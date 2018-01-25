@@ -178,6 +178,11 @@ func (r CreateImageBuilderRequest) Send() (*CreateImageBuilderOutput, error) {
 // CreateImageBuilderRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
+// Creates an image builder.
+//
+// The initial state of the builder is PENDING. When it is ready, the state
+// is RUNNING.
+//
 //    // Example sending a request using the CreateImageBuilderRequest method.
 //    req := client.CreateImageBuilderRequest(params)
 //    resp, err := req.Send()
@@ -224,6 +229,8 @@ func (r CreateImageBuilderStreamingURLRequest) Send() (*CreateImageBuilderStream
 
 // CreateImageBuilderStreamingURLRequest returns a request value for making API operation for
 // Amazon AppStream.
+//
+// Creates a URL to start an image builder streaming session.
 //
 //    // Example sending a request using the CreateImageBuilderStreamingURLRequest method.
 //    req := client.CreateImageBuilderStreamingURLRequest(params)
@@ -322,9 +329,6 @@ func (r CreateStreamingURLRequest) Send() (*CreateStreamingURLOutput, error) {
 // Amazon AppStream.
 //
 // Creates a URL to start a streaming session for the specified user.
-//
-// By default, the URL is valid only for one minute from the time that it is
-// generated.
 //
 //    // Example sending a request using the CreateStreamingURLRequest method.
 //    req := client.CreateStreamingURLRequest(params)
@@ -471,6 +475,10 @@ func (r DeleteImageRequest) Send() (*DeleteImageOutput, error) {
 // DeleteImageRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
+// Deletes the specified image. You cannot delete an image that is currently
+// in use. After you delete an image, you cannot provision new capacity using
+// the image.
+//
 //    // Example sending a request using the DeleteImageRequest method.
 //    req := client.DeleteImageRequest(params)
 //    resp, err := req.Send()
@@ -517,6 +525,8 @@ func (r DeleteImageBuilderRequest) Send() (*DeleteImageBuilderOutput, error) {
 
 // DeleteImageBuilderRequest returns a request value for making API operation for
 // Amazon AppStream.
+//
+// Deletes the specified image builder and releases the capacity.
 //
 //    // Example sending a request using the DeleteImageBuilderRequest method.
 //    req := client.DeleteImageBuilderRequest(params)
@@ -712,6 +722,8 @@ func (r DescribeImageBuildersRequest) Send() (*DescribeImageBuildersOutput, erro
 
 // DescribeImageBuildersRequest returns a request value for making API operation for
 // Amazon AppStream.
+//
+// Describes the specified image builders or all image builders in the account.
 //
 //    // Example sending a request using the DescribeImageBuildersRequest method.
 //    req := client.DescribeImageBuildersRequest(params)
@@ -1085,6 +1097,59 @@ func (c *AppStream) ListAssociatedStacksRequest(input *ListAssociatedStacksInput
 	return ListAssociatedStacksRequest{Request: req, Input: input}
 }
 
+const opListTagsForResource = "ListTagsForResource"
+
+// ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
+type ListTagsForResourceRequest struct {
+	*aws.Request
+	Input *ListTagsForResourceInput
+}
+
+// Send marshals and sends the ListTagsForResource API request.
+func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListTagsForResourceOutput), nil
+}
+
+// ListTagsForResourceRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Lists the tags for the specified AppStream 2.0 resource. You can tag AppStream
+// 2.0 image builders, images, fleets, and stacks.
+//
+// For more information about tags, see Tagging Your Resources (http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic)
+// in the Amazon AppStream 2.0 Developer Guide.
+//
+//    // Example sending a request using the ListTagsForResourceRequest method.
+//    req := client.ListTagsForResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListTagsForResource
+func (c *AppStream) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
+	op := &aws.Operation{
+		Name:       opListTagsForResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListTagsForResourceInput{}
+	}
+
+	output := &ListTagsForResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListTagsForResourceRequest{Request: req, Input: input}
+}
+
 const opStartFleet = "StartFleet"
 
 // StartFleetRequest is a API request type for the StartFleet API operation.
@@ -1154,6 +1219,8 @@ func (r StartImageBuilderRequest) Send() (*StartImageBuilderOutput, error) {
 
 // StartImageBuilderRequest returns a request value for making API operation for
 // Amazon AppStream.
+//
+// Starts the specified image builder.
 //
 //    // Example sending a request using the StartImageBuilderRequest method.
 //    req := client.StartImageBuilderRequest(params)
@@ -1251,6 +1318,8 @@ func (r StopImageBuilderRequest) Send() (*StopImageBuilderOutput, error) {
 // StopImageBuilderRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
+// Stops the specified image builder.
+//
 //    // Example sending a request using the StopImageBuilderRequest method.
 //    req := client.StopImageBuilderRequest(params)
 //    resp, err := req.Send()
@@ -1275,6 +1344,119 @@ func (c *AppStream) StopImageBuilderRequest(input *StopImageBuilderInput) StopIm
 	output.responseMetadata = aws.Response{Request: req}
 
 	return StopImageBuilderRequest{Request: req, Input: input}
+}
+
+const opTagResource = "TagResource"
+
+// TagResourceRequest is a API request type for the TagResource API operation.
+type TagResourceRequest struct {
+	*aws.Request
+	Input *TagResourceInput
+}
+
+// Send marshals and sends the TagResource API request.
+func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*TagResourceOutput), nil
+}
+
+// TagResourceRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Adds or overwrites one or more tags for the specified AppStream 2.0 resource.
+// You can tag AppStream 2.0 image builders, images, fleets, and stacks.
+//
+// Each tag consists of a key and an optional value. If a resource already has
+// a tag with the same key, this operation updates its value.
+//
+// To list the current tags for your resources, use ListTagsForResource. To
+// disassociate tags from your resources, use UntagResource.
+//
+// For more information about tags, see Tagging Your Resources (http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic)
+// in the Amazon AppStream 2.0 Developer Guide.
+//
+//    // Example sending a request using the TagResourceRequest method.
+//    req := client.TagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/TagResource
+func (c *AppStream) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
+	op := &aws.Operation{
+		Name:       opTagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &TagResourceInput{}
+	}
+
+	output := &TagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return TagResourceRequest{Request: req, Input: input}
+}
+
+const opUntagResource = "UntagResource"
+
+// UntagResourceRequest is a API request type for the UntagResource API operation.
+type UntagResourceRequest struct {
+	*aws.Request
+	Input *UntagResourceInput
+}
+
+// Send marshals and sends the UntagResource API request.
+func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UntagResourceOutput), nil
+}
+
+// UntagResourceRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Disassociates the specified tags from the specified AppStream 2.0 resource.
+//
+// To list the current tags for your resources, use ListTagsForResource.
+//
+// For more information about tags, see Tagging Your Resources (http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic)
+// in the Amazon AppStream 2.0 Developer Guide.
+//
+//    // Example sending a request using the UntagResourceRequest method.
+//    req := client.UntagResourceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UntagResource
+func (c *AppStream) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
+	op := &aws.Operation{
+		Name:       opUntagResource,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UntagResourceInput{}
+	}
+
+	output := &UntagResourceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UntagResourceRequest{Request: req, Input: input}
 }
 
 const opUpdateDirectoryConfig = "UpdateDirectoryConfig"
@@ -1434,7 +1616,7 @@ func (c *AppStream) UpdateStackRequest(input *UpdateStackInput) UpdateStackReque
 type Application struct {
 	_ struct{} `type:"structure"`
 
-	// The application name displayed to end users.
+	// The application name for display.
 	DisplayName *string `min:"1" type:"string"`
 
 	// If there is a problem, the application can be disabled after image creation.
@@ -1464,48 +1646,6 @@ func (s Application) String() string {
 // GoString returns the string representation
 func (s Application) GoString() string {
 	return s.String()
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *Application) SetDisplayName(v string) *Application {
-	s.DisplayName = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *Application) SetEnabled(v bool) *Application {
-	s.Enabled = &v
-	return s
-}
-
-// SetIconURL sets the IconURL field's value.
-func (s *Application) SetIconURL(v string) *Application {
-	s.IconURL = &v
-	return s
-}
-
-// SetLaunchParameters sets the LaunchParameters field's value.
-func (s *Application) SetLaunchParameters(v string) *Application {
-	s.LaunchParameters = &v
-	return s
-}
-
-// SetLaunchPath sets the LaunchPath field's value.
-func (s *Application) SetLaunchPath(v string) *Application {
-	s.LaunchPath = &v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *Application) SetMetadata(v map[string]string) *Application {
-	s.Metadata = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Application) SetName(v string) *Application {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleetRequest
@@ -1555,18 +1695,6 @@ func (s *AssociateFleetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetFleetName sets the FleetName field's value.
-func (s *AssociateFleetInput) SetFleetName(v string) *AssociateFleetInput {
-	s.FleetName = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *AssociateFleetInput) SetStackName(v string) *AssociateFleetInput {
-	s.StackName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateFleetResult
@@ -1626,12 +1754,6 @@ func (s *ComputeCapacity) Validate() error {
 	return nil
 }
 
-// SetDesiredInstances sets the DesiredInstances field's value.
-func (s *ComputeCapacity) SetDesiredInstances(v int64) *ComputeCapacity {
-	s.DesiredInstances = &v
-	return s
-}
-
 // Describes the capacity status for a fleet.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ComputeCapacityStatus
 type ComputeCapacityStatus struct {
@@ -1660,30 +1782,6 @@ func (s ComputeCapacityStatus) String() string {
 // GoString returns the string representation
 func (s ComputeCapacityStatus) GoString() string {
 	return s.String()
-}
-
-// SetAvailable sets the Available field's value.
-func (s *ComputeCapacityStatus) SetAvailable(v int64) *ComputeCapacityStatus {
-	s.Available = &v
-	return s
-}
-
-// SetDesired sets the Desired field's value.
-func (s *ComputeCapacityStatus) SetDesired(v int64) *ComputeCapacityStatus {
-	s.Desired = &v
-	return s
-}
-
-// SetInUse sets the InUse field's value.
-func (s *ComputeCapacityStatus) SetInUse(v int64) *ComputeCapacityStatus {
-	s.InUse = &v
-	return s
-}
-
-// SetRunning sets the Running field's value.
-func (s *ComputeCapacityStatus) SetRunning(v int64) *ComputeCapacityStatus {
-	s.Running = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfigRequest
@@ -1744,24 +1842,6 @@ func (s *CreateDirectoryConfigInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryName sets the DirectoryName field's value.
-func (s *CreateDirectoryConfigInput) SetDirectoryName(v string) *CreateDirectoryConfigInput {
-	s.DirectoryName = &v
-	return s
-}
-
-// SetOrganizationalUnitDistinguishedNames sets the OrganizationalUnitDistinguishedNames field's value.
-func (s *CreateDirectoryConfigInput) SetOrganizationalUnitDistinguishedNames(v []string) *CreateDirectoryConfigInput {
-	s.OrganizationalUnitDistinguishedNames = v
-	return s
-}
-
-// SetServiceAccountCredentials sets the ServiceAccountCredentials field's value.
-func (s *CreateDirectoryConfigInput) SetServiceAccountCredentials(v *ServiceAccountCredentials) *CreateDirectoryConfigInput {
-	s.ServiceAccountCredentials = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfigResult
 type CreateDirectoryConfigOutput struct {
 	_ struct{} `type:"structure"`
@@ -1787,12 +1867,6 @@ func (s CreateDirectoryConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDirectoryConfig sets the DirectoryConfig field's value.
-func (s *CreateDirectoryConfigOutput) SetDirectoryConfig(v *DirectoryConfig) *CreateDirectoryConfigOutput {
-	s.DirectoryConfig = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest
 type CreateFleetInput struct {
 	_ struct{} `type:"structure"`
@@ -1802,7 +1876,7 @@ type CreateFleetInput struct {
 	// ComputeCapacity is a required field
 	ComputeCapacity *ComputeCapacity `type:"structure" required:"true"`
 
-	// The description displayed to end users.
+	// The description for display.
 	Description *string `type:"string"`
 
 	// The time after disconnection when a session is considered to have ended,
@@ -1811,18 +1885,27 @@ type CreateFleetInput struct {
 	// 60 and 57600.
 	DisconnectTimeoutInSeconds *int64 `type:"integer"`
 
-	// The fleet name displayed to end users.
+	// The fleet name for display.
 	DisplayName *string `type:"string"`
 
-	// The information needed for streaming instances to join a domain.
+	// The information needed to join a Microsoft Active Directory domain.
 	DomainJoinInfo *DomainJoinInfo `type:"structure"`
 
 	// Enables or disables default internet access for the fleet.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
 
+	// The fleet type.
+	//
+	// ALWAYS_ONProvides users with instant-on access to their apps. You are charged
+	// for all running instances in your fleet, even if no users are streaming apps.
+	//
+	// ON_DEMANDProvide users with access to applications after they connect, which
+	// takes one to two minutes. You are charged for instance streaming when users
+	// are connected and a small hourly fee for instances that are not streaming
+	// apps.
 	FleetType FleetType `type:"string" enum:"true"`
 
-	// The name of the image used by the fleet.
+	// The name of the image used to create the fleet.
 	//
 	// ImageName is a required field
 	ImageName *string `min:"1" type:"string" required:"true"`
@@ -1933,78 +2016,6 @@ func (s *CreateFleetInput) Validate() error {
 	return nil
 }
 
-// SetComputeCapacity sets the ComputeCapacity field's value.
-func (s *CreateFleetInput) SetComputeCapacity(v *ComputeCapacity) *CreateFleetInput {
-	s.ComputeCapacity = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateFleetInput) SetDescription(v string) *CreateFleetInput {
-	s.Description = &v
-	return s
-}
-
-// SetDisconnectTimeoutInSeconds sets the DisconnectTimeoutInSeconds field's value.
-func (s *CreateFleetInput) SetDisconnectTimeoutInSeconds(v int64) *CreateFleetInput {
-	s.DisconnectTimeoutInSeconds = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *CreateFleetInput) SetDisplayName(v string) *CreateFleetInput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetDomainJoinInfo sets the DomainJoinInfo field's value.
-func (s *CreateFleetInput) SetDomainJoinInfo(v *DomainJoinInfo) *CreateFleetInput {
-	s.DomainJoinInfo = v
-	return s
-}
-
-// SetEnableDefaultInternetAccess sets the EnableDefaultInternetAccess field's value.
-func (s *CreateFleetInput) SetEnableDefaultInternetAccess(v bool) *CreateFleetInput {
-	s.EnableDefaultInternetAccess = &v
-	return s
-}
-
-// SetFleetType sets the FleetType field's value.
-func (s *CreateFleetInput) SetFleetType(v FleetType) *CreateFleetInput {
-	s.FleetType = v
-	return s
-}
-
-// SetImageName sets the ImageName field's value.
-func (s *CreateFleetInput) SetImageName(v string) *CreateFleetInput {
-	s.ImageName = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *CreateFleetInput) SetInstanceType(v string) *CreateFleetInput {
-	s.InstanceType = &v
-	return s
-}
-
-// SetMaxUserDurationInSeconds sets the MaxUserDurationInSeconds field's value.
-func (s *CreateFleetInput) SetMaxUserDurationInSeconds(v int64) *CreateFleetInput {
-	s.MaxUserDurationInSeconds = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateFleetInput) SetName(v string) *CreateFleetInput {
-	s.Name = &v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *CreateFleetInput) SetVpcConfig(v *VpcConfig) *CreateFleetInput {
-	s.VpcConfig = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetResult
 type CreateFleetOutput struct {
 	_ struct{} `type:"structure"`
@@ -2030,35 +2041,42 @@ func (s CreateFleetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFleet sets the Fleet field's value.
-func (s *CreateFleetOutput) SetFleet(v *Fleet) *CreateFleetOutput {
-	s.Fleet = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderRequest
 type CreateImageBuilderInput struct {
 	_ struct{} `type:"structure"`
 
+	// The version of the AppStream 2.0 agent to use for this image builder. To
+	// use the latest version of the AppStream 2.0 agent, specify [LATEST].
+	AppstreamAgentVersion *string `min:"1" type:"string"`
+
+	// The description for display.
 	Description *string `type:"string"`
 
+	// The image builder name for display.
 	DisplayName *string `type:"string"`
 
-	// Contains the information needed for streaming instances to join a domain.
+	// The information needed to join a Microsoft Active Directory domain.
 	DomainJoinInfo *DomainJoinInfo `type:"structure"`
 
+	// Enables or disables default internet access for the image builder.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
 
+	// The name of the image used to create the builder.
+	//
 	// ImageName is a required field
 	ImageName *string `min:"1" type:"string" required:"true"`
 
+	// The instance type to use when launching the image builder.
+	//
 	// InstanceType is a required field
 	InstanceType *string `min:"1" type:"string" required:"true"`
 
+	// A unique name for the image builder.
+	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// Describes VPC configuration information.
+	// The VPC configuration for the image builder. You can specify only one subnet.
 	VpcConfig *VpcConfig `type:"structure"`
 }
 
@@ -2075,6 +2093,9 @@ func (s CreateImageBuilderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateImageBuilderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateImageBuilderInput"}
+	if s.AppstreamAgentVersion != nil && len(*s.AppstreamAgentVersion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AppstreamAgentVersion", 1))
+	}
 
 	if s.ImageName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ImageName"))
@@ -2100,60 +2121,13 @@ func (s *CreateImageBuilderInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateImageBuilderInput) SetDescription(v string) *CreateImageBuilderInput {
-	s.Description = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *CreateImageBuilderInput) SetDisplayName(v string) *CreateImageBuilderInput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetDomainJoinInfo sets the DomainJoinInfo field's value.
-func (s *CreateImageBuilderInput) SetDomainJoinInfo(v *DomainJoinInfo) *CreateImageBuilderInput {
-	s.DomainJoinInfo = v
-	return s
-}
-
-// SetEnableDefaultInternetAccess sets the EnableDefaultInternetAccess field's value.
-func (s *CreateImageBuilderInput) SetEnableDefaultInternetAccess(v bool) *CreateImageBuilderInput {
-	s.EnableDefaultInternetAccess = &v
-	return s
-}
-
-// SetImageName sets the ImageName field's value.
-func (s *CreateImageBuilderInput) SetImageName(v string) *CreateImageBuilderInput {
-	s.ImageName = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *CreateImageBuilderInput) SetInstanceType(v string) *CreateImageBuilderInput {
-	s.InstanceType = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateImageBuilderInput) SetName(v string) *CreateImageBuilderInput {
-	s.Name = &v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *CreateImageBuilderInput) SetVpcConfig(v *VpcConfig) *CreateImageBuilderInput {
-	s.VpcConfig = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderResult
 type CreateImageBuilderOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
+	// Information about the image builder.
 	ImageBuilder *ImageBuilder `type:"structure"`
 }
 
@@ -2172,19 +2146,17 @@ func (s CreateImageBuilderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetImageBuilder sets the ImageBuilder field's value.
-func (s *CreateImageBuilderOutput) SetImageBuilder(v *ImageBuilder) *CreateImageBuilderOutput {
-	s.ImageBuilder = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURLRequest
 type CreateImageBuilderStreamingURLInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the image builder.
+	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
+	// The time that the streaming URL will be valid, in seconds. Specify a value
+	// between 1 and 604800 seconds. The default is 3600 seconds.
 	Validity *int64 `type:"long"`
 }
 
@@ -2215,26 +2187,16 @@ func (s *CreateImageBuilderStreamingURLInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateImageBuilderStreamingURLInput) SetName(v string) *CreateImageBuilderStreamingURLInput {
-	s.Name = &v
-	return s
-}
-
-// SetValidity sets the Validity field's value.
-func (s *CreateImageBuilderStreamingURLInput) SetValidity(v int64) *CreateImageBuilderStreamingURLInput {
-	s.Validity = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImageBuilderStreamingURLResult
 type CreateImageBuilderStreamingURLOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
+	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
 	Expires *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// The URL to start the AppStream 2.0 streaming session.
 	StreamingURL *string `min:"1" type:"string"`
 }
 
@@ -2253,26 +2215,14 @@ func (s CreateImageBuilderStreamingURLOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// SetExpires sets the Expires field's value.
-func (s *CreateImageBuilderStreamingURLOutput) SetExpires(v time.Time) *CreateImageBuilderStreamingURLOutput {
-	s.Expires = &v
-	return s
-}
-
-// SetStreamingURL sets the StreamingURL field's value.
-func (s *CreateImageBuilderStreamingURLOutput) SetStreamingURL(v string) *CreateImageBuilderStreamingURLOutput {
-	s.StreamingURL = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest
 type CreateStackInput struct {
 	_ struct{} `type:"structure"`
 
-	// The description displayed to end users.
+	// The description for display.
 	Description *string `type:"string"`
 
-	// The stack name displayed to end users.
+	// The stack name for display.
 	DisplayName *string `type:"string"`
 
 	// The name of the stack.
@@ -2318,30 +2268,6 @@ func (s *CreateStackInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateStackInput) SetDescription(v string) *CreateStackInput {
-	s.Description = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *CreateStackInput) SetDisplayName(v string) *CreateStackInput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateStackInput) SetName(v string) *CreateStackInput {
-	s.Name = &v
-	return s
-}
-
-// SetStorageConnectors sets the StorageConnectors field's value.
-func (s *CreateStackInput) SetStorageConnectors(v []StorageConnector) *CreateStackInput {
-	s.StorageConnectors = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackResult
 type CreateStackOutput struct {
 	_ struct{} `type:"structure"`
@@ -2367,17 +2293,12 @@ func (s CreateStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetStack sets the Stack field's value.
-func (s *CreateStackOutput) SetStack(v *Stack) *CreateStackOutput {
-	s.Stack = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURLRequest
 type CreateStreamingURLInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the application that must be launched after the session starts.
+	// The name of the application to launch after the session starts. This is the
+	// name that you specified as Name in the Image Assistant.
 	ApplicationId *string `min:"1" type:"string"`
 
 	// The name of the fleet.
@@ -2385,7 +2306,8 @@ type CreateStreamingURLInput struct {
 	// FleetName is a required field
 	FleetName *string `min:"1" type:"string" required:"true"`
 
-	// The session context of the streaming URL.
+	// The session context. For more information, see Session Context (http://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters)
+	// in the Amazon AppStream 2.0 Developer Guide.
 	SessionContext *string `min:"1" type:"string"`
 
 	// The name of the stack.
@@ -2399,7 +2321,7 @@ type CreateStreamingURLInput struct {
 	UserId *string `min:"2" type:"string" required:"true"`
 
 	// The time that the streaming URL will be valid, in seconds. Specify a value
-	// between 1 and 604800 seconds.
+	// between 1 and 604800 seconds. The default is 60 seconds.
 	Validity *int64 `type:"long"`
 }
 
@@ -2450,42 +2372,6 @@ func (s *CreateStreamingURLInput) Validate() error {
 	return nil
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CreateStreamingURLInput) SetApplicationId(v string) *CreateStreamingURLInput {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetFleetName sets the FleetName field's value.
-func (s *CreateStreamingURLInput) SetFleetName(v string) *CreateStreamingURLInput {
-	s.FleetName = &v
-	return s
-}
-
-// SetSessionContext sets the SessionContext field's value.
-func (s *CreateStreamingURLInput) SetSessionContext(v string) *CreateStreamingURLInput {
-	s.SessionContext = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *CreateStreamingURLInput) SetStackName(v string) *CreateStreamingURLInput {
-	s.StackName = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *CreateStreamingURLInput) SetUserId(v string) *CreateStreamingURLInput {
-	s.UserId = &v
-	return s
-}
-
-// SetValidity sets the Validity field's value.
-func (s *CreateStreamingURLInput) SetValidity(v int64) *CreateStreamingURLInput {
-	s.Validity = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStreamingURLResult
 type CreateStreamingURLOutput struct {
 	_ struct{} `type:"structure"`
@@ -2512,18 +2398,6 @@ func (s CreateStreamingURLOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStreamingURLOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetExpires sets the Expires field's value.
-func (s *CreateStreamingURLOutput) SetExpires(v time.Time) *CreateStreamingURLOutput {
-	s.Expires = &v
-	return s
-}
-
-// SetStreamingURL sets the StreamingURL field's value.
-func (s *CreateStreamingURLOutput) SetStreamingURL(v string) *CreateStreamingURLOutput {
-	s.StreamingURL = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfigRequest
@@ -2558,12 +2432,6 @@ func (s *DeleteDirectoryConfigInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDirectoryName sets the DirectoryName field's value.
-func (s *DeleteDirectoryConfigInput) SetDirectoryName(v string) *DeleteDirectoryConfigInput {
-	s.DirectoryName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteDirectoryConfigResult
@@ -2625,12 +2493,6 @@ func (s *DeleteFleetInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeleteFleetInput) SetName(v string) *DeleteFleetInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteFleetResult
 type DeleteFleetOutput struct {
 	_ struct{} `type:"structure"`
@@ -2657,6 +2519,8 @@ func (s DeleteFleetOutput) SDKResponseMetadata() aws.Response {
 type DeleteImageBuilderInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the image builder.
+	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 }
@@ -2685,18 +2549,13 @@ func (s *DeleteImageBuilderInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeleteImageBuilderInput) SetName(v string) *DeleteImageBuilderInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageBuilderResult
 type DeleteImageBuilderOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
+	// Information about the image builder.
 	ImageBuilder *ImageBuilder `type:"structure"`
 }
 
@@ -2715,16 +2574,12 @@ func (s DeleteImageBuilderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetImageBuilder sets the ImageBuilder field's value.
-func (s *DeleteImageBuilderOutput) SetImageBuilder(v *ImageBuilder) *DeleteImageBuilderOutput {
-	s.ImageBuilder = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageRequest
 type DeleteImageInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the image.
+	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 }
@@ -2753,19 +2608,13 @@ func (s *DeleteImageInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *DeleteImageInput) SetName(v string) *DeleteImageInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImageResult
 type DeleteImageOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Describes an image.
+	// Information about the image.
 	Image *Image `type:"structure"`
 }
 
@@ -2782,12 +2631,6 @@ func (s DeleteImageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteImageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImage sets the Image field's value.
-func (s *DeleteImageOutput) SetImage(v *Image) *DeleteImageOutput {
-	s.Image = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStackRequest
@@ -2825,12 +2668,6 @@ func (s *DeleteStackInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetName sets the Name field's value.
-func (s *DeleteStackInput) SetName(v string) *DeleteStackInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteStackResult
@@ -2893,24 +2730,6 @@ func (s *DescribeDirectoryConfigsInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryNames sets the DirectoryNames field's value.
-func (s *DescribeDirectoryConfigsInput) SetDirectoryNames(v []string) *DescribeDirectoryConfigsInput {
-	s.DirectoryNames = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeDirectoryConfigsInput) SetMaxResults(v int64) *DescribeDirectoryConfigsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeDirectoryConfigsInput) SetNextToken(v string) *DescribeDirectoryConfigsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeDirectoryConfigsResult
 type DescribeDirectoryConfigsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2938,18 +2757,6 @@ func (s DescribeDirectoryConfigsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeDirectoryConfigsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDirectoryConfigs sets the DirectoryConfigs field's value.
-func (s *DescribeDirectoryConfigsOutput) SetDirectoryConfigs(v []DirectoryConfig) *DescribeDirectoryConfigsOutput {
-	s.DirectoryConfigs = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeDirectoryConfigsOutput) SetNextToken(v string) *DescribeDirectoryConfigsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleetsRequest
@@ -2987,18 +2794,6 @@ func (s *DescribeFleetsInput) Validate() error {
 	return nil
 }
 
-// SetNames sets the Names field's value.
-func (s *DescribeFleetsInput) SetNames(v []string) *DescribeFleetsInput {
-	s.Names = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFleetsInput) SetNextToken(v string) *DescribeFleetsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeFleetsResult
 type DescribeFleetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3028,26 +2823,18 @@ func (s DescribeFleetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFleets sets the Fleets field's value.
-func (s *DescribeFleetsOutput) SetFleets(v []Fleet) *DescribeFleetsOutput {
-	s.Fleets = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeFleetsOutput) SetNextToken(v string) *DescribeFleetsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuildersRequest
 type DescribeImageBuildersInput struct {
 	_ struct{} `type:"structure"`
 
+	// The maximum size of each page of results.
 	MaxResults *int64 `type:"integer"`
 
+	// The names of the image builders to describe.
 	Names []string `type:"list"`
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -3074,32 +2861,17 @@ func (s *DescribeImageBuildersInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeImageBuildersInput) SetMaxResults(v int64) *DescribeImageBuildersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNames sets the Names field's value.
-func (s *DescribeImageBuildersInput) SetNames(v []string) *DescribeImageBuildersInput {
-	s.Names = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeImageBuildersInput) SetNextToken(v string) *DescribeImageBuildersInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImageBuildersResult
 type DescribeImageBuildersOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
+	// Information about the image builders.
 	ImageBuilders []ImageBuilder `type:"list"`
 
+	// The pagination token to use to retrieve the next page of results for this
+	// operation. If there are no more pages, this value is null.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -3118,18 +2890,6 @@ func (s DescribeImageBuildersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetImageBuilders sets the ImageBuilders field's value.
-func (s *DescribeImageBuildersOutput) SetImageBuilders(v []ImageBuilder) *DescribeImageBuildersOutput {
-	s.ImageBuilders = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeImageBuildersOutput) SetNextToken(v string) *DescribeImageBuildersOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesRequest
 type DescribeImagesInput struct {
 	_ struct{} `type:"structure"`
@@ -3146,12 +2906,6 @@ func (s DescribeImagesInput) String() string {
 // GoString returns the string representation
 func (s DescribeImagesInput) GoString() string {
 	return s.String()
-}
-
-// SetNames sets the Names field's value.
-func (s *DescribeImagesInput) SetNames(v []string) *DescribeImagesInput {
-	s.Names = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImagesResult
@@ -3177,12 +2931,6 @@ func (s DescribeImagesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeImagesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImages sets the Images field's value.
-func (s *DescribeImagesOutput) SetImages(v []Image) *DescribeImagesOutput {
-	s.Images = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessionsRequest
@@ -3256,42 +3004,6 @@ func (s *DescribeSessionsInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationType sets the AuthenticationType field's value.
-func (s *DescribeSessionsInput) SetAuthenticationType(v AuthenticationType) *DescribeSessionsInput {
-	s.AuthenticationType = v
-	return s
-}
-
-// SetFleetName sets the FleetName field's value.
-func (s *DescribeSessionsInput) SetFleetName(v string) *DescribeSessionsInput {
-	s.FleetName = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeSessionsInput) SetLimit(v int64) *DescribeSessionsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSessionsInput) SetNextToken(v string) *DescribeSessionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *DescribeSessionsInput) SetStackName(v string) *DescribeSessionsInput {
-	s.StackName = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *DescribeSessionsInput) SetUserId(v string) *DescribeSessionsInput {
-	s.UserId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeSessionsResult
 type DescribeSessionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -3319,18 +3031,6 @@ func (s DescribeSessionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSessionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSessionsOutput) SetNextToken(v string) *DescribeSessionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSessions sets the Sessions field's value.
-func (s *DescribeSessionsOutput) SetSessions(v []Session) *DescribeSessionsOutput {
-	s.Sessions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacksRequest
@@ -3368,18 +3068,6 @@ func (s *DescribeStacksInput) Validate() error {
 	return nil
 }
 
-// SetNames sets the Names field's value.
-func (s *DescribeStacksInput) SetNames(v []string) *DescribeStacksInput {
-	s.Names = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeStacksInput) SetNextToken(v string) *DescribeStacksInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacksResult
 type DescribeStacksOutput struct {
 	_ struct{} `type:"structure"`
@@ -3407,18 +3095,6 @@ func (s DescribeStacksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStacksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeStacksOutput) SetNextToken(v string) *DescribeStacksOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStacks sets the Stacks field's value.
-func (s *DescribeStacksOutput) SetStacks(v []Stack) *DescribeStacksOutput {
-	s.Stacks = v
-	return s
 }
 
 // Configuration information for the directory used to join domains.
@@ -3450,30 +3126,6 @@ func (s DirectoryConfig) String() string {
 // GoString returns the string representation
 func (s DirectoryConfig) GoString() string {
 	return s.String()
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *DirectoryConfig) SetCreatedTime(v time.Time) *DirectoryConfig {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetDirectoryName sets the DirectoryName field's value.
-func (s *DirectoryConfig) SetDirectoryName(v string) *DirectoryConfig {
-	s.DirectoryName = &v
-	return s
-}
-
-// SetOrganizationalUnitDistinguishedNames sets the OrganizationalUnitDistinguishedNames field's value.
-func (s *DirectoryConfig) SetOrganizationalUnitDistinguishedNames(v []string) *DirectoryConfig {
-	s.OrganizationalUnitDistinguishedNames = v
-	return s
-}
-
-// SetServiceAccountCredentials sets the ServiceAccountCredentials field's value.
-func (s *DirectoryConfig) SetServiceAccountCredentials(v *ServiceAccountCredentials) *DirectoryConfig {
-	s.ServiceAccountCredentials = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleetRequest
@@ -3525,18 +3177,6 @@ func (s *DisassociateFleetInput) Validate() error {
 	return nil
 }
 
-// SetFleetName sets the FleetName field's value.
-func (s *DisassociateFleetInput) SetFleetName(v string) *DisassociateFleetInput {
-	s.FleetName = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *DisassociateFleetInput) SetStackName(v string) *DisassociateFleetInput {
-	s.StackName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateFleetResult
 type DisassociateFleetOutput struct {
 	_ struct{} `type:"structure"`
@@ -3559,7 +3199,7 @@ func (s DisassociateFleetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Contains the information needed for streaming instances to join a domain.
+// Contains the information needed to join a Microsoft Active Directory domain.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DomainJoinInfo
 type DomainJoinInfo struct {
 	_ struct{} `type:"structure"`
@@ -3579,18 +3219,6 @@ func (s DomainJoinInfo) String() string {
 // GoString returns the string representation
 func (s DomainJoinInfo) GoString() string {
 	return s.String()
-}
-
-// SetDirectoryName sets the DirectoryName field's value.
-func (s *DomainJoinInfo) SetDirectoryName(v string) *DomainJoinInfo {
-	s.DirectoryName = &v
-	return s
-}
-
-// SetOrganizationalUnitDistinguishedName sets the OrganizationalUnitDistinguishedName field's value.
-func (s *DomainJoinInfo) SetOrganizationalUnitDistinguishedName(v string) *DomainJoinInfo {
-	s.OrganizationalUnitDistinguishedName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSessionRequest
@@ -3628,12 +3256,6 @@ func (s *ExpireSessionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSessionId sets the SessionId field's value.
-func (s *ExpireSessionInput) SetSessionId(v string) *ExpireSessionInput {
-	s.SessionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ExpireSessionResult
@@ -3676,7 +3298,7 @@ type Fleet struct {
 	// The time the fleet was created.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The description displayed to end users.
+	// The description for display.
 	Description *string `min:"1" type:"string"`
 
 	// The time after disconnection when a session is considered to have ended,
@@ -3685,10 +3307,10 @@ type Fleet struct {
 	// 60 and 57600.
 	DisconnectTimeoutInSeconds *int64 `type:"integer"`
 
-	// The fleet name displayed to end users.
+	// The fleet name for display.
 	DisplayName *string `min:"1" type:"string"`
 
-	// The information needed for streaming instances to join a domain.
+	// The information needed to join a Microsoft Active Directory domain.
 	DomainJoinInfo *DomainJoinInfo `type:"structure"`
 
 	// Indicates whether default internet access is enabled for the fleet.
@@ -3697,9 +3319,18 @@ type Fleet struct {
 	// The fleet errors.
 	FleetErrors []FleetError `type:"list"`
 
+	// The fleet type.
+	//
+	// ALWAYS_ONProvides users with instant-on access to their apps. You are charged
+	// for all running instances in your fleet, even if no users are streaming apps.
+	//
+	// ON_DEMANDProvide users with access to applications after they connect, which
+	// takes one to two minutes. You are charged for instance streaming when users
+	// are connected and a small hourly fee for instances that are not streaming
+	// apps.
 	FleetType FleetType `type:"string" enum:"true"`
 
-	// The image used by the fleet.
+	// The name of the image used to create the fleet.
 	//
 	// ImageName is a required field
 	ImageName *string `min:"1" type:"string" required:"true"`
@@ -3737,102 +3368,6 @@ func (s Fleet) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Fleet) SetArn(v string) *Fleet {
-	s.Arn = &v
-	return s
-}
-
-// SetComputeCapacityStatus sets the ComputeCapacityStatus field's value.
-func (s *Fleet) SetComputeCapacityStatus(v *ComputeCapacityStatus) *Fleet {
-	s.ComputeCapacityStatus = v
-	return s
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *Fleet) SetCreatedTime(v time.Time) *Fleet {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Fleet) SetDescription(v string) *Fleet {
-	s.Description = &v
-	return s
-}
-
-// SetDisconnectTimeoutInSeconds sets the DisconnectTimeoutInSeconds field's value.
-func (s *Fleet) SetDisconnectTimeoutInSeconds(v int64) *Fleet {
-	s.DisconnectTimeoutInSeconds = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *Fleet) SetDisplayName(v string) *Fleet {
-	s.DisplayName = &v
-	return s
-}
-
-// SetDomainJoinInfo sets the DomainJoinInfo field's value.
-func (s *Fleet) SetDomainJoinInfo(v *DomainJoinInfo) *Fleet {
-	s.DomainJoinInfo = v
-	return s
-}
-
-// SetEnableDefaultInternetAccess sets the EnableDefaultInternetAccess field's value.
-func (s *Fleet) SetEnableDefaultInternetAccess(v bool) *Fleet {
-	s.EnableDefaultInternetAccess = &v
-	return s
-}
-
-// SetFleetErrors sets the FleetErrors field's value.
-func (s *Fleet) SetFleetErrors(v []FleetError) *Fleet {
-	s.FleetErrors = v
-	return s
-}
-
-// SetFleetType sets the FleetType field's value.
-func (s *Fleet) SetFleetType(v FleetType) *Fleet {
-	s.FleetType = v
-	return s
-}
-
-// SetImageName sets the ImageName field's value.
-func (s *Fleet) SetImageName(v string) *Fleet {
-	s.ImageName = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *Fleet) SetInstanceType(v string) *Fleet {
-	s.InstanceType = &v
-	return s
-}
-
-// SetMaxUserDurationInSeconds sets the MaxUserDurationInSeconds field's value.
-func (s *Fleet) SetMaxUserDurationInSeconds(v int64) *Fleet {
-	s.MaxUserDurationInSeconds = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Fleet) SetName(v string) *Fleet {
-	s.Name = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Fleet) SetState(v FleetState) *Fleet {
-	s.State = v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *Fleet) SetVpcConfig(v *VpcConfig) *Fleet {
-	s.VpcConfig = v
-	return s
-}
-
 // Describes a fleet error.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/FleetError
 type FleetError struct {
@@ -3855,18 +3390,6 @@ func (s FleetError) GoString() string {
 	return s.String()
 }
 
-// SetErrorCode sets the ErrorCode field's value.
-func (s *FleetError) SetErrorCode(v FleetErrorCode) *FleetError {
-	s.ErrorCode = v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *FleetError) SetErrorMessage(v string) *FleetError {
-	s.ErrorMessage = &v
-	return s
-}
-
 // Describes an image.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image
 type Image struct {
@@ -3874,6 +3397,10 @@ type Image struct {
 
 	// The applications associated with the image.
 	Applications []Application `type:"list"`
+
+	// The version of the AppStream 2.0 agent to use for instances that are launched
+	// from this image.
+	AppstreamAgentVersion *string `min:"1" type:"string"`
 
 	// The ARN of the image.
 	Arn *string `type:"string"`
@@ -3884,10 +3411,10 @@ type Image struct {
 	// The time the image was created.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The description displayed to end users.
+	// The description for display.
 	Description *string `min:"1" type:"string"`
 
-	// The image name displayed to end users.
+	// The image name for display.
 	DisplayName *string `min:"1" type:"string"`
 
 	// Indicates whether an image builder can be launched from this image.
@@ -3926,117 +3453,58 @@ func (s Image) GoString() string {
 	return s.String()
 }
 
-// SetApplications sets the Applications field's value.
-func (s *Image) SetApplications(v []Application) *Image {
-	s.Applications = v
-	return s
-}
-
-// SetArn sets the Arn field's value.
-func (s *Image) SetArn(v string) *Image {
-	s.Arn = &v
-	return s
-}
-
-// SetBaseImageArn sets the BaseImageArn field's value.
-func (s *Image) SetBaseImageArn(v string) *Image {
-	s.BaseImageArn = &v
-	return s
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *Image) SetCreatedTime(v time.Time) *Image {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Image) SetDescription(v string) *Image {
-	s.Description = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *Image) SetDisplayName(v string) *Image {
-	s.DisplayName = &v
-	return s
-}
-
-// SetImageBuilderSupported sets the ImageBuilderSupported field's value.
-func (s *Image) SetImageBuilderSupported(v bool) *Image {
-	s.ImageBuilderSupported = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Image) SetName(v string) *Image {
-	s.Name = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *Image) SetPlatform(v PlatformType) *Image {
-	s.Platform = v
-	return s
-}
-
-// SetPublicBaseImageReleasedDate sets the PublicBaseImageReleasedDate field's value.
-func (s *Image) SetPublicBaseImageReleasedDate(v time.Time) *Image {
-	s.PublicBaseImageReleasedDate = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Image) SetState(v ImageState) *Image {
-	s.State = v
-	return s
-}
-
-// SetStateChangeReason sets the StateChangeReason field's value.
-func (s *Image) SetStateChangeReason(v *ImageStateChangeReason) *Image {
-	s.StateChangeReason = v
-	return s
-}
-
-// SetVisibility sets the Visibility field's value.
-func (s *Image) SetVisibility(v VisibilityType) *Image {
-	s.Visibility = v
-	return s
-}
-
+// Describes a streaming instance used for editing an image. New images are
+// created from a snapshot through an image builder.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilder
 type ImageBuilder struct {
 	_ struct{} `type:"structure"`
 
+	// The version of the AppStream 2.0 agent that is currently being used by this
+	// image builder.
+	AppstreamAgentVersion *string `min:"1" type:"string"`
+
+	// The ARN for the image builder.
 	Arn *string `type:"string"`
 
+	// The time stamp when the image builder was created.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// The description for display.
 	Description *string `min:"1" type:"string"`
 
+	// The image builder name for display.
 	DisplayName *string `min:"1" type:"string"`
 
-	// Contains the information needed for streaming instances to join a domain.
+	// The information needed to join a Microsoft Active Directory domain.
 	DomainJoinInfo *DomainJoinInfo `type:"structure"`
 
+	// Enables or disables default internet access for the image builder.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
 
+	// The ARN of the image from which this builder was created.
 	ImageArn *string `type:"string"`
 
+	// The image builder errors.
 	ImageBuilderErrors []ResourceError `type:"list"`
 
+	// The instance type for the image builder.
 	InstanceType *string `min:"1" type:"string"`
 
+	// The name of the image builder.
+	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
+	// The operating system platform of the image builder.
 	Platform PlatformType `type:"string" enum:"true"`
 
+	// The state of the image builder.
 	State ImageBuilderState `type:"string" enum:"true"`
 
+	// The reason why the last state change occurred.
 	StateChangeReason *ImageBuilderStateChangeReason `type:"structure"`
 
-	// Describes VPC configuration information.
+	// The VPC configuration of the image builder.
 	VpcConfig *VpcConfig `type:"structure"`
 }
 
@@ -4050,96 +3518,15 @@ func (s ImageBuilder) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *ImageBuilder) SetArn(v string) *ImageBuilder {
-	s.Arn = &v
-	return s
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *ImageBuilder) SetCreatedTime(v time.Time) *ImageBuilder {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ImageBuilder) SetDescription(v string) *ImageBuilder {
-	s.Description = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *ImageBuilder) SetDisplayName(v string) *ImageBuilder {
-	s.DisplayName = &v
-	return s
-}
-
-// SetDomainJoinInfo sets the DomainJoinInfo field's value.
-func (s *ImageBuilder) SetDomainJoinInfo(v *DomainJoinInfo) *ImageBuilder {
-	s.DomainJoinInfo = v
-	return s
-}
-
-// SetEnableDefaultInternetAccess sets the EnableDefaultInternetAccess field's value.
-func (s *ImageBuilder) SetEnableDefaultInternetAccess(v bool) *ImageBuilder {
-	s.EnableDefaultInternetAccess = &v
-	return s
-}
-
-// SetImageArn sets the ImageArn field's value.
-func (s *ImageBuilder) SetImageArn(v string) *ImageBuilder {
-	s.ImageArn = &v
-	return s
-}
-
-// SetImageBuilderErrors sets the ImageBuilderErrors field's value.
-func (s *ImageBuilder) SetImageBuilderErrors(v []ResourceError) *ImageBuilder {
-	s.ImageBuilderErrors = v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *ImageBuilder) SetInstanceType(v string) *ImageBuilder {
-	s.InstanceType = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ImageBuilder) SetName(v string) *ImageBuilder {
-	s.Name = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *ImageBuilder) SetPlatform(v PlatformType) *ImageBuilder {
-	s.Platform = v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *ImageBuilder) SetState(v ImageBuilderState) *ImageBuilder {
-	s.State = v
-	return s
-}
-
-// SetStateChangeReason sets the StateChangeReason field's value.
-func (s *ImageBuilder) SetStateChangeReason(v *ImageBuilderStateChangeReason) *ImageBuilder {
-	s.StateChangeReason = v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *ImageBuilder) SetVpcConfig(v *VpcConfig) *ImageBuilder {
-	s.VpcConfig = v
-	return s
-}
-
+// Describes the reason why the last image builder state change occurred.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageBuilderStateChangeReason
 type ImageBuilderStateChangeReason struct {
 	_ struct{} `type:"structure"`
 
+	// The state change reason code.
 	Code ImageBuilderStateChangeReasonCode `type:"string" enum:"true"`
 
+	// The state change reason message.
 	Message *string `min:"1" type:"string"`
 }
 
@@ -4153,19 +3540,7 @@ func (s ImageBuilderStateChangeReason) GoString() string {
 	return s.String()
 }
 
-// SetCode sets the Code field's value.
-func (s *ImageBuilderStateChangeReason) SetCode(v ImageBuilderStateChangeReasonCode) *ImageBuilderStateChangeReason {
-	s.Code = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *ImageBuilderStateChangeReason) SetMessage(v string) *ImageBuilderStateChangeReason {
-	s.Message = &v
-	return s
-}
-
-// Describes the reason why the last state change occurred.
+// Describes the reason why the last image state change occurred.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageStateChangeReason
 type ImageStateChangeReason struct {
 	_ struct{} `type:"structure"`
@@ -4185,18 +3560,6 @@ func (s ImageStateChangeReason) String() string {
 // GoString returns the string representation
 func (s ImageStateChangeReason) GoString() string {
 	return s.String()
-}
-
-// SetCode sets the Code field's value.
-func (s *ImageStateChangeReason) SetCode(v ImageStateChangeReasonCode) *ImageStateChangeReason {
-	s.Code = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *ImageStateChangeReason) SetMessage(v string) *ImageStateChangeReason {
-	s.Message = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedFleetsRequest
@@ -4243,18 +3606,6 @@ func (s *ListAssociatedFleetsInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssociatedFleetsInput) SetNextToken(v string) *ListAssociatedFleetsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *ListAssociatedFleetsInput) SetStackName(v string) *ListAssociatedFleetsInput {
-	s.StackName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedFleetsResult
 type ListAssociatedFleetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -4282,18 +3633,6 @@ func (s ListAssociatedFleetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAssociatedFleetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNames sets the Names field's value.
-func (s *ListAssociatedFleetsOutput) SetNames(v []string) *ListAssociatedFleetsOutput {
-	s.Names = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssociatedFleetsOutput) SetNextToken(v string) *ListAssociatedFleetsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedStacksRequest
@@ -4340,18 +3679,6 @@ func (s *ListAssociatedStacksInput) Validate() error {
 	return nil
 }
 
-// SetFleetName sets the FleetName field's value.
-func (s *ListAssociatedStacksInput) SetFleetName(v string) *ListAssociatedStacksInput {
-	s.FleetName = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssociatedStacksInput) SetNextToken(v string) *ListAssociatedStacksInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListAssociatedStacksResult
 type ListAssociatedStacksOutput struct {
 	_ struct{} `type:"structure"`
@@ -4381,26 +3708,77 @@ func (s ListAssociatedStacksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNames sets the Names field's value.
-func (s *ListAssociatedStacksOutput) SetNames(v []string) *ListAssociatedStacksOutput {
-	s.Names = v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListTagsForResourceRequest
+type ListTagsForResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `type:"string" required:"true"`
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListAssociatedStacksOutput) SetNextToken(v string) *ListAssociatedStacksOutput {
-	s.NextToken = &v
-	return s
+// String returns the string representation
+func (s ListTagsForResourceInput) String() string {
+	return awsutil.Prettify(s)
 }
 
+// GoString returns the string representation
+func (s ListTagsForResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListTagsForResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListTagsForResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListTagsForResourceResponse
+type ListTagsForResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The information about the tags.
+	Tags map[string]string `min:"1" type:"map"`
+}
+
+// String returns the string representation
+func (s ListTagsForResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListTagsForResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Describes a resource error.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ResourceError
 type ResourceError struct {
 	_ struct{} `type:"structure"`
 
+	// The error code.
 	ErrorCode FleetErrorCode `type:"string" enum:"true"`
 
+	// The error message.
 	ErrorMessage *string `min:"1" type:"string"`
 
+	// The time the error occurred.
 	ErrorTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
 
@@ -4412,24 +3790,6 @@ func (s ResourceError) String() string {
 // GoString returns the string representation
 func (s ResourceError) GoString() string {
 	return s.String()
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *ResourceError) SetErrorCode(v FleetErrorCode) *ResourceError {
-	s.ErrorCode = v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *ResourceError) SetErrorMessage(v string) *ResourceError {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetErrorTimestamp sets the ErrorTimestamp field's value.
-func (s *ResourceError) SetErrorTimestamp(v time.Time) *ResourceError {
-	s.ErrorTimestamp = &v
-	return s
 }
 
 // Describes the credentials for the service account used by the streaming instance
@@ -4485,18 +3845,6 @@ func (s *ServiceAccountCredentials) Validate() error {
 	return nil
 }
 
-// SetAccountName sets the AccountName field's value.
-func (s *ServiceAccountCredentials) SetAccountName(v string) *ServiceAccountCredentials {
-	s.AccountName = &v
-	return s
-}
-
-// SetAccountPassword sets the AccountPassword field's value.
-func (s *ServiceAccountCredentials) SetAccountPassword(v string) *ServiceAccountCredentials {
-	s.AccountPassword = &v
-	return s
-}
-
 // Describes a streaming session.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Session
 type Session struct {
@@ -4542,42 +3890,6 @@ func (s Session) GoString() string {
 	return s.String()
 }
 
-// SetAuthenticationType sets the AuthenticationType field's value.
-func (s *Session) SetAuthenticationType(v AuthenticationType) *Session {
-	s.AuthenticationType = v
-	return s
-}
-
-// SetFleetName sets the FleetName field's value.
-func (s *Session) SetFleetName(v string) *Session {
-	s.FleetName = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Session) SetId(v string) *Session {
-	s.Id = &v
-	return s
-}
-
-// SetStackName sets the StackName field's value.
-func (s *Session) SetStackName(v string) *Session {
-	s.StackName = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Session) SetState(v SessionState) *Session {
-	s.State = v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *Session) SetUserId(v string) *Session {
-	s.UserId = &v
-	return s
-}
-
 // Describes a stack.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack
 type Stack struct {
@@ -4589,10 +3901,10 @@ type Stack struct {
 	// The time the stack was created.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The description displayed to end users.
+	// The description for display.
 	Description *string `min:"1" type:"string"`
 
-	// The stack name displayed to end users.
+	// The stack name for display.
 	DisplayName *string `min:"1" type:"string"`
 
 	// The name of the stack.
@@ -4617,48 +3929,6 @@ func (s Stack) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Stack) SetArn(v string) *Stack {
-	s.Arn = &v
-	return s
-}
-
-// SetCreatedTime sets the CreatedTime field's value.
-func (s *Stack) SetCreatedTime(v time.Time) *Stack {
-	s.CreatedTime = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Stack) SetDescription(v string) *Stack {
-	s.Description = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *Stack) SetDisplayName(v string) *Stack {
-	s.DisplayName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Stack) SetName(v string) *Stack {
-	s.Name = &v
-	return s
-}
-
-// SetStackErrors sets the StackErrors field's value.
-func (s *Stack) SetStackErrors(v []StackError) *Stack {
-	s.StackErrors = v
-	return s
-}
-
-// SetStorageConnectors sets the StorageConnectors field's value.
-func (s *Stack) SetStorageConnectors(v []StorageConnector) *Stack {
-	s.StorageConnectors = v
-	return s
-}
-
 // Describes a stack error.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StackError
 type StackError struct {
@@ -4679,18 +3949,6 @@ func (s StackError) String() string {
 // GoString returns the string representation
 func (s StackError) GoString() string {
 	return s.String()
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *StackError) SetErrorCode(v StackErrorCode) *StackError {
-	s.ErrorCode = v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *StackError) SetErrorMessage(v string) *StackError {
-	s.ErrorMessage = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleetRequest
@@ -4730,12 +3988,6 @@ func (s *StartFleetInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *StartFleetInput) SetName(v string) *StartFleetInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartFleetResult
 type StartFleetOutput struct {
 	_ struct{} `type:"structure"`
@@ -4762,6 +4014,12 @@ func (s StartFleetOutput) SDKResponseMetadata() aws.Response {
 type StartImageBuilderInput struct {
 	_ struct{} `type:"structure"`
 
+	// The version of the AppStream 2.0 agent to use for this image builder. To
+	// use the latest version of the AppStream 2.0 agent, specify [LATEST].
+	AppstreamAgentVersion *string `min:"1" type:"string"`
+
+	// The name of the image builder.
+	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 }
@@ -4779,6 +4037,9 @@ func (s StartImageBuilderInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartImageBuilderInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartImageBuilderInput"}
+	if s.AppstreamAgentVersion != nil && len(*s.AppstreamAgentVersion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AppstreamAgentVersion", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -4793,18 +4054,13 @@ func (s *StartImageBuilderInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *StartImageBuilderInput) SetName(v string) *StartImageBuilderInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StartImageBuilderResult
 type StartImageBuilderOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
+	// Information about the image builder.
 	ImageBuilder *ImageBuilder `type:"structure"`
 }
 
@@ -4821,12 +4077,6 @@ func (s StartImageBuilderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartImageBuilderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImageBuilder sets the ImageBuilder field's value.
-func (s *StartImageBuilderOutput) SetImageBuilder(v *ImageBuilder) *StartImageBuilderOutput {
-	s.ImageBuilder = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleetRequest
@@ -4866,12 +4116,6 @@ func (s *StopFleetInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *StopFleetInput) SetName(v string) *StopFleetInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopFleetResult
 type StopFleetOutput struct {
 	_ struct{} `type:"structure"`
@@ -4898,6 +4142,8 @@ func (s StopFleetOutput) SDKResponseMetadata() aws.Response {
 type StopImageBuilderInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the image builder.
+	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 }
@@ -4929,18 +4175,13 @@ func (s *StopImageBuilderInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *StopImageBuilderInput) SetName(v string) *StopImageBuilderInput {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StopImageBuilderResult
 type StopImageBuilderOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
+	// Information about the image builder.
 	ImageBuilder *ImageBuilder `type:"structure"`
 }
 
@@ -4957,12 +4198,6 @@ func (s StopImageBuilderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StopImageBuilderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetImageBuilder sets the ImageBuilder field's value.
-func (s *StopImageBuilderOutput) SetImageBuilder(v *ImageBuilder) *StopImageBuilderOutput {
-	s.ImageBuilder = v
-	return s
 }
 
 // Describes a storage connector.
@@ -5005,16 +4240,143 @@ func (s *StorageConnector) Validate() error {
 	return nil
 }
 
-// SetConnectorType sets the ConnectorType field's value.
-func (s *StorageConnector) SetConnectorType(v StorageConnectorType) *StorageConnector {
-	s.ConnectorType = v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/TagResourceRequest
+type TagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `type:"string" required:"true"`
+
+	// The tags to associate. A tag is a key-value pair (the value is optional).
+	// For example, Environment=Test, or, if you do not specify a value, Environment=.
+	//
+	// If you do not specify a value, we set the value to an empty string.
+	//
+	// Tags is a required field
+	Tags map[string]string `min:"1" type:"map" required:"true"`
 }
 
-// SetResourceIdentifier sets the ResourceIdentifier field's value.
-func (s *StorageConnector) SetResourceIdentifier(v string) *StorageConnector {
-	s.ResourceIdentifier = &v
-	return s
+// String returns the string representation
+func (s TagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.Tags == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Tags"))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/TagResourceResponse
+type TagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s TagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UntagResourceRequest
+type UntagResourceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource.
+	//
+	// ResourceArn is a required field
+	ResourceArn *string `type:"string" required:"true"`
+
+	// The tag keys for the tags to disassociate.
+	//
+	// TagKeys is a required field
+	TagKeys []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UntagResourceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UntagResourceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UntagResourceInput"}
+
+	if s.ResourceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
+	}
+
+	if s.TagKeys == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TagKeys"))
+	}
+	if s.TagKeys != nil && len(s.TagKeys) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TagKeys", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UntagResourceResponse
+type UntagResourceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UntagResourceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UntagResourceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfigRequest
@@ -5063,24 +4425,6 @@ func (s *UpdateDirectoryConfigInput) Validate() error {
 	return nil
 }
 
-// SetDirectoryName sets the DirectoryName field's value.
-func (s *UpdateDirectoryConfigInput) SetDirectoryName(v string) *UpdateDirectoryConfigInput {
-	s.DirectoryName = &v
-	return s
-}
-
-// SetOrganizationalUnitDistinguishedNames sets the OrganizationalUnitDistinguishedNames field's value.
-func (s *UpdateDirectoryConfigInput) SetOrganizationalUnitDistinguishedNames(v []string) *UpdateDirectoryConfigInput {
-	s.OrganizationalUnitDistinguishedNames = v
-	return s
-}
-
-// SetServiceAccountCredentials sets the ServiceAccountCredentials field's value.
-func (s *UpdateDirectoryConfigInput) SetServiceAccountCredentials(v *ServiceAccountCredentials) *UpdateDirectoryConfigInput {
-	s.ServiceAccountCredentials = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateDirectoryConfigResult
 type UpdateDirectoryConfigOutput struct {
 	_ struct{} `type:"structure"`
@@ -5106,12 +4450,6 @@ func (s UpdateDirectoryConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDirectoryConfig sets the DirectoryConfig field's value.
-func (s *UpdateDirectoryConfigOutput) SetDirectoryConfig(v *DirectoryConfig) *UpdateDirectoryConfigOutput {
-	s.DirectoryConfig = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest
 type UpdateFleetInput struct {
 	_ struct{} `type:"structure"`
@@ -5125,7 +4463,7 @@ type UpdateFleetInput struct {
 	// Deletes the VPC association for the specified fleet.
 	DeleteVpcConfig *bool `deprecated:"true" type:"boolean"`
 
-	// The description displayed to end users.
+	// The description for display.
 	Description *string `type:"string"`
 
 	// The time after disconnection when a session is considered to have ended,
@@ -5134,16 +4472,16 @@ type UpdateFleetInput struct {
 	// 60 and 57600.
 	DisconnectTimeoutInSeconds *int64 `type:"integer"`
 
-	// The fleet name displayed to end users.
+	// The fleet name for display.
 	DisplayName *string `type:"string"`
 
-	// The information needed for streaming instances to join a domain.
+	// The information needed to join a Microsoft Active Directory domain.
 	DomainJoinInfo *DomainJoinInfo `type:"structure"`
 
 	// Enables or disables default internet access for the fleet.
 	EnableDefaultInternetAccess *bool `type:"boolean"`
 
-	// The name of the image used by the fleet.
+	// The name of the image used to create the fleet.
 	ImageName *string `min:"1" type:"string"`
 
 	// The instance type to use when launching fleet instances. The following instance
@@ -5241,84 +4579,6 @@ func (s *UpdateFleetInput) Validate() error {
 	return nil
 }
 
-// SetAttributesToDelete sets the AttributesToDelete field's value.
-func (s *UpdateFleetInput) SetAttributesToDelete(v []FleetAttribute) *UpdateFleetInput {
-	s.AttributesToDelete = v
-	return s
-}
-
-// SetComputeCapacity sets the ComputeCapacity field's value.
-func (s *UpdateFleetInput) SetComputeCapacity(v *ComputeCapacity) *UpdateFleetInput {
-	s.ComputeCapacity = v
-	return s
-}
-
-// SetDeleteVpcConfig sets the DeleteVpcConfig field's value.
-func (s *UpdateFleetInput) SetDeleteVpcConfig(v bool) *UpdateFleetInput {
-	s.DeleteVpcConfig = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateFleetInput) SetDescription(v string) *UpdateFleetInput {
-	s.Description = &v
-	return s
-}
-
-// SetDisconnectTimeoutInSeconds sets the DisconnectTimeoutInSeconds field's value.
-func (s *UpdateFleetInput) SetDisconnectTimeoutInSeconds(v int64) *UpdateFleetInput {
-	s.DisconnectTimeoutInSeconds = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *UpdateFleetInput) SetDisplayName(v string) *UpdateFleetInput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetDomainJoinInfo sets the DomainJoinInfo field's value.
-func (s *UpdateFleetInput) SetDomainJoinInfo(v *DomainJoinInfo) *UpdateFleetInput {
-	s.DomainJoinInfo = v
-	return s
-}
-
-// SetEnableDefaultInternetAccess sets the EnableDefaultInternetAccess field's value.
-func (s *UpdateFleetInput) SetEnableDefaultInternetAccess(v bool) *UpdateFleetInput {
-	s.EnableDefaultInternetAccess = &v
-	return s
-}
-
-// SetImageName sets the ImageName field's value.
-func (s *UpdateFleetInput) SetImageName(v string) *UpdateFleetInput {
-	s.ImageName = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *UpdateFleetInput) SetInstanceType(v string) *UpdateFleetInput {
-	s.InstanceType = &v
-	return s
-}
-
-// SetMaxUserDurationInSeconds sets the MaxUserDurationInSeconds field's value.
-func (s *UpdateFleetInput) SetMaxUserDurationInSeconds(v int64) *UpdateFleetInput {
-	s.MaxUserDurationInSeconds = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateFleetInput) SetName(v string) *UpdateFleetInput {
-	s.Name = &v
-	return s
-}
-
-// SetVpcConfig sets the VpcConfig field's value.
-func (s *UpdateFleetInput) SetVpcConfig(v *VpcConfig) *UpdateFleetInput {
-	s.VpcConfig = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetResult
 type UpdateFleetOutput struct {
 	_ struct{} `type:"structure"`
@@ -5344,12 +4604,6 @@ func (s UpdateFleetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFleet sets the Fleet field's value.
-func (s *UpdateFleetOutput) SetFleet(v *Fleet) *UpdateFleetOutput {
-	s.Fleet = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest
 type UpdateStackInput struct {
 	_ struct{} `type:"structure"`
@@ -5357,10 +4611,10 @@ type UpdateStackInput struct {
 	// Deletes the storage connectors currently enabled for the stack.
 	DeleteStorageConnectors *bool `type:"boolean"`
 
-	// The description displayed to end users.
+	// The description for display.
 	Description *string `type:"string"`
 
-	// The stack name displayed to end users.
+	// The stack name for display.
 	DisplayName *string `type:"string"`
 
 	// The name of the stack.
@@ -5406,36 +4660,6 @@ func (s *UpdateStackInput) Validate() error {
 	return nil
 }
 
-// SetDeleteStorageConnectors sets the DeleteStorageConnectors field's value.
-func (s *UpdateStackInput) SetDeleteStorageConnectors(v bool) *UpdateStackInput {
-	s.DeleteStorageConnectors = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateStackInput) SetDescription(v string) *UpdateStackInput {
-	s.Description = &v
-	return s
-}
-
-// SetDisplayName sets the DisplayName field's value.
-func (s *UpdateStackInput) SetDisplayName(v string) *UpdateStackInput {
-	s.DisplayName = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateStackInput) SetName(v string) *UpdateStackInput {
-	s.Name = &v
-	return s
-}
-
-// SetStorageConnectors sets the StorageConnectors field's value.
-func (s *UpdateStackInput) SetStorageConnectors(v []StorageConnector) *UpdateStackInput {
-	s.StorageConnectors = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackResult
 type UpdateStackOutput struct {
 	_ struct{} `type:"structure"`
@@ -5461,12 +4685,6 @@ func (s UpdateStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetStack sets the Stack field's value.
-func (s *UpdateStackOutput) SetStack(v *Stack) *UpdateStackOutput {
-	s.Stack = v
-	return s
-}
-
 // Describes VPC configuration information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/VpcConfig
 type VpcConfig struct {
@@ -5489,18 +4707,6 @@ func (s VpcConfig) GoString() string {
 	return s.String()
 }
 
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *VpcConfig) SetSecurityGroupIds(v []string) *VpcConfig {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *VpcConfig) SetSubnetIds(v []string) *VpcConfig {
-	s.SubnetIds = v
-	return s
-}
-
 type AuthenticationType string
 
 // Enum values for AuthenticationType
@@ -5509,6 +4715,15 @@ const (
 	AuthenticationTypeSaml     AuthenticationType = "SAML"
 	AuthenticationTypeUserpool AuthenticationType = "USERPOOL"
 )
+
+func (enum AuthenticationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthenticationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The fleet attribute.
 type FleetAttribute string
@@ -5519,6 +4734,15 @@ const (
 	FleetAttributeVpcConfigurationSecurityGroupIds FleetAttribute = "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
 	FleetAttributeDomainJoinInfo                   FleetAttribute = "DOMAIN_JOIN_INFO"
 )
+
+func (enum FleetAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type FleetErrorCode string
 
@@ -5552,6 +4776,15 @@ const (
 	FleetErrorCodeDomainJoinInternalServiceError                    FleetErrorCode = "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
 )
 
+func (enum FleetErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FleetState string
 
 // Enum values for FleetState
@@ -5562,6 +4795,15 @@ const (
 	FleetStateStopped  FleetState = "STOPPED"
 )
 
+func (enum FleetState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FleetType string
 
 // Enum values for FleetType
@@ -5570,19 +4812,38 @@ const (
 	FleetTypeOnDemand FleetType = "ON_DEMAND"
 )
 
+func (enum FleetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ImageBuilderState string
 
 // Enum values for ImageBuilderState
 const (
-	ImageBuilderStatePending      ImageBuilderState = "PENDING"
-	ImageBuilderStateRunning      ImageBuilderState = "RUNNING"
-	ImageBuilderStateStopping     ImageBuilderState = "STOPPING"
-	ImageBuilderStateStopped      ImageBuilderState = "STOPPED"
-	ImageBuilderStateRebooting    ImageBuilderState = "REBOOTING"
-	ImageBuilderStateSnapshotting ImageBuilderState = "SNAPSHOTTING"
-	ImageBuilderStateDeleting     ImageBuilderState = "DELETING"
-	ImageBuilderStateFailed       ImageBuilderState = "FAILED"
+	ImageBuilderStatePending       ImageBuilderState = "PENDING"
+	ImageBuilderStateUpdatingAgent ImageBuilderState = "UPDATING_AGENT"
+	ImageBuilderStateRunning       ImageBuilderState = "RUNNING"
+	ImageBuilderStateStopping      ImageBuilderState = "STOPPING"
+	ImageBuilderStateStopped       ImageBuilderState = "STOPPED"
+	ImageBuilderStateRebooting     ImageBuilderState = "REBOOTING"
+	ImageBuilderStateSnapshotting  ImageBuilderState = "SNAPSHOTTING"
+	ImageBuilderStateDeleting      ImageBuilderState = "DELETING"
+	ImageBuilderStateFailed        ImageBuilderState = "FAILED"
 )
+
+func (enum ImageBuilderState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageBuilderState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ImageBuilderStateChangeReasonCode string
 
@@ -5591,6 +4852,15 @@ const (
 	ImageBuilderStateChangeReasonCodeInternalError    ImageBuilderStateChangeReasonCode = "INTERNAL_ERROR"
 	ImageBuilderStateChangeReasonCodeImageUnavailable ImageBuilderStateChangeReasonCode = "IMAGE_UNAVAILABLE"
 )
+
+func (enum ImageBuilderStateChangeReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageBuilderStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ImageState string
 
@@ -5602,6 +4872,15 @@ const (
 	ImageStateDeleting  ImageState = "DELETING"
 )
 
+func (enum ImageState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ImageStateChangeReasonCode string
 
 // Enum values for ImageStateChangeReasonCode
@@ -5610,12 +4889,30 @@ const (
 	ImageStateChangeReasonCodeImageBuilderNotAvailable ImageStateChangeReasonCode = "IMAGE_BUILDER_NOT_AVAILABLE"
 )
 
+func (enum ImageStateChangeReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PlatformType string
 
 // Enum values for PlatformType
 const (
 	PlatformTypeWindows PlatformType = "WINDOWS"
 )
+
+func (enum PlatformType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlatformType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Possible values for the state of a streaming session.
 type SessionState string
@@ -5627,6 +4924,15 @@ const (
 	SessionStateExpired SessionState = "EXPIRED"
 )
 
+func (enum SessionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SessionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackErrorCode string
 
 // Enum values for StackErrorCode
@@ -5634,6 +4940,15 @@ const (
 	StackErrorCodeStorageConnectorError StackErrorCode = "STORAGE_CONNECTOR_ERROR"
 	StackErrorCodeInternalServiceError  StackErrorCode = "INTERNAL_SERVICE_ERROR"
 )
+
+func (enum StackErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The type of storage connector.
 type StorageConnectorType string
@@ -5643,6 +4958,15 @@ const (
 	StorageConnectorTypeHomefolders StorageConnectorType = "HOMEFOLDERS"
 )
 
+func (enum StorageConnectorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StorageConnectorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VisibilityType string
 
 // Enum values for VisibilityType
@@ -5650,3 +4974,12 @@ const (
 	VisibilityTypePublic  VisibilityType = "PUBLIC"
 	VisibilityTypePrivate VisibilityType = "PRIVATE"
 )
+
+func (enum VisibilityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VisibilityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -282,6 +282,148 @@ func (c *DynamoDB) BatchWriteItemRequest(input *BatchWriteItemInput) BatchWriteI
 	return BatchWriteItemRequest{Request: req, Input: input}
 }
 
+const opCreateBackup = "CreateBackup"
+
+// CreateBackupRequest is a API request type for the CreateBackup API operation.
+type CreateBackupRequest struct {
+	*aws.Request
+	Input *CreateBackupInput
+}
+
+// Send marshals and sends the CreateBackup API request.
+func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateBackupOutput), nil
+}
+
+// CreateBackupRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// Creates a backup for an existing table.
+//
+// Each time you create an On-Demand Backup, the entire table data is backed
+// up. There is no limit to the number of on-demand backups that can be taken.
+//
+// You can call CreateBackup at a maximum rate of 50 times per second.
+//
+// All backups in DynamoDB work without consuming any provisioned throughput
+// on the table. This results in a fast, low-cost, and scalable backup process.
+// In general, the larger the table, the more time it takes to back up. The
+// backup is stored in an S3 data store that is maintained and managed by DynamoDB.
+//
+// Backups incorporate all writes (delete, put, update) that were completed
+// within the last minute before the backup request was initiated. Backups might
+// include some writes (delete, put, update) that were completed before the
+// backup request was finished.
+//
+// For example, if you submit the backup request on 2018-12-14 at 14:25:00,
+// the backup is guaranteed to contain all data committed to the table up to
+// 14:24:00, and data committed after 14:26:00 will not be. The backup may or
+// may not contain data modifications made between 14:24:00 and 14:26:00. On-Demand
+// Backup does not support causal consistency.
+//
+// Along with data, the following are also included on the backups:
+//
+//    * Global secondary indexes (GSIs)
+//
+//    * Local secondary indexes (LSIs)
+//
+//    * Streams
+//
+//    * Provisioned read and write capacity
+//
+//    // Example sending a request using the CreateBackupRequest method.
+//    req := client.CreateBackupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateBackup
+func (c *DynamoDB) CreateBackupRequest(input *CreateBackupInput) CreateBackupRequest {
+	op := &aws.Operation{
+		Name:       opCreateBackup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateBackupInput{}
+	}
+
+	output := &CreateBackupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateBackupRequest{Request: req, Input: input}
+}
+
+const opCreateGlobalTable = "CreateGlobalTable"
+
+// CreateGlobalTableRequest is a API request type for the CreateGlobalTable API operation.
+type CreateGlobalTableRequest struct {
+	*aws.Request
+	Input *CreateGlobalTableInput
+}
+
+// Send marshals and sends the CreateGlobalTable API request.
+func (r CreateGlobalTableRequest) Send() (*CreateGlobalTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateGlobalTableOutput), nil
+}
+
+// CreateGlobalTableRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// Creates a global table from an existing table. A global table creates a replication
+// relationship between two or more DynamoDB tables with the same table name
+// in the provided regions.
+//
+// Tables can only be added as the replicas of a global table group under the
+// following conditions:
+//
+//    *  The tables must have the same name.
+//
+//    *  The tables must contain no items.
+//
+//    *  The tables must have the same hash key and sort key (if present).
+//
+//    *  The tables must have DynamoDB Streams enabled (NEW_AND_OLD_IMAGES).
+//
+//    // Example sending a request using the CreateGlobalTableRequest method.
+//    req := client.CreateGlobalTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalTable
+func (c *DynamoDB) CreateGlobalTableRequest(input *CreateGlobalTableInput) CreateGlobalTableRequest {
+	op := &aws.Operation{
+		Name:       opCreateGlobalTable,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateGlobalTableInput{}
+	}
+
+	output := &CreateGlobalTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateGlobalTableRequest{Request: req, Input: input}
+}
+
 const opCreateTable = "CreateTable"
 
 // CreateTableRequest is a API request type for the CreateTable API operation.
@@ -343,6 +485,57 @@ func (c *DynamoDB) CreateTableRequest(input *CreateTableInput) CreateTableReques
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateTableRequest{Request: req, Input: input}
+}
+
+const opDeleteBackup = "DeleteBackup"
+
+// DeleteBackupRequest is a API request type for the DeleteBackup API operation.
+type DeleteBackupRequest struct {
+	*aws.Request
+	Input *DeleteBackupInput
+}
+
+// Send marshals and sends the DeleteBackup API request.
+func (r DeleteBackupRequest) Send() (*DeleteBackupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteBackupOutput), nil
+}
+
+// DeleteBackupRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// Deletes an existing backup of a table.
+//
+// You can call DeleteBackup at a maximum rate of 10 times per second.
+//
+//    // Example sending a request using the DeleteBackupRequest method.
+//    req := client.DeleteBackupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackup
+func (c *DynamoDB) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupRequest {
+	op := &aws.Operation{
+		Name:       opDeleteBackup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteBackupInput{}
+	}
+
+	output := &DeleteBackupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteBackupRequest{Request: req, Input: input}
 }
 
 const opDeleteItem = "DeleteItem"
@@ -471,6 +664,159 @@ func (c *DynamoDB) DeleteTableRequest(input *DeleteTableInput) DeleteTableReques
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteTableRequest{Request: req, Input: input}
+}
+
+const opDescribeBackup = "DescribeBackup"
+
+// DescribeBackupRequest is a API request type for the DescribeBackup API operation.
+type DescribeBackupRequest struct {
+	*aws.Request
+	Input *DescribeBackupInput
+}
+
+// Send marshals and sends the DescribeBackup API request.
+func (r DescribeBackupRequest) Send() (*DescribeBackupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeBackupOutput), nil
+}
+
+// DescribeBackupRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// Describes an existing backup of a table.
+//
+// You can call DescribeBackup at a maximum rate of 10 times per second.
+//
+//    // Example sending a request using the DescribeBackupRequest method.
+//    req := client.DescribeBackupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackup
+func (c *DynamoDB) DescribeBackupRequest(input *DescribeBackupInput) DescribeBackupRequest {
+	op := &aws.Operation{
+		Name:       opDescribeBackup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeBackupInput{}
+	}
+
+	output := &DescribeBackupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeBackupRequest{Request: req, Input: input}
+}
+
+const opDescribeContinuousBackups = "DescribeContinuousBackups"
+
+// DescribeContinuousBackupsRequest is a API request type for the DescribeContinuousBackups API operation.
+type DescribeContinuousBackupsRequest struct {
+	*aws.Request
+	Input *DescribeContinuousBackupsInput
+}
+
+// Send marshals and sends the DescribeContinuousBackups API request.
+func (r DescribeContinuousBackupsRequest) Send() (*DescribeContinuousBackupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeContinuousBackupsOutput), nil
+}
+
+// DescribeContinuousBackupsRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// Checks the status of the backup restore settings on the specified table.
+// If backups are enabled, ContinuousBackupsStatus will bet set to ENABLED.
+//
+// You can call DescribeContinuousBackups at a maximum rate of 10 times per
+// second.
+//
+//    // Example sending a request using the DescribeContinuousBackupsRequest method.
+//    req := client.DescribeContinuousBackupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackups
+func (c *DynamoDB) DescribeContinuousBackupsRequest(input *DescribeContinuousBackupsInput) DescribeContinuousBackupsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeContinuousBackups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeContinuousBackupsInput{}
+	}
+
+	output := &DescribeContinuousBackupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeContinuousBackupsRequest{Request: req, Input: input}
+}
+
+const opDescribeGlobalTable = "DescribeGlobalTable"
+
+// DescribeGlobalTableRequest is a API request type for the DescribeGlobalTable API operation.
+type DescribeGlobalTableRequest struct {
+	*aws.Request
+	Input *DescribeGlobalTableInput
+}
+
+// Send marshals and sends the DescribeGlobalTable API request.
+func (r DescribeGlobalTableRequest) Send() (*DescribeGlobalTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeGlobalTableOutput), nil
+}
+
+// DescribeGlobalTableRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// Returns information about the global table.
+//
+//    // Example sending a request using the DescribeGlobalTableRequest method.
+//    req := client.DescribeGlobalTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTable
+func (c *DynamoDB) DescribeGlobalTableRequest(input *DescribeGlobalTableInput) DescribeGlobalTableRequest {
+	op := &aws.Operation{
+		Name:       opDescribeGlobalTable,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeGlobalTableInput{}
+	}
+
+	output := &DescribeGlobalTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeGlobalTableRequest{Request: req, Input: input}
 }
 
 const opDescribeLimits = "DescribeLimits"
@@ -738,6 +1084,113 @@ func (c *DynamoDB) GetItemRequest(input *GetItemInput) GetItemRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetItemRequest{Request: req, Input: input}
+}
+
+const opListBackups = "ListBackups"
+
+// ListBackupsRequest is a API request type for the ListBackups API operation.
+type ListBackupsRequest struct {
+	*aws.Request
+	Input *ListBackupsInput
+}
+
+// Send marshals and sends the ListBackups API request.
+func (r ListBackupsRequest) Send() (*ListBackupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListBackupsOutput), nil
+}
+
+// ListBackupsRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// List backups associated with an AWS account. To list backups for a given
+// table, specify TableName. ListBackups returns a paginated list of results
+// with at most 1MB worth of items in a page. You can also specify a limit for
+// the maximum number of entries to be returned in a page.
+//
+// In the request, start time is inclusive but end time is exclusive. Note that
+// these limits are for the time at which the original backup was requested.
+//
+// You can call ListBackups a maximum of 5 times per second.
+//
+//    // Example sending a request using the ListBackupsRequest method.
+//    req := client.ListBackupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackups
+func (c *DynamoDB) ListBackupsRequest(input *ListBackupsInput) ListBackupsRequest {
+	op := &aws.Operation{
+		Name:       opListBackups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListBackupsInput{}
+	}
+
+	output := &ListBackupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListBackupsRequest{Request: req, Input: input}
+}
+
+const opListGlobalTables = "ListGlobalTables"
+
+// ListGlobalTablesRequest is a API request type for the ListGlobalTables API operation.
+type ListGlobalTablesRequest struct {
+	*aws.Request
+	Input *ListGlobalTablesInput
+}
+
+// Send marshals and sends the ListGlobalTables API request.
+func (r ListGlobalTablesRequest) Send() (*ListGlobalTablesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListGlobalTablesOutput), nil
+}
+
+// ListGlobalTablesRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// Lists all the global tables. Only those global tables that have replicas
+// in the region specified as input are returned.
+//
+//    // Example sending a request using the ListGlobalTablesRequest method.
+//    req := client.ListGlobalTablesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListGlobalTables
+func (c *DynamoDB) ListGlobalTablesRequest(input *ListGlobalTablesInput) ListGlobalTablesRequest {
+	op := &aws.Operation{
+		Name:       opListGlobalTables,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListGlobalTablesInput{}
+	}
+
+	output := &ListGlobalTablesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListGlobalTablesRequest{Request: req, Input: input}
 }
 
 const opListTables = "ListTables"
@@ -1144,6 +1597,70 @@ func (c *DynamoDB) QueryPagesWithContext(ctx aws.Context, input *QueryInput, fn 
 	return p.Err()
 }
 
+const opRestoreTableFromBackup = "RestoreTableFromBackup"
+
+// RestoreTableFromBackupRequest is a API request type for the RestoreTableFromBackup API operation.
+type RestoreTableFromBackupRequest struct {
+	*aws.Request
+	Input *RestoreTableFromBackupInput
+}
+
+// Send marshals and sends the RestoreTableFromBackup API request.
+func (r RestoreTableFromBackupRequest) Send() (*RestoreTableFromBackupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreTableFromBackupOutput), nil
+}
+
+// RestoreTableFromBackupRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// Creates a new table from an existing backup. Any number of users can execute
+// up to 10 concurrent restores in a given account.
+//
+// You can call RestoreTableFromBackup at a maximum rate of 10 times per second.
+//
+// You must manually set up the following on the restored table:
+//
+//    * Auto scaling policies
+//
+//    * IAM policies
+//
+//    * Cloudwatch metrics and alarms
+//
+//    * Tags
+//
+//    * Time to Live (TTL) settings
+//
+//    // Example sending a request using the RestoreTableFromBackupRequest method.
+//    req := client.RestoreTableFromBackupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackup
+func (c *DynamoDB) RestoreTableFromBackupRequest(input *RestoreTableFromBackupInput) RestoreTableFromBackupRequest {
+	op := &aws.Operation{
+		Name:       opRestoreTableFromBackup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RestoreTableFromBackupInput{}
+	}
+
+	output := &RestoreTableFromBackupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RestoreTableFromBackupRequest{Request: req, Input: input}
+}
+
 const opScan = "Scan"
 
 // ScanRequest is a API request type for the Scan API operation.
@@ -1386,6 +1903,57 @@ func (c *DynamoDB) UntagResourceRequest(input *UntagResourceInput) UntagResource
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UntagResourceRequest{Request: req, Input: input}
+}
+
+const opUpdateGlobalTable = "UpdateGlobalTable"
+
+// UpdateGlobalTableRequest is a API request type for the UpdateGlobalTable API operation.
+type UpdateGlobalTableRequest struct {
+	*aws.Request
+	Input *UpdateGlobalTableInput
+}
+
+// Send marshals and sends the UpdateGlobalTable API request.
+func (r UpdateGlobalTableRequest) Send() (*UpdateGlobalTableOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateGlobalTableOutput), nil
+}
+
+// UpdateGlobalTableRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// Adds or removes replicas to the specified global table. The global table
+// should already exist to be able to use this operation. Currently, the replica
+// to be added should be empty.
+//
+//    // Example sending a request using the UpdateGlobalTableRequest method.
+//    req := client.UpdateGlobalTableRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTable
+func (c *DynamoDB) UpdateGlobalTableRequest(input *UpdateGlobalTableInput) UpdateGlobalTableRequest {
+	op := &aws.Operation{
+		Name:       opUpdateGlobalTable,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateGlobalTableInput{}
+	}
+
+	output := &UpdateGlobalTableOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateGlobalTableRequest{Request: req, Input: input}
 }
 
 const opUpdateItem = "UpdateItem"
@@ -1638,18 +2206,6 @@ func (s *AttributeDefinition) Validate() error {
 	return nil
 }
 
-// SetAttributeName sets the AttributeName field's value.
-func (s *AttributeDefinition) SetAttributeName(v string) *AttributeDefinition {
-	s.AttributeName = &v
-	return s
-}
-
-// SetAttributeType sets the AttributeType field's value.
-func (s *AttributeDefinition) SetAttributeType(v ScalarAttributeType) *AttributeDefinition {
-	s.AttributeType = v
-	return s
-}
-
 // Represents the data for an attribute.
 //
 // Each attribute value is described as a name-value pair. The name is the data
@@ -1730,66 +2286,6 @@ func (s AttributeValue) String() string {
 // GoString returns the string representation
 func (s AttributeValue) GoString() string {
 	return s.String()
-}
-
-// SetB sets the B field's value.
-func (s *AttributeValue) SetB(v []byte) *AttributeValue {
-	s.B = v
-	return s
-}
-
-// SetBOOL sets the BOOL field's value.
-func (s *AttributeValue) SetBOOL(v bool) *AttributeValue {
-	s.BOOL = &v
-	return s
-}
-
-// SetBS sets the BS field's value.
-func (s *AttributeValue) SetBS(v [][]byte) *AttributeValue {
-	s.BS = v
-	return s
-}
-
-// SetL sets the L field's value.
-func (s *AttributeValue) SetL(v []AttributeValue) *AttributeValue {
-	s.L = v
-	return s
-}
-
-// SetM sets the M field's value.
-func (s *AttributeValue) SetM(v map[string]AttributeValue) *AttributeValue {
-	s.M = v
-	return s
-}
-
-// SetN sets the N field's value.
-func (s *AttributeValue) SetN(v string) *AttributeValue {
-	s.N = &v
-	return s
-}
-
-// SetNS sets the NS field's value.
-func (s *AttributeValue) SetNS(v []string) *AttributeValue {
-	s.NS = v
-	return s
-}
-
-// SetNULL sets the NULL field's value.
-func (s *AttributeValue) SetNULL(v bool) *AttributeValue {
-	s.NULL = &v
-	return s
-}
-
-// SetS sets the S field's value.
-func (s *AttributeValue) SetS(v string) *AttributeValue {
-	s.S = &v
-	return s
-}
-
-// SetSS sets the SS field's value.
-func (s *AttributeValue) SetSS(v []string) *AttributeValue {
-	s.SS = v
-	return s
 }
 
 // For the UpdateItem operation, represents the attributes to be modified, the
@@ -1891,16 +2387,109 @@ func (s AttributeValueUpdate) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *AttributeValueUpdate) SetAction(v AttributeAction) *AttributeValueUpdate {
-	s.Action = v
-	return s
+// Contains the description of the backup created for the table.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupDescription
+type BackupDescription struct {
+	_ struct{} `type:"structure"`
+
+	// Contains the details of the backup created for the table.
+	BackupDetails *BackupDetails `type:"structure"`
+
+	// Contains the details of the table when the backup was created.
+	SourceTableDetails *SourceTableDetails `type:"structure"`
+
+	// Contains the details of the features enabled on the table when the backup
+	// was created. For example, LSIs, GSIs, streams, TTL.
+	SourceTableFeatureDetails *SourceTableFeatureDetails `type:"structure"`
 }
 
-// SetValue sets the Value field's value.
-func (s *AttributeValueUpdate) SetValue(v *AttributeValue) *AttributeValueUpdate {
-	s.Value = v
-	return s
+// String returns the string representation
+func (s BackupDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BackupDescription) GoString() string {
+	return s.String()
+}
+
+// Contains the details of the backup created for the table.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupDetails
+type BackupDetails struct {
+	_ struct{} `type:"structure"`
+
+	// ARN associated with the backup.
+	//
+	// BackupArn is a required field
+	BackupArn *string `min:"37" type:"string" required:"true"`
+
+	// Time at which the backup was created. This is the request time of the backup.
+	//
+	// BackupCreationDateTime is a required field
+	BackupCreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Name of the requested backup.
+	//
+	// BackupName is a required field
+	BackupName *string `min:"3" type:"string" required:"true"`
+
+	// Size of the backup in bytes.
+	BackupSizeBytes *int64 `type:"long"`
+
+	// Backup can be in one of the following states: CREATING, ACTIVE, DELETED.
+	//
+	// BackupStatus is a required field
+	BackupStatus BackupStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s BackupDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BackupDetails) GoString() string {
+	return s.String()
+}
+
+// Contains details for the backup.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BackupSummary
+type BackupSummary struct {
+	_ struct{} `type:"structure"`
+
+	// ARN associated with the backup.
+	BackupArn *string `min:"37" type:"string"`
+
+	// Time at which the backup was created.
+	BackupCreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Name of the specified backup.
+	BackupName *string `min:"3" type:"string"`
+
+	// Size of the backup in bytes.
+	BackupSizeBytes *int64 `type:"long"`
+
+	// Backup can be in one of the following states: CREATING, ACTIVE, DELETED.
+	BackupStatus BackupStatus `type:"string" enum:"true"`
+
+	// ARN associated with the table.
+	TableArn *string `type:"string"`
+
+	// Unique identifier for the table.
+	TableId *string `type:"string"`
+
+	// Name of the table.
+	TableName *string `min:"3" type:"string"`
+}
+
+// String returns the string representation
+func (s BackupSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BackupSummary) GoString() string {
+	return s.String()
 }
 
 // Represents the input of a BatchGetItem operation.
@@ -2030,18 +2619,6 @@ func (s *BatchGetItemInput) Validate() error {
 	return nil
 }
 
-// SetRequestItems sets the RequestItems field's value.
-func (s *BatchGetItemInput) SetRequestItems(v map[string]KeysAndAttributes) *BatchGetItemInput {
-	s.RequestItems = v
-	return s
-}
-
-// SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *BatchGetItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *BatchGetItemInput {
-	s.ReturnConsumedCapacity = v
-	return s
-}
-
 // Represents the output of a BatchGetItem operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchGetItemOutput
 type BatchGetItemOutput struct {
@@ -2099,24 +2676,6 @@ func (s BatchGetItemOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetItemOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConsumedCapacity sets the ConsumedCapacity field's value.
-func (s *BatchGetItemOutput) SetConsumedCapacity(v []ConsumedCapacity) *BatchGetItemOutput {
-	s.ConsumedCapacity = v
-	return s
-}
-
-// SetResponses sets the Responses field's value.
-func (s *BatchGetItemOutput) SetResponses(v map[string][]map[string]AttributeValue) *BatchGetItemOutput {
-	s.Responses = v
-	return s
-}
-
-// SetUnprocessedKeys sets the UnprocessedKeys field's value.
-func (s *BatchGetItemOutput) SetUnprocessedKeys(v map[string]KeysAndAttributes) *BatchGetItemOutput {
-	s.UnprocessedKeys = v
-	return s
 }
 
 // Represents the input of a BatchWriteItem operation.
@@ -2205,24 +2764,6 @@ func (s *BatchWriteItemInput) Validate() error {
 	return nil
 }
 
-// SetRequestItems sets the RequestItems field's value.
-func (s *BatchWriteItemInput) SetRequestItems(v map[string][]WriteRequest) *BatchWriteItemInput {
-	s.RequestItems = v
-	return s
-}
-
-// SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *BatchWriteItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *BatchWriteItemInput {
-	s.ReturnConsumedCapacity = v
-	return s
-}
-
-// SetReturnItemCollectionMetrics sets the ReturnItemCollectionMetrics field's value.
-func (s *BatchWriteItemInput) SetReturnItemCollectionMetrics(v ReturnItemCollectionMetrics) *BatchWriteItemInput {
-	s.ReturnItemCollectionMetrics = v
-	return s
-}
-
 // Represents the output of a BatchWriteItem operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BatchWriteItemOutput
 type BatchWriteItemOutput struct {
@@ -2248,8 +2789,8 @@ type BatchWriteItemOutput struct {
 	//    * ItemCollectionKey - The partition key value of the item collection.
 	//    This is the same as the partition key value of the item.
 	//
-	//    * SizeEstimateRange - An estimate of item collection size, expressed in
-	//    GB. This is a two-element array containing a lower bound and an upper
+	//    * SizeEstimateRangeGB - An estimate of item collection size, expressed
+	//    in GB. This is a two-element array containing a lower bound and an upper
 	//    bound for the estimate. The estimate includes the size of all the items
 	//    in the table, plus the size of all attributes projected into all of the
 	//    local secondary indexes on the table. Use this estimate to measure whether
@@ -2307,24 +2848,6 @@ func (s BatchWriteItemOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetConsumedCapacity sets the ConsumedCapacity field's value.
-func (s *BatchWriteItemOutput) SetConsumedCapacity(v []ConsumedCapacity) *BatchWriteItemOutput {
-	s.ConsumedCapacity = v
-	return s
-}
-
-// SetItemCollectionMetrics sets the ItemCollectionMetrics field's value.
-func (s *BatchWriteItemOutput) SetItemCollectionMetrics(v map[string][]ItemCollectionMetrics) *BatchWriteItemOutput {
-	s.ItemCollectionMetrics = v
-	return s
-}
-
-// SetUnprocessedItems sets the UnprocessedItems field's value.
-func (s *BatchWriteItemOutput) SetUnprocessedItems(v map[string][]WriteRequest) *BatchWriteItemOutput {
-	s.UnprocessedItems = v
-	return s
-}
-
 // Represents the amount of provisioned throughput capacity consumed on a table
 // or an index.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Capacity
@@ -2343,12 +2866,6 @@ func (s Capacity) String() string {
 // GoString returns the string representation
 func (s Capacity) GoString() string {
 	return s.String()
-}
-
-// SetCapacityUnits sets the CapacityUnits field's value.
-func (s *Capacity) SetCapacityUnits(v float64) *Capacity {
-	s.CapacityUnits = &v
-	return s
 }
 
 // Represents the selection criteria for a Query or Scan operation:
@@ -2451,18 +2968,6 @@ func (s *Condition) Validate() error {
 	return nil
 }
 
-// SetAttributeValueList sets the AttributeValueList field's value.
-func (s *Condition) SetAttributeValueList(v []AttributeValue) *Condition {
-	s.AttributeValueList = v
-	return s
-}
-
-// SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *Condition) SetComparisonOperator(v ComparisonOperator) *Condition {
-	s.ComparisonOperator = v
-	return s
-}
-
 // The capacity units consumed by an operation. The data returned includes the
 // total provisioned throughput consumed, along with statistics for the table
 // and any indexes involved in the operation. ConsumedCapacity is only returned
@@ -2499,34 +3004,100 @@ func (s ConsumedCapacity) GoString() string {
 	return s.String()
 }
 
-// SetCapacityUnits sets the CapacityUnits field's value.
-func (s *ConsumedCapacity) SetCapacityUnits(v float64) *ConsumedCapacity {
-	s.CapacityUnits = &v
-	return s
+// Represents the backup and restore settings on the table when the backup was
+// created.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ContinuousBackupsDescription
+type ContinuousBackupsDescription struct {
+	_ struct{} `type:"structure"`
+
+	// ContinuousBackupsStatus can be one of the following states : ENABLED, DISABLED
+	//
+	// ContinuousBackupsStatus is a required field
+	ContinuousBackupsStatus ContinuousBackupsStatus `type:"string" required:"true" enum:"true"`
 }
 
-// SetGlobalSecondaryIndexes sets the GlobalSecondaryIndexes field's value.
-func (s *ConsumedCapacity) SetGlobalSecondaryIndexes(v map[string]Capacity) *ConsumedCapacity {
-	s.GlobalSecondaryIndexes = v
-	return s
+// String returns the string representation
+func (s ContinuousBackupsDescription) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetLocalSecondaryIndexes sets the LocalSecondaryIndexes field's value.
-func (s *ConsumedCapacity) SetLocalSecondaryIndexes(v map[string]Capacity) *ConsumedCapacity {
-	s.LocalSecondaryIndexes = v
-	return s
+// GoString returns the string representation
+func (s ContinuousBackupsDescription) GoString() string {
+	return s.String()
 }
 
-// SetTable sets the Table field's value.
-func (s *ConsumedCapacity) SetTable(v *Capacity) *ConsumedCapacity {
-	s.Table = v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateBackupInput
+type CreateBackupInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specified name for the backup.
+	//
+	// BackupName is a required field
+	BackupName *string `min:"3" type:"string" required:"true"`
+
+	// The name of the table.
+	//
+	// TableName is a required field
+	TableName *string `min:"3" type:"string" required:"true"`
 }
 
-// SetTableName sets the TableName field's value.
-func (s *ConsumedCapacity) SetTableName(v string) *ConsumedCapacity {
-	s.TableName = &v
-	return s
+// String returns the string representation
+func (s CreateBackupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateBackupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateBackupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateBackupInput"}
+
+	if s.BackupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BackupName"))
+	}
+	if s.BackupName != nil && len(*s.BackupName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("BackupName", 3))
+	}
+
+	if s.TableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
+	}
+	if s.TableName != nil && len(*s.TableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateBackupOutput
+type CreateBackupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Contains the details of the backup created for the table.
+	BackupDetails *BackupDetails `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateBackupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateBackupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateBackupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a new global secondary index to be added to an existing table.
@@ -2621,28 +3192,110 @@ func (s *CreateGlobalSecondaryIndexAction) Validate() error {
 	return nil
 }
 
-// SetIndexName sets the IndexName field's value.
-func (s *CreateGlobalSecondaryIndexAction) SetIndexName(v string) *CreateGlobalSecondaryIndexAction {
-	s.IndexName = &v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalTableInput
+type CreateGlobalTableInput struct {
+	_ struct{} `type:"structure"`
+
+	// The global table name.
+	//
+	// GlobalTableName is a required field
+	GlobalTableName *string `min:"3" type:"string" required:"true"`
+
+	// The regions where the global table needs to be created.
+	//
+	// ReplicationGroup is a required field
+	ReplicationGroup []Replica `type:"list" required:"true"`
 }
 
-// SetKeySchema sets the KeySchema field's value.
-func (s *CreateGlobalSecondaryIndexAction) SetKeySchema(v []KeySchemaElement) *CreateGlobalSecondaryIndexAction {
-	s.KeySchema = v
-	return s
+// String returns the string representation
+func (s CreateGlobalTableInput) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetProjection sets the Projection field's value.
-func (s *CreateGlobalSecondaryIndexAction) SetProjection(v *Projection) *CreateGlobalSecondaryIndexAction {
-	s.Projection = v
-	return s
+// GoString returns the string representation
+func (s CreateGlobalTableInput) GoString() string {
+	return s.String()
 }
 
-// SetProvisionedThroughput sets the ProvisionedThroughput field's value.
-func (s *CreateGlobalSecondaryIndexAction) SetProvisionedThroughput(v *ProvisionedThroughput) *CreateGlobalSecondaryIndexAction {
-	s.ProvisionedThroughput = v
-	return s
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateGlobalTableInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateGlobalTableInput"}
+
+	if s.GlobalTableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GlobalTableName"))
+	}
+	if s.GlobalTableName != nil && len(*s.GlobalTableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("GlobalTableName", 3))
+	}
+
+	if s.ReplicationGroup == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationGroup"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateGlobalTableOutput
+type CreateGlobalTableOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Contains the details of the global table.
+	GlobalTableDescription *GlobalTableDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateGlobalTableOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateGlobalTableOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateGlobalTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Represents a replica to be added.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateReplicaAction
+type CreateReplicaAction struct {
+	_ struct{} `type:"structure"`
+
+	// The region of the replica to be added.
+	//
+	// RegionName is a required field
+	RegionName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateReplicaAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateReplicaAction) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateReplicaAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateReplicaAction"}
+
+	if s.RegionName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegionName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Represents the input of a CreateTable operation.
@@ -2871,48 +3524,6 @@ func (s *CreateTableInput) Validate() error {
 	return nil
 }
 
-// SetAttributeDefinitions sets the AttributeDefinitions field's value.
-func (s *CreateTableInput) SetAttributeDefinitions(v []AttributeDefinition) *CreateTableInput {
-	s.AttributeDefinitions = v
-	return s
-}
-
-// SetGlobalSecondaryIndexes sets the GlobalSecondaryIndexes field's value.
-func (s *CreateTableInput) SetGlobalSecondaryIndexes(v []GlobalSecondaryIndex) *CreateTableInput {
-	s.GlobalSecondaryIndexes = v
-	return s
-}
-
-// SetKeySchema sets the KeySchema field's value.
-func (s *CreateTableInput) SetKeySchema(v []KeySchemaElement) *CreateTableInput {
-	s.KeySchema = v
-	return s
-}
-
-// SetLocalSecondaryIndexes sets the LocalSecondaryIndexes field's value.
-func (s *CreateTableInput) SetLocalSecondaryIndexes(v []LocalSecondaryIndex) *CreateTableInput {
-	s.LocalSecondaryIndexes = v
-	return s
-}
-
-// SetProvisionedThroughput sets the ProvisionedThroughput field's value.
-func (s *CreateTableInput) SetProvisionedThroughput(v *ProvisionedThroughput) *CreateTableInput {
-	s.ProvisionedThroughput = v
-	return s
-}
-
-// SetStreamSpecification sets the StreamSpecification field's value.
-func (s *CreateTableInput) SetStreamSpecification(v *StreamSpecification) *CreateTableInput {
-	s.StreamSpecification = v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *CreateTableInput) SetTableName(v string) *CreateTableInput {
-	s.TableName = &v
-	return s
-}
-
 // Represents the output of a CreateTable operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CreateTableOutput
 type CreateTableOutput struct {
@@ -2939,10 +3550,66 @@ func (s CreateTableOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetTableDescription sets the TableDescription field's value.
-func (s *CreateTableOutput) SetTableDescription(v *TableDescription) *CreateTableOutput {
-	s.TableDescription = v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackupInput
+type DeleteBackupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN associated with the backup.
+	//
+	// BackupArn is a required field
+	BackupArn *string `min:"37" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteBackupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteBackupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteBackupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteBackupInput"}
+
+	if s.BackupArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BackupArn"))
+	}
+	if s.BackupArn != nil && len(*s.BackupArn) < 37 {
+		invalidParams.Add(aws.NewErrParamMinLen("BackupArn", 37))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteBackupOutput
+type DeleteBackupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Contains the description of the backup created for the table.
+	BackupDescription *BackupDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeleteBackupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteBackupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteBackupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents a global secondary index to be deleted from an existing table.
@@ -2981,12 +3648,6 @@ func (s *DeleteGlobalSecondaryIndexAction) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetIndexName sets the IndexName field's value.
-func (s *DeleteGlobalSecondaryIndexAction) SetIndexName(v string) *DeleteGlobalSecondaryIndexAction {
-	s.IndexName = &v
-	return s
 }
 
 // Represents the input of a DeleteItem operation.
@@ -3165,66 +3826,6 @@ func (s *DeleteItemInput) Validate() error {
 	return nil
 }
 
-// SetConditionExpression sets the ConditionExpression field's value.
-func (s *DeleteItemInput) SetConditionExpression(v string) *DeleteItemInput {
-	s.ConditionExpression = &v
-	return s
-}
-
-// SetConditionalOperator sets the ConditionalOperator field's value.
-func (s *DeleteItemInput) SetConditionalOperator(v ConditionalOperator) *DeleteItemInput {
-	s.ConditionalOperator = v
-	return s
-}
-
-// SetExpected sets the Expected field's value.
-func (s *DeleteItemInput) SetExpected(v map[string]ExpectedAttributeValue) *DeleteItemInput {
-	s.Expected = v
-	return s
-}
-
-// SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *DeleteItemInput) SetExpressionAttributeNames(v map[string]string) *DeleteItemInput {
-	s.ExpressionAttributeNames = v
-	return s
-}
-
-// SetExpressionAttributeValues sets the ExpressionAttributeValues field's value.
-func (s *DeleteItemInput) SetExpressionAttributeValues(v map[string]AttributeValue) *DeleteItemInput {
-	s.ExpressionAttributeValues = v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *DeleteItemInput) SetKey(v map[string]AttributeValue) *DeleteItemInput {
-	s.Key = v
-	return s
-}
-
-// SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *DeleteItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *DeleteItemInput {
-	s.ReturnConsumedCapacity = v
-	return s
-}
-
-// SetReturnItemCollectionMetrics sets the ReturnItemCollectionMetrics field's value.
-func (s *DeleteItemInput) SetReturnItemCollectionMetrics(v ReturnItemCollectionMetrics) *DeleteItemInput {
-	s.ReturnItemCollectionMetrics = v
-	return s
-}
-
-// SetReturnValues sets the ReturnValues field's value.
-func (s *DeleteItemInput) SetReturnValues(v ReturnValue) *DeleteItemInput {
-	s.ReturnValues = v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *DeleteItemInput) SetTableName(v string) *DeleteItemInput {
-	s.TableName = &v
-	return s
-}
-
 // Represents the output of a DeleteItem operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteItemOutput
 type DeleteItemOutput struct {
@@ -3255,7 +3856,7 @@ type DeleteItemOutput struct {
 	//    * ItemCollectionKey - The partition key value of the item collection.
 	//    This is the same as the partition key value of the item itself.
 	//
-	//    * SizeEstimateRange - An estimate of item collection size, in gigabytes.
+	//    * SizeEstimateRangeGB - An estimate of item collection size, in gigabytes.
 	//    This value is a two-element array containing a lower bound and an upper
 	//    bound for the estimate. The estimate includes the size of all the items
 	//    in the table, plus the size of all attributes projected into all of the
@@ -3282,22 +3883,39 @@ func (s DeleteItemOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *DeleteItemOutput) SetAttributes(v map[string]AttributeValue) *DeleteItemOutput {
-	s.Attributes = v
-	return s
+// Represents a replica to be removed.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteReplicaAction
+type DeleteReplicaAction struct {
+	_ struct{} `type:"structure"`
+
+	// The region of the replica to be removed.
+	//
+	// RegionName is a required field
+	RegionName *string `type:"string" required:"true"`
 }
 
-// SetConsumedCapacity sets the ConsumedCapacity field's value.
-func (s *DeleteItemOutput) SetConsumedCapacity(v *ConsumedCapacity) *DeleteItemOutput {
-	s.ConsumedCapacity = v
-	return s
+// String returns the string representation
+func (s DeleteReplicaAction) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetItemCollectionMetrics sets the ItemCollectionMetrics field's value.
-func (s *DeleteItemOutput) SetItemCollectionMetrics(v *ItemCollectionMetrics) *DeleteItemOutput {
-	s.ItemCollectionMetrics = v
-	return s
+// GoString returns the string representation
+func (s DeleteReplicaAction) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteReplicaAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteReplicaAction"}
+
+	if s.RegionName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RegionName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Represents a request to perform a DeleteItem operation on an item.
@@ -3321,12 +3939,6 @@ func (s DeleteRequest) String() string {
 // GoString returns the string representation
 func (s DeleteRequest) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *DeleteRequest) SetKey(v map[string]AttributeValue) *DeleteRequest {
-	s.Key = v
-	return s
 }
 
 // Represents the input of a DeleteTable operation.
@@ -3367,12 +3979,6 @@ func (s *DeleteTableInput) Validate() error {
 	return nil
 }
 
-// SetTableName sets the TableName field's value.
-func (s *DeleteTableInput) SetTableName(v string) *DeleteTableInput {
-	s.TableName = &v
-	return s
-}
-
 // Represents the output of a DeleteTable operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DeleteTableOutput
 type DeleteTableOutput struct {
@@ -3399,10 +4005,191 @@ func (s DeleteTableOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetTableDescription sets the TableDescription field's value.
-func (s *DeleteTableOutput) SetTableDescription(v *TableDescription) *DeleteTableOutput {
-	s.TableDescription = v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackupInput
+type DescribeBackupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN associated with the backup.
+	//
+	// BackupArn is a required field
+	BackupArn *string `min:"37" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeBackupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeBackupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeBackupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeBackupInput"}
+
+	if s.BackupArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BackupArn"))
+	}
+	if s.BackupArn != nil && len(*s.BackupArn) < 37 {
+		invalidParams.Add(aws.NewErrParamMinLen("BackupArn", 37))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBackupOutput
+type DescribeBackupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Contains the description of the backup created for the table.
+	BackupDescription *BackupDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeBackupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeBackupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeBackupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackupsInput
+type DescribeContinuousBackupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Name of the table for which the customer wants to check the backup and restore
+	// settings.
+	//
+	// TableName is a required field
+	TableName *string `min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeContinuousBackupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeContinuousBackupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeContinuousBackupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeContinuousBackupsInput"}
+
+	if s.TableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
+	}
+	if s.TableName != nil && len(*s.TableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeContinuousBackupsOutput
+type DescribeContinuousBackupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// ContinuousBackupsDescription can be one of the following : ENABLED, DISABLED.
+	ContinuousBackupsDescription *ContinuousBackupsDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeContinuousBackupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeContinuousBackupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeContinuousBackupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableInput
+type DescribeGlobalTableInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the global table.
+	//
+	// GlobalTableName is a required field
+	GlobalTableName *string `min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeGlobalTableInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeGlobalTableInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeGlobalTableInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeGlobalTableInput"}
+
+	if s.GlobalTableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GlobalTableName"))
+	}
+	if s.GlobalTableName != nil && len(*s.GlobalTableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("GlobalTableName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeGlobalTableOutput
+type DescribeGlobalTableOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Contains the details of the global table.
+	GlobalTableDescription *GlobalTableDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeGlobalTableOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeGlobalTableOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeGlobalTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a DescribeLimits operation. Has no content.
@@ -3462,30 +4249,6 @@ func (s DescribeLimitsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAccountMaxReadCapacityUnits sets the AccountMaxReadCapacityUnits field's value.
-func (s *DescribeLimitsOutput) SetAccountMaxReadCapacityUnits(v int64) *DescribeLimitsOutput {
-	s.AccountMaxReadCapacityUnits = &v
-	return s
-}
-
-// SetAccountMaxWriteCapacityUnits sets the AccountMaxWriteCapacityUnits field's value.
-func (s *DescribeLimitsOutput) SetAccountMaxWriteCapacityUnits(v int64) *DescribeLimitsOutput {
-	s.AccountMaxWriteCapacityUnits = &v
-	return s
-}
-
-// SetTableMaxReadCapacityUnits sets the TableMaxReadCapacityUnits field's value.
-func (s *DescribeLimitsOutput) SetTableMaxReadCapacityUnits(v int64) *DescribeLimitsOutput {
-	s.TableMaxReadCapacityUnits = &v
-	return s
-}
-
-// SetTableMaxWriteCapacityUnits sets the TableMaxWriteCapacityUnits field's value.
-func (s *DescribeLimitsOutput) SetTableMaxWriteCapacityUnits(v int64) *DescribeLimitsOutput {
-	s.TableMaxWriteCapacityUnits = &v
-	return s
-}
-
 // Represents the input of a DescribeTable operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableInput
 type DescribeTableInput struct {
@@ -3524,12 +4287,6 @@ func (s *DescribeTableInput) Validate() error {
 	return nil
 }
 
-// SetTableName sets the TableName field's value.
-func (s *DescribeTableInput) SetTableName(v string) *DescribeTableInput {
-	s.TableName = &v
-	return s
-}
-
 // Represents the output of a DescribeTable operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTableOutput
 type DescribeTableOutput struct {
@@ -3554,12 +4311,6 @@ func (s DescribeTableOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTableOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTable sets the Table field's value.
-func (s *DescribeTableOutput) SetTable(v *TableDescription) *DescribeTableOutput {
-	s.Table = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTimeToLiveInput
@@ -3599,12 +4350,6 @@ func (s *DescribeTimeToLiveInput) Validate() error {
 	return nil
 }
 
-// SetTableName sets the TableName field's value.
-func (s *DescribeTimeToLiveInput) SetTableName(v string) *DescribeTimeToLiveInput {
-	s.TableName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeTimeToLiveOutput
 type DescribeTimeToLiveOutput struct {
 	_ struct{} `type:"structure"`
@@ -3628,12 +4373,6 @@ func (s DescribeTimeToLiveOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeTimeToLiveOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTimeToLiveDescription sets the TimeToLiveDescription field's value.
-func (s *DescribeTimeToLiveOutput) SetTimeToLiveDescription(v *TimeToLiveDescription) *DescribeTimeToLiveOutput {
-	s.TimeToLiveDescription = v
-	return s
 }
 
 // Represents a condition to be compared with an attribute value. This condition
@@ -3762,30 +4501,6 @@ func (s ExpectedAttributeValue) String() string {
 // GoString returns the string representation
 func (s ExpectedAttributeValue) GoString() string {
 	return s.String()
-}
-
-// SetAttributeValueList sets the AttributeValueList field's value.
-func (s *ExpectedAttributeValue) SetAttributeValueList(v []AttributeValue) *ExpectedAttributeValue {
-	s.AttributeValueList = v
-	return s
-}
-
-// SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *ExpectedAttributeValue) SetComparisonOperator(v ComparisonOperator) *ExpectedAttributeValue {
-	s.ComparisonOperator = v
-	return s
-}
-
-// SetExists sets the Exists field's value.
-func (s *ExpectedAttributeValue) SetExists(v bool) *ExpectedAttributeValue {
-	s.Exists = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *ExpectedAttributeValue) SetValue(v *AttributeValue) *ExpectedAttributeValue {
-	s.Value = v
-	return s
 }
 
 // Represents the input of a GetItem operation.
@@ -3920,48 +4635,6 @@ func (s *GetItemInput) Validate() error {
 	return nil
 }
 
-// SetAttributesToGet sets the AttributesToGet field's value.
-func (s *GetItemInput) SetAttributesToGet(v []string) *GetItemInput {
-	s.AttributesToGet = v
-	return s
-}
-
-// SetConsistentRead sets the ConsistentRead field's value.
-func (s *GetItemInput) SetConsistentRead(v bool) *GetItemInput {
-	s.ConsistentRead = &v
-	return s
-}
-
-// SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *GetItemInput) SetExpressionAttributeNames(v map[string]string) *GetItemInput {
-	s.ExpressionAttributeNames = v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *GetItemInput) SetKey(v map[string]AttributeValue) *GetItemInput {
-	s.Key = v
-	return s
-}
-
-// SetProjectionExpression sets the ProjectionExpression field's value.
-func (s *GetItemInput) SetProjectionExpression(v string) *GetItemInput {
-	s.ProjectionExpression = &v
-	return s
-}
-
-// SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *GetItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *GetItemInput {
-	s.ReturnConsumedCapacity = v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *GetItemInput) SetTableName(v string) *GetItemInput {
-	s.TableName = &v
-	return s
-}
-
 // Represents the output of a GetItem operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GetItemOutput
 type GetItemOutput struct {
@@ -3994,18 +4667,6 @@ func (s GetItemOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetItemOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConsumedCapacity sets the ConsumedCapacity field's value.
-func (s *GetItemOutput) SetConsumedCapacity(v *ConsumedCapacity) *GetItemOutput {
-	s.ConsumedCapacity = v
-	return s
-}
-
-// SetItem sets the Item field's value.
-func (s *GetItemOutput) SetItem(v map[string]AttributeValue) *GetItemOutput {
-	s.Item = v
-	return s
 }
 
 // Represents the properties of a global secondary index.
@@ -4115,30 +4776,6 @@ func (s *GlobalSecondaryIndex) Validate() error {
 	return nil
 }
 
-// SetIndexName sets the IndexName field's value.
-func (s *GlobalSecondaryIndex) SetIndexName(v string) *GlobalSecondaryIndex {
-	s.IndexName = &v
-	return s
-}
-
-// SetKeySchema sets the KeySchema field's value.
-func (s *GlobalSecondaryIndex) SetKeySchema(v []KeySchemaElement) *GlobalSecondaryIndex {
-	s.KeySchema = v
-	return s
-}
-
-// SetProjection sets the Projection field's value.
-func (s *GlobalSecondaryIndex) SetProjection(v *Projection) *GlobalSecondaryIndex {
-	s.Projection = v
-	return s
-}
-
-// SetProvisionedThroughput sets the ProvisionedThroughput field's value.
-func (s *GlobalSecondaryIndex) SetProvisionedThroughput(v *ProvisionedThroughput) *GlobalSecondaryIndex {
-	s.ProvisionedThroughput = v
-	return s
-}
-
 // Represents the properties of a global secondary index.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexDescription
 type GlobalSecondaryIndexDescription struct {
@@ -4222,58 +4859,50 @@ func (s GlobalSecondaryIndexDescription) GoString() string {
 	return s.String()
 }
 
-// SetBackfilling sets the Backfilling field's value.
-func (s *GlobalSecondaryIndexDescription) SetBackfilling(v bool) *GlobalSecondaryIndexDescription {
-	s.Backfilling = &v
-	return s
+// Represents the properties of a global secondary index for the table when
+// the backup was created.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalSecondaryIndexInfo
+type GlobalSecondaryIndexInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the global secondary index.
+	IndexName *string `min:"3" type:"string"`
+
+	// The complete key schema for a global secondary index, which consists of one
+	// or more pairs of attribute names and key types:
+	//
+	//    * HASH - partition key
+	//
+	//    * RANGE - sort key
+	//
+	// The partition key of an item is also known as its hash attribute. The term
+	// "hash attribute" derives from DynamoDB' usage of an internal hash function
+	// to evenly distribute data items across partitions, based on their partition
+	// key values.
+	//
+	// The sort key of an item is also known as its range attribute. The term "range
+	// attribute" derives from the way DynamoDB stores items with the same partition
+	// key physically close together, in sorted order by the sort key value.
+	KeySchema []KeySchemaElement `min:"1" type:"list"`
+
+	// Represents attributes that are copied (projected) from the table into the
+	// global secondary index. These are in addition to the primary key attributes
+	// and index key attributes, which are automatically projected.
+	Projection *Projection `type:"structure"`
+
+	// Represents the provisioned throughput settings for the specified global secondary
+	// index.
+	ProvisionedThroughput *ProvisionedThroughput `type:"structure"`
 }
 
-// SetIndexArn sets the IndexArn field's value.
-func (s *GlobalSecondaryIndexDescription) SetIndexArn(v string) *GlobalSecondaryIndexDescription {
-	s.IndexArn = &v
-	return s
+// String returns the string representation
+func (s GlobalSecondaryIndexInfo) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetIndexName sets the IndexName field's value.
-func (s *GlobalSecondaryIndexDescription) SetIndexName(v string) *GlobalSecondaryIndexDescription {
-	s.IndexName = &v
-	return s
-}
-
-// SetIndexSizeBytes sets the IndexSizeBytes field's value.
-func (s *GlobalSecondaryIndexDescription) SetIndexSizeBytes(v int64) *GlobalSecondaryIndexDescription {
-	s.IndexSizeBytes = &v
-	return s
-}
-
-// SetIndexStatus sets the IndexStatus field's value.
-func (s *GlobalSecondaryIndexDescription) SetIndexStatus(v IndexStatus) *GlobalSecondaryIndexDescription {
-	s.IndexStatus = v
-	return s
-}
-
-// SetItemCount sets the ItemCount field's value.
-func (s *GlobalSecondaryIndexDescription) SetItemCount(v int64) *GlobalSecondaryIndexDescription {
-	s.ItemCount = &v
-	return s
-}
-
-// SetKeySchema sets the KeySchema field's value.
-func (s *GlobalSecondaryIndexDescription) SetKeySchema(v []KeySchemaElement) *GlobalSecondaryIndexDescription {
-	s.KeySchema = v
-	return s
-}
-
-// SetProjection sets the Projection field's value.
-func (s *GlobalSecondaryIndexDescription) SetProjection(v *Projection) *GlobalSecondaryIndexDescription {
-	s.Projection = v
-	return s
-}
-
-// SetProvisionedThroughput sets the ProvisionedThroughput field's value.
-func (s *GlobalSecondaryIndexDescription) SetProvisionedThroughput(v *ProvisionedThroughputDescription) *GlobalSecondaryIndexDescription {
-	s.ProvisionedThroughput = v
-	return s
+// GoString returns the string representation
+func (s GlobalSecondaryIndexInfo) GoString() string {
+	return s.String()
 }
 
 // Represents one of the following:
@@ -4345,22 +4974,65 @@ func (s *GlobalSecondaryIndexUpdate) Validate() error {
 	return nil
 }
 
-// SetCreate sets the Create field's value.
-func (s *GlobalSecondaryIndexUpdate) SetCreate(v *CreateGlobalSecondaryIndexAction) *GlobalSecondaryIndexUpdate {
-	s.Create = v
-	return s
+// Represents the properties of a global table.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTable
+type GlobalTable struct {
+	_ struct{} `type:"structure"`
+
+	// The global table name.
+	GlobalTableName *string `min:"3" type:"string"`
+
+	// The regions where the global table has replicas.
+	ReplicationGroup []Replica `type:"list"`
 }
 
-// SetDelete sets the Delete field's value.
-func (s *GlobalSecondaryIndexUpdate) SetDelete(v *DeleteGlobalSecondaryIndexAction) *GlobalSecondaryIndexUpdate {
-	s.Delete = v
-	return s
+// String returns the string representation
+func (s GlobalTable) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetUpdate sets the Update field's value.
-func (s *GlobalSecondaryIndexUpdate) SetUpdate(v *UpdateGlobalSecondaryIndexAction) *GlobalSecondaryIndexUpdate {
-	s.Update = v
-	return s
+// GoString returns the string representation
+func (s GlobalTable) GoString() string {
+	return s.String()
+}
+
+// Contains details about the global table.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/GlobalTableDescription
+type GlobalTableDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The creation time of the global table.
+	CreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The unique identifier of the global table.
+	GlobalTableArn *string `type:"string"`
+
+	// The global table name.
+	GlobalTableName *string `min:"3" type:"string"`
+
+	// The current state of the global table:
+	//
+	//    * CREATING - The global table is being created.
+	//
+	//    * UPDATING - The global table is being updated.
+	//
+	//    * DELETING - The global table is being deleted.
+	//
+	//    * ACTIVE - The global table is ready for use.
+	GlobalTableStatus GlobalTableStatus `type:"string" enum:"true"`
+
+	// The regions where the global table has replicas.
+	ReplicationGroup []ReplicaDescription `type:"list"`
+}
+
+// String returns the string representation
+func (s GlobalTableDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GlobalTableDescription) GoString() string {
+	return s.String()
 }
 
 // Information about item collections, if any, that were affected by the operation.
@@ -4395,18 +5067,6 @@ func (s ItemCollectionMetrics) String() string {
 // GoString returns the string representation
 func (s ItemCollectionMetrics) GoString() string {
 	return s.String()
-}
-
-// SetItemCollectionKey sets the ItemCollectionKey field's value.
-func (s *ItemCollectionMetrics) SetItemCollectionKey(v map[string]AttributeValue) *ItemCollectionMetrics {
-	s.ItemCollectionKey = v
-	return s
-}
-
-// SetSizeEstimateRangeGB sets the SizeEstimateRangeGB field's value.
-func (s *ItemCollectionMetrics) SetSizeEstimateRangeGB(v []float64) *ItemCollectionMetrics {
-	s.SizeEstimateRangeGB = v
-	return s
 }
 
 // Represents a single element of a key schema. A key schema specifies the attributes
@@ -4476,18 +5136,6 @@ func (s *KeySchemaElement) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAttributeName sets the AttributeName field's value.
-func (s *KeySchemaElement) SetAttributeName(v string) *KeySchemaElement {
-	s.AttributeName = &v
-	return s
-}
-
-// SetKeyType sets the KeyType field's value.
-func (s *KeySchemaElement) SetKeyType(v KeyType) *KeySchemaElement {
-	s.KeyType = v
-	return s
 }
 
 // Represents a set of primary keys and, for each key, the attributes to retrieve
@@ -4596,34 +5244,150 @@ func (s *KeysAndAttributes) Validate() error {
 	return nil
 }
 
-// SetAttributesToGet sets the AttributesToGet field's value.
-func (s *KeysAndAttributes) SetAttributesToGet(v []string) *KeysAndAttributes {
-	s.AttributesToGet = v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackupsInput
+type ListBackupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// LastEvaluatedBackupARN returned by the previous ListBackups call.
+	ExclusiveStartBackupArn *string `min:"37" type:"string"`
+
+	// Maximum number of backups to return at once.
+	Limit *int64 `min:"1" type:"integer"`
+
+	// The backups from the table specified by TableName are listed.
+	TableName *string `min:"3" type:"string"`
+
+	// Only backups created after this time are listed. TimeRangeLowerBound is inclusive.
+	TimeRangeLowerBound *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Only backups created before this time are listed. TimeRangeUpperBound is
+	// exclusive.
+	TimeRangeUpperBound *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
 
-// SetConsistentRead sets the ConsistentRead field's value.
-func (s *KeysAndAttributes) SetConsistentRead(v bool) *KeysAndAttributes {
-	s.ConsistentRead = &v
-	return s
+// String returns the string representation
+func (s ListBackupsInput) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *KeysAndAttributes) SetExpressionAttributeNames(v map[string]string) *KeysAndAttributes {
-	s.ExpressionAttributeNames = v
-	return s
+// GoString returns the string representation
+func (s ListBackupsInput) GoString() string {
+	return s.String()
 }
 
-// SetKeys sets the Keys field's value.
-func (s *KeysAndAttributes) SetKeys(v []map[string]AttributeValue) *KeysAndAttributes {
-	s.Keys = v
-	return s
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListBackupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListBackupsInput"}
+	if s.ExclusiveStartBackupArn != nil && len(*s.ExclusiveStartBackupArn) < 37 {
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartBackupArn", 37))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
+	}
+	if s.TableName != nil && len(*s.TableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
-// SetProjectionExpression sets the ProjectionExpression field's value.
-func (s *KeysAndAttributes) SetProjectionExpression(v string) *KeysAndAttributes {
-	s.ProjectionExpression = &v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBackupsOutput
+type ListBackupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// List of BackupSummary objects.
+	BackupSummaries []BackupSummary `type:"list"`
+
+	// Last evaluated BackupARN.
+	LastEvaluatedBackupArn *string `min:"37" type:"string"`
+}
+
+// String returns the string representation
+func (s ListBackupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListBackupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListBackupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListGlobalTablesInput
+type ListGlobalTablesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The first global table name that this operation will evaluate.
+	ExclusiveStartGlobalTableName *string `min:"3" type:"string"`
+
+	// The maximum number of table names to return.
+	Limit *int64 `min:"1" type:"integer"`
+
+	// Lists the global tables in a specific region.
+	RegionName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListGlobalTablesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListGlobalTablesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListGlobalTablesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListGlobalTablesInput"}
+	if s.ExclusiveStartGlobalTableName != nil && len(*s.ExclusiveStartGlobalTableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("ExclusiveStartGlobalTableName", 3))
+	}
+	if s.Limit != nil && *s.Limit < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Limit", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListGlobalTablesOutput
+type ListGlobalTablesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// List of global table names.
+	GlobalTables []GlobalTable `type:"list"`
+
+	// Last evaluated global table name.
+	LastEvaluatedGlobalTableName *string `min:"3" type:"string"`
+}
+
+// String returns the string representation
+func (s ListGlobalTablesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListGlobalTablesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListGlobalTablesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a ListTables operation.
@@ -4667,18 +5431,6 @@ func (s *ListTablesInput) Validate() error {
 	return nil
 }
 
-// SetExclusiveStartTableName sets the ExclusiveStartTableName field's value.
-func (s *ListTablesInput) SetExclusiveStartTableName(v string) *ListTablesInput {
-	s.ExclusiveStartTableName = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListTablesInput) SetLimit(v int64) *ListTablesInput {
-	s.Limit = &v
-	return s
-}
-
 // Represents the output of a ListTables operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTablesOutput
 type ListTablesOutput struct {
@@ -4716,18 +5468,6 @@ func (s ListTablesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTablesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLastEvaluatedTableName sets the LastEvaluatedTableName field's value.
-func (s *ListTablesOutput) SetLastEvaluatedTableName(v string) *ListTablesOutput {
-	s.LastEvaluatedTableName = &v
-	return s
-}
-
-// SetTableNames sets the TableNames field's value.
-func (s *ListTablesOutput) SetTableNames(v []string) *ListTablesOutput {
-	s.TableNames = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResourceInput
@@ -4773,18 +5513,6 @@ func (s *ListTagsOfResourceInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsOfResourceInput) SetNextToken(v string) *ListTagsOfResourceInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *ListTagsOfResourceInput) SetResourceArn(v string) *ListTagsOfResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListTagsOfResourceOutput
 type ListTagsOfResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -4813,18 +5541,6 @@ func (s ListTagsOfResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsOfResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsOfResourceOutput) SetNextToken(v string) *ListTagsOfResourceOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsOfResourceOutput) SetTags(v []Tag) *ListTagsOfResourceOutput {
-	s.Tags = v
-	return s
 }
 
 // Represents the properties of a local secondary index.
@@ -4915,24 +5631,6 @@ func (s *LocalSecondaryIndex) Validate() error {
 	return nil
 }
 
-// SetIndexName sets the IndexName field's value.
-func (s *LocalSecondaryIndex) SetIndexName(v string) *LocalSecondaryIndex {
-	s.IndexName = &v
-	return s
-}
-
-// SetKeySchema sets the KeySchema field's value.
-func (s *LocalSecondaryIndex) SetKeySchema(v []KeySchemaElement) *LocalSecondaryIndex {
-	s.KeySchema = v
-	return s
-}
-
-// SetProjection sets the Projection field's value.
-func (s *LocalSecondaryIndex) SetProjection(v *Projection) *LocalSecondaryIndex {
-	s.Projection = v
-	return s
-}
-
 // Represents the properties of a local secondary index.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/LocalSecondaryIndexDescription
 type LocalSecondaryIndexDescription struct {
@@ -4986,40 +5684,46 @@ func (s LocalSecondaryIndexDescription) GoString() string {
 	return s.String()
 }
 
-// SetIndexArn sets the IndexArn field's value.
-func (s *LocalSecondaryIndexDescription) SetIndexArn(v string) *LocalSecondaryIndexDescription {
-	s.IndexArn = &v
-	return s
+// Represents the properties of a local secondary index for the table when the
+// backup was created.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/LocalSecondaryIndexInfo
+type LocalSecondaryIndexInfo struct {
+	_ struct{} `type:"structure"`
+
+	// Represents the name of the local secondary index.
+	IndexName *string `min:"3" type:"string"`
+
+	// The complete key schema for a local secondary index, which consists of one
+	// or more pairs of attribute names and key types:
+	//
+	//    * HASH - partition key
+	//
+	//    * RANGE - sort key
+	//
+	// The partition key of an item is also known as its hash attribute. The term
+	// "hash attribute" derives from DynamoDB' usage of an internal hash function
+	// to evenly distribute data items across partitions, based on their partition
+	// key values.
+	//
+	// The sort key of an item is also known as its range attribute. The term "range
+	// attribute" derives from the way DynamoDB stores items with the same partition
+	// key physically close together, in sorted order by the sort key value.
+	KeySchema []KeySchemaElement `min:"1" type:"list"`
+
+	// Represents attributes that are copied (projected) from the table into the
+	// global secondary index. These are in addition to the primary key attributes
+	// and index key attributes, which are automatically projected.
+	Projection *Projection `type:"structure"`
 }
 
-// SetIndexName sets the IndexName field's value.
-func (s *LocalSecondaryIndexDescription) SetIndexName(v string) *LocalSecondaryIndexDescription {
-	s.IndexName = &v
-	return s
+// String returns the string representation
+func (s LocalSecondaryIndexInfo) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetIndexSizeBytes sets the IndexSizeBytes field's value.
-func (s *LocalSecondaryIndexDescription) SetIndexSizeBytes(v int64) *LocalSecondaryIndexDescription {
-	s.IndexSizeBytes = &v
-	return s
-}
-
-// SetItemCount sets the ItemCount field's value.
-func (s *LocalSecondaryIndexDescription) SetItemCount(v int64) *LocalSecondaryIndexDescription {
-	s.ItemCount = &v
-	return s
-}
-
-// SetKeySchema sets the KeySchema field's value.
-func (s *LocalSecondaryIndexDescription) SetKeySchema(v []KeySchemaElement) *LocalSecondaryIndexDescription {
-	s.KeySchema = v
-	return s
-}
-
-// SetProjection sets the Projection field's value.
-func (s *LocalSecondaryIndexDescription) SetProjection(v *Projection) *LocalSecondaryIndexDescription {
-	s.Projection = v
-	return s
+// GoString returns the string representation
+func (s LocalSecondaryIndexInfo) GoString() string {
+	return s.String()
 }
 
 // Represents attributes that are copied (projected) from the table into an
@@ -5069,18 +5773,6 @@ func (s *Projection) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetNonKeyAttributes sets the NonKeyAttributes field's value.
-func (s *Projection) SetNonKeyAttributes(v []string) *Projection {
-	s.NonKeyAttributes = v
-	return s
-}
-
-// SetProjectionType sets the ProjectionType field's value.
-func (s *Projection) SetProjectionType(v ProjectionType) *Projection {
-	s.ProjectionType = v
-	return s
 }
 
 // Represents the provisioned throughput settings for a specified table or index.
@@ -5144,18 +5836,6 @@ func (s *ProvisionedThroughput) Validate() error {
 	return nil
 }
 
-// SetReadCapacityUnits sets the ReadCapacityUnits field's value.
-func (s *ProvisionedThroughput) SetReadCapacityUnits(v int64) *ProvisionedThroughput {
-	s.ReadCapacityUnits = &v
-	return s
-}
-
-// SetWriteCapacityUnits sets the WriteCapacityUnits field's value.
-func (s *ProvisionedThroughput) SetWriteCapacityUnits(v int64) *ProvisionedThroughput {
-	s.WriteCapacityUnits = &v
-	return s
-}
-
 // Represents the provisioned throughput settings for the table, consisting
 // of read and write capacity units, along with data about increases and decreases.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ProvisionedThroughputDescription
@@ -5193,36 +5873,6 @@ func (s ProvisionedThroughputDescription) String() string {
 // GoString returns the string representation
 func (s ProvisionedThroughputDescription) GoString() string {
 	return s.String()
-}
-
-// SetLastDecreaseDateTime sets the LastDecreaseDateTime field's value.
-func (s *ProvisionedThroughputDescription) SetLastDecreaseDateTime(v time.Time) *ProvisionedThroughputDescription {
-	s.LastDecreaseDateTime = &v
-	return s
-}
-
-// SetLastIncreaseDateTime sets the LastIncreaseDateTime field's value.
-func (s *ProvisionedThroughputDescription) SetLastIncreaseDateTime(v time.Time) *ProvisionedThroughputDescription {
-	s.LastIncreaseDateTime = &v
-	return s
-}
-
-// SetNumberOfDecreasesToday sets the NumberOfDecreasesToday field's value.
-func (s *ProvisionedThroughputDescription) SetNumberOfDecreasesToday(v int64) *ProvisionedThroughputDescription {
-	s.NumberOfDecreasesToday = &v
-	return s
-}
-
-// SetReadCapacityUnits sets the ReadCapacityUnits field's value.
-func (s *ProvisionedThroughputDescription) SetReadCapacityUnits(v int64) *ProvisionedThroughputDescription {
-	s.ReadCapacityUnits = &v
-	return s
-}
-
-// SetWriteCapacityUnits sets the WriteCapacityUnits field's value.
-func (s *ProvisionedThroughputDescription) SetWriteCapacityUnits(v int64) *ProvisionedThroughputDescription {
-	s.WriteCapacityUnits = &v
-	return s
 }
 
 // Represents the input of a PutItem operation.
@@ -5413,66 +6063,6 @@ func (s *PutItemInput) Validate() error {
 	return nil
 }
 
-// SetConditionExpression sets the ConditionExpression field's value.
-func (s *PutItemInput) SetConditionExpression(v string) *PutItemInput {
-	s.ConditionExpression = &v
-	return s
-}
-
-// SetConditionalOperator sets the ConditionalOperator field's value.
-func (s *PutItemInput) SetConditionalOperator(v ConditionalOperator) *PutItemInput {
-	s.ConditionalOperator = v
-	return s
-}
-
-// SetExpected sets the Expected field's value.
-func (s *PutItemInput) SetExpected(v map[string]ExpectedAttributeValue) *PutItemInput {
-	s.Expected = v
-	return s
-}
-
-// SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *PutItemInput) SetExpressionAttributeNames(v map[string]string) *PutItemInput {
-	s.ExpressionAttributeNames = v
-	return s
-}
-
-// SetExpressionAttributeValues sets the ExpressionAttributeValues field's value.
-func (s *PutItemInput) SetExpressionAttributeValues(v map[string]AttributeValue) *PutItemInput {
-	s.ExpressionAttributeValues = v
-	return s
-}
-
-// SetItem sets the Item field's value.
-func (s *PutItemInput) SetItem(v map[string]AttributeValue) *PutItemInput {
-	s.Item = v
-	return s
-}
-
-// SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *PutItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *PutItemInput {
-	s.ReturnConsumedCapacity = v
-	return s
-}
-
-// SetReturnItemCollectionMetrics sets the ReturnItemCollectionMetrics field's value.
-func (s *PutItemInput) SetReturnItemCollectionMetrics(v ReturnItemCollectionMetrics) *PutItemInput {
-	s.ReturnItemCollectionMetrics = v
-	return s
-}
-
-// SetReturnValues sets the ReturnValues field's value.
-func (s *PutItemInput) SetReturnValues(v ReturnValue) *PutItemInput {
-	s.ReturnValues = v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *PutItemInput) SetTableName(v string) *PutItemInput {
-	s.TableName = &v
-	return s
-}
-
 // Represents the output of a PutItem operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutItemOutput
 type PutItemOutput struct {
@@ -5503,7 +6093,7 @@ type PutItemOutput struct {
 	//    * ItemCollectionKey - The partition key value of the item collection.
 	//    This is the same as the partition key value of the item itself.
 	//
-	//    * SizeEstimateRange - An estimate of item collection size, in gigabytes.
+	//    * SizeEstimateRangeGB - An estimate of item collection size, in gigabytes.
 	//    This value is a two-element array containing a lower bound and an upper
 	//    bound for the estimate. The estimate includes the size of all the items
 	//    in the table, plus the size of all attributes projected into all of the
@@ -5530,24 +6120,6 @@ func (s PutItemOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *PutItemOutput) SetAttributes(v map[string]AttributeValue) *PutItemOutput {
-	s.Attributes = v
-	return s
-}
-
-// SetConsumedCapacity sets the ConsumedCapacity field's value.
-func (s *PutItemOutput) SetConsumedCapacity(v *ConsumedCapacity) *PutItemOutput {
-	s.ConsumedCapacity = v
-	return s
-}
-
-// SetItemCollectionMetrics sets the ItemCollectionMetrics field's value.
-func (s *PutItemOutput) SetItemCollectionMetrics(v *ItemCollectionMetrics) *PutItemOutput {
-	s.ItemCollectionMetrics = v
-	return s
-}
-
 // Represents a request to perform a PutItem operation on an item.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PutRequest
 type PutRequest struct {
@@ -5571,12 +6143,6 @@ func (s PutRequest) String() string {
 // GoString returns the string representation
 func (s PutRequest) GoString() string {
 	return s.String()
-}
-
-// SetItem sets the Item field's value.
-func (s *PutRequest) SetItem(v map[string]AttributeValue) *PutRequest {
-	s.Item = v
-	return s
 }
 
 // Represents the input of a Query operation.
@@ -5925,108 +6491,6 @@ func (s *QueryInput) Validate() error {
 	return nil
 }
 
-// SetAttributesToGet sets the AttributesToGet field's value.
-func (s *QueryInput) SetAttributesToGet(v []string) *QueryInput {
-	s.AttributesToGet = v
-	return s
-}
-
-// SetConditionalOperator sets the ConditionalOperator field's value.
-func (s *QueryInput) SetConditionalOperator(v ConditionalOperator) *QueryInput {
-	s.ConditionalOperator = v
-	return s
-}
-
-// SetConsistentRead sets the ConsistentRead field's value.
-func (s *QueryInput) SetConsistentRead(v bool) *QueryInput {
-	s.ConsistentRead = &v
-	return s
-}
-
-// SetExclusiveStartKey sets the ExclusiveStartKey field's value.
-func (s *QueryInput) SetExclusiveStartKey(v map[string]AttributeValue) *QueryInput {
-	s.ExclusiveStartKey = v
-	return s
-}
-
-// SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *QueryInput) SetExpressionAttributeNames(v map[string]string) *QueryInput {
-	s.ExpressionAttributeNames = v
-	return s
-}
-
-// SetExpressionAttributeValues sets the ExpressionAttributeValues field's value.
-func (s *QueryInput) SetExpressionAttributeValues(v map[string]AttributeValue) *QueryInput {
-	s.ExpressionAttributeValues = v
-	return s
-}
-
-// SetFilterExpression sets the FilterExpression field's value.
-func (s *QueryInput) SetFilterExpression(v string) *QueryInput {
-	s.FilterExpression = &v
-	return s
-}
-
-// SetIndexName sets the IndexName field's value.
-func (s *QueryInput) SetIndexName(v string) *QueryInput {
-	s.IndexName = &v
-	return s
-}
-
-// SetKeyConditionExpression sets the KeyConditionExpression field's value.
-func (s *QueryInput) SetKeyConditionExpression(v string) *QueryInput {
-	s.KeyConditionExpression = &v
-	return s
-}
-
-// SetKeyConditions sets the KeyConditions field's value.
-func (s *QueryInput) SetKeyConditions(v map[string]Condition) *QueryInput {
-	s.KeyConditions = v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *QueryInput) SetLimit(v int64) *QueryInput {
-	s.Limit = &v
-	return s
-}
-
-// SetProjectionExpression sets the ProjectionExpression field's value.
-func (s *QueryInput) SetProjectionExpression(v string) *QueryInput {
-	s.ProjectionExpression = &v
-	return s
-}
-
-// SetQueryFilter sets the QueryFilter field's value.
-func (s *QueryInput) SetQueryFilter(v map[string]Condition) *QueryInput {
-	s.QueryFilter = v
-	return s
-}
-
-// SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *QueryInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *QueryInput {
-	s.ReturnConsumedCapacity = v
-	return s
-}
-
-// SetScanIndexForward sets the ScanIndexForward field's value.
-func (s *QueryInput) SetScanIndexForward(v bool) *QueryInput {
-	s.ScanIndexForward = &v
-	return s
-}
-
-// SetSelect sets the Select field's value.
-func (s *QueryInput) SetSelect(v Select) *QueryInput {
-	s.Select = v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *QueryInput) SetTableName(v string) *QueryInput {
-	s.TableName = &v
-	return s
-}
-
 // Represents the output of a Query operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/QueryOutput
 type QueryOutput struct {
@@ -6093,34 +6557,196 @@ func (s QueryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetConsumedCapacity sets the ConsumedCapacity field's value.
-func (s *QueryOutput) SetConsumedCapacity(v *ConsumedCapacity) *QueryOutput {
-	s.ConsumedCapacity = v
-	return s
+// Represents the properties of a replica.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/Replica
+type Replica struct {
+	_ struct{} `type:"structure"`
+
+	// The region where the replica needs to be created.
+	RegionName *string `type:"string"`
 }
 
-// SetCount sets the Count field's value.
-func (s *QueryOutput) SetCount(v int64) *QueryOutput {
-	s.Count = &v
-	return s
+// String returns the string representation
+func (s Replica) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetItems sets the Items field's value.
-func (s *QueryOutput) SetItems(v []map[string]AttributeValue) *QueryOutput {
-	s.Items = v
-	return s
+// GoString returns the string representation
+func (s Replica) GoString() string {
+	return s.String()
 }
 
-// SetLastEvaluatedKey sets the LastEvaluatedKey field's value.
-func (s *QueryOutput) SetLastEvaluatedKey(v map[string]AttributeValue) *QueryOutput {
-	s.LastEvaluatedKey = v
-	return s
+// Contains the details of the replica.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaDescription
+type ReplicaDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the region.
+	RegionName *string `type:"string"`
 }
 
-// SetScannedCount sets the ScannedCount field's value.
-func (s *QueryOutput) SetScannedCount(v int64) *QueryOutput {
-	s.ScannedCount = &v
-	return s
+// String returns the string representation
+func (s ReplicaDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReplicaDescription) GoString() string {
+	return s.String()
+}
+
+// Represents one of the following:
+//
+//    * A new replica to be added to an existing global table.
+//
+//    * New parameters for an existing replica.
+//
+//    * An existing replica to be removed from an existing global table.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicaUpdate
+type ReplicaUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// The parameters required for creating a replica on an existing global table.
+	Create *CreateReplicaAction `type:"structure"`
+
+	// The name of the existing replica to be removed.
+	Delete *DeleteReplicaAction `type:"structure"`
+}
+
+// String returns the string representation
+func (s ReplicaUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReplicaUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ReplicaUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ReplicaUpdate"}
+	if s.Create != nil {
+		if err := s.Create.Validate(); err != nil {
+			invalidParams.AddNested("Create", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Delete != nil {
+		if err := s.Delete.Validate(); err != nil {
+			invalidParams.AddNested("Delete", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Contains details for the restore.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreSummary
+type RestoreSummary struct {
+	_ struct{} `type:"structure"`
+
+	// Point in time or source backup time.
+	//
+	// RestoreDateTime is a required field
+	RestoreDateTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Indicates if a restore is in progress or not.
+	//
+	// RestoreInProgress is a required field
+	RestoreInProgress *bool `type:"boolean" required:"true"`
+
+	// ARN of the backup from which the table was restored.
+	SourceBackupArn *string `min:"37" type:"string"`
+
+	// ARN of the source table of the backup that is being restored.
+	SourceTableArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s RestoreSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestoreSummary) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackupInput
+type RestoreTableFromBackupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN associated with the backup.
+	//
+	// BackupArn is a required field
+	BackupArn *string `min:"37" type:"string" required:"true"`
+
+	// The name of the new table to which the backup must be restored.
+	//
+	// TargetTableName is a required field
+	TargetTableName *string `min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RestoreTableFromBackupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestoreTableFromBackupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RestoreTableFromBackupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreTableFromBackupInput"}
+
+	if s.BackupArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BackupArn"))
+	}
+	if s.BackupArn != nil && len(*s.BackupArn) < 37 {
+		invalidParams.Add(aws.NewErrParamMinLen("BackupArn", 37))
+	}
+
+	if s.TargetTableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetTableName"))
+	}
+	if s.TargetTableName != nil && len(*s.TargetTableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetTableName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableFromBackupOutput
+type RestoreTableFromBackupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The description of the table created from an existing backup.
+	TableDescription *TableDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s RestoreTableFromBackupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestoreTableFromBackupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreTableFromBackupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of a Scan operation.
@@ -6416,102 +7042,6 @@ func (s *ScanInput) Validate() error {
 	return nil
 }
 
-// SetAttributesToGet sets the AttributesToGet field's value.
-func (s *ScanInput) SetAttributesToGet(v []string) *ScanInput {
-	s.AttributesToGet = v
-	return s
-}
-
-// SetConditionalOperator sets the ConditionalOperator field's value.
-func (s *ScanInput) SetConditionalOperator(v ConditionalOperator) *ScanInput {
-	s.ConditionalOperator = v
-	return s
-}
-
-// SetConsistentRead sets the ConsistentRead field's value.
-func (s *ScanInput) SetConsistentRead(v bool) *ScanInput {
-	s.ConsistentRead = &v
-	return s
-}
-
-// SetExclusiveStartKey sets the ExclusiveStartKey field's value.
-func (s *ScanInput) SetExclusiveStartKey(v map[string]AttributeValue) *ScanInput {
-	s.ExclusiveStartKey = v
-	return s
-}
-
-// SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *ScanInput) SetExpressionAttributeNames(v map[string]string) *ScanInput {
-	s.ExpressionAttributeNames = v
-	return s
-}
-
-// SetExpressionAttributeValues sets the ExpressionAttributeValues field's value.
-func (s *ScanInput) SetExpressionAttributeValues(v map[string]AttributeValue) *ScanInput {
-	s.ExpressionAttributeValues = v
-	return s
-}
-
-// SetFilterExpression sets the FilterExpression field's value.
-func (s *ScanInput) SetFilterExpression(v string) *ScanInput {
-	s.FilterExpression = &v
-	return s
-}
-
-// SetIndexName sets the IndexName field's value.
-func (s *ScanInput) SetIndexName(v string) *ScanInput {
-	s.IndexName = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ScanInput) SetLimit(v int64) *ScanInput {
-	s.Limit = &v
-	return s
-}
-
-// SetProjectionExpression sets the ProjectionExpression field's value.
-func (s *ScanInput) SetProjectionExpression(v string) *ScanInput {
-	s.ProjectionExpression = &v
-	return s
-}
-
-// SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *ScanInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *ScanInput {
-	s.ReturnConsumedCapacity = v
-	return s
-}
-
-// SetScanFilter sets the ScanFilter field's value.
-func (s *ScanInput) SetScanFilter(v map[string]Condition) *ScanInput {
-	s.ScanFilter = v
-	return s
-}
-
-// SetSegment sets the Segment field's value.
-func (s *ScanInput) SetSegment(v int64) *ScanInput {
-	s.Segment = &v
-	return s
-}
-
-// SetSelect sets the Select field's value.
-func (s *ScanInput) SetSelect(v Select) *ScanInput {
-	s.Select = v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *ScanInput) SetTableName(v string) *ScanInput {
-	s.TableName = &v
-	return s
-}
-
-// SetTotalSegments sets the TotalSegments field's value.
-func (s *ScanInput) SetTotalSegments(v int64) *ScanInput {
-	s.TotalSegments = &v
-	return s
-}
-
 // Represents the output of a Scan operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ScanOutput
 type ScanOutput struct {
@@ -6577,34 +7107,87 @@ func (s ScanOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetConsumedCapacity sets the ConsumedCapacity field's value.
-func (s *ScanOutput) SetConsumedCapacity(v *ConsumedCapacity) *ScanOutput {
-	s.ConsumedCapacity = v
-	return s
+// Contains the details of the table when the backup was created.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SourceTableDetails
+type SourceTableDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Number of items in the table. Please note this is an approximate value.
+	ItemCount *int64 `type:"long"`
+
+	// Schema of the table.
+	//
+	// KeySchema is a required field
+	KeySchema []KeySchemaElement `min:"1" type:"list" required:"true"`
+
+	// Read IOPs and Write IOPS on the table when the backup was created.
+	//
+	// ProvisionedThroughput is a required field
+	ProvisionedThroughput *ProvisionedThroughput `type:"structure" required:"true"`
+
+	// ARN of the table for which backup was created.
+	TableArn *string `type:"string"`
+
+	// Time when the source table was created.
+	//
+	// TableCreationDateTime is a required field
+	TableCreationDateTime *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
+
+	// Unique identifier for the table for which the backup was created.
+	//
+	// TableId is a required field
+	TableId *string `type:"string" required:"true"`
+
+	// The name of the table for which the backup was created.
+	//
+	// TableName is a required field
+	TableName *string `min:"3" type:"string" required:"true"`
+
+	// Size of the table in bytes. Please note this is an approximate value.
+	TableSizeBytes *int64 `type:"long"`
 }
 
-// SetCount sets the Count field's value.
-func (s *ScanOutput) SetCount(v int64) *ScanOutput {
-	s.Count = &v
-	return s
+// String returns the string representation
+func (s SourceTableDetails) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetItems sets the Items field's value.
-func (s *ScanOutput) SetItems(v []map[string]AttributeValue) *ScanOutput {
-	s.Items = v
-	return s
+// GoString returns the string representation
+func (s SourceTableDetails) GoString() string {
+	return s.String()
 }
 
-// SetLastEvaluatedKey sets the LastEvaluatedKey field's value.
-func (s *ScanOutput) SetLastEvaluatedKey(v map[string]AttributeValue) *ScanOutput {
-	s.LastEvaluatedKey = v
-	return s
+// Contains the details of the features enabled on the table when the backup
+// was created. For example, LSIs, GSIs, streams, TTL.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SourceTableFeatureDetails
+type SourceTableFeatureDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Represents the GSI properties for the table when the backup was created.
+	// It includes the IndexName, KeySchema, Projection and ProvisionedThroughput
+	// for the GSIs on the table at the time of backup.
+	GlobalSecondaryIndexes []GlobalSecondaryIndexInfo `type:"list"`
+
+	// Represents the LSI properties for the table when the backup was created.
+	// It includes the IndexName, KeySchema and Projection for the LSIs on the table
+	// at the time of backup.
+	LocalSecondaryIndexes []LocalSecondaryIndexInfo `type:"list"`
+
+	// Stream settings on the table when the backup was created.
+	StreamDescription *StreamSpecification `type:"structure"`
+
+	// Time to Live settings on the table when the backup was created.
+	TimeToLiveDescription *TimeToLiveDescription `type:"structure"`
 }
 
-// SetScannedCount sets the ScannedCount field's value.
-func (s *ScanOutput) SetScannedCount(v int64) *ScanOutput {
-	s.ScannedCount = &v
-	return s
+// String returns the string representation
+func (s SourceTableFeatureDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SourceTableFeatureDetails) GoString() string {
+	return s.String()
 }
 
 // Represents the DynamoDB Streams configuration for a table in DynamoDB.
@@ -6642,18 +7225,6 @@ func (s StreamSpecification) String() string {
 // GoString returns the string representation
 func (s StreamSpecification) GoString() string {
 	return s.String()
-}
-
-// SetStreamEnabled sets the StreamEnabled field's value.
-func (s *StreamSpecification) SetStreamEnabled(v bool) *StreamSpecification {
-	s.StreamEnabled = &v
-	return s
-}
-
-// SetStreamViewType sets the StreamViewType field's value.
-func (s *StreamSpecification) SetStreamViewType(v StreamViewType) *StreamSpecification {
-	s.StreamViewType = v
-	return s
 }
 
 // Represents the properties of a table.
@@ -6829,11 +7400,17 @@ type TableDescription struct {
 	// write capacity units, along with data about increases and decreases.
 	ProvisionedThroughput *ProvisionedThroughputDescription `type:"structure"`
 
+	// Contains details for the restore.
+	RestoreSummary *RestoreSummary `type:"structure"`
+
 	// The current DynamoDB Streams configuration for the table.
 	StreamSpecification *StreamSpecification `type:"structure"`
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the table.
 	TableArn *string `type:"string"`
+
+	// Unique identifier for the table for which the backup was created.
+	TableId *string `type:"string"`
 
 	// The name of the table.
 	TableName *string `min:"3" type:"string"`
@@ -6863,90 +7440,6 @@ func (s TableDescription) String() string {
 // GoString returns the string representation
 func (s TableDescription) GoString() string {
 	return s.String()
-}
-
-// SetAttributeDefinitions sets the AttributeDefinitions field's value.
-func (s *TableDescription) SetAttributeDefinitions(v []AttributeDefinition) *TableDescription {
-	s.AttributeDefinitions = v
-	return s
-}
-
-// SetCreationDateTime sets the CreationDateTime field's value.
-func (s *TableDescription) SetCreationDateTime(v time.Time) *TableDescription {
-	s.CreationDateTime = &v
-	return s
-}
-
-// SetGlobalSecondaryIndexes sets the GlobalSecondaryIndexes field's value.
-func (s *TableDescription) SetGlobalSecondaryIndexes(v []GlobalSecondaryIndexDescription) *TableDescription {
-	s.GlobalSecondaryIndexes = v
-	return s
-}
-
-// SetItemCount sets the ItemCount field's value.
-func (s *TableDescription) SetItemCount(v int64) *TableDescription {
-	s.ItemCount = &v
-	return s
-}
-
-// SetKeySchema sets the KeySchema field's value.
-func (s *TableDescription) SetKeySchema(v []KeySchemaElement) *TableDescription {
-	s.KeySchema = v
-	return s
-}
-
-// SetLatestStreamArn sets the LatestStreamArn field's value.
-func (s *TableDescription) SetLatestStreamArn(v string) *TableDescription {
-	s.LatestStreamArn = &v
-	return s
-}
-
-// SetLatestStreamLabel sets the LatestStreamLabel field's value.
-func (s *TableDescription) SetLatestStreamLabel(v string) *TableDescription {
-	s.LatestStreamLabel = &v
-	return s
-}
-
-// SetLocalSecondaryIndexes sets the LocalSecondaryIndexes field's value.
-func (s *TableDescription) SetLocalSecondaryIndexes(v []LocalSecondaryIndexDescription) *TableDescription {
-	s.LocalSecondaryIndexes = v
-	return s
-}
-
-// SetProvisionedThroughput sets the ProvisionedThroughput field's value.
-func (s *TableDescription) SetProvisionedThroughput(v *ProvisionedThroughputDescription) *TableDescription {
-	s.ProvisionedThroughput = v
-	return s
-}
-
-// SetStreamSpecification sets the StreamSpecification field's value.
-func (s *TableDescription) SetStreamSpecification(v *StreamSpecification) *TableDescription {
-	s.StreamSpecification = v
-	return s
-}
-
-// SetTableArn sets the TableArn field's value.
-func (s *TableDescription) SetTableArn(v string) *TableDescription {
-	s.TableArn = &v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *TableDescription) SetTableName(v string) *TableDescription {
-	s.TableName = &v
-	return s
-}
-
-// SetTableSizeBytes sets the TableSizeBytes field's value.
-func (s *TableDescription) SetTableSizeBytes(v int64) *TableDescription {
-	s.TableSizeBytes = &v
-	return s
-}
-
-// SetTableStatus sets the TableStatus field's value.
-func (s *TableDescription) SetTableStatus(v TableStatus) *TableDescription {
-	s.TableStatus = v
-	return s
 }
 
 // Describes a tag. A tag is a key-value pair. You can add up to 50 tags to
@@ -7007,18 +7500,6 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TagResourceInput
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
@@ -7073,18 +7554,6 @@ func (s *TagResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceArn sets the ResourceArn field's value.
-func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -7127,18 +7596,6 @@ func (s TimeToLiveDescription) String() string {
 // GoString returns the string representation
 func (s TimeToLiveDescription) GoString() string {
 	return s.String()
-}
-
-// SetAttributeName sets the AttributeName field's value.
-func (s *TimeToLiveDescription) SetAttributeName(v string) *TimeToLiveDescription {
-	s.AttributeName = &v
-	return s
-}
-
-// SetTimeToLiveStatus sets the TimeToLiveStatus field's value.
-func (s *TimeToLiveDescription) SetTimeToLiveStatus(v TimeToLiveStatus) *TimeToLiveDescription {
-	s.TimeToLiveStatus = v
-	return s
 }
 
 // Represents the settings used to enable or disable Time to Live for the specified
@@ -7191,18 +7648,6 @@ func (s *TimeToLiveSpecification) Validate() error {
 	return nil
 }
 
-// SetAttributeName sets the AttributeName field's value.
-func (s *TimeToLiveSpecification) SetAttributeName(v string) *TimeToLiveSpecification {
-	s.AttributeName = &v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *TimeToLiveSpecification) SetEnabled(v bool) *TimeToLiveSpecification {
-	s.Enabled = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UntagResourceInput
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
@@ -7249,18 +7694,6 @@ func (s *UntagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
-	s.TagKeys = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UntagResourceOutput
@@ -7343,16 +7776,82 @@ func (s *UpdateGlobalSecondaryIndexAction) Validate() error {
 	return nil
 }
 
-// SetIndexName sets the IndexName field's value.
-func (s *UpdateGlobalSecondaryIndexAction) SetIndexName(v string) *UpdateGlobalSecondaryIndexAction {
-	s.IndexName = &v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableInput
+type UpdateGlobalTableInput struct {
+	_ struct{} `type:"structure"`
+
+	// The global table name.
+	//
+	// GlobalTableName is a required field
+	GlobalTableName *string `min:"3" type:"string" required:"true"`
+
+	// A list of regions that should be added or removed from the global table.
+	//
+	// ReplicaUpdates is a required field
+	ReplicaUpdates []ReplicaUpdate `type:"list" required:"true"`
 }
 
-// SetProvisionedThroughput sets the ProvisionedThroughput field's value.
-func (s *UpdateGlobalSecondaryIndexAction) SetProvisionedThroughput(v *ProvisionedThroughput) *UpdateGlobalSecondaryIndexAction {
-	s.ProvisionedThroughput = v
-	return s
+// String returns the string representation
+func (s UpdateGlobalTableInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGlobalTableInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateGlobalTableInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateGlobalTableInput"}
+
+	if s.GlobalTableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GlobalTableName"))
+	}
+	if s.GlobalTableName != nil && len(*s.GlobalTableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("GlobalTableName", 3))
+	}
+
+	if s.ReplicaUpdates == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReplicaUpdates"))
+	}
+	if s.ReplicaUpdates != nil {
+		for i, v := range s.ReplicaUpdates {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ReplicaUpdates", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalTableOutput
+type UpdateGlobalTableOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Contains the details of the global table.
+	GlobalTableDescription *GlobalTableDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateGlobalTableOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateGlobalTableOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateGlobalTableOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input of an UpdateItem operation.
@@ -7623,78 +8122,6 @@ func (s *UpdateItemInput) Validate() error {
 	return nil
 }
 
-// SetAttributeUpdates sets the AttributeUpdates field's value.
-func (s *UpdateItemInput) SetAttributeUpdates(v map[string]AttributeValueUpdate) *UpdateItemInput {
-	s.AttributeUpdates = v
-	return s
-}
-
-// SetConditionExpression sets the ConditionExpression field's value.
-func (s *UpdateItemInput) SetConditionExpression(v string) *UpdateItemInput {
-	s.ConditionExpression = &v
-	return s
-}
-
-// SetConditionalOperator sets the ConditionalOperator field's value.
-func (s *UpdateItemInput) SetConditionalOperator(v ConditionalOperator) *UpdateItemInput {
-	s.ConditionalOperator = v
-	return s
-}
-
-// SetExpected sets the Expected field's value.
-func (s *UpdateItemInput) SetExpected(v map[string]ExpectedAttributeValue) *UpdateItemInput {
-	s.Expected = v
-	return s
-}
-
-// SetExpressionAttributeNames sets the ExpressionAttributeNames field's value.
-func (s *UpdateItemInput) SetExpressionAttributeNames(v map[string]string) *UpdateItemInput {
-	s.ExpressionAttributeNames = v
-	return s
-}
-
-// SetExpressionAttributeValues sets the ExpressionAttributeValues field's value.
-func (s *UpdateItemInput) SetExpressionAttributeValues(v map[string]AttributeValue) *UpdateItemInput {
-	s.ExpressionAttributeValues = v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *UpdateItemInput) SetKey(v map[string]AttributeValue) *UpdateItemInput {
-	s.Key = v
-	return s
-}
-
-// SetReturnConsumedCapacity sets the ReturnConsumedCapacity field's value.
-func (s *UpdateItemInput) SetReturnConsumedCapacity(v ReturnConsumedCapacity) *UpdateItemInput {
-	s.ReturnConsumedCapacity = v
-	return s
-}
-
-// SetReturnItemCollectionMetrics sets the ReturnItemCollectionMetrics field's value.
-func (s *UpdateItemInput) SetReturnItemCollectionMetrics(v ReturnItemCollectionMetrics) *UpdateItemInput {
-	s.ReturnItemCollectionMetrics = v
-	return s
-}
-
-// SetReturnValues sets the ReturnValues field's value.
-func (s *UpdateItemInput) SetReturnValues(v ReturnValue) *UpdateItemInput {
-	s.ReturnValues = v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *UpdateItemInput) SetTableName(v string) *UpdateItemInput {
-	s.TableName = &v
-	return s
-}
-
-// SetUpdateExpression sets the UpdateExpression field's value.
-func (s *UpdateItemInput) SetUpdateExpression(v string) *UpdateItemInput {
-	s.UpdateExpression = &v
-	return s
-}
-
 // Represents the output of an UpdateItem operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateItemOutput
 type UpdateItemOutput struct {
@@ -7727,7 +8154,7 @@ type UpdateItemOutput struct {
 	//    * ItemCollectionKey - The partition key value of the item collection.
 	//    This is the same as the partition key value of the item itself.
 	//
-	//    * SizeEstimateRange - An estimate of item collection size, in gigabytes.
+	//    * SizeEstimateRangeGB - An estimate of item collection size, in gigabytes.
 	//    This value is a two-element array containing a lower bound and an upper
 	//    bound for the estimate. The estimate includes the size of all the items
 	//    in the table, plus the size of all attributes projected into all of the
@@ -7752,24 +8179,6 @@ func (s UpdateItemOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateItemOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *UpdateItemOutput) SetAttributes(v map[string]AttributeValue) *UpdateItemOutput {
-	s.Attributes = v
-	return s
-}
-
-// SetConsumedCapacity sets the ConsumedCapacity field's value.
-func (s *UpdateItemOutput) SetConsumedCapacity(v *ConsumedCapacity) *UpdateItemOutput {
-	s.ConsumedCapacity = v
-	return s
-}
-
-// SetItemCollectionMetrics sets the ItemCollectionMetrics field's value.
-func (s *UpdateItemOutput) SetItemCollectionMetrics(v *ItemCollectionMetrics) *UpdateItemOutput {
-	s.ItemCollectionMetrics = v
-	return s
 }
 
 // Represents the input of an UpdateTable operation.
@@ -7858,36 +8267,6 @@ func (s *UpdateTableInput) Validate() error {
 	return nil
 }
 
-// SetAttributeDefinitions sets the AttributeDefinitions field's value.
-func (s *UpdateTableInput) SetAttributeDefinitions(v []AttributeDefinition) *UpdateTableInput {
-	s.AttributeDefinitions = v
-	return s
-}
-
-// SetGlobalSecondaryIndexUpdates sets the GlobalSecondaryIndexUpdates field's value.
-func (s *UpdateTableInput) SetGlobalSecondaryIndexUpdates(v []GlobalSecondaryIndexUpdate) *UpdateTableInput {
-	s.GlobalSecondaryIndexUpdates = v
-	return s
-}
-
-// SetProvisionedThroughput sets the ProvisionedThroughput field's value.
-func (s *UpdateTableInput) SetProvisionedThroughput(v *ProvisionedThroughput) *UpdateTableInput {
-	s.ProvisionedThroughput = v
-	return s
-}
-
-// SetStreamSpecification sets the StreamSpecification field's value.
-func (s *UpdateTableInput) SetStreamSpecification(v *StreamSpecification) *UpdateTableInput {
-	s.StreamSpecification = v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *UpdateTableInput) SetTableName(v string) *UpdateTableInput {
-	s.TableName = &v
-	return s
-}
-
 // Represents the output of an UpdateTable operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTableOutput
 type UpdateTableOutput struct {
@@ -7912,12 +8291,6 @@ func (s UpdateTableOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateTableOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTableDescription sets the TableDescription field's value.
-func (s *UpdateTableOutput) SetTableDescription(v *TableDescription) *UpdateTableOutput {
-	s.TableDescription = v
-	return s
 }
 
 // Represents the input of an UpdateTimeToLive operation.
@@ -7973,18 +8346,6 @@ func (s *UpdateTimeToLiveInput) Validate() error {
 	return nil
 }
 
-// SetTableName sets the TableName field's value.
-func (s *UpdateTimeToLiveInput) SetTableName(v string) *UpdateTimeToLiveInput {
-	s.TableName = &v
-	return s
-}
-
-// SetTimeToLiveSpecification sets the TimeToLiveSpecification field's value.
-func (s *UpdateTimeToLiveInput) SetTimeToLiveSpecification(v *TimeToLiveSpecification) *UpdateTimeToLiveInput {
-	s.TimeToLiveSpecification = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateTimeToLiveOutput
 type UpdateTimeToLiveOutput struct {
 	_ struct{} `type:"structure"`
@@ -8008,12 +8369,6 @@ func (s UpdateTimeToLiveOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateTimeToLiveOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTimeToLiveSpecification sets the TimeToLiveSpecification field's value.
-func (s *UpdateTimeToLiveOutput) SetTimeToLiveSpecification(v *TimeToLiveSpecification) *UpdateTimeToLiveOutput {
-	s.TimeToLiveSpecification = v
-	return s
 }
 
 // Represents an operation to perform - either DeleteItem or PutItem. You can
@@ -8041,18 +8396,6 @@ func (s WriteRequest) GoString() string {
 	return s.String()
 }
 
-// SetDeleteRequest sets the DeleteRequest field's value.
-func (s *WriteRequest) SetDeleteRequest(v *DeleteRequest) *WriteRequest {
-	s.DeleteRequest = v
-	return s
-}
-
-// SetPutRequest sets the PutRequest field's value.
-func (s *WriteRequest) SetPutRequest(v *PutRequest) *WriteRequest {
-	s.PutRequest = v
-	return s
-}
-
 type AttributeAction string
 
 // Enum values for AttributeAction
@@ -8061,6 +8404,33 @@ const (
 	AttributeActionPut    AttributeAction = "PUT"
 	AttributeActionDelete AttributeAction = "DELETE"
 )
+
+func (enum AttributeAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AttributeAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type BackupStatus string
+
+// Enum values for BackupStatus
+const (
+	BackupStatusCreating  BackupStatus = "CREATING"
+	BackupStatusDeleted   BackupStatus = "DELETED"
+	BackupStatusAvailable BackupStatus = "AVAILABLE"
+)
+
+func (enum BackupStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BackupStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ComparisonOperator string
 
@@ -8081,6 +8451,15 @@ const (
 	ComparisonOperatorBeginsWith  ComparisonOperator = "BEGINS_WITH"
 )
 
+func (enum ComparisonOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConditionalOperator string
 
 // Enum values for ConditionalOperator
@@ -8088,6 +8467,51 @@ const (
 	ConditionalOperatorAnd ConditionalOperator = "AND"
 	ConditionalOperatorOr  ConditionalOperator = "OR"
 )
+
+func (enum ConditionalOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConditionalOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ContinuousBackupsStatus string
+
+// Enum values for ContinuousBackupsStatus
+const (
+	ContinuousBackupsStatusEnabled  ContinuousBackupsStatus = "ENABLED"
+	ContinuousBackupsStatusDisabled ContinuousBackupsStatus = "DISABLED"
+)
+
+func (enum ContinuousBackupsStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContinuousBackupsStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type GlobalTableStatus string
+
+// Enum values for GlobalTableStatus
+const (
+	GlobalTableStatusCreating GlobalTableStatus = "CREATING"
+	GlobalTableStatusActive   GlobalTableStatus = "ACTIVE"
+	GlobalTableStatusDeleting GlobalTableStatus = "DELETING"
+	GlobalTableStatusUpdating GlobalTableStatus = "UPDATING"
+)
+
+func (enum GlobalTableStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GlobalTableStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type IndexStatus string
 
@@ -8099,6 +8523,15 @@ const (
 	IndexStatusActive   IndexStatus = "ACTIVE"
 )
 
+func (enum IndexStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IndexStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type KeyType string
 
 // Enum values for KeyType
@@ -8106,6 +8539,15 @@ const (
 	KeyTypeHash  KeyType = "HASH"
 	KeyTypeRange KeyType = "RANGE"
 )
+
+func (enum KeyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProjectionType string
 
@@ -8115,6 +8557,15 @@ const (
 	ProjectionTypeKeysOnly ProjectionType = "KEYS_ONLY"
 	ProjectionTypeInclude  ProjectionType = "INCLUDE"
 )
+
+func (enum ProjectionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProjectionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Determines the level of detail about provisioned throughput consumption that
 // is returned in the response:
@@ -8140,6 +8591,15 @@ const (
 	ReturnConsumedCapacityNone    ReturnConsumedCapacity = "NONE"
 )
 
+func (enum ReturnConsumedCapacity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReturnConsumedCapacity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReturnItemCollectionMetrics string
 
 // Enum values for ReturnItemCollectionMetrics
@@ -8147,6 +8607,15 @@ const (
 	ReturnItemCollectionMetricsSize ReturnItemCollectionMetrics = "SIZE"
 	ReturnItemCollectionMetricsNone ReturnItemCollectionMetrics = "NONE"
 )
+
+func (enum ReturnItemCollectionMetrics) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReturnItemCollectionMetrics) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ReturnValue string
 
@@ -8159,6 +8628,15 @@ const (
 	ReturnValueUpdatedNew ReturnValue = "UPDATED_NEW"
 )
 
+func (enum ReturnValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReturnValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ScalarAttributeType string
 
 // Enum values for ScalarAttributeType
@@ -8167,6 +8645,15 @@ const (
 	ScalarAttributeTypeN ScalarAttributeType = "N"
 	ScalarAttributeTypeB ScalarAttributeType = "B"
 )
+
+func (enum ScalarAttributeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScalarAttributeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Select string
 
@@ -8178,6 +8665,15 @@ const (
 	SelectCount                  Select = "COUNT"
 )
 
+func (enum Select) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Select) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StreamViewType string
 
 // Enum values for StreamViewType
@@ -8187,6 +8683,15 @@ const (
 	StreamViewTypeNewAndOldImages StreamViewType = "NEW_AND_OLD_IMAGES"
 	StreamViewTypeKeysOnly        StreamViewType = "KEYS_ONLY"
 )
+
+func (enum StreamViewType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StreamViewType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TableStatus string
 
@@ -8198,6 +8703,15 @@ const (
 	TableStatusActive   TableStatus = "ACTIVE"
 )
 
+func (enum TableStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TableStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TimeToLiveStatus string
 
 // Enum values for TimeToLiveStatus
@@ -8207,3 +8721,12 @@ const (
 	TimeToLiveStatusEnabled   TimeToLiveStatus = "ENABLED"
 	TimeToLiveStatusDisabled  TimeToLiveStatus = "DISABLED"
 )
+
+func (enum TimeToLiveStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TimeToLiveStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -20,11 +20,11 @@ type EC2Metadata struct {
 	*aws.Client
 }
 
-// New creates a new instance of the EC2Metadata client with a session.
+// New creates a new instance of the EC2Metadata client with a Config.
 // This client is safe to use across multiple goroutines.
 //
 // Example:
-//     // Create a EC2Metadata client from just a session.
+//     // Create a EC2Metadata client from just a config.
 //     svc := ec2metadata.New(cfg)
 func New(config aws.Config) *EC2Metadata {
 	svc := &EC2Metadata{

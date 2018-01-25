@@ -15,21 +15,22 @@ ciphers.
 Creating an S3 cryptography client
 
 	cmkID := "<some key ID>"
-	sess := session.New()
+	cfg, err := external.LoadDefaultAWSConfig()
+
 	// Create the KeyProvider
-	handler := s3crypto.NewKMSKeyGenerator(kms.New(sess), cmkID)
+	handler := s3crypto.NewKMSKeyGenerator(kms.New(cfg), cmkID)
 
 	// Create an encryption and decryption client
-	// We need to pass the session here so S3 can use it. In addition, any decryption that
+	// We need to pass the config here so S3 can use it. In addition, any decryption that
 	// occurs will use the KMS client.
-	svc := s3crypto.NewEncryptionClient(sess, s3crypto.AESGCMContentCipherBuilder(handler))
-	svc := s3crypto.NewDecryptionClient(sess)
+	svc := s3crypto.NewEncryptionClient(cfg, s3crypto.AESGCMContentCipherBuilder(handler))
+	svc := s3crypto.NewDecryptionClient(cfg)
 
 Configuration of the S3 cryptography client
 
 	cfg := s3crypto.EncryptionConfig{
 		// Save instruction files to separate objects
-		SaveStrategy: NewS3SaveStrategy(session.New(), ""),
+		SaveStrategy: NewS3SaveStrategy(cfg, ""),
 		// Change instruction file suffix to .example
 		InstructionFileSuffix: ".example",
 		// Set temp folder path

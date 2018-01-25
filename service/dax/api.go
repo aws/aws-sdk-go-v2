@@ -1154,102 +1154,6 @@ func (s Cluster) GoString() string {
 	return s.String()
 }
 
-// SetActiveNodes sets the ActiveNodes field's value.
-func (s *Cluster) SetActiveNodes(v int64) *Cluster {
-	s.ActiveNodes = &v
-	return s
-}
-
-// SetClusterArn sets the ClusterArn field's value.
-func (s *Cluster) SetClusterArn(v string) *Cluster {
-	s.ClusterArn = &v
-	return s
-}
-
-// SetClusterDiscoveryEndpoint sets the ClusterDiscoveryEndpoint field's value.
-func (s *Cluster) SetClusterDiscoveryEndpoint(v *Endpoint) *Cluster {
-	s.ClusterDiscoveryEndpoint = v
-	return s
-}
-
-// SetClusterName sets the ClusterName field's value.
-func (s *Cluster) SetClusterName(v string) *Cluster {
-	s.ClusterName = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Cluster) SetDescription(v string) *Cluster {
-	s.Description = &v
-	return s
-}
-
-// SetIamRoleArn sets the IamRoleArn field's value.
-func (s *Cluster) SetIamRoleArn(v string) *Cluster {
-	s.IamRoleArn = &v
-	return s
-}
-
-// SetNodeIdsToRemove sets the NodeIdsToRemove field's value.
-func (s *Cluster) SetNodeIdsToRemove(v []string) *Cluster {
-	s.NodeIdsToRemove = v
-	return s
-}
-
-// SetNodeType sets the NodeType field's value.
-func (s *Cluster) SetNodeType(v string) *Cluster {
-	s.NodeType = &v
-	return s
-}
-
-// SetNodes sets the Nodes field's value.
-func (s *Cluster) SetNodes(v []Node) *Cluster {
-	s.Nodes = v
-	return s
-}
-
-// SetNotificationConfiguration sets the NotificationConfiguration field's value.
-func (s *Cluster) SetNotificationConfiguration(v *NotificationConfiguration) *Cluster {
-	s.NotificationConfiguration = v
-	return s
-}
-
-// SetParameterGroup sets the ParameterGroup field's value.
-func (s *Cluster) SetParameterGroup(v *ParameterGroupStatus) *Cluster {
-	s.ParameterGroup = v
-	return s
-}
-
-// SetPreferredMaintenanceWindow sets the PreferredMaintenanceWindow field's value.
-func (s *Cluster) SetPreferredMaintenanceWindow(v string) *Cluster {
-	s.PreferredMaintenanceWindow = &v
-	return s
-}
-
-// SetSecurityGroups sets the SecurityGroups field's value.
-func (s *Cluster) SetSecurityGroups(v []SecurityGroupMembership) *Cluster {
-	s.SecurityGroups = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Cluster) SetStatus(v string) *Cluster {
-	s.Status = &v
-	return s
-}
-
-// SetSubnetGroup sets the SubnetGroup field's value.
-func (s *Cluster) SetSubnetGroup(v string) *Cluster {
-	s.SubnetGroup = &v
-	return s
-}
-
-// SetTotalNodes sets the TotalNodes field's value.
-func (s *Cluster) SetTotalNodes(v int64) *Cluster {
-	s.TotalNodes = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateClusterRequest
 type CreateClusterInput struct {
 	_ struct{} `type:"structure"`
@@ -1385,78 +1289,6 @@ func (s *CreateClusterInput) Validate() error {
 	return nil
 }
 
-// SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *CreateClusterInput) SetAvailabilityZones(v []string) *CreateClusterInput {
-	s.AvailabilityZones = v
-	return s
-}
-
-// SetClusterName sets the ClusterName field's value.
-func (s *CreateClusterInput) SetClusterName(v string) *CreateClusterInput {
-	s.ClusterName = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateClusterInput) SetDescription(v string) *CreateClusterInput {
-	s.Description = &v
-	return s
-}
-
-// SetIamRoleArn sets the IamRoleArn field's value.
-func (s *CreateClusterInput) SetIamRoleArn(v string) *CreateClusterInput {
-	s.IamRoleArn = &v
-	return s
-}
-
-// SetNodeType sets the NodeType field's value.
-func (s *CreateClusterInput) SetNodeType(v string) *CreateClusterInput {
-	s.NodeType = &v
-	return s
-}
-
-// SetNotificationTopicArn sets the NotificationTopicArn field's value.
-func (s *CreateClusterInput) SetNotificationTopicArn(v string) *CreateClusterInput {
-	s.NotificationTopicArn = &v
-	return s
-}
-
-// SetParameterGroupName sets the ParameterGroupName field's value.
-func (s *CreateClusterInput) SetParameterGroupName(v string) *CreateClusterInput {
-	s.ParameterGroupName = &v
-	return s
-}
-
-// SetPreferredMaintenanceWindow sets the PreferredMaintenanceWindow field's value.
-func (s *CreateClusterInput) SetPreferredMaintenanceWindow(v string) *CreateClusterInput {
-	s.PreferredMaintenanceWindow = &v
-	return s
-}
-
-// SetReplicationFactor sets the ReplicationFactor field's value.
-func (s *CreateClusterInput) SetReplicationFactor(v int64) *CreateClusterInput {
-	s.ReplicationFactor = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *CreateClusterInput) SetSecurityGroupIds(v []string) *CreateClusterInput {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSubnetGroupName sets the SubnetGroupName field's value.
-func (s *CreateClusterInput) SetSubnetGroupName(v string) *CreateClusterInput {
-	s.SubnetGroupName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *CreateClusterInput) SetTags(v []Tag) *CreateClusterInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateClusterResponse
 type CreateClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -1480,12 +1312,6 @@ func (s CreateClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCluster sets the Cluster field's value.
-func (s *CreateClusterOutput) SetCluster(v *Cluster) *CreateClusterOutput {
-	s.Cluster = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateParameterGroupRequest
@@ -1526,18 +1352,6 @@ func (s *CreateParameterGroupInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateParameterGroupInput) SetDescription(v string) *CreateParameterGroupInput {
-	s.Description = &v
-	return s
-}
-
-// SetParameterGroupName sets the ParameterGroupName field's value.
-func (s *CreateParameterGroupInput) SetParameterGroupName(v string) *CreateParameterGroupInput {
-	s.ParameterGroupName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateParameterGroupResponse
 type CreateParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -1561,12 +1375,6 @@ func (s CreateParameterGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateParameterGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetParameterGroup sets the ParameterGroup field's value.
-func (s *CreateParameterGroupOutput) SetParameterGroup(v *ParameterGroup) *CreateParameterGroupOutput {
-	s.ParameterGroup = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateSubnetGroupRequest
@@ -1615,24 +1423,6 @@ func (s *CreateSubnetGroupInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateSubnetGroupInput) SetDescription(v string) *CreateSubnetGroupInput {
-	s.Description = &v
-	return s
-}
-
-// SetSubnetGroupName sets the SubnetGroupName field's value.
-func (s *CreateSubnetGroupInput) SetSubnetGroupName(v string) *CreateSubnetGroupInput {
-	s.SubnetGroupName = &v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateSubnetGroupInput) SetSubnetIds(v []string) *CreateSubnetGroupInput {
-	s.SubnetIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/CreateSubnetGroupResponse
 type CreateSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -1656,12 +1446,6 @@ func (s CreateSubnetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSubnetGroup sets the SubnetGroup field's value.
-func (s *CreateSubnetGroupOutput) SetSubnetGroup(v *SubnetGroup) *CreateSubnetGroupOutput {
-	s.SubnetGroup = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DecreaseReplicationFactorRequest
@@ -1713,30 +1497,6 @@ func (s *DecreaseReplicationFactorInput) Validate() error {
 	return nil
 }
 
-// SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *DecreaseReplicationFactorInput) SetAvailabilityZones(v []string) *DecreaseReplicationFactorInput {
-	s.AvailabilityZones = v
-	return s
-}
-
-// SetClusterName sets the ClusterName field's value.
-func (s *DecreaseReplicationFactorInput) SetClusterName(v string) *DecreaseReplicationFactorInput {
-	s.ClusterName = &v
-	return s
-}
-
-// SetNewReplicationFactor sets the NewReplicationFactor field's value.
-func (s *DecreaseReplicationFactorInput) SetNewReplicationFactor(v int64) *DecreaseReplicationFactorInput {
-	s.NewReplicationFactor = &v
-	return s
-}
-
-// SetNodeIdsToRemove sets the NodeIdsToRemove field's value.
-func (s *DecreaseReplicationFactorInput) SetNodeIdsToRemove(v []string) *DecreaseReplicationFactorInput {
-	s.NodeIdsToRemove = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DecreaseReplicationFactorResponse
 type DecreaseReplicationFactorOutput struct {
 	_ struct{} `type:"structure"`
@@ -1761,12 +1521,6 @@ func (s DecreaseReplicationFactorOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DecreaseReplicationFactorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCluster sets the Cluster field's value.
-func (s *DecreaseReplicationFactorOutput) SetCluster(v *Cluster) *DecreaseReplicationFactorOutput {
-	s.Cluster = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteClusterRequest
@@ -1803,12 +1557,6 @@ func (s *DeleteClusterInput) Validate() error {
 	return nil
 }
 
-// SetClusterName sets the ClusterName field's value.
-func (s *DeleteClusterInput) SetClusterName(v string) *DeleteClusterInput {
-	s.ClusterName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteClusterResponse
 type DeleteClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -1832,12 +1580,6 @@ func (s DeleteClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCluster sets the Cluster field's value.
-func (s *DeleteClusterOutput) SetCluster(v *Cluster) *DeleteClusterOutput {
-	s.Cluster = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteParameterGroupRequest
@@ -1874,12 +1616,6 @@ func (s *DeleteParameterGroupInput) Validate() error {
 	return nil
 }
 
-// SetParameterGroupName sets the ParameterGroupName field's value.
-func (s *DeleteParameterGroupInput) SetParameterGroupName(v string) *DeleteParameterGroupInput {
-	s.ParameterGroupName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteParameterGroupResponse
 type DeleteParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -1904,12 +1640,6 @@ func (s DeleteParameterGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteParameterGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeletionMessage sets the DeletionMessage field's value.
-func (s *DeleteParameterGroupOutput) SetDeletionMessage(v string) *DeleteParameterGroupOutput {
-	s.DeletionMessage = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteSubnetGroupRequest
@@ -1946,12 +1676,6 @@ func (s *DeleteSubnetGroupInput) Validate() error {
 	return nil
 }
 
-// SetSubnetGroupName sets the SubnetGroupName field's value.
-func (s *DeleteSubnetGroupInput) SetSubnetGroupName(v string) *DeleteSubnetGroupInput {
-	s.SubnetGroupName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DeleteSubnetGroupResponse
 type DeleteSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -1976,12 +1700,6 @@ func (s DeleteSubnetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeletionMessage sets the DeletionMessage field's value.
-func (s *DeleteSubnetGroupOutput) SetDeletionMessage(v string) *DeleteSubnetGroupOutput {
-	s.DeletionMessage = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeClustersRequest
@@ -2014,24 +1732,6 @@ func (s DescribeClustersInput) GoString() string {
 	return s.String()
 }
 
-// SetClusterNames sets the ClusterNames field's value.
-func (s *DescribeClustersInput) SetClusterNames(v []string) *DescribeClustersInput {
-	s.ClusterNames = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeClustersInput) SetMaxResults(v int64) *DescribeClustersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeClustersInput) SetNextToken(v string) *DescribeClustersInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeClustersResponse
 type DescribeClustersOutput struct {
 	_ struct{} `type:"structure"`
@@ -2061,18 +1761,6 @@ func (s DescribeClustersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetClusters sets the Clusters field's value.
-func (s *DescribeClustersOutput) SetClusters(v []Cluster) *DescribeClustersOutput {
-	s.Clusters = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeClustersOutput) SetNextToken(v string) *DescribeClustersOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeDefaultParametersRequest
 type DescribeDefaultParametersInput struct {
 	_ struct{} `type:"structure"`
@@ -2098,18 +1786,6 @@ func (s DescribeDefaultParametersInput) String() string {
 // GoString returns the string representation
 func (s DescribeDefaultParametersInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeDefaultParametersInput) SetMaxResults(v int64) *DescribeDefaultParametersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeDefaultParametersInput) SetNextToken(v string) *DescribeDefaultParametersInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeDefaultParametersResponse
@@ -2138,18 +1814,6 @@ func (s DescribeDefaultParametersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeDefaultParametersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeDefaultParametersOutput) SetNextToken(v string) *DescribeDefaultParametersOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *DescribeDefaultParametersOutput) SetParameters(v []Parameter) *DescribeDefaultParametersOutput {
-	s.Parameters = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeEventsRequest
@@ -2198,48 +1862,6 @@ func (s DescribeEventsInput) GoString() string {
 	return s.String()
 }
 
-// SetDuration sets the Duration field's value.
-func (s *DescribeEventsInput) SetDuration(v int64) *DescribeEventsInput {
-	s.Duration = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *DescribeEventsInput) SetEndTime(v time.Time) *DescribeEventsInput {
-	s.EndTime = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeEventsInput) SetMaxResults(v int64) *DescribeEventsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEventsInput) SetNextToken(v string) *DescribeEventsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSourceName sets the SourceName field's value.
-func (s *DescribeEventsInput) SetSourceName(v string) *DescribeEventsInput {
-	s.SourceName = &v
-	return s
-}
-
-// SetSourceType sets the SourceType field's value.
-func (s *DescribeEventsInput) SetSourceType(v SourceType) *DescribeEventsInput {
-	s.SourceType = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *DescribeEventsInput) SetStartTime(v time.Time) *DescribeEventsInput {
-	s.StartTime = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeEventsResponse
 type DescribeEventsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2266,18 +1888,6 @@ func (s DescribeEventsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEvents sets the Events field's value.
-func (s *DescribeEventsOutput) SetEvents(v []Event) *DescribeEventsOutput {
-	s.Events = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEventsOutput) SetNextToken(v string) *DescribeEventsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameterGroupsRequest
@@ -2310,24 +1920,6 @@ func (s DescribeParameterGroupsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeParameterGroupsInput) SetMaxResults(v int64) *DescribeParameterGroupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeParameterGroupsInput) SetNextToken(v string) *DescribeParameterGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParameterGroupNames sets the ParameterGroupNames field's value.
-func (s *DescribeParameterGroupsInput) SetParameterGroupNames(v []string) *DescribeParameterGroupsInput {
-	s.ParameterGroupNames = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParameterGroupsResponse
 type DescribeParameterGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2355,18 +1947,6 @@ func (s DescribeParameterGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeParameterGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeParameterGroupsOutput) SetNextToken(v string) *DescribeParameterGroupsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParameterGroups sets the ParameterGroups field's value.
-func (s *DescribeParameterGroupsOutput) SetParameterGroups(v []ParameterGroup) *DescribeParameterGroupsOutput {
-	s.ParameterGroups = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParametersRequest
@@ -2419,30 +1999,6 @@ func (s *DescribeParametersInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeParametersInput) SetMaxResults(v int64) *DescribeParametersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeParametersInput) SetNextToken(v string) *DescribeParametersInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParameterGroupName sets the ParameterGroupName field's value.
-func (s *DescribeParametersInput) SetParameterGroupName(v string) *DescribeParametersInput {
-	s.ParameterGroupName = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *DescribeParametersInput) SetSource(v string) *DescribeParametersInput {
-	s.Source = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeParametersResponse
 type DescribeParametersOutput struct {
 	_ struct{} `type:"structure"`
@@ -2470,18 +2026,6 @@ func (s DescribeParametersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeParametersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeParametersOutput) SetNextToken(v string) *DescribeParametersOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *DescribeParametersOutput) SetParameters(v []Parameter) *DescribeParametersOutput {
-	s.Parameters = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeSubnetGroupsRequest
@@ -2514,24 +2058,6 @@ func (s DescribeSubnetGroupsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeSubnetGroupsInput) SetMaxResults(v int64) *DescribeSubnetGroupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSubnetGroupsInput) SetNextToken(v string) *DescribeSubnetGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSubnetGroupNames sets the SubnetGroupNames field's value.
-func (s *DescribeSubnetGroupsInput) SetSubnetGroupNames(v []string) *DescribeSubnetGroupsInput {
-	s.SubnetGroupNames = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/DescribeSubnetGroupsResponse
 type DescribeSubnetGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2561,18 +2087,6 @@ func (s DescribeSubnetGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSubnetGroupsOutput) SetNextToken(v string) *DescribeSubnetGroupsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSubnetGroups sets the SubnetGroups field's value.
-func (s *DescribeSubnetGroupsOutput) SetSubnetGroups(v []SubnetGroup) *DescribeSubnetGroupsOutput {
-	s.SubnetGroups = v
-	return s
-}
-
 // Represents the information required for client programs to connect to the
 // configuration endpoint for a DAX cluster, or to an individual node within
 // the cluster.
@@ -2595,18 +2109,6 @@ func (s Endpoint) String() string {
 // GoString returns the string representation
 func (s Endpoint) GoString() string {
 	return s.String()
-}
-
-// SetAddress sets the Address field's value.
-func (s *Endpoint) SetAddress(v string) *Endpoint {
-	s.Address = &v
-	return s
-}
-
-// SetPort sets the Port field's value.
-func (s *Endpoint) SetPort(v int64) *Endpoint {
-	s.Port = &v
-	return s
 }
 
 // Represents a single occurrence of something interesting within the system.
@@ -2639,30 +2141,6 @@ func (s Event) String() string {
 // GoString returns the string representation
 func (s Event) GoString() string {
 	return s.String()
-}
-
-// SetDate sets the Date field's value.
-func (s *Event) SetDate(v time.Time) *Event {
-	s.Date = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Event) SetMessage(v string) *Event {
-	s.Message = &v
-	return s
-}
-
-// SetSourceName sets the SourceName field's value.
-func (s *Event) SetSourceName(v string) *Event {
-	s.SourceName = &v
-	return s
-}
-
-// SetSourceType sets the SourceType field's value.
-func (s *Event) SetSourceType(v SourceType) *Event {
-	s.SourceType = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/IncreaseReplicationFactorRequest
@@ -2713,24 +2191,6 @@ func (s *IncreaseReplicationFactorInput) Validate() error {
 	return nil
 }
 
-// SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *IncreaseReplicationFactorInput) SetAvailabilityZones(v []string) *IncreaseReplicationFactorInput {
-	s.AvailabilityZones = v
-	return s
-}
-
-// SetClusterName sets the ClusterName field's value.
-func (s *IncreaseReplicationFactorInput) SetClusterName(v string) *IncreaseReplicationFactorInput {
-	s.ClusterName = &v
-	return s
-}
-
-// SetNewReplicationFactor sets the NewReplicationFactor field's value.
-func (s *IncreaseReplicationFactorInput) SetNewReplicationFactor(v int64) *IncreaseReplicationFactorInput {
-	s.NewReplicationFactor = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/IncreaseReplicationFactorResponse
 type IncreaseReplicationFactorOutput struct {
 	_ struct{} `type:"structure"`
@@ -2754,12 +2214,6 @@ func (s IncreaseReplicationFactorOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s IncreaseReplicationFactorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCluster sets the Cluster field's value.
-func (s *IncreaseReplicationFactorOutput) SetCluster(v *Cluster) *IncreaseReplicationFactorOutput {
-	s.Cluster = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ListTagsRequest
@@ -2801,18 +2255,6 @@ func (s *ListTagsInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsInput) SetNextToken(v string) *ListTagsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceName sets the ResourceName field's value.
-func (s *ListTagsInput) SetResourceName(v string) *ListTagsInput {
-	s.ResourceName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ListTagsResponse
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2840,18 +2282,6 @@ func (s ListTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsOutput) SetNextToken(v string) *ListTagsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsOutput) SetTags(v []Tag) *ListTagsOutput {
-	s.Tags = v
-	return s
 }
 
 // Represents an individual node within a DAX cluster.
@@ -2892,42 +2322,6 @@ func (s Node) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *Node) SetAvailabilityZone(v string) *Node {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetEndpoint sets the Endpoint field's value.
-func (s *Node) SetEndpoint(v *Endpoint) *Node {
-	s.Endpoint = v
-	return s
-}
-
-// SetNodeCreateTime sets the NodeCreateTime field's value.
-func (s *Node) SetNodeCreateTime(v time.Time) *Node {
-	s.NodeCreateTime = &v
-	return s
-}
-
-// SetNodeId sets the NodeId field's value.
-func (s *Node) SetNodeId(v string) *Node {
-	s.NodeId = &v
-	return s
-}
-
-// SetNodeStatus sets the NodeStatus field's value.
-func (s *Node) SetNodeStatus(v string) *Node {
-	s.NodeStatus = &v
-	return s
-}
-
-// SetParameterGroupStatus sets the ParameterGroupStatus field's value.
-func (s *Node) SetParameterGroupStatus(v string) *Node {
-	s.ParameterGroupStatus = &v
-	return s
-}
-
 // Represents a parameter value that is applicable to a particular node type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/NodeTypeSpecificValue
 type NodeTypeSpecificValue struct {
@@ -2948,18 +2342,6 @@ func (s NodeTypeSpecificValue) String() string {
 // GoString returns the string representation
 func (s NodeTypeSpecificValue) GoString() string {
 	return s.String()
-}
-
-// SetNodeType sets the NodeType field's value.
-func (s *NodeTypeSpecificValue) SetNodeType(v string) *NodeTypeSpecificValue {
-	s.NodeType = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *NodeTypeSpecificValue) SetValue(v string) *NodeTypeSpecificValue {
-	s.Value = &v
-	return s
 }
 
 // Describes a notification topic and its status. Notification topics are used
@@ -2984,18 +2366,6 @@ func (s NotificationConfiguration) String() string {
 // GoString returns the string representation
 func (s NotificationConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetTopicArn sets the TopicArn field's value.
-func (s *NotificationConfiguration) SetTopicArn(v string) *NotificationConfiguration {
-	s.TopicArn = &v
-	return s
-}
-
-// SetTopicStatus sets the TopicStatus field's value.
-func (s *NotificationConfiguration) SetTopicStatus(v string) *NotificationConfiguration {
-	s.TopicStatus = &v
-	return s
 }
 
 // Describes an individual setting that controls some aspect of DAX behavior.
@@ -3048,66 +2418,6 @@ func (s Parameter) GoString() string {
 	return s.String()
 }
 
-// SetAllowedValues sets the AllowedValues field's value.
-func (s *Parameter) SetAllowedValues(v string) *Parameter {
-	s.AllowedValues = &v
-	return s
-}
-
-// SetChangeType sets the ChangeType field's value.
-func (s *Parameter) SetChangeType(v ChangeType) *Parameter {
-	s.ChangeType = v
-	return s
-}
-
-// SetDataType sets the DataType field's value.
-func (s *Parameter) SetDataType(v string) *Parameter {
-	s.DataType = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Parameter) SetDescription(v string) *Parameter {
-	s.Description = &v
-	return s
-}
-
-// SetIsModifiable sets the IsModifiable field's value.
-func (s *Parameter) SetIsModifiable(v IsModifiable) *Parameter {
-	s.IsModifiable = v
-	return s
-}
-
-// SetNodeTypeSpecificValues sets the NodeTypeSpecificValues field's value.
-func (s *Parameter) SetNodeTypeSpecificValues(v []NodeTypeSpecificValue) *Parameter {
-	s.NodeTypeSpecificValues = v
-	return s
-}
-
-// SetParameterName sets the ParameterName field's value.
-func (s *Parameter) SetParameterName(v string) *Parameter {
-	s.ParameterName = &v
-	return s
-}
-
-// SetParameterType sets the ParameterType field's value.
-func (s *Parameter) SetParameterType(v ParameterType) *Parameter {
-	s.ParameterType = v
-	return s
-}
-
-// SetParameterValue sets the ParameterValue field's value.
-func (s *Parameter) SetParameterValue(v string) *Parameter {
-	s.ParameterValue = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *Parameter) SetSource(v string) *Parameter {
-	s.Source = &v
-	return s
-}
-
 // A named set of parameters that are applied to all of the nodes in a DAX cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ParameterGroup
 type ParameterGroup struct {
@@ -3128,18 +2438,6 @@ func (s ParameterGroup) String() string {
 // GoString returns the string representation
 func (s ParameterGroup) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *ParameterGroup) SetDescription(v string) *ParameterGroup {
-	s.Description = &v
-	return s
-}
-
-// SetParameterGroupName sets the ParameterGroupName field's value.
-func (s *ParameterGroup) SetParameterGroupName(v string) *ParameterGroup {
-	s.ParameterGroupName = &v
-	return s
 }
 
 // The status of a parameter group.
@@ -3167,24 +2465,6 @@ func (s ParameterGroupStatus) GoString() string {
 	return s.String()
 }
 
-// SetNodeIdsToReboot sets the NodeIdsToReboot field's value.
-func (s *ParameterGroupStatus) SetNodeIdsToReboot(v []string) *ParameterGroupStatus {
-	s.NodeIdsToReboot = v
-	return s
-}
-
-// SetParameterApplyStatus sets the ParameterApplyStatus field's value.
-func (s *ParameterGroupStatus) SetParameterApplyStatus(v string) *ParameterGroupStatus {
-	s.ParameterApplyStatus = &v
-	return s
-}
-
-// SetParameterGroupName sets the ParameterGroupName field's value.
-func (s *ParameterGroupStatus) SetParameterGroupName(v string) *ParameterGroupStatus {
-	s.ParameterGroupName = &v
-	return s
-}
-
 // An individual DAX parameter.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/ParameterNameValue
 type ParameterNameValue struct {
@@ -3205,18 +2485,6 @@ func (s ParameterNameValue) String() string {
 // GoString returns the string representation
 func (s ParameterNameValue) GoString() string {
 	return s.String()
-}
-
-// SetParameterName sets the ParameterName field's value.
-func (s *ParameterNameValue) SetParameterName(v string) *ParameterNameValue {
-	s.ParameterName = &v
-	return s
-}
-
-// SetParameterValue sets the ParameterValue field's value.
-func (s *ParameterNameValue) SetParameterValue(v string) *ParameterNameValue {
-	s.ParameterValue = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/RebootNodeRequest
@@ -3262,18 +2530,6 @@ func (s *RebootNodeInput) Validate() error {
 	return nil
 }
 
-// SetClusterName sets the ClusterName field's value.
-func (s *RebootNodeInput) SetClusterName(v string) *RebootNodeInput {
-	s.ClusterName = &v
-	return s
-}
-
-// SetNodeId sets the NodeId field's value.
-func (s *RebootNodeInput) SetNodeId(v string) *RebootNodeInput {
-	s.NodeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/RebootNodeResponse
 type RebootNodeOutput struct {
 	_ struct{} `type:"structure"`
@@ -3299,12 +2555,6 @@ func (s RebootNodeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCluster sets the Cluster field's value.
-func (s *RebootNodeOutput) SetCluster(v *Cluster) *RebootNodeOutput {
-	s.Cluster = v
-	return s
-}
-
 // An individual VPC security group and its status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/SecurityGroupMembership
 type SecurityGroupMembership struct {
@@ -3325,18 +2575,6 @@ func (s SecurityGroupMembership) String() string {
 // GoString returns the string representation
 func (s SecurityGroupMembership) GoString() string {
 	return s.String()
-}
-
-// SetSecurityGroupIdentifier sets the SecurityGroupIdentifier field's value.
-func (s *SecurityGroupMembership) SetSecurityGroupIdentifier(v string) *SecurityGroupMembership {
-	s.SecurityGroupIdentifier = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *SecurityGroupMembership) SetStatus(v string) *SecurityGroupMembership {
-	s.Status = &v
-	return s
 }
 
 // Represents the subnet associated with a DAX cluster. This parameter refers
@@ -3361,18 +2599,6 @@ func (s Subnet) String() string {
 // GoString returns the string representation
 func (s Subnet) GoString() string {
 	return s.String()
-}
-
-// SetSubnetAvailabilityZone sets the SubnetAvailabilityZone field's value.
-func (s *Subnet) SetSubnetAvailabilityZone(v string) *Subnet {
-	s.SubnetAvailabilityZone = &v
-	return s
-}
-
-// SetSubnetIdentifier sets the SubnetIdentifier field's value.
-func (s *Subnet) SetSubnetIdentifier(v string) *Subnet {
-	s.SubnetIdentifier = &v
-	return s
 }
 
 // Represents the output of one of the following actions:
@@ -3407,30 +2633,6 @@ func (s SubnetGroup) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *SubnetGroup) SetDescription(v string) *SubnetGroup {
-	s.Description = &v
-	return s
-}
-
-// SetSubnetGroupName sets the SubnetGroupName field's value.
-func (s *SubnetGroup) SetSubnetGroupName(v string) *SubnetGroup {
-	s.SubnetGroupName = &v
-	return s
-}
-
-// SetSubnets sets the Subnets field's value.
-func (s *SubnetGroup) SetSubnets(v []Subnet) *SubnetGroup {
-	s.Subnets = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *SubnetGroup) SetVpcId(v string) *SubnetGroup {
-	s.VpcId = &v
-	return s
-}
-
 // A description of a tag. Every tag is a key-value pair. You can add up to
 // 50 tags to a single DAX cluster.
 //
@@ -3460,18 +2662,6 @@ func (s Tag) String() string {
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/TagResourceRequest
@@ -3517,18 +2707,6 @@ func (s *TagResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceName sets the ResourceName field's value.
-func (s *TagResourceInput) SetResourceName(v string) *TagResourceInput {
-	s.ResourceName = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v []Tag) *TagResourceInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/TagResourceResponse
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3552,12 +2730,6 @@ func (s TagResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagResourceOutput) SetTags(v []Tag) *TagResourceOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UntagResourceRequest
@@ -3604,18 +2776,6 @@ func (s *UntagResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceName sets the ResourceName field's value.
-func (s *UntagResourceInput) SetResourceName(v string) *UntagResourceInput {
-	s.ResourceName = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
-	s.TagKeys = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3639,12 +2799,6 @@ func (s UntagResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTags sets the Tags field's value.
-func (s *UntagResourceOutput) SetTags(v []Tag) *UntagResourceOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateClusterRequest
@@ -3703,48 +2857,6 @@ func (s *UpdateClusterInput) Validate() error {
 	return nil
 }
 
-// SetClusterName sets the ClusterName field's value.
-func (s *UpdateClusterInput) SetClusterName(v string) *UpdateClusterInput {
-	s.ClusterName = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateClusterInput) SetDescription(v string) *UpdateClusterInput {
-	s.Description = &v
-	return s
-}
-
-// SetNotificationTopicArn sets the NotificationTopicArn field's value.
-func (s *UpdateClusterInput) SetNotificationTopicArn(v string) *UpdateClusterInput {
-	s.NotificationTopicArn = &v
-	return s
-}
-
-// SetNotificationTopicStatus sets the NotificationTopicStatus field's value.
-func (s *UpdateClusterInput) SetNotificationTopicStatus(v string) *UpdateClusterInput {
-	s.NotificationTopicStatus = &v
-	return s
-}
-
-// SetParameterGroupName sets the ParameterGroupName field's value.
-func (s *UpdateClusterInput) SetParameterGroupName(v string) *UpdateClusterInput {
-	s.ParameterGroupName = &v
-	return s
-}
-
-// SetPreferredMaintenanceWindow sets the PreferredMaintenanceWindow field's value.
-func (s *UpdateClusterInput) SetPreferredMaintenanceWindow(v string) *UpdateClusterInput {
-	s.PreferredMaintenanceWindow = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *UpdateClusterInput) SetSecurityGroupIds(v []string) *UpdateClusterInput {
-	s.SecurityGroupIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateClusterResponse
 type UpdateClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -3768,12 +2880,6 @@ func (s UpdateClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCluster sets the Cluster field's value.
-func (s *UpdateClusterOutput) SetCluster(v *Cluster) *UpdateClusterOutput {
-	s.Cluster = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateParameterGroupRequest
@@ -3820,18 +2926,6 @@ func (s *UpdateParameterGroupInput) Validate() error {
 	return nil
 }
 
-// SetParameterGroupName sets the ParameterGroupName field's value.
-func (s *UpdateParameterGroupInput) SetParameterGroupName(v string) *UpdateParameterGroupInput {
-	s.ParameterGroupName = &v
-	return s
-}
-
-// SetParameterNameValues sets the ParameterNameValues field's value.
-func (s *UpdateParameterGroupInput) SetParameterNameValues(v []ParameterNameValue) *UpdateParameterGroupInput {
-	s.ParameterNameValues = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateParameterGroupResponse
 type UpdateParameterGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -3855,12 +2949,6 @@ func (s UpdateParameterGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateParameterGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetParameterGroup sets the ParameterGroup field's value.
-func (s *UpdateParameterGroupOutput) SetParameterGroup(v *ParameterGroup) *UpdateParameterGroupOutput {
-	s.ParameterGroup = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateSubnetGroupRequest
@@ -3903,24 +2991,6 @@ func (s *UpdateSubnetGroupInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateSubnetGroupInput) SetDescription(v string) *UpdateSubnetGroupInput {
-	s.Description = &v
-	return s
-}
-
-// SetSubnetGroupName sets the SubnetGroupName field's value.
-func (s *UpdateSubnetGroupInput) SetSubnetGroupName(v string) *UpdateSubnetGroupInput {
-	s.SubnetGroupName = &v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *UpdateSubnetGroupInput) SetSubnetIds(v []string) *UpdateSubnetGroupInput {
-	s.SubnetIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dax-2017-04-19/UpdateSubnetGroupResponse
 type UpdateSubnetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -3946,12 +3016,6 @@ func (s UpdateSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetSubnetGroup sets the SubnetGroup field's value.
-func (s *UpdateSubnetGroupOutput) SetSubnetGroup(v *SubnetGroup) *UpdateSubnetGroupOutput {
-	s.SubnetGroup = v
-	return s
-}
-
 type ChangeType string
 
 // Enum values for ChangeType
@@ -3959,6 +3023,15 @@ const (
 	ChangeTypeImmediate      ChangeType = "IMMEDIATE"
 	ChangeTypeRequiresReboot ChangeType = "REQUIRES_REBOOT"
 )
+
+func (enum ChangeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type IsModifiable string
 
@@ -3969,6 +3042,15 @@ const (
 	IsModifiableConditional IsModifiable = "CONDITIONAL"
 )
 
+func (enum IsModifiable) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IsModifiable) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ParameterType string
 
 // Enum values for ParameterType
@@ -3976,6 +3058,15 @@ const (
 	ParameterTypeDefault          ParameterType = "DEFAULT"
 	ParameterTypeNodeTypeSpecific ParameterType = "NODE_TYPE_SPECIFIC"
 )
+
+func (enum ParameterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ParameterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -3985,3 +3076,12 @@ const (
 	SourceTypeParameterGroup SourceType = "PARAMETER_GROUP"
 	SourceTypeSubnetGroup    SourceType = "SUBNET_GROUP"
 )
+
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

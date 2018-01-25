@@ -9,10 +9,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	credentials "github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-	"github.com/aws/aws-sdk-go-v2/aws/session"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder"
 )
@@ -26,14 +23,13 @@ func TestMain(m *testing.M) {
 		w.WriteHeader(http.StatusOK)
 	}))
 
-	sess := session.Must(session.NewSession(&aws.Config{
-		Credentials:      credentials.NewStaticCredentials("Key", "Secret", "Token"),
-		Endpoint:         aws.String(server.URL),
-		S3ForcePathStyle: aws.Bool(true),
-		DisableSSL:       aws.Bool(true),
-		Region:           aws.String(endpoints.UsWest2RegionID),
-	}))
-	elastictranscoderSvc = elastictranscoder.New(sess)
+	cfg, _ := external.LoadDefaultAWSConfig()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
+
+	cfg.Credentials = aws.NewStaticCredentialsProvider("Key", "Secret", "Token")
+	cfg.Region = "us-west-2"
+
+	elastictranscoderSvc = elastictranscoder.New(cfg)
 
 	c := m.Run()
 	server.Close()
@@ -43,36 +39,32 @@ func TestMain(m *testing.M) {
 func BenchmarkRESTJSONBuild_Complex_ETCCreateJob(b *testing.B) {
 	params := elastictranscoderCreateJobInput()
 
-	benchRESTJSONBuild(b, func() *request.Request {
-		req, _ := elastictranscoderSvc.CreateJobRequest(params)
-		return req
+	benchRESTJSONBuild(b, func() *aws.Request {
+		return elastictranscoderSvc.CreateJobRequest(params).Request
 	})
 }
 
 func BenchmarkRESTJSONBuild_Simple_ETCListJobsByPipeline(b *testing.B) {
 	params := elastictranscoderListJobsByPipeline()
 
-	benchRESTJSONBuild(b, func() *request.Request {
-		req, _ := elastictranscoderSvc.ListJobsByPipelineRequest(params)
-		return req
+	benchRESTJSONBuild(b, func() *aws.Request {
+		return elastictranscoderSvc.ListJobsByPipelineRequest(params).Request
 	})
 }
 
 func BenchmarkRESTJSONRequest_Complex_CFCreateJob(b *testing.B) {
-	benchRESTJSONRequest(b, func() *request.Request {
-		req, _ := elastictranscoderSvc.CreateJobRequest(elastictranscoderCreateJobInput())
-		return req
+	benchRESTJSONRequest(b, func() *aws.Request {
+		return elastictranscoderSvc.CreateJobRequest(elastictranscoderCreateJobInput()).Request
 	})
 }
 
 func BenchmarkRESTJSONRequest_Simple_ETCListJobsByPipeline(b *testing.B) {
-	benchRESTJSONRequest(b, func() *request.Request {
-		req, _ := elastictranscoderSvc.ListJobsByPipelineRequest(elastictranscoderListJobsByPipeline())
-		return req
+	benchRESTJSONRequest(b, func() *aws.Request {
+		return elastictranscoderSvc.ListJobsByPipelineRequest(elastictranscoderListJobsByPipeline()).Request
 	})
 }
 
-func benchRESTJSONBuild(b *testing.B, reqFn func() *request.Request) {
+func benchRESTJSONBuild(b *testing.B, reqFn func() *aws.Request) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
@@ -84,7 +76,7 @@ func benchRESTJSONBuild(b *testing.B, reqFn func() *request.Request) {
 	}
 }
 
-func benchRESTJSONRequest(b *testing.B, reqFn func() *request.Request) {
+func benchRESTJSONRequest(b *testing.B, reqFn func() *aws.Request) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
@@ -129,7 +121,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 		PipelineId: aws.String("Id"), // Required
 		Output: &elastictranscoder.CreateJobOutput{
 			AlbumArt: &elastictranscoder.JobAlbumArt{
-				Artwork: []*elastictranscoder.Artwork{
+				Artwork: []elastictranscoder.Artwork{
 					{ // Required
 						AlbumArtFormat: aws.String("JpgOrPng"),
 						Encryption: &elastictranscoder.Encryption{
@@ -149,7 +141,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 				MergePolicy: aws.String("MergePolicy"),
 			},
 			Captions: &elastictranscoder.Captions{
-				CaptionFormats: []*elastictranscoder.CaptionFormat{
+				CaptionFormats: []elastictranscoder.CaptionFormat{
 					{ // Required
 						Encryption: &elastictranscoder.Encryption{
 							InitializationVector: aws.String("ZeroTo255String"),
@@ -162,7 +154,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 					},
 					// More values...
 				},
-				CaptionSources: []*elastictranscoder.CaptionSource{
+				CaptionSources: []elastictranscoder.CaptionSource{
 					{ // Required
 						Encryption: &elastictranscoder.Encryption{
 							InitializationVector: aws.String("ZeroTo255String"),
@@ -179,7 +171,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 				},
 				MergePolicy: aws.String("CaptionMergePolicy"),
 			},
-			Composition: []*elastictranscoder.Clip{
+			Composition: []elastictranscoder.Clip{
 				{ // Required
 					TimeSpan: &elastictranscoder.TimeSpan{
 						Duration:  aws.String("Time"),
@@ -205,7 +197,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 				Mode:                 aws.String("EncryptionMode"),
 			},
 			ThumbnailPattern: aws.String("ThumbnailPattern"),
-			Watermarks: []*elastictranscoder.JobWatermark{
+			Watermarks: []elastictranscoder.JobWatermark{
 				{ // Required
 					Encryption: &elastictranscoder.Encryption{
 						InitializationVector: aws.String("ZeroTo255String"),
@@ -220,10 +212,10 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 			},
 		},
 		OutputKeyPrefix: aws.String("Key"),
-		Outputs: []*elastictranscoder.CreateJobOutput{
+		Outputs: []elastictranscoder.CreateJobOutput{
 			{ // Required
 				AlbumArt: &elastictranscoder.JobAlbumArt{
-					Artwork: []*elastictranscoder.Artwork{
+					Artwork: []elastictranscoder.Artwork{
 						{ // Required
 							AlbumArtFormat: aws.String("JpgOrPng"),
 							Encryption: &elastictranscoder.Encryption{
@@ -243,7 +235,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 					MergePolicy: aws.String("MergePolicy"),
 				},
 				Captions: &elastictranscoder.Captions{
-					CaptionFormats: []*elastictranscoder.CaptionFormat{
+					CaptionFormats: []elastictranscoder.CaptionFormat{
 						{ // Required
 							Encryption: &elastictranscoder.Encryption{
 								InitializationVector: aws.String("ZeroTo255String"),
@@ -256,7 +248,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 						},
 						// More values...
 					},
-					CaptionSources: []*elastictranscoder.CaptionSource{
+					CaptionSources: []elastictranscoder.CaptionSource{
 						{ // Required
 							Encryption: &elastictranscoder.Encryption{
 								InitializationVector: aws.String("ZeroTo255String"),
@@ -273,7 +265,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 					},
 					MergePolicy: aws.String("CaptionMergePolicy"),
 				},
-				Composition: []*elastictranscoder.Clip{
+				Composition: []elastictranscoder.Clip{
 					{ // Required
 						TimeSpan: &elastictranscoder.TimeSpan{
 							Duration:  aws.String("Time"),
@@ -299,7 +291,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 					Mode:                 aws.String("EncryptionMode"),
 				},
 				ThumbnailPattern: aws.String("ThumbnailPattern"),
-				Watermarks: []*elastictranscoder.JobWatermark{
+				Watermarks: []elastictranscoder.JobWatermark{
 					{ // Required
 						Encryption: &elastictranscoder.Encryption{
 							InitializationVector: aws.String("ZeroTo255String"),
@@ -315,7 +307,7 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 			},
 			// More values...
 		},
-		Playlists: []*elastictranscoder.CreateJobPlaylist{
+		Playlists: []elastictranscoder.CreateJobPlaylist{
 			{ // Required
 				Format: aws.String("PlaylistFormat"),
 				HlsContentProtection: &elastictranscoder.HlsContentProtection{
@@ -327,8 +319,8 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 					Method:                aws.String("HlsContentProtectionMethod"),
 				},
 				Name: aws.String("Filename"),
-				OutputKeys: []*string{
-					aws.String("Key"), // Required
+				OutputKeys: []string{
+					"Key", // Required
 					// More values...
 				},
 				PlayReadyDrm: &elastictranscoder.PlayReadyDrm{
@@ -342,8 +334,8 @@ func elastictranscoderCreateJobInput() *elastictranscoder.CreateJobInput {
 			},
 			// More values...
 		},
-		UserMetadata: map[string]*string{
-			"Key": aws.String("String"), // Required
+		UserMetadata: map[string]string{
+			"Key": "String", // Required
 			// More values...
 		},
 	}

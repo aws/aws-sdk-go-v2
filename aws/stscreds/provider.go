@@ -7,7 +7,7 @@ future AWS service API operation calls.
 The SDK will ensure that per instance of credentials.Credentials all requests
 to refresh the credentials will be synchronized. But, the SDK is unable to
 ensure synchronous usage of the AssumeRoleProvider if the value is shared
-between multiple Credentials, Sessions or service clients.
+between multiple Credentials or service clients.
 
 Assume Role
 
@@ -17,15 +17,18 @@ with the SDKs's stscreds package.
 	// Initial credentials loaded from SDK's default credential chain. Such as
 	// the environment, shared credentials (~/.aws/credentials), or EC2 Instance
 	// Role. These credentials will be used to to make the STS Assume Role API.
-	sess := session.Must(session.NewSession())
+	cfg, err := external.LoadDefaultAWSConfig()
 
 	// Create the credentials from AssumeRoleProvider to assume the role
 	// referenced by the "myRoleARN" ARN.
-	creds := stscreds.NewCredentials(sess, "myRoleArn")
+	stsSvc := sts.New(cfg)
+	stsCredProvider := stscreds.NewAssumeRoleProvider(stsSvc, "myRoleArn")
+
+	cfg.Credentials = aws.NewCredentials(stsCredProvider)
 
 	// Create service client value configured for credentials
 	// from assumed role.
-	svc := s3.New(sess, &aws.Config{Credentials: creds})
+	svc := s3.New(cfg)
 
 Assume Role with static MFA Token
 

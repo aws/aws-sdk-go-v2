@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCreateProject = "CreateProject"
@@ -599,40 +600,51 @@ func (s BundleDetails) GoString() string {
 	return s.String()
 }
 
-// SetAvailablePlatforms sets the AvailablePlatforms field's value.
-func (s *BundleDetails) SetAvailablePlatforms(v []Platform) *BundleDetails {
-	s.AvailablePlatforms = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BundleDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AvailablePlatforms) > 0 {
+		v := s.AvailablePlatforms
 
-// SetBundleId sets the BundleId field's value.
-func (s *BundleDetails) SetBundleId(v string) *BundleDetails {
-	s.BundleId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "availablePlatforms", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
 
-// SetDescription sets the Description field's value.
-func (s *BundleDetails) SetDescription(v string) *BundleDetails {
-	s.Description = &v
-	return s
-}
+	}
+	if s.BundleId != nil {
+		v := *s.BundleId
 
-// SetIconUrl sets the IconUrl field's value.
-func (s *BundleDetails) SetIconUrl(v string) *BundleDetails {
-	s.IconUrl = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bundleId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
 
-// SetTitle sets the Title field's value.
-func (s *BundleDetails) SetTitle(v string) *BundleDetails {
-	s.Title = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.IconUrl != nil {
+		v := *s.IconUrl
 
-// SetVersion sets the Version field's value.
-func (s *BundleDetails) SetVersion(v string) *BundleDetails {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "iconUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Title != nil {
+		v := *s.Title
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "title", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Request structure used to request a project be created.
@@ -666,28 +678,34 @@ func (s CreateProjectInput) GoString() string {
 	return s.String()
 }
 
-// SetContents sets the Contents field's value.
-func (s *CreateProjectInput) SetContents(v []byte) *CreateProjectInput {
-	s.Contents = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateProjectInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetName sets the Name field's value.
-func (s *CreateProjectInput) SetName(v string) *CreateProjectInput {
-	s.Name = &v
-	return s
-}
+	if s.Contents != nil {
+		v := s.Contents
 
-// SetRegion sets the Region field's value.
-func (s *CreateProjectInput) SetRegion(v string) *CreateProjectInput {
-	s.Region = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "contents", protocol.BytesStream(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
 
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *CreateProjectInput) SetSnapshotId(v string) *CreateProjectInput {
-	s.SnapshotId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "region", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SnapshotId != nil {
+		v := *s.SnapshotId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "snapshotId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Result structure used in response to a request to create a project.
@@ -716,10 +734,15 @@ func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDetails sets the Details field's value.
-func (s *CreateProjectOutput) SetDetails(v *ProjectDetails) *CreateProjectOutput {
-	s.Details = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Details != nil {
+		v := s.Details
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "details", v, metadata)
+	}
+	return nil
 }
 
 // Request structure used to request a project be deleted.
@@ -757,10 +780,17 @@ func (s *DeleteProjectInput) Validate() error {
 	return nil
 }
 
-// SetProjectId sets the ProjectId field's value.
-func (s *DeleteProjectInput) SetProjectId(v string) *DeleteProjectInput {
-	s.ProjectId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteProjectInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Result structure used in response to request to delete a project.
@@ -793,16 +823,33 @@ func (s DeleteProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeletedResources sets the DeletedResources field's value.
-func (s *DeleteProjectOutput) SetDeletedResources(v []Resource) *DeleteProjectOutput {
-	s.DeletedResources = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DeletedResources) > 0 {
+		v := s.DeletedResources
 
-// SetOrphanedResources sets the OrphanedResources field's value.
-func (s *DeleteProjectOutput) SetOrphanedResources(v []Resource) *DeleteProjectOutput {
-	s.OrphanedResources = v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "deletedResources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.OrphanedResources) > 0 {
+		v := s.OrphanedResources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "orphanedResources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Request structure to request the details of a specific bundle.
@@ -840,10 +887,17 @@ func (s *DescribeBundleInput) Validate() error {
 	return nil
 }
 
-// SetBundleId sets the BundleId field's value.
-func (s *DescribeBundleInput) SetBundleId(v string) *DescribeBundleInput {
-	s.BundleId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBundleInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.BundleId != nil {
+		v := *s.BundleId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "bundleId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Result structure contains the details of the bundle.
@@ -872,10 +926,15 @@ func (s DescribeBundleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDetails sets the Details field's value.
-func (s *DescribeBundleOutput) SetDetails(v *BundleDetails) *DescribeBundleOutput {
-	s.Details = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBundleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Details != nil {
+		v := s.Details
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "details", v, metadata)
+	}
+	return nil
 }
 
 // Request structure used to request details about a project.
@@ -918,16 +977,23 @@ func (s *DescribeProjectInput) Validate() error {
 	return nil
 }
 
-// SetProjectId sets the ProjectId field's value.
-func (s *DescribeProjectInput) SetProjectId(v string) *DescribeProjectInput {
-	s.ProjectId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeProjectInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetSyncFromResources sets the SyncFromResources field's value.
-func (s *DescribeProjectInput) SetSyncFromResources(v bool) *DescribeProjectInput {
-	s.SyncFromResources = &v
-	return s
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SyncFromResources != nil {
+		v := *s.SyncFromResources
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "syncFromResources", protocol.BoolValue(v), metadata)
+	}
+	return nil
 }
 
 // Result structure used for requests of project details.
@@ -956,10 +1022,15 @@ func (s DescribeProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDetails sets the Details field's value.
-func (s *DescribeProjectOutput) SetDetails(v *ProjectDetails) *DescribeProjectOutput {
-	s.Details = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Details != nil {
+		v := s.Details
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "details", v, metadata)
+	}
+	return nil
 }
 
 // Request structure used to request generation of custom SDK and tool packages
@@ -1004,22 +1075,29 @@ func (s *ExportBundleInput) Validate() error {
 	return nil
 }
 
-// SetBundleId sets the BundleId field's value.
-func (s *ExportBundleInput) SetBundleId(v string) *ExportBundleInput {
-	s.BundleId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportBundleInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetPlatform sets the Platform field's value.
-func (s *ExportBundleInput) SetPlatform(v Platform) *ExportBundleInput {
-	s.Platform = v
-	return s
-}
+	if s.BundleId != nil {
+		v := *s.BundleId
 
-// SetProjectId sets the ProjectId field's value.
-func (s *ExportBundleInput) SetProjectId(v string) *ExportBundleInput {
-	s.ProjectId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "bundleId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Platform) > 0 {
+		v := s.Platform
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "platform", protocol.QuotedValue{v}, metadata)
+	}
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Result structure which contains link to download custom-generated SDK and
@@ -1052,10 +1130,15 @@ func (s ExportBundleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDownloadUrl sets the DownloadUrl field's value.
-func (s *ExportBundleOutput) SetDownloadUrl(v string) *ExportBundleOutput {
-	s.DownloadUrl = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportBundleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DownloadUrl != nil {
+		v := *s.DownloadUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "downloadUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Request structure used in requests to export project configuration details.
@@ -1093,10 +1176,17 @@ func (s *ExportProjectInput) Validate() error {
 	return nil
 }
 
-// SetProjectId sets the ProjectId field's value.
-func (s *ExportProjectInput) SetProjectId(v string) *ExportProjectInput {
-	s.ProjectId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportProjectInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Result structure used for requests to export project configuration details.
@@ -1137,22 +1227,27 @@ func (s ExportProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDownloadUrl sets the DownloadUrl field's value.
-func (s *ExportProjectOutput) SetDownloadUrl(v string) *ExportProjectOutput {
-	s.DownloadUrl = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DownloadUrl != nil {
+		v := *s.DownloadUrl
 
-// SetShareUrl sets the ShareUrl field's value.
-func (s *ExportProjectOutput) SetShareUrl(v string) *ExportProjectOutput {
-	s.ShareUrl = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "downloadUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ShareUrl != nil {
+		v := *s.ShareUrl
 
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *ExportProjectOutput) SetSnapshotId(v string) *ExportProjectOutput {
-	s.SnapshotId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "shareUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SnapshotId != nil {
+		v := *s.SnapshotId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "snapshotId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Request structure to request all available bundles.
@@ -1179,16 +1274,23 @@ func (s ListBundlesInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListBundlesInput) SetMaxResults(v int64) *ListBundlesInput {
-	s.MaxResults = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListBundlesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListBundlesInput) SetNextToken(v string) *ListBundlesInput {
-	s.NextToken = &v
-	return s
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Result structure contains a list of all available bundles with details.
@@ -1221,16 +1323,27 @@ func (s ListBundlesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetBundleList sets the BundleList field's value.
-func (s *ListBundlesOutput) SetBundleList(v []BundleDetails) *ListBundlesOutput {
-	s.BundleList = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListBundlesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.BundleList) > 0 {
+		v := s.BundleList
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListBundlesOutput) SetNextToken(v string) *ListBundlesOutput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "bundleList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Request structure used to request projects list in AWS Mobile Hub.
@@ -1257,16 +1370,23 @@ func (s ListProjectsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListProjectsInput) SetMaxResults(v int64) *ListProjectsInput {
-	s.MaxResults = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListProjectsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListProjectsInput) SetNextToken(v string) *ListProjectsInput {
-	s.NextToken = &v
-	return s
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Result structure used for requests to list projects in AWS Mobile Hub.
@@ -1300,16 +1420,27 @@ func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListProjectsOutput) SetNextToken(v string) *ListProjectsOutput {
-	s.NextToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListProjectsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
 
-// SetProjects sets the Projects field's value.
-func (s *ListProjectsOutput) SetProjects(v []ProjectSummary) *ListProjectsOutput {
-	s.Projects = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Projects) > 0 {
+		v := s.Projects
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "projects", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Detailed information about an AWS Mobile Hub project.
@@ -1352,52 +1483,63 @@ func (s ProjectDetails) GoString() string {
 	return s.String()
 }
 
-// SetConsoleUrl sets the ConsoleUrl field's value.
-func (s *ProjectDetails) SetConsoleUrl(v string) *ProjectDetails {
-	s.ConsoleUrl = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ProjectDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConsoleUrl != nil {
+		v := *s.ConsoleUrl
 
-// SetCreatedDate sets the CreatedDate field's value.
-func (s *ProjectDetails) SetCreatedDate(v time.Time) *ProjectDetails {
-	s.CreatedDate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "consoleUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedDate != nil {
+		v := *s.CreatedDate
 
-// SetLastUpdatedDate sets the LastUpdatedDate field's value.
-func (s *ProjectDetails) SetLastUpdatedDate(v time.Time) *ProjectDetails {
-	s.LastUpdatedDate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.LastUpdatedDate != nil {
+		v := *s.LastUpdatedDate
 
-// SetName sets the Name field's value.
-func (s *ProjectDetails) SetName(v string) *ProjectDetails {
-	s.Name = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
 
-// SetProjectId sets the ProjectId field's value.
-func (s *ProjectDetails) SetProjectId(v string) *ProjectDetails {
-	s.ProjectId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ProjectId != nil {
+		v := *s.ProjectId
 
-// SetRegion sets the Region field's value.
-func (s *ProjectDetails) SetRegion(v string) *ProjectDetails {
-	s.Region = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Region != nil {
+		v := *s.Region
 
-// SetResources sets the Resources field's value.
-func (s *ProjectDetails) SetResources(v []Resource) *ProjectDetails {
-	s.Resources = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "region", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Resources) > 0 {
+		v := s.Resources
 
-// SetState sets the State field's value.
-func (s *ProjectDetails) SetState(v ProjectState) *ProjectDetails {
-	s.State = v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "resources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
 }
 
 // Summary information about an AWS Mobile Hub project.
@@ -1422,16 +1564,21 @@ func (s ProjectSummary) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *ProjectSummary) SetName(v string) *ProjectSummary {
-	s.Name = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ProjectSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
 
-// SetProjectId sets the ProjectId field's value.
-func (s *ProjectSummary) SetProjectId(v string) *ProjectSummary {
-	s.ProjectId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information about an instance of an AWS resource associated with a project.
@@ -1466,34 +1613,45 @@ func (s Resource) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Resource) SetArn(v string) *Resource {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetAttributes sets the Attributes field's value.
-func (s *Resource) SetAttributes(v map[string]string) *Resource {
-	s.Attributes = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
 
-// SetFeature sets the Feature field's value.
-func (s *Resource) SetFeature(v string) *Resource {
-	s.Feature = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
 
-// SetName sets the Name field's value.
-func (s *Resource) SetName(v string) *Resource {
-	s.Name = &v
-	return s
-}
+	}
+	if s.Feature != nil {
+		v := *s.Feature
 
-// SetType sets the Type field's value.
-func (s *Resource) SetType(v string) *Resource {
-	s.Type = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "feature", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Request structure used for requests to update project configuration.
@@ -1536,16 +1694,22 @@ func (s *UpdateProjectInput) Validate() error {
 	return nil
 }
 
-// SetContents sets the Contents field's value.
-func (s *UpdateProjectInput) SetContents(v []byte) *UpdateProjectInput {
-	s.Contents = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateProjectInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetProjectId sets the ProjectId field's value.
-func (s *UpdateProjectInput) SetProjectId(v string) *UpdateProjectInput {
-	s.ProjectId = &v
-	return s
+	if s.Contents != nil {
+		v := s.Contents
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "contents", protocol.BytesStream(v), metadata)
+	}
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Result structure used for requests to updated project configuration.
@@ -1574,10 +1738,15 @@ func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDetails sets the Details field's value.
-func (s *UpdateProjectOutput) SetDetails(v *ProjectDetails) *UpdateProjectOutput {
-	s.Details = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Details != nil {
+		v := s.Details
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "details", v, metadata)
+	}
+	return nil
 }
 
 // Developer desktop or target mobile app or website platform.
@@ -1594,6 +1763,15 @@ const (
 	PlatformJavascript Platform = "JAVASCRIPT"
 )
 
+func (enum Platform) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Platform) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Synchronization state for a project.
 type ProjectState string
 
@@ -1603,3 +1781,12 @@ const (
 	ProjectStateSyncing   ProjectState = "SYNCING"
 	ProjectStateImporting ProjectState = "IMPORTING"
 )
+
+func (enum ProjectState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProjectState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

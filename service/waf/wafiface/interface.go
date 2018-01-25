@@ -64,11 +64,19 @@ import (
 type WAFAPI interface {
 	CreateByteMatchSetRequest(*waf.CreateByteMatchSetInput) waf.CreateByteMatchSetRequest
 
+	CreateGeoMatchSetRequest(*waf.CreateGeoMatchSetInput) waf.CreateGeoMatchSetRequest
+
 	CreateIPSetRequest(*waf.CreateIPSetInput) waf.CreateIPSetRequest
 
 	CreateRateBasedRuleRequest(*waf.CreateRateBasedRuleInput) waf.CreateRateBasedRuleRequest
 
+	CreateRegexMatchSetRequest(*waf.CreateRegexMatchSetInput) waf.CreateRegexMatchSetRequest
+
+	CreateRegexPatternSetRequest(*waf.CreateRegexPatternSetInput) waf.CreateRegexPatternSetRequest
+
 	CreateRuleRequest(*waf.CreateRuleInput) waf.CreateRuleRequest
+
+	CreateRuleGroupRequest(*waf.CreateRuleGroupInput) waf.CreateRuleGroupRequest
 
 	CreateSizeConstraintSetRequest(*waf.CreateSizeConstraintSetInput) waf.CreateSizeConstraintSetRequest
 
@@ -80,11 +88,19 @@ type WAFAPI interface {
 
 	DeleteByteMatchSetRequest(*waf.DeleteByteMatchSetInput) waf.DeleteByteMatchSetRequest
 
+	DeleteGeoMatchSetRequest(*waf.DeleteGeoMatchSetInput) waf.DeleteGeoMatchSetRequest
+
 	DeleteIPSetRequest(*waf.DeleteIPSetInput) waf.DeleteIPSetRequest
 
 	DeleteRateBasedRuleRequest(*waf.DeleteRateBasedRuleInput) waf.DeleteRateBasedRuleRequest
 
+	DeleteRegexMatchSetRequest(*waf.DeleteRegexMatchSetInput) waf.DeleteRegexMatchSetRequest
+
+	DeleteRegexPatternSetRequest(*waf.DeleteRegexPatternSetInput) waf.DeleteRegexPatternSetRequest
+
 	DeleteRuleRequest(*waf.DeleteRuleInput) waf.DeleteRuleRequest
+
+	DeleteRuleGroupRequest(*waf.DeleteRuleGroupInput) waf.DeleteRuleGroupRequest
 
 	DeleteSizeConstraintSetRequest(*waf.DeleteSizeConstraintSetInput) waf.DeleteSizeConstraintSetRequest
 
@@ -100,13 +116,21 @@ type WAFAPI interface {
 
 	GetChangeTokenStatusRequest(*waf.GetChangeTokenStatusInput) waf.GetChangeTokenStatusRequest
 
+	GetGeoMatchSetRequest(*waf.GetGeoMatchSetInput) waf.GetGeoMatchSetRequest
+
 	GetIPSetRequest(*waf.GetIPSetInput) waf.GetIPSetRequest
 
 	GetRateBasedRuleRequest(*waf.GetRateBasedRuleInput) waf.GetRateBasedRuleRequest
 
 	GetRateBasedRuleManagedKeysRequest(*waf.GetRateBasedRuleManagedKeysInput) waf.GetRateBasedRuleManagedKeysRequest
 
+	GetRegexMatchSetRequest(*waf.GetRegexMatchSetInput) waf.GetRegexMatchSetRequest
+
+	GetRegexPatternSetRequest(*waf.GetRegexPatternSetInput) waf.GetRegexPatternSetRequest
+
 	GetRuleRequest(*waf.GetRuleInput) waf.GetRuleRequest
+
+	GetRuleGroupRequest(*waf.GetRuleGroupInput) waf.GetRuleGroupRequest
 
 	GetSampledRequestsRequest(*waf.GetSampledRequestsInput) waf.GetSampledRequestsRequest
 
@@ -118,11 +142,21 @@ type WAFAPI interface {
 
 	GetXssMatchSetRequest(*waf.GetXssMatchSetInput) waf.GetXssMatchSetRequest
 
+	ListActivatedRulesInRuleGroupRequest(*waf.ListActivatedRulesInRuleGroupInput) waf.ListActivatedRulesInRuleGroupRequest
+
 	ListByteMatchSetsRequest(*waf.ListByteMatchSetsInput) waf.ListByteMatchSetsRequest
+
+	ListGeoMatchSetsRequest(*waf.ListGeoMatchSetsInput) waf.ListGeoMatchSetsRequest
 
 	ListIPSetsRequest(*waf.ListIPSetsInput) waf.ListIPSetsRequest
 
 	ListRateBasedRulesRequest(*waf.ListRateBasedRulesInput) waf.ListRateBasedRulesRequest
+
+	ListRegexMatchSetsRequest(*waf.ListRegexMatchSetsInput) waf.ListRegexMatchSetsRequest
+
+	ListRegexPatternSetsRequest(*waf.ListRegexPatternSetsInput) waf.ListRegexPatternSetsRequest
+
+	ListRuleGroupsRequest(*waf.ListRuleGroupsInput) waf.ListRuleGroupsRequest
 
 	ListRulesRequest(*waf.ListRulesInput) waf.ListRulesRequest
 
@@ -130,17 +164,27 @@ type WAFAPI interface {
 
 	ListSqlInjectionMatchSetsRequest(*waf.ListSqlInjectionMatchSetsInput) waf.ListSqlInjectionMatchSetsRequest
 
+	ListSubscribedRuleGroupsRequest(*waf.ListSubscribedRuleGroupsInput) waf.ListSubscribedRuleGroupsRequest
+
 	ListWebACLsRequest(*waf.ListWebACLsInput) waf.ListWebACLsRequest
 
 	ListXssMatchSetsRequest(*waf.ListXssMatchSetsInput) waf.ListXssMatchSetsRequest
 
 	UpdateByteMatchSetRequest(*waf.UpdateByteMatchSetInput) waf.UpdateByteMatchSetRequest
 
+	UpdateGeoMatchSetRequest(*waf.UpdateGeoMatchSetInput) waf.UpdateGeoMatchSetRequest
+
 	UpdateIPSetRequest(*waf.UpdateIPSetInput) waf.UpdateIPSetRequest
 
 	UpdateRateBasedRuleRequest(*waf.UpdateRateBasedRuleInput) waf.UpdateRateBasedRuleRequest
 
+	UpdateRegexMatchSetRequest(*waf.UpdateRegexMatchSetInput) waf.UpdateRegexMatchSetRequest
+
+	UpdateRegexPatternSetRequest(*waf.UpdateRegexPatternSetInput) waf.UpdateRegexPatternSetRequest
+
 	UpdateRuleRequest(*waf.UpdateRuleInput) waf.UpdateRuleRequest
+
+	UpdateRuleGroupRequest(*waf.UpdateRuleGroupInput) waf.UpdateRuleGroupRequest
 
 	UpdateSizeConstraintSetRequest(*waf.UpdateSizeConstraintSetInput) waf.UpdateSizeConstraintSetRequest
 

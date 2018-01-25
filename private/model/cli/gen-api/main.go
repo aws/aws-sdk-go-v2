@@ -112,9 +112,8 @@ func newGenerateInfo(modelFile, svcPath, svcImportPath string) *generateInfo {
 // Env:
 //  SERVICES comma separated list of services to generate.
 func main() {
-	var svcPath, sessionPath, svcImportPath string
+	var svcPath, svcImportPath string
 	flag.StringVar(&svcPath, "path", "service", "directory to generate service clients in")
-	flag.StringVar(&sessionPath, "sessionPath", filepath.Join("aws", "session"), "generate session service client factories")
 	flag.StringVar(&svcImportPath, "svc-import-path", "github.com/aws/aws-sdk-go-v2/service", "namespace to generate service client Go code import path under")
 	flag.Parse()
 	api.Bootstrap()

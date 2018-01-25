@@ -63,18 +63,17 @@ func WithDownloaderRequestOptions(opts ...request.Option) func(*Downloader) {
 // NewDownloader creates a new Downloader instance to downloads objects from
 // S3 in concurrent chunks. Pass in additional functional options  to customize
 // the downloader behavior. Requires a client.ConfigProvider in order to create
-// a S3 service client. The session.Session satisfies the client.ConfigProvider
-// interface.
+// a S3 service client.
 //
 // Example:
-//     // The session the S3 Downloader will use
-//     sess := session.Must(session.NewSession())
+//     // The config the S3 Downloader will use
+//     cfg, err := external.LoadDefaultAWSConfig()
 //
-//     // Create a downloader with the session and default options
-//     downloader := s3manager.NewDownloader(sess)
+//     // Create a downloader with the config and default options
+//     downloader := s3manager.NewDownloader(cfg)
 //
-//     // Create a downloader with the session and custom options
-//     downloader := s3manager.NewDownloader(sess, func(d *s3manager.Downloader) {
+//     // Create a downloader with the config and custom options
+//     downloader := s3manager.NewDownloader(cfg, func(d *s3manager.Downloader) {
 //          d.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
 func NewDownloader(cfg aws.Config, options ...func(*Downloader)) *Downloader {
@@ -101,11 +100,11 @@ func NewDownloader(cfg aws.Config, options ...func(*Downloader)) *Downloader {
 // to make S3 API calls.
 //
 // Example:
-//     // The session the S3 Downloader will use
-//     sess := session.Must(session.NewSession())
+//     // The config the S3 Downloader will use
+//     cfg, err := external.LoadDefaultAWSConfig()
 //
 //     // The S3 client the S3 Downloader will use
-//     s3Svc := s3.new(sess)
+//     s3Svc := s3.new(cfg)
 //
 //     // Create a downloader with the s3 client and default options
 //     downloader := s3manager.NewDownloaderWithClient(s3Svc)
@@ -207,7 +206,7 @@ func (d Downloader) DownloadWithContext(ctx aws.Context, w io.WriterAt, input *s
 // to the io.WriterAt specificed in the iterator.
 //
 // Example:
-//	svc := s3manager.NewDownloader(session)
+//	cfg, err := external.LoadDefaultAWSConfig()
 //
 //	fooFile, err := os.Open("/tmp/foo.file")
 //	if err != nil {

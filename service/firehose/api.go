@@ -222,53 +222,6 @@ func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamIn
 	return DescribeDeliveryStreamRequest{Request: req, Input: input}
 }
 
-const opGetKinesisStream = "GetKinesisStream"
-
-// GetKinesisStreamRequest is a API request type for the GetKinesisStream API operation.
-type GetKinesisStreamRequest struct {
-	*aws.Request
-	Input *GetKinesisStreamInput
-}
-
-// Send marshals and sends the GetKinesisStream API request.
-func (r GetKinesisStreamRequest) Send() (*GetKinesisStreamOutput, error) {
-	err := r.Request.Send()
-	if err != nil {
-		return nil, err
-	}
-
-	return r.Request.Data.(*GetKinesisStreamOutput), nil
-}
-
-// GetKinesisStreamRequest returns a request value for making API operation for
-// Amazon Kinesis Firehose.
-//
-//    // Example sending a request using the GetKinesisStreamRequest method.
-//    req := client.GetKinesisStreamRequest(params)
-//    resp, err := req.Send()
-//    if err == nil {
-//        fmt.Println(resp)
-//    }
-//
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStream
-func (c *Firehose) GetKinesisStreamRequest(input *GetKinesisStreamInput) GetKinesisStreamRequest {
-	op := &aws.Operation{
-		Name:       opGetKinesisStream,
-		HTTPMethod: "POST",
-		HTTPPath:   "/",
-	}
-
-	if input == nil {
-		input = &GetKinesisStreamInput{}
-	}
-
-	output := &GetKinesisStreamOutput{}
-	req := c.newRequest(op, input, output)
-	output.responseMetadata = aws.Response{Request: req}
-
-	return GetKinesisStreamRequest{Request: req, Input: input}
-}
-
 const opListDeliveryStreams = "ListDeliveryStreams"
 
 // ListDeliveryStreamsRequest is a API request type for the ListDeliveryStreams API operation.
@@ -637,18 +590,6 @@ func (s *BufferingHints) Validate() error {
 	return nil
 }
 
-// SetIntervalInSeconds sets the IntervalInSeconds field's value.
-func (s *BufferingHints) SetIntervalInSeconds(v int64) *BufferingHints {
-	s.IntervalInSeconds = &v
-	return s
-}
-
-// SetSizeInMBs sets the SizeInMBs field's value.
-func (s *BufferingHints) SetSizeInMBs(v int64) *BufferingHints {
-	s.SizeInMBs = &v
-	return s
-}
-
 // Describes the Amazon CloudWatch logging options for your delivery stream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CloudWatchLoggingOptions
 type CloudWatchLoggingOptions struct {
@@ -674,24 +615,6 @@ func (s CloudWatchLoggingOptions) String() string {
 // GoString returns the string representation
 func (s CloudWatchLoggingOptions) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *CloudWatchLoggingOptions) SetEnabled(v bool) *CloudWatchLoggingOptions {
-	s.Enabled = &v
-	return s
-}
-
-// SetLogGroupName sets the LogGroupName field's value.
-func (s *CloudWatchLoggingOptions) SetLogGroupName(v string) *CloudWatchLoggingOptions {
-	s.LogGroupName = &v
-	return s
-}
-
-// SetLogStreamName sets the LogStreamName field's value.
-func (s *CloudWatchLoggingOptions) SetLogStreamName(v string) *CloudWatchLoggingOptions {
-	s.LogStreamName = &v
-	return s
 }
 
 // Describes a COPY command for Amazon Redshift.
@@ -757,24 +680,6 @@ func (s *CopyCommand) Validate() error {
 	return nil
 }
 
-// SetCopyOptions sets the CopyOptions field's value.
-func (s *CopyCommand) SetCopyOptions(v string) *CopyCommand {
-	s.CopyOptions = &v
-	return s
-}
-
-// SetDataTableColumns sets the DataTableColumns field's value.
-func (s *CopyCommand) SetDataTableColumns(v string) *CopyCommand {
-	s.DataTableColumns = &v
-	return s
-}
-
-// SetDataTableName sets the DataTableName field's value.
-func (s *CopyCommand) SetDataTableName(v string) *CopyCommand {
-	s.DataTableName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamInput
 type CreateDeliveryStreamInput struct {
 	_ struct{} `type:"structure"`
@@ -809,6 +714,9 @@ type CreateDeliveryStreamInput struct {
 
 	// [Deprecated] The destination in Amazon S3. You can specify only one destination.
 	S3DestinationConfiguration *S3DestinationConfiguration `deprecated:"true" type:"structure"`
+
+	// The destination in Splunk. You can specify only one destination.
+	SplunkDestinationConfiguration *SplunkDestinationConfiguration `type:"structure"`
 }
 
 // String returns the string representation
@@ -856,53 +764,16 @@ func (s *CreateDeliveryStreamInput) Validate() error {
 			invalidParams.AddNested("S3DestinationConfiguration", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.SplunkDestinationConfiguration != nil {
+		if err := s.SplunkDestinationConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("SplunkDestinationConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeliveryStreamName sets the DeliveryStreamName field's value.
-func (s *CreateDeliveryStreamInput) SetDeliveryStreamName(v string) *CreateDeliveryStreamInput {
-	s.DeliveryStreamName = &v
-	return s
-}
-
-// SetDeliveryStreamType sets the DeliveryStreamType field's value.
-func (s *CreateDeliveryStreamInput) SetDeliveryStreamType(v DeliveryStreamType) *CreateDeliveryStreamInput {
-	s.DeliveryStreamType = v
-	return s
-}
-
-// SetElasticsearchDestinationConfiguration sets the ElasticsearchDestinationConfiguration field's value.
-func (s *CreateDeliveryStreamInput) SetElasticsearchDestinationConfiguration(v *ElasticsearchDestinationConfiguration) *CreateDeliveryStreamInput {
-	s.ElasticsearchDestinationConfiguration = v
-	return s
-}
-
-// SetExtendedS3DestinationConfiguration sets the ExtendedS3DestinationConfiguration field's value.
-func (s *CreateDeliveryStreamInput) SetExtendedS3DestinationConfiguration(v *ExtendedS3DestinationConfiguration) *CreateDeliveryStreamInput {
-	s.ExtendedS3DestinationConfiguration = v
-	return s
-}
-
-// SetKinesisStreamSourceConfiguration sets the KinesisStreamSourceConfiguration field's value.
-func (s *CreateDeliveryStreamInput) SetKinesisStreamSourceConfiguration(v *KinesisStreamSourceConfiguration) *CreateDeliveryStreamInput {
-	s.KinesisStreamSourceConfiguration = v
-	return s
-}
-
-// SetRedshiftDestinationConfiguration sets the RedshiftDestinationConfiguration field's value.
-func (s *CreateDeliveryStreamInput) SetRedshiftDestinationConfiguration(v *RedshiftDestinationConfiguration) *CreateDeliveryStreamInput {
-	s.RedshiftDestinationConfiguration = v
-	return s
-}
-
-// SetS3DestinationConfiguration sets the S3DestinationConfiguration field's value.
-func (s *CreateDeliveryStreamInput) SetS3DestinationConfiguration(v *S3DestinationConfiguration) *CreateDeliveryStreamInput {
-	s.S3DestinationConfiguration = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/CreateDeliveryStreamOutput
@@ -928,12 +799,6 @@ func (s CreateDeliveryStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDeliveryStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeliveryStreamARN sets the DeliveryStreamARN field's value.
-func (s *CreateDeliveryStreamOutput) SetDeliveryStreamARN(v string) *CreateDeliveryStreamOutput {
-	s.DeliveryStreamARN = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStreamInput
@@ -971,12 +836,6 @@ func (s *DeleteDeliveryStreamInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeliveryStreamName sets the DeliveryStreamName field's value.
-func (s *DeleteDeliveryStreamInput) SetDeliveryStreamName(v string) *DeleteDeliveryStreamInput {
-	s.DeliveryStreamName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DeleteDeliveryStreamOutput
@@ -1070,66 +929,6 @@ func (s DeliveryStreamDescription) GoString() string {
 	return s.String()
 }
 
-// SetCreateTimestamp sets the CreateTimestamp field's value.
-func (s *DeliveryStreamDescription) SetCreateTimestamp(v time.Time) *DeliveryStreamDescription {
-	s.CreateTimestamp = &v
-	return s
-}
-
-// SetDeliveryStreamARN sets the DeliveryStreamARN field's value.
-func (s *DeliveryStreamDescription) SetDeliveryStreamARN(v string) *DeliveryStreamDescription {
-	s.DeliveryStreamARN = &v
-	return s
-}
-
-// SetDeliveryStreamName sets the DeliveryStreamName field's value.
-func (s *DeliveryStreamDescription) SetDeliveryStreamName(v string) *DeliveryStreamDescription {
-	s.DeliveryStreamName = &v
-	return s
-}
-
-// SetDeliveryStreamStatus sets the DeliveryStreamStatus field's value.
-func (s *DeliveryStreamDescription) SetDeliveryStreamStatus(v DeliveryStreamStatus) *DeliveryStreamDescription {
-	s.DeliveryStreamStatus = v
-	return s
-}
-
-// SetDeliveryStreamType sets the DeliveryStreamType field's value.
-func (s *DeliveryStreamDescription) SetDeliveryStreamType(v DeliveryStreamType) *DeliveryStreamDescription {
-	s.DeliveryStreamType = v
-	return s
-}
-
-// SetDestinations sets the Destinations field's value.
-func (s *DeliveryStreamDescription) SetDestinations(v []DestinationDescription) *DeliveryStreamDescription {
-	s.Destinations = v
-	return s
-}
-
-// SetHasMoreDestinations sets the HasMoreDestinations field's value.
-func (s *DeliveryStreamDescription) SetHasMoreDestinations(v bool) *DeliveryStreamDescription {
-	s.HasMoreDestinations = &v
-	return s
-}
-
-// SetLastUpdateTimestamp sets the LastUpdateTimestamp field's value.
-func (s *DeliveryStreamDescription) SetLastUpdateTimestamp(v time.Time) *DeliveryStreamDescription {
-	s.LastUpdateTimestamp = &v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *DeliveryStreamDescription) SetSource(v *SourceDescription) *DeliveryStreamDescription {
-	s.Source = v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DeliveryStreamDescription) SetVersionId(v string) *DeliveryStreamDescription {
-	s.VersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStreamInput
 type DescribeDeliveryStreamInput struct {
 	_ struct{} `type:"structure"`
@@ -1181,24 +980,6 @@ func (s *DescribeDeliveryStreamInput) Validate() error {
 	return nil
 }
 
-// SetDeliveryStreamName sets the DeliveryStreamName field's value.
-func (s *DescribeDeliveryStreamInput) SetDeliveryStreamName(v string) *DescribeDeliveryStreamInput {
-	s.DeliveryStreamName = &v
-	return s
-}
-
-// SetExclusiveStartDestinationId sets the ExclusiveStartDestinationId field's value.
-func (s *DescribeDeliveryStreamInput) SetExclusiveStartDestinationId(v string) *DescribeDeliveryStreamInput {
-	s.ExclusiveStartDestinationId = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeDeliveryStreamInput) SetLimit(v int64) *DescribeDeliveryStreamInput {
-	s.Limit = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DescribeDeliveryStreamOutput
 type DescribeDeliveryStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -1226,12 +1007,6 @@ func (s DescribeDeliveryStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeliveryStreamDescription sets the DeliveryStreamDescription field's value.
-func (s *DescribeDeliveryStreamOutput) SetDeliveryStreamDescription(v *DeliveryStreamDescription) *DescribeDeliveryStreamOutput {
-	s.DeliveryStreamDescription = v
-	return s
-}
-
 // Describes the destination for a delivery stream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/DestinationDescription
 type DestinationDescription struct {
@@ -1253,6 +1028,9 @@ type DestinationDescription struct {
 
 	// [Deprecated] The destination in Amazon S3.
 	S3DestinationDescription *S3DestinationDescription `type:"structure"`
+
+	// The destination in Splunk.
+	SplunkDestinationDescription *SplunkDestinationDescription `type:"structure"`
 }
 
 // String returns the string representation
@@ -1263,36 +1041,6 @@ func (s DestinationDescription) String() string {
 // GoString returns the string representation
 func (s DestinationDescription) GoString() string {
 	return s.String()
-}
-
-// SetDestinationId sets the DestinationId field's value.
-func (s *DestinationDescription) SetDestinationId(v string) *DestinationDescription {
-	s.DestinationId = &v
-	return s
-}
-
-// SetElasticsearchDestinationDescription sets the ElasticsearchDestinationDescription field's value.
-func (s *DestinationDescription) SetElasticsearchDestinationDescription(v *ElasticsearchDestinationDescription) *DestinationDescription {
-	s.ElasticsearchDestinationDescription = v
-	return s
-}
-
-// SetExtendedS3DestinationDescription sets the ExtendedS3DestinationDescription field's value.
-func (s *DestinationDescription) SetExtendedS3DestinationDescription(v *ExtendedS3DestinationDescription) *DestinationDescription {
-	s.ExtendedS3DestinationDescription = v
-	return s
-}
-
-// SetRedshiftDestinationDescription sets the RedshiftDestinationDescription field's value.
-func (s *DestinationDescription) SetRedshiftDestinationDescription(v *RedshiftDestinationDescription) *DestinationDescription {
-	s.RedshiftDestinationDescription = v
-	return s
-}
-
-// SetS3DestinationDescription sets the S3DestinationDescription field's value.
-func (s *DestinationDescription) SetS3DestinationDescription(v *S3DestinationDescription) *DestinationDescription {
-	s.S3DestinationDescription = v
-	return s
 }
 
 // Describes the buffering to perform before delivering data to the Amazon ES
@@ -1338,18 +1086,6 @@ func (s *ElasticsearchBufferingHints) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetIntervalInSeconds sets the IntervalInSeconds field's value.
-func (s *ElasticsearchBufferingHints) SetIntervalInSeconds(v int64) *ElasticsearchBufferingHints {
-	s.IntervalInSeconds = &v
-	return s
-}
-
-// SetSizeInMBs sets the SizeInMBs field's value.
-func (s *ElasticsearchBufferingHints) SetSizeInMBs(v int64) *ElasticsearchBufferingHints {
-	s.SizeInMBs = &v
-	return s
 }
 
 // Describes the configuration of a destination in Amazon ES.
@@ -1484,72 +1220,6 @@ func (s *ElasticsearchDestinationConfiguration) Validate() error {
 	return nil
 }
 
-// SetBufferingHints sets the BufferingHints field's value.
-func (s *ElasticsearchDestinationConfiguration) SetBufferingHints(v *ElasticsearchBufferingHints) *ElasticsearchDestinationConfiguration {
-	s.BufferingHints = v
-	return s
-}
-
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *ElasticsearchDestinationConfiguration) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *ElasticsearchDestinationConfiguration {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetDomainARN sets the DomainARN field's value.
-func (s *ElasticsearchDestinationConfiguration) SetDomainARN(v string) *ElasticsearchDestinationConfiguration {
-	s.DomainARN = &v
-	return s
-}
-
-// SetIndexName sets the IndexName field's value.
-func (s *ElasticsearchDestinationConfiguration) SetIndexName(v string) *ElasticsearchDestinationConfiguration {
-	s.IndexName = &v
-	return s
-}
-
-// SetIndexRotationPeriod sets the IndexRotationPeriod field's value.
-func (s *ElasticsearchDestinationConfiguration) SetIndexRotationPeriod(v ElasticsearchIndexRotationPeriod) *ElasticsearchDestinationConfiguration {
-	s.IndexRotationPeriod = v
-	return s
-}
-
-// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
-func (s *ElasticsearchDestinationConfiguration) SetProcessingConfiguration(v *ProcessingConfiguration) *ElasticsearchDestinationConfiguration {
-	s.ProcessingConfiguration = v
-	return s
-}
-
-// SetRetryOptions sets the RetryOptions field's value.
-func (s *ElasticsearchDestinationConfiguration) SetRetryOptions(v *ElasticsearchRetryOptions) *ElasticsearchDestinationConfiguration {
-	s.RetryOptions = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *ElasticsearchDestinationConfiguration) SetRoleARN(v string) *ElasticsearchDestinationConfiguration {
-	s.RoleARN = &v
-	return s
-}
-
-// SetS3BackupMode sets the S3BackupMode field's value.
-func (s *ElasticsearchDestinationConfiguration) SetS3BackupMode(v ElasticsearchS3BackupMode) *ElasticsearchDestinationConfiguration {
-	s.S3BackupMode = v
-	return s
-}
-
-// SetS3Configuration sets the S3Configuration field's value.
-func (s *ElasticsearchDestinationConfiguration) SetS3Configuration(v *S3DestinationConfiguration) *ElasticsearchDestinationConfiguration {
-	s.S3Configuration = v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *ElasticsearchDestinationConfiguration) SetTypeName(v string) *ElasticsearchDestinationConfiguration {
-	s.TypeName = &v
-	return s
-}
-
 // The destination description in Amazon ES.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchDestinationDescription
 type ElasticsearchDestinationDescription struct {
@@ -1597,72 +1267,6 @@ func (s ElasticsearchDestinationDescription) String() string {
 // GoString returns the string representation
 func (s ElasticsearchDestinationDescription) GoString() string {
 	return s.String()
-}
-
-// SetBufferingHints sets the BufferingHints field's value.
-func (s *ElasticsearchDestinationDescription) SetBufferingHints(v *ElasticsearchBufferingHints) *ElasticsearchDestinationDescription {
-	s.BufferingHints = v
-	return s
-}
-
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *ElasticsearchDestinationDescription) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *ElasticsearchDestinationDescription {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetDomainARN sets the DomainARN field's value.
-func (s *ElasticsearchDestinationDescription) SetDomainARN(v string) *ElasticsearchDestinationDescription {
-	s.DomainARN = &v
-	return s
-}
-
-// SetIndexName sets the IndexName field's value.
-func (s *ElasticsearchDestinationDescription) SetIndexName(v string) *ElasticsearchDestinationDescription {
-	s.IndexName = &v
-	return s
-}
-
-// SetIndexRotationPeriod sets the IndexRotationPeriod field's value.
-func (s *ElasticsearchDestinationDescription) SetIndexRotationPeriod(v ElasticsearchIndexRotationPeriod) *ElasticsearchDestinationDescription {
-	s.IndexRotationPeriod = v
-	return s
-}
-
-// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
-func (s *ElasticsearchDestinationDescription) SetProcessingConfiguration(v *ProcessingConfiguration) *ElasticsearchDestinationDescription {
-	s.ProcessingConfiguration = v
-	return s
-}
-
-// SetRetryOptions sets the RetryOptions field's value.
-func (s *ElasticsearchDestinationDescription) SetRetryOptions(v *ElasticsearchRetryOptions) *ElasticsearchDestinationDescription {
-	s.RetryOptions = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *ElasticsearchDestinationDescription) SetRoleARN(v string) *ElasticsearchDestinationDescription {
-	s.RoleARN = &v
-	return s
-}
-
-// SetS3BackupMode sets the S3BackupMode field's value.
-func (s *ElasticsearchDestinationDescription) SetS3BackupMode(v ElasticsearchS3BackupMode) *ElasticsearchDestinationDescription {
-	s.S3BackupMode = v
-	return s
-}
-
-// SetS3DestinationDescription sets the S3DestinationDescription field's value.
-func (s *ElasticsearchDestinationDescription) SetS3DestinationDescription(v *S3DestinationDescription) *ElasticsearchDestinationDescription {
-	s.S3DestinationDescription = v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *ElasticsearchDestinationDescription) SetTypeName(v string) *ElasticsearchDestinationDescription {
-	s.TypeName = &v
-	return s
 }
 
 // Describes an update for a destination in Amazon ES.
@@ -1757,66 +1361,6 @@ func (s *ElasticsearchDestinationUpdate) Validate() error {
 	return nil
 }
 
-// SetBufferingHints sets the BufferingHints field's value.
-func (s *ElasticsearchDestinationUpdate) SetBufferingHints(v *ElasticsearchBufferingHints) *ElasticsearchDestinationUpdate {
-	s.BufferingHints = v
-	return s
-}
-
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *ElasticsearchDestinationUpdate) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *ElasticsearchDestinationUpdate {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetDomainARN sets the DomainARN field's value.
-func (s *ElasticsearchDestinationUpdate) SetDomainARN(v string) *ElasticsearchDestinationUpdate {
-	s.DomainARN = &v
-	return s
-}
-
-// SetIndexName sets the IndexName field's value.
-func (s *ElasticsearchDestinationUpdate) SetIndexName(v string) *ElasticsearchDestinationUpdate {
-	s.IndexName = &v
-	return s
-}
-
-// SetIndexRotationPeriod sets the IndexRotationPeriod field's value.
-func (s *ElasticsearchDestinationUpdate) SetIndexRotationPeriod(v ElasticsearchIndexRotationPeriod) *ElasticsearchDestinationUpdate {
-	s.IndexRotationPeriod = v
-	return s
-}
-
-// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
-func (s *ElasticsearchDestinationUpdate) SetProcessingConfiguration(v *ProcessingConfiguration) *ElasticsearchDestinationUpdate {
-	s.ProcessingConfiguration = v
-	return s
-}
-
-// SetRetryOptions sets the RetryOptions field's value.
-func (s *ElasticsearchDestinationUpdate) SetRetryOptions(v *ElasticsearchRetryOptions) *ElasticsearchDestinationUpdate {
-	s.RetryOptions = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *ElasticsearchDestinationUpdate) SetRoleARN(v string) *ElasticsearchDestinationUpdate {
-	s.RoleARN = &v
-	return s
-}
-
-// SetS3Update sets the S3Update field's value.
-func (s *ElasticsearchDestinationUpdate) SetS3Update(v *S3DestinationUpdate) *ElasticsearchDestinationUpdate {
-	s.S3Update = v
-	return s
-}
-
-// SetTypeName sets the TypeName field's value.
-func (s *ElasticsearchDestinationUpdate) SetTypeName(v string) *ElasticsearchDestinationUpdate {
-	s.TypeName = &v
-	return s
-}
-
 // Configures retry behavior in case Kinesis Firehose is unable to deliver documents
 // to Amazon ES.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ElasticsearchRetryOptions
@@ -1839,12 +1383,6 @@ func (s ElasticsearchRetryOptions) String() string {
 // GoString returns the string representation
 func (s ElasticsearchRetryOptions) GoString() string {
 	return s.String()
-}
-
-// SetDurationInSeconds sets the DurationInSeconds field's value.
-func (s *ElasticsearchRetryOptions) SetDurationInSeconds(v int64) *ElasticsearchRetryOptions {
-	s.DurationInSeconds = &v
-	return s
 }
 
 // Describes the encryption for a destination in Amazon S3.
@@ -1883,18 +1421,6 @@ func (s *EncryptionConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKMSEncryptionConfig sets the KMSEncryptionConfig field's value.
-func (s *EncryptionConfiguration) SetKMSEncryptionConfig(v *KMSEncryptionConfig) *EncryptionConfiguration {
-	s.KMSEncryptionConfig = v
-	return s
-}
-
-// SetNoEncryptionConfig sets the NoEncryptionConfig field's value.
-func (s *EncryptionConfiguration) SetNoEncryptionConfig(v NoEncryptionConfig) *EncryptionConfiguration {
-	s.NoEncryptionConfig = v
-	return s
 }
 
 // Describes the configuration of a destination in Amazon S3.
@@ -1996,66 +1522,6 @@ func (s *ExtendedS3DestinationConfiguration) Validate() error {
 	return nil
 }
 
-// SetBucketARN sets the BucketARN field's value.
-func (s *ExtendedS3DestinationConfiguration) SetBucketARN(v string) *ExtendedS3DestinationConfiguration {
-	s.BucketARN = &v
-	return s
-}
-
-// SetBufferingHints sets the BufferingHints field's value.
-func (s *ExtendedS3DestinationConfiguration) SetBufferingHints(v *BufferingHints) *ExtendedS3DestinationConfiguration {
-	s.BufferingHints = v
-	return s
-}
-
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *ExtendedS3DestinationConfiguration) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *ExtendedS3DestinationConfiguration {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetCompressionFormat sets the CompressionFormat field's value.
-func (s *ExtendedS3DestinationConfiguration) SetCompressionFormat(v CompressionFormat) *ExtendedS3DestinationConfiguration {
-	s.CompressionFormat = v
-	return s
-}
-
-// SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
-func (s *ExtendedS3DestinationConfiguration) SetEncryptionConfiguration(v *EncryptionConfiguration) *ExtendedS3DestinationConfiguration {
-	s.EncryptionConfiguration = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ExtendedS3DestinationConfiguration) SetPrefix(v string) *ExtendedS3DestinationConfiguration {
-	s.Prefix = &v
-	return s
-}
-
-// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
-func (s *ExtendedS3DestinationConfiguration) SetProcessingConfiguration(v *ProcessingConfiguration) *ExtendedS3DestinationConfiguration {
-	s.ProcessingConfiguration = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *ExtendedS3DestinationConfiguration) SetRoleARN(v string) *ExtendedS3DestinationConfiguration {
-	s.RoleARN = &v
-	return s
-}
-
-// SetS3BackupConfiguration sets the S3BackupConfiguration field's value.
-func (s *ExtendedS3DestinationConfiguration) SetS3BackupConfiguration(v *S3DestinationConfiguration) *ExtendedS3DestinationConfiguration {
-	s.S3BackupConfiguration = v
-	return s
-}
-
-// SetS3BackupMode sets the S3BackupMode field's value.
-func (s *ExtendedS3DestinationConfiguration) SetS3BackupMode(v S3BackupMode) *ExtendedS3DestinationConfiguration {
-	s.S3BackupMode = v
-	return s
-}
-
 // Describes a destination in Amazon S3.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ExtendedS3DestinationDescription
 type ExtendedS3DestinationDescription struct {
@@ -2115,66 +1581,6 @@ func (s ExtendedS3DestinationDescription) String() string {
 // GoString returns the string representation
 func (s ExtendedS3DestinationDescription) GoString() string {
 	return s.String()
-}
-
-// SetBucketARN sets the BucketARN field's value.
-func (s *ExtendedS3DestinationDescription) SetBucketARN(v string) *ExtendedS3DestinationDescription {
-	s.BucketARN = &v
-	return s
-}
-
-// SetBufferingHints sets the BufferingHints field's value.
-func (s *ExtendedS3DestinationDescription) SetBufferingHints(v *BufferingHints) *ExtendedS3DestinationDescription {
-	s.BufferingHints = v
-	return s
-}
-
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *ExtendedS3DestinationDescription) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *ExtendedS3DestinationDescription {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetCompressionFormat sets the CompressionFormat field's value.
-func (s *ExtendedS3DestinationDescription) SetCompressionFormat(v CompressionFormat) *ExtendedS3DestinationDescription {
-	s.CompressionFormat = v
-	return s
-}
-
-// SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
-func (s *ExtendedS3DestinationDescription) SetEncryptionConfiguration(v *EncryptionConfiguration) *ExtendedS3DestinationDescription {
-	s.EncryptionConfiguration = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ExtendedS3DestinationDescription) SetPrefix(v string) *ExtendedS3DestinationDescription {
-	s.Prefix = &v
-	return s
-}
-
-// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
-func (s *ExtendedS3DestinationDescription) SetProcessingConfiguration(v *ProcessingConfiguration) *ExtendedS3DestinationDescription {
-	s.ProcessingConfiguration = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *ExtendedS3DestinationDescription) SetRoleARN(v string) *ExtendedS3DestinationDescription {
-	s.RoleARN = &v
-	return s
-}
-
-// SetS3BackupDescription sets the S3BackupDescription field's value.
-func (s *ExtendedS3DestinationDescription) SetS3BackupDescription(v *S3DestinationDescription) *ExtendedS3DestinationDescription {
-	s.S3BackupDescription = v
-	return s
-}
-
-// SetS3BackupMode sets the S3BackupMode field's value.
-func (s *ExtendedS3DestinationDescription) SetS3BackupMode(v S3BackupMode) *ExtendedS3DestinationDescription {
-	s.S3BackupMode = v
-	return s
 }
 
 // Describes an update for a destination in Amazon S3.
@@ -2264,145 +1670,6 @@ func (s *ExtendedS3DestinationUpdate) Validate() error {
 	return nil
 }
 
-// SetBucketARN sets the BucketARN field's value.
-func (s *ExtendedS3DestinationUpdate) SetBucketARN(v string) *ExtendedS3DestinationUpdate {
-	s.BucketARN = &v
-	return s
-}
-
-// SetBufferingHints sets the BufferingHints field's value.
-func (s *ExtendedS3DestinationUpdate) SetBufferingHints(v *BufferingHints) *ExtendedS3DestinationUpdate {
-	s.BufferingHints = v
-	return s
-}
-
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *ExtendedS3DestinationUpdate) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *ExtendedS3DestinationUpdate {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetCompressionFormat sets the CompressionFormat field's value.
-func (s *ExtendedS3DestinationUpdate) SetCompressionFormat(v CompressionFormat) *ExtendedS3DestinationUpdate {
-	s.CompressionFormat = v
-	return s
-}
-
-// SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
-func (s *ExtendedS3DestinationUpdate) SetEncryptionConfiguration(v *EncryptionConfiguration) *ExtendedS3DestinationUpdate {
-	s.EncryptionConfiguration = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *ExtendedS3DestinationUpdate) SetPrefix(v string) *ExtendedS3DestinationUpdate {
-	s.Prefix = &v
-	return s
-}
-
-// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
-func (s *ExtendedS3DestinationUpdate) SetProcessingConfiguration(v *ProcessingConfiguration) *ExtendedS3DestinationUpdate {
-	s.ProcessingConfiguration = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *ExtendedS3DestinationUpdate) SetRoleARN(v string) *ExtendedS3DestinationUpdate {
-	s.RoleARN = &v
-	return s
-}
-
-// SetS3BackupMode sets the S3BackupMode field's value.
-func (s *ExtendedS3DestinationUpdate) SetS3BackupMode(v S3BackupMode) *ExtendedS3DestinationUpdate {
-	s.S3BackupMode = v
-	return s
-}
-
-// SetS3BackupUpdate sets the S3BackupUpdate field's value.
-func (s *ExtendedS3DestinationUpdate) SetS3BackupUpdate(v *S3DestinationUpdate) *ExtendedS3DestinationUpdate {
-	s.S3BackupUpdate = v
-	return s
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStreamInput
-type GetKinesisStreamInput struct {
-	_ struct{} `type:"structure"`
-
-	// DeliveryStreamARN is a required field
-	DeliveryStreamARN *string `min:"1" type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s GetKinesisStreamInput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s GetKinesisStreamInput) GoString() string {
-	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *GetKinesisStreamInput) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "GetKinesisStreamInput"}
-
-	if s.DeliveryStreamARN == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DeliveryStreamARN"))
-	}
-	if s.DeliveryStreamARN != nil && len(*s.DeliveryStreamARN) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DeliveryStreamARN", 1))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// SetDeliveryStreamARN sets the DeliveryStreamARN field's value.
-func (s *GetKinesisStreamInput) SetDeliveryStreamARN(v string) *GetKinesisStreamInput {
-	s.DeliveryStreamARN = &v
-	return s
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/GetKinesisStreamOutput
-type GetKinesisStreamOutput struct {
-	_ struct{} `type:"structure"`
-
-	responseMetadata aws.Response
-
-	CredentialsForReadingKinesisStream *SessionCredentials `type:"structure"`
-
-	KinesisStreamARN *string `min:"1" type:"string"`
-}
-
-// String returns the string representation
-func (s GetKinesisStreamOutput) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s GetKinesisStreamOutput) GoString() string {
-	return s.String()
-}
-
-// SDKResponseMetdata return sthe response metadata for the API.
-func (s GetKinesisStreamOutput) SDKResponseMetadata() aws.Response {
-	return s.responseMetadata
-}
-
-// SetCredentialsForReadingKinesisStream sets the CredentialsForReadingKinesisStream field's value.
-func (s *GetKinesisStreamOutput) SetCredentialsForReadingKinesisStream(v *SessionCredentials) *GetKinesisStreamOutput {
-	s.CredentialsForReadingKinesisStream = v
-	return s
-}
-
-// SetKinesisStreamARN sets the KinesisStreamARN field's value.
-func (s *GetKinesisStreamOutput) SetKinesisStreamARN(v string) *GetKinesisStreamOutput {
-	s.KinesisStreamARN = &v
-	return s
-}
-
 // Describes an encryption key for a destination in Amazon S3.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KMSEncryptionConfig
 type KMSEncryptionConfig struct {
@@ -2440,12 +1707,6 @@ func (s *KMSEncryptionConfig) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAWSKMSKeyARN sets the AWSKMSKeyARN field's value.
-func (s *KMSEncryptionConfig) SetAWSKMSKeyARN(v string) *KMSEncryptionConfig {
-	s.AWSKMSKeyARN = &v
-	return s
 }
 
 // The stream and role ARNs for a Kinesis stream used as the source for a delivery
@@ -2499,18 +1760,6 @@ func (s *KinesisStreamSourceConfiguration) Validate() error {
 	return nil
 }
 
-// SetKinesisStreamARN sets the KinesisStreamARN field's value.
-func (s *KinesisStreamSourceConfiguration) SetKinesisStreamARN(v string) *KinesisStreamSourceConfiguration {
-	s.KinesisStreamARN = &v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *KinesisStreamSourceConfiguration) SetRoleARN(v string) *KinesisStreamSourceConfiguration {
-	s.RoleARN = &v
-	return s
-}
-
 // Details about a Kinesis stream used as the source for a Kinesis Firehose
 // delivery stream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/KinesisStreamSourceDescription
@@ -2538,24 +1787,6 @@ func (s KinesisStreamSourceDescription) GoString() string {
 	return s.String()
 }
 
-// SetDeliveryStartTimestamp sets the DeliveryStartTimestamp field's value.
-func (s *KinesisStreamSourceDescription) SetDeliveryStartTimestamp(v time.Time) *KinesisStreamSourceDescription {
-	s.DeliveryStartTimestamp = &v
-	return s
-}
-
-// SetKinesisStreamARN sets the KinesisStreamARN field's value.
-func (s *KinesisStreamSourceDescription) SetKinesisStreamARN(v string) *KinesisStreamSourceDescription {
-	s.KinesisStreamARN = &v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *KinesisStreamSourceDescription) SetRoleARN(v string) *KinesisStreamSourceDescription {
-	s.RoleARN = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreamsInput
 type ListDeliveryStreamsInput struct {
 	_ struct{} `type:"structure"`
@@ -2574,7 +1805,7 @@ type ListDeliveryStreamsInput struct {
 	// The name of the delivery stream to start the list with.
 	ExclusiveStartDeliveryStreamName *string `min:"1" type:"string"`
 
-	// The maximum number of delivery streams to list.
+	// The maximum number of delivery streams to list. The default value is 10.
 	Limit *int64 `min:"1" type:"integer"`
 }
 
@@ -2602,24 +1833,6 @@ func (s *ListDeliveryStreamsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeliveryStreamType sets the DeliveryStreamType field's value.
-func (s *ListDeliveryStreamsInput) SetDeliveryStreamType(v DeliveryStreamType) *ListDeliveryStreamsInput {
-	s.DeliveryStreamType = v
-	return s
-}
-
-// SetExclusiveStartDeliveryStreamName sets the ExclusiveStartDeliveryStreamName field's value.
-func (s *ListDeliveryStreamsInput) SetExclusiveStartDeliveryStreamName(v string) *ListDeliveryStreamsInput {
-	s.ExclusiveStartDeliveryStreamName = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListDeliveryStreamsInput) SetLimit(v int64) *ListDeliveryStreamsInput {
-	s.Limit = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ListDeliveryStreamsOutput
@@ -2652,18 +1865,6 @@ func (s ListDeliveryStreamsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDeliveryStreamsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeliveryStreamNames sets the DeliveryStreamNames field's value.
-func (s *ListDeliveryStreamsOutput) SetDeliveryStreamNames(v []string) *ListDeliveryStreamsOutput {
-	s.DeliveryStreamNames = v
-	return s
-}
-
-// SetHasMoreDeliveryStreams sets the HasMoreDeliveryStreams field's value.
-func (s *ListDeliveryStreamsOutput) SetHasMoreDeliveryStreams(v bool) *ListDeliveryStreamsOutput {
-	s.HasMoreDeliveryStreams = &v
-	return s
 }
 
 // Describes a data processing configuration.
@@ -2703,18 +1904,6 @@ func (s *ProcessingConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *ProcessingConfiguration) SetEnabled(v bool) *ProcessingConfiguration {
-	s.Enabled = &v
-	return s
-}
-
-// SetProcessors sets the Processors field's value.
-func (s *ProcessingConfiguration) SetProcessors(v []Processor) *ProcessingConfiguration {
-	s.Processors = v
-	return s
 }
 
 // Describes a data processor.
@@ -2761,18 +1950,6 @@ func (s *Processor) Validate() error {
 	return nil
 }
 
-// SetParameters sets the Parameters field's value.
-func (s *Processor) SetParameters(v []ProcessorParameter) *Processor {
-	s.Parameters = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Processor) SetType(v ProcessorType) *Processor {
-	s.Type = v
-	return s
-}
-
 // Describes the processor parameter.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/ProcessorParameter
 type ProcessorParameter struct {
@@ -2817,18 +1994,6 @@ func (s *ProcessorParameter) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetParameterName sets the ParameterName field's value.
-func (s *ProcessorParameter) SetParameterName(v ProcessorParameterName) *ProcessorParameter {
-	s.ParameterName = v
-	return s
-}
-
-// SetParameterValue sets the ParameterValue field's value.
-func (s *ProcessorParameter) SetParameterValue(v string) *ProcessorParameter {
-	s.ParameterValue = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatchInput
@@ -2887,18 +2052,6 @@ func (s *PutRecordBatchInput) Validate() error {
 	return nil
 }
 
-// SetDeliveryStreamName sets the DeliveryStreamName field's value.
-func (s *PutRecordBatchInput) SetDeliveryStreamName(v string) *PutRecordBatchInput {
-	s.DeliveryStreamName = &v
-	return s
-}
-
-// SetRecords sets the Records field's value.
-func (s *PutRecordBatchInput) SetRecords(v []Record) *PutRecordBatchInput {
-	s.Records = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordBatchOutput
 type PutRecordBatchOutput struct {
 	_ struct{} `type:"structure"`
@@ -2932,18 +2085,6 @@ func (s PutRecordBatchOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetFailedPutCount sets the FailedPutCount field's value.
-func (s *PutRecordBatchOutput) SetFailedPutCount(v int64) *PutRecordBatchOutput {
-	s.FailedPutCount = &v
-	return s
-}
-
-// SetRequestResponses sets the RequestResponses field's value.
-func (s *PutRecordBatchOutput) SetRequestResponses(v []PutRecordBatchResponseEntry) *PutRecordBatchOutput {
-	s.RequestResponses = v
-	return s
-}
-
 // Contains the result for an individual record from a PutRecordBatch request.
 // If the record is successfully added to your delivery stream, it receives
 // a record ID. If the record fails to be added to your delivery stream, the
@@ -2970,24 +2111,6 @@ func (s PutRecordBatchResponseEntry) String() string {
 // GoString returns the string representation
 func (s PutRecordBatchResponseEntry) GoString() string {
 	return s.String()
-}
-
-// SetErrorCode sets the ErrorCode field's value.
-func (s *PutRecordBatchResponseEntry) SetErrorCode(v string) *PutRecordBatchResponseEntry {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *PutRecordBatchResponseEntry) SetErrorMessage(v string) *PutRecordBatchResponseEntry {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetRecordId sets the RecordId field's value.
-func (s *PutRecordBatchResponseEntry) SetRecordId(v string) *PutRecordBatchResponseEntry {
-	s.RecordId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordInput
@@ -3041,18 +2164,6 @@ func (s *PutRecordInput) Validate() error {
 	return nil
 }
 
-// SetDeliveryStreamName sets the DeliveryStreamName field's value.
-func (s *PutRecordInput) SetDeliveryStreamName(v string) *PutRecordInput {
-	s.DeliveryStreamName = &v
-	return s
-}
-
-// SetRecord sets the Record field's value.
-func (s *PutRecordInput) SetRecord(v *Record) *PutRecordInput {
-	s.Record = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/PutRecordOutput
 type PutRecordOutput struct {
 	_ struct{} `type:"structure"`
@@ -3078,12 +2189,6 @@ func (s PutRecordOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutRecordOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRecordId sets the RecordId field's value.
-func (s *PutRecordOutput) SetRecordId(v string) *PutRecordOutput {
-	s.RecordId = &v
-	return s
 }
 
 // The unit of data in a delivery stream.
@@ -3122,12 +2227,6 @@ func (s *Record) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetData sets the Data field's value.
-func (s *Record) SetData(v []byte) *Record {
-	s.Data = v
-	return s
 }
 
 // Describes the configuration of a destination in Amazon Redshift.
@@ -3263,72 +2362,6 @@ func (s *RedshiftDestinationConfiguration) Validate() error {
 	return nil
 }
 
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *RedshiftDestinationConfiguration) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *RedshiftDestinationConfiguration {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetClusterJDBCURL sets the ClusterJDBCURL field's value.
-func (s *RedshiftDestinationConfiguration) SetClusterJDBCURL(v string) *RedshiftDestinationConfiguration {
-	s.ClusterJDBCURL = &v
-	return s
-}
-
-// SetCopyCommand sets the CopyCommand field's value.
-func (s *RedshiftDestinationConfiguration) SetCopyCommand(v *CopyCommand) *RedshiftDestinationConfiguration {
-	s.CopyCommand = v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *RedshiftDestinationConfiguration) SetPassword(v string) *RedshiftDestinationConfiguration {
-	s.Password = &v
-	return s
-}
-
-// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
-func (s *RedshiftDestinationConfiguration) SetProcessingConfiguration(v *ProcessingConfiguration) *RedshiftDestinationConfiguration {
-	s.ProcessingConfiguration = v
-	return s
-}
-
-// SetRetryOptions sets the RetryOptions field's value.
-func (s *RedshiftDestinationConfiguration) SetRetryOptions(v *RedshiftRetryOptions) *RedshiftDestinationConfiguration {
-	s.RetryOptions = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *RedshiftDestinationConfiguration) SetRoleARN(v string) *RedshiftDestinationConfiguration {
-	s.RoleARN = &v
-	return s
-}
-
-// SetS3BackupConfiguration sets the S3BackupConfiguration field's value.
-func (s *RedshiftDestinationConfiguration) SetS3BackupConfiguration(v *S3DestinationConfiguration) *RedshiftDestinationConfiguration {
-	s.S3BackupConfiguration = v
-	return s
-}
-
-// SetS3BackupMode sets the S3BackupMode field's value.
-func (s *RedshiftDestinationConfiguration) SetS3BackupMode(v RedshiftS3BackupMode) *RedshiftDestinationConfiguration {
-	s.S3BackupMode = v
-	return s
-}
-
-// SetS3Configuration sets the S3Configuration field's value.
-func (s *RedshiftDestinationConfiguration) SetS3Configuration(v *S3DestinationConfiguration) *RedshiftDestinationConfiguration {
-	s.S3Configuration = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *RedshiftDestinationConfiguration) SetUsername(v string) *RedshiftDestinationConfiguration {
-	s.Username = &v
-	return s
-}
-
 // Describes a destination in Amazon Redshift.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftDestinationDescription
 type RedshiftDestinationDescription struct {
@@ -3384,66 +2417,6 @@ func (s RedshiftDestinationDescription) String() string {
 // GoString returns the string representation
 func (s RedshiftDestinationDescription) GoString() string {
 	return s.String()
-}
-
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *RedshiftDestinationDescription) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *RedshiftDestinationDescription {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetClusterJDBCURL sets the ClusterJDBCURL field's value.
-func (s *RedshiftDestinationDescription) SetClusterJDBCURL(v string) *RedshiftDestinationDescription {
-	s.ClusterJDBCURL = &v
-	return s
-}
-
-// SetCopyCommand sets the CopyCommand field's value.
-func (s *RedshiftDestinationDescription) SetCopyCommand(v *CopyCommand) *RedshiftDestinationDescription {
-	s.CopyCommand = v
-	return s
-}
-
-// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
-func (s *RedshiftDestinationDescription) SetProcessingConfiguration(v *ProcessingConfiguration) *RedshiftDestinationDescription {
-	s.ProcessingConfiguration = v
-	return s
-}
-
-// SetRetryOptions sets the RetryOptions field's value.
-func (s *RedshiftDestinationDescription) SetRetryOptions(v *RedshiftRetryOptions) *RedshiftDestinationDescription {
-	s.RetryOptions = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *RedshiftDestinationDescription) SetRoleARN(v string) *RedshiftDestinationDescription {
-	s.RoleARN = &v
-	return s
-}
-
-// SetS3BackupDescription sets the S3BackupDescription field's value.
-func (s *RedshiftDestinationDescription) SetS3BackupDescription(v *S3DestinationDescription) *RedshiftDestinationDescription {
-	s.S3BackupDescription = v
-	return s
-}
-
-// SetS3BackupMode sets the S3BackupMode field's value.
-func (s *RedshiftDestinationDescription) SetS3BackupMode(v RedshiftS3BackupMode) *RedshiftDestinationDescription {
-	s.S3BackupMode = v
-	return s
-}
-
-// SetS3DestinationDescription sets the S3DestinationDescription field's value.
-func (s *RedshiftDestinationDescription) SetS3DestinationDescription(v *S3DestinationDescription) *RedshiftDestinationDescription {
-	s.S3DestinationDescription = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *RedshiftDestinationDescription) SetUsername(v string) *RedshiftDestinationDescription {
-	s.Username = &v
-	return s
 }
 
 // Describes an update for a destination in Amazon Redshift.
@@ -3542,72 +2515,6 @@ func (s *RedshiftDestinationUpdate) Validate() error {
 	return nil
 }
 
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *RedshiftDestinationUpdate) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *RedshiftDestinationUpdate {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetClusterJDBCURL sets the ClusterJDBCURL field's value.
-func (s *RedshiftDestinationUpdate) SetClusterJDBCURL(v string) *RedshiftDestinationUpdate {
-	s.ClusterJDBCURL = &v
-	return s
-}
-
-// SetCopyCommand sets the CopyCommand field's value.
-func (s *RedshiftDestinationUpdate) SetCopyCommand(v *CopyCommand) *RedshiftDestinationUpdate {
-	s.CopyCommand = v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *RedshiftDestinationUpdate) SetPassword(v string) *RedshiftDestinationUpdate {
-	s.Password = &v
-	return s
-}
-
-// SetProcessingConfiguration sets the ProcessingConfiguration field's value.
-func (s *RedshiftDestinationUpdate) SetProcessingConfiguration(v *ProcessingConfiguration) *RedshiftDestinationUpdate {
-	s.ProcessingConfiguration = v
-	return s
-}
-
-// SetRetryOptions sets the RetryOptions field's value.
-func (s *RedshiftDestinationUpdate) SetRetryOptions(v *RedshiftRetryOptions) *RedshiftDestinationUpdate {
-	s.RetryOptions = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *RedshiftDestinationUpdate) SetRoleARN(v string) *RedshiftDestinationUpdate {
-	s.RoleARN = &v
-	return s
-}
-
-// SetS3BackupMode sets the S3BackupMode field's value.
-func (s *RedshiftDestinationUpdate) SetS3BackupMode(v RedshiftS3BackupMode) *RedshiftDestinationUpdate {
-	s.S3BackupMode = v
-	return s
-}
-
-// SetS3BackupUpdate sets the S3BackupUpdate field's value.
-func (s *RedshiftDestinationUpdate) SetS3BackupUpdate(v *S3DestinationUpdate) *RedshiftDestinationUpdate {
-	s.S3BackupUpdate = v
-	return s
-}
-
-// SetS3Update sets the S3Update field's value.
-func (s *RedshiftDestinationUpdate) SetS3Update(v *S3DestinationUpdate) *RedshiftDestinationUpdate {
-	s.S3Update = v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *RedshiftDestinationUpdate) SetUsername(v string) *RedshiftDestinationUpdate {
-	s.Username = &v
-	return s
-}
-
 // Configures retry behavior in case Kinesis Firehose is unable to deliver documents
 // to Amazon Redshift.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/RedshiftRetryOptions
@@ -3630,12 +2537,6 @@ func (s RedshiftRetryOptions) String() string {
 // GoString returns the string representation
 func (s RedshiftRetryOptions) GoString() string {
 	return s.String()
-}
-
-// SetDurationInSeconds sets the DurationInSeconds field's value.
-func (s *RedshiftRetryOptions) SetDurationInSeconds(v int64) *RedshiftRetryOptions {
-	s.DurationInSeconds = &v
-	return s
 }
 
 // Describes the configuration of a destination in Amazon S3.
@@ -3723,48 +2624,6 @@ func (s *S3DestinationConfiguration) Validate() error {
 	return nil
 }
 
-// SetBucketARN sets the BucketARN field's value.
-func (s *S3DestinationConfiguration) SetBucketARN(v string) *S3DestinationConfiguration {
-	s.BucketARN = &v
-	return s
-}
-
-// SetBufferingHints sets the BufferingHints field's value.
-func (s *S3DestinationConfiguration) SetBufferingHints(v *BufferingHints) *S3DestinationConfiguration {
-	s.BufferingHints = v
-	return s
-}
-
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *S3DestinationConfiguration) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *S3DestinationConfiguration {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetCompressionFormat sets the CompressionFormat field's value.
-func (s *S3DestinationConfiguration) SetCompressionFormat(v CompressionFormat) *S3DestinationConfiguration {
-	s.CompressionFormat = v
-	return s
-}
-
-// SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
-func (s *S3DestinationConfiguration) SetEncryptionConfiguration(v *EncryptionConfiguration) *S3DestinationConfiguration {
-	s.EncryptionConfiguration = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *S3DestinationConfiguration) SetPrefix(v string) *S3DestinationConfiguration {
-	s.Prefix = &v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *S3DestinationConfiguration) SetRoleARN(v string) *S3DestinationConfiguration {
-	s.RoleARN = &v
-	return s
-}
-
 // Describes a destination in Amazon S3.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/S3DestinationDescription
 type S3DestinationDescription struct {
@@ -3816,48 +2675,6 @@ func (s S3DestinationDescription) String() string {
 // GoString returns the string representation
 func (s S3DestinationDescription) GoString() string {
 	return s.String()
-}
-
-// SetBucketARN sets the BucketARN field's value.
-func (s *S3DestinationDescription) SetBucketARN(v string) *S3DestinationDescription {
-	s.BucketARN = &v
-	return s
-}
-
-// SetBufferingHints sets the BufferingHints field's value.
-func (s *S3DestinationDescription) SetBufferingHints(v *BufferingHints) *S3DestinationDescription {
-	s.BufferingHints = v
-	return s
-}
-
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *S3DestinationDescription) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *S3DestinationDescription {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetCompressionFormat sets the CompressionFormat field's value.
-func (s *S3DestinationDescription) SetCompressionFormat(v CompressionFormat) *S3DestinationDescription {
-	s.CompressionFormat = v
-	return s
-}
-
-// SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
-func (s *S3DestinationDescription) SetEncryptionConfiguration(v *EncryptionConfiguration) *S3DestinationDescription {
-	s.EncryptionConfiguration = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *S3DestinationDescription) SetPrefix(v string) *S3DestinationDescription {
-	s.Prefix = &v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *S3DestinationDescription) SetRoleARN(v string) *S3DestinationDescription {
-	s.RoleARN = &v
-	return s
 }
 
 // Describes an update for a destination in Amazon S3.
@@ -3933,99 +2750,6 @@ func (s *S3DestinationUpdate) Validate() error {
 	return nil
 }
 
-// SetBucketARN sets the BucketARN field's value.
-func (s *S3DestinationUpdate) SetBucketARN(v string) *S3DestinationUpdate {
-	s.BucketARN = &v
-	return s
-}
-
-// SetBufferingHints sets the BufferingHints field's value.
-func (s *S3DestinationUpdate) SetBufferingHints(v *BufferingHints) *S3DestinationUpdate {
-	s.BufferingHints = v
-	return s
-}
-
-// SetCloudWatchLoggingOptions sets the CloudWatchLoggingOptions field's value.
-func (s *S3DestinationUpdate) SetCloudWatchLoggingOptions(v *CloudWatchLoggingOptions) *S3DestinationUpdate {
-	s.CloudWatchLoggingOptions = v
-	return s
-}
-
-// SetCompressionFormat sets the CompressionFormat field's value.
-func (s *S3DestinationUpdate) SetCompressionFormat(v CompressionFormat) *S3DestinationUpdate {
-	s.CompressionFormat = v
-	return s
-}
-
-// SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
-func (s *S3DestinationUpdate) SetEncryptionConfiguration(v *EncryptionConfiguration) *S3DestinationUpdate {
-	s.EncryptionConfiguration = v
-	return s
-}
-
-// SetPrefix sets the Prefix field's value.
-func (s *S3DestinationUpdate) SetPrefix(v string) *S3DestinationUpdate {
-	s.Prefix = &v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *S3DestinationUpdate) SetRoleARN(v string) *S3DestinationUpdate {
-	s.RoleARN = &v
-	return s
-}
-
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SessionCredentials
-type SessionCredentials struct {
-	_ struct{} `type:"structure"`
-
-	// AccessKeyId is a required field
-	AccessKeyId *string `type:"string" required:"true"`
-
-	// Expiration is a required field
-	Expiration *time.Time `type:"timestamp" timestampFormat:"unix" required:"true"`
-
-	// SecretAccessKey is a required field
-	SecretAccessKey *string `type:"string" required:"true"`
-
-	// SessionToken is a required field
-	SessionToken *string `type:"string" required:"true"`
-}
-
-// String returns the string representation
-func (s SessionCredentials) String() string {
-	return awsutil.Prettify(s)
-}
-
-// GoString returns the string representation
-func (s SessionCredentials) GoString() string {
-	return s.String()
-}
-
-// SetAccessKeyId sets the AccessKeyId field's value.
-func (s *SessionCredentials) SetAccessKeyId(v string) *SessionCredentials {
-	s.AccessKeyId = &v
-	return s
-}
-
-// SetExpiration sets the Expiration field's value.
-func (s *SessionCredentials) SetExpiration(v time.Time) *SessionCredentials {
-	s.Expiration = &v
-	return s
-}
-
-// SetSecretAccessKey sets the SecretAccessKey field's value.
-func (s *SessionCredentials) SetSecretAccessKey(v string) *SessionCredentials {
-	s.SecretAccessKey = &v
-	return s
-}
-
-// SetSessionToken sets the SessionToken field's value.
-func (s *SessionCredentials) SetSessionToken(v string) *SessionCredentials {
-	s.SessionToken = &v
-	return s
-}
-
 // Details about a Kinesis stream used as the source for a Kinesis Firehose
 // delivery stream.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SourceDescription
@@ -4046,10 +2770,255 @@ func (s SourceDescription) GoString() string {
 	return s.String()
 }
 
-// SetKinesisStreamSourceDescription sets the KinesisStreamSourceDescription field's value.
-func (s *SourceDescription) SetKinesisStreamSourceDescription(v *KinesisStreamSourceDescription) *SourceDescription {
-	s.KinesisStreamSourceDescription = v
-	return s
+// Describes the configuration of a destination in Splunk.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationConfiguration
+type SplunkDestinationConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The amount of time that Kinesis Firehose waits to receive an acknowledgment
+	// from Splunk after it sends it data. At the end of the timeout period Kinesis
+	// Firehose either tries to send the data again or considers it an error, based
+	// on your retry settings.
+	HECAcknowledgmentTimeoutInSeconds *int64 `min:"180" type:"integer"`
+
+	// The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your
+	// data.
+	//
+	// HECEndpoint is a required field
+	HECEndpoint *string `type:"string" required:"true"`
+
+	// This type can be either "Raw" or "Event".
+	//
+	// HECEndpointType is a required field
+	HECEndpointType HECEndpointType `type:"string" required:"true" enum:"true"`
+
+	// This is a GUID you obtain from your Splunk cluster when you create a new
+	// HEC endpoint.
+	//
+	// HECToken is a required field
+	HECToken *string `type:"string" required:"true"`
+
+	// The data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The retry behavior in case Kinesis Firehose is unable to deliver data to
+	// Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+	RetryOptions *SplunkRetryOptions `type:"structure"`
+
+	// Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly,
+	// Kinesis Firehose writes any data that could not be indexed to the configured
+	// Amazon S3 destination. When set to AllDocuments, Kinesis Firehose delivers
+	// all incoming records to Amazon S3, and also writes failed documents to Amazon
+	// S3. Default value is FailedDocumentsOnly.
+	S3BackupMode SplunkS3BackupMode `type:"string" enum:"true"`
+
+	// The configuration for the backup Amazon S3 location.
+	//
+	// S3Configuration is a required field
+	S3Configuration *S3DestinationConfiguration `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s SplunkDestinationConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SplunkDestinationConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SplunkDestinationConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SplunkDestinationConfiguration"}
+	if s.HECAcknowledgmentTimeoutInSeconds != nil && *s.HECAcknowledgmentTimeoutInSeconds < 180 {
+		invalidParams.Add(aws.NewErrParamMinValue("HECAcknowledgmentTimeoutInSeconds", 180))
+	}
+
+	if s.HECEndpoint == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HECEndpoint"))
+	}
+	if len(s.HECEndpointType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("HECEndpointType"))
+	}
+
+	if s.HECToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HECToken"))
+	}
+
+	if s.S3Configuration == nil {
+		invalidParams.Add(aws.NewErrParamRequired("S3Configuration"))
+	}
+	if s.ProcessingConfiguration != nil {
+		if err := s.ProcessingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.S3Configuration != nil {
+		if err := s.S3Configuration.Validate(); err != nil {
+			invalidParams.AddNested("S3Configuration", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes a destination in Splunk.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationDescription
+type SplunkDestinationDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The amount of time that Kinesis Firehose waits to receive an acknowledgment
+	// from Splunk after it sends it data. At the end of the timeout period Kinesis
+	// Firehose either tries to send the data again or considers it an error, based
+	// on your retry settings.
+	HECAcknowledgmentTimeoutInSeconds *int64 `min:"180" type:"integer"`
+
+	// The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your
+	// data.
+	HECEndpoint *string `type:"string"`
+
+	// This type can be either "Raw" or "Event".
+	HECEndpointType HECEndpointType `type:"string" enum:"true"`
+
+	// This is a GUID you obtain from your Splunk cluster when you create a new
+	// HEC endpoint.
+	HECToken *string `type:"string"`
+
+	// The data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The retry behavior in case Kinesis Firehose is unable to deliver data to
+	// Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+	RetryOptions *SplunkRetryOptions `type:"structure"`
+
+	// Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly,
+	// Kinesis Firehose writes any data that could not be indexed to the configured
+	// Amazon S3 destination. When set to AllDocuments, Kinesis Firehose delivers
+	// all incoming records to Amazon S3, and also writes failed documents to Amazon
+	// S3. Default value is FailedDocumentsOnly.
+	S3BackupMode SplunkS3BackupMode `type:"string" enum:"true"`
+
+	// The Amazon S3 destination.>
+	S3DestinationDescription *S3DestinationDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s SplunkDestinationDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SplunkDestinationDescription) GoString() string {
+	return s.String()
+}
+
+// Describes an update for a destination in Splunk.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkDestinationUpdate
+type SplunkDestinationUpdate struct {
+	_ struct{} `type:"structure"`
+
+	// The CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions `type:"structure"`
+
+	// The amount of time that Kinesis Firehose waits to receive an acknowledgment
+	// from Splunk after it sends it data. At the end of the timeout period Kinesis
+	// Firehose either tries to send the data again or considers it an error, based
+	// on your retry settings.
+	HECAcknowledgmentTimeoutInSeconds *int64 `min:"180" type:"integer"`
+
+	// The HTTP Event Collector (HEC) endpoint to which Kinesis Firehose sends your
+	// data.
+	HECEndpoint *string `type:"string"`
+
+	// This type can be either "Raw" or "Event".
+	HECEndpointType HECEndpointType `type:"string" enum:"true"`
+
+	// This is a GUID you obtain from your Splunk cluster when you create a new
+	// HEC endpoint.
+	HECToken *string `type:"string"`
+
+	// The data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration `type:"structure"`
+
+	// The retry behavior in case Kinesis Firehose is unable to deliver data to
+	// Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+	RetryOptions *SplunkRetryOptions `type:"structure"`
+
+	// Defines how documents should be delivered to Amazon S3. When set to FailedDocumentsOnly,
+	// Kinesis Firehose writes any data that could not be indexed to the configured
+	// Amazon S3 destination. When set to AllDocuments, Kinesis Firehose delivers
+	// all incoming records to Amazon S3, and also writes failed documents to Amazon
+	// S3. Default value is FailedDocumentsOnly.
+	S3BackupMode SplunkS3BackupMode `type:"string" enum:"true"`
+
+	// Your update to the configuration of the backup Amazon S3 location.
+	S3Update *S3DestinationUpdate `type:"structure"`
+}
+
+// String returns the string representation
+func (s SplunkDestinationUpdate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SplunkDestinationUpdate) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SplunkDestinationUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SplunkDestinationUpdate"}
+	if s.HECAcknowledgmentTimeoutInSeconds != nil && *s.HECAcknowledgmentTimeoutInSeconds < 180 {
+		invalidParams.Add(aws.NewErrParamMinValue("HECAcknowledgmentTimeoutInSeconds", 180))
+	}
+	if s.ProcessingConfiguration != nil {
+		if err := s.ProcessingConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("ProcessingConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.S3Update != nil {
+		if err := s.S3Update.Validate(); err != nil {
+			invalidParams.AddNested("S3Update", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Configures retry behavior in case Kinesis Firehose is unable to deliver documents
+// to Splunk or if it doesn't receive an acknowledgment from Splunk.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/SplunkRetryOptions
+type SplunkRetryOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The total amount of time that Kinesis Firehose spends on retries. This duration
+	// starts after the initial attempt to send data to Splunk fails and doesn't
+	// include the periods during which Kinesis Firehose waits for acknowledgment
+	// from Splunk after each attempt.
+	DurationInSeconds *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s SplunkRetryOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SplunkRetryOptions) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationInput
@@ -4087,6 +3056,9 @@ type UpdateDestinationInput struct {
 
 	// [Deprecated] Describes an update for a destination in Amazon S3.
 	S3DestinationUpdate *S3DestinationUpdate `deprecated:"true" type:"structure"`
+
+	// Describes an update for a destination in Splunk.
+	SplunkDestinationUpdate *SplunkDestinationUpdate `type:"structure"`
 }
 
 // String returns the string representation
@@ -4143,53 +3115,16 @@ func (s *UpdateDestinationInput) Validate() error {
 			invalidParams.AddNested("S3DestinationUpdate", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.SplunkDestinationUpdate != nil {
+		if err := s.SplunkDestinationUpdate.Validate(); err != nil {
+			invalidParams.AddNested("SplunkDestinationUpdate", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCurrentDeliveryStreamVersionId sets the CurrentDeliveryStreamVersionId field's value.
-func (s *UpdateDestinationInput) SetCurrentDeliveryStreamVersionId(v string) *UpdateDestinationInput {
-	s.CurrentDeliveryStreamVersionId = &v
-	return s
-}
-
-// SetDeliveryStreamName sets the DeliveryStreamName field's value.
-func (s *UpdateDestinationInput) SetDeliveryStreamName(v string) *UpdateDestinationInput {
-	s.DeliveryStreamName = &v
-	return s
-}
-
-// SetDestinationId sets the DestinationId field's value.
-func (s *UpdateDestinationInput) SetDestinationId(v string) *UpdateDestinationInput {
-	s.DestinationId = &v
-	return s
-}
-
-// SetElasticsearchDestinationUpdate sets the ElasticsearchDestinationUpdate field's value.
-func (s *UpdateDestinationInput) SetElasticsearchDestinationUpdate(v *ElasticsearchDestinationUpdate) *UpdateDestinationInput {
-	s.ElasticsearchDestinationUpdate = v
-	return s
-}
-
-// SetExtendedS3DestinationUpdate sets the ExtendedS3DestinationUpdate field's value.
-func (s *UpdateDestinationInput) SetExtendedS3DestinationUpdate(v *ExtendedS3DestinationUpdate) *UpdateDestinationInput {
-	s.ExtendedS3DestinationUpdate = v
-	return s
-}
-
-// SetRedshiftDestinationUpdate sets the RedshiftDestinationUpdate field's value.
-func (s *UpdateDestinationInput) SetRedshiftDestinationUpdate(v *RedshiftDestinationUpdate) *UpdateDestinationInput {
-	s.RedshiftDestinationUpdate = v
-	return s
-}
-
-// SetS3DestinationUpdate sets the S3DestinationUpdate field's value.
-func (s *UpdateDestinationInput) SetS3DestinationUpdate(v *S3DestinationUpdate) *UpdateDestinationInput {
-	s.S3DestinationUpdate = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/firehose-2015-08-04/UpdateDestinationOutput
@@ -4224,6 +3159,15 @@ const (
 	CompressionFormatSnappy       CompressionFormat = "Snappy"
 )
 
+func (enum CompressionFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CompressionFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeliveryStreamStatus string
 
 // Enum values for DeliveryStreamStatus
@@ -4233,6 +3177,15 @@ const (
 	DeliveryStreamStatusActive   DeliveryStreamStatus = "ACTIVE"
 )
 
+func (enum DeliveryStreamStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeliveryStreamStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeliveryStreamType string
 
 // Enum values for DeliveryStreamType
@@ -4240,6 +3193,15 @@ const (
 	DeliveryStreamTypeDirectPut             DeliveryStreamType = "DirectPut"
 	DeliveryStreamTypeKinesisStreamAsSource DeliveryStreamType = "KinesisStreamAsSource"
 )
+
+func (enum DeliveryStreamType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeliveryStreamType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ElasticsearchIndexRotationPeriod string
 
@@ -4252,6 +3214,15 @@ const (
 	ElasticsearchIndexRotationPeriodOneMonth   ElasticsearchIndexRotationPeriod = "OneMonth"
 )
 
+func (enum ElasticsearchIndexRotationPeriod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ElasticsearchIndexRotationPeriod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ElasticsearchS3BackupMode string
 
 // Enum values for ElasticsearchS3BackupMode
@@ -4260,6 +3231,32 @@ const (
 	ElasticsearchS3BackupModeAllDocuments        ElasticsearchS3BackupMode = "AllDocuments"
 )
 
+func (enum ElasticsearchS3BackupMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ElasticsearchS3BackupMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type HECEndpointType string
+
+// Enum values for HECEndpointType
+const (
+	HECEndpointTypeRaw   HECEndpointType = "Raw"
+	HECEndpointTypeEvent HECEndpointType = "Event"
+)
+
+func (enum HECEndpointType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HECEndpointType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NoEncryptionConfig string
 
 // Enum values for NoEncryptionConfig
@@ -4267,13 +3264,34 @@ const (
 	NoEncryptionConfigNoEncryption NoEncryptionConfig = "NoEncryption"
 )
 
+func (enum NoEncryptionConfig) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NoEncryptionConfig) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ProcessorParameterName string
 
 // Enum values for ProcessorParameterName
 const (
-	ProcessorParameterNameLambdaArn       ProcessorParameterName = "LambdaArn"
-	ProcessorParameterNameNumberOfRetries ProcessorParameterName = "NumberOfRetries"
+	ProcessorParameterNameLambdaArn               ProcessorParameterName = "LambdaArn"
+	ProcessorParameterNameNumberOfRetries         ProcessorParameterName = "NumberOfRetries"
+	ProcessorParameterNameRoleArn                 ProcessorParameterName = "RoleArn"
+	ProcessorParameterNameBufferSizeInMbs         ProcessorParameterName = "BufferSizeInMBs"
+	ProcessorParameterNameBufferIntervalInSeconds ProcessorParameterName = "BufferIntervalInSeconds"
 )
+
+func (enum ProcessorParameterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessorParameterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProcessorType string
 
@@ -4281,6 +3299,15 @@ type ProcessorType string
 const (
 	ProcessorTypeLambda ProcessorType = "Lambda"
 )
+
+func (enum ProcessorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProcessorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RedshiftS3BackupMode string
 
@@ -4290,6 +3317,15 @@ const (
 	RedshiftS3BackupModeEnabled  RedshiftS3BackupMode = "Enabled"
 )
 
+func (enum RedshiftS3BackupMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RedshiftS3BackupMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type S3BackupMode string
 
 // Enum values for S3BackupMode
@@ -4297,3 +3333,29 @@ const (
 	S3BackupModeDisabled S3BackupMode = "Disabled"
 	S3BackupModeEnabled  S3BackupMode = "Enabled"
 )
+
+func (enum S3BackupMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum S3BackupMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SplunkS3BackupMode string
+
+// Enum values for SplunkS3BackupMode
+const (
+	SplunkS3BackupModeFailedEventsOnly SplunkS3BackupMode = "FailedEventsOnly"
+	SplunkS3BackupModeAllEvents        SplunkS3BackupMode = "AllEvents"
+)
+
+func (enum SplunkS3BackupMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SplunkS3BackupMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

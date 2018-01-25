@@ -67,9 +67,15 @@ type RekognitionAPI interface {
 
 	CreateCollectionRequest(*rekognition.CreateCollectionInput) rekognition.CreateCollectionRequest
 
+	CreateStreamProcessorRequest(*rekognition.CreateStreamProcessorInput) rekognition.CreateStreamProcessorRequest
+
 	DeleteCollectionRequest(*rekognition.DeleteCollectionInput) rekognition.DeleteCollectionRequest
 
 	DeleteFacesRequest(*rekognition.DeleteFacesInput) rekognition.DeleteFacesRequest
+
+	DeleteStreamProcessorRequest(*rekognition.DeleteStreamProcessorInput) rekognition.DeleteStreamProcessorRequest
+
+	DescribeStreamProcessorRequest(*rekognition.DescribeStreamProcessorInput) rekognition.DescribeStreamProcessorRequest
 
 	DetectFacesRequest(*rekognition.DetectFacesInput) rekognition.DetectFacesRequest
 
@@ -77,7 +83,39 @@ type RekognitionAPI interface {
 
 	DetectModerationLabelsRequest(*rekognition.DetectModerationLabelsInput) rekognition.DetectModerationLabelsRequest
 
+	DetectTextRequest(*rekognition.DetectTextInput) rekognition.DetectTextRequest
+
 	GetCelebrityInfoRequest(*rekognition.GetCelebrityInfoInput) rekognition.GetCelebrityInfoRequest
+
+	GetCelebrityRecognitionRequest(*rekognition.GetCelebrityRecognitionInput) rekognition.GetCelebrityRecognitionRequest
+
+	GetCelebrityRecognitionPages(*rekognition.GetCelebrityRecognitionInput, func(*rekognition.GetCelebrityRecognitionOutput, bool) bool) error
+	GetCelebrityRecognitionPagesWithContext(aws.Context, *rekognition.GetCelebrityRecognitionInput, func(*rekognition.GetCelebrityRecognitionOutput, bool) bool, ...aws.Option) error
+
+	GetContentModerationRequest(*rekognition.GetContentModerationInput) rekognition.GetContentModerationRequest
+
+	GetContentModerationPages(*rekognition.GetContentModerationInput, func(*rekognition.GetContentModerationOutput, bool) bool) error
+	GetContentModerationPagesWithContext(aws.Context, *rekognition.GetContentModerationInput, func(*rekognition.GetContentModerationOutput, bool) bool, ...aws.Option) error
+
+	GetFaceDetectionRequest(*rekognition.GetFaceDetectionInput) rekognition.GetFaceDetectionRequest
+
+	GetFaceDetectionPages(*rekognition.GetFaceDetectionInput, func(*rekognition.GetFaceDetectionOutput, bool) bool) error
+	GetFaceDetectionPagesWithContext(aws.Context, *rekognition.GetFaceDetectionInput, func(*rekognition.GetFaceDetectionOutput, bool) bool, ...aws.Option) error
+
+	GetFaceSearchRequest(*rekognition.GetFaceSearchInput) rekognition.GetFaceSearchRequest
+
+	GetFaceSearchPages(*rekognition.GetFaceSearchInput, func(*rekognition.GetFaceSearchOutput, bool) bool) error
+	GetFaceSearchPagesWithContext(aws.Context, *rekognition.GetFaceSearchInput, func(*rekognition.GetFaceSearchOutput, bool) bool, ...aws.Option) error
+
+	GetLabelDetectionRequest(*rekognition.GetLabelDetectionInput) rekognition.GetLabelDetectionRequest
+
+	GetLabelDetectionPages(*rekognition.GetLabelDetectionInput, func(*rekognition.GetLabelDetectionOutput, bool) bool) error
+	GetLabelDetectionPagesWithContext(aws.Context, *rekognition.GetLabelDetectionInput, func(*rekognition.GetLabelDetectionOutput, bool) bool, ...aws.Option) error
+
+	GetPersonTrackingRequest(*rekognition.GetPersonTrackingInput) rekognition.GetPersonTrackingRequest
+
+	GetPersonTrackingPages(*rekognition.GetPersonTrackingInput, func(*rekognition.GetPersonTrackingOutput, bool) bool) error
+	GetPersonTrackingPagesWithContext(aws.Context, *rekognition.GetPersonTrackingInput, func(*rekognition.GetPersonTrackingOutput, bool) bool, ...aws.Option) error
 
 	IndexFacesRequest(*rekognition.IndexFacesInput) rekognition.IndexFacesRequest
 
@@ -91,11 +129,32 @@ type RekognitionAPI interface {
 	ListFacesPages(*rekognition.ListFacesInput, func(*rekognition.ListFacesOutput, bool) bool) error
 	ListFacesPagesWithContext(aws.Context, *rekognition.ListFacesInput, func(*rekognition.ListFacesOutput, bool) bool, ...aws.Option) error
 
+	ListStreamProcessorsRequest(*rekognition.ListStreamProcessorsInput) rekognition.ListStreamProcessorsRequest
+
+	ListStreamProcessorsPages(*rekognition.ListStreamProcessorsInput, func(*rekognition.ListStreamProcessorsOutput, bool) bool) error
+	ListStreamProcessorsPagesWithContext(aws.Context, *rekognition.ListStreamProcessorsInput, func(*rekognition.ListStreamProcessorsOutput, bool) bool, ...aws.Option) error
+
 	RecognizeCelebritiesRequest(*rekognition.RecognizeCelebritiesInput) rekognition.RecognizeCelebritiesRequest
 
 	SearchFacesRequest(*rekognition.SearchFacesInput) rekognition.SearchFacesRequest
 
 	SearchFacesByImageRequest(*rekognition.SearchFacesByImageInput) rekognition.SearchFacesByImageRequest
+
+	StartCelebrityRecognitionRequest(*rekognition.StartCelebrityRecognitionInput) rekognition.StartCelebrityRecognitionRequest
+
+	StartContentModerationRequest(*rekognition.StartContentModerationInput) rekognition.StartContentModerationRequest
+
+	StartFaceDetectionRequest(*rekognition.StartFaceDetectionInput) rekognition.StartFaceDetectionRequest
+
+	StartFaceSearchRequest(*rekognition.StartFaceSearchInput) rekognition.StartFaceSearchRequest
+
+	StartLabelDetectionRequest(*rekognition.StartLabelDetectionInput) rekognition.StartLabelDetectionRequest
+
+	StartPersonTrackingRequest(*rekognition.StartPersonTrackingInput) rekognition.StartPersonTrackingRequest
+
+	StartStreamProcessorRequest(*rekognition.StartStreamProcessorInput) rekognition.StartStreamProcessorRequest
+
+	StopStreamProcessorRequest(*rekognition.StopStreamProcessorInput) rekognition.StopStreamProcessorRequest
 }
 
 var _ RekognitionAPI = (*rekognition.Rekognition)(nil)

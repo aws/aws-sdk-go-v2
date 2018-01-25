@@ -3278,48 +3278,6 @@ func (s AccountSettings) GoString() string {
 	return s.String()
 }
 
-// SetAwsAccountNumber sets the AwsAccountNumber field's value.
-func (s *AccountSettings) SetAwsAccountNumber(v string) *AccountSettings {
-	s.AwsAccountNumber = &v
-	return s
-}
-
-// SetDefaultJobTimeoutMinutes sets the DefaultJobTimeoutMinutes field's value.
-func (s *AccountSettings) SetDefaultJobTimeoutMinutes(v int64) *AccountSettings {
-	s.DefaultJobTimeoutMinutes = &v
-	return s
-}
-
-// SetMaxJobTimeoutMinutes sets the MaxJobTimeoutMinutes field's value.
-func (s *AccountSettings) SetMaxJobTimeoutMinutes(v int64) *AccountSettings {
-	s.MaxJobTimeoutMinutes = &v
-	return s
-}
-
-// SetMaxSlots sets the MaxSlots field's value.
-func (s *AccountSettings) SetMaxSlots(v map[string]int64) *AccountSettings {
-	s.MaxSlots = v
-	return s
-}
-
-// SetTrialMinutes sets the TrialMinutes field's value.
-func (s *AccountSettings) SetTrialMinutes(v *TrialMinutes) *AccountSettings {
-	s.TrialMinutes = v
-	return s
-}
-
-// SetUnmeteredDevices sets the UnmeteredDevices field's value.
-func (s *AccountSettings) SetUnmeteredDevices(v map[string]int64) *AccountSettings {
-	s.UnmeteredDevices = v
-	return s
-}
-
-// SetUnmeteredRemoteAccessDevices sets the UnmeteredRemoteAccessDevices field's value.
-func (s *AccountSettings) SetUnmeteredRemoteAccessDevices(v map[string]int64) *AccountSettings {
-	s.UnmeteredRemoteAccessDevices = v
-	return s
-}
-
 // Represents the output of a test. Examples of artifacts include logs and screenshots.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Artifact
 type Artifact struct {
@@ -3401,36 +3359,6 @@ func (s Artifact) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Artifact) SetArn(v string) *Artifact {
-	s.Arn = &v
-	return s
-}
-
-// SetExtension sets the Extension field's value.
-func (s *Artifact) SetExtension(v string) *Artifact {
-	s.Extension = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Artifact) SetName(v string) *Artifact {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Artifact) SetType(v ArtifactType) *Artifact {
-	s.Type = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *Artifact) SetUrl(v string) *Artifact {
-	s.Url = &v
-	return s
-}
-
 // Represents the amount of CPU that an app is using on a physical device.
 //
 // Note that this does not represent system-wide CPU usage.
@@ -3457,24 +3385,6 @@ func (s CPU) String() string {
 // GoString returns the string representation
 func (s CPU) GoString() string {
 	return s.String()
-}
-
-// SetArchitecture sets the Architecture field's value.
-func (s *CPU) SetArchitecture(v string) *CPU {
-	s.Architecture = &v
-	return s
-}
-
-// SetClock sets the Clock field's value.
-func (s *CPU) SetClock(v float64) *CPU {
-	s.Clock = &v
-	return s
-}
-
-// SetFrequency sets the Frequency field's value.
-func (s *CPU) SetFrequency(v string) *CPU {
-	s.Frequency = &v
-	return s
 }
 
 // Represents entity counters.
@@ -3512,48 +3422,6 @@ func (s Counters) String() string {
 // GoString returns the string representation
 func (s Counters) GoString() string {
 	return s.String()
-}
-
-// SetErrored sets the Errored field's value.
-func (s *Counters) SetErrored(v int64) *Counters {
-	s.Errored = &v
-	return s
-}
-
-// SetFailed sets the Failed field's value.
-func (s *Counters) SetFailed(v int64) *Counters {
-	s.Failed = &v
-	return s
-}
-
-// SetPassed sets the Passed field's value.
-func (s *Counters) SetPassed(v int64) *Counters {
-	s.Passed = &v
-	return s
-}
-
-// SetSkipped sets the Skipped field's value.
-func (s *Counters) SetSkipped(v int64) *Counters {
-	s.Skipped = &v
-	return s
-}
-
-// SetStopped sets the Stopped field's value.
-func (s *Counters) SetStopped(v int64) *Counters {
-	s.Stopped = &v
-	return s
-}
-
-// SetTotal sets the Total field's value.
-func (s *Counters) SetTotal(v int64) *Counters {
-	s.Total = &v
-	return s
-}
-
-// SetWarned sets the Warned field's value.
-func (s *Counters) SetWarned(v int64) *Counters {
-	s.Warned = &v
-	return s
 }
 
 // Represents a request to the create device pool operation.
@@ -3615,30 +3483,6 @@ func (s *CreateDevicePoolInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateDevicePoolInput) SetDescription(v string) *CreateDevicePoolInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateDevicePoolInput) SetName(v string) *CreateDevicePoolInput {
-	s.Name = &v
-	return s
-}
-
-// SetProjectArn sets the ProjectArn field's value.
-func (s *CreateDevicePoolInput) SetProjectArn(v string) *CreateDevicePoolInput {
-	s.ProjectArn = &v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *CreateDevicePoolInput) SetRules(v []Rule) *CreateDevicePoolInput {
-	s.Rules = v
-	return s
-}
-
 // Represents the result of a create device pool request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateDevicePoolResult
 type CreateDevicePoolOutput struct {
@@ -3663,12 +3507,6 @@ func (s CreateDevicePoolOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDevicePoolOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevicePool sets the DevicePool field's value.
-func (s *CreateDevicePoolOutput) SetDevicePool(v *DevicePool) *CreateDevicePoolOutput {
-	s.DevicePool = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateNetworkProfileRequest
@@ -3752,78 +3590,6 @@ func (s *CreateNetworkProfileInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreateNetworkProfileInput) SetDescription(v string) *CreateNetworkProfileInput {
-	s.Description = &v
-	return s
-}
-
-// SetDownlinkBandwidthBits sets the DownlinkBandwidthBits field's value.
-func (s *CreateNetworkProfileInput) SetDownlinkBandwidthBits(v int64) *CreateNetworkProfileInput {
-	s.DownlinkBandwidthBits = &v
-	return s
-}
-
-// SetDownlinkDelayMs sets the DownlinkDelayMs field's value.
-func (s *CreateNetworkProfileInput) SetDownlinkDelayMs(v int64) *CreateNetworkProfileInput {
-	s.DownlinkDelayMs = &v
-	return s
-}
-
-// SetDownlinkJitterMs sets the DownlinkJitterMs field's value.
-func (s *CreateNetworkProfileInput) SetDownlinkJitterMs(v int64) *CreateNetworkProfileInput {
-	s.DownlinkJitterMs = &v
-	return s
-}
-
-// SetDownlinkLossPercent sets the DownlinkLossPercent field's value.
-func (s *CreateNetworkProfileInput) SetDownlinkLossPercent(v int64) *CreateNetworkProfileInput {
-	s.DownlinkLossPercent = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateNetworkProfileInput) SetName(v string) *CreateNetworkProfileInput {
-	s.Name = &v
-	return s
-}
-
-// SetProjectArn sets the ProjectArn field's value.
-func (s *CreateNetworkProfileInput) SetProjectArn(v string) *CreateNetworkProfileInput {
-	s.ProjectArn = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateNetworkProfileInput) SetType(v NetworkProfileType) *CreateNetworkProfileInput {
-	s.Type = v
-	return s
-}
-
-// SetUplinkBandwidthBits sets the UplinkBandwidthBits field's value.
-func (s *CreateNetworkProfileInput) SetUplinkBandwidthBits(v int64) *CreateNetworkProfileInput {
-	s.UplinkBandwidthBits = &v
-	return s
-}
-
-// SetUplinkDelayMs sets the UplinkDelayMs field's value.
-func (s *CreateNetworkProfileInput) SetUplinkDelayMs(v int64) *CreateNetworkProfileInput {
-	s.UplinkDelayMs = &v
-	return s
-}
-
-// SetUplinkJitterMs sets the UplinkJitterMs field's value.
-func (s *CreateNetworkProfileInput) SetUplinkJitterMs(v int64) *CreateNetworkProfileInput {
-	s.UplinkJitterMs = &v
-	return s
-}
-
-// SetUplinkLossPercent sets the UplinkLossPercent field's value.
-func (s *CreateNetworkProfileInput) SetUplinkLossPercent(v int64) *CreateNetworkProfileInput {
-	s.UplinkLossPercent = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateNetworkProfileResult
 type CreateNetworkProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -3847,12 +3613,6 @@ func (s CreateNetworkProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateNetworkProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNetworkProfile sets the NetworkProfile field's value.
-func (s *CreateNetworkProfileOutput) SetNetworkProfile(v *NetworkProfile) *CreateNetworkProfileOutput {
-	s.NetworkProfile = v
-	return s
 }
 
 // Represents a request to the create project operation.
@@ -3895,18 +3655,6 @@ func (s *CreateProjectInput) Validate() error {
 	return nil
 }
 
-// SetDefaultJobTimeoutMinutes sets the DefaultJobTimeoutMinutes field's value.
-func (s *CreateProjectInput) SetDefaultJobTimeoutMinutes(v int64) *CreateProjectInput {
-	s.DefaultJobTimeoutMinutes = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateProjectInput) SetName(v string) *CreateProjectInput {
-	s.Name = &v
-	return s
-}
-
 // Represents the result of a create project request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateProjectResult
 type CreateProjectOutput struct {
@@ -3933,12 +3681,6 @@ func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetProject sets the Project field's value.
-func (s *CreateProjectOutput) SetProject(v *Project) *CreateProjectOutput {
-	s.Project = v
-	return s
-}
-
 // Creates the configuration settings for a remote access session, including
 // the device model and type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionConfiguration
@@ -3957,12 +3699,6 @@ func (s CreateRemoteAccessSessionConfiguration) String() string {
 // GoString returns the string representation
 func (s CreateRemoteAccessSessionConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetBillingMethod sets the BillingMethod field's value.
-func (s *CreateRemoteAccessSessionConfiguration) SetBillingMethod(v BillingMethod) *CreateRemoteAccessSessionConfiguration {
-	s.BillingMethod = v
-	return s
 }
 
 // Creates and submits a request to start a remote access session.
@@ -4038,48 +3774,6 @@ func (s *CreateRemoteAccessSessionInput) Validate() error {
 	return nil
 }
 
-// SetClientId sets the ClientId field's value.
-func (s *CreateRemoteAccessSessionInput) SetClientId(v string) *CreateRemoteAccessSessionInput {
-	s.ClientId = &v
-	return s
-}
-
-// SetConfiguration sets the Configuration field's value.
-func (s *CreateRemoteAccessSessionInput) SetConfiguration(v *CreateRemoteAccessSessionConfiguration) *CreateRemoteAccessSessionInput {
-	s.Configuration = v
-	return s
-}
-
-// SetDeviceArn sets the DeviceArn field's value.
-func (s *CreateRemoteAccessSessionInput) SetDeviceArn(v string) *CreateRemoteAccessSessionInput {
-	s.DeviceArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateRemoteAccessSessionInput) SetName(v string) *CreateRemoteAccessSessionInput {
-	s.Name = &v
-	return s
-}
-
-// SetProjectArn sets the ProjectArn field's value.
-func (s *CreateRemoteAccessSessionInput) SetProjectArn(v string) *CreateRemoteAccessSessionInput {
-	s.ProjectArn = &v
-	return s
-}
-
-// SetRemoteDebugEnabled sets the RemoteDebugEnabled field's value.
-func (s *CreateRemoteAccessSessionInput) SetRemoteDebugEnabled(v bool) *CreateRemoteAccessSessionInput {
-	s.RemoteDebugEnabled = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *CreateRemoteAccessSessionInput) SetSshPublicKey(v string) *CreateRemoteAccessSessionInput {
-	s.SshPublicKey = &v
-	return s
-}
-
 // Represents the server response from a request to create a remote access session.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionResult
 type CreateRemoteAccessSessionOutput struct {
@@ -4105,12 +3799,6 @@ func (s CreateRemoteAccessSessionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRemoteAccessSessionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRemoteAccessSession sets the RemoteAccessSession field's value.
-func (s *CreateRemoteAccessSessionOutput) SetRemoteAccessSession(v *RemoteAccessSession) *CreateRemoteAccessSessionOutput {
-	s.RemoteAccessSession = v
-	return s
 }
 
 // Represents a request to the create upload operation.
@@ -4214,30 +3902,6 @@ func (s *CreateUploadInput) Validate() error {
 	return nil
 }
 
-// SetContentType sets the ContentType field's value.
-func (s *CreateUploadInput) SetContentType(v string) *CreateUploadInput {
-	s.ContentType = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateUploadInput) SetName(v string) *CreateUploadInput {
-	s.Name = &v
-	return s
-}
-
-// SetProjectArn sets the ProjectArn field's value.
-func (s *CreateUploadInput) SetProjectArn(v string) *CreateUploadInput {
-	s.ProjectArn = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateUploadInput) SetType(v UploadType) *CreateUploadInput {
-	s.Type = v
-	return s
-}
-
 // Represents the result of a create upload request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateUploadResult
 type CreateUploadOutput struct {
@@ -4262,12 +3926,6 @@ func (s CreateUploadOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateUploadOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUpload sets the Upload field's value.
-func (s *CreateUploadOutput) SetUpload(v *Upload) *CreateUploadOutput {
-	s.Upload = v
-	return s
 }
 
 // A JSON object specifying the paths where the artifacts generated by the customer's
@@ -4301,24 +3959,6 @@ func (s CustomerArtifactPaths) String() string {
 // GoString returns the string representation
 func (s CustomerArtifactPaths) GoString() string {
 	return s.String()
-}
-
-// SetAndroidPaths sets the AndroidPaths field's value.
-func (s *CustomerArtifactPaths) SetAndroidPaths(v []string) *CustomerArtifactPaths {
-	s.AndroidPaths = v
-	return s
-}
-
-// SetDeviceHostPaths sets the DeviceHostPaths field's value.
-func (s *CustomerArtifactPaths) SetDeviceHostPaths(v []string) *CustomerArtifactPaths {
-	s.DeviceHostPaths = v
-	return s
-}
-
-// SetIosPaths sets the IosPaths field's value.
-func (s *CustomerArtifactPaths) SetIosPaths(v []string) *CustomerArtifactPaths {
-	s.IosPaths = v
-	return s
 }
 
 // Represents a request to the delete device pool operation.
@@ -4358,12 +3998,6 @@ func (s *DeleteDevicePoolInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetArn sets the Arn field's value.
-func (s *DeleteDevicePoolInput) SetArn(v string) *DeleteDevicePoolInput {
-	s.Arn = &v
-	return s
 }
 
 // Represents the result of a delete device pool request.
@@ -4426,12 +4060,6 @@ func (s *DeleteNetworkProfileInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *DeleteNetworkProfileInput) SetArn(v string) *DeleteNetworkProfileInput {
-	s.Arn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteNetworkProfileResult
 type DeleteNetworkProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -4491,12 +4119,6 @@ func (s *DeleteProjectInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetArn sets the Arn field's value.
-func (s *DeleteProjectInput) SetArn(v string) *DeleteProjectInput {
-	s.Arn = &v
-	return s
 }
 
 // Represents the result of a delete project request.
@@ -4561,12 +4183,6 @@ func (s *DeleteRemoteAccessSessionInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *DeleteRemoteAccessSessionInput) SetArn(v string) *DeleteRemoteAccessSessionInput {
-	s.Arn = &v
-	return s
-}
-
 // The response from the server when a request is made to delete the remote
 // access session.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRemoteAccessSessionResult
@@ -4629,12 +4245,6 @@ func (s *DeleteRunInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *DeleteRunInput) SetArn(v string) *DeleteRunInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the result of a delete run request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteRunResult
 type DeleteRunOutput struct {
@@ -4695,12 +4305,6 @@ func (s *DeleteUploadInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetArn sets the Arn field's value.
-func (s *DeleteUploadInput) SetArn(v string) *DeleteUploadInput {
-	s.Arn = &v
-	return s
 }
 
 // Represents the result of a delete upload request.
@@ -4809,114 +4413,6 @@ func (s Device) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Device) SetArn(v string) *Device {
-	s.Arn = &v
-	return s
-}
-
-// SetCarrier sets the Carrier field's value.
-func (s *Device) SetCarrier(v string) *Device {
-	s.Carrier = &v
-	return s
-}
-
-// SetCpu sets the Cpu field's value.
-func (s *Device) SetCpu(v *CPU) *Device {
-	s.Cpu = v
-	return s
-}
-
-// SetFleetName sets the FleetName field's value.
-func (s *Device) SetFleetName(v string) *Device {
-	s.FleetName = &v
-	return s
-}
-
-// SetFleetType sets the FleetType field's value.
-func (s *Device) SetFleetType(v string) *Device {
-	s.FleetType = &v
-	return s
-}
-
-// SetFormFactor sets the FormFactor field's value.
-func (s *Device) SetFormFactor(v DeviceFormFactor) *Device {
-	s.FormFactor = v
-	return s
-}
-
-// SetHeapSize sets the HeapSize field's value.
-func (s *Device) SetHeapSize(v int64) *Device {
-	s.HeapSize = &v
-	return s
-}
-
-// SetImage sets the Image field's value.
-func (s *Device) SetImage(v string) *Device {
-	s.Image = &v
-	return s
-}
-
-// SetManufacturer sets the Manufacturer field's value.
-func (s *Device) SetManufacturer(v string) *Device {
-	s.Manufacturer = &v
-	return s
-}
-
-// SetMemory sets the Memory field's value.
-func (s *Device) SetMemory(v int64) *Device {
-	s.Memory = &v
-	return s
-}
-
-// SetModel sets the Model field's value.
-func (s *Device) SetModel(v string) *Device {
-	s.Model = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Device) SetName(v string) *Device {
-	s.Name = &v
-	return s
-}
-
-// SetOs sets the Os field's value.
-func (s *Device) SetOs(v string) *Device {
-	s.Os = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *Device) SetPlatform(v DevicePlatform) *Device {
-	s.Platform = v
-	return s
-}
-
-// SetRadio sets the Radio field's value.
-func (s *Device) SetRadio(v string) *Device {
-	s.Radio = &v
-	return s
-}
-
-// SetRemoteAccessEnabled sets the RemoteAccessEnabled field's value.
-func (s *Device) SetRemoteAccessEnabled(v bool) *Device {
-	s.RemoteAccessEnabled = &v
-	return s
-}
-
-// SetRemoteDebugEnabled sets the RemoteDebugEnabled field's value.
-func (s *Device) SetRemoteDebugEnabled(v bool) *Device {
-	s.RemoteDebugEnabled = &v
-	return s
-}
-
-// SetResolution sets the Resolution field's value.
-func (s *Device) SetResolution(v *Resolution) *Device {
-	s.Resolution = v
-	return s
-}
-
 // Represents the total (metered or unmetered) minutes used by the resource
 // to run tests. Contains the sum of minutes consumed by all children.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceMinutes
@@ -4944,24 +4440,6 @@ func (s DeviceMinutes) String() string {
 // GoString returns the string representation
 func (s DeviceMinutes) GoString() string {
 	return s.String()
-}
-
-// SetMetered sets the Metered field's value.
-func (s *DeviceMinutes) SetMetered(v float64) *DeviceMinutes {
-	s.Metered = &v
-	return s
-}
-
-// SetTotal sets the Total field's value.
-func (s *DeviceMinutes) SetTotal(v float64) *DeviceMinutes {
-	s.Total = &v
-	return s
-}
-
-// SetUnmetered sets the Unmetered field's value.
-func (s *DeviceMinutes) SetUnmetered(v float64) *DeviceMinutes {
-	s.Unmetered = &v
-	return s
 }
 
 // Represents a collection of device types.
@@ -5002,36 +4480,6 @@ func (s DevicePool) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *DevicePool) SetArn(v string) *DevicePool {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DevicePool) SetDescription(v string) *DevicePool {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DevicePool) SetName(v string) *DevicePool {
-	s.Name = &v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *DevicePool) SetRules(v []Rule) *DevicePool {
-	s.Rules = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *DevicePool) SetType(v DevicePoolType) *DevicePool {
-	s.Type = v
-	return s
-}
-
 // Represents a device pool compatibility result.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DevicePoolCompatibilityResult
 type DevicePoolCompatibilityResult struct {
@@ -5055,24 +4503,6 @@ func (s DevicePoolCompatibilityResult) String() string {
 // GoString returns the string representation
 func (s DevicePoolCompatibilityResult) GoString() string {
 	return s.String()
-}
-
-// SetCompatible sets the Compatible field's value.
-func (s *DevicePoolCompatibilityResult) SetCompatible(v bool) *DevicePoolCompatibilityResult {
-	s.Compatible = &v
-	return s
-}
-
-// SetDevice sets the Device field's value.
-func (s *DevicePoolCompatibilityResult) SetDevice(v *Device) *DevicePoolCompatibilityResult {
-	s.Device = v
-	return s
-}
-
-// SetIncompatibilityMessages sets the IncompatibilityMessages field's value.
-func (s *DevicePoolCompatibilityResult) SetIncompatibilityMessages(v []IncompatibilityMessage) *DevicePoolCompatibilityResult {
-	s.IncompatibilityMessages = v
-	return s
 }
 
 // Represents configuration information about a test run, such as the execution
@@ -5101,24 +4531,6 @@ func (s ExecutionConfiguration) String() string {
 // GoString returns the string representation
 func (s ExecutionConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetAccountsCleanup sets the AccountsCleanup field's value.
-func (s *ExecutionConfiguration) SetAccountsCleanup(v bool) *ExecutionConfiguration {
-	s.AccountsCleanup = &v
-	return s
-}
-
-// SetAppPackagesCleanup sets the AppPackagesCleanup field's value.
-func (s *ExecutionConfiguration) SetAppPackagesCleanup(v bool) *ExecutionConfiguration {
-	s.AppPackagesCleanup = &v
-	return s
-}
-
-// SetJobTimeoutMinutes sets the JobTimeoutMinutes field's value.
-func (s *ExecutionConfiguration) SetJobTimeoutMinutes(v int64) *ExecutionConfiguration {
-	s.JobTimeoutMinutes = &v
-	return s
 }
 
 // Represents the request sent to retrieve the account settings.
@@ -5164,12 +4576,6 @@ func (s GetAccountSettingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAccountSettings sets the AccountSettings field's value.
-func (s *GetAccountSettingsOutput) SetAccountSettings(v *AccountSettings) *GetAccountSettingsOutput {
-	s.AccountSettings = v
-	return s
-}
-
 // Represents a request to the get device request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceRequest
 type GetDeviceInput struct {
@@ -5208,12 +4614,6 @@ func (s *GetDeviceInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetDeviceInput) SetArn(v string) *GetDeviceInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the result of a get device request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceResult
 type GetDeviceOutput struct {
@@ -5238,12 +4638,6 @@ func (s GetDeviceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevice sets the Device field's value.
-func (s *GetDeviceOutput) SetDevice(v *Device) *GetDeviceOutput {
-	s.Device = v
-	return s
 }
 
 // Represents a request to the get device pool compatibility operation.
@@ -5333,30 +4727,6 @@ func (s *GetDevicePoolCompatibilityInput) Validate() error {
 	return nil
 }
 
-// SetAppArn sets the AppArn field's value.
-func (s *GetDevicePoolCompatibilityInput) SetAppArn(v string) *GetDevicePoolCompatibilityInput {
-	s.AppArn = &v
-	return s
-}
-
-// SetDevicePoolArn sets the DevicePoolArn field's value.
-func (s *GetDevicePoolCompatibilityInput) SetDevicePoolArn(v string) *GetDevicePoolCompatibilityInput {
-	s.DevicePoolArn = &v
-	return s
-}
-
-// SetTest sets the Test field's value.
-func (s *GetDevicePoolCompatibilityInput) SetTest(v *ScheduleRunTest) *GetDevicePoolCompatibilityInput {
-	s.Test = v
-	return s
-}
-
-// SetTestType sets the TestType field's value.
-func (s *GetDevicePoolCompatibilityInput) SetTestType(v TestType) *GetDevicePoolCompatibilityInput {
-	s.TestType = v
-	return s
-}
-
 // Represents the result of describe device pool compatibility request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolCompatibilityResult
 type GetDevicePoolCompatibilityOutput struct {
@@ -5384,18 +4754,6 @@ func (s GetDevicePoolCompatibilityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDevicePoolCompatibilityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCompatibleDevices sets the CompatibleDevices field's value.
-func (s *GetDevicePoolCompatibilityOutput) SetCompatibleDevices(v []DevicePoolCompatibilityResult) *GetDevicePoolCompatibilityOutput {
-	s.CompatibleDevices = v
-	return s
-}
-
-// SetIncompatibleDevices sets the IncompatibleDevices field's value.
-func (s *GetDevicePoolCompatibilityOutput) SetIncompatibleDevices(v []DevicePoolCompatibilityResult) *GetDevicePoolCompatibilityOutput {
-	s.IncompatibleDevices = v
-	return s
 }
 
 // Represents a request to the get device pool operation.
@@ -5436,12 +4794,6 @@ func (s *GetDevicePoolInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetDevicePoolInput) SetArn(v string) *GetDevicePoolInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the result of a get device pool request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDevicePoolResult
 type GetDevicePoolOutput struct {
@@ -5466,12 +4818,6 @@ func (s GetDevicePoolOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDevicePoolOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevicePool sets the DevicePool field's value.
-func (s *GetDevicePoolOutput) SetDevicePool(v *DevicePool) *GetDevicePoolOutput {
-	s.DevicePool = v
-	return s
 }
 
 // Represents a request to the get job operation.
@@ -5512,12 +4858,6 @@ func (s *GetJobInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetJobInput) SetArn(v string) *GetJobInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the result of a get job request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetJobResult
 type GetJobOutput struct {
@@ -5542,12 +4882,6 @@ func (s GetJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJob sets the Job field's value.
-func (s *GetJobOutput) SetJob(v *Job) *GetJobOutput {
-	s.Job = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetNetworkProfileRequest
@@ -5588,12 +4922,6 @@ func (s *GetNetworkProfileInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetNetworkProfileInput) SetArn(v string) *GetNetworkProfileInput {
-	s.Arn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetNetworkProfileResult
 type GetNetworkProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -5617,12 +4945,6 @@ func (s GetNetworkProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetNetworkProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNetworkProfile sets the NetworkProfile field's value.
-func (s *GetNetworkProfileOutput) SetNetworkProfile(v *NetworkProfile) *GetNetworkProfileOutput {
-	s.NetworkProfile = v
-	return s
 }
 
 // Represents the request to retrieve the offering status for the specified
@@ -5659,12 +4981,6 @@ func (s *GetOfferingStatusInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *GetOfferingStatusInput) SetNextToken(v string) *GetOfferingStatusInput {
-	s.NextToken = &v
-	return s
-}
-
 // Returns the status result for a device offering.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetOfferingStatusResult
 type GetOfferingStatusOutput struct {
@@ -5696,24 +5012,6 @@ func (s GetOfferingStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetOfferingStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCurrent sets the Current field's value.
-func (s *GetOfferingStatusOutput) SetCurrent(v map[string]OfferingStatus) *GetOfferingStatusOutput {
-	s.Current = v
-	return s
-}
-
-// SetNextPeriod sets the NextPeriod field's value.
-func (s *GetOfferingStatusOutput) SetNextPeriod(v map[string]OfferingStatus) *GetOfferingStatusOutput {
-	s.NextPeriod = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetOfferingStatusOutput) SetNextToken(v string) *GetOfferingStatusOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents a request to the get project operation.
@@ -5754,12 +5052,6 @@ func (s *GetProjectInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetProjectInput) SetArn(v string) *GetProjectInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the result of a get project request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetProjectResult
 type GetProjectOutput struct {
@@ -5784,12 +5076,6 @@ func (s GetProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProject sets the Project field's value.
-func (s *GetProjectOutput) SetProject(v *Project) *GetProjectOutput {
-	s.Project = v
-	return s
 }
 
 // Represents the request to get information about the specified remote access
@@ -5832,12 +5118,6 @@ func (s *GetRemoteAccessSessionInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetRemoteAccessSessionInput) SetArn(v string) *GetRemoteAccessSessionInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the response from the server that lists detailed information about
 // the remote access session.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRemoteAccessSessionResult
@@ -5863,12 +5143,6 @@ func (s GetRemoteAccessSessionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRemoteAccessSessionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRemoteAccessSession sets the RemoteAccessSession field's value.
-func (s *GetRemoteAccessSessionOutput) SetRemoteAccessSession(v *RemoteAccessSession) *GetRemoteAccessSessionOutput {
-	s.RemoteAccessSession = v
-	return s
 }
 
 // Represents a request to the get run operation.
@@ -5909,12 +5183,6 @@ func (s *GetRunInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetRunInput) SetArn(v string) *GetRunInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the result of a get run request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetRunResult
 type GetRunOutput struct {
@@ -5939,12 +5207,6 @@ func (s GetRunOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRunOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRun sets the Run field's value.
-func (s *GetRunOutput) SetRun(v *Run) *GetRunOutput {
-	s.Run = v
-	return s
 }
 
 // Represents a request to the get suite operation.
@@ -5985,12 +5247,6 @@ func (s *GetSuiteInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetSuiteInput) SetArn(v string) *GetSuiteInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the result of a get suite request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetSuiteResult
 type GetSuiteOutput struct {
@@ -6015,12 +5271,6 @@ func (s GetSuiteOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSuiteOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSuite sets the Suite field's value.
-func (s *GetSuiteOutput) SetSuite(v *Suite) *GetSuiteOutput {
-	s.Suite = v
-	return s
 }
 
 // Represents a request to the get test operation.
@@ -6061,12 +5311,6 @@ func (s *GetTestInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetTestInput) SetArn(v string) *GetTestInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the result of a get test request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetTestResult
 type GetTestOutput struct {
@@ -6091,12 +5335,6 @@ func (s GetTestOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTestOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTest sets the Test field's value.
-func (s *GetTestOutput) SetTest(v *Test) *GetTestOutput {
-	s.Test = v
-	return s
 }
 
 // Represents a request to the get upload operation.
@@ -6137,12 +5375,6 @@ func (s *GetUploadInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetUploadInput) SetArn(v string) *GetUploadInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the result of a get upload request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetUploadResult
 type GetUploadOutput struct {
@@ -6167,12 +5399,6 @@ func (s GetUploadOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetUploadOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUpload sets the Upload field's value.
-func (s *GetUploadOutput) SetUpload(v *Upload) *GetUploadOutput {
-	s.Upload = v
-	return s
 }
 
 // Represents information about incompatibility.
@@ -6209,18 +5435,6 @@ func (s IncompatibilityMessage) String() string {
 // GoString returns the string representation
 func (s IncompatibilityMessage) GoString() string {
 	return s.String()
-}
-
-// SetMessage sets the Message field's value.
-func (s *IncompatibilityMessage) SetMessage(v string) *IncompatibilityMessage {
-	s.Message = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *IncompatibilityMessage) SetType(v DeviceAttribute) *IncompatibilityMessage {
-	s.Type = v
-	return s
 }
 
 // Represents the request to install an Android application (in .apk format)
@@ -6276,18 +5490,6 @@ func (s *InstallToRemoteAccessSessionInput) Validate() error {
 	return nil
 }
 
-// SetAppArn sets the AppArn field's value.
-func (s *InstallToRemoteAccessSessionInput) SetAppArn(v string) *InstallToRemoteAccessSessionInput {
-	s.AppArn = &v
-	return s
-}
-
-// SetRemoteAccessSessionArn sets the RemoteAccessSessionArn field's value.
-func (s *InstallToRemoteAccessSessionInput) SetRemoteAccessSessionArn(v string) *InstallToRemoteAccessSessionInput {
-	s.RemoteAccessSessionArn = &v
-	return s
-}
-
 // Represents the response from the server after AWS Device Farm makes a request
 // to install to a remote access session.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstallToRemoteAccessSessionResult
@@ -6313,12 +5515,6 @@ func (s InstallToRemoteAccessSessionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InstallToRemoteAccessSessionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAppUpload sets the AppUpload field's value.
-func (s *InstallToRemoteAccessSessionOutput) SetAppUpload(v *Upload) *InstallToRemoteAccessSessionOutput {
-	s.AppUpload = v
-	return s
 }
 
 // Represents a device.
@@ -6441,78 +5637,6 @@ func (s Job) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Job) SetArn(v string) *Job {
-	s.Arn = &v
-	return s
-}
-
-// SetCounters sets the Counters field's value.
-func (s *Job) SetCounters(v *Counters) *Job {
-	s.Counters = v
-	return s
-}
-
-// SetCreated sets the Created field's value.
-func (s *Job) SetCreated(v time.Time) *Job {
-	s.Created = &v
-	return s
-}
-
-// SetDevice sets the Device field's value.
-func (s *Job) SetDevice(v *Device) *Job {
-	s.Device = v
-	return s
-}
-
-// SetDeviceMinutes sets the DeviceMinutes field's value.
-func (s *Job) SetDeviceMinutes(v *DeviceMinutes) *Job {
-	s.DeviceMinutes = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Job) SetMessage(v string) *Job {
-	s.Message = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Job) SetName(v string) *Job {
-	s.Name = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *Job) SetResult(v ExecutionResult) *Job {
-	s.Result = v
-	return s
-}
-
-// SetStarted sets the Started field's value.
-func (s *Job) SetStarted(v time.Time) *Job {
-	s.Started = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Job) SetStatus(v ExecutionStatus) *Job {
-	s.Status = v
-	return s
-}
-
-// SetStopped sets the Stopped field's value.
-func (s *Job) SetStopped(v time.Time) *Job {
-	s.Stopped = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Job) SetType(v TestType) *Job {
-	s.Type = v
-	return s
-}
-
 // Represents a request to the list artifacts operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListArtifactsRequest
 type ListArtifactsInput struct {
@@ -6574,24 +5698,6 @@ func (s *ListArtifactsInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListArtifactsInput) SetArn(v string) *ListArtifactsInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListArtifactsInput) SetNextToken(v string) *ListArtifactsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ListArtifactsInput) SetType(v ArtifactCategory) *ListArtifactsInput {
-	s.Type = v
-	return s
-}
-
 // Represents the result of a list artifacts operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListArtifactsResult
 type ListArtifactsOutput struct {
@@ -6621,18 +5727,6 @@ func (s ListArtifactsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListArtifactsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetArtifacts sets the Artifacts field's value.
-func (s *ListArtifactsOutput) SetArtifacts(v []Artifact) *ListArtifactsOutput {
-	s.Artifacts = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListArtifactsOutput) SetNextToken(v string) *ListArtifactsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the result of a list device pools request.
@@ -6690,24 +5784,6 @@ func (s *ListDevicePoolsInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListDevicePoolsInput) SetArn(v string) *ListDevicePoolsInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDevicePoolsInput) SetNextToken(v string) *ListDevicePoolsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ListDevicePoolsInput) SetType(v DevicePoolType) *ListDevicePoolsInput {
-	s.Type = v
-	return s
-}
-
 // Represents the result of a list device pools request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicePoolsResult
 type ListDevicePoolsOutput struct {
@@ -6737,18 +5813,6 @@ func (s ListDevicePoolsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDevicePoolsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevicePools sets the DevicePools field's value.
-func (s *ListDevicePoolsOutput) SetDevicePools(v []DevicePool) *ListDevicePoolsOutput {
-	s.DevicePools = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDevicePoolsOutput) SetNextToken(v string) *ListDevicePoolsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the result of a list devices request.
@@ -6790,18 +5854,6 @@ func (s *ListDevicesInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListDevicesInput) SetArn(v string) *ListDevicesInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDevicesInput) SetNextToken(v string) *ListDevicesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the result of a list devices operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicesResult
 type ListDevicesOutput struct {
@@ -6831,18 +5883,6 @@ func (s ListDevicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDevicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevices sets the Devices field's value.
-func (s *ListDevicesOutput) SetDevices(v []Device) *ListDevicesOutput {
-	s.Devices = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDevicesOutput) SetNextToken(v string) *ListDevicesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents a request to the list jobs operation.
@@ -6890,18 +5930,6 @@ func (s *ListJobsInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListJobsInput) SetArn(v string) *ListJobsInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobsInput) SetNextToken(v string) *ListJobsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the result of a list jobs request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListJobsResult
 type ListJobsOutput struct {
@@ -6931,18 +5959,6 @@ func (s ListJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetJobs sets the Jobs field's value.
-func (s *ListJobsOutput) SetJobs(v []Job) *ListJobsOutput {
-	s.Jobs = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListJobsOutput) SetNextToken(v string) *ListJobsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListNetworkProfilesRequest
@@ -6994,24 +6010,6 @@ func (s *ListNetworkProfilesInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListNetworkProfilesInput) SetArn(v string) *ListNetworkProfilesInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListNetworkProfilesInput) SetNextToken(v string) *ListNetworkProfilesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ListNetworkProfilesInput) SetType(v NetworkProfileType) *ListNetworkProfilesInput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListNetworkProfilesResult
 type ListNetworkProfilesOutput struct {
 	_ struct{} `type:"structure"`
@@ -7039,18 +6037,6 @@ func (s ListNetworkProfilesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListNetworkProfilesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNetworkProfiles sets the NetworkProfiles field's value.
-func (s *ListNetworkProfilesOutput) SetNetworkProfiles(v []NetworkProfile) *ListNetworkProfilesOutput {
-	s.NetworkProfiles = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListNetworkProfilesOutput) SetNextToken(v string) *ListNetworkProfilesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingPromotionsRequest
@@ -7085,12 +6071,6 @@ func (s *ListOfferingPromotionsInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListOfferingPromotionsInput) SetNextToken(v string) *ListOfferingPromotionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingPromotionsResult
 type ListOfferingPromotionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -7118,18 +6098,6 @@ func (s ListOfferingPromotionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOfferingPromotionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOfferingPromotionsOutput) SetNextToken(v string) *ListOfferingPromotionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOfferingPromotions sets the OfferingPromotions field's value.
-func (s *ListOfferingPromotionsOutput) SetOfferingPromotions(v []OfferingPromotion) *ListOfferingPromotionsOutput {
-	s.OfferingPromotions = v
-	return s
 }
 
 // Represents the request to list the offering transaction history.
@@ -7165,12 +6133,6 @@ func (s *ListOfferingTransactionsInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListOfferingTransactionsInput) SetNextToken(v string) *ListOfferingTransactionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Returns the transaction log of the specified offerings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingTransactionsResult
 type ListOfferingTransactionsOutput struct {
@@ -7200,18 +6162,6 @@ func (s ListOfferingTransactionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOfferingTransactionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOfferingTransactionsOutput) SetNextToken(v string) *ListOfferingTransactionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOfferingTransactions sets the OfferingTransactions field's value.
-func (s *ListOfferingTransactionsOutput) SetOfferingTransactions(v []OfferingTransaction) *ListOfferingTransactionsOutput {
-	s.OfferingTransactions = v
-	return s
 }
 
 // Represents the request to list all offerings.
@@ -7247,12 +6197,6 @@ func (s *ListOfferingsInput) Validate() error {
 	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListOfferingsInput) SetNextToken(v string) *ListOfferingsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the return values of the list of offerings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListOfferingsResult
 type ListOfferingsOutput struct {
@@ -7281,18 +6225,6 @@ func (s ListOfferingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOfferingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOfferingsOutput) SetNextToken(v string) *ListOfferingsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetOfferings sets the Offerings field's value.
-func (s *ListOfferingsOutput) SetOfferings(v []Offering) *ListOfferingsOutput {
-	s.Offerings = v
-	return s
 }
 
 // Represents a request to the list projects operation.
@@ -7336,18 +6268,6 @@ func (s *ListProjectsInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListProjectsInput) SetArn(v string) *ListProjectsInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListProjectsInput) SetNextToken(v string) *ListProjectsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the result of a list projects request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListProjectsResult
 type ListProjectsOutput struct {
@@ -7377,18 +6297,6 @@ func (s ListProjectsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListProjectsOutput) SetNextToken(v string) *ListProjectsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetProjects sets the Projects field's value.
-func (s *ListProjectsOutput) SetProjects(v []Project) *ListProjectsOutput {
-	s.Projects = v
-	return s
 }
 
 // Represents the request to return information about the remote access session.
@@ -7437,18 +6345,6 @@ func (s *ListRemoteAccessSessionsInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListRemoteAccessSessionsInput) SetArn(v string) *ListRemoteAccessSessionsInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRemoteAccessSessionsInput) SetNextToken(v string) *ListRemoteAccessSessionsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the response from the server after AWS Device Farm makes a request
 // to return information about the remote access session.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRemoteAccessSessionsResult
@@ -7479,18 +6375,6 @@ func (s ListRemoteAccessSessionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRemoteAccessSessionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRemoteAccessSessionsOutput) SetNextToken(v string) *ListRemoteAccessSessionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRemoteAccessSessions sets the RemoteAccessSessions field's value.
-func (s *ListRemoteAccessSessionsOutput) SetRemoteAccessSessions(v []RemoteAccessSession) *ListRemoteAccessSessionsOutput {
-	s.RemoteAccessSessions = v
-	return s
 }
 
 // Represents a request to the list runs operation.
@@ -7539,18 +6423,6 @@ func (s *ListRunsInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListRunsInput) SetArn(v string) *ListRunsInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRunsInput) SetNextToken(v string) *ListRunsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the result of a list runs request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListRunsResult
 type ListRunsOutput struct {
@@ -7580,18 +6452,6 @@ func (s ListRunsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRunsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListRunsOutput) SetNextToken(v string) *ListRunsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRuns sets the Runs field's value.
-func (s *ListRunsOutput) SetRuns(v []Run) *ListRunsOutput {
-	s.Runs = v
-	return s
 }
 
 // Represents a request to the list samples operation.
@@ -7640,18 +6500,6 @@ func (s *ListSamplesInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListSamplesInput) SetArn(v string) *ListSamplesInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListSamplesInput) SetNextToken(v string) *ListSamplesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the result of a list samples request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSamplesResult
 type ListSamplesOutput struct {
@@ -7681,18 +6529,6 @@ func (s ListSamplesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListSamplesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListSamplesOutput) SetNextToken(v string) *ListSamplesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSamples sets the Samples field's value.
-func (s *ListSamplesOutput) SetSamples(v []Sample) *ListSamplesOutput {
-	s.Samples = v
-	return s
 }
 
 // Represents a request to the list suites operation.
@@ -7740,18 +6576,6 @@ func (s *ListSuitesInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListSuitesInput) SetArn(v string) *ListSuitesInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListSuitesInput) SetNextToken(v string) *ListSuitesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the result of a list suites request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListSuitesResult
 type ListSuitesOutput struct {
@@ -7781,18 +6605,6 @@ func (s ListSuitesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListSuitesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListSuitesOutput) SetNextToken(v string) *ListSuitesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSuites sets the Suites field's value.
-func (s *ListSuitesOutput) SetSuites(v []Suite) *ListSuitesOutput {
-	s.Suites = v
-	return s
 }
 
 // Represents a request to the list tests operation.
@@ -7840,18 +6652,6 @@ func (s *ListTestsInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListTestsInput) SetArn(v string) *ListTestsInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTestsInput) SetNextToken(v string) *ListTestsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the result of a list tests request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListTestsResult
 type ListTestsOutput struct {
@@ -7881,18 +6681,6 @@ func (s ListTestsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTestsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTestsOutput) SetNextToken(v string) *ListTestsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTests sets the Tests field's value.
-func (s *ListTestsOutput) SetTests(v []Test) *ListTestsOutput {
-	s.Tests = v
-	return s
 }
 
 // Represents a request to the list unique problems operation.
@@ -7938,18 +6726,6 @@ func (s *ListUniqueProblemsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetArn sets the Arn field's value.
-func (s *ListUniqueProblemsInput) SetArn(v string) *ListUniqueProblemsInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUniqueProblemsInput) SetNextToken(v string) *ListUniqueProblemsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the result of a list unique problems request.
@@ -7999,18 +6775,6 @@ func (s ListUniqueProblemsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListUniqueProblemsOutput) SetNextToken(v string) *ListUniqueProblemsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUniqueProblems sets the UniqueProblems field's value.
-func (s *ListUniqueProblemsOutput) SetUniqueProblems(v map[string][]UniqueProblem) *ListUniqueProblemsOutput {
-	s.UniqueProblems = v
-	return s
-}
-
 // Represents a request to the list uploads operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploadsRequest
 type ListUploadsInput struct {
@@ -8057,18 +6821,6 @@ func (s *ListUploadsInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *ListUploadsInput) SetArn(v string) *ListUploadsInput {
-	s.Arn = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUploadsInput) SetNextToken(v string) *ListUploadsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the result of a list uploads request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListUploadsResult
 type ListUploadsOutput struct {
@@ -8098,18 +6850,6 @@ func (s ListUploadsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUploadsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListUploadsOutput) SetNextToken(v string) *ListUploadsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetUploads sets the Uploads field's value.
-func (s *ListUploadsOutput) SetUploads(v []Upload) *ListUploadsOutput {
-	s.Uploads = v
-	return s
 }
 
 // Represents a latitude and longitude pair, expressed in geographic coordinate
@@ -8159,18 +6899,6 @@ func (s *Location) Validate() error {
 	return nil
 }
 
-// SetLatitude sets the Latitude field's value.
-func (s *Location) SetLatitude(v float64) *Location {
-	s.Latitude = &v
-	return s
-}
-
-// SetLongitude sets the Longitude field's value.
-func (s *Location) SetLongitude(v float64) *Location {
-	s.Longitude = &v
-	return s
-}
-
 // A number representing the monetary amount for an offering or transaction.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/MonetaryAmount
 type MonetaryAmount struct {
@@ -8191,18 +6919,6 @@ func (s MonetaryAmount) String() string {
 // GoString returns the string representation
 func (s MonetaryAmount) GoString() string {
 	return s.String()
-}
-
-// SetAmount sets the Amount field's value.
-func (s *MonetaryAmount) SetAmount(v float64) *MonetaryAmount {
-	s.Amount = &v
-	return s
-}
-
-// SetCurrencyCode sets the CurrencyCode field's value.
-func (s *MonetaryAmount) SetCurrencyCode(v CurrencyCode) *MonetaryAmount {
-	s.CurrencyCode = v
-	return s
 }
 
 // An array of settings that describes characteristics of a network profile.
@@ -8261,78 +6977,6 @@ func (s NetworkProfile) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *NetworkProfile) SetArn(v string) *NetworkProfile {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *NetworkProfile) SetDescription(v string) *NetworkProfile {
-	s.Description = &v
-	return s
-}
-
-// SetDownlinkBandwidthBits sets the DownlinkBandwidthBits field's value.
-func (s *NetworkProfile) SetDownlinkBandwidthBits(v int64) *NetworkProfile {
-	s.DownlinkBandwidthBits = &v
-	return s
-}
-
-// SetDownlinkDelayMs sets the DownlinkDelayMs field's value.
-func (s *NetworkProfile) SetDownlinkDelayMs(v int64) *NetworkProfile {
-	s.DownlinkDelayMs = &v
-	return s
-}
-
-// SetDownlinkJitterMs sets the DownlinkJitterMs field's value.
-func (s *NetworkProfile) SetDownlinkJitterMs(v int64) *NetworkProfile {
-	s.DownlinkJitterMs = &v
-	return s
-}
-
-// SetDownlinkLossPercent sets the DownlinkLossPercent field's value.
-func (s *NetworkProfile) SetDownlinkLossPercent(v int64) *NetworkProfile {
-	s.DownlinkLossPercent = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *NetworkProfile) SetName(v string) *NetworkProfile {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *NetworkProfile) SetType(v NetworkProfileType) *NetworkProfile {
-	s.Type = v
-	return s
-}
-
-// SetUplinkBandwidthBits sets the UplinkBandwidthBits field's value.
-func (s *NetworkProfile) SetUplinkBandwidthBits(v int64) *NetworkProfile {
-	s.UplinkBandwidthBits = &v
-	return s
-}
-
-// SetUplinkDelayMs sets the UplinkDelayMs field's value.
-func (s *NetworkProfile) SetUplinkDelayMs(v int64) *NetworkProfile {
-	s.UplinkDelayMs = &v
-	return s
-}
-
-// SetUplinkJitterMs sets the UplinkJitterMs field's value.
-func (s *NetworkProfile) SetUplinkJitterMs(v int64) *NetworkProfile {
-	s.UplinkJitterMs = &v
-	return s
-}
-
-// SetUplinkLossPercent sets the UplinkLossPercent field's value.
-func (s *NetworkProfile) SetUplinkLossPercent(v int64) *NetworkProfile {
-	s.UplinkLossPercent = &v
-	return s
-}
-
 // Represents the metadata of a device offering.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Offering
 type Offering struct {
@@ -8364,36 +7008,6 @@ func (s Offering) GoString() string {
 	return s.String()
 }
 
-// SetDescription sets the Description field's value.
-func (s *Offering) SetDescription(v string) *Offering {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *Offering) SetId(v string) *Offering {
-	s.Id = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *Offering) SetPlatform(v DevicePlatform) *Offering {
-	s.Platform = v
-	return s
-}
-
-// SetRecurringCharges sets the RecurringCharges field's value.
-func (s *Offering) SetRecurringCharges(v []RecurringCharge) *Offering {
-	s.RecurringCharges = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Offering) SetType(v OfferingType) *Offering {
-	s.Type = v
-	return s
-}
-
 // Represents information about an offering promotion.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/OfferingPromotion
 type OfferingPromotion struct {
@@ -8414,18 +7028,6 @@ func (s OfferingPromotion) String() string {
 // GoString returns the string representation
 func (s OfferingPromotion) GoString() string {
 	return s.String()
-}
-
-// SetDescription sets the Description field's value.
-func (s *OfferingPromotion) SetDescription(v string) *OfferingPromotion {
-	s.Description = &v
-	return s
-}
-
-// SetId sets the Id field's value.
-func (s *OfferingPromotion) SetId(v string) *OfferingPromotion {
-	s.Id = &v
-	return s
 }
 
 // The status of the offering.
@@ -8454,30 +7056,6 @@ func (s OfferingStatus) String() string {
 // GoString returns the string representation
 func (s OfferingStatus) GoString() string {
 	return s.String()
-}
-
-// SetEffectiveOn sets the EffectiveOn field's value.
-func (s *OfferingStatus) SetEffectiveOn(v time.Time) *OfferingStatus {
-	s.EffectiveOn = &v
-	return s
-}
-
-// SetOffering sets the Offering field's value.
-func (s *OfferingStatus) SetOffering(v *Offering) *OfferingStatus {
-	s.Offering = v
-	return s
-}
-
-// SetQuantity sets the Quantity field's value.
-func (s *OfferingStatus) SetQuantity(v int64) *OfferingStatus {
-	s.Quantity = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *OfferingStatus) SetType(v OfferingTransactionType) *OfferingStatus {
-	s.Type = v
-	return s
 }
 
 // Represents the metadata of an offering transaction.
@@ -8509,36 +7087,6 @@ func (s OfferingTransaction) String() string {
 // GoString returns the string representation
 func (s OfferingTransaction) GoString() string {
 	return s.String()
-}
-
-// SetCost sets the Cost field's value.
-func (s *OfferingTransaction) SetCost(v *MonetaryAmount) *OfferingTransaction {
-	s.Cost = v
-	return s
-}
-
-// SetCreatedOn sets the CreatedOn field's value.
-func (s *OfferingTransaction) SetCreatedOn(v time.Time) *OfferingTransaction {
-	s.CreatedOn = &v
-	return s
-}
-
-// SetOfferingPromotionId sets the OfferingPromotionId field's value.
-func (s *OfferingTransaction) SetOfferingPromotionId(v string) *OfferingTransaction {
-	s.OfferingPromotionId = &v
-	return s
-}
-
-// SetOfferingStatus sets the OfferingStatus field's value.
-func (s *OfferingTransaction) SetOfferingStatus(v *OfferingStatus) *OfferingTransaction {
-	s.OfferingStatus = v
-	return s
-}
-
-// SetTransactionId sets the TransactionId field's value.
-func (s *OfferingTransaction) SetTransactionId(v string) *OfferingTransaction {
-	s.TransactionId = &v
-	return s
 }
 
 // Represents a specific warning or failure.
@@ -8594,48 +7142,6 @@ func (s Problem) GoString() string {
 	return s.String()
 }
 
-// SetDevice sets the Device field's value.
-func (s *Problem) SetDevice(v *Device) *Problem {
-	s.Device = v
-	return s
-}
-
-// SetJob sets the Job field's value.
-func (s *Problem) SetJob(v *ProblemDetail) *Problem {
-	s.Job = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Problem) SetMessage(v string) *Problem {
-	s.Message = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *Problem) SetResult(v ExecutionResult) *Problem {
-	s.Result = v
-	return s
-}
-
-// SetRun sets the Run field's value.
-func (s *Problem) SetRun(v *ProblemDetail) *Problem {
-	s.Run = v
-	return s
-}
-
-// SetSuite sets the Suite field's value.
-func (s *Problem) SetSuite(v *ProblemDetail) *Problem {
-	s.Suite = v
-	return s
-}
-
-// SetTest sets the Test field's value.
-func (s *Problem) SetTest(v *ProblemDetail) *Problem {
-	s.Test = v
-	return s
-}
-
 // Information about a problem detail.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ProblemDetail
 type ProblemDetail struct {
@@ -8656,18 +7162,6 @@ func (s ProblemDetail) String() string {
 // GoString returns the string representation
 func (s ProblemDetail) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *ProblemDetail) SetArn(v string) *ProblemDetail {
-	s.Arn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ProblemDetail) SetName(v string) *ProblemDetail {
-	s.Name = &v
-	return s
 }
 
 // Represents an operating-system neutral workspace for running and managing
@@ -8698,30 +7192,6 @@ func (s Project) String() string {
 // GoString returns the string representation
 func (s Project) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *Project) SetArn(v string) *Project {
-	s.Arn = &v
-	return s
-}
-
-// SetCreated sets the Created field's value.
-func (s *Project) SetCreated(v time.Time) *Project {
-	s.Created = &v
-	return s
-}
-
-// SetDefaultJobTimeoutMinutes sets the DefaultJobTimeoutMinutes field's value.
-func (s *Project) SetDefaultJobTimeoutMinutes(v int64) *Project {
-	s.DefaultJobTimeoutMinutes = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Project) SetName(v string) *Project {
-	s.Name = &v
-	return s
 }
 
 // Represents a request for a purchase offering.
@@ -8765,24 +7235,6 @@ func (s *PurchaseOfferingInput) Validate() error {
 	return nil
 }
 
-// SetOfferingId sets the OfferingId field's value.
-func (s *PurchaseOfferingInput) SetOfferingId(v string) *PurchaseOfferingInput {
-	s.OfferingId = &v
-	return s
-}
-
-// SetOfferingPromotionId sets the OfferingPromotionId field's value.
-func (s *PurchaseOfferingInput) SetOfferingPromotionId(v string) *PurchaseOfferingInput {
-	s.OfferingPromotionId = &v
-	return s
-}
-
-// SetQuantity sets the Quantity field's value.
-func (s *PurchaseOfferingInput) SetQuantity(v int64) *PurchaseOfferingInput {
-	s.Quantity = &v
-	return s
-}
-
 // The result of the purchase offering (e.g., success or failure).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/PurchaseOfferingResult
 type PurchaseOfferingOutput struct {
@@ -8807,12 +7259,6 @@ func (s PurchaseOfferingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PurchaseOfferingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOfferingTransaction sets the OfferingTransaction field's value.
-func (s *PurchaseOfferingOutput) SetOfferingTransaction(v *OfferingTransaction) *PurchaseOfferingOutput {
-	s.OfferingTransaction = v
-	return s
 }
 
 // Represents the set of radios and their states on a device. Examples of radios
@@ -8844,30 +7290,6 @@ func (s Radios) GoString() string {
 	return s.String()
 }
 
-// SetBluetooth sets the Bluetooth field's value.
-func (s *Radios) SetBluetooth(v bool) *Radios {
-	s.Bluetooth = &v
-	return s
-}
-
-// SetGps sets the Gps field's value.
-func (s *Radios) SetGps(v bool) *Radios {
-	s.Gps = &v
-	return s
-}
-
-// SetNfc sets the Nfc field's value.
-func (s *Radios) SetNfc(v bool) *Radios {
-	s.Nfc = &v
-	return s
-}
-
-// SetWifi sets the Wifi field's value.
-func (s *Radios) SetWifi(v bool) *Radios {
-	s.Wifi = &v
-	return s
-}
-
 // Specifies whether charges for devices will be recurring.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RecurringCharge
 type RecurringCharge struct {
@@ -8888,18 +7310,6 @@ func (s RecurringCharge) String() string {
 // GoString returns the string representation
 func (s RecurringCharge) GoString() string {
 	return s.String()
-}
-
-// SetCost sets the Cost field's value.
-func (s *RecurringCharge) SetCost(v *MonetaryAmount) *RecurringCharge {
-	s.Cost = v
-	return s
-}
-
-// SetFrequency sets the Frequency field's value.
-func (s *RecurringCharge) SetFrequency(v RecurringChargeFrequency) *RecurringCharge {
-	s.Frequency = v
-	return s
 }
 
 // Represents information about the remote access session.
@@ -9005,102 +7415,6 @@ func (s RemoteAccessSession) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *RemoteAccessSession) SetArn(v string) *RemoteAccessSession {
-	s.Arn = &v
-	return s
-}
-
-// SetBillingMethod sets the BillingMethod field's value.
-func (s *RemoteAccessSession) SetBillingMethod(v BillingMethod) *RemoteAccessSession {
-	s.BillingMethod = v
-	return s
-}
-
-// SetClientId sets the ClientId field's value.
-func (s *RemoteAccessSession) SetClientId(v string) *RemoteAccessSession {
-	s.ClientId = &v
-	return s
-}
-
-// SetCreated sets the Created field's value.
-func (s *RemoteAccessSession) SetCreated(v time.Time) *RemoteAccessSession {
-	s.Created = &v
-	return s
-}
-
-// SetDevice sets the Device field's value.
-func (s *RemoteAccessSession) SetDevice(v *Device) *RemoteAccessSession {
-	s.Device = v
-	return s
-}
-
-// SetDeviceMinutes sets the DeviceMinutes field's value.
-func (s *RemoteAccessSession) SetDeviceMinutes(v *DeviceMinutes) *RemoteAccessSession {
-	s.DeviceMinutes = v
-	return s
-}
-
-// SetDeviceUdid sets the DeviceUdid field's value.
-func (s *RemoteAccessSession) SetDeviceUdid(v string) *RemoteAccessSession {
-	s.DeviceUdid = &v
-	return s
-}
-
-// SetEndpoint sets the Endpoint field's value.
-func (s *RemoteAccessSession) SetEndpoint(v string) *RemoteAccessSession {
-	s.Endpoint = &v
-	return s
-}
-
-// SetHostAddress sets the HostAddress field's value.
-func (s *RemoteAccessSession) SetHostAddress(v string) *RemoteAccessSession {
-	s.HostAddress = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *RemoteAccessSession) SetMessage(v string) *RemoteAccessSession {
-	s.Message = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *RemoteAccessSession) SetName(v string) *RemoteAccessSession {
-	s.Name = &v
-	return s
-}
-
-// SetRemoteDebugEnabled sets the RemoteDebugEnabled field's value.
-func (s *RemoteAccessSession) SetRemoteDebugEnabled(v bool) *RemoteAccessSession {
-	s.RemoteDebugEnabled = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *RemoteAccessSession) SetResult(v ExecutionResult) *RemoteAccessSession {
-	s.Result = v
-	return s
-}
-
-// SetStarted sets the Started field's value.
-func (s *RemoteAccessSession) SetStarted(v time.Time) *RemoteAccessSession {
-	s.Started = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *RemoteAccessSession) SetStatus(v ExecutionStatus) *RemoteAccessSession {
-	s.Status = v
-	return s
-}
-
-// SetStopped sets the Stopped field's value.
-func (s *RemoteAccessSession) SetStopped(v time.Time) *RemoteAccessSession {
-	s.Stopped = &v
-	return s
-}
-
 // A request representing an offering renewal.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RenewOfferingRequest
 type RenewOfferingInput struct {
@@ -9136,18 +7450,6 @@ func (s *RenewOfferingInput) Validate() error {
 	return nil
 }
 
-// SetOfferingId sets the OfferingId field's value.
-func (s *RenewOfferingInput) SetOfferingId(v string) *RenewOfferingInput {
-	s.OfferingId = &v
-	return s
-}
-
-// SetQuantity sets the Quantity field's value.
-func (s *RenewOfferingInput) SetQuantity(v int64) *RenewOfferingInput {
-	s.Quantity = &v
-	return s
-}
-
 // The result of a renewal offering.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/RenewOfferingResult
 type RenewOfferingOutput struct {
@@ -9174,12 +7476,6 @@ func (s RenewOfferingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetOfferingTransaction sets the OfferingTransaction field's value.
-func (s *RenewOfferingOutput) SetOfferingTransaction(v *OfferingTransaction) *RenewOfferingOutput {
-	s.OfferingTransaction = v
-	return s
-}
-
 // Represents the screen resolution of a device in height and width, expressed
 // in pixels.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Resolution
@@ -9201,18 +7497,6 @@ func (s Resolution) String() string {
 // GoString returns the string representation
 func (s Resolution) GoString() string {
 	return s.String()
-}
-
-// SetHeight sets the Height field's value.
-func (s *Resolution) SetHeight(v int64) *Resolution {
-	s.Height = &v
-	return s
-}
-
-// SetWidth sets the Width field's value.
-func (s *Resolution) SetWidth(v int64) *Resolution {
-	s.Width = &v
-	return s
 }
 
 // Represents a condition for a device pool.
@@ -9264,24 +7548,6 @@ func (s Rule) String() string {
 // GoString returns the string representation
 func (s Rule) GoString() string {
 	return s.String()
-}
-
-// SetAttribute sets the Attribute field's value.
-func (s *Rule) SetAttribute(v DeviceAttribute) *Rule {
-	s.Attribute = v
-	return s
-}
-
-// SetOperator sets the Operator field's value.
-func (s *Rule) SetOperator(v RuleOperator) *Rule {
-	s.Operator = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Rule) SetValue(v string) *Rule {
-	s.Value = &v
-	return s
 }
 
 // Represents a test run on a set of devices with a given app package, test
@@ -9436,120 +7702,6 @@ func (s Run) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Run) SetArn(v string) *Run {
-	s.Arn = &v
-	return s
-}
-
-// SetBillingMethod sets the BillingMethod field's value.
-func (s *Run) SetBillingMethod(v BillingMethod) *Run {
-	s.BillingMethod = v
-	return s
-}
-
-// SetCompletedJobs sets the CompletedJobs field's value.
-func (s *Run) SetCompletedJobs(v int64) *Run {
-	s.CompletedJobs = &v
-	return s
-}
-
-// SetCounters sets the Counters field's value.
-func (s *Run) SetCounters(v *Counters) *Run {
-	s.Counters = v
-	return s
-}
-
-// SetCreated sets the Created field's value.
-func (s *Run) SetCreated(v time.Time) *Run {
-	s.Created = &v
-	return s
-}
-
-// SetCustomerArtifactPaths sets the CustomerArtifactPaths field's value.
-func (s *Run) SetCustomerArtifactPaths(v *CustomerArtifactPaths) *Run {
-	s.CustomerArtifactPaths = v
-	return s
-}
-
-// SetDeviceMinutes sets the DeviceMinutes field's value.
-func (s *Run) SetDeviceMinutes(v *DeviceMinutes) *Run {
-	s.DeviceMinutes = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Run) SetMessage(v string) *Run {
-	s.Message = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Run) SetName(v string) *Run {
-	s.Name = &v
-	return s
-}
-
-// SetNetworkProfile sets the NetworkProfile field's value.
-func (s *Run) SetNetworkProfile(v *NetworkProfile) *Run {
-	s.NetworkProfile = v
-	return s
-}
-
-// SetParsingResultUrl sets the ParsingResultUrl field's value.
-func (s *Run) SetParsingResultUrl(v string) *Run {
-	s.ParsingResultUrl = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *Run) SetPlatform(v DevicePlatform) *Run {
-	s.Platform = v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *Run) SetResult(v ExecutionResult) *Run {
-	s.Result = v
-	return s
-}
-
-// SetResultCode sets the ResultCode field's value.
-func (s *Run) SetResultCode(v ExecutionResultCode) *Run {
-	s.ResultCode = v
-	return s
-}
-
-// SetStarted sets the Started field's value.
-func (s *Run) SetStarted(v time.Time) *Run {
-	s.Started = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Run) SetStatus(v ExecutionStatus) *Run {
-	s.Status = v
-	return s
-}
-
-// SetStopped sets the Stopped field's value.
-func (s *Run) SetStopped(v time.Time) *Run {
-	s.Stopped = &v
-	return s
-}
-
-// SetTotalJobs sets the TotalJobs field's value.
-func (s *Run) SetTotalJobs(v int64) *Run {
-	s.TotalJobs = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Run) SetType(v TestType) *Run {
-	s.Type = v
-	return s
-}
-
 // Represents a sample of performance data.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Sample
 type Sample struct {
@@ -9617,24 +7769,6 @@ func (s Sample) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Sample) SetArn(v string) *Sample {
-	s.Arn = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Sample) SetType(v SampleType) *Sample {
-	s.Type = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *Sample) SetUrl(v string) *Sample {
-	s.Url = &v
-	return s
-}
-
 // Represents the settings for a run. Includes things like location, radio states,
 // auxiliary apps, and network profiles.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunConfiguration
@@ -9698,54 +7832,6 @@ func (s *ScheduleRunConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAuxiliaryApps sets the AuxiliaryApps field's value.
-func (s *ScheduleRunConfiguration) SetAuxiliaryApps(v []string) *ScheduleRunConfiguration {
-	s.AuxiliaryApps = v
-	return s
-}
-
-// SetBillingMethod sets the BillingMethod field's value.
-func (s *ScheduleRunConfiguration) SetBillingMethod(v BillingMethod) *ScheduleRunConfiguration {
-	s.BillingMethod = v
-	return s
-}
-
-// SetCustomerArtifactPaths sets the CustomerArtifactPaths field's value.
-func (s *ScheduleRunConfiguration) SetCustomerArtifactPaths(v *CustomerArtifactPaths) *ScheduleRunConfiguration {
-	s.CustomerArtifactPaths = v
-	return s
-}
-
-// SetExtraDataPackageArn sets the ExtraDataPackageArn field's value.
-func (s *ScheduleRunConfiguration) SetExtraDataPackageArn(v string) *ScheduleRunConfiguration {
-	s.ExtraDataPackageArn = &v
-	return s
-}
-
-// SetLocale sets the Locale field's value.
-func (s *ScheduleRunConfiguration) SetLocale(v string) *ScheduleRunConfiguration {
-	s.Locale = &v
-	return s
-}
-
-// SetLocation sets the Location field's value.
-func (s *ScheduleRunConfiguration) SetLocation(v *Location) *ScheduleRunConfiguration {
-	s.Location = v
-	return s
-}
-
-// SetNetworkProfileArn sets the NetworkProfileArn field's value.
-func (s *ScheduleRunConfiguration) SetNetworkProfileArn(v string) *ScheduleRunConfiguration {
-	s.NetworkProfileArn = &v
-	return s
-}
-
-// SetRadios sets the Radios field's value.
-func (s *ScheduleRunConfiguration) SetRadios(v *Radios) *ScheduleRunConfiguration {
-	s.Radios = v
-	return s
 }
 
 // Represents a request to the schedule run operation.
@@ -9833,48 +7919,6 @@ func (s *ScheduleRunInput) Validate() error {
 	return nil
 }
 
-// SetAppArn sets the AppArn field's value.
-func (s *ScheduleRunInput) SetAppArn(v string) *ScheduleRunInput {
-	s.AppArn = &v
-	return s
-}
-
-// SetConfiguration sets the Configuration field's value.
-func (s *ScheduleRunInput) SetConfiguration(v *ScheduleRunConfiguration) *ScheduleRunInput {
-	s.Configuration = v
-	return s
-}
-
-// SetDevicePoolArn sets the DevicePoolArn field's value.
-func (s *ScheduleRunInput) SetDevicePoolArn(v string) *ScheduleRunInput {
-	s.DevicePoolArn = &v
-	return s
-}
-
-// SetExecutionConfiguration sets the ExecutionConfiguration field's value.
-func (s *ScheduleRunInput) SetExecutionConfiguration(v *ExecutionConfiguration) *ScheduleRunInput {
-	s.ExecutionConfiguration = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ScheduleRunInput) SetName(v string) *ScheduleRunInput {
-	s.Name = &v
-	return s
-}
-
-// SetProjectArn sets the ProjectArn field's value.
-func (s *ScheduleRunInput) SetProjectArn(v string) *ScheduleRunInput {
-	s.ProjectArn = &v
-	return s
-}
-
-// SetTest sets the Test field's value.
-func (s *ScheduleRunInput) SetTest(v *ScheduleRunTest) *ScheduleRunInput {
-	s.Test = v
-	return s
-}
-
 // Represents the result of a schedule run request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ScheduleRunResult
 type ScheduleRunOutput struct {
@@ -9899,12 +7943,6 @@ func (s ScheduleRunOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ScheduleRunOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRun sets the Run field's value.
-func (s *ScheduleRunOutput) SetRun(v *Run) *ScheduleRunOutput {
-	s.Run = v
-	return s
 }
 
 // Represents additional test settings.
@@ -10057,30 +8095,6 @@ func (s *ScheduleRunTest) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *ScheduleRunTest) SetFilter(v string) *ScheduleRunTest {
-	s.Filter = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *ScheduleRunTest) SetParameters(v map[string]string) *ScheduleRunTest {
-	s.Parameters = v
-	return s
-}
-
-// SetTestPackageArn sets the TestPackageArn field's value.
-func (s *ScheduleRunTest) SetTestPackageArn(v string) *ScheduleRunTest {
-	s.TestPackageArn = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ScheduleRunTest) SetType(v TestType) *ScheduleRunTest {
-	s.Type = v
-	return s
-}
-
 // Represents the request to stop the remote access session.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSessionRequest
 type StopRemoteAccessSessionInput struct {
@@ -10119,12 +8133,6 @@ func (s *StopRemoteAccessSessionInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *StopRemoteAccessSessionInput) SetArn(v string) *StopRemoteAccessSessionInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the response from the server that describes the remote access
 // session when AWS Device Farm stops the session.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRemoteAccessSessionResult
@@ -10151,12 +8159,6 @@ func (s StopRemoteAccessSessionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StopRemoteAccessSessionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRemoteAccessSession sets the RemoteAccessSession field's value.
-func (s *StopRemoteAccessSessionOutput) SetRemoteAccessSession(v *RemoteAccessSession) *StopRemoteAccessSessionOutput {
-	s.RemoteAccessSession = v
-	return s
 }
 
 // Represents the request to stop a specific run.
@@ -10198,12 +8200,6 @@ func (s *StopRunInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *StopRunInput) SetArn(v string) *StopRunInput {
-	s.Arn = &v
-	return s
-}
-
 // Represents the results of your stop run attempt.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/StopRunResult
 type StopRunOutput struct {
@@ -10228,12 +8224,6 @@ func (s StopRunOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StopRunOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRun sets the Run field's value.
-func (s *StopRunOutput) SetRun(v *Run) *StopRunOutput {
-	s.Run = v
-	return s
 }
 
 // Represents a collection of one or more tests.
@@ -10353,72 +8343,6 @@ func (s Suite) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Suite) SetArn(v string) *Suite {
-	s.Arn = &v
-	return s
-}
-
-// SetCounters sets the Counters field's value.
-func (s *Suite) SetCounters(v *Counters) *Suite {
-	s.Counters = v
-	return s
-}
-
-// SetCreated sets the Created field's value.
-func (s *Suite) SetCreated(v time.Time) *Suite {
-	s.Created = &v
-	return s
-}
-
-// SetDeviceMinutes sets the DeviceMinutes field's value.
-func (s *Suite) SetDeviceMinutes(v *DeviceMinutes) *Suite {
-	s.DeviceMinutes = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Suite) SetMessage(v string) *Suite {
-	s.Message = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Suite) SetName(v string) *Suite {
-	s.Name = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *Suite) SetResult(v ExecutionResult) *Suite {
-	s.Result = v
-	return s
-}
-
-// SetStarted sets the Started field's value.
-func (s *Suite) SetStarted(v time.Time) *Suite {
-	s.Started = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Suite) SetStatus(v ExecutionStatus) *Suite {
-	s.Status = v
-	return s
-}
-
-// SetStopped sets the Stopped field's value.
-func (s *Suite) SetStopped(v time.Time) *Suite {
-	s.Stopped = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Suite) SetType(v TestType) *Suite {
-	s.Type = v
-	return s
-}
-
 // Represents a condition that is evaluated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Test
 type Test struct {
@@ -10536,72 +8460,6 @@ func (s Test) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Test) SetArn(v string) *Test {
-	s.Arn = &v
-	return s
-}
-
-// SetCounters sets the Counters field's value.
-func (s *Test) SetCounters(v *Counters) *Test {
-	s.Counters = v
-	return s
-}
-
-// SetCreated sets the Created field's value.
-func (s *Test) SetCreated(v time.Time) *Test {
-	s.Created = &v
-	return s
-}
-
-// SetDeviceMinutes sets the DeviceMinutes field's value.
-func (s *Test) SetDeviceMinutes(v *DeviceMinutes) *Test {
-	s.DeviceMinutes = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Test) SetMessage(v string) *Test {
-	s.Message = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Test) SetName(v string) *Test {
-	s.Name = &v
-	return s
-}
-
-// SetResult sets the Result field's value.
-func (s *Test) SetResult(v ExecutionResult) *Test {
-	s.Result = v
-	return s
-}
-
-// SetStarted sets the Started field's value.
-func (s *Test) SetStarted(v time.Time) *Test {
-	s.Started = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Test) SetStatus(v ExecutionStatus) *Test {
-	s.Status = v
-	return s
-}
-
-// SetStopped sets the Stopped field's value.
-func (s *Test) SetStopped(v time.Time) *Test {
-	s.Stopped = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Test) SetType(v TestType) *Test {
-	s.Type = v
-	return s
-}
-
 // Represents information about free trial device minutes for an AWS account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/TrialMinutes
 type TrialMinutes struct {
@@ -10624,18 +8482,6 @@ func (s TrialMinutes) GoString() string {
 	return s.String()
 }
 
-// SetRemaining sets the Remaining field's value.
-func (s *TrialMinutes) SetRemaining(v float64) *TrialMinutes {
-	s.Remaining = &v
-	return s
-}
-
-// SetTotal sets the Total field's value.
-func (s *TrialMinutes) SetTotal(v float64) *TrialMinutes {
-	s.Total = &v
-	return s
-}
-
 // A collection of one or more problems, grouped by their result.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UniqueProblem
 type UniqueProblem struct {
@@ -10656,18 +8502,6 @@ func (s UniqueProblem) String() string {
 // GoString returns the string representation
 func (s UniqueProblem) GoString() string {
 	return s.String()
-}
-
-// SetMessage sets the Message field's value.
-func (s *UniqueProblem) SetMessage(v string) *UniqueProblem {
-	s.Message = &v
-	return s
-}
-
-// SetProblems sets the Problems field's value.
-func (s *UniqueProblem) SetProblems(v []Problem) *UniqueProblem {
-	s.Problems = v
-	return s
 }
 
 // Represents a request to the update device pool operation.
@@ -10720,30 +8554,6 @@ func (s *UpdateDevicePoolInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *UpdateDevicePoolInput) SetArn(v string) *UpdateDevicePoolInput {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateDevicePoolInput) SetDescription(v string) *UpdateDevicePoolInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateDevicePoolInput) SetName(v string) *UpdateDevicePoolInput {
-	s.Name = &v
-	return s
-}
-
-// SetRules sets the Rules field's value.
-func (s *UpdateDevicePoolInput) SetRules(v []Rule) *UpdateDevicePoolInput {
-	s.Rules = v
-	return s
-}
-
 // Represents the result of an update device pool request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePoolResult
 type UpdateDevicePoolOutput struct {
@@ -10768,12 +8578,6 @@ func (s UpdateDevicePoolOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateDevicePoolOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDevicePool sets the DevicePool field's value.
-func (s *UpdateDevicePoolOutput) SetDevicePool(v *DevicePool) *UpdateDevicePoolOutput {
-	s.DevicePool = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateNetworkProfileRequest
@@ -10852,78 +8656,6 @@ func (s *UpdateNetworkProfileInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *UpdateNetworkProfileInput) SetArn(v string) *UpdateNetworkProfileInput {
-	s.Arn = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateNetworkProfileInput) SetDescription(v string) *UpdateNetworkProfileInput {
-	s.Description = &v
-	return s
-}
-
-// SetDownlinkBandwidthBits sets the DownlinkBandwidthBits field's value.
-func (s *UpdateNetworkProfileInput) SetDownlinkBandwidthBits(v int64) *UpdateNetworkProfileInput {
-	s.DownlinkBandwidthBits = &v
-	return s
-}
-
-// SetDownlinkDelayMs sets the DownlinkDelayMs field's value.
-func (s *UpdateNetworkProfileInput) SetDownlinkDelayMs(v int64) *UpdateNetworkProfileInput {
-	s.DownlinkDelayMs = &v
-	return s
-}
-
-// SetDownlinkJitterMs sets the DownlinkJitterMs field's value.
-func (s *UpdateNetworkProfileInput) SetDownlinkJitterMs(v int64) *UpdateNetworkProfileInput {
-	s.DownlinkJitterMs = &v
-	return s
-}
-
-// SetDownlinkLossPercent sets the DownlinkLossPercent field's value.
-func (s *UpdateNetworkProfileInput) SetDownlinkLossPercent(v int64) *UpdateNetworkProfileInput {
-	s.DownlinkLossPercent = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateNetworkProfileInput) SetName(v string) *UpdateNetworkProfileInput {
-	s.Name = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *UpdateNetworkProfileInput) SetType(v NetworkProfileType) *UpdateNetworkProfileInput {
-	s.Type = v
-	return s
-}
-
-// SetUplinkBandwidthBits sets the UplinkBandwidthBits field's value.
-func (s *UpdateNetworkProfileInput) SetUplinkBandwidthBits(v int64) *UpdateNetworkProfileInput {
-	s.UplinkBandwidthBits = &v
-	return s
-}
-
-// SetUplinkDelayMs sets the UplinkDelayMs field's value.
-func (s *UpdateNetworkProfileInput) SetUplinkDelayMs(v int64) *UpdateNetworkProfileInput {
-	s.UplinkDelayMs = &v
-	return s
-}
-
-// SetUplinkJitterMs sets the UplinkJitterMs field's value.
-func (s *UpdateNetworkProfileInput) SetUplinkJitterMs(v int64) *UpdateNetworkProfileInput {
-	s.UplinkJitterMs = &v
-	return s
-}
-
-// SetUplinkLossPercent sets the UplinkLossPercent field's value.
-func (s *UpdateNetworkProfileInput) SetUplinkLossPercent(v int64) *UpdateNetworkProfileInput {
-	s.UplinkLossPercent = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateNetworkProfileResult
 type UpdateNetworkProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -10947,12 +8679,6 @@ func (s UpdateNetworkProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateNetworkProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNetworkProfile sets the NetworkProfile field's value.
-func (s *UpdateNetworkProfileOutput) SetNetworkProfile(v *NetworkProfile) *UpdateNetworkProfileOutput {
-	s.NetworkProfile = v
-	return s
 }
 
 // Represents a request to the update project operation.
@@ -11000,24 +8726,6 @@ func (s *UpdateProjectInput) Validate() error {
 	return nil
 }
 
-// SetArn sets the Arn field's value.
-func (s *UpdateProjectInput) SetArn(v string) *UpdateProjectInput {
-	s.Arn = &v
-	return s
-}
-
-// SetDefaultJobTimeoutMinutes sets the DefaultJobTimeoutMinutes field's value.
-func (s *UpdateProjectInput) SetDefaultJobTimeoutMinutes(v int64) *UpdateProjectInput {
-	s.DefaultJobTimeoutMinutes = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateProjectInput) SetName(v string) *UpdateProjectInput {
-	s.Name = &v
-	return s
-}
-
 // Represents the result of an update project request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateProjectResult
 type UpdateProjectOutput struct {
@@ -11042,12 +8750,6 @@ func (s UpdateProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetProject sets the Project field's value.
-func (s *UpdateProjectOutput) SetProject(v *Project) *UpdateProjectOutput {
-	s.Project = v
-	return s
 }
 
 // An app or a set of one or more tests to upload or that have been uploaded.
@@ -11143,60 +8845,6 @@ func (s Upload) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Upload) SetArn(v string) *Upload {
-	s.Arn = &v
-	return s
-}
-
-// SetContentType sets the ContentType field's value.
-func (s *Upload) SetContentType(v string) *Upload {
-	s.ContentType = &v
-	return s
-}
-
-// SetCreated sets the Created field's value.
-func (s *Upload) SetCreated(v time.Time) *Upload {
-	s.Created = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Upload) SetMessage(v string) *Upload {
-	s.Message = &v
-	return s
-}
-
-// SetMetadata sets the Metadata field's value.
-func (s *Upload) SetMetadata(v string) *Upload {
-	s.Metadata = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Upload) SetName(v string) *Upload {
-	s.Name = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Upload) SetStatus(v UploadStatus) *Upload {
-	s.Status = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Upload) SetType(v UploadType) *Upload {
-	s.Type = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *Upload) SetUrl(v string) *Upload {
-	s.Url = &v
-	return s
-}
-
 type ArtifactCategory string
 
 // Enum values for ArtifactCategory
@@ -11205,6 +8853,15 @@ const (
 	ArtifactCategoryFile       ArtifactCategory = "FILE"
 	ArtifactCategoryLog        ArtifactCategory = "LOG"
 )
+
+func (enum ArtifactCategory) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArtifactCategory) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ArtifactType string
 
@@ -11239,6 +8896,15 @@ const (
 	ArtifactTypeCustomerArtifactLog    ArtifactType = "CUSTOMER_ARTIFACT_LOG"
 )
 
+func (enum ArtifactType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArtifactType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BillingMethod string
 
 // Enum values for BillingMethod
@@ -11247,12 +8913,30 @@ const (
 	BillingMethodUnmetered BillingMethod = "UNMETERED"
 )
 
+func (enum BillingMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BillingMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CurrencyCode string
 
 // Enum values for CurrencyCode
 const (
 	CurrencyCodeUsd CurrencyCode = "USD"
 )
+
+func (enum CurrencyCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CurrencyCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DeviceAttribute string
 
@@ -11267,6 +8951,15 @@ const (
 	DeviceAttributeAppiumVersion       DeviceAttribute = "APPIUM_VERSION"
 )
 
+func (enum DeviceAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeviceFormFactor string
 
 // Enum values for DeviceFormFactor
@@ -11274,6 +8967,15 @@ const (
 	DeviceFormFactorPhone  DeviceFormFactor = "PHONE"
 	DeviceFormFactorTablet DeviceFormFactor = "TABLET"
 )
+
+func (enum DeviceFormFactor) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceFormFactor) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DevicePlatform string
 
@@ -11283,6 +8985,15 @@ const (
 	DevicePlatformIos     DevicePlatform = "IOS"
 )
 
+func (enum DevicePlatform) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DevicePlatform) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DevicePoolType string
 
 // Enum values for DevicePoolType
@@ -11290,6 +9001,15 @@ const (
 	DevicePoolTypeCurated DevicePoolType = "CURATED"
 	DevicePoolTypePrivate DevicePoolType = "PRIVATE"
 )
+
+func (enum DevicePoolType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DevicePoolType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExecutionResult string
 
@@ -11304,12 +9024,30 @@ const (
 	ExecutionResultStopped ExecutionResult = "STOPPED"
 )
 
+func (enum ExecutionResult) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExecutionResult) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ExecutionResultCode string
 
 // Enum values for ExecutionResultCode
 const (
 	ExecutionResultCodeParsingFailed ExecutionResultCode = "PARSING_FAILED"
 )
+
+func (enum ExecutionResultCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExecutionResultCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExecutionStatus string
 
@@ -11326,6 +9064,15 @@ const (
 	ExecutionStatusStopping           ExecutionStatus = "STOPPING"
 )
 
+func (enum ExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NetworkProfileType string
 
 // Enum values for NetworkProfileType
@@ -11333,6 +9080,15 @@ const (
 	NetworkProfileTypeCurated NetworkProfileType = "CURATED"
 	NetworkProfileTypePrivate NetworkProfileType = "PRIVATE"
 )
+
+func (enum NetworkProfileType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkProfileType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OfferingTransactionType string
 
@@ -11343,6 +9099,15 @@ const (
 	OfferingTransactionTypeSystem   OfferingTransactionType = "SYSTEM"
 )
 
+func (enum OfferingTransactionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OfferingTransactionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OfferingType string
 
 // Enum values for OfferingType
@@ -11350,12 +9115,30 @@ const (
 	OfferingTypeRecurring OfferingType = "RECURRING"
 )
 
+func (enum OfferingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OfferingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RecurringChargeFrequency string
 
 // Enum values for RecurringChargeFrequency
 const (
 	RecurringChargeFrequencyMonthly RecurringChargeFrequency = "MONTHLY"
 )
+
+func (enum RecurringChargeFrequency) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecurringChargeFrequency) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RuleOperator string
 
@@ -11368,6 +9151,15 @@ const (
 	RuleOperatorNotIn       RuleOperator = "NOT_IN"
 	RuleOperatorContains    RuleOperator = "CONTAINS"
 )
+
+func (enum RuleOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RuleOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SampleType string
 
@@ -11392,6 +9184,15 @@ const (
 	SampleTypeOpenglMaxDrawtime SampleType = "OPENGL_MAX_DRAWTIME"
 )
 
+func (enum SampleType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SampleType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TestType string
 
 // Enum values for TestType
@@ -11412,6 +9213,15 @@ const (
 	TestTypeXctestUi            TestType = "XCTEST_UI"
 )
 
+func (enum TestType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TestType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type UploadStatus string
 
 // Enum values for UploadStatus
@@ -11421,6 +9231,15 @@ const (
 	UploadStatusSucceeded   UploadStatus = "SUCCEEDED"
 	UploadStatusFailed      UploadStatus = "FAILED"
 )
+
+func (enum UploadStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UploadStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type UploadType string
 
@@ -11443,3 +9262,12 @@ const (
 	UploadTypeXctestTestPackage              UploadType = "XCTEST_TEST_PACKAGE"
 	UploadTypeXctestUiTestPackage            UploadType = "XCTEST_UI_TEST_PACKAGE"
 )
+
+func (enum UploadType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UploadType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

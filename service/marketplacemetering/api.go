@@ -231,18 +231,6 @@ func (s *BatchMeterUsageInput) Validate() error {
 	return nil
 }
 
-// SetProductCode sets the ProductCode field's value.
-func (s *BatchMeterUsageInput) SetProductCode(v string) *BatchMeterUsageInput {
-	s.ProductCode = &v
-	return s
-}
-
-// SetUsageRecords sets the UsageRecords field's value.
-func (s *BatchMeterUsageInput) SetUsageRecords(v []UsageRecord) *BatchMeterUsageInput {
-	s.UsageRecords = v
-	return s
-}
-
 // Contains the UsageRecords processed by BatchMeterUsage and any records that
 // have failed due to transient error.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/BatchMeterUsageResult
@@ -274,18 +262,6 @@ func (s BatchMeterUsageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchMeterUsageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetResults sets the Results field's value.
-func (s *BatchMeterUsageOutput) SetResults(v []UsageRecordResult) *BatchMeterUsageOutput {
-	s.Results = v
-	return s
-}
-
-// SetUnprocessedRecords sets the UnprocessedRecords field's value.
-func (s *BatchMeterUsageOutput) SetUnprocessedRecords(v []UsageRecord) *BatchMeterUsageOutput {
-	s.UnprocessedRecords = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageRequest
@@ -370,36 +346,6 @@ func (s *MeterUsageInput) Validate() error {
 	return nil
 }
 
-// SetDryRun sets the DryRun field's value.
-func (s *MeterUsageInput) SetDryRun(v bool) *MeterUsageInput {
-	s.DryRun = &v
-	return s
-}
-
-// SetProductCode sets the ProductCode field's value.
-func (s *MeterUsageInput) SetProductCode(v string) *MeterUsageInput {
-	s.ProductCode = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *MeterUsageInput) SetTimestamp(v time.Time) *MeterUsageInput {
-	s.Timestamp = &v
-	return s
-}
-
-// SetUsageDimension sets the UsageDimension field's value.
-func (s *MeterUsageInput) SetUsageDimension(v string) *MeterUsageInput {
-	s.UsageDimension = &v
-	return s
-}
-
-// SetUsageQuantity sets the UsageQuantity field's value.
-func (s *MeterUsageInput) SetUsageQuantity(v int64) *MeterUsageInput {
-	s.UsageQuantity = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/MeterUsageResult
 type MeterUsageOutput struct {
 	_ struct{} `type:"structure"`
@@ -422,12 +368,6 @@ func (s MeterUsageOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s MeterUsageOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetMeteringRecordId sets the MeteringRecordId field's value.
-func (s *MeterUsageOutput) SetMeteringRecordId(v string) *MeterUsageOutput {
-	s.MeteringRecordId = &v
-	return s
 }
 
 // Contains input to the ResolveCustomer operation.
@@ -467,12 +407,6 @@ func (s *ResolveCustomerInput) Validate() error {
 	return nil
 }
 
-// SetRegistrationToken sets the RegistrationToken field's value.
-func (s *ResolveCustomerInput) SetRegistrationToken(v string) *ResolveCustomerInput {
-	s.RegistrationToken = &v
-	return s
-}
-
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier
 // and product code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomerResult
@@ -505,18 +439,6 @@ func (s ResolveCustomerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ResolveCustomerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCustomerIdentifier sets the CustomerIdentifier field's value.
-func (s *ResolveCustomerOutput) SetCustomerIdentifier(v string) *ResolveCustomerOutput {
-	s.CustomerIdentifier = &v
-	return s
-}
-
-// SetProductCode sets the ProductCode field's value.
-func (s *ResolveCustomerOutput) SetProductCode(v string) *ResolveCustomerOutput {
-	s.ProductCode = &v
-	return s
 }
 
 // A UsageRecord indicates a quantity of usage for a given product, customer,
@@ -598,30 +520,6 @@ func (s *UsageRecord) Validate() error {
 	return nil
 }
 
-// SetCustomerIdentifier sets the CustomerIdentifier field's value.
-func (s *UsageRecord) SetCustomerIdentifier(v string) *UsageRecord {
-	s.CustomerIdentifier = &v
-	return s
-}
-
-// SetDimension sets the Dimension field's value.
-func (s *UsageRecord) SetDimension(v string) *UsageRecord {
-	s.Dimension = &v
-	return s
-}
-
-// SetQuantity sets the Quantity field's value.
-func (s *UsageRecord) SetQuantity(v int64) *UsageRecord {
-	s.Quantity = &v
-	return s
-}
-
-// SetTimestamp sets the Timestamp field's value.
-func (s *UsageRecord) SetTimestamp(v time.Time) *UsageRecord {
-	s.Timestamp = &v
-	return s
-}
-
 // A UsageRecordResult indicates the status of a given UsageRecord processed
 // by BatchMeterUsage.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/UsageRecordResult
@@ -659,24 +557,6 @@ func (s UsageRecordResult) GoString() string {
 	return s.String()
 }
 
-// SetMeteringRecordId sets the MeteringRecordId field's value.
-func (s *UsageRecordResult) SetMeteringRecordId(v string) *UsageRecordResult {
-	s.MeteringRecordId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UsageRecordResult) SetStatus(v UsageRecordResultStatus) *UsageRecordResult {
-	s.Status = v
-	return s
-}
-
-// SetUsageRecord sets the UsageRecord field's value.
-func (s *UsageRecordResult) SetUsageRecord(v *UsageRecord) *UsageRecordResult {
-	s.UsageRecord = v
-	return s
-}
-
 type UsageRecordResultStatus string
 
 // Enum values for UsageRecordResultStatus
@@ -685,3 +565,12 @@ const (
 	UsageRecordResultStatusCustomerNotSubscribed UsageRecordResultStatus = "CustomerNotSubscribed"
 	UsageRecordResultStatusDuplicateRecord       UsageRecordResultStatus = "DuplicateRecord"
 )
+
+func (enum UsageRecordResultStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UsageRecordResultStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

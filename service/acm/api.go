@@ -100,11 +100,11 @@ func (r DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
 // DeleteCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager.
 //
-// Deletes an ACM Certificate and its associated private key. If this action
-// succeeds, the certificate no longer appears in the list of ACM Certificates
-// that can be displayed by calling the ListCertificates action or be retrieved
-// by calling the GetCertificate action. The certificate will not be available
-// for use by other AWS services.
+// Deletes a certificate and its associated private key. If this action succeeds,
+// the certificate no longer appears in the list that can be displayed by calling
+// the ListCertificates action or be retrieved by calling the GetCertificate
+// action. The certificate will not be available for use by AWS services integrated
+// with ACM.
 //
 // You cannot delete an ACM Certificate that is being used by another AWS service.
 // To delete a certificate that is in use, the certificate association must
@@ -208,15 +208,12 @@ func (r GetCertificateRequest) Send() (*GetCertificateOutput, error) {
 // GetCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager.
 //
-// Retrieves an ACM Certificate and certificate chain for the certificate specified
-// by an ARN. The chain is an ordered list of certificates that contains the
-// root certificate, intermediate certificates of subordinate CAs, and the ACM
-// Certificate. The certificate and certificate chain are base64 encoded. If
-// you want to decode the certificate chain to see the individual certificate
-// fields, you can use OpenSSL.
-//
-// Currently, ACM Certificates can be used only with Elastic Load Balancing
-// and Amazon CloudFront.
+// Retrieves a certificate specified by an ARN and its certificate chain . The
+// chain is an ordered list of certificates that contains the end entity ertificate,
+// intermediate certificates of subordinate CAs, and the root certificate in
+// that order. The certificate and certificate chain are base64 encoded. If
+// you want to decode the certificate to see the individual fields, you can
+// use OpenSSL.
 //
 //    // Example sending a request using the GetCertificateRequest method.
 //    req := client.GetCertificateRequest(params)
@@ -265,8 +262,9 @@ func (r ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
 // ImportCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager.
 //
-// Imports an SSL/TLS certificate into AWS Certificate Manager (ACM) to use
-// with ACM's integrated AWS services (http://docs.aws.amazon.com/acm/latest/userguide/acm-services.html).
+// Imports a certificate into AWS Certificate Manager (ACM) to use with services
+// that are integrated with ACM. For more information, see Integrated Services
+// (http://docs.aws.amazon.com/acm/latest/userguide/acm-services.html).
 //
 // ACM does not provide managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
 // for certificates that you import.
@@ -276,18 +274,40 @@ func (r ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
 // see Importing Certificates (http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
 // in the AWS Certificate Manager User Guide.
 //
-// To import a certificate, you must provide the certificate and the matching
-// private key. When the certificate is not self-signed, you must also provide
-// a certificate chain. You can omit the certificate chain when importing a
-// self-signed certificate.
+// In general, you can import almost any valid certificate. However, services
+// integrated with ACM allow only certificate types they support to be associated
+// with their resources. The following guidelines are also important:
 //
-// The certificate, private key, and certificate chain must be PEM-encoded.
-// For more information about converting these items to PEM format, see Importing
-// Certificates Troubleshooting (http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html#import-certificate-troubleshooting)
-// in the AWS Certificate Manager User Guide.
+//    * You must enter the private key that matches the certificate you are
+//    importing.
 //
-// To import a new certificate, omit the CertificateArn field. Include this
-// field only when you want to replace a previously imported certificate.
+//    * The private key must be unencrypted. You cannot import a private key
+//    that is protected by a password or a passphrase.
+//
+//    * If the certificate you are importing is not self-signed, you must enter
+//    its certificate chain.
+//
+//    * If a certificate chain is included, the issuer must be the subject of
+//    one of the certificates in the chain.
+//
+//    * The certificate, private key, and certificate chain must be PEM-encoded.
+//
+//    * The current time must be between the Not Before and Not After certificate
+//    fields.
+//
+//    * The Issuer field must not be empty.
+//
+//    * The OCSP authority URL must not exceed 1000 characters.
+//
+//    * To import a new certificate, omit the CertificateArn field. Include
+//    this field only when you want to replace a previously imported certificate.
+//
+//    * When you import a certificate by using the CLI or one of the SDKs, you
+//    must specify the certificate, certificate chain, and private key parameters
+//    as file names preceded by file://. For example, you can specify a certificate
+//    saved in the C:\temp folder as C:\temp\certificate_to_import.pem. If you
+//    are making an HTTP or HTTPS Query request, include these parameters as
+//    BLOBs.
 //
 // This operation returns the Amazon Resource Name (ARN) (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 // of the imported certificate.
@@ -339,9 +359,9 @@ func (r ListCertificatesRequest) Send() (*ListCertificatesOutput, error) {
 // ListCertificatesRequest returns a request value for making API operation for
 // AWS Certificate Manager.
 //
-// Retrieves a list of ACM Certificates and the domain name for each. You can
-// optionally filter the list to return only the certificates that match the
-// specified status.
+// Retrieves a list of certificate ARNs and domain names. You can request that
+// only certificates that match a specific status be listed. You can also filter
+// by specific attributes of the certificate.
 //
 //    // Example sending a request using the ListCertificatesRequest method.
 //    req := client.ListCertificatesRequest(params)
@@ -558,11 +578,18 @@ func (r RequestCertificateRequest) Send() (*RequestCertificateOutput, error) {
 //
 // Requests an ACM Certificate for use with other AWS services. To request an
 // ACM Certificate, you must specify the fully qualified domain name (FQDN)
-// for your site. You can also specify additional FQDNs if users can reach your
-// site by using other names. For each domain name you specify, email is sent
-// to the domain owner to request approval to issue the certificate. After receiving
-// approval from the domain owner, the ACM Certificate is issued. For more information,
-// see the AWS Certificate Manager User Guide (http://docs.aws.amazon.com/acm/latest/userguide/).
+// for your site in the DomainName parameter. You can also specify additional
+// FQDNs in the SubjectAlternativeNames parameter if users can reach your site
+// by using other names.
+//
+// For each domain name you specify, email is sent to the domain owner to request
+// approval to issue the certificate. Email is sent to three registered contact
+// addresses in the WHOIS database and to five common system administration
+// addresses formed from the DomainName you enter or the optional ValidationDomain
+// parameter. For more information, see Validate Domain Ownership (http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate.html).
+//
+// After receiving approval from the domain owner, the ACM Certificate is issued.
+// For more information, see the AWS Certificate Manager User Guide (http://docs.aws.amazon.com/acm/latest/userguide/).
 //
 //    // Example sending a request using the RequestCertificateRequest method.
 //    req := client.RequestCertificateRequest(params)
@@ -713,18 +740,6 @@ func (s *AddTagsToCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *AddTagsToCertificateInput) SetCertificateArn(v string) *AddTagsToCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *AddTagsToCertificateInput) SetTags(v []Tag) *AddTagsToCertificateInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificateOutput
 type AddTagsToCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -771,6 +786,11 @@ type CertificateDetail struct {
 	// when the certificate type is AMAZON_ISSUED.
 	DomainValidationOptions []DomainValidation `min:"1" type:"list"`
 
+	// Contains a list of Extended Key Usage X.509 v3 extension objects. Each object
+	// specifies a purpose for which the certificate public key can be used and
+	// consists of a name and an object identifier (OID).
+	ExtendedKeyUsages []ExtendedKeyUsage `type:"list"`
+
 	// The reason the certificate request failed. This value exists only when the
 	// certificate status is FAILED. For more information, see Certificate Request
 	// Failed (http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed)
@@ -792,9 +812,14 @@ type CertificateDetail struct {
 	// The name of the certificate authority that issued and signed the certificate.
 	Issuer *string `type:"string"`
 
-	// The algorithm that was used to generate the key pair (the public and private
-	// key).
+	// The algorithm that was used to generate the public-private key pair.
 	KeyAlgorithm KeyAlgorithm `type:"string" enum:"true"`
+
+	// A list of Key Usage X.509 v3 extension objects. Each object is a string value
+	// that identifies the purpose of the public key contained in the certificate.
+	// Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT, NON_REPUDIATION,
+	// and more.
+	KeyUsages []KeyUsage `type:"list"`
 
 	// The time after which the certificate is not valid.
 	NotAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -855,132 +880,6 @@ func (s CertificateDetail) GoString() string {
 	return s.String()
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *CertificateDetail) SetCertificateArn(v string) *CertificateDetail {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *CertificateDetail) SetCreatedAt(v time.Time) *CertificateDetail {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *CertificateDetail) SetDomainName(v string) *CertificateDetail {
-	s.DomainName = &v
-	return s
-}
-
-// SetDomainValidationOptions sets the DomainValidationOptions field's value.
-func (s *CertificateDetail) SetDomainValidationOptions(v []DomainValidation) *CertificateDetail {
-	s.DomainValidationOptions = v
-	return s
-}
-
-// SetFailureReason sets the FailureReason field's value.
-func (s *CertificateDetail) SetFailureReason(v FailureReason) *CertificateDetail {
-	s.FailureReason = v
-	return s
-}
-
-// SetImportedAt sets the ImportedAt field's value.
-func (s *CertificateDetail) SetImportedAt(v time.Time) *CertificateDetail {
-	s.ImportedAt = &v
-	return s
-}
-
-// SetInUseBy sets the InUseBy field's value.
-func (s *CertificateDetail) SetInUseBy(v []string) *CertificateDetail {
-	s.InUseBy = v
-	return s
-}
-
-// SetIssuedAt sets the IssuedAt field's value.
-func (s *CertificateDetail) SetIssuedAt(v time.Time) *CertificateDetail {
-	s.IssuedAt = &v
-	return s
-}
-
-// SetIssuer sets the Issuer field's value.
-func (s *CertificateDetail) SetIssuer(v string) *CertificateDetail {
-	s.Issuer = &v
-	return s
-}
-
-// SetKeyAlgorithm sets the KeyAlgorithm field's value.
-func (s *CertificateDetail) SetKeyAlgorithm(v KeyAlgorithm) *CertificateDetail {
-	s.KeyAlgorithm = v
-	return s
-}
-
-// SetNotAfter sets the NotAfter field's value.
-func (s *CertificateDetail) SetNotAfter(v time.Time) *CertificateDetail {
-	s.NotAfter = &v
-	return s
-}
-
-// SetNotBefore sets the NotBefore field's value.
-func (s *CertificateDetail) SetNotBefore(v time.Time) *CertificateDetail {
-	s.NotBefore = &v
-	return s
-}
-
-// SetRenewalSummary sets the RenewalSummary field's value.
-func (s *CertificateDetail) SetRenewalSummary(v *RenewalSummary) *CertificateDetail {
-	s.RenewalSummary = v
-	return s
-}
-
-// SetRevocationReason sets the RevocationReason field's value.
-func (s *CertificateDetail) SetRevocationReason(v RevocationReason) *CertificateDetail {
-	s.RevocationReason = v
-	return s
-}
-
-// SetRevokedAt sets the RevokedAt field's value.
-func (s *CertificateDetail) SetRevokedAt(v time.Time) *CertificateDetail {
-	s.RevokedAt = &v
-	return s
-}
-
-// SetSerial sets the Serial field's value.
-func (s *CertificateDetail) SetSerial(v string) *CertificateDetail {
-	s.Serial = &v
-	return s
-}
-
-// SetSignatureAlgorithm sets the SignatureAlgorithm field's value.
-func (s *CertificateDetail) SetSignatureAlgorithm(v string) *CertificateDetail {
-	s.SignatureAlgorithm = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *CertificateDetail) SetStatus(v CertificateStatus) *CertificateDetail {
-	s.Status = v
-	return s
-}
-
-// SetSubject sets the Subject field's value.
-func (s *CertificateDetail) SetSubject(v string) *CertificateDetail {
-	s.Subject = &v
-	return s
-}
-
-// SetSubjectAlternativeNames sets the SubjectAlternativeNames field's value.
-func (s *CertificateDetail) SetSubjectAlternativeNames(v []string) *CertificateDetail {
-	s.SubjectAlternativeNames = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CertificateDetail) SetType(v CertificateType) *CertificateDetail {
-	s.Type = v
-	return s
-}
-
 // This structure is returned in the response object of ListCertificates action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateSummary
 type CertificateSummary struct {
@@ -1007,18 +906,6 @@ func (s CertificateSummary) String() string {
 // GoString returns the string representation
 func (s CertificateSummary) GoString() string {
 	return s.String()
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *CertificateSummary) SetCertificateArn(v string) *CertificateSummary {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetDomainName sets the DomainName field's value.
-func (s *CertificateSummary) SetDomainName(v string) *CertificateSummary {
-	s.DomainName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificateRequest
@@ -1062,12 +949,6 @@ func (s *DeleteCertificateInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *DeleteCertificateInput) SetCertificateArn(v string) *DeleteCertificateInput {
-	s.CertificateArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DeleteCertificateOutput
@@ -1135,12 +1016,6 @@ func (s *DescribeCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *DescribeCertificateInput) SetCertificateArn(v string) *DescribeCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DescribeCertificateResponse
 type DescribeCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -1166,12 +1041,6 @@ func (s DescribeCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCertificate sets the Certificate field's value.
-func (s *DescribeCertificateOutput) SetCertificate(v *CertificateDetail) *DescribeCertificateOutput {
-	s.Certificate = v
-	return s
-}
-
 // Contains information about the validation of each domain name in the certificate.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DomainValidation
 type DomainValidation struct {
@@ -1183,13 +1052,27 @@ type DomainValidation struct {
 	// DomainName is a required field
 	DomainName *string `min:"1" type:"string" required:"true"`
 
+	// Contains the CNAME record that you add to your DNS database for domain validation.
+	// For more information, see Use DNS to Validate Domain Ownership (http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html).
+	ResourceRecord *ResourceRecord `type:"structure"`
+
 	// The domain name that ACM used to send domain validation emails.
 	ValidationDomain *string `min:"1" type:"string"`
 
 	// A list of email addresses that ACM used to send domain validation emails.
 	ValidationEmails []string `type:"list"`
 
-	// The validation status of the domain name.
+	// Specifies the domain validation method.
+	ValidationMethod ValidationMethod `type:"string" enum:"true"`
+
+	// The validation status of the domain name. This can be one of the following
+	// values:
+	//
+	//    * PENDING_VALIDATION
+	//
+	//    * SUCCESS
+	//
+	//    * FAILED
 	ValidationStatus DomainStatus `type:"string" enum:"true"`
 }
 
@@ -1203,32 +1086,8 @@ func (s DomainValidation) GoString() string {
 	return s.String()
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *DomainValidation) SetDomainName(v string) *DomainValidation {
-	s.DomainName = &v
-	return s
-}
-
-// SetValidationDomain sets the ValidationDomain field's value.
-func (s *DomainValidation) SetValidationDomain(v string) *DomainValidation {
-	s.ValidationDomain = &v
-	return s
-}
-
-// SetValidationEmails sets the ValidationEmails field's value.
-func (s *DomainValidation) SetValidationEmails(v []string) *DomainValidation {
-	s.ValidationEmails = v
-	return s
-}
-
-// SetValidationStatus sets the ValidationStatus field's value.
-func (s *DomainValidation) SetValidationStatus(v DomainStatus) *DomainValidation {
-	s.ValidationStatus = v
-	return s
-}
-
 // Contains information about the domain names that you want ACM to use to send
-// you emails to validate your ownership of the domain.
+// you emails that enable you to validate domain ownership.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/DomainValidationOption
 type DomainValidationOption struct {
 	_ struct{} `type:"structure"`
@@ -1293,16 +1152,74 @@ func (s *DomainValidationOption) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *DomainValidationOption) SetDomainName(v string) *DomainValidationOption {
-	s.DomainName = &v
-	return s
+// The Extended Key Usage X.509 v3 extension defines one or more purposes for
+// which the public key can be used. This is in addition to or in place of the
+// basic purposes specified by the Key Usage extension.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExtendedKeyUsage
+type ExtendedKeyUsage struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an Extended Key Usage value.
+	Name ExtendedKeyUsageName `type:"string" enum:"true"`
+
+	// An object identifier (OID) for the extension value. OIDs are strings of numbers
+	// separated by periods. The following OIDs are defined in RFC 3280 and RFC
+	// 5280.
+	//
+	//    * 1.3.6.1.5.5.7.3.1 (TLS_WEB_SERVER_AUTHENTICATION)
+	//
+	//    * 1.3.6.1.5.5.7.3.2 (TLS_WEB_CLIENT_AUTHENTICATION)
+	//
+	//    * 1.3.6.1.5.5.7.3.3 (CODE_SIGNING)
+	//
+	//    * 1.3.6.1.5.5.7.3.4 (EMAIL_PROTECTION)
+	//
+	//    * 1.3.6.1.5.5.7.3.8 (TIME_STAMPING)
+	//
+	//    * 1.3.6.1.5.5.7.3.9 (OCSP_SIGNING)
+	//
+	//    * 1.3.6.1.5.5.7.3.5 (IPSEC_END_SYSTEM)
+	//
+	//    * 1.3.6.1.5.5.7.3.6 (IPSEC_TUNNEL)
+	//
+	//    * 1.3.6.1.5.5.7.3.7 (IPSEC_USER)
+	OID *string `type:"string"`
 }
 
-// SetValidationDomain sets the ValidationDomain field's value.
-func (s *DomainValidationOption) SetValidationDomain(v string) *DomainValidationOption {
-	s.ValidationDomain = &v
-	return s
+// String returns the string representation
+func (s ExtendedKeyUsage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExtendedKeyUsage) GoString() string {
+	return s.String()
+}
+
+// This structure can be used in the ListCertificates action to filter the output
+// of the certificate list.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/Filters
+type Filters struct {
+	_ struct{} `type:"structure"`
+
+	// Specify one or more ExtendedKeyUsage extension values.
+	ExtendedKeyUsage []ExtendedKeyUsageName `locationName:"extendedKeyUsage" type:"list"`
+
+	// Specify one or more algorithms that can be used to generate key pairs.
+	KeyTypes []KeyAlgorithm `locationName:"keyTypes" type:"list"`
+
+	// Specify one or more KeyUsage extension values.
+	KeyUsage []KeyUsageName `locationName:"keyUsage" type:"list"`
+}
+
+// String returns the string representation
+func (s Filters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Filters) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificateRequest
@@ -1347,12 +1264,6 @@ func (s *GetCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *GetCertificateInput) SetCertificateArn(v string) *GetCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/GetCertificateResponse
 type GetCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -1383,31 +1294,11 @@ func (s GetCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCertificate sets the Certificate field's value.
-func (s *GetCertificateOutput) SetCertificate(v string) *GetCertificateOutput {
-	s.Certificate = &v
-	return s
-}
-
-// SetCertificateChain sets the CertificateChain field's value.
-func (s *GetCertificateOutput) SetCertificateChain(v string) *GetCertificateOutput {
-	s.CertificateChain = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateRequest
 type ImportCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The certificate to import. It must meet the following requirements:
-	//
-	//    * Must be PEM-encoded.
-	//
-	//    * Must contain a 1024-bit or 2048-bit RSA public key.
-	//
-	//    * Must be valid at the time of import. You cannot import a certificate
-	//    before its validity period begins (the certificate's NotBefore date) or
-	//    after it expires (the certificate's NotAfter date).
+	// The certificate to import.
 	//
 	// Certificate is automatically base64 encoded/decoded by the SDK.
 	//
@@ -1419,18 +1310,12 @@ type ImportCertificateInput struct {
 	// this field.
 	CertificateArn *string `min:"20" type:"string"`
 
-	// The certificate chain. It must be PEM-encoded.
+	// The PEM encoded certificate chain.
 	//
 	// CertificateChain is automatically base64 encoded/decoded by the SDK.
 	CertificateChain []byte `min:"1" type:"blob"`
 
-	// The private key that matches the public key in the certificate. It must meet
-	// the following requirements:
-	//
-	//    * Must be PEM-encoded.
-	//
-	//    * Must be unencrypted. You cannot import a private key that is protected
-	//    by a password or passphrase.
+	// The private key that matches the public key in the certificate.
 	//
 	// PrivateKey is automatically base64 encoded/decoded by the SDK.
 	//
@@ -1478,30 +1363,6 @@ func (s *ImportCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificate sets the Certificate field's value.
-func (s *ImportCertificateInput) SetCertificate(v []byte) *ImportCertificateInput {
-	s.Certificate = v
-	return s
-}
-
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *ImportCertificateInput) SetCertificateArn(v string) *ImportCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetCertificateChain sets the CertificateChain field's value.
-func (s *ImportCertificateInput) SetCertificateChain(v []byte) *ImportCertificateInput {
-	s.CertificateChain = v
-	return s
-}
-
-// SetPrivateKey sets the PrivateKey field's value.
-func (s *ImportCertificateInput) SetPrivateKey(v []byte) *ImportCertificateInput {
-	s.PrivateKey = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ImportCertificateResponse
 type ImportCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -1528,18 +1389,42 @@ func (s ImportCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *ImportCertificateOutput) SetCertificateArn(v string) *ImportCertificateOutput {
-	s.CertificateArn = &v
-	return s
+// The Key Usage X.509 v3 extension defines the purpose of the public key contained
+// in the certificate.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/KeyUsage
+type KeyUsage struct {
+	_ struct{} `type:"structure"`
+
+	// A string value that contains a Key Usage extension name.
+	Name KeyUsageName `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s KeyUsage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s KeyUsage) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificatesRequest
 type ListCertificatesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The status or statuses on which to filter the list of ACM Certificates.
+	// Filter the certificate list by status value.
 	CertificateStatuses []CertificateStatus `type:"list"`
+
+	// Filter the certificate list by one or more of the following values. For more
+	// information, see the Filters structure.
+	//
+	//    * extendedKeyUsage
+	//
+	//    * keyUsage
+	//
+	//    * keyTypes
+	Includes *Filters `type:"structure"`
 
 	// Use this parameter when paginating results to specify the maximum number
 	// of items to return in the response. If additional items exist beyond the
@@ -1579,24 +1464,6 @@ func (s *ListCertificatesInput) Validate() error {
 	return nil
 }
 
-// SetCertificateStatuses sets the CertificateStatuses field's value.
-func (s *ListCertificatesInput) SetCertificateStatuses(v []CertificateStatus) *ListCertificatesInput {
-	s.CertificateStatuses = v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListCertificatesInput) SetMaxItems(v int64) *ListCertificatesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCertificatesInput) SetNextToken(v string) *ListCertificatesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListCertificatesResponse
 type ListCertificatesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1626,24 +1493,12 @@ func (s ListCertificatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCertificateSummaryList sets the CertificateSummaryList field's value.
-func (s *ListCertificatesOutput) SetCertificateSummaryList(v []CertificateSummary) *ListCertificatesOutput {
-	s.CertificateSummaryList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListCertificatesOutput) SetNextToken(v string) *ListCertificatesOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificateRequest
 type ListTagsForCertificateInput struct {
 	_ struct{} `type:"structure"`
 
 	// String that contains the ARN of the ACM Certificate for which you want to
-	// list the tags. This has the following form:
+	// list the tags. This must have the following form:
 	//
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
@@ -1681,12 +1536,6 @@ func (s *ListTagsForCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *ListTagsForCertificateInput) SetCertificateArn(v string) *ListTagsForCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ListTagsForCertificateResponse
 type ListTagsForCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -1710,12 +1559,6 @@ func (s ListTagsForCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsForCertificateOutput) SetTags(v []Tag) *ListTagsForCertificateOutput {
-	s.Tags = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificateRequest
@@ -1780,18 +1623,6 @@ func (s *RemoveTagsFromCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *RemoveTagsFromCertificateInput) SetCertificateArn(v string) *RemoveTagsFromCertificateInput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *RemoveTagsFromCertificateInput) SetTags(v []Tag) *RemoveTagsFromCertificateInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RemoveTagsFromCertificateOutput
 type RemoveTagsFromCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -1847,18 +1678,6 @@ func (s RenewalSummary) GoString() string {
 	return s.String()
 }
 
-// SetDomainValidationOptions sets the DomainValidationOptions field's value.
-func (s *RenewalSummary) SetDomainValidationOptions(v []DomainValidation) *RenewalSummary {
-	s.DomainValidationOptions = v
-	return s
-}
-
-// SetRenewalStatus sets the RenewalStatus field's value.
-func (s *RenewalSummary) SetRenewalStatus(v RenewalStatus) *RenewalSummary {
-	s.RenewalStatus = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest
 type RequestCertificateInput struct {
 	_ struct{} `type:"structure"`
@@ -1868,25 +1687,15 @@ type RequestCertificateInput struct {
 	// a wildcard certificate that protects several sites in the same domain. For
 	// example, *.example.com protects www.example.com, site.example.com, and images.example.com.
 	//
-	// The maximum length of a DNS name is 253 octets. The name is made up of multiple
-	// labels separated by periods. No label can be longer than 63 octets. Consider
-	// the following examples:
-	//
-	// (63 octets).(63 octets).(63 octets).(61 octets) is legal because the total
-	// length is 253 octets (63+1+63+1+63+1+61) and no label exceeds 63 octets.
-	//
-	// (64 octets).(63 octets).(63 octets).(61 octets) is not legal because the
-	// total length exceeds 253 octets (64+1+63+1+63+1+61) and the first label exceeds
-	// 63 octets.
-	//
-	// (63 octets).(63 octets).(63 octets).(62 octets) is not legal because the
-	// total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets.
+	// The first domain name you enter cannot exceed 63 octets, including periods.
+	// Each subsequent Subject Alternative Name (SAN), however, can be up to 253
+	// octets in length.
 	//
 	// DomainName is a required field
 	DomainName *string `min:"1" type:"string" required:"true"`
 
-	// The domain name that you want ACM to use to send you emails to validate your
-	// ownership of the domain.
+	// The domain name that you want ACM to use to send you emails so taht your
+	// can validate domain ownership.
 	DomainValidationOptions []DomainValidationOption `min:"1" type:"list"`
 
 	// Customer chosen string that can be used to distinguish between calls to RequestCertificate.
@@ -1904,7 +1713,25 @@ type RequestCertificateInput struct {
 	// add to an ACM Certificate is 100. However, the initial limit is 10 domain
 	// names. If you need more than 10 names, you must request a limit increase.
 	// For more information, see Limits (http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html).
+	//
+	// The maximum length of a SAN DNS name is 253 octets. The name is made up of
+	// multiple labels separated by periods. No label can be longer than 63 octets.
+	// Consider the following examples:
+	//
+	//    * (63 octets).(63 octets).(63 octets).(61 octets) is legal because the
+	//    total length is 253 octets (63+1+63+1+63+1+61) and no label exceeds 63
+	//    octets.
+	//
+	//    * (64 octets).(63 octets).(63 octets).(61 octets) is not legal because
+	//    the total length exceeds 253 octets (64+1+63+1+63+1+61) and the first
+	//    label exceeds 63 octets.
+	//
+	//    * (63 octets).(63 octets).(63 octets).(62 octets) is not legal because
+	//    the total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets.
 	SubjectAlternativeNames []string `min:"1" type:"list"`
+
+	// The method you want to use to validate your domain.
+	ValidationMethod ValidationMethod `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -1950,30 +1777,6 @@ func (s *RequestCertificateInput) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *RequestCertificateInput) SetDomainName(v string) *RequestCertificateInput {
-	s.DomainName = &v
-	return s
-}
-
-// SetDomainValidationOptions sets the DomainValidationOptions field's value.
-func (s *RequestCertificateInput) SetDomainValidationOptions(v []DomainValidationOption) *RequestCertificateInput {
-	s.DomainValidationOptions = v
-	return s
-}
-
-// SetIdempotencyToken sets the IdempotencyToken field's value.
-func (s *RequestCertificateInput) SetIdempotencyToken(v string) *RequestCertificateInput {
-	s.IdempotencyToken = &v
-	return s
-}
-
-// SetSubjectAlternativeNames sets the SubjectAlternativeNames field's value.
-func (s *RequestCertificateInput) SetSubjectAlternativeNames(v []string) *RequestCertificateInput {
-	s.SubjectAlternativeNames = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateResponse
 type RequestCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -2002,12 +1805,6 @@ func (s RequestCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *RequestCertificateOutput) SetCertificateArn(v string) *RequestCertificateOutput {
-	s.CertificateArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmailRequest
 type ResendValidationEmailInput struct {
 	_ struct{} `type:"structure"`
@@ -2015,9 +1812,8 @@ type ResendValidationEmailInput struct {
 	// String that contains the ARN of the requested certificate. The certificate
 	// ARN is generated and returned by the RequestCertificate action as soon as
 	// the request is made. By default, using this parameter causes email to be
-	// sent to all top-level domains you specified in the certificate request.
-	//
-	// The ARN must be of the form:
+	// sent to all top-level domains you specified in the certificate request. The
+	// ARN must be of the form:
 	//
 	// arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
@@ -2092,24 +1888,6 @@ func (s *ResendValidationEmailInput) Validate() error {
 	return nil
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *ResendValidationEmailInput) SetCertificateArn(v string) *ResendValidationEmailInput {
-	s.CertificateArn = &v
-	return s
-}
-
-// SetDomain sets the Domain field's value.
-func (s *ResendValidationEmailInput) SetDomain(v string) *ResendValidationEmailInput {
-	s.Domain = &v
-	return s
-}
-
-// SetValidationDomain sets the ValidationDomain field's value.
-func (s *ResendValidationEmailInput) SetValidationDomain(v string) *ResendValidationEmailInput {
-	s.ValidationDomain = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResendValidationEmailOutput
 type ResendValidationEmailOutput struct {
 	_ struct{} `type:"structure"`
@@ -2130,6 +1908,40 @@ func (s ResendValidationEmailOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ResendValidationEmailOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Contains a DNS record value that you can use to can use to validate ownership
+// or control of a domain. This is used by the DescribeCertificate action.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ResourceRecord
+type ResourceRecord struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the DNS record to create in your domain. This is supplied by
+	// ACM.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The type of DNS record. Currently this can be CNAME.
+	//
+	// Type is a required field
+	Type RecordType `type:"string" required:"true" enum:"true"`
+
+	// The value of the CNAME record to add to your DNS database. This is supplied
+	// by ACM.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ResourceRecord) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceRecord) GoString() string {
+	return s.String()
 }
 
 // A key-value pair that identifies or specifies metadata about an ACM resource.
@@ -2173,18 +1985,6 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
-}
-
 type CertificateStatus string
 
 // Enum values for CertificateStatus
@@ -2198,6 +1998,15 @@ const (
 	CertificateStatusFailed             CertificateStatus = "FAILED"
 )
 
+func (enum CertificateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CertificateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CertificateType string
 
 // Enum values for CertificateType
@@ -2205,6 +2014,15 @@ const (
 	CertificateTypeImported     CertificateType = "IMPORTED"
 	CertificateTypeAmazonIssued CertificateType = "AMAZON_ISSUED"
 )
+
+func (enum CertificateType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CertificateType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DomainStatus string
 
@@ -2215,6 +2033,42 @@ const (
 	DomainStatusFailed            DomainStatus = "FAILED"
 )
 
+func (enum DomainStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ExtendedKeyUsageName string
+
+// Enum values for ExtendedKeyUsageName
+const (
+	ExtendedKeyUsageNameTlsWebServerAuthentication ExtendedKeyUsageName = "TLS_WEB_SERVER_AUTHENTICATION"
+	ExtendedKeyUsageNameTlsWebClientAuthentication ExtendedKeyUsageName = "TLS_WEB_CLIENT_AUTHENTICATION"
+	ExtendedKeyUsageNameCodeSigning                ExtendedKeyUsageName = "CODE_SIGNING"
+	ExtendedKeyUsageNameEmailProtection            ExtendedKeyUsageName = "EMAIL_PROTECTION"
+	ExtendedKeyUsageNameTimeStamping               ExtendedKeyUsageName = "TIME_STAMPING"
+	ExtendedKeyUsageNameOcspSigning                ExtendedKeyUsageName = "OCSP_SIGNING"
+	ExtendedKeyUsageNameIpsecEndSystem             ExtendedKeyUsageName = "IPSEC_END_SYSTEM"
+	ExtendedKeyUsageNameIpsecTunnel                ExtendedKeyUsageName = "IPSEC_TUNNEL"
+	ExtendedKeyUsageNameIpsecUser                  ExtendedKeyUsageName = "IPSEC_USER"
+	ExtendedKeyUsageNameAny                        ExtendedKeyUsageName = "ANY"
+	ExtendedKeyUsageNameNone                       ExtendedKeyUsageName = "NONE"
+	ExtendedKeyUsageNameCustom                     ExtendedKeyUsageName = "CUSTOM"
+)
+
+func (enum ExtendedKeyUsageName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExtendedKeyUsageName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FailureReason string
 
 // Enum values for FailureReason
@@ -2223,8 +2077,18 @@ const (
 	FailureReasonAdditionalVerificationRequired FailureReason = "ADDITIONAL_VERIFICATION_REQUIRED"
 	FailureReasonDomainNotAllowed               FailureReason = "DOMAIN_NOT_ALLOWED"
 	FailureReasonInvalidPublicDomain            FailureReason = "INVALID_PUBLIC_DOMAIN"
+	FailureReasonCaaError                       FailureReason = "CAA_ERROR"
 	FailureReasonOther                          FailureReason = "OTHER"
 )
+
+func (enum FailureReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FailureReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type KeyAlgorithm string
 
@@ -2232,8 +2096,62 @@ type KeyAlgorithm string
 const (
 	KeyAlgorithmRsa2048      KeyAlgorithm = "RSA_2048"
 	KeyAlgorithmRsa1024      KeyAlgorithm = "RSA_1024"
+	KeyAlgorithmRsa4096      KeyAlgorithm = "RSA_4096"
 	KeyAlgorithmEcPrime256v1 KeyAlgorithm = "EC_prime256v1"
+	KeyAlgorithmEcSecp384r1  KeyAlgorithm = "EC_secp384r1"
+	KeyAlgorithmEcSecp521r1  KeyAlgorithm = "EC_secp521r1"
 )
+
+func (enum KeyAlgorithm) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyAlgorithm) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type KeyUsageName string
+
+// Enum values for KeyUsageName
+const (
+	KeyUsageNameDigitalSignature   KeyUsageName = "DIGITAL_SIGNATURE"
+	KeyUsageNameNonRepudiation     KeyUsageName = "NON_REPUDIATION"
+	KeyUsageNameKeyEncipherment    KeyUsageName = "KEY_ENCIPHERMENT"
+	KeyUsageNameDataEncipherment   KeyUsageName = "DATA_ENCIPHERMENT"
+	KeyUsageNameKeyAgreement       KeyUsageName = "KEY_AGREEMENT"
+	KeyUsageNameCertificateSigning KeyUsageName = "CERTIFICATE_SIGNING"
+	KeyUsageNameCrlSigning         KeyUsageName = "CRL_SIGNING"
+	KeyUsageNameEncipherOnly       KeyUsageName = "ENCIPHER_ONLY"
+	KeyUsageNameDecipherOnly       KeyUsageName = "DECIPHER_ONLY"
+	KeyUsageNameAny                KeyUsageName = "ANY"
+	KeyUsageNameCustom             KeyUsageName = "CUSTOM"
+)
+
+func (enum KeyUsageName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyUsageName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RecordType string
+
+// Enum values for RecordType
+const (
+	RecordTypeCname RecordType = "CNAME"
+)
+
+func (enum RecordType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecordType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RenewalStatus string
 
@@ -2244,6 +2162,15 @@ const (
 	RenewalStatusSuccess            RenewalStatus = "SUCCESS"
 	RenewalStatusFailed             RenewalStatus = "FAILED"
 )
+
+func (enum RenewalStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RenewalStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RevocationReason string
 
@@ -2260,3 +2187,29 @@ const (
 	RevocationReasonPrivilegeWithdrawn   RevocationReason = "PRIVILEGE_WITHDRAWN"
 	RevocationReasonAACompromise         RevocationReason = "A_A_COMPROMISE"
 )
+
+func (enum RevocationReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RevocationReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ValidationMethod string
+
+// Enum values for ValidationMethod
+const (
+	ValidationMethodEmail ValidationMethod = "EMAIL"
+	ValidationMethodDns   ValidationMethod = "DNS"
+)
+
+func (enum ValidationMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ValidationMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

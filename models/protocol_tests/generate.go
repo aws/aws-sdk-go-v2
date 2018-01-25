@@ -397,6 +397,7 @@ func generateTestSuite(filename string) string {
 
 	for i, suite := range suites {
 		svcPrefix := inout + "Service" + strconv.Itoa(i+1)
+		suite.API.EnableSelectGeneratedMarshalers()
 		suite.API.Metadata.ServiceAbbreviation = svcPrefix + "ProtocolTest"
 		suite.API.Operations = map[string]*api.Operation{}
 		for idx, c := range suite.Cases {

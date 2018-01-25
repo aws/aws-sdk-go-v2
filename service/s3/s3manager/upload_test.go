@@ -27,7 +27,6 @@ import (
 var emptyList = []string{}
 
 func val(i interface{}, s string) interface{} {
-	fmt.Println("INNER", i)
 	v, err := awsutil.ValuesAtPath(i, s)
 	if err != nil || len(v) == 0 {
 		return nil
@@ -772,7 +771,10 @@ func TestUploadInputS3PutObjectInputPairity(t *testing.T) {
 	bOnly := []string{}
 
 	for k, c := range matchings {
-		if c == 1 && k != "ContentLength" {
+		if strings.HasPrefix(k, "Body-") || strings.HasPrefix(k, "ContentLength-") {
+			continue
+		}
+		if c == 1 {
 			aOnly = append(aOnly, k)
 		} else if c == 2 {
 			bOnly = append(bOnly, k)
@@ -850,16 +852,22 @@ func compareStructType(a, b reflect.Type) map[string]int {
 
 	for i := 0; i < len(aFields) || i < len(bFields); i++ {
 		if i < len(aFields) {
-			c := matchings[aFields[i].Name]
-			matchings[aFields[i].Name] = c + 1
+			name := matchName(aFields[i])
+			c := matchings[name]
+			matchings[name] = c + 1
 		}
 		if i < len(bFields) {
-			c := matchings[bFields[i].Name]
-			matchings[bFields[i].Name] = c + 2
+			name := matchName(bFields[i])
+			c := matchings[name]
+			matchings[name] = c + 2
 		}
 	}
 
 	return matchings
+}
+
+func matchName(field reflect.StructField) string {
+	return field.Name + "-" + field.Type.String()
 }
 
 func enumFields(v reflect.Type) []reflect.StructField {

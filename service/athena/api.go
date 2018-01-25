@@ -790,12 +790,6 @@ func (s *BatchGetNamedQueryInput) Validate() error {
 	return nil
 }
 
-// SetNamedQueryIds sets the NamedQueryIds field's value.
-func (s *BatchGetNamedQueryInput) SetNamedQueryIds(v []string) *BatchGetNamedQueryInput {
-	s.NamedQueryIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetNamedQueryOutput
 type BatchGetNamedQueryOutput struct {
 	_ struct{} `type:"structure"`
@@ -822,18 +816,6 @@ func (s BatchGetNamedQueryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetNamedQueryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNamedQueries sets the NamedQueries field's value.
-func (s *BatchGetNamedQueryOutput) SetNamedQueries(v []NamedQuery) *BatchGetNamedQueryOutput {
-	s.NamedQueries = v
-	return s
-}
-
-// SetUnprocessedNamedQueryIds sets the UnprocessedNamedQueryIds field's value.
-func (s *BatchGetNamedQueryOutput) SetUnprocessedNamedQueryIds(v []UnprocessedNamedQueryId) *BatchGetNamedQueryOutput {
-	s.UnprocessedNamedQueryIds = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetQueryExecutionInput
@@ -873,12 +855,6 @@ func (s *BatchGetQueryExecutionInput) Validate() error {
 	return nil
 }
 
-// SetQueryExecutionIds sets the QueryExecutionIds field's value.
-func (s *BatchGetQueryExecutionInput) SetQueryExecutionIds(v []string) *BatchGetQueryExecutionInput {
-	s.QueryExecutionIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetQueryExecutionOutput
 type BatchGetQueryExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -905,18 +881,6 @@ func (s BatchGetQueryExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetQueryExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetQueryExecutions sets the QueryExecutions field's value.
-func (s *BatchGetQueryExecutionOutput) SetQueryExecutions(v []QueryExecution) *BatchGetQueryExecutionOutput {
-	s.QueryExecutions = v
-	return s
-}
-
-// SetUnprocessedQueryExecutionIds sets the UnprocessedQueryExecutionIds field's value.
-func (s *BatchGetQueryExecutionOutput) SetUnprocessedQueryExecutionIds(v []UnprocessedQueryExecutionId) *BatchGetQueryExecutionOutput {
-	s.UnprocessedQueryExecutionIds = v
-	return s
 }
 
 // Information about the columns in a query execution result.
@@ -969,66 +933,6 @@ func (s ColumnInfo) String() string {
 // GoString returns the string representation
 func (s ColumnInfo) GoString() string {
 	return s.String()
-}
-
-// SetCaseSensitive sets the CaseSensitive field's value.
-func (s *ColumnInfo) SetCaseSensitive(v bool) *ColumnInfo {
-	s.CaseSensitive = &v
-	return s
-}
-
-// SetCatalogName sets the CatalogName field's value.
-func (s *ColumnInfo) SetCatalogName(v string) *ColumnInfo {
-	s.CatalogName = &v
-	return s
-}
-
-// SetLabel sets the Label field's value.
-func (s *ColumnInfo) SetLabel(v string) *ColumnInfo {
-	s.Label = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ColumnInfo) SetName(v string) *ColumnInfo {
-	s.Name = &v
-	return s
-}
-
-// SetNullable sets the Nullable field's value.
-func (s *ColumnInfo) SetNullable(v ColumnNullable) *ColumnInfo {
-	s.Nullable = v
-	return s
-}
-
-// SetPrecision sets the Precision field's value.
-func (s *ColumnInfo) SetPrecision(v int64) *ColumnInfo {
-	s.Precision = &v
-	return s
-}
-
-// SetScale sets the Scale field's value.
-func (s *ColumnInfo) SetScale(v int64) *ColumnInfo {
-	s.Scale = &v
-	return s
-}
-
-// SetSchemaName sets the SchemaName field's value.
-func (s *ColumnInfo) SetSchemaName(v string) *ColumnInfo {
-	s.SchemaName = &v
-	return s
-}
-
-// SetTableName sets the TableName field's value.
-func (s *ColumnInfo) SetTableName(v string) *ColumnInfo {
-	s.TableName = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ColumnInfo) SetType(v string) *ColumnInfo {
-	s.Type = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateNamedQueryInput
@@ -1111,36 +1015,6 @@ func (s *CreateNamedQueryInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *CreateNamedQueryInput) SetClientRequestToken(v string) *CreateNamedQueryInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetDatabase sets the Database field's value.
-func (s *CreateNamedQueryInput) SetDatabase(v string) *CreateNamedQueryInput {
-	s.Database = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateNamedQueryInput) SetDescription(v string) *CreateNamedQueryInput {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateNamedQueryInput) SetName(v string) *CreateNamedQueryInput {
-	s.Name = &v
-	return s
-}
-
-// SetQueryString sets the QueryString field's value.
-func (s *CreateNamedQueryInput) SetQueryString(v string) *CreateNamedQueryInput {
-	s.QueryString = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateNamedQueryOutput
 type CreateNamedQueryOutput struct {
 	_ struct{} `type:"structure"`
@@ -1166,12 +1040,6 @@ func (s CreateNamedQueryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNamedQueryId sets the NamedQueryId field's value.
-func (s *CreateNamedQueryOutput) SetNamedQueryId(v string) *CreateNamedQueryOutput {
-	s.NamedQueryId = &v
-	return s
-}
-
 // A piece of data (a field in the table).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/Datum
 type Datum struct {
@@ -1189,12 +1057,6 @@ func (s Datum) String() string {
 // GoString returns the string representation
 func (s Datum) GoString() string {
 	return s.String()
-}
-
-// SetVarCharValue sets the VarCharValue field's value.
-func (s *Datum) SetVarCharValue(v string) *Datum {
-	s.VarCharValue = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteNamedQueryInput
@@ -1229,12 +1091,6 @@ func (s *DeleteNamedQueryInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetNamedQueryId sets the NamedQueryId field's value.
-func (s *DeleteNamedQueryInput) SetNamedQueryId(v string) *DeleteNamedQueryInput {
-	s.NamedQueryId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteNamedQueryOutput
@@ -1299,18 +1155,6 @@ func (s *EncryptionConfiguration) Validate() error {
 	return nil
 }
 
-// SetEncryptionOption sets the EncryptionOption field's value.
-func (s *EncryptionConfiguration) SetEncryptionOption(v EncryptionOption) *EncryptionConfiguration {
-	s.EncryptionOption = v
-	return s
-}
-
-// SetKmsKey sets the KmsKey field's value.
-func (s *EncryptionConfiguration) SetKmsKey(v string) *EncryptionConfiguration {
-	s.KmsKey = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetNamedQueryInput
 type GetNamedQueryInput struct {
 	_ struct{} `type:"structure"`
@@ -1345,12 +1189,6 @@ func (s *GetNamedQueryInput) Validate() error {
 	return nil
 }
 
-// SetNamedQueryId sets the NamedQueryId field's value.
-func (s *GetNamedQueryInput) SetNamedQueryId(v string) *GetNamedQueryInput {
-	s.NamedQueryId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetNamedQueryOutput
 type GetNamedQueryOutput struct {
 	_ struct{} `type:"structure"`
@@ -1374,12 +1212,6 @@ func (s GetNamedQueryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetNamedQueryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNamedQuery sets the NamedQuery field's value.
-func (s *GetNamedQueryOutput) SetNamedQuery(v *NamedQuery) *GetNamedQueryOutput {
-	s.NamedQuery = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecutionInput
@@ -1416,12 +1248,6 @@ func (s *GetQueryExecutionInput) Validate() error {
 	return nil
 }
 
-// SetQueryExecutionId sets the QueryExecutionId field's value.
-func (s *GetQueryExecutionInput) SetQueryExecutionId(v string) *GetQueryExecutionInput {
-	s.QueryExecutionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryExecutionOutput
 type GetQueryExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -1445,12 +1271,6 @@ func (s GetQueryExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetQueryExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetQueryExecution sets the QueryExecution field's value.
-func (s *GetQueryExecutionOutput) SetQueryExecution(v *QueryExecution) *GetQueryExecutionOutput {
-	s.QueryExecution = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResultsInput
@@ -1494,24 +1314,6 @@ func (s *GetQueryResultsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *GetQueryResultsInput) SetMaxResults(v int64) *GetQueryResultsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetQueryResultsInput) SetNextToken(v string) *GetQueryResultsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetQueryExecutionId sets the QueryExecutionId field's value.
-func (s *GetQueryResultsInput) SetQueryExecutionId(v string) *GetQueryResultsInput {
-	s.QueryExecutionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetQueryResultsOutput
 type GetQueryResultsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1540,18 +1342,6 @@ func (s GetQueryResultsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *GetQueryResultsOutput) SetNextToken(v string) *GetQueryResultsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResultSet sets the ResultSet field's value.
-func (s *GetQueryResultsOutput) SetResultSet(v *ResultSet) *GetQueryResultsOutput {
-	s.ResultSet = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueriesInput
 type ListNamedQueriesInput struct {
 	_ struct{} `type:"structure"`
@@ -1572,18 +1362,6 @@ func (s ListNamedQueriesInput) String() string {
 // GoString returns the string representation
 func (s ListNamedQueriesInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListNamedQueriesInput) SetMaxResults(v int64) *ListNamedQueriesInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListNamedQueriesInput) SetNextToken(v string) *ListNamedQueriesInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListNamedQueriesOutput
@@ -1614,18 +1392,6 @@ func (s ListNamedQueriesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNamedQueryIds sets the NamedQueryIds field's value.
-func (s *ListNamedQueriesOutput) SetNamedQueryIds(v []string) *ListNamedQueriesOutput {
-	s.NamedQueryIds = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListNamedQueriesOutput) SetNextToken(v string) *ListNamedQueriesOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListQueryExecutionsInput
 type ListQueryExecutionsInput struct {
 	_ struct{} `type:"structure"`
@@ -1646,18 +1412,6 @@ func (s ListQueryExecutionsInput) String() string {
 // GoString returns the string representation
 func (s ListQueryExecutionsInput) GoString() string {
 	return s.String()
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListQueryExecutionsInput) SetMaxResults(v int64) *ListQueryExecutionsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListQueryExecutionsInput) SetNextToken(v string) *ListQueryExecutionsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListQueryExecutionsOutput
@@ -1686,18 +1440,6 @@ func (s ListQueryExecutionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListQueryExecutionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListQueryExecutionsOutput) SetNextToken(v string) *ListQueryExecutionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetQueryExecutionIds sets the QueryExecutionIds field's value.
-func (s *ListQueryExecutionsOutput) SetQueryExecutionIds(v []string) *ListQueryExecutionsOutput {
-	s.QueryExecutionIds = v
-	return s
 }
 
 // A query, where QueryString is the SQL query statements that comprise the
@@ -1738,36 +1480,6 @@ func (s NamedQuery) GoString() string {
 	return s.String()
 }
 
-// SetDatabase sets the Database field's value.
-func (s *NamedQuery) SetDatabase(v string) *NamedQuery {
-	s.Database = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *NamedQuery) SetDescription(v string) *NamedQuery {
-	s.Description = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *NamedQuery) SetName(v string) *NamedQuery {
-	s.Name = &v
-	return s
-}
-
-// SetNamedQueryId sets the NamedQueryId field's value.
-func (s *NamedQuery) SetNamedQueryId(v string) *NamedQuery {
-	s.NamedQueryId = &v
-	return s
-}
-
-// SetQueryString sets the QueryString field's value.
-func (s *NamedQuery) SetQueryString(v string) *NamedQuery {
-	s.QueryString = &v
-	return s
-}
-
 // Information about a single instance of a query execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecution
 type QueryExecution struct {
@@ -1805,42 +1517,6 @@ func (s QueryExecution) GoString() string {
 	return s.String()
 }
 
-// SetQuery sets the Query field's value.
-func (s *QueryExecution) SetQuery(v string) *QueryExecution {
-	s.Query = &v
-	return s
-}
-
-// SetQueryExecutionContext sets the QueryExecutionContext field's value.
-func (s *QueryExecution) SetQueryExecutionContext(v *QueryExecutionContext) *QueryExecution {
-	s.QueryExecutionContext = v
-	return s
-}
-
-// SetQueryExecutionId sets the QueryExecutionId field's value.
-func (s *QueryExecution) SetQueryExecutionId(v string) *QueryExecution {
-	s.QueryExecutionId = &v
-	return s
-}
-
-// SetResultConfiguration sets the ResultConfiguration field's value.
-func (s *QueryExecution) SetResultConfiguration(v *ResultConfiguration) *QueryExecution {
-	s.ResultConfiguration = v
-	return s
-}
-
-// SetStatistics sets the Statistics field's value.
-func (s *QueryExecution) SetStatistics(v *QueryExecutionStatistics) *QueryExecution {
-	s.Statistics = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *QueryExecution) SetStatus(v *QueryExecutionStatus) *QueryExecution {
-	s.Status = v
-	return s
-}
-
 // The database in which the query execution occurs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionContext
 type QueryExecutionContext struct {
@@ -1873,12 +1549,6 @@ func (s *QueryExecutionContext) Validate() error {
 	return nil
 }
 
-// SetDatabase sets the Database field's value.
-func (s *QueryExecutionContext) SetDatabase(v string) *QueryExecutionContext {
-	s.Database = &v
-	return s
-}
-
 // The amount of data scanned during the query execution and the amount of time
 // that it took to execute.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionStatistics
@@ -1900,18 +1570,6 @@ func (s QueryExecutionStatistics) String() string {
 // GoString returns the string representation
 func (s QueryExecutionStatistics) GoString() string {
 	return s.String()
-}
-
-// SetDataScannedInBytes sets the DataScannedInBytes field's value.
-func (s *QueryExecutionStatistics) SetDataScannedInBytes(v int64) *QueryExecutionStatistics {
-	s.DataScannedInBytes = &v
-	return s
-}
-
-// SetEngineExecutionTimeInMillis sets the EngineExecutionTimeInMillis field's value.
-func (s *QueryExecutionStatistics) SetEngineExecutionTimeInMillis(v int64) *QueryExecutionStatistics {
-	s.EngineExecutionTimeInMillis = &v
-	return s
 }
 
 // The completion date, current state, submission time, and state change reason
@@ -1945,30 +1603,6 @@ func (s QueryExecutionStatus) String() string {
 // GoString returns the string representation
 func (s QueryExecutionStatus) GoString() string {
 	return s.String()
-}
-
-// SetCompletionDateTime sets the CompletionDateTime field's value.
-func (s *QueryExecutionStatus) SetCompletionDateTime(v time.Time) *QueryExecutionStatus {
-	s.CompletionDateTime = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *QueryExecutionStatus) SetState(v QueryExecutionState) *QueryExecutionStatus {
-	s.State = v
-	return s
-}
-
-// SetStateChangeReason sets the StateChangeReason field's value.
-func (s *QueryExecutionStatus) SetStateChangeReason(v string) *QueryExecutionStatus {
-	s.StateChangeReason = &v
-	return s
-}
-
-// SetSubmissionDateTime sets the SubmissionDateTime field's value.
-func (s *QueryExecutionStatus) SetSubmissionDateTime(v time.Time) *QueryExecutionStatus {
-	s.SubmissionDateTime = &v
-	return s
 }
 
 // The location in Amazon S3 where query results are stored and the encryption
@@ -2016,18 +1650,6 @@ func (s *ResultConfiguration) Validate() error {
 	return nil
 }
 
-// SetEncryptionConfiguration sets the EncryptionConfiguration field's value.
-func (s *ResultConfiguration) SetEncryptionConfiguration(v *EncryptionConfiguration) *ResultConfiguration {
-	s.EncryptionConfiguration = v
-	return s
-}
-
-// SetOutputLocation sets the OutputLocation field's value.
-func (s *ResultConfiguration) SetOutputLocation(v string) *ResultConfiguration {
-	s.OutputLocation = &v
-	return s
-}
-
 // The metadata and rows that comprise a query result set. The metadata describes
 // the column structure and data types.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultSet
@@ -2052,18 +1674,6 @@ func (s ResultSet) GoString() string {
 	return s.String()
 }
 
-// SetResultSetMetadata sets the ResultSetMetadata field's value.
-func (s *ResultSet) SetResultSetMetadata(v *ResultSetMetadata) *ResultSet {
-	s.ResultSetMetadata = v
-	return s
-}
-
-// SetRows sets the Rows field's value.
-func (s *ResultSet) SetRows(v []Row) *ResultSet {
-	s.Rows = v
-	return s
-}
-
 // The metadata that describes the column structure and data types of a table
 // of query results.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultSetMetadata
@@ -2084,12 +1694,6 @@ func (s ResultSetMetadata) GoString() string {
 	return s.String()
 }
 
-// SetColumnInfo sets the ColumnInfo field's value.
-func (s *ResultSetMetadata) SetColumnInfo(v []ColumnInfo) *ResultSetMetadata {
-	s.ColumnInfo = v
-	return s
-}
-
 // The rows that comprise a query result table.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/Row
 type Row struct {
@@ -2107,12 +1711,6 @@ func (s Row) String() string {
 // GoString returns the string representation
 func (s Row) GoString() string {
 	return s.String()
-}
-
-// SetData sets the Data field's value.
-func (s *Row) SetData(v []Datum) *Row {
-	s.Data = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartQueryExecutionInput
@@ -2188,30 +1786,6 @@ func (s *StartQueryExecutionInput) Validate() error {
 	return nil
 }
 
-// SetClientRequestToken sets the ClientRequestToken field's value.
-func (s *StartQueryExecutionInput) SetClientRequestToken(v string) *StartQueryExecutionInput {
-	s.ClientRequestToken = &v
-	return s
-}
-
-// SetQueryExecutionContext sets the QueryExecutionContext field's value.
-func (s *StartQueryExecutionInput) SetQueryExecutionContext(v *QueryExecutionContext) *StartQueryExecutionInput {
-	s.QueryExecutionContext = v
-	return s
-}
-
-// SetQueryString sets the QueryString field's value.
-func (s *StartQueryExecutionInput) SetQueryString(v string) *StartQueryExecutionInput {
-	s.QueryString = &v
-	return s
-}
-
-// SetResultConfiguration sets the ResultConfiguration field's value.
-func (s *StartQueryExecutionInput) SetResultConfiguration(v *ResultConfiguration) *StartQueryExecutionInput {
-	s.ResultConfiguration = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartQueryExecutionOutput
 type StartQueryExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -2235,12 +1809,6 @@ func (s StartQueryExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartQueryExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetQueryExecutionId sets the QueryExecutionId field's value.
-func (s *StartQueryExecutionOutput) SetQueryExecutionId(v string) *StartQueryExecutionOutput {
-	s.QueryExecutionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopQueryExecutionInput
@@ -2275,12 +1843,6 @@ func (s *StopQueryExecutionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetQueryExecutionId sets the QueryExecutionId field's value.
-func (s *StopQueryExecutionInput) SetQueryExecutionId(v string) *StopQueryExecutionInput {
-	s.QueryExecutionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopQueryExecutionOutput
@@ -2332,24 +1894,6 @@ func (s UnprocessedNamedQueryId) GoString() string {
 	return s.String()
 }
 
-// SetErrorCode sets the ErrorCode field's value.
-func (s *UnprocessedNamedQueryId) SetErrorCode(v string) *UnprocessedNamedQueryId {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *UnprocessedNamedQueryId) SetErrorMessage(v string) *UnprocessedNamedQueryId {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetNamedQueryId sets the NamedQueryId field's value.
-func (s *UnprocessedNamedQueryId) SetNamedQueryId(v string) *UnprocessedNamedQueryId {
-	s.NamedQueryId = &v
-	return s
-}
-
 // Describes a query execution that failed to process.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UnprocessedQueryExecutionId
 type UnprocessedQueryExecutionId struct {
@@ -2376,24 +1920,6 @@ func (s UnprocessedQueryExecutionId) GoString() string {
 	return s.String()
 }
 
-// SetErrorCode sets the ErrorCode field's value.
-func (s *UnprocessedQueryExecutionId) SetErrorCode(v string) *UnprocessedQueryExecutionId {
-	s.ErrorCode = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *UnprocessedQueryExecutionId) SetErrorMessage(v string) *UnprocessedQueryExecutionId {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetQueryExecutionId sets the QueryExecutionId field's value.
-func (s *UnprocessedQueryExecutionId) SetQueryExecutionId(v string) *UnprocessedQueryExecutionId {
-	s.QueryExecutionId = &v
-	return s
-}
-
 type ColumnNullable string
 
 // Enum values for ColumnNullable
@@ -2403,6 +1929,15 @@ const (
 	ColumnNullableUnknown  ColumnNullable = "UNKNOWN"
 )
 
+func (enum ColumnNullable) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ColumnNullable) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EncryptionOption string
 
 // Enum values for EncryptionOption
@@ -2411,6 +1946,15 @@ const (
 	EncryptionOptionSseKms EncryptionOption = "SSE_KMS"
 	EncryptionOptionCseKms EncryptionOption = "CSE_KMS"
 )
+
+func (enum EncryptionOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncryptionOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type QueryExecutionState string
 
@@ -2423,9 +1967,27 @@ const (
 	QueryExecutionStateCancelled QueryExecutionState = "CANCELLED"
 )
 
+func (enum QueryExecutionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QueryExecutionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ThrottleReason string
 
 // Enum values for ThrottleReason
 const (
 	ThrottleReasonConcurrentQueryLimitExceeded ThrottleReason = "CONCURRENT_QUERY_LIMIT_EXCEEDED"
 )
+
+func (enum ThrottleReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ThrottleReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

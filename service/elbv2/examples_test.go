@@ -272,6 +272,8 @@ func ExampleELBV2_CreateLoadBalancerRequest_shared00() {
 				fmt.Println(elbv2.ErrCodeAllocationIdNotFoundException, aerr.Error())
 			case elbv2.ErrCodeAvailabilityZoneNotSupportedException:
 				fmt.Println(elbv2.ErrCodeAvailabilityZoneNotSupportedException, aerr.Error())
+			case elbv2.ErrCodeOperationNotPermittedException:
+				fmt.Println(elbv2.ErrCodeOperationNotPermittedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -335,6 +337,8 @@ func ExampleELBV2_CreateLoadBalancerRequest_shared01() {
 				fmt.Println(elbv2.ErrCodeAllocationIdNotFoundException, aerr.Error())
 			case elbv2.ErrCodeAvailabilityZoneNotSupportedException:
 				fmt.Println(elbv2.ErrCodeAvailabilityZoneNotSupportedException, aerr.Error())
+			case elbv2.ErrCodeOperationNotPermittedException:
+				fmt.Println(elbv2.ErrCodeOperationNotPermittedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -519,6 +523,8 @@ func ExampleELBV2_DeleteLoadBalancerRequest_shared00() {
 				fmt.Println(elbv2.ErrCodeLoadBalancerNotFoundException, aerr.Error())
 			case elbv2.ErrCodeOperationNotPermittedException:
 				fmt.Println(elbv2.ErrCodeOperationNotPermittedException, aerr.Error())
+			case elbv2.ErrCodeResourceInUseException:
+				fmt.Println(elbv2.ErrCodeResourceInUseException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

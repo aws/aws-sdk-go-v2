@@ -4203,18 +4203,6 @@ func (s AgentVersion) GoString() string {
 	return s.String()
 }
 
-// SetConfigurationManager sets the ConfigurationManager field's value.
-func (s *AgentVersion) SetConfigurationManager(v *StackConfigurationManager) *AgentVersion {
-	s.ConfigurationManager = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *AgentVersion) SetVersion(v string) *AgentVersion {
-	s.Version = &v
-	return s
-}
-
 // A description of the app.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/App
 type App struct {
@@ -4284,90 +4272,6 @@ func (s App) GoString() string {
 	return s.String()
 }
 
-// SetAppId sets the AppId field's value.
-func (s *App) SetAppId(v string) *App {
-	s.AppId = &v
-	return s
-}
-
-// SetAppSource sets the AppSource field's value.
-func (s *App) SetAppSource(v *Source) *App {
-	s.AppSource = v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *App) SetAttributes(v map[string]string) *App {
-	s.Attributes = v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *App) SetCreatedAt(v string) *App {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDataSources sets the DataSources field's value.
-func (s *App) SetDataSources(v []DataSource) *App {
-	s.DataSources = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *App) SetDescription(v string) *App {
-	s.Description = &v
-	return s
-}
-
-// SetDomains sets the Domains field's value.
-func (s *App) SetDomains(v []string) *App {
-	s.Domains = v
-	return s
-}
-
-// SetEnableSsl sets the EnableSsl field's value.
-func (s *App) SetEnableSsl(v bool) *App {
-	s.EnableSsl = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *App) SetEnvironment(v []EnvironmentVariable) *App {
-	s.Environment = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *App) SetName(v string) *App {
-	s.Name = &v
-	return s
-}
-
-// SetShortname sets the Shortname field's value.
-func (s *App) SetShortname(v string) *App {
-	s.Shortname = &v
-	return s
-}
-
-// SetSslConfiguration sets the SslConfiguration field's value.
-func (s *App) SetSslConfiguration(v *SslConfiguration) *App {
-	s.SslConfiguration = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *App) SetStackId(v string) *App {
-	s.StackId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *App) SetType(v AppType) *App {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignInstanceRequest
 type AssignInstanceInput struct {
 	_ struct{} `type:"structure"`
@@ -4410,18 +4314,6 @@ func (s *AssignInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *AssignInstanceInput) SetInstanceId(v string) *AssignInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetLayerIds sets the LayerIds field's value.
-func (s *AssignInstanceInput) SetLayerIds(v []string) *AssignInstanceInput {
-	s.LayerIds = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignInstanceOutput
@@ -4483,18 +4375,6 @@ func (s *AssignVolumeInput) Validate() error {
 	return nil
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *AssignVolumeInput) SetInstanceId(v string) *AssignVolumeInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *AssignVolumeInput) SetVolumeId(v string) *AssignVolumeInput {
-	s.VolumeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssignVolumeOutput
 type AssignVolumeOutput struct {
 	_ struct{} `type:"structure"`
@@ -4552,18 +4432,6 @@ func (s *AssociateElasticIpInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetElasticIp sets the ElasticIp field's value.
-func (s *AssociateElasticIpInput) SetElasticIp(v string) *AssociateElasticIpInput {
-	s.ElasticIp = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *AssociateElasticIpInput) SetInstanceId(v string) *AssociateElasticIpInput {
-	s.InstanceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AssociateElasticIpOutput
@@ -4630,18 +4498,6 @@ func (s *AttachElasticLoadBalancerInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetElasticLoadBalancerName sets the ElasticLoadBalancerName field's value.
-func (s *AttachElasticLoadBalancerInput) SetElasticLoadBalancerName(v string) *AttachElasticLoadBalancerInput {
-	s.ElasticLoadBalancerName = &v
-	return s
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *AttachElasticLoadBalancerInput) SetLayerId(v string) *AttachElasticLoadBalancerInput {
-	s.LayerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/AttachElasticLoadBalancerOutput
@@ -4738,48 +4594,6 @@ func (s *AutoScalingThresholds) Validate() error {
 	return nil
 }
 
-// SetAlarms sets the Alarms field's value.
-func (s *AutoScalingThresholds) SetAlarms(v []string) *AutoScalingThresholds {
-	s.Alarms = v
-	return s
-}
-
-// SetCpuThreshold sets the CpuThreshold field's value.
-func (s *AutoScalingThresholds) SetCpuThreshold(v float64) *AutoScalingThresholds {
-	s.CpuThreshold = &v
-	return s
-}
-
-// SetIgnoreMetricsTime sets the IgnoreMetricsTime field's value.
-func (s *AutoScalingThresholds) SetIgnoreMetricsTime(v int64) *AutoScalingThresholds {
-	s.IgnoreMetricsTime = &v
-	return s
-}
-
-// SetInstanceCount sets the InstanceCount field's value.
-func (s *AutoScalingThresholds) SetInstanceCount(v int64) *AutoScalingThresholds {
-	s.InstanceCount = &v
-	return s
-}
-
-// SetLoadThreshold sets the LoadThreshold field's value.
-func (s *AutoScalingThresholds) SetLoadThreshold(v float64) *AutoScalingThresholds {
-	s.LoadThreshold = &v
-	return s
-}
-
-// SetMemoryThreshold sets the MemoryThreshold field's value.
-func (s *AutoScalingThresholds) SetMemoryThreshold(v float64) *AutoScalingThresholds {
-	s.MemoryThreshold = &v
-	return s
-}
-
-// SetThresholdsWaitTime sets the ThresholdsWaitTime field's value.
-func (s *AutoScalingThresholds) SetThresholdsWaitTime(v int64) *AutoScalingThresholds {
-	s.ThresholdsWaitTime = &v
-	return s
-}
-
 // Describes a block device mapping. This data type maps directly to the Amazon
 // EC2 BlockDeviceMapping (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html)
 // data type.
@@ -4813,30 +4627,6 @@ func (s BlockDeviceMapping) GoString() string {
 	return s.String()
 }
 
-// SetDeviceName sets the DeviceName field's value.
-func (s *BlockDeviceMapping) SetDeviceName(v string) *BlockDeviceMapping {
-	s.DeviceName = &v
-	return s
-}
-
-// SetEbs sets the Ebs field's value.
-func (s *BlockDeviceMapping) SetEbs(v *EbsBlockDevice) *BlockDeviceMapping {
-	s.Ebs = v
-	return s
-}
-
-// SetNoDevice sets the NoDevice field's value.
-func (s *BlockDeviceMapping) SetNoDevice(v string) *BlockDeviceMapping {
-	s.NoDevice = &v
-	return s
-}
-
-// SetVirtualName sets the VirtualName field's value.
-func (s *BlockDeviceMapping) SetVirtualName(v string) *BlockDeviceMapping {
-	s.VirtualName = &v
-	return s
-}
-
 // Describes the Chef configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ChefConfiguration
 type ChefConfiguration struct {
@@ -4857,18 +4647,6 @@ func (s ChefConfiguration) String() string {
 // GoString returns the string representation
 func (s ChefConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetBerkshelfVersion sets the BerkshelfVersion field's value.
-func (s *ChefConfiguration) SetBerkshelfVersion(v string) *ChefConfiguration {
-	s.BerkshelfVersion = &v
-	return s
-}
-
-// SetManageBerkshelf sets the ManageBerkshelf field's value.
-func (s *ChefConfiguration) SetManageBerkshelf(v bool) *ChefConfiguration {
-	s.ManageBerkshelf = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloneStackRequest
@@ -5134,138 +4912,6 @@ func (s *CloneStackInput) Validate() error {
 	return nil
 }
 
-// SetAgentVersion sets the AgentVersion field's value.
-func (s *CloneStackInput) SetAgentVersion(v string) *CloneStackInput {
-	s.AgentVersion = &v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *CloneStackInput) SetAttributes(v map[string]string) *CloneStackInput {
-	s.Attributes = v
-	return s
-}
-
-// SetChefConfiguration sets the ChefConfiguration field's value.
-func (s *CloneStackInput) SetChefConfiguration(v *ChefConfiguration) *CloneStackInput {
-	s.ChefConfiguration = v
-	return s
-}
-
-// SetCloneAppIds sets the CloneAppIds field's value.
-func (s *CloneStackInput) SetCloneAppIds(v []string) *CloneStackInput {
-	s.CloneAppIds = v
-	return s
-}
-
-// SetClonePermissions sets the ClonePermissions field's value.
-func (s *CloneStackInput) SetClonePermissions(v bool) *CloneStackInput {
-	s.ClonePermissions = &v
-	return s
-}
-
-// SetConfigurationManager sets the ConfigurationManager field's value.
-func (s *CloneStackInput) SetConfigurationManager(v *StackConfigurationManager) *CloneStackInput {
-	s.ConfigurationManager = v
-	return s
-}
-
-// SetCustomCookbooksSource sets the CustomCookbooksSource field's value.
-func (s *CloneStackInput) SetCustomCookbooksSource(v *Source) *CloneStackInput {
-	s.CustomCookbooksSource = v
-	return s
-}
-
-// SetCustomJson sets the CustomJson field's value.
-func (s *CloneStackInput) SetCustomJson(v string) *CloneStackInput {
-	s.CustomJson = &v
-	return s
-}
-
-// SetDefaultAvailabilityZone sets the DefaultAvailabilityZone field's value.
-func (s *CloneStackInput) SetDefaultAvailabilityZone(v string) *CloneStackInput {
-	s.DefaultAvailabilityZone = &v
-	return s
-}
-
-// SetDefaultInstanceProfileArn sets the DefaultInstanceProfileArn field's value.
-func (s *CloneStackInput) SetDefaultInstanceProfileArn(v string) *CloneStackInput {
-	s.DefaultInstanceProfileArn = &v
-	return s
-}
-
-// SetDefaultOs sets the DefaultOs field's value.
-func (s *CloneStackInput) SetDefaultOs(v string) *CloneStackInput {
-	s.DefaultOs = &v
-	return s
-}
-
-// SetDefaultRootDeviceType sets the DefaultRootDeviceType field's value.
-func (s *CloneStackInput) SetDefaultRootDeviceType(v RootDeviceType) *CloneStackInput {
-	s.DefaultRootDeviceType = v
-	return s
-}
-
-// SetDefaultSshKeyName sets the DefaultSshKeyName field's value.
-func (s *CloneStackInput) SetDefaultSshKeyName(v string) *CloneStackInput {
-	s.DefaultSshKeyName = &v
-	return s
-}
-
-// SetDefaultSubnetId sets the DefaultSubnetId field's value.
-func (s *CloneStackInput) SetDefaultSubnetId(v string) *CloneStackInput {
-	s.DefaultSubnetId = &v
-	return s
-}
-
-// SetHostnameTheme sets the HostnameTheme field's value.
-func (s *CloneStackInput) SetHostnameTheme(v string) *CloneStackInput {
-	s.HostnameTheme = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CloneStackInput) SetName(v string) *CloneStackInput {
-	s.Name = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *CloneStackInput) SetRegion(v string) *CloneStackInput {
-	s.Region = &v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *CloneStackInput) SetServiceRoleArn(v string) *CloneStackInput {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetSourceStackId sets the SourceStackId field's value.
-func (s *CloneStackInput) SetSourceStackId(v string) *CloneStackInput {
-	s.SourceStackId = &v
-	return s
-}
-
-// SetUseCustomCookbooks sets the UseCustomCookbooks field's value.
-func (s *CloneStackInput) SetUseCustomCookbooks(v bool) *CloneStackInput {
-	s.UseCustomCookbooks = &v
-	return s
-}
-
-// SetUseOpsworksSecurityGroups sets the UseOpsworksSecurityGroups field's value.
-func (s *CloneStackInput) SetUseOpsworksSecurityGroups(v bool) *CloneStackInput {
-	s.UseOpsworksSecurityGroups = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *CloneStackInput) SetVpcId(v string) *CloneStackInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the response to a CloneStack request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloneStackResult
 type CloneStackOutput struct {
@@ -5292,12 +4938,6 @@ func (s CloneStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetStackId sets the StackId field's value.
-func (s *CloneStackOutput) SetStackId(v string) *CloneStackOutput {
-	s.StackId = &v
-	return s
-}
-
 // Describes the Amazon CloudWatch logs configuration for a layer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CloudWatchLogsConfiguration
 type CloudWatchLogsConfiguration struct {
@@ -5318,18 +4958,6 @@ func (s CloudWatchLogsConfiguration) String() string {
 // GoString returns the string representation
 func (s CloudWatchLogsConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *CloudWatchLogsConfiguration) SetEnabled(v bool) *CloudWatchLogsConfiguration {
-	s.Enabled = &v
-	return s
-}
-
-// SetLogStreams sets the LogStreams field's value.
-func (s *CloudWatchLogsConfiguration) SetLogStreams(v []CloudWatchLogsLogStream) *CloudWatchLogsConfiguration {
-	s.LogStreams = v
-	return s
 }
 
 // Describes the Amazon CloudWatch logs configuration for a layer. For detailed
@@ -5411,72 +5039,6 @@ func (s CloudWatchLogsLogStream) GoString() string {
 	return s.String()
 }
 
-// SetBatchCount sets the BatchCount field's value.
-func (s *CloudWatchLogsLogStream) SetBatchCount(v int64) *CloudWatchLogsLogStream {
-	s.BatchCount = &v
-	return s
-}
-
-// SetBatchSize sets the BatchSize field's value.
-func (s *CloudWatchLogsLogStream) SetBatchSize(v int64) *CloudWatchLogsLogStream {
-	s.BatchSize = &v
-	return s
-}
-
-// SetBufferDuration sets the BufferDuration field's value.
-func (s *CloudWatchLogsLogStream) SetBufferDuration(v int64) *CloudWatchLogsLogStream {
-	s.BufferDuration = &v
-	return s
-}
-
-// SetDatetimeFormat sets the DatetimeFormat field's value.
-func (s *CloudWatchLogsLogStream) SetDatetimeFormat(v string) *CloudWatchLogsLogStream {
-	s.DatetimeFormat = &v
-	return s
-}
-
-// SetEncoding sets the Encoding field's value.
-func (s *CloudWatchLogsLogStream) SetEncoding(v CloudWatchLogsEncoding) *CloudWatchLogsLogStream {
-	s.Encoding = v
-	return s
-}
-
-// SetFile sets the File field's value.
-func (s *CloudWatchLogsLogStream) SetFile(v string) *CloudWatchLogsLogStream {
-	s.File = &v
-	return s
-}
-
-// SetFileFingerprintLines sets the FileFingerprintLines field's value.
-func (s *CloudWatchLogsLogStream) SetFileFingerprintLines(v string) *CloudWatchLogsLogStream {
-	s.FileFingerprintLines = &v
-	return s
-}
-
-// SetInitialPosition sets the InitialPosition field's value.
-func (s *CloudWatchLogsLogStream) SetInitialPosition(v CloudWatchLogsInitialPosition) *CloudWatchLogsLogStream {
-	s.InitialPosition = v
-	return s
-}
-
-// SetLogGroupName sets the LogGroupName field's value.
-func (s *CloudWatchLogsLogStream) SetLogGroupName(v string) *CloudWatchLogsLogStream {
-	s.LogGroupName = &v
-	return s
-}
-
-// SetMultiLineStartPattern sets the MultiLineStartPattern field's value.
-func (s *CloudWatchLogsLogStream) SetMultiLineStartPattern(v string) *CloudWatchLogsLogStream {
-	s.MultiLineStartPattern = &v
-	return s
-}
-
-// SetTimeZone sets the TimeZone field's value.
-func (s *CloudWatchLogsLogStream) SetTimeZone(v CloudWatchLogsTimeZone) *CloudWatchLogsLogStream {
-	s.TimeZone = v
-	return s
-}
-
 // Describes a command.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/Command
 type Command struct {
@@ -5553,66 +5115,6 @@ func (s Command) String() string {
 // GoString returns the string representation
 func (s Command) GoString() string {
 	return s.String()
-}
-
-// SetAcknowledgedAt sets the AcknowledgedAt field's value.
-func (s *Command) SetAcknowledgedAt(v string) *Command {
-	s.AcknowledgedAt = &v
-	return s
-}
-
-// SetCommandId sets the CommandId field's value.
-func (s *Command) SetCommandId(v string) *Command {
-	s.CommandId = &v
-	return s
-}
-
-// SetCompletedAt sets the CompletedAt field's value.
-func (s *Command) SetCompletedAt(v string) *Command {
-	s.CompletedAt = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Command) SetCreatedAt(v string) *Command {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *Command) SetDeploymentId(v string) *Command {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetExitCode sets the ExitCode field's value.
-func (s *Command) SetExitCode(v int64) *Command {
-	s.ExitCode = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *Command) SetInstanceId(v string) *Command {
-	s.InstanceId = &v
-	return s
-}
-
-// SetLogUrl sets the LogUrl field's value.
-func (s *Command) SetLogUrl(v string) *Command {
-	s.LogUrl = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Command) SetStatus(v string) *Command {
-	s.Status = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Command) SetType(v string) *Command {
-	s.Type = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateAppRequest
@@ -5723,78 +5225,6 @@ func (s *CreateAppInput) Validate() error {
 	return nil
 }
 
-// SetAppSource sets the AppSource field's value.
-func (s *CreateAppInput) SetAppSource(v *Source) *CreateAppInput {
-	s.AppSource = v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *CreateAppInput) SetAttributes(v map[string]string) *CreateAppInput {
-	s.Attributes = v
-	return s
-}
-
-// SetDataSources sets the DataSources field's value.
-func (s *CreateAppInput) SetDataSources(v []DataSource) *CreateAppInput {
-	s.DataSources = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateAppInput) SetDescription(v string) *CreateAppInput {
-	s.Description = &v
-	return s
-}
-
-// SetDomains sets the Domains field's value.
-func (s *CreateAppInput) SetDomains(v []string) *CreateAppInput {
-	s.Domains = v
-	return s
-}
-
-// SetEnableSsl sets the EnableSsl field's value.
-func (s *CreateAppInput) SetEnableSsl(v bool) *CreateAppInput {
-	s.EnableSsl = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *CreateAppInput) SetEnvironment(v []EnvironmentVariable) *CreateAppInput {
-	s.Environment = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateAppInput) SetName(v string) *CreateAppInput {
-	s.Name = &v
-	return s
-}
-
-// SetShortname sets the Shortname field's value.
-func (s *CreateAppInput) SetShortname(v string) *CreateAppInput {
-	s.Shortname = &v
-	return s
-}
-
-// SetSslConfiguration sets the SslConfiguration field's value.
-func (s *CreateAppInput) SetSslConfiguration(v *SslConfiguration) *CreateAppInput {
-	s.SslConfiguration = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *CreateAppInput) SetStackId(v string) *CreateAppInput {
-	s.StackId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateAppInput) SetType(v AppType) *CreateAppInput {
-	s.Type = v
-	return s
-}
-
 // Contains the response to a CreateApp request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateAppResult
 type CreateAppOutput struct {
@@ -5819,12 +5249,6 @@ func (s CreateAppOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAppOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAppId sets the AppId field's value.
-func (s *CreateAppOutput) SetAppId(v string) *CreateAppOutput {
-	s.AppId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeploymentRequest
@@ -5899,48 +5323,6 @@ func (s *CreateDeploymentInput) Validate() error {
 	return nil
 }
 
-// SetAppId sets the AppId field's value.
-func (s *CreateDeploymentInput) SetAppId(v string) *CreateDeploymentInput {
-	s.AppId = &v
-	return s
-}
-
-// SetCommand sets the Command field's value.
-func (s *CreateDeploymentInput) SetCommand(v *DeploymentCommand) *CreateDeploymentInput {
-	s.Command = v
-	return s
-}
-
-// SetComment sets the Comment field's value.
-func (s *CreateDeploymentInput) SetComment(v string) *CreateDeploymentInput {
-	s.Comment = &v
-	return s
-}
-
-// SetCustomJson sets the CustomJson field's value.
-func (s *CreateDeploymentInput) SetCustomJson(v string) *CreateDeploymentInput {
-	s.CustomJson = &v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *CreateDeploymentInput) SetInstanceIds(v []string) *CreateDeploymentInput {
-	s.InstanceIds = v
-	return s
-}
-
-// SetLayerIds sets the LayerIds field's value.
-func (s *CreateDeploymentInput) SetLayerIds(v []string) *CreateDeploymentInput {
-	s.LayerIds = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *CreateDeploymentInput) SetStackId(v string) *CreateDeploymentInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a CreateDeployment request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateDeploymentResult
 type CreateDeploymentOutput struct {
@@ -5966,12 +5348,6 @@ func (s CreateDeploymentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDeploymentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *CreateDeploymentOutput) SetDeploymentId(v string) *CreateDeploymentOutput {
-	s.DeploymentId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateInstanceRequest
@@ -6147,114 +5523,6 @@ func (s *CreateInstanceInput) Validate() error {
 	return nil
 }
 
-// SetAgentVersion sets the AgentVersion field's value.
-func (s *CreateInstanceInput) SetAgentVersion(v string) *CreateInstanceInput {
-	s.AgentVersion = &v
-	return s
-}
-
-// SetAmiId sets the AmiId field's value.
-func (s *CreateInstanceInput) SetAmiId(v string) *CreateInstanceInput {
-	s.AmiId = &v
-	return s
-}
-
-// SetArchitecture sets the Architecture field's value.
-func (s *CreateInstanceInput) SetArchitecture(v Architecture) *CreateInstanceInput {
-	s.Architecture = v
-	return s
-}
-
-// SetAutoScalingType sets the AutoScalingType field's value.
-func (s *CreateInstanceInput) SetAutoScalingType(v AutoScalingType) *CreateInstanceInput {
-	s.AutoScalingType = v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *CreateInstanceInput) SetAvailabilityZone(v string) *CreateInstanceInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *CreateInstanceInput) SetBlockDeviceMappings(v []BlockDeviceMapping) *CreateInstanceInput {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *CreateInstanceInput) SetEbsOptimized(v bool) *CreateInstanceInput {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetHostname sets the Hostname field's value.
-func (s *CreateInstanceInput) SetHostname(v string) *CreateInstanceInput {
-	s.Hostname = &v
-	return s
-}
-
-// SetInstallUpdatesOnBoot sets the InstallUpdatesOnBoot field's value.
-func (s *CreateInstanceInput) SetInstallUpdatesOnBoot(v bool) *CreateInstanceInput {
-	s.InstallUpdatesOnBoot = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *CreateInstanceInput) SetInstanceType(v string) *CreateInstanceInput {
-	s.InstanceType = &v
-	return s
-}
-
-// SetLayerIds sets the LayerIds field's value.
-func (s *CreateInstanceInput) SetLayerIds(v []string) *CreateInstanceInput {
-	s.LayerIds = v
-	return s
-}
-
-// SetOs sets the Os field's value.
-func (s *CreateInstanceInput) SetOs(v string) *CreateInstanceInput {
-	s.Os = &v
-	return s
-}
-
-// SetRootDeviceType sets the RootDeviceType field's value.
-func (s *CreateInstanceInput) SetRootDeviceType(v RootDeviceType) *CreateInstanceInput {
-	s.RootDeviceType = v
-	return s
-}
-
-// SetSshKeyName sets the SshKeyName field's value.
-func (s *CreateInstanceInput) SetSshKeyName(v string) *CreateInstanceInput {
-	s.SshKeyName = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *CreateInstanceInput) SetStackId(v string) *CreateInstanceInput {
-	s.StackId = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *CreateInstanceInput) SetSubnetId(v string) *CreateInstanceInput {
-	s.SubnetId = &v
-	return s
-}
-
-// SetTenancy sets the Tenancy field's value.
-func (s *CreateInstanceInput) SetTenancy(v string) *CreateInstanceInput {
-	s.Tenancy = &v
-	return s
-}
-
-// SetVirtualizationType sets the VirtualizationType field's value.
-func (s *CreateInstanceInput) SetVirtualizationType(v string) *CreateInstanceInput {
-	s.VirtualizationType = &v
-	return s
-}
-
 // Contains the response to a CreateInstance request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateInstanceResult
 type CreateInstanceOutput struct {
@@ -6279,12 +5547,6 @@ func (s CreateInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *CreateInstanceOutput) SetInstanceId(v string) *CreateInstanceOutput {
-	s.InstanceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateLayerRequest
@@ -6425,114 +5687,6 @@ func (s *CreateLayerInput) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *CreateLayerInput) SetAttributes(v map[string]string) *CreateLayerInput {
-	s.Attributes = v
-	return s
-}
-
-// SetAutoAssignElasticIps sets the AutoAssignElasticIps field's value.
-func (s *CreateLayerInput) SetAutoAssignElasticIps(v bool) *CreateLayerInput {
-	s.AutoAssignElasticIps = &v
-	return s
-}
-
-// SetAutoAssignPublicIps sets the AutoAssignPublicIps field's value.
-func (s *CreateLayerInput) SetAutoAssignPublicIps(v bool) *CreateLayerInput {
-	s.AutoAssignPublicIps = &v
-	return s
-}
-
-// SetCloudWatchLogsConfiguration sets the CloudWatchLogsConfiguration field's value.
-func (s *CreateLayerInput) SetCloudWatchLogsConfiguration(v *CloudWatchLogsConfiguration) *CreateLayerInput {
-	s.CloudWatchLogsConfiguration = v
-	return s
-}
-
-// SetCustomInstanceProfileArn sets the CustomInstanceProfileArn field's value.
-func (s *CreateLayerInput) SetCustomInstanceProfileArn(v string) *CreateLayerInput {
-	s.CustomInstanceProfileArn = &v
-	return s
-}
-
-// SetCustomJson sets the CustomJson field's value.
-func (s *CreateLayerInput) SetCustomJson(v string) *CreateLayerInput {
-	s.CustomJson = &v
-	return s
-}
-
-// SetCustomRecipes sets the CustomRecipes field's value.
-func (s *CreateLayerInput) SetCustomRecipes(v *Recipes) *CreateLayerInput {
-	s.CustomRecipes = v
-	return s
-}
-
-// SetCustomSecurityGroupIds sets the CustomSecurityGroupIds field's value.
-func (s *CreateLayerInput) SetCustomSecurityGroupIds(v []string) *CreateLayerInput {
-	s.CustomSecurityGroupIds = v
-	return s
-}
-
-// SetEnableAutoHealing sets the EnableAutoHealing field's value.
-func (s *CreateLayerInput) SetEnableAutoHealing(v bool) *CreateLayerInput {
-	s.EnableAutoHealing = &v
-	return s
-}
-
-// SetInstallUpdatesOnBoot sets the InstallUpdatesOnBoot field's value.
-func (s *CreateLayerInput) SetInstallUpdatesOnBoot(v bool) *CreateLayerInput {
-	s.InstallUpdatesOnBoot = &v
-	return s
-}
-
-// SetLifecycleEventConfiguration sets the LifecycleEventConfiguration field's value.
-func (s *CreateLayerInput) SetLifecycleEventConfiguration(v *LifecycleEventConfiguration) *CreateLayerInput {
-	s.LifecycleEventConfiguration = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateLayerInput) SetName(v string) *CreateLayerInput {
-	s.Name = &v
-	return s
-}
-
-// SetPackages sets the Packages field's value.
-func (s *CreateLayerInput) SetPackages(v []string) *CreateLayerInput {
-	s.Packages = v
-	return s
-}
-
-// SetShortname sets the Shortname field's value.
-func (s *CreateLayerInput) SetShortname(v string) *CreateLayerInput {
-	s.Shortname = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *CreateLayerInput) SetStackId(v string) *CreateLayerInput {
-	s.StackId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *CreateLayerInput) SetType(v LayerType) *CreateLayerInput {
-	s.Type = v
-	return s
-}
-
-// SetUseEbsOptimizedInstances sets the UseEbsOptimizedInstances field's value.
-func (s *CreateLayerInput) SetUseEbsOptimizedInstances(v bool) *CreateLayerInput {
-	s.UseEbsOptimizedInstances = &v
-	return s
-}
-
-// SetVolumeConfigurations sets the VolumeConfigurations field's value.
-func (s *CreateLayerInput) SetVolumeConfigurations(v []VolumeConfiguration) *CreateLayerInput {
-	s.VolumeConfigurations = v
-	return s
-}
-
 // Contains the response to a CreateLayer request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateLayerResult
 type CreateLayerOutput struct {
@@ -6557,12 +5711,6 @@ func (s CreateLayerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateLayerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *CreateLayerOutput) SetLayerId(v string) *CreateLayerOutput {
-	s.LayerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateStackRequest
@@ -6823,120 +5971,6 @@ func (s *CreateStackInput) Validate() error {
 	return nil
 }
 
-// SetAgentVersion sets the AgentVersion field's value.
-func (s *CreateStackInput) SetAgentVersion(v string) *CreateStackInput {
-	s.AgentVersion = &v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *CreateStackInput) SetAttributes(v map[string]string) *CreateStackInput {
-	s.Attributes = v
-	return s
-}
-
-// SetChefConfiguration sets the ChefConfiguration field's value.
-func (s *CreateStackInput) SetChefConfiguration(v *ChefConfiguration) *CreateStackInput {
-	s.ChefConfiguration = v
-	return s
-}
-
-// SetConfigurationManager sets the ConfigurationManager field's value.
-func (s *CreateStackInput) SetConfigurationManager(v *StackConfigurationManager) *CreateStackInput {
-	s.ConfigurationManager = v
-	return s
-}
-
-// SetCustomCookbooksSource sets the CustomCookbooksSource field's value.
-func (s *CreateStackInput) SetCustomCookbooksSource(v *Source) *CreateStackInput {
-	s.CustomCookbooksSource = v
-	return s
-}
-
-// SetCustomJson sets the CustomJson field's value.
-func (s *CreateStackInput) SetCustomJson(v string) *CreateStackInput {
-	s.CustomJson = &v
-	return s
-}
-
-// SetDefaultAvailabilityZone sets the DefaultAvailabilityZone field's value.
-func (s *CreateStackInput) SetDefaultAvailabilityZone(v string) *CreateStackInput {
-	s.DefaultAvailabilityZone = &v
-	return s
-}
-
-// SetDefaultInstanceProfileArn sets the DefaultInstanceProfileArn field's value.
-func (s *CreateStackInput) SetDefaultInstanceProfileArn(v string) *CreateStackInput {
-	s.DefaultInstanceProfileArn = &v
-	return s
-}
-
-// SetDefaultOs sets the DefaultOs field's value.
-func (s *CreateStackInput) SetDefaultOs(v string) *CreateStackInput {
-	s.DefaultOs = &v
-	return s
-}
-
-// SetDefaultRootDeviceType sets the DefaultRootDeviceType field's value.
-func (s *CreateStackInput) SetDefaultRootDeviceType(v RootDeviceType) *CreateStackInput {
-	s.DefaultRootDeviceType = v
-	return s
-}
-
-// SetDefaultSshKeyName sets the DefaultSshKeyName field's value.
-func (s *CreateStackInput) SetDefaultSshKeyName(v string) *CreateStackInput {
-	s.DefaultSshKeyName = &v
-	return s
-}
-
-// SetDefaultSubnetId sets the DefaultSubnetId field's value.
-func (s *CreateStackInput) SetDefaultSubnetId(v string) *CreateStackInput {
-	s.DefaultSubnetId = &v
-	return s
-}
-
-// SetHostnameTheme sets the HostnameTheme field's value.
-func (s *CreateStackInput) SetHostnameTheme(v string) *CreateStackInput {
-	s.HostnameTheme = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *CreateStackInput) SetName(v string) *CreateStackInput {
-	s.Name = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *CreateStackInput) SetRegion(v string) *CreateStackInput {
-	s.Region = &v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *CreateStackInput) SetServiceRoleArn(v string) *CreateStackInput {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetUseCustomCookbooks sets the UseCustomCookbooks field's value.
-func (s *CreateStackInput) SetUseCustomCookbooks(v bool) *CreateStackInput {
-	s.UseCustomCookbooks = &v
-	return s
-}
-
-// SetUseOpsworksSecurityGroups sets the UseOpsworksSecurityGroups field's value.
-func (s *CreateStackInput) SetUseOpsworksSecurityGroups(v bool) *CreateStackInput {
-	s.UseOpsworksSecurityGroups = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *CreateStackInput) SetVpcId(v string) *CreateStackInput {
-	s.VpcId = &v
-	return s
-}
-
 // Contains the response to a CreateStack request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateStackResult
 type CreateStackOutput struct {
@@ -6962,12 +5996,6 @@ func (s CreateStackOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStackId sets the StackId field's value.
-func (s *CreateStackOutput) SetStackId(v string) *CreateStackOutput {
-	s.StackId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateUserProfileRequest
@@ -7018,30 +6046,6 @@ func (s *CreateUserProfileInput) Validate() error {
 	return nil
 }
 
-// SetAllowSelfManagement sets the AllowSelfManagement field's value.
-func (s *CreateUserProfileInput) SetAllowSelfManagement(v bool) *CreateUserProfileInput {
-	s.AllowSelfManagement = &v
-	return s
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *CreateUserProfileInput) SetIamUserArn(v string) *CreateUserProfileInput {
-	s.IamUserArn = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *CreateUserProfileInput) SetSshPublicKey(v string) *CreateUserProfileInput {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetSshUsername sets the SshUsername field's value.
-func (s *CreateUserProfileInput) SetSshUsername(v string) *CreateUserProfileInput {
-	s.SshUsername = &v
-	return s
-}
-
 // Contains the response to a CreateUserProfile request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/CreateUserProfileResult
 type CreateUserProfileOutput struct {
@@ -7068,12 +6072,6 @@ func (s CreateUserProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *CreateUserProfileOutput) SetIamUserArn(v string) *CreateUserProfileOutput {
-	s.IamUserArn = &v
-	return s
-}
-
 // Describes an app's data source.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DataSource
 type DataSource struct {
@@ -7098,24 +6096,6 @@ func (s DataSource) String() string {
 // GoString returns the string representation
 func (s DataSource) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *DataSource) SetArn(v string) *DataSource {
-	s.Arn = &v
-	return s
-}
-
-// SetDatabaseName sets the DatabaseName field's value.
-func (s *DataSource) SetDatabaseName(v string) *DataSource {
-	s.DatabaseName = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *DataSource) SetType(v string) *DataSource {
-	s.Type = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteAppRequest
@@ -7150,12 +6130,6 @@ func (s *DeleteAppInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAppId sets the AppId field's value.
-func (s *DeleteAppInput) SetAppId(v string) *DeleteAppInput {
-	s.AppId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteAppOutput
@@ -7220,24 +6194,6 @@ func (s *DeleteInstanceInput) Validate() error {
 	return nil
 }
 
-// SetDeleteElasticIp sets the DeleteElasticIp field's value.
-func (s *DeleteInstanceInput) SetDeleteElasticIp(v bool) *DeleteInstanceInput {
-	s.DeleteElasticIp = &v
-	return s
-}
-
-// SetDeleteVolumes sets the DeleteVolumes field's value.
-func (s *DeleteInstanceInput) SetDeleteVolumes(v bool) *DeleteInstanceInput {
-	s.DeleteVolumes = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *DeleteInstanceInput) SetInstanceId(v string) *DeleteInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteInstanceOutput
 type DeleteInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -7292,12 +6248,6 @@ func (s *DeleteLayerInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *DeleteLayerInput) SetLayerId(v string) *DeleteLayerInput {
-	s.LayerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteLayerOutput
@@ -7356,12 +6306,6 @@ func (s *DeleteStackInput) Validate() error {
 	return nil
 }
 
-// SetStackId sets the StackId field's value.
-func (s *DeleteStackInput) SetStackId(v string) *DeleteStackInput {
-	s.StackId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteStackOutput
 type DeleteStackOutput struct {
 	_ struct{} `type:"structure"`
@@ -7416,12 +6360,6 @@ func (s *DeleteUserProfileInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *DeleteUserProfileInput) SetIamUserArn(v string) *DeleteUserProfileInput {
-	s.IamUserArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeleteUserProfileOutput
@@ -7509,78 +6447,6 @@ func (s Deployment) String() string {
 // GoString returns the string representation
 func (s Deployment) GoString() string {
 	return s.String()
-}
-
-// SetAppId sets the AppId field's value.
-func (s *Deployment) SetAppId(v string) *Deployment {
-	s.AppId = &v
-	return s
-}
-
-// SetCommand sets the Command field's value.
-func (s *Deployment) SetCommand(v *DeploymentCommand) *Deployment {
-	s.Command = v
-	return s
-}
-
-// SetComment sets the Comment field's value.
-func (s *Deployment) SetComment(v string) *Deployment {
-	s.Comment = &v
-	return s
-}
-
-// SetCompletedAt sets the CompletedAt field's value.
-func (s *Deployment) SetCompletedAt(v string) *Deployment {
-	s.CompletedAt = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Deployment) SetCreatedAt(v string) *Deployment {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetCustomJson sets the CustomJson field's value.
-func (s *Deployment) SetCustomJson(v string) *Deployment {
-	s.CustomJson = &v
-	return s
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *Deployment) SetDeploymentId(v string) *Deployment {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetDuration sets the Duration field's value.
-func (s *Deployment) SetDuration(v int64) *Deployment {
-	s.Duration = &v
-	return s
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *Deployment) SetIamUserArn(v string) *Deployment {
-	s.IamUserArn = &v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *Deployment) SetInstanceIds(v []string) *Deployment {
-	s.InstanceIds = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *Deployment) SetStackId(v string) *Deployment {
-	s.StackId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Deployment) SetStatus(v string) *Deployment {
-	s.Status = &v
-	return s
 }
 
 // Used to specify a stack or deployment command.
@@ -7674,18 +6540,6 @@ func (s *DeploymentCommand) Validate() error {
 	return nil
 }
 
-// SetArgs sets the Args field's value.
-func (s *DeploymentCommand) SetArgs(v map[string][]string) *DeploymentCommand {
-	s.Args = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DeploymentCommand) SetName(v DeploymentCommandName) *DeploymentCommand {
-	s.Name = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterEcsClusterRequest
 type DeregisterEcsClusterInput struct {
 	_ struct{} `type:"structure"`
@@ -7718,12 +6572,6 @@ func (s *DeregisterEcsClusterInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEcsClusterArn sets the EcsClusterArn field's value.
-func (s *DeregisterEcsClusterInput) SetEcsClusterArn(v string) *DeregisterEcsClusterInput {
-	s.EcsClusterArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterEcsClusterOutput
@@ -7782,12 +6630,6 @@ func (s *DeregisterElasticIpInput) Validate() error {
 	return nil
 }
 
-// SetElasticIp sets the ElasticIp field's value.
-func (s *DeregisterElasticIpInput) SetElasticIp(v string) *DeregisterElasticIpInput {
-	s.ElasticIp = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterElasticIpOutput
 type DeregisterElasticIpOutput struct {
 	_ struct{} `type:"structure"`
@@ -7844,12 +6686,6 @@ func (s *DeregisterInstanceInput) Validate() error {
 	return nil
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *DeregisterInstanceInput) SetInstanceId(v string) *DeregisterInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterInstanceOutput
 type DeregisterInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -7904,12 +6740,6 @@ func (s *DeregisterRdsDbInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRdsDbInstanceArn sets the RdsDbInstanceArn field's value.
-func (s *DeregisterRdsDbInstanceInput) SetRdsDbInstanceArn(v string) *DeregisterRdsDbInstanceInput {
-	s.RdsDbInstanceArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterRdsDbInstanceOutput
@@ -7970,12 +6800,6 @@ func (s *DeregisterVolumeInput) Validate() error {
 	return nil
 }
 
-// SetVolumeId sets the VolumeId field's value.
-func (s *DeregisterVolumeInput) SetVolumeId(v string) *DeregisterVolumeInput {
-	s.VolumeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DeregisterVolumeOutput
 type DeregisterVolumeOutput struct {
 	_ struct{} `type:"structure"`
@@ -8019,18 +6843,6 @@ func (s DescribeAgentVersionsInput) GoString() string {
 	return s.String()
 }
 
-// SetConfigurationManager sets the ConfigurationManager field's value.
-func (s *DescribeAgentVersionsInput) SetConfigurationManager(v *StackConfigurationManager) *DescribeAgentVersionsInput {
-	s.ConfigurationManager = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeAgentVersionsInput) SetStackId(v string) *DescribeAgentVersionsInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a DescribeAgentVersions request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAgentVersionsResult
 type DescribeAgentVersionsOutput struct {
@@ -8059,12 +6871,6 @@ func (s DescribeAgentVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAgentVersions sets the AgentVersions field's value.
-func (s *DescribeAgentVersionsOutput) SetAgentVersions(v []AgentVersion) *DescribeAgentVersionsOutput {
-	s.AgentVersions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeAppsRequest
 type DescribeAppsInput struct {
 	_ struct{} `type:"structure"`
@@ -8087,18 +6893,6 @@ func (s DescribeAppsInput) String() string {
 // GoString returns the string representation
 func (s DescribeAppsInput) GoString() string {
 	return s.String()
-}
-
-// SetAppIds sets the AppIds field's value.
-func (s *DescribeAppsInput) SetAppIds(v []string) *DescribeAppsInput {
-	s.AppIds = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeAppsInput) SetStackId(v string) *DescribeAppsInput {
-	s.StackId = &v
-	return s
 }
 
 // Contains the response to a DescribeApps request.
@@ -8125,12 +6919,6 @@ func (s DescribeAppsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeAppsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApps sets the Apps field's value.
-func (s *DescribeAppsOutput) SetApps(v []App) *DescribeAppsOutput {
-	s.Apps = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeCommandsRequest
@@ -8161,24 +6949,6 @@ func (s DescribeCommandsInput) GoString() string {
 	return s.String()
 }
 
-// SetCommandIds sets the CommandIds field's value.
-func (s *DescribeCommandsInput) SetCommandIds(v []string) *DescribeCommandsInput {
-	s.CommandIds = v
-	return s
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *DescribeCommandsInput) SetDeploymentId(v string) *DescribeCommandsInput {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *DescribeCommandsInput) SetInstanceId(v string) *DescribeCommandsInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Contains the response to a DescribeCommands request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeCommandsResult
 type DescribeCommandsOutput struct {
@@ -8203,12 +6973,6 @@ func (s DescribeCommandsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeCommandsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCommands sets the Commands field's value.
-func (s *DescribeCommandsOutput) SetCommands(v []Command) *DescribeCommandsOutput {
-	s.Commands = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeDeploymentsRequest
@@ -8239,24 +7003,6 @@ func (s DescribeDeploymentsInput) GoString() string {
 	return s.String()
 }
 
-// SetAppId sets the AppId field's value.
-func (s *DescribeDeploymentsInput) SetAppId(v string) *DescribeDeploymentsInput {
-	s.AppId = &v
-	return s
-}
-
-// SetDeploymentIds sets the DeploymentIds field's value.
-func (s *DescribeDeploymentsInput) SetDeploymentIds(v []string) *DescribeDeploymentsInput {
-	s.DeploymentIds = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeDeploymentsInput) SetStackId(v string) *DescribeDeploymentsInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a DescribeDeployments request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeDeploymentsResult
 type DescribeDeploymentsOutput struct {
@@ -8281,12 +7027,6 @@ func (s DescribeDeploymentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeDeploymentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeployments sets the Deployments field's value.
-func (s *DescribeDeploymentsOutput) SetDeployments(v []Deployment) *DescribeDeploymentsOutput {
-	s.Deployments = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeEcsClustersRequest
@@ -8325,30 +7065,6 @@ func (s DescribeEcsClustersInput) GoString() string {
 	return s.String()
 }
 
-// SetEcsClusterArns sets the EcsClusterArns field's value.
-func (s *DescribeEcsClustersInput) SetEcsClusterArns(v []string) *DescribeEcsClustersInput {
-	s.EcsClusterArns = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeEcsClustersInput) SetMaxResults(v int64) *DescribeEcsClustersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEcsClustersInput) SetNextToken(v string) *DescribeEcsClustersInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeEcsClustersInput) SetStackId(v string) *DescribeEcsClustersInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a DescribeEcsClusters request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeEcsClustersResult
 type DescribeEcsClustersOutput struct {
@@ -8381,18 +7097,6 @@ func (s DescribeEcsClustersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetEcsClusters sets the EcsClusters field's value.
-func (s *DescribeEcsClustersOutput) SetEcsClusters(v []EcsCluster) *DescribeEcsClustersOutput {
-	s.EcsClusters = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeEcsClustersOutput) SetNextToken(v string) *DescribeEcsClustersOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticIpsRequest
 type DescribeElasticIpsInput struct {
 	_ struct{} `type:"structure"`
@@ -8421,24 +7125,6 @@ func (s DescribeElasticIpsInput) GoString() string {
 	return s.String()
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *DescribeElasticIpsInput) SetInstanceId(v string) *DescribeElasticIpsInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetIps sets the Ips field's value.
-func (s *DescribeElasticIpsInput) SetIps(v []string) *DescribeElasticIpsInput {
-	s.Ips = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeElasticIpsInput) SetStackId(v string) *DescribeElasticIpsInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a DescribeElasticIps request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticIpsResult
 type DescribeElasticIpsOutput struct {
@@ -8465,12 +7151,6 @@ func (s DescribeElasticIpsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetElasticIps sets the ElasticIps field's value.
-func (s *DescribeElasticIpsOutput) SetElasticIps(v []ElasticIp) *DescribeElasticIpsOutput {
-	s.ElasticIps = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeElasticLoadBalancersRequest
 type DescribeElasticLoadBalancersInput struct {
 	_ struct{} `type:"structure"`
@@ -8491,18 +7171,6 @@ func (s DescribeElasticLoadBalancersInput) String() string {
 // GoString returns the string representation
 func (s DescribeElasticLoadBalancersInput) GoString() string {
 	return s.String()
-}
-
-// SetLayerIds sets the LayerIds field's value.
-func (s *DescribeElasticLoadBalancersInput) SetLayerIds(v []string) *DescribeElasticLoadBalancersInput {
-	s.LayerIds = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeElasticLoadBalancersInput) SetStackId(v string) *DescribeElasticLoadBalancersInput {
-	s.StackId = &v
-	return s
 }
 
 // Contains the response to a DescribeElasticLoadBalancers request.
@@ -8530,12 +7198,6 @@ func (s DescribeElasticLoadBalancersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeElasticLoadBalancersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetElasticLoadBalancers sets the ElasticLoadBalancers field's value.
-func (s *DescribeElasticLoadBalancersOutput) SetElasticLoadBalancers(v []ElasticLoadBalancer) *DescribeElasticLoadBalancersOutput {
-	s.ElasticLoadBalancers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstancesRequest
@@ -8566,24 +7228,6 @@ func (s DescribeInstancesInput) GoString() string {
 	return s.String()
 }
 
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeInstancesInput) SetInstanceIds(v []string) *DescribeInstancesInput {
-	s.InstanceIds = v
-	return s
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *DescribeInstancesInput) SetLayerId(v string) *DescribeInstancesInput {
-	s.LayerId = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeInstancesInput) SetStackId(v string) *DescribeInstancesInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a DescribeInstances request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeInstancesResult
 type DescribeInstancesOutput struct {
@@ -8610,12 +7254,6 @@ func (s DescribeInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInstances sets the Instances field's value.
-func (s *DescribeInstancesOutput) SetInstances(v []Instance) *DescribeInstancesOutput {
-	s.Instances = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLayersRequest
 type DescribeLayersInput struct {
 	_ struct{} `type:"structure"`
@@ -8637,18 +7275,6 @@ func (s DescribeLayersInput) String() string {
 // GoString returns the string representation
 func (s DescribeLayersInput) GoString() string {
 	return s.String()
-}
-
-// SetLayerIds sets the LayerIds field's value.
-func (s *DescribeLayersInput) SetLayerIds(v []string) *DescribeLayersInput {
-	s.LayerIds = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeLayersInput) SetStackId(v string) *DescribeLayersInput {
-	s.StackId = &v
-	return s
 }
 
 // Contains the response to a DescribeLayers request.
@@ -8675,12 +7301,6 @@ func (s DescribeLayersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeLayersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLayers sets the Layers field's value.
-func (s *DescribeLayersOutput) SetLayers(v []Layer) *DescribeLayersOutput {
-	s.Layers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLoadBasedAutoScalingRequest
@@ -8717,12 +7337,6 @@ func (s *DescribeLoadBasedAutoScalingInput) Validate() error {
 	return nil
 }
 
-// SetLayerIds sets the LayerIds field's value.
-func (s *DescribeLoadBasedAutoScalingInput) SetLayerIds(v []string) *DescribeLoadBasedAutoScalingInput {
-	s.LayerIds = v
-	return s
-}
-
 // Contains the response to a DescribeLoadBasedAutoScaling request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeLoadBasedAutoScalingResult
 type DescribeLoadBasedAutoScalingOutput struct {
@@ -8748,12 +7362,6 @@ func (s DescribeLoadBasedAutoScalingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeLoadBasedAutoScalingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLoadBasedAutoScalingConfigurations sets the LoadBasedAutoScalingConfigurations field's value.
-func (s *DescribeLoadBasedAutoScalingOutput) SetLoadBasedAutoScalingConfigurations(v []LoadBasedAutoScalingConfiguration) *DescribeLoadBasedAutoScalingOutput {
-	s.LoadBasedAutoScalingConfigurations = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeMyUserProfileInput
@@ -8797,12 +7405,6 @@ func (s DescribeMyUserProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetUserProfile sets the UserProfile field's value.
-func (s *DescribeMyUserProfileOutput) SetUserProfile(v *SelfUserProfile) *DescribeMyUserProfileOutput {
-	s.UserProfile = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribePermissionsRequest
 type DescribePermissionsInput struct {
 	_ struct{} `type:"structure"`
@@ -8823,18 +7425,6 @@ func (s DescribePermissionsInput) String() string {
 // GoString returns the string representation
 func (s DescribePermissionsInput) GoString() string {
 	return s.String()
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *DescribePermissionsInput) SetIamUserArn(v string) *DescribePermissionsInput {
-	s.IamUserArn = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribePermissionsInput) SetStackId(v string) *DescribePermissionsInput {
-	s.StackId = &v
-	return s
 }
 
 // Contains the response to a DescribePermissions request.
@@ -8873,12 +7463,6 @@ func (s DescribePermissionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPermissions sets the Permissions field's value.
-func (s *DescribePermissionsOutput) SetPermissions(v []Permission) *DescribePermissionsOutput {
-	s.Permissions = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRaidArraysRequest
 type DescribeRaidArraysInput struct {
 	_ struct{} `type:"structure"`
@@ -8906,24 +7490,6 @@ func (s DescribeRaidArraysInput) GoString() string {
 	return s.String()
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *DescribeRaidArraysInput) SetInstanceId(v string) *DescribeRaidArraysInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetRaidArrayIds sets the RaidArrayIds field's value.
-func (s *DescribeRaidArraysInput) SetRaidArrayIds(v []string) *DescribeRaidArraysInput {
-	s.RaidArrayIds = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeRaidArraysInput) SetStackId(v string) *DescribeRaidArraysInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a DescribeRaidArrays request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRaidArraysResult
 type DescribeRaidArraysOutput struct {
@@ -8948,12 +7514,6 @@ func (s DescribeRaidArraysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRaidArraysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRaidArrays sets the RaidArrays field's value.
-func (s *DescribeRaidArraysOutput) SetRaidArrays(v []RaidArray) *DescribeRaidArraysOutput {
-	s.RaidArrays = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstancesRequest
@@ -8994,18 +7554,6 @@ func (s *DescribeRdsDbInstancesInput) Validate() error {
 	return nil
 }
 
-// SetRdsDbInstanceArns sets the RdsDbInstanceArns field's value.
-func (s *DescribeRdsDbInstancesInput) SetRdsDbInstanceArns(v []string) *DescribeRdsDbInstancesInput {
-	s.RdsDbInstanceArns = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeRdsDbInstancesInput) SetStackId(v string) *DescribeRdsDbInstancesInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a DescribeRdsDbInstances request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeRdsDbInstancesResult
 type DescribeRdsDbInstancesOutput struct {
@@ -9030,12 +7578,6 @@ func (s DescribeRdsDbInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeRdsDbInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRdsDbInstances sets the RdsDbInstances field's value.
-func (s *DescribeRdsDbInstancesOutput) SetRdsDbInstances(v []RdsDbInstance) *DescribeRdsDbInstancesOutput {
-	s.RdsDbInstances = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeServiceErrorsRequest
@@ -9066,24 +7608,6 @@ func (s DescribeServiceErrorsInput) GoString() string {
 	return s.String()
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *DescribeServiceErrorsInput) SetInstanceId(v string) *DescribeServiceErrorsInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetServiceErrorIds sets the ServiceErrorIds field's value.
-func (s *DescribeServiceErrorsInput) SetServiceErrorIds(v []string) *DescribeServiceErrorsInput {
-	s.ServiceErrorIds = v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeServiceErrorsInput) SetStackId(v string) *DescribeServiceErrorsInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a DescribeServiceErrors request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeServiceErrorsResult
 type DescribeServiceErrorsOutput struct {
@@ -9108,12 +7632,6 @@ func (s DescribeServiceErrorsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeServiceErrorsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServiceErrors sets the ServiceErrors field's value.
-func (s *DescribeServiceErrorsOutput) SetServiceErrors(v []ServiceError) *DescribeServiceErrorsOutput {
-	s.ServiceErrors = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackProvisioningParametersRequest
@@ -9150,12 +7668,6 @@ func (s *DescribeStackProvisioningParametersInput) Validate() error {
 	return nil
 }
 
-// SetStackId sets the StackId field's value.
-func (s *DescribeStackProvisioningParametersInput) SetStackId(v string) *DescribeStackProvisioningParametersInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a DescribeStackProvisioningParameters request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackProvisioningParametersResult
 type DescribeStackProvisioningParametersOutput struct {
@@ -9183,18 +7695,6 @@ func (s DescribeStackProvisioningParametersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStackProvisioningParametersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAgentInstallerUrl sets the AgentInstallerUrl field's value.
-func (s *DescribeStackProvisioningParametersOutput) SetAgentInstallerUrl(v string) *DescribeStackProvisioningParametersOutput {
-	s.AgentInstallerUrl = &v
-	return s
-}
-
-// SetParameters sets the Parameters field's value.
-func (s *DescribeStackProvisioningParametersOutput) SetParameters(v map[string]string) *DescribeStackProvisioningParametersOutput {
-	s.Parameters = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackSummaryRequest
@@ -9231,12 +7731,6 @@ func (s *DescribeStackSummaryInput) Validate() error {
 	return nil
 }
 
-// SetStackId sets the StackId field's value.
-func (s *DescribeStackSummaryInput) SetStackId(v string) *DescribeStackSummaryInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a DescribeStackSummary request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStackSummaryResult
 type DescribeStackSummaryOutput struct {
@@ -9263,12 +7757,6 @@ func (s DescribeStackSummaryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetStackSummary sets the StackSummary field's value.
-func (s *DescribeStackSummaryOutput) SetStackSummary(v *StackSummary) *DescribeStackSummaryOutput {
-	s.StackSummary = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeStacksRequest
 type DescribeStacksInput struct {
 	_ struct{} `type:"structure"`
@@ -9286,12 +7774,6 @@ func (s DescribeStacksInput) String() string {
 // GoString returns the string representation
 func (s DescribeStacksInput) GoString() string {
 	return s.String()
-}
-
-// SetStackIds sets the StackIds field's value.
-func (s *DescribeStacksInput) SetStackIds(v []string) *DescribeStacksInput {
-	s.StackIds = v
-	return s
 }
 
 // Contains the response to a DescribeStacks request.
@@ -9318,12 +7800,6 @@ func (s DescribeStacksOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStacksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetStacks sets the Stacks field's value.
-func (s *DescribeStacksOutput) SetStacks(v []Stack) *DescribeStacksOutput {
-	s.Stacks = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeTimeBasedAutoScalingRequest
@@ -9360,12 +7836,6 @@ func (s *DescribeTimeBasedAutoScalingInput) Validate() error {
 	return nil
 }
 
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *DescribeTimeBasedAutoScalingInput) SetInstanceIds(v []string) *DescribeTimeBasedAutoScalingInput {
-	s.InstanceIds = v
-	return s
-}
-
 // Contains the response to a DescribeTimeBasedAutoScaling request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeTimeBasedAutoScalingResult
 type DescribeTimeBasedAutoScalingOutput struct {
@@ -9393,12 +7863,6 @@ func (s DescribeTimeBasedAutoScalingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetTimeBasedAutoScalingConfigurations sets the TimeBasedAutoScalingConfigurations field's value.
-func (s *DescribeTimeBasedAutoScalingOutput) SetTimeBasedAutoScalingConfigurations(v []TimeBasedAutoScalingConfiguration) *DescribeTimeBasedAutoScalingOutput {
-	s.TimeBasedAutoScalingConfigurations = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeUserProfilesRequest
 type DescribeUserProfilesInput struct {
 	_ struct{} `type:"structure"`
@@ -9415,12 +7879,6 @@ func (s DescribeUserProfilesInput) String() string {
 // GoString returns the string representation
 func (s DescribeUserProfilesInput) GoString() string {
 	return s.String()
-}
-
-// SetIamUserArns sets the IamUserArns field's value.
-func (s *DescribeUserProfilesInput) SetIamUserArns(v []string) *DescribeUserProfilesInput {
-	s.IamUserArns = v
-	return s
 }
 
 // Contains the response to a DescribeUserProfiles request.
@@ -9447,12 +7905,6 @@ func (s DescribeUserProfilesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeUserProfilesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUserProfiles sets the UserProfiles field's value.
-func (s *DescribeUserProfilesOutput) SetUserProfiles(v []UserProfile) *DescribeUserProfilesOutput {
-	s.UserProfiles = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeVolumesRequest
@@ -9486,30 +7938,6 @@ func (s DescribeVolumesInput) GoString() string {
 	return s.String()
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *DescribeVolumesInput) SetInstanceId(v string) *DescribeVolumesInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetRaidArrayId sets the RaidArrayId field's value.
-func (s *DescribeVolumesInput) SetRaidArrayId(v string) *DescribeVolumesInput {
-	s.RaidArrayId = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *DescribeVolumesInput) SetStackId(v string) *DescribeVolumesInput {
-	s.StackId = &v
-	return s
-}
-
-// SetVolumeIds sets the VolumeIds field's value.
-func (s *DescribeVolumesInput) SetVolumeIds(v []string) *DescribeVolumesInput {
-	s.VolumeIds = v
-	return s
-}
-
 // Contains the response to a DescribeVolumes request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DescribeVolumesResult
 type DescribeVolumesOutput struct {
@@ -9534,12 +7962,6 @@ func (s DescribeVolumesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeVolumesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVolumes sets the Volumes field's value.
-func (s *DescribeVolumesOutput) SetVolumes(v []Volume) *DescribeVolumesOutput {
-	s.Volumes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DetachElasticLoadBalancerRequest
@@ -9584,18 +8006,6 @@ func (s *DetachElasticLoadBalancerInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetElasticLoadBalancerName sets the ElasticLoadBalancerName field's value.
-func (s *DetachElasticLoadBalancerInput) SetElasticLoadBalancerName(v string) *DetachElasticLoadBalancerInput {
-	s.ElasticLoadBalancerName = &v
-	return s
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *DetachElasticLoadBalancerInput) SetLayerId(v string) *DetachElasticLoadBalancerInput {
-	s.LayerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DetachElasticLoadBalancerOutput
@@ -9652,12 +8062,6 @@ func (s *DisassociateElasticIpInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetElasticIp sets the ElasticIp field's value.
-func (s *DisassociateElasticIpInput) SetElasticIp(v string) *DisassociateElasticIpInput {
-	s.ElasticIp = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/DisassociateElasticIpOutput
@@ -9717,36 +8121,6 @@ func (s EbsBlockDevice) GoString() string {
 	return s.String()
 }
 
-// SetDeleteOnTermination sets the DeleteOnTermination field's value.
-func (s *EbsBlockDevice) SetDeleteOnTermination(v bool) *EbsBlockDevice {
-	s.DeleteOnTermination = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *EbsBlockDevice) SetIops(v int64) *EbsBlockDevice {
-	s.Iops = &v
-	return s
-}
-
-// SetSnapshotId sets the SnapshotId field's value.
-func (s *EbsBlockDevice) SetSnapshotId(v string) *EbsBlockDevice {
-	s.SnapshotId = &v
-	return s
-}
-
-// SetVolumeSize sets the VolumeSize field's value.
-func (s *EbsBlockDevice) SetVolumeSize(v int64) *EbsBlockDevice {
-	s.VolumeSize = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *EbsBlockDevice) SetVolumeType(v VolumeType) *EbsBlockDevice {
-	s.VolumeType = v
-	return s
-}
-
 // Describes a registered Amazon ECS cluster.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/EcsCluster
 type EcsCluster struct {
@@ -9773,30 +8147,6 @@ func (s EcsCluster) String() string {
 // GoString returns the string representation
 func (s EcsCluster) GoString() string {
 	return s.String()
-}
-
-// SetEcsClusterArn sets the EcsClusterArn field's value.
-func (s *EcsCluster) SetEcsClusterArn(v string) *EcsCluster {
-	s.EcsClusterArn = &v
-	return s
-}
-
-// SetEcsClusterName sets the EcsClusterName field's value.
-func (s *EcsCluster) SetEcsClusterName(v string) *EcsCluster {
-	s.EcsClusterName = &v
-	return s
-}
-
-// SetRegisteredAt sets the RegisteredAt field's value.
-func (s *EcsCluster) SetRegisteredAt(v string) *EcsCluster {
-	s.RegisteredAt = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *EcsCluster) SetStackId(v string) *EcsCluster {
-	s.StackId = &v
-	return s
 }
 
 // Describes an Elastic IP address.
@@ -9828,36 +8178,6 @@ func (s ElasticIp) String() string {
 // GoString returns the string representation
 func (s ElasticIp) GoString() string {
 	return s.String()
-}
-
-// SetDomain sets the Domain field's value.
-func (s *ElasticIp) SetDomain(v string) *ElasticIp {
-	s.Domain = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ElasticIp) SetInstanceId(v string) *ElasticIp {
-	s.InstanceId = &v
-	return s
-}
-
-// SetIp sets the Ip field's value.
-func (s *ElasticIp) SetIp(v string) *ElasticIp {
-	s.Ip = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ElasticIp) SetName(v string) *ElasticIp {
-	s.Name = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *ElasticIp) SetRegion(v string) *ElasticIp {
-	s.Region = &v
-	return s
 }
 
 // Describes an Elastic Load Balancing instance.
@@ -9902,60 +8222,6 @@ func (s ElasticLoadBalancer) String() string {
 // GoString returns the string representation
 func (s ElasticLoadBalancer) GoString() string {
 	return s.String()
-}
-
-// SetAvailabilityZones sets the AvailabilityZones field's value.
-func (s *ElasticLoadBalancer) SetAvailabilityZones(v []string) *ElasticLoadBalancer {
-	s.AvailabilityZones = v
-	return s
-}
-
-// SetDnsName sets the DnsName field's value.
-func (s *ElasticLoadBalancer) SetDnsName(v string) *ElasticLoadBalancer {
-	s.DnsName = &v
-	return s
-}
-
-// SetEc2InstanceIds sets the Ec2InstanceIds field's value.
-func (s *ElasticLoadBalancer) SetEc2InstanceIds(v []string) *ElasticLoadBalancer {
-	s.Ec2InstanceIds = v
-	return s
-}
-
-// SetElasticLoadBalancerName sets the ElasticLoadBalancerName field's value.
-func (s *ElasticLoadBalancer) SetElasticLoadBalancerName(v string) *ElasticLoadBalancer {
-	s.ElasticLoadBalancerName = &v
-	return s
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *ElasticLoadBalancer) SetLayerId(v string) *ElasticLoadBalancer {
-	s.LayerId = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *ElasticLoadBalancer) SetRegion(v string) *ElasticLoadBalancer {
-	s.Region = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *ElasticLoadBalancer) SetStackId(v string) *ElasticLoadBalancer {
-	s.StackId = &v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *ElasticLoadBalancer) SetSubnetIds(v []string) *ElasticLoadBalancer {
-	s.SubnetIds = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *ElasticLoadBalancer) SetVpcId(v string) *ElasticLoadBalancer {
-	s.VpcId = &v
-	return s
 }
 
 // Represents an app's environment variable.
@@ -10013,24 +8279,6 @@ func (s *EnvironmentVariable) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *EnvironmentVariable) SetKey(v string) *EnvironmentVariable {
-	s.Key = &v
-	return s
-}
-
-// SetSecure sets the Secure field's value.
-func (s *EnvironmentVariable) SetSecure(v bool) *EnvironmentVariable {
-	s.Secure = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *EnvironmentVariable) SetValue(v string) *EnvironmentVariable {
-	s.Value = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GetHostnameSuggestionRequest
 type GetHostnameSuggestionInput struct {
 	_ struct{} `type:"structure"`
@@ -10065,12 +8313,6 @@ func (s *GetHostnameSuggestionInput) Validate() error {
 	return nil
 }
 
-// SetLayerId sets the LayerId field's value.
-func (s *GetHostnameSuggestionInput) SetLayerId(v string) *GetHostnameSuggestionInput {
-	s.LayerId = &v
-	return s
-}
-
 // Contains the response to a GetHostnameSuggestion request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GetHostnameSuggestionResult
 type GetHostnameSuggestionOutput struct {
@@ -10098,18 +8340,6 @@ func (s GetHostnameSuggestionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetHostnameSuggestionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHostname sets the Hostname field's value.
-func (s *GetHostnameSuggestionOutput) SetHostname(v string) *GetHostnameSuggestionOutput {
-	s.Hostname = &v
-	return s
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *GetHostnameSuggestionOutput) SetLayerId(v string) *GetHostnameSuggestionOutput {
-	s.LayerId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GrantAccessRequest
@@ -10155,18 +8385,6 @@ func (s *GrantAccessInput) Validate() error {
 	return nil
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *GrantAccessInput) SetInstanceId(v string) *GrantAccessInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetValidForInMinutes sets the ValidForInMinutes field's value.
-func (s *GrantAccessInput) SetValidForInMinutes(v int64) *GrantAccessInput {
-	s.ValidForInMinutes = &v
-	return s
-}
-
 // Contains the response to a GrantAccess request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/GrantAccessResult
 type GrantAccessOutput struct {
@@ -10192,12 +8410,6 @@ func (s GrantAccessOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GrantAccessOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetTemporaryCredential sets the TemporaryCredential field's value.
-func (s *GrantAccessOutput) SetTemporaryCredential(v *TemporaryCredential) *GrantAccessOutput {
-	s.TemporaryCredential = v
-	return s
 }
 
 // Describes an instance.
@@ -10381,252 +8593,6 @@ func (s Instance) GoString() string {
 	return s.String()
 }
 
-// SetAgentVersion sets the AgentVersion field's value.
-func (s *Instance) SetAgentVersion(v string) *Instance {
-	s.AgentVersion = &v
-	return s
-}
-
-// SetAmiId sets the AmiId field's value.
-func (s *Instance) SetAmiId(v string) *Instance {
-	s.AmiId = &v
-	return s
-}
-
-// SetArchitecture sets the Architecture field's value.
-func (s *Instance) SetArchitecture(v Architecture) *Instance {
-	s.Architecture = v
-	return s
-}
-
-// SetArn sets the Arn field's value.
-func (s *Instance) SetArn(v string) *Instance {
-	s.Arn = &v
-	return s
-}
-
-// SetAutoScalingType sets the AutoScalingType field's value.
-func (s *Instance) SetAutoScalingType(v AutoScalingType) *Instance {
-	s.AutoScalingType = v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *Instance) SetAvailabilityZone(v string) *Instance {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetBlockDeviceMappings sets the BlockDeviceMappings field's value.
-func (s *Instance) SetBlockDeviceMappings(v []BlockDeviceMapping) *Instance {
-	s.BlockDeviceMappings = v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Instance) SetCreatedAt(v string) *Instance {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *Instance) SetEbsOptimized(v bool) *Instance {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetEc2InstanceId sets the Ec2InstanceId field's value.
-func (s *Instance) SetEc2InstanceId(v string) *Instance {
-	s.Ec2InstanceId = &v
-	return s
-}
-
-// SetEcsClusterArn sets the EcsClusterArn field's value.
-func (s *Instance) SetEcsClusterArn(v string) *Instance {
-	s.EcsClusterArn = &v
-	return s
-}
-
-// SetEcsContainerInstanceArn sets the EcsContainerInstanceArn field's value.
-func (s *Instance) SetEcsContainerInstanceArn(v string) *Instance {
-	s.EcsContainerInstanceArn = &v
-	return s
-}
-
-// SetElasticIp sets the ElasticIp field's value.
-func (s *Instance) SetElasticIp(v string) *Instance {
-	s.ElasticIp = &v
-	return s
-}
-
-// SetHostname sets the Hostname field's value.
-func (s *Instance) SetHostname(v string) *Instance {
-	s.Hostname = &v
-	return s
-}
-
-// SetInfrastructureClass sets the InfrastructureClass field's value.
-func (s *Instance) SetInfrastructureClass(v string) *Instance {
-	s.InfrastructureClass = &v
-	return s
-}
-
-// SetInstallUpdatesOnBoot sets the InstallUpdatesOnBoot field's value.
-func (s *Instance) SetInstallUpdatesOnBoot(v bool) *Instance {
-	s.InstallUpdatesOnBoot = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *Instance) SetInstanceId(v string) *Instance {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceProfileArn sets the InstanceProfileArn field's value.
-func (s *Instance) SetInstanceProfileArn(v string) *Instance {
-	s.InstanceProfileArn = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *Instance) SetInstanceType(v string) *Instance {
-	s.InstanceType = &v
-	return s
-}
-
-// SetLastServiceErrorId sets the LastServiceErrorId field's value.
-func (s *Instance) SetLastServiceErrorId(v string) *Instance {
-	s.LastServiceErrorId = &v
-	return s
-}
-
-// SetLayerIds sets the LayerIds field's value.
-func (s *Instance) SetLayerIds(v []string) *Instance {
-	s.LayerIds = v
-	return s
-}
-
-// SetOs sets the Os field's value.
-func (s *Instance) SetOs(v string) *Instance {
-	s.Os = &v
-	return s
-}
-
-// SetPlatform sets the Platform field's value.
-func (s *Instance) SetPlatform(v string) *Instance {
-	s.Platform = &v
-	return s
-}
-
-// SetPrivateDns sets the PrivateDns field's value.
-func (s *Instance) SetPrivateDns(v string) *Instance {
-	s.PrivateDns = &v
-	return s
-}
-
-// SetPrivateIp sets the PrivateIp field's value.
-func (s *Instance) SetPrivateIp(v string) *Instance {
-	s.PrivateIp = &v
-	return s
-}
-
-// SetPublicDns sets the PublicDns field's value.
-func (s *Instance) SetPublicDns(v string) *Instance {
-	s.PublicDns = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *Instance) SetPublicIp(v string) *Instance {
-	s.PublicIp = &v
-	return s
-}
-
-// SetRegisteredBy sets the RegisteredBy field's value.
-func (s *Instance) SetRegisteredBy(v string) *Instance {
-	s.RegisteredBy = &v
-	return s
-}
-
-// SetReportedAgentVersion sets the ReportedAgentVersion field's value.
-func (s *Instance) SetReportedAgentVersion(v string) *Instance {
-	s.ReportedAgentVersion = &v
-	return s
-}
-
-// SetReportedOs sets the ReportedOs field's value.
-func (s *Instance) SetReportedOs(v *ReportedOs) *Instance {
-	s.ReportedOs = v
-	return s
-}
-
-// SetRootDeviceType sets the RootDeviceType field's value.
-func (s *Instance) SetRootDeviceType(v RootDeviceType) *Instance {
-	s.RootDeviceType = v
-	return s
-}
-
-// SetRootDeviceVolumeId sets the RootDeviceVolumeId field's value.
-func (s *Instance) SetRootDeviceVolumeId(v string) *Instance {
-	s.RootDeviceVolumeId = &v
-	return s
-}
-
-// SetSecurityGroupIds sets the SecurityGroupIds field's value.
-func (s *Instance) SetSecurityGroupIds(v []string) *Instance {
-	s.SecurityGroupIds = v
-	return s
-}
-
-// SetSshHostDsaKeyFingerprint sets the SshHostDsaKeyFingerprint field's value.
-func (s *Instance) SetSshHostDsaKeyFingerprint(v string) *Instance {
-	s.SshHostDsaKeyFingerprint = &v
-	return s
-}
-
-// SetSshHostRsaKeyFingerprint sets the SshHostRsaKeyFingerprint field's value.
-func (s *Instance) SetSshHostRsaKeyFingerprint(v string) *Instance {
-	s.SshHostRsaKeyFingerprint = &v
-	return s
-}
-
-// SetSshKeyName sets the SshKeyName field's value.
-func (s *Instance) SetSshKeyName(v string) *Instance {
-	s.SshKeyName = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *Instance) SetStackId(v string) *Instance {
-	s.StackId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Instance) SetStatus(v string) *Instance {
-	s.Status = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *Instance) SetSubnetId(v string) *Instance {
-	s.SubnetId = &v
-	return s
-}
-
-// SetTenancy sets the Tenancy field's value.
-func (s *Instance) SetTenancy(v string) *Instance {
-	s.Tenancy = &v
-	return s
-}
-
-// SetVirtualizationType sets the VirtualizationType field's value.
-func (s *Instance) SetVirtualizationType(v VirtualizationType) *Instance {
-	s.VirtualizationType = v
-	return s
-}
-
 // Contains a description of an Amazon EC2 instance from the Amazon EC2 metadata
 // service. For more information, see Instance Metadata and User Data (http://docs.aws.amazon.com/sdkfornet/latest/apidocs/Index.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/InstanceIdentity
@@ -10648,18 +8614,6 @@ func (s InstanceIdentity) String() string {
 // GoString returns the string representation
 func (s InstanceIdentity) GoString() string {
 	return s.String()
-}
-
-// SetDocument sets the Document field's value.
-func (s *InstanceIdentity) SetDocument(v string) *InstanceIdentity {
-	s.Document = &v
-	return s
-}
-
-// SetSignature sets the Signature field's value.
-func (s *InstanceIdentity) SetSignature(v string) *InstanceIdentity {
-	s.Signature = &v
-	return s
 }
 
 // Describes how many instances a stack has for each status.
@@ -10733,120 +8687,6 @@ func (s InstancesCount) String() string {
 // GoString returns the string representation
 func (s InstancesCount) GoString() string {
 	return s.String()
-}
-
-// SetAssigning sets the Assigning field's value.
-func (s *InstancesCount) SetAssigning(v int64) *InstancesCount {
-	s.Assigning = &v
-	return s
-}
-
-// SetBooting sets the Booting field's value.
-func (s *InstancesCount) SetBooting(v int64) *InstancesCount {
-	s.Booting = &v
-	return s
-}
-
-// SetConnectionLost sets the ConnectionLost field's value.
-func (s *InstancesCount) SetConnectionLost(v int64) *InstancesCount {
-	s.ConnectionLost = &v
-	return s
-}
-
-// SetDeregistering sets the Deregistering field's value.
-func (s *InstancesCount) SetDeregistering(v int64) *InstancesCount {
-	s.Deregistering = &v
-	return s
-}
-
-// SetOnline sets the Online field's value.
-func (s *InstancesCount) SetOnline(v int64) *InstancesCount {
-	s.Online = &v
-	return s
-}
-
-// SetPending sets the Pending field's value.
-func (s *InstancesCount) SetPending(v int64) *InstancesCount {
-	s.Pending = &v
-	return s
-}
-
-// SetRebooting sets the Rebooting field's value.
-func (s *InstancesCount) SetRebooting(v int64) *InstancesCount {
-	s.Rebooting = &v
-	return s
-}
-
-// SetRegistered sets the Registered field's value.
-func (s *InstancesCount) SetRegistered(v int64) *InstancesCount {
-	s.Registered = &v
-	return s
-}
-
-// SetRegistering sets the Registering field's value.
-func (s *InstancesCount) SetRegistering(v int64) *InstancesCount {
-	s.Registering = &v
-	return s
-}
-
-// SetRequested sets the Requested field's value.
-func (s *InstancesCount) SetRequested(v int64) *InstancesCount {
-	s.Requested = &v
-	return s
-}
-
-// SetRunningSetup sets the RunningSetup field's value.
-func (s *InstancesCount) SetRunningSetup(v int64) *InstancesCount {
-	s.RunningSetup = &v
-	return s
-}
-
-// SetSetupFailed sets the SetupFailed field's value.
-func (s *InstancesCount) SetSetupFailed(v int64) *InstancesCount {
-	s.SetupFailed = &v
-	return s
-}
-
-// SetShuttingDown sets the ShuttingDown field's value.
-func (s *InstancesCount) SetShuttingDown(v int64) *InstancesCount {
-	s.ShuttingDown = &v
-	return s
-}
-
-// SetStartFailed sets the StartFailed field's value.
-func (s *InstancesCount) SetStartFailed(v int64) *InstancesCount {
-	s.StartFailed = &v
-	return s
-}
-
-// SetStopped sets the Stopped field's value.
-func (s *InstancesCount) SetStopped(v int64) *InstancesCount {
-	s.Stopped = &v
-	return s
-}
-
-// SetStopping sets the Stopping field's value.
-func (s *InstancesCount) SetStopping(v int64) *InstancesCount {
-	s.Stopping = &v
-	return s
-}
-
-// SetTerminated sets the Terminated field's value.
-func (s *InstancesCount) SetTerminated(v int64) *InstancesCount {
-	s.Terminated = &v
-	return s
-}
-
-// SetTerminating sets the Terminating field's value.
-func (s *InstancesCount) SetTerminating(v int64) *InstancesCount {
-	s.Terminating = &v
-	return s
-}
-
-// SetUnassigning sets the Unassigning field's value.
-func (s *InstancesCount) SetUnassigning(v int64) *InstancesCount {
-	s.Unassigning = &v
-	return s
 }
 
 // Describes a layer.
@@ -10962,144 +8802,6 @@ func (s Layer) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Layer) SetArn(v string) *Layer {
-	s.Arn = &v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *Layer) SetAttributes(v map[string]string) *Layer {
-	s.Attributes = v
-	return s
-}
-
-// SetAutoAssignElasticIps sets the AutoAssignElasticIps field's value.
-func (s *Layer) SetAutoAssignElasticIps(v bool) *Layer {
-	s.AutoAssignElasticIps = &v
-	return s
-}
-
-// SetAutoAssignPublicIps sets the AutoAssignPublicIps field's value.
-func (s *Layer) SetAutoAssignPublicIps(v bool) *Layer {
-	s.AutoAssignPublicIps = &v
-	return s
-}
-
-// SetCloudWatchLogsConfiguration sets the CloudWatchLogsConfiguration field's value.
-func (s *Layer) SetCloudWatchLogsConfiguration(v *CloudWatchLogsConfiguration) *Layer {
-	s.CloudWatchLogsConfiguration = v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Layer) SetCreatedAt(v string) *Layer {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetCustomInstanceProfileArn sets the CustomInstanceProfileArn field's value.
-func (s *Layer) SetCustomInstanceProfileArn(v string) *Layer {
-	s.CustomInstanceProfileArn = &v
-	return s
-}
-
-// SetCustomJson sets the CustomJson field's value.
-func (s *Layer) SetCustomJson(v string) *Layer {
-	s.CustomJson = &v
-	return s
-}
-
-// SetCustomRecipes sets the CustomRecipes field's value.
-func (s *Layer) SetCustomRecipes(v *Recipes) *Layer {
-	s.CustomRecipes = v
-	return s
-}
-
-// SetCustomSecurityGroupIds sets the CustomSecurityGroupIds field's value.
-func (s *Layer) SetCustomSecurityGroupIds(v []string) *Layer {
-	s.CustomSecurityGroupIds = v
-	return s
-}
-
-// SetDefaultRecipes sets the DefaultRecipes field's value.
-func (s *Layer) SetDefaultRecipes(v *Recipes) *Layer {
-	s.DefaultRecipes = v
-	return s
-}
-
-// SetDefaultSecurityGroupNames sets the DefaultSecurityGroupNames field's value.
-func (s *Layer) SetDefaultSecurityGroupNames(v []string) *Layer {
-	s.DefaultSecurityGroupNames = v
-	return s
-}
-
-// SetEnableAutoHealing sets the EnableAutoHealing field's value.
-func (s *Layer) SetEnableAutoHealing(v bool) *Layer {
-	s.EnableAutoHealing = &v
-	return s
-}
-
-// SetInstallUpdatesOnBoot sets the InstallUpdatesOnBoot field's value.
-func (s *Layer) SetInstallUpdatesOnBoot(v bool) *Layer {
-	s.InstallUpdatesOnBoot = &v
-	return s
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *Layer) SetLayerId(v string) *Layer {
-	s.LayerId = &v
-	return s
-}
-
-// SetLifecycleEventConfiguration sets the LifecycleEventConfiguration field's value.
-func (s *Layer) SetLifecycleEventConfiguration(v *LifecycleEventConfiguration) *Layer {
-	s.LifecycleEventConfiguration = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Layer) SetName(v string) *Layer {
-	s.Name = &v
-	return s
-}
-
-// SetPackages sets the Packages field's value.
-func (s *Layer) SetPackages(v []string) *Layer {
-	s.Packages = v
-	return s
-}
-
-// SetShortname sets the Shortname field's value.
-func (s *Layer) SetShortname(v string) *Layer {
-	s.Shortname = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *Layer) SetStackId(v string) *Layer {
-	s.StackId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Layer) SetType(v LayerType) *Layer {
-	s.Type = v
-	return s
-}
-
-// SetUseEbsOptimizedInstances sets the UseEbsOptimizedInstances field's value.
-func (s *Layer) SetUseEbsOptimizedInstances(v bool) *Layer {
-	s.UseEbsOptimizedInstances = &v
-	return s
-}
-
-// SetVolumeConfigurations sets the VolumeConfigurations field's value.
-func (s *Layer) SetVolumeConfigurations(v []VolumeConfiguration) *Layer {
-	s.VolumeConfigurations = v
-	return s
-}
-
 // Specifies the lifecycle event configuration
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/LifecycleEventConfiguration
 type LifecycleEventConfiguration struct {
@@ -11117,12 +8819,6 @@ func (s LifecycleEventConfiguration) String() string {
 // GoString returns the string representation
 func (s LifecycleEventConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetShutdown sets the Shutdown field's value.
-func (s *LifecycleEventConfiguration) SetShutdown(v *ShutdownEventConfiguration) *LifecycleEventConfiguration {
-	s.Shutdown = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ListTagsRequest
@@ -11167,24 +8863,6 @@ func (s *ListTagsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTagsInput) SetMaxResults(v int64) *ListTagsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsInput) SetNextToken(v string) *ListTagsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *ListTagsInput) SetResourceArn(v string) *ListTagsInput {
-	s.ResourceArn = &v
-	return s
-}
-
 // Contains the response to a ListTags request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ListTagsResult
 type ListTagsOutput struct {
@@ -11218,18 +8896,6 @@ func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsOutput) SetNextToken(v string) *ListTagsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ListTagsOutput) SetTags(v map[string]string) *ListTagsOutput {
-	s.Tags = v
-	return s
-}
-
 // Describes a layer's load-based auto scaling configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/LoadBasedAutoScalingConfiguration
 type LoadBasedAutoScalingConfiguration struct {
@@ -11258,30 +8924,6 @@ func (s LoadBasedAutoScalingConfiguration) String() string {
 // GoString returns the string representation
 func (s LoadBasedAutoScalingConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetDownScaling sets the DownScaling field's value.
-func (s *LoadBasedAutoScalingConfiguration) SetDownScaling(v *AutoScalingThresholds) *LoadBasedAutoScalingConfiguration {
-	s.DownScaling = v
-	return s
-}
-
-// SetEnable sets the Enable field's value.
-func (s *LoadBasedAutoScalingConfiguration) SetEnable(v bool) *LoadBasedAutoScalingConfiguration {
-	s.Enable = &v
-	return s
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *LoadBasedAutoScalingConfiguration) SetLayerId(v string) *LoadBasedAutoScalingConfiguration {
-	s.LayerId = &v
-	return s
-}
-
-// SetUpScaling sets the UpScaling field's value.
-func (s *LoadBasedAutoScalingConfiguration) SetUpScaling(v *AutoScalingThresholds) *LoadBasedAutoScalingConfiguration {
-	s.UpScaling = v
-	return s
 }
 
 // Describes stack or user permissions.
@@ -11327,36 +8969,6 @@ func (s Permission) String() string {
 // GoString returns the string representation
 func (s Permission) GoString() string {
 	return s.String()
-}
-
-// SetAllowSsh sets the AllowSsh field's value.
-func (s *Permission) SetAllowSsh(v bool) *Permission {
-	s.AllowSsh = &v
-	return s
-}
-
-// SetAllowSudo sets the AllowSudo field's value.
-func (s *Permission) SetAllowSudo(v bool) *Permission {
-	s.AllowSudo = &v
-	return s
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *Permission) SetIamUserArn(v string) *Permission {
-	s.IamUserArn = &v
-	return s
-}
-
-// SetLevel sets the Level field's value.
-func (s *Permission) SetLevel(v string) *Permission {
-	s.Level = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *Permission) SetStackId(v string) *Permission {
-	s.StackId = &v
-	return s
 }
 
 // Describes an instance's RAID array.
@@ -11415,84 +9027,6 @@ func (s RaidArray) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *RaidArray) SetAvailabilityZone(v string) *RaidArray {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *RaidArray) SetCreatedAt(v string) *RaidArray {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetDevice sets the Device field's value.
-func (s *RaidArray) SetDevice(v string) *RaidArray {
-	s.Device = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *RaidArray) SetInstanceId(v string) *RaidArray {
-	s.InstanceId = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *RaidArray) SetIops(v int64) *RaidArray {
-	s.Iops = &v
-	return s
-}
-
-// SetMountPoint sets the MountPoint field's value.
-func (s *RaidArray) SetMountPoint(v string) *RaidArray {
-	s.MountPoint = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *RaidArray) SetName(v string) *RaidArray {
-	s.Name = &v
-	return s
-}
-
-// SetNumberOfDisks sets the NumberOfDisks field's value.
-func (s *RaidArray) SetNumberOfDisks(v int64) *RaidArray {
-	s.NumberOfDisks = &v
-	return s
-}
-
-// SetRaidArrayId sets the RaidArrayId field's value.
-func (s *RaidArray) SetRaidArrayId(v string) *RaidArray {
-	s.RaidArrayId = &v
-	return s
-}
-
-// SetRaidLevel sets the RaidLevel field's value.
-func (s *RaidArray) SetRaidLevel(v int64) *RaidArray {
-	s.RaidLevel = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *RaidArray) SetSize(v int64) *RaidArray {
-	s.Size = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *RaidArray) SetStackId(v string) *RaidArray {
-	s.StackId = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *RaidArray) SetVolumeType(v string) *RaidArray {
-	s.VolumeType = &v
-	return s
-}
-
 // Describes an Amazon RDS instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RdsDbInstance
 type RdsDbInstance struct {
@@ -11539,60 +9073,6 @@ func (s RdsDbInstance) GoString() string {
 	return s.String()
 }
 
-// SetAddress sets the Address field's value.
-func (s *RdsDbInstance) SetAddress(v string) *RdsDbInstance {
-	s.Address = &v
-	return s
-}
-
-// SetDbInstanceIdentifier sets the DbInstanceIdentifier field's value.
-func (s *RdsDbInstance) SetDbInstanceIdentifier(v string) *RdsDbInstance {
-	s.DbInstanceIdentifier = &v
-	return s
-}
-
-// SetDbPassword sets the DbPassword field's value.
-func (s *RdsDbInstance) SetDbPassword(v string) *RdsDbInstance {
-	s.DbPassword = &v
-	return s
-}
-
-// SetDbUser sets the DbUser field's value.
-func (s *RdsDbInstance) SetDbUser(v string) *RdsDbInstance {
-	s.DbUser = &v
-	return s
-}
-
-// SetEngine sets the Engine field's value.
-func (s *RdsDbInstance) SetEngine(v string) *RdsDbInstance {
-	s.Engine = &v
-	return s
-}
-
-// SetMissingOnRds sets the MissingOnRds field's value.
-func (s *RdsDbInstance) SetMissingOnRds(v bool) *RdsDbInstance {
-	s.MissingOnRds = &v
-	return s
-}
-
-// SetRdsDbInstanceArn sets the RdsDbInstanceArn field's value.
-func (s *RdsDbInstance) SetRdsDbInstanceArn(v string) *RdsDbInstance {
-	s.RdsDbInstanceArn = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *RdsDbInstance) SetRegion(v string) *RdsDbInstance {
-	s.Region = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *RdsDbInstance) SetStackId(v string) *RdsDbInstance {
-	s.StackId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RebootInstanceRequest
 type RebootInstanceInput struct {
 	_ struct{} `type:"structure"`
@@ -11625,12 +9105,6 @@ func (s *RebootInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *RebootInstanceInput) SetInstanceId(v string) *RebootInstanceInput {
-	s.InstanceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RebootInstanceOutput
@@ -11697,36 +9171,6 @@ func (s Recipes) GoString() string {
 	return s.String()
 }
 
-// SetConfigure sets the Configure field's value.
-func (s *Recipes) SetConfigure(v []string) *Recipes {
-	s.Configure = v
-	return s
-}
-
-// SetDeploy sets the Deploy field's value.
-func (s *Recipes) SetDeploy(v []string) *Recipes {
-	s.Deploy = v
-	return s
-}
-
-// SetSetup sets the Setup field's value.
-func (s *Recipes) SetSetup(v []string) *Recipes {
-	s.Setup = v
-	return s
-}
-
-// SetShutdown sets the Shutdown field's value.
-func (s *Recipes) SetShutdown(v []string) *Recipes {
-	s.Shutdown = v
-	return s
-}
-
-// SetUndeploy sets the Undeploy field's value.
-func (s *Recipes) SetUndeploy(v []string) *Recipes {
-	s.Undeploy = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterEcsClusterRequest
 type RegisterEcsClusterInput struct {
 	_ struct{} `type:"structure"`
@@ -11770,18 +9214,6 @@ func (s *RegisterEcsClusterInput) Validate() error {
 	return nil
 }
 
-// SetEcsClusterArn sets the EcsClusterArn field's value.
-func (s *RegisterEcsClusterInput) SetEcsClusterArn(v string) *RegisterEcsClusterInput {
-	s.EcsClusterArn = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *RegisterEcsClusterInput) SetStackId(v string) *RegisterEcsClusterInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a RegisterEcsCluster request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterEcsClusterResult
 type RegisterEcsClusterOutput struct {
@@ -11806,12 +9238,6 @@ func (s RegisterEcsClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RegisterEcsClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEcsClusterArn sets the EcsClusterArn field's value.
-func (s *RegisterEcsClusterOutput) SetEcsClusterArn(v string) *RegisterEcsClusterOutput {
-	s.EcsClusterArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterElasticIpRequest
@@ -11857,18 +9283,6 @@ func (s *RegisterElasticIpInput) Validate() error {
 	return nil
 }
 
-// SetElasticIp sets the ElasticIp field's value.
-func (s *RegisterElasticIpInput) SetElasticIp(v string) *RegisterElasticIpInput {
-	s.ElasticIp = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *RegisterElasticIpInput) SetStackId(v string) *RegisterElasticIpInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a RegisterElasticIp request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterElasticIpResult
 type RegisterElasticIpOutput struct {
@@ -11893,12 +9307,6 @@ func (s RegisterElasticIpOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RegisterElasticIpOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetElasticIp sets the ElasticIp field's value.
-func (s *RegisterElasticIpOutput) SetElasticIp(v string) *RegisterElasticIpOutput {
-	s.ElasticIp = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterInstanceRequest
@@ -11954,48 +9362,6 @@ func (s *RegisterInstanceInput) Validate() error {
 	return nil
 }
 
-// SetHostname sets the Hostname field's value.
-func (s *RegisterInstanceInput) SetHostname(v string) *RegisterInstanceInput {
-	s.Hostname = &v
-	return s
-}
-
-// SetInstanceIdentity sets the InstanceIdentity field's value.
-func (s *RegisterInstanceInput) SetInstanceIdentity(v *InstanceIdentity) *RegisterInstanceInput {
-	s.InstanceIdentity = v
-	return s
-}
-
-// SetPrivateIp sets the PrivateIp field's value.
-func (s *RegisterInstanceInput) SetPrivateIp(v string) *RegisterInstanceInput {
-	s.PrivateIp = &v
-	return s
-}
-
-// SetPublicIp sets the PublicIp field's value.
-func (s *RegisterInstanceInput) SetPublicIp(v string) *RegisterInstanceInput {
-	s.PublicIp = &v
-	return s
-}
-
-// SetRsaPublicKey sets the RsaPublicKey field's value.
-func (s *RegisterInstanceInput) SetRsaPublicKey(v string) *RegisterInstanceInput {
-	s.RsaPublicKey = &v
-	return s
-}
-
-// SetRsaPublicKeyFingerprint sets the RsaPublicKeyFingerprint field's value.
-func (s *RegisterInstanceInput) SetRsaPublicKeyFingerprint(v string) *RegisterInstanceInput {
-	s.RsaPublicKeyFingerprint = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *RegisterInstanceInput) SetStackId(v string) *RegisterInstanceInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a RegisterInstanceResult request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterInstanceResult
 type RegisterInstanceOutput struct {
@@ -12020,12 +9386,6 @@ func (s RegisterInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RegisterInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *RegisterInstanceOutput) SetInstanceId(v string) *RegisterInstanceOutput {
-	s.InstanceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterRdsDbInstanceRequest
@@ -12089,30 +9449,6 @@ func (s *RegisterRdsDbInstanceInput) Validate() error {
 	return nil
 }
 
-// SetDbPassword sets the DbPassword field's value.
-func (s *RegisterRdsDbInstanceInput) SetDbPassword(v string) *RegisterRdsDbInstanceInput {
-	s.DbPassword = &v
-	return s
-}
-
-// SetDbUser sets the DbUser field's value.
-func (s *RegisterRdsDbInstanceInput) SetDbUser(v string) *RegisterRdsDbInstanceInput {
-	s.DbUser = &v
-	return s
-}
-
-// SetRdsDbInstanceArn sets the RdsDbInstanceArn field's value.
-func (s *RegisterRdsDbInstanceInput) SetRdsDbInstanceArn(v string) *RegisterRdsDbInstanceInput {
-	s.RdsDbInstanceArn = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *RegisterRdsDbInstanceInput) SetStackId(v string) *RegisterRdsDbInstanceInput {
-	s.StackId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterRdsDbInstanceOutput
 type RegisterRdsDbInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -12172,18 +9508,6 @@ func (s *RegisterVolumeInput) Validate() error {
 	return nil
 }
 
-// SetEc2VolumeId sets the Ec2VolumeId field's value.
-func (s *RegisterVolumeInput) SetEc2VolumeId(v string) *RegisterVolumeInput {
-	s.Ec2VolumeId = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *RegisterVolumeInput) SetStackId(v string) *RegisterVolumeInput {
-	s.StackId = &v
-	return s
-}
-
 // Contains the response to a RegisterVolume request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/RegisterVolumeResult
 type RegisterVolumeOutput struct {
@@ -12210,12 +9534,6 @@ func (s RegisterVolumeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetVolumeId sets the VolumeId field's value.
-func (s *RegisterVolumeOutput) SetVolumeId(v string) *RegisterVolumeOutput {
-	s.VolumeId = &v
-	return s
-}
-
 // A registered instance's reported operating system.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/ReportedOs
 type ReportedOs struct {
@@ -12239,24 +9557,6 @@ func (s ReportedOs) String() string {
 // GoString returns the string representation
 func (s ReportedOs) GoString() string {
 	return s.String()
-}
-
-// SetFamily sets the Family field's value.
-func (s *ReportedOs) SetFamily(v string) *ReportedOs {
-	s.Family = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ReportedOs) SetName(v string) *ReportedOs {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *ReportedOs) SetVersion(v string) *ReportedOs {
-	s.Version = &v
-	return s
 }
 
 // Describes a user's SSH information.
@@ -12285,30 +9585,6 @@ func (s SelfUserProfile) String() string {
 // GoString returns the string representation
 func (s SelfUserProfile) GoString() string {
 	return s.String()
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *SelfUserProfile) SetIamUserArn(v string) *SelfUserProfile {
-	s.IamUserArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *SelfUserProfile) SetName(v string) *SelfUserProfile {
-	s.Name = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *SelfUserProfile) SetSshPublicKey(v string) *SelfUserProfile {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetSshUsername sets the SshUsername field's value.
-func (s *SelfUserProfile) SetSshUsername(v string) *SelfUserProfile {
-	s.SshUsername = &v
-	return s
 }
 
 // Describes an AWS OpsWorks Stacks service error.
@@ -12343,42 +9619,6 @@ func (s ServiceError) String() string {
 // GoString returns the string representation
 func (s ServiceError) GoString() string {
 	return s.String()
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *ServiceError) SetCreatedAt(v string) *ServiceError {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *ServiceError) SetInstanceId(v string) *ServiceError {
-	s.InstanceId = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *ServiceError) SetMessage(v string) *ServiceError {
-	s.Message = &v
-	return s
-}
-
-// SetServiceErrorId sets the ServiceErrorId field's value.
-func (s *ServiceError) SetServiceErrorId(v string) *ServiceError {
-	s.ServiceErrorId = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *ServiceError) SetStackId(v string) *ServiceError {
-	s.StackId = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *ServiceError) SetType(v string) *ServiceError {
-	s.Type = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetLoadBasedAutoScalingRequest
@@ -12436,30 +9676,6 @@ func (s *SetLoadBasedAutoScalingInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDownScaling sets the DownScaling field's value.
-func (s *SetLoadBasedAutoScalingInput) SetDownScaling(v *AutoScalingThresholds) *SetLoadBasedAutoScalingInput {
-	s.DownScaling = v
-	return s
-}
-
-// SetEnable sets the Enable field's value.
-func (s *SetLoadBasedAutoScalingInput) SetEnable(v bool) *SetLoadBasedAutoScalingInput {
-	s.Enable = &v
-	return s
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *SetLoadBasedAutoScalingInput) SetLayerId(v string) *SetLoadBasedAutoScalingInput {
-	s.LayerId = &v
-	return s
-}
-
-// SetUpScaling sets the UpScaling field's value.
-func (s *SetLoadBasedAutoScalingInput) SetUpScaling(v *AutoScalingThresholds) *SetLoadBasedAutoScalingInput {
-	s.UpScaling = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetLoadBasedAutoScalingOutput
@@ -12550,36 +9766,6 @@ func (s *SetPermissionInput) Validate() error {
 	return nil
 }
 
-// SetAllowSsh sets the AllowSsh field's value.
-func (s *SetPermissionInput) SetAllowSsh(v bool) *SetPermissionInput {
-	s.AllowSsh = &v
-	return s
-}
-
-// SetAllowSudo sets the AllowSudo field's value.
-func (s *SetPermissionInput) SetAllowSudo(v bool) *SetPermissionInput {
-	s.AllowSudo = &v
-	return s
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *SetPermissionInput) SetIamUserArn(v string) *SetPermissionInput {
-	s.IamUserArn = &v
-	return s
-}
-
-// SetLevel sets the Level field's value.
-func (s *SetPermissionInput) SetLevel(v string) *SetPermissionInput {
-	s.Level = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *SetPermissionInput) SetStackId(v string) *SetPermissionInput {
-	s.StackId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetPermissionOutput
 type SetPermissionOutput struct {
 	_ struct{} `type:"structure"`
@@ -12639,18 +9825,6 @@ func (s *SetTimeBasedAutoScalingInput) Validate() error {
 	return nil
 }
 
-// SetAutoScalingSchedule sets the AutoScalingSchedule field's value.
-func (s *SetTimeBasedAutoScalingInput) SetAutoScalingSchedule(v *WeeklyAutoScalingSchedule) *SetTimeBasedAutoScalingInput {
-	s.AutoScalingSchedule = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *SetTimeBasedAutoScalingInput) SetInstanceId(v string) *SetTimeBasedAutoScalingInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SetTimeBasedAutoScalingOutput
 type SetTimeBasedAutoScalingOutput struct {
 	_ struct{} `type:"structure"`
@@ -12695,18 +9869,6 @@ func (s ShutdownEventConfiguration) String() string {
 // GoString returns the string representation
 func (s ShutdownEventConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetDelayUntilElbConnectionsDrained sets the DelayUntilElbConnectionsDrained field's value.
-func (s *ShutdownEventConfiguration) SetDelayUntilElbConnectionsDrained(v bool) *ShutdownEventConfiguration {
-	s.DelayUntilElbConnectionsDrained = &v
-	return s
-}
-
-// SetExecutionTimeout sets the ExecutionTimeout field's value.
-func (s *ShutdownEventConfiguration) SetExecutionTimeout(v int64) *ShutdownEventConfiguration {
-	s.ExecutionTimeout = &v
-	return s
 }
 
 // Contains the information required to retrieve an app or cookbook from a repository.
@@ -12768,42 +9930,6 @@ func (s Source) GoString() string {
 	return s.String()
 }
 
-// SetPassword sets the Password field's value.
-func (s *Source) SetPassword(v string) *Source {
-	s.Password = &v
-	return s
-}
-
-// SetRevision sets the Revision field's value.
-func (s *Source) SetRevision(v string) *Source {
-	s.Revision = &v
-	return s
-}
-
-// SetSshKey sets the SshKey field's value.
-func (s *Source) SetSshKey(v string) *Source {
-	s.SshKey = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *Source) SetType(v SourceType) *Source {
-	s.Type = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *Source) SetUrl(v string) *Source {
-	s.Url = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *Source) SetUsername(v string) *Source {
-	s.Username = &v
-	return s
-}
-
 // Describes an app's SSL configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/SslConfiguration
 type SslConfiguration struct {
@@ -12850,24 +9976,6 @@ func (s *SslConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *SslConfiguration) SetCertificate(v string) *SslConfiguration {
-	s.Certificate = &v
-	return s
-}
-
-// SetChain sets the Chain field's value.
-func (s *SslConfiguration) SetChain(v string) *SslConfiguration {
-	s.Chain = &v
-	return s
-}
-
-// SetPrivateKey sets the PrivateKey field's value.
-func (s *SslConfiguration) SetPrivateKey(v string) *SslConfiguration {
-	s.PrivateKey = &v
-	return s
 }
 
 // Describes a stack.
@@ -12972,138 +10080,6 @@ func (s Stack) GoString() string {
 	return s.String()
 }
 
-// SetAgentVersion sets the AgentVersion field's value.
-func (s *Stack) SetAgentVersion(v string) *Stack {
-	s.AgentVersion = &v
-	return s
-}
-
-// SetArn sets the Arn field's value.
-func (s *Stack) SetArn(v string) *Stack {
-	s.Arn = &v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *Stack) SetAttributes(v map[string]string) *Stack {
-	s.Attributes = v
-	return s
-}
-
-// SetChefConfiguration sets the ChefConfiguration field's value.
-func (s *Stack) SetChefConfiguration(v *ChefConfiguration) *Stack {
-	s.ChefConfiguration = v
-	return s
-}
-
-// SetConfigurationManager sets the ConfigurationManager field's value.
-func (s *Stack) SetConfigurationManager(v *StackConfigurationManager) *Stack {
-	s.ConfigurationManager = v
-	return s
-}
-
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Stack) SetCreatedAt(v string) *Stack {
-	s.CreatedAt = &v
-	return s
-}
-
-// SetCustomCookbooksSource sets the CustomCookbooksSource field's value.
-func (s *Stack) SetCustomCookbooksSource(v *Source) *Stack {
-	s.CustomCookbooksSource = v
-	return s
-}
-
-// SetCustomJson sets the CustomJson field's value.
-func (s *Stack) SetCustomJson(v string) *Stack {
-	s.CustomJson = &v
-	return s
-}
-
-// SetDefaultAvailabilityZone sets the DefaultAvailabilityZone field's value.
-func (s *Stack) SetDefaultAvailabilityZone(v string) *Stack {
-	s.DefaultAvailabilityZone = &v
-	return s
-}
-
-// SetDefaultInstanceProfileArn sets the DefaultInstanceProfileArn field's value.
-func (s *Stack) SetDefaultInstanceProfileArn(v string) *Stack {
-	s.DefaultInstanceProfileArn = &v
-	return s
-}
-
-// SetDefaultOs sets the DefaultOs field's value.
-func (s *Stack) SetDefaultOs(v string) *Stack {
-	s.DefaultOs = &v
-	return s
-}
-
-// SetDefaultRootDeviceType sets the DefaultRootDeviceType field's value.
-func (s *Stack) SetDefaultRootDeviceType(v RootDeviceType) *Stack {
-	s.DefaultRootDeviceType = v
-	return s
-}
-
-// SetDefaultSshKeyName sets the DefaultSshKeyName field's value.
-func (s *Stack) SetDefaultSshKeyName(v string) *Stack {
-	s.DefaultSshKeyName = &v
-	return s
-}
-
-// SetDefaultSubnetId sets the DefaultSubnetId field's value.
-func (s *Stack) SetDefaultSubnetId(v string) *Stack {
-	s.DefaultSubnetId = &v
-	return s
-}
-
-// SetHostnameTheme sets the HostnameTheme field's value.
-func (s *Stack) SetHostnameTheme(v string) *Stack {
-	s.HostnameTheme = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Stack) SetName(v string) *Stack {
-	s.Name = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *Stack) SetRegion(v string) *Stack {
-	s.Region = &v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *Stack) SetServiceRoleArn(v string) *Stack {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *Stack) SetStackId(v string) *Stack {
-	s.StackId = &v
-	return s
-}
-
-// SetUseCustomCookbooks sets the UseCustomCookbooks field's value.
-func (s *Stack) SetUseCustomCookbooks(v bool) *Stack {
-	s.UseCustomCookbooks = &v
-	return s
-}
-
-// SetUseOpsworksSecurityGroups sets the UseOpsworksSecurityGroups field's value.
-func (s *Stack) SetUseOpsworksSecurityGroups(v bool) *Stack {
-	s.UseOpsworksSecurityGroups = &v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *Stack) SetVpcId(v string) *Stack {
-	s.VpcId = &v
-	return s
-}
-
 // Describes the configuration manager.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StackConfigurationManager
 type StackConfigurationManager struct {
@@ -13126,18 +10102,6 @@ func (s StackConfigurationManager) String() string {
 // GoString returns the string representation
 func (s StackConfigurationManager) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *StackConfigurationManager) SetName(v string) *StackConfigurationManager {
-	s.Name = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *StackConfigurationManager) SetVersion(v string) *StackConfigurationManager {
-	s.Version = &v
-	return s
 }
 
 // Summarizes the number of layers, instances, and apps in a stack.
@@ -13174,42 +10138,6 @@ func (s StackSummary) GoString() string {
 	return s.String()
 }
 
-// SetAppsCount sets the AppsCount field's value.
-func (s *StackSummary) SetAppsCount(v int64) *StackSummary {
-	s.AppsCount = &v
-	return s
-}
-
-// SetArn sets the Arn field's value.
-func (s *StackSummary) SetArn(v string) *StackSummary {
-	s.Arn = &v
-	return s
-}
-
-// SetInstancesCount sets the InstancesCount field's value.
-func (s *StackSummary) SetInstancesCount(v *InstancesCount) *StackSummary {
-	s.InstancesCount = v
-	return s
-}
-
-// SetLayersCount sets the LayersCount field's value.
-func (s *StackSummary) SetLayersCount(v int64) *StackSummary {
-	s.LayersCount = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *StackSummary) SetName(v string) *StackSummary {
-	s.Name = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *StackSummary) SetStackId(v string) *StackSummary {
-	s.StackId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartInstanceRequest
 type StartInstanceInput struct {
 	_ struct{} `type:"structure"`
@@ -13242,12 +10170,6 @@ func (s *StartInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *StartInstanceInput) SetInstanceId(v string) *StartInstanceInput {
-	s.InstanceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartInstanceOutput
@@ -13306,12 +10228,6 @@ func (s *StartStackInput) Validate() error {
 	return nil
 }
 
-// SetStackId sets the StackId field's value.
-func (s *StartStackInput) SetStackId(v string) *StartStackInput {
-	s.StackId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StartStackOutput
 type StartStackOutput struct {
 	_ struct{} `type:"structure"`
@@ -13368,12 +10284,6 @@ func (s *StopInstanceInput) Validate() error {
 	return nil
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *StopInstanceInput) SetInstanceId(v string) *StopInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopInstanceOutput
 type StopInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -13428,12 +10338,6 @@ func (s *StopStackInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetStackId sets the StackId field's value.
-func (s *StopStackInput) SetStackId(v string) *StopStackInput {
-	s.StackId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/StopStackOutput
@@ -13517,18 +10421,6 @@ func (s *TagResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceArn sets the ResourceArn field's value.
-func (s *TagResourceInput) SetResourceArn(v string) *TagResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v map[string]string) *TagResourceInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -13583,30 +10475,6 @@ func (s TemporaryCredential) GoString() string {
 	return s.String()
 }
 
-// SetInstanceId sets the InstanceId field's value.
-func (s *TemporaryCredential) SetInstanceId(v string) *TemporaryCredential {
-	s.InstanceId = &v
-	return s
-}
-
-// SetPassword sets the Password field's value.
-func (s *TemporaryCredential) SetPassword(v string) *TemporaryCredential {
-	s.Password = &v
-	return s
-}
-
-// SetUsername sets the Username field's value.
-func (s *TemporaryCredential) SetUsername(v string) *TemporaryCredential {
-	s.Username = &v
-	return s
-}
-
-// SetValidForInMinutes sets the ValidForInMinutes field's value.
-func (s *TemporaryCredential) SetValidForInMinutes(v int64) *TemporaryCredential {
-	s.ValidForInMinutes = &v
-	return s
-}
-
 // Describes an instance's time-based auto scaling configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/TimeBasedAutoScalingConfiguration
 type TimeBasedAutoScalingConfiguration struct {
@@ -13627,18 +10495,6 @@ func (s TimeBasedAutoScalingConfiguration) String() string {
 // GoString returns the string representation
 func (s TimeBasedAutoScalingConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetAutoScalingSchedule sets the AutoScalingSchedule field's value.
-func (s *TimeBasedAutoScalingConfiguration) SetAutoScalingSchedule(v *WeeklyAutoScalingSchedule) *TimeBasedAutoScalingConfiguration {
-	s.AutoScalingSchedule = v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *TimeBasedAutoScalingConfiguration) SetInstanceId(v string) *TimeBasedAutoScalingConfiguration {
-	s.InstanceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignInstanceRequest
@@ -13673,12 +10529,6 @@ func (s *UnassignInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *UnassignInstanceInput) SetInstanceId(v string) *UnassignInstanceInput {
-	s.InstanceId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignInstanceOutput
@@ -13735,12 +10585,6 @@ func (s *UnassignVolumeInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *UnassignVolumeInput) SetVolumeId(v string) *UnassignVolumeInput {
-	s.VolumeId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UnassignVolumeOutput
@@ -13806,18 +10650,6 @@ func (s *UntagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceArn sets the ResourceArn field's value.
-func (s *UntagResourceInput) SetResourceArn(v string) *UntagResourceInput {
-	s.ResourceArn = &v
-	return s
-}
-
-// SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v []string) *UntagResourceInput {
-	s.TagKeys = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UntagResourceOutput
@@ -13932,72 +10764,6 @@ func (s *UpdateAppInput) Validate() error {
 	return nil
 }
 
-// SetAppId sets the AppId field's value.
-func (s *UpdateAppInput) SetAppId(v string) *UpdateAppInput {
-	s.AppId = &v
-	return s
-}
-
-// SetAppSource sets the AppSource field's value.
-func (s *UpdateAppInput) SetAppSource(v *Source) *UpdateAppInput {
-	s.AppSource = v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *UpdateAppInput) SetAttributes(v map[string]string) *UpdateAppInput {
-	s.Attributes = v
-	return s
-}
-
-// SetDataSources sets the DataSources field's value.
-func (s *UpdateAppInput) SetDataSources(v []DataSource) *UpdateAppInput {
-	s.DataSources = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *UpdateAppInput) SetDescription(v string) *UpdateAppInput {
-	s.Description = &v
-	return s
-}
-
-// SetDomains sets the Domains field's value.
-func (s *UpdateAppInput) SetDomains(v []string) *UpdateAppInput {
-	s.Domains = v
-	return s
-}
-
-// SetEnableSsl sets the EnableSsl field's value.
-func (s *UpdateAppInput) SetEnableSsl(v bool) *UpdateAppInput {
-	s.EnableSsl = &v
-	return s
-}
-
-// SetEnvironment sets the Environment field's value.
-func (s *UpdateAppInput) SetEnvironment(v []EnvironmentVariable) *UpdateAppInput {
-	s.Environment = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateAppInput) SetName(v string) *UpdateAppInput {
-	s.Name = &v
-	return s
-}
-
-// SetSslConfiguration sets the SslConfiguration field's value.
-func (s *UpdateAppInput) SetSslConfiguration(v *SslConfiguration) *UpdateAppInput {
-	s.SslConfiguration = v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *UpdateAppInput) SetType(v AppType) *UpdateAppInput {
-	s.Type = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateAppOutput
 type UpdateAppOutput struct {
 	_ struct{} `type:"structure"`
@@ -14055,18 +10821,6 @@ func (s *UpdateElasticIpInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetElasticIp sets the ElasticIp field's value.
-func (s *UpdateElasticIpInput) SetElasticIp(v string) *UpdateElasticIpInput {
-	s.ElasticIp = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateElasticIpInput) SetName(v string) *UpdateElasticIpInput {
-	s.Name = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateElasticIpOutput
@@ -14219,78 +10973,6 @@ func (s *UpdateInstanceInput) Validate() error {
 	return nil
 }
 
-// SetAgentVersion sets the AgentVersion field's value.
-func (s *UpdateInstanceInput) SetAgentVersion(v string) *UpdateInstanceInput {
-	s.AgentVersion = &v
-	return s
-}
-
-// SetAmiId sets the AmiId field's value.
-func (s *UpdateInstanceInput) SetAmiId(v string) *UpdateInstanceInput {
-	s.AmiId = &v
-	return s
-}
-
-// SetArchitecture sets the Architecture field's value.
-func (s *UpdateInstanceInput) SetArchitecture(v Architecture) *UpdateInstanceInput {
-	s.Architecture = v
-	return s
-}
-
-// SetAutoScalingType sets the AutoScalingType field's value.
-func (s *UpdateInstanceInput) SetAutoScalingType(v AutoScalingType) *UpdateInstanceInput {
-	s.AutoScalingType = v
-	return s
-}
-
-// SetEbsOptimized sets the EbsOptimized field's value.
-func (s *UpdateInstanceInput) SetEbsOptimized(v bool) *UpdateInstanceInput {
-	s.EbsOptimized = &v
-	return s
-}
-
-// SetHostname sets the Hostname field's value.
-func (s *UpdateInstanceInput) SetHostname(v string) *UpdateInstanceInput {
-	s.Hostname = &v
-	return s
-}
-
-// SetInstallUpdatesOnBoot sets the InstallUpdatesOnBoot field's value.
-func (s *UpdateInstanceInput) SetInstallUpdatesOnBoot(v bool) *UpdateInstanceInput {
-	s.InstallUpdatesOnBoot = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *UpdateInstanceInput) SetInstanceId(v string) *UpdateInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *UpdateInstanceInput) SetInstanceType(v string) *UpdateInstanceInput {
-	s.InstanceType = &v
-	return s
-}
-
-// SetLayerIds sets the LayerIds field's value.
-func (s *UpdateInstanceInput) SetLayerIds(v []string) *UpdateInstanceInput {
-	s.LayerIds = v
-	return s
-}
-
-// SetOs sets the Os field's value.
-func (s *UpdateInstanceInput) SetOs(v string) *UpdateInstanceInput {
-	s.Os = &v
-	return s
-}
-
-// SetSshKeyName sets the SshKeyName field's value.
-func (s *UpdateInstanceInput) SetSshKeyName(v string) *UpdateInstanceInput {
-	s.SshKeyName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateInstanceOutput
 type UpdateInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -14423,108 +11105,6 @@ func (s *UpdateLayerInput) Validate() error {
 	return nil
 }
 
-// SetAttributes sets the Attributes field's value.
-func (s *UpdateLayerInput) SetAttributes(v map[string]string) *UpdateLayerInput {
-	s.Attributes = v
-	return s
-}
-
-// SetAutoAssignElasticIps sets the AutoAssignElasticIps field's value.
-func (s *UpdateLayerInput) SetAutoAssignElasticIps(v bool) *UpdateLayerInput {
-	s.AutoAssignElasticIps = &v
-	return s
-}
-
-// SetAutoAssignPublicIps sets the AutoAssignPublicIps field's value.
-func (s *UpdateLayerInput) SetAutoAssignPublicIps(v bool) *UpdateLayerInput {
-	s.AutoAssignPublicIps = &v
-	return s
-}
-
-// SetCloudWatchLogsConfiguration sets the CloudWatchLogsConfiguration field's value.
-func (s *UpdateLayerInput) SetCloudWatchLogsConfiguration(v *CloudWatchLogsConfiguration) *UpdateLayerInput {
-	s.CloudWatchLogsConfiguration = v
-	return s
-}
-
-// SetCustomInstanceProfileArn sets the CustomInstanceProfileArn field's value.
-func (s *UpdateLayerInput) SetCustomInstanceProfileArn(v string) *UpdateLayerInput {
-	s.CustomInstanceProfileArn = &v
-	return s
-}
-
-// SetCustomJson sets the CustomJson field's value.
-func (s *UpdateLayerInput) SetCustomJson(v string) *UpdateLayerInput {
-	s.CustomJson = &v
-	return s
-}
-
-// SetCustomRecipes sets the CustomRecipes field's value.
-func (s *UpdateLayerInput) SetCustomRecipes(v *Recipes) *UpdateLayerInput {
-	s.CustomRecipes = v
-	return s
-}
-
-// SetCustomSecurityGroupIds sets the CustomSecurityGroupIds field's value.
-func (s *UpdateLayerInput) SetCustomSecurityGroupIds(v []string) *UpdateLayerInput {
-	s.CustomSecurityGroupIds = v
-	return s
-}
-
-// SetEnableAutoHealing sets the EnableAutoHealing field's value.
-func (s *UpdateLayerInput) SetEnableAutoHealing(v bool) *UpdateLayerInput {
-	s.EnableAutoHealing = &v
-	return s
-}
-
-// SetInstallUpdatesOnBoot sets the InstallUpdatesOnBoot field's value.
-func (s *UpdateLayerInput) SetInstallUpdatesOnBoot(v bool) *UpdateLayerInput {
-	s.InstallUpdatesOnBoot = &v
-	return s
-}
-
-// SetLayerId sets the LayerId field's value.
-func (s *UpdateLayerInput) SetLayerId(v string) *UpdateLayerInput {
-	s.LayerId = &v
-	return s
-}
-
-// SetLifecycleEventConfiguration sets the LifecycleEventConfiguration field's value.
-func (s *UpdateLayerInput) SetLifecycleEventConfiguration(v *LifecycleEventConfiguration) *UpdateLayerInput {
-	s.LifecycleEventConfiguration = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateLayerInput) SetName(v string) *UpdateLayerInput {
-	s.Name = &v
-	return s
-}
-
-// SetPackages sets the Packages field's value.
-func (s *UpdateLayerInput) SetPackages(v []string) *UpdateLayerInput {
-	s.Packages = v
-	return s
-}
-
-// SetShortname sets the Shortname field's value.
-func (s *UpdateLayerInput) SetShortname(v string) *UpdateLayerInput {
-	s.Shortname = &v
-	return s
-}
-
-// SetUseEbsOptimizedInstances sets the UseEbsOptimizedInstances field's value.
-func (s *UpdateLayerInput) SetUseEbsOptimizedInstances(v bool) *UpdateLayerInput {
-	s.UseEbsOptimizedInstances = &v
-	return s
-}
-
-// SetVolumeConfigurations sets the VolumeConfigurations field's value.
-func (s *UpdateLayerInput) SetVolumeConfigurations(v []VolumeConfiguration) *UpdateLayerInput {
-	s.VolumeConfigurations = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateLayerOutput
 type UpdateLayerOutput struct {
 	_ struct{} `type:"structure"`
@@ -14563,12 +11143,6 @@ func (s UpdateMyUserProfileInput) String() string {
 // GoString returns the string representation
 func (s UpdateMyUserProfileInput) GoString() string {
 	return s.String()
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *UpdateMyUserProfileInput) SetSshPublicKey(v string) *UpdateMyUserProfileInput {
-	s.SshPublicKey = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateMyUserProfileOutput
@@ -14631,24 +11205,6 @@ func (s *UpdateRdsDbInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDbPassword sets the DbPassword field's value.
-func (s *UpdateRdsDbInstanceInput) SetDbPassword(v string) *UpdateRdsDbInstanceInput {
-	s.DbPassword = &v
-	return s
-}
-
-// SetDbUser sets the DbUser field's value.
-func (s *UpdateRdsDbInstanceInput) SetDbUser(v string) *UpdateRdsDbInstanceInput {
-	s.DbUser = &v
-	return s
-}
-
-// SetRdsDbInstanceArn sets the RdsDbInstanceArn field's value.
-func (s *UpdateRdsDbInstanceInput) SetRdsDbInstanceArn(v string) *UpdateRdsDbInstanceInput {
-	s.RdsDbInstanceArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateRdsDbInstanceOutput
@@ -14878,114 +11434,6 @@ func (s *UpdateStackInput) Validate() error {
 	return nil
 }
 
-// SetAgentVersion sets the AgentVersion field's value.
-func (s *UpdateStackInput) SetAgentVersion(v string) *UpdateStackInput {
-	s.AgentVersion = &v
-	return s
-}
-
-// SetAttributes sets the Attributes field's value.
-func (s *UpdateStackInput) SetAttributes(v map[string]string) *UpdateStackInput {
-	s.Attributes = v
-	return s
-}
-
-// SetChefConfiguration sets the ChefConfiguration field's value.
-func (s *UpdateStackInput) SetChefConfiguration(v *ChefConfiguration) *UpdateStackInput {
-	s.ChefConfiguration = v
-	return s
-}
-
-// SetConfigurationManager sets the ConfigurationManager field's value.
-func (s *UpdateStackInput) SetConfigurationManager(v *StackConfigurationManager) *UpdateStackInput {
-	s.ConfigurationManager = v
-	return s
-}
-
-// SetCustomCookbooksSource sets the CustomCookbooksSource field's value.
-func (s *UpdateStackInput) SetCustomCookbooksSource(v *Source) *UpdateStackInput {
-	s.CustomCookbooksSource = v
-	return s
-}
-
-// SetCustomJson sets the CustomJson field's value.
-func (s *UpdateStackInput) SetCustomJson(v string) *UpdateStackInput {
-	s.CustomJson = &v
-	return s
-}
-
-// SetDefaultAvailabilityZone sets the DefaultAvailabilityZone field's value.
-func (s *UpdateStackInput) SetDefaultAvailabilityZone(v string) *UpdateStackInput {
-	s.DefaultAvailabilityZone = &v
-	return s
-}
-
-// SetDefaultInstanceProfileArn sets the DefaultInstanceProfileArn field's value.
-func (s *UpdateStackInput) SetDefaultInstanceProfileArn(v string) *UpdateStackInput {
-	s.DefaultInstanceProfileArn = &v
-	return s
-}
-
-// SetDefaultOs sets the DefaultOs field's value.
-func (s *UpdateStackInput) SetDefaultOs(v string) *UpdateStackInput {
-	s.DefaultOs = &v
-	return s
-}
-
-// SetDefaultRootDeviceType sets the DefaultRootDeviceType field's value.
-func (s *UpdateStackInput) SetDefaultRootDeviceType(v RootDeviceType) *UpdateStackInput {
-	s.DefaultRootDeviceType = v
-	return s
-}
-
-// SetDefaultSshKeyName sets the DefaultSshKeyName field's value.
-func (s *UpdateStackInput) SetDefaultSshKeyName(v string) *UpdateStackInput {
-	s.DefaultSshKeyName = &v
-	return s
-}
-
-// SetDefaultSubnetId sets the DefaultSubnetId field's value.
-func (s *UpdateStackInput) SetDefaultSubnetId(v string) *UpdateStackInput {
-	s.DefaultSubnetId = &v
-	return s
-}
-
-// SetHostnameTheme sets the HostnameTheme field's value.
-func (s *UpdateStackInput) SetHostnameTheme(v string) *UpdateStackInput {
-	s.HostnameTheme = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateStackInput) SetName(v string) *UpdateStackInput {
-	s.Name = &v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *UpdateStackInput) SetServiceRoleArn(v string) *UpdateStackInput {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetStackId sets the StackId field's value.
-func (s *UpdateStackInput) SetStackId(v string) *UpdateStackInput {
-	s.StackId = &v
-	return s
-}
-
-// SetUseCustomCookbooks sets the UseCustomCookbooks field's value.
-func (s *UpdateStackInput) SetUseCustomCookbooks(v bool) *UpdateStackInput {
-	s.UseCustomCookbooks = &v
-	return s
-}
-
-// SetUseOpsworksSecurityGroups sets the UseOpsworksSecurityGroups field's value.
-func (s *UpdateStackInput) SetUseOpsworksSecurityGroups(v bool) *UpdateStackInput {
-	s.UseOpsworksSecurityGroups = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateStackOutput
 type UpdateStackOutput struct {
 	_ struct{} `type:"structure"`
@@ -15056,30 +11504,6 @@ func (s *UpdateUserProfileInput) Validate() error {
 	return nil
 }
 
-// SetAllowSelfManagement sets the AllowSelfManagement field's value.
-func (s *UpdateUserProfileInput) SetAllowSelfManagement(v bool) *UpdateUserProfileInput {
-	s.AllowSelfManagement = &v
-	return s
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *UpdateUserProfileInput) SetIamUserArn(v string) *UpdateUserProfileInput {
-	s.IamUserArn = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *UpdateUserProfileInput) SetSshPublicKey(v string) *UpdateUserProfileInput {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetSshUsername sets the SshUsername field's value.
-func (s *UpdateUserProfileInput) SetSshUsername(v string) *UpdateUserProfileInput {
-	s.SshUsername = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateUserProfileOutput
 type UpdateUserProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -15142,24 +11566,6 @@ func (s *UpdateVolumeInput) Validate() error {
 	return nil
 }
 
-// SetMountPoint sets the MountPoint field's value.
-func (s *UpdateVolumeInput) SetMountPoint(v string) *UpdateVolumeInput {
-	s.MountPoint = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UpdateVolumeInput) SetName(v string) *UpdateVolumeInput {
-	s.Name = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *UpdateVolumeInput) SetVolumeId(v string) *UpdateVolumeInput {
-	s.VolumeId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/opsworks-2013-02-18/UpdateVolumeOutput
 type UpdateVolumeOutput struct {
 	_ struct{} `type:"structure"`
@@ -15212,36 +11618,6 @@ func (s UserProfile) String() string {
 // GoString returns the string representation
 func (s UserProfile) GoString() string {
 	return s.String()
-}
-
-// SetAllowSelfManagement sets the AllowSelfManagement field's value.
-func (s *UserProfile) SetAllowSelfManagement(v bool) *UserProfile {
-	s.AllowSelfManagement = &v
-	return s
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *UserProfile) SetIamUserArn(v string) *UserProfile {
-	s.IamUserArn = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *UserProfile) SetName(v string) *UserProfile {
-	s.Name = &v
-	return s
-}
-
-// SetSshPublicKey sets the SshPublicKey field's value.
-func (s *UserProfile) SetSshPublicKey(v string) *UserProfile {
-	s.SshPublicKey = &v
-	return s
-}
-
-// SetSshUsername sets the SshUsername field's value.
-func (s *UserProfile) SetSshUsername(v string) *UserProfile {
-	s.SshUsername = &v
-	return s
 }
 
 // Describes an instance's Amazon EBS volume.
@@ -15299,84 +11675,6 @@ func (s Volume) String() string {
 // GoString returns the string representation
 func (s Volume) GoString() string {
 	return s.String()
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *Volume) SetAvailabilityZone(v string) *Volume {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetDevice sets the Device field's value.
-func (s *Volume) SetDevice(v string) *Volume {
-	s.Device = &v
-	return s
-}
-
-// SetEc2VolumeId sets the Ec2VolumeId field's value.
-func (s *Volume) SetEc2VolumeId(v string) *Volume {
-	s.Ec2VolumeId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *Volume) SetInstanceId(v string) *Volume {
-	s.InstanceId = &v
-	return s
-}
-
-// SetIops sets the Iops field's value.
-func (s *Volume) SetIops(v int64) *Volume {
-	s.Iops = &v
-	return s
-}
-
-// SetMountPoint sets the MountPoint field's value.
-func (s *Volume) SetMountPoint(v string) *Volume {
-	s.MountPoint = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *Volume) SetName(v string) *Volume {
-	s.Name = &v
-	return s
-}
-
-// SetRaidArrayId sets the RaidArrayId field's value.
-func (s *Volume) SetRaidArrayId(v string) *Volume {
-	s.RaidArrayId = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *Volume) SetRegion(v string) *Volume {
-	s.Region = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *Volume) SetSize(v int64) *Volume {
-	s.Size = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *Volume) SetStatus(v string) *Volume {
-	s.Status = &v
-	return s
-}
-
-// SetVolumeId sets the VolumeId field's value.
-func (s *Volume) SetVolumeId(v string) *Volume {
-	s.VolumeId = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *Volume) SetVolumeType(v string) *Volume {
-	s.VolumeType = &v
-	return s
 }
 
 // Describes an Amazon EBS volume configuration.
@@ -15447,42 +11745,6 @@ func (s *VolumeConfiguration) Validate() error {
 	return nil
 }
 
-// SetIops sets the Iops field's value.
-func (s *VolumeConfiguration) SetIops(v int64) *VolumeConfiguration {
-	s.Iops = &v
-	return s
-}
-
-// SetMountPoint sets the MountPoint field's value.
-func (s *VolumeConfiguration) SetMountPoint(v string) *VolumeConfiguration {
-	s.MountPoint = &v
-	return s
-}
-
-// SetNumberOfDisks sets the NumberOfDisks field's value.
-func (s *VolumeConfiguration) SetNumberOfDisks(v int64) *VolumeConfiguration {
-	s.NumberOfDisks = &v
-	return s
-}
-
-// SetRaidLevel sets the RaidLevel field's value.
-func (s *VolumeConfiguration) SetRaidLevel(v int64) *VolumeConfiguration {
-	s.RaidLevel = &v
-	return s
-}
-
-// SetSize sets the Size field's value.
-func (s *VolumeConfiguration) SetSize(v int64) *VolumeConfiguration {
-	s.Size = &v
-	return s
-}
-
-// SetVolumeType sets the VolumeType field's value.
-func (s *VolumeConfiguration) SetVolumeType(v string) *VolumeConfiguration {
-	s.VolumeType = &v
-	return s
-}
-
 // Describes a time-based instance's auto scaling schedule. The schedule consists
 // of a set of key-value pairs.
 //
@@ -15537,48 +11799,6 @@ func (s WeeklyAutoScalingSchedule) GoString() string {
 	return s.String()
 }
 
-// SetFriday sets the Friday field's value.
-func (s *WeeklyAutoScalingSchedule) SetFriday(v map[string]string) *WeeklyAutoScalingSchedule {
-	s.Friday = v
-	return s
-}
-
-// SetMonday sets the Monday field's value.
-func (s *WeeklyAutoScalingSchedule) SetMonday(v map[string]string) *WeeklyAutoScalingSchedule {
-	s.Monday = v
-	return s
-}
-
-// SetSaturday sets the Saturday field's value.
-func (s *WeeklyAutoScalingSchedule) SetSaturday(v map[string]string) *WeeklyAutoScalingSchedule {
-	s.Saturday = v
-	return s
-}
-
-// SetSunday sets the Sunday field's value.
-func (s *WeeklyAutoScalingSchedule) SetSunday(v map[string]string) *WeeklyAutoScalingSchedule {
-	s.Sunday = v
-	return s
-}
-
-// SetThursday sets the Thursday field's value.
-func (s *WeeklyAutoScalingSchedule) SetThursday(v map[string]string) *WeeklyAutoScalingSchedule {
-	s.Thursday = v
-	return s
-}
-
-// SetTuesday sets the Tuesday field's value.
-func (s *WeeklyAutoScalingSchedule) SetTuesday(v map[string]string) *WeeklyAutoScalingSchedule {
-	s.Tuesday = v
-	return s
-}
-
-// SetWednesday sets the Wednesday field's value.
-func (s *WeeklyAutoScalingSchedule) SetWednesday(v map[string]string) *WeeklyAutoScalingSchedule {
-	s.Wednesday = v
-	return s
-}
-
 type AppAttributesKeys string
 
 // Enum values for AppAttributesKeys
@@ -15588,6 +11808,15 @@ const (
 	AppAttributesKeysAutoBundleOnDeploy  AppAttributesKeys = "AutoBundleOnDeploy"
 	AppAttributesKeysAwsFlowRubySettings AppAttributesKeys = "AwsFlowRubySettings"
 )
+
+func (enum AppAttributesKeys) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppAttributesKeys) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type AppType string
 
@@ -15602,6 +11831,15 @@ const (
 	AppTypeOther       AppType = "other"
 )
 
+func (enum AppType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Architecture string
 
 // Enum values for Architecture
@@ -15610,6 +11848,15 @@ const (
 	ArchitectureI386  Architecture = "i386"
 )
 
+func (enum Architecture) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Architecture) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AutoScalingType string
 
 // Enum values for AutoScalingType
@@ -15617,6 +11864,15 @@ const (
 	AutoScalingTypeLoad  AutoScalingType = "load"
 	AutoScalingTypeTimer AutoScalingType = "timer"
 )
+
+func (enum AutoScalingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoScalingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Specifies the encoding of the log file so that the file can be read correctly.
 // The default is utf_8. Encodings supported by Python codecs.decode() can be
@@ -15719,6 +11975,15 @@ const (
 	CloudWatchLogsEncodingUtf8Sig       CloudWatchLogsEncoding = "utf_8_sig"
 )
 
+func (enum CloudWatchLogsEncoding) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CloudWatchLogsEncoding) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Specifies where to start to read data (start_of_file or end_of_file). The
 // default is start_of_file. It's only used if there is no state persisted for
 // that log stream.
@@ -15730,6 +11995,15 @@ const (
 	CloudWatchLogsInitialPositionEndOfFile   CloudWatchLogsInitialPosition = "end_of_file"
 )
 
+func (enum CloudWatchLogsInitialPosition) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CloudWatchLogsInitialPosition) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The preferred time zone for logs streamed to CloudWatch Logs. Valid values
 // are LOCAL and UTC, for Coordinated Universal Time.
 type CloudWatchLogsTimeZone string
@@ -15739,6 +12013,15 @@ const (
 	CloudWatchLogsTimeZoneLocal CloudWatchLogsTimeZone = "LOCAL"
 	CloudWatchLogsTimeZoneUtc   CloudWatchLogsTimeZone = "UTC"
 )
+
+func (enum CloudWatchLogsTimeZone) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CloudWatchLogsTimeZone) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DeploymentCommandName string
 
@@ -15757,6 +12040,15 @@ const (
 	DeploymentCommandNameRestart               DeploymentCommandName = "restart"
 	DeploymentCommandNameUndeploy              DeploymentCommandName = "undeploy"
 )
+
+func (enum DeploymentCommandName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentCommandName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LayerAttributesKeys string
 
@@ -15789,6 +12081,15 @@ const (
 	LayerAttributesKeysJavaAppServerVersion        LayerAttributesKeys = "JavaAppServerVersion"
 )
 
+func (enum LayerAttributesKeys) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LayerAttributesKeys) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LayerType string
 
 // Enum values for LayerType
@@ -15807,6 +12108,15 @@ const (
 	LayerTypeCustom           LayerType = "custom"
 )
 
+func (enum LayerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LayerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RootDeviceType string
 
 // Enum values for RootDeviceType
@@ -15814,6 +12124,15 @@ const (
 	RootDeviceTypeEbs           RootDeviceType = "ebs"
 	RootDeviceTypeInstanceStore RootDeviceType = "instance-store"
 )
+
+func (enum RootDeviceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RootDeviceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -15825,12 +12144,30 @@ const (
 	SourceTypeS3      SourceType = "s3"
 )
 
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackAttributesKeys string
 
 // Enum values for StackAttributesKeys
 const (
 	StackAttributesKeysColor StackAttributesKeys = "Color"
 )
+
+func (enum StackAttributesKeys) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackAttributesKeys) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VirtualizationType string
 
@@ -15840,6 +12177,15 @@ const (
 	VirtualizationTypeHvm         VirtualizationType = "hvm"
 )
 
+func (enum VirtualizationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VirtualizationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VolumeType string
 
 // Enum values for VolumeType
@@ -15848,3 +12194,12 @@ const (
 	VolumeTypeIo1      VolumeType = "io1"
 	VolumeTypeStandard VolumeType = "standard"
 )
+
+func (enum VolumeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VolumeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCancelJob = "CancelJob"
@@ -1195,46 +1196,51 @@ func (s *Artwork) Validate() error {
 	return nil
 }
 
-// SetAlbumArtFormat sets the AlbumArtFormat field's value.
-func (s *Artwork) SetAlbumArtFormat(v string) *Artwork {
-	s.AlbumArtFormat = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Artwork) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AlbumArtFormat != nil {
+		v := *s.AlbumArtFormat
 
-// SetEncryption sets the Encryption field's value.
-func (s *Artwork) SetEncryption(v *Encryption) *Artwork {
-	s.Encryption = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AlbumArtFormat", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Encryption != nil {
+		v := s.Encryption
 
-// SetInputKey sets the InputKey field's value.
-func (s *Artwork) SetInputKey(v string) *Artwork {
-	s.InputKey = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.InputKey != nil {
+		v := *s.InputKey
 
-// SetMaxHeight sets the MaxHeight field's value.
-func (s *Artwork) SetMaxHeight(v string) *Artwork {
-	s.MaxHeight = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputKey", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxHeight != nil {
+		v := *s.MaxHeight
 
-// SetMaxWidth sets the MaxWidth field's value.
-func (s *Artwork) SetMaxWidth(v string) *Artwork {
-	s.MaxWidth = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxHeight", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxWidth != nil {
+		v := *s.MaxWidth
 
-// SetPaddingPolicy sets the PaddingPolicy field's value.
-func (s *Artwork) SetPaddingPolicy(v string) *Artwork {
-	s.PaddingPolicy = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxWidth", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PaddingPolicy != nil {
+		v := *s.PaddingPolicy
 
-// SetSizingPolicy sets the SizingPolicy field's value.
-func (s *Artwork) SetSizingPolicy(v string) *Artwork {
-	s.SizingPolicy = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PaddingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SizingPolicy != nil {
+		v := *s.SizingPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SizingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Options associated with your audio codec.
@@ -1306,28 +1312,33 @@ func (s AudioCodecOptions) GoString() string {
 	return s.String()
 }
 
-// SetBitDepth sets the BitDepth field's value.
-func (s *AudioCodecOptions) SetBitDepth(v string) *AudioCodecOptions {
-	s.BitDepth = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AudioCodecOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BitDepth != nil {
+		v := *s.BitDepth
 
-// SetBitOrder sets the BitOrder field's value.
-func (s *AudioCodecOptions) SetBitOrder(v string) *AudioCodecOptions {
-	s.BitOrder = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BitDepth", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BitOrder != nil {
+		v := *s.BitOrder
 
-// SetProfile sets the Profile field's value.
-func (s *AudioCodecOptions) SetProfile(v string) *AudioCodecOptions {
-	s.Profile = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BitOrder", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Profile != nil {
+		v := *s.Profile
 
-// SetSigned sets the Signed field's value.
-func (s *AudioCodecOptions) SetSigned(v string) *AudioCodecOptions {
-	s.Signed = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Profile", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Signed != nil {
+		v := *s.Signed
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Signed", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Parameters required for transcoding audio.
@@ -1504,40 +1515,45 @@ func (s AudioParameters) GoString() string {
 	return s.String()
 }
 
-// SetAudioPackingMode sets the AudioPackingMode field's value.
-func (s *AudioParameters) SetAudioPackingMode(v string) *AudioParameters {
-	s.AudioPackingMode = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AudioParameters) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AudioPackingMode != nil {
+		v := *s.AudioPackingMode
 
-// SetBitRate sets the BitRate field's value.
-func (s *AudioParameters) SetBitRate(v string) *AudioParameters {
-	s.BitRate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AudioPackingMode", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BitRate != nil {
+		v := *s.BitRate
 
-// SetChannels sets the Channels field's value.
-func (s *AudioParameters) SetChannels(v string) *AudioParameters {
-	s.Channels = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BitRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Channels != nil {
+		v := *s.Channels
 
-// SetCodec sets the Codec field's value.
-func (s *AudioParameters) SetCodec(v string) *AudioParameters {
-	s.Codec = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Channels", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Codec != nil {
+		v := *s.Codec
 
-// SetCodecOptions sets the CodecOptions field's value.
-func (s *AudioParameters) SetCodecOptions(v *AudioCodecOptions) *AudioParameters {
-	s.CodecOptions = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Codec", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CodecOptions != nil {
+		v := s.CodecOptions
 
-// SetSampleRate sets the SampleRate field's value.
-func (s *AudioParameters) SetSampleRate(v string) *AudioParameters {
-	s.SampleRate = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CodecOptions", v, metadata)
+	}
+	if s.SampleRate != nil {
+		v := *s.SampleRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SampleRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The CancelJobRequest structure.
@@ -1577,10 +1593,16 @@ func (s *CancelJobInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *CancelJobInput) SetId(v string) *CancelJobInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelJobInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The response body contains a JSON object. If the job is successfully canceled,
@@ -1604,6 +1626,11 @@ func (s CancelJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The file format of the output captions. If you leave this value blank, Elastic
@@ -1672,22 +1699,27 @@ func (s CaptionFormat) GoString() string {
 	return s.String()
 }
 
-// SetEncryption sets the Encryption field's value.
-func (s *CaptionFormat) SetEncryption(v *Encryption) *CaptionFormat {
-	s.Encryption = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CaptionFormat) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Encryption != nil {
+		v := s.Encryption
 
-// SetFormat sets the Format field's value.
-func (s *CaptionFormat) SetFormat(v string) *CaptionFormat {
-	s.Format = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.Format != nil {
+		v := *s.Format
 
-// SetPattern sets the Pattern field's value.
-func (s *CaptionFormat) SetPattern(v string) *CaptionFormat {
-	s.Pattern = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Pattern != nil {
+		v := *s.Pattern
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Pattern", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // A source file for the input sidecar captions used during the transcoding
@@ -1758,34 +1790,39 @@ func (s *CaptionSource) Validate() error {
 	return nil
 }
 
-// SetEncryption sets the Encryption field's value.
-func (s *CaptionSource) SetEncryption(v *Encryption) *CaptionSource {
-	s.Encryption = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CaptionSource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Encryption != nil {
+		v := s.Encryption
 
-// SetKey sets the Key field's value.
-func (s *CaptionSource) SetKey(v string) *CaptionSource {
-	s.Key = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
 
-// SetLabel sets the Label field's value.
-func (s *CaptionSource) SetLabel(v string) *CaptionSource {
-	s.Label = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Label != nil {
+		v := *s.Label
 
-// SetLanguage sets the Language field's value.
-func (s *CaptionSource) SetLanguage(v string) *CaptionSource {
-	s.Language = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Label", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Language != nil {
+		v := *s.Language
 
-// SetTimeOffset sets the TimeOffset field's value.
-func (s *CaptionSource) SetTimeOffset(v string) *CaptionSource {
-	s.TimeOffset = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Language", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TimeOffset != nil {
+		v := *s.TimeOffset
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TimeOffset", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The captions to be created, if any.
@@ -1849,22 +1886,39 @@ func (s *Captions) Validate() error {
 	return nil
 }
 
-// SetCaptionFormats sets the CaptionFormats field's value.
-func (s *Captions) SetCaptionFormats(v []CaptionFormat) *Captions {
-	s.CaptionFormats = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Captions) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CaptionFormats) > 0 {
+		v := s.CaptionFormats
 
-// SetCaptionSources sets the CaptionSources field's value.
-func (s *Captions) SetCaptionSources(v []CaptionSource) *Captions {
-	s.CaptionSources = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CaptionFormats", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetMergePolicy sets the MergePolicy field's value.
-func (s *Captions) SetMergePolicy(v string) *Captions {
-	s.MergePolicy = &v
-	return s
+	}
+	if len(s.CaptionSources) > 0 {
+		v := s.CaptionSources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CaptionSources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MergePolicy != nil {
+		v := *s.MergePolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MergePolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Settings for one clip in a composition. All jobs in a playlist must have
@@ -1886,10 +1940,15 @@ func (s Clip) GoString() string {
 	return s.String()
 }
 
-// SetTimeSpan sets the TimeSpan field's value.
-func (s *Clip) SetTimeSpan(v *TimeSpan) *Clip {
-	s.TimeSpan = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Clip) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TimeSpan != nil {
+		v := s.TimeSpan
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TimeSpan", v, metadata)
+	}
+	return nil
 }
 
 // The CreateJobRequest structure.
@@ -1999,52 +2058,82 @@ func (s *CreateJobInput) Validate() error {
 	return nil
 }
 
-// SetInput sets the Input field's value.
-func (s *CreateJobInput) SetInput(v *JobInput) *CreateJobInput {
-	s.Input = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetInputs sets the Inputs field's value.
-func (s *CreateJobInput) SetInputs(v []JobInput) *CreateJobInput {
-	s.Inputs = v
-	return s
-}
+	if s.Input != nil {
+		v := s.Input
 
-// SetOutput sets the Output field's value.
-func (s *CreateJobInput) SetOutput(v *CreateJobOutput) *CreateJobInput {
-	s.Output = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Input", v, metadata)
+	}
+	if len(s.Inputs) > 0 {
+		v := s.Inputs
 
-// SetOutputKeyPrefix sets the OutputKeyPrefix field's value.
-func (s *CreateJobInput) SetOutputKeyPrefix(v string) *CreateJobInput {
-	s.OutputKeyPrefix = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Inputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetOutputs sets the Outputs field's value.
-func (s *CreateJobInput) SetOutputs(v []CreateJobOutput) *CreateJobInput {
-	s.Outputs = v
-	return s
-}
+	}
+	if s.Output != nil {
+		v := s.Output
 
-// SetPipelineId sets the PipelineId field's value.
-func (s *CreateJobInput) SetPipelineId(v string) *CreateJobInput {
-	s.PipelineId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Output", v, metadata)
+	}
+	if s.OutputKeyPrefix != nil {
+		v := *s.OutputKeyPrefix
 
-// SetPlaylists sets the Playlists field's value.
-func (s *CreateJobInput) SetPlaylists(v []CreateJobPlaylist) *CreateJobInput {
-	s.Playlists = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputKeyPrefix", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Outputs) > 0 {
+		v := s.Outputs
 
-// SetUserMetadata sets the UserMetadata field's value.
-func (s *CreateJobInput) SetUserMetadata(v map[string]string) *CreateJobInput {
-	s.UserMetadata = v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Outputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.PipelineId != nil {
+		v := *s.PipelineId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Playlists) > 0 {
+		v := s.Playlists
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Playlists", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.UserMetadata) > 0 {
+		v := s.UserMetadata
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "UserMetadata", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
 }
 
 // The CreateJobOutput structure.
@@ -2233,70 +2322,87 @@ func (s *CreateJobOutput) Validate() error {
 	return nil
 }
 
-// SetAlbumArt sets the AlbumArt field's value.
-func (s *CreateJobOutput) SetAlbumArt(v *JobAlbumArt) *CreateJobOutput {
-	s.AlbumArt = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AlbumArt != nil {
+		v := s.AlbumArt
 
-// SetCaptions sets the Captions field's value.
-func (s *CreateJobOutput) SetCaptions(v *Captions) *CreateJobOutput {
-	s.Captions = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AlbumArt", v, metadata)
+	}
+	if s.Captions != nil {
+		v := s.Captions
 
-// SetComposition sets the Composition field's value.
-func (s *CreateJobOutput) SetComposition(v []Clip) *CreateJobOutput {
-	s.Composition = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Captions", v, metadata)
+	}
+	if len(s.Composition) > 0 {
+		v := s.Composition
 
-// SetEncryption sets the Encryption field's value.
-func (s *CreateJobOutput) SetEncryption(v *Encryption) *CreateJobOutput {
-	s.Encryption = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Composition", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetKey sets the Key field's value.
-func (s *CreateJobOutput) SetKey(v string) *CreateJobOutput {
-	s.Key = &v
-	return s
-}
+	}
+	if s.Encryption != nil {
+		v := s.Encryption
 
-// SetPresetId sets the PresetId field's value.
-func (s *CreateJobOutput) SetPresetId(v string) *CreateJobOutput {
-	s.PresetId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
 
-// SetRotate sets the Rotate field's value.
-func (s *CreateJobOutput) SetRotate(v string) *CreateJobOutput {
-	s.Rotate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PresetId != nil {
+		v := *s.PresetId
 
-// SetSegmentDuration sets the SegmentDuration field's value.
-func (s *CreateJobOutput) SetSegmentDuration(v string) *CreateJobOutput {
-	s.SegmentDuration = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PresetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Rotate != nil {
+		v := *s.Rotate
 
-// SetThumbnailEncryption sets the ThumbnailEncryption field's value.
-func (s *CreateJobOutput) SetThumbnailEncryption(v *Encryption) *CreateJobOutput {
-	s.ThumbnailEncryption = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Rotate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SegmentDuration != nil {
+		v := *s.SegmentDuration
 
-// SetThumbnailPattern sets the ThumbnailPattern field's value.
-func (s *CreateJobOutput) SetThumbnailPattern(v string) *CreateJobOutput {
-	s.ThumbnailPattern = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SegmentDuration", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThumbnailEncryption != nil {
+		v := s.ThumbnailEncryption
 
-// SetWatermarks sets the Watermarks field's value.
-func (s *CreateJobOutput) SetWatermarks(v []JobWatermark) *CreateJobOutput {
-	s.Watermarks = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ThumbnailEncryption", v, metadata)
+	}
+	if s.ThumbnailPattern != nil {
+		v := *s.ThumbnailPattern
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThumbnailPattern", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Watermarks) > 0 {
+		v := s.Watermarks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Watermarks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Information about the master playlist.
@@ -2394,34 +2500,45 @@ func (s *CreateJobPlaylist) Validate() error {
 	return nil
 }
 
-// SetFormat sets the Format field's value.
-func (s *CreateJobPlaylist) SetFormat(v string) *CreateJobPlaylist {
-	s.Format = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateJobPlaylist) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Format != nil {
+		v := *s.Format
 
-// SetHlsContentProtection sets the HlsContentProtection field's value.
-func (s *CreateJobPlaylist) SetHlsContentProtection(v *HlsContentProtection) *CreateJobPlaylist {
-	s.HlsContentProtection = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsContentProtection != nil {
+		v := s.HlsContentProtection
 
-// SetName sets the Name field's value.
-func (s *CreateJobPlaylist) SetName(v string) *CreateJobPlaylist {
-	s.Name = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HlsContentProtection", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
 
-// SetOutputKeys sets the OutputKeys field's value.
-func (s *CreateJobPlaylist) SetOutputKeys(v []string) *CreateJobPlaylist {
-	s.OutputKeys = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.OutputKeys) > 0 {
+		v := s.OutputKeys
 
-// SetPlayReadyDrm sets the PlayReadyDrm field's value.
-func (s *CreateJobPlaylist) SetPlayReadyDrm(v *PlayReadyDrm) *CreateJobPlaylist {
-	s.PlayReadyDrm = v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "OutputKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.PlayReadyDrm != nil {
+		v := s.PlayReadyDrm
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PlayReadyDrm", v, metadata)
+	}
+	return nil
 }
 
 // The CreateJobResponse structure.
@@ -2450,10 +2567,15 @@ func (s CreateJobResponse) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetJob sets the Job field's value.
-func (s *CreateJobResponse) SetJob(v *Job) *CreateJobResponse {
-	s.Job = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateJobResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Job != nil {
+		v := s.Job
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Job", v, metadata)
+	}
+	return nil
 }
 
 // The CreatePipelineRequest structure.
@@ -2718,52 +2840,58 @@ func (s *CreatePipelineInput) Validate() error {
 	return nil
 }
 
-// SetAwsKmsKeyArn sets the AwsKmsKeyArn field's value.
-func (s *CreatePipelineInput) SetAwsKmsKeyArn(v string) *CreatePipelineInput {
-	s.AwsKmsKeyArn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetContentConfig sets the ContentConfig field's value.
-func (s *CreatePipelineInput) SetContentConfig(v *PipelineOutputConfig) *CreatePipelineInput {
-	s.ContentConfig = v
-	return s
-}
+	if s.AwsKmsKeyArn != nil {
+		v := *s.AwsKmsKeyArn
 
-// SetInputBucket sets the InputBucket field's value.
-func (s *CreatePipelineInput) SetInputBucket(v string) *CreatePipelineInput {
-	s.InputBucket = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AwsKmsKeyArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentConfig != nil {
+		v := s.ContentConfig
 
-// SetName sets the Name field's value.
-func (s *CreatePipelineInput) SetName(v string) *CreatePipelineInput {
-	s.Name = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ContentConfig", v, metadata)
+	}
+	if s.InputBucket != nil {
+		v := *s.InputBucket
 
-// SetNotifications sets the Notifications field's value.
-func (s *CreatePipelineInput) SetNotifications(v *Notifications) *CreatePipelineInput {
-	s.Notifications = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
 
-// SetOutputBucket sets the OutputBucket field's value.
-func (s *CreatePipelineInput) SetOutputBucket(v string) *CreatePipelineInput {
-	s.OutputBucket = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Notifications != nil {
+		v := s.Notifications
 
-// SetRole sets the Role field's value.
-func (s *CreatePipelineInput) SetRole(v string) *CreatePipelineInput {
-	s.Role = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Notifications", v, metadata)
+	}
+	if s.OutputBucket != nil {
+		v := *s.OutputBucket
 
-// SetThumbnailConfig sets the ThumbnailConfig field's value.
-func (s *CreatePipelineInput) SetThumbnailConfig(v *PipelineOutputConfig) *CreatePipelineInput {
-	s.ThumbnailConfig = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Role != nil {
+		v := *s.Role
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThumbnailConfig != nil {
+		v := s.ThumbnailConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ThumbnailConfig", v, metadata)
+	}
+	return nil
 }
 
 // When you create a pipeline, Elastic Transcoder returns the values that you
@@ -2801,16 +2929,27 @@ func (s CreatePipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPipeline sets the Pipeline field's value.
-func (s *CreatePipelineOutput) SetPipeline(v *Pipeline) *CreatePipelineOutput {
-	s.Pipeline = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pipeline != nil {
+		v := s.Pipeline
 
-// SetWarnings sets the Warnings field's value.
-func (s *CreatePipelineOutput) SetWarnings(v []Warning) *CreatePipelineOutput {
-	s.Warnings = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
+	}
+	if len(s.Warnings) > 0 {
+		v := s.Warnings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Warnings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The CreatePresetRequest structure.
@@ -2879,40 +3018,46 @@ func (s *CreatePresetInput) Validate() error {
 	return nil
 }
 
-// SetAudio sets the Audio field's value.
-func (s *CreatePresetInput) SetAudio(v *AudioParameters) *CreatePresetInput {
-	s.Audio = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetContainer sets the Container field's value.
-func (s *CreatePresetInput) SetContainer(v string) *CreatePresetInput {
-	s.Container = &v
-	return s
-}
+	if s.Audio != nil {
+		v := s.Audio
 
-// SetDescription sets the Description field's value.
-func (s *CreatePresetInput) SetDescription(v string) *CreatePresetInput {
-	s.Description = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Audio", v, metadata)
+	}
+	if s.Container != nil {
+		v := *s.Container
 
-// SetName sets the Name field's value.
-func (s *CreatePresetInput) SetName(v string) *CreatePresetInput {
-	s.Name = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Container", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
 
-// SetThumbnails sets the Thumbnails field's value.
-func (s *CreatePresetInput) SetThumbnails(v *Thumbnails) *CreatePresetInput {
-	s.Thumbnails = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
 
-// SetVideo sets the Video field's value.
-func (s *CreatePresetInput) SetVideo(v *VideoParameters) *CreatePresetInput {
-	s.Video = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Thumbnails != nil {
+		v := s.Thumbnails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Thumbnails", v, metadata)
+	}
+	if s.Video != nil {
+		v := s.Video
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Video", v, metadata)
+	}
+	return nil
 }
 
 // The CreatePresetResponse structure.
@@ -2947,16 +3092,21 @@ func (s CreatePresetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPreset sets the Preset field's value.
-func (s *CreatePresetOutput) SetPreset(v *Preset) *CreatePresetOutput {
-	s.Preset = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Preset != nil {
+		v := s.Preset
 
-// SetWarning sets the Warning field's value.
-func (s *CreatePresetOutput) SetWarning(v string) *CreatePresetOutput {
-	s.Warning = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Preset", v, metadata)
+	}
+	if s.Warning != nil {
+		v := *s.Warning
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Warning", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The DeletePipelineRequest structure.
@@ -2993,10 +3143,16 @@ func (s *DeletePipelineInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DeletePipelineInput) SetId(v string) *DeletePipelineInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The DeletePipelineResponse structure.
@@ -3019,6 +3175,11 @@ func (s DeletePipelineOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeletePipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The DeletePresetRequest structure.
@@ -3055,10 +3216,16 @@ func (s *DeletePresetInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DeletePresetInput) SetId(v string) *DeletePresetInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePresetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The DeletePresetResponse structure.
@@ -3081,6 +3248,11 @@ func (s DeletePresetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeletePresetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The detected properties of the input file. Elastic Transcoder identifies
@@ -3114,34 +3286,39 @@ func (s DetectedProperties) GoString() string {
 	return s.String()
 }
 
-// SetDurationMillis sets the DurationMillis field's value.
-func (s *DetectedProperties) SetDurationMillis(v int64) *DetectedProperties {
-	s.DurationMillis = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DetectedProperties) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DurationMillis != nil {
+		v := *s.DurationMillis
 
-// SetFileSize sets the FileSize field's value.
-func (s *DetectedProperties) SetFileSize(v int64) *DetectedProperties {
-	s.FileSize = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DurationMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.FileSize != nil {
+		v := *s.FileSize
 
-// SetFrameRate sets the FrameRate field's value.
-func (s *DetectedProperties) SetFrameRate(v string) *DetectedProperties {
-	s.FrameRate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FileSize", protocol.Int64Value(v), metadata)
+	}
+	if s.FrameRate != nil {
+		v := *s.FrameRate
 
-// SetHeight sets the Height field's value.
-func (s *DetectedProperties) SetHeight(v int64) *DetectedProperties {
-	s.Height = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FrameRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Height != nil {
+		v := *s.Height
 
-// SetWidth sets the Width field's value.
-func (s *DetectedProperties) SetWidth(v int64) *DetectedProperties {
-	s.Width = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Height", protocol.Int64Value(v), metadata)
+	}
+	if s.Width != nil {
+		v := *s.Width
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Width", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The encryption settings, if any, that are used for decrypting your input
@@ -3223,28 +3400,33 @@ func (s Encryption) GoString() string {
 	return s.String()
 }
 
-// SetInitializationVector sets the InitializationVector field's value.
-func (s *Encryption) SetInitializationVector(v string) *Encryption {
-	s.InitializationVector = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Encryption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InitializationVector != nil {
+		v := *s.InitializationVector
 
-// SetKey sets the Key field's value.
-func (s *Encryption) SetKey(v string) *Encryption {
-	s.Key = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InitializationVector", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
 
-// SetKeyMd5 sets the KeyMd5 field's value.
-func (s *Encryption) SetKeyMd5(v string) *Encryption {
-	s.KeyMd5 = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyMd5 != nil {
+		v := *s.KeyMd5
 
-// SetMode sets the Mode field's value.
-func (s *Encryption) SetMode(v string) *Encryption {
-	s.Mode = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyMd5", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Mode != nil {
+		v := *s.Mode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Mode", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The HLS content protection settings, if any, that you want Elastic Transcoder
@@ -3308,40 +3490,45 @@ func (s HlsContentProtection) GoString() string {
 	return s.String()
 }
 
-// SetInitializationVector sets the InitializationVector field's value.
-func (s *HlsContentProtection) SetInitializationVector(v string) *HlsContentProtection {
-	s.InitializationVector = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HlsContentProtection) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InitializationVector != nil {
+		v := *s.InitializationVector
 
-// SetKey sets the Key field's value.
-func (s *HlsContentProtection) SetKey(v string) *HlsContentProtection {
-	s.Key = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InitializationVector", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
 
-// SetKeyMd5 sets the KeyMd5 field's value.
-func (s *HlsContentProtection) SetKeyMd5(v string) *HlsContentProtection {
-	s.KeyMd5 = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyMd5 != nil {
+		v := *s.KeyMd5
 
-// SetKeyStoragePolicy sets the KeyStoragePolicy field's value.
-func (s *HlsContentProtection) SetKeyStoragePolicy(v string) *HlsContentProtection {
-	s.KeyStoragePolicy = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyMd5", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyStoragePolicy != nil {
+		v := *s.KeyStoragePolicy
 
-// SetLicenseAcquisitionUrl sets the LicenseAcquisitionUrl field's value.
-func (s *HlsContentProtection) SetLicenseAcquisitionUrl(v string) *HlsContentProtection {
-	s.LicenseAcquisitionUrl = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyStoragePolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LicenseAcquisitionUrl != nil {
+		v := *s.LicenseAcquisitionUrl
 
-// SetMethod sets the Method field's value.
-func (s *HlsContentProtection) SetMethod(v string) *HlsContentProtection {
-	s.Method = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LicenseAcquisitionUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Method != nil {
+		v := *s.Method
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Method", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The captions to be created, if any.
@@ -3401,16 +3588,27 @@ func (s *InputCaptions) Validate() error {
 	return nil
 }
 
-// SetCaptionSources sets the CaptionSources field's value.
-func (s *InputCaptions) SetCaptionSources(v []CaptionSource) *InputCaptions {
-	s.CaptionSources = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputCaptions) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CaptionSources) > 0 {
+		v := s.CaptionSources
 
-// SetMergePolicy sets the MergePolicy field's value.
-func (s *InputCaptions) SetMergePolicy(v string) *InputCaptions {
-	s.MergePolicy = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CaptionSources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MergePolicy != nil {
+		v := *s.MergePolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MergePolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // A section of the response body that provides information about the job that
@@ -3508,76 +3706,105 @@ func (s Job) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Job) SetArn(v string) *Job {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Job) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetId sets the Id field's value.
-func (s *Job) SetId(v string) *Job {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetInput sets the Input field's value.
-func (s *Job) SetInput(v *JobInput) *Job {
-	s.Input = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Input != nil {
+		v := s.Input
 
-// SetInputs sets the Inputs field's value.
-func (s *Job) SetInputs(v []JobInput) *Job {
-	s.Inputs = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Input", v, metadata)
+	}
+	if len(s.Inputs) > 0 {
+		v := s.Inputs
 
-// SetOutput sets the Output field's value.
-func (s *Job) SetOutput(v *JobOutput) *Job {
-	s.Output = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Inputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetOutputKeyPrefix sets the OutputKeyPrefix field's value.
-func (s *Job) SetOutputKeyPrefix(v string) *Job {
-	s.OutputKeyPrefix = &v
-	return s
-}
+	}
+	if s.Output != nil {
+		v := s.Output
 
-// SetOutputs sets the Outputs field's value.
-func (s *Job) SetOutputs(v []JobOutput) *Job {
-	s.Outputs = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Output", v, metadata)
+	}
+	if s.OutputKeyPrefix != nil {
+		v := *s.OutputKeyPrefix
 
-// SetPipelineId sets the PipelineId field's value.
-func (s *Job) SetPipelineId(v string) *Job {
-	s.PipelineId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputKeyPrefix", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Outputs) > 0 {
+		v := s.Outputs
 
-// SetPlaylists sets the Playlists field's value.
-func (s *Job) SetPlaylists(v []Playlist) *Job {
-	s.Playlists = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Outputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetStatus sets the Status field's value.
-func (s *Job) SetStatus(v string) *Job {
-	s.Status = &v
-	return s
-}
+	}
+	if s.PipelineId != nil {
+		v := *s.PipelineId
 
-// SetTiming sets the Timing field's value.
-func (s *Job) SetTiming(v *Timing) *Job {
-	s.Timing = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Playlists) > 0 {
+		v := s.Playlists
 
-// SetUserMetadata sets the UserMetadata field's value.
-func (s *Job) SetUserMetadata(v map[string]string) *Job {
-	s.UserMetadata = v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Playlists", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Timing != nil {
+		v := s.Timing
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Timing", v, metadata)
+	}
+	if len(s.UserMetadata) > 0 {
+		v := s.UserMetadata
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "UserMetadata", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
 }
 
 // The .jpg or .png file associated with an audio file.
@@ -3631,16 +3858,27 @@ func (s *JobAlbumArt) Validate() error {
 	return nil
 }
 
-// SetArtwork sets the Artwork field's value.
-func (s *JobAlbumArt) SetArtwork(v []Artwork) *JobAlbumArt {
-	s.Artwork = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobAlbumArt) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Artwork) > 0 {
+		v := s.Artwork
 
-// SetMergePolicy sets the MergePolicy field's value.
-func (s *JobAlbumArt) SetMergePolicy(v string) *JobAlbumArt {
-	s.MergePolicy = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Artwork", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MergePolicy != nil {
+		v := *s.MergePolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MergePolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information about the file that you're transcoding.
@@ -3785,64 +4023,69 @@ func (s *JobInput) Validate() error {
 	return nil
 }
 
-// SetAspectRatio sets the AspectRatio field's value.
-func (s *JobInput) SetAspectRatio(v string) *JobInput {
-	s.AspectRatio = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobInput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AspectRatio != nil {
+		v := *s.AspectRatio
 
-// SetContainer sets the Container field's value.
-func (s *JobInput) SetContainer(v string) *JobInput {
-	s.Container = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AspectRatio", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Container != nil {
+		v := *s.Container
 
-// SetDetectedProperties sets the DetectedProperties field's value.
-func (s *JobInput) SetDetectedProperties(v *DetectedProperties) *JobInput {
-	s.DetectedProperties = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Container", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectedProperties != nil {
+		v := s.DetectedProperties
 
-// SetEncryption sets the Encryption field's value.
-func (s *JobInput) SetEncryption(v *Encryption) *JobInput {
-	s.Encryption = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DetectedProperties", v, metadata)
+	}
+	if s.Encryption != nil {
+		v := s.Encryption
 
-// SetFrameRate sets the FrameRate field's value.
-func (s *JobInput) SetFrameRate(v string) *JobInput {
-	s.FrameRate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.FrameRate != nil {
+		v := *s.FrameRate
 
-// SetInputCaptions sets the InputCaptions field's value.
-func (s *JobInput) SetInputCaptions(v *InputCaptions) *JobInput {
-	s.InputCaptions = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FrameRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InputCaptions != nil {
+		v := s.InputCaptions
 
-// SetInterlaced sets the Interlaced field's value.
-func (s *JobInput) SetInterlaced(v string) *JobInput {
-	s.Interlaced = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InputCaptions", v, metadata)
+	}
+	if s.Interlaced != nil {
+		v := *s.Interlaced
 
-// SetKey sets the Key field's value.
-func (s *JobInput) SetKey(v string) *JobInput {
-	s.Key = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Interlaced", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
 
-// SetResolution sets the Resolution field's value.
-func (s *JobInput) SetResolution(v string) *JobInput {
-	s.Resolution = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Resolution != nil {
+		v := *s.Resolution
 
-// SetTimeSpan sets the TimeSpan field's value.
-func (s *JobInput) SetTimeSpan(v *TimeSpan) *JobInput {
-	s.TimeSpan = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Resolution", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TimeSpan != nil {
+		v := s.TimeSpan
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TimeSpan", v, metadata)
+	}
+	return nil
 }
 
 // Outputs recommended instead.
@@ -4073,130 +4316,147 @@ func (s JobOutput) GoString() string {
 	return s.String()
 }
 
-// SetAlbumArt sets the AlbumArt field's value.
-func (s *JobOutput) SetAlbumArt(v *JobAlbumArt) *JobOutput {
-	s.AlbumArt = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AlbumArt != nil {
+		v := s.AlbumArt
 
-// SetAppliedColorSpaceConversion sets the AppliedColorSpaceConversion field's value.
-func (s *JobOutput) SetAppliedColorSpaceConversion(v string) *JobOutput {
-	s.AppliedColorSpaceConversion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AlbumArt", v, metadata)
+	}
+	if s.AppliedColorSpaceConversion != nil {
+		v := *s.AppliedColorSpaceConversion
 
-// SetCaptions sets the Captions field's value.
-func (s *JobOutput) SetCaptions(v *Captions) *JobOutput {
-	s.Captions = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AppliedColorSpaceConversion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Captions != nil {
+		v := s.Captions
 
-// SetComposition sets the Composition field's value.
-func (s *JobOutput) SetComposition(v []Clip) *JobOutput {
-	s.Composition = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Captions", v, metadata)
+	}
+	if len(s.Composition) > 0 {
+		v := s.Composition
 
-// SetDuration sets the Duration field's value.
-func (s *JobOutput) SetDuration(v int64) *JobOutput {
-	s.Duration = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Composition", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetDurationMillis sets the DurationMillis field's value.
-func (s *JobOutput) SetDurationMillis(v int64) *JobOutput {
-	s.DurationMillis = &v
-	return s
-}
+	}
+	if s.Duration != nil {
+		v := *s.Duration
 
-// SetEncryption sets the Encryption field's value.
-func (s *JobOutput) SetEncryption(v *Encryption) *JobOutput {
-	s.Encryption = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), metadata)
+	}
+	if s.DurationMillis != nil {
+		v := *s.DurationMillis
 
-// SetFileSize sets the FileSize field's value.
-func (s *JobOutput) SetFileSize(v int64) *JobOutput {
-	s.FileSize = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DurationMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.Encryption != nil {
+		v := s.Encryption
 
-// SetFrameRate sets the FrameRate field's value.
-func (s *JobOutput) SetFrameRate(v string) *JobOutput {
-	s.FrameRate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.FileSize != nil {
+		v := *s.FileSize
 
-// SetHeight sets the Height field's value.
-func (s *JobOutput) SetHeight(v int64) *JobOutput {
-	s.Height = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FileSize", protocol.Int64Value(v), metadata)
+	}
+	if s.FrameRate != nil {
+		v := *s.FrameRate
 
-// SetId sets the Id field's value.
-func (s *JobOutput) SetId(v string) *JobOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FrameRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Height != nil {
+		v := *s.Height
 
-// SetKey sets the Key field's value.
-func (s *JobOutput) SetKey(v string) *JobOutput {
-	s.Key = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Height", protocol.Int64Value(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetPresetId sets the PresetId field's value.
-func (s *JobOutput) SetPresetId(v string) *JobOutput {
-	s.PresetId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
 
-// SetRotate sets the Rotate field's value.
-func (s *JobOutput) SetRotate(v string) *JobOutput {
-	s.Rotate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PresetId != nil {
+		v := *s.PresetId
 
-// SetSegmentDuration sets the SegmentDuration field's value.
-func (s *JobOutput) SetSegmentDuration(v string) *JobOutput {
-	s.SegmentDuration = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PresetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Rotate != nil {
+		v := *s.Rotate
 
-// SetStatus sets the Status field's value.
-func (s *JobOutput) SetStatus(v string) *JobOutput {
-	s.Status = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Rotate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SegmentDuration != nil {
+		v := *s.SegmentDuration
 
-// SetStatusDetail sets the StatusDetail field's value.
-func (s *JobOutput) SetStatusDetail(v string) *JobOutput {
-	s.StatusDetail = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SegmentDuration", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
 
-// SetThumbnailEncryption sets the ThumbnailEncryption field's value.
-func (s *JobOutput) SetThumbnailEncryption(v *Encryption) *JobOutput {
-	s.ThumbnailEncryption = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StatusDetail != nil {
+		v := *s.StatusDetail
 
-// SetThumbnailPattern sets the ThumbnailPattern field's value.
-func (s *JobOutput) SetThumbnailPattern(v string) *JobOutput {
-	s.ThumbnailPattern = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StatusDetail", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThumbnailEncryption != nil {
+		v := s.ThumbnailEncryption
 
-// SetWatermarks sets the Watermarks field's value.
-func (s *JobOutput) SetWatermarks(v []JobWatermark) *JobOutput {
-	s.Watermarks = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ThumbnailEncryption", v, metadata)
+	}
+	if s.ThumbnailPattern != nil {
+		v := *s.ThumbnailPattern
 
-// SetWidth sets the Width field's value.
-func (s *JobOutput) SetWidth(v int64) *JobOutput {
-	s.Width = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThumbnailPattern", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Watermarks) > 0 {
+		v := s.Watermarks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Watermarks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Width != nil {
+		v := *s.Width
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Width", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Watermarks can be in .png or .jpg format. If you want to display a watermark
@@ -4251,22 +4511,27 @@ func (s *JobWatermark) Validate() error {
 	return nil
 }
 
-// SetEncryption sets the Encryption field's value.
-func (s *JobWatermark) SetEncryption(v *Encryption) *JobWatermark {
-	s.Encryption = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobWatermark) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Encryption != nil {
+		v := s.Encryption
 
-// SetInputKey sets the InputKey field's value.
-func (s *JobWatermark) SetInputKey(v string) *JobWatermark {
-	s.InputKey = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.InputKey != nil {
+		v := *s.InputKey
 
-// SetPresetWatermarkId sets the PresetWatermarkId field's value.
-func (s *JobWatermark) SetPresetWatermarkId(v string) *JobWatermark {
-	s.PresetWatermarkId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputKey", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PresetWatermarkId != nil {
+		v := *s.PresetWatermarkId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PresetWatermarkId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ListJobsByPipelineRequest structure.
@@ -4311,22 +4576,28 @@ func (s *ListJobsByPipelineInput) Validate() error {
 	return nil
 }
 
-// SetAscending sets the Ascending field's value.
-func (s *ListJobsByPipelineInput) SetAscending(v string) *ListJobsByPipelineInput {
-	s.Ascending = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListJobsByPipelineInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetPageToken sets the PageToken field's value.
-func (s *ListJobsByPipelineInput) SetPageToken(v string) *ListJobsByPipelineInput {
-	s.PageToken = &v
-	return s
-}
+	if s.PipelineId != nil {
+		v := *s.PipelineId
 
-// SetPipelineId sets the PipelineId field's value.
-func (s *ListJobsByPipelineInput) SetPipelineId(v string) *ListJobsByPipelineInput {
-	s.PipelineId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Ascending != nil {
+		v := *s.Ascending
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PageToken != nil {
+		v := *s.PageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ListJobsByPipelineResponse structure.
@@ -4359,16 +4630,27 @@ func (s ListJobsByPipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetJobs sets the Jobs field's value.
-func (s *ListJobsByPipelineOutput) SetJobs(v []Job) *ListJobsByPipelineOutput {
-	s.Jobs = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListJobsByPipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Jobs) > 0 {
+		v := s.Jobs
 
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListJobsByPipelineOutput) SetNextPageToken(v string) *ListJobsByPipelineOutput {
-	s.NextPageToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Jobs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextPageToken != nil {
+		v := *s.NextPageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ListJobsByStatusRequest structure.
@@ -4415,22 +4697,28 @@ func (s *ListJobsByStatusInput) Validate() error {
 	return nil
 }
 
-// SetAscending sets the Ascending field's value.
-func (s *ListJobsByStatusInput) SetAscending(v string) *ListJobsByStatusInput {
-	s.Ascending = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListJobsByStatusInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetPageToken sets the PageToken field's value.
-func (s *ListJobsByStatusInput) SetPageToken(v string) *ListJobsByStatusInput {
-	s.PageToken = &v
-	return s
-}
+	if s.Status != nil {
+		v := *s.Status
 
-// SetStatus sets the Status field's value.
-func (s *ListJobsByStatusInput) SetStatus(v string) *ListJobsByStatusInput {
-	s.Status = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Ascending != nil {
+		v := *s.Ascending
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PageToken != nil {
+		v := *s.PageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ListJobsByStatusResponse structure.
@@ -4463,16 +4751,27 @@ func (s ListJobsByStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetJobs sets the Jobs field's value.
-func (s *ListJobsByStatusOutput) SetJobs(v []Job) *ListJobsByStatusOutput {
-	s.Jobs = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListJobsByStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Jobs) > 0 {
+		v := s.Jobs
 
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListJobsByStatusOutput) SetNextPageToken(v string) *ListJobsByStatusOutput {
-	s.NextPageToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Jobs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextPageToken != nil {
+		v := *s.NextPageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ListPipelineRequest structure.
@@ -4499,16 +4798,22 @@ func (s ListPipelinesInput) GoString() string {
 	return s.String()
 }
 
-// SetAscending sets the Ascending field's value.
-func (s *ListPipelinesInput) SetAscending(v string) *ListPipelinesInput {
-	s.Ascending = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPipelinesInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetPageToken sets the PageToken field's value.
-func (s *ListPipelinesInput) SetPageToken(v string) *ListPipelinesInput {
-	s.PageToken = &v
-	return s
+	if s.Ascending != nil {
+		v := *s.Ascending
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PageToken != nil {
+		v := *s.PageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // A list of the pipelines associated with the current AWS account.
@@ -4541,16 +4846,27 @@ func (s ListPipelinesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListPipelinesOutput) SetNextPageToken(v string) *ListPipelinesOutput {
-	s.NextPageToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPipelinesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextPageToken != nil {
+		v := *s.NextPageToken
 
-// SetPipelines sets the Pipelines field's value.
-func (s *ListPipelinesOutput) SetPipelines(v []Pipeline) *ListPipelinesOutput {
-	s.Pipelines = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Pipelines) > 0 {
+		v := s.Pipelines
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Pipelines", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The ListPresetsRequest structure.
@@ -4577,16 +4893,22 @@ func (s ListPresetsInput) GoString() string {
 	return s.String()
 }
 
-// SetAscending sets the Ascending field's value.
-func (s *ListPresetsInput) SetAscending(v string) *ListPresetsInput {
-	s.Ascending = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPresetsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetPageToken sets the PageToken field's value.
-func (s *ListPresetsInput) SetPageToken(v string) *ListPresetsInput {
-	s.PageToken = &v
-	return s
+	if s.Ascending != nil {
+		v := *s.Ascending
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PageToken != nil {
+		v := *s.PageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ListPresetsResponse structure.
@@ -4619,16 +4941,27 @@ func (s ListPresetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextPageToken sets the NextPageToken field's value.
-func (s *ListPresetsOutput) SetNextPageToken(v string) *ListPresetsOutput {
-	s.NextPageToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPresetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextPageToken != nil {
+		v := *s.NextPageToken
 
-// SetPresets sets the Presets field's value.
-func (s *ListPresetsOutput) SetPresets(v []Preset) *ListPresetsOutput {
-	s.Presets = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Presets) > 0 {
+		v := s.Presets
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Presets", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify
@@ -4666,28 +4999,33 @@ func (s Notifications) GoString() string {
 	return s.String()
 }
 
-// SetCompleted sets the Completed field's value.
-func (s *Notifications) SetCompleted(v string) *Notifications {
-	s.Completed = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Notifications) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Completed != nil {
+		v := *s.Completed
 
-// SetError sets the Error field's value.
-func (s *Notifications) SetError(v string) *Notifications {
-	s.Error = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Completed", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Error != nil {
+		v := *s.Error
 
-// SetProgressing sets the Progressing field's value.
-func (s *Notifications) SetProgressing(v string) *Notifications {
-	s.Progressing = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Error", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Progressing != nil {
+		v := *s.Progressing
 
-// SetWarning sets the Warning field's value.
-func (s *Notifications) SetWarning(v string) *Notifications {
-	s.Warning = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Progressing", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Warning != nil {
+		v := *s.Warning
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Warning", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The Permission structure.
@@ -4754,22 +5092,33 @@ func (s *Permission) Validate() error {
 	return nil
 }
 
-// SetAccess sets the Access field's value.
-func (s *Permission) SetAccess(v []string) *Permission {
-	s.Access = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Permission) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Access) > 0 {
+		v := s.Access
 
-// SetGrantee sets the Grantee field's value.
-func (s *Permission) SetGrantee(v string) *Permission {
-	s.Grantee = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Access", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
 
-// SetGranteeType sets the GranteeType field's value.
-func (s *Permission) SetGranteeType(v string) *Permission {
-	s.GranteeType = &v
-	return s
+	}
+	if s.Grantee != nil {
+		v := *s.Grantee
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Grantee", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GranteeType != nil {
+		v := *s.GranteeType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GranteeType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The pipeline (queue) that is used to manage jobs.
@@ -4941,70 +5290,75 @@ func (s Pipeline) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Pipeline) SetArn(v string) *Pipeline {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Pipeline) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetAwsKmsKeyArn sets the AwsKmsKeyArn field's value.
-func (s *Pipeline) SetAwsKmsKeyArn(v string) *Pipeline {
-	s.AwsKmsKeyArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AwsKmsKeyArn != nil {
+		v := *s.AwsKmsKeyArn
 
-// SetContentConfig sets the ContentConfig field's value.
-func (s *Pipeline) SetContentConfig(v *PipelineOutputConfig) *Pipeline {
-	s.ContentConfig = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AwsKmsKeyArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentConfig != nil {
+		v := s.ContentConfig
 
-// SetId sets the Id field's value.
-func (s *Pipeline) SetId(v string) *Pipeline {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ContentConfig", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetInputBucket sets the InputBucket field's value.
-func (s *Pipeline) SetInputBucket(v string) *Pipeline {
-	s.InputBucket = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InputBucket != nil {
+		v := *s.InputBucket
 
-// SetName sets the Name field's value.
-func (s *Pipeline) SetName(v string) *Pipeline {
-	s.Name = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
 
-// SetNotifications sets the Notifications field's value.
-func (s *Pipeline) SetNotifications(v *Notifications) *Pipeline {
-	s.Notifications = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Notifications != nil {
+		v := s.Notifications
 
-// SetOutputBucket sets the OutputBucket field's value.
-func (s *Pipeline) SetOutputBucket(v string) *Pipeline {
-	s.OutputBucket = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Notifications", v, metadata)
+	}
+	if s.OutputBucket != nil {
+		v := *s.OutputBucket
 
-// SetRole sets the Role field's value.
-func (s *Pipeline) SetRole(v string) *Pipeline {
-	s.Role = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Role != nil {
+		v := *s.Role
 
-// SetStatus sets the Status field's value.
-func (s *Pipeline) SetStatus(v string) *Pipeline {
-	s.Status = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
 
-// SetThumbnailConfig sets the ThumbnailConfig field's value.
-func (s *Pipeline) SetThumbnailConfig(v *PipelineOutputConfig) *Pipeline {
-	s.ThumbnailConfig = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThumbnailConfig != nil {
+		v := s.ThumbnailConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ThumbnailConfig", v, metadata)
+	}
+	return nil
 }
 
 // The PipelineOutputConfig structure.
@@ -5080,22 +5434,33 @@ func (s *PipelineOutputConfig) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *PipelineOutputConfig) SetBucket(v string) *PipelineOutputConfig {
-	s.Bucket = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PipelineOutputConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bucket != nil {
+		v := *s.Bucket
 
-// SetPermissions sets the Permissions field's value.
-func (s *PipelineOutputConfig) SetPermissions(v []Permission) *PipelineOutputConfig {
-	s.Permissions = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Bucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Permissions) > 0 {
+		v := s.Permissions
 
-// SetStorageClass sets the StorageClass field's value.
-func (s *PipelineOutputConfig) SetStorageClass(v string) *PipelineOutputConfig {
-	s.StorageClass = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Permissions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.StorageClass != nil {
+		v := *s.StorageClass
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StorageClass", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The PlayReady DRM settings, if any, that you want Elastic Transcoder to apply
@@ -5173,40 +5538,45 @@ func (s *PlayReadyDrm) Validate() error {
 	return nil
 }
 
-// SetFormat sets the Format field's value.
-func (s *PlayReadyDrm) SetFormat(v string) *PlayReadyDrm {
-	s.Format = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PlayReadyDrm) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Format != nil {
+		v := *s.Format
 
-// SetInitializationVector sets the InitializationVector field's value.
-func (s *PlayReadyDrm) SetInitializationVector(v string) *PlayReadyDrm {
-	s.InitializationVector = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InitializationVector != nil {
+		v := *s.InitializationVector
 
-// SetKey sets the Key field's value.
-func (s *PlayReadyDrm) SetKey(v string) *PlayReadyDrm {
-	s.Key = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InitializationVector", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
 
-// SetKeyId sets the KeyId field's value.
-func (s *PlayReadyDrm) SetKeyId(v string) *PlayReadyDrm {
-	s.KeyId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyId != nil {
+		v := *s.KeyId
 
-// SetKeyMd5 sets the KeyMd5 field's value.
-func (s *PlayReadyDrm) SetKeyMd5(v string) *PlayReadyDrm {
-	s.KeyMd5 = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyMd5 != nil {
+		v := *s.KeyMd5
 
-// SetLicenseAcquisitionUrl sets the LicenseAcquisitionUrl field's value.
-func (s *PlayReadyDrm) SetLicenseAcquisitionUrl(v string) *PlayReadyDrm {
-	s.LicenseAcquisitionUrl = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyMd5", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LicenseAcquisitionUrl != nil {
+		v := *s.LicenseAcquisitionUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LicenseAcquisitionUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Use Only for Fragmented MP4 or MPEG-TS Outputs. If you specify a preset for
@@ -5296,46 +5666,57 @@ func (s Playlist) GoString() string {
 	return s.String()
 }
 
-// SetFormat sets the Format field's value.
-func (s *Playlist) SetFormat(v string) *Playlist {
-	s.Format = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Playlist) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Format != nil {
+		v := *s.Format
 
-// SetHlsContentProtection sets the HlsContentProtection field's value.
-func (s *Playlist) SetHlsContentProtection(v *HlsContentProtection) *Playlist {
-	s.HlsContentProtection = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsContentProtection != nil {
+		v := s.HlsContentProtection
 
-// SetName sets the Name field's value.
-func (s *Playlist) SetName(v string) *Playlist {
-	s.Name = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HlsContentProtection", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
 
-// SetOutputKeys sets the OutputKeys field's value.
-func (s *Playlist) SetOutputKeys(v []string) *Playlist {
-	s.OutputKeys = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.OutputKeys) > 0 {
+		v := s.OutputKeys
 
-// SetPlayReadyDrm sets the PlayReadyDrm field's value.
-func (s *Playlist) SetPlayReadyDrm(v *PlayReadyDrm) *Playlist {
-	s.PlayReadyDrm = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "OutputKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
 
-// SetStatus sets the Status field's value.
-func (s *Playlist) SetStatus(v string) *Playlist {
-	s.Status = &v
-	return s
-}
+	}
+	if s.PlayReadyDrm != nil {
+		v := s.PlayReadyDrm
 
-// SetStatusDetail sets the StatusDetail field's value.
-func (s *Playlist) SetStatusDetail(v string) *Playlist {
-	s.StatusDetail = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PlayReadyDrm", v, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StatusDetail != nil {
+		v := *s.StatusDetail
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StatusDetail", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Presets are templates that contain most of the settings for transcoding media
@@ -5391,58 +5772,63 @@ func (s Preset) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Preset) SetArn(v string) *Preset {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Preset) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetAudio sets the Audio field's value.
-func (s *Preset) SetAudio(v *AudioParameters) *Preset {
-	s.Audio = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Audio != nil {
+		v := s.Audio
 
-// SetContainer sets the Container field's value.
-func (s *Preset) SetContainer(v string) *Preset {
-	s.Container = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Audio", v, metadata)
+	}
+	if s.Container != nil {
+		v := *s.Container
 
-// SetDescription sets the Description field's value.
-func (s *Preset) SetDescription(v string) *Preset {
-	s.Description = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Container", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
 
-// SetId sets the Id field's value.
-func (s *Preset) SetId(v string) *Preset {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetName sets the Name field's value.
-func (s *Preset) SetName(v string) *Preset {
-	s.Name = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
 
-// SetThumbnails sets the Thumbnails field's value.
-func (s *Preset) SetThumbnails(v *Thumbnails) *Preset {
-	s.Thumbnails = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Thumbnails != nil {
+		v := s.Thumbnails
 
-// SetType sets the Type field's value.
-func (s *Preset) SetType(v string) *Preset {
-	s.Type = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Thumbnails", v, metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
 
-// SetVideo sets the Video field's value.
-func (s *Preset) SetVideo(v *VideoParameters) *Preset {
-	s.Video = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Video != nil {
+		v := s.Video
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Video", v, metadata)
+	}
+	return nil
 }
 
 // Settings for the size, location, and opacity of graphics that you want Elastic
@@ -5633,64 +6019,69 @@ func (s *PresetWatermark) Validate() error {
 	return nil
 }
 
-// SetHorizontalAlign sets the HorizontalAlign field's value.
-func (s *PresetWatermark) SetHorizontalAlign(v string) *PresetWatermark {
-	s.HorizontalAlign = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PresetWatermark) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HorizontalAlign != nil {
+		v := *s.HorizontalAlign
 
-// SetHorizontalOffset sets the HorizontalOffset field's value.
-func (s *PresetWatermark) SetHorizontalOffset(v string) *PresetWatermark {
-	s.HorizontalOffset = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HorizontalAlign", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HorizontalOffset != nil {
+		v := *s.HorizontalOffset
 
-// SetId sets the Id field's value.
-func (s *PresetWatermark) SetId(v string) *PresetWatermark {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HorizontalOffset", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetMaxHeight sets the MaxHeight field's value.
-func (s *PresetWatermark) SetMaxHeight(v string) *PresetWatermark {
-	s.MaxHeight = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxHeight != nil {
+		v := *s.MaxHeight
 
-// SetMaxWidth sets the MaxWidth field's value.
-func (s *PresetWatermark) SetMaxWidth(v string) *PresetWatermark {
-	s.MaxWidth = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxHeight", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxWidth != nil {
+		v := *s.MaxWidth
 
-// SetOpacity sets the Opacity field's value.
-func (s *PresetWatermark) SetOpacity(v string) *PresetWatermark {
-	s.Opacity = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxWidth", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Opacity != nil {
+		v := *s.Opacity
 
-// SetSizingPolicy sets the SizingPolicy field's value.
-func (s *PresetWatermark) SetSizingPolicy(v string) *PresetWatermark {
-	s.SizingPolicy = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Opacity", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SizingPolicy != nil {
+		v := *s.SizingPolicy
 
-// SetTarget sets the Target field's value.
-func (s *PresetWatermark) SetTarget(v string) *PresetWatermark {
-	s.Target = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SizingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Target != nil {
+		v := *s.Target
 
-// SetVerticalAlign sets the VerticalAlign field's value.
-func (s *PresetWatermark) SetVerticalAlign(v string) *PresetWatermark {
-	s.VerticalAlign = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Target", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.VerticalAlign != nil {
+		v := *s.VerticalAlign
 
-// SetVerticalOffset sets the VerticalOffset field's value.
-func (s *PresetWatermark) SetVerticalOffset(v string) *PresetWatermark {
-	s.VerticalOffset = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VerticalAlign", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.VerticalOffset != nil {
+		v := *s.VerticalOffset
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VerticalOffset", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ReadJobRequest structure.
@@ -5727,10 +6118,16 @@ func (s *ReadJobInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *ReadJobInput) SetId(v string) *ReadJobInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadJobInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ReadJobResponse structure.
@@ -5758,10 +6155,15 @@ func (s ReadJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetJob sets the Job field's value.
-func (s *ReadJobOutput) SetJob(v *Job) *ReadJobOutput {
-	s.Job = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Job != nil {
+		v := s.Job
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Job", v, metadata)
+	}
+	return nil
 }
 
 // The ReadPipelineRequest structure.
@@ -5798,10 +6200,16 @@ func (s *ReadPipelineInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *ReadPipelineInput) SetId(v string) *ReadPipelineInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadPipelineInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ReadPipelineResponse structure.
@@ -5837,16 +6245,27 @@ func (s ReadPipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPipeline sets the Pipeline field's value.
-func (s *ReadPipelineOutput) SetPipeline(v *Pipeline) *ReadPipelineOutput {
-	s.Pipeline = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadPipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pipeline != nil {
+		v := s.Pipeline
 
-// SetWarnings sets the Warnings field's value.
-func (s *ReadPipelineOutput) SetWarnings(v []Warning) *ReadPipelineOutput {
-	s.Warnings = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
+	}
+	if len(s.Warnings) > 0 {
+		v := s.Warnings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Warnings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The ReadPresetRequest structure.
@@ -5883,10 +6302,16 @@ func (s *ReadPresetInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *ReadPresetInput) SetId(v string) *ReadPresetInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadPresetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ReadPresetResponse structure.
@@ -5914,10 +6339,15 @@ func (s ReadPresetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPreset sets the Preset field's value.
-func (s *ReadPresetOutput) SetPreset(v *Preset) *ReadPresetOutput {
-	s.Preset = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadPresetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Preset != nil {
+		v := s.Preset
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Preset", v, metadata)
+	}
+	return nil
 }
 
 // The TestRoleRequest structure.
@@ -5985,28 +6415,40 @@ func (s *TestRoleInput) Validate() error {
 	return nil
 }
 
-// SetInputBucket sets the InputBucket field's value.
-func (s *TestRoleInput) SetInputBucket(v string) *TestRoleInput {
-	s.InputBucket = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TestRoleInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetOutputBucket sets the OutputBucket field's value.
-func (s *TestRoleInput) SetOutputBucket(v string) *TestRoleInput {
-	s.OutputBucket = &v
-	return s
-}
+	if s.InputBucket != nil {
+		v := *s.InputBucket
 
-// SetRole sets the Role field's value.
-func (s *TestRoleInput) SetRole(v string) *TestRoleInput {
-	s.Role = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.OutputBucket != nil {
+		v := *s.OutputBucket
 
-// SetTopics sets the Topics field's value.
-func (s *TestRoleInput) SetTopics(v []string) *TestRoleInput {
-	s.Topics = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Role != nil {
+		v := *s.Role
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Topics) > 0 {
+		v := s.Topics
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Topics", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The TestRoleResponse structure.
@@ -6039,16 +6481,27 @@ func (s TestRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetMessages sets the Messages field's value.
-func (s *TestRoleOutput) SetMessages(v []string) *TestRoleOutput {
-	s.Messages = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TestRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Messages) > 0 {
+		v := s.Messages
 
-// SetSuccess sets the Success field's value.
-func (s *TestRoleOutput) SetSuccess(v string) *TestRoleOutput {
-	s.Success = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Messages", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Success != nil {
+		v := *s.Success
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Success", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Thumbnails for videos.
@@ -6146,52 +6599,57 @@ func (s Thumbnails) GoString() string {
 	return s.String()
 }
 
-// SetAspectRatio sets the AspectRatio field's value.
-func (s *Thumbnails) SetAspectRatio(v string) *Thumbnails {
-	s.AspectRatio = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Thumbnails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AspectRatio != nil {
+		v := *s.AspectRatio
 
-// SetFormat sets the Format field's value.
-func (s *Thumbnails) SetFormat(v string) *Thumbnails {
-	s.Format = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AspectRatio", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Format != nil {
+		v := *s.Format
 
-// SetInterval sets the Interval field's value.
-func (s *Thumbnails) SetInterval(v string) *Thumbnails {
-	s.Interval = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Interval != nil {
+		v := *s.Interval
 
-// SetMaxHeight sets the MaxHeight field's value.
-func (s *Thumbnails) SetMaxHeight(v string) *Thumbnails {
-	s.MaxHeight = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Interval", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxHeight != nil {
+		v := *s.MaxHeight
 
-// SetMaxWidth sets the MaxWidth field's value.
-func (s *Thumbnails) SetMaxWidth(v string) *Thumbnails {
-	s.MaxWidth = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxHeight", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxWidth != nil {
+		v := *s.MaxWidth
 
-// SetPaddingPolicy sets the PaddingPolicy field's value.
-func (s *Thumbnails) SetPaddingPolicy(v string) *Thumbnails {
-	s.PaddingPolicy = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxWidth", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PaddingPolicy != nil {
+		v := *s.PaddingPolicy
 
-// SetResolution sets the Resolution field's value.
-func (s *Thumbnails) SetResolution(v string) *Thumbnails {
-	s.Resolution = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PaddingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Resolution != nil {
+		v := *s.Resolution
 
-// SetSizingPolicy sets the SizingPolicy field's value.
-func (s *Thumbnails) SetSizingPolicy(v string) *Thumbnails {
-	s.SizingPolicy = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Resolution", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SizingPolicy != nil {
+		v := *s.SizingPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SizingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Settings that determine when a clip begins and how long it lasts.
@@ -6224,16 +6682,21 @@ func (s TimeSpan) GoString() string {
 	return s.String()
 }
 
-// SetDuration sets the Duration field's value.
-func (s *TimeSpan) SetDuration(v string) *TimeSpan {
-	s.Duration = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TimeSpan) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Duration != nil {
+		v := *s.Duration
 
-// SetStartTime sets the StartTime field's value.
-func (s *TimeSpan) SetStartTime(v string) *TimeSpan {
-	s.StartTime = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Details about the timing of a job.
@@ -6260,22 +6723,27 @@ func (s Timing) GoString() string {
 	return s.String()
 }
 
-// SetFinishTimeMillis sets the FinishTimeMillis field's value.
-func (s *Timing) SetFinishTimeMillis(v int64) *Timing {
-	s.FinishTimeMillis = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Timing) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FinishTimeMillis != nil {
+		v := *s.FinishTimeMillis
 
-// SetStartTimeMillis sets the StartTimeMillis field's value.
-func (s *Timing) SetStartTimeMillis(v int64) *Timing {
-	s.StartTimeMillis = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FinishTimeMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.StartTimeMillis != nil {
+		v := *s.StartTimeMillis
 
-// SetSubmitTimeMillis sets the SubmitTimeMillis field's value.
-func (s *Timing) SetSubmitTimeMillis(v int64) *Timing {
-	s.SubmitTimeMillis = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTimeMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.SubmitTimeMillis != nil {
+		v := *s.SubmitTimeMillis
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SubmitTimeMillis", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The UpdatePipelineRequest structure.
@@ -6500,52 +6968,58 @@ func (s *UpdatePipelineInput) Validate() error {
 	return nil
 }
 
-// SetAwsKmsKeyArn sets the AwsKmsKeyArn field's value.
-func (s *UpdatePipelineInput) SetAwsKmsKeyArn(v string) *UpdatePipelineInput {
-	s.AwsKmsKeyArn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetContentConfig sets the ContentConfig field's value.
-func (s *UpdatePipelineInput) SetContentConfig(v *PipelineOutputConfig) *UpdatePipelineInput {
-	s.ContentConfig = v
-	return s
-}
+	if s.AwsKmsKeyArn != nil {
+		v := *s.AwsKmsKeyArn
 
-// SetId sets the Id field's value.
-func (s *UpdatePipelineInput) SetId(v string) *UpdatePipelineInput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AwsKmsKeyArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentConfig != nil {
+		v := s.ContentConfig
 
-// SetInputBucket sets the InputBucket field's value.
-func (s *UpdatePipelineInput) SetInputBucket(v string) *UpdatePipelineInput {
-	s.InputBucket = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ContentConfig", v, metadata)
+	}
+	if s.InputBucket != nil {
+		v := *s.InputBucket
 
-// SetName sets the Name field's value.
-func (s *UpdatePipelineInput) SetName(v string) *UpdatePipelineInput {
-	s.Name = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
 
-// SetNotifications sets the Notifications field's value.
-func (s *UpdatePipelineInput) SetNotifications(v *Notifications) *UpdatePipelineInput {
-	s.Notifications = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Notifications != nil {
+		v := s.Notifications
 
-// SetRole sets the Role field's value.
-func (s *UpdatePipelineInput) SetRole(v string) *UpdatePipelineInput {
-	s.Role = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Notifications", v, metadata)
+	}
+	if s.Role != nil {
+		v := *s.Role
 
-// SetThumbnailConfig sets the ThumbnailConfig field's value.
-func (s *UpdatePipelineInput) SetThumbnailConfig(v *PipelineOutputConfig) *UpdatePipelineInput {
-	s.ThumbnailConfig = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThumbnailConfig != nil {
+		v := s.ThumbnailConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ThumbnailConfig", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The UpdatePipelineNotificationsRequest structure.
@@ -6613,16 +7087,22 @@ func (s *UpdatePipelineNotificationsInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *UpdatePipelineNotificationsInput) SetId(v string) *UpdatePipelineNotificationsInput {
-	s.Id = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineNotificationsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetNotifications sets the Notifications field's value.
-func (s *UpdatePipelineNotificationsInput) SetNotifications(v *Notifications) *UpdatePipelineNotificationsInput {
-	s.Notifications = v
-	return s
+	if s.Notifications != nil {
+		v := s.Notifications
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Notifications", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The UpdatePipelineNotificationsResponse structure.
@@ -6651,10 +7131,15 @@ func (s UpdatePipelineNotificationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPipeline sets the Pipeline field's value.
-func (s *UpdatePipelineNotificationsOutput) SetPipeline(v *Pipeline) *UpdatePipelineNotificationsOutput {
-	s.Pipeline = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineNotificationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pipeline != nil {
+		v := s.Pipeline
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
+	}
+	return nil
 }
 
 // When you update a pipeline, Elastic Transcoder returns the values that you
@@ -6691,16 +7176,27 @@ func (s UpdatePipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPipeline sets the Pipeline field's value.
-func (s *UpdatePipelineOutput) SetPipeline(v *Pipeline) *UpdatePipelineOutput {
-	s.Pipeline = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pipeline != nil {
+		v := s.Pipeline
 
-// SetWarnings sets the Warnings field's value.
-func (s *UpdatePipelineOutput) SetWarnings(v []Warning) *UpdatePipelineOutput {
-	s.Warnings = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
+	}
+	if len(s.Warnings) > 0 {
+		v := s.Warnings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Warnings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The UpdatePipelineStatusRequest structure.
@@ -6750,16 +7246,22 @@ func (s *UpdatePipelineStatusInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *UpdatePipelineStatusInput) SetId(v string) *UpdatePipelineStatusInput {
-	s.Id = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineStatusInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetStatus sets the Status field's value.
-func (s *UpdatePipelineStatusInput) SetStatus(v string) *UpdatePipelineStatusInput {
-	s.Status = &v
-	return s
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // When you update status for a pipeline, Elastic Transcoder returns the values
@@ -6788,10 +7290,15 @@ func (s UpdatePipelineStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetPipeline sets the Pipeline field's value.
-func (s *UpdatePipelineStatusOutput) SetPipeline(v *Pipeline) *UpdatePipelineStatusOutput {
-	s.Pipeline = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pipeline != nil {
+		v := s.Pipeline
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
+	}
+	return nil
 }
 
 // The VideoParameters structure.
@@ -7238,94 +7745,111 @@ func (s *VideoParameters) Validate() error {
 	return nil
 }
 
-// SetAspectRatio sets the AspectRatio field's value.
-func (s *VideoParameters) SetAspectRatio(v string) *VideoParameters {
-	s.AspectRatio = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VideoParameters) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AspectRatio != nil {
+		v := *s.AspectRatio
 
-// SetBitRate sets the BitRate field's value.
-func (s *VideoParameters) SetBitRate(v string) *VideoParameters {
-	s.BitRate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AspectRatio", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BitRate != nil {
+		v := *s.BitRate
 
-// SetCodec sets the Codec field's value.
-func (s *VideoParameters) SetCodec(v string) *VideoParameters {
-	s.Codec = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BitRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Codec != nil {
+		v := *s.Codec
 
-// SetCodecOptions sets the CodecOptions field's value.
-func (s *VideoParameters) SetCodecOptions(v map[string]string) *VideoParameters {
-	s.CodecOptions = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Codec", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.CodecOptions) > 0 {
+		v := s.CodecOptions
 
-// SetDisplayAspectRatio sets the DisplayAspectRatio field's value.
-func (s *VideoParameters) SetDisplayAspectRatio(v string) *VideoParameters {
-	s.DisplayAspectRatio = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "CodecOptions", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
 
-// SetFixedGOP sets the FixedGOP field's value.
-func (s *VideoParameters) SetFixedGOP(v string) *VideoParameters {
-	s.FixedGOP = &v
-	return s
-}
+	}
+	if s.DisplayAspectRatio != nil {
+		v := *s.DisplayAspectRatio
 
-// SetFrameRate sets the FrameRate field's value.
-func (s *VideoParameters) SetFrameRate(v string) *VideoParameters {
-	s.FrameRate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DisplayAspectRatio", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FixedGOP != nil {
+		v := *s.FixedGOP
 
-// SetKeyframesMaxDist sets the KeyframesMaxDist field's value.
-func (s *VideoParameters) SetKeyframesMaxDist(v string) *VideoParameters {
-	s.KeyframesMaxDist = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FixedGOP", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FrameRate != nil {
+		v := *s.FrameRate
 
-// SetMaxFrameRate sets the MaxFrameRate field's value.
-func (s *VideoParameters) SetMaxFrameRate(v string) *VideoParameters {
-	s.MaxFrameRate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FrameRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyframesMaxDist != nil {
+		v := *s.KeyframesMaxDist
 
-// SetMaxHeight sets the MaxHeight field's value.
-func (s *VideoParameters) SetMaxHeight(v string) *VideoParameters {
-	s.MaxHeight = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyframesMaxDist", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxFrameRate != nil {
+		v := *s.MaxFrameRate
 
-// SetMaxWidth sets the MaxWidth field's value.
-func (s *VideoParameters) SetMaxWidth(v string) *VideoParameters {
-	s.MaxWidth = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxFrameRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxHeight != nil {
+		v := *s.MaxHeight
 
-// SetPaddingPolicy sets the PaddingPolicy field's value.
-func (s *VideoParameters) SetPaddingPolicy(v string) *VideoParameters {
-	s.PaddingPolicy = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxHeight", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxWidth != nil {
+		v := *s.MaxWidth
 
-// SetResolution sets the Resolution field's value.
-func (s *VideoParameters) SetResolution(v string) *VideoParameters {
-	s.Resolution = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxWidth", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PaddingPolicy != nil {
+		v := *s.PaddingPolicy
 
-// SetSizingPolicy sets the SizingPolicy field's value.
-func (s *VideoParameters) SetSizingPolicy(v string) *VideoParameters {
-	s.SizingPolicy = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PaddingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Resolution != nil {
+		v := *s.Resolution
 
-// SetWatermarks sets the Watermarks field's value.
-func (s *VideoParameters) SetWatermarks(v []PresetWatermark) *VideoParameters {
-	s.Watermarks = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Resolution", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SizingPolicy != nil {
+		v := *s.SizingPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SizingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Watermarks) > 0 {
+		v := s.Watermarks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Watermarks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Elastic Transcoder returns a warning if the resources used by your pipeline
@@ -7357,14 +7881,19 @@ func (s Warning) GoString() string {
 	return s.String()
 }
 
-// SetCode sets the Code field's value.
-func (s *Warning) SetCode(v string) *Warning {
-	s.Code = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Warning) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Code != nil {
+		v := *s.Code
 
-// SetMessage sets the Message field's value.
-func (s *Warning) SetMessage(v string) *Warning {
-	s.Message = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Code", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }

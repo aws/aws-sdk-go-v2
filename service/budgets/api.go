@@ -648,9 +648,7 @@ type Budget struct {
 	CostFilters map[string][]string `type:"map"`
 
 	// This includes the options for getting the cost of a budget.
-	//
-	// CostTypes is a required field
-	CostTypes *CostTypes `type:"structure" required:"true"`
+	CostTypes *CostTypes `type:"structure"`
 
 	// A time period indicating the start date and end date of a budget.
 	//
@@ -688,10 +686,6 @@ func (s *Budget) Validate() error {
 		invalidParams.Add(aws.NewErrParamRequired("BudgetType"))
 	}
 
-	if s.CostTypes == nil {
-		invalidParams.Add(aws.NewErrParamRequired("CostTypes"))
-	}
-
 	if s.TimePeriod == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TimePeriod"))
 	}
@@ -708,11 +702,6 @@ func (s *Budget) Validate() error {
 			invalidParams.AddNested("CalculatedSpend", err.(aws.ErrInvalidParams))
 		}
 	}
-	if s.CostTypes != nil {
-		if err := s.CostTypes.Validate(); err != nil {
-			invalidParams.AddNested("CostTypes", err.(aws.ErrInvalidParams))
-		}
-	}
 	if s.TimePeriod != nil {
 		if err := s.TimePeriod.Validate(); err != nil {
 			invalidParams.AddNested("TimePeriod", err.(aws.ErrInvalidParams))
@@ -723,54 +712,6 @@ func (s *Budget) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetBudgetLimit sets the BudgetLimit field's value.
-func (s *Budget) SetBudgetLimit(v *Spend) *Budget {
-	s.BudgetLimit = v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *Budget) SetBudgetName(v string) *Budget {
-	s.BudgetName = &v
-	return s
-}
-
-// SetBudgetType sets the BudgetType field's value.
-func (s *Budget) SetBudgetType(v BudgetType) *Budget {
-	s.BudgetType = v
-	return s
-}
-
-// SetCalculatedSpend sets the CalculatedSpend field's value.
-func (s *Budget) SetCalculatedSpend(v *CalculatedSpend) *Budget {
-	s.CalculatedSpend = v
-	return s
-}
-
-// SetCostFilters sets the CostFilters field's value.
-func (s *Budget) SetCostFilters(v map[string][]string) *Budget {
-	s.CostFilters = v
-	return s
-}
-
-// SetCostTypes sets the CostTypes field's value.
-func (s *Budget) SetCostTypes(v *CostTypes) *Budget {
-	s.CostTypes = v
-	return s
-}
-
-// SetTimePeriod sets the TimePeriod field's value.
-func (s *Budget) SetTimePeriod(v *TimePeriod) *Budget {
-	s.TimePeriod = v
-	return s
-}
-
-// SetTimeUnit sets the TimeUnit field's value.
-func (s *Budget) SetTimeUnit(v TimeUnit) *Budget {
-	s.TimeUnit = v
-	return s
 }
 
 // A structure that holds the actual and forecasted spend for a budget.
@@ -822,36 +763,36 @@ func (s *CalculatedSpend) Validate() error {
 	return nil
 }
 
-// SetActualSpend sets the ActualSpend field's value.
-func (s *CalculatedSpend) SetActualSpend(v *Spend) *CalculatedSpend {
-	s.ActualSpend = v
-	return s
-}
-
-// SetForecastedSpend sets the ForecastedSpend field's value.
-func (s *CalculatedSpend) SetForecastedSpend(v *Spend) *CalculatedSpend {
-	s.ForecastedSpend = v
-	return s
-}
-
 // This includes the options for getting the cost of a budget.
 type CostTypes struct {
 	_ struct{} `type:"structure"`
 
-	// A generic boolean value.
-	//
-	// IncludeSubscription is a required field
-	IncludeSubscription *bool `type:"boolean" required:"true"`
+	// A boolean value whether to include credits in the cost budget.
+	IncludeCredit *bool `type:"boolean"`
 
-	// A generic boolean value.
-	//
-	// IncludeTax is a required field
-	IncludeTax *bool `type:"boolean" required:"true"`
+	// A boolean value whether to include other subscription costs in the cost budget.
+	IncludeOtherSubscription *bool `type:"boolean"`
 
-	// A generic boolean value.
-	//
-	// UseBlended is a required field
-	UseBlended *bool `type:"boolean" required:"true"`
+	// A boolean value whether to include recurring costs in the cost budget.
+	IncludeRecurring *bool `type:"boolean"`
+
+	// A boolean value whether to include refunds in the cost budget.
+	IncludeRefund *bool `type:"boolean"`
+
+	// A boolean value whether to include subscriptions in the cost budget.
+	IncludeSubscription *bool `type:"boolean"`
+
+	// A boolean value whether to include support costs in the cost budget.
+	IncludeSupport *bool `type:"boolean"`
+
+	// A boolean value whether to include tax in the cost budget.
+	IncludeTax *bool `type:"boolean"`
+
+	// A boolean value whether to include upfront costs in the cost budget.
+	IncludeUpfront *bool `type:"boolean"`
+
+	// A boolean value whether to use blended costs in the cost budget.
+	UseBlended *bool `type:"boolean"`
 }
 
 // String returns the string representation
@@ -862,46 +803,6 @@ func (s CostTypes) String() string {
 // GoString returns the string representation
 func (s CostTypes) GoString() string {
 	return s.String()
-}
-
-// Validate inspects the fields of the type to determine if they are valid.
-func (s *CostTypes) Validate() error {
-	invalidParams := aws.ErrInvalidParams{Context: "CostTypes"}
-
-	if s.IncludeSubscription == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IncludeSubscription"))
-	}
-
-	if s.IncludeTax == nil {
-		invalidParams.Add(aws.NewErrParamRequired("IncludeTax"))
-	}
-
-	if s.UseBlended == nil {
-		invalidParams.Add(aws.NewErrParamRequired("UseBlended"))
-	}
-
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	}
-	return nil
-}
-
-// SetIncludeSubscription sets the IncludeSubscription field's value.
-func (s *CostTypes) SetIncludeSubscription(v bool) *CostTypes {
-	s.IncludeSubscription = &v
-	return s
-}
-
-// SetIncludeTax sets the IncludeTax field's value.
-func (s *CostTypes) SetIncludeTax(v bool) *CostTypes {
-	s.IncludeTax = &v
-	return s
-}
-
-// SetUseBlended sets the UseBlended field's value.
-func (s *CostTypes) SetUseBlended(v bool) *CostTypes {
-	s.UseBlended = &v
-	return s
 }
 
 // Request of CreateBudget
@@ -963,24 +864,6 @@ func (s *CreateBudgetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *CreateBudgetInput) SetAccountId(v string) *CreateBudgetInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudget sets the Budget field's value.
-func (s *CreateBudgetInput) SetBudget(v *Budget) *CreateBudgetInput {
-	s.Budget = v
-	return s
-}
-
-// SetNotificationsWithSubscribers sets the NotificationsWithSubscribers field's value.
-func (s *CreateBudgetInput) SetNotificationsWithSubscribers(v []NotificationWithSubscribers) *CreateBudgetInput {
-	s.NotificationsWithSubscribers = v
-	return s
 }
 
 // Response of CreateBudget
@@ -1085,30 +968,6 @@ func (s *CreateNotificationInput) Validate() error {
 	return nil
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *CreateNotificationInput) SetAccountId(v string) *CreateNotificationInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *CreateNotificationInput) SetBudgetName(v string) *CreateNotificationInput {
-	s.BudgetName = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *CreateNotificationInput) SetNotification(v *Notification) *CreateNotificationInput {
-	s.Notification = v
-	return s
-}
-
-// SetSubscribers sets the Subscribers field's value.
-func (s *CreateNotificationInput) SetSubscribers(v []Subscriber) *CreateNotificationInput {
-	s.Subscribers = v
-	return s
-}
-
 // Response of CreateNotification
 type CreateNotificationOutput struct {
 	_ struct{} `type:"structure"`
@@ -1207,30 +1066,6 @@ func (s *CreateSubscriberInput) Validate() error {
 	return nil
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *CreateSubscriberInput) SetAccountId(v string) *CreateSubscriberInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *CreateSubscriberInput) SetBudgetName(v string) *CreateSubscriberInput {
-	s.BudgetName = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *CreateSubscriberInput) SetNotification(v *Notification) *CreateSubscriberInput {
-	s.Notification = v
-	return s
-}
-
-// SetSubscriber sets the Subscriber field's value.
-func (s *CreateSubscriberInput) SetSubscriber(v *Subscriber) *CreateSubscriberInput {
-	s.Subscriber = v
-	return s
-}
-
 // Response of CreateSubscriber
 type CreateSubscriberOutput struct {
 	_ struct{} `type:"structure"`
@@ -1297,18 +1132,6 @@ func (s *DeleteBudgetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *DeleteBudgetInput) SetAccountId(v string) *DeleteBudgetInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *DeleteBudgetInput) SetBudgetName(v string) *DeleteBudgetInput {
-	s.BudgetName = &v
-	return s
 }
 
 // Response of DeleteBudget
@@ -1392,24 +1215,6 @@ func (s *DeleteNotificationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *DeleteNotificationInput) SetAccountId(v string) *DeleteNotificationInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *DeleteNotificationInput) SetBudgetName(v string) *DeleteNotificationInput {
-	s.BudgetName = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *DeleteNotificationInput) SetNotification(v *Notification) *DeleteNotificationInput {
-	s.Notification = v
-	return s
 }
 
 // Response of DeleteNotification
@@ -1510,30 +1315,6 @@ func (s *DeleteSubscriberInput) Validate() error {
 	return nil
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *DeleteSubscriberInput) SetAccountId(v string) *DeleteSubscriberInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *DeleteSubscriberInput) SetBudgetName(v string) *DeleteSubscriberInput {
-	s.BudgetName = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *DeleteSubscriberInput) SetNotification(v *Notification) *DeleteSubscriberInput {
-	s.Notification = v
-	return s
-}
-
-// SetSubscriber sets the Subscriber field's value.
-func (s *DeleteSubscriberInput) SetSubscriber(v *Subscriber) *DeleteSubscriberInput {
-	s.Subscriber = v
-	return s
-}
-
 // Response of DeleteSubscriber
 type DeleteSubscriberOutput struct {
 	_ struct{} `type:"structure"`
@@ -1602,18 +1383,6 @@ func (s *DescribeBudgetInput) Validate() error {
 	return nil
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *DescribeBudgetInput) SetAccountId(v string) *DescribeBudgetInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *DescribeBudgetInput) SetBudgetName(v string) *DescribeBudgetInput {
-	s.BudgetName = &v
-	return s
-}
-
 // Response of DescribeBudget
 type DescribeBudgetOutput struct {
 	_ struct{} `type:"structure"`
@@ -1637,12 +1406,6 @@ func (s DescribeBudgetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeBudgetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBudget sets the Budget field's value.
-func (s *DescribeBudgetOutput) SetBudget(v *Budget) *DescribeBudgetOutput {
-	s.Budget = v
-	return s
 }
 
 // Request of DescribeBudgets
@@ -1692,24 +1455,6 @@ func (s *DescribeBudgetsInput) Validate() error {
 	return nil
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *DescribeBudgetsInput) SetAccountId(v string) *DescribeBudgetsInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeBudgetsInput) SetMaxResults(v int64) *DescribeBudgetsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeBudgetsInput) SetNextToken(v string) *DescribeBudgetsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Response of DescribeBudgets
 type DescribeBudgetsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1736,18 +1481,6 @@ func (s DescribeBudgetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeBudgetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBudgets sets the Budgets field's value.
-func (s *DescribeBudgetsOutput) SetBudgets(v []Budget) *DescribeBudgetsOutput {
-	s.Budgets = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeBudgetsOutput) SetNextToken(v string) *DescribeBudgetsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Request of DescribeNotificationsForBudget
@@ -1806,30 +1539,6 @@ func (s *DescribeNotificationsForBudgetInput) Validate() error {
 	return nil
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *DescribeNotificationsForBudgetInput) SetAccountId(v string) *DescribeNotificationsForBudgetInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *DescribeNotificationsForBudgetInput) SetBudgetName(v string) *DescribeNotificationsForBudgetInput {
-	s.BudgetName = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeNotificationsForBudgetInput) SetMaxResults(v int64) *DescribeNotificationsForBudgetInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeNotificationsForBudgetInput) SetNextToken(v string) *DescribeNotificationsForBudgetInput {
-	s.NextToken = &v
-	return s
-}
-
 // Response of GetNotificationsForBudget
 type DescribeNotificationsForBudgetOutput struct {
 	_ struct{} `type:"structure"`
@@ -1856,18 +1565,6 @@ func (s DescribeNotificationsForBudgetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeNotificationsForBudgetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeNotificationsForBudgetOutput) SetNextToken(v string) *DescribeNotificationsForBudgetOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNotifications sets the Notifications field's value.
-func (s *DescribeNotificationsForBudgetOutput) SetNotifications(v []Notification) *DescribeNotificationsForBudgetOutput {
-	s.Notifications = v
-	return s
 }
 
 // Request of DescribeSubscribersForNotification
@@ -1941,36 +1638,6 @@ func (s *DescribeSubscribersForNotificationInput) Validate() error {
 	return nil
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *DescribeSubscribersForNotificationInput) SetAccountId(v string) *DescribeSubscribersForNotificationInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *DescribeSubscribersForNotificationInput) SetBudgetName(v string) *DescribeSubscribersForNotificationInput {
-	s.BudgetName = &v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeSubscribersForNotificationInput) SetMaxResults(v int64) *DescribeSubscribersForNotificationInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSubscribersForNotificationInput) SetNextToken(v string) *DescribeSubscribersForNotificationInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *DescribeSubscribersForNotificationInput) SetNotification(v *Notification) *DescribeSubscribersForNotificationInput {
-	s.Notification = v
-	return s
-}
-
 // Response of DescribeSubscribersForNotification
 type DescribeSubscribersForNotificationOutput struct {
 	_ struct{} `type:"structure"`
@@ -1997,18 +1664,6 @@ func (s DescribeSubscribersForNotificationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeSubscribersForNotificationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeSubscribersForNotificationOutput) SetNextToken(v string) *DescribeSubscribersForNotificationOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetSubscribers sets the Subscribers field's value.
-func (s *DescribeSubscribersForNotificationOutput) SetSubscribers(v []Subscriber) *DescribeSubscribersForNotificationOutput {
-	s.Subscribers = v
-	return s
 }
 
 // Notification model. Each budget may contain multiple notifications with different
@@ -2067,30 +1722,6 @@ func (s *Notification) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetComparisonOperator sets the ComparisonOperator field's value.
-func (s *Notification) SetComparisonOperator(v ComparisonOperator) *Notification {
-	s.ComparisonOperator = v
-	return s
-}
-
-// SetNotificationType sets the NotificationType field's value.
-func (s *Notification) SetNotificationType(v NotificationType) *Notification {
-	s.NotificationType = v
-	return s
-}
-
-// SetThreshold sets the Threshold field's value.
-func (s *Notification) SetThreshold(v float64) *Notification {
-	s.Threshold = &v
-	return s
-}
-
-// SetThresholdType sets the ThresholdType field's value.
-func (s *Notification) SetThresholdType(v ThresholdType) *Notification {
-	s.ThresholdType = v
-	return s
 }
 
 // A structure to relate notification and a list of subscribers who belong to
@@ -2153,18 +1784,6 @@ func (s *NotificationWithSubscribers) Validate() error {
 	return nil
 }
 
-// SetNotification sets the Notification field's value.
-func (s *NotificationWithSubscribers) SetNotification(v *Notification) *NotificationWithSubscribers {
-	s.Notification = v
-	return s
-}
-
-// SetSubscribers sets the Subscribers field's value.
-func (s *NotificationWithSubscribers) SetSubscribers(v []Subscriber) *NotificationWithSubscribers {
-	s.Subscribers = v
-	return s
-}
-
 // A structure that represents either a cost spend or usage spend. Contains
 // an amount and a unit.
 type Spend struct {
@@ -2212,27 +1831,15 @@ func (s *Spend) Validate() error {
 	return nil
 }
 
-// SetAmount sets the Amount field's value.
-func (s *Spend) SetAmount(v string) *Spend {
-	s.Amount = &v
-	return s
-}
-
-// SetUnit sets the Unit field's value.
-func (s *Spend) SetUnit(v string) *Spend {
-	s.Unit = &v
-	return s
-}
-
 // Subscriber model. Each notification may contain multiple subscribers with
 // different addresses.
 type Subscriber struct {
 	_ struct{} `type:"structure"`
 
-	// A generic String.
+	// String containing email or sns topic for the subscriber address.
 	//
 	// Address is a required field
-	Address *string `type:"string" required:"true"`
+	Address *string `min:"1" type:"string" required:"true"`
 
 	// The subscription type of the subscriber. It can be SMS or EMAIL.
 	//
@@ -2257,6 +1864,9 @@ func (s *Subscriber) Validate() error {
 	if s.Address == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Address"))
 	}
+	if s.Address != nil && len(*s.Address) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Address", 1))
+	}
 	if len(s.SubscriptionType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("SubscriptionType"))
 	}
@@ -2265,18 +1875,6 @@ func (s *Subscriber) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAddress sets the Address field's value.
-func (s *Subscriber) SetAddress(v string) *Subscriber {
-	s.Address = &v
-	return s
-}
-
-// SetSubscriptionType sets the SubscriptionType field's value.
-func (s *Subscriber) SetSubscriptionType(v SubscriptionType) *Subscriber {
-	s.SubscriptionType = v
-	return s
 }
 
 // A time period indicating the start date and end date of a budget.
@@ -2320,18 +1918,6 @@ func (s *TimePeriod) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetEnd sets the End field's value.
-func (s *TimePeriod) SetEnd(v time.Time) *TimePeriod {
-	s.End = &v
-	return s
-}
-
-// SetStart sets the Start field's value.
-func (s *TimePeriod) SetStart(v time.Time) *TimePeriod {
-	s.Start = &v
-	return s
 }
 
 // Request of UpdateBudget
@@ -2383,18 +1969,6 @@ func (s *UpdateBudgetInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *UpdateBudgetInput) SetAccountId(v string) *UpdateBudgetInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetNewBudget sets the NewBudget field's value.
-func (s *UpdateBudgetInput) SetNewBudget(v *Budget) *UpdateBudgetInput {
-	s.NewBudget = v
-	return s
 }
 
 // Response of UpdateBudget
@@ -2493,30 +2067,6 @@ func (s *UpdateNotificationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccountId sets the AccountId field's value.
-func (s *UpdateNotificationInput) SetAccountId(v string) *UpdateNotificationInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *UpdateNotificationInput) SetBudgetName(v string) *UpdateNotificationInput {
-	s.BudgetName = &v
-	return s
-}
-
-// SetNewNotification sets the NewNotification field's value.
-func (s *UpdateNotificationInput) SetNewNotification(v *Notification) *UpdateNotificationInput {
-	s.NewNotification = v
-	return s
-}
-
-// SetOldNotification sets the OldNotification field's value.
-func (s *UpdateNotificationInput) SetOldNotification(v *Notification) *UpdateNotificationInput {
-	s.OldNotification = v
-	return s
 }
 
 // Response of UpdateNotification
@@ -2632,36 +2182,6 @@ func (s *UpdateSubscriberInput) Validate() error {
 	return nil
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *UpdateSubscriberInput) SetAccountId(v string) *UpdateSubscriberInput {
-	s.AccountId = &v
-	return s
-}
-
-// SetBudgetName sets the BudgetName field's value.
-func (s *UpdateSubscriberInput) SetBudgetName(v string) *UpdateSubscriberInput {
-	s.BudgetName = &v
-	return s
-}
-
-// SetNewSubscriber sets the NewSubscriber field's value.
-func (s *UpdateSubscriberInput) SetNewSubscriber(v *Subscriber) *UpdateSubscriberInput {
-	s.NewSubscriber = v
-	return s
-}
-
-// SetNotification sets the Notification field's value.
-func (s *UpdateSubscriberInput) SetNotification(v *Notification) *UpdateSubscriberInput {
-	s.Notification = v
-	return s
-}
-
-// SetOldSubscriber sets the OldSubscriber field's value.
-func (s *UpdateSubscriberInput) SetOldSubscriber(v *Subscriber) *UpdateSubscriberInput {
-	s.OldSubscriber = v
-	return s
-}
-
 // Response of UpdateSubscriber
 type UpdateSubscriberOutput struct {
 	_ struct{} `type:"structure"`
@@ -2694,6 +2214,15 @@ const (
 	BudgetTypeRiUtilization BudgetType = "RI_UTILIZATION"
 )
 
+func (enum BudgetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BudgetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The comparison operator of a notification. Currently we support less than,
 // equal to and greater than.
 type ComparisonOperator string
@@ -2705,6 +2234,15 @@ const (
 	ComparisonOperatorEqualTo     ComparisonOperator = "EQUAL_TO"
 )
 
+func (enum ComparisonOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The type of a notification. It should be ACTUAL or FORECASTED.
 type NotificationType string
 
@@ -2713,6 +2251,15 @@ const (
 	NotificationTypeActual     NotificationType = "ACTUAL"
 	NotificationTypeForecasted NotificationType = "FORECASTED"
 )
+
+func (enum NotificationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotificationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The subscription type of the subscriber. It can be SMS or EMAIL.
 type SubscriptionType string
@@ -2723,6 +2270,15 @@ const (
 	SubscriptionTypeEmail SubscriptionType = "EMAIL"
 )
 
+func (enum SubscriptionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SubscriptionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.
 type ThresholdType string
 
@@ -2731,6 +2287,15 @@ const (
 	ThresholdTypePercentage    ThresholdType = "PERCENTAGE"
 	ThresholdTypeAbsoluteValue ThresholdType = "ABSOLUTE_VALUE"
 )
+
+func (enum ThresholdType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ThresholdType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.
 type TimeUnit string
@@ -2742,3 +2307,12 @@ const (
 	TimeUnitQuarterly TimeUnit = "QUARTERLY"
 	TimeUnitAnnually  TimeUnit = "ANNUALLY"
 )
+
+func (enum TimeUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TimeUnit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -173,6 +173,8 @@ type StorageGatewayAPI interface {
 	ListVolumesPages(*storagegateway.ListVolumesInput, func(*storagegateway.ListVolumesOutput, bool) bool) error
 	ListVolumesPagesWithContext(aws.Context, *storagegateway.ListVolumesInput, func(*storagegateway.ListVolumesOutput, bool) bool, ...aws.Option) error
 
+	NotifyWhenUploadedRequest(*storagegateway.NotifyWhenUploadedInput) storagegateway.NotifyWhenUploadedRequest
+
 	RefreshCacheRequest(*storagegateway.RefreshCacheInput) storagegateway.RefreshCacheRequest
 
 	RemoveTagsFromResourceRequest(*storagegateway.RemoveTagsFromResourceInput) storagegateway.RemoveTagsFromResourceRequest

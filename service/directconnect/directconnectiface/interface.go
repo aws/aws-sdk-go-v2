@@ -86,6 +86,10 @@ type DirectConnectAPI interface {
 
 	CreateConnectionRequest(*directconnect.CreateConnectionInput) directconnect.CreateConnectionRequest
 
+	CreateDirectConnectGatewayRequest(*directconnect.CreateDirectConnectGatewayInput) directconnect.CreateDirectConnectGatewayRequest
+
+	CreateDirectConnectGatewayAssociationRequest(*directconnect.CreateDirectConnectGatewayAssociationInput) directconnect.CreateDirectConnectGatewayAssociationRequest
+
 	CreateInterconnectRequest(*directconnect.CreateInterconnectInput) directconnect.CreateInterconnectRequest
 
 	CreateLagRequest(*directconnect.CreateLagInput) directconnect.CreateLagRequest
@@ -98,6 +102,10 @@ type DirectConnectAPI interface {
 
 	DeleteConnectionRequest(*directconnect.DeleteConnectionInput) directconnect.DeleteConnectionRequest
 
+	DeleteDirectConnectGatewayRequest(*directconnect.DeleteDirectConnectGatewayInput) directconnect.DeleteDirectConnectGatewayRequest
+
+	DeleteDirectConnectGatewayAssociationRequest(*directconnect.DeleteDirectConnectGatewayAssociationInput) directconnect.DeleteDirectConnectGatewayAssociationRequest
+
 	DeleteInterconnectRequest(*directconnect.DeleteInterconnectInput) directconnect.DeleteInterconnectRequest
 
 	DeleteLagRequest(*directconnect.DeleteLagInput) directconnect.DeleteLagRequest
@@ -109,6 +117,12 @@ type DirectConnectAPI interface {
 	DescribeConnectionsRequest(*directconnect.DescribeConnectionsInput) directconnect.DescribeConnectionsRequest
 
 	DescribeConnectionsOnInterconnectRequest(*directconnect.DescribeConnectionsOnInterconnectInput) directconnect.DescribeConnectionsOnInterconnectRequest
+
+	DescribeDirectConnectGatewayAssociationsRequest(*directconnect.DescribeDirectConnectGatewayAssociationsInput) directconnect.DescribeDirectConnectGatewayAssociationsRequest
+
+	DescribeDirectConnectGatewayAttachmentsRequest(*directconnect.DescribeDirectConnectGatewayAttachmentsInput) directconnect.DescribeDirectConnectGatewayAttachmentsRequest
+
+	DescribeDirectConnectGatewaysRequest(*directconnect.DescribeDirectConnectGatewaysInput) directconnect.DescribeDirectConnectGatewaysRequest
 
 	DescribeHostedConnectionsRequest(*directconnect.DescribeHostedConnectionsInput) directconnect.DescribeHostedConnectionsRequest
 

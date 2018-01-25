@@ -441,6 +441,55 @@ func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) D
 	return DeleteDistributionRequest{Request: req, Input: input}
 }
 
+const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole2017_03_25"
+
+// DeleteServiceLinkedRoleRequest is a API request type for the DeleteServiceLinkedRole API operation.
+type DeleteServiceLinkedRoleRequest struct {
+	*aws.Request
+	Input *DeleteServiceLinkedRoleInput
+}
+
+// Send marshals and sends the DeleteServiceLinkedRole API request.
+func (r DeleteServiceLinkedRoleRequest) Send() (*DeleteServiceLinkedRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteServiceLinkedRoleOutput), nil
+}
+
+// DeleteServiceLinkedRoleRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+//    // Example sending a request using the DeleteServiceLinkedRoleRequest method.
+//    req := client.DeleteServiceLinkedRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRole
+func (c *CloudFront) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleInput) DeleteServiceLinkedRoleRequest {
+	op := &aws.Operation{
+		Name:       opDeleteServiceLinkedRole,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2017-03-25/service-linked-role/{RoleName}",
+	}
+
+	if input == nil {
+		input = &DeleteServiceLinkedRoleInput{}
+	}
+
+	output := &DeleteServiceLinkedRoleOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteServiceLinkedRoleRequest{Request: req, Input: input}
+}
+
 const opDeleteStreamingDistribution = "DeleteStreamingDistribution2017_03_25"
 
 // DeleteStreamingDistributionRequest is a API request type for the DeleteStreamingDistribution API operation.
@@ -1737,22 +1786,33 @@ func (s ActiveTrustedSigners) GoString() string {
 	return s.String()
 }
 
-// SetEnabled sets the Enabled field's value.
-func (s *ActiveTrustedSigners) SetEnabled(v bool) *ActiveTrustedSigners {
-	s.Enabled = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ActiveTrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enabled != nil {
+		v := *s.Enabled
 
-// SetItems sets the Items field's value.
-func (s *ActiveTrustedSigners) SetItems(v []Signer) *ActiveTrustedSigners {
-	s.Items = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *ActiveTrustedSigners) SetQuantity(v int64) *ActiveTrustedSigners {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "Signer"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that contains information about CNAMEs (alternate domain names),
@@ -1796,16 +1856,27 @@ func (s *Aliases) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *Aliases) SetItems(v []string) *Aliases {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Aliases) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *Aliases) SetQuantity(v int64) *Aliases {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "CNAME"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that controls which HTTP methods CloudFront processes and
@@ -1886,22 +1957,33 @@ func (s *AllowedMethods) Validate() error {
 	return nil
 }
 
-// SetCachedMethods sets the CachedMethods field's value.
-func (s *AllowedMethods) SetCachedMethods(v *CachedMethods) *AllowedMethods {
-	s.CachedMethods = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AllowedMethods) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CachedMethods != nil {
+		v := s.CachedMethods
 
-// SetItems sets the Items field's value.
-func (s *AllowedMethods) SetItems(v []Method) *AllowedMethods {
-	s.Items = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CachedMethods", v, metadata)
+	}
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *AllowedMethods) SetQuantity(v int64) *AllowedMethods {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "Method"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that describes how CloudFront processes requests.
@@ -2144,76 +2226,81 @@ func (s *CacheBehavior) Validate() error {
 	return nil
 }
 
-// SetAllowedMethods sets the AllowedMethods field's value.
-func (s *CacheBehavior) SetAllowedMethods(v *AllowedMethods) *CacheBehavior {
-	s.AllowedMethods = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AllowedMethods != nil {
+		v := s.AllowedMethods
 
-// SetCompress sets the Compress field's value.
-func (s *CacheBehavior) SetCompress(v bool) *CacheBehavior {
-	s.Compress = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AllowedMethods", v, metadata)
+	}
+	if s.Compress != nil {
+		v := *s.Compress
 
-// SetDefaultTTL sets the DefaultTTL field's value.
-func (s *CacheBehavior) SetDefaultTTL(v int64) *CacheBehavior {
-	s.DefaultTTL = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Compress", protocol.BoolValue(v), metadata)
+	}
+	if s.DefaultTTL != nil {
+		v := *s.DefaultTTL
 
-// SetForwardedValues sets the ForwardedValues field's value.
-func (s *CacheBehavior) SetForwardedValues(v *ForwardedValues) *CacheBehavior {
-	s.ForwardedValues = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.ForwardedValues != nil {
+		v := s.ForwardedValues
 
-// SetLambdaFunctionAssociations sets the LambdaFunctionAssociations field's value.
-func (s *CacheBehavior) SetLambdaFunctionAssociations(v *LambdaFunctionAssociations) *CacheBehavior {
-	s.LambdaFunctionAssociations = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ForwardedValues", v, metadata)
+	}
+	if s.LambdaFunctionAssociations != nil {
+		v := s.LambdaFunctionAssociations
 
-// SetMaxTTL sets the MaxTTL field's value.
-func (s *CacheBehavior) SetMaxTTL(v int64) *CacheBehavior {
-	s.MaxTTL = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LambdaFunctionAssociations", v, metadata)
+	}
+	if s.MaxTTL != nil {
+		v := *s.MaxTTL
 
-// SetMinTTL sets the MinTTL field's value.
-func (s *CacheBehavior) SetMinTTL(v int64) *CacheBehavior {
-	s.MinTTL = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.MinTTL != nil {
+		v := *s.MinTTL
 
-// SetPathPattern sets the PathPattern field's value.
-func (s *CacheBehavior) SetPathPattern(v string) *CacheBehavior {
-	s.PathPattern = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MinTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.PathPattern != nil {
+		v := *s.PathPattern
 
-// SetSmoothStreaming sets the SmoothStreaming field's value.
-func (s *CacheBehavior) SetSmoothStreaming(v bool) *CacheBehavior {
-	s.SmoothStreaming = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PathPattern", protocol.StringValue(v), metadata)
+	}
+	if s.SmoothStreaming != nil {
+		v := *s.SmoothStreaming
 
-// SetTargetOriginId sets the TargetOriginId field's value.
-func (s *CacheBehavior) SetTargetOriginId(v string) *CacheBehavior {
-	s.TargetOriginId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SmoothStreaming", protocol.BoolValue(v), metadata)
+	}
+	if s.TargetOriginId != nil {
+		v := *s.TargetOriginId
 
-// SetTrustedSigners sets the TrustedSigners field's value.
-func (s *CacheBehavior) SetTrustedSigners(v *TrustedSigners) *CacheBehavior {
-	s.TrustedSigners = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TargetOriginId", protocol.StringValue(v), metadata)
+	}
+	if s.TrustedSigners != nil {
+		v := s.TrustedSigners
 
-// SetViewerProtocolPolicy sets the ViewerProtocolPolicy field's value.
-func (s *CacheBehavior) SetViewerProtocolPolicy(v ViewerProtocolPolicy) *CacheBehavior {
-	s.ViewerProtocolPolicy = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TrustedSigners", v, metadata)
+	}
+	if len(s.ViewerProtocolPolicy) > 0 {
+		v := s.ViewerProtocolPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ViewerProtocolPolicy", v, metadata)
+	}
+	return nil
 }
 
 // A complex type that contains zero or more CacheBehavior elements.
@@ -2262,16 +2349,27 @@ func (s *CacheBehaviors) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *CacheBehaviors) SetItems(v []CacheBehavior) *CacheBehaviors {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CacheBehaviors) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *CacheBehaviors) SetQuantity(v int64) *CacheBehaviors {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "CacheBehavior"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that controls whether CloudFront caches the response to requests
@@ -2330,16 +2428,27 @@ func (s *CachedMethods) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *CachedMethods) SetItems(v []Method) *CachedMethods {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CachedMethods) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *CachedMethods) SetQuantity(v int64) *CachedMethods {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "Method"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that specifies whether you want CloudFront to forward cookies
@@ -2386,16 +2495,27 @@ func (s *CookieNames) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *CookieNames) SetItems(v []string) *CookieNames {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CookieNames) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *CookieNames) SetQuantity(v int64) *CookieNames {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "Name"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that specifies whether you want CloudFront to forward cookies
@@ -2461,16 +2581,21 @@ func (s *CookiePreference) Validate() error {
 	return nil
 }
 
-// SetForward sets the Forward field's value.
-func (s *CookiePreference) SetForward(v ItemSelection) *CookiePreference {
-	s.Forward = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CookiePreference) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Forward) > 0 {
+		v := s.Forward
 
-// SetWhitelistedNames sets the WhitelistedNames field's value.
-func (s *CookiePreference) SetWhitelistedNames(v *CookieNames) *CookiePreference {
-	s.WhitelistedNames = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Forward", v, metadata)
+	}
+	if s.WhitelistedNames != nil {
+		v := s.WhitelistedNames
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "WhitelistedNames", v, metadata)
+	}
+	return nil
 }
 
 // The request to create a new origin access identity.
@@ -2513,10 +2638,16 @@ func (s *CreateCloudFrontOriginAccessIdentityInput) Validate() error {
 	return nil
 }
 
-// SetCloudFrontOriginAccessIdentityConfig sets the CloudFrontOriginAccessIdentityConfig field's value.
-func (s *CreateCloudFrontOriginAccessIdentityInput) SetCloudFrontOriginAccessIdentityConfig(v *OriginAccessIdentityConfig) *CreateCloudFrontOriginAccessIdentityInput {
-	s.CloudFrontOriginAccessIdentityConfig = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CloudFrontOriginAccessIdentityConfig != nil {
+		v := s.CloudFrontOriginAccessIdentityConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityConfig", v, metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -2552,22 +2683,27 @@ func (s CreateCloudFrontOriginAccessIdentityOutput) SDKResponseMetadata() aws.Re
 	return s.responseMetadata
 }
 
-// SetCloudFrontOriginAccessIdentity sets the CloudFrontOriginAccessIdentity field's value.
-func (s *CreateCloudFrontOriginAccessIdentityOutput) SetCloudFrontOriginAccessIdentity(v *OriginAccessIdentity) *CreateCloudFrontOriginAccessIdentityOutput {
-	s.CloudFrontOriginAccessIdentity = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetETag sets the ETag field's value.
-func (s *CreateCloudFrontOriginAccessIdentityOutput) SetETag(v string) *CreateCloudFrontOriginAccessIdentityOutput {
-	s.ETag = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
 
-// SetLocation sets the Location field's value.
-func (s *CreateCloudFrontOriginAccessIdentityOutput) SetLocation(v string) *CreateCloudFrontOriginAccessIdentityOutput {
-	s.Location = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
+	}
+	if s.CloudFrontOriginAccessIdentity != nil {
+		v := s.CloudFrontOriginAccessIdentity
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentity", v, metadata)
+	}
+	return nil
 }
 
 // The request to create a new distribution.
@@ -2610,10 +2746,16 @@ func (s *CreateDistributionInput) Validate() error {
 	return nil
 }
 
-// SetDistributionConfig sets the DistributionConfig field's value.
-func (s *CreateDistributionInput) SetDistributionConfig(v *DistributionConfig) *CreateDistributionInput {
-	s.DistributionConfig = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DistributionConfig != nil {
+		v := s.DistributionConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "DistributionConfig", v, metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -2649,22 +2791,27 @@ func (s CreateDistributionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDistribution sets the Distribution field's value.
-func (s *CreateDistributionOutput) SetDistribution(v *Distribution) *CreateDistributionOutput {
-	s.Distribution = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetETag sets the ETag field's value.
-func (s *CreateDistributionOutput) SetETag(v string) *CreateDistributionOutput {
-	s.ETag = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
 
-// SetLocation sets the Location field's value.
-func (s *CreateDistributionOutput) SetLocation(v string) *CreateDistributionOutput {
-	s.Location = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
+	}
+	if s.Distribution != nil {
+		v := s.Distribution
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "Distribution", v, metadata)
+	}
+	return nil
 }
 
 // The request to create a new distribution with tags.
@@ -2707,10 +2854,16 @@ func (s *CreateDistributionWithTagsInput) Validate() error {
 	return nil
 }
 
-// SetDistributionConfigWithTags sets the DistributionConfigWithTags field's value.
-func (s *CreateDistributionWithTagsInput) SetDistributionConfigWithTags(v *DistributionConfigWithTags) *CreateDistributionWithTagsInput {
-	s.DistributionConfigWithTags = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDistributionWithTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DistributionConfigWithTags != nil {
+		v := s.DistributionConfigWithTags
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "DistributionConfigWithTags", v, metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -2746,22 +2899,27 @@ func (s CreateDistributionWithTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDistribution sets the Distribution field's value.
-func (s *CreateDistributionWithTagsOutput) SetDistribution(v *Distribution) *CreateDistributionWithTagsOutput {
-	s.Distribution = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDistributionWithTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetETag sets the ETag field's value.
-func (s *CreateDistributionWithTagsOutput) SetETag(v string) *CreateDistributionWithTagsOutput {
-	s.ETag = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
 
-// SetLocation sets the Location field's value.
-func (s *CreateDistributionWithTagsOutput) SetLocation(v string) *CreateDistributionWithTagsOutput {
-	s.Location = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
+	}
+	if s.Distribution != nil {
+		v := s.Distribution
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "Distribution", v, metadata)
+	}
+	return nil
 }
 
 // The request to create an invalidation.
@@ -2813,16 +2971,22 @@ func (s *CreateInvalidationInput) Validate() error {
 	return nil
 }
 
-// SetDistributionId sets the DistributionId field's value.
-func (s *CreateInvalidationInput) SetDistributionId(v string) *CreateInvalidationInput {
-	s.DistributionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateInvalidationInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetInvalidationBatch sets the InvalidationBatch field's value.
-func (s *CreateInvalidationInput) SetInvalidationBatch(v *InvalidationBatch) *CreateInvalidationInput {
-	s.InvalidationBatch = v
-	return s
+	if s.DistributionId != nil {
+		v := *s.DistributionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DistributionId", protocol.StringValue(v), metadata)
+	}
+	if s.InvalidationBatch != nil {
+		v := s.InvalidationBatch
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "InvalidationBatch", v, metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -2855,16 +3019,21 @@ func (s CreateInvalidationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInvalidation sets the Invalidation field's value.
-func (s *CreateInvalidationOutput) SetInvalidation(v *Invalidation) *CreateInvalidationOutput {
-	s.Invalidation = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateInvalidationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Location != nil {
+		v := *s.Location
 
-// SetLocation sets the Location field's value.
-func (s *CreateInvalidationOutput) SetLocation(v string) *CreateInvalidationOutput {
-	s.Location = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
+	}
+	if s.Invalidation != nil {
+		v := s.Invalidation
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "Invalidation", v, metadata)
+	}
+	return nil
 }
 
 // The request to create a new streaming distribution.
@@ -2907,10 +3076,16 @@ func (s *CreateStreamingDistributionInput) Validate() error {
 	return nil
 }
 
-// SetStreamingDistributionConfig sets the StreamingDistributionConfig field's value.
-func (s *CreateStreamingDistributionInput) SetStreamingDistributionConfig(v *StreamingDistributionConfig) *CreateStreamingDistributionInput {
-	s.StreamingDistributionConfig = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StreamingDistributionConfig != nil {
+		v := s.StreamingDistributionConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfig", v, metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -2946,22 +3121,27 @@ func (s CreateStreamingDistributionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetETag sets the ETag field's value.
-func (s *CreateStreamingDistributionOutput) SetETag(v string) *CreateStreamingDistributionOutput {
-	s.ETag = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetLocation sets the Location field's value.
-func (s *CreateStreamingDistributionOutput) SetLocation(v string) *CreateStreamingDistributionOutput {
-	s.Location = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
 
-// SetStreamingDistribution sets the StreamingDistribution field's value.
-func (s *CreateStreamingDistributionOutput) SetStreamingDistribution(v *StreamingDistribution) *CreateStreamingDistributionOutput {
-	s.StreamingDistribution = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
+	}
+	if s.StreamingDistribution != nil {
+		v := s.StreamingDistribution
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "StreamingDistribution", v, metadata)
+	}
+	return nil
 }
 
 // The request to create a new streaming distribution with tags.
@@ -3004,10 +3184,16 @@ func (s *CreateStreamingDistributionWithTagsInput) Validate() error {
 	return nil
 }
 
-// SetStreamingDistributionConfigWithTags sets the StreamingDistributionConfigWithTags field's value.
-func (s *CreateStreamingDistributionWithTagsInput) SetStreamingDistributionConfigWithTags(v *StreamingDistributionConfigWithTags) *CreateStreamingDistributionWithTagsInput {
-	s.StreamingDistributionConfigWithTags = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateStreamingDistributionWithTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StreamingDistributionConfigWithTags != nil {
+		v := s.StreamingDistributionConfigWithTags
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfigWithTags", v, metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -3042,22 +3228,27 @@ func (s CreateStreamingDistributionWithTagsOutput) SDKResponseMetadata() aws.Res
 	return s.responseMetadata
 }
 
-// SetETag sets the ETag field's value.
-func (s *CreateStreamingDistributionWithTagsOutput) SetETag(v string) *CreateStreamingDistributionWithTagsOutput {
-	s.ETag = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateStreamingDistributionWithTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetLocation sets the Location field's value.
-func (s *CreateStreamingDistributionWithTagsOutput) SetLocation(v string) *CreateStreamingDistributionWithTagsOutput {
-	s.Location = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
 
-// SetStreamingDistribution sets the StreamingDistribution field's value.
-func (s *CreateStreamingDistributionWithTagsOutput) SetStreamingDistribution(v *StreamingDistribution) *CreateStreamingDistributionWithTagsOutput {
-	s.StreamingDistribution = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
+	}
+	if s.StreamingDistribution != nil {
+		v := s.StreamingDistribution
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "StreamingDistribution", v, metadata)
+	}
+	return nil
 }
 
 // A complex type that controls:
@@ -3166,28 +3357,33 @@ func (s *CustomErrorResponse) Validate() error {
 	return nil
 }
 
-// SetErrorCachingMinTTL sets the ErrorCachingMinTTL field's value.
-func (s *CustomErrorResponse) SetErrorCachingMinTTL(v int64) *CustomErrorResponse {
-	s.ErrorCachingMinTTL = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CustomErrorResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ErrorCachingMinTTL != nil {
+		v := *s.ErrorCachingMinTTL
 
-// SetErrorCode sets the ErrorCode field's value.
-func (s *CustomErrorResponse) SetErrorCode(v int64) *CustomErrorResponse {
-	s.ErrorCode = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorCachingMinTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.ErrorCode != nil {
+		v := *s.ErrorCode
 
-// SetResponseCode sets the ResponseCode field's value.
-func (s *CustomErrorResponse) SetResponseCode(v string) *CustomErrorResponse {
-	s.ResponseCode = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorCode", protocol.Int64Value(v), metadata)
+	}
+	if s.ResponseCode != nil {
+		v := *s.ResponseCode
 
-// SetResponsePagePath sets the ResponsePagePath field's value.
-func (s *CustomErrorResponse) SetResponsePagePath(v string) *CustomErrorResponse {
-	s.ResponsePagePath = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResponseCode", protocol.StringValue(v), metadata)
+	}
+	if s.ResponsePagePath != nil {
+		v := *s.ResponsePagePath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResponsePagePath", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that controls:
@@ -3247,16 +3443,27 @@ func (s *CustomErrorResponses) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *CustomErrorResponses) SetItems(v []CustomErrorResponse) *CustomErrorResponses {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CustomErrorResponses) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *CustomErrorResponses) SetQuantity(v int64) *CustomErrorResponses {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "CustomErrorResponse"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that contains the list of Custom Headers for each origin.
@@ -3306,16 +3513,27 @@ func (s *CustomHeaders) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *CustomHeaders) SetItems(v []OriginCustomHeader) *CustomHeaders {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CustomHeaders) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *CustomHeaders) SetQuantity(v int64) *CustomHeaders {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "OriginCustomHeader"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A customer origin.
@@ -3397,43 +3615,48 @@ func (s *CustomOriginConfig) Validate() error {
 	return nil
 }
 
-// SetHTTPPort sets the HTTPPort field's value.
-func (s *CustomOriginConfig) SetHTTPPort(v int64) *CustomOriginConfig {
-	s.HTTPPort = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CustomOriginConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HTTPPort != nil {
+		v := *s.HTTPPort
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HTTPPort", protocol.Int64Value(v), metadata)
+	}
+	if s.HTTPSPort != nil {
+		v := *s.HTTPSPort
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HTTPSPort", protocol.Int64Value(v), metadata)
+	}
+	if s.OriginKeepaliveTimeout != nil {
+		v := *s.OriginKeepaliveTimeout
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginKeepaliveTimeout", protocol.Int64Value(v), metadata)
+	}
+	if len(s.OriginProtocolPolicy) > 0 {
+		v := s.OriginProtocolPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginProtocolPolicy", v, metadata)
+	}
+	if s.OriginReadTimeout != nil {
+		v := *s.OriginReadTimeout
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginReadTimeout", protocol.Int64Value(v), metadata)
+	}
+	if s.OriginSslProtocols != nil {
+		v := s.OriginSslProtocols
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "OriginSslProtocols", v, metadata)
+	}
+	return nil
 }
 
-// SetHTTPSPort sets the HTTPSPort field's value.
-func (s *CustomOriginConfig) SetHTTPSPort(v int64) *CustomOriginConfig {
-	s.HTTPSPort = &v
-	return s
-}
-
-// SetOriginKeepaliveTimeout sets the OriginKeepaliveTimeout field's value.
-func (s *CustomOriginConfig) SetOriginKeepaliveTimeout(v int64) *CustomOriginConfig {
-	s.OriginKeepaliveTimeout = &v
-	return s
-}
-
-// SetOriginProtocolPolicy sets the OriginProtocolPolicy field's value.
-func (s *CustomOriginConfig) SetOriginProtocolPolicy(v OriginProtocolPolicy) *CustomOriginConfig {
-	s.OriginProtocolPolicy = v
-	return s
-}
-
-// SetOriginReadTimeout sets the OriginReadTimeout field's value.
-func (s *CustomOriginConfig) SetOriginReadTimeout(v int64) *CustomOriginConfig {
-	s.OriginReadTimeout = &v
-	return s
-}
-
-// SetOriginSslProtocols sets the OriginSslProtocols field's value.
-func (s *CustomOriginConfig) SetOriginSslProtocols(v *OriginSslProtocols) *CustomOriginConfig {
-	s.OriginSslProtocols = v
-	return s
-}
-
-// A complex type that describes the default cache behavior if you do not specify
+// A complex type that describes the default cache behavior if you don't specify
 // a CacheBehavior element or if files don't match any of the values of PathPattern
 // in CacheBehavior elements. You must create exactly one default cache behavior.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DefaultCacheBehavior
@@ -3619,70 +3842,75 @@ func (s *DefaultCacheBehavior) Validate() error {
 	return nil
 }
 
-// SetAllowedMethods sets the AllowedMethods field's value.
-func (s *DefaultCacheBehavior) SetAllowedMethods(v *AllowedMethods) *DefaultCacheBehavior {
-	s.AllowedMethods = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DefaultCacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AllowedMethods != nil {
+		v := s.AllowedMethods
 
-// SetCompress sets the Compress field's value.
-func (s *DefaultCacheBehavior) SetCompress(v bool) *DefaultCacheBehavior {
-	s.Compress = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AllowedMethods", v, metadata)
+	}
+	if s.Compress != nil {
+		v := *s.Compress
 
-// SetDefaultTTL sets the DefaultTTL field's value.
-func (s *DefaultCacheBehavior) SetDefaultTTL(v int64) *DefaultCacheBehavior {
-	s.DefaultTTL = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Compress", protocol.BoolValue(v), metadata)
+	}
+	if s.DefaultTTL != nil {
+		v := *s.DefaultTTL
 
-// SetForwardedValues sets the ForwardedValues field's value.
-func (s *DefaultCacheBehavior) SetForwardedValues(v *ForwardedValues) *DefaultCacheBehavior {
-	s.ForwardedValues = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.ForwardedValues != nil {
+		v := s.ForwardedValues
 
-// SetLambdaFunctionAssociations sets the LambdaFunctionAssociations field's value.
-func (s *DefaultCacheBehavior) SetLambdaFunctionAssociations(v *LambdaFunctionAssociations) *DefaultCacheBehavior {
-	s.LambdaFunctionAssociations = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ForwardedValues", v, metadata)
+	}
+	if s.LambdaFunctionAssociations != nil {
+		v := s.LambdaFunctionAssociations
 
-// SetMaxTTL sets the MaxTTL field's value.
-func (s *DefaultCacheBehavior) SetMaxTTL(v int64) *DefaultCacheBehavior {
-	s.MaxTTL = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LambdaFunctionAssociations", v, metadata)
+	}
+	if s.MaxTTL != nil {
+		v := *s.MaxTTL
 
-// SetMinTTL sets the MinTTL field's value.
-func (s *DefaultCacheBehavior) SetMinTTL(v int64) *DefaultCacheBehavior {
-	s.MinTTL = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.MinTTL != nil {
+		v := *s.MinTTL
 
-// SetSmoothStreaming sets the SmoothStreaming field's value.
-func (s *DefaultCacheBehavior) SetSmoothStreaming(v bool) *DefaultCacheBehavior {
-	s.SmoothStreaming = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MinTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.SmoothStreaming != nil {
+		v := *s.SmoothStreaming
 
-// SetTargetOriginId sets the TargetOriginId field's value.
-func (s *DefaultCacheBehavior) SetTargetOriginId(v string) *DefaultCacheBehavior {
-	s.TargetOriginId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SmoothStreaming", protocol.BoolValue(v), metadata)
+	}
+	if s.TargetOriginId != nil {
+		v := *s.TargetOriginId
 
-// SetTrustedSigners sets the TrustedSigners field's value.
-func (s *DefaultCacheBehavior) SetTrustedSigners(v *TrustedSigners) *DefaultCacheBehavior {
-	s.TrustedSigners = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TargetOriginId", protocol.StringValue(v), metadata)
+	}
+	if s.TrustedSigners != nil {
+		v := s.TrustedSigners
 
-// SetViewerProtocolPolicy sets the ViewerProtocolPolicy field's value.
-func (s *DefaultCacheBehavior) SetViewerProtocolPolicy(v ViewerProtocolPolicy) *DefaultCacheBehavior {
-	s.ViewerProtocolPolicy = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TrustedSigners", v, metadata)
+	}
+	if len(s.ViewerProtocolPolicy) > 0 {
+		v := s.ViewerProtocolPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ViewerProtocolPolicy", v, metadata)
+	}
+	return nil
 }
 
 // Deletes a origin access identity.
@@ -3724,16 +3952,22 @@ func (s *DeleteCloudFrontOriginAccessIdentityInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DeleteCloudFrontOriginAccessIdentityInput) SetId(v string) *DeleteCloudFrontOriginAccessIdentityInput {
-	s.Id = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetIfMatch sets the IfMatch field's value.
-func (s *DeleteCloudFrontOriginAccessIdentityInput) SetIfMatch(v string) *DeleteCloudFrontOriginAccessIdentityInput {
-	s.IfMatch = &v
-	return s
+	if s.IfMatch != nil {
+		v := *s.IfMatch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteCloudFrontOriginAccessIdentityOutput
@@ -3756,6 +3990,11 @@ func (s DeleteCloudFrontOriginAccessIdentityOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteCloudFrontOriginAccessIdentityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // This action deletes a web distribution. To delete a web distribution using
@@ -3831,16 +4070,22 @@ func (s *DeleteDistributionInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DeleteDistributionInput) SetId(v string) *DeleteDistributionInput {
-	s.Id = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetIfMatch sets the IfMatch field's value.
-func (s *DeleteDistributionInput) SetIfMatch(v string) *DeleteDistributionInput {
-	s.IfMatch = &v
-	return s
+	if s.IfMatch != nil {
+		v := *s.IfMatch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteDistributionOutput
@@ -3863,6 +4108,82 @@ func (s DeleteDistributionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDistributionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRoleRequest
+type DeleteServiceLinkedRoleInput struct {
+	_ struct{} `type:"structure"`
+
+	// RoleName is a required field
+	RoleName *string `location:"uri" locationName:"RoleName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteServiceLinkedRoleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteServiceLinkedRoleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteServiceLinkedRoleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteServiceLinkedRoleInput"}
+
+	if s.RoleName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteServiceLinkedRoleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.RoleName != nil {
+		v := *s.RoleName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "RoleName", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRoleOutput
+type DeleteServiceLinkedRoleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteServiceLinkedRoleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteServiceLinkedRoleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteServiceLinkedRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteServiceLinkedRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The request to delete a streaming distribution.
@@ -3904,16 +4225,22 @@ func (s *DeleteStreamingDistributionInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *DeleteStreamingDistributionInput) SetId(v string) *DeleteStreamingDistributionInput {
-	s.Id = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetIfMatch sets the IfMatch field's value.
-func (s *DeleteStreamingDistributionInput) SetIfMatch(v string) *DeleteStreamingDistributionInput {
-	s.IfMatch = &v
-	return s
+	if s.IfMatch != nil {
+		v := *s.IfMatch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistributionOutput
@@ -3936,6 +4263,11 @@ func (s DeleteStreamingDistributionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteStreamingDistributionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The distribution's information.
@@ -3967,7 +4299,7 @@ type Distribution struct {
 	// DistributionConfig is a required field
 	DistributionConfig *DistributionConfig `type:"structure" required:"true"`
 
-	// The domain name corresponding to the distribution. For example: d604721fxaaqy9.cloudfront.net.
+	// The domain name corresponding to the distribution, for example, d111111abcdef8.cloudfront.net.
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -4005,52 +4337,57 @@ func (s Distribution) GoString() string {
 	return s.String()
 }
 
-// SetARN sets the ARN field's value.
-func (s *Distribution) SetARN(v string) *Distribution {
-	s.ARN = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Distribution) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ARN != nil {
+		v := *s.ARN
 
-// SetActiveTrustedSigners sets the ActiveTrustedSigners field's value.
-func (s *Distribution) SetActiveTrustedSigners(v *ActiveTrustedSigners) *Distribution {
-	s.ActiveTrustedSigners = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ARN", protocol.StringValue(v), metadata)
+	}
+	if s.ActiveTrustedSigners != nil {
+		v := s.ActiveTrustedSigners
 
-// SetDistributionConfig sets the DistributionConfig field's value.
-func (s *Distribution) SetDistributionConfig(v *DistributionConfig) *Distribution {
-	s.DistributionConfig = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ActiveTrustedSigners", v, metadata)
+	}
+	if s.DistributionConfig != nil {
+		v := s.DistributionConfig
 
-// SetDomainName sets the DomainName field's value.
-func (s *Distribution) SetDomainName(v string) *Distribution {
-	s.DomainName = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DistributionConfig", v, metadata)
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
 
-// SetId sets the Id field's value.
-func (s *Distribution) SetId(v string) *Distribution {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetInProgressInvalidationBatches sets the InProgressInvalidationBatches field's value.
-func (s *Distribution) SetInProgressInvalidationBatches(v int64) *Distribution {
-	s.InProgressInvalidationBatches = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.InProgressInvalidationBatches != nil {
+		v := *s.InProgressInvalidationBatches
 
-// SetLastModifiedTime sets the LastModifiedTime field's value.
-func (s *Distribution) SetLastModifiedTime(v time.Time) *Distribution {
-	s.LastModifiedTime = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InProgressInvalidationBatches", protocol.Int64Value(v), metadata)
+	}
+	if s.LastModifiedTime != nil {
+		v := *s.LastModifiedTime
 
-// SetStatus sets the Status field's value.
-func (s *Distribution) SetStatus(v string) *Distribution {
-	s.Status = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A distribution configuration.
@@ -4108,7 +4445,7 @@ type DistributionConfig struct {
 	// in the Amazon CloudFront Developer Guide.
 	CustomErrorResponses *CustomErrorResponses `type:"structure"`
 
-	// A complex type that describes the default cache behavior if you do not specify
+	// A complex type that describes the default cache behavior if you don't specify
 	// a CacheBehavior element or if files don't match any of the values of PathPattern
 	// in CacheBehavior elements. You must create exactly one default cache behavior.
 	//
@@ -4120,7 +4457,7 @@ type DistributionConfig struct {
 	// instead of an object in your distribution (http://www.example.com/product-description.html).
 	// Specifying a default root object avoids exposing the contents of your distribution.
 	//
-	// Specify only the object name, for example, index.html. Do not add a / before
+	// Specify only the object name, for example, index.html. Don't add a / before
 	// the object name.
 	//
 	// If you don't want to specify a default root object when you create a distribution,
@@ -4168,7 +4505,7 @@ type DistributionConfig struct {
 	// want to access your content. However, if you're using signed URLs or signed
 	// cookies to restrict access to your content, and if you're using a custom
 	// policy that includes the IpAddress parameter to restrict the IP addresses
-	// that can access your content, do not enable IPv6. If you want to restrict
+	// that can access your content, don't enable IPv6. If you want to restrict
 	// access to some content by IP address and not restrict access to other content
 	// (or restrict access but not by IP address), you can create two distributions.
 	// For more information, see Creating a Signed URL Using a Custom Policy (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html)
@@ -4226,18 +4563,90 @@ type DistributionConfig struct {
 
 	// A complex type that specifies the following:
 	//
-	//    * Which SSL/TLS certificate to use when viewers request objects using
-	//    HTTPS
+	//    * Whether you want viewers to use HTTP or HTTPS to request your objects.
 	//
-	//    * Whether you want CloudFront to use dedicated IP addresses or SNI when
-	//    you're using alternate domain names in your object names
+	//    * If you want viewers to use HTTPS, whether you're using an alternate
+	//    domain name such as example.com or the CloudFront domain name for your
+	//    distribution, such as d111111abcdef8.cloudfront.net.
 	//
-	//    * The minimum protocol version that you want CloudFront to use when communicating
-	//    with viewers
+	//    * If you're using an alternate domain name, whether AWS Certificate Manager
+	//    (ACM) provided the certificate, or you purchased a certificate from a
+	//    third-party certificate authority and imported it into ACM or uploaded
+	//    it to the IAM certificate store.
 	//
-	// For more information, see Using an HTTPS Connection to Access Your Objects
-	// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
-	// in the Amazon Amazon CloudFront Developer Guide.
+	// You must specify only one of the following values:
+	//
+	//    * ViewerCertificate$ACMCertificateArn
+	//
+	//    * ViewerCertificate$IAMCertificateId
+	//
+	//    * ViewerCertificate$CloudFrontDefaultCertificate
+	//
+	// Don't specify false for CloudFrontDefaultCertificate.
+	//
+	// If you want viewers to use HTTP instead of HTTPS to request your objects:
+	// Specify the following value:
+	//
+	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+	//
+	// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
+	// behaviors.
+	//
+	// If you want viewers to use HTTPS to request your objects: Choose the type
+	// of certificate that you want to use based on whether you're using an alternate
+	// domain name for your objects or the CloudFront domain name:
+	//
+	//    * If you're using an alternate domain name, such as example.com: Specify
+	//    one of the following values, depending on whether ACM provided your certificate
+	//    or you purchased your certificate from third-party certificate authority:
+	//
+	// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
+	//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
+	//    that you want to use for this distribution.
+	//
+	// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
+	//    ID is the ID that IAM returned when you added the certificate to the IAM
+	//    certificate store.
+	//
+	// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
+	//    a value for SSLSupportMethod.
+	//
+	// If you choose to use an ACM certificate or a certificate in the IAM certificate
+	//    store, we recommend that you use only an alternate domain name in your
+	//    object URLs (https://example.com/logo.jpg). If you use the domain name
+	//    that is associated with your CloudFront distribution (such as https://d111111abcdef8.cloudfront.net/logo.jpg)
+	//    and the viewer supports SNI, then CloudFront behaves normally. However,
+	//    if the browser does not support SNI, the user's experience depends on
+	//    the value that you choose for SSLSupportMethod:
+	//
+	// vip: The viewer displays a warning because there is a mismatch between the
+	//    CloudFront domain name and the domain name in your SSL/TLS certificate.
+	//
+	// sni-only: CloudFront drops the connection with the browser without returning
+	//    the object.
+	//
+	//    * If you're using the CloudFront domain name for your distribution, such
+	//    as d111111abcdef8.cloudfront.net: Specify the following value:
+	//
+	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+	//
+	// If you want viewers to use HTTPS, you must also specify one of the following
+	// values in your cache behaviors:
+	//
+	//    *  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
+	//
+	//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
+	//
+	// You can also optionally require that CloudFront use HTTPS to communicate
+	// with your origin by specifying one of the following values for the applicable
+	// origins:
+	//
+	//    * <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
+	//
+	//    * <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
+	//
+	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
+	// in the Amazon CloudFront Developer Guide.
 	ViewerCertificate *ViewerCertificate `type:"structure"`
 
 	// A unique identifier that specifies the AWS WAF web ACL, if any, to associate
@@ -4329,100 +4738,105 @@ func (s *DistributionConfig) Validate() error {
 	return nil
 }
 
-// SetAliases sets the Aliases field's value.
-func (s *DistributionConfig) SetAliases(v *Aliases) *DistributionConfig {
-	s.Aliases = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DistributionConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Aliases != nil {
+		v := s.Aliases
 
-// SetCacheBehaviors sets the CacheBehaviors field's value.
-func (s *DistributionConfig) SetCacheBehaviors(v *CacheBehaviors) *DistributionConfig {
-	s.CacheBehaviors = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Aliases", v, metadata)
+	}
+	if s.CacheBehaviors != nil {
+		v := s.CacheBehaviors
 
-// SetCallerReference sets the CallerReference field's value.
-func (s *DistributionConfig) SetCallerReference(v string) *DistributionConfig {
-	s.CallerReference = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CacheBehaviors", v, metadata)
+	}
+	if s.CallerReference != nil {
+		v := *s.CallerReference
 
-// SetComment sets the Comment field's value.
-func (s *DistributionConfig) SetComment(v string) *DistributionConfig {
-	s.Comment = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallerReference", protocol.StringValue(v), metadata)
+	}
+	if s.Comment != nil {
+		v := *s.Comment
 
-// SetCustomErrorResponses sets the CustomErrorResponses field's value.
-func (s *DistributionConfig) SetCustomErrorResponses(v *CustomErrorResponses) *DistributionConfig {
-	s.CustomErrorResponses = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.CustomErrorResponses != nil {
+		v := s.CustomErrorResponses
 
-// SetDefaultCacheBehavior sets the DefaultCacheBehavior field's value.
-func (s *DistributionConfig) SetDefaultCacheBehavior(v *DefaultCacheBehavior) *DistributionConfig {
-	s.DefaultCacheBehavior = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CustomErrorResponses", v, metadata)
+	}
+	if s.DefaultCacheBehavior != nil {
+		v := s.DefaultCacheBehavior
 
-// SetDefaultRootObject sets the DefaultRootObject field's value.
-func (s *DistributionConfig) SetDefaultRootObject(v string) *DistributionConfig {
-	s.DefaultRootObject = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DefaultCacheBehavior", v, metadata)
+	}
+	if s.DefaultRootObject != nil {
+		v := *s.DefaultRootObject
 
-// SetEnabled sets the Enabled field's value.
-func (s *DistributionConfig) SetEnabled(v bool) *DistributionConfig {
-	s.Enabled = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultRootObject", protocol.StringValue(v), metadata)
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
 
-// SetHttpVersion sets the HttpVersion field's value.
-func (s *DistributionConfig) SetHttpVersion(v HttpVersion) *DistributionConfig {
-	s.HttpVersion = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if len(s.HttpVersion) > 0 {
+		v := s.HttpVersion
 
-// SetIsIPV6Enabled sets the IsIPV6Enabled field's value.
-func (s *DistributionConfig) SetIsIPV6Enabled(v bool) *DistributionConfig {
-	s.IsIPV6Enabled = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HttpVersion", v, metadata)
+	}
+	if s.IsIPV6Enabled != nil {
+		v := *s.IsIPV6Enabled
 
-// SetLogging sets the Logging field's value.
-func (s *DistributionConfig) SetLogging(v *LoggingConfig) *DistributionConfig {
-	s.Logging = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsIPV6Enabled", protocol.BoolValue(v), metadata)
+	}
+	if s.Logging != nil {
+		v := s.Logging
 
-// SetOrigins sets the Origins field's value.
-func (s *DistributionConfig) SetOrigins(v *Origins) *DistributionConfig {
-	s.Origins = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Logging", v, metadata)
+	}
+	if s.Origins != nil {
+		v := s.Origins
 
-// SetPriceClass sets the PriceClass field's value.
-func (s *DistributionConfig) SetPriceClass(v PriceClass) *DistributionConfig {
-	s.PriceClass = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Origins", v, metadata)
+	}
+	if len(s.PriceClass) > 0 {
+		v := s.PriceClass
 
-// SetRestrictions sets the Restrictions field's value.
-func (s *DistributionConfig) SetRestrictions(v *Restrictions) *DistributionConfig {
-	s.Restrictions = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PriceClass", v, metadata)
+	}
+	if s.Restrictions != nil {
+		v := s.Restrictions
 
-// SetViewerCertificate sets the ViewerCertificate field's value.
-func (s *DistributionConfig) SetViewerCertificate(v *ViewerCertificate) *DistributionConfig {
-	s.ViewerCertificate = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Restrictions", v, metadata)
+	}
+	if s.ViewerCertificate != nil {
+		v := s.ViewerCertificate
 
-// SetWebACLId sets the WebACLId field's value.
-func (s *DistributionConfig) SetWebACLId(v string) *DistributionConfig {
-	s.WebACLId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ViewerCertificate", v, metadata)
+	}
+	if s.WebACLId != nil {
+		v := *s.WebACLId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "WebACLId", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A distribution Configuration and a list of tags to be associated with the
@@ -4480,16 +4894,21 @@ func (s *DistributionConfigWithTags) Validate() error {
 	return nil
 }
 
-// SetDistributionConfig sets the DistributionConfig field's value.
-func (s *DistributionConfigWithTags) SetDistributionConfig(v *DistributionConfig) *DistributionConfigWithTags {
-	s.DistributionConfig = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DistributionConfigWithTags) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DistributionConfig != nil {
+		v := s.DistributionConfig
 
-// SetTags sets the Tags field's value.
-func (s *DistributionConfigWithTags) SetTags(v *Tags) *DistributionConfigWithTags {
-	s.Tags = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DistributionConfig", v, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Tags", v, metadata)
+	}
+	return nil
 }
 
 // A distribution list.
@@ -4540,40 +4959,51 @@ func (s DistributionList) GoString() string {
 	return s.String()
 }
 
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *DistributionList) SetIsTruncated(v bool) *DistributionList {
-	s.IsTruncated = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DistributionList) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
 
-// SetItems sets the Items field's value.
-func (s *DistributionList) SetItems(v []DistributionSummary) *DistributionList {
-	s.Items = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetMarker sets the Marker field's value.
-func (s *DistributionList) SetMarker(v string) *DistributionList {
-	s.Marker = &v
-	return s
-}
+		metadata := protocol.Metadata{ListLocationName: "DistributionSummary"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *DistributionList) SetMaxItems(v int64) *DistributionList {
-	s.MaxItems = &v
-	return s
-}
+	}
+	if s.Marker != nil {
+		v := *s.Marker
 
-// SetNextMarker sets the NextMarker field's value.
-func (s *DistributionList) SetNextMarker(v string) *DistributionList {
-	s.NextMarker = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
 
-// SetQuantity sets the Quantity field's value.
-func (s *DistributionList) SetQuantity(v int64) *DistributionList {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A summary of the information about a CloudFront distribution.
@@ -4608,14 +5038,14 @@ type DistributionSummary struct {
 	// CustomErrorResponses is a required field
 	CustomErrorResponses *CustomErrorResponses `type:"structure" required:"true"`
 
-	// A complex type that describes the default cache behavior if you do not specify
+	// A complex type that describes the default cache behavior if you don't specify
 	// a CacheBehavior element or if files don't match any of the values of PathPattern
 	// in CacheBehavior elements. You must create exactly one default cache behavior.
 	//
 	// DefaultCacheBehavior is a required field
 	DefaultCacheBehavior *DefaultCacheBehavior `type:"structure" required:"true"`
 
-	// The domain name that corresponds to the distribution. For example: d604721fxaaqy9.cloudfront.net.
+	// The domain name that corresponds to the distribution, for example, d111111abcdef8.cloudfront.net.
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -4670,18 +5100,90 @@ type DistributionSummary struct {
 
 	// A complex type that specifies the following:
 	//
-	//    * Which SSL/TLS certificate to use when viewers request objects using
-	//    HTTPS
+	//    * Whether you want viewers to use HTTP or HTTPS to request your objects.
 	//
-	//    * Whether you want CloudFront to use dedicated IP addresses or SNI when
-	//    you're using alternate domain names in your object names
+	//    * If you want viewers to use HTTPS, whether you're using an alternate
+	//    domain name such as example.com or the CloudFront domain name for your
+	//    distribution, such as d111111abcdef8.cloudfront.net.
 	//
-	//    * The minimum protocol version that you want CloudFront to use when communicating
-	//    with viewers
+	//    * If you're using an alternate domain name, whether AWS Certificate Manager
+	//    (ACM) provided the certificate, or you purchased a certificate from a
+	//    third-party certificate authority and imported it into ACM or uploaded
+	//    it to the IAM certificate store.
 	//
-	// For more information, see Using an HTTPS Connection to Access Your Objects
-	// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
-	// in the Amazon Amazon CloudFront Developer Guide.
+	// You must specify only one of the following values:
+	//
+	//    * ViewerCertificate$ACMCertificateArn
+	//
+	//    * ViewerCertificate$IAMCertificateId
+	//
+	//    * ViewerCertificate$CloudFrontDefaultCertificate
+	//
+	// Don't specify false for CloudFrontDefaultCertificate.
+	//
+	// If you want viewers to use HTTP instead of HTTPS to request your objects:
+	// Specify the following value:
+	//
+	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+	//
+	// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
+	// behaviors.
+	//
+	// If you want viewers to use HTTPS to request your objects: Choose the type
+	// of certificate that you want to use based on whether you're using an alternate
+	// domain name for your objects or the CloudFront domain name:
+	//
+	//    * If you're using an alternate domain name, such as example.com: Specify
+	//    one of the following values, depending on whether ACM provided your certificate
+	//    or you purchased your certificate from third-party certificate authority:
+	//
+	// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
+	//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
+	//    that you want to use for this distribution.
+	//
+	// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
+	//    ID is the ID that IAM returned when you added the certificate to the IAM
+	//    certificate store.
+	//
+	// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
+	//    a value for SSLSupportMethod.
+	//
+	// If you choose to use an ACM certificate or a certificate in the IAM certificate
+	//    store, we recommend that you use only an alternate domain name in your
+	//    object URLs (https://example.com/logo.jpg). If you use the domain name
+	//    that is associated with your CloudFront distribution (such as https://d111111abcdef8.cloudfront.net/logo.jpg)
+	//    and the viewer supports SNI, then CloudFront behaves normally. However,
+	//    if the browser does not support SNI, the user's experience depends on
+	//    the value that you choose for SSLSupportMethod:
+	//
+	// vip: The viewer displays a warning because there is a mismatch between the
+	//    CloudFront domain name and the domain name in your SSL/TLS certificate.
+	//
+	// sni-only: CloudFront drops the connection with the browser without returning
+	//    the object.
+	//
+	//    * If you're using the CloudFront domain name for your distribution, such
+	//    as d111111abcdef8.cloudfront.net: Specify the following value:
+	//
+	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+	//
+	// If you want viewers to use HTTPS, you must also specify one of the following
+	// values in your cache behaviors:
+	//
+	//    *  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
+	//
+	//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
+	//
+	// You can also optionally require that CloudFront use HTTPS to communicate
+	// with your origin by specifying one of the following values for the applicable
+	// origins:
+	//
+	//    * <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
+	//
+	//    * <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
+	//
+	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
+	// in the Amazon CloudFront Developer Guide.
 	//
 	// ViewerCertificate is a required field
 	ViewerCertificate *ViewerCertificate `type:"structure" required:"true"`
@@ -4702,112 +5204,117 @@ func (s DistributionSummary) GoString() string {
 	return s.String()
 }
 
-// SetARN sets the ARN field's value.
-func (s *DistributionSummary) SetARN(v string) *DistributionSummary {
-	s.ARN = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DistributionSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ARN != nil {
+		v := *s.ARN
 
-// SetAliases sets the Aliases field's value.
-func (s *DistributionSummary) SetAliases(v *Aliases) *DistributionSummary {
-	s.Aliases = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ARN", protocol.StringValue(v), metadata)
+	}
+	if s.Aliases != nil {
+		v := s.Aliases
 
-// SetCacheBehaviors sets the CacheBehaviors field's value.
-func (s *DistributionSummary) SetCacheBehaviors(v *CacheBehaviors) *DistributionSummary {
-	s.CacheBehaviors = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Aliases", v, metadata)
+	}
+	if s.CacheBehaviors != nil {
+		v := s.CacheBehaviors
 
-// SetComment sets the Comment field's value.
-func (s *DistributionSummary) SetComment(v string) *DistributionSummary {
-	s.Comment = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CacheBehaviors", v, metadata)
+	}
+	if s.Comment != nil {
+		v := *s.Comment
 
-// SetCustomErrorResponses sets the CustomErrorResponses field's value.
-func (s *DistributionSummary) SetCustomErrorResponses(v *CustomErrorResponses) *DistributionSummary {
-	s.CustomErrorResponses = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.CustomErrorResponses != nil {
+		v := s.CustomErrorResponses
 
-// SetDefaultCacheBehavior sets the DefaultCacheBehavior field's value.
-func (s *DistributionSummary) SetDefaultCacheBehavior(v *DefaultCacheBehavior) *DistributionSummary {
-	s.DefaultCacheBehavior = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CustomErrorResponses", v, metadata)
+	}
+	if s.DefaultCacheBehavior != nil {
+		v := s.DefaultCacheBehavior
 
-// SetDomainName sets the DomainName field's value.
-func (s *DistributionSummary) SetDomainName(v string) *DistributionSummary {
-	s.DomainName = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DefaultCacheBehavior", v, metadata)
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
 
-// SetEnabled sets the Enabled field's value.
-func (s *DistributionSummary) SetEnabled(v bool) *DistributionSummary {
-	s.Enabled = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), metadata)
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
 
-// SetHttpVersion sets the HttpVersion field's value.
-func (s *DistributionSummary) SetHttpVersion(v HttpVersion) *DistributionSummary {
-	s.HttpVersion = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if len(s.HttpVersion) > 0 {
+		v := s.HttpVersion
 
-// SetId sets the Id field's value.
-func (s *DistributionSummary) SetId(v string) *DistributionSummary {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HttpVersion", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetIsIPV6Enabled sets the IsIPV6Enabled field's value.
-func (s *DistributionSummary) SetIsIPV6Enabled(v bool) *DistributionSummary {
-	s.IsIPV6Enabled = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.IsIPV6Enabled != nil {
+		v := *s.IsIPV6Enabled
 
-// SetLastModifiedTime sets the LastModifiedTime field's value.
-func (s *DistributionSummary) SetLastModifiedTime(v time.Time) *DistributionSummary {
-	s.LastModifiedTime = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsIPV6Enabled", protocol.BoolValue(v), metadata)
+	}
+	if s.LastModifiedTime != nil {
+		v := *s.LastModifiedTime
 
-// SetOrigins sets the Origins field's value.
-func (s *DistributionSummary) SetOrigins(v *Origins) *DistributionSummary {
-	s.Origins = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if s.Origins != nil {
+		v := s.Origins
 
-// SetPriceClass sets the PriceClass field's value.
-func (s *DistributionSummary) SetPriceClass(v PriceClass) *DistributionSummary {
-	s.PriceClass = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Origins", v, metadata)
+	}
+	if len(s.PriceClass) > 0 {
+		v := s.PriceClass
 
-// SetRestrictions sets the Restrictions field's value.
-func (s *DistributionSummary) SetRestrictions(v *Restrictions) *DistributionSummary {
-	s.Restrictions = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PriceClass", v, metadata)
+	}
+	if s.Restrictions != nil {
+		v := s.Restrictions
 
-// SetStatus sets the Status field's value.
-func (s *DistributionSummary) SetStatus(v string) *DistributionSummary {
-	s.Status = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Restrictions", v, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
 
-// SetViewerCertificate sets the ViewerCertificate field's value.
-func (s *DistributionSummary) SetViewerCertificate(v *ViewerCertificate) *DistributionSummary {
-	s.ViewerCertificate = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), metadata)
+	}
+	if s.ViewerCertificate != nil {
+		v := s.ViewerCertificate
 
-// SetWebACLId sets the WebACLId field's value.
-func (s *DistributionSummary) SetWebACLId(v string) *DistributionSummary {
-	s.WebACLId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ViewerCertificate", v, metadata)
+	}
+	if s.WebACLId != nil {
+		v := *s.WebACLId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "WebACLId", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that specifies how CloudFront handles query strings and cookies.
@@ -4825,7 +5332,7 @@ type ForwardedValues struct {
 	Cookies *CookiePreference `type:"structure" required:"true"`
 
 	// A complex type that specifies the Headers, if any, that you want CloudFront
-	// to vary upon for this cache behavior.
+	// to base caching on for this cache behavior.
 	Headers *Headers `type:"structure"`
 
 	// Indicates whether you want CloudFront to forward query strings to the origin
@@ -4903,28 +5410,33 @@ func (s *ForwardedValues) Validate() error {
 	return nil
 }
 
-// SetCookies sets the Cookies field's value.
-func (s *ForwardedValues) SetCookies(v *CookiePreference) *ForwardedValues {
-	s.Cookies = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ForwardedValues) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Cookies != nil {
+		v := s.Cookies
 
-// SetHeaders sets the Headers field's value.
-func (s *ForwardedValues) SetHeaders(v *Headers) *ForwardedValues {
-	s.Headers = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Cookies", v, metadata)
+	}
+	if s.Headers != nil {
+		v := s.Headers
 
-// SetQueryString sets the QueryString field's value.
-func (s *ForwardedValues) SetQueryString(v bool) *ForwardedValues {
-	s.QueryString = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Headers", v, metadata)
+	}
+	if s.QueryString != nil {
+		v := *s.QueryString
 
-// SetQueryStringCacheKeys sets the QueryStringCacheKeys field's value.
-func (s *ForwardedValues) SetQueryStringCacheKeys(v *QueryStringCacheKeys) *ForwardedValues {
-	s.QueryStringCacheKeys = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "QueryString", protocol.BoolValue(v), metadata)
+	}
+	if s.QueryStringCacheKeys != nil {
+		v := s.QueryStringCacheKeys
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "QueryStringCacheKeys", v, metadata)
+	}
+	return nil
 }
 
 // A complex type that controls the countries in which your content is distributed.
@@ -4944,7 +5456,7 @@ type GeoRestriction struct {
 	// CloudFront and MaxMind both use ISO 3166 country codes. For the current list
 	// of countries and the corresponding codes, see ISO 3166-1-alpha-2 code on
 	// the International Organization for Standardization website. You can also
-	// refer to the country list in the CloudFront console, which includes both
+	// refer to the country list on the CloudFront console, which includes both
 	// country names and codes.
 	Items []string `locationNameList:"Location" type:"list"`
 
@@ -4962,7 +5474,7 @@ type GeoRestriction struct {
 	//    restricted by client geo location.
 	//
 	//    * blacklist: The Location elements specify the countries in which you
-	//    do not want CloudFront to distribute your content.
+	//    don't want CloudFront to distribute your content.
 	//
 	//    * whitelist: The Location elements specify the countries in which you
 	//    want CloudFront to distribute your content.
@@ -4998,22 +5510,33 @@ func (s *GeoRestriction) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *GeoRestriction) SetItems(v []string) *GeoRestriction {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GeoRestriction) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *GeoRestriction) SetQuantity(v int64) *GeoRestriction {
-	s.Quantity = &v
-	return s
-}
+		metadata := protocol.Metadata{ListLocationName: "Location"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
 
-// SetRestrictionType sets the RestrictionType field's value.
-func (s *GeoRestriction) SetRestrictionType(v GeoRestrictionType) *GeoRestriction {
-	s.RestrictionType = v
-	return s
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	if len(s.RestrictionType) > 0 {
+		v := s.RestrictionType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RestrictionType", v, metadata)
+	}
+	return nil
 }
 
 // The origin access identity's configuration information. For more information,
@@ -5052,10 +5575,16 @@ func (s *GetCloudFrontOriginAccessIdentityConfigInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetCloudFrontOriginAccessIdentityConfigInput) SetId(v string) *GetCloudFrontOriginAccessIdentityConfigInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCloudFrontOriginAccessIdentityConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -5087,16 +5616,21 @@ func (s GetCloudFrontOriginAccessIdentityConfigOutput) SDKResponseMetadata() aws
 	return s.responseMetadata
 }
 
-// SetCloudFrontOriginAccessIdentityConfig sets the CloudFrontOriginAccessIdentityConfig field's value.
-func (s *GetCloudFrontOriginAccessIdentityConfigOutput) SetCloudFrontOriginAccessIdentityConfig(v *OriginAccessIdentityConfig) *GetCloudFrontOriginAccessIdentityConfigOutput {
-	s.CloudFrontOriginAccessIdentityConfig = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCloudFrontOriginAccessIdentityConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetETag sets the ETag field's value.
-func (s *GetCloudFrontOriginAccessIdentityConfigOutput) SetETag(v string) *GetCloudFrontOriginAccessIdentityConfigOutput {
-	s.ETag = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.CloudFrontOriginAccessIdentityConfig != nil {
+		v := s.CloudFrontOriginAccessIdentityConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityConfig", v, metadata)
+	}
+	return nil
 }
 
 // The request to get an origin access identity's information.
@@ -5134,10 +5668,16 @@ func (s *GetCloudFrontOriginAccessIdentityInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetCloudFrontOriginAccessIdentityInput) SetId(v string) *GetCloudFrontOriginAccessIdentityInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -5170,16 +5710,21 @@ func (s GetCloudFrontOriginAccessIdentityOutput) SDKResponseMetadata() aws.Respo
 	return s.responseMetadata
 }
 
-// SetCloudFrontOriginAccessIdentity sets the CloudFrontOriginAccessIdentity field's value.
-func (s *GetCloudFrontOriginAccessIdentityOutput) SetCloudFrontOriginAccessIdentity(v *OriginAccessIdentity) *GetCloudFrontOriginAccessIdentityOutput {
-	s.CloudFrontOriginAccessIdentity = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetETag sets the ETag field's value.
-func (s *GetCloudFrontOriginAccessIdentityOutput) SetETag(v string) *GetCloudFrontOriginAccessIdentityOutput {
-	s.ETag = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.CloudFrontOriginAccessIdentity != nil {
+		v := s.CloudFrontOriginAccessIdentity
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentity", v, metadata)
+	}
+	return nil
 }
 
 // The request to get a distribution configuration.
@@ -5217,10 +5762,16 @@ func (s *GetDistributionConfigInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetDistributionConfigInput) SetId(v string) *GetDistributionConfigInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDistributionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -5252,16 +5803,21 @@ func (s GetDistributionConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDistributionConfig sets the DistributionConfig field's value.
-func (s *GetDistributionConfigOutput) SetDistributionConfig(v *DistributionConfig) *GetDistributionConfigOutput {
-	s.DistributionConfig = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDistributionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetETag sets the ETag field's value.
-func (s *GetDistributionConfigOutput) SetETag(v string) *GetDistributionConfigOutput {
-	s.ETag = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.DistributionConfig != nil {
+		v := s.DistributionConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "DistributionConfig", v, metadata)
+	}
+	return nil
 }
 
 // The request to get a distribution's information.
@@ -5299,10 +5855,16 @@ func (s *GetDistributionInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetDistributionInput) SetId(v string) *GetDistributionInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -5334,16 +5896,21 @@ func (s GetDistributionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDistribution sets the Distribution field's value.
-func (s *GetDistributionOutput) SetDistribution(v *Distribution) *GetDistributionOutput {
-	s.Distribution = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetETag sets the ETag field's value.
-func (s *GetDistributionOutput) SetETag(v string) *GetDistributionOutput {
-	s.ETag = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.Distribution != nil {
+		v := s.Distribution
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "Distribution", v, metadata)
+	}
+	return nil
 }
 
 // The request to get an invalidation's information.
@@ -5390,16 +5957,22 @@ func (s *GetInvalidationInput) Validate() error {
 	return nil
 }
 
-// SetDistributionId sets the DistributionId field's value.
-func (s *GetInvalidationInput) SetDistributionId(v string) *GetInvalidationInput {
-	s.DistributionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetInvalidationInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetId sets the Id field's value.
-func (s *GetInvalidationInput) SetId(v string) *GetInvalidationInput {
-	s.Id = &v
-	return s
+	if s.DistributionId != nil {
+		v := *s.DistributionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DistributionId", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -5429,10 +6002,15 @@ func (s GetInvalidationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInvalidation sets the Invalidation field's value.
-func (s *GetInvalidationOutput) SetInvalidation(v *Invalidation) *GetInvalidationOutput {
-	s.Invalidation = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetInvalidationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Invalidation != nil {
+		v := s.Invalidation
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "Invalidation", v, metadata)
+	}
+	return nil
 }
 
 // To request to get a streaming distribution configuration.
@@ -5470,10 +6048,16 @@ func (s *GetStreamingDistributionConfigInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetStreamingDistributionConfigInput) SetId(v string) *GetStreamingDistributionConfigInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetStreamingDistributionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -5505,16 +6089,21 @@ func (s GetStreamingDistributionConfigOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// SetETag sets the ETag field's value.
-func (s *GetStreamingDistributionConfigOutput) SetETag(v string) *GetStreamingDistributionConfigOutput {
-	s.ETag = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetStreamingDistributionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetStreamingDistributionConfig sets the StreamingDistributionConfig field's value.
-func (s *GetStreamingDistributionConfigOutput) SetStreamingDistributionConfig(v *StreamingDistributionConfig) *GetStreamingDistributionConfigOutput {
-	s.StreamingDistributionConfig = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.StreamingDistributionConfig != nil {
+		v := s.StreamingDistributionConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfig", v, metadata)
+	}
+	return nil
 }
 
 // The request to get a streaming distribution's information.
@@ -5552,10 +6141,16 @@ func (s *GetStreamingDistributionInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *GetStreamingDistributionInput) SetId(v string) *GetStreamingDistributionInput {
-	s.Id = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -5588,60 +6183,70 @@ func (s GetStreamingDistributionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetETag sets the ETag field's value.
-func (s *GetStreamingDistributionOutput) SetETag(v string) *GetStreamingDistributionOutput {
-	s.ETag = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.StreamingDistribution != nil {
+		v := s.StreamingDistribution
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "StreamingDistribution", v, metadata)
+	}
+	return nil
 }
 
-// SetStreamingDistribution sets the StreamingDistribution field's value.
-func (s *GetStreamingDistributionOutput) SetStreamingDistribution(v *StreamingDistribution) *GetStreamingDistributionOutput {
-	s.StreamingDistribution = v
-	return s
-}
-
-// A complex type that specifies the headers that you want CloudFront to forward
-// to the origin for this cache behavior.
+// A complex type that specifies the request headers, if any, that you want
+// CloudFront to base caching on for this cache behavior.
 //
-// For the headers that you specify, CloudFront also caches separate versions
-// of a specified object based on the header values in viewer requests. For
-// example, suppose viewer requests for logo.jpg contain a custom Product header
-// that has a value of either Acme or Apex, and you configure CloudFront to
-// cache your content based on values in the Product header. CloudFront forwards
-// the Product header to the origin and caches the response from the origin
-// once for each header value. For more information about caching based on header
+// For the headers that you specify, CloudFront caches separate versions of
+// a specified object based on the header values in viewer requests. For example,
+// suppose viewer requests for logo.jpg contain a custom product header that
+// has a value of either acme or apex, and you configure CloudFront to cache
+// your content based on values in the product header. CloudFront forwards the
+// product header to the origin and caches the response from the origin once
+// for each header value. For more information about caching based on header
 // values, see How CloudFront Forwards and Caches Headers (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
 // in the Amazon CloudFront Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Headers
 type Headers struct {
 	_ struct{} `type:"structure"`
 
-	// A complex type that contains one Name element for each header that you want
-	// CloudFront to forward to the origin and to vary on for this cache behavior.
-	// If Quantity is 0, omit Items.
+	// A list that contains one Name element for each header that you want CloudFront
+	// to use for caching in this cache behavior. If Quantity is 0, omit Items.
 	Items []string `locationNameList:"Name" type:"list"`
 
-	// The number of different headers that you want CloudFront to forward to the
-	// origin for this cache behavior. You can configure each cache behavior in
-	// a web distribution to do one of the following:
+	// The number of different headers that you want CloudFront to base caching
+	// on for this cache behavior. You can configure each cache behavior in a web
+	// distribution to do one of the following:
 	//
 	//    * Forward all headers to your origin: Specify 1 for Quantity and * for
 	//    Name.
 	//
-	// If you configure CloudFront to forward all headers to your origin, CloudFront
-	//    doesn't cache the objects associated with this cache behavior. Instead,
-	//    it sends every request to the origin.
+	// CloudFront doesn't cache the objects that are associated with this cache
+	//    behavior. Instead, CloudFront sends every request to the origin.
 	//
 	//    * Forward a whitelist of headers you specify: Specify the number of headers
-	//    that you want to forward, and specify the header names in Name elements.
-	//    CloudFront caches your objects based on the values in all of the specified
-	//    headers. CloudFront also forwards the headers that it forwards by default,
-	//    but it caches your objects based only on the headers that you specify.
-	//
+	//    that you want CloudFront to base caching on. Then specify the header names
+	//    in Name elements. CloudFront caches your objects based on the values in
+	//    the specified headers.
 	//
 	//    * Forward only the default headers: Specify 0 for Quantity and omit Items.
 	//    In this configuration, CloudFront doesn't cache based on the values in
 	//    the request headers.
+	//
+	// Regardless of which option you choose, CloudFront forwards headers to your
+	// origin based on whether the origin is an S3 bucket or a custom origin. See
+	// the following documentation:
+	//
+	//    * S3 bucket: See HTTP Request Headers That CloudFront Removes or Updates
+	//    (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorS3Origin.html#request-s3-removed-headers)
+	//
+	//    * Custom origin: See HTTP Request Headers and CloudFront Behavior (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior)
 	//
 	// Quantity is a required field
 	Quantity *int64 `type:"integer" required:"true"`
@@ -5671,16 +6276,27 @@ func (s *Headers) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *Headers) SetItems(v []string) *Headers {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Headers) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *Headers) SetQuantity(v int64) *Headers {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "Name"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // An invalidation.
@@ -5720,28 +6336,33 @@ func (s Invalidation) GoString() string {
 	return s.String()
 }
 
-// SetCreateTime sets the CreateTime field's value.
-func (s *Invalidation) SetCreateTime(v time.Time) *Invalidation {
-	s.CreateTime = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Invalidation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreateTime != nil {
+		v := *s.CreateTime
 
-// SetId sets the Id field's value.
-func (s *Invalidation) SetId(v string) *Invalidation {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetInvalidationBatch sets the InvalidationBatch field's value.
-func (s *Invalidation) SetInvalidationBatch(v *InvalidationBatch) *Invalidation {
-	s.InvalidationBatch = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.InvalidationBatch != nil {
+		v := s.InvalidationBatch
 
-// SetStatus sets the Status field's value.
-func (s *Invalidation) SetStatus(v string) *Invalidation {
-	s.Status = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InvalidationBatch", v, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // An invalidation batch.
@@ -5810,16 +6431,21 @@ func (s *InvalidationBatch) Validate() error {
 	return nil
 }
 
-// SetCallerReference sets the CallerReference field's value.
-func (s *InvalidationBatch) SetCallerReference(v string) *InvalidationBatch {
-	s.CallerReference = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InvalidationBatch) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CallerReference != nil {
+		v := *s.CallerReference
 
-// SetPaths sets the Paths field's value.
-func (s *InvalidationBatch) SetPaths(v *Paths) *InvalidationBatch {
-	s.Paths = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallerReference", protocol.StringValue(v), metadata)
+	}
+	if s.Paths != nil {
+		v := s.Paths
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Paths", v, metadata)
+	}
+	return nil
 }
 
 // The InvalidationList complex type describes the list of invalidation objects.
@@ -5873,40 +6499,51 @@ func (s InvalidationList) GoString() string {
 	return s.String()
 }
 
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *InvalidationList) SetIsTruncated(v bool) *InvalidationList {
-	s.IsTruncated = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InvalidationList) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
 
-// SetItems sets the Items field's value.
-func (s *InvalidationList) SetItems(v []InvalidationSummary) *InvalidationList {
-	s.Items = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetMarker sets the Marker field's value.
-func (s *InvalidationList) SetMarker(v string) *InvalidationList {
-	s.Marker = &v
-	return s
-}
+		metadata := protocol.Metadata{ListLocationName: "InvalidationSummary"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *InvalidationList) SetMaxItems(v int64) *InvalidationList {
-	s.MaxItems = &v
-	return s
-}
+	}
+	if s.Marker != nil {
+		v := *s.Marker
 
-// SetNextMarker sets the NextMarker field's value.
-func (s *InvalidationList) SetNextMarker(v string) *InvalidationList {
-	s.NextMarker = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
 
-// SetQuantity sets the Quantity field's value.
-func (s *InvalidationList) SetQuantity(v int64) *InvalidationList {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A summary of an invalidation request.
@@ -5938,22 +6575,27 @@ func (s InvalidationSummary) GoString() string {
 	return s.String()
 }
 
-// SetCreateTime sets the CreateTime field's value.
-func (s *InvalidationSummary) SetCreateTime(v time.Time) *InvalidationSummary {
-	s.CreateTime = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InvalidationSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreateTime != nil {
+		v := *s.CreateTime
 
-// SetId sets the Id field's value.
-func (s *InvalidationSummary) SetId(v string) *InvalidationSummary {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreateTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetStatus sets the Status field's value.
-func (s *InvalidationSummary) SetStatus(v string) *InvalidationSummary {
-	s.Status = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that lists the active CloudFront key pairs, if any, that are
@@ -5988,16 +6630,27 @@ func (s KeyPairIds) GoString() string {
 	return s.String()
 }
 
-// SetItems sets the Items field's value.
-func (s *KeyPairIds) SetItems(v []string) *KeyPairIds {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s KeyPairIds) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *KeyPairIds) SetQuantity(v int64) *KeyPairIds {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "KeyPairId"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that contains a Lambda function association.
@@ -6005,19 +6658,34 @@ func (s *KeyPairIds) SetQuantity(v int64) *KeyPairIds {
 type LambdaFunctionAssociation struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the event type that triggers a Lambda function invocation. Valid
-	// values are:
+	// Specifies the event type that triggers a Lambda function invocation. You
+	// can specify the following values:
 	//
-	//    * viewer-request
+	//    * viewer-request: The function executes when CloudFront receives a request
+	//    from a viewer and before it checks to see whether the requested object
+	//    is in the edge cache.
 	//
-	//    * origin-request
+	//    * origin-request: The function executes only when CloudFront forwards
+	//    a request to your origin. When the requested object is in the edge cache,
+	//    the function doesn't execute.
 	//
-	//    * viewer-response
+	//    * origin-response: The function executes after CloudFront receives a response
+	//    from the origin and before it caches the object in the response. When
+	//    the requested object is in the edge cache, the function doesn't execute.
 	//
-	//    * origin-response
+	// If the origin returns an HTTP status code other than HTTP 200 (OK), the function
+	//    doesn't execute.
+	//
+	//    * viewer-response: The function executes before CloudFront returns the
+	//    requested object to the viewer. The function executes regardless of whether
+	//    the object was already in the edge cache.
+	//
+	// If the origin returns an HTTP status code other than HTTP 200 (OK), the function
+	//    doesn't execute.
 	EventType EventType `type:"string" enum:"true"`
 
-	// The ARN of the Lambda function.
+	// The ARN of the Lambda function. You must specify the ARN of a function version;
+	// you can't specify a Lambda alias or $LATEST.
 	LambdaFunctionARN *string `type:"string"`
 }
 
@@ -6031,16 +6699,21 @@ func (s LambdaFunctionAssociation) GoString() string {
 	return s.String()
 }
 
-// SetEventType sets the EventType field's value.
-func (s *LambdaFunctionAssociation) SetEventType(v EventType) *LambdaFunctionAssociation {
-	s.EventType = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LambdaFunctionAssociation) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.EventType) > 0 {
+		v := s.EventType
 
-// SetLambdaFunctionARN sets the LambdaFunctionARN field's value.
-func (s *LambdaFunctionAssociation) SetLambdaFunctionARN(v string) *LambdaFunctionAssociation {
-	s.LambdaFunctionARN = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EventType", v, metadata)
+	}
+	if s.LambdaFunctionARN != nil {
+		v := *s.LambdaFunctionARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LambdaFunctionARN", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that specifies a list of Lambda functions associations for
@@ -6092,16 +6765,27 @@ func (s *LambdaFunctionAssociations) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *LambdaFunctionAssociations) SetItems(v []LambdaFunctionAssociation) *LambdaFunctionAssociations {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LambdaFunctionAssociations) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *LambdaFunctionAssociations) SetQuantity(v int64) *LambdaFunctionAssociations {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "LambdaFunctionAssociation"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The request to list origin access identities.
@@ -6130,16 +6814,22 @@ func (s ListCloudFrontOriginAccessIdentitiesInput) GoString() string {
 	return s.String()
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListCloudFrontOriginAccessIdentitiesInput) SetMarker(v string) *ListCloudFrontOriginAccessIdentitiesInput {
-	s.Marker = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListCloudFrontOriginAccessIdentitiesInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListCloudFrontOriginAccessIdentitiesInput) SetMaxItems(v int64) *ListCloudFrontOriginAccessIdentitiesInput {
-	s.MaxItems = &v
-	return s
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -6168,10 +6858,15 @@ func (s ListCloudFrontOriginAccessIdentitiesOutput) SDKResponseMetadata() aws.Re
 	return s.responseMetadata
 }
 
-// SetCloudFrontOriginAccessIdentityList sets the CloudFrontOriginAccessIdentityList field's value.
-func (s *ListCloudFrontOriginAccessIdentitiesOutput) SetCloudFrontOriginAccessIdentityList(v *OriginAccessIdentityList) *ListCloudFrontOriginAccessIdentitiesOutput {
-	s.CloudFrontOriginAccessIdentityList = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListCloudFrontOriginAccessIdentitiesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CloudFrontOriginAccessIdentityList != nil {
+		v := s.CloudFrontOriginAccessIdentityList
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityList", v, metadata)
+	}
+	return nil
 }
 
 // The request to list distributions that are associated with a specified AWS
@@ -6223,22 +6918,28 @@ func (s *ListDistributionsByWebACLIdInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListDistributionsByWebACLIdInput) SetMarker(v string) *ListDistributionsByWebACLIdInput {
-	s.Marker = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDistributionsByWebACLIdInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListDistributionsByWebACLIdInput) SetMaxItems(v int64) *ListDistributionsByWebACLIdInput {
-	s.MaxItems = &v
-	return s
-}
+	if s.WebACLId != nil {
+		v := *s.WebACLId
 
-// SetWebACLId sets the WebACLId field's value.
-func (s *ListDistributionsByWebACLIdInput) SetWebACLId(v string) *ListDistributionsByWebACLIdInput {
-	s.WebACLId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "WebACLId", protocol.StringValue(v), metadata)
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The response to a request to list the distributions that are associated with
@@ -6268,10 +6969,15 @@ func (s ListDistributionsByWebACLIdOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDistributionList sets the DistributionList field's value.
-func (s *ListDistributionsByWebACLIdOutput) SetDistributionList(v *DistributionList) *ListDistributionsByWebACLIdOutput {
-	s.DistributionList = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDistributionsByWebACLIdOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DistributionList != nil {
+		v := s.DistributionList
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "DistributionList", v, metadata)
+	}
+	return nil
 }
 
 // The request to list your distributions.
@@ -6300,16 +7006,22 @@ func (s ListDistributionsInput) GoString() string {
 	return s.String()
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListDistributionsInput) SetMarker(v string) *ListDistributionsInput {
-	s.Marker = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDistributionsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListDistributionsInput) SetMaxItems(v int64) *ListDistributionsInput {
-	s.MaxItems = &v
-	return s
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -6338,10 +7050,15 @@ func (s ListDistributionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDistributionList sets the DistributionList field's value.
-func (s *ListDistributionsOutput) SetDistributionList(v *DistributionList) *ListDistributionsOutput {
-	s.DistributionList = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDistributionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DistributionList != nil {
+		v := s.DistributionList
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "DistributionList", v, metadata)
+	}
+	return nil
 }
 
 // The request to list invalidations.
@@ -6392,22 +7109,28 @@ func (s *ListInvalidationsInput) Validate() error {
 	return nil
 }
 
-// SetDistributionId sets the DistributionId field's value.
-func (s *ListInvalidationsInput) SetDistributionId(v string) *ListInvalidationsInput {
-	s.DistributionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListInvalidationsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetMarker sets the Marker field's value.
-func (s *ListInvalidationsInput) SetMarker(v string) *ListInvalidationsInput {
-	s.Marker = &v
-	return s
-}
+	if s.DistributionId != nil {
+		v := *s.DistributionId
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListInvalidationsInput) SetMaxItems(v int64) *ListInvalidationsInput {
-	s.MaxItems = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DistributionId", protocol.StringValue(v), metadata)
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -6436,10 +7159,15 @@ func (s ListInvalidationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInvalidationList sets the InvalidationList field's value.
-func (s *ListInvalidationsOutput) SetInvalidationList(v *InvalidationList) *ListInvalidationsOutput {
-	s.InvalidationList = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListInvalidationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InvalidationList != nil {
+		v := s.InvalidationList
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "InvalidationList", v, metadata)
+	}
+	return nil
 }
 
 // The request to list your streaming distributions.
@@ -6464,16 +7192,22 @@ func (s ListStreamingDistributionsInput) GoString() string {
 	return s.String()
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListStreamingDistributionsInput) SetMarker(v string) *ListStreamingDistributionsInput {
-	s.Marker = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListStreamingDistributionsInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListStreamingDistributionsInput) SetMaxItems(v int64) *ListStreamingDistributionsInput {
-	s.MaxItems = &v
-	return s
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -6502,10 +7236,15 @@ func (s ListStreamingDistributionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetStreamingDistributionList sets the StreamingDistributionList field's value.
-func (s *ListStreamingDistributionsOutput) SetStreamingDistributionList(v *StreamingDistributionList) *ListStreamingDistributionsOutput {
-	s.StreamingDistributionList = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListStreamingDistributionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.StreamingDistributionList != nil {
+		v := s.StreamingDistributionList
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "StreamingDistributionList", v, metadata)
+	}
+	return nil
 }
 
 // The request to list tags for a CloudFront resource.
@@ -6543,10 +7282,16 @@ func (s *ListTagsForResourceInput) Validate() error {
 	return nil
 }
 
-// SetResource sets the Resource field's value.
-func (s *ListTagsForResourceInput) SetResource(v string) *ListTagsForResourceInput {
-	s.Resource = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Resource != nil {
+		v := *s.Resource
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Resource", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -6577,10 +7322,15 @@ func (s ListTagsForResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetTags sets the Tags field's value.
-func (s *ListTagsForResourceOutput) SetTags(v *Tags) *ListTagsForResourceOutput {
-	s.Tags = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "Tags", v, metadata)
+	}
+	return nil
 }
 
 // A complex type that controls whether access logs are written for the distribution.
@@ -6594,7 +7344,7 @@ type LoggingConfig struct {
 	Bucket *string `type:"string" required:"true"`
 
 	// Specifies whether you want CloudFront to save access logs to an Amazon S3
-	// bucket. If you do not want to enable logging when you create a distribution
+	// bucket. If you don't want to enable logging when you create a distribution
 	// or if you want to disable logging for an existing distribution, specify false
 	// for Enabled, and specify empty Bucket and Prefix elements. If you specify
 	// false for Enabled but you specify values for Bucket, prefix, and IncludeCookies,
@@ -6606,7 +7356,7 @@ type LoggingConfig struct {
 	// Specifies whether you want CloudFront to include cookies in access logs,
 	// specify true for IncludeCookies. If you choose to include cookies in logs,
 	// CloudFront logs all cookies regardless of how you configure the cache behaviors
-	// for this distribution. If you do not want to include cookies when you create
+	// for this distribution. If you don't want to include cookies when you create
 	// a distribution or if you want to disable include cookies for an existing
 	// distribution, specify false for IncludeCookies.
 	//
@@ -6615,8 +7365,8 @@ type LoggingConfig struct {
 
 	// An optional string that you want CloudFront to prefix to the access log filenames
 	// for this distribution, for example, myprefix/. If you want to enable logging,
-	// but you do not want to specify a prefix, you still must include an empty
-	// Prefix element in the Logging element.
+	// but you don't want to specify a prefix, you still must include an empty Prefix
+	// element in the Logging element.
 	//
 	// Prefix is a required field
 	Prefix *string `type:"string" required:"true"`
@@ -6658,28 +7408,33 @@ func (s *LoggingConfig) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *LoggingConfig) SetBucket(v string) *LoggingConfig {
-	s.Bucket = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bucket != nil {
+		v := *s.Bucket
 
-// SetEnabled sets the Enabled field's value.
-func (s *LoggingConfig) SetEnabled(v bool) *LoggingConfig {
-	s.Enabled = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Bucket", protocol.StringValue(v), metadata)
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
 
-// SetIncludeCookies sets the IncludeCookies field's value.
-func (s *LoggingConfig) SetIncludeCookies(v bool) *LoggingConfig {
-	s.IncludeCookies = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if s.IncludeCookies != nil {
+		v := *s.IncludeCookies
 
-// SetPrefix sets the Prefix field's value.
-func (s *LoggingConfig) SetPrefix(v string) *LoggingConfig {
-	s.Prefix = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IncludeCookies", protocol.BoolValue(v), metadata)
+	}
+	if s.Prefix != nil {
+		v := *s.Prefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that describes the Amazon S3 bucket or the HTTP server (for
@@ -6706,8 +7461,8 @@ type Origin struct {
 	//
 	// Constraints for Amazon S3 origins:
 	//
-	//    * If you configured Amazon S3 Transfer Acceleration for your bucket, do
-	//    not specify the s3-accelerate endpoint for DomainName.
+	//    * If you configured Amazon S3 Transfer Acceleration for your bucket, don't
+	//    specify the s3-accelerate endpoint for DomainName.
 	//
 	//    * The bucket name must be between 3 and 63 characters long (inclusive).
 	//
@@ -6812,40 +7567,45 @@ func (s *Origin) Validate() error {
 	return nil
 }
 
-// SetCustomHeaders sets the CustomHeaders field's value.
-func (s *Origin) SetCustomHeaders(v *CustomHeaders) *Origin {
-	s.CustomHeaders = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Origin) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CustomHeaders != nil {
+		v := s.CustomHeaders
 
-// SetCustomOriginConfig sets the CustomOriginConfig field's value.
-func (s *Origin) SetCustomOriginConfig(v *CustomOriginConfig) *Origin {
-	s.CustomOriginConfig = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CustomHeaders", v, metadata)
+	}
+	if s.CustomOriginConfig != nil {
+		v := s.CustomOriginConfig
 
-// SetDomainName sets the DomainName field's value.
-func (s *Origin) SetDomainName(v string) *Origin {
-	s.DomainName = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CustomOriginConfig", v, metadata)
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
 
-// SetId sets the Id field's value.
-func (s *Origin) SetId(v string) *Origin {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetOriginPath sets the OriginPath field's value.
-func (s *Origin) SetOriginPath(v string) *Origin {
-	s.OriginPath = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.OriginPath != nil {
+		v := *s.OriginPath
 
-// SetS3OriginConfig sets the S3OriginConfig field's value.
-func (s *Origin) SetS3OriginConfig(v *S3OriginConfig) *Origin {
-	s.S3OriginConfig = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginPath", protocol.StringValue(v), metadata)
+	}
+	if s.S3OriginConfig != nil {
+		v := s.S3OriginConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "S3OriginConfig", v, metadata)
+	}
+	return nil
 }
 
 // CloudFront origin access identity.
@@ -6856,7 +7616,7 @@ type OriginAccessIdentity struct {
 	// The current configuration information for the identity.
 	CloudFrontOriginAccessIdentityConfig *OriginAccessIdentityConfig `type:"structure"`
 
-	// The ID for the origin access identity. For example: E74FTE3AJFJ256A.
+	// The ID for the origin access identity, for example, E74FTE3AJFJ256A.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
@@ -6879,22 +7639,27 @@ func (s OriginAccessIdentity) GoString() string {
 	return s.String()
 }
 
-// SetCloudFrontOriginAccessIdentityConfig sets the CloudFrontOriginAccessIdentityConfig field's value.
-func (s *OriginAccessIdentity) SetCloudFrontOriginAccessIdentityConfig(v *OriginAccessIdentityConfig) *OriginAccessIdentity {
-	s.CloudFrontOriginAccessIdentityConfig = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginAccessIdentity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CloudFrontOriginAccessIdentityConfig != nil {
+		v := s.CloudFrontOriginAccessIdentityConfig
 
-// SetId sets the Id field's value.
-func (s *OriginAccessIdentity) SetId(v string) *OriginAccessIdentity {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CloudFrontOriginAccessIdentityConfig", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetS3CanonicalUserId sets the S3CanonicalUserId field's value.
-func (s *OriginAccessIdentity) SetS3CanonicalUserId(v string) *OriginAccessIdentity {
-	s.S3CanonicalUserId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.S3CanonicalUserId != nil {
+		v := *s.S3CanonicalUserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "S3CanonicalUserId", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // Origin access identity configuration. Send a GET request to the /CloudFront
@@ -6955,16 +7720,21 @@ func (s *OriginAccessIdentityConfig) Validate() error {
 	return nil
 }
 
-// SetCallerReference sets the CallerReference field's value.
-func (s *OriginAccessIdentityConfig) SetCallerReference(v string) *OriginAccessIdentityConfig {
-	s.CallerReference = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginAccessIdentityConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CallerReference != nil {
+		v := *s.CallerReference
 
-// SetComment sets the Comment field's value.
-func (s *OriginAccessIdentityConfig) SetComment(v string) *OriginAccessIdentityConfig {
-	s.Comment = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallerReference", protocol.StringValue(v), metadata)
+	}
+	if s.Comment != nil {
+		v := *s.Comment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // Lists the origin access identities for CloudFront.Send a GET request to the
@@ -7025,40 +7795,51 @@ func (s OriginAccessIdentityList) GoString() string {
 	return s.String()
 }
 
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *OriginAccessIdentityList) SetIsTruncated(v bool) *OriginAccessIdentityList {
-	s.IsTruncated = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginAccessIdentityList) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
 
-// SetItems sets the Items field's value.
-func (s *OriginAccessIdentityList) SetItems(v []OriginAccessIdentitySummary) *OriginAccessIdentityList {
-	s.Items = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetMarker sets the Marker field's value.
-func (s *OriginAccessIdentityList) SetMarker(v string) *OriginAccessIdentityList {
-	s.Marker = &v
-	return s
-}
+		metadata := protocol.Metadata{ListLocationName: "CloudFrontOriginAccessIdentitySummary"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *OriginAccessIdentityList) SetMaxItems(v int64) *OriginAccessIdentityList {
-	s.MaxItems = &v
-	return s
-}
+	}
+	if s.Marker != nil {
+		v := *s.Marker
 
-// SetNextMarker sets the NextMarker field's value.
-func (s *OriginAccessIdentityList) SetNextMarker(v string) *OriginAccessIdentityList {
-	s.NextMarker = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
 
-// SetQuantity sets the Quantity field's value.
-func (s *OriginAccessIdentityList) SetQuantity(v int64) *OriginAccessIdentityList {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Summary of the information about a CloudFront origin access identity.
@@ -7095,22 +7876,27 @@ func (s OriginAccessIdentitySummary) GoString() string {
 	return s.String()
 }
 
-// SetComment sets the Comment field's value.
-func (s *OriginAccessIdentitySummary) SetComment(v string) *OriginAccessIdentitySummary {
-	s.Comment = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginAccessIdentitySummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Comment != nil {
+		v := *s.Comment
 
-// SetId sets the Id field's value.
-func (s *OriginAccessIdentitySummary) SetId(v string) *OriginAccessIdentitySummary {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetS3CanonicalUserId sets the S3CanonicalUserId field's value.
-func (s *OriginAccessIdentitySummary) SetS3CanonicalUserId(v string) *OriginAccessIdentitySummary {
-	s.S3CanonicalUserId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.S3CanonicalUserId != nil {
+		v := *s.S3CanonicalUserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "S3CanonicalUserId", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that contains HeaderName and HeaderValue elements, if any,
@@ -7161,16 +7947,21 @@ func (s *OriginCustomHeader) Validate() error {
 	return nil
 }
 
-// SetHeaderName sets the HeaderName field's value.
-func (s *OriginCustomHeader) SetHeaderName(v string) *OriginCustomHeader {
-	s.HeaderName = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginCustomHeader) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HeaderName != nil {
+		v := *s.HeaderName
 
-// SetHeaderValue sets the HeaderValue field's value.
-func (s *OriginCustomHeader) SetHeaderValue(v string) *OriginCustomHeader {
-	s.HeaderValue = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HeaderName", protocol.StringValue(v), metadata)
+	}
+	if s.HeaderValue != nil {
+		v := *s.HeaderValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HeaderValue", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that contains information about the SSL/TLS protocols that
@@ -7219,16 +8010,27 @@ func (s *OriginSslProtocols) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *OriginSslProtocols) SetItems(v []SslProtocol) *OriginSslProtocols {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginSslProtocols) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *OriginSslProtocols) SetQuantity(v int64) *OriginSslProtocols {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "SslProtocol"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that contains information about origins for this distribution.
@@ -7279,16 +8081,27 @@ func (s *Origins) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *Origins) SetItems(v []Origin) *Origins {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Origins) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *Origins) SetQuantity(v int64) *Origins {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "Origin"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that contains information about the objects that you want
@@ -7332,16 +8145,27 @@ func (s *Paths) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *Paths) SetItems(v []string) *Paths {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Paths) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *Paths) SetQuantity(v int64) *Paths {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "Path"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/QueryStringCacheKeys
@@ -7383,16 +8207,27 @@ func (s *QueryStringCacheKeys) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *QueryStringCacheKeys) SetItems(v []string) *QueryStringCacheKeys {
-	s.Items = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s QueryStringCacheKeys) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *QueryStringCacheKeys) SetQuantity(v int64) *QueryStringCacheKeys {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "Name"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that identifies ways in which you want to restrict distribution
@@ -7437,10 +8272,15 @@ func (s *Restrictions) Validate() error {
 	return nil
 }
 
-// SetGeoRestriction sets the GeoRestriction field's value.
-func (s *Restrictions) SetGeoRestriction(v *GeoRestriction) *Restrictions {
-	s.GeoRestriction = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Restrictions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GeoRestriction != nil {
+		v := s.GeoRestriction
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GeoRestriction", v, metadata)
+	}
+	return nil
 }
 
 // A complex type that contains information about the Amazon S3 bucket from
@@ -7504,16 +8344,21 @@ func (s *S3Origin) Validate() error {
 	return nil
 }
 
-// SetDomainName sets the DomainName field's value.
-func (s *S3Origin) SetDomainName(v string) *S3Origin {
-	s.DomainName = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3Origin) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DomainName != nil {
+		v := *s.DomainName
 
-// SetOriginAccessIdentity sets the OriginAccessIdentity field's value.
-func (s *S3Origin) SetOriginAccessIdentity(v string) *S3Origin {
-	s.OriginAccessIdentity = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), metadata)
+	}
+	if s.OriginAccessIdentity != nil {
+		v := *s.OriginAccessIdentity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginAccessIdentity", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that contains information about the Amazon S3 origin. If the
@@ -7574,10 +8419,15 @@ func (s *S3OriginConfig) Validate() error {
 	return nil
 }
 
-// SetOriginAccessIdentity sets the OriginAccessIdentity field's value.
-func (s *S3OriginConfig) SetOriginAccessIdentity(v string) *S3OriginConfig {
-	s.OriginAccessIdentity = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3OriginConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.OriginAccessIdentity != nil {
+		v := *s.OriginAccessIdentity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginAccessIdentity", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that lists the AWS accounts that were included in the TrustedSigners
@@ -7609,16 +8459,21 @@ func (s Signer) GoString() string {
 	return s.String()
 }
 
-// SetAwsAccountNumber sets the AwsAccountNumber field's value.
-func (s *Signer) SetAwsAccountNumber(v string) *Signer {
-	s.AwsAccountNumber = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Signer) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AwsAccountNumber != nil {
+		v := *s.AwsAccountNumber
 
-// SetKeyPairIds sets the KeyPairIds field's value.
-func (s *Signer) SetKeyPairIds(v *KeyPairIds) *Signer {
-	s.KeyPairIds = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AwsAccountNumber", protocol.StringValue(v), metadata)
+	}
+	if s.KeyPairIds != nil {
+		v := s.KeyPairIds
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "KeyPairIds", v, metadata)
+	}
+	return nil
 }
 
 // A streaming distribution.
@@ -7645,7 +8500,7 @@ type StreamingDistribution struct {
 	// ActiveTrustedSigners is a required field
 	ActiveTrustedSigners *ActiveTrustedSigners `type:"structure" required:"true"`
 
-	// The domain name that corresponds to the streaming distribution. For example:
+	// The domain name that corresponds to the streaming distribution, for example,
 	// s5c39gqb8ow64r.cloudfront.net.
 	//
 	// DomainName is a required field
@@ -7681,46 +8536,51 @@ func (s StreamingDistribution) GoString() string {
 	return s.String()
 }
 
-// SetARN sets the ARN field's value.
-func (s *StreamingDistribution) SetARN(v string) *StreamingDistribution {
-	s.ARN = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamingDistribution) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ARN != nil {
+		v := *s.ARN
 
-// SetActiveTrustedSigners sets the ActiveTrustedSigners field's value.
-func (s *StreamingDistribution) SetActiveTrustedSigners(v *ActiveTrustedSigners) *StreamingDistribution {
-	s.ActiveTrustedSigners = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ARN", protocol.StringValue(v), metadata)
+	}
+	if s.ActiveTrustedSigners != nil {
+		v := s.ActiveTrustedSigners
 
-// SetDomainName sets the DomainName field's value.
-func (s *StreamingDistribution) SetDomainName(v string) *StreamingDistribution {
-	s.DomainName = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ActiveTrustedSigners", v, metadata)
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
 
-// SetId sets the Id field's value.
-func (s *StreamingDistribution) SetId(v string) *StreamingDistribution {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastModifiedTime sets the LastModifiedTime field's value.
-func (s *StreamingDistribution) SetLastModifiedTime(v time.Time) *StreamingDistribution {
-	s.LastModifiedTime = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.LastModifiedTime != nil {
+		v := *s.LastModifiedTime
 
-// SetStatus sets the Status field's value.
-func (s *StreamingDistribution) SetStatus(v string) *StreamingDistribution {
-	s.Status = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
 
-// SetStreamingDistributionConfig sets the StreamingDistributionConfig field's value.
-func (s *StreamingDistribution) SetStreamingDistributionConfig(v *StreamingDistributionConfig) *StreamingDistribution {
-	s.StreamingDistributionConfig = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), metadata)
+	}
+	if s.StreamingDistributionConfig != nil {
+		v := s.StreamingDistributionConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "StreamingDistributionConfig", v, metadata)
+	}
+	return nil
 }
 
 // The RTMP distribution's configuration information.
@@ -7842,52 +8702,57 @@ func (s *StreamingDistributionConfig) Validate() error {
 	return nil
 }
 
-// SetAliases sets the Aliases field's value.
-func (s *StreamingDistributionConfig) SetAliases(v *Aliases) *StreamingDistributionConfig {
-	s.Aliases = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamingDistributionConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Aliases != nil {
+		v := s.Aliases
 
-// SetCallerReference sets the CallerReference field's value.
-func (s *StreamingDistributionConfig) SetCallerReference(v string) *StreamingDistributionConfig {
-	s.CallerReference = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Aliases", v, metadata)
+	}
+	if s.CallerReference != nil {
+		v := *s.CallerReference
 
-// SetComment sets the Comment field's value.
-func (s *StreamingDistributionConfig) SetComment(v string) *StreamingDistributionConfig {
-	s.Comment = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallerReference", protocol.StringValue(v), metadata)
+	}
+	if s.Comment != nil {
+		v := *s.Comment
 
-// SetEnabled sets the Enabled field's value.
-func (s *StreamingDistributionConfig) SetEnabled(v bool) *StreamingDistributionConfig {
-	s.Enabled = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
 
-// SetLogging sets the Logging field's value.
-func (s *StreamingDistributionConfig) SetLogging(v *StreamingLoggingConfig) *StreamingDistributionConfig {
-	s.Logging = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if s.Logging != nil {
+		v := s.Logging
 
-// SetPriceClass sets the PriceClass field's value.
-func (s *StreamingDistributionConfig) SetPriceClass(v PriceClass) *StreamingDistributionConfig {
-	s.PriceClass = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Logging", v, metadata)
+	}
+	if len(s.PriceClass) > 0 {
+		v := s.PriceClass
 
-// SetS3Origin sets the S3Origin field's value.
-func (s *StreamingDistributionConfig) SetS3Origin(v *S3Origin) *StreamingDistributionConfig {
-	s.S3Origin = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PriceClass", v, metadata)
+	}
+	if s.S3Origin != nil {
+		v := s.S3Origin
 
-// SetTrustedSigners sets the TrustedSigners field's value.
-func (s *StreamingDistributionConfig) SetTrustedSigners(v *TrustedSigners) *StreamingDistributionConfig {
-	s.TrustedSigners = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "S3Origin", v, metadata)
+	}
+	if s.TrustedSigners != nil {
+		v := s.TrustedSigners
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TrustedSigners", v, metadata)
+	}
+	return nil
 }
 
 // A streaming distribution Configuration and a list of tags to be associated
@@ -7945,16 +8810,21 @@ func (s *StreamingDistributionConfigWithTags) Validate() error {
 	return nil
 }
 
-// SetStreamingDistributionConfig sets the StreamingDistributionConfig field's value.
-func (s *StreamingDistributionConfigWithTags) SetStreamingDistributionConfig(v *StreamingDistributionConfig) *StreamingDistributionConfigWithTags {
-	s.StreamingDistributionConfig = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamingDistributionConfigWithTags) MarshalFields(e protocol.FieldEncoder) error {
+	if s.StreamingDistributionConfig != nil {
+		v := s.StreamingDistributionConfig
 
-// SetTags sets the Tags field's value.
-func (s *StreamingDistributionConfigWithTags) SetTags(v *Tags) *StreamingDistributionConfigWithTags {
-	s.Tags = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "StreamingDistributionConfig", v, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Tags", v, metadata)
+	}
+	return nil
 }
 
 // A streaming distribution list.
@@ -8006,40 +8876,51 @@ func (s StreamingDistributionList) GoString() string {
 	return s.String()
 }
 
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *StreamingDistributionList) SetIsTruncated(v bool) *StreamingDistributionList {
-	s.IsTruncated = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamingDistributionList) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
 
-// SetItems sets the Items field's value.
-func (s *StreamingDistributionList) SetItems(v []StreamingDistributionSummary) *StreamingDistributionList {
-	s.Items = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetMarker sets the Marker field's value.
-func (s *StreamingDistributionList) SetMarker(v string) *StreamingDistributionList {
-	s.Marker = &v
-	return s
-}
+		metadata := protocol.Metadata{ListLocationName: "StreamingDistributionSummary"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetMaxItems sets the MaxItems field's value.
-func (s *StreamingDistributionList) SetMaxItems(v int64) *StreamingDistributionList {
-	s.MaxItems = &v
-	return s
-}
+	}
+	if s.Marker != nil {
+		v := *s.Marker
 
-// SetNextMarker sets the NextMarker field's value.
-func (s *StreamingDistributionList) SetNextMarker(v string) *StreamingDistributionList {
-	s.NextMarker = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
 
-// SetQuantity sets the Quantity field's value.
-func (s *StreamingDistributionList) SetQuantity(v int64) *StreamingDistributionList {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // A summary of the information for an Amazon CloudFront streaming distribution.
@@ -8065,7 +8946,7 @@ type StreamingDistributionSummary struct {
 	// Comment is a required field
 	Comment *string `type:"string" required:"true"`
 
-	// The domain name corresponding to the distribution. For example: d604721fxaaqy9.cloudfront.net.
+	// The domain name corresponding to the distribution, for example, d111111abcdef8.cloudfront.net.
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
@@ -8075,7 +8956,7 @@ type StreamingDistributionSummary struct {
 	// Enabled is a required field
 	Enabled *bool `type:"boolean" required:"true"`
 
-	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
+	// The identifier for the distribution, for example, EDFDVBD632BHDS5.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
@@ -8126,70 +9007,75 @@ func (s StreamingDistributionSummary) GoString() string {
 	return s.String()
 }
 
-// SetARN sets the ARN field's value.
-func (s *StreamingDistributionSummary) SetARN(v string) *StreamingDistributionSummary {
-	s.ARN = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamingDistributionSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ARN != nil {
+		v := *s.ARN
 
-// SetAliases sets the Aliases field's value.
-func (s *StreamingDistributionSummary) SetAliases(v *Aliases) *StreamingDistributionSummary {
-	s.Aliases = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ARN", protocol.StringValue(v), metadata)
+	}
+	if s.Aliases != nil {
+		v := s.Aliases
 
-// SetComment sets the Comment field's value.
-func (s *StreamingDistributionSummary) SetComment(v string) *StreamingDistributionSummary {
-	s.Comment = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Aliases", v, metadata)
+	}
+	if s.Comment != nil {
+		v := *s.Comment
 
-// SetDomainName sets the DomainName field's value.
-func (s *StreamingDistributionSummary) SetDomainName(v string) *StreamingDistributionSummary {
-	s.DomainName = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.DomainName != nil {
+		v := *s.DomainName
 
-// SetEnabled sets the Enabled field's value.
-func (s *StreamingDistributionSummary) SetEnabled(v bool) *StreamingDistributionSummary {
-	s.Enabled = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.StringValue(v), metadata)
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
 
-// SetId sets the Id field's value.
-func (s *StreamingDistributionSummary) SetId(v string) *StreamingDistributionSummary {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastModifiedTime sets the LastModifiedTime field's value.
-func (s *StreamingDistributionSummary) SetLastModifiedTime(v time.Time) *StreamingDistributionSummary {
-	s.LastModifiedTime = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.LastModifiedTime != nil {
+		v := *s.LastModifiedTime
 
-// SetPriceClass sets the PriceClass field's value.
-func (s *StreamingDistributionSummary) SetPriceClass(v PriceClass) *StreamingDistributionSummary {
-	s.PriceClass = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if len(s.PriceClass) > 0 {
+		v := s.PriceClass
 
-// SetS3Origin sets the S3Origin field's value.
-func (s *StreamingDistributionSummary) SetS3Origin(v *S3Origin) *StreamingDistributionSummary {
-	s.S3Origin = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PriceClass", v, metadata)
+	}
+	if s.S3Origin != nil {
+		v := s.S3Origin
 
-// SetStatus sets the Status field's value.
-func (s *StreamingDistributionSummary) SetStatus(v string) *StreamingDistributionSummary {
-	s.Status = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "S3Origin", v, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
 
-// SetTrustedSigners sets the TrustedSigners field's value.
-func (s *StreamingDistributionSummary) SetTrustedSigners(v *TrustedSigners) *StreamingDistributionSummary {
-	s.TrustedSigners = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.StringValue(v), metadata)
+	}
+	if s.TrustedSigners != nil {
+		v := s.TrustedSigners
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TrustedSigners", v, metadata)
+	}
+	return nil
 }
 
 // A complex type that controls whether access logs are written for this streaming
@@ -8204,19 +9090,19 @@ type StreamingLoggingConfig struct {
 	Bucket *string `type:"string" required:"true"`
 
 	// Specifies whether you want CloudFront to save access logs to an Amazon S3
-	// bucket. If you do not want to enable logging when you create a streaming
-	// distribution or if you want to disable logging for an existing streaming
-	// distribution, specify false for Enabled, and specify empty Bucket and Prefix
-	// elements. If you specify false for Enabled but you specify values for Bucket
-	// and Prefix, the values are automatically deleted.
+	// bucket. If you don't want to enable logging when you create a streaming distribution
+	// or if you want to disable logging for an existing streaming distribution,
+	// specify false for Enabled, and specify empty Bucket and Prefix elements.
+	// If you specify false for Enabled but you specify values for Bucket and Prefix,
+	// the values are automatically deleted.
 	//
 	// Enabled is a required field
 	Enabled *bool `type:"boolean" required:"true"`
 
 	// An optional string that you want CloudFront to prefix to the access log filenames
 	// for this streaming distribution, for example, myprefix/. If you want to enable
-	// logging, but you do not want to specify a prefix, you still must include
-	// an empty Prefix element in the Logging element.
+	// logging, but you don't want to specify a prefix, you still must include an
+	// empty Prefix element in the Logging element.
 	//
 	// Prefix is a required field
 	Prefix *string `type:"string" required:"true"`
@@ -8254,22 +9140,27 @@ func (s *StreamingLoggingConfig) Validate() error {
 	return nil
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *StreamingLoggingConfig) SetBucket(v string) *StreamingLoggingConfig {
-	s.Bucket = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamingLoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bucket != nil {
+		v := *s.Bucket
 
-// SetEnabled sets the Enabled field's value.
-func (s *StreamingLoggingConfig) SetEnabled(v bool) *StreamingLoggingConfig {
-	s.Enabled = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Bucket", protocol.StringValue(v), metadata)
+	}
+	if s.Enabled != nil {
+		v := *s.Enabled
 
-// SetPrefix sets the Prefix field's value.
-func (s *StreamingLoggingConfig) SetPrefix(v string) *StreamingLoggingConfig {
-	s.Prefix = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if s.Prefix != nil {
+		v := *s.Prefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Prefix", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that contains Tag key and Tag value.
@@ -8319,16 +9210,21 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
 
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.StringValue(v), metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // A complex type that contains zero or more Tag elements.
@@ -8350,10 +9246,21 @@ func (s TagKeys) GoString() string {
 	return s.String()
 }
 
-// SetItems sets the Items field's value.
-func (s *TagKeys) SetItems(v []string) *TagKeys {
-	s.Items = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagKeys) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "Key"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The request to add tags to a CloudFront resource.
@@ -8405,16 +9312,22 @@ func (s *TagResourceInput) Validate() error {
 	return nil
 }
 
-// SetResource sets the Resource field's value.
-func (s *TagResourceInput) SetResource(v string) *TagResourceInput {
-	s.Resource = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetTags sets the Tags field's value.
-func (s *TagResourceInput) SetTags(v *Tags) *TagResourceInput {
-	s.Tags = v
-	return s
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "Tags", v, metadata)
+	}
+	if s.Resource != nil {
+		v := *s.Resource
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Resource", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagResourceOutput
@@ -8437,6 +9350,11 @@ func (s TagResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TagResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // A complex type that contains zero or more Tag elements.
@@ -8475,10 +9393,21 @@ func (s *Tags) Validate() error {
 	return nil
 }
 
-// SetItems sets the Items field's value.
-func (s *Tags) SetItems(v []Tag) *Tags {
-	s.Items = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tags) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "Tag"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // A complex type that specifies the AWS accounts, if any, that you want to
@@ -8547,22 +9476,33 @@ func (s *TrustedSigners) Validate() error {
 	return nil
 }
 
-// SetEnabled sets the Enabled field's value.
-func (s *TrustedSigners) SetEnabled(v bool) *TrustedSigners {
-	s.Enabled = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enabled != nil {
+		v := *s.Enabled
 
-// SetItems sets the Items field's value.
-func (s *TrustedSigners) SetItems(v []string) *TrustedSigners {
-	s.Items = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Items) > 0 {
+		v := s.Items
 
-// SetQuantity sets the Quantity field's value.
-func (s *TrustedSigners) SetQuantity(v int64) *TrustedSigners {
-	s.Quantity = &v
-	return s
+		metadata := protocol.Metadata{ListLocationName: "AwsAccountNumber"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The request to remove tags from a CloudFront resource.
@@ -8609,16 +9549,22 @@ func (s *UntagResourceInput) Validate() error {
 	return nil
 }
 
-// SetResource sets the Resource field's value.
-func (s *UntagResourceInput) SetResource(v string) *UntagResourceInput {
-	s.Resource = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetTagKeys sets the TagKeys field's value.
-func (s *UntagResourceInput) SetTagKeys(v *TagKeys) *UntagResourceInput {
-	s.TagKeys = v
-	return s
+	if s.TagKeys != nil {
+		v := s.TagKeys
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "TagKeys", v, metadata)
+	}
+	if s.Resource != nil {
+		v := *s.Resource
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Resource", protocol.StringValue(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UntagResourceOutput
@@ -8641,6 +9587,11 @@ func (s UntagResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The request to update an origin access identity.
@@ -8696,22 +9647,28 @@ func (s *UpdateCloudFrontOriginAccessIdentityInput) Validate() error {
 	return nil
 }
 
-// SetCloudFrontOriginAccessIdentityConfig sets the CloudFrontOriginAccessIdentityConfig field's value.
-func (s *UpdateCloudFrontOriginAccessIdentityInput) SetCloudFrontOriginAccessIdentityConfig(v *OriginAccessIdentityConfig) *UpdateCloudFrontOriginAccessIdentityInput {
-	s.CloudFrontOriginAccessIdentityConfig = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetId sets the Id field's value.
-func (s *UpdateCloudFrontOriginAccessIdentityInput) SetId(v string) *UpdateCloudFrontOriginAccessIdentityInput {
-	s.Id = &v
-	return s
-}
+	if s.IfMatch != nil {
+		v := *s.IfMatch
 
-// SetIfMatch sets the IfMatch field's value.
-func (s *UpdateCloudFrontOriginAccessIdentityInput) SetIfMatch(v string) *UpdateCloudFrontOriginAccessIdentityInput {
-	s.IfMatch = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.CloudFrontOriginAccessIdentityConfig != nil {
+		v := s.CloudFrontOriginAccessIdentityConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityConfig", v, metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -8743,16 +9700,21 @@ func (s UpdateCloudFrontOriginAccessIdentityOutput) SDKResponseMetadata() aws.Re
 	return s.responseMetadata
 }
 
-// SetCloudFrontOriginAccessIdentity sets the CloudFrontOriginAccessIdentity field's value.
-func (s *UpdateCloudFrontOriginAccessIdentityOutput) SetCloudFrontOriginAccessIdentity(v *OriginAccessIdentity) *UpdateCloudFrontOriginAccessIdentityOutput {
-	s.CloudFrontOriginAccessIdentity = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetETag sets the ETag field's value.
-func (s *UpdateCloudFrontOriginAccessIdentityOutput) SetETag(v string) *UpdateCloudFrontOriginAccessIdentityOutput {
-	s.ETag = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.CloudFrontOriginAccessIdentity != nil {
+		v := s.CloudFrontOriginAccessIdentity
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentity", v, metadata)
+	}
+	return nil
 }
 
 // The request to update a distribution.
@@ -8808,22 +9770,28 @@ func (s *UpdateDistributionInput) Validate() error {
 	return nil
 }
 
-// SetDistributionConfig sets the DistributionConfig field's value.
-func (s *UpdateDistributionInput) SetDistributionConfig(v *DistributionConfig) *UpdateDistributionInput {
-	s.DistributionConfig = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetId sets the Id field's value.
-func (s *UpdateDistributionInput) SetId(v string) *UpdateDistributionInput {
-	s.Id = &v
-	return s
-}
+	if s.IfMatch != nil {
+		v := *s.IfMatch
 
-// SetIfMatch sets the IfMatch field's value.
-func (s *UpdateDistributionInput) SetIfMatch(v string) *UpdateDistributionInput {
-	s.IfMatch = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.DistributionConfig != nil {
+		v := s.DistributionConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "DistributionConfig", v, metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -8855,16 +9823,21 @@ func (s UpdateDistributionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDistribution sets the Distribution field's value.
-func (s *UpdateDistributionOutput) SetDistribution(v *Distribution) *UpdateDistributionOutput {
-	s.Distribution = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetETag sets the ETag field's value.
-func (s *UpdateDistributionOutput) SetETag(v string) *UpdateDistributionOutput {
-	s.ETag = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.Distribution != nil {
+		v := s.Distribution
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "Distribution", v, metadata)
+	}
+	return nil
 }
 
 // The request to update a streaming distribution.
@@ -8920,22 +9893,28 @@ func (s *UpdateStreamingDistributionInput) Validate() error {
 	return nil
 }
 
-// SetId sets the Id field's value.
-func (s *UpdateStreamingDistributionInput) SetId(v string) *UpdateStreamingDistributionInput {
-	s.Id = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 
-// SetIfMatch sets the IfMatch field's value.
-func (s *UpdateStreamingDistributionInput) SetIfMatch(v string) *UpdateStreamingDistributionInput {
-	s.IfMatch = &v
-	return s
-}
+	if s.IfMatch != nil {
+		v := *s.IfMatch
 
-// SetStreamingDistributionConfig sets the StreamingDistributionConfig field's value.
-func (s *UpdateStreamingDistributionInput) SetStreamingDistributionConfig(v *StreamingDistributionConfig) *UpdateStreamingDistributionInput {
-	s.StreamingDistributionConfig = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.StreamingDistributionConfig != nil {
+		v := s.StreamingDistributionConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfig", v, metadata)
+	}
+	return nil
 }
 
 // The returned result of the corresponding request.
@@ -8967,144 +9946,176 @@ func (s UpdateStreamingDistributionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetETag sets the ETag field's value.
-func (s *UpdateStreamingDistributionOutput) SetETag(v string) *UpdateStreamingDistributionOutput {
-	s.ETag = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
 
-// SetStreamingDistribution sets the StreamingDistribution field's value.
-func (s *UpdateStreamingDistributionOutput) SetStreamingDistribution(v *StreamingDistribution) *UpdateStreamingDistributionOutput {
-	s.StreamingDistribution = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.StreamingDistribution != nil {
+		v := s.StreamingDistribution
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "StreamingDistribution", v, metadata)
+	}
+	return nil
 }
 
 // A complex type that specifies the following:
 //
-//    * Which SSL/TLS certificate to use when viewers request objects using
-//    HTTPS
+//    * Whether you want viewers to use HTTP or HTTPS to request your objects.
 //
-//    * Whether you want CloudFront to use dedicated IP addresses or SNI when
-//    you're using alternate domain names in your object names
+//    * If you want viewers to use HTTPS, whether you're using an alternate
+//    domain name such as example.com or the CloudFront domain name for your
+//    distribution, such as d111111abcdef8.cloudfront.net.
 //
-//    * The minimum protocol version that you want CloudFront to use when communicating
-//    with viewers
+//    * If you're using an alternate domain name, whether AWS Certificate Manager
+//    (ACM) provided the certificate, or you purchased a certificate from a
+//    third-party certificate authority and imported it into ACM or uploaded
+//    it to the IAM certificate store.
 //
-// For more information, see Using an HTTPS Connection to Access Your Objects
-// (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
-// in the Amazon Amazon CloudFront Developer Guide.
+// You must specify only one of the following values:
+//
+//    * ViewerCertificate$ACMCertificateArn
+//
+//    * ViewerCertificate$IAMCertificateId
+//
+//    * ViewerCertificate$CloudFrontDefaultCertificate
+//
+// Don't specify false for CloudFrontDefaultCertificate.
+//
+// If you want viewers to use HTTP instead of HTTPS to request your objects:
+// Specify the following value:
+//
+// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+//
+// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
+// behaviors.
+//
+// If you want viewers to use HTTPS to request your objects: Choose the type
+// of certificate that you want to use based on whether you're using an alternate
+// domain name for your objects or the CloudFront domain name:
+//
+//    * If you're using an alternate domain name, such as example.com: Specify
+//    one of the following values, depending on whether ACM provided your certificate
+//    or you purchased your certificate from third-party certificate authority:
+//
+// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
+//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
+//    that you want to use for this distribution.
+//
+// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
+//    ID is the ID that IAM returned when you added the certificate to the IAM
+//    certificate store.
+//
+// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
+//    a value for SSLSupportMethod.
+//
+// If you choose to use an ACM certificate or a certificate in the IAM certificate
+//    store, we recommend that you use only an alternate domain name in your
+//    object URLs (https://example.com/logo.jpg). If you use the domain name
+//    that is associated with your CloudFront distribution (such as https://d111111abcdef8.cloudfront.net/logo.jpg)
+//    and the viewer supports SNI, then CloudFront behaves normally. However,
+//    if the browser does not support SNI, the user's experience depends on
+//    the value that you choose for SSLSupportMethod:
+//
+// vip: The viewer displays a warning because there is a mismatch between the
+//    CloudFront domain name and the domain name in your SSL/TLS certificate.
+//
+// sni-only: CloudFront drops the connection with the browser without returning
+//    the object.
+//
+//    * If you're using the CloudFront domain name for your distribution, such
+//    as d111111abcdef8.cloudfront.net: Specify the following value:
+//
+// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+//
+// If you want viewers to use HTTPS, you must also specify one of the following
+// values in your cache behaviors:
+//
+//    *  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
+//
+//    * <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
+//
+// You can also optionally require that CloudFront use HTTPS to communicate
+// with your origin by specifying one of the following values for the applicable
+// origins:
+//
+//    * <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
+//
+//    * <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
+//
+// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
+// in the Amazon CloudFront Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ViewerCertificate
 type ViewerCertificate struct {
 	_ struct{} `type:"structure"`
 
+	// For information about how and when to use ACMCertificateArn, see ViewerCertificate.
 	ACMCertificateArn *string `type:"string"`
 
-	// Include one of these values to specify the following:
+	// This field has been deprecated. Use one of the following fields instead:
 	//
-	//    * Whether you want viewers to use HTTP or HTTPS to request your objects.
+	//    * ViewerCertificate$ACMCertificateArn
 	//
-	//    * If you want viewers to use HTTPS, whether you're using an alternate
-	//    domain name such as example.com or the CloudFront domain name for your
-	//    distribution, such as d111111abcdef8.cloudfront.net.
+	//    * ViewerCertificate$IAMCertificateId
 	//
-	//    * If you're using an alternate domain name, whether AWS Certificate Manager
-	//    (ACM) provided the certificate, or you purchased a certificate from a
-	//    third-party certificate authority and imported it into ACM or uploaded
-	//    it to the IAM certificate store.
-	//
-	// You must specify one (and only one) of the three values. Do not specify false
-	// for CloudFrontDefaultCertificate.
-	//
-	// If you want viewers to use HTTP to request your objects: Specify the following
-	// value:
-	//
-	// <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-	//
-	// In addition, specify allow-all for ViewerProtocolPolicy for all of your cache
-	// behaviors.
-	//
-	// If you want viewers to use HTTPS to request your objects: Choose the type
-	// of certificate that you want to use based on whether you're using an alternate
-	// domain name for your objects or the CloudFront domain name:
-	//
-	//    * If you're using an alternate domain name, such as example.com: Specify
-	//    one of the following values, depending on whether ACM provided your certificate
-	//    or you purchased your certificate from third-party certificate authority:
-	//
-	// <ACMCertificateArn>ARN for ACM SSL/TLS certificate<ACMCertificateArn> where
-	//    ARN for ACM SSL/TLS certificate is the ARN for the ACM SSL/TLS certificate
-	//    that you want to use for this distribution.
-	//
-	// <IAMCertificateId>IAM certificate ID<IAMCertificateId> where IAM certificate
-	//    ID is the ID that IAM returned when you added the certificate to the IAM
-	//    certificate store.
-	//
-	// If you specify ACMCertificateArn or IAMCertificateId, you must also specify
-	//    a value for SSLSupportMethod.
-	//
-	// If you choose to use an ACM certificate or a certificate in the IAM certificate
-	//    store, we recommend that you use only an alternate domain name in your
-	//    object URLs (https://example.com/logo.jpg). If you use the domain name
-	//    that is associated with your CloudFront distribution (https://d111111abcdef8.cloudfront.net/logo.jpg)
-	//    and the viewer supports SNI, then CloudFront behaves normally. However,
-	//    if the browser does not support SNI, the user's experience depends on
-	//    the value that you choose for SSLSupportMethod:
-	//
-	// vip: The viewer displays a warning because there is a mismatch between the
-	//    CloudFront domain name and the domain name in your SSL/TLS certificate.
-	//
-	// sni-only: CloudFront drops the connection with the browser without returning
-	//    the object.
-	//
-	//    * If you're using the CloudFront domain name for your distribution, such
-	//    as d111111abcdef8.cloudfront.net: Specify the following value:
-	//
-	//  <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-	//
-	// If you want viewers to use HTTPS, you must also specify one of the following
-	//    values in your cache behaviors:
-	//
-	//  <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy>
-	//
-	//  <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
-	//
-	// You can also optionally require that CloudFront use HTTPS to communicate
-	//    with your origin by specifying one of the following values for the applicable
-	//    origins:
-	//
-	//  <OriginProtocolPolicy>https-only<OriginProtocolPolicy>
-	//
-	//  <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy>
-	//
-	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
-	//    in the Amazon CloudFront Developer Guide.
+	//    * ViewerCertificate$CloudFrontDefaultCertificate
 	Certificate *string `deprecated:"true" type:"string"`
 
-	// This field is deprecated. You can use one of the following: [ACMCertificateArn,
-	// IAMCertificateId, or CloudFrontDefaultCertificate].
+	// This field has been deprecated. Use one of the following fields instead:
+	//
+	//    * ViewerCertificate$ACMCertificateArn
+	//
+	//    * ViewerCertificate$IAMCertificateId
+	//
+	//    * ViewerCertificate$CloudFrontDefaultCertificate
 	CertificateSource CertificateSource `deprecated:"true" type:"string" enum:"true"`
 
+	// For information about how and when to use CloudFrontDefaultCertificate, see
+	// ViewerCertificate.
 	CloudFrontDefaultCertificate *bool `type:"boolean"`
 
+	// For information about how and when to use IAMCertificateId, see ViewerCertificate.
 	IAMCertificateId *string `type:"string"`
 
-	// Specify the minimum version of the SSL/TLS protocol that you want CloudFront
-	// to use for HTTPS connections between viewers and CloudFront: SSLv3 or TLSv1.
-	// CloudFront serves your objects only to viewers that support SSL/TLS version
-	// that you specify and later versions. The TLSv1 protocol is more secure, so
-	// we recommend that you specify SSLv3 only if your users are using browsers
-	// or devices that don't support TLSv1. Note the following:
+	// Specify the security policy that you want CloudFront to use for HTTPS connections.
+	// A security policy determines two settings:
 	//
-	//    * If you specify <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>,
-	//    the minimum SSL protocol version is TLSv1 and can't be changed.
+	//    * The minimum SSL/TLS protocol that CloudFront uses to communicate with
+	//    viewers
 	//
-	//    * If you're using a custom certificate (if you specify a value for ACMCertificateArn
-	//    or for IAMCertificateId) and if you're using SNI (if you specify sni-only
-	//    for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion.
+	//    * The cipher that CloudFront uses to encrypt the content that it returns
+	//    to viewers
+	//
+	// On the CloudFront console, this setting is called Security policy.
+	//
+	// We recommend that you specify TLSv1.1_2016 unless your users are using browsers
+	// or devices that do not support TLSv1.1 or later.
+	//
+	// When both of the following are true, you must specify TLSv1 or later for
+	// the security policy:
+	//
+	//    * You're using a custom certificate: you specified a value for ACMCertificateArn
+	//    or for IAMCertificateId
+	//
+	//    * You're using SNI: you specified sni-only for SSLSupportMethod
+	//
+	// If you specify true for CloudFrontDefaultCertificate, CloudFront automatically
+	// sets the security policy to TLSv1 regardless of the value that you specify
+	// for MinimumProtocolVersion.
+	//
+	// For information about the relationship between the security policy that you
+	// choose and the protocols and ciphers that CloudFront uses to communicate
+	// with viewers, see  Supported SSL/TLS Protocols and Ciphers for Communication
+	// Between Viewers and CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/secure-connections-supported-viewer-protocols-ciphers.html#secure-connections-supported-ciphers)
+	// in the Amazon CloudFront Developer Guide.
 	MinimumProtocolVersion MinimumProtocolVersion `type:"string" enum:"true"`
 
-	// If you specify a value for ACMCertificateArn or for IAMCertificateId, you
-	// must also specify how you want CloudFront to serve HTTPS requests: using
+	// If you specify a value for ViewerCertificate$ACMCertificateArn or for ViewerCertificate$IAMCertificateId,
+	// you must also specify how you want CloudFront to serve HTTPS requests: using
 	// a method that works for all clients or one that works for most clients:
 	//
 	//    * vip: CloudFront uses dedicated IP addresses for your content and can
@@ -9127,7 +10138,7 @@ type ViewerCertificate struct {
 	//
 	// Use HTTP instead of HTTPS.
 	//
-	// Do not specify a value for SSLSupportMethod if you specified <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>.
+	// Don't specify a value for SSLSupportMethod if you specified <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>.
 	//
 	// For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS.html)
 	// in the Amazon CloudFront Developer Guide.
@@ -9144,46 +10155,51 @@ func (s ViewerCertificate) GoString() string {
 	return s.String()
 }
 
-// SetACMCertificateArn sets the ACMCertificateArn field's value.
-func (s *ViewerCertificate) SetACMCertificateArn(v string) *ViewerCertificate {
-	s.ACMCertificateArn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ViewerCertificate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ACMCertificateArn != nil {
+		v := *s.ACMCertificateArn
 
-// SetCertificate sets the Certificate field's value.
-func (s *ViewerCertificate) SetCertificate(v string) *ViewerCertificate {
-	s.Certificate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ACMCertificateArn", protocol.StringValue(v), metadata)
+	}
+	if s.Certificate != nil {
+		v := *s.Certificate
 
-// SetCertificateSource sets the CertificateSource field's value.
-func (s *ViewerCertificate) SetCertificateSource(v CertificateSource) *ViewerCertificate {
-	s.CertificateSource = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Certificate", protocol.StringValue(v), metadata)
+	}
+	if len(s.CertificateSource) > 0 {
+		v := s.CertificateSource
 
-// SetCloudFrontDefaultCertificate sets the CloudFrontDefaultCertificate field's value.
-func (s *ViewerCertificate) SetCloudFrontDefaultCertificate(v bool) *ViewerCertificate {
-	s.CloudFrontDefaultCertificate = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CertificateSource", v, metadata)
+	}
+	if s.CloudFrontDefaultCertificate != nil {
+		v := *s.CloudFrontDefaultCertificate
 
-// SetIAMCertificateId sets the IAMCertificateId field's value.
-func (s *ViewerCertificate) SetIAMCertificateId(v string) *ViewerCertificate {
-	s.IAMCertificateId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CloudFrontDefaultCertificate", protocol.BoolValue(v), metadata)
+	}
+	if s.IAMCertificateId != nil {
+		v := *s.IAMCertificateId
 
-// SetMinimumProtocolVersion sets the MinimumProtocolVersion field's value.
-func (s *ViewerCertificate) SetMinimumProtocolVersion(v MinimumProtocolVersion) *ViewerCertificate {
-	s.MinimumProtocolVersion = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IAMCertificateId", protocol.StringValue(v), metadata)
+	}
+	if len(s.MinimumProtocolVersion) > 0 {
+		v := s.MinimumProtocolVersion
 
-// SetSSLSupportMethod sets the SSLSupportMethod field's value.
-func (s *ViewerCertificate) SetSSLSupportMethod(v SSLSupportMethod) *ViewerCertificate {
-	s.SSLSupportMethod = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MinimumProtocolVersion", v, metadata)
+	}
+	if len(s.SSLSupportMethod) > 0 {
+		v := s.SSLSupportMethod
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SSLSupportMethod", v, metadata)
+	}
+	return nil
 }
 
 type CertificateSource string
@@ -9195,6 +10211,15 @@ const (
 	CertificateSourceAcm        CertificateSource = "acm"
 )
 
+func (enum CertificateSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CertificateSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EventType string
 
 // Enum values for EventType
@@ -9205,6 +10230,15 @@ const (
 	EventTypeOriginResponse EventType = "origin-response"
 )
 
+func (enum EventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type GeoRestrictionType string
 
 // Enum values for GeoRestrictionType
@@ -9214,6 +10248,15 @@ const (
 	GeoRestrictionTypeNone      GeoRestrictionType = "none"
 )
 
+func (enum GeoRestrictionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GeoRestrictionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HttpVersion string
 
 // Enum values for HttpVersion
@@ -9221,6 +10264,15 @@ const (
 	HttpVersionHttp11 HttpVersion = "http1.1"
 	HttpVersionHttp2  HttpVersion = "http2"
 )
+
+func (enum HttpVersion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HttpVersion) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ItemSelection string
 
@@ -9230,6 +10282,15 @@ const (
 	ItemSelectionWhitelist ItemSelection = "whitelist"
 	ItemSelectionAll       ItemSelection = "all"
 )
+
+func (enum ItemSelection) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ItemSelection) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Method string
 
@@ -9244,13 +10305,34 @@ const (
 	MethodDelete  Method = "DELETE"
 )
 
+func (enum Method) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Method) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MinimumProtocolVersion string
 
 // Enum values for MinimumProtocolVersion
 const (
-	MinimumProtocolVersionSslv3 MinimumProtocolVersion = "SSLv3"
-	MinimumProtocolVersionTlsv1 MinimumProtocolVersion = "TLSv1"
+	MinimumProtocolVersionSslv3      MinimumProtocolVersion = "SSLv3"
+	MinimumProtocolVersionTlsv1      MinimumProtocolVersion = "TLSv1"
+	MinimumProtocolVersionTlsv12016  MinimumProtocolVersion = "TLSv1_2016"
+	MinimumProtocolVersionTlsv112016 MinimumProtocolVersion = "TLSv1.1_2016"
+	MinimumProtocolVersionTlsv122018 MinimumProtocolVersion = "TLSv1.2_2018"
 )
+
+func (enum MinimumProtocolVersion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MinimumProtocolVersion) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OriginProtocolPolicy string
 
@@ -9261,6 +10343,15 @@ const (
 	OriginProtocolPolicyHttpsOnly   OriginProtocolPolicy = "https-only"
 )
 
+func (enum OriginProtocolPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OriginProtocolPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PriceClass string
 
 // Enum values for PriceClass
@@ -9270,6 +10361,15 @@ const (
 	PriceClassPriceClassAll PriceClass = "PriceClass_All"
 )
 
+func (enum PriceClass) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PriceClass) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SSLSupportMethod string
 
 // Enum values for SSLSupportMethod
@@ -9277,6 +10377,15 @@ const (
 	SSLSupportMethodSniOnly SSLSupportMethod = "sni-only"
 	SSLSupportMethodVip     SSLSupportMethod = "vip"
 )
+
+func (enum SSLSupportMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SSLSupportMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SslProtocol string
 
@@ -9288,6 +10397,15 @@ const (
 	SslProtocolTlsv12 SslProtocol = "TLSv1.2"
 )
 
+func (enum SslProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SslProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ViewerProtocolPolicy string
 
 // Enum values for ViewerProtocolPolicy
@@ -9296,3 +10414,12 @@ const (
 	ViewerProtocolPolicyHttpsOnly       ViewerProtocolPolicy = "https-only"
 	ViewerProtocolPolicyRedirectToHttps ViewerProtocolPolicy = "redirect-to-https"
 )
+
+func (enum ViewerProtocolPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ViewerProtocolPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

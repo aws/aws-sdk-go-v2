@@ -130,7 +130,7 @@ type EnvConfig struct {
 	//
 	// Setting a custom HTTPClient in the aws.Config options will override this setting.
 	// To use this option and custom HTTP client, the HTTP client needs to be provided
-	// when creating the session. Not the service client.
+	// when creating the config. Not the service client.
 	//
 	//  AWS_CA_BUNDLE=$HOME/my_custom_ca_bundle
 	CustomCABundle string
@@ -194,9 +194,9 @@ func (c EnvConfig) GetCredentialsEndpoint() (string, error) {
 	return c.CredentialsEndpoint, nil
 }
 
-// GetContainerCredentailsEndpointPath returns the container credentails endpoint
+// GetContainerCredentialsEndpointPath returns the container credentails endpoint
 // path string if set.
-func (c EnvConfig) GetContainerCredentailsEndpointPath() (string, error) {
+func (c EnvConfig) GetContainerCredentialsEndpointPath() (string, error) {
 	return c.ContainerCredentialsEndpointPath, nil
 }
 

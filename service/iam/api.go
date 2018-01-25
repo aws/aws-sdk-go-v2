@@ -8544,36 +8544,6 @@ func (s AccessKey) GoString() string {
 	return s.String()
 }
 
-// SetAccessKeyId sets the AccessKeyId field's value.
-func (s *AccessKey) SetAccessKeyId(v string) *AccessKey {
-	s.AccessKeyId = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *AccessKey) SetCreateDate(v time.Time) *AccessKey {
-	s.CreateDate = &v
-	return s
-}
-
-// SetSecretAccessKey sets the SecretAccessKey field's value.
-func (s *AccessKey) SetSecretAccessKey(v string) *AccessKey {
-	s.SecretAccessKey = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *AccessKey) SetStatus(v StatusType) *AccessKey {
-	s.Status = v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *AccessKey) SetUserName(v string) *AccessKey {
-	s.UserName = &v
-	return s
-}
-
 // Contains information about the last time an AWS access key was used.
 //
 // This data type is used as a response element in the GetAccessKeyLastUsed
@@ -8635,24 +8605,6 @@ func (s AccessKeyLastUsed) GoString() string {
 	return s.String()
 }
 
-// SetLastUsedDate sets the LastUsedDate field's value.
-func (s *AccessKeyLastUsed) SetLastUsedDate(v time.Time) *AccessKeyLastUsed {
-	s.LastUsedDate = &v
-	return s
-}
-
-// SetRegion sets the Region field's value.
-func (s *AccessKeyLastUsed) SetRegion(v string) *AccessKeyLastUsed {
-	s.Region = &v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *AccessKeyLastUsed) SetServiceName(v string) *AccessKeyLastUsed {
-	s.ServiceName = &v
-	return s
-}
-
 // Contains information about an AWS access key, without its secret key.
 //
 // This data type is used as a response element in the ListAccessKeys action.
@@ -8682,30 +8634,6 @@ func (s AccessKeyMetadata) String() string {
 // GoString returns the string representation
 func (s AccessKeyMetadata) GoString() string {
 	return s.String()
-}
-
-// SetAccessKeyId sets the AccessKeyId field's value.
-func (s *AccessKeyMetadata) SetAccessKeyId(v string) *AccessKeyMetadata {
-	s.AccessKeyId = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *AccessKeyMetadata) SetCreateDate(v time.Time) *AccessKeyMetadata {
-	s.CreateDate = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *AccessKeyMetadata) SetStatus(v StatusType) *AccessKeyMetadata {
-	s.Status = v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *AccessKeyMetadata) SetUserName(v string) *AccessKeyMetadata {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddClientIDToOpenIDConnectProviderRequest
@@ -8758,18 +8686,6 @@ func (s *AddClientIDToOpenIDConnectProviderInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetClientID sets the ClientID field's value.
-func (s *AddClientIDToOpenIDConnectProviderInput) SetClientID(v string) *AddClientIDToOpenIDConnectProviderInput {
-	s.ClientID = &v
-	return s
-}
-
-// SetOpenIDConnectProviderArn sets the OpenIDConnectProviderArn field's value.
-func (s *AddClientIDToOpenIDConnectProviderInput) SetOpenIDConnectProviderArn(v string) *AddClientIDToOpenIDConnectProviderInput {
-	s.OpenIDConnectProviderArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddClientIDToOpenIDConnectProviderOutput
@@ -8851,18 +8767,6 @@ func (s *AddRoleToInstanceProfileInput) Validate() error {
 	return nil
 }
 
-// SetInstanceProfileName sets the InstanceProfileName field's value.
-func (s *AddRoleToInstanceProfileInput) SetInstanceProfileName(v string) *AddRoleToInstanceProfileInput {
-	s.InstanceProfileName = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *AddRoleToInstanceProfileInput) SetRoleName(v string) *AddRoleToInstanceProfileInput {
-	s.RoleName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddRoleToInstanceProfileOutput
 type AddRoleToInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -8940,18 +8844,6 @@ func (s *AddUserToGroupInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *AddUserToGroupInput) SetGroupName(v string) *AddUserToGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *AddUserToGroupInput) SetUserName(v string) *AddUserToGroupInput {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AddUserToGroupOutput
@@ -9033,18 +8925,6 @@ func (s *AttachGroupPolicyInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *AttachGroupPolicyInput) SetGroupName(v string) *AttachGroupPolicyInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *AttachGroupPolicyInput) SetPolicyArn(v string) *AttachGroupPolicyInput {
-	s.PolicyArn = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachGroupPolicyOutput
 type AttachGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -9122,18 +9002,6 @@ func (s *AttachRolePolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *AttachRolePolicyInput) SetPolicyArn(v string) *AttachRolePolicyInput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *AttachRolePolicyInput) SetRoleName(v string) *AttachRolePolicyInput {
-	s.RoleName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachRolePolicyOutput
@@ -9215,18 +9083,6 @@ func (s *AttachUserPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *AttachUserPolicyInput) SetPolicyArn(v string) *AttachUserPolicyInput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *AttachUserPolicyInput) SetUserName(v string) *AttachUserPolicyInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AttachUserPolicyOutput
 type AttachUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -9282,18 +9138,6 @@ func (s AttachedPolicy) String() string {
 // GoString returns the string representation
 func (s AttachedPolicy) GoString() string {
 	return s.String()
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *AttachedPolicy) SetPolicyArn(v string) *AttachedPolicy {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *AttachedPolicy) SetPolicyName(v string) *AttachedPolicy {
-	s.PolicyName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePasswordRequest
@@ -9353,18 +9197,6 @@ func (s *ChangePasswordInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetNewPassword sets the NewPassword field's value.
-func (s *ChangePasswordInput) SetNewPassword(v string) *ChangePasswordInput {
-	s.NewPassword = &v
-	return s
-}
-
-// SetOldPassword sets the OldPassword field's value.
-func (s *ChangePasswordInput) SetOldPassword(v string) *ChangePasswordInput {
-	s.OldPassword = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ChangePasswordOutput
@@ -9437,24 +9269,6 @@ func (s *ContextEntry) Validate() error {
 	return nil
 }
 
-// SetContextKeyName sets the ContextKeyName field's value.
-func (s *ContextEntry) SetContextKeyName(v string) *ContextEntry {
-	s.ContextKeyName = &v
-	return s
-}
-
-// SetContextKeyType sets the ContextKeyType field's value.
-func (s *ContextEntry) SetContextKeyType(v ContextKeyTypeEnum) *ContextEntry {
-	s.ContextKeyType = v
-	return s
-}
-
-// SetContextKeyValues sets the ContextKeyValues field's value.
-func (s *ContextEntry) SetContextKeyValues(v []string) *ContextEntry {
-	s.ContextKeyValues = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccessKeyRequest
 type CreateAccessKeyInput struct {
 	_ struct{} `type:"structure"`
@@ -9490,12 +9304,6 @@ func (s *CreateAccessKeyInput) Validate() error {
 	return nil
 }
 
-// SetUserName sets the UserName field's value.
-func (s *CreateAccessKeyInput) SetUserName(v string) *CreateAccessKeyInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful CreateAccessKey request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccessKeyResponse
 type CreateAccessKeyOutput struct {
@@ -9522,12 +9330,6 @@ func (s CreateAccessKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateAccessKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccessKey sets the AccessKey field's value.
-func (s *CreateAccessKeyOutput) SetAccessKey(v *AccessKey) *CreateAccessKeyOutput {
-	s.AccessKey = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccountAliasRequest
@@ -9570,12 +9372,6 @@ func (s *CreateAccountAliasInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccountAlias sets the AccountAlias field's value.
-func (s *CreateAccountAliasInput) SetAccountAlias(v string) *CreateAccountAliasInput {
-	s.AccountAlias = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateAccountAliasOutput
@@ -9660,18 +9456,6 @@ func (s *CreateGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *CreateGroupInput) SetGroupName(v string) *CreateGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *CreateGroupInput) SetPath(v string) *CreateGroupInput {
-	s.Path = &v
-	return s
-}
-
 // Contains the response to a successful CreateGroup request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateGroupResponse
 type CreateGroupOutput struct {
@@ -9698,12 +9482,6 @@ func (s CreateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroup sets the Group field's value.
-func (s *CreateGroupOutput) SetGroup(v *Group) *CreateGroupOutput {
-	s.Group = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfileRequest
@@ -9764,18 +9542,6 @@ func (s *CreateInstanceProfileInput) Validate() error {
 	return nil
 }
 
-// SetInstanceProfileName sets the InstanceProfileName field's value.
-func (s *CreateInstanceProfileInput) SetInstanceProfileName(v string) *CreateInstanceProfileInput {
-	s.InstanceProfileName = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *CreateInstanceProfileInput) SetPath(v string) *CreateInstanceProfileInput {
-	s.Path = &v
-	return s
-}
-
 // Contains the response to a successful CreateInstanceProfile request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateInstanceProfileResponse
 type CreateInstanceProfileOutput struct {
@@ -9802,12 +9568,6 @@ func (s CreateInstanceProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceProfile sets the InstanceProfile field's value.
-func (s *CreateInstanceProfileOutput) SetInstanceProfile(v *InstanceProfile) *CreateInstanceProfileOutput {
-	s.InstanceProfile = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfileRequest
@@ -9876,24 +9636,6 @@ func (s *CreateLoginProfileInput) Validate() error {
 	return nil
 }
 
-// SetPassword sets the Password field's value.
-func (s *CreateLoginProfileInput) SetPassword(v string) *CreateLoginProfileInput {
-	s.Password = &v
-	return s
-}
-
-// SetPasswordResetRequired sets the PasswordResetRequired field's value.
-func (s *CreateLoginProfileInput) SetPasswordResetRequired(v bool) *CreateLoginProfileInput {
-	s.PasswordResetRequired = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *CreateLoginProfileInput) SetUserName(v string) *CreateLoginProfileInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful CreateLoginProfile request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateLoginProfileResponse
 type CreateLoginProfileOutput struct {
@@ -9920,12 +9662,6 @@ func (s CreateLoginProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateLoginProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLoginProfile sets the LoginProfile field's value.
-func (s *CreateLoginProfileOutput) SetLoginProfile(v *LoginProfile) *CreateLoginProfileOutput {
-	s.LoginProfile = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderRequest
@@ -10013,24 +9749,6 @@ func (s *CreateOpenIDConnectProviderInput) Validate() error {
 	return nil
 }
 
-// SetClientIDList sets the ClientIDList field's value.
-func (s *CreateOpenIDConnectProviderInput) SetClientIDList(v []string) *CreateOpenIDConnectProviderInput {
-	s.ClientIDList = v
-	return s
-}
-
-// SetThumbprintList sets the ThumbprintList field's value.
-func (s *CreateOpenIDConnectProviderInput) SetThumbprintList(v []string) *CreateOpenIDConnectProviderInput {
-	s.ThumbprintList = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *CreateOpenIDConnectProviderInput) SetUrl(v string) *CreateOpenIDConnectProviderInput {
-	s.Url = &v
-	return s
-}
-
 // Contains the response to a successful CreateOpenIDConnectProvider request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateOpenIDConnectProviderResponse
 type CreateOpenIDConnectProviderOutput struct {
@@ -10056,12 +9774,6 @@ func (s CreateOpenIDConnectProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOpenIDConnectProviderArn sets the OpenIDConnectProviderArn field's value.
-func (s *CreateOpenIDConnectProviderOutput) SetOpenIDConnectProviderArn(v string) *CreateOpenIDConnectProviderOutput {
-	s.OpenIDConnectProviderArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyRequest
@@ -10149,30 +9861,6 @@ func (s *CreatePolicyInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *CreatePolicyInput) SetDescription(v string) *CreatePolicyInput {
-	s.Description = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *CreatePolicyInput) SetPath(v string) *CreatePolicyInput {
-	s.Path = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *CreatePolicyInput) SetPolicyDocument(v string) *CreatePolicyInput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *CreatePolicyInput) SetPolicyName(v string) *CreatePolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
 // Contains the response to a successful CreatePolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyResponse
 type CreatePolicyOutput struct {
@@ -10197,12 +9885,6 @@ func (s CreatePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *CreatePolicyOutput) SetPolicy(v *Policy) *CreatePolicyOutput {
-	s.Policy = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersionRequest
@@ -10278,24 +9960,6 @@ func (s *CreatePolicyVersionInput) Validate() error {
 	return nil
 }
 
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *CreatePolicyVersionInput) SetPolicyArn(v string) *CreatePolicyVersionInput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *CreatePolicyVersionInput) SetPolicyDocument(v string) *CreatePolicyVersionInput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetSetAsDefault sets the SetAsDefault field's value.
-func (s *CreatePolicyVersionInput) SetSetAsDefault(v bool) *CreatePolicyVersionInput {
-	s.SetAsDefault = &v
-	return s
-}
-
 // Contains the response to a successful CreatePolicyVersion request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreatePolicyVersionResponse
 type CreatePolicyVersionOutput struct {
@@ -10320,12 +9984,6 @@ func (s CreatePolicyVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePolicyVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicyVersion sets the PolicyVersion field's value.
-func (s *CreatePolicyVersionOutput) SetPolicyVersion(v *PolicyVersion) *CreatePolicyVersionOutput {
-	s.PolicyVersion = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleRequest
@@ -10412,30 +10070,6 @@ func (s *CreateRoleInput) Validate() error {
 	return nil
 }
 
-// SetAssumeRolePolicyDocument sets the AssumeRolePolicyDocument field's value.
-func (s *CreateRoleInput) SetAssumeRolePolicyDocument(v string) *CreateRoleInput {
-	s.AssumeRolePolicyDocument = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateRoleInput) SetDescription(v string) *CreateRoleInput {
-	s.Description = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *CreateRoleInput) SetPath(v string) *CreateRoleInput {
-	s.Path = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *CreateRoleInput) SetRoleName(v string) *CreateRoleInput {
-	s.RoleName = &v
-	return s
-}
-
 // Contains the response to a successful CreateRole request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateRoleResponse
 type CreateRoleOutput struct {
@@ -10462,12 +10096,6 @@ func (s CreateRoleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRole sets the Role field's value.
-func (s *CreateRoleOutput) SetRole(v *Role) *CreateRoleOutput {
-	s.Role = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProviderRequest
@@ -10530,18 +10158,6 @@ func (s *CreateSAMLProviderInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *CreateSAMLProviderInput) SetName(v string) *CreateSAMLProviderInput {
-	s.Name = &v
-	return s
-}
-
-// SetSAMLMetadataDocument sets the SAMLMetadataDocument field's value.
-func (s *CreateSAMLProviderInput) SetSAMLMetadataDocument(v string) *CreateSAMLProviderInput {
-	s.SAMLMetadataDocument = &v
-	return s
-}
-
 // Contains the response to a successful CreateSAMLProvider request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateSAMLProviderResponse
 type CreateSAMLProviderOutput struct {
@@ -10566,12 +10182,6 @@ func (s CreateSAMLProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSAMLProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSAMLProviderArn sets the SAMLProviderArn field's value.
-func (s *CreateSAMLProviderOutput) SetSAMLProviderArn(v string) *CreateSAMLProviderOutput {
-	s.SAMLProviderArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRoleRequest
@@ -10625,24 +10235,6 @@ func (s *CreateServiceLinkedRoleInput) Validate() error {
 	return nil
 }
 
-// SetAWSServiceName sets the AWSServiceName field's value.
-func (s *CreateServiceLinkedRoleInput) SetAWSServiceName(v string) *CreateServiceLinkedRoleInput {
-	s.AWSServiceName = &v
-	return s
-}
-
-// SetCustomSuffix sets the CustomSuffix field's value.
-func (s *CreateServiceLinkedRoleInput) SetCustomSuffix(v string) *CreateServiceLinkedRoleInput {
-	s.CustomSuffix = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateServiceLinkedRoleInput) SetDescription(v string) *CreateServiceLinkedRoleInput {
-	s.Description = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceLinkedRoleResponse
 type CreateServiceLinkedRoleOutput struct {
 	_ struct{} `type:"structure"`
@@ -10666,12 +10258,6 @@ func (s CreateServiceLinkedRoleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateServiceLinkedRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRole sets the Role field's value.
-func (s *CreateServiceLinkedRoleOutput) SetRole(v *Role) *CreateServiceLinkedRoleOutput {
-	s.Role = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredentialRequest
@@ -10728,18 +10314,6 @@ func (s *CreateServiceSpecificCredentialInput) Validate() error {
 	return nil
 }
 
-// SetServiceName sets the ServiceName field's value.
-func (s *CreateServiceSpecificCredentialInput) SetServiceName(v string) *CreateServiceSpecificCredentialInput {
-	s.ServiceName = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *CreateServiceSpecificCredentialInput) SetUserName(v string) *CreateServiceSpecificCredentialInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateServiceSpecificCredentialResponse
 type CreateServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
@@ -10768,12 +10342,6 @@ func (s CreateServiceSpecificCredentialOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServiceSpecificCredential sets the ServiceSpecificCredential field's value.
-func (s *CreateServiceSpecificCredentialOutput) SetServiceSpecificCredential(v *ServiceSpecificCredential) *CreateServiceSpecificCredentialOutput {
-	s.ServiceSpecificCredential = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUserRequest
@@ -10836,18 +10404,6 @@ func (s *CreateUserInput) Validate() error {
 	return nil
 }
 
-// SetPath sets the Path field's value.
-func (s *CreateUserInput) SetPath(v string) *CreateUserInput {
-	s.Path = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *CreateUserInput) SetUserName(v string) *CreateUserInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful CreateUser request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateUserResponse
 type CreateUserOutput struct {
@@ -10872,12 +10428,6 @@ func (s CreateUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUser sets the User field's value.
-func (s *CreateUserOutput) SetUser(v *User) *CreateUserOutput {
-	s.User = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADeviceRequest
@@ -10939,18 +10489,6 @@ func (s *CreateVirtualMFADeviceInput) Validate() error {
 	return nil
 }
 
-// SetPath sets the Path field's value.
-func (s *CreateVirtualMFADeviceInput) SetPath(v string) *CreateVirtualMFADeviceInput {
-	s.Path = &v
-	return s
-}
-
-// SetVirtualMFADeviceName sets the VirtualMFADeviceName field's value.
-func (s *CreateVirtualMFADeviceInput) SetVirtualMFADeviceName(v string) *CreateVirtualMFADeviceInput {
-	s.VirtualMFADeviceName = &v
-	return s
-}
-
 // Contains the response to a successful CreateVirtualMFADevice request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/CreateVirtualMFADeviceResponse
 type CreateVirtualMFADeviceOutput struct {
@@ -10977,12 +10515,6 @@ func (s CreateVirtualMFADeviceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateVirtualMFADeviceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetVirtualMFADevice sets the VirtualMFADevice field's value.
-func (s *CreateVirtualMFADeviceOutput) SetVirtualMFADevice(v *VirtualMFADevice) *CreateVirtualMFADeviceOutput {
-	s.VirtualMFADevice = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeactivateMFADeviceRequest
@@ -11041,18 +10573,6 @@ func (s *DeactivateMFADeviceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSerialNumber sets the SerialNumber field's value.
-func (s *DeactivateMFADeviceInput) SetSerialNumber(v string) *DeactivateMFADeviceInput {
-	s.SerialNumber = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *DeactivateMFADeviceInput) SetUserName(v string) *DeactivateMFADeviceInput {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeactivateMFADeviceOutput
@@ -11129,18 +10649,6 @@ func (s *DeleteAccessKeyInput) Validate() error {
 	return nil
 }
 
-// SetAccessKeyId sets the AccessKeyId field's value.
-func (s *DeleteAccessKeyInput) SetAccessKeyId(v string) *DeleteAccessKeyInput {
-	s.AccessKeyId = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *DeleteAccessKeyInput) SetUserName(v string) *DeleteAccessKeyInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccessKeyOutput
 type DeleteAccessKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -11203,12 +10711,6 @@ func (s *DeleteAccountAliasInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccountAlias sets the AccountAlias field's value.
-func (s *DeleteAccountAliasInput) SetAccountAlias(v string) *DeleteAccountAliasInput {
-	s.AccountAlias = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteAccountAliasOutput
@@ -11311,12 +10813,6 @@ func (s *DeleteGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *DeleteGroupInput) SetGroupName(v string) *DeleteGroupInput {
-	s.GroupName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupOutput
 type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -11397,18 +10893,6 @@ func (s *DeleteGroupPolicyInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *DeleteGroupPolicyInput) SetGroupName(v string) *DeleteGroupPolicyInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *DeleteGroupPolicyInput) SetPolicyName(v string) *DeleteGroupPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteGroupPolicyOutput
 type DeleteGroupPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -11470,12 +10954,6 @@ func (s *DeleteInstanceProfileInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInstanceProfileName sets the InstanceProfileName field's value.
-func (s *DeleteInstanceProfileInput) SetInstanceProfileName(v string) *DeleteInstanceProfileInput {
-	s.InstanceProfileName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteInstanceProfileOutput
@@ -11541,12 +11019,6 @@ func (s *DeleteLoginProfileInput) Validate() error {
 	return nil
 }
 
-// SetUserName sets the UserName field's value.
-func (s *DeleteLoginProfileInput) SetUserName(v string) *DeleteLoginProfileInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteLoginProfileOutput
 type DeleteLoginProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -11606,12 +11078,6 @@ func (s *DeleteOpenIDConnectProviderInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetOpenIDConnectProviderArn sets the OpenIDConnectProviderArn field's value.
-func (s *DeleteOpenIDConnectProviderInput) SetOpenIDConnectProviderArn(v string) *DeleteOpenIDConnectProviderInput {
-	s.OpenIDConnectProviderArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteOpenIDConnectProviderOutput
@@ -11675,12 +11141,6 @@ func (s *DeletePolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *DeletePolicyInput) SetPolicyArn(v string) *DeletePolicyInput {
-	s.PolicyArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyOutput
@@ -11765,18 +11225,6 @@ func (s *DeletePolicyVersionInput) Validate() error {
 	return nil
 }
 
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *DeletePolicyVersionInput) SetPolicyArn(v string) *DeletePolicyVersionInput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *DeletePolicyVersionInput) SetVersionId(v string) *DeletePolicyVersionInput {
-	s.VersionId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeletePolicyVersionOutput
 type DeletePolicyVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -11838,12 +11286,6 @@ func (s *DeleteRoleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *DeleteRoleInput) SetRoleName(v string) *DeleteRoleInput {
-	s.RoleName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRoleOutput
@@ -11926,18 +11368,6 @@ func (s *DeleteRolePolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyName sets the PolicyName field's value.
-func (s *DeleteRolePolicyInput) SetPolicyName(v string) *DeleteRolePolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *DeleteRolePolicyInput) SetRoleName(v string) *DeleteRolePolicyInput {
-	s.RoleName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteRolePolicyOutput
 type DeleteRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -11995,12 +11425,6 @@ func (s *DeleteSAMLProviderInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSAMLProviderArn sets the SAMLProviderArn field's value.
-func (s *DeleteSAMLProviderInput) SetSAMLProviderArn(v string) *DeleteSAMLProviderInput {
-	s.SAMLProviderArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSAMLProviderOutput
@@ -12082,18 +11506,6 @@ func (s *DeleteSSHPublicKeyInput) Validate() error {
 	return nil
 }
 
-// SetSSHPublicKeyId sets the SSHPublicKeyId field's value.
-func (s *DeleteSSHPublicKeyInput) SetSSHPublicKeyId(v string) *DeleteSSHPublicKeyInput {
-	s.SSHPublicKeyId = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *DeleteSSHPublicKeyInput) SetUserName(v string) *DeleteSSHPublicKeyInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSSHPublicKeyOutput
 type DeleteSSHPublicKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -12157,12 +11569,6 @@ func (s *DeleteServerCertificateInput) Validate() error {
 	return nil
 }
 
-// SetServerCertificateName sets the ServerCertificateName field's value.
-func (s *DeleteServerCertificateInput) SetServerCertificateName(v string) *DeleteServerCertificateInput {
-	s.ServerCertificateName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServerCertificateOutput
 type DeleteServerCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -12222,12 +11628,6 @@ func (s *DeleteServiceLinkedRoleInput) Validate() error {
 	return nil
 }
 
-// SetRoleName sets the RoleName field's value.
-func (s *DeleteServiceLinkedRoleInput) SetRoleName(v string) *DeleteServiceLinkedRoleInput {
-	s.RoleName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceLinkedRoleResponse
 type DeleteServiceLinkedRoleOutput struct {
 	_ struct{} `type:"structure"`
@@ -12254,12 +11654,6 @@ func (s DeleteServiceLinkedRoleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteServiceLinkedRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeletionTaskId sets the DeletionTaskId field's value.
-func (s *DeleteServiceLinkedRoleOutput) SetDeletionTaskId(v string) *DeleteServiceLinkedRoleOutput {
-	s.DeletionTaskId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceSpecificCredentialRequest
@@ -12314,18 +11708,6 @@ func (s *DeleteServiceSpecificCredentialInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetServiceSpecificCredentialId sets the ServiceSpecificCredentialId field's value.
-func (s *DeleteServiceSpecificCredentialInput) SetServiceSpecificCredentialId(v string) *DeleteServiceSpecificCredentialInput {
-	s.ServiceSpecificCredentialId = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *DeleteServiceSpecificCredentialInput) SetUserName(v string) *DeleteServiceSpecificCredentialInput {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteServiceSpecificCredentialOutput
@@ -12401,18 +11783,6 @@ func (s *DeleteSigningCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateId sets the CertificateId field's value.
-func (s *DeleteSigningCertificateInput) SetCertificateId(v string) *DeleteSigningCertificateInput {
-	s.CertificateId = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *DeleteSigningCertificateInput) SetUserName(v string) *DeleteSigningCertificateInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteSigningCertificateOutput
 type DeleteSigningCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -12474,12 +11844,6 @@ func (s *DeleteUserInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetUserName sets the UserName field's value.
-func (s *DeleteUserInput) SetUserName(v string) *DeleteUserInput {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserOutput
@@ -12562,18 +11926,6 @@ func (s *DeleteUserPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyName sets the PolicyName field's value.
-func (s *DeleteUserPolicyInput) SetPolicyName(v string) *DeleteUserPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *DeleteUserPolicyInput) SetUserName(v string) *DeleteUserPolicyInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteUserPolicyOutput
 type DeleteUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -12638,12 +11990,6 @@ func (s *DeleteVirtualMFADeviceInput) Validate() error {
 	return nil
 }
 
-// SetSerialNumber sets the SerialNumber field's value.
-func (s *DeleteVirtualMFADeviceInput) SetSerialNumber(v string) *DeleteVirtualMFADeviceInput {
-	s.SerialNumber = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DeleteVirtualMFADeviceOutput
 type DeleteVirtualMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
@@ -12694,18 +12040,6 @@ func (s DeletionTaskFailureReasonType) String() string {
 // GoString returns the string representation
 func (s DeletionTaskFailureReasonType) GoString() string {
 	return s.String()
-}
-
-// SetReason sets the Reason field's value.
-func (s *DeletionTaskFailureReasonType) SetReason(v string) *DeletionTaskFailureReasonType {
-	s.Reason = &v
-	return s
-}
-
-// SetRoleUsageList sets the RoleUsageList field's value.
-func (s *DeletionTaskFailureReasonType) SetRoleUsageList(v []RoleUsageType) *DeletionTaskFailureReasonType {
-	s.RoleUsageList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicyRequest
@@ -12763,18 +12097,6 @@ func (s *DetachGroupPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *DetachGroupPolicyInput) SetGroupName(v string) *DetachGroupPolicyInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *DetachGroupPolicyInput) SetPolicyArn(v string) *DetachGroupPolicyInput {
-	s.PolicyArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachGroupPolicyOutput
@@ -12856,18 +12178,6 @@ func (s *DetachRolePolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *DetachRolePolicyInput) SetPolicyArn(v string) *DetachRolePolicyInput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *DetachRolePolicyInput) SetRoleName(v string) *DetachRolePolicyInput {
-	s.RoleName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachRolePolicyOutput
 type DetachRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -12945,18 +12255,6 @@ func (s *DetachUserPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *DetachUserPolicyInput) SetPolicyArn(v string) *DetachUserPolicyInput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *DetachUserPolicyInput) SetUserName(v string) *DetachUserPolicyInput {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/DetachUserPolicyOutput
@@ -13081,30 +12379,6 @@ func (s *EnableMFADeviceInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationCode1 sets the AuthenticationCode1 field's value.
-func (s *EnableMFADeviceInput) SetAuthenticationCode1(v string) *EnableMFADeviceInput {
-	s.AuthenticationCode1 = &v
-	return s
-}
-
-// SetAuthenticationCode2 sets the AuthenticationCode2 field's value.
-func (s *EnableMFADeviceInput) SetAuthenticationCode2(v string) *EnableMFADeviceInput {
-	s.AuthenticationCode2 = &v
-	return s
-}
-
-// SetSerialNumber sets the SerialNumber field's value.
-func (s *EnableMFADeviceInput) SetSerialNumber(v string) *EnableMFADeviceInput {
-	s.SerialNumber = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *EnableMFADeviceInput) SetUserName(v string) *EnableMFADeviceInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/EnableMFADeviceOutput
 type EnableMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
@@ -13192,54 +12466,6 @@ func (s EvaluationResult) GoString() string {
 	return s.String()
 }
 
-// SetEvalActionName sets the EvalActionName field's value.
-func (s *EvaluationResult) SetEvalActionName(v string) *EvaluationResult {
-	s.EvalActionName = &v
-	return s
-}
-
-// SetEvalDecision sets the EvalDecision field's value.
-func (s *EvaluationResult) SetEvalDecision(v PolicyEvaluationDecisionType) *EvaluationResult {
-	s.EvalDecision = v
-	return s
-}
-
-// SetEvalDecisionDetails sets the EvalDecisionDetails field's value.
-func (s *EvaluationResult) SetEvalDecisionDetails(v map[string]PolicyEvaluationDecisionType) *EvaluationResult {
-	s.EvalDecisionDetails = v
-	return s
-}
-
-// SetEvalResourceName sets the EvalResourceName field's value.
-func (s *EvaluationResult) SetEvalResourceName(v string) *EvaluationResult {
-	s.EvalResourceName = &v
-	return s
-}
-
-// SetMatchedStatements sets the MatchedStatements field's value.
-func (s *EvaluationResult) SetMatchedStatements(v []Statement) *EvaluationResult {
-	s.MatchedStatements = v
-	return s
-}
-
-// SetMissingContextValues sets the MissingContextValues field's value.
-func (s *EvaluationResult) SetMissingContextValues(v []string) *EvaluationResult {
-	s.MissingContextValues = v
-	return s
-}
-
-// SetOrganizationsDecisionDetail sets the OrganizationsDecisionDetail field's value.
-func (s *EvaluationResult) SetOrganizationsDecisionDetail(v *OrganizationsDecisionDetail) *EvaluationResult {
-	s.OrganizationsDecisionDetail = v
-	return s
-}
-
-// SetResourceSpecificResults sets the ResourceSpecificResults field's value.
-func (s *EvaluationResult) SetResourceSpecificResults(v []ResourceSpecificResult) *EvaluationResult {
-	s.ResourceSpecificResults = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GenerateCredentialReportInput
 type GenerateCredentialReportInput struct {
 	_ struct{} `type:"structure"`
@@ -13284,18 +12510,6 @@ func (s GenerateCredentialReportOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDescription sets the Description field's value.
-func (s *GenerateCredentialReportOutput) SetDescription(v string) *GenerateCredentialReportOutput {
-	s.Description = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *GenerateCredentialReportOutput) SetState(v ReportStateType) *GenerateCredentialReportOutput {
-	s.State = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccessKeyLastUsedRequest
 type GetAccessKeyLastUsedInput struct {
 	_ struct{} `type:"structure"`
@@ -13337,12 +12551,6 @@ func (s *GetAccessKeyLastUsedInput) Validate() error {
 	return nil
 }
 
-// SetAccessKeyId sets the AccessKeyId field's value.
-func (s *GetAccessKeyLastUsedInput) SetAccessKeyId(v string) *GetAccessKeyLastUsedInput {
-	s.AccessKeyId = &v
-	return s
-}
-
 // Contains the response to a successful GetAccessKeyLastUsed request. It is
 // also returned as a member of the AccessKeyMetaData structure returned by
 // the ListAccessKeys action.
@@ -13372,18 +12580,6 @@ func (s GetAccessKeyLastUsedOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAccessKeyLastUsedOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccessKeyLastUsed sets the AccessKeyLastUsed field's value.
-func (s *GetAccessKeyLastUsedOutput) SetAccessKeyLastUsed(v *AccessKeyLastUsed) *GetAccessKeyLastUsedOutput {
-	s.AccessKeyLastUsed = v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *GetAccessKeyLastUsedOutput) SetUserName(v string) *GetAccessKeyLastUsedOutput {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountAuthorizationDetailsRequest
@@ -13443,24 +12639,6 @@ func (s *GetAccountAuthorizationDetailsInput) Validate() error {
 	return nil
 }
 
-// SetFilter sets the Filter field's value.
-func (s *GetAccountAuthorizationDetailsInput) SetFilter(v []EntityType) *GetAccountAuthorizationDetailsInput {
-	s.Filter = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *GetAccountAuthorizationDetailsInput) SetMarker(v string) *GetAccountAuthorizationDetailsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *GetAccountAuthorizationDetailsInput) SetMaxItems(v int64) *GetAccountAuthorizationDetailsInput {
-	s.MaxItems = &v
-	return s
-}
-
 // Contains the response to a successful GetAccountAuthorizationDetails request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountAuthorizationDetailsResponse
 type GetAccountAuthorizationDetailsOutput struct {
@@ -13508,42 +12686,6 @@ func (s GetAccountAuthorizationDetailsOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// SetGroupDetailList sets the GroupDetailList field's value.
-func (s *GetAccountAuthorizationDetailsOutput) SetGroupDetailList(v []GroupDetail) *GetAccountAuthorizationDetailsOutput {
-	s.GroupDetailList = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *GetAccountAuthorizationDetailsOutput) SetIsTruncated(v bool) *GetAccountAuthorizationDetailsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *GetAccountAuthorizationDetailsOutput) SetMarker(v string) *GetAccountAuthorizationDetailsOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *GetAccountAuthorizationDetailsOutput) SetPolicies(v []ManagedPolicyDetail) *GetAccountAuthorizationDetailsOutput {
-	s.Policies = v
-	return s
-}
-
-// SetRoleDetailList sets the RoleDetailList field's value.
-func (s *GetAccountAuthorizationDetailsOutput) SetRoleDetailList(v []RoleDetail) *GetAccountAuthorizationDetailsOutput {
-	s.RoleDetailList = v
-	return s
-}
-
-// SetUserDetailList sets the UserDetailList field's value.
-func (s *GetAccountAuthorizationDetailsOutput) SetUserDetailList(v []UserDetail) *GetAccountAuthorizationDetailsOutput {
-	s.UserDetailList = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountPasswordPolicyInput
 type GetAccountPasswordPolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -13585,12 +12727,6 @@ func (s GetAccountPasswordPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetAccountPasswordPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPasswordPolicy sets the PasswordPolicy field's value.
-func (s *GetAccountPasswordPolicyOutput) SetPasswordPolicy(v *PasswordPolicy) *GetAccountPasswordPolicyOutput {
-	s.PasswordPolicy = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetAccountSummaryInput
@@ -13635,12 +12771,6 @@ func (s GetAccountSummaryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetSummaryMap sets the SummaryMap field's value.
-func (s *GetAccountSummaryOutput) SetSummaryMap(v map[string]int64) *GetAccountSummaryOutput {
-	s.SummaryMap = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicyRequest
 type GetContextKeysForCustomPolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -13682,12 +12812,6 @@ func (s *GetContextKeysForCustomPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyInputList sets the PolicyInputList field's value.
-func (s *GetContextKeysForCustomPolicyInput) SetPolicyInputList(v []string) *GetContextKeysForCustomPolicyInput {
-	s.PolicyInputList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForPrincipalPolicyRequest
@@ -13748,18 +12872,6 @@ func (s *GetContextKeysForPrincipalPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyInputList sets the PolicyInputList field's value.
-func (s *GetContextKeysForPrincipalPolicyInput) SetPolicyInputList(v []string) *GetContextKeysForPrincipalPolicyInput {
-	s.PolicyInputList = v
-	return s
-}
-
-// SetPolicySourceArn sets the PolicySourceArn field's value.
-func (s *GetContextKeysForPrincipalPolicyInput) SetPolicySourceArn(v string) *GetContextKeysForPrincipalPolicyInput {
-	s.PolicySourceArn = &v
-	return s
-}
-
 // Contains the response to a successful GetContextKeysForPrincipalPolicy or
 // GetContextKeysForCustomPolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetContextKeysForCustomPolicyOutput
@@ -13785,12 +12897,6 @@ func (s GetContextKeysForPrincipalPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetContextKeysForPrincipalPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetContextKeyNames sets the ContextKeyNames field's value.
-func (s *GetContextKeysForPrincipalPolicyOutput) SetContextKeyNames(v []string) *GetContextKeysForPrincipalPolicyOutput {
-	s.ContextKeyNames = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetCredentialReportInput
@@ -13841,24 +12947,6 @@ func (s GetCredentialReportOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetCredentialReportOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetContent sets the Content field's value.
-func (s *GetCredentialReportOutput) SetContent(v []byte) *GetCredentialReportOutput {
-	s.Content = v
-	return s
-}
-
-// SetGeneratedTime sets the GeneratedTime field's value.
-func (s *GetCredentialReportOutput) SetGeneratedTime(v time.Time) *GetCredentialReportOutput {
-	s.GeneratedTime = &v
-	return s
-}
-
-// SetReportFormat sets the ReportFormat field's value.
-func (s *GetCredentialReportOutput) SetReportFormat(v ReportFormatType) *GetCredentialReportOutput {
-	s.ReportFormat = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupRequest
@@ -13925,24 +13013,6 @@ func (s *GetGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *GetGroupInput) SetGroupName(v string) *GetGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *GetGroupInput) SetMarker(v string) *GetGroupInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *GetGroupInput) SetMaxItems(v int64) *GetGroupInput {
-	s.MaxItems = &v
-	return s
-}
-
 // Contains the response to a successful GetGroup request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupResponse
 type GetGroupOutput struct {
@@ -13986,30 +13056,6 @@ func (s GetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroup sets the Group field's value.
-func (s *GetGroupOutput) SetGroup(v *Group) *GetGroupOutput {
-	s.Group = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *GetGroupOutput) SetIsTruncated(v bool) *GetGroupOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *GetGroupOutput) SetMarker(v string) *GetGroupOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *GetGroupOutput) SetUsers(v []User) *GetGroupOutput {
-	s.Users = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicyRequest
@@ -14069,18 +13115,6 @@ func (s *GetGroupPolicyInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *GetGroupPolicyInput) SetGroupName(v string) *GetGroupPolicyInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetGroupPolicyInput) SetPolicyName(v string) *GetGroupPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
 // Contains the response to a successful GetGroupPolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetGroupPolicyResponse
 type GetGroupPolicyOutput struct {
@@ -14117,24 +13151,6 @@ func (s GetGroupPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGroupPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *GetGroupPolicyOutput) SetGroupName(v string) *GetGroupPolicyOutput {
-	s.GroupName = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *GetGroupPolicyOutput) SetPolicyDocument(v string) *GetGroupPolicyOutput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetGroupPolicyOutput) SetPolicyName(v string) *GetGroupPolicyOutput {
-	s.PolicyName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfileRequest
@@ -14178,12 +13194,6 @@ func (s *GetInstanceProfileInput) Validate() error {
 	return nil
 }
 
-// SetInstanceProfileName sets the InstanceProfileName field's value.
-func (s *GetInstanceProfileInput) SetInstanceProfileName(v string) *GetInstanceProfileInput {
-	s.InstanceProfileName = &v
-	return s
-}
-
 // Contains the response to a successful GetInstanceProfile request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetInstanceProfileResponse
 type GetInstanceProfileOutput struct {
@@ -14210,12 +13220,6 @@ func (s GetInstanceProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceProfile sets the InstanceProfile field's value.
-func (s *GetInstanceProfileOutput) SetInstanceProfile(v *InstanceProfile) *GetInstanceProfileOutput {
-	s.InstanceProfile = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfileRequest
@@ -14259,12 +13263,6 @@ func (s *GetLoginProfileInput) Validate() error {
 	return nil
 }
 
-// SetUserName sets the UserName field's value.
-func (s *GetLoginProfileInput) SetUserName(v string) *GetLoginProfileInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful GetLoginProfile request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetLoginProfileResponse
 type GetLoginProfileOutput struct {
@@ -14291,12 +13289,6 @@ func (s GetLoginProfileOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetLoginProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetLoginProfile sets the LoginProfile field's value.
-func (s *GetLoginProfileOutput) SetLoginProfile(v *LoginProfile) *GetLoginProfileOutput {
-	s.LoginProfile = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProviderRequest
@@ -14342,12 +13334,6 @@ func (s *GetOpenIDConnectProviderInput) Validate() error {
 	return nil
 }
 
-// SetOpenIDConnectProviderArn sets the OpenIDConnectProviderArn field's value.
-func (s *GetOpenIDConnectProviderInput) SetOpenIDConnectProviderArn(v string) *GetOpenIDConnectProviderInput {
-	s.OpenIDConnectProviderArn = &v
-	return s
-}
-
 // Contains the response to a successful GetOpenIDConnectProvider request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetOpenIDConnectProviderResponse
 type GetOpenIDConnectProviderOutput struct {
@@ -14385,30 +13371,6 @@ func (s GetOpenIDConnectProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetOpenIDConnectProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClientIDList sets the ClientIDList field's value.
-func (s *GetOpenIDConnectProviderOutput) SetClientIDList(v []string) *GetOpenIDConnectProviderOutput {
-	s.ClientIDList = v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *GetOpenIDConnectProviderOutput) SetCreateDate(v time.Time) *GetOpenIDConnectProviderOutput {
-	s.CreateDate = &v
-	return s
-}
-
-// SetThumbprintList sets the ThumbprintList field's value.
-func (s *GetOpenIDConnectProviderOutput) SetThumbprintList(v []string) *GetOpenIDConnectProviderOutput {
-	s.ThumbprintList = v
-	return s
-}
-
-// SetUrl sets the Url field's value.
-func (s *GetOpenIDConnectProviderOutput) SetUrl(v string) *GetOpenIDConnectProviderOutput {
-	s.Url = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyRequest
@@ -14453,12 +13415,6 @@ func (s *GetPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *GetPolicyInput) SetPolicyArn(v string) *GetPolicyInput {
-	s.PolicyArn = &v
-	return s
-}
-
 // Contains the response to a successful GetPolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyResponse
 type GetPolicyOutput struct {
@@ -14483,12 +13439,6 @@ func (s GetPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicy sets the Policy field's value.
-func (s *GetPolicyOutput) SetPolicy(v *Policy) *GetPolicyOutput {
-	s.Policy = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersionRequest
@@ -14547,18 +13497,6 @@ func (s *GetPolicyVersionInput) Validate() error {
 	return nil
 }
 
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *GetPolicyVersionInput) SetPolicyArn(v string) *GetPolicyVersionInput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *GetPolicyVersionInput) SetVersionId(v string) *GetPolicyVersionInput {
-	s.VersionId = &v
-	return s
-}
-
 // Contains the response to a successful GetPolicyVersion request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetPolicyVersionResponse
 type GetPolicyVersionOutput struct {
@@ -14583,12 +13521,6 @@ func (s GetPolicyVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPolicyVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicyVersion sets the PolicyVersion field's value.
-func (s *GetPolicyVersionOutput) SetPolicyVersion(v *PolicyVersion) *GetPolicyVersionOutput {
-	s.PolicyVersion = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRoleRequest
@@ -14632,12 +13564,6 @@ func (s *GetRoleInput) Validate() error {
 	return nil
 }
 
-// SetRoleName sets the RoleName field's value.
-func (s *GetRoleInput) SetRoleName(v string) *GetRoleInput {
-	s.RoleName = &v
-	return s
-}
-
 // Contains the response to a successful GetRole request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRoleResponse
 type GetRoleOutput struct {
@@ -14664,12 +13590,6 @@ func (s GetRoleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRole sets the Role field's value.
-func (s *GetRoleOutput) SetRole(v *Role) *GetRoleOutput {
-	s.Role = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicyRequest
@@ -14729,18 +13649,6 @@ func (s *GetRolePolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetRolePolicyInput) SetPolicyName(v string) *GetRolePolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *GetRolePolicyInput) SetRoleName(v string) *GetRolePolicyInput {
-	s.RoleName = &v
-	return s
-}
-
 // Contains the response to a successful GetRolePolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetRolePolicyResponse
 type GetRolePolicyOutput struct {
@@ -14777,24 +13685,6 @@ func (s GetRolePolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetRolePolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *GetRolePolicyOutput) SetPolicyDocument(v string) *GetRolePolicyOutput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetRolePolicyOutput) SetPolicyName(v string) *GetRolePolicyOutput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *GetRolePolicyOutput) SetRoleName(v string) *GetRolePolicyOutput {
-	s.RoleName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderRequest
@@ -14839,12 +13729,6 @@ func (s *GetSAMLProviderInput) Validate() error {
 	return nil
 }
 
-// SetSAMLProviderArn sets the SAMLProviderArn field's value.
-func (s *GetSAMLProviderInput) SetSAMLProviderArn(v string) *GetSAMLProviderInput {
-	s.SAMLProviderArn = &v
-	return s
-}
-
 // Contains the response to a successful GetSAMLProvider request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSAMLProviderResponse
 type GetSAMLProviderOutput struct {
@@ -14875,24 +13759,6 @@ func (s GetSAMLProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSAMLProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *GetSAMLProviderOutput) SetCreateDate(v time.Time) *GetSAMLProviderOutput {
-	s.CreateDate = &v
-	return s
-}
-
-// SetSAMLMetadataDocument sets the SAMLMetadataDocument field's value.
-func (s *GetSAMLProviderOutput) SetSAMLMetadataDocument(v string) *GetSAMLProviderOutput {
-	s.SAMLMetadataDocument = &v
-	return s
-}
-
-// SetValidUntil sets the ValidUntil field's value.
-func (s *GetSAMLProviderOutput) SetValidUntil(v time.Time) *GetSAMLProviderOutput {
-	s.ValidUntil = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKeyRequest
@@ -14962,24 +13828,6 @@ func (s *GetSSHPublicKeyInput) Validate() error {
 	return nil
 }
 
-// SetEncoding sets the Encoding field's value.
-func (s *GetSSHPublicKeyInput) SetEncoding(v EncodingType) *GetSSHPublicKeyInput {
-	s.Encoding = v
-	return s
-}
-
-// SetSSHPublicKeyId sets the SSHPublicKeyId field's value.
-func (s *GetSSHPublicKeyInput) SetSSHPublicKeyId(v string) *GetSSHPublicKeyInput {
-	s.SSHPublicKeyId = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *GetSSHPublicKeyInput) SetUserName(v string) *GetSSHPublicKeyInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful GetSSHPublicKey request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetSSHPublicKeyResponse
 type GetSSHPublicKeyOutput struct {
@@ -15004,12 +13852,6 @@ func (s GetSSHPublicKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSSHPublicKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSSHPublicKey sets the SSHPublicKey field's value.
-func (s *GetSSHPublicKeyOutput) SetSSHPublicKey(v *SSHPublicKey) *GetSSHPublicKeyOutput {
-	s.SSHPublicKey = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificateRequest
@@ -15053,12 +13895,6 @@ func (s *GetServerCertificateInput) Validate() error {
 	return nil
 }
 
-// SetServerCertificateName sets the ServerCertificateName field's value.
-func (s *GetServerCertificateInput) SetServerCertificateName(v string) *GetServerCertificateInput {
-	s.ServerCertificateName = &v
-	return s
-}
-
 // Contains the response to a successful GetServerCertificate request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServerCertificateResponse
 type GetServerCertificateOutput struct {
@@ -15085,12 +13921,6 @@ func (s GetServerCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetServerCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServerCertificate sets the ServerCertificate field's value.
-func (s *GetServerCertificateOutput) SetServerCertificate(v *ServerCertificate) *GetServerCertificateOutput {
-	s.ServerCertificate = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLinkedRoleDeletionStatusRequest
@@ -15131,12 +13961,6 @@ func (s *GetServiceLinkedRoleDeletionStatusInput) Validate() error {
 	return nil
 }
 
-// SetDeletionTaskId sets the DeletionTaskId field's value.
-func (s *GetServiceLinkedRoleDeletionStatusInput) SetDeletionTaskId(v string) *GetServiceLinkedRoleDeletionStatusInput {
-	s.DeletionTaskId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetServiceLinkedRoleDeletionStatusResponse
 type GetServiceLinkedRoleDeletionStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -15165,18 +13989,6 @@ func (s GetServiceLinkedRoleDeletionStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetServiceLinkedRoleDeletionStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetReason sets the Reason field's value.
-func (s *GetServiceLinkedRoleDeletionStatusOutput) SetReason(v *DeletionTaskFailureReasonType) *GetServiceLinkedRoleDeletionStatusOutput {
-	s.Reason = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *GetServiceLinkedRoleDeletionStatusOutput) SetStatus(v DeletionTaskStatusType) *GetServiceLinkedRoleDeletionStatusOutput {
-	s.Status = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserRequest
@@ -15215,12 +14027,6 @@ func (s *GetUserInput) Validate() error {
 	return nil
 }
 
-// SetUserName sets the UserName field's value.
-func (s *GetUserInput) SetUserName(v string) *GetUserInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful GetUser request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserResponse
 type GetUserOutput struct {
@@ -15247,12 +14053,6 @@ func (s GetUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetUser sets the User field's value.
-func (s *GetUserOutput) SetUser(v *User) *GetUserOutput {
-	s.User = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicyRequest
@@ -15312,18 +14112,6 @@ func (s *GetUserPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetUserPolicyInput) SetPolicyName(v string) *GetUserPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *GetUserPolicyInput) SetUserName(v string) *GetUserPolicyInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful GetUserPolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GetUserPolicyResponse
 type GetUserPolicyOutput struct {
@@ -15360,24 +14148,6 @@ func (s GetUserPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetUserPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *GetUserPolicyOutput) SetPolicyDocument(v string) *GetUserPolicyOutput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *GetUserPolicyOutput) SetPolicyName(v string) *GetUserPolicyOutput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *GetUserPolicyOutput) SetUserName(v string) *GetUserPolicyOutput {
-	s.UserName = &v
-	return s
 }
 
 // Contains information about an IAM group entity.
@@ -15436,36 +14206,6 @@ func (s Group) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Group) SetArn(v string) *Group {
-	s.Arn = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *Group) SetCreateDate(v time.Time) *Group {
-	s.CreateDate = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *Group) SetGroupId(v string) *Group {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *Group) SetGroupName(v string) *Group {
-	s.GroupName = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *Group) SetPath(v string) *Group {
-	s.Path = &v
-	return s
-}
-
 // Contains information about an IAM group, including all of the group's policies.
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
@@ -15513,48 +14253,6 @@ func (s GroupDetail) String() string {
 // GoString returns the string representation
 func (s GroupDetail) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *GroupDetail) SetArn(v string) *GroupDetail {
-	s.Arn = &v
-	return s
-}
-
-// SetAttachedManagedPolicies sets the AttachedManagedPolicies field's value.
-func (s *GroupDetail) SetAttachedManagedPolicies(v []AttachedPolicy) *GroupDetail {
-	s.AttachedManagedPolicies = v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *GroupDetail) SetCreateDate(v time.Time) *GroupDetail {
-	s.CreateDate = &v
-	return s
-}
-
-// SetGroupId sets the GroupId field's value.
-func (s *GroupDetail) SetGroupId(v string) *GroupDetail {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *GroupDetail) SetGroupName(v string) *GroupDetail {
-	s.GroupName = &v
-	return s
-}
-
-// SetGroupPolicyList sets the GroupPolicyList field's value.
-func (s *GroupDetail) SetGroupPolicyList(v []PolicyDetail) *GroupDetail {
-	s.GroupPolicyList = v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *GroupDetail) SetPath(v string) *GroupDetail {
-	s.Path = &v
-	return s
 }
 
 // Contains information about an instance profile.
@@ -15620,42 +14318,6 @@ func (s InstanceProfile) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *InstanceProfile) SetArn(v string) *InstanceProfile {
-	s.Arn = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *InstanceProfile) SetCreateDate(v time.Time) *InstanceProfile {
-	s.CreateDate = &v
-	return s
-}
-
-// SetInstanceProfileId sets the InstanceProfileId field's value.
-func (s *InstanceProfile) SetInstanceProfileId(v string) *InstanceProfile {
-	s.InstanceProfileId = &v
-	return s
-}
-
-// SetInstanceProfileName sets the InstanceProfileName field's value.
-func (s *InstanceProfile) SetInstanceProfileName(v string) *InstanceProfile {
-	s.InstanceProfileName = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *InstanceProfile) SetPath(v string) *InstanceProfile {
-	s.Path = &v
-	return s
-}
-
-// SetRoles sets the Roles field's value.
-func (s *InstanceProfile) SetRoles(v []Role) *InstanceProfile {
-	s.Roles = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeysRequest
 type ListAccessKeysInput struct {
 	_ struct{} `type:"structure"`
@@ -15714,24 +14376,6 @@ func (s *ListAccessKeysInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListAccessKeysInput) SetMarker(v string) *ListAccessKeysInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListAccessKeysInput) SetMaxItems(v int64) *ListAccessKeysInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ListAccessKeysInput) SetUserName(v string) *ListAccessKeysInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful ListAccessKeys request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccessKeysResponse
 type ListAccessKeysOutput struct {
@@ -15770,24 +14414,6 @@ func (s ListAccessKeysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAccessKeysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccessKeyMetadata sets the AccessKeyMetadata field's value.
-func (s *ListAccessKeysOutput) SetAccessKeyMetadata(v []AccessKeyMetadata) *ListAccessKeysOutput {
-	s.AccessKeyMetadata = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListAccessKeysOutput) SetIsTruncated(v bool) *ListAccessKeysOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListAccessKeysOutput) SetMarker(v string) *ListAccessKeysOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccountAliasesRequest
@@ -15838,18 +14464,6 @@ func (s *ListAccountAliasesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListAccountAliasesInput) SetMarker(v string) *ListAccountAliasesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListAccountAliasesInput) SetMaxItems(v int64) *ListAccountAliasesInput {
-	s.MaxItems = &v
-	return s
-}
-
 // Contains the response to a successful ListAccountAliases request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAccountAliasesResponse
 type ListAccountAliasesOutput struct {
@@ -15889,24 +14503,6 @@ func (s ListAccountAliasesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAccountAliasesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAccountAliases sets the AccountAliases field's value.
-func (s *ListAccountAliasesOutput) SetAccountAliases(v []string) *ListAccountAliasesOutput {
-	s.AccountAliases = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListAccountAliasesOutput) SetIsTruncated(v bool) *ListAccountAliasesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListAccountAliasesOutput) SetMarker(v string) *ListAccountAliasesOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedGroupPoliciesRequest
@@ -15984,30 +14580,6 @@ func (s *ListAttachedGroupPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *ListAttachedGroupPoliciesInput) SetGroupName(v string) *ListAttachedGroupPoliciesInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListAttachedGroupPoliciesInput) SetMarker(v string) *ListAttachedGroupPoliciesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListAttachedGroupPoliciesInput) SetMaxItems(v int64) *ListAttachedGroupPoliciesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPathPrefix sets the PathPrefix field's value.
-func (s *ListAttachedGroupPoliciesInput) SetPathPrefix(v string) *ListAttachedGroupPoliciesInput {
-	s.PathPrefix = &v
-	return s
-}
-
 // Contains the response to a successful ListAttachedGroupPolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedGroupPoliciesResponse
 type ListAttachedGroupPoliciesOutput struct {
@@ -16044,24 +14616,6 @@ func (s ListAttachedGroupPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAttachedGroupPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttachedPolicies sets the AttachedPolicies field's value.
-func (s *ListAttachedGroupPoliciesOutput) SetAttachedPolicies(v []AttachedPolicy) *ListAttachedGroupPoliciesOutput {
-	s.AttachedPolicies = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListAttachedGroupPoliciesOutput) SetIsTruncated(v bool) *ListAttachedGroupPoliciesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListAttachedGroupPoliciesOutput) SetMarker(v string) *ListAttachedGroupPoliciesOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedRolePoliciesRequest
@@ -16138,30 +14692,6 @@ func (s *ListAttachedRolePoliciesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListAttachedRolePoliciesInput) SetMarker(v string) *ListAttachedRolePoliciesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListAttachedRolePoliciesInput) SetMaxItems(v int64) *ListAttachedRolePoliciesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPathPrefix sets the PathPrefix field's value.
-func (s *ListAttachedRolePoliciesInput) SetPathPrefix(v string) *ListAttachedRolePoliciesInput {
-	s.PathPrefix = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *ListAttachedRolePoliciesInput) SetRoleName(v string) *ListAttachedRolePoliciesInput {
-	s.RoleName = &v
-	return s
-}
-
 // Contains the response to a successful ListAttachedRolePolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedRolePoliciesResponse
 type ListAttachedRolePoliciesOutput struct {
@@ -16198,24 +14728,6 @@ func (s ListAttachedRolePoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAttachedRolePoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttachedPolicies sets the AttachedPolicies field's value.
-func (s *ListAttachedRolePoliciesOutput) SetAttachedPolicies(v []AttachedPolicy) *ListAttachedRolePoliciesOutput {
-	s.AttachedPolicies = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListAttachedRolePoliciesOutput) SetIsTruncated(v bool) *ListAttachedRolePoliciesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListAttachedRolePoliciesOutput) SetMarker(v string) *ListAttachedRolePoliciesOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPoliciesRequest
@@ -16292,30 +14804,6 @@ func (s *ListAttachedUserPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListAttachedUserPoliciesInput) SetMarker(v string) *ListAttachedUserPoliciesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListAttachedUserPoliciesInput) SetMaxItems(v int64) *ListAttachedUserPoliciesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPathPrefix sets the PathPrefix field's value.
-func (s *ListAttachedUserPoliciesInput) SetPathPrefix(v string) *ListAttachedUserPoliciesInput {
-	s.PathPrefix = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ListAttachedUserPoliciesInput) SetUserName(v string) *ListAttachedUserPoliciesInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful ListAttachedUserPolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListAttachedUserPoliciesResponse
 type ListAttachedUserPoliciesOutput struct {
@@ -16352,24 +14840,6 @@ func (s ListAttachedUserPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListAttachedUserPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetAttachedPolicies sets the AttachedPolicies field's value.
-func (s *ListAttachedUserPoliciesOutput) SetAttachedPolicies(v []AttachedPolicy) *ListAttachedUserPoliciesOutput {
-	s.AttachedPolicies = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListAttachedUserPoliciesOutput) SetIsTruncated(v bool) *ListAttachedUserPoliciesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListAttachedUserPoliciesOutput) SetMarker(v string) *ListAttachedUserPoliciesOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicyRequest
@@ -16457,36 +14927,6 @@ func (s *ListEntitiesForPolicyInput) Validate() error {
 	return nil
 }
 
-// SetEntityFilter sets the EntityFilter field's value.
-func (s *ListEntitiesForPolicyInput) SetEntityFilter(v EntityType) *ListEntitiesForPolicyInput {
-	s.EntityFilter = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListEntitiesForPolicyInput) SetMarker(v string) *ListEntitiesForPolicyInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListEntitiesForPolicyInput) SetMaxItems(v int64) *ListEntitiesForPolicyInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPathPrefix sets the PathPrefix field's value.
-func (s *ListEntitiesForPolicyInput) SetPathPrefix(v string) *ListEntitiesForPolicyInput {
-	s.PathPrefix = &v
-	return s
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *ListEntitiesForPolicyInput) SetPolicyArn(v string) *ListEntitiesForPolicyInput {
-	s.PolicyArn = &v
-	return s
-}
-
 // Contains the response to a successful ListEntitiesForPolicy request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListEntitiesForPolicyResponse
 type ListEntitiesForPolicyOutput struct {
@@ -16529,36 +14969,6 @@ func (s ListEntitiesForPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListEntitiesForPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListEntitiesForPolicyOutput) SetIsTruncated(v bool) *ListEntitiesForPolicyOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListEntitiesForPolicyOutput) SetMarker(v string) *ListEntitiesForPolicyOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetPolicyGroups sets the PolicyGroups field's value.
-func (s *ListEntitiesForPolicyOutput) SetPolicyGroups(v []PolicyGroup) *ListEntitiesForPolicyOutput {
-	s.PolicyGroups = v
-	return s
-}
-
-// SetPolicyRoles sets the PolicyRoles field's value.
-func (s *ListEntitiesForPolicyOutput) SetPolicyRoles(v []PolicyRole) *ListEntitiesForPolicyOutput {
-	s.PolicyRoles = v
-	return s
-}
-
-// SetPolicyUsers sets the PolicyUsers field's value.
-func (s *ListEntitiesForPolicyOutput) SetPolicyUsers(v []PolicyUser) *ListEntitiesForPolicyOutput {
-	s.PolicyUsers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupPoliciesRequest
@@ -16625,24 +15035,6 @@ func (s *ListGroupPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *ListGroupPoliciesInput) SetGroupName(v string) *ListGroupPoliciesInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListGroupPoliciesInput) SetMarker(v string) *ListGroupPoliciesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListGroupPoliciesInput) SetMaxItems(v int64) *ListGroupPoliciesInput {
-	s.MaxItems = &v
-	return s
-}
-
 // Contains the response to a successful ListGroupPolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupPoliciesResponse
 type ListGroupPoliciesOutput struct {
@@ -16685,24 +15077,6 @@ func (s ListGroupPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGroupPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListGroupPoliciesOutput) SetIsTruncated(v bool) *ListGroupPoliciesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListGroupPoliciesOutput) SetMarker(v string) *ListGroupPoliciesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetPolicyNames sets the PolicyNames field's value.
-func (s *ListGroupPoliciesOutput) SetPolicyNames(v []string) *ListGroupPoliciesOutput {
-	s.PolicyNames = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUserRequest
@@ -16769,24 +15143,6 @@ func (s *ListGroupsForUserInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListGroupsForUserInput) SetMarker(v string) *ListGroupsForUserInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListGroupsForUserInput) SetMaxItems(v int64) *ListGroupsForUserInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ListGroupsForUserInput) SetUserName(v string) *ListGroupsForUserInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful ListGroupsForUser request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsForUserResponse
 type ListGroupsForUserOutput struct {
@@ -16825,24 +15181,6 @@ func (s ListGroupsForUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGroupsForUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroups sets the Groups field's value.
-func (s *ListGroupsForUserOutput) SetGroups(v []Group) *ListGroupsForUserOutput {
-	s.Groups = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListGroupsForUserOutput) SetIsTruncated(v bool) *ListGroupsForUserOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListGroupsForUserOutput) SetMarker(v string) *ListGroupsForUserOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsRequest
@@ -16907,24 +15245,6 @@ func (s *ListGroupsInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListGroupsInput) SetMarker(v string) *ListGroupsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListGroupsInput) SetMaxItems(v int64) *ListGroupsInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPathPrefix sets the PathPrefix field's value.
-func (s *ListGroupsInput) SetPathPrefix(v string) *ListGroupsInput {
-	s.PathPrefix = &v
-	return s
-}
-
 // Contains the response to a successful ListGroups request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListGroupsResponse
 type ListGroupsOutput struct {
@@ -16963,24 +15283,6 @@ func (s ListGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetGroups sets the Groups field's value.
-func (s *ListGroupsOutput) SetGroups(v []Group) *ListGroupsOutput {
-	s.Groups = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListGroupsOutput) SetIsTruncated(v bool) *ListGroupsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListGroupsOutput) SetMarker(v string) *ListGroupsOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesForRoleRequest
@@ -17047,24 +15349,6 @@ func (s *ListInstanceProfilesForRoleInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListInstanceProfilesForRoleInput) SetMarker(v string) *ListInstanceProfilesForRoleInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListInstanceProfilesForRoleInput) SetMaxItems(v int64) *ListInstanceProfilesForRoleInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *ListInstanceProfilesForRoleInput) SetRoleName(v string) *ListInstanceProfilesForRoleInput {
-	s.RoleName = &v
-	return s
-}
-
 // Contains the response to a successful ListInstanceProfilesForRole request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesForRoleResponse
 type ListInstanceProfilesForRoleOutput struct {
@@ -17103,24 +15387,6 @@ func (s ListInstanceProfilesForRoleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListInstanceProfilesForRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceProfiles sets the InstanceProfiles field's value.
-func (s *ListInstanceProfilesForRoleOutput) SetInstanceProfiles(v []InstanceProfile) *ListInstanceProfilesForRoleOutput {
-	s.InstanceProfiles = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListInstanceProfilesForRoleOutput) SetIsTruncated(v bool) *ListInstanceProfilesForRoleOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListInstanceProfilesForRoleOutput) SetMarker(v string) *ListInstanceProfilesForRoleOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesRequest
@@ -17186,24 +15452,6 @@ func (s *ListInstanceProfilesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListInstanceProfilesInput) SetMarker(v string) *ListInstanceProfilesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListInstanceProfilesInput) SetMaxItems(v int64) *ListInstanceProfilesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPathPrefix sets the PathPrefix field's value.
-func (s *ListInstanceProfilesInput) SetPathPrefix(v string) *ListInstanceProfilesInput {
-	s.PathPrefix = &v
-	return s
-}
-
 // Contains the response to a successful ListInstanceProfiles request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListInstanceProfilesResponse
 type ListInstanceProfilesOutput struct {
@@ -17242,24 +15490,6 @@ func (s ListInstanceProfilesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListInstanceProfilesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceProfiles sets the InstanceProfiles field's value.
-func (s *ListInstanceProfilesOutput) SetInstanceProfiles(v []InstanceProfile) *ListInstanceProfilesOutput {
-	s.InstanceProfiles = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListInstanceProfilesOutput) SetIsTruncated(v bool) *ListInstanceProfilesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListInstanceProfilesOutput) SetMarker(v string) *ListInstanceProfilesOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADevicesRequest
@@ -17320,24 +15550,6 @@ func (s *ListMFADevicesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListMFADevicesInput) SetMarker(v string) *ListMFADevicesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListMFADevicesInput) SetMaxItems(v int64) *ListMFADevicesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ListMFADevicesInput) SetUserName(v string) *ListMFADevicesInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful ListMFADevices request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListMFADevicesResponse
 type ListMFADevicesOutput struct {
@@ -17376,24 +15588,6 @@ func (s ListMFADevicesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListMFADevicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListMFADevicesOutput) SetIsTruncated(v bool) *ListMFADevicesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMFADevices sets the MFADevices field's value.
-func (s *ListMFADevicesOutput) SetMFADevices(v []MFADevice) *ListMFADevicesOutput {
-	s.MFADevices = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListMFADevicesOutput) SetMarker(v string) *ListMFADevicesOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListOpenIDConnectProvidersRequest
@@ -17435,12 +15629,6 @@ func (s ListOpenIDConnectProvidersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOpenIDConnectProvidersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetOpenIDConnectProviderList sets the OpenIDConnectProviderList field's value.
-func (s *ListOpenIDConnectProvidersOutput) SetOpenIDConnectProviderList(v []OpenIDConnectProviderListEntry) *ListOpenIDConnectProvidersOutput {
-	s.OpenIDConnectProviderList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesRequest
@@ -17516,36 +15704,6 @@ func (s *ListPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListPoliciesInput) SetMarker(v string) *ListPoliciesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListPoliciesInput) SetMaxItems(v int64) *ListPoliciesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetOnlyAttached sets the OnlyAttached field's value.
-func (s *ListPoliciesInput) SetOnlyAttached(v bool) *ListPoliciesInput {
-	s.OnlyAttached = &v
-	return s
-}
-
-// SetPathPrefix sets the PathPrefix field's value.
-func (s *ListPoliciesInput) SetPathPrefix(v string) *ListPoliciesInput {
-	s.PathPrefix = &v
-	return s
-}
-
-// SetScope sets the Scope field's value.
-func (s *ListPoliciesInput) SetScope(v PolicyScopeType) *ListPoliciesInput {
-	s.Scope = v
-	return s
-}
-
 // Contains the response to a successful ListPolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPoliciesResponse
 type ListPoliciesOutput struct {
@@ -17582,24 +15740,6 @@ func (s ListPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListPoliciesOutput) SetIsTruncated(v bool) *ListPoliciesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListPoliciesOutput) SetMarker(v string) *ListPoliciesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetPolicies sets the Policies field's value.
-func (s *ListPoliciesOutput) SetPolicies(v []Policy) *ListPoliciesOutput {
-	s.Policies = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersionsRequest
@@ -17666,24 +15806,6 @@ func (s *ListPolicyVersionsInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListPolicyVersionsInput) SetMarker(v string) *ListPolicyVersionsInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListPolicyVersionsInput) SetMaxItems(v int64) *ListPolicyVersionsInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *ListPolicyVersionsInput) SetPolicyArn(v string) *ListPolicyVersionsInput {
-	s.PolicyArn = &v
-	return s
-}
-
 // Contains the response to a successful ListPolicyVersions request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListPolicyVersionsResponse
 type ListPolicyVersionsOutput struct {
@@ -17724,24 +15846,6 @@ func (s ListPolicyVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPolicyVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListPolicyVersionsOutput) SetIsTruncated(v bool) *ListPolicyVersionsOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListPolicyVersionsOutput) SetMarker(v string) *ListPolicyVersionsOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetVersions sets the Versions field's value.
-func (s *ListPolicyVersionsOutput) SetVersions(v []PolicyVersion) *ListPolicyVersionsOutput {
-	s.Versions = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolePoliciesRequest
@@ -17808,24 +15912,6 @@ func (s *ListRolePoliciesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListRolePoliciesInput) SetMarker(v string) *ListRolePoliciesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListRolePoliciesInput) SetMaxItems(v int64) *ListRolePoliciesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *ListRolePoliciesInput) SetRoleName(v string) *ListRolePoliciesInput {
-	s.RoleName = &v
-	return s
-}
-
 // Contains the response to a successful ListRolePolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolePoliciesResponse
 type ListRolePoliciesOutput struct {
@@ -17864,24 +15950,6 @@ func (s ListRolePoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRolePoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListRolePoliciesOutput) SetIsTruncated(v bool) *ListRolePoliciesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListRolePoliciesOutput) SetMarker(v string) *ListRolePoliciesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetPolicyNames sets the PolicyNames field's value.
-func (s *ListRolePoliciesOutput) SetPolicyNames(v []string) *ListRolePoliciesOutput {
-	s.PolicyNames = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolesRequest
@@ -17946,24 +16014,6 @@ func (s *ListRolesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListRolesInput) SetMarker(v string) *ListRolesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListRolesInput) SetMaxItems(v int64) *ListRolesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPathPrefix sets the PathPrefix field's value.
-func (s *ListRolesInput) SetPathPrefix(v string) *ListRolesInput {
-	s.PathPrefix = &v
-	return s
-}
-
 // Contains the response to a successful ListRoles request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListRolesResponse
 type ListRolesOutput struct {
@@ -18002,24 +16052,6 @@ func (s ListRolesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListRolesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListRolesOutput) SetIsTruncated(v bool) *ListRolesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListRolesOutput) SetMarker(v string) *ListRolesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetRoles sets the Roles field's value.
-func (s *ListRolesOutput) SetRoles(v []Role) *ListRolesOutput {
-	s.Roles = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSAMLProvidersRequest
@@ -18061,12 +16093,6 @@ func (s ListSAMLProvidersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListSAMLProvidersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSAMLProviderList sets the SAMLProviderList field's value.
-func (s *ListSAMLProvidersOutput) SetSAMLProviderList(v []SAMLProviderListEntry) *ListSAMLProvidersOutput {
-	s.SAMLProviderList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeysRequest
@@ -18129,24 +16155,6 @@ func (s *ListSSHPublicKeysInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListSSHPublicKeysInput) SetMarker(v string) *ListSSHPublicKeysInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListSSHPublicKeysInput) SetMaxItems(v int64) *ListSSHPublicKeysInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ListSSHPublicKeysInput) SetUserName(v string) *ListSSHPublicKeysInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful ListSSHPublicKeys request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSSHPublicKeysResponse
 type ListSSHPublicKeysOutput struct {
@@ -18183,24 +16191,6 @@ func (s ListSSHPublicKeysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListSSHPublicKeysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListSSHPublicKeysOutput) SetIsTruncated(v bool) *ListSSHPublicKeysOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListSSHPublicKeysOutput) SetMarker(v string) *ListSSHPublicKeysOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetSSHPublicKeys sets the SSHPublicKeys field's value.
-func (s *ListSSHPublicKeysOutput) SetSSHPublicKeys(v []SSHPublicKeyMetadata) *ListSSHPublicKeysOutput {
-	s.SSHPublicKeys = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificatesRequest
@@ -18266,24 +16256,6 @@ func (s *ListServerCertificatesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListServerCertificatesInput) SetMarker(v string) *ListServerCertificatesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListServerCertificatesInput) SetMaxItems(v int64) *ListServerCertificatesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPathPrefix sets the PathPrefix field's value.
-func (s *ListServerCertificatesInput) SetPathPrefix(v string) *ListServerCertificatesInput {
-	s.PathPrefix = &v
-	return s
-}
-
 // Contains the response to a successful ListServerCertificates request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServerCertificatesResponse
 type ListServerCertificatesOutput struct {
@@ -18322,24 +16294,6 @@ func (s ListServerCertificatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListServerCertificatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListServerCertificatesOutput) SetIsTruncated(v bool) *ListServerCertificatesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListServerCertificatesOutput) SetMarker(v string) *ListServerCertificatesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetServerCertificateMetadataList sets the ServerCertificateMetadataList field's value.
-func (s *ListServerCertificatesOutput) SetServerCertificateMetadataList(v []ServerCertificateMetadata) *ListServerCertificatesOutput {
-	s.ServerCertificateMetadataList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentialsRequest
@@ -18383,18 +16337,6 @@ func (s *ListServiceSpecificCredentialsInput) Validate() error {
 	return nil
 }
 
-// SetServiceName sets the ServiceName field's value.
-func (s *ListServiceSpecificCredentialsInput) SetServiceName(v string) *ListServiceSpecificCredentialsInput {
-	s.ServiceName = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ListServiceSpecificCredentialsInput) SetUserName(v string) *ListServiceSpecificCredentialsInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListServiceSpecificCredentialsResponse
 type ListServiceSpecificCredentialsOutput struct {
 	_ struct{} `type:"structure"`
@@ -18418,12 +16360,6 @@ func (s ListServiceSpecificCredentialsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListServiceSpecificCredentialsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServiceSpecificCredentials sets the ServiceSpecificCredentials field's value.
-func (s *ListServiceSpecificCredentialsOutput) SetServiceSpecificCredentials(v []ServiceSpecificCredentialMetadata) *ListServiceSpecificCredentialsOutput {
-	s.ServiceSpecificCredentials = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificatesRequest
@@ -18484,24 +16420,6 @@ func (s *ListSigningCertificatesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListSigningCertificatesInput) SetMarker(v string) *ListSigningCertificatesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListSigningCertificatesInput) SetMaxItems(v int64) *ListSigningCertificatesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ListSigningCertificatesInput) SetUserName(v string) *ListSigningCertificatesInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful ListSigningCertificates request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListSigningCertificatesResponse
 type ListSigningCertificatesOutput struct {
@@ -18540,24 +16458,6 @@ func (s ListSigningCertificatesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListSigningCertificatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificates sets the Certificates field's value.
-func (s *ListSigningCertificatesOutput) SetCertificates(v []SigningCertificate) *ListSigningCertificatesOutput {
-	s.Certificates = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListSigningCertificatesOutput) SetIsTruncated(v bool) *ListSigningCertificatesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListSigningCertificatesOutput) SetMarker(v string) *ListSigningCertificatesOutput {
-	s.Marker = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserPoliciesRequest
@@ -18624,24 +16524,6 @@ func (s *ListUserPoliciesInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListUserPoliciesInput) SetMarker(v string) *ListUserPoliciesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListUserPoliciesInput) SetMaxItems(v int64) *ListUserPoliciesInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ListUserPoliciesInput) SetUserName(v string) *ListUserPoliciesInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful ListUserPolicies request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUserPoliciesResponse
 type ListUserPoliciesOutput struct {
@@ -18680,24 +16562,6 @@ func (s ListUserPoliciesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUserPoliciesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListUserPoliciesOutput) SetIsTruncated(v bool) *ListUserPoliciesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListUserPoliciesOutput) SetMarker(v string) *ListUserPoliciesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetPolicyNames sets the PolicyNames field's value.
-func (s *ListUserPoliciesOutput) SetPolicyNames(v []string) *ListUserPoliciesOutput {
-	s.PolicyNames = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUsersRequest
@@ -18763,24 +16627,6 @@ func (s *ListUsersInput) Validate() error {
 	return nil
 }
 
-// SetMarker sets the Marker field's value.
-func (s *ListUsersInput) SetMarker(v string) *ListUsersInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListUsersInput) SetMaxItems(v int64) *ListUsersInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPathPrefix sets the PathPrefix field's value.
-func (s *ListUsersInput) SetPathPrefix(v string) *ListUsersInput {
-	s.PathPrefix = &v
-	return s
-}
-
 // Contains the response to a successful ListUsers request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListUsersResponse
 type ListUsersOutput struct {
@@ -18819,24 +16665,6 @@ func (s ListUsersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUsersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListUsersOutput) SetIsTruncated(v bool) *ListUsersOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListUsersOutput) SetMarker(v string) *ListUsersOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetUsers sets the Users field's value.
-func (s *ListUsersOutput) SetUsers(v []User) *ListUsersOutput {
-	s.Users = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevicesRequest
@@ -18892,24 +16720,6 @@ func (s *ListVirtualMFADevicesInput) Validate() error {
 	return nil
 }
 
-// SetAssignmentStatus sets the AssignmentStatus field's value.
-func (s *ListVirtualMFADevicesInput) SetAssignmentStatus(v AssignmentStatusType) *ListVirtualMFADevicesInput {
-	s.AssignmentStatus = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListVirtualMFADevicesInput) SetMarker(v string) *ListVirtualMFADevicesInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *ListVirtualMFADevicesInput) SetMaxItems(v int64) *ListVirtualMFADevicesInput {
-	s.MaxItems = &v
-	return s
-}
-
 // Contains the response to a successful ListVirtualMFADevices request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ListVirtualMFADevicesResponse
 type ListVirtualMFADevicesOutput struct {
@@ -18951,24 +16761,6 @@ func (s ListVirtualMFADevicesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *ListVirtualMFADevicesOutput) SetIsTruncated(v bool) *ListVirtualMFADevicesOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *ListVirtualMFADevicesOutput) SetMarker(v string) *ListVirtualMFADevicesOutput {
-	s.Marker = &v
-	return s
-}
-
-// SetVirtualMFADevices sets the VirtualMFADevices field's value.
-func (s *ListVirtualMFADevicesOutput) SetVirtualMFADevices(v []VirtualMFADevice) *ListVirtualMFADevicesOutput {
-	s.VirtualMFADevices = v
-	return s
-}
-
 // Contains the user name and password create date for a user.
 //
 // This data type is used as a response element in the CreateLoginProfile and
@@ -19000,24 +16792,6 @@ func (s LoginProfile) String() string {
 // GoString returns the string representation
 func (s LoginProfile) GoString() string {
 	return s.String()
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *LoginProfile) SetCreateDate(v time.Time) *LoginProfile {
-	s.CreateDate = &v
-	return s
-}
-
-// SetPasswordResetRequired sets the PasswordResetRequired field's value.
-func (s *LoginProfile) SetPasswordResetRequired(v bool) *LoginProfile {
-	s.PasswordResetRequired = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *LoginProfile) SetUserName(v string) *LoginProfile {
-	s.UserName = &v
-	return s
 }
 
 // Contains information about an MFA device.
@@ -19052,24 +16826,6 @@ func (s MFADevice) String() string {
 // GoString returns the string representation
 func (s MFADevice) GoString() string {
 	return s.String()
-}
-
-// SetEnableDate sets the EnableDate field's value.
-func (s *MFADevice) SetEnableDate(v time.Time) *MFADevice {
-	s.EnableDate = &v
-	return s
-}
-
-// SetSerialNumber sets the SerialNumber field's value.
-func (s *MFADevice) SetSerialNumber(v string) *MFADevice {
-	s.SerialNumber = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *MFADevice) SetUserName(v string) *MFADevice {
-	s.UserName = &v
-	return s
 }
 
 // Contains information about a managed policy, including the policy's ARN,
@@ -19153,72 +16909,6 @@ func (s ManagedPolicyDetail) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *ManagedPolicyDetail) SetArn(v string) *ManagedPolicyDetail {
-	s.Arn = &v
-	return s
-}
-
-// SetAttachmentCount sets the AttachmentCount field's value.
-func (s *ManagedPolicyDetail) SetAttachmentCount(v int64) *ManagedPolicyDetail {
-	s.AttachmentCount = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *ManagedPolicyDetail) SetCreateDate(v time.Time) *ManagedPolicyDetail {
-	s.CreateDate = &v
-	return s
-}
-
-// SetDefaultVersionId sets the DefaultVersionId field's value.
-func (s *ManagedPolicyDetail) SetDefaultVersionId(v string) *ManagedPolicyDetail {
-	s.DefaultVersionId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ManagedPolicyDetail) SetDescription(v string) *ManagedPolicyDetail {
-	s.Description = &v
-	return s
-}
-
-// SetIsAttachable sets the IsAttachable field's value.
-func (s *ManagedPolicyDetail) SetIsAttachable(v bool) *ManagedPolicyDetail {
-	s.IsAttachable = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *ManagedPolicyDetail) SetPath(v string) *ManagedPolicyDetail {
-	s.Path = &v
-	return s
-}
-
-// SetPolicyId sets the PolicyId field's value.
-func (s *ManagedPolicyDetail) SetPolicyId(v string) *ManagedPolicyDetail {
-	s.PolicyId = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *ManagedPolicyDetail) SetPolicyName(v string) *ManagedPolicyDetail {
-	s.PolicyName = &v
-	return s
-}
-
-// SetPolicyVersionList sets the PolicyVersionList field's value.
-func (s *ManagedPolicyDetail) SetPolicyVersionList(v []PolicyVersion) *ManagedPolicyDetail {
-	s.PolicyVersionList = v
-	return s
-}
-
-// SetUpdateDate sets the UpdateDate field's value.
-func (s *ManagedPolicyDetail) SetUpdateDate(v time.Time) *ManagedPolicyDetail {
-	s.UpdateDate = &v
-	return s
-}
-
 // Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OpenIDConnectProviderListEntry
 type OpenIDConnectProviderListEntry struct {
@@ -19242,12 +16932,6 @@ func (s OpenIDConnectProviderListEntry) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *OpenIDConnectProviderListEntry) SetArn(v string) *OpenIDConnectProviderListEntry {
-	s.Arn = &v
-	return s
-}
-
 // Contains information about AWS Organizations's affect on a policy simulation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OrganizationsDecisionDetail
 type OrganizationsDecisionDetail struct {
@@ -19266,12 +16950,6 @@ func (s OrganizationsDecisionDetail) String() string {
 // GoString returns the string representation
 func (s OrganizationsDecisionDetail) GoString() string {
 	return s.String()
-}
-
-// SetAllowedByOrganizations sets the AllowedByOrganizations field's value.
-func (s *OrganizationsDecisionDetail) SetAllowedByOrganizations(v bool) *OrganizationsDecisionDetail {
-	s.AllowedByOrganizations = &v
-	return s
 }
 
 // Contains information about the account password policy.
@@ -19325,66 +17003,6 @@ func (s PasswordPolicy) String() string {
 // GoString returns the string representation
 func (s PasswordPolicy) GoString() string {
 	return s.String()
-}
-
-// SetAllowUsersToChangePassword sets the AllowUsersToChangePassword field's value.
-func (s *PasswordPolicy) SetAllowUsersToChangePassword(v bool) *PasswordPolicy {
-	s.AllowUsersToChangePassword = &v
-	return s
-}
-
-// SetExpirePasswords sets the ExpirePasswords field's value.
-func (s *PasswordPolicy) SetExpirePasswords(v bool) *PasswordPolicy {
-	s.ExpirePasswords = &v
-	return s
-}
-
-// SetHardExpiry sets the HardExpiry field's value.
-func (s *PasswordPolicy) SetHardExpiry(v bool) *PasswordPolicy {
-	s.HardExpiry = &v
-	return s
-}
-
-// SetMaxPasswordAge sets the MaxPasswordAge field's value.
-func (s *PasswordPolicy) SetMaxPasswordAge(v int64) *PasswordPolicy {
-	s.MaxPasswordAge = &v
-	return s
-}
-
-// SetMinimumPasswordLength sets the MinimumPasswordLength field's value.
-func (s *PasswordPolicy) SetMinimumPasswordLength(v int64) *PasswordPolicy {
-	s.MinimumPasswordLength = &v
-	return s
-}
-
-// SetPasswordReusePrevention sets the PasswordReusePrevention field's value.
-func (s *PasswordPolicy) SetPasswordReusePrevention(v int64) *PasswordPolicy {
-	s.PasswordReusePrevention = &v
-	return s
-}
-
-// SetRequireLowercaseCharacters sets the RequireLowercaseCharacters field's value.
-func (s *PasswordPolicy) SetRequireLowercaseCharacters(v bool) *PasswordPolicy {
-	s.RequireLowercaseCharacters = &v
-	return s
-}
-
-// SetRequireNumbers sets the RequireNumbers field's value.
-func (s *PasswordPolicy) SetRequireNumbers(v bool) *PasswordPolicy {
-	s.RequireNumbers = &v
-	return s
-}
-
-// SetRequireSymbols sets the RequireSymbols field's value.
-func (s *PasswordPolicy) SetRequireSymbols(v bool) *PasswordPolicy {
-	s.RequireSymbols = &v
-	return s
-}
-
-// SetRequireUppercaseCharacters sets the RequireUppercaseCharacters field's value.
-func (s *PasswordPolicy) SetRequireUppercaseCharacters(v bool) *PasswordPolicy {
-	s.RequireUppercaseCharacters = &v
-	return s
 }
 
 // Contains information about a managed policy.
@@ -19461,66 +17079,6 @@ func (s Policy) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Policy) SetArn(v string) *Policy {
-	s.Arn = &v
-	return s
-}
-
-// SetAttachmentCount sets the AttachmentCount field's value.
-func (s *Policy) SetAttachmentCount(v int64) *Policy {
-	s.AttachmentCount = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *Policy) SetCreateDate(v time.Time) *Policy {
-	s.CreateDate = &v
-	return s
-}
-
-// SetDefaultVersionId sets the DefaultVersionId field's value.
-func (s *Policy) SetDefaultVersionId(v string) *Policy {
-	s.DefaultVersionId = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Policy) SetDescription(v string) *Policy {
-	s.Description = &v
-	return s
-}
-
-// SetIsAttachable sets the IsAttachable field's value.
-func (s *Policy) SetIsAttachable(v bool) *Policy {
-	s.IsAttachable = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *Policy) SetPath(v string) *Policy {
-	s.Path = &v
-	return s
-}
-
-// SetPolicyId sets the PolicyId field's value.
-func (s *Policy) SetPolicyId(v string) *Policy {
-	s.PolicyId = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *Policy) SetPolicyName(v string) *Policy {
-	s.PolicyName = &v
-	return s
-}
-
-// SetUpdateDate sets the UpdateDate field's value.
-func (s *Policy) SetUpdateDate(v time.Time) *Policy {
-	s.UpdateDate = &v
-	return s
-}
-
 // Contains information about an IAM policy, including the policy document.
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
@@ -19544,18 +17102,6 @@ func (s PolicyDetail) String() string {
 // GoString returns the string representation
 func (s PolicyDetail) GoString() string {
 	return s.String()
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *PolicyDetail) SetPolicyDocument(v string) *PolicyDetail {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *PolicyDetail) SetPolicyName(v string) *PolicyDetail {
-	s.PolicyName = &v
-	return s
 }
 
 // Contains information about a group that a managed policy is attached to.
@@ -19589,18 +17135,6 @@ func (s PolicyGroup) GoString() string {
 	return s.String()
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *PolicyGroup) SetGroupId(v string) *PolicyGroup {
-	s.GroupId = &v
-	return s
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *PolicyGroup) SetGroupName(v string) *PolicyGroup {
-	s.GroupName = &v
-	return s
-}
-
 // Contains information about a role that a managed policy is attached to.
 //
 // This data type is used as a response element in the ListEntitiesForPolicy
@@ -19632,18 +17166,6 @@ func (s PolicyRole) GoString() string {
 	return s.String()
 }
 
-// SetRoleId sets the RoleId field's value.
-func (s *PolicyRole) SetRoleId(v string) *PolicyRole {
-	s.RoleId = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *PolicyRole) SetRoleName(v string) *PolicyRole {
-	s.RoleName = &v
-	return s
-}
-
 // Contains information about a user that a managed policy is attached to.
 //
 // This data type is used as a response element in the ListEntitiesForPolicy
@@ -19673,18 +17195,6 @@ func (s PolicyUser) String() string {
 // GoString returns the string representation
 func (s PolicyUser) GoString() string {
 	return s.String()
-}
-
-// SetUserId sets the UserId field's value.
-func (s *PolicyUser) SetUserId(v string) *PolicyUser {
-	s.UserId = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *PolicyUser) SetUserName(v string) *PolicyUser {
-	s.UserName = &v
-	return s
 }
 
 // Contains information about a version of a managed policy.
@@ -19731,30 +17241,6 @@ func (s PolicyVersion) GoString() string {
 	return s.String()
 }
 
-// SetCreateDate sets the CreateDate field's value.
-func (s *PolicyVersion) SetCreateDate(v time.Time) *PolicyVersion {
-	s.CreateDate = &v
-	return s
-}
-
-// SetDocument sets the Document field's value.
-func (s *PolicyVersion) SetDocument(v string) *PolicyVersion {
-	s.Document = &v
-	return s
-}
-
-// SetIsDefaultVersion sets the IsDefaultVersion field's value.
-func (s *PolicyVersion) SetIsDefaultVersion(v bool) *PolicyVersion {
-	s.IsDefaultVersion = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *PolicyVersion) SetVersionId(v string) *PolicyVersion {
-	s.VersionId = &v
-	return s
-}
-
 // Contains the row and column of a location of a Statement element in a policy
 // document.
 //
@@ -19778,18 +17264,6 @@ func (s Position) String() string {
 // GoString returns the string representation
 func (s Position) GoString() string {
 	return s.String()
-}
-
-// SetColumn sets the Column field's value.
-func (s *Position) SetColumn(v int64) *Position {
-	s.Column = &v
-	return s
-}
-
-// SetLine sets the Line field's value.
-func (s *Position) SetLine(v int64) *Position {
-	s.Line = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutGroupPolicyRequest
@@ -19866,24 +17340,6 @@ func (s *PutGroupPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetGroupName sets the GroupName field's value.
-func (s *PutGroupPolicyInput) SetGroupName(v string) *PutGroupPolicyInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *PutGroupPolicyInput) SetPolicyDocument(v string) *PutGroupPolicyInput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *PutGroupPolicyInput) SetPolicyName(v string) *PutGroupPolicyInput {
-	s.PolicyName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutGroupPolicyOutput
@@ -19984,24 +17440,6 @@ func (s *PutRolePolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *PutRolePolicyInput) SetPolicyDocument(v string) *PutRolePolicyInput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *PutRolePolicyInput) SetPolicyName(v string) *PutRolePolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *PutRolePolicyInput) SetRoleName(v string) *PutRolePolicyInput {
-	s.RoleName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutRolePolicyOutput
 type PutRolePolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -20100,24 +17538,6 @@ func (s *PutUserPolicyInput) Validate() error {
 	return nil
 }
 
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *PutUserPolicyInput) SetPolicyDocument(v string) *PutUserPolicyInput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetPolicyName sets the PolicyName field's value.
-func (s *PutUserPolicyInput) SetPolicyName(v string) *PutUserPolicyInput {
-	s.PolicyName = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *PutUserPolicyInput) SetUserName(v string) *PutUserPolicyInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PutUserPolicyOutput
 type PutUserPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -20194,18 +17614,6 @@ func (s *RemoveClientIDFromOpenIDConnectProviderInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetClientID sets the ClientID field's value.
-func (s *RemoveClientIDFromOpenIDConnectProviderInput) SetClientID(v string) *RemoveClientIDFromOpenIDConnectProviderInput {
-	s.ClientID = &v
-	return s
-}
-
-// SetOpenIDConnectProviderArn sets the OpenIDConnectProviderArn field's value.
-func (s *RemoveClientIDFromOpenIDConnectProviderInput) SetOpenIDConnectProviderArn(v string) *RemoveClientIDFromOpenIDConnectProviderInput {
-	s.OpenIDConnectProviderArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveClientIDFromOpenIDConnectProviderOutput
@@ -20287,18 +17695,6 @@ func (s *RemoveRoleFromInstanceProfileInput) Validate() error {
 	return nil
 }
 
-// SetInstanceProfileName sets the InstanceProfileName field's value.
-func (s *RemoveRoleFromInstanceProfileInput) SetInstanceProfileName(v string) *RemoveRoleFromInstanceProfileInput {
-	s.InstanceProfileName = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *RemoveRoleFromInstanceProfileInput) SetRoleName(v string) *RemoveRoleFromInstanceProfileInput {
-	s.RoleName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveRoleFromInstanceProfileOutput
 type RemoveRoleFromInstanceProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -20378,18 +17774,6 @@ func (s *RemoveUserFromGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *RemoveUserFromGroupInput) SetGroupName(v string) *RemoveUserFromGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *RemoveUserFromGroupInput) SetUserName(v string) *RemoveUserFromGroupInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RemoveUserFromGroupOutput
 type RemoveUserFromGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -20465,18 +17849,6 @@ func (s *ResetServiceSpecificCredentialInput) Validate() error {
 	return nil
 }
 
-// SetServiceSpecificCredentialId sets the ServiceSpecificCredentialId field's value.
-func (s *ResetServiceSpecificCredentialInput) SetServiceSpecificCredentialId(v string) *ResetServiceSpecificCredentialInput {
-	s.ServiceSpecificCredentialId = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ResetServiceSpecificCredentialInput) SetUserName(v string) *ResetServiceSpecificCredentialInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResetServiceSpecificCredentialResponse
 type ResetServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
@@ -20504,12 +17876,6 @@ func (s ResetServiceSpecificCredentialOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ResetServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServiceSpecificCredential sets the ServiceSpecificCredential field's value.
-func (s *ResetServiceSpecificCredentialOutput) SetServiceSpecificCredential(v *ServiceSpecificCredential) *ResetServiceSpecificCredentialOutput {
-	s.ServiceSpecificCredential = v
-	return s
 }
 
 // Contains the result of the simulation of a single API action call on a single
@@ -20564,36 +17930,6 @@ func (s ResourceSpecificResult) String() string {
 // GoString returns the string representation
 func (s ResourceSpecificResult) GoString() string {
 	return s.String()
-}
-
-// SetEvalDecisionDetails sets the EvalDecisionDetails field's value.
-func (s *ResourceSpecificResult) SetEvalDecisionDetails(v map[string]PolicyEvaluationDecisionType) *ResourceSpecificResult {
-	s.EvalDecisionDetails = v
-	return s
-}
-
-// SetEvalResourceDecision sets the EvalResourceDecision field's value.
-func (s *ResourceSpecificResult) SetEvalResourceDecision(v PolicyEvaluationDecisionType) *ResourceSpecificResult {
-	s.EvalResourceDecision = v
-	return s
-}
-
-// SetEvalResourceName sets the EvalResourceName field's value.
-func (s *ResourceSpecificResult) SetEvalResourceName(v string) *ResourceSpecificResult {
-	s.EvalResourceName = &v
-	return s
-}
-
-// SetMatchedStatements sets the MatchedStatements field's value.
-func (s *ResourceSpecificResult) SetMatchedStatements(v []Statement) *ResourceSpecificResult {
-	s.MatchedStatements = v
-	return s
-}
-
-// SetMissingContextValues sets the MissingContextValues field's value.
-func (s *ResourceSpecificResult) SetMissingContextValues(v []string) *ResourceSpecificResult {
-	s.MissingContextValues = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResyncMFADeviceRequest
@@ -20681,30 +18017,6 @@ func (s *ResyncMFADeviceInput) Validate() error {
 	return nil
 }
 
-// SetAuthenticationCode1 sets the AuthenticationCode1 field's value.
-func (s *ResyncMFADeviceInput) SetAuthenticationCode1(v string) *ResyncMFADeviceInput {
-	s.AuthenticationCode1 = &v
-	return s
-}
-
-// SetAuthenticationCode2 sets the AuthenticationCode2 field's value.
-func (s *ResyncMFADeviceInput) SetAuthenticationCode2(v string) *ResyncMFADeviceInput {
-	s.AuthenticationCode2 = &v
-	return s
-}
-
-// SetSerialNumber sets the SerialNumber field's value.
-func (s *ResyncMFADeviceInput) SetSerialNumber(v string) *ResyncMFADeviceInput {
-	s.SerialNumber = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ResyncMFADeviceInput) SetUserName(v string) *ResyncMFADeviceInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResyncMFADeviceOutput
 type ResyncMFADeviceOutput struct {
 	_ struct{} `type:"structure"`
@@ -20782,48 +18094,6 @@ func (s Role) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *Role) SetArn(v string) *Role {
-	s.Arn = &v
-	return s
-}
-
-// SetAssumeRolePolicyDocument sets the AssumeRolePolicyDocument field's value.
-func (s *Role) SetAssumeRolePolicyDocument(v string) *Role {
-	s.AssumeRolePolicyDocument = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *Role) SetCreateDate(v time.Time) *Role {
-	s.CreateDate = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *Role) SetDescription(v string) *Role {
-	s.Description = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *Role) SetPath(v string) *Role {
-	s.Path = &v
-	return s
-}
-
-// SetRoleId sets the RoleId field's value.
-func (s *Role) SetRoleId(v string) *Role {
-	s.RoleId = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *Role) SetRoleName(v string) *Role {
-	s.RoleName = &v
-	return s
-}
-
 // Contains information about an IAM role, including all of the role's policies.
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
@@ -20881,60 +18151,6 @@ func (s RoleDetail) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *RoleDetail) SetArn(v string) *RoleDetail {
-	s.Arn = &v
-	return s
-}
-
-// SetAssumeRolePolicyDocument sets the AssumeRolePolicyDocument field's value.
-func (s *RoleDetail) SetAssumeRolePolicyDocument(v string) *RoleDetail {
-	s.AssumeRolePolicyDocument = &v
-	return s
-}
-
-// SetAttachedManagedPolicies sets the AttachedManagedPolicies field's value.
-func (s *RoleDetail) SetAttachedManagedPolicies(v []AttachedPolicy) *RoleDetail {
-	s.AttachedManagedPolicies = v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *RoleDetail) SetCreateDate(v time.Time) *RoleDetail {
-	s.CreateDate = &v
-	return s
-}
-
-// SetInstanceProfileList sets the InstanceProfileList field's value.
-func (s *RoleDetail) SetInstanceProfileList(v []InstanceProfile) *RoleDetail {
-	s.InstanceProfileList = v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *RoleDetail) SetPath(v string) *RoleDetail {
-	s.Path = &v
-	return s
-}
-
-// SetRoleId sets the RoleId field's value.
-func (s *RoleDetail) SetRoleId(v string) *RoleDetail {
-	s.RoleId = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *RoleDetail) SetRoleName(v string) *RoleDetail {
-	s.RoleName = &v
-	return s
-}
-
-// SetRolePolicyList sets the RolePolicyList field's value.
-func (s *RoleDetail) SetRolePolicyList(v []PolicyDetail) *RoleDetail {
-	s.RolePolicyList = v
-	return s
-}
-
 // An object that contains details about how a service-linked role is used.
 //
 // This data type is used as a response element in the GetServiceLinkedRoleDeletionStatus
@@ -20960,18 +18176,6 @@ func (s RoleUsageType) GoString() string {
 	return s.String()
 }
 
-// SetRegion sets the Region field's value.
-func (s *RoleUsageType) SetRegion(v string) *RoleUsageType {
-	s.Region = &v
-	return s
-}
-
-// SetResources sets the Resources field's value.
-func (s *RoleUsageType) SetResources(v []string) *RoleUsageType {
-	s.Resources = v
-	return s
-}
-
 // Contains the list of SAML providers for this account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SAMLProviderListEntry
 type SAMLProviderListEntry struct {
@@ -20995,24 +18199,6 @@ func (s SAMLProviderListEntry) String() string {
 // GoString returns the string representation
 func (s SAMLProviderListEntry) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *SAMLProviderListEntry) SetArn(v string) *SAMLProviderListEntry {
-	s.Arn = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *SAMLProviderListEntry) SetCreateDate(v time.Time) *SAMLProviderListEntry {
-	s.CreateDate = &v
-	return s
-}
-
-// SetValidUntil sets the ValidUntil field's value.
-func (s *SAMLProviderListEntry) SetValidUntil(v time.Time) *SAMLProviderListEntry {
-	s.ValidUntil = &v
-	return s
 }
 
 // Contains information about an SSH public key.
@@ -21064,42 +18250,6 @@ func (s SSHPublicKey) GoString() string {
 	return s.String()
 }
 
-// SetFingerprint sets the Fingerprint field's value.
-func (s *SSHPublicKey) SetFingerprint(v string) *SSHPublicKey {
-	s.Fingerprint = &v
-	return s
-}
-
-// SetSSHPublicKeyBody sets the SSHPublicKeyBody field's value.
-func (s *SSHPublicKey) SetSSHPublicKeyBody(v string) *SSHPublicKey {
-	s.SSHPublicKeyBody = &v
-	return s
-}
-
-// SetSSHPublicKeyId sets the SSHPublicKeyId field's value.
-func (s *SSHPublicKey) SetSSHPublicKeyId(v string) *SSHPublicKey {
-	s.SSHPublicKeyId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *SSHPublicKey) SetStatus(v StatusType) *SSHPublicKey {
-	s.Status = v
-	return s
-}
-
-// SetUploadDate sets the UploadDate field's value.
-func (s *SSHPublicKey) SetUploadDate(v time.Time) *SSHPublicKey {
-	s.UploadDate = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *SSHPublicKey) SetUserName(v string) *SSHPublicKey {
-	s.UserName = &v
-	return s
-}
-
 // Contains information about an SSH public key, without the key's body or fingerprint.
 //
 // This data type is used as a response element in the ListSSHPublicKeys action.
@@ -21140,30 +18290,6 @@ func (s SSHPublicKeyMetadata) GoString() string {
 	return s.String()
 }
 
-// SetSSHPublicKeyId sets the SSHPublicKeyId field's value.
-func (s *SSHPublicKeyMetadata) SetSSHPublicKeyId(v string) *SSHPublicKeyMetadata {
-	s.SSHPublicKeyId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *SSHPublicKeyMetadata) SetStatus(v StatusType) *SSHPublicKeyMetadata {
-	s.Status = v
-	return s
-}
-
-// SetUploadDate sets the UploadDate field's value.
-func (s *SSHPublicKeyMetadata) SetUploadDate(v time.Time) *SSHPublicKeyMetadata {
-	s.UploadDate = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *SSHPublicKeyMetadata) SetUserName(v string) *SSHPublicKeyMetadata {
-	s.UserName = &v
-	return s
-}
-
 // Contains information about a server certificate.
 //
 // This data type is used as a response element in the GetServerCertificate
@@ -21195,24 +18321,6 @@ func (s ServerCertificate) String() string {
 // GoString returns the string representation
 func (s ServerCertificate) GoString() string {
 	return s.String()
-}
-
-// SetCertificateBody sets the CertificateBody field's value.
-func (s *ServerCertificate) SetCertificateBody(v string) *ServerCertificate {
-	s.CertificateBody = &v
-	return s
-}
-
-// SetCertificateChain sets the CertificateChain field's value.
-func (s *ServerCertificate) SetCertificateChain(v string) *ServerCertificate {
-	s.CertificateChain = &v
-	return s
-}
-
-// SetServerCertificateMetadata sets the ServerCertificateMetadata field's value.
-func (s *ServerCertificate) SetServerCertificateMetadata(v *ServerCertificateMetadata) *ServerCertificate {
-	s.ServerCertificateMetadata = v
-	return s
 }
 
 // Contains information about a server certificate without its certificate body,
@@ -21266,42 +18374,6 @@ func (s ServerCertificateMetadata) String() string {
 // GoString returns the string representation
 func (s ServerCertificateMetadata) GoString() string {
 	return s.String()
-}
-
-// SetArn sets the Arn field's value.
-func (s *ServerCertificateMetadata) SetArn(v string) *ServerCertificateMetadata {
-	s.Arn = &v
-	return s
-}
-
-// SetExpiration sets the Expiration field's value.
-func (s *ServerCertificateMetadata) SetExpiration(v time.Time) *ServerCertificateMetadata {
-	s.Expiration = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *ServerCertificateMetadata) SetPath(v string) *ServerCertificateMetadata {
-	s.Path = &v
-	return s
-}
-
-// SetServerCertificateId sets the ServerCertificateId field's value.
-func (s *ServerCertificateMetadata) SetServerCertificateId(v string) *ServerCertificateMetadata {
-	s.ServerCertificateId = &v
-	return s
-}
-
-// SetServerCertificateName sets the ServerCertificateName field's value.
-func (s *ServerCertificateMetadata) SetServerCertificateName(v string) *ServerCertificateMetadata {
-	s.ServerCertificateName = &v
-	return s
-}
-
-// SetUploadDate sets the UploadDate field's value.
-func (s *ServerCertificateMetadata) SetUploadDate(v time.Time) *ServerCertificateMetadata {
-	s.UploadDate = &v
-	return s
 }
 
 // Contains the details of a service specific credential.
@@ -21360,48 +18432,6 @@ func (s ServiceSpecificCredential) GoString() string {
 	return s.String()
 }
 
-// SetCreateDate sets the CreateDate field's value.
-func (s *ServiceSpecificCredential) SetCreateDate(v time.Time) *ServiceSpecificCredential {
-	s.CreateDate = &v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *ServiceSpecificCredential) SetServiceName(v string) *ServiceSpecificCredential {
-	s.ServiceName = &v
-	return s
-}
-
-// SetServicePassword sets the ServicePassword field's value.
-func (s *ServiceSpecificCredential) SetServicePassword(v string) *ServiceSpecificCredential {
-	s.ServicePassword = &v
-	return s
-}
-
-// SetServiceSpecificCredentialId sets the ServiceSpecificCredentialId field's value.
-func (s *ServiceSpecificCredential) SetServiceSpecificCredentialId(v string) *ServiceSpecificCredential {
-	s.ServiceSpecificCredentialId = &v
-	return s
-}
-
-// SetServiceUserName sets the ServiceUserName field's value.
-func (s *ServiceSpecificCredential) SetServiceUserName(v string) *ServiceSpecificCredential {
-	s.ServiceUserName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ServiceSpecificCredential) SetStatus(v StatusType) *ServiceSpecificCredential {
-	s.Status = v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ServiceSpecificCredential) SetUserName(v string) *ServiceSpecificCredential {
-	s.UserName = &v
-	return s
-}
-
 // Contains additional details about a service-specific credential.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceSpecificCredentialMetadata
 type ServiceSpecificCredentialMetadata struct {
@@ -21448,42 +18478,6 @@ func (s ServiceSpecificCredentialMetadata) String() string {
 // GoString returns the string representation
 func (s ServiceSpecificCredentialMetadata) GoString() string {
 	return s.String()
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *ServiceSpecificCredentialMetadata) SetCreateDate(v time.Time) *ServiceSpecificCredentialMetadata {
-	s.CreateDate = &v
-	return s
-}
-
-// SetServiceName sets the ServiceName field's value.
-func (s *ServiceSpecificCredentialMetadata) SetServiceName(v string) *ServiceSpecificCredentialMetadata {
-	s.ServiceName = &v
-	return s
-}
-
-// SetServiceSpecificCredentialId sets the ServiceSpecificCredentialId field's value.
-func (s *ServiceSpecificCredentialMetadata) SetServiceSpecificCredentialId(v string) *ServiceSpecificCredentialMetadata {
-	s.ServiceSpecificCredentialId = &v
-	return s
-}
-
-// SetServiceUserName sets the ServiceUserName field's value.
-func (s *ServiceSpecificCredentialMetadata) SetServiceUserName(v string) *ServiceSpecificCredentialMetadata {
-	s.ServiceUserName = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *ServiceSpecificCredentialMetadata) SetStatus(v StatusType) *ServiceSpecificCredentialMetadata {
-	s.Status = v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *ServiceSpecificCredentialMetadata) SetUserName(v string) *ServiceSpecificCredentialMetadata {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersionRequest
@@ -21539,18 +18533,6 @@ func (s *SetDefaultPolicyVersionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyArn sets the PolicyArn field's value.
-func (s *SetDefaultPolicyVersionInput) SetPolicyArn(v string) *SetDefaultPolicyVersionInput {
-	s.PolicyArn = &v
-	return s
-}
-
-// SetVersionId sets the VersionId field's value.
-func (s *SetDefaultPolicyVersionInput) SetVersionId(v string) *SetDefaultPolicyVersionInput {
-	s.VersionId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SetDefaultPolicyVersionOutput
@@ -21616,36 +18598,6 @@ func (s SigningCertificate) String() string {
 // GoString returns the string representation
 func (s SigningCertificate) GoString() string {
 	return s.String()
-}
-
-// SetCertificateBody sets the CertificateBody field's value.
-func (s *SigningCertificate) SetCertificateBody(v string) *SigningCertificate {
-	s.CertificateBody = &v
-	return s
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *SigningCertificate) SetCertificateId(v string) *SigningCertificate {
-	s.CertificateId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *SigningCertificate) SetStatus(v StatusType) *SigningCertificate {
-	s.Status = v
-	return s
-}
-
-// SetUploadDate sets the UploadDate field's value.
-func (s *SigningCertificate) SetUploadDate(v time.Time) *SigningCertificate {
-	s.UploadDate = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *SigningCertificate) SetUserName(v string) *SigningCertificate {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulateCustomPolicyRequest
@@ -21842,66 +18794,6 @@ func (s *SimulateCustomPolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetActionNames sets the ActionNames field's value.
-func (s *SimulateCustomPolicyInput) SetActionNames(v []string) *SimulateCustomPolicyInput {
-	s.ActionNames = v
-	return s
-}
-
-// SetCallerArn sets the CallerArn field's value.
-func (s *SimulateCustomPolicyInput) SetCallerArn(v string) *SimulateCustomPolicyInput {
-	s.CallerArn = &v
-	return s
-}
-
-// SetContextEntries sets the ContextEntries field's value.
-func (s *SimulateCustomPolicyInput) SetContextEntries(v []ContextEntry) *SimulateCustomPolicyInput {
-	s.ContextEntries = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *SimulateCustomPolicyInput) SetMarker(v string) *SimulateCustomPolicyInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *SimulateCustomPolicyInput) SetMaxItems(v int64) *SimulateCustomPolicyInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPolicyInputList sets the PolicyInputList field's value.
-func (s *SimulateCustomPolicyInput) SetPolicyInputList(v []string) *SimulateCustomPolicyInput {
-	s.PolicyInputList = v
-	return s
-}
-
-// SetResourceArns sets the ResourceArns field's value.
-func (s *SimulateCustomPolicyInput) SetResourceArns(v []string) *SimulateCustomPolicyInput {
-	s.ResourceArns = v
-	return s
-}
-
-// SetResourceHandlingOption sets the ResourceHandlingOption field's value.
-func (s *SimulateCustomPolicyInput) SetResourceHandlingOption(v string) *SimulateCustomPolicyInput {
-	s.ResourceHandlingOption = &v
-	return s
-}
-
-// SetResourceOwner sets the ResourceOwner field's value.
-func (s *SimulateCustomPolicyInput) SetResourceOwner(v string) *SimulateCustomPolicyInput {
-	s.ResourceOwner = &v
-	return s
-}
-
-// SetResourcePolicy sets the ResourcePolicy field's value.
-func (s *SimulateCustomPolicyInput) SetResourcePolicy(v string) *SimulateCustomPolicyInput {
-	s.ResourcePolicy = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulatePrincipalPolicyRequest
@@ -22117,72 +19009,6 @@ func (s *SimulatePrincipalPolicyInput) Validate() error {
 	return nil
 }
 
-// SetActionNames sets the ActionNames field's value.
-func (s *SimulatePrincipalPolicyInput) SetActionNames(v []string) *SimulatePrincipalPolicyInput {
-	s.ActionNames = v
-	return s
-}
-
-// SetCallerArn sets the CallerArn field's value.
-func (s *SimulatePrincipalPolicyInput) SetCallerArn(v string) *SimulatePrincipalPolicyInput {
-	s.CallerArn = &v
-	return s
-}
-
-// SetContextEntries sets the ContextEntries field's value.
-func (s *SimulatePrincipalPolicyInput) SetContextEntries(v []ContextEntry) *SimulatePrincipalPolicyInput {
-	s.ContextEntries = v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *SimulatePrincipalPolicyInput) SetMarker(v string) *SimulatePrincipalPolicyInput {
-	s.Marker = &v
-	return s
-}
-
-// SetMaxItems sets the MaxItems field's value.
-func (s *SimulatePrincipalPolicyInput) SetMaxItems(v int64) *SimulatePrincipalPolicyInput {
-	s.MaxItems = &v
-	return s
-}
-
-// SetPolicyInputList sets the PolicyInputList field's value.
-func (s *SimulatePrincipalPolicyInput) SetPolicyInputList(v []string) *SimulatePrincipalPolicyInput {
-	s.PolicyInputList = v
-	return s
-}
-
-// SetPolicySourceArn sets the PolicySourceArn field's value.
-func (s *SimulatePrincipalPolicyInput) SetPolicySourceArn(v string) *SimulatePrincipalPolicyInput {
-	s.PolicySourceArn = &v
-	return s
-}
-
-// SetResourceArns sets the ResourceArns field's value.
-func (s *SimulatePrincipalPolicyInput) SetResourceArns(v []string) *SimulatePrincipalPolicyInput {
-	s.ResourceArns = v
-	return s
-}
-
-// SetResourceHandlingOption sets the ResourceHandlingOption field's value.
-func (s *SimulatePrincipalPolicyInput) SetResourceHandlingOption(v string) *SimulatePrincipalPolicyInput {
-	s.ResourceHandlingOption = &v
-	return s
-}
-
-// SetResourceOwner sets the ResourceOwner field's value.
-func (s *SimulatePrincipalPolicyInput) SetResourceOwner(v string) *SimulatePrincipalPolicyInput {
-	s.ResourceOwner = &v
-	return s
-}
-
-// SetResourcePolicy sets the ResourcePolicy field's value.
-func (s *SimulatePrincipalPolicyInput) SetResourcePolicy(v string) *SimulatePrincipalPolicyInput {
-	s.ResourcePolicy = &v
-	return s
-}
-
 // Contains the response to a successful SimulatePrincipalPolicy or SimulateCustomPolicy
 // request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SimulateCustomPolicyOutput
@@ -22222,24 +19048,6 @@ func (s SimulatePrincipalPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetEvaluationResults sets the EvaluationResults field's value.
-func (s *SimulatePrincipalPolicyOutput) SetEvaluationResults(v []EvaluationResult) *SimulatePrincipalPolicyOutput {
-	s.EvaluationResults = v
-	return s
-}
-
-// SetIsTruncated sets the IsTruncated field's value.
-func (s *SimulatePrincipalPolicyOutput) SetIsTruncated(v bool) *SimulatePrincipalPolicyOutput {
-	s.IsTruncated = &v
-	return s
-}
-
-// SetMarker sets the Marker field's value.
-func (s *SimulatePrincipalPolicyOutput) SetMarker(v string) *SimulatePrincipalPolicyOutput {
-	s.Marker = &v
-	return s
-}
-
 // Contains a reference to a Statement element in a policy document that determines
 // the result of the simulation.
 //
@@ -22270,30 +19078,6 @@ func (s Statement) String() string {
 // GoString returns the string representation
 func (s Statement) GoString() string {
 	return s.String()
-}
-
-// SetEndPosition sets the EndPosition field's value.
-func (s *Statement) SetEndPosition(v *Position) *Statement {
-	s.EndPosition = v
-	return s
-}
-
-// SetSourcePolicyId sets the SourcePolicyId field's value.
-func (s *Statement) SetSourcePolicyId(v string) *Statement {
-	s.SourcePolicyId = &v
-	return s
-}
-
-// SetSourcePolicyType sets the SourcePolicyType field's value.
-func (s *Statement) SetSourcePolicyType(v PolicySourceType) *Statement {
-	s.SourcePolicyType = v
-	return s
-}
-
-// SetStartPosition sets the StartPosition field's value.
-func (s *Statement) SetStartPosition(v *Position) *Statement {
-	s.StartPosition = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKeyRequest
@@ -22355,24 +19139,6 @@ func (s *UpdateAccessKeyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetAccessKeyId sets the AccessKeyId field's value.
-func (s *UpdateAccessKeyInput) SetAccessKeyId(v string) *UpdateAccessKeyInput {
-	s.AccessKeyId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UpdateAccessKeyInput) SetStatus(v StatusType) *UpdateAccessKeyInput {
-	s.Status = v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *UpdateAccessKeyInput) SetUserName(v string) *UpdateAccessKeyInput {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccessKeyOutput
@@ -22488,60 +19254,6 @@ func (s *UpdateAccountPasswordPolicyInput) Validate() error {
 	return nil
 }
 
-// SetAllowUsersToChangePassword sets the AllowUsersToChangePassword field's value.
-func (s *UpdateAccountPasswordPolicyInput) SetAllowUsersToChangePassword(v bool) *UpdateAccountPasswordPolicyInput {
-	s.AllowUsersToChangePassword = &v
-	return s
-}
-
-// SetHardExpiry sets the HardExpiry field's value.
-func (s *UpdateAccountPasswordPolicyInput) SetHardExpiry(v bool) *UpdateAccountPasswordPolicyInput {
-	s.HardExpiry = &v
-	return s
-}
-
-// SetMaxPasswordAge sets the MaxPasswordAge field's value.
-func (s *UpdateAccountPasswordPolicyInput) SetMaxPasswordAge(v int64) *UpdateAccountPasswordPolicyInput {
-	s.MaxPasswordAge = &v
-	return s
-}
-
-// SetMinimumPasswordLength sets the MinimumPasswordLength field's value.
-func (s *UpdateAccountPasswordPolicyInput) SetMinimumPasswordLength(v int64) *UpdateAccountPasswordPolicyInput {
-	s.MinimumPasswordLength = &v
-	return s
-}
-
-// SetPasswordReusePrevention sets the PasswordReusePrevention field's value.
-func (s *UpdateAccountPasswordPolicyInput) SetPasswordReusePrevention(v int64) *UpdateAccountPasswordPolicyInput {
-	s.PasswordReusePrevention = &v
-	return s
-}
-
-// SetRequireLowercaseCharacters sets the RequireLowercaseCharacters field's value.
-func (s *UpdateAccountPasswordPolicyInput) SetRequireLowercaseCharacters(v bool) *UpdateAccountPasswordPolicyInput {
-	s.RequireLowercaseCharacters = &v
-	return s
-}
-
-// SetRequireNumbers sets the RequireNumbers field's value.
-func (s *UpdateAccountPasswordPolicyInput) SetRequireNumbers(v bool) *UpdateAccountPasswordPolicyInput {
-	s.RequireNumbers = &v
-	return s
-}
-
-// SetRequireSymbols sets the RequireSymbols field's value.
-func (s *UpdateAccountPasswordPolicyInput) SetRequireSymbols(v bool) *UpdateAccountPasswordPolicyInput {
-	s.RequireSymbols = &v
-	return s
-}
-
-// SetRequireUppercaseCharacters sets the RequireUppercaseCharacters field's value.
-func (s *UpdateAccountPasswordPolicyInput) SetRequireUppercaseCharacters(v bool) *UpdateAccountPasswordPolicyInput {
-	s.RequireUppercaseCharacters = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAccountPasswordPolicyOutput
 type UpdateAccountPasswordPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -22622,18 +19334,6 @@ func (s *UpdateAssumeRolePolicyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetPolicyDocument sets the PolicyDocument field's value.
-func (s *UpdateAssumeRolePolicyInput) SetPolicyDocument(v string) *UpdateAssumeRolePolicyInput {
-	s.PolicyDocument = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *UpdateAssumeRolePolicyInput) SetRoleName(v string) *UpdateAssumeRolePolicyInput {
-	s.RoleName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateAssumeRolePolicyOutput
@@ -22722,24 +19422,6 @@ func (s *UpdateGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupName sets the GroupName field's value.
-func (s *UpdateGroupInput) SetGroupName(v string) *UpdateGroupInput {
-	s.GroupName = &v
-	return s
-}
-
-// SetNewGroupName sets the NewGroupName field's value.
-func (s *UpdateGroupInput) SetNewGroupName(v string) *UpdateGroupInput {
-	s.NewGroupName = &v
-	return s
-}
-
-// SetNewPath sets the NewPath field's value.
-func (s *UpdateGroupInput) SetNewPath(v string) *UpdateGroupInput {
-	s.NewPath = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateGroupOutput
 type UpdateGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -22822,24 +19504,6 @@ func (s *UpdateLoginProfileInput) Validate() error {
 	return nil
 }
 
-// SetPassword sets the Password field's value.
-func (s *UpdateLoginProfileInput) SetPassword(v string) *UpdateLoginProfileInput {
-	s.Password = &v
-	return s
-}
-
-// SetPasswordResetRequired sets the PasswordResetRequired field's value.
-func (s *UpdateLoginProfileInput) SetPasswordResetRequired(v bool) *UpdateLoginProfileInput {
-	s.PasswordResetRequired = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *UpdateLoginProfileInput) SetUserName(v string) *UpdateLoginProfileInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateLoginProfileOutput
 type UpdateLoginProfileOutput struct {
 	_ struct{} `type:"structure"`
@@ -22915,18 +19579,6 @@ func (s *UpdateOpenIDConnectProviderThumbprintInput) Validate() error {
 	return nil
 }
 
-// SetOpenIDConnectProviderArn sets the OpenIDConnectProviderArn field's value.
-func (s *UpdateOpenIDConnectProviderThumbprintInput) SetOpenIDConnectProviderArn(v string) *UpdateOpenIDConnectProviderThumbprintInput {
-	s.OpenIDConnectProviderArn = &v
-	return s
-}
-
-// SetThumbprintList sets the ThumbprintList field's value.
-func (s *UpdateOpenIDConnectProviderThumbprintInput) SetThumbprintList(v []string) *UpdateOpenIDConnectProviderThumbprintInput {
-	s.ThumbprintList = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateOpenIDConnectProviderThumbprintOutput
 type UpdateOpenIDConnectProviderThumbprintOutput struct {
 	_ struct{} `type:"structure"`
@@ -22995,18 +19647,6 @@ func (s *UpdateRoleDescriptionInput) Validate() error {
 	return nil
 }
 
-// SetDescription sets the Description field's value.
-func (s *UpdateRoleDescriptionInput) SetDescription(v string) *UpdateRoleDescriptionInput {
-	s.Description = &v
-	return s
-}
-
-// SetRoleName sets the RoleName field's value.
-func (s *UpdateRoleDescriptionInput) SetRoleName(v string) *UpdateRoleDescriptionInput {
-	s.RoleName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleDescriptionResponse
 type UpdateRoleDescriptionOutput struct {
 	_ struct{} `type:"structure"`
@@ -23030,12 +19670,6 @@ func (s UpdateRoleDescriptionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateRoleDescriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetRole sets the Role field's value.
-func (s *UpdateRoleDescriptionOutput) SetRole(v *Role) *UpdateRoleDescriptionOutput {
-	s.Role = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderRequest
@@ -23095,18 +19729,6 @@ func (s *UpdateSAMLProviderInput) Validate() error {
 	return nil
 }
 
-// SetSAMLMetadataDocument sets the SAMLMetadataDocument field's value.
-func (s *UpdateSAMLProviderInput) SetSAMLMetadataDocument(v string) *UpdateSAMLProviderInput {
-	s.SAMLMetadataDocument = &v
-	return s
-}
-
-// SetSAMLProviderArn sets the SAMLProviderArn field's value.
-func (s *UpdateSAMLProviderInput) SetSAMLProviderArn(v string) *UpdateSAMLProviderInput {
-	s.SAMLProviderArn = &v
-	return s
-}
-
 // Contains the response to a successful UpdateSAMLProvider request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderResponse
 type UpdateSAMLProviderOutput struct {
@@ -23131,12 +19753,6 @@ func (s UpdateSAMLProviderOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateSAMLProviderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSAMLProviderArn sets the SAMLProviderArn field's value.
-func (s *UpdateSAMLProviderOutput) SetSAMLProviderArn(v string) *UpdateSAMLProviderOutput {
-	s.SAMLProviderArn = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKeyRequest
@@ -23204,24 +19820,6 @@ func (s *UpdateSSHPublicKeyInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetSSHPublicKeyId sets the SSHPublicKeyId field's value.
-func (s *UpdateSSHPublicKeyInput) SetSSHPublicKeyId(v string) *UpdateSSHPublicKeyInput {
-	s.SSHPublicKeyId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UpdateSSHPublicKeyInput) SetStatus(v StatusType) *UpdateSSHPublicKeyInput {
-	s.Status = v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *UpdateSSHPublicKeyInput) SetUserName(v string) *UpdateSSHPublicKeyInput {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSSHPublicKeyOutput
@@ -23312,24 +19910,6 @@ func (s *UpdateServerCertificateInput) Validate() error {
 	return nil
 }
 
-// SetNewPath sets the NewPath field's value.
-func (s *UpdateServerCertificateInput) SetNewPath(v string) *UpdateServerCertificateInput {
-	s.NewPath = &v
-	return s
-}
-
-// SetNewServerCertificateName sets the NewServerCertificateName field's value.
-func (s *UpdateServerCertificateInput) SetNewServerCertificateName(v string) *UpdateServerCertificateInput {
-	s.NewServerCertificateName = &v
-	return s
-}
-
-// SetServerCertificateName sets the ServerCertificateName field's value.
-func (s *UpdateServerCertificateInput) SetServerCertificateName(v string) *UpdateServerCertificateInput {
-	s.ServerCertificateName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServerCertificateOutput
 type UpdateServerCertificateOutput struct {
 	_ struct{} `type:"structure"`
@@ -23413,24 +19993,6 @@ func (s *UpdateServiceSpecificCredentialInput) Validate() error {
 	return nil
 }
 
-// SetServiceSpecificCredentialId sets the ServiceSpecificCredentialId field's value.
-func (s *UpdateServiceSpecificCredentialInput) SetServiceSpecificCredentialId(v string) *UpdateServiceSpecificCredentialInput {
-	s.ServiceSpecificCredentialId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UpdateServiceSpecificCredentialInput) SetStatus(v StatusType) *UpdateServiceSpecificCredentialInput {
-	s.Status = v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *UpdateServiceSpecificCredentialInput) SetUserName(v string) *UpdateServiceSpecificCredentialInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateServiceSpecificCredentialOutput
 type UpdateServiceSpecificCredentialOutput struct {
 	_ struct{} `type:"structure"`
@@ -23512,24 +20074,6 @@ func (s *UpdateSigningCertificateInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetCertificateId sets the CertificateId field's value.
-func (s *UpdateSigningCertificateInput) SetCertificateId(v string) *UpdateSigningCertificateInput {
-	s.CertificateId = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *UpdateSigningCertificateInput) SetStatus(v StatusType) *UpdateSigningCertificateInput {
-	s.Status = v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *UpdateSigningCertificateInput) SetUserName(v string) *UpdateSigningCertificateInput {
-	s.UserName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSigningCertificateOutput
@@ -23620,24 +20164,6 @@ func (s *UpdateUserInput) Validate() error {
 	return nil
 }
 
-// SetNewPath sets the NewPath field's value.
-func (s *UpdateUserInput) SetNewPath(v string) *UpdateUserInput {
-	s.NewPath = &v
-	return s
-}
-
-// SetNewUserName sets the NewUserName field's value.
-func (s *UpdateUserInput) SetNewUserName(v string) *UpdateUserInput {
-	s.NewUserName = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *UpdateUserInput) SetUserName(v string) *UpdateUserInput {
-	s.UserName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateUserOutput
 type UpdateUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -23721,18 +20247,6 @@ func (s *UploadSSHPublicKeyInput) Validate() error {
 	return nil
 }
 
-// SetSSHPublicKeyBody sets the SSHPublicKeyBody field's value.
-func (s *UploadSSHPublicKeyInput) SetSSHPublicKeyBody(v string) *UploadSSHPublicKeyInput {
-	s.SSHPublicKeyBody = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *UploadSSHPublicKeyInput) SetUserName(v string) *UploadSSHPublicKeyInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful UploadSSHPublicKey request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSSHPublicKeyResponse
 type UploadSSHPublicKeyOutput struct {
@@ -23757,12 +20271,6 @@ func (s UploadSSHPublicKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UploadSSHPublicKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetSSHPublicKey sets the SSHPublicKey field's value.
-func (s *UploadSSHPublicKeyOutput) SetSSHPublicKey(v *SSHPublicKey) *UploadSSHPublicKeyOutput {
-	s.SSHPublicKey = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificateRequest
@@ -23879,36 +20387,6 @@ func (s *UploadServerCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateBody sets the CertificateBody field's value.
-func (s *UploadServerCertificateInput) SetCertificateBody(v string) *UploadServerCertificateInput {
-	s.CertificateBody = &v
-	return s
-}
-
-// SetCertificateChain sets the CertificateChain field's value.
-func (s *UploadServerCertificateInput) SetCertificateChain(v string) *UploadServerCertificateInput {
-	s.CertificateChain = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *UploadServerCertificateInput) SetPath(v string) *UploadServerCertificateInput {
-	s.Path = &v
-	return s
-}
-
-// SetPrivateKey sets the PrivateKey field's value.
-func (s *UploadServerCertificateInput) SetPrivateKey(v string) *UploadServerCertificateInput {
-	s.PrivateKey = &v
-	return s
-}
-
-// SetServerCertificateName sets the ServerCertificateName field's value.
-func (s *UploadServerCertificateInput) SetServerCertificateName(v string) *UploadServerCertificateInput {
-	s.ServerCertificateName = &v
-	return s
-}
-
 // Contains the response to a successful UploadServerCertificate request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadServerCertificateResponse
 type UploadServerCertificateOutput struct {
@@ -23934,12 +20412,6 @@ func (s UploadServerCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UploadServerCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetServerCertificateMetadata sets the ServerCertificateMetadata field's value.
-func (s *UploadServerCertificateOutput) SetServerCertificateMetadata(v *ServerCertificateMetadata) *UploadServerCertificateOutput {
-	s.ServerCertificateMetadata = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificateRequest
@@ -23996,18 +20468,6 @@ func (s *UploadSigningCertificateInput) Validate() error {
 	return nil
 }
 
-// SetCertificateBody sets the CertificateBody field's value.
-func (s *UploadSigningCertificateInput) SetCertificateBody(v string) *UploadSigningCertificateInput {
-	s.CertificateBody = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *UploadSigningCertificateInput) SetUserName(v string) *UploadSigningCertificateInput {
-	s.UserName = &v
-	return s
-}
-
 // Contains the response to a successful UploadSigningCertificate request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UploadSigningCertificateResponse
 type UploadSigningCertificateOutput struct {
@@ -24034,12 +20494,6 @@ func (s UploadSigningCertificateOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UploadSigningCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCertificate sets the Certificate field's value.
-func (s *UploadSigningCertificateOutput) SetCertificate(v *SigningCertificate) *UploadSigningCertificateOutput {
-	s.Certificate = v
-	return s
 }
 
 // Contains information about an IAM user entity.
@@ -24119,42 +20573,6 @@ func (s User) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *User) SetArn(v string) *User {
-	s.Arn = &v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *User) SetCreateDate(v time.Time) *User {
-	s.CreateDate = &v
-	return s
-}
-
-// SetPasswordLastUsed sets the PasswordLastUsed field's value.
-func (s *User) SetPasswordLastUsed(v time.Time) *User {
-	s.PasswordLastUsed = &v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *User) SetPath(v string) *User {
-	s.Path = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *User) SetUserId(v string) *User {
-	s.UserId = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *User) SetUserName(v string) *User {
-	s.UserName = &v
-	return s
-}
-
 // Contains information about an IAM user, including all the user's policies
 // and all the IAM groups the user is in.
 //
@@ -24208,54 +20626,6 @@ func (s UserDetail) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *UserDetail) SetArn(v string) *UserDetail {
-	s.Arn = &v
-	return s
-}
-
-// SetAttachedManagedPolicies sets the AttachedManagedPolicies field's value.
-func (s *UserDetail) SetAttachedManagedPolicies(v []AttachedPolicy) *UserDetail {
-	s.AttachedManagedPolicies = v
-	return s
-}
-
-// SetCreateDate sets the CreateDate field's value.
-func (s *UserDetail) SetCreateDate(v time.Time) *UserDetail {
-	s.CreateDate = &v
-	return s
-}
-
-// SetGroupList sets the GroupList field's value.
-func (s *UserDetail) SetGroupList(v []string) *UserDetail {
-	s.GroupList = v
-	return s
-}
-
-// SetPath sets the Path field's value.
-func (s *UserDetail) SetPath(v string) *UserDetail {
-	s.Path = &v
-	return s
-}
-
-// SetUserId sets the UserId field's value.
-func (s *UserDetail) SetUserId(v string) *UserDetail {
-	s.UserId = &v
-	return s
-}
-
-// SetUserName sets the UserName field's value.
-func (s *UserDetail) SetUserName(v string) *UserDetail {
-	s.UserName = &v
-	return s
-}
-
-// SetUserPolicyList sets the UserPolicyList field's value.
-func (s *UserDetail) SetUserPolicyList(v []PolicyDetail) *UserDetail {
-	s.UserPolicyList = v
-	return s
-}
-
 // Contains information about a virtual MFA device.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/VirtualMFADevice
 type VirtualMFADevice struct {
@@ -24297,36 +20667,6 @@ func (s VirtualMFADevice) GoString() string {
 	return s.String()
 }
 
-// SetBase32StringSeed sets the Base32StringSeed field's value.
-func (s *VirtualMFADevice) SetBase32StringSeed(v []byte) *VirtualMFADevice {
-	s.Base32StringSeed = v
-	return s
-}
-
-// SetEnableDate sets the EnableDate field's value.
-func (s *VirtualMFADevice) SetEnableDate(v time.Time) *VirtualMFADevice {
-	s.EnableDate = &v
-	return s
-}
-
-// SetQRCodePNG sets the QRCodePNG field's value.
-func (s *VirtualMFADevice) SetQRCodePNG(v []byte) *VirtualMFADevice {
-	s.QRCodePNG = v
-	return s
-}
-
-// SetSerialNumber sets the SerialNumber field's value.
-func (s *VirtualMFADevice) SetSerialNumber(v string) *VirtualMFADevice {
-	s.SerialNumber = &v
-	return s
-}
-
-// SetUser sets the User field's value.
-func (s *VirtualMFADevice) SetUser(v *User) *VirtualMFADevice {
-	s.User = v
-	return s
-}
-
 type ContextKeyTypeEnum string
 
 // Enum values for ContextKeyTypeEnum
@@ -24345,6 +20685,15 @@ const (
 	ContextKeyTypeEnumDateList    ContextKeyTypeEnum = "dateList"
 )
 
+func (enum ContextKeyTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContextKeyTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeletionTaskStatusType string
 
 // Enum values for DeletionTaskStatusType
@@ -24354,6 +20703,15 @@ const (
 	DeletionTaskStatusTypeFailed     DeletionTaskStatusType = "FAILED"
 	DeletionTaskStatusTypeNotStarted DeletionTaskStatusType = "NOT_STARTED"
 )
+
+func (enum DeletionTaskStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeletionTaskStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EntityType string
 
@@ -24366,6 +20724,15 @@ const (
 	EntityTypeAwsmanagedPolicy   EntityType = "AWSManagedPolicy"
 )
 
+func (enum EntityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EntityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PolicyEvaluationDecisionType string
 
 // Enum values for PolicyEvaluationDecisionType
@@ -24374,6 +20741,15 @@ const (
 	PolicyEvaluationDecisionTypeExplicitDeny PolicyEvaluationDecisionType = "explicitDeny"
 	PolicyEvaluationDecisionTypeImplicitDeny PolicyEvaluationDecisionType = "implicitDeny"
 )
+
+func (enum PolicyEvaluationDecisionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyEvaluationDecisionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PolicySourceType string
 
@@ -24388,12 +20764,30 @@ const (
 	PolicySourceTypeNone        PolicySourceType = "none"
 )
 
+func (enum PolicySourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicySourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReportFormatType string
 
 // Enum values for ReportFormatType
 const (
 	ReportFormatTypeTextCsv ReportFormatType = "text/csv"
 )
+
+func (enum ReportFormatType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportFormatType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ReportStateType string
 
@@ -24404,6 +20798,15 @@ const (
 	ReportStateTypeComplete   ReportStateType = "COMPLETE"
 )
 
+func (enum ReportStateType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportStateType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AssignmentStatusType string
 
 // Enum values for AssignmentStatusType
@@ -24413,6 +20816,15 @@ const (
 	AssignmentStatusTypeAny        AssignmentStatusType = "Any"
 )
 
+func (enum AssignmentStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssignmentStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EncodingType string
 
 // Enum values for EncodingType
@@ -24420,6 +20832,15 @@ const (
 	EncodingTypeSsh EncodingType = "SSH"
 	EncodingTypePem EncodingType = "PEM"
 )
+
+func (enum EncodingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncodingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PolicyScopeType string
 
@@ -24430,6 +20851,15 @@ const (
 	PolicyScopeTypeLocal PolicyScopeType = "Local"
 )
 
+func (enum PolicyScopeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyScopeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StatusType string
 
 // Enum values for StatusType
@@ -24437,6 +20867,15 @@ const (
 	StatusTypeActive   StatusType = "Active"
 	StatusTypeInactive StatusType = "Inactive"
 )
+
+func (enum StatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SummaryKeyType string
 
@@ -24468,3 +20907,12 @@ const (
 	SummaryKeyTypePolicyVersionsInUseQuota          SummaryKeyType = "PolicyVersionsInUseQuota"
 	SummaryKeyTypeVersionsPerPolicyQuota            SummaryKeyType = "VersionsPerPolicyQuota"
 )
+
+func (enum SummaryKeyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SummaryKeyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

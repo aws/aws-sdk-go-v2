@@ -65,6 +65,8 @@ import (
 type ApplicationAutoScalingAPI interface {
 	DeleteScalingPolicyRequest(*applicationautoscaling.DeleteScalingPolicyInput) applicationautoscaling.DeleteScalingPolicyRequest
 
+	DeleteScheduledActionRequest(*applicationautoscaling.DeleteScheduledActionInput) applicationautoscaling.DeleteScheduledActionRequest
+
 	DeregisterScalableTargetRequest(*applicationautoscaling.DeregisterScalableTargetInput) applicationautoscaling.DeregisterScalableTargetRequest
 
 	DescribeScalableTargetsRequest(*applicationautoscaling.DescribeScalableTargetsInput) applicationautoscaling.DescribeScalableTargetsRequest
@@ -82,7 +84,11 @@ type ApplicationAutoScalingAPI interface {
 	DescribeScalingPoliciesPages(*applicationautoscaling.DescribeScalingPoliciesInput, func(*applicationautoscaling.DescribeScalingPoliciesOutput, bool) bool) error
 	DescribeScalingPoliciesPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalingPoliciesInput, func(*applicationautoscaling.DescribeScalingPoliciesOutput, bool) bool, ...aws.Option) error
 
+	DescribeScheduledActionsRequest(*applicationautoscaling.DescribeScheduledActionsInput) applicationautoscaling.DescribeScheduledActionsRequest
+
 	PutScalingPolicyRequest(*applicationautoscaling.PutScalingPolicyInput) applicationautoscaling.PutScalingPolicyRequest
+
+	PutScheduledActionRequest(*applicationautoscaling.PutScheduledActionInput) applicationautoscaling.PutScheduledActionRequest
 
 	RegisterScalableTargetRequest(*applicationautoscaling.RegisterScalableTargetInput) applicationautoscaling.RegisterScalableTargetRequest
 }

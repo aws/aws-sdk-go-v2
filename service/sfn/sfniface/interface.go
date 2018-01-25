@@ -77,6 +77,8 @@ type SFNAPI interface {
 
 	DescribeStateMachineRequest(*sfn.DescribeStateMachineInput) sfn.DescribeStateMachineRequest
 
+	DescribeStateMachineForExecutionRequest(*sfn.DescribeStateMachineForExecutionInput) sfn.DescribeStateMachineForExecutionRequest
+
 	GetActivityTaskRequest(*sfn.GetActivityTaskInput) sfn.GetActivityTaskRequest
 
 	GetExecutionHistoryRequest(*sfn.GetExecutionHistoryInput) sfn.GetExecutionHistoryRequest
@@ -108,6 +110,8 @@ type SFNAPI interface {
 	StartExecutionRequest(*sfn.StartExecutionInput) sfn.StartExecutionRequest
 
 	StopExecutionRequest(*sfn.StopExecutionInput) sfn.StopExecutionRequest
+
+	UpdateStateMachineRequest(*sfn.UpdateStateMachineInput) sfn.UpdateStateMachineRequest
 }
 
 var _ SFNAPI = (*sfn.SFN)(nil)

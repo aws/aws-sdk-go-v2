@@ -98,7 +98,7 @@ func (m multiUploadError) UploadID() string {
 // UploadInput contains all input for upload requests to Amazon S3.
 type UploadInput struct {
 	// The canned ACL to apply to the object.
-	ACL *string `location:"header" locationName:"x-amz-acl" type:"string"`
+	ACL s3.ObjectCannedACL `location:"header" locationName:"x-amz-acl" type:"string"`
 
 	Bucket *string `location:"uri" locationName:"Bucket" type:"string" required:"true"`
 
@@ -140,13 +140,13 @@ type UploadInput struct {
 	Key *string `location:"uri" locationName:"Key" type:"string" required:"true"`
 
 	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string `location:"headers" locationName:"x-amz-meta-" type:"map"`
+	Metadata map[string]string `location:"headers" locationName:"x-amz-meta-" type:"map"`
 
 	// Confirms that the requester knows that she or he will be charged for the
 	// request. Bucket owners need not specify this parameter in their requests.
 	// Documentation on downloading objects from requester pays buckets can be found
 	// at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
-	RequestPayer *string `location:"header" locationName:"x-amz-request-payer" type:"string"`
+	RequestPayer s3.RequestPayer `location:"header" locationName:"x-amz-request-payer" type:"string"`
 
 	// Specifies the algorithm to use to when encrypting the object (e.g., AES256,
 	// aws:kms).
@@ -175,7 +175,7 @@ type UploadInput struct {
 	ServerSideEncryption s3.ServerSideEncryption `location:"header" locationName:"x-amz-server-side-encryption" type:"string"`
 
 	// The type of storage to use for the object. Defaults to 'STANDARD'.
-	StorageClass *string `location:"header" locationName:"x-amz-storage-class" type:"string"`
+	StorageClass s3.StorageClass `location:"header" locationName:"x-amz-storage-class" type:"string"`
 
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters
 	Tagging *string `location:"header" locationName:"x-amz-tagging" type:"string"`
@@ -251,19 +251,17 @@ type Uploader struct {
 }
 
 // NewUploader creates a new Uploader instance to upload objects to S3. Pass In
-// additional functional options to customize the uploader's behavior. Requires a
-// client.ConfigProvider in order to create a S3 service client. The session.Session
-// satisfies the client.ConfigProvider interface.
+// additional functional options to customize the uploader's behavior.
 //
 // Example:
-//     // The session the S3 Uploader will use
-//     sess := session.Must(session.NewSession())
+//     // The config the S3 Uploader will use
+//     cfg, err := external.LoadDefaultAWSConfig()
 //
-//     // Create an uploader with the session and default options
-//     uploader := s3manager.NewUploader(sess)
+//     // Create an uploader with the config and default options
+//     uploader := s3manager.NewUploader(cfg)
 //
-//     // Create an uploader with the session and custom options
-//     uploader := s3manager.NewUploader(session, func(u *s3manager.Uploader) {
+//     // Create an uploader with the config and custom options
+//     uploader := s3manager.NewUploader(cfg, func(u *s3manager.Uploader) {
 //          u.PartSize = 64 * 1024 * 1024 // 64MB per part
 //     })
 func NewUploader(cfg aws.Config, options ...func(*Uploader)) *Uploader {
@@ -287,11 +285,11 @@ func NewUploader(cfg aws.Config, options ...func(*Uploader)) *Uploader {
 // a S3 service client to make S3 API calls.
 //
 // Example:
-//     // The session the S3 Uploader will use
-//     sess := session.Must(session.NewSession())
+//     // The config the S3 Uploader will use
+//     cfg, err := external.LoadDefaultAWSConfig()
 //
 //     // S3 service client the Upload manager will use.
-//     s3Svc := s3.New(sess)
+//     s3Svc := s3.New(cfg)
 //
 //     // Create an uploader with S3 client and default options
 //     uploader := s3manager.NewUploaderWithClient(s3Svc)

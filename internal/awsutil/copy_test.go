@@ -15,13 +15,13 @@ import (
 func ExampleCopy() {
 	type Foo struct {
 		A int
-		B []*string
+		B []string
 	}
 
 	// Create the initial value
 	str1 := "hello"
 	str2 := "bye bye"
-	f1 := &Foo{A: 1, B: []*string{&str1, &str2}}
+	f1 := &Foo{A: 1, B: []string{str1, str2}}
 
 	// Do the copy
 	var f2 Foo
@@ -46,8 +46,8 @@ func TestCopy1(t *testing.T) {
 	}
 	type Foo struct {
 		A int
-		B []*string
-		C map[string]*int
+		B []string
+		C map[string]int
 		D *time.Time
 		E *Bar
 	}
@@ -62,10 +62,10 @@ func TestCopy1(t *testing.T) {
 	now := time.Now()
 	f1 := &Foo{
 		A: 1,
-		B: []*string{&str1, &str2},
-		C: map[string]*int{
-			"A": &int1,
-			"B": &int2,
+		B: []string{str1, str2},
+		C: map[string]int{
+			"A": int1,
+			"B": int2,
 		},
 		D: &now,
 		E: &Bar{
@@ -104,8 +104,8 @@ func TestCopy1(t *testing.T) {
 	str3 := "nothello"
 	int3 := 57
 	f2.A = 100
-	*f2.B[0] = str3
-	*f2.C["B"] = int3
+	f2.B[0] = str3
+	f2.C["B"] = int3
 	*f2.D = time.Now()
 	f2.E.a = &int3
 	*f2.E.B = int3
@@ -252,8 +252,8 @@ func TestCopyReader(t *testing.T) {
 func TestCopyDifferentStructs(t *testing.T) {
 	type SrcFoo struct {
 		A                int
-		B                []*string
-		C                map[string]*int
+		B                []string
+		C                map[string]int
 		SrcUnique        string
 		SameNameDiffType int
 		unexportedPtr    *int
@@ -261,8 +261,8 @@ func TestCopyDifferentStructs(t *testing.T) {
 	}
 	type DstFoo struct {
 		A                int
-		B                []*string
-		C                map[string]*int
+		B                []string
+		C                map[string]int
 		DstUnique        int
 		SameNameDiffType string
 		unexportedPtr    *int
@@ -276,10 +276,10 @@ func TestCopyDifferentStructs(t *testing.T) {
 	int2 := 2
 	f1 := &SrcFoo{
 		A: 1,
-		B: []*string{&str1, &str2},
-		C: map[string]*int{
-			"A": &int1,
-			"B": &int2,
+		B: []string{str1, str2},
+		C: map[string]int{
+			"A": int1,
+			"B": int2,
 		},
 		SrcUnique:        "unique",
 		SameNameDiffType: 1,
@@ -330,13 +330,13 @@ func TestCopyDifferentStructs(t *testing.T) {
 func ExampleCopyOf() {
 	type Foo struct {
 		A int
-		B []*string
+		B []string
 	}
 
 	// Create the initial value
 	str1 := "hello"
 	str2 := "bye bye"
-	f1 := &Foo{A: 1, B: []*string{&str1, &str2}}
+	f1 := &Foo{A: 1, B: []string{str1, str2}}
 
 	// Do the copy
 	v := awsutil.CopyOf(f1)

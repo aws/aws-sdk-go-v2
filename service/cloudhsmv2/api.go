@@ -727,30 +727,6 @@ func (s Backup) GoString() string {
 	return s.String()
 }
 
-// SetBackupId sets the BackupId field's value.
-func (s *Backup) SetBackupId(v string) *Backup {
-	s.BackupId = &v
-	return s
-}
-
-// SetBackupState sets the BackupState field's value.
-func (s *Backup) SetBackupState(v BackupState) *Backup {
-	s.BackupState = v
-	return s
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *Backup) SetClusterId(v string) *Backup {
-	s.ClusterId = &v
-	return s
-}
-
-// SetCreateTimestamp sets the CreateTimestamp field's value.
-func (s *Backup) SetCreateTimestamp(v time.Time) *Backup {
-	s.CreateTimestamp = &v
-	return s
-}
-
 // Contains one or more certificates or a certificate signing request (CSR).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/Certificates
 type Certificates struct {
@@ -782,36 +758,6 @@ func (s Certificates) String() string {
 // GoString returns the string representation
 func (s Certificates) GoString() string {
 	return s.String()
-}
-
-// SetAwsHardwareCertificate sets the AwsHardwareCertificate field's value.
-func (s *Certificates) SetAwsHardwareCertificate(v string) *Certificates {
-	s.AwsHardwareCertificate = &v
-	return s
-}
-
-// SetClusterCertificate sets the ClusterCertificate field's value.
-func (s *Certificates) SetClusterCertificate(v string) *Certificates {
-	s.ClusterCertificate = &v
-	return s
-}
-
-// SetClusterCsr sets the ClusterCsr field's value.
-func (s *Certificates) SetClusterCsr(v string) *Certificates {
-	s.ClusterCsr = &v
-	return s
-}
-
-// SetHsmCertificate sets the HsmCertificate field's value.
-func (s *Certificates) SetHsmCertificate(v string) *Certificates {
-	s.HsmCertificate = &v
-	return s
-}
-
-// SetManufacturerHardwareCertificate sets the ManufacturerHardwareCertificate field's value.
-func (s *Certificates) SetManufacturerHardwareCertificate(v string) *Certificates {
-	s.ManufacturerHardwareCertificate = &v
-	return s
 }
 
 // Contains information about an AWS CloudHSM cluster.
@@ -869,84 +815,6 @@ func (s Cluster) String() string {
 // GoString returns the string representation
 func (s Cluster) GoString() string {
 	return s.String()
-}
-
-// SetBackupPolicy sets the BackupPolicy field's value.
-func (s *Cluster) SetBackupPolicy(v BackupPolicy) *Cluster {
-	s.BackupPolicy = v
-	return s
-}
-
-// SetCertificates sets the Certificates field's value.
-func (s *Cluster) SetCertificates(v *Certificates) *Cluster {
-	s.Certificates = v
-	return s
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *Cluster) SetClusterId(v string) *Cluster {
-	s.ClusterId = &v
-	return s
-}
-
-// SetCreateTimestamp sets the CreateTimestamp field's value.
-func (s *Cluster) SetCreateTimestamp(v time.Time) *Cluster {
-	s.CreateTimestamp = &v
-	return s
-}
-
-// SetHsmType sets the HsmType field's value.
-func (s *Cluster) SetHsmType(v string) *Cluster {
-	s.HsmType = &v
-	return s
-}
-
-// SetHsms sets the Hsms field's value.
-func (s *Cluster) SetHsms(v []Hsm) *Cluster {
-	s.Hsms = v
-	return s
-}
-
-// SetPreCoPassword sets the PreCoPassword field's value.
-func (s *Cluster) SetPreCoPassword(v string) *Cluster {
-	s.PreCoPassword = &v
-	return s
-}
-
-// SetSecurityGroup sets the SecurityGroup field's value.
-func (s *Cluster) SetSecurityGroup(v string) *Cluster {
-	s.SecurityGroup = &v
-	return s
-}
-
-// SetSourceBackupId sets the SourceBackupId field's value.
-func (s *Cluster) SetSourceBackupId(v string) *Cluster {
-	s.SourceBackupId = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Cluster) SetState(v ClusterState) *Cluster {
-	s.State = v
-	return s
-}
-
-// SetStateMessage sets the StateMessage field's value.
-func (s *Cluster) SetStateMessage(v string) *Cluster {
-	s.StateMessage = &v
-	return s
-}
-
-// SetSubnetMapping sets the SubnetMapping field's value.
-func (s *Cluster) SetSubnetMapping(v map[string]string) *Cluster {
-	s.SubnetMapping = v
-	return s
-}
-
-// SetVpcId sets the VpcId field's value.
-func (s *Cluster) SetVpcId(v string) *Cluster {
-	s.VpcId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateClusterRequest
@@ -1007,24 +875,6 @@ func (s *CreateClusterInput) Validate() error {
 	return nil
 }
 
-// SetHsmType sets the HsmType field's value.
-func (s *CreateClusterInput) SetHsmType(v string) *CreateClusterInput {
-	s.HsmType = &v
-	return s
-}
-
-// SetSourceBackupId sets the SourceBackupId field's value.
-func (s *CreateClusterInput) SetSourceBackupId(v string) *CreateClusterInput {
-	s.SourceBackupId = &v
-	return s
-}
-
-// SetSubnetIds sets the SubnetIds field's value.
-func (s *CreateClusterInput) SetSubnetIds(v []string) *CreateClusterInput {
-	s.SubnetIds = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateClusterResponse
 type CreateClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -1048,12 +898,6 @@ func (s CreateClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCluster sets the Cluster field's value.
-func (s *CreateClusterOutput) SetCluster(v *Cluster) *CreateClusterOutput {
-	s.Cluster = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateHsmRequest
@@ -1106,24 +950,6 @@ func (s *CreateHsmInput) Validate() error {
 	return nil
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *CreateHsmInput) SetAvailabilityZone(v string) *CreateHsmInput {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *CreateHsmInput) SetClusterId(v string) *CreateHsmInput {
-	s.ClusterId = &v
-	return s
-}
-
-// SetIpAddress sets the IpAddress field's value.
-func (s *CreateHsmInput) SetIpAddress(v string) *CreateHsmInput {
-	s.IpAddress = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/CreateHsmResponse
 type CreateHsmOutput struct {
 	_ struct{} `type:"structure"`
@@ -1147,12 +973,6 @@ func (s CreateHsmOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateHsmOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHsm sets the Hsm field's value.
-func (s *CreateHsmOutput) SetHsm(v *Hsm) *CreateHsmOutput {
-	s.Hsm = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteClusterRequest
@@ -1190,12 +1010,6 @@ func (s *DeleteClusterInput) Validate() error {
 	return nil
 }
 
-// SetClusterId sets the ClusterId field's value.
-func (s *DeleteClusterInput) SetClusterId(v string) *DeleteClusterInput {
-	s.ClusterId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteClusterResponse
 type DeleteClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -1219,12 +1033,6 @@ func (s DeleteClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetCluster sets the Cluster field's value.
-func (s *DeleteClusterOutput) SetCluster(v *Cluster) *DeleteClusterOutput {
-	s.Cluster = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteHsmRequest
@@ -1272,30 +1080,6 @@ func (s *DeleteHsmInput) Validate() error {
 	return nil
 }
 
-// SetClusterId sets the ClusterId field's value.
-func (s *DeleteHsmInput) SetClusterId(v string) *DeleteHsmInput {
-	s.ClusterId = &v
-	return s
-}
-
-// SetEniId sets the EniId field's value.
-func (s *DeleteHsmInput) SetEniId(v string) *DeleteHsmInput {
-	s.EniId = &v
-	return s
-}
-
-// SetEniIp sets the EniIp field's value.
-func (s *DeleteHsmInput) SetEniIp(v string) *DeleteHsmInput {
-	s.EniIp = &v
-	return s
-}
-
-// SetHsmId sets the HsmId field's value.
-func (s *DeleteHsmInput) SetHsmId(v string) *DeleteHsmInput {
-	s.HsmId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DeleteHsmResponse
 type DeleteHsmOutput struct {
 	_ struct{} `type:"structure"`
@@ -1319,12 +1103,6 @@ func (s DeleteHsmOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteHsmOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetHsmId sets the HsmId field's value.
-func (s *DeleteHsmOutput) SetHsmId(v string) *DeleteHsmOutput {
-	s.HsmId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackupsRequest
@@ -1374,24 +1152,6 @@ func (s *DescribeBackupsInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeBackupsInput) SetFilters(v map[string][]string) *DescribeBackupsInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeBackupsInput) SetMaxResults(v int64) *DescribeBackupsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeBackupsInput) SetNextToken(v string) *DescribeBackupsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeBackupsResponse
 type DescribeBackupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1420,18 +1180,6 @@ func (s DescribeBackupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeBackupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetBackups sets the Backups field's value.
-func (s *DescribeBackupsOutput) SetBackups(v []Backup) *DescribeBackupsOutput {
-	s.Backups = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeBackupsOutput) SetNextToken(v string) *DescribeBackupsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeClustersRequest
@@ -1482,24 +1230,6 @@ func (s *DescribeClustersInput) Validate() error {
 	return nil
 }
 
-// SetFilters sets the Filters field's value.
-func (s *DescribeClustersInput) SetFilters(v map[string][]string) *DescribeClustersInput {
-	s.Filters = v
-	return s
-}
-
-// SetMaxResults sets the MaxResults field's value.
-func (s *DescribeClustersInput) SetMaxResults(v int64) *DescribeClustersInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeClustersInput) SetNextToken(v string) *DescribeClustersInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/DescribeClustersResponse
 type DescribeClustersOutput struct {
 	_ struct{} `type:"structure"`
@@ -1528,18 +1258,6 @@ func (s DescribeClustersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeClustersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetClusters sets the Clusters field's value.
-func (s *DescribeClustersOutput) SetClusters(v []Cluster) *DescribeClustersOutput {
-	s.Clusters = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeClustersOutput) SetNextToken(v string) *DescribeClustersOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Contains information about a hardware security module (HSM) in an AWS CloudHSM
@@ -1585,54 +1303,6 @@ func (s Hsm) GoString() string {
 	return s.String()
 }
 
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *Hsm) SetAvailabilityZone(v string) *Hsm {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetClusterId sets the ClusterId field's value.
-func (s *Hsm) SetClusterId(v string) *Hsm {
-	s.ClusterId = &v
-	return s
-}
-
-// SetEniId sets the EniId field's value.
-func (s *Hsm) SetEniId(v string) *Hsm {
-	s.EniId = &v
-	return s
-}
-
-// SetEniIp sets the EniIp field's value.
-func (s *Hsm) SetEniIp(v string) *Hsm {
-	s.EniIp = &v
-	return s
-}
-
-// SetHsmId sets the HsmId field's value.
-func (s *Hsm) SetHsmId(v string) *Hsm {
-	s.HsmId = &v
-	return s
-}
-
-// SetState sets the State field's value.
-func (s *Hsm) SetState(v HsmState) *Hsm {
-	s.State = v
-	return s
-}
-
-// SetStateMessage sets the StateMessage field's value.
-func (s *Hsm) SetStateMessage(v string) *Hsm {
-	s.StateMessage = &v
-	return s
-}
-
-// SetSubnetId sets the SubnetId field's value.
-func (s *Hsm) SetSubnetId(v string) *Hsm {
-	s.SubnetId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/InitializeClusterRequest
 type InitializeClusterInput struct {
 	_ struct{} `type:"structure"`
@@ -1644,7 +1314,8 @@ type InitializeClusterInput struct {
 	ClusterId *string `type:"string" required:"true"`
 
 	// The cluster certificate issued (signed) by your issuing certificate authority
-	// (CA). The certificate must be in PEM format.
+	// (CA). The certificate must be in PEM format and can contain a maximum of
+	// 5000 characters.
 	//
 	// SignedCert is a required field
 	SignedCert *string `type:"string" required:"true"`
@@ -1653,7 +1324,7 @@ type InitializeClusterInput struct {
 	// (signed) the cluster certificate. This can be a root (self-signed) certificate
 	// or a certificate chain that begins with the certificate that issued the cluster
 	// certificate and ends with a root certificate. The certificate or certificate
-	// chain must be in PEM format.
+	// chain must be in PEM format and can contain a maximum of 5000 characters.
 	//
 	// TrustAnchor is a required field
 	TrustAnchor *string `type:"string" required:"true"`
@@ -1691,24 +1362,6 @@ func (s *InitializeClusterInput) Validate() error {
 	return nil
 }
 
-// SetClusterId sets the ClusterId field's value.
-func (s *InitializeClusterInput) SetClusterId(v string) *InitializeClusterInput {
-	s.ClusterId = &v
-	return s
-}
-
-// SetSignedCert sets the SignedCert field's value.
-func (s *InitializeClusterInput) SetSignedCert(v string) *InitializeClusterInput {
-	s.SignedCert = &v
-	return s
-}
-
-// SetTrustAnchor sets the TrustAnchor field's value.
-func (s *InitializeClusterInput) SetTrustAnchor(v string) *InitializeClusterInput {
-	s.TrustAnchor = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/InitializeClusterResponse
 type InitializeClusterOutput struct {
 	_ struct{} `type:"structure"`
@@ -1735,18 +1388,6 @@ func (s InitializeClusterOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InitializeClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetState sets the State field's value.
-func (s *InitializeClusterOutput) SetState(v ClusterState) *InitializeClusterOutput {
-	s.State = v
-	return s
-}
-
-// SetStateMessage sets the StateMessage field's value.
-func (s *InitializeClusterOutput) SetStateMessage(v string) *InitializeClusterOutput {
-	s.StateMessage = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ListTagsRequest
@@ -1795,24 +1436,6 @@ func (s *ListTagsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListTagsInput) SetMaxResults(v int64) *ListTagsInput {
-	s.MaxResults = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsInput) SetNextToken(v string) *ListTagsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ListTagsInput) SetResourceId(v string) *ListTagsInput {
-	s.ResourceId = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/ListTagsResponse
 type ListTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1842,18 +1465,6 @@ func (s ListTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListTagsOutput) SetNextToken(v string) *ListTagsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *ListTagsOutput) SetTagList(v []Tag) *ListTagsOutput {
-	s.TagList = v
-	return s
 }
 
 // Contains a tag. A tag is a key-value pair.
@@ -1901,18 +1512,6 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/TagResourceRequest
@@ -1967,18 +1566,6 @@ func (s *TagResourceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *TagResourceInput) SetResourceId(v string) *TagResourceInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetTagList sets the TagList field's value.
-func (s *TagResourceInput) SetTagList(v []Tag) *TagResourceInput {
-	s.TagList = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/TagResourceResponse
@@ -2051,18 +1638,6 @@ func (s *UntagResourceInput) Validate() error {
 	return nil
 }
 
-// SetResourceId sets the ResourceId field's value.
-func (s *UntagResourceInput) SetResourceId(v string) *UntagResourceInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetTagKeyList sets the TagKeyList field's value.
-func (s *UntagResourceInput) SetTagKeyList(v []string) *UntagResourceInput {
-	s.TagKeyList = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsmv2-2017-04-28/UntagResourceResponse
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2092,6 +1667,15 @@ const (
 	BackupPolicyDefault BackupPolicy = "DEFAULT"
 )
 
+func (enum BackupPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BackupPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BackupState string
 
 // Enum values for BackupState
@@ -2100,6 +1684,15 @@ const (
 	BackupStateReady            BackupState = "READY"
 	BackupStateDeleted          BackupState = "DELETED"
 )
+
+func (enum BackupState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BackupState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ClusterState string
 
@@ -2116,6 +1709,15 @@ const (
 	ClusterStateDegraded             ClusterState = "DEGRADED"
 )
 
+func (enum ClusterState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ClusterState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HsmState string
 
 // Enum values for HsmState
@@ -2126,3 +1728,12 @@ const (
 	HsmStateDeleteInProgress HsmState = "DELETE_IN_PROGRESS"
 	HsmStateDeleted          HsmState = "DELETED"
 )
+
+func (enum HsmState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HsmState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

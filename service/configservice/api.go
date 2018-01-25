@@ -1699,18 +1699,6 @@ func (s Compliance) GoString() string {
 	return s.String()
 }
 
-// SetComplianceContributorCount sets the ComplianceContributorCount field's value.
-func (s *Compliance) SetComplianceContributorCount(v *ComplianceContributorCount) *Compliance {
-	s.ComplianceContributorCount = v
-	return s
-}
-
-// SetComplianceType sets the ComplianceType field's value.
-func (s *Compliance) SetComplianceType(v ComplianceType) *Compliance {
-	s.ComplianceType = v
-	return s
-}
-
 // Indicates whether an AWS Config rule is compliant. A rule is compliant if
 // all of the resources that the rule evaluated comply with it, and it is noncompliant
 // if any of these resources do not comply.
@@ -1733,18 +1721,6 @@ func (s ComplianceByConfigRule) String() string {
 // GoString returns the string representation
 func (s ComplianceByConfigRule) GoString() string {
 	return s.String()
-}
-
-// SetCompliance sets the Compliance field's value.
-func (s *ComplianceByConfigRule) SetCompliance(v *Compliance) *ComplianceByConfigRule {
-	s.Compliance = v
-	return s
-}
-
-// SetConfigRuleName sets the ConfigRuleName field's value.
-func (s *ComplianceByConfigRule) SetConfigRuleName(v string) *ComplianceByConfigRule {
-	s.ConfigRuleName = &v
-	return s
 }
 
 // Indicates whether an AWS resource that is evaluated according to one or more
@@ -1776,24 +1752,6 @@ func (s ComplianceByResource) GoString() string {
 	return s.String()
 }
 
-// SetCompliance sets the Compliance field's value.
-func (s *ComplianceByResource) SetCompliance(v *Compliance) *ComplianceByResource {
-	s.Compliance = v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ComplianceByResource) SetResourceId(v string) *ComplianceByResource {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ComplianceByResource) SetResourceType(v string) *ComplianceByResource {
-	s.ResourceType = &v
-	return s
-}
-
 // The number of AWS resources or AWS Config rules responsible for the current
 // compliance of the item, up to a maximum number.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceContributorCount
@@ -1816,18 +1774,6 @@ func (s ComplianceContributorCount) String() string {
 // GoString returns the string representation
 func (s ComplianceContributorCount) GoString() string {
 	return s.String()
-}
-
-// SetCapExceeded sets the CapExceeded field's value.
-func (s *ComplianceContributorCount) SetCapExceeded(v bool) *ComplianceContributorCount {
-	s.CapExceeded = &v
-	return s
-}
-
-// SetCappedCount sets the CappedCount field's value.
-func (s *ComplianceContributorCount) SetCappedCount(v int64) *ComplianceContributorCount {
-	s.CappedCount = &v
-	return s
 }
 
 // The number of AWS Config rules or AWS resources that are compliant and noncompliant.
@@ -1857,24 +1803,6 @@ func (s ComplianceSummary) GoString() string {
 	return s.String()
 }
 
-// SetComplianceSummaryTimestamp sets the ComplianceSummaryTimestamp field's value.
-func (s *ComplianceSummary) SetComplianceSummaryTimestamp(v time.Time) *ComplianceSummary {
-	s.ComplianceSummaryTimestamp = &v
-	return s
-}
-
-// SetCompliantResourceCount sets the CompliantResourceCount field's value.
-func (s *ComplianceSummary) SetCompliantResourceCount(v *ComplianceContributorCount) *ComplianceSummary {
-	s.CompliantResourceCount = v
-	return s
-}
-
-// SetNonCompliantResourceCount sets the NonCompliantResourceCount field's value.
-func (s *ComplianceSummary) SetNonCompliantResourceCount(v *ComplianceContributorCount) *ComplianceSummary {
-	s.NonCompliantResourceCount = v
-	return s
-}
-
 // The number of AWS resources of a specific type that are compliant or noncompliant,
 // up to a maximum of 100 for each compliance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ComplianceSummaryByResourceType
@@ -1897,18 +1825,6 @@ func (s ComplianceSummaryByResourceType) String() string {
 // GoString returns the string representation
 func (s ComplianceSummaryByResourceType) GoString() string {
 	return s.String()
-}
-
-// SetComplianceSummary sets the ComplianceSummary field's value.
-func (s *ComplianceSummaryByResourceType) SetComplianceSummary(v *ComplianceSummary) *ComplianceSummaryByResourceType {
-	s.ComplianceSummary = v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ComplianceSummaryByResourceType) SetResourceType(v string) *ComplianceSummaryByResourceType {
-	s.ResourceType = &v
-	return s
 }
 
 // Provides status of the delivery of the snapshot or the configuration history
@@ -1945,42 +1861,6 @@ func (s ConfigExportDeliveryInfo) String() string {
 // GoString returns the string representation
 func (s ConfigExportDeliveryInfo) GoString() string {
 	return s.String()
-}
-
-// SetLastAttemptTime sets the LastAttemptTime field's value.
-func (s *ConfigExportDeliveryInfo) SetLastAttemptTime(v time.Time) *ConfigExportDeliveryInfo {
-	s.LastAttemptTime = &v
-	return s
-}
-
-// SetLastErrorCode sets the LastErrorCode field's value.
-func (s *ConfigExportDeliveryInfo) SetLastErrorCode(v string) *ConfigExportDeliveryInfo {
-	s.LastErrorCode = &v
-	return s
-}
-
-// SetLastErrorMessage sets the LastErrorMessage field's value.
-func (s *ConfigExportDeliveryInfo) SetLastErrorMessage(v string) *ConfigExportDeliveryInfo {
-	s.LastErrorMessage = &v
-	return s
-}
-
-// SetLastStatus sets the LastStatus field's value.
-func (s *ConfigExportDeliveryInfo) SetLastStatus(v DeliveryStatus) *ConfigExportDeliveryInfo {
-	s.LastStatus = v
-	return s
-}
-
-// SetLastSuccessfulTime sets the LastSuccessfulTime field's value.
-func (s *ConfigExportDeliveryInfo) SetLastSuccessfulTime(v time.Time) *ConfigExportDeliveryInfo {
-	s.LastSuccessfulTime = &v
-	return s
-}
-
-// SetNextDeliveryTime sets the NextDeliveryTime field's value.
-func (s *ConfigExportDeliveryInfo) SetNextDeliveryTime(v time.Time) *ConfigExportDeliveryInfo {
-	s.NextDeliveryTime = &v
-	return s
 }
 
 // An AWS Config rule represents an AWS Lambda function that you create for
@@ -2103,60 +1983,6 @@ func (s *ConfigRule) Validate() error {
 	return nil
 }
 
-// SetConfigRuleArn sets the ConfigRuleArn field's value.
-func (s *ConfigRule) SetConfigRuleArn(v string) *ConfigRule {
-	s.ConfigRuleArn = &v
-	return s
-}
-
-// SetConfigRuleId sets the ConfigRuleId field's value.
-func (s *ConfigRule) SetConfigRuleId(v string) *ConfigRule {
-	s.ConfigRuleId = &v
-	return s
-}
-
-// SetConfigRuleName sets the ConfigRuleName field's value.
-func (s *ConfigRule) SetConfigRuleName(v string) *ConfigRule {
-	s.ConfigRuleName = &v
-	return s
-}
-
-// SetConfigRuleState sets the ConfigRuleState field's value.
-func (s *ConfigRule) SetConfigRuleState(v ConfigRuleState) *ConfigRule {
-	s.ConfigRuleState = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *ConfigRule) SetDescription(v string) *ConfigRule {
-	s.Description = &v
-	return s
-}
-
-// SetInputParameters sets the InputParameters field's value.
-func (s *ConfigRule) SetInputParameters(v string) *ConfigRule {
-	s.InputParameters = &v
-	return s
-}
-
-// SetMaximumExecutionFrequency sets the MaximumExecutionFrequency field's value.
-func (s *ConfigRule) SetMaximumExecutionFrequency(v MaximumExecutionFrequency) *ConfigRule {
-	s.MaximumExecutionFrequency = v
-	return s
-}
-
-// SetScope sets the Scope field's value.
-func (s *ConfigRule) SetScope(v *Scope) *ConfigRule {
-	s.Scope = v
-	return s
-}
-
-// SetSource sets the Source field's value.
-func (s *ConfigRule) SetSource(v *Source) *ConfigRule {
-	s.Source = v
-	return s
-}
-
 // Status information for your AWS managed Config rules. The status includes
 // information such as the last time the rule ran, the last time it failed,
 // and the related error for the last failure.
@@ -2221,72 +2047,6 @@ func (s ConfigRuleEvaluationStatus) GoString() string {
 	return s.String()
 }
 
-// SetConfigRuleArn sets the ConfigRuleArn field's value.
-func (s *ConfigRuleEvaluationStatus) SetConfigRuleArn(v string) *ConfigRuleEvaluationStatus {
-	s.ConfigRuleArn = &v
-	return s
-}
-
-// SetConfigRuleId sets the ConfigRuleId field's value.
-func (s *ConfigRuleEvaluationStatus) SetConfigRuleId(v string) *ConfigRuleEvaluationStatus {
-	s.ConfigRuleId = &v
-	return s
-}
-
-// SetConfigRuleName sets the ConfigRuleName field's value.
-func (s *ConfigRuleEvaluationStatus) SetConfigRuleName(v string) *ConfigRuleEvaluationStatus {
-	s.ConfigRuleName = &v
-	return s
-}
-
-// SetFirstActivatedTime sets the FirstActivatedTime field's value.
-func (s *ConfigRuleEvaluationStatus) SetFirstActivatedTime(v time.Time) *ConfigRuleEvaluationStatus {
-	s.FirstActivatedTime = &v
-	return s
-}
-
-// SetFirstEvaluationStarted sets the FirstEvaluationStarted field's value.
-func (s *ConfigRuleEvaluationStatus) SetFirstEvaluationStarted(v bool) *ConfigRuleEvaluationStatus {
-	s.FirstEvaluationStarted = &v
-	return s
-}
-
-// SetLastErrorCode sets the LastErrorCode field's value.
-func (s *ConfigRuleEvaluationStatus) SetLastErrorCode(v string) *ConfigRuleEvaluationStatus {
-	s.LastErrorCode = &v
-	return s
-}
-
-// SetLastErrorMessage sets the LastErrorMessage field's value.
-func (s *ConfigRuleEvaluationStatus) SetLastErrorMessage(v string) *ConfigRuleEvaluationStatus {
-	s.LastErrorMessage = &v
-	return s
-}
-
-// SetLastFailedEvaluationTime sets the LastFailedEvaluationTime field's value.
-func (s *ConfigRuleEvaluationStatus) SetLastFailedEvaluationTime(v time.Time) *ConfigRuleEvaluationStatus {
-	s.LastFailedEvaluationTime = &v
-	return s
-}
-
-// SetLastFailedInvocationTime sets the LastFailedInvocationTime field's value.
-func (s *ConfigRuleEvaluationStatus) SetLastFailedInvocationTime(v time.Time) *ConfigRuleEvaluationStatus {
-	s.LastFailedInvocationTime = &v
-	return s
-}
-
-// SetLastSuccessfulEvaluationTime sets the LastSuccessfulEvaluationTime field's value.
-func (s *ConfigRuleEvaluationStatus) SetLastSuccessfulEvaluationTime(v time.Time) *ConfigRuleEvaluationStatus {
-	s.LastSuccessfulEvaluationTime = &v
-	return s
-}
-
-// SetLastSuccessfulInvocationTime sets the LastSuccessfulInvocationTime field's value.
-func (s *ConfigRuleEvaluationStatus) SetLastSuccessfulInvocationTime(v time.Time) *ConfigRuleEvaluationStatus {
-	s.LastSuccessfulInvocationTime = &v
-	return s
-}
-
 // Provides options for how often AWS Config delivers configuration snapshots
 // to the Amazon S3 bucket in your delivery channel.
 //
@@ -2344,12 +2104,6 @@ func (s ConfigSnapshotDeliveryProperties) GoString() string {
 	return s.String()
 }
 
-// SetDeliveryFrequency sets the DeliveryFrequency field's value.
-func (s *ConfigSnapshotDeliveryProperties) SetDeliveryFrequency(v MaximumExecutionFrequency) *ConfigSnapshotDeliveryProperties {
-	s.DeliveryFrequency = v
-	return s
-}
-
 // A list that contains the status of the delivery of the configuration stream
 // notification to the Amazon SNS topic.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigStreamDeliveryInfo
@@ -2381,30 +2135,6 @@ func (s ConfigStreamDeliveryInfo) String() string {
 // GoString returns the string representation
 func (s ConfigStreamDeliveryInfo) GoString() string {
 	return s.String()
-}
-
-// SetLastErrorCode sets the LastErrorCode field's value.
-func (s *ConfigStreamDeliveryInfo) SetLastErrorCode(v string) *ConfigStreamDeliveryInfo {
-	s.LastErrorCode = &v
-	return s
-}
-
-// SetLastErrorMessage sets the LastErrorMessage field's value.
-func (s *ConfigStreamDeliveryInfo) SetLastErrorMessage(v string) *ConfigStreamDeliveryInfo {
-	s.LastErrorMessage = &v
-	return s
-}
-
-// SetLastStatus sets the LastStatus field's value.
-func (s *ConfigStreamDeliveryInfo) SetLastStatus(v DeliveryStatus) *ConfigStreamDeliveryInfo {
-	s.LastStatus = v
-	return s
-}
-
-// SetLastStatusChangeTime sets the LastStatusChangeTime field's value.
-func (s *ConfigStreamDeliveryInfo) SetLastStatusChangeTime(v time.Time) *ConfigStreamDeliveryInfo {
-	s.LastStatusChangeTime = &v
-	return s
 }
 
 // A list that contains detailed configurations of a specified resource.
@@ -2489,114 +2219,6 @@ func (s ConfigurationItem) GoString() string {
 	return s.String()
 }
 
-// SetAccountId sets the AccountId field's value.
-func (s *ConfigurationItem) SetAccountId(v string) *ConfigurationItem {
-	s.AccountId = &v
-	return s
-}
-
-// SetArn sets the Arn field's value.
-func (s *ConfigurationItem) SetArn(v string) *ConfigurationItem {
-	s.Arn = &v
-	return s
-}
-
-// SetAvailabilityZone sets the AvailabilityZone field's value.
-func (s *ConfigurationItem) SetAvailabilityZone(v string) *ConfigurationItem {
-	s.AvailabilityZone = &v
-	return s
-}
-
-// SetAwsRegion sets the AwsRegion field's value.
-func (s *ConfigurationItem) SetAwsRegion(v string) *ConfigurationItem {
-	s.AwsRegion = &v
-	return s
-}
-
-// SetConfiguration sets the Configuration field's value.
-func (s *ConfigurationItem) SetConfiguration(v string) *ConfigurationItem {
-	s.Configuration = &v
-	return s
-}
-
-// SetConfigurationItemCaptureTime sets the ConfigurationItemCaptureTime field's value.
-func (s *ConfigurationItem) SetConfigurationItemCaptureTime(v time.Time) *ConfigurationItem {
-	s.ConfigurationItemCaptureTime = &v
-	return s
-}
-
-// SetConfigurationItemMD5Hash sets the ConfigurationItemMD5Hash field's value.
-func (s *ConfigurationItem) SetConfigurationItemMD5Hash(v string) *ConfigurationItem {
-	s.ConfigurationItemMD5Hash = &v
-	return s
-}
-
-// SetConfigurationItemStatus sets the ConfigurationItemStatus field's value.
-func (s *ConfigurationItem) SetConfigurationItemStatus(v ConfigurationItemStatus) *ConfigurationItem {
-	s.ConfigurationItemStatus = v
-	return s
-}
-
-// SetConfigurationStateId sets the ConfigurationStateId field's value.
-func (s *ConfigurationItem) SetConfigurationStateId(v string) *ConfigurationItem {
-	s.ConfigurationStateId = &v
-	return s
-}
-
-// SetRelatedEvents sets the RelatedEvents field's value.
-func (s *ConfigurationItem) SetRelatedEvents(v []string) *ConfigurationItem {
-	s.RelatedEvents = v
-	return s
-}
-
-// SetRelationships sets the Relationships field's value.
-func (s *ConfigurationItem) SetRelationships(v []Relationship) *ConfigurationItem {
-	s.Relationships = v
-	return s
-}
-
-// SetResourceCreationTime sets the ResourceCreationTime field's value.
-func (s *ConfigurationItem) SetResourceCreationTime(v time.Time) *ConfigurationItem {
-	s.ResourceCreationTime = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ConfigurationItem) SetResourceId(v string) *ConfigurationItem {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceName sets the ResourceName field's value.
-func (s *ConfigurationItem) SetResourceName(v string) *ConfigurationItem {
-	s.ResourceName = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ConfigurationItem) SetResourceType(v ResourceType) *ConfigurationItem {
-	s.ResourceType = v
-	return s
-}
-
-// SetSupplementaryConfiguration sets the SupplementaryConfiguration field's value.
-func (s *ConfigurationItem) SetSupplementaryConfiguration(v map[string]string) *ConfigurationItem {
-	s.SupplementaryConfiguration = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *ConfigurationItem) SetTags(v map[string]string) *ConfigurationItem {
-	s.Tags = v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *ConfigurationItem) SetVersion(v string) *ConfigurationItem {
-	s.Version = &v
-	return s
-}
-
 // An object that represents the recording of configuration changes of an AWS
 // resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorder
@@ -2640,24 +2262,6 @@ func (s *ConfigurationRecorder) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *ConfigurationRecorder) SetName(v string) *ConfigurationRecorder {
-	s.Name = &v
-	return s
-}
-
-// SetRecordingGroup sets the RecordingGroup field's value.
-func (s *ConfigurationRecorder) SetRecordingGroup(v *RecordingGroup) *ConfigurationRecorder {
-	s.RecordingGroup = v
-	return s
-}
-
-// SetRoleARN sets the RoleARN field's value.
-func (s *ConfigurationRecorder) SetRoleARN(v string) *ConfigurationRecorder {
-	s.RoleARN = &v
-	return s
-}
-
 // The current status of the configuration recorder.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ConfigurationRecorderStatus
 type ConfigurationRecorderStatus struct {
@@ -2698,54 +2302,6 @@ func (s ConfigurationRecorderStatus) GoString() string {
 	return s.String()
 }
 
-// SetLastErrorCode sets the LastErrorCode field's value.
-func (s *ConfigurationRecorderStatus) SetLastErrorCode(v string) *ConfigurationRecorderStatus {
-	s.LastErrorCode = &v
-	return s
-}
-
-// SetLastErrorMessage sets the LastErrorMessage field's value.
-func (s *ConfigurationRecorderStatus) SetLastErrorMessage(v string) *ConfigurationRecorderStatus {
-	s.LastErrorMessage = &v
-	return s
-}
-
-// SetLastStartTime sets the LastStartTime field's value.
-func (s *ConfigurationRecorderStatus) SetLastStartTime(v time.Time) *ConfigurationRecorderStatus {
-	s.LastStartTime = &v
-	return s
-}
-
-// SetLastStatus sets the LastStatus field's value.
-func (s *ConfigurationRecorderStatus) SetLastStatus(v RecorderStatus) *ConfigurationRecorderStatus {
-	s.LastStatus = v
-	return s
-}
-
-// SetLastStatusChangeTime sets the LastStatusChangeTime field's value.
-func (s *ConfigurationRecorderStatus) SetLastStatusChangeTime(v time.Time) *ConfigurationRecorderStatus {
-	s.LastStatusChangeTime = &v
-	return s
-}
-
-// SetLastStopTime sets the LastStopTime field's value.
-func (s *ConfigurationRecorderStatus) SetLastStopTime(v time.Time) *ConfigurationRecorderStatus {
-	s.LastStopTime = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *ConfigurationRecorderStatus) SetName(v string) *ConfigurationRecorderStatus {
-	s.Name = &v
-	return s
-}
-
-// SetRecording sets the Recording field's value.
-func (s *ConfigurationRecorderStatus) SetRecording(v bool) *ConfigurationRecorderStatus {
-	s.Recording = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRuleRequest
 type DeleteConfigRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -2781,12 +2337,6 @@ func (s *DeleteConfigRuleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigRuleName sets the ConfigRuleName field's value.
-func (s *DeleteConfigRuleInput) SetConfigRuleName(v string) *DeleteConfigRuleInput {
-	s.ConfigRuleName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigRuleOutput
@@ -2851,12 +2401,6 @@ func (s *DeleteConfigurationRecorderInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationRecorderName sets the ConfigurationRecorderName field's value.
-func (s *DeleteConfigurationRecorderInput) SetConfigurationRecorderName(v string) *DeleteConfigurationRecorderInput {
-	s.ConfigurationRecorderName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteConfigurationRecorderOutput
 type DeleteConfigurationRecorderOutput struct {
 	_ struct{} `type:"structure"`
@@ -2918,12 +2462,6 @@ func (s *DeleteDeliveryChannelInput) Validate() error {
 	return nil
 }
 
-// SetDeliveryChannelName sets the DeliveryChannelName field's value.
-func (s *DeleteDeliveryChannelInput) SetDeliveryChannelName(v string) *DeleteDeliveryChannelInput {
-	s.DeliveryChannelName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteDeliveryChannelOutput
 type DeleteDeliveryChannelOutput struct {
 	_ struct{} `type:"structure"`
@@ -2981,12 +2519,6 @@ func (s *DeleteEvaluationResultsInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigRuleName sets the ConfigRuleName field's value.
-func (s *DeleteEvaluationResultsInput) SetConfigRuleName(v string) *DeleteEvaluationResultsInput {
-	s.ConfigRuleName = &v
-	return s
 }
 
 // The output when you delete the evaluation results for the specified Config
@@ -3051,12 +2583,6 @@ func (s *DeliverConfigSnapshotInput) Validate() error {
 	return nil
 }
 
-// SetDeliveryChannelName sets the DeliveryChannelName field's value.
-func (s *DeliverConfigSnapshotInput) SetDeliveryChannelName(v string) *DeliverConfigSnapshotInput {
-	s.DeliveryChannelName = &v
-	return s
-}
-
 // The output for the DeliverConfigSnapshot action in JSON format.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshotResponse
 type DeliverConfigSnapshotOutput struct {
@@ -3081,12 +2607,6 @@ func (s DeliverConfigSnapshotOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeliverConfigSnapshotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigSnapshotId sets the ConfigSnapshotId field's value.
-func (s *DeliverConfigSnapshotOutput) SetConfigSnapshotId(v string) *DeliverConfigSnapshotOutput {
-	s.ConfigSnapshotId = &v
-	return s
 }
 
 // The channel through which AWS Config delivers notifications and updated configuration
@@ -3151,36 +2671,6 @@ func (s *DeliveryChannel) Validate() error {
 	return nil
 }
 
-// SetConfigSnapshotDeliveryProperties sets the ConfigSnapshotDeliveryProperties field's value.
-func (s *DeliveryChannel) SetConfigSnapshotDeliveryProperties(v *ConfigSnapshotDeliveryProperties) *DeliveryChannel {
-	s.ConfigSnapshotDeliveryProperties = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DeliveryChannel) SetName(v string) *DeliveryChannel {
-	s.Name = &v
-	return s
-}
-
-// SetS3BucketName sets the S3BucketName field's value.
-func (s *DeliveryChannel) SetS3BucketName(v string) *DeliveryChannel {
-	s.S3BucketName = &v
-	return s
-}
-
-// SetS3KeyPrefix sets the S3KeyPrefix field's value.
-func (s *DeliveryChannel) SetS3KeyPrefix(v string) *DeliveryChannel {
-	s.S3KeyPrefix = &v
-	return s
-}
-
-// SetSnsTopicARN sets the SnsTopicARN field's value.
-func (s *DeliveryChannel) SetSnsTopicARN(v string) *DeliveryChannel {
-	s.SnsTopicARN = &v
-	return s
-}
-
 // The status of a specified delivery channel.
 //
 // Valid values: Success | Failure
@@ -3214,30 +2704,6 @@ func (s DeliveryChannelStatus) GoString() string {
 	return s.String()
 }
 
-// SetConfigHistoryDeliveryInfo sets the ConfigHistoryDeliveryInfo field's value.
-func (s *DeliveryChannelStatus) SetConfigHistoryDeliveryInfo(v *ConfigExportDeliveryInfo) *DeliveryChannelStatus {
-	s.ConfigHistoryDeliveryInfo = v
-	return s
-}
-
-// SetConfigSnapshotDeliveryInfo sets the ConfigSnapshotDeliveryInfo field's value.
-func (s *DeliveryChannelStatus) SetConfigSnapshotDeliveryInfo(v *ConfigExportDeliveryInfo) *DeliveryChannelStatus {
-	s.ConfigSnapshotDeliveryInfo = v
-	return s
-}
-
-// SetConfigStreamDeliveryInfo sets the ConfigStreamDeliveryInfo field's value.
-func (s *DeliveryChannelStatus) SetConfigStreamDeliveryInfo(v *ConfigStreamDeliveryInfo) *DeliveryChannelStatus {
-	s.ConfigStreamDeliveryInfo = v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *DeliveryChannelStatus) SetName(v string) *DeliveryChannelStatus {
-	s.Name = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByConfigRuleRequest
 type DescribeComplianceByConfigRuleInput struct {
 	_ struct{} `type:"structure"`
@@ -3263,24 +2729,6 @@ func (s DescribeComplianceByConfigRuleInput) String() string {
 // GoString returns the string representation
 func (s DescribeComplianceByConfigRuleInput) GoString() string {
 	return s.String()
-}
-
-// SetComplianceTypes sets the ComplianceTypes field's value.
-func (s *DescribeComplianceByConfigRuleInput) SetComplianceTypes(v []ComplianceType) *DescribeComplianceByConfigRuleInput {
-	s.ComplianceTypes = v
-	return s
-}
-
-// SetConfigRuleNames sets the ConfigRuleNames field's value.
-func (s *DescribeComplianceByConfigRuleInput) SetConfigRuleNames(v []string) *DescribeComplianceByConfigRuleInput {
-	s.ConfigRuleNames = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeComplianceByConfigRuleInput) SetNextToken(v string) *DescribeComplianceByConfigRuleInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByConfigRuleResponse
@@ -3310,18 +2758,6 @@ func (s DescribeComplianceByConfigRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeComplianceByConfigRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComplianceByConfigRules sets the ComplianceByConfigRules field's value.
-func (s *DescribeComplianceByConfigRuleOutput) SetComplianceByConfigRules(v []ComplianceByConfigRule) *DescribeComplianceByConfigRuleOutput {
-	s.ComplianceByConfigRules = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeComplianceByConfigRuleOutput) SetNextToken(v string) *DescribeComplianceByConfigRuleOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByResourceRequest
@@ -3379,36 +2815,6 @@ func (s *DescribeComplianceByResourceInput) Validate() error {
 	return nil
 }
 
-// SetComplianceTypes sets the ComplianceTypes field's value.
-func (s *DescribeComplianceByResourceInput) SetComplianceTypes(v []ComplianceType) *DescribeComplianceByResourceInput {
-	s.ComplianceTypes = v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeComplianceByResourceInput) SetLimit(v int64) *DescribeComplianceByResourceInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeComplianceByResourceInput) SetNextToken(v string) *DescribeComplianceByResourceInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *DescribeComplianceByResourceInput) SetResourceId(v string) *DescribeComplianceByResourceInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *DescribeComplianceByResourceInput) SetResourceType(v string) *DescribeComplianceByResourceInput {
-	s.ResourceType = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeComplianceByResourceResponse
 type DescribeComplianceByResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3437,18 +2843,6 @@ func (s DescribeComplianceByResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeComplianceByResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComplianceByResources sets the ComplianceByResources field's value.
-func (s *DescribeComplianceByResourceOutput) SetComplianceByResources(v []ComplianceByResource) *DescribeComplianceByResourceOutput {
-	s.ComplianceByResources = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeComplianceByResourceOutput) SetNextToken(v string) *DescribeComplianceByResourceOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRuleEvaluationStatusRequest
@@ -3485,24 +2879,6 @@ func (s DescribeConfigRuleEvaluationStatusInput) GoString() string {
 	return s.String()
 }
 
-// SetConfigRuleNames sets the ConfigRuleNames field's value.
-func (s *DescribeConfigRuleEvaluationStatusInput) SetConfigRuleNames(v []string) *DescribeConfigRuleEvaluationStatusInput {
-	s.ConfigRuleNames = v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *DescribeConfigRuleEvaluationStatusInput) SetLimit(v int64) *DescribeConfigRuleEvaluationStatusInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeConfigRuleEvaluationStatusInput) SetNextToken(v string) *DescribeConfigRuleEvaluationStatusInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRuleEvaluationStatusResponse
 type DescribeConfigRuleEvaluationStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -3532,18 +2908,6 @@ func (s DescribeConfigRuleEvaluationStatusOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// SetConfigRulesEvaluationStatus sets the ConfigRulesEvaluationStatus field's value.
-func (s *DescribeConfigRuleEvaluationStatusOutput) SetConfigRulesEvaluationStatus(v []ConfigRuleEvaluationStatus) *DescribeConfigRuleEvaluationStatusOutput {
-	s.ConfigRulesEvaluationStatus = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeConfigRuleEvaluationStatusOutput) SetNextToken(v string) *DescribeConfigRuleEvaluationStatusOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRulesRequest
 type DescribeConfigRulesInput struct {
 	_ struct{} `type:"structure"`
@@ -3565,18 +2929,6 @@ func (s DescribeConfigRulesInput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigRulesInput) GoString() string {
 	return s.String()
-}
-
-// SetConfigRuleNames sets the ConfigRuleNames field's value.
-func (s *DescribeConfigRulesInput) SetConfigRuleNames(v []string) *DescribeConfigRulesInput {
-	s.ConfigRuleNames = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeConfigRulesInput) SetNextToken(v string) *DescribeConfigRulesInput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigRulesResponse
@@ -3608,18 +2960,6 @@ func (s DescribeConfigRulesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetConfigRules sets the ConfigRules field's value.
-func (s *DescribeConfigRulesOutput) SetConfigRules(v []ConfigRule) *DescribeConfigRulesOutput {
-	s.ConfigRules = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *DescribeConfigRulesOutput) SetNextToken(v string) *DescribeConfigRulesOutput {
-	s.NextToken = &v
-	return s
-}
-
 // The input for the DescribeConfigurationRecorderStatus action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecorderStatusRequest
 type DescribeConfigurationRecorderStatusInput struct {
@@ -3639,12 +2979,6 @@ func (s DescribeConfigurationRecorderStatusInput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigurationRecorderStatusInput) GoString() string {
 	return s.String()
-}
-
-// SetConfigurationRecorderNames sets the ConfigurationRecorderNames field's value.
-func (s *DescribeConfigurationRecorderStatusInput) SetConfigurationRecorderNames(v []string) *DescribeConfigurationRecorderStatusInput {
-	s.ConfigurationRecorderNames = v
-	return s
 }
 
 // The output for the DescribeConfigurationRecorderStatus action in JSON format.
@@ -3673,12 +3007,6 @@ func (s DescribeConfigurationRecorderStatusOutput) SDKResponseMetadata() aws.Res
 	return s.responseMetadata
 }
 
-// SetConfigurationRecordersStatus sets the ConfigurationRecordersStatus field's value.
-func (s *DescribeConfigurationRecorderStatusOutput) SetConfigurationRecordersStatus(v []ConfigurationRecorderStatus) *DescribeConfigurationRecorderStatusOutput {
-	s.ConfigurationRecordersStatus = v
-	return s
-}
-
 // The input for the DescribeConfigurationRecorders action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeConfigurationRecordersRequest
 type DescribeConfigurationRecordersInput struct {
@@ -3696,12 +3024,6 @@ func (s DescribeConfigurationRecordersInput) String() string {
 // GoString returns the string representation
 func (s DescribeConfigurationRecordersInput) GoString() string {
 	return s.String()
-}
-
-// SetConfigurationRecorderNames sets the ConfigurationRecorderNames field's value.
-func (s *DescribeConfigurationRecordersInput) SetConfigurationRecorderNames(v []string) *DescribeConfigurationRecordersInput {
-	s.ConfigurationRecorderNames = v
-	return s
 }
 
 // The output for the DescribeConfigurationRecorders action.
@@ -3730,12 +3052,6 @@ func (s DescribeConfigurationRecordersOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// SetConfigurationRecorders sets the ConfigurationRecorders field's value.
-func (s *DescribeConfigurationRecordersOutput) SetConfigurationRecorders(v []ConfigurationRecorder) *DescribeConfigurationRecordersOutput {
-	s.ConfigurationRecorders = v
-	return s
-}
-
 // The input for the DeliveryChannelStatus action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelStatusRequest
 type DescribeDeliveryChannelStatusInput struct {
@@ -3753,12 +3069,6 @@ func (s DescribeDeliveryChannelStatusInput) String() string {
 // GoString returns the string representation
 func (s DescribeDeliveryChannelStatusInput) GoString() string {
 	return s.String()
-}
-
-// SetDeliveryChannelNames sets the DeliveryChannelNames field's value.
-func (s *DescribeDeliveryChannelStatusInput) SetDeliveryChannelNames(v []string) *DescribeDeliveryChannelStatusInput {
-	s.DeliveryChannelNames = v
-	return s
 }
 
 // The output for the DescribeDeliveryChannelStatus action.
@@ -3787,12 +3097,6 @@ func (s DescribeDeliveryChannelStatusOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetDeliveryChannelsStatus sets the DeliveryChannelsStatus field's value.
-func (s *DescribeDeliveryChannelStatusOutput) SetDeliveryChannelsStatus(v []DeliveryChannelStatus) *DescribeDeliveryChannelStatusOutput {
-	s.DeliveryChannelsStatus = v
-	return s
-}
-
 // The input for the DescribeDeliveryChannels action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeDeliveryChannelsRequest
 type DescribeDeliveryChannelsInput struct {
@@ -3810,12 +3114,6 @@ func (s DescribeDeliveryChannelsInput) String() string {
 // GoString returns the string representation
 func (s DescribeDeliveryChannelsInput) GoString() string {
 	return s.String()
-}
-
-// SetDeliveryChannelNames sets the DeliveryChannelNames field's value.
-func (s *DescribeDeliveryChannelsInput) SetDeliveryChannelNames(v []string) *DescribeDeliveryChannelsInput {
-	s.DeliveryChannelNames = v
-	return s
 }
 
 // The output for the DescribeDeliveryChannels action.
@@ -3842,12 +3140,6 @@ func (s DescribeDeliveryChannelsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeDeliveryChannelsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeliveryChannels sets the DeliveryChannels field's value.
-func (s *DescribeDeliveryChannelsOutput) SetDeliveryChannels(v []DeliveryChannel) *DescribeDeliveryChannelsOutput {
-	s.DeliveryChannels = v
-	return s
 }
 
 // Identifies an AWS resource and indicates whether it complies with the AWS
@@ -3938,36 +3230,6 @@ func (s *Evaluation) Validate() error {
 	return nil
 }
 
-// SetAnnotation sets the Annotation field's value.
-func (s *Evaluation) SetAnnotation(v string) *Evaluation {
-	s.Annotation = &v
-	return s
-}
-
-// SetComplianceResourceId sets the ComplianceResourceId field's value.
-func (s *Evaluation) SetComplianceResourceId(v string) *Evaluation {
-	s.ComplianceResourceId = &v
-	return s
-}
-
-// SetComplianceResourceType sets the ComplianceResourceType field's value.
-func (s *Evaluation) SetComplianceResourceType(v string) *Evaluation {
-	s.ComplianceResourceType = &v
-	return s
-}
-
-// SetComplianceType sets the ComplianceType field's value.
-func (s *Evaluation) SetComplianceType(v ComplianceType) *Evaluation {
-	s.ComplianceType = v
-	return s
-}
-
-// SetOrderingTimestamp sets the OrderingTimestamp field's value.
-func (s *Evaluation) SetOrderingTimestamp(v time.Time) *Evaluation {
-	s.OrderingTimestamp = &v
-	return s
-}
-
 // The details of an AWS Config evaluation. Provides the AWS resource that was
 // evaluated, the compliance of the resource, related timestamps, and supplementary
 // information.
@@ -4011,42 +3273,6 @@ func (s EvaluationResult) GoString() string {
 	return s.String()
 }
 
-// SetAnnotation sets the Annotation field's value.
-func (s *EvaluationResult) SetAnnotation(v string) *EvaluationResult {
-	s.Annotation = &v
-	return s
-}
-
-// SetComplianceType sets the ComplianceType field's value.
-func (s *EvaluationResult) SetComplianceType(v ComplianceType) *EvaluationResult {
-	s.ComplianceType = v
-	return s
-}
-
-// SetConfigRuleInvokedTime sets the ConfigRuleInvokedTime field's value.
-func (s *EvaluationResult) SetConfigRuleInvokedTime(v time.Time) *EvaluationResult {
-	s.ConfigRuleInvokedTime = &v
-	return s
-}
-
-// SetEvaluationResultIdentifier sets the EvaluationResultIdentifier field's value.
-func (s *EvaluationResult) SetEvaluationResultIdentifier(v *EvaluationResultIdentifier) *EvaluationResult {
-	s.EvaluationResultIdentifier = v
-	return s
-}
-
-// SetResultRecordedTime sets the ResultRecordedTime field's value.
-func (s *EvaluationResult) SetResultRecordedTime(v time.Time) *EvaluationResult {
-	s.ResultRecordedTime = &v
-	return s
-}
-
-// SetResultToken sets the ResultToken field's value.
-func (s *EvaluationResult) SetResultToken(v string) *EvaluationResult {
-	s.ResultToken = &v
-	return s
-}
-
 // Uniquely identifies an evaluation result.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationResultIdentifier
 type EvaluationResultIdentifier struct {
@@ -4073,18 +3299,6 @@ func (s EvaluationResultIdentifier) GoString() string {
 	return s.String()
 }
 
-// SetEvaluationResultQualifier sets the EvaluationResultQualifier field's value.
-func (s *EvaluationResultIdentifier) SetEvaluationResultQualifier(v *EvaluationResultQualifier) *EvaluationResultIdentifier {
-	s.EvaluationResultQualifier = v
-	return s
-}
-
-// SetOrderingTimestamp sets the OrderingTimestamp field's value.
-func (s *EvaluationResultIdentifier) SetOrderingTimestamp(v time.Time) *EvaluationResultIdentifier {
-	s.OrderingTimestamp = &v
-	return s
-}
-
 // Identifies an AWS Config rule that evaluated an AWS resource, and provides
 // the type and ID of the resource that the rule evaluated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/EvaluationResultQualifier
@@ -4109,24 +3323,6 @@ func (s EvaluationResultQualifier) String() string {
 // GoString returns the string representation
 func (s EvaluationResultQualifier) GoString() string {
 	return s.String()
-}
-
-// SetConfigRuleName sets the ConfigRuleName field's value.
-func (s *EvaluationResultQualifier) SetConfigRuleName(v string) *EvaluationResultQualifier {
-	s.ConfigRuleName = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *EvaluationResultQualifier) SetResourceId(v string) *EvaluationResultQualifier {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *EvaluationResultQualifier) SetResourceType(v string) *EvaluationResultQualifier {
-	s.ResourceType = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByConfigRuleRequest
@@ -4180,30 +3376,6 @@ func (s *GetComplianceDetailsByConfigRuleInput) Validate() error {
 	return nil
 }
 
-// SetComplianceTypes sets the ComplianceTypes field's value.
-func (s *GetComplianceDetailsByConfigRuleInput) SetComplianceTypes(v []ComplianceType) *GetComplianceDetailsByConfigRuleInput {
-	s.ComplianceTypes = v
-	return s
-}
-
-// SetConfigRuleName sets the ConfigRuleName field's value.
-func (s *GetComplianceDetailsByConfigRuleInput) SetConfigRuleName(v string) *GetComplianceDetailsByConfigRuleInput {
-	s.ConfigRuleName = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *GetComplianceDetailsByConfigRuleInput) SetLimit(v int64) *GetComplianceDetailsByConfigRuleInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetComplianceDetailsByConfigRuleInput) SetNextToken(v string) *GetComplianceDetailsByConfigRuleInput {
-	s.NextToken = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByConfigRuleResponse
 type GetComplianceDetailsByConfigRuleOutput struct {
 	_ struct{} `type:"structure"`
@@ -4232,18 +3404,6 @@ func (s GetComplianceDetailsByConfigRuleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetComplianceDetailsByConfigRuleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEvaluationResults sets the EvaluationResults field's value.
-func (s *GetComplianceDetailsByConfigRuleOutput) SetEvaluationResults(v []EvaluationResult) *GetComplianceDetailsByConfigRuleOutput {
-	s.EvaluationResults = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetComplianceDetailsByConfigRuleOutput) SetNextToken(v string) *GetComplianceDetailsByConfigRuleOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByResourceRequest
@@ -4304,30 +3464,6 @@ func (s *GetComplianceDetailsByResourceInput) Validate() error {
 	return nil
 }
 
-// SetComplianceTypes sets the ComplianceTypes field's value.
-func (s *GetComplianceDetailsByResourceInput) SetComplianceTypes(v []ComplianceType) *GetComplianceDetailsByResourceInput {
-	s.ComplianceTypes = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetComplianceDetailsByResourceInput) SetNextToken(v string) *GetComplianceDetailsByResourceInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *GetComplianceDetailsByResourceInput) SetResourceId(v string) *GetComplianceDetailsByResourceInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *GetComplianceDetailsByResourceInput) SetResourceType(v string) *GetComplianceDetailsByResourceInput {
-	s.ResourceType = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceDetailsByResourceResponse
 type GetComplianceDetailsByResourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -4355,18 +3491,6 @@ func (s GetComplianceDetailsByResourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetComplianceDetailsByResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetEvaluationResults sets the EvaluationResults field's value.
-func (s *GetComplianceDetailsByResourceOutput) SetEvaluationResults(v []EvaluationResult) *GetComplianceDetailsByResourceOutput {
-	s.EvaluationResults = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetComplianceDetailsByResourceOutput) SetNextToken(v string) *GetComplianceDetailsByResourceOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByConfigRuleInput
@@ -4410,12 +3534,6 @@ func (s GetComplianceSummaryByConfigRuleOutput) SDKResponseMetadata() aws.Respon
 	return s.responseMetadata
 }
 
-// SetComplianceSummary sets the ComplianceSummary field's value.
-func (s *GetComplianceSummaryByConfigRuleOutput) SetComplianceSummary(v *ComplianceSummary) *GetComplianceSummaryByConfigRuleOutput {
-	s.ComplianceSummary = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByResourceTypeRequest
 type GetComplianceSummaryByResourceTypeInput struct {
 	_ struct{} `type:"structure"`
@@ -4437,12 +3555,6 @@ func (s GetComplianceSummaryByResourceTypeInput) String() string {
 // GoString returns the string representation
 func (s GetComplianceSummaryByResourceTypeInput) GoString() string {
 	return s.String()
-}
-
-// SetResourceTypes sets the ResourceTypes field's value.
-func (s *GetComplianceSummaryByResourceTypeInput) SetResourceTypes(v []string) *GetComplianceSummaryByResourceTypeInput {
-	s.ResourceTypes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetComplianceSummaryByResourceTypeResponse
@@ -4470,12 +3582,6 @@ func (s GetComplianceSummaryByResourceTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetComplianceSummaryByResourceTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetComplianceSummariesByResourceType sets the ComplianceSummariesByResourceType field's value.
-func (s *GetComplianceSummaryByResourceTypeOutput) SetComplianceSummariesByResourceType(v []ComplianceSummaryByResourceType) *GetComplianceSummaryByResourceTypeOutput {
-	s.ComplianceSummariesByResourceType = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetDiscoveredResourceCountsRequest
@@ -4512,24 +3618,6 @@ func (s GetDiscoveredResourceCountsInput) String() string {
 // GoString returns the string representation
 func (s GetDiscoveredResourceCountsInput) GoString() string {
 	return s.String()
-}
-
-// SetLimit sets the Limit field's value.
-func (s *GetDiscoveredResourceCountsInput) SetLimit(v int64) *GetDiscoveredResourceCountsInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetDiscoveredResourceCountsInput) SetNextToken(v string) *GetDiscoveredResourceCountsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceTypes sets the ResourceTypes field's value.
-func (s *GetDiscoveredResourceCountsInput) SetResourceTypes(v []string) *GetDiscoveredResourceCountsInput {
-	s.ResourceTypes = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetDiscoveredResourceCountsResponse
@@ -4576,24 +3664,6 @@ func (s GetDiscoveredResourceCountsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDiscoveredResourceCountsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetDiscoveredResourceCountsOutput) SetNextToken(v string) *GetDiscoveredResourceCountsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceCounts sets the ResourceCounts field's value.
-func (s *GetDiscoveredResourceCountsOutput) SetResourceCounts(v []ResourceCount) *GetDiscoveredResourceCountsOutput {
-	s.ResourceCounts = v
-	return s
-}
-
-// SetTotalDiscoveredResources sets the TotalDiscoveredResources field's value.
-func (s *GetDiscoveredResourceCountsOutput) SetTotalDiscoveredResources(v int64) *GetDiscoveredResourceCountsOutput {
-	s.TotalDiscoveredResources = &v
-	return s
 }
 
 // The input for the GetResourceConfigHistory action.
@@ -4661,48 +3731,6 @@ func (s *GetResourceConfigHistoryInput) Validate() error {
 	return nil
 }
 
-// SetChronologicalOrder sets the ChronologicalOrder field's value.
-func (s *GetResourceConfigHistoryInput) SetChronologicalOrder(v ChronologicalOrder) *GetResourceConfigHistoryInput {
-	s.ChronologicalOrder = v
-	return s
-}
-
-// SetEarlierTime sets the EarlierTime field's value.
-func (s *GetResourceConfigHistoryInput) SetEarlierTime(v time.Time) *GetResourceConfigHistoryInput {
-	s.EarlierTime = &v
-	return s
-}
-
-// SetLaterTime sets the LaterTime field's value.
-func (s *GetResourceConfigHistoryInput) SetLaterTime(v time.Time) *GetResourceConfigHistoryInput {
-	s.LaterTime = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *GetResourceConfigHistoryInput) SetLimit(v int64) *GetResourceConfigHistoryInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetResourceConfigHistoryInput) SetNextToken(v string) *GetResourceConfigHistoryInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *GetResourceConfigHistoryInput) SetResourceId(v string) *GetResourceConfigHistoryInput {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *GetResourceConfigHistoryInput) SetResourceType(v ResourceType) *GetResourceConfigHistoryInput {
-	s.ResourceType = v
-	return s
-}
-
 // The output for the GetResourceConfigHistory action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/GetResourceConfigHistoryResponse
 type GetResourceConfigHistoryOutput struct {
@@ -4731,18 +3759,6 @@ func (s GetResourceConfigHistoryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetResourceConfigHistoryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetConfigurationItems sets the ConfigurationItems field's value.
-func (s *GetResourceConfigHistoryOutput) SetConfigurationItems(v []ConfigurationItem) *GetResourceConfigHistoryOutput {
-	s.ConfigurationItems = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *GetResourceConfigHistoryOutput) SetNextToken(v string) *GetResourceConfigHistoryOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListDiscoveredResourcesRequest
@@ -4801,42 +3817,6 @@ func (s *ListDiscoveredResourcesInput) Validate() error {
 	return nil
 }
 
-// SetIncludeDeletedResources sets the IncludeDeletedResources field's value.
-func (s *ListDiscoveredResourcesInput) SetIncludeDeletedResources(v bool) *ListDiscoveredResourcesInput {
-	s.IncludeDeletedResources = &v
-	return s
-}
-
-// SetLimit sets the Limit field's value.
-func (s *ListDiscoveredResourcesInput) SetLimit(v int64) *ListDiscoveredResourcesInput {
-	s.Limit = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDiscoveredResourcesInput) SetNextToken(v string) *ListDiscoveredResourcesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceIds sets the ResourceIds field's value.
-func (s *ListDiscoveredResourcesInput) SetResourceIds(v []string) *ListDiscoveredResourcesInput {
-	s.ResourceIds = v
-	return s
-}
-
-// SetResourceName sets the ResourceName field's value.
-func (s *ListDiscoveredResourcesInput) SetResourceName(v string) *ListDiscoveredResourcesInput {
-	s.ResourceName = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ListDiscoveredResourcesInput) SetResourceType(v ResourceType) *ListDiscoveredResourcesInput {
-	s.ResourceType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ListDiscoveredResourcesResponse
 type ListDiscoveredResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -4865,18 +3845,6 @@ func (s ListDiscoveredResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDiscoveredResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDiscoveredResourcesOutput) SetNextToken(v string) *ListDiscoveredResourcesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetResourceIdentifiers sets the ResourceIdentifiers field's value.
-func (s *ListDiscoveredResourcesOutput) SetResourceIdentifiers(v []ResourceIdentifier) *ListDiscoveredResourcesOutput {
-	s.ResourceIdentifiers = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRuleRequest
@@ -4916,12 +3884,6 @@ func (s *PutConfigRuleInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigRule sets the ConfigRule field's value.
-func (s *PutConfigRuleInput) SetConfigRule(v *ConfigRule) *PutConfigRuleInput {
-	s.ConfigRule = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigRuleOutput
@@ -4987,12 +3949,6 @@ func (s *PutConfigurationRecorderInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationRecorder sets the ConfigurationRecorder field's value.
-func (s *PutConfigurationRecorderInput) SetConfigurationRecorder(v *ConfigurationRecorder) *PutConfigurationRecorderInput {
-	s.ConfigurationRecorder = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutConfigurationRecorderOutput
 type PutConfigurationRecorderOutput struct {
 	_ struct{} `type:"structure"`
@@ -5054,12 +4010,6 @@ func (s *PutDeliveryChannelInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeliveryChannel sets the DeliveryChannel field's value.
-func (s *PutDeliveryChannelInput) SetDeliveryChannel(v *DeliveryChannel) *PutDeliveryChannelInput {
-	s.DeliveryChannel = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutDeliveryChannelOutput
@@ -5140,24 +4090,6 @@ func (s *PutEvaluationsInput) Validate() error {
 	return nil
 }
 
-// SetEvaluations sets the Evaluations field's value.
-func (s *PutEvaluationsInput) SetEvaluations(v []Evaluation) *PutEvaluationsInput {
-	s.Evaluations = v
-	return s
-}
-
-// SetResultToken sets the ResultToken field's value.
-func (s *PutEvaluationsInput) SetResultToken(v string) *PutEvaluationsInput {
-	s.ResultToken = &v
-	return s
-}
-
-// SetTestMode sets the TestMode field's value.
-func (s *PutEvaluationsInput) SetTestMode(v bool) *PutEvaluationsInput {
-	s.TestMode = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutEvaluationsResponse
 type PutEvaluationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5181,12 +4113,6 @@ func (s PutEvaluationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutEvaluationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetFailedEvaluations sets the FailedEvaluations field's value.
-func (s *PutEvaluationsOutput) SetFailedEvaluations(v []Evaluation) *PutEvaluationsOutput {
-	s.FailedEvaluations = v
-	return s
 }
 
 // Specifies the types of AWS resource for which AWS Config records configuration
@@ -5273,24 +4199,6 @@ func (s RecordingGroup) GoString() string {
 	return s.String()
 }
 
-// SetAllSupported sets the AllSupported field's value.
-func (s *RecordingGroup) SetAllSupported(v bool) *RecordingGroup {
-	s.AllSupported = &v
-	return s
-}
-
-// SetIncludeGlobalResourceTypes sets the IncludeGlobalResourceTypes field's value.
-func (s *RecordingGroup) SetIncludeGlobalResourceTypes(v bool) *RecordingGroup {
-	s.IncludeGlobalResourceTypes = &v
-	return s
-}
-
-// SetResourceTypes sets the ResourceTypes field's value.
-func (s *RecordingGroup) SetResourceTypes(v []ResourceType) *RecordingGroup {
-	s.ResourceTypes = v
-	return s
-}
-
 // The relationship of the related resource to the main resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Relationship
 type Relationship struct {
@@ -5319,30 +4227,6 @@ func (s Relationship) GoString() string {
 	return s.String()
 }
 
-// SetRelationshipName sets the RelationshipName field's value.
-func (s *Relationship) SetRelationshipName(v string) *Relationship {
-	s.RelationshipName = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *Relationship) SetResourceId(v string) *Relationship {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceName sets the ResourceName field's value.
-func (s *Relationship) SetResourceName(v string) *Relationship {
-	s.ResourceName = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *Relationship) SetResourceType(v ResourceType) *Relationship {
-	s.ResourceType = v
-	return s
-}
-
 // An object that contains the resource type and the number of resources.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/ResourceCount
 type ResourceCount struct {
@@ -5363,18 +4247,6 @@ func (s ResourceCount) String() string {
 // GoString returns the string representation
 func (s ResourceCount) GoString() string {
 	return s.String()
-}
-
-// SetCount sets the Count field's value.
-func (s *ResourceCount) SetCount(v int64) *ResourceCount {
-	s.Count = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ResourceCount) SetResourceType(v ResourceType) *ResourceCount {
-	s.ResourceType = v
-	return s
 }
 
 // The details that identify a resource that is discovered by AWS Config, including
@@ -5404,30 +4276,6 @@ func (s ResourceIdentifier) String() string {
 // GoString returns the string representation
 func (s ResourceIdentifier) GoString() string {
 	return s.String()
-}
-
-// SetResourceDeletionTime sets the ResourceDeletionTime field's value.
-func (s *ResourceIdentifier) SetResourceDeletionTime(v time.Time) *ResourceIdentifier {
-	s.ResourceDeletionTime = &v
-	return s
-}
-
-// SetResourceId sets the ResourceId field's value.
-func (s *ResourceIdentifier) SetResourceId(v string) *ResourceIdentifier {
-	s.ResourceId = &v
-	return s
-}
-
-// SetResourceName sets the ResourceName field's value.
-func (s *ResourceIdentifier) SetResourceName(v string) *ResourceIdentifier {
-	s.ResourceName = &v
-	return s
-}
-
-// SetResourceType sets the ResourceType field's value.
-func (s *ResourceIdentifier) SetResourceType(v ResourceType) *ResourceIdentifier {
-	s.ResourceType = v
-	return s
 }
 
 // Defines which resources trigger an evaluation for an AWS Config rule. The
@@ -5489,30 +4337,6 @@ func (s *Scope) Validate() error {
 	return nil
 }
 
-// SetComplianceResourceId sets the ComplianceResourceId field's value.
-func (s *Scope) SetComplianceResourceId(v string) *Scope {
-	s.ComplianceResourceId = &v
-	return s
-}
-
-// SetComplianceResourceTypes sets the ComplianceResourceTypes field's value.
-func (s *Scope) SetComplianceResourceTypes(v []string) *Scope {
-	s.ComplianceResourceTypes = v
-	return s
-}
-
-// SetTagKey sets the TagKey field's value.
-func (s *Scope) SetTagKey(v string) *Scope {
-	s.TagKey = &v
-	return s
-}
-
-// SetTagValue sets the TagValue field's value.
-func (s *Scope) SetTagValue(v string) *Scope {
-	s.TagValue = &v
-	return s
-}
-
 // Provides the AWS Config rule owner (AWS or customer), the rule identifier,
 // and the events that trigger the evaluation of your AWS resources.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/Source
@@ -5569,24 +4393,6 @@ func (s *Source) Validate() error {
 	return nil
 }
 
-// SetOwner sets the Owner field's value.
-func (s *Source) SetOwner(v Owner) *Source {
-	s.Owner = v
-	return s
-}
-
-// SetSourceDetails sets the SourceDetails field's value.
-func (s *Source) SetSourceDetails(v []SourceDetail) *Source {
-	s.SourceDetails = v
-	return s
-}
-
-// SetSourceIdentifier sets the SourceIdentifier field's value.
-func (s *Source) SetSourceIdentifier(v string) *Source {
-	s.SourceIdentifier = &v
-	return s
-}
-
 // Provides the source and the message types that trigger AWS Config to evaluate
 // your AWS resources against a rule. It also provides the frequency with which
 // you want AWS Config to run evaluations for the rule if the trigger type is
@@ -5641,24 +4447,6 @@ func (s SourceDetail) GoString() string {
 	return s.String()
 }
 
-// SetEventSource sets the EventSource field's value.
-func (s *SourceDetail) SetEventSource(v EventSource) *SourceDetail {
-	s.EventSource = v
-	return s
-}
-
-// SetMaximumExecutionFrequency sets the MaximumExecutionFrequency field's value.
-func (s *SourceDetail) SetMaximumExecutionFrequency(v MaximumExecutionFrequency) *SourceDetail {
-	s.MaximumExecutionFrequency = v
-	return s
-}
-
-// SetMessageType sets the MessageType field's value.
-func (s *SourceDetail) SetMessageType(v MessageType) *SourceDetail {
-	s.MessageType = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigRulesEvaluationRequest
 type StartConfigRulesEvaluationInput struct {
 	_ struct{} `type:"structure"`
@@ -5688,12 +4476,6 @@ func (s *StartConfigRulesEvaluationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetConfigRuleNames sets the ConfigRuleNames field's value.
-func (s *StartConfigRulesEvaluationInput) SetConfigRuleNames(v []string) *StartConfigRulesEvaluationInput {
-	s.ConfigRuleNames = v
-	return s
 }
 
 // The output when you start the evaluation for the specified Config rule.
@@ -5758,12 +4540,6 @@ func (s *StartConfigurationRecorderInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationRecorderName sets the ConfigurationRecorderName field's value.
-func (s *StartConfigurationRecorderInput) SetConfigurationRecorderName(v string) *StartConfigurationRecorderInput {
-	s.ConfigurationRecorderName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StartConfigurationRecorderOutput
 type StartConfigurationRecorderOutput struct {
 	_ struct{} `type:"structure"`
@@ -5825,12 +4601,6 @@ func (s *StopConfigurationRecorderInput) Validate() error {
 	return nil
 }
 
-// SetConfigurationRecorderName sets the ConfigurationRecorderName field's value.
-func (s *StopConfigurationRecorderInput) SetConfigurationRecorderName(v string) *StopConfigurationRecorderInput {
-	s.ConfigurationRecorderName = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/StopConfigurationRecorderOutput
 type StopConfigurationRecorderOutput struct {
 	_ struct{} `type:"structure"`
@@ -5861,6 +4631,15 @@ const (
 	ChronologicalOrderForward ChronologicalOrder = "Forward"
 )
 
+func (enum ChronologicalOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChronologicalOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComplianceType string
 
 // Enum values for ComplianceType
@@ -5870,6 +4649,15 @@ const (
 	ComplianceTypeNotApplicable    ComplianceType = "NOT_APPLICABLE"
 	ComplianceTypeInsufficientData ComplianceType = "INSUFFICIENT_DATA"
 )
+
+func (enum ComplianceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComplianceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ConfigRuleState string
 
@@ -5881,6 +4669,15 @@ const (
 	ConfigRuleStateEvaluating      ConfigRuleState = "EVALUATING"
 )
 
+func (enum ConfigRuleState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigRuleState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConfigurationItemStatus string
 
 // Enum values for ConfigurationItemStatus
@@ -5891,6 +4688,15 @@ const (
 	ConfigurationItemStatusDeleted    ConfigurationItemStatus = "Deleted"
 )
 
+func (enum ConfigurationItemStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationItemStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeliveryStatus string
 
 // Enum values for DeliveryStatus
@@ -5900,12 +4706,30 @@ const (
 	DeliveryStatusNotApplicable DeliveryStatus = "Not_Applicable"
 )
 
+func (enum DeliveryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeliveryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EventSource string
 
 // Enum values for EventSource
 const (
 	EventSourceAwsConfig EventSource = "aws.config"
 )
+
+func (enum EventSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MaximumExecutionFrequency string
 
@@ -5918,6 +4742,15 @@ const (
 	MaximumExecutionFrequencyTwentyFourHours MaximumExecutionFrequency = "TwentyFour_Hours"
 )
 
+func (enum MaximumExecutionFrequency) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MaximumExecutionFrequency) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MessageType string
 
 // Enum values for MessageType
@@ -5928,6 +4761,15 @@ const (
 	MessageTypeOversizedConfigurationItemChangeNotification MessageType = "OversizedConfigurationItemChangeNotification"
 )
 
+func (enum MessageType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MessageType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Owner string
 
 // Enum values for Owner
@@ -5935,6 +4777,15 @@ const (
 	OwnerCustomLambda Owner = "CUSTOM_LAMBDA"
 	OwnerAws          Owner = "AWS"
 )
+
+func (enum Owner) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Owner) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RecorderStatus string
 
@@ -5944,6 +4795,15 @@ const (
 	RecorderStatusSuccess RecorderStatus = "Success"
 	RecorderStatusFailure RecorderStatus = "Failure"
 )
+
+func (enum RecorderStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecorderStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ResourceType string
 
@@ -5990,4 +4850,22 @@ const (
 	ResourceTypeAwsAutoScalingLaunchConfiguration     ResourceType = "AWS::AutoScaling::LaunchConfiguration"
 	ResourceTypeAwsAutoScalingScalingPolicy           ResourceType = "AWS::AutoScaling::ScalingPolicy"
 	ResourceTypeAwsAutoScalingScheduledAction         ResourceType = "AWS::AutoScaling::ScheduledAction"
+	ResourceTypeAwsCodeBuildProject                   ResourceType = "AWS::CodeBuild::Project"
+	ResourceTypeAwsWafRateBasedRule                   ResourceType = "AWS::WAF::RateBasedRule"
+	ResourceTypeAwsWafRule                            ResourceType = "AWS::WAF::Rule"
+	ResourceTypeAwsWafWebAcl                          ResourceType = "AWS::WAF::WebACL"
+	ResourceTypeAwsWafregionalRateBasedRule           ResourceType = "AWS::WAFRegional::RateBasedRule"
+	ResourceTypeAwsWafregionalRule                    ResourceType = "AWS::WAFRegional::Rule"
+	ResourceTypeAwsWafregionalWebAcl                  ResourceType = "AWS::WAFRegional::WebACL"
+	ResourceTypeAwsCloudFrontDistribution             ResourceType = "AWS::CloudFront::Distribution"
+	ResourceTypeAwsCloudFrontStreamingDistribution    ResourceType = "AWS::CloudFront::StreamingDistribution"
 )
+
+func (enum ResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

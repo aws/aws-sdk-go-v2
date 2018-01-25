@@ -763,6 +763,55 @@ func (c *CodeDeploy) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupIn
 	return DeleteDeploymentGroupRequest{Request: req, Input: input}
 }
 
+const opDeleteGitHubAccountToken = "DeleteGitHubAccountToken"
+
+// DeleteGitHubAccountTokenRequest is a API request type for the DeleteGitHubAccountToken API operation.
+type DeleteGitHubAccountTokenRequest struct {
+	*aws.Request
+	Input *DeleteGitHubAccountTokenInput
+}
+
+// Send marshals and sends the DeleteGitHubAccountToken API request.
+func (r DeleteGitHubAccountTokenRequest) Send() (*DeleteGitHubAccountTokenOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteGitHubAccountTokenOutput), nil
+}
+
+// DeleteGitHubAccountTokenRequest returns a request value for making API operation for
+// AWS CodeDeploy.
+//
+// Deletes a GitHub account connection.
+//
+//    // Example sending a request using the DeleteGitHubAccountTokenRequest method.
+//    req := client.DeleteGitHubAccountTokenRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountToken
+func (c *CodeDeploy) DeleteGitHubAccountTokenRequest(input *DeleteGitHubAccountTokenInput) DeleteGitHubAccountTokenRequest {
+	op := &aws.Operation{
+		Name:       opDeleteGitHubAccountToken,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteGitHubAccountTokenInput{}
+	}
+
+	output := &DeleteGitHubAccountTokenOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteGitHubAccountTokenRequest{Request: req, Input: input}
+}
+
 const opDeregisterOnPremisesInstance = "DeregisterOnPremisesInstance"
 
 // DeregisterOnPremisesInstanceRequest is a API request type for the DeregisterOnPremisesInstance API operation.
@@ -1892,6 +1941,57 @@ func (c *CodeDeploy) ListOnPremisesInstancesRequest(input *ListOnPremisesInstanc
 	return ListOnPremisesInstancesRequest{Request: req, Input: input}
 }
 
+const opPutLifecycleEventHookExecutionStatus = "PutLifecycleEventHookExecutionStatus"
+
+// PutLifecycleEventHookExecutionStatusRequest is a API request type for the PutLifecycleEventHookExecutionStatus API operation.
+type PutLifecycleEventHookExecutionStatusRequest struct {
+	*aws.Request
+	Input *PutLifecycleEventHookExecutionStatusInput
+}
+
+// Send marshals and sends the PutLifecycleEventHookExecutionStatus API request.
+func (r PutLifecycleEventHookExecutionStatusRequest) Send() (*PutLifecycleEventHookExecutionStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutLifecycleEventHookExecutionStatusOutput), nil
+}
+
+// PutLifecycleEventHookExecutionStatusRequest returns a request value for making API operation for
+// AWS CodeDeploy.
+//
+// Sets the result of a Lambda validation function. The function validates one
+// or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns
+// Succeeded or Failed.
+//
+//    // Example sending a request using the PutLifecycleEventHookExecutionStatusRequest method.
+//    req := client.PutLifecycleEventHookExecutionStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatus
+func (c *CodeDeploy) PutLifecycleEventHookExecutionStatusRequest(input *PutLifecycleEventHookExecutionStatusInput) PutLifecycleEventHookExecutionStatusRequest {
+	op := &aws.Operation{
+		Name:       opPutLifecycleEventHookExecutionStatus,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutLifecycleEventHookExecutionStatusInput{}
+	}
+
+	output := &PutLifecycleEventHookExecutionStatusOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutLifecycleEventHookExecutionStatusRequest{Request: req, Input: input}
+}
+
 const opRegisterApplicationRevision = "RegisterApplicationRevision"
 
 // RegisterApplicationRevisionRequest is a API request type for the RegisterApplicationRevision API operation.
@@ -2296,18 +2396,6 @@ func (s *AddTagsToOnPremisesInstancesInput) Validate() error {
 	return nil
 }
 
-// SetInstanceNames sets the InstanceNames field's value.
-func (s *AddTagsToOnPremisesInstancesInput) SetInstanceNames(v []string) *AddTagsToOnPremisesInstancesInput {
-	s.InstanceNames = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *AddTagsToOnPremisesInstancesInput) SetTags(v []Tag) *AddTagsToOnPremisesInstancesInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AddTagsToOnPremisesInstancesOutput
 type AddTagsToOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2350,12 +2438,6 @@ func (s Alarm) GoString() string {
 	return s.String()
 }
 
-// SetName sets the Name field's value.
-func (s *Alarm) SetName(v string) *Alarm {
-	s.Name = &v
-	return s
-}
-
 // Information about alarms associated with the deployment group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AlarmConfiguration
 type AlarmConfiguration struct {
@@ -2390,24 +2472,6 @@ func (s AlarmConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetAlarms sets the Alarms field's value.
-func (s *AlarmConfiguration) SetAlarms(v []Alarm) *AlarmConfiguration {
-	s.Alarms = v
-	return s
-}
-
-// SetEnabled sets the Enabled field's value.
-func (s *AlarmConfiguration) SetEnabled(v bool) *AlarmConfiguration {
-	s.Enabled = &v
-	return s
-}
-
-// SetIgnorePollAlarmFailure sets the IgnorePollAlarmFailure field's value.
-func (s *AlarmConfiguration) SetIgnorePollAlarmFailure(v bool) *AlarmConfiguration {
-	s.IgnorePollAlarmFailure = &v
-	return s
-}
-
 // Information about an application.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ApplicationInfo
 type ApplicationInfo struct {
@@ -2418,6 +2482,10 @@ type ApplicationInfo struct {
 
 	// The application name.
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
+
+	// The destination platform type for deployment of the application (Lambda or
+	// Server).
+	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// The time at which the application was created.
 	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix"`
@@ -2438,36 +2506,6 @@ func (s ApplicationInfo) String() string {
 // GoString returns the string representation
 func (s ApplicationInfo) GoString() string {
 	return s.String()
-}
-
-// SetApplicationId sets the ApplicationId field's value.
-func (s *ApplicationInfo) SetApplicationId(v string) *ApplicationInfo {
-	s.ApplicationId = &v
-	return s
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *ApplicationInfo) SetApplicationName(v string) *ApplicationInfo {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetCreateTime sets the CreateTime field's value.
-func (s *ApplicationInfo) SetCreateTime(v time.Time) *ApplicationInfo {
-	s.CreateTime = &v
-	return s
-}
-
-// SetGitHubAccountName sets the GitHubAccountName field's value.
-func (s *ApplicationInfo) SetGitHubAccountName(v string) *ApplicationInfo {
-	s.GitHubAccountName = &v
-	return s
-}
-
-// SetLinkedToGitHub sets the LinkedToGitHub field's value.
-func (s *ApplicationInfo) SetLinkedToGitHub(v bool) *ApplicationInfo {
-	s.LinkedToGitHub = &v
-	return s
 }
 
 // Information about a configuration for automatically rolling back to a previous
@@ -2494,18 +2532,6 @@ func (s AutoRollbackConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetEnabled sets the Enabled field's value.
-func (s *AutoRollbackConfiguration) SetEnabled(v bool) *AutoRollbackConfiguration {
-	s.Enabled = &v
-	return s
-}
-
-// SetEvents sets the Events field's value.
-func (s *AutoRollbackConfiguration) SetEvents(v []AutoRollbackEvent) *AutoRollbackConfiguration {
-	s.Events = v
-	return s
-}
-
 // Information about an Auto Scaling group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/AutoScalingGroup
 type AutoScalingGroup struct {
@@ -2526,18 +2552,6 @@ func (s AutoScalingGroup) String() string {
 // GoString returns the string representation
 func (s AutoScalingGroup) GoString() string {
 	return s.String()
-}
-
-// SetHook sets the Hook field's value.
-func (s *AutoScalingGroup) SetHook(v string) *AutoScalingGroup {
-	s.Hook = &v
-	return s
-}
-
-// SetName sets the Name field's value.
-func (s *AutoScalingGroup) SetName(v string) *AutoScalingGroup {
-	s.Name = &v
-	return s
 }
 
 // Represents the input of a BatchGetApplicationRevisions operation.
@@ -2587,18 +2601,6 @@ func (s *BatchGetApplicationRevisionsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *BatchGetApplicationRevisionsInput) SetApplicationName(v string) *BatchGetApplicationRevisionsInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetRevisions sets the Revisions field's value.
-func (s *BatchGetApplicationRevisionsInput) SetRevisions(v []RevisionLocation) *BatchGetApplicationRevisionsInput {
-	s.Revisions = v
-	return s
-}
-
 // Represents the output of a BatchGetApplicationRevisions operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationRevisionsOutput
 type BatchGetApplicationRevisionsOutput struct {
@@ -2631,31 +2633,15 @@ func (s BatchGetApplicationRevisionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *BatchGetApplicationRevisionsOutput) SetApplicationName(v string) *BatchGetApplicationRevisionsOutput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *BatchGetApplicationRevisionsOutput) SetErrorMessage(v string) *BatchGetApplicationRevisionsOutput {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetRevisions sets the Revisions field's value.
-func (s *BatchGetApplicationRevisionsOutput) SetRevisions(v []RevisionInfo) *BatchGetApplicationRevisionsOutput {
-	s.Revisions = v
-	return s
-}
-
 // Represents the input of a BatchGetApplications operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetApplicationsInput
 type BatchGetApplicationsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of application names separated by spaces.
-	ApplicationNames []string `locationName:"applicationNames" type:"list"`
+	//
+	// ApplicationNames is a required field
+	ApplicationNames []string `locationName:"applicationNames" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2668,10 +2654,18 @@ func (s BatchGetApplicationsInput) GoString() string {
 	return s.String()
 }
 
-// SetApplicationNames sets the ApplicationNames field's value.
-func (s *BatchGetApplicationsInput) SetApplicationNames(v []string) *BatchGetApplicationsInput {
-	s.ApplicationNames = v
-	return s
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetApplicationsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetApplicationsInput"}
+
+	if s.ApplicationNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationNames"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Represents the output of a BatchGetApplications operation.
@@ -2698,12 +2692,6 @@ func (s BatchGetApplicationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetApplicationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationsInfo sets the ApplicationsInfo field's value.
-func (s *BatchGetApplicationsOutput) SetApplicationsInfo(v []ApplicationInfo) *BatchGetApplicationsOutput {
-	s.ApplicationsInfo = v
-	return s
 }
 
 // Represents the input of a BatchGetDeploymentGroups operation.
@@ -2754,18 +2742,6 @@ func (s *BatchGetDeploymentGroupsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *BatchGetDeploymentGroupsInput) SetApplicationName(v string) *BatchGetDeploymentGroupsInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetDeploymentGroupNames sets the DeploymentGroupNames field's value.
-func (s *BatchGetDeploymentGroupsInput) SetDeploymentGroupNames(v []string) *BatchGetDeploymentGroupsInput {
-	s.DeploymentGroupNames = v
-	return s
-}
-
 // Represents the output of a BatchGetDeploymentGroups operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentGroupsOutput
 type BatchGetDeploymentGroupsOutput struct {
@@ -2793,18 +2769,6 @@ func (s BatchGetDeploymentGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s BatchGetDeploymentGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeploymentGroupsInfo sets the DeploymentGroupsInfo field's value.
-func (s *BatchGetDeploymentGroupsOutput) SetDeploymentGroupsInfo(v []DeploymentGroupInfo) *BatchGetDeploymentGroupsOutput {
-	s.DeploymentGroupsInfo = v
-	return s
-}
-
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *BatchGetDeploymentGroupsOutput) SetErrorMessage(v string) *BatchGetDeploymentGroupsOutput {
-	s.ErrorMessage = &v
-	return s
 }
 
 // Represents the input of a BatchGetDeploymentInstances operation.
@@ -2851,18 +2815,6 @@ func (s *BatchGetDeploymentInstancesInput) Validate() error {
 	return nil
 }
 
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *BatchGetDeploymentInstancesInput) SetDeploymentId(v string) *BatchGetDeploymentInstancesInput {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetInstanceIds sets the InstanceIds field's value.
-func (s *BatchGetDeploymentInstancesInput) SetInstanceIds(v []string) *BatchGetDeploymentInstancesInput {
-	s.InstanceIds = v
-	return s
-}
-
 // Represents the output of a BatchGetDeploymentInstances operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentInstancesOutput
 type BatchGetDeploymentInstancesOutput struct {
@@ -2892,25 +2844,15 @@ func (s BatchGetDeploymentInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *BatchGetDeploymentInstancesOutput) SetErrorMessage(v string) *BatchGetDeploymentInstancesOutput {
-	s.ErrorMessage = &v
-	return s
-}
-
-// SetInstancesSummary sets the InstancesSummary field's value.
-func (s *BatchGetDeploymentInstancesOutput) SetInstancesSummary(v []InstanceSummary) *BatchGetDeploymentInstancesOutput {
-	s.InstancesSummary = v
-	return s
-}
-
 // Represents the input of a BatchGetDeployments operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetDeploymentsInput
 type BatchGetDeploymentsInput struct {
 	_ struct{} `type:"structure"`
 
 	// A list of deployment IDs, separated by spaces.
-	DeploymentIds []string `locationName:"deploymentIds" type:"list"`
+	//
+	// DeploymentIds is a required field
+	DeploymentIds []string `locationName:"deploymentIds" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2923,10 +2865,18 @@ func (s BatchGetDeploymentsInput) GoString() string {
 	return s.String()
 }
 
-// SetDeploymentIds sets the DeploymentIds field's value.
-func (s *BatchGetDeploymentsInput) SetDeploymentIds(v []string) *BatchGetDeploymentsInput {
-	s.DeploymentIds = v
-	return s
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetDeploymentsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetDeploymentsInput"}
+
+	if s.DeploymentIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DeploymentIds"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Represents the output of a BatchGetDeployments operation.
@@ -2955,19 +2905,15 @@ func (s BatchGetDeploymentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeploymentsInfo sets the DeploymentsInfo field's value.
-func (s *BatchGetDeploymentsOutput) SetDeploymentsInfo(v []DeploymentInfo) *BatchGetDeploymentsOutput {
-	s.DeploymentsInfo = v
-	return s
-}
-
 // Represents the input of a BatchGetOnPremisesInstances operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BatchGetOnPremisesInstancesInput
 type BatchGetOnPremisesInstancesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The names of the on-premises instances about which to get information.
-	InstanceNames []string `locationName:"instanceNames" type:"list"`
+	//
+	// InstanceNames is a required field
+	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
 }
 
 // String returns the string representation
@@ -2980,10 +2926,18 @@ func (s BatchGetOnPremisesInstancesInput) GoString() string {
 	return s.String()
 }
 
-// SetInstanceNames sets the InstanceNames field's value.
-func (s *BatchGetOnPremisesInstancesInput) SetInstanceNames(v []string) *BatchGetOnPremisesInstancesInput {
-	s.InstanceNames = v
-	return s
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetOnPremisesInstancesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetOnPremisesInstancesInput"}
+
+	if s.InstanceNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceNames"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Represents the output of a BatchGetOnPremisesInstances operation.
@@ -3012,12 +2966,6 @@ func (s BatchGetOnPremisesInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInstanceInfos sets the InstanceInfos field's value.
-func (s *BatchGetOnPremisesInstancesOutput) SetInstanceInfos(v []InstanceInfo) *BatchGetOnPremisesInstancesOutput {
-	s.InstanceInfos = v
-	return s
-}
-
 // Information about blue/green deployment options for a deployment group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/BlueGreenDeploymentConfiguration
 type BlueGreenDeploymentConfiguration struct {
@@ -3044,24 +2992,6 @@ func (s BlueGreenDeploymentConfiguration) String() string {
 // GoString returns the string representation
 func (s BlueGreenDeploymentConfiguration) GoString() string {
 	return s.String()
-}
-
-// SetDeploymentReadyOption sets the DeploymentReadyOption field's value.
-func (s *BlueGreenDeploymentConfiguration) SetDeploymentReadyOption(v *DeploymentReadyOption) *BlueGreenDeploymentConfiguration {
-	s.DeploymentReadyOption = v
-	return s
-}
-
-// SetGreenFleetProvisioningOption sets the GreenFleetProvisioningOption field's value.
-func (s *BlueGreenDeploymentConfiguration) SetGreenFleetProvisioningOption(v *GreenFleetProvisioningOption) *BlueGreenDeploymentConfiguration {
-	s.GreenFleetProvisioningOption = v
-	return s
-}
-
-// SetTerminateBlueInstancesOnDeploymentSuccess sets the TerminateBlueInstancesOnDeploymentSuccess field's value.
-func (s *BlueGreenDeploymentConfiguration) SetTerminateBlueInstancesOnDeploymentSuccess(v *BlueInstanceTerminationOption) *BlueGreenDeploymentConfiguration {
-	s.TerminateBlueInstancesOnDeploymentSuccess = v
-	return s
 }
 
 // Information about whether instances in the original environment are terminated
@@ -3094,18 +3024,6 @@ func (s BlueInstanceTerminationOption) GoString() string {
 	return s.String()
 }
 
-// SetAction sets the Action field's value.
-func (s *BlueInstanceTerminationOption) SetAction(v InstanceAction) *BlueInstanceTerminationOption {
-	s.Action = v
-	return s
-}
-
-// SetTerminationWaitTimeInMinutes sets the TerminationWaitTimeInMinutes field's value.
-func (s *BlueInstanceTerminationOption) SetTerminationWaitTimeInMinutes(v int64) *BlueInstanceTerminationOption {
-	s.TerminationWaitTimeInMinutes = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeploymentInput
 type ContinueDeploymentInput struct {
 	_ struct{} `type:"structure"`
@@ -3123,12 +3041,6 @@ func (s ContinueDeploymentInput) String() string {
 // GoString returns the string representation
 func (s ContinueDeploymentInput) GoString() string {
 	return s.String()
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *ContinueDeploymentInput) SetDeploymentId(v string) *ContinueDeploymentInput {
-	s.DeploymentId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ContinueDeploymentOutput
@@ -3163,6 +3075,9 @@ type CreateApplicationInput struct {
 	//
 	// ApplicationName is a required field
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string" required:"true"`
+
+	// The destination platform type for the deployment (Lambda or Server).
+	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -3192,12 +3107,6 @@ func (s *CreateApplicationInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *CreateApplicationInput) SetApplicationName(v string) *CreateApplicationInput {
-	s.ApplicationName = &v
-	return s
-}
-
 // Represents the output of a CreateApplication operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateApplicationOutput
 type CreateApplicationOutput struct {
@@ -3224,16 +3133,13 @@ func (s CreateApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetApplicationId sets the ApplicationId field's value.
-func (s *CreateApplicationOutput) SetApplicationId(v string) *CreateApplicationOutput {
-	s.ApplicationId = &v
-	return s
-}
-
 // Represents the input of a CreateDeploymentConfig operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentConfigInput
 type CreateDeploymentConfigInput struct {
 	_ struct{} `type:"structure"`
+
+	// The destination platform type for the deployment (Lambda or Server>).
+	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// The name of the deployment configuration to create.
 	//
@@ -3259,9 +3165,10 @@ type CreateDeploymentConfigInput struct {
 	//
 	// For example, to set a minimum of 95% healthy instance, specify a type of
 	// FLEET_PERCENT and a value of 95.
-	//
-	// MinimumHealthyHosts is a required field
-	MinimumHealthyHosts *MinimumHealthyHosts `locationName:"minimumHealthyHosts" type:"structure" required:"true"`
+	MinimumHealthyHosts *MinimumHealthyHosts `locationName:"minimumHealthyHosts" type:"structure"`
+
+	// The configuration that specifies how the deployment traffic will be routed.
+	TrafficRoutingConfig *TrafficRoutingConfig `locationName:"trafficRoutingConfig" type:"structure"`
 }
 
 // String returns the string representation
@@ -3285,26 +3192,10 @@ func (s *CreateDeploymentConfigInput) Validate() error {
 		invalidParams.Add(aws.NewErrParamMinLen("DeploymentConfigName", 1))
 	}
 
-	if s.MinimumHealthyHosts == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MinimumHealthyHosts"))
-	}
-
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeploymentConfigName sets the DeploymentConfigName field's value.
-func (s *CreateDeploymentConfigInput) SetDeploymentConfigName(v string) *CreateDeploymentConfigInput {
-	s.DeploymentConfigName = &v
-	return s
-}
-
-// SetMinimumHealthyHosts sets the MinimumHealthyHosts field's value.
-func (s *CreateDeploymentConfigInput) SetMinimumHealthyHosts(v *MinimumHealthyHosts) *CreateDeploymentConfigInput {
-	s.MinimumHealthyHosts = v
-	return s
 }
 
 // Represents the output of a CreateDeploymentConfig operation.
@@ -3331,12 +3222,6 @@ func (s CreateDeploymentConfigOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDeploymentConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeploymentConfigId sets the DeploymentConfigId field's value.
-func (s *CreateDeploymentConfigOutput) SetDeploymentConfigId(v string) *CreateDeploymentConfigOutput {
-	s.DeploymentConfigId = &v
-	return s
 }
 
 // Represents the input of a CreateDeploymentGroup operation.
@@ -3463,96 +3348,6 @@ func (s *CreateDeploymentGroupInput) Validate() error {
 	return nil
 }
 
-// SetAlarmConfiguration sets the AlarmConfiguration field's value.
-func (s *CreateDeploymentGroupInput) SetAlarmConfiguration(v *AlarmConfiguration) *CreateDeploymentGroupInput {
-	s.AlarmConfiguration = v
-	return s
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *CreateDeploymentGroupInput) SetApplicationName(v string) *CreateDeploymentGroupInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetAutoRollbackConfiguration sets the AutoRollbackConfiguration field's value.
-func (s *CreateDeploymentGroupInput) SetAutoRollbackConfiguration(v *AutoRollbackConfiguration) *CreateDeploymentGroupInput {
-	s.AutoRollbackConfiguration = v
-	return s
-}
-
-// SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *CreateDeploymentGroupInput) SetAutoScalingGroups(v []string) *CreateDeploymentGroupInput {
-	s.AutoScalingGroups = v
-	return s
-}
-
-// SetBlueGreenDeploymentConfiguration sets the BlueGreenDeploymentConfiguration field's value.
-func (s *CreateDeploymentGroupInput) SetBlueGreenDeploymentConfiguration(v *BlueGreenDeploymentConfiguration) *CreateDeploymentGroupInput {
-	s.BlueGreenDeploymentConfiguration = v
-	return s
-}
-
-// SetDeploymentConfigName sets the DeploymentConfigName field's value.
-func (s *CreateDeploymentGroupInput) SetDeploymentConfigName(v string) *CreateDeploymentGroupInput {
-	s.DeploymentConfigName = &v
-	return s
-}
-
-// SetDeploymentGroupName sets the DeploymentGroupName field's value.
-func (s *CreateDeploymentGroupInput) SetDeploymentGroupName(v string) *CreateDeploymentGroupInput {
-	s.DeploymentGroupName = &v
-	return s
-}
-
-// SetDeploymentStyle sets the DeploymentStyle field's value.
-func (s *CreateDeploymentGroupInput) SetDeploymentStyle(v *DeploymentStyle) *CreateDeploymentGroupInput {
-	s.DeploymentStyle = v
-	return s
-}
-
-// SetEc2TagFilters sets the Ec2TagFilters field's value.
-func (s *CreateDeploymentGroupInput) SetEc2TagFilters(v []EC2TagFilter) *CreateDeploymentGroupInput {
-	s.Ec2TagFilters = v
-	return s
-}
-
-// SetEc2TagSet sets the Ec2TagSet field's value.
-func (s *CreateDeploymentGroupInput) SetEc2TagSet(v *EC2TagSet) *CreateDeploymentGroupInput {
-	s.Ec2TagSet = v
-	return s
-}
-
-// SetLoadBalancerInfo sets the LoadBalancerInfo field's value.
-func (s *CreateDeploymentGroupInput) SetLoadBalancerInfo(v *LoadBalancerInfo) *CreateDeploymentGroupInput {
-	s.LoadBalancerInfo = v
-	return s
-}
-
-// SetOnPremisesInstanceTagFilters sets the OnPremisesInstanceTagFilters field's value.
-func (s *CreateDeploymentGroupInput) SetOnPremisesInstanceTagFilters(v []TagFilter) *CreateDeploymentGroupInput {
-	s.OnPremisesInstanceTagFilters = v
-	return s
-}
-
-// SetOnPremisesTagSet sets the OnPremisesTagSet field's value.
-func (s *CreateDeploymentGroupInput) SetOnPremisesTagSet(v *OnPremisesTagSet) *CreateDeploymentGroupInput {
-	s.OnPremisesTagSet = v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *CreateDeploymentGroupInput) SetServiceRoleArn(v string) *CreateDeploymentGroupInput {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetTriggerConfigurations sets the TriggerConfigurations field's value.
-func (s *CreateDeploymentGroupInput) SetTriggerConfigurations(v []TriggerConfig) *CreateDeploymentGroupInput {
-	s.TriggerConfigurations = v
-	return s
-}
-
 // Represents the output of a CreateDeploymentGroup operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentGroupOutput
 type CreateDeploymentGroupOutput struct {
@@ -3577,12 +3372,6 @@ func (s CreateDeploymentGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDeploymentGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeploymentGroupId sets the DeploymentGroupId field's value.
-func (s *CreateDeploymentGroupOutput) SetDeploymentGroupId(v string) *CreateDeploymentGroupOutput {
-	s.DeploymentGroupId = &v
-	return s
 }
 
 // Represents the input of a CreateDeployment operation.
@@ -3686,66 +3475,6 @@ func (s *CreateDeploymentInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *CreateDeploymentInput) SetApplicationName(v string) *CreateDeploymentInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetAutoRollbackConfiguration sets the AutoRollbackConfiguration field's value.
-func (s *CreateDeploymentInput) SetAutoRollbackConfiguration(v *AutoRollbackConfiguration) *CreateDeploymentInput {
-	s.AutoRollbackConfiguration = v
-	return s
-}
-
-// SetDeploymentConfigName sets the DeploymentConfigName field's value.
-func (s *CreateDeploymentInput) SetDeploymentConfigName(v string) *CreateDeploymentInput {
-	s.DeploymentConfigName = &v
-	return s
-}
-
-// SetDeploymentGroupName sets the DeploymentGroupName field's value.
-func (s *CreateDeploymentInput) SetDeploymentGroupName(v string) *CreateDeploymentInput {
-	s.DeploymentGroupName = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *CreateDeploymentInput) SetDescription(v string) *CreateDeploymentInput {
-	s.Description = &v
-	return s
-}
-
-// SetFileExistsBehavior sets the FileExistsBehavior field's value.
-func (s *CreateDeploymentInput) SetFileExistsBehavior(v FileExistsBehavior) *CreateDeploymentInput {
-	s.FileExistsBehavior = v
-	return s
-}
-
-// SetIgnoreApplicationStopFailures sets the IgnoreApplicationStopFailures field's value.
-func (s *CreateDeploymentInput) SetIgnoreApplicationStopFailures(v bool) *CreateDeploymentInput {
-	s.IgnoreApplicationStopFailures = &v
-	return s
-}
-
-// SetRevision sets the Revision field's value.
-func (s *CreateDeploymentInput) SetRevision(v *RevisionLocation) *CreateDeploymentInput {
-	s.Revision = v
-	return s
-}
-
-// SetTargetInstances sets the TargetInstances field's value.
-func (s *CreateDeploymentInput) SetTargetInstances(v *TargetInstances) *CreateDeploymentInput {
-	s.TargetInstances = v
-	return s
-}
-
-// SetUpdateOutdatedInstancesOnly sets the UpdateOutdatedInstancesOnly field's value.
-func (s *CreateDeploymentInput) SetUpdateOutdatedInstancesOnly(v bool) *CreateDeploymentInput {
-	s.UpdateOutdatedInstancesOnly = &v
-	return s
-}
-
 // Represents the output of a CreateDeployment operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentOutput
 type CreateDeploymentOutput struct {
@@ -3770,12 +3499,6 @@ func (s CreateDeploymentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDeploymentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *CreateDeploymentOutput) SetDeploymentId(v string) *CreateDeploymentOutput {
-	s.DeploymentId = &v
-	return s
 }
 
 // Represents the input of a DeleteApplication operation.
@@ -3815,12 +3538,6 @@ func (s *DeleteApplicationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *DeleteApplicationInput) SetApplicationName(v string) *DeleteApplicationInput {
-	s.ApplicationName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteApplicationOutput
@@ -3882,12 +3599,6 @@ func (s *DeleteDeploymentConfigInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeploymentConfigName sets the DeploymentConfigName field's value.
-func (s *DeleteDeploymentConfigInput) SetDeploymentConfigName(v string) *DeleteDeploymentConfigInput {
-	s.DeploymentConfigName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentConfigOutput
@@ -3963,18 +3674,6 @@ func (s *DeleteDeploymentGroupInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *DeleteDeploymentGroupInput) SetApplicationName(v string) *DeleteDeploymentGroupInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetDeploymentGroupName sets the DeploymentGroupName field's value.
-func (s *DeleteDeploymentGroupInput) SetDeploymentGroupName(v string) *DeleteDeploymentGroupInput {
-	s.DeploymentGroupName = &v
-	return s
-}
-
 // Represents the output of a DeleteDeploymentGroup operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteDeploymentGroupOutput
 type DeleteDeploymentGroupOutput struct {
@@ -4006,16 +3705,58 @@ func (s DeleteDeploymentGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHooksNotCleanedUp sets the HooksNotCleanedUp field's value.
-func (s *DeleteDeploymentGroupOutput) SetHooksNotCleanedUp(v []AutoScalingGroup) *DeleteDeploymentGroupOutput {
-	s.HooksNotCleanedUp = v
-	return s
+// Represents the input of a DeleteGitHubAccount operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountTokenInput
+type DeleteGitHubAccountTokenInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the GitHub account connection to delete.
+	TokenName *string `locationName:"tokenName" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteGitHubAccountTokenInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteGitHubAccountTokenInput) GoString() string {
+	return s.String()
+}
+
+// Represents the output of a DeleteGitHubAccountToken operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeleteGitHubAccountTokenOutput
+type DeleteGitHubAccountTokenOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The name of the GitHub account connection that was deleted.
+	TokenName *string `locationName:"tokenName" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteGitHubAccountTokenOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteGitHubAccountTokenOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteGitHubAccountTokenOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Information about a deployment configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentConfigInfo
 type DeploymentConfigInfo struct {
 	_ struct{} `type:"structure"`
+
+	// The destination platform type for the deployment (Lambda or Server).
+	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// The time at which the deployment configuration was created.
 	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix"`
@@ -4028,6 +3769,10 @@ type DeploymentConfigInfo struct {
 
 	// Information about the number or percentage of minimum healthy instance.
 	MinimumHealthyHosts *MinimumHealthyHosts `locationName:"minimumHealthyHosts" type:"structure"`
+
+	// The configuration specifying how the deployment traffic will be routed. Only
+	// deployments with a Lambda compute platform can specify this.
+	TrafficRoutingConfig *TrafficRoutingConfig `locationName:"trafficRoutingConfig" type:"structure"`
 }
 
 // String returns the string representation
@@ -4038,30 +3783,6 @@ func (s DeploymentConfigInfo) String() string {
 // GoString returns the string representation
 func (s DeploymentConfigInfo) GoString() string {
 	return s.String()
-}
-
-// SetCreateTime sets the CreateTime field's value.
-func (s *DeploymentConfigInfo) SetCreateTime(v time.Time) *DeploymentConfigInfo {
-	s.CreateTime = &v
-	return s
-}
-
-// SetDeploymentConfigId sets the DeploymentConfigId field's value.
-func (s *DeploymentConfigInfo) SetDeploymentConfigId(v string) *DeploymentConfigInfo {
-	s.DeploymentConfigId = &v
-	return s
-}
-
-// SetDeploymentConfigName sets the DeploymentConfigName field's value.
-func (s *DeploymentConfigInfo) SetDeploymentConfigName(v string) *DeploymentConfigInfo {
-	s.DeploymentConfigName = &v
-	return s
-}
-
-// SetMinimumHealthyHosts sets the MinimumHealthyHosts field's value.
-func (s *DeploymentConfigInfo) SetMinimumHealthyHosts(v *MinimumHealthyHosts) *DeploymentConfigInfo {
-	s.MinimumHealthyHosts = v
-	return s
 }
 
 // Information about a deployment group.
@@ -4084,6 +3805,9 @@ type DeploymentGroupInfo struct {
 
 	// Information about blue/green deployment options for a deployment group.
 	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration `locationName:"blueGreenDeploymentConfiguration" type:"structure"`
+
+	// The destination platform type for the deployment group (Lambda or Server).
+	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// The deployment configuration name.
 	DeploymentConfigName *string `locationName:"deploymentConfigName" min:"1" type:"string"`
@@ -4148,120 +3872,6 @@ func (s DeploymentGroupInfo) GoString() string {
 	return s.String()
 }
 
-// SetAlarmConfiguration sets the AlarmConfiguration field's value.
-func (s *DeploymentGroupInfo) SetAlarmConfiguration(v *AlarmConfiguration) *DeploymentGroupInfo {
-	s.AlarmConfiguration = v
-	return s
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *DeploymentGroupInfo) SetApplicationName(v string) *DeploymentGroupInfo {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetAutoRollbackConfiguration sets the AutoRollbackConfiguration field's value.
-func (s *DeploymentGroupInfo) SetAutoRollbackConfiguration(v *AutoRollbackConfiguration) *DeploymentGroupInfo {
-	s.AutoRollbackConfiguration = v
-	return s
-}
-
-// SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *DeploymentGroupInfo) SetAutoScalingGroups(v []AutoScalingGroup) *DeploymentGroupInfo {
-	s.AutoScalingGroups = v
-	return s
-}
-
-// SetBlueGreenDeploymentConfiguration sets the BlueGreenDeploymentConfiguration field's value.
-func (s *DeploymentGroupInfo) SetBlueGreenDeploymentConfiguration(v *BlueGreenDeploymentConfiguration) *DeploymentGroupInfo {
-	s.BlueGreenDeploymentConfiguration = v
-	return s
-}
-
-// SetDeploymentConfigName sets the DeploymentConfigName field's value.
-func (s *DeploymentGroupInfo) SetDeploymentConfigName(v string) *DeploymentGroupInfo {
-	s.DeploymentConfigName = &v
-	return s
-}
-
-// SetDeploymentGroupId sets the DeploymentGroupId field's value.
-func (s *DeploymentGroupInfo) SetDeploymentGroupId(v string) *DeploymentGroupInfo {
-	s.DeploymentGroupId = &v
-	return s
-}
-
-// SetDeploymentGroupName sets the DeploymentGroupName field's value.
-func (s *DeploymentGroupInfo) SetDeploymentGroupName(v string) *DeploymentGroupInfo {
-	s.DeploymentGroupName = &v
-	return s
-}
-
-// SetDeploymentStyle sets the DeploymentStyle field's value.
-func (s *DeploymentGroupInfo) SetDeploymentStyle(v *DeploymentStyle) *DeploymentGroupInfo {
-	s.DeploymentStyle = v
-	return s
-}
-
-// SetEc2TagFilters sets the Ec2TagFilters field's value.
-func (s *DeploymentGroupInfo) SetEc2TagFilters(v []EC2TagFilter) *DeploymentGroupInfo {
-	s.Ec2TagFilters = v
-	return s
-}
-
-// SetEc2TagSet sets the Ec2TagSet field's value.
-func (s *DeploymentGroupInfo) SetEc2TagSet(v *EC2TagSet) *DeploymentGroupInfo {
-	s.Ec2TagSet = v
-	return s
-}
-
-// SetLastAttemptedDeployment sets the LastAttemptedDeployment field's value.
-func (s *DeploymentGroupInfo) SetLastAttemptedDeployment(v *LastDeploymentInfo) *DeploymentGroupInfo {
-	s.LastAttemptedDeployment = v
-	return s
-}
-
-// SetLastSuccessfulDeployment sets the LastSuccessfulDeployment field's value.
-func (s *DeploymentGroupInfo) SetLastSuccessfulDeployment(v *LastDeploymentInfo) *DeploymentGroupInfo {
-	s.LastSuccessfulDeployment = v
-	return s
-}
-
-// SetLoadBalancerInfo sets the LoadBalancerInfo field's value.
-func (s *DeploymentGroupInfo) SetLoadBalancerInfo(v *LoadBalancerInfo) *DeploymentGroupInfo {
-	s.LoadBalancerInfo = v
-	return s
-}
-
-// SetOnPremisesInstanceTagFilters sets the OnPremisesInstanceTagFilters field's value.
-func (s *DeploymentGroupInfo) SetOnPremisesInstanceTagFilters(v []TagFilter) *DeploymentGroupInfo {
-	s.OnPremisesInstanceTagFilters = v
-	return s
-}
-
-// SetOnPremisesTagSet sets the OnPremisesTagSet field's value.
-func (s *DeploymentGroupInfo) SetOnPremisesTagSet(v *OnPremisesTagSet) *DeploymentGroupInfo {
-	s.OnPremisesTagSet = v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *DeploymentGroupInfo) SetServiceRoleArn(v string) *DeploymentGroupInfo {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetTargetRevision sets the TargetRevision field's value.
-func (s *DeploymentGroupInfo) SetTargetRevision(v *RevisionLocation) *DeploymentGroupInfo {
-	s.TargetRevision = v
-	return s
-}
-
-// SetTriggerConfigurations sets the TriggerConfigurations field's value.
-func (s *DeploymentGroupInfo) SetTriggerConfigurations(v []TriggerConfig) *DeploymentGroupInfo {
-	s.TriggerConfigurations = v
-	return s
-}
-
 // Information about a deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentInfo
 type DeploymentInfo struct {
@@ -4269,7 +3879,7 @@ type DeploymentInfo struct {
 
 	// Provides information about the results of a deployment, such as whether instances
 	// in the original environment in a blue/green deployment were not terminated.
-	AdditionalDeploymentStatusInfo *string `locationName:"additionalDeploymentStatusInfo" type:"string"`
+	AdditionalDeploymentStatusInfo *string `locationName:"additionalDeploymentStatusInfo" deprecated:"true" type:"string"`
 
 	// The application name.
 	ApplicationName *string `locationName:"applicationName" min:"1" type:"string"`
@@ -4283,6 +3893,9 @@ type DeploymentInfo struct {
 
 	// A timestamp indicating when the deployment was complete.
 	CompleteTime *time.Time `locationName:"completeTime" type:"timestamp" timestampFormat:"unix"`
+
+	// The destination platform type for the deployment (Lambda or Server).
+	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
 
 	// A timestamp indicating when the deployment was created.
 	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"unix"`
@@ -4307,6 +3920,9 @@ type DeploymentInfo struct {
 
 	// A summary of the deployment status of the instances in the deployment.
 	DeploymentOverview *DeploymentOverview `locationName:"deploymentOverview" type:"structure"`
+
+	// Messages that contain information about the status of a deployment.
+	DeploymentStatusMessages []string `locationName:"deploymentStatusMessages" type:"list"`
 
 	// Information about the type of deployment, either in-place or blue/green,
 	// you want to run and whether to route deployment traffic behind a load balancer.
@@ -4393,156 +4009,6 @@ func (s DeploymentInfo) GoString() string {
 	return s.String()
 }
 
-// SetAdditionalDeploymentStatusInfo sets the AdditionalDeploymentStatusInfo field's value.
-func (s *DeploymentInfo) SetAdditionalDeploymentStatusInfo(v string) *DeploymentInfo {
-	s.AdditionalDeploymentStatusInfo = &v
-	return s
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *DeploymentInfo) SetApplicationName(v string) *DeploymentInfo {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetAutoRollbackConfiguration sets the AutoRollbackConfiguration field's value.
-func (s *DeploymentInfo) SetAutoRollbackConfiguration(v *AutoRollbackConfiguration) *DeploymentInfo {
-	s.AutoRollbackConfiguration = v
-	return s
-}
-
-// SetBlueGreenDeploymentConfiguration sets the BlueGreenDeploymentConfiguration field's value.
-func (s *DeploymentInfo) SetBlueGreenDeploymentConfiguration(v *BlueGreenDeploymentConfiguration) *DeploymentInfo {
-	s.BlueGreenDeploymentConfiguration = v
-	return s
-}
-
-// SetCompleteTime sets the CompleteTime field's value.
-func (s *DeploymentInfo) SetCompleteTime(v time.Time) *DeploymentInfo {
-	s.CompleteTime = &v
-	return s
-}
-
-// SetCreateTime sets the CreateTime field's value.
-func (s *DeploymentInfo) SetCreateTime(v time.Time) *DeploymentInfo {
-	s.CreateTime = &v
-	return s
-}
-
-// SetCreator sets the Creator field's value.
-func (s *DeploymentInfo) SetCreator(v DeploymentCreator) *DeploymentInfo {
-	s.Creator = v
-	return s
-}
-
-// SetDeploymentConfigName sets the DeploymentConfigName field's value.
-func (s *DeploymentInfo) SetDeploymentConfigName(v string) *DeploymentInfo {
-	s.DeploymentConfigName = &v
-	return s
-}
-
-// SetDeploymentGroupName sets the DeploymentGroupName field's value.
-func (s *DeploymentInfo) SetDeploymentGroupName(v string) *DeploymentInfo {
-	s.DeploymentGroupName = &v
-	return s
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *DeploymentInfo) SetDeploymentId(v string) *DeploymentInfo {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetDeploymentOverview sets the DeploymentOverview field's value.
-func (s *DeploymentInfo) SetDeploymentOverview(v *DeploymentOverview) *DeploymentInfo {
-	s.DeploymentOverview = v
-	return s
-}
-
-// SetDeploymentStyle sets the DeploymentStyle field's value.
-func (s *DeploymentInfo) SetDeploymentStyle(v *DeploymentStyle) *DeploymentInfo {
-	s.DeploymentStyle = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *DeploymentInfo) SetDescription(v string) *DeploymentInfo {
-	s.Description = &v
-	return s
-}
-
-// SetErrorInformation sets the ErrorInformation field's value.
-func (s *DeploymentInfo) SetErrorInformation(v *ErrorInformation) *DeploymentInfo {
-	s.ErrorInformation = v
-	return s
-}
-
-// SetFileExistsBehavior sets the FileExistsBehavior field's value.
-func (s *DeploymentInfo) SetFileExistsBehavior(v FileExistsBehavior) *DeploymentInfo {
-	s.FileExistsBehavior = v
-	return s
-}
-
-// SetIgnoreApplicationStopFailures sets the IgnoreApplicationStopFailures field's value.
-func (s *DeploymentInfo) SetIgnoreApplicationStopFailures(v bool) *DeploymentInfo {
-	s.IgnoreApplicationStopFailures = &v
-	return s
-}
-
-// SetInstanceTerminationWaitTimeStarted sets the InstanceTerminationWaitTimeStarted field's value.
-func (s *DeploymentInfo) SetInstanceTerminationWaitTimeStarted(v bool) *DeploymentInfo {
-	s.InstanceTerminationWaitTimeStarted = &v
-	return s
-}
-
-// SetLoadBalancerInfo sets the LoadBalancerInfo field's value.
-func (s *DeploymentInfo) SetLoadBalancerInfo(v *LoadBalancerInfo) *DeploymentInfo {
-	s.LoadBalancerInfo = v
-	return s
-}
-
-// SetPreviousRevision sets the PreviousRevision field's value.
-func (s *DeploymentInfo) SetPreviousRevision(v *RevisionLocation) *DeploymentInfo {
-	s.PreviousRevision = v
-	return s
-}
-
-// SetRevision sets the Revision field's value.
-func (s *DeploymentInfo) SetRevision(v *RevisionLocation) *DeploymentInfo {
-	s.Revision = v
-	return s
-}
-
-// SetRollbackInfo sets the RollbackInfo field's value.
-func (s *DeploymentInfo) SetRollbackInfo(v *RollbackInfo) *DeploymentInfo {
-	s.RollbackInfo = v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *DeploymentInfo) SetStartTime(v time.Time) *DeploymentInfo {
-	s.StartTime = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *DeploymentInfo) SetStatus(v DeploymentStatus) *DeploymentInfo {
-	s.Status = v
-	return s
-}
-
-// SetTargetInstances sets the TargetInstances field's value.
-func (s *DeploymentInfo) SetTargetInstances(v *TargetInstances) *DeploymentInfo {
-	s.TargetInstances = v
-	return s
-}
-
-// SetUpdateOutdatedInstancesOnly sets the UpdateOutdatedInstancesOnly field's value.
-func (s *DeploymentInfo) SetUpdateOutdatedInstancesOnly(v bool) *DeploymentInfo {
-	s.UpdateOutdatedInstancesOnly = &v
-	return s
-}
-
 // Information about the deployment status of the instances in the deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentOverview
 type DeploymentOverview struct {
@@ -4577,42 +4043,6 @@ func (s DeploymentOverview) String() string {
 // GoString returns the string representation
 func (s DeploymentOverview) GoString() string {
 	return s.String()
-}
-
-// SetFailed sets the Failed field's value.
-func (s *DeploymentOverview) SetFailed(v int64) *DeploymentOverview {
-	s.Failed = &v
-	return s
-}
-
-// SetInProgress sets the InProgress field's value.
-func (s *DeploymentOverview) SetInProgress(v int64) *DeploymentOverview {
-	s.InProgress = &v
-	return s
-}
-
-// SetPending sets the Pending field's value.
-func (s *DeploymentOverview) SetPending(v int64) *DeploymentOverview {
-	s.Pending = &v
-	return s
-}
-
-// SetReady sets the Ready field's value.
-func (s *DeploymentOverview) SetReady(v int64) *DeploymentOverview {
-	s.Ready = &v
-	return s
-}
-
-// SetSkipped sets the Skipped field's value.
-func (s *DeploymentOverview) SetSkipped(v int64) *DeploymentOverview {
-	s.Skipped = &v
-	return s
-}
-
-// SetSucceeded sets the Succeeded field's value.
-func (s *DeploymentOverview) SetSucceeded(v int64) *DeploymentOverview {
-	s.Succeeded = &v
-	return s
 }
 
 // Information about how traffic is rerouted to instances in a replacement environment
@@ -4650,18 +4080,6 @@ func (s DeploymentReadyOption) GoString() string {
 	return s.String()
 }
 
-// SetActionOnTimeout sets the ActionOnTimeout field's value.
-func (s *DeploymentReadyOption) SetActionOnTimeout(v DeploymentReadyAction) *DeploymentReadyOption {
-	s.ActionOnTimeout = v
-	return s
-}
-
-// SetWaitTimeInMinutes sets the WaitTimeInMinutes field's value.
-func (s *DeploymentReadyOption) SetWaitTimeInMinutes(v int64) *DeploymentReadyOption {
-	s.WaitTimeInMinutes = &v
-	return s
-}
-
 // Information about the type of deployment, either in-place or blue/green,
 // you want to run and whether to route deployment traffic behind a load balancer.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentStyle
@@ -4683,18 +4101,6 @@ func (s DeploymentStyle) String() string {
 // GoString returns the string representation
 func (s DeploymentStyle) GoString() string {
 	return s.String()
-}
-
-// SetDeploymentOption sets the DeploymentOption field's value.
-func (s *DeploymentStyle) SetDeploymentOption(v DeploymentOption) *DeploymentStyle {
-	s.DeploymentOption = v
-	return s
-}
-
-// SetDeploymentType sets the DeploymentType field's value.
-func (s *DeploymentStyle) SetDeploymentType(v DeploymentType) *DeploymentStyle {
-	s.DeploymentType = v
-	return s
 }
 
 // Represents the input of a DeregisterOnPremisesInstance operation.
@@ -4730,12 +4136,6 @@ func (s *DeregisterOnPremisesInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetInstanceName sets the InstanceName field's value.
-func (s *DeregisterOnPremisesInstanceInput) SetInstanceName(v string) *DeregisterOnPremisesInstanceInput {
-	s.InstanceName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeregisterOnPremisesInstanceOutput
@@ -4805,30 +4205,6 @@ func (s Diagnostics) GoString() string {
 	return s.String()
 }
 
-// SetErrorCode sets the ErrorCode field's value.
-func (s *Diagnostics) SetErrorCode(v LifecycleErrorCode) *Diagnostics {
-	s.ErrorCode = v
-	return s
-}
-
-// SetLogTail sets the LogTail field's value.
-func (s *Diagnostics) SetLogTail(v string) *Diagnostics {
-	s.LogTail = &v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *Diagnostics) SetMessage(v string) *Diagnostics {
-	s.Message = &v
-	return s
-}
-
-// SetScriptName sets the ScriptName field's value.
-func (s *Diagnostics) SetScriptName(v string) *Diagnostics {
-	s.ScriptName = &v
-	return s
-}
-
 // Information about an EC2 tag filter.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/EC2TagFilter
 type EC2TagFilter struct {
@@ -4860,24 +4236,6 @@ func (s EC2TagFilter) GoString() string {
 	return s.String()
 }
 
-// SetKey sets the Key field's value.
-func (s *EC2TagFilter) SetKey(v string) *EC2TagFilter {
-	s.Key = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *EC2TagFilter) SetType(v EC2TagFilterType) *EC2TagFilter {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *EC2TagFilter) SetValue(v string) *EC2TagFilter {
-	s.Value = &v
-	return s
-}
-
 // Information about groups of EC2 instance tags.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/EC2TagSet
 type EC2TagSet struct {
@@ -4899,12 +4257,6 @@ func (s EC2TagSet) GoString() string {
 	return s.String()
 }
 
-// SetEc2TagSetList sets the Ec2TagSetList field's value.
-func (s *EC2TagSet) SetEc2TagSetList(v [][]EC2TagFilter) *EC2TagSet {
-	s.Ec2TagSetList = v
-	return s
-}
-
 // Information about a load balancer in Elastic Load Balancing to use in a deployment.
 // Instances are registered directly with a load balancer, and traffic is routed
 // to the load balancer.
@@ -4915,7 +4267,7 @@ type ELBInfo struct {
 	// For blue/green deployments, the name of the load balancer that will be used
 	// to route traffic from original instances to replacement instances in a blue/green
 	// deployment. For in-place deployments, the name of the load balancer that
-	// instances are deregistered from, so they are not serving traffic during a
+	// instances are deregistered from so they are not serving traffic during a
 	// deployment, and then re-registered with after the deployment completes.
 	Name *string `locationName:"name" type:"string"`
 }
@@ -4928,12 +4280,6 @@ func (s ELBInfo) String() string {
 // GoString returns the string representation
 func (s ELBInfo) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *ELBInfo) SetName(v string) *ELBInfo {
-	s.Name = &v
-	return s
 }
 
 // Information about a deployment error.
@@ -4998,18 +4344,6 @@ func (s ErrorInformation) GoString() string {
 	return s.String()
 }
 
-// SetCode sets the Code field's value.
-func (s *ErrorInformation) SetCode(v ErrorCode) *ErrorInformation {
-	s.Code = v
-	return s
-}
-
-// SetMessage sets the Message field's value.
-func (s *ErrorInformation) SetMessage(v string) *ErrorInformation {
-	s.Message = &v
-	return s
-}
-
 // Information about an application revision.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GenericRevisionInfo
 type GenericRevisionInfo struct {
@@ -5039,36 +4373,6 @@ func (s GenericRevisionInfo) String() string {
 // GoString returns the string representation
 func (s GenericRevisionInfo) GoString() string {
 	return s.String()
-}
-
-// SetDeploymentGroups sets the DeploymentGroups field's value.
-func (s *GenericRevisionInfo) SetDeploymentGroups(v []string) *GenericRevisionInfo {
-	s.DeploymentGroups = v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *GenericRevisionInfo) SetDescription(v string) *GenericRevisionInfo {
-	s.Description = &v
-	return s
-}
-
-// SetFirstUsedTime sets the FirstUsedTime field's value.
-func (s *GenericRevisionInfo) SetFirstUsedTime(v time.Time) *GenericRevisionInfo {
-	s.FirstUsedTime = &v
-	return s
-}
-
-// SetLastUsedTime sets the LastUsedTime field's value.
-func (s *GenericRevisionInfo) SetLastUsedTime(v time.Time) *GenericRevisionInfo {
-	s.LastUsedTime = &v
-	return s
-}
-
-// SetRegisterTime sets the RegisterTime field's value.
-func (s *GenericRevisionInfo) SetRegisterTime(v time.Time) *GenericRevisionInfo {
-	s.RegisterTime = &v
-	return s
 }
 
 // Represents the input of a GetApplication operation.
@@ -5110,12 +4414,6 @@ func (s *GetApplicationInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *GetApplicationInput) SetApplicationName(v string) *GetApplicationInput {
-	s.ApplicationName = &v
-	return s
-}
-
 // Represents the output of a GetApplication operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationOutput
 type GetApplicationOutput struct {
@@ -5140,12 +4438,6 @@ func (s GetApplicationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplication sets the Application field's value.
-func (s *GetApplicationOutput) SetApplication(v *ApplicationInfo) *GetApplicationOutput {
-	s.Application = v
-	return s
 }
 
 // Represents the input of a GetApplicationRevision operation.
@@ -5195,18 +4487,6 @@ func (s *GetApplicationRevisionInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *GetApplicationRevisionInput) SetApplicationName(v string) *GetApplicationRevisionInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetRevision sets the Revision field's value.
-func (s *GetApplicationRevisionInput) SetRevision(v *RevisionLocation) *GetApplicationRevisionInput {
-	s.Revision = v
-	return s
-}
-
 // Represents the output of a GetApplicationRevision operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetApplicationRevisionOutput
 type GetApplicationRevisionOutput struct {
@@ -5237,24 +4517,6 @@ func (s GetApplicationRevisionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetApplicationRevisionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *GetApplicationRevisionOutput) SetApplicationName(v string) *GetApplicationRevisionOutput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetRevision sets the Revision field's value.
-func (s *GetApplicationRevisionOutput) SetRevision(v *RevisionLocation) *GetApplicationRevisionOutput {
-	s.Revision = v
-	return s
-}
-
-// SetRevisionInfo sets the RevisionInfo field's value.
-func (s *GetApplicationRevisionOutput) SetRevisionInfo(v *GenericRevisionInfo) *GetApplicationRevisionOutput {
-	s.RevisionInfo = v
-	return s
 }
 
 // Represents the input of a GetDeploymentConfig operation.
@@ -5296,12 +4558,6 @@ func (s *GetDeploymentConfigInput) Validate() error {
 	return nil
 }
 
-// SetDeploymentConfigName sets the DeploymentConfigName field's value.
-func (s *GetDeploymentConfigInput) SetDeploymentConfigName(v string) *GetDeploymentConfigInput {
-	s.DeploymentConfigName = &v
-	return s
-}
-
 // Represents the output of a GetDeploymentConfig operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentConfigOutput
 type GetDeploymentConfigOutput struct {
@@ -5326,12 +4582,6 @@ func (s GetDeploymentConfigOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDeploymentConfigOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeploymentConfigInfo sets the DeploymentConfigInfo field's value.
-func (s *GetDeploymentConfigOutput) SetDeploymentConfigInfo(v *DeploymentConfigInfo) *GetDeploymentConfigOutput {
-	s.DeploymentConfigInfo = v
-	return s
 }
 
 // Represents the input of a GetDeploymentGroup operation.
@@ -5385,18 +4635,6 @@ func (s *GetDeploymentGroupInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *GetDeploymentGroupInput) SetApplicationName(v string) *GetDeploymentGroupInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetDeploymentGroupName sets the DeploymentGroupName field's value.
-func (s *GetDeploymentGroupInput) SetDeploymentGroupName(v string) *GetDeploymentGroupInput {
-	s.DeploymentGroupName = &v
-	return s
-}
-
 // Represents the output of a GetDeploymentGroup operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentGroupOutput
 type GetDeploymentGroupOutput struct {
@@ -5421,12 +4659,6 @@ func (s GetDeploymentGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDeploymentGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeploymentGroupInfo sets the DeploymentGroupInfo field's value.
-func (s *GetDeploymentGroupOutput) SetDeploymentGroupInfo(v *DeploymentGroupInfo) *GetDeploymentGroupOutput {
-	s.DeploymentGroupInfo = v
-	return s
 }
 
 // Represents the input of a GetDeployment operation.
@@ -5462,12 +4694,6 @@ func (s *GetDeploymentInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *GetDeploymentInput) SetDeploymentId(v string) *GetDeploymentInput {
-	s.DeploymentId = &v
-	return s
 }
 
 // Represents the input of a GetDeploymentInstance operation.
@@ -5514,18 +4740,6 @@ func (s *GetDeploymentInstanceInput) Validate() error {
 	return nil
 }
 
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *GetDeploymentInstanceInput) SetDeploymentId(v string) *GetDeploymentInstanceInput {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *GetDeploymentInstanceInput) SetInstanceId(v string) *GetDeploymentInstanceInput {
-	s.InstanceId = &v
-	return s
-}
-
 // Represents the output of a GetDeploymentInstance operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentInstanceOutput
 type GetDeploymentInstanceOutput struct {
@@ -5552,12 +4766,6 @@ func (s GetDeploymentInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInstanceSummary sets the InstanceSummary field's value.
-func (s *GetDeploymentInstanceOutput) SetInstanceSummary(v *InstanceSummary) *GetDeploymentInstanceOutput {
-	s.InstanceSummary = v
-	return s
-}
-
 // Represents the output of a GetDeployment operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetDeploymentOutput
 type GetDeploymentOutput struct {
@@ -5582,12 +4790,6 @@ func (s GetDeploymentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDeploymentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeploymentInfo sets the DeploymentInfo field's value.
-func (s *GetDeploymentOutput) SetDeploymentInfo(v *DeploymentInfo) *GetDeploymentOutput {
-	s.DeploymentInfo = v
-	return s
 }
 
 // Represents the input of a GetOnPremisesInstance operation.
@@ -5625,12 +4827,6 @@ func (s *GetOnPremisesInstanceInput) Validate() error {
 	return nil
 }
 
-// SetInstanceName sets the InstanceName field's value.
-func (s *GetOnPremisesInstanceInput) SetInstanceName(v string) *GetOnPremisesInstanceInput {
-	s.InstanceName = &v
-	return s
-}
-
 // Represents the output of a GetOnPremisesInstance operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GetOnPremisesInstanceOutput
 type GetOnPremisesInstanceOutput struct {
@@ -5655,12 +4851,6 @@ func (s GetOnPremisesInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetOnPremisesInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstanceInfo sets the InstanceInfo field's value.
-func (s *GetOnPremisesInstanceOutput) SetInstanceInfo(v *InstanceInfo) *GetOnPremisesInstanceOutput {
-	s.InstanceInfo = v
-	return s
 }
 
 // Information about the location of application artifacts stored in GitHub.
@@ -5689,18 +4879,6 @@ func (s GitHubLocation) GoString() string {
 	return s.String()
 }
 
-// SetCommitId sets the CommitId field's value.
-func (s *GitHubLocation) SetCommitId(v string) *GitHubLocation {
-	s.CommitId = &v
-	return s
-}
-
-// SetRepository sets the Repository field's value.
-func (s *GitHubLocation) SetRepository(v string) *GitHubLocation {
-	s.Repository = &v
-	return s
-}
-
 // Information about the instances that belong to the replacement environment
 // in a blue/green deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/GreenFleetProvisioningOption
@@ -5725,12 +4903,6 @@ func (s GreenFleetProvisioningOption) String() string {
 // GoString returns the string representation
 func (s GreenFleetProvisioningOption) GoString() string {
 	return s.String()
-}
-
-// SetAction sets the Action field's value.
-func (s *GreenFleetProvisioningOption) SetAction(v GreenFleetProvisioningAction) *GreenFleetProvisioningOption {
-	s.Action = v
-	return s
 }
 
 // Information about an on-premises instance.
@@ -5769,48 +4941,6 @@ func (s InstanceInfo) String() string {
 // GoString returns the string representation
 func (s InstanceInfo) GoString() string {
 	return s.String()
-}
-
-// SetDeregisterTime sets the DeregisterTime field's value.
-func (s *InstanceInfo) SetDeregisterTime(v time.Time) *InstanceInfo {
-	s.DeregisterTime = &v
-	return s
-}
-
-// SetIamSessionArn sets the IamSessionArn field's value.
-func (s *InstanceInfo) SetIamSessionArn(v string) *InstanceInfo {
-	s.IamSessionArn = &v
-	return s
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *InstanceInfo) SetIamUserArn(v string) *InstanceInfo {
-	s.IamUserArn = &v
-	return s
-}
-
-// SetInstanceArn sets the InstanceArn field's value.
-func (s *InstanceInfo) SetInstanceArn(v string) *InstanceInfo {
-	s.InstanceArn = &v
-	return s
-}
-
-// SetInstanceName sets the InstanceName field's value.
-func (s *InstanceInfo) SetInstanceName(v string) *InstanceInfo {
-	s.InstanceName = &v
-	return s
-}
-
-// SetRegisterTime sets the RegisterTime field's value.
-func (s *InstanceInfo) SetRegisterTime(v time.Time) *InstanceInfo {
-	s.RegisterTime = &v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *InstanceInfo) SetTags(v []Tag) *InstanceInfo {
-	s.Tags = v
-	return s
 }
 
 // Information about an instance in a deployment.
@@ -5864,42 +4994,6 @@ func (s InstanceSummary) GoString() string {
 	return s.String()
 }
 
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *InstanceSummary) SetDeploymentId(v string) *InstanceSummary {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetInstanceId sets the InstanceId field's value.
-func (s *InstanceSummary) SetInstanceId(v string) *InstanceSummary {
-	s.InstanceId = &v
-	return s
-}
-
-// SetInstanceType sets the InstanceType field's value.
-func (s *InstanceSummary) SetInstanceType(v InstanceType) *InstanceSummary {
-	s.InstanceType = v
-	return s
-}
-
-// SetLastUpdatedAt sets the LastUpdatedAt field's value.
-func (s *InstanceSummary) SetLastUpdatedAt(v time.Time) *InstanceSummary {
-	s.LastUpdatedAt = &v
-	return s
-}
-
-// SetLifecycleEvents sets the LifecycleEvents field's value.
-func (s *InstanceSummary) SetLifecycleEvents(v []LifecycleEvent) *InstanceSummary {
-	s.LifecycleEvents = v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *InstanceSummary) SetStatus(v InstanceStatus) *InstanceSummary {
-	s.Status = v
-	return s
-}
-
 // Information about the most recent attempted or successful deployment to a
 // deployment group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LastDeploymentInfo
@@ -5929,30 +5023,6 @@ func (s LastDeploymentInfo) String() string {
 // GoString returns the string representation
 func (s LastDeploymentInfo) GoString() string {
 	return s.String()
-}
-
-// SetCreateTime sets the CreateTime field's value.
-func (s *LastDeploymentInfo) SetCreateTime(v time.Time) *LastDeploymentInfo {
-	s.CreateTime = &v
-	return s
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *LastDeploymentInfo) SetDeploymentId(v string) *LastDeploymentInfo {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *LastDeploymentInfo) SetEndTime(v time.Time) *LastDeploymentInfo {
-	s.EndTime = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *LastDeploymentInfo) SetStatus(v DeploymentStatus) *LastDeploymentInfo {
-	s.Status = v
-	return s
 }
 
 // Information about a deployment lifecycle event.
@@ -5997,36 +5067,6 @@ func (s LifecycleEvent) String() string {
 // GoString returns the string representation
 func (s LifecycleEvent) GoString() string {
 	return s.String()
-}
-
-// SetDiagnostics sets the Diagnostics field's value.
-func (s *LifecycleEvent) SetDiagnostics(v *Diagnostics) *LifecycleEvent {
-	s.Diagnostics = v
-	return s
-}
-
-// SetEndTime sets the EndTime field's value.
-func (s *LifecycleEvent) SetEndTime(v time.Time) *LifecycleEvent {
-	s.EndTime = &v
-	return s
-}
-
-// SetLifecycleEventName sets the LifecycleEventName field's value.
-func (s *LifecycleEvent) SetLifecycleEventName(v string) *LifecycleEvent {
-	s.LifecycleEventName = &v
-	return s
-}
-
-// SetStartTime sets the StartTime field's value.
-func (s *LifecycleEvent) SetStartTime(v time.Time) *LifecycleEvent {
-	s.StartTime = &v
-	return s
-}
-
-// SetStatus sets the Status field's value.
-func (s *LifecycleEvent) SetStatus(v LifecycleEventStatus) *LifecycleEvent {
-	s.Status = v
-	return s
 }
 
 // Represents the input of a ListApplicationRevisions operation.
@@ -6115,48 +5155,6 @@ func (s *ListApplicationRevisionsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *ListApplicationRevisionsInput) SetApplicationName(v string) *ListApplicationRevisionsInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetDeployed sets the Deployed field's value.
-func (s *ListApplicationRevisionsInput) SetDeployed(v ListStateFilterAction) *ListApplicationRevisionsInput {
-	s.Deployed = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListApplicationRevisionsInput) SetNextToken(v string) *ListApplicationRevisionsInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetS3Bucket sets the S3Bucket field's value.
-func (s *ListApplicationRevisionsInput) SetS3Bucket(v string) *ListApplicationRevisionsInput {
-	s.S3Bucket = &v
-	return s
-}
-
-// SetS3KeyPrefix sets the S3KeyPrefix field's value.
-func (s *ListApplicationRevisionsInput) SetS3KeyPrefix(v string) *ListApplicationRevisionsInput {
-	s.S3KeyPrefix = &v
-	return s
-}
-
-// SetSortBy sets the SortBy field's value.
-func (s *ListApplicationRevisionsInput) SetSortBy(v ApplicationRevisionSortBy) *ListApplicationRevisionsInput {
-	s.SortBy = v
-	return s
-}
-
-// SetSortOrder sets the SortOrder field's value.
-func (s *ListApplicationRevisionsInput) SetSortOrder(v SortOrder) *ListApplicationRevisionsInput {
-	s.SortOrder = v
-	return s
-}
-
 // Represents the output of a ListApplicationRevisions operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationRevisionsOutput
 type ListApplicationRevisionsOutput struct {
@@ -6188,18 +5186,6 @@ func (s ListApplicationRevisionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListApplicationRevisionsOutput) SetNextToken(v string) *ListApplicationRevisionsOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRevisions sets the Revisions field's value.
-func (s *ListApplicationRevisionsOutput) SetRevisions(v []RevisionLocation) *ListApplicationRevisionsOutput {
-	s.Revisions = v
-	return s
-}
-
 // Represents the input of a ListApplications operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListApplicationsInput
 type ListApplicationsInput struct {
@@ -6218,12 +5204,6 @@ func (s ListApplicationsInput) String() string {
 // GoString returns the string representation
 func (s ListApplicationsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListApplicationsInput) SetNextToken(v string) *ListApplicationsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the output of a ListApplications operation.
@@ -6257,18 +5237,6 @@ func (s ListApplicationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetApplications sets the Applications field's value.
-func (s *ListApplicationsOutput) SetApplications(v []string) *ListApplicationsOutput {
-	s.Applications = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListApplicationsOutput) SetNextToken(v string) *ListApplicationsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the input of a ListDeploymentConfigs operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentConfigsInput
 type ListDeploymentConfigsInput struct {
@@ -6288,12 +5256,6 @@ func (s ListDeploymentConfigsInput) String() string {
 // GoString returns the string representation
 func (s ListDeploymentConfigsInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentConfigsInput) SetNextToken(v string) *ListDeploymentConfigsInput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the output of a ListDeploymentConfigs operation.
@@ -6326,18 +5288,6 @@ func (s ListDeploymentConfigsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDeploymentConfigsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetDeploymentConfigsList sets the DeploymentConfigsList field's value.
-func (s *ListDeploymentConfigsOutput) SetDeploymentConfigsList(v []string) *ListDeploymentConfigsOutput {
-	s.DeploymentConfigsList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentConfigsOutput) SetNextToken(v string) *ListDeploymentConfigsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input of a ListDeploymentGroups operation.
@@ -6383,18 +5333,6 @@ func (s *ListDeploymentGroupsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *ListDeploymentGroupsInput) SetApplicationName(v string) *ListDeploymentGroupsInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentGroupsInput) SetNextToken(v string) *ListDeploymentGroupsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the output of a ListDeploymentGroups operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentGroupsOutput
 type ListDeploymentGroupsOutput struct {
@@ -6427,24 +5365,6 @@ func (s ListDeploymentGroupsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDeploymentGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *ListDeploymentGroupsOutput) SetApplicationName(v string) *ListDeploymentGroupsOutput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetDeploymentGroups sets the DeploymentGroups field's value.
-func (s *ListDeploymentGroupsOutput) SetDeploymentGroups(v []string) *ListDeploymentGroupsOutput {
-	s.DeploymentGroups = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentGroupsOutput) SetNextToken(v string) *ListDeploymentGroupsOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input of a ListDeploymentInstances operation.
@@ -6506,30 +5426,6 @@ func (s *ListDeploymentInstancesInput) Validate() error {
 	return nil
 }
 
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *ListDeploymentInstancesInput) SetDeploymentId(v string) *ListDeploymentInstancesInput {
-	s.DeploymentId = &v
-	return s
-}
-
-// SetInstanceStatusFilter sets the InstanceStatusFilter field's value.
-func (s *ListDeploymentInstancesInput) SetInstanceStatusFilter(v []InstanceStatus) *ListDeploymentInstancesInput {
-	s.InstanceStatusFilter = v
-	return s
-}
-
-// SetInstanceTypeFilter sets the InstanceTypeFilter field's value.
-func (s *ListDeploymentInstancesInput) SetInstanceTypeFilter(v []InstanceType) *ListDeploymentInstancesInput {
-	s.InstanceTypeFilter = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentInstancesInput) SetNextToken(v string) *ListDeploymentInstancesInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the output of a ListDeploymentInstances operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentInstancesOutput
 type ListDeploymentInstancesOutput struct {
@@ -6559,18 +5455,6 @@ func (s ListDeploymentInstancesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDeploymentInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetInstancesList sets the InstancesList field's value.
-func (s *ListDeploymentInstancesOutput) SetInstancesList(v []string) *ListDeploymentInstancesOutput {
-	s.InstancesList = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentInstancesOutput) SetNextToken(v string) *ListDeploymentInstancesOutput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the input of a ListDeployments operation.
@@ -6634,36 +5518,6 @@ func (s *ListDeploymentsInput) Validate() error {
 	return nil
 }
 
-// SetApplicationName sets the ApplicationName field's value.
-func (s *ListDeploymentsInput) SetApplicationName(v string) *ListDeploymentsInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetCreateTimeRange sets the CreateTimeRange field's value.
-func (s *ListDeploymentsInput) SetCreateTimeRange(v *TimeRange) *ListDeploymentsInput {
-	s.CreateTimeRange = v
-	return s
-}
-
-// SetDeploymentGroupName sets the DeploymentGroupName field's value.
-func (s *ListDeploymentsInput) SetDeploymentGroupName(v string) *ListDeploymentsInput {
-	s.DeploymentGroupName = &v
-	return s
-}
-
-// SetIncludeOnlyStatuses sets the IncludeOnlyStatuses field's value.
-func (s *ListDeploymentsInput) SetIncludeOnlyStatuses(v []DeploymentStatus) *ListDeploymentsInput {
-	s.IncludeOnlyStatuses = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentsInput) SetNextToken(v string) *ListDeploymentsInput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the output of a ListDeployments operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListDeploymentsOutput
 type ListDeploymentsOutput struct {
@@ -6695,18 +5549,6 @@ func (s ListDeploymentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeployments sets the Deployments field's value.
-func (s *ListDeploymentsOutput) SetDeployments(v []string) *ListDeploymentsOutput {
-	s.Deployments = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentsOutput) SetNextToken(v string) *ListDeploymentsOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Represents the input of a ListGitHubAccountTokenNames operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListGitHubAccountTokenNamesInput
 type ListGitHubAccountTokenNamesInput struct {
@@ -6725,12 +5567,6 @@ func (s ListGitHubAccountTokenNamesInput) String() string {
 // GoString returns the string representation
 func (s ListGitHubAccountTokenNamesInput) GoString() string {
 	return s.String()
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGitHubAccountTokenNamesInput) SetNextToken(v string) *ListGitHubAccountTokenNamesInput {
-	s.NextToken = &v
-	return s
 }
 
 // Represents the output of a ListGitHubAccountTokenNames operation.
@@ -6762,18 +5598,6 @@ func (s ListGitHubAccountTokenNamesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGitHubAccountTokenNamesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListGitHubAccountTokenNamesOutput) SetNextToken(v string) *ListGitHubAccountTokenNamesOutput {
-	s.NextToken = &v
-	return s
-}
-
-// SetTokenNameList sets the TokenNameList field's value.
-func (s *ListGitHubAccountTokenNamesOutput) SetTokenNameList(v []string) *ListGitHubAccountTokenNamesOutput {
-	s.TokenNameList = v
-	return s
 }
 
 // Represents the input of a ListOnPremisesInstances operation.
@@ -6809,24 +5633,6 @@ func (s ListOnPremisesInstancesInput) GoString() string {
 	return s.String()
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListOnPremisesInstancesInput) SetNextToken(v string) *ListOnPremisesInstancesInput {
-	s.NextToken = &v
-	return s
-}
-
-// SetRegistrationStatus sets the RegistrationStatus field's value.
-func (s *ListOnPremisesInstancesInput) SetRegistrationStatus(v RegistrationStatus) *ListOnPremisesInstancesInput {
-	s.RegistrationStatus = v
-	return s
-}
-
-// SetTagFilters sets the TagFilters field's value.
-func (s *ListOnPremisesInstancesInput) SetTagFilters(v []TagFilter) *ListOnPremisesInstancesInput {
-	s.TagFilters = v
-	return s
-}
-
 // Represents the output of list on-premises instances operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/ListOnPremisesInstancesOutput
 type ListOnPremisesInstancesOutput struct {
@@ -6858,18 +5664,6 @@ func (s ListOnPremisesInstancesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetInstanceNames sets the InstanceNames field's value.
-func (s *ListOnPremisesInstancesOutput) SetInstanceNames(v []string) *ListOnPremisesInstancesOutput {
-	s.InstanceNames = v
-	return s
-}
-
-// SetNextToken sets the NextToken field's value.
-func (s *ListOnPremisesInstancesOutput) SetNextToken(v string) *ListOnPremisesInstancesOutput {
-	s.NextToken = &v
-	return s
-}
-
 // Information about the Elastic Load Balancing load balancer or target group
 // used in a deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/LoadBalancerInfo
@@ -6895,18 +5689,6 @@ func (s LoadBalancerInfo) String() string {
 // GoString returns the string representation
 func (s LoadBalancerInfo) GoString() string {
 	return s.String()
-}
-
-// SetElbInfoList sets the ElbInfoList field's value.
-func (s *LoadBalancerInfo) SetElbInfoList(v []ELBInfo) *LoadBalancerInfo {
-	s.ElbInfoList = v
-	return s
-}
-
-// SetTargetGroupInfoList sets the TargetGroupInfoList field's value.
-func (s *LoadBalancerInfo) SetTargetGroupInfoList(v []TargetGroupInfo) *LoadBalancerInfo {
-	s.TargetGroupInfoList = v
-	return s
 }
 
 // Information about minimum healthy instance.
@@ -6956,18 +5738,6 @@ func (s MinimumHealthyHosts) GoString() string {
 	return s.String()
 }
 
-// SetType sets the Type field's value.
-func (s *MinimumHealthyHosts) SetType(v MinimumHealthyHostsType) *MinimumHealthyHosts {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *MinimumHealthyHosts) SetValue(v int64) *MinimumHealthyHosts {
-	s.Value = &v
-	return s
-}
-
 // Information about groups of on-premises instance tags.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/OnPremisesTagSet
 type OnPremisesTagSet struct {
@@ -6989,10 +5759,83 @@ func (s OnPremisesTagSet) GoString() string {
 	return s.String()
 }
 
-// SetOnPremisesTagSetList sets the OnPremisesTagSetList field's value.
-func (s *OnPremisesTagSet) SetOnPremisesTagSetList(v [][]TagFilter) *OnPremisesTagSet {
-	s.OnPremisesTagSetList = v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatusInput
+type PutLifecycleEventHookExecutionStatusInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the deployment. Pass this ID to a Lambda function that validates
+	// a deployment lifecycle event.
+	DeploymentId *string `locationName:"deploymentId" type:"string"`
+
+	// The execution ID of a deployment's lifecycle hook. A deployment lifecycle
+	// hook is specified in the hooks section of the AppSpec file.
+	LifecycleEventHookExecutionId *string `locationName:"lifecycleEventHookExecutionId" type:"string"`
+
+	// The result of a Lambda function that validates a deployment lifecycle event
+	// (Succeeded or Failed).
+	Status LifecycleEventStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s PutLifecycleEventHookExecutionStatusInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutLifecycleEventHookExecutionStatusInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/PutLifecycleEventHookExecutionStatusOutput
+type PutLifecycleEventHookExecutionStatusOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The execution ID of the lifecycle event hook. A hook is specified in the
+	// hooks section of the deployment's AppSpec file.
+	LifecycleEventHookExecutionId *string `locationName:"lifecycleEventHookExecutionId" type:"string"`
+}
+
+// String returns the string representation
+func (s PutLifecycleEventHookExecutionStatusOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutLifecycleEventHookExecutionStatusOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutLifecycleEventHookExecutionStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// A revision for an AWS Lambda deployment that is a YAML-formatted or JSON-formatted
+// string. For AWS Lambda deployments, the revision is the same as the AppSpec
+// file.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RawString
+type RawString struct {
+	_ struct{} `type:"structure"`
+
+	// The YAML-formatted or JSON-formatted revision string. It includes information
+	// about which Lambda function to update and optional Lambda functions that
+	// validate deployment lifecycle events.
+	Content *string `locationName:"content" type:"string"`
+
+	// The SHA256 hash value of the revision that is specified as a RawString.
+	Sha256 *string `locationName:"sha256" type:"string"`
+}
+
+// String returns the string representation
+func (s RawString) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RawString) GoString() string {
+	return s.String()
 }
 
 // Represents the input of a RegisterApplicationRevision operation.
@@ -7045,24 +5888,6 @@ func (s *RegisterApplicationRevisionInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *RegisterApplicationRevisionInput) SetApplicationName(v string) *RegisterApplicationRevisionInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetDescription sets the Description field's value.
-func (s *RegisterApplicationRevisionInput) SetDescription(v string) *RegisterApplicationRevisionInput {
-	s.Description = &v
-	return s
-}
-
-// SetRevision sets the Revision field's value.
-func (s *RegisterApplicationRevisionInput) SetRevision(v *RevisionLocation) *RegisterApplicationRevisionInput {
-	s.Revision = v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterApplicationRevisionOutput
@@ -7126,24 +5951,6 @@ func (s *RegisterOnPremisesInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetIamSessionArn sets the IamSessionArn field's value.
-func (s *RegisterOnPremisesInstanceInput) SetIamSessionArn(v string) *RegisterOnPremisesInstanceInput {
-	s.IamSessionArn = &v
-	return s
-}
-
-// SetIamUserArn sets the IamUserArn field's value.
-func (s *RegisterOnPremisesInstanceInput) SetIamUserArn(v string) *RegisterOnPremisesInstanceInput {
-	s.IamUserArn = &v
-	return s
-}
-
-// SetInstanceName sets the InstanceName field's value.
-func (s *RegisterOnPremisesInstanceInput) SetInstanceName(v string) *RegisterOnPremisesInstanceInput {
-	s.InstanceName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RegisterOnPremisesInstanceOutput
@@ -7212,18 +6019,6 @@ func (s *RemoveTagsFromOnPremisesInstancesInput) Validate() error {
 	return nil
 }
 
-// SetInstanceNames sets the InstanceNames field's value.
-func (s *RemoveTagsFromOnPremisesInstancesInput) SetInstanceNames(v []string) *RemoveTagsFromOnPremisesInstancesInput {
-	s.InstanceNames = v
-	return s
-}
-
-// SetTags sets the Tags field's value.
-func (s *RemoveTagsFromOnPremisesInstancesInput) SetTags(v []Tag) *RemoveTagsFromOnPremisesInstancesInput {
-	s.Tags = v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RemoveTagsFromOnPremisesInstancesOutput
 type RemoveTagsFromOnPremisesInstancesOutput struct {
 	_ struct{} `type:"structure"`
@@ -7269,18 +6064,6 @@ func (s RevisionInfo) GoString() string {
 	return s.String()
 }
 
-// SetGenericRevisionInfo sets the GenericRevisionInfo field's value.
-func (s *RevisionInfo) SetGenericRevisionInfo(v *GenericRevisionInfo) *RevisionInfo {
-	s.GenericRevisionInfo = v
-	return s
-}
-
-// SetRevisionLocation sets the RevisionLocation field's value.
-func (s *RevisionInfo) SetRevisionLocation(v *RevisionLocation) *RevisionInfo {
-	s.RevisionLocation = v
-	return s
-}
-
 // Information about the location of an application revision.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/RevisionLocation
 type RevisionLocation struct {
@@ -7293,12 +6076,19 @@ type RevisionLocation struct {
 	//
 	//    * S3: An application revision stored in Amazon S3.
 	//
-	//    * GitHub: An application revision stored in GitHub.
+	//    * GitHub: An application revision stored in GitHub (EC2/On-premises deployments
+	//    only)
+	//
+	//    * String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments
+	//    only)
 	RevisionType RevisionLocationType `locationName:"revisionType" type:"string" enum:"true"`
 
-	// Information about the location of application artifacts stored in Amazon
-	// S3.
+	// Information about the location of a revision stored in Amazon S3.
 	S3Location *S3Location `locationName:"s3Location" type:"structure"`
+
+	// Information about the location of an AWS Lambda deployment revision stored
+	// as a RawString.
+	String_ *RawString `locationName:"string" type:"structure"`
 }
 
 // String returns the string representation
@@ -7309,24 +6099,6 @@ func (s RevisionLocation) String() string {
 // GoString returns the string representation
 func (s RevisionLocation) GoString() string {
 	return s.String()
-}
-
-// SetGitHubLocation sets the GitHubLocation field's value.
-func (s *RevisionLocation) SetGitHubLocation(v *GitHubLocation) *RevisionLocation {
-	s.GitHubLocation = v
-	return s
-}
-
-// SetRevisionType sets the RevisionType field's value.
-func (s *RevisionLocation) SetRevisionType(v RevisionLocationType) *RevisionLocation {
-	s.RevisionType = v
-	return s
-}
-
-// SetS3Location sets the S3Location field's value.
-func (s *RevisionLocation) SetS3Location(v *S3Location) *RevisionLocation {
-	s.S3Location = v
-	return s
 }
 
 // Information about a deployment rollback.
@@ -7354,24 +6126,6 @@ func (s RollbackInfo) String() string {
 // GoString returns the string representation
 func (s RollbackInfo) GoString() string {
 	return s.String()
-}
-
-// SetRollbackDeploymentId sets the RollbackDeploymentId field's value.
-func (s *RollbackInfo) SetRollbackDeploymentId(v string) *RollbackInfo {
-	s.RollbackDeploymentId = &v
-	return s
-}
-
-// SetRollbackMessage sets the RollbackMessage field's value.
-func (s *RollbackInfo) SetRollbackMessage(v string) *RollbackInfo {
-	s.RollbackMessage = &v
-	return s
-}
-
-// SetRollbackTriggeringDeploymentId sets the RollbackTriggeringDeploymentId field's value.
-func (s *RollbackInfo) SetRollbackTriggeringDeploymentId(v string) *RollbackInfo {
-	s.RollbackTriggeringDeploymentId = &v
-	return s
 }
 
 // Information about the location of application artifacts stored in Amazon
@@ -7421,36 +6175,6 @@ func (s S3Location) GoString() string {
 	return s.String()
 }
 
-// SetBucket sets the Bucket field's value.
-func (s *S3Location) SetBucket(v string) *S3Location {
-	s.Bucket = &v
-	return s
-}
-
-// SetBundleType sets the BundleType field's value.
-func (s *S3Location) SetBundleType(v BundleType) *S3Location {
-	s.BundleType = v
-	return s
-}
-
-// SetETag sets the ETag field's value.
-func (s *S3Location) SetETag(v string) *S3Location {
-	s.ETag = &v
-	return s
-}
-
-// SetKey sets the Key field's value.
-func (s *S3Location) SetKey(v string) *S3Location {
-	s.Key = &v
-	return s
-}
-
-// SetVersion sets the Version field's value.
-func (s *S3Location) SetVersion(v string) *S3Location {
-	s.Version = &v
-	return s
-}
-
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTerminationInput
 type SkipWaitTimeForInstanceTerminationInput struct {
 	_ struct{} `type:"structure"`
@@ -7468,12 +6192,6 @@ func (s SkipWaitTimeForInstanceTerminationInput) String() string {
 // GoString returns the string representation
 func (s SkipWaitTimeForInstanceTerminationInput) GoString() string {
 	return s.String()
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *SkipWaitTimeForInstanceTerminationInput) SetDeploymentId(v string) *SkipWaitTimeForInstanceTerminationInput {
-	s.DeploymentId = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/SkipWaitTimeForInstanceTerminationOutput
@@ -7538,18 +6256,6 @@ func (s *StopDeploymentInput) Validate() error {
 	return nil
 }
 
-// SetAutoRollbackEnabled sets the AutoRollbackEnabled field's value.
-func (s *StopDeploymentInput) SetAutoRollbackEnabled(v bool) *StopDeploymentInput {
-	s.AutoRollbackEnabled = &v
-	return s
-}
-
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *StopDeploymentInput) SetDeploymentId(v string) *StopDeploymentInput {
-	s.DeploymentId = &v
-	return s
-}
-
 // Represents the output of a StopDeployment operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/StopDeploymentOutput
 type StopDeploymentOutput struct {
@@ -7583,18 +6289,6 @@ func (s StopDeploymentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetStatus sets the Status field's value.
-func (s *StopDeploymentOutput) SetStatus(v StopStatus) *StopDeploymentOutput {
-	s.Status = v
-	return s
-}
-
-// SetStatusMessage sets the StatusMessage field's value.
-func (s *StopDeploymentOutput) SetStatusMessage(v string) *StopDeploymentOutput {
-	s.StatusMessage = &v
-	return s
-}
-
 // Information about a tag.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/Tag
 type Tag struct {
@@ -7615,18 +6309,6 @@ func (s Tag) String() string {
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
-}
-
-// SetKey sets the Key field's value.
-func (s *Tag) SetKey(v string) *Tag {
-	s.Key = &v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *Tag) SetValue(v string) *Tag {
-	s.Value = &v
-	return s
 }
 
 // Information about an on-premises instance tag filter.
@@ -7660,24 +6342,6 @@ func (s TagFilter) GoString() string {
 	return s.String()
 }
 
-// SetKey sets the Key field's value.
-func (s *TagFilter) SetKey(v string) *TagFilter {
-	s.Key = &v
-	return s
-}
-
-// SetType sets the Type field's value.
-func (s *TagFilter) SetType(v TagFilterType) *TagFilter {
-	s.Type = v
-	return s
-}
-
-// SetValue sets the Value field's value.
-func (s *TagFilter) SetValue(v string) *TagFilter {
-	s.Value = &v
-	return s
-}
-
 // Information about a target group in Elastic Load Balancing to use in a deployment.
 // Instances are registered as targets in a target group, and traffic is routed
 // to the target group.
@@ -7701,12 +6365,6 @@ func (s TargetGroupInfo) String() string {
 // GoString returns the string representation
 func (s TargetGroupInfo) GoString() string {
 	return s.String()
-}
-
-// SetName sets the Name field's value.
-func (s *TargetGroupInfo) SetName(v string) *TargetGroupInfo {
-	s.Name = &v
-	return s
 }
 
 // Information about the instances to be used in the replacement environment
@@ -7740,22 +6398,57 @@ func (s TargetInstances) GoString() string {
 	return s.String()
 }
 
-// SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *TargetInstances) SetAutoScalingGroups(v []string) *TargetInstances {
-	s.AutoScalingGroups = v
-	return s
+// A configuration that shifts traffic from one version of a Lambda function
+// to another in two increments. The original and target Lambda function versions
+// are specified in the deployment's AppSpec file.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TimeBasedCanary
+type TimeBasedCanary struct {
+	_ struct{} `type:"structure"`
+
+	// The number of minutes between the first and second traffic shifts of a TimeBasedCanary
+	// deployment.
+	CanaryInterval *int64 `locationName:"canaryInterval" type:"integer"`
+
+	// The percentage of traffic to shift in the first increment of a TimeBasedCanary
+	// deployment.
+	CanaryPercentage *int64 `locationName:"canaryPercentage" type:"integer"`
 }
 
-// SetEc2TagSet sets the Ec2TagSet field's value.
-func (s *TargetInstances) SetEc2TagSet(v *EC2TagSet) *TargetInstances {
-	s.Ec2TagSet = v
-	return s
+// String returns the string representation
+func (s TimeBasedCanary) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetTagFilters sets the TagFilters field's value.
-func (s *TargetInstances) SetTagFilters(v []EC2TagFilter) *TargetInstances {
-	s.TagFilters = v
-	return s
+// GoString returns the string representation
+func (s TimeBasedCanary) GoString() string {
+	return s.String()
+}
+
+// A configuration that shifts traffic from one version of a Lambda function
+// to another in equal increments, with an equal number of minutes between each
+// increment. The original and target Lambda function versions are specified
+// in the deployment's AppSpec file.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TimeBasedLinear
+type TimeBasedLinear struct {
+	_ struct{} `type:"structure"`
+
+	// The number of minutes between each incremental traffic shift of a TimeBasedLinear
+	// deployment.
+	LinearInterval *int64 `locationName:"linearInterval" type:"integer"`
+
+	// The percentage of traffic that is shifted at the start of each increment
+	// of a TimeBasedLinear deployment.
+	LinearPercentage *int64 `locationName:"linearPercentage" type:"integer"`
+}
+
+// String returns the string representation
+func (s TimeBasedLinear) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TimeBasedLinear) GoString() string {
+	return s.String()
 }
 
 // Information about a time range.
@@ -7784,16 +6477,36 @@ func (s TimeRange) GoString() string {
 	return s.String()
 }
 
-// SetEnd sets the End field's value.
-func (s *TimeRange) SetEnd(v time.Time) *TimeRange {
-	s.End = &v
-	return s
+// The configuration that specifies how traffic is shifted from one version
+// of a Lambda function to another version during an AWS Lambda deployment.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/TrafficRoutingConfig
+type TrafficRoutingConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A configuration that shifts traffic from one version of a Lambda function
+	// to another in two increments. The original and target Lambda function versions
+	// are specified in the deployment's AppSpec file.
+	TimeBasedCanary *TimeBasedCanary `locationName:"timeBasedCanary" type:"structure"`
+
+	// A configuration that shifts traffic from one version of a Lambda function
+	// to another in equal increments, with an equal number of minutes between each
+	// increment. The original and target Lambda function versions are specified
+	// in the deployment's AppSpec file.
+	TimeBasedLinear *TimeBasedLinear `locationName:"timeBasedLinear" type:"structure"`
+
+	// The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by
+	// a deployment configuration .
+	Type TrafficRoutingType `locationName:"type" type:"string" enum:"true"`
 }
 
-// SetStart sets the Start field's value.
-func (s *TimeRange) SetStart(v time.Time) *TimeRange {
-	s.Start = &v
-	return s
+// String returns the string representation
+func (s TrafficRoutingConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TrafficRoutingConfig) GoString() string {
+	return s.String()
 }
 
 // Information about notification triggers for the deployment group.
@@ -7820,24 +6533,6 @@ func (s TriggerConfig) String() string {
 // GoString returns the string representation
 func (s TriggerConfig) GoString() string {
 	return s.String()
-}
-
-// SetTriggerEvents sets the TriggerEvents field's value.
-func (s *TriggerConfig) SetTriggerEvents(v []TriggerEventType) *TriggerConfig {
-	s.TriggerEvents = v
-	return s
-}
-
-// SetTriggerName sets the TriggerName field's value.
-func (s *TriggerConfig) SetTriggerName(v string) *TriggerConfig {
-	s.TriggerName = &v
-	return s
-}
-
-// SetTriggerTargetArn sets the TriggerTargetArn field's value.
-func (s *TriggerConfig) SetTriggerTargetArn(v string) *TriggerConfig {
-	s.TriggerTargetArn = &v
-	return s
 }
 
 // Represents the input of an UpdateApplication operation.
@@ -7876,18 +6571,6 @@ func (s *UpdateApplicationInput) Validate() error {
 		return invalidParams
 	}
 	return nil
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *UpdateApplicationInput) SetApplicationName(v string) *UpdateApplicationInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetNewApplicationName sets the NewApplicationName field's value.
-func (s *UpdateApplicationInput) SetNewApplicationName(v string) *UpdateApplicationInput {
-	s.NewApplicationName = &v
-	return s
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateApplicationOutput
@@ -8025,102 +6708,6 @@ func (s *UpdateDeploymentGroupInput) Validate() error {
 	return nil
 }
 
-// SetAlarmConfiguration sets the AlarmConfiguration field's value.
-func (s *UpdateDeploymentGroupInput) SetAlarmConfiguration(v *AlarmConfiguration) *UpdateDeploymentGroupInput {
-	s.AlarmConfiguration = v
-	return s
-}
-
-// SetApplicationName sets the ApplicationName field's value.
-func (s *UpdateDeploymentGroupInput) SetApplicationName(v string) *UpdateDeploymentGroupInput {
-	s.ApplicationName = &v
-	return s
-}
-
-// SetAutoRollbackConfiguration sets the AutoRollbackConfiguration field's value.
-func (s *UpdateDeploymentGroupInput) SetAutoRollbackConfiguration(v *AutoRollbackConfiguration) *UpdateDeploymentGroupInput {
-	s.AutoRollbackConfiguration = v
-	return s
-}
-
-// SetAutoScalingGroups sets the AutoScalingGroups field's value.
-func (s *UpdateDeploymentGroupInput) SetAutoScalingGroups(v []string) *UpdateDeploymentGroupInput {
-	s.AutoScalingGroups = v
-	return s
-}
-
-// SetBlueGreenDeploymentConfiguration sets the BlueGreenDeploymentConfiguration field's value.
-func (s *UpdateDeploymentGroupInput) SetBlueGreenDeploymentConfiguration(v *BlueGreenDeploymentConfiguration) *UpdateDeploymentGroupInput {
-	s.BlueGreenDeploymentConfiguration = v
-	return s
-}
-
-// SetCurrentDeploymentGroupName sets the CurrentDeploymentGroupName field's value.
-func (s *UpdateDeploymentGroupInput) SetCurrentDeploymentGroupName(v string) *UpdateDeploymentGroupInput {
-	s.CurrentDeploymentGroupName = &v
-	return s
-}
-
-// SetDeploymentConfigName sets the DeploymentConfigName field's value.
-func (s *UpdateDeploymentGroupInput) SetDeploymentConfigName(v string) *UpdateDeploymentGroupInput {
-	s.DeploymentConfigName = &v
-	return s
-}
-
-// SetDeploymentStyle sets the DeploymentStyle field's value.
-func (s *UpdateDeploymentGroupInput) SetDeploymentStyle(v *DeploymentStyle) *UpdateDeploymentGroupInput {
-	s.DeploymentStyle = v
-	return s
-}
-
-// SetEc2TagFilters sets the Ec2TagFilters field's value.
-func (s *UpdateDeploymentGroupInput) SetEc2TagFilters(v []EC2TagFilter) *UpdateDeploymentGroupInput {
-	s.Ec2TagFilters = v
-	return s
-}
-
-// SetEc2TagSet sets the Ec2TagSet field's value.
-func (s *UpdateDeploymentGroupInput) SetEc2TagSet(v *EC2TagSet) *UpdateDeploymentGroupInput {
-	s.Ec2TagSet = v
-	return s
-}
-
-// SetLoadBalancerInfo sets the LoadBalancerInfo field's value.
-func (s *UpdateDeploymentGroupInput) SetLoadBalancerInfo(v *LoadBalancerInfo) *UpdateDeploymentGroupInput {
-	s.LoadBalancerInfo = v
-	return s
-}
-
-// SetNewDeploymentGroupName sets the NewDeploymentGroupName field's value.
-func (s *UpdateDeploymentGroupInput) SetNewDeploymentGroupName(v string) *UpdateDeploymentGroupInput {
-	s.NewDeploymentGroupName = &v
-	return s
-}
-
-// SetOnPremisesInstanceTagFilters sets the OnPremisesInstanceTagFilters field's value.
-func (s *UpdateDeploymentGroupInput) SetOnPremisesInstanceTagFilters(v []TagFilter) *UpdateDeploymentGroupInput {
-	s.OnPremisesInstanceTagFilters = v
-	return s
-}
-
-// SetOnPremisesTagSet sets the OnPremisesTagSet field's value.
-func (s *UpdateDeploymentGroupInput) SetOnPremisesTagSet(v *OnPremisesTagSet) *UpdateDeploymentGroupInput {
-	s.OnPremisesTagSet = v
-	return s
-}
-
-// SetServiceRoleArn sets the ServiceRoleArn field's value.
-func (s *UpdateDeploymentGroupInput) SetServiceRoleArn(v string) *UpdateDeploymentGroupInput {
-	s.ServiceRoleArn = &v
-	return s
-}
-
-// SetTriggerConfigurations sets the TriggerConfigurations field's value.
-func (s *UpdateDeploymentGroupInput) SetTriggerConfigurations(v []TriggerConfig) *UpdateDeploymentGroupInput {
-	s.TriggerConfigurations = v
-	return s
-}
-
 // Represents the output of an UpdateDeploymentGroup operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/UpdateDeploymentGroupOutput
 type UpdateDeploymentGroupOutput struct {
@@ -8151,12 +6738,6 @@ func (s UpdateDeploymentGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetHooksNotCleanedUp sets the HooksNotCleanedUp field's value.
-func (s *UpdateDeploymentGroupOutput) SetHooksNotCleanedUp(v []AutoScalingGroup) *UpdateDeploymentGroupOutput {
-	s.HooksNotCleanedUp = v
-	return s
-}
-
 type ApplicationRevisionSortBy string
 
 // Enum values for ApplicationRevisionSortBy
@@ -8165,6 +6746,15 @@ const (
 	ApplicationRevisionSortByFirstUsedTime ApplicationRevisionSortBy = "firstUsedTime"
 	ApplicationRevisionSortByLastUsedTime  ApplicationRevisionSortBy = "lastUsedTime"
 )
+
+func (enum ApplicationRevisionSortBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApplicationRevisionSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type AutoRollbackEvent string
 
@@ -8175,14 +6765,51 @@ const (
 	AutoRollbackEventDeploymentStopOnRequest AutoRollbackEvent = "DEPLOYMENT_STOP_ON_REQUEST"
 )
 
+func (enum AutoRollbackEvent) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoRollbackEvent) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BundleType string
 
 // Enum values for BundleType
 const (
-	BundleTypeTar BundleType = "tar"
-	BundleTypeTgz BundleType = "tgz"
-	BundleTypeZip BundleType = "zip"
+	BundleTypeTar  BundleType = "tar"
+	BundleTypeTgz  BundleType = "tgz"
+	BundleTypeZip  BundleType = "zip"
+	BundleTypeYaml BundleType = "YAML"
+	BundleTypeJson BundleType = "JSON"
 )
+
+func (enum BundleType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BundleType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ComputePlatform string
+
+// Enum values for ComputePlatform
+const (
+	ComputePlatformServer ComputePlatform = "Server"
+	ComputePlatformLambda ComputePlatform = "Lambda"
+)
+
+func (enum ComputePlatform) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComputePlatform) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DeploymentCreator string
 
@@ -8193,6 +6820,15 @@ const (
 	DeploymentCreatorCodeDeployRollback DeploymentCreator = "codeDeployRollback"
 )
 
+func (enum DeploymentCreator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentCreator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeploymentOption string
 
 // Enum values for DeploymentOption
@@ -8201,6 +6837,15 @@ const (
 	DeploymentOptionWithoutTrafficControl DeploymentOption = "WITHOUT_TRAFFIC_CONTROL"
 )
 
+func (enum DeploymentOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeploymentReadyAction string
 
 // Enum values for DeploymentReadyAction
@@ -8208,6 +6853,15 @@ const (
 	DeploymentReadyActionContinueDeployment DeploymentReadyAction = "CONTINUE_DEPLOYMENT"
 	DeploymentReadyActionStopDeployment     DeploymentReadyAction = "STOP_DEPLOYMENT"
 )
+
+func (enum DeploymentReadyAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentReadyAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DeploymentStatus string
 
@@ -8222,6 +6876,15 @@ const (
 	DeploymentStatusReady      DeploymentStatus = "Ready"
 )
 
+func (enum DeploymentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeploymentType string
 
 // Enum values for DeploymentType
@@ -8229,6 +6892,15 @@ const (
 	DeploymentTypeInPlace   DeploymentType = "IN_PLACE"
 	DeploymentTypeBlueGreen DeploymentType = "BLUE_GREEN"
 )
+
+func (enum DeploymentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EC2TagFilterType string
 
@@ -8239,29 +6911,55 @@ const (
 	EC2TagFilterTypeKeyAndValue EC2TagFilterType = "KEY_AND_VALUE"
 )
 
+func (enum EC2TagFilterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EC2TagFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeDeploymentGroupMissing        ErrorCode = "DEPLOYMENT_GROUP_MISSING"
-	ErrorCodeApplicationMissing            ErrorCode = "APPLICATION_MISSING"
-	ErrorCodeRevisionMissing               ErrorCode = "REVISION_MISSING"
-	ErrorCodeIamRoleMissing                ErrorCode = "IAM_ROLE_MISSING"
-	ErrorCodeIamRolePermissions            ErrorCode = "IAM_ROLE_PERMISSIONS"
-	ErrorCodeNoEc2Subscription             ErrorCode = "NO_EC2_SUBSCRIPTION"
-	ErrorCodeOverMaxInstances              ErrorCode = "OVER_MAX_INSTANCES"
-	ErrorCodeNoInstances                   ErrorCode = "NO_INSTANCES"
-	ErrorCodeTimeout                       ErrorCode = "TIMEOUT"
-	ErrorCodeHealthConstraintsInvalid      ErrorCode = "HEALTH_CONSTRAINTS_INVALID"
-	ErrorCodeHealthConstraints             ErrorCode = "HEALTH_CONSTRAINTS"
-	ErrorCodeInternalError                 ErrorCode = "INTERNAL_ERROR"
-	ErrorCodeThrottled                     ErrorCode = "THROTTLED"
-	ErrorCodeAlarmActive                   ErrorCode = "ALARM_ACTIVE"
-	ErrorCodeAgentIssue                    ErrorCode = "AGENT_ISSUE"
-	ErrorCodeAutoScalingIamRolePermissions ErrorCode = "AUTO_SCALING_IAM_ROLE_PERMISSIONS"
-	ErrorCodeAutoScalingConfiguration      ErrorCode = "AUTO_SCALING_CONFIGURATION"
-	ErrorCodeManualStop                    ErrorCode = "MANUAL_STOP"
+	ErrorCodeDeploymentGroupMissing                  ErrorCode = "DEPLOYMENT_GROUP_MISSING"
+	ErrorCodeApplicationMissing                      ErrorCode = "APPLICATION_MISSING"
+	ErrorCodeRevisionMissing                         ErrorCode = "REVISION_MISSING"
+	ErrorCodeIamRoleMissing                          ErrorCode = "IAM_ROLE_MISSING"
+	ErrorCodeIamRolePermissions                      ErrorCode = "IAM_ROLE_PERMISSIONS"
+	ErrorCodeNoEc2Subscription                       ErrorCode = "NO_EC2_SUBSCRIPTION"
+	ErrorCodeOverMaxInstances                        ErrorCode = "OVER_MAX_INSTANCES"
+	ErrorCodeNoInstances                             ErrorCode = "NO_INSTANCES"
+	ErrorCodeTimeout                                 ErrorCode = "TIMEOUT"
+	ErrorCodeHealthConstraintsInvalid                ErrorCode = "HEALTH_CONSTRAINTS_INVALID"
+	ErrorCodeHealthConstraints                       ErrorCode = "HEALTH_CONSTRAINTS"
+	ErrorCodeInternalError                           ErrorCode = "INTERNAL_ERROR"
+	ErrorCodeThrottled                               ErrorCode = "THROTTLED"
+	ErrorCodeAlarmActive                             ErrorCode = "ALARM_ACTIVE"
+	ErrorCodeAgentIssue                              ErrorCode = "AGENT_ISSUE"
+	ErrorCodeAutoScalingIamRolePermissions           ErrorCode = "AUTO_SCALING_IAM_ROLE_PERMISSIONS"
+	ErrorCodeAutoScalingConfiguration                ErrorCode = "AUTO_SCALING_CONFIGURATION"
+	ErrorCodeManualStop                              ErrorCode = "MANUAL_STOP"
+	ErrorCodeMissingBlueGreenDeploymentConfiguration ErrorCode = "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"
+	ErrorCodeMissingElbInformation                   ErrorCode = "MISSING_ELB_INFORMATION"
+	ErrorCodeMissingGithubToken                      ErrorCode = "MISSING_GITHUB_TOKEN"
+	ErrorCodeElasticLoadBalancingInvalid             ErrorCode = "ELASTIC_LOAD_BALANCING_INVALID"
+	ErrorCodeElbInvalidInstance                      ErrorCode = "ELB_INVALID_INSTANCE"
+	ErrorCodeInvalidLambdaConfiguration              ErrorCode = "INVALID_LAMBDA_CONFIGURATION"
+	ErrorCodeInvalidLambdaFunction                   ErrorCode = "INVALID_LAMBDA_FUNCTION"
+	ErrorCodeHookExecutionFailure                    ErrorCode = "HOOK_EXECUTION_FAILURE"
 )
+
+func (enum ErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type FileExistsBehavior string
 
@@ -8272,6 +6970,15 @@ const (
 	FileExistsBehaviorRetain    FileExistsBehavior = "RETAIN"
 )
 
+func (enum FileExistsBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FileExistsBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type GreenFleetProvisioningAction string
 
 // Enum values for GreenFleetProvisioningAction
@@ -8280,6 +6987,15 @@ const (
 	GreenFleetProvisioningActionCopyAutoScalingGroup GreenFleetProvisioningAction = "COPY_AUTO_SCALING_GROUP"
 )
 
+func (enum GreenFleetProvisioningAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GreenFleetProvisioningAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceAction string
 
 // Enum values for InstanceAction
@@ -8287,6 +7003,15 @@ const (
 	InstanceActionTerminate InstanceAction = "TERMINATE"
 	InstanceActionKeepAlive InstanceAction = "KEEP_ALIVE"
 )
+
+func (enum InstanceAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceStatus string
 
@@ -8301,6 +7026,15 @@ const (
 	InstanceStatusReady      InstanceStatus = "Ready"
 )
 
+func (enum InstanceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceType string
 
 // Enum values for InstanceType
@@ -8308,6 +7042,15 @@ const (
 	InstanceTypeBlue  InstanceType = "Blue"
 	InstanceTypeGreen InstanceType = "Green"
 )
+
+func (enum InstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LifecycleErrorCode string
 
@@ -8321,6 +7064,15 @@ const (
 	LifecycleErrorCodeUnknownError        LifecycleErrorCode = "UnknownError"
 )
 
+func (enum LifecycleErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LifecycleErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LifecycleEventStatus string
 
 // Enum values for LifecycleEventStatus
@@ -8333,6 +7085,15 @@ const (
 	LifecycleEventStatusUnknown    LifecycleEventStatus = "Unknown"
 )
 
+func (enum LifecycleEventStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LifecycleEventStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ListStateFilterAction string
 
 // Enum values for ListStateFilterAction
@@ -8342,6 +7103,15 @@ const (
 	ListStateFilterActionIgnore  ListStateFilterAction = "ignore"
 )
 
+func (enum ListStateFilterAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ListStateFilterAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MinimumHealthyHostsType string
 
 // Enum values for MinimumHealthyHostsType
@@ -8349,6 +7119,15 @@ const (
 	MinimumHealthyHostsTypeHostCount    MinimumHealthyHostsType = "HOST_COUNT"
 	MinimumHealthyHostsTypeFleetPercent MinimumHealthyHostsType = "FLEET_PERCENT"
 )
+
+func (enum MinimumHealthyHostsType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MinimumHealthyHostsType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RegistrationStatus string
 
@@ -8358,13 +7137,32 @@ const (
 	RegistrationStatusDeregistered RegistrationStatus = "Deregistered"
 )
 
+func (enum RegistrationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RegistrationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RevisionLocationType string
 
 // Enum values for RevisionLocationType
 const (
 	RevisionLocationTypeS3     RevisionLocationType = "S3"
 	RevisionLocationTypeGitHub RevisionLocationType = "GitHub"
+	RevisionLocationTypeString RevisionLocationType = "String"
 )
+
+func (enum RevisionLocationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RevisionLocationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SortOrder string
 
@@ -8374,6 +7172,15 @@ const (
 	SortOrderDescending SortOrder = "descending"
 )
 
+func (enum SortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StopStatus string
 
 // Enum values for StopStatus
@@ -8381,6 +7188,15 @@ const (
 	StopStatusPending   StopStatus = "Pending"
 	StopStatusSucceeded StopStatus = "Succeeded"
 )
+
+func (enum StopStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StopStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TagFilterType string
 
@@ -8390,6 +7206,33 @@ const (
 	TagFilterTypeValueOnly   TagFilterType = "VALUE_ONLY"
 	TagFilterTypeKeyAndValue TagFilterType = "KEY_AND_VALUE"
 )
+
+func (enum TagFilterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TagFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TrafficRoutingType string
+
+// Enum values for TrafficRoutingType
+const (
+	TrafficRoutingTypeTimeBasedCanary TrafficRoutingType = "TimeBasedCanary"
+	TrafficRoutingTypeTimeBasedLinear TrafficRoutingType = "TimeBasedLinear"
+	TrafficRoutingTypeAllAtOnce       TrafficRoutingType = "AllAtOnce"
+)
+
+func (enum TrafficRoutingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrafficRoutingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TriggerEventType string
 
@@ -8406,3 +7249,12 @@ const (
 	TriggerEventTypeInstanceFailure    TriggerEventType = "InstanceFailure"
 	TriggerEventTypeInstanceReady      TriggerEventType = "InstanceReady"
 )
+
+func (enum TriggerEventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TriggerEventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

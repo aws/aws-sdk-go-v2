@@ -5,6 +5,7 @@ package greengrass
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opAssociateRoleToGroup = "AssociateRoleToGroup"
@@ -710,6 +711,156 @@ func (c *Greengrass) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDef
 	return CreateLoggerDefinitionVersionRequest{Request: req, Input: input}
 }
 
+const opCreateResourceDefinition = "CreateResourceDefinition"
+
+// CreateResourceDefinitionRequest is a API request type for the CreateResourceDefinition API operation.
+type CreateResourceDefinitionRequest struct {
+	*aws.Request
+	Input *CreateResourceDefinitionInput
+}
+
+// Send marshals and sends the CreateResourceDefinition API request.
+func (r CreateResourceDefinitionRequest) Send() (*CreateResourceDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateResourceDefinitionOutput), nil
+}
+
+// CreateResourceDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
+//
+// Creates a resource definition which contains a list of resources to be used
+// in a group. You can create an initial version of the definition by providing
+// a list of resources now, or use ``CreateResourceDefinitionVersion`` later.
+//
+//    // Example sending a request using the CreateResourceDefinitionRequest method.
+//    req := client.CreateResourceDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinition
+func (c *Greengrass) CreateResourceDefinitionRequest(input *CreateResourceDefinitionInput) CreateResourceDefinitionRequest {
+	op := &aws.Operation{
+		Name:       opCreateResourceDefinition,
+		HTTPMethod: "POST",
+		HTTPPath:   "/greengrass/definition/resources",
+	}
+
+	if input == nil {
+		input = &CreateResourceDefinitionInput{}
+	}
+
+	output := &CreateResourceDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateResourceDefinitionRequest{Request: req, Input: input}
+}
+
+const opCreateResourceDefinitionVersion = "CreateResourceDefinitionVersion"
+
+// CreateResourceDefinitionVersionRequest is a API request type for the CreateResourceDefinitionVersion API operation.
+type CreateResourceDefinitionVersionRequest struct {
+	*aws.Request
+	Input *CreateResourceDefinitionVersionInput
+}
+
+// Send marshals and sends the CreateResourceDefinitionVersion API request.
+func (r CreateResourceDefinitionVersionRequest) Send() (*CreateResourceDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateResourceDefinitionVersionOutput), nil
+}
+
+// CreateResourceDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
+//
+// Create a version of a resource definition that has already been defined.
+//
+//    // Example sending a request using the CreateResourceDefinitionVersionRequest method.
+//    req := client.CreateResourceDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionVersion
+func (c *Greengrass) CreateResourceDefinitionVersionRequest(input *CreateResourceDefinitionVersionInput) CreateResourceDefinitionVersionRequest {
+	op := &aws.Operation{
+		Name:       opCreateResourceDefinitionVersion,
+		HTTPMethod: "POST",
+		HTTPPath:   "/greengrass/definition/resources/{ResourceDefinitionId}/versions",
+	}
+
+	if input == nil {
+		input = &CreateResourceDefinitionVersionInput{}
+	}
+
+	output := &CreateResourceDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateResourceDefinitionVersionRequest{Request: req, Input: input}
+}
+
+const opCreateSoftwareUpdateJob = "CreateSoftwareUpdateJob"
+
+// CreateSoftwareUpdateJobRequest is a API request type for the CreateSoftwareUpdateJob API operation.
+type CreateSoftwareUpdateJobRequest struct {
+	*aws.Request
+	Input *CreateSoftwareUpdateJobInput
+}
+
+// Send marshals and sends the CreateSoftwareUpdateJob API request.
+func (r CreateSoftwareUpdateJobRequest) Send() (*CreateSoftwareUpdateJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateSoftwareUpdateJobOutput), nil
+}
+
+// CreateSoftwareUpdateJobRequest returns a request value for making API operation for
+// AWS Greengrass.
+//
+// Creates an Iot Job that will trigger your Greengrass Cores to update the
+// software they are running.
+//
+//    // Example sending a request using the CreateSoftwareUpdateJobRequest method.
+//    req := client.CreateSoftwareUpdateJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJob
+func (c *Greengrass) CreateSoftwareUpdateJobRequest(input *CreateSoftwareUpdateJobInput) CreateSoftwareUpdateJobRequest {
+	op := &aws.Operation{
+		Name:       opCreateSoftwareUpdateJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/greengrass/updates",
+	}
+
+	if input == nil {
+		input = &CreateSoftwareUpdateJobInput{}
+	}
+
+	output := &CreateSoftwareUpdateJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateSoftwareUpdateJobRequest{Request: req, Input: input}
+}
+
 const opCreateSubscriptionDefinition = "CreateSubscriptionDefinition"
 
 // CreateSubscriptionDefinitionRequest is a API request type for the CreateSubscriptionDefinition API operation.
@@ -1057,6 +1208,55 @@ func (c *Greengrass) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinition
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteLoggerDefinitionRequest{Request: req, Input: input}
+}
+
+const opDeleteResourceDefinition = "DeleteResourceDefinition"
+
+// DeleteResourceDefinitionRequest is a API request type for the DeleteResourceDefinition API operation.
+type DeleteResourceDefinitionRequest struct {
+	*aws.Request
+	Input *DeleteResourceDefinitionInput
+}
+
+// Send marshals and sends the DeleteResourceDefinition API request.
+func (r DeleteResourceDefinitionRequest) Send() (*DeleteResourceDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteResourceDefinitionOutput), nil
+}
+
+// DeleteResourceDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
+//
+// Deletes a resource definition.
+//
+//    // Example sending a request using the DeleteResourceDefinitionRequest method.
+//    req := client.DeleteResourceDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteResourceDefinition
+func (c *Greengrass) DeleteResourceDefinitionRequest(input *DeleteResourceDefinitionInput) DeleteResourceDefinitionRequest {
+	op := &aws.Operation{
+		Name:       opDeleteResourceDefinition,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/greengrass/definition/resources/{ResourceDefinitionId}",
+	}
+
+	if input == nil {
+		input = &DeleteResourceDefinitionInput{}
+	}
+
+	output := &DeleteResourceDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteResourceDefinitionRequest{Request: req, Input: input}
 }
 
 const opDeleteSubscriptionDefinition = "DeleteSubscriptionDefinition"
@@ -1945,6 +2145,106 @@ func (c *Greengrass) GetLoggerDefinitionVersionRequest(input *GetLoggerDefinitio
 	return GetLoggerDefinitionVersionRequest{Request: req, Input: input}
 }
 
+const opGetResourceDefinition = "GetResourceDefinition"
+
+// GetResourceDefinitionRequest is a API request type for the GetResourceDefinition API operation.
+type GetResourceDefinitionRequest struct {
+	*aws.Request
+	Input *GetResourceDefinitionInput
+}
+
+// Send marshals and sends the GetResourceDefinition API request.
+func (r GetResourceDefinitionRequest) Send() (*GetResourceDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetResourceDefinitionOutput), nil
+}
+
+// GetResourceDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
+//
+// Retrieves information about a resource definition, such as its creation time
+// and latest version.
+//
+//    // Example sending a request using the GetResourceDefinitionRequest method.
+//    req := client.GetResourceDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinition
+func (c *Greengrass) GetResourceDefinitionRequest(input *GetResourceDefinitionInput) GetResourceDefinitionRequest {
+	op := &aws.Operation{
+		Name:       opGetResourceDefinition,
+		HTTPMethod: "GET",
+		HTTPPath:   "/greengrass/definition/resources/{ResourceDefinitionId}",
+	}
+
+	if input == nil {
+		input = &GetResourceDefinitionInput{}
+	}
+
+	output := &GetResourceDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetResourceDefinitionRequest{Request: req, Input: input}
+}
+
+const opGetResourceDefinitionVersion = "GetResourceDefinitionVersion"
+
+// GetResourceDefinitionVersionRequest is a API request type for the GetResourceDefinitionVersion API operation.
+type GetResourceDefinitionVersionRequest struct {
+	*aws.Request
+	Input *GetResourceDefinitionVersionInput
+}
+
+// Send marshals and sends the GetResourceDefinitionVersion API request.
+func (r GetResourceDefinitionVersionRequest) Send() (*GetResourceDefinitionVersionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetResourceDefinitionVersionOutput), nil
+}
+
+// GetResourceDefinitionVersionRequest returns a request value for making API operation for
+// AWS Greengrass.
+//
+// Retrieves information about a resource definition version, such as which
+// resources are included in the version.
+//
+//    // Example sending a request using the GetResourceDefinitionVersionRequest method.
+//    req := client.GetResourceDefinitionVersionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersion
+func (c *Greengrass) GetResourceDefinitionVersionRequest(input *GetResourceDefinitionVersionInput) GetResourceDefinitionVersionRequest {
+	op := &aws.Operation{
+		Name:       opGetResourceDefinitionVersion,
+		HTTPMethod: "GET",
+		HTTPPath:   "/greengrass/definition/resources/{ResourceDefinitionId}/versions/{ResourceDefinitionVersionId}",
+	}
+
+	if input == nil {
+		input = &GetResourceDefinitionVersionInput{}
+	}
+
+	output := &GetResourceDefinitionVersionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetResourceDefinitionVersionRequest{Request: req, Input: input}
+}
+
 const opGetServiceRoleForAccount = "GetServiceRoleForAccount"
 
 // GetServiceRoleForAccountRequest is a API request type for the GetServiceRoleForAccount API operation.
@@ -2680,6 +2980,104 @@ func (c *Greengrass) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsIn
 	return ListLoggerDefinitionsRequest{Request: req, Input: input}
 }
 
+const opListResourceDefinitionVersions = "ListResourceDefinitionVersions"
+
+// ListResourceDefinitionVersionsRequest is a API request type for the ListResourceDefinitionVersions API operation.
+type ListResourceDefinitionVersionsRequest struct {
+	*aws.Request
+	Input *ListResourceDefinitionVersionsInput
+}
+
+// Send marshals and sends the ListResourceDefinitionVersions API request.
+func (r ListResourceDefinitionVersionsRequest) Send() (*ListResourceDefinitionVersionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListResourceDefinitionVersionsOutput), nil
+}
+
+// ListResourceDefinitionVersionsRequest returns a request value for making API operation for
+// AWS Greengrass.
+//
+// Lists the versions of a resource definition.
+//
+//    // Example sending a request using the ListResourceDefinitionVersionsRequest method.
+//    req := client.ListResourceDefinitionVersionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionVersions
+func (c *Greengrass) ListResourceDefinitionVersionsRequest(input *ListResourceDefinitionVersionsInput) ListResourceDefinitionVersionsRequest {
+	op := &aws.Operation{
+		Name:       opListResourceDefinitionVersions,
+		HTTPMethod: "GET",
+		HTTPPath:   "/greengrass/definition/resources/{ResourceDefinitionId}/versions",
+	}
+
+	if input == nil {
+		input = &ListResourceDefinitionVersionsInput{}
+	}
+
+	output := &ListResourceDefinitionVersionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListResourceDefinitionVersionsRequest{Request: req, Input: input}
+}
+
+const opListResourceDefinitions = "ListResourceDefinitions"
+
+// ListResourceDefinitionsRequest is a API request type for the ListResourceDefinitions API operation.
+type ListResourceDefinitionsRequest struct {
+	*aws.Request
+	Input *ListResourceDefinitionsInput
+}
+
+// Send marshals and sends the ListResourceDefinitions API request.
+func (r ListResourceDefinitionsRequest) Send() (*ListResourceDefinitionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListResourceDefinitionsOutput), nil
+}
+
+// ListResourceDefinitionsRequest returns a request value for making API operation for
+// AWS Greengrass.
+//
+// Retrieves a list of resource definitions.
+//
+//    // Example sending a request using the ListResourceDefinitionsRequest method.
+//    req := client.ListResourceDefinitionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitions
+func (c *Greengrass) ListResourceDefinitionsRequest(input *ListResourceDefinitionsInput) ListResourceDefinitionsRequest {
+	op := &aws.Operation{
+		Name:       opListResourceDefinitions,
+		HTTPMethod: "GET",
+		HTTPPath:   "/greengrass/definition/resources",
+	}
+
+	if input == nil {
+		input = &ListResourceDefinitionsInput{}
+	}
+
+	output := &ListResourceDefinitionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListResourceDefinitionsRequest{Request: req, Input: input}
+}
+
 const opListSubscriptionDefinitionVersions = "ListSubscriptionDefinitionVersions"
 
 // ListSubscriptionDefinitionVersionsRequest is a API request type for the ListSubscriptionDefinitionVersions API operation.
@@ -3172,6 +3570,55 @@ func (c *Greengrass) UpdateLoggerDefinitionRequest(input *UpdateLoggerDefinition
 	return UpdateLoggerDefinitionRequest{Request: req, Input: input}
 }
 
+const opUpdateResourceDefinition = "UpdateResourceDefinition"
+
+// UpdateResourceDefinitionRequest is a API request type for the UpdateResourceDefinition API operation.
+type UpdateResourceDefinitionRequest struct {
+	*aws.Request
+	Input *UpdateResourceDefinitionInput
+}
+
+// Send marshals and sends the UpdateResourceDefinition API request.
+func (r UpdateResourceDefinitionRequest) Send() (*UpdateResourceDefinitionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateResourceDefinitionOutput), nil
+}
+
+// UpdateResourceDefinitionRequest returns a request value for making API operation for
+// AWS Greengrass.
+//
+// Updates a resource definition.
+//
+//    // Example sending a request using the UpdateResourceDefinitionRequest method.
+//    req := client.UpdateResourceDefinitionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateResourceDefinition
+func (c *Greengrass) UpdateResourceDefinitionRequest(input *UpdateResourceDefinitionInput) UpdateResourceDefinitionRequest {
+	op := &aws.Operation{
+		Name:       opUpdateResourceDefinition,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/greengrass/definition/resources/{ResourceDefinitionId}",
+	}
+
+	if input == nil {
+		input = &UpdateResourceDefinitionInput{}
+	}
+
+	output := &UpdateResourceDefinitionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateResourceDefinitionRequest{Request: req, Input: input}
+}
+
 const opUpdateSubscriptionDefinition = "UpdateSubscriptionDefinition"
 
 // UpdateSubscriptionDefinitionRequest is a API request type for the UpdateSubscriptionDefinition API operation.
@@ -3256,16 +3703,23 @@ func (s *AssociateRoleToGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *AssociateRoleToGroupInput) SetGroupId(v string) *AssociateRoleToGroupInput {
-	s.GroupId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssociateRoleToGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetRoleArn sets the RoleArn field's value.
-func (s *AssociateRoleToGroupInput) SetRoleArn(v string) *AssociateRoleToGroupInput {
-	s.RoleArn = &v
-	return s
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroupResponse
@@ -3293,10 +3747,15 @@ func (s AssociateRoleToGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAssociatedAt sets the AssociatedAt field's value.
-func (s *AssociateRoleToGroupOutput) SetAssociatedAt(v string) *AssociateRoleToGroupOutput {
-	s.AssociatedAt = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssociateRoleToGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AssociatedAt != nil {
+		v := *s.AssociatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AssociatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccountRequest
@@ -3317,10 +3776,17 @@ func (s AssociateServiceRoleToAccountInput) GoString() string {
 	return s.String()
 }
 
-// SetRoleArn sets the RoleArn field's value.
-func (s *AssociateServiceRoleToAccountInput) SetRoleArn(v string) *AssociateServiceRoleToAccountInput {
-	s.RoleArn = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssociateServiceRoleToAccountInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateServiceRoleToAccountResponse
@@ -3348,10 +3814,15 @@ func (s AssociateServiceRoleToAccountOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetAssociatedAt sets the AssociatedAt field's value.
-func (s *AssociateServiceRoleToAccountOutput) SetAssociatedAt(v string) *AssociateServiceRoleToAccountOutput {
-	s.AssociatedAt = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AssociateServiceRoleToAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AssociatedAt != nil {
+		v := *s.AssociatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AssociatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Connectivity Info
@@ -3382,28 +3853,33 @@ func (s ConnectivityInfo) GoString() string {
 	return s.String()
 }
 
-// SetHostAddress sets the HostAddress field's value.
-func (s *ConnectivityInfo) SetHostAddress(v string) *ConnectivityInfo {
-	s.HostAddress = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ConnectivityInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HostAddress != nil {
+		v := *s.HostAddress
 
-// SetId sets the Id field's value.
-func (s *ConnectivityInfo) SetId(v string) *ConnectivityInfo {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HostAddress", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetMetadata sets the Metadata field's value.
-func (s *ConnectivityInfo) SetMetadata(v string) *ConnectivityInfo {
-	s.Metadata = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Metadata != nil {
+		v := *s.Metadata
 
-// SetPortNumber sets the PortNumber field's value.
-func (s *ConnectivityInfo) SetPortNumber(v int64) *ConnectivityInfo {
-	s.PortNumber = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Metadata", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PortNumber != nil {
+		v := *s.PortNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PortNumber", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Information on the core
@@ -3435,28 +3911,33 @@ func (s Core) GoString() string {
 	return s.String()
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *Core) SetCertificateArn(v string) *Core {
-	s.CertificateArn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Core) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateArn != nil {
+		v := *s.CertificateArn
 
-// SetId sets the Id field's value.
-func (s *Core) SetId(v string) *Core {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CertificateArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetSyncShadow sets the SyncShadow field's value.
-func (s *Core) SetSyncShadow(v bool) *Core {
-	s.SyncShadow = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SyncShadow != nil {
+		v := *s.SyncShadow
 
-// SetThingArn sets the ThingArn field's value.
-func (s *Core) SetThingArn(v string) *Core {
-	s.ThingArn = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SyncShadow", protocol.BoolValue(v), metadata)
+	}
+	if s.ThingArn != nil {
+		v := *s.ThingArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThingArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on core definition version
@@ -3478,10 +3959,21 @@ func (s CoreDefinitionVersion) GoString() string {
 	return s.String()
 }
 
-// SetCores sets the Cores field's value.
-func (s *CoreDefinitionVersion) SetCores(v []Core) *CoreDefinitionVersion {
-	s.Cores = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CoreDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Cores) > 0 {
+		v := s.Cores
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Cores", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionRequest
@@ -3506,22 +3998,29 @@ func (s CreateCoreDefinitionInput) GoString() string {
 	return s.String()
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateCoreDefinitionInput) SetAmznClientToken(v string) *CreateCoreDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateCoreDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateCoreDefinitionInput) SetInitialVersion(v *CoreDefinitionVersion) *CreateCoreDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
+	if s.InitialVersion != nil {
+		v := s.InitialVersion
 
-// SetName sets the Name field's value.
-func (s *CreateCoreDefinitionInput) SetName(v string) *CreateCoreDefinitionInput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InitialVersion", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionResponse
@@ -3560,46 +4059,51 @@ func (s CreateCoreDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateCoreDefinitionOutput) SetArn(v string) *CreateCoreDefinitionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateCoreDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateCoreDefinitionOutput) SetCreationTimestamp(v string) *CreateCoreDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateCoreDefinitionOutput) SetId(v string) *CreateCoreDefinitionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateCoreDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateCoreDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateCoreDefinitionOutput) SetLatestVersion(v string) *CreateCoreDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateCoreDefinitionOutput) SetLatestVersionArn(v string) *CreateCoreDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *CreateCoreDefinitionOutput) SetName(v string) *CreateCoreDefinitionOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionVersionRequest
@@ -3638,22 +4142,35 @@ func (s *CreateCoreDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateCoreDefinitionVersionInput) SetAmznClientToken(v string) *CreateCoreDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateCoreDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *CreateCoreDefinitionVersionInput) SetCoreDefinitionId(v string) *CreateCoreDefinitionVersionInput {
-	s.CoreDefinitionId = &v
-	return s
-}
+	if len(s.Cores) > 0 {
+		v := s.Cores
 
-// SetCores sets the Cores field's value.
-func (s *CreateCoreDefinitionVersionInput) SetCores(v []Core) *CreateCoreDefinitionVersionInput {
-	s.Cores = v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Cores", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CoreDefinitionId != nil {
+		v := *s.CoreDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateCoreDefinitionVersionResponse
@@ -3686,28 +4203,33 @@ func (s CreateCoreDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateCoreDefinitionVersionOutput) SetArn(v string) *CreateCoreDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateCoreDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateCoreDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateCoreDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateCoreDefinitionVersionOutput) SetId(v string) *CreateCoreDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *CreateCoreDefinitionVersionOutput) SetVersion(v string) *CreateCoreDefinitionVersionOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on Deployment
@@ -3755,34 +4277,41 @@ func (s *CreateDeploymentInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateDeploymentInput) SetAmznClientToken(v string) *CreateDeploymentInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *CreateDeploymentInput) SetDeploymentId(v string) *CreateDeploymentInput {
-	s.DeploymentId = &v
-	return s
-}
+	if s.DeploymentId != nil {
+		v := *s.DeploymentId
 
-// SetDeploymentType sets the DeploymentType field's value.
-func (s *CreateDeploymentInput) SetDeploymentType(v DeploymentType) *CreateDeploymentInput {
-	s.DeploymentType = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.DeploymentType) > 0 {
+		v := s.DeploymentType
 
-// SetGroupId sets the GroupId field's value.
-func (s *CreateDeploymentInput) SetGroupId(v string) *CreateDeploymentInput {
-	s.GroupId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.GroupVersionId != nil {
+		v := *s.GroupVersionId
 
-// SetGroupVersionId sets the GroupVersionId field's value.
-func (s *CreateDeploymentInput) SetGroupVersionId(v string) *CreateDeploymentInput {
-	s.GroupVersionId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupVersionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeploymentResponse
@@ -3813,16 +4342,21 @@ func (s CreateDeploymentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeploymentArn sets the DeploymentArn field's value.
-func (s *CreateDeploymentOutput) SetDeploymentArn(v string) *CreateDeploymentOutput {
-	s.DeploymentArn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDeploymentOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DeploymentArn != nil {
+		v := *s.DeploymentArn
 
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *CreateDeploymentOutput) SetDeploymentId(v string) *CreateDeploymentOutput {
-	s.DeploymentId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DeploymentId != nil {
+		v := *s.DeploymentId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionRequest
@@ -3847,22 +4381,29 @@ func (s CreateDeviceDefinitionInput) GoString() string {
 	return s.String()
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateDeviceDefinitionInput) SetAmznClientToken(v string) *CreateDeviceDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDeviceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateDeviceDefinitionInput) SetInitialVersion(v *DeviceDefinitionVersion) *CreateDeviceDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
+	if s.InitialVersion != nil {
+		v := s.InitialVersion
 
-// SetName sets the Name field's value.
-func (s *CreateDeviceDefinitionInput) SetName(v string) *CreateDeviceDefinitionInput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InitialVersion", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionResponse
@@ -3901,46 +4442,51 @@ func (s CreateDeviceDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateDeviceDefinitionOutput) SetArn(v string) *CreateDeviceDefinitionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDeviceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateDeviceDefinitionOutput) SetCreationTimestamp(v string) *CreateDeviceDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateDeviceDefinitionOutput) SetId(v string) *CreateDeviceDefinitionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateDeviceDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateDeviceDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateDeviceDefinitionOutput) SetLatestVersion(v string) *CreateDeviceDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateDeviceDefinitionOutput) SetLatestVersionArn(v string) *CreateDeviceDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *CreateDeviceDefinitionOutput) SetName(v string) *CreateDeviceDefinitionOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionVersionRequest
@@ -3979,22 +4525,35 @@ func (s *CreateDeviceDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateDeviceDefinitionVersionInput) SetAmznClientToken(v string) *CreateDeviceDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDeviceDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *CreateDeviceDefinitionVersionInput) SetDeviceDefinitionId(v string) *CreateDeviceDefinitionVersionInput {
-	s.DeviceDefinitionId = &v
-	return s
-}
+	if len(s.Devices) > 0 {
+		v := s.Devices
 
-// SetDevices sets the Devices field's value.
-func (s *CreateDeviceDefinitionVersionInput) SetDevices(v []Device) *CreateDeviceDefinitionVersionInput {
-	s.Devices = v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Devices", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DeviceDefinitionId != nil {
+		v := *s.DeviceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DeviceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeviceDefinitionVersionResponse
@@ -4027,28 +4586,33 @@ func (s CreateDeviceDefinitionVersionOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateDeviceDefinitionVersionOutput) SetArn(v string) *CreateDeviceDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDeviceDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateDeviceDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateDeviceDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateDeviceDefinitionVersionOutput) SetId(v string) *CreateDeviceDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *CreateDeviceDefinitionVersionOutput) SetVersion(v string) *CreateDeviceDefinitionVersionOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionRequest
@@ -4073,22 +4637,29 @@ func (s CreateFunctionDefinitionInput) GoString() string {
 	return s.String()
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateFunctionDefinitionInput) SetAmznClientToken(v string) *CreateFunctionDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFunctionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateFunctionDefinitionInput) SetInitialVersion(v *FunctionDefinitionVersion) *CreateFunctionDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
+	if s.InitialVersion != nil {
+		v := s.InitialVersion
 
-// SetName sets the Name field's value.
-func (s *CreateFunctionDefinitionInput) SetName(v string) *CreateFunctionDefinitionInput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InitialVersion", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionResponse
@@ -4127,46 +4698,51 @@ func (s CreateFunctionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateFunctionDefinitionOutput) SetArn(v string) *CreateFunctionDefinitionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFunctionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateFunctionDefinitionOutput) SetCreationTimestamp(v string) *CreateFunctionDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateFunctionDefinitionOutput) SetId(v string) *CreateFunctionDefinitionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateFunctionDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateFunctionDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateFunctionDefinitionOutput) SetLatestVersion(v string) *CreateFunctionDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateFunctionDefinitionOutput) SetLatestVersionArn(v string) *CreateFunctionDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *CreateFunctionDefinitionOutput) SetName(v string) *CreateFunctionDefinitionOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionVersionRequest
@@ -4205,22 +4781,35 @@ func (s *CreateFunctionDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateFunctionDefinitionVersionInput) SetAmznClientToken(v string) *CreateFunctionDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFunctionDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *CreateFunctionDefinitionVersionInput) SetFunctionDefinitionId(v string) *CreateFunctionDefinitionVersionInput {
-	s.FunctionDefinitionId = &v
-	return s
-}
+	if len(s.Functions) > 0 {
+		v := s.Functions
 
-// SetFunctions sets the Functions field's value.
-func (s *CreateFunctionDefinitionVersionInput) SetFunctions(v []Function) *CreateFunctionDefinitionVersionInput {
-	s.Functions = v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Functions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionDefinitionId != nil {
+		v := *s.FunctionDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "FunctionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateFunctionDefinitionVersionResponse
@@ -4253,28 +4842,33 @@ func (s CreateFunctionDefinitionVersionOutput) SDKResponseMetadata() aws.Respons
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateFunctionDefinitionVersionOutput) SetArn(v string) *CreateFunctionDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFunctionDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateFunctionDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateFunctionDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateFunctionDefinitionVersionOutput) SetId(v string) *CreateFunctionDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *CreateFunctionDefinitionVersionOutput) SetVersion(v string) *CreateFunctionDefinitionVersionOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupCertificateAuthorityRequest
@@ -4311,16 +4905,23 @@ func (s *CreateGroupCertificateAuthorityInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateGroupCertificateAuthorityInput) SetAmznClientToken(v string) *CreateGroupCertificateAuthorityInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGroupCertificateAuthorityInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetGroupId sets the GroupId field's value.
-func (s *CreateGroupCertificateAuthorityInput) SetGroupId(v string) *CreateGroupCertificateAuthorityInput {
-	s.GroupId = &v
-	return s
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupCertificateAuthorityResponse
@@ -4348,10 +4949,15 @@ func (s CreateGroupCertificateAuthorityOutput) SDKResponseMetadata() aws.Respons
 	return s.responseMetadata
 }
 
-// SetGroupCertificateAuthorityArn sets the GroupCertificateAuthorityArn field's value.
-func (s *CreateGroupCertificateAuthorityOutput) SetGroupCertificateAuthorityArn(v string) *CreateGroupCertificateAuthorityOutput {
-	s.GroupCertificateAuthorityArn = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGroupCertificateAuthorityOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupCertificateAuthorityArn != nil {
+		v := *s.GroupCertificateAuthorityArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupCertificateAuthorityArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupRequest
@@ -4376,22 +4982,29 @@ func (s CreateGroupInput) GoString() string {
 	return s.String()
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateGroupInput) SetAmznClientToken(v string) *CreateGroupInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateGroupInput) SetInitialVersion(v *GroupVersion) *CreateGroupInput {
-	s.InitialVersion = v
-	return s
-}
+	if s.InitialVersion != nil {
+		v := s.InitialVersion
 
-// SetName sets the Name field's value.
-func (s *CreateGroupInput) SetName(v string) *CreateGroupInput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InitialVersion", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupResponse
@@ -4430,46 +5043,51 @@ func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateGroupOutput) SetArn(v string) *CreateGroupOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateGroupOutput) SetCreationTimestamp(v string) *CreateGroupOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateGroupOutput) SetId(v string) *CreateGroupOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateGroupOutput) SetLastUpdatedTimestamp(v string) *CreateGroupOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateGroupOutput) SetLatestVersion(v string) *CreateGroupOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateGroupOutput) SetLatestVersionArn(v string) *CreateGroupOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *CreateGroupOutput) SetName(v string) *CreateGroupOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupVersionRequest
@@ -4488,6 +5106,8 @@ type CreateGroupVersionInput struct {
 	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
 
 	LoggerDefinitionVersionArn *string `type:"string"`
+
+	ResourceDefinitionVersionArn *string `type:"string"`
 
 	SubscriptionDefinitionVersionArn *string `type:"string"`
 }
@@ -4516,46 +5136,59 @@ func (s *CreateGroupVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateGroupVersionInput) SetAmznClientToken(v string) *CreateGroupVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGroupVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetCoreDefinitionVersionArn sets the CoreDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetCoreDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.CoreDefinitionVersionArn = &v
-	return s
-}
+	if s.CoreDefinitionVersionArn != nil {
+		v := *s.CoreDefinitionVersionArn
 
-// SetDeviceDefinitionVersionArn sets the DeviceDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetDeviceDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.DeviceDefinitionVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CoreDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DeviceDefinitionVersionArn != nil {
+		v := *s.DeviceDefinitionVersionArn
 
-// SetFunctionDefinitionVersionArn sets the FunctionDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetFunctionDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.FunctionDefinitionVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeviceDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionDefinitionVersionArn != nil {
+		v := *s.FunctionDefinitionVersionArn
 
-// SetGroupId sets the GroupId field's value.
-func (s *CreateGroupVersionInput) SetGroupId(v string) *CreateGroupVersionInput {
-	s.GroupId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FunctionDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LoggerDefinitionVersionArn != nil {
+		v := *s.LoggerDefinitionVersionArn
 
-// SetLoggerDefinitionVersionArn sets the LoggerDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetLoggerDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.LoggerDefinitionVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LoggerDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceDefinitionVersionArn != nil {
+		v := *s.ResourceDefinitionVersionArn
 
-// SetSubscriptionDefinitionVersionArn sets the SubscriptionDefinitionVersionArn field's value.
-func (s *CreateGroupVersionInput) SetSubscriptionDefinitionVersionArn(v string) *CreateGroupVersionInput {
-	s.SubscriptionDefinitionVersionArn = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SubscriptionDefinitionVersionArn != nil {
+		v := *s.SubscriptionDefinitionVersionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SubscriptionDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateGroupVersionResponse
@@ -4588,28 +5221,33 @@ func (s CreateGroupVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateGroupVersionOutput) SetArn(v string) *CreateGroupVersionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGroupVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateGroupVersionOutput) SetCreationTimestamp(v string) *CreateGroupVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateGroupVersionOutput) SetId(v string) *CreateGroupVersionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *CreateGroupVersionOutput) SetVersion(v string) *CreateGroupVersionOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionRequest
@@ -4634,22 +5272,29 @@ func (s CreateLoggerDefinitionInput) GoString() string {
 	return s.String()
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateLoggerDefinitionInput) SetAmznClientToken(v string) *CreateLoggerDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateLoggerDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateLoggerDefinitionInput) SetInitialVersion(v *LoggerDefinitionVersion) *CreateLoggerDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
+	if s.InitialVersion != nil {
+		v := s.InitialVersion
 
-// SetName sets the Name field's value.
-func (s *CreateLoggerDefinitionInput) SetName(v string) *CreateLoggerDefinitionInput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InitialVersion", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionResponse
@@ -4688,46 +5333,51 @@ func (s CreateLoggerDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateLoggerDefinitionOutput) SetArn(v string) *CreateLoggerDefinitionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateLoggerDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateLoggerDefinitionOutput) SetCreationTimestamp(v string) *CreateLoggerDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateLoggerDefinitionOutput) SetId(v string) *CreateLoggerDefinitionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateLoggerDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateLoggerDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateLoggerDefinitionOutput) SetLatestVersion(v string) *CreateLoggerDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateLoggerDefinitionOutput) SetLatestVersionArn(v string) *CreateLoggerDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *CreateLoggerDefinitionOutput) SetName(v string) *CreateLoggerDefinitionOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionVersionRequest
@@ -4766,22 +5416,35 @@ func (s *CreateLoggerDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateLoggerDefinitionVersionInput) SetAmznClientToken(v string) *CreateLoggerDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateLoggerDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *CreateLoggerDefinitionVersionInput) SetLoggerDefinitionId(v string) *CreateLoggerDefinitionVersionInput {
-	s.LoggerDefinitionId = &v
-	return s
-}
+	if len(s.Loggers) > 0 {
+		v := s.Loggers
 
-// SetLoggers sets the Loggers field's value.
-func (s *CreateLoggerDefinitionVersionInput) SetLoggers(v []Logger) *CreateLoggerDefinitionVersionInput {
-	s.Loggers = v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Loggers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LoggerDefinitionId != nil {
+		v := *s.LoggerDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "LoggerDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateLoggerDefinitionVersionResponse
@@ -4814,28 +5477,427 @@ func (s CreateLoggerDefinitionVersionOutput) SDKResponseMetadata() aws.Response 
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateLoggerDefinitionVersionOutput) SetArn(v string) *CreateLoggerDefinitionVersionOutput {
-	s.Arn = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateLoggerDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateLoggerDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateLoggerDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionRequest
+type CreateResourceDefinitionInput struct {
+	_ struct{} `type:"structure"`
+
+	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
+
+	// Information on resource definition version
+	InitialVersion *ResourceDefinitionVersion `type:"structure"`
+
+	Name *string `type:"string"`
 }
 
-// SetId sets the Id field's value.
-func (s *CreateLoggerDefinitionVersionOutput) SetId(v string) *CreateLoggerDefinitionVersionOutput {
-	s.Id = &v
-	return s
+// String returns the string representation
+func (s CreateResourceDefinitionInput) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetVersion sets the Version field's value.
-func (s *CreateLoggerDefinitionVersionOutput) SetVersion(v string) *CreateLoggerDefinitionVersionOutput {
-	s.Version = &v
-	return s
+// GoString returns the string representation
+func (s CreateResourceDefinitionInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateResourceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InitialVersion != nil {
+		v := s.InitialVersion
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InitialVersion", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionResponse
+type CreateResourceDefinitionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	Arn *string `type:"string"`
+
+	CreationTimestamp *string `type:"string"`
+
+	Id *string `type:"string"`
+
+	LastUpdatedTimestamp *string `type:"string"`
+
+	LatestVersion *string `type:"string"`
+
+	LatestVersionArn *string `type:"string"`
+
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateResourceDefinitionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateResourceDefinitionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateResourceDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateResourceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionVersionRequest
+type CreateResourceDefinitionVersionInput struct {
+	_ struct{} `type:"structure"`
+
+	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
+
+	// ResourceDefinitionId is a required field
+	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
+
+	Resources []Resource `type:"list"`
+}
+
+// String returns the string representation
+func (s CreateResourceDefinitionVersionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateResourceDefinitionVersionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateResourceDefinitionVersionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateResourceDefinitionVersionInput"}
+
+	if s.ResourceDefinitionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateResourceDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.Resources) > 0 {
+		v := s.Resources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Resources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceDefinitionId != nil {
+		v := *s.ResourceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateResourceDefinitionVersionResponse
+type CreateResourceDefinitionVersionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	Arn *string `type:"string"`
+
+	CreationTimestamp *string `type:"string"`
+
+	Id *string `type:"string"`
+
+	Version *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateResourceDefinitionVersionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateResourceDefinitionVersionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateResourceDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateResourceDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Request for the CreateSoftwareUpdateJob API
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobRequest
+type CreateSoftwareUpdateJobInput struct {
+	_ struct{} `type:"structure"`
+
+	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
+
+	// The IAM Role that Greengrass will use to create pre-signed URLs pointing
+	// towards the update artifact.
+	S3UrlSignerRole *string `type:"string"`
+
+	// The piece of software on the Greengrass Core that will be updated.
+	SoftwareToUpdate SoftwareToUpdate `type:"string" enum:"true"`
+
+	// The minimum level of log statements that should be logged by the OTA Agent
+	// during an update.
+	UpdateAgentLogLevel UpdateAgentLogLevel `type:"string" enum:"true"`
+
+	// The target arns that this update will be applied to.
+	UpdateTargets []string `type:"list"`
+
+	// The architecture of the Cores in the targets of an update
+	UpdateTargetsArchitecture UpdateTargetsArchitecture `type:"string" enum:"true"`
+
+	// The operating system of the Cores in the targets of an update
+	UpdateTargetsOperatingSystem UpdateTargetsOperatingSystem `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CreateSoftwareUpdateJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSoftwareUpdateJobInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateSoftwareUpdateJobInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.S3UrlSignerRole != nil {
+		v := *s.S3UrlSignerRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "S3UrlSignerRole", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SoftwareToUpdate) > 0 {
+		v := s.SoftwareToUpdate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SoftwareToUpdate", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.UpdateAgentLogLevel) > 0 {
+		v := s.UpdateAgentLogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdateAgentLogLevel", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.UpdateTargets) > 0 {
+		v := s.UpdateTargets
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "UpdateTargets", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.UpdateTargetsArchitecture) > 0 {
+		v := s.UpdateTargetsArchitecture
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdateTargetsArchitecture", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.UpdateTargetsOperatingSystem) > 0 {
+		v := s.UpdateTargetsOperatingSystem
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdateTargetsOperatingSystem", protocol.QuotedValue{v}, metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobResponse
+type CreateSoftwareUpdateJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Iot Job Arn corresponding to this update.
+	IotJobArn *string `type:"string"`
+
+	// The Iot Job Id corresponding to this update.
+	IotJobId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateSoftwareUpdateJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateSoftwareUpdateJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateSoftwareUpdateJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateSoftwareUpdateJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IotJobArn != nil {
+		v := *s.IotJobArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IotJobArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.IotJobId != nil {
+		v := *s.IotJobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IotJobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionRequest
@@ -4860,22 +5922,29 @@ func (s CreateSubscriptionDefinitionInput) GoString() string {
 	return s.String()
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateSubscriptionDefinitionInput) SetAmznClientToken(v string) *CreateSubscriptionDefinitionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateSubscriptionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetInitialVersion sets the InitialVersion field's value.
-func (s *CreateSubscriptionDefinitionInput) SetInitialVersion(v *SubscriptionDefinitionVersion) *CreateSubscriptionDefinitionInput {
-	s.InitialVersion = v
-	return s
-}
+	if s.InitialVersion != nil {
+		v := s.InitialVersion
 
-// SetName sets the Name field's value.
-func (s *CreateSubscriptionDefinitionInput) SetName(v string) *CreateSubscriptionDefinitionInput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InitialVersion", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionResponse
@@ -4914,46 +5983,51 @@ func (s CreateSubscriptionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetArn(v string) *CreateSubscriptionDefinitionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateSubscriptionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetCreationTimestamp(v string) *CreateSubscriptionDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetId(v string) *CreateSubscriptionDefinitionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetLastUpdatedTimestamp(v string) *CreateSubscriptionDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetLatestVersion(v string) *CreateSubscriptionDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetLatestVersionArn(v string) *CreateSubscriptionDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *CreateSubscriptionDefinitionOutput) SetName(v string) *CreateSubscriptionDefinitionOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionVersionRequest
@@ -4992,22 +6066,35 @@ func (s *CreateSubscriptionDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *CreateSubscriptionDefinitionVersionInput) SetAmznClientToken(v string) *CreateSubscriptionDefinitionVersionInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateSubscriptionDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *CreateSubscriptionDefinitionVersionInput) SetSubscriptionDefinitionId(v string) *CreateSubscriptionDefinitionVersionInput {
-	s.SubscriptionDefinitionId = &v
-	return s
-}
+	if len(s.Subscriptions) > 0 {
+		v := s.Subscriptions
 
-// SetSubscriptions sets the Subscriptions field's value.
-func (s *CreateSubscriptionDefinitionVersionInput) SetSubscriptions(v []Subscription) *CreateSubscriptionDefinitionVersionInput {
-	s.Subscriptions = v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Subscriptions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SubscriptionDefinitionId != nil {
+		v := *s.SubscriptionDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSubscriptionDefinitionVersionResponse
@@ -5040,28 +6127,33 @@ func (s CreateSubscriptionDefinitionVersionOutput) SDKResponseMetadata() aws.Res
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *CreateSubscriptionDefinitionVersionOutput) SetArn(v string) *CreateSubscriptionDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateSubscriptionDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *CreateSubscriptionDefinitionVersionOutput) SetCreationTimestamp(v string) *CreateSubscriptionDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *CreateSubscriptionDefinitionVersionOutput) SetId(v string) *CreateSubscriptionDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *CreateSubscriptionDefinitionVersionOutput) SetVersion(v string) *CreateSubscriptionDefinitionVersionOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on the Definition
@@ -5101,46 +6193,51 @@ func (s DefinitionInformation) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *DefinitionInformation) SetArn(v string) *DefinitionInformation {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DefinitionInformation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *DefinitionInformation) SetCreationTimestamp(v string) *DefinitionInformation {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *DefinitionInformation) SetId(v string) *DefinitionInformation {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *DefinitionInformation) SetLastUpdatedTimestamp(v string) *DefinitionInformation {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *DefinitionInformation) SetLatestVersion(v string) *DefinitionInformation {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *DefinitionInformation) SetLatestVersionArn(v string) *DefinitionInformation {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *DefinitionInformation) SetName(v string) *DefinitionInformation {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinitionRequest
@@ -5175,10 +6272,17 @@ func (s *DeleteCoreDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *DeleteCoreDefinitionInput) SetCoreDefinitionId(v string) *DeleteCoreDefinitionInput {
-	s.CoreDefinitionId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteCoreDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.CoreDefinitionId != nil {
+		v := *s.CoreDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteCoreDefinitionResponse
@@ -5201,6 +6305,11 @@ func (s DeleteCoreDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteCoreDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteCoreDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteDeviceDefinitionRequest
@@ -5235,10 +6344,17 @@ func (s *DeleteDeviceDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *DeleteDeviceDefinitionInput) SetDeviceDefinitionId(v string) *DeleteDeviceDefinitionInput {
-	s.DeviceDefinitionId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteDeviceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DeviceDefinitionId != nil {
+		v := *s.DeviceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DeviceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteDeviceDefinitionResponse
@@ -5261,6 +6377,11 @@ func (s DeleteDeviceDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDeviceDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteDeviceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteFunctionDefinitionRequest
@@ -5295,10 +6416,17 @@ func (s *DeleteFunctionDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *DeleteFunctionDefinitionInput) SetFunctionDefinitionId(v string) *DeleteFunctionDefinitionInput {
-	s.FunctionDefinitionId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteFunctionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.FunctionDefinitionId != nil {
+		v := *s.FunctionDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "FunctionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteFunctionDefinitionResponse
@@ -5321,6 +6449,11 @@ func (s DeleteFunctionDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteFunctionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteFunctionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteGroupRequest
@@ -5355,10 +6488,17 @@ func (s *DeleteGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *DeleteGroupInput) SetGroupId(v string) *DeleteGroupInput {
-	s.GroupId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteGroupResponse
@@ -5381,6 +6521,11 @@ func (s DeleteGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteLoggerDefinitionRequest
@@ -5415,10 +6560,17 @@ func (s *DeleteLoggerDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *DeleteLoggerDefinitionInput) SetLoggerDefinitionId(v string) *DeleteLoggerDefinitionInput {
-	s.LoggerDefinitionId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteLoggerDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.LoggerDefinitionId != nil {
+		v := *s.LoggerDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "LoggerDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteLoggerDefinitionResponse
@@ -5441,6 +6593,83 @@ func (s DeleteLoggerDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteLoggerDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteLoggerDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteResourceDefinitionRequest
+type DeleteResourceDefinitionInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceDefinitionId is a required field
+	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteResourceDefinitionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteResourceDefinitionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteResourceDefinitionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourceDefinitionInput"}
+
+	if s.ResourceDefinitionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteResourceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceDefinitionId != nil {
+		v := *s.ResourceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteResourceDefinitionResponse
+type DeleteResourceDefinitionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteResourceDefinitionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteResourceDefinitionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteResourceDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteResourceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteSubscriptionDefinitionRequest
@@ -5475,10 +6704,17 @@ func (s *DeleteSubscriptionDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *DeleteSubscriptionDefinitionInput) SetSubscriptionDefinitionId(v string) *DeleteSubscriptionDefinitionInput {
-	s.SubscriptionDefinitionId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteSubscriptionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.SubscriptionDefinitionId != nil {
+		v := *s.SubscriptionDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeleteSubscriptionDefinitionResponse
@@ -5501,6 +6737,11 @@ func (s DeleteSubscriptionDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteSubscriptionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteSubscriptionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Information on the deployment
@@ -5534,34 +6775,39 @@ func (s Deployment) GoString() string {
 	return s.String()
 }
 
-// SetCreatedAt sets the CreatedAt field's value.
-func (s *Deployment) SetCreatedAt(v string) *Deployment {
-	s.CreatedAt = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Deployment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
 
-// SetDeploymentArn sets the DeploymentArn field's value.
-func (s *Deployment) SetDeploymentArn(v string) *Deployment {
-	s.DeploymentArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DeploymentArn != nil {
+		v := *s.DeploymentArn
 
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *Deployment) SetDeploymentId(v string) *Deployment {
-	s.DeploymentId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DeploymentId != nil {
+		v := *s.DeploymentId
 
-// SetDeploymentType sets the DeploymentType field's value.
-func (s *Deployment) SetDeploymentType(v DeploymentType) *Deployment {
-	s.DeploymentType = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.DeploymentType) > 0 {
+		v := s.DeploymentType
 
-// SetGroupArn sets the GroupArn field's value.
-func (s *Deployment) SetGroupArn(v string) *Deployment {
-	s.GroupArn = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.GroupArn != nil {
+		v := *s.GroupArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on a Device
@@ -5593,28 +6839,33 @@ func (s Device) GoString() string {
 	return s.String()
 }
 
-// SetCertificateArn sets the CertificateArn field's value.
-func (s *Device) SetCertificateArn(v string) *Device {
-	s.CertificateArn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Device) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateArn != nil {
+		v := *s.CertificateArn
 
-// SetId sets the Id field's value.
-func (s *Device) SetId(v string) *Device {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CertificateArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetSyncShadow sets the SyncShadow field's value.
-func (s *Device) SetSyncShadow(v bool) *Device {
-	s.SyncShadow = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SyncShadow != nil {
+		v := *s.SyncShadow
 
-// SetThingArn sets the ThingArn field's value.
-func (s *Device) SetThingArn(v string) *Device {
-	s.ThingArn = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SyncShadow", protocol.BoolValue(v), metadata)
+	}
+	if s.ThingArn != nil {
+		v := *s.ThingArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThingArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on device definition version
@@ -5636,10 +6887,21 @@ func (s DeviceDefinitionVersion) GoString() string {
 	return s.String()
 }
 
-// SetDevices sets the Devices field's value.
-func (s *DeviceDefinitionVersion) SetDevices(v []Device) *DeviceDefinitionVersion {
-	s.Devices = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeviceDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Devices) > 0 {
+		v := s.Devices
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Devices", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateRoleFromGroupRequest
@@ -5674,10 +6936,17 @@ func (s *DisassociateRoleFromGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *DisassociateRoleFromGroupInput) SetGroupId(v string) *DisassociateRoleFromGroupInput {
-	s.GroupId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociateRoleFromGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateRoleFromGroupResponse
@@ -5705,10 +6974,15 @@ func (s DisassociateRoleFromGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDisassociatedAt sets the DisassociatedAt field's value.
-func (s *DisassociateRoleFromGroupOutput) SetDisassociatedAt(v string) *DisassociateRoleFromGroupOutput {
-	s.DisassociatedAt = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociateRoleFromGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DisassociatedAt != nil {
+		v := *s.DisassociatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DisassociatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccountRequest
@@ -5724,6 +6998,13 @@ func (s DisassociateServiceRoleFromAccountInput) String() string {
 // GoString returns the string representation
 func (s DisassociateServiceRoleFromAccountInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociateServiceRoleFromAccountInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DisassociateServiceRoleFromAccountResponse
@@ -5751,10 +7032,15 @@ func (s DisassociateServiceRoleFromAccountOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// SetDisassociatedAt sets the DisassociatedAt field's value.
-func (s *DisassociateServiceRoleFromAccountOutput) SetDisassociatedAt(v string) *DisassociateServiceRoleFromAccountOutput {
-	s.DisassociatedAt = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociateServiceRoleFromAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DisassociatedAt != nil {
+		v := *s.DisassociatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DisassociatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // ErrorDetail
@@ -5779,16 +7065,21 @@ func (s ErrorDetail) GoString() string {
 	return s.String()
 }
 
-// SetDetailedErrorCode sets the DetailedErrorCode field's value.
-func (s *ErrorDetail) SetDetailedErrorCode(v string) *ErrorDetail {
-	s.DetailedErrorCode = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ErrorDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DetailedErrorCode != nil {
+		v := *s.DetailedErrorCode
 
-// SetDetailedErrorMessage sets the DetailedErrorMessage field's value.
-func (s *ErrorDetail) SetDetailedErrorMessage(v string) *ErrorDetail {
-	s.DetailedErrorMessage = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DetailedErrorCode", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DetailedErrorMessage != nil {
+		v := *s.DetailedErrorMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DetailedErrorMessage", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on function
@@ -5816,22 +7107,27 @@ func (s Function) GoString() string {
 	return s.String()
 }
 
-// SetFunctionArn sets the FunctionArn field's value.
-func (s *Function) SetFunctionArn(v string) *Function {
-	s.FunctionArn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Function) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FunctionArn != nil {
+		v := *s.FunctionArn
 
-// SetFunctionConfiguration sets the FunctionConfiguration field's value.
-func (s *Function) SetFunctionConfiguration(v *FunctionConfiguration) *Function {
-	s.FunctionConfiguration = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FunctionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionConfiguration != nil {
+		v := s.FunctionConfiguration
 
-// SetId sets the Id field's value.
-func (s *Function) SetId(v string) *Function {
-	s.Id = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "FunctionConfiguration", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Configuration of the function
@@ -5870,46 +7166,57 @@ func (s FunctionConfiguration) GoString() string {
 	return s.String()
 }
 
-// SetEnvironment sets the Environment field's value.
-func (s *FunctionConfiguration) SetEnvironment(v *FunctionConfigurationEnvironment) *FunctionConfiguration {
-	s.Environment = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Environment != nil {
+		v := s.Environment
 
-// SetExecArgs sets the ExecArgs field's value.
-func (s *FunctionConfiguration) SetExecArgs(v string) *FunctionConfiguration {
-	s.ExecArgs = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Environment", v, metadata)
+	}
+	if s.ExecArgs != nil {
+		v := *s.ExecArgs
 
-// SetExecutable sets the Executable field's value.
-func (s *FunctionConfiguration) SetExecutable(v string) *FunctionConfiguration {
-	s.Executable = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ExecArgs", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Executable != nil {
+		v := *s.Executable
 
-// SetMemorySize sets the MemorySize field's value.
-func (s *FunctionConfiguration) SetMemorySize(v int64) *FunctionConfiguration {
-	s.MemorySize = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Executable", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MemorySize != nil {
+		v := *s.MemorySize
 
-// SetPinned sets the Pinned field's value.
-func (s *FunctionConfiguration) SetPinned(v bool) *FunctionConfiguration {
-	s.Pinned = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MemorySize", protocol.Int64Value(v), metadata)
+	}
+	if s.Pinned != nil {
+		v := *s.Pinned
 
-// SetTimeout sets the Timeout field's value.
-func (s *FunctionConfiguration) SetTimeout(v int64) *FunctionConfiguration {
-	s.Timeout = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Pinned", protocol.BoolValue(v), metadata)
+	}
+	if s.Timeout != nil {
+		v := *s.Timeout
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Timeout", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Environment of the function configuration
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionConfigurationEnvironment
 type FunctionConfigurationEnvironment struct {
 	_ struct{} `type:"structure"`
+
+	// Flag to allow lambda access sys filesystem.
+	AccessSysfs *bool `type:"boolean"`
+
+	// Policies for the function to access resources.
+	ResourceAccessPolicies []ResourceAccessPolicy `type:"list"`
 
 	Variables map[string]string `type:"map"`
 }
@@ -5924,10 +7231,39 @@ func (s FunctionConfigurationEnvironment) GoString() string {
 	return s.String()
 }
 
-// SetVariables sets the Variables field's value.
-func (s *FunctionConfigurationEnvironment) SetVariables(v map[string]string) *FunctionConfigurationEnvironment {
-	s.Variables = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FunctionConfigurationEnvironment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessSysfs != nil {
+		v := *s.AccessSysfs
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccessSysfs", protocol.BoolValue(v), metadata)
+	}
+	if len(s.ResourceAccessPolicies) > 0 {
+		v := s.ResourceAccessPolicies
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ResourceAccessPolicies", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.Variables) > 0 {
+		v := s.Variables
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Variables", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
 }
 
 // Information on the function definition version
@@ -5949,10 +7285,21 @@ func (s FunctionDefinitionVersion) GoString() string {
 	return s.String()
 }
 
-// SetFunctions sets the Functions field's value.
-func (s *FunctionDefinitionVersion) SetFunctions(v []Function) *FunctionDefinitionVersion {
-	s.Functions = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FunctionDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Functions) > 0 {
+		v := s.Functions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Functions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetAssociatedRoleRequest
@@ -5987,10 +7334,17 @@ func (s *GetAssociatedRoleInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *GetAssociatedRoleInput) SetGroupId(v string) *GetAssociatedRoleInput {
-	s.GroupId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetAssociatedRoleInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetAssociatedRoleResponse
@@ -6021,16 +7375,21 @@ func (s GetAssociatedRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAssociatedAt sets the AssociatedAt field's value.
-func (s *GetAssociatedRoleOutput) SetAssociatedAt(v string) *GetAssociatedRoleOutput {
-	s.AssociatedAt = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetAssociatedRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AssociatedAt != nil {
+		v := *s.AssociatedAt
 
-// SetRoleArn sets the RoleArn field's value.
-func (s *GetAssociatedRoleOutput) SetRoleArn(v string) *GetAssociatedRoleOutput {
-	s.RoleArn = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AssociatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfoRequest
@@ -6065,10 +7424,17 @@ func (s *GetConnectivityInfoInput) Validate() error {
 	return nil
 }
 
-// SetThingName sets the ThingName field's value.
-func (s *GetConnectivityInfoInput) SetThingName(v string) *GetConnectivityInfoInput {
-	s.ThingName = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetConnectivityInfoInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ThingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // connectivity info response
@@ -6081,6 +7447,7 @@ type GetConnectivityInfoOutput struct {
 	// Connectivity info list
 	ConnectivityInfo []ConnectivityInfo `type:"list"`
 
+	// Response Text
 	Message *string `locationName:"message" type:"string"`
 }
 
@@ -6099,16 +7466,27 @@ func (s GetConnectivityInfoOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetConnectivityInfo sets the ConnectivityInfo field's value.
-func (s *GetConnectivityInfoOutput) SetConnectivityInfo(v []ConnectivityInfo) *GetConnectivityInfoOutput {
-	s.ConnectivityInfo = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetConnectivityInfoOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ConnectivityInfo) > 0 {
+		v := s.ConnectivityInfo
 
-// SetMessage sets the Message field's value.
-func (s *GetConnectivityInfoOutput) SetMessage(v string) *GetConnectivityInfoOutput {
-	s.Message = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ConnectivityInfo", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionRequest
@@ -6143,10 +7521,17 @@ func (s *GetCoreDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *GetCoreDefinitionInput) SetCoreDefinitionId(v string) *GetCoreDefinitionInput {
-	s.CoreDefinitionId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCoreDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.CoreDefinitionId != nil {
+		v := *s.CoreDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionResponse
@@ -6185,46 +7570,51 @@ func (s GetCoreDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetCoreDefinitionOutput) SetArn(v string) *GetCoreDefinitionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCoreDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetCoreDefinitionOutput) SetCreationTimestamp(v string) *GetCoreDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *GetCoreDefinitionOutput) SetId(v string) *GetCoreDefinitionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetCoreDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetCoreDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetCoreDefinitionOutput) SetLatestVersion(v string) *GetCoreDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetCoreDefinitionOutput) SetLatestVersionArn(v string) *GetCoreDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *GetCoreDefinitionOutput) SetName(v string) *GetCoreDefinitionOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionVersionRequest
@@ -6266,16 +7656,23 @@ func (s *GetCoreDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *GetCoreDefinitionVersionInput) SetCoreDefinitionId(v string) *GetCoreDefinitionVersionInput {
-	s.CoreDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCoreDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetCoreDefinitionVersionId sets the CoreDefinitionVersionId field's value.
-func (s *GetCoreDefinitionVersionInput) SetCoreDefinitionVersionId(v string) *GetCoreDefinitionVersionInput {
-	s.CoreDefinitionVersionId = &v
-	return s
+	if s.CoreDefinitionId != nil {
+		v := *s.CoreDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CoreDefinitionVersionId != nil {
+		v := *s.CoreDefinitionVersionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "CoreDefinitionVersionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetCoreDefinitionVersionResponse
@@ -6315,34 +7712,39 @@ func (s GetCoreDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetCoreDefinitionVersionOutput) SetArn(v string) *GetCoreDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetCoreDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetCoreDefinitionVersionOutput) SetCreationTimestamp(v string) *GetCoreDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetDefinition sets the Definition field's value.
-func (s *GetCoreDefinitionVersionOutput) SetDefinition(v *CoreDefinitionVersion) *GetCoreDefinitionVersionOutput {
-	s.Definition = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Definition != nil {
+		v := s.Definition
 
-// SetId sets the Id field's value.
-func (s *GetCoreDefinitionVersionOutput) SetId(v string) *GetCoreDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *GetCoreDefinitionVersionOutput) SetVersion(v string) *GetCoreDefinitionVersionOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeploymentStatusRequest
@@ -6384,16 +7786,23 @@ func (s *GetDeploymentStatusInput) Validate() error {
 	return nil
 }
 
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *GetDeploymentStatusInput) SetDeploymentId(v string) *GetDeploymentStatusInput {
-	s.DeploymentId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDeploymentStatusInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetGroupId sets the GroupId field's value.
-func (s *GetDeploymentStatusInput) SetGroupId(v string) *GetDeploymentStatusInput {
-	s.GroupId = &v
-	return s
+	if s.DeploymentId != nil {
+		v := *s.DeploymentId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DeploymentId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The response body contains the status of a deployment for a group.
@@ -6434,34 +7843,45 @@ func (s GetDeploymentStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeploymentStatus sets the DeploymentStatus field's value.
-func (s *GetDeploymentStatusOutput) SetDeploymentStatus(v string) *GetDeploymentStatusOutput {
-	s.DeploymentStatus = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDeploymentStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DeploymentStatus != nil {
+		v := *s.DeploymentStatus
 
-// SetDeploymentType sets the DeploymentType field's value.
-func (s *GetDeploymentStatusOutput) SetDeploymentType(v DeploymentType) *GetDeploymentStatusOutput {
-	s.DeploymentType = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentStatus", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.DeploymentType) > 0 {
+		v := s.DeploymentType
 
-// SetErrorDetails sets the ErrorDetails field's value.
-func (s *GetDeploymentStatusOutput) SetErrorDetails(v []ErrorDetail) *GetDeploymentStatusOutput {
-	s.ErrorDetails = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentType", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.ErrorDetails) > 0 {
+		v := s.ErrorDetails
 
-// SetErrorMessage sets the ErrorMessage field's value.
-func (s *GetDeploymentStatusOutput) SetErrorMessage(v string) *GetDeploymentStatusOutput {
-	s.ErrorMessage = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ErrorDetails", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
-// SetUpdatedAt sets the UpdatedAt field's value.
-func (s *GetDeploymentStatusOutput) SetUpdatedAt(v string) *GetDeploymentStatusOutput {
-	s.UpdatedAt = &v
-	return s
+	}
+	if s.ErrorMessage != nil {
+		v := *s.ErrorMessage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ErrorMessage", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdatedAt != nil {
+		v := *s.UpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UpdatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionRequest
@@ -6496,10 +7916,17 @@ func (s *GetDeviceDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *GetDeviceDefinitionInput) SetDeviceDefinitionId(v string) *GetDeviceDefinitionInput {
-	s.DeviceDefinitionId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDeviceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DeviceDefinitionId != nil {
+		v := *s.DeviceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DeviceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionResponse
@@ -6538,46 +7965,51 @@ func (s GetDeviceDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetDeviceDefinitionOutput) SetArn(v string) *GetDeviceDefinitionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDeviceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetDeviceDefinitionOutput) SetCreationTimestamp(v string) *GetDeviceDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *GetDeviceDefinitionOutput) SetId(v string) *GetDeviceDefinitionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetDeviceDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetDeviceDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetDeviceDefinitionOutput) SetLatestVersion(v string) *GetDeviceDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetDeviceDefinitionOutput) SetLatestVersionArn(v string) *GetDeviceDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *GetDeviceDefinitionOutput) SetName(v string) *GetDeviceDefinitionOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersionRequest
@@ -6619,16 +8051,23 @@ func (s *GetDeviceDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *GetDeviceDefinitionVersionInput) SetDeviceDefinitionId(v string) *GetDeviceDefinitionVersionInput {
-	s.DeviceDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDeviceDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetDeviceDefinitionVersionId sets the DeviceDefinitionVersionId field's value.
-func (s *GetDeviceDefinitionVersionInput) SetDeviceDefinitionVersionId(v string) *GetDeviceDefinitionVersionInput {
-	s.DeviceDefinitionVersionId = &v
-	return s
+	if s.DeviceDefinitionId != nil {
+		v := *s.DeviceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DeviceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DeviceDefinitionVersionId != nil {
+		v := *s.DeviceDefinitionVersionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DeviceDefinitionVersionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeviceDefinitionVersionResponse
@@ -6668,34 +8107,39 @@ func (s GetDeviceDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetDeviceDefinitionVersionOutput) SetArn(v string) *GetDeviceDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDeviceDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetDeviceDefinitionVersionOutput) SetCreationTimestamp(v string) *GetDeviceDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetDefinition sets the Definition field's value.
-func (s *GetDeviceDefinitionVersionOutput) SetDefinition(v *DeviceDefinitionVersion) *GetDeviceDefinitionVersionOutput {
-	s.Definition = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Definition != nil {
+		v := s.Definition
 
-// SetId sets the Id field's value.
-func (s *GetDeviceDefinitionVersionOutput) SetId(v string) *GetDeviceDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *GetDeviceDefinitionVersionOutput) SetVersion(v string) *GetDeviceDefinitionVersionOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionRequest
@@ -6730,10 +8174,17 @@ func (s *GetFunctionDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *GetFunctionDefinitionInput) SetFunctionDefinitionId(v string) *GetFunctionDefinitionInput {
-	s.FunctionDefinitionId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFunctionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.FunctionDefinitionId != nil {
+		v := *s.FunctionDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "FunctionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionResponse
@@ -6772,46 +8223,51 @@ func (s GetFunctionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetFunctionDefinitionOutput) SetArn(v string) *GetFunctionDefinitionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFunctionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetFunctionDefinitionOutput) SetCreationTimestamp(v string) *GetFunctionDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *GetFunctionDefinitionOutput) SetId(v string) *GetFunctionDefinitionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetFunctionDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetFunctionDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetFunctionDefinitionOutput) SetLatestVersion(v string) *GetFunctionDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetFunctionDefinitionOutput) SetLatestVersionArn(v string) *GetFunctionDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *GetFunctionDefinitionOutput) SetName(v string) *GetFunctionDefinitionOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersionRequest
@@ -6853,16 +8309,23 @@ func (s *GetFunctionDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *GetFunctionDefinitionVersionInput) SetFunctionDefinitionId(v string) *GetFunctionDefinitionVersionInput {
-	s.FunctionDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFunctionDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetFunctionDefinitionVersionId sets the FunctionDefinitionVersionId field's value.
-func (s *GetFunctionDefinitionVersionInput) SetFunctionDefinitionVersionId(v string) *GetFunctionDefinitionVersionInput {
-	s.FunctionDefinitionVersionId = &v
-	return s
+	if s.FunctionDefinitionId != nil {
+		v := *s.FunctionDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "FunctionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionDefinitionVersionId != nil {
+		v := *s.FunctionDefinitionVersionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "FunctionDefinitionVersionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Function definition version
@@ -6878,7 +8341,7 @@ type GetFunctionDefinitionVersionOutput struct {
 	// Timestamp when the funtion definition version was created.
 	CreationTimestamp *string `type:"string"`
 
-	// Information on the definition
+	// Information on the definition.
 	Definition *FunctionDefinitionVersion `type:"structure"`
 
 	// Id of the function definition the version belongs to.
@@ -6903,34 +8366,39 @@ func (s GetFunctionDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetFunctionDefinitionVersionOutput) SetArn(v string) *GetFunctionDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFunctionDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetFunctionDefinitionVersionOutput) SetCreationTimestamp(v string) *GetFunctionDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetDefinition sets the Definition field's value.
-func (s *GetFunctionDefinitionVersionOutput) SetDefinition(v *FunctionDefinitionVersion) *GetFunctionDefinitionVersionOutput {
-	s.Definition = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Definition != nil {
+		v := s.Definition
 
-// SetId sets the Id field's value.
-func (s *GetFunctionDefinitionVersionOutput) SetId(v string) *GetFunctionDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *GetFunctionDefinitionVersionOutput) SetVersion(v string) *GetFunctionDefinitionVersionOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthorityRequest
@@ -6972,16 +8440,23 @@ func (s *GetGroupCertificateAuthorityInput) Validate() error {
 	return nil
 }
 
-// SetCertificateAuthorityId sets the CertificateAuthorityId field's value.
-func (s *GetGroupCertificateAuthorityInput) SetCertificateAuthorityId(v string) *GetGroupCertificateAuthorityInput {
-	s.CertificateAuthorityId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupCertificateAuthorityInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetGroupId sets the GroupId field's value.
-func (s *GetGroupCertificateAuthorityInput) SetGroupId(v string) *GetGroupCertificateAuthorityInput {
-	s.GroupId = &v
-	return s
+	if s.CertificateAuthorityId != nil {
+		v := *s.CertificateAuthorityId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "CertificateAuthorityId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Certificate authority for the group.
@@ -7016,22 +8491,27 @@ func (s GetGroupCertificateAuthorityOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetGroupCertificateAuthorityArn sets the GroupCertificateAuthorityArn field's value.
-func (s *GetGroupCertificateAuthorityOutput) SetGroupCertificateAuthorityArn(v string) *GetGroupCertificateAuthorityOutput {
-	s.GroupCertificateAuthorityArn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupCertificateAuthorityOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupCertificateAuthorityArn != nil {
+		v := *s.GroupCertificateAuthorityArn
 
-// SetGroupCertificateAuthorityId sets the GroupCertificateAuthorityId field's value.
-func (s *GetGroupCertificateAuthorityOutput) SetGroupCertificateAuthorityId(v string) *GetGroupCertificateAuthorityOutput {
-	s.GroupCertificateAuthorityId = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupCertificateAuthorityArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupCertificateAuthorityId != nil {
+		v := *s.GroupCertificateAuthorityId
 
-// SetPemEncodedCertificate sets the PemEncodedCertificate field's value.
-func (s *GetGroupCertificateAuthorityOutput) SetPemEncodedCertificate(v string) *GetGroupCertificateAuthorityOutput {
-	s.PemEncodedCertificate = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupCertificateAuthorityId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PemEncodedCertificate != nil {
+		v := *s.PemEncodedCertificate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PemEncodedCertificate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateConfigurationRequest
@@ -7066,10 +8546,17 @@ func (s *GetGroupCertificateConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *GetGroupCertificateConfigurationInput) SetGroupId(v string) *GetGroupCertificateConfigurationInput {
-	s.GroupId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupCertificateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateConfigurationResponse
@@ -7100,22 +8587,27 @@ func (s GetGroupCertificateConfigurationOutput) SDKResponseMetadata() aws.Respon
 	return s.responseMetadata
 }
 
-// SetCertificateAuthorityExpiryInMilliseconds sets the CertificateAuthorityExpiryInMilliseconds field's value.
-func (s *GetGroupCertificateConfigurationOutput) SetCertificateAuthorityExpiryInMilliseconds(v string) *GetGroupCertificateConfigurationOutput {
-	s.CertificateAuthorityExpiryInMilliseconds = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupCertificateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateAuthorityExpiryInMilliseconds != nil {
+		v := *s.CertificateAuthorityExpiryInMilliseconds
 
-// SetCertificateExpiryInMilliseconds sets the CertificateExpiryInMilliseconds field's value.
-func (s *GetGroupCertificateConfigurationOutput) SetCertificateExpiryInMilliseconds(v string) *GetGroupCertificateConfigurationOutput {
-	s.CertificateExpiryInMilliseconds = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CertificateAuthorityExpiryInMilliseconds", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CertificateExpiryInMilliseconds != nil {
+		v := *s.CertificateExpiryInMilliseconds
 
-// SetGroupId sets the GroupId field's value.
-func (s *GetGroupCertificateConfigurationOutput) SetGroupId(v string) *GetGroupCertificateConfigurationOutput {
-	s.GroupId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CertificateExpiryInMilliseconds", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupRequest
@@ -7150,10 +8642,17 @@ func (s *GetGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *GetGroupInput) SetGroupId(v string) *GetGroupInput {
-	s.GroupId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupResponse
@@ -7192,46 +8691,51 @@ func (s GetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetGroupOutput) SetArn(v string) *GetGroupOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetGroupOutput) SetCreationTimestamp(v string) *GetGroupOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *GetGroupOutput) SetId(v string) *GetGroupOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetGroupOutput) SetLastUpdatedTimestamp(v string) *GetGroupOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetGroupOutput) SetLatestVersion(v string) *GetGroupOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetGroupOutput) SetLatestVersionArn(v string) *GetGroupOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *GetGroupOutput) SetName(v string) *GetGroupOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersionRequest
@@ -7273,16 +8777,23 @@ func (s *GetGroupVersionInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *GetGroupVersionInput) SetGroupId(v string) *GetGroupVersionInput {
-	s.GroupId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetGroupVersionId sets the GroupVersionId field's value.
-func (s *GetGroupVersionInput) SetGroupVersionId(v string) *GetGroupVersionInput {
-	s.GroupVersionId = &v
-	return s
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupVersionId != nil {
+		v := *s.GroupVersionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupVersionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on the group version
@@ -7323,34 +8834,39 @@ func (s GetGroupVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetGroupVersionOutput) SetArn(v string) *GetGroupVersionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetGroupVersionOutput) SetCreationTimestamp(v string) *GetGroupVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetDefinition sets the Definition field's value.
-func (s *GetGroupVersionOutput) SetDefinition(v *GroupVersion) *GetGroupVersionOutput {
-	s.Definition = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Definition != nil {
+		v := s.Definition
 
-// SetId sets the Id field's value.
-func (s *GetGroupVersionOutput) SetId(v string) *GetGroupVersionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *GetGroupVersionOutput) SetVersion(v string) *GetGroupVersionOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionRequest
@@ -7385,10 +8901,17 @@ func (s *GetLoggerDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *GetLoggerDefinitionInput) SetLoggerDefinitionId(v string) *GetLoggerDefinitionInput {
-	s.LoggerDefinitionId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetLoggerDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.LoggerDefinitionId != nil {
+		v := *s.LoggerDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "LoggerDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionResponse
@@ -7427,46 +8950,51 @@ func (s GetLoggerDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetLoggerDefinitionOutput) SetArn(v string) *GetLoggerDefinitionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetLoggerDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetLoggerDefinitionOutput) SetCreationTimestamp(v string) *GetLoggerDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *GetLoggerDefinitionOutput) SetId(v string) *GetLoggerDefinitionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetLoggerDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetLoggerDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetLoggerDefinitionOutput) SetLatestVersion(v string) *GetLoggerDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetLoggerDefinitionOutput) SetLatestVersionArn(v string) *GetLoggerDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *GetLoggerDefinitionOutput) SetName(v string) *GetLoggerDefinitionOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionVersionRequest
@@ -7508,16 +9036,23 @@ func (s *GetLoggerDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *GetLoggerDefinitionVersionInput) SetLoggerDefinitionId(v string) *GetLoggerDefinitionVersionInput {
-	s.LoggerDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetLoggerDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetLoggerDefinitionVersionId sets the LoggerDefinitionVersionId field's value.
-func (s *GetLoggerDefinitionVersionInput) SetLoggerDefinitionVersionId(v string) *GetLoggerDefinitionVersionInput {
-	s.LoggerDefinitionVersionId = &v
-	return s
+	if s.LoggerDefinitionId != nil {
+		v := *s.LoggerDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "LoggerDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LoggerDefinitionVersionId != nil {
+		v := *s.LoggerDefinitionVersionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "LoggerDefinitionVersionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on logger definition version response
@@ -7558,34 +9093,298 @@ func (s GetLoggerDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetLoggerDefinitionVersionOutput) SetArn(v string) *GetLoggerDefinitionVersionOutput {
-	s.Arn = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetLoggerDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Definition != nil {
+		v := s.Definition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetLoggerDefinitionVersionOutput) SetCreationTimestamp(v string) *GetLoggerDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionRequest
+type GetResourceDefinitionInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceDefinitionId is a required field
+	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
 }
 
-// SetDefinition sets the Definition field's value.
-func (s *GetLoggerDefinitionVersionOutput) SetDefinition(v *LoggerDefinitionVersion) *GetLoggerDefinitionVersionOutput {
-	s.Definition = v
-	return s
+// String returns the string representation
+func (s GetResourceDefinitionInput) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetId sets the Id field's value.
-func (s *GetLoggerDefinitionVersionOutput) SetId(v string) *GetLoggerDefinitionVersionOutput {
-	s.Id = &v
-	return s
+// GoString returns the string representation
+func (s GetResourceDefinitionInput) GoString() string {
+	return s.String()
 }
 
-// SetVersion sets the Version field's value.
-func (s *GetLoggerDefinitionVersionOutput) SetVersion(v string) *GetLoggerDefinitionVersionOutput {
-	s.Version = &v
-	return s
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetResourceDefinitionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetResourceDefinitionInput"}
+
+	if s.ResourceDefinitionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetResourceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceDefinitionId != nil {
+		v := *s.ResourceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionResponse
+type GetResourceDefinitionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	Arn *string `type:"string"`
+
+	CreationTimestamp *string `type:"string"`
+
+	Id *string `type:"string"`
+
+	LastUpdatedTimestamp *string `type:"string"`
+
+	LatestVersion *string `type:"string"`
+
+	LatestVersionArn *string `type:"string"`
+
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetResourceDefinitionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetResourceDefinitionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetResourceDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetResourceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersionRequest
+type GetResourceDefinitionVersionInput struct {
+	_ struct{} `type:"structure"`
+
+	// ResourceDefinitionId is a required field
+	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
+
+	// ResourceDefinitionVersionId is a required field
+	ResourceDefinitionVersionId *string `location:"uri" locationName:"ResourceDefinitionVersionId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetResourceDefinitionVersionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetResourceDefinitionVersionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetResourceDefinitionVersionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetResourceDefinitionVersionInput"}
+
+	if s.ResourceDefinitionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
+	}
+
+	if s.ResourceDefinitionVersionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionVersionId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetResourceDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceDefinitionId != nil {
+		v := *s.ResourceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceDefinitionVersionId != nil {
+		v := *s.ResourceDefinitionVersionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceDefinitionVersionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information on resource definition version response
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersionResponse
+type GetResourceDefinitionVersionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Arn of the resource definition version.
+	Arn *string `type:"string"`
+
+	// Timestamp of when the resource definition version was created.
+	CreationTimestamp *string `type:"string"`
+
+	// Information on definition.
+	Definition *ResourceDefinitionVersion `type:"structure"`
+
+	// Id of the resource definition the version belongs to.
+	Id *string `type:"string"`
+
+	// Version of the resource definition version.
+	Version *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetResourceDefinitionVersionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetResourceDefinitionVersionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetResourceDefinitionVersionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetResourceDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Definition != nil {
+		v := s.Definition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccountRequest
@@ -7601,6 +9400,13 @@ func (s GetServiceRoleForAccountInput) String() string {
 // GoString returns the string representation
 func (s GetServiceRoleForAccountInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetServiceRoleForAccountInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetServiceRoleForAccountResponse
@@ -7631,16 +9437,21 @@ func (s GetServiceRoleForAccountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetAssociatedAt sets the AssociatedAt field's value.
-func (s *GetServiceRoleForAccountOutput) SetAssociatedAt(v string) *GetServiceRoleForAccountOutput {
-	s.AssociatedAt = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetServiceRoleForAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AssociatedAt != nil {
+		v := *s.AssociatedAt
 
-// SetRoleArn sets the RoleArn field's value.
-func (s *GetServiceRoleForAccountOutput) SetRoleArn(v string) *GetServiceRoleForAccountOutput {
-	s.RoleArn = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AssociatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionRequest
@@ -7675,10 +9486,17 @@ func (s *GetSubscriptionDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *GetSubscriptionDefinitionInput) SetSubscriptionDefinitionId(v string) *GetSubscriptionDefinitionInput {
-	s.SubscriptionDefinitionId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSubscriptionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.SubscriptionDefinitionId != nil {
+		v := *s.SubscriptionDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionResponse
@@ -7717,46 +9535,51 @@ func (s GetSubscriptionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetSubscriptionDefinitionOutput) SetArn(v string) *GetSubscriptionDefinitionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSubscriptionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetSubscriptionDefinitionOutput) SetCreationTimestamp(v string) *GetSubscriptionDefinitionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *GetSubscriptionDefinitionOutput) SetId(v string) *GetSubscriptionDefinitionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GetSubscriptionDefinitionOutput) SetLastUpdatedTimestamp(v string) *GetSubscriptionDefinitionOutput {
-	s.LastUpdatedTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GetSubscriptionDefinitionOutput) SetLatestVersion(v string) *GetSubscriptionDefinitionOutput {
-	s.LatestVersion = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GetSubscriptionDefinitionOutput) SetLatestVersionArn(v string) *GetSubscriptionDefinitionOutput {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
 
-// SetName sets the Name field's value.
-func (s *GetSubscriptionDefinitionOutput) SetName(v string) *GetSubscriptionDefinitionOutput {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionVersionRequest
@@ -7798,16 +9621,23 @@ func (s *GetSubscriptionDefinitionVersionInput) Validate() error {
 	return nil
 }
 
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *GetSubscriptionDefinitionVersionInput) SetSubscriptionDefinitionId(v string) *GetSubscriptionDefinitionVersionInput {
-	s.SubscriptionDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSubscriptionDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetSubscriptionDefinitionVersionId sets the SubscriptionDefinitionVersionId field's value.
-func (s *GetSubscriptionDefinitionVersionInput) SetSubscriptionDefinitionVersionId(v string) *GetSubscriptionDefinitionVersionInput {
-	s.SubscriptionDefinitionVersionId = &v
-	return s
+	if s.SubscriptionDefinitionId != nil {
+		v := *s.SubscriptionDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SubscriptionDefinitionVersionId != nil {
+		v := *s.SubscriptionDefinitionVersionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionVersionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on the Subscription Definition Version
@@ -7848,34 +9678,39 @@ func (s GetSubscriptionDefinitionVersionOutput) SDKResponseMetadata() aws.Respon
 	return s.responseMetadata
 }
 
-// SetArn sets the Arn field's value.
-func (s *GetSubscriptionDefinitionVersionOutput) SetArn(v string) *GetSubscriptionDefinitionVersionOutput {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSubscriptionDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GetSubscriptionDefinitionVersionOutput) SetCreationTimestamp(v string) *GetSubscriptionDefinitionVersionOutput {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetDefinition sets the Definition field's value.
-func (s *GetSubscriptionDefinitionVersionOutput) SetDefinition(v *SubscriptionDefinitionVersion) *GetSubscriptionDefinitionVersionOutput {
-	s.Definition = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Definition != nil {
+		v := s.Definition
 
-// SetId sets the Id field's value.
-func (s *GetSubscriptionDefinitionVersionOutput) SetId(v string) *GetSubscriptionDefinitionVersionOutput {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *GetSubscriptionDefinitionVersionOutput) SetVersion(v string) *GetSubscriptionDefinitionVersionOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on group certificate authority properties
@@ -7900,16 +9735,21 @@ func (s GroupCertificateAuthorityProperties) GoString() string {
 	return s.String()
 }
 
-// SetGroupCertificateAuthorityArn sets the GroupCertificateAuthorityArn field's value.
-func (s *GroupCertificateAuthorityProperties) SetGroupCertificateAuthorityArn(v string) *GroupCertificateAuthorityProperties {
-	s.GroupCertificateAuthorityArn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GroupCertificateAuthorityProperties) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupCertificateAuthorityArn != nil {
+		v := *s.GroupCertificateAuthorityArn
 
-// SetGroupCertificateAuthorityId sets the GroupCertificateAuthorityId field's value.
-func (s *GroupCertificateAuthorityProperties) SetGroupCertificateAuthorityId(v string) *GroupCertificateAuthorityProperties {
-	s.GroupCertificateAuthorityId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupCertificateAuthorityArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupCertificateAuthorityId != nil {
+		v := *s.GroupCertificateAuthorityId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupCertificateAuthorityId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on the group
@@ -7949,46 +9789,90 @@ func (s GroupInformation) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *GroupInformation) SetArn(v string) *GroupInformation {
-	s.Arn = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GroupInformation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedTimestamp != nil {
+		v := *s.LastUpdatedTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersion != nil {
+		v := *s.LatestVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestVersionArn != nil {
+		v := *s.LatestVersionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *GroupInformation) SetCreationTimestamp(v string) *GroupInformation {
-	s.CreationTimestamp = &v
-	return s
+// Group owner related settings for local resources.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupOwnerSetting
+type GroupOwnerSetting struct {
+	_ struct{} `type:"structure"`
+
+	// Eanble the auto added group owner.
+	AutoAddGroupOwner *bool `type:"boolean"`
+
+	// Name of the group owner.
+	GroupOwner *string `type:"string"`
 }
 
-// SetId sets the Id field's value.
-func (s *GroupInformation) SetId(v string) *GroupInformation {
-	s.Id = &v
-	return s
+// String returns the string representation
+func (s GroupOwnerSetting) String() string {
+	return awsutil.Prettify(s)
 }
 
-// SetLastUpdatedTimestamp sets the LastUpdatedTimestamp field's value.
-func (s *GroupInformation) SetLastUpdatedTimestamp(v string) *GroupInformation {
-	s.LastUpdatedTimestamp = &v
-	return s
+// GoString returns the string representation
+func (s GroupOwnerSetting) GoString() string {
+	return s.String()
 }
 
-// SetLatestVersion sets the LatestVersion field's value.
-func (s *GroupInformation) SetLatestVersion(v string) *GroupInformation {
-	s.LatestVersion = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GroupOwnerSetting) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AutoAddGroupOwner != nil {
+		v := *s.AutoAddGroupOwner
 
-// SetLatestVersionArn sets the LatestVersionArn field's value.
-func (s *GroupInformation) SetLatestVersionArn(v string) *GroupInformation {
-	s.LatestVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AutoAddGroupOwner", protocol.BoolValue(v), metadata)
+	}
+	if s.GroupOwner != nil {
+		v := *s.GroupOwner
 
-// SetName sets the Name field's value.
-func (s *GroupInformation) SetName(v string) *GroupInformation {
-	s.Name = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupOwner", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on group version
@@ -8005,8 +9889,11 @@ type GroupVersion struct {
 	// Function definition version arn for this group.
 	FunctionDefinitionVersionArn *string `type:"string"`
 
-	// Logger definitionv ersion arn for this group.
+	// Logger definition version arn for this group.
 	LoggerDefinitionVersionArn *string `type:"string"`
+
+	// Resource definition version arn for this group.
+	ResourceDefinitionVersionArn *string `type:"string"`
 
 	// Subscription definition version arn for this group.
 	SubscriptionDefinitionVersionArn *string `type:"string"`
@@ -8022,34 +9909,45 @@ func (s GroupVersion) GoString() string {
 	return s.String()
 }
 
-// SetCoreDefinitionVersionArn sets the CoreDefinitionVersionArn field's value.
-func (s *GroupVersion) SetCoreDefinitionVersionArn(v string) *GroupVersion {
-	s.CoreDefinitionVersionArn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GroupVersion) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CoreDefinitionVersionArn != nil {
+		v := *s.CoreDefinitionVersionArn
 
-// SetDeviceDefinitionVersionArn sets the DeviceDefinitionVersionArn field's value.
-func (s *GroupVersion) SetDeviceDefinitionVersionArn(v string) *GroupVersion {
-	s.DeviceDefinitionVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CoreDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DeviceDefinitionVersionArn != nil {
+		v := *s.DeviceDefinitionVersionArn
 
-// SetFunctionDefinitionVersionArn sets the FunctionDefinitionVersionArn field's value.
-func (s *GroupVersion) SetFunctionDefinitionVersionArn(v string) *GroupVersion {
-	s.FunctionDefinitionVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeviceDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionDefinitionVersionArn != nil {
+		v := *s.FunctionDefinitionVersionArn
 
-// SetLoggerDefinitionVersionArn sets the LoggerDefinitionVersionArn field's value.
-func (s *GroupVersion) SetLoggerDefinitionVersionArn(v string) *GroupVersion {
-	s.LoggerDefinitionVersionArn = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FunctionDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LoggerDefinitionVersionArn != nil {
+		v := *s.LoggerDefinitionVersionArn
 
-// SetSubscriptionDefinitionVersionArn sets the SubscriptionDefinitionVersionArn field's value.
-func (s *GroupVersion) SetSubscriptionDefinitionVersionArn(v string) *GroupVersion {
-	s.SubscriptionDefinitionVersionArn = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LoggerDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceDefinitionVersionArn != nil {
+		v := *s.ResourceDefinitionVersionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SubscriptionDefinitionVersionArn != nil {
+		v := *s.SubscriptionDefinitionVersionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SubscriptionDefinitionVersionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionVersionsRequest
@@ -8088,22 +9986,29 @@ func (s *ListCoreDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *ListCoreDefinitionVersionsInput) SetCoreDefinitionId(v string) *ListCoreDefinitionVersionsInput {
-	s.CoreDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListCoreDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListCoreDefinitionVersionsInput) SetMaxResults(v string) *ListCoreDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
+	if s.CoreDefinitionId != nil {
+		v := *s.CoreDefinitionId
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListCoreDefinitionVersionsInput) SetNextToken(v string) *ListCoreDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionVersionsResponse
@@ -8132,16 +10037,27 @@ func (s ListCoreDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListCoreDefinitionVersionsOutput) SetNextToken(v string) *ListCoreDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListCoreDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
 
-// SetVersions sets the Versions field's value.
-func (s *ListCoreDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListCoreDefinitionVersionsOutput {
-	s.Versions = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Versions) > 0 {
+		v := s.Versions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionsRequest
@@ -8163,16 +10079,23 @@ func (s ListCoreDefinitionsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListCoreDefinitionsInput) SetMaxResults(v string) *ListCoreDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListCoreDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListCoreDefinitionsInput) SetNextToken(v string) *ListCoreDefinitionsInput {
-	s.NextToken = &v
-	return s
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListCoreDefinitionsResponse
@@ -8201,16 +10124,27 @@ func (s ListCoreDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDefinitions sets the Definitions field's value.
-func (s *ListCoreDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListCoreDefinitionsOutput {
-	s.Definitions = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListCoreDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Definitions) > 0 {
+		v := s.Definitions
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListCoreDefinitionsOutput) SetNextToken(v string) *ListCoreDefinitionsOutput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeploymentsRequest
@@ -8249,22 +10183,29 @@ func (s *ListDeploymentsInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *ListDeploymentsInput) SetGroupId(v string) *ListDeploymentsInput {
-	s.GroupId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDeploymentsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDeploymentsInput) SetMaxResults(v string) *ListDeploymentsInput {
-	s.MaxResults = &v
-	return s
-}
+	if s.GroupId != nil {
+		v := *s.GroupId
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentsInput) SetNextToken(v string) *ListDeploymentsInput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeploymentsResponse
@@ -8296,16 +10237,27 @@ func (s ListDeploymentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeployments sets the Deployments field's value.
-func (s *ListDeploymentsOutput) SetDeployments(v []Deployment) *ListDeploymentsOutput {
-	s.Deployments = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDeploymentsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Deployments) > 0 {
+		v := s.Deployments
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeploymentsOutput) SetNextToken(v string) *ListDeploymentsOutput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Deployments", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionVersionsRequest
@@ -8344,22 +10296,29 @@ func (s *ListDeviceDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *ListDeviceDefinitionVersionsInput) SetDeviceDefinitionId(v string) *ListDeviceDefinitionVersionsInput {
-	s.DeviceDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDeviceDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDeviceDefinitionVersionsInput) SetMaxResults(v string) *ListDeviceDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
+	if s.DeviceDefinitionId != nil {
+		v := *s.DeviceDefinitionId
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeviceDefinitionVersionsInput) SetNextToken(v string) *ListDeviceDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DeviceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionVersionsResponse
@@ -8388,16 +10347,27 @@ func (s ListDeviceDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeviceDefinitionVersionsOutput) SetNextToken(v string) *ListDeviceDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDeviceDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
 
-// SetVersions sets the Versions field's value.
-func (s *ListDeviceDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListDeviceDefinitionVersionsOutput {
-	s.Versions = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Versions) > 0 {
+		v := s.Versions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionsRequest
@@ -8419,16 +10389,23 @@ func (s ListDeviceDefinitionsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListDeviceDefinitionsInput) SetMaxResults(v string) *ListDeviceDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDeviceDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeviceDefinitionsInput) SetNextToken(v string) *ListDeviceDefinitionsInput {
-	s.NextToken = &v
-	return s
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListDeviceDefinitionsResponse
@@ -8457,16 +10434,27 @@ func (s ListDeviceDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDefinitions sets the Definitions field's value.
-func (s *ListDeviceDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListDeviceDefinitionsOutput {
-	s.Definitions = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDeviceDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Definitions) > 0 {
+		v := s.Definitions
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListDeviceDefinitionsOutput) SetNextToken(v string) *ListDeviceDefinitionsOutput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionVersionsRequest
@@ -8505,22 +10493,29 @@ func (s *ListFunctionDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *ListFunctionDefinitionVersionsInput) SetFunctionDefinitionId(v string) *ListFunctionDefinitionVersionsInput {
-	s.FunctionDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFunctionDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListFunctionDefinitionVersionsInput) SetMaxResults(v string) *ListFunctionDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
+	if s.FunctionDefinitionId != nil {
+		v := *s.FunctionDefinitionId
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListFunctionDefinitionVersionsInput) SetNextToken(v string) *ListFunctionDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "FunctionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionVersionsResponse
@@ -8549,16 +10544,27 @@ func (s ListFunctionDefinitionVersionsOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListFunctionDefinitionVersionsOutput) SetNextToken(v string) *ListFunctionDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFunctionDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
 
-// SetVersions sets the Versions field's value.
-func (s *ListFunctionDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListFunctionDefinitionVersionsOutput {
-	s.Versions = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Versions) > 0 {
+		v := s.Versions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionsRequest
@@ -8580,16 +10586,23 @@ func (s ListFunctionDefinitionsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListFunctionDefinitionsInput) SetMaxResults(v string) *ListFunctionDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFunctionDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListFunctionDefinitionsInput) SetNextToken(v string) *ListFunctionDefinitionsInput {
-	s.NextToken = &v
-	return s
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListFunctionDefinitionsResponse
@@ -8618,16 +10631,27 @@ func (s ListFunctionDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDefinitions sets the Definitions field's value.
-func (s *ListFunctionDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListFunctionDefinitionsOutput {
-	s.Definitions = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFunctionDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Definitions) > 0 {
+		v := s.Definitions
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListFunctionDefinitionsOutput) SetNextToken(v string) *ListFunctionDefinitionsOutput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupCertificateAuthoritiesRequest
@@ -8662,10 +10686,17 @@ func (s *ListGroupCertificateAuthoritiesInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *ListGroupCertificateAuthoritiesInput) SetGroupId(v string) *ListGroupCertificateAuthoritiesInput {
-	s.GroupId = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGroupCertificateAuthoritiesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupCertificateAuthoritiesResponse
@@ -8693,10 +10724,21 @@ func (s ListGroupCertificateAuthoritiesOutput) SDKResponseMetadata() aws.Respons
 	return s.responseMetadata
 }
 
-// SetGroupCertificateAuthorities sets the GroupCertificateAuthorities field's value.
-func (s *ListGroupCertificateAuthoritiesOutput) SetGroupCertificateAuthorities(v []GroupCertificateAuthorityProperties) *ListGroupCertificateAuthoritiesOutput {
-	s.GroupCertificateAuthorities = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGroupCertificateAuthoritiesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.GroupCertificateAuthorities) > 0 {
+		v := s.GroupCertificateAuthorities
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "GroupCertificateAuthorities", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupVersionsRequest
@@ -8735,22 +10777,29 @@ func (s *ListGroupVersionsInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *ListGroupVersionsInput) SetGroupId(v string) *ListGroupVersionsInput {
-	s.GroupId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGroupVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListGroupVersionsInput) SetMaxResults(v string) *ListGroupVersionsInput {
-	s.MaxResults = &v
-	return s
-}
+	if s.GroupId != nil {
+		v := *s.GroupId
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupVersionsInput) SetNextToken(v string) *ListGroupVersionsInput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupVersionsResponse
@@ -8779,16 +10828,27 @@ func (s ListGroupVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupVersionsOutput) SetNextToken(v string) *ListGroupVersionsOutput {
-	s.NextToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGroupVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
 
-// SetVersions sets the Versions field's value.
-func (s *ListGroupVersionsOutput) SetVersions(v []VersionInformation) *ListGroupVersionsOutput {
-	s.Versions = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Versions) > 0 {
+		v := s.Versions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupsRequest
@@ -8810,16 +10870,23 @@ func (s ListGroupsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListGroupsInput) SetMaxResults(v string) *ListGroupsInput {
-	s.MaxResults = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupsInput) SetNextToken(v string) *ListGroupsInput {
-	s.NextToken = &v
-	return s
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListGroupsResponse
@@ -8851,16 +10918,27 @@ func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetGroups sets the Groups field's value.
-func (s *ListGroupsOutput) SetGroups(v []GroupInformation) *ListGroupsOutput {
-	s.Groups = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Groups) > 0 {
+		v := s.Groups
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListGroupsOutput) SetNextToken(v string) *ListGroupsOutput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Groups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionVersionsRequest
@@ -8899,22 +10977,29 @@ func (s *ListLoggerDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *ListLoggerDefinitionVersionsInput) SetLoggerDefinitionId(v string) *ListLoggerDefinitionVersionsInput {
-	s.LoggerDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListLoggerDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListLoggerDefinitionVersionsInput) SetMaxResults(v string) *ListLoggerDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
+	if s.LoggerDefinitionId != nil {
+		v := *s.LoggerDefinitionId
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListLoggerDefinitionVersionsInput) SetNextToken(v string) *ListLoggerDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "LoggerDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionVersionsResponse
@@ -8943,16 +11028,27 @@ func (s ListLoggerDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListLoggerDefinitionVersionsOutput) SetNextToken(v string) *ListLoggerDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListLoggerDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
 
-// SetVersions sets the Versions field's value.
-func (s *ListLoggerDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListLoggerDefinitionVersionsOutput {
-	s.Versions = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Versions) > 0 {
+		v := s.Versions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionsRequest
@@ -8974,16 +11070,23 @@ func (s ListLoggerDefinitionsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListLoggerDefinitionsInput) SetMaxResults(v string) *ListLoggerDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListLoggerDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListLoggerDefinitionsInput) SetNextToken(v string) *ListLoggerDefinitionsInput {
-	s.NextToken = &v
-	return s
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListLoggerDefinitionsResponse
@@ -9012,16 +11115,224 @@ func (s ListLoggerDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDefinitions sets the Definitions field's value.
-func (s *ListLoggerDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListLoggerDefinitionsOutput {
-	s.Definitions = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListLoggerDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Definitions) > 0 {
+		v := s.Definitions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListLoggerDefinitionsOutput) SetNextToken(v string) *ListLoggerDefinitionsOutput {
-	s.NextToken = &v
-	return s
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionVersionsRequest
+type ListResourceDefinitionVersionsInput struct {
+	_ struct{} `type:"structure"`
+
+	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
+
+	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
+
+	// ResourceDefinitionId is a required field
+	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListResourceDefinitionVersionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListResourceDefinitionVersionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListResourceDefinitionVersionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListResourceDefinitionVersionsInput"}
+
+	if s.ResourceDefinitionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListResourceDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ResourceDefinitionId != nil {
+		v := *s.ResourceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionVersionsResponse
+type ListResourceDefinitionVersionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	NextToken *string `type:"string"`
+
+	Versions []VersionInformation `type:"list"`
+}
+
+// String returns the string representation
+func (s ListResourceDefinitionVersionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListResourceDefinitionVersionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResourceDefinitionVersionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListResourceDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Versions) > 0 {
+		v := s.Versions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionsRequest
+type ListResourceDefinitionsInput struct {
+	_ struct{} `type:"structure"`
+
+	MaxResults *string `location:"querystring" locationName:"MaxResults" type:"string"`
+
+	NextToken *string `location:"querystring" locationName:"NextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListResourceDefinitionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListResourceDefinitionsInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListResourceDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListResourceDefinitionsResponse
+type ListResourceDefinitionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	Definitions []DefinitionInformation `type:"list"`
+
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ListResourceDefinitionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListResourceDefinitionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListResourceDefinitionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListResourceDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Definitions) > 0 {
+		v := s.Definitions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionVersionsRequest
@@ -9060,22 +11371,29 @@ func (s *ListSubscriptionDefinitionVersionsInput) Validate() error {
 	return nil
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListSubscriptionDefinitionVersionsInput) SetMaxResults(v string) *ListSubscriptionDefinitionVersionsInput {
-	s.MaxResults = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListSubscriptionDefinitionVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionDefinitionVersionsInput) SetNextToken(v string) *ListSubscriptionDefinitionVersionsInput {
-	s.NextToken = &v
-	return s
-}
+	if s.SubscriptionDefinitionId != nil {
+		v := *s.SubscriptionDefinitionId
 
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *ListSubscriptionDefinitionVersionsInput) SetSubscriptionDefinitionId(v string) *ListSubscriptionDefinitionVersionsInput {
-	s.SubscriptionDefinitionId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionVersionsResponse
@@ -9104,16 +11422,27 @@ func (s ListSubscriptionDefinitionVersionsOutput) SDKResponseMetadata() aws.Resp
 	return s.responseMetadata
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionDefinitionVersionsOutput) SetNextToken(v string) *ListSubscriptionDefinitionVersionsOutput {
-	s.NextToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListSubscriptionDefinitionVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
 
-// SetVersions sets the Versions field's value.
-func (s *ListSubscriptionDefinitionVersionsOutput) SetVersions(v []VersionInformation) *ListSubscriptionDefinitionVersionsOutput {
-	s.Versions = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Versions) > 0 {
+		v := s.Versions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Versions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionsRequest
@@ -9135,16 +11464,23 @@ func (s ListSubscriptionDefinitionsInput) GoString() string {
 	return s.String()
 }
 
-// SetMaxResults sets the MaxResults field's value.
-func (s *ListSubscriptionDefinitionsInput) SetMaxResults(v string) *ListSubscriptionDefinitionsInput {
-	s.MaxResults = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListSubscriptionDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionDefinitionsInput) SetNextToken(v string) *ListSubscriptionDefinitionsInput {
-	s.NextToken = &v
-	return s
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ListSubscriptionDefinitionsResponse
@@ -9173,16 +11509,114 @@ func (s ListSubscriptionDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDefinitions sets the Definitions field's value.
-func (s *ListSubscriptionDefinitionsOutput) SetDefinitions(v []DefinitionInformation) *ListSubscriptionDefinitionsOutput {
-	s.Definitions = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListSubscriptionDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Definitions) > 0 {
+		v := s.Definitions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Definitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
-// SetNextToken sets the NextToken field's value.
-func (s *ListSubscriptionDefinitionsOutput) SetNextToken(v string) *ListSubscriptionDefinitionsOutput {
-	s.NextToken = &v
-	return s
+// Attributes that define the Local Device Resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalDeviceResourceData
+type LocalDeviceResourceData struct {
+	_ struct{} `type:"structure"`
+
+	// Group owner related settings for local resources.
+	GroupOwnerSetting *GroupOwnerSetting `type:"structure"`
+
+	// Local source path of the resource.
+	SourcePath *string `type:"string"`
+}
+
+// String returns the string representation
+func (s LocalDeviceResourceData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LocalDeviceResourceData) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LocalDeviceResourceData) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupOwnerSetting != nil {
+		v := s.GroupOwnerSetting
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GroupOwnerSetting", v, metadata)
+	}
+	if s.SourcePath != nil {
+		v := *s.SourcePath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SourcePath", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Attributes that define the Local Volume Resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalVolumeResourceData
+type LocalVolumeResourceData struct {
+	_ struct{} `type:"structure"`
+
+	// Local destination path of the resource.
+	DestinationPath *string `type:"string"`
+
+	// Group owner related settings for local resources.
+	GroupOwnerSetting *GroupOwnerSetting `type:"structure"`
+
+	// Local source path of the resource.
+	SourcePath *string `type:"string"`
+}
+
+// String returns the string representation
+func (s LocalVolumeResourceData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LocalVolumeResourceData) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LocalVolumeResourceData) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DestinationPath != nil {
+		v := *s.DestinationPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DestinationPath", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupOwnerSetting != nil {
+		v := s.GroupOwnerSetting
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GroupOwnerSetting", v, metadata)
+	}
+	if s.SourcePath != nil {
+		v := *s.SourcePath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SourcePath", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on the Logger
@@ -9217,34 +11651,39 @@ func (s Logger) GoString() string {
 	return s.String()
 }
 
-// SetComponent sets the Component field's value.
-func (s *Logger) SetComponent(v LoggerComponent) *Logger {
-	s.Component = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Logger) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Component) > 0 {
+		v := s.Component
 
-// SetId sets the Id field's value.
-func (s *Logger) SetId(v string) *Logger {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Component", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetLevel sets the Level field's value.
-func (s *Logger) SetLevel(v LoggerLevel) *Logger {
-	s.Level = v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Level) > 0 {
+		v := s.Level
 
-// SetSpace sets the Space field's value.
-func (s *Logger) SetSpace(v int64) *Logger {
-	s.Space = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Level", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Space != nil {
+		v := *s.Space
 
-// SetType sets the Type field's value.
-func (s *Logger) SetType(v LoggerType) *Logger {
-	s.Type = v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Space", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
 }
 
 // Information on logger definition version
@@ -9266,10 +11705,21 @@ func (s LoggerDefinitionVersion) GoString() string {
 	return s.String()
 }
 
-// SetLoggers sets the Loggers field's value.
-func (s *LoggerDefinitionVersion) SetLoggers(v []Logger) *LoggerDefinitionVersion {
-	s.Loggers = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LoggerDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Loggers) > 0 {
+		v := s.Loggers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Loggers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Information needed to perform a reset of a group's deployments.
@@ -9310,22 +11760,29 @@ func (s *ResetDeploymentsInput) Validate() error {
 	return nil
 }
 
-// SetAmznClientToken sets the AmznClientToken field's value.
-func (s *ResetDeploymentsInput) SetAmznClientToken(v string) *ResetDeploymentsInput {
-	s.AmznClientToken = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResetDeploymentsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetForce sets the Force field's value.
-func (s *ResetDeploymentsInput) SetForce(v bool) *ResetDeploymentsInput {
-	s.Force = &v
-	return s
-}
+	if s.Force != nil {
+		v := *s.Force
 
-// SetGroupId sets the GroupId field's value.
-func (s *ResetDeploymentsInput) SetGroupId(v string) *ResetDeploymentsInput {
-	s.GroupId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Force", protocol.BoolValue(v), metadata)
+	}
+	if s.AmznClientToken != nil {
+		v := *s.AmznClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-Client-Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeploymentsResponse
@@ -9356,16 +11813,183 @@ func (s ResetDeploymentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetDeploymentArn sets the DeploymentArn field's value.
-func (s *ResetDeploymentsOutput) SetDeploymentArn(v string) *ResetDeploymentsOutput {
-	s.DeploymentArn = &v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResetDeploymentsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DeploymentArn != nil {
+		v := *s.DeploymentArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DeploymentId != nil {
+		v := *s.DeploymentId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeploymentId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
-// SetDeploymentId sets the DeploymentId field's value.
-func (s *ResetDeploymentsOutput) SetDeploymentId(v string) *ResetDeploymentsOutput {
-	s.DeploymentId = &v
-	return s
+// Information on the resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Resource
+type Resource struct {
+	_ struct{} `type:"structure"`
+
+	// Resource Id.
+	Id *string `type:"string"`
+
+	// A descriptive resource name.
+	Name *string `type:"string"`
+
+	// A container of data for all resource types.
+	ResourceDataContainer *ResourceDataContainer `type:"structure"`
+}
+
+// String returns the string representation
+func (s Resource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Resource) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceDataContainer != nil {
+		v := s.ResourceDataContainer
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ResourceDataContainer", v, metadata)
+	}
+	return nil
+}
+
+// Policy for the function to access a resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceAccessPolicy
+type ResourceAccessPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// The function's access permission to the resource.
+	Permission Permission `type:"string" enum:"true"`
+
+	// Id of the resource. A reference to the resource definiton.
+	ResourceId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ResourceAccessPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceAccessPolicy) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceAccessPolicy) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Permission) > 0 {
+		v := s.Permission
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Permission", protocol.QuotedValue{v}, metadata)
+	}
+	if s.ResourceId != nil {
+		v := *s.ResourceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A container of data for all resource types.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDataContainer
+type ResourceDataContainer struct {
+	_ struct{} `type:"structure"`
+
+	// Attributes that define the Local Device Resource.
+	LocalDeviceResourceData *LocalDeviceResourceData `type:"structure"`
+
+	// Attributes that define the Local Volume Resource.
+	LocalVolumeResourceData *LocalVolumeResourceData `type:"structure"`
+}
+
+// String returns the string representation
+func (s ResourceDataContainer) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceDataContainer) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceDataContainer) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LocalDeviceResourceData != nil {
+		v := s.LocalDeviceResourceData
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LocalDeviceResourceData", v, metadata)
+	}
+	if s.LocalVolumeResourceData != nil {
+		v := s.LocalVolumeResourceData
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "LocalVolumeResourceData", v, metadata)
+	}
+	return nil
+}
+
+// Information on resource definition version
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDefinitionVersion
+type ResourceDefinitionVersion struct {
+	_ struct{} `type:"structure"`
+
+	// List of resources.
+	Resources []Resource `type:"list"`
+}
+
+// String returns the string representation
+func (s ResourceDefinitionVersion) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceDefinitionVersion) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Resources) > 0 {
+		v := s.Resources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Resources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Information on subscription
@@ -9396,28 +12020,33 @@ func (s Subscription) GoString() string {
 	return s.String()
 }
 
-// SetId sets the Id field's value.
-func (s *Subscription) SetId(v string) *Subscription {
-	s.Id = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Subscription) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id != nil {
+		v := *s.Id
 
-// SetSource sets the Source field's value.
-func (s *Subscription) SetSource(v string) *Subscription {
-	s.Source = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Source != nil {
+		v := *s.Source
 
-// SetSubject sets the Subject field's value.
-func (s *Subscription) SetSubject(v string) *Subscription {
-	s.Subject = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Source", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Subject != nil {
+		v := *s.Subject
 
-// SetTarget sets the Target field's value.
-func (s *Subscription) SetTarget(v string) *Subscription {
-	s.Target = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Subject", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Target != nil {
+		v := *s.Target
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Target", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information on subscription definition version
@@ -9439,10 +12068,21 @@ func (s SubscriptionDefinitionVersion) GoString() string {
 	return s.String()
 }
 
-// SetSubscriptions sets the Subscriptions field's value.
-func (s *SubscriptionDefinitionVersion) SetSubscriptions(v []Subscription) *SubscriptionDefinitionVersion {
-	s.Subscriptions = v
-	return s
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SubscriptionDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Subscriptions) > 0 {
+		v := s.Subscriptions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Subscriptions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Information on connectivity info
@@ -9481,16 +12121,29 @@ func (s *UpdateConnectivityInfoInput) Validate() error {
 	return nil
 }
 
-// SetConnectivityInfo sets the ConnectivityInfo field's value.
-func (s *UpdateConnectivityInfoInput) SetConnectivityInfo(v []ConnectivityInfo) *UpdateConnectivityInfoInput {
-	s.ConnectivityInfo = v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateConnectivityInfoInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetThingName sets the ThingName field's value.
-func (s *UpdateConnectivityInfoInput) SetThingName(v string) *UpdateConnectivityInfoInput {
-	s.ThingName = &v
-	return s
+	if len(s.ConnectivityInfo) > 0 {
+		v := s.ConnectivityInfo
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ConnectivityInfo", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ThingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectivityInfoResponse
@@ -9499,6 +12152,7 @@ type UpdateConnectivityInfoOutput struct {
 
 	responseMetadata aws.Response
 
+	// Response Text
 	Message *string `locationName:"message" type:"string"`
 
 	// New Version
@@ -9520,16 +12174,21 @@ func (s UpdateConnectivityInfoOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// SetMessage sets the Message field's value.
-func (s *UpdateConnectivityInfoOutput) SetMessage(v string) *UpdateConnectivityInfoOutput {
-	s.Message = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateConnectivityInfoOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Message != nil {
+		v := *s.Message
 
-// SetVersion sets the Version field's value.
-func (s *UpdateConnectivityInfoOutput) SetVersion(v string) *UpdateConnectivityInfoOutput {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinitionRequest
@@ -9566,16 +12225,23 @@ func (s *UpdateCoreDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetCoreDefinitionId sets the CoreDefinitionId field's value.
-func (s *UpdateCoreDefinitionInput) SetCoreDefinitionId(v string) *UpdateCoreDefinitionInput {
-	s.CoreDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateCoreDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetName sets the Name field's value.
-func (s *UpdateCoreDefinitionInput) SetName(v string) *UpdateCoreDefinitionInput {
-	s.Name = &v
-	return s
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CoreDefinitionId != nil {
+		v := *s.CoreDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "CoreDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateCoreDefinitionResponse
@@ -9598,6 +12264,11 @@ func (s UpdateCoreDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateCoreDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateCoreDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateDeviceDefinitionRequest
@@ -9634,16 +12305,23 @@ func (s *UpdateDeviceDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetDeviceDefinitionId sets the DeviceDefinitionId field's value.
-func (s *UpdateDeviceDefinitionInput) SetDeviceDefinitionId(v string) *UpdateDeviceDefinitionInput {
-	s.DeviceDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDeviceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetName sets the Name field's value.
-func (s *UpdateDeviceDefinitionInput) SetName(v string) *UpdateDeviceDefinitionInput {
-	s.Name = &v
-	return s
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DeviceDefinitionId != nil {
+		v := *s.DeviceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "DeviceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateDeviceDefinitionResponse
@@ -9666,6 +12344,11 @@ func (s UpdateDeviceDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateDeviceDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDeviceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateFunctionDefinitionRequest
@@ -9702,16 +12385,23 @@ func (s *UpdateFunctionDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetFunctionDefinitionId sets the FunctionDefinitionId field's value.
-func (s *UpdateFunctionDefinitionInput) SetFunctionDefinitionId(v string) *UpdateFunctionDefinitionInput {
-	s.FunctionDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFunctionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetName sets the Name field's value.
-func (s *UpdateFunctionDefinitionInput) SetName(v string) *UpdateFunctionDefinitionInput {
-	s.Name = &v
-	return s
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FunctionDefinitionId != nil {
+		v := *s.FunctionDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "FunctionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateFunctionDefinitionResponse
@@ -9734,6 +12424,11 @@ func (s UpdateFunctionDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateFunctionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFunctionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupCertificateConfigurationRequest
@@ -9771,16 +12466,23 @@ func (s *UpdateGroupCertificateConfigurationInput) Validate() error {
 	return nil
 }
 
-// SetCertificateExpiryInMilliseconds sets the CertificateExpiryInMilliseconds field's value.
-func (s *UpdateGroupCertificateConfigurationInput) SetCertificateExpiryInMilliseconds(v string) *UpdateGroupCertificateConfigurationInput {
-	s.CertificateExpiryInMilliseconds = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGroupCertificateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetGroupId sets the GroupId field's value.
-func (s *UpdateGroupCertificateConfigurationInput) SetGroupId(v string) *UpdateGroupCertificateConfigurationInput {
-	s.GroupId = &v
-	return s
+	if s.CertificateExpiryInMilliseconds != nil {
+		v := *s.CertificateExpiryInMilliseconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CertificateExpiryInMilliseconds", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupCertificateConfigurationResponse
@@ -9811,22 +12513,27 @@ func (s UpdateGroupCertificateConfigurationOutput) SDKResponseMetadata() aws.Res
 	return s.responseMetadata
 }
 
-// SetCertificateAuthorityExpiryInMilliseconds sets the CertificateAuthorityExpiryInMilliseconds field's value.
-func (s *UpdateGroupCertificateConfigurationOutput) SetCertificateAuthorityExpiryInMilliseconds(v string) *UpdateGroupCertificateConfigurationOutput {
-	s.CertificateAuthorityExpiryInMilliseconds = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGroupCertificateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateAuthorityExpiryInMilliseconds != nil {
+		v := *s.CertificateAuthorityExpiryInMilliseconds
 
-// SetCertificateExpiryInMilliseconds sets the CertificateExpiryInMilliseconds field's value.
-func (s *UpdateGroupCertificateConfigurationOutput) SetCertificateExpiryInMilliseconds(v string) *UpdateGroupCertificateConfigurationOutput {
-	s.CertificateExpiryInMilliseconds = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CertificateAuthorityExpiryInMilliseconds", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CertificateExpiryInMilliseconds != nil {
+		v := *s.CertificateExpiryInMilliseconds
 
-// SetGroupId sets the GroupId field's value.
-func (s *UpdateGroupCertificateConfigurationOutput) SetGroupId(v string) *UpdateGroupCertificateConfigurationOutput {
-	s.GroupId = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CertificateExpiryInMilliseconds", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupRequest
@@ -9863,16 +12570,23 @@ func (s *UpdateGroupInput) Validate() error {
 	return nil
 }
 
-// SetGroupId sets the GroupId field's value.
-func (s *UpdateGroupInput) SetGroupId(v string) *UpdateGroupInput {
-	s.GroupId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetName sets the Name field's value.
-func (s *UpdateGroupInput) SetName(v string) *UpdateGroupInput {
-	s.Name = &v
-	return s
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateGroupResponse
@@ -9895,6 +12609,11 @@ func (s UpdateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateLoggerDefinitionRequest
@@ -9931,16 +12650,23 @@ func (s *UpdateLoggerDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetLoggerDefinitionId sets the LoggerDefinitionId field's value.
-func (s *UpdateLoggerDefinitionInput) SetLoggerDefinitionId(v string) *UpdateLoggerDefinitionInput {
-	s.LoggerDefinitionId = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateLoggerDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetName sets the Name field's value.
-func (s *UpdateLoggerDefinitionInput) SetName(v string) *UpdateLoggerDefinitionInput {
-	s.Name = &v
-	return s
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LoggerDefinitionId != nil {
+		v := *s.LoggerDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "LoggerDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateLoggerDefinitionResponse
@@ -9963,6 +12689,91 @@ func (s UpdateLoggerDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateLoggerDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateLoggerDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateResourceDefinitionRequest
+type UpdateResourceDefinitionInput struct {
+	_ struct{} `type:"structure"`
+
+	Name *string `type:"string"`
+
+	// ResourceDefinitionId is a required field
+	ResourceDefinitionId *string `location:"uri" locationName:"ResourceDefinitionId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateResourceDefinitionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateResourceDefinitionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateResourceDefinitionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateResourceDefinitionInput"}
+
+	if s.ResourceDefinitionId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceDefinitionId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateResourceDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceDefinitionId != nil {
+		v := *s.ResourceDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ResourceDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateResourceDefinitionResponse
+type UpdateResourceDefinitionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateResourceDefinitionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateResourceDefinitionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateResourceDefinitionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateResourceDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateSubscriptionDefinitionRequest
@@ -9999,16 +12810,23 @@ func (s *UpdateSubscriptionDefinitionInput) Validate() error {
 	return nil
 }
 
-// SetName sets the Name field's value.
-func (s *UpdateSubscriptionDefinitionInput) SetName(v string) *UpdateSubscriptionDefinitionInput {
-	s.Name = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateSubscriptionDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
-// SetSubscriptionDefinitionId sets the SubscriptionDefinitionId field's value.
-func (s *UpdateSubscriptionDefinitionInput) SetSubscriptionDefinitionId(v string) *UpdateSubscriptionDefinitionInput {
-	s.SubscriptionDefinitionId = &v
-	return s
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SubscriptionDefinitionId != nil {
+		v := *s.SubscriptionDefinitionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "SubscriptionDefinitionId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateSubscriptionDefinitionResponse
@@ -10031,6 +12849,11 @@ func (s UpdateSubscriptionDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateSubscriptionDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateSubscriptionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Information on the version
@@ -10061,28 +12884,33 @@ func (s VersionInformation) GoString() string {
 	return s.String()
 }
 
-// SetArn sets the Arn field's value.
-func (s *VersionInformation) SetArn(v string) *VersionInformation {
-	s.Arn = &v
-	return s
-}
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VersionInformation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
 
-// SetCreationTimestamp sets the CreationTimestamp field's value.
-func (s *VersionInformation) SetCreationTimestamp(v string) *VersionInformation {
-	s.CreationTimestamp = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTimestamp != nil {
+		v := *s.CreationTimestamp
 
-// SetId sets the Id field's value.
-func (s *VersionInformation) SetId(v string) *VersionInformation {
-	s.Id = &v
-	return s
-}
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
 
-// SetVersion sets the Version field's value.
-func (s *VersionInformation) SetVersion(v string) *VersionInformation {
-	s.Version = &v
-	return s
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 type DeploymentType string
@@ -10095,6 +12923,15 @@ const (
 	DeploymentTypeForceResetDeployment DeploymentType = "ForceResetDeployment"
 )
 
+func (enum DeploymentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LoggerComponent string
 
 // Enum values for LoggerComponent
@@ -10102,6 +12939,15 @@ const (
 	LoggerComponentGreengrassSystem LoggerComponent = "GreengrassSystem"
 	LoggerComponentLambda           LoggerComponent = "Lambda"
 )
+
+func (enum LoggerComponent) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoggerComponent) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LoggerLevel string
 
@@ -10114,6 +12960,15 @@ const (
 	LoggerLevelFatal LoggerLevel = "FATAL"
 )
 
+func (enum LoggerLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoggerLevel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LoggerType string
 
 // Enum values for LoggerType
@@ -10121,3 +12976,111 @@ const (
 	LoggerTypeFileSystem    LoggerType = "FileSystem"
 	LoggerTypeAwscloudWatch LoggerType = "AWSCloudWatch"
 )
+
+func (enum LoggerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoggerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Type of permissions a function could have to access a resource.
+type Permission string
+
+// Enum values for Permission
+const (
+	PermissionRo Permission = "ro"
+	PermissionRw Permission = "rw"
+)
+
+func (enum Permission) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Permission) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The piece of software on the Greengrass Core that will be updated.
+type SoftwareToUpdate string
+
+// Enum values for SoftwareToUpdate
+const (
+	SoftwareToUpdateCore     SoftwareToUpdate = "core"
+	SoftwareToUpdateOtaAgent SoftwareToUpdate = "ota_agent"
+)
+
+func (enum SoftwareToUpdate) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SoftwareToUpdate) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The minimum level of log statements that should be logged by the OTA Agent
+// during an update.
+type UpdateAgentLogLevel string
+
+// Enum values for UpdateAgentLogLevel
+const (
+	UpdateAgentLogLevelNone    UpdateAgentLogLevel = "NONE"
+	UpdateAgentLogLevelTrace   UpdateAgentLogLevel = "TRACE"
+	UpdateAgentLogLevelDebug   UpdateAgentLogLevel = "DEBUG"
+	UpdateAgentLogLevelVerbose UpdateAgentLogLevel = "VERBOSE"
+	UpdateAgentLogLevelInfo    UpdateAgentLogLevel = "INFO"
+	UpdateAgentLogLevelWarn    UpdateAgentLogLevel = "WARN"
+	UpdateAgentLogLevelError   UpdateAgentLogLevel = "ERROR"
+	UpdateAgentLogLevelFatal   UpdateAgentLogLevel = "FATAL"
+)
+
+func (enum UpdateAgentLogLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpdateAgentLogLevel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The architecture of the Cores in the targets of an update
+type UpdateTargetsArchitecture string
+
+// Enum values for UpdateTargetsArchitecture
+const (
+	UpdateTargetsArchitectureArmv7l  UpdateTargetsArchitecture = "armv7l"
+	UpdateTargetsArchitectureX8664   UpdateTargetsArchitecture = "x86_64"
+	UpdateTargetsArchitectureAarch64 UpdateTargetsArchitecture = "aarch64"
+)
+
+func (enum UpdateTargetsArchitecture) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpdateTargetsArchitecture) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The operating system of the Cores in the targets of an update
+type UpdateTargetsOperatingSystem string
+
+// Enum values for UpdateTargetsOperatingSystem
+const (
+	UpdateTargetsOperatingSystemUbuntu      UpdateTargetsOperatingSystem = "ubuntu"
+	UpdateTargetsOperatingSystemRaspbian    UpdateTargetsOperatingSystem = "raspbian"
+	UpdateTargetsOperatingSystemAmazonLinux UpdateTargetsOperatingSystem = "amazon_linux"
+)
+
+func (enum UpdateTargetsOperatingSystem) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpdateTargetsOperatingSystem) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

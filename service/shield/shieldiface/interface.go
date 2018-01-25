@@ -76,6 +76,8 @@ type ShieldAPI interface {
 
 	DescribeSubscriptionRequest(*shield.DescribeSubscriptionInput) shield.DescribeSubscriptionRequest
 
+	GetSubscriptionStateRequest(*shield.GetSubscriptionStateInput) shield.GetSubscriptionStateRequest
+
 	ListAttacksRequest(*shield.ListAttacksInput) shield.ListAttacksRequest
 
 	ListProtectionsRequest(*shield.ListProtectionsInput) shield.ListProtectionsRequest

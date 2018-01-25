@@ -71,17 +71,23 @@ type SESAPI interface {
 
 	CreateConfigurationSetTrackingOptionsRequest(*ses.CreateConfigurationSetTrackingOptionsInput) ses.CreateConfigurationSetTrackingOptionsRequest
 
+	CreateCustomVerificationEmailTemplateRequest(*ses.CreateCustomVerificationEmailTemplateInput) ses.CreateCustomVerificationEmailTemplateRequest
+
 	CreateReceiptFilterRequest(*ses.CreateReceiptFilterInput) ses.CreateReceiptFilterRequest
 
 	CreateReceiptRuleRequest(*ses.CreateReceiptRuleInput) ses.CreateReceiptRuleRequest
 
 	CreateReceiptRuleSetRequest(*ses.CreateReceiptRuleSetInput) ses.CreateReceiptRuleSetRequest
 
+	CreateTemplateRequest(*ses.CreateTemplateInput) ses.CreateTemplateRequest
+
 	DeleteConfigurationSetRequest(*ses.DeleteConfigurationSetInput) ses.DeleteConfigurationSetRequest
 
 	DeleteConfigurationSetEventDestinationRequest(*ses.DeleteConfigurationSetEventDestinationInput) ses.DeleteConfigurationSetEventDestinationRequest
 
 	DeleteConfigurationSetTrackingOptionsRequest(*ses.DeleteConfigurationSetTrackingOptionsInput) ses.DeleteConfigurationSetTrackingOptionsRequest
+
+	DeleteCustomVerificationEmailTemplateRequest(*ses.DeleteCustomVerificationEmailTemplateInput) ses.DeleteCustomVerificationEmailTemplateRequest
 
 	DeleteIdentityRequest(*ses.DeleteIdentityInput) ses.DeleteIdentityRequest
 
@@ -93,6 +99,8 @@ type SESAPI interface {
 
 	DeleteReceiptRuleSetRequest(*ses.DeleteReceiptRuleSetInput) ses.DeleteReceiptRuleSetRequest
 
+	DeleteTemplateRequest(*ses.DeleteTemplateInput) ses.DeleteTemplateRequest
+
 	DeleteVerifiedEmailAddressRequest(*ses.DeleteVerifiedEmailAddressInput) ses.DeleteVerifiedEmailAddressRequest
 
 	DescribeActiveReceiptRuleSetRequest(*ses.DescribeActiveReceiptRuleSetInput) ses.DescribeActiveReceiptRuleSetRequest
@@ -102,6 +110,10 @@ type SESAPI interface {
 	DescribeReceiptRuleRequest(*ses.DescribeReceiptRuleInput) ses.DescribeReceiptRuleRequest
 
 	DescribeReceiptRuleSetRequest(*ses.DescribeReceiptRuleSetInput) ses.DescribeReceiptRuleSetRequest
+
+	GetAccountSendingEnabledRequest(*ses.GetAccountSendingEnabledInput) ses.GetAccountSendingEnabledRequest
+
+	GetCustomVerificationEmailTemplateRequest(*ses.GetCustomVerificationEmailTemplateInput) ses.GetCustomVerificationEmailTemplateRequest
 
 	GetIdentityDkimAttributesRequest(*ses.GetIdentityDkimAttributesInput) ses.GetIdentityDkimAttributesRequest
 
@@ -117,7 +129,14 @@ type SESAPI interface {
 
 	GetSendStatisticsRequest(*ses.GetSendStatisticsInput) ses.GetSendStatisticsRequest
 
+	GetTemplateRequest(*ses.GetTemplateInput) ses.GetTemplateRequest
+
 	ListConfigurationSetsRequest(*ses.ListConfigurationSetsInput) ses.ListConfigurationSetsRequest
+
+	ListCustomVerificationEmailTemplatesRequest(*ses.ListCustomVerificationEmailTemplatesInput) ses.ListCustomVerificationEmailTemplatesRequest
+
+	ListCustomVerificationEmailTemplatesPages(*ses.ListCustomVerificationEmailTemplatesInput, func(*ses.ListCustomVerificationEmailTemplatesOutput, bool) bool) error
+	ListCustomVerificationEmailTemplatesPagesWithContext(aws.Context, *ses.ListCustomVerificationEmailTemplatesInput, func(*ses.ListCustomVerificationEmailTemplatesOutput, bool) bool, ...aws.Option) error
 
 	ListIdentitiesRequest(*ses.ListIdentitiesInput) ses.ListIdentitiesRequest
 
@@ -130,6 +149,8 @@ type SESAPI interface {
 
 	ListReceiptRuleSetsRequest(*ses.ListReceiptRuleSetsInput) ses.ListReceiptRuleSetsRequest
 
+	ListTemplatesRequest(*ses.ListTemplatesInput) ses.ListTemplatesRequest
+
 	ListVerifiedEmailAddressesRequest(*ses.ListVerifiedEmailAddressesInput) ses.ListVerifiedEmailAddressesRequest
 
 	PutIdentityPolicyRequest(*ses.PutIdentityPolicyInput) ses.PutIdentityPolicyRequest
@@ -138,9 +159,15 @@ type SESAPI interface {
 
 	SendBounceRequest(*ses.SendBounceInput) ses.SendBounceRequest
 
+	SendBulkTemplatedEmailRequest(*ses.SendBulkTemplatedEmailInput) ses.SendBulkTemplatedEmailRequest
+
+	SendCustomVerificationEmailRequest(*ses.SendCustomVerificationEmailInput) ses.SendCustomVerificationEmailRequest
+
 	SendEmailRequest(*ses.SendEmailInput) ses.SendEmailRequest
 
 	SendRawEmailRequest(*ses.SendRawEmailInput) ses.SendRawEmailRequest
+
+	SendTemplatedEmailRequest(*ses.SendTemplatedEmailInput) ses.SendTemplatedEmailRequest
 
 	SetActiveReceiptRuleSetRequest(*ses.SetActiveReceiptRuleSetInput) ses.SetActiveReceiptRuleSetRequest
 
@@ -156,11 +183,23 @@ type SESAPI interface {
 
 	SetReceiptRulePositionRequest(*ses.SetReceiptRulePositionInput) ses.SetReceiptRulePositionRequest
 
+	TestRenderTemplateRequest(*ses.TestRenderTemplateInput) ses.TestRenderTemplateRequest
+
+	UpdateAccountSendingEnabledRequest(*ses.UpdateAccountSendingEnabledInput) ses.UpdateAccountSendingEnabledRequest
+
 	UpdateConfigurationSetEventDestinationRequest(*ses.UpdateConfigurationSetEventDestinationInput) ses.UpdateConfigurationSetEventDestinationRequest
+
+	UpdateConfigurationSetReputationMetricsEnabledRequest(*ses.UpdateConfigurationSetReputationMetricsEnabledInput) ses.UpdateConfigurationSetReputationMetricsEnabledRequest
+
+	UpdateConfigurationSetSendingEnabledRequest(*ses.UpdateConfigurationSetSendingEnabledInput) ses.UpdateConfigurationSetSendingEnabledRequest
 
 	UpdateConfigurationSetTrackingOptionsRequest(*ses.UpdateConfigurationSetTrackingOptionsInput) ses.UpdateConfigurationSetTrackingOptionsRequest
 
+	UpdateCustomVerificationEmailTemplateRequest(*ses.UpdateCustomVerificationEmailTemplateInput) ses.UpdateCustomVerificationEmailTemplateRequest
+
 	UpdateReceiptRuleRequest(*ses.UpdateReceiptRuleInput) ses.UpdateReceiptRuleRequest
+
+	UpdateTemplateRequest(*ses.UpdateTemplateInput) ses.UpdateTemplateRequest
 
 	VerifyDomainDkimRequest(*ses.VerifyDomainDkimInput) ses.VerifyDomainDkimRequest
 
