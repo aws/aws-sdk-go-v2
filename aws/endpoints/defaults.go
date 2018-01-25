@@ -438,7 +438,11 @@ var awsPartition = partition{
 			},
 		},
 		"cloudhsmv2": service{
-
+			Defaults: endpoint{
+				CredentialScope: credentialScope{
+					Service: "cloudhsm",
+				},
+			},
 			Endpoints: endpoints{
 				"eu-west-1": endpoint{},
 				"us-east-1": endpoint{},
