@@ -3721,7 +3721,7 @@ type TagQueueInput struct {
 	// The list of tags to be added to the specified queue.
 	//
 	// Tags is a required field
-	Tags map[string]string `locationName:"Tag" locationNameKey:"Key" locationNameValue:"Value" type:"map" flattened:"true" required:"true"`
+	Tags map[string]string `locationNameKey:"Key" locationNameValue:"Value" type:"map" flattened:"true" required:"true"`
 }
 
 // String returns the string representation
@@ -3852,6 +3852,15 @@ const (
 	MessageSystemAttributeNameMessageGroupId                   MessageSystemAttributeName = "MessageGroupId"
 )
 
+func (enum MessageSystemAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MessageSystemAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type QueueAttributeName string
 
 // Enum values for QueueAttributeName
@@ -3875,3 +3884,12 @@ const (
 	QueueAttributeNameKmsMasterKeyId                        QueueAttributeName = "KmsMasterKeyId"
 	QueueAttributeNameKmsDataKeyReusePeriodSeconds          QueueAttributeName = "KmsDataKeyReusePeriodSeconds"
 )
+
+func (enum QueueAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QueueAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

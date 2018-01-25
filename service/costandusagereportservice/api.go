@@ -500,6 +500,15 @@ const (
 	AWSRegionApNortheast1 AWSRegion = "ap-northeast-1"
 )
 
+func (enum AWSRegion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AWSRegion) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Enable support for Redshift and/or QuickSight.
 type AdditionalArtifact string
 
@@ -508,6 +517,15 @@ const (
 	AdditionalArtifactRedshift   AdditionalArtifact = "REDSHIFT"
 	AdditionalArtifactQuicksight AdditionalArtifact = "QUICKSIGHT"
 )
+
+func (enum AdditionalArtifact) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AdditionalArtifact) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Preferred compression format for report.
 type CompressionFormat string
@@ -518,6 +536,15 @@ const (
 	CompressionFormatGzip CompressionFormat = "GZIP"
 )
 
+func (enum CompressionFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CompressionFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Preferred format for report.
 type ReportFormat string
 
@@ -525,6 +552,15 @@ type ReportFormat string
 const (
 	ReportFormatTextOrcsv ReportFormat = "textORcsv"
 )
+
+func (enum ReportFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Preference of including Resource IDs. You can include additional details
 // about individual resource IDs in your report.
@@ -535,6 +571,15 @@ const (
 	SchemaElementResources SchemaElement = "RESOURCES"
 )
 
+func (enum SchemaElement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SchemaElement) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The frequency on which report data are measured and displayed.
 type TimeUnit string
 
@@ -543,3 +588,12 @@ const (
 	TimeUnitHourly TimeUnit = "HOURLY"
 	TimeUnitDaily  TimeUnit = "DAILY"
 )
+
+func (enum TimeUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TimeUnit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

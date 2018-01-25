@@ -1354,7 +1354,7 @@ func (s CreateHapgOutput) SDKResponseMetadata() aws.Response {
 // Contains the inputs for the CreateHsm operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/CreateHsmRequest
 type CreateHsmInput struct {
-	_ struct{} `locationName:"CreateHsmRequest" type:"structure"`
+	_ struct{} `type:"structure"`
 
 	// A user-defined token to ensure idempotence. Subsequent calls to this operation
 	// with the same token will be ignored.
@@ -1594,7 +1594,7 @@ func (s DeleteHapgOutput) SDKResponseMetadata() aws.Response {
 // Contains the inputs for the DeleteHsm operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/DeleteHsmRequest
 type DeleteHsmInput struct {
-	_ struct{} `locationName:"DeleteHsmRequest" type:"structure"`
+	_ struct{} `type:"structure"`
 
 	// The ARN of the HSM to delete.
 	//
@@ -2376,7 +2376,7 @@ func (s ModifyHapgOutput) SDKResponseMetadata() aws.Response {
 // Contains the inputs for the ModifyHsm operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/ModifyHsmRequest
 type ModifyHsmInput struct {
-	_ struct{} `locationName:"ModifyHsmRequest" type:"structure"`
+	_ struct{} `type:"structure"`
 
 	// The new IP address for the elastic network interface (ENI) attached to the
 	// HSM.
@@ -2655,6 +2655,15 @@ const (
 	ClientVersion53 ClientVersion = "5.3"
 )
 
+func (enum ClientVersion) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ClientVersion) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CloudHsmObjectState string
 
 // Enum values for CloudHsmObjectState
@@ -2663,6 +2672,15 @@ const (
 	CloudHsmObjectStateUpdating CloudHsmObjectState = "UPDATING"
 	CloudHsmObjectStateDegraded CloudHsmObjectState = "DEGRADED"
 )
+
+func (enum CloudHsmObjectState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CloudHsmObjectState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type HsmStatus string
 
@@ -2677,6 +2695,15 @@ const (
 	HsmStatusDegraded    HsmStatus = "DEGRADED"
 )
 
+func (enum HsmStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HsmStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Specifies the type of subscription for the HSM.
 //
 //    * PRODUCTION - The HSM is being used in a production environment.
@@ -2688,3 +2715,12 @@ type SubscriptionType string
 const (
 	SubscriptionTypeProduction SubscriptionType = "PRODUCTION"
 )
+
+func (enum SubscriptionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SubscriptionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

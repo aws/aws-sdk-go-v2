@@ -1964,6 +1964,15 @@ const (
 	EntityTypeOther          EntityType = "OTHER"
 )
 
+func (enum EntityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EntityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InputFormat string
 
 // Enum values for InputFormat
@@ -1971,6 +1980,15 @@ const (
 	InputFormatOneDocPerFile InputFormat = "ONE_DOC_PER_FILE"
 	InputFormatOneDocPerLine InputFormat = "ONE_DOC_PER_LINE"
 )
+
+func (enum InputFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type JobStatus string
 
@@ -1982,6 +2000,15 @@ const (
 	JobStatusFailed     JobStatus = "FAILED"
 )
 
+func (enum JobStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LanguageCode string
 
 // Enum values for LanguageCode
@@ -1989,6 +2016,15 @@ const (
 	LanguageCodeEn LanguageCode = "en"
 	LanguageCodeEs LanguageCode = "es"
 )
+
+func (enum LanguageCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LanguageCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SentimentType string
 
@@ -1999,3 +2035,12 @@ const (
 	SentimentTypeNeutral  SentimentType = "NEUTRAL"
 	SentimentTypeMixed    SentimentType = "MIXED"
 )
+
+func (enum SentimentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SentimentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -3526,6 +3526,15 @@ const (
 	ImageActionTypeExpire ImageActionType = "EXPIRE"
 )
 
+func (enum ImageActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageActionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ImageFailureCode string
 
 // Enum values for ImageFailureCode
@@ -3537,6 +3546,15 @@ const (
 	ImageFailureCodeMissingDigestAndTag        ImageFailureCode = "MissingDigestAndTag"
 )
 
+func (enum ImageFailureCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageFailureCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LayerAvailability string
 
 // Enum values for LayerAvailability
@@ -3545,6 +3563,15 @@ const (
 	LayerAvailabilityUnavailable LayerAvailability = "UNAVAILABLE"
 )
 
+func (enum LayerAvailability) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LayerAvailability) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LayerFailureCode string
 
 // Enum values for LayerFailureCode
@@ -3552,6 +3579,15 @@ const (
 	LayerFailureCodeInvalidLayerDigest LayerFailureCode = "InvalidLayerDigest"
 	LayerFailureCodeMissingLayerDigest LayerFailureCode = "MissingLayerDigest"
 )
+
+func (enum LayerFailureCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LayerFailureCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LifecyclePolicyPreviewStatus string
 
@@ -3563,6 +3599,15 @@ const (
 	LifecyclePolicyPreviewStatusFailed     LifecyclePolicyPreviewStatus = "FAILED"
 )
 
+func (enum LifecyclePolicyPreviewStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LifecyclePolicyPreviewStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TagStatus string
 
 // Enum values for TagStatus
@@ -3570,3 +3615,12 @@ const (
 	TagStatusTagged   TagStatus = "TAGGED"
 	TagStatusUntagged TagStatus = "UNTAGGED"
 )
+
+func (enum TagStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TagStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

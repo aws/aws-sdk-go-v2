@@ -7529,6 +7529,15 @@ const (
 	ActionHistoryStatusUnknown   ActionHistoryStatus = "Unknown"
 )
 
+func (enum ActionHistoryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionHistoryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ActionStatus string
 
 // Enum values for ActionStatus
@@ -7539,6 +7548,15 @@ const (
 	ActionStatusUnknown   ActionStatus = "Unknown"
 )
 
+func (enum ActionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ActionType string
 
 // Enum values for ActionType
@@ -7547,6 +7565,15 @@ const (
 	ActionTypePlatformUpdate  ActionType = "PlatformUpdate"
 	ActionTypeUnknown         ActionType = "Unknown"
 )
+
+func (enum ActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ApplicationVersionStatus string
 
@@ -7559,6 +7586,15 @@ const (
 	ApplicationVersionStatusBuilding    ApplicationVersionStatus = "Building"
 )
 
+func (enum ApplicationVersionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApplicationVersionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComputeType string
 
 // Enum values for ComputeType
@@ -7567,6 +7603,15 @@ const (
 	ComputeTypeBuildGeneral1Medium ComputeType = "BUILD_GENERAL1_MEDIUM"
 	ComputeTypeBuildGeneral1Large  ComputeType = "BUILD_GENERAL1_LARGE"
 )
+
+func (enum ComputeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComputeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ConfigurationDeploymentStatus string
 
@@ -7577,6 +7622,15 @@ const (
 	ConfigurationDeploymentStatusFailed   ConfigurationDeploymentStatus = "failed"
 )
 
+func (enum ConfigurationDeploymentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationDeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConfigurationOptionValueType string
 
 // Enum values for ConfigurationOptionValueType
@@ -7584,6 +7638,15 @@ const (
 	ConfigurationOptionValueTypeScalar ConfigurationOptionValueType = "Scalar"
 	ConfigurationOptionValueTypeList   ConfigurationOptionValueType = "List"
 )
+
+func (enum ConfigurationOptionValueType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationOptionValueType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EnvironmentHealth string
 
@@ -7594,6 +7657,15 @@ const (
 	EnvironmentHealthRed    EnvironmentHealth = "Red"
 	EnvironmentHealthGrey   EnvironmentHealth = "Grey"
 )
+
+func (enum EnvironmentHealth) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentHealth) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EnvironmentHealthAttribute string
 
@@ -7609,6 +7681,15 @@ const (
 	EnvironmentHealthAttributeRefreshedAt        EnvironmentHealthAttribute = "RefreshedAt"
 )
 
+func (enum EnvironmentHealthAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentHealthAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EnvironmentHealthStatus string
 
 // Enum values for EnvironmentHealthStatus
@@ -7623,6 +7704,15 @@ const (
 	EnvironmentHealthStatusSevere   EnvironmentHealthStatus = "Severe"
 )
 
+func (enum EnvironmentHealthStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentHealthStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EnvironmentInfoType string
 
 // Enum values for EnvironmentInfoType
@@ -7630,6 +7720,15 @@ const (
 	EnvironmentInfoTypeTail   EnvironmentInfoType = "tail"
 	EnvironmentInfoTypeBundle EnvironmentInfoType = "bundle"
 )
+
+func (enum EnvironmentInfoType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentInfoType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EnvironmentStatus string
 
@@ -7641,6 +7740,15 @@ const (
 	EnvironmentStatusTerminating EnvironmentStatus = "Terminating"
 	EnvironmentStatusTerminated  EnvironmentStatus = "Terminated"
 )
+
+func (enum EnvironmentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EventSeverity string
 
@@ -7654,6 +7762,15 @@ const (
 	EventSeverityFatal EventSeverity = "FATAL"
 )
 
+func (enum EventSeverity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventSeverity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FailureType string
 
 // Enum values for FailureType
@@ -7666,6 +7783,15 @@ const (
 	FailureTypeInvalidEnvironmentState FailureType = "InvalidEnvironmentState"
 	FailureTypePermissionsError        FailureType = "PermissionsError"
 )
+
+func (enum FailureType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FailureType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstancesHealthAttribute string
 
@@ -7684,6 +7810,15 @@ const (
 	InstancesHealthAttributeAll                InstancesHealthAttribute = "All"
 )
 
+func (enum InstancesHealthAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstancesHealthAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PlatformStatus string
 
 // Enum values for PlatformStatus
@@ -7695,6 +7830,15 @@ const (
 	PlatformStatusDeleted  PlatformStatus = "Deleted"
 )
 
+func (enum PlatformStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlatformStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SourceRepository string
 
 // Enum values for SourceRepository
@@ -7702,6 +7846,15 @@ const (
 	SourceRepositoryCodeCommit SourceRepository = "CodeCommit"
 	SourceRepositoryS3         SourceRepository = "S3"
 )
+
+func (enum SourceRepository) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceRepository) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -7711,6 +7864,15 @@ const (
 	SourceTypeZip SourceType = "Zip"
 )
 
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ValidationSeverity string
 
 // Enum values for ValidationSeverity
@@ -7718,3 +7880,12 @@ const (
 	ValidationSeverityError   ValidationSeverity = "error"
 	ValidationSeverityWarning ValidationSeverity = "warning"
 )
+
+func (enum ValidationSeverity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ValidationSeverity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

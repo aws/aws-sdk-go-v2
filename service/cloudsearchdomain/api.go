@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opSearch = "Search"
@@ -228,6 +229,23 @@ func (s Bucket) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Bucket) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Count != nil {
+		v := *s.Count
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "count", protocol.Int64Value(v), metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A container for the calculated facet values and counts.
 type BucketInfo struct {
 	_ struct{} `type:"structure"`
@@ -244,6 +262,23 @@ func (s BucketInfo) String() string {
 // GoString returns the string representation
 func (s BucketInfo) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BucketInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Buckets) > 0 {
+		v := s.Buckets
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "buckets", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // A warning returned by the document service when an issue is discovered while
@@ -263,6 +298,17 @@ func (s DocumentServiceWarning) String() string {
 // GoString returns the string representation
 func (s DocumentServiceWarning) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DocumentServiceWarning) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The statistics for a field calculated in the request.
@@ -326,6 +372,59 @@ func (s FieldStats) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FieldStats) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Count != nil {
+		v := *s.Count
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "count", protocol.Int64Value(v), metadata)
+	}
+	if s.Max != nil {
+		v := *s.Max
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "max", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Mean != nil {
+		v := *s.Mean
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mean", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Min != nil {
+		v := *s.Min
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "min", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Missing != nil {
+		v := *s.Missing
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "missing", protocol.Int64Value(v), metadata)
+	}
+	if s.Stddev != nil {
+		v := *s.Stddev
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stddev", protocol.Float64Value(v), metadata)
+	}
+	if s.Sum != nil {
+		v := *s.Sum
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sum", protocol.Float64Value(v), metadata)
+	}
+	if s.SumOfSquares != nil {
+		v := *s.SumOfSquares
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sumOfSquares", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
 // Information about a document that matches the search request.
 type Hit struct {
 	_ struct{} `type:"structure"`
@@ -351,6 +450,58 @@ func (s Hit) String() string {
 // GoString returns the string representation
 func (s Hit) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Hit) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Exprs) > 0 {
+		v := s.Exprs
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "exprs", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if len(s.Fields) > 0 {
+		v := s.Fields
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "fields", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ls1 := ms0.List(k1)
+			ls1.Start()
+			for _, v2 := range v1 {
+				ls1.ListAddValue(protocol.QuotedValue{protocol.StringValue(v2)})
+			}
+			ls1.End()
+		}
+		ms0.End()
+
+	}
+	if len(s.Highlights) > 0 {
+		v := s.Highlights
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "highlights", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The collection of documents that match the search request.
@@ -379,6 +530,41 @@ func (s Hits) String() string {
 // GoString returns the string representation
 func (s Hits) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Hits) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Cursor != nil {
+		v := *s.Cursor
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "cursor", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Found != nil {
+		v := *s.Found
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "found", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Hit) > 0 {
+		v := s.Hit
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "hit", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Start != nil {
+		v := *s.Start
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "start", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Container for the parameters to the Search request.
@@ -709,6 +895,97 @@ func (s *SearchInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SearchInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Cursor != nil {
+		v := *s.Cursor
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "cursor", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Expr != nil {
+		v := *s.Expr
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "expr", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Facet != nil {
+		v := *s.Facet
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "facet", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FilterQuery != nil {
+		v := *s.FilterQuery
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "fq", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Highlight != nil {
+		v := *s.Highlight
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "highlight", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Partial != nil {
+		v := *s.Partial
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "partial", protocol.BoolValue(v), metadata)
+	}
+	if s.Query != nil {
+		v := *s.Query
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "q", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryOptions != nil {
+		v := *s.QueryOptions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "q.options", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.QueryParser) > 0 {
+		v := s.QueryParser
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "q.parser", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Return != nil {
+		v := *s.Return
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "return", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Size != nil {
+		v := *s.Size
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "size", protocol.Int64Value(v), metadata)
+	}
+	if s.Sort != nil {
+		v := *s.Sort
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "sort", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Start != nil {
+		v := *s.Start
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "start", protocol.Int64Value(v), metadata)
+	}
+	if s.Stats != nil {
+		v := *s.Stats
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "stats", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The result of a Search request. Contains the documents that match the specified
 // search criteria and any requested fields, highlights, and facet information.
 type SearchOutput struct {
@@ -744,6 +1021,47 @@ func (s SearchOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SearchOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Facets) > 0 {
+		v := s.Facets
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "facets", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetFields(k1, v1)
+		}
+		ms0.End()
+
+	}
+	if s.Hits != nil {
+		v := s.Hits
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hits", v, metadata)
+	}
+	if len(s.Stats) > 0 {
+		v := s.Stats
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "stats", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetFields(k1, v1)
+		}
+		ms0.End()
+
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "status", v, metadata)
+	}
+	return nil
+}
+
 // Contains the resource id (rid) and the time it took to process the request
 // (timems).
 type SearchStatus struct {
@@ -764,6 +1082,23 @@ func (s SearchStatus) String() string {
 // GoString returns the string representation
 func (s SearchStatus) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SearchStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Rid != nil {
+		v := *s.Rid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rid", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Timems != nil {
+		v := *s.Timems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timems", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Container for the parameters to the Suggest request.
@@ -812,6 +1147,31 @@ func (s *SuggestInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SuggestInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Query != nil {
+		v := *s.Query
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "q", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Size != nil {
+		v := *s.Size
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "size", protocol.Int64Value(v), metadata)
+	}
+	if s.Suggester != nil {
+		v := *s.Suggester
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "suggester", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Container for the suggestion information returned in a SuggestResponse.
 type SuggestModel struct {
 	_ struct{} `type:"structure"`
@@ -834,6 +1194,35 @@ func (s SuggestModel) String() string {
 // GoString returns the string representation
 func (s SuggestModel) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SuggestModel) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Found != nil {
+		v := *s.Found
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "found", protocol.Int64Value(v), metadata)
+	}
+	if s.Query != nil {
+		v := *s.Query
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "query", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Suggestions) > 0 {
+		v := s.Suggestions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "suggestions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Contains the response to a Suggest request.
@@ -865,6 +1254,23 @@ func (s SuggestOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SuggestOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Status != nil {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "status", v, metadata)
+	}
+	if s.Suggest != nil {
+		v := s.Suggest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "suggest", v, metadata)
+	}
+	return nil
+}
+
 // Contains the resource id (rid) and the time it took to process the request
 // (timems).
 type SuggestStatus struct {
@@ -885,6 +1291,23 @@ func (s SuggestStatus) String() string {
 // GoString returns the string representation
 func (s SuggestStatus) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SuggestStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Rid != nil {
+		v := *s.Rid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rid", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Timems != nil {
+		v := *s.Timems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timems", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // An autocomplete suggestion that matches the query string specified in a SuggestRequest.
@@ -909,6 +1332,29 @@ func (s SuggestionMatch) String() string {
 // GoString returns the string representation
 func (s SuggestionMatch) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SuggestionMatch) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Score != nil {
+		v := *s.Score
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "score", protocol.Int64Value(v), metadata)
+	}
+	if s.Suggestion != nil {
+		v := *s.Suggestion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "suggestion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Container for the parameters to the UploadDocuments request.
@@ -957,6 +1403,24 @@ func (s *UploadDocumentsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UploadDocumentsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.ContentType) > 0 {
+		v := s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Documents != nil {
+		v := s.Documents
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "documents", protocol.ReadSeekerStream{V: v}, metadata)
+	}
+	return nil
+}
+
 // Contains the response to an UploadDocuments request.
 type UploadDocumentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -991,6 +1455,41 @@ func (s UploadDocumentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UploadDocumentsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Adds != nil {
+		v := *s.Adds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adds", protocol.Int64Value(v), metadata)
+	}
+	if s.Deletes != nil {
+		v := *s.Deletes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deletes", protocol.Int64Value(v), metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Warnings) > 0 {
+		v := s.Warnings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "warnings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 type ContentType string
 
 // Enum values for ContentType
@@ -998,6 +1497,15 @@ const (
 	ContentTypeApplicationJson ContentType = "application/json"
 	ContentTypeApplicationXml  ContentType = "application/xml"
 )
+
+func (enum ContentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type QueryParser string
 
@@ -1008,3 +1516,12 @@ const (
 	QueryParserLucene     QueryParser = "lucene"
 	QueryParserDismax     QueryParser = "dismax"
 )
+
+func (enum QueryParser) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QueryParser) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

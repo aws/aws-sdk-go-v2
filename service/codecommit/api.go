@@ -5656,12 +5656,30 @@ const (
 	ChangeTypeEnumD ChangeTypeEnum = "D"
 )
 
+func (enum ChangeTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MergeOptionTypeEnum string
 
 // Enum values for MergeOptionTypeEnum
 const (
 	MergeOptionTypeEnumFastForwardMerge MergeOptionTypeEnum = "FAST_FORWARD_MERGE"
 )
+
+func (enum MergeOptionTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MergeOptionTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OrderEnum string
 
@@ -5670,6 +5688,15 @@ const (
 	OrderEnumAscending  OrderEnum = "ascending"
 	OrderEnumDescending OrderEnum = "descending"
 )
+
+func (enum OrderEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrderEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PullRequestEventType string
 
@@ -5681,6 +5708,15 @@ const (
 	PullRequestEventTypePullRequestMergeStateChanged      PullRequestEventType = "PULL_REQUEST_MERGE_STATE_CHANGED"
 )
 
+func (enum PullRequestEventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PullRequestEventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PullRequestStatusEnum string
 
 // Enum values for PullRequestStatusEnum
@@ -5689,6 +5725,15 @@ const (
 	PullRequestStatusEnumClosed PullRequestStatusEnum = "CLOSED"
 )
 
+func (enum PullRequestStatusEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PullRequestStatusEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RelativeFileVersionEnum string
 
 // Enum values for RelativeFileVersionEnum
@@ -5696,6 +5741,15 @@ const (
 	RelativeFileVersionEnumBefore RelativeFileVersionEnum = "BEFORE"
 	RelativeFileVersionEnumAfter  RelativeFileVersionEnum = "AFTER"
 )
+
+func (enum RelativeFileVersionEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RelativeFileVersionEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RepositoryTriggerEventEnum string
 
@@ -5707,6 +5761,15 @@ const (
 	RepositoryTriggerEventEnumDeleteReference RepositoryTriggerEventEnum = "deleteReference"
 )
 
+func (enum RepositoryTriggerEventEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RepositoryTriggerEventEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SortByEnum string
 
 // Enum values for SortByEnum
@@ -5714,3 +5777,12 @@ const (
 	SortByEnumRepositoryName   SortByEnum = "repositoryName"
 	SortByEnumLastModifiedDate SortByEnum = "lastModifiedDate"
 )
+
+func (enum SortByEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortByEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

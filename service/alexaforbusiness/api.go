@@ -5078,6 +5078,15 @@ const (
 	DeviceStatusWasOffline DeviceStatus = "WAS_OFFLINE"
 )
 
+func (enum DeviceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DistanceUnit string
 
 // Enum values for DistanceUnit
@@ -5085,6 +5094,15 @@ const (
 	DistanceUnitMetric   DistanceUnit = "METRIC"
 	DistanceUnitImperial DistanceUnit = "IMPERIAL"
 )
+
+func (enum DistanceUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DistanceUnit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EnrollmentStatus string
 
@@ -5095,6 +5113,15 @@ const (
 	EnrollmentStatusRegistered    EnrollmentStatus = "REGISTERED"
 	EnrollmentStatusDeregistering EnrollmentStatus = "DEREGISTERING"
 )
+
+func (enum EnrollmentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnrollmentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Feature string
 
@@ -5108,6 +5135,15 @@ const (
 	FeatureAll           Feature = "ALL"
 )
 
+func (enum Feature) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Feature) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SortValue string
 
 // Enum values for SortValue
@@ -5116,6 +5152,15 @@ const (
 	SortValueDesc SortValue = "DESC"
 )
 
+func (enum SortValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TemperatureUnit string
 
 // Enum values for TemperatureUnit
@@ -5123,6 +5168,15 @@ const (
 	TemperatureUnitFahrenheit TemperatureUnit = "FAHRENHEIT"
 	TemperatureUnitCelsius    TemperatureUnit = "CELSIUS"
 )
+
+func (enum TemperatureUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TemperatureUnit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type WakeWord string
 
@@ -5133,3 +5187,12 @@ const (
 	WakeWordEcho     WakeWord = "ECHO"
 	WakeWordComputer WakeWord = "COMPUTER"
 )
+
+func (enum WakeWord) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WakeWord) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -890,6 +890,15 @@ const (
 	KeyTypeRange KeyType = "RANGE"
 )
 
+func (enum KeyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OperationType string
 
 // Enum values for OperationType
@@ -898,6 +907,15 @@ const (
 	OperationTypeModify OperationType = "MODIFY"
 	OperationTypeRemove OperationType = "REMOVE"
 )
+
+func (enum OperationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ShardIteratorType string
 
@@ -909,6 +927,15 @@ const (
 	ShardIteratorTypeAfterSequenceNumber ShardIteratorType = "AFTER_SEQUENCE_NUMBER"
 )
 
+func (enum ShardIteratorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ShardIteratorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StreamStatus string
 
 // Enum values for StreamStatus
@@ -919,6 +946,15 @@ const (
 	StreamStatusDisabled  StreamStatus = "DISABLED"
 )
 
+func (enum StreamStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StreamStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StreamViewType string
 
 // Enum values for StreamViewType
@@ -928,3 +964,12 @@ const (
 	StreamViewTypeNewAndOldImages StreamViewType = "NEW_AND_OLD_IMAGES"
 	StreamViewTypeKeysOnly        StreamViewType = "KEYS_ONLY"
 )
+
+func (enum StreamViewType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StreamViewType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

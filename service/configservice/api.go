@@ -4631,6 +4631,15 @@ const (
 	ChronologicalOrderForward ChronologicalOrder = "Forward"
 )
 
+func (enum ChronologicalOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChronologicalOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComplianceType string
 
 // Enum values for ComplianceType
@@ -4640,6 +4649,15 @@ const (
 	ComplianceTypeNotApplicable    ComplianceType = "NOT_APPLICABLE"
 	ComplianceTypeInsufficientData ComplianceType = "INSUFFICIENT_DATA"
 )
+
+func (enum ComplianceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComplianceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ConfigRuleState string
 
@@ -4651,6 +4669,15 @@ const (
 	ConfigRuleStateEvaluating      ConfigRuleState = "EVALUATING"
 )
 
+func (enum ConfigRuleState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigRuleState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConfigurationItemStatus string
 
 // Enum values for ConfigurationItemStatus
@@ -4661,6 +4688,15 @@ const (
 	ConfigurationItemStatusDeleted    ConfigurationItemStatus = "Deleted"
 )
 
+func (enum ConfigurationItemStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationItemStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeliveryStatus string
 
 // Enum values for DeliveryStatus
@@ -4670,12 +4706,30 @@ const (
 	DeliveryStatusNotApplicable DeliveryStatus = "Not_Applicable"
 )
 
+func (enum DeliveryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeliveryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EventSource string
 
 // Enum values for EventSource
 const (
 	EventSourceAwsConfig EventSource = "aws.config"
 )
+
+func (enum EventSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MaximumExecutionFrequency string
 
@@ -4688,6 +4742,15 @@ const (
 	MaximumExecutionFrequencyTwentyFourHours MaximumExecutionFrequency = "TwentyFour_Hours"
 )
 
+func (enum MaximumExecutionFrequency) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MaximumExecutionFrequency) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MessageType string
 
 // Enum values for MessageType
@@ -4698,6 +4761,15 @@ const (
 	MessageTypeOversizedConfigurationItemChangeNotification MessageType = "OversizedConfigurationItemChangeNotification"
 )
 
+func (enum MessageType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MessageType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Owner string
 
 // Enum values for Owner
@@ -4705,6 +4777,15 @@ const (
 	OwnerCustomLambda Owner = "CUSTOM_LAMBDA"
 	OwnerAws          Owner = "AWS"
 )
+
+func (enum Owner) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Owner) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RecorderStatus string
 
@@ -4714,6 +4795,15 @@ const (
 	RecorderStatusSuccess RecorderStatus = "Success"
 	RecorderStatusFailure RecorderStatus = "Failure"
 )
+
+func (enum RecorderStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecorderStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ResourceType string
 
@@ -4770,3 +4860,12 @@ const (
 	ResourceTypeAwsCloudFrontDistribution             ResourceType = "AWS::CloudFront::Distribution"
 	ResourceTypeAwsCloudFrontStreamingDistribution    ResourceType = "AWS::CloudFront::StreamingDistribution"
 )
+
+func (enum ResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

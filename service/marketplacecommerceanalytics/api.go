@@ -509,6 +509,15 @@ const (
 	DataSetTypeUsSalesAndUseTaxRecords                      DataSetType = "us_sales_and_use_tax_records"
 )
 
+func (enum DataSetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DataSetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SupportDataSetType string
 
 // Enum values for SupportDataSetType
@@ -516,3 +525,12 @@ const (
 	SupportDataSetTypeCustomerSupportContactsData     SupportDataSetType = "customer_support_contacts_data"
 	SupportDataSetTypeTestCustomerSupportContactsData SupportDataSetType = "test_customer_support_contacts_data"
 )
+
+func (enum SupportDataSetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SupportDataSetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

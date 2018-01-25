@@ -12,14 +12,8 @@ import (
 	"encoding/xml"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-<<<<<<< HEAD
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-=======
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
->>>>>>> benchmarks
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
@@ -35,28 +29,13 @@ func TestMain(m *testing.M) {
 		w.WriteHeader(http.StatusOK)
 	}))
 
-<<<<<<< HEAD
 	cfg := unit.Config()
-	cfg.Region = endpoints.UsWest2RegionID
-	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.Credentials = aws.NewCredentials(aws.NewStaticCredentialsProvider(
-		"Key", "Secret", "Token",
-	))
-
-	cloudfrontSvc = cloudfront.New(cfg)
-
-=======
-	cfg, err := external.LoadDefaultAWSConfig()
-	if err != nil {
-		panic(err)
-	}
 
 	cfg.Credentials = aws.NewStaticCredentialsProvider("Key", "Secret", "Token")
 	cfg.Region = endpoints.UsWest2RegionID
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
 
 	cloudfrontSvc = cloudfront.New(cfg)
->>>>>>> benchmarks
 	s3Svc = s3.New(cfg)
 	s3Svc.ForcePathStyle = true
 

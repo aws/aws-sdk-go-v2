@@ -195,10 +195,13 @@ func (s *Shape) GoStructValueType(name string, ref *ShapeRef) string {
 	return v
 }
 
+// IsRefPayload will return whether or a not the field name is a payload.
 func (s *Shape) IsRefPayload(name string) bool {
 	return s.Payload == name
 }
 
+// IsRefPayloadReader will whether or not the shape ref is a payload and that it is
+// a streaming reference.
 func (s *Shape) IsRefPayloadReader(name string, ref *ShapeRef) bool {
 	return (ref.Streaming || ref.Shape.Streaming) && s.IsRefPayload(name)
 }

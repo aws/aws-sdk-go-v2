@@ -248,6 +248,18 @@ func (s *DeleteThingShadowInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The output from the DeleteThingShadow operation.
 type DeleteThingShadowOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
@@ -273,6 +285,17 @@ func (s DeleteThingShadowOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteThingShadowOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteThingShadowOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
+	}
+	return nil
 }
 
 // The input for the GetThingShadow operation.
@@ -312,6 +335,18 @@ func (s *GetThingShadowInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The output from the GetThingShadow operation.
 type GetThingShadowOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
@@ -335,6 +370,17 @@ func (s GetThingShadowOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetThingShadowOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetThingShadowOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
+	}
+	return nil
 }
 
 // The input for the Publish operation.
@@ -377,6 +423,30 @@ func (s *PublishInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PublishInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Topic != nil {
+		v := *s.Topic
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "topic", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
+	}
+	if s.Qos != nil {
+		v := *s.Qos
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "qos", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 type PublishOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -396,6 +466,11 @@ func (s PublishOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PublishOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PublishOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The input for the UpdateThingShadow operation.
@@ -444,6 +519,24 @@ func (s *UpdateThingShadowInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
+	}
+	return nil
+}
+
 // The output from the UpdateThingShadow operation.
 type UpdateThingShadowOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
@@ -467,4 +560,15 @@ func (s UpdateThingShadowOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateThingShadowOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateThingShadowOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
+	}
+	return nil
 }

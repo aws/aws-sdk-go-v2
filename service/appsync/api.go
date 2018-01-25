@@ -5,6 +5,7 @@ package appsync
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCreateApiKey = "CreateApiKey"
@@ -1312,6 +1313,29 @@ func (s ApiKey) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ApiKey) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Expires != nil {
+		v := *s.Expires
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expires", protocol.Int64Value(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiKeyRequest
 type CreateApiKeyInput struct {
 	_ struct{} `type:"structure"`
@@ -1349,6 +1373,25 @@ func (s *CreateApiKeyInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateApiKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateApiKeyResponse
 type CreateApiKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -1372,6 +1415,17 @@ func (s CreateApiKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateApiKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateApiKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApiKey != nil {
+		v := s.ApiKey
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "apiKey", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSourceRequest
@@ -1456,6 +1510,61 @@ func (s *CreateDataSourceInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DynamodbConfig != nil {
+		v := s.DynamodbConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dynamodbConfig", v, metadata)
+	}
+	if s.ElasticsearchConfig != nil {
+		v := s.ElasticsearchConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "elasticsearchConfig", v, metadata)
+	}
+	if s.LambdaConfig != nil {
+		v := s.LambdaConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "lambdaConfig", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceRoleArn != nil {
+		v := *s.ServiceRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceRoleArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateDataSourceResponse
 type CreateDataSourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1479,6 +1588,17 @@ func (s CreateDataSourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDataSourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDataSourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataSource != nil {
+		v := s.DataSource
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dataSource", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiRequest
@@ -1531,6 +1651,31 @@ func (s *CreateGraphqlApiInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AuthenticationType) > 0 {
+		v := s.AuthenticationType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "authenticationType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.UserPoolConfig != nil {
+		v := s.UserPoolConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "userPoolConfig", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateGraphqlApiResponse
 type CreateGraphqlApiOutput struct {
 	_ struct{} `type:"structure"`
@@ -1554,6 +1699,17 @@ func (s CreateGraphqlApiOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGraphqlApiOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGraphqlApiOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GraphqlApi != nil {
+		v := s.GraphqlApi
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "graphqlApi", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolverRequest
@@ -1633,6 +1789,49 @@ func (s *CreateResolverInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateResolverInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DataSourceName != nil {
+		v := *s.DataSourceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dataSourceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FieldName != nil {
+		v := *s.FieldName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "fieldName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestMappingTemplate != nil {
+		v := *s.RequestMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "requestMappingTemplate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResponseMappingTemplate != nil {
+		v := *s.ResponseMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "responseMappingTemplate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TypeName != nil {
+		v := *s.TypeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolverResponse
 type CreateResolverOutput struct {
 	_ struct{} `type:"structure"`
@@ -1656,6 +1855,17 @@ func (s CreateResolverOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateResolverOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateResolverOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Resolver != nil {
+		v := s.Resolver
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "resolver", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateTypeRequest
@@ -1711,6 +1921,31 @@ func (s *CreateTypeInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateTypeInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Definition != nil {
+		v := *s.Definition
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "definition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "format", protocol.QuotedValue{v}, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateTypeResponse
 type CreateTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -1734,6 +1969,17 @@ func (s CreateTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Type != nil {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "type", v, metadata)
+	}
+	return nil
 }
 
 // Describes a data source.
@@ -1775,6 +2021,59 @@ func (s DataSource) String() string {
 // GoString returns the string representation
 func (s DataSource) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DataSource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataSourceArn != nil {
+		v := *s.DataSourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dataSourceArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DynamodbConfig != nil {
+		v := s.DynamodbConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dynamodbConfig", v, metadata)
+	}
+	if s.ElasticsearchConfig != nil {
+		v := s.ElasticsearchConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "elasticsearchConfig", v, metadata)
+	}
+	if s.LambdaConfig != nil {
+		v := s.LambdaConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "lambdaConfig", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceRoleArn != nil {
+		v := *s.ServiceRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceRoleArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiKeyRequest
@@ -1820,6 +2119,25 @@ func (s *DeleteApiKeyInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteApiKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteApiKeyResponse
 type DeleteApiKeyOutput struct {
 	_ struct{} `type:"structure"`
@@ -1840,6 +2158,11 @@ func (s DeleteApiKeyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteApiKeyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteApiKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteDataSourceRequest
@@ -1885,6 +2208,25 @@ func (s *DeleteDataSourceInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteDataSourceResponse
 type DeleteDataSourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -1905,6 +2247,11 @@ func (s DeleteDataSourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDataSourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteDataSourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteGraphqlApiRequest
@@ -1941,6 +2288,19 @@ func (s *DeleteGraphqlApiInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteGraphqlApiResponse
 type DeleteGraphqlApiOutput struct {
 	_ struct{} `type:"structure"`
@@ -1961,6 +2321,11 @@ func (s DeleteGraphqlApiOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteGraphqlApiOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteGraphqlApiOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteResolverRequest
@@ -2015,6 +2380,31 @@ func (s *DeleteResolverInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteResolverInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FieldName != nil {
+		v := *s.FieldName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "fieldName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TypeName != nil {
+		v := *s.TypeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteResolverResponse
 type DeleteResolverOutput struct {
 	_ struct{} `type:"structure"`
@@ -2035,6 +2425,11 @@ func (s DeleteResolverOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteResolverOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteResolverOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteTypeRequest
@@ -2080,6 +2475,25 @@ func (s *DeleteTypeInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteTypeInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TypeName != nil {
+		v := *s.TypeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/DeleteTypeResponse
 type DeleteTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -2100,6 +2514,11 @@ func (s DeleteTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Describes a DynamoDB data source configuration.
@@ -2149,6 +2568,29 @@ func (s *DynamodbDataSourceConfig) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DynamodbDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AwsRegion != nil {
+		v := *s.AwsRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "awsRegion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TableName != nil {
+		v := *s.TableName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "tableName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.UseCallerCredentials != nil {
+		v := *s.UseCallerCredentials
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "useCallerCredentials", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
 // Describes an Elasticsearch data source configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ElasticsearchDataSourceConfig
 type ElasticsearchDataSourceConfig struct {
@@ -2189,6 +2631,23 @@ func (s *ElasticsearchDataSourceConfig) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ElasticsearchDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AwsRegion != nil {
+		v := *s.AwsRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "awsRegion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Endpoint != nil {
+		v := *s.Endpoint
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "endpoint", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2236,6 +2695,25 @@ func (s *GetDataSourceInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetDataSourceResponse
 type GetDataSourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -2259,6 +2737,17 @@ func (s GetDataSourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDataSourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDataSourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataSource != nil {
+		v := s.DataSource
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dataSource", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiRequest
@@ -2295,6 +2784,19 @@ func (s *GetGraphqlApiInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetGraphqlApiResponse
 type GetGraphqlApiOutput struct {
 	_ struct{} `type:"structure"`
@@ -2318,6 +2820,17 @@ func (s GetGraphqlApiOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGraphqlApiOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGraphqlApiOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GraphqlApi != nil {
+		v := s.GraphqlApi
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "graphqlApi", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetIntrospectionSchemaRequest
@@ -2362,6 +2875,25 @@ func (s *GetIntrospectionSchemaInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetIntrospectionSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "format", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetIntrospectionSchemaResponse
 type GetIntrospectionSchemaOutput struct {
 	_ struct{} `type:"structure" payload:"Schema"`
@@ -2387,6 +2919,17 @@ func (s GetIntrospectionSchemaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetIntrospectionSchemaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetIntrospectionSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Schema != nil {
+		v := s.Schema
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "schema", protocol.BytesStream(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolverRequest
@@ -2441,6 +2984,31 @@ func (s *GetResolverInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetResolverInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FieldName != nil {
+		v := *s.FieldName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "fieldName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TypeName != nil {
+		v := *s.TypeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolverResponse
 type GetResolverOutput struct {
 	_ struct{} `type:"structure"`
@@ -2464,6 +3032,17 @@ func (s GetResolverOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetResolverOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetResolverOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Resolver != nil {
+		v := s.Resolver
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "resolver", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetSchemaCreationStatusRequest
@@ -2500,6 +3079,19 @@ func (s *GetSchemaCreationStatusInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSchemaCreationStatusInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetSchemaCreationStatusResponse
 type GetSchemaCreationStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -2527,6 +3119,23 @@ func (s GetSchemaCreationStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSchemaCreationStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSchemaCreationStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Details != nil {
+		v := *s.Details
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "details", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetTypeRequest
@@ -2580,6 +3189,31 @@ func (s *GetTypeInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetTypeInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TypeName != nil {
+		v := *s.TypeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "format", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetTypeResponse
 type GetTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -2603,6 +3237,17 @@ func (s GetTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Type != nil {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "type", v, metadata)
+	}
+	return nil
 }
 
 // Describes a GraphQL API.
@@ -2639,6 +3284,53 @@ func (s GraphqlApi) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.AuthenticationType) > 0 {
+		v := s.AuthenticationType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "authenticationType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Uris) > 0 {
+		v := s.Uris
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "uris", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.UserPoolConfig != nil {
+		v := s.UserPoolConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "userPoolConfig", v, metadata)
+	}
+	return nil
+}
+
 // Describes a Lambda data source configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LambdaDataSourceConfig
 type LambdaDataSourceConfig struct {
@@ -2670,6 +3362,17 @@ func (s *LambdaDataSourceConfig) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LambdaDataSourceConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LambdaFunctionArn != nil {
+		v := *s.LambdaFunctionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lambdaFunctionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2715,6 +3418,31 @@ func (s *ListApiKeysInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListApiKeysInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListApiKeysResponse
 type ListApiKeysOutput struct {
 	_ struct{} `type:"structure"`
@@ -2742,6 +3470,29 @@ func (s ListApiKeysOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListApiKeysOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListApiKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ApiKeys) > 0 {
+		v := s.ApiKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "apiKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDataSourcesRequest
@@ -2785,6 +3536,31 @@ func (s *ListDataSourcesInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDataSourcesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListDataSourcesResponse
 type ListDataSourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2814,6 +3590,29 @@ func (s ListDataSourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDataSourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DataSources) > 0 {
+		v := s.DataSources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dataSources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApisRequest
 type ListGraphqlApisInput struct {
 	_ struct{} `type:"structure"`
@@ -2834,6 +3633,25 @@ func (s ListGraphqlApisInput) String() string {
 // GoString returns the string representation
 func (s ListGraphqlApisInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGraphqlApisInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListGraphqlApisResponse
@@ -2863,6 +3681,29 @@ func (s ListGraphqlApisOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGraphqlApisOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGraphqlApisOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.GraphqlApis) > 0 {
+		v := s.GraphqlApis
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "graphqlApis", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversRequest
@@ -2915,6 +3756,37 @@ func (s *ListResolversInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListResolversInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TypeName != nil {
+		v := *s.TypeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversResponse
 type ListResolversOutput struct {
 	_ struct{} `type:"structure"`
@@ -2942,6 +3814,29 @@ func (s ListResolversOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListResolversOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListResolversOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Resolvers) > 0 {
+		v := s.Resolvers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "resolvers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListTypesRequest
@@ -2993,6 +3888,37 @@ func (s *ListTypesInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTypesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "format", protocol.QuotedValue{v}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListTypesResponse
 type ListTypesOutput struct {
 	_ struct{} `type:"structure"`
@@ -3020,6 +3946,29 @@ func (s ListTypesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTypesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Types) > 0 {
+		v := s.Types
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "types", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Describes a resolver.
@@ -3054,6 +4003,47 @@ func (s Resolver) String() string {
 // GoString returns the string representation
 func (s Resolver) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Resolver) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataSourceName != nil {
+		v := *s.DataSourceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dataSourceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FieldName != nil {
+		v := *s.FieldName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "fieldName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestMappingTemplate != nil {
+		v := *s.RequestMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "requestMappingTemplate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResolverArn != nil {
+		v := *s.ResolverArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resolverArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResponseMappingTemplate != nil {
+		v := *s.ResponseMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "responseMappingTemplate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TypeName != nil {
+		v := *s.TypeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "typeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartSchemaCreationRequest
@@ -3101,6 +4091,25 @@ func (s *StartSchemaCreationInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartSchemaCreationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Definition != nil {
+		v := s.Definition
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "definition", protocol.QuotedValue{protocol.BytesValue(v)}, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/StartSchemaCreationResponse
 type StartSchemaCreationOutput struct {
 	_ struct{} `type:"structure"`
@@ -3125,6 +4134,17 @@ func (s StartSchemaCreationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartSchemaCreationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartSchemaCreationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
 }
 
 // Describes a type.
@@ -3156,6 +4176,41 @@ func (s Type) String() string {
 // GoString returns the string representation
 func (s Type) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Type) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Definition != nil {
+		v := *s.Definition
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "definition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "format", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSourceRequest
@@ -3239,6 +4294,61 @@ func (s *UpdateDataSourceInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDataSourceInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DynamodbConfig != nil {
+		v := s.DynamodbConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dynamodbConfig", v, metadata)
+	}
+	if s.ElasticsearchConfig != nil {
+		v := s.ElasticsearchConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "elasticsearchConfig", v, metadata)
+	}
+	if s.LambdaConfig != nil {
+		v := s.LambdaConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "lambdaConfig", v, metadata)
+	}
+	if s.ServiceRoleArn != nil {
+		v := *s.ServiceRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceRoleArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSourceResponse
 type UpdateDataSourceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3262,6 +4372,17 @@ func (s UpdateDataSourceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateDataSourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDataSourceOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataSource != nil {
+		v := s.DataSource
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dataSource", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiRequest
@@ -3318,6 +4439,37 @@ func (s *UpdateGraphqlApiInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AuthenticationType) > 0 {
+		v := s.AuthenticationType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "authenticationType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.UserPoolConfig != nil {
+		v := s.UserPoolConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "userPoolConfig", v, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateGraphqlApiResponse
 type UpdateGraphqlApiOutput struct {
 	_ struct{} `type:"structure"`
@@ -3341,6 +4493,17 @@ func (s UpdateGraphqlApiOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGraphqlApiOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGraphqlApiOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GraphqlApi != nil {
+		v := s.GraphqlApi
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "graphqlApi", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolverRequest
@@ -3416,6 +4579,49 @@ func (s *UpdateResolverInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateResolverInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DataSourceName != nil {
+		v := *s.DataSourceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dataSourceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestMappingTemplate != nil {
+		v := *s.RequestMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "requestMappingTemplate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResponseMappingTemplate != nil {
+		v := *s.ResponseMappingTemplate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "responseMappingTemplate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FieldName != nil {
+		v := *s.FieldName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "fieldName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TypeName != nil {
+		v := *s.TypeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolverResponse
 type UpdateResolverOutput struct {
 	_ struct{} `type:"structure"`
@@ -3439,6 +4645,17 @@ func (s UpdateResolverOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateResolverOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateResolverOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Resolver != nil {
+		v := s.Resolver
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "resolver", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateTypeRequest
@@ -3495,6 +4712,37 @@ func (s *UpdateTypeInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateTypeInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Definition != nil {
+		v := *s.Definition
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "definition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "format", protocol.QuotedValue{v}, metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TypeName != nil {
+		v := *s.TypeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "typeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateTypeResponse
 type UpdateTypeOutput struct {
 	_ struct{} `type:"structure"`
@@ -3518,6 +4766,17 @@ func (s UpdateTypeOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateTypeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Type != nil {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "type", v, metadata)
+	}
+	return nil
 }
 
 // Describes an Amazon Cognito User Pool configuration.
@@ -3578,6 +4837,35 @@ func (s *UserPoolConfig) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UserPoolConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AppIdClientRegex != nil {
+		v := *s.AppIdClientRegex
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "appIdClientRegex", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AwsRegion != nil {
+		v := *s.AwsRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "awsRegion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.DefaultAction) > 0 {
+		v := s.DefaultAction
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "defaultAction", protocol.QuotedValue{v}, metadata)
+	}
+	if s.UserPoolId != nil {
+		v := *s.UserPoolId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "userPoolId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 type AuthenticationType string
 
 // Enum values for AuthenticationType
@@ -3586,6 +4874,15 @@ const (
 	AuthenticationTypeAwsIam                 AuthenticationType = "AWS_IAM"
 	AuthenticationTypeAmazonCognitoUserPools AuthenticationType = "AMAZON_COGNITO_USER_POOLS"
 )
+
+func (enum AuthenticationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthenticationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DataSourceType string
 
@@ -3596,6 +4893,15 @@ const (
 	DataSourceTypeAmazonElasticsearch DataSourceType = "AMAZON_ELASTICSEARCH"
 )
 
+func (enum DataSourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DataSourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DefaultAction string
 
 // Enum values for DefaultAction
@@ -3604,6 +4910,15 @@ const (
 	DefaultActionDeny  DefaultAction = "DENY"
 )
 
+func (enum DefaultAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DefaultAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OutputType string
 
 // Enum values for OutputType
@@ -3611,6 +4926,15 @@ const (
 	OutputTypeSdl  OutputType = "SDL"
 	OutputTypeJson OutputType = "JSON"
 )
+
+func (enum OutputType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OutputType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SchemaStatus string
 
@@ -3621,6 +4945,15 @@ const (
 	SchemaStatusDeleting   SchemaStatus = "DELETING"
 )
 
+func (enum SchemaStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SchemaStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TypeDefinitionFormat string
 
 // Enum values for TypeDefinitionFormat
@@ -3628,3 +4961,12 @@ const (
 	TypeDefinitionFormatSdl  TypeDefinitionFormat = "SDL"
 	TypeDefinitionFormatJson TypeDefinitionFormat = "JSON"
 )
+
+func (enum TypeDefinitionFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TypeDefinitionFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

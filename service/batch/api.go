@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCancelJob = "CancelJob"
@@ -864,6 +865,17 @@ func (s ArrayProperties) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ArrayProperties) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Size != nil {
+		v := *s.Size
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "size", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // An object representing the array properties of a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayPropertiesDetail
 type ArrayPropertiesDetail struct {
@@ -891,6 +903,35 @@ func (s ArrayPropertiesDetail) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ArrayPropertiesDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Index != nil {
+		v := *s.Index
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "index", protocol.Int64Value(v), metadata)
+	}
+	if s.Size != nil {
+		v := *s.Size
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "size", protocol.Int64Value(v), metadata)
+	}
+	if len(s.StatusSummary) > 0 {
+		v := s.StatusSummary
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "statusSummary", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.Int64Value(v1))
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // An object representing the array properties of a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ArrayPropertiesSummary
 type ArrayPropertiesSummary struct {
@@ -912,6 +953,23 @@ func (s ArrayPropertiesSummary) String() string {
 // GoString returns the string representation
 func (s ArrayPropertiesSummary) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ArrayPropertiesSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Index != nil {
+		v := *s.Index
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "index", protocol.Int64Value(v), metadata)
+	}
+	if s.Size != nil {
+		v := *s.Size
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "size", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // An object representing the details of a container that is part of a job attempt.
@@ -951,6 +1009,41 @@ func (s AttemptContainerDetail) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AttemptContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContainerInstanceArn != nil {
+		v := *s.ContainerInstanceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "containerInstanceArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ExitCode != nil {
+		v := *s.ExitCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "exitCode", protocol.Int64Value(v), metadata)
+	}
+	if s.LogStreamName != nil {
+		v := *s.LogStreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logStreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Reason != nil {
+		v := *s.Reason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "reason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TaskArn != nil {
+		v := *s.TaskArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "taskArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object representing a job attempt.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/AttemptDetail
 type AttemptDetail struct {
@@ -980,6 +1073,35 @@ func (s AttemptDetail) String() string {
 // GoString returns the string representation
 func (s AttemptDetail) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AttemptDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Container != nil {
+		v := s.Container
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "container", v, metadata)
+	}
+	if s.StartedAt != nil {
+		v := *s.StartedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startedAt", protocol.Int64Value(v), metadata)
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "statusReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StoppedAt != nil {
+		v := *s.StoppedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stoppedAt", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobRequest
@@ -1027,6 +1149,25 @@ func (s *CancelJobInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelJobInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Reason != nil {
+		v := *s.Reason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "reason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobResponse
 type CancelJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -1047,6 +1188,11 @@ func (s CancelJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // An object representing an AWS Batch compute environment.
@@ -1103,6 +1249,65 @@ func (s ComputeEnvironmentDetail) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ComputeEnvironmentDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ComputeEnvironmentArn != nil {
+		v := *s.ComputeEnvironmentArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeEnvironmentArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ComputeEnvironmentName != nil {
+		v := *s.ComputeEnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeEnvironmentName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ComputeResources != nil {
+		v := s.ComputeResources
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "computeResources", v, metadata)
+	}
+	if s.EcsClusterArn != nil {
+		v := *s.EcsClusterArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ecsClusterArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceRole != nil {
+		v := *s.ServiceRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceRole", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "statusReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // The order in which compute environments are tried for job placement within
 // a queue. Compute environments are tried in ascending order. For example,
 // if two compute environments are associated with a job queue, the compute
@@ -1146,6 +1351,23 @@ func (s *ComputeEnvironmentOrder) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ComputeEnvironmentOrder) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ComputeEnvironment != nil {
+		v := *s.ComputeEnvironment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeEnvironment", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Order != nil {
+		v := *s.Order
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "order", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -1271,6 +1493,113 @@ func (s *ComputeResource) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ComputeResource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BidPercentage != nil {
+		v := *s.BidPercentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bidPercentage", protocol.Int64Value(v), metadata)
+	}
+	if s.DesiredvCpus != nil {
+		v := *s.DesiredvCpus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "desiredvCpus", protocol.Int64Value(v), metadata)
+	}
+	if s.Ec2KeyPair != nil {
+		v := *s.Ec2KeyPair
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ec2KeyPair", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ImageId != nil {
+		v := *s.ImageId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "imageId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceRole != nil {
+		v := *s.InstanceRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "instanceRole", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.InstanceTypes) > 0 {
+		v := s.InstanceTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "instanceTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.MaxvCpus != nil {
+		v := *s.MaxvCpus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxvCpus", protocol.Int64Value(v), metadata)
+	}
+	if s.MinvCpus != nil {
+		v := *s.MinvCpus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minvCpus", protocol.Int64Value(v), metadata)
+	}
+	if len(s.SecurityGroupIds) > 0 {
+		v := s.SecurityGroupIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "securityGroupIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.SpotIamFleetRole != nil {
+		v := *s.SpotIamFleetRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "spotIamFleetRole", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Subnets) > 0 {
+		v := s.Subnets
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "subnets", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // An object representing the attributes of a compute environment that can be
 // updated.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ComputeResourceUpdate
@@ -1295,6 +1624,29 @@ func (s ComputeResourceUpdate) String() string {
 // GoString returns the string representation
 func (s ComputeResourceUpdate) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ComputeResourceUpdate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DesiredvCpus != nil {
+		v := *s.DesiredvCpus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "desiredvCpus", protocol.Int64Value(v), metadata)
+	}
+	if s.MaxvCpus != nil {
+		v := *s.MaxvCpus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxvCpus", protocol.Int64Value(v), metadata)
+	}
+	if s.MinvCpus != nil {
+		v := *s.MinvCpus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minvCpus", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // An object representing the details of a container that is part of a job.
@@ -1375,6 +1727,143 @@ func (s ContainerDetail) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ContainerDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Command) > 0 {
+		v := s.Command
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "command", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ContainerInstanceArn != nil {
+		v := *s.ContainerInstanceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "containerInstanceArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Environment) > 0 {
+		v := s.Environment
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "environment", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ExitCode != nil {
+		v := *s.ExitCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "exitCode", protocol.Int64Value(v), metadata)
+	}
+	if s.Image != nil {
+		v := *s.Image
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "image", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobRoleArn != nil {
+		v := *s.JobRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobRoleArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LogStreamName != nil {
+		v := *s.LogStreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logStreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Memory != nil {
+		v := *s.Memory
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "memory", protocol.Int64Value(v), metadata)
+	}
+	if len(s.MountPoints) > 0 {
+		v := s.MountPoints
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "mountPoints", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Privileged != nil {
+		v := *s.Privileged
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privileged", protocol.BoolValue(v), metadata)
+	}
+	if s.ReadonlyRootFilesystem != nil {
+		v := *s.ReadonlyRootFilesystem
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "readonlyRootFilesystem", protocol.BoolValue(v), metadata)
+	}
+	if s.Reason != nil {
+		v := *s.Reason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "reason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TaskArn != nil {
+		v := *s.TaskArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "taskArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Ulimits) > 0 {
+		v := s.Ulimits
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ulimits", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.User != nil {
+		v := *s.User
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "user", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Vcpus != nil {
+		v := *s.Vcpus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vcpus", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Volumes) > 0 {
+		v := s.Volumes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "volumes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // The overrides that should be sent to a container.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerOverrides
 type ContainerOverrides struct {
@@ -1409,6 +1898,47 @@ func (s ContainerOverrides) String() string {
 // GoString returns the string representation
 func (s ContainerOverrides) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ContainerOverrides) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Command) > 0 {
+		v := s.Command
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "command", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.Environment) > 0 {
+		v := s.Environment
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "environment", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Memory != nil {
+		v := *s.Memory
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "memory", protocol.Int64Value(v), metadata)
+	}
+	if s.Vcpus != nil {
+		v := *s.Vcpus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vcpus", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Container properties are used in job definitions to describe the container
@@ -1561,6 +2091,113 @@ func (s *ContainerProperties) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ContainerProperties) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Command) > 0 {
+		v := s.Command
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "command", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.Environment) > 0 {
+		v := s.Environment
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "environment", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Image != nil {
+		v := *s.Image
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "image", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobRoleArn != nil {
+		v := *s.JobRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobRoleArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Memory != nil {
+		v := *s.Memory
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "memory", protocol.Int64Value(v), metadata)
+	}
+	if len(s.MountPoints) > 0 {
+		v := s.MountPoints
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "mountPoints", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Privileged != nil {
+		v := *s.Privileged
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privileged", protocol.BoolValue(v), metadata)
+	}
+	if s.ReadonlyRootFilesystem != nil {
+		v := *s.ReadonlyRootFilesystem
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "readonlyRootFilesystem", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Ulimits) > 0 {
+		v := s.Ulimits
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ulimits", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.User != nil {
+		v := *s.User
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "user", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Vcpus != nil {
+		v := *s.Vcpus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vcpus", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Volumes) > 0 {
+		v := s.Volumes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "volumes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // An object representing summary details of a container within a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ContainerSummary
 type ContainerSummary struct {
@@ -1582,6 +2219,23 @@ func (s ContainerSummary) String() string {
 // GoString returns the string representation
 func (s ContainerSummary) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ContainerSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExitCode != nil {
+		v := *s.ExitCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "exitCode", protocol.Int64Value(v), metadata)
+	}
+	if s.Reason != nil {
+		v := *s.Reason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "reason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironmentRequest
@@ -1661,6 +2315,43 @@ func (s *CreateComputeEnvironmentInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateComputeEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ComputeEnvironmentName != nil {
+		v := *s.ComputeEnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeEnvironmentName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ComputeResources != nil {
+		v := s.ComputeResources
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "computeResources", v, metadata)
+	}
+	if s.ServiceRole != nil {
+		v := *s.ServiceRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceRole", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateComputeEnvironmentResponse
 type CreateComputeEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
@@ -1687,6 +2378,23 @@ func (s CreateComputeEnvironmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateComputeEnvironmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateComputeEnvironmentOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ComputeEnvironmentArn != nil {
+		v := *s.ComputeEnvironmentArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeEnvironmentArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ComputeEnvironmentName != nil {
+		v := *s.ComputeEnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeEnvironmentName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueueRequest
@@ -1760,6 +2468,43 @@ func (s *CreateJobQueueInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateJobQueueInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.ComputeEnvironmentOrder) > 0 {
+		v := s.ComputeEnvironmentOrder
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "computeEnvironmentOrder", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.JobQueueName != nil {
+		v := *s.JobQueueName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueueName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CreateJobQueueResponse
 type CreateJobQueueOutput struct {
 	_ struct{} `type:"structure"`
@@ -1790,6 +2535,23 @@ func (s CreateJobQueueOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateJobQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateJobQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.JobQueueArn != nil {
+		v := *s.JobQueueArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueueArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobQueueName != nil {
+		v := *s.JobQueueName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueueName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironmentRequest
@@ -1826,6 +2588,19 @@ func (s *DeleteComputeEnvironmentInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteComputeEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ComputeEnvironment != nil {
+		v := *s.ComputeEnvironment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeEnvironment", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteComputeEnvironmentResponse
 type DeleteComputeEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
@@ -1846,6 +2621,11 @@ func (s DeleteComputeEnvironmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteComputeEnvironmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteComputeEnvironmentOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueueRequest
@@ -1882,6 +2662,19 @@ func (s *DeleteJobQueueInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteJobQueueInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.JobQueue != nil {
+		v := *s.JobQueue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeleteJobQueueResponse
 type DeleteJobQueueOutput struct {
 	_ struct{} `type:"structure"`
@@ -1902,6 +2695,11 @@ func (s DeleteJobQueueOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteJobQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteJobQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinitionRequest
@@ -1939,6 +2737,19 @@ func (s *DeregisterJobDefinitionInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeregisterJobDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.JobDefinition != nil {
+		v := *s.JobDefinition
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDefinition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DeregisterJobDefinitionResponse
 type DeregisterJobDefinitionOutput struct {
 	_ struct{} `type:"structure"`
@@ -1959,6 +2770,11 @@ func (s DeregisterJobDefinitionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeregisterJobDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeregisterJobDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironmentsRequest
@@ -2000,6 +2816,37 @@ func (s DescribeComputeEnvironmentsInput) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeComputeEnvironmentsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.ComputeEnvironments) > 0 {
+		v := s.ComputeEnvironments
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "computeEnvironments", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironmentsResponse
 type DescribeComputeEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2029,6 +2876,29 @@ func (s DescribeComputeEnvironmentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeComputeEnvironmentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeComputeEnvironmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ComputeEnvironments) > 0 {
+		v := s.ComputeEnvironments
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "computeEnvironments", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitionsRequest
@@ -2075,6 +2945,49 @@ func (s DescribeJobDefinitionsInput) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeJobDefinitionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.JobDefinitionName != nil {
+		v := *s.JobDefinitionName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDefinitionName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.JobDefinitions) > 0 {
+		v := s.JobDefinitions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "jobDefinitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobDefinitionsResponse
 type DescribeJobDefinitionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2104,6 +3017,29 @@ func (s DescribeJobDefinitionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeJobDefinitionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeJobDefinitionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.JobDefinitions) > 0 {
+		v := s.JobDefinitions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "jobDefinitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueuesRequest
@@ -2144,6 +3080,37 @@ func (s DescribeJobQueuesInput) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeJobQueuesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.JobQueues) > 0 {
+		v := s.JobQueues
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "jobQueues", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobQueuesResponse
 type DescribeJobQueuesOutput struct {
 	_ struct{} `type:"structure"`
@@ -2173,6 +3140,29 @@ func (s DescribeJobQueuesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeJobQueuesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeJobQueuesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.JobQueues) > 0 {
+		v := s.JobQueues
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "jobQueues", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobsRequest
@@ -2209,6 +3199,25 @@ func (s *DescribeJobsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeJobsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.Jobs) > 0 {
+		v := s.Jobs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "jobs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeJobsResponse
 type DescribeJobsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2232,6 +3241,23 @@ func (s DescribeJobsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Jobs) > 0 {
+		v := s.Jobs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "jobs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The contents of the host parameter determine whether your data volume persists
@@ -2261,6 +3287,17 @@ func (s Host) String() string {
 // GoString returns the string representation
 func (s Host) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Host) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SourcePath != nil {
+		v := *s.SourcePath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourcePath", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // An object representing an AWS Batch job definition.
@@ -2315,6 +3352,65 @@ func (s JobDefinition) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobDefinition) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContainerProperties != nil {
+		v := s.ContainerProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "containerProperties", v, metadata)
+	}
+	if s.JobDefinitionArn != nil {
+		v := *s.JobDefinitionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDefinitionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobDefinitionName != nil {
+		v := *s.JobDefinitionName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDefinitionName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "parameters", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.RetryStrategy != nil {
+		v := s.RetryStrategy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "retryStrategy", v, metadata)
+	}
+	if s.Revision != nil {
+		v := *s.Revision
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "revision", protocol.Int64Value(v), metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object representing an AWS Batch job dependency.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobDependency
 type JobDependency struct {
@@ -2335,6 +3431,23 @@ func (s JobDependency) String() string {
 // GoString returns the string representation
 func (s JobDependency) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobDependency) MarshalFields(e protocol.FieldEncoder) error {
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
 }
 
 // An object representing an AWS Batch job.
@@ -2419,6 +3532,119 @@ func (s JobDetail) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ArrayProperties != nil {
+		v := s.ArrayProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "arrayProperties", v, metadata)
+	}
+	if len(s.Attempts) > 0 {
+		v := s.Attempts
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "attempts", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Container != nil {
+		v := s.Container
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "container", v, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt", protocol.Int64Value(v), metadata)
+	}
+	if len(s.DependsOn) > 0 {
+		v := s.DependsOn
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dependsOn", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.JobDefinition != nil {
+		v := *s.JobDefinition
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDefinition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobName != nil {
+		v := *s.JobName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobQueue != nil {
+		v := *s.JobQueue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "parameters", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.RetryStrategy != nil {
+		v := s.RetryStrategy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "retryStrategy", v, metadata)
+	}
+	if s.StartedAt != nil {
+		v := *s.StartedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startedAt", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "statusReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StoppedAt != nil {
+		v := *s.StoppedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stoppedAt", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // An object representing the details of an AWS Batch job queue.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/JobQueueDetail
 type JobQueueDetail struct {
@@ -2467,6 +3693,59 @@ func (s JobQueueDetail) String() string {
 // GoString returns the string representation
 func (s JobQueueDetail) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobQueueDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ComputeEnvironmentOrder) > 0 {
+		v := s.ComputeEnvironmentOrder
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "computeEnvironmentOrder", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.JobQueueArn != nil {
+		v := *s.JobQueueArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueueArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobQueueName != nil {
+		v := *s.JobQueueName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueueName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "statusReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // An object representing summary details of a job.
@@ -2523,6 +3802,65 @@ func (s JobSummary) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ArrayProperties != nil {
+		v := s.ArrayProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "arrayProperties", v, metadata)
+	}
+	if s.Container != nil {
+		v := s.Container
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "container", v, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt", protocol.Int64Value(v), metadata)
+	}
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobName != nil {
+		v := *s.JobName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StartedAt != nil {
+		v := *s.StartedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startedAt", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	if s.StatusReason != nil {
+		v := *s.StatusReason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "statusReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StoppedAt != nil {
+		v := *s.StoppedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stoppedAt", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // A key-value pair object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/KeyValuePair
 type KeyValuePair struct {
@@ -2545,6 +3883,23 @@ func (s KeyValuePair) String() string {
 // GoString returns the string representation
 func (s KeyValuePair) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s KeyValuePair) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobsRequest
@@ -2592,6 +3947,43 @@ func (s ListJobsInput) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ArrayJobId != nil {
+		v := *s.ArrayJobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arrayJobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobQueue != nil {
+		v := *s.JobQueue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.JobStatus) > 0 {
+		v := s.JobStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobStatus", protocol.QuotedValue{v}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobsResponse
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2625,6 +4017,29 @@ func (s ListJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.JobSummaryList) > 0 {
+		v := s.JobSummaryList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "jobSummaryList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Details on a Docker volume mount point that is used in a job's container
 // properties.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/MountPoint
@@ -2650,6 +4065,29 @@ func (s MountPoint) String() string {
 // GoString returns the string representation
 func (s MountPoint) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MountPoint) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContainerPath != nil {
+		v := *s.ContainerPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "containerPath", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ReadOnly != nil {
+		v := *s.ReadOnly
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "readOnly", protocol.BoolValue(v), metadata)
+	}
+	if s.SourceVolume != nil {
+		v := *s.SourceVolume
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceVolume", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionRequest
@@ -2714,6 +4152,49 @@ func (s *RegisterJobDefinitionInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RegisterJobDefinitionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ContainerProperties != nil {
+		v := s.ContainerProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "containerProperties", v, metadata)
+	}
+	if s.JobDefinitionName != nil {
+		v := *s.JobDefinitionName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDefinitionName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "parameters", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.RetryStrategy != nil {
+		v := s.RetryStrategy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "retryStrategy", v, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RegisterJobDefinitionResponse
 type RegisterJobDefinitionOutput struct {
 	_ struct{} `type:"structure"`
@@ -2751,6 +4232,29 @@ func (s RegisterJobDefinitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RegisterJobDefinitionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.JobDefinitionArn != nil {
+		v := *s.JobDefinitionArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDefinitionArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobDefinitionName != nil {
+		v := *s.JobDefinitionName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDefinitionName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Revision != nil {
+		v := *s.Revision
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "revision", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // The retry strategy associated with a job.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/RetryStrategy
 type RetryStrategy struct {
@@ -2770,6 +4274,17 @@ func (s RetryStrategy) String() string {
 // GoString returns the string representation
 func (s RetryStrategy) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RetryStrategy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Attempts != nil {
+		v := *s.Attempts
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "attempts", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobRequest
@@ -2863,6 +4378,73 @@ func (s *SubmitJobInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SubmitJobInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ArrayProperties != nil {
+		v := s.ArrayProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "arrayProperties", v, metadata)
+	}
+	if s.ContainerOverrides != nil {
+		v := s.ContainerOverrides
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "containerOverrides", v, metadata)
+	}
+	if len(s.DependsOn) > 0 {
+		v := s.DependsOn
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dependsOn", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.JobDefinition != nil {
+		v := *s.JobDefinition
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDefinition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobName != nil {
+		v := *s.JobName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobQueue != nil {
+		v := *s.JobQueue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Parameters) > 0 {
+		v := s.Parameters
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "parameters", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.RetryStrategy != nil {
+		v := s.RetryStrategy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "retryStrategy", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/SubmitJobResponse
 type SubmitJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -2893,6 +4475,23 @@ func (s SubmitJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SubmitJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SubmitJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobName != nil {
+		v := *s.JobName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobRequest
@@ -2940,6 +4539,25 @@ func (s *TerminateJobInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TerminateJobInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Reason != nil {
+		v := *s.Reason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "reason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobResponse
 type TerminateJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -2960,6 +4578,11 @@ func (s TerminateJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TerminateJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TerminateJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The ulimit settings to pass to the container.
@@ -3011,6 +4634,29 @@ func (s *Ulimit) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Ulimit) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HardLimit != nil {
+		v := *s.HardLimit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hardLimit", protocol.Int64Value(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SoftLimit != nil {
+		v := *s.SoftLimit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "softLimit", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -3073,6 +4719,37 @@ func (s *UpdateComputeEnvironmentInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateComputeEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ComputeEnvironment != nil {
+		v := *s.ComputeEnvironment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeEnvironment", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ComputeResources != nil {
+		v := s.ComputeResources
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "computeResources", v, metadata)
+	}
+	if s.ServiceRole != nil {
+		v := *s.ServiceRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceRole", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentResponse
 type UpdateComputeEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
@@ -3099,6 +4776,23 @@ func (s UpdateComputeEnvironmentOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateComputeEnvironmentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateComputeEnvironmentOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ComputeEnvironmentArn != nil {
+		v := *s.ComputeEnvironmentArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeEnvironmentArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ComputeEnvironmentName != nil {
+		v := *s.ComputeEnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computeEnvironmentName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueueRequest
@@ -3157,6 +4851,43 @@ func (s *UpdateJobQueueInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateJobQueueInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.ComputeEnvironmentOrder) > 0 {
+		v := s.ComputeEnvironmentOrder
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "computeEnvironmentOrder", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.JobQueue != nil {
+		v := *s.JobQueue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Priority != nil {
+		v := *s.Priority
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "priority", protocol.Int64Value(v), metadata)
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateJobQueueResponse
 type UpdateJobQueueOutput struct {
 	_ struct{} `type:"structure"`
@@ -3183,6 +4914,23 @@ func (s UpdateJobQueueOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateJobQueueOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateJobQueueOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.JobQueueArn != nil {
+		v := *s.JobQueueArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueueArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobQueueName != nil {
+		v := *s.JobQueueName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobQueueName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // A data volume used in a job's container properties.
@@ -3213,6 +4961,23 @@ func (s Volume) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Volume) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Host != nil {
+		v := s.Host
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "host", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 type ArrayJobDependency string
 
 // Enum values for ArrayJobDependency
@@ -3221,6 +4986,15 @@ const (
 	ArrayJobDependencySequential ArrayJobDependency = "SEQUENTIAL"
 )
 
+func (enum ArrayJobDependency) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArrayJobDependency) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CEState string
 
 // Enum values for CEState
@@ -3228,6 +5002,15 @@ const (
 	CEStateEnabled  CEState = "ENABLED"
 	CEStateDisabled CEState = "DISABLED"
 )
+
+func (enum CEState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CEState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type CEStatus string
 
@@ -3241,6 +5024,15 @@ const (
 	CEStatusInvalid  CEStatus = "INVALID"
 )
 
+func (enum CEStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CEStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CEType string
 
 // Enum values for CEType
@@ -3248,6 +5040,15 @@ const (
 	CETypeManaged   CEType = "MANAGED"
 	CETypeUnmanaged CEType = "UNMANAGED"
 )
+
+func (enum CEType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CEType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type CRType string
 
@@ -3257,6 +5058,15 @@ const (
 	CRTypeSpot CRType = "SPOT"
 )
 
+func (enum CRType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CRType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type JQState string
 
 // Enum values for JQState
@@ -3264,6 +5074,15 @@ const (
 	JQStateEnabled  JQState = "ENABLED"
 	JQStateDisabled JQState = "DISABLED"
 )
+
+func (enum JQState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JQState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type JQStatus string
 
@@ -3277,12 +5096,30 @@ const (
 	JQStatusInvalid  JQStatus = "INVALID"
 )
 
+func (enum JQStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JQStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type JobDefinitionType string
 
 // Enum values for JobDefinitionType
 const (
 	JobDefinitionTypeContainer JobDefinitionType = "container"
 )
+
+func (enum JobDefinitionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobDefinitionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type JobStatus string
 
@@ -3296,3 +5133,12 @@ const (
 	JobStatusSucceeded JobStatus = "SUCCEEDED"
 	JobStatusFailed    JobStatus = "FAILED"
 )
+
+func (enum JobStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

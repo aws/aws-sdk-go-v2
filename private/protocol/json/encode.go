@@ -20,11 +20,10 @@ type Encoder struct {
 // than Body or Payload.
 func NewEncoder() *Encoder {
 	buf := bytes.NewBuffer([]byte{'{'})
-	s := newScope(buf, nil)
 	e := &Encoder{
 		encoder: encoder{
 			buf:      buf,
-			scope:    s,
+			parent:   nil,
 			fieldBuf: &protocol.FieldBuffer{},
 		},
 		root: true,
@@ -51,7 +50,7 @@ func (e *Encoder) Encode() (io.ReadSeeker, error) {
 
 // SetValue sets an individual value to the JSON body.
 func (e *Encoder) SetValue(t protocol.Target, k string, v protocol.ValueMarshaler, meta protocol.Metadata) {
-	e.encoder.scope.writeSep()
+	e.encoder.writeSep()
 	e.writeKey(k)
 	e.writeValue(v)
 }
@@ -66,15 +65,13 @@ func (e *Encoder) SetStream(t protocol.Target, k string, v protocol.StreamMarsha
 
 // Map will return a new mapEncoder and create a new scope for the map encoding.
 func (e *Encoder) Map(t protocol.Target, k string, meta protocol.Metadata) protocol.MapEncoder {
-	temp := e.encoder
-	temp.scope = newScope(e.encoder.buf, temp.scope)
+	temp := newScope(e.encoder, &e.encoder)
 	return &mapEncoder{temp, k}
 }
 
 // List will return a new listEncoder and create a new scope for the list encoding.
 func (e *Encoder) List(t protocol.Target, k string, meta protocol.Metadata) protocol.ListEncoder {
-	temp := e.encoder
-	temp.scope = newScope(e.encoder.buf, temp.scope)
+	temp := newScope(e.encoder, &e.encoder)
 	return &listEncoder{temp, k}
 }
 
@@ -86,7 +83,6 @@ func (e *Encoder) SetFields(t protocol.Target, k string, m protocol.FieldMarshal
 			encoder: encoder{
 				buf:      e.encoder.buf,
 				fieldBuf: e.encoder.fieldBuf,
-				scope:    newScope(e.encoder.buf, e.encoder.scope),
 			},
 		}
 		m.MarshalFields(&nested)
@@ -94,11 +90,11 @@ func (e *Encoder) SetFields(t protocol.Target, k string, m protocol.FieldMarshal
 		return
 	}
 
-	e.scope.writeSep()
+	e.writeSep()
 	e.writeKey(k)
 	e.writeObject(func(enc encoder) error {
-		enc.scope = newScope(enc.buf, enc.scope)
-		nested := Encoder{encoder: enc}
+		temp := newScope(enc, &e.encoder)
+		nested := Encoder{encoder: temp}
 		m.MarshalFields(&nested)
 		return nested.err
 	})
@@ -112,21 +108,19 @@ type listEncoder struct {
 
 // Map return a new mapEncoder while creating a new scope for the encoder.
 func (e *listEncoder) Map() protocol.MapEncoder {
-	temp := e.encoder
-	temp.scope = newScope(e.buf, temp.scope)
+	temp := newScope(e.encoder, &e.encoder)
 	return &mapEncoder{temp, ""}
 }
 
 // List return a new listEncoder while creating a new scope for the encoder.
 func (e *listEncoder) List() protocol.ListEncoder {
-	temp := e.encoder
-	temp.scope = newScope(e.buf, temp.scope)
+	temp := newScope(e.encoder, &e.encoder)
 	return &listEncoder{temp, ""}
 }
 
 // Start will open a new scope for a list and write the given key.
 func (e *listEncoder) Start() {
-	e.encoder.scope.parent.writeSep()
+	e.encoder.parent.writeSep()
 	e.writeKey(e.k)
 	e.WriteListStart()
 }
@@ -138,16 +132,16 @@ func (e *listEncoder) End() {
 
 // ListAddValue will add the value to the list.
 func (e *listEncoder) ListAddValue(v protocol.ValueMarshaler) {
-	e.encoder.scope.writeSep()
+	e.encoder.writeSep()
 	e.writeValue(v)
 }
 
 // ListAddFields will set the nested type's fields to the list.
 func (e *listEncoder) ListAddFields(m protocol.FieldMarshaler) {
-	e.encoder.scope.writeSep()
+	e.encoder.writeSep()
 	e.writeObject(func(enc encoder) error {
-		enc.scope = newScope(enc.buf, enc.scope)
-		nested := Encoder{encoder: enc}
+		temp := newScope(enc, &e.encoder)
+		nested := Encoder{encoder: temp}
 		m.MarshalFields(&nested)
 		return nested.err
 	})
@@ -161,7 +155,7 @@ type mapEncoder struct {
 
 // Start will open a new scope for a list and write the given key.
 func (e *mapEncoder) Start() {
-	e.encoder.scope.parent.writeSep()
+	e.encoder.parent.writeSep()
 	e.encoder.writeKey(e.k)
 	e.encoder.WriteMapStart()
 }
@@ -173,32 +167,30 @@ func (e *mapEncoder) End() {
 
 // Map will create a new scope and return a mapEncoder.
 func (e *mapEncoder) Map(k string) protocol.MapEncoder {
-	temp := e.encoder
-	temp.scope = newScope(e.encoder.buf, temp.scope)
+	temp := newScope(e.encoder, &e.encoder)
 	return &mapEncoder{temp, k}
 }
 
 // List will create a new scope and return a listEncoder
 func (e *mapEncoder) List(k string) protocol.ListEncoder {
-	temp := e.encoder
-	temp.scope = newScope(e.encoder.buf, temp.scope)
+	temp := newScope(e.encoder, &e.encoder)
 	return &listEncoder{temp, k}
 }
 
 // MapSetValue sets a map value.
 func (e *mapEncoder) MapSetValue(k string, v protocol.ValueMarshaler) {
-	e.encoder.scope.writeSep()
+	e.encoder.writeSep()
 	e.encoder.writeKey(k)
 	e.encoder.writeValue(v)
 }
 
 // MapSetFields will set the nested type's fields under the map.
 func (e *mapEncoder) MapSetFields(k string, m protocol.FieldMarshaler) {
-	e.encoder.scope.writeSep()
+	e.encoder.writeSep()
 	e.encoder.writeKey(k)
 	e.encoder.writeObject(func(enc encoder) error {
-		enc.scope = newScope(enc.buf, enc.scope)
-		nested := Encoder{encoder: enc}
+		temp := newScope(enc, &e.encoder)
+		nested := Encoder{encoder: temp}
 		m.MarshalFields(&nested)
 		return nested.err
 	})
@@ -207,7 +199,8 @@ func (e *mapEncoder) MapSetFields(k string, m protocol.FieldMarshaler) {
 type encoder struct {
 	buf      *bytes.Buffer
 	fieldBuf *protocol.FieldBuffer
-	scope    *scope
+	started  bool
+	parent   *encoder
 	err      error
 }
 
@@ -224,7 +217,7 @@ func (e encoder) encode() ([]byte, error) {
 
 func (e *encoder) writeKey(k string) {
 	e.buf.WriteByte('"')
-	e.buf.WriteString(k) // TODO escape?
+	e.buf.WriteString(k)
 	e.buf.WriteByte('"')
 	e.buf.WriteByte(':')
 }
@@ -279,21 +272,19 @@ func (e *encoder) WriteMapEnd() {
 	e.buf.WriteByte('}')
 }
 
-type scope struct {
-	started bool
-	buf     *bytes.Buffer
-	parent  *scope
-}
-
-func newScope(buf *bytes.Buffer, parent *scope) *scope {
-	return &scope{false, buf, parent}
-}
-
-func (s *scope) writeSep() {
-	if s.started {
-		s.buf.WriteByte(',')
+func (e *encoder) writeSep() {
+	if e.started {
+		e.buf.WriteByte(',')
 	} else {
-		s.started = true
+		e.started = true
 	}
 
+}
+
+// newScope will return a new encoder with the correct parent and started to false.
+func newScope(e encoder, parent *encoder) encoder {
+	temp := e
+	temp.started = false
+	temp.parent = parent
+	return temp
 }

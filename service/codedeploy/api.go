@@ -6747,6 +6747,15 @@ const (
 	ApplicationRevisionSortByLastUsedTime  ApplicationRevisionSortBy = "lastUsedTime"
 )
 
+func (enum ApplicationRevisionSortBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApplicationRevisionSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AutoRollbackEvent string
 
 // Enum values for AutoRollbackEvent
@@ -6755,6 +6764,15 @@ const (
 	AutoRollbackEventDeploymentStopOnAlarm   AutoRollbackEvent = "DEPLOYMENT_STOP_ON_ALARM"
 	AutoRollbackEventDeploymentStopOnRequest AutoRollbackEvent = "DEPLOYMENT_STOP_ON_REQUEST"
 )
+
+func (enum AutoRollbackEvent) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoRollbackEvent) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type BundleType string
 
@@ -6767,6 +6785,15 @@ const (
 	BundleTypeJson BundleType = "JSON"
 )
 
+func (enum BundleType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BundleType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComputePlatform string
 
 // Enum values for ComputePlatform
@@ -6774,6 +6801,15 @@ const (
 	ComputePlatformServer ComputePlatform = "Server"
 	ComputePlatformLambda ComputePlatform = "Lambda"
 )
+
+func (enum ComputePlatform) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComputePlatform) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DeploymentCreator string
 
@@ -6784,6 +6820,15 @@ const (
 	DeploymentCreatorCodeDeployRollback DeploymentCreator = "codeDeployRollback"
 )
 
+func (enum DeploymentCreator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentCreator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeploymentOption string
 
 // Enum values for DeploymentOption
@@ -6792,6 +6837,15 @@ const (
 	DeploymentOptionWithoutTrafficControl DeploymentOption = "WITHOUT_TRAFFIC_CONTROL"
 )
 
+func (enum DeploymentOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeploymentReadyAction string
 
 // Enum values for DeploymentReadyAction
@@ -6799,6 +6853,15 @@ const (
 	DeploymentReadyActionContinueDeployment DeploymentReadyAction = "CONTINUE_DEPLOYMENT"
 	DeploymentReadyActionStopDeployment     DeploymentReadyAction = "STOP_DEPLOYMENT"
 )
+
+func (enum DeploymentReadyAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentReadyAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DeploymentStatus string
 
@@ -6813,6 +6876,15 @@ const (
 	DeploymentStatusReady      DeploymentStatus = "Ready"
 )
 
+func (enum DeploymentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeploymentType string
 
 // Enum values for DeploymentType
@@ -6820,6 +6892,15 @@ const (
 	DeploymentTypeInPlace   DeploymentType = "IN_PLACE"
 	DeploymentTypeBlueGreen DeploymentType = "BLUE_GREEN"
 )
+
+func (enum DeploymentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EC2TagFilterType string
 
@@ -6829,6 +6910,15 @@ const (
 	EC2TagFilterTypeValueOnly   EC2TagFilterType = "VALUE_ONLY"
 	EC2TagFilterTypeKeyAndValue EC2TagFilterType = "KEY_AND_VALUE"
 )
+
+func (enum EC2TagFilterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EC2TagFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ErrorCode string
 
@@ -6862,6 +6952,15 @@ const (
 	ErrorCodeHookExecutionFailure                    ErrorCode = "HOOK_EXECUTION_FAILURE"
 )
 
+func (enum ErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FileExistsBehavior string
 
 // Enum values for FileExistsBehavior
@@ -6871,6 +6970,15 @@ const (
 	FileExistsBehaviorRetain    FileExistsBehavior = "RETAIN"
 )
 
+func (enum FileExistsBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FileExistsBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type GreenFleetProvisioningAction string
 
 // Enum values for GreenFleetProvisioningAction
@@ -6879,6 +6987,15 @@ const (
 	GreenFleetProvisioningActionCopyAutoScalingGroup GreenFleetProvisioningAction = "COPY_AUTO_SCALING_GROUP"
 )
 
+func (enum GreenFleetProvisioningAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GreenFleetProvisioningAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceAction string
 
 // Enum values for InstanceAction
@@ -6886,6 +7003,15 @@ const (
 	InstanceActionTerminate InstanceAction = "TERMINATE"
 	InstanceActionKeepAlive InstanceAction = "KEEP_ALIVE"
 )
+
+func (enum InstanceAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceStatus string
 
@@ -6900,6 +7026,15 @@ const (
 	InstanceStatusReady      InstanceStatus = "Ready"
 )
 
+func (enum InstanceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceType string
 
 // Enum values for InstanceType
@@ -6907,6 +7042,15 @@ const (
 	InstanceTypeBlue  InstanceType = "Blue"
 	InstanceTypeGreen InstanceType = "Green"
 )
+
+func (enum InstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LifecycleErrorCode string
 
@@ -6920,6 +7064,15 @@ const (
 	LifecycleErrorCodeUnknownError        LifecycleErrorCode = "UnknownError"
 )
 
+func (enum LifecycleErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LifecycleErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LifecycleEventStatus string
 
 // Enum values for LifecycleEventStatus
@@ -6932,6 +7085,15 @@ const (
 	LifecycleEventStatusUnknown    LifecycleEventStatus = "Unknown"
 )
 
+func (enum LifecycleEventStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LifecycleEventStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ListStateFilterAction string
 
 // Enum values for ListStateFilterAction
@@ -6941,6 +7103,15 @@ const (
 	ListStateFilterActionIgnore  ListStateFilterAction = "ignore"
 )
 
+func (enum ListStateFilterAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ListStateFilterAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MinimumHealthyHostsType string
 
 // Enum values for MinimumHealthyHostsType
@@ -6949,6 +7120,15 @@ const (
 	MinimumHealthyHostsTypeFleetPercent MinimumHealthyHostsType = "FLEET_PERCENT"
 )
 
+func (enum MinimumHealthyHostsType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MinimumHealthyHostsType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RegistrationStatus string
 
 // Enum values for RegistrationStatus
@@ -6956,6 +7136,15 @@ const (
 	RegistrationStatusRegistered   RegistrationStatus = "Registered"
 	RegistrationStatusDeregistered RegistrationStatus = "Deregistered"
 )
+
+func (enum RegistrationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RegistrationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RevisionLocationType string
 
@@ -6966,6 +7155,15 @@ const (
 	RevisionLocationTypeString RevisionLocationType = "String"
 )
 
+func (enum RevisionLocationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RevisionLocationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -6974,6 +7172,15 @@ const (
 	SortOrderDescending SortOrder = "descending"
 )
 
+func (enum SortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StopStatus string
 
 // Enum values for StopStatus
@@ -6981,6 +7188,15 @@ const (
 	StopStatusPending   StopStatus = "Pending"
 	StopStatusSucceeded StopStatus = "Succeeded"
 )
+
+func (enum StopStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StopStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TagFilterType string
 
@@ -6991,6 +7207,15 @@ const (
 	TagFilterTypeKeyAndValue TagFilterType = "KEY_AND_VALUE"
 )
 
+func (enum TagFilterType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TagFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TrafficRoutingType string
 
 // Enum values for TrafficRoutingType
@@ -6999,6 +7224,15 @@ const (
 	TrafficRoutingTypeTimeBasedLinear TrafficRoutingType = "TimeBasedLinear"
 	TrafficRoutingTypeAllAtOnce       TrafficRoutingType = "AllAtOnce"
 )
+
+func (enum TrafficRoutingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrafficRoutingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TriggerEventType string
 
@@ -7015,3 +7249,12 @@ const (
 	TriggerEventTypeInstanceFailure    TriggerEventType = "InstanceFailure"
 	TriggerEventTypeInstanceReady      TriggerEventType = "InstanceReady"
 )
+
+func (enum TriggerEventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TriggerEventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

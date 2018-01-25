@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opGetMedia = "GetMedia"
@@ -130,6 +131,30 @@ func (s *GetMediaInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetMediaInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StartSelector != nil {
+		v := s.StartSelector
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "StartSelector", v, metadata)
+	}
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/GetMediaOutput
 type GetMediaOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
@@ -202,6 +227,18 @@ func (s GetMediaOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetMediaOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetMediaOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	// Skipping Payload Output type's body not valid.
+	return nil
 }
 
 // Identifies the chunk on the Kinesis video stream where you want the GetMedia
@@ -287,6 +324,35 @@ func (s *StartSelector) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartSelector) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AfterFragmentNumber != nil {
+		v := *s.AfterFragmentNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AfterFragmentNumber", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContinuationToken != nil {
+		v := *s.ContinuationToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ContinuationToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.StartSelectorType) > 0 {
+		v := s.StartSelectorType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartSelectorType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.StartTimestamp != nil {
+		v := *s.StartTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
 type StartSelectorType string
 
 // Enum values for StartSelectorType
@@ -298,3 +364,12 @@ const (
 	StartSelectorTypeEarliest          StartSelectorType = "EARLIEST"
 	StartSelectorTypeContinuationToken StartSelectorType = "CONTINUATION_TOKEN"
 )
+
+func (enum StartSelectorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StartSelectorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

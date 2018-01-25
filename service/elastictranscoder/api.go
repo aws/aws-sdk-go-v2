@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCancelJob = "CancelJob"
@@ -1195,6 +1196,53 @@ func (s *Artwork) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Artwork) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AlbumArtFormat != nil {
+		v := *s.AlbumArtFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AlbumArtFormat", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.InputKey != nil {
+		v := *s.InputKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputKey", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxHeight != nil {
+		v := *s.MaxHeight
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxHeight", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxWidth != nil {
+		v := *s.MaxWidth
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxWidth", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PaddingPolicy != nil {
+		v := *s.PaddingPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PaddingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SizingPolicy != nil {
+		v := *s.SizingPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SizingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Options associated with your audio codec.
 type AudioCodecOptions struct {
 	_ struct{} `type:"structure"`
@@ -1262,6 +1310,35 @@ func (s AudioCodecOptions) String() string {
 // GoString returns the string representation
 func (s AudioCodecOptions) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AudioCodecOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BitDepth != nil {
+		v := *s.BitDepth
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BitDepth", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BitOrder != nil {
+		v := *s.BitOrder
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BitOrder", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Profile != nil {
+		v := *s.Profile
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Profile", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Signed != nil {
+		v := *s.Signed
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Signed", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Parameters required for transcoding audio.
@@ -1438,6 +1515,47 @@ func (s AudioParameters) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AudioParameters) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AudioPackingMode != nil {
+		v := *s.AudioPackingMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AudioPackingMode", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BitRate != nil {
+		v := *s.BitRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BitRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Channels != nil {
+		v := *s.Channels
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Channels", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Codec != nil {
+		v := *s.Codec
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Codec", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CodecOptions != nil {
+		v := s.CodecOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CodecOptions", v, metadata)
+	}
+	if s.SampleRate != nil {
+		v := *s.SampleRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SampleRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The CancelJobRequest structure.
 type CancelJobInput struct {
 	_ struct{} `type:"structure"`
@@ -1475,6 +1593,18 @@ func (s *CancelJobInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelJobInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The response body contains a JSON object. If the job is successfully canceled,
 // the value of Success is true.
 type CancelJobOutput struct {
@@ -1496,6 +1626,11 @@ func (s CancelJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CancelJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The file format of the output captions. If you leave this value blank, Elastic
@@ -1562,6 +1697,29 @@ func (s CaptionFormat) String() string {
 // GoString returns the string representation
 func (s CaptionFormat) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CaptionFormat) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.Format != nil {
+		v := *s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Pattern != nil {
+		v := *s.Pattern
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Pattern", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // A source file for the input sidecar captions used during the transcoding
@@ -1632,6 +1790,41 @@ func (s *CaptionSource) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CaptionSource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Label != nil {
+		v := *s.Label
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Label", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Language != nil {
+		v := *s.Language
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Language", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TimeOffset != nil {
+		v := *s.TimeOffset
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TimeOffset", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The captions to be created, if any.
 type Captions struct {
 	_ struct{} `type:"structure"`
@@ -1693,6 +1886,41 @@ func (s *Captions) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Captions) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CaptionFormats) > 0 {
+		v := s.CaptionFormats
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CaptionFormats", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.CaptionSources) > 0 {
+		v := s.CaptionSources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CaptionSources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MergePolicy != nil {
+		v := *s.MergePolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MergePolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Settings for one clip in a composition. All jobs in a playlist must have
 // the same clip settings.
 type Clip struct {
@@ -1710,6 +1938,17 @@ func (s Clip) String() string {
 // GoString returns the string representation
 func (s Clip) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Clip) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TimeSpan != nil {
+		v := s.TimeSpan
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TimeSpan", v, metadata)
+	}
+	return nil
 }
 
 // The CreateJobRequest structure.
@@ -1815,6 +2054,84 @@ func (s *CreateJobInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Input != nil {
+		v := s.Input
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Input", v, metadata)
+	}
+	if len(s.Inputs) > 0 {
+		v := s.Inputs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Inputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Output != nil {
+		v := s.Output
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Output", v, metadata)
+	}
+	if s.OutputKeyPrefix != nil {
+		v := *s.OutputKeyPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputKeyPrefix", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Outputs) > 0 {
+		v := s.Outputs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Outputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.PipelineId != nil {
+		v := *s.PipelineId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Playlists) > 0 {
+		v := s.Playlists
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Playlists", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.UserMetadata) > 0 {
+		v := s.UserMetadata
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "UserMetadata", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }
@@ -2005,6 +2322,89 @@ func (s *CreateJobOutput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AlbumArt != nil {
+		v := s.AlbumArt
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AlbumArt", v, metadata)
+	}
+	if s.Captions != nil {
+		v := s.Captions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Captions", v, metadata)
+	}
+	if len(s.Composition) > 0 {
+		v := s.Composition
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Composition", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PresetId != nil {
+		v := *s.PresetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PresetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Rotate != nil {
+		v := *s.Rotate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Rotate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SegmentDuration != nil {
+		v := *s.SegmentDuration
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SegmentDuration", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThumbnailEncryption != nil {
+		v := s.ThumbnailEncryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ThumbnailEncryption", v, metadata)
+	}
+	if s.ThumbnailPattern != nil {
+		v := *s.ThumbnailPattern
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThumbnailPattern", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Watermarks) > 0 {
+		v := s.Watermarks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Watermarks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Information about the master playlist.
 type CreateJobPlaylist struct {
 	_ struct{} `type:"structure"`
@@ -2100,6 +2500,47 @@ func (s *CreateJobPlaylist) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateJobPlaylist) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Format != nil {
+		v := *s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsContentProtection != nil {
+		v := s.HlsContentProtection
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HlsContentProtection", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.OutputKeys) > 0 {
+		v := s.OutputKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "OutputKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.PlayReadyDrm != nil {
+		v := s.PlayReadyDrm
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PlayReadyDrm", v, metadata)
+	}
+	return nil
+}
+
 // The CreateJobResponse structure.
 type CreateJobResponse struct {
 	_ struct{} `type:"structure"`
@@ -2124,6 +2565,17 @@ func (s CreateJobResponse) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateJobResponse) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateJobResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Job != nil {
+		v := s.Job
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Job", v, metadata)
+	}
+	return nil
 }
 
 // The CreatePipelineRequest structure.
@@ -2388,6 +2840,60 @@ func (s *CreatePipelineInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AwsKmsKeyArn != nil {
+		v := *s.AwsKmsKeyArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AwsKmsKeyArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentConfig != nil {
+		v := s.ContentConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ContentConfig", v, metadata)
+	}
+	if s.InputBucket != nil {
+		v := *s.InputBucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Notifications != nil {
+		v := s.Notifications
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Notifications", v, metadata)
+	}
+	if s.OutputBucket != nil {
+		v := *s.OutputBucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Role != nil {
+		v := *s.Role
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThumbnailConfig != nil {
+		v := s.ThumbnailConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ThumbnailConfig", v, metadata)
+	}
+	return nil
+}
+
 // When you create a pipeline, Elastic Transcoder returns the values that you
 // specified in the request.
 type CreatePipelineOutput struct {
@@ -2421,6 +2927,29 @@ func (s CreatePipelineOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pipeline != nil {
+		v := s.Pipeline
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
+	}
+	if len(s.Warnings) > 0 {
+		v := s.Warnings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Warnings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The CreatePresetRequest structure.
@@ -2489,6 +3018,48 @@ func (s *CreatePresetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Audio != nil {
+		v := s.Audio
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Audio", v, metadata)
+	}
+	if s.Container != nil {
+		v := *s.Container
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Container", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Thumbnails != nil {
+		v := s.Thumbnails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Thumbnails", v, metadata)
+	}
+	if s.Video != nil {
+		v := s.Video
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Video", v, metadata)
+	}
+	return nil
+}
+
 // The CreatePresetResponse structure.
 type CreatePresetOutput struct {
 	_ struct{} `type:"structure"`
@@ -2519,6 +3090,23 @@ func (s CreatePresetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreatePresetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Preset != nil {
+		v := s.Preset
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Preset", v, metadata)
+	}
+	if s.Warning != nil {
+		v := *s.Warning
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Warning", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The DeletePipelineRequest structure.
@@ -2555,6 +3143,18 @@ func (s *DeletePipelineInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The DeletePipelineResponse structure.
 type DeletePipelineOutput struct {
 	_ struct{} `type:"structure"`
@@ -2575,6 +3175,11 @@ func (s DeletePipelineOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeletePipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The DeletePresetRequest structure.
@@ -2611,6 +3216,18 @@ func (s *DeletePresetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePresetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The DeletePresetResponse structure.
 type DeletePresetOutput struct {
 	_ struct{} `type:"structure"`
@@ -2631,6 +3248,11 @@ func (s DeletePresetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeletePresetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePresetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // The detected properties of the input file. Elastic Transcoder identifies
@@ -2662,6 +3284,41 @@ func (s DetectedProperties) String() string {
 // GoString returns the string representation
 func (s DetectedProperties) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DetectedProperties) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DurationMillis != nil {
+		v := *s.DurationMillis
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DurationMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.FileSize != nil {
+		v := *s.FileSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FileSize", protocol.Int64Value(v), metadata)
+	}
+	if s.FrameRate != nil {
+		v := *s.FrameRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FrameRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Height != nil {
+		v := *s.Height
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Height", protocol.Int64Value(v), metadata)
+	}
+	if s.Width != nil {
+		v := *s.Width
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Width", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The encryption settings, if any, that are used for decrypting your input
@@ -2743,6 +3400,35 @@ func (s Encryption) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Encryption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InitializationVector != nil {
+		v := *s.InitializationVector
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InitializationVector", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyMd5 != nil {
+		v := *s.KeyMd5
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyMd5", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Mode != nil {
+		v := *s.Mode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Mode", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The HLS content protection settings, if any, that you want Elastic Transcoder
 // to apply to your output files.
 type HlsContentProtection struct {
@@ -2804,6 +3490,47 @@ func (s HlsContentProtection) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HlsContentProtection) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InitializationVector != nil {
+		v := *s.InitializationVector
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InitializationVector", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyMd5 != nil {
+		v := *s.KeyMd5
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyMd5", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyStoragePolicy != nil {
+		v := *s.KeyStoragePolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyStoragePolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LicenseAcquisitionUrl != nil {
+		v := *s.LicenseAcquisitionUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LicenseAcquisitionUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Method != nil {
+		v := *s.Method
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Method", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The captions to be created, if any.
 type InputCaptions struct {
 	_ struct{} `type:"structure"`
@@ -2857,6 +3584,29 @@ func (s *InputCaptions) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputCaptions) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CaptionSources) > 0 {
+		v := s.CaptionSources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CaptionSources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MergePolicy != nil {
+		v := *s.MergePolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MergePolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2956,6 +3706,107 @@ func (s Job) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Job) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Input != nil {
+		v := s.Input
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Input", v, metadata)
+	}
+	if len(s.Inputs) > 0 {
+		v := s.Inputs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Inputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Output != nil {
+		v := s.Output
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Output", v, metadata)
+	}
+	if s.OutputKeyPrefix != nil {
+		v := *s.OutputKeyPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputKeyPrefix", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Outputs) > 0 {
+		v := s.Outputs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Outputs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.PipelineId != nil {
+		v := *s.PipelineId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Playlists) > 0 {
+		v := s.Playlists
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Playlists", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Timing != nil {
+		v := s.Timing
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Timing", v, metadata)
+	}
+	if len(s.UserMetadata) > 0 {
+		v := s.UserMetadata
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "UserMetadata", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // The .jpg or .png file associated with an audio file.
 type JobAlbumArt struct {
 	_ struct{} `type:"structure"`
@@ -3003,6 +3854,29 @@ func (s *JobAlbumArt) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobAlbumArt) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Artwork) > 0 {
+		v := s.Artwork
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Artwork", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MergePolicy != nil {
+		v := *s.MergePolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MergePolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3145,6 +4019,71 @@ func (s *JobInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobInput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AspectRatio != nil {
+		v := *s.AspectRatio
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AspectRatio", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Container != nil {
+		v := *s.Container
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Container", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectedProperties != nil {
+		v := s.DetectedProperties
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DetectedProperties", v, metadata)
+	}
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.FrameRate != nil {
+		v := *s.FrameRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FrameRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InputCaptions != nil {
+		v := s.InputCaptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "InputCaptions", v, metadata)
+	}
+	if s.Interlaced != nil {
+		v := *s.Interlaced
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Interlaced", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Resolution != nil {
+		v := *s.Resolution
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Resolution", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TimeSpan != nil {
+		v := s.TimeSpan
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TimeSpan", v, metadata)
 	}
 	return nil
 }
@@ -3377,6 +4316,149 @@ func (s JobOutput) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AlbumArt != nil {
+		v := s.AlbumArt
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AlbumArt", v, metadata)
+	}
+	if s.AppliedColorSpaceConversion != nil {
+		v := *s.AppliedColorSpaceConversion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AppliedColorSpaceConversion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Captions != nil {
+		v := s.Captions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Captions", v, metadata)
+	}
+	if len(s.Composition) > 0 {
+		v := s.Composition
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Composition", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), metadata)
+	}
+	if s.DurationMillis != nil {
+		v := *s.DurationMillis
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DurationMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.FileSize != nil {
+		v := *s.FileSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FileSize", protocol.Int64Value(v), metadata)
+	}
+	if s.FrameRate != nil {
+		v := *s.FrameRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FrameRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Height != nil {
+		v := *s.Height
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Height", protocol.Int64Value(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PresetId != nil {
+		v := *s.PresetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PresetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Rotate != nil {
+		v := *s.Rotate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Rotate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SegmentDuration != nil {
+		v := *s.SegmentDuration
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SegmentDuration", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StatusDetail != nil {
+		v := *s.StatusDetail
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StatusDetail", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThumbnailEncryption != nil {
+		v := s.ThumbnailEncryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ThumbnailEncryption", v, metadata)
+	}
+	if s.ThumbnailPattern != nil {
+		v := *s.ThumbnailPattern
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThumbnailPattern", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Watermarks) > 0 {
+		v := s.Watermarks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Watermarks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Width != nil {
+		v := *s.Width
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Width", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Watermarks can be in .png or .jpg format. If you want to display a watermark
 // that is not rectangular, use the .png format, which supports transparency.
 type JobWatermark struct {
@@ -3429,6 +4511,29 @@ func (s *JobWatermark) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobWatermark) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Encryption", v, metadata)
+	}
+	if s.InputKey != nil {
+		v := *s.InputKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputKey", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PresetWatermarkId != nil {
+		v := *s.PresetWatermarkId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PresetWatermarkId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The ListJobsByPipelineRequest structure.
 type ListJobsByPipelineInput struct {
 	_ struct{} `type:"structure"`
@@ -3471,6 +4576,30 @@ func (s *ListJobsByPipelineInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListJobsByPipelineInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PipelineId != nil {
+		v := *s.PipelineId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Ascending != nil {
+		v := *s.Ascending
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PageToken != nil {
+		v := *s.PageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The ListJobsByPipelineResponse structure.
 type ListJobsByPipelineOutput struct {
 	_ struct{} `type:"structure"`
@@ -3499,6 +4628,29 @@ func (s ListJobsByPipelineOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListJobsByPipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListJobsByPipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Jobs) > 0 {
+		v := s.Jobs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Jobs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextPageToken != nil {
+		v := *s.NextPageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ListJobsByStatusRequest structure.
@@ -3545,6 +4697,30 @@ func (s *ListJobsByStatusInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListJobsByStatusInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Ascending != nil {
+		v := *s.Ascending
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PageToken != nil {
+		v := *s.PageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The ListJobsByStatusResponse structure.
 type ListJobsByStatusOutput struct {
 	_ struct{} `type:"structure"`
@@ -3575,6 +4751,29 @@ func (s ListJobsByStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListJobsByStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Jobs) > 0 {
+		v := s.Jobs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Jobs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextPageToken != nil {
+		v := *s.NextPageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The ListPipelineRequest structure.
 type ListPipelinesInput struct {
 	_ struct{} `type:"structure"`
@@ -3597,6 +4796,24 @@ func (s ListPipelinesInput) String() string {
 // GoString returns the string representation
 func (s ListPipelinesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPipelinesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Ascending != nil {
+		v := *s.Ascending
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PageToken != nil {
+		v := *s.PageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // A list of the pipelines associated with the current AWS account.
@@ -3629,6 +4846,29 @@ func (s ListPipelinesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPipelinesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextPageToken != nil {
+		v := *s.NextPageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Pipelines) > 0 {
+		v := s.Pipelines
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Pipelines", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // The ListPresetsRequest structure.
 type ListPresetsInput struct {
 	_ struct{} `type:"structure"`
@@ -3651,6 +4891,24 @@ func (s ListPresetsInput) String() string {
 // GoString returns the string representation
 func (s ListPresetsInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPresetsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Ascending != nil {
+		v := *s.Ascending
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PageToken != nil {
+		v := *s.PageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The ListPresetsResponse structure.
@@ -3681,6 +4939,29 @@ func (s ListPresetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListPresetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPresetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextPageToken != nil {
+		v := *s.NextPageToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextPageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Presets) > 0 {
+		v := s.Presets
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Presets", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) topic or topics to notify
@@ -3716,6 +4997,35 @@ func (s Notifications) String() string {
 // GoString returns the string representation
 func (s Notifications) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Notifications) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Completed != nil {
+		v := *s.Completed
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Completed", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Error != nil {
+		v := *s.Error
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Error", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Progressing != nil {
+		v := *s.Progressing
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Progressing", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Warning != nil {
+		v := *s.Warning
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Warning", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The Permission structure.
@@ -3778,6 +5088,35 @@ func (s *Permission) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Permission) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Access) > 0 {
+		v := s.Access
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Access", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Grantee != nil {
+		v := *s.Grantee
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Grantee", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GranteeType != nil {
+		v := *s.GranteeType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GranteeType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3951,6 +5290,77 @@ func (s Pipeline) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Pipeline) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AwsKmsKeyArn != nil {
+		v := *s.AwsKmsKeyArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AwsKmsKeyArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentConfig != nil {
+		v := s.ContentConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ContentConfig", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InputBucket != nil {
+		v := *s.InputBucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Notifications != nil {
+		v := s.Notifications
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Notifications", v, metadata)
+	}
+	if s.OutputBucket != nil {
+		v := *s.OutputBucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Role != nil {
+		v := *s.Role
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThumbnailConfig != nil {
+		v := s.ThumbnailConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ThumbnailConfig", v, metadata)
+	}
+	return nil
+}
+
 // The PipelineOutputConfig structure.
 type PipelineOutputConfig struct {
 	_ struct{} `type:"structure"`
@@ -4020,6 +5430,35 @@ func (s *PipelineOutputConfig) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PipelineOutputConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Bucket != nil {
+		v := *s.Bucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Bucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Permissions) > 0 {
+		v := s.Permissions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Permissions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.StorageClass != nil {
+		v := *s.StorageClass
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StorageClass", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4095,6 +5534,47 @@ func (s *PlayReadyDrm) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PlayReadyDrm) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Format != nil {
+		v := *s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InitializationVector != nil {
+		v := *s.InitializationVector
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InitializationVector", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyId != nil {
+		v := *s.KeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyMd5 != nil {
+		v := *s.KeyMd5
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyMd5", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LicenseAcquisitionUrl != nil {
+		v := *s.LicenseAcquisitionUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LicenseAcquisitionUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4186,6 +5666,59 @@ func (s Playlist) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Playlist) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Format != nil {
+		v := *s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsContentProtection != nil {
+		v := s.HlsContentProtection
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HlsContentProtection", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.OutputKeys) > 0 {
+		v := s.OutputKeys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "OutputKeys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.PlayReadyDrm != nil {
+		v := s.PlayReadyDrm
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PlayReadyDrm", v, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StatusDetail != nil {
+		v := *s.StatusDetail
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StatusDetail", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Presets are templates that contain most of the settings for transcoding media
 // files from one format to another. Elastic Transcoder includes some default
 // presets for common formats, for example, several iPod and iPhone versions.
@@ -4237,6 +5770,65 @@ func (s Preset) String() string {
 // GoString returns the string representation
 func (s Preset) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Preset) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Audio != nil {
+		v := s.Audio
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Audio", v, metadata)
+	}
+	if s.Container != nil {
+		v := *s.Container
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Container", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Thumbnails != nil {
+		v := s.Thumbnails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Thumbnails", v, metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Video != nil {
+		v := s.Video
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Video", v, metadata)
+	}
+	return nil
 }
 
 // Settings for the size, location, and opacity of graphics that you want Elastic
@@ -4427,6 +6019,71 @@ func (s *PresetWatermark) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PresetWatermark) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HorizontalAlign != nil {
+		v := *s.HorizontalAlign
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HorizontalAlign", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HorizontalOffset != nil {
+		v := *s.HorizontalOffset
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HorizontalOffset", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxHeight != nil {
+		v := *s.MaxHeight
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxHeight", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxWidth != nil {
+		v := *s.MaxWidth
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxWidth", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Opacity != nil {
+		v := *s.Opacity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Opacity", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SizingPolicy != nil {
+		v := *s.SizingPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SizingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Target != nil {
+		v := *s.Target
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Target", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.VerticalAlign != nil {
+		v := *s.VerticalAlign
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VerticalAlign", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.VerticalOffset != nil {
+		v := *s.VerticalOffset
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VerticalOffset", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The ReadJobRequest structure.
 type ReadJobInput struct {
 	_ struct{} `type:"structure"`
@@ -4461,6 +6118,18 @@ func (s *ReadJobInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadJobInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The ReadJobResponse structure.
 type ReadJobOutput struct {
 	_ struct{} `type:"structure"`
@@ -4484,6 +6153,17 @@ func (s ReadJobOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ReadJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Job != nil {
+		v := s.Job
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Job", v, metadata)
+	}
+	return nil
 }
 
 // The ReadPipelineRequest structure.
@@ -4516,6 +6196,18 @@ func (s *ReadPipelineInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadPipelineInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4553,6 +6245,29 @@ func (s ReadPipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadPipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pipeline != nil {
+		v := s.Pipeline
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
+	}
+	if len(s.Warnings) > 0 {
+		v := s.Warnings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Warnings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // The ReadPresetRequest structure.
 type ReadPresetInput struct {
 	_ struct{} `type:"structure"`
@@ -4587,6 +6302,18 @@ func (s *ReadPresetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadPresetInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The ReadPresetResponse structure.
 type ReadPresetOutput struct {
 	_ struct{} `type:"structure"`
@@ -4610,6 +6337,17 @@ func (s ReadPresetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ReadPresetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReadPresetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Preset != nil {
+		v := s.Preset
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Preset", v, metadata)
+	}
+	return nil
 }
 
 // The TestRoleRequest structure.
@@ -4677,6 +6415,42 @@ func (s *TestRoleInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TestRoleInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InputBucket != nil {
+		v := *s.InputBucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.OutputBucket != nil {
+		v := *s.OutputBucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OutputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Role != nil {
+		v := *s.Role
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Topics) > 0 {
+		v := s.Topics
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Topics", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // The TestRoleResponse structure.
 type TestRoleOutput struct {
 	_ struct{} `deprecated:"true" type:"structure"`
@@ -4705,6 +6479,29 @@ func (s TestRoleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TestRoleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TestRoleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Messages) > 0 {
+		v := s.Messages
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Messages", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Success != nil {
+		v := *s.Success
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Success", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Thumbnails for videos.
@@ -4802,6 +6599,59 @@ func (s Thumbnails) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Thumbnails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AspectRatio != nil {
+		v := *s.AspectRatio
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AspectRatio", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Format != nil {
+		v := *s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Interval != nil {
+		v := *s.Interval
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Interval", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxHeight != nil {
+		v := *s.MaxHeight
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxHeight", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxWidth != nil {
+		v := *s.MaxWidth
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxWidth", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PaddingPolicy != nil {
+		v := *s.PaddingPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PaddingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Resolution != nil {
+		v := *s.Resolution
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Resolution", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SizingPolicy != nil {
+		v := *s.SizingPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SizingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Settings that determine when a clip begins and how long it lasts.
 type TimeSpan struct {
 	_ struct{} `type:"structure"`
@@ -4832,6 +6682,23 @@ func (s TimeSpan) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TimeSpan) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Duration != nil {
+		v := *s.Duration
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Details about the timing of a job.
 type Timing struct {
 	_ struct{} `type:"structure"`
@@ -4854,6 +6721,29 @@ func (s Timing) String() string {
 // GoString returns the string representation
 func (s Timing) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Timing) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FinishTimeMillis != nil {
+		v := *s.FinishTimeMillis
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FinishTimeMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.StartTimeMillis != nil {
+		v := *s.StartTimeMillis
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTimeMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.SubmitTimeMillis != nil {
+		v := *s.SubmitTimeMillis
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SubmitTimeMillis", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // The UpdatePipelineRequest structure.
@@ -5078,6 +6968,60 @@ func (s *UpdatePipelineInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.AwsKmsKeyArn != nil {
+		v := *s.AwsKmsKeyArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AwsKmsKeyArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentConfig != nil {
+		v := s.ContentConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ContentConfig", v, metadata)
+	}
+	if s.InputBucket != nil {
+		v := *s.InputBucket
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InputBucket", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Notifications != nil {
+		v := s.Notifications
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Notifications", v, metadata)
+	}
+	if s.Role != nil {
+		v := *s.Role
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Role", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThumbnailConfig != nil {
+		v := s.ThumbnailConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ThumbnailConfig", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The UpdatePipelineNotificationsRequest structure.
 type UpdatePipelineNotificationsInput struct {
 	_ struct{} `type:"structure"`
@@ -5143,6 +7087,24 @@ func (s *UpdatePipelineNotificationsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineNotificationsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Notifications != nil {
+		v := s.Notifications
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Notifications", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The UpdatePipelineNotificationsResponse structure.
 type UpdatePipelineNotificationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5167,6 +7129,17 @@ func (s UpdatePipelineNotificationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePipelineNotificationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineNotificationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pipeline != nil {
+		v := s.Pipeline
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
+	}
+	return nil
 }
 
 // When you update a pipeline, Elastic Transcoder returns the values that you
@@ -5201,6 +7174,29 @@ func (s UpdatePipelineOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pipeline != nil {
+		v := s.Pipeline
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
+	}
+	if len(s.Warnings) > 0 {
+		v := s.Warnings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Warnings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // The UpdatePipelineStatusRequest structure.
@@ -5250,6 +7246,24 @@ func (s *UpdatePipelineStatusInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineStatusInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // When you update status for a pipeline, Elastic Transcoder returns the values
 // that you specified in the request.
 type UpdatePipelineStatusOutput struct {
@@ -5274,6 +7288,17 @@ func (s UpdatePipelineStatusOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePipelineStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePipelineStatusOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Pipeline != nil {
+		v := s.Pipeline
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Pipeline", v, metadata)
+	}
+	return nil
 }
 
 // The VideoParameters structure.
@@ -5720,6 +7745,113 @@ func (s *VideoParameters) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VideoParameters) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AspectRatio != nil {
+		v := *s.AspectRatio
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AspectRatio", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BitRate != nil {
+		v := *s.BitRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BitRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Codec != nil {
+		v := *s.Codec
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Codec", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.CodecOptions) > 0 {
+		v := s.CodecOptions
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "CodecOptions", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.DisplayAspectRatio != nil {
+		v := *s.DisplayAspectRatio
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DisplayAspectRatio", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FixedGOP != nil {
+		v := *s.FixedGOP
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FixedGOP", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FrameRate != nil {
+		v := *s.FrameRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FrameRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KeyframesMaxDist != nil {
+		v := *s.KeyframesMaxDist
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyframesMaxDist", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxFrameRate != nil {
+		v := *s.MaxFrameRate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxFrameRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxHeight != nil {
+		v := *s.MaxHeight
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxHeight", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxWidth != nil {
+		v := *s.MaxWidth
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxWidth", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PaddingPolicy != nil {
+		v := *s.PaddingPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PaddingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Resolution != nil {
+		v := *s.Resolution
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Resolution", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SizingPolicy != nil {
+		v := *s.SizingPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SizingPolicy", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Watermarks) > 0 {
+		v := s.Watermarks
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Watermarks", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Elastic Transcoder returns a warning if the resources used by your pipeline
 // are not in the same region as the pipeline.
 //
@@ -5747,4 +7879,21 @@ func (s Warning) String() string {
 // GoString returns the string representation
 func (s Warning) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Warning) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Code != nil {
+		v := *s.Code
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Code", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }

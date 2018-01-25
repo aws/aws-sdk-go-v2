@@ -229,3 +229,12 @@ const (
 	GetEntitlementFilterNameCustomerIdentifier GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"
 	GetEntitlementFilterNameDimension          GetEntitlementFilterName = "DIMENSION"
 )
+
+func (enum GetEntitlementFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GetEntitlementFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

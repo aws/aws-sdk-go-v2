@@ -5467,6 +5467,15 @@ const (
 	ActionTypeEnumForward ActionTypeEnum = "forward"
 )
 
+func (enum ActionTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IpAddressType string
 
 // Enum values for IpAddressType
@@ -5475,6 +5484,15 @@ const (
 	IpAddressTypeDualstack IpAddressType = "dualstack"
 )
 
+func (enum IpAddressType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IpAddressType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LoadBalancerSchemeEnum string
 
 // Enum values for LoadBalancerSchemeEnum
@@ -5482,6 +5500,15 @@ const (
 	LoadBalancerSchemeEnumInternetFacing LoadBalancerSchemeEnum = "internet-facing"
 	LoadBalancerSchemeEnumInternal       LoadBalancerSchemeEnum = "internal"
 )
+
+func (enum LoadBalancerSchemeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerSchemeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LoadBalancerStateEnum string
 
@@ -5493,6 +5520,15 @@ const (
 	LoadBalancerStateEnumFailed         LoadBalancerStateEnum = "failed"
 )
 
+func (enum LoadBalancerStateEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerStateEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LoadBalancerTypeEnum string
 
 // Enum values for LoadBalancerTypeEnum
@@ -5500,6 +5536,15 @@ const (
 	LoadBalancerTypeEnumApplication LoadBalancerTypeEnum = "application"
 	LoadBalancerTypeEnumNetwork     LoadBalancerTypeEnum = "network"
 )
+
+func (enum LoadBalancerTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProtocolEnum string
 
@@ -5509,6 +5554,15 @@ const (
 	ProtocolEnumHttps ProtocolEnum = "HTTPS"
 	ProtocolEnumTcp   ProtocolEnum = "TCP"
 )
+
+func (enum ProtocolEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProtocolEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TargetHealthReasonEnum string
 
@@ -5527,6 +5581,15 @@ const (
 	TargetHealthReasonEnumElbInternalError               TargetHealthReasonEnum = "Elb.InternalError"
 )
 
+func (enum TargetHealthReasonEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetHealthReasonEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TargetHealthStateEnum string
 
 // Enum values for TargetHealthStateEnum
@@ -5539,6 +5602,15 @@ const (
 	TargetHealthStateEnumUnavailable TargetHealthStateEnum = "unavailable"
 )
 
+func (enum TargetHealthStateEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetHealthStateEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TargetTypeEnum string
 
 // Enum values for TargetTypeEnum
@@ -5546,3 +5618,12 @@ const (
 	TargetTypeEnumInstance TargetTypeEnum = "instance"
 	TargetTypeEnumIp       TargetTypeEnum = "ip"
 )
+
+func (enum TargetTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

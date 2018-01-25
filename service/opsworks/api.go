@@ -11809,6 +11809,15 @@ const (
 	AppAttributesKeysAwsFlowRubySettings AppAttributesKeys = "AwsFlowRubySettings"
 )
 
+func (enum AppAttributesKeys) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppAttributesKeys) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AppType string
 
 // Enum values for AppType
@@ -11822,6 +11831,15 @@ const (
 	AppTypeOther       AppType = "other"
 )
 
+func (enum AppType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AppType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Architecture string
 
 // Enum values for Architecture
@@ -11830,6 +11848,15 @@ const (
 	ArchitectureI386  Architecture = "i386"
 )
 
+func (enum Architecture) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Architecture) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AutoScalingType string
 
 // Enum values for AutoScalingType
@@ -11837,6 +11864,15 @@ const (
 	AutoScalingTypeLoad  AutoScalingType = "load"
 	AutoScalingTypeTimer AutoScalingType = "timer"
 )
+
+func (enum AutoScalingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutoScalingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Specifies the encoding of the log file so that the file can be read correctly.
 // The default is utf_8. Encodings supported by Python codecs.decode() can be
@@ -11939,6 +11975,15 @@ const (
 	CloudWatchLogsEncodingUtf8Sig       CloudWatchLogsEncoding = "utf_8_sig"
 )
 
+func (enum CloudWatchLogsEncoding) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CloudWatchLogsEncoding) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Specifies where to start to read data (start_of_file or end_of_file). The
 // default is start_of_file. It's only used if there is no state persisted for
 // that log stream.
@@ -11950,6 +11995,15 @@ const (
 	CloudWatchLogsInitialPositionEndOfFile   CloudWatchLogsInitialPosition = "end_of_file"
 )
 
+func (enum CloudWatchLogsInitialPosition) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CloudWatchLogsInitialPosition) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The preferred time zone for logs streamed to CloudWatch Logs. Valid values
 // are LOCAL and UTC, for Coordinated Universal Time.
 type CloudWatchLogsTimeZone string
@@ -11959,6 +12013,15 @@ const (
 	CloudWatchLogsTimeZoneLocal CloudWatchLogsTimeZone = "LOCAL"
 	CloudWatchLogsTimeZoneUtc   CloudWatchLogsTimeZone = "UTC"
 )
+
+func (enum CloudWatchLogsTimeZone) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CloudWatchLogsTimeZone) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DeploymentCommandName string
 
@@ -11977,6 +12040,15 @@ const (
 	DeploymentCommandNameRestart               DeploymentCommandName = "restart"
 	DeploymentCommandNameUndeploy              DeploymentCommandName = "undeploy"
 )
+
+func (enum DeploymentCommandName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentCommandName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LayerAttributesKeys string
 
@@ -12009,6 +12081,15 @@ const (
 	LayerAttributesKeysJavaAppServerVersion        LayerAttributesKeys = "JavaAppServerVersion"
 )
 
+func (enum LayerAttributesKeys) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LayerAttributesKeys) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LayerType string
 
 // Enum values for LayerType
@@ -12027,6 +12108,15 @@ const (
 	LayerTypeCustom           LayerType = "custom"
 )
 
+func (enum LayerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LayerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RootDeviceType string
 
 // Enum values for RootDeviceType
@@ -12034,6 +12124,15 @@ const (
 	RootDeviceTypeEbs           RootDeviceType = "ebs"
 	RootDeviceTypeInstanceStore RootDeviceType = "instance-store"
 )
+
+func (enum RootDeviceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RootDeviceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -12045,12 +12144,30 @@ const (
 	SourceTypeS3      SourceType = "s3"
 )
 
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackAttributesKeys string
 
 // Enum values for StackAttributesKeys
 const (
 	StackAttributesKeysColor StackAttributesKeys = "Color"
 )
+
+func (enum StackAttributesKeys) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackAttributesKeys) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VirtualizationType string
 
@@ -12060,6 +12177,15 @@ const (
 	VirtualizationTypeHvm         VirtualizationType = "hvm"
 )
 
+func (enum VirtualizationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VirtualizationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VolumeType string
 
 // Enum values for VolumeType
@@ -12068,3 +12194,12 @@ const (
 	VolumeTypeIo1      VolumeType = "io1"
 	VolumeTypeStandard VolumeType = "standard"
 )
+
+func (enum VolumeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VolumeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

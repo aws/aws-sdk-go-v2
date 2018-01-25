@@ -4201,6 +4201,15 @@ const (
 	EntityStateDeleted  EntityState = "DELETED"
 )
 
+func (enum EntityState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EntityState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MemberType string
 
 // Enum values for MemberType
@@ -4208,6 +4217,15 @@ const (
 	MemberTypeGroup MemberType = "GROUP"
 	MemberTypeUser  MemberType = "USER"
 )
+
+func (enum MemberType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MemberType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ResourceType string
 
@@ -4217,6 +4235,15 @@ const (
 	ResourceTypeEquipment ResourceType = "EQUIPMENT"
 )
 
+func (enum ResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type UserRole string
 
 // Enum values for UserRole
@@ -4225,3 +4252,12 @@ const (
 	UserRoleResource   UserRole = "RESOURCE"
 	UserRoleSystemUser UserRole = "SYSTEM_USER"
 )
+
+func (enum UserRole) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UserRole) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -5,6 +5,7 @@ package mediapackage
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCreateChannel = "CreateChannel"
@@ -686,6 +687,35 @@ func (s Channel) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Channel) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsIngest != nil {
+		v := s.HlsIngest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsIngest", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateChannelRequest
 type CreateChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -720,6 +750,25 @@ func (s *CreateChannelInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateChannelResponse
 type CreateChannelOutput struct {
 	_ struct{} `type:"structure"`
@@ -749,6 +798,35 @@ func (s CreateChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsIngest != nil {
+		v := s.HlsIngest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsIngest", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateOriginEndpointRequest
@@ -824,6 +902,79 @@ func (s *CreateOriginEndpointInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateOriginEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ChannelId != nil {
+		v := *s.ChannelId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DashPackage != nil {
+		v := s.DashPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dashPackage", v, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsPackage != nil {
+		v := s.HlsPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsPackage", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ManifestName != nil {
+		v := *s.ManifestName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MssPackage != nil {
+		v := s.MssPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
+	}
+	if s.StartoverWindowSeconds != nil {
+		v := *s.StartoverWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startoverWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.TimeDelaySeconds != nil {
+		v := *s.TimeDelaySeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeDelaySeconds", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Whitelist) > 0 {
+		v := s.Whitelist
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "whitelist", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateOriginEndpointResponse
 type CreateOriginEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -873,6 +1024,89 @@ func (s CreateOriginEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ChannelId != nil {
+		v := *s.ChannelId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DashPackage != nil {
+		v := s.DashPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dashPackage", v, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsPackage != nil {
+		v := s.HlsPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsPackage", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ManifestName != nil {
+		v := *s.ManifestName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MssPackage != nil {
+		v := s.MssPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
+	}
+	if s.StartoverWindowSeconds != nil {
+		v := *s.StartoverWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startoverWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.TimeDelaySeconds != nil {
+		v := *s.TimeDelaySeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeDelaySeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Whitelist) > 0 {
+		v := s.Whitelist
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "whitelist", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DashEncryption
 type DashEncryption struct {
@@ -913,6 +1147,23 @@ func (s *DashEncryption) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DashEncryption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.KeyRotationIntervalSeconds != nil {
+		v := *s.KeyRotationIntervalSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "keyRotationIntervalSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.SpekeKeyProvider != nil {
+		v := s.SpekeKeyProvider
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spekeKeyProvider", v, metadata)
 	}
 	return nil
 }
@@ -976,6 +1227,59 @@ func (s *DashPackage) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DashPackage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
+	}
+	if s.ManifestWindowSeconds != nil {
+		v := *s.ManifestWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.MinBufferTimeSeconds != nil {
+		v := *s.MinBufferTimeSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minBufferTimeSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.MinUpdatePeriodSeconds != nil {
+		v := *s.MinUpdatePeriodSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minUpdatePeriodSeconds", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Profile) > 0 {
+		v := s.Profile
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "profile", protocol.QuotedValue{v}, metadata)
+	}
+	if s.SegmentDurationSeconds != nil {
+		v := *s.SegmentDurationSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "segmentDurationSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.StreamSelection != nil {
+		v := s.StreamSelection
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "streamSelection", v, metadata)
+	}
+	if s.SuggestedPresentationDelaySeconds != nil {
+		v := *s.SuggestedPresentationDelaySeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "suggestedPresentationDelaySeconds", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DeleteChannelRequest
 type DeleteChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -1008,6 +1312,19 @@ func (s *DeleteChannelInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteChannelInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DeleteChannelResponse
 type DeleteChannelOutput struct {
 	_ struct{} `type:"structure"`
@@ -1028,6 +1345,11 @@ func (s DeleteChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DeleteOriginEndpointRequest
@@ -1062,6 +1384,19 @@ func (s *DeleteOriginEndpointInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteOriginEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DeleteOriginEndpointResponse
 type DeleteOriginEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -1082,6 +1417,11 @@ func (s DeleteOriginEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteOriginEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeChannelRequest
@@ -1112,6 +1452,19 @@ func (s *DescribeChannelInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeChannelInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1147,6 +1500,35 @@ func (s DescribeChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsIngest != nil {
+		v := s.HlsIngest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsIngest", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DescribeOriginEndpointRequest
 type DescribeOriginEndpointInput struct {
 	_ struct{} `type:"structure"`
@@ -1175,6 +1557,19 @@ func (s *DescribeOriginEndpointInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeOriginEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1226,6 +1621,89 @@ func (s DescribeOriginEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeOriginEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ChannelId != nil {
+		v := *s.ChannelId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DashPackage != nil {
+		v := s.DashPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dashPackage", v, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsPackage != nil {
+		v := s.HlsPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsPackage", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ManifestName != nil {
+		v := *s.ManifestName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MssPackage != nil {
+		v := s.MssPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
+	}
+	if s.StartoverWindowSeconds != nil {
+		v := *s.StartoverWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startoverWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.TimeDelaySeconds != nil {
+		v := *s.TimeDelaySeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeDelaySeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Whitelist) > 0 {
+		v := s.Whitelist
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "whitelist", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // An HTTP Live Streaming (HLS) encryption configuration.
@@ -1282,6 +1760,41 @@ func (s *HlsEncryption) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HlsEncryption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConstantInitializationVector != nil {
+		v := *s.ConstantInitializationVector
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "constantInitializationVector", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.EncryptionMethod) > 0 {
+		v := s.EncryptionMethod
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "encryptionMethod", protocol.QuotedValue{v}, metadata)
+	}
+	if s.KeyRotationIntervalSeconds != nil {
+		v := *s.KeyRotationIntervalSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "keyRotationIntervalSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.RepeatExtXKey != nil {
+		v := *s.RepeatExtXKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "repeatExtXKey", protocol.BoolValue(v), metadata)
+	}
+	if s.SpekeKeyProvider != nil {
+		v := s.SpekeKeyProvider
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spekeKeyProvider", v, metadata)
+	}
+	return nil
+}
+
 // An HTTP Live Streaming (HLS) ingest resource configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsIngest
 type HlsIngest struct {
@@ -1299,6 +1812,23 @@ func (s HlsIngest) String() string {
 // GoString returns the string representation
 func (s HlsIngest) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HlsIngest) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.IngestEndpoints) > 0 {
+		v := s.IngestEndpoints
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ingestEndpoints", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // An HTTP Live Streaming (HLS) packaging configuration.
@@ -1373,6 +1903,65 @@ func (s *HlsPackage) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HlsPackage) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AdMarkers) > 0 {
+		v := s.AdMarkers
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adMarkers", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
+	}
+	if s.IncludeIframeOnlyStream != nil {
+		v := *s.IncludeIframeOnlyStream
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "includeIframeOnlyStream", protocol.BoolValue(v), metadata)
+	}
+	if len(s.PlaylistType) > 0 {
+		v := s.PlaylistType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "playlistType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.PlaylistWindowSeconds != nil {
+		v := *s.PlaylistWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "playlistWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.ProgramDateTimeIntervalSeconds != nil {
+		v := *s.ProgramDateTimeIntervalSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "programDateTimeIntervalSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.SegmentDurationSeconds != nil {
+		v := *s.SegmentDurationSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "segmentDurationSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.StreamSelection != nil {
+		v := s.StreamSelection
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "streamSelection", v, metadata)
+	}
+	if s.UseAudioRenditionGroup != nil {
+		v := *s.UseAudioRenditionGroup
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "useAudioRenditionGroup", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
 // An endpoint for ingesting source content for a Channel.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/IngestEndpoint
 type IngestEndpoint struct {
@@ -1396,6 +1985,29 @@ func (s IngestEndpoint) String() string {
 // GoString returns the string representation
 func (s IngestEndpoint) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s IngestEndpoint) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Password != nil {
+		v := *s.Password
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "password", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "username", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListChannelsRequest
@@ -1430,6 +2042,25 @@ func (s *ListChannelsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListChannelsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListChannelsResponse
 type ListChannelsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1454,6 +2085,29 @@ func (s ListChannelsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListChannelsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListChannelsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Channels) > 0 {
+		v := s.Channels
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "channels", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListOriginEndpointsRequest
@@ -1490,6 +2144,31 @@ func (s *ListOriginEndpointsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListOriginEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ChannelId != nil {
+		v := *s.ChannelId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "channelId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/ListOriginEndpointsResponse
 type ListOriginEndpointsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1514,6 +2193,29 @@ func (s ListOriginEndpointsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListOriginEndpointsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListOriginEndpointsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.OriginEndpoints) > 0 {
+		v := s.OriginEndpoints
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "originEndpoints", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // A Microsoft Smooth Streaming (MSS) encryption configuration.
@@ -1557,6 +2259,17 @@ func (s *MssEncryption) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MssEncryption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.SpekeKeyProvider != nil {
+		v := s.SpekeKeyProvider
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spekeKeyProvider", v, metadata)
+	}
+	return nil
+}
+
 // A Microsoft Smooth Streaming (MSS) packaging configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/MssPackage
 type MssPackage struct {
@@ -1596,6 +2309,35 @@ func (s *MssPackage) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MssPackage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
+	}
+	if s.ManifestWindowSeconds != nil {
+		v := *s.ManifestWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.SegmentDurationSeconds != nil {
+		v := *s.SegmentDurationSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "segmentDurationSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.StreamSelection != nil {
+		v := s.StreamSelection
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "streamSelection", v, metadata)
 	}
 	return nil
 }
@@ -1654,6 +2396,89 @@ func (s OriginEndpoint) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginEndpoint) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ChannelId != nil {
+		v := *s.ChannelId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DashPackage != nil {
+		v := s.DashPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dashPackage", v, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsPackage != nil {
+		v := s.HlsPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsPackage", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ManifestName != nil {
+		v := *s.ManifestName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MssPackage != nil {
+		v := s.MssPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
+	}
+	if s.StartoverWindowSeconds != nil {
+		v := *s.StartoverWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startoverWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.TimeDelaySeconds != nil {
+		v := *s.TimeDelaySeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeDelaySeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Whitelist) > 0 {
+		v := s.Whitelist
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "whitelist", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/RotateChannelCredentialsRequest
 type RotateChannelCredentialsInput struct {
 	_ struct{} `type:"structure"`
@@ -1682,6 +2507,19 @@ func (s *RotateChannelCredentialsInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RotateChannelCredentialsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1715,6 +2553,35 @@ func (s RotateChannelCredentialsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RotateChannelCredentialsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RotateChannelCredentialsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsIngest != nil {
+		v := s.HlsIngest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsIngest", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // A configuration for accessing an external Secure Packager and Encoder Key
@@ -1781,6 +2648,41 @@ func (s *SpekeKeyProvider) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ResourceId != nil {
+		v := *s.ResourceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SystemIds) > 0 {
+		v := s.SystemIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "systemIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A StreamSelection configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/StreamSelection
 type StreamSelection struct {
@@ -1804,6 +2706,29 @@ func (s StreamSelection) String() string {
 // GoString returns the string representation
 func (s StreamSelection) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamSelection) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MaxVideoBitsPerSecond != nil {
+		v := *s.MaxVideoBitsPerSecond
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxVideoBitsPerSecond", protocol.Int64Value(v), metadata)
+	}
+	if s.MinVideoBitsPerSecond != nil {
+		v := *s.MinVideoBitsPerSecond
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minVideoBitsPerSecond", protocol.Int64Value(v), metadata)
+	}
+	if len(s.StreamOrder) > 0 {
+		v := s.StreamOrder
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "streamOrder", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateChannelRequest
@@ -1840,6 +2765,25 @@ func (s *UpdateChannelInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateChannelResponse
 type UpdateChannelOutput struct {
 	_ struct{} `type:"structure"`
@@ -1869,6 +2813,35 @@ func (s UpdateChannelOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateChannelOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsIngest != nil {
+		v := s.HlsIngest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsIngest", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateOriginEndpointRequest
@@ -1937,6 +2910,73 @@ func (s *UpdateOriginEndpointInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateOriginEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DashPackage != nil {
+		v := s.DashPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dashPackage", v, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsPackage != nil {
+		v := s.HlsPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsPackage", v, metadata)
+	}
+	if s.ManifestName != nil {
+		v := *s.ManifestName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MssPackage != nil {
+		v := s.MssPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
+	}
+	if s.StartoverWindowSeconds != nil {
+		v := *s.StartoverWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startoverWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.TimeDelaySeconds != nil {
+		v := *s.TimeDelaySeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeDelaySeconds", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Whitelist) > 0 {
+		v := s.Whitelist
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "whitelist", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/UpdateOriginEndpointResponse
 type UpdateOriginEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -1986,6 +3026,89 @@ func (s UpdateOriginEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ChannelId != nil {
+		v := *s.ChannelId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DashPackage != nil {
+		v := s.DashPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dashPackage", v, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HlsPackage != nil {
+		v := s.HlsPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "hlsPackage", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ManifestName != nil {
+		v := *s.ManifestName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MssPackage != nil {
+		v := s.MssPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "mssPackage", v, metadata)
+	}
+	if s.StartoverWindowSeconds != nil {
+		v := *s.StartoverWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startoverWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.TimeDelaySeconds != nil {
+		v := *s.TimeDelaySeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeDelaySeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Whitelist) > 0 {
+		v := s.Whitelist
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "whitelist", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 type AdMarkers string
 
 // Enum values for AdMarkers
@@ -1995,6 +3118,15 @@ const (
 	AdMarkersPassthrough    AdMarkers = "PASSTHROUGH"
 )
 
+func (enum AdMarkers) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AdMarkers) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EncryptionMethod string
 
 // Enum values for EncryptionMethod
@@ -2002,6 +3134,15 @@ const (
 	EncryptionMethodAes128    EncryptionMethod = "AES_128"
 	EncryptionMethodSampleAes EncryptionMethod = "SAMPLE_AES"
 )
+
+func (enum EncryptionMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncryptionMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PlaylistType string
 
@@ -2012,6 +3153,15 @@ const (
 	PlaylistTypeVod   PlaylistType = "VOD"
 )
 
+func (enum PlaylistType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlaylistType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Profile string
 
 // Enum values for Profile
@@ -2019,6 +3169,15 @@ const (
 	ProfileNone    Profile = "NONE"
 	ProfileHbbtv15 Profile = "HBBTV_1_5"
 )
+
+func (enum Profile) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Profile) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type StreamOrder string
 
@@ -2028,3 +3187,12 @@ const (
 	StreamOrderVideoBitrateAscending  StreamOrder = "VIDEO_BITRATE_ASCENDING"
 	StreamOrderVideoBitrateDescending StreamOrder = "VIDEO_BITRATE_DESCENDING"
 )
+
+func (enum StreamOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StreamOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

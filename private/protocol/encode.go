@@ -31,8 +31,8 @@ type StreamMarshaler interface {
 	MarshalStream() (io.ReadSeeker, error)
 }
 
-// ListMarshaler is a marshaler for list encoders.
-type ListMarshaler interface {
+// MarshalListValues is a marshaler for list encoders.
+type MarshalListValues interface {
 	MarshalValues(enc ListEncoder) error
 }
 

@@ -1521,12 +1521,30 @@ const (
 	EntityStatusCodeUnknown    EntityStatusCode = "UNKNOWN"
 )
 
+func (enum EntityStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EntityStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EventAggregateField string
 
 // Enum values for EventAggregateField
 const (
 	EventAggregateFieldEventTypeCategory EventAggregateField = "eventTypeCategory"
 )
+
+func (enum EventAggregateField) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventAggregateField) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EventStatusCode string
 
@@ -1537,6 +1555,15 @@ const (
 	EventStatusCodeUpcoming EventStatusCode = "upcoming"
 )
 
+func (enum EventStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EventTypeCategory string
 
 // Enum values for EventTypeCategory
@@ -1545,3 +1572,12 @@ const (
 	EventTypeCategoryAccountNotification EventTypeCategory = "accountNotification"
 	EventTypeCategoryScheduledChange     EventTypeCategory = "scheduledChange"
 )
+
+func (enum EventTypeCategory) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventTypeCategory) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -19051,6 +19051,15 @@ const (
 	ApplyMethodPendingReboot ApplyMethod = "pending-reboot"
 )
 
+func (enum ApplyMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApplyMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SourceType string
 
 // Enum values for SourceType
@@ -19062,3 +19071,12 @@ const (
 	SourceTypeDbCluster         SourceType = "db-cluster"
 	SourceTypeDbClusterSnapshot SourceType = "db-cluster-snapshot"
 )
+
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

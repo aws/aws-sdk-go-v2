@@ -2546,6 +2546,15 @@ const (
 	EnumTypeBar InputService15TestShapeEnumType = "bar"
 )
 
+func (enum InputService15TestShapeEnumType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InputService15TestShapeEnumType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 //
 // Tests begin here
 //

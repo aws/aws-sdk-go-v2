@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opDeleteObject = "DeleteObject"
@@ -298,6 +299,18 @@ func (s *DeleteObjectInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteObjectInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Path != nil {
+		v := *s.Path
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DeleteObjectResponse
 type DeleteObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -318,6 +331,11 @@ func (s DeleteObjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DescribeObjectRequest
@@ -354,6 +372,18 @@ func (s *DescribeObjectInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeObjectInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Path != nil {
+		v := *s.Path
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -397,6 +427,41 @@ func (s DescribeObjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CacheControl != nil {
+		v := *s.CacheControl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Cache-Control", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentLength != nil {
+		v := *s.ContentLength
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Length", protocol.Int64Value(v), metadata)
+	}
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModified != nil {
+		v := *s.LastModified
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Last-Modified", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/GetObjectRequest
@@ -463,6 +528,24 @@ func (s *GetObjectInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetObjectInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Range != nil {
+		v := *s.Range
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Range", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/GetObjectResponse
 type GetObjectOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
@@ -517,6 +600,49 @@ func (s GetObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CacheControl != nil {
+		v := *s.CacheControl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Cache-Control", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentLength != nil {
+		v := *s.ContentLength
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Length", protocol.Int64Value(v), metadata)
+	}
+	if s.ContentRange != nil {
+		v := *s.ContentRange
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Range", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModified != nil {
+		v := *s.LastModified
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Last-Modified", protocol.TimeValue{V: v, Format: protocol.RFC822TimeFromat}, metadata)
+	}
+	// Skipping Body Output type's body not valid.
+	// ignoring invalid encode state, StatusCode. StatusCode
+	return nil
+}
+
 // A metadata entry for a folder or object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/Item
 type Item struct {
@@ -549,6 +675,47 @@ func (s Item) String() string {
 // GoString returns the string representation
 func (s Item) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Item) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContentLength != nil {
+		v := *s.ContentLength
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ContentLength", protocol.Int64Value(v), metadata)
+	}
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ContentType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ETag", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModified != nil {
+		v := *s.LastModified
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModified", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ListItemsRequest
@@ -590,6 +757,30 @@ func (s *ListItemsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListItemsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/ListItemsResponse
 type ListItemsOutput struct {
 	_ struct{} `type:"structure"`
@@ -616,6 +807,29 @@ func (s ListItemsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListItemsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListItemsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObjectRequest
@@ -701,6 +915,42 @@ func (s *PutObjectInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutObjectInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CacheControl != nil {
+		v := *s.CacheControl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Cache-Control", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.StorageClass) > 0 {
+		v := s.StorageClass
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-storage-class", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Body != nil {
+		v := s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "Body", protocol.ReadSeekerStream{V: v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/PutObjectResponse
 type PutObjectOutput struct {
 	_ struct{} `type:"structure"`
@@ -732,6 +982,29 @@ func (s PutObjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContentSHA256 != nil {
+		v := *s.ContentSHA256
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ContentSHA256", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ETag", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.StorageClass) > 0 {
+		v := s.StorageClass
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StorageClass", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 type ItemType string
 
 // Enum values for ItemType
@@ -740,9 +1013,27 @@ const (
 	ItemTypeFolder ItemType = "FOLDER"
 )
 
+func (enum ItemType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ItemType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StorageClass string
 
 // Enum values for StorageClass
 const (
 	StorageClassTemporal StorageClass = "TEMPORAL"
 )
+
+func (enum StorageClass) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StorageClass) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

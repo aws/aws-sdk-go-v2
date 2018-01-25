@@ -215,7 +215,7 @@
           "ListBools": [
             true,
             false,
-						false
+            false
           ],
           "ListFloats": [
             1.1,
@@ -228,9 +228,9 @@
             2
           ],
           "ListIntegers": [
-						0,
-						1,
-						2
+            0,
+            1,
+            2
           ]
         },
         "serialized": {

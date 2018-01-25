@@ -5379,6 +5379,15 @@ const (
 	DistributionByLogStream Distribution = "ByLogStream"
 )
 
+func (enum Distribution) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Distribution) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ExportTaskStatusCode string
 
 // Enum values for ExportTaskStatusCode
@@ -5391,6 +5400,15 @@ const (
 	ExportTaskStatusCodeRunning       ExportTaskStatusCode = "RUNNING"
 )
 
+func (enum ExportTaskStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExportTaskStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OrderBy string
 
 // Enum values for OrderBy
@@ -5398,3 +5416,12 @@ const (
 	OrderByLogStreamName OrderBy = "LogStreamName"
 	OrderByLastEventTime OrderBy = "LastEventTime"
 )
+
+func (enum OrderBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrderBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

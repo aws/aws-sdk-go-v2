@@ -13250,6 +13250,15 @@ const (
 	AcceptanceTypeReject AcceptanceType = "REJECT"
 )
 
+func (enum AcceptanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AcceptanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BuildStatus string
 
 // Enum values for BuildStatus
@@ -13258,6 +13267,15 @@ const (
 	BuildStatusReady       BuildStatus = "READY"
 	BuildStatusFailed      BuildStatus = "FAILED"
 )
+
+func (enum BuildStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BuildStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ComparisonOperatorType string
 
@@ -13268,6 +13286,15 @@ const (
 	ComparisonOperatorTypeLessThanThreshold             ComparisonOperatorType = "LessThanThreshold"
 	ComparisonOperatorTypeLessThanOrEqualToThreshold    ComparisonOperatorType = "LessThanOrEqualToThreshold"
 )
+
+func (enum ComparisonOperatorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperatorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EC2InstanceType string
 
@@ -13309,6 +13336,15 @@ const (
 	EC2InstanceTypeM410xlarge EC2InstanceType = "m4.10xlarge"
 )
 
+func (enum EC2InstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EC2InstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EventCode string
 
 // Enum values for EventCode
@@ -13347,6 +13383,15 @@ const (
 	EventCodeFleetVpcPeeringDeleted                     EventCode = "FLEET_VPC_PEERING_DELETED"
 )
 
+func (enum EventCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FleetStatus string
 
 // Enum values for FleetStatus
@@ -13362,6 +13407,15 @@ const (
 	FleetStatusTerminated  FleetStatus = "TERMINATED"
 )
 
+func (enum FleetStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type GameSessionPlacementState string
 
 // Enum values for GameSessionPlacementState
@@ -13371,6 +13425,15 @@ const (
 	GameSessionPlacementStateCancelled GameSessionPlacementState = "CANCELLED"
 	GameSessionPlacementStateTimedOut  GameSessionPlacementState = "TIMED_OUT"
 )
+
+func (enum GameSessionPlacementState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GameSessionPlacementState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type GameSessionStatus string
 
@@ -13383,6 +13446,15 @@ const (
 	GameSessionStatusError       GameSessionStatus = "ERROR"
 )
 
+func (enum GameSessionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GameSessionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceStatus string
 
 // Enum values for InstanceStatus
@@ -13392,6 +13464,15 @@ const (
 	InstanceStatusTerminating InstanceStatus = "TERMINATING"
 )
 
+func (enum InstanceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IpProtocol string
 
 // Enum values for IpProtocol
@@ -13399,6 +13480,15 @@ const (
 	IpProtocolTcp IpProtocol = "TCP"
 	IpProtocolUdp IpProtocol = "UDP"
 )
+
+func (enum IpProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IpProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MatchmakingConfigurationStatus string
 
@@ -13413,6 +13503,15 @@ const (
 	MatchmakingConfigurationStatusSearching          MatchmakingConfigurationStatus = "SEARCHING"
 	MatchmakingConfigurationStatusTimedOut           MatchmakingConfigurationStatus = "TIMED_OUT"
 )
+
+func (enum MatchmakingConfigurationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MatchmakingConfigurationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MetricName string
 
@@ -13431,6 +13530,15 @@ const (
 	MetricNameWaitTime                     MetricName = "WaitTime"
 )
 
+func (enum MetricName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OperatingSystem string
 
 // Enum values for OperatingSystem
@@ -13439,6 +13547,15 @@ const (
 	OperatingSystemAmazonLinux OperatingSystem = "AMAZON_LINUX"
 )
 
+func (enum OperatingSystem) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperatingSystem) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PlayerSessionCreationPolicy string
 
 // Enum values for PlayerSessionCreationPolicy
@@ -13446,6 +13563,15 @@ const (
 	PlayerSessionCreationPolicyAcceptAll PlayerSessionCreationPolicy = "ACCEPT_ALL"
 	PlayerSessionCreationPolicyDenyAll   PlayerSessionCreationPolicy = "DENY_ALL"
 )
+
+func (enum PlayerSessionCreationPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlayerSessionCreationPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PlayerSessionStatus string
 
@@ -13457,6 +13583,15 @@ const (
 	PlayerSessionStatusTimedout  PlayerSessionStatus = "TIMEDOUT"
 )
 
+func (enum PlayerSessionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlayerSessionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ProtectionPolicy string
 
 // Enum values for ProtectionPolicy
@@ -13464,6 +13599,15 @@ const (
 	ProtectionPolicyNoProtection   ProtectionPolicy = "NoProtection"
 	ProtectionPolicyFullProtection ProtectionPolicy = "FullProtection"
 )
+
+func (enum ProtectionPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProtectionPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RoutingStrategyType string
 
@@ -13473,6 +13617,15 @@ const (
 	RoutingStrategyTypeTerminal RoutingStrategyType = "TERMINAL"
 )
 
+func (enum RoutingStrategyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RoutingStrategyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ScalingAdjustmentType string
 
 // Enum values for ScalingAdjustmentType
@@ -13481,6 +13634,15 @@ const (
 	ScalingAdjustmentTypeExactCapacity           ScalingAdjustmentType = "ExactCapacity"
 	ScalingAdjustmentTypePercentChangeInCapacity ScalingAdjustmentType = "PercentChangeInCapacity"
 )
+
+func (enum ScalingAdjustmentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScalingAdjustmentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ScalingStatusType string
 
@@ -13494,3 +13656,12 @@ const (
 	ScalingStatusTypeDeleted         ScalingStatusType = "DELETED"
 	ScalingStatusTypeError           ScalingStatusType = "ERROR"
 )
+
+func (enum ScalingStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScalingStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

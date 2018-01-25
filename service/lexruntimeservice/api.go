@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opPostContent = "PostContent"
@@ -242,6 +243,23 @@ func (s Button) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Button) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Text != nil {
+		v := *s.Text
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "text", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Represents an option rendered to the user when a prompt is shown. It could
 // be an image, a button, a link, or text.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/GenericAttachment
@@ -272,6 +290,47 @@ func (s GenericAttachment) String() string {
 // GoString returns the string representation
 func (s GenericAttachment) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GenericAttachment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AttachmentLinkUrl != nil {
+		v := *s.AttachmentLinkUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "attachmentLinkUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Buttons) > 0 {
+		v := s.Buttons
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "buttons", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ImageUrl != nil {
+		v := *s.ImageUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "imageUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SubTitle != nil {
+		v := *s.SubTitle
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "subTitle", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Title != nil {
+		v := *s.Title
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "title", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContentRequest
@@ -443,6 +502,60 @@ func (s *PostContentInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PostContentInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Accept != nil {
+		v := *s.Accept
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Accept", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RequestAttributes != nil {
+		v := s.RequestAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-request-attributes", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
+	}
+	if s.SessionAttributes != nil {
+		v := s.SessionAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-session-attributes", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
+	}
+	if s.BotAlias != nil {
+		v := *s.BotAlias
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "botAlias", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BotName != nil {
+		v := *s.BotName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InputStream != nil {
+		v := s.InputStream
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "inputStream", protocol.ReadSeekerStream{V: v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostContentResponse
 type PostContentOutput struct {
 	_ struct{} `type:"structure" payload:"AudioStream"`
@@ -565,6 +678,60 @@ func (s PostContentOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PostContentOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.DialogState) > 0 {
+		v := s.DialogState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-dialog-state", protocol.QuotedValue{v}, metadata)
+	}
+	if s.InputTranscript != nil {
+		v := *s.InputTranscript
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-input-transcript", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.IntentName != nil {
+		v := *s.IntentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-intent-name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-message", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SessionAttributes != nil {
+		v := s.SessionAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-session-attributes", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
+	}
+	if s.SlotToElicit != nil {
+		v := *s.SlotToElicit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-slot-to-elicit", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Slots != nil {
+		v := s.Slots
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-slots", protocol.JSONValue{V: v, EscapeMode: protocol.Base64Escape}, metadata)
+	}
+	// Skipping AudioStream Output type's body not valid.
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.lex-2016-11-28/PostTextRequest
 type PostTextInput struct {
 	_ struct{} `type:"structure"`
@@ -663,6 +830,61 @@ func (s *PostTextInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PostTextInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InputText != nil {
+		v := *s.InputText
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inputText", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.RequestAttributes) > 0 {
+		v := s.RequestAttributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "requestAttributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if len(s.SessionAttributes) > 0 {
+		v := s.SessionAttributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "sessionAttributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.BotAlias != nil {
+		v := *s.BotAlias
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "botAlias", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BotName != nil {
+		v := *s.BotName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.UserId != nil {
+		v := *s.UserId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -774,6 +996,65 @@ func (s PostTextOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PostTextOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DialogState) > 0 {
+		v := s.DialogState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dialogState", protocol.QuotedValue{v}, metadata)
+	}
+	if s.IntentName != nil {
+		v := *s.IntentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "intentName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResponseCard != nil {
+		v := s.ResponseCard
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "responseCard", v, metadata)
+	}
+	if len(s.SessionAttributes) > 0 {
+		v := s.SessionAttributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "sessionAttributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.SlotToElicit != nil {
+		v := *s.SlotToElicit
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "slotToElicit", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Slots) > 0 {
+		v := s.Slots
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "slots", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // If you configure a response card when creating your bots, Amazon Lex substitutes
 // the session attributes and slot values that are available, and then returns
 // it. The response card can also come from a Lambda function ( dialogCodeHook
@@ -802,12 +1083,50 @@ func (s ResponseCard) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResponseCard) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ContentType) > 0 {
+		v := s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "contentType", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.GenericAttachments) > 0 {
+		v := s.GenericAttachments
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "genericAttachments", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 type ContentType string
 
 // Enum values for ContentType
 const (
 	ContentTypeApplicationVndAmazonawsCardGeneric ContentType = "application/vnd.amazonaws.card.generic"
 )
+
+func (enum ContentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DialogState string
 
@@ -820,3 +1139,12 @@ const (
 	DialogStateReadyForFulfillment DialogState = "ReadyForFulfillment"
 	DialogStateFailed              DialogState = "Failed"
 )
+
+func (enum DialogState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DialogState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -6005,6 +6005,15 @@ const (
 	AlgorithmSgd Algorithm = "sgd"
 )
 
+func (enum Algorithm) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Algorithm) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // A list of the variables to use in searching or filtering BatchPrediction.
 //
 //    * CreatedAt - Sets the search criteria to BatchPrediction creation date.
@@ -6035,6 +6044,15 @@ const (
 	BatchPredictionFilterVariableDataUri       BatchPredictionFilterVariable = "DataURI"
 )
 
+func (enum BatchPredictionFilterVariable) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BatchPredictionFilterVariable) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // A list of the variables to use in searching or filtering DataSource.
 //
 //    * CreatedAt - Sets the search criteria to DataSource creation date.
@@ -6058,6 +6076,15 @@ const (
 	DataSourceFilterVariableIamuser        DataSourceFilterVariable = "IAMUser"
 )
 
+func (enum DataSourceFilterVariable) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DataSourceFilterVariable) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Contains the key values of DetailsMap: PredictiveModelType- Indicates the type of the MLModel. Algorithm- Indicates the algorithm that was used for the MLModel
 type DetailsAttributes string
 
@@ -6066,6 +6093,15 @@ const (
 	DetailsAttributesPredictiveModelType DetailsAttributes = "PredictiveModelType"
 	DetailsAttributesAlgorithm           DetailsAttributes = "Algorithm"
 )
+
+func (enum DetailsAttributes) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DetailsAttributes) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Object status with the following possible values:
 //
@@ -6084,6 +6120,15 @@ const (
 	EntityStatusCompleted  EntityStatus = "COMPLETED"
 	EntityStatusDeleted    EntityStatus = "DELETED"
 )
+
+func (enum EntityStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EntityStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // A list of the variables to use in searching or filtering Evaluation.
 //
@@ -6113,6 +6158,15 @@ const (
 	EvaluationFilterVariableDataUri       EvaluationFilterVariable = "DataURI"
 )
 
+func (enum EvaluationFilterVariable) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EvaluationFilterVariable) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MLModelFilterVariable string
 
 // Enum values for MLModelFilterVariable
@@ -6129,6 +6183,15 @@ const (
 	MLModelFilterVariableTrainingDataUri        MLModelFilterVariable = "TrainingDataURI"
 )
 
+func (enum MLModelFilterVariable) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MLModelFilterVariable) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MLModelType string
 
 // Enum values for MLModelType
@@ -6137,6 +6200,15 @@ const (
 	MLModelTypeBinary     MLModelType = "BINARY"
 	MLModelTypeMulticlass MLModelType = "MULTICLASS"
 )
+
+func (enum MLModelType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MLModelType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RealtimeEndpointStatus string
 
@@ -6147,6 +6219,15 @@ const (
 	RealtimeEndpointStatusUpdating RealtimeEndpointStatus = "UPDATING"
 	RealtimeEndpointStatusFailed   RealtimeEndpointStatus = "FAILED"
 )
+
+func (enum RealtimeEndpointStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RealtimeEndpointStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The sort order specified in a listing condition. Possible values include
 // the following:
@@ -6161,6 +6242,15 @@ const (
 	SortOrderDsc SortOrder = "dsc"
 )
 
+func (enum SortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TaggableResourceType string
 
 // Enum values for TaggableResourceType
@@ -6170,3 +6260,12 @@ const (
 	TaggableResourceTypeEvaluation      TaggableResourceType = "Evaluation"
 	TaggableResourceTypeMlmodel         TaggableResourceType = "MLModel"
 )
+
+func (enum TaggableResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TaggableResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

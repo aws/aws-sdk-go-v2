@@ -2459,6 +2459,15 @@ const (
 	BackupStatusDeleting   BackupStatus = "DELETING"
 )
 
+func (enum BackupStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BackupStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BackupType string
 
 // Enum values for BackupType
@@ -2467,6 +2476,15 @@ const (
 	BackupTypeManual    BackupType = "MANUAL"
 )
 
+func (enum BackupType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BackupType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MaintenanceStatus string
 
 // Enum values for MaintenanceStatus
@@ -2474,6 +2492,15 @@ const (
 	MaintenanceStatusSuccess MaintenanceStatus = "SUCCESS"
 	MaintenanceStatusFailed  MaintenanceStatus = "FAILED"
 )
+
+func (enum MaintenanceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MaintenanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The status of the association or disassociation request.
 //
@@ -2493,6 +2520,15 @@ const (
 	NodeAssociationStatusInProgress NodeAssociationStatus = "IN_PROGRESS"
 )
 
+func (enum NodeAssociationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NodeAssociationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ServerStatus string
 
 // Enum values for ServerStatus
@@ -2511,3 +2547,12 @@ const (
 	ServerStatusUnhealthy        ServerStatus = "UNHEALTHY"
 	ServerStatusTerminated       ServerStatus = "TERMINATED"
 )
+
+func (enum ServerStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServerStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

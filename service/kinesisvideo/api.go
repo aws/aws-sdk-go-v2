@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCreateStream = "CreateStream"
@@ -661,6 +662,42 @@ func (s *CreateStreamInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateStreamInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.DataRetentionInHours != nil {
+		v := *s.DataRetentionInHours
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DataRetentionInHours", protocol.Int64Value(v), metadata)
+	}
+	if s.DeviceName != nil {
+		v := *s.DeviceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeviceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MediaType != nil {
+		v := *s.MediaType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MediaType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateStreamOutput
 type CreateStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -684,6 +721,17 @@ func (s CreateStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteStreamInput
@@ -734,6 +782,24 @@ func (s *DeleteStreamInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteStreamInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CurrentVersion != nil {
+		v := *s.CurrentVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DeleteStreamOutput
 type DeleteStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -754,6 +820,11 @@ func (s DeleteStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeStreamInput
@@ -793,6 +864,24 @@ func (s *DescribeStreamInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeStreamInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeStreamOutput
 type DescribeStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -816,6 +905,17 @@ func (s DescribeStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.StreamInfo != nil {
+		v := s.StreamInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "StreamInfo", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/GetDataEndpointInput
@@ -865,6 +965,30 @@ func (s *GetDataEndpointInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDataEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.APIName) > 0 {
+		v := s.APIName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "APIName", protocol.QuotedValue{v}, metadata)
+	}
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/GetDataEndpointOutput
 type GetDataEndpointOutput struct {
 	_ struct{} `type:"structure"`
@@ -889,6 +1013,17 @@ func (s GetDataEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDataEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDataEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataEndpoint != nil {
+		v := *s.DataEndpoint
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DataEndpoint", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListStreamsInput
@@ -936,6 +1071,30 @@ func (s *ListStreamsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListStreamsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamNameCondition != nil {
+		v := s.StreamNameCondition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "StreamNameCondition", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListStreamsOutput
 type ListStreamsOutput struct {
 	_ struct{} `type:"structure"`
@@ -963,6 +1122,29 @@ func (s ListStreamsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListStreamsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListStreamsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.StreamInfoList) > 0 {
+		v := s.StreamInfoList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "StreamInfoList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListTagsForStreamInput
@@ -1007,6 +1189,30 @@ func (s *ListTagsForStreamInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForStreamInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ListTagsForStreamOutput
 type ListTagsForStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -1035,6 +1241,29 @@ func (s ListTagsForStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListTagsForStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListTagsForStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
 }
 
 // An object describing a Kinesis video stream.
@@ -1081,6 +1310,65 @@ func (s StreamInfo) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamInfo) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.DataRetentionInHours != nil {
+		v := *s.DataRetentionInHours
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DataRetentionInHours", protocol.Int64Value(v), metadata)
+	}
+	if s.DeviceName != nil {
+		v := *s.DeviceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeviceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MediaType != nil {
+		v := *s.MediaType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MediaType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{v}, metadata)
+	}
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the condition that streams must satisfy to be returned when you
 // list streams (see the ListStreams API). A condition has a comparison operation
 // and a value. Currently, you can specify only the BEGINS_WITH operator, which
@@ -1116,6 +1404,23 @@ func (s *StreamNameCondition) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StreamNameCondition) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.ComparisonOperator) > 0 {
+		v := s.ComparisonOperator
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ComparisonOperator", protocol.QuotedValue{v}, metadata)
+	}
+	if s.ComparisonValue != nil {
+		v := *s.ComparisonValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ComparisonValue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1171,6 +1476,36 @@ func (s *TagStreamInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagStreamInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/TagStreamOutput
 type TagStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -1191,6 +1526,11 @@ func (s TagStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TagStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UntagStreamInput
@@ -1243,6 +1583,36 @@ func (s *UntagStreamInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagStreamInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.TagKeyList) > 0 {
+		v := s.TagKeyList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "TagKeyList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UntagStreamOutput
 type UntagStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -1263,6 +1633,11 @@ func (s UntagStreamOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UntagStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateDataRetentionInput
@@ -1337,6 +1712,42 @@ func (s *UpdateDataRetentionInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDataRetentionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CurrentVersion != nil {
+		v := *s.CurrentVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DataRetentionChangeInHours != nil {
+		v := *s.DataRetentionChangeInHours
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DataRetentionChangeInHours", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Operation) > 0 {
+		v := s.Operation
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Operation", protocol.QuotedValue{v}, metadata)
+	}
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateDataRetentionOutput
 type UpdateDataRetentionOutput struct {
 	_ struct{} `type:"structure"`
@@ -1357,6 +1768,11 @@ func (s UpdateDataRetentionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateDataRetentionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDataRetentionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateStreamInput
@@ -1431,6 +1847,42 @@ func (s *UpdateStreamInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateStreamInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.CurrentVersion != nil {
+		v := *s.CurrentVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DeviceName != nil {
+		v := *s.DeviceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeviceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MediaType != nil {
+		v := *s.MediaType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MediaType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamARN != nil {
+		v := *s.StreamARN
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateStreamOutput
 type UpdateStreamOutput struct {
 	_ struct{} `type:"structure"`
@@ -1453,6 +1905,11 @@ func (s UpdateStreamOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 type APIName string
 
 // Enum values for APIName
@@ -1463,12 +1920,30 @@ const (
 	APINameGetMediaForFragmentList APIName = "GET_MEDIA_FOR_FRAGMENT_LIST"
 )
 
+func (enum APIName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum APIName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
 const (
 	ComparisonOperatorBeginsWith ComparisonOperator = "BEGINS_WITH"
 )
+
+func (enum ComparisonOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Status string
 
@@ -1480,6 +1955,15 @@ const (
 	StatusDeleting Status = "DELETING"
 )
 
+func (enum Status) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Status) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type UpdateDataRetentionOperation string
 
 // Enum values for UpdateDataRetentionOperation
@@ -1487,3 +1971,12 @@ const (
 	UpdateDataRetentionOperationIncreaseDataRetention UpdateDataRetentionOperation = "INCREASE_DATA_RETENTION"
 	UpdateDataRetentionOperationDecreaseDataRetention UpdateDataRetentionOperation = "DECREASE_DATA_RETENTION"
 )
+
+func (enum UpdateDataRetentionOperation) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UpdateDataRetentionOperation) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

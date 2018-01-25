@@ -1451,6 +1451,15 @@ const (
 	AttackLayerApplication AttackLayer = "APPLICATION"
 )
 
+func (enum AttackLayer) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AttackLayer) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AttackPropertyIdentifier string
 
 // Enum values for AttackPropertyIdentifier
@@ -1463,6 +1472,15 @@ const (
 	AttackPropertyIdentifierSourceUserAgent AttackPropertyIdentifier = "SOURCE_USER_AGENT"
 )
 
+func (enum AttackPropertyIdentifier) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AttackPropertyIdentifier) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SubResourceType string
 
 // Enum values for SubResourceType
@@ -1471,6 +1489,15 @@ const (
 	SubResourceTypeUrl SubResourceType = "URL"
 )
 
+func (enum SubResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SubResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SubscriptionState string
 
 // Enum values for SubscriptionState
@@ -1478,6 +1505,15 @@ const (
 	SubscriptionStateActive   SubscriptionState = "ACTIVE"
 	SubscriptionStateInactive SubscriptionState = "INACTIVE"
 )
+
+func (enum SubscriptionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SubscriptionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Unit string
 
@@ -1488,3 +1524,12 @@ const (
 	UnitPackets  Unit = "PACKETS"
 	UnitRequests Unit = "REQUESTS"
 )
+
+func (enum Unit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Unit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

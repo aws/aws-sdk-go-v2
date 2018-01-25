@@ -136,6 +136,59 @@ func (s *Event) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Event) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.EventType != nil {
+		v := *s.EventType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "eventType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Metrics) > 0 {
+		v := s.Metrics
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "metrics", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.Float64Value(v1))
+		}
+		ms0.End()
+
+	}
+	if s.Session != nil {
+		v := s.Session
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "session", v, metadata)
+	}
+	if s.Timestamp != nil {
+		v := *s.Timestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A container for the data needed for a PutEvent operation
 type PutEventsInput struct {
 	_ struct{} `type:"structure"`
@@ -190,6 +243,36 @@ func (s *PutEventsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutEventsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Events) > 0 {
+		v := s.Events
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "events", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ClientContext != nil {
+		v := *s.ClientContext
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ClientContextEncoding != nil {
+		v := *s.ClientContextEncoding
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context-Encoding", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 type PutEventsOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -209,6 +292,11 @@ func (s PutEventsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutEventsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Describes the session. Session information is required on ALL events.
@@ -249,6 +337,35 @@ func (s *Session) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Session) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Duration != nil {
+		v := *s.Duration
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "duration", protocol.Int64Value(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StartTimestamp != nil {
+		v := *s.StartTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StopTimestamp != nil {
+		v := *s.StopTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stopTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

@@ -1085,6 +1085,15 @@ const (
 	ContextReservations Context = "RESERVATIONS"
 )
 
+func (enum Context) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Context) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Dimension string
 
 // Enum values for Dimension
@@ -1106,6 +1115,15 @@ const (
 	DimensionSubscriptionId  Dimension = "SUBSCRIPTION_ID"
 )
 
+func (enum Dimension) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Dimension) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Granularity string
 
 // Enum values for Granularity
@@ -1114,6 +1132,15 @@ const (
 	GranularityMonthly Granularity = "MONTHLY"
 )
 
+func (enum Granularity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Granularity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type GroupDefinitionType string
 
 // Enum values for GroupDefinitionType
@@ -1121,3 +1148,12 @@ const (
 	GroupDefinitionTypeDimension GroupDefinitionType = "DIMENSION"
 	GroupDefinitionTypeTag       GroupDefinitionType = "TAG"
 )
+
+func (enum GroupDefinitionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GroupDefinitionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

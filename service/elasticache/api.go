@@ -8551,6 +8551,15 @@ const (
 	AZModeCrossAz  AZMode = "cross-az"
 )
 
+func (enum AZMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AZMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AutomaticFailoverStatus string
 
 // Enum values for AutomaticFailoverStatus
@@ -8561,6 +8570,15 @@ const (
 	AutomaticFailoverStatusDisabling AutomaticFailoverStatus = "disabling"
 )
 
+func (enum AutomaticFailoverStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AutomaticFailoverStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ChangeType string
 
 // Enum values for ChangeType
@@ -8569,6 +8587,15 @@ const (
 	ChangeTypeRequiresReboot ChangeType = "requires-reboot"
 )
 
+func (enum ChangeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PendingAutomaticFailoverStatus string
 
 // Enum values for PendingAutomaticFailoverStatus
@@ -8576,6 +8603,15 @@ const (
 	PendingAutomaticFailoverStatusEnabled  PendingAutomaticFailoverStatus = "enabled"
 	PendingAutomaticFailoverStatusDisabled PendingAutomaticFailoverStatus = "disabled"
 )
+
+func (enum PendingAutomaticFailoverStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PendingAutomaticFailoverStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -8587,3 +8623,12 @@ const (
 	SourceTypeCacheSubnetGroup    SourceType = "cache-subnet-group"
 	SourceTypeReplicationGroup    SourceType = "replication-group"
 )
+
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

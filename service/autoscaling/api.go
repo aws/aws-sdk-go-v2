@@ -8957,6 +8957,15 @@ const (
 	LifecycleStateStandby            LifecycleState = "Standby"
 )
 
+func (enum LifecycleState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LifecycleState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MetricStatistic string
 
 // Enum values for MetricStatistic
@@ -8968,6 +8977,15 @@ const (
 	MetricStatisticSum         MetricStatistic = "Sum"
 )
 
+func (enum MetricStatistic) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricStatistic) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MetricType string
 
 // Enum values for MetricType
@@ -8977,6 +8995,15 @@ const (
 	MetricTypeAsgaverageNetworkOut     MetricType = "ASGAverageNetworkOut"
 	MetricTypeAlbrequestCountPerTarget MetricType = "ALBRequestCountPerTarget"
 )
+
+func (enum MetricType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ScalingActivityStatusCode string
 
@@ -8995,3 +9022,12 @@ const (
 	ScalingActivityStatusCodeFailed                          ScalingActivityStatusCode = "Failed"
 	ScalingActivityStatusCodeCancelled                       ScalingActivityStatusCode = "Cancelled"
 )
+
+func (enum ScalingActivityStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScalingActivityStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -1232,6 +1232,15 @@ const (
 	EC2EnumTypeBar OutputService10TestShapeEC2EnumType = "bar"
 )
 
+func (enum OutputService10TestShapeEC2EnumType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OutputService10TestShapeEC2EnumType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 //
 // Tests begin here
 //
