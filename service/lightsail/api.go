@@ -9535,6 +9535,15 @@ const (
 	AccessDirectionOutbound AccessDirection = "outbound"
 )
 
+func (enum AccessDirection) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccessDirection) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BlueprintType string
 
 // Enum values for BlueprintType
@@ -9542,6 +9551,15 @@ const (
 	BlueprintTypeOs  BlueprintType = "os"
 	BlueprintTypeApp BlueprintType = "app"
 )
+
+func (enum BlueprintType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BlueprintType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DiskSnapshotState string
 
@@ -9552,6 +9570,15 @@ const (
 	DiskSnapshotStateError     DiskSnapshotState = "error"
 	DiskSnapshotStateUnknown   DiskSnapshotState = "unknown"
 )
+
+func (enum DiskSnapshotState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DiskSnapshotState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DiskState string
 
@@ -9564,6 +9591,15 @@ const (
 	DiskStateUnknown   DiskState = "unknown"
 )
 
+func (enum DiskState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DiskState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceAccessProtocol string
 
 // Enum values for InstanceAccessProtocol
@@ -9571,6 +9607,15 @@ const (
 	InstanceAccessProtocolSsh InstanceAccessProtocol = "ssh"
 	InstanceAccessProtocolRdp InstanceAccessProtocol = "rdp"
 )
+
+func (enum InstanceAccessProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceAccessProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceHealthReason string
 
@@ -9589,6 +9634,15 @@ const (
 	InstanceHealthReasonInstanceIpUnusable               InstanceHealthReason = "Instance.IpUnusable"
 )
 
+func (enum InstanceHealthReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceHealthReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceHealthState string
 
 // Enum values for InstanceHealthState
@@ -9600,6 +9654,15 @@ const (
 	InstanceHealthStateDraining    InstanceHealthState = "draining"
 	InstanceHealthStateUnavailable InstanceHealthState = "unavailable"
 )
+
+func (enum InstanceHealthState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceHealthState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceMetricName string
 
@@ -9613,6 +9676,15 @@ const (
 	InstanceMetricNameStatusCheckFailedSystem   InstanceMetricName = "StatusCheckFailed_System"
 )
 
+func (enum InstanceMetricName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceMetricName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstancePlatform string
 
 // Enum values for InstancePlatform
@@ -9620,6 +9692,15 @@ const (
 	InstancePlatformLinuxUnix InstancePlatform = "LINUX_UNIX"
 	InstancePlatformWindows   InstancePlatform = "WINDOWS"
 )
+
+func (enum InstancePlatform) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstancePlatform) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type InstanceSnapshotState string
 
@@ -9630,6 +9711,15 @@ const (
 	InstanceSnapshotStateAvailable InstanceSnapshotState = "available"
 )
 
+func (enum InstanceSnapshotState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceSnapshotState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LoadBalancerAttributeName string
 
 // Enum values for LoadBalancerAttributeName
@@ -9638,6 +9728,15 @@ const (
 	LoadBalancerAttributeNameSessionStickinessEnabled                 LoadBalancerAttributeName = "SessionStickinessEnabled"
 	LoadBalancerAttributeNameSessionStickinessLbCookieDurationSeconds LoadBalancerAttributeName = "SessionStickiness_LB_CookieDurationSeconds"
 )
+
+func (enum LoadBalancerAttributeName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerAttributeName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LoadBalancerMetricName string
 
@@ -9657,6 +9756,15 @@ const (
 	LoadBalancerMetricNameRequestCount                   LoadBalancerMetricName = "RequestCount"
 )
 
+func (enum LoadBalancerMetricName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerMetricName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LoadBalancerProtocol string
 
 // Enum values for LoadBalancerProtocol
@@ -9664,6 +9772,15 @@ const (
 	LoadBalancerProtocolHttpHttps LoadBalancerProtocol = "HTTP_HTTPS"
 	LoadBalancerProtocolHttp      LoadBalancerProtocol = "HTTP"
 )
+
+func (enum LoadBalancerProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LoadBalancerState string
 
@@ -9676,6 +9793,15 @@ const (
 	LoadBalancerStateUnknown        LoadBalancerState = "unknown"
 )
 
+func (enum LoadBalancerState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LoadBalancerTlsCertificateDomainStatus string
 
 // Enum values for LoadBalancerTlsCertificateDomainStatus
@@ -9684,6 +9810,15 @@ const (
 	LoadBalancerTlsCertificateDomainStatusFailed            LoadBalancerTlsCertificateDomainStatus = "FAILED"
 	LoadBalancerTlsCertificateDomainStatusSuccess           LoadBalancerTlsCertificateDomainStatus = "SUCCESS"
 )
+
+func (enum LoadBalancerTlsCertificateDomainStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerTlsCertificateDomainStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LoadBalancerTlsCertificateFailureReason string
 
@@ -9696,6 +9831,15 @@ const (
 	LoadBalancerTlsCertificateFailureReasonOther                          LoadBalancerTlsCertificateFailureReason = "OTHER"
 )
 
+func (enum LoadBalancerTlsCertificateFailureReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerTlsCertificateFailureReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LoadBalancerTlsCertificateRenewalStatus string
 
 // Enum values for LoadBalancerTlsCertificateRenewalStatus
@@ -9705,6 +9849,15 @@ const (
 	LoadBalancerTlsCertificateRenewalStatusSuccess            LoadBalancerTlsCertificateRenewalStatus = "SUCCESS"
 	LoadBalancerTlsCertificateRenewalStatusFailed             LoadBalancerTlsCertificateRenewalStatus = "FAILED"
 )
+
+func (enum LoadBalancerTlsCertificateRenewalStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerTlsCertificateRenewalStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LoadBalancerTlsCertificateRevocationReason string
 
@@ -9722,6 +9875,15 @@ const (
 	LoadBalancerTlsCertificateRevocationReasonAACompromise         LoadBalancerTlsCertificateRevocationReason = "A_A_COMPROMISE"
 )
 
+func (enum LoadBalancerTlsCertificateRevocationReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerTlsCertificateRevocationReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LoadBalancerTlsCertificateStatus string
 
 // Enum values for LoadBalancerTlsCertificateStatus
@@ -9736,6 +9898,15 @@ const (
 	LoadBalancerTlsCertificateStatusUnknown            LoadBalancerTlsCertificateStatus = "UNKNOWN"
 )
 
+func (enum LoadBalancerTlsCertificateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LoadBalancerTlsCertificateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MetricStatistic string
 
 // Enum values for MetricStatistic
@@ -9746,6 +9917,15 @@ const (
 	MetricStatisticAverage     MetricStatistic = "Average"
 	MetricStatisticSampleCount MetricStatistic = "SampleCount"
 )
+
+func (enum MetricStatistic) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricStatistic) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MetricUnit string
 
@@ -9780,6 +9960,15 @@ const (
 	MetricUnitNone            MetricUnit = "None"
 )
 
+func (enum MetricUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricUnit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NetworkProtocol string
 
 // Enum values for NetworkProtocol
@@ -9788,6 +9977,15 @@ const (
 	NetworkProtocolAll NetworkProtocol = "all"
 	NetworkProtocolUdp NetworkProtocol = "udp"
 )
+
+func (enum NetworkProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NetworkProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OperationStatus string
 
@@ -9798,6 +9996,15 @@ const (
 	OperationStatusFailed     OperationStatus = "Failed"
 	OperationStatusCompleted  OperationStatus = "Completed"
 )
+
+func (enum OperationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OperationType string
 
@@ -9839,6 +10046,15 @@ const (
 	OperationTypeCreateDiskFromSnapshot           OperationType = "CreateDiskFromSnapshot"
 )
 
+func (enum OperationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PortAccessType string
 
 // Enum values for PortAccessType
@@ -9847,6 +10063,15 @@ const (
 	PortAccessTypePrivate PortAccessType = "Private"
 )
 
+func (enum PortAccessType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PortAccessType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PortState string
 
 // Enum values for PortState
@@ -9854,6 +10079,15 @@ const (
 	PortStateOpen   PortState = "open"
 	PortStateClosed PortState = "closed"
 )
+
+func (enum PortState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PortState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RegionName string
 
@@ -9872,6 +10106,15 @@ const (
 	RegionNameApNortheast2 RegionName = "ap-northeast-2"
 )
 
+func (enum RegionName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RegionName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -9887,3 +10130,12 @@ const (
 	ResourceTypeDisk                       ResourceType = "Disk"
 	ResourceTypeDiskSnapshot               ResourceType = "DiskSnapshot"
 )
+
+func (enum ResourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

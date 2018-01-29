@@ -4290,6 +4290,15 @@ const (
 	AlgorithmicStemmingFull    AlgorithmicStemming = "full"
 )
 
+func (enum AlgorithmicStemming) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AlgorithmicStemming) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // An IETF RFC 4646 (http://tools.ietf.org/html/rfc4646) language code or mul
 // for multiple languages.
 type AnalysisSchemeLanguage string
@@ -4333,6 +4342,15 @@ const (
 	AnalysisSchemeLanguageZhHant AnalysisSchemeLanguage = "zh-Hant"
 )
 
+func (enum AnalysisSchemeLanguage) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AnalysisSchemeLanguage) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The type of field. The valid options for a field depend on the field type.
 // For more information about the supported field types, see Configuring Index
 // Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
@@ -4354,6 +4372,15 @@ const (
 	IndexFieldTypeDateArray    IndexFieldType = "date-array"
 )
 
+func (enum IndexFieldType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IndexFieldType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The state of processing a change to an option. One of:
 //
 //    * RequiresIndexDocuments: The option's latest value will not be deployed
@@ -4374,6 +4401,15 @@ const (
 	OptionStateFailedToValidate       OptionState = "FailedToValidate"
 )
 
+func (enum OptionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OptionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The instance type (such as search.m1.small) on which an index partition is
 // hosted.
 type PartitionInstanceType string
@@ -4390,6 +4426,15 @@ const (
 	PartitionInstanceTypeSearchM32xlarge PartitionInstanceType = "search.m3.2xlarge"
 )
 
+func (enum PartitionInstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PartitionInstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SuggesterFuzzyMatching string
 
 // Enum values for SuggesterFuzzyMatching
@@ -4398,3 +4443,12 @@ const (
 	SuggesterFuzzyMatchingLow  SuggesterFuzzyMatching = "low"
 	SuggesterFuzzyMatchingHigh SuggesterFuzzyMatching = "high"
 )
+
+func (enum SuggesterFuzzyMatching) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SuggesterFuzzyMatching) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

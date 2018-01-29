@@ -5,6 +5,7 @@ package mq
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCreateBroker = "CreateBroker"
@@ -864,6 +865,29 @@ func (s BrokerInstance) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BrokerInstance) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConsoleURL != nil {
+		v := *s.ConsoleURL
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "consoleURL", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Endpoints) > 0 {
+		v := s.Endpoints
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "endpoints", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // The Amazon Resource Name (ARN) of the broker.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/BrokerSummary
 type BrokerSummary struct {
@@ -903,6 +927,47 @@ func (s BrokerSummary) String() string {
 // GoString returns the string representation
 func (s BrokerSummary) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BrokerSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BrokerArn != nil {
+		v := *s.BrokerArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BrokerName != nil {
+		v := *s.BrokerName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.BrokerState) > 0 {
+		v := s.BrokerState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerState", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.DeploymentMode) > 0 {
+		v := s.DeploymentMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deploymentMode", protocol.QuotedValue{v}, metadata)
+	}
+	if s.HostInstanceType != nil {
+		v := *s.HostInstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Returns information about all configurations.
@@ -945,6 +1010,53 @@ func (s Configuration) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Configuration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.EngineType) > 0 {
+		v := s.EngineType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestRevision != nil {
+		v := s.LatestRevision
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "latestRevision", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A list of information about the configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ConfigurationId
 type ConfigurationId struct {
@@ -967,6 +1079,23 @@ func (s ConfigurationId) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ConfigurationId) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Revision != nil {
+		v := *s.Revision
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "revision", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Returns information about the specified configuration revision.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ConfigurationRevision
 type ConfigurationRevision struct {
@@ -987,6 +1116,23 @@ func (s ConfigurationRevision) String() string {
 // GoString returns the string representation
 func (s ConfigurationRevision) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ConfigurationRevision) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Revision != nil {
+		v := *s.Revision
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "revision", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Broker configuration information
@@ -1012,6 +1158,35 @@ func (s Configurations) String() string {
 // GoString returns the string representation
 func (s Configurations) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Configurations) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Current != nil {
+		v := s.Current
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "current", v, metadata)
+	}
+	if len(s.History) > 0 {
+		v := s.History
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "history", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Pending != nil {
+		v := s.Pending
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "pending", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBrokerRequest
@@ -1062,6 +1237,115 @@ func (s CreateBrokerInput) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoMinorVersionUpgrade", protocol.BoolValue(v), metadata)
+	}
+	if s.BrokerName != nil {
+		v := *s.BrokerName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Configuration != nil {
+		v := s.Configuration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "configuration", v, metadata)
+	}
+	var CreatorRequestId string
+	if s.CreatorRequestId != nil {
+		CreatorRequestId = *s.CreatorRequestId
+	} else {
+		CreatorRequestId = protocol.GetIdempotencyToken()
+	}
+	{
+		v := CreatorRequestId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creatorRequestId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.DeploymentMode) > 0 {
+		v := s.DeploymentMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deploymentMode", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.EngineType) > 0 {
+		v := s.EngineType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HostInstanceType != nil {
+		v := *s.HostInstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaintenanceWindowStartTime != nil {
+		v := s.MaintenanceWindowStartTime
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "maintenanceWindowStartTime", v, metadata)
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "publiclyAccessible", protocol.BoolValue(v), metadata)
+	}
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "securityGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.SubnetIds) > 0 {
+		v := s.SubnetIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "subnetIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.Users) > 0 {
+		v := s.Users
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "users", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateBrokerResponse
 type CreateBrokerOutput struct {
 	_ struct{} `type:"structure"`
@@ -1088,6 +1372,23 @@ func (s CreateBrokerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BrokerArn != nil {
+		v := *s.BrokerArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateConfigurationRequest
 type CreateConfigurationInput struct {
 	_ struct{} `type:"structure"`
@@ -1108,6 +1409,31 @@ func (s CreateConfigurationInput) String() string {
 // GoString returns the string representation
 func (s CreateConfigurationInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.EngineType) > 0 {
+		v := s.EngineType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateConfigurationResponse
@@ -1139,6 +1465,35 @@ func (s CreateConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestRevision != nil {
+		v := s.LatestRevision
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "latestRevision", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateUserRequest
@@ -1186,6 +1541,49 @@ func (s *CreateUserInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateUserInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ConsoleAccess != nil {
+		v := *s.ConsoleAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "consoleAccess", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Groups) > 0 {
+		v := s.Groups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "groups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Password != nil {
+		v := *s.Password
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "password", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "username", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/CreateUserResponse
 type CreateUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -1206,6 +1604,11 @@ func (s CreateUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteBrokerRequest
@@ -1240,6 +1643,19 @@ func (s *DeleteBrokerInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteBrokerResponse
 type DeleteBrokerOutput struct {
 	_ struct{} `type:"structure"`
@@ -1262,6 +1678,17 @@ func (s DeleteBrokerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteBrokerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteUserRequest
@@ -1303,6 +1730,25 @@ func (s *DeleteUserInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteUserInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "username", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DeleteUserResponse
 type DeleteUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -1323,6 +1769,11 @@ func (s DeleteUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeBrokerRequest
@@ -1353,6 +1804,19 @@ func (s *DescribeBrokerInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1420,6 +1884,131 @@ func (s DescribeBrokerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AutoMinorVersionUpgrade != nil {
+		v := *s.AutoMinorVersionUpgrade
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoMinorVersionUpgrade", protocol.BoolValue(v), metadata)
+	}
+	if s.BrokerArn != nil {
+		v := *s.BrokerArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.BrokerInstances) > 0 {
+		v := s.BrokerInstances
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "brokerInstances", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.BrokerName != nil {
+		v := *s.BrokerName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.BrokerState) > 0 {
+		v := s.BrokerState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerState", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Configurations != nil {
+		v := s.Configurations
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "configurations", v, metadata)
+	}
+	if len(s.DeploymentMode) > 0 {
+		v := s.DeploymentMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "deploymentMode", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.EngineType) > 0 {
+		v := s.EngineType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.HostInstanceType != nil {
+		v := *s.HostInstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "hostInstanceType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaintenanceWindowStartTime != nil {
+		v := s.MaintenanceWindowStartTime
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "maintenanceWindowStartTime", v, metadata)
+	}
+	if s.PubliclyAccessible != nil {
+		v := *s.PubliclyAccessible
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "publiclyAccessible", protocol.BoolValue(v), metadata)
+	}
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "securityGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.SubnetIds) > 0 {
+		v := s.SubnetIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "subnetIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.Users) > 0 {
+		v := s.Users
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "users", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfigurationRequest
 type DescribeConfigurationInput struct {
 	_ struct{} `type:"structure"`
@@ -1448,6 +2037,19 @@ func (s *DescribeConfigurationInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ConfigurationId != nil {
+		v := *s.ConfigurationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "configuration-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1490,6 +2092,53 @@ func (s DescribeConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.EngineType) > 0 {
+		v := s.EngineType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.EngineVersion != nil {
+		v := *s.EngineVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "engineVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestRevision != nil {
+		v := s.LatestRevision
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "latestRevision", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfigurationRevisionRequest
 type DescribeConfigurationRevisionInput struct {
 	_ struct{} `type:"structure"`
@@ -1529,6 +2178,25 @@ func (s *DescribeConfigurationRevisionInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeConfigurationRevisionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ConfigurationId != nil {
+		v := *s.ConfigurationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "configuration-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ConfigurationRevision != nil {
+		v := *s.ConfigurationRevision
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "configuration-revision", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeConfigurationRevisionResponse
 type DescribeConfigurationRevisionOutput struct {
 	_ struct{} `type:"structure"`
@@ -1555,6 +2223,29 @@ func (s DescribeConfigurationRevisionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeConfigurationRevisionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeConfigurationRevisionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConfigurationId != nil {
+		v := *s.ConfigurationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "configurationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Data != nil {
+		v := *s.Data
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "data", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeUserRequest
@@ -1596,6 +2287,25 @@ func (s *DescribeUserInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeUserInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "username", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/DescribeUserResponse
 type DescribeUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -1630,6 +2340,47 @@ func (s DescribeUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ConsoleAccess != nil {
+		v := *s.ConsoleAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "consoleAccess", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Groups) > 0 {
+		v := s.Groups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "groups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Pending != nil {
+		v := s.Pending
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "pending", v, metadata)
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "username", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListBrokersRequest
 type ListBrokersInput struct {
 	_ struct{} `type:"structure"`
@@ -1662,6 +2413,25 @@ func (s *ListBrokersInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListBrokersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListBrokersResponse
 type ListBrokersOutput struct {
 	_ struct{} `type:"structure"`
@@ -1686,6 +2456,29 @@ func (s ListBrokersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListBrokersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListBrokersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.BrokerSummaries) > 0 {
+		v := s.BrokerSummaries
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "brokerSummaries", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationRevisionsRequest
@@ -1727,6 +2520,31 @@ func (s *ListConfigurationRevisionsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListConfigurationRevisionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ConfigurationId != nil {
+		v := *s.ConfigurationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "configuration-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationRevisionsResponse
 type ListConfigurationRevisionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1755,6 +2573,41 @@ func (s ListConfigurationRevisionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListConfigurationRevisionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListConfigurationRevisionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConfigurationId != nil {
+		v := *s.ConfigurationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "configurationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Revisions) > 0 {
+		v := s.Revisions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "revisions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationsRequest
@@ -1789,6 +2642,25 @@ func (s *ListConfigurationsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListConfigurationsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListConfigurationsResponse
 type ListConfigurationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1815,6 +2687,35 @@ func (s ListConfigurationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListConfigurationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListConfigurationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Configurations) > 0 {
+		v := s.Configurations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "configurations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListUsersRequest
@@ -1856,6 +2757,31 @@ func (s *ListUsersInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListUsersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/ListUsersResponse
 type ListUsersOutput struct {
 	_ struct{} `type:"structure"`
@@ -1884,6 +2810,41 @@ func (s ListUsersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListUsersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListUsersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Users) > 0 {
+		v := s.Users
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "users", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/RebootBrokerRequest
@@ -1918,6 +2879,19 @@ func (s *RebootBrokerInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RebootBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/RebootBrokerResponse
 type RebootBrokerOutput struct {
 	_ struct{} `type:"structure"`
@@ -1938,6 +2912,11 @@ func (s RebootBrokerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RebootBrokerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RebootBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Returns information about the XML element or attribute that was sanitized
@@ -1970,6 +2949,29 @@ func (s SanitizationWarning) String() string {
 // GoString returns the string representation
 func (s SanitizationWarning) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SanitizationWarning) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "attributeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ElementName != nil {
+		v := *s.ElementName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "elementName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Reason) > 0 {
+		v := s.Reason
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "reason", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerRequest
@@ -2007,6 +3009,25 @@ func (s *UpdateBrokerInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateBrokerInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Configuration != nil {
+		v := s.Configuration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "configuration", v, metadata)
+	}
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateBrokerResponse
 type UpdateBrokerOutput struct {
 	_ struct{} `type:"structure"`
@@ -2032,6 +3053,23 @@ func (s UpdateBrokerOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateBrokerOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateBrokerOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "brokerId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Configuration != nil {
+		v := s.Configuration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "configuration", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateConfigurationRequest
@@ -2070,6 +3108,31 @@ func (s *UpdateConfigurationInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateConfigurationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Data != nil {
+		v := *s.Data
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "data", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ConfigurationId != nil {
+		v := *s.ConfigurationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "configuration-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateConfigurationResponse
 type UpdateConfigurationOutput struct {
 	_ struct{} `type:"structure"`
@@ -2101,6 +3164,47 @@ func (s UpdateConfigurationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateConfigurationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateConfigurationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LatestRevision != nil {
+		v := s.LatestRevision
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "latestRevision", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Warnings) > 0 {
+		v := s.Warnings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "warnings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateUserRequest
@@ -2148,6 +3252,49 @@ func (s *UpdateUserInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ConsoleAccess != nil {
+		v := *s.ConsoleAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "consoleAccess", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Groups) > 0 {
+		v := s.Groups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "groups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Password != nil {
+		v := *s.Password
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "password", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.BrokerId != nil {
+		v := *s.BrokerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "broker-id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "username", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UpdateUserResponse
 type UpdateUserOutput struct {
 	_ struct{} `type:"structure"`
@@ -2168,6 +3315,11 @@ func (s UpdateUserOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateUserOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // An ActiveMQ user associated with the broker.
@@ -2204,6 +3356,41 @@ func (s User) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s User) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConsoleAccess != nil {
+		v := *s.ConsoleAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "consoleAccess", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Groups) > 0 {
+		v := s.Groups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "groups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Password != nil {
+		v := *s.Password
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "password", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "username", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Returns information about the status of the changes pending for the ActiveMQ
 // user.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UserPendingChanges
@@ -2233,6 +3420,35 @@ func (s UserPendingChanges) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UserPendingChanges) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConsoleAccess != nil {
+		v := *s.ConsoleAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "consoleAccess", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Groups) > 0 {
+		v := s.Groups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "groups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.PendingChange) > 0 {
+		v := s.PendingChange
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pendingChange", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // Returns a list of all ActiveMQ users.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mq-2017-11-27/UserSummary
 type UserSummary struct {
@@ -2256,6 +3472,23 @@ func (s UserSummary) String() string {
 // GoString returns the string representation
 func (s UserSummary) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UserSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.PendingChange) > 0 {
+		v := s.PendingChange
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "pendingChange", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Username != nil {
+		v := *s.Username
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "username", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The scheduled time period relative to UTC during which Amazon MQ begins to
@@ -2286,6 +3519,29 @@ func (s WeeklyStartTime) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s WeeklyStartTime) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DayOfWeek) > 0 {
+		v := s.DayOfWeek
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dayOfWeek", protocol.QuotedValue{v}, metadata)
+	}
+	if s.TimeOfDay != nil {
+		v := *s.TimeOfDay
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeOfDay", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TimeZone != nil {
+		v := *s.TimeZone
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeZone", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The status of the broker. Possible values: CREATION_IN_PROGRESS, CREATION_FAILED,
 // DELETION_IN_PROGRESS, RUNNING, REBOOT_IN_PROGRESS
 type BrokerState string
@@ -2299,6 +3555,15 @@ const (
 	BrokerStateRebootInProgress   BrokerState = "REBOOT_IN_PROGRESS"
 )
 
+func (enum BrokerState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BrokerState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The type of change pending for the ActiveMQ user. Possible values: CREATE,
 // UPDATE, DELETE
 type ChangeType string
@@ -2309,6 +3574,15 @@ const (
 	ChangeTypeUpdate ChangeType = "UPDATE"
 	ChangeTypeDelete ChangeType = "DELETE"
 )
+
+func (enum ChangeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DayOfWeek string
 
@@ -2323,6 +3597,15 @@ const (
 	DayOfWeekSunday    DayOfWeek = "SUNDAY"
 )
 
+func (enum DayOfWeek) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DayOfWeek) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The deployment mode of the broker. Possible values: SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ
 // SINGLE_INSTANCE creates a single-instance broker in a single Availability
 // Zone. ACTIVE_STANDBY_MULTI_AZ creates an active/standby broker for high availability.
@@ -2334,6 +3617,15 @@ const (
 	DeploymentModeActiveStandbyMultiAz DeploymentMode = "ACTIVE_STANDBY_MULTI_AZ"
 )
 
+func (enum DeploymentMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeploymentMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.
 type EngineType string
 
@@ -2341,6 +3633,15 @@ type EngineType string
 const (
 	EngineTypeActivemq EngineType = "ACTIVEMQ"
 )
+
+func (enum EngineType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EngineType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The reason for which the XML elements or attributes were sanitized. Possible
 // values: DISALLOWED_ELEMENT_REMOVED, DISALLOWED_ATTRIBUTE_REMOVED, INVALID_ATTRIBUTE_VALUE_REMOVED
@@ -2357,3 +3658,12 @@ const (
 	SanitizationWarningReasonDisallowedAttributeRemoved   SanitizationWarningReason = "DISALLOWED_ATTRIBUTE_REMOVED"
 	SanitizationWarningReasonInvalidAttributeValueRemoved SanitizationWarningReason = "INVALID_ATTRIBUTE_VALUE_REMOVED"
 )
+
+func (enum SanitizationWarningReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SanitizationWarningReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

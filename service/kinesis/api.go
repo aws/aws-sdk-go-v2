@@ -4009,6 +4009,15 @@ const (
 	EncryptionTypeKms  EncryptionType = "KMS"
 )
 
+func (enum EncryptionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncryptionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type MetricsName string
 
 // Enum values for MetricsName
@@ -4023,12 +4032,30 @@ const (
 	MetricsNameAll                                MetricsName = "ALL"
 )
 
+func (enum MetricsName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricsName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ScalingType string
 
 // Enum values for ScalingType
 const (
 	ScalingTypeUniformScaling ScalingType = "UNIFORM_SCALING"
 )
+
+func (enum ScalingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScalingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ShardIteratorType string
 
@@ -4041,6 +4068,15 @@ const (
 	ShardIteratorTypeAtTimestamp         ShardIteratorType = "AT_TIMESTAMP"
 )
 
+func (enum ShardIteratorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ShardIteratorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StreamStatus string
 
 // Enum values for StreamStatus
@@ -4050,3 +4086,12 @@ const (
 	StreamStatusActive   StreamStatus = "ACTIVE"
 	StreamStatusUpdating StreamStatus = "UPDATING"
 )
+
+func (enum StreamStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StreamStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

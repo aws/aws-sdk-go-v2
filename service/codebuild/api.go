@@ -3016,6 +3016,15 @@ const (
 	ArtifactNamespaceBuildId ArtifactNamespace = "BUILD_ID"
 )
 
+func (enum ArtifactNamespace) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArtifactNamespace) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ArtifactPackaging string
 
 // Enum values for ArtifactPackaging
@@ -3023,6 +3032,15 @@ const (
 	ArtifactPackagingNone ArtifactPackaging = "NONE"
 	ArtifactPackagingZip  ArtifactPackaging = "ZIP"
 )
+
+func (enum ArtifactPackaging) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArtifactPackaging) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ArtifactsType string
 
@@ -3032,6 +3050,15 @@ const (
 	ArtifactsTypeS3           ArtifactsType = "S3"
 	ArtifactsTypeNoArtifacts  ArtifactsType = "NO_ARTIFACTS"
 )
+
+func (enum ArtifactsType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArtifactsType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type BuildPhaseType string
 
@@ -3049,6 +3076,15 @@ const (
 	BuildPhaseTypeCompleted       BuildPhaseType = "COMPLETED"
 )
 
+func (enum BuildPhaseType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BuildPhaseType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CacheType string
 
 // Enum values for CacheType
@@ -3056,6 +3092,15 @@ const (
 	CacheTypeNoCache CacheType = "NO_CACHE"
 	CacheTypeS3      CacheType = "S3"
 )
+
+func (enum CacheType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CacheType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ComputeType string
 
@@ -3066,12 +3111,30 @@ const (
 	ComputeTypeBuildGeneral1Large  ComputeType = "BUILD_GENERAL1_LARGE"
 )
 
+func (enum ComputeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComputeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EnvironmentType string
 
 // Enum values for EnvironmentType
 const (
 	EnvironmentTypeLinuxContainer EnvironmentType = "LINUX_CONTAINER"
 )
+
+func (enum EnvironmentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EnvironmentVariableType string
 
@@ -3080,6 +3143,15 @@ const (
 	EnvironmentVariableTypePlaintext      EnvironmentVariableType = "PLAINTEXT"
 	EnvironmentVariableTypeParameterStore EnvironmentVariableType = "PARAMETER_STORE"
 )
+
+func (enum EnvironmentVariableType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentVariableType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type LanguageType string
 
@@ -3096,6 +3168,15 @@ const (
 	LanguageTypeBase    LanguageType = "BASE"
 )
 
+func (enum LanguageType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LanguageType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PlatformType string
 
 // Enum values for PlatformType
@@ -3104,6 +3185,15 @@ const (
 	PlatformTypeAmazonLinux PlatformType = "AMAZON_LINUX"
 	PlatformTypeUbuntu      PlatformType = "UBUNTU"
 )
+
+func (enum PlatformType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlatformType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProjectSortByType string
 
@@ -3114,6 +3204,15 @@ const (
 	ProjectSortByTypeLastModifiedTime ProjectSortByType = "LAST_MODIFIED_TIME"
 )
 
+func (enum ProjectSortByType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProjectSortByType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SortOrderType string
 
 // Enum values for SortOrderType
@@ -3122,12 +3221,30 @@ const (
 	SortOrderTypeDescending SortOrderType = "DESCENDING"
 )
 
+func (enum SortOrderType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortOrderType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SourceAuthType string
 
 // Enum values for SourceAuthType
 const (
 	SourceAuthTypeOauth SourceAuthType = "OAUTH"
 )
+
+func (enum SourceAuthType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceAuthType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SourceType string
 
@@ -3140,6 +3257,15 @@ const (
 	SourceTypeBitbucket    SourceType = "BITBUCKET"
 )
 
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StatusType string
 
 // Enum values for StatusType
@@ -3151,3 +3277,12 @@ const (
 	StatusTypeInProgress StatusType = "IN_PROGRESS"
 	StatusTypeStopped    StatusType = "STOPPED"
 )
+
+func (enum StatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

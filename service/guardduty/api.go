@@ -5,6 +5,7 @@ package guardduty
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opAcceptInvitation = "AcceptInvitation"
@@ -2221,6 +2222,31 @@ func (s *AcceptInvitationInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AcceptInvitationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.InvitationId != nil {
+		v := *s.InvitationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "invitationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MasterId != nil {
+		v := *s.MasterId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "masterId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AcceptInvitationResponse
 type AcceptInvitationOutput struct {
 	_ struct{} `type:"structure"`
@@ -2243,6 +2269,11 @@ func (s AcceptInvitationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AcceptInvitationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // An object containing the member's accountId and email address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountDetail
 type AccountDetail struct {
@@ -2263,6 +2294,23 @@ func (s AccountDetail) String() string {
 // GoString returns the string representation
 func (s AccountDetail) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AccountDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accountId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Email != nil {
+		v := *s.Email
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "email", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information about the activity described in a finding.
@@ -2291,6 +2339,35 @@ func (s Action) String() string {
 // GoString returns the string representation
 func (s Action) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Action) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ActionType != nil {
+		v := *s.ActionType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "actionType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AwsApiCallAction != nil {
+		v := s.AwsApiCallAction
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "awsApiCallAction", v, metadata)
+	}
+	if s.DnsRequestAction != nil {
+		v := s.DnsRequestAction
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "dnsRequestAction", v, metadata)
+	}
+	if s.NetworkConnectionAction != nil {
+		v := s.NetworkConnectionAction
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "networkConnectionAction", v, metadata)
+	}
+	return nil
 }
 
 // Archive Findings Request
@@ -2329,6 +2406,31 @@ func (s *ArchiveFindingsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ArchiveFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.FindingIds) > 0 {
+		v := s.FindingIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "findingIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindingsResponse
 type ArchiveFindingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2349,6 +2451,11 @@ func (s ArchiveFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ArchiveFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ArchiveFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Information about the AWS_API_CALL action described in this finding.
@@ -2382,6 +2489,41 @@ func (s AwsApiCallAction) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsApiCallAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Api != nil {
+		v := *s.Api
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "api", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CallerType != nil {
+		v := *s.CallerType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "callerType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DomainDetails != nil {
+		v := s.DomainDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "domainDetails", v, metadata)
+	}
+	if s.RemoteIpDetails != nil {
+		v := s.RemoteIpDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "remoteIpDetails", v, metadata)
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // City information of the remote IP address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/City
 type City struct {
@@ -2399,6 +2541,17 @@ func (s City) String() string {
 // GoString returns the string representation
 func (s City) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s City) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CityName != nil {
+		v := *s.CityName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "cityName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Finding attribute (for example, accountId) for which conditions and values
@@ -2442,6 +2595,59 @@ func (s Condition) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Condition) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Eq) > 0 {
+		v := s.Eq
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "eq", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Gt != nil {
+		v := *s.Gt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gt", protocol.Int64Value(v), metadata)
+	}
+	if s.Gte != nil {
+		v := *s.Gte
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gte", protocol.Int64Value(v), metadata)
+	}
+	if s.Lt != nil {
+		v := *s.Lt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lt", protocol.Int64Value(v), metadata)
+	}
+	if s.Lte != nil {
+		v := *s.Lte
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lte", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Neq) > 0 {
+		v := s.Neq
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "neq", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Country information of the remote IP address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Country
 type Country struct {
@@ -2464,6 +2670,23 @@ func (s Country) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Country) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CountryCode != nil {
+		v := *s.CountryCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "countryCode", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CountryName != nil {
+		v := *s.CountryName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "countryName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Create Detector Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateDetectorRequest
 type CreateDetectorInput struct {
@@ -2481,6 +2704,19 @@ func (s CreateDetectorInput) String() string {
 // GoString returns the string representation
 func (s CreateDetectorInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Enable != nil {
+		v := *s.Enable
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enable", protocol.BoolValue(v), metadata)
+	}
+	return nil
 }
 
 // CreateDetector response object.
@@ -2507,6 +2743,17 @@ func (s CreateDetectorOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateDetectorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Create IP Set Request
@@ -2557,6 +2804,43 @@ func (s *CreateIPSetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateIPSetInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Activate != nil {
+		v := *s.Activate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "activate", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "format", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "location", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // CreateIPSet response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetResponse
 type CreateIPSetOutput struct {
@@ -2581,6 +2865,17 @@ func (s CreateIPSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateIPSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateIPSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IpSetId != nil {
+		v := *s.IpSetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ipSetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // CreateMembers body
@@ -2620,6 +2915,31 @@ func (s *CreateMembersInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateMembersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AccountDetails) > 0 {
+		v := s.AccountDetails
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "accountDetails", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // CreateMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateMembersResponse
 type CreateMembersOutput struct {
@@ -2645,6 +2965,23 @@ func (s CreateMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.UnprocessedAccounts) > 0 {
+		v := s.UnprocessedAccounts
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Create Sample Findings Request
@@ -2683,6 +3020,31 @@ func (s *CreateSampleFindingsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateSampleFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.FindingTypes) > 0 {
+		v := s.FindingTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "findingTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateSampleFindingsResponse
 type CreateSampleFindingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -2703,6 +3065,11 @@ func (s CreateSampleFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateSampleFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateSampleFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Create Threat Intel Set Request
@@ -2752,6 +3119,43 @@ func (s *CreateThreatIntelSetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Activate != nil {
+		v := *s.Activate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "activate", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "format", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "location", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // CreateThreatIntelSet response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateThreatIntelSetResponse
 type CreateThreatIntelSetOutput struct {
@@ -2778,6 +3182,17 @@ func (s CreateThreatIntelSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateThreatIntelSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ThreatIntelSetId != nil {
+		v := *s.ThreatIntelSetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "threatIntelSetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // DeclineInvitations request body.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitationsRequest
 type DeclineInvitationsInput struct {
@@ -2796,6 +3211,25 @@ func (s DeclineInvitationsInput) String() string {
 // GoString returns the string representation
 func (s DeclineInvitationsInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeclineInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AccountIds) > 0 {
+		v := s.AccountIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "accountIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // DeclineInvitations response object.
@@ -2823,6 +3257,23 @@ func (s DeclineInvitationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeclineInvitationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeclineInvitationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.UnprocessedAccounts) > 0 {
+		v := s.UnprocessedAccounts
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorRequest
@@ -2857,6 +3308,19 @@ func (s *DeleteDetectorInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteDetectorResponse
 type DeleteDetectorOutput struct {
 	_ struct{} `type:"structure"`
@@ -2877,6 +3341,11 @@ func (s DeleteDetectorOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDetectorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSetRequest
@@ -2918,6 +3387,25 @@ func (s *DeleteIPSetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteIPSetInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.IpSetId != nil {
+		v := *s.IpSetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ipSetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteIPSetResponse
 type DeleteIPSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -2940,6 +3428,11 @@ func (s DeleteIPSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteIPSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // DeleteInvitations request body.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitationsRequest
 type DeleteInvitationsInput struct {
@@ -2958,6 +3451,25 @@ func (s DeleteInvitationsInput) String() string {
 // GoString returns the string representation
 func (s DeleteInvitationsInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AccountIds) > 0 {
+		v := s.AccountIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "accountIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // DeleteInvitations response object.
@@ -2985,6 +3497,23 @@ func (s DeleteInvitationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteInvitationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteInvitationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.UnprocessedAccounts) > 0 {
+		v := s.UnprocessedAccounts
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // DeleteMembers request body.
@@ -3023,6 +3552,31 @@ func (s *DeleteMembersInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AccountIds) > 0 {
+		v := s.AccountIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "accountIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // DeleteMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteMembersResponse
 type DeleteMembersOutput struct {
@@ -3048,6 +3602,23 @@ func (s DeleteMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.UnprocessedAccounts) > 0 {
+		v := s.UnprocessedAccounts
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetRequest
@@ -3089,6 +3660,25 @@ func (s *DeleteThreatIntelSetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThreatIntelSetId != nil {
+		v := *s.ThreatIntelSetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "threatIntelSetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteThreatIntelSetResponse
 type DeleteThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -3109,6 +3699,11 @@ func (s DeleteThreatIntelSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteThreatIntelSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteThreatIntelSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccountRequest
@@ -3143,6 +3738,19 @@ func (s *DisassociateFromMasterAccountInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociateFromMasterAccountInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateFromMasterAccountResponse
 type DisassociateFromMasterAccountOutput struct {
 	_ struct{} `type:"structure"`
@@ -3163,6 +3771,11 @@ func (s DisassociateFromMasterAccountOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DisassociateFromMasterAccountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociateFromMasterAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // DisassociateMembers request body.
@@ -3202,6 +3815,31 @@ func (s *DisassociateMembersInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociateMembersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AccountIds) > 0 {
+		v := s.AccountIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "accountIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // DisassociateMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisassociateMembersResponse
 type DisassociateMembersOutput struct {
@@ -3229,6 +3867,23 @@ func (s DisassociateMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DisassociateMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.UnprocessedAccounts) > 0 {
+		v := s.UnprocessedAccounts
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Information about the DNS_REQUEST action described in this finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DnsRequestAction
 type DnsRequestAction struct {
@@ -3248,6 +3903,17 @@ func (s DnsRequestAction) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DnsRequestAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Domain != nil {
+		v := *s.Domain
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "domain", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Domain information for the AWS API call.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DomainDetails
 type DomainDetails struct {
@@ -3262,6 +3928,11 @@ func (s DomainDetails) String() string {
 // GoString returns the string representation
 func (s DomainDetails) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DomainDetails) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Representation of a abnormal or suspicious activity.
@@ -3328,6 +3999,101 @@ func (s Finding) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Finding) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accountId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Confidence != nil {
+		v := *s.Confidence
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "confidence", protocol.Float64Value(v), metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Partition != nil {
+		v := *s.Partition
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "region", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Resource != nil {
+		v := s.Resource
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "resource", v, metadata)
+	}
+	if s.SchemaVersion != nil {
+		v := *s.SchemaVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "schemaVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Service != nil {
+		v := s.Service
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "service", v, metadata)
+	}
+	if s.Severity != nil {
+		v := *s.Severity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "severity", protocol.Float64Value(v), metadata)
+	}
+	if s.Title != nil {
+		v := *s.Title
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "title", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdatedAt != nil {
+		v := *s.UpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "updatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Represents the criteria used for querying findings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingCriteria
 type FindingCriteria struct {
@@ -3348,6 +4114,23 @@ func (s FindingCriteria) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FindingCriteria) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Criterion) > 0 {
+		v := s.Criterion
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "criterion", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetFields(k1, v1)
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // Finding statistics object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/FindingStatistics
 type FindingStatistics struct {
@@ -3365,6 +4148,23 @@ func (s FindingStatistics) String() string {
 // GoString returns the string representation
 func (s FindingStatistics) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FindingStatistics) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CountBySeverity) > 0 {
+		v := s.CountBySeverity
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "countBySeverity", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.Int64Value(v1))
+		}
+		ms0.End()
+
+	}
+	return nil
 }
 
 // Location information of the remote IP address.
@@ -3387,6 +4187,23 @@ func (s GeoLocation) String() string {
 // GoString returns the string representation
 func (s GeoLocation) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GeoLocation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Lat != nil {
+		v := *s.Lat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lat", protocol.Float64Value(v), metadata)
+	}
+	if s.Lon != nil {
+		v := *s.Lon
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lon", protocol.Float64Value(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetDetectorRequest
@@ -3417,6 +4234,19 @@ func (s *GetDetectorInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3454,6 +4284,35 @@ func (s GetDetectorOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDetectorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceRole != nil {
+		v := *s.ServiceRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceRole", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	if s.UpdatedAt != nil {
+		v := *s.UpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "updatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Get Findings Request
@@ -3495,6 +4354,37 @@ func (s *GetFindingsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.FindingIds) > 0 {
+		v := s.FindingIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "findingIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.SortCriteria != nil {
+		v := s.SortCriteria
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "sortCriteria", v, metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // GetFindings response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsResponse
 type GetFindingsOutput struct {
@@ -3519,6 +4409,23 @@ func (s GetFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Findings) > 0 {
+		v := s.Findings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "findings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Get Findings Statistics Request
@@ -3560,6 +4467,37 @@ func (s *GetFindingsStatisticsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFindingsStatisticsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.FindingCriteria != nil {
+		v := s.FindingCriteria
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "findingCriteria", v, metadata)
+	}
+	if len(s.FindingStatisticTypes) > 0 {
+		v := s.FindingStatisticTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "findingStatisticTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // GetFindingsStatistics response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFindingsStatisticsResponse
 type GetFindingsStatisticsOutput struct {
@@ -3584,6 +4522,17 @@ func (s GetFindingsStatisticsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetFindingsStatisticsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFindingsStatisticsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FindingStatistics != nil {
+		v := s.FindingStatistics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "findingStatistics", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetRequest
@@ -3625,6 +4574,25 @@ func (s *GetIPSetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetIPSetInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.IpSetId != nil {
+		v := *s.IpSetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ipSetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // GetIPSet response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetIPSetResponse
 type GetIPSetOutput struct {
@@ -3662,6 +4630,35 @@ func (s GetIPSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetIPSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "format", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "location", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetInvitationsCountRequest
 type GetInvitationsCountInput struct {
 	_ struct{} `type:"structure"`
@@ -3675,6 +4672,13 @@ func (s GetInvitationsCountInput) String() string {
 // GoString returns the string representation
 func (s GetInvitationsCountInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetInvitationsCountInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	return nil
 }
 
 // GetInvitationsCount response object.
@@ -3701,6 +4705,17 @@ func (s GetInvitationsCountOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetInvitationsCountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetInvitationsCountOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InvitationsCount != nil {
+		v := *s.InvitationsCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "invitationsCount", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountRequest
@@ -3735,6 +4750,19 @@ func (s *GetMasterAccountInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetMasterAccountInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // GetMasterAccount response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMasterAccountResponse
 type GetMasterAccountOutput struct {
@@ -3759,6 +4787,17 @@ func (s GetMasterAccountOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetMasterAccountOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetMasterAccountOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Master != nil {
+		v := s.Master
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "master", v, metadata)
+	}
+	return nil
 }
 
 // GetMembers request body.
@@ -3797,6 +4836,31 @@ func (s *GetMembersInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetMembersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AccountIds) > 0 {
+		v := s.AccountIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "accountIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // GetMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetMembersResponse
 type GetMembersOutput struct {
@@ -3825,6 +4889,35 @@ func (s GetMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Members) > 0 {
+		v := s.Members
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "members", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.UnprocessedAccounts) > 0 {
+		v := s.UnprocessedAccounts
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetRequest
@@ -3866,6 +4959,25 @@ func (s *GetThreatIntelSetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThreatIntelSetId != nil {
+		v := *s.ThreatIntelSetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "threatIntelSetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // GetThreatIntelSet response object
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetThreatIntelSetResponse
 type GetThreatIntelSetOutput struct {
@@ -3902,6 +5014,35 @@ func (s GetThreatIntelSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetThreatIntelSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "format", protocol.QuotedValue{v}, metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "location", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // The profile information of the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/IamInstanceProfile
 type IamInstanceProfile struct {
@@ -3922,6 +5063,23 @@ func (s IamInstanceProfile) String() string {
 // GoString returns the string representation
 func (s IamInstanceProfile) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s IamInstanceProfile) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The information about the EC2 instance associated with the activity that
@@ -3974,6 +5132,95 @@ func (s InstanceDetails) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AvailabilityZone != nil {
+		v := *s.AvailabilityZone
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "availabilityZone", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.IamInstanceProfile != nil {
+		v := s.IamInstanceProfile
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "iamInstanceProfile", v, metadata)
+	}
+	if s.ImageId != nil {
+		v := *s.ImageId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "imageId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "instanceId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceState != nil {
+		v := *s.InstanceState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "instanceState", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InstanceType != nil {
+		v := *s.InstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "instanceType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LaunchTime != nil {
+		v := *s.LaunchTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "launchTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.NetworkInterfaces) > 0 {
+		v := s.NetworkInterfaces
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "networkInterfaces", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Platform != nil {
+		v := *s.Platform
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "platform", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ProductCodes) > 0 {
+		v := s.ProductCodes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "productCodes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Invitation from an AWS account to become the current account's master.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Invitation
 type Invitation struct {
@@ -4000,6 +5247,35 @@ func (s Invitation) String() string {
 // GoString returns the string representation
 func (s Invitation) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Invitation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accountId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InvitationId != nil {
+		v := *s.InvitationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "invitationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InvitedAt != nil {
+		v := *s.InvitedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "invitedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RelationshipStatus != nil {
+		v := *s.RelationshipStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "relationshipStatus", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // InviteMembers request body.
@@ -4043,6 +5319,37 @@ func (s *InviteMembersInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InviteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AccountIds) > 0 {
+		v := s.AccountIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "accountIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // InviteMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/InviteMembersResponse
 type InviteMembersOutput struct {
@@ -4068,6 +5375,23 @@ func (s InviteMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InviteMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InviteMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.UnprocessedAccounts) > 0 {
+		v := s.UnprocessedAccounts
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectorsRequest
@@ -4104,6 +5428,25 @@ func (s *ListDetectorsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDetectorsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // ListDetectors response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListDetectorsResponse
 type ListDetectorsOutput struct {
@@ -4134,6 +5477,29 @@ func (s ListDetectorsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDetectorsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListDetectorsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DetectorIds) > 0 {
+		v := s.DetectorIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "detectorIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // List Findings Request
@@ -4188,6 +5554,43 @@ func (s *ListFindingsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.FindingCriteria != nil {
+		v := s.FindingCriteria
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "findingCriteria", v, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SortCriteria != nil {
+		v := s.SortCriteria
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "sortCriteria", v, metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // ListFindings response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFindingsResponse
 type ListFindingsOutput struct {
@@ -4218,6 +5621,29 @@ func (s ListFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.FindingIds) > 0 {
+		v := s.FindingIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "findingIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsRequest
@@ -4261,6 +5687,31 @@ func (s *ListIPSetsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListIPSetsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // ListIPSets response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListIPSetsResponse
 type ListIPSetsOutput struct {
@@ -4291,6 +5742,29 @@ func (s ListIPSetsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListIPSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListIPSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.IpSetIds) > 0 {
+		v := s.IpSetIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ipSetIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitationsRequest
@@ -4327,6 +5801,25 @@ func (s *ListInvitationsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListInvitationsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // ListInvitations response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListInvitationsResponse
 type ListInvitationsOutput struct {
@@ -4357,6 +5850,29 @@ func (s ListInvitationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListInvitationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListInvitationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Invitations) > 0 {
+		v := s.Invitations
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "invitations", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersRequest
@@ -4402,6 +5918,37 @@ func (s *ListMembersInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListMembersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.OnlyAssociated != nil {
+		v := *s.OnlyAssociated
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "onlyAssociated", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // ListMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListMembersResponse
 type ListMembersOutput struct {
@@ -4432,6 +5979,29 @@ func (s ListMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Members) > 0 {
+		v := s.Members
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "members", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsRequest
@@ -4475,6 +6045,31 @@ func (s *ListThreatIntelSetsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListThreatIntelSetsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // ListThreatIntelSets response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListThreatIntelSetsResponse
 type ListThreatIntelSetsOutput struct {
@@ -4507,6 +6102,29 @@ func (s ListThreatIntelSetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListThreatIntelSetsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ThreatIntelSetIds) > 0 {
+		v := s.ThreatIntelSetIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "threatIntelSetIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Local port information of the connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/LocalPortDetails
 type LocalPortDetails struct {
@@ -4527,6 +6145,23 @@ func (s LocalPortDetails) String() string {
 // GoString returns the string representation
 func (s LocalPortDetails) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LocalPortDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Port != nil {
+		v := *s.Port
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "port", protocol.Int64Value(v), metadata)
+	}
+	if s.PortName != nil {
+		v := *s.PortName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "portName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Contains details about the master account.
@@ -4555,6 +6190,35 @@ func (s Master) String() string {
 // GoString returns the string representation
 func (s Master) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Master) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accountId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InvitationId != nil {
+		v := *s.InvitationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "invitationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InvitedAt != nil {
+		v := *s.InvitedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "invitedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RelationshipStatus != nil {
+		v := *s.RelationshipStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "relationshipStatus", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Contains details about the member account.
@@ -4594,6 +6258,53 @@ func (s Member) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Member) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accountId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Email != nil {
+		v := *s.Email
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "email", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InvitedAt != nil {
+		v := *s.InvitedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "invitedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MasterId != nil {
+		v := *s.MasterId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "masterId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RelationshipStatus != nil {
+		v := *s.RelationshipStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "relationshipStatus", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.UpdatedAt != nil {
+		v := *s.UpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "updatedAt", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Information about the NETWORK_CONNECTION action described in this finding.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/NetworkConnectionAction
 type NetworkConnectionAction struct {
@@ -4626,6 +6337,47 @@ func (s NetworkConnectionAction) String() string {
 // GoString returns the string representation
 func (s NetworkConnectionAction) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NetworkConnectionAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Blocked != nil {
+		v := *s.Blocked
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "blocked", protocol.BoolValue(v), metadata)
+	}
+	if s.ConnectionDirection != nil {
+		v := *s.ConnectionDirection
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "connectionDirection", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LocalPortDetails != nil {
+		v := s.LocalPortDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "localPortDetails", v, metadata)
+	}
+	if s.Protocol != nil {
+		v := *s.Protocol
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "protocol", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.RemoteIpDetails != nil {
+		v := s.RemoteIpDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "remoteIpDetails", v, metadata)
+	}
+	if s.RemotePortDetails != nil {
+		v := s.RemotePortDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "remotePortDetails", v, metadata)
+	}
+	return nil
 }
 
 // The network interface information of the EC2 instance.
@@ -4671,6 +6423,83 @@ func (s NetworkInterface) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Ipv6Addresses) > 0 {
+		v := s.Ipv6Addresses
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ipv6Addresses", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.PrivateDnsName != nil {
+		v := *s.PrivateDnsName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privateDnsName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PrivateIpAddress != nil {
+		v := *s.PrivateIpAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privateIpAddress", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.PrivateIpAddresses) > 0 {
+		v := s.PrivateIpAddresses
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "privateIpAddresses", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.PublicDnsName != nil {
+		v := *s.PublicDnsName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "publicDnsName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PublicIp != nil {
+		v := *s.PublicIp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "publicIp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.SecurityGroups) > 0 {
+		v := s.SecurityGroups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "securityGroups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.SubnetId != nil {
+		v := *s.SubnetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "subnetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "vpcId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // ISP Organization information of the remote IP address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Organization
 type Organization struct {
@@ -4699,6 +6528,35 @@ func (s Organization) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Organization) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Asn != nil {
+		v := *s.Asn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "asn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.AsnOrg != nil {
+		v := *s.AsnOrg
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "asnOrg", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Isp != nil {
+		v := *s.Isp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "isp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Org != nil {
+		v := *s.Org
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "org", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Other private IP address information of the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PrivateIpAddressDetails
 type PrivateIpAddressDetails struct {
@@ -4721,6 +6579,23 @@ func (s PrivateIpAddressDetails) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PrivateIpAddressDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PrivateDnsName != nil {
+		v := *s.PrivateDnsName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privateDnsName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.PrivateIpAddress != nil {
+		v := *s.PrivateIpAddress
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privateIpAddress", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The product code of the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ProductCode
 type ProductCode struct {
@@ -4741,6 +6616,23 @@ func (s ProductCode) String() string {
 // GoString returns the string representation
 func (s ProductCode) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ProductCode) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Code != nil {
+		v := *s.Code
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "code", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ProductType != nil {
+		v := *s.ProductType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "productType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Remote IP information of the connection.
@@ -4774,6 +6666,41 @@ func (s RemoteIpDetails) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RemoteIpDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.City != nil {
+		v := s.City
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "city", v, metadata)
+	}
+	if s.Country != nil {
+		v := s.Country
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "country", v, metadata)
+	}
+	if s.GeoLocation != nil {
+		v := s.GeoLocation
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "geoLocation", v, metadata)
+	}
+	if s.IpAddressV4 != nil {
+		v := *s.IpAddressV4
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ipAddressV4", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Organization != nil {
+		v := s.Organization
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "organization", v, metadata)
+	}
+	return nil
+}
+
 // Remote port information of the connection.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemotePortDetails
 type RemotePortDetails struct {
@@ -4794,6 +6721,23 @@ func (s RemotePortDetails) String() string {
 // GoString returns the string representation
 func (s RemotePortDetails) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RemotePortDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Port != nil {
+		v := *s.Port
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "port", protocol.Int64Value(v), metadata)
+	}
+	if s.PortName != nil {
+		v := *s.PortName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "portName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The AWS resource associated with the activity that prompted GuardDuty to
@@ -4820,6 +6764,23 @@ func (s Resource) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InstanceDetails != nil {
+		v := s.InstanceDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "instanceDetails", v, metadata)
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Security groups associated with the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SecurityGroup
 type SecurityGroup struct {
@@ -4840,6 +6801,23 @@ func (s SecurityGroup) String() string {
 // GoString returns the string representation
 func (s SecurityGroup) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SecurityGroup) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupId != nil {
+		v := *s.GroupId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "groupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "groupName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Additional information assigned to the generated finding by GuardDuty.
@@ -4887,6 +6865,65 @@ func (s Service) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Service) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Action != nil {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "action", v, metadata)
+	}
+	if s.Archived != nil {
+		v := *s.Archived
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "archived", protocol.BoolValue(v), metadata)
+	}
+	if s.Count != nil {
+		v := *s.Count
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "count", protocol.Int64Value(v), metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.EventFirstSeen != nil {
+		v := *s.EventFirstSeen
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "eventFirstSeen", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.EventLastSeen != nil {
+		v := *s.EventLastSeen
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "eventLastSeen", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceRole != nil {
+		v := *s.ResourceRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceRole", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.UserFeedback != nil {
+		v := *s.UserFeedback
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "userFeedback", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Represents the criteria used for sorting findings.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SortCriteria
 type SortCriteria struct {
@@ -4908,6 +6945,23 @@ func (s SortCriteria) String() string {
 // GoString returns the string representation
 func (s SortCriteria) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SortCriteria) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AttributeName != nil {
+		v := *s.AttributeName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "attributeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.OrderBy) > 0 {
+		v := s.OrderBy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "orderBy", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
 }
 
 // StartMonitoringMembers request body.
@@ -4947,6 +7001,31 @@ func (s *StartMonitoringMembersInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartMonitoringMembersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AccountIds) > 0 {
+		v := s.AccountIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "accountIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // StartMonitoringMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StartMonitoringMembersResponse
 type StartMonitoringMembersOutput struct {
@@ -4972,6 +7051,23 @@ func (s StartMonitoringMembersOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartMonitoringMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartMonitoringMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.UnprocessedAccounts) > 0 {
+		v := s.UnprocessedAccounts
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // StopMonitoringMembers request body.
@@ -5011,6 +7107,31 @@ func (s *StopMonitoringMembersInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StopMonitoringMembersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.AccountIds) > 0 {
+		v := s.AccountIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "accountIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // StopMonitoringMembers response object.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/StopMonitoringMembersResponse
 type StopMonitoringMembersOutput struct {
@@ -5038,6 +7159,23 @@ func (s StopMonitoringMembersOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StopMonitoringMembersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.UnprocessedAccounts) > 0 {
+		v := s.UnprocessedAccounts
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "unprocessedAccounts", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // A tag of the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Tag
 type Tag struct {
@@ -5058,6 +7196,23 @@ func (s Tag) String() string {
 // GoString returns the string representation
 func (s Tag) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Unrchive Findings Request
@@ -5096,6 +7251,31 @@ func (s *UnarchiveFindingsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UnarchiveFindingsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.FindingIds) > 0 {
+		v := s.FindingIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "findingIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UnarchiveFindingsResponse
 type UnarchiveFindingsOutput struct {
 	_ struct{} `type:"structure"`
@@ -5116,6 +7296,11 @@ func (s UnarchiveFindingsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UnarchiveFindingsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UnarchiveFindingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // An object containing the unprocessed account and a result string explaining
@@ -5139,6 +7324,23 @@ func (s UnprocessedAccount) String() string {
 // GoString returns the string representation
 func (s UnprocessedAccount) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UnprocessedAccount) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accountId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Result != nil {
+		v := *s.Result
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "result", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Update Detector Request
@@ -5178,6 +7380,25 @@ func (s *UpdateDetectorInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDetectorInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Enable != nil {
+		v := *s.Enable
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enable", protocol.BoolValue(v), metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateDetectorResponse
 type UpdateDetectorOutput struct {
 	_ struct{} `type:"structure"`
@@ -5198,6 +7419,11 @@ func (s UpdateDetectorOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateDetectorOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Update findings feedback body
@@ -5242,6 +7468,43 @@ func (s *UpdateFindingsFeedbackInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFindingsFeedbackInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Comments != nil {
+		v := *s.Comments
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "comments", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Feedback) > 0 {
+		v := s.Feedback
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "feedback", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.FindingIds) > 0 {
+		v := s.FindingIds
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "findingIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFindingsFeedbackResponse
 type UpdateFindingsFeedbackOutput struct {
 	_ struct{} `type:"structure"`
@@ -5262,6 +7525,11 @@ func (s UpdateFindingsFeedbackOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateFindingsFeedbackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFindingsFeedbackOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Update IP Set Request
@@ -5313,6 +7581,43 @@ func (s *UpdateIPSetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateIPSetInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Activate != nil {
+		v := *s.Activate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "activate", protocol.BoolValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "location", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.IpSetId != nil {
+		v := *s.IpSetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "ipSetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateIPSetResponse
 type UpdateIPSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -5333,6 +7638,11 @@ func (s UpdateIPSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateIPSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateIPSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
 }
 
 // Update Threat Intel Set Request
@@ -5386,6 +7696,43 @@ func (s *UpdateThreatIntelSetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateThreatIntelSetInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Activate != nil {
+		v := *s.Activate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "activate", protocol.BoolValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "location", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThreatIntelSetId != nil {
+		v := *s.ThreatIntelSetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "threatIntelSetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateThreatIntelSetResponse
 type UpdateThreatIntelSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -5408,6 +7755,11 @@ func (s UpdateThreatIntelSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateThreatIntelSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // The status of detector.
 type DetectorStatus string
 
@@ -5416,6 +7768,15 @@ const (
 	DetectorStatusEnabled  DetectorStatus = "ENABLED"
 	DetectorStatusDisabled DetectorStatus = "DISABLED"
 )
+
+func (enum DetectorStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DetectorStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Finding Feedback Value
 type Feedback string
@@ -5426,6 +7787,15 @@ const (
 	FeedbackNotUseful Feedback = "NOT_USEFUL"
 )
 
+func (enum Feedback) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Feedback) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The types of finding statistics.
 type FindingStatisticType string
 
@@ -5433,6 +7803,15 @@ type FindingStatisticType string
 const (
 	FindingStatisticTypeCountBySeverity FindingStatisticType = "COUNT_BY_SEVERITY"
 )
+
+func (enum FindingStatisticType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FindingStatisticType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The format of the ipSet.
 type IpSetFormat string
@@ -5446,6 +7825,15 @@ const (
 	IpSetFormatProofPoint IpSetFormat = "PROOF_POINT"
 	IpSetFormatFireEye    IpSetFormat = "FIRE_EYE"
 )
+
+func (enum IpSetFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IpSetFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The status of ipSet file uploaded.
 type IpSetStatus string
@@ -5461,6 +7849,15 @@ const (
 	IpSetStatusDeleted       IpSetStatus = "DELETED"
 )
 
+func (enum IpSetStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IpSetStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OrderBy string
 
 // Enum values for OrderBy
@@ -5468,6 +7865,15 @@ const (
 	OrderByAsc  OrderBy = "ASC"
 	OrderByDesc OrderBy = "DESC"
 )
+
+func (enum OrderBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrderBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The format of the threatIntelSet.
 type ThreatIntelSetFormat string
@@ -5482,6 +7888,15 @@ const (
 	ThreatIntelSetFormatFireEye    ThreatIntelSetFormat = "FIRE_EYE"
 )
 
+func (enum ThreatIntelSetFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ThreatIntelSetFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The status of threatIntelSet file uploaded.
 type ThreatIntelSetStatus string
 
@@ -5495,3 +7910,12 @@ const (
 	ThreatIntelSetStatusDeletePending ThreatIntelSetStatus = "DELETE_PENDING"
 	ThreatIntelSetStatusDeleted       ThreatIntelSetStatus = "DELETED"
 )
+
+func (enum ThreatIntelSetStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ThreatIntelSetStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

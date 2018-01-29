@@ -1998,6 +1998,15 @@ const (
 	CertificateStatusFailed             CertificateStatus = "FAILED"
 )
 
+func (enum CertificateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CertificateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CertificateType string
 
 // Enum values for CertificateType
@@ -2005,6 +2014,15 @@ const (
 	CertificateTypeImported     CertificateType = "IMPORTED"
 	CertificateTypeAmazonIssued CertificateType = "AMAZON_ISSUED"
 )
+
+func (enum CertificateType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CertificateType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DomainStatus string
 
@@ -2014,6 +2032,15 @@ const (
 	DomainStatusSuccess           DomainStatus = "SUCCESS"
 	DomainStatusFailed            DomainStatus = "FAILED"
 )
+
+func (enum DomainStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DomainStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExtendedKeyUsageName string
 
@@ -2033,6 +2060,15 @@ const (
 	ExtendedKeyUsageNameCustom                     ExtendedKeyUsageName = "CUSTOM"
 )
 
+func (enum ExtendedKeyUsageName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExtendedKeyUsageName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FailureReason string
 
 // Enum values for FailureReason
@@ -2045,6 +2081,15 @@ const (
 	FailureReasonOther                          FailureReason = "OTHER"
 )
 
+func (enum FailureReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FailureReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type KeyAlgorithm string
 
 // Enum values for KeyAlgorithm
@@ -2056,6 +2101,15 @@ const (
 	KeyAlgorithmEcSecp384r1  KeyAlgorithm = "EC_secp384r1"
 	KeyAlgorithmEcSecp521r1  KeyAlgorithm = "EC_secp521r1"
 )
+
+func (enum KeyAlgorithm) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyAlgorithm) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type KeyUsageName string
 
@@ -2074,12 +2128,30 @@ const (
 	KeyUsageNameCustom             KeyUsageName = "CUSTOM"
 )
 
+func (enum KeyUsageName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyUsageName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RecordType string
 
 // Enum values for RecordType
 const (
 	RecordTypeCname RecordType = "CNAME"
 )
+
+func (enum RecordType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecordType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RenewalStatus string
 
@@ -2090,6 +2162,15 @@ const (
 	RenewalStatusSuccess            RenewalStatus = "SUCCESS"
 	RenewalStatusFailed             RenewalStatus = "FAILED"
 )
+
+func (enum RenewalStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RenewalStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type RevocationReason string
 
@@ -2107,6 +2188,15 @@ const (
 	RevocationReasonAACompromise         RevocationReason = "A_A_COMPROMISE"
 )
 
+func (enum RevocationReason) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RevocationReason) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ValidationMethod string
 
 // Enum values for ValidationMethod
@@ -2114,3 +2204,12 @@ const (
 	ValidationMethodEmail ValidationMethod = "EMAIL"
 	ValidationMethodDns   ValidationMethod = "DNS"
 )
+
+func (enum ValidationMethod) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ValidationMethod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

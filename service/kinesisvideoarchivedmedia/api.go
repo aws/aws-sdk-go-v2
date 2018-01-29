@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opGetMediaForFragmentList = "GetMediaForFragmentList"
@@ -154,6 +155,41 @@ func (s Fragment) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Fragment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FragmentLengthInMilliseconds != nil {
+		v := *s.FragmentLengthInMilliseconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FragmentLengthInMilliseconds", protocol.Int64Value(v), metadata)
+	}
+	if s.FragmentNumber != nil {
+		v := *s.FragmentNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FragmentNumber", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.FragmentSizeInBytes != nil {
+		v := *s.FragmentSizeInBytes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FragmentSizeInBytes", protocol.Int64Value(v), metadata)
+	}
+	if s.ProducerTimestamp != nil {
+		v := *s.ProducerTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProducerTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.ServerTimestamp != nil {
+		v := *s.ServerTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ServerTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
 // Describes the time stamp range and time stamp origin of a range of fragments.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/FragmentSelector
 type FragmentSelector struct {
@@ -198,6 +234,23 @@ func (s *FragmentSelector) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FragmentSelector) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.FragmentSelectorType) > 0 {
+		v := s.FragmentSelectorType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FragmentSelectorType", protocol.QuotedValue{v}, metadata)
+	}
+	if s.TimestampRange != nil {
+		v := s.TimestampRange
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TimestampRange", v, metadata)
 	}
 	return nil
 }
@@ -249,6 +302,30 @@ func (s *GetMediaForFragmentListInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetMediaForFragmentListInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Fragments) > 0 {
+		v := s.Fragments
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Fragments", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/GetMediaForFragmentListOutput
 type GetMediaForFragmentListOutput struct {
 	_ struct{} `type:"structure" payload:"Payload"`
@@ -295,6 +372,18 @@ func (s GetMediaForFragmentListOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetMediaForFragmentListOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetMediaForFragmentListOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	// Skipping Payload Output type's body not valid.
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ListFragmentsInput
@@ -358,6 +447,36 @@ func (s *ListFragmentsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFragmentsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FragmentSelector != nil {
+		v := s.FragmentSelector
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "FragmentSelector", v, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-archived-media-2017-09-30/ListFragmentsOutput
 type ListFragmentsOutput struct {
 	_ struct{} `type:"structure"`
@@ -386,6 +505,29 @@ func (s ListFragmentsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListFragmentsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFragmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Fragments) > 0 {
+		v := s.Fragments
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Fragments", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The range of time stamps for which to return fragments.
@@ -432,6 +574,23 @@ func (s *TimestampRange) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TimestampRange) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EndTimestamp != nil {
+		v := *s.EndTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.StartTimestamp != nil {
+		v := *s.StartTimestamp
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTimestamp", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	return nil
+}
+
 type FragmentSelectorType string
 
 // Enum values for FragmentSelectorType
@@ -439,3 +598,12 @@ const (
 	FragmentSelectorTypeProducerTimestamp FragmentSelectorType = "PRODUCER_TIMESTAMP"
 	FragmentSelectorTypeServerTimestamp   FragmentSelectorType = "SERVER_TIMESTAMP"
 )
+
+func (enum FragmentSelectorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FragmentSelectorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

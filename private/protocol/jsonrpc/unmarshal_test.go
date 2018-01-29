@@ -952,6 +952,15 @@ const (
 	JSONEnumTypeBar OutputService7TestShapeJSONEnumType = "bar"
 )
 
+func (enum OutputService7TestShapeJSONEnumType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OutputService7TestShapeJSONEnumType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 //
 // Tests begin here
 //

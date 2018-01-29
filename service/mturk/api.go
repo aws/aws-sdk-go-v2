@@ -6840,6 +6840,15 @@ const (
 	AssignmentStatusRejected  AssignmentStatus = "Rejected"
 )
 
+func (enum AssignmentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssignmentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Comparator string
 
 // Enum values for Comparator
@@ -6855,6 +6864,15 @@ const (
 	ComparatorIn                   Comparator = "In"
 	ComparatorNotIn                Comparator = "NotIn"
 )
+
+func (enum Comparator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Comparator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EventType string
 
@@ -6874,6 +6892,15 @@ const (
 	EventTypePing                EventType = "Ping"
 )
 
+func (enum EventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HITReviewStatus string
 
 // Enum values for HITReviewStatus
@@ -6883,6 +6910,15 @@ const (
 	HITReviewStatusReviewedAppropriate   HITReviewStatus = "ReviewedAppropriate"
 	HITReviewStatusReviewedInappropriate HITReviewStatus = "ReviewedInappropriate"
 )
+
+func (enum HITReviewStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HITReviewStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type HITStatus string
 
@@ -6895,6 +6931,15 @@ const (
 	HITStatusDisposed     HITStatus = "Disposed"
 )
 
+func (enum HITStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HITStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NotificationTransport string
 
 // Enum values for NotificationTransport
@@ -6904,6 +6949,15 @@ const (
 	NotificationTransportSns   NotificationTransport = "SNS"
 )
 
+func (enum NotificationTransport) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotificationTransport) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NotifyWorkersFailureCode string
 
 // Enum values for NotifyWorkersFailureCode
@@ -6911,6 +6965,15 @@ const (
 	NotifyWorkersFailureCodeSoftFailure NotifyWorkersFailureCode = "SoftFailure"
 	NotifyWorkersFailureCodeHardFailure NotifyWorkersFailureCode = "HardFailure"
 )
+
+func (enum NotifyWorkersFailureCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotifyWorkersFailureCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type QualificationStatus string
 
@@ -6920,6 +6983,15 @@ const (
 	QualificationStatusRevoked QualificationStatus = "Revoked"
 )
 
+func (enum QualificationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QualificationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type QualificationTypeStatus string
 
 // Enum values for QualificationTypeStatus
@@ -6927,6 +6999,15 @@ const (
 	QualificationTypeStatusActive   QualificationTypeStatus = "Active"
 	QualificationTypeStatusInactive QualificationTypeStatus = "Inactive"
 )
+
+func (enum QualificationTypeStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QualificationTypeStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ReviewActionStatus string
 
@@ -6938,6 +7019,15 @@ const (
 	ReviewActionStatusCancelled ReviewActionStatus = "Cancelled"
 )
 
+func (enum ReviewActionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReviewActionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReviewPolicyLevel string
 
 // Enum values for ReviewPolicyLevel
@@ -6946,6 +7036,15 @@ const (
 	ReviewPolicyLevelHit        ReviewPolicyLevel = "HIT"
 )
 
+func (enum ReviewPolicyLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReviewPolicyLevel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReviewableHITStatus string
 
 // Enum values for ReviewableHITStatus
@@ -6953,3 +7052,12 @@ const (
 	ReviewableHITStatusReviewable ReviewableHITStatus = "Reviewable"
 	ReviewableHITStatusReviewing  ReviewableHITStatus = "Reviewing"
 )
+
+func (enum ReviewableHITStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReviewableHITStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

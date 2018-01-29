@@ -5353,6 +5353,15 @@ const (
 	CompressionTypeGzip CompressionType = "Gzip"
 )
 
+func (enum CompressionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CompressionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EndpointConfigSortKey string
 
 // Enum values for EndpointConfigSortKey
@@ -5360,6 +5369,15 @@ const (
 	EndpointConfigSortKeyName         EndpointConfigSortKey = "Name"
 	EndpointConfigSortKeyCreationTime EndpointConfigSortKey = "CreationTime"
 )
+
+func (enum EndpointConfigSortKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EndpointConfigSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EndpointSortKey string
 
@@ -5369,6 +5387,15 @@ const (
 	EndpointSortKeyCreationTime EndpointSortKey = "CreationTime"
 	EndpointSortKeyStatus       EndpointSortKey = "Status"
 )
+
+func (enum EndpointSortKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EndpointSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EndpointStatus string
 
@@ -5383,6 +5410,15 @@ const (
 	EndpointStatusFailed       EndpointStatus = "Failed"
 )
 
+func (enum EndpointStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EndpointStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InstanceType string
 
 // Enum values for InstanceType
@@ -5392,6 +5428,15 @@ const (
 	InstanceTypeMlP2Xlarge InstanceType = "ml.p2.xlarge"
 )
 
+func (enum InstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ModelSortKey string
 
 // Enum values for ModelSortKey
@@ -5399,6 +5444,15 @@ const (
 	ModelSortKeyName         ModelSortKey = "Name"
 	ModelSortKeyCreationTime ModelSortKey = "CreationTime"
 )
+
+func (enum ModelSortKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ModelSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type NotebookInstanceSortKey string
 
@@ -5409,6 +5463,15 @@ const (
 	NotebookInstanceSortKeyStatus       NotebookInstanceSortKey = "Status"
 )
 
+func (enum NotebookInstanceSortKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotebookInstanceSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NotebookInstanceSortOrder string
 
 // Enum values for NotebookInstanceSortOrder
@@ -5416,6 +5479,15 @@ const (
 	NotebookInstanceSortOrderAscending  NotebookInstanceSortOrder = "Ascending"
 	NotebookInstanceSortOrderDescending NotebookInstanceSortOrder = "Descending"
 )
+
+func (enum NotebookInstanceSortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotebookInstanceSortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type NotebookInstanceStatus string
 
@@ -5429,6 +5501,15 @@ const (
 	NotebookInstanceStatusDeleting  NotebookInstanceStatus = "Deleting"
 )
 
+func (enum NotebookInstanceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotebookInstanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OrderKey string
 
 // Enum values for OrderKey
@@ -5436,6 +5517,15 @@ const (
 	OrderKeyAscending  OrderKey = "Ascending"
 	OrderKeyDescending OrderKey = "Descending"
 )
+
+func (enum OrderKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrderKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ProductionVariantInstanceType string
 
@@ -5453,6 +5543,15 @@ const (
 	ProductionVariantInstanceTypeMlT2Medium  ProductionVariantInstanceType = "ml.t2.medium"
 )
 
+func (enum ProductionVariantInstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProductionVariantInstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RecordWrapper string
 
 // Enum values for RecordWrapper
@@ -5460,6 +5559,15 @@ const (
 	RecordWrapperNone     RecordWrapper = "None"
 	RecordWrapperRecordIo RecordWrapper = "RecordIO"
 )
+
+func (enum RecordWrapper) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecordWrapper) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type S3DataDistribution string
 
@@ -5469,6 +5577,15 @@ const (
 	S3DataDistributionShardedByS3key  S3DataDistribution = "ShardedByS3Key"
 )
 
+func (enum S3DataDistribution) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum S3DataDistribution) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type S3DataType string
 
 // Enum values for S3DataType
@@ -5476,6 +5593,15 @@ const (
 	S3DataTypeManifestFile S3DataType = "ManifestFile"
 	S3DataTypeS3prefix     S3DataType = "S3Prefix"
 )
+
+func (enum S3DataType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum S3DataType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SecondaryStatus string
 
@@ -5492,6 +5618,15 @@ const (
 	SecondaryStatusFailed             SecondaryStatus = "Failed"
 )
 
+func (enum SecondaryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SecondaryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SortBy string
 
 // Enum values for SortBy
@@ -5501,6 +5636,15 @@ const (
 	SortByStatus       SortBy = "Status"
 )
 
+func (enum SortBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SortOrder string
 
 // Enum values for SortOrder
@@ -5509,6 +5653,15 @@ const (
 	SortOrderDescending SortOrder = "Descending"
 )
 
+func (enum SortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TrainingInputMode string
 
 // Enum values for TrainingInputMode
@@ -5516,6 +5669,15 @@ const (
 	TrainingInputModePipe TrainingInputMode = "Pipe"
 	TrainingInputModeFile TrainingInputMode = "File"
 )
+
+func (enum TrainingInputMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrainingInputMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TrainingInstanceType string
 
@@ -5540,6 +5702,15 @@ const (
 	TrainingInstanceTypeMlC518xlarge TrainingInstanceType = "ml.c5.18xlarge"
 )
 
+func (enum TrainingInstanceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrainingInstanceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TrainingJobStatus string
 
 // Enum values for TrainingJobStatus
@@ -5550,3 +5721,12 @@ const (
 	TrainingJobStatusStopping   TrainingJobStatus = "Stopping"
 	TrainingJobStatusStopped    TrainingJobStatus = "Stopped"
 )
+
+func (enum TrainingJobStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrainingJobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

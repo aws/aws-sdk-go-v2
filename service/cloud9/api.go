@@ -1435,6 +1435,15 @@ const (
 	EnvironmentStatusDeleting   EnvironmentStatus = "deleting"
 )
 
+func (enum EnvironmentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EnvironmentType string
 
 // Enum values for EnvironmentType
@@ -1442,6 +1451,15 @@ const (
 	EnvironmentTypeSsh EnvironmentType = "ssh"
 	EnvironmentTypeEc2 EnvironmentType = "ec2"
 )
+
+func (enum EnvironmentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnvironmentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type MemberPermissions string
 
@@ -1451,6 +1469,15 @@ const (
 	MemberPermissionsReadOnly  MemberPermissions = "read-only"
 )
 
+func (enum MemberPermissions) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MemberPermissions) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Permissions string
 
 // Enum values for Permissions
@@ -1459,3 +1486,12 @@ const (
 	PermissionsReadWrite Permissions = "read-write"
 	PermissionsReadOnly  Permissions = "read-only"
 )
+
+func (enum Permissions) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Permissions) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

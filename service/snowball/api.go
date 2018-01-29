@@ -3056,6 +3056,15 @@ const (
 	CapacityNoPreference Capacity = "NoPreference"
 )
 
+func (enum Capacity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Capacity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ClusterState string
 
 // Enum values for ClusterState
@@ -3066,6 +3075,15 @@ const (
 	ClusterStateComplete       ClusterState = "Complete"
 	ClusterStateCancelled      ClusterState = "Cancelled"
 )
+
+func (enum ClusterState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ClusterState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type JobState string
 
@@ -3085,6 +3103,15 @@ const (
 	JobStatePending             JobState = "Pending"
 )
 
+func (enum JobState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type JobType string
 
 // Enum values for JobType
@@ -3093,6 +3120,15 @@ const (
 	JobTypeExport   JobType = "EXPORT"
 	JobTypeLocalUse JobType = "LOCAL_USE"
 )
+
+func (enum JobType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ShippingOption string
 
@@ -3104,6 +3140,15 @@ const (
 	ShippingOptionStandard  ShippingOption = "STANDARD"
 )
 
+func (enum ShippingOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ShippingOption) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Type string
 
 // Enum values for Type
@@ -3111,3 +3156,12 @@ const (
 	TypeStandard Type = "STANDARD"
 	TypeEdge     Type = "EDGE"
 )
+
+func (enum Type) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Type) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

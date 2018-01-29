@@ -1674,6 +1674,15 @@ const (
 	ConnectorCapabilityVsphere ConnectorCapability = "VSPHERE"
 )
 
+func (enum ConnectorCapability) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConnectorCapability) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Status of on-premises Connector
 type ConnectorStatus string
 
@@ -1682,6 +1691,15 @@ const (
 	ConnectorStatusHealthy   ConnectorStatus = "HEALTHY"
 	ConnectorStatusUnhealthy ConnectorStatus = "UNHEALTHY"
 )
+
+func (enum ConnectorStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConnectorStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The license type to be used for the Amazon Machine Image (AMI) created after
 // a successful ReplicationRun.
@@ -1692,6 +1710,15 @@ const (
 	LicenseTypeAws  LicenseType = "AWS"
 	LicenseTypeByol LicenseType = "BYOL"
 )
+
+func (enum LicenseType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LicenseType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Current state of Replication Job
 type ReplicationJobState string
@@ -1704,6 +1731,15 @@ const (
 	ReplicationJobStateDeleting ReplicationJobState = "DELETING"
 	ReplicationJobStateDeleted  ReplicationJobState = "DELETED"
 )
+
+func (enum ReplicationJobState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReplicationJobState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Current state of Replication Run
 type ReplicationRunState string
@@ -1719,6 +1755,15 @@ const (
 	ReplicationRunStateDeleted   ReplicationRunState = "DELETED"
 )
 
+func (enum ReplicationRunState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReplicationRunState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Type of Replication Run
 type ReplicationRunType string
 
@@ -1727,6 +1772,15 @@ const (
 	ReplicationRunTypeOnDemand  ReplicationRunType = "ON_DEMAND"
 	ReplicationRunTypeAutomatic ReplicationRunType = "AUTOMATIC"
 )
+
+func (enum ReplicationRunType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReplicationRunType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Status of Server catalog
 type ServerCatalogStatus string
@@ -1740,6 +1794,15 @@ const (
 	ServerCatalogStatusExpired     ServerCatalogStatus = "EXPIRED"
 )
 
+func (enum ServerCatalogStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServerCatalogStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Type of server.
 type ServerType string
 
@@ -1748,6 +1811,15 @@ const (
 	ServerTypeVirtualMachine ServerType = "VIRTUAL_MACHINE"
 )
 
+func (enum ServerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // VM Management Product
 type VmManagerType string
 
@@ -1755,3 +1827,12 @@ type VmManagerType string
 const (
 	VmManagerTypeVsphere VmManagerType = "VSPHERE"
 )
+
+func (enum VmManagerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VmManagerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

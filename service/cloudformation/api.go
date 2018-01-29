@@ -8277,6 +8277,15 @@ const (
 	AccountGateStatusSkipped   AccountGateStatus = "SKIPPED"
 )
 
+func (enum AccountGateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AccountGateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Capability string
 
 // Enum values for Capability
@@ -8284,6 +8293,15 @@ const (
 	CapabilityCapabilityIam      Capability = "CAPABILITY_IAM"
 	CapabilityCapabilityNamedIam Capability = "CAPABILITY_NAMED_IAM"
 )
+
+func (enum Capability) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Capability) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ChangeAction string
 
@@ -8293,6 +8311,15 @@ const (
 	ChangeActionModify ChangeAction = "Modify"
 	ChangeActionRemove ChangeAction = "Remove"
 )
+
+func (enum ChangeAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ChangeSetStatus string
 
@@ -8305,6 +8332,15 @@ const (
 	ChangeSetStatusFailed           ChangeSetStatus = "FAILED"
 )
 
+func (enum ChangeSetStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeSetStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ChangeSetType string
 
 // Enum values for ChangeSetType
@@ -8312,6 +8348,15 @@ const (
 	ChangeSetTypeCreate ChangeSetType = "CREATE"
 	ChangeSetTypeUpdate ChangeSetType = "UPDATE"
 )
+
+func (enum ChangeSetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeSetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ChangeSource string
 
@@ -8324,12 +8369,30 @@ const (
 	ChangeSourceAutomatic          ChangeSource = "Automatic"
 )
 
+func (enum ChangeSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ChangeType string
 
 // Enum values for ChangeType
 const (
 	ChangeTypeResource ChangeType = "Resource"
 )
+
+func (enum ChangeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EvaluationType string
 
@@ -8338,6 +8401,15 @@ const (
 	EvaluationTypeStatic  EvaluationType = "Static"
 	EvaluationTypeDynamic EvaluationType = "Dynamic"
 )
+
+func (enum EvaluationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EvaluationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExecutionStatus string
 
@@ -8351,6 +8423,15 @@ const (
 	ExecutionStatusObsolete          ExecutionStatus = "OBSOLETE"
 )
 
+func (enum ExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OnFailure string
 
 // Enum values for OnFailure
@@ -8359,6 +8440,15 @@ const (
 	OnFailureRollback  OnFailure = "ROLLBACK"
 	OnFailureDelete    OnFailure = "DELETE"
 )
+
+func (enum OnFailure) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OnFailure) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Replacement string
 
@@ -8369,6 +8459,15 @@ const (
 	ReplacementConditional Replacement = "Conditional"
 )
 
+func (enum Replacement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Replacement) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RequiresRecreation string
 
 // Enum values for RequiresRecreation
@@ -8377,6 +8476,15 @@ const (
 	RequiresRecreationConditionally RequiresRecreation = "Conditionally"
 	RequiresRecreationAlways        RequiresRecreation = "Always"
 )
+
+func (enum RequiresRecreation) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RequiresRecreation) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ResourceAttribute string
 
@@ -8390,6 +8498,15 @@ const (
 	ResourceAttributeTags           ResourceAttribute = "Tags"
 )
 
+func (enum ResourceAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResourceSignalStatus string
 
 // Enum values for ResourceSignalStatus
@@ -8397,6 +8514,15 @@ const (
 	ResourceSignalStatusSuccess ResourceSignalStatus = "SUCCESS"
 	ResourceSignalStatusFailure ResourceSignalStatus = "FAILURE"
 )
+
+func (enum ResourceSignalStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceSignalStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ResourceStatus string
 
@@ -8414,6 +8540,15 @@ const (
 	ResourceStatusUpdateComplete   ResourceStatus = "UPDATE_COMPLETE"
 )
 
+func (enum ResourceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackInstanceStatus string
 
 // Enum values for StackInstanceStatus
@@ -8423,6 +8558,15 @@ const (
 	StackInstanceStatusInoperable StackInstanceStatus = "INOPERABLE"
 )
 
+func (enum StackInstanceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackInstanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackSetOperationAction string
 
 // Enum values for StackSetOperationAction
@@ -8431,6 +8575,15 @@ const (
 	StackSetOperationActionUpdate StackSetOperationAction = "UPDATE"
 	StackSetOperationActionDelete StackSetOperationAction = "DELETE"
 )
+
+func (enum StackSetOperationAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackSetOperationAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type StackSetOperationResultStatus string
 
@@ -8443,6 +8596,15 @@ const (
 	StackSetOperationResultStatusCancelled StackSetOperationResultStatus = "CANCELLED"
 )
 
+func (enum StackSetOperationResultStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackSetOperationResultStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackSetOperationStatus string
 
 // Enum values for StackSetOperationStatus
@@ -8454,6 +8616,15 @@ const (
 	StackSetOperationStatusStopped   StackSetOperationStatus = "STOPPED"
 )
 
+func (enum StackSetOperationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackSetOperationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackSetStatus string
 
 // Enum values for StackSetStatus
@@ -8461,6 +8632,15 @@ const (
 	StackSetStatusActive  StackSetStatus = "ACTIVE"
 	StackSetStatusDeleted StackSetStatus = "DELETED"
 )
+
+func (enum StackSetStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackSetStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type StackStatus string
 
@@ -8485,6 +8665,15 @@ const (
 	StackStatusReviewInProgress                        StackStatus = "REVIEW_IN_PROGRESS"
 )
 
+func (enum StackStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TemplateStage string
 
 // Enum values for TemplateStage
@@ -8492,3 +8681,12 @@ const (
 	TemplateStageOriginal  TemplateStage = "Original"
 	TemplateStageProcessed TemplateStage = "Processed"
 )
+
+func (enum TemplateStage) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TemplateStage) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

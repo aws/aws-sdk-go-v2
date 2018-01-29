@@ -2214,6 +2214,15 @@ const (
 	BudgetTypeRiUtilization BudgetType = "RI_UTILIZATION"
 )
 
+func (enum BudgetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BudgetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The comparison operator of a notification. Currently we support less than,
 // equal to and greater than.
 type ComparisonOperator string
@@ -2225,6 +2234,15 @@ const (
 	ComparisonOperatorEqualTo     ComparisonOperator = "EQUAL_TO"
 )
 
+func (enum ComparisonOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The type of a notification. It should be ACTUAL or FORECASTED.
 type NotificationType string
 
@@ -2233,6 +2251,15 @@ const (
 	NotificationTypeActual     NotificationType = "ACTUAL"
 	NotificationTypeForecasted NotificationType = "FORECASTED"
 )
+
+func (enum NotificationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotificationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The subscription type of the subscriber. It can be SMS or EMAIL.
 type SubscriptionType string
@@ -2243,6 +2270,15 @@ const (
 	SubscriptionTypeEmail SubscriptionType = "EMAIL"
 )
 
+func (enum SubscriptionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SubscriptionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.
 type ThresholdType string
 
@@ -2251,6 +2287,15 @@ const (
 	ThresholdTypePercentage    ThresholdType = "PERCENTAGE"
 	ThresholdTypeAbsoluteValue ThresholdType = "ABSOLUTE_VALUE"
 )
+
+func (enum ThresholdType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ThresholdType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The time unit of the budget. e.g. MONTHLY, QUARTERLY, etc.
 type TimeUnit string
@@ -2262,3 +2307,12 @@ const (
 	TimeUnitQuarterly TimeUnit = "QUARTERLY"
 	TimeUnitAnnually  TimeUnit = "ANNUALLY"
 )
+
+func (enum TimeUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TimeUnit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

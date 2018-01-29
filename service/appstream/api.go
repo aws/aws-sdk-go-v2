@@ -4716,6 +4716,15 @@ const (
 	AuthenticationTypeUserpool AuthenticationType = "USERPOOL"
 )
 
+func (enum AuthenticationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthenticationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The fleet attribute.
 type FleetAttribute string
 
@@ -4725,6 +4734,15 @@ const (
 	FleetAttributeVpcConfigurationSecurityGroupIds FleetAttribute = "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
 	FleetAttributeDomainJoinInfo                   FleetAttribute = "DOMAIN_JOIN_INFO"
 )
+
+func (enum FleetAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type FleetErrorCode string
 
@@ -4758,6 +4776,15 @@ const (
 	FleetErrorCodeDomainJoinInternalServiceError                    FleetErrorCode = "DOMAIN_JOIN_INTERNAL_SERVICE_ERROR"
 )
 
+func (enum FleetErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FleetState string
 
 // Enum values for FleetState
@@ -4768,6 +4795,15 @@ const (
 	FleetStateStopped  FleetState = "STOPPED"
 )
 
+func (enum FleetState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FleetType string
 
 // Enum values for FleetType
@@ -4775,6 +4811,15 @@ const (
 	FleetTypeAlwaysOn FleetType = "ALWAYS_ON"
 	FleetTypeOnDemand FleetType = "ON_DEMAND"
 )
+
+func (enum FleetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ImageBuilderState string
 
@@ -4791,6 +4836,15 @@ const (
 	ImageBuilderStateFailed        ImageBuilderState = "FAILED"
 )
 
+func (enum ImageBuilderState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageBuilderState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ImageBuilderStateChangeReasonCode string
 
 // Enum values for ImageBuilderStateChangeReasonCode
@@ -4798,6 +4852,15 @@ const (
 	ImageBuilderStateChangeReasonCodeInternalError    ImageBuilderStateChangeReasonCode = "INTERNAL_ERROR"
 	ImageBuilderStateChangeReasonCodeImageUnavailable ImageBuilderStateChangeReasonCode = "IMAGE_UNAVAILABLE"
 )
+
+func (enum ImageBuilderStateChangeReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageBuilderStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ImageState string
 
@@ -4809,6 +4872,15 @@ const (
 	ImageStateDeleting  ImageState = "DELETING"
 )
 
+func (enum ImageState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ImageStateChangeReasonCode string
 
 // Enum values for ImageStateChangeReasonCode
@@ -4817,12 +4889,30 @@ const (
 	ImageStateChangeReasonCodeImageBuilderNotAvailable ImageStateChangeReasonCode = "IMAGE_BUILDER_NOT_AVAILABLE"
 )
 
+func (enum ImageStateChangeReasonCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImageStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PlatformType string
 
 // Enum values for PlatformType
 const (
 	PlatformTypeWindows PlatformType = "WINDOWS"
 )
+
+func (enum PlatformType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PlatformType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // Possible values for the state of a streaming session.
 type SessionState string
@@ -4834,6 +4924,15 @@ const (
 	SessionStateExpired SessionState = "EXPIRED"
 )
 
+func (enum SessionState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SessionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackErrorCode string
 
 // Enum values for StackErrorCode
@@ -4841,6 +4940,15 @@ const (
 	StackErrorCodeStorageConnectorError StackErrorCode = "STORAGE_CONNECTOR_ERROR"
 	StackErrorCodeInternalServiceError  StackErrorCode = "INTERNAL_SERVICE_ERROR"
 )
+
+func (enum StackErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 // The type of storage connector.
 type StorageConnectorType string
@@ -4850,6 +4958,15 @@ const (
 	StorageConnectorTypeHomefolders StorageConnectorType = "HOMEFOLDERS"
 )
 
+func (enum StorageConnectorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StorageConnectorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type VisibilityType string
 
 // Enum values for VisibilityType
@@ -4857,3 +4974,12 @@ const (
 	VisibilityTypePublic  VisibilityType = "PUBLIC"
 	VisibilityTypePrivate VisibilityType = "PRIVATE"
 )
+
+func (enum VisibilityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VisibilityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

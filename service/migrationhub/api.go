@@ -2446,6 +2446,15 @@ const (
 	ApplicationStatusCompleted  ApplicationStatus = "COMPLETED"
 )
 
+func (enum ApplicationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApplicationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ResourceAttributeType string
 
 // Enum values for ResourceAttributeType
@@ -2463,6 +2472,15 @@ const (
 	ResourceAttributeTypeLabel                    ResourceAttributeType = "LABEL"
 )
 
+func (enum ResourceAttributeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceAttributeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Status string
 
 // Enum values for Status
@@ -2472,3 +2490,12 @@ const (
 	StatusFailed     Status = "FAILED"
 	StatusCompleted  Status = "COMPLETED"
 )
+
+func (enum Status) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Status) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

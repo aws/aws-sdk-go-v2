@@ -891,3 +891,12 @@ const (
 	ContainerStatusCreating ContainerStatus = "CREATING"
 	ContainerStatusDeleting ContainerStatus = "DELETING"
 )
+
+func (enum ContainerStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContainerStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

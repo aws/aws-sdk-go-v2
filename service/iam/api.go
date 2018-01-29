@@ -20685,6 +20685,15 @@ const (
 	ContextKeyTypeEnumDateList    ContextKeyTypeEnum = "dateList"
 )
 
+func (enum ContextKeyTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ContextKeyTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeletionTaskStatusType string
 
 // Enum values for DeletionTaskStatusType
@@ -20694,6 +20703,15 @@ const (
 	DeletionTaskStatusTypeFailed     DeletionTaskStatusType = "FAILED"
 	DeletionTaskStatusTypeNotStarted DeletionTaskStatusType = "NOT_STARTED"
 )
+
+func (enum DeletionTaskStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeletionTaskStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EntityType string
 
@@ -20706,6 +20724,15 @@ const (
 	EntityTypeAwsmanagedPolicy   EntityType = "AWSManagedPolicy"
 )
 
+func (enum EntityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EntityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PolicyEvaluationDecisionType string
 
 // Enum values for PolicyEvaluationDecisionType
@@ -20714,6 +20741,15 @@ const (
 	PolicyEvaluationDecisionTypeExplicitDeny PolicyEvaluationDecisionType = "explicitDeny"
 	PolicyEvaluationDecisionTypeImplicitDeny PolicyEvaluationDecisionType = "implicitDeny"
 )
+
+func (enum PolicyEvaluationDecisionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyEvaluationDecisionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PolicySourceType string
 
@@ -20728,12 +20764,30 @@ const (
 	PolicySourceTypeNone        PolicySourceType = "none"
 )
 
+func (enum PolicySourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicySourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReportFormatType string
 
 // Enum values for ReportFormatType
 const (
 	ReportFormatTypeTextCsv ReportFormatType = "text/csv"
 )
+
+func (enum ReportFormatType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportFormatType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ReportStateType string
 
@@ -20744,6 +20798,15 @@ const (
 	ReportStateTypeComplete   ReportStateType = "COMPLETE"
 )
 
+func (enum ReportStateType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReportStateType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AssignmentStatusType string
 
 // Enum values for AssignmentStatusType
@@ -20753,6 +20816,15 @@ const (
 	AssignmentStatusTypeAny        AssignmentStatusType = "Any"
 )
 
+func (enum AssignmentStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AssignmentStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EncodingType string
 
 // Enum values for EncodingType
@@ -20760,6 +20832,15 @@ const (
 	EncodingTypeSsh EncodingType = "SSH"
 	EncodingTypePem EncodingType = "PEM"
 )
+
+func (enum EncodingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncodingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type PolicyScopeType string
 
@@ -20770,6 +20851,15 @@ const (
 	PolicyScopeTypeLocal PolicyScopeType = "Local"
 )
 
+func (enum PolicyScopeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyScopeType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StatusType string
 
 // Enum values for StatusType
@@ -20777,6 +20867,15 @@ const (
 	StatusTypeActive   StatusType = "Active"
 	StatusTypeInactive StatusType = "Inactive"
 )
+
+func (enum StatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SummaryKeyType string
 
@@ -20808,3 +20907,12 @@ const (
 	SummaryKeyTypePolicyVersionsInUseQuota          SummaryKeyType = "PolicyVersionsInUseQuota"
 	SummaryKeyTypeVersionsPerPolicyQuota            SummaryKeyType = "VersionsPerPolicyQuota"
 )
+
+func (enum SummaryKeyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SummaryKeyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

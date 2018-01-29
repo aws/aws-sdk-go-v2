@@ -12,7 +12,6 @@ import (
 	"encoding/xml"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
@@ -31,14 +30,12 @@ func TestMain(m *testing.M) {
 	}))
 
 	cfg := unit.Config()
+
+	cfg.Credentials = aws.NewStaticCredentialsProvider("Key", "Secret", "Token")
 	cfg.Region = endpoints.UsWest2RegionID
 	cfg.EndpointResolver = aws.ResolveWithEndpointURL(server.URL)
-	cfg.Credentials = aws.NewCredentials(aws.NewStaticCredentialsProvider(
-		"Key", "Secret", "Token",
-	))
 
 	cloudfrontSvc = cloudfront.New(cfg)
-
 	s3Svc = s3.New(cfg)
 	s3Svc.ForcePathStyle = true
 
@@ -50,64 +47,64 @@ func TestMain(m *testing.M) {
 func BenchmarkRESTXMLBuild_Complex_CFCreateDistro(b *testing.B) {
 	params := cloudfrontCreateDistributionInput()
 
-	benchRESTXMLBuild(b, func() *request.Request {
-		req, _ := cloudfrontSvc.CreateDistributionRequest(params)
-		return req
+	benchRESTXMLBuild(b, func() *aws.Request {
+		req := cloudfrontSvc.CreateDistributionRequest(params)
+		return req.Request
 	})
 }
 
 func BenchmarkRESTXMLBuild_Simple_CFDeleteDistro(b *testing.B) {
 	params := cloudfrontDeleteDistributionInput()
 
-	benchRESTXMLBuild(b, func() *request.Request {
-		req, _ := cloudfrontSvc.DeleteDistributionRequest(params)
-		return req
+	benchRESTXMLBuild(b, func() *aws.Request {
+		req := cloudfrontSvc.DeleteDistributionRequest(params)
+		return req.Request
 	})
 }
 
 func BenchmarkRESTXMLBuild_REST_S3HeadObject(b *testing.B) {
 	params := s3HeadObjectInput()
 
-	benchRESTXMLBuild(b, func() *request.Request {
-		req, _ := s3Svc.HeadObjectRequest(params)
-		return req
+	benchRESTXMLBuild(b, func() *aws.Request {
+		req := s3Svc.HeadObjectRequest(params)
+		return req.Request
 	})
 }
 
 func BenchmarkRESTXMLBuild_XML_S3PutObjectAcl(b *testing.B) {
 	params := s3PutObjectAclInput()
 
-	benchRESTXMLBuild(b, func() *request.Request {
-		req, _ := s3Svc.PutObjectAclRequest(params)
-		return req
+	benchRESTXMLBuild(b, func() *aws.Request {
+		req := s3Svc.PutObjectAclRequest(params)
+		return req.Request
 	})
 }
 
 func BenchmarkRESTXMLRequest_Complex_CFCreateDistro(b *testing.B) {
-	benchRESTXMLRequest(b, func() *request.Request {
-		req, _ := cloudfrontSvc.CreateDistributionRequest(cloudfrontCreateDistributionInput())
-		return req
+	benchRESTXMLRequest(b, func() *aws.Request {
+		req := cloudfrontSvc.CreateDistributionRequest(cloudfrontCreateDistributionInput())
+		return req.Request
 	})
 }
 
 func BenchmarkRESTXMLRequest_Simple_CFDeleteDistro(b *testing.B) {
-	benchRESTXMLRequest(b, func() *request.Request {
-		req, _ := cloudfrontSvc.DeleteDistributionRequest(cloudfrontDeleteDistributionInput())
-		return req
+	benchRESTXMLRequest(b, func() *aws.Request {
+		req := cloudfrontSvc.DeleteDistributionRequest(cloudfrontDeleteDistributionInput())
+		return req.Request
 	})
 }
 
 func BenchmarkRESTXMLRequest_REST_S3HeadObject(b *testing.B) {
-	benchRESTXMLRequest(b, func() *request.Request {
-		req, _ := s3Svc.HeadObjectRequest(s3HeadObjectInput())
-		return req
+	benchRESTXMLRequest(b, func() *aws.Request {
+		req := s3Svc.HeadObjectRequest(s3HeadObjectInput())
+		return req.Request
 	})
 }
 
 func BenchmarkRESTXMLRequest_XML_S3PutObjectAcl(b *testing.B) {
-	benchRESTXMLRequest(b, func() *request.Request {
-		req, _ := s3Svc.PutObjectAclRequest(s3PutObjectAclInput())
-		return req
+	benchRESTXMLRequest(b, func() *aws.Request {
+		req := s3Svc.PutObjectAclRequest(s3PutObjectAclInput())
+		return req.Request
 	})
 }
 
@@ -123,7 +120,7 @@ func BenchmarkEncodingXML_Simple(b *testing.B) {
 	}
 }
 
-func benchRESTXMLBuild(b *testing.B, reqFn func() *request.Request) {
+func benchRESTXMLBuild(b *testing.B, reqFn func() *aws.Request) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
@@ -135,7 +132,7 @@ func benchRESTXMLBuild(b *testing.B, reqFn func() *request.Request) {
 	}
 }
 
-func benchRESTXMLRequest(b *testing.B, reqFn func() *request.Request) {
+func benchRESTXMLRequest(b *testing.B, reqFn func() *aws.Request) {
 	b.ResetTimer()
 
 	for i := 0; i < b.N; i++ {
@@ -154,11 +151,11 @@ func cloudfrontCreateDistributionInput() *cloudfront.CreateDistributionInput {
 			DefaultCacheBehavior: &cloudfront.DefaultCacheBehavior{ // Required
 				ForwardedValues: &cloudfront.ForwardedValues{ // Required
 					Cookies: &cloudfront.CookiePreference{ // Required
-						Forward: aws.String("ItemSelection"), // Required
+						Forward: cloudfront.ItemSelection("ItemSelection"), // Required
 						WhitelistedNames: &cloudfront.CookieNames{
 							Quantity: aws.Int64(1), // Required
-							Items: []*string{
-								aws.String("string"), // Required
+							Items: []string{
+								"string", // Required
 								// More values...
 							},
 						},
@@ -166,8 +163,8 @@ func cloudfrontCreateDistributionInput() *cloudfront.CreateDistributionInput {
 					QueryString: aws.Bool(true), // Required
 					Headers: &cloudfront.Headers{
 						Quantity: aws.Int64(1), // Required
-						Items: []*string{
-							aws.String("string"), // Required
+						Items: []string{
+							"string", // Required
 							// More values...
 						},
 					},
@@ -177,21 +174,21 @@ func cloudfrontCreateDistributionInput() *cloudfront.CreateDistributionInput {
 				TrustedSigners: &cloudfront.TrustedSigners{ // Required
 					Enabled:  aws.Bool(true), // Required
 					Quantity: aws.Int64(1),   // Required
-					Items: []*string{
-						aws.String("string"), // Required
+					Items: []string{
+						"string", // Required
 						// More values...
 					},
 				},
-				ViewerProtocolPolicy: aws.String("ViewerProtocolPolicy"), // Required
+				ViewerProtocolPolicy: cloudfront.ViewerProtocolPolicy("ViewerProtocolPolicy"), // Required
 				AllowedMethods: &cloudfront.AllowedMethods{
-					Items: []*string{ // Required
-						aws.String("Method"), // Required
+					Items: []cloudfront.Method{ // Required
+						cloudfront.Method("string"), // Required
 						// More values...
 					},
 					Quantity: aws.Int64(1), // Required
 					CachedMethods: &cloudfront.CachedMethods{
-						Items: []*string{ // Required
-							aws.String("Method"), // Required
+						Items: []cloudfront.Method{ // Required
+							cloudfront.Method("string"), // Required
 							// More values...
 						},
 						Quantity: aws.Int64(1), // Required
@@ -204,14 +201,14 @@ func cloudfrontCreateDistributionInput() *cloudfront.CreateDistributionInput {
 			Enabled: aws.Bool(true), // Required
 			Origins: &cloudfront.Origins{ // Required
 				Quantity: aws.Int64(1), // Required
-				Items: []*cloudfront.Origin{
+				Items: []cloudfront.Origin{
 					{ // Required
 						DomainName: aws.String("string"), // Required
 						Id:         aws.String("string"), // Required
 						CustomOriginConfig: &cloudfront.CustomOriginConfig{
-							HTTPPort:             aws.Int64(1),                       // Required
-							HTTPSPort:            aws.Int64(1),                       // Required
-							OriginProtocolPolicy: aws.String("OriginProtocolPolicy"), // Required
+							HTTPPort:             aws.Int64(1),                                            // Required
+							HTTPSPort:            aws.Int64(1),                                            // Required
+							OriginProtocolPolicy: cloudfront.OriginProtocolPolicy("OriginProtocolPolicy"), // Required
 						},
 						OriginPath: aws.String("string"),
 						S3OriginConfig: &cloudfront.S3OriginConfig{
@@ -223,22 +220,22 @@ func cloudfrontCreateDistributionInput() *cloudfront.CreateDistributionInput {
 			},
 			Aliases: &cloudfront.Aliases{
 				Quantity: aws.Int64(1), // Required
-				Items: []*string{
-					aws.String("string"), // Required
+				Items: []string{
+					"string", // Required
 					// More values...
 				},
 			},
 			CacheBehaviors: &cloudfront.CacheBehaviors{
 				Quantity: aws.Int64(1), // Required
-				Items: []*cloudfront.CacheBehavior{
+				Items: []cloudfront.CacheBehavior{
 					{ // Required
 						ForwardedValues: &cloudfront.ForwardedValues{ // Required
 							Cookies: &cloudfront.CookiePreference{ // Required
-								Forward: aws.String("ItemSelection"), // Required
+								Forward: cloudfront.ItemSelection("ItemSelection"), // Required
 								WhitelistedNames: &cloudfront.CookieNames{
 									Quantity: aws.Int64(1), // Required
-									Items: []*string{
-										aws.String("string"), // Required
+									Items: []string{
+										"string", // Required
 										// More values...
 									},
 								},
@@ -246,8 +243,8 @@ func cloudfrontCreateDistributionInput() *cloudfront.CreateDistributionInput {
 							QueryString: aws.Bool(true), // Required
 							Headers: &cloudfront.Headers{
 								Quantity: aws.Int64(1), // Required
-								Items: []*string{
-									aws.String("string"), // Required
+								Items: []string{
+									"string", // Required
 									// More values...
 								},
 							},
@@ -258,21 +255,21 @@ func cloudfrontCreateDistributionInput() *cloudfront.CreateDistributionInput {
 						TrustedSigners: &cloudfront.TrustedSigners{ // Required
 							Enabled:  aws.Bool(true), // Required
 							Quantity: aws.Int64(1),   // Required
-							Items: []*string{
-								aws.String("string"), // Required
+							Items: []string{
+								"string", // Required
 								// More values...
 							},
 						},
-						ViewerProtocolPolicy: aws.String("ViewerProtocolPolicy"), // Required
+						ViewerProtocolPolicy: cloudfront.ViewerProtocolPolicy("ViewerProtocolPolicy"), // Required
 						AllowedMethods: &cloudfront.AllowedMethods{
-							Items: []*string{ // Required
-								aws.String("Method"), // Required
+							Items: []cloudfront.Method{ // Required
+								cloudfront.Method("string"), // Required
 								// More values...
 							},
 							Quantity: aws.Int64(1), // Required
 							CachedMethods: &cloudfront.CachedMethods{
-								Items: []*string{ // Required
-									aws.String("Method"), // Required
+								Items: []cloudfront.Method{ // Required
+									cloudfront.Method("string"), // Required
 									// More values...
 								},
 								Quantity: aws.Int64(1), // Required
@@ -287,7 +284,7 @@ func cloudfrontCreateDistributionInput() *cloudfront.CreateDistributionInput {
 			},
 			CustomErrorResponses: &cloudfront.CustomErrorResponses{
 				Quantity: aws.Int64(1), // Required
-				Items: []*cloudfront.CustomErrorResponse{
+				Items: []cloudfront.CustomErrorResponse{
 					{ // Required
 						ErrorCode:          aws.Int64(1), // Required
 						ErrorCachingMinTTL: aws.Int64(1),
@@ -304,13 +301,13 @@ func cloudfrontCreateDistributionInput() *cloudfront.CreateDistributionInput {
 				IncludeCookies: aws.Bool(true),       // Required
 				Prefix:         aws.String("string"), // Required
 			},
-			PriceClass: aws.String("PriceClass"),
+			PriceClass: cloudfront.PriceClass("PriceClass"),
 			Restrictions: &cloudfront.Restrictions{
 				GeoRestriction: &cloudfront.GeoRestriction{ // Required
-					Quantity:        aws.Int64(1),                     // Required
-					RestrictionType: aws.String("GeoRestrictionType"), // Required
-					Items: []*string{
-						aws.String("string"), // Required
+					Quantity:        aws.Int64(1),                                        // Required
+					RestrictionType: cloudfront.GeoRestrictionType("GeoRestrictionType"), // Required
+					Items: []string{
+						"string", // Required
 						// More values...
 					},
 				},
@@ -318,8 +315,8 @@ func cloudfrontCreateDistributionInput() *cloudfront.CreateDistributionInput {
 			ViewerCertificate: &cloudfront.ViewerCertificate{
 				CloudFrontDefaultCertificate: aws.Bool(true),
 				IAMCertificateId:             aws.String("string"),
-				MinimumProtocolVersion:       aws.String("MinimumProtocolVersion"),
-				SSLSupportMethod:             aws.String("SSLSupportMethod"),
+				MinimumProtocolVersion:       cloudfront.MinimumProtocolVersion("MinimumProtocolVersion"),
+				SSLSupportMethod:             cloudfront.SSLSupportMethod("SSLSupportMethod"),
 			},
 		},
 	}
@@ -346,16 +343,16 @@ func s3PutObjectAclInput() *s3.PutObjectAclInput {
 		Bucket: aws.String("somebucketname"),
 		Key:    aws.String("keyname"),
 		AccessControlPolicy: &s3.AccessControlPolicy{
-			Grants: []*s3.Grant{
+			Grants: []s3.Grant{
 				{
 					Grantee: &s3.Grantee{
 						DisplayName:  aws.String("someName"),
 						EmailAddress: aws.String("someAddr"),
 						ID:           aws.String("someID"),
-						Type:         aws.String(s3.TypeCanonicalUser),
+						Type:         s3.TypeCanonicalUser,
 						URI:          aws.String("someURI"),
 					},
-					Permission: aws.String(s3.PermissionWrite),
+					Permission: s3.PermissionWrite,
 				},
 			},
 			Owner: &s3.Owner{

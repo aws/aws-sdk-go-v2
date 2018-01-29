@@ -3374,6 +3374,15 @@ const (
 	FilterConditionBetween FilterCondition = "BETWEEN"
 )
 
+func (enum FilterCondition) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FilterCondition) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HealthCheckType string
 
 // Enum values for HealthCheckType
@@ -3382,6 +3391,15 @@ const (
 	HealthCheckTypeHttps HealthCheckType = "HTTPS"
 	HealthCheckTypeTcp   HealthCheckType = "TCP"
 )
+
+func (enum HealthCheckType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HealthCheckType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type HealthStatus string
 
@@ -3392,12 +3410,30 @@ const (
 	HealthStatusUnknown   HealthStatus = "UNKNOWN"
 )
 
+func (enum HealthStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HealthStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NamespaceFilterName string
 
 // Enum values for NamespaceFilterName
 const (
 	NamespaceFilterNameType NamespaceFilterName = "TYPE"
 )
+
+func (enum NamespaceFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NamespaceFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type NamespaceType string
 
@@ -3406,6 +3442,15 @@ const (
 	NamespaceTypeDnsPublic  NamespaceType = "DNS_PUBLIC"
 	NamespaceTypeDnsPrivate NamespaceType = "DNS_PRIVATE"
 )
+
+func (enum NamespaceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NamespaceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OperationFilterName string
 
@@ -3418,6 +3463,15 @@ const (
 	OperationFilterNameUpdateDate  OperationFilterName = "UPDATE_DATE"
 )
 
+func (enum OperationFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OperationStatus string
 
 // Enum values for OperationStatus
@@ -3428,6 +3482,15 @@ const (
 	OperationStatusFail      OperationStatus = "FAIL"
 )
 
+func (enum OperationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OperationTargetType string
 
 // Enum values for OperationTargetType
@@ -3436,6 +3499,15 @@ const (
 	OperationTargetTypeService   OperationTargetType = "SERVICE"
 	OperationTargetTypeInstance  OperationTargetType = "INSTANCE"
 )
+
+func (enum OperationTargetType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationTargetType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OperationType string
 
@@ -3448,6 +3520,15 @@ const (
 	OperationTypeDeregisterInstance OperationType = "DEREGISTER_INSTANCE"
 )
 
+func (enum OperationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RecordType string
 
 // Enum values for RecordType
@@ -3457,9 +3538,27 @@ const (
 	RecordTypeAaaa RecordType = "AAAA"
 )
 
+func (enum RecordType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RecordType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ServiceFilterName string
 
 // Enum values for ServiceFilterName
 const (
 	ServiceFilterNameNamespaceId ServiceFilterName = "NAMESPACE_ID"
 )
+
+func (enum ServiceFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ServiceFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

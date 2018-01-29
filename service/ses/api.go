@@ -11461,6 +11461,15 @@ const (
 	BehaviorOnMXFailureRejectMessage   BehaviorOnMXFailure = "RejectMessage"
 )
 
+func (enum BehaviorOnMXFailure) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BehaviorOnMXFailure) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BounceType string
 
 // Enum values for BounceType
@@ -11472,6 +11481,15 @@ const (
 	BounceTypeUndefined        BounceType = "Undefined"
 	BounceTypeTemporaryFailure BounceType = "TemporaryFailure"
 )
+
+func (enum BounceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BounceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type BulkEmailStatus string
 
@@ -11493,6 +11511,15 @@ const (
 	BulkEmailStatusFailed                        BulkEmailStatus = "Failed"
 )
 
+func (enum BulkEmailStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BulkEmailStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConfigurationSetAttribute string
 
 // Enum values for ConfigurationSetAttribute
@@ -11501,6 +11528,15 @@ const (
 	ConfigurationSetAttributeTrackingOptions   ConfigurationSetAttribute = "trackingOptions"
 	ConfigurationSetAttributeReputationOptions ConfigurationSetAttribute = "reputationOptions"
 )
+
+func (enum ConfigurationSetAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationSetAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type CustomMailFromStatus string
 
@@ -11512,6 +11548,15 @@ const (
 	CustomMailFromStatusTemporaryFailure CustomMailFromStatus = "TemporaryFailure"
 )
 
+func (enum CustomMailFromStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CustomMailFromStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DimensionValueSource string
 
 // Enum values for DimensionValueSource
@@ -11520,6 +11565,15 @@ const (
 	DimensionValueSourceEmailHeader DimensionValueSource = "emailHeader"
 	DimensionValueSourceLinkTag     DimensionValueSource = "linkTag"
 )
+
+func (enum DimensionValueSource) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DimensionValueSource) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type DsnAction string
 
@@ -11531,6 +11585,15 @@ const (
 	DsnActionRelayed   DsnAction = "relayed"
 	DsnActionExpanded  DsnAction = "expanded"
 )
+
+func (enum DsnAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DsnAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type EventType string
 
@@ -11546,6 +11609,15 @@ const (
 	EventTypeRenderingFailure EventType = "renderingFailure"
 )
 
+func (enum EventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IdentityType string
 
 // Enum values for IdentityType
@@ -11554,6 +11626,15 @@ const (
 	IdentityTypeDomain       IdentityType = "Domain"
 )
 
+func (enum IdentityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum IdentityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type InvocationType string
 
 // Enum values for InvocationType
@@ -11561,6 +11642,15 @@ const (
 	InvocationTypeEvent           InvocationType = "Event"
 	InvocationTypeRequestResponse InvocationType = "RequestResponse"
 )
+
+func (enum InvocationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InvocationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type NotificationType string
 
@@ -11571,6 +11661,15 @@ const (
 	NotificationTypeDelivery  NotificationType = "Delivery"
 )
 
+func (enum NotificationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotificationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ReceiptFilterPolicy string
 
 // Enum values for ReceiptFilterPolicy
@@ -11578,6 +11677,15 @@ const (
 	ReceiptFilterPolicyBlock ReceiptFilterPolicy = "Block"
 	ReceiptFilterPolicyAllow ReceiptFilterPolicy = "Allow"
 )
+
+func (enum ReceiptFilterPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReceiptFilterPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type SNSActionEncoding string
 
@@ -11587,12 +11695,30 @@ const (
 	SNSActionEncodingBase64 SNSActionEncoding = "Base64"
 )
 
+func (enum SNSActionEncoding) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SNSActionEncoding) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StopScope string
 
 // Enum values for StopScope
 const (
 	StopScopeRuleSet StopScope = "RuleSet"
 )
+
+func (enum StopScope) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StopScope) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TlsPolicy string
 
@@ -11601,6 +11727,15 @@ const (
 	TlsPolicyRequire  TlsPolicy = "Require"
 	TlsPolicyOptional TlsPolicy = "Optional"
 )
+
+func (enum TlsPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TlsPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type VerificationStatus string
 
@@ -11612,3 +11747,12 @@ const (
 	VerificationStatusTemporaryFailure VerificationStatus = "TemporaryFailure"
 	VerificationStatusNotStarted       VerificationStatus = "NotStarted"
 )
+
+func (enum VerificationStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VerificationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

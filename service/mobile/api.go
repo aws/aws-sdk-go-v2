@@ -7,6 +7,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCreateProject = "CreateProject"
@@ -599,6 +600,53 @@ func (s BundleDetails) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BundleDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AvailablePlatforms) > 0 {
+		v := s.AvailablePlatforms
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "availablePlatforms", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.BundleId != nil {
+		v := *s.BundleId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "bundleId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.IconUrl != nil {
+		v := *s.IconUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "iconUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Title != nil {
+		v := *s.Title
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "title", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Request structure used to request a project be created.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/CreateProjectRequest
 type CreateProjectInput struct {
@@ -630,6 +678,36 @@ func (s CreateProjectInput) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateProjectInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Contents != nil {
+		v := s.Contents
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "contents", protocol.BytesStream(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "region", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SnapshotId != nil {
+		v := *s.SnapshotId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "snapshotId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Result structure used in response to a request to create a project.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/CreateProjectResult
 type CreateProjectOutput struct {
@@ -654,6 +732,17 @@ func (s CreateProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Details != nil {
+		v := s.Details
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "details", v, metadata)
+	}
+	return nil
 }
 
 // Request structure used to request a project be deleted.
@@ -691,6 +780,19 @@ func (s *DeleteProjectInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteProjectInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Result structure used in response to request to delete a project.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DeleteProjectResult
 type DeleteProjectOutput struct {
@@ -719,6 +821,35 @@ func (s DeleteProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.DeletedResources) > 0 {
+		v := s.DeletedResources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "deletedResources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.OrphanedResources) > 0 {
+		v := s.OrphanedResources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "orphanedResources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Request structure to request the details of a specific bundle.
@@ -756,6 +887,19 @@ func (s *DescribeBundleInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBundleInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.BundleId != nil {
+		v := *s.BundleId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "bundleId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Result structure contains the details of the bundle.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeBundleResult
 type DescribeBundleOutput struct {
@@ -780,6 +924,17 @@ func (s DescribeBundleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeBundleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeBundleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Details != nil {
+		v := s.Details
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "details", v, metadata)
+	}
+	return nil
 }
 
 // Request structure used to request details about a project.
@@ -822,6 +977,25 @@ func (s *DescribeProjectInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeProjectInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SyncFromResources != nil {
+		v := *s.SyncFromResources
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "syncFromResources", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
 // Result structure used for requests of project details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/DescribeProjectResult
 type DescribeProjectOutput struct {
@@ -846,6 +1020,17 @@ func (s DescribeProjectOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Details != nil {
+		v := s.Details
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "details", v, metadata)
+	}
+	return nil
 }
 
 // Request structure used to request generation of custom SDK and tool packages
@@ -890,6 +1075,31 @@ func (s *ExportBundleInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportBundleInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.BundleId != nil {
+		v := *s.BundleId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "bundleId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Platform) > 0 {
+		v := s.Platform
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "platform", protocol.QuotedValue{v}, metadata)
+	}
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Result structure which contains link to download custom-generated SDK and
 // tool packages used to integrate mobile web or app clients with backed AWS
 // resources.
@@ -918,6 +1128,17 @@ func (s ExportBundleOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ExportBundleOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportBundleOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DownloadUrl != nil {
+		v := *s.DownloadUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "downloadUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Request structure used in requests to export project configuration details.
@@ -951,6 +1172,19 @@ func (s *ExportProjectInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportProjectInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -993,6 +1227,29 @@ func (s ExportProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DownloadUrl != nil {
+		v := *s.DownloadUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "downloadUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ShareUrl != nil {
+		v := *s.ShareUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "shareUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SnapshotId != nil {
+		v := *s.SnapshotId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "snapshotId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Request structure to request all available bundles.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListBundlesRequest
 type ListBundlesInput struct {
@@ -1015,6 +1272,25 @@ func (s ListBundlesInput) String() string {
 // GoString returns the string representation
 func (s ListBundlesInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListBundlesInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Result structure contains a list of all available bundles with details.
@@ -1047,6 +1323,29 @@ func (s ListBundlesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListBundlesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.BundleList) > 0 {
+		v := s.BundleList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "bundleList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Request structure used to request projects list in AWS Mobile Hub.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ListProjectsRequest
 type ListProjectsInput struct {
@@ -1069,6 +1368,25 @@ func (s ListProjectsInput) String() string {
 // GoString returns the string representation
 func (s ListProjectsInput) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListProjectsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Result structure used for requests to list projects in AWS Mobile Hub.
@@ -1100,6 +1418,29 @@ func (s ListProjectsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListProjectsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListProjectsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Projects) > 0 {
+		v := s.Projects
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "projects", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Detailed information about an AWS Mobile Hub project.
@@ -1142,6 +1483,65 @@ func (s ProjectDetails) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ProjectDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConsoleUrl != nil {
+		v := *s.ConsoleUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "consoleUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedDate != nil {
+		v := *s.CreatedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.LastUpdatedDate != nil {
+		v := *s.LastUpdatedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "region", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Resources) > 0 {
+		v := s.Resources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "resources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.State) > 0 {
+		v := s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{v}, metadata)
+	}
+	return nil
+}
+
 // Summary information about an AWS Mobile Hub project.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/ProjectSummary
 type ProjectSummary struct {
@@ -1162,6 +1562,23 @@ func (s ProjectSummary) String() string {
 // GoString returns the string representation
 func (s ProjectSummary) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ProjectSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Information about an instance of an AWS resource associated with a project.
@@ -1194,6 +1611,47 @@ func (s Resource) String() string {
 // GoString returns the string representation
 func (s Resource) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "attributes", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.Feature != nil {
+		v := *s.Feature
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "feature", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Request structure used for requests to update project configuration.
@@ -1236,6 +1694,24 @@ func (s *UpdateProjectInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateProjectInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Contents != nil {
+		v := s.Contents
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "contents", protocol.BytesStream(v), metadata)
+	}
+	if s.ProjectId != nil {
+		v := *s.ProjectId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "projectId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Result structure used for requests to updated project configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mobile-2017-07-01/UpdateProjectResult
 type UpdateProjectOutput struct {
@@ -1262,6 +1738,17 @@ func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateProjectOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Details != nil {
+		v := s.Details
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "details", v, metadata)
+	}
+	return nil
+}
+
 // Developer desktop or target mobile app or website platform.
 type Platform string
 
@@ -1276,6 +1763,15 @@ const (
 	PlatformJavascript Platform = "JAVASCRIPT"
 )
 
+func (enum Platform) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Platform) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Synchronization state for a project.
 type ProjectState string
 
@@ -1285,3 +1781,12 @@ const (
 	ProjectStateSyncing   ProjectState = "SYNCING"
 	ProjectStateImporting ProjectState = "IMPORTING"
 )
+
+func (enum ProjectState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProjectState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

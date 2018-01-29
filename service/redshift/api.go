@@ -11584,6 +11584,15 @@ const (
 	ParameterApplyTypeDynamic ParameterApplyType = "dynamic"
 )
 
+func (enum ParameterApplyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ParameterApplyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SourceType string
 
 // Enum values for SourceType
@@ -11593,6 +11602,15 @@ const (
 	SourceTypeClusterSecurityGroup  SourceType = "cluster-security-group"
 	SourceTypeClusterSnapshot       SourceType = "cluster-snapshot"
 )
+
+func (enum SourceType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SourceType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type TableRestoreStatusType string
 
@@ -11604,3 +11622,12 @@ const (
 	TableRestoreStatusTypeFailed     TableRestoreStatusType = "FAILED"
 	TableRestoreStatusTypeCanceled   TableRestoreStatusType = "CANCELED"
 )
+
+func (enum TableRestoreStatusType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TableRestoreStatusType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

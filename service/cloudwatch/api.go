@@ -2959,6 +2959,15 @@ const (
 	ComparisonOperatorLessThanOrEqualToThreshold    ComparisonOperator = "LessThanOrEqualToThreshold"
 )
 
+func (enum ComparisonOperator) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComparisonOperator) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HistoryItemType string
 
 // Enum values for HistoryItemType
@@ -2967,6 +2976,15 @@ const (
 	HistoryItemTypeStateUpdate         HistoryItemType = "StateUpdate"
 	HistoryItemTypeAction              HistoryItemType = "Action"
 )
+
+func (enum HistoryItemType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HistoryItemType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type StandardUnit string
 
@@ -3001,6 +3019,15 @@ const (
 	StandardUnitNone            StandardUnit = "None"
 )
 
+func (enum StandardUnit) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StandardUnit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StateValue string
 
 // Enum values for StateValue
@@ -3009,6 +3036,15 @@ const (
 	StateValueAlarm            StateValue = "ALARM"
 	StateValueInsufficientData StateValue = "INSUFFICIENT_DATA"
 )
+
+func (enum StateValue) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StateValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type Statistic string
 
@@ -3020,3 +3056,12 @@ const (
 	StatisticMinimum     Statistic = "Minimum"
 	StatisticMaximum     Statistic = "Maximum"
 )
+
+func (enum Statistic) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Statistic) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

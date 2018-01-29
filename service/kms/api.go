@@ -5747,6 +5747,15 @@ const (
 	AlgorithmSpecRsaesOaepSha256 AlgorithmSpec = "RSAES_OAEP_SHA_256"
 )
 
+func (enum AlgorithmSpec) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AlgorithmSpec) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DataKeySpec string
 
 // Enum values for DataKeySpec
@@ -5755,6 +5764,15 @@ const (
 	DataKeySpecAes128 DataKeySpec = "AES_128"
 )
 
+func (enum DataKeySpec) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DataKeySpec) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ExpirationModelType string
 
 // Enum values for ExpirationModelType
@@ -5762,6 +5780,15 @@ const (
 	ExpirationModelTypeKeyMaterialExpires       ExpirationModelType = "KEY_MATERIAL_EXPIRES"
 	ExpirationModelTypeKeyMaterialDoesNotExpire ExpirationModelType = "KEY_MATERIAL_DOES_NOT_EXPIRE"
 )
+
+func (enum ExpirationModelType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExpirationModelType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type GrantOperation string
 
@@ -5778,6 +5805,15 @@ const (
 	GrantOperationDescribeKey                     GrantOperation = "DescribeKey"
 )
 
+func (enum GrantOperation) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GrantOperation) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type KeyManagerType string
 
 // Enum values for KeyManagerType
@@ -5785,6 +5821,15 @@ const (
 	KeyManagerTypeAws      KeyManagerType = "AWS"
 	KeyManagerTypeCustomer KeyManagerType = "CUSTOMER"
 )
+
+func (enum KeyManagerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyManagerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type KeyState string
 
@@ -5796,12 +5841,30 @@ const (
 	KeyStatePendingImport   KeyState = "PendingImport"
 )
 
+func (enum KeyState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type KeyUsageType string
 
 // Enum values for KeyUsageType
 const (
 	KeyUsageTypeEncryptDecrypt KeyUsageType = "ENCRYPT_DECRYPT"
 )
+
+func (enum KeyUsageType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum KeyUsageType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type OriginType string
 
@@ -5811,9 +5874,27 @@ const (
 	OriginTypeExternal OriginType = "EXTERNAL"
 )
 
+func (enum OriginType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OriginType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type WrappingKeySpec string
 
 // Enum values for WrappingKeySpec
 const (
 	WrappingKeySpecRsa2048 WrappingKeySpec = "RSA_2048"
 )
+
+func (enum WrappingKeySpec) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WrappingKeySpec) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

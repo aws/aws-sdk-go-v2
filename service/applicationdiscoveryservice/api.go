@@ -2877,6 +2877,15 @@ const (
 	AgentStatusShutdown    AgentStatus = "SHUTDOWN"
 )
 
+func (enum AgentStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AgentStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ConfigurationItemType string
 
 // Enum values for ConfigurationItemType
@@ -2887,6 +2896,15 @@ const (
 	ConfigurationItemTypeApplication ConfigurationItemType = "APPLICATION"
 )
 
+func (enum ConfigurationItemType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConfigurationItemType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ExportDataFormat string
 
 // Enum values for ExportDataFormat
@@ -2894,6 +2912,15 @@ const (
 	ExportDataFormatCsv     ExportDataFormat = "CSV"
 	ExportDataFormatGraphml ExportDataFormat = "GRAPHML"
 )
+
+func (enum ExportDataFormat) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExportDataFormat) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ExportStatus string
 
@@ -2904,6 +2931,15 @@ const (
 	ExportStatusInProgress ExportStatus = "IN_PROGRESS"
 )
 
+func (enum ExportStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ExportStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type OrderString string
 
 // Enum values for OrderString
@@ -2911,3 +2947,12 @@ const (
 	OrderStringAsc  OrderString = "ASC"
 	OrderStringDesc OrderString = "DESC"
 )
+
+func (enum OrderString) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OrderString) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

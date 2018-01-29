@@ -3369,6 +3369,15 @@ const (
 	OperatorTypeBetween OperatorType = "BETWEEN"
 )
 
+func (enum OperatorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OperatorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type TaskStatus string
 
 // Enum values for TaskStatus
@@ -3377,3 +3386,12 @@ const (
 	TaskStatusFailed   TaskStatus = "FAILED"
 	TaskStatusFalse    TaskStatus = "FALSE"
 )
+
+func (enum TaskStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TaskStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

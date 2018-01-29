@@ -5,6 +5,7 @@ package iotjobsdataplane
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opDescribeJobExecution = "DescribeJobExecution"
@@ -258,6 +259,36 @@ func (s *DescribeJobExecutionInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ExecutionNumber != nil {
+		v := *s.ExecutionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "executionNumber", protocol.Int64Value(v), metadata)
+	}
+	if s.IncludeJobDocument != nil {
+		v := *s.IncludeJobDocument
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "includeJobDocument", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/DescribeJobExecutionResponse
 type DescribeJobExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -281,6 +312,17 @@ func (s DescribeJobExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeJobExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeJobExecutionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Execution != nil {
+		v := s.Execution
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "execution", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/GetPendingJobExecutionsRequest
@@ -320,6 +362,18 @@ func (s *GetPendingJobExecutionsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetPendingJobExecutionsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/GetPendingJobExecutionsResponse
 type GetPendingJobExecutionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -346,6 +400,35 @@ func (s GetPendingJobExecutionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetPendingJobExecutionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetPendingJobExecutionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.InProgressJobs) > 0 {
+		v := s.InProgressJobs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "inProgressJobs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.QueuedJobs) > 0 {
+		v := s.QueuedJobs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "queuedJobs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Contains data about a job execution.
@@ -398,6 +481,77 @@ func (s JobExecution) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExecutionNumber != nil {
+		v := *s.ExecutionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "executionNumber", protocol.Int64Value(v), metadata)
+	}
+	if s.JobDocument != nil {
+		v := *s.JobDocument
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDocument", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedAt != nil {
+		v := *s.LastUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.Int64Value(v), metadata)
+	}
+	if s.QueuedAt != nil {
+		v := *s.QueuedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queuedAt", protocol.Int64Value(v), metadata)
+	}
+	if s.StartedAt != nil {
+		v := *s.StartedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startedAt", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.StatusDetails) > 0 {
+		v := s.StatusDetails
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "statusDetails", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.VersionNumber != nil {
+		v := *s.VersionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "versionNumber", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Contains data about the state of a job execution.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/JobExecutionState
 type JobExecutionState struct {
@@ -423,6 +577,35 @@ func (s JobExecutionState) String() string {
 // GoString returns the string representation
 func (s JobExecutionState) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobExecutionState) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.StatusDetails) > 0 {
+		v := s.StatusDetails
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "statusDetails", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.VersionNumber != nil {
+		v := *s.VersionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "versionNumber", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Contains a subset of information about a job execution.
@@ -459,6 +642,47 @@ func (s JobExecutionSummary) String() string {
 // GoString returns the string representation
 func (s JobExecutionSummary) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JobExecutionSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExecutionNumber != nil {
+		v := *s.ExecutionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "executionNumber", protocol.Int64Value(v), metadata)
+	}
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedAt != nil {
+		v := *s.LastUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt", protocol.Int64Value(v), metadata)
+	}
+	if s.QueuedAt != nil {
+		v := *s.QueuedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queuedAt", protocol.Int64Value(v), metadata)
+	}
+	if s.StartedAt != nil {
+		v := *s.StartedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "startedAt", protocol.Int64Value(v), metadata)
+	}
+	if s.VersionNumber != nil {
+		v := *s.VersionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "versionNumber", protocol.Int64Value(v), metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/StartNextPendingJobExecutionRequest
@@ -502,6 +726,30 @@ func (s *StartNextPendingJobExecutionInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartNextPendingJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.StatusDetails) > 0 {
+		v := s.StatusDetails
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "statusDetails", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/StartNextPendingJobExecutionResponse
 type StartNextPendingJobExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -525,6 +773,17 @@ func (s StartNextPendingJobExecutionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StartNextPendingJobExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartNextPendingJobExecutionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Execution != nil {
+		v := s.Execution
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "execution", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/UpdateJobExecutionRequest
@@ -610,6 +869,66 @@ func (s *UpdateJobExecutionInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ExecutionNumber != nil {
+		v := *s.ExecutionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "executionNumber", protocol.Int64Value(v), metadata)
+	}
+	if s.ExpectedVersion != nil {
+		v := *s.ExpectedVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expectedVersion", protocol.Int64Value(v), metadata)
+	}
+	if s.IncludeJobDocument != nil {
+		v := *s.IncludeJobDocument
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "includeJobDocument", protocol.BoolValue(v), metadata)
+	}
+	if s.IncludeJobExecutionState != nil {
+		v := *s.IncludeJobExecutionState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "includeJobExecutionState", protocol.BoolValue(v), metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+	}
+	if len(s.StatusDetails) > 0 {
+		v := s.StatusDetails
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "statusDetails", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/UpdateJobExecutionResponse
 type UpdateJobExecutionOutput struct {
 	_ struct{} `type:"structure"`
@@ -638,6 +957,23 @@ func (s UpdateJobExecutionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateJobExecutionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExecutionState != nil {
+		v := s.ExecutionState
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "executionState", v, metadata)
+	}
+	if s.JobDocument != nil {
+		v := *s.JobDocument
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "jobDocument", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 type JobExecutionStatus string
 
 // Enum values for JobExecutionStatus
@@ -650,3 +986,12 @@ const (
 	JobExecutionStatusRemoved    JobExecutionStatus = "REMOVED"
 	JobExecutionStatusCanceled   JobExecutionStatus = "CANCELED"
 )
+
+func (enum JobExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

@@ -5,6 +5,7 @@ package resourcegroups
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCreateGroup = "CreateGroup"
@@ -836,6 +837,42 @@ func (s *CreateGroupInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceQuery != nil {
+		v := s.ResourceQuery
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ResourceQuery", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/CreateGroupOutput
 type CreateGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -865,6 +902,35 @@ func (s CreateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Group != nil {
+		v := s.Group
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
+	}
+	if s.ResourceQuery != nil {
+		v := s.ResourceQuery
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ResourceQuery", v, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/DeleteGroupInput
@@ -904,6 +970,18 @@ func (s *DeleteGroupInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/DeleteGroupOutput
 type DeleteGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -927,6 +1005,17 @@ func (s DeleteGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Group != nil {
+		v := s.Group
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupInput
@@ -966,6 +1055,18 @@ func (s *GetGroupInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupOutput
 type GetGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -989,6 +1090,17 @@ func (s GetGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Group != nil {
+		v := s.Group
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupQueryInput
@@ -1028,6 +1140,18 @@ func (s *GetGroupQueryInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupQueryInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetGroupQueryOutput
 type GetGroupQueryOutput struct {
 	_ struct{} `type:"structure"`
@@ -1051,6 +1175,17 @@ func (s GetGroupQueryOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetGroupQueryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetGroupQueryOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupQuery != nil {
+		v := s.GroupQuery
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GroupQuery", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagsInput
@@ -1088,6 +1223,18 @@ func (s *GetTagsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetTagsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GetTagsOutput
 type GetTagsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1114,6 +1261,29 @@ func (s GetTagsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
 }
 
 // A resource group.
@@ -1145,6 +1315,29 @@ func (s Group) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Group) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupArn != nil {
+		v := *s.GroupArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The underlying resource query of a resource group. Resources that match query
 // results are part of the group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/GroupQuery
@@ -1172,6 +1365,23 @@ func (s GroupQuery) String() string {
 // GoString returns the string representation
 func (s GroupQuery) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GroupQuery) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "GroupName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceQuery != nil {
+		v := s.ResourceQuery
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ResourceQuery", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesInput
@@ -1223,6 +1433,30 @@ func (s *ListGroupResourcesInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGroupResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupResourcesOutput
 type ListGroupResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1251,6 +1485,29 @@ func (s ListGroupResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListGroupResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGroupResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ResourceIdentifiers) > 0 {
+		v := s.ResourceIdentifiers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ResourceIdentifiers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupsInput
@@ -1290,6 +1547,24 @@ func (s *ListGroupsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGroupsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ListGroupsOutput
 type ListGroupsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1319,6 +1594,29 @@ func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListGroupsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Groups) > 0 {
+		v := s.Groups
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Groups", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The ARN of a resource, and its resource type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/ResourceIdentifier
 type ResourceIdentifier struct {
@@ -1339,6 +1637,23 @@ func (s ResourceIdentifier) String() string {
 // GoString returns the string representation
 func (s ResourceIdentifier) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceIdentifier) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ResourceArn != nil {
+		v := *s.ResourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // The query that is used to define a resource group or a search for resources.
@@ -1387,6 +1702,23 @@ func (s *ResourceQuery) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ResourceQuery) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Query != nil {
+		v := *s.Query
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Query", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{v}, metadata)
 	}
 	return nil
 }
@@ -1443,6 +1775,30 @@ func (s *SearchResourcesInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SearchResourcesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceQuery != nil {
+		v := s.ResourceQuery
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ResourceQuery", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/SearchResourcesOutput
 type SearchResourcesOutput struct {
 	_ struct{} `type:"structure"`
@@ -1471,6 +1827,29 @@ func (s SearchResourcesOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s SearchResourcesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SearchResourcesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ResourceIdentifiers) > 0 {
+		v := s.ResourceIdentifiers
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ResourceIdentifiers", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/TagInput
@@ -1518,6 +1897,30 @@ func (s *TagInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/TagOutput
 type TagOutput struct {
 	_ struct{} `type:"structure"`
@@ -1544,6 +1947,29 @@ func (s TagOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TagOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TagOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Tags) > 0 {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UntagInput
@@ -1589,6 +2015,30 @@ func (s *UntagInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.Keys) > 0 {
+		v := s.Keys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Keys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UntagOutput
 type UntagOutput struct {
 	_ struct{} `type:"structure"`
@@ -1615,6 +2065,29 @@ func (s UntagOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UntagOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UntagOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Keys) > 0 {
+		v := s.Keys
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Keys", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupInput
@@ -1659,6 +2132,24 @@ func (s *UpdateGroupInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGroupInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupOutput
 type UpdateGroupOutput struct {
 	_ struct{} `type:"structure"`
@@ -1682,6 +2173,17 @@ func (s UpdateGroupOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGroupOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Group != nil {
+		v := s.Group
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Group", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupQueryInput
@@ -1736,6 +2238,24 @@ func (s *UpdateGroupQueryInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGroupQueryInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ResourceQuery != nil {
+		v := s.ResourceQuery
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ResourceQuery", v, metadata)
+	}
+	if s.GroupName != nil {
+		v := *s.GroupName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "GroupName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/UpdateGroupQueryOutput
 type UpdateGroupQueryOutput struct {
 	_ struct{} `type:"structure"`
@@ -1761,9 +2281,29 @@ func (s UpdateGroupQueryOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateGroupQueryOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GroupQuery != nil {
+		v := s.GroupQuery
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GroupQuery", v, metadata)
+	}
+	return nil
+}
+
 type QueryType string
 
 // Enum values for QueryType
 const (
 	QueryTypeTagFilters10 QueryType = "TAG_FILTERS_1_0"
 )
+
+func (enum QueryType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum QueryType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

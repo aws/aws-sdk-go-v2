@@ -5427,6 +5427,15 @@ const (
 	ActionCategoryApproval ActionCategory = "Approval"
 )
 
+func (enum ActionCategory) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionCategory) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ActionConfigurationPropertyType string
 
 // Enum values for ActionConfigurationPropertyType
@@ -5435,6 +5444,15 @@ const (
 	ActionConfigurationPropertyTypeNumber  ActionConfigurationPropertyType = "Number"
 	ActionConfigurationPropertyTypeBoolean ActionConfigurationPropertyType = "Boolean"
 )
+
+func (enum ActionConfigurationPropertyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionConfigurationPropertyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ActionExecutionStatus string
 
@@ -5445,6 +5463,15 @@ const (
 	ActionExecutionStatusFailed     ActionExecutionStatus = "Failed"
 )
 
+func (enum ActionExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ActionOwner string
 
 // Enum values for ActionOwner
@@ -5454,6 +5481,15 @@ const (
 	ActionOwnerCustom     ActionOwner = "Custom"
 )
 
+func (enum ActionOwner) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ActionOwner) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ApprovalStatus string
 
 // Enum values for ApprovalStatus
@@ -5462,12 +5498,30 @@ const (
 	ApprovalStatusRejected ApprovalStatus = "Rejected"
 )
 
+func (enum ApprovalStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ApprovalStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ArtifactLocationType string
 
 // Enum values for ArtifactLocationType
 const (
 	ArtifactLocationTypeS3 ArtifactLocationType = "S3"
 )
+
+func (enum ArtifactLocationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArtifactLocationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type ArtifactStoreType string
 
@@ -5476,6 +5530,15 @@ const (
 	ArtifactStoreTypeS3 ArtifactStoreType = "S3"
 )
 
+func (enum ArtifactStoreType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ArtifactStoreType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type BlockerType string
 
 // Enum values for BlockerType
@@ -5483,12 +5546,30 @@ const (
 	BlockerTypeSchedule BlockerType = "Schedule"
 )
 
+func (enum BlockerType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BlockerType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EncryptionKeyType string
 
 // Enum values for EncryptionKeyType
 const (
 	EncryptionKeyTypeKms EncryptionKeyType = "KMS"
 )
+
+func (enum EncryptionKeyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncryptionKeyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type FailureType string
 
@@ -5501,6 +5582,15 @@ const (
 	FailureTypeRevisionUnavailable FailureType = "RevisionUnavailable"
 	FailureTypeSystemUnavailable   FailureType = "SystemUnavailable"
 )
+
+func (enum FailureType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FailureType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type JobStatus string
 
@@ -5515,6 +5605,15 @@ const (
 	JobStatusFailed     JobStatus = "Failed"
 )
 
+func (enum JobStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum JobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PipelineExecutionStatus string
 
 // Enum values for PipelineExecutionStatus
@@ -5525,6 +5624,15 @@ const (
 	PipelineExecutionStatusFailed     PipelineExecutionStatus = "Failed"
 )
 
+func (enum PipelineExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PipelineExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StageExecutionStatus string
 
 // Enum values for StageExecutionStatus
@@ -5534,12 +5642,30 @@ const (
 	StageExecutionStatusSucceeded  StageExecutionStatus = "Succeeded"
 )
 
+func (enum StageExecutionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StageExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StageRetryMode string
 
 // Enum values for StageRetryMode
 const (
 	StageRetryModeFailedActions StageRetryMode = "FAILED_ACTIONS"
 )
+
+func (enum StageRetryMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StageRetryMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
 
 type StageTransitionType string
 
@@ -5548,3 +5674,12 @@ const (
 	StageTransitionTypeInbound  StageTransitionType = "Inbound"
 	StageTransitionTypeOutbound StageTransitionType = "Outbound"
 )
+
+func (enum StageTransitionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StageTransitionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

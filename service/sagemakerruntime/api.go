@@ -5,6 +5,7 @@ package sagemakerruntime
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opInvokeEndpoint = "InvokeEndpoint"
@@ -116,6 +117,36 @@ func (s *InvokeEndpointInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InvokeEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Accept != nil {
+		v := *s.Accept
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Accept", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.EndpointName != nil {
+		v := *s.EndpointName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "EndpointName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Body != nil {
+		v := s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "Body", protocol.BytesStream(v), metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointOutput
 type InvokeEndpointOutput struct {
 	_ struct{} `type:"structure" payload:"Body"`
@@ -147,4 +178,27 @@ func (s InvokeEndpointOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s InvokeEndpointOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InvokeEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.InvokedProductionVariant != nil {
+		v := *s.InvokedProductionVariant
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-Amzn-Invoked-Production-Variant", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Body != nil {
+		v := s.Body
+
+		metadata := protocol.Metadata{}
+		e.SetStream(protocol.PayloadTarget, "Body", protocol.BytesStream(v), metadata)
+	}
+	return nil
 }

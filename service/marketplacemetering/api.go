@@ -565,3 +565,12 @@ const (
 	UsageRecordResultStatusCustomerNotSubscribed UsageRecordResultStatus = "CustomerNotSubscribed"
 	UsageRecordResultStatusDuplicateRecord       UsageRecordResultStatus = "DuplicateRecord"
 )
+
+func (enum UsageRecordResultStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum UsageRecordResultStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

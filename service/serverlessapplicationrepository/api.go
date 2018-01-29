@@ -5,6 +5,7 @@ package serverlessapplicationrepository
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
 const opCreateApplication = "CreateApplication"
@@ -476,6 +477,41 @@ func (s ApplicationPolicyStatement) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ApplicationPolicyStatement) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Actions) > 0 {
+		v := s.Actions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "actions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if len(s.Principals) > 0 {
+		v := s.Principals
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "principals", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.StatementId != nil {
+		v := *s.StatementId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "statementId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Summary of details about the application.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ApplicationSummary
 type ApplicationSummary struct {
@@ -513,6 +549,59 @@ func (s ApplicationSummary) String() string {
 // GoString returns the string representation
 func (s ApplicationSummary) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ApplicationSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Author != nil {
+		v := *s.Author
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "author", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Labels) > 0 {
+		v := s.Labels
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "labels", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SpdxLicenseId != nil {
+		v := *s.SpdxLicenseId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "spdxLicenseId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationRequest
@@ -556,6 +645,97 @@ func (s CreateApplicationInput) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Author != nil {
+		v := *s.Author
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "author", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Labels) > 0 {
+		v := s.Labels
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "labels", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.LicenseBody != nil {
+		v := *s.LicenseBody
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "licenseBody", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.LicenseUrl != nil {
+		v := *s.LicenseUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "licenseUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ReadmeBody != nil {
+		v := *s.ReadmeBody
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "readmeBody", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ReadmeUrl != nil {
+		v := *s.ReadmeUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "readmeUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceCodeUrl != nil {
+		v := *s.SourceCodeUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceCodeUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SpdxLicenseId != nil {
+		v := *s.SpdxLicenseId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "spdxLicenseId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateBody", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateUrl != nil {
+		v := *s.TemplateUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationResponse
 type CreateApplicationOutput struct {
 	_ struct{} `type:"structure"`
@@ -597,6 +777,77 @@ func (s CreateApplicationOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Author != nil {
+		v := *s.Author
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "author", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Labels) > 0 {
+		v := s.Labels
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "labels", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.LicenseUrl != nil {
+		v := *s.LicenseUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "licenseUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ReadmeUrl != nil {
+		v := *s.ReadmeUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "readmeUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SpdxLicenseId != nil {
+		v := *s.SpdxLicenseId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "spdxLicenseId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "version", v, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationVersionRequest
@@ -644,6 +895,43 @@ func (s *CreateApplicationVersionInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateApplicationVersionInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.SourceCodeUrl != nil {
+		v := *s.SourceCodeUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceCodeUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateBody != nil {
+		v := *s.TemplateBody
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateBody", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateUrl != nil {
+		v := *s.TemplateUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "semanticVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateApplicationVersionResponse
 type CreateApplicationVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -676,6 +964,53 @@ func (s CreateApplicationVersionOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateApplicationVersionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateApplicationVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ParameterDefinitions) > 0 {
+		v := s.ParameterDefinitions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "parameterDefinitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceCodeUrl != nil {
+		v := *s.SourceCodeUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceCodeUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateUrl != nil {
+		v := *s.TemplateUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationChangeSetRequest
@@ -716,6 +1051,43 @@ func (s *CreateCloudFormationChangeSetInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateCloudFormationChangeSetInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.ParameterOverrides) > 0 {
+		v := s.ParameterOverrides
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "parameterOverrides", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StackName != nil {
+		v := *s.StackName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stackName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/CreateCloudFormationChangeSetResponse
 type CreateCloudFormationChangeSetOutput struct {
 	_ struct{} `type:"structure"`
@@ -744,6 +1116,35 @@ func (s CreateCloudFormationChangeSetOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateCloudFormationChangeSetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateCloudFormationChangeSetOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ChangeSetId != nil {
+		v := *s.ChangeSetId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "changeSetId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.StackId != nil {
+		v := *s.StackId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "stackId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetApplicationRequest
@@ -776,6 +1177,25 @@ func (s *GetApplicationInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "semanticVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -823,6 +1243,77 @@ func (s GetApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Author != nil {
+		v := *s.Author
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "author", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Labels) > 0 {
+		v := s.Labels
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "labels", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.LicenseUrl != nil {
+		v := *s.LicenseUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "licenseUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ReadmeUrl != nil {
+		v := *s.ReadmeUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "readmeUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SpdxLicenseId != nil {
+		v := *s.SpdxLicenseId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "spdxLicenseId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "version", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetApplicationPolicyRequest
 type GetApplicationPolicyInput struct {
 	_ struct{} `type:"structure"`
@@ -855,6 +1346,19 @@ func (s *GetApplicationPolicyInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetApplicationPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetApplicationPolicyResponse
 type GetApplicationPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -877,6 +1381,23 @@ func (s GetApplicationPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetApplicationPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetApplicationPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Statements) > 0 {
+		v := s.Statements
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "statements", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationVersionsRequest
@@ -918,6 +1439,31 @@ func (s *ListApplicationVersionsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListApplicationVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationVersionsResponse
 type ListApplicationVersionsOutput struct {
 	_ struct{} `type:"structure"`
@@ -942,6 +1488,29 @@ func (s ListApplicationVersionsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListApplicationVersionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListApplicationVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Versions) > 0 {
+		v := s.Versions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "versions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationsRequest
@@ -976,6 +1545,25 @@ func (s *ListApplicationsInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListApplicationsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ListApplicationsResponse
 type ListApplicationsOutput struct {
 	_ struct{} `type:"structure"`
@@ -1000,6 +1588,29 @@ func (s ListApplicationsOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListApplicationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListApplicationsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Applications) > 0 {
+		v := s.Applications
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "applications", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Parameters supported by the application.
@@ -1086,6 +1697,101 @@ func (s ParameterDefinition) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ParameterDefinition) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AllowedPattern != nil {
+		v := *s.AllowedPattern
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "allowedPattern", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.AllowedValues) > 0 {
+		v := s.AllowedValues
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "allowedValues", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ConstraintDescription != nil {
+		v := *s.ConstraintDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "constraintDescription", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.DefaultValue != nil {
+		v := *s.DefaultValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "defaultValue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxLength != nil {
+		v := *s.MaxLength
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxLength", protocol.Int64Value(v), metadata)
+	}
+	if s.MaxValue != nil {
+		v := *s.MaxValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "maxValue", protocol.Int64Value(v), metadata)
+	}
+	if s.MinLength != nil {
+		v := *s.MinLength
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minLength", protocol.Int64Value(v), metadata)
+	}
+	if s.MinValue != nil {
+		v := *s.MinValue
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minValue", protocol.Int64Value(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.NoEcho != nil {
+		v := *s.NoEcho
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "noEcho", protocol.BoolValue(v), metadata)
+	}
+	if len(s.ReferencedByResources) > 0 {
+		v := s.ReferencedByResources
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "referencedByResources", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Parameter value of the application.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/ParameterValue
 type ParameterValue struct {
@@ -1108,6 +1814,23 @@ func (s ParameterValue) String() string {
 // GoString returns the string representation
 func (s ParameterValue) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ParameterValue) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/PutApplicationPolicyRequest
@@ -1144,6 +1867,31 @@ func (s *PutApplicationPolicyInput) Validate() error {
 	return nil
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutApplicationPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.Statements) > 0 {
+		v := s.Statements
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "statements", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/PutApplicationPolicyResponse
 type PutApplicationPolicyOutput struct {
 	_ struct{} `type:"structure"`
@@ -1166,6 +1914,23 @@ func (s PutApplicationPolicyOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutApplicationPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutApplicationPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Statements) > 0 {
+		v := s.Statements
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "statements", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/UpdateApplicationRequest
@@ -1206,6 +1971,55 @@ func (s *UpdateApplicationInput) Validate() error {
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Author != nil {
+		v := *s.Author
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "author", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Labels) > 0 {
+		v := s.Labels
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "labels", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ReadmeBody != nil {
+		v := *s.ReadmeBody
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "readmeBody", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ReadmeUrl != nil {
+		v := *s.ReadmeUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "readmeUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1253,6 +2067,77 @@ func (s UpdateApplicationOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Author != nil {
+		v := *s.Author
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "author", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Labels) > 0 {
+		v := s.Labels
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "labels", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.LicenseUrl != nil {
+		v := *s.LicenseUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "licenseUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.ReadmeUrl != nil {
+		v := *s.ReadmeUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "readmeUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SpdxLicenseId != nil {
+		v := *s.SpdxLicenseId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "spdxLicenseId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "version", v, metadata)
+	}
+	return nil
+}
+
 // Application version details.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/Version
 type Version struct {
@@ -1287,6 +2172,53 @@ func (s Version) GoString() string {
 	return s.String()
 }
 
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Version) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ParameterDefinitions) > 0 {
+		v := s.ParameterDefinitions
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "parameterDefinitions", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceCodeUrl != nil {
+		v := *s.SourceCodeUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceCodeUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateUrl != nil {
+		v := *s.TemplateUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "templateUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Application version summary.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/VersionSummary
 type VersionSummary struct {
@@ -1313,4 +2245,33 @@ func (s VersionSummary) String() string {
 // GoString returns the string representation
 func (s VersionSummary) GoString() string {
 	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VersionSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "applicationId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationTime != nil {
+		v := *s.CreationTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SemanticVersion != nil {
+		v := *s.SemanticVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "semanticVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	if s.SourceCodeUrl != nil {
+		v := *s.SourceCodeUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "sourceCodeUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+	}
+	return nil
 }
