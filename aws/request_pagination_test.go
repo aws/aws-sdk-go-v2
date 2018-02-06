@@ -5,182 +5,89 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
+	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-	"github.com/aws/aws-sdk-go-v2/service/route53"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
-// Use DynamoDB methods for simplicity
-func TestPaginationQueryPage(t *testing.T) {
-	db := dynamodb.New(unit.Config())
-	tokens, pages, numPages, gotToEnd := []map[string]dynamodb.AttributeValue{}, []map[string]dynamodb.AttributeValue{}, 0, false
-
-	reqNum := 0
-	resps := []*dynamodb.QueryOutput{
-		{
-			LastEvaluatedKey: map[string]dynamodb.AttributeValue{"key": {S: aws.String("key1")}},
-			Count:            aws.Int64(1),
-			Items: []map[string]dynamodb.AttributeValue{
-				{
-					"key": {S: aws.String("key1")},
-				},
-			},
-		},
-		{
-			LastEvaluatedKey: map[string]dynamodb.AttributeValue{"key": {S: aws.String("key2")}},
-			Count:            aws.Int64(1),
-			Items: []map[string]dynamodb.AttributeValue{
-				{
-					"key": {S: aws.String("key2")},
-				},
-			},
-		},
-		{
-			LastEvaluatedKey: map[string]dynamodb.AttributeValue{},
-			Count:            aws.Int64(1),
-			Items: []map[string]dynamodb.AttributeValue{
-				{
-					"key": {S: aws.String("key3")},
-				},
-			},
-		},
+func TestPagination(t *testing.T) {
+	type mockInput struct {
+		Foo *string
+	}
+	input := mockInput{
+		Foo: aws.String("foo"),
 	}
 
-	db.Handlers.Send.Clear() // mock sending
-	db.Handlers.Unmarshal.Clear()
-	db.Handlers.UnmarshalMeta.Clear()
-	db.Handlers.ValidateResponse.Clear()
-	db.Handlers.Build.PushBack(func(r *aws.Request) {
-		in := r.Params.(*dynamodb.QueryInput)
-		if in == nil {
-			tokens = append(tokens, nil)
-		} else if len(in.ExclusiveStartKey) != 0 {
-			tokens = append(tokens, in.ExclusiveStartKey)
-		}
-	})
-	db.Handlers.Unmarshal.PushBack(func(r *aws.Request) {
+	type mockOutput struct {
+		Bar *string
+	}
+
+	resps := []*mockOutput{
+		{aws.String("1")},
+		{aws.String("2")},
+		{aws.String("3")},
+	}
+
+	reqNum := 0
+	h := defaults.Handlers()
+	h.Send.Clear()
+	h.Unmarshal.Clear()
+	h.UnmarshalMeta.Clear()
+	h.ValidateResponse.Clear()
+	h.Unmarshal.PushBack(func(r *aws.Request) {
 		r.Data = resps[reqNum]
 		reqNum++
 	})
+	retryer := aws.DefaultRetryer{2}
+	op := aws.Operation{}
 
-	params := &dynamodb.QueryInput{
-		Limit:     aws.Int64(2),
-		TableName: aws.String("tablename"),
-	}
-	err := db.QueryPages(params, func(p *dynamodb.QueryOutput, last bool) bool {
-		numPages++
-		for _, item := range p.Items {
-			pages = append(pages, item)
-		}
-		if last {
-			if gotToEnd {
-				t.Fatal("last == true, happened twice")
-			}
-			gotToEnd = true
-		}
-		return true
-	})
-	if err != nil {
-		t.Errorf("expected no error, but received %v", err)
-	}
+	inValues := []string{}
+	p := aws.Pager{
+		NewRequest: func() (*aws.Request, error) {
+			tmp := input
+			inCpy := &tmp
 
-	if e, a := []map[string]dynamodb.AttributeValue{
-		{"key": {S: aws.String("key1")}},
-		{"key": {S: aws.String("key2")}},
-	}, tokens; !reflect.DeepEqual(e, a) {
-		t.Errorf("expected %v, but received %v", e, a)
+			var output mockOutput
+			req := aws.New(unit.Config(), aws.Metadata{}, h, retryer, &op, inCpy, &output)
+			req.Handlers.Build.PushBack(func(r *aws.Request) {
+				in := r.Params.(*mockInput)
+				if in == nil {
+					inValues = append(inValues, "")
+				} else if in.Foo != nil {
+					inValues = append(inValues, *in.Foo)
+				}
+			})
+			req.SetContext(aws.BackgroundContext())
+
+			return req, nil
+		},
 	}
 
-	if e, a := []map[string]dynamodb.AttributeValue{
-		{"key": {S: aws.String("key1")}},
-		{"key": {S: aws.String("key2")}},
-		{"key": {S: aws.String("key3")}},
-	}, pages; !reflect.DeepEqual(e, a) {
-		t.Errorf("expected %v, but received %v", e, a)
+	results := []*string{}
+	for p.Next() {
+		page := p.CurrentPage()
+		output := page.(*mockOutput)
+		results = append(results, output.Bar)
 	}
 
-	if e, a := 3, numPages; e != a {
-		t.Errorf("expected %v, but received %v", e, a)
+	if err := p.Err(); err != nil {
+		t.Error("unexpected error", err)
 	}
-	if !gotToEnd {
-		t.Error("did not reach of the end of the pagination")
+
+	expected := []*string{
+		aws.String("1"),
+		aws.String("2"),
+		aws.String("3"),
 	}
-	if params.ExclusiveStartKey != nil {
-		t.Errorf("expected a nil value, but received %v", params.ExclusiveStartKey)
+
+	if e, a := expected, results; !reflect.DeepEqual(e, a) {
+		t.Error("expected %v, but received %v", e, a)
 	}
 }
 
-// Use DynamoDB methods for simplicity
+/*// Use DynamoDB methods for simplicity
 func TestPagination(t *testing.T) {
 	db := dynamodb.New(unit.Config())
-	tokens, pages, numPages, gotToEnd := []string{}, []string{}, 0, false
-
-	reqNum := 0
-	resps := []*dynamodb.ListTablesOutput{
-		{TableNames: []string{"Table1", "Table2"}, LastEvaluatedTableName: aws.String("Table2")},
-		{TableNames: []string{"Table3", "Table4"}, LastEvaluatedTableName: aws.String("Table4")},
-		{TableNames: []string{"Table5"}},
-	}
-
-	db.Handlers.Send.Clear() // mock sending
-	db.Handlers.Unmarshal.Clear()
-	db.Handlers.UnmarshalMeta.Clear()
-	db.Handlers.ValidateResponse.Clear()
-	db.Handlers.Build.PushBack(func(r *aws.Request) {
-		in := r.Params.(*dynamodb.ListTablesInput)
-		if in == nil {
-			tokens = append(tokens, "")
-		} else if in.ExclusiveStartTableName != nil {
-			tokens = append(tokens, *in.ExclusiveStartTableName)
-		}
-	})
-	db.Handlers.Unmarshal.PushBack(func(r *aws.Request) {
-		r.Data = resps[reqNum]
-		reqNum++
-	})
-
-	params := &dynamodb.ListTablesInput{Limit: aws.Int64(2)}
-	err := db.ListTablesPages(params, func(p *dynamodb.ListTablesOutput, last bool) bool {
-		numPages++
-		for _, t := range p.TableNames {
-			pages = append(pages, t)
-		}
-		if last {
-			if gotToEnd {
-				t.Fatal("last == true, happened twice")
-			}
-			gotToEnd = true
-		}
-		return true
-	})
-
-	if e, a := []string{"Table2", "Table4"}, tokens; !reflect.DeepEqual(e, a) {
-		t.Errorf("expected %v, but received %v", e, a)
-	}
-	if e, a := []string{"Table1", "Table2", "Table3", "Table4", "Table5"}, pages; !reflect.DeepEqual(e, a) {
-		t.Errorf("expected %v, but received %v", e, a)
-	}
-
-	if e, a := 3, numPages; e != a {
-		t.Errorf("expected %v, but received %v", e, a)
-	}
-	if !gotToEnd {
-		t.Error("did not reach of the end of the pagination")
-	}
-	if err != nil {
-		t.Errorf("expected no error, but received %v", err)
-	}
-	if params.ExclusiveStartTableName != nil {
-		t.Errorf("expected nil value, but received %v", params.ExclusiveStartTableName)
-	}
-}
-
-// Use DynamoDB methods for simplicity
-func TestPaginationEachPage(t *testing.T) {
-	db := dynamodb.New(unit.Config())
-	tokens, pages, numPages, gotToEnd := []string{}, []string{}, 0, false
+	tokens, pages, numPages := []string{}, []string{}, 0
 
 	reqNum := 0
 	resps := []*dynamodb.ListTablesOutput{
@@ -208,20 +115,14 @@ func TestPaginationEachPage(t *testing.T) {
 
 	params := &dynamodb.ListTablesInput{Limit: aws.Int64(2)}
 	req := db.ListTablesRequest(params)
-	err := req.EachPage(func(p interface{}, last bool) bool {
+	p := req.Paginate()
+	for p.Next() {
 		numPages++
-		for _, t := range p.(*dynamodb.ListTablesOutput).TableNames {
+		page := p.CurrentPage()
+		for _, t := range page.TableNames {
 			pages = append(pages, t)
 		}
-		if last {
-			if gotToEnd {
-				t.Fatal("last == true, happened twice")
-			}
-			gotToEnd = true
-		}
-
-		return true
-	})
+	}
 
 	if e, a := []string{"Table2", "Table4"}, tokens; !reflect.DeepEqual(e, a) {
 		t.Errorf("expected %v, but received %v", e, a)
@@ -229,89 +130,16 @@ func TestPaginationEachPage(t *testing.T) {
 	if e, a := []string{"Table1", "Table2", "Table3", "Table4", "Table5"}, pages; !reflect.DeepEqual(e, a) {
 		t.Errorf("expected %v, but received %v", e, a)
 	}
+
 	if e, a := 3, numPages; e != a {
 		t.Errorf("expected %v, but received %v", e, a)
 	}
-	if !gotToEnd {
-		t.Error("did not reach of the end of the pagination")
-	}
-	if err != nil {
+
+	if err := p.Err(); err != nil {
 		t.Errorf("expected no error, but received %v", err)
 	}
-}
-
-// Use DynamoDB methods for simplicity
-func TestPaginationEarlyExit(t *testing.T) {
-	db := dynamodb.New(unit.Config())
-	numPages, gotToEnd := 0, false
-
-	reqNum := 0
-	resps := []*dynamodb.ListTablesOutput{
-		{TableNames: []string{"Table1", "Table2"}, LastEvaluatedTableName: aws.String("Table2")},
-		{TableNames: []string{"Table3", "Table4"}, LastEvaluatedTableName: aws.String("Table4")},
-		{TableNames: []string{"Table5"}},
-	}
-
-	db.Handlers.Send.Clear() // mock sending
-	db.Handlers.Unmarshal.Clear()
-	db.Handlers.UnmarshalMeta.Clear()
-	db.Handlers.ValidateResponse.Clear()
-	db.Handlers.Unmarshal.PushBack(func(r *aws.Request) {
-		r.Data = resps[reqNum]
-		reqNum++
-	})
-
-	params := &dynamodb.ListTablesInput{Limit: aws.Int64(2)}
-	err := db.ListTablesPages(params, func(p *dynamodb.ListTablesOutput, last bool) bool {
-		numPages++
-		if numPages == 2 {
-			return false
-		}
-		if last {
-			if gotToEnd {
-				t.Fatal("last == true, happened twice")
-			}
-			gotToEnd = true
-		}
-		return true
-	})
-
-	if e, a := 2, numPages; e != a {
-		t.Errorf("expected %v, but received %v", e, a)
-	}
-	if gotToEnd {
-		t.Error("should not have reached the end of pagination")
-	}
-	if err != nil {
-		t.Errorf("expected no error, but received %v", err)
-	}
-}
-
-func TestSkipPagination(t *testing.T) {
-	client := s3.New(unit.Config())
-	client.Handlers.Send.Clear() // mock sending
-	client.Handlers.Unmarshal.Clear()
-	client.Handlers.UnmarshalMeta.Clear()
-	client.Handlers.ValidateResponse.Clear()
-	client.Handlers.Unmarshal.PushBack(func(r *aws.Request) {
-		r.Data = &s3.HeadBucketOutput{}
-	})
-
-	req := client.HeadBucketRequest(&s3.HeadBucketInput{Bucket: aws.String("bucket")})
-
-	numPages, gotToEnd := 0, false
-	req.EachPage(func(p interface{}, last bool) bool {
-		numPages++
-		if last {
-			gotToEnd = true
-		}
-		return true
-	})
-	if e, a := 1, numPages; e != a {
-		t.Errorf("expected %v, but received %v", e, a)
-	}
-	if !gotToEnd {
-		t.Error("did not reach of the end of the pagination")
+	if params.ExclusiveStartTableName != nil {
+		t.Errorf("expected nil value, but received %v", params.ExclusiveStartTableName)
 	}
 }
 
@@ -337,10 +165,14 @@ func TestPaginationTruncation(t *testing.T) {
 	})
 
 	params := &s3.ListObjectsInput{Bucket: aws.String("bucket")}
+	req := client.ListObjectsRequest(params)
+	p := req.Paginate()
 
 	results := []string{}
-	err := client.ListObjectsPages(params, func(p *s3.ListObjectsOutput, last bool) bool {
+	for p.Next() {
 		results = append(results, *p.Contents[0].Key)
+	}
+	err := client.ListObjectsPages(params, func(p *s3.ListObjectsOutput, last bool) bool {
 		return true
 	})
 
@@ -675,4 +507,4 @@ func BenchmarkEachPageIterator(b *testing.B) {
 			return true
 		})
 	}
-}
+}*/
