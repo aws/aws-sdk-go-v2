@@ -10,7 +10,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
@@ -374,8 +373,8 @@ func TestBatchDeleteList(t *testing.T) {
 	}
 	iter := &DeleteListIterator{
 		Bucket: input.Bucket,
-		Paginator: request.Pagination{
-			NewRequest: func() (*request.Request, error) {
+		Paginator: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
 				var inCpy *s3.ListObjectsInput
 				if input != nil {
 					tmp := *input
@@ -439,8 +438,8 @@ func TestBatchDeleteList_EmptyListObjects(t *testing.T) {
 	// called on it
 	iter := &DeleteListIterator{
 		Bucket: input.Bucket,
-		Paginator: request.Pagination{
-			NewRequest: func() (*request.Request, error) {
+		Paginator: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
 				req := svc.ListObjectsRequest(input)
 				return req.Request, nil
 			},

@@ -87,35 +87,17 @@ type EMRAPI interface {
 
 	ListBootstrapActionsRequest(*emr.ListBootstrapActionsInput) emr.ListBootstrapActionsRequest
 
-	ListBootstrapActionsPages(*emr.ListBootstrapActionsInput, func(*emr.ListBootstrapActionsOutput, bool) bool) error
-	ListBootstrapActionsPagesWithContext(aws.Context, *emr.ListBootstrapActionsInput, func(*emr.ListBootstrapActionsOutput, bool) bool, ...aws.Option) error
-
 	ListClustersRequest(*emr.ListClustersInput) emr.ListClustersRequest
-
-	ListClustersPages(*emr.ListClustersInput, func(*emr.ListClustersOutput, bool) bool) error
-	ListClustersPagesWithContext(aws.Context, *emr.ListClustersInput, func(*emr.ListClustersOutput, bool) bool, ...aws.Option) error
 
 	ListInstanceFleetsRequest(*emr.ListInstanceFleetsInput) emr.ListInstanceFleetsRequest
 
-	ListInstanceFleetsPages(*emr.ListInstanceFleetsInput, func(*emr.ListInstanceFleetsOutput, bool) bool) error
-	ListInstanceFleetsPagesWithContext(aws.Context, *emr.ListInstanceFleetsInput, func(*emr.ListInstanceFleetsOutput, bool) bool, ...aws.Option) error
-
 	ListInstanceGroupsRequest(*emr.ListInstanceGroupsInput) emr.ListInstanceGroupsRequest
 
-	ListInstanceGroupsPages(*emr.ListInstanceGroupsInput, func(*emr.ListInstanceGroupsOutput, bool) bool) error
-	ListInstanceGroupsPagesWithContext(aws.Context, *emr.ListInstanceGroupsInput, func(*emr.ListInstanceGroupsOutput, bool) bool, ...aws.Option) error
-
 	ListInstancesRequest(*emr.ListInstancesInput) emr.ListInstancesRequest
-
-	ListInstancesPages(*emr.ListInstancesInput, func(*emr.ListInstancesOutput, bool) bool) error
-	ListInstancesPagesWithContext(aws.Context, *emr.ListInstancesInput, func(*emr.ListInstancesOutput, bool) bool, ...aws.Option) error
 
 	ListSecurityConfigurationsRequest(*emr.ListSecurityConfigurationsInput) emr.ListSecurityConfigurationsRequest
 
 	ListStepsRequest(*emr.ListStepsInput) emr.ListStepsRequest
-
-	ListStepsPages(*emr.ListStepsInput, func(*emr.ListStepsOutput, bool) bool) error
-	ListStepsPagesWithContext(aws.Context, *emr.ListStepsInput, func(*emr.ListStepsOutput, bool) bool, ...aws.Option) error
 
 	ModifyInstanceFleetRequest(*emr.ModifyInstanceFleetInput) emr.ModifyInstanceFleetRequest
 

@@ -1074,37 +1074,33 @@ func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsIn
 //            return pageNum <= 3
 //        })
 //
-func (c *Lambda) ListEventSourceMappingsPages(input *ListEventSourceMappingsInput, fn func(*ListEventSourceMappingsOutput, bool) bool) error {
-	return c.ListEventSourceMappingsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListEventSourceMappingsPagesWithContext same as ListEventSourceMappingsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) ListEventSourceMappingsPagesWithContext(ctx aws.Context, input *ListEventSourceMappingsInput, fn func(*ListEventSourceMappingsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListEventSourceMappingsRequest) Paginate(opts ...aws.Option) ListEventSourceMappingsPager {
+	return ListEventSourceMappingsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListEventSourceMappingsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListEventSourceMappingsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListEventSourceMappingsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListEventSourceMappingsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListEventSourceMappingsPager ...
+type ListEventSourceMappingsPager struct {
+	aws.Pager
+}
+
+func (p *ListEventSourceMappingsPager) CurrentPage() *ListEventSourceMappingsOutput {
+	return p.Pager.CurrentPage().(*ListEventSourceMappingsOutput)
 }
 
 const opListFunctions = "ListFunctions"
@@ -1187,37 +1183,33 @@ func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRe
 //            return pageNum <= 3
 //        })
 //
-func (c *Lambda) ListFunctionsPages(input *ListFunctionsInput, fn func(*ListFunctionsOutput, bool) bool) error {
-	return c.ListFunctionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListFunctionsPagesWithContext same as ListFunctionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Lambda) ListFunctionsPagesWithContext(ctx aws.Context, input *ListFunctionsInput, fn func(*ListFunctionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListFunctionsRequest) Paginate(opts ...aws.Option) ListFunctionsPager {
+	return ListFunctionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListFunctionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListFunctionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListFunctionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFunctionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListFunctionsPager ...
+type ListFunctionsPager struct {
+	aws.Pager
+}
+
+func (p *ListFunctionsPager) CurrentPage() *ListFunctionsOutput {
+	return p.Pager.CurrentPage().(*ListFunctionsOutput)
 }
 
 const opListTags = "ListTags"

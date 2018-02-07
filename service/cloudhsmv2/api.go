@@ -291,37 +291,33 @@ func (c *CloudHSMV2) DescribeBackupsRequest(input *DescribeBackupsInput) Describ
 //            return pageNum <= 3
 //        })
 //
-func (c *CloudHSMV2) DescribeBackupsPages(input *DescribeBackupsInput, fn func(*DescribeBackupsOutput, bool) bool) error {
-	return c.DescribeBackupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeBackupsPagesWithContext same as DescribeBackupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) DescribeBackupsPagesWithContext(ctx aws.Context, input *DescribeBackupsInput, fn func(*DescribeBackupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeBackupsRequest) Paginate(opts ...aws.Option) DescribeBackupsPager {
+	return DescribeBackupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeBackupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeBackupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeBackupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeBackupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeBackupsPager ...
+type DescribeBackupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeBackupsPager) CurrentPage() *DescribeBackupsOutput {
+	return p.Pager.CurrentPage().(*DescribeBackupsOutput)
 }
 
 const opDescribeClusters = "DescribeClusters"
@@ -403,37 +399,33 @@ func (c *CloudHSMV2) DescribeClustersRequest(input *DescribeClustersInput) Descr
 //            return pageNum <= 3
 //        })
 //
-func (c *CloudHSMV2) DescribeClustersPages(input *DescribeClustersInput, fn func(*DescribeClustersOutput, bool) bool) error {
-	return c.DescribeClustersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeClustersPagesWithContext same as DescribeClustersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) DescribeClustersPagesWithContext(ctx aws.Context, input *DescribeClustersInput, fn func(*DescribeClustersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeClustersRequest) Paginate(opts ...aws.Option) DescribeClustersPager {
+	return DescribeClustersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeClustersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeClustersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeClustersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeClustersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeClustersPager ...
+type DescribeClustersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeClustersPager) CurrentPage() *DescribeClustersOutput {
+	return p.Pager.CurrentPage().(*DescribeClustersOutput)
 }
 
 const opInitializeCluster = "InitializeCluster"
@@ -566,37 +558,33 @@ func (c *CloudHSMV2) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *CloudHSMV2) ListTagsPages(input *ListTagsInput, fn func(*ListTagsOutput, bool) bool) error {
-	return c.ListTagsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListTagsPagesWithContext same as ListTagsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsInput, fn func(*ListTagsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
+	return ListTagsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTagsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListTagsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListTagsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTagsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTagsPager ...
+type ListTagsPager struct {
+	aws.Pager
+}
+
+func (p *ListTagsPager) CurrentPage() *ListTagsOutput {
+	return p.Pager.CurrentPage().(*ListTagsOutput)
 }
 
 const opTagResource = "TagResource"

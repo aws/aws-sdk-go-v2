@@ -396,37 +396,33 @@ func (c *Athena) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryRes
 //            return pageNum <= 3
 //        })
 //
-func (c *Athena) GetQueryResultsPages(input *GetQueryResultsInput, fn func(*GetQueryResultsOutput, bool) bool) error {
-	return c.GetQueryResultsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetQueryResultsPagesWithContext same as GetQueryResultsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) GetQueryResultsPagesWithContext(ctx aws.Context, input *GetQueryResultsInput, fn func(*GetQueryResultsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetQueryResultsRequest) Paginate(opts ...aws.Option) GetQueryResultsPager {
+	return GetQueryResultsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetQueryResultsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetQueryResultsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetQueryResultsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetQueryResultsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetQueryResultsPager ...
+type GetQueryResultsPager struct {
+	aws.Pager
+}
+
+func (p *GetQueryResultsPager) CurrentPage() *GetQueryResultsOutput {
+	return p.Pager.CurrentPage().(*GetQueryResultsOutput)
 }
 
 const opListNamedQueries = "ListNamedQueries"
@@ -505,37 +501,33 @@ func (c *Athena) ListNamedQueriesRequest(input *ListNamedQueriesInput) ListNamed
 //            return pageNum <= 3
 //        })
 //
-func (c *Athena) ListNamedQueriesPages(input *ListNamedQueriesInput, fn func(*ListNamedQueriesOutput, bool) bool) error {
-	return c.ListNamedQueriesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListNamedQueriesPagesWithContext same as ListNamedQueriesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) ListNamedQueriesPagesWithContext(ctx aws.Context, input *ListNamedQueriesInput, fn func(*ListNamedQueriesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListNamedQueriesRequest) Paginate(opts ...aws.Option) ListNamedQueriesPager {
+	return ListNamedQueriesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListNamedQueriesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListNamedQueriesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListNamedQueriesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListNamedQueriesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListNamedQueriesPager ...
+type ListNamedQueriesPager struct {
+	aws.Pager
+}
+
+func (p *ListNamedQueriesPager) CurrentPage() *ListNamedQueriesOutput {
+	return p.Pager.CurrentPage().(*ListNamedQueriesOutput)
 }
 
 const opListQueryExecutions = "ListQueryExecutions"
@@ -614,37 +606,33 @@ func (c *Athena) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) Lis
 //            return pageNum <= 3
 //        })
 //
-func (c *Athena) ListQueryExecutionsPages(input *ListQueryExecutionsInput, fn func(*ListQueryExecutionsOutput, bool) bool) error {
-	return c.ListQueryExecutionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListQueryExecutionsPagesWithContext same as ListQueryExecutionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) ListQueryExecutionsPagesWithContext(ctx aws.Context, input *ListQueryExecutionsInput, fn func(*ListQueryExecutionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListQueryExecutionsRequest) Paginate(opts ...aws.Option) ListQueryExecutionsPager {
+	return ListQueryExecutionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListQueryExecutionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListQueryExecutionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListQueryExecutionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListQueryExecutionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListQueryExecutionsPager ...
+type ListQueryExecutionsPager struct {
+	aws.Pager
+}
+
+func (p *ListQueryExecutionsPager) CurrentPage() *ListQueryExecutionsOutput {
+	return p.Pager.CurrentPage().(*ListQueryExecutionsOutput)
 }
 
 const opStartQueryExecution = "StartQueryExecution"

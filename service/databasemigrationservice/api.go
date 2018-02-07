@@ -749,37 +749,33 @@ func (c *DatabaseMigrationService) DescribeCertificatesRequest(input *DescribeCe
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeCertificatesPages(input *DescribeCertificatesInput, fn func(*DescribeCertificatesOutput, bool) bool) error {
-	return c.DescribeCertificatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeCertificatesPagesWithContext same as DescribeCertificatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeCertificatesPagesWithContext(ctx aws.Context, input *DescribeCertificatesInput, fn func(*DescribeCertificatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeCertificatesRequest) Paginate(opts ...aws.Option) DescribeCertificatesPager {
+	return DescribeCertificatesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCertificatesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeCertificatesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeCertificatesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCertificatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCertificatesPager ...
+type DescribeCertificatesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCertificatesPager) CurrentPage() *DescribeCertificatesOutput {
+	return p.Pager.CurrentPage().(*DescribeCertificatesOutput)
 }
 
 const opDescribeConnections = "DescribeConnections"
@@ -855,37 +851,33 @@ func (c *DatabaseMigrationService) DescribeConnectionsRequest(input *DescribeCon
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeConnectionsPages(input *DescribeConnectionsInput, fn func(*DescribeConnectionsOutput, bool) bool) error {
-	return c.DescribeConnectionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeConnectionsPagesWithContext same as DescribeConnectionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeConnectionsPagesWithContext(ctx aws.Context, input *DescribeConnectionsInput, fn func(*DescribeConnectionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeConnectionsRequest) Paginate(opts ...aws.Option) DescribeConnectionsPager {
+	return DescribeConnectionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeConnectionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeConnectionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeConnectionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeConnectionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeConnectionsPager ...
+type DescribeConnectionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeConnectionsPager) CurrentPage() *DescribeConnectionsOutput {
+	return p.Pager.CurrentPage().(*DescribeConnectionsOutput)
 }
 
 const opDescribeEndpointTypes = "DescribeEndpointTypes"
@@ -960,37 +952,33 @@ func (c *DatabaseMigrationService) DescribeEndpointTypesRequest(input *DescribeE
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeEndpointTypesPages(input *DescribeEndpointTypesInput, fn func(*DescribeEndpointTypesOutput, bool) bool) error {
-	return c.DescribeEndpointTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEndpointTypesPagesWithContext same as DescribeEndpointTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEndpointTypesPagesWithContext(ctx aws.Context, input *DescribeEndpointTypesInput, fn func(*DescribeEndpointTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEndpointTypesRequest) Paginate(opts ...aws.Option) DescribeEndpointTypesPager {
+	return DescribeEndpointTypesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEndpointTypesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEndpointTypesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEndpointTypesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEndpointTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEndpointTypesPager ...
+type DescribeEndpointTypesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEndpointTypesPager) CurrentPage() *DescribeEndpointTypesOutput {
+	return p.Pager.CurrentPage().(*DescribeEndpointTypesOutput)
 }
 
 const opDescribeEndpoints = "DescribeEndpoints"
@@ -1065,37 +1053,33 @@ func (c *DatabaseMigrationService) DescribeEndpointsRequest(input *DescribeEndpo
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeEndpointsPages(input *DescribeEndpointsInput, fn func(*DescribeEndpointsOutput, bool) bool) error {
-	return c.DescribeEndpointsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEndpointsPagesWithContext same as DescribeEndpointsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEndpointsPagesWithContext(ctx aws.Context, input *DescribeEndpointsInput, fn func(*DescribeEndpointsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEndpointsRequest) Paginate(opts ...aws.Option) DescribeEndpointsPager {
+	return DescribeEndpointsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEndpointsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEndpointsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEndpointsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEndpointsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEndpointsPager ...
+type DescribeEndpointsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEndpointsPager) CurrentPage() *DescribeEndpointsOutput {
+	return p.Pager.CurrentPage().(*DescribeEndpointsOutput)
 }
 
 const opDescribeEventCategories = "DescribeEventCategories"
@@ -1227,37 +1211,33 @@ func (c *DatabaseMigrationService) DescribeEventSubscriptionsRequest(input *Desc
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeEventSubscriptionsPages(input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool) error {
-	return c.DescribeEventSubscriptionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEventSubscriptionsPagesWithContext same as DescribeEventSubscriptionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) DescribeEventSubscriptionsPager {
+	return DescribeEventSubscriptionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventSubscriptionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEventSubscriptionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEventSubscriptionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventSubscriptionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventSubscriptionsPager ...
+type DescribeEventSubscriptionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventSubscriptionsPager) CurrentPage() *DescribeEventSubscriptionsOutput {
+	return p.Pager.CurrentPage().(*DescribeEventSubscriptionsOutput)
 }
 
 const opDescribeEvents = "DescribeEvents"
@@ -1334,37 +1314,33 @@ func (c *DatabaseMigrationService) DescribeEventsRequest(input *DescribeEventsIn
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeEventsPages(input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool) error {
-	return c.DescribeEventsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEventsPagesWithContext same as DescribeEventsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
+	return DescribeEventsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEventsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEventsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventsPager ...
+type DescribeEventsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventsPager) CurrentPage() *DescribeEventsOutput {
+	return p.Pager.CurrentPage().(*DescribeEventsOutput)
 }
 
 const opDescribeOrderableReplicationInstances = "DescribeOrderableReplicationInstances"
@@ -1440,37 +1416,33 @@ func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesRequest(
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesPages(input *DescribeOrderableReplicationInstancesInput, fn func(*DescribeOrderableReplicationInstancesOutput, bool) bool) error {
-	return c.DescribeOrderableReplicationInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeOrderableReplicationInstancesPagesWithContext same as DescribeOrderableReplicationInstancesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesPagesWithContext(ctx aws.Context, input *DescribeOrderableReplicationInstancesInput, fn func(*DescribeOrderableReplicationInstancesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeOrderableReplicationInstancesRequest) Paginate(opts ...aws.Option) DescribeOrderableReplicationInstancesPager {
+	return DescribeOrderableReplicationInstancesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeOrderableReplicationInstancesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeOrderableReplicationInstancesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeOrderableReplicationInstancesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeOrderableReplicationInstancesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeOrderableReplicationInstancesPager ...
+type DescribeOrderableReplicationInstancesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeOrderableReplicationInstancesPager) CurrentPage() *DescribeOrderableReplicationInstancesOutput {
+	return p.Pager.CurrentPage().(*DescribeOrderableReplicationInstancesOutput)
 }
 
 const opDescribeRefreshSchemasStatus = "DescribeRefreshSchemasStatus"
@@ -1595,37 +1567,33 @@ func (c *DatabaseMigrationService) DescribeReplicationInstancesRequest(input *De
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeReplicationInstancesPages(input *DescribeReplicationInstancesInput, fn func(*DescribeReplicationInstancesOutput, bool) bool) error {
-	return c.DescribeReplicationInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeReplicationInstancesPagesWithContext same as DescribeReplicationInstancesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationInstancesPagesWithContext(ctx aws.Context, input *DescribeReplicationInstancesInput, fn func(*DescribeReplicationInstancesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeReplicationInstancesRequest) Paginate(opts ...aws.Option) DescribeReplicationInstancesPager {
+	return DescribeReplicationInstancesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReplicationInstancesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeReplicationInstancesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeReplicationInstancesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReplicationInstancesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReplicationInstancesPager ...
+type DescribeReplicationInstancesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReplicationInstancesPager) CurrentPage() *DescribeReplicationInstancesOutput {
+	return p.Pager.CurrentPage().(*DescribeReplicationInstancesOutput)
 }
 
 const opDescribeReplicationSubnetGroups = "DescribeReplicationSubnetGroups"
@@ -1700,37 +1668,33 @@ func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsRequest(input 
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsPages(input *DescribeReplicationSubnetGroupsInput, fn func(*DescribeReplicationSubnetGroupsOutput, bool) bool) error {
-	return c.DescribeReplicationSubnetGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeReplicationSubnetGroupsPagesWithContext same as DescribeReplicationSubnetGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeReplicationSubnetGroupsInput, fn func(*DescribeReplicationSubnetGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeReplicationSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeReplicationSubnetGroupsPager {
+	return DescribeReplicationSubnetGroupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReplicationSubnetGroupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeReplicationSubnetGroupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeReplicationSubnetGroupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReplicationSubnetGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReplicationSubnetGroupsPager ...
+type DescribeReplicationSubnetGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReplicationSubnetGroupsPager) CurrentPage() *DescribeReplicationSubnetGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeReplicationSubnetGroupsOutput)
 }
 
 const opDescribeReplicationTaskAssessmentResults = "DescribeReplicationTaskAssessmentResults"
@@ -1806,37 +1770,33 @@ func (c *DatabaseMigrationService) DescribeReplicationTaskAssessmentResultsReque
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeReplicationTaskAssessmentResultsPages(input *DescribeReplicationTaskAssessmentResultsInput, fn func(*DescribeReplicationTaskAssessmentResultsOutput, bool) bool) error {
-	return c.DescribeReplicationTaskAssessmentResultsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeReplicationTaskAssessmentResultsPagesWithContext same as DescribeReplicationTaskAssessmentResultsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationTaskAssessmentResultsPagesWithContext(ctx aws.Context, input *DescribeReplicationTaskAssessmentResultsInput, fn func(*DescribeReplicationTaskAssessmentResultsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeReplicationTaskAssessmentResultsRequest) Paginate(opts ...aws.Option) DescribeReplicationTaskAssessmentResultsPager {
+	return DescribeReplicationTaskAssessmentResultsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReplicationTaskAssessmentResultsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeReplicationTaskAssessmentResultsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeReplicationTaskAssessmentResultsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReplicationTaskAssessmentResultsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReplicationTaskAssessmentResultsPager ...
+type DescribeReplicationTaskAssessmentResultsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReplicationTaskAssessmentResultsPager) CurrentPage() *DescribeReplicationTaskAssessmentResultsOutput {
+	return p.Pager.CurrentPage().(*DescribeReplicationTaskAssessmentResultsOutput)
 }
 
 const opDescribeReplicationTasks = "DescribeReplicationTasks"
@@ -1912,37 +1872,33 @@ func (c *DatabaseMigrationService) DescribeReplicationTasksRequest(input *Descri
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeReplicationTasksPages(input *DescribeReplicationTasksInput, fn func(*DescribeReplicationTasksOutput, bool) bool) error {
-	return c.DescribeReplicationTasksPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeReplicationTasksPagesWithContext same as DescribeReplicationTasksPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationTasksPagesWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, fn func(*DescribeReplicationTasksOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeReplicationTasksRequest) Paginate(opts ...aws.Option) DescribeReplicationTasksPager {
+	return DescribeReplicationTasksPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReplicationTasksInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeReplicationTasksRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeReplicationTasksOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReplicationTasksOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReplicationTasksPager ...
+type DescribeReplicationTasksPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReplicationTasksPager) CurrentPage() *DescribeReplicationTasksOutput {
+	return p.Pager.CurrentPage().(*DescribeReplicationTasksOutput)
 }
 
 const opDescribeSchemas = "DescribeSchemas"
@@ -2017,37 +1973,33 @@ func (c *DatabaseMigrationService) DescribeSchemasRequest(input *DescribeSchemas
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeSchemasPages(input *DescribeSchemasInput, fn func(*DescribeSchemasOutput, bool) bool) error {
-	return c.DescribeSchemasPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeSchemasPagesWithContext same as DescribeSchemasPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeSchemasPagesWithContext(ctx aws.Context, input *DescribeSchemasInput, fn func(*DescribeSchemasOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeSchemasRequest) Paginate(opts ...aws.Option) DescribeSchemasPager {
+	return DescribeSchemasPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeSchemasInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeSchemasRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeSchemasOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeSchemasOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeSchemasPager ...
+type DescribeSchemasPager struct {
+	aws.Pager
+}
+
+func (p *DescribeSchemasPager) CurrentPage() *DescribeSchemasOutput {
+	return p.Pager.CurrentPage().(*DescribeSchemasOutput)
 }
 
 const opDescribeTableStatistics = "DescribeTableStatistics"
@@ -2127,37 +2079,33 @@ func (c *DatabaseMigrationService) DescribeTableStatisticsRequest(input *Describ
 //            return pageNum <= 3
 //        })
 //
-func (c *DatabaseMigrationService) DescribeTableStatisticsPages(input *DescribeTableStatisticsInput, fn func(*DescribeTableStatisticsOutput, bool) bool) error {
-	return c.DescribeTableStatisticsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeTableStatisticsPagesWithContext same as DescribeTableStatisticsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeTableStatisticsPagesWithContext(ctx aws.Context, input *DescribeTableStatisticsInput, fn func(*DescribeTableStatisticsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeTableStatisticsRequest) Paginate(opts ...aws.Option) DescribeTableStatisticsPager {
+	return DescribeTableStatisticsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeTableStatisticsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeTableStatisticsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeTableStatisticsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeTableStatisticsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeTableStatisticsPager ...
+type DescribeTableStatisticsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeTableStatisticsPager) CurrentPage() *DescribeTableStatisticsOutput {
+	return p.Pager.CurrentPage().(*DescribeTableStatisticsOutput)
 }
 
 const opImportCertificate = "ImportCertificate"

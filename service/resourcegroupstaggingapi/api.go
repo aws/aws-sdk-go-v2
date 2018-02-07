@@ -86,37 +86,33 @@ func (c *ResourceGroupsTaggingAPI) GetResourcesRequest(input *GetResourcesInput)
 //            return pageNum <= 3
 //        })
 //
-func (c *ResourceGroupsTaggingAPI) GetResourcesPages(input *GetResourcesInput, fn func(*GetResourcesOutput, bool) bool) error {
-	return c.GetResourcesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetResourcesPagesWithContext same as GetResourcesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetResourcesPagesWithContext(ctx aws.Context, input *GetResourcesInput, fn func(*GetResourcesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetResourcesRequest) Paginate(opts ...aws.Option) GetResourcesPager {
+	return GetResourcesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetResourcesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetResourcesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetResourcesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetResourcesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetResourcesPager ...
+type GetResourcesPager struct {
+	aws.Pager
+}
+
+func (p *GetResourcesPager) CurrentPage() *GetResourcesOutput {
+	return p.Pager.CurrentPage().(*GetResourcesOutput)
 }
 
 const opGetTagKeys = "GetTagKeys"
@@ -191,37 +187,33 @@ func (c *ResourceGroupsTaggingAPI) GetTagKeysRequest(input *GetTagKeysInput) Get
 //            return pageNum <= 3
 //        })
 //
-func (c *ResourceGroupsTaggingAPI) GetTagKeysPages(input *GetTagKeysInput, fn func(*GetTagKeysOutput, bool) bool) error {
-	return c.GetTagKeysPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetTagKeysPagesWithContext same as GetTagKeysPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetTagKeysPagesWithContext(ctx aws.Context, input *GetTagKeysInput, fn func(*GetTagKeysOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetTagKeysRequest) Paginate(opts ...aws.Option) GetTagKeysPager {
+	return GetTagKeysPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTagKeysInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetTagKeysRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetTagKeysOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTagKeysOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetTagKeysPager ...
+type GetTagKeysPager struct {
+	aws.Pager
+}
+
+func (p *GetTagKeysPager) CurrentPage() *GetTagKeysOutput {
+	return p.Pager.CurrentPage().(*GetTagKeysOutput)
 }
 
 const opGetTagValues = "GetTagValues"
@@ -297,37 +289,33 @@ func (c *ResourceGroupsTaggingAPI) GetTagValuesRequest(input *GetTagValuesInput)
 //            return pageNum <= 3
 //        })
 //
-func (c *ResourceGroupsTaggingAPI) GetTagValuesPages(input *GetTagValuesInput, fn func(*GetTagValuesOutput, bool) bool) error {
-	return c.GetTagValuesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetTagValuesPagesWithContext same as GetTagValuesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetTagValuesPagesWithContext(ctx aws.Context, input *GetTagValuesInput, fn func(*GetTagValuesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetTagValuesRequest) Paginate(opts ...aws.Option) GetTagValuesPager {
+	return GetTagValuesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTagValuesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetTagValuesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetTagValuesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTagValuesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetTagValuesPager ...
+type GetTagValuesPager struct {
+	aws.Pager
+}
+
+func (p *GetTagValuesPager) CurrentPage() *GetTagValuesOutput {
+	return p.Pager.CurrentPage().(*GetTagValuesOutput)
 }
 
 const opTagResources = "TagResources"

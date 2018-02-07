@@ -970,37 +970,33 @@ func (c *AlexaForBusiness) ListSkillsRequest(input *ListSkillsInput) ListSkillsR
 //            return pageNum <= 3
 //        })
 //
-func (c *AlexaForBusiness) ListSkillsPages(input *ListSkillsInput, fn func(*ListSkillsOutput, bool) bool) error {
-	return c.ListSkillsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListSkillsPagesWithContext same as ListSkillsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) ListSkillsPagesWithContext(ctx aws.Context, input *ListSkillsInput, fn func(*ListSkillsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListSkillsRequest) Paginate(opts ...aws.Option) ListSkillsPager {
+	return ListSkillsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListSkillsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListSkillsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListSkillsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListSkillsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListSkillsPager ...
+type ListSkillsPager struct {
+	aws.Pager
+}
+
+func (p *ListSkillsPager) CurrentPage() *ListSkillsOutput {
+	return p.Pager.CurrentPage().(*ListSkillsOutput)
 }
 
 const opListTags = "ListTags"
@@ -1075,37 +1071,33 @@ func (c *AlexaForBusiness) ListTagsRequest(input *ListTagsInput) ListTagsRequest
 //            return pageNum <= 3
 //        })
 //
-func (c *AlexaForBusiness) ListTagsPages(input *ListTagsInput, fn func(*ListTagsOutput, bool) bool) error {
-	return c.ListTagsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListTagsPagesWithContext same as ListTagsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsInput, fn func(*ListTagsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
+	return ListTagsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTagsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListTagsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListTagsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTagsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTagsPager ...
+type ListTagsPager struct {
+	aws.Pager
+}
+
+func (p *ListTagsPager) CurrentPage() *ListTagsOutput {
+	return p.Pager.CurrentPage().(*ListTagsOutput)
 }
 
 const opPutRoomSkillParameter = "PutRoomSkillParameter"
@@ -1329,37 +1321,33 @@ func (c *AlexaForBusiness) SearchDevicesRequest(input *SearchDevicesInput) Searc
 //            return pageNum <= 3
 //        })
 //
-func (c *AlexaForBusiness) SearchDevicesPages(input *SearchDevicesInput, fn func(*SearchDevicesOutput, bool) bool) error {
-	return c.SearchDevicesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// SearchDevicesPagesWithContext same as SearchDevicesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) SearchDevicesPagesWithContext(ctx aws.Context, input *SearchDevicesInput, fn func(*SearchDevicesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *SearchDevicesRequest) Paginate(opts ...aws.Option) SearchDevicesPager {
+	return SearchDevicesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *SearchDevicesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.SearchDevicesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output SearchDevicesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchDevicesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchDevicesPager ...
+type SearchDevicesPager struct {
+	aws.Pager
+}
+
+func (p *SearchDevicesPager) CurrentPage() *SearchDevicesOutput {
+	return p.Pager.CurrentPage().(*SearchDevicesOutput)
 }
 
 const opSearchProfiles = "SearchProfiles"
@@ -1434,37 +1422,33 @@ func (c *AlexaForBusiness) SearchProfilesRequest(input *SearchProfilesInput) Sea
 //            return pageNum <= 3
 //        })
 //
-func (c *AlexaForBusiness) SearchProfilesPages(input *SearchProfilesInput, fn func(*SearchProfilesOutput, bool) bool) error {
-	return c.SearchProfilesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// SearchProfilesPagesWithContext same as SearchProfilesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) SearchProfilesPagesWithContext(ctx aws.Context, input *SearchProfilesInput, fn func(*SearchProfilesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *SearchProfilesRequest) Paginate(opts ...aws.Option) SearchProfilesPager {
+	return SearchProfilesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *SearchProfilesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.SearchProfilesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output SearchProfilesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchProfilesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchProfilesPager ...
+type SearchProfilesPager struct {
+	aws.Pager
+}
+
+func (p *SearchProfilesPager) CurrentPage() *SearchProfilesOutput {
+	return p.Pager.CurrentPage().(*SearchProfilesOutput)
 }
 
 const opSearchRooms = "SearchRooms"
@@ -1539,37 +1523,33 @@ func (c *AlexaForBusiness) SearchRoomsRequest(input *SearchRoomsInput) SearchRoo
 //            return pageNum <= 3
 //        })
 //
-func (c *AlexaForBusiness) SearchRoomsPages(input *SearchRoomsInput, fn func(*SearchRoomsOutput, bool) bool) error {
-	return c.SearchRoomsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// SearchRoomsPagesWithContext same as SearchRoomsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) SearchRoomsPagesWithContext(ctx aws.Context, input *SearchRoomsInput, fn func(*SearchRoomsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *SearchRoomsRequest) Paginate(opts ...aws.Option) SearchRoomsPager {
+	return SearchRoomsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *SearchRoomsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.SearchRoomsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output SearchRoomsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchRoomsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchRoomsPager ...
+type SearchRoomsPager struct {
+	aws.Pager
+}
+
+func (p *SearchRoomsPager) CurrentPage() *SearchRoomsOutput {
+	return p.Pager.CurrentPage().(*SearchRoomsOutput)
 }
 
 const opSearchSkillGroups = "SearchSkillGroups"
@@ -1645,37 +1625,33 @@ func (c *AlexaForBusiness) SearchSkillGroupsRequest(input *SearchSkillGroupsInpu
 //            return pageNum <= 3
 //        })
 //
-func (c *AlexaForBusiness) SearchSkillGroupsPages(input *SearchSkillGroupsInput, fn func(*SearchSkillGroupsOutput, bool) bool) error {
-	return c.SearchSkillGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// SearchSkillGroupsPagesWithContext same as SearchSkillGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) SearchSkillGroupsPagesWithContext(ctx aws.Context, input *SearchSkillGroupsInput, fn func(*SearchSkillGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *SearchSkillGroupsRequest) Paginate(opts ...aws.Option) SearchSkillGroupsPager {
+	return SearchSkillGroupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *SearchSkillGroupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.SearchSkillGroupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output SearchSkillGroupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchSkillGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchSkillGroupsPager ...
+type SearchSkillGroupsPager struct {
+	aws.Pager
+}
+
+func (p *SearchSkillGroupsPager) CurrentPage() *SearchSkillGroupsOutput {
+	return p.Pager.CurrentPage().(*SearchSkillGroupsOutput)
 }
 
 const opSearchUsers = "SearchUsers"
@@ -1750,37 +1726,33 @@ func (c *AlexaForBusiness) SearchUsersRequest(input *SearchUsersInput) SearchUse
 //            return pageNum <= 3
 //        })
 //
-func (c *AlexaForBusiness) SearchUsersPages(input *SearchUsersInput, fn func(*SearchUsersOutput, bool) bool) error {
-	return c.SearchUsersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// SearchUsersPagesWithContext same as SearchUsersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) SearchUsersPagesWithContext(ctx aws.Context, input *SearchUsersInput, fn func(*SearchUsersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *SearchUsersRequest) Paginate(opts ...aws.Option) SearchUsersPager {
+	return SearchUsersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *SearchUsersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.SearchUsersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output SearchUsersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchUsersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchUsersPager ...
+type SearchUsersPager struct {
+	aws.Pager
+}
+
+func (p *SearchUsersPager) CurrentPage() *SearchUsersOutput {
+	return p.Pager.CurrentPage().(*SearchUsersOutput)
 }
 
 const opSendInvitation = "SendInvitation"

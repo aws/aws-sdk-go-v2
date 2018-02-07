@@ -141,100 +141,49 @@ type RDSAPI interface {
 
 	DescribeDBEngineVersionsRequest(*rds.DescribeDBEngineVersionsInput) rds.DescribeDBEngineVersionsRequest
 
-	DescribeDBEngineVersionsPages(*rds.DescribeDBEngineVersionsInput, func(*rds.DescribeDBEngineVersionsOutput, bool) bool) error
-	DescribeDBEngineVersionsPagesWithContext(aws.Context, *rds.DescribeDBEngineVersionsInput, func(*rds.DescribeDBEngineVersionsOutput, bool) bool, ...aws.Option) error
-
 	DescribeDBInstancesRequest(*rds.DescribeDBInstancesInput) rds.DescribeDBInstancesRequest
-
-	DescribeDBInstancesPages(*rds.DescribeDBInstancesInput, func(*rds.DescribeDBInstancesOutput, bool) bool) error
-	DescribeDBInstancesPagesWithContext(aws.Context, *rds.DescribeDBInstancesInput, func(*rds.DescribeDBInstancesOutput, bool) bool, ...aws.Option) error
 
 	DescribeDBLogFilesRequest(*rds.DescribeDBLogFilesInput) rds.DescribeDBLogFilesRequest
 
-	DescribeDBLogFilesPages(*rds.DescribeDBLogFilesInput, func(*rds.DescribeDBLogFilesOutput, bool) bool) error
-	DescribeDBLogFilesPagesWithContext(aws.Context, *rds.DescribeDBLogFilesInput, func(*rds.DescribeDBLogFilesOutput, bool) bool, ...aws.Option) error
-
 	DescribeDBParameterGroupsRequest(*rds.DescribeDBParameterGroupsInput) rds.DescribeDBParameterGroupsRequest
-
-	DescribeDBParameterGroupsPages(*rds.DescribeDBParameterGroupsInput, func(*rds.DescribeDBParameterGroupsOutput, bool) bool) error
-	DescribeDBParameterGroupsPagesWithContext(aws.Context, *rds.DescribeDBParameterGroupsInput, func(*rds.DescribeDBParameterGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeDBParametersRequest(*rds.DescribeDBParametersInput) rds.DescribeDBParametersRequest
 
-	DescribeDBParametersPages(*rds.DescribeDBParametersInput, func(*rds.DescribeDBParametersOutput, bool) bool) error
-	DescribeDBParametersPagesWithContext(aws.Context, *rds.DescribeDBParametersInput, func(*rds.DescribeDBParametersOutput, bool) bool, ...aws.Option) error
-
 	DescribeDBSecurityGroupsRequest(*rds.DescribeDBSecurityGroupsInput) rds.DescribeDBSecurityGroupsRequest
-
-	DescribeDBSecurityGroupsPages(*rds.DescribeDBSecurityGroupsInput, func(*rds.DescribeDBSecurityGroupsOutput, bool) bool) error
-	DescribeDBSecurityGroupsPagesWithContext(aws.Context, *rds.DescribeDBSecurityGroupsInput, func(*rds.DescribeDBSecurityGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeDBSnapshotAttributesRequest(*rds.DescribeDBSnapshotAttributesInput) rds.DescribeDBSnapshotAttributesRequest
 
 	DescribeDBSnapshotsRequest(*rds.DescribeDBSnapshotsInput) rds.DescribeDBSnapshotsRequest
 
-	DescribeDBSnapshotsPages(*rds.DescribeDBSnapshotsInput, func(*rds.DescribeDBSnapshotsOutput, bool) bool) error
-	DescribeDBSnapshotsPagesWithContext(aws.Context, *rds.DescribeDBSnapshotsInput, func(*rds.DescribeDBSnapshotsOutput, bool) bool, ...aws.Option) error
-
 	DescribeDBSubnetGroupsRequest(*rds.DescribeDBSubnetGroupsInput) rds.DescribeDBSubnetGroupsRequest
-
-	DescribeDBSubnetGroupsPages(*rds.DescribeDBSubnetGroupsInput, func(*rds.DescribeDBSubnetGroupsOutput, bool) bool) error
-	DescribeDBSubnetGroupsPagesWithContext(aws.Context, *rds.DescribeDBSubnetGroupsInput, func(*rds.DescribeDBSubnetGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeEngineDefaultClusterParametersRequest(*rds.DescribeEngineDefaultClusterParametersInput) rds.DescribeEngineDefaultClusterParametersRequest
 
 	DescribeEngineDefaultParametersRequest(*rds.DescribeEngineDefaultParametersInput) rds.DescribeEngineDefaultParametersRequest
 
-	DescribeEngineDefaultParametersPages(*rds.DescribeEngineDefaultParametersInput, func(*rds.DescribeEngineDefaultParametersOutput, bool) bool) error
-	DescribeEngineDefaultParametersPagesWithContext(aws.Context, *rds.DescribeEngineDefaultParametersInput, func(*rds.DescribeEngineDefaultParametersOutput, bool) bool, ...aws.Option) error
-
 	DescribeEventCategoriesRequest(*rds.DescribeEventCategoriesInput) rds.DescribeEventCategoriesRequest
 
 	DescribeEventSubscriptionsRequest(*rds.DescribeEventSubscriptionsInput) rds.DescribeEventSubscriptionsRequest
 
-	DescribeEventSubscriptionsPages(*rds.DescribeEventSubscriptionsInput, func(*rds.DescribeEventSubscriptionsOutput, bool) bool) error
-	DescribeEventSubscriptionsPagesWithContext(aws.Context, *rds.DescribeEventSubscriptionsInput, func(*rds.DescribeEventSubscriptionsOutput, bool) bool, ...aws.Option) error
-
 	DescribeEventsRequest(*rds.DescribeEventsInput) rds.DescribeEventsRequest
-
-	DescribeEventsPages(*rds.DescribeEventsInput, func(*rds.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *rds.DescribeEventsInput, func(*rds.DescribeEventsOutput, bool) bool, ...aws.Option) error
 
 	DescribeOptionGroupOptionsRequest(*rds.DescribeOptionGroupOptionsInput) rds.DescribeOptionGroupOptionsRequest
 
-	DescribeOptionGroupOptionsPages(*rds.DescribeOptionGroupOptionsInput, func(*rds.DescribeOptionGroupOptionsOutput, bool) bool) error
-	DescribeOptionGroupOptionsPagesWithContext(aws.Context, *rds.DescribeOptionGroupOptionsInput, func(*rds.DescribeOptionGroupOptionsOutput, bool) bool, ...aws.Option) error
-
 	DescribeOptionGroupsRequest(*rds.DescribeOptionGroupsInput) rds.DescribeOptionGroupsRequest
 
-	DescribeOptionGroupsPages(*rds.DescribeOptionGroupsInput, func(*rds.DescribeOptionGroupsOutput, bool) bool) error
-	DescribeOptionGroupsPagesWithContext(aws.Context, *rds.DescribeOptionGroupsInput, func(*rds.DescribeOptionGroupsOutput, bool) bool, ...aws.Option) error
-
 	DescribeOrderableDBInstanceOptionsRequest(*rds.DescribeOrderableDBInstanceOptionsInput) rds.DescribeOrderableDBInstanceOptionsRequest
-
-	DescribeOrderableDBInstanceOptionsPages(*rds.DescribeOrderableDBInstanceOptionsInput, func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool) error
-	DescribeOrderableDBInstanceOptionsPagesWithContext(aws.Context, *rds.DescribeOrderableDBInstanceOptionsInput, func(*rds.DescribeOrderableDBInstanceOptionsOutput, bool) bool, ...aws.Option) error
 
 	DescribePendingMaintenanceActionsRequest(*rds.DescribePendingMaintenanceActionsInput) rds.DescribePendingMaintenanceActionsRequest
 
 	DescribeReservedDBInstancesRequest(*rds.DescribeReservedDBInstancesInput) rds.DescribeReservedDBInstancesRequest
 
-	DescribeReservedDBInstancesPages(*rds.DescribeReservedDBInstancesInput, func(*rds.DescribeReservedDBInstancesOutput, bool) bool) error
-	DescribeReservedDBInstancesPagesWithContext(aws.Context, *rds.DescribeReservedDBInstancesInput, func(*rds.DescribeReservedDBInstancesOutput, bool) bool, ...aws.Option) error
-
 	DescribeReservedDBInstancesOfferingsRequest(*rds.DescribeReservedDBInstancesOfferingsInput) rds.DescribeReservedDBInstancesOfferingsRequest
-
-	DescribeReservedDBInstancesOfferingsPages(*rds.DescribeReservedDBInstancesOfferingsInput, func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool) error
-	DescribeReservedDBInstancesOfferingsPagesWithContext(aws.Context, *rds.DescribeReservedDBInstancesOfferingsInput, func(*rds.DescribeReservedDBInstancesOfferingsOutput, bool) bool, ...aws.Option) error
 
 	DescribeSourceRegionsRequest(*rds.DescribeSourceRegionsInput) rds.DescribeSourceRegionsRequest
 
 	DescribeValidDBInstanceModificationsRequest(*rds.DescribeValidDBInstanceModificationsInput) rds.DescribeValidDBInstanceModificationsRequest
 
 	DownloadDBLogFilePortionRequest(*rds.DownloadDBLogFilePortionInput) rds.DownloadDBLogFilePortionRequest
-
-	DownloadDBLogFilePortionPages(*rds.DownloadDBLogFilePortionInput, func(*rds.DownloadDBLogFilePortionOutput, bool) bool) error
-	DownloadDBLogFilePortionPagesWithContext(aws.Context, *rds.DownloadDBLogFilePortionInput, func(*rds.DownloadDBLogFilePortionOutput, bool) bool, ...aws.Option) error
 
 	FailoverDBClusterRequest(*rds.FailoverDBClusterInput) rds.FailoverDBClusterRequest
 

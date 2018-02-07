@@ -139,22 +139,13 @@ type Route53API interface {
 
 	ListHealthChecksRequest(*route53.ListHealthChecksInput) route53.ListHealthChecksRequest
 
-	ListHealthChecksPages(*route53.ListHealthChecksInput, func(*route53.ListHealthChecksOutput, bool) bool) error
-	ListHealthChecksPagesWithContext(aws.Context, *route53.ListHealthChecksInput, func(*route53.ListHealthChecksOutput, bool) bool, ...aws.Option) error
-
 	ListHostedZonesRequest(*route53.ListHostedZonesInput) route53.ListHostedZonesRequest
-
-	ListHostedZonesPages(*route53.ListHostedZonesInput, func(*route53.ListHostedZonesOutput, bool) bool) error
-	ListHostedZonesPagesWithContext(aws.Context, *route53.ListHostedZonesInput, func(*route53.ListHostedZonesOutput, bool) bool, ...aws.Option) error
 
 	ListHostedZonesByNameRequest(*route53.ListHostedZonesByNameInput) route53.ListHostedZonesByNameRequest
 
 	ListQueryLoggingConfigsRequest(*route53.ListQueryLoggingConfigsInput) route53.ListQueryLoggingConfigsRequest
 
 	ListResourceRecordSetsRequest(*route53.ListResourceRecordSetsInput) route53.ListResourceRecordSetsRequest
-
-	ListResourceRecordSetsPages(*route53.ListResourceRecordSetsInput, func(*route53.ListResourceRecordSetsOutput, bool) bool) error
-	ListResourceRecordSetsPagesWithContext(aws.Context, *route53.ListResourceRecordSetsInput, func(*route53.ListResourceRecordSetsOutput, bool) bool, ...aws.Option) error
 
 	ListReusableDelegationSetsRequest(*route53.ListReusableDelegationSetsInput) route53.ListReusableDelegationSetsRequest
 

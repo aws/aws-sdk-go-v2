@@ -6,7 +6,6 @@ import (
 	"io"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
@@ -128,7 +127,7 @@ type BatchDeleteIterator interface {
 //	}
 type DeleteListIterator struct {
 	Bucket    *string
-	Paginator request.Pagination
+	Paginator aws.Pager
 	objects   []s3.Object
 }
 
@@ -136,8 +135,8 @@ type DeleteListIterator struct {
 func NewDeleteListIterator(svc s3iface.S3API, input *s3.ListObjectsInput, opts ...func(*DeleteListIterator)) BatchDeleteIterator {
 	iter := &DeleteListIterator{
 		Bucket: input.Bucket,
-		Paginator: request.Pagination{
-			NewRequest: func() (*request.Request, error) {
+		Paginator: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
 				var inCpy *s3.ListObjectsInput
 				if input != nil {
 					tmp := *input
@@ -162,7 +161,7 @@ func (iter *DeleteListIterator) Next() bool {
 	}
 
 	if len(iter.objects) == 0 && iter.Paginator.Next() {
-		iter.objects = iter.Paginator.Page().(s3.ListObjectsOutput).Contents
+		iter.objects = iter.Paginator.CurrentPage().(s3.ListObjectsOutput).Contents
 	}
 
 	return len(iter.objects) > 0

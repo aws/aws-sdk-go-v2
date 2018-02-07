@@ -9,7 +9,6 @@
 package inspectoriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/inspector"
 )
 
@@ -97,45 +96,21 @@ type InspectorAPI interface {
 
 	ListAssessmentRunAgentsRequest(*inspector.ListAssessmentRunAgentsInput) inspector.ListAssessmentRunAgentsRequest
 
-	ListAssessmentRunAgentsPages(*inspector.ListAssessmentRunAgentsInput, func(*inspector.ListAssessmentRunAgentsOutput, bool) bool) error
-	ListAssessmentRunAgentsPagesWithContext(aws.Context, *inspector.ListAssessmentRunAgentsInput, func(*inspector.ListAssessmentRunAgentsOutput, bool) bool, ...aws.Option) error
-
 	ListAssessmentRunsRequest(*inspector.ListAssessmentRunsInput) inspector.ListAssessmentRunsRequest
-
-	ListAssessmentRunsPages(*inspector.ListAssessmentRunsInput, func(*inspector.ListAssessmentRunsOutput, bool) bool) error
-	ListAssessmentRunsPagesWithContext(aws.Context, *inspector.ListAssessmentRunsInput, func(*inspector.ListAssessmentRunsOutput, bool) bool, ...aws.Option) error
 
 	ListAssessmentTargetsRequest(*inspector.ListAssessmentTargetsInput) inspector.ListAssessmentTargetsRequest
 
-	ListAssessmentTargetsPages(*inspector.ListAssessmentTargetsInput, func(*inspector.ListAssessmentTargetsOutput, bool) bool) error
-	ListAssessmentTargetsPagesWithContext(aws.Context, *inspector.ListAssessmentTargetsInput, func(*inspector.ListAssessmentTargetsOutput, bool) bool, ...aws.Option) error
-
 	ListAssessmentTemplatesRequest(*inspector.ListAssessmentTemplatesInput) inspector.ListAssessmentTemplatesRequest
-
-	ListAssessmentTemplatesPages(*inspector.ListAssessmentTemplatesInput, func(*inspector.ListAssessmentTemplatesOutput, bool) bool) error
-	ListAssessmentTemplatesPagesWithContext(aws.Context, *inspector.ListAssessmentTemplatesInput, func(*inspector.ListAssessmentTemplatesOutput, bool) bool, ...aws.Option) error
 
 	ListEventSubscriptionsRequest(*inspector.ListEventSubscriptionsInput) inspector.ListEventSubscriptionsRequest
 
-	ListEventSubscriptionsPages(*inspector.ListEventSubscriptionsInput, func(*inspector.ListEventSubscriptionsOutput, bool) bool) error
-	ListEventSubscriptionsPagesWithContext(aws.Context, *inspector.ListEventSubscriptionsInput, func(*inspector.ListEventSubscriptionsOutput, bool) bool, ...aws.Option) error
-
 	ListFindingsRequest(*inspector.ListFindingsInput) inspector.ListFindingsRequest
 
-	ListFindingsPages(*inspector.ListFindingsInput, func(*inspector.ListFindingsOutput, bool) bool) error
-	ListFindingsPagesWithContext(aws.Context, *inspector.ListFindingsInput, func(*inspector.ListFindingsOutput, bool) bool, ...aws.Option) error
-
 	ListRulesPackagesRequest(*inspector.ListRulesPackagesInput) inspector.ListRulesPackagesRequest
-
-	ListRulesPackagesPages(*inspector.ListRulesPackagesInput, func(*inspector.ListRulesPackagesOutput, bool) bool) error
-	ListRulesPackagesPagesWithContext(aws.Context, *inspector.ListRulesPackagesInput, func(*inspector.ListRulesPackagesOutput, bool) bool, ...aws.Option) error
 
 	ListTagsForResourceRequest(*inspector.ListTagsForResourceInput) inspector.ListTagsForResourceRequest
 
 	PreviewAgentsRequest(*inspector.PreviewAgentsInput) inspector.PreviewAgentsRequest
-
-	PreviewAgentsPages(*inspector.PreviewAgentsInput, func(*inspector.PreviewAgentsOutput, bool) bool) error
-	PreviewAgentsPagesWithContext(aws.Context, *inspector.PreviewAgentsInput, func(*inspector.PreviewAgentsOutput, bool) bool, ...aws.Option) error
 
 	RegisterCrossAccountAccessRoleRequest(*inspector.RegisterCrossAccountAccessRoleInput) inspector.RegisterCrossAccountAccessRoleRequest
 

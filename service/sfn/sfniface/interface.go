@@ -9,7 +9,6 @@
 package sfniface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sfn"
 )
 
@@ -83,23 +82,11 @@ type SFNAPI interface {
 
 	GetExecutionHistoryRequest(*sfn.GetExecutionHistoryInput) sfn.GetExecutionHistoryRequest
 
-	GetExecutionHistoryPages(*sfn.GetExecutionHistoryInput, func(*sfn.GetExecutionHistoryOutput, bool) bool) error
-	GetExecutionHistoryPagesWithContext(aws.Context, *sfn.GetExecutionHistoryInput, func(*sfn.GetExecutionHistoryOutput, bool) bool, ...aws.Option) error
-
 	ListActivitiesRequest(*sfn.ListActivitiesInput) sfn.ListActivitiesRequest
-
-	ListActivitiesPages(*sfn.ListActivitiesInput, func(*sfn.ListActivitiesOutput, bool) bool) error
-	ListActivitiesPagesWithContext(aws.Context, *sfn.ListActivitiesInput, func(*sfn.ListActivitiesOutput, bool) bool, ...aws.Option) error
 
 	ListExecutionsRequest(*sfn.ListExecutionsInput) sfn.ListExecutionsRequest
 
-	ListExecutionsPages(*sfn.ListExecutionsInput, func(*sfn.ListExecutionsOutput, bool) bool) error
-	ListExecutionsPagesWithContext(aws.Context, *sfn.ListExecutionsInput, func(*sfn.ListExecutionsOutput, bool) bool, ...aws.Option) error
-
 	ListStateMachinesRequest(*sfn.ListStateMachinesInput) sfn.ListStateMachinesRequest
-
-	ListStateMachinesPages(*sfn.ListStateMachinesInput, func(*sfn.ListStateMachinesOutput, bool) bool) error
-	ListStateMachinesPagesWithContext(aws.Context, *sfn.ListStateMachinesInput, func(*sfn.ListStateMachinesOutput, bool) bool, ...aws.Option) error
 
 	SendTaskFailureRequest(*sfn.SendTaskFailureInput) sfn.SendTaskFailureRequest
 

@@ -99,25 +99,13 @@ type CloudFrontAPI interface {
 
 	ListCloudFrontOriginAccessIdentitiesRequest(*cloudfront.ListCloudFrontOriginAccessIdentitiesInput) cloudfront.ListCloudFrontOriginAccessIdentitiesRequest
 
-	ListCloudFrontOriginAccessIdentitiesPages(*cloudfront.ListCloudFrontOriginAccessIdentitiesInput, func(*cloudfront.ListCloudFrontOriginAccessIdentitiesOutput, bool) bool) error
-	ListCloudFrontOriginAccessIdentitiesPagesWithContext(aws.Context, *cloudfront.ListCloudFrontOriginAccessIdentitiesInput, func(*cloudfront.ListCloudFrontOriginAccessIdentitiesOutput, bool) bool, ...aws.Option) error
-
 	ListDistributionsRequest(*cloudfront.ListDistributionsInput) cloudfront.ListDistributionsRequest
-
-	ListDistributionsPages(*cloudfront.ListDistributionsInput, func(*cloudfront.ListDistributionsOutput, bool) bool) error
-	ListDistributionsPagesWithContext(aws.Context, *cloudfront.ListDistributionsInput, func(*cloudfront.ListDistributionsOutput, bool) bool, ...aws.Option) error
 
 	ListDistributionsByWebACLIdRequest(*cloudfront.ListDistributionsByWebACLIdInput) cloudfront.ListDistributionsByWebACLIdRequest
 
 	ListInvalidationsRequest(*cloudfront.ListInvalidationsInput) cloudfront.ListInvalidationsRequest
 
-	ListInvalidationsPages(*cloudfront.ListInvalidationsInput, func(*cloudfront.ListInvalidationsOutput, bool) bool) error
-	ListInvalidationsPagesWithContext(aws.Context, *cloudfront.ListInvalidationsInput, func(*cloudfront.ListInvalidationsOutput, bool) bool, ...aws.Option) error
-
 	ListStreamingDistributionsRequest(*cloudfront.ListStreamingDistributionsInput) cloudfront.ListStreamingDistributionsRequest
-
-	ListStreamingDistributionsPages(*cloudfront.ListStreamingDistributionsInput, func(*cloudfront.ListStreamingDistributionsOutput, bool) bool) error
-	ListStreamingDistributionsPagesWithContext(aws.Context, *cloudfront.ListStreamingDistributionsInput, func(*cloudfront.ListStreamingDistributionsOutput, bool) bool, ...aws.Option) error
 
 	ListTagsForResourceRequest(*cloudfront.ListTagsForResourceInput) cloudfront.ListTagsForResourceRequest
 

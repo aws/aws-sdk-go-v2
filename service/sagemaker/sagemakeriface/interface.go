@@ -99,33 +99,15 @@ type SageMakerAPI interface {
 
 	ListEndpointConfigsRequest(*sagemaker.ListEndpointConfigsInput) sagemaker.ListEndpointConfigsRequest
 
-	ListEndpointConfigsPages(*sagemaker.ListEndpointConfigsInput, func(*sagemaker.ListEndpointConfigsOutput, bool) bool) error
-	ListEndpointConfigsPagesWithContext(aws.Context, *sagemaker.ListEndpointConfigsInput, func(*sagemaker.ListEndpointConfigsOutput, bool) bool, ...aws.Option) error
-
 	ListEndpointsRequest(*sagemaker.ListEndpointsInput) sagemaker.ListEndpointsRequest
-
-	ListEndpointsPages(*sagemaker.ListEndpointsInput, func(*sagemaker.ListEndpointsOutput, bool) bool) error
-	ListEndpointsPagesWithContext(aws.Context, *sagemaker.ListEndpointsInput, func(*sagemaker.ListEndpointsOutput, bool) bool, ...aws.Option) error
 
 	ListModelsRequest(*sagemaker.ListModelsInput) sagemaker.ListModelsRequest
 
-	ListModelsPages(*sagemaker.ListModelsInput, func(*sagemaker.ListModelsOutput, bool) bool) error
-	ListModelsPagesWithContext(aws.Context, *sagemaker.ListModelsInput, func(*sagemaker.ListModelsOutput, bool) bool, ...aws.Option) error
-
 	ListNotebookInstancesRequest(*sagemaker.ListNotebookInstancesInput) sagemaker.ListNotebookInstancesRequest
-
-	ListNotebookInstancesPages(*sagemaker.ListNotebookInstancesInput, func(*sagemaker.ListNotebookInstancesOutput, bool) bool) error
-	ListNotebookInstancesPagesWithContext(aws.Context, *sagemaker.ListNotebookInstancesInput, func(*sagemaker.ListNotebookInstancesOutput, bool) bool, ...aws.Option) error
 
 	ListTagsRequest(*sagemaker.ListTagsInput) sagemaker.ListTagsRequest
 
-	ListTagsPages(*sagemaker.ListTagsInput, func(*sagemaker.ListTagsOutput, bool) bool) error
-	ListTagsPagesWithContext(aws.Context, *sagemaker.ListTagsInput, func(*sagemaker.ListTagsOutput, bool) bool, ...aws.Option) error
-
 	ListTrainingJobsRequest(*sagemaker.ListTrainingJobsInput) sagemaker.ListTrainingJobsRequest
-
-	ListTrainingJobsPages(*sagemaker.ListTrainingJobsInput, func(*sagemaker.ListTrainingJobsOutput, bool) bool) error
-	ListTrainingJobsPagesWithContext(aws.Context, *sagemaker.ListTrainingJobsInput, func(*sagemaker.ListTrainingJobsOutput, bool) bool, ...aws.Option) error
 
 	StartNotebookInstanceRequest(*sagemaker.StartNotebookInstanceInput) sagemaker.StartNotebookInstanceRequest
 

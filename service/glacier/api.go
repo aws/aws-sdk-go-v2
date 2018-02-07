@@ -1453,37 +1453,33 @@ func (c *Glacier) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *Glacier) ListJobsPages(input *ListJobsInput, fn func(*ListJobsOutput, bool) bool) error {
-	return c.ListJobsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListJobsPagesWithContext same as ListJobsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput, fn func(*ListJobsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
+	return ListJobsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListJobsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListJobsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListJobsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListJobsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListJobsPager ...
+type ListJobsPager struct {
+	aws.Pager
+}
+
+func (p *ListJobsPager) CurrentPage() *ListJobsOutput {
+	return p.Pager.CurrentPage().(*ListJobsOutput)
 }
 
 const opListMultipartUploads = "ListMultipartUploads"
@@ -1585,37 +1581,33 @@ func (c *Glacier) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) 
 //            return pageNum <= 3
 //        })
 //
-func (c *Glacier) ListMultipartUploadsPages(input *ListMultipartUploadsInput, fn func(*ListMultipartUploadsOutput, bool) bool) error {
-	return c.ListMultipartUploadsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListMultipartUploadsPagesWithContext same as ListMultipartUploadsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *ListMultipartUploadsInput, fn func(*ListMultipartUploadsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListMultipartUploadsRequest) Paginate(opts ...aws.Option) ListMultipartUploadsPager {
+	return ListMultipartUploadsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListMultipartUploadsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListMultipartUploadsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListMultipartUploadsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListMultipartUploadsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListMultipartUploadsPager ...
+type ListMultipartUploadsPager struct {
+	aws.Pager
+}
+
+func (p *ListMultipartUploadsPager) CurrentPage() *ListMultipartUploadsOutput {
+	return p.Pager.CurrentPage().(*ListMultipartUploadsOutput)
 }
 
 const opListParts = "ListParts"
@@ -1711,37 +1703,33 @@ func (c *Glacier) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *Glacier) ListPartsPages(input *ListPartsInput, fn func(*ListPartsOutput, bool) bool) error {
-	return c.ListPartsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListPartsPagesWithContext same as ListPartsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInput, fn func(*ListPartsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListPartsRequest) Paginate(opts ...aws.Option) ListPartsPager {
+	return ListPartsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPartsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListPartsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListPartsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPartsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPartsPager ...
+type ListPartsPager struct {
+	aws.Pager
+}
+
+func (p *ListPartsPager) CurrentPage() *ListPartsOutput {
+	return p.Pager.CurrentPage().(*ListPartsOutput)
 }
 
 const opListProvisionedCapacity = "ListProvisionedCapacity"
@@ -1931,37 +1919,33 @@ func (c *Glacier) ListVaultsRequest(input *ListVaultsInput) ListVaultsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *Glacier) ListVaultsPages(input *ListVaultsInput, fn func(*ListVaultsOutput, bool) bool) error {
-	return c.ListVaultsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListVaultsPagesWithContext same as ListVaultsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glacier) ListVaultsPagesWithContext(ctx aws.Context, input *ListVaultsInput, fn func(*ListVaultsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListVaultsRequest) Paginate(opts ...aws.Option) ListVaultsPager {
+	return ListVaultsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListVaultsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListVaultsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListVaultsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListVaultsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListVaultsPager ...
+type ListVaultsPager struct {
+	aws.Pager
+}
+
+func (p *ListVaultsPager) CurrentPage() *ListVaultsOutput {
+	return p.Pager.CurrentPage().(*ListVaultsOutput)
 }
 
 const opPurchaseProvisionedCapacity = "PurchaseProvisionedCapacity"

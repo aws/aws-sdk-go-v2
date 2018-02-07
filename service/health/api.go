@@ -89,37 +89,33 @@ func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntities
 //            return pageNum <= 3
 //        })
 //
-func (c *Health) DescribeAffectedEntitiesPages(input *DescribeAffectedEntitiesInput, fn func(*DescribeAffectedEntitiesOutput, bool) bool) error {
-	return c.DescribeAffectedEntitiesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeAffectedEntitiesPagesWithContext same as DescribeAffectedEntitiesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeAffectedEntitiesPagesWithContext(ctx aws.Context, input *DescribeAffectedEntitiesInput, fn func(*DescribeAffectedEntitiesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeAffectedEntitiesRequest) Paginate(opts ...aws.Option) DescribeAffectedEntitiesPager {
+	return DescribeAffectedEntitiesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeAffectedEntitiesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeAffectedEntitiesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeAffectedEntitiesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeAffectedEntitiesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeAffectedEntitiesPager ...
+type DescribeAffectedEntitiesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeAffectedEntitiesPager) CurrentPage() *DescribeAffectedEntitiesOutput {
+	return p.Pager.CurrentPage().(*DescribeAffectedEntitiesOutput)
 }
 
 const opDescribeEntityAggregates = "DescribeEntityAggregates"
@@ -247,37 +243,33 @@ func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesIn
 //            return pageNum <= 3
 //        })
 //
-func (c *Health) DescribeEventAggregatesPages(input *DescribeEventAggregatesInput, fn func(*DescribeEventAggregatesOutput, bool) bool) error {
-	return c.DescribeEventAggregatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEventAggregatesPagesWithContext same as DescribeEventAggregatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEventAggregatesPagesWithContext(ctx aws.Context, input *DescribeEventAggregatesInput, fn func(*DescribeEventAggregatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEventAggregatesRequest) Paginate(opts ...aws.Option) DescribeEventAggregatesPager {
+	return DescribeEventAggregatesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventAggregatesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEventAggregatesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEventAggregatesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventAggregatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventAggregatesPager ...
+type DescribeEventAggregatesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventAggregatesPager) CurrentPage() *DescribeEventAggregatesOutput {
+	return p.Pager.CurrentPage().(*DescribeEventAggregatesOutput)
 }
 
 const opDescribeEventDetails = "DescribeEventDetails"
@@ -409,37 +401,33 @@ func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) Descr
 //            return pageNum <= 3
 //        })
 //
-func (c *Health) DescribeEventTypesPages(input *DescribeEventTypesInput, fn func(*DescribeEventTypesOutput, bool) bool) error {
-	return c.DescribeEventTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEventTypesPagesWithContext same as DescribeEventTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEventTypesPagesWithContext(ctx aws.Context, input *DescribeEventTypesInput, fn func(*DescribeEventTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEventTypesRequest) Paginate(opts ...aws.Option) DescribeEventTypesPager {
+	return DescribeEventTypesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventTypesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEventTypesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEventTypesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventTypesPager ...
+type DescribeEventTypesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventTypesPager) CurrentPage() *DescribeEventTypesOutput {
+	return p.Pager.CurrentPage().(*DescribeEventTypesOutput)
 }
 
 const opDescribeEvents = "DescribeEvents"
@@ -521,37 +509,33 @@ func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 //            return pageNum <= 3
 //        })
 //
-func (c *Health) DescribeEventsPages(input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool) error {
-	return c.DescribeEventsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEventsPagesWithContext same as DescribeEventsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
+	return DescribeEventsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEventsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEventsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventsPager ...
+type DescribeEventsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventsPager) CurrentPage() *DescribeEventsOutput {
+	return p.Pager.CurrentPage().(*DescribeEventsOutput)
 }
 
 // Information about an entity that is affected by a Health event.

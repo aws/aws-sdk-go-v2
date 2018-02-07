@@ -9,7 +9,6 @@
 package directoryserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice"
 )
 
@@ -100,9 +99,6 @@ type DirectoryServiceAPI interface {
 	DescribeDirectoriesRequest(*directoryservice.DescribeDirectoriesInput) directoryservice.DescribeDirectoriesRequest
 
 	DescribeDomainControllersRequest(*directoryservice.DescribeDomainControllersInput) directoryservice.DescribeDomainControllersRequest
-
-	DescribeDomainControllersPages(*directoryservice.DescribeDomainControllersInput, func(*directoryservice.DescribeDomainControllersOutput, bool) bool) error
-	DescribeDomainControllersPagesWithContext(aws.Context, *directoryservice.DescribeDomainControllersInput, func(*directoryservice.DescribeDomainControllersOutput, bool) bool, ...aws.Option) error
 
 	DescribeEventTopicsRequest(*directoryservice.DescribeEventTopicsInput) directoryservice.DescribeEventTopicsRequest
 

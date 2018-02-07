@@ -351,37 +351,33 @@ func (c *Support) DescribeCasesRequest(input *DescribeCasesInput) DescribeCasesR
 //            return pageNum <= 3
 //        })
 //
-func (c *Support) DescribeCasesPages(input *DescribeCasesInput, fn func(*DescribeCasesOutput, bool) bool) error {
-	return c.DescribeCasesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeCasesPagesWithContext same as DescribeCasesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeCasesPagesWithContext(ctx aws.Context, input *DescribeCasesInput, fn func(*DescribeCasesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeCasesRequest) Paginate(opts ...aws.Option) DescribeCasesPager {
+	return DescribeCasesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCasesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeCasesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeCasesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCasesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCasesPager ...
+type DescribeCasesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCasesPager) CurrentPage() *DescribeCasesOutput {
+	return p.Pager.CurrentPage().(*DescribeCasesOutput)
 }
 
 const opDescribeCommunications = "DescribeCommunications"
@@ -465,37 +461,33 @@ func (c *Support) DescribeCommunicationsRequest(input *DescribeCommunicationsInp
 //            return pageNum <= 3
 //        })
 //
-func (c *Support) DescribeCommunicationsPages(input *DescribeCommunicationsInput, fn func(*DescribeCommunicationsOutput, bool) bool) error {
-	return c.DescribeCommunicationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeCommunicationsPagesWithContext same as DescribeCommunicationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeCommunicationsPagesWithContext(ctx aws.Context, input *DescribeCommunicationsInput, fn func(*DescribeCommunicationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeCommunicationsRequest) Paginate(opts ...aws.Option) DescribeCommunicationsPager {
+	return DescribeCommunicationsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeCommunicationsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeCommunicationsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeCommunicationsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCommunicationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCommunicationsPager ...
+type DescribeCommunicationsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCommunicationsPager) CurrentPage() *DescribeCommunicationsOutput {
+	return p.Pager.CurrentPage().(*DescribeCommunicationsOutput)
 }
 
 const opDescribeServices = "DescribeServices"

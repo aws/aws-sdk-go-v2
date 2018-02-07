@@ -532,37 +532,33 @@ func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) LookupEventsR
 //            return pageNum <= 3
 //        })
 //
-func (c *CloudTrail) LookupEventsPages(input *LookupEventsInput, fn func(*LookupEventsOutput, bool) bool) error {
-	return c.LookupEventsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// LookupEventsPagesWithContext same as LookupEventsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) LookupEventsPagesWithContext(ctx aws.Context, input *LookupEventsInput, fn func(*LookupEventsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *LookupEventsRequest) Paginate(opts ...aws.Option) LookupEventsPager {
+	return LookupEventsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *LookupEventsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.LookupEventsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output LookupEventsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*LookupEventsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// LookupEventsPager ...
+type LookupEventsPager struct {
+	aws.Pager
+}
+
+func (p *LookupEventsPager) CurrentPage() *LookupEventsOutput {
+	return p.Pager.CurrentPage().(*LookupEventsOutput)
 }
 
 const opPutEventSelectors = "PutEventSelectors"

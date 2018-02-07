@@ -1515,37 +1515,33 @@ func (c *OpsWorks) DescribeEcsClustersRequest(input *DescribeEcsClustersInput) D
 //            return pageNum <= 3
 //        })
 //
-func (c *OpsWorks) DescribeEcsClustersPages(input *DescribeEcsClustersInput, fn func(*DescribeEcsClustersOutput, bool) bool) error {
-	return c.DescribeEcsClustersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEcsClustersPagesWithContext same as DescribeEcsClustersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *OpsWorks) DescribeEcsClustersPagesWithContext(ctx aws.Context, input *DescribeEcsClustersInput, fn func(*DescribeEcsClustersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEcsClustersRequest) Paginate(opts ...aws.Option) DescribeEcsClustersPager {
+	return DescribeEcsClustersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEcsClustersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEcsClustersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEcsClustersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEcsClustersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEcsClustersPager ...
+type DescribeEcsClustersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEcsClustersPager) CurrentPage() *DescribeEcsClustersOutput {
+	return p.Pager.CurrentPage().(*DescribeEcsClustersOutput)
 }
 
 const opDescribeElasticIps = "DescribeElasticIps"

@@ -93,33 +93,15 @@ type ECSAPI interface {
 
 	ListClustersRequest(*ecs.ListClustersInput) ecs.ListClustersRequest
 
-	ListClustersPages(*ecs.ListClustersInput, func(*ecs.ListClustersOutput, bool) bool) error
-	ListClustersPagesWithContext(aws.Context, *ecs.ListClustersInput, func(*ecs.ListClustersOutput, bool) bool, ...aws.Option) error
-
 	ListContainerInstancesRequest(*ecs.ListContainerInstancesInput) ecs.ListContainerInstancesRequest
-
-	ListContainerInstancesPages(*ecs.ListContainerInstancesInput, func(*ecs.ListContainerInstancesOutput, bool) bool) error
-	ListContainerInstancesPagesWithContext(aws.Context, *ecs.ListContainerInstancesInput, func(*ecs.ListContainerInstancesOutput, bool) bool, ...aws.Option) error
 
 	ListServicesRequest(*ecs.ListServicesInput) ecs.ListServicesRequest
 
-	ListServicesPages(*ecs.ListServicesInput, func(*ecs.ListServicesOutput, bool) bool) error
-	ListServicesPagesWithContext(aws.Context, *ecs.ListServicesInput, func(*ecs.ListServicesOutput, bool) bool, ...aws.Option) error
-
 	ListTaskDefinitionFamiliesRequest(*ecs.ListTaskDefinitionFamiliesInput) ecs.ListTaskDefinitionFamiliesRequest
-
-	ListTaskDefinitionFamiliesPages(*ecs.ListTaskDefinitionFamiliesInput, func(*ecs.ListTaskDefinitionFamiliesOutput, bool) bool) error
-	ListTaskDefinitionFamiliesPagesWithContext(aws.Context, *ecs.ListTaskDefinitionFamiliesInput, func(*ecs.ListTaskDefinitionFamiliesOutput, bool) bool, ...aws.Option) error
 
 	ListTaskDefinitionsRequest(*ecs.ListTaskDefinitionsInput) ecs.ListTaskDefinitionsRequest
 
-	ListTaskDefinitionsPages(*ecs.ListTaskDefinitionsInput, func(*ecs.ListTaskDefinitionsOutput, bool) bool) error
-	ListTaskDefinitionsPagesWithContext(aws.Context, *ecs.ListTaskDefinitionsInput, func(*ecs.ListTaskDefinitionsOutput, bool) bool, ...aws.Option) error
-
 	ListTasksRequest(*ecs.ListTasksInput) ecs.ListTasksRequest
-
-	ListTasksPages(*ecs.ListTasksInput, func(*ecs.ListTasksOutput, bool) bool) error
-	ListTasksPagesWithContext(aws.Context, *ecs.ListTasksInput, func(*ecs.ListTasksOutput, bool) bool, ...aws.Option) error
 
 	PutAttributesRequest(*ecs.PutAttributesInput) ecs.PutAttributesRequest
 

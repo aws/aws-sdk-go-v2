@@ -93,23 +93,11 @@ type MachineLearningAPI interface {
 
 	DescribeBatchPredictionsRequest(*machinelearning.DescribeBatchPredictionsInput) machinelearning.DescribeBatchPredictionsRequest
 
-	DescribeBatchPredictionsPages(*machinelearning.DescribeBatchPredictionsInput, func(*machinelearning.DescribeBatchPredictionsOutput, bool) bool) error
-	DescribeBatchPredictionsPagesWithContext(aws.Context, *machinelearning.DescribeBatchPredictionsInput, func(*machinelearning.DescribeBatchPredictionsOutput, bool) bool, ...aws.Option) error
-
 	DescribeDataSourcesRequest(*machinelearning.DescribeDataSourcesInput) machinelearning.DescribeDataSourcesRequest
-
-	DescribeDataSourcesPages(*machinelearning.DescribeDataSourcesInput, func(*machinelearning.DescribeDataSourcesOutput, bool) bool) error
-	DescribeDataSourcesPagesWithContext(aws.Context, *machinelearning.DescribeDataSourcesInput, func(*machinelearning.DescribeDataSourcesOutput, bool) bool, ...aws.Option) error
 
 	DescribeEvaluationsRequest(*machinelearning.DescribeEvaluationsInput) machinelearning.DescribeEvaluationsRequest
 
-	DescribeEvaluationsPages(*machinelearning.DescribeEvaluationsInput, func(*machinelearning.DescribeEvaluationsOutput, bool) bool) error
-	DescribeEvaluationsPagesWithContext(aws.Context, *machinelearning.DescribeEvaluationsInput, func(*machinelearning.DescribeEvaluationsOutput, bool) bool, ...aws.Option) error
-
 	DescribeMLModelsRequest(*machinelearning.DescribeMLModelsInput) machinelearning.DescribeMLModelsRequest
-
-	DescribeMLModelsPages(*machinelearning.DescribeMLModelsInput, func(*machinelearning.DescribeMLModelsOutput, bool) bool) error
-	DescribeMLModelsPagesWithContext(aws.Context, *machinelearning.DescribeMLModelsInput, func(*machinelearning.DescribeMLModelsOutput, bool) bool, ...aws.Option) error
 
 	DescribeTagsRequest(*machinelearning.DescribeTagsInput) machinelearning.DescribeTagsRequest
 

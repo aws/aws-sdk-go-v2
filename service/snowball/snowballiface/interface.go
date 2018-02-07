@@ -9,7 +9,6 @@
 package snowballiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/snowball"
 )
 
@@ -77,9 +76,6 @@ type SnowballAPI interface {
 
 	DescribeAddressesRequest(*snowball.DescribeAddressesInput) snowball.DescribeAddressesRequest
 
-	DescribeAddressesPages(*snowball.DescribeAddressesInput, func(*snowball.DescribeAddressesOutput, bool) bool) error
-	DescribeAddressesPagesWithContext(aws.Context, *snowball.DescribeAddressesInput, func(*snowball.DescribeAddressesOutput, bool) bool, ...aws.Option) error
-
 	DescribeClusterRequest(*snowball.DescribeClusterInput) snowball.DescribeClusterRequest
 
 	DescribeJobRequest(*snowball.DescribeJobInput) snowball.DescribeJobRequest
@@ -95,9 +91,6 @@ type SnowballAPI interface {
 	ListClustersRequest(*snowball.ListClustersInput) snowball.ListClustersRequest
 
 	ListJobsRequest(*snowball.ListJobsInput) snowball.ListJobsRequest
-
-	ListJobsPages(*snowball.ListJobsInput, func(*snowball.ListJobsOutput, bool) bool) error
-	ListJobsPagesWithContext(aws.Context, *snowball.ListJobsInput, func(*snowball.ListJobsOutput, bool) bool, ...aws.Option) error
 
 	UpdateClusterRequest(*snowball.UpdateClusterInput) snowball.UpdateClusterRequest
 

@@ -922,37 +922,33 @@ func (c *WorkMail) ListAliasesRequest(input *ListAliasesInput) ListAliasesReques
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkMail) ListAliasesPages(input *ListAliasesInput, fn func(*ListAliasesOutput, bool) bool) error {
-	return c.ListAliasesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListAliasesPagesWithContext same as ListAliasesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkMail) ListAliasesPagesWithContext(ctx aws.Context, input *ListAliasesInput, fn func(*ListAliasesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListAliasesRequest) Paginate(opts ...aws.Option) ListAliasesPager {
+	return ListAliasesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListAliasesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListAliasesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListAliasesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAliasesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAliasesPager ...
+type ListAliasesPager struct {
+	aws.Pager
+}
+
+func (p *ListAliasesPager) CurrentPage() *ListAliasesOutput {
+	return p.Pager.CurrentPage().(*ListAliasesOutput)
 }
 
 const opListGroupMembers = "ListGroupMembers"
@@ -1027,37 +1023,33 @@ func (c *WorkMail) ListGroupMembersRequest(input *ListGroupMembersInput) ListGro
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkMail) ListGroupMembersPages(input *ListGroupMembersInput, fn func(*ListGroupMembersOutput, bool) bool) error {
-	return c.ListGroupMembersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListGroupMembersPagesWithContext same as ListGroupMembersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkMail) ListGroupMembersPagesWithContext(ctx aws.Context, input *ListGroupMembersInput, fn func(*ListGroupMembersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListGroupMembersRequest) Paginate(opts ...aws.Option) ListGroupMembersPager {
+	return ListGroupMembersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListGroupMembersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListGroupMembersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListGroupMembersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGroupMembersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListGroupMembersPager ...
+type ListGroupMembersPager struct {
+	aws.Pager
+}
+
+func (p *ListGroupMembersPager) CurrentPage() *ListGroupMembersOutput {
+	return p.Pager.CurrentPage().(*ListGroupMembersOutput)
 }
 
 const opListGroups = "ListGroups"
@@ -1132,37 +1124,33 @@ func (c *WorkMail) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkMail) ListGroupsPages(input *ListGroupsInput, fn func(*ListGroupsOutput, bool) bool) error {
-	return c.ListGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListGroupsPagesWithContext same as ListGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkMail) ListGroupsPagesWithContext(ctx aws.Context, input *ListGroupsInput, fn func(*ListGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
+	return ListGroupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListGroupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListGroupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListGroupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListGroupsPager ...
+type ListGroupsPager struct {
+	aws.Pager
+}
+
+func (p *ListGroupsPager) CurrentPage() *ListGroupsOutput {
+	return p.Pager.CurrentPage().(*ListGroupsOutput)
 }
 
 const opListOrganizations = "ListOrganizations"
@@ -1237,37 +1225,33 @@ func (c *WorkMail) ListOrganizationsRequest(input *ListOrganizationsInput) ListO
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkMail) ListOrganizationsPages(input *ListOrganizationsInput, fn func(*ListOrganizationsOutput, bool) bool) error {
-	return c.ListOrganizationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListOrganizationsPagesWithContext same as ListOrganizationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkMail) ListOrganizationsPagesWithContext(ctx aws.Context, input *ListOrganizationsInput, fn func(*ListOrganizationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListOrganizationsRequest) Paginate(opts ...aws.Option) ListOrganizationsPager {
+	return ListOrganizationsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOrganizationsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListOrganizationsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListOrganizationsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListOrganizationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListOrganizationsPager ...
+type ListOrganizationsPager struct {
+	aws.Pager
+}
+
+func (p *ListOrganizationsPager) CurrentPage() *ListOrganizationsOutput {
+	return p.Pager.CurrentPage().(*ListOrganizationsOutput)
 }
 
 const opListResourceDelegates = "ListResourceDelegates"
@@ -1392,37 +1376,33 @@ func (c *WorkMail) ListResourcesRequest(input *ListResourcesInput) ListResources
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkMail) ListResourcesPages(input *ListResourcesInput, fn func(*ListResourcesOutput, bool) bool) error {
-	return c.ListResourcesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListResourcesPagesWithContext same as ListResourcesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkMail) ListResourcesPagesWithContext(ctx aws.Context, input *ListResourcesInput, fn func(*ListResourcesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListResourcesRequest) Paginate(opts ...aws.Option) ListResourcesPager {
+	return ListResourcesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListResourcesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListResourcesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListResourcesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListResourcesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListResourcesPager ...
+type ListResourcesPager struct {
+	aws.Pager
+}
+
+func (p *ListResourcesPager) CurrentPage() *ListResourcesOutput {
+	return p.Pager.CurrentPage().(*ListResourcesOutput)
 }
 
 const opListUsers = "ListUsers"
@@ -1497,37 +1477,33 @@ func (c *WorkMail) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkMail) ListUsersPages(input *ListUsersInput, fn func(*ListUsersOutput, bool) bool) error {
-	return c.ListUsersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListUsersPagesWithContext same as ListUsersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkMail) ListUsersPagesWithContext(ctx aws.Context, input *ListUsersInput, fn func(*ListUsersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
+	return ListUsersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListUsersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListUsersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListUsersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListUsersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListUsersPager ...
+type ListUsersPager struct {
+	aws.Pager
+}
+
+func (p *ListUsersPager) CurrentPage() *ListUsersOutput {
+	return p.Pager.CurrentPage().(*ListUsersOutput)
 }
 
 const opRegisterToWorkMail = "RegisterToWorkMail"

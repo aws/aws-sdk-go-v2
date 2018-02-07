@@ -86,37 +86,33 @@ func (c *Pricing) DescribeServicesRequest(input *DescribeServicesInput) Describe
 //            return pageNum <= 3
 //        })
 //
-func (c *Pricing) DescribeServicesPages(input *DescribeServicesInput, fn func(*DescribeServicesOutput, bool) bool) error {
-	return c.DescribeServicesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeServicesPagesWithContext same as DescribeServicesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pricing) DescribeServicesPagesWithContext(ctx aws.Context, input *DescribeServicesInput, fn func(*DescribeServicesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeServicesRequest) Paginate(opts ...aws.Option) DescribeServicesPager {
+	return DescribeServicesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeServicesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeServicesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeServicesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeServicesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeServicesPager ...
+type DescribeServicesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeServicesPager) CurrentPage() *DescribeServicesOutput {
+	return p.Pager.CurrentPage().(*DescribeServicesOutput)
 }
 
 const opGetAttributeValues = "GetAttributeValues"
@@ -194,37 +190,33 @@ func (c *Pricing) GetAttributeValuesRequest(input *GetAttributeValuesInput) GetA
 //            return pageNum <= 3
 //        })
 //
-func (c *Pricing) GetAttributeValuesPages(input *GetAttributeValuesInput, fn func(*GetAttributeValuesOutput, bool) bool) error {
-	return c.GetAttributeValuesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetAttributeValuesPagesWithContext same as GetAttributeValuesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pricing) GetAttributeValuesPagesWithContext(ctx aws.Context, input *GetAttributeValuesInput, fn func(*GetAttributeValuesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetAttributeValuesRequest) Paginate(opts ...aws.Option) GetAttributeValuesPager {
+	return GetAttributeValuesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetAttributeValuesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetAttributeValuesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetAttributeValuesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetAttributeValuesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetAttributeValuesPager ...
+type GetAttributeValuesPager struct {
+	aws.Pager
+}
+
+func (p *GetAttributeValuesPager) CurrentPage() *GetAttributeValuesOutput {
+	return p.Pager.CurrentPage().(*GetAttributeValuesOutput)
 }
 
 const opGetProducts = "GetProducts"
@@ -299,37 +291,33 @@ func (c *Pricing) GetProductsRequest(input *GetProductsInput) GetProductsRequest
 //            return pageNum <= 3
 //        })
 //
-func (c *Pricing) GetProductsPages(input *GetProductsInput, fn func(*GetProductsOutput, bool) bool) error {
-	return c.GetProductsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetProductsPagesWithContext same as GetProductsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Pricing) GetProductsPagesWithContext(ctx aws.Context, input *GetProductsInput, fn func(*GetProductsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetProductsRequest) Paginate(opts ...aws.Option) GetProductsPager {
+	return GetProductsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetProductsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetProductsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetProductsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetProductsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetProductsPager ...
+type GetProductsPager struct {
+	aws.Pager
+}
+
+func (p *GetProductsPager) CurrentPage() *GetProductsOutput {
+	return p.Pager.CurrentPage().(*GetProductsOutput)
 }
 
 // The values of a given attribute, such as Throughput Optimized HDD or Provisioned

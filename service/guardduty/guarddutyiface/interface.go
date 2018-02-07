@@ -9,7 +9,6 @@
 package guarddutyiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty"
 )
 
@@ -113,33 +112,15 @@ type GuardDutyAPI interface {
 
 	ListDetectorsRequest(*guardduty.ListDetectorsInput) guardduty.ListDetectorsRequest
 
-	ListDetectorsPages(*guardduty.ListDetectorsInput, func(*guardduty.ListDetectorsOutput, bool) bool) error
-	ListDetectorsPagesWithContext(aws.Context, *guardduty.ListDetectorsInput, func(*guardduty.ListDetectorsOutput, bool) bool, ...aws.Option) error
-
 	ListFindingsRequest(*guardduty.ListFindingsInput) guardduty.ListFindingsRequest
-
-	ListFindingsPages(*guardduty.ListFindingsInput, func(*guardduty.ListFindingsOutput, bool) bool) error
-	ListFindingsPagesWithContext(aws.Context, *guardduty.ListFindingsInput, func(*guardduty.ListFindingsOutput, bool) bool, ...aws.Option) error
 
 	ListIPSetsRequest(*guardduty.ListIPSetsInput) guardduty.ListIPSetsRequest
 
-	ListIPSetsPages(*guardduty.ListIPSetsInput, func(*guardduty.ListIPSetsOutput, bool) bool) error
-	ListIPSetsPagesWithContext(aws.Context, *guardduty.ListIPSetsInput, func(*guardduty.ListIPSetsOutput, bool) bool, ...aws.Option) error
-
 	ListInvitationsRequest(*guardduty.ListInvitationsInput) guardduty.ListInvitationsRequest
-
-	ListInvitationsPages(*guardduty.ListInvitationsInput, func(*guardduty.ListInvitationsOutput, bool) bool) error
-	ListInvitationsPagesWithContext(aws.Context, *guardduty.ListInvitationsInput, func(*guardduty.ListInvitationsOutput, bool) bool, ...aws.Option) error
 
 	ListMembersRequest(*guardduty.ListMembersInput) guardduty.ListMembersRequest
 
-	ListMembersPages(*guardduty.ListMembersInput, func(*guardduty.ListMembersOutput, bool) bool) error
-	ListMembersPagesWithContext(aws.Context, *guardduty.ListMembersInput, func(*guardduty.ListMembersOutput, bool) bool, ...aws.Option) error
-
 	ListThreatIntelSetsRequest(*guardduty.ListThreatIntelSetsInput) guardduty.ListThreatIntelSetsRequest
-
-	ListThreatIntelSetsPages(*guardduty.ListThreatIntelSetsInput, func(*guardduty.ListThreatIntelSetsOutput, bool) bool) error
-	ListThreatIntelSetsPagesWithContext(aws.Context, *guardduty.ListThreatIntelSetsInput, func(*guardduty.ListThreatIntelSetsOutput, bool) bool, ...aws.Option) error
 
 	StartMonitoringMembersRequest(*guardduty.StartMonitoringMembersInput) guardduty.StartMonitoringMembersRequest
 

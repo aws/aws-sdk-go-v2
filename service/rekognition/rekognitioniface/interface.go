@@ -9,7 +9,6 @@
 package rekognitioniface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition"
 )
 
@@ -89,50 +88,23 @@ type RekognitionAPI interface {
 
 	GetCelebrityRecognitionRequest(*rekognition.GetCelebrityRecognitionInput) rekognition.GetCelebrityRecognitionRequest
 
-	GetCelebrityRecognitionPages(*rekognition.GetCelebrityRecognitionInput, func(*rekognition.GetCelebrityRecognitionOutput, bool) bool) error
-	GetCelebrityRecognitionPagesWithContext(aws.Context, *rekognition.GetCelebrityRecognitionInput, func(*rekognition.GetCelebrityRecognitionOutput, bool) bool, ...aws.Option) error
-
 	GetContentModerationRequest(*rekognition.GetContentModerationInput) rekognition.GetContentModerationRequest
-
-	GetContentModerationPages(*rekognition.GetContentModerationInput, func(*rekognition.GetContentModerationOutput, bool) bool) error
-	GetContentModerationPagesWithContext(aws.Context, *rekognition.GetContentModerationInput, func(*rekognition.GetContentModerationOutput, bool) bool, ...aws.Option) error
 
 	GetFaceDetectionRequest(*rekognition.GetFaceDetectionInput) rekognition.GetFaceDetectionRequest
 
-	GetFaceDetectionPages(*rekognition.GetFaceDetectionInput, func(*rekognition.GetFaceDetectionOutput, bool) bool) error
-	GetFaceDetectionPagesWithContext(aws.Context, *rekognition.GetFaceDetectionInput, func(*rekognition.GetFaceDetectionOutput, bool) bool, ...aws.Option) error
-
 	GetFaceSearchRequest(*rekognition.GetFaceSearchInput) rekognition.GetFaceSearchRequest
-
-	GetFaceSearchPages(*rekognition.GetFaceSearchInput, func(*rekognition.GetFaceSearchOutput, bool) bool) error
-	GetFaceSearchPagesWithContext(aws.Context, *rekognition.GetFaceSearchInput, func(*rekognition.GetFaceSearchOutput, bool) bool, ...aws.Option) error
 
 	GetLabelDetectionRequest(*rekognition.GetLabelDetectionInput) rekognition.GetLabelDetectionRequest
 
-	GetLabelDetectionPages(*rekognition.GetLabelDetectionInput, func(*rekognition.GetLabelDetectionOutput, bool) bool) error
-	GetLabelDetectionPagesWithContext(aws.Context, *rekognition.GetLabelDetectionInput, func(*rekognition.GetLabelDetectionOutput, bool) bool, ...aws.Option) error
-
 	GetPersonTrackingRequest(*rekognition.GetPersonTrackingInput) rekognition.GetPersonTrackingRequest
-
-	GetPersonTrackingPages(*rekognition.GetPersonTrackingInput, func(*rekognition.GetPersonTrackingOutput, bool) bool) error
-	GetPersonTrackingPagesWithContext(aws.Context, *rekognition.GetPersonTrackingInput, func(*rekognition.GetPersonTrackingOutput, bool) bool, ...aws.Option) error
 
 	IndexFacesRequest(*rekognition.IndexFacesInput) rekognition.IndexFacesRequest
 
 	ListCollectionsRequest(*rekognition.ListCollectionsInput) rekognition.ListCollectionsRequest
 
-	ListCollectionsPages(*rekognition.ListCollectionsInput, func(*rekognition.ListCollectionsOutput, bool) bool) error
-	ListCollectionsPagesWithContext(aws.Context, *rekognition.ListCollectionsInput, func(*rekognition.ListCollectionsOutput, bool) bool, ...aws.Option) error
-
 	ListFacesRequest(*rekognition.ListFacesInput) rekognition.ListFacesRequest
 
-	ListFacesPages(*rekognition.ListFacesInput, func(*rekognition.ListFacesOutput, bool) bool) error
-	ListFacesPagesWithContext(aws.Context, *rekognition.ListFacesInput, func(*rekognition.ListFacesOutput, bool) bool, ...aws.Option) error
-
 	ListStreamProcessorsRequest(*rekognition.ListStreamProcessorsInput) rekognition.ListStreamProcessorsRequest
-
-	ListStreamProcessorsPages(*rekognition.ListStreamProcessorsInput, func(*rekognition.ListStreamProcessorsOutput, bool) bool) error
-	ListStreamProcessorsPagesWithContext(aws.Context, *rekognition.ListStreamProcessorsInput, func(*rekognition.ListStreamProcessorsOutput, bool) bool, ...aws.Option) error
 
 	RecognizeCelebritiesRequest(*rekognition.RecognizeCelebritiesInput) rekognition.RecognizeCelebritiesRequest
 

@@ -9,7 +9,6 @@
 package lexmodelbuildingserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice"
 )
 
@@ -93,37 +92,19 @@ type LexModelBuildingServiceAPI interface {
 
 	GetBotAliasesRequest(*lexmodelbuildingservice.GetBotAliasesInput) lexmodelbuildingservice.GetBotAliasesRequest
 
-	GetBotAliasesPages(*lexmodelbuildingservice.GetBotAliasesInput, func(*lexmodelbuildingservice.GetBotAliasesOutput, bool) bool) error
-	GetBotAliasesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotAliasesInput, func(*lexmodelbuildingservice.GetBotAliasesOutput, bool) bool, ...aws.Option) error
-
 	GetBotChannelAssociationRequest(*lexmodelbuildingservice.GetBotChannelAssociationInput) lexmodelbuildingservice.GetBotChannelAssociationRequest
 
 	GetBotChannelAssociationsRequest(*lexmodelbuildingservice.GetBotChannelAssociationsInput) lexmodelbuildingservice.GetBotChannelAssociationsRequest
 
-	GetBotChannelAssociationsPages(*lexmodelbuildingservice.GetBotChannelAssociationsInput, func(*lexmodelbuildingservice.GetBotChannelAssociationsOutput, bool) bool) error
-	GetBotChannelAssociationsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotChannelAssociationsInput, func(*lexmodelbuildingservice.GetBotChannelAssociationsOutput, bool) bool, ...aws.Option) error
-
 	GetBotVersionsRequest(*lexmodelbuildingservice.GetBotVersionsInput) lexmodelbuildingservice.GetBotVersionsRequest
 
-	GetBotVersionsPages(*lexmodelbuildingservice.GetBotVersionsInput, func(*lexmodelbuildingservice.GetBotVersionsOutput, bool) bool) error
-	GetBotVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotVersionsInput, func(*lexmodelbuildingservice.GetBotVersionsOutput, bool) bool, ...aws.Option) error
-
 	GetBotsRequest(*lexmodelbuildingservice.GetBotsInput) lexmodelbuildingservice.GetBotsRequest
-
-	GetBotsPages(*lexmodelbuildingservice.GetBotsInput, func(*lexmodelbuildingservice.GetBotsOutput, bool) bool) error
-	GetBotsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBotsInput, func(*lexmodelbuildingservice.GetBotsOutput, bool) bool, ...aws.Option) error
 
 	GetBuiltinIntentRequest(*lexmodelbuildingservice.GetBuiltinIntentInput) lexmodelbuildingservice.GetBuiltinIntentRequest
 
 	GetBuiltinIntentsRequest(*lexmodelbuildingservice.GetBuiltinIntentsInput) lexmodelbuildingservice.GetBuiltinIntentsRequest
 
-	GetBuiltinIntentsPages(*lexmodelbuildingservice.GetBuiltinIntentsInput, func(*lexmodelbuildingservice.GetBuiltinIntentsOutput, bool) bool) error
-	GetBuiltinIntentsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinIntentsInput, func(*lexmodelbuildingservice.GetBuiltinIntentsOutput, bool) bool, ...aws.Option) error
-
 	GetBuiltinSlotTypesRequest(*lexmodelbuildingservice.GetBuiltinSlotTypesInput) lexmodelbuildingservice.GetBuiltinSlotTypesRequest
-
-	GetBuiltinSlotTypesPages(*lexmodelbuildingservice.GetBuiltinSlotTypesInput, func(*lexmodelbuildingservice.GetBuiltinSlotTypesOutput, bool) bool) error
-	GetBuiltinSlotTypesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetBuiltinSlotTypesInput, func(*lexmodelbuildingservice.GetBuiltinSlotTypesOutput, bool) bool, ...aws.Option) error
 
 	GetExportRequest(*lexmodelbuildingservice.GetExportInput) lexmodelbuildingservice.GetExportRequest
 
@@ -131,25 +112,13 @@ type LexModelBuildingServiceAPI interface {
 
 	GetIntentVersionsRequest(*lexmodelbuildingservice.GetIntentVersionsInput) lexmodelbuildingservice.GetIntentVersionsRequest
 
-	GetIntentVersionsPages(*lexmodelbuildingservice.GetIntentVersionsInput, func(*lexmodelbuildingservice.GetIntentVersionsOutput, bool) bool) error
-	GetIntentVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetIntentVersionsInput, func(*lexmodelbuildingservice.GetIntentVersionsOutput, bool) bool, ...aws.Option) error
-
 	GetIntentsRequest(*lexmodelbuildingservice.GetIntentsInput) lexmodelbuildingservice.GetIntentsRequest
-
-	GetIntentsPages(*lexmodelbuildingservice.GetIntentsInput, func(*lexmodelbuildingservice.GetIntentsOutput, bool) bool) error
-	GetIntentsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetIntentsInput, func(*lexmodelbuildingservice.GetIntentsOutput, bool) bool, ...aws.Option) error
 
 	GetSlotTypeRequest(*lexmodelbuildingservice.GetSlotTypeInput) lexmodelbuildingservice.GetSlotTypeRequest
 
 	GetSlotTypeVersionsRequest(*lexmodelbuildingservice.GetSlotTypeVersionsInput) lexmodelbuildingservice.GetSlotTypeVersionsRequest
 
-	GetSlotTypeVersionsPages(*lexmodelbuildingservice.GetSlotTypeVersionsInput, func(*lexmodelbuildingservice.GetSlotTypeVersionsOutput, bool) bool) error
-	GetSlotTypeVersionsPagesWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypeVersionsInput, func(*lexmodelbuildingservice.GetSlotTypeVersionsOutput, bool) bool, ...aws.Option) error
-
 	GetSlotTypesRequest(*lexmodelbuildingservice.GetSlotTypesInput) lexmodelbuildingservice.GetSlotTypesRequest
-
-	GetSlotTypesPages(*lexmodelbuildingservice.GetSlotTypesInput, func(*lexmodelbuildingservice.GetSlotTypesOutput, bool) bool) error
-	GetSlotTypesPagesWithContext(aws.Context, *lexmodelbuildingservice.GetSlotTypesInput, func(*lexmodelbuildingservice.GetSlotTypesOutput, bool) bool, ...aws.Option) error
 
 	GetUtterancesViewRequest(*lexmodelbuildingservice.GetUtterancesViewInput) lexmodelbuildingservice.GetUtterancesViewRequest
 

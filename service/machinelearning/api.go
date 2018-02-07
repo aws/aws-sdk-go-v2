@@ -882,37 +882,33 @@ func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPr
 //            return pageNum <= 3
 //        })
 //
-func (c *MachineLearning) DescribeBatchPredictionsPages(input *DescribeBatchPredictionsInput, fn func(*DescribeBatchPredictionsOutput, bool) bool) error {
-	return c.DescribeBatchPredictionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeBatchPredictionsPagesWithContext same as DescribeBatchPredictionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeBatchPredictionsPagesWithContext(ctx aws.Context, input *DescribeBatchPredictionsInput, fn func(*DescribeBatchPredictionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeBatchPredictionsRequest) Paginate(opts ...aws.Option) DescribeBatchPredictionsPager {
+	return DescribeBatchPredictionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeBatchPredictionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeBatchPredictionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeBatchPredictionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeBatchPredictionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeBatchPredictionsPager ...
+type DescribeBatchPredictionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeBatchPredictionsPager) CurrentPage() *DescribeBatchPredictionsOutput {
+	return p.Pager.CurrentPage().(*DescribeBatchPredictionsOutput)
 }
 
 const opDescribeDataSources = "DescribeDataSources"
@@ -985,37 +981,33 @@ func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesI
 //            return pageNum <= 3
 //        })
 //
-func (c *MachineLearning) DescribeDataSourcesPages(input *DescribeDataSourcesInput, fn func(*DescribeDataSourcesOutput, bool) bool) error {
-	return c.DescribeDataSourcesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDataSourcesPagesWithContext same as DescribeDataSourcesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeDataSourcesPagesWithContext(ctx aws.Context, input *DescribeDataSourcesInput, fn func(*DescribeDataSourcesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDataSourcesRequest) Paginate(opts ...aws.Option) DescribeDataSourcesPager {
+	return DescribeDataSourcesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDataSourcesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDataSourcesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDataSourcesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDataSourcesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDataSourcesPager ...
+type DescribeDataSourcesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDataSourcesPager) CurrentPage() *DescribeDataSourcesOutput {
+	return p.Pager.CurrentPage().(*DescribeDataSourcesOutput)
 }
 
 const opDescribeEvaluations = "DescribeEvaluations"
@@ -1089,37 +1081,33 @@ func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsI
 //            return pageNum <= 3
 //        })
 //
-func (c *MachineLearning) DescribeEvaluationsPages(input *DescribeEvaluationsInput, fn func(*DescribeEvaluationsOutput, bool) bool) error {
-	return c.DescribeEvaluationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEvaluationsPagesWithContext same as DescribeEvaluationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeEvaluationsPagesWithContext(ctx aws.Context, input *DescribeEvaluationsInput, fn func(*DescribeEvaluationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEvaluationsRequest) Paginate(opts ...aws.Option) DescribeEvaluationsPager {
+	return DescribeEvaluationsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEvaluationsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEvaluationsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEvaluationsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEvaluationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEvaluationsPager ...
+type DescribeEvaluationsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEvaluationsPager) CurrentPage() *DescribeEvaluationsOutput {
+	return p.Pager.CurrentPage().(*DescribeEvaluationsOutput)
 }
 
 const opDescribeMLModels = "DescribeMLModels"
@@ -1192,37 +1180,33 @@ func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) 
 //            return pageNum <= 3
 //        })
 //
-func (c *MachineLearning) DescribeMLModelsPages(input *DescribeMLModelsInput, fn func(*DescribeMLModelsOutput, bool) bool) error {
-	return c.DescribeMLModelsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeMLModelsPagesWithContext same as DescribeMLModelsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeMLModelsPagesWithContext(ctx aws.Context, input *DescribeMLModelsInput, fn func(*DescribeMLModelsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeMLModelsRequest) Paginate(opts ...aws.Option) DescribeMLModelsPager {
+	return DescribeMLModelsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeMLModelsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeMLModelsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeMLModelsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeMLModelsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeMLModelsPager ...
+type DescribeMLModelsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeMLModelsPager) CurrentPage() *DescribeMLModelsOutput {
+	return p.Pager.CurrentPage().(*DescribeMLModelsOutput)
 }
 
 const opDescribeTags = "DescribeTags"

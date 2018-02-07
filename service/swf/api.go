@@ -918,37 +918,33 @@ func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHist
 //            return pageNum <= 3
 //        })
 //
-func (c *SWF) GetWorkflowExecutionHistoryPages(input *GetWorkflowExecutionHistoryInput, fn func(*GetWorkflowExecutionHistoryOutput, bool) bool) error {
-	return c.GetWorkflowExecutionHistoryPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetWorkflowExecutionHistoryPagesWithContext same as GetWorkflowExecutionHistoryPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) GetWorkflowExecutionHistoryPagesWithContext(ctx aws.Context, input *GetWorkflowExecutionHistoryInput, fn func(*GetWorkflowExecutionHistoryOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetWorkflowExecutionHistoryRequest) Paginate(opts ...aws.Option) GetWorkflowExecutionHistoryPager {
+	return GetWorkflowExecutionHistoryPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetWorkflowExecutionHistoryInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetWorkflowExecutionHistoryRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetWorkflowExecutionHistoryOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetWorkflowExecutionHistoryOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetWorkflowExecutionHistoryPager ...
+type GetWorkflowExecutionHistoryPager struct {
+	aws.Pager
+}
+
+func (p *GetWorkflowExecutionHistoryPager) CurrentPage() *GetWorkflowExecutionHistoryOutput {
+	return p.Pager.CurrentPage().(*GetWorkflowExecutionHistoryOutput)
 }
 
 const opListActivityTypes = "ListActivityTypes"
@@ -1044,37 +1040,33 @@ func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) ListActivi
 //            return pageNum <= 3
 //        })
 //
-func (c *SWF) ListActivityTypesPages(input *ListActivityTypesInput, fn func(*ListActivityTypesOutput, bool) bool) error {
-	return c.ListActivityTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListActivityTypesPagesWithContext same as ListActivityTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) ListActivityTypesPagesWithContext(ctx aws.Context, input *ListActivityTypesInput, fn func(*ListActivityTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListActivityTypesRequest) Paginate(opts ...aws.Option) ListActivityTypesPager {
+	return ListActivityTypesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListActivityTypesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListActivityTypesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListActivityTypesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListActivityTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListActivityTypesPager ...
+type ListActivityTypesPager struct {
+	aws.Pager
+}
+
+func (p *ListActivityTypesPager) CurrentPage() *ListActivityTypesOutput {
+	return p.Pager.CurrentPage().(*ListActivityTypesOutput)
 }
 
 const opListClosedWorkflowExecutions = "ListClosedWorkflowExecutions"
@@ -1179,37 +1171,33 @@ func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecu
 //            return pageNum <= 3
 //        })
 //
-func (c *SWF) ListClosedWorkflowExecutionsPages(input *ListClosedWorkflowExecutionsInput, fn func(*ListOpenWorkflowExecutionsOutput, bool) bool) error {
-	return c.ListClosedWorkflowExecutionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListClosedWorkflowExecutionsPagesWithContext same as ListClosedWorkflowExecutionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) ListClosedWorkflowExecutionsPagesWithContext(ctx aws.Context, input *ListClosedWorkflowExecutionsInput, fn func(*ListOpenWorkflowExecutionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListClosedWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListClosedWorkflowExecutionsPager {
+	return ListClosedWorkflowExecutionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListClosedWorkflowExecutionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListClosedWorkflowExecutionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListOpenWorkflowExecutionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListOpenWorkflowExecutionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListClosedWorkflowExecutionsPager ...
+type ListClosedWorkflowExecutionsPager struct {
+	aws.Pager
+}
+
+func (p *ListClosedWorkflowExecutionsPager) CurrentPage() *ListOpenWorkflowExecutionsOutput {
+	return p.Pager.CurrentPage().(*ListOpenWorkflowExecutionsOutput)
 }
 
 const opListDomains = "ListDomains"
@@ -1307,37 +1295,33 @@ func (c *SWF) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *SWF) ListDomainsPages(input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool) error {
-	return c.ListDomainsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListDomainsPagesWithContext same as ListDomainsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
+	return ListDomainsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDomainsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListDomainsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListDomainsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDomainsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListDomainsPager ...
+type ListDomainsPager struct {
+	aws.Pager
+}
+
+func (p *ListDomainsPager) CurrentPage() *ListDomainsOutput {
+	return p.Pager.CurrentPage().(*ListDomainsOutput)
 }
 
 const opListOpenWorkflowExecutions = "ListOpenWorkflowExecutions"
@@ -1442,37 +1426,33 @@ func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecution
 //            return pageNum <= 3
 //        })
 //
-func (c *SWF) ListOpenWorkflowExecutionsPages(input *ListOpenWorkflowExecutionsInput, fn func(*ListOpenWorkflowExecutionsOutput, bool) bool) error {
-	return c.ListOpenWorkflowExecutionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListOpenWorkflowExecutionsPagesWithContext same as ListOpenWorkflowExecutionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) ListOpenWorkflowExecutionsPagesWithContext(ctx aws.Context, input *ListOpenWorkflowExecutionsInput, fn func(*ListOpenWorkflowExecutionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListOpenWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListOpenWorkflowExecutionsPager {
+	return ListOpenWorkflowExecutionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOpenWorkflowExecutionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListOpenWorkflowExecutionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListOpenWorkflowExecutionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListOpenWorkflowExecutionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListOpenWorkflowExecutionsPager ...
+type ListOpenWorkflowExecutionsPager struct {
+	aws.Pager
+}
+
+func (p *ListOpenWorkflowExecutionsPager) CurrentPage() *ListOpenWorkflowExecutionsOutput {
+	return p.Pager.CurrentPage().(*ListOpenWorkflowExecutionsOutput)
 }
 
 const opListWorkflowTypes = "ListWorkflowTypes"
@@ -1566,37 +1546,33 @@ func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) ListWorkfl
 //            return pageNum <= 3
 //        })
 //
-func (c *SWF) ListWorkflowTypesPages(input *ListWorkflowTypesInput, fn func(*ListWorkflowTypesOutput, bool) bool) error {
-	return c.ListWorkflowTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListWorkflowTypesPagesWithContext same as ListWorkflowTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) ListWorkflowTypesPagesWithContext(ctx aws.Context, input *ListWorkflowTypesInput, fn func(*ListWorkflowTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListWorkflowTypesRequest) Paginate(opts ...aws.Option) ListWorkflowTypesPager {
+	return ListWorkflowTypesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListWorkflowTypesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListWorkflowTypesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListWorkflowTypesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListWorkflowTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListWorkflowTypesPager ...
+type ListWorkflowTypesPager struct {
+	aws.Pager
+}
+
+func (p *ListWorkflowTypesPager) CurrentPage() *ListWorkflowTypesOutput {
+	return p.Pager.CurrentPage().(*ListWorkflowTypesOutput)
 }
 
 const opPollForActivityTask = "PollForActivityTask"
@@ -1788,37 +1764,33 @@ func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) PollFo
 //            return pageNum <= 3
 //        })
 //
-func (c *SWF) PollForDecisionTaskPages(input *PollForDecisionTaskInput, fn func(*PollForDecisionTaskOutput, bool) bool) error {
-	return c.PollForDecisionTaskPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// PollForDecisionTaskPagesWithContext same as PollForDecisionTaskPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SWF) PollForDecisionTaskPagesWithContext(ctx aws.Context, input *PollForDecisionTaskInput, fn func(*PollForDecisionTaskOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *PollForDecisionTaskRequest) Paginate(opts ...aws.Option) PollForDecisionTaskPager {
+	return PollForDecisionTaskPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *PollForDecisionTaskInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.PollForDecisionTaskRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output PollForDecisionTaskOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*PollForDecisionTaskOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// PollForDecisionTaskPager ...
+type PollForDecisionTaskPager struct {
+	aws.Pager
+}
+
+func (p *PollForDecisionTaskPager) CurrentPage() *PollForDecisionTaskOutput {
+	return p.Pager.CurrentPage().(*PollForDecisionTaskOutput)
 }
 
 const opRecordActivityTaskHeartbeat = "RecordActivityTaskHeartbeat"

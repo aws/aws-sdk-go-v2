@@ -9,7 +9,6 @@
 package alexaforbusinessiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness"
 )
 
@@ -101,13 +100,7 @@ type AlexaForBusinessAPI interface {
 
 	ListSkillsRequest(*alexaforbusiness.ListSkillsInput) alexaforbusiness.ListSkillsRequest
 
-	ListSkillsPages(*alexaforbusiness.ListSkillsInput, func(*alexaforbusiness.ListSkillsOutput, bool) bool) error
-	ListSkillsPagesWithContext(aws.Context, *alexaforbusiness.ListSkillsInput, func(*alexaforbusiness.ListSkillsOutput, bool) bool, ...aws.Option) error
-
 	ListTagsRequest(*alexaforbusiness.ListTagsInput) alexaforbusiness.ListTagsRequest
-
-	ListTagsPages(*alexaforbusiness.ListTagsInput, func(*alexaforbusiness.ListTagsOutput, bool) bool) error
-	ListTagsPagesWithContext(aws.Context, *alexaforbusiness.ListTagsInput, func(*alexaforbusiness.ListTagsOutput, bool) bool, ...aws.Option) error
 
 	PutRoomSkillParameterRequest(*alexaforbusiness.PutRoomSkillParameterInput) alexaforbusiness.PutRoomSkillParameterRequest
 
@@ -117,28 +110,13 @@ type AlexaForBusinessAPI interface {
 
 	SearchDevicesRequest(*alexaforbusiness.SearchDevicesInput) alexaforbusiness.SearchDevicesRequest
 
-	SearchDevicesPages(*alexaforbusiness.SearchDevicesInput, func(*alexaforbusiness.SearchDevicesOutput, bool) bool) error
-	SearchDevicesPagesWithContext(aws.Context, *alexaforbusiness.SearchDevicesInput, func(*alexaforbusiness.SearchDevicesOutput, bool) bool, ...aws.Option) error
-
 	SearchProfilesRequest(*alexaforbusiness.SearchProfilesInput) alexaforbusiness.SearchProfilesRequest
-
-	SearchProfilesPages(*alexaforbusiness.SearchProfilesInput, func(*alexaforbusiness.SearchProfilesOutput, bool) bool) error
-	SearchProfilesPagesWithContext(aws.Context, *alexaforbusiness.SearchProfilesInput, func(*alexaforbusiness.SearchProfilesOutput, bool) bool, ...aws.Option) error
 
 	SearchRoomsRequest(*alexaforbusiness.SearchRoomsInput) alexaforbusiness.SearchRoomsRequest
 
-	SearchRoomsPages(*alexaforbusiness.SearchRoomsInput, func(*alexaforbusiness.SearchRoomsOutput, bool) bool) error
-	SearchRoomsPagesWithContext(aws.Context, *alexaforbusiness.SearchRoomsInput, func(*alexaforbusiness.SearchRoomsOutput, bool) bool, ...aws.Option) error
-
 	SearchSkillGroupsRequest(*alexaforbusiness.SearchSkillGroupsInput) alexaforbusiness.SearchSkillGroupsRequest
 
-	SearchSkillGroupsPages(*alexaforbusiness.SearchSkillGroupsInput, func(*alexaforbusiness.SearchSkillGroupsOutput, bool) bool) error
-	SearchSkillGroupsPagesWithContext(aws.Context, *alexaforbusiness.SearchSkillGroupsInput, func(*alexaforbusiness.SearchSkillGroupsOutput, bool) bool, ...aws.Option) error
-
 	SearchUsersRequest(*alexaforbusiness.SearchUsersInput) alexaforbusiness.SearchUsersRequest
-
-	SearchUsersPages(*alexaforbusiness.SearchUsersInput, func(*alexaforbusiness.SearchUsersOutput, bool) bool) error
-	SearchUsersPagesWithContext(aws.Context, *alexaforbusiness.SearchUsersInput, func(*alexaforbusiness.SearchUsersOutput, bool) bool, ...aws.Option) error
 
 	SendInvitationRequest(*alexaforbusiness.SendInvitationInput) alexaforbusiness.SendInvitationRequest
 

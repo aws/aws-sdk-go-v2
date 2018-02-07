@@ -189,37 +189,33 @@ func (c *CloudWatch) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInpu
 //            return pageNum <= 3
 //        })
 //
-func (c *CloudWatch) DescribeAlarmHistoryPages(input *DescribeAlarmHistoryInput, fn func(*DescribeAlarmHistoryOutput, bool) bool) error {
-	return c.DescribeAlarmHistoryPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeAlarmHistoryPagesWithContext same as DescribeAlarmHistoryPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmHistoryPagesWithContext(ctx aws.Context, input *DescribeAlarmHistoryInput, fn func(*DescribeAlarmHistoryOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeAlarmHistoryRequest) Paginate(opts ...aws.Option) DescribeAlarmHistoryPager {
+	return DescribeAlarmHistoryPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeAlarmHistoryInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeAlarmHistoryRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeAlarmHistoryOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeAlarmHistoryOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeAlarmHistoryPager ...
+type DescribeAlarmHistoryPager struct {
+	aws.Pager
+}
+
+func (p *DescribeAlarmHistoryPager) CurrentPage() *DescribeAlarmHistoryOutput {
+	return p.Pager.CurrentPage().(*DescribeAlarmHistoryOutput)
 }
 
 const opDescribeAlarms = "DescribeAlarms"
@@ -296,37 +292,33 @@ func (c *CloudWatch) DescribeAlarmsRequest(input *DescribeAlarmsInput) DescribeA
 //            return pageNum <= 3
 //        })
 //
-func (c *CloudWatch) DescribeAlarmsPages(input *DescribeAlarmsInput, fn func(*DescribeAlarmsOutput, bool) bool) error {
-	return c.DescribeAlarmsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeAlarmsPagesWithContext same as DescribeAlarmsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmsPagesWithContext(ctx aws.Context, input *DescribeAlarmsInput, fn func(*DescribeAlarmsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeAlarmsRequest) Paginate(opts ...aws.Option) DescribeAlarmsPager {
+	return DescribeAlarmsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeAlarmsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeAlarmsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeAlarmsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeAlarmsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeAlarmsPager ...
+type DescribeAlarmsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeAlarmsPager) CurrentPage() *DescribeAlarmsOutput {
+	return p.Pager.CurrentPage().(*DescribeAlarmsOutput)
 }
 
 const opDescribeAlarmsForMetric = "DescribeAlarmsForMetric"
@@ -765,37 +757,33 @@ func (c *CloudWatch) ListMetricsRequest(input *ListMetricsInput) ListMetricsRequ
 //            return pageNum <= 3
 //        })
 //
-func (c *CloudWatch) ListMetricsPages(input *ListMetricsInput, fn func(*ListMetricsOutput, bool) bool) error {
-	return c.ListMetricsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListMetricsPagesWithContext same as ListMetricsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) ListMetricsPagesWithContext(ctx aws.Context, input *ListMetricsInput, fn func(*ListMetricsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListMetricsRequest) Paginate(opts ...aws.Option) ListMetricsPager {
+	return ListMetricsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListMetricsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListMetricsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListMetricsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListMetricsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListMetricsPager ...
+type ListMetricsPager struct {
+	aws.Pager
+}
+
+func (p *ListMetricsPager) CurrentPage() *ListMetricsOutput {
+	return p.Pager.CurrentPage().(*ListMetricsOutput)
 }
 
 const opPutDashboard = "PutDashboard"

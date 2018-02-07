@@ -135,13 +135,7 @@ type SESAPI interface {
 
 	ListCustomVerificationEmailTemplatesRequest(*ses.ListCustomVerificationEmailTemplatesInput) ses.ListCustomVerificationEmailTemplatesRequest
 
-	ListCustomVerificationEmailTemplatesPages(*ses.ListCustomVerificationEmailTemplatesInput, func(*ses.ListCustomVerificationEmailTemplatesOutput, bool) bool) error
-	ListCustomVerificationEmailTemplatesPagesWithContext(aws.Context, *ses.ListCustomVerificationEmailTemplatesInput, func(*ses.ListCustomVerificationEmailTemplatesOutput, bool) bool, ...aws.Option) error
-
 	ListIdentitiesRequest(*ses.ListIdentitiesInput) ses.ListIdentitiesRequest
-
-	ListIdentitiesPages(*ses.ListIdentitiesInput, func(*ses.ListIdentitiesOutput, bool) bool) error
-	ListIdentitiesPagesWithContext(aws.Context, *ses.ListIdentitiesInput, func(*ses.ListIdentitiesOutput, bool) bool, ...aws.Option) error
 
 	ListIdentityPoliciesRequest(*ses.ListIdentityPoliciesInput) ses.ListIdentityPoliciesRequest
 

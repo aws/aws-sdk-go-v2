@@ -287,37 +287,33 @@ func (c *SMS) GetConnectorsRequest(input *GetConnectorsInput) GetConnectorsReque
 //            return pageNum <= 3
 //        })
 //
-func (c *SMS) GetConnectorsPages(input *GetConnectorsInput, fn func(*GetConnectorsOutput, bool) bool) error {
-	return c.GetConnectorsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetConnectorsPagesWithContext same as GetConnectorsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) GetConnectorsPagesWithContext(ctx aws.Context, input *GetConnectorsInput, fn func(*GetConnectorsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetConnectorsRequest) Paginate(opts ...aws.Option) GetConnectorsPager {
+	return GetConnectorsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetConnectorsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetConnectorsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetConnectorsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetConnectorsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetConnectorsPager ...
+type GetConnectorsPager struct {
+	aws.Pager
+}
+
+func (p *GetConnectorsPager) CurrentPage() *GetConnectorsOutput {
+	return p.Pager.CurrentPage().(*GetConnectorsOutput)
 }
 
 const opGetReplicationJobs = "GetReplicationJobs"
@@ -394,37 +390,33 @@ func (c *SMS) GetReplicationJobsRequest(input *GetReplicationJobsInput) GetRepli
 //            return pageNum <= 3
 //        })
 //
-func (c *SMS) GetReplicationJobsPages(input *GetReplicationJobsInput, fn func(*GetReplicationJobsOutput, bool) bool) error {
-	return c.GetReplicationJobsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetReplicationJobsPagesWithContext same as GetReplicationJobsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) GetReplicationJobsPagesWithContext(ctx aws.Context, input *GetReplicationJobsInput, fn func(*GetReplicationJobsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetReplicationJobsRequest) Paginate(opts ...aws.Option) GetReplicationJobsPager {
+	return GetReplicationJobsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetReplicationJobsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetReplicationJobsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetReplicationJobsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetReplicationJobsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetReplicationJobsPager ...
+type GetReplicationJobsPager struct {
+	aws.Pager
+}
+
+func (p *GetReplicationJobsPager) CurrentPage() *GetReplicationJobsOutput {
+	return p.Pager.CurrentPage().(*GetReplicationJobsOutput)
 }
 
 const opGetReplicationRuns = "GetReplicationRuns"
@@ -501,37 +493,33 @@ func (c *SMS) GetReplicationRunsRequest(input *GetReplicationRunsInput) GetRepli
 //            return pageNum <= 3
 //        })
 //
-func (c *SMS) GetReplicationRunsPages(input *GetReplicationRunsInput, fn func(*GetReplicationRunsOutput, bool) bool) error {
-	return c.GetReplicationRunsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetReplicationRunsPagesWithContext same as GetReplicationRunsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) GetReplicationRunsPagesWithContext(ctx aws.Context, input *GetReplicationRunsInput, fn func(*GetReplicationRunsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetReplicationRunsRequest) Paginate(opts ...aws.Option) GetReplicationRunsPager {
+	return GetReplicationRunsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetReplicationRunsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetReplicationRunsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetReplicationRunsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetReplicationRunsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetReplicationRunsPager ...
+type GetReplicationRunsPager struct {
+	aws.Pager
+}
+
+func (p *GetReplicationRunsPager) CurrentPage() *GetReplicationRunsOutput {
+	return p.Pager.CurrentPage().(*GetReplicationRunsOutput)
 }
 
 const opGetServers = "GetServers"
@@ -607,37 +595,33 @@ func (c *SMS) GetServersRequest(input *GetServersInput) GetServersRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *SMS) GetServersPages(input *GetServersInput, fn func(*GetServersOutput, bool) bool) error {
-	return c.GetServersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetServersPagesWithContext same as GetServersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SMS) GetServersPagesWithContext(ctx aws.Context, input *GetServersInput, fn func(*GetServersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetServersRequest) Paginate(opts ...aws.Option) GetServersPager {
+	return GetServersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetServersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetServersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetServersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetServersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetServersPager ...
+type GetServersPager struct {
+	aws.Pager
+}
+
+func (p *GetServersPager) CurrentPage() *GetServersOutput {
+	return p.Pager.CurrentPage().(*GetServersOutput)
 }
 
 const opImportServerCatalog = "ImportServerCatalog"

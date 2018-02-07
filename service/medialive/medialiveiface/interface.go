@@ -9,7 +9,6 @@
 package medialiveiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/medialive"
 )
 
@@ -83,18 +82,9 @@ type MediaLiveAPI interface {
 
 	ListChannelsRequest(*medialive.ListChannelsInput) medialive.ListChannelsRequest
 
-	ListChannelsPages(*medialive.ListChannelsInput, func(*medialive.ListChannelsOutput, bool) bool) error
-	ListChannelsPagesWithContext(aws.Context, *medialive.ListChannelsInput, func(*medialive.ListChannelsOutput, bool) bool, ...aws.Option) error
-
 	ListInputSecurityGroupsRequest(*medialive.ListInputSecurityGroupsInput) medialive.ListInputSecurityGroupsRequest
 
-	ListInputSecurityGroupsPages(*medialive.ListInputSecurityGroupsInput, func(*medialive.ListInputSecurityGroupsOutput, bool) bool) error
-	ListInputSecurityGroupsPagesWithContext(aws.Context, *medialive.ListInputSecurityGroupsInput, func(*medialive.ListInputSecurityGroupsOutput, bool) bool, ...aws.Option) error
-
 	ListInputsRequest(*medialive.ListInputsInput) medialive.ListInputsRequest
-
-	ListInputsPages(*medialive.ListInputsInput, func(*medialive.ListInputsOutput, bool) bool) error
-	ListInputsPagesWithContext(aws.Context, *medialive.ListInputsInput, func(*medialive.ListInputsOutput, bool) bool, ...aws.Option) error
 
 	StartChannelRequest(*medialive.StartChannelInput) medialive.StartChannelRequest
 

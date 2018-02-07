@@ -252,10 +252,14 @@ func (a *API) renameExportable() {
 // specific name.
 func (a *API) renameCollidingFields() {
 	for _, v := range a.Shapes {
-		namesWithSet := map[string]struct{}{}
+		namesWithFixes := map[string]string{}
 		for k, field := range v.MemberRefs {
 			if strings.HasPrefix(k, "Set") {
-				namesWithSet[k] = struct{}{}
+				namesWithFixes[k] = "Set" + name
+			}
+
+			if strings.HasSuffix(k, "Pager") {
+				namesWithFixes[k] = name + "Pager"
 			}
 
 			if collides(k) {
@@ -264,8 +268,8 @@ func (a *API) renameCollidingFields() {
 		}
 
 		// checks if any field names collide with setters.
-		for name := range namesWithSet {
-			if field, ok := v.MemberRefs["Set"+name]; ok {
+		for name, checkName := range namesWithFixes {
+			if field, ok := v.MemberRefs[checkName]; ok {
 				renameCollidingField(name, v, field)
 			}
 		}

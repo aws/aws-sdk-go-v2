@@ -9,7 +9,6 @@
 package kmsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/kms"
 )
 
@@ -105,23 +104,11 @@ type KMSAPI interface {
 
 	ListAliasesRequest(*kms.ListAliasesInput) kms.ListAliasesRequest
 
-	ListAliasesPages(*kms.ListAliasesInput, func(*kms.ListAliasesOutput, bool) bool) error
-	ListAliasesPagesWithContext(aws.Context, *kms.ListAliasesInput, func(*kms.ListAliasesOutput, bool) bool, ...aws.Option) error
-
 	ListGrantsRequest(*kms.ListGrantsInput) kms.ListGrantsRequest
-
-	ListGrantsPages(*kms.ListGrantsInput, func(*kms.ListRetirableGrantsOutput, bool) bool) error
-	ListGrantsPagesWithContext(aws.Context, *kms.ListGrantsInput, func(*kms.ListRetirableGrantsOutput, bool) bool, ...aws.Option) error
 
 	ListKeyPoliciesRequest(*kms.ListKeyPoliciesInput) kms.ListKeyPoliciesRequest
 
-	ListKeyPoliciesPages(*kms.ListKeyPoliciesInput, func(*kms.ListKeyPoliciesOutput, bool) bool) error
-	ListKeyPoliciesPagesWithContext(aws.Context, *kms.ListKeyPoliciesInput, func(*kms.ListKeyPoliciesOutput, bool) bool, ...aws.Option) error
-
 	ListKeysRequest(*kms.ListKeysInput) kms.ListKeysRequest
-
-	ListKeysPages(*kms.ListKeysInput, func(*kms.ListKeysOutput, bool) bool) error
-	ListKeysPagesWithContext(aws.Context, *kms.ListKeysInput, func(*kms.ListKeysOutput, bool) bool, ...aws.Option) error
 
 	ListResourceTagsRequest(*kms.ListResourceTagsInput) kms.ListResourceTagsRequest
 

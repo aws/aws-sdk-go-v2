@@ -521,37 +521,33 @@ func (c *MediaLive) ListChannelsRequest(input *ListChannelsInput) ListChannelsRe
 //            return pageNum <= 3
 //        })
 //
-func (c *MediaLive) ListChannelsPages(input *ListChannelsInput, fn func(*ListChannelsOutput, bool) bool) error {
-	return c.ListChannelsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListChannelsPagesWithContext same as ListChannelsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MediaLive) ListChannelsPagesWithContext(ctx aws.Context, input *ListChannelsInput, fn func(*ListChannelsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
+	return ListChannelsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListChannelsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListChannelsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListChannelsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListChannelsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListChannelsPager ...
+type ListChannelsPager struct {
+	aws.Pager
+}
+
+func (p *ListChannelsPager) CurrentPage() *ListChannelsOutput {
+	return p.Pager.CurrentPage().(*ListChannelsOutput)
 }
 
 const opListInputSecurityGroups = "ListInputSecurityGroups"
@@ -626,37 +622,33 @@ func (c *MediaLive) ListInputSecurityGroupsRequest(input *ListInputSecurityGroup
 //            return pageNum <= 3
 //        })
 //
-func (c *MediaLive) ListInputSecurityGroupsPages(input *ListInputSecurityGroupsInput, fn func(*ListInputSecurityGroupsOutput, bool) bool) error {
-	return c.ListInputSecurityGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListInputSecurityGroupsPagesWithContext same as ListInputSecurityGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MediaLive) ListInputSecurityGroupsPagesWithContext(ctx aws.Context, input *ListInputSecurityGroupsInput, fn func(*ListInputSecurityGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListInputSecurityGroupsRequest) Paginate(opts ...aws.Option) ListInputSecurityGroupsPager {
+	return ListInputSecurityGroupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListInputSecurityGroupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListInputSecurityGroupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListInputSecurityGroupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListInputSecurityGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListInputSecurityGroupsPager ...
+type ListInputSecurityGroupsPager struct {
+	aws.Pager
+}
+
+func (p *ListInputSecurityGroupsPager) CurrentPage() *ListInputSecurityGroupsOutput {
+	return p.Pager.CurrentPage().(*ListInputSecurityGroupsOutput)
 }
 
 const opListInputs = "ListInputs"
@@ -731,37 +723,33 @@ func (c *MediaLive) ListInputsRequest(input *ListInputsInput) ListInputsRequest 
 //            return pageNum <= 3
 //        })
 //
-func (c *MediaLive) ListInputsPages(input *ListInputsInput, fn func(*ListInputsOutput, bool) bool) error {
-	return c.ListInputsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListInputsPagesWithContext same as ListInputsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MediaLive) ListInputsPagesWithContext(ctx aws.Context, input *ListInputsInput, fn func(*ListInputsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListInputsRequest) Paginate(opts ...aws.Option) ListInputsPager {
+	return ListInputsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListInputsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListInputsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListInputsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListInputsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListInputsPager ...
+type ListInputsPager struct {
+	aws.Pager
+}
+
+func (p *ListInputsPager) CurrentPage() *ListInputsOutput {
+	return p.Pager.CurrentPage().(*ListInputsOutput)
 }
 
 const opStartChannel = "StartChannel"

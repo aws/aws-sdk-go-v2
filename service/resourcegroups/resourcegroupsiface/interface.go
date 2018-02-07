@@ -9,7 +9,6 @@
 package resourcegroupsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups"
 )
 
@@ -75,18 +74,9 @@ type ResourceGroupsAPI interface {
 
 	ListGroupResourcesRequest(*resourcegroups.ListGroupResourcesInput) resourcegroups.ListGroupResourcesRequest
 
-	ListGroupResourcesPages(*resourcegroups.ListGroupResourcesInput, func(*resourcegroups.ListGroupResourcesOutput, bool) bool) error
-	ListGroupResourcesPagesWithContext(aws.Context, *resourcegroups.ListGroupResourcesInput, func(*resourcegroups.ListGroupResourcesOutput, bool) bool, ...aws.Option) error
-
 	ListGroupsRequest(*resourcegroups.ListGroupsInput) resourcegroups.ListGroupsRequest
 
-	ListGroupsPages(*resourcegroups.ListGroupsInput, func(*resourcegroups.ListGroupsOutput, bool) bool) error
-	ListGroupsPagesWithContext(aws.Context, *resourcegroups.ListGroupsInput, func(*resourcegroups.ListGroupsOutput, bool) bool, ...aws.Option) error
-
 	SearchResourcesRequest(*resourcegroups.SearchResourcesInput) resourcegroups.SearchResourcesRequest
-
-	SearchResourcesPages(*resourcegroups.SearchResourcesInput, func(*resourcegroups.SearchResourcesOutput, bool) bool) error
-	SearchResourcesPagesWithContext(aws.Context, *resourcegroups.SearchResourcesInput, func(*resourcegroups.SearchResourcesOutput, bool) bool, ...aws.Option) error
 
 	TagRequest(*resourcegroups.TagInput) resourcegroups.TagRequest
 

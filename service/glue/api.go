@@ -1508,37 +1508,33 @@ func (c *Glue) GetClassifiersRequest(input *GetClassifiersInput) GetClassifiersR
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetClassifiersPages(input *GetClassifiersInput, fn func(*GetClassifiersOutput, bool) bool) error {
-	return c.GetClassifiersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetClassifiersPagesWithContext same as GetClassifiersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetClassifiersPagesWithContext(ctx aws.Context, input *GetClassifiersInput, fn func(*GetClassifiersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetClassifiersRequest) Paginate(opts ...aws.Option) GetClassifiersPager {
+	return GetClassifiersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetClassifiersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetClassifiersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetClassifiersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetClassifiersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetClassifiersPager ...
+type GetClassifiersPager struct {
+	aws.Pager
+}
+
+func (p *GetClassifiersPager) CurrentPage() *GetClassifiersOutput {
+	return p.Pager.CurrentPage().(*GetClassifiersOutput)
 }
 
 const opGetConnection = "GetConnection"
@@ -1662,37 +1658,33 @@ func (c *Glue) GetConnectionsRequest(input *GetConnectionsInput) GetConnectionsR
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetConnectionsPages(input *GetConnectionsInput, fn func(*GetConnectionsOutput, bool) bool) error {
-	return c.GetConnectionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetConnectionsPagesWithContext same as GetConnectionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetConnectionsPagesWithContext(ctx aws.Context, input *GetConnectionsInput, fn func(*GetConnectionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetConnectionsRequest) Paginate(opts ...aws.Option) GetConnectionsPager {
+	return GetConnectionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetConnectionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetConnectionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetConnectionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetConnectionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetConnectionsPager ...
+type GetConnectionsPager struct {
+	aws.Pager
+}
+
+func (p *GetConnectionsPager) CurrentPage() *GetConnectionsOutput {
+	return p.Pager.CurrentPage().(*GetConnectionsOutput)
 }
 
 const opGetCrawler = "GetCrawler"
@@ -1816,37 +1808,33 @@ func (c *Glue) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) GetCrawle
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetCrawlerMetricsPages(input *GetCrawlerMetricsInput, fn func(*GetCrawlerMetricsOutput, bool) bool) error {
-	return c.GetCrawlerMetricsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetCrawlerMetricsPagesWithContext same as GetCrawlerMetricsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetCrawlerMetricsPagesWithContext(ctx aws.Context, input *GetCrawlerMetricsInput, fn func(*GetCrawlerMetricsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetCrawlerMetricsRequest) Paginate(opts ...aws.Option) GetCrawlerMetricsPager {
+	return GetCrawlerMetricsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetCrawlerMetricsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetCrawlerMetricsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetCrawlerMetricsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetCrawlerMetricsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetCrawlerMetricsPager ...
+type GetCrawlerMetricsPager struct {
+	aws.Pager
+}
+
+func (p *GetCrawlerMetricsPager) CurrentPage() *GetCrawlerMetricsOutput {
+	return p.Pager.CurrentPage().(*GetCrawlerMetricsOutput)
 }
 
 const opGetCrawlers = "GetCrawlers"
@@ -1921,37 +1909,33 @@ func (c *Glue) GetCrawlersRequest(input *GetCrawlersInput) GetCrawlersRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetCrawlersPages(input *GetCrawlersInput, fn func(*GetCrawlersOutput, bool) bool) error {
-	return c.GetCrawlersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetCrawlersPagesWithContext same as GetCrawlersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetCrawlersPagesWithContext(ctx aws.Context, input *GetCrawlersInput, fn func(*GetCrawlersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetCrawlersRequest) Paginate(opts ...aws.Option) GetCrawlersPager {
+	return GetCrawlersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetCrawlersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetCrawlersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetCrawlersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetCrawlersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetCrawlersPager ...
+type GetCrawlersPager struct {
+	aws.Pager
+}
+
+func (p *GetCrawlersPager) CurrentPage() *GetCrawlersOutput {
+	return p.Pager.CurrentPage().(*GetCrawlersOutput)
 }
 
 const opGetDatabase = "GetDatabase"
@@ -2075,37 +2059,33 @@ func (c *Glue) GetDatabasesRequest(input *GetDatabasesInput) GetDatabasesRequest
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetDatabasesPages(input *GetDatabasesInput, fn func(*GetDatabasesOutput, bool) bool) error {
-	return c.GetDatabasesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetDatabasesPagesWithContext same as GetDatabasesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetDatabasesPagesWithContext(ctx aws.Context, input *GetDatabasesInput, fn func(*GetDatabasesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetDatabasesRequest) Paginate(opts ...aws.Option) GetDatabasesPager {
+	return GetDatabasesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetDatabasesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetDatabasesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetDatabasesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetDatabasesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetDatabasesPager ...
+type GetDatabasesPager struct {
+	aws.Pager
+}
+
+func (p *GetDatabasesPager) CurrentPage() *GetDatabasesOutput {
+	return p.Pager.CurrentPage().(*GetDatabasesOutput)
 }
 
 const opGetDataflowGraph = "GetDataflowGraph"
@@ -2278,37 +2258,33 @@ func (c *Glue) GetDevEndpointsRequest(input *GetDevEndpointsInput) GetDevEndpoin
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetDevEndpointsPages(input *GetDevEndpointsInput, fn func(*GetDevEndpointsOutput, bool) bool) error {
-	return c.GetDevEndpointsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetDevEndpointsPagesWithContext same as GetDevEndpointsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetDevEndpointsPagesWithContext(ctx aws.Context, input *GetDevEndpointsInput, fn func(*GetDevEndpointsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetDevEndpointsRequest) Paginate(opts ...aws.Option) GetDevEndpointsPager {
+	return GetDevEndpointsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetDevEndpointsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetDevEndpointsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetDevEndpointsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetDevEndpointsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetDevEndpointsPager ...
+type GetDevEndpointsPager struct {
+	aws.Pager
+}
+
+func (p *GetDevEndpointsPager) CurrentPage() *GetDevEndpointsOutput {
+	return p.Pager.CurrentPage().(*GetDevEndpointsOutput)
 }
 
 const opGetJob = "GetJob"
@@ -2481,37 +2457,33 @@ func (c *Glue) GetJobRunsRequest(input *GetJobRunsInput) GetJobRunsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetJobRunsPages(input *GetJobRunsInput, fn func(*GetJobRunsOutput, bool) bool) error {
-	return c.GetJobRunsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetJobRunsPagesWithContext same as GetJobRunsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetJobRunsPagesWithContext(ctx aws.Context, input *GetJobRunsInput, fn func(*GetJobRunsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetJobRunsRequest) Paginate(opts ...aws.Option) GetJobRunsPager {
+	return GetJobRunsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetJobRunsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetJobRunsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetJobRunsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetJobRunsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetJobRunsPager ...
+type GetJobRunsPager struct {
+	aws.Pager
+}
+
+func (p *GetJobRunsPager) CurrentPage() *GetJobRunsOutput {
+	return p.Pager.CurrentPage().(*GetJobRunsOutput)
 }
 
 const opGetJobs = "GetJobs"
@@ -2586,37 +2558,33 @@ func (c *Glue) GetJobsRequest(input *GetJobsInput) GetJobsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetJobsPages(input *GetJobsInput, fn func(*GetJobsOutput, bool) bool) error {
-	return c.GetJobsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetJobsPagesWithContext same as GetJobsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetJobsPagesWithContext(ctx aws.Context, input *GetJobsInput, fn func(*GetJobsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetJobsRequest) Paginate(opts ...aws.Option) GetJobsPager {
+	return GetJobsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetJobsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetJobsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetJobsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetJobsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetJobsPager ...
+type GetJobsPager struct {
+	aws.Pager
+}
+
+func (p *GetJobsPager) CurrentPage() *GetJobsOutput {
+	return p.Pager.CurrentPage().(*GetJobsOutput)
 }
 
 const opGetMapping = "GetMapping"
@@ -2789,37 +2757,33 @@ func (c *Glue) GetPartitionsRequest(input *GetPartitionsInput) GetPartitionsRequ
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetPartitionsPages(input *GetPartitionsInput, fn func(*GetPartitionsOutput, bool) bool) error {
-	return c.GetPartitionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetPartitionsPagesWithContext same as GetPartitionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetPartitionsPagesWithContext(ctx aws.Context, input *GetPartitionsInput, fn func(*GetPartitionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetPartitionsRequest) Paginate(opts ...aws.Option) GetPartitionsPager {
+	return GetPartitionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetPartitionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetPartitionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetPartitionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetPartitionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetPartitionsPager ...
+type GetPartitionsPager struct {
+	aws.Pager
+}
+
+func (p *GetPartitionsPager) CurrentPage() *GetPartitionsOutput {
+	return p.Pager.CurrentPage().(*GetPartitionsOutput)
 }
 
 const opGetPlan = "GetPlan"
@@ -2993,37 +2957,33 @@ func (c *Glue) GetTableVersionsRequest(input *GetTableVersionsInput) GetTableVer
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetTableVersionsPages(input *GetTableVersionsInput, fn func(*GetTableVersionsOutput, bool) bool) error {
-	return c.GetTableVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetTableVersionsPagesWithContext same as GetTableVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetTableVersionsPagesWithContext(ctx aws.Context, input *GetTableVersionsInput, fn func(*GetTableVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetTableVersionsRequest) Paginate(opts ...aws.Option) GetTableVersionsPager {
+	return GetTableVersionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTableVersionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetTableVersionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetTableVersionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTableVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetTableVersionsPager ...
+type GetTableVersionsPager struct {
+	aws.Pager
+}
+
+func (p *GetTableVersionsPager) CurrentPage() *GetTableVersionsOutput {
+	return p.Pager.CurrentPage().(*GetTableVersionsOutput)
 }
 
 const opGetTables = "GetTables"
@@ -3098,37 +3058,33 @@ func (c *Glue) GetTablesRequest(input *GetTablesInput) GetTablesRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetTablesPages(input *GetTablesInput, fn func(*GetTablesOutput, bool) bool) error {
-	return c.GetTablesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetTablesPagesWithContext same as GetTablesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetTablesPagesWithContext(ctx aws.Context, input *GetTablesInput, fn func(*GetTablesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetTablesRequest) Paginate(opts ...aws.Option) GetTablesPager {
+	return GetTablesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTablesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetTablesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetTablesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTablesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetTablesPager ...
+type GetTablesPager struct {
+	aws.Pager
+}
+
+func (p *GetTablesPager) CurrentPage() *GetTablesOutput {
+	return p.Pager.CurrentPage().(*GetTablesOutput)
 }
 
 const opGetTrigger = "GetTrigger"
@@ -3252,37 +3208,33 @@ func (c *Glue) GetTriggersRequest(input *GetTriggersInput) GetTriggersRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetTriggersPages(input *GetTriggersInput, fn func(*GetTriggersOutput, bool) bool) error {
-	return c.GetTriggersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetTriggersPagesWithContext same as GetTriggersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetTriggersPagesWithContext(ctx aws.Context, input *GetTriggersInput, fn func(*GetTriggersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetTriggersRequest) Paginate(opts ...aws.Option) GetTriggersPager {
+	return GetTriggersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTriggersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetTriggersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetTriggersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTriggersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetTriggersPager ...
+type GetTriggersPager struct {
+	aws.Pager
+}
+
+func (p *GetTriggersPager) CurrentPage() *GetTriggersOutput {
+	return p.Pager.CurrentPage().(*GetTriggersOutput)
 }
 
 const opGetUserDefinedFunction = "GetUserDefinedFunction"
@@ -3406,37 +3358,33 @@ func (c *Glue) GetUserDefinedFunctionsRequest(input *GetUserDefinedFunctionsInpu
 //            return pageNum <= 3
 //        })
 //
-func (c *Glue) GetUserDefinedFunctionsPages(input *GetUserDefinedFunctionsInput, fn func(*GetUserDefinedFunctionsOutput, bool) bool) error {
-	return c.GetUserDefinedFunctionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetUserDefinedFunctionsPagesWithContext same as GetUserDefinedFunctionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Glue) GetUserDefinedFunctionsPagesWithContext(ctx aws.Context, input *GetUserDefinedFunctionsInput, fn func(*GetUserDefinedFunctionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetUserDefinedFunctionsRequest) Paginate(opts ...aws.Option) GetUserDefinedFunctionsPager {
+	return GetUserDefinedFunctionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetUserDefinedFunctionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetUserDefinedFunctionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetUserDefinedFunctionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetUserDefinedFunctionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetUserDefinedFunctionsPager ...
+type GetUserDefinedFunctionsPager struct {
+	aws.Pager
+}
+
+func (p *GetUserDefinedFunctionsPager) CurrentPage() *GetUserDefinedFunctionsOutput {
+	return p.Pager.CurrentPage().(*GetUserDefinedFunctionsOutput)
 }
 
 const opImportCatalogToGlue = "ImportCatalogToGlue"

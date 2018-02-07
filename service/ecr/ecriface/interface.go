@@ -9,7 +9,6 @@
 package ecriface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ecr"
 )
 
@@ -81,13 +80,7 @@ type ECRAPI interface {
 
 	DescribeImagesRequest(*ecr.DescribeImagesInput) ecr.DescribeImagesRequest
 
-	DescribeImagesPages(*ecr.DescribeImagesInput, func(*ecr.DescribeImagesOutput, bool) bool) error
-	DescribeImagesPagesWithContext(aws.Context, *ecr.DescribeImagesInput, func(*ecr.DescribeImagesOutput, bool) bool, ...aws.Option) error
-
 	DescribeRepositoriesRequest(*ecr.DescribeRepositoriesInput) ecr.DescribeRepositoriesRequest
-
-	DescribeRepositoriesPages(*ecr.DescribeRepositoriesInput, func(*ecr.DescribeRepositoriesOutput, bool) bool) error
-	DescribeRepositoriesPagesWithContext(aws.Context, *ecr.DescribeRepositoriesInput, func(*ecr.DescribeRepositoriesOutput, bool) bool, ...aws.Option) error
 
 	GetAuthorizationTokenRequest(*ecr.GetAuthorizationTokenInput) ecr.GetAuthorizationTokenRequest
 
@@ -102,9 +95,6 @@ type ECRAPI interface {
 	InitiateLayerUploadRequest(*ecr.InitiateLayerUploadInput) ecr.InitiateLayerUploadRequest
 
 	ListImagesRequest(*ecr.ListImagesInput) ecr.ListImagesRequest
-
-	ListImagesPages(*ecr.ListImagesInput, func(*ecr.ListImagesOutput, bool) bool) error
-	ListImagesPagesWithContext(aws.Context, *ecr.ListImagesInput, func(*ecr.ListImagesOutput, bool) bool, ...aws.Option) error
 
 	PutImageRequest(*ecr.PutImageInput) ecr.PutImageRequest
 

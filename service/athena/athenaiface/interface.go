@@ -9,7 +9,6 @@
 package athenaiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/athena"
 )
 
@@ -77,18 +76,9 @@ type AthenaAPI interface {
 
 	GetQueryResultsRequest(*athena.GetQueryResultsInput) athena.GetQueryResultsRequest
 
-	GetQueryResultsPages(*athena.GetQueryResultsInput, func(*athena.GetQueryResultsOutput, bool) bool) error
-	GetQueryResultsPagesWithContext(aws.Context, *athena.GetQueryResultsInput, func(*athena.GetQueryResultsOutput, bool) bool, ...aws.Option) error
-
 	ListNamedQueriesRequest(*athena.ListNamedQueriesInput) athena.ListNamedQueriesRequest
 
-	ListNamedQueriesPages(*athena.ListNamedQueriesInput, func(*athena.ListNamedQueriesOutput, bool) bool) error
-	ListNamedQueriesPagesWithContext(aws.Context, *athena.ListNamedQueriesInput, func(*athena.ListNamedQueriesOutput, bool) bool, ...aws.Option) error
-
 	ListQueryExecutionsRequest(*athena.ListQueryExecutionsInput) athena.ListQueryExecutionsRequest
-
-	ListQueryExecutionsPages(*athena.ListQueryExecutionsInput, func(*athena.ListQueryExecutionsOutput, bool) bool) error
-	ListQueryExecutionsPagesWithContext(aws.Context, *athena.ListQueryExecutionsInput, func(*athena.ListQueryExecutionsOutput, bool) bool, ...aws.Option) error
 
 	StartQueryExecutionRequest(*athena.StartQueryExecutionInput) athena.StartQueryExecutionRequest
 

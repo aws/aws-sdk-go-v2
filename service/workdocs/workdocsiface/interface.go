@@ -9,7 +9,6 @@
 package workdocsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs"
 )
 
@@ -105,13 +104,7 @@ type WorkDocsAPI interface {
 
 	DescribeDocumentVersionsRequest(*workdocs.DescribeDocumentVersionsInput) workdocs.DescribeDocumentVersionsRequest
 
-	DescribeDocumentVersionsPages(*workdocs.DescribeDocumentVersionsInput, func(*workdocs.DescribeDocumentVersionsOutput, bool) bool) error
-	DescribeDocumentVersionsPagesWithContext(aws.Context, *workdocs.DescribeDocumentVersionsInput, func(*workdocs.DescribeDocumentVersionsOutput, bool) bool, ...aws.Option) error
-
 	DescribeFolderContentsRequest(*workdocs.DescribeFolderContentsInput) workdocs.DescribeFolderContentsRequest
-
-	DescribeFolderContentsPages(*workdocs.DescribeFolderContentsInput, func(*workdocs.DescribeFolderContentsOutput, bool) bool) error
-	DescribeFolderContentsPagesWithContext(aws.Context, *workdocs.DescribeFolderContentsInput, func(*workdocs.DescribeFolderContentsOutput, bool) bool, ...aws.Option) error
 
 	DescribeGroupsRequest(*workdocs.DescribeGroupsInput) workdocs.DescribeGroupsRequest
 
@@ -122,9 +115,6 @@ type WorkDocsAPI interface {
 	DescribeRootFoldersRequest(*workdocs.DescribeRootFoldersInput) workdocs.DescribeRootFoldersRequest
 
 	DescribeUsersRequest(*workdocs.DescribeUsersInput) workdocs.DescribeUsersRequest
-
-	DescribeUsersPages(*workdocs.DescribeUsersInput, func(*workdocs.DescribeUsersOutput, bool) bool) error
-	DescribeUsersPagesWithContext(aws.Context, *workdocs.DescribeUsersInput, func(*workdocs.DescribeUsersOutput, bool) bool, ...aws.Option) error
 
 	GetCurrentUserRequest(*workdocs.GetCurrentUserInput) workdocs.GetCurrentUserRequest
 

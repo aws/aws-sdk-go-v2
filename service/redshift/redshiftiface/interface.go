@@ -111,82 +111,37 @@ type RedshiftAPI interface {
 
 	DescribeClusterParameterGroupsRequest(*redshift.DescribeClusterParameterGroupsInput) redshift.DescribeClusterParameterGroupsRequest
 
-	DescribeClusterParameterGroupsPages(*redshift.DescribeClusterParameterGroupsInput, func(*redshift.DescribeClusterParameterGroupsOutput, bool) bool) error
-	DescribeClusterParameterGroupsPagesWithContext(aws.Context, *redshift.DescribeClusterParameterGroupsInput, func(*redshift.DescribeClusterParameterGroupsOutput, bool) bool, ...aws.Option) error
-
 	DescribeClusterParametersRequest(*redshift.DescribeClusterParametersInput) redshift.DescribeClusterParametersRequest
-
-	DescribeClusterParametersPages(*redshift.DescribeClusterParametersInput, func(*redshift.DescribeClusterParametersOutput, bool) bool) error
-	DescribeClusterParametersPagesWithContext(aws.Context, *redshift.DescribeClusterParametersInput, func(*redshift.DescribeClusterParametersOutput, bool) bool, ...aws.Option) error
 
 	DescribeClusterSecurityGroupsRequest(*redshift.DescribeClusterSecurityGroupsInput) redshift.DescribeClusterSecurityGroupsRequest
 
-	DescribeClusterSecurityGroupsPages(*redshift.DescribeClusterSecurityGroupsInput, func(*redshift.DescribeClusterSecurityGroupsOutput, bool) bool) error
-	DescribeClusterSecurityGroupsPagesWithContext(aws.Context, *redshift.DescribeClusterSecurityGroupsInput, func(*redshift.DescribeClusterSecurityGroupsOutput, bool) bool, ...aws.Option) error
-
 	DescribeClusterSnapshotsRequest(*redshift.DescribeClusterSnapshotsInput) redshift.DescribeClusterSnapshotsRequest
-
-	DescribeClusterSnapshotsPages(*redshift.DescribeClusterSnapshotsInput, func(*redshift.DescribeClusterSnapshotsOutput, bool) bool) error
-	DescribeClusterSnapshotsPagesWithContext(aws.Context, *redshift.DescribeClusterSnapshotsInput, func(*redshift.DescribeClusterSnapshotsOutput, bool) bool, ...aws.Option) error
 
 	DescribeClusterSubnetGroupsRequest(*redshift.DescribeClusterSubnetGroupsInput) redshift.DescribeClusterSubnetGroupsRequest
 
-	DescribeClusterSubnetGroupsPages(*redshift.DescribeClusterSubnetGroupsInput, func(*redshift.DescribeClusterSubnetGroupsOutput, bool) bool) error
-	DescribeClusterSubnetGroupsPagesWithContext(aws.Context, *redshift.DescribeClusterSubnetGroupsInput, func(*redshift.DescribeClusterSubnetGroupsOutput, bool) bool, ...aws.Option) error
-
 	DescribeClusterVersionsRequest(*redshift.DescribeClusterVersionsInput) redshift.DescribeClusterVersionsRequest
-
-	DescribeClusterVersionsPages(*redshift.DescribeClusterVersionsInput, func(*redshift.DescribeClusterVersionsOutput, bool) bool) error
-	DescribeClusterVersionsPagesWithContext(aws.Context, *redshift.DescribeClusterVersionsInput, func(*redshift.DescribeClusterVersionsOutput, bool) bool, ...aws.Option) error
 
 	DescribeClustersRequest(*redshift.DescribeClustersInput) redshift.DescribeClustersRequest
 
-	DescribeClustersPages(*redshift.DescribeClustersInput, func(*redshift.DescribeClustersOutput, bool) bool) error
-	DescribeClustersPagesWithContext(aws.Context, *redshift.DescribeClustersInput, func(*redshift.DescribeClustersOutput, bool) bool, ...aws.Option) error
-
 	DescribeDefaultClusterParametersRequest(*redshift.DescribeDefaultClusterParametersInput) redshift.DescribeDefaultClusterParametersRequest
-
-	DescribeDefaultClusterParametersPages(*redshift.DescribeDefaultClusterParametersInput, func(*redshift.DescribeDefaultClusterParametersOutput, bool) bool) error
-	DescribeDefaultClusterParametersPagesWithContext(aws.Context, *redshift.DescribeDefaultClusterParametersInput, func(*redshift.DescribeDefaultClusterParametersOutput, bool) bool, ...aws.Option) error
 
 	DescribeEventCategoriesRequest(*redshift.DescribeEventCategoriesInput) redshift.DescribeEventCategoriesRequest
 
 	DescribeEventSubscriptionsRequest(*redshift.DescribeEventSubscriptionsInput) redshift.DescribeEventSubscriptionsRequest
 
-	DescribeEventSubscriptionsPages(*redshift.DescribeEventSubscriptionsInput, func(*redshift.DescribeEventSubscriptionsOutput, bool) bool) error
-	DescribeEventSubscriptionsPagesWithContext(aws.Context, *redshift.DescribeEventSubscriptionsInput, func(*redshift.DescribeEventSubscriptionsOutput, bool) bool, ...aws.Option) error
-
 	DescribeEventsRequest(*redshift.DescribeEventsInput) redshift.DescribeEventsRequest
-
-	DescribeEventsPages(*redshift.DescribeEventsInput, func(*redshift.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *redshift.DescribeEventsInput, func(*redshift.DescribeEventsOutput, bool) bool, ...aws.Option) error
 
 	DescribeHsmClientCertificatesRequest(*redshift.DescribeHsmClientCertificatesInput) redshift.DescribeHsmClientCertificatesRequest
 
-	DescribeHsmClientCertificatesPages(*redshift.DescribeHsmClientCertificatesInput, func(*redshift.DescribeHsmClientCertificatesOutput, bool) bool) error
-	DescribeHsmClientCertificatesPagesWithContext(aws.Context, *redshift.DescribeHsmClientCertificatesInput, func(*redshift.DescribeHsmClientCertificatesOutput, bool) bool, ...aws.Option) error
-
 	DescribeHsmConfigurationsRequest(*redshift.DescribeHsmConfigurationsInput) redshift.DescribeHsmConfigurationsRequest
-
-	DescribeHsmConfigurationsPages(*redshift.DescribeHsmConfigurationsInput, func(*redshift.DescribeHsmConfigurationsOutput, bool) bool) error
-	DescribeHsmConfigurationsPagesWithContext(aws.Context, *redshift.DescribeHsmConfigurationsInput, func(*redshift.DescribeHsmConfigurationsOutput, bool) bool, ...aws.Option) error
 
 	DescribeLoggingStatusRequest(*redshift.DescribeLoggingStatusInput) redshift.DescribeLoggingStatusRequest
 
 	DescribeOrderableClusterOptionsRequest(*redshift.DescribeOrderableClusterOptionsInput) redshift.DescribeOrderableClusterOptionsRequest
 
-	DescribeOrderableClusterOptionsPages(*redshift.DescribeOrderableClusterOptionsInput, func(*redshift.DescribeOrderableClusterOptionsOutput, bool) bool) error
-	DescribeOrderableClusterOptionsPagesWithContext(aws.Context, *redshift.DescribeOrderableClusterOptionsInput, func(*redshift.DescribeOrderableClusterOptionsOutput, bool) bool, ...aws.Option) error
-
 	DescribeReservedNodeOfferingsRequest(*redshift.DescribeReservedNodeOfferingsInput) redshift.DescribeReservedNodeOfferingsRequest
 
-	DescribeReservedNodeOfferingsPages(*redshift.DescribeReservedNodeOfferingsInput, func(*redshift.DescribeReservedNodeOfferingsOutput, bool) bool) error
-	DescribeReservedNodeOfferingsPagesWithContext(aws.Context, *redshift.DescribeReservedNodeOfferingsInput, func(*redshift.DescribeReservedNodeOfferingsOutput, bool) bool, ...aws.Option) error
-
 	DescribeReservedNodesRequest(*redshift.DescribeReservedNodesInput) redshift.DescribeReservedNodesRequest
-
-	DescribeReservedNodesPages(*redshift.DescribeReservedNodesInput, func(*redshift.DescribeReservedNodesOutput, bool) bool) error
-	DescribeReservedNodesPagesWithContext(aws.Context, *redshift.DescribeReservedNodesInput, func(*redshift.DescribeReservedNodesOutput, bool) bool, ...aws.Option) error
 
 	DescribeResizeRequest(*redshift.DescribeResizeInput) redshift.DescribeResizeRequest
 

@@ -9,7 +9,6 @@
 package glueiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/glue"
 )
 
@@ -123,34 +122,19 @@ type GlueAPI interface {
 
 	GetClassifiersRequest(*glue.GetClassifiersInput) glue.GetClassifiersRequest
 
-	GetClassifiersPages(*glue.GetClassifiersInput, func(*glue.GetClassifiersOutput, bool) bool) error
-	GetClassifiersPagesWithContext(aws.Context, *glue.GetClassifiersInput, func(*glue.GetClassifiersOutput, bool) bool, ...aws.Option) error
-
 	GetConnectionRequest(*glue.GetConnectionInput) glue.GetConnectionRequest
 
 	GetConnectionsRequest(*glue.GetConnectionsInput) glue.GetConnectionsRequest
-
-	GetConnectionsPages(*glue.GetConnectionsInput, func(*glue.GetConnectionsOutput, bool) bool) error
-	GetConnectionsPagesWithContext(aws.Context, *glue.GetConnectionsInput, func(*glue.GetConnectionsOutput, bool) bool, ...aws.Option) error
 
 	GetCrawlerRequest(*glue.GetCrawlerInput) glue.GetCrawlerRequest
 
 	GetCrawlerMetricsRequest(*glue.GetCrawlerMetricsInput) glue.GetCrawlerMetricsRequest
 
-	GetCrawlerMetricsPages(*glue.GetCrawlerMetricsInput, func(*glue.GetCrawlerMetricsOutput, bool) bool) error
-	GetCrawlerMetricsPagesWithContext(aws.Context, *glue.GetCrawlerMetricsInput, func(*glue.GetCrawlerMetricsOutput, bool) bool, ...aws.Option) error
-
 	GetCrawlersRequest(*glue.GetCrawlersInput) glue.GetCrawlersRequest
-
-	GetCrawlersPages(*glue.GetCrawlersInput, func(*glue.GetCrawlersOutput, bool) bool) error
-	GetCrawlersPagesWithContext(aws.Context, *glue.GetCrawlersInput, func(*glue.GetCrawlersOutput, bool) bool, ...aws.Option) error
 
 	GetDatabaseRequest(*glue.GetDatabaseInput) glue.GetDatabaseRequest
 
 	GetDatabasesRequest(*glue.GetDatabasesInput) glue.GetDatabasesRequest
-
-	GetDatabasesPages(*glue.GetDatabasesInput, func(*glue.GetDatabasesOutput, bool) bool) error
-	GetDatabasesPagesWithContext(aws.Context, *glue.GetDatabasesInput, func(*glue.GetDatabasesOutput, bool) bool, ...aws.Option) error
 
 	GetDataflowGraphRequest(*glue.GetDataflowGraphInput) glue.GetDataflowGraphRequest
 
@@ -158,22 +142,13 @@ type GlueAPI interface {
 
 	GetDevEndpointsRequest(*glue.GetDevEndpointsInput) glue.GetDevEndpointsRequest
 
-	GetDevEndpointsPages(*glue.GetDevEndpointsInput, func(*glue.GetDevEndpointsOutput, bool) bool) error
-	GetDevEndpointsPagesWithContext(aws.Context, *glue.GetDevEndpointsInput, func(*glue.GetDevEndpointsOutput, bool) bool, ...aws.Option) error
-
 	GetJobRequest(*glue.GetJobInput) glue.GetJobRequest
 
 	GetJobRunRequest(*glue.GetJobRunInput) glue.GetJobRunRequest
 
 	GetJobRunsRequest(*glue.GetJobRunsInput) glue.GetJobRunsRequest
 
-	GetJobRunsPages(*glue.GetJobRunsInput, func(*glue.GetJobRunsOutput, bool) bool) error
-	GetJobRunsPagesWithContext(aws.Context, *glue.GetJobRunsInput, func(*glue.GetJobRunsOutput, bool) bool, ...aws.Option) error
-
 	GetJobsRequest(*glue.GetJobsInput) glue.GetJobsRequest
-
-	GetJobsPages(*glue.GetJobsInput, func(*glue.GetJobsOutput, bool) bool) error
-	GetJobsPagesWithContext(aws.Context, *glue.GetJobsInput, func(*glue.GetJobsOutput, bool) bool, ...aws.Option) error
 
 	GetMappingRequest(*glue.GetMappingInput) glue.GetMappingRequest
 
@@ -181,36 +156,21 @@ type GlueAPI interface {
 
 	GetPartitionsRequest(*glue.GetPartitionsInput) glue.GetPartitionsRequest
 
-	GetPartitionsPages(*glue.GetPartitionsInput, func(*glue.GetPartitionsOutput, bool) bool) error
-	GetPartitionsPagesWithContext(aws.Context, *glue.GetPartitionsInput, func(*glue.GetPartitionsOutput, bool) bool, ...aws.Option) error
-
 	GetPlanRequest(*glue.GetPlanInput) glue.GetPlanRequest
 
 	GetTableRequest(*glue.GetTableInput) glue.GetTableRequest
 
 	GetTableVersionsRequest(*glue.GetTableVersionsInput) glue.GetTableVersionsRequest
 
-	GetTableVersionsPages(*glue.GetTableVersionsInput, func(*glue.GetTableVersionsOutput, bool) bool) error
-	GetTableVersionsPagesWithContext(aws.Context, *glue.GetTableVersionsInput, func(*glue.GetTableVersionsOutput, bool) bool, ...aws.Option) error
-
 	GetTablesRequest(*glue.GetTablesInput) glue.GetTablesRequest
-
-	GetTablesPages(*glue.GetTablesInput, func(*glue.GetTablesOutput, bool) bool) error
-	GetTablesPagesWithContext(aws.Context, *glue.GetTablesInput, func(*glue.GetTablesOutput, bool) bool, ...aws.Option) error
 
 	GetTriggerRequest(*glue.GetTriggerInput) glue.GetTriggerRequest
 
 	GetTriggersRequest(*glue.GetTriggersInput) glue.GetTriggersRequest
 
-	GetTriggersPages(*glue.GetTriggersInput, func(*glue.GetTriggersOutput, bool) bool) error
-	GetTriggersPagesWithContext(aws.Context, *glue.GetTriggersInput, func(*glue.GetTriggersOutput, bool) bool, ...aws.Option) error
-
 	GetUserDefinedFunctionRequest(*glue.GetUserDefinedFunctionInput) glue.GetUserDefinedFunctionRequest
 
 	GetUserDefinedFunctionsRequest(*glue.GetUserDefinedFunctionsInput) glue.GetUserDefinedFunctionsRequest
-
-	GetUserDefinedFunctionsPages(*glue.GetUserDefinedFunctionsInput, func(*glue.GetUserDefinedFunctionsOutput, bool) bool) error
-	GetUserDefinedFunctionsPagesWithContext(aws.Context, *glue.GetUserDefinedFunctionsInput, func(*glue.GetUserDefinedFunctionsOutput, bool) bool, ...aws.Option) error
 
 	ImportCatalogToGlueRequest(*glue.ImportCatalogToGlueInput) glue.ImportCatalogToGlueRequest
 

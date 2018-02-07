@@ -128,37 +128,33 @@ func (c *CostAndUsageReportService) DescribeReportDefinitionsRequest(input *Desc
 //            return pageNum <= 3
 //        })
 //
-func (c *CostAndUsageReportService) DescribeReportDefinitionsPages(input *DescribeReportDefinitionsInput, fn func(*DescribeReportDefinitionsOutput, bool) bool) error {
-	return c.DescribeReportDefinitionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeReportDefinitionsPagesWithContext same as DescribeReportDefinitionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CostAndUsageReportService) DescribeReportDefinitionsPagesWithContext(ctx aws.Context, input *DescribeReportDefinitionsInput, fn func(*DescribeReportDefinitionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeReportDefinitionsRequest) Paginate(opts ...aws.Option) DescribeReportDefinitionsPager {
+	return DescribeReportDefinitionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReportDefinitionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeReportDefinitionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeReportDefinitionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReportDefinitionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReportDefinitionsPager ...
+type DescribeReportDefinitionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReportDefinitionsPager) CurrentPage() *DescribeReportDefinitionsOutput {
+	return p.Pager.CurrentPage().(*DescribeReportDefinitionsOutput)
 }
 
 const opPutReportDefinition = "PutReportDefinition"

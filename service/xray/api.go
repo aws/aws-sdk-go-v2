@@ -85,37 +85,33 @@ func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) BatchGetTracesR
 //            return pageNum <= 3
 //        })
 //
-func (c *XRay) BatchGetTracesPages(input *BatchGetTracesInput, fn func(*BatchGetTracesOutput, bool) bool) error {
-	return c.BatchGetTracesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// BatchGetTracesPagesWithContext same as BatchGetTracesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *XRay) BatchGetTracesPagesWithContext(ctx aws.Context, input *BatchGetTracesInput, fn func(*BatchGetTracesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *BatchGetTracesRequest) Paginate(opts ...aws.Option) BatchGetTracesPager {
+	return BatchGetTracesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *BatchGetTracesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.BatchGetTracesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output BatchGetTracesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*BatchGetTracesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// BatchGetTracesPager ...
+type BatchGetTracesPager struct {
+	aws.Pager
+}
+
+func (p *BatchGetTracesPager) CurrentPage() *BatchGetTracesOutput {
+	return p.Pager.CurrentPage().(*BatchGetTracesOutput)
 }
 
 const opGetServiceGraph = "GetServiceGraph"
@@ -194,37 +190,33 @@ func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) GetServiceGra
 //            return pageNum <= 3
 //        })
 //
-func (c *XRay) GetServiceGraphPages(input *GetServiceGraphInput, fn func(*GetServiceGraphOutput, bool) bool) error {
-	return c.GetServiceGraphPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetServiceGraphPagesWithContext same as GetServiceGraphPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *XRay) GetServiceGraphPagesWithContext(ctx aws.Context, input *GetServiceGraphInput, fn func(*GetServiceGraphOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetServiceGraphRequest) Paginate(opts ...aws.Option) GetServiceGraphPager {
+	return GetServiceGraphPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetServiceGraphInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetServiceGraphRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetServiceGraphOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetServiceGraphOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetServiceGraphPager ...
+type GetServiceGraphPager struct {
+	aws.Pager
+}
+
+func (p *GetServiceGraphPager) CurrentPage() *GetServiceGraphOutput {
+	return p.Pager.CurrentPage().(*GetServiceGraphOutput)
 }
 
 const opGetTraceGraph = "GetTraceGraph"
@@ -299,37 +291,33 @@ func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) GetTraceGraphRequ
 //            return pageNum <= 3
 //        })
 //
-func (c *XRay) GetTraceGraphPages(input *GetTraceGraphInput, fn func(*GetTraceGraphOutput, bool) bool) error {
-	return c.GetTraceGraphPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetTraceGraphPagesWithContext same as GetTraceGraphPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *XRay) GetTraceGraphPagesWithContext(ctx aws.Context, input *GetTraceGraphInput, fn func(*GetTraceGraphOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetTraceGraphRequest) Paginate(opts ...aws.Option) GetTraceGraphPager {
+	return GetTraceGraphPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTraceGraphInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetTraceGraphRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetTraceGraphOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTraceGraphOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetTraceGraphPager ...
+type GetTraceGraphPager struct {
+	aws.Pager
+}
+
+func (p *GetTraceGraphPager) CurrentPage() *GetTraceGraphOutput {
+	return p.Pager.CurrentPage().(*GetTraceGraphOutput)
 }
 
 const opGetTraceSummaries = "GetTraceSummaries"
@@ -420,37 +408,33 @@ func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) GetTraceS
 //            return pageNum <= 3
 //        })
 //
-func (c *XRay) GetTraceSummariesPages(input *GetTraceSummariesInput, fn func(*GetTraceSummariesOutput, bool) bool) error {
-	return c.GetTraceSummariesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetTraceSummariesPagesWithContext same as GetTraceSummariesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *XRay) GetTraceSummariesPagesWithContext(ctx aws.Context, input *GetTraceSummariesInput, fn func(*GetTraceSummariesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetTraceSummariesRequest) Paginate(opts ...aws.Option) GetTraceSummariesPager {
+	return GetTraceSummariesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetTraceSummariesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetTraceSummariesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetTraceSummariesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTraceSummariesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetTraceSummariesPager ...
+type GetTraceSummariesPager struct {
+	aws.Pager
+}
+
+func (p *GetTraceSummariesPager) CurrentPage() *GetTraceSummariesOutput {
+	return p.Pager.CurrentPage().(*GetTraceSummariesOutput)
 }
 
 const opPutTelemetryRecords = "PutTelemetryRecords"

@@ -1092,37 +1092,33 @@ func (c *WorkDocs) DescribeDocumentVersionsRequest(input *DescribeDocumentVersio
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkDocs) DescribeDocumentVersionsPages(input *DescribeDocumentVersionsInput, fn func(*DescribeDocumentVersionsOutput, bool) bool) error {
-	return c.DescribeDocumentVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDocumentVersionsPagesWithContext same as DescribeDocumentVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkDocs) DescribeDocumentVersionsPagesWithContext(ctx aws.Context, input *DescribeDocumentVersionsInput, fn func(*DescribeDocumentVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDocumentVersionsRequest) Paginate(opts ...aws.Option) DescribeDocumentVersionsPager {
+	return DescribeDocumentVersionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDocumentVersionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDocumentVersionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDocumentVersionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDocumentVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDocumentVersionsPager ...
+type DescribeDocumentVersionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDocumentVersionsPager) CurrentPage() *DescribeDocumentVersionsOutput {
+	return p.Pager.CurrentPage().(*DescribeDocumentVersionsOutput)
 }
 
 const opDescribeFolderContents = "DescribeFolderContents"
@@ -1203,37 +1199,33 @@ func (c *WorkDocs) DescribeFolderContentsRequest(input *DescribeFolderContentsIn
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkDocs) DescribeFolderContentsPages(input *DescribeFolderContentsInput, fn func(*DescribeFolderContentsOutput, bool) bool) error {
-	return c.DescribeFolderContentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeFolderContentsPagesWithContext same as DescribeFolderContentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkDocs) DescribeFolderContentsPagesWithContext(ctx aws.Context, input *DescribeFolderContentsInput, fn func(*DescribeFolderContentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeFolderContentsRequest) Paginate(opts ...aws.Option) DescribeFolderContentsPager {
+	return DescribeFolderContentsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeFolderContentsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeFolderContentsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeFolderContentsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeFolderContentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeFolderContentsPager ...
+type DescribeFolderContentsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeFolderContentsPager) CurrentPage() *DescribeFolderContentsOutput {
+	return p.Pager.CurrentPage().(*DescribeFolderContentsOutput)
 }
 
 const opDescribeGroups = "DescribeGroups"
@@ -1512,37 +1504,33 @@ func (c *WorkDocs) DescribeUsersRequest(input *DescribeUsersInput) DescribeUsers
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkDocs) DescribeUsersPages(input *DescribeUsersInput, fn func(*DescribeUsersOutput, bool) bool) error {
-	return c.DescribeUsersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeUsersPagesWithContext same as DescribeUsersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkDocs) DescribeUsersPagesWithContext(ctx aws.Context, input *DescribeUsersInput, fn func(*DescribeUsersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeUsersRequest) Paginate(opts ...aws.Option) DescribeUsersPager {
+	return DescribeUsersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeUsersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeUsersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeUsersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeUsersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeUsersPager ...
+type DescribeUsersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeUsersPager) CurrentPage() *DescribeUsersOutput {
+	return p.Pager.CurrentPage().(*DescribeUsersOutput)
 }
 
 const opGetCurrentUser = "GetCurrentUser"

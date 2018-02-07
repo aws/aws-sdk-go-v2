@@ -879,37 +879,33 @@ func (c *Rekognition) GetCelebrityRecognitionRequest(input *GetCelebrityRecognit
 //            return pageNum <= 3
 //        })
 //
-func (c *Rekognition) GetCelebrityRecognitionPages(input *GetCelebrityRecognitionInput, fn func(*GetCelebrityRecognitionOutput, bool) bool) error {
-	return c.GetCelebrityRecognitionPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetCelebrityRecognitionPagesWithContext same as GetCelebrityRecognitionPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetCelebrityRecognitionPagesWithContext(ctx aws.Context, input *GetCelebrityRecognitionInput, fn func(*GetCelebrityRecognitionOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetCelebrityRecognitionRequest) Paginate(opts ...aws.Option) GetCelebrityRecognitionPager {
+	return GetCelebrityRecognitionPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetCelebrityRecognitionInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetCelebrityRecognitionRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetCelebrityRecognitionOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetCelebrityRecognitionOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetCelebrityRecognitionPager ...
+type GetCelebrityRecognitionPager struct {
+	aws.Pager
+}
+
+func (p *GetCelebrityRecognitionPager) CurrentPage() *GetCelebrityRecognitionOutput {
+	return p.Pager.CurrentPage().(*GetCelebrityRecognitionOutput)
 }
 
 const opGetContentModeration = "GetContentModeration"
@@ -1009,37 +1005,33 @@ func (c *Rekognition) GetContentModerationRequest(input *GetContentModerationInp
 //            return pageNum <= 3
 //        })
 //
-func (c *Rekognition) GetContentModerationPages(input *GetContentModerationInput, fn func(*GetContentModerationOutput, bool) bool) error {
-	return c.GetContentModerationPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetContentModerationPagesWithContext same as GetContentModerationPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetContentModerationPagesWithContext(ctx aws.Context, input *GetContentModerationInput, fn func(*GetContentModerationOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetContentModerationRequest) Paginate(opts ...aws.Option) GetContentModerationPager {
+	return GetContentModerationPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetContentModerationInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetContentModerationRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetContentModerationOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetContentModerationOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetContentModerationPager ...
+type GetContentModerationPager struct {
+	aws.Pager
+}
+
+func (p *GetContentModerationPager) CurrentPage() *GetContentModerationOutput {
+	return p.Pager.CurrentPage().(*GetContentModerationOutput)
 }
 
 const opGetFaceDetection = "GetFaceDetection"
@@ -1131,37 +1123,33 @@ func (c *Rekognition) GetFaceDetectionRequest(input *GetFaceDetectionInput) GetF
 //            return pageNum <= 3
 //        })
 //
-func (c *Rekognition) GetFaceDetectionPages(input *GetFaceDetectionInput, fn func(*GetFaceDetectionOutput, bool) bool) error {
-	return c.GetFaceDetectionPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetFaceDetectionPagesWithContext same as GetFaceDetectionPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetFaceDetectionPagesWithContext(ctx aws.Context, input *GetFaceDetectionInput, fn func(*GetFaceDetectionOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetFaceDetectionRequest) Paginate(opts ...aws.Option) GetFaceDetectionPager {
+	return GetFaceDetectionPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetFaceDetectionInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetFaceDetectionRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetFaceDetectionOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetFaceDetectionOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetFaceDetectionPager ...
+type GetFaceDetectionPager struct {
+	aws.Pager
+}
+
+func (p *GetFaceDetectionPager) CurrentPage() *GetFaceDetectionOutput {
+	return p.Pager.CurrentPage().(*GetFaceDetectionOutput)
 }
 
 const opGetFaceSearch = "GetFaceSearch"
@@ -1255,37 +1243,33 @@ func (c *Rekognition) GetFaceSearchRequest(input *GetFaceSearchInput) GetFaceSea
 //            return pageNum <= 3
 //        })
 //
-func (c *Rekognition) GetFaceSearchPages(input *GetFaceSearchInput, fn func(*GetFaceSearchOutput, bool) bool) error {
-	return c.GetFaceSearchPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetFaceSearchPagesWithContext same as GetFaceSearchPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetFaceSearchPagesWithContext(ctx aws.Context, input *GetFaceSearchInput, fn func(*GetFaceSearchOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetFaceSearchRequest) Paginate(opts ...aws.Option) GetFaceSearchPager {
+	return GetFaceSearchPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetFaceSearchInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetFaceSearchRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetFaceSearchOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetFaceSearchOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetFaceSearchPager ...
+type GetFaceSearchPager struct {
+	aws.Pager
+}
+
+func (p *GetFaceSearchPager) CurrentPage() *GetFaceSearchOutput {
+	return p.Pager.CurrentPage().(*GetFaceSearchOutput)
 }
 
 const opGetLabelDetection = "GetLabelDetection"
@@ -1382,37 +1366,33 @@ func (c *Rekognition) GetLabelDetectionRequest(input *GetLabelDetectionInput) Ge
 //            return pageNum <= 3
 //        })
 //
-func (c *Rekognition) GetLabelDetectionPages(input *GetLabelDetectionInput, fn func(*GetLabelDetectionOutput, bool) bool) error {
-	return c.GetLabelDetectionPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetLabelDetectionPagesWithContext same as GetLabelDetectionPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetLabelDetectionPagesWithContext(ctx aws.Context, input *GetLabelDetectionInput, fn func(*GetLabelDetectionOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetLabelDetectionRequest) Paginate(opts ...aws.Option) GetLabelDetectionPager {
+	return GetLabelDetectionPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetLabelDetectionInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetLabelDetectionRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetLabelDetectionOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetLabelDetectionOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetLabelDetectionPager ...
+type GetLabelDetectionPager struct {
+	aws.Pager
+}
+
+func (p *GetLabelDetectionPager) CurrentPage() *GetLabelDetectionOutput {
+	return p.Pager.CurrentPage().(*GetLabelDetectionOutput)
 }
 
 const opGetPersonTracking = "GetPersonTracking"
@@ -1509,37 +1489,33 @@ func (c *Rekognition) GetPersonTrackingRequest(input *GetPersonTrackingInput) Ge
 //            return pageNum <= 3
 //        })
 //
-func (c *Rekognition) GetPersonTrackingPages(input *GetPersonTrackingInput, fn func(*GetPersonTrackingOutput, bool) bool) error {
-	return c.GetPersonTrackingPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetPersonTrackingPagesWithContext same as GetPersonTrackingPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetPersonTrackingPagesWithContext(ctx aws.Context, input *GetPersonTrackingInput, fn func(*GetPersonTrackingOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetPersonTrackingRequest) Paginate(opts ...aws.Option) GetPersonTrackingPager {
+	return GetPersonTrackingPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetPersonTrackingInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetPersonTrackingRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetPersonTrackingOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetPersonTrackingOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetPersonTrackingPager ...
+type GetPersonTrackingPager struct {
+	aws.Pager
+}
+
+func (p *GetPersonTrackingPager) CurrentPage() *GetPersonTrackingOutput {
+	return p.Pager.CurrentPage().(*GetPersonTrackingOutput)
 }
 
 const opIndexFaces = "IndexFaces"
@@ -1703,37 +1679,33 @@ func (c *Rekognition) ListCollectionsRequest(input *ListCollectionsInput) ListCo
 //            return pageNum <= 3
 //        })
 //
-func (c *Rekognition) ListCollectionsPages(input *ListCollectionsInput, fn func(*ListCollectionsOutput, bool) bool) error {
-	return c.ListCollectionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListCollectionsPagesWithContext same as ListCollectionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) ListCollectionsPagesWithContext(ctx aws.Context, input *ListCollectionsInput, fn func(*ListCollectionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListCollectionsRequest) Paginate(opts ...aws.Option) ListCollectionsPager {
+	return ListCollectionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListCollectionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListCollectionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListCollectionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListCollectionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListCollectionsPager ...
+type ListCollectionsPager struct {
+	aws.Pager
+}
+
+func (p *ListCollectionsPager) CurrentPage() *ListCollectionsOutput {
+	return p.Pager.CurrentPage().(*ListCollectionsOutput)
 }
 
 const opListFaces = "ListFaces"
@@ -1811,37 +1783,33 @@ func (c *Rekognition) ListFacesRequest(input *ListFacesInput) ListFacesRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *Rekognition) ListFacesPages(input *ListFacesInput, fn func(*ListFacesOutput, bool) bool) error {
-	return c.ListFacesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListFacesPagesWithContext same as ListFacesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) ListFacesPagesWithContext(ctx aws.Context, input *ListFacesInput, fn func(*ListFacesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListFacesRequest) Paginate(opts ...aws.Option) ListFacesPager {
+	return ListFacesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListFacesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListFacesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListFacesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFacesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListFacesPager ...
+type ListFacesPager struct {
+	aws.Pager
+}
+
+func (p *ListFacesPager) CurrentPage() *ListFacesOutput {
+	return p.Pager.CurrentPage().(*ListFacesOutput)
 }
 
 const opListStreamProcessors = "ListStreamProcessors"
@@ -1914,37 +1882,33 @@ func (c *Rekognition) ListStreamProcessorsRequest(input *ListStreamProcessorsInp
 //            return pageNum <= 3
 //        })
 //
-func (c *Rekognition) ListStreamProcessorsPages(input *ListStreamProcessorsInput, fn func(*ListStreamProcessorsOutput, bool) bool) error {
-	return c.ListStreamProcessorsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListStreamProcessorsPagesWithContext same as ListStreamProcessorsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) ListStreamProcessorsPagesWithContext(ctx aws.Context, input *ListStreamProcessorsInput, fn func(*ListStreamProcessorsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListStreamProcessorsRequest) Paginate(opts ...aws.Option) ListStreamProcessorsPager {
+	return ListStreamProcessorsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListStreamProcessorsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListStreamProcessorsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListStreamProcessorsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListStreamProcessorsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListStreamProcessorsPager ...
+type ListStreamProcessorsPager struct {
+	aws.Pager
+}
+
+func (p *ListStreamProcessorsPager) CurrentPage() *ListStreamProcessorsOutput {
+	return p.Pager.CurrentPage().(*ListStreamProcessorsOutput)
 }
 
 const opRecognizeCelebrities = "RecognizeCelebrities"

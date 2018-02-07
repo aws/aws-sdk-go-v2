@@ -9,7 +9,6 @@
 package route53domainsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains"
 )
 
@@ -87,13 +86,7 @@ type Route53DomainsAPI interface {
 
 	ListDomainsRequest(*route53domains.ListDomainsInput) route53domains.ListDomainsRequest
 
-	ListDomainsPages(*route53domains.ListDomainsInput, func(*route53domains.ListDomainsOutput, bool) bool) error
-	ListDomainsPagesWithContext(aws.Context, *route53domains.ListDomainsInput, func(*route53domains.ListDomainsOutput, bool) bool, ...aws.Option) error
-
 	ListOperationsRequest(*route53domains.ListOperationsInput) route53domains.ListOperationsRequest
-
-	ListOperationsPages(*route53domains.ListOperationsInput, func(*route53domains.ListOperationsOutput, bool) bool) error
-	ListOperationsPagesWithContext(aws.Context, *route53domains.ListOperationsInput, func(*route53domains.ListOperationsOutput, bool) bool, ...aws.Option) error
 
 	ListTagsForDomainRequest(*route53domains.ListTagsForDomainInput) route53domains.ListTagsForDomainRequest
 

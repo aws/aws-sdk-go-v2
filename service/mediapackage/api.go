@@ -374,37 +374,33 @@ func (c *MediaPackage) ListChannelsRequest(input *ListChannelsInput) ListChannel
 //            return pageNum <= 3
 //        })
 //
-func (c *MediaPackage) ListChannelsPages(input *ListChannelsInput, fn func(*ListChannelsOutput, bool) bool) error {
-	return c.ListChannelsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListChannelsPagesWithContext same as ListChannelsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MediaPackage) ListChannelsPagesWithContext(ctx aws.Context, input *ListChannelsInput, fn func(*ListChannelsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
+	return ListChannelsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListChannelsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListChannelsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListChannelsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListChannelsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListChannelsPager ...
+type ListChannelsPager struct {
+	aws.Pager
+}
+
+func (p *ListChannelsPager) CurrentPage() *ListChannelsOutput {
+	return p.Pager.CurrentPage().(*ListChannelsOutput)
 }
 
 const opListOriginEndpoints = "ListOriginEndpoints"
@@ -479,37 +475,33 @@ func (c *MediaPackage) ListOriginEndpointsRequest(input *ListOriginEndpointsInpu
 //            return pageNum <= 3
 //        })
 //
-func (c *MediaPackage) ListOriginEndpointsPages(input *ListOriginEndpointsInput, fn func(*ListOriginEndpointsOutput, bool) bool) error {
-	return c.ListOriginEndpointsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListOriginEndpointsPagesWithContext same as ListOriginEndpointsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MediaPackage) ListOriginEndpointsPagesWithContext(ctx aws.Context, input *ListOriginEndpointsInput, fn func(*ListOriginEndpointsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListOriginEndpointsRequest) Paginate(opts ...aws.Option) ListOriginEndpointsPager {
+	return ListOriginEndpointsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOriginEndpointsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListOriginEndpointsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListOriginEndpointsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListOriginEndpointsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListOriginEndpointsPager ...
+type ListOriginEndpointsPager struct {
+	aws.Pager
+}
+
+func (p *ListOriginEndpointsPager) CurrentPage() *ListOriginEndpointsOutput {
+	return p.Pager.CurrentPage().(*ListOriginEndpointsOutput)
 }
 
 const opRotateChannelCredentials = "RotateChannelCredentials"

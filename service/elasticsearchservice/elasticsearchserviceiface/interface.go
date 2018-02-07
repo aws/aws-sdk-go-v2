@@ -9,7 +9,6 @@
 package elasticsearchserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice"
 )
 
@@ -83,13 +82,7 @@ type ElasticsearchServiceAPI interface {
 
 	ListElasticsearchInstanceTypesRequest(*elasticsearchservice.ListElasticsearchInstanceTypesInput) elasticsearchservice.ListElasticsearchInstanceTypesRequest
 
-	ListElasticsearchInstanceTypesPages(*elasticsearchservice.ListElasticsearchInstanceTypesInput, func(*elasticsearchservice.ListElasticsearchInstanceTypesOutput, bool) bool) error
-	ListElasticsearchInstanceTypesPagesWithContext(aws.Context, *elasticsearchservice.ListElasticsearchInstanceTypesInput, func(*elasticsearchservice.ListElasticsearchInstanceTypesOutput, bool) bool, ...aws.Option) error
-
 	ListElasticsearchVersionsRequest(*elasticsearchservice.ListElasticsearchVersionsInput) elasticsearchservice.ListElasticsearchVersionsRequest
-
-	ListElasticsearchVersionsPages(*elasticsearchservice.ListElasticsearchVersionsInput, func(*elasticsearchservice.ListElasticsearchVersionsOutput, bool) bool) error
-	ListElasticsearchVersionsPagesWithContext(aws.Context, *elasticsearchservice.ListElasticsearchVersionsInput, func(*elasticsearchservice.ListElasticsearchVersionsOutput, bool) bool, ...aws.Option) error
 
 	ListTagsRequest(*elasticsearchservice.ListTagsInput) elasticsearchservice.ListTagsRequest
 

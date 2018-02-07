@@ -9,7 +9,6 @@
 package simpledbiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/simpledb"
 )
 
@@ -79,15 +78,9 @@ type SimpleDBAPI interface {
 
 	ListDomainsRequest(*simpledb.ListDomainsInput) simpledb.ListDomainsRequest
 
-	ListDomainsPages(*simpledb.ListDomainsInput, func(*simpledb.ListDomainsOutput, bool) bool) error
-	ListDomainsPagesWithContext(aws.Context, *simpledb.ListDomainsInput, func(*simpledb.ListDomainsOutput, bool) bool, ...aws.Option) error
-
 	PutAttributesRequest(*simpledb.PutAttributesInput) simpledb.PutAttributesRequest
 
 	SelectRequest(*simpledb.SelectInput) simpledb.SelectRequest
-
-	SelectPages(*simpledb.SelectInput, func(*simpledb.SelectOutput, bool) bool) error
-	SelectPagesWithContext(aws.Context, *simpledb.SelectInput, func(*simpledb.SelectOutput, bool) bool, ...aws.Option) error
 }
 
 var _ SimpleDBAPI = (*simpledb.SimpleDB)(nil)

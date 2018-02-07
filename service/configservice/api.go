@@ -1120,37 +1120,33 @@ func (c *ConfigService) GetResourceConfigHistoryRequest(input *GetResourceConfig
 //            return pageNum <= 3
 //        })
 //
-func (c *ConfigService) GetResourceConfigHistoryPages(input *GetResourceConfigHistoryInput, fn func(*GetResourceConfigHistoryOutput, bool) bool) error {
-	return c.GetResourceConfigHistoryPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetResourceConfigHistoryPagesWithContext same as GetResourceConfigHistoryPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) GetResourceConfigHistoryPagesWithContext(ctx aws.Context, input *GetResourceConfigHistoryInput, fn func(*GetResourceConfigHistoryOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetResourceConfigHistoryRequest) Paginate(opts ...aws.Option) GetResourceConfigHistoryPager {
+	return GetResourceConfigHistoryPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetResourceConfigHistoryInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetResourceConfigHistoryRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetResourceConfigHistoryOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetResourceConfigHistoryOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetResourceConfigHistoryPager ...
+type GetResourceConfigHistoryPager struct {
+	aws.Pager
+}
+
+func (p *GetResourceConfigHistoryPager) CurrentPage() *GetResourceConfigHistoryOutput {
+	return p.Pager.CurrentPage().(*GetResourceConfigHistoryOutput)
 }
 
 const opListDiscoveredResources = "ListDiscoveredResources"

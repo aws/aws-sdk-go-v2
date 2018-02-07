@@ -247,37 +247,33 @@ func (c *ApplicationAutoScaling) DescribeScalableTargetsRequest(input *DescribeS
 //            return pageNum <= 3
 //        })
 //
-func (c *ApplicationAutoScaling) DescribeScalableTargetsPages(input *DescribeScalableTargetsInput, fn func(*DescribeScalableTargetsOutput, bool) bool) error {
-	return c.DescribeScalableTargetsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeScalableTargetsPagesWithContext same as DescribeScalableTargetsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalableTargetsPagesWithContext(ctx aws.Context, input *DescribeScalableTargetsInput, fn func(*DescribeScalableTargetsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeScalableTargetsRequest) Paginate(opts ...aws.Option) DescribeScalableTargetsPager {
+	return DescribeScalableTargetsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeScalableTargetsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeScalableTargetsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeScalableTargetsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeScalableTargetsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeScalableTargetsPager ...
+type DescribeScalableTargetsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeScalableTargetsPager) CurrentPage() *DescribeScalableTargetsOutput {
+	return p.Pager.CurrentPage().(*DescribeScalableTargetsOutput)
 }
 
 const opDescribeScalingActivities = "DescribeScalingActivities"
@@ -360,37 +356,33 @@ func (c *ApplicationAutoScaling) DescribeScalingActivitiesRequest(input *Describ
 //            return pageNum <= 3
 //        })
 //
-func (c *ApplicationAutoScaling) DescribeScalingActivitiesPages(input *DescribeScalingActivitiesInput, fn func(*DescribeScalingActivitiesOutput, bool) bool) error {
-	return c.DescribeScalingActivitiesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeScalingActivitiesPagesWithContext same as DescribeScalingActivitiesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalingActivitiesPagesWithContext(ctx aws.Context, input *DescribeScalingActivitiesInput, fn func(*DescribeScalingActivitiesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) DescribeScalingActivitiesPager {
+	return DescribeScalingActivitiesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeScalingActivitiesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeScalingActivitiesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeScalingActivitiesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeScalingActivitiesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeScalingActivitiesPager ...
+type DescribeScalingActivitiesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeScalingActivitiesPager) CurrentPage() *DescribeScalingActivitiesOutput {
+	return p.Pager.CurrentPage().(*DescribeScalingActivitiesOutput)
 }
 
 const opDescribeScalingPolicies = "DescribeScalingPolicies"
@@ -471,37 +463,33 @@ func (c *ApplicationAutoScaling) DescribeScalingPoliciesRequest(input *DescribeS
 //            return pageNum <= 3
 //        })
 //
-func (c *ApplicationAutoScaling) DescribeScalingPoliciesPages(input *DescribeScalingPoliciesInput, fn func(*DescribeScalingPoliciesOutput, bool) bool) error {
-	return c.DescribeScalingPoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeScalingPoliciesPagesWithContext same as DescribeScalingPoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalingPoliciesPagesWithContext(ctx aws.Context, input *DescribeScalingPoliciesInput, fn func(*DescribeScalingPoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeScalingPoliciesRequest) Paginate(opts ...aws.Option) DescribeScalingPoliciesPager {
+	return DescribeScalingPoliciesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeScalingPoliciesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeScalingPoliciesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeScalingPoliciesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeScalingPoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeScalingPoliciesPager ...
+type DescribeScalingPoliciesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeScalingPoliciesPager) CurrentPage() *DescribeScalingPoliciesOutput {
+	return p.Pager.CurrentPage().(*DescribeScalingPoliciesOutput)
 }
 
 const opDescribeScheduledActions = "DescribeScheduledActions"

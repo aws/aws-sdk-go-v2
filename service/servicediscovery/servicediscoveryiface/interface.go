@@ -9,7 +9,6 @@
 package servicediscoveryiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery"
 )
 
@@ -79,9 +78,6 @@ type ServiceDiscoveryAPI interface {
 
 	GetInstancesHealthStatusRequest(*servicediscovery.GetInstancesHealthStatusInput) servicediscovery.GetInstancesHealthStatusRequest
 
-	GetInstancesHealthStatusPages(*servicediscovery.GetInstancesHealthStatusInput, func(*servicediscovery.GetInstancesHealthStatusOutput, bool) bool) error
-	GetInstancesHealthStatusPagesWithContext(aws.Context, *servicediscovery.GetInstancesHealthStatusInput, func(*servicediscovery.GetInstancesHealthStatusOutput, bool) bool, ...aws.Option) error
-
 	GetNamespaceRequest(*servicediscovery.GetNamespaceInput) servicediscovery.GetNamespaceRequest
 
 	GetOperationRequest(*servicediscovery.GetOperationInput) servicediscovery.GetOperationRequest
@@ -90,23 +86,11 @@ type ServiceDiscoveryAPI interface {
 
 	ListInstancesRequest(*servicediscovery.ListInstancesInput) servicediscovery.ListInstancesRequest
 
-	ListInstancesPages(*servicediscovery.ListInstancesInput, func(*servicediscovery.ListInstancesOutput, bool) bool) error
-	ListInstancesPagesWithContext(aws.Context, *servicediscovery.ListInstancesInput, func(*servicediscovery.ListInstancesOutput, bool) bool, ...aws.Option) error
-
 	ListNamespacesRequest(*servicediscovery.ListNamespacesInput) servicediscovery.ListNamespacesRequest
-
-	ListNamespacesPages(*servicediscovery.ListNamespacesInput, func(*servicediscovery.ListNamespacesOutput, bool) bool) error
-	ListNamespacesPagesWithContext(aws.Context, *servicediscovery.ListNamespacesInput, func(*servicediscovery.ListNamespacesOutput, bool) bool, ...aws.Option) error
 
 	ListOperationsRequest(*servicediscovery.ListOperationsInput) servicediscovery.ListOperationsRequest
 
-	ListOperationsPages(*servicediscovery.ListOperationsInput, func(*servicediscovery.ListOperationsOutput, bool) bool) error
-	ListOperationsPagesWithContext(aws.Context, *servicediscovery.ListOperationsInput, func(*servicediscovery.ListOperationsOutput, bool) bool, ...aws.Option) error
-
 	ListServicesRequest(*servicediscovery.ListServicesInput) servicediscovery.ListServicesRequest
-
-	ListServicesPages(*servicediscovery.ListServicesInput, func(*servicediscovery.ListServicesOutput, bool) bool) error
-	ListServicesPagesWithContext(aws.Context, *servicediscovery.ListServicesInput, func(*servicediscovery.ListServicesOutput, bool) bool, ...aws.Option) error
 
 	RegisterInstanceRequest(*servicediscovery.RegisterInstanceInput) servicediscovery.RegisterInstanceRequest
 

@@ -9,7 +9,6 @@
 package costandusagereportserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
 )
 
@@ -66,9 +65,6 @@ type CostAndUsageReportServiceAPI interface {
 	DeleteReportDefinitionRequest(*costandusagereportservice.DeleteReportDefinitionInput) costandusagereportservice.DeleteReportDefinitionRequest
 
 	DescribeReportDefinitionsRequest(*costandusagereportservice.DescribeReportDefinitionsInput) costandusagereportservice.DescribeReportDefinitionsRequest
-
-	DescribeReportDefinitionsPages(*costandusagereportservice.DescribeReportDefinitionsInput, func(*costandusagereportservice.DescribeReportDefinitionsOutput, bool) bool) error
-	DescribeReportDefinitionsPagesWithContext(aws.Context, *costandusagereportservice.DescribeReportDefinitionsInput, func(*costandusagereportservice.DescribeReportDefinitionsOutput, bool) bool, ...aws.Option) error
 
 	PutReportDefinitionRequest(*costandusagereportservice.PutReportDefinitionInput) costandusagereportservice.PutReportDefinitionRequest
 }

@@ -896,37 +896,33 @@ func (c *LexModelBuildingService) GetBotAliasesRequest(input *GetBotAliasesInput
 //            return pageNum <= 3
 //        })
 //
-func (c *LexModelBuildingService) GetBotAliasesPages(input *GetBotAliasesInput, fn func(*GetBotAliasesOutput, bool) bool) error {
-	return c.GetBotAliasesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetBotAliasesPagesWithContext same as GetBotAliasesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotAliasesPagesWithContext(ctx aws.Context, input *GetBotAliasesInput, fn func(*GetBotAliasesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetBotAliasesRequest) Paginate(opts ...aws.Option) GetBotAliasesPager {
+	return GetBotAliasesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBotAliasesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetBotAliasesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetBotAliasesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBotAliasesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBotAliasesPager ...
+type GetBotAliasesPager struct {
+	aws.Pager
+}
+
+func (p *GetBotAliasesPager) CurrentPage() *GetBotAliasesOutput {
+	return p.Pager.CurrentPage().(*GetBotAliasesOutput)
 }
 
 const opGetBotChannelAssociation = "GetBotChannelAssociation"
@@ -1057,37 +1053,33 @@ func (c *LexModelBuildingService) GetBotChannelAssociationsRequest(input *GetBot
 //            return pageNum <= 3
 //        })
 //
-func (c *LexModelBuildingService) GetBotChannelAssociationsPages(input *GetBotChannelAssociationsInput, fn func(*GetBotChannelAssociationsOutput, bool) bool) error {
-	return c.GetBotChannelAssociationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetBotChannelAssociationsPagesWithContext same as GetBotChannelAssociationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotChannelAssociationsPagesWithContext(ctx aws.Context, input *GetBotChannelAssociationsInput, fn func(*GetBotChannelAssociationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetBotChannelAssociationsRequest) Paginate(opts ...aws.Option) GetBotChannelAssociationsPager {
+	return GetBotChannelAssociationsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBotChannelAssociationsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetBotChannelAssociationsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetBotChannelAssociationsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBotChannelAssociationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBotChannelAssociationsPager ...
+type GetBotChannelAssociationsPager struct {
+	aws.Pager
+}
+
+func (p *GetBotChannelAssociationsPager) CurrentPage() *GetBotChannelAssociationsOutput {
+	return p.Pager.CurrentPage().(*GetBotChannelAssociationsOutput)
 }
 
 const opGetBotVersions = "GetBotVersions"
@@ -1172,37 +1164,33 @@ func (c *LexModelBuildingService) GetBotVersionsRequest(input *GetBotVersionsInp
 //            return pageNum <= 3
 //        })
 //
-func (c *LexModelBuildingService) GetBotVersionsPages(input *GetBotVersionsInput, fn func(*GetBotVersionsOutput, bool) bool) error {
-	return c.GetBotVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetBotVersionsPagesWithContext same as GetBotVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotVersionsPagesWithContext(ctx aws.Context, input *GetBotVersionsInput, fn func(*GetBotVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetBotVersionsRequest) Paginate(opts ...aws.Option) GetBotVersionsPager {
+	return GetBotVersionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBotVersionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetBotVersionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetBotVersionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBotVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBotVersionsPager ...
+type GetBotVersionsPager struct {
+	aws.Pager
+}
+
+func (p *GetBotVersionsPager) CurrentPage() *GetBotVersionsOutput {
+	return p.Pager.CurrentPage().(*GetBotVersionsOutput)
 }
 
 const opGetBots = "GetBots"
@@ -1286,37 +1274,33 @@ func (c *LexModelBuildingService) GetBotsRequest(input *GetBotsInput) GetBotsReq
 //            return pageNum <= 3
 //        })
 //
-func (c *LexModelBuildingService) GetBotsPages(input *GetBotsInput, fn func(*GetBotsOutput, bool) bool) error {
-	return c.GetBotsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetBotsPagesWithContext same as GetBotsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotsPagesWithContext(ctx aws.Context, input *GetBotsInput, fn func(*GetBotsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetBotsRequest) Paginate(opts ...aws.Option) GetBotsPager {
+	return GetBotsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBotsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetBotsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetBotsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBotsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBotsPager ...
+type GetBotsPager struct {
+	aws.Pager
+}
+
+func (p *GetBotsPager) CurrentPage() *GetBotsOutput {
+	return p.Pager.CurrentPage().(*GetBotsOutput)
 }
 
 const opGetBuiltinIntent = "GetBuiltinIntent"
@@ -1444,37 +1428,33 @@ func (c *LexModelBuildingService) GetBuiltinIntentsRequest(input *GetBuiltinInte
 //            return pageNum <= 3
 //        })
 //
-func (c *LexModelBuildingService) GetBuiltinIntentsPages(input *GetBuiltinIntentsInput, fn func(*GetBuiltinIntentsOutput, bool) bool) error {
-	return c.GetBuiltinIntentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetBuiltinIntentsPagesWithContext same as GetBuiltinIntentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinIntentsPagesWithContext(ctx aws.Context, input *GetBuiltinIntentsInput, fn func(*GetBuiltinIntentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetBuiltinIntentsRequest) Paginate(opts ...aws.Option) GetBuiltinIntentsPager {
+	return GetBuiltinIntentsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBuiltinIntentsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetBuiltinIntentsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetBuiltinIntentsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBuiltinIntentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBuiltinIntentsPager ...
+type GetBuiltinIntentsPager struct {
+	aws.Pager
+}
+
+func (p *GetBuiltinIntentsPager) CurrentPage() *GetBuiltinIntentsOutput {
+	return p.Pager.CurrentPage().(*GetBuiltinIntentsOutput)
 }
 
 const opGetBuiltinSlotTypes = "GetBuiltinSlotTypes"
@@ -1554,37 +1534,33 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypesRequest(input *GetBuiltinSl
 //            return pageNum <= 3
 //        })
 //
-func (c *LexModelBuildingService) GetBuiltinSlotTypesPages(input *GetBuiltinSlotTypesInput, fn func(*GetBuiltinSlotTypesOutput, bool) bool) error {
-	return c.GetBuiltinSlotTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetBuiltinSlotTypesPagesWithContext same as GetBuiltinSlotTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinSlotTypesPagesWithContext(ctx aws.Context, input *GetBuiltinSlotTypesInput, fn func(*GetBuiltinSlotTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetBuiltinSlotTypesRequest) Paginate(opts ...aws.Option) GetBuiltinSlotTypesPager {
+	return GetBuiltinSlotTypesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetBuiltinSlotTypesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetBuiltinSlotTypesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetBuiltinSlotTypesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBuiltinSlotTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBuiltinSlotTypesPager ...
+type GetBuiltinSlotTypesPager struct {
+	aws.Pager
+}
+
+func (p *GetBuiltinSlotTypesPager) CurrentPage() *GetBuiltinSlotTypesOutput {
+	return p.Pager.CurrentPage().(*GetBuiltinSlotTypesOutput)
 }
 
 const opGetExport = "GetExport"
@@ -1770,37 +1746,33 @@ func (c *LexModelBuildingService) GetIntentVersionsRequest(input *GetIntentVersi
 //            return pageNum <= 3
 //        })
 //
-func (c *LexModelBuildingService) GetIntentVersionsPages(input *GetIntentVersionsInput, fn func(*GetIntentVersionsOutput, bool) bool) error {
-	return c.GetIntentVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetIntentVersionsPagesWithContext same as GetIntentVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentVersionsPagesWithContext(ctx aws.Context, input *GetIntentVersionsInput, fn func(*GetIntentVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetIntentVersionsRequest) Paginate(opts ...aws.Option) GetIntentVersionsPager {
+	return GetIntentVersionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetIntentVersionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetIntentVersionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetIntentVersionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetIntentVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetIntentVersionsPager ...
+type GetIntentVersionsPager struct {
+	aws.Pager
+}
+
+func (p *GetIntentVersionsPager) CurrentPage() *GetIntentVersionsOutput {
+	return p.Pager.CurrentPage().(*GetIntentVersionsOutput)
 }
 
 const opGetIntents = "GetIntents"
@@ -1883,37 +1855,33 @@ func (c *LexModelBuildingService) GetIntentsRequest(input *GetIntentsInput) GetI
 //            return pageNum <= 3
 //        })
 //
-func (c *LexModelBuildingService) GetIntentsPages(input *GetIntentsInput, fn func(*GetIntentsOutput, bool) bool) error {
-	return c.GetIntentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetIntentsPagesWithContext same as GetIntentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentsPagesWithContext(ctx aws.Context, input *GetIntentsInput, fn func(*GetIntentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetIntentsRequest) Paginate(opts ...aws.Option) GetIntentsPager {
+	return GetIntentsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetIntentsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetIntentsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetIntentsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetIntentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetIntentsPager ...
+type GetIntentsPager struct {
+	aws.Pager
+}
+
+func (p *GetIntentsPager) CurrentPage() *GetIntentsOutput {
+	return p.Pager.CurrentPage().(*GetIntentsOutput)
 }
 
 const opGetSlotType = "GetSlotType"
@@ -2050,37 +2018,33 @@ func (c *LexModelBuildingService) GetSlotTypeVersionsRequest(input *GetSlotTypeV
 //            return pageNum <= 3
 //        })
 //
-func (c *LexModelBuildingService) GetSlotTypeVersionsPages(input *GetSlotTypeVersionsInput, fn func(*GetSlotTypeVersionsOutput, bool) bool) error {
-	return c.GetSlotTypeVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetSlotTypeVersionsPagesWithContext same as GetSlotTypeVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypeVersionsPagesWithContext(ctx aws.Context, input *GetSlotTypeVersionsInput, fn func(*GetSlotTypeVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetSlotTypeVersionsRequest) Paginate(opts ...aws.Option) GetSlotTypeVersionsPager {
+	return GetSlotTypeVersionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetSlotTypeVersionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetSlotTypeVersionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetSlotTypeVersionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetSlotTypeVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetSlotTypeVersionsPager ...
+type GetSlotTypeVersionsPager struct {
+	aws.Pager
+}
+
+func (p *GetSlotTypeVersionsPager) CurrentPage() *GetSlotTypeVersionsOutput {
+	return p.Pager.CurrentPage().(*GetSlotTypeVersionsOutput)
 }
 
 const opGetSlotTypes = "GetSlotTypes"
@@ -2163,37 +2127,33 @@ func (c *LexModelBuildingService) GetSlotTypesRequest(input *GetSlotTypesInput) 
 //            return pageNum <= 3
 //        })
 //
-func (c *LexModelBuildingService) GetSlotTypesPages(input *GetSlotTypesInput, fn func(*GetSlotTypesOutput, bool) bool) error {
-	return c.GetSlotTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetSlotTypesPagesWithContext same as GetSlotTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypesPagesWithContext(ctx aws.Context, input *GetSlotTypesInput, fn func(*GetSlotTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetSlotTypesRequest) Paginate(opts ...aws.Option) GetSlotTypesPager {
+	return GetSlotTypesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetSlotTypesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetSlotTypesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetSlotTypesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetSlotTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetSlotTypesPager ...
+type GetSlotTypesPager struct {
+	aws.Pager
+}
+
+func (p *GetSlotTypesPager) CurrentPage() *GetSlotTypesOutput {
+	return p.Pager.CurrentPage().(*GetSlotTypesOutput)
 }
 
 const opGetUtterancesView = "GetUtterancesView"

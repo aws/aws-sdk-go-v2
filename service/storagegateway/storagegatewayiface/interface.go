@@ -9,7 +9,6 @@
 package storagegatewayiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway"
 )
 
@@ -127,25 +126,13 @@ type StorageGatewayAPI interface {
 
 	DescribeTapeArchivesRequest(*storagegateway.DescribeTapeArchivesInput) storagegateway.DescribeTapeArchivesRequest
 
-	DescribeTapeArchivesPages(*storagegateway.DescribeTapeArchivesInput, func(*storagegateway.DescribeTapeArchivesOutput, bool) bool) error
-	DescribeTapeArchivesPagesWithContext(aws.Context, *storagegateway.DescribeTapeArchivesInput, func(*storagegateway.DescribeTapeArchivesOutput, bool) bool, ...aws.Option) error
-
 	DescribeTapeRecoveryPointsRequest(*storagegateway.DescribeTapeRecoveryPointsInput) storagegateway.DescribeTapeRecoveryPointsRequest
 
-	DescribeTapeRecoveryPointsPages(*storagegateway.DescribeTapeRecoveryPointsInput, func(*storagegateway.DescribeTapeRecoveryPointsOutput, bool) bool) error
-	DescribeTapeRecoveryPointsPagesWithContext(aws.Context, *storagegateway.DescribeTapeRecoveryPointsInput, func(*storagegateway.DescribeTapeRecoveryPointsOutput, bool) bool, ...aws.Option) error
-
 	DescribeTapesRequest(*storagegateway.DescribeTapesInput) storagegateway.DescribeTapesRequest
-
-	DescribeTapesPages(*storagegateway.DescribeTapesInput, func(*storagegateway.DescribeTapesOutput, bool) bool) error
-	DescribeTapesPagesWithContext(aws.Context, *storagegateway.DescribeTapesInput, func(*storagegateway.DescribeTapesOutput, bool) bool, ...aws.Option) error
 
 	DescribeUploadBufferRequest(*storagegateway.DescribeUploadBufferInput) storagegateway.DescribeUploadBufferRequest
 
 	DescribeVTLDevicesRequest(*storagegateway.DescribeVTLDevicesInput) storagegateway.DescribeVTLDevicesRequest
-
-	DescribeVTLDevicesPages(*storagegateway.DescribeVTLDevicesInput, func(*storagegateway.DescribeVTLDevicesOutput, bool) bool) error
-	DescribeVTLDevicesPagesWithContext(aws.Context, *storagegateway.DescribeVTLDevicesInput, func(*storagegateway.DescribeVTLDevicesOutput, bool) bool, ...aws.Option) error
 
 	DescribeWorkingStorageRequest(*storagegateway.DescribeWorkingStorageInput) storagegateway.DescribeWorkingStorageRequest
 
@@ -154,9 +141,6 @@ type StorageGatewayAPI interface {
 	ListFileSharesRequest(*storagegateway.ListFileSharesInput) storagegateway.ListFileSharesRequest
 
 	ListGatewaysRequest(*storagegateway.ListGatewaysInput) storagegateway.ListGatewaysRequest
-
-	ListGatewaysPages(*storagegateway.ListGatewaysInput, func(*storagegateway.ListGatewaysOutput, bool) bool) error
-	ListGatewaysPagesWithContext(aws.Context, *storagegateway.ListGatewaysInput, func(*storagegateway.ListGatewaysOutput, bool) bool, ...aws.Option) error
 
 	ListLocalDisksRequest(*storagegateway.ListLocalDisksInput) storagegateway.ListLocalDisksRequest
 
@@ -169,9 +153,6 @@ type StorageGatewayAPI interface {
 	ListVolumeRecoveryPointsRequest(*storagegateway.ListVolumeRecoveryPointsInput) storagegateway.ListVolumeRecoveryPointsRequest
 
 	ListVolumesRequest(*storagegateway.ListVolumesInput) storagegateway.ListVolumesRequest
-
-	ListVolumesPages(*storagegateway.ListVolumesInput, func(*storagegateway.ListVolumesOutput, bool) bool) error
-	ListVolumesPagesWithContext(aws.Context, *storagegateway.ListVolumesInput, func(*storagegateway.ListVolumesOutput, bool) bool, ...aws.Option) error
 
 	NotifyWhenUploadedRequest(*storagegateway.NotifyWhenUploadedInput) storagegateway.NotifyWhenUploadedRequest
 

@@ -815,37 +815,33 @@ func (c *ELBV2) DescribeListenersRequest(input *DescribeListenersInput) Describe
 //            return pageNum <= 3
 //        })
 //
-func (c *ELBV2) DescribeListenersPages(input *DescribeListenersInput, fn func(*DescribeListenersOutput, bool) bool) error {
-	return c.DescribeListenersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeListenersPagesWithContext same as DescribeListenersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELBV2) DescribeListenersPagesWithContext(ctx aws.Context, input *DescribeListenersInput, fn func(*DescribeListenersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeListenersRequest) Paginate(opts ...aws.Option) DescribeListenersPager {
+	return DescribeListenersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeListenersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeListenersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeListenersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeListenersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeListenersPager ...
+type DescribeListenersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeListenersPager) CurrentPage() *DescribeListenersOutput {
+	return p.Pager.CurrentPage().(*DescribeListenersOutput)
 }
 
 const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
@@ -973,37 +969,33 @@ func (c *ELBV2) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) 
 //            return pageNum <= 3
 //        })
 //
-func (c *ELBV2) DescribeLoadBalancersPages(input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool) error {
-	return c.DescribeLoadBalancersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeLoadBalancersPagesWithContext same as DescribeLoadBalancersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELBV2) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeLoadBalancersRequest) Paginate(opts ...aws.Option) DescribeLoadBalancersPager {
+	return DescribeLoadBalancersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeLoadBalancersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeLoadBalancersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeLoadBalancersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeLoadBalancersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeLoadBalancersPager ...
+type DescribeLoadBalancersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeLoadBalancersPager) CurrentPage() *DescribeLoadBalancersOutput {
+	return p.Pager.CurrentPage().(*DescribeLoadBalancersOutput)
 }
 
 const opDescribeRules = "DescribeRules"
@@ -1286,37 +1278,33 @@ func (c *ELBV2) DescribeTargetGroupsRequest(input *DescribeTargetGroupsInput) De
 //            return pageNum <= 3
 //        })
 //
-func (c *ELBV2) DescribeTargetGroupsPages(input *DescribeTargetGroupsInput, fn func(*DescribeTargetGroupsOutput, bool) bool) error {
-	return c.DescribeTargetGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeTargetGroupsPagesWithContext same as DescribeTargetGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELBV2) DescribeTargetGroupsPagesWithContext(ctx aws.Context, input *DescribeTargetGroupsInput, fn func(*DescribeTargetGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeTargetGroupsRequest) Paginate(opts ...aws.Option) DescribeTargetGroupsPager {
+	return DescribeTargetGroupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeTargetGroupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeTargetGroupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeTargetGroupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeTargetGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeTargetGroupsPager ...
+type DescribeTargetGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeTargetGroupsPager) CurrentPage() *DescribeTargetGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeTargetGroupsOutput)
 }
 
 const opDescribeTargetHealth = "DescribeTargetHealth"

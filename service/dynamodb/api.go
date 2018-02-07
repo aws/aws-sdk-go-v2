@@ -132,37 +132,33 @@ func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) BatchGetItemReq
 //            return pageNum <= 3
 //        })
 //
-func (c *DynamoDB) BatchGetItemPages(input *BatchGetItemInput, fn func(*BatchGetItemOutput, bool) bool) error {
-	return c.BatchGetItemPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// BatchGetItemPagesWithContext same as BatchGetItemPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) BatchGetItemPagesWithContext(ctx aws.Context, input *BatchGetItemInput, fn func(*BatchGetItemOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *BatchGetItemRequest) Paginate(opts ...aws.Option) BatchGetItemPager {
+	return BatchGetItemPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *BatchGetItemInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.BatchGetItemRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output BatchGetItemOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*BatchGetItemOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// BatchGetItemPager ...
+type BatchGetItemPager struct {
+	aws.Pager
+}
+
+func (p *BatchGetItemPager) CurrentPage() *BatchGetItemOutput {
+	return p.Pager.CurrentPage().(*BatchGetItemOutput)
 }
 
 const opBatchWriteItem = "BatchWriteItem"
@@ -1267,37 +1263,33 @@ func (c *DynamoDB) ListTablesRequest(input *ListTablesInput) ListTablesRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *DynamoDB) ListTablesPages(input *ListTablesInput, fn func(*ListTablesOutput, bool) bool) error {
-	return c.ListTablesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListTablesPagesWithContext same as ListTablesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) ListTablesPagesWithContext(ctx aws.Context, input *ListTablesInput, fn func(*ListTablesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListTablesRequest) Paginate(opts ...aws.Option) ListTablesPager {
+	return ListTablesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTablesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListTablesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListTablesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTablesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTablesPager ...
+type ListTablesPager struct {
+	aws.Pager
+}
+
+func (p *ListTablesPager) CurrentPage() *ListTablesOutput {
+	return p.Pager.CurrentPage().(*ListTablesOutput)
 }
 
 const opListTagsOfResource = "ListTagsOfResource"
@@ -1564,37 +1556,33 @@ func (c *DynamoDB) QueryRequest(input *QueryInput) QueryRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *DynamoDB) QueryPages(input *QueryInput, fn func(*QueryOutput, bool) bool) error {
-	return c.QueryPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// QueryPagesWithContext same as QueryPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) QueryPagesWithContext(ctx aws.Context, input *QueryInput, fn func(*QueryOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *QueryRequest) Paginate(opts ...aws.Option) QueryPager {
+	return QueryPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *QueryInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.QueryRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output QueryOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*QueryOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// QueryPager ...
+type QueryPager struct {
+	aws.Pager
+}
+
+func (p *QueryPager) CurrentPage() *QueryOutput {
+	return p.Pager.CurrentPage().(*QueryOutput)
 }
 
 const opRestoreTableFromBackup = "RestoreTableFromBackup"
@@ -1760,37 +1748,33 @@ func (c *DynamoDB) ScanRequest(input *ScanInput) ScanRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *DynamoDB) ScanPages(input *ScanInput, fn func(*ScanOutput, bool) bool) error {
-	return c.ScanPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ScanPagesWithContext same as ScanPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DynamoDB) ScanPagesWithContext(ctx aws.Context, input *ScanInput, fn func(*ScanOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ScanRequest) Paginate(opts ...aws.Option) ScanPager {
+	return ScanPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ScanInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ScanRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ScanOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ScanOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ScanPager ...
+type ScanPager struct {
+	aws.Pager
+}
+
+func (p *ScanPager) CurrentPage() *ScanOutput {
+	return p.Pager.CurrentPage().(*ScanOutput)
 }
 
 const opTagResource = "TagResource"

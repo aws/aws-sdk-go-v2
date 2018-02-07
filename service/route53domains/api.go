@@ -656,37 +656,33 @@ func (c *Route53Domains) ListDomainsRequest(input *ListDomainsInput) ListDomains
 //            return pageNum <= 3
 //        })
 //
-func (c *Route53Domains) ListDomainsPages(input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool) error {
-	return c.ListDomainsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListDomainsPagesWithContext same as ListDomainsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53Domains) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
+	return ListDomainsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDomainsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListDomainsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListDomainsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDomainsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListDomainsPager ...
+type ListDomainsPager struct {
+	aws.Pager
+}
+
+func (p *ListDomainsPager) CurrentPage() *ListDomainsOutput {
+	return p.Pager.CurrentPage().(*ListDomainsOutput)
 }
 
 const opListOperations = "ListOperations"
@@ -761,37 +757,33 @@ func (c *Route53Domains) ListOperationsRequest(input *ListOperationsInput) ListO
 //            return pageNum <= 3
 //        })
 //
-func (c *Route53Domains) ListOperationsPages(input *ListOperationsInput, fn func(*ListOperationsOutput, bool) bool) error {
-	return c.ListOperationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListOperationsPagesWithContext same as ListOperationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Route53Domains) ListOperationsPagesWithContext(ctx aws.Context, input *ListOperationsInput, fn func(*ListOperationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager {
+	return ListOperationsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOperationsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListOperationsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListOperationsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListOperationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListOperationsPager ...
+type ListOperationsPager struct {
+	aws.Pager
+}
+
+func (p *ListOperationsPager) CurrentPage() *ListOperationsOutput {
+	return p.Pager.CurrentPage().(*ListOperationsOutput)
 }
 
 const opListTagsForDomain = "ListTagsForDomain"

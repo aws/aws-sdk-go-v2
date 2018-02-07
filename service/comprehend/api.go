@@ -531,37 +531,33 @@ func (c *Comprehend) ListTopicsDetectionJobsRequest(input *ListTopicsDetectionJo
 //            return pageNum <= 3
 //        })
 //
-func (c *Comprehend) ListTopicsDetectionJobsPages(input *ListTopicsDetectionJobsInput, fn func(*ListTopicsDetectionJobsOutput, bool) bool) error {
-	return c.ListTopicsDetectionJobsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListTopicsDetectionJobsPagesWithContext same as ListTopicsDetectionJobsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Comprehend) ListTopicsDetectionJobsPagesWithContext(ctx aws.Context, input *ListTopicsDetectionJobsInput, fn func(*ListTopicsDetectionJobsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListTopicsDetectionJobsRequest) Paginate(opts ...aws.Option) ListTopicsDetectionJobsPager {
+	return ListTopicsDetectionJobsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTopicsDetectionJobsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListTopicsDetectionJobsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListTopicsDetectionJobsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTopicsDetectionJobsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTopicsDetectionJobsPager ...
+type ListTopicsDetectionJobsPager struct {
+	aws.Pager
+}
+
+func (p *ListTopicsDetectionJobsPager) CurrentPage() *ListTopicsDetectionJobsOutput {
+	return p.Pager.CurrentPage().(*ListTopicsDetectionJobsOutput)
 }
 
 const opStartTopicsDetectionJob = "StartTopicsDetectionJob"

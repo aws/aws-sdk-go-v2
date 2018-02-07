@@ -2220,37 +2220,33 @@ func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInp
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeDBEngineVersionsPages(input *DescribeDBEngineVersionsInput, fn func(*DescribeDBEngineVersionsOutput, bool) bool) error {
-	return c.DescribeDBEngineVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDBEngineVersionsPagesWithContext same as DescribeDBEngineVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBEngineVersionsPagesWithContext(ctx aws.Context, input *DescribeDBEngineVersionsInput, fn func(*DescribeDBEngineVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDBEngineVersionsRequest) Paginate(opts ...aws.Option) DescribeDBEngineVersionsPager {
+	return DescribeDBEngineVersionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBEngineVersionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDBEngineVersionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDBEngineVersionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBEngineVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDBEngineVersionsPager ...
+type DescribeDBEngineVersionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDBEngineVersionsPager) CurrentPage() *DescribeDBEngineVersionsOutput {
+	return p.Pager.CurrentPage().(*DescribeDBEngineVersionsOutput)
 }
 
 const opDescribeDBInstances = "DescribeDBInstances"
@@ -2325,37 +2321,33 @@ func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) Descri
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeDBInstancesPages(input *DescribeDBInstancesInput, fn func(*DescribeDBInstancesOutput, bool) bool) error {
-	return c.DescribeDBInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDBInstancesPagesWithContext same as DescribeDBInstancesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBInstancesPagesWithContext(ctx aws.Context, input *DescribeDBInstancesInput, fn func(*DescribeDBInstancesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDBInstancesRequest) Paginate(opts ...aws.Option) DescribeDBInstancesPager {
+	return DescribeDBInstancesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBInstancesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDBInstancesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDBInstancesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBInstancesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDBInstancesPager ...
+type DescribeDBInstancesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDBInstancesPager) CurrentPage() *DescribeDBInstancesOutput {
+	return p.Pager.CurrentPage().(*DescribeDBInstancesOutput)
 }
 
 const opDescribeDBLogFiles = "DescribeDBLogFiles"
@@ -2430,37 +2422,33 @@ func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) Describe
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeDBLogFilesPages(input *DescribeDBLogFilesInput, fn func(*DescribeDBLogFilesOutput, bool) bool) error {
-	return c.DescribeDBLogFilesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDBLogFilesPagesWithContext same as DescribeDBLogFilesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBLogFilesPagesWithContext(ctx aws.Context, input *DescribeDBLogFilesInput, fn func(*DescribeDBLogFilesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDBLogFilesRequest) Paginate(opts ...aws.Option) DescribeDBLogFilesPager {
+	return DescribeDBLogFilesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBLogFilesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDBLogFilesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDBLogFilesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBLogFilesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDBLogFilesPager ...
+type DescribeDBLogFilesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDBLogFilesPager) CurrentPage() *DescribeDBLogFilesOutput {
+	return p.Pager.CurrentPage().(*DescribeDBLogFilesOutput)
 }
 
 const opDescribeDBParameterGroups = "DescribeDBParameterGroups"
@@ -2537,37 +2525,33 @@ func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsI
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeDBParameterGroupsPages(input *DescribeDBParameterGroupsInput, fn func(*DescribeDBParameterGroupsOutput, bool) bool) error {
-	return c.DescribeDBParameterGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDBParameterGroupsPagesWithContext same as DescribeDBParameterGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBParameterGroupsPagesWithContext(ctx aws.Context, input *DescribeDBParameterGroupsInput, fn func(*DescribeDBParameterGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDBParameterGroupsRequest) Paginate(opts ...aws.Option) DescribeDBParameterGroupsPager {
+	return DescribeDBParameterGroupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBParameterGroupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDBParameterGroupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDBParameterGroupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBParameterGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDBParameterGroupsPager ...
+type DescribeDBParameterGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDBParameterGroupsPager) CurrentPage() *DescribeDBParameterGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeDBParameterGroupsOutput)
 }
 
 const opDescribeDBParameters = "DescribeDBParameters"
@@ -2642,37 +2626,33 @@ func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) Desc
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeDBParametersPages(input *DescribeDBParametersInput, fn func(*DescribeDBParametersOutput, bool) bool) error {
-	return c.DescribeDBParametersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDBParametersPagesWithContext same as DescribeDBParametersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBParametersPagesWithContext(ctx aws.Context, input *DescribeDBParametersInput, fn func(*DescribeDBParametersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDBParametersRequest) Paginate(opts ...aws.Option) DescribeDBParametersPager {
+	return DescribeDBParametersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBParametersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDBParametersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDBParametersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBParametersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDBParametersPager ...
+type DescribeDBParametersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDBParametersPager) CurrentPage() *DescribeDBParametersOutput {
+	return p.Pager.CurrentPage().(*DescribeDBParametersOutput)
 }
 
 const opDescribeDBSecurityGroups = "DescribeDBSecurityGroups"
@@ -2749,37 +2729,33 @@ func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInp
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeDBSecurityGroupsPages(input *DescribeDBSecurityGroupsInput, fn func(*DescribeDBSecurityGroupsOutput, bool) bool) error {
-	return c.DescribeDBSecurityGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDBSecurityGroupsPagesWithContext same as DescribeDBSecurityGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBSecurityGroupsPagesWithContext(ctx aws.Context, input *DescribeDBSecurityGroupsInput, fn func(*DescribeDBSecurityGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDBSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeDBSecurityGroupsPager {
+	return DescribeDBSecurityGroupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBSecurityGroupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDBSecurityGroupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDBSecurityGroupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBSecurityGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDBSecurityGroupsPager ...
+type DescribeDBSecurityGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDBSecurityGroupsPager) CurrentPage() *DescribeDBSecurityGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeDBSecurityGroupsOutput)
 }
 
 const opDescribeDBSnapshotAttributes = "DescribeDBSnapshotAttributes"
@@ -2914,37 +2890,33 @@ func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) Descri
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeDBSnapshotsPages(input *DescribeDBSnapshotsInput, fn func(*DescribeDBSnapshotsOutput, bool) bool) error {
-	return c.DescribeDBSnapshotsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDBSnapshotsPagesWithContext same as DescribeDBSnapshotsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBSnapshotsPagesWithContext(ctx aws.Context, input *DescribeDBSnapshotsInput, fn func(*DescribeDBSnapshotsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDBSnapshotsRequest) Paginate(opts ...aws.Option) DescribeDBSnapshotsPager {
+	return DescribeDBSnapshotsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBSnapshotsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDBSnapshotsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDBSnapshotsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBSnapshotsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDBSnapshotsPager ...
+type DescribeDBSnapshotsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDBSnapshotsPager) CurrentPage() *DescribeDBSnapshotsOutput {
+	return p.Pager.CurrentPage().(*DescribeDBSnapshotsOutput)
 }
 
 const opDescribeDBSubnetGroups = "DescribeDBSubnetGroups"
@@ -3022,37 +2994,33 @@ func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) 
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeDBSubnetGroupsPages(input *DescribeDBSubnetGroupsInput, fn func(*DescribeDBSubnetGroupsOutput, bool) bool) error {
-	return c.DescribeDBSubnetGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDBSubnetGroupsPagesWithContext same as DescribeDBSubnetGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeDBSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeDBSubnetGroupsInput, fn func(*DescribeDBSubnetGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDBSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeDBSubnetGroupsPager {
+	return DescribeDBSubnetGroupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDBSubnetGroupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDBSubnetGroupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDBSubnetGroupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDBSubnetGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDBSubnetGroupsPager ...
+type DescribeDBSubnetGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDBSubnetGroupsPager) CurrentPage() *DescribeDBSubnetGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeDBSubnetGroupsOutput)
 }
 
 const opDescribeEngineDefaultClusterParameters = "DescribeEngineDefaultClusterParameters"
@@ -3181,37 +3149,33 @@ func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaul
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeEngineDefaultParametersPages(input *DescribeEngineDefaultParametersInput, fn func(*DescribeEngineDefaultParametersOutput, bool) bool) error {
-	return c.DescribeEngineDefaultParametersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEngineDefaultParametersPagesWithContext same as DescribeEngineDefaultParametersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, fn func(*DescribeEngineDefaultParametersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEngineDefaultParametersRequest) Paginate(opts ...aws.Option) DescribeEngineDefaultParametersPager {
+	return DescribeEngineDefaultParametersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEngineDefaultParametersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEngineDefaultParametersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEngineDefaultParametersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEngineDefaultParametersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEngineDefaultParametersPager ...
+type DescribeEngineDefaultParametersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEngineDefaultParametersPager) CurrentPage() *DescribeEngineDefaultParametersOutput {
+	return p.Pager.CurrentPage().(*DescribeEngineDefaultParametersOutput)
 }
 
 const opDescribeEventCategories = "DescribeEventCategories"
@@ -3342,37 +3306,33 @@ func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscription
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeEventSubscriptionsPages(input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool) error {
-	return c.DescribeEventSubscriptionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEventSubscriptionsPagesWithContext same as DescribeEventSubscriptionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) DescribeEventSubscriptionsPager {
+	return DescribeEventSubscriptionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventSubscriptionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEventSubscriptionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEventSubscriptionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventSubscriptionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventSubscriptionsPager ...
+type DescribeEventSubscriptionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventSubscriptionsPager) CurrentPage() *DescribeEventSubscriptionsOutput {
+	return p.Pager.CurrentPage().(*DescribeEventSubscriptionsOutput)
 }
 
 const opDescribeEvents = "DescribeEvents"
@@ -3451,37 +3411,33 @@ func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRe
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeEventsPages(input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool) error {
-	return c.DescribeEventsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEventsPagesWithContext same as DescribeEventsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
+	return DescribeEventsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEventsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEventsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEventsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventsPager ...
+type DescribeEventsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventsPager) CurrentPage() *DescribeEventsOutput {
+	return p.Pager.CurrentPage().(*DescribeEventsOutput)
 }
 
 const opDescribeOptionGroupOptions = "DescribeOptionGroupOptions"
@@ -3556,37 +3512,33 @@ func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOption
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeOptionGroupOptionsPages(input *DescribeOptionGroupOptionsInput, fn func(*DescribeOptionGroupOptionsOutput, bool) bool) error {
-	return c.DescribeOptionGroupOptionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeOptionGroupOptionsPagesWithContext same as DescribeOptionGroupOptionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeOptionGroupOptionsPagesWithContext(ctx aws.Context, input *DescribeOptionGroupOptionsInput, fn func(*DescribeOptionGroupOptionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeOptionGroupOptionsRequest) Paginate(opts ...aws.Option) DescribeOptionGroupOptionsPager {
+	return DescribeOptionGroupOptionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeOptionGroupOptionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeOptionGroupOptionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeOptionGroupOptionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeOptionGroupOptionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeOptionGroupOptionsPager ...
+type DescribeOptionGroupOptionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeOptionGroupOptionsPager) CurrentPage() *DescribeOptionGroupOptionsOutput {
+	return p.Pager.CurrentPage().(*DescribeOptionGroupOptionsOutput)
 }
 
 const opDescribeOptionGroups = "DescribeOptionGroups"
@@ -3661,37 +3613,33 @@ func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) Desc
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeOptionGroupsPages(input *DescribeOptionGroupsInput, fn func(*DescribeOptionGroupsOutput, bool) bool) error {
-	return c.DescribeOptionGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeOptionGroupsPagesWithContext same as DescribeOptionGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeOptionGroupsPagesWithContext(ctx aws.Context, input *DescribeOptionGroupsInput, fn func(*DescribeOptionGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeOptionGroupsRequest) Paginate(opts ...aws.Option) DescribeOptionGroupsPager {
+	return DescribeOptionGroupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeOptionGroupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeOptionGroupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeOptionGroupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeOptionGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeOptionGroupsPager ...
+type DescribeOptionGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeOptionGroupsPager) CurrentPage() *DescribeOptionGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeOptionGroupsOutput)
 }
 
 const opDescribeOrderableDBInstanceOptions = "DescribeOrderableDBInstanceOptions"
@@ -3766,37 +3714,33 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderable
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeOrderableDBInstanceOptionsPages(input *DescribeOrderableDBInstanceOptionsInput, fn func(*DescribeOrderableDBInstanceOptionsOutput, bool) bool) error {
-	return c.DescribeOrderableDBInstanceOptionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeOrderableDBInstanceOptionsPagesWithContext same as DescribeOrderableDBInstanceOptionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeOrderableDBInstanceOptionsPagesWithContext(ctx aws.Context, input *DescribeOrderableDBInstanceOptionsInput, fn func(*DescribeOrderableDBInstanceOptionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeOrderableDBInstanceOptionsRequest) Paginate(opts ...aws.Option) DescribeOrderableDBInstanceOptionsPager {
+	return DescribeOrderableDBInstanceOptionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeOrderableDBInstanceOptionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeOrderableDBInstanceOptionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeOrderableDBInstanceOptionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeOrderableDBInstanceOptionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeOrderableDBInstanceOptionsPager ...
+type DescribeOrderableDBInstanceOptionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeOrderableDBInstanceOptionsPager) CurrentPage() *DescribeOrderableDBInstanceOptionsOutput {
+	return p.Pager.CurrentPage().(*DescribeOrderableDBInstanceOptionsOutput)
 }
 
 const opDescribePendingMaintenanceActions = "DescribePendingMaintenanceActions"
@@ -3922,37 +3866,33 @@ func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstan
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeReservedDBInstancesPages(input *DescribeReservedDBInstancesInput, fn func(*DescribeReservedDBInstancesOutput, bool) bool) error {
-	return c.DescribeReservedDBInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeReservedDBInstancesPagesWithContext same as DescribeReservedDBInstancesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeReservedDBInstancesPagesWithContext(ctx aws.Context, input *DescribeReservedDBInstancesInput, fn func(*DescribeReservedDBInstancesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeReservedDBInstancesRequest) Paginate(opts ...aws.Option) DescribeReservedDBInstancesPager {
+	return DescribeReservedDBInstancesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReservedDBInstancesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeReservedDBInstancesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeReservedDBInstancesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReservedDBInstancesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReservedDBInstancesPager ...
+type DescribeReservedDBInstancesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReservedDBInstancesPager) CurrentPage() *DescribeReservedDBInstancesOutput {
+	return p.Pager.CurrentPage().(*DescribeReservedDBInstancesOutput)
 }
 
 const opDescribeReservedDBInstancesOfferings = "DescribeReservedDBInstancesOfferings"
@@ -4027,37 +3967,33 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReserve
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DescribeReservedDBInstancesOfferingsPages(input *DescribeReservedDBInstancesOfferingsInput, fn func(*DescribeReservedDBInstancesOfferingsOutput, bool) bool) error {
-	return c.DescribeReservedDBInstancesOfferingsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeReservedDBInstancesOfferingsPagesWithContext same as DescribeReservedDBInstancesOfferingsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DescribeReservedDBInstancesOfferingsPagesWithContext(ctx aws.Context, input *DescribeReservedDBInstancesOfferingsInput, fn func(*DescribeReservedDBInstancesOfferingsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeReservedDBInstancesOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedDBInstancesOfferingsPager {
+	return DescribeReservedDBInstancesOfferingsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeReservedDBInstancesOfferingsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeReservedDBInstancesOfferingsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeReservedDBInstancesOfferingsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReservedDBInstancesOfferingsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReservedDBInstancesOfferingsPager ...
+type DescribeReservedDBInstancesOfferingsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReservedDBInstancesOfferingsPager) CurrentPage() *DescribeReservedDBInstancesOfferingsOutput {
+	return p.Pager.CurrentPage().(*DescribeReservedDBInstancesOfferingsOutput)
 }
 
 const opDescribeSourceRegions = "DescribeSourceRegions"
@@ -4234,37 +4170,33 @@ func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInp
 //            return pageNum <= 3
 //        })
 //
-func (c *RDS) DownloadDBLogFilePortionPages(input *DownloadDBLogFilePortionInput, fn func(*DownloadDBLogFilePortionOutput, bool) bool) error {
-	return c.DownloadDBLogFilePortionPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DownloadDBLogFilePortionPagesWithContext same as DownloadDBLogFilePortionPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *RDS) DownloadDBLogFilePortionPagesWithContext(ctx aws.Context, input *DownloadDBLogFilePortionInput, fn func(*DownloadDBLogFilePortionOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DownloadDBLogFilePortionRequest) Paginate(opts ...aws.Option) DownloadDBLogFilePortionPager {
+	return DownloadDBLogFilePortionPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DownloadDBLogFilePortionInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DownloadDBLogFilePortionRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DownloadDBLogFilePortionOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DownloadDBLogFilePortionOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DownloadDBLogFilePortionPager ...
+type DownloadDBLogFilePortionPager struct {
+	aws.Pager
+}
+
+func (p *DownloadDBLogFilePortionPager) CurrentPage() *DownloadDBLogFilePortionOutput {
+	return p.Pager.CurrentPage().(*DownloadDBLogFilePortionOutput)
 }
 
 const opFailoverDBCluster = "FailoverDBCluster"

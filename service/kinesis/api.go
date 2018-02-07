@@ -426,37 +426,33 @@ func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) DescribeStre
 //            return pageNum <= 3
 //        })
 //
-func (c *Kinesis) DescribeStreamPages(input *DescribeStreamInput, fn func(*DescribeStreamOutput, bool) bool) error {
-	return c.DescribeStreamPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeStreamPagesWithContext same as DescribeStreamPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) DescribeStreamPagesWithContext(ctx aws.Context, input *DescribeStreamInput, fn func(*DescribeStreamOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeStreamRequest) Paginate(opts ...aws.Option) DescribeStreamPager {
+	return DescribeStreamPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeStreamInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeStreamRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeStreamOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeStreamOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeStreamPager ...
+type DescribeStreamPager struct {
+	aws.Pager
+}
+
+func (p *DescribeStreamPager) CurrentPage() *DescribeStreamOutput {
+	return p.Pager.CurrentPage().(*DescribeStreamOutput)
 }
 
 const opDescribeStreamSummary = "DescribeStreamSummary"
@@ -946,37 +942,33 @@ func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest
 //            return pageNum <= 3
 //        })
 //
-func (c *Kinesis) ListStreamsPages(input *ListStreamsInput, fn func(*ListStreamsOutput, bool) bool) error {
-	return c.ListStreamsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListStreamsPagesWithContext same as ListStreamsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) ListStreamsPagesWithContext(ctx aws.Context, input *ListStreamsInput, fn func(*ListStreamsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListStreamsRequest) Paginate(opts ...aws.Option) ListStreamsPager {
+	return ListStreamsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListStreamsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListStreamsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListStreamsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListStreamsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListStreamsPager ...
+type ListStreamsPager struct {
+	aws.Pager
+}
+
+func (p *ListStreamsPager) CurrentPage() *ListStreamsOutput {
+	return p.Pager.CurrentPage().(*ListStreamsOutput)
 }
 
 const opListTagsForStream = "ListTagsForStream"

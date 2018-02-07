@@ -9,7 +9,6 @@
 package mediapackageiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage"
 )
 
@@ -77,13 +76,7 @@ type MediaPackageAPI interface {
 
 	ListChannelsRequest(*mediapackage.ListChannelsInput) mediapackage.ListChannelsRequest
 
-	ListChannelsPages(*mediapackage.ListChannelsInput, func(*mediapackage.ListChannelsOutput, bool) bool) error
-	ListChannelsPagesWithContext(aws.Context, *mediapackage.ListChannelsInput, func(*mediapackage.ListChannelsOutput, bool) bool, ...aws.Option) error
-
 	ListOriginEndpointsRequest(*mediapackage.ListOriginEndpointsInput) mediapackage.ListOriginEndpointsRequest
-
-	ListOriginEndpointsPages(*mediapackage.ListOriginEndpointsInput, func(*mediapackage.ListOriginEndpointsOutput, bool) bool) error
-	ListOriginEndpointsPagesWithContext(aws.Context, *mediapackage.ListOriginEndpointsInput, func(*mediapackage.ListOriginEndpointsOutput, bool) bool, ...aws.Option) error
 
 	RotateChannelCredentialsRequest(*mediapackage.RotateChannelCredentialsInput) mediapackage.RotateChannelCredentialsRequest
 

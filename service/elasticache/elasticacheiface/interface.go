@@ -95,63 +95,27 @@ type ElastiCacheAPI interface {
 
 	DescribeCacheClustersRequest(*elasticache.DescribeCacheClustersInput) elasticache.DescribeCacheClustersRequest
 
-	DescribeCacheClustersPages(*elasticache.DescribeCacheClustersInput, func(*elasticache.DescribeCacheClustersOutput, bool) bool) error
-	DescribeCacheClustersPagesWithContext(aws.Context, *elasticache.DescribeCacheClustersInput, func(*elasticache.DescribeCacheClustersOutput, bool) bool, ...aws.Option) error
-
 	DescribeCacheEngineVersionsRequest(*elasticache.DescribeCacheEngineVersionsInput) elasticache.DescribeCacheEngineVersionsRequest
-
-	DescribeCacheEngineVersionsPages(*elasticache.DescribeCacheEngineVersionsInput, func(*elasticache.DescribeCacheEngineVersionsOutput, bool) bool) error
-	DescribeCacheEngineVersionsPagesWithContext(aws.Context, *elasticache.DescribeCacheEngineVersionsInput, func(*elasticache.DescribeCacheEngineVersionsOutput, bool) bool, ...aws.Option) error
 
 	DescribeCacheParameterGroupsRequest(*elasticache.DescribeCacheParameterGroupsInput) elasticache.DescribeCacheParameterGroupsRequest
 
-	DescribeCacheParameterGroupsPages(*elasticache.DescribeCacheParameterGroupsInput, func(*elasticache.DescribeCacheParameterGroupsOutput, bool) bool) error
-	DescribeCacheParameterGroupsPagesWithContext(aws.Context, *elasticache.DescribeCacheParameterGroupsInput, func(*elasticache.DescribeCacheParameterGroupsOutput, bool) bool, ...aws.Option) error
-
 	DescribeCacheParametersRequest(*elasticache.DescribeCacheParametersInput) elasticache.DescribeCacheParametersRequest
-
-	DescribeCacheParametersPages(*elasticache.DescribeCacheParametersInput, func(*elasticache.DescribeCacheParametersOutput, bool) bool) error
-	DescribeCacheParametersPagesWithContext(aws.Context, *elasticache.DescribeCacheParametersInput, func(*elasticache.DescribeCacheParametersOutput, bool) bool, ...aws.Option) error
 
 	DescribeCacheSecurityGroupsRequest(*elasticache.DescribeCacheSecurityGroupsInput) elasticache.DescribeCacheSecurityGroupsRequest
 
-	DescribeCacheSecurityGroupsPages(*elasticache.DescribeCacheSecurityGroupsInput, func(*elasticache.DescribeCacheSecurityGroupsOutput, bool) bool) error
-	DescribeCacheSecurityGroupsPagesWithContext(aws.Context, *elasticache.DescribeCacheSecurityGroupsInput, func(*elasticache.DescribeCacheSecurityGroupsOutput, bool) bool, ...aws.Option) error
-
 	DescribeCacheSubnetGroupsRequest(*elasticache.DescribeCacheSubnetGroupsInput) elasticache.DescribeCacheSubnetGroupsRequest
-
-	DescribeCacheSubnetGroupsPages(*elasticache.DescribeCacheSubnetGroupsInput, func(*elasticache.DescribeCacheSubnetGroupsOutput, bool) bool) error
-	DescribeCacheSubnetGroupsPagesWithContext(aws.Context, *elasticache.DescribeCacheSubnetGroupsInput, func(*elasticache.DescribeCacheSubnetGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeEngineDefaultParametersRequest(*elasticache.DescribeEngineDefaultParametersInput) elasticache.DescribeEngineDefaultParametersRequest
 
-	DescribeEngineDefaultParametersPages(*elasticache.DescribeEngineDefaultParametersInput, func(*elasticache.DescribeEngineDefaultParametersOutput, bool) bool) error
-	DescribeEngineDefaultParametersPagesWithContext(aws.Context, *elasticache.DescribeEngineDefaultParametersInput, func(*elasticache.DescribeEngineDefaultParametersOutput, bool) bool, ...aws.Option) error
-
 	DescribeEventsRequest(*elasticache.DescribeEventsInput) elasticache.DescribeEventsRequest
-
-	DescribeEventsPages(*elasticache.DescribeEventsInput, func(*elasticache.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *elasticache.DescribeEventsInput, func(*elasticache.DescribeEventsOutput, bool) bool, ...aws.Option) error
 
 	DescribeReplicationGroupsRequest(*elasticache.DescribeReplicationGroupsInput) elasticache.DescribeReplicationGroupsRequest
 
-	DescribeReplicationGroupsPages(*elasticache.DescribeReplicationGroupsInput, func(*elasticache.DescribeReplicationGroupsOutput, bool) bool) error
-	DescribeReplicationGroupsPagesWithContext(aws.Context, *elasticache.DescribeReplicationGroupsInput, func(*elasticache.DescribeReplicationGroupsOutput, bool) bool, ...aws.Option) error
-
 	DescribeReservedCacheNodesRequest(*elasticache.DescribeReservedCacheNodesInput) elasticache.DescribeReservedCacheNodesRequest
-
-	DescribeReservedCacheNodesPages(*elasticache.DescribeReservedCacheNodesInput, func(*elasticache.DescribeReservedCacheNodesOutput, bool) bool) error
-	DescribeReservedCacheNodesPagesWithContext(aws.Context, *elasticache.DescribeReservedCacheNodesInput, func(*elasticache.DescribeReservedCacheNodesOutput, bool) bool, ...aws.Option) error
 
 	DescribeReservedCacheNodesOfferingsRequest(*elasticache.DescribeReservedCacheNodesOfferingsInput) elasticache.DescribeReservedCacheNodesOfferingsRequest
 
-	DescribeReservedCacheNodesOfferingsPages(*elasticache.DescribeReservedCacheNodesOfferingsInput, func(*elasticache.DescribeReservedCacheNodesOfferingsOutput, bool) bool) error
-	DescribeReservedCacheNodesOfferingsPagesWithContext(aws.Context, *elasticache.DescribeReservedCacheNodesOfferingsInput, func(*elasticache.DescribeReservedCacheNodesOfferingsOutput, bool) bool, ...aws.Option) error
-
 	DescribeSnapshotsRequest(*elasticache.DescribeSnapshotsInput) elasticache.DescribeSnapshotsRequest
-
-	DescribeSnapshotsPages(*elasticache.DescribeSnapshotsInput, func(*elasticache.DescribeSnapshotsOutput, bool) bool) error
-	DescribeSnapshotsPagesWithContext(aws.Context, *elasticache.DescribeSnapshotsInput, func(*elasticache.DescribeSnapshotsOutput, bool) bool, ...aws.Option) error
 
 	ListAllowedNodeTypeModificationsRequest(*elasticache.ListAllowedNodeTypeModificationsInput) elasticache.ListAllowedNodeTypeModificationsRequest
 

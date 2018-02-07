@@ -9,7 +9,6 @@
 package cloud9iface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9"
 )
 
@@ -73,17 +72,11 @@ type Cloud9API interface {
 
 	DescribeEnvironmentMembershipsRequest(*cloud9.DescribeEnvironmentMembershipsInput) cloud9.DescribeEnvironmentMembershipsRequest
 
-	DescribeEnvironmentMembershipsPages(*cloud9.DescribeEnvironmentMembershipsInput, func(*cloud9.DescribeEnvironmentMembershipsOutput, bool) bool) error
-	DescribeEnvironmentMembershipsPagesWithContext(aws.Context, *cloud9.DescribeEnvironmentMembershipsInput, func(*cloud9.DescribeEnvironmentMembershipsOutput, bool) bool, ...aws.Option) error
-
 	DescribeEnvironmentStatusRequest(*cloud9.DescribeEnvironmentStatusInput) cloud9.DescribeEnvironmentStatusRequest
 
 	DescribeEnvironmentsRequest(*cloud9.DescribeEnvironmentsInput) cloud9.DescribeEnvironmentsRequest
 
 	ListEnvironmentsRequest(*cloud9.ListEnvironmentsInput) cloud9.ListEnvironmentsRequest
-
-	ListEnvironmentsPages(*cloud9.ListEnvironmentsInput, func(*cloud9.ListEnvironmentsOutput, bool) bool) error
-	ListEnvironmentsPagesWithContext(aws.Context, *cloud9.ListEnvironmentsInput, func(*cloud9.ListEnvironmentsOutput, bool) bool, ...aws.Option) error
 
 	UpdateEnvironmentRequest(*cloud9.UpdateEnvironmentInput) cloud9.UpdateEnvironmentRequest
 

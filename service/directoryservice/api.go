@@ -1030,37 +1030,33 @@ func (c *DirectoryService) DescribeDomainControllersRequest(input *DescribeDomai
 //            return pageNum <= 3
 //        })
 //
-func (c *DirectoryService) DescribeDomainControllersPages(input *DescribeDomainControllersInput, fn func(*DescribeDomainControllersOutput, bool) bool) error {
-	return c.DescribeDomainControllersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeDomainControllersPagesWithContext same as DescribeDomainControllersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectoryService) DescribeDomainControllersPagesWithContext(ctx aws.Context, input *DescribeDomainControllersInput, fn func(*DescribeDomainControllersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeDomainControllersRequest) Paginate(opts ...aws.Option) DescribeDomainControllersPager {
+	return DescribeDomainControllersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeDomainControllersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeDomainControllersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeDomainControllersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDomainControllersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDomainControllersPager ...
+type DescribeDomainControllersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDomainControllersPager) CurrentPage() *DescribeDomainControllersOutput {
+	return p.Pager.CurrentPage().(*DescribeDomainControllersOutput)
 }
 
 const opDescribeEventTopics = "DescribeEventTopics"

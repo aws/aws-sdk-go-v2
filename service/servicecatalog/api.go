@@ -1587,37 +1587,33 @@ func (c *ServiceCatalog) ListAcceptedPortfolioSharesRequest(input *ListAcceptedP
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceCatalog) ListAcceptedPortfolioSharesPages(input *ListAcceptedPortfolioSharesInput, fn func(*ListAcceptedPortfolioSharesOutput, bool) bool) error {
-	return c.ListAcceptedPortfolioSharesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListAcceptedPortfolioSharesPagesWithContext same as ListAcceptedPortfolioSharesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListAcceptedPortfolioSharesPagesWithContext(ctx aws.Context, input *ListAcceptedPortfolioSharesInput, fn func(*ListAcceptedPortfolioSharesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListAcceptedPortfolioSharesRequest) Paginate(opts ...aws.Option) ListAcceptedPortfolioSharesPager {
+	return ListAcceptedPortfolioSharesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListAcceptedPortfolioSharesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListAcceptedPortfolioSharesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListAcceptedPortfolioSharesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAcceptedPortfolioSharesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAcceptedPortfolioSharesPager ...
+type ListAcceptedPortfolioSharesPager struct {
+	aws.Pager
+}
+
+func (p *ListAcceptedPortfolioSharesPager) CurrentPage() *ListAcceptedPortfolioSharesOutput {
+	return p.Pager.CurrentPage().(*ListAcceptedPortfolioSharesOutput)
 }
 
 const opListConstraintsForPortfolio = "ListConstraintsForPortfolio"
@@ -1692,37 +1688,33 @@ func (c *ServiceCatalog) ListConstraintsForPortfolioRequest(input *ListConstrain
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceCatalog) ListConstraintsForPortfolioPages(input *ListConstraintsForPortfolioInput, fn func(*ListConstraintsForPortfolioOutput, bool) bool) error {
-	return c.ListConstraintsForPortfolioPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListConstraintsForPortfolioPagesWithContext same as ListConstraintsForPortfolioPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListConstraintsForPortfolioPagesWithContext(ctx aws.Context, input *ListConstraintsForPortfolioInput, fn func(*ListConstraintsForPortfolioOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListConstraintsForPortfolioRequest) Paginate(opts ...aws.Option) ListConstraintsForPortfolioPager {
+	return ListConstraintsForPortfolioPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListConstraintsForPortfolioInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListConstraintsForPortfolioRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListConstraintsForPortfolioOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListConstraintsForPortfolioOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListConstraintsForPortfolioPager ...
+type ListConstraintsForPortfolioPager struct {
+	aws.Pager
+}
+
+func (p *ListConstraintsForPortfolioPager) CurrentPage() *ListConstraintsForPortfolioOutput {
+	return p.Pager.CurrentPage().(*ListConstraintsForPortfolioOutput)
 }
 
 const opListLaunchPaths = "ListLaunchPaths"
@@ -1799,37 +1791,33 @@ func (c *ServiceCatalog) ListLaunchPathsRequest(input *ListLaunchPathsInput) Lis
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceCatalog) ListLaunchPathsPages(input *ListLaunchPathsInput, fn func(*ListLaunchPathsOutput, bool) bool) error {
-	return c.ListLaunchPathsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListLaunchPathsPagesWithContext same as ListLaunchPathsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListLaunchPathsPagesWithContext(ctx aws.Context, input *ListLaunchPathsInput, fn func(*ListLaunchPathsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListLaunchPathsRequest) Paginate(opts ...aws.Option) ListLaunchPathsPager {
+	return ListLaunchPathsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListLaunchPathsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListLaunchPathsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListLaunchPathsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListLaunchPathsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListLaunchPathsPager ...
+type ListLaunchPathsPager struct {
+	aws.Pager
+}
+
+func (p *ListLaunchPathsPager) CurrentPage() *ListLaunchPathsOutput {
+	return p.Pager.CurrentPage().(*ListLaunchPathsOutput)
 }
 
 const opListPortfolioAccess = "ListPortfolioAccess"
@@ -1953,37 +1941,33 @@ func (c *ServiceCatalog) ListPortfoliosRequest(input *ListPortfoliosInput) ListP
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceCatalog) ListPortfoliosPages(input *ListPortfoliosInput, fn func(*ListPortfoliosOutput, bool) bool) error {
-	return c.ListPortfoliosPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListPortfoliosPagesWithContext same as ListPortfoliosPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfoliosPagesWithContext(ctx aws.Context, input *ListPortfoliosInput, fn func(*ListPortfoliosOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListPortfoliosRequest) Paginate(opts ...aws.Option) ListPortfoliosPager {
+	return ListPortfoliosPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPortfoliosInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListPortfoliosRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListPortfoliosOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPortfoliosOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPortfoliosPager ...
+type ListPortfoliosPager struct {
+	aws.Pager
+}
+
+func (p *ListPortfoliosPager) CurrentPage() *ListPortfoliosOutput {
+	return p.Pager.CurrentPage().(*ListPortfoliosOutput)
 }
 
 const opListPortfoliosForProduct = "ListPortfoliosForProduct"
@@ -2058,37 +2042,33 @@ func (c *ServiceCatalog) ListPortfoliosForProductRequest(input *ListPortfoliosFo
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceCatalog) ListPortfoliosForProductPages(input *ListPortfoliosForProductInput, fn func(*ListPortfoliosForProductOutput, bool) bool) error {
-	return c.ListPortfoliosForProductPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListPortfoliosForProductPagesWithContext same as ListPortfoliosForProductPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfoliosForProductPagesWithContext(ctx aws.Context, input *ListPortfoliosForProductInput, fn func(*ListPortfoliosForProductOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListPortfoliosForProductRequest) Paginate(opts ...aws.Option) ListPortfoliosForProductPager {
+	return ListPortfoliosForProductPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPortfoliosForProductInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListPortfoliosForProductRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListPortfoliosForProductOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPortfoliosForProductOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPortfoliosForProductPager ...
+type ListPortfoliosForProductPager struct {
+	aws.Pager
+}
+
+func (p *ListPortfoliosForProductPager) CurrentPage() *ListPortfoliosForProductOutput {
+	return p.Pager.CurrentPage().(*ListPortfoliosForProductOutput)
 }
 
 const opListPrincipalsForPortfolio = "ListPrincipalsForPortfolio"
@@ -2163,37 +2143,33 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolioRequest(input *ListPrincipals
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceCatalog) ListPrincipalsForPortfolioPages(input *ListPrincipalsForPortfolioInput, fn func(*ListPrincipalsForPortfolioOutput, bool) bool) error {
-	return c.ListPrincipalsForPortfolioPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListPrincipalsForPortfolioPagesWithContext same as ListPrincipalsForPortfolioPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListPrincipalsForPortfolioPagesWithContext(ctx aws.Context, input *ListPrincipalsForPortfolioInput, fn func(*ListPrincipalsForPortfolioOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListPrincipalsForPortfolioRequest) Paginate(opts ...aws.Option) ListPrincipalsForPortfolioPager {
+	return ListPrincipalsForPortfolioPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPrincipalsForPortfolioInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListPrincipalsForPortfolioRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListPrincipalsForPortfolioOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPrincipalsForPortfolioOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPrincipalsForPortfolioPager ...
+type ListPrincipalsForPortfolioPager struct {
+	aws.Pager
+}
+
+func (p *ListPrincipalsForPortfolioPager) CurrentPage() *ListPrincipalsForPortfolioOutput {
+	return p.Pager.CurrentPage().(*ListPrincipalsForPortfolioOutput)
 }
 
 const opListProvisioningArtifacts = "ListProvisioningArtifacts"
@@ -2367,37 +2343,33 @@ func (c *ServiceCatalog) ListResourcesForTagOptionRequest(input *ListResourcesFo
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceCatalog) ListResourcesForTagOptionPages(input *ListResourcesForTagOptionInput, fn func(*ListResourcesForTagOptionOutput, bool) bool) error {
-	return c.ListResourcesForTagOptionPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListResourcesForTagOptionPagesWithContext same as ListResourcesForTagOptionPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListResourcesForTagOptionPagesWithContext(ctx aws.Context, input *ListResourcesForTagOptionInput, fn func(*ListResourcesForTagOptionOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListResourcesForTagOptionRequest) Paginate(opts ...aws.Option) ListResourcesForTagOptionPager {
+	return ListResourcesForTagOptionPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListResourcesForTagOptionInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListResourcesForTagOptionRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListResourcesForTagOptionOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListResourcesForTagOptionOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListResourcesForTagOptionPager ...
+type ListResourcesForTagOptionPager struct {
+	aws.Pager
+}
+
+func (p *ListResourcesForTagOptionPager) CurrentPage() *ListResourcesForTagOptionOutput {
+	return p.Pager.CurrentPage().(*ListResourcesForTagOptionOutput)
 }
 
 const opListTagOptions = "ListTagOptions"
@@ -2472,37 +2444,33 @@ func (c *ServiceCatalog) ListTagOptionsRequest(input *ListTagOptionsInput) ListT
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceCatalog) ListTagOptionsPages(input *ListTagOptionsInput, fn func(*ListTagOptionsOutput, bool) bool) error {
-	return c.ListTagOptionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListTagOptionsPagesWithContext same as ListTagOptionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListTagOptionsPagesWithContext(ctx aws.Context, input *ListTagOptionsInput, fn func(*ListTagOptionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListTagOptionsRequest) Paginate(opts ...aws.Option) ListTagOptionsPager {
+	return ListTagOptionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListTagOptionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListTagOptionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListTagOptionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTagOptionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTagOptionsPager ...
+type ListTagOptionsPager struct {
+	aws.Pager
+}
+
+func (p *ListTagOptionsPager) CurrentPage() *ListTagOptionsOutput {
+	return p.Pager.CurrentPage().(*ListTagOptionsOutput)
 }
 
 const opProvisionProduct = "ProvisionProduct"
@@ -2734,37 +2702,33 @@ func (c *ServiceCatalog) SearchProductsRequest(input *SearchProductsInput) Searc
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceCatalog) SearchProductsPages(input *SearchProductsInput, fn func(*SearchProductsOutput, bool) bool) error {
-	return c.SearchProductsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// SearchProductsPagesWithContext same as SearchProductsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) SearchProductsPagesWithContext(ctx aws.Context, input *SearchProductsInput, fn func(*SearchProductsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *SearchProductsRequest) Paginate(opts ...aws.Option) SearchProductsPager {
+	return SearchProductsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *SearchProductsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.SearchProductsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output SearchProductsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchProductsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchProductsPager ...
+type SearchProductsPager struct {
+	aws.Pager
+}
+
+func (p *SearchProductsPager) CurrentPage() *SearchProductsOutput {
+	return p.Pager.CurrentPage().(*SearchProductsOutput)
 }
 
 const opSearchProductsAsAdmin = "SearchProductsAsAdmin"
@@ -2839,37 +2803,33 @@ func (c *ServiceCatalog) SearchProductsAsAdminRequest(input *SearchProductsAsAdm
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceCatalog) SearchProductsAsAdminPages(input *SearchProductsAsAdminInput, fn func(*SearchProductsAsAdminOutput, bool) bool) error {
-	return c.SearchProductsAsAdminPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// SearchProductsAsAdminPagesWithContext same as SearchProductsAsAdminPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) SearchProductsAsAdminPagesWithContext(ctx aws.Context, input *SearchProductsAsAdminInput, fn func(*SearchProductsAsAdminOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *SearchProductsAsAdminRequest) Paginate(opts ...aws.Option) SearchProductsAsAdminPager {
+	return SearchProductsAsAdminPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *SearchProductsAsAdminInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.SearchProductsAsAdminRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output SearchProductsAsAdminOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchProductsAsAdminOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchProductsAsAdminPager ...
+type SearchProductsAsAdminPager struct {
+	aws.Pager
+}
+
+func (p *SearchProductsAsAdminPager) CurrentPage() *SearchProductsAsAdminOutput {
+	return p.Pager.CurrentPage().(*SearchProductsAsAdminOutput)
 }
 
 const opTerminateProvisionedProduct = "TerminateProvisionedProduct"

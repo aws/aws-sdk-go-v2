@@ -393,37 +393,33 @@ func (c *Snowball) DescribeAddressesRequest(input *DescribeAddressesInput) Descr
 //            return pageNum <= 3
 //        })
 //
-func (c *Snowball) DescribeAddressesPages(input *DescribeAddressesInput, fn func(*DescribeAddressesOutput, bool) bool) error {
-	return c.DescribeAddressesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeAddressesPagesWithContext same as DescribeAddressesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) DescribeAddressesPagesWithContext(ctx aws.Context, input *DescribeAddressesInput, fn func(*DescribeAddressesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeAddressesRequest) Paginate(opts ...aws.Option) DescribeAddressesPager {
+	return DescribeAddressesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeAddressesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeAddressesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeAddressesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeAddressesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeAddressesPager ...
+type DescribeAddressesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeAddressesPager) CurrentPage() *DescribeAddressesOutput {
+	return p.Pager.CurrentPage().(*DescribeAddressesOutput)
 }
 
 const opDescribeCluster = "DescribeCluster"
@@ -884,37 +880,33 @@ func (c *Snowball) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *Snowball) ListJobsPages(input *ListJobsInput, fn func(*ListJobsOutput, bool) bool) error {
-	return c.ListJobsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListJobsPagesWithContext same as ListJobsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Snowball) ListJobsPagesWithContext(ctx aws.Context, input *ListJobsInput, fn func(*ListJobsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
+	return ListJobsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListJobsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListJobsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListJobsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListJobsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListJobsPager ...
+type ListJobsPager struct {
+	aws.Pager
+}
+
+func (p *ListJobsPager) CurrentPage() *ListJobsOutput {
+	return p.Pager.CurrentPage().(*ListJobsOutput)
 }
 
 const opUpdateCluster = "UpdateCluster"

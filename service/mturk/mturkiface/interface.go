@@ -9,7 +9,6 @@
 package mturkiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/mturk"
 )
 
@@ -103,53 +102,23 @@ type MTurkAPI interface {
 
 	ListAssignmentsForHITRequest(*mturk.ListAssignmentsForHITInput) mturk.ListAssignmentsForHITRequest
 
-	ListAssignmentsForHITPages(*mturk.ListAssignmentsForHITInput, func(*mturk.ListAssignmentsForHITOutput, bool) bool) error
-	ListAssignmentsForHITPagesWithContext(aws.Context, *mturk.ListAssignmentsForHITInput, func(*mturk.ListAssignmentsForHITOutput, bool) bool, ...aws.Option) error
-
 	ListBonusPaymentsRequest(*mturk.ListBonusPaymentsInput) mturk.ListBonusPaymentsRequest
-
-	ListBonusPaymentsPages(*mturk.ListBonusPaymentsInput, func(*mturk.ListBonusPaymentsOutput, bool) bool) error
-	ListBonusPaymentsPagesWithContext(aws.Context, *mturk.ListBonusPaymentsInput, func(*mturk.ListBonusPaymentsOutput, bool) bool, ...aws.Option) error
 
 	ListHITsRequest(*mturk.ListHITsInput) mturk.ListHITsRequest
 
-	ListHITsPages(*mturk.ListHITsInput, func(*mturk.ListHITsOutput, bool) bool) error
-	ListHITsPagesWithContext(aws.Context, *mturk.ListHITsInput, func(*mturk.ListHITsOutput, bool) bool, ...aws.Option) error
-
 	ListHITsForQualificationTypeRequest(*mturk.ListHITsForQualificationTypeInput) mturk.ListHITsForQualificationTypeRequest
-
-	ListHITsForQualificationTypePages(*mturk.ListHITsForQualificationTypeInput, func(*mturk.ListHITsForQualificationTypeOutput, bool) bool) error
-	ListHITsForQualificationTypePagesWithContext(aws.Context, *mturk.ListHITsForQualificationTypeInput, func(*mturk.ListHITsForQualificationTypeOutput, bool) bool, ...aws.Option) error
 
 	ListQualificationRequestsRequest(*mturk.ListQualificationRequestsInput) mturk.ListQualificationRequestsRequest
 
-	ListQualificationRequestsPages(*mturk.ListQualificationRequestsInput, func(*mturk.ListQualificationRequestsOutput, bool) bool) error
-	ListQualificationRequestsPagesWithContext(aws.Context, *mturk.ListQualificationRequestsInput, func(*mturk.ListQualificationRequestsOutput, bool) bool, ...aws.Option) error
-
 	ListQualificationTypesRequest(*mturk.ListQualificationTypesInput) mturk.ListQualificationTypesRequest
-
-	ListQualificationTypesPages(*mturk.ListQualificationTypesInput, func(*mturk.ListQualificationTypesOutput, bool) bool) error
-	ListQualificationTypesPagesWithContext(aws.Context, *mturk.ListQualificationTypesInput, func(*mturk.ListQualificationTypesOutput, bool) bool, ...aws.Option) error
 
 	ListReviewPolicyResultsForHITRequest(*mturk.ListReviewPolicyResultsForHITInput) mturk.ListReviewPolicyResultsForHITRequest
 
-	ListReviewPolicyResultsForHITPages(*mturk.ListReviewPolicyResultsForHITInput, func(*mturk.ListReviewPolicyResultsForHITOutput, bool) bool) error
-	ListReviewPolicyResultsForHITPagesWithContext(aws.Context, *mturk.ListReviewPolicyResultsForHITInput, func(*mturk.ListReviewPolicyResultsForHITOutput, bool) bool, ...aws.Option) error
-
 	ListReviewableHITsRequest(*mturk.ListReviewableHITsInput) mturk.ListReviewableHITsRequest
-
-	ListReviewableHITsPages(*mturk.ListReviewableHITsInput, func(*mturk.ListReviewableHITsOutput, bool) bool) error
-	ListReviewableHITsPagesWithContext(aws.Context, *mturk.ListReviewableHITsInput, func(*mturk.ListReviewableHITsOutput, bool) bool, ...aws.Option) error
 
 	ListWorkerBlocksRequest(*mturk.ListWorkerBlocksInput) mturk.ListWorkerBlocksRequest
 
-	ListWorkerBlocksPages(*mturk.ListWorkerBlocksInput, func(*mturk.ListWorkerBlocksOutput, bool) bool) error
-	ListWorkerBlocksPagesWithContext(aws.Context, *mturk.ListWorkerBlocksInput, func(*mturk.ListWorkerBlocksOutput, bool) bool, ...aws.Option) error
-
 	ListWorkersWithQualificationTypeRequest(*mturk.ListWorkersWithQualificationTypeInput) mturk.ListWorkersWithQualificationTypeRequest
-
-	ListWorkersWithQualificationTypePages(*mturk.ListWorkersWithQualificationTypeInput, func(*mturk.ListWorkersWithQualificationTypeOutput, bool) bool) error
-	ListWorkersWithQualificationTypePagesWithContext(aws.Context, *mturk.ListWorkersWithQualificationTypeInput, func(*mturk.ListWorkersWithQualificationTypeOutput, bool) bool, ...aws.Option) error
 
 	NotifyWorkersRequest(*mturk.NotifyWorkersInput) mturk.NotifyWorkersRequest
 

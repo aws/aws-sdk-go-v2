@@ -9,7 +9,6 @@
 package lambdaiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/lambda"
 )
 
@@ -99,13 +98,7 @@ type LambdaAPI interface {
 
 	ListEventSourceMappingsRequest(*lambda.ListEventSourceMappingsInput) lambda.ListEventSourceMappingsRequest
 
-	ListEventSourceMappingsPages(*lambda.ListEventSourceMappingsInput, func(*lambda.ListEventSourceMappingsOutput, bool) bool) error
-	ListEventSourceMappingsPagesWithContext(aws.Context, *lambda.ListEventSourceMappingsInput, func(*lambda.ListEventSourceMappingsOutput, bool) bool, ...aws.Option) error
-
 	ListFunctionsRequest(*lambda.ListFunctionsInput) lambda.ListFunctionsRequest
-
-	ListFunctionsPages(*lambda.ListFunctionsInput, func(*lambda.ListFunctionsOutput, bool) bool) error
-	ListFunctionsPagesWithContext(aws.Context, *lambda.ListFunctionsInput, func(*lambda.ListFunctionsOutput, bool) bool, ...aws.Option) error
 
 	ListTagsRequest(*lambda.ListTagsInput) lambda.ListTagsRequest
 

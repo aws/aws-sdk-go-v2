@@ -1085,37 +1085,33 @@ func (c *ELB) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) De
 //            return pageNum <= 3
 //        })
 //
-func (c *ELB) DescribeLoadBalancersPages(input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool) error {
-	return c.DescribeLoadBalancersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeLoadBalancersPagesWithContext same as DescribeLoadBalancersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeLoadBalancersRequest) Paginate(opts ...aws.Option) DescribeLoadBalancersPager {
+	return DescribeLoadBalancersPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeLoadBalancersInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeLoadBalancersRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeLoadBalancersOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeLoadBalancersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeLoadBalancersPager ...
+type DescribeLoadBalancersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeLoadBalancersPager) CurrentPage() *DescribeLoadBalancersOutput {
+	return p.Pager.CurrentPage().(*DescribeLoadBalancersOutput)
 }
 
 const opDescribeTags = "DescribeTags"

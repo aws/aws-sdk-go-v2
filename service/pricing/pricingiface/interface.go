@@ -9,7 +9,6 @@
 package pricingiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/pricing"
 )
 
@@ -65,18 +64,9 @@ import (
 type PricingAPI interface {
 	DescribeServicesRequest(*pricing.DescribeServicesInput) pricing.DescribeServicesRequest
 
-	DescribeServicesPages(*pricing.DescribeServicesInput, func(*pricing.DescribeServicesOutput, bool) bool) error
-	DescribeServicesPagesWithContext(aws.Context, *pricing.DescribeServicesInput, func(*pricing.DescribeServicesOutput, bool) bool, ...aws.Option) error
-
 	GetAttributeValuesRequest(*pricing.GetAttributeValuesInput) pricing.GetAttributeValuesRequest
 
-	GetAttributeValuesPages(*pricing.GetAttributeValuesInput, func(*pricing.GetAttributeValuesOutput, bool) bool) error
-	GetAttributeValuesPagesWithContext(aws.Context, *pricing.GetAttributeValuesInput, func(*pricing.GetAttributeValuesOutput, bool) bool, ...aws.Option) error
-
 	GetProductsRequest(*pricing.GetProductsInput) pricing.GetProductsRequest
-
-	GetProductsPages(*pricing.GetProductsInput, func(*pricing.GetProductsOutput, bool) bool) error
-	GetProductsPagesWithContext(aws.Context, *pricing.GetProductsInput, func(*pricing.GetProductsOutput, bool) bool, ...aws.Option) error
 }
 
 var _ PricingAPI = (*pricing.Pricing)(nil)

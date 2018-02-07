@@ -525,37 +525,33 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypesRequest(input *List
 //            return pageNum <= 3
 //        })
 //
-func (c *ElasticsearchService) ListElasticsearchInstanceTypesPages(input *ListElasticsearchInstanceTypesInput, fn func(*ListElasticsearchInstanceTypesOutput, bool) bool) error {
-	return c.ListElasticsearchInstanceTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListElasticsearchInstanceTypesPagesWithContext same as ListElasticsearchInstanceTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) ListElasticsearchInstanceTypesPagesWithContext(ctx aws.Context, input *ListElasticsearchInstanceTypesInput, fn func(*ListElasticsearchInstanceTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListElasticsearchInstanceTypesRequest) Paginate(opts ...aws.Option) ListElasticsearchInstanceTypesPager {
+	return ListElasticsearchInstanceTypesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListElasticsearchInstanceTypesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListElasticsearchInstanceTypesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListElasticsearchInstanceTypesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListElasticsearchInstanceTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListElasticsearchInstanceTypesPager ...
+type ListElasticsearchInstanceTypesPager struct {
+	aws.Pager
+}
+
+func (p *ListElasticsearchInstanceTypesPager) CurrentPage() *ListElasticsearchInstanceTypesOutput {
+	return p.Pager.CurrentPage().(*ListElasticsearchInstanceTypesOutput)
 }
 
 const opListElasticsearchVersions = "ListElasticsearchVersions"
@@ -628,37 +624,33 @@ func (c *ElasticsearchService) ListElasticsearchVersionsRequest(input *ListElast
 //            return pageNum <= 3
 //        })
 //
-func (c *ElasticsearchService) ListElasticsearchVersionsPages(input *ListElasticsearchVersionsInput, fn func(*ListElasticsearchVersionsOutput, bool) bool) error {
-	return c.ListElasticsearchVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListElasticsearchVersionsPagesWithContext same as ListElasticsearchVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) ListElasticsearchVersionsPagesWithContext(ctx aws.Context, input *ListElasticsearchVersionsInput, fn func(*ListElasticsearchVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListElasticsearchVersionsRequest) Paginate(opts ...aws.Option) ListElasticsearchVersionsPager {
+	return ListElasticsearchVersionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListElasticsearchVersionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListElasticsearchVersionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListElasticsearchVersionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListElasticsearchVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListElasticsearchVersionsPager ...
+type ListElasticsearchVersionsPager struct {
+	aws.Pager
+}
+
+func (p *ListElasticsearchVersionsPager) CurrentPage() *ListElasticsearchVersionsOutput {
+	return p.Pager.CurrentPage().(*ListElasticsearchVersionsOutput)
 }
 
 const opListTags = "ListTags"

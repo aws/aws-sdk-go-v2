@@ -282,37 +282,33 @@ func (c *Cloud9) DescribeEnvironmentMembershipsRequest(input *DescribeEnvironmen
 //            return pageNum <= 3
 //        })
 //
-func (c *Cloud9) DescribeEnvironmentMembershipsPages(input *DescribeEnvironmentMembershipsInput, fn func(*DescribeEnvironmentMembershipsOutput, bool) bool) error {
-	return c.DescribeEnvironmentMembershipsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeEnvironmentMembershipsPagesWithContext same as DescribeEnvironmentMembershipsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Cloud9) DescribeEnvironmentMembershipsPagesWithContext(ctx aws.Context, input *DescribeEnvironmentMembershipsInput, fn func(*DescribeEnvironmentMembershipsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeEnvironmentMembershipsRequest) Paginate(opts ...aws.Option) DescribeEnvironmentMembershipsPager {
+	return DescribeEnvironmentMembershipsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeEnvironmentMembershipsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeEnvironmentMembershipsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeEnvironmentMembershipsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEnvironmentMembershipsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEnvironmentMembershipsPager ...
+type DescribeEnvironmentMembershipsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEnvironmentMembershipsPager) CurrentPage() *DescribeEnvironmentMembershipsOutput {
+	return p.Pager.CurrentPage().(*DescribeEnvironmentMembershipsOutput)
 }
 
 const opDescribeEnvironmentStatus = "DescribeEnvironmentStatus"
@@ -485,37 +481,33 @@ func (c *Cloud9) ListEnvironmentsRequest(input *ListEnvironmentsInput) ListEnvir
 //            return pageNum <= 3
 //        })
 //
-func (c *Cloud9) ListEnvironmentsPages(input *ListEnvironmentsInput, fn func(*ListEnvironmentsOutput, bool) bool) error {
-	return c.ListEnvironmentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListEnvironmentsPagesWithContext same as ListEnvironmentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Cloud9) ListEnvironmentsPagesWithContext(ctx aws.Context, input *ListEnvironmentsInput, fn func(*ListEnvironmentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListEnvironmentsRequest) Paginate(opts ...aws.Option) ListEnvironmentsPager {
+	return ListEnvironmentsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListEnvironmentsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListEnvironmentsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListEnvironmentsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListEnvironmentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListEnvironmentsPager ...
+type ListEnvironmentsPager struct {
+	aws.Pager
+}
+
+func (p *ListEnvironmentsPager) CurrentPage() *ListEnvironmentsOutput {
+	return p.Pager.CurrentPage().(*ListEnvironmentsOutput)
 }
 
 const opUpdateEnvironment = "UpdateEnvironment"

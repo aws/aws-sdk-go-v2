@@ -2494,37 +2494,33 @@ func (c *S3) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) ListM
 //            return pageNum <= 3
 //        })
 //
-func (c *S3) ListMultipartUploadsPages(input *ListMultipartUploadsInput, fn func(*ListMultipartUploadsOutput, bool) bool) error {
-	return c.ListMultipartUploadsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListMultipartUploadsPagesWithContext same as ListMultipartUploadsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *ListMultipartUploadsInput, fn func(*ListMultipartUploadsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListMultipartUploadsRequest) Paginate(opts ...aws.Option) ListMultipartUploadsPager {
+	return ListMultipartUploadsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListMultipartUploadsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListMultipartUploadsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListMultipartUploadsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListMultipartUploadsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListMultipartUploadsPager ...
+type ListMultipartUploadsPager struct {
+	aws.Pager
+}
+
+func (p *ListMultipartUploadsPager) CurrentPage() *ListMultipartUploadsOutput {
+	return p.Pager.CurrentPage().(*ListMultipartUploadsOutput)
 }
 
 const opListObjectVersions = "ListObjectVersions"
@@ -2599,37 +2595,33 @@ func (c *S3) ListObjectVersionsRequest(input *ListObjectVersionsInput) ListObjec
 //            return pageNum <= 3
 //        })
 //
-func (c *S3) ListObjectVersionsPages(input *ListObjectVersionsInput, fn func(*ListObjectVersionsOutput, bool) bool) error {
-	return c.ListObjectVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListObjectVersionsPagesWithContext same as ListObjectVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListObjectVersionsPagesWithContext(ctx aws.Context, input *ListObjectVersionsInput, fn func(*ListObjectVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListObjectVersionsRequest) Paginate(opts ...aws.Option) ListObjectVersionsPager {
+	return ListObjectVersionsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectVersionsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListObjectVersionsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListObjectVersionsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectVersionsPager ...
+type ListObjectVersionsPager struct {
+	aws.Pager
+}
+
+func (p *ListObjectVersionsPager) CurrentPage() *ListObjectVersionsOutput {
+	return p.Pager.CurrentPage().(*ListObjectVersionsOutput)
 }
 
 const opListObjects = "ListObjects"
@@ -2706,37 +2698,33 @@ func (c *S3) ListObjectsRequest(input *ListObjectsInput) ListObjectsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *S3) ListObjectsPages(input *ListObjectsInput, fn func(*ListObjectsOutput, bool) bool) error {
-	return c.ListObjectsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListObjectsPagesWithContext same as ListObjectsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListObjectsPagesWithContext(ctx aws.Context, input *ListObjectsInput, fn func(*ListObjectsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListObjectsRequest) Paginate(opts ...aws.Option) ListObjectsPager {
+	return ListObjectsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListObjectsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListObjectsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectsPager ...
+type ListObjectsPager struct {
+	aws.Pager
+}
+
+func (p *ListObjectsPager) CurrentPage() *ListObjectsOutput {
+	return p.Pager.CurrentPage().(*ListObjectsOutput)
 }
 
 const opListObjectsV2 = "ListObjectsV2"
@@ -2814,37 +2802,33 @@ func (c *S3) ListObjectsV2Request(input *ListObjectsV2Input) ListObjectsV2Reques
 //            return pageNum <= 3
 //        })
 //
-func (c *S3) ListObjectsV2Pages(input *ListObjectsV2Input, fn func(*ListObjectsV2Output, bool) bool) error {
-	return c.ListObjectsV2PagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListObjectsV2PagesWithContext same as ListObjectsV2Pages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListObjectsV2PagesWithContext(ctx aws.Context, input *ListObjectsV2Input, fn func(*ListObjectsV2Output, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListObjectsV2Request) Paginate(opts ...aws.Option) ListObjectsV2Pager {
+	return ListObjectsV2Pager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListObjectsV2Input
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListObjectsV2Request(inCpy)
-			req.SetContext(ctx)
+
+			var output ListObjectsV2Output
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectsV2Output), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectsV2Pager ...
+type ListObjectsV2Pager struct {
+	aws.Pager
+}
+
+func (p *ListObjectsV2Pager) CurrentPage() *ListObjectsV2Output {
+	return p.Pager.CurrentPage().(*ListObjectsV2Output)
 }
 
 const opListParts = "ListParts"
@@ -2919,37 +2903,33 @@ func (c *S3) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *S3) ListPartsPages(input *ListPartsInput, fn func(*ListPartsOutput, bool) bool) error {
-	return c.ListPartsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListPartsPagesWithContext same as ListPartsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInput, fn func(*ListPartsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListPartsRequest) Paginate(opts ...aws.Option) ListPartsPager {
+	return ListPartsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPartsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListPartsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListPartsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPartsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPartsPager ...
+type ListPartsPager struct {
+	aws.Pager
+}
+
+func (p *ListPartsPager) CurrentPage() *ListPartsOutput {
+	return p.Pager.CurrentPage().(*ListPartsOutput)
 }
 
 const opPutBucketAccelerateConfiguration = "PutBucketAccelerateConfiguration"

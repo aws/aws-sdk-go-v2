@@ -524,37 +524,33 @@ func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) ListDomainsReques
 //            return pageNum <= 3
 //        })
 //
-func (c *SimpleDB) ListDomainsPages(input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool) error {
-	return c.ListDomainsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListDomainsPagesWithContext same as ListDomainsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) ListDomainsPagesWithContext(ctx aws.Context, input *ListDomainsInput, fn func(*ListDomainsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
+	return ListDomainsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListDomainsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListDomainsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListDomainsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDomainsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListDomainsPager ...
+type ListDomainsPager struct {
+	aws.Pager
+}
+
+func (p *ListDomainsPager) CurrentPage() *ListDomainsOutput {
+	return p.Pager.CurrentPage().(*ListDomainsOutput)
 }
 
 const opPutAttributes = "PutAttributes"
@@ -716,37 +712,33 @@ func (c *SimpleDB) SelectRequest(input *SelectInput) SelectRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *SimpleDB) SelectPages(input *SelectInput, fn func(*SelectOutput, bool) bool) error {
-	return c.SelectPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// SelectPagesWithContext same as SelectPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SimpleDB) SelectPagesWithContext(ctx aws.Context, input *SelectInput, fn func(*SelectOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *SelectRequest) Paginate(opts ...aws.Option) SelectPager {
+	return SelectPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *SelectInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.SelectRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output SelectOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SelectOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SelectPager ...
+type SelectPager struct {
+	aws.Pager
+}
+
+func (p *SelectPager) CurrentPage() *SelectOutput {
+	return p.Pager.CurrentPage().(*SelectOutput)
 }
 
 type Attribute struct {

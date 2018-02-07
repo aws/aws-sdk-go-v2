@@ -9,7 +9,6 @@
 package elasticbeanstalkiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk"
 )
 
@@ -112,9 +111,6 @@ type ElasticBeanstalkAPI interface {
 	DescribeEnvironmentsRequest(*elasticbeanstalk.DescribeEnvironmentsInput) elasticbeanstalk.DescribeEnvironmentsRequest
 
 	DescribeEventsRequest(*elasticbeanstalk.DescribeEventsInput) elasticbeanstalk.DescribeEventsRequest
-
-	DescribeEventsPages(*elasticbeanstalk.DescribeEventsInput, func(*elasticbeanstalk.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *elasticbeanstalk.DescribeEventsInput, func(*elasticbeanstalk.DescribeEventsOutput, bool) bool, ...aws.Option) error
 
 	DescribeInstancesHealthRequest(*elasticbeanstalk.DescribeInstancesHealthInput) elasticbeanstalk.DescribeInstancesHealthRequest
 

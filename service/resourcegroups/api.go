@@ -328,37 +328,33 @@ func (c *ResourceGroups) ListGroupResourcesRequest(input *ListGroupResourcesInpu
 //            return pageNum <= 3
 //        })
 //
-func (c *ResourceGroups) ListGroupResourcesPages(input *ListGroupResourcesInput, fn func(*ListGroupResourcesOutput, bool) bool) error {
-	return c.ListGroupResourcesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListGroupResourcesPagesWithContext same as ListGroupResourcesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroups) ListGroupResourcesPagesWithContext(ctx aws.Context, input *ListGroupResourcesInput, fn func(*ListGroupResourcesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListGroupResourcesRequest) Paginate(opts ...aws.Option) ListGroupResourcesPager {
+	return ListGroupResourcesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListGroupResourcesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListGroupResourcesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListGroupResourcesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGroupResourcesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListGroupResourcesPager ...
+type ListGroupResourcesPager struct {
+	aws.Pager
+}
+
+func (p *ListGroupResourcesPager) CurrentPage() *ListGroupResourcesOutput {
+	return p.Pager.CurrentPage().(*ListGroupResourcesOutput)
 }
 
 const opListGroups = "ListGroups"
@@ -433,37 +429,33 @@ func (c *ResourceGroups) ListGroupsRequest(input *ListGroupsInput) ListGroupsReq
 //            return pageNum <= 3
 //        })
 //
-func (c *ResourceGroups) ListGroupsPages(input *ListGroupsInput, fn func(*ListGroupsOutput, bool) bool) error {
-	return c.ListGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListGroupsPagesWithContext same as ListGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroups) ListGroupsPagesWithContext(ctx aws.Context, input *ListGroupsInput, fn func(*ListGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
+	return ListGroupsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListGroupsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListGroupsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListGroupsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListGroupsPager ...
+type ListGroupsPager struct {
+	aws.Pager
+}
+
+func (p *ListGroupsPager) CurrentPage() *ListGroupsOutput {
+	return p.Pager.CurrentPage().(*ListGroupsOutput)
 }
 
 const opSearchResources = "SearchResources"
@@ -540,37 +532,33 @@ func (c *ResourceGroups) SearchResourcesRequest(input *SearchResourcesInput) Sea
 //            return pageNum <= 3
 //        })
 //
-func (c *ResourceGroups) SearchResourcesPages(input *SearchResourcesInput, fn func(*SearchResourcesOutput, bool) bool) error {
-	return c.SearchResourcesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// SearchResourcesPagesWithContext same as SearchResourcesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroups) SearchResourcesPagesWithContext(ctx aws.Context, input *SearchResourcesInput, fn func(*SearchResourcesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *SearchResourcesRequest) Paginate(opts ...aws.Option) SearchResourcesPager {
+	return SearchResourcesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *SearchResourcesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.SearchResourcesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output SearchResourcesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchResourcesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchResourcesPager ...
+type SearchResourcesPager struct {
+	aws.Pager
+}
+
+func (p *SearchResourcesPager) CurrentPage() *SearchResourcesOutput {
+	return p.Pager.CurrentPage().(*SearchResourcesOutput)
 }
 
 const opTag = "Tag"

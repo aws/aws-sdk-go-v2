@@ -2037,37 +2037,33 @@ func (c *SES) ListCustomVerificationEmailTemplatesRequest(input *ListCustomVerif
 //            return pageNum <= 3
 //        })
 //
-func (c *SES) ListCustomVerificationEmailTemplatesPages(input *ListCustomVerificationEmailTemplatesInput, fn func(*ListCustomVerificationEmailTemplatesOutput, bool) bool) error {
-	return c.ListCustomVerificationEmailTemplatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListCustomVerificationEmailTemplatesPagesWithContext same as ListCustomVerificationEmailTemplatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SES) ListCustomVerificationEmailTemplatesPagesWithContext(ctx aws.Context, input *ListCustomVerificationEmailTemplatesInput, fn func(*ListCustomVerificationEmailTemplatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListCustomVerificationEmailTemplatesRequest) Paginate(opts ...aws.Option) ListCustomVerificationEmailTemplatesPager {
+	return ListCustomVerificationEmailTemplatesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListCustomVerificationEmailTemplatesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListCustomVerificationEmailTemplatesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListCustomVerificationEmailTemplatesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListCustomVerificationEmailTemplatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListCustomVerificationEmailTemplatesPager ...
+type ListCustomVerificationEmailTemplatesPager struct {
+	aws.Pager
+}
+
+func (p *ListCustomVerificationEmailTemplatesPager) CurrentPage() *ListCustomVerificationEmailTemplatesOutput {
+	return p.Pager.CurrentPage().(*ListCustomVerificationEmailTemplatesOutput)
 }
 
 const opListIdentities = "ListIdentities"
@@ -2145,37 +2141,33 @@ func (c *SES) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitiesRe
 //            return pageNum <= 3
 //        })
 //
-func (c *SES) ListIdentitiesPages(input *ListIdentitiesInput, fn func(*ListIdentitiesOutput, bool) bool) error {
-	return c.ListIdentitiesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListIdentitiesPagesWithContext same as ListIdentitiesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SES) ListIdentitiesPagesWithContext(ctx aws.Context, input *ListIdentitiesInput, fn func(*ListIdentitiesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListIdentitiesRequest) Paginate(opts ...aws.Option) ListIdentitiesPager {
+	return ListIdentitiesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListIdentitiesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListIdentitiesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListIdentitiesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListIdentitiesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListIdentitiesPager ...
+type ListIdentitiesPager struct {
+	aws.Pager
+}
+
+func (p *ListIdentitiesPager) CurrentPage() *ListIdentitiesOutput {
+	return p.Pager.CurrentPage().(*ListIdentitiesOutput)
 }
 
 const opListIdentityPolicies = "ListIdentityPolicies"

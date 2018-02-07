@@ -500,37 +500,33 @@ func (c *ECR) DescribeImagesRequest(input *DescribeImagesInput) DescribeImagesRe
 //            return pageNum <= 3
 //        })
 //
-func (c *ECR) DescribeImagesPages(input *DescribeImagesInput, fn func(*DescribeImagesOutput, bool) bool) error {
-	return c.DescribeImagesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeImagesPagesWithContext same as DescribeImagesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) DescribeImagesPagesWithContext(ctx aws.Context, input *DescribeImagesInput, fn func(*DescribeImagesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeImagesRequest) Paginate(opts ...aws.Option) DescribeImagesPager {
+	return DescribeImagesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeImagesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeImagesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeImagesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeImagesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeImagesPager ...
+type DescribeImagesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeImagesPager) CurrentPage() *DescribeImagesOutput {
+	return p.Pager.CurrentPage().(*DescribeImagesOutput)
 }
 
 const opDescribeRepositories = "DescribeRepositories"
@@ -605,37 +601,33 @@ func (c *ECR) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) Desc
 //            return pageNum <= 3
 //        })
 //
-func (c *ECR) DescribeRepositoriesPages(input *DescribeRepositoriesInput, fn func(*DescribeRepositoriesOutput, bool) bool) error {
-	return c.DescribeRepositoriesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeRepositoriesPagesWithContext same as DescribeRepositoriesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) DescribeRepositoriesPagesWithContext(ctx aws.Context, input *DescribeRepositoriesInput, fn func(*DescribeRepositoriesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeRepositoriesRequest) Paginate(opts ...aws.Option) DescribeRepositoriesPager {
+	return DescribeRepositoriesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeRepositoriesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeRepositoriesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeRepositoriesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeRepositoriesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeRepositoriesPager ...
+type DescribeRepositoriesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeRepositoriesPager) CurrentPage() *DescribeRepositoriesOutput {
+	return p.Pager.CurrentPage().(*DescribeRepositoriesOutput)
 }
 
 const opGetAuthorizationToken = "GetAuthorizationToken"
@@ -1026,37 +1018,33 @@ func (c *ECR) ListImagesRequest(input *ListImagesInput) ListImagesRequest {
 //            return pageNum <= 3
 //        })
 //
-func (c *ECR) ListImagesPages(input *ListImagesInput, fn func(*ListImagesOutput, bool) bool) error {
-	return c.ListImagesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListImagesPagesWithContext same as ListImagesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ECR) ListImagesPagesWithContext(ctx aws.Context, input *ListImagesInput, fn func(*ListImagesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListImagesRequest) Paginate(opts ...aws.Option) ListImagesPager {
+	return ListImagesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListImagesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListImagesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListImagesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListImagesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListImagesPager ...
+type ListImagesPager struct {
+	aws.Pager
+}
+
+func (p *ListImagesPager) CurrentPage() *ListImagesOutput {
+	return p.Pager.CurrentPage().(*ListImagesOutput)
 }
 
 const opPutImage = "PutImage"

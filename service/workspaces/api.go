@@ -282,37 +282,33 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBun
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkSpaces) DescribeWorkspaceBundlesPages(input *DescribeWorkspaceBundlesInput, fn func(*DescribeWorkspaceBundlesOutput, bool) bool) error {
-	return c.DescribeWorkspaceBundlesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeWorkspaceBundlesPagesWithContext same as DescribeWorkspaceBundlesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspaceBundlesPagesWithContext(ctx aws.Context, input *DescribeWorkspaceBundlesInput, fn func(*DescribeWorkspaceBundlesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeWorkspaceBundlesRequest) Paginate(opts ...aws.Option) DescribeWorkspaceBundlesPager {
+	return DescribeWorkspaceBundlesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeWorkspaceBundlesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeWorkspaceBundlesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeWorkspaceBundlesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeWorkspaceBundlesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeWorkspaceBundlesPager ...
+type DescribeWorkspaceBundlesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeWorkspaceBundlesPager) CurrentPage() *DescribeWorkspaceBundlesOutput {
+	return p.Pager.CurrentPage().(*DescribeWorkspaceBundlesOutput)
 }
 
 const opDescribeWorkspaceDirectories = "DescribeWorkspaceDirectories"
@@ -388,37 +384,33 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspac
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkSpaces) DescribeWorkspaceDirectoriesPages(input *DescribeWorkspaceDirectoriesInput, fn func(*DescribeWorkspaceDirectoriesOutput, bool) bool) error {
-	return c.DescribeWorkspaceDirectoriesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeWorkspaceDirectoriesPagesWithContext same as DescribeWorkspaceDirectoriesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspaceDirectoriesPagesWithContext(ctx aws.Context, input *DescribeWorkspaceDirectoriesInput, fn func(*DescribeWorkspaceDirectoriesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeWorkspaceDirectoriesRequest) Paginate(opts ...aws.Option) DescribeWorkspaceDirectoriesPager {
+	return DescribeWorkspaceDirectoriesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeWorkspaceDirectoriesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeWorkspaceDirectoriesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeWorkspaceDirectoriesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeWorkspaceDirectoriesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeWorkspaceDirectoriesPager ...
+type DescribeWorkspaceDirectoriesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeWorkspaceDirectoriesPager) CurrentPage() *DescribeWorkspaceDirectoriesOutput {
+	return p.Pager.CurrentPage().(*DescribeWorkspaceDirectoriesOutput)
 }
 
 const opDescribeWorkspaces = "DescribeWorkspaces"
@@ -496,37 +488,33 @@ func (c *WorkSpaces) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) D
 //            return pageNum <= 3
 //        })
 //
-func (c *WorkSpaces) DescribeWorkspacesPages(input *DescribeWorkspacesInput, fn func(*DescribeWorkspacesOutput, bool) bool) error {
-	return c.DescribeWorkspacesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeWorkspacesPagesWithContext same as DescribeWorkspacesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspacesPagesWithContext(ctx aws.Context, input *DescribeWorkspacesInput, fn func(*DescribeWorkspacesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeWorkspacesRequest) Paginate(opts ...aws.Option) DescribeWorkspacesPager {
+	return DescribeWorkspacesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeWorkspacesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeWorkspacesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeWorkspacesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeWorkspacesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeWorkspacesPager ...
+type DescribeWorkspacesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeWorkspacesPager) CurrentPage() *DescribeWorkspacesOutput {
+	return p.Pager.CurrentPage().(*DescribeWorkspacesOutput)
 }
 
 const opDescribeWorkspacesConnectionStatus = "DescribeWorkspacesConnectionStatus"

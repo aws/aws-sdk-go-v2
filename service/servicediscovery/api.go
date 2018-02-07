@@ -445,37 +445,33 @@ func (c *ServiceDiscovery) GetInstancesHealthStatusRequest(input *GetInstancesHe
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceDiscovery) GetInstancesHealthStatusPages(input *GetInstancesHealthStatusInput, fn func(*GetInstancesHealthStatusOutput, bool) bool) error {
-	return c.GetInstancesHealthStatusPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// GetInstancesHealthStatusPagesWithContext same as GetInstancesHealthStatusPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceDiscovery) GetInstancesHealthStatusPagesWithContext(ctx aws.Context, input *GetInstancesHealthStatusInput, fn func(*GetInstancesHealthStatusOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *GetInstancesHealthStatusRequest) Paginate(opts ...aws.Option) GetInstancesHealthStatusPager {
+	return GetInstancesHealthStatusPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *GetInstancesHealthStatusInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.GetInstancesHealthStatusRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output GetInstancesHealthStatusOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetInstancesHealthStatusOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetInstancesHealthStatusPager ...
+type GetInstancesHealthStatusPager struct {
+	aws.Pager
+}
+
+func (p *GetInstancesHealthStatusPager) CurrentPage() *GetInstancesHealthStatusOutput {
+	return p.Pager.CurrentPage().(*GetInstancesHealthStatusOutput)
 }
 
 const opGetNamespace = "GetNamespace"
@@ -700,37 +696,33 @@ func (c *ServiceDiscovery) ListInstancesRequest(input *ListInstancesInput) ListI
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceDiscovery) ListInstancesPages(input *ListInstancesInput, fn func(*ListInstancesOutput, bool) bool) error {
-	return c.ListInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListInstancesPagesWithContext same as ListInstancesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceDiscovery) ListInstancesPagesWithContext(ctx aws.Context, input *ListInstancesInput, fn func(*ListInstancesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListInstancesRequest) Paginate(opts ...aws.Option) ListInstancesPager {
+	return ListInstancesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListInstancesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListInstancesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListInstancesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListInstancesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListInstancesPager ...
+type ListInstancesPager struct {
+	aws.Pager
+}
+
+func (p *ListInstancesPager) CurrentPage() *ListInstancesOutput {
+	return p.Pager.CurrentPage().(*ListInstancesOutput)
 }
 
 const opListNamespaces = "ListNamespaces"
@@ -806,37 +798,33 @@ func (c *ServiceDiscovery) ListNamespacesRequest(input *ListNamespacesInput) Lis
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceDiscovery) ListNamespacesPages(input *ListNamespacesInput, fn func(*ListNamespacesOutput, bool) bool) error {
-	return c.ListNamespacesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListNamespacesPagesWithContext same as ListNamespacesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceDiscovery) ListNamespacesPagesWithContext(ctx aws.Context, input *ListNamespacesInput, fn func(*ListNamespacesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListNamespacesRequest) Paginate(opts ...aws.Option) ListNamespacesPager {
+	return ListNamespacesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListNamespacesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListNamespacesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListNamespacesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListNamespacesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListNamespacesPager ...
+type ListNamespacesPager struct {
+	aws.Pager
+}
+
+func (p *ListNamespacesPager) CurrentPage() *ListNamespacesOutput {
+	return p.Pager.CurrentPage().(*ListNamespacesOutput)
 }
 
 const opListOperations = "ListOperations"
@@ -911,37 +899,33 @@ func (c *ServiceDiscovery) ListOperationsRequest(input *ListOperationsInput) Lis
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceDiscovery) ListOperationsPages(input *ListOperationsInput, fn func(*ListOperationsOutput, bool) bool) error {
-	return c.ListOperationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListOperationsPagesWithContext same as ListOperationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceDiscovery) ListOperationsPagesWithContext(ctx aws.Context, input *ListOperationsInput, fn func(*ListOperationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager {
+	return ListOperationsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListOperationsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListOperationsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListOperationsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListOperationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListOperationsPager ...
+type ListOperationsPager struct {
+	aws.Pager
+}
+
+func (p *ListOperationsPager) CurrentPage() *ListOperationsOutput {
+	return p.Pager.CurrentPage().(*ListOperationsOutput)
 }
 
 const opListServices = "ListServices"
@@ -1017,37 +1001,33 @@ func (c *ServiceDiscovery) ListServicesRequest(input *ListServicesInput) ListSer
 //            return pageNum <= 3
 //        })
 //
-func (c *ServiceDiscovery) ListServicesPages(input *ListServicesInput, fn func(*ListServicesOutput, bool) bool) error {
-	return c.ListServicesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListServicesPagesWithContext same as ListServicesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceDiscovery) ListServicesPagesWithContext(ctx aws.Context, input *ListServicesInput, fn func(*ListServicesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListServicesRequest) Paginate(opts ...aws.Option) ListServicesPager {
+	return ListServicesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListServicesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListServicesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListServicesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListServicesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListServicesPager ...
+type ListServicesPager struct {
+	aws.Pager
+}
+
+func (p *ListServicesPager) CurrentPage() *ListServicesOutput {
+	return p.Pager.CurrentPage().(*ListServicesOutput)
 }
 
 const opRegisterInstance = "RegisterInstance"

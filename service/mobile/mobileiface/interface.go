@@ -9,7 +9,6 @@
 package mobileiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/mobile"
 )
 
@@ -77,13 +76,7 @@ type MobileAPI interface {
 
 	ListBundlesRequest(*mobile.ListBundlesInput) mobile.ListBundlesRequest
 
-	ListBundlesPages(*mobile.ListBundlesInput, func(*mobile.ListBundlesOutput, bool) bool) error
-	ListBundlesPagesWithContext(aws.Context, *mobile.ListBundlesInput, func(*mobile.ListBundlesOutput, bool) bool, ...aws.Option) error
-
 	ListProjectsRequest(*mobile.ListProjectsInput) mobile.ListProjectsRequest
-
-	ListProjectsPages(*mobile.ListProjectsInput, func(*mobile.ListProjectsOutput, bool) bool) error
-	ListProjectsPagesWithContext(aws.Context, *mobile.ListProjectsInput, func(*mobile.ListProjectsOutput, bool) bool, ...aws.Option) error
 
 	UpdateProjectRequest(*mobile.UpdateProjectInput) mobile.UpdateProjectRequest
 }

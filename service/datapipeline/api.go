@@ -353,37 +353,33 @@ func (c *DataPipeline) DescribeObjectsRequest(input *DescribeObjectsInput) Descr
 //            return pageNum <= 3
 //        })
 //
-func (c *DataPipeline) DescribeObjectsPages(input *DescribeObjectsInput, fn func(*DescribeObjectsOutput, bool) bool) error {
-	return c.DescribeObjectsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// DescribeObjectsPagesWithContext same as DescribeObjectsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) DescribeObjectsPagesWithContext(ctx aws.Context, input *DescribeObjectsInput, fn func(*DescribeObjectsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *DescribeObjectsRequest) Paginate(opts ...aws.Option) DescribeObjectsPager {
+	return DescribeObjectsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *DescribeObjectsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.DescribeObjectsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output DescribeObjectsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeObjectsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeObjectsPager ...
+type DescribeObjectsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeObjectsPager) CurrentPage() *DescribeObjectsOutput {
+	return p.Pager.CurrentPage().(*DescribeObjectsOutput)
 }
 
 const opDescribePipelines = "DescribePipelines"
@@ -617,37 +613,33 @@ func (c *DataPipeline) ListPipelinesRequest(input *ListPipelinesInput) ListPipel
 //            return pageNum <= 3
 //        })
 //
-func (c *DataPipeline) ListPipelinesPages(input *ListPipelinesInput, fn func(*ListPipelinesOutput, bool) bool) error {
-	return c.ListPipelinesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// ListPipelinesPagesWithContext same as ListPipelinesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) ListPipelinesPagesWithContext(ctx aws.Context, input *ListPipelinesInput, fn func(*ListPipelinesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
+	return ListPipelinesPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *ListPipelinesInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.ListPipelinesRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output ListPipelinesOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPipelinesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPipelinesPager ...
+type ListPipelinesPager struct {
+	aws.Pager
+}
+
+func (p *ListPipelinesPager) CurrentPage() *ListPipelinesOutput {
+	return p.Pager.CurrentPage().(*ListPipelinesOutput)
 }
 
 const opPollForTask = "PollForTask"
@@ -847,37 +839,33 @@ func (c *DataPipeline) QueryObjectsRequest(input *QueryObjectsInput) QueryObject
 //            return pageNum <= 3
 //        })
 //
-func (c *DataPipeline) QueryObjectsPages(input *QueryObjectsInput, fn func(*QueryObjectsOutput, bool) bool) error {
-	return c.QueryObjectsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
-
-// QueryObjectsPagesWithContext same as QueryObjectsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) QueryObjectsPagesWithContext(ctx aws.Context, input *QueryObjectsInput, fn func(*QueryObjectsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
+func (p *QueryObjectsRequest) Paginate(opts ...aws.Option) QueryObjectsPager {
+	return QueryObjectsPager{
+		aws.Pager{NewRequest: func() (*aws.Request, error) {
 			var inCpy *QueryObjectsInput
-			if input != nil {
-				tmp := *input
+			if p.Input != nil {
+				tmp := *p.Input
 				inCpy = &tmp
 			}
-			req := c.QueryObjectsRequest(inCpy)
-			req.SetContext(ctx)
+
+			var output QueryObjectsOutput
+			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
+			req.SetContext(p.Request.Context())
 			req.ApplyOptions(opts...)
-			return req.Request, nil
+
+			return req, nil
+		},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*QueryObjectsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// QueryObjectsPager ...
+type QueryObjectsPager struct {
+	aws.Pager
+}
+
+func (p *QueryObjectsPager) CurrentPage() *QueryObjectsOutput {
+	return p.Pager.CurrentPage().(*QueryObjectsOutput)
 }
 
 const opRemoveTags = "RemoveTags"
