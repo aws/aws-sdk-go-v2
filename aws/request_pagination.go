@@ -11,19 +11,18 @@ import (
 // operations method to automatically perform pagination for you. Such as,
 // "S3.ListObjectsPages", and "S3.ListObjectsPagesWithContext" methods.
 //
-// Pagination differs from a Paginator type in that pagination is the type that
+// Pagier differs from a Paginator type in that pagination is the type that
 // does the pagination between API operations, and Paginator defines the
 // configuration that will be used per page request.
 //
-//     cont := true
-//     for p.Next() && cont {
-//         data := p.Page().(*s3.ListObjectsOutput)
+//     for p.Next() {
+//         data := p.CurrentPage().(*s3.ListObjectsOutput)
 //         // process the page's data
 //     }
 //     return p.Err()
 //
 // See service client API operation Pages methods for examples how the SDK will
-// use the Pagination type.
+// use the Pager type.
 type Pager struct {
 	// Function to return a Request value for each pagination request.
 	// Any configuration or handlers that need to be applied to the request
@@ -41,7 +40,7 @@ type Pager struct {
 	curPage interface{}
 }
 
-// hasNextPage will return true if Pagination is able to determine that the API
+// hasNextPage will return true if Pager is able to determine that the API
 // operation has additional pages. False will be returned if there are no more
 // pages remaining.
 //
@@ -50,7 +49,7 @@ func (p *Pager) hasNextPage() bool {
 	return !(p.started && len(p.nextTokens) == 0)
 }
 
-// Err returns the error Pagination encountered when retrieving the next page.
+// Err returns the error Pager encountered when retrieving the next page.
 func (p *Pager) Err() error {
 	return p.err
 }
@@ -104,7 +103,7 @@ func (p *Pager) Next() bool {
 // should be paginated. This type is used by the API service models to define
 // the generated pagination config for service APIs.
 //
-// The Pagination type is what provides iterating between pages of an API. It
+// The Pager type is what provides iterating between pages of an API. It
 // is only used to store the token metadata the SDK should use for performing
 // pagination.
 type Paginator struct {

@@ -31,19 +31,16 @@ func main() {
 
 	svc := s3.New(cfg)
 
-	i := 0
-	err = svc.ListObjectsPages(&s3.ListObjectsInput{
-		Bucket: &os.Args[1],
-	}, func(p *s3.ListObjectsOutput, last bool) (shouldContinue bool) {
-		fmt.Println("Page,", i)
-		i++
-
-		for _, obj := range p.Contents {
-			fmt.Println("Object:", *obj.Key)
+	req := svc.ListObjectsRequest(&s3.ListObjectsInput{Bucket: &os.Args[1]})
+	p := req.Paginate()
+	for p.Next() {
+		page := p.CurrentPage()
+		for _, obj := range page.Contents {
+			fmt.Println("Object: ", *obj.Key)
 		}
-		return true
-	})
-	if err != nil {
+	}
+
+	if err := p.Err(); err != nil {
 		exitErrorf("failed to list objects, %v", err)
 	}
 }
