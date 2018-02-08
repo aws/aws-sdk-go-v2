@@ -16,6 +16,7 @@ const opCreatePrivateDnsNamespace = "CreatePrivateDnsNamespace"
 type CreatePrivateDnsNamespaceRequest struct {
 	*aws.Request
 	Input *CreatePrivateDnsNamespaceInput
+	Copy  func(*CreatePrivateDnsNamespaceInput) CreatePrivateDnsNamespaceRequest
 }
 
 // Send marshals and sends the CreatePrivateDnsNamespace API request.
@@ -60,7 +61,7 @@ func (c *ServiceDiscovery) CreatePrivateDnsNamespaceRequest(input *CreatePrivate
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePrivateDnsNamespaceRequest{Request: req, Input: input}
+	return CreatePrivateDnsNamespaceRequest{Request: req, Input: input, Copy: c.CreatePrivateDnsNamespaceRequest}
 }
 
 const opCreatePublicDnsNamespace = "CreatePublicDnsNamespace"
@@ -69,6 +70,7 @@ const opCreatePublicDnsNamespace = "CreatePublicDnsNamespace"
 type CreatePublicDnsNamespaceRequest struct {
 	*aws.Request
 	Input *CreatePublicDnsNamespaceInput
+	Copy  func(*CreatePublicDnsNamespaceInput) CreatePublicDnsNamespaceRequest
 }
 
 // Send marshals and sends the CreatePublicDnsNamespace API request.
@@ -113,7 +115,7 @@ func (c *ServiceDiscovery) CreatePublicDnsNamespaceRequest(input *CreatePublicDn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePublicDnsNamespaceRequest{Request: req, Input: input}
+	return CreatePublicDnsNamespaceRequest{Request: req, Input: input, Copy: c.CreatePublicDnsNamespaceRequest}
 }
 
 const opCreateService = "CreateService"
@@ -122,6 +124,7 @@ const opCreateService = "CreateService"
 type CreateServiceRequest struct {
 	*aws.Request
 	Input *CreateServiceInput
+	Copy  func(*CreateServiceInput) CreateServiceRequest
 }
 
 // Send marshals and sends the CreateService API request.
@@ -170,7 +173,7 @@ func (c *ServiceDiscovery) CreateServiceRequest(input *CreateServiceInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateServiceRequest{Request: req, Input: input}
+	return CreateServiceRequest{Request: req, Input: input, Copy: c.CreateServiceRequest}
 }
 
 const opDeleteNamespace = "DeleteNamespace"
@@ -179,6 +182,7 @@ const opDeleteNamespace = "DeleteNamespace"
 type DeleteNamespaceRequest struct {
 	*aws.Request
 	Input *DeleteNamespaceInput
+	Copy  func(*DeleteNamespaceInput) DeleteNamespaceRequest
 }
 
 // Send marshals and sends the DeleteNamespace API request.
@@ -220,7 +224,7 @@ func (c *ServiceDiscovery) DeleteNamespaceRequest(input *DeleteNamespaceInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNamespaceRequest{Request: req, Input: input}
+	return DeleteNamespaceRequest{Request: req, Input: input, Copy: c.DeleteNamespaceRequest}
 }
 
 const opDeleteService = "DeleteService"
@@ -229,6 +233,7 @@ const opDeleteService = "DeleteService"
 type DeleteServiceRequest struct {
 	*aws.Request
 	Input *DeleteServiceInput
+	Copy  func(*DeleteServiceInput) DeleteServiceRequest
 }
 
 // Send marshals and sends the DeleteService API request.
@@ -270,7 +275,7 @@ func (c *ServiceDiscovery) DeleteServiceRequest(input *DeleteServiceInput) Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteServiceRequest{Request: req, Input: input}
+	return DeleteServiceRequest{Request: req, Input: input, Copy: c.DeleteServiceRequest}
 }
 
 const opDeregisterInstance = "DeregisterInstance"
@@ -279,6 +284,7 @@ const opDeregisterInstance = "DeregisterInstance"
 type DeregisterInstanceRequest struct {
 	*aws.Request
 	Input *DeregisterInstanceInput
+	Copy  func(*DeregisterInstanceInput) DeregisterInstanceRequest
 }
 
 // Send marshals and sends the DeregisterInstance API request.
@@ -320,7 +326,7 @@ func (c *ServiceDiscovery) DeregisterInstanceRequest(input *DeregisterInstanceIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterInstanceRequest{Request: req, Input: input}
+	return DeregisterInstanceRequest{Request: req, Input: input, Copy: c.DeregisterInstanceRequest}
 }
 
 const opGetInstance = "GetInstance"
@@ -329,6 +335,7 @@ const opGetInstance = "GetInstance"
 type GetInstanceRequest struct {
 	*aws.Request
 	Input *GetInstanceInput
+	Copy  func(*GetInstanceInput) GetInstanceRequest
 }
 
 // Send marshals and sends the GetInstance API request.
@@ -369,7 +376,7 @@ func (c *ServiceDiscovery) GetInstanceRequest(input *GetInstanceInput) GetInstan
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstanceRequest{Request: req, Input: input}
+	return GetInstanceRequest{Request: req, Input: input, Copy: c.GetInstanceRequest}
 }
 
 const opGetInstancesHealthStatus = "GetInstancesHealthStatus"
@@ -378,6 +385,7 @@ const opGetInstancesHealthStatus = "GetInstancesHealthStatus"
 type GetInstancesHealthStatusRequest struct {
 	*aws.Request
 	Input *GetInstancesHealthStatusInput
+	Copy  func(*GetInstancesHealthStatusInput) GetInstancesHealthStatusRequest
 }
 
 // Send marshals and sends the GetInstancesHealthStatus API request.
@@ -425,47 +433,47 @@ func (c *ServiceDiscovery) GetInstancesHealthStatusRequest(input *GetInstancesHe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstancesHealthStatusRequest{Request: req, Input: input}
+	return GetInstancesHealthStatusRequest{Request: req, Input: input, Copy: c.GetInstancesHealthStatusRequest}
 }
 
-// GetInstancesHealthStatusPages iterates over the pages of a GetInstancesHealthStatus operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetInstancesHealthStatus method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetInstancesHealthStatusRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetInstancesHealthStatus operation.
-//    pageNum := 0
-//    err := client.GetInstancesHealthStatusPages(params,
-//        func(page *GetInstancesHealthStatusOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetInstancesHealthStatusRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetInstancesHealthStatusRequest) Paginate(opts ...aws.Option) GetInstancesHealthStatusPager {
 	return GetInstancesHealthStatusPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetInstancesHealthStatusInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetInstancesHealthStatusInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetInstancesHealthStatusOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetInstancesHealthStatusPager ...
+// GetInstancesHealthStatusPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetInstancesHealthStatusPager struct {
 	aws.Pager
 }
@@ -480,6 +488,7 @@ const opGetNamespace = "GetNamespace"
 type GetNamespaceRequest struct {
 	*aws.Request
 	Input *GetNamespaceInput
+	Copy  func(*GetNamespaceInput) GetNamespaceRequest
 }
 
 // Send marshals and sends the GetNamespace API request.
@@ -520,7 +529,7 @@ func (c *ServiceDiscovery) GetNamespaceRequest(input *GetNamespaceInput) GetName
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetNamespaceRequest{Request: req, Input: input}
+	return GetNamespaceRequest{Request: req, Input: input, Copy: c.GetNamespaceRequest}
 }
 
 const opGetOperation = "GetOperation"
@@ -529,6 +538,7 @@ const opGetOperation = "GetOperation"
 type GetOperationRequest struct {
 	*aws.Request
 	Input *GetOperationInput
+	Copy  func(*GetOperationInput) GetOperationRequest
 }
 
 // Send marshals and sends the GetOperation API request.
@@ -571,7 +581,7 @@ func (c *ServiceDiscovery) GetOperationRequest(input *GetOperationInput) GetOper
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOperationRequest{Request: req, Input: input}
+	return GetOperationRequest{Request: req, Input: input, Copy: c.GetOperationRequest}
 }
 
 const opGetService = "GetService"
@@ -580,6 +590,7 @@ const opGetService = "GetService"
 type GetServiceRequest struct {
 	*aws.Request
 	Input *GetServiceInput
+	Copy  func(*GetServiceInput) GetServiceRequest
 }
 
 // Send marshals and sends the GetService API request.
@@ -620,7 +631,7 @@ func (c *ServiceDiscovery) GetServiceRequest(input *GetServiceInput) GetServiceR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetServiceRequest{Request: req, Input: input}
+	return GetServiceRequest{Request: req, Input: input, Copy: c.GetServiceRequest}
 }
 
 const opListInstances = "ListInstances"
@@ -629,6 +640,7 @@ const opListInstances = "ListInstances"
 type ListInstancesRequest struct {
 	*aws.Request
 	Input *ListInstancesInput
+	Copy  func(*ListInstancesInput) ListInstancesRequest
 }
 
 // Send marshals and sends the ListInstances API request.
@@ -676,47 +688,47 @@ func (c *ServiceDiscovery) ListInstancesRequest(input *ListInstancesInput) ListI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListInstancesRequest{Request: req, Input: input}
+	return ListInstancesRequest{Request: req, Input: input, Copy: c.ListInstancesRequest}
 }
 
-// ListInstancesPages iterates over the pages of a ListInstances operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListInstances method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListInstances operation.
-//    pageNum := 0
-//    err := client.ListInstancesPages(params,
-//        func(page *ListInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListInstancesRequest) Paginate(opts ...aws.Option) ListInstancesPager {
 	return ListInstancesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListInstancesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListInstancesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListInstancesPager ...
+// ListInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListInstancesPager struct {
 	aws.Pager
 }
@@ -731,6 +743,7 @@ const opListNamespaces = "ListNamespaces"
 type ListNamespacesRequest struct {
 	*aws.Request
 	Input *ListNamespacesInput
+	Copy  func(*ListNamespacesInput) ListNamespacesRequest
 }
 
 // Send marshals and sends the ListNamespaces API request.
@@ -778,47 +791,47 @@ func (c *ServiceDiscovery) ListNamespacesRequest(input *ListNamespacesInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListNamespacesRequest{Request: req, Input: input}
+	return ListNamespacesRequest{Request: req, Input: input, Copy: c.ListNamespacesRequest}
 }
 
-// ListNamespacesPages iterates over the pages of a ListNamespaces operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListNamespaces method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListNamespacesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListNamespaces operation.
-//    pageNum := 0
-//    err := client.ListNamespacesPages(params,
-//        func(page *ListNamespacesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListNamespacesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListNamespacesRequest) Paginate(opts ...aws.Option) ListNamespacesPager {
 	return ListNamespacesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListNamespacesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListNamespacesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListNamespacesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListNamespacesPager ...
+// ListNamespacesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListNamespacesPager struct {
 	aws.Pager
 }
@@ -833,6 +846,7 @@ const opListOperations = "ListOperations"
 type ListOperationsRequest struct {
 	*aws.Request
 	Input *ListOperationsInput
+	Copy  func(*ListOperationsInput) ListOperationsRequest
 }
 
 // Send marshals and sends the ListOperations API request.
@@ -879,47 +893,47 @@ func (c *ServiceDiscovery) ListOperationsRequest(input *ListOperationsInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOperationsRequest{Request: req, Input: input}
+	return ListOperationsRequest{Request: req, Input: input, Copy: c.ListOperationsRequest}
 }
 
-// ListOperationsPages iterates over the pages of a ListOperations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListOperations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListOperationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListOperations operation.
-//    pageNum := 0
-//    err := client.ListOperationsPages(params,
-//        func(page *ListOperationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListOperationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager {
 	return ListOperationsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListOperationsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListOperationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListOperationsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListOperationsPager ...
+// ListOperationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListOperationsPager struct {
 	aws.Pager
 }
@@ -934,6 +948,7 @@ const opListServices = "ListServices"
 type ListServicesRequest struct {
 	*aws.Request
 	Input *ListServicesInput
+	Copy  func(*ListServicesInput) ListServicesRequest
 }
 
 // Send marshals and sends the ListServices API request.
@@ -981,47 +996,47 @@ func (c *ServiceDiscovery) ListServicesRequest(input *ListServicesInput) ListSer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListServicesRequest{Request: req, Input: input}
+	return ListServicesRequest{Request: req, Input: input, Copy: c.ListServicesRequest}
 }
 
-// ListServicesPages iterates over the pages of a ListServices operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListServices method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListServicesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListServices operation.
-//    pageNum := 0
-//    err := client.ListServicesPages(params,
-//        func(page *ListServicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListServicesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListServicesRequest) Paginate(opts ...aws.Option) ListServicesPager {
 	return ListServicesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListServicesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListServicesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListServicesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListServicesPager ...
+// ListServicesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListServicesPager struct {
 	aws.Pager
 }
@@ -1036,6 +1051,7 @@ const opRegisterInstance = "RegisterInstance"
 type RegisterInstanceRequest struct {
 	*aws.Request
 	Input *RegisterInstanceInput
+	Copy  func(*RegisterInstanceInput) RegisterInstanceRequest
 }
 
 // Send marshals and sends the RegisterInstance API request.
@@ -1103,7 +1119,7 @@ func (c *ServiceDiscovery) RegisterInstanceRequest(input *RegisterInstanceInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterInstanceRequest{Request: req, Input: input}
+	return RegisterInstanceRequest{Request: req, Input: input, Copy: c.RegisterInstanceRequest}
 }
 
 const opUpdateService = "UpdateService"
@@ -1112,6 +1128,7 @@ const opUpdateService = "UpdateService"
 type UpdateServiceRequest struct {
 	*aws.Request
 	Input *UpdateServiceInput
+	Copy  func(*UpdateServiceInput) UpdateServiceRequest
 }
 
 // Send marshals and sends the UpdateService API request.
@@ -1160,7 +1177,7 @@ func (c *ServiceDiscovery) UpdateServiceRequest(input *UpdateServiceInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateServiceRequest{Request: req, Input: input}
+	return UpdateServiceRequest{Request: req, Input: input, Copy: c.UpdateServiceRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/CreatePrivateDnsNamespaceRequest

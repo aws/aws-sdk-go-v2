@@ -15,6 +15,7 @@ const opDeleteThingShadow = "DeleteThingShadow"
 type DeleteThingShadowRequest struct {
 	*aws.Request
 	Input *DeleteThingShadowInput
+	Copy  func(*DeleteThingShadowInput) DeleteThingShadowRequest
 }
 
 // Send marshals and sends the DeleteThingShadow API request.
@@ -56,7 +57,7 @@ func (c *IoTDataPlane) DeleteThingShadowRequest(input *DeleteThingShadowInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteThingShadowRequest{Request: req, Input: input}
+	return DeleteThingShadowRequest{Request: req, Input: input, Copy: c.DeleteThingShadowRequest}
 }
 
 const opGetThingShadow = "GetThingShadow"
@@ -65,6 +66,7 @@ const opGetThingShadow = "GetThingShadow"
 type GetThingShadowRequest struct {
 	*aws.Request
 	Input *GetThingShadowInput
+	Copy  func(*GetThingShadowInput) GetThingShadowRequest
 }
 
 // Send marshals and sends the GetThingShadow API request.
@@ -106,7 +108,7 @@ func (c *IoTDataPlane) GetThingShadowRequest(input *GetThingShadowInput) GetThin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetThingShadowRequest{Request: req, Input: input}
+	return GetThingShadowRequest{Request: req, Input: input, Copy: c.GetThingShadowRequest}
 }
 
 const opPublish = "Publish"
@@ -115,6 +117,7 @@ const opPublish = "Publish"
 type PublishRequest struct {
 	*aws.Request
 	Input *PublishInput
+	Copy  func(*PublishInput) PublishRequest
 }
 
 // Send marshals and sends the Publish API request.
@@ -158,7 +161,7 @@ func (c *IoTDataPlane) PublishRequest(input *PublishInput) PublishRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PublishRequest{Request: req, Input: input}
+	return PublishRequest{Request: req, Input: input, Copy: c.PublishRequest}
 }
 
 const opUpdateThingShadow = "UpdateThingShadow"
@@ -167,6 +170,7 @@ const opUpdateThingShadow = "UpdateThingShadow"
 type UpdateThingShadowRequest struct {
 	*aws.Request
 	Input *UpdateThingShadowInput
+	Copy  func(*UpdateThingShadowInput) UpdateThingShadowRequest
 }
 
 // Send marshals and sends the UpdateThingShadow API request.
@@ -208,7 +212,7 @@ func (c *IoTDataPlane) UpdateThingShadowRequest(input *UpdateThingShadowInput) U
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateThingShadowRequest{Request: req, Input: input}
+	return UpdateThingShadowRequest{Request: req, Input: input, Copy: c.UpdateThingShadowRequest}
 }
 
 // The input for the DeleteThingShadow operation.

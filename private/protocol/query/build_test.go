@@ -101,6 +101,7 @@ const opInputService1TestCaseOperation1 = "OperationName"
 type InputService1TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService1TestShapeInputService1TestCaseOperation3Input
+	Copy  func(*InputService1TestShapeInputService1TestCaseOperation3Input) InputService1TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService1TestCaseOperation1 API request.
@@ -139,7 +140,7 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation1Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService1TestCaseOperation1Request{Request: req, Input: input}
+	return InputService1TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService1TestCaseOperation1Request}
 }
 
 const opInputService1TestCaseOperation2 = "OperationName"
@@ -148,6 +149,7 @@ const opInputService1TestCaseOperation2 = "OperationName"
 type InputService1TestCaseOperation2Request struct {
 	*aws.Request
 	Input *InputService1TestShapeInputService1TestCaseOperation3Input
+	Copy  func(*InputService1TestShapeInputService1TestCaseOperation3Input) InputService1TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService1TestCaseOperation2 API request.
@@ -186,7 +188,7 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation2Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService1TestCaseOperation2Request{Request: req, Input: input}
+	return InputService1TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService1TestCaseOperation2Request}
 }
 
 const opInputService1TestCaseOperation3 = "OperationName"
@@ -195,6 +197,7 @@ const opInputService1TestCaseOperation3 = "OperationName"
 type InputService1TestCaseOperation3Request struct {
 	*aws.Request
 	Input *InputService1TestShapeInputService1TestCaseOperation3Input
+	Copy  func(*InputService1TestShapeInputService1TestCaseOperation3Input) InputService1TestCaseOperation3Request
 }
 
 // Send marshals and sends the InputService1TestCaseOperation3 API request.
@@ -233,7 +236,7 @@ func (c *InputService1ProtocolTest) InputService1TestCaseOperation3Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService1TestCaseOperation3Request{Request: req, Input: input}
+	return InputService1TestCaseOperation3Request{Request: req, Input: input, Copy: c.InputService1TestCaseOperation3Request}
 }
 
 type InputService1TestShapeInputService1TestCaseOperation1Output struct {
@@ -339,6 +342,7 @@ const opInputService2TestCaseOperation1 = "OperationName"
 type InputService2TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService2TestShapeInputService2TestCaseOperation1Input
+	Copy  func(*InputService2TestShapeInputService2TestCaseOperation1Input) InputService2TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService2TestCaseOperation1 API request.
@@ -377,7 +381,7 @@ func (c *InputService2ProtocolTest) InputService2TestCaseOperation1Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService2TestCaseOperation1Request{Request: req, Input: input}
+	return InputService2TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService2TestCaseOperation1Request}
 }
 
 type InputService2TestShapeInputService2TestCaseOperation1Input struct {
@@ -463,6 +467,7 @@ const opInputService3TestCaseOperation1 = "OperationName"
 type InputService3TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService3TestShapeInputService3TestCaseOperation2Input
+	Copy  func(*InputService3TestShapeInputService3TestCaseOperation2Input) InputService3TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService3TestCaseOperation1 API request.
@@ -501,7 +506,7 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation1Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService3TestCaseOperation1Request{Request: req, Input: input}
+	return InputService3TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService3TestCaseOperation1Request}
 }
 
 const opInputService3TestCaseOperation2 = "OperationName"
@@ -510,6 +515,7 @@ const opInputService3TestCaseOperation2 = "OperationName"
 type InputService3TestCaseOperation2Request struct {
 	*aws.Request
 	Input *InputService3TestShapeInputService3TestCaseOperation2Input
+	Copy  func(*InputService3TestShapeInputService3TestCaseOperation2Input) InputService3TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService3TestCaseOperation2 API request.
@@ -548,7 +554,7 @@ func (c *InputService3ProtocolTest) InputService3TestCaseOperation2Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService3TestCaseOperation2Request{Request: req, Input: input}
+	return InputService3TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService3TestCaseOperation2Request}
 }
 
 type InputService3TestShapeInputService3TestCaseOperation1Output struct {
@@ -639,6 +645,7 @@ const opInputService4TestCaseOperation1 = "OperationName"
 type InputService4TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService4TestShapeInputService4TestCaseOperation2Input
+	Copy  func(*InputService4TestShapeInputService4TestCaseOperation2Input) InputService4TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService4TestCaseOperation1 API request.
@@ -677,7 +684,7 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation1Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService4TestCaseOperation1Request{Request: req, Input: input}
+	return InputService4TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService4TestCaseOperation1Request}
 }
 
 const opInputService4TestCaseOperation2 = "OperationName"
@@ -686,6 +693,7 @@ const opInputService4TestCaseOperation2 = "OperationName"
 type InputService4TestCaseOperation2Request struct {
 	*aws.Request
 	Input *InputService4TestShapeInputService4TestCaseOperation2Input
+	Copy  func(*InputService4TestShapeInputService4TestCaseOperation2Input) InputService4TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService4TestCaseOperation2 API request.
@@ -724,7 +732,7 @@ func (c *InputService4ProtocolTest) InputService4TestCaseOperation2Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService4TestCaseOperation2Request{Request: req, Input: input}
+	return InputService4TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService4TestCaseOperation2Request}
 }
 
 type InputService4TestShapeInputService4TestCaseOperation1Output struct {
@@ -819,6 +827,7 @@ const opInputService5TestCaseOperation1 = "OperationName"
 type InputService5TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService5TestShapeInputService5TestCaseOperation1Input
+	Copy  func(*InputService5TestShapeInputService5TestCaseOperation1Input) InputService5TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService5TestCaseOperation1 API request.
@@ -857,7 +866,7 @@ func (c *InputService5ProtocolTest) InputService5TestCaseOperation1Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService5TestCaseOperation1Request{Request: req, Input: input}
+	return InputService5TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService5TestCaseOperation1Request}
 }
 
 type InputService5TestShapeInputService5TestCaseOperation1Input struct {
@@ -937,6 +946,7 @@ const opInputService6TestCaseOperation1 = "OperationName"
 type InputService6TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService6TestShapeInputService6TestCaseOperation1Input
+	Copy  func(*InputService6TestShapeInputService6TestCaseOperation1Input) InputService6TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService6TestCaseOperation1 API request.
@@ -975,7 +985,7 @@ func (c *InputService6ProtocolTest) InputService6TestCaseOperation1Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService6TestCaseOperation1Request{Request: req, Input: input}
+	return InputService6TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService6TestCaseOperation1Request}
 }
 
 type InputService6TestShapeInputService6TestCaseOperation1Input struct {
@@ -1055,6 +1065,7 @@ const opInputService7TestCaseOperation1 = "OperationName"
 type InputService7TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService7TestShapeInputService7TestCaseOperation1Input
+	Copy  func(*InputService7TestShapeInputService7TestCaseOperation1Input) InputService7TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService7TestCaseOperation1 API request.
@@ -1093,7 +1104,7 @@ func (c *InputService7ProtocolTest) InputService7TestCaseOperation1Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService7TestCaseOperation1Request{Request: req, Input: input}
+	return InputService7TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService7TestCaseOperation1Request}
 }
 
 type InputService7TestShapeInputService7TestCaseOperation1Input struct {
@@ -1175,6 +1186,7 @@ const opInputService8TestCaseOperation1 = "OperationName"
 type InputService8TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService8TestShapeInputService8TestCaseOperation1Input
+	Copy  func(*InputService8TestShapeInputService8TestCaseOperation1Input) InputService8TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService8TestCaseOperation1 API request.
@@ -1213,7 +1225,7 @@ func (c *InputService8ProtocolTest) InputService8TestCaseOperation1Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService8TestCaseOperation1Request{Request: req, Input: input}
+	return InputService8TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService8TestCaseOperation1Request}
 }
 
 type InputService8TestShapeInputService8TestCaseOperation1Input struct {
@@ -1293,6 +1305,7 @@ const opInputService9TestCaseOperation1 = "OperationName"
 type InputService9TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService9TestShapeInputService9TestCaseOperation1Input
+	Copy  func(*InputService9TestShapeInputService9TestCaseOperation1Input) InputService9TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService9TestCaseOperation1 API request.
@@ -1331,7 +1344,7 @@ func (c *InputService9ProtocolTest) InputService9TestCaseOperation1Request(input
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService9TestCaseOperation1Request{Request: req, Input: input}
+	return InputService9TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService9TestCaseOperation1Request}
 }
 
 type InputService9TestShapeInputService9TestCaseOperation1Input struct {
@@ -1411,6 +1424,7 @@ const opInputService10TestCaseOperation1 = "OperationName"
 type InputService10TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService10TestShapeInputService10TestCaseOperation1Input
+	Copy  func(*InputService10TestShapeInputService10TestCaseOperation1Input) InputService10TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService10TestCaseOperation1 API request.
@@ -1449,7 +1463,7 @@ func (c *InputService10ProtocolTest) InputService10TestCaseOperation1Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService10TestCaseOperation1Request{Request: req, Input: input}
+	return InputService10TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService10TestCaseOperation1Request}
 }
 
 type InputService10TestShapeInputService10TestCaseOperation1Input struct {
@@ -1530,6 +1544,7 @@ const opInputService11TestCaseOperation1 = "OperationName"
 type InputService11TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService11TestShapeInputService11TestCaseOperation1Input
+	Copy  func(*InputService11TestShapeInputService11TestCaseOperation1Input) InputService11TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService11TestCaseOperation1 API request.
@@ -1568,7 +1583,7 @@ func (c *InputService11ProtocolTest) InputService11TestCaseOperation1Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService11TestCaseOperation1Request{Request: req, Input: input}
+	return InputService11TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService11TestCaseOperation1Request}
 }
 
 type InputService11TestShapeInputService11TestCaseOperation1Input struct {
@@ -1648,6 +1663,7 @@ const opInputService12TestCaseOperation1 = "OperationName"
 type InputService12TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService12TestShapeInputService12TestCaseOperation1Input
+	Copy  func(*InputService12TestShapeInputService12TestCaseOperation1Input) InputService12TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService12TestCaseOperation1 API request.
@@ -1686,7 +1702,7 @@ func (c *InputService12ProtocolTest) InputService12TestCaseOperation1Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService12TestCaseOperation1Request{Request: req, Input: input}
+	return InputService12TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService12TestCaseOperation1Request}
 }
 
 type InputService12TestShapeInputService12TestCaseOperation1Input struct {
@@ -1766,6 +1782,7 @@ const opInputService13TestCaseOperation1 = "OperationName"
 type InputService13TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService13TestShapeInputService13TestCaseOperation6Input
+	Copy  func(*InputService13TestShapeInputService13TestCaseOperation6Input) InputService13TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService13TestCaseOperation1 API request.
@@ -1804,7 +1821,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation1Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService13TestCaseOperation1Request{Request: req, Input: input}
+	return InputService13TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation1Request}
 }
 
 const opInputService13TestCaseOperation2 = "OperationName"
@@ -1813,6 +1830,7 @@ const opInputService13TestCaseOperation2 = "OperationName"
 type InputService13TestCaseOperation2Request struct {
 	*aws.Request
 	Input *InputService13TestShapeInputService13TestCaseOperation6Input
+	Copy  func(*InputService13TestShapeInputService13TestCaseOperation6Input) InputService13TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService13TestCaseOperation2 API request.
@@ -1851,7 +1869,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation2Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService13TestCaseOperation2Request{Request: req, Input: input}
+	return InputService13TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation2Request}
 }
 
 const opInputService13TestCaseOperation3 = "OperationName"
@@ -1860,6 +1878,7 @@ const opInputService13TestCaseOperation3 = "OperationName"
 type InputService13TestCaseOperation3Request struct {
 	*aws.Request
 	Input *InputService13TestShapeInputService13TestCaseOperation6Input
+	Copy  func(*InputService13TestShapeInputService13TestCaseOperation6Input) InputService13TestCaseOperation3Request
 }
 
 // Send marshals and sends the InputService13TestCaseOperation3 API request.
@@ -1898,7 +1917,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation3Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService13TestCaseOperation3Request{Request: req, Input: input}
+	return InputService13TestCaseOperation3Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation3Request}
 }
 
 const opInputService13TestCaseOperation4 = "OperationName"
@@ -1907,6 +1926,7 @@ const opInputService13TestCaseOperation4 = "OperationName"
 type InputService13TestCaseOperation4Request struct {
 	*aws.Request
 	Input *InputService13TestShapeInputService13TestCaseOperation6Input
+	Copy  func(*InputService13TestShapeInputService13TestCaseOperation6Input) InputService13TestCaseOperation4Request
 }
 
 // Send marshals and sends the InputService13TestCaseOperation4 API request.
@@ -1945,7 +1965,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation4Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService13TestCaseOperation4Request{Request: req, Input: input}
+	return InputService13TestCaseOperation4Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation4Request}
 }
 
 const opInputService13TestCaseOperation5 = "OperationName"
@@ -1954,6 +1974,7 @@ const opInputService13TestCaseOperation5 = "OperationName"
 type InputService13TestCaseOperation5Request struct {
 	*aws.Request
 	Input *InputService13TestShapeInputService13TestCaseOperation6Input
+	Copy  func(*InputService13TestShapeInputService13TestCaseOperation6Input) InputService13TestCaseOperation5Request
 }
 
 // Send marshals and sends the InputService13TestCaseOperation5 API request.
@@ -1992,7 +2013,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation5Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService13TestCaseOperation5Request{Request: req, Input: input}
+	return InputService13TestCaseOperation5Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation5Request}
 }
 
 const opInputService13TestCaseOperation6 = "OperationName"
@@ -2001,6 +2022,7 @@ const opInputService13TestCaseOperation6 = "OperationName"
 type InputService13TestCaseOperation6Request struct {
 	*aws.Request
 	Input *InputService13TestShapeInputService13TestCaseOperation6Input
+	Copy  func(*InputService13TestShapeInputService13TestCaseOperation6Input) InputService13TestCaseOperation6Request
 }
 
 // Send marshals and sends the InputService13TestCaseOperation6 API request.
@@ -2039,7 +2061,7 @@ func (c *InputService13ProtocolTest) InputService13TestCaseOperation6Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService13TestCaseOperation6Request{Request: req, Input: input}
+	return InputService13TestCaseOperation6Request{Request: req, Input: input, Copy: c.InputService13TestCaseOperation6Request}
 }
 
 type InputService13TestShapeInputService13TestCaseOperation1Output struct {
@@ -2186,6 +2208,7 @@ const opInputService14TestCaseOperation1 = "OperationName"
 type InputService14TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService14TestShapeInputService14TestCaseOperation2Input
+	Copy  func(*InputService14TestShapeInputService14TestCaseOperation2Input) InputService14TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService14TestCaseOperation1 API request.
@@ -2224,7 +2247,7 @@ func (c *InputService14ProtocolTest) InputService14TestCaseOperation1Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService14TestCaseOperation1Request{Request: req, Input: input}
+	return InputService14TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService14TestCaseOperation1Request}
 }
 
 const opInputService14TestCaseOperation2 = "OperationName"
@@ -2233,6 +2256,7 @@ const opInputService14TestCaseOperation2 = "OperationName"
 type InputService14TestCaseOperation2Request struct {
 	*aws.Request
 	Input *InputService14TestShapeInputService14TestCaseOperation2Input
+	Copy  func(*InputService14TestShapeInputService14TestCaseOperation2Input) InputService14TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService14TestCaseOperation2 API request.
@@ -2271,7 +2295,7 @@ func (c *InputService14ProtocolTest) InputService14TestCaseOperation2Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService14TestCaseOperation2Request{Request: req, Input: input}
+	return InputService14TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService14TestCaseOperation2Request}
 }
 
 type InputService14TestShapeInputService14TestCaseOperation1Output struct {
@@ -2362,6 +2386,7 @@ const opInputService15TestCaseOperation1 = "OperationName"
 type InputService15TestCaseOperation1Request struct {
 	*aws.Request
 	Input *InputService15TestShapeInputService15TestCaseOperation3Input
+	Copy  func(*InputService15TestShapeInputService15TestCaseOperation3Input) InputService15TestCaseOperation1Request
 }
 
 // Send marshals and sends the InputService15TestCaseOperation1 API request.
@@ -2400,7 +2425,7 @@ func (c *InputService15ProtocolTest) InputService15TestCaseOperation1Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService15TestCaseOperation1Request{Request: req, Input: input}
+	return InputService15TestCaseOperation1Request{Request: req, Input: input, Copy: c.InputService15TestCaseOperation1Request}
 }
 
 const opInputService15TestCaseOperation2 = "OperationName"
@@ -2409,6 +2434,7 @@ const opInputService15TestCaseOperation2 = "OperationName"
 type InputService15TestCaseOperation2Request struct {
 	*aws.Request
 	Input *InputService15TestShapeInputService15TestCaseOperation3Input
+	Copy  func(*InputService15TestShapeInputService15TestCaseOperation3Input) InputService15TestCaseOperation2Request
 }
 
 // Send marshals and sends the InputService15TestCaseOperation2 API request.
@@ -2447,7 +2473,7 @@ func (c *InputService15ProtocolTest) InputService15TestCaseOperation2Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService15TestCaseOperation2Request{Request: req, Input: input}
+	return InputService15TestCaseOperation2Request{Request: req, Input: input, Copy: c.InputService15TestCaseOperation2Request}
 }
 
 const opInputService15TestCaseOperation3 = "OperationName"
@@ -2456,6 +2482,7 @@ const opInputService15TestCaseOperation3 = "OperationName"
 type InputService15TestCaseOperation3Request struct {
 	*aws.Request
 	Input *InputService15TestShapeInputService15TestCaseOperation3Input
+	Copy  func(*InputService15TestShapeInputService15TestCaseOperation3Input) InputService15TestCaseOperation3Request
 }
 
 // Send marshals and sends the InputService15TestCaseOperation3 API request.
@@ -2494,7 +2521,7 @@ func (c *InputService15ProtocolTest) InputService15TestCaseOperation3Request(inp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InputService15TestCaseOperation3Request{Request: req, Input: input}
+	return InputService15TestCaseOperation3Request{Request: req, Input: input, Copy: c.InputService15TestCaseOperation3Request}
 }
 
 type InputService15TestShapeInputService15TestCaseOperation1Output struct {

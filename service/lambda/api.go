@@ -18,6 +18,7 @@ const opAddPermission = "AddPermission"
 type AddPermissionRequest struct {
 	*aws.Request
 	Input *AddPermissionInput
+	Copy  func(*AddPermissionInput) AddPermissionRequest
 }
 
 // Send marshals and sends the AddPermission API request.
@@ -72,7 +73,7 @@ func (c *Lambda) AddPermissionRequest(input *AddPermissionInput) AddPermissionRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddPermissionRequest{Request: req, Input: input}
+	return AddPermissionRequest{Request: req, Input: input, Copy: c.AddPermissionRequest}
 }
 
 const opCreateAlias = "CreateAlias"
@@ -81,6 +82,7 @@ const opCreateAlias = "CreateAlias"
 type CreateAliasRequest struct {
 	*aws.Request
 	Input *CreateAliasInput
+	Copy  func(*CreateAliasInput) CreateAliasRequest
 }
 
 // Send marshals and sends the CreateAlias API request.
@@ -125,7 +127,7 @@ func (c *Lambda) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAliasRequest{Request: req, Input: input}
+	return CreateAliasRequest{Request: req, Input: input, Copy: c.CreateAliasRequest}
 }
 
 const opCreateEventSourceMapping = "CreateEventSourceMapping"
@@ -134,6 +136,7 @@ const opCreateEventSourceMapping = "CreateEventSourceMapping"
 type CreateEventSourceMappingRequest struct {
 	*aws.Request
 	Input *CreateEventSourceMappingInput
+	Copy  func(*CreateEventSourceMappingInput) CreateEventSourceMappingRequest
 }
 
 // Send marshals and sends the CreateEventSourceMapping API request.
@@ -198,7 +201,7 @@ func (c *Lambda) CreateEventSourceMappingRequest(input *CreateEventSourceMapping
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEventSourceMappingRequest{Request: req, Input: input}
+	return CreateEventSourceMappingRequest{Request: req, Input: input, Copy: c.CreateEventSourceMappingRequest}
 }
 
 const opCreateFunction = "CreateFunction"
@@ -207,6 +210,7 @@ const opCreateFunction = "CreateFunction"
 type CreateFunctionRequest struct {
 	*aws.Request
 	Input *CreateFunctionInput
+	Copy  func(*CreateFunctionInput) CreateFunctionRequest
 }
 
 // Send marshals and sends the CreateFunction API request.
@@ -256,7 +260,7 @@ func (c *Lambda) CreateFunctionRequest(input *CreateFunctionInput) CreateFunctio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateFunctionRequest{Request: req, Input: input}
+	return CreateFunctionRequest{Request: req, Input: input, Copy: c.CreateFunctionRequest}
 }
 
 const opDeleteAlias = "DeleteAlias"
@@ -265,6 +269,7 @@ const opDeleteAlias = "DeleteAlias"
 type DeleteAliasRequest struct {
 	*aws.Request
 	Input *DeleteAliasInput
+	Copy  func(*DeleteAliasInput) DeleteAliasRequest
 }
 
 // Send marshals and sends the DeleteAlias API request.
@@ -310,7 +315,7 @@ func (c *Lambda) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAliasRequest{Request: req, Input: input}
+	return DeleteAliasRequest{Request: req, Input: input, Copy: c.DeleteAliasRequest}
 }
 
 const opDeleteEventSourceMapping = "DeleteEventSourceMapping"
@@ -319,6 +324,7 @@ const opDeleteEventSourceMapping = "DeleteEventSourceMapping"
 type DeleteEventSourceMappingRequest struct {
 	*aws.Request
 	Input *DeleteEventSourceMappingInput
+	Copy  func(*DeleteEventSourceMappingInput) DeleteEventSourceMappingRequest
 }
 
 // Send marshals and sends the DeleteEventSourceMapping API request.
@@ -363,7 +369,7 @@ func (c *Lambda) DeleteEventSourceMappingRequest(input *DeleteEventSourceMapping
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEventSourceMappingRequest{Request: req, Input: input}
+	return DeleteEventSourceMappingRequest{Request: req, Input: input, Copy: c.DeleteEventSourceMappingRequest}
 }
 
 const opDeleteFunction = "DeleteFunction"
@@ -372,6 +378,7 @@ const opDeleteFunction = "DeleteFunction"
 type DeleteFunctionRequest struct {
 	*aws.Request
 	Input *DeleteFunctionInput
+	Copy  func(*DeleteFunctionInput) DeleteFunctionRequest
 }
 
 // Send marshals and sends the DeleteFunction API request.
@@ -426,7 +433,7 @@ func (c *Lambda) DeleteFunctionRequest(input *DeleteFunctionInput) DeleteFunctio
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFunctionRequest{Request: req, Input: input}
+	return DeleteFunctionRequest{Request: req, Input: input, Copy: c.DeleteFunctionRequest}
 }
 
 const opDeleteFunctionConcurrency = "DeleteFunctionConcurrency"
@@ -435,6 +442,7 @@ const opDeleteFunctionConcurrency = "DeleteFunctionConcurrency"
 type DeleteFunctionConcurrencyRequest struct {
 	*aws.Request
 	Input *DeleteFunctionConcurrencyInput
+	Copy  func(*DeleteFunctionConcurrencyInput) DeleteFunctionConcurrencyRequest
 }
 
 // Send marshals and sends the DeleteFunctionConcurrency API request.
@@ -477,7 +485,7 @@ func (c *Lambda) DeleteFunctionConcurrencyRequest(input *DeleteFunctionConcurren
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFunctionConcurrencyRequest{Request: req, Input: input}
+	return DeleteFunctionConcurrencyRequest{Request: req, Input: input, Copy: c.DeleteFunctionConcurrencyRequest}
 }
 
 const opGetAccountSettings = "GetAccountSettings"
@@ -486,6 +494,7 @@ const opGetAccountSettings = "GetAccountSettings"
 type GetAccountSettingsRequest struct {
 	*aws.Request
 	Input *GetAccountSettingsInput
+	Copy  func(*GetAccountSettingsInput) GetAccountSettingsRequest
 }
 
 // Send marshals and sends the GetAccountSettings API request.
@@ -532,7 +541,7 @@ func (c *Lambda) GetAccountSettingsRequest(input *GetAccountSettingsInput) GetAc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAccountSettingsRequest{Request: req, Input: input}
+	return GetAccountSettingsRequest{Request: req, Input: input, Copy: c.GetAccountSettingsRequest}
 }
 
 const opGetAlias = "GetAlias"
@@ -541,6 +550,7 @@ const opGetAlias = "GetAlias"
 type GetAliasRequest struct {
 	*aws.Request
 	Input *GetAliasInput
+	Copy  func(*GetAliasInput) GetAliasRequest
 }
 
 // Send marshals and sends the GetAlias API request.
@@ -585,7 +595,7 @@ func (c *Lambda) GetAliasRequest(input *GetAliasInput) GetAliasRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAliasRequest{Request: req, Input: input}
+	return GetAliasRequest{Request: req, Input: input, Copy: c.GetAliasRequest}
 }
 
 const opGetEventSourceMapping = "GetEventSourceMapping"
@@ -594,6 +604,7 @@ const opGetEventSourceMapping = "GetEventSourceMapping"
 type GetEventSourceMappingRequest struct {
 	*aws.Request
 	Input *GetEventSourceMappingInput
+	Copy  func(*GetEventSourceMappingInput) GetEventSourceMappingRequest
 }
 
 // Send marshals and sends the GetEventSourceMapping API request.
@@ -637,7 +648,7 @@ func (c *Lambda) GetEventSourceMappingRequest(input *GetEventSourceMappingInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetEventSourceMappingRequest{Request: req, Input: input}
+	return GetEventSourceMappingRequest{Request: req, Input: input, Copy: c.GetEventSourceMappingRequest}
 }
 
 const opGetFunction = "GetFunction"
@@ -646,6 +657,7 @@ const opGetFunction = "GetFunction"
 type GetFunctionRequest struct {
 	*aws.Request
 	Input *GetFunctionInput
+	Copy  func(*GetFunctionInput) GetFunctionRequest
 }
 
 // Send marshals and sends the GetFunction API request.
@@ -698,7 +710,7 @@ func (c *Lambda) GetFunctionRequest(input *GetFunctionInput) GetFunctionRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFunctionRequest{Request: req, Input: input}
+	return GetFunctionRequest{Request: req, Input: input, Copy: c.GetFunctionRequest}
 }
 
 const opGetFunctionConfiguration = "GetFunctionConfiguration"
@@ -707,6 +719,7 @@ const opGetFunctionConfiguration = "GetFunctionConfiguration"
 type GetFunctionConfigurationRequest struct {
 	*aws.Request
 	Input *GetFunctionConfigurationInput
+	Copy  func(*GetFunctionConfigurationInput) GetFunctionConfigurationRequest
 }
 
 // Send marshals and sends the GetFunctionConfiguration API request.
@@ -759,7 +772,7 @@ func (c *Lambda) GetFunctionConfigurationRequest(input *GetFunctionConfiguration
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFunctionConfigurationRequest{Request: req, Input: input}
+	return GetFunctionConfigurationRequest{Request: req, Input: input, Copy: c.GetFunctionConfigurationRequest}
 }
 
 const opGetPolicy = "GetPolicy"
@@ -768,6 +781,7 @@ const opGetPolicy = "GetPolicy"
 type GetPolicyRequest struct {
 	*aws.Request
 	Input *GetPolicyInput
+	Copy  func(*GetPolicyInput) GetPolicyRequest
 }
 
 // Send marshals and sends the GetPolicy API request.
@@ -815,7 +829,7 @@ func (c *Lambda) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPolicyRequest{Request: req, Input: input}
+	return GetPolicyRequest{Request: req, Input: input, Copy: c.GetPolicyRequest}
 }
 
 const opInvoke = "Invoke"
@@ -824,6 +838,7 @@ const opInvoke = "Invoke"
 type InvokeRequest struct {
 	*aws.Request
 	Input *InvokeInput
+	Copy  func(*InvokeInput) InvokeRequest
 }
 
 // Send marshals and sends the Invoke API request.
@@ -875,7 +890,7 @@ func (c *Lambda) InvokeRequest(input *InvokeInput) InvokeRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InvokeRequest{Request: req, Input: input}
+	return InvokeRequest{Request: req, Input: input, Copy: c.InvokeRequest}
 }
 
 const opInvokeAsync = "InvokeAsync"
@@ -884,6 +899,7 @@ const opInvokeAsync = "InvokeAsync"
 type InvokeAsyncRequest struct {
 	*aws.Request
 	Input *InvokeAsyncInput
+	Copy  func(*InvokeAsyncInput) InvokeAsyncRequest
 }
 
 // Send marshals and sends the InvokeAsync API request.
@@ -933,7 +949,7 @@ func (c *Lambda) InvokeAsyncRequest(input *InvokeAsyncInput) InvokeAsyncRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InvokeAsyncRequest{Request: req, Input: input}
+	return InvokeAsyncRequest{Request: req, Input: input, Copy: c.InvokeAsyncRequest}
 }
 
 const opListAliases = "ListAliases"
@@ -942,6 +958,7 @@ const opListAliases = "ListAliases"
 type ListAliasesRequest struct {
 	*aws.Request
 	Input *ListAliasesInput
+	Copy  func(*ListAliasesInput) ListAliasesRequest
 }
 
 // Send marshals and sends the ListAliases API request.
@@ -987,7 +1004,7 @@ func (c *Lambda) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAliasesRequest{Request: req, Input: input}
+	return ListAliasesRequest{Request: req, Input: input, Copy: c.ListAliasesRequest}
 }
 
 const opListEventSourceMappings = "ListEventSourceMappings"
@@ -996,6 +1013,7 @@ const opListEventSourceMappings = "ListEventSourceMappings"
 type ListEventSourceMappingsRequest struct {
 	*aws.Request
 	Input *ListEventSourceMappingsInput
+	Copy  func(*ListEventSourceMappingsInput) ListEventSourceMappingsRequest
 }
 
 // Send marshals and sends the ListEventSourceMappings API request.
@@ -1054,47 +1072,47 @@ func (c *Lambda) ListEventSourceMappingsRequest(input *ListEventSourceMappingsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListEventSourceMappingsRequest{Request: req, Input: input}
+	return ListEventSourceMappingsRequest{Request: req, Input: input, Copy: c.ListEventSourceMappingsRequest}
 }
 
-// ListEventSourceMappingsPages iterates over the pages of a ListEventSourceMappings operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListEventSourceMappings method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListEventSourceMappingsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListEventSourceMappings operation.
-//    pageNum := 0
-//    err := client.ListEventSourceMappingsPages(params,
-//        func(page *ListEventSourceMappingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListEventSourceMappingsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListEventSourceMappingsRequest) Paginate(opts ...aws.Option) ListEventSourceMappingsPager {
 	return ListEventSourceMappingsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListEventSourceMappingsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListEventSourceMappingsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListEventSourceMappingsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListEventSourceMappingsPager ...
+// ListEventSourceMappingsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListEventSourceMappingsPager struct {
 	aws.Pager
 }
@@ -1109,6 +1127,7 @@ const opListFunctions = "ListFunctions"
 type ListFunctionsRequest struct {
 	*aws.Request
 	Input *ListFunctionsInput
+	Copy  func(*ListFunctionsInput) ListFunctionsRequest
 }
 
 // Send marshals and sends the ListFunctions API request.
@@ -1163,47 +1182,47 @@ func (c *Lambda) ListFunctionsRequest(input *ListFunctionsInput) ListFunctionsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFunctionsRequest{Request: req, Input: input}
+	return ListFunctionsRequest{Request: req, Input: input, Copy: c.ListFunctionsRequest}
 }
 
-// ListFunctionsPages iterates over the pages of a ListFunctions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListFunctions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListFunctionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListFunctions operation.
-//    pageNum := 0
-//    err := client.ListFunctionsPages(params,
-//        func(page *ListFunctionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListFunctionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListFunctionsRequest) Paginate(opts ...aws.Option) ListFunctionsPager {
 	return ListFunctionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListFunctionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListFunctionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListFunctionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListFunctionsPager ...
+// ListFunctionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListFunctionsPager struct {
 	aws.Pager
 }
@@ -1218,6 +1237,7 @@ const opListTags = "ListTags"
 type ListTagsRequest struct {
 	*aws.Request
 	Input *ListTagsInput
+	Copy  func(*ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -1259,7 +1279,7 @@ func (c *Lambda) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsRequest{Request: req, Input: input}
+	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
 const opListVersionsByFunction = "ListVersionsByFunction"
@@ -1268,6 +1288,7 @@ const opListVersionsByFunction = "ListVersionsByFunction"
 type ListVersionsByFunctionRequest struct {
 	*aws.Request
 	Input *ListVersionsByFunctionInput
+	Copy  func(*ListVersionsByFunctionInput) ListVersionsByFunctionRequest
 }
 
 // Send marshals and sends the ListVersionsByFunction API request.
@@ -1309,7 +1330,7 @@ func (c *Lambda) ListVersionsByFunctionRequest(input *ListVersionsByFunctionInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListVersionsByFunctionRequest{Request: req, Input: input}
+	return ListVersionsByFunctionRequest{Request: req, Input: input, Copy: c.ListVersionsByFunctionRequest}
 }
 
 const opPublishVersion = "PublishVersion"
@@ -1318,6 +1339,7 @@ const opPublishVersion = "PublishVersion"
 type PublishVersionRequest struct {
 	*aws.Request
 	Input *PublishVersionInput
+	Copy  func(*PublishVersionInput) PublishVersionRequest
 }
 
 // Send marshals and sends the PublishVersion API request.
@@ -1362,7 +1384,7 @@ func (c *Lambda) PublishVersionRequest(input *PublishVersionInput) PublishVersio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PublishVersionRequest{Request: req, Input: input}
+	return PublishVersionRequest{Request: req, Input: input, Copy: c.PublishVersionRequest}
 }
 
 const opPutFunctionConcurrency = "PutFunctionConcurrency"
@@ -1371,6 +1393,7 @@ const opPutFunctionConcurrency = "PutFunctionConcurrency"
 type PutFunctionConcurrencyRequest struct {
 	*aws.Request
 	Input *PutFunctionConcurrencyInput
+	Copy  func(*PutFunctionConcurrencyInput) PutFunctionConcurrencyRequest
 }
 
 // Send marshals and sends the PutFunctionConcurrency API request.
@@ -1416,7 +1439,7 @@ func (c *Lambda) PutFunctionConcurrencyRequest(input *PutFunctionConcurrencyInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutFunctionConcurrencyRequest{Request: req, Input: input}
+	return PutFunctionConcurrencyRequest{Request: req, Input: input, Copy: c.PutFunctionConcurrencyRequest}
 }
 
 const opRemovePermission = "RemovePermission"
@@ -1425,6 +1448,7 @@ const opRemovePermission = "RemovePermission"
 type RemovePermissionRequest struct {
 	*aws.Request
 	Input *RemovePermissionInput
+	Copy  func(*RemovePermissionInput) RemovePermissionRequest
 }
 
 // Send marshals and sends the RemovePermission API request.
@@ -1479,7 +1503,7 @@ func (c *Lambda) RemovePermissionRequest(input *RemovePermissionInput) RemovePer
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemovePermissionRequest{Request: req, Input: input}
+	return RemovePermissionRequest{Request: req, Input: input, Copy: c.RemovePermissionRequest}
 }
 
 const opTagResource = "TagResource"
@@ -1488,6 +1512,7 @@ const opTagResource = "TagResource"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -1532,7 +1557,7 @@ func (c *Lambda) TagResourceRequest(input *TagResourceInput) TagResourceRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUntagResource = "UntagResource"
@@ -1541,6 +1566,7 @@ const opUntagResource = "UntagResource"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -1584,7 +1610,7 @@ func (c *Lambda) UntagResourceRequest(input *UntagResourceInput) UntagResourceRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateAlias = "UpdateAlias"
@@ -1593,6 +1619,7 @@ const opUpdateAlias = "UpdateAlias"
 type UpdateAliasRequest struct {
 	*aws.Request
 	Input *UpdateAliasInput
+	Copy  func(*UpdateAliasInput) UpdateAliasRequest
 }
 
 // Send marshals and sends the UpdateAlias API request.
@@ -1637,7 +1664,7 @@ func (c *Lambda) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAliasRequest{Request: req, Input: input}
+	return UpdateAliasRequest{Request: req, Input: input, Copy: c.UpdateAliasRequest}
 }
 
 const opUpdateEventSourceMapping = "UpdateEventSourceMapping"
@@ -1646,6 +1673,7 @@ const opUpdateEventSourceMapping = "UpdateEventSourceMapping"
 type UpdateEventSourceMappingRequest struct {
 	*aws.Request
 	Input *UpdateEventSourceMappingInput
+	Copy  func(*UpdateEventSourceMappingInput) UpdateEventSourceMappingRequest
 }
 
 // Send marshals and sends the UpdateEventSourceMapping API request.
@@ -1702,7 +1730,7 @@ func (c *Lambda) UpdateEventSourceMappingRequest(input *UpdateEventSourceMapping
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEventSourceMappingRequest{Request: req, Input: input}
+	return UpdateEventSourceMappingRequest{Request: req, Input: input, Copy: c.UpdateEventSourceMappingRequest}
 }
 
 const opUpdateFunctionCode = "UpdateFunctionCode"
@@ -1711,6 +1739,7 @@ const opUpdateFunctionCode = "UpdateFunctionCode"
 type UpdateFunctionCodeRequest struct {
 	*aws.Request
 	Input *UpdateFunctionCodeInput
+	Copy  func(*UpdateFunctionCodeInput) UpdateFunctionCodeRequest
 }
 
 // Send marshals and sends the UpdateFunctionCode API request.
@@ -1759,7 +1788,7 @@ func (c *Lambda) UpdateFunctionCodeRequest(input *UpdateFunctionCodeInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateFunctionCodeRequest{Request: req, Input: input}
+	return UpdateFunctionCodeRequest{Request: req, Input: input, Copy: c.UpdateFunctionCodeRequest}
 }
 
 const opUpdateFunctionConfiguration = "UpdateFunctionConfiguration"
@@ -1768,6 +1797,7 @@ const opUpdateFunctionConfiguration = "UpdateFunctionConfiguration"
 type UpdateFunctionConfigurationRequest struct {
 	*aws.Request
 	Input *UpdateFunctionConfigurationInput
+	Copy  func(*UpdateFunctionConfigurationInput) UpdateFunctionConfigurationRequest
 }
 
 // Send marshals and sends the UpdateFunctionConfiguration API request.
@@ -1818,7 +1848,7 @@ func (c *Lambda) UpdateFunctionConfigurationRequest(input *UpdateFunctionConfigu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateFunctionConfigurationRequest{Request: req, Input: input}
+	return UpdateFunctionConfigurationRequest{Request: req, Input: input, Copy: c.UpdateFunctionConfigurationRequest}
 }
 
 // Provides limits of code size and concurrency associated with the current

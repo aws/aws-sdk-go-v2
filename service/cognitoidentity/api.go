@@ -18,6 +18,7 @@ const opCreateIdentityPool = "CreateIdentityPool"
 type CreateIdentityPoolRequest struct {
 	*aws.Request
 	Input *CreateIdentityPoolInput
+	Copy  func(*CreateIdentityPoolInput) CreateIdentityPoolRequest
 }
 
 // Send marshals and sends the CreateIdentityPool API request.
@@ -72,7 +73,7 @@ func (c *CognitoIdentity) CreateIdentityPoolRequest(input *CreateIdentityPoolInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateIdentityPoolRequest{Request: req, Input: input}
+	return CreateIdentityPoolRequest{Request: req, Input: input, Copy: c.CreateIdentityPoolRequest}
 }
 
 const opDeleteIdentities = "DeleteIdentities"
@@ -81,6 +82,7 @@ const opDeleteIdentities = "DeleteIdentities"
 type DeleteIdentitiesRequest struct {
 	*aws.Request
 	Input *DeleteIdentitiesInput
+	Copy  func(*DeleteIdentitiesInput) DeleteIdentitiesRequest
 }
 
 // Send marshals and sends the DeleteIdentities API request.
@@ -124,7 +126,7 @@ func (c *CognitoIdentity) DeleteIdentitiesRequest(input *DeleteIdentitiesInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIdentitiesRequest{Request: req, Input: input}
+	return DeleteIdentitiesRequest{Request: req, Input: input, Copy: c.DeleteIdentitiesRequest}
 }
 
 const opDeleteIdentityPool = "DeleteIdentityPool"
@@ -133,6 +135,7 @@ const opDeleteIdentityPool = "DeleteIdentityPool"
 type DeleteIdentityPoolRequest struct {
 	*aws.Request
 	Input *DeleteIdentityPoolInput
+	Copy  func(*DeleteIdentityPoolInput) DeleteIdentityPoolRequest
 }
 
 // Send marshals and sends the DeleteIdentityPool API request.
@@ -178,7 +181,7 @@ func (c *CognitoIdentity) DeleteIdentityPoolRequest(input *DeleteIdentityPoolInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIdentityPoolRequest{Request: req, Input: input}
+	return DeleteIdentityPoolRequest{Request: req, Input: input, Copy: c.DeleteIdentityPoolRequest}
 }
 
 const opDescribeIdentity = "DescribeIdentity"
@@ -187,6 +190,7 @@ const opDescribeIdentity = "DescribeIdentity"
 type DescribeIdentityRequest struct {
 	*aws.Request
 	Input *DescribeIdentityInput
+	Copy  func(*DescribeIdentityInput) DescribeIdentityRequest
 }
 
 // Send marshals and sends the DescribeIdentity API request.
@@ -230,7 +234,7 @@ func (c *CognitoIdentity) DescribeIdentityRequest(input *DescribeIdentityInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeIdentityRequest{Request: req, Input: input}
+	return DescribeIdentityRequest{Request: req, Input: input, Copy: c.DescribeIdentityRequest}
 }
 
 const opDescribeIdentityPool = "DescribeIdentityPool"
@@ -239,6 +243,7 @@ const opDescribeIdentityPool = "DescribeIdentityPool"
 type DescribeIdentityPoolRequest struct {
 	*aws.Request
 	Input *DescribeIdentityPoolInput
+	Copy  func(*DescribeIdentityPoolInput) DescribeIdentityPoolRequest
 }
 
 // Send marshals and sends the DescribeIdentityPool API request.
@@ -282,7 +287,7 @@ func (c *CognitoIdentity) DescribeIdentityPoolRequest(input *DescribeIdentityPoo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeIdentityPoolRequest{Request: req, Input: input}
+	return DescribeIdentityPoolRequest{Request: req, Input: input, Copy: c.DescribeIdentityPoolRequest}
 }
 
 const opGetCredentialsForIdentity = "GetCredentialsForIdentity"
@@ -291,6 +296,7 @@ const opGetCredentialsForIdentity = "GetCredentialsForIdentity"
 type GetCredentialsForIdentityRequest struct {
 	*aws.Request
 	Input *GetCredentialsForIdentityInput
+	Copy  func(*GetCredentialsForIdentityInput) GetCredentialsForIdentityRequest
 }
 
 // Send marshals and sends the GetCredentialsForIdentity API request.
@@ -336,7 +342,7 @@ func (c *CognitoIdentity) GetCredentialsForIdentityRequest(input *GetCredentials
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCredentialsForIdentityRequest{Request: req, Input: input}
+	return GetCredentialsForIdentityRequest{Request: req, Input: input, Copy: c.GetCredentialsForIdentityRequest}
 }
 
 const opGetId = "GetId"
@@ -345,6 +351,7 @@ const opGetId = "GetId"
 type GetIdRequest struct {
 	*aws.Request
 	Input *GetIdInput
+	Copy  func(*GetIdInput) GetIdRequest
 }
 
 // Send marshals and sends the GetId API request.
@@ -388,7 +395,7 @@ func (c *CognitoIdentity) GetIdRequest(input *GetIdInput) GetIdRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIdRequest{Request: req, Input: input}
+	return GetIdRequest{Request: req, Input: input, Copy: c.GetIdRequest}
 }
 
 const opGetIdentityPoolRoles = "GetIdentityPoolRoles"
@@ -397,6 +404,7 @@ const opGetIdentityPoolRoles = "GetIdentityPoolRoles"
 type GetIdentityPoolRolesRequest struct {
 	*aws.Request
 	Input *GetIdentityPoolRolesInput
+	Copy  func(*GetIdentityPoolRolesInput) GetIdentityPoolRolesRequest
 }
 
 // Send marshals and sends the GetIdentityPoolRoles API request.
@@ -439,7 +447,7 @@ func (c *CognitoIdentity) GetIdentityPoolRolesRequest(input *GetIdentityPoolRole
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIdentityPoolRolesRequest{Request: req, Input: input}
+	return GetIdentityPoolRolesRequest{Request: req, Input: input, Copy: c.GetIdentityPoolRolesRequest}
 }
 
 const opGetOpenIdToken = "GetOpenIdToken"
@@ -448,6 +456,7 @@ const opGetOpenIdToken = "GetOpenIdToken"
 type GetOpenIdTokenRequest struct {
 	*aws.Request
 	Input *GetOpenIdTokenInput
+	Copy  func(*GetOpenIdTokenInput) GetOpenIdTokenRequest
 }
 
 // Send marshals and sends the GetOpenIdToken API request.
@@ -494,7 +503,7 @@ func (c *CognitoIdentity) GetOpenIdTokenRequest(input *GetOpenIdTokenInput) GetO
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOpenIdTokenRequest{Request: req, Input: input}
+	return GetOpenIdTokenRequest{Request: req, Input: input, Copy: c.GetOpenIdTokenRequest}
 }
 
 const opGetOpenIdTokenForDeveloperIdentity = "GetOpenIdTokenForDeveloperIdentity"
@@ -503,6 +512,7 @@ const opGetOpenIdTokenForDeveloperIdentity = "GetOpenIdTokenForDeveloperIdentity
 type GetOpenIdTokenForDeveloperIdentityRequest struct {
 	*aws.Request
 	Input *GetOpenIdTokenForDeveloperIdentityInput
+	Copy  func(*GetOpenIdTokenForDeveloperIdentityInput) GetOpenIdTokenForDeveloperIdentityRequest
 }
 
 // Send marshals and sends the GetOpenIdTokenForDeveloperIdentity API request.
@@ -558,7 +568,7 @@ func (c *CognitoIdentity) GetOpenIdTokenForDeveloperIdentityRequest(input *GetOp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOpenIdTokenForDeveloperIdentityRequest{Request: req, Input: input}
+	return GetOpenIdTokenForDeveloperIdentityRequest{Request: req, Input: input, Copy: c.GetOpenIdTokenForDeveloperIdentityRequest}
 }
 
 const opListIdentities = "ListIdentities"
@@ -567,6 +577,7 @@ const opListIdentities = "ListIdentities"
 type ListIdentitiesRequest struct {
 	*aws.Request
 	Input *ListIdentitiesInput
+	Copy  func(*ListIdentitiesInput) ListIdentitiesRequest
 }
 
 // Send marshals and sends the ListIdentities API request.
@@ -609,7 +620,7 @@ func (c *CognitoIdentity) ListIdentitiesRequest(input *ListIdentitiesInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIdentitiesRequest{Request: req, Input: input}
+	return ListIdentitiesRequest{Request: req, Input: input, Copy: c.ListIdentitiesRequest}
 }
 
 const opListIdentityPools = "ListIdentityPools"
@@ -618,6 +629,7 @@ const opListIdentityPools = "ListIdentityPools"
 type ListIdentityPoolsRequest struct {
 	*aws.Request
 	Input *ListIdentityPoolsInput
+	Copy  func(*ListIdentityPoolsInput) ListIdentityPoolsRequest
 }
 
 // Send marshals and sends the ListIdentityPools API request.
@@ -660,7 +672,7 @@ func (c *CognitoIdentity) ListIdentityPoolsRequest(input *ListIdentityPoolsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIdentityPoolsRequest{Request: req, Input: input}
+	return ListIdentityPoolsRequest{Request: req, Input: input, Copy: c.ListIdentityPoolsRequest}
 }
 
 const opLookupDeveloperIdentity = "LookupDeveloperIdentity"
@@ -669,6 +681,7 @@ const opLookupDeveloperIdentity = "LookupDeveloperIdentity"
 type LookupDeveloperIdentityRequest struct {
 	*aws.Request
 	Input *LookupDeveloperIdentityInput
+	Copy  func(*LookupDeveloperIdentityInput) LookupDeveloperIdentityRequest
 }
 
 // Send marshals and sends the LookupDeveloperIdentity API request.
@@ -718,7 +731,7 @@ func (c *CognitoIdentity) LookupDeveloperIdentityRequest(input *LookupDeveloperI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return LookupDeveloperIdentityRequest{Request: req, Input: input}
+	return LookupDeveloperIdentityRequest{Request: req, Input: input, Copy: c.LookupDeveloperIdentityRequest}
 }
 
 const opMergeDeveloperIdentities = "MergeDeveloperIdentities"
@@ -727,6 +740,7 @@ const opMergeDeveloperIdentities = "MergeDeveloperIdentities"
 type MergeDeveloperIdentitiesRequest struct {
 	*aws.Request
 	Input *MergeDeveloperIdentitiesInput
+	Copy  func(*MergeDeveloperIdentitiesInput) MergeDeveloperIdentitiesRequest
 }
 
 // Send marshals and sends the MergeDeveloperIdentities API request.
@@ -775,7 +789,7 @@ func (c *CognitoIdentity) MergeDeveloperIdentitiesRequest(input *MergeDeveloperI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return MergeDeveloperIdentitiesRequest{Request: req, Input: input}
+	return MergeDeveloperIdentitiesRequest{Request: req, Input: input, Copy: c.MergeDeveloperIdentitiesRequest}
 }
 
 const opSetIdentityPoolRoles = "SetIdentityPoolRoles"
@@ -784,6 +798,7 @@ const opSetIdentityPoolRoles = "SetIdentityPoolRoles"
 type SetIdentityPoolRolesRequest struct {
 	*aws.Request
 	Input *SetIdentityPoolRolesInput
+	Copy  func(*SetIdentityPoolRolesInput) SetIdentityPoolRolesRequest
 }
 
 // Send marshals and sends the SetIdentityPoolRoles API request.
@@ -829,7 +844,7 @@ func (c *CognitoIdentity) SetIdentityPoolRolesRequest(input *SetIdentityPoolRole
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetIdentityPoolRolesRequest{Request: req, Input: input}
+	return SetIdentityPoolRolesRequest{Request: req, Input: input, Copy: c.SetIdentityPoolRolesRequest}
 }
 
 const opUnlinkDeveloperIdentity = "UnlinkDeveloperIdentity"
@@ -838,6 +853,7 @@ const opUnlinkDeveloperIdentity = "UnlinkDeveloperIdentity"
 type UnlinkDeveloperIdentityRequest struct {
 	*aws.Request
 	Input *UnlinkDeveloperIdentityInput
+	Copy  func(*UnlinkDeveloperIdentityInput) UnlinkDeveloperIdentityRequest
 }
 
 // Send marshals and sends the UnlinkDeveloperIdentity API request.
@@ -885,7 +901,7 @@ func (c *CognitoIdentity) UnlinkDeveloperIdentityRequest(input *UnlinkDeveloperI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UnlinkDeveloperIdentityRequest{Request: req, Input: input}
+	return UnlinkDeveloperIdentityRequest{Request: req, Input: input, Copy: c.UnlinkDeveloperIdentityRequest}
 }
 
 const opUnlinkIdentity = "UnlinkIdentity"
@@ -894,6 +910,7 @@ const opUnlinkIdentity = "UnlinkIdentity"
 type UnlinkIdentityRequest struct {
 	*aws.Request
 	Input *UnlinkIdentityInput
+	Copy  func(*UnlinkIdentityInput) UnlinkIdentityRequest
 }
 
 // Send marshals and sends the UnlinkIdentity API request.
@@ -940,7 +957,7 @@ func (c *CognitoIdentity) UnlinkIdentityRequest(input *UnlinkIdentityInput) Unli
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UnlinkIdentityRequest{Request: req, Input: input}
+	return UnlinkIdentityRequest{Request: req, Input: input, Copy: c.UnlinkIdentityRequest}
 }
 
 const opUpdateIdentityPool = "UpdateIdentityPool"
@@ -949,6 +966,7 @@ const opUpdateIdentityPool = "UpdateIdentityPool"
 type UpdateIdentityPoolRequest struct {
 	*aws.Request
 	Input *UpdateIdentityPoolOutput
+	Copy  func(*UpdateIdentityPoolOutput) UpdateIdentityPoolRequest
 }
 
 // Send marshals and sends the UpdateIdentityPool API request.
@@ -991,7 +1009,7 @@ func (c *CognitoIdentity) UpdateIdentityPoolRequest(input *UpdateIdentityPoolOut
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateIdentityPoolRequest{Request: req, Input: input}
+	return UpdateIdentityPoolRequest{Request: req, Input: input, Copy: c.UpdateIdentityPoolRequest}
 }
 
 // Input to the CreateIdentityPool action.

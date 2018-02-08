@@ -17,6 +17,7 @@ const opAssociateVPCWithHostedZone = "AssociateVPCWithHostedZone"
 type AssociateVPCWithHostedZoneRequest struct {
 	*aws.Request
 	Input *AssociateVPCWithHostedZoneInput
+	Copy  func(*AssociateVPCWithHostedZoneInput) AssociateVPCWithHostedZoneRequest
 }
 
 // Send marshals and sends the AssociateVPCWithHostedZone API request.
@@ -66,7 +67,7 @@ func (c *Route53) AssociateVPCWithHostedZoneRequest(input *AssociateVPCWithHoste
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateVPCWithHostedZoneRequest{Request: req, Input: input}
+	return AssociateVPCWithHostedZoneRequest{Request: req, Input: input, Copy: c.AssociateVPCWithHostedZoneRequest}
 }
 
 const opChangeResourceRecordSets = "ChangeResourceRecordSets"
@@ -75,6 +76,7 @@ const opChangeResourceRecordSets = "ChangeResourceRecordSets"
 type ChangeResourceRecordSetsRequest struct {
 	*aws.Request
 	Input *ChangeResourceRecordSetsInput
+	Copy  func(*ChangeResourceRecordSetsInput) ChangeResourceRecordSetsRequest
 }
 
 // Send marshals and sends the ChangeResourceRecordSets API request.
@@ -193,7 +195,7 @@ func (c *Route53) ChangeResourceRecordSetsRequest(input *ChangeResourceRecordSet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ChangeResourceRecordSetsRequest{Request: req, Input: input}
+	return ChangeResourceRecordSetsRequest{Request: req, Input: input, Copy: c.ChangeResourceRecordSetsRequest}
 }
 
 const opChangeTagsForResource = "ChangeTagsForResource"
@@ -202,6 +204,7 @@ const opChangeTagsForResource = "ChangeTagsForResource"
 type ChangeTagsForResourceRequest struct {
 	*aws.Request
 	Input *ChangeTagsForResourceInput
+	Copy  func(*ChangeTagsForResourceInput) ChangeTagsForResourceRequest
 }
 
 // Send marshals and sends the ChangeTagsForResource API request.
@@ -246,7 +249,7 @@ func (c *Route53) ChangeTagsForResourceRequest(input *ChangeTagsForResourceInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ChangeTagsForResourceRequest{Request: req, Input: input}
+	return ChangeTagsForResourceRequest{Request: req, Input: input, Copy: c.ChangeTagsForResourceRequest}
 }
 
 const opCreateHealthCheck = "CreateHealthCheck"
@@ -255,6 +258,7 @@ const opCreateHealthCheck = "CreateHealthCheck"
 type CreateHealthCheckRequest struct {
 	*aws.Request
 	Input *CreateHealthCheckInput
+	Copy  func(*CreateHealthCheckInput) CreateHealthCheckRequest
 }
 
 // Send marshals and sends the CreateHealthCheck API request.
@@ -326,7 +330,7 @@ func (c *Route53) CreateHealthCheckRequest(input *CreateHealthCheckInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateHealthCheckRequest{Request: req, Input: input}
+	return CreateHealthCheckRequest{Request: req, Input: input, Copy: c.CreateHealthCheckRequest}
 }
 
 const opCreateHostedZone = "CreateHostedZone"
@@ -335,6 +339,7 @@ const opCreateHostedZone = "CreateHostedZone"
 type CreateHostedZoneRequest struct {
 	*aws.Request
 	Input *CreateHostedZoneInput
+	Copy  func(*CreateHostedZoneInput) CreateHostedZoneRequest
 }
 
 // Send marshals and sends the CreateHostedZone API request.
@@ -409,7 +414,7 @@ func (c *Route53) CreateHostedZoneRequest(input *CreateHostedZoneInput) CreateHo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateHostedZoneRequest{Request: req, Input: input}
+	return CreateHostedZoneRequest{Request: req, Input: input, Copy: c.CreateHostedZoneRequest}
 }
 
 const opCreateQueryLoggingConfig = "CreateQueryLoggingConfig"
@@ -418,6 +423,7 @@ const opCreateQueryLoggingConfig = "CreateQueryLoggingConfig"
 type CreateQueryLoggingConfigRequest struct {
 	*aws.Request
 	Input *CreateQueryLoggingConfigInput
+	Copy  func(*CreateQueryLoggingConfigInput) CreateQueryLoggingConfigRequest
 }
 
 // Send marshals and sends the CreateQueryLoggingConfig API request.
@@ -554,7 +560,7 @@ func (c *Route53) CreateQueryLoggingConfigRequest(input *CreateQueryLoggingConfi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateQueryLoggingConfigRequest{Request: req, Input: input}
+	return CreateQueryLoggingConfigRequest{Request: req, Input: input, Copy: c.CreateQueryLoggingConfigRequest}
 }
 
 const opCreateReusableDelegationSet = "CreateReusableDelegationSet"
@@ -563,6 +569,7 @@ const opCreateReusableDelegationSet = "CreateReusableDelegationSet"
 type CreateReusableDelegationSetRequest struct {
 	*aws.Request
 	Input *CreateReusableDelegationSetInput
+	Copy  func(*CreateReusableDelegationSetInput) CreateReusableDelegationSetRequest
 }
 
 // Send marshals and sends the CreateReusableDelegationSet API request.
@@ -646,7 +653,7 @@ func (c *Route53) CreateReusableDelegationSetRequest(input *CreateReusableDelega
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateReusableDelegationSetRequest{Request: req, Input: input}
+	return CreateReusableDelegationSetRequest{Request: req, Input: input, Copy: c.CreateReusableDelegationSetRequest}
 }
 
 const opCreateTrafficPolicy = "CreateTrafficPolicy"
@@ -655,6 +662,7 @@ const opCreateTrafficPolicy = "CreateTrafficPolicy"
 type CreateTrafficPolicyRequest struct {
 	*aws.Request
 	Input *CreateTrafficPolicyInput
+	Copy  func(*CreateTrafficPolicyInput) CreateTrafficPolicyRequest
 }
 
 // Send marshals and sends the CreateTrafficPolicy API request.
@@ -697,7 +705,7 @@ func (c *Route53) CreateTrafficPolicyRequest(input *CreateTrafficPolicyInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTrafficPolicyRequest{Request: req, Input: input}
+	return CreateTrafficPolicyRequest{Request: req, Input: input, Copy: c.CreateTrafficPolicyRequest}
 }
 
 const opCreateTrafficPolicyInstance = "CreateTrafficPolicyInstance"
@@ -706,6 +714,7 @@ const opCreateTrafficPolicyInstance = "CreateTrafficPolicyInstance"
 type CreateTrafficPolicyInstanceRequest struct {
 	*aws.Request
 	Input *CreateTrafficPolicyInstanceInput
+	Copy  func(*CreateTrafficPolicyInstanceInput) CreateTrafficPolicyInstanceRequest
 }
 
 // Send marshals and sends the CreateTrafficPolicyInstance API request.
@@ -751,7 +760,7 @@ func (c *Route53) CreateTrafficPolicyInstanceRequest(input *CreateTrafficPolicyI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTrafficPolicyInstanceRequest{Request: req, Input: input}
+	return CreateTrafficPolicyInstanceRequest{Request: req, Input: input, Copy: c.CreateTrafficPolicyInstanceRequest}
 }
 
 const opCreateTrafficPolicyVersion = "CreateTrafficPolicyVersion"
@@ -760,6 +769,7 @@ const opCreateTrafficPolicyVersion = "CreateTrafficPolicyVersion"
 type CreateTrafficPolicyVersionRequest struct {
 	*aws.Request
 	Input *CreateTrafficPolicyVersionInput
+	Copy  func(*CreateTrafficPolicyVersionInput) CreateTrafficPolicyVersionRequest
 }
 
 // Send marshals and sends the CreateTrafficPolicyVersion API request.
@@ -807,7 +817,7 @@ func (c *Route53) CreateTrafficPolicyVersionRequest(input *CreateTrafficPolicyVe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTrafficPolicyVersionRequest{Request: req, Input: input}
+	return CreateTrafficPolicyVersionRequest{Request: req, Input: input, Copy: c.CreateTrafficPolicyVersionRequest}
 }
 
 const opCreateVPCAssociationAuthorization = "CreateVPCAssociationAuthorization"
@@ -816,6 +826,7 @@ const opCreateVPCAssociationAuthorization = "CreateVPCAssociationAuthorization"
 type CreateVPCAssociationAuthorizationRequest struct {
 	*aws.Request
 	Input *CreateVPCAssociationAuthorizationInput
+	Copy  func(*CreateVPCAssociationAuthorizationInput) CreateVPCAssociationAuthorizationRequest
 }
 
 // Send marshals and sends the CreateVPCAssociationAuthorization API request.
@@ -865,7 +876,7 @@ func (c *Route53) CreateVPCAssociationAuthorizationRequest(input *CreateVPCAssoc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVPCAssociationAuthorizationRequest{Request: req, Input: input}
+	return CreateVPCAssociationAuthorizationRequest{Request: req, Input: input, Copy: c.CreateVPCAssociationAuthorizationRequest}
 }
 
 const opDeleteHealthCheck = "DeleteHealthCheck"
@@ -874,6 +885,7 @@ const opDeleteHealthCheck = "DeleteHealthCheck"
 type DeleteHealthCheckRequest struct {
 	*aws.Request
 	Input *DeleteHealthCheckInput
+	Copy  func(*DeleteHealthCheckInput) DeleteHealthCheckRequest
 }
 
 // Send marshals and sends the DeleteHealthCheck API request.
@@ -922,7 +934,7 @@ func (c *Route53) DeleteHealthCheckRequest(input *DeleteHealthCheckInput) Delete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteHealthCheckRequest{Request: req, Input: input}
+	return DeleteHealthCheckRequest{Request: req, Input: input, Copy: c.DeleteHealthCheckRequest}
 }
 
 const opDeleteHostedZone = "DeleteHostedZone"
@@ -931,6 +943,7 @@ const opDeleteHostedZone = "DeleteHostedZone"
 type DeleteHostedZoneRequest struct {
 	*aws.Request
 	Input *DeleteHostedZoneInput
+	Copy  func(*DeleteHostedZoneInput) DeleteHostedZoneRequest
 }
 
 // Send marshals and sends the DeleteHostedZone API request.
@@ -1000,7 +1013,7 @@ func (c *Route53) DeleteHostedZoneRequest(input *DeleteHostedZoneInput) DeleteHo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteHostedZoneRequest{Request: req, Input: input}
+	return DeleteHostedZoneRequest{Request: req, Input: input, Copy: c.DeleteHostedZoneRequest}
 }
 
 const opDeleteQueryLoggingConfig = "DeleteQueryLoggingConfig"
@@ -1009,6 +1022,7 @@ const opDeleteQueryLoggingConfig = "DeleteQueryLoggingConfig"
 type DeleteQueryLoggingConfigRequest struct {
 	*aws.Request
 	Input *DeleteQueryLoggingConfigInput
+	Copy  func(*DeleteQueryLoggingConfigInput) DeleteQueryLoggingConfigRequest
 }
 
 // Send marshals and sends the DeleteQueryLoggingConfig API request.
@@ -1053,7 +1067,7 @@ func (c *Route53) DeleteQueryLoggingConfigRequest(input *DeleteQueryLoggingConfi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteQueryLoggingConfigRequest{Request: req, Input: input}
+	return DeleteQueryLoggingConfigRequest{Request: req, Input: input, Copy: c.DeleteQueryLoggingConfigRequest}
 }
 
 const opDeleteReusableDelegationSet = "DeleteReusableDelegationSet"
@@ -1062,6 +1076,7 @@ const opDeleteReusableDelegationSet = "DeleteReusableDelegationSet"
 type DeleteReusableDelegationSetRequest struct {
 	*aws.Request
 	Input *DeleteReusableDelegationSetInput
+	Copy  func(*DeleteReusableDelegationSetInput) DeleteReusableDelegationSetRequest
 }
 
 // Send marshals and sends the DeleteReusableDelegationSet API request.
@@ -1109,7 +1124,7 @@ func (c *Route53) DeleteReusableDelegationSetRequest(input *DeleteReusableDelega
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteReusableDelegationSetRequest{Request: req, Input: input}
+	return DeleteReusableDelegationSetRequest{Request: req, Input: input, Copy: c.DeleteReusableDelegationSetRequest}
 }
 
 const opDeleteTrafficPolicy = "DeleteTrafficPolicy"
@@ -1118,6 +1133,7 @@ const opDeleteTrafficPolicy = "DeleteTrafficPolicy"
 type DeleteTrafficPolicyRequest struct {
 	*aws.Request
 	Input *DeleteTrafficPolicyInput
+	Copy  func(*DeleteTrafficPolicyInput) DeleteTrafficPolicyRequest
 }
 
 // Send marshals and sends the DeleteTrafficPolicy API request.
@@ -1158,7 +1174,7 @@ func (c *Route53) DeleteTrafficPolicyRequest(input *DeleteTrafficPolicyInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTrafficPolicyRequest{Request: req, Input: input}
+	return DeleteTrafficPolicyRequest{Request: req, Input: input, Copy: c.DeleteTrafficPolicyRequest}
 }
 
 const opDeleteTrafficPolicyInstance = "DeleteTrafficPolicyInstance"
@@ -1167,6 +1183,7 @@ const opDeleteTrafficPolicyInstance = "DeleteTrafficPolicyInstance"
 type DeleteTrafficPolicyInstanceRequest struct {
 	*aws.Request
 	Input *DeleteTrafficPolicyInstanceInput
+	Copy  func(*DeleteTrafficPolicyInstanceInput) DeleteTrafficPolicyInstanceRequest
 }
 
 // Send marshals and sends the DeleteTrafficPolicyInstance API request.
@@ -1211,7 +1228,7 @@ func (c *Route53) DeleteTrafficPolicyInstanceRequest(input *DeleteTrafficPolicyI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTrafficPolicyInstanceRequest{Request: req, Input: input}
+	return DeleteTrafficPolicyInstanceRequest{Request: req, Input: input, Copy: c.DeleteTrafficPolicyInstanceRequest}
 }
 
 const opDeleteVPCAssociationAuthorization = "DeleteVPCAssociationAuthorization"
@@ -1220,6 +1237,7 @@ const opDeleteVPCAssociationAuthorization = "DeleteVPCAssociationAuthorization"
 type DeleteVPCAssociationAuthorizationRequest struct {
 	*aws.Request
 	Input *DeleteVPCAssociationAuthorizationInput
+	Copy  func(*DeleteVPCAssociationAuthorizationInput) DeleteVPCAssociationAuthorizationRequest
 }
 
 // Send marshals and sends the DeleteVPCAssociationAuthorization API request.
@@ -1269,7 +1287,7 @@ func (c *Route53) DeleteVPCAssociationAuthorizationRequest(input *DeleteVPCAssoc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVPCAssociationAuthorizationRequest{Request: req, Input: input}
+	return DeleteVPCAssociationAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteVPCAssociationAuthorizationRequest}
 }
 
 const opDisassociateVPCFromHostedZone = "DisassociateVPCFromHostedZone"
@@ -1278,6 +1296,7 @@ const opDisassociateVPCFromHostedZone = "DisassociateVPCFromHostedZone"
 type DisassociateVPCFromHostedZoneRequest struct {
 	*aws.Request
 	Input *DisassociateVPCFromHostedZoneInput
+	Copy  func(*DisassociateVPCFromHostedZoneInput) DisassociateVPCFromHostedZoneRequest
 }
 
 // Send marshals and sends the DisassociateVPCFromHostedZone API request.
@@ -1324,7 +1343,7 @@ func (c *Route53) DisassociateVPCFromHostedZoneRequest(input *DisassociateVPCFro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateVPCFromHostedZoneRequest{Request: req, Input: input}
+	return DisassociateVPCFromHostedZoneRequest{Request: req, Input: input, Copy: c.DisassociateVPCFromHostedZoneRequest}
 }
 
 const opGetAccountLimit = "GetAccountLimit"
@@ -1333,6 +1352,7 @@ const opGetAccountLimit = "GetAccountLimit"
 type GetAccountLimitRequest struct {
 	*aws.Request
 	Input *GetAccountLimitInput
+	Copy  func(*GetAccountLimitInput) GetAccountLimitRequest
 }
 
 // Send marshals and sends the GetAccountLimit API request.
@@ -1378,7 +1398,7 @@ func (c *Route53) GetAccountLimitRequest(input *GetAccountLimitInput) GetAccount
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAccountLimitRequest{Request: req, Input: input}
+	return GetAccountLimitRequest{Request: req, Input: input, Copy: c.GetAccountLimitRequest}
 }
 
 const opGetChange = "GetChange"
@@ -1387,6 +1407,7 @@ const opGetChange = "GetChange"
 type GetChangeRequest struct {
 	*aws.Request
 	Input *GetChangeInput
+	Copy  func(*GetChangeInput) GetChangeRequest
 }
 
 // Send marshals and sends the GetChange API request.
@@ -1435,7 +1456,7 @@ func (c *Route53) GetChangeRequest(input *GetChangeInput) GetChangeRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetChangeRequest{Request: req, Input: input}
+	return GetChangeRequest{Request: req, Input: input, Copy: c.GetChangeRequest}
 }
 
 const opGetCheckerIpRanges = "GetCheckerIpRanges"
@@ -1444,6 +1465,7 @@ const opGetCheckerIpRanges = "GetCheckerIpRanges"
 type GetCheckerIpRangesRequest struct {
 	*aws.Request
 	Input *GetCheckerIpRangesInput
+	Copy  func(*GetCheckerIpRangesInput) GetCheckerIpRangesRequest
 }
 
 // Send marshals and sends the GetCheckerIpRanges API request.
@@ -1487,7 +1509,7 @@ func (c *Route53) GetCheckerIpRangesRequest(input *GetCheckerIpRangesInput) GetC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCheckerIpRangesRequest{Request: req, Input: input}
+	return GetCheckerIpRangesRequest{Request: req, Input: input, Copy: c.GetCheckerIpRangesRequest}
 }
 
 const opGetGeoLocation = "GetGeoLocation"
@@ -1496,6 +1518,7 @@ const opGetGeoLocation = "GetGeoLocation"
 type GetGeoLocationRequest struct {
 	*aws.Request
 	Input *GetGeoLocationInput
+	Copy  func(*GetGeoLocationInput) GetGeoLocationRequest
 }
 
 // Send marshals and sends the GetGeoLocation API request.
@@ -1553,7 +1576,7 @@ func (c *Route53) GetGeoLocationRequest(input *GetGeoLocationInput) GetGeoLocati
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGeoLocationRequest{Request: req, Input: input}
+	return GetGeoLocationRequest{Request: req, Input: input, Copy: c.GetGeoLocationRequest}
 }
 
 const opGetHealthCheck = "GetHealthCheck"
@@ -1562,6 +1585,7 @@ const opGetHealthCheck = "GetHealthCheck"
 type GetHealthCheckRequest struct {
 	*aws.Request
 	Input *GetHealthCheckInput
+	Copy  func(*GetHealthCheckInput) GetHealthCheckRequest
 }
 
 // Send marshals and sends the GetHealthCheck API request.
@@ -1602,7 +1626,7 @@ func (c *Route53) GetHealthCheckRequest(input *GetHealthCheckInput) GetHealthChe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetHealthCheckRequest{Request: req, Input: input}
+	return GetHealthCheckRequest{Request: req, Input: input, Copy: c.GetHealthCheckRequest}
 }
 
 const opGetHealthCheckCount = "GetHealthCheckCount"
@@ -1611,6 +1635,7 @@ const opGetHealthCheckCount = "GetHealthCheckCount"
 type GetHealthCheckCountRequest struct {
 	*aws.Request
 	Input *GetHealthCheckCountInput
+	Copy  func(*GetHealthCheckCountInput) GetHealthCheckCountRequest
 }
 
 // Send marshals and sends the GetHealthCheckCount API request.
@@ -1652,7 +1677,7 @@ func (c *Route53) GetHealthCheckCountRequest(input *GetHealthCheckCountInput) Ge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetHealthCheckCountRequest{Request: req, Input: input}
+	return GetHealthCheckCountRequest{Request: req, Input: input, Copy: c.GetHealthCheckCountRequest}
 }
 
 const opGetHealthCheckLastFailureReason = "GetHealthCheckLastFailureReason"
@@ -1661,6 +1686,7 @@ const opGetHealthCheckLastFailureReason = "GetHealthCheckLastFailureReason"
 type GetHealthCheckLastFailureReasonRequest struct {
 	*aws.Request
 	Input *GetHealthCheckLastFailureReasonInput
+	Copy  func(*GetHealthCheckLastFailureReasonInput) GetHealthCheckLastFailureReasonRequest
 }
 
 // Send marshals and sends the GetHealthCheckLastFailureReason API request.
@@ -1701,7 +1727,7 @@ func (c *Route53) GetHealthCheckLastFailureReasonRequest(input *GetHealthCheckLa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetHealthCheckLastFailureReasonRequest{Request: req, Input: input}
+	return GetHealthCheckLastFailureReasonRequest{Request: req, Input: input, Copy: c.GetHealthCheckLastFailureReasonRequest}
 }
 
 const opGetHealthCheckStatus = "GetHealthCheckStatus"
@@ -1710,6 +1736,7 @@ const opGetHealthCheckStatus = "GetHealthCheckStatus"
 type GetHealthCheckStatusRequest struct {
 	*aws.Request
 	Input *GetHealthCheckStatusInput
+	Copy  func(*GetHealthCheckStatusInput) GetHealthCheckStatusRequest
 }
 
 // Send marshals and sends the GetHealthCheckStatus API request.
@@ -1750,7 +1777,7 @@ func (c *Route53) GetHealthCheckStatusRequest(input *GetHealthCheckStatusInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetHealthCheckStatusRequest{Request: req, Input: input}
+	return GetHealthCheckStatusRequest{Request: req, Input: input, Copy: c.GetHealthCheckStatusRequest}
 }
 
 const opGetHostedZone = "GetHostedZone"
@@ -1759,6 +1786,7 @@ const opGetHostedZone = "GetHostedZone"
 type GetHostedZoneRequest struct {
 	*aws.Request
 	Input *GetHostedZoneInput
+	Copy  func(*GetHostedZoneInput) GetHostedZoneRequest
 }
 
 // Send marshals and sends the GetHostedZone API request.
@@ -1800,7 +1828,7 @@ func (c *Route53) GetHostedZoneRequest(input *GetHostedZoneInput) GetHostedZoneR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetHostedZoneRequest{Request: req, Input: input}
+	return GetHostedZoneRequest{Request: req, Input: input, Copy: c.GetHostedZoneRequest}
 }
 
 const opGetHostedZoneCount = "GetHostedZoneCount"
@@ -1809,6 +1837,7 @@ const opGetHostedZoneCount = "GetHostedZoneCount"
 type GetHostedZoneCountRequest struct {
 	*aws.Request
 	Input *GetHostedZoneCountInput
+	Copy  func(*GetHostedZoneCountInput) GetHostedZoneCountRequest
 }
 
 // Send marshals and sends the GetHostedZoneCount API request.
@@ -1850,7 +1879,7 @@ func (c *Route53) GetHostedZoneCountRequest(input *GetHostedZoneCountInput) GetH
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetHostedZoneCountRequest{Request: req, Input: input}
+	return GetHostedZoneCountRequest{Request: req, Input: input, Copy: c.GetHostedZoneCountRequest}
 }
 
 const opGetHostedZoneLimit = "GetHostedZoneLimit"
@@ -1859,6 +1888,7 @@ const opGetHostedZoneLimit = "GetHostedZoneLimit"
 type GetHostedZoneLimitRequest struct {
 	*aws.Request
 	Input *GetHostedZoneLimitInput
+	Copy  func(*GetHostedZoneLimitInput) GetHostedZoneLimitRequest
 }
 
 // Send marshals and sends the GetHostedZoneLimit API request.
@@ -1904,7 +1934,7 @@ func (c *Route53) GetHostedZoneLimitRequest(input *GetHostedZoneLimitInput) GetH
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetHostedZoneLimitRequest{Request: req, Input: input}
+	return GetHostedZoneLimitRequest{Request: req, Input: input, Copy: c.GetHostedZoneLimitRequest}
 }
 
 const opGetQueryLoggingConfig = "GetQueryLoggingConfig"
@@ -1913,6 +1943,7 @@ const opGetQueryLoggingConfig = "GetQueryLoggingConfig"
 type GetQueryLoggingConfigRequest struct {
 	*aws.Request
 	Input *GetQueryLoggingConfigInput
+	Copy  func(*GetQueryLoggingConfigInput) GetQueryLoggingConfigRequest
 }
 
 // Send marshals and sends the GetQueryLoggingConfig API request.
@@ -1956,7 +1987,7 @@ func (c *Route53) GetQueryLoggingConfigRequest(input *GetQueryLoggingConfigInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetQueryLoggingConfigRequest{Request: req, Input: input}
+	return GetQueryLoggingConfigRequest{Request: req, Input: input, Copy: c.GetQueryLoggingConfigRequest}
 }
 
 const opGetReusableDelegationSet = "GetReusableDelegationSet"
@@ -1965,6 +1996,7 @@ const opGetReusableDelegationSet = "GetReusableDelegationSet"
 type GetReusableDelegationSetRequest struct {
 	*aws.Request
 	Input *GetReusableDelegationSetInput
+	Copy  func(*GetReusableDelegationSetInput) GetReusableDelegationSetRequest
 }
 
 // Send marshals and sends the GetReusableDelegationSet API request.
@@ -2006,7 +2038,7 @@ func (c *Route53) GetReusableDelegationSetRequest(input *GetReusableDelegationSe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetReusableDelegationSetRequest{Request: req, Input: input}
+	return GetReusableDelegationSetRequest{Request: req, Input: input, Copy: c.GetReusableDelegationSetRequest}
 }
 
 const opGetReusableDelegationSetLimit = "GetReusableDelegationSetLimit"
@@ -2015,6 +2047,7 @@ const opGetReusableDelegationSetLimit = "GetReusableDelegationSetLimit"
 type GetReusableDelegationSetLimitRequest struct {
 	*aws.Request
 	Input *GetReusableDelegationSetLimitInput
+	Copy  func(*GetReusableDelegationSetLimitInput) GetReusableDelegationSetLimitRequest
 }
 
 // Send marshals and sends the GetReusableDelegationSetLimit API request.
@@ -2060,7 +2093,7 @@ func (c *Route53) GetReusableDelegationSetLimitRequest(input *GetReusableDelegat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetReusableDelegationSetLimitRequest{Request: req, Input: input}
+	return GetReusableDelegationSetLimitRequest{Request: req, Input: input, Copy: c.GetReusableDelegationSetLimitRequest}
 }
 
 const opGetTrafficPolicy = "GetTrafficPolicy"
@@ -2069,6 +2102,7 @@ const opGetTrafficPolicy = "GetTrafficPolicy"
 type GetTrafficPolicyRequest struct {
 	*aws.Request
 	Input *GetTrafficPolicyInput
+	Copy  func(*GetTrafficPolicyInput) GetTrafficPolicyRequest
 }
 
 // Send marshals and sends the GetTrafficPolicy API request.
@@ -2109,7 +2143,7 @@ func (c *Route53) GetTrafficPolicyRequest(input *GetTrafficPolicyInput) GetTraff
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTrafficPolicyRequest{Request: req, Input: input}
+	return GetTrafficPolicyRequest{Request: req, Input: input, Copy: c.GetTrafficPolicyRequest}
 }
 
 const opGetTrafficPolicyInstance = "GetTrafficPolicyInstance"
@@ -2118,6 +2152,7 @@ const opGetTrafficPolicyInstance = "GetTrafficPolicyInstance"
 type GetTrafficPolicyInstanceRequest struct {
 	*aws.Request
 	Input *GetTrafficPolicyInstanceInput
+	Copy  func(*GetTrafficPolicyInstanceInput) GetTrafficPolicyInstanceRequest
 }
 
 // Send marshals and sends the GetTrafficPolicyInstance API request.
@@ -2166,7 +2201,7 @@ func (c *Route53) GetTrafficPolicyInstanceRequest(input *GetTrafficPolicyInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTrafficPolicyInstanceRequest{Request: req, Input: input}
+	return GetTrafficPolicyInstanceRequest{Request: req, Input: input, Copy: c.GetTrafficPolicyInstanceRequest}
 }
 
 const opGetTrafficPolicyInstanceCount = "GetTrafficPolicyInstanceCount"
@@ -2175,6 +2210,7 @@ const opGetTrafficPolicyInstanceCount = "GetTrafficPolicyInstanceCount"
 type GetTrafficPolicyInstanceCountRequest struct {
 	*aws.Request
 	Input *GetTrafficPolicyInstanceCountInput
+	Copy  func(*GetTrafficPolicyInstanceCountInput) GetTrafficPolicyInstanceCountRequest
 }
 
 // Send marshals and sends the GetTrafficPolicyInstanceCount API request.
@@ -2216,7 +2252,7 @@ func (c *Route53) GetTrafficPolicyInstanceCountRequest(input *GetTrafficPolicyIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTrafficPolicyInstanceCountRequest{Request: req, Input: input}
+	return GetTrafficPolicyInstanceCountRequest{Request: req, Input: input, Copy: c.GetTrafficPolicyInstanceCountRequest}
 }
 
 const opListGeoLocations = "ListGeoLocations"
@@ -2225,6 +2261,7 @@ const opListGeoLocations = "ListGeoLocations"
 type ListGeoLocationsRequest struct {
 	*aws.Request
 	Input *ListGeoLocationsInput
+	Copy  func(*ListGeoLocationsInput) ListGeoLocationsRequest
 }
 
 // Send marshals and sends the ListGeoLocations API request.
@@ -2270,7 +2307,7 @@ func (c *Route53) ListGeoLocationsRequest(input *ListGeoLocationsInput) ListGeoL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGeoLocationsRequest{Request: req, Input: input}
+	return ListGeoLocationsRequest{Request: req, Input: input, Copy: c.ListGeoLocationsRequest}
 }
 
 const opListHealthChecks = "ListHealthChecks"
@@ -2279,6 +2316,7 @@ const opListHealthChecks = "ListHealthChecks"
 type ListHealthChecksRequest struct {
 	*aws.Request
 	Input *ListHealthChecksInput
+	Copy  func(*ListHealthChecksInput) ListHealthChecksRequest
 }
 
 // Send marshals and sends the ListHealthChecks API request.
@@ -2326,47 +2364,47 @@ func (c *Route53) ListHealthChecksRequest(input *ListHealthChecksInput) ListHeal
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListHealthChecksRequest{Request: req, Input: input}
+	return ListHealthChecksRequest{Request: req, Input: input, Copy: c.ListHealthChecksRequest}
 }
 
-// ListHealthChecksPages iterates over the pages of a ListHealthChecks operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListHealthChecks method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListHealthChecksRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListHealthChecks operation.
-//    pageNum := 0
-//    err := client.ListHealthChecksPages(params,
-//        func(page *ListHealthChecksOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListHealthChecksRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListHealthChecksRequest) Paginate(opts ...aws.Option) ListHealthChecksPager {
 	return ListHealthChecksPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListHealthChecksInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListHealthChecksInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListHealthChecksOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListHealthChecksPager ...
+// ListHealthChecksPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListHealthChecksPager struct {
 	aws.Pager
 }
@@ -2381,6 +2419,7 @@ const opListHostedZones = "ListHostedZones"
 type ListHostedZonesRequest struct {
 	*aws.Request
 	Input *ListHostedZonesInput
+	Copy  func(*ListHostedZonesInput) ListHostedZonesRequest
 }
 
 // Send marshals and sends the ListHostedZones API request.
@@ -2433,47 +2472,47 @@ func (c *Route53) ListHostedZonesRequest(input *ListHostedZonesInput) ListHosted
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListHostedZonesRequest{Request: req, Input: input}
+	return ListHostedZonesRequest{Request: req, Input: input, Copy: c.ListHostedZonesRequest}
 }
 
-// ListHostedZonesPages iterates over the pages of a ListHostedZones operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListHostedZones method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListHostedZonesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListHostedZones operation.
-//    pageNum := 0
-//    err := client.ListHostedZonesPages(params,
-//        func(page *ListHostedZonesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListHostedZonesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListHostedZonesRequest) Paginate(opts ...aws.Option) ListHostedZonesPager {
 	return ListHostedZonesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListHostedZonesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListHostedZonesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListHostedZonesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListHostedZonesPager ...
+// ListHostedZonesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListHostedZonesPager struct {
 	aws.Pager
 }
@@ -2488,6 +2527,7 @@ const opListHostedZonesByName = "ListHostedZonesByName"
 type ListHostedZonesByNameRequest struct {
 	*aws.Request
 	Input *ListHostedZonesByNameInput
+	Copy  func(*ListHostedZonesByNameInput) ListHostedZonesByNameRequest
 }
 
 // Send marshals and sends the ListHostedZonesByName API request.
@@ -2577,7 +2617,7 @@ func (c *Route53) ListHostedZonesByNameRequest(input *ListHostedZonesByNameInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListHostedZonesByNameRequest{Request: req, Input: input}
+	return ListHostedZonesByNameRequest{Request: req, Input: input, Copy: c.ListHostedZonesByNameRequest}
 }
 
 const opListQueryLoggingConfigs = "ListQueryLoggingConfigs"
@@ -2586,6 +2626,7 @@ const opListQueryLoggingConfigs = "ListQueryLoggingConfigs"
 type ListQueryLoggingConfigsRequest struct {
 	*aws.Request
 	Input *ListQueryLoggingConfigsInput
+	Copy  func(*ListQueryLoggingConfigsInput) ListQueryLoggingConfigsRequest
 }
 
 // Send marshals and sends the ListQueryLoggingConfigs API request.
@@ -2633,7 +2674,7 @@ func (c *Route53) ListQueryLoggingConfigsRequest(input *ListQueryLoggingConfigsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListQueryLoggingConfigsRequest{Request: req, Input: input}
+	return ListQueryLoggingConfigsRequest{Request: req, Input: input, Copy: c.ListQueryLoggingConfigsRequest}
 }
 
 const opListResourceRecordSets = "ListResourceRecordSets"
@@ -2642,6 +2683,7 @@ const opListResourceRecordSets = "ListResourceRecordSets"
 type ListResourceRecordSetsRequest struct {
 	*aws.Request
 	Input *ListResourceRecordSetsInput
+	Copy  func(*ListResourceRecordSetsInput) ListResourceRecordSetsRequest
 }
 
 // Send marshals and sends the ListResourceRecordSets API request.
@@ -2726,47 +2768,47 @@ func (c *Route53) ListResourceRecordSetsRequest(input *ListResourceRecordSetsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourceRecordSetsRequest{Request: req, Input: input}
+	return ListResourceRecordSetsRequest{Request: req, Input: input, Copy: c.ListResourceRecordSetsRequest}
 }
 
-// ListResourceRecordSetsPages iterates over the pages of a ListResourceRecordSets operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListResourceRecordSets method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListResourceRecordSetsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListResourceRecordSets operation.
-//    pageNum := 0
-//    err := client.ListResourceRecordSetsPages(params,
-//        func(page *ListResourceRecordSetsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListResourceRecordSetsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListResourceRecordSetsRequest) Paginate(opts ...aws.Option) ListResourceRecordSetsPager {
 	return ListResourceRecordSetsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListResourceRecordSetsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListResourceRecordSetsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListResourceRecordSetsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListResourceRecordSetsPager ...
+// ListResourceRecordSetsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListResourceRecordSetsPager struct {
 	aws.Pager
 }
@@ -2781,6 +2823,7 @@ const opListReusableDelegationSets = "ListReusableDelegationSets"
 type ListReusableDelegationSetsRequest struct {
 	*aws.Request
 	Input *ListReusableDelegationSetsInput
+	Copy  func(*ListReusableDelegationSetsInput) ListReusableDelegationSetsRequest
 }
 
 // Send marshals and sends the ListReusableDelegationSets API request.
@@ -2822,7 +2865,7 @@ func (c *Route53) ListReusableDelegationSetsRequest(input *ListReusableDelegatio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListReusableDelegationSetsRequest{Request: req, Input: input}
+	return ListReusableDelegationSetsRequest{Request: req, Input: input, Copy: c.ListReusableDelegationSetsRequest}
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -2831,6 +2874,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -2875,7 +2919,7 @@ func (c *Route53) ListTagsForResourceRequest(input *ListTagsForResourceInput) Li
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opListTagsForResources = "ListTagsForResources"
@@ -2884,6 +2928,7 @@ const opListTagsForResources = "ListTagsForResources"
 type ListTagsForResourcesRequest struct {
 	*aws.Request
 	Input *ListTagsForResourcesInput
+	Copy  func(*ListTagsForResourcesInput) ListTagsForResourcesRequest
 }
 
 // Send marshals and sends the ListTagsForResources API request.
@@ -2928,7 +2973,7 @@ func (c *Route53) ListTagsForResourcesRequest(input *ListTagsForResourcesInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourcesRequest{Request: req, Input: input}
+	return ListTagsForResourcesRequest{Request: req, Input: input, Copy: c.ListTagsForResourcesRequest}
 }
 
 const opListTrafficPolicies = "ListTrafficPolicies"
@@ -2937,6 +2982,7 @@ const opListTrafficPolicies = "ListTrafficPolicies"
 type ListTrafficPoliciesRequest struct {
 	*aws.Request
 	Input *ListTrafficPoliciesInput
+	Copy  func(*ListTrafficPoliciesInput) ListTrafficPoliciesRequest
 }
 
 // Send marshals and sends the ListTrafficPolicies API request.
@@ -2979,7 +3025,7 @@ func (c *Route53) ListTrafficPoliciesRequest(input *ListTrafficPoliciesInput) Li
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTrafficPoliciesRequest{Request: req, Input: input}
+	return ListTrafficPoliciesRequest{Request: req, Input: input, Copy: c.ListTrafficPoliciesRequest}
 }
 
 const opListTrafficPolicyInstances = "ListTrafficPolicyInstances"
@@ -2988,6 +3034,7 @@ const opListTrafficPolicyInstances = "ListTrafficPolicyInstances"
 type ListTrafficPolicyInstancesRequest struct {
 	*aws.Request
 	Input *ListTrafficPolicyInstancesInput
+	Copy  func(*ListTrafficPolicyInstancesInput) ListTrafficPolicyInstancesRequest
 }
 
 // Send marshals and sends the ListTrafficPolicyInstances API request.
@@ -3038,7 +3085,7 @@ func (c *Route53) ListTrafficPolicyInstancesRequest(input *ListTrafficPolicyInst
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTrafficPolicyInstancesRequest{Request: req, Input: input}
+	return ListTrafficPolicyInstancesRequest{Request: req, Input: input, Copy: c.ListTrafficPolicyInstancesRequest}
 }
 
 const opListTrafficPolicyInstancesByHostedZone = "ListTrafficPolicyInstancesByHostedZone"
@@ -3047,6 +3094,7 @@ const opListTrafficPolicyInstancesByHostedZone = "ListTrafficPolicyInstancesByHo
 type ListTrafficPolicyInstancesByHostedZoneRequest struct {
 	*aws.Request
 	Input *ListTrafficPolicyInstancesByHostedZoneInput
+	Copy  func(*ListTrafficPolicyInstancesByHostedZoneInput) ListTrafficPolicyInstancesByHostedZoneRequest
 }
 
 // Send marshals and sends the ListTrafficPolicyInstancesByHostedZone API request.
@@ -3097,7 +3145,7 @@ func (c *Route53) ListTrafficPolicyInstancesByHostedZoneRequest(input *ListTraff
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTrafficPolicyInstancesByHostedZoneRequest{Request: req, Input: input}
+	return ListTrafficPolicyInstancesByHostedZoneRequest{Request: req, Input: input, Copy: c.ListTrafficPolicyInstancesByHostedZoneRequest}
 }
 
 const opListTrafficPolicyInstancesByPolicy = "ListTrafficPolicyInstancesByPolicy"
@@ -3106,6 +3154,7 @@ const opListTrafficPolicyInstancesByPolicy = "ListTrafficPolicyInstancesByPolicy
 type ListTrafficPolicyInstancesByPolicyRequest struct {
 	*aws.Request
 	Input *ListTrafficPolicyInstancesByPolicyInput
+	Copy  func(*ListTrafficPolicyInstancesByPolicyInput) ListTrafficPolicyInstancesByPolicyRequest
 }
 
 // Send marshals and sends the ListTrafficPolicyInstancesByPolicy API request.
@@ -3156,7 +3205,7 @@ func (c *Route53) ListTrafficPolicyInstancesByPolicyRequest(input *ListTrafficPo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTrafficPolicyInstancesByPolicyRequest{Request: req, Input: input}
+	return ListTrafficPolicyInstancesByPolicyRequest{Request: req, Input: input, Copy: c.ListTrafficPolicyInstancesByPolicyRequest}
 }
 
 const opListTrafficPolicyVersions = "ListTrafficPolicyVersions"
@@ -3165,6 +3214,7 @@ const opListTrafficPolicyVersions = "ListTrafficPolicyVersions"
 type ListTrafficPolicyVersionsRequest struct {
 	*aws.Request
 	Input *ListTrafficPolicyVersionsInput
+	Copy  func(*ListTrafficPolicyVersionsInput) ListTrafficPolicyVersionsRequest
 }
 
 // Send marshals and sends the ListTrafficPolicyVersions API request.
@@ -3207,7 +3257,7 @@ func (c *Route53) ListTrafficPolicyVersionsRequest(input *ListTrafficPolicyVersi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTrafficPolicyVersionsRequest{Request: req, Input: input}
+	return ListTrafficPolicyVersionsRequest{Request: req, Input: input, Copy: c.ListTrafficPolicyVersionsRequest}
 }
 
 const opListVPCAssociationAuthorizations = "ListVPCAssociationAuthorizations"
@@ -3216,6 +3266,7 @@ const opListVPCAssociationAuthorizations = "ListVPCAssociationAuthorizations"
 type ListVPCAssociationAuthorizationsRequest struct {
 	*aws.Request
 	Input *ListVPCAssociationAuthorizationsInput
+	Copy  func(*ListVPCAssociationAuthorizationsInput) ListVPCAssociationAuthorizationsRequest
 }
 
 // Send marshals and sends the ListVPCAssociationAuthorizations API request.
@@ -3261,7 +3312,7 @@ func (c *Route53) ListVPCAssociationAuthorizationsRequest(input *ListVPCAssociat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListVPCAssociationAuthorizationsRequest{Request: req, Input: input}
+	return ListVPCAssociationAuthorizationsRequest{Request: req, Input: input, Copy: c.ListVPCAssociationAuthorizationsRequest}
 }
 
 const opTestDNSAnswer = "TestDNSAnswer"
@@ -3270,6 +3321,7 @@ const opTestDNSAnswer = "TestDNSAnswer"
 type TestDNSAnswerRequest struct {
 	*aws.Request
 	Input *TestDNSAnswerInput
+	Copy  func(*TestDNSAnswerInput) TestDNSAnswerRequest
 }
 
 // Send marshals and sends the TestDNSAnswer API request.
@@ -3312,7 +3364,7 @@ func (c *Route53) TestDNSAnswerRequest(input *TestDNSAnswerInput) TestDNSAnswerR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestDNSAnswerRequest{Request: req, Input: input}
+	return TestDNSAnswerRequest{Request: req, Input: input, Copy: c.TestDNSAnswerRequest}
 }
 
 const opUpdateHealthCheck = "UpdateHealthCheck"
@@ -3321,6 +3373,7 @@ const opUpdateHealthCheck = "UpdateHealthCheck"
 type UpdateHealthCheckRequest struct {
 	*aws.Request
 	Input *UpdateHealthCheckInput
+	Copy  func(*UpdateHealthCheckInput) UpdateHealthCheckRequest
 }
 
 // Send marshals and sends the UpdateHealthCheck API request.
@@ -3365,7 +3418,7 @@ func (c *Route53) UpdateHealthCheckRequest(input *UpdateHealthCheckInput) Update
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateHealthCheckRequest{Request: req, Input: input}
+	return UpdateHealthCheckRequest{Request: req, Input: input, Copy: c.UpdateHealthCheckRequest}
 }
 
 const opUpdateHostedZoneComment = "UpdateHostedZoneComment"
@@ -3374,6 +3427,7 @@ const opUpdateHostedZoneComment = "UpdateHostedZoneComment"
 type UpdateHostedZoneCommentRequest struct {
 	*aws.Request
 	Input *UpdateHostedZoneCommentInput
+	Copy  func(*UpdateHostedZoneCommentInput) UpdateHostedZoneCommentRequest
 }
 
 // Send marshals and sends the UpdateHostedZoneComment API request.
@@ -3414,7 +3468,7 @@ func (c *Route53) UpdateHostedZoneCommentRequest(input *UpdateHostedZoneCommentI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateHostedZoneCommentRequest{Request: req, Input: input}
+	return UpdateHostedZoneCommentRequest{Request: req, Input: input, Copy: c.UpdateHostedZoneCommentRequest}
 }
 
 const opUpdateTrafficPolicyComment = "UpdateTrafficPolicyComment"
@@ -3423,6 +3477,7 @@ const opUpdateTrafficPolicyComment = "UpdateTrafficPolicyComment"
 type UpdateTrafficPolicyCommentRequest struct {
 	*aws.Request
 	Input *UpdateTrafficPolicyCommentInput
+	Copy  func(*UpdateTrafficPolicyCommentInput) UpdateTrafficPolicyCommentRequest
 }
 
 // Send marshals and sends the UpdateTrafficPolicyComment API request.
@@ -3463,7 +3518,7 @@ func (c *Route53) UpdateTrafficPolicyCommentRequest(input *UpdateTrafficPolicyCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTrafficPolicyCommentRequest{Request: req, Input: input}
+	return UpdateTrafficPolicyCommentRequest{Request: req, Input: input, Copy: c.UpdateTrafficPolicyCommentRequest}
 }
 
 const opUpdateTrafficPolicyInstance = "UpdateTrafficPolicyInstance"
@@ -3472,6 +3527,7 @@ const opUpdateTrafficPolicyInstance = "UpdateTrafficPolicyInstance"
 type UpdateTrafficPolicyInstanceRequest struct {
 	*aws.Request
 	Input *UpdateTrafficPolicyInstanceInput
+	Copy  func(*UpdateTrafficPolicyInstanceInput) UpdateTrafficPolicyInstanceRequest
 }
 
 // Send marshals and sends the UpdateTrafficPolicyInstance API request.
@@ -3530,7 +3586,7 @@ func (c *Route53) UpdateTrafficPolicyInstanceRequest(input *UpdateTrafficPolicyI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTrafficPolicyInstanceRequest{Request: req, Input: input}
+	return UpdateTrafficPolicyInstanceRequest{Request: req, Input: input, Copy: c.UpdateTrafficPolicyInstanceRequest}
 }
 
 // A complex type that contains the type of limit that you specified in the

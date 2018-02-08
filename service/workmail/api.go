@@ -15,6 +15,7 @@ const opAssociateDelegateToResource = "AssociateDelegateToResource"
 type AssociateDelegateToResourceRequest struct {
 	*aws.Request
 	Input *AssociateDelegateToResourceInput
+	Copy  func(*AssociateDelegateToResourceInput) AssociateDelegateToResourceRequest
 }
 
 // Send marshals and sends the AssociateDelegateToResource API request.
@@ -55,7 +56,7 @@ func (c *WorkMail) AssociateDelegateToResourceRequest(input *AssociateDelegateTo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateDelegateToResourceRequest{Request: req, Input: input}
+	return AssociateDelegateToResourceRequest{Request: req, Input: input, Copy: c.AssociateDelegateToResourceRequest}
 }
 
 const opAssociateMemberToGroup = "AssociateMemberToGroup"
@@ -64,6 +65,7 @@ const opAssociateMemberToGroup = "AssociateMemberToGroup"
 type AssociateMemberToGroupRequest struct {
 	*aws.Request
 	Input *AssociateMemberToGroupInput
+	Copy  func(*AssociateMemberToGroupInput) AssociateMemberToGroupRequest
 }
 
 // Send marshals and sends the AssociateMemberToGroup API request.
@@ -104,7 +106,7 @@ func (c *WorkMail) AssociateMemberToGroupRequest(input *AssociateMemberToGroupIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateMemberToGroupRequest{Request: req, Input: input}
+	return AssociateMemberToGroupRequest{Request: req, Input: input, Copy: c.AssociateMemberToGroupRequest}
 }
 
 const opCreateAlias = "CreateAlias"
@@ -113,6 +115,7 @@ const opCreateAlias = "CreateAlias"
 type CreateAliasRequest struct {
 	*aws.Request
 	Input *CreateAliasInput
+	Copy  func(*CreateAliasInput) CreateAliasRequest
 }
 
 // Send marshals and sends the CreateAlias API request.
@@ -153,7 +156,7 @@ func (c *WorkMail) CreateAliasRequest(input *CreateAliasInput) CreateAliasReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAliasRequest{Request: req, Input: input}
+	return CreateAliasRequest{Request: req, Input: input, Copy: c.CreateAliasRequest}
 }
 
 const opCreateGroup = "CreateGroup"
@@ -162,6 +165,7 @@ const opCreateGroup = "CreateGroup"
 type CreateGroupRequest struct {
 	*aws.Request
 	Input *CreateGroupInput
+	Copy  func(*CreateGroupInput) CreateGroupRequest
 }
 
 // Send marshals and sends the CreateGroup API request.
@@ -203,7 +207,7 @@ func (c *WorkMail) CreateGroupRequest(input *CreateGroupInput) CreateGroupReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGroupRequest{Request: req, Input: input}
+	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
 }
 
 const opCreateResource = "CreateResource"
@@ -212,6 +216,7 @@ const opCreateResource = "CreateResource"
 type CreateResourceRequest struct {
 	*aws.Request
 	Input *CreateResourceInput
+	Copy  func(*CreateResourceInput) CreateResourceRequest
 }
 
 // Send marshals and sends the CreateResource API request.
@@ -253,7 +258,7 @@ func (c *WorkMail) CreateResourceRequest(input *CreateResourceInput) CreateResou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateResourceRequest{Request: req, Input: input}
+	return CreateResourceRequest{Request: req, Input: input, Copy: c.CreateResourceRequest}
 }
 
 const opCreateUser = "CreateUser"
@@ -262,6 +267,7 @@ const opCreateUser = "CreateUser"
 type CreateUserRequest struct {
 	*aws.Request
 	Input *CreateUserInput
+	Copy  func(*CreateUserInput) CreateUserRequest
 }
 
 // Send marshals and sends the CreateUser API request.
@@ -303,7 +309,7 @@ func (c *WorkMail) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserRequest{Request: req, Input: input}
+	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
 }
 
 const opDeleteAlias = "DeleteAlias"
@@ -312,6 +318,7 @@ const opDeleteAlias = "DeleteAlias"
 type DeleteAliasRequest struct {
 	*aws.Request
 	Input *DeleteAliasInput
+	Copy  func(*DeleteAliasInput) DeleteAliasRequest
 }
 
 // Send marshals and sends the DeleteAlias API request.
@@ -352,7 +359,7 @@ func (c *WorkMail) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAliasRequest{Request: req, Input: input}
+	return DeleteAliasRequest{Request: req, Input: input, Copy: c.DeleteAliasRequest}
 }
 
 const opDeleteGroup = "DeleteGroup"
@@ -361,6 +368,7 @@ const opDeleteGroup = "DeleteGroup"
 type DeleteGroupRequest struct {
 	*aws.Request
 	Input *DeleteGroupInput
+	Copy  func(*DeleteGroupInput) DeleteGroupRequest
 }
 
 // Send marshals and sends the DeleteGroup API request.
@@ -401,7 +409,7 @@ func (c *WorkMail) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroupReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGroupRequest{Request: req, Input: input}
+	return DeleteGroupRequest{Request: req, Input: input, Copy: c.DeleteGroupRequest}
 }
 
 const opDeleteResource = "DeleteResource"
@@ -410,6 +418,7 @@ const opDeleteResource = "DeleteResource"
 type DeleteResourceRequest struct {
 	*aws.Request
 	Input *DeleteResourceInput
+	Copy  func(*DeleteResourceInput) DeleteResourceRequest
 }
 
 // Send marshals and sends the DeleteResource API request.
@@ -450,7 +459,7 @@ func (c *WorkMail) DeleteResourceRequest(input *DeleteResourceInput) DeleteResou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteResourceRequest{Request: req, Input: input}
+	return DeleteResourceRequest{Request: req, Input: input, Copy: c.DeleteResourceRequest}
 }
 
 const opDeleteUser = "DeleteUser"
@@ -459,6 +468,7 @@ const opDeleteUser = "DeleteUser"
 type DeleteUserRequest struct {
 	*aws.Request
 	Input *DeleteUserInput
+	Copy  func(*DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -501,7 +511,7 @@ func (c *WorkMail) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserRequest{Request: req, Input: input}
+	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
 const opDeregisterFromWorkMail = "DeregisterFromWorkMail"
@@ -510,6 +520,7 @@ const opDeregisterFromWorkMail = "DeregisterFromWorkMail"
 type DeregisterFromWorkMailRequest struct {
 	*aws.Request
 	Input *DeregisterFromWorkMailInput
+	Copy  func(*DeregisterFromWorkMailInput) DeregisterFromWorkMailRequest
 }
 
 // Send marshals and sends the DeregisterFromWorkMail API request.
@@ -553,7 +564,7 @@ func (c *WorkMail) DeregisterFromWorkMailRequest(input *DeregisterFromWorkMailIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterFromWorkMailRequest{Request: req, Input: input}
+	return DeregisterFromWorkMailRequest{Request: req, Input: input, Copy: c.DeregisterFromWorkMailRequest}
 }
 
 const opDescribeGroup = "DescribeGroup"
@@ -562,6 +573,7 @@ const opDescribeGroup = "DescribeGroup"
 type DescribeGroupRequest struct {
 	*aws.Request
 	Input *DescribeGroupInput
+	Copy  func(*DescribeGroupInput) DescribeGroupRequest
 }
 
 // Send marshals and sends the DescribeGroup API request.
@@ -602,7 +614,7 @@ func (c *WorkMail) DescribeGroupRequest(input *DescribeGroupInput) DescribeGroup
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeGroupRequest{Request: req, Input: input}
+	return DescribeGroupRequest{Request: req, Input: input, Copy: c.DescribeGroupRequest}
 }
 
 const opDescribeOrganization = "DescribeOrganization"
@@ -611,6 +623,7 @@ const opDescribeOrganization = "DescribeOrganization"
 type DescribeOrganizationRequest struct {
 	*aws.Request
 	Input *DescribeOrganizationInput
+	Copy  func(*DescribeOrganizationInput) DescribeOrganizationRequest
 }
 
 // Send marshals and sends the DescribeOrganization API request.
@@ -651,7 +664,7 @@ func (c *WorkMail) DescribeOrganizationRequest(input *DescribeOrganizationInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeOrganizationRequest{Request: req, Input: input}
+	return DescribeOrganizationRequest{Request: req, Input: input, Copy: c.DescribeOrganizationRequest}
 }
 
 const opDescribeResource = "DescribeResource"
@@ -660,6 +673,7 @@ const opDescribeResource = "DescribeResource"
 type DescribeResourceRequest struct {
 	*aws.Request
 	Input *DescribeResourceInput
+	Copy  func(*DescribeResourceInput) DescribeResourceRequest
 }
 
 // Send marshals and sends the DescribeResource API request.
@@ -700,7 +714,7 @@ func (c *WorkMail) DescribeResourceRequest(input *DescribeResourceInput) Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeResourceRequest{Request: req, Input: input}
+	return DescribeResourceRequest{Request: req, Input: input, Copy: c.DescribeResourceRequest}
 }
 
 const opDescribeUser = "DescribeUser"
@@ -709,6 +723,7 @@ const opDescribeUser = "DescribeUser"
 type DescribeUserRequest struct {
 	*aws.Request
 	Input *DescribeUserInput
+	Copy  func(*DescribeUserInput) DescribeUserRequest
 }
 
 // Send marshals and sends the DescribeUser API request.
@@ -749,7 +764,7 @@ func (c *WorkMail) DescribeUserRequest(input *DescribeUserInput) DescribeUserReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeUserRequest{Request: req, Input: input}
+	return DescribeUserRequest{Request: req, Input: input, Copy: c.DescribeUserRequest}
 }
 
 const opDisassociateDelegateFromResource = "DisassociateDelegateFromResource"
@@ -758,6 +773,7 @@ const opDisassociateDelegateFromResource = "DisassociateDelegateFromResource"
 type DisassociateDelegateFromResourceRequest struct {
 	*aws.Request
 	Input *DisassociateDelegateFromResourceInput
+	Copy  func(*DisassociateDelegateFromResourceInput) DisassociateDelegateFromResourceRequest
 }
 
 // Send marshals and sends the DisassociateDelegateFromResource API request.
@@ -798,7 +814,7 @@ func (c *WorkMail) DisassociateDelegateFromResourceRequest(input *DisassociateDe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateDelegateFromResourceRequest{Request: req, Input: input}
+	return DisassociateDelegateFromResourceRequest{Request: req, Input: input, Copy: c.DisassociateDelegateFromResourceRequest}
 }
 
 const opDisassociateMemberFromGroup = "DisassociateMemberFromGroup"
@@ -807,6 +823,7 @@ const opDisassociateMemberFromGroup = "DisassociateMemberFromGroup"
 type DisassociateMemberFromGroupRequest struct {
 	*aws.Request
 	Input *DisassociateMemberFromGroupInput
+	Copy  func(*DisassociateMemberFromGroupInput) DisassociateMemberFromGroupRequest
 }
 
 // Send marshals and sends the DisassociateMemberFromGroup API request.
@@ -847,7 +864,7 @@ func (c *WorkMail) DisassociateMemberFromGroupRequest(input *DisassociateMemberF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateMemberFromGroupRequest{Request: req, Input: input}
+	return DisassociateMemberFromGroupRequest{Request: req, Input: input, Copy: c.DisassociateMemberFromGroupRequest}
 }
 
 const opListAliases = "ListAliases"
@@ -856,6 +873,7 @@ const opListAliases = "ListAliases"
 type ListAliasesRequest struct {
 	*aws.Request
 	Input *ListAliasesInput
+	Copy  func(*ListAliasesInput) ListAliasesRequest
 }
 
 // Send marshals and sends the ListAliases API request.
@@ -902,47 +920,47 @@ func (c *WorkMail) ListAliasesRequest(input *ListAliasesInput) ListAliasesReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAliasesRequest{Request: req, Input: input}
+	return ListAliasesRequest{Request: req, Input: input, Copy: c.ListAliasesRequest}
 }
 
-// ListAliasesPages iterates over the pages of a ListAliases operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAliases method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAliasesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAliases operation.
-//    pageNum := 0
-//    err := client.ListAliasesPages(params,
-//        func(page *ListAliasesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAliasesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListAliasesRequest) Paginate(opts ...aws.Option) ListAliasesPager {
 	return ListAliasesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAliasesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAliasesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListAliasesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListAliasesPager ...
+// ListAliasesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListAliasesPager struct {
 	aws.Pager
 }
@@ -957,6 +975,7 @@ const opListGroupMembers = "ListGroupMembers"
 type ListGroupMembersRequest struct {
 	*aws.Request
 	Input *ListGroupMembersInput
+	Copy  func(*ListGroupMembersInput) ListGroupMembersRequest
 }
 
 // Send marshals and sends the ListGroupMembers API request.
@@ -1003,47 +1022,47 @@ func (c *WorkMail) ListGroupMembersRequest(input *ListGroupMembersInput) ListGro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupMembersRequest{Request: req, Input: input}
+	return ListGroupMembersRequest{Request: req, Input: input, Copy: c.ListGroupMembersRequest}
 }
 
-// ListGroupMembersPages iterates over the pages of a ListGroupMembers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListGroupMembers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListGroupMembersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListGroupMembers operation.
-//    pageNum := 0
-//    err := client.ListGroupMembersPages(params,
-//        func(page *ListGroupMembersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListGroupMembersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListGroupMembersRequest) Paginate(opts ...aws.Option) ListGroupMembersPager {
 	return ListGroupMembersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListGroupMembersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListGroupMembersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListGroupMembersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListGroupMembersPager ...
+// ListGroupMembersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListGroupMembersPager struct {
 	aws.Pager
 }
@@ -1058,6 +1077,7 @@ const opListGroups = "ListGroups"
 type ListGroupsRequest struct {
 	*aws.Request
 	Input *ListGroupsInput
+	Copy  func(*ListGroupsInput) ListGroupsRequest
 }
 
 // Send marshals and sends the ListGroups API request.
@@ -1104,47 +1124,47 @@ func (c *WorkMail) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupsRequest{Request: req, Input: input}
+	return ListGroupsRequest{Request: req, Input: input, Copy: c.ListGroupsRequest}
 }
 
-// ListGroupsPages iterates over the pages of a ListGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListGroups operation.
-//    pageNum := 0
-//    err := client.ListGroupsPages(params,
-//        func(page *ListGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
 	return ListGroupsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListGroupsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListGroupsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListGroupsPager ...
+// ListGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListGroupsPager struct {
 	aws.Pager
 }
@@ -1159,6 +1179,7 @@ const opListOrganizations = "ListOrganizations"
 type ListOrganizationsRequest struct {
 	*aws.Request
 	Input *ListOrganizationsInput
+	Copy  func(*ListOrganizationsInput) ListOrganizationsRequest
 }
 
 // Send marshals and sends the ListOrganizations API request.
@@ -1205,47 +1226,47 @@ func (c *WorkMail) ListOrganizationsRequest(input *ListOrganizationsInput) ListO
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOrganizationsRequest{Request: req, Input: input}
+	return ListOrganizationsRequest{Request: req, Input: input, Copy: c.ListOrganizationsRequest}
 }
 
-// ListOrganizationsPages iterates over the pages of a ListOrganizations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListOrganizations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListOrganizationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListOrganizations operation.
-//    pageNum := 0
-//    err := client.ListOrganizationsPages(params,
-//        func(page *ListOrganizationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListOrganizationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListOrganizationsRequest) Paginate(opts ...aws.Option) ListOrganizationsPager {
 	return ListOrganizationsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListOrganizationsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListOrganizationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListOrganizationsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListOrganizationsPager ...
+// ListOrganizationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListOrganizationsPager struct {
 	aws.Pager
 }
@@ -1260,6 +1281,7 @@ const opListResourceDelegates = "ListResourceDelegates"
 type ListResourceDelegatesRequest struct {
 	*aws.Request
 	Input *ListResourceDelegatesInput
+	Copy  func(*ListResourceDelegatesInput) ListResourceDelegatesRequest
 }
 
 // Send marshals and sends the ListResourceDelegates API request.
@@ -1301,7 +1323,7 @@ func (c *WorkMail) ListResourceDelegatesRequest(input *ListResourceDelegatesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourceDelegatesRequest{Request: req, Input: input}
+	return ListResourceDelegatesRequest{Request: req, Input: input, Copy: c.ListResourceDelegatesRequest}
 }
 
 const opListResources = "ListResources"
@@ -1310,6 +1332,7 @@ const opListResources = "ListResources"
 type ListResourcesRequest struct {
 	*aws.Request
 	Input *ListResourcesInput
+	Copy  func(*ListResourcesInput) ListResourcesRequest
 }
 
 // Send marshals and sends the ListResources API request.
@@ -1356,47 +1379,47 @@ func (c *WorkMail) ListResourcesRequest(input *ListResourcesInput) ListResources
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourcesRequest{Request: req, Input: input}
+	return ListResourcesRequest{Request: req, Input: input, Copy: c.ListResourcesRequest}
 }
 
-// ListResourcesPages iterates over the pages of a ListResources operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListResources method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListResourcesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListResources operation.
-//    pageNum := 0
-//    err := client.ListResourcesPages(params,
-//        func(page *ListResourcesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListResourcesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListResourcesRequest) Paginate(opts ...aws.Option) ListResourcesPager {
 	return ListResourcesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListResourcesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListResourcesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListResourcesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListResourcesPager ...
+// ListResourcesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListResourcesPager struct {
 	aws.Pager
 }
@@ -1411,6 +1434,7 @@ const opListUsers = "ListUsers"
 type ListUsersRequest struct {
 	*aws.Request
 	Input *ListUsersInput
+	Copy  func(*ListUsersInput) ListUsersRequest
 }
 
 // Send marshals and sends the ListUsers API request.
@@ -1457,47 +1481,47 @@ func (c *WorkMail) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUsersRequest{Request: req, Input: input}
+	return ListUsersRequest{Request: req, Input: input, Copy: c.ListUsersRequest}
 }
 
-// ListUsersPages iterates over the pages of a ListUsers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListUsers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListUsersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListUsers operation.
-//    pageNum := 0
-//    err := client.ListUsersPages(params,
-//        func(page *ListUsersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListUsersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
 	return ListUsersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListUsersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListUsersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListUsersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListUsersPager ...
+// ListUsersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListUsersPager struct {
 	aws.Pager
 }
@@ -1512,6 +1536,7 @@ const opRegisterToWorkMail = "RegisterToWorkMail"
 type RegisterToWorkMailRequest struct {
 	*aws.Request
 	Input *RegisterToWorkMailInput
+	Copy  func(*RegisterToWorkMailInput) RegisterToWorkMailRequest
 }
 
 // Send marshals and sends the RegisterToWorkMail API request.
@@ -1559,7 +1584,7 @@ func (c *WorkMail) RegisterToWorkMailRequest(input *RegisterToWorkMailInput) Reg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterToWorkMailRequest{Request: req, Input: input}
+	return RegisterToWorkMailRequest{Request: req, Input: input, Copy: c.RegisterToWorkMailRequest}
 }
 
 const opResetPassword = "ResetPassword"
@@ -1568,6 +1593,7 @@ const opResetPassword = "ResetPassword"
 type ResetPasswordRequest struct {
 	*aws.Request
 	Input *ResetPasswordInput
+	Copy  func(*ResetPasswordInput) ResetPasswordRequest
 }
 
 // Send marshals and sends the ResetPassword API request.
@@ -1608,7 +1634,7 @@ func (c *WorkMail) ResetPasswordRequest(input *ResetPasswordInput) ResetPassword
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetPasswordRequest{Request: req, Input: input}
+	return ResetPasswordRequest{Request: req, Input: input, Copy: c.ResetPasswordRequest}
 }
 
 const opUpdatePrimaryEmailAddress = "UpdatePrimaryEmailAddress"
@@ -1617,6 +1643,7 @@ const opUpdatePrimaryEmailAddress = "UpdatePrimaryEmailAddress"
 type UpdatePrimaryEmailAddressRequest struct {
 	*aws.Request
 	Input *UpdatePrimaryEmailAddressInput
+	Copy  func(*UpdatePrimaryEmailAddressInput) UpdatePrimaryEmailAddressRequest
 }
 
 // Send marshals and sends the UpdatePrimaryEmailAddress API request.
@@ -1659,7 +1686,7 @@ func (c *WorkMail) UpdatePrimaryEmailAddressRequest(input *UpdatePrimaryEmailAdd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePrimaryEmailAddressRequest{Request: req, Input: input}
+	return UpdatePrimaryEmailAddressRequest{Request: req, Input: input, Copy: c.UpdatePrimaryEmailAddressRequest}
 }
 
 const opUpdateResource = "UpdateResource"
@@ -1668,6 +1695,7 @@ const opUpdateResource = "UpdateResource"
 type UpdateResourceRequest struct {
 	*aws.Request
 	Input *UpdateResourceInput
+	Copy  func(*UpdateResourceInput) UpdateResourceRequest
 }
 
 // Send marshals and sends the UpdateResource API request.
@@ -1710,7 +1738,7 @@ func (c *WorkMail) UpdateResourceRequest(input *UpdateResourceInput) UpdateResou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateResourceRequest{Request: req, Input: input}
+	return UpdateResourceRequest{Request: req, Input: input, Copy: c.UpdateResourceRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/AssociateDelegateToResourceRequest

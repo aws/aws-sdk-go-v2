@@ -16,6 +16,7 @@ const opCheckDomainAvailability = "CheckDomainAvailability"
 type CheckDomainAvailabilityRequest struct {
 	*aws.Request
 	Input *CheckDomainAvailabilityInput
+	Copy  func(*CheckDomainAvailabilityInput) CheckDomainAvailabilityRequest
 }
 
 // Send marshals and sends the CheckDomainAvailability API request.
@@ -58,7 +59,7 @@ func (c *Route53Domains) CheckDomainAvailabilityRequest(input *CheckDomainAvaila
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CheckDomainAvailabilityRequest{Request: req, Input: input}
+	return CheckDomainAvailabilityRequest{Request: req, Input: input, Copy: c.CheckDomainAvailabilityRequest}
 }
 
 const opCheckDomainTransferability = "CheckDomainTransferability"
@@ -67,6 +68,7 @@ const opCheckDomainTransferability = "CheckDomainTransferability"
 type CheckDomainTransferabilityRequest struct {
 	*aws.Request
 	Input *CheckDomainTransferabilityInput
+	Copy  func(*CheckDomainTransferabilityInput) CheckDomainTransferabilityRequest
 }
 
 // Send marshals and sends the CheckDomainTransferability API request.
@@ -107,7 +109,7 @@ func (c *Route53Domains) CheckDomainTransferabilityRequest(input *CheckDomainTra
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CheckDomainTransferabilityRequest{Request: req, Input: input}
+	return CheckDomainTransferabilityRequest{Request: req, Input: input, Copy: c.CheckDomainTransferabilityRequest}
 }
 
 const opDeleteTagsForDomain = "DeleteTagsForDomain"
@@ -116,6 +118,7 @@ const opDeleteTagsForDomain = "DeleteTagsForDomain"
 type DeleteTagsForDomainRequest struct {
 	*aws.Request
 	Input *DeleteTagsForDomainInput
+	Copy  func(*DeleteTagsForDomainInput) DeleteTagsForDomainRequest
 }
 
 // Send marshals and sends the DeleteTagsForDomain API request.
@@ -159,7 +162,7 @@ func (c *Route53Domains) DeleteTagsForDomainRequest(input *DeleteTagsForDomainIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTagsForDomainRequest{Request: req, Input: input}
+	return DeleteTagsForDomainRequest{Request: req, Input: input, Copy: c.DeleteTagsForDomainRequest}
 }
 
 const opDisableDomainAutoRenew = "DisableDomainAutoRenew"
@@ -168,6 +171,7 @@ const opDisableDomainAutoRenew = "DisableDomainAutoRenew"
 type DisableDomainAutoRenewRequest struct {
 	*aws.Request
 	Input *DisableDomainAutoRenewInput
+	Copy  func(*DisableDomainAutoRenewInput) DisableDomainAutoRenewRequest
 }
 
 // Send marshals and sends the DisableDomainAutoRenew API request.
@@ -209,7 +213,7 @@ func (c *Route53Domains) DisableDomainAutoRenewRequest(input *DisableDomainAutoR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableDomainAutoRenewRequest{Request: req, Input: input}
+	return DisableDomainAutoRenewRequest{Request: req, Input: input, Copy: c.DisableDomainAutoRenewRequest}
 }
 
 const opDisableDomainTransferLock = "DisableDomainTransferLock"
@@ -218,6 +222,7 @@ const opDisableDomainTransferLock = "DisableDomainTransferLock"
 type DisableDomainTransferLockRequest struct {
 	*aws.Request
 	Input *DisableDomainTransferLockInput
+	Copy  func(*DisableDomainTransferLockInput) DisableDomainTransferLockRequest
 }
 
 // Send marshals and sends the DisableDomainTransferLock API request.
@@ -264,7 +269,7 @@ func (c *Route53Domains) DisableDomainTransferLockRequest(input *DisableDomainTr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableDomainTransferLockRequest{Request: req, Input: input}
+	return DisableDomainTransferLockRequest{Request: req, Input: input, Copy: c.DisableDomainTransferLockRequest}
 }
 
 const opEnableDomainAutoRenew = "EnableDomainAutoRenew"
@@ -273,6 +278,7 @@ const opEnableDomainAutoRenew = "EnableDomainAutoRenew"
 type EnableDomainAutoRenewRequest struct {
 	*aws.Request
 	Input *EnableDomainAutoRenewInput
+	Copy  func(*EnableDomainAutoRenewInput) EnableDomainAutoRenewRequest
 }
 
 // Send marshals and sends the EnableDomainAutoRenew API request.
@@ -322,7 +328,7 @@ func (c *Route53Domains) EnableDomainAutoRenewRequest(input *EnableDomainAutoRen
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableDomainAutoRenewRequest{Request: req, Input: input}
+	return EnableDomainAutoRenewRequest{Request: req, Input: input, Copy: c.EnableDomainAutoRenewRequest}
 }
 
 const opEnableDomainTransferLock = "EnableDomainTransferLock"
@@ -331,6 +337,7 @@ const opEnableDomainTransferLock = "EnableDomainTransferLock"
 type EnableDomainTransferLockRequest struct {
 	*aws.Request
 	Input *EnableDomainTransferLockInput
+	Copy  func(*EnableDomainTransferLockInput) EnableDomainTransferLockRequest
 }
 
 // Send marshals and sends the EnableDomainTransferLock API request.
@@ -375,7 +382,7 @@ func (c *Route53Domains) EnableDomainTransferLockRequest(input *EnableDomainTran
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableDomainTransferLockRequest{Request: req, Input: input}
+	return EnableDomainTransferLockRequest{Request: req, Input: input, Copy: c.EnableDomainTransferLockRequest}
 }
 
 const opGetContactReachabilityStatus = "GetContactReachabilityStatus"
@@ -384,6 +391,7 @@ const opGetContactReachabilityStatus = "GetContactReachabilityStatus"
 type GetContactReachabilityStatusRequest struct {
 	*aws.Request
 	Input *GetContactReachabilityStatusInput
+	Copy  func(*GetContactReachabilityStatusInput) GetContactReachabilityStatusRequest
 }
 
 // Send marshals and sends the GetContactReachabilityStatus API request.
@@ -429,7 +437,7 @@ func (c *Route53Domains) GetContactReachabilityStatusRequest(input *GetContactRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetContactReachabilityStatusRequest{Request: req, Input: input}
+	return GetContactReachabilityStatusRequest{Request: req, Input: input, Copy: c.GetContactReachabilityStatusRequest}
 }
 
 const opGetDomainDetail = "GetDomainDetail"
@@ -438,6 +446,7 @@ const opGetDomainDetail = "GetDomainDetail"
 type GetDomainDetailRequest struct {
 	*aws.Request
 	Input *GetDomainDetailInput
+	Copy  func(*GetDomainDetailInput) GetDomainDetailRequest
 }
 
 // Send marshals and sends the GetDomainDetail API request.
@@ -480,7 +489,7 @@ func (c *Route53Domains) GetDomainDetailRequest(input *GetDomainDetailInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDomainDetailRequest{Request: req, Input: input}
+	return GetDomainDetailRequest{Request: req, Input: input, Copy: c.GetDomainDetailRequest}
 }
 
 const opGetDomainSuggestions = "GetDomainSuggestions"
@@ -489,6 +498,7 @@ const opGetDomainSuggestions = "GetDomainSuggestions"
 type GetDomainSuggestionsRequest struct {
 	*aws.Request
 	Input *GetDomainSuggestionsInput
+	Copy  func(*GetDomainSuggestionsInput) GetDomainSuggestionsRequest
 }
 
 // Send marshals and sends the GetDomainSuggestions API request.
@@ -531,7 +541,7 @@ func (c *Route53Domains) GetDomainSuggestionsRequest(input *GetDomainSuggestions
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDomainSuggestionsRequest{Request: req, Input: input}
+	return GetDomainSuggestionsRequest{Request: req, Input: input, Copy: c.GetDomainSuggestionsRequest}
 }
 
 const opGetOperationDetail = "GetOperationDetail"
@@ -540,6 +550,7 @@ const opGetOperationDetail = "GetOperationDetail"
 type GetOperationDetailRequest struct {
 	*aws.Request
 	Input *GetOperationDetailInput
+	Copy  func(*GetOperationDetailInput) GetOperationDetailRequest
 }
 
 // Send marshals and sends the GetOperationDetail API request.
@@ -580,7 +591,7 @@ func (c *Route53Domains) GetOperationDetailRequest(input *GetOperationDetailInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOperationDetailRequest{Request: req, Input: input}
+	return GetOperationDetailRequest{Request: req, Input: input, Copy: c.GetOperationDetailRequest}
 }
 
 const opListDomains = "ListDomains"
@@ -589,6 +600,7 @@ const opListDomains = "ListDomains"
 type ListDomainsRequest struct {
 	*aws.Request
 	Input *ListDomainsInput
+	Copy  func(*ListDomainsInput) ListDomainsRequest
 }
 
 // Send marshals and sends the ListDomains API request.
@@ -636,47 +648,47 @@ func (c *Route53Domains) ListDomainsRequest(input *ListDomainsInput) ListDomains
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDomainsRequest{Request: req, Input: input}
+	return ListDomainsRequest{Request: req, Input: input, Copy: c.ListDomainsRequest}
 }
 
-// ListDomainsPages iterates over the pages of a ListDomains operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDomains method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDomainsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDomains operation.
-//    pageNum := 0
-//    err := client.ListDomainsPages(params,
-//        func(page *ListDomainsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDomainsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 	return ListDomainsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDomainsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDomainsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDomainsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDomainsPager ...
+// ListDomainsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDomainsPager struct {
 	aws.Pager
 }
@@ -691,6 +703,7 @@ const opListOperations = "ListOperations"
 type ListOperationsRequest struct {
 	*aws.Request
 	Input *ListOperationsInput
+	Copy  func(*ListOperationsInput) ListOperationsRequest
 }
 
 // Send marshals and sends the ListOperations API request.
@@ -737,47 +750,47 @@ func (c *Route53Domains) ListOperationsRequest(input *ListOperationsInput) ListO
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOperationsRequest{Request: req, Input: input}
+	return ListOperationsRequest{Request: req, Input: input, Copy: c.ListOperationsRequest}
 }
 
-// ListOperationsPages iterates over the pages of a ListOperations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListOperations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListOperationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListOperations operation.
-//    pageNum := 0
-//    err := client.ListOperationsPages(params,
-//        func(page *ListOperationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListOperationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListOperationsRequest) Paginate(opts ...aws.Option) ListOperationsPager {
 	return ListOperationsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListOperationsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListOperationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListOperationsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListOperationsPager ...
+// ListOperationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListOperationsPager struct {
 	aws.Pager
 }
@@ -792,6 +805,7 @@ const opListTagsForDomain = "ListTagsForDomain"
 type ListTagsForDomainRequest struct {
 	*aws.Request
 	Input *ListTagsForDomainInput
+	Copy  func(*ListTagsForDomainInput) ListTagsForDomainRequest
 }
 
 // Send marshals and sends the ListTagsForDomain API request.
@@ -836,7 +850,7 @@ func (c *Route53Domains) ListTagsForDomainRequest(input *ListTagsForDomainInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForDomainRequest{Request: req, Input: input}
+	return ListTagsForDomainRequest{Request: req, Input: input, Copy: c.ListTagsForDomainRequest}
 }
 
 const opRegisterDomain = "RegisterDomain"
@@ -845,6 +859,7 @@ const opRegisterDomain = "RegisterDomain"
 type RegisterDomainRequest struct {
 	*aws.Request
 	Input *RegisterDomainInput
+	Copy  func(*RegisterDomainInput) RegisterDomainRequest
 }
 
 // Send marshals and sends the RegisterDomain API request.
@@ -909,7 +924,7 @@ func (c *Route53Domains) RegisterDomainRequest(input *RegisterDomainInput) Regis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterDomainRequest{Request: req, Input: input}
+	return RegisterDomainRequest{Request: req, Input: input, Copy: c.RegisterDomainRequest}
 }
 
 const opRenewDomain = "RenewDomain"
@@ -918,6 +933,7 @@ const opRenewDomain = "RenewDomain"
 type RenewDomainRequest struct {
 	*aws.Request
 	Input *RenewDomainInput
+	Copy  func(*RenewDomainInput) RenewDomainRequest
 }
 
 // Send marshals and sends the RenewDomain API request.
@@ -965,7 +981,7 @@ func (c *Route53Domains) RenewDomainRequest(input *RenewDomainInput) RenewDomain
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RenewDomainRequest{Request: req, Input: input}
+	return RenewDomainRequest{Request: req, Input: input, Copy: c.RenewDomainRequest}
 }
 
 const opResendContactReachabilityEmail = "ResendContactReachabilityEmail"
@@ -974,6 +990,7 @@ const opResendContactReachabilityEmail = "ResendContactReachabilityEmail"
 type ResendContactReachabilityEmailRequest struct {
 	*aws.Request
 	Input *ResendContactReachabilityEmailInput
+	Copy  func(*ResendContactReachabilityEmailInput) ResendContactReachabilityEmailRequest
 }
 
 // Send marshals and sends the ResendContactReachabilityEmail API request.
@@ -1016,7 +1033,7 @@ func (c *Route53Domains) ResendContactReachabilityEmailRequest(input *ResendCont
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResendContactReachabilityEmailRequest{Request: req, Input: input}
+	return ResendContactReachabilityEmailRequest{Request: req, Input: input, Copy: c.ResendContactReachabilityEmailRequest}
 }
 
 const opRetrieveDomainAuthCode = "RetrieveDomainAuthCode"
@@ -1025,6 +1042,7 @@ const opRetrieveDomainAuthCode = "RetrieveDomainAuthCode"
 type RetrieveDomainAuthCodeRequest struct {
 	*aws.Request
 	Input *RetrieveDomainAuthCodeInput
+	Copy  func(*RetrieveDomainAuthCodeInput) RetrieveDomainAuthCodeRequest
 }
 
 // Send marshals and sends the RetrieveDomainAuthCode API request.
@@ -1066,7 +1084,7 @@ func (c *Route53Domains) RetrieveDomainAuthCodeRequest(input *RetrieveDomainAuth
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RetrieveDomainAuthCodeRequest{Request: req, Input: input}
+	return RetrieveDomainAuthCodeRequest{Request: req, Input: input, Copy: c.RetrieveDomainAuthCodeRequest}
 }
 
 const opTransferDomain = "TransferDomain"
@@ -1075,6 +1093,7 @@ const opTransferDomain = "TransferDomain"
 type TransferDomainRequest struct {
 	*aws.Request
 	Input *TransferDomainInput
+	Copy  func(*TransferDomainInput) TransferDomainRequest
 }
 
 // Send marshals and sends the TransferDomain API request.
@@ -1139,7 +1158,7 @@ func (c *Route53Domains) TransferDomainRequest(input *TransferDomainInput) Trans
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TransferDomainRequest{Request: req, Input: input}
+	return TransferDomainRequest{Request: req, Input: input, Copy: c.TransferDomainRequest}
 }
 
 const opUpdateDomainContact = "UpdateDomainContact"
@@ -1148,6 +1167,7 @@ const opUpdateDomainContact = "UpdateDomainContact"
 type UpdateDomainContactRequest struct {
 	*aws.Request
 	Input *UpdateDomainContactInput
+	Copy  func(*UpdateDomainContactInput) UpdateDomainContactRequest
 }
 
 // Send marshals and sends the UpdateDomainContact API request.
@@ -1195,7 +1215,7 @@ func (c *Route53Domains) UpdateDomainContactRequest(input *UpdateDomainContactIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDomainContactRequest{Request: req, Input: input}
+	return UpdateDomainContactRequest{Request: req, Input: input, Copy: c.UpdateDomainContactRequest}
 }
 
 const opUpdateDomainContactPrivacy = "UpdateDomainContactPrivacy"
@@ -1204,6 +1224,7 @@ const opUpdateDomainContactPrivacy = "UpdateDomainContactPrivacy"
 type UpdateDomainContactPrivacyRequest struct {
 	*aws.Request
 	Input *UpdateDomainContactPrivacyInput
+	Copy  func(*UpdateDomainContactPrivacyInput) UpdateDomainContactPrivacyRequest
 }
 
 // Send marshals and sends the UpdateDomainContactPrivacy API request.
@@ -1254,7 +1275,7 @@ func (c *Route53Domains) UpdateDomainContactPrivacyRequest(input *UpdateDomainCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDomainContactPrivacyRequest{Request: req, Input: input}
+	return UpdateDomainContactPrivacyRequest{Request: req, Input: input, Copy: c.UpdateDomainContactPrivacyRequest}
 }
 
 const opUpdateDomainNameservers = "UpdateDomainNameservers"
@@ -1263,6 +1284,7 @@ const opUpdateDomainNameservers = "UpdateDomainNameservers"
 type UpdateDomainNameserversRequest struct {
 	*aws.Request
 	Input *UpdateDomainNameserversInput
+	Copy  func(*UpdateDomainNameserversInput) UpdateDomainNameserversRequest
 }
 
 // Send marshals and sends the UpdateDomainNameservers API request.
@@ -1310,7 +1332,7 @@ func (c *Route53Domains) UpdateDomainNameserversRequest(input *UpdateDomainNames
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDomainNameserversRequest{Request: req, Input: input}
+	return UpdateDomainNameserversRequest{Request: req, Input: input, Copy: c.UpdateDomainNameserversRequest}
 }
 
 const opUpdateTagsForDomain = "UpdateTagsForDomain"
@@ -1319,6 +1341,7 @@ const opUpdateTagsForDomain = "UpdateTagsForDomain"
 type UpdateTagsForDomainRequest struct {
 	*aws.Request
 	Input *UpdateTagsForDomainInput
+	Copy  func(*UpdateTagsForDomainInput) UpdateTagsForDomainRequest
 }
 
 // Send marshals and sends the UpdateTagsForDomain API request.
@@ -1362,7 +1385,7 @@ func (c *Route53Domains) UpdateTagsForDomainRequest(input *UpdateTagsForDomainIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTagsForDomainRequest{Request: req, Input: input}
+	return UpdateTagsForDomainRequest{Request: req, Input: input, Copy: c.UpdateTagsForDomainRequest}
 }
 
 const opViewBilling = "ViewBilling"
@@ -1371,6 +1394,7 @@ const opViewBilling = "ViewBilling"
 type ViewBillingRequest struct {
 	*aws.Request
 	Input *ViewBillingInput
+	Copy  func(*ViewBillingInput) ViewBillingRequest
 }
 
 // Send marshals and sends the ViewBilling API request.
@@ -1412,7 +1436,7 @@ func (c *Route53Domains) ViewBillingRequest(input *ViewBillingInput) ViewBilling
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ViewBillingRequest{Request: req, Input: input}
+	return ViewBillingRequest{Request: req, Input: input, Copy: c.ViewBillingRequest}
 }
 
 // Information for one billing record.

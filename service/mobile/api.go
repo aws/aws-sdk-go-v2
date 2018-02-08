@@ -16,6 +16,7 @@ const opCreateProject = "CreateProject"
 type CreateProjectRequest struct {
 	*aws.Request
 	Input *CreateProjectInput
+	Copy  func(*CreateProjectInput) CreateProjectRequest
 }
 
 // Send marshals and sends the CreateProject API request.
@@ -56,7 +57,7 @@ func (c *Mobile) CreateProjectRequest(input *CreateProjectInput) CreateProjectRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateProjectRequest{Request: req, Input: input}
+	return CreateProjectRequest{Request: req, Input: input, Copy: c.CreateProjectRequest}
 }
 
 const opDeleteProject = "DeleteProject"
@@ -65,6 +66,7 @@ const opDeleteProject = "DeleteProject"
 type DeleteProjectRequest struct {
 	*aws.Request
 	Input *DeleteProjectInput
+	Copy  func(*DeleteProjectInput) DeleteProjectRequest
 }
 
 // Send marshals and sends the DeleteProject API request.
@@ -105,7 +107,7 @@ func (c *Mobile) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjectRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteProjectRequest{Request: req, Input: input}
+	return DeleteProjectRequest{Request: req, Input: input, Copy: c.DeleteProjectRequest}
 }
 
 const opDescribeBundle = "DescribeBundle"
@@ -114,6 +116,7 @@ const opDescribeBundle = "DescribeBundle"
 type DescribeBundleRequest struct {
 	*aws.Request
 	Input *DescribeBundleInput
+	Copy  func(*DescribeBundleInput) DescribeBundleRequest
 }
 
 // Send marshals and sends the DescribeBundle API request.
@@ -154,7 +157,7 @@ func (c *Mobile) DescribeBundleRequest(input *DescribeBundleInput) DescribeBundl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBundleRequest{Request: req, Input: input}
+	return DescribeBundleRequest{Request: req, Input: input, Copy: c.DescribeBundleRequest}
 }
 
 const opDescribeProject = "DescribeProject"
@@ -163,6 +166,7 @@ const opDescribeProject = "DescribeProject"
 type DescribeProjectRequest struct {
 	*aws.Request
 	Input *DescribeProjectInput
+	Copy  func(*DescribeProjectInput) DescribeProjectRequest
 }
 
 // Send marshals and sends the DescribeProject API request.
@@ -203,7 +207,7 @@ func (c *Mobile) DescribeProjectRequest(input *DescribeProjectInput) DescribePro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeProjectRequest{Request: req, Input: input}
+	return DescribeProjectRequest{Request: req, Input: input, Copy: c.DescribeProjectRequest}
 }
 
 const opExportBundle = "ExportBundle"
@@ -212,6 +216,7 @@ const opExportBundle = "ExportBundle"
 type ExportBundleRequest struct {
 	*aws.Request
 	Input *ExportBundleInput
+	Copy  func(*ExportBundleInput) ExportBundleRequest
 }
 
 // Send marshals and sends the ExportBundle API request.
@@ -253,7 +258,7 @@ func (c *Mobile) ExportBundleRequest(input *ExportBundleInput) ExportBundleReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ExportBundleRequest{Request: req, Input: input}
+	return ExportBundleRequest{Request: req, Input: input, Copy: c.ExportBundleRequest}
 }
 
 const opExportProject = "ExportProject"
@@ -262,6 +267,7 @@ const opExportProject = "ExportProject"
 type ExportProjectRequest struct {
 	*aws.Request
 	Input *ExportProjectInput
+	Copy  func(*ExportProjectInput) ExportProjectRequest
 }
 
 // Send marshals and sends the ExportProject API request.
@@ -304,7 +310,7 @@ func (c *Mobile) ExportProjectRequest(input *ExportProjectInput) ExportProjectRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ExportProjectRequest{Request: req, Input: input}
+	return ExportProjectRequest{Request: req, Input: input, Copy: c.ExportProjectRequest}
 }
 
 const opListBundles = "ListBundles"
@@ -313,6 +319,7 @@ const opListBundles = "ListBundles"
 type ListBundlesRequest struct {
 	*aws.Request
 	Input *ListBundlesInput
+	Copy  func(*ListBundlesInput) ListBundlesRequest
 }
 
 // Send marshals and sends the ListBundles API request.
@@ -359,47 +366,47 @@ func (c *Mobile) ListBundlesRequest(input *ListBundlesInput) ListBundlesRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBundlesRequest{Request: req, Input: input}
+	return ListBundlesRequest{Request: req, Input: input, Copy: c.ListBundlesRequest}
 }
 
-// ListBundlesPages iterates over the pages of a ListBundles operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListBundles method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListBundlesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListBundles operation.
-//    pageNum := 0
-//    err := client.ListBundlesPages(params,
-//        func(page *ListBundlesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListBundlesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListBundlesRequest) Paginate(opts ...aws.Option) ListBundlesPager {
 	return ListBundlesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListBundlesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListBundlesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListBundlesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListBundlesPager ...
+// ListBundlesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListBundlesPager struct {
 	aws.Pager
 }
@@ -414,6 +421,7 @@ const opListProjects = "ListProjects"
 type ListProjectsRequest struct {
 	*aws.Request
 	Input *ListProjectsInput
+	Copy  func(*ListProjectsInput) ListProjectsRequest
 }
 
 // Send marshals and sends the ListProjects API request.
@@ -460,47 +468,47 @@ func (c *Mobile) ListProjectsRequest(input *ListProjectsInput) ListProjectsReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListProjectsRequest{Request: req, Input: input}
+	return ListProjectsRequest{Request: req, Input: input, Copy: c.ListProjectsRequest}
 }
 
-// ListProjectsPages iterates over the pages of a ListProjects operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListProjects method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListProjectsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListProjects operation.
-//    pageNum := 0
-//    err := client.ListProjectsPages(params,
-//        func(page *ListProjectsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListProjectsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListProjectsRequest) Paginate(opts ...aws.Option) ListProjectsPager {
 	return ListProjectsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListProjectsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListProjectsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListProjectsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListProjectsPager ...
+// ListProjectsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListProjectsPager struct {
 	aws.Pager
 }
@@ -515,6 +523,7 @@ const opUpdateProject = "UpdateProject"
 type UpdateProjectRequest struct {
 	*aws.Request
 	Input *UpdateProjectInput
+	Copy  func(*UpdateProjectInput) UpdateProjectRequest
 }
 
 // Send marshals and sends the UpdateProject API request.
@@ -555,7 +564,7 @@ func (c *Mobile) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjectRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateProjectRequest{Request: req, Input: input}
+	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 
 // The details of the bundle.

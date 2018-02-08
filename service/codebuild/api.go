@@ -16,6 +16,7 @@ const opBatchDeleteBuilds = "BatchDeleteBuilds"
 type BatchDeleteBuildsRequest struct {
 	*aws.Request
 	Input *BatchDeleteBuildsInput
+	Copy  func(*BatchDeleteBuildsInput) BatchDeleteBuildsRequest
 }
 
 // Send marshals and sends the BatchDeleteBuilds API request.
@@ -56,7 +57,7 @@ func (c *CodeBuild) BatchDeleteBuildsRequest(input *BatchDeleteBuildsInput) Batc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchDeleteBuildsRequest{Request: req, Input: input}
+	return BatchDeleteBuildsRequest{Request: req, Input: input, Copy: c.BatchDeleteBuildsRequest}
 }
 
 const opBatchGetBuilds = "BatchGetBuilds"
@@ -65,6 +66,7 @@ const opBatchGetBuilds = "BatchGetBuilds"
 type BatchGetBuildsRequest struct {
 	*aws.Request
 	Input *BatchGetBuildsInput
+	Copy  func(*BatchGetBuildsInput) BatchGetBuildsRequest
 }
 
 // Send marshals and sends the BatchGetBuilds API request.
@@ -105,7 +107,7 @@ func (c *CodeBuild) BatchGetBuildsRequest(input *BatchGetBuildsInput) BatchGetBu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetBuildsRequest{Request: req, Input: input}
+	return BatchGetBuildsRequest{Request: req, Input: input, Copy: c.BatchGetBuildsRequest}
 }
 
 const opBatchGetProjects = "BatchGetProjects"
@@ -114,6 +116,7 @@ const opBatchGetProjects = "BatchGetProjects"
 type BatchGetProjectsRequest struct {
 	*aws.Request
 	Input *BatchGetProjectsInput
+	Copy  func(*BatchGetProjectsInput) BatchGetProjectsRequest
 }
 
 // Send marshals and sends the BatchGetProjects API request.
@@ -154,7 +157,7 @@ func (c *CodeBuild) BatchGetProjectsRequest(input *BatchGetProjectsInput) BatchG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetProjectsRequest{Request: req, Input: input}
+	return BatchGetProjectsRequest{Request: req, Input: input, Copy: c.BatchGetProjectsRequest}
 }
 
 const opCreateProject = "CreateProject"
@@ -163,6 +166,7 @@ const opCreateProject = "CreateProject"
 type CreateProjectRequest struct {
 	*aws.Request
 	Input *CreateProjectInput
+	Copy  func(*CreateProjectInput) CreateProjectRequest
 }
 
 // Send marshals and sends the CreateProject API request.
@@ -203,7 +207,7 @@ func (c *CodeBuild) CreateProjectRequest(input *CreateProjectInput) CreateProjec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateProjectRequest{Request: req, Input: input}
+	return CreateProjectRequest{Request: req, Input: input, Copy: c.CreateProjectRequest}
 }
 
 const opCreateWebhook = "CreateWebhook"
@@ -212,6 +216,7 @@ const opCreateWebhook = "CreateWebhook"
 type CreateWebhookRequest struct {
 	*aws.Request
 	Input *CreateWebhookInput
+	Copy  func(*CreateWebhookInput) CreateWebhookRequest
 }
 
 // Send marshals and sends the CreateWebhook API request.
@@ -263,7 +268,7 @@ func (c *CodeBuild) CreateWebhookRequest(input *CreateWebhookInput) CreateWebhoo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateWebhookRequest{Request: req, Input: input}
+	return CreateWebhookRequest{Request: req, Input: input, Copy: c.CreateWebhookRequest}
 }
 
 const opDeleteProject = "DeleteProject"
@@ -272,6 +277,7 @@ const opDeleteProject = "DeleteProject"
 type DeleteProjectRequest struct {
 	*aws.Request
 	Input *DeleteProjectInput
+	Copy  func(*DeleteProjectInput) DeleteProjectRequest
 }
 
 // Send marshals and sends the DeleteProject API request.
@@ -312,7 +318,7 @@ func (c *CodeBuild) DeleteProjectRequest(input *DeleteProjectInput) DeleteProjec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteProjectRequest{Request: req, Input: input}
+	return DeleteProjectRequest{Request: req, Input: input, Copy: c.DeleteProjectRequest}
 }
 
 const opDeleteWebhook = "DeleteWebhook"
@@ -321,6 +327,7 @@ const opDeleteWebhook = "DeleteWebhook"
 type DeleteWebhookRequest struct {
 	*aws.Request
 	Input *DeleteWebhookInput
+	Copy  func(*DeleteWebhookInput) DeleteWebhookRequest
 }
 
 // Send marshals and sends the DeleteWebhook API request.
@@ -363,7 +370,7 @@ func (c *CodeBuild) DeleteWebhookRequest(input *DeleteWebhookInput) DeleteWebhoo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteWebhookRequest{Request: req, Input: input}
+	return DeleteWebhookRequest{Request: req, Input: input, Copy: c.DeleteWebhookRequest}
 }
 
 const opInvalidateProjectCache = "InvalidateProjectCache"
@@ -372,6 +379,7 @@ const opInvalidateProjectCache = "InvalidateProjectCache"
 type InvalidateProjectCacheRequest struct {
 	*aws.Request
 	Input *InvalidateProjectCacheInput
+	Copy  func(*InvalidateProjectCacheInput) InvalidateProjectCacheRequest
 }
 
 // Send marshals and sends the InvalidateProjectCache API request.
@@ -412,7 +420,7 @@ func (c *CodeBuild) InvalidateProjectCacheRequest(input *InvalidateProjectCacheI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InvalidateProjectCacheRequest{Request: req, Input: input}
+	return InvalidateProjectCacheRequest{Request: req, Input: input, Copy: c.InvalidateProjectCacheRequest}
 }
 
 const opListBuilds = "ListBuilds"
@@ -421,6 +429,7 @@ const opListBuilds = "ListBuilds"
 type ListBuildsRequest struct {
 	*aws.Request
 	Input *ListBuildsInput
+	Copy  func(*ListBuildsInput) ListBuildsRequest
 }
 
 // Send marshals and sends the ListBuilds API request.
@@ -461,7 +470,7 @@ func (c *CodeBuild) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBuildsRequest{Request: req, Input: input}
+	return ListBuildsRequest{Request: req, Input: input, Copy: c.ListBuildsRequest}
 }
 
 const opListBuildsForProject = "ListBuildsForProject"
@@ -470,6 +479,7 @@ const opListBuildsForProject = "ListBuildsForProject"
 type ListBuildsForProjectRequest struct {
 	*aws.Request
 	Input *ListBuildsForProjectInput
+	Copy  func(*ListBuildsForProjectInput) ListBuildsForProjectRequest
 }
 
 // Send marshals and sends the ListBuildsForProject API request.
@@ -511,7 +521,7 @@ func (c *CodeBuild) ListBuildsForProjectRequest(input *ListBuildsForProjectInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBuildsForProjectRequest{Request: req, Input: input}
+	return ListBuildsForProjectRequest{Request: req, Input: input, Copy: c.ListBuildsForProjectRequest}
 }
 
 const opListCuratedEnvironmentImages = "ListCuratedEnvironmentImages"
@@ -520,6 +530,7 @@ const opListCuratedEnvironmentImages = "ListCuratedEnvironmentImages"
 type ListCuratedEnvironmentImagesRequest struct {
 	*aws.Request
 	Input *ListCuratedEnvironmentImagesInput
+	Copy  func(*ListCuratedEnvironmentImagesInput) ListCuratedEnvironmentImagesRequest
 }
 
 // Send marshals and sends the ListCuratedEnvironmentImages API request.
@@ -560,7 +571,7 @@ func (c *CodeBuild) ListCuratedEnvironmentImagesRequest(input *ListCuratedEnviro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCuratedEnvironmentImagesRequest{Request: req, Input: input}
+	return ListCuratedEnvironmentImagesRequest{Request: req, Input: input, Copy: c.ListCuratedEnvironmentImagesRequest}
 }
 
 const opListProjects = "ListProjects"
@@ -569,6 +580,7 @@ const opListProjects = "ListProjects"
 type ListProjectsRequest struct {
 	*aws.Request
 	Input *ListProjectsInput
+	Copy  func(*ListProjectsInput) ListProjectsRequest
 }
 
 // Send marshals and sends the ListProjects API request.
@@ -610,7 +622,7 @@ func (c *CodeBuild) ListProjectsRequest(input *ListProjectsInput) ListProjectsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListProjectsRequest{Request: req, Input: input}
+	return ListProjectsRequest{Request: req, Input: input, Copy: c.ListProjectsRequest}
 }
 
 const opStartBuild = "StartBuild"
@@ -619,6 +631,7 @@ const opStartBuild = "StartBuild"
 type StartBuildRequest struct {
 	*aws.Request
 	Input *StartBuildInput
+	Copy  func(*StartBuildInput) StartBuildRequest
 }
 
 // Send marshals and sends the StartBuild API request.
@@ -659,7 +672,7 @@ func (c *CodeBuild) StartBuildRequest(input *StartBuildInput) StartBuildRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartBuildRequest{Request: req, Input: input}
+	return StartBuildRequest{Request: req, Input: input, Copy: c.StartBuildRequest}
 }
 
 const opStopBuild = "StopBuild"
@@ -668,6 +681,7 @@ const opStopBuild = "StopBuild"
 type StopBuildRequest struct {
 	*aws.Request
 	Input *StopBuildInput
+	Copy  func(*StopBuildInput) StopBuildRequest
 }
 
 // Send marshals and sends the StopBuild API request.
@@ -708,7 +722,7 @@ func (c *CodeBuild) StopBuildRequest(input *StopBuildInput) StopBuildRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopBuildRequest{Request: req, Input: input}
+	return StopBuildRequest{Request: req, Input: input, Copy: c.StopBuildRequest}
 }
 
 const opUpdateProject = "UpdateProject"
@@ -717,6 +731,7 @@ const opUpdateProject = "UpdateProject"
 type UpdateProjectRequest struct {
 	*aws.Request
 	Input *UpdateProjectInput
+	Copy  func(*UpdateProjectInput) UpdateProjectRequest
 }
 
 // Send marshals and sends the UpdateProject API request.
@@ -757,7 +772,7 @@ func (c *CodeBuild) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateProjectRequest{Request: req, Input: input}
+	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuildsInput

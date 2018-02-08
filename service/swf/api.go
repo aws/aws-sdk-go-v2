@@ -18,6 +18,7 @@ const opCountClosedWorkflowExecutions = "CountClosedWorkflowExecutions"
 type CountClosedWorkflowExecutionsRequest struct {
 	*aws.Request
 	Input *CountClosedWorkflowExecutionsInput
+	Copy  func(*CountClosedWorkflowExecutionsInput) CountClosedWorkflowExecutionsRequest
 }
 
 // Send marshals and sends the CountClosedWorkflowExecutions API request.
@@ -86,7 +87,7 @@ func (c *SWF) CountClosedWorkflowExecutionsRequest(input *CountClosedWorkflowExe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CountClosedWorkflowExecutionsRequest{Request: req, Input: input}
+	return CountClosedWorkflowExecutionsRequest{Request: req, Input: input, Copy: c.CountClosedWorkflowExecutionsRequest}
 }
 
 const opCountOpenWorkflowExecutions = "CountOpenWorkflowExecutions"
@@ -95,6 +96,7 @@ const opCountOpenWorkflowExecutions = "CountOpenWorkflowExecutions"
 type CountOpenWorkflowExecutionsRequest struct {
 	*aws.Request
 	Input *CountOpenWorkflowExecutionsInput
+	Copy  func(*CountOpenWorkflowExecutionsInput) CountOpenWorkflowExecutionsRequest
 }
 
 // Send marshals and sends the CountOpenWorkflowExecutions API request.
@@ -163,7 +165,7 @@ func (c *SWF) CountOpenWorkflowExecutionsRequest(input *CountOpenWorkflowExecuti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CountOpenWorkflowExecutionsRequest{Request: req, Input: input}
+	return CountOpenWorkflowExecutionsRequest{Request: req, Input: input, Copy: c.CountOpenWorkflowExecutionsRequest}
 }
 
 const opCountPendingActivityTasks = "CountPendingActivityTasks"
@@ -172,6 +174,7 @@ const opCountPendingActivityTasks = "CountPendingActivityTasks"
 type CountPendingActivityTasksRequest struct {
 	*aws.Request
 	Input *CountPendingActivityTasksInput
+	Copy  func(*CountPendingActivityTasksInput) CountPendingActivityTasksRequest
 }
 
 // Send marshals and sends the CountPendingActivityTasks API request.
@@ -234,7 +237,7 @@ func (c *SWF) CountPendingActivityTasksRequest(input *CountPendingActivityTasksI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CountPendingActivityTasksRequest{Request: req, Input: input}
+	return CountPendingActivityTasksRequest{Request: req, Input: input, Copy: c.CountPendingActivityTasksRequest}
 }
 
 const opCountPendingDecisionTasks = "CountPendingDecisionTasks"
@@ -243,6 +246,7 @@ const opCountPendingDecisionTasks = "CountPendingDecisionTasks"
 type CountPendingDecisionTasksRequest struct {
 	*aws.Request
 	Input *CountPendingDecisionTasksInput
+	Copy  func(*CountPendingDecisionTasksInput) CountPendingDecisionTasksRequest
 }
 
 // Send marshals and sends the CountPendingDecisionTasks API request.
@@ -305,7 +309,7 @@ func (c *SWF) CountPendingDecisionTasksRequest(input *CountPendingDecisionTasksI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CountPendingDecisionTasksRequest{Request: req, Input: input}
+	return CountPendingDecisionTasksRequest{Request: req, Input: input, Copy: c.CountPendingDecisionTasksRequest}
 }
 
 const opDeprecateActivityType = "DeprecateActivityType"
@@ -314,6 +318,7 @@ const opDeprecateActivityType = "DeprecateActivityType"
 type DeprecateActivityTypeRequest struct {
 	*aws.Request
 	Input *DeprecateActivityTypeInput
+	Copy  func(*DeprecateActivityTypeInput) DeprecateActivityTypeRequest
 }
 
 // Send marshals and sends the DeprecateActivityType API request.
@@ -383,7 +388,7 @@ func (c *SWF) DeprecateActivityTypeRequest(input *DeprecateActivityTypeInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeprecateActivityTypeRequest{Request: req, Input: input}
+	return DeprecateActivityTypeRequest{Request: req, Input: input, Copy: c.DeprecateActivityTypeRequest}
 }
 
 const opDeprecateDomain = "DeprecateDomain"
@@ -392,6 +397,7 @@ const opDeprecateDomain = "DeprecateDomain"
 type DeprecateDomainRequest struct {
 	*aws.Request
 	Input *DeprecateDomainInput
+	Copy  func(*DeprecateDomainInput) DeprecateDomainRequest
 }
 
 // Send marshals and sends the DeprecateDomain API request.
@@ -459,7 +465,7 @@ func (c *SWF) DeprecateDomainRequest(input *DeprecateDomainInput) DeprecateDomai
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeprecateDomainRequest{Request: req, Input: input}
+	return DeprecateDomainRequest{Request: req, Input: input, Copy: c.DeprecateDomainRequest}
 }
 
 const opDeprecateWorkflowType = "DeprecateWorkflowType"
@@ -468,6 +474,7 @@ const opDeprecateWorkflowType = "DeprecateWorkflowType"
 type DeprecateWorkflowTypeRequest struct {
 	*aws.Request
 	Input *DeprecateWorkflowTypeInput
+	Copy  func(*DeprecateWorkflowTypeInput) DeprecateWorkflowTypeRequest
 }
 
 // Send marshals and sends the DeprecateWorkflowType API request.
@@ -538,7 +545,7 @@ func (c *SWF) DeprecateWorkflowTypeRequest(input *DeprecateWorkflowTypeInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeprecateWorkflowTypeRequest{Request: req, Input: input}
+	return DeprecateWorkflowTypeRequest{Request: req, Input: input, Copy: c.DeprecateWorkflowTypeRequest}
 }
 
 const opDescribeActivityType = "DescribeActivityType"
@@ -547,6 +554,7 @@ const opDescribeActivityType = "DescribeActivityType"
 type DescribeActivityTypeRequest struct {
 	*aws.Request
 	Input *DescribeActivityTypeInput
+	Copy  func(*DescribeActivityTypeInput) DescribeActivityTypeRequest
 }
 
 // Send marshals and sends the DescribeActivityType API request.
@@ -611,7 +619,7 @@ func (c *SWF) DescribeActivityTypeRequest(input *DescribeActivityTypeInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeActivityTypeRequest{Request: req, Input: input}
+	return DescribeActivityTypeRequest{Request: req, Input: input, Copy: c.DescribeActivityTypeRequest}
 }
 
 const opDescribeDomain = "DescribeDomain"
@@ -620,6 +628,7 @@ const opDescribeDomain = "DescribeDomain"
 type DescribeDomainRequest struct {
 	*aws.Request
 	Input *DescribeDomainInput
+	Copy  func(*DescribeDomainInput) DescribeDomainRequest
 }
 
 // Send marshals and sends the DescribeDomain API request.
@@ -678,7 +687,7 @@ func (c *SWF) DescribeDomainRequest(input *DescribeDomainInput) DescribeDomainRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDomainRequest{Request: req, Input: input}
+	return DescribeDomainRequest{Request: req, Input: input, Copy: c.DescribeDomainRequest}
 }
 
 const opDescribeWorkflowExecution = "DescribeWorkflowExecution"
@@ -687,6 +696,7 @@ const opDescribeWorkflowExecution = "DescribeWorkflowExecution"
 type DescribeWorkflowExecutionRequest struct {
 	*aws.Request
 	Input *DescribeWorkflowExecutionInput
+	Copy  func(*DescribeWorkflowExecutionInput) DescribeWorkflowExecutionRequest
 }
 
 // Send marshals and sends the DescribeWorkflowExecution API request.
@@ -748,7 +758,7 @@ func (c *SWF) DescribeWorkflowExecutionRequest(input *DescribeWorkflowExecutionI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeWorkflowExecutionRequest{Request: req, Input: input}
+	return DescribeWorkflowExecutionRequest{Request: req, Input: input, Copy: c.DescribeWorkflowExecutionRequest}
 }
 
 const opDescribeWorkflowType = "DescribeWorkflowType"
@@ -757,6 +767,7 @@ const opDescribeWorkflowType = "DescribeWorkflowType"
 type DescribeWorkflowTypeRequest struct {
 	*aws.Request
 	Input *DescribeWorkflowTypeInput
+	Copy  func(*DescribeWorkflowTypeInput) DescribeWorkflowTypeRequest
 }
 
 // Send marshals and sends the DescribeWorkflowType API request.
@@ -821,7 +832,7 @@ func (c *SWF) DescribeWorkflowTypeRequest(input *DescribeWorkflowTypeInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeWorkflowTypeRequest{Request: req, Input: input}
+	return DescribeWorkflowTypeRequest{Request: req, Input: input, Copy: c.DescribeWorkflowTypeRequest}
 }
 
 const opGetWorkflowExecutionHistory = "GetWorkflowExecutionHistory"
@@ -830,6 +841,7 @@ const opGetWorkflowExecutionHistory = "GetWorkflowExecutionHistory"
 type GetWorkflowExecutionHistoryRequest struct {
 	*aws.Request
 	Input *GetWorkflowExecutionHistoryInput
+	Copy  func(*GetWorkflowExecutionHistoryInput) GetWorkflowExecutionHistoryRequest
 }
 
 // Send marshals and sends the GetWorkflowExecutionHistory API request.
@@ -898,47 +910,47 @@ func (c *SWF) GetWorkflowExecutionHistoryRequest(input *GetWorkflowExecutionHist
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetWorkflowExecutionHistoryRequest{Request: req, Input: input}
+	return GetWorkflowExecutionHistoryRequest{Request: req, Input: input, Copy: c.GetWorkflowExecutionHistoryRequest}
 }
 
-// GetWorkflowExecutionHistoryPages iterates over the pages of a GetWorkflowExecutionHistory operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetWorkflowExecutionHistory method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetWorkflowExecutionHistoryRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetWorkflowExecutionHistory operation.
-//    pageNum := 0
-//    err := client.GetWorkflowExecutionHistoryPages(params,
-//        func(page *GetWorkflowExecutionHistoryOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetWorkflowExecutionHistoryRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetWorkflowExecutionHistoryRequest) Paginate(opts ...aws.Option) GetWorkflowExecutionHistoryPager {
 	return GetWorkflowExecutionHistoryPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetWorkflowExecutionHistoryInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetWorkflowExecutionHistoryInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetWorkflowExecutionHistoryOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetWorkflowExecutionHistoryPager ...
+// GetWorkflowExecutionHistoryPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetWorkflowExecutionHistoryPager struct {
 	aws.Pager
 }
@@ -953,6 +965,7 @@ const opListActivityTypes = "ListActivityTypes"
 type ListActivityTypesRequest struct {
 	*aws.Request
 	Input *ListActivityTypesInput
+	Copy  func(*ListActivityTypesInput) ListActivityTypesRequest
 }
 
 // Send marshals and sends the ListActivityTypes API request.
@@ -1020,47 +1033,47 @@ func (c *SWF) ListActivityTypesRequest(input *ListActivityTypesInput) ListActivi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListActivityTypesRequest{Request: req, Input: input}
+	return ListActivityTypesRequest{Request: req, Input: input, Copy: c.ListActivityTypesRequest}
 }
 
-// ListActivityTypesPages iterates over the pages of a ListActivityTypes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListActivityTypes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListActivityTypesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListActivityTypes operation.
-//    pageNum := 0
-//    err := client.ListActivityTypesPages(params,
-//        func(page *ListActivityTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListActivityTypesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListActivityTypesRequest) Paginate(opts ...aws.Option) ListActivityTypesPager {
 	return ListActivityTypesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListActivityTypesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListActivityTypesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListActivityTypesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListActivityTypesPager ...
+// ListActivityTypesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListActivityTypesPager struct {
 	aws.Pager
 }
@@ -1075,6 +1088,7 @@ const opListClosedWorkflowExecutions = "ListClosedWorkflowExecutions"
 type ListClosedWorkflowExecutionsRequest struct {
 	*aws.Request
 	Input *ListClosedWorkflowExecutionsInput
+	Copy  func(*ListClosedWorkflowExecutionsInput) ListClosedWorkflowExecutionsRequest
 }
 
 // Send marshals and sends the ListClosedWorkflowExecutions API request.
@@ -1151,47 +1165,47 @@ func (c *SWF) ListClosedWorkflowExecutionsRequest(input *ListClosedWorkflowExecu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListClosedWorkflowExecutionsRequest{Request: req, Input: input}
+	return ListClosedWorkflowExecutionsRequest{Request: req, Input: input, Copy: c.ListClosedWorkflowExecutionsRequest}
 }
 
-// ListClosedWorkflowExecutionsPages iterates over the pages of a ListClosedWorkflowExecutions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListClosedWorkflowExecutions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListClosedWorkflowExecutionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListClosedWorkflowExecutions operation.
-//    pageNum := 0
-//    err := client.ListClosedWorkflowExecutionsPages(params,
-//        func(page *ListOpenWorkflowExecutionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListClosedWorkflowExecutionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListClosedWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListClosedWorkflowExecutionsPager {
 	return ListClosedWorkflowExecutionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListClosedWorkflowExecutionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListClosedWorkflowExecutionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListOpenWorkflowExecutionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListClosedWorkflowExecutionsPager ...
+// ListClosedWorkflowExecutionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListClosedWorkflowExecutionsPager struct {
 	aws.Pager
 }
@@ -1206,6 +1220,7 @@ const opListDomains = "ListDomains"
 type ListDomainsRequest struct {
 	*aws.Request
 	Input *ListDomainsInput
+	Copy  func(*ListDomainsInput) ListDomainsRequest
 }
 
 // Send marshals and sends the ListDomains API request.
@@ -1275,47 +1290,47 @@ func (c *SWF) ListDomainsRequest(input *ListDomainsInput) ListDomainsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDomainsRequest{Request: req, Input: input}
+	return ListDomainsRequest{Request: req, Input: input, Copy: c.ListDomainsRequest}
 }
 
-// ListDomainsPages iterates over the pages of a ListDomains operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDomains method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDomainsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDomains operation.
-//    pageNum := 0
-//    err := client.ListDomainsPages(params,
-//        func(page *ListDomainsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDomainsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 	return ListDomainsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDomainsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDomainsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDomainsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDomainsPager ...
+// ListDomainsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDomainsPager struct {
 	aws.Pager
 }
@@ -1330,6 +1345,7 @@ const opListOpenWorkflowExecutions = "ListOpenWorkflowExecutions"
 type ListOpenWorkflowExecutionsRequest struct {
 	*aws.Request
 	Input *ListOpenWorkflowExecutionsInput
+	Copy  func(*ListOpenWorkflowExecutionsInput) ListOpenWorkflowExecutionsRequest
 }
 
 // Send marshals and sends the ListOpenWorkflowExecutions API request.
@@ -1406,47 +1422,47 @@ func (c *SWF) ListOpenWorkflowExecutionsRequest(input *ListOpenWorkflowExecution
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOpenWorkflowExecutionsRequest{Request: req, Input: input}
+	return ListOpenWorkflowExecutionsRequest{Request: req, Input: input, Copy: c.ListOpenWorkflowExecutionsRequest}
 }
 
-// ListOpenWorkflowExecutionsPages iterates over the pages of a ListOpenWorkflowExecutions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListOpenWorkflowExecutions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListOpenWorkflowExecutionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListOpenWorkflowExecutions operation.
-//    pageNum := 0
-//    err := client.ListOpenWorkflowExecutionsPages(params,
-//        func(page *ListOpenWorkflowExecutionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListOpenWorkflowExecutionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListOpenWorkflowExecutionsRequest) Paginate(opts ...aws.Option) ListOpenWorkflowExecutionsPager {
 	return ListOpenWorkflowExecutionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListOpenWorkflowExecutionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListOpenWorkflowExecutionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListOpenWorkflowExecutionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListOpenWorkflowExecutionsPager ...
+// ListOpenWorkflowExecutionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListOpenWorkflowExecutionsPager struct {
 	aws.Pager
 }
@@ -1461,6 +1477,7 @@ const opListWorkflowTypes = "ListWorkflowTypes"
 type ListWorkflowTypesRequest struct {
 	*aws.Request
 	Input *ListWorkflowTypesInput
+	Copy  func(*ListWorkflowTypesInput) ListWorkflowTypesRequest
 }
 
 // Send marshals and sends the ListWorkflowTypes API request.
@@ -1526,47 +1543,47 @@ func (c *SWF) ListWorkflowTypesRequest(input *ListWorkflowTypesInput) ListWorkfl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListWorkflowTypesRequest{Request: req, Input: input}
+	return ListWorkflowTypesRequest{Request: req, Input: input, Copy: c.ListWorkflowTypesRequest}
 }
 
-// ListWorkflowTypesPages iterates over the pages of a ListWorkflowTypes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListWorkflowTypes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListWorkflowTypesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListWorkflowTypes operation.
-//    pageNum := 0
-//    err := client.ListWorkflowTypesPages(params,
-//        func(page *ListWorkflowTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListWorkflowTypesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListWorkflowTypesRequest) Paginate(opts ...aws.Option) ListWorkflowTypesPager {
 	return ListWorkflowTypesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListWorkflowTypesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListWorkflowTypesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListWorkflowTypesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListWorkflowTypesPager ...
+// ListWorkflowTypesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListWorkflowTypesPager struct {
 	aws.Pager
 }
@@ -1581,6 +1598,7 @@ const opPollForActivityTask = "PollForActivityTask"
 type PollForActivityTaskRequest struct {
 	*aws.Request
 	Input *PollForActivityTaskInput
+	Copy  func(*PollForActivityTaskInput) PollForActivityTaskRequest
 }
 
 // Send marshals and sends the PollForActivityTask API request.
@@ -1650,7 +1668,7 @@ func (c *SWF) PollForActivityTaskRequest(input *PollForActivityTaskInput) PollFo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PollForActivityTaskRequest{Request: req, Input: input}
+	return PollForActivityTaskRequest{Request: req, Input: input, Copy: c.PollForActivityTaskRequest}
 }
 
 const opPollForDecisionTask = "PollForDecisionTask"
@@ -1659,6 +1677,7 @@ const opPollForDecisionTask = "PollForDecisionTask"
 type PollForDecisionTaskRequest struct {
 	*aws.Request
 	Input *PollForDecisionTaskInput
+	Copy  func(*PollForDecisionTaskInput) PollForDecisionTaskRequest
 }
 
 // Send marshals and sends the PollForDecisionTask API request.
@@ -1744,47 +1763,47 @@ func (c *SWF) PollForDecisionTaskRequest(input *PollForDecisionTaskInput) PollFo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PollForDecisionTaskRequest{Request: req, Input: input}
+	return PollForDecisionTaskRequest{Request: req, Input: input, Copy: c.PollForDecisionTaskRequest}
 }
 
-// PollForDecisionTaskPages iterates over the pages of a PollForDecisionTask operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See PollForDecisionTask method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a PollForDecisionTaskRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a PollForDecisionTask operation.
-//    pageNum := 0
-//    err := client.PollForDecisionTaskPages(params,
-//        func(page *PollForDecisionTaskOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.PollForDecisionTaskRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *PollForDecisionTaskRequest) Paginate(opts ...aws.Option) PollForDecisionTaskPager {
 	return PollForDecisionTaskPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *PollForDecisionTaskInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *PollForDecisionTaskInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output PollForDecisionTaskOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// PollForDecisionTaskPager ...
+// PollForDecisionTaskPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type PollForDecisionTaskPager struct {
 	aws.Pager
 }
@@ -1799,6 +1818,7 @@ const opRecordActivityTaskHeartbeat = "RecordActivityTaskHeartbeat"
 type RecordActivityTaskHeartbeatRequest struct {
 	*aws.Request
 	Input *RecordActivityTaskHeartbeatInput
+	Copy  func(*RecordActivityTaskHeartbeatInput) RecordActivityTaskHeartbeatRequest
 }
 
 // Send marshals and sends the RecordActivityTaskHeartbeat API request.
@@ -1881,7 +1901,7 @@ func (c *SWF) RecordActivityTaskHeartbeatRequest(input *RecordActivityTaskHeartb
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RecordActivityTaskHeartbeatRequest{Request: req, Input: input}
+	return RecordActivityTaskHeartbeatRequest{Request: req, Input: input, Copy: c.RecordActivityTaskHeartbeatRequest}
 }
 
 const opRegisterActivityType = "RegisterActivityType"
@@ -1890,6 +1910,7 @@ const opRegisterActivityType = "RegisterActivityType"
 type RegisterActivityTypeRequest struct {
 	*aws.Request
 	Input *RegisterActivityTypeInput
+	Copy  func(*RegisterActivityTypeInput) RegisterActivityTypeRequest
 }
 
 // Send marshals and sends the RegisterActivityType API request.
@@ -1961,7 +1982,7 @@ func (c *SWF) RegisterActivityTypeRequest(input *RegisterActivityTypeInput) Regi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterActivityTypeRequest{Request: req, Input: input}
+	return RegisterActivityTypeRequest{Request: req, Input: input, Copy: c.RegisterActivityTypeRequest}
 }
 
 const opRegisterDomain = "RegisterDomain"
@@ -1970,6 +1991,7 @@ const opRegisterDomain = "RegisterDomain"
 type RegisterDomainRequest struct {
 	*aws.Request
 	Input *RegisterDomainInput
+	Copy  func(*RegisterDomainInput) RegisterDomainRequest
 }
 
 // Send marshals and sends the RegisterDomain API request.
@@ -2030,7 +2052,7 @@ func (c *SWF) RegisterDomainRequest(input *RegisterDomainInput) RegisterDomainRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterDomainRequest{Request: req, Input: input}
+	return RegisterDomainRequest{Request: req, Input: input, Copy: c.RegisterDomainRequest}
 }
 
 const opRegisterWorkflowType = "RegisterWorkflowType"
@@ -2039,6 +2061,7 @@ const opRegisterWorkflowType = "RegisterWorkflowType"
 type RegisterWorkflowTypeRequest struct {
 	*aws.Request
 	Input *RegisterWorkflowTypeInput
+	Copy  func(*RegisterWorkflowTypeInput) RegisterWorkflowTypeRequest
 }
 
 // Send marshals and sends the RegisterWorkflowType API request.
@@ -2113,7 +2136,7 @@ func (c *SWF) RegisterWorkflowTypeRequest(input *RegisterWorkflowTypeInput) Regi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterWorkflowTypeRequest{Request: req, Input: input}
+	return RegisterWorkflowTypeRequest{Request: req, Input: input, Copy: c.RegisterWorkflowTypeRequest}
 }
 
 const opRequestCancelWorkflowExecution = "RequestCancelWorkflowExecution"
@@ -2122,6 +2145,7 @@ const opRequestCancelWorkflowExecution = "RequestCancelWorkflowExecution"
 type RequestCancelWorkflowExecutionRequest struct {
 	*aws.Request
 	Input *RequestCancelWorkflowExecutionInput
+	Copy  func(*RequestCancelWorkflowExecutionInput) RequestCancelWorkflowExecutionRequest
 }
 
 // Send marshals and sends the RequestCancelWorkflowExecution API request.
@@ -2192,7 +2216,7 @@ func (c *SWF) RequestCancelWorkflowExecutionRequest(input *RequestCancelWorkflow
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RequestCancelWorkflowExecutionRequest{Request: req, Input: input}
+	return RequestCancelWorkflowExecutionRequest{Request: req, Input: input, Copy: c.RequestCancelWorkflowExecutionRequest}
 }
 
 const opRespondActivityTaskCanceled = "RespondActivityTaskCanceled"
@@ -2201,6 +2225,7 @@ const opRespondActivityTaskCanceled = "RespondActivityTaskCanceled"
 type RespondActivityTaskCanceledRequest struct {
 	*aws.Request
 	Input *RespondActivityTaskCanceledInput
+	Copy  func(*RespondActivityTaskCanceledInput) RespondActivityTaskCanceledRequest
 }
 
 // Send marshals and sends the RespondActivityTaskCanceled API request.
@@ -2274,7 +2299,7 @@ func (c *SWF) RespondActivityTaskCanceledRequest(input *RespondActivityTaskCance
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RespondActivityTaskCanceledRequest{Request: req, Input: input}
+	return RespondActivityTaskCanceledRequest{Request: req, Input: input, Copy: c.RespondActivityTaskCanceledRequest}
 }
 
 const opRespondActivityTaskCompleted = "RespondActivityTaskCompleted"
@@ -2283,6 +2308,7 @@ const opRespondActivityTaskCompleted = "RespondActivityTaskCompleted"
 type RespondActivityTaskCompletedRequest struct {
 	*aws.Request
 	Input *RespondActivityTaskCompletedInput
+	Copy  func(*RespondActivityTaskCompletedInput) RespondActivityTaskCompletedRequest
 }
 
 // Send marshals and sends the RespondActivityTaskCompleted API request.
@@ -2355,7 +2381,7 @@ func (c *SWF) RespondActivityTaskCompletedRequest(input *RespondActivityTaskComp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RespondActivityTaskCompletedRequest{Request: req, Input: input}
+	return RespondActivityTaskCompletedRequest{Request: req, Input: input, Copy: c.RespondActivityTaskCompletedRequest}
 }
 
 const opRespondActivityTaskFailed = "RespondActivityTaskFailed"
@@ -2364,6 +2390,7 @@ const opRespondActivityTaskFailed = "RespondActivityTaskFailed"
 type RespondActivityTaskFailedRequest struct {
 	*aws.Request
 	Input *RespondActivityTaskFailedInput
+	Copy  func(*RespondActivityTaskFailedInput) RespondActivityTaskFailedRequest
 }
 
 // Send marshals and sends the RespondActivityTaskFailed API request.
@@ -2431,7 +2458,7 @@ func (c *SWF) RespondActivityTaskFailedRequest(input *RespondActivityTaskFailedI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RespondActivityTaskFailedRequest{Request: req, Input: input}
+	return RespondActivityTaskFailedRequest{Request: req, Input: input, Copy: c.RespondActivityTaskFailedRequest}
 }
 
 const opRespondDecisionTaskCompleted = "RespondDecisionTaskCompleted"
@@ -2440,6 +2467,7 @@ const opRespondDecisionTaskCompleted = "RespondDecisionTaskCompleted"
 type RespondDecisionTaskCompletedRequest struct {
 	*aws.Request
 	Input *RespondDecisionTaskCompletedInput
+	Copy  func(*RespondDecisionTaskCompletedInput) RespondDecisionTaskCompletedRequest
 }
 
 // Send marshals and sends the RespondDecisionTaskCompleted API request.
@@ -2496,7 +2524,7 @@ func (c *SWF) RespondDecisionTaskCompletedRequest(input *RespondDecisionTaskComp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RespondDecisionTaskCompletedRequest{Request: req, Input: input}
+	return RespondDecisionTaskCompletedRequest{Request: req, Input: input, Copy: c.RespondDecisionTaskCompletedRequest}
 }
 
 const opSignalWorkflowExecution = "SignalWorkflowExecution"
@@ -2505,6 +2533,7 @@ const opSignalWorkflowExecution = "SignalWorkflowExecution"
 type SignalWorkflowExecutionRequest struct {
 	*aws.Request
 	Input *SignalWorkflowExecutionInput
+	Copy  func(*SignalWorkflowExecutionInput) SignalWorkflowExecutionRequest
 }
 
 // Send marshals and sends the SignalWorkflowExecution API request.
@@ -2573,7 +2602,7 @@ func (c *SWF) SignalWorkflowExecutionRequest(input *SignalWorkflowExecutionInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SignalWorkflowExecutionRequest{Request: req, Input: input}
+	return SignalWorkflowExecutionRequest{Request: req, Input: input, Copy: c.SignalWorkflowExecutionRequest}
 }
 
 const opStartWorkflowExecution = "StartWorkflowExecution"
@@ -2582,6 +2611,7 @@ const opStartWorkflowExecution = "StartWorkflowExecution"
 type StartWorkflowExecutionRequest struct {
 	*aws.Request
 	Input *StartWorkflowExecutionInput
+	Copy  func(*StartWorkflowExecutionInput) StartWorkflowExecutionRequest
 }
 
 // Send marshals and sends the StartWorkflowExecution API request.
@@ -2659,7 +2689,7 @@ func (c *SWF) StartWorkflowExecutionRequest(input *StartWorkflowExecutionInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartWorkflowExecutionRequest{Request: req, Input: input}
+	return StartWorkflowExecutionRequest{Request: req, Input: input, Copy: c.StartWorkflowExecutionRequest}
 }
 
 const opTerminateWorkflowExecution = "TerminateWorkflowExecution"
@@ -2668,6 +2698,7 @@ const opTerminateWorkflowExecution = "TerminateWorkflowExecution"
 type TerminateWorkflowExecutionRequest struct {
 	*aws.Request
 	Input *TerminateWorkflowExecutionInput
+	Copy  func(*TerminateWorkflowExecutionInput) TerminateWorkflowExecutionRequest
 }
 
 // Send marshals and sends the TerminateWorkflowExecution API request.
@@ -2741,7 +2772,7 @@ func (c *SWF) TerminateWorkflowExecutionRequest(input *TerminateWorkflowExecutio
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TerminateWorkflowExecutionRequest{Request: req, Input: input}
+	return TerminateWorkflowExecutionRequest{Request: req, Input: input, Copy: c.TerminateWorkflowExecutionRequest}
 }
 
 // Provides the details of the ActivityTaskCancelRequested event.

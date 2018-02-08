@@ -15,6 +15,7 @@ const opDescribeServices = "DescribeServices"
 type DescribeServicesRequest struct {
 	*aws.Request
 	Input *DescribeServicesInput
+	Copy  func(*DescribeServicesInput) DescribeServicesRequest
 }
 
 // Send marshals and sends the DescribeServices API request.
@@ -66,47 +67,47 @@ func (c *Pricing) DescribeServicesRequest(input *DescribeServicesInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeServicesRequest{Request: req, Input: input}
+	return DescribeServicesRequest{Request: req, Input: input, Copy: c.DescribeServicesRequest}
 }
 
-// DescribeServicesPages iterates over the pages of a DescribeServices operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeServices method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeServicesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeServices operation.
-//    pageNum := 0
-//    err := client.DescribeServicesPages(params,
-//        func(page *DescribeServicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeServicesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeServicesRequest) Paginate(opts ...aws.Option) DescribeServicesPager {
 	return DescribeServicesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeServicesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeServicesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeServicesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeServicesPager ...
+// DescribeServicesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeServicesPager struct {
 	aws.Pager
 }
@@ -121,6 +122,7 @@ const opGetAttributeValues = "GetAttributeValues"
 type GetAttributeValuesRequest struct {
 	*aws.Request
 	Input *GetAttributeValuesInput
+	Copy  func(*GetAttributeValuesInput) GetAttributeValuesRequest
 }
 
 // Send marshals and sends the GetAttributeValues API request.
@@ -170,47 +172,47 @@ func (c *Pricing) GetAttributeValuesRequest(input *GetAttributeValuesInput) GetA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAttributeValuesRequest{Request: req, Input: input}
+	return GetAttributeValuesRequest{Request: req, Input: input, Copy: c.GetAttributeValuesRequest}
 }
 
-// GetAttributeValuesPages iterates over the pages of a GetAttributeValues operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetAttributeValues method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetAttributeValuesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetAttributeValues operation.
-//    pageNum := 0
-//    err := client.GetAttributeValuesPages(params,
-//        func(page *GetAttributeValuesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetAttributeValuesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetAttributeValuesRequest) Paginate(opts ...aws.Option) GetAttributeValuesPager {
 	return GetAttributeValuesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetAttributeValuesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetAttributeValuesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetAttributeValuesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetAttributeValuesPager ...
+// GetAttributeValuesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetAttributeValuesPager struct {
 	aws.Pager
 }
@@ -225,6 +227,7 @@ const opGetProducts = "GetProducts"
 type GetProductsRequest struct {
 	*aws.Request
 	Input *GetProductsInput
+	Copy  func(*GetProductsInput) GetProductsRequest
 }
 
 // Send marshals and sends the GetProducts API request.
@@ -271,47 +274,47 @@ func (c *Pricing) GetProductsRequest(input *GetProductsInput) GetProductsRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetProductsRequest{Request: req, Input: input}
+	return GetProductsRequest{Request: req, Input: input, Copy: c.GetProductsRequest}
 }
 
-// GetProductsPages iterates over the pages of a GetProducts operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetProducts method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetProductsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetProducts operation.
-//    pageNum := 0
-//    err := client.GetProductsPages(params,
-//        func(page *GetProductsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetProductsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetProductsRequest) Paginate(opts ...aws.Option) GetProductsPager {
 	return GetProductsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetProductsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetProductsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetProductsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetProductsPager ...
+// GetProductsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetProductsPager struct {
 	aws.Pager
 }

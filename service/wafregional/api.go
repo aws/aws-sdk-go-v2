@@ -16,6 +16,7 @@ const opAssociateWebACL = "AssociateWebACL"
 type AssociateWebACLRequest struct {
 	*aws.Request
 	Input *AssociateWebACLInput
+	Copy  func(*AssociateWebACLInput) AssociateWebACLRequest
 }
 
 // Send marshals and sends the AssociateWebACL API request.
@@ -56,7 +57,7 @@ func (c *WAFRegional) AssociateWebACLRequest(input *AssociateWebACLInput) Associ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateWebACLRequest{Request: req, Input: input}
+	return AssociateWebACLRequest{Request: req, Input: input, Copy: c.AssociateWebACLRequest}
 }
 
 const opCreateByteMatchSet = "CreateByteMatchSet"
@@ -65,6 +66,7 @@ const opCreateByteMatchSet = "CreateByteMatchSet"
 type CreateByteMatchSetRequest struct {
 	*aws.Request
 	Input *CreateByteMatchSetInput
+	Copy  func(*CreateByteMatchSetInput) CreateByteMatchSetRequest
 }
 
 // Send marshals and sends the CreateByteMatchSet API request.
@@ -126,7 +128,7 @@ func (c *WAFRegional) CreateByteMatchSetRequest(input *CreateByteMatchSetInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateByteMatchSetRequest{Request: req, Input: input}
+	return CreateByteMatchSetRequest{Request: req, Input: input, Copy: c.CreateByteMatchSetRequest}
 }
 
 const opCreateGeoMatchSet = "CreateGeoMatchSet"
@@ -135,6 +137,7 @@ const opCreateGeoMatchSet = "CreateGeoMatchSet"
 type CreateGeoMatchSetRequest struct {
 	*aws.Request
 	Input *CreateGeoMatchSetInput
+	Copy  func(*CreateGeoMatchSetInput) CreateGeoMatchSetRequest
 }
 
 // Send marshals and sends the CreateGeoMatchSet API request.
@@ -195,7 +198,7 @@ func (c *WAFRegional) CreateGeoMatchSetRequest(input *CreateGeoMatchSetInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGeoMatchSetRequest{Request: req, Input: input}
+	return CreateGeoMatchSetRequest{Request: req, Input: input, Copy: c.CreateGeoMatchSetRequest}
 }
 
 const opCreateIPSet = "CreateIPSet"
@@ -204,6 +207,7 @@ const opCreateIPSet = "CreateIPSet"
 type CreateIPSetRequest struct {
 	*aws.Request
 	Input *CreateIPSetInput
+	Copy  func(*CreateIPSetInput) CreateIPSetRequest
 }
 
 // Send marshals and sends the CreateIPSet API request.
@@ -265,7 +269,7 @@ func (c *WAFRegional) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateIPSetRequest{Request: req, Input: input}
+	return CreateIPSetRequest{Request: req, Input: input, Copy: c.CreateIPSetRequest}
 }
 
 const opCreateRateBasedRule = "CreateRateBasedRule"
@@ -274,6 +278,7 @@ const opCreateRateBasedRule = "CreateRateBasedRule"
 type CreateRateBasedRuleRequest struct {
 	*aws.Request
 	Input *CreateRateBasedRuleInput
+	Copy  func(*CreateRateBasedRuleInput) CreateRateBasedRuleRequest
 }
 
 // Send marshals and sends the CreateRateBasedRule API request.
@@ -374,7 +379,7 @@ func (c *WAFRegional) CreateRateBasedRuleRequest(input *CreateRateBasedRuleInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRateBasedRuleRequest{Request: req, Input: input}
+	return CreateRateBasedRuleRequest{Request: req, Input: input, Copy: c.CreateRateBasedRuleRequest}
 }
 
 const opCreateRegexMatchSet = "CreateRegexMatchSet"
@@ -383,6 +388,7 @@ const opCreateRegexMatchSet = "CreateRegexMatchSet"
 type CreateRegexMatchSetRequest struct {
 	*aws.Request
 	Input *CreateRegexMatchSetInput
+	Copy  func(*CreateRegexMatchSetInput) CreateRegexMatchSetRequest
 }
 
 // Send marshals and sends the CreateRegexMatchSet API request.
@@ -445,7 +451,7 @@ func (c *WAFRegional) CreateRegexMatchSetRequest(input *CreateRegexMatchSetInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRegexMatchSetRequest{Request: req, Input: input}
+	return CreateRegexMatchSetRequest{Request: req, Input: input, Copy: c.CreateRegexMatchSetRequest}
 }
 
 const opCreateRegexPatternSet = "CreateRegexPatternSet"
@@ -454,6 +460,7 @@ const opCreateRegexPatternSet = "CreateRegexPatternSet"
 type CreateRegexPatternSetRequest struct {
 	*aws.Request
 	Input *CreateRegexPatternSetInput
+	Copy  func(*CreateRegexPatternSetInput) CreateRegexPatternSetRequest
 }
 
 // Send marshals and sends the CreateRegexPatternSet API request.
@@ -512,7 +519,7 @@ func (c *WAFRegional) CreateRegexPatternSetRequest(input *CreateRegexPatternSetI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRegexPatternSetRequest{Request: req, Input: input}
+	return CreateRegexPatternSetRequest{Request: req, Input: input, Copy: c.CreateRegexPatternSetRequest}
 }
 
 const opCreateRule = "CreateRule"
@@ -521,6 +528,7 @@ const opCreateRule = "CreateRule"
 type CreateRuleRequest struct {
 	*aws.Request
 	Input *CreateRuleInput
+	Copy  func(*CreateRuleInput) CreateRuleRequest
 }
 
 // Send marshals and sends the CreateRule API request.
@@ -596,7 +604,7 @@ func (c *WAFRegional) CreateRuleRequest(input *CreateRuleInput) CreateRuleReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRuleRequest{Request: req, Input: input}
+	return CreateRuleRequest{Request: req, Input: input, Copy: c.CreateRuleRequest}
 }
 
 const opCreateRuleGroup = "CreateRuleGroup"
@@ -605,6 +613,7 @@ const opCreateRuleGroup = "CreateRuleGroup"
 type CreateRuleGroupRequest struct {
 	*aws.Request
 	Input *CreateRuleGroupInput
+	Copy  func(*CreateRuleGroupInput) CreateRuleGroupRequest
 }
 
 // Send marshals and sends the CreateRuleGroup API request.
@@ -658,7 +667,7 @@ func (c *WAFRegional) CreateRuleGroupRequest(input *CreateRuleGroupInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRuleGroupRequest{Request: req, Input: input}
+	return CreateRuleGroupRequest{Request: req, Input: input, Copy: c.CreateRuleGroupRequest}
 }
 
 const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
@@ -667,6 +676,7 @@ const opCreateSizeConstraintSet = "CreateSizeConstraintSet"
 type CreateSizeConstraintSetRequest struct {
 	*aws.Request
 	Input *CreateSizeConstraintSetInput
+	Copy  func(*CreateSizeConstraintSetInput) CreateSizeConstraintSetRequest
 }
 
 // Send marshals and sends the CreateSizeConstraintSet API request.
@@ -729,7 +739,7 @@ func (c *WAFRegional) CreateSizeConstraintSetRequest(input *CreateSizeConstraint
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSizeConstraintSetRequest{Request: req, Input: input}
+	return CreateSizeConstraintSetRequest{Request: req, Input: input, Copy: c.CreateSizeConstraintSetRequest}
 }
 
 const opCreateSqlInjectionMatchSet = "CreateSqlInjectionMatchSet"
@@ -738,6 +748,7 @@ const opCreateSqlInjectionMatchSet = "CreateSqlInjectionMatchSet"
 type CreateSqlInjectionMatchSetRequest struct {
 	*aws.Request
 	Input *CreateSqlInjectionMatchSetInput
+	Copy  func(*CreateSqlInjectionMatchSetInput) CreateSqlInjectionMatchSetRequest
 }
 
 // Send marshals and sends the CreateSqlInjectionMatchSet API request.
@@ -796,7 +807,7 @@ func (c *WAFRegional) CreateSqlInjectionMatchSetRequest(input *CreateSqlInjectio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSqlInjectionMatchSetRequest{Request: req, Input: input}
+	return CreateSqlInjectionMatchSetRequest{Request: req, Input: input, Copy: c.CreateSqlInjectionMatchSetRequest}
 }
 
 const opCreateWebACL = "CreateWebACL"
@@ -805,6 +816,7 @@ const opCreateWebACL = "CreateWebACL"
 type CreateWebACLRequest struct {
 	*aws.Request
 	Input *CreateWebACLInput
+	Copy  func(*CreateWebACLInput) CreateWebACLRequest
 }
 
 // Send marshals and sends the CreateWebACL API request.
@@ -875,7 +887,7 @@ func (c *WAFRegional) CreateWebACLRequest(input *CreateWebACLInput) CreateWebACL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateWebACLRequest{Request: req, Input: input}
+	return CreateWebACLRequest{Request: req, Input: input, Copy: c.CreateWebACLRequest}
 }
 
 const opCreateXssMatchSet = "CreateXssMatchSet"
@@ -884,6 +896,7 @@ const opCreateXssMatchSet = "CreateXssMatchSet"
 type CreateXssMatchSetRequest struct {
 	*aws.Request
 	Input *CreateXssMatchSetInput
+	Copy  func(*CreateXssMatchSetInput) CreateXssMatchSetRequest
 }
 
 // Send marshals and sends the CreateXssMatchSet API request.
@@ -943,7 +956,7 @@ func (c *WAFRegional) CreateXssMatchSetRequest(input *CreateXssMatchSetInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateXssMatchSetRequest{Request: req, Input: input}
+	return CreateXssMatchSetRequest{Request: req, Input: input, Copy: c.CreateXssMatchSetRequest}
 }
 
 const opDeleteByteMatchSet = "DeleteByteMatchSet"
@@ -952,6 +965,7 @@ const opDeleteByteMatchSet = "DeleteByteMatchSet"
 type DeleteByteMatchSetRequest struct {
 	*aws.Request
 	Input *DeleteByteMatchSetInput
+	Copy  func(*DeleteByteMatchSetInput) DeleteByteMatchSetRequest
 }
 
 // Send marshals and sends the DeleteByteMatchSet API request.
@@ -1006,7 +1020,7 @@ func (c *WAFRegional) DeleteByteMatchSetRequest(input *DeleteByteMatchSetInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteByteMatchSetRequest{Request: req, Input: input}
+	return DeleteByteMatchSetRequest{Request: req, Input: input, Copy: c.DeleteByteMatchSetRequest}
 }
 
 const opDeleteGeoMatchSet = "DeleteGeoMatchSet"
@@ -1015,6 +1029,7 @@ const opDeleteGeoMatchSet = "DeleteGeoMatchSet"
 type DeleteGeoMatchSetRequest struct {
 	*aws.Request
 	Input *DeleteGeoMatchSetInput
+	Copy  func(*DeleteGeoMatchSetInput) DeleteGeoMatchSetRequest
 }
 
 // Send marshals and sends the DeleteGeoMatchSet API request.
@@ -1068,7 +1083,7 @@ func (c *WAFRegional) DeleteGeoMatchSetRequest(input *DeleteGeoMatchSetInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGeoMatchSetRequest{Request: req, Input: input}
+	return DeleteGeoMatchSetRequest{Request: req, Input: input, Copy: c.DeleteGeoMatchSetRequest}
 }
 
 const opDeleteIPSet = "DeleteIPSet"
@@ -1077,6 +1092,7 @@ const opDeleteIPSet = "DeleteIPSet"
 type DeleteIPSetRequest struct {
 	*aws.Request
 	Input *DeleteIPSetInput
+	Copy  func(*DeleteIPSetInput) DeleteIPSetRequest
 }
 
 // Send marshals and sends the DeleteIPSet API request.
@@ -1130,7 +1146,7 @@ func (c *WAFRegional) DeleteIPSetRequest(input *DeleteIPSetInput) DeleteIPSetReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIPSetRequest{Request: req, Input: input}
+	return DeleteIPSetRequest{Request: req, Input: input, Copy: c.DeleteIPSetRequest}
 }
 
 const opDeleteRateBasedRule = "DeleteRateBasedRule"
@@ -1139,6 +1155,7 @@ const opDeleteRateBasedRule = "DeleteRateBasedRule"
 type DeleteRateBasedRuleRequest struct {
 	*aws.Request
 	Input *DeleteRateBasedRuleInput
+	Copy  func(*DeleteRateBasedRuleInput) DeleteRateBasedRuleRequest
 }
 
 // Send marshals and sends the DeleteRateBasedRule API request.
@@ -1194,7 +1211,7 @@ func (c *WAFRegional) DeleteRateBasedRuleRequest(input *DeleteRateBasedRuleInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRateBasedRuleRequest{Request: req, Input: input}
+	return DeleteRateBasedRuleRequest{Request: req, Input: input, Copy: c.DeleteRateBasedRuleRequest}
 }
 
 const opDeleteRegexMatchSet = "DeleteRegexMatchSet"
@@ -1203,6 +1220,7 @@ const opDeleteRegexMatchSet = "DeleteRegexMatchSet"
 type DeleteRegexMatchSetRequest struct {
 	*aws.Request
 	Input *DeleteRegexMatchSetInput
+	Copy  func(*DeleteRegexMatchSetInput) DeleteRegexMatchSetRequest
 }
 
 // Send marshals and sends the DeleteRegexMatchSet API request.
@@ -1257,7 +1275,7 @@ func (c *WAFRegional) DeleteRegexMatchSetRequest(input *DeleteRegexMatchSetInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRegexMatchSetRequest{Request: req, Input: input}
+	return DeleteRegexMatchSetRequest{Request: req, Input: input, Copy: c.DeleteRegexMatchSetRequest}
 }
 
 const opDeleteRegexPatternSet = "DeleteRegexPatternSet"
@@ -1266,6 +1284,7 @@ const opDeleteRegexPatternSet = "DeleteRegexPatternSet"
 type DeleteRegexPatternSetRequest struct {
 	*aws.Request
 	Input *DeleteRegexPatternSetInput
+	Copy  func(*DeleteRegexPatternSetInput) DeleteRegexPatternSetRequest
 }
 
 // Send marshals and sends the DeleteRegexPatternSet API request.
@@ -1308,7 +1327,7 @@ func (c *WAFRegional) DeleteRegexPatternSetRequest(input *DeleteRegexPatternSetI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRegexPatternSetRequest{Request: req, Input: input}
+	return DeleteRegexPatternSetRequest{Request: req, Input: input, Copy: c.DeleteRegexPatternSetRequest}
 }
 
 const opDeleteRule = "DeleteRule"
@@ -1317,6 +1336,7 @@ const opDeleteRule = "DeleteRule"
 type DeleteRuleRequest struct {
 	*aws.Request
 	Input *DeleteRuleInput
+	Copy  func(*DeleteRuleInput) DeleteRuleRequest
 }
 
 // Send marshals and sends the DeleteRule API request.
@@ -1370,7 +1390,7 @@ func (c *WAFRegional) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRuleRequest{Request: req, Input: input}
+	return DeleteRuleRequest{Request: req, Input: input, Copy: c.DeleteRuleRequest}
 }
 
 const opDeleteRuleGroup = "DeleteRuleGroup"
@@ -1379,6 +1399,7 @@ const opDeleteRuleGroup = "DeleteRuleGroup"
 type DeleteRuleGroupRequest struct {
 	*aws.Request
 	Input *DeleteRuleGroupInput
+	Copy  func(*DeleteRuleGroupInput) DeleteRuleGroupRequest
 }
 
 // Send marshals and sends the DeleteRuleGroup API request.
@@ -1431,7 +1452,7 @@ func (c *WAFRegional) DeleteRuleGroupRequest(input *DeleteRuleGroupInput) Delete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRuleGroupRequest{Request: req, Input: input}
+	return DeleteRuleGroupRequest{Request: req, Input: input, Copy: c.DeleteRuleGroupRequest}
 }
 
 const opDeleteSizeConstraintSet = "DeleteSizeConstraintSet"
@@ -1440,6 +1461,7 @@ const opDeleteSizeConstraintSet = "DeleteSizeConstraintSet"
 type DeleteSizeConstraintSetRequest struct {
 	*aws.Request
 	Input *DeleteSizeConstraintSetInput
+	Copy  func(*DeleteSizeConstraintSetInput) DeleteSizeConstraintSetRequest
 }
 
 // Send marshals and sends the DeleteSizeConstraintSet API request.
@@ -1494,7 +1516,7 @@ func (c *WAFRegional) DeleteSizeConstraintSetRequest(input *DeleteSizeConstraint
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSizeConstraintSetRequest{Request: req, Input: input}
+	return DeleteSizeConstraintSetRequest{Request: req, Input: input, Copy: c.DeleteSizeConstraintSetRequest}
 }
 
 const opDeleteSqlInjectionMatchSet = "DeleteSqlInjectionMatchSet"
@@ -1503,6 +1525,7 @@ const opDeleteSqlInjectionMatchSet = "DeleteSqlInjectionMatchSet"
 type DeleteSqlInjectionMatchSetRequest struct {
 	*aws.Request
 	Input *DeleteSqlInjectionMatchSetInput
+	Copy  func(*DeleteSqlInjectionMatchSetInput) DeleteSqlInjectionMatchSetRequest
 }
 
 // Send marshals and sends the DeleteSqlInjectionMatchSet API request.
@@ -1558,7 +1581,7 @@ func (c *WAFRegional) DeleteSqlInjectionMatchSetRequest(input *DeleteSqlInjectio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSqlInjectionMatchSetRequest{Request: req, Input: input}
+	return DeleteSqlInjectionMatchSetRequest{Request: req, Input: input, Copy: c.DeleteSqlInjectionMatchSetRequest}
 }
 
 const opDeleteWebACL = "DeleteWebACL"
@@ -1567,6 +1590,7 @@ const opDeleteWebACL = "DeleteWebACL"
 type DeleteWebACLRequest struct {
 	*aws.Request
 	Input *DeleteWebACLInput
+	Copy  func(*DeleteWebACLInput) DeleteWebACLRequest
 }
 
 // Send marshals and sends the DeleteWebACL API request.
@@ -1617,7 +1641,7 @@ func (c *WAFRegional) DeleteWebACLRequest(input *DeleteWebACLInput) DeleteWebACL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteWebACLRequest{Request: req, Input: input}
+	return DeleteWebACLRequest{Request: req, Input: input, Copy: c.DeleteWebACLRequest}
 }
 
 const opDeleteXssMatchSet = "DeleteXssMatchSet"
@@ -1626,6 +1650,7 @@ const opDeleteXssMatchSet = "DeleteXssMatchSet"
 type DeleteXssMatchSetRequest struct {
 	*aws.Request
 	Input *DeleteXssMatchSetInput
+	Copy  func(*DeleteXssMatchSetInput) DeleteXssMatchSetRequest
 }
 
 // Send marshals and sends the DeleteXssMatchSet API request.
@@ -1680,7 +1705,7 @@ func (c *WAFRegional) DeleteXssMatchSetRequest(input *DeleteXssMatchSetInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteXssMatchSetRequest{Request: req, Input: input}
+	return DeleteXssMatchSetRequest{Request: req, Input: input, Copy: c.DeleteXssMatchSetRequest}
 }
 
 const opDisassociateWebACL = "DisassociateWebACL"
@@ -1689,6 +1714,7 @@ const opDisassociateWebACL = "DisassociateWebACL"
 type DisassociateWebACLRequest struct {
 	*aws.Request
 	Input *DisassociateWebACLInput
+	Copy  func(*DisassociateWebACLInput) DisassociateWebACLRequest
 }
 
 // Send marshals and sends the DisassociateWebACL API request.
@@ -1729,7 +1755,7 @@ func (c *WAFRegional) DisassociateWebACLRequest(input *DisassociateWebACLInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateWebACLRequest{Request: req, Input: input}
+	return DisassociateWebACLRequest{Request: req, Input: input, Copy: c.DisassociateWebACLRequest}
 }
 
 const opGetByteMatchSet = "GetByteMatchSet"
@@ -1738,6 +1764,7 @@ const opGetByteMatchSet = "GetByteMatchSet"
 type GetByteMatchSetRequest struct {
 	*aws.Request
 	Input *GetByteMatchSetInput
+	Copy  func(*GetByteMatchSetInput) GetByteMatchSetRequest
 }
 
 // Send marshals and sends the GetByteMatchSet API request.
@@ -1778,7 +1805,7 @@ func (c *WAFRegional) GetByteMatchSetRequest(input *GetByteMatchSetInput) GetByt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetByteMatchSetRequest{Request: req, Input: input}
+	return GetByteMatchSetRequest{Request: req, Input: input, Copy: c.GetByteMatchSetRequest}
 }
 
 const opGetChangeToken = "GetChangeToken"
@@ -1787,6 +1814,7 @@ const opGetChangeToken = "GetChangeToken"
 type GetChangeTokenRequest struct {
 	*aws.Request
 	Input *GetChangeTokenInput
+	Copy  func(*GetChangeTokenInput) GetChangeTokenRequest
 }
 
 // Send marshals and sends the GetChangeToken API request.
@@ -1841,7 +1869,7 @@ func (c *WAFRegional) GetChangeTokenRequest(input *GetChangeTokenInput) GetChang
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetChangeTokenRequest{Request: req, Input: input}
+	return GetChangeTokenRequest{Request: req, Input: input, Copy: c.GetChangeTokenRequest}
 }
 
 const opGetChangeTokenStatus = "GetChangeTokenStatus"
@@ -1850,6 +1878,7 @@ const opGetChangeTokenStatus = "GetChangeTokenStatus"
 type GetChangeTokenStatusRequest struct {
 	*aws.Request
 	Input *GetChangeTokenStatusInput
+	Copy  func(*GetChangeTokenStatusInput) GetChangeTokenStatusRequest
 }
 
 // Send marshals and sends the GetChangeTokenStatus API request.
@@ -1900,7 +1929,7 @@ func (c *WAFRegional) GetChangeTokenStatusRequest(input *GetChangeTokenStatusInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetChangeTokenStatusRequest{Request: req, Input: input}
+	return GetChangeTokenStatusRequest{Request: req, Input: input, Copy: c.GetChangeTokenStatusRequest}
 }
 
 const opGetGeoMatchSet = "GetGeoMatchSet"
@@ -1909,6 +1938,7 @@ const opGetGeoMatchSet = "GetGeoMatchSet"
 type GetGeoMatchSetRequest struct {
 	*aws.Request
 	Input *GetGeoMatchSetInput
+	Copy  func(*GetGeoMatchSetInput) GetGeoMatchSetRequest
 }
 
 // Send marshals and sends the GetGeoMatchSet API request.
@@ -1949,7 +1979,7 @@ func (c *WAFRegional) GetGeoMatchSetRequest(input *GetGeoMatchSetInput) GetGeoMa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGeoMatchSetRequest{Request: req, Input: input}
+	return GetGeoMatchSetRequest{Request: req, Input: input, Copy: c.GetGeoMatchSetRequest}
 }
 
 const opGetIPSet = "GetIPSet"
@@ -1958,6 +1988,7 @@ const opGetIPSet = "GetIPSet"
 type GetIPSetRequest struct {
 	*aws.Request
 	Input *GetIPSetInput
+	Copy  func(*GetIPSetInput) GetIPSetRequest
 }
 
 // Send marshals and sends the GetIPSet API request.
@@ -1998,7 +2029,7 @@ func (c *WAFRegional) GetIPSetRequest(input *GetIPSetInput) GetIPSetRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIPSetRequest{Request: req, Input: input}
+	return GetIPSetRequest{Request: req, Input: input, Copy: c.GetIPSetRequest}
 }
 
 const opGetRateBasedRule = "GetRateBasedRule"
@@ -2007,6 +2038,7 @@ const opGetRateBasedRule = "GetRateBasedRule"
 type GetRateBasedRuleRequest struct {
 	*aws.Request
 	Input *GetRateBasedRuleInput
+	Copy  func(*GetRateBasedRuleInput) GetRateBasedRuleRequest
 }
 
 // Send marshals and sends the GetRateBasedRule API request.
@@ -2048,7 +2080,7 @@ func (c *WAFRegional) GetRateBasedRuleRequest(input *GetRateBasedRuleInput) GetR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRateBasedRuleRequest{Request: req, Input: input}
+	return GetRateBasedRuleRequest{Request: req, Input: input, Copy: c.GetRateBasedRuleRequest}
 }
 
 const opGetRateBasedRuleManagedKeys = "GetRateBasedRuleManagedKeys"
@@ -2057,6 +2089,7 @@ const opGetRateBasedRuleManagedKeys = "GetRateBasedRuleManagedKeys"
 type GetRateBasedRuleManagedKeysRequest struct {
 	*aws.Request
 	Input *GetRateBasedRuleManagedKeysInput
+	Copy  func(*GetRateBasedRuleManagedKeysInput) GetRateBasedRuleManagedKeysRequest
 }
 
 // Send marshals and sends the GetRateBasedRuleManagedKeys API request.
@@ -2100,7 +2133,7 @@ func (c *WAFRegional) GetRateBasedRuleManagedKeysRequest(input *GetRateBasedRule
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRateBasedRuleManagedKeysRequest{Request: req, Input: input}
+	return GetRateBasedRuleManagedKeysRequest{Request: req, Input: input, Copy: c.GetRateBasedRuleManagedKeysRequest}
 }
 
 const opGetRegexMatchSet = "GetRegexMatchSet"
@@ -2109,6 +2142,7 @@ const opGetRegexMatchSet = "GetRegexMatchSet"
 type GetRegexMatchSetRequest struct {
 	*aws.Request
 	Input *GetRegexMatchSetInput
+	Copy  func(*GetRegexMatchSetInput) GetRegexMatchSetRequest
 }
 
 // Send marshals and sends the GetRegexMatchSet API request.
@@ -2149,7 +2183,7 @@ func (c *WAFRegional) GetRegexMatchSetRequest(input *GetRegexMatchSetInput) GetR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRegexMatchSetRequest{Request: req, Input: input}
+	return GetRegexMatchSetRequest{Request: req, Input: input, Copy: c.GetRegexMatchSetRequest}
 }
 
 const opGetRegexPatternSet = "GetRegexPatternSet"
@@ -2158,6 +2192,7 @@ const opGetRegexPatternSet = "GetRegexPatternSet"
 type GetRegexPatternSetRequest struct {
 	*aws.Request
 	Input *GetRegexPatternSetInput
+	Copy  func(*GetRegexPatternSetInput) GetRegexPatternSetRequest
 }
 
 // Send marshals and sends the GetRegexPatternSet API request.
@@ -2198,7 +2233,7 @@ func (c *WAFRegional) GetRegexPatternSetRequest(input *GetRegexPatternSetInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRegexPatternSetRequest{Request: req, Input: input}
+	return GetRegexPatternSetRequest{Request: req, Input: input, Copy: c.GetRegexPatternSetRequest}
 }
 
 const opGetRule = "GetRule"
@@ -2207,6 +2242,7 @@ const opGetRule = "GetRule"
 type GetRuleRequest struct {
 	*aws.Request
 	Input *GetRuleInput
+	Copy  func(*GetRuleInput) GetRuleRequest
 }
 
 // Send marshals and sends the GetRule API request.
@@ -2248,7 +2284,7 @@ func (c *WAFRegional) GetRuleRequest(input *GetRuleInput) GetRuleRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRuleRequest{Request: req, Input: input}
+	return GetRuleRequest{Request: req, Input: input, Copy: c.GetRuleRequest}
 }
 
 const opGetRuleGroup = "GetRuleGroup"
@@ -2257,6 +2293,7 @@ const opGetRuleGroup = "GetRuleGroup"
 type GetRuleGroupRequest struct {
 	*aws.Request
 	Input *GetRuleGroupInput
+	Copy  func(*GetRuleGroupInput) GetRuleGroupRequest
 }
 
 // Send marshals and sends the GetRuleGroup API request.
@@ -2300,7 +2337,7 @@ func (c *WAFRegional) GetRuleGroupRequest(input *GetRuleGroupInput) GetRuleGroup
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRuleGroupRequest{Request: req, Input: input}
+	return GetRuleGroupRequest{Request: req, Input: input, Copy: c.GetRuleGroupRequest}
 }
 
 const opGetSampledRequests = "GetSampledRequests"
@@ -2309,6 +2346,7 @@ const opGetSampledRequests = "GetSampledRequests"
 type GetSampledRequestsRequest struct {
 	*aws.Request
 	Input *GetSampledRequestsInput
+	Copy  func(*GetSampledRequestsInput) GetSampledRequestsRequest
 }
 
 // Send marshals and sends the GetSampledRequests API request.
@@ -2359,7 +2397,7 @@ func (c *WAFRegional) GetSampledRequestsRequest(input *GetSampledRequestsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSampledRequestsRequest{Request: req, Input: input}
+	return GetSampledRequestsRequest{Request: req, Input: input, Copy: c.GetSampledRequestsRequest}
 }
 
 const opGetSizeConstraintSet = "GetSizeConstraintSet"
@@ -2368,6 +2406,7 @@ const opGetSizeConstraintSet = "GetSizeConstraintSet"
 type GetSizeConstraintSetRequest struct {
 	*aws.Request
 	Input *GetSizeConstraintSetInput
+	Copy  func(*GetSizeConstraintSetInput) GetSizeConstraintSetRequest
 }
 
 // Send marshals and sends the GetSizeConstraintSet API request.
@@ -2408,7 +2447,7 @@ func (c *WAFRegional) GetSizeConstraintSetRequest(input *GetSizeConstraintSetInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSizeConstraintSetRequest{Request: req, Input: input}
+	return GetSizeConstraintSetRequest{Request: req, Input: input, Copy: c.GetSizeConstraintSetRequest}
 }
 
 const opGetSqlInjectionMatchSet = "GetSqlInjectionMatchSet"
@@ -2417,6 +2456,7 @@ const opGetSqlInjectionMatchSet = "GetSqlInjectionMatchSet"
 type GetSqlInjectionMatchSetRequest struct {
 	*aws.Request
 	Input *GetSqlInjectionMatchSetInput
+	Copy  func(*GetSqlInjectionMatchSetInput) GetSqlInjectionMatchSetRequest
 }
 
 // Send marshals and sends the GetSqlInjectionMatchSet API request.
@@ -2457,7 +2497,7 @@ func (c *WAFRegional) GetSqlInjectionMatchSetRequest(input *GetSqlInjectionMatch
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSqlInjectionMatchSetRequest{Request: req, Input: input}
+	return GetSqlInjectionMatchSetRequest{Request: req, Input: input, Copy: c.GetSqlInjectionMatchSetRequest}
 }
 
 const opGetWebACL = "GetWebACL"
@@ -2466,6 +2506,7 @@ const opGetWebACL = "GetWebACL"
 type GetWebACLRequest struct {
 	*aws.Request
 	Input *GetWebACLInput
+	Copy  func(*GetWebACLInput) GetWebACLRequest
 }
 
 // Send marshals and sends the GetWebACL API request.
@@ -2506,7 +2547,7 @@ func (c *WAFRegional) GetWebACLRequest(input *GetWebACLInput) GetWebACLRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetWebACLRequest{Request: req, Input: input}
+	return GetWebACLRequest{Request: req, Input: input, Copy: c.GetWebACLRequest}
 }
 
 const opGetWebACLForResource = "GetWebACLForResource"
@@ -2515,6 +2556,7 @@ const opGetWebACLForResource = "GetWebACLForResource"
 type GetWebACLForResourceRequest struct {
 	*aws.Request
 	Input *GetWebACLForResourceInput
+	Copy  func(*GetWebACLForResourceInput) GetWebACLForResourceRequest
 }
 
 // Send marshals and sends the GetWebACLForResource API request.
@@ -2555,7 +2597,7 @@ func (c *WAFRegional) GetWebACLForResourceRequest(input *GetWebACLForResourceInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetWebACLForResourceRequest{Request: req, Input: input}
+	return GetWebACLForResourceRequest{Request: req, Input: input, Copy: c.GetWebACLForResourceRequest}
 }
 
 const opGetXssMatchSet = "GetXssMatchSet"
@@ -2564,6 +2606,7 @@ const opGetXssMatchSet = "GetXssMatchSet"
 type GetXssMatchSetRequest struct {
 	*aws.Request
 	Input *GetXssMatchSetInput
+	Copy  func(*GetXssMatchSetInput) GetXssMatchSetRequest
 }
 
 // Send marshals and sends the GetXssMatchSet API request.
@@ -2604,7 +2647,7 @@ func (c *WAFRegional) GetXssMatchSetRequest(input *GetXssMatchSetInput) GetXssMa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetXssMatchSetRequest{Request: req, Input: input}
+	return GetXssMatchSetRequest{Request: req, Input: input, Copy: c.GetXssMatchSetRequest}
 }
 
 const opListActivatedRulesInRuleGroup = "ListActivatedRulesInRuleGroup"
@@ -2613,6 +2656,7 @@ const opListActivatedRulesInRuleGroup = "ListActivatedRulesInRuleGroup"
 type ListActivatedRulesInRuleGroupRequest struct {
 	*aws.Request
 	Input *ListActivatedRulesInRuleGroupInput
+	Copy  func(*ListActivatedRulesInRuleGroupInput) ListActivatedRulesInRuleGroupRequest
 }
 
 // Send marshals and sends the ListActivatedRulesInRuleGroup API request.
@@ -2653,7 +2697,7 @@ func (c *WAFRegional) ListActivatedRulesInRuleGroupRequest(input *ListActivatedR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListActivatedRulesInRuleGroupRequest{Request: req, Input: input}
+	return ListActivatedRulesInRuleGroupRequest{Request: req, Input: input, Copy: c.ListActivatedRulesInRuleGroupRequest}
 }
 
 const opListByteMatchSets = "ListByteMatchSets"
@@ -2662,6 +2706,7 @@ const opListByteMatchSets = "ListByteMatchSets"
 type ListByteMatchSetsRequest struct {
 	*aws.Request
 	Input *ListByteMatchSetsInput
+	Copy  func(*ListByteMatchSetsInput) ListByteMatchSetsRequest
 }
 
 // Send marshals and sends the ListByteMatchSets API request.
@@ -2702,7 +2747,7 @@ func (c *WAFRegional) ListByteMatchSetsRequest(input *ListByteMatchSetsInput) Li
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListByteMatchSetsRequest{Request: req, Input: input}
+	return ListByteMatchSetsRequest{Request: req, Input: input, Copy: c.ListByteMatchSetsRequest}
 }
 
 const opListGeoMatchSets = "ListGeoMatchSets"
@@ -2711,6 +2756,7 @@ const opListGeoMatchSets = "ListGeoMatchSets"
 type ListGeoMatchSetsRequest struct {
 	*aws.Request
 	Input *ListGeoMatchSetsInput
+	Copy  func(*ListGeoMatchSetsInput) ListGeoMatchSetsRequest
 }
 
 // Send marshals and sends the ListGeoMatchSets API request.
@@ -2751,7 +2797,7 @@ func (c *WAFRegional) ListGeoMatchSetsRequest(input *ListGeoMatchSetsInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGeoMatchSetsRequest{Request: req, Input: input}
+	return ListGeoMatchSetsRequest{Request: req, Input: input, Copy: c.ListGeoMatchSetsRequest}
 }
 
 const opListIPSets = "ListIPSets"
@@ -2760,6 +2806,7 @@ const opListIPSets = "ListIPSets"
 type ListIPSetsRequest struct {
 	*aws.Request
 	Input *ListIPSetsInput
+	Copy  func(*ListIPSetsInput) ListIPSetsRequest
 }
 
 // Send marshals and sends the ListIPSets API request.
@@ -2800,7 +2847,7 @@ func (c *WAFRegional) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIPSetsRequest{Request: req, Input: input}
+	return ListIPSetsRequest{Request: req, Input: input, Copy: c.ListIPSetsRequest}
 }
 
 const opListRateBasedRules = "ListRateBasedRules"
@@ -2809,6 +2856,7 @@ const opListRateBasedRules = "ListRateBasedRules"
 type ListRateBasedRulesRequest struct {
 	*aws.Request
 	Input *ListRateBasedRulesInput
+	Copy  func(*ListRateBasedRulesInput) ListRateBasedRulesRequest
 }
 
 // Send marshals and sends the ListRateBasedRules API request.
@@ -2849,7 +2897,7 @@ func (c *WAFRegional) ListRateBasedRulesRequest(input *ListRateBasedRulesInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRateBasedRulesRequest{Request: req, Input: input}
+	return ListRateBasedRulesRequest{Request: req, Input: input, Copy: c.ListRateBasedRulesRequest}
 }
 
 const opListRegexMatchSets = "ListRegexMatchSets"
@@ -2858,6 +2906,7 @@ const opListRegexMatchSets = "ListRegexMatchSets"
 type ListRegexMatchSetsRequest struct {
 	*aws.Request
 	Input *ListRegexMatchSetsInput
+	Copy  func(*ListRegexMatchSetsInput) ListRegexMatchSetsRequest
 }
 
 // Send marshals and sends the ListRegexMatchSets API request.
@@ -2898,7 +2947,7 @@ func (c *WAFRegional) ListRegexMatchSetsRequest(input *ListRegexMatchSetsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRegexMatchSetsRequest{Request: req, Input: input}
+	return ListRegexMatchSetsRequest{Request: req, Input: input, Copy: c.ListRegexMatchSetsRequest}
 }
 
 const opListRegexPatternSets = "ListRegexPatternSets"
@@ -2907,6 +2956,7 @@ const opListRegexPatternSets = "ListRegexPatternSets"
 type ListRegexPatternSetsRequest struct {
 	*aws.Request
 	Input *ListRegexPatternSetsInput
+	Copy  func(*ListRegexPatternSetsInput) ListRegexPatternSetsRequest
 }
 
 // Send marshals and sends the ListRegexPatternSets API request.
@@ -2947,7 +2997,7 @@ func (c *WAFRegional) ListRegexPatternSetsRequest(input *ListRegexPatternSetsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRegexPatternSetsRequest{Request: req, Input: input}
+	return ListRegexPatternSetsRequest{Request: req, Input: input, Copy: c.ListRegexPatternSetsRequest}
 }
 
 const opListResourcesForWebACL = "ListResourcesForWebACL"
@@ -2956,6 +3006,7 @@ const opListResourcesForWebACL = "ListResourcesForWebACL"
 type ListResourcesForWebACLRequest struct {
 	*aws.Request
 	Input *ListResourcesForWebACLInput
+	Copy  func(*ListResourcesForWebACLInput) ListResourcesForWebACLRequest
 }
 
 // Send marshals and sends the ListResourcesForWebACL API request.
@@ -2996,7 +3047,7 @@ func (c *WAFRegional) ListResourcesForWebACLRequest(input *ListResourcesForWebAC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourcesForWebACLRequest{Request: req, Input: input}
+	return ListResourcesForWebACLRequest{Request: req, Input: input, Copy: c.ListResourcesForWebACLRequest}
 }
 
 const opListRuleGroups = "ListRuleGroups"
@@ -3005,6 +3056,7 @@ const opListRuleGroups = "ListRuleGroups"
 type ListRuleGroupsRequest struct {
 	*aws.Request
 	Input *ListRuleGroupsInput
+	Copy  func(*ListRuleGroupsInput) ListRuleGroupsRequest
 }
 
 // Send marshals and sends the ListRuleGroups API request.
@@ -3045,7 +3097,7 @@ func (c *WAFRegional) ListRuleGroupsRequest(input *ListRuleGroupsInput) ListRule
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRuleGroupsRequest{Request: req, Input: input}
+	return ListRuleGroupsRequest{Request: req, Input: input, Copy: c.ListRuleGroupsRequest}
 }
 
 const opListRules = "ListRules"
@@ -3054,6 +3106,7 @@ const opListRules = "ListRules"
 type ListRulesRequest struct {
 	*aws.Request
 	Input *ListRulesInput
+	Copy  func(*ListRulesInput) ListRulesRequest
 }
 
 // Send marshals and sends the ListRules API request.
@@ -3094,7 +3147,7 @@ func (c *WAFRegional) ListRulesRequest(input *ListRulesInput) ListRulesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRulesRequest{Request: req, Input: input}
+	return ListRulesRequest{Request: req, Input: input, Copy: c.ListRulesRequest}
 }
 
 const opListSizeConstraintSets = "ListSizeConstraintSets"
@@ -3103,6 +3156,7 @@ const opListSizeConstraintSets = "ListSizeConstraintSets"
 type ListSizeConstraintSetsRequest struct {
 	*aws.Request
 	Input *ListSizeConstraintSetsInput
+	Copy  func(*ListSizeConstraintSetsInput) ListSizeConstraintSetsRequest
 }
 
 // Send marshals and sends the ListSizeConstraintSets API request.
@@ -3143,7 +3197,7 @@ func (c *WAFRegional) ListSizeConstraintSetsRequest(input *ListSizeConstraintSet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSizeConstraintSetsRequest{Request: req, Input: input}
+	return ListSizeConstraintSetsRequest{Request: req, Input: input, Copy: c.ListSizeConstraintSetsRequest}
 }
 
 const opListSqlInjectionMatchSets = "ListSqlInjectionMatchSets"
@@ -3152,6 +3206,7 @@ const opListSqlInjectionMatchSets = "ListSqlInjectionMatchSets"
 type ListSqlInjectionMatchSetsRequest struct {
 	*aws.Request
 	Input *ListSqlInjectionMatchSetsInput
+	Copy  func(*ListSqlInjectionMatchSetsInput) ListSqlInjectionMatchSetsRequest
 }
 
 // Send marshals and sends the ListSqlInjectionMatchSets API request.
@@ -3192,7 +3247,7 @@ func (c *WAFRegional) ListSqlInjectionMatchSetsRequest(input *ListSqlInjectionMa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSqlInjectionMatchSetsRequest{Request: req, Input: input}
+	return ListSqlInjectionMatchSetsRequest{Request: req, Input: input, Copy: c.ListSqlInjectionMatchSetsRequest}
 }
 
 const opListSubscribedRuleGroups = "ListSubscribedRuleGroups"
@@ -3201,6 +3256,7 @@ const opListSubscribedRuleGroups = "ListSubscribedRuleGroups"
 type ListSubscribedRuleGroupsRequest struct {
 	*aws.Request
 	Input *ListSubscribedRuleGroupsInput
+	Copy  func(*ListSubscribedRuleGroupsInput) ListSubscribedRuleGroupsRequest
 }
 
 // Send marshals and sends the ListSubscribedRuleGroups API request.
@@ -3241,7 +3297,7 @@ func (c *WAFRegional) ListSubscribedRuleGroupsRequest(input *ListSubscribedRuleG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSubscribedRuleGroupsRequest{Request: req, Input: input}
+	return ListSubscribedRuleGroupsRequest{Request: req, Input: input, Copy: c.ListSubscribedRuleGroupsRequest}
 }
 
 const opListWebACLs = "ListWebACLs"
@@ -3250,6 +3306,7 @@ const opListWebACLs = "ListWebACLs"
 type ListWebACLsRequest struct {
 	*aws.Request
 	Input *ListWebACLsInput
+	Copy  func(*ListWebACLsInput) ListWebACLsRequest
 }
 
 // Send marshals and sends the ListWebACLs API request.
@@ -3290,7 +3347,7 @@ func (c *WAFRegional) ListWebACLsRequest(input *ListWebACLsInput) ListWebACLsReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListWebACLsRequest{Request: req, Input: input}
+	return ListWebACLsRequest{Request: req, Input: input, Copy: c.ListWebACLsRequest}
 }
 
 const opListXssMatchSets = "ListXssMatchSets"
@@ -3299,6 +3356,7 @@ const opListXssMatchSets = "ListXssMatchSets"
 type ListXssMatchSetsRequest struct {
 	*aws.Request
 	Input *ListXssMatchSetsInput
+	Copy  func(*ListXssMatchSetsInput) ListXssMatchSetsRequest
 }
 
 // Send marshals and sends the ListXssMatchSets API request.
@@ -3339,7 +3397,7 @@ func (c *WAFRegional) ListXssMatchSetsRequest(input *ListXssMatchSetsInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListXssMatchSetsRequest{Request: req, Input: input}
+	return ListXssMatchSetsRequest{Request: req, Input: input, Copy: c.ListXssMatchSetsRequest}
 }
 
 const opUpdateByteMatchSet = "UpdateByteMatchSet"
@@ -3348,6 +3406,7 @@ const opUpdateByteMatchSet = "UpdateByteMatchSet"
 type UpdateByteMatchSetRequest struct {
 	*aws.Request
 	Input *UpdateByteMatchSetInput
+	Copy  func(*UpdateByteMatchSetInput) UpdateByteMatchSetRequest
 }
 
 // Send marshals and sends the UpdateByteMatchSet API request.
@@ -3424,7 +3483,7 @@ func (c *WAFRegional) UpdateByteMatchSetRequest(input *UpdateByteMatchSetInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateByteMatchSetRequest{Request: req, Input: input}
+	return UpdateByteMatchSetRequest{Request: req, Input: input, Copy: c.UpdateByteMatchSetRequest}
 }
 
 const opUpdateGeoMatchSet = "UpdateGeoMatchSet"
@@ -3433,6 +3492,7 @@ const opUpdateGeoMatchSet = "UpdateGeoMatchSet"
 type UpdateGeoMatchSetRequest struct {
 	*aws.Request
 	Input *UpdateGeoMatchSetInput
+	Copy  func(*UpdateGeoMatchSetInput) UpdateGeoMatchSetRequest
 }
 
 // Send marshals and sends the UpdateGeoMatchSet API request.
@@ -3500,7 +3560,7 @@ func (c *WAFRegional) UpdateGeoMatchSetRequest(input *UpdateGeoMatchSetInput) Up
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGeoMatchSetRequest{Request: req, Input: input}
+	return UpdateGeoMatchSetRequest{Request: req, Input: input, Copy: c.UpdateGeoMatchSetRequest}
 }
 
 const opUpdateIPSet = "UpdateIPSet"
@@ -3509,6 +3569,7 @@ const opUpdateIPSet = "UpdateIPSet"
 type UpdateIPSetRequest struct {
 	*aws.Request
 	Input *UpdateIPSetInput
+	Copy  func(*UpdateIPSetInput) UpdateIPSetRequest
 }
 
 // Send marshals and sends the UpdateIPSet API request.
@@ -3597,7 +3658,7 @@ func (c *WAFRegional) UpdateIPSetRequest(input *UpdateIPSetInput) UpdateIPSetReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateIPSetRequest{Request: req, Input: input}
+	return UpdateIPSetRequest{Request: req, Input: input, Copy: c.UpdateIPSetRequest}
 }
 
 const opUpdateRateBasedRule = "UpdateRateBasedRule"
@@ -3606,6 +3667,7 @@ const opUpdateRateBasedRule = "UpdateRateBasedRule"
 type UpdateRateBasedRuleRequest struct {
 	*aws.Request
 	Input *UpdateRateBasedRuleInput
+	Copy  func(*UpdateRateBasedRuleInput) UpdateRateBasedRuleRequest
 }
 
 // Send marshals and sends the UpdateRateBasedRule API request.
@@ -3683,7 +3745,7 @@ func (c *WAFRegional) UpdateRateBasedRuleRequest(input *UpdateRateBasedRuleInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRateBasedRuleRequest{Request: req, Input: input}
+	return UpdateRateBasedRuleRequest{Request: req, Input: input, Copy: c.UpdateRateBasedRuleRequest}
 }
 
 const opUpdateRegexMatchSet = "UpdateRegexMatchSet"
@@ -3692,6 +3754,7 @@ const opUpdateRegexMatchSet = "UpdateRegexMatchSet"
 type UpdateRegexMatchSetRequest struct {
 	*aws.Request
 	Input *UpdateRegexMatchSetInput
+	Copy  func(*UpdateRegexMatchSetInput) UpdateRegexMatchSetRequest
 }
 
 // Send marshals and sends the UpdateRegexMatchSet API request.
@@ -3765,7 +3828,7 @@ func (c *WAFRegional) UpdateRegexMatchSetRequest(input *UpdateRegexMatchSetInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRegexMatchSetRequest{Request: req, Input: input}
+	return UpdateRegexMatchSetRequest{Request: req, Input: input, Copy: c.UpdateRegexMatchSetRequest}
 }
 
 const opUpdateRegexPatternSet = "UpdateRegexPatternSet"
@@ -3774,6 +3837,7 @@ const opUpdateRegexPatternSet = "UpdateRegexPatternSet"
 type UpdateRegexPatternSetRequest struct {
 	*aws.Request
 	Input *UpdateRegexPatternSetInput
+	Copy  func(*UpdateRegexPatternSetInput) UpdateRegexPatternSetRequest
 }
 
 // Send marshals and sends the UpdateRegexPatternSet API request.
@@ -3844,7 +3908,7 @@ func (c *WAFRegional) UpdateRegexPatternSetRequest(input *UpdateRegexPatternSetI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRegexPatternSetRequest{Request: req, Input: input}
+	return UpdateRegexPatternSetRequest{Request: req, Input: input, Copy: c.UpdateRegexPatternSetRequest}
 }
 
 const opUpdateRule = "UpdateRule"
@@ -3853,6 +3917,7 @@ const opUpdateRule = "UpdateRule"
 type UpdateRuleRequest struct {
 	*aws.Request
 	Input *UpdateRuleInput
+	Copy  func(*UpdateRuleInput) UpdateRuleRequest
 }
 
 // Send marshals and sends the UpdateRule API request.
@@ -3925,7 +3990,7 @@ func (c *WAFRegional) UpdateRuleRequest(input *UpdateRuleInput) UpdateRuleReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRuleRequest{Request: req, Input: input}
+	return UpdateRuleRequest{Request: req, Input: input, Copy: c.UpdateRuleRequest}
 }
 
 const opUpdateRuleGroup = "UpdateRuleGroup"
@@ -3934,6 +3999,7 @@ const opUpdateRuleGroup = "UpdateRuleGroup"
 type UpdateRuleGroupRequest struct {
 	*aws.Request
 	Input *UpdateRuleGroupInput
+	Copy  func(*UpdateRuleGroupInput) UpdateRuleGroupRequest
 }
 
 // Send marshals and sends the UpdateRuleGroup API request.
@@ -3996,7 +4062,7 @@ func (c *WAFRegional) UpdateRuleGroupRequest(input *UpdateRuleGroupInput) Update
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRuleGroupRequest{Request: req, Input: input}
+	return UpdateRuleGroupRequest{Request: req, Input: input, Copy: c.UpdateRuleGroupRequest}
 }
 
 const opUpdateSizeConstraintSet = "UpdateSizeConstraintSet"
@@ -4005,6 +4071,7 @@ const opUpdateSizeConstraintSet = "UpdateSizeConstraintSet"
 type UpdateSizeConstraintSetRequest struct {
 	*aws.Request
 	Input *UpdateSizeConstraintSetInput
+	Copy  func(*UpdateSizeConstraintSetInput) UpdateSizeConstraintSetRequest
 }
 
 // Send marshals and sends the UpdateSizeConstraintSet API request.
@@ -4083,7 +4150,7 @@ func (c *WAFRegional) UpdateSizeConstraintSetRequest(input *UpdateSizeConstraint
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSizeConstraintSetRequest{Request: req, Input: input}
+	return UpdateSizeConstraintSetRequest{Request: req, Input: input, Copy: c.UpdateSizeConstraintSetRequest}
 }
 
 const opUpdateSqlInjectionMatchSet = "UpdateSqlInjectionMatchSet"
@@ -4092,6 +4159,7 @@ const opUpdateSqlInjectionMatchSet = "UpdateSqlInjectionMatchSet"
 type UpdateSqlInjectionMatchSetRequest struct {
 	*aws.Request
 	Input *UpdateSqlInjectionMatchSetInput
+	Copy  func(*UpdateSqlInjectionMatchSetInput) UpdateSqlInjectionMatchSetRequest
 }
 
 // Send marshals and sends the UpdateSqlInjectionMatchSet API request.
@@ -4163,7 +4231,7 @@ func (c *WAFRegional) UpdateSqlInjectionMatchSetRequest(input *UpdateSqlInjectio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSqlInjectionMatchSetRequest{Request: req, Input: input}
+	return UpdateSqlInjectionMatchSetRequest{Request: req, Input: input, Copy: c.UpdateSqlInjectionMatchSetRequest}
 }
 
 const opUpdateWebACL = "UpdateWebACL"
@@ -4172,6 +4240,7 @@ const opUpdateWebACL = "UpdateWebACL"
 type UpdateWebACLRequest struct {
 	*aws.Request
 	Input *UpdateWebACLInput
+	Copy  func(*UpdateWebACLInput) UpdateWebACLRequest
 }
 
 // Send marshals and sends the UpdateWebACL API request.
@@ -4259,7 +4328,7 @@ func (c *WAFRegional) UpdateWebACLRequest(input *UpdateWebACLInput) UpdateWebACL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateWebACLRequest{Request: req, Input: input}
+	return UpdateWebACLRequest{Request: req, Input: input, Copy: c.UpdateWebACLRequest}
 }
 
 const opUpdateXssMatchSet = "UpdateXssMatchSet"
@@ -4268,6 +4337,7 @@ const opUpdateXssMatchSet = "UpdateXssMatchSet"
 type UpdateXssMatchSetRequest struct {
 	*aws.Request
 	Input *UpdateXssMatchSetInput
+	Copy  func(*UpdateXssMatchSetInput) UpdateXssMatchSetRequest
 }
 
 // Send marshals and sends the UpdateXssMatchSet API request.
@@ -4339,7 +4409,7 @@ func (c *WAFRegional) UpdateXssMatchSetRequest(input *UpdateXssMatchSetInput) Up
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateXssMatchSetRequest{Request: req, Input: input}
+	return UpdateXssMatchSetRequest{Request: req, Input: input, Copy: c.UpdateXssMatchSetRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/waf-regional-2016-11-28/AssociateWebACLRequest

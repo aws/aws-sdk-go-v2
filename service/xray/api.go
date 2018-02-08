@@ -17,6 +17,7 @@ const opBatchGetTraces = "BatchGetTraces"
 type BatchGetTracesRequest struct {
 	*aws.Request
 	Input *BatchGetTracesInput
+	Copy  func(*BatchGetTracesInput) BatchGetTracesRequest
 }
 
 // Send marshals and sends the BatchGetTraces API request.
@@ -65,47 +66,47 @@ func (c *XRay) BatchGetTracesRequest(input *BatchGetTracesInput) BatchGetTracesR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetTracesRequest{Request: req, Input: input}
+	return BatchGetTracesRequest{Request: req, Input: input, Copy: c.BatchGetTracesRequest}
 }
 
-// BatchGetTracesPages iterates over the pages of a BatchGetTraces operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See BatchGetTraces method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a BatchGetTracesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a BatchGetTraces operation.
-//    pageNum := 0
-//    err := client.BatchGetTracesPages(params,
-//        func(page *BatchGetTracesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.BatchGetTracesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *BatchGetTracesRequest) Paginate(opts ...aws.Option) BatchGetTracesPager {
 	return BatchGetTracesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *BatchGetTracesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *BatchGetTracesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output BatchGetTracesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// BatchGetTracesPager ...
+// BatchGetTracesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type BatchGetTracesPager struct {
 	aws.Pager
 }
@@ -120,6 +121,7 @@ const opGetServiceGraph = "GetServiceGraph"
 type GetServiceGraphRequest struct {
 	*aws.Request
 	Input *GetServiceGraphInput
+	Copy  func(*GetServiceGraphInput) GetServiceGraphRequest
 }
 
 // Send marshals and sends the GetServiceGraph API request.
@@ -170,47 +172,47 @@ func (c *XRay) GetServiceGraphRequest(input *GetServiceGraphInput) GetServiceGra
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetServiceGraphRequest{Request: req, Input: input}
+	return GetServiceGraphRequest{Request: req, Input: input, Copy: c.GetServiceGraphRequest}
 }
 
-// GetServiceGraphPages iterates over the pages of a GetServiceGraph operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetServiceGraph method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetServiceGraphRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetServiceGraph operation.
-//    pageNum := 0
-//    err := client.GetServiceGraphPages(params,
-//        func(page *GetServiceGraphOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetServiceGraphRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetServiceGraphRequest) Paginate(opts ...aws.Option) GetServiceGraphPager {
 	return GetServiceGraphPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetServiceGraphInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetServiceGraphInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetServiceGraphOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetServiceGraphPager ...
+// GetServiceGraphPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetServiceGraphPager struct {
 	aws.Pager
 }
@@ -225,6 +227,7 @@ const opGetTraceGraph = "GetTraceGraph"
 type GetTraceGraphRequest struct {
 	*aws.Request
 	Input *GetTraceGraphInput
+	Copy  func(*GetTraceGraphInput) GetTraceGraphRequest
 }
 
 // Send marshals and sends the GetTraceGraph API request.
@@ -271,47 +274,47 @@ func (c *XRay) GetTraceGraphRequest(input *GetTraceGraphInput) GetTraceGraphRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTraceGraphRequest{Request: req, Input: input}
+	return GetTraceGraphRequest{Request: req, Input: input, Copy: c.GetTraceGraphRequest}
 }
 
-// GetTraceGraphPages iterates over the pages of a GetTraceGraph operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetTraceGraph method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetTraceGraphRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetTraceGraph operation.
-//    pageNum := 0
-//    err := client.GetTraceGraphPages(params,
-//        func(page *GetTraceGraphOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetTraceGraphRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetTraceGraphRequest) Paginate(opts ...aws.Option) GetTraceGraphPager {
 	return GetTraceGraphPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetTraceGraphInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetTraceGraphInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetTraceGraphOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetTraceGraphPager ...
+// GetTraceGraphPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetTraceGraphPager struct {
 	aws.Pager
 }
@@ -326,6 +329,7 @@ const opGetTraceSummaries = "GetTraceSummaries"
 type GetTraceSummariesRequest struct {
 	*aws.Request
 	Input *GetTraceSummariesInput
+	Copy  func(*GetTraceSummariesInput) GetTraceSummariesRequest
 }
 
 // Send marshals and sends the GetTraceSummaries API request.
@@ -388,47 +392,47 @@ func (c *XRay) GetTraceSummariesRequest(input *GetTraceSummariesInput) GetTraceS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTraceSummariesRequest{Request: req, Input: input}
+	return GetTraceSummariesRequest{Request: req, Input: input, Copy: c.GetTraceSummariesRequest}
 }
 
-// GetTraceSummariesPages iterates over the pages of a GetTraceSummaries operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetTraceSummaries method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetTraceSummariesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetTraceSummaries operation.
-//    pageNum := 0
-//    err := client.GetTraceSummariesPages(params,
-//        func(page *GetTraceSummariesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetTraceSummariesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetTraceSummariesRequest) Paginate(opts ...aws.Option) GetTraceSummariesPager {
 	return GetTraceSummariesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetTraceSummariesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetTraceSummariesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetTraceSummariesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetTraceSummariesPager ...
+// GetTraceSummariesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetTraceSummariesPager struct {
 	aws.Pager
 }
@@ -443,6 +447,7 @@ const opPutTelemetryRecords = "PutTelemetryRecords"
 type PutTelemetryRecordsRequest struct {
 	*aws.Request
 	Input *PutTelemetryRecordsInput
+	Copy  func(*PutTelemetryRecordsInput) PutTelemetryRecordsRequest
 }
 
 // Send marshals and sends the PutTelemetryRecords API request.
@@ -483,7 +488,7 @@ func (c *XRay) PutTelemetryRecordsRequest(input *PutTelemetryRecordsInput) PutTe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutTelemetryRecordsRequest{Request: req, Input: input}
+	return PutTelemetryRecordsRequest{Request: req, Input: input, Copy: c.PutTelemetryRecordsRequest}
 }
 
 const opPutTraceSegments = "PutTraceSegments"
@@ -492,6 +497,7 @@ const opPutTraceSegments = "PutTraceSegments"
 type PutTraceSegmentsRequest struct {
 	*aws.Request
 	Input *PutTraceSegmentsInput
+	Copy  func(*PutTraceSegmentsInput) PutTraceSegmentsRequest
 }
 
 // Send marshals and sends the PutTraceSegments API request.
@@ -577,7 +583,7 @@ func (c *XRay) PutTraceSegmentsRequest(input *PutTraceSegmentsInput) PutTraceSeg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutTraceSegmentsRequest{Request: req, Input: input}
+	return PutTraceSegmentsRequest{Request: req, Input: input, Copy: c.PutTraceSegmentsRequest}
 }
 
 // An alias for an edge.

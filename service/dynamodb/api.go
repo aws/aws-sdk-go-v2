@@ -18,6 +18,7 @@ const opBatchGetItem = "BatchGetItem"
 type BatchGetItemRequest struct {
 	*aws.Request
 	Input *BatchGetItemInput
+	Copy  func(*BatchGetItemInput) BatchGetItemRequest
 }
 
 // Send marshals and sends the BatchGetItem API request.
@@ -112,47 +113,47 @@ func (c *DynamoDB) BatchGetItemRequest(input *BatchGetItemInput) BatchGetItemReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetItemRequest{Request: req, Input: input}
+	return BatchGetItemRequest{Request: req, Input: input, Copy: c.BatchGetItemRequest}
 }
 
-// BatchGetItemPages iterates over the pages of a BatchGetItem operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See BatchGetItem method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a BatchGetItemRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a BatchGetItem operation.
-//    pageNum := 0
-//    err := client.BatchGetItemPages(params,
-//        func(page *BatchGetItemOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.BatchGetItemRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *BatchGetItemRequest) Paginate(opts ...aws.Option) BatchGetItemPager {
 	return BatchGetItemPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *BatchGetItemInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *BatchGetItemInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output BatchGetItemOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// BatchGetItemPager ...
+// BatchGetItemPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type BatchGetItemPager struct {
 	aws.Pager
 }
@@ -167,6 +168,7 @@ const opBatchWriteItem = "BatchWriteItem"
 type BatchWriteItemRequest struct {
 	*aws.Request
 	Input *BatchWriteItemInput
+	Copy  func(*BatchWriteItemInput) BatchWriteItemRequest
 }
 
 // Send marshals and sends the BatchWriteItem API request.
@@ -275,7 +277,7 @@ func (c *DynamoDB) BatchWriteItemRequest(input *BatchWriteItemInput) BatchWriteI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchWriteItemRequest{Request: req, Input: input}
+	return BatchWriteItemRequest{Request: req, Input: input, Copy: c.BatchWriteItemRequest}
 }
 
 const opCreateBackup = "CreateBackup"
@@ -284,6 +286,7 @@ const opCreateBackup = "CreateBackup"
 type CreateBackupRequest struct {
 	*aws.Request
 	Input *CreateBackupInput
+	Copy  func(*CreateBackupInput) CreateBackupRequest
 }
 
 // Send marshals and sends the CreateBackup API request.
@@ -355,7 +358,7 @@ func (c *DynamoDB) CreateBackupRequest(input *CreateBackupInput) CreateBackupReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBackupRequest{Request: req, Input: input}
+	return CreateBackupRequest{Request: req, Input: input, Copy: c.CreateBackupRequest}
 }
 
 const opCreateGlobalTable = "CreateGlobalTable"
@@ -364,6 +367,7 @@ const opCreateGlobalTable = "CreateGlobalTable"
 type CreateGlobalTableRequest struct {
 	*aws.Request
 	Input *CreateGlobalTableInput
+	Copy  func(*CreateGlobalTableInput) CreateGlobalTableRequest
 }
 
 // Send marshals and sends the CreateGlobalTable API request.
@@ -417,7 +421,7 @@ func (c *DynamoDB) CreateGlobalTableRequest(input *CreateGlobalTableInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGlobalTableRequest{Request: req, Input: input}
+	return CreateGlobalTableRequest{Request: req, Input: input, Copy: c.CreateGlobalTableRequest}
 }
 
 const opCreateTable = "CreateTable"
@@ -426,6 +430,7 @@ const opCreateTable = "CreateTable"
 type CreateTableRequest struct {
 	*aws.Request
 	Input *CreateTableInput
+	Copy  func(*CreateTableInput) CreateTableRequest
 }
 
 // Send marshals and sends the CreateTable API request.
@@ -480,7 +485,7 @@ func (c *DynamoDB) CreateTableRequest(input *CreateTableInput) CreateTableReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTableRequest{Request: req, Input: input}
+	return CreateTableRequest{Request: req, Input: input, Copy: c.CreateTableRequest}
 }
 
 const opDeleteBackup = "DeleteBackup"
@@ -489,6 +494,7 @@ const opDeleteBackup = "DeleteBackup"
 type DeleteBackupRequest struct {
 	*aws.Request
 	Input *DeleteBackupInput
+	Copy  func(*DeleteBackupInput) DeleteBackupRequest
 }
 
 // Send marshals and sends the DeleteBackup API request.
@@ -531,7 +537,7 @@ func (c *DynamoDB) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBackupRequest{Request: req, Input: input}
+	return DeleteBackupRequest{Request: req, Input: input, Copy: c.DeleteBackupRequest}
 }
 
 const opDeleteItem = "DeleteItem"
@@ -540,6 +546,7 @@ const opDeleteItem = "DeleteItem"
 type DeleteItemRequest struct {
 	*aws.Request
 	Input *DeleteItemInput
+	Copy  func(*DeleteItemInput) DeleteItemRequest
 }
 
 // Send marshals and sends the DeleteItem API request.
@@ -593,7 +600,7 @@ func (c *DynamoDB) DeleteItemRequest(input *DeleteItemInput) DeleteItemRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteItemRequest{Request: req, Input: input}
+	return DeleteItemRequest{Request: req, Input: input, Copy: c.DeleteItemRequest}
 }
 
 const opDeleteTable = "DeleteTable"
@@ -602,6 +609,7 @@ const opDeleteTable = "DeleteTable"
 type DeleteTableRequest struct {
 	*aws.Request
 	Input *DeleteTableInput
+	Copy  func(*DeleteTableInput) DeleteTableRequest
 }
 
 // Send marshals and sends the DeleteTable API request.
@@ -659,7 +667,7 @@ func (c *DynamoDB) DeleteTableRequest(input *DeleteTableInput) DeleteTableReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTableRequest{Request: req, Input: input}
+	return DeleteTableRequest{Request: req, Input: input, Copy: c.DeleteTableRequest}
 }
 
 const opDescribeBackup = "DescribeBackup"
@@ -668,6 +676,7 @@ const opDescribeBackup = "DescribeBackup"
 type DescribeBackupRequest struct {
 	*aws.Request
 	Input *DescribeBackupInput
+	Copy  func(*DescribeBackupInput) DescribeBackupRequest
 }
 
 // Send marshals and sends the DescribeBackup API request.
@@ -710,7 +719,7 @@ func (c *DynamoDB) DescribeBackupRequest(input *DescribeBackupInput) DescribeBac
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBackupRequest{Request: req, Input: input}
+	return DescribeBackupRequest{Request: req, Input: input, Copy: c.DescribeBackupRequest}
 }
 
 const opDescribeContinuousBackups = "DescribeContinuousBackups"
@@ -719,6 +728,7 @@ const opDescribeContinuousBackups = "DescribeContinuousBackups"
 type DescribeContinuousBackupsRequest struct {
 	*aws.Request
 	Input *DescribeContinuousBackupsInput
+	Copy  func(*DescribeContinuousBackupsInput) DescribeContinuousBackupsRequest
 }
 
 // Send marshals and sends the DescribeContinuousBackups API request.
@@ -763,7 +773,7 @@ func (c *DynamoDB) DescribeContinuousBackupsRequest(input *DescribeContinuousBac
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeContinuousBackupsRequest{Request: req, Input: input}
+	return DescribeContinuousBackupsRequest{Request: req, Input: input, Copy: c.DescribeContinuousBackupsRequest}
 }
 
 const opDescribeGlobalTable = "DescribeGlobalTable"
@@ -772,6 +782,7 @@ const opDescribeGlobalTable = "DescribeGlobalTable"
 type DescribeGlobalTableRequest struct {
 	*aws.Request
 	Input *DescribeGlobalTableInput
+	Copy  func(*DescribeGlobalTableInput) DescribeGlobalTableRequest
 }
 
 // Send marshals and sends the DescribeGlobalTable API request.
@@ -812,7 +823,7 @@ func (c *DynamoDB) DescribeGlobalTableRequest(input *DescribeGlobalTableInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeGlobalTableRequest{Request: req, Input: input}
+	return DescribeGlobalTableRequest{Request: req, Input: input, Copy: c.DescribeGlobalTableRequest}
 }
 
 const opDescribeLimits = "DescribeLimits"
@@ -821,6 +832,7 @@ const opDescribeLimits = "DescribeLimits"
 type DescribeLimitsRequest struct {
 	*aws.Request
 	Input *DescribeLimitsInput
+	Copy  func(*DescribeLimitsInput) DescribeLimitsRequest
 }
 
 // Send marshals and sends the DescribeLimits API request.
@@ -917,7 +929,7 @@ func (c *DynamoDB) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLim
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLimitsRequest{Request: req, Input: input}
+	return DescribeLimitsRequest{Request: req, Input: input, Copy: c.DescribeLimitsRequest}
 }
 
 const opDescribeTable = "DescribeTable"
@@ -926,6 +938,7 @@ const opDescribeTable = "DescribeTable"
 type DescribeTableRequest struct {
 	*aws.Request
 	Input *DescribeTableInput
+	Copy  func(*DescribeTableInput) DescribeTableRequest
 }
 
 // Send marshals and sends the DescribeTable API request.
@@ -974,7 +987,7 @@ func (c *DynamoDB) DescribeTableRequest(input *DescribeTableInput) DescribeTable
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTableRequest{Request: req, Input: input}
+	return DescribeTableRequest{Request: req, Input: input, Copy: c.DescribeTableRequest}
 }
 
 const opDescribeTimeToLive = "DescribeTimeToLive"
@@ -983,6 +996,7 @@ const opDescribeTimeToLive = "DescribeTimeToLive"
 type DescribeTimeToLiveRequest struct {
 	*aws.Request
 	Input *DescribeTimeToLiveInput
+	Copy  func(*DescribeTimeToLiveInput) DescribeTimeToLiveRequest
 }
 
 // Send marshals and sends the DescribeTimeToLive API request.
@@ -1023,7 +1037,7 @@ func (c *DynamoDB) DescribeTimeToLiveRequest(input *DescribeTimeToLiveInput) Des
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTimeToLiveRequest{Request: req, Input: input}
+	return DescribeTimeToLiveRequest{Request: req, Input: input, Copy: c.DescribeTimeToLiveRequest}
 }
 
 const opGetItem = "GetItem"
@@ -1032,6 +1046,7 @@ const opGetItem = "GetItem"
 type GetItemRequest struct {
 	*aws.Request
 	Input *GetItemInput
+	Copy  func(*GetItemInput) GetItemRequest
 }
 
 // Send marshals and sends the GetItem API request.
@@ -1079,7 +1094,7 @@ func (c *DynamoDB) GetItemRequest(input *GetItemInput) GetItemRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetItemRequest{Request: req, Input: input}
+	return GetItemRequest{Request: req, Input: input, Copy: c.GetItemRequest}
 }
 
 const opListBackups = "ListBackups"
@@ -1088,6 +1103,7 @@ const opListBackups = "ListBackups"
 type ListBackupsRequest struct {
 	*aws.Request
 	Input *ListBackupsInput
+	Copy  func(*ListBackupsInput) ListBackupsRequest
 }
 
 // Send marshals and sends the ListBackups API request.
@@ -1136,7 +1152,7 @@ func (c *DynamoDB) ListBackupsRequest(input *ListBackupsInput) ListBackupsReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBackupsRequest{Request: req, Input: input}
+	return ListBackupsRequest{Request: req, Input: input, Copy: c.ListBackupsRequest}
 }
 
 const opListGlobalTables = "ListGlobalTables"
@@ -1145,6 +1161,7 @@ const opListGlobalTables = "ListGlobalTables"
 type ListGlobalTablesRequest struct {
 	*aws.Request
 	Input *ListGlobalTablesInput
+	Copy  func(*ListGlobalTablesInput) ListGlobalTablesRequest
 }
 
 // Send marshals and sends the ListGlobalTables API request.
@@ -1186,7 +1203,7 @@ func (c *DynamoDB) ListGlobalTablesRequest(input *ListGlobalTablesInput) ListGlo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGlobalTablesRequest{Request: req, Input: input}
+	return ListGlobalTablesRequest{Request: req, Input: input, Copy: c.ListGlobalTablesRequest}
 }
 
 const opListTables = "ListTables"
@@ -1195,6 +1212,7 @@ const opListTables = "ListTables"
 type ListTablesRequest struct {
 	*aws.Request
 	Input *ListTablesInput
+	Copy  func(*ListTablesInput) ListTablesRequest
 }
 
 // Send marshals and sends the ListTables API request.
@@ -1243,47 +1261,47 @@ func (c *DynamoDB) ListTablesRequest(input *ListTablesInput) ListTablesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTablesRequest{Request: req, Input: input}
+	return ListTablesRequest{Request: req, Input: input, Copy: c.ListTablesRequest}
 }
 
-// ListTablesPages iterates over the pages of a ListTables operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTables method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTablesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTables operation.
-//    pageNum := 0
-//    err := client.ListTablesPages(params,
-//        func(page *ListTablesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTablesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListTablesRequest) Paginate(opts ...aws.Option) ListTablesPager {
 	return ListTablesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTablesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTablesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListTablesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListTablesPager ...
+// ListTablesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListTablesPager struct {
 	aws.Pager
 }
@@ -1298,6 +1316,7 @@ const opListTagsOfResource = "ListTagsOfResource"
 type ListTagsOfResourceRequest struct {
 	*aws.Request
 	Input *ListTagsOfResourceInput
+	Copy  func(*ListTagsOfResourceInput) ListTagsOfResourceRequest
 }
 
 // Send marshals and sends the ListTagsOfResource API request.
@@ -1342,7 +1361,7 @@ func (c *DynamoDB) ListTagsOfResourceRequest(input *ListTagsOfResourceInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsOfResourceRequest{Request: req, Input: input}
+	return ListTagsOfResourceRequest{Request: req, Input: input, Copy: c.ListTagsOfResourceRequest}
 }
 
 const opPutItem = "PutItem"
@@ -1351,6 +1370,7 @@ const opPutItem = "PutItem"
 type PutItemRequest struct {
 	*aws.Request
 	Input *PutItemInput
+	Copy  func(*PutItemInput) PutItemRequest
 }
 
 // Send marshals and sends the PutItem API request.
@@ -1434,7 +1454,7 @@ func (c *DynamoDB) PutItemRequest(input *PutItemInput) PutItemRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutItemRequest{Request: req, Input: input}
+	return PutItemRequest{Request: req, Input: input, Copy: c.PutItemRequest}
 }
 
 const opQuery = "Query"
@@ -1443,6 +1463,7 @@ const opQuery = "Query"
 type QueryRequest struct {
 	*aws.Request
 	Input *QueryInput
+	Copy  func(*QueryInput) QueryRequest
 }
 
 // Send marshals and sends the Query API request.
@@ -1536,47 +1557,47 @@ func (c *DynamoDB) QueryRequest(input *QueryInput) QueryRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return QueryRequest{Request: req, Input: input}
+	return QueryRequest{Request: req, Input: input, Copy: c.QueryRequest}
 }
 
-// QueryPages iterates over the pages of a Query operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See Query method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a QueryRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a Query operation.
-//    pageNum := 0
-//    err := client.QueryPages(params,
-//        func(page *QueryOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.QueryRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *QueryRequest) Paginate(opts ...aws.Option) QueryPager {
 	return QueryPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *QueryInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *QueryInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output QueryOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// QueryPager ...
+// QueryPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type QueryPager struct {
 	aws.Pager
 }
@@ -1591,6 +1612,7 @@ const opRestoreTableFromBackup = "RestoreTableFromBackup"
 type RestoreTableFromBackupRequest struct {
 	*aws.Request
 	Input *RestoreTableFromBackupInput
+	Copy  func(*RestoreTableFromBackupInput) RestoreTableFromBackupRequest
 }
 
 // Send marshals and sends the RestoreTableFromBackup API request.
@@ -1646,7 +1668,7 @@ func (c *DynamoDB) RestoreTableFromBackupRequest(input *RestoreTableFromBackupIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreTableFromBackupRequest{Request: req, Input: input}
+	return RestoreTableFromBackupRequest{Request: req, Input: input, Copy: c.RestoreTableFromBackupRequest}
 }
 
 const opScan = "Scan"
@@ -1655,6 +1677,7 @@ const opScan = "Scan"
 type ScanRequest struct {
 	*aws.Request
 	Input *ScanInput
+	Copy  func(*ScanInput) ScanRequest
 }
 
 // Send marshals and sends the Scan API request.
@@ -1728,47 +1751,47 @@ func (c *DynamoDB) ScanRequest(input *ScanInput) ScanRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ScanRequest{Request: req, Input: input}
+	return ScanRequest{Request: req, Input: input, Copy: c.ScanRequest}
 }
 
-// ScanPages iterates over the pages of a Scan operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See Scan method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ScanRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a Scan operation.
-//    pageNum := 0
-//    err := client.ScanPages(params,
-//        func(page *ScanOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ScanRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ScanRequest) Paginate(opts ...aws.Option) ScanPager {
 	return ScanPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ScanInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ScanInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ScanOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ScanPager ...
+// ScanPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ScanPager struct {
 	aws.Pager
 }
@@ -1783,6 +1806,7 @@ const opTagResource = "TagResource"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -1831,7 +1855,7 @@ func (c *DynamoDB) TagResourceRequest(input *TagResourceInput) TagResourceReques
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUntagResource = "UntagResource"
@@ -1840,6 +1864,7 @@ const opUntagResource = "UntagResource"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -1886,7 +1911,7 @@ func (c *DynamoDB) UntagResourceRequest(input *UntagResourceInput) UntagResource
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateGlobalTable = "UpdateGlobalTable"
@@ -1895,6 +1920,7 @@ const opUpdateGlobalTable = "UpdateGlobalTable"
 type UpdateGlobalTableRequest struct {
 	*aws.Request
 	Input *UpdateGlobalTableInput
+	Copy  func(*UpdateGlobalTableInput) UpdateGlobalTableRequest
 }
 
 // Send marshals and sends the UpdateGlobalTable API request.
@@ -1937,7 +1963,7 @@ func (c *DynamoDB) UpdateGlobalTableRequest(input *UpdateGlobalTableInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGlobalTableRequest{Request: req, Input: input}
+	return UpdateGlobalTableRequest{Request: req, Input: input, Copy: c.UpdateGlobalTableRequest}
 }
 
 const opUpdateItem = "UpdateItem"
@@ -1946,6 +1972,7 @@ const opUpdateItem = "UpdateItem"
 type UpdateItemRequest struct {
 	*aws.Request
 	Input *UpdateItemInput
+	Copy  func(*UpdateItemInput) UpdateItemRequest
 }
 
 // Send marshals and sends the UpdateItem API request.
@@ -1993,7 +2020,7 @@ func (c *DynamoDB) UpdateItemRequest(input *UpdateItemInput) UpdateItemRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateItemRequest{Request: req, Input: input}
+	return UpdateItemRequest{Request: req, Input: input, Copy: c.UpdateItemRequest}
 }
 
 const opUpdateTable = "UpdateTable"
@@ -2002,6 +2029,7 @@ const opUpdateTable = "UpdateTable"
 type UpdateTableRequest struct {
 	*aws.Request
 	Input *UpdateTableInput
+	Copy  func(*UpdateTableInput) UpdateTableRequest
 }
 
 // Send marshals and sends the UpdateTable API request.
@@ -2059,7 +2087,7 @@ func (c *DynamoDB) UpdateTableRequest(input *UpdateTableInput) UpdateTableReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTableRequest{Request: req, Input: input}
+	return UpdateTableRequest{Request: req, Input: input, Copy: c.UpdateTableRequest}
 }
 
 const opUpdateTimeToLive = "UpdateTimeToLive"
@@ -2068,6 +2096,7 @@ const opUpdateTimeToLive = "UpdateTimeToLive"
 type UpdateTimeToLiveRequest struct {
 	*aws.Request
 	Input *UpdateTimeToLiveInput
+	Copy  func(*UpdateTimeToLiveInput) UpdateTimeToLiveRequest
 }
 
 // Send marshals and sends the UpdateTimeToLive API request.
@@ -2135,7 +2164,7 @@ func (c *DynamoDB) UpdateTimeToLiveRequest(input *UpdateTimeToLiveInput) UpdateT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTimeToLiveRequest{Request: req, Input: input}
+	return UpdateTimeToLiveRequest{Request: req, Input: input, Copy: c.UpdateTimeToLiveRequest}
 }
 
 // Represents an attribute for describing the key schema for the table and indexes.

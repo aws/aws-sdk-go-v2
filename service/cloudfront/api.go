@@ -18,6 +18,7 @@ const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIden
 type CreateCloudFrontOriginAccessIdentityRequest struct {
 	*aws.Request
 	Input *CreateCloudFrontOriginAccessIdentityInput
+	Copy  func(*CreateCloudFrontOriginAccessIdentityInput) CreateCloudFrontOriginAccessIdentityRequest
 }
 
 // Send marshals and sends the CreateCloudFrontOriginAccessIdentity API request.
@@ -63,7 +64,7 @@ func (c *CloudFront) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
+	return CreateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.CreateCloudFrontOriginAccessIdentityRequest}
 }
 
 const opCreateDistribution = "CreateDistribution2017_03_25"
@@ -72,6 +73,7 @@ const opCreateDistribution = "CreateDistribution2017_03_25"
 type CreateDistributionRequest struct {
 	*aws.Request
 	Input *CreateDistributionInput
+	Copy  func(*CreateDistributionInput) CreateDistributionRequest
 }
 
 // Send marshals and sends the CreateDistribution API request.
@@ -113,7 +115,7 @@ func (c *CloudFront) CreateDistributionRequest(input *CreateDistributionInput) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDistributionRequest{Request: req, Input: input}
+	return CreateDistributionRequest{Request: req, Input: input, Copy: c.CreateDistributionRequest}
 }
 
 const opCreateDistributionWithTags = "CreateDistributionWithTags2017_03_25"
@@ -122,6 +124,7 @@ const opCreateDistributionWithTags = "CreateDistributionWithTags2017_03_25"
 type CreateDistributionWithTagsRequest struct {
 	*aws.Request
 	Input *CreateDistributionWithTagsInput
+	Copy  func(*CreateDistributionWithTagsInput) CreateDistributionWithTagsRequest
 }
 
 // Send marshals and sends the CreateDistributionWithTags API request.
@@ -162,7 +165,7 @@ func (c *CloudFront) CreateDistributionWithTagsRequest(input *CreateDistribution
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDistributionWithTagsRequest{Request: req, Input: input}
+	return CreateDistributionWithTagsRequest{Request: req, Input: input, Copy: c.CreateDistributionWithTagsRequest}
 }
 
 const opCreateInvalidation = "CreateInvalidation2017_03_25"
@@ -171,6 +174,7 @@ const opCreateInvalidation = "CreateInvalidation2017_03_25"
 type CreateInvalidationRequest struct {
 	*aws.Request
 	Input *CreateInvalidationInput
+	Copy  func(*CreateInvalidationInput) CreateInvalidationRequest
 }
 
 // Send marshals and sends the CreateInvalidation API request.
@@ -211,7 +215,7 @@ func (c *CloudFront) CreateInvalidationRequest(input *CreateInvalidationInput) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateInvalidationRequest{Request: req, Input: input}
+	return CreateInvalidationRequest{Request: req, Input: input, Copy: c.CreateInvalidationRequest}
 }
 
 const opCreateStreamingDistribution = "CreateStreamingDistribution2017_03_25"
@@ -220,6 +224,7 @@ const opCreateStreamingDistribution = "CreateStreamingDistribution2017_03_25"
 type CreateStreamingDistributionRequest struct {
 	*aws.Request
 	Input *CreateStreamingDistributionInput
+	Copy  func(*CreateStreamingDistributionInput) CreateStreamingDistributionRequest
 }
 
 // Send marshals and sends the CreateStreamingDistribution API request.
@@ -287,7 +292,7 @@ func (c *CloudFront) CreateStreamingDistributionRequest(input *CreateStreamingDi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStreamingDistributionRequest{Request: req, Input: input}
+	return CreateStreamingDistributionRequest{Request: req, Input: input, Copy: c.CreateStreamingDistributionRequest}
 }
 
 const opCreateStreamingDistributionWithTags = "CreateStreamingDistributionWithTags2017_03_25"
@@ -296,6 +301,7 @@ const opCreateStreamingDistributionWithTags = "CreateStreamingDistributionWithTa
 type CreateStreamingDistributionWithTagsRequest struct {
 	*aws.Request
 	Input *CreateStreamingDistributionWithTagsInput
+	Copy  func(*CreateStreamingDistributionWithTagsInput) CreateStreamingDistributionWithTagsRequest
 }
 
 // Send marshals and sends the CreateStreamingDistributionWithTags API request.
@@ -336,7 +342,7 @@ func (c *CloudFront) CreateStreamingDistributionWithTagsRequest(input *CreateStr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStreamingDistributionWithTagsRequest{Request: req, Input: input}
+	return CreateStreamingDistributionWithTagsRequest{Request: req, Input: input, Copy: c.CreateStreamingDistributionWithTagsRequest}
 }
 
 const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIdentity2017_03_25"
@@ -345,6 +351,7 @@ const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIden
 type DeleteCloudFrontOriginAccessIdentityRequest struct {
 	*aws.Request
 	Input *DeleteCloudFrontOriginAccessIdentityInput
+	Copy  func(*DeleteCloudFrontOriginAccessIdentityInput) DeleteCloudFrontOriginAccessIdentityRequest
 }
 
 // Send marshals and sends the DeleteCloudFrontOriginAccessIdentity API request.
@@ -387,7 +394,7 @@ func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCl
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
+	return DeleteCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.DeleteCloudFrontOriginAccessIdentityRequest}
 }
 
 const opDeleteDistribution = "DeleteDistribution2017_03_25"
@@ -396,6 +403,7 @@ const opDeleteDistribution = "DeleteDistribution2017_03_25"
 type DeleteDistributionRequest struct {
 	*aws.Request
 	Input *DeleteDistributionInput
+	Copy  func(*DeleteDistributionInput) DeleteDistributionRequest
 }
 
 // Send marshals and sends the DeleteDistribution API request.
@@ -438,7 +446,7 @@ func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) D
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDistributionRequest{Request: req, Input: input}
+	return DeleteDistributionRequest{Request: req, Input: input, Copy: c.DeleteDistributionRequest}
 }
 
 const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole2017_03_25"
@@ -447,6 +455,7 @@ const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole2017_03_25"
 type DeleteServiceLinkedRoleRequest struct {
 	*aws.Request
 	Input *DeleteServiceLinkedRoleInput
+	Copy  func(*DeleteServiceLinkedRoleInput) DeleteServiceLinkedRoleRequest
 }
 
 // Send marshals and sends the DeleteServiceLinkedRole API request.
@@ -487,7 +496,7 @@ func (c *CloudFront) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteServiceLinkedRoleRequest{Request: req, Input: input}
+	return DeleteServiceLinkedRoleRequest{Request: req, Input: input, Copy: c.DeleteServiceLinkedRoleRequest}
 }
 
 const opDeleteStreamingDistribution = "DeleteStreamingDistribution2017_03_25"
@@ -496,6 +505,7 @@ const opDeleteStreamingDistribution = "DeleteStreamingDistribution2017_03_25"
 type DeleteStreamingDistributionRequest struct {
 	*aws.Request
 	Input *DeleteStreamingDistributionInput
+	Copy  func(*DeleteStreamingDistributionInput) DeleteStreamingDistributionRequest
 }
 
 // Send marshals and sends the DeleteStreamingDistribution API request.
@@ -573,7 +583,7 @@ func (c *CloudFront) DeleteStreamingDistributionRequest(input *DeleteStreamingDi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStreamingDistributionRequest{Request: req, Input: input}
+	return DeleteStreamingDistributionRequest{Request: req, Input: input, Copy: c.DeleteStreamingDistributionRequest}
 }
 
 const opGetCloudFrontOriginAccessIdentity = "GetCloudFrontOriginAccessIdentity2017_03_25"
@@ -582,6 +592,7 @@ const opGetCloudFrontOriginAccessIdentity = "GetCloudFrontOriginAccessIdentity20
 type GetCloudFrontOriginAccessIdentityRequest struct {
 	*aws.Request
 	Input *GetCloudFrontOriginAccessIdentityInput
+	Copy  func(*GetCloudFrontOriginAccessIdentityInput) GetCloudFrontOriginAccessIdentityRequest
 }
 
 // Send marshals and sends the GetCloudFrontOriginAccessIdentity API request.
@@ -622,7 +633,7 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityRequest(input *GetCloudFro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
+	return GetCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.GetCloudFrontOriginAccessIdentityRequest}
 }
 
 const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIdentityConfig2017_03_25"
@@ -631,6 +642,7 @@ const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIden
 type GetCloudFrontOriginAccessIdentityConfigRequest struct {
 	*aws.Request
 	Input *GetCloudFrontOriginAccessIdentityConfigInput
+	Copy  func(*GetCloudFrontOriginAccessIdentityConfigInput) GetCloudFrontOriginAccessIdentityConfigRequest
 }
 
 // Send marshals and sends the GetCloudFrontOriginAccessIdentityConfig API request.
@@ -671,7 +683,7 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCloudFrontOriginAccessIdentityConfigRequest{Request: req, Input: input}
+	return GetCloudFrontOriginAccessIdentityConfigRequest{Request: req, Input: input, Copy: c.GetCloudFrontOriginAccessIdentityConfigRequest}
 }
 
 const opGetDistribution = "GetDistribution2017_03_25"
@@ -680,6 +692,7 @@ const opGetDistribution = "GetDistribution2017_03_25"
 type GetDistributionRequest struct {
 	*aws.Request
 	Input *GetDistributionInput
+	Copy  func(*GetDistributionInput) GetDistributionRequest
 }
 
 // Send marshals and sends the GetDistribution API request.
@@ -720,7 +733,7 @@ func (c *CloudFront) GetDistributionRequest(input *GetDistributionInput) GetDist
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDistributionRequest{Request: req, Input: input}
+	return GetDistributionRequest{Request: req, Input: input, Copy: c.GetDistributionRequest}
 }
 
 const opGetDistributionConfig = "GetDistributionConfig2017_03_25"
@@ -729,6 +742,7 @@ const opGetDistributionConfig = "GetDistributionConfig2017_03_25"
 type GetDistributionConfigRequest struct {
 	*aws.Request
 	Input *GetDistributionConfigInput
+	Copy  func(*GetDistributionConfigInput) GetDistributionConfigRequest
 }
 
 // Send marshals and sends the GetDistributionConfig API request.
@@ -769,7 +783,7 @@ func (c *CloudFront) GetDistributionConfigRequest(input *GetDistributionConfigIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDistributionConfigRequest{Request: req, Input: input}
+	return GetDistributionConfigRequest{Request: req, Input: input, Copy: c.GetDistributionConfigRequest}
 }
 
 const opGetInvalidation = "GetInvalidation2017_03_25"
@@ -778,6 +792,7 @@ const opGetInvalidation = "GetInvalidation2017_03_25"
 type GetInvalidationRequest struct {
 	*aws.Request
 	Input *GetInvalidationInput
+	Copy  func(*GetInvalidationInput) GetInvalidationRequest
 }
 
 // Send marshals and sends the GetInvalidation API request.
@@ -818,7 +833,7 @@ func (c *CloudFront) GetInvalidationRequest(input *GetInvalidationInput) GetInva
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInvalidationRequest{Request: req, Input: input}
+	return GetInvalidationRequest{Request: req, Input: input, Copy: c.GetInvalidationRequest}
 }
 
 const opGetStreamingDistribution = "GetStreamingDistribution2017_03_25"
@@ -827,6 +842,7 @@ const opGetStreamingDistribution = "GetStreamingDistribution2017_03_25"
 type GetStreamingDistributionRequest struct {
 	*aws.Request
 	Input *GetStreamingDistributionInput
+	Copy  func(*GetStreamingDistributionInput) GetStreamingDistributionRequest
 }
 
 // Send marshals and sends the GetStreamingDistribution API request.
@@ -868,7 +884,7 @@ func (c *CloudFront) GetStreamingDistributionRequest(input *GetStreamingDistribu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetStreamingDistributionRequest{Request: req, Input: input}
+	return GetStreamingDistributionRequest{Request: req, Input: input, Copy: c.GetStreamingDistributionRequest}
 }
 
 const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2017_03_25"
@@ -877,6 +893,7 @@ const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2017_03_
 type GetStreamingDistributionConfigRequest struct {
 	*aws.Request
 	Input *GetStreamingDistributionConfigInput
+	Copy  func(*GetStreamingDistributionConfigInput) GetStreamingDistributionConfigRequest
 }
 
 // Send marshals and sends the GetStreamingDistributionConfig API request.
@@ -917,7 +934,7 @@ func (c *CloudFront) GetStreamingDistributionConfigRequest(input *GetStreamingDi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetStreamingDistributionConfigRequest{Request: req, Input: input}
+	return GetStreamingDistributionConfigRequest{Request: req, Input: input, Copy: c.GetStreamingDistributionConfigRequest}
 }
 
 const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2017_03_25"
@@ -926,6 +943,7 @@ const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdenti
 type ListCloudFrontOriginAccessIdentitiesRequest struct {
 	*aws.Request
 	Input *ListCloudFrontOriginAccessIdentitiesInput
+	Copy  func(*ListCloudFrontOriginAccessIdentitiesInput) ListCloudFrontOriginAccessIdentitiesRequest
 }
 
 // Send marshals and sends the ListCloudFrontOriginAccessIdentities API request.
@@ -972,47 +990,47 @@ func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesRequest(input *ListClou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCloudFrontOriginAccessIdentitiesRequest{Request: req, Input: input}
+	return ListCloudFrontOriginAccessIdentitiesRequest{Request: req, Input: input, Copy: c.ListCloudFrontOriginAccessIdentitiesRequest}
 }
 
-// ListCloudFrontOriginAccessIdentitiesPages iterates over the pages of a ListCloudFrontOriginAccessIdentities operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListCloudFrontOriginAccessIdentities method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListCloudFrontOriginAccessIdentitiesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListCloudFrontOriginAccessIdentities operation.
-//    pageNum := 0
-//    err := client.ListCloudFrontOriginAccessIdentitiesPages(params,
-//        func(page *ListCloudFrontOriginAccessIdentitiesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListCloudFrontOriginAccessIdentitiesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListCloudFrontOriginAccessIdentitiesRequest) Paginate(opts ...aws.Option) ListCloudFrontOriginAccessIdentitiesPager {
 	return ListCloudFrontOriginAccessIdentitiesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListCloudFrontOriginAccessIdentitiesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListCloudFrontOriginAccessIdentitiesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListCloudFrontOriginAccessIdentitiesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListCloudFrontOriginAccessIdentitiesPager ...
+// ListCloudFrontOriginAccessIdentitiesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListCloudFrontOriginAccessIdentitiesPager struct {
 	aws.Pager
 }
@@ -1027,6 +1045,7 @@ const opListDistributions = "ListDistributions2017_03_25"
 type ListDistributionsRequest struct {
 	*aws.Request
 	Input *ListDistributionsInput
+	Copy  func(*ListDistributionsInput) ListDistributionsRequest
 }
 
 // Send marshals and sends the ListDistributions API request.
@@ -1073,47 +1092,47 @@ func (c *CloudFront) ListDistributionsRequest(input *ListDistributionsInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDistributionsRequest{Request: req, Input: input}
+	return ListDistributionsRequest{Request: req, Input: input, Copy: c.ListDistributionsRequest}
 }
 
-// ListDistributionsPages iterates over the pages of a ListDistributions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDistributions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDistributionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDistributions operation.
-//    pageNum := 0
-//    err := client.ListDistributionsPages(params,
-//        func(page *ListDistributionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDistributionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDistributionsRequest) Paginate(opts ...aws.Option) ListDistributionsPager {
 	return ListDistributionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDistributionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDistributionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDistributionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDistributionsPager ...
+// ListDistributionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDistributionsPager struct {
 	aws.Pager
 }
@@ -1128,6 +1147,7 @@ const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2017_03_25"
 type ListDistributionsByWebACLIdRequest struct {
 	*aws.Request
 	Input *ListDistributionsByWebACLIdInput
+	Copy  func(*ListDistributionsByWebACLIdInput) ListDistributionsByWebACLIdRequest
 }
 
 // Send marshals and sends the ListDistributionsByWebACLId API request.
@@ -1168,7 +1188,7 @@ func (c *CloudFront) ListDistributionsByWebACLIdRequest(input *ListDistributions
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDistributionsByWebACLIdRequest{Request: req, Input: input}
+	return ListDistributionsByWebACLIdRequest{Request: req, Input: input, Copy: c.ListDistributionsByWebACLIdRequest}
 }
 
 const opListInvalidations = "ListInvalidations2017_03_25"
@@ -1177,6 +1197,7 @@ const opListInvalidations = "ListInvalidations2017_03_25"
 type ListInvalidationsRequest struct {
 	*aws.Request
 	Input *ListInvalidationsInput
+	Copy  func(*ListInvalidationsInput) ListInvalidationsRequest
 }
 
 // Send marshals and sends the ListInvalidations API request.
@@ -1223,47 +1244,47 @@ func (c *CloudFront) ListInvalidationsRequest(input *ListInvalidationsInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListInvalidationsRequest{Request: req, Input: input}
+	return ListInvalidationsRequest{Request: req, Input: input, Copy: c.ListInvalidationsRequest}
 }
 
-// ListInvalidationsPages iterates over the pages of a ListInvalidations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListInvalidations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListInvalidationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListInvalidations operation.
-//    pageNum := 0
-//    err := client.ListInvalidationsPages(params,
-//        func(page *ListInvalidationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListInvalidationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListInvalidationsRequest) Paginate(opts ...aws.Option) ListInvalidationsPager {
 	return ListInvalidationsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListInvalidationsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListInvalidationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListInvalidationsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListInvalidationsPager ...
+// ListInvalidationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListInvalidationsPager struct {
 	aws.Pager
 }
@@ -1278,6 +1299,7 @@ const opListStreamingDistributions = "ListStreamingDistributions2017_03_25"
 type ListStreamingDistributionsRequest struct {
 	*aws.Request
 	Input *ListStreamingDistributionsInput
+	Copy  func(*ListStreamingDistributionsInput) ListStreamingDistributionsRequest
 }
 
 // Send marshals and sends the ListStreamingDistributions API request.
@@ -1324,47 +1346,47 @@ func (c *CloudFront) ListStreamingDistributionsRequest(input *ListStreamingDistr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStreamingDistributionsRequest{Request: req, Input: input}
+	return ListStreamingDistributionsRequest{Request: req, Input: input, Copy: c.ListStreamingDistributionsRequest}
 }
 
-// ListStreamingDistributionsPages iterates over the pages of a ListStreamingDistributions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListStreamingDistributions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListStreamingDistributionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListStreamingDistributions operation.
-//    pageNum := 0
-//    err := client.ListStreamingDistributionsPages(params,
-//        func(page *ListStreamingDistributionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListStreamingDistributionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListStreamingDistributionsRequest) Paginate(opts ...aws.Option) ListStreamingDistributionsPager {
 	return ListStreamingDistributionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListStreamingDistributionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListStreamingDistributionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListStreamingDistributionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListStreamingDistributionsPager ...
+// ListStreamingDistributionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListStreamingDistributionsPager struct {
 	aws.Pager
 }
@@ -1379,6 +1401,7 @@ const opListTagsForResource = "ListTagsForResource2017_03_25"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -1419,7 +1442,7 @@ func (c *CloudFront) ListTagsForResourceRequest(input *ListTagsForResourceInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opTagResource = "TagResource2017_03_25"
@@ -1428,6 +1451,7 @@ const opTagResource = "TagResource2017_03_25"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -1470,7 +1494,7 @@ func (c *CloudFront) TagResourceRequest(input *TagResourceInput) TagResourceRequ
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUntagResource = "UntagResource2017_03_25"
@@ -1479,6 +1503,7 @@ const opUntagResource = "UntagResource2017_03_25"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -1521,7 +1546,7 @@ func (c *CloudFront) UntagResourceRequest(input *UntagResourceInput) UntagResour
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateCloudFrontOriginAccessIdentity = "UpdateCloudFrontOriginAccessIdentity2017_03_25"
@@ -1530,6 +1555,7 @@ const opUpdateCloudFrontOriginAccessIdentity = "UpdateCloudFrontOriginAccessIden
 type UpdateCloudFrontOriginAccessIdentityRequest struct {
 	*aws.Request
 	Input *UpdateCloudFrontOriginAccessIdentityInput
+	Copy  func(*UpdateCloudFrontOriginAccessIdentityInput) UpdateCloudFrontOriginAccessIdentityRequest
 }
 
 // Send marshals and sends the UpdateCloudFrontOriginAccessIdentity API request.
@@ -1570,7 +1596,7 @@ func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input}
+	return UpdateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.UpdateCloudFrontOriginAccessIdentityRequest}
 }
 
 const opUpdateDistribution = "UpdateDistribution2017_03_25"
@@ -1579,6 +1605,7 @@ const opUpdateDistribution = "UpdateDistribution2017_03_25"
 type UpdateDistributionRequest struct {
 	*aws.Request
 	Input *UpdateDistributionInput
+	Copy  func(*UpdateDistributionInput) UpdateDistributionRequest
 }
 
 // Send marshals and sends the UpdateDistribution API request.
@@ -1668,7 +1695,7 @@ func (c *CloudFront) UpdateDistributionRequest(input *UpdateDistributionInput) U
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDistributionRequest{Request: req, Input: input}
+	return UpdateDistributionRequest{Request: req, Input: input, Copy: c.UpdateDistributionRequest}
 }
 
 const opUpdateStreamingDistribution = "UpdateStreamingDistribution2017_03_25"
@@ -1677,6 +1704,7 @@ const opUpdateStreamingDistribution = "UpdateStreamingDistribution2017_03_25"
 type UpdateStreamingDistributionRequest struct {
 	*aws.Request
 	Input *UpdateStreamingDistributionInput
+	Copy  func(*UpdateStreamingDistributionInput) UpdateStreamingDistributionRequest
 }
 
 // Send marshals and sends the UpdateStreamingDistribution API request.
@@ -1717,7 +1745,7 @@ func (c *CloudFront) UpdateStreamingDistributionRequest(input *UpdateStreamingDi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateStreamingDistributionRequest{Request: req, Input: input}
+	return UpdateStreamingDistributionRequest{Request: req, Input: input, Copy: c.UpdateStreamingDistributionRequest}
 }
 
 // A complex type that lists the AWS accounts, if any, that you included in

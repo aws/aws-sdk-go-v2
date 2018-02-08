@@ -18,6 +18,7 @@ const opAddRoleToDBCluster = "AddRoleToDBCluster"
 type AddRoleToDBClusterRequest struct {
 	*aws.Request
 	Input *AddRoleToDBClusterInput
+	Copy  func(*AddRoleToDBClusterInput) AddRoleToDBClusterRequest
 }
 
 // Send marshals and sends the AddRoleToDBCluster API request.
@@ -62,7 +63,7 @@ func (c *RDS) AddRoleToDBClusterRequest(input *AddRoleToDBClusterInput) AddRoleT
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddRoleToDBClusterRequest{Request: req, Input: input}
+	return AddRoleToDBClusterRequest{Request: req, Input: input, Copy: c.AddRoleToDBClusterRequest}
 }
 
 const opAddSourceIdentifierToSubscription = "AddSourceIdentifierToSubscription"
@@ -71,6 +72,7 @@ const opAddSourceIdentifierToSubscription = "AddSourceIdentifierToSubscription"
 type AddSourceIdentifierToSubscriptionRequest struct {
 	*aws.Request
 	Input *AddSourceIdentifierToSubscriptionInput
+	Copy  func(*AddSourceIdentifierToSubscriptionInput) AddSourceIdentifierToSubscriptionRequest
 }
 
 // Send marshals and sends the AddSourceIdentifierToSubscription API request.
@@ -111,7 +113,7 @@ func (c *RDS) AddSourceIdentifierToSubscriptionRequest(input *AddSourceIdentifie
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddSourceIdentifierToSubscriptionRequest{Request: req, Input: input}
+	return AddSourceIdentifierToSubscriptionRequest{Request: req, Input: input, Copy: c.AddSourceIdentifierToSubscriptionRequest}
 }
 
 const opAddTagsToResource = "AddTagsToResource"
@@ -120,6 +122,7 @@ const opAddTagsToResource = "AddTagsToResource"
 type AddTagsToResourceRequest struct {
 	*aws.Request
 	Input *AddTagsToResourceInput
+	Copy  func(*AddTagsToResourceInput) AddTagsToResourceRequest
 }
 
 // Send marshals and sends the AddTagsToResource API request.
@@ -167,7 +170,7 @@ func (c *RDS) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToResourceRequest{Request: req, Input: input}
+	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 
 const opApplyPendingMaintenanceAction = "ApplyPendingMaintenanceAction"
@@ -176,6 +179,7 @@ const opApplyPendingMaintenanceAction = "ApplyPendingMaintenanceAction"
 type ApplyPendingMaintenanceActionRequest struct {
 	*aws.Request
 	Input *ApplyPendingMaintenanceActionInput
+	Copy  func(*ApplyPendingMaintenanceActionInput) ApplyPendingMaintenanceActionRequest
 }
 
 // Send marshals and sends the ApplyPendingMaintenanceAction API request.
@@ -217,7 +221,7 @@ func (c *RDS) ApplyPendingMaintenanceActionRequest(input *ApplyPendingMaintenanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ApplyPendingMaintenanceActionRequest{Request: req, Input: input}
+	return ApplyPendingMaintenanceActionRequest{Request: req, Input: input, Copy: c.ApplyPendingMaintenanceActionRequest}
 }
 
 const opAuthorizeDBSecurityGroupIngress = "AuthorizeDBSecurityGroupIngress"
@@ -226,6 +230,7 @@ const opAuthorizeDBSecurityGroupIngress = "AuthorizeDBSecurityGroupIngress"
 type AuthorizeDBSecurityGroupIngressRequest struct {
 	*aws.Request
 	Input *AuthorizeDBSecurityGroupIngressInput
+	Copy  func(*AuthorizeDBSecurityGroupIngressInput) AuthorizeDBSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the AuthorizeDBSecurityGroupIngress API request.
@@ -278,7 +283,7 @@ func (c *RDS) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecurityG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AuthorizeDBSecurityGroupIngressRequest{Request: req, Input: input}
+	return AuthorizeDBSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeDBSecurityGroupIngressRequest}
 }
 
 const opCopyDBClusterParameterGroup = "CopyDBClusterParameterGroup"
@@ -287,6 +292,7 @@ const opCopyDBClusterParameterGroup = "CopyDBClusterParameterGroup"
 type CopyDBClusterParameterGroupRequest struct {
 	*aws.Request
 	Input *CopyDBClusterParameterGroupInput
+	Copy  func(*CopyDBClusterParameterGroupInput) CopyDBClusterParameterGroupRequest
 }
 
 // Send marshals and sends the CopyDBClusterParameterGroup API request.
@@ -327,7 +333,7 @@ func (c *RDS) CopyDBClusterParameterGroupRequest(input *CopyDBClusterParameterGr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopyDBClusterParameterGroupRequest{Request: req, Input: input}
+	return CopyDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.CopyDBClusterParameterGroupRequest}
 }
 
 const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
@@ -336,6 +342,7 @@ const opCopyDBClusterSnapshot = "CopyDBClusterSnapshot"
 type CopyDBClusterSnapshotRequest struct {
 	*aws.Request
 	Input *CopyDBClusterSnapshotInput
+	Copy  func(*CopyDBClusterSnapshotInput) CopyDBClusterSnapshotRequest
 }
 
 // Send marshals and sends the CopyDBClusterSnapshot API request.
@@ -438,7 +445,7 @@ func (c *RDS) CopyDBClusterSnapshotRequest(input *CopyDBClusterSnapshotInput) Co
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopyDBClusterSnapshotRequest{Request: req, Input: input}
+	return CopyDBClusterSnapshotRequest{Request: req, Input: input, Copy: c.CopyDBClusterSnapshotRequest}
 }
 
 const opCopyDBParameterGroup = "CopyDBParameterGroup"
@@ -447,6 +454,7 @@ const opCopyDBParameterGroup = "CopyDBParameterGroup"
 type CopyDBParameterGroupRequest struct {
 	*aws.Request
 	Input *CopyDBParameterGroupInput
+	Copy  func(*CopyDBParameterGroupInput) CopyDBParameterGroupRequest
 }
 
 // Send marshals and sends the CopyDBParameterGroup API request.
@@ -487,7 +495,7 @@ func (c *RDS) CopyDBParameterGroupRequest(input *CopyDBParameterGroupInput) Copy
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopyDBParameterGroupRequest{Request: req, Input: input}
+	return CopyDBParameterGroupRequest{Request: req, Input: input, Copy: c.CopyDBParameterGroupRequest}
 }
 
 const opCopyDBSnapshot = "CopyDBSnapshot"
@@ -496,6 +504,7 @@ const opCopyDBSnapshot = "CopyDBSnapshot"
 type CopyDBSnapshotRequest struct {
 	*aws.Request
 	Input *CopyDBSnapshotInput
+	Copy  func(*CopyDBSnapshotInput) CopyDBSnapshotRequest
 }
 
 // Send marshals and sends the CopyDBSnapshot API request.
@@ -546,7 +555,7 @@ func (c *RDS) CopyDBSnapshotRequest(input *CopyDBSnapshotInput) CopyDBSnapshotRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopyDBSnapshotRequest{Request: req, Input: input}
+	return CopyDBSnapshotRequest{Request: req, Input: input, Copy: c.CopyDBSnapshotRequest}
 }
 
 const opCopyOptionGroup = "CopyOptionGroup"
@@ -555,6 +564,7 @@ const opCopyOptionGroup = "CopyOptionGroup"
 type CopyOptionGroupRequest struct {
 	*aws.Request
 	Input *CopyOptionGroupInput
+	Copy  func(*CopyOptionGroupInput) CopyOptionGroupRequest
 }
 
 // Send marshals and sends the CopyOptionGroup API request.
@@ -595,7 +605,7 @@ func (c *RDS) CopyOptionGroupRequest(input *CopyOptionGroupInput) CopyOptionGrou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopyOptionGroupRequest{Request: req, Input: input}
+	return CopyOptionGroupRequest{Request: req, Input: input, Copy: c.CopyOptionGroupRequest}
 }
 
 const opCreateDBCluster = "CreateDBCluster"
@@ -604,6 +614,7 @@ const opCreateDBCluster = "CreateDBCluster"
 type CreateDBClusterRequest struct {
 	*aws.Request
 	Input *CreateDBClusterInput
+	Copy  func(*CreateDBClusterInput) CreateDBClusterRequest
 }
 
 // Send marshals and sends the CreateDBCluster API request.
@@ -652,7 +663,7 @@ func (c *RDS) CreateDBClusterRequest(input *CreateDBClusterInput) CreateDBCluste
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDBClusterRequest{Request: req, Input: input}
+	return CreateDBClusterRequest{Request: req, Input: input, Copy: c.CreateDBClusterRequest}
 }
 
 const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
@@ -661,6 +672,7 @@ const opCreateDBClusterParameterGroup = "CreateDBClusterParameterGroup"
 type CreateDBClusterParameterGroupRequest struct {
 	*aws.Request
 	Input *CreateDBClusterParameterGroupInput
+	Copy  func(*CreateDBClusterParameterGroupInput) CreateDBClusterParameterGroupRequest
 }
 
 // Send marshals and sends the CreateDBClusterParameterGroup API request.
@@ -728,7 +740,7 @@ func (c *RDS) CreateDBClusterParameterGroupRequest(input *CreateDBClusterParamet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDBClusterParameterGroupRequest{Request: req, Input: input}
+	return CreateDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.CreateDBClusterParameterGroupRequest}
 }
 
 const opCreateDBClusterSnapshot = "CreateDBClusterSnapshot"
@@ -737,6 +749,7 @@ const opCreateDBClusterSnapshot = "CreateDBClusterSnapshot"
 type CreateDBClusterSnapshotRequest struct {
 	*aws.Request
 	Input *CreateDBClusterSnapshotInput
+	Copy  func(*CreateDBClusterSnapshotInput) CreateDBClusterSnapshotRequest
 }
 
 // Send marshals and sends the CreateDBClusterSnapshot API request.
@@ -779,7 +792,7 @@ func (c *RDS) CreateDBClusterSnapshotRequest(input *CreateDBClusterSnapshotInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDBClusterSnapshotRequest{Request: req, Input: input}
+	return CreateDBClusterSnapshotRequest{Request: req, Input: input, Copy: c.CreateDBClusterSnapshotRequest}
 }
 
 const opCreateDBInstance = "CreateDBInstance"
@@ -788,6 +801,7 @@ const opCreateDBInstance = "CreateDBInstance"
 type CreateDBInstanceRequest struct {
 	*aws.Request
 	Input *CreateDBInstanceInput
+	Copy  func(*CreateDBInstanceInput) CreateDBInstanceRequest
 }
 
 // Send marshals and sends the CreateDBInstance API request.
@@ -828,7 +842,7 @@ func (c *RDS) CreateDBInstanceRequest(input *CreateDBInstanceInput) CreateDBInst
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDBInstanceRequest{Request: req, Input: input}
+	return CreateDBInstanceRequest{Request: req, Input: input, Copy: c.CreateDBInstanceRequest}
 }
 
 const opCreateDBInstanceReadReplica = "CreateDBInstanceReadReplica"
@@ -837,6 +851,7 @@ const opCreateDBInstanceReadReplica = "CreateDBInstanceReadReplica"
 type CreateDBInstanceReadReplicaRequest struct {
 	*aws.Request
 	Input *CreateDBInstanceReadReplicaInput
+	Copy  func(*CreateDBInstanceReadReplicaInput) CreateDBInstanceReadReplicaRequest
 }
 
 // Send marshals and sends the CreateDBInstanceReadReplica API request.
@@ -889,7 +904,7 @@ func (c *RDS) CreateDBInstanceReadReplicaRequest(input *CreateDBInstanceReadRepl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDBInstanceReadReplicaRequest{Request: req, Input: input}
+	return CreateDBInstanceReadReplicaRequest{Request: req, Input: input, Copy: c.CreateDBInstanceReadReplicaRequest}
 }
 
 const opCreateDBParameterGroup = "CreateDBParameterGroup"
@@ -898,6 +913,7 @@ const opCreateDBParameterGroup = "CreateDBParameterGroup"
 type CreateDBParameterGroupRequest struct {
 	*aws.Request
 	Input *CreateDBParameterGroupInput
+	Copy  func(*CreateDBParameterGroupInput) CreateDBParameterGroupRequest
 }
 
 // Send marshals and sends the CreateDBParameterGroup API request.
@@ -958,7 +974,7 @@ func (c *RDS) CreateDBParameterGroupRequest(input *CreateDBParameterGroupInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDBParameterGroupRequest{Request: req, Input: input}
+	return CreateDBParameterGroupRequest{Request: req, Input: input, Copy: c.CreateDBParameterGroupRequest}
 }
 
 const opCreateDBSecurityGroup = "CreateDBSecurityGroup"
@@ -967,6 +983,7 @@ const opCreateDBSecurityGroup = "CreateDBSecurityGroup"
 type CreateDBSecurityGroupRequest struct {
 	*aws.Request
 	Input *CreateDBSecurityGroupInput
+	Copy  func(*CreateDBSecurityGroupInput) CreateDBSecurityGroupRequest
 }
 
 // Send marshals and sends the CreateDBSecurityGroup API request.
@@ -1008,7 +1025,7 @@ func (c *RDS) CreateDBSecurityGroupRequest(input *CreateDBSecurityGroupInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDBSecurityGroupRequest{Request: req, Input: input}
+	return CreateDBSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateDBSecurityGroupRequest}
 }
 
 const opCreateDBSnapshot = "CreateDBSnapshot"
@@ -1017,6 +1034,7 @@ const opCreateDBSnapshot = "CreateDBSnapshot"
 type CreateDBSnapshotRequest struct {
 	*aws.Request
 	Input *CreateDBSnapshotInput
+	Copy  func(*CreateDBSnapshotInput) CreateDBSnapshotRequest
 }
 
 // Send marshals and sends the CreateDBSnapshot API request.
@@ -1057,7 +1075,7 @@ func (c *RDS) CreateDBSnapshotRequest(input *CreateDBSnapshotInput) CreateDBSnap
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDBSnapshotRequest{Request: req, Input: input}
+	return CreateDBSnapshotRequest{Request: req, Input: input, Copy: c.CreateDBSnapshotRequest}
 }
 
 const opCreateDBSubnetGroup = "CreateDBSubnetGroup"
@@ -1066,6 +1084,7 @@ const opCreateDBSubnetGroup = "CreateDBSubnetGroup"
 type CreateDBSubnetGroupRequest struct {
 	*aws.Request
 	Input *CreateDBSubnetGroupInput
+	Copy  func(*CreateDBSubnetGroupInput) CreateDBSubnetGroupRequest
 }
 
 // Send marshals and sends the CreateDBSubnetGroup API request.
@@ -1107,7 +1126,7 @@ func (c *RDS) CreateDBSubnetGroupRequest(input *CreateDBSubnetGroupInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDBSubnetGroupRequest{Request: req, Input: input}
+	return CreateDBSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateDBSubnetGroupRequest}
 }
 
 const opCreateEventSubscription = "CreateEventSubscription"
@@ -1116,6 +1135,7 @@ const opCreateEventSubscription = "CreateEventSubscription"
 type CreateEventSubscriptionRequest struct {
 	*aws.Request
 	Input *CreateEventSubscriptionInput
+	Copy  func(*CreateEventSubscriptionInput) CreateEventSubscriptionRequest
 }
 
 // Send marshals and sends the CreateEventSubscription API request.
@@ -1173,7 +1193,7 @@ func (c *RDS) CreateEventSubscriptionRequest(input *CreateEventSubscriptionInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEventSubscriptionRequest{Request: req, Input: input}
+	return CreateEventSubscriptionRequest{Request: req, Input: input, Copy: c.CreateEventSubscriptionRequest}
 }
 
 const opCreateOptionGroup = "CreateOptionGroup"
@@ -1182,6 +1202,7 @@ const opCreateOptionGroup = "CreateOptionGroup"
 type CreateOptionGroupRequest struct {
 	*aws.Request
 	Input *CreateOptionGroupInput
+	Copy  func(*CreateOptionGroupInput) CreateOptionGroupRequest
 }
 
 // Send marshals and sends the CreateOptionGroup API request.
@@ -1222,7 +1243,7 @@ func (c *RDS) CreateOptionGroupRequest(input *CreateOptionGroupInput) CreateOpti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateOptionGroupRequest{Request: req, Input: input}
+	return CreateOptionGroupRequest{Request: req, Input: input, Copy: c.CreateOptionGroupRequest}
 }
 
 const opDeleteDBCluster = "DeleteDBCluster"
@@ -1231,6 +1252,7 @@ const opDeleteDBCluster = "DeleteDBCluster"
 type DeleteDBClusterRequest struct {
 	*aws.Request
 	Input *DeleteDBClusterInput
+	Copy  func(*DeleteDBClusterInput) DeleteDBClusterRequest
 }
 
 // Send marshals and sends the DeleteDBCluster API request.
@@ -1276,7 +1298,7 @@ func (c *RDS) DeleteDBClusterRequest(input *DeleteDBClusterInput) DeleteDBCluste
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDBClusterRequest{Request: req, Input: input}
+	return DeleteDBClusterRequest{Request: req, Input: input, Copy: c.DeleteDBClusterRequest}
 }
 
 const opDeleteDBClusterParameterGroup = "DeleteDBClusterParameterGroup"
@@ -1285,6 +1307,7 @@ const opDeleteDBClusterParameterGroup = "DeleteDBClusterParameterGroup"
 type DeleteDBClusterParameterGroupRequest struct {
 	*aws.Request
 	Input *DeleteDBClusterParameterGroupInput
+	Copy  func(*DeleteDBClusterParameterGroupInput) DeleteDBClusterParameterGroupRequest
 }
 
 // Send marshals and sends the DeleteDBClusterParameterGroup API request.
@@ -1331,7 +1354,7 @@ func (c *RDS) DeleteDBClusterParameterGroupRequest(input *DeleteDBClusterParamet
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDBClusterParameterGroupRequest{Request: req, Input: input}
+	return DeleteDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteDBClusterParameterGroupRequest}
 }
 
 const opDeleteDBClusterSnapshot = "DeleteDBClusterSnapshot"
@@ -1340,6 +1363,7 @@ const opDeleteDBClusterSnapshot = "DeleteDBClusterSnapshot"
 type DeleteDBClusterSnapshotRequest struct {
 	*aws.Request
 	Input *DeleteDBClusterSnapshotInput
+	Copy  func(*DeleteDBClusterSnapshotInput) DeleteDBClusterSnapshotRequest
 }
 
 // Send marshals and sends the DeleteDBClusterSnapshot API request.
@@ -1386,7 +1410,7 @@ func (c *RDS) DeleteDBClusterSnapshotRequest(input *DeleteDBClusterSnapshotInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDBClusterSnapshotRequest{Request: req, Input: input}
+	return DeleteDBClusterSnapshotRequest{Request: req, Input: input, Copy: c.DeleteDBClusterSnapshotRequest}
 }
 
 const opDeleteDBInstance = "DeleteDBInstance"
@@ -1395,6 +1419,7 @@ const opDeleteDBInstance = "DeleteDBInstance"
 type DeleteDBInstanceRequest struct {
 	*aws.Request
 	Input *DeleteDBInstanceInput
+	Copy  func(*DeleteDBInstanceInput) DeleteDBInstanceRequest
 }
 
 // Send marshals and sends the DeleteDBInstance API request.
@@ -1459,7 +1484,7 @@ func (c *RDS) DeleteDBInstanceRequest(input *DeleteDBInstanceInput) DeleteDBInst
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDBInstanceRequest{Request: req, Input: input}
+	return DeleteDBInstanceRequest{Request: req, Input: input, Copy: c.DeleteDBInstanceRequest}
 }
 
 const opDeleteDBParameterGroup = "DeleteDBParameterGroup"
@@ -1468,6 +1493,7 @@ const opDeleteDBParameterGroup = "DeleteDBParameterGroup"
 type DeleteDBParameterGroupRequest struct {
 	*aws.Request
 	Input *DeleteDBParameterGroupInput
+	Copy  func(*DeleteDBParameterGroupInput) DeleteDBParameterGroupRequest
 }
 
 // Send marshals and sends the DeleteDBParameterGroup API request.
@@ -1511,7 +1537,7 @@ func (c *RDS) DeleteDBParameterGroupRequest(input *DeleteDBParameterGroupInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDBParameterGroupRequest{Request: req, Input: input}
+	return DeleteDBParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteDBParameterGroupRequest}
 }
 
 const opDeleteDBSecurityGroup = "DeleteDBSecurityGroup"
@@ -1520,6 +1546,7 @@ const opDeleteDBSecurityGroup = "DeleteDBSecurityGroup"
 type DeleteDBSecurityGroupRequest struct {
 	*aws.Request
 	Input *DeleteDBSecurityGroupInput
+	Copy  func(*DeleteDBSecurityGroupInput) DeleteDBSecurityGroupRequest
 }
 
 // Send marshals and sends the DeleteDBSecurityGroup API request.
@@ -1564,7 +1591,7 @@ func (c *RDS) DeleteDBSecurityGroupRequest(input *DeleteDBSecurityGroupInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDBSecurityGroupRequest{Request: req, Input: input}
+	return DeleteDBSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteDBSecurityGroupRequest}
 }
 
 const opDeleteDBSnapshot = "DeleteDBSnapshot"
@@ -1573,6 +1600,7 @@ const opDeleteDBSnapshot = "DeleteDBSnapshot"
 type DeleteDBSnapshotRequest struct {
 	*aws.Request
 	Input *DeleteDBSnapshotInput
+	Copy  func(*DeleteDBSnapshotInput) DeleteDBSnapshotRequest
 }
 
 // Send marshals and sends the DeleteDBSnapshot API request.
@@ -1616,7 +1644,7 @@ func (c *RDS) DeleteDBSnapshotRequest(input *DeleteDBSnapshotInput) DeleteDBSnap
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDBSnapshotRequest{Request: req, Input: input}
+	return DeleteDBSnapshotRequest{Request: req, Input: input, Copy: c.DeleteDBSnapshotRequest}
 }
 
 const opDeleteDBSubnetGroup = "DeleteDBSubnetGroup"
@@ -1625,6 +1653,7 @@ const opDeleteDBSubnetGroup = "DeleteDBSubnetGroup"
 type DeleteDBSubnetGroupRequest struct {
 	*aws.Request
 	Input *DeleteDBSubnetGroupInput
+	Copy  func(*DeleteDBSubnetGroupInput) DeleteDBSubnetGroupRequest
 }
 
 // Send marshals and sends the DeleteDBSubnetGroup API request.
@@ -1669,7 +1698,7 @@ func (c *RDS) DeleteDBSubnetGroupRequest(input *DeleteDBSubnetGroupInput) Delete
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDBSubnetGroupRequest{Request: req, Input: input}
+	return DeleteDBSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteDBSubnetGroupRequest}
 }
 
 const opDeleteEventSubscription = "DeleteEventSubscription"
@@ -1678,6 +1707,7 @@ const opDeleteEventSubscription = "DeleteEventSubscription"
 type DeleteEventSubscriptionRequest struct {
 	*aws.Request
 	Input *DeleteEventSubscriptionInput
+	Copy  func(*DeleteEventSubscriptionInput) DeleteEventSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteEventSubscription API request.
@@ -1718,7 +1748,7 @@ func (c *RDS) DeleteEventSubscriptionRequest(input *DeleteEventSubscriptionInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEventSubscriptionRequest{Request: req, Input: input}
+	return DeleteEventSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteEventSubscriptionRequest}
 }
 
 const opDeleteOptionGroup = "DeleteOptionGroup"
@@ -1727,6 +1757,7 @@ const opDeleteOptionGroup = "DeleteOptionGroup"
 type DeleteOptionGroupRequest struct {
 	*aws.Request
 	Input *DeleteOptionGroupInput
+	Copy  func(*DeleteOptionGroupInput) DeleteOptionGroupRequest
 }
 
 // Send marshals and sends the DeleteOptionGroup API request.
@@ -1769,7 +1800,7 @@ func (c *RDS) DeleteOptionGroupRequest(input *DeleteOptionGroupInput) DeleteOpti
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteOptionGroupRequest{Request: req, Input: input}
+	return DeleteOptionGroupRequest{Request: req, Input: input, Copy: c.DeleteOptionGroupRequest}
 }
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
@@ -1778,6 +1809,7 @@ const opDescribeAccountAttributes = "DescribeAccountAttributes"
 type DescribeAccountAttributesRequest struct {
 	*aws.Request
 	Input *DescribeAccountAttributesInput
+	Copy  func(*DescribeAccountAttributesInput) DescribeAccountAttributesRequest
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
@@ -1823,7 +1855,7 @@ func (c *RDS) DescribeAccountAttributesRequest(input *DescribeAccountAttributesI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAccountAttributesRequest{Request: req, Input: input}
+	return DescribeAccountAttributesRequest{Request: req, Input: input, Copy: c.DescribeAccountAttributesRequest}
 }
 
 const opDescribeCertificates = "DescribeCertificates"
@@ -1832,6 +1864,7 @@ const opDescribeCertificates = "DescribeCertificates"
 type DescribeCertificatesRequest struct {
 	*aws.Request
 	Input *DescribeCertificatesInput
+	Copy  func(*DescribeCertificatesInput) DescribeCertificatesRequest
 }
 
 // Send marshals and sends the DescribeCertificates API request.
@@ -1872,7 +1905,7 @@ func (c *RDS) DescribeCertificatesRequest(input *DescribeCertificatesInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCertificatesRequest{Request: req, Input: input}
+	return DescribeCertificatesRequest{Request: req, Input: input, Copy: c.DescribeCertificatesRequest}
 }
 
 const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
@@ -1881,6 +1914,7 @@ const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
 type DescribeDBClusterParameterGroupsRequest struct {
 	*aws.Request
 	Input *DescribeDBClusterParameterGroupsInput
+	Copy  func(*DescribeDBClusterParameterGroupsInput) DescribeDBClusterParameterGroupsRequest
 }
 
 // Send marshals and sends the DescribeDBClusterParameterGroups API request.
@@ -1926,7 +1960,7 @@ func (c *RDS) DescribeDBClusterParameterGroupsRequest(input *DescribeDBClusterPa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBClusterParameterGroupsRequest{Request: req, Input: input}
+	return DescribeDBClusterParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBClusterParameterGroupsRequest}
 }
 
 const opDescribeDBClusterParameters = "DescribeDBClusterParameters"
@@ -1935,6 +1969,7 @@ const opDescribeDBClusterParameters = "DescribeDBClusterParameters"
 type DescribeDBClusterParametersRequest struct {
 	*aws.Request
 	Input *DescribeDBClusterParametersInput
+	Copy  func(*DescribeDBClusterParametersInput) DescribeDBClusterParametersRequest
 }
 
 // Send marshals and sends the DescribeDBClusterParameters API request.
@@ -1979,7 +2014,7 @@ func (c *RDS) DescribeDBClusterParametersRequest(input *DescribeDBClusterParamet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBClusterParametersRequest{Request: req, Input: input}
+	return DescribeDBClusterParametersRequest{Request: req, Input: input, Copy: c.DescribeDBClusterParametersRequest}
 }
 
 const opDescribeDBClusterSnapshotAttributes = "DescribeDBClusterSnapshotAttributes"
@@ -1988,6 +2023,7 @@ const opDescribeDBClusterSnapshotAttributes = "DescribeDBClusterSnapshotAttribut
 type DescribeDBClusterSnapshotAttributesRequest struct {
 	*aws.Request
 	Input *DescribeDBClusterSnapshotAttributesInput
+	Copy  func(*DescribeDBClusterSnapshotAttributesInput) DescribeDBClusterSnapshotAttributesRequest
 }
 
 // Send marshals and sends the DescribeDBClusterSnapshotAttributes API request.
@@ -2039,7 +2075,7 @@ func (c *RDS) DescribeDBClusterSnapshotAttributesRequest(input *DescribeDBCluste
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBClusterSnapshotAttributesRequest{Request: req, Input: input}
+	return DescribeDBClusterSnapshotAttributesRequest{Request: req, Input: input, Copy: c.DescribeDBClusterSnapshotAttributesRequest}
 }
 
 const opDescribeDBClusterSnapshots = "DescribeDBClusterSnapshots"
@@ -2048,6 +2084,7 @@ const opDescribeDBClusterSnapshots = "DescribeDBClusterSnapshots"
 type DescribeDBClusterSnapshotsRequest struct {
 	*aws.Request
 	Input *DescribeDBClusterSnapshotsInput
+	Copy  func(*DescribeDBClusterSnapshotsInput) DescribeDBClusterSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeDBClusterSnapshots API request.
@@ -2092,7 +2129,7 @@ func (c *RDS) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnapshot
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBClusterSnapshotsRequest{Request: req, Input: input}
+	return DescribeDBClusterSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeDBClusterSnapshotsRequest}
 }
 
 const opDescribeDBClusters = "DescribeDBClusters"
@@ -2101,6 +2138,7 @@ const opDescribeDBClusters = "DescribeDBClusters"
 type DescribeDBClustersRequest struct {
 	*aws.Request
 	Input *DescribeDBClustersInput
+	Copy  func(*DescribeDBClustersInput) DescribeDBClustersRequest
 }
 
 // Send marshals and sends the DescribeDBClusters API request.
@@ -2145,7 +2183,7 @@ func (c *RDS) DescribeDBClustersRequest(input *DescribeDBClustersInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBClustersRequest{Request: req, Input: input}
+	return DescribeDBClustersRequest{Request: req, Input: input, Copy: c.DescribeDBClustersRequest}
 }
 
 const opDescribeDBEngineVersions = "DescribeDBEngineVersions"
@@ -2154,6 +2192,7 @@ const opDescribeDBEngineVersions = "DescribeDBEngineVersions"
 type DescribeDBEngineVersionsRequest struct {
 	*aws.Request
 	Input *DescribeDBEngineVersionsInput
+	Copy  func(*DescribeDBEngineVersionsInput) DescribeDBEngineVersionsRequest
 }
 
 // Send marshals and sends the DescribeDBEngineVersions API request.
@@ -2200,47 +2239,47 @@ func (c *RDS) DescribeDBEngineVersionsRequest(input *DescribeDBEngineVersionsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBEngineVersionsRequest{Request: req, Input: input}
+	return DescribeDBEngineVersionsRequest{Request: req, Input: input, Copy: c.DescribeDBEngineVersionsRequest}
 }
 
-// DescribeDBEngineVersionsPages iterates over the pages of a DescribeDBEngineVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDBEngineVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDBEngineVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDBEngineVersions operation.
-//    pageNum := 0
-//    err := client.DescribeDBEngineVersionsPages(params,
-//        func(page *DescribeDBEngineVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDBEngineVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeDBEngineVersionsRequest) Paginate(opts ...aws.Option) DescribeDBEngineVersionsPager {
 	return DescribeDBEngineVersionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDBEngineVersionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDBEngineVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeDBEngineVersionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeDBEngineVersionsPager ...
+// DescribeDBEngineVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeDBEngineVersionsPager struct {
 	aws.Pager
 }
@@ -2255,6 +2294,7 @@ const opDescribeDBInstances = "DescribeDBInstances"
 type DescribeDBInstancesRequest struct {
 	*aws.Request
 	Input *DescribeDBInstancesInput
+	Copy  func(*DescribeDBInstancesInput) DescribeDBInstancesRequest
 }
 
 // Send marshals and sends the DescribeDBInstances API request.
@@ -2301,47 +2341,47 @@ func (c *RDS) DescribeDBInstancesRequest(input *DescribeDBInstancesInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBInstancesRequest{Request: req, Input: input}
+	return DescribeDBInstancesRequest{Request: req, Input: input, Copy: c.DescribeDBInstancesRequest}
 }
 
-// DescribeDBInstancesPages iterates over the pages of a DescribeDBInstances operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDBInstances method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDBInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDBInstances operation.
-//    pageNum := 0
-//    err := client.DescribeDBInstancesPages(params,
-//        func(page *DescribeDBInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDBInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeDBInstancesRequest) Paginate(opts ...aws.Option) DescribeDBInstancesPager {
 	return DescribeDBInstancesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDBInstancesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDBInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeDBInstancesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeDBInstancesPager ...
+// DescribeDBInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeDBInstancesPager struct {
 	aws.Pager
 }
@@ -2356,6 +2396,7 @@ const opDescribeDBLogFiles = "DescribeDBLogFiles"
 type DescribeDBLogFilesRequest struct {
 	*aws.Request
 	Input *DescribeDBLogFilesInput
+	Copy  func(*DescribeDBLogFilesInput) DescribeDBLogFilesRequest
 }
 
 // Send marshals and sends the DescribeDBLogFiles API request.
@@ -2402,47 +2443,47 @@ func (c *RDS) DescribeDBLogFilesRequest(input *DescribeDBLogFilesInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBLogFilesRequest{Request: req, Input: input}
+	return DescribeDBLogFilesRequest{Request: req, Input: input, Copy: c.DescribeDBLogFilesRequest}
 }
 
-// DescribeDBLogFilesPages iterates over the pages of a DescribeDBLogFiles operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDBLogFiles method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDBLogFilesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDBLogFiles operation.
-//    pageNum := 0
-//    err := client.DescribeDBLogFilesPages(params,
-//        func(page *DescribeDBLogFilesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDBLogFilesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeDBLogFilesRequest) Paginate(opts ...aws.Option) DescribeDBLogFilesPager {
 	return DescribeDBLogFilesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDBLogFilesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDBLogFilesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeDBLogFilesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeDBLogFilesPager ...
+// DescribeDBLogFilesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeDBLogFilesPager struct {
 	aws.Pager
 }
@@ -2457,6 +2498,7 @@ const opDescribeDBParameterGroups = "DescribeDBParameterGroups"
 type DescribeDBParameterGroupsRequest struct {
 	*aws.Request
 	Input *DescribeDBParameterGroupsInput
+	Copy  func(*DescribeDBParameterGroupsInput) DescribeDBParameterGroupsRequest
 }
 
 // Send marshals and sends the DescribeDBParameterGroups API request.
@@ -2505,47 +2547,47 @@ func (c *RDS) DescribeDBParameterGroupsRequest(input *DescribeDBParameterGroupsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBParameterGroupsRequest{Request: req, Input: input}
+	return DescribeDBParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBParameterGroupsRequest}
 }
 
-// DescribeDBParameterGroupsPages iterates over the pages of a DescribeDBParameterGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDBParameterGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDBParameterGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDBParameterGroups operation.
-//    pageNum := 0
-//    err := client.DescribeDBParameterGroupsPages(params,
-//        func(page *DescribeDBParameterGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDBParameterGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeDBParameterGroupsRequest) Paginate(opts ...aws.Option) DescribeDBParameterGroupsPager {
 	return DescribeDBParameterGroupsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDBParameterGroupsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDBParameterGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeDBParameterGroupsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeDBParameterGroupsPager ...
+// DescribeDBParameterGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeDBParameterGroupsPager struct {
 	aws.Pager
 }
@@ -2560,6 +2602,7 @@ const opDescribeDBParameters = "DescribeDBParameters"
 type DescribeDBParametersRequest struct {
 	*aws.Request
 	Input *DescribeDBParametersInput
+	Copy  func(*DescribeDBParametersInput) DescribeDBParametersRequest
 }
 
 // Send marshals and sends the DescribeDBParameters API request.
@@ -2606,47 +2649,47 @@ func (c *RDS) DescribeDBParametersRequest(input *DescribeDBParametersInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBParametersRequest{Request: req, Input: input}
+	return DescribeDBParametersRequest{Request: req, Input: input, Copy: c.DescribeDBParametersRequest}
 }
 
-// DescribeDBParametersPages iterates over the pages of a DescribeDBParameters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDBParameters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDBParametersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDBParameters operation.
-//    pageNum := 0
-//    err := client.DescribeDBParametersPages(params,
-//        func(page *DescribeDBParametersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDBParametersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeDBParametersRequest) Paginate(opts ...aws.Option) DescribeDBParametersPager {
 	return DescribeDBParametersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDBParametersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDBParametersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeDBParametersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeDBParametersPager ...
+// DescribeDBParametersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeDBParametersPager struct {
 	aws.Pager
 }
@@ -2661,6 +2704,7 @@ const opDescribeDBSecurityGroups = "DescribeDBSecurityGroups"
 type DescribeDBSecurityGroupsRequest struct {
 	*aws.Request
 	Input *DescribeDBSecurityGroupsInput
+	Copy  func(*DescribeDBSecurityGroupsInput) DescribeDBSecurityGroupsRequest
 }
 
 // Send marshals and sends the DescribeDBSecurityGroups API request.
@@ -2709,47 +2753,47 @@ func (c *RDS) DescribeDBSecurityGroupsRequest(input *DescribeDBSecurityGroupsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBSecurityGroupsRequest{Request: req, Input: input}
+	return DescribeDBSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBSecurityGroupsRequest}
 }
 
-// DescribeDBSecurityGroupsPages iterates over the pages of a DescribeDBSecurityGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDBSecurityGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDBSecurityGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDBSecurityGroups operation.
-//    pageNum := 0
-//    err := client.DescribeDBSecurityGroupsPages(params,
-//        func(page *DescribeDBSecurityGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDBSecurityGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeDBSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeDBSecurityGroupsPager {
 	return DescribeDBSecurityGroupsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDBSecurityGroupsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDBSecurityGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeDBSecurityGroupsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeDBSecurityGroupsPager ...
+// DescribeDBSecurityGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeDBSecurityGroupsPager struct {
 	aws.Pager
 }
@@ -2764,6 +2808,7 @@ const opDescribeDBSnapshotAttributes = "DescribeDBSnapshotAttributes"
 type DescribeDBSnapshotAttributesRequest struct {
 	*aws.Request
 	Input *DescribeDBSnapshotAttributesInput
+	Copy  func(*DescribeDBSnapshotAttributesInput) DescribeDBSnapshotAttributesRequest
 }
 
 // Send marshals and sends the DescribeDBSnapshotAttributes API request.
@@ -2815,7 +2860,7 @@ func (c *RDS) DescribeDBSnapshotAttributesRequest(input *DescribeDBSnapshotAttri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBSnapshotAttributesRequest{Request: req, Input: input}
+	return DescribeDBSnapshotAttributesRequest{Request: req, Input: input, Copy: c.DescribeDBSnapshotAttributesRequest}
 }
 
 const opDescribeDBSnapshots = "DescribeDBSnapshots"
@@ -2824,6 +2869,7 @@ const opDescribeDBSnapshots = "DescribeDBSnapshots"
 type DescribeDBSnapshotsRequest struct {
 	*aws.Request
 	Input *DescribeDBSnapshotsInput
+	Copy  func(*DescribeDBSnapshotsInput) DescribeDBSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeDBSnapshots API request.
@@ -2870,47 +2916,47 @@ func (c *RDS) DescribeDBSnapshotsRequest(input *DescribeDBSnapshotsInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBSnapshotsRequest{Request: req, Input: input}
+	return DescribeDBSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeDBSnapshotsRequest}
 }
 
-// DescribeDBSnapshotsPages iterates over the pages of a DescribeDBSnapshots operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDBSnapshots method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDBSnapshotsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDBSnapshots operation.
-//    pageNum := 0
-//    err := client.DescribeDBSnapshotsPages(params,
-//        func(page *DescribeDBSnapshotsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDBSnapshotsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeDBSnapshotsRequest) Paginate(opts ...aws.Option) DescribeDBSnapshotsPager {
 	return DescribeDBSnapshotsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDBSnapshotsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDBSnapshotsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeDBSnapshotsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeDBSnapshotsPager ...
+// DescribeDBSnapshotsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeDBSnapshotsPager struct {
 	aws.Pager
 }
@@ -2925,6 +2971,7 @@ const opDescribeDBSubnetGroups = "DescribeDBSubnetGroups"
 type DescribeDBSubnetGroupsRequest struct {
 	*aws.Request
 	Input *DescribeDBSubnetGroupsInput
+	Copy  func(*DescribeDBSubnetGroupsInput) DescribeDBSubnetGroupsRequest
 }
 
 // Send marshals and sends the DescribeDBSubnetGroups API request.
@@ -2974,47 +3021,47 @@ func (c *RDS) DescribeDBSubnetGroupsRequest(input *DescribeDBSubnetGroupsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDBSubnetGroupsRequest{Request: req, Input: input}
+	return DescribeDBSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeDBSubnetGroupsRequest}
 }
 
-// DescribeDBSubnetGroupsPages iterates over the pages of a DescribeDBSubnetGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDBSubnetGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDBSubnetGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDBSubnetGroups operation.
-//    pageNum := 0
-//    err := client.DescribeDBSubnetGroupsPages(params,
-//        func(page *DescribeDBSubnetGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDBSubnetGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeDBSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeDBSubnetGroupsPager {
 	return DescribeDBSubnetGroupsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDBSubnetGroupsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDBSubnetGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeDBSubnetGroupsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeDBSubnetGroupsPager ...
+// DescribeDBSubnetGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeDBSubnetGroupsPager struct {
 	aws.Pager
 }
@@ -3029,6 +3076,7 @@ const opDescribeEngineDefaultClusterParameters = "DescribeEngineDefaultClusterPa
 type DescribeEngineDefaultClusterParametersRequest struct {
 	*aws.Request
 	Input *DescribeEngineDefaultClusterParametersInput
+	Copy  func(*DescribeEngineDefaultClusterParametersInput) DescribeEngineDefaultClusterParametersRequest
 }
 
 // Send marshals and sends the DescribeEngineDefaultClusterParameters API request.
@@ -3073,7 +3121,7 @@ func (c *RDS) DescribeEngineDefaultClusterParametersRequest(input *DescribeEngin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEngineDefaultClusterParametersRequest{Request: req, Input: input}
+	return DescribeEngineDefaultClusterParametersRequest{Request: req, Input: input, Copy: c.DescribeEngineDefaultClusterParametersRequest}
 }
 
 const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
@@ -3082,6 +3130,7 @@ const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
 type DescribeEngineDefaultParametersRequest struct {
 	*aws.Request
 	Input *DescribeEngineDefaultParametersInput
+	Copy  func(*DescribeEngineDefaultParametersInput) DescribeEngineDefaultParametersRequest
 }
 
 // Send marshals and sends the DescribeEngineDefaultParameters API request.
@@ -3129,47 +3178,47 @@ func (c *RDS) DescribeEngineDefaultParametersRequest(input *DescribeEngineDefaul
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEngineDefaultParametersRequest{Request: req, Input: input}
+	return DescribeEngineDefaultParametersRequest{Request: req, Input: input, Copy: c.DescribeEngineDefaultParametersRequest}
 }
 
-// DescribeEngineDefaultParametersPages iterates over the pages of a DescribeEngineDefaultParameters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEngineDefaultParameters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEngineDefaultParametersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEngineDefaultParameters operation.
-//    pageNum := 0
-//    err := client.DescribeEngineDefaultParametersPages(params,
-//        func(page *DescribeEngineDefaultParametersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEngineDefaultParametersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeEngineDefaultParametersRequest) Paginate(opts ...aws.Option) DescribeEngineDefaultParametersPager {
 	return DescribeEngineDefaultParametersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEngineDefaultParametersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEngineDefaultParametersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeEngineDefaultParametersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeEngineDefaultParametersPager ...
+// DescribeEngineDefaultParametersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeEngineDefaultParametersPager struct {
 	aws.Pager
 }
@@ -3184,6 +3233,7 @@ const opDescribeEventCategories = "DescribeEventCategories"
 type DescribeEventCategoriesRequest struct {
 	*aws.Request
 	Input *DescribeEventCategoriesInput
+	Copy  func(*DescribeEventCategoriesInput) DescribeEventCategoriesRequest
 }
 
 // Send marshals and sends the DescribeEventCategories API request.
@@ -3227,7 +3277,7 @@ func (c *RDS) DescribeEventCategoriesRequest(input *DescribeEventCategoriesInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventCategoriesRequest{Request: req, Input: input}
+	return DescribeEventCategoriesRequest{Request: req, Input: input, Copy: c.DescribeEventCategoriesRequest}
 }
 
 const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
@@ -3236,6 +3286,7 @@ const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 type DescribeEventSubscriptionsRequest struct {
 	*aws.Request
 	Input *DescribeEventSubscriptionsInput
+	Copy  func(*DescribeEventSubscriptionsInput) DescribeEventSubscriptionsRequest
 }
 
 // Send marshals and sends the DescribeEventSubscriptions API request.
@@ -3286,47 +3337,47 @@ func (c *RDS) DescribeEventSubscriptionsRequest(input *DescribeEventSubscription
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventSubscriptionsRequest{Request: req, Input: input}
+	return DescribeEventSubscriptionsRequest{Request: req, Input: input, Copy: c.DescribeEventSubscriptionsRequest}
 }
 
-// DescribeEventSubscriptionsPages iterates over the pages of a DescribeEventSubscriptions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEventSubscriptions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventSubscriptionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEventSubscriptions operation.
-//    pageNum := 0
-//    err := client.DescribeEventSubscriptionsPages(params,
-//        func(page *DescribeEventSubscriptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventSubscriptionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) DescribeEventSubscriptionsPager {
 	return DescribeEventSubscriptionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventSubscriptionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventSubscriptionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeEventSubscriptionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeEventSubscriptionsPager ...
+// DescribeEventSubscriptionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeEventSubscriptionsPager struct {
 	aws.Pager
 }
@@ -3341,6 +3392,7 @@ const opDescribeEvents = "DescribeEvents"
 type DescribeEventsRequest struct {
 	*aws.Request
 	Input *DescribeEventsInput
+	Copy  func(*DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -3391,47 +3443,47 @@ func (c *RDS) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventsRequest{Request: req, Input: input}
+	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
-// DescribeEventsPages iterates over the pages of a DescribeEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEvents operation.
-//    pageNum := 0
-//    err := client.DescribeEventsPages(params,
-//        func(page *DescribeEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeEventsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeEventsPager ...
+// DescribeEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeEventsPager struct {
 	aws.Pager
 }
@@ -3446,6 +3498,7 @@ const opDescribeOptionGroupOptions = "DescribeOptionGroupOptions"
 type DescribeOptionGroupOptionsRequest struct {
 	*aws.Request
 	Input *DescribeOptionGroupOptionsInput
+	Copy  func(*DescribeOptionGroupOptionsInput) DescribeOptionGroupOptionsRequest
 }
 
 // Send marshals and sends the DescribeOptionGroupOptions API request.
@@ -3492,47 +3545,47 @@ func (c *RDS) DescribeOptionGroupOptionsRequest(input *DescribeOptionGroupOption
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeOptionGroupOptionsRequest{Request: req, Input: input}
+	return DescribeOptionGroupOptionsRequest{Request: req, Input: input, Copy: c.DescribeOptionGroupOptionsRequest}
 }
 
-// DescribeOptionGroupOptionsPages iterates over the pages of a DescribeOptionGroupOptions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeOptionGroupOptions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeOptionGroupOptionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeOptionGroupOptions operation.
-//    pageNum := 0
-//    err := client.DescribeOptionGroupOptionsPages(params,
-//        func(page *DescribeOptionGroupOptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeOptionGroupOptionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeOptionGroupOptionsRequest) Paginate(opts ...aws.Option) DescribeOptionGroupOptionsPager {
 	return DescribeOptionGroupOptionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeOptionGroupOptionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeOptionGroupOptionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeOptionGroupOptionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeOptionGroupOptionsPager ...
+// DescribeOptionGroupOptionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeOptionGroupOptionsPager struct {
 	aws.Pager
 }
@@ -3547,6 +3600,7 @@ const opDescribeOptionGroups = "DescribeOptionGroups"
 type DescribeOptionGroupsRequest struct {
 	*aws.Request
 	Input *DescribeOptionGroupsInput
+	Copy  func(*DescribeOptionGroupsInput) DescribeOptionGroupsRequest
 }
 
 // Send marshals and sends the DescribeOptionGroups API request.
@@ -3593,47 +3647,47 @@ func (c *RDS) DescribeOptionGroupsRequest(input *DescribeOptionGroupsInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeOptionGroupsRequest{Request: req, Input: input}
+	return DescribeOptionGroupsRequest{Request: req, Input: input, Copy: c.DescribeOptionGroupsRequest}
 }
 
-// DescribeOptionGroupsPages iterates over the pages of a DescribeOptionGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeOptionGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeOptionGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeOptionGroups operation.
-//    pageNum := 0
-//    err := client.DescribeOptionGroupsPages(params,
-//        func(page *DescribeOptionGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeOptionGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeOptionGroupsRequest) Paginate(opts ...aws.Option) DescribeOptionGroupsPager {
 	return DescribeOptionGroupsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeOptionGroupsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeOptionGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeOptionGroupsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeOptionGroupsPager ...
+// DescribeOptionGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeOptionGroupsPager struct {
 	aws.Pager
 }
@@ -3648,6 +3702,7 @@ const opDescribeOrderableDBInstanceOptions = "DescribeOrderableDBInstanceOptions
 type DescribeOrderableDBInstanceOptionsRequest struct {
 	*aws.Request
 	Input *DescribeOrderableDBInstanceOptionsInput
+	Copy  func(*DescribeOrderableDBInstanceOptionsInput) DescribeOrderableDBInstanceOptionsRequest
 }
 
 // Send marshals and sends the DescribeOrderableDBInstanceOptions API request.
@@ -3694,47 +3749,47 @@ func (c *RDS) DescribeOrderableDBInstanceOptionsRequest(input *DescribeOrderable
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeOrderableDBInstanceOptionsRequest{Request: req, Input: input}
+	return DescribeOrderableDBInstanceOptionsRequest{Request: req, Input: input, Copy: c.DescribeOrderableDBInstanceOptionsRequest}
 }
 
-// DescribeOrderableDBInstanceOptionsPages iterates over the pages of a DescribeOrderableDBInstanceOptions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeOrderableDBInstanceOptions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeOrderableDBInstanceOptionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeOrderableDBInstanceOptions operation.
-//    pageNum := 0
-//    err := client.DescribeOrderableDBInstanceOptionsPages(params,
-//        func(page *DescribeOrderableDBInstanceOptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeOrderableDBInstanceOptionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeOrderableDBInstanceOptionsRequest) Paginate(opts ...aws.Option) DescribeOrderableDBInstanceOptionsPager {
 	return DescribeOrderableDBInstanceOptionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeOrderableDBInstanceOptionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeOrderableDBInstanceOptionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeOrderableDBInstanceOptionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeOrderableDBInstanceOptionsPager ...
+// DescribeOrderableDBInstanceOptionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeOrderableDBInstanceOptionsPager struct {
 	aws.Pager
 }
@@ -3749,6 +3804,7 @@ const opDescribePendingMaintenanceActions = "DescribePendingMaintenanceActions"
 type DescribePendingMaintenanceActionsRequest struct {
 	*aws.Request
 	Input *DescribePendingMaintenanceActionsInput
+	Copy  func(*DescribePendingMaintenanceActionsInput) DescribePendingMaintenanceActionsRequest
 }
 
 // Send marshals and sends the DescribePendingMaintenanceActions API request.
@@ -3790,7 +3846,7 @@ func (c *RDS) DescribePendingMaintenanceActionsRequest(input *DescribePendingMai
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePendingMaintenanceActionsRequest{Request: req, Input: input}
+	return DescribePendingMaintenanceActionsRequest{Request: req, Input: input, Copy: c.DescribePendingMaintenanceActionsRequest}
 }
 
 const opDescribeReservedDBInstances = "DescribeReservedDBInstances"
@@ -3799,6 +3855,7 @@ const opDescribeReservedDBInstances = "DescribeReservedDBInstances"
 type DescribeReservedDBInstancesRequest struct {
 	*aws.Request
 	Input *DescribeReservedDBInstancesInput
+	Copy  func(*DescribeReservedDBInstancesInput) DescribeReservedDBInstancesRequest
 }
 
 // Send marshals and sends the DescribeReservedDBInstances API request.
@@ -3846,47 +3903,47 @@ func (c *RDS) DescribeReservedDBInstancesRequest(input *DescribeReservedDBInstan
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReservedDBInstancesRequest{Request: req, Input: input}
+	return DescribeReservedDBInstancesRequest{Request: req, Input: input, Copy: c.DescribeReservedDBInstancesRequest}
 }
 
-// DescribeReservedDBInstancesPages iterates over the pages of a DescribeReservedDBInstances operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReservedDBInstances method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReservedDBInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReservedDBInstances operation.
-//    pageNum := 0
-//    err := client.DescribeReservedDBInstancesPages(params,
-//        func(page *DescribeReservedDBInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReservedDBInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeReservedDBInstancesRequest) Paginate(opts ...aws.Option) DescribeReservedDBInstancesPager {
 	return DescribeReservedDBInstancesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReservedDBInstancesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReservedDBInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeReservedDBInstancesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeReservedDBInstancesPager ...
+// DescribeReservedDBInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeReservedDBInstancesPager struct {
 	aws.Pager
 }
@@ -3901,6 +3958,7 @@ const opDescribeReservedDBInstancesOfferings = "DescribeReservedDBInstancesOffer
 type DescribeReservedDBInstancesOfferingsRequest struct {
 	*aws.Request
 	Input *DescribeReservedDBInstancesOfferingsInput
+	Copy  func(*DescribeReservedDBInstancesOfferingsInput) DescribeReservedDBInstancesOfferingsRequest
 }
 
 // Send marshals and sends the DescribeReservedDBInstancesOfferings API request.
@@ -3947,47 +4005,47 @@ func (c *RDS) DescribeReservedDBInstancesOfferingsRequest(input *DescribeReserve
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReservedDBInstancesOfferingsRequest{Request: req, Input: input}
+	return DescribeReservedDBInstancesOfferingsRequest{Request: req, Input: input, Copy: c.DescribeReservedDBInstancesOfferingsRequest}
 }
 
-// DescribeReservedDBInstancesOfferingsPages iterates over the pages of a DescribeReservedDBInstancesOfferings operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReservedDBInstancesOfferings method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReservedDBInstancesOfferingsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReservedDBInstancesOfferings operation.
-//    pageNum := 0
-//    err := client.DescribeReservedDBInstancesOfferingsPages(params,
-//        func(page *DescribeReservedDBInstancesOfferingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReservedDBInstancesOfferingsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeReservedDBInstancesOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedDBInstancesOfferingsPager {
 	return DescribeReservedDBInstancesOfferingsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReservedDBInstancesOfferingsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReservedDBInstancesOfferingsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeReservedDBInstancesOfferingsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeReservedDBInstancesOfferingsPager ...
+// DescribeReservedDBInstancesOfferingsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeReservedDBInstancesOfferingsPager struct {
 	aws.Pager
 }
@@ -4002,6 +4060,7 @@ const opDescribeSourceRegions = "DescribeSourceRegions"
 type DescribeSourceRegionsRequest struct {
 	*aws.Request
 	Input *DescribeSourceRegionsInput
+	Copy  func(*DescribeSourceRegionsInput) DescribeSourceRegionsRequest
 }
 
 // Send marshals and sends the DescribeSourceRegions API request.
@@ -4044,7 +4103,7 @@ func (c *RDS) DescribeSourceRegionsRequest(input *DescribeSourceRegionsInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSourceRegionsRequest{Request: req, Input: input}
+	return DescribeSourceRegionsRequest{Request: req, Input: input, Copy: c.DescribeSourceRegionsRequest}
 }
 
 const opDescribeValidDBInstanceModifications = "DescribeValidDBInstanceModifications"
@@ -4053,6 +4112,7 @@ const opDescribeValidDBInstanceModifications = "DescribeValidDBInstanceModificat
 type DescribeValidDBInstanceModificationsRequest struct {
 	*aws.Request
 	Input *DescribeValidDBInstanceModificationsInput
+	Copy  func(*DescribeValidDBInstanceModificationsInput) DescribeValidDBInstanceModificationsRequest
 }
 
 // Send marshals and sends the DescribeValidDBInstanceModifications API request.
@@ -4095,7 +4155,7 @@ func (c *RDS) DescribeValidDBInstanceModificationsRequest(input *DescribeValidDB
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeValidDBInstanceModificationsRequest{Request: req, Input: input}
+	return DescribeValidDBInstanceModificationsRequest{Request: req, Input: input, Copy: c.DescribeValidDBInstanceModificationsRequest}
 }
 
 const opDownloadDBLogFilePortion = "DownloadDBLogFilePortion"
@@ -4104,6 +4164,7 @@ const opDownloadDBLogFilePortion = "DownloadDBLogFilePortion"
 type DownloadDBLogFilePortionRequest struct {
 	*aws.Request
 	Input *DownloadDBLogFilePortionInput
+	Copy  func(*DownloadDBLogFilePortionInput) DownloadDBLogFilePortionRequest
 }
 
 // Send marshals and sends the DownloadDBLogFilePortion API request.
@@ -4150,47 +4211,47 @@ func (c *RDS) DownloadDBLogFilePortionRequest(input *DownloadDBLogFilePortionInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DownloadDBLogFilePortionRequest{Request: req, Input: input}
+	return DownloadDBLogFilePortionRequest{Request: req, Input: input, Copy: c.DownloadDBLogFilePortionRequest}
 }
 
-// DownloadDBLogFilePortionPages iterates over the pages of a DownloadDBLogFilePortion operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DownloadDBLogFilePortion method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DownloadDBLogFilePortionRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DownloadDBLogFilePortion operation.
-//    pageNum := 0
-//    err := client.DownloadDBLogFilePortionPages(params,
-//        func(page *DownloadDBLogFilePortionOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DownloadDBLogFilePortionRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DownloadDBLogFilePortionRequest) Paginate(opts ...aws.Option) DownloadDBLogFilePortionPager {
 	return DownloadDBLogFilePortionPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DownloadDBLogFilePortionInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DownloadDBLogFilePortionInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DownloadDBLogFilePortionOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DownloadDBLogFilePortionPager ...
+// DownloadDBLogFilePortionPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DownloadDBLogFilePortionPager struct {
 	aws.Pager
 }
@@ -4205,6 +4266,7 @@ const opFailoverDBCluster = "FailoverDBCluster"
 type FailoverDBClusterRequest struct {
 	*aws.Request
 	Input *FailoverDBClusterInput
+	Copy  func(*FailoverDBClusterInput) FailoverDBClusterRequest
 }
 
 // Send marshals and sends the FailoverDBCluster API request.
@@ -4258,7 +4320,7 @@ func (c *RDS) FailoverDBClusterRequest(input *FailoverDBClusterInput) FailoverDB
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return FailoverDBClusterRequest{Request: req, Input: input}
+	return FailoverDBClusterRequest{Request: req, Input: input, Copy: c.FailoverDBClusterRequest}
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -4267,6 +4329,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -4310,7 +4373,7 @@ func (c *RDS) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opModifyDBCluster = "ModifyDBCluster"
@@ -4319,6 +4382,7 @@ const opModifyDBCluster = "ModifyDBCluster"
 type ModifyDBClusterRequest struct {
 	*aws.Request
 	Input *ModifyDBClusterInput
+	Copy  func(*ModifyDBClusterInput) ModifyDBClusterRequest
 }
 
 // Send marshals and sends the ModifyDBCluster API request.
@@ -4363,7 +4427,7 @@ func (c *RDS) ModifyDBClusterRequest(input *ModifyDBClusterInput) ModifyDBCluste
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyDBClusterRequest{Request: req, Input: input}
+	return ModifyDBClusterRequest{Request: req, Input: input, Copy: c.ModifyDBClusterRequest}
 }
 
 const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
@@ -4372,6 +4436,7 @@ const opModifyDBClusterParameterGroup = "ModifyDBClusterParameterGroup"
 type ModifyDBClusterParameterGroupRequest struct {
 	*aws.Request
 	Input *ModifyDBClusterParameterGroupInput
+	Copy  func(*ModifyDBClusterParameterGroupInput) ModifyDBClusterParameterGroupRequest
 }
 
 // Send marshals and sends the ModifyDBClusterParameterGroup API request.
@@ -4432,7 +4497,7 @@ func (c *RDS) ModifyDBClusterParameterGroupRequest(input *ModifyDBClusterParamet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyDBClusterParameterGroupRequest{Request: req, Input: input}
+	return ModifyDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyDBClusterParameterGroupRequest}
 }
 
 const opModifyDBClusterSnapshotAttribute = "ModifyDBClusterSnapshotAttribute"
@@ -4441,6 +4506,7 @@ const opModifyDBClusterSnapshotAttribute = "ModifyDBClusterSnapshotAttribute"
 type ModifyDBClusterSnapshotAttributeRequest struct {
 	*aws.Request
 	Input *ModifyDBClusterSnapshotAttributeInput
+	Copy  func(*ModifyDBClusterSnapshotAttributeInput) ModifyDBClusterSnapshotAttributeRequest
 }
 
 // Send marshals and sends the ModifyDBClusterSnapshotAttribute API request.
@@ -4497,7 +4563,7 @@ func (c *RDS) ModifyDBClusterSnapshotAttributeRequest(input *ModifyDBClusterSnap
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyDBClusterSnapshotAttributeRequest{Request: req, Input: input}
+	return ModifyDBClusterSnapshotAttributeRequest{Request: req, Input: input, Copy: c.ModifyDBClusterSnapshotAttributeRequest}
 }
 
 const opModifyDBInstance = "ModifyDBInstance"
@@ -4506,6 +4572,7 @@ const opModifyDBInstance = "ModifyDBInstance"
 type ModifyDBInstanceRequest struct {
 	*aws.Request
 	Input *ModifyDBInstanceInput
+	Copy  func(*ModifyDBInstanceInput) ModifyDBInstanceRequest
 }
 
 // Send marshals and sends the ModifyDBInstance API request.
@@ -4549,7 +4616,7 @@ func (c *RDS) ModifyDBInstanceRequest(input *ModifyDBInstanceInput) ModifyDBInst
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyDBInstanceRequest{Request: req, Input: input}
+	return ModifyDBInstanceRequest{Request: req, Input: input, Copy: c.ModifyDBInstanceRequest}
 }
 
 const opModifyDBParameterGroup = "ModifyDBParameterGroup"
@@ -4558,6 +4625,7 @@ const opModifyDBParameterGroup = "ModifyDBParameterGroup"
 type ModifyDBParameterGroupRequest struct {
 	*aws.Request
 	Input *ModifyDBParameterGroupInput
+	Copy  func(*ModifyDBParameterGroupInput) ModifyDBParameterGroupRequest
 }
 
 // Send marshals and sends the ModifyDBParameterGroup API request.
@@ -4615,7 +4683,7 @@ func (c *RDS) ModifyDBParameterGroupRequest(input *ModifyDBParameterGroupInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyDBParameterGroupRequest{Request: req, Input: input}
+	return ModifyDBParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyDBParameterGroupRequest}
 }
 
 const opModifyDBSnapshot = "ModifyDBSnapshot"
@@ -4624,6 +4692,7 @@ const opModifyDBSnapshot = "ModifyDBSnapshot"
 type ModifyDBSnapshotRequest struct {
 	*aws.Request
 	Input *ModifyDBSnapshotInput
+	Copy  func(*ModifyDBSnapshotInput) ModifyDBSnapshotRequest
 }
 
 // Send marshals and sends the ModifyDBSnapshot API request.
@@ -4667,7 +4736,7 @@ func (c *RDS) ModifyDBSnapshotRequest(input *ModifyDBSnapshotInput) ModifyDBSnap
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyDBSnapshotRequest{Request: req, Input: input}
+	return ModifyDBSnapshotRequest{Request: req, Input: input, Copy: c.ModifyDBSnapshotRequest}
 }
 
 const opModifyDBSnapshotAttribute = "ModifyDBSnapshotAttribute"
@@ -4676,6 +4745,7 @@ const opModifyDBSnapshotAttribute = "ModifyDBSnapshotAttribute"
 type ModifyDBSnapshotAttributeRequest struct {
 	*aws.Request
 	Input *ModifyDBSnapshotAttributeInput
+	Copy  func(*ModifyDBSnapshotAttributeInput) ModifyDBSnapshotAttributeRequest
 }
 
 // Send marshals and sends the ModifyDBSnapshotAttribute API request.
@@ -4732,7 +4802,7 @@ func (c *RDS) ModifyDBSnapshotAttributeRequest(input *ModifyDBSnapshotAttributeI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyDBSnapshotAttributeRequest{Request: req, Input: input}
+	return ModifyDBSnapshotAttributeRequest{Request: req, Input: input, Copy: c.ModifyDBSnapshotAttributeRequest}
 }
 
 const opModifyDBSubnetGroup = "ModifyDBSubnetGroup"
@@ -4741,6 +4811,7 @@ const opModifyDBSubnetGroup = "ModifyDBSubnetGroup"
 type ModifyDBSubnetGroupRequest struct {
 	*aws.Request
 	Input *ModifyDBSubnetGroupInput
+	Copy  func(*ModifyDBSubnetGroupInput) ModifyDBSubnetGroupRequest
 }
 
 // Send marshals and sends the ModifyDBSubnetGroup API request.
@@ -4782,7 +4853,7 @@ func (c *RDS) ModifyDBSubnetGroupRequest(input *ModifyDBSubnetGroupInput) Modify
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyDBSubnetGroupRequest{Request: req, Input: input}
+	return ModifyDBSubnetGroupRequest{Request: req, Input: input, Copy: c.ModifyDBSubnetGroupRequest}
 }
 
 const opModifyEventSubscription = "ModifyEventSubscription"
@@ -4791,6 +4862,7 @@ const opModifyEventSubscription = "ModifyEventSubscription"
 type ModifyEventSubscriptionRequest struct {
 	*aws.Request
 	Input *ModifyEventSubscriptionInput
+	Copy  func(*ModifyEventSubscriptionInput) ModifyEventSubscriptionRequest
 }
 
 // Send marshals and sends the ModifyEventSubscription API request.
@@ -4839,7 +4911,7 @@ func (c *RDS) ModifyEventSubscriptionRequest(input *ModifyEventSubscriptionInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyEventSubscriptionRequest{Request: req, Input: input}
+	return ModifyEventSubscriptionRequest{Request: req, Input: input, Copy: c.ModifyEventSubscriptionRequest}
 }
 
 const opModifyOptionGroup = "ModifyOptionGroup"
@@ -4848,6 +4920,7 @@ const opModifyOptionGroup = "ModifyOptionGroup"
 type ModifyOptionGroupRequest struct {
 	*aws.Request
 	Input *ModifyOptionGroupInput
+	Copy  func(*ModifyOptionGroupInput) ModifyOptionGroupRequest
 }
 
 // Send marshals and sends the ModifyOptionGroup API request.
@@ -4888,7 +4961,7 @@ func (c *RDS) ModifyOptionGroupRequest(input *ModifyOptionGroupInput) ModifyOpti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyOptionGroupRequest{Request: req, Input: input}
+	return ModifyOptionGroupRequest{Request: req, Input: input, Copy: c.ModifyOptionGroupRequest}
 }
 
 const opPromoteReadReplica = "PromoteReadReplica"
@@ -4897,6 +4970,7 @@ const opPromoteReadReplica = "PromoteReadReplica"
 type PromoteReadReplicaRequest struct {
 	*aws.Request
 	Input *PromoteReadReplicaInput
+	Copy  func(*PromoteReadReplicaInput) PromoteReadReplicaRequest
 }
 
 // Send marshals and sends the PromoteReadReplica API request.
@@ -4942,7 +5016,7 @@ func (c *RDS) PromoteReadReplicaRequest(input *PromoteReadReplicaInput) PromoteR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PromoteReadReplicaRequest{Request: req, Input: input}
+	return PromoteReadReplicaRequest{Request: req, Input: input, Copy: c.PromoteReadReplicaRequest}
 }
 
 const opPromoteReadReplicaDBCluster = "PromoteReadReplicaDBCluster"
@@ -4951,6 +5025,7 @@ const opPromoteReadReplicaDBCluster = "PromoteReadReplicaDBCluster"
 type PromoteReadReplicaDBClusterRequest struct {
 	*aws.Request
 	Input *PromoteReadReplicaDBClusterInput
+	Copy  func(*PromoteReadReplicaDBClusterInput) PromoteReadReplicaDBClusterRequest
 }
 
 // Send marshals and sends the PromoteReadReplicaDBCluster API request.
@@ -4991,7 +5066,7 @@ func (c *RDS) PromoteReadReplicaDBClusterRequest(input *PromoteReadReplicaDBClus
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PromoteReadReplicaDBClusterRequest{Request: req, Input: input}
+	return PromoteReadReplicaDBClusterRequest{Request: req, Input: input, Copy: c.PromoteReadReplicaDBClusterRequest}
 }
 
 const opPurchaseReservedDBInstancesOffering = "PurchaseReservedDBInstancesOffering"
@@ -5000,6 +5075,7 @@ const opPurchaseReservedDBInstancesOffering = "PurchaseReservedDBInstancesOfferi
 type PurchaseReservedDBInstancesOfferingRequest struct {
 	*aws.Request
 	Input *PurchaseReservedDBInstancesOfferingInput
+	Copy  func(*PurchaseReservedDBInstancesOfferingInput) PurchaseReservedDBInstancesOfferingRequest
 }
 
 // Send marshals and sends the PurchaseReservedDBInstancesOffering API request.
@@ -5040,7 +5116,7 @@ func (c *RDS) PurchaseReservedDBInstancesOfferingRequest(input *PurchaseReserved
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PurchaseReservedDBInstancesOfferingRequest{Request: req, Input: input}
+	return PurchaseReservedDBInstancesOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedDBInstancesOfferingRequest}
 }
 
 const opRebootDBInstance = "RebootDBInstance"
@@ -5049,6 +5125,7 @@ const opRebootDBInstance = "RebootDBInstance"
 type RebootDBInstanceRequest struct {
 	*aws.Request
 	Input *RebootDBInstanceInput
+	Copy  func(*RebootDBInstanceInput) RebootDBInstanceRequest
 }
 
 // Send marshals and sends the RebootDBInstance API request.
@@ -5098,7 +5175,7 @@ func (c *RDS) RebootDBInstanceRequest(input *RebootDBInstanceInput) RebootDBInst
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RebootDBInstanceRequest{Request: req, Input: input}
+	return RebootDBInstanceRequest{Request: req, Input: input, Copy: c.RebootDBInstanceRequest}
 }
 
 const opRemoveRoleFromDBCluster = "RemoveRoleFromDBCluster"
@@ -5107,6 +5184,7 @@ const opRemoveRoleFromDBCluster = "RemoveRoleFromDBCluster"
 type RemoveRoleFromDBClusterRequest struct {
 	*aws.Request
 	Input *RemoveRoleFromDBClusterInput
+	Copy  func(*RemoveRoleFromDBClusterInput) RemoveRoleFromDBClusterRequest
 }
 
 // Send marshals and sends the RemoveRoleFromDBCluster API request.
@@ -5151,7 +5229,7 @@ func (c *RDS) RemoveRoleFromDBClusterRequest(input *RemoveRoleFromDBClusterInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveRoleFromDBClusterRequest{Request: req, Input: input}
+	return RemoveRoleFromDBClusterRequest{Request: req, Input: input, Copy: c.RemoveRoleFromDBClusterRequest}
 }
 
 const opRemoveSourceIdentifierFromSubscription = "RemoveSourceIdentifierFromSubscription"
@@ -5160,6 +5238,7 @@ const opRemoveSourceIdentifierFromSubscription = "RemoveSourceIdentifierFromSubs
 type RemoveSourceIdentifierFromSubscriptionRequest struct {
 	*aws.Request
 	Input *RemoveSourceIdentifierFromSubscriptionInput
+	Copy  func(*RemoveSourceIdentifierFromSubscriptionInput) RemoveSourceIdentifierFromSubscriptionRequest
 }
 
 // Send marshals and sends the RemoveSourceIdentifierFromSubscription API request.
@@ -5200,7 +5279,7 @@ func (c *RDS) RemoveSourceIdentifierFromSubscriptionRequest(input *RemoveSourceI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveSourceIdentifierFromSubscriptionRequest{Request: req, Input: input}
+	return RemoveSourceIdentifierFromSubscriptionRequest{Request: req, Input: input, Copy: c.RemoveSourceIdentifierFromSubscriptionRequest}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
@@ -5209,6 +5288,7 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 type RemoveTagsFromResourceRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromResourceInput
+	Copy  func(*RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
@@ -5254,7 +5334,7 @@ func (c *RDS) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromResourceRequest{Request: req, Input: input}
+	return RemoveTagsFromResourceRequest{Request: req, Input: input, Copy: c.RemoveTagsFromResourceRequest}
 }
 
 const opResetDBClusterParameterGroup = "ResetDBClusterParameterGroup"
@@ -5263,6 +5343,7 @@ const opResetDBClusterParameterGroup = "ResetDBClusterParameterGroup"
 type ResetDBClusterParameterGroupRequest struct {
 	*aws.Request
 	Input *ResetDBClusterParameterGroupInput
+	Copy  func(*ResetDBClusterParameterGroupInput) ResetDBClusterParameterGroupRequest
 }
 
 // Send marshals and sends the ResetDBClusterParameterGroup API request.
@@ -5315,7 +5396,7 @@ func (c *RDS) ResetDBClusterParameterGroupRequest(input *ResetDBClusterParameter
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetDBClusterParameterGroupRequest{Request: req, Input: input}
+	return ResetDBClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ResetDBClusterParameterGroupRequest}
 }
 
 const opResetDBParameterGroup = "ResetDBParameterGroup"
@@ -5324,6 +5405,7 @@ const opResetDBParameterGroup = "ResetDBParameterGroup"
 type ResetDBParameterGroupRequest struct {
 	*aws.Request
 	Input *ResetDBParameterGroupInput
+	Copy  func(*ResetDBParameterGroupInput) ResetDBParameterGroupRequest
 }
 
 // Send marshals and sends the ResetDBParameterGroup API request.
@@ -5370,7 +5452,7 @@ func (c *RDS) ResetDBParameterGroupRequest(input *ResetDBParameterGroupInput) Re
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetDBParameterGroupRequest{Request: req, Input: input}
+	return ResetDBParameterGroupRequest{Request: req, Input: input, Copy: c.ResetDBParameterGroupRequest}
 }
 
 const opRestoreDBClusterFromS3 = "RestoreDBClusterFromS3"
@@ -5379,6 +5461,7 @@ const opRestoreDBClusterFromS3 = "RestoreDBClusterFromS3"
 type RestoreDBClusterFromS3Request struct {
 	*aws.Request
 	Input *RestoreDBClusterFromS3Input
+	Copy  func(*RestoreDBClusterFromS3Input) RestoreDBClusterFromS3Request
 }
 
 // Send marshals and sends the RestoreDBClusterFromS3 API request.
@@ -5422,7 +5505,7 @@ func (c *RDS) RestoreDBClusterFromS3Request(input *RestoreDBClusterFromS3Input) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreDBClusterFromS3Request{Request: req, Input: input}
+	return RestoreDBClusterFromS3Request{Request: req, Input: input, Copy: c.RestoreDBClusterFromS3Request}
 }
 
 const opRestoreDBClusterFromSnapshot = "RestoreDBClusterFromSnapshot"
@@ -5431,6 +5514,7 @@ const opRestoreDBClusterFromSnapshot = "RestoreDBClusterFromSnapshot"
 type RestoreDBClusterFromSnapshotRequest struct {
 	*aws.Request
 	Input *RestoreDBClusterFromSnapshotInput
+	Copy  func(*RestoreDBClusterFromSnapshotInput) RestoreDBClusterFromSnapshotRequest
 }
 
 // Send marshals and sends the RestoreDBClusterFromSnapshot API request.
@@ -5482,7 +5566,7 @@ func (c *RDS) RestoreDBClusterFromSnapshotRequest(input *RestoreDBClusterFromSna
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreDBClusterFromSnapshotRequest{Request: req, Input: input}
+	return RestoreDBClusterFromSnapshotRequest{Request: req, Input: input, Copy: c.RestoreDBClusterFromSnapshotRequest}
 }
 
 const opRestoreDBClusterToPointInTime = "RestoreDBClusterToPointInTime"
@@ -5491,6 +5575,7 @@ const opRestoreDBClusterToPointInTime = "RestoreDBClusterToPointInTime"
 type RestoreDBClusterToPointInTimeRequest struct {
 	*aws.Request
 	Input *RestoreDBClusterToPointInTimeInput
+	Copy  func(*RestoreDBClusterToPointInTimeInput) RestoreDBClusterToPointInTimeRequest
 }
 
 // Send marshals and sends the RestoreDBClusterToPointInTime API request.
@@ -5545,7 +5630,7 @@ func (c *RDS) RestoreDBClusterToPointInTimeRequest(input *RestoreDBClusterToPoin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreDBClusterToPointInTimeRequest{Request: req, Input: input}
+	return RestoreDBClusterToPointInTimeRequest{Request: req, Input: input, Copy: c.RestoreDBClusterToPointInTimeRequest}
 }
 
 const opRestoreDBInstanceFromDBSnapshot = "RestoreDBInstanceFromDBSnapshot"
@@ -5554,6 +5639,7 @@ const opRestoreDBInstanceFromDBSnapshot = "RestoreDBInstanceFromDBSnapshot"
 type RestoreDBInstanceFromDBSnapshotRequest struct {
 	*aws.Request
 	Input *RestoreDBInstanceFromDBSnapshotInput
+	Copy  func(*RestoreDBInstanceFromDBSnapshotInput) RestoreDBInstanceFromDBSnapshotRequest
 }
 
 // Send marshals and sends the RestoreDBInstanceFromDBSnapshot API request.
@@ -5612,7 +5698,7 @@ func (c *RDS) RestoreDBInstanceFromDBSnapshotRequest(input *RestoreDBInstanceFro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreDBInstanceFromDBSnapshotRequest{Request: req, Input: input}
+	return RestoreDBInstanceFromDBSnapshotRequest{Request: req, Input: input, Copy: c.RestoreDBInstanceFromDBSnapshotRequest}
 }
 
 const opRestoreDBInstanceFromS3 = "RestoreDBInstanceFromS3"
@@ -5621,6 +5707,7 @@ const opRestoreDBInstanceFromS3 = "RestoreDBInstanceFromS3"
 type RestoreDBInstanceFromS3Request struct {
 	*aws.Request
 	Input *RestoreDBInstanceFromS3Input
+	Copy  func(*RestoreDBInstanceFromS3Input) RestoreDBInstanceFromS3Request
 }
 
 // Send marshals and sends the RestoreDBInstanceFromS3 API request.
@@ -5666,7 +5753,7 @@ func (c *RDS) RestoreDBInstanceFromS3Request(input *RestoreDBInstanceFromS3Input
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreDBInstanceFromS3Request{Request: req, Input: input}
+	return RestoreDBInstanceFromS3Request{Request: req, Input: input, Copy: c.RestoreDBInstanceFromS3Request}
 }
 
 const opRestoreDBInstanceToPointInTime = "RestoreDBInstanceToPointInTime"
@@ -5675,6 +5762,7 @@ const opRestoreDBInstanceToPointInTime = "RestoreDBInstanceToPointInTime"
 type RestoreDBInstanceToPointInTimeRequest struct {
 	*aws.Request
 	Input *RestoreDBInstanceToPointInTimeInput
+	Copy  func(*RestoreDBInstanceToPointInTimeInput) RestoreDBInstanceToPointInTimeRequest
 }
 
 // Send marshals and sends the RestoreDBInstanceToPointInTime API request.
@@ -5726,7 +5814,7 @@ func (c *RDS) RestoreDBInstanceToPointInTimeRequest(input *RestoreDBInstanceToPo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreDBInstanceToPointInTimeRequest{Request: req, Input: input}
+	return RestoreDBInstanceToPointInTimeRequest{Request: req, Input: input, Copy: c.RestoreDBInstanceToPointInTimeRequest}
 }
 
 const opRevokeDBSecurityGroupIngress = "RevokeDBSecurityGroupIngress"
@@ -5735,6 +5823,7 @@ const opRevokeDBSecurityGroupIngress = "RevokeDBSecurityGroupIngress"
 type RevokeDBSecurityGroupIngressRequest struct {
 	*aws.Request
 	Input *RevokeDBSecurityGroupIngressInput
+	Copy  func(*RevokeDBSecurityGroupIngressInput) RevokeDBSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the RevokeDBSecurityGroupIngress API request.
@@ -5778,7 +5867,7 @@ func (c *RDS) RevokeDBSecurityGroupIngressRequest(input *RevokeDBSecurityGroupIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RevokeDBSecurityGroupIngressRequest{Request: req, Input: input}
+	return RevokeDBSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.RevokeDBSecurityGroupIngressRequest}
 }
 
 const opStartDBInstance = "StartDBInstance"
@@ -5787,6 +5876,7 @@ const opStartDBInstance = "StartDBInstance"
 type StartDBInstanceRequest struct {
 	*aws.Request
 	Input *StartDBInstanceInput
+	Copy  func(*StartDBInstanceInput) StartDBInstanceRequest
 }
 
 // Send marshals and sends the StartDBInstance API request.
@@ -5831,7 +5921,7 @@ func (c *RDS) StartDBInstanceRequest(input *StartDBInstanceInput) StartDBInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartDBInstanceRequest{Request: req, Input: input}
+	return StartDBInstanceRequest{Request: req, Input: input, Copy: c.StartDBInstanceRequest}
 }
 
 const opStopDBInstance = "StopDBInstance"
@@ -5840,6 +5930,7 @@ const opStopDBInstance = "StopDBInstance"
 type StopDBInstanceRequest struct {
 	*aws.Request
 	Input *StopDBInstanceInput
+	Copy  func(*StopDBInstanceInput) StopDBInstanceRequest
 }
 
 // Send marshals and sends the StopDBInstance API request.
@@ -5886,7 +5977,7 @@ func (c *RDS) StopDBInstanceRequest(input *StopDBInstanceInput) StopDBInstanceRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopDBInstanceRequest{Request: req, Input: input}
+	return StopDBInstanceRequest{Request: req, Input: input, Copy: c.StopDBInstanceRequest}
 }
 
 // Describes a quota for an AWS account, for example, the number of DB instances

@@ -15,6 +15,7 @@ const opCreateDevicePool = "CreateDevicePool"
 type CreateDevicePoolRequest struct {
 	*aws.Request
 	Input *CreateDevicePoolInput
+	Copy  func(*CreateDevicePoolInput) CreateDevicePoolRequest
 }
 
 // Send marshals and sends the CreateDevicePool API request.
@@ -55,7 +56,7 @@ func (c *DeviceFarm) CreateDevicePoolRequest(input *CreateDevicePoolInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDevicePoolRequest{Request: req, Input: input}
+	return CreateDevicePoolRequest{Request: req, Input: input, Copy: c.CreateDevicePoolRequest}
 }
 
 const opCreateNetworkProfile = "CreateNetworkProfile"
@@ -64,6 +65,7 @@ const opCreateNetworkProfile = "CreateNetworkProfile"
 type CreateNetworkProfileRequest struct {
 	*aws.Request
 	Input *CreateNetworkProfileInput
+	Copy  func(*CreateNetworkProfileInput) CreateNetworkProfileRequest
 }
 
 // Send marshals and sends the CreateNetworkProfile API request.
@@ -104,7 +106,7 @@ func (c *DeviceFarm) CreateNetworkProfileRequest(input *CreateNetworkProfileInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNetworkProfileRequest{Request: req, Input: input}
+	return CreateNetworkProfileRequest{Request: req, Input: input, Copy: c.CreateNetworkProfileRequest}
 }
 
 const opCreateProject = "CreateProject"
@@ -113,6 +115,7 @@ const opCreateProject = "CreateProject"
 type CreateProjectRequest struct {
 	*aws.Request
 	Input *CreateProjectInput
+	Copy  func(*CreateProjectInput) CreateProjectRequest
 }
 
 // Send marshals and sends the CreateProject API request.
@@ -153,7 +156,7 @@ func (c *DeviceFarm) CreateProjectRequest(input *CreateProjectInput) CreateProje
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateProjectRequest{Request: req, Input: input}
+	return CreateProjectRequest{Request: req, Input: input, Copy: c.CreateProjectRequest}
 }
 
 const opCreateRemoteAccessSession = "CreateRemoteAccessSession"
@@ -162,6 +165,7 @@ const opCreateRemoteAccessSession = "CreateRemoteAccessSession"
 type CreateRemoteAccessSessionRequest struct {
 	*aws.Request
 	Input *CreateRemoteAccessSessionInput
+	Copy  func(*CreateRemoteAccessSessionInput) CreateRemoteAccessSessionRequest
 }
 
 // Send marshals and sends the CreateRemoteAccessSession API request.
@@ -202,7 +206,7 @@ func (c *DeviceFarm) CreateRemoteAccessSessionRequest(input *CreateRemoteAccessS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRemoteAccessSessionRequest{Request: req, Input: input}
+	return CreateRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.CreateRemoteAccessSessionRequest}
 }
 
 const opCreateUpload = "CreateUpload"
@@ -211,6 +215,7 @@ const opCreateUpload = "CreateUpload"
 type CreateUploadRequest struct {
 	*aws.Request
 	Input *CreateUploadInput
+	Copy  func(*CreateUploadInput) CreateUploadRequest
 }
 
 // Send marshals and sends the CreateUpload API request.
@@ -251,7 +256,7 @@ func (c *DeviceFarm) CreateUploadRequest(input *CreateUploadInput) CreateUploadR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUploadRequest{Request: req, Input: input}
+	return CreateUploadRequest{Request: req, Input: input, Copy: c.CreateUploadRequest}
 }
 
 const opDeleteDevicePool = "DeleteDevicePool"
@@ -260,6 +265,7 @@ const opDeleteDevicePool = "DeleteDevicePool"
 type DeleteDevicePoolRequest struct {
 	*aws.Request
 	Input *DeleteDevicePoolInput
+	Copy  func(*DeleteDevicePoolInput) DeleteDevicePoolRequest
 }
 
 // Send marshals and sends the DeleteDevicePool API request.
@@ -301,7 +307,7 @@ func (c *DeviceFarm) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDevicePoolRequest{Request: req, Input: input}
+	return DeleteDevicePoolRequest{Request: req, Input: input, Copy: c.DeleteDevicePoolRequest}
 }
 
 const opDeleteNetworkProfile = "DeleteNetworkProfile"
@@ -310,6 +316,7 @@ const opDeleteNetworkProfile = "DeleteNetworkProfile"
 type DeleteNetworkProfileRequest struct {
 	*aws.Request
 	Input *DeleteNetworkProfileInput
+	Copy  func(*DeleteNetworkProfileInput) DeleteNetworkProfileRequest
 }
 
 // Send marshals and sends the DeleteNetworkProfile API request.
@@ -350,7 +357,7 @@ func (c *DeviceFarm) DeleteNetworkProfileRequest(input *DeleteNetworkProfileInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNetworkProfileRequest{Request: req, Input: input}
+	return DeleteNetworkProfileRequest{Request: req, Input: input, Copy: c.DeleteNetworkProfileRequest}
 }
 
 const opDeleteProject = "DeleteProject"
@@ -359,6 +366,7 @@ const opDeleteProject = "DeleteProject"
 type DeleteProjectRequest struct {
 	*aws.Request
 	Input *DeleteProjectInput
+	Copy  func(*DeleteProjectInput) DeleteProjectRequest
 }
 
 // Send marshals and sends the DeleteProject API request.
@@ -401,7 +409,7 @@ func (c *DeviceFarm) DeleteProjectRequest(input *DeleteProjectInput) DeleteProje
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteProjectRequest{Request: req, Input: input}
+	return DeleteProjectRequest{Request: req, Input: input, Copy: c.DeleteProjectRequest}
 }
 
 const opDeleteRemoteAccessSession = "DeleteRemoteAccessSession"
@@ -410,6 +418,7 @@ const opDeleteRemoteAccessSession = "DeleteRemoteAccessSession"
 type DeleteRemoteAccessSessionRequest struct {
 	*aws.Request
 	Input *DeleteRemoteAccessSessionInput
+	Copy  func(*DeleteRemoteAccessSessionInput) DeleteRemoteAccessSessionRequest
 }
 
 // Send marshals and sends the DeleteRemoteAccessSession API request.
@@ -450,7 +459,7 @@ func (c *DeviceFarm) DeleteRemoteAccessSessionRequest(input *DeleteRemoteAccessS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRemoteAccessSessionRequest{Request: req, Input: input}
+	return DeleteRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.DeleteRemoteAccessSessionRequest}
 }
 
 const opDeleteRun = "DeleteRun"
@@ -459,6 +468,7 @@ const opDeleteRun = "DeleteRun"
 type DeleteRunRequest struct {
 	*aws.Request
 	Input *DeleteRunInput
+	Copy  func(*DeleteRunInput) DeleteRunRequest
 }
 
 // Send marshals and sends the DeleteRun API request.
@@ -501,7 +511,7 @@ func (c *DeviceFarm) DeleteRunRequest(input *DeleteRunInput) DeleteRunRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRunRequest{Request: req, Input: input}
+	return DeleteRunRequest{Request: req, Input: input, Copy: c.DeleteRunRequest}
 }
 
 const opDeleteUpload = "DeleteUpload"
@@ -510,6 +520,7 @@ const opDeleteUpload = "DeleteUpload"
 type DeleteUploadRequest struct {
 	*aws.Request
 	Input *DeleteUploadInput
+	Copy  func(*DeleteUploadInput) DeleteUploadRequest
 }
 
 // Send marshals and sends the DeleteUpload API request.
@@ -550,7 +561,7 @@ func (c *DeviceFarm) DeleteUploadRequest(input *DeleteUploadInput) DeleteUploadR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUploadRequest{Request: req, Input: input}
+	return DeleteUploadRequest{Request: req, Input: input, Copy: c.DeleteUploadRequest}
 }
 
 const opGetAccountSettings = "GetAccountSettings"
@@ -559,6 +570,7 @@ const opGetAccountSettings = "GetAccountSettings"
 type GetAccountSettingsRequest struct {
 	*aws.Request
 	Input *GetAccountSettingsInput
+	Copy  func(*GetAccountSettingsInput) GetAccountSettingsRequest
 }
 
 // Send marshals and sends the GetAccountSettings API request.
@@ -600,7 +612,7 @@ func (c *DeviceFarm) GetAccountSettingsRequest(input *GetAccountSettingsInput) G
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAccountSettingsRequest{Request: req, Input: input}
+	return GetAccountSettingsRequest{Request: req, Input: input, Copy: c.GetAccountSettingsRequest}
 }
 
 const opGetDevice = "GetDevice"
@@ -609,6 +621,7 @@ const opGetDevice = "GetDevice"
 type GetDeviceRequest struct {
 	*aws.Request
 	Input *GetDeviceInput
+	Copy  func(*GetDeviceInput) GetDeviceRequest
 }
 
 // Send marshals and sends the GetDevice API request.
@@ -649,7 +662,7 @@ func (c *DeviceFarm) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeviceRequest{Request: req, Input: input}
+	return GetDeviceRequest{Request: req, Input: input, Copy: c.GetDeviceRequest}
 }
 
 const opGetDevicePool = "GetDevicePool"
@@ -658,6 +671,7 @@ const opGetDevicePool = "GetDevicePool"
 type GetDevicePoolRequest struct {
 	*aws.Request
 	Input *GetDevicePoolInput
+	Copy  func(*GetDevicePoolInput) GetDevicePoolRequest
 }
 
 // Send marshals and sends the GetDevicePool API request.
@@ -698,7 +712,7 @@ func (c *DeviceFarm) GetDevicePoolRequest(input *GetDevicePoolInput) GetDevicePo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDevicePoolRequest{Request: req, Input: input}
+	return GetDevicePoolRequest{Request: req, Input: input, Copy: c.GetDevicePoolRequest}
 }
 
 const opGetDevicePoolCompatibility = "GetDevicePoolCompatibility"
@@ -707,6 +721,7 @@ const opGetDevicePoolCompatibility = "GetDevicePoolCompatibility"
 type GetDevicePoolCompatibilityRequest struct {
 	*aws.Request
 	Input *GetDevicePoolCompatibilityInput
+	Copy  func(*GetDevicePoolCompatibilityInput) GetDevicePoolCompatibilityRequest
 }
 
 // Send marshals and sends the GetDevicePoolCompatibility API request.
@@ -747,7 +762,7 @@ func (c *DeviceFarm) GetDevicePoolCompatibilityRequest(input *GetDevicePoolCompa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDevicePoolCompatibilityRequest{Request: req, Input: input}
+	return GetDevicePoolCompatibilityRequest{Request: req, Input: input, Copy: c.GetDevicePoolCompatibilityRequest}
 }
 
 const opGetJob = "GetJob"
@@ -756,6 +771,7 @@ const opGetJob = "GetJob"
 type GetJobRequest struct {
 	*aws.Request
 	Input *GetJobInput
+	Copy  func(*GetJobInput) GetJobRequest
 }
 
 // Send marshals and sends the GetJob API request.
@@ -796,7 +812,7 @@ func (c *DeviceFarm) GetJobRequest(input *GetJobInput) GetJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobRequest{Request: req, Input: input}
+	return GetJobRequest{Request: req, Input: input, Copy: c.GetJobRequest}
 }
 
 const opGetNetworkProfile = "GetNetworkProfile"
@@ -805,6 +821,7 @@ const opGetNetworkProfile = "GetNetworkProfile"
 type GetNetworkProfileRequest struct {
 	*aws.Request
 	Input *GetNetworkProfileInput
+	Copy  func(*GetNetworkProfileInput) GetNetworkProfileRequest
 }
 
 // Send marshals and sends the GetNetworkProfile API request.
@@ -845,7 +862,7 @@ func (c *DeviceFarm) GetNetworkProfileRequest(input *GetNetworkProfileInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetNetworkProfileRequest{Request: req, Input: input}
+	return GetNetworkProfileRequest{Request: req, Input: input, Copy: c.GetNetworkProfileRequest}
 }
 
 const opGetOfferingStatus = "GetOfferingStatus"
@@ -854,6 +871,7 @@ const opGetOfferingStatus = "GetOfferingStatus"
 type GetOfferingStatusRequest struct {
 	*aws.Request
 	Input *GetOfferingStatusInput
+	Copy  func(*GetOfferingStatusInput) GetOfferingStatusRequest
 }
 
 // Send marshals and sends the GetOfferingStatus API request.
@@ -905,47 +923,47 @@ func (c *DeviceFarm) GetOfferingStatusRequest(input *GetOfferingStatusInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOfferingStatusRequest{Request: req, Input: input}
+	return GetOfferingStatusRequest{Request: req, Input: input, Copy: c.GetOfferingStatusRequest}
 }
 
-// GetOfferingStatusPages iterates over the pages of a GetOfferingStatus operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetOfferingStatus method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetOfferingStatusRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetOfferingStatus operation.
-//    pageNum := 0
-//    err := client.GetOfferingStatusPages(params,
-//        func(page *GetOfferingStatusOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetOfferingStatusRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetOfferingStatusRequest) Paginate(opts ...aws.Option) GetOfferingStatusPager {
 	return GetOfferingStatusPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetOfferingStatusInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetOfferingStatusInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetOfferingStatusOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetOfferingStatusPager ...
+// GetOfferingStatusPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetOfferingStatusPager struct {
 	aws.Pager
 }
@@ -960,6 +978,7 @@ const opGetProject = "GetProject"
 type GetProjectRequest struct {
 	*aws.Request
 	Input *GetProjectInput
+	Copy  func(*GetProjectInput) GetProjectRequest
 }
 
 // Send marshals and sends the GetProject API request.
@@ -1000,7 +1019,7 @@ func (c *DeviceFarm) GetProjectRequest(input *GetProjectInput) GetProjectRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetProjectRequest{Request: req, Input: input}
+	return GetProjectRequest{Request: req, Input: input, Copy: c.GetProjectRequest}
 }
 
 const opGetRemoteAccessSession = "GetRemoteAccessSession"
@@ -1009,6 +1028,7 @@ const opGetRemoteAccessSession = "GetRemoteAccessSession"
 type GetRemoteAccessSessionRequest struct {
 	*aws.Request
 	Input *GetRemoteAccessSessionInput
+	Copy  func(*GetRemoteAccessSessionInput) GetRemoteAccessSessionRequest
 }
 
 // Send marshals and sends the GetRemoteAccessSession API request.
@@ -1049,7 +1069,7 @@ func (c *DeviceFarm) GetRemoteAccessSessionRequest(input *GetRemoteAccessSession
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRemoteAccessSessionRequest{Request: req, Input: input}
+	return GetRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.GetRemoteAccessSessionRequest}
 }
 
 const opGetRun = "GetRun"
@@ -1058,6 +1078,7 @@ const opGetRun = "GetRun"
 type GetRunRequest struct {
 	*aws.Request
 	Input *GetRunInput
+	Copy  func(*GetRunInput) GetRunRequest
 }
 
 // Send marshals and sends the GetRun API request.
@@ -1098,7 +1119,7 @@ func (c *DeviceFarm) GetRunRequest(input *GetRunInput) GetRunRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRunRequest{Request: req, Input: input}
+	return GetRunRequest{Request: req, Input: input, Copy: c.GetRunRequest}
 }
 
 const opGetSuite = "GetSuite"
@@ -1107,6 +1128,7 @@ const opGetSuite = "GetSuite"
 type GetSuiteRequest struct {
 	*aws.Request
 	Input *GetSuiteInput
+	Copy  func(*GetSuiteInput) GetSuiteRequest
 }
 
 // Send marshals and sends the GetSuite API request.
@@ -1147,7 +1169,7 @@ func (c *DeviceFarm) GetSuiteRequest(input *GetSuiteInput) GetSuiteRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSuiteRequest{Request: req, Input: input}
+	return GetSuiteRequest{Request: req, Input: input, Copy: c.GetSuiteRequest}
 }
 
 const opGetTest = "GetTest"
@@ -1156,6 +1178,7 @@ const opGetTest = "GetTest"
 type GetTestRequest struct {
 	*aws.Request
 	Input *GetTestInput
+	Copy  func(*GetTestInput) GetTestRequest
 }
 
 // Send marshals and sends the GetTest API request.
@@ -1196,7 +1219,7 @@ func (c *DeviceFarm) GetTestRequest(input *GetTestInput) GetTestRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTestRequest{Request: req, Input: input}
+	return GetTestRequest{Request: req, Input: input, Copy: c.GetTestRequest}
 }
 
 const opGetUpload = "GetUpload"
@@ -1205,6 +1228,7 @@ const opGetUpload = "GetUpload"
 type GetUploadRequest struct {
 	*aws.Request
 	Input *GetUploadInput
+	Copy  func(*GetUploadInput) GetUploadRequest
 }
 
 // Send marshals and sends the GetUpload API request.
@@ -1245,7 +1269,7 @@ func (c *DeviceFarm) GetUploadRequest(input *GetUploadInput) GetUploadRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUploadRequest{Request: req, Input: input}
+	return GetUploadRequest{Request: req, Input: input, Copy: c.GetUploadRequest}
 }
 
 const opInstallToRemoteAccessSession = "InstallToRemoteAccessSession"
@@ -1254,6 +1278,7 @@ const opInstallToRemoteAccessSession = "InstallToRemoteAccessSession"
 type InstallToRemoteAccessSessionRequest struct {
 	*aws.Request
 	Input *InstallToRemoteAccessSessionInput
+	Copy  func(*InstallToRemoteAccessSessionInput) InstallToRemoteAccessSessionRequest
 }
 
 // Send marshals and sends the InstallToRemoteAccessSession API request.
@@ -1296,7 +1321,7 @@ func (c *DeviceFarm) InstallToRemoteAccessSessionRequest(input *InstallToRemoteA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InstallToRemoteAccessSessionRequest{Request: req, Input: input}
+	return InstallToRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.InstallToRemoteAccessSessionRequest}
 }
 
 const opListArtifacts = "ListArtifacts"
@@ -1305,6 +1330,7 @@ const opListArtifacts = "ListArtifacts"
 type ListArtifactsRequest struct {
 	*aws.Request
 	Input *ListArtifactsInput
+	Copy  func(*ListArtifactsInput) ListArtifactsRequest
 }
 
 // Send marshals and sends the ListArtifacts API request.
@@ -1351,47 +1377,47 @@ func (c *DeviceFarm) ListArtifactsRequest(input *ListArtifactsInput) ListArtifac
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListArtifactsRequest{Request: req, Input: input}
+	return ListArtifactsRequest{Request: req, Input: input, Copy: c.ListArtifactsRequest}
 }
 
-// ListArtifactsPages iterates over the pages of a ListArtifacts operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListArtifacts method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListArtifactsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListArtifacts operation.
-//    pageNum := 0
-//    err := client.ListArtifactsPages(params,
-//        func(page *ListArtifactsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListArtifactsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListArtifactsRequest) Paginate(opts ...aws.Option) ListArtifactsPager {
 	return ListArtifactsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListArtifactsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListArtifactsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListArtifactsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListArtifactsPager ...
+// ListArtifactsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListArtifactsPager struct {
 	aws.Pager
 }
@@ -1406,6 +1432,7 @@ const opListDevicePools = "ListDevicePools"
 type ListDevicePoolsRequest struct {
 	*aws.Request
 	Input *ListDevicePoolsInput
+	Copy  func(*ListDevicePoolsInput) ListDevicePoolsRequest
 }
 
 // Send marshals and sends the ListDevicePools API request.
@@ -1452,47 +1479,47 @@ func (c *DeviceFarm) ListDevicePoolsRequest(input *ListDevicePoolsInput) ListDev
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDevicePoolsRequest{Request: req, Input: input}
+	return ListDevicePoolsRequest{Request: req, Input: input, Copy: c.ListDevicePoolsRequest}
 }
 
-// ListDevicePoolsPages iterates over the pages of a ListDevicePools operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDevicePools method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDevicePoolsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDevicePools operation.
-//    pageNum := 0
-//    err := client.ListDevicePoolsPages(params,
-//        func(page *ListDevicePoolsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDevicePoolsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDevicePoolsRequest) Paginate(opts ...aws.Option) ListDevicePoolsPager {
 	return ListDevicePoolsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDevicePoolsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDevicePoolsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDevicePoolsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDevicePoolsPager ...
+// ListDevicePoolsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDevicePoolsPager struct {
 	aws.Pager
 }
@@ -1507,6 +1534,7 @@ const opListDevices = "ListDevices"
 type ListDevicesRequest struct {
 	*aws.Request
 	Input *ListDevicesInput
+	Copy  func(*ListDevicesInput) ListDevicesRequest
 }
 
 // Send marshals and sends the ListDevices API request.
@@ -1553,47 +1581,47 @@ func (c *DeviceFarm) ListDevicesRequest(input *ListDevicesInput) ListDevicesRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDevicesRequest{Request: req, Input: input}
+	return ListDevicesRequest{Request: req, Input: input, Copy: c.ListDevicesRequest}
 }
 
-// ListDevicesPages iterates over the pages of a ListDevices operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDevices method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDevicesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDevices operation.
-//    pageNum := 0
-//    err := client.ListDevicesPages(params,
-//        func(page *ListDevicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDevicesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDevicesRequest) Paginate(opts ...aws.Option) ListDevicesPager {
 	return ListDevicesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDevicesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDevicesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDevicesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDevicesPager ...
+// ListDevicesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDevicesPager struct {
 	aws.Pager
 }
@@ -1608,6 +1636,7 @@ const opListJobs = "ListJobs"
 type ListJobsRequest struct {
 	*aws.Request
 	Input *ListJobsInput
+	Copy  func(*ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -1654,47 +1683,47 @@ func (c *DeviceFarm) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobsRequest{Request: req, Input: input}
+	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
-// ListJobsPages iterates over the pages of a ListJobs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListJobs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListJobs operation.
-//    pageNum := 0
-//    err := client.ListJobsPages(params,
-//        func(page *ListJobsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 	return ListJobsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListJobsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListJobsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListJobsPager ...
+// ListJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListJobsPager struct {
 	aws.Pager
 }
@@ -1709,6 +1738,7 @@ const opListNetworkProfiles = "ListNetworkProfiles"
 type ListNetworkProfilesRequest struct {
 	*aws.Request
 	Input *ListNetworkProfilesInput
+	Copy  func(*ListNetworkProfilesInput) ListNetworkProfilesRequest
 }
 
 // Send marshals and sends the ListNetworkProfiles API request.
@@ -1749,7 +1779,7 @@ func (c *DeviceFarm) ListNetworkProfilesRequest(input *ListNetworkProfilesInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListNetworkProfilesRequest{Request: req, Input: input}
+	return ListNetworkProfilesRequest{Request: req, Input: input, Copy: c.ListNetworkProfilesRequest}
 }
 
 const opListOfferingPromotions = "ListOfferingPromotions"
@@ -1758,6 +1788,7 @@ const opListOfferingPromotions = "ListOfferingPromotions"
 type ListOfferingPromotionsRequest struct {
 	*aws.Request
 	Input *ListOfferingPromotionsInput
+	Copy  func(*ListOfferingPromotionsInput) ListOfferingPromotionsRequest
 }
 
 // Send marshals and sends the ListOfferingPromotions API request.
@@ -1802,7 +1833,7 @@ func (c *DeviceFarm) ListOfferingPromotionsRequest(input *ListOfferingPromotions
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOfferingPromotionsRequest{Request: req, Input: input}
+	return ListOfferingPromotionsRequest{Request: req, Input: input, Copy: c.ListOfferingPromotionsRequest}
 }
 
 const opListOfferingTransactions = "ListOfferingTransactions"
@@ -1811,6 +1842,7 @@ const opListOfferingTransactions = "ListOfferingTransactions"
 type ListOfferingTransactionsRequest struct {
 	*aws.Request
 	Input *ListOfferingTransactionsInput
+	Copy  func(*ListOfferingTransactionsInput) ListOfferingTransactionsRequest
 }
 
 // Send marshals and sends the ListOfferingTransactions API request.
@@ -1862,47 +1894,47 @@ func (c *DeviceFarm) ListOfferingTransactionsRequest(input *ListOfferingTransact
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOfferingTransactionsRequest{Request: req, Input: input}
+	return ListOfferingTransactionsRequest{Request: req, Input: input, Copy: c.ListOfferingTransactionsRequest}
 }
 
-// ListOfferingTransactionsPages iterates over the pages of a ListOfferingTransactions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListOfferingTransactions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListOfferingTransactionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListOfferingTransactions operation.
-//    pageNum := 0
-//    err := client.ListOfferingTransactionsPages(params,
-//        func(page *ListOfferingTransactionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListOfferingTransactionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListOfferingTransactionsRequest) Paginate(opts ...aws.Option) ListOfferingTransactionsPager {
 	return ListOfferingTransactionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListOfferingTransactionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListOfferingTransactionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListOfferingTransactionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListOfferingTransactionsPager ...
+// ListOfferingTransactionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListOfferingTransactionsPager struct {
 	aws.Pager
 }
@@ -1917,6 +1949,7 @@ const opListOfferings = "ListOfferings"
 type ListOfferingsRequest struct {
 	*aws.Request
 	Input *ListOfferingsInput
+	Copy  func(*ListOfferingsInput) ListOfferingsRequest
 }
 
 // Send marshals and sends the ListOfferings API request.
@@ -1968,47 +2001,47 @@ func (c *DeviceFarm) ListOfferingsRequest(input *ListOfferingsInput) ListOfferin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOfferingsRequest{Request: req, Input: input}
+	return ListOfferingsRequest{Request: req, Input: input, Copy: c.ListOfferingsRequest}
 }
 
-// ListOfferingsPages iterates over the pages of a ListOfferings operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListOfferings method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListOfferingsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListOfferings operation.
-//    pageNum := 0
-//    err := client.ListOfferingsPages(params,
-//        func(page *ListOfferingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListOfferingsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListOfferingsRequest) Paginate(opts ...aws.Option) ListOfferingsPager {
 	return ListOfferingsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListOfferingsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListOfferingsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListOfferingsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListOfferingsPager ...
+// ListOfferingsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListOfferingsPager struct {
 	aws.Pager
 }
@@ -2023,6 +2056,7 @@ const opListProjects = "ListProjects"
 type ListProjectsRequest struct {
 	*aws.Request
 	Input *ListProjectsInput
+	Copy  func(*ListProjectsInput) ListProjectsRequest
 }
 
 // Send marshals and sends the ListProjects API request.
@@ -2069,47 +2103,47 @@ func (c *DeviceFarm) ListProjectsRequest(input *ListProjectsInput) ListProjectsR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListProjectsRequest{Request: req, Input: input}
+	return ListProjectsRequest{Request: req, Input: input, Copy: c.ListProjectsRequest}
 }
 
-// ListProjectsPages iterates over the pages of a ListProjects operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListProjects method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListProjectsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListProjects operation.
-//    pageNum := 0
-//    err := client.ListProjectsPages(params,
-//        func(page *ListProjectsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListProjectsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListProjectsRequest) Paginate(opts ...aws.Option) ListProjectsPager {
 	return ListProjectsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListProjectsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListProjectsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListProjectsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListProjectsPager ...
+// ListProjectsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListProjectsPager struct {
 	aws.Pager
 }
@@ -2124,6 +2158,7 @@ const opListRemoteAccessSessions = "ListRemoteAccessSessions"
 type ListRemoteAccessSessionsRequest struct {
 	*aws.Request
 	Input *ListRemoteAccessSessionsInput
+	Copy  func(*ListRemoteAccessSessionsInput) ListRemoteAccessSessionsRequest
 }
 
 // Send marshals and sends the ListRemoteAccessSessions API request.
@@ -2164,7 +2199,7 @@ func (c *DeviceFarm) ListRemoteAccessSessionsRequest(input *ListRemoteAccessSess
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRemoteAccessSessionsRequest{Request: req, Input: input}
+	return ListRemoteAccessSessionsRequest{Request: req, Input: input, Copy: c.ListRemoteAccessSessionsRequest}
 }
 
 const opListRuns = "ListRuns"
@@ -2173,6 +2208,7 @@ const opListRuns = "ListRuns"
 type ListRunsRequest struct {
 	*aws.Request
 	Input *ListRunsInput
+	Copy  func(*ListRunsInput) ListRunsRequest
 }
 
 // Send marshals and sends the ListRuns API request.
@@ -2219,47 +2255,47 @@ func (c *DeviceFarm) ListRunsRequest(input *ListRunsInput) ListRunsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRunsRequest{Request: req, Input: input}
+	return ListRunsRequest{Request: req, Input: input, Copy: c.ListRunsRequest}
 }
 
-// ListRunsPages iterates over the pages of a ListRuns operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListRuns method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListRunsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListRuns operation.
-//    pageNum := 0
-//    err := client.ListRunsPages(params,
-//        func(page *ListRunsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListRunsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListRunsRequest) Paginate(opts ...aws.Option) ListRunsPager {
 	return ListRunsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListRunsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListRunsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListRunsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListRunsPager ...
+// ListRunsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListRunsPager struct {
 	aws.Pager
 }
@@ -2274,6 +2310,7 @@ const opListSamples = "ListSamples"
 type ListSamplesRequest struct {
 	*aws.Request
 	Input *ListSamplesInput
+	Copy  func(*ListSamplesInput) ListSamplesRequest
 }
 
 // Send marshals and sends the ListSamples API request.
@@ -2320,47 +2357,47 @@ func (c *DeviceFarm) ListSamplesRequest(input *ListSamplesInput) ListSamplesRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSamplesRequest{Request: req, Input: input}
+	return ListSamplesRequest{Request: req, Input: input, Copy: c.ListSamplesRequest}
 }
 
-// ListSamplesPages iterates over the pages of a ListSamples operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListSamples method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListSamplesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListSamples operation.
-//    pageNum := 0
-//    err := client.ListSamplesPages(params,
-//        func(page *ListSamplesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListSamplesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListSamplesRequest) Paginate(opts ...aws.Option) ListSamplesPager {
 	return ListSamplesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListSamplesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSamplesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListSamplesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListSamplesPager ...
+// ListSamplesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListSamplesPager struct {
 	aws.Pager
 }
@@ -2375,6 +2412,7 @@ const opListSuites = "ListSuites"
 type ListSuitesRequest struct {
 	*aws.Request
 	Input *ListSuitesInput
+	Copy  func(*ListSuitesInput) ListSuitesRequest
 }
 
 // Send marshals and sends the ListSuites API request.
@@ -2421,47 +2459,47 @@ func (c *DeviceFarm) ListSuitesRequest(input *ListSuitesInput) ListSuitesRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSuitesRequest{Request: req, Input: input}
+	return ListSuitesRequest{Request: req, Input: input, Copy: c.ListSuitesRequest}
 }
 
-// ListSuitesPages iterates over the pages of a ListSuites operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListSuites method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListSuitesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListSuites operation.
-//    pageNum := 0
-//    err := client.ListSuitesPages(params,
-//        func(page *ListSuitesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListSuitesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListSuitesRequest) Paginate(opts ...aws.Option) ListSuitesPager {
 	return ListSuitesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListSuitesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSuitesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListSuitesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListSuitesPager ...
+// ListSuitesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListSuitesPager struct {
 	aws.Pager
 }
@@ -2476,6 +2514,7 @@ const opListTests = "ListTests"
 type ListTestsRequest struct {
 	*aws.Request
 	Input *ListTestsInput
+	Copy  func(*ListTestsInput) ListTestsRequest
 }
 
 // Send marshals and sends the ListTests API request.
@@ -2522,47 +2561,47 @@ func (c *DeviceFarm) ListTestsRequest(input *ListTestsInput) ListTestsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTestsRequest{Request: req, Input: input}
+	return ListTestsRequest{Request: req, Input: input, Copy: c.ListTestsRequest}
 }
 
-// ListTestsPages iterates over the pages of a ListTests operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTests method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTestsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTests operation.
-//    pageNum := 0
-//    err := client.ListTestsPages(params,
-//        func(page *ListTestsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTestsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListTestsRequest) Paginate(opts ...aws.Option) ListTestsPager {
 	return ListTestsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTestsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTestsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListTestsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListTestsPager ...
+// ListTestsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListTestsPager struct {
 	aws.Pager
 }
@@ -2577,6 +2616,7 @@ const opListUniqueProblems = "ListUniqueProblems"
 type ListUniqueProblemsRequest struct {
 	*aws.Request
 	Input *ListUniqueProblemsInput
+	Copy  func(*ListUniqueProblemsInput) ListUniqueProblemsRequest
 }
 
 // Send marshals and sends the ListUniqueProblems API request.
@@ -2623,47 +2663,47 @@ func (c *DeviceFarm) ListUniqueProblemsRequest(input *ListUniqueProblemsInput) L
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUniqueProblemsRequest{Request: req, Input: input}
+	return ListUniqueProblemsRequest{Request: req, Input: input, Copy: c.ListUniqueProblemsRequest}
 }
 
-// ListUniqueProblemsPages iterates over the pages of a ListUniqueProblems operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListUniqueProblems method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListUniqueProblemsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListUniqueProblems operation.
-//    pageNum := 0
-//    err := client.ListUniqueProblemsPages(params,
-//        func(page *ListUniqueProblemsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListUniqueProblemsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListUniqueProblemsRequest) Paginate(opts ...aws.Option) ListUniqueProblemsPager {
 	return ListUniqueProblemsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListUniqueProblemsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListUniqueProblemsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListUniqueProblemsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListUniqueProblemsPager ...
+// ListUniqueProblemsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListUniqueProblemsPager struct {
 	aws.Pager
 }
@@ -2678,6 +2718,7 @@ const opListUploads = "ListUploads"
 type ListUploadsRequest struct {
 	*aws.Request
 	Input *ListUploadsInput
+	Copy  func(*ListUploadsInput) ListUploadsRequest
 }
 
 // Send marshals and sends the ListUploads API request.
@@ -2724,47 +2765,47 @@ func (c *DeviceFarm) ListUploadsRequest(input *ListUploadsInput) ListUploadsRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUploadsRequest{Request: req, Input: input}
+	return ListUploadsRequest{Request: req, Input: input, Copy: c.ListUploadsRequest}
 }
 
-// ListUploadsPages iterates over the pages of a ListUploads operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListUploads method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListUploadsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListUploads operation.
-//    pageNum := 0
-//    err := client.ListUploadsPages(params,
-//        func(page *ListUploadsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListUploadsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListUploadsRequest) Paginate(opts ...aws.Option) ListUploadsPager {
 	return ListUploadsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListUploadsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListUploadsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListUploadsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListUploadsPager ...
+// ListUploadsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListUploadsPager struct {
 	aws.Pager
 }
@@ -2779,6 +2820,7 @@ const opPurchaseOffering = "PurchaseOffering"
 type PurchaseOfferingRequest struct {
 	*aws.Request
 	Input *PurchaseOfferingInput
+	Copy  func(*PurchaseOfferingInput) PurchaseOfferingRequest
 }
 
 // Send marshals and sends the PurchaseOffering API request.
@@ -2824,7 +2866,7 @@ func (c *DeviceFarm) PurchaseOfferingRequest(input *PurchaseOfferingInput) Purch
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PurchaseOfferingRequest{Request: req, Input: input}
+	return PurchaseOfferingRequest{Request: req, Input: input, Copy: c.PurchaseOfferingRequest}
 }
 
 const opRenewOffering = "RenewOffering"
@@ -2833,6 +2875,7 @@ const opRenewOffering = "RenewOffering"
 type RenewOfferingRequest struct {
 	*aws.Request
 	Input *RenewOfferingInput
+	Copy  func(*RenewOfferingInput) RenewOfferingRequest
 }
 
 // Send marshals and sends the RenewOffering API request.
@@ -2877,7 +2920,7 @@ func (c *DeviceFarm) RenewOfferingRequest(input *RenewOfferingInput) RenewOfferi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RenewOfferingRequest{Request: req, Input: input}
+	return RenewOfferingRequest{Request: req, Input: input, Copy: c.RenewOfferingRequest}
 }
 
 const opScheduleRun = "ScheduleRun"
@@ -2886,6 +2929,7 @@ const opScheduleRun = "ScheduleRun"
 type ScheduleRunRequest struct {
 	*aws.Request
 	Input *ScheduleRunInput
+	Copy  func(*ScheduleRunInput) ScheduleRunRequest
 }
 
 // Send marshals and sends the ScheduleRun API request.
@@ -2926,7 +2970,7 @@ func (c *DeviceFarm) ScheduleRunRequest(input *ScheduleRunInput) ScheduleRunRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ScheduleRunRequest{Request: req, Input: input}
+	return ScheduleRunRequest{Request: req, Input: input, Copy: c.ScheduleRunRequest}
 }
 
 const opStopRemoteAccessSession = "StopRemoteAccessSession"
@@ -2935,6 +2979,7 @@ const opStopRemoteAccessSession = "StopRemoteAccessSession"
 type StopRemoteAccessSessionRequest struct {
 	*aws.Request
 	Input *StopRemoteAccessSessionInput
+	Copy  func(*StopRemoteAccessSessionInput) StopRemoteAccessSessionRequest
 }
 
 // Send marshals and sends the StopRemoteAccessSession API request.
@@ -2975,7 +3020,7 @@ func (c *DeviceFarm) StopRemoteAccessSessionRequest(input *StopRemoteAccessSessi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopRemoteAccessSessionRequest{Request: req, Input: input}
+	return StopRemoteAccessSessionRequest{Request: req, Input: input, Copy: c.StopRemoteAccessSessionRequest}
 }
 
 const opStopRun = "StopRun"
@@ -2984,6 +3029,7 @@ const opStopRun = "StopRun"
 type StopRunRequest struct {
 	*aws.Request
 	Input *StopRunInput
+	Copy  func(*StopRunInput) StopRunRequest
 }
 
 // Send marshals and sends the StopRun API request.
@@ -3029,7 +3075,7 @@ func (c *DeviceFarm) StopRunRequest(input *StopRunInput) StopRunRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopRunRequest{Request: req, Input: input}
+	return StopRunRequest{Request: req, Input: input, Copy: c.StopRunRequest}
 }
 
 const opUpdateDevicePool = "UpdateDevicePool"
@@ -3038,6 +3084,7 @@ const opUpdateDevicePool = "UpdateDevicePool"
 type UpdateDevicePoolRequest struct {
 	*aws.Request
 	Input *UpdateDevicePoolInput
+	Copy  func(*UpdateDevicePoolInput) UpdateDevicePoolRequest
 }
 
 // Send marshals and sends the UpdateDevicePool API request.
@@ -3080,7 +3127,7 @@ func (c *DeviceFarm) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDevicePoolRequest{Request: req, Input: input}
+	return UpdateDevicePoolRequest{Request: req, Input: input, Copy: c.UpdateDevicePoolRequest}
 }
 
 const opUpdateNetworkProfile = "UpdateNetworkProfile"
@@ -3089,6 +3136,7 @@ const opUpdateNetworkProfile = "UpdateNetworkProfile"
 type UpdateNetworkProfileRequest struct {
 	*aws.Request
 	Input *UpdateNetworkProfileInput
+	Copy  func(*UpdateNetworkProfileInput) UpdateNetworkProfileRequest
 }
 
 // Send marshals and sends the UpdateNetworkProfile API request.
@@ -3129,7 +3177,7 @@ func (c *DeviceFarm) UpdateNetworkProfileRequest(input *UpdateNetworkProfileInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateNetworkProfileRequest{Request: req, Input: input}
+	return UpdateNetworkProfileRequest{Request: req, Input: input, Copy: c.UpdateNetworkProfileRequest}
 }
 
 const opUpdateProject = "UpdateProject"
@@ -3138,6 +3186,7 @@ const opUpdateProject = "UpdateProject"
 type UpdateProjectRequest struct {
 	*aws.Request
 	Input *UpdateProjectInput
+	Copy  func(*UpdateProjectInput) UpdateProjectRequest
 }
 
 // Send marshals and sends the UpdateProject API request.
@@ -3178,7 +3227,7 @@ func (c *DeviceFarm) UpdateProjectRequest(input *UpdateProjectInput) UpdateProje
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateProjectRequest{Request: req, Input: input}
+	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 
 // A container for account-level settings within AWS Device Farm.

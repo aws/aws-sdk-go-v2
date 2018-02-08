@@ -18,6 +18,7 @@ const opAcceptCertificateTransfer = "AcceptCertificateTransfer"
 type AcceptCertificateTransferRequest struct {
 	*aws.Request
 	Input *AcceptCertificateTransferInput
+	Copy  func(*AcceptCertificateTransferInput) AcceptCertificateTransferRequest
 }
 
 // Send marshals and sends the AcceptCertificateTransfer API request.
@@ -62,7 +63,7 @@ func (c *IoT) AcceptCertificateTransferRequest(input *AcceptCertificateTransferI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcceptCertificateTransferRequest{Request: req, Input: input}
+	return AcceptCertificateTransferRequest{Request: req, Input: input, Copy: c.AcceptCertificateTransferRequest}
 }
 
 const opAddThingToThingGroup = "AddThingToThingGroup"
@@ -71,6 +72,7 @@ const opAddThingToThingGroup = "AddThingToThingGroup"
 type AddThingToThingGroupRequest struct {
 	*aws.Request
 	Input *AddThingToThingGroupInput
+	Copy  func(*AddThingToThingGroupInput) AddThingToThingGroupRequest
 }
 
 // Send marshals and sends the AddThingToThingGroup API request.
@@ -109,7 +111,7 @@ func (c *IoT) AddThingToThingGroupRequest(input *AddThingToThingGroupInput) AddT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddThingToThingGroupRequest{Request: req, Input: input}
+	return AddThingToThingGroupRequest{Request: req, Input: input, Copy: c.AddThingToThingGroupRequest}
 }
 
 const opAssociateTargetsWithJob = "AssociateTargetsWithJob"
@@ -118,6 +120,7 @@ const opAssociateTargetsWithJob = "AssociateTargetsWithJob"
 type AssociateTargetsWithJobRequest struct {
 	*aws.Request
 	Input *AssociateTargetsWithJobInput
+	Copy  func(*AssociateTargetsWithJobInput) AssociateTargetsWithJobRequest
 }
 
 // Send marshals and sends the AssociateTargetsWithJob API request.
@@ -164,7 +167,7 @@ func (c *IoT) AssociateTargetsWithJobRequest(input *AssociateTargetsWithJobInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateTargetsWithJobRequest{Request: req, Input: input}
+	return AssociateTargetsWithJobRequest{Request: req, Input: input, Copy: c.AssociateTargetsWithJobRequest}
 }
 
 const opAttachPolicy = "AttachPolicy"
@@ -173,6 +176,7 @@ const opAttachPolicy = "AttachPolicy"
 type AttachPolicyRequest struct {
 	*aws.Request
 	Input *AttachPolicyInput
+	Copy  func(*AttachPolicyInput) AttachPolicyRequest
 }
 
 // Send marshals and sends the AttachPolicy API request.
@@ -213,7 +217,7 @@ func (c *IoT) AttachPolicyRequest(input *AttachPolicyInput) AttachPolicyRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachPolicyRequest{Request: req, Input: input}
+	return AttachPolicyRequest{Request: req, Input: input, Copy: c.AttachPolicyRequest}
 }
 
 const opAttachPrincipalPolicy = "AttachPrincipalPolicy"
@@ -222,6 +226,7 @@ const opAttachPrincipalPolicy = "AttachPrincipalPolicy"
 type AttachPrincipalPolicyRequest struct {
 	*aws.Request
 	Input *AttachPrincipalPolicyInput
+	Copy  func(*AttachPrincipalPolicyInput) AttachPrincipalPolicyRequest
 }
 
 // Send marshals and sends the AttachPrincipalPolicy API request.
@@ -268,7 +273,7 @@ func (c *IoT) AttachPrincipalPolicyRequest(input *AttachPrincipalPolicyInput) At
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachPrincipalPolicyRequest{Request: req, Input: input}
+	return AttachPrincipalPolicyRequest{Request: req, Input: input, Copy: c.AttachPrincipalPolicyRequest}
 }
 
 const opAttachThingPrincipal = "AttachThingPrincipal"
@@ -277,6 +282,7 @@ const opAttachThingPrincipal = "AttachThingPrincipal"
 type AttachThingPrincipalRequest struct {
 	*aws.Request
 	Input *AttachThingPrincipalInput
+	Copy  func(*AttachThingPrincipalInput) AttachThingPrincipalRequest
 }
 
 // Send marshals and sends the AttachThingPrincipal API request.
@@ -315,7 +321,7 @@ func (c *IoT) AttachThingPrincipalRequest(input *AttachThingPrincipalInput) Atta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachThingPrincipalRequest{Request: req, Input: input}
+	return AttachThingPrincipalRequest{Request: req, Input: input, Copy: c.AttachThingPrincipalRequest}
 }
 
 const opCancelCertificateTransfer = "CancelCertificateTransfer"
@@ -324,6 +330,7 @@ const opCancelCertificateTransfer = "CancelCertificateTransfer"
 type CancelCertificateTransferRequest struct {
 	*aws.Request
 	Input *CancelCertificateTransferInput
+	Copy  func(*CancelCertificateTransferInput) CancelCertificateTransferRequest
 }
 
 // Send marshals and sends the CancelCertificateTransfer API request.
@@ -373,7 +380,7 @@ func (c *IoT) CancelCertificateTransferRequest(input *CancelCertificateTransferI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelCertificateTransferRequest{Request: req, Input: input}
+	return CancelCertificateTransferRequest{Request: req, Input: input, Copy: c.CancelCertificateTransferRequest}
 }
 
 const opCancelJob = "CancelJob"
@@ -382,6 +389,7 @@ const opCancelJob = "CancelJob"
 type CancelJobRequest struct {
 	*aws.Request
 	Input *CancelJobInput
+	Copy  func(*CancelJobInput) CancelJobRequest
 }
 
 // Send marshals and sends the CancelJob API request.
@@ -420,7 +428,7 @@ func (c *IoT) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelJobRequest{Request: req, Input: input}
+	return CancelJobRequest{Request: req, Input: input, Copy: c.CancelJobRequest}
 }
 
 const opClearDefaultAuthorizer = "ClearDefaultAuthorizer"
@@ -429,6 +437,7 @@ const opClearDefaultAuthorizer = "ClearDefaultAuthorizer"
 type ClearDefaultAuthorizerRequest struct {
 	*aws.Request
 	Input *ClearDefaultAuthorizerInput
+	Copy  func(*ClearDefaultAuthorizerInput) ClearDefaultAuthorizerRequest
 }
 
 // Send marshals and sends the ClearDefaultAuthorizer API request.
@@ -467,7 +476,7 @@ func (c *IoT) ClearDefaultAuthorizerRequest(input *ClearDefaultAuthorizerInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ClearDefaultAuthorizerRequest{Request: req, Input: input}
+	return ClearDefaultAuthorizerRequest{Request: req, Input: input, Copy: c.ClearDefaultAuthorizerRequest}
 }
 
 const opCreateAuthorizer = "CreateAuthorizer"
@@ -476,6 +485,7 @@ const opCreateAuthorizer = "CreateAuthorizer"
 type CreateAuthorizerRequest struct {
 	*aws.Request
 	Input *CreateAuthorizerInput
+	Copy  func(*CreateAuthorizerInput) CreateAuthorizerRequest
 }
 
 // Send marshals and sends the CreateAuthorizer API request.
@@ -514,7 +524,7 @@ func (c *IoT) CreateAuthorizerRequest(input *CreateAuthorizerInput) CreateAuthor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAuthorizerRequest{Request: req, Input: input}
+	return CreateAuthorizerRequest{Request: req, Input: input, Copy: c.CreateAuthorizerRequest}
 }
 
 const opCreateCertificateFromCsr = "CreateCertificateFromCsr"
@@ -523,6 +533,7 @@ const opCreateCertificateFromCsr = "CreateCertificateFromCsr"
 type CreateCertificateFromCsrRequest struct {
 	*aws.Request
 	Input *CreateCertificateFromCsrInput
+	Copy  func(*CreateCertificateFromCsrInput) CreateCertificateFromCsrRequest
 }
 
 // Send marshals and sends the CreateCertificateFromCsr API request.
@@ -602,7 +613,7 @@ func (c *IoT) CreateCertificateFromCsrRequest(input *CreateCertificateFromCsrInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCertificateFromCsrRequest{Request: req, Input: input}
+	return CreateCertificateFromCsrRequest{Request: req, Input: input, Copy: c.CreateCertificateFromCsrRequest}
 }
 
 const opCreateJob = "CreateJob"
@@ -611,6 +622,7 @@ const opCreateJob = "CreateJob"
 type CreateJobRequest struct {
 	*aws.Request
 	Input *CreateJobInput
+	Copy  func(*CreateJobInput) CreateJobRequest
 }
 
 // Send marshals and sends the CreateJob API request.
@@ -649,7 +661,7 @@ func (c *IoT) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateJobRequest{Request: req, Input: input}
+	return CreateJobRequest{Request: req, Input: input, Copy: c.CreateJobRequest}
 }
 
 const opCreateKeysAndCertificate = "CreateKeysAndCertificate"
@@ -658,6 +670,7 @@ const opCreateKeysAndCertificate = "CreateKeysAndCertificate"
 type CreateKeysAndCertificateRequest struct {
 	*aws.Request
 	Input *CreateKeysAndCertificateInput
+	Copy  func(*CreateKeysAndCertificateInput) CreateKeysAndCertificateRequest
 }
 
 // Send marshals and sends the CreateKeysAndCertificate API request.
@@ -700,7 +713,7 @@ func (c *IoT) CreateKeysAndCertificateRequest(input *CreateKeysAndCertificateInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateKeysAndCertificateRequest{Request: req, Input: input}
+	return CreateKeysAndCertificateRequest{Request: req, Input: input, Copy: c.CreateKeysAndCertificateRequest}
 }
 
 const opCreateOTAUpdate = "CreateOTAUpdate"
@@ -709,6 +722,7 @@ const opCreateOTAUpdate = "CreateOTAUpdate"
 type CreateOTAUpdateRequest struct {
 	*aws.Request
 	Input *CreateOTAUpdateInput
+	Copy  func(*CreateOTAUpdateInput) CreateOTAUpdateRequest
 }
 
 // Send marshals and sends the CreateOTAUpdate API request.
@@ -747,7 +761,7 @@ func (c *IoT) CreateOTAUpdateRequest(input *CreateOTAUpdateInput) CreateOTAUpdat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateOTAUpdateRequest{Request: req, Input: input}
+	return CreateOTAUpdateRequest{Request: req, Input: input, Copy: c.CreateOTAUpdateRequest}
 }
 
 const opCreatePolicy = "CreatePolicy"
@@ -756,6 +770,7 @@ const opCreatePolicy = "CreatePolicy"
 type CreatePolicyRequest struct {
 	*aws.Request
 	Input *CreatePolicyInput
+	Copy  func(*CreatePolicyInput) CreatePolicyRequest
 }
 
 // Send marshals and sends the CreatePolicy API request.
@@ -798,7 +813,7 @@ func (c *IoT) CreatePolicyRequest(input *CreatePolicyInput) CreatePolicyRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePolicyRequest{Request: req, Input: input}
+	return CreatePolicyRequest{Request: req, Input: input, Copy: c.CreatePolicyRequest}
 }
 
 const opCreatePolicyVersion = "CreatePolicyVersion"
@@ -807,6 +822,7 @@ const opCreatePolicyVersion = "CreatePolicyVersion"
 type CreatePolicyVersionRequest struct {
 	*aws.Request
 	Input *CreatePolicyVersionInput
+	Copy  func(*CreatePolicyVersionInput) CreatePolicyVersionRequest
 }
 
 // Send marshals and sends the CreatePolicyVersion API request.
@@ -852,7 +868,7 @@ func (c *IoT) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePolicyVersionRequest{Request: req, Input: input}
+	return CreatePolicyVersionRequest{Request: req, Input: input, Copy: c.CreatePolicyVersionRequest}
 }
 
 const opCreateRoleAlias = "CreateRoleAlias"
@@ -861,6 +877,7 @@ const opCreateRoleAlias = "CreateRoleAlias"
 type CreateRoleAliasRequest struct {
 	*aws.Request
 	Input *CreateRoleAliasInput
+	Copy  func(*CreateRoleAliasInput) CreateRoleAliasRequest
 }
 
 // Send marshals and sends the CreateRoleAlias API request.
@@ -899,7 +916,7 @@ func (c *IoT) CreateRoleAliasRequest(input *CreateRoleAliasInput) CreateRoleAlia
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRoleAliasRequest{Request: req, Input: input}
+	return CreateRoleAliasRequest{Request: req, Input: input, Copy: c.CreateRoleAliasRequest}
 }
 
 const opCreateStream = "CreateStream"
@@ -908,6 +925,7 @@ const opCreateStream = "CreateStream"
 type CreateStreamRequest struct {
 	*aws.Request
 	Input *CreateStreamInput
+	Copy  func(*CreateStreamInput) CreateStreamRequest
 }
 
 // Send marshals and sends the CreateStream API request.
@@ -952,7 +970,7 @@ func (c *IoT) CreateStreamRequest(input *CreateStreamInput) CreateStreamRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStreamRequest{Request: req, Input: input}
+	return CreateStreamRequest{Request: req, Input: input, Copy: c.CreateStreamRequest}
 }
 
 const opCreateThing = "CreateThing"
@@ -961,6 +979,7 @@ const opCreateThing = "CreateThing"
 type CreateThingRequest struct {
 	*aws.Request
 	Input *CreateThingInput
+	Copy  func(*CreateThingInput) CreateThingRequest
 }
 
 // Send marshals and sends the CreateThing API request.
@@ -999,7 +1018,7 @@ func (c *IoT) CreateThingRequest(input *CreateThingInput) CreateThingRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateThingRequest{Request: req, Input: input}
+	return CreateThingRequest{Request: req, Input: input, Copy: c.CreateThingRequest}
 }
 
 const opCreateThingGroup = "CreateThingGroup"
@@ -1008,6 +1027,7 @@ const opCreateThingGroup = "CreateThingGroup"
 type CreateThingGroupRequest struct {
 	*aws.Request
 	Input *CreateThingGroupInput
+	Copy  func(*CreateThingGroupInput) CreateThingGroupRequest
 }
 
 // Send marshals and sends the CreateThingGroup API request.
@@ -1046,7 +1066,7 @@ func (c *IoT) CreateThingGroupRequest(input *CreateThingGroupInput) CreateThingG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateThingGroupRequest{Request: req, Input: input}
+	return CreateThingGroupRequest{Request: req, Input: input, Copy: c.CreateThingGroupRequest}
 }
 
 const opCreateThingType = "CreateThingType"
@@ -1055,6 +1075,7 @@ const opCreateThingType = "CreateThingType"
 type CreateThingTypeRequest struct {
 	*aws.Request
 	Input *CreateThingTypeInput
+	Copy  func(*CreateThingTypeInput) CreateThingTypeRequest
 }
 
 // Send marshals and sends the CreateThingType API request.
@@ -1093,7 +1114,7 @@ func (c *IoT) CreateThingTypeRequest(input *CreateThingTypeInput) CreateThingTyp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateThingTypeRequest{Request: req, Input: input}
+	return CreateThingTypeRequest{Request: req, Input: input, Copy: c.CreateThingTypeRequest}
 }
 
 const opCreateTopicRule = "CreateTopicRule"
@@ -1102,6 +1123,7 @@ const opCreateTopicRule = "CreateTopicRule"
 type CreateTopicRuleRequest struct {
 	*aws.Request
 	Input *CreateTopicRuleInput
+	Copy  func(*CreateTopicRuleInput) CreateTopicRuleRequest
 }
 
 // Send marshals and sends the CreateTopicRule API request.
@@ -1144,7 +1166,7 @@ func (c *IoT) CreateTopicRuleRequest(input *CreateTopicRuleInput) CreateTopicRul
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTopicRuleRequest{Request: req, Input: input}
+	return CreateTopicRuleRequest{Request: req, Input: input, Copy: c.CreateTopicRuleRequest}
 }
 
 const opDeleteAuthorizer = "DeleteAuthorizer"
@@ -1153,6 +1175,7 @@ const opDeleteAuthorizer = "DeleteAuthorizer"
 type DeleteAuthorizerRequest struct {
 	*aws.Request
 	Input *DeleteAuthorizerInput
+	Copy  func(*DeleteAuthorizerInput) DeleteAuthorizerRequest
 }
 
 // Send marshals and sends the DeleteAuthorizer API request.
@@ -1191,7 +1214,7 @@ func (c *IoT) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) DeleteAuthor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAuthorizerRequest{Request: req, Input: input}
+	return DeleteAuthorizerRequest{Request: req, Input: input, Copy: c.DeleteAuthorizerRequest}
 }
 
 const opDeleteCACertificate = "DeleteCACertificate"
@@ -1200,6 +1223,7 @@ const opDeleteCACertificate = "DeleteCACertificate"
 type DeleteCACertificateRequest struct {
 	*aws.Request
 	Input *DeleteCACertificateInput
+	Copy  func(*DeleteCACertificateInput) DeleteCACertificateRequest
 }
 
 // Send marshals and sends the DeleteCACertificate API request.
@@ -1238,7 +1262,7 @@ func (c *IoT) DeleteCACertificateRequest(input *DeleteCACertificateInput) Delete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCACertificateRequest{Request: req, Input: input}
+	return DeleteCACertificateRequest{Request: req, Input: input, Copy: c.DeleteCACertificateRequest}
 }
 
 const opDeleteCertificate = "DeleteCertificate"
@@ -1247,6 +1271,7 @@ const opDeleteCertificate = "DeleteCertificate"
 type DeleteCertificateRequest struct {
 	*aws.Request
 	Input *DeleteCertificateInput
+	Copy  func(*DeleteCertificateInput) DeleteCertificateRequest
 }
 
 // Send marshals and sends the DeleteCertificate API request.
@@ -1292,7 +1317,7 @@ func (c *IoT) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteCert
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCertificateRequest{Request: req, Input: input}
+	return DeleteCertificateRequest{Request: req, Input: input, Copy: c.DeleteCertificateRequest}
 }
 
 const opDeleteOTAUpdate = "DeleteOTAUpdate"
@@ -1301,6 +1326,7 @@ const opDeleteOTAUpdate = "DeleteOTAUpdate"
 type DeleteOTAUpdateRequest struct {
 	*aws.Request
 	Input *DeleteOTAUpdateInput
+	Copy  func(*DeleteOTAUpdateInput) DeleteOTAUpdateRequest
 }
 
 // Send marshals and sends the DeleteOTAUpdate API request.
@@ -1339,7 +1365,7 @@ func (c *IoT) DeleteOTAUpdateRequest(input *DeleteOTAUpdateInput) DeleteOTAUpdat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteOTAUpdateRequest{Request: req, Input: input}
+	return DeleteOTAUpdateRequest{Request: req, Input: input, Copy: c.DeleteOTAUpdateRequest}
 }
 
 const opDeletePolicy = "DeletePolicy"
@@ -1348,6 +1374,7 @@ const opDeletePolicy = "DeletePolicy"
 type DeletePolicyRequest struct {
 	*aws.Request
 	Input *DeletePolicyInput
+	Copy  func(*DeletePolicyInput) DeletePolicyRequest
 }
 
 // Send marshals and sends the DeletePolicy API request.
@@ -1398,7 +1425,7 @@ func (c *IoT) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicyRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePolicyRequest{Request: req, Input: input}
+	return DeletePolicyRequest{Request: req, Input: input, Copy: c.DeletePolicyRequest}
 }
 
 const opDeletePolicyVersion = "DeletePolicyVersion"
@@ -1407,6 +1434,7 @@ const opDeletePolicyVersion = "DeletePolicyVersion"
 type DeletePolicyVersionRequest struct {
 	*aws.Request
 	Input *DeletePolicyVersionInput
+	Copy  func(*DeletePolicyVersionInput) DeletePolicyVersionRequest
 }
 
 // Send marshals and sends the DeletePolicyVersion API request.
@@ -1450,7 +1478,7 @@ func (c *IoT) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) Delete
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePolicyVersionRequest{Request: req, Input: input}
+	return DeletePolicyVersionRequest{Request: req, Input: input, Copy: c.DeletePolicyVersionRequest}
 }
 
 const opDeleteRegistrationCode = "DeleteRegistrationCode"
@@ -1459,6 +1487,7 @@ const opDeleteRegistrationCode = "DeleteRegistrationCode"
 type DeleteRegistrationCodeRequest struct {
 	*aws.Request
 	Input *DeleteRegistrationCodeInput
+	Copy  func(*DeleteRegistrationCodeInput) DeleteRegistrationCodeRequest
 }
 
 // Send marshals and sends the DeleteRegistrationCode API request.
@@ -1497,7 +1526,7 @@ func (c *IoT) DeleteRegistrationCodeRequest(input *DeleteRegistrationCodeInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRegistrationCodeRequest{Request: req, Input: input}
+	return DeleteRegistrationCodeRequest{Request: req, Input: input, Copy: c.DeleteRegistrationCodeRequest}
 }
 
 const opDeleteRoleAlias = "DeleteRoleAlias"
@@ -1506,6 +1535,7 @@ const opDeleteRoleAlias = "DeleteRoleAlias"
 type DeleteRoleAliasRequest struct {
 	*aws.Request
 	Input *DeleteRoleAliasInput
+	Copy  func(*DeleteRoleAliasInput) DeleteRoleAliasRequest
 }
 
 // Send marshals and sends the DeleteRoleAlias API request.
@@ -1544,7 +1574,7 @@ func (c *IoT) DeleteRoleAliasRequest(input *DeleteRoleAliasInput) DeleteRoleAlia
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRoleAliasRequest{Request: req, Input: input}
+	return DeleteRoleAliasRequest{Request: req, Input: input, Copy: c.DeleteRoleAliasRequest}
 }
 
 const opDeleteStream = "DeleteStream"
@@ -1553,6 +1583,7 @@ const opDeleteStream = "DeleteStream"
 type DeleteStreamRequest struct {
 	*aws.Request
 	Input *DeleteStreamInput
+	Copy  func(*DeleteStreamInput) DeleteStreamRequest
 }
 
 // Send marshals and sends the DeleteStream API request.
@@ -1591,7 +1622,7 @@ func (c *IoT) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStreamRequest{Request: req, Input: input}
+	return DeleteStreamRequest{Request: req, Input: input, Copy: c.DeleteStreamRequest}
 }
 
 const opDeleteThing = "DeleteThing"
@@ -1600,6 +1631,7 @@ const opDeleteThing = "DeleteThing"
 type DeleteThingRequest struct {
 	*aws.Request
 	Input *DeleteThingInput
+	Copy  func(*DeleteThingInput) DeleteThingRequest
 }
 
 // Send marshals and sends the DeleteThing API request.
@@ -1638,7 +1670,7 @@ func (c *IoT) DeleteThingRequest(input *DeleteThingInput) DeleteThingRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteThingRequest{Request: req, Input: input}
+	return DeleteThingRequest{Request: req, Input: input, Copy: c.DeleteThingRequest}
 }
 
 const opDeleteThingGroup = "DeleteThingGroup"
@@ -1647,6 +1679,7 @@ const opDeleteThingGroup = "DeleteThingGroup"
 type DeleteThingGroupRequest struct {
 	*aws.Request
 	Input *DeleteThingGroupInput
+	Copy  func(*DeleteThingGroupInput) DeleteThingGroupRequest
 }
 
 // Send marshals and sends the DeleteThingGroup API request.
@@ -1685,7 +1718,7 @@ func (c *IoT) DeleteThingGroupRequest(input *DeleteThingGroupInput) DeleteThingG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteThingGroupRequest{Request: req, Input: input}
+	return DeleteThingGroupRequest{Request: req, Input: input, Copy: c.DeleteThingGroupRequest}
 }
 
 const opDeleteThingType = "DeleteThingType"
@@ -1694,6 +1727,7 @@ const opDeleteThingType = "DeleteThingType"
 type DeleteThingTypeRequest struct {
 	*aws.Request
 	Input *DeleteThingTypeInput
+	Copy  func(*DeleteThingTypeInput) DeleteThingTypeRequest
 }
 
 // Send marshals and sends the DeleteThingType API request.
@@ -1736,7 +1770,7 @@ func (c *IoT) DeleteThingTypeRequest(input *DeleteThingTypeInput) DeleteThingTyp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteThingTypeRequest{Request: req, Input: input}
+	return DeleteThingTypeRequest{Request: req, Input: input, Copy: c.DeleteThingTypeRequest}
 }
 
 const opDeleteTopicRule = "DeleteTopicRule"
@@ -1745,6 +1779,7 @@ const opDeleteTopicRule = "DeleteTopicRule"
 type DeleteTopicRuleRequest struct {
 	*aws.Request
 	Input *DeleteTopicRuleInput
+	Copy  func(*DeleteTopicRuleInput) DeleteTopicRuleRequest
 }
 
 // Send marshals and sends the DeleteTopicRule API request.
@@ -1785,7 +1820,7 @@ func (c *IoT) DeleteTopicRuleRequest(input *DeleteTopicRuleInput) DeleteTopicRul
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTopicRuleRequest{Request: req, Input: input}
+	return DeleteTopicRuleRequest{Request: req, Input: input, Copy: c.DeleteTopicRuleRequest}
 }
 
 const opDeleteV2LoggingLevel = "DeleteV2LoggingLevel"
@@ -1794,6 +1829,7 @@ const opDeleteV2LoggingLevel = "DeleteV2LoggingLevel"
 type DeleteV2LoggingLevelRequest struct {
 	*aws.Request
 	Input *DeleteV2LoggingLevelInput
+	Copy  func(*DeleteV2LoggingLevelInput) DeleteV2LoggingLevelRequest
 }
 
 // Send marshals and sends the DeleteV2LoggingLevel API request.
@@ -1834,7 +1870,7 @@ func (c *IoT) DeleteV2LoggingLevelRequest(input *DeleteV2LoggingLevelInput) Dele
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteV2LoggingLevelRequest{Request: req, Input: input}
+	return DeleteV2LoggingLevelRequest{Request: req, Input: input, Copy: c.DeleteV2LoggingLevelRequest}
 }
 
 const opDeprecateThingType = "DeprecateThingType"
@@ -1843,6 +1879,7 @@ const opDeprecateThingType = "DeprecateThingType"
 type DeprecateThingTypeRequest struct {
 	*aws.Request
 	Input *DeprecateThingTypeInput
+	Copy  func(*DeprecateThingTypeInput) DeprecateThingTypeRequest
 }
 
 // Send marshals and sends the DeprecateThingType API request.
@@ -1882,7 +1919,7 @@ func (c *IoT) DeprecateThingTypeRequest(input *DeprecateThingTypeInput) Deprecat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeprecateThingTypeRequest{Request: req, Input: input}
+	return DeprecateThingTypeRequest{Request: req, Input: input, Copy: c.DeprecateThingTypeRequest}
 }
 
 const opDescribeAuthorizer = "DescribeAuthorizer"
@@ -1891,6 +1928,7 @@ const opDescribeAuthorizer = "DescribeAuthorizer"
 type DescribeAuthorizerRequest struct {
 	*aws.Request
 	Input *DescribeAuthorizerInput
+	Copy  func(*DescribeAuthorizerInput) DescribeAuthorizerRequest
 }
 
 // Send marshals and sends the DescribeAuthorizer API request.
@@ -1929,7 +1967,7 @@ func (c *IoT) DescribeAuthorizerRequest(input *DescribeAuthorizerInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAuthorizerRequest{Request: req, Input: input}
+	return DescribeAuthorizerRequest{Request: req, Input: input, Copy: c.DescribeAuthorizerRequest}
 }
 
 const opDescribeCACertificate = "DescribeCACertificate"
@@ -1938,6 +1976,7 @@ const opDescribeCACertificate = "DescribeCACertificate"
 type DescribeCACertificateRequest struct {
 	*aws.Request
 	Input *DescribeCACertificateInput
+	Copy  func(*DescribeCACertificateInput) DescribeCACertificateRequest
 }
 
 // Send marshals and sends the DescribeCACertificate API request.
@@ -1976,7 +2015,7 @@ func (c *IoT) DescribeCACertificateRequest(input *DescribeCACertificateInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCACertificateRequest{Request: req, Input: input}
+	return DescribeCACertificateRequest{Request: req, Input: input, Copy: c.DescribeCACertificateRequest}
 }
 
 const opDescribeCertificate = "DescribeCertificate"
@@ -1985,6 +2024,7 @@ const opDescribeCertificate = "DescribeCertificate"
 type DescribeCertificateRequest struct {
 	*aws.Request
 	Input *DescribeCertificateInput
+	Copy  func(*DescribeCertificateInput) DescribeCertificateRequest
 }
 
 // Send marshals and sends the DescribeCertificate API request.
@@ -2023,7 +2063,7 @@ func (c *IoT) DescribeCertificateRequest(input *DescribeCertificateInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCertificateRequest{Request: req, Input: input}
+	return DescribeCertificateRequest{Request: req, Input: input, Copy: c.DescribeCertificateRequest}
 }
 
 const opDescribeDefaultAuthorizer = "DescribeDefaultAuthorizer"
@@ -2032,6 +2072,7 @@ const opDescribeDefaultAuthorizer = "DescribeDefaultAuthorizer"
 type DescribeDefaultAuthorizerRequest struct {
 	*aws.Request
 	Input *DescribeDefaultAuthorizerInput
+	Copy  func(*DescribeDefaultAuthorizerInput) DescribeDefaultAuthorizerRequest
 }
 
 // Send marshals and sends the DescribeDefaultAuthorizer API request.
@@ -2070,7 +2111,7 @@ func (c *IoT) DescribeDefaultAuthorizerRequest(input *DescribeDefaultAuthorizerI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDefaultAuthorizerRequest{Request: req, Input: input}
+	return DescribeDefaultAuthorizerRequest{Request: req, Input: input, Copy: c.DescribeDefaultAuthorizerRequest}
 }
 
 const opDescribeEndpoint = "DescribeEndpoint"
@@ -2079,6 +2120,7 @@ const opDescribeEndpoint = "DescribeEndpoint"
 type DescribeEndpointRequest struct {
 	*aws.Request
 	Input *DescribeEndpointInput
+	Copy  func(*DescribeEndpointInput) DescribeEndpointRequest
 }
 
 // Send marshals and sends the DescribeEndpoint API request.
@@ -2117,7 +2159,7 @@ func (c *IoT) DescribeEndpointRequest(input *DescribeEndpointInput) DescribeEndp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEndpointRequest{Request: req, Input: input}
+	return DescribeEndpointRequest{Request: req, Input: input, Copy: c.DescribeEndpointRequest}
 }
 
 const opDescribeEventConfigurations = "DescribeEventConfigurations"
@@ -2126,6 +2168,7 @@ const opDescribeEventConfigurations = "DescribeEventConfigurations"
 type DescribeEventConfigurationsRequest struct {
 	*aws.Request
 	Input *DescribeEventConfigurationsInput
+	Copy  func(*DescribeEventConfigurationsInput) DescribeEventConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeEventConfigurations API request.
@@ -2164,7 +2207,7 @@ func (c *IoT) DescribeEventConfigurationsRequest(input *DescribeEventConfigurati
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventConfigurationsRequest{Request: req, Input: input}
+	return DescribeEventConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeEventConfigurationsRequest}
 }
 
 const opDescribeIndex = "DescribeIndex"
@@ -2173,6 +2216,7 @@ const opDescribeIndex = "DescribeIndex"
 type DescribeIndexRequest struct {
 	*aws.Request
 	Input *DescribeIndexInput
+	Copy  func(*DescribeIndexInput) DescribeIndexRequest
 }
 
 // Send marshals and sends the DescribeIndex API request.
@@ -2211,7 +2255,7 @@ func (c *IoT) DescribeIndexRequest(input *DescribeIndexInput) DescribeIndexReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeIndexRequest{Request: req, Input: input}
+	return DescribeIndexRequest{Request: req, Input: input, Copy: c.DescribeIndexRequest}
 }
 
 const opDescribeJob = "DescribeJob"
@@ -2220,6 +2264,7 @@ const opDescribeJob = "DescribeJob"
 type DescribeJobRequest struct {
 	*aws.Request
 	Input *DescribeJobInput
+	Copy  func(*DescribeJobInput) DescribeJobRequest
 }
 
 // Send marshals and sends the DescribeJob API request.
@@ -2258,7 +2303,7 @@ func (c *IoT) DescribeJobRequest(input *DescribeJobInput) DescribeJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeJobRequest{Request: req, Input: input}
+	return DescribeJobRequest{Request: req, Input: input, Copy: c.DescribeJobRequest}
 }
 
 const opDescribeJobExecution = "DescribeJobExecution"
@@ -2267,6 +2312,7 @@ const opDescribeJobExecution = "DescribeJobExecution"
 type DescribeJobExecutionRequest struct {
 	*aws.Request
 	Input *DescribeJobExecutionInput
+	Copy  func(*DescribeJobExecutionInput) DescribeJobExecutionRequest
 }
 
 // Send marshals and sends the DescribeJobExecution API request.
@@ -2305,7 +2351,7 @@ func (c *IoT) DescribeJobExecutionRequest(input *DescribeJobExecutionInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeJobExecutionRequest{Request: req, Input: input}
+	return DescribeJobExecutionRequest{Request: req, Input: input, Copy: c.DescribeJobExecutionRequest}
 }
 
 const opDescribeRoleAlias = "DescribeRoleAlias"
@@ -2314,6 +2360,7 @@ const opDescribeRoleAlias = "DescribeRoleAlias"
 type DescribeRoleAliasRequest struct {
 	*aws.Request
 	Input *DescribeRoleAliasInput
+	Copy  func(*DescribeRoleAliasInput) DescribeRoleAliasRequest
 }
 
 // Send marshals and sends the DescribeRoleAlias API request.
@@ -2352,7 +2399,7 @@ func (c *IoT) DescribeRoleAliasRequest(input *DescribeRoleAliasInput) DescribeRo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRoleAliasRequest{Request: req, Input: input}
+	return DescribeRoleAliasRequest{Request: req, Input: input, Copy: c.DescribeRoleAliasRequest}
 }
 
 const opDescribeStream = "DescribeStream"
@@ -2361,6 +2408,7 @@ const opDescribeStream = "DescribeStream"
 type DescribeStreamRequest struct {
 	*aws.Request
 	Input *DescribeStreamInput
+	Copy  func(*DescribeStreamInput) DescribeStreamRequest
 }
 
 // Send marshals and sends the DescribeStream API request.
@@ -2399,7 +2447,7 @@ func (c *IoT) DescribeStreamRequest(input *DescribeStreamInput) DescribeStreamRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStreamRequest{Request: req, Input: input}
+	return DescribeStreamRequest{Request: req, Input: input, Copy: c.DescribeStreamRequest}
 }
 
 const opDescribeThing = "DescribeThing"
@@ -2408,6 +2456,7 @@ const opDescribeThing = "DescribeThing"
 type DescribeThingRequest struct {
 	*aws.Request
 	Input *DescribeThingInput
+	Copy  func(*DescribeThingInput) DescribeThingRequest
 }
 
 // Send marshals and sends the DescribeThing API request.
@@ -2446,7 +2495,7 @@ func (c *IoT) DescribeThingRequest(input *DescribeThingInput) DescribeThingReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeThingRequest{Request: req, Input: input}
+	return DescribeThingRequest{Request: req, Input: input, Copy: c.DescribeThingRequest}
 }
 
 const opDescribeThingGroup = "DescribeThingGroup"
@@ -2455,6 +2504,7 @@ const opDescribeThingGroup = "DescribeThingGroup"
 type DescribeThingGroupRequest struct {
 	*aws.Request
 	Input *DescribeThingGroupInput
+	Copy  func(*DescribeThingGroupInput) DescribeThingGroupRequest
 }
 
 // Send marshals and sends the DescribeThingGroup API request.
@@ -2493,7 +2543,7 @@ func (c *IoT) DescribeThingGroupRequest(input *DescribeThingGroupInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeThingGroupRequest{Request: req, Input: input}
+	return DescribeThingGroupRequest{Request: req, Input: input, Copy: c.DescribeThingGroupRequest}
 }
 
 const opDescribeThingRegistrationTask = "DescribeThingRegistrationTask"
@@ -2502,6 +2552,7 @@ const opDescribeThingRegistrationTask = "DescribeThingRegistrationTask"
 type DescribeThingRegistrationTaskRequest struct {
 	*aws.Request
 	Input *DescribeThingRegistrationTaskInput
+	Copy  func(*DescribeThingRegistrationTaskInput) DescribeThingRegistrationTaskRequest
 }
 
 // Send marshals and sends the DescribeThingRegistrationTask API request.
@@ -2540,7 +2591,7 @@ func (c *IoT) DescribeThingRegistrationTaskRequest(input *DescribeThingRegistrat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeThingRegistrationTaskRequest{Request: req, Input: input}
+	return DescribeThingRegistrationTaskRequest{Request: req, Input: input, Copy: c.DescribeThingRegistrationTaskRequest}
 }
 
 const opDescribeThingType = "DescribeThingType"
@@ -2549,6 +2600,7 @@ const opDescribeThingType = "DescribeThingType"
 type DescribeThingTypeRequest struct {
 	*aws.Request
 	Input *DescribeThingTypeInput
+	Copy  func(*DescribeThingTypeInput) DescribeThingTypeRequest
 }
 
 // Send marshals and sends the DescribeThingType API request.
@@ -2587,7 +2639,7 @@ func (c *IoT) DescribeThingTypeRequest(input *DescribeThingTypeInput) DescribeTh
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeThingTypeRequest{Request: req, Input: input}
+	return DescribeThingTypeRequest{Request: req, Input: input, Copy: c.DescribeThingTypeRequest}
 }
 
 const opDetachPolicy = "DetachPolicy"
@@ -2596,6 +2648,7 @@ const opDetachPolicy = "DetachPolicy"
 type DetachPolicyRequest struct {
 	*aws.Request
 	Input *DetachPolicyInput
+	Copy  func(*DetachPolicyInput) DetachPolicyRequest
 }
 
 // Send marshals and sends the DetachPolicy API request.
@@ -2636,7 +2689,7 @@ func (c *IoT) DetachPolicyRequest(input *DetachPolicyInput) DetachPolicyRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachPolicyRequest{Request: req, Input: input}
+	return DetachPolicyRequest{Request: req, Input: input, Copy: c.DetachPolicyRequest}
 }
 
 const opDetachPrincipalPolicy = "DetachPrincipalPolicy"
@@ -2645,6 +2698,7 @@ const opDetachPrincipalPolicy = "DetachPrincipalPolicy"
 type DetachPrincipalPolicyRequest struct {
 	*aws.Request
 	Input *DetachPrincipalPolicyInput
+	Copy  func(*DetachPrincipalPolicyInput) DetachPrincipalPolicyRequest
 }
 
 // Send marshals and sends the DetachPrincipalPolicy API request.
@@ -2690,7 +2744,7 @@ func (c *IoT) DetachPrincipalPolicyRequest(input *DetachPrincipalPolicyInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachPrincipalPolicyRequest{Request: req, Input: input}
+	return DetachPrincipalPolicyRequest{Request: req, Input: input, Copy: c.DetachPrincipalPolicyRequest}
 }
 
 const opDetachThingPrincipal = "DetachThingPrincipal"
@@ -2699,6 +2753,7 @@ const opDetachThingPrincipal = "DetachThingPrincipal"
 type DetachThingPrincipalRequest struct {
 	*aws.Request
 	Input *DetachThingPrincipalInput
+	Copy  func(*DetachThingPrincipalInput) DetachThingPrincipalRequest
 }
 
 // Send marshals and sends the DetachThingPrincipal API request.
@@ -2737,7 +2792,7 @@ func (c *IoT) DetachThingPrincipalRequest(input *DetachThingPrincipalInput) Deta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachThingPrincipalRequest{Request: req, Input: input}
+	return DetachThingPrincipalRequest{Request: req, Input: input, Copy: c.DetachThingPrincipalRequest}
 }
 
 const opDisableTopicRule = "DisableTopicRule"
@@ -2746,6 +2801,7 @@ const opDisableTopicRule = "DisableTopicRule"
 type DisableTopicRuleRequest struct {
 	*aws.Request
 	Input *DisableTopicRuleInput
+	Copy  func(*DisableTopicRuleInput) DisableTopicRuleRequest
 }
 
 // Send marshals and sends the DisableTopicRule API request.
@@ -2786,7 +2842,7 @@ func (c *IoT) DisableTopicRuleRequest(input *DisableTopicRuleInput) DisableTopic
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableTopicRuleRequest{Request: req, Input: input}
+	return DisableTopicRuleRequest{Request: req, Input: input, Copy: c.DisableTopicRuleRequest}
 }
 
 const opEnableTopicRule = "EnableTopicRule"
@@ -2795,6 +2851,7 @@ const opEnableTopicRule = "EnableTopicRule"
 type EnableTopicRuleRequest struct {
 	*aws.Request
 	Input *EnableTopicRuleInput
+	Copy  func(*EnableTopicRuleInput) EnableTopicRuleRequest
 }
 
 // Send marshals and sends the EnableTopicRule API request.
@@ -2835,7 +2892,7 @@ func (c *IoT) EnableTopicRuleRequest(input *EnableTopicRuleInput) EnableTopicRul
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableTopicRuleRequest{Request: req, Input: input}
+	return EnableTopicRuleRequest{Request: req, Input: input, Copy: c.EnableTopicRuleRequest}
 }
 
 const opGetEffectivePolicies = "GetEffectivePolicies"
@@ -2844,6 +2901,7 @@ const opGetEffectivePolicies = "GetEffectivePolicies"
 type GetEffectivePoliciesRequest struct {
 	*aws.Request
 	Input *GetEffectivePoliciesInput
+	Copy  func(*GetEffectivePoliciesInput) GetEffectivePoliciesRequest
 }
 
 // Send marshals and sends the GetEffectivePolicies API request.
@@ -2882,7 +2940,7 @@ func (c *IoT) GetEffectivePoliciesRequest(input *GetEffectivePoliciesInput) GetE
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetEffectivePoliciesRequest{Request: req, Input: input}
+	return GetEffectivePoliciesRequest{Request: req, Input: input, Copy: c.GetEffectivePoliciesRequest}
 }
 
 const opGetIndexingConfiguration = "GetIndexingConfiguration"
@@ -2891,6 +2949,7 @@ const opGetIndexingConfiguration = "GetIndexingConfiguration"
 type GetIndexingConfigurationRequest struct {
 	*aws.Request
 	Input *GetIndexingConfigurationInput
+	Copy  func(*GetIndexingConfigurationInput) GetIndexingConfigurationRequest
 }
 
 // Send marshals and sends the GetIndexingConfiguration API request.
@@ -2929,7 +2988,7 @@ func (c *IoT) GetIndexingConfigurationRequest(input *GetIndexingConfigurationInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIndexingConfigurationRequest{Request: req, Input: input}
+	return GetIndexingConfigurationRequest{Request: req, Input: input, Copy: c.GetIndexingConfigurationRequest}
 }
 
 const opGetJobDocument = "GetJobDocument"
@@ -2938,6 +2997,7 @@ const opGetJobDocument = "GetJobDocument"
 type GetJobDocumentRequest struct {
 	*aws.Request
 	Input *GetJobDocumentInput
+	Copy  func(*GetJobDocumentInput) GetJobDocumentRequest
 }
 
 // Send marshals and sends the GetJobDocument API request.
@@ -2976,7 +3036,7 @@ func (c *IoT) GetJobDocumentRequest(input *GetJobDocumentInput) GetJobDocumentRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobDocumentRequest{Request: req, Input: input}
+	return GetJobDocumentRequest{Request: req, Input: input, Copy: c.GetJobDocumentRequest}
 }
 
 const opGetLoggingOptions = "GetLoggingOptions"
@@ -2985,6 +3045,7 @@ const opGetLoggingOptions = "GetLoggingOptions"
 type GetLoggingOptionsRequest struct {
 	*aws.Request
 	Input *GetLoggingOptionsInput
+	Copy  func(*GetLoggingOptionsInput) GetLoggingOptionsRequest
 }
 
 // Send marshals and sends the GetLoggingOptions API request.
@@ -3023,7 +3084,7 @@ func (c *IoT) GetLoggingOptionsRequest(input *GetLoggingOptionsInput) GetLogging
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLoggingOptionsRequest{Request: req, Input: input}
+	return GetLoggingOptionsRequest{Request: req, Input: input, Copy: c.GetLoggingOptionsRequest}
 }
 
 const opGetOTAUpdate = "GetOTAUpdate"
@@ -3032,6 +3093,7 @@ const opGetOTAUpdate = "GetOTAUpdate"
 type GetOTAUpdateRequest struct {
 	*aws.Request
 	Input *GetOTAUpdateInput
+	Copy  func(*GetOTAUpdateInput) GetOTAUpdateRequest
 }
 
 // Send marshals and sends the GetOTAUpdate API request.
@@ -3070,7 +3132,7 @@ func (c *IoT) GetOTAUpdateRequest(input *GetOTAUpdateInput) GetOTAUpdateRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOTAUpdateRequest{Request: req, Input: input}
+	return GetOTAUpdateRequest{Request: req, Input: input, Copy: c.GetOTAUpdateRequest}
 }
 
 const opGetPolicy = "GetPolicy"
@@ -3079,6 +3141,7 @@ const opGetPolicy = "GetPolicy"
 type GetPolicyRequest struct {
 	*aws.Request
 	Input *GetPolicyInput
+	Copy  func(*GetPolicyInput) GetPolicyRequest
 }
 
 // Send marshals and sends the GetPolicy API request.
@@ -3118,7 +3181,7 @@ func (c *IoT) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPolicyRequest{Request: req, Input: input}
+	return GetPolicyRequest{Request: req, Input: input, Copy: c.GetPolicyRequest}
 }
 
 const opGetPolicyVersion = "GetPolicyVersion"
@@ -3127,6 +3190,7 @@ const opGetPolicyVersion = "GetPolicyVersion"
 type GetPolicyVersionRequest struct {
 	*aws.Request
 	Input *GetPolicyVersionInput
+	Copy  func(*GetPolicyVersionInput) GetPolicyVersionRequest
 }
 
 // Send marshals and sends the GetPolicyVersion API request.
@@ -3165,7 +3229,7 @@ func (c *IoT) GetPolicyVersionRequest(input *GetPolicyVersionInput) GetPolicyVer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPolicyVersionRequest{Request: req, Input: input}
+	return GetPolicyVersionRequest{Request: req, Input: input, Copy: c.GetPolicyVersionRequest}
 }
 
 const opGetRegistrationCode = "GetRegistrationCode"
@@ -3174,6 +3238,7 @@ const opGetRegistrationCode = "GetRegistrationCode"
 type GetRegistrationCodeRequest struct {
 	*aws.Request
 	Input *GetRegistrationCodeInput
+	Copy  func(*GetRegistrationCodeInput) GetRegistrationCodeRequest
 }
 
 // Send marshals and sends the GetRegistrationCode API request.
@@ -3212,7 +3277,7 @@ func (c *IoT) GetRegistrationCodeRequest(input *GetRegistrationCodeInput) GetReg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRegistrationCodeRequest{Request: req, Input: input}
+	return GetRegistrationCodeRequest{Request: req, Input: input, Copy: c.GetRegistrationCodeRequest}
 }
 
 const opGetTopicRule = "GetTopicRule"
@@ -3221,6 +3286,7 @@ const opGetTopicRule = "GetTopicRule"
 type GetTopicRuleRequest struct {
 	*aws.Request
 	Input *GetTopicRuleInput
+	Copy  func(*GetTopicRuleInput) GetTopicRuleRequest
 }
 
 // Send marshals and sends the GetTopicRule API request.
@@ -3259,7 +3325,7 @@ func (c *IoT) GetTopicRuleRequest(input *GetTopicRuleInput) GetTopicRuleRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTopicRuleRequest{Request: req, Input: input}
+	return GetTopicRuleRequest{Request: req, Input: input, Copy: c.GetTopicRuleRequest}
 }
 
 const opGetV2LoggingOptions = "GetV2LoggingOptions"
@@ -3268,6 +3334,7 @@ const opGetV2LoggingOptions = "GetV2LoggingOptions"
 type GetV2LoggingOptionsRequest struct {
 	*aws.Request
 	Input *GetV2LoggingOptionsInput
+	Copy  func(*GetV2LoggingOptionsInput) GetV2LoggingOptionsRequest
 }
 
 // Send marshals and sends the GetV2LoggingOptions API request.
@@ -3306,7 +3373,7 @@ func (c *IoT) GetV2LoggingOptionsRequest(input *GetV2LoggingOptionsInput) GetV2L
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetV2LoggingOptionsRequest{Request: req, Input: input}
+	return GetV2LoggingOptionsRequest{Request: req, Input: input, Copy: c.GetV2LoggingOptionsRequest}
 }
 
 const opListAttachedPolicies = "ListAttachedPolicies"
@@ -3315,6 +3382,7 @@ const opListAttachedPolicies = "ListAttachedPolicies"
 type ListAttachedPoliciesRequest struct {
 	*aws.Request
 	Input *ListAttachedPoliciesInput
+	Copy  func(*ListAttachedPoliciesInput) ListAttachedPoliciesRequest
 }
 
 // Send marshals and sends the ListAttachedPolicies API request.
@@ -3353,7 +3421,7 @@ func (c *IoT) ListAttachedPoliciesRequest(input *ListAttachedPoliciesInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAttachedPoliciesRequest{Request: req, Input: input}
+	return ListAttachedPoliciesRequest{Request: req, Input: input, Copy: c.ListAttachedPoliciesRequest}
 }
 
 const opListAuthorizers = "ListAuthorizers"
@@ -3362,6 +3430,7 @@ const opListAuthorizers = "ListAuthorizers"
 type ListAuthorizersRequest struct {
 	*aws.Request
 	Input *ListAuthorizersInput
+	Copy  func(*ListAuthorizersInput) ListAuthorizersRequest
 }
 
 // Send marshals and sends the ListAuthorizers API request.
@@ -3400,7 +3469,7 @@ func (c *IoT) ListAuthorizersRequest(input *ListAuthorizersInput) ListAuthorizer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAuthorizersRequest{Request: req, Input: input}
+	return ListAuthorizersRequest{Request: req, Input: input, Copy: c.ListAuthorizersRequest}
 }
 
 const opListCACertificates = "ListCACertificates"
@@ -3409,6 +3478,7 @@ const opListCACertificates = "ListCACertificates"
 type ListCACertificatesRequest struct {
 	*aws.Request
 	Input *ListCACertificatesInput
+	Copy  func(*ListCACertificatesInput) ListCACertificatesRequest
 }
 
 // Send marshals and sends the ListCACertificates API request.
@@ -3450,7 +3520,7 @@ func (c *IoT) ListCACertificatesRequest(input *ListCACertificatesInput) ListCACe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCACertificatesRequest{Request: req, Input: input}
+	return ListCACertificatesRequest{Request: req, Input: input, Copy: c.ListCACertificatesRequest}
 }
 
 const opListCertificates = "ListCertificates"
@@ -3459,6 +3529,7 @@ const opListCertificates = "ListCertificates"
 type ListCertificatesRequest struct {
 	*aws.Request
 	Input *ListCertificatesInput
+	Copy  func(*ListCertificatesInput) ListCertificatesRequest
 }
 
 // Send marshals and sends the ListCertificates API request.
@@ -3500,7 +3571,7 @@ func (c *IoT) ListCertificatesRequest(input *ListCertificatesInput) ListCertific
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCertificatesRequest{Request: req, Input: input}
+	return ListCertificatesRequest{Request: req, Input: input, Copy: c.ListCertificatesRequest}
 }
 
 const opListCertificatesByCA = "ListCertificatesByCA"
@@ -3509,6 +3580,7 @@ const opListCertificatesByCA = "ListCertificatesByCA"
 type ListCertificatesByCARequest struct {
 	*aws.Request
 	Input *ListCertificatesByCAInput
+	Copy  func(*ListCertificatesByCAInput) ListCertificatesByCARequest
 }
 
 // Send marshals and sends the ListCertificatesByCA API request.
@@ -3547,7 +3619,7 @@ func (c *IoT) ListCertificatesByCARequest(input *ListCertificatesByCAInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCertificatesByCARequest{Request: req, Input: input}
+	return ListCertificatesByCARequest{Request: req, Input: input, Copy: c.ListCertificatesByCARequest}
 }
 
 const opListIndices = "ListIndices"
@@ -3556,6 +3628,7 @@ const opListIndices = "ListIndices"
 type ListIndicesRequest struct {
 	*aws.Request
 	Input *ListIndicesInput
+	Copy  func(*ListIndicesInput) ListIndicesRequest
 }
 
 // Send marshals and sends the ListIndices API request.
@@ -3594,7 +3667,7 @@ func (c *IoT) ListIndicesRequest(input *ListIndicesInput) ListIndicesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIndicesRequest{Request: req, Input: input}
+	return ListIndicesRequest{Request: req, Input: input, Copy: c.ListIndicesRequest}
 }
 
 const opListJobExecutionsForJob = "ListJobExecutionsForJob"
@@ -3603,6 +3676,7 @@ const opListJobExecutionsForJob = "ListJobExecutionsForJob"
 type ListJobExecutionsForJobRequest struct {
 	*aws.Request
 	Input *ListJobExecutionsForJobInput
+	Copy  func(*ListJobExecutionsForJobInput) ListJobExecutionsForJobRequest
 }
 
 // Send marshals and sends the ListJobExecutionsForJob API request.
@@ -3641,7 +3715,7 @@ func (c *IoT) ListJobExecutionsForJobRequest(input *ListJobExecutionsForJobInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobExecutionsForJobRequest{Request: req, Input: input}
+	return ListJobExecutionsForJobRequest{Request: req, Input: input, Copy: c.ListJobExecutionsForJobRequest}
 }
 
 const opListJobExecutionsForThing = "ListJobExecutionsForThing"
@@ -3650,6 +3724,7 @@ const opListJobExecutionsForThing = "ListJobExecutionsForThing"
 type ListJobExecutionsForThingRequest struct {
 	*aws.Request
 	Input *ListJobExecutionsForThingInput
+	Copy  func(*ListJobExecutionsForThingInput) ListJobExecutionsForThingRequest
 }
 
 // Send marshals and sends the ListJobExecutionsForThing API request.
@@ -3688,7 +3763,7 @@ func (c *IoT) ListJobExecutionsForThingRequest(input *ListJobExecutionsForThingI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobExecutionsForThingRequest{Request: req, Input: input}
+	return ListJobExecutionsForThingRequest{Request: req, Input: input, Copy: c.ListJobExecutionsForThingRequest}
 }
 
 const opListJobs = "ListJobs"
@@ -3697,6 +3772,7 @@ const opListJobs = "ListJobs"
 type ListJobsRequest struct {
 	*aws.Request
 	Input *ListJobsInput
+	Copy  func(*ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -3735,7 +3811,7 @@ func (c *IoT) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobsRequest{Request: req, Input: input}
+	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
 const opListOTAUpdates = "ListOTAUpdates"
@@ -3744,6 +3820,7 @@ const opListOTAUpdates = "ListOTAUpdates"
 type ListOTAUpdatesRequest struct {
 	*aws.Request
 	Input *ListOTAUpdatesInput
+	Copy  func(*ListOTAUpdatesInput) ListOTAUpdatesRequest
 }
 
 // Send marshals and sends the ListOTAUpdates API request.
@@ -3782,7 +3859,7 @@ func (c *IoT) ListOTAUpdatesRequest(input *ListOTAUpdatesInput) ListOTAUpdatesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOTAUpdatesRequest{Request: req, Input: input}
+	return ListOTAUpdatesRequest{Request: req, Input: input, Copy: c.ListOTAUpdatesRequest}
 }
 
 const opListOutgoingCertificates = "ListOutgoingCertificates"
@@ -3791,6 +3868,7 @@ const opListOutgoingCertificates = "ListOutgoingCertificates"
 type ListOutgoingCertificatesRequest struct {
 	*aws.Request
 	Input *ListOutgoingCertificatesInput
+	Copy  func(*ListOutgoingCertificatesInput) ListOutgoingCertificatesRequest
 }
 
 // Send marshals and sends the ListOutgoingCertificates API request.
@@ -3829,7 +3907,7 @@ func (c *IoT) ListOutgoingCertificatesRequest(input *ListOutgoingCertificatesInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOutgoingCertificatesRequest{Request: req, Input: input}
+	return ListOutgoingCertificatesRequest{Request: req, Input: input, Copy: c.ListOutgoingCertificatesRequest}
 }
 
 const opListPolicies = "ListPolicies"
@@ -3838,6 +3916,7 @@ const opListPolicies = "ListPolicies"
 type ListPoliciesRequest struct {
 	*aws.Request
 	Input *ListPoliciesInput
+	Copy  func(*ListPoliciesInput) ListPoliciesRequest
 }
 
 // Send marshals and sends the ListPolicies API request.
@@ -3876,7 +3955,7 @@ func (c *IoT) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPoliciesRequest{Request: req, Input: input}
+	return ListPoliciesRequest{Request: req, Input: input, Copy: c.ListPoliciesRequest}
 }
 
 const opListPolicyPrincipals = "ListPolicyPrincipals"
@@ -3885,6 +3964,7 @@ const opListPolicyPrincipals = "ListPolicyPrincipals"
 type ListPolicyPrincipalsRequest struct {
 	*aws.Request
 	Input *ListPolicyPrincipalsInput
+	Copy  func(*ListPolicyPrincipalsInput) ListPolicyPrincipalsRequest
 }
 
 // Send marshals and sends the ListPolicyPrincipals API request.
@@ -3928,7 +4008,7 @@ func (c *IoT) ListPolicyPrincipalsRequest(input *ListPolicyPrincipalsInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPolicyPrincipalsRequest{Request: req, Input: input}
+	return ListPolicyPrincipalsRequest{Request: req, Input: input, Copy: c.ListPolicyPrincipalsRequest}
 }
 
 const opListPolicyVersions = "ListPolicyVersions"
@@ -3937,6 +4017,7 @@ const opListPolicyVersions = "ListPolicyVersions"
 type ListPolicyVersionsRequest struct {
 	*aws.Request
 	Input *ListPolicyVersionsInput
+	Copy  func(*ListPolicyVersionsInput) ListPolicyVersionsRequest
 }
 
 // Send marshals and sends the ListPolicyVersions API request.
@@ -3975,7 +4056,7 @@ func (c *IoT) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListPoli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPolicyVersionsRequest{Request: req, Input: input}
+	return ListPolicyVersionsRequest{Request: req, Input: input, Copy: c.ListPolicyVersionsRequest}
 }
 
 const opListPrincipalPolicies = "ListPrincipalPolicies"
@@ -3984,6 +4065,7 @@ const opListPrincipalPolicies = "ListPrincipalPolicies"
 type ListPrincipalPoliciesRequest struct {
 	*aws.Request
 	Input *ListPrincipalPoliciesInput
+	Copy  func(*ListPrincipalPoliciesInput) ListPrincipalPoliciesRequest
 }
 
 // Send marshals and sends the ListPrincipalPolicies API request.
@@ -4028,7 +4110,7 @@ func (c *IoT) ListPrincipalPoliciesRequest(input *ListPrincipalPoliciesInput) Li
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPrincipalPoliciesRequest{Request: req, Input: input}
+	return ListPrincipalPoliciesRequest{Request: req, Input: input, Copy: c.ListPrincipalPoliciesRequest}
 }
 
 const opListPrincipalThings = "ListPrincipalThings"
@@ -4037,6 +4119,7 @@ const opListPrincipalThings = "ListPrincipalThings"
 type ListPrincipalThingsRequest struct {
 	*aws.Request
 	Input *ListPrincipalThingsInput
+	Copy  func(*ListPrincipalThingsInput) ListPrincipalThingsRequest
 }
 
 // Send marshals and sends the ListPrincipalThings API request.
@@ -4075,7 +4158,7 @@ func (c *IoT) ListPrincipalThingsRequest(input *ListPrincipalThingsInput) ListPr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPrincipalThingsRequest{Request: req, Input: input}
+	return ListPrincipalThingsRequest{Request: req, Input: input, Copy: c.ListPrincipalThingsRequest}
 }
 
 const opListRoleAliases = "ListRoleAliases"
@@ -4084,6 +4167,7 @@ const opListRoleAliases = "ListRoleAliases"
 type ListRoleAliasesRequest struct {
 	*aws.Request
 	Input *ListRoleAliasesInput
+	Copy  func(*ListRoleAliasesInput) ListRoleAliasesRequest
 }
 
 // Send marshals and sends the ListRoleAliases API request.
@@ -4122,7 +4206,7 @@ func (c *IoT) ListRoleAliasesRequest(input *ListRoleAliasesInput) ListRoleAliase
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRoleAliasesRequest{Request: req, Input: input}
+	return ListRoleAliasesRequest{Request: req, Input: input, Copy: c.ListRoleAliasesRequest}
 }
 
 const opListStreams = "ListStreams"
@@ -4131,6 +4215,7 @@ const opListStreams = "ListStreams"
 type ListStreamsRequest struct {
 	*aws.Request
 	Input *ListStreamsInput
+	Copy  func(*ListStreamsInput) ListStreamsRequest
 }
 
 // Send marshals and sends the ListStreams API request.
@@ -4169,7 +4254,7 @@ func (c *IoT) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStreamsRequest{Request: req, Input: input}
+	return ListStreamsRequest{Request: req, Input: input, Copy: c.ListStreamsRequest}
 }
 
 const opListTargetsForPolicy = "ListTargetsForPolicy"
@@ -4178,6 +4263,7 @@ const opListTargetsForPolicy = "ListTargetsForPolicy"
 type ListTargetsForPolicyRequest struct {
 	*aws.Request
 	Input *ListTargetsForPolicyInput
+	Copy  func(*ListTargetsForPolicyInput) ListTargetsForPolicyRequest
 }
 
 // Send marshals and sends the ListTargetsForPolicy API request.
@@ -4216,7 +4302,7 @@ func (c *IoT) ListTargetsForPolicyRequest(input *ListTargetsForPolicyInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTargetsForPolicyRequest{Request: req, Input: input}
+	return ListTargetsForPolicyRequest{Request: req, Input: input, Copy: c.ListTargetsForPolicyRequest}
 }
 
 const opListThingGroups = "ListThingGroups"
@@ -4225,6 +4311,7 @@ const opListThingGroups = "ListThingGroups"
 type ListThingGroupsRequest struct {
 	*aws.Request
 	Input *ListThingGroupsInput
+	Copy  func(*ListThingGroupsInput) ListThingGroupsRequest
 }
 
 // Send marshals and sends the ListThingGroups API request.
@@ -4263,7 +4350,7 @@ func (c *IoT) ListThingGroupsRequest(input *ListThingGroupsInput) ListThingGroup
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListThingGroupsRequest{Request: req, Input: input}
+	return ListThingGroupsRequest{Request: req, Input: input, Copy: c.ListThingGroupsRequest}
 }
 
 const opListThingGroupsForThing = "ListThingGroupsForThing"
@@ -4272,6 +4359,7 @@ const opListThingGroupsForThing = "ListThingGroupsForThing"
 type ListThingGroupsForThingRequest struct {
 	*aws.Request
 	Input *ListThingGroupsForThingInput
+	Copy  func(*ListThingGroupsForThingInput) ListThingGroupsForThingRequest
 }
 
 // Send marshals and sends the ListThingGroupsForThing API request.
@@ -4310,7 +4398,7 @@ func (c *IoT) ListThingGroupsForThingRequest(input *ListThingGroupsForThingInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListThingGroupsForThingRequest{Request: req, Input: input}
+	return ListThingGroupsForThingRequest{Request: req, Input: input, Copy: c.ListThingGroupsForThingRequest}
 }
 
 const opListThingPrincipals = "ListThingPrincipals"
@@ -4319,6 +4407,7 @@ const opListThingPrincipals = "ListThingPrincipals"
 type ListThingPrincipalsRequest struct {
 	*aws.Request
 	Input *ListThingPrincipalsInput
+	Copy  func(*ListThingPrincipalsInput) ListThingPrincipalsRequest
 }
 
 // Send marshals and sends the ListThingPrincipals API request.
@@ -4357,7 +4446,7 @@ func (c *IoT) ListThingPrincipalsRequest(input *ListThingPrincipalsInput) ListTh
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListThingPrincipalsRequest{Request: req, Input: input}
+	return ListThingPrincipalsRequest{Request: req, Input: input, Copy: c.ListThingPrincipalsRequest}
 }
 
 const opListThingRegistrationTaskReports = "ListThingRegistrationTaskReports"
@@ -4366,6 +4455,7 @@ const opListThingRegistrationTaskReports = "ListThingRegistrationTaskReports"
 type ListThingRegistrationTaskReportsRequest struct {
 	*aws.Request
 	Input *ListThingRegistrationTaskReportsInput
+	Copy  func(*ListThingRegistrationTaskReportsInput) ListThingRegistrationTaskReportsRequest
 }
 
 // Send marshals and sends the ListThingRegistrationTaskReports API request.
@@ -4404,7 +4494,7 @@ func (c *IoT) ListThingRegistrationTaskReportsRequest(input *ListThingRegistrati
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListThingRegistrationTaskReportsRequest{Request: req, Input: input}
+	return ListThingRegistrationTaskReportsRequest{Request: req, Input: input, Copy: c.ListThingRegistrationTaskReportsRequest}
 }
 
 const opListThingRegistrationTasks = "ListThingRegistrationTasks"
@@ -4413,6 +4503,7 @@ const opListThingRegistrationTasks = "ListThingRegistrationTasks"
 type ListThingRegistrationTasksRequest struct {
 	*aws.Request
 	Input *ListThingRegistrationTasksInput
+	Copy  func(*ListThingRegistrationTasksInput) ListThingRegistrationTasksRequest
 }
 
 // Send marshals and sends the ListThingRegistrationTasks API request.
@@ -4451,7 +4542,7 @@ func (c *IoT) ListThingRegistrationTasksRequest(input *ListThingRegistrationTask
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListThingRegistrationTasksRequest{Request: req, Input: input}
+	return ListThingRegistrationTasksRequest{Request: req, Input: input, Copy: c.ListThingRegistrationTasksRequest}
 }
 
 const opListThingTypes = "ListThingTypes"
@@ -4460,6 +4551,7 @@ const opListThingTypes = "ListThingTypes"
 type ListThingTypesRequest struct {
 	*aws.Request
 	Input *ListThingTypesInput
+	Copy  func(*ListThingTypesInput) ListThingTypesRequest
 }
 
 // Send marshals and sends the ListThingTypes API request.
@@ -4498,7 +4590,7 @@ func (c *IoT) ListThingTypesRequest(input *ListThingTypesInput) ListThingTypesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListThingTypesRequest{Request: req, Input: input}
+	return ListThingTypesRequest{Request: req, Input: input, Copy: c.ListThingTypesRequest}
 }
 
 const opListThings = "ListThings"
@@ -4507,6 +4599,7 @@ const opListThings = "ListThings"
 type ListThingsRequest struct {
 	*aws.Request
 	Input *ListThingsInput
+	Copy  func(*ListThingsInput) ListThingsRequest
 }
 
 // Send marshals and sends the ListThings API request.
@@ -4548,7 +4641,7 @@ func (c *IoT) ListThingsRequest(input *ListThingsInput) ListThingsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListThingsRequest{Request: req, Input: input}
+	return ListThingsRequest{Request: req, Input: input, Copy: c.ListThingsRequest}
 }
 
 const opListThingsInThingGroup = "ListThingsInThingGroup"
@@ -4557,6 +4650,7 @@ const opListThingsInThingGroup = "ListThingsInThingGroup"
 type ListThingsInThingGroupRequest struct {
 	*aws.Request
 	Input *ListThingsInThingGroupInput
+	Copy  func(*ListThingsInThingGroupInput) ListThingsInThingGroupRequest
 }
 
 // Send marshals and sends the ListThingsInThingGroup API request.
@@ -4595,7 +4689,7 @@ func (c *IoT) ListThingsInThingGroupRequest(input *ListThingsInThingGroupInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListThingsInThingGroupRequest{Request: req, Input: input}
+	return ListThingsInThingGroupRequest{Request: req, Input: input, Copy: c.ListThingsInThingGroupRequest}
 }
 
 const opListTopicRules = "ListTopicRules"
@@ -4604,6 +4698,7 @@ const opListTopicRules = "ListTopicRules"
 type ListTopicRulesRequest struct {
 	*aws.Request
 	Input *ListTopicRulesInput
+	Copy  func(*ListTopicRulesInput) ListTopicRulesRequest
 }
 
 // Send marshals and sends the ListTopicRules API request.
@@ -4642,7 +4737,7 @@ func (c *IoT) ListTopicRulesRequest(input *ListTopicRulesInput) ListTopicRulesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTopicRulesRequest{Request: req, Input: input}
+	return ListTopicRulesRequest{Request: req, Input: input, Copy: c.ListTopicRulesRequest}
 }
 
 const opListV2LoggingLevels = "ListV2LoggingLevels"
@@ -4651,6 +4746,7 @@ const opListV2LoggingLevels = "ListV2LoggingLevels"
 type ListV2LoggingLevelsRequest struct {
 	*aws.Request
 	Input *ListV2LoggingLevelsInput
+	Copy  func(*ListV2LoggingLevelsInput) ListV2LoggingLevelsRequest
 }
 
 // Send marshals and sends the ListV2LoggingLevels API request.
@@ -4689,7 +4785,7 @@ func (c *IoT) ListV2LoggingLevelsRequest(input *ListV2LoggingLevelsInput) ListV2
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListV2LoggingLevelsRequest{Request: req, Input: input}
+	return ListV2LoggingLevelsRequest{Request: req, Input: input, Copy: c.ListV2LoggingLevelsRequest}
 }
 
 const opRegisterCACertificate = "RegisterCACertificate"
@@ -4698,6 +4794,7 @@ const opRegisterCACertificate = "RegisterCACertificate"
 type RegisterCACertificateRequest struct {
 	*aws.Request
 	Input *RegisterCACertificateInput
+	Copy  func(*RegisterCACertificateInput) RegisterCACertificateRequest
 }
 
 // Send marshals and sends the RegisterCACertificate API request.
@@ -4742,7 +4839,7 @@ func (c *IoT) RegisterCACertificateRequest(input *RegisterCACertificateInput) Re
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterCACertificateRequest{Request: req, Input: input}
+	return RegisterCACertificateRequest{Request: req, Input: input, Copy: c.RegisterCACertificateRequest}
 }
 
 const opRegisterCertificate = "RegisterCertificate"
@@ -4751,6 +4848,7 @@ const opRegisterCertificate = "RegisterCertificate"
 type RegisterCertificateRequest struct {
 	*aws.Request
 	Input *RegisterCertificateInput
+	Copy  func(*RegisterCertificateInput) RegisterCertificateRequest
 }
 
 // Send marshals and sends the RegisterCertificate API request.
@@ -4791,7 +4889,7 @@ func (c *IoT) RegisterCertificateRequest(input *RegisterCertificateInput) Regist
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterCertificateRequest{Request: req, Input: input}
+	return RegisterCertificateRequest{Request: req, Input: input, Copy: c.RegisterCertificateRequest}
 }
 
 const opRegisterThing = "RegisterThing"
@@ -4800,6 +4898,7 @@ const opRegisterThing = "RegisterThing"
 type RegisterThingRequest struct {
 	*aws.Request
 	Input *RegisterThingInput
+	Copy  func(*RegisterThingInput) RegisterThingRequest
 }
 
 // Send marshals and sends the RegisterThing API request.
@@ -4838,7 +4937,7 @@ func (c *IoT) RegisterThingRequest(input *RegisterThingInput) RegisterThingReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterThingRequest{Request: req, Input: input}
+	return RegisterThingRequest{Request: req, Input: input, Copy: c.RegisterThingRequest}
 }
 
 const opRejectCertificateTransfer = "RejectCertificateTransfer"
@@ -4847,6 +4946,7 @@ const opRejectCertificateTransfer = "RejectCertificateTransfer"
 type RejectCertificateTransferRequest struct {
 	*aws.Request
 	Input *RejectCertificateTransferInput
+	Copy  func(*RejectCertificateTransferInput) RejectCertificateTransferRequest
 }
 
 // Send marshals and sends the RejectCertificateTransfer API request.
@@ -4895,7 +4995,7 @@ func (c *IoT) RejectCertificateTransferRequest(input *RejectCertificateTransferI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RejectCertificateTransferRequest{Request: req, Input: input}
+	return RejectCertificateTransferRequest{Request: req, Input: input, Copy: c.RejectCertificateTransferRequest}
 }
 
 const opRemoveThingFromThingGroup = "RemoveThingFromThingGroup"
@@ -4904,6 +5004,7 @@ const opRemoveThingFromThingGroup = "RemoveThingFromThingGroup"
 type RemoveThingFromThingGroupRequest struct {
 	*aws.Request
 	Input *RemoveThingFromThingGroupInput
+	Copy  func(*RemoveThingFromThingGroupInput) RemoveThingFromThingGroupRequest
 }
 
 // Send marshals and sends the RemoveThingFromThingGroup API request.
@@ -4942,7 +5043,7 @@ func (c *IoT) RemoveThingFromThingGroupRequest(input *RemoveThingFromThingGroupI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveThingFromThingGroupRequest{Request: req, Input: input}
+	return RemoveThingFromThingGroupRequest{Request: req, Input: input, Copy: c.RemoveThingFromThingGroupRequest}
 }
 
 const opReplaceTopicRule = "ReplaceTopicRule"
@@ -4951,6 +5052,7 @@ const opReplaceTopicRule = "ReplaceTopicRule"
 type ReplaceTopicRuleRequest struct {
 	*aws.Request
 	Input *ReplaceTopicRuleInput
+	Copy  func(*ReplaceTopicRuleInput) ReplaceTopicRuleRequest
 }
 
 // Send marshals and sends the ReplaceTopicRule API request.
@@ -4993,7 +5095,7 @@ func (c *IoT) ReplaceTopicRuleRequest(input *ReplaceTopicRuleInput) ReplaceTopic
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReplaceTopicRuleRequest{Request: req, Input: input}
+	return ReplaceTopicRuleRequest{Request: req, Input: input, Copy: c.ReplaceTopicRuleRequest}
 }
 
 const opSearchIndex = "SearchIndex"
@@ -5002,6 +5104,7 @@ const opSearchIndex = "SearchIndex"
 type SearchIndexRequest struct {
 	*aws.Request
 	Input *SearchIndexInput
+	Copy  func(*SearchIndexInput) SearchIndexRequest
 }
 
 // Send marshals and sends the SearchIndex API request.
@@ -5040,7 +5143,7 @@ func (c *IoT) SearchIndexRequest(input *SearchIndexInput) SearchIndexRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchIndexRequest{Request: req, Input: input}
+	return SearchIndexRequest{Request: req, Input: input, Copy: c.SearchIndexRequest}
 }
 
 const opSetDefaultAuthorizer = "SetDefaultAuthorizer"
@@ -5049,6 +5152,7 @@ const opSetDefaultAuthorizer = "SetDefaultAuthorizer"
 type SetDefaultAuthorizerRequest struct {
 	*aws.Request
 	Input *SetDefaultAuthorizerInput
+	Copy  func(*SetDefaultAuthorizerInput) SetDefaultAuthorizerRequest
 }
 
 // Send marshals and sends the SetDefaultAuthorizer API request.
@@ -5088,7 +5192,7 @@ func (c *IoT) SetDefaultAuthorizerRequest(input *SetDefaultAuthorizerInput) SetD
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetDefaultAuthorizerRequest{Request: req, Input: input}
+	return SetDefaultAuthorizerRequest{Request: req, Input: input, Copy: c.SetDefaultAuthorizerRequest}
 }
 
 const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
@@ -5097,6 +5201,7 @@ const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
 type SetDefaultPolicyVersionRequest struct {
 	*aws.Request
 	Input *SetDefaultPolicyVersionInput
+	Copy  func(*SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest
 }
 
 // Send marshals and sends the SetDefaultPolicyVersion API request.
@@ -5140,7 +5245,7 @@ func (c *IoT) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetDefaultPolicyVersionRequest{Request: req, Input: input}
+	return SetDefaultPolicyVersionRequest{Request: req, Input: input, Copy: c.SetDefaultPolicyVersionRequest}
 }
 
 const opSetLoggingOptions = "SetLoggingOptions"
@@ -5149,6 +5254,7 @@ const opSetLoggingOptions = "SetLoggingOptions"
 type SetLoggingOptionsRequest struct {
 	*aws.Request
 	Input *SetLoggingOptionsInput
+	Copy  func(*SetLoggingOptionsInput) SetLoggingOptionsRequest
 }
 
 // Send marshals and sends the SetLoggingOptions API request.
@@ -5189,7 +5295,7 @@ func (c *IoT) SetLoggingOptionsRequest(input *SetLoggingOptionsInput) SetLogging
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetLoggingOptionsRequest{Request: req, Input: input}
+	return SetLoggingOptionsRequest{Request: req, Input: input, Copy: c.SetLoggingOptionsRequest}
 }
 
 const opSetV2LoggingLevel = "SetV2LoggingLevel"
@@ -5198,6 +5304,7 @@ const opSetV2LoggingLevel = "SetV2LoggingLevel"
 type SetV2LoggingLevelRequest struct {
 	*aws.Request
 	Input *SetV2LoggingLevelInput
+	Copy  func(*SetV2LoggingLevelInput) SetV2LoggingLevelRequest
 }
 
 // Send marshals and sends the SetV2LoggingLevel API request.
@@ -5238,7 +5345,7 @@ func (c *IoT) SetV2LoggingLevelRequest(input *SetV2LoggingLevelInput) SetV2Loggi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetV2LoggingLevelRequest{Request: req, Input: input}
+	return SetV2LoggingLevelRequest{Request: req, Input: input, Copy: c.SetV2LoggingLevelRequest}
 }
 
 const opSetV2LoggingOptions = "SetV2LoggingOptions"
@@ -5247,6 +5354,7 @@ const opSetV2LoggingOptions = "SetV2LoggingOptions"
 type SetV2LoggingOptionsRequest struct {
 	*aws.Request
 	Input *SetV2LoggingOptionsInput
+	Copy  func(*SetV2LoggingOptionsInput) SetV2LoggingOptionsRequest
 }
 
 // Send marshals and sends the SetV2LoggingOptions API request.
@@ -5287,7 +5395,7 @@ func (c *IoT) SetV2LoggingOptionsRequest(input *SetV2LoggingOptionsInput) SetV2L
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetV2LoggingOptionsRequest{Request: req, Input: input}
+	return SetV2LoggingOptionsRequest{Request: req, Input: input, Copy: c.SetV2LoggingOptionsRequest}
 }
 
 const opStartThingRegistrationTask = "StartThingRegistrationTask"
@@ -5296,6 +5404,7 @@ const opStartThingRegistrationTask = "StartThingRegistrationTask"
 type StartThingRegistrationTaskRequest struct {
 	*aws.Request
 	Input *StartThingRegistrationTaskInput
+	Copy  func(*StartThingRegistrationTaskInput) StartThingRegistrationTaskRequest
 }
 
 // Send marshals and sends the StartThingRegistrationTask API request.
@@ -5334,7 +5443,7 @@ func (c *IoT) StartThingRegistrationTaskRequest(input *StartThingRegistrationTas
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartThingRegistrationTaskRequest{Request: req, Input: input}
+	return StartThingRegistrationTaskRequest{Request: req, Input: input, Copy: c.StartThingRegistrationTaskRequest}
 }
 
 const opStopThingRegistrationTask = "StopThingRegistrationTask"
@@ -5343,6 +5452,7 @@ const opStopThingRegistrationTask = "StopThingRegistrationTask"
 type StopThingRegistrationTaskRequest struct {
 	*aws.Request
 	Input *StopThingRegistrationTaskInput
+	Copy  func(*StopThingRegistrationTaskInput) StopThingRegistrationTaskRequest
 }
 
 // Send marshals and sends the StopThingRegistrationTask API request.
@@ -5381,7 +5491,7 @@ func (c *IoT) StopThingRegistrationTaskRequest(input *StopThingRegistrationTaskI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopThingRegistrationTaskRequest{Request: req, Input: input}
+	return StopThingRegistrationTaskRequest{Request: req, Input: input, Copy: c.StopThingRegistrationTaskRequest}
 }
 
 const opTestAuthorization = "TestAuthorization"
@@ -5390,6 +5500,7 @@ const opTestAuthorization = "TestAuthorization"
 type TestAuthorizationRequest struct {
 	*aws.Request
 	Input *TestAuthorizationInput
+	Copy  func(*TestAuthorizationInput) TestAuthorizationRequest
 }
 
 // Send marshals and sends the TestAuthorization API request.
@@ -5428,7 +5539,7 @@ func (c *IoT) TestAuthorizationRequest(input *TestAuthorizationInput) TestAuthor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestAuthorizationRequest{Request: req, Input: input}
+	return TestAuthorizationRequest{Request: req, Input: input, Copy: c.TestAuthorizationRequest}
 }
 
 const opTestInvokeAuthorizer = "TestInvokeAuthorizer"
@@ -5437,6 +5548,7 @@ const opTestInvokeAuthorizer = "TestInvokeAuthorizer"
 type TestInvokeAuthorizerRequest struct {
 	*aws.Request
 	Input *TestInvokeAuthorizerInput
+	Copy  func(*TestInvokeAuthorizerInput) TestInvokeAuthorizerRequest
 }
 
 // Send marshals and sends the TestInvokeAuthorizer API request.
@@ -5475,7 +5587,7 @@ func (c *IoT) TestInvokeAuthorizerRequest(input *TestInvokeAuthorizerInput) Test
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestInvokeAuthorizerRequest{Request: req, Input: input}
+	return TestInvokeAuthorizerRequest{Request: req, Input: input, Copy: c.TestInvokeAuthorizerRequest}
 }
 
 const opTransferCertificate = "TransferCertificate"
@@ -5484,6 +5596,7 @@ const opTransferCertificate = "TransferCertificate"
 type TransferCertificateRequest struct {
 	*aws.Request
 	Input *TransferCertificateInput
+	Copy  func(*TransferCertificateInput) TransferCertificateRequest
 }
 
 // Send marshals and sends the TransferCertificate API request.
@@ -5533,7 +5646,7 @@ func (c *IoT) TransferCertificateRequest(input *TransferCertificateInput) Transf
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TransferCertificateRequest{Request: req, Input: input}
+	return TransferCertificateRequest{Request: req, Input: input, Copy: c.TransferCertificateRequest}
 }
 
 const opUpdateAuthorizer = "UpdateAuthorizer"
@@ -5542,6 +5655,7 @@ const opUpdateAuthorizer = "UpdateAuthorizer"
 type UpdateAuthorizerRequest struct {
 	*aws.Request
 	Input *UpdateAuthorizerInput
+	Copy  func(*UpdateAuthorizerInput) UpdateAuthorizerRequest
 }
 
 // Send marshals and sends the UpdateAuthorizer API request.
@@ -5580,7 +5694,7 @@ func (c *IoT) UpdateAuthorizerRequest(input *UpdateAuthorizerInput) UpdateAuthor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAuthorizerRequest{Request: req, Input: input}
+	return UpdateAuthorizerRequest{Request: req, Input: input, Copy: c.UpdateAuthorizerRequest}
 }
 
 const opUpdateCACertificate = "UpdateCACertificate"
@@ -5589,6 +5703,7 @@ const opUpdateCACertificate = "UpdateCACertificate"
 type UpdateCACertificateRequest struct {
 	*aws.Request
 	Input *UpdateCACertificateInput
+	Copy  func(*UpdateCACertificateInput) UpdateCACertificateRequest
 }
 
 // Send marshals and sends the UpdateCACertificate API request.
@@ -5629,7 +5744,7 @@ func (c *IoT) UpdateCACertificateRequest(input *UpdateCACertificateInput) Update
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateCACertificateRequest{Request: req, Input: input}
+	return UpdateCACertificateRequest{Request: req, Input: input, Copy: c.UpdateCACertificateRequest}
 }
 
 const opUpdateCertificate = "UpdateCertificate"
@@ -5638,6 +5753,7 @@ const opUpdateCertificate = "UpdateCertificate"
 type UpdateCertificateRequest struct {
 	*aws.Request
 	Input *UpdateCertificateInput
+	Copy  func(*UpdateCertificateInput) UpdateCertificateRequest
 }
 
 // Send marshals and sends the UpdateCertificate API request.
@@ -5684,7 +5800,7 @@ func (c *IoT) UpdateCertificateRequest(input *UpdateCertificateInput) UpdateCert
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateCertificateRequest{Request: req, Input: input}
+	return UpdateCertificateRequest{Request: req, Input: input, Copy: c.UpdateCertificateRequest}
 }
 
 const opUpdateEventConfigurations = "UpdateEventConfigurations"
@@ -5693,6 +5809,7 @@ const opUpdateEventConfigurations = "UpdateEventConfigurations"
 type UpdateEventConfigurationsRequest struct {
 	*aws.Request
 	Input *UpdateEventConfigurationsInput
+	Copy  func(*UpdateEventConfigurationsInput) UpdateEventConfigurationsRequest
 }
 
 // Send marshals and sends the UpdateEventConfigurations API request.
@@ -5731,7 +5848,7 @@ func (c *IoT) UpdateEventConfigurationsRequest(input *UpdateEventConfigurationsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEventConfigurationsRequest{Request: req, Input: input}
+	return UpdateEventConfigurationsRequest{Request: req, Input: input, Copy: c.UpdateEventConfigurationsRequest}
 }
 
 const opUpdateIndexingConfiguration = "UpdateIndexingConfiguration"
@@ -5740,6 +5857,7 @@ const opUpdateIndexingConfiguration = "UpdateIndexingConfiguration"
 type UpdateIndexingConfigurationRequest struct {
 	*aws.Request
 	Input *UpdateIndexingConfigurationInput
+	Copy  func(*UpdateIndexingConfigurationInput) UpdateIndexingConfigurationRequest
 }
 
 // Send marshals and sends the UpdateIndexingConfiguration API request.
@@ -5778,7 +5896,7 @@ func (c *IoT) UpdateIndexingConfigurationRequest(input *UpdateIndexingConfigurat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateIndexingConfigurationRequest{Request: req, Input: input}
+	return UpdateIndexingConfigurationRequest{Request: req, Input: input, Copy: c.UpdateIndexingConfigurationRequest}
 }
 
 const opUpdateRoleAlias = "UpdateRoleAlias"
@@ -5787,6 +5905,7 @@ const opUpdateRoleAlias = "UpdateRoleAlias"
 type UpdateRoleAliasRequest struct {
 	*aws.Request
 	Input *UpdateRoleAliasInput
+	Copy  func(*UpdateRoleAliasInput) UpdateRoleAliasRequest
 }
 
 // Send marshals and sends the UpdateRoleAlias API request.
@@ -5825,7 +5944,7 @@ func (c *IoT) UpdateRoleAliasRequest(input *UpdateRoleAliasInput) UpdateRoleAlia
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRoleAliasRequest{Request: req, Input: input}
+	return UpdateRoleAliasRequest{Request: req, Input: input, Copy: c.UpdateRoleAliasRequest}
 }
 
 const opUpdateStream = "UpdateStream"
@@ -5834,6 +5953,7 @@ const opUpdateStream = "UpdateStream"
 type UpdateStreamRequest struct {
 	*aws.Request
 	Input *UpdateStreamInput
+	Copy  func(*UpdateStreamInput) UpdateStreamRequest
 }
 
 // Send marshals and sends the UpdateStream API request.
@@ -5872,7 +5992,7 @@ func (c *IoT) UpdateStreamRequest(input *UpdateStreamInput) UpdateStreamRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateStreamRequest{Request: req, Input: input}
+	return UpdateStreamRequest{Request: req, Input: input, Copy: c.UpdateStreamRequest}
 }
 
 const opUpdateThing = "UpdateThing"
@@ -5881,6 +6001,7 @@ const opUpdateThing = "UpdateThing"
 type UpdateThingRequest struct {
 	*aws.Request
 	Input *UpdateThingInput
+	Copy  func(*UpdateThingInput) UpdateThingRequest
 }
 
 // Send marshals and sends the UpdateThing API request.
@@ -5919,7 +6040,7 @@ func (c *IoT) UpdateThingRequest(input *UpdateThingInput) UpdateThingRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateThingRequest{Request: req, Input: input}
+	return UpdateThingRequest{Request: req, Input: input, Copy: c.UpdateThingRequest}
 }
 
 const opUpdateThingGroup = "UpdateThingGroup"
@@ -5928,6 +6049,7 @@ const opUpdateThingGroup = "UpdateThingGroup"
 type UpdateThingGroupRequest struct {
 	*aws.Request
 	Input *UpdateThingGroupInput
+	Copy  func(*UpdateThingGroupInput) UpdateThingGroupRequest
 }
 
 // Send marshals and sends the UpdateThingGroup API request.
@@ -5966,7 +6088,7 @@ func (c *IoT) UpdateThingGroupRequest(input *UpdateThingGroupInput) UpdateThingG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateThingGroupRequest{Request: req, Input: input}
+	return UpdateThingGroupRequest{Request: req, Input: input, Copy: c.UpdateThingGroupRequest}
 }
 
 const opUpdateThingGroupsForThing = "UpdateThingGroupsForThing"
@@ -5975,6 +6097,7 @@ const opUpdateThingGroupsForThing = "UpdateThingGroupsForThing"
 type UpdateThingGroupsForThingRequest struct {
 	*aws.Request
 	Input *UpdateThingGroupsForThingInput
+	Copy  func(*UpdateThingGroupsForThingInput) UpdateThingGroupsForThingRequest
 }
 
 // Send marshals and sends the UpdateThingGroupsForThing API request.
@@ -6013,7 +6136,7 @@ func (c *IoT) UpdateThingGroupsForThingRequest(input *UpdateThingGroupsForThingI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateThingGroupsForThingRequest{Request: req, Input: input}
+	return UpdateThingGroupsForThingRequest{Request: req, Input: input, Copy: c.UpdateThingGroupsForThingRequest}
 }
 
 // The input for the AcceptCertificateTransfer operation.

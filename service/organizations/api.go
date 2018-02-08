@@ -17,6 +17,7 @@ const opAcceptHandshake = "AcceptHandshake"
 type AcceptHandshakeRequest struct {
 	*aws.Request
 	Input *AcceptHandshakeInput
+	Copy  func(*AcceptHandshakeInput) AcceptHandshakeRequest
 }
 
 // Send marshals and sends the AcceptHandshake API request.
@@ -84,7 +85,7 @@ func (c *Organizations) AcceptHandshakeRequest(input *AcceptHandshakeInput) Acce
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcceptHandshakeRequest{Request: req, Input: input}
+	return AcceptHandshakeRequest{Request: req, Input: input, Copy: c.AcceptHandshakeRequest}
 }
 
 const opAttachPolicy = "AttachPolicy"
@@ -93,6 +94,7 @@ const opAttachPolicy = "AttachPolicy"
 type AttachPolicyRequest struct {
 	*aws.Request
 	Input *AttachPolicyInput
+	Copy  func(*AttachPolicyInput) AttachPolicyRequest
 }
 
 // Send marshals and sends the AttachPolicy API request.
@@ -173,7 +175,7 @@ func (c *Organizations) AttachPolicyRequest(input *AttachPolicyInput) AttachPoli
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachPolicyRequest{Request: req, Input: input}
+	return AttachPolicyRequest{Request: req, Input: input, Copy: c.AttachPolicyRequest}
 }
 
 const opCancelHandshake = "CancelHandshake"
@@ -182,6 +184,7 @@ const opCancelHandshake = "CancelHandshake"
 type CancelHandshakeRequest struct {
 	*aws.Request
 	Input *CancelHandshakeInput
+	Copy  func(*CancelHandshakeInput) CancelHandshakeRequest
 }
 
 // Send marshals and sends the CancelHandshake API request.
@@ -230,7 +233,7 @@ func (c *Organizations) CancelHandshakeRequest(input *CancelHandshakeInput) Canc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelHandshakeRequest{Request: req, Input: input}
+	return CancelHandshakeRequest{Request: req, Input: input, Copy: c.CancelHandshakeRequest}
 }
 
 const opCreateAccount = "CreateAccount"
@@ -239,6 +242,7 @@ const opCreateAccount = "CreateAccount"
 type CreateAccountRequest struct {
 	*aws.Request
 	Input *CreateAccountInput
+	Copy  func(*CreateAccountInput) CreateAccountRequest
 }
 
 // Send marshals and sends the CreateAccount API request.
@@ -327,7 +331,7 @@ func (c *Organizations) CreateAccountRequest(input *CreateAccountInput) CreateAc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAccountRequest{Request: req, Input: input}
+	return CreateAccountRequest{Request: req, Input: input, Copy: c.CreateAccountRequest}
 }
 
 const opCreateOrganization = "CreateOrganization"
@@ -336,6 +340,7 @@ const opCreateOrganization = "CreateOrganization"
 type CreateOrganizationRequest struct {
 	*aws.Request
 	Input *CreateOrganizationInput
+	Copy  func(*CreateOrganizationInput) CreateOrganizationRequest
 }
 
 // Send marshals and sends the CreateOrganization API request.
@@ -389,7 +394,7 @@ func (c *Organizations) CreateOrganizationRequest(input *CreateOrganizationInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateOrganizationRequest{Request: req, Input: input}
+	return CreateOrganizationRequest{Request: req, Input: input, Copy: c.CreateOrganizationRequest}
 }
 
 const opCreateOrganizationalUnit = "CreateOrganizationalUnit"
@@ -398,6 +403,7 @@ const opCreateOrganizationalUnit = "CreateOrganizationalUnit"
 type CreateOrganizationalUnitRequest struct {
 	*aws.Request
 	Input *CreateOrganizationalUnitInput
+	Copy  func(*CreateOrganizationalUnitInput) CreateOrganizationalUnitRequest
 }
 
 // Send marshals and sends the CreateOrganizationalUnit API request.
@@ -447,7 +453,7 @@ func (c *Organizations) CreateOrganizationalUnitRequest(input *CreateOrganizatio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateOrganizationalUnitRequest{Request: req, Input: input}
+	return CreateOrganizationalUnitRequest{Request: req, Input: input, Copy: c.CreateOrganizationalUnitRequest}
 }
 
 const opCreatePolicy = "CreatePolicy"
@@ -456,6 +462,7 @@ const opCreatePolicy = "CreatePolicy"
 type CreatePolicyRequest struct {
 	*aws.Request
 	Input *CreatePolicyInput
+	Copy  func(*CreatePolicyInput) CreatePolicyRequest
 }
 
 // Send marshals and sends the CreatePolicy API request.
@@ -502,7 +509,7 @@ func (c *Organizations) CreatePolicyRequest(input *CreatePolicyInput) CreatePoli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePolicyRequest{Request: req, Input: input}
+	return CreatePolicyRequest{Request: req, Input: input, Copy: c.CreatePolicyRequest}
 }
 
 const opDeclineHandshake = "DeclineHandshake"
@@ -511,6 +518,7 @@ const opDeclineHandshake = "DeclineHandshake"
 type DeclineHandshakeRequest struct {
 	*aws.Request
 	Input *DeclineHandshakeInput
+	Copy  func(*DeclineHandshakeInput) DeclineHandshakeRequest
 }
 
 // Send marshals and sends the DeclineHandshake API request.
@@ -560,7 +568,7 @@ func (c *Organizations) DeclineHandshakeRequest(input *DeclineHandshakeInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeclineHandshakeRequest{Request: req, Input: input}
+	return DeclineHandshakeRequest{Request: req, Input: input, Copy: c.DeclineHandshakeRequest}
 }
 
 const opDeleteOrganization = "DeleteOrganization"
@@ -569,6 +577,7 @@ const opDeleteOrganization = "DeleteOrganization"
 type DeleteOrganizationRequest struct {
 	*aws.Request
 	Input *DeleteOrganizationInput
+	Copy  func(*DeleteOrganizationInput) DeleteOrganizationRequest
 }
 
 // Send marshals and sends the DeleteOrganization API request.
@@ -613,7 +622,7 @@ func (c *Organizations) DeleteOrganizationRequest(input *DeleteOrganizationInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteOrganizationRequest{Request: req, Input: input}
+	return DeleteOrganizationRequest{Request: req, Input: input, Copy: c.DeleteOrganizationRequest}
 }
 
 const opDeleteOrganizationalUnit = "DeleteOrganizationalUnit"
@@ -622,6 +631,7 @@ const opDeleteOrganizationalUnit = "DeleteOrganizationalUnit"
 type DeleteOrganizationalUnitRequest struct {
 	*aws.Request
 	Input *DeleteOrganizationalUnitInput
+	Copy  func(*DeleteOrganizationalUnitInput) DeleteOrganizationalUnitRequest
 }
 
 // Send marshals and sends the DeleteOrganizationalUnit API request.
@@ -667,7 +677,7 @@ func (c *Organizations) DeleteOrganizationalUnitRequest(input *DeleteOrganizatio
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteOrganizationalUnitRequest{Request: req, Input: input}
+	return DeleteOrganizationalUnitRequest{Request: req, Input: input, Copy: c.DeleteOrganizationalUnitRequest}
 }
 
 const opDeletePolicy = "DeletePolicy"
@@ -676,6 +686,7 @@ const opDeletePolicy = "DeletePolicy"
 type DeletePolicyRequest struct {
 	*aws.Request
 	Input *DeletePolicyInput
+	Copy  func(*DeletePolicyInput) DeletePolicyRequest
 }
 
 // Send marshals and sends the DeletePolicy API request.
@@ -721,7 +732,7 @@ func (c *Organizations) DeletePolicyRequest(input *DeletePolicyInput) DeletePoli
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePolicyRequest{Request: req, Input: input}
+	return DeletePolicyRequest{Request: req, Input: input, Copy: c.DeletePolicyRequest}
 }
 
 const opDescribeAccount = "DescribeAccount"
@@ -730,6 +741,7 @@ const opDescribeAccount = "DescribeAccount"
 type DescribeAccountRequest struct {
 	*aws.Request
 	Input *DescribeAccountInput
+	Copy  func(*DescribeAccountInput) DescribeAccountRequest
 }
 
 // Send marshals and sends the DescribeAccount API request.
@@ -772,7 +784,7 @@ func (c *Organizations) DescribeAccountRequest(input *DescribeAccountInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAccountRequest{Request: req, Input: input}
+	return DescribeAccountRequest{Request: req, Input: input, Copy: c.DescribeAccountRequest}
 }
 
 const opDescribeCreateAccountStatus = "DescribeCreateAccountStatus"
@@ -781,6 +793,7 @@ const opDescribeCreateAccountStatus = "DescribeCreateAccountStatus"
 type DescribeCreateAccountStatusRequest struct {
 	*aws.Request
 	Input *DescribeCreateAccountStatusInput
+	Copy  func(*DescribeCreateAccountStatusInput) DescribeCreateAccountStatusRequest
 }
 
 // Send marshals and sends the DescribeCreateAccountStatus API request.
@@ -823,7 +836,7 @@ func (c *Organizations) DescribeCreateAccountStatusRequest(input *DescribeCreate
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCreateAccountStatusRequest{Request: req, Input: input}
+	return DescribeCreateAccountStatusRequest{Request: req, Input: input, Copy: c.DescribeCreateAccountStatusRequest}
 }
 
 const opDescribeHandshake = "DescribeHandshake"
@@ -832,6 +845,7 @@ const opDescribeHandshake = "DescribeHandshake"
 type DescribeHandshakeRequest struct {
 	*aws.Request
 	Input *DescribeHandshakeInput
+	Copy  func(*DescribeHandshakeInput) DescribeHandshakeRequest
 }
 
 // Send marshals and sends the DescribeHandshake API request.
@@ -880,7 +894,7 @@ func (c *Organizations) DescribeHandshakeRequest(input *DescribeHandshakeInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeHandshakeRequest{Request: req, Input: input}
+	return DescribeHandshakeRequest{Request: req, Input: input, Copy: c.DescribeHandshakeRequest}
 }
 
 const opDescribeOrganization = "DescribeOrganization"
@@ -889,6 +903,7 @@ const opDescribeOrganization = "DescribeOrganization"
 type DescribeOrganizationRequest struct {
 	*aws.Request
 	Input *DescribeOrganizationInput
+	Copy  func(*DescribeOrganizationInput) DescribeOrganizationRequest
 }
 
 // Send marshals and sends the DescribeOrganization API request.
@@ -932,7 +947,7 @@ func (c *Organizations) DescribeOrganizationRequest(input *DescribeOrganizationI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeOrganizationRequest{Request: req, Input: input}
+	return DescribeOrganizationRequest{Request: req, Input: input, Copy: c.DescribeOrganizationRequest}
 }
 
 const opDescribeOrganizationalUnit = "DescribeOrganizationalUnit"
@@ -941,6 +956,7 @@ const opDescribeOrganizationalUnit = "DescribeOrganizationalUnit"
 type DescribeOrganizationalUnitRequest struct {
 	*aws.Request
 	Input *DescribeOrganizationalUnitInput
+	Copy  func(*DescribeOrganizationalUnitInput) DescribeOrganizationalUnitRequest
 }
 
 // Send marshals and sends the DescribeOrganizationalUnit API request.
@@ -983,7 +999,7 @@ func (c *Organizations) DescribeOrganizationalUnitRequest(input *DescribeOrganiz
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeOrganizationalUnitRequest{Request: req, Input: input}
+	return DescribeOrganizationalUnitRequest{Request: req, Input: input, Copy: c.DescribeOrganizationalUnitRequest}
 }
 
 const opDescribePolicy = "DescribePolicy"
@@ -992,6 +1008,7 @@ const opDescribePolicy = "DescribePolicy"
 type DescribePolicyRequest struct {
 	*aws.Request
 	Input *DescribePolicyInput
+	Copy  func(*DescribePolicyInput) DescribePolicyRequest
 }
 
 // Send marshals and sends the DescribePolicy API request.
@@ -1034,7 +1051,7 @@ func (c *Organizations) DescribePolicyRequest(input *DescribePolicyInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePolicyRequest{Request: req, Input: input}
+	return DescribePolicyRequest{Request: req, Input: input, Copy: c.DescribePolicyRequest}
 }
 
 const opDetachPolicy = "DetachPolicy"
@@ -1043,6 +1060,7 @@ const opDetachPolicy = "DetachPolicy"
 type DetachPolicyRequest struct {
 	*aws.Request
 	Input *DetachPolicyInput
+	Copy  func(*DetachPolicyInput) DetachPolicyRequest
 }
 
 // Send marshals and sends the DetachPolicy API request.
@@ -1099,7 +1117,7 @@ func (c *Organizations) DetachPolicyRequest(input *DetachPolicyInput) DetachPoli
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachPolicyRequest{Request: req, Input: input}
+	return DetachPolicyRequest{Request: req, Input: input, Copy: c.DetachPolicyRequest}
 }
 
 const opDisableAWSServiceAccess = "DisableAWSServiceAccess"
@@ -1108,6 +1126,7 @@ const opDisableAWSServiceAccess = "DisableAWSServiceAccess"
 type DisableAWSServiceAccessRequest struct {
 	*aws.Request
 	Input *DisableAWSServiceAccessInput
+	Copy  func(*DisableAWSServiceAccessInput) DisableAWSServiceAccessRequest
 }
 
 // Send marshals and sends the DisableAWSServiceAccess API request.
@@ -1172,7 +1191,7 @@ func (c *Organizations) DisableAWSServiceAccessRequest(input *DisableAWSServiceA
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableAWSServiceAccessRequest{Request: req, Input: input}
+	return DisableAWSServiceAccessRequest{Request: req, Input: input, Copy: c.DisableAWSServiceAccessRequest}
 }
 
 const opDisablePolicyType = "DisablePolicyType"
@@ -1181,6 +1200,7 @@ const opDisablePolicyType = "DisablePolicyType"
 type DisablePolicyTypeRequest struct {
 	*aws.Request
 	Input *DisablePolicyTypeInput
+	Copy  func(*DisablePolicyTypeInput) DisablePolicyTypeRequest
 }
 
 // Send marshals and sends the DisablePolicyType API request.
@@ -1227,7 +1247,7 @@ func (c *Organizations) DisablePolicyTypeRequest(input *DisablePolicyTypeInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisablePolicyTypeRequest{Request: req, Input: input}
+	return DisablePolicyTypeRequest{Request: req, Input: input, Copy: c.DisablePolicyTypeRequest}
 }
 
 const opEnableAWSServiceAccess = "EnableAWSServiceAccess"
@@ -1236,6 +1256,7 @@ const opEnableAWSServiceAccess = "EnableAWSServiceAccess"
 type EnableAWSServiceAccessRequest struct {
 	*aws.Request
 	Input *EnableAWSServiceAccessInput
+	Copy  func(*EnableAWSServiceAccessInput) EnableAWSServiceAccessRequest
 }
 
 // Send marshals and sends the EnableAWSServiceAccess API request.
@@ -1297,7 +1318,7 @@ func (c *Organizations) EnableAWSServiceAccessRequest(input *EnableAWSServiceAcc
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableAWSServiceAccessRequest{Request: req, Input: input}
+	return EnableAWSServiceAccessRequest{Request: req, Input: input, Copy: c.EnableAWSServiceAccessRequest}
 }
 
 const opEnableAllFeatures = "EnableAllFeatures"
@@ -1306,6 +1327,7 @@ const opEnableAllFeatures = "EnableAllFeatures"
 type EnableAllFeaturesRequest struct {
 	*aws.Request
 	Input *EnableAllFeaturesInput
+	Copy  func(*EnableAllFeaturesInput) EnableAllFeaturesRequest
 }
 
 // Send marshals and sends the EnableAllFeatures API request.
@@ -1372,7 +1394,7 @@ func (c *Organizations) EnableAllFeaturesRequest(input *EnableAllFeaturesInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableAllFeaturesRequest{Request: req, Input: input}
+	return EnableAllFeaturesRequest{Request: req, Input: input, Copy: c.EnableAllFeaturesRequest}
 }
 
 const opEnablePolicyType = "EnablePolicyType"
@@ -1381,6 +1403,7 @@ const opEnablePolicyType = "EnablePolicyType"
 type EnablePolicyTypeRequest struct {
 	*aws.Request
 	Input *EnablePolicyTypeInput
+	Copy  func(*EnablePolicyTypeInput) EnablePolicyTypeRequest
 }
 
 // Send marshals and sends the EnablePolicyType API request.
@@ -1425,7 +1448,7 @@ func (c *Organizations) EnablePolicyTypeRequest(input *EnablePolicyTypeInput) En
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnablePolicyTypeRequest{Request: req, Input: input}
+	return EnablePolicyTypeRequest{Request: req, Input: input, Copy: c.EnablePolicyTypeRequest}
 }
 
 const opInviteAccountToOrganization = "InviteAccountToOrganization"
@@ -1434,6 +1457,7 @@ const opInviteAccountToOrganization = "InviteAccountToOrganization"
 type InviteAccountToOrganizationRequest struct {
 	*aws.Request
 	Input *InviteAccountToOrganizationInput
+	Copy  func(*InviteAccountToOrganizationInput) InviteAccountToOrganizationRequest
 }
 
 // Send marshals and sends the InviteAccountToOrganization API request.
@@ -1490,7 +1514,7 @@ func (c *Organizations) InviteAccountToOrganizationRequest(input *InviteAccountT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InviteAccountToOrganizationRequest{Request: req, Input: input}
+	return InviteAccountToOrganizationRequest{Request: req, Input: input, Copy: c.InviteAccountToOrganizationRequest}
 }
 
 const opLeaveOrganization = "LeaveOrganization"
@@ -1499,6 +1523,7 @@ const opLeaveOrganization = "LeaveOrganization"
 type LeaveOrganizationRequest struct {
 	*aws.Request
 	Input *LeaveOrganizationInput
+	Copy  func(*LeaveOrganizationInput) LeaveOrganizationRequest
 }
 
 // Send marshals and sends the LeaveOrganization API request.
@@ -1569,7 +1594,7 @@ func (c *Organizations) LeaveOrganizationRequest(input *LeaveOrganizationInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return LeaveOrganizationRequest{Request: req, Input: input}
+	return LeaveOrganizationRequest{Request: req, Input: input, Copy: c.LeaveOrganizationRequest}
 }
 
 const opListAWSServiceAccessForOrganization = "ListAWSServiceAccessForOrganization"
@@ -1578,6 +1603,7 @@ const opListAWSServiceAccessForOrganization = "ListAWSServiceAccessForOrganizati
 type ListAWSServiceAccessForOrganizationRequest struct {
 	*aws.Request
 	Input *ListAWSServiceAccessForOrganizationInput
+	Copy  func(*ListAWSServiceAccessForOrganizationInput) ListAWSServiceAccessForOrganizationRequest
 }
 
 // Send marshals and sends the ListAWSServiceAccessForOrganization API request.
@@ -1634,47 +1660,47 @@ func (c *Organizations) ListAWSServiceAccessForOrganizationRequest(input *ListAW
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAWSServiceAccessForOrganizationRequest{Request: req, Input: input}
+	return ListAWSServiceAccessForOrganizationRequest{Request: req, Input: input, Copy: c.ListAWSServiceAccessForOrganizationRequest}
 }
 
-// ListAWSServiceAccessForOrganizationPages iterates over the pages of a ListAWSServiceAccessForOrganization operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAWSServiceAccessForOrganization method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAWSServiceAccessForOrganizationRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAWSServiceAccessForOrganization operation.
-//    pageNum := 0
-//    err := client.ListAWSServiceAccessForOrganizationPages(params,
-//        func(page *ListAWSServiceAccessForOrganizationOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAWSServiceAccessForOrganizationRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListAWSServiceAccessForOrganizationRequest) Paginate(opts ...aws.Option) ListAWSServiceAccessForOrganizationPager {
 	return ListAWSServiceAccessForOrganizationPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAWSServiceAccessForOrganizationInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAWSServiceAccessForOrganizationInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListAWSServiceAccessForOrganizationOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListAWSServiceAccessForOrganizationPager ...
+// ListAWSServiceAccessForOrganizationPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListAWSServiceAccessForOrganizationPager struct {
 	aws.Pager
 }
@@ -1689,6 +1715,7 @@ const opListAccounts = "ListAccounts"
 type ListAccountsRequest struct {
 	*aws.Request
 	Input *ListAccountsInput
+	Copy  func(*ListAccountsInput) ListAccountsRequest
 }
 
 // Send marshals and sends the ListAccounts API request.
@@ -1738,47 +1765,47 @@ func (c *Organizations) ListAccountsRequest(input *ListAccountsInput) ListAccoun
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAccountsRequest{Request: req, Input: input}
+	return ListAccountsRequest{Request: req, Input: input, Copy: c.ListAccountsRequest}
 }
 
-// ListAccountsPages iterates over the pages of a ListAccounts operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAccounts method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAccountsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAccounts operation.
-//    pageNum := 0
-//    err := client.ListAccountsPages(params,
-//        func(page *ListAccountsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAccountsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListAccountsRequest) Paginate(opts ...aws.Option) ListAccountsPager {
 	return ListAccountsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAccountsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAccountsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListAccountsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListAccountsPager ...
+// ListAccountsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListAccountsPager struct {
 	aws.Pager
 }
@@ -1793,6 +1820,7 @@ const opListAccountsForParent = "ListAccountsForParent"
 type ListAccountsForParentRequest struct {
 	*aws.Request
 	Input *ListAccountsForParentInput
+	Copy  func(*ListAccountsForParentInput) ListAccountsForParentRequest
 }
 
 // Send marshals and sends the ListAccountsForParent API request.
@@ -1846,47 +1874,47 @@ func (c *Organizations) ListAccountsForParentRequest(input *ListAccountsForParen
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAccountsForParentRequest{Request: req, Input: input}
+	return ListAccountsForParentRequest{Request: req, Input: input, Copy: c.ListAccountsForParentRequest}
 }
 
-// ListAccountsForParentPages iterates over the pages of a ListAccountsForParent operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAccountsForParent method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAccountsForParentRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAccountsForParent operation.
-//    pageNum := 0
-//    err := client.ListAccountsForParentPages(params,
-//        func(page *ListAccountsForParentOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAccountsForParentRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListAccountsForParentRequest) Paginate(opts ...aws.Option) ListAccountsForParentPager {
 	return ListAccountsForParentPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAccountsForParentInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAccountsForParentInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListAccountsForParentOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListAccountsForParentPager ...
+// ListAccountsForParentPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListAccountsForParentPager struct {
 	aws.Pager
 }
@@ -1901,6 +1929,7 @@ const opListChildren = "ListChildren"
 type ListChildrenRequest struct {
 	*aws.Request
 	Input *ListChildrenInput
+	Copy  func(*ListChildrenInput) ListChildrenRequest
 }
 
 // Send marshals and sends the ListChildren API request.
@@ -1951,47 +1980,47 @@ func (c *Organizations) ListChildrenRequest(input *ListChildrenInput) ListChildr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListChildrenRequest{Request: req, Input: input}
+	return ListChildrenRequest{Request: req, Input: input, Copy: c.ListChildrenRequest}
 }
 
-// ListChildrenPages iterates over the pages of a ListChildren operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListChildren method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListChildrenRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListChildren operation.
-//    pageNum := 0
-//    err := client.ListChildrenPages(params,
-//        func(page *ListChildrenOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListChildrenRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListChildrenRequest) Paginate(opts ...aws.Option) ListChildrenPager {
 	return ListChildrenPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListChildrenInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListChildrenInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListChildrenOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListChildrenPager ...
+// ListChildrenPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListChildrenPager struct {
 	aws.Pager
 }
@@ -2006,6 +2035,7 @@ const opListCreateAccountStatus = "ListCreateAccountStatus"
 type ListCreateAccountStatusRequest struct {
 	*aws.Request
 	Input *ListCreateAccountStatusInput
+	Copy  func(*ListCreateAccountStatusInput) ListCreateAccountStatusRequest
 }
 
 // Send marshals and sends the ListCreateAccountStatus API request.
@@ -2055,47 +2085,47 @@ func (c *Organizations) ListCreateAccountStatusRequest(input *ListCreateAccountS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCreateAccountStatusRequest{Request: req, Input: input}
+	return ListCreateAccountStatusRequest{Request: req, Input: input, Copy: c.ListCreateAccountStatusRequest}
 }
 
-// ListCreateAccountStatusPages iterates over the pages of a ListCreateAccountStatus operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListCreateAccountStatus method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListCreateAccountStatusRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListCreateAccountStatus operation.
-//    pageNum := 0
-//    err := client.ListCreateAccountStatusPages(params,
-//        func(page *ListCreateAccountStatusOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListCreateAccountStatusRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListCreateAccountStatusRequest) Paginate(opts ...aws.Option) ListCreateAccountStatusPager {
 	return ListCreateAccountStatusPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListCreateAccountStatusInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListCreateAccountStatusInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListCreateAccountStatusOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListCreateAccountStatusPager ...
+// ListCreateAccountStatusPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListCreateAccountStatusPager struct {
 	aws.Pager
 }
@@ -2110,6 +2140,7 @@ const opListHandshakesForAccount = "ListHandshakesForAccount"
 type ListHandshakesForAccountRequest struct {
 	*aws.Request
 	Input *ListHandshakesForAccountInput
+	Copy  func(*ListHandshakesForAccountInput) ListHandshakesForAccountRequest
 }
 
 // Send marshals and sends the ListHandshakesForAccount API request.
@@ -2163,47 +2194,47 @@ func (c *Organizations) ListHandshakesForAccountRequest(input *ListHandshakesFor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListHandshakesForAccountRequest{Request: req, Input: input}
+	return ListHandshakesForAccountRequest{Request: req, Input: input, Copy: c.ListHandshakesForAccountRequest}
 }
 
-// ListHandshakesForAccountPages iterates over the pages of a ListHandshakesForAccount operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListHandshakesForAccount method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListHandshakesForAccountRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListHandshakesForAccount operation.
-//    pageNum := 0
-//    err := client.ListHandshakesForAccountPages(params,
-//        func(page *ListHandshakesForAccountOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListHandshakesForAccountRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListHandshakesForAccountRequest) Paginate(opts ...aws.Option) ListHandshakesForAccountPager {
 	return ListHandshakesForAccountPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListHandshakesForAccountInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListHandshakesForAccountInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListHandshakesForAccountOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListHandshakesForAccountPager ...
+// ListHandshakesForAccountPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListHandshakesForAccountPager struct {
 	aws.Pager
 }
@@ -2218,6 +2249,7 @@ const opListHandshakesForOrganization = "ListHandshakesForOrganization"
 type ListHandshakesForOrganizationRequest struct {
 	*aws.Request
 	Input *ListHandshakesForOrganizationInput
+	Copy  func(*ListHandshakesForOrganizationInput) ListHandshakesForOrganizationRequest
 }
 
 // Send marshals and sends the ListHandshakesForOrganization API request.
@@ -2273,47 +2305,47 @@ func (c *Organizations) ListHandshakesForOrganizationRequest(input *ListHandshak
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListHandshakesForOrganizationRequest{Request: req, Input: input}
+	return ListHandshakesForOrganizationRequest{Request: req, Input: input, Copy: c.ListHandshakesForOrganizationRequest}
 }
 
-// ListHandshakesForOrganizationPages iterates over the pages of a ListHandshakesForOrganization operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListHandshakesForOrganization method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListHandshakesForOrganizationRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListHandshakesForOrganization operation.
-//    pageNum := 0
-//    err := client.ListHandshakesForOrganizationPages(params,
-//        func(page *ListHandshakesForOrganizationOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListHandshakesForOrganizationRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListHandshakesForOrganizationRequest) Paginate(opts ...aws.Option) ListHandshakesForOrganizationPager {
 	return ListHandshakesForOrganizationPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListHandshakesForOrganizationInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListHandshakesForOrganizationInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListHandshakesForOrganizationOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListHandshakesForOrganizationPager ...
+// ListHandshakesForOrganizationPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListHandshakesForOrganizationPager struct {
 	aws.Pager
 }
@@ -2328,6 +2360,7 @@ const opListOrganizationalUnitsForParent = "ListOrganizationalUnitsForParent"
 type ListOrganizationalUnitsForParentRequest struct {
 	*aws.Request
 	Input *ListOrganizationalUnitsForParentInput
+	Copy  func(*ListOrganizationalUnitsForParentInput) ListOrganizationalUnitsForParentRequest
 }
 
 // Send marshals and sends the ListOrganizationalUnitsForParent API request.
@@ -2376,47 +2409,47 @@ func (c *Organizations) ListOrganizationalUnitsForParentRequest(input *ListOrgan
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOrganizationalUnitsForParentRequest{Request: req, Input: input}
+	return ListOrganizationalUnitsForParentRequest{Request: req, Input: input, Copy: c.ListOrganizationalUnitsForParentRequest}
 }
 
-// ListOrganizationalUnitsForParentPages iterates over the pages of a ListOrganizationalUnitsForParent operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListOrganizationalUnitsForParent method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListOrganizationalUnitsForParentRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListOrganizationalUnitsForParent operation.
-//    pageNum := 0
-//    err := client.ListOrganizationalUnitsForParentPages(params,
-//        func(page *ListOrganizationalUnitsForParentOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListOrganizationalUnitsForParentRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListOrganizationalUnitsForParentRequest) Paginate(opts ...aws.Option) ListOrganizationalUnitsForParentPager {
 	return ListOrganizationalUnitsForParentPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListOrganizationalUnitsForParentInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListOrganizationalUnitsForParentInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListOrganizationalUnitsForParentOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListOrganizationalUnitsForParentPager ...
+// ListOrganizationalUnitsForParentPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListOrganizationalUnitsForParentPager struct {
 	aws.Pager
 }
@@ -2431,6 +2464,7 @@ const opListParents = "ListParents"
 type ListParentsRequest struct {
 	*aws.Request
 	Input *ListParentsInput
+	Copy  func(*ListParentsInput) ListParentsRequest
 }
 
 // Send marshals and sends the ListParents API request.
@@ -2483,47 +2517,47 @@ func (c *Organizations) ListParentsRequest(input *ListParentsInput) ListParentsR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListParentsRequest{Request: req, Input: input}
+	return ListParentsRequest{Request: req, Input: input, Copy: c.ListParentsRequest}
 }
 
-// ListParentsPages iterates over the pages of a ListParents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListParents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListParentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListParents operation.
-//    pageNum := 0
-//    err := client.ListParentsPages(params,
-//        func(page *ListParentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListParentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListParentsRequest) Paginate(opts ...aws.Option) ListParentsPager {
 	return ListParentsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListParentsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListParentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListParentsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListParentsPager ...
+// ListParentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListParentsPager struct {
 	aws.Pager
 }
@@ -2538,6 +2572,7 @@ const opListPolicies = "ListPolicies"
 type ListPoliciesRequest struct {
 	*aws.Request
 	Input *ListPoliciesInput
+	Copy  func(*ListPoliciesInput) ListPoliciesRequest
 }
 
 // Send marshals and sends the ListPolicies API request.
@@ -2586,47 +2621,47 @@ func (c *Organizations) ListPoliciesRequest(input *ListPoliciesInput) ListPolici
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPoliciesRequest{Request: req, Input: input}
+	return ListPoliciesRequest{Request: req, Input: input, Copy: c.ListPoliciesRequest}
 }
 
-// ListPoliciesPages iterates over the pages of a ListPolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPolicies operation.
-//    pageNum := 0
-//    err := client.ListPoliciesPages(params,
-//        func(page *ListPoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
 	return ListPoliciesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPoliciesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListPoliciesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListPoliciesPager ...
+// ListPoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListPoliciesPager struct {
 	aws.Pager
 }
@@ -2641,6 +2676,7 @@ const opListPoliciesForTarget = "ListPoliciesForTarget"
 type ListPoliciesForTargetRequest struct {
 	*aws.Request
 	Input *ListPoliciesForTargetInput
+	Copy  func(*ListPoliciesForTargetInput) ListPoliciesForTargetRequest
 }
 
 // Send marshals and sends the ListPoliciesForTarget API request.
@@ -2691,47 +2727,47 @@ func (c *Organizations) ListPoliciesForTargetRequest(input *ListPoliciesForTarge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPoliciesForTargetRequest{Request: req, Input: input}
+	return ListPoliciesForTargetRequest{Request: req, Input: input, Copy: c.ListPoliciesForTargetRequest}
 }
 
-// ListPoliciesForTargetPages iterates over the pages of a ListPoliciesForTarget operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPoliciesForTarget method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPoliciesForTargetRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPoliciesForTarget operation.
-//    pageNum := 0
-//    err := client.ListPoliciesForTargetPages(params,
-//        func(page *ListPoliciesForTargetOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPoliciesForTargetRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListPoliciesForTargetRequest) Paginate(opts ...aws.Option) ListPoliciesForTargetPager {
 	return ListPoliciesForTargetPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPoliciesForTargetInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPoliciesForTargetInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListPoliciesForTargetOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListPoliciesForTargetPager ...
+// ListPoliciesForTargetPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListPoliciesForTargetPager struct {
 	aws.Pager
 }
@@ -2746,6 +2782,7 @@ const opListRoots = "ListRoots"
 type ListRootsRequest struct {
 	*aws.Request
 	Input *ListRootsInput
+	Copy  func(*ListRootsInput) ListRootsRequest
 }
 
 // Send marshals and sends the ListRoots API request.
@@ -2794,47 +2831,47 @@ func (c *Organizations) ListRootsRequest(input *ListRootsInput) ListRootsRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRootsRequest{Request: req, Input: input}
+	return ListRootsRequest{Request: req, Input: input, Copy: c.ListRootsRequest}
 }
 
-// ListRootsPages iterates over the pages of a ListRoots operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListRoots method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListRootsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListRoots operation.
-//    pageNum := 0
-//    err := client.ListRootsPages(params,
-//        func(page *ListRootsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListRootsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListRootsRequest) Paginate(opts ...aws.Option) ListRootsPager {
 	return ListRootsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListRootsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListRootsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListRootsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListRootsPager ...
+// ListRootsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListRootsPager struct {
 	aws.Pager
 }
@@ -2849,6 +2886,7 @@ const opListTargetsForPolicy = "ListTargetsForPolicy"
 type ListTargetsForPolicyRequest struct {
 	*aws.Request
 	Input *ListTargetsForPolicyInput
+	Copy  func(*ListTargetsForPolicyInput) ListTargetsForPolicyRequest
 }
 
 // Send marshals and sends the ListTargetsForPolicy API request.
@@ -2897,47 +2935,47 @@ func (c *Organizations) ListTargetsForPolicyRequest(input *ListTargetsForPolicyI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTargetsForPolicyRequest{Request: req, Input: input}
+	return ListTargetsForPolicyRequest{Request: req, Input: input, Copy: c.ListTargetsForPolicyRequest}
 }
 
-// ListTargetsForPolicyPages iterates over the pages of a ListTargetsForPolicy operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTargetsForPolicy method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTargetsForPolicyRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTargetsForPolicy operation.
-//    pageNum := 0
-//    err := client.ListTargetsForPolicyPages(params,
-//        func(page *ListTargetsForPolicyOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTargetsForPolicyRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListTargetsForPolicyRequest) Paginate(opts ...aws.Option) ListTargetsForPolicyPager {
 	return ListTargetsForPolicyPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTargetsForPolicyInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTargetsForPolicyInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListTargetsForPolicyOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListTargetsForPolicyPager ...
+// ListTargetsForPolicyPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListTargetsForPolicyPager struct {
 	aws.Pager
 }
@@ -2952,6 +2990,7 @@ const opMoveAccount = "MoveAccount"
 type MoveAccountRequest struct {
 	*aws.Request
 	Input *MoveAccountInput
+	Copy  func(*MoveAccountInput) MoveAccountRequest
 }
 
 // Send marshals and sends the MoveAccount API request.
@@ -2997,7 +3036,7 @@ func (c *Organizations) MoveAccountRequest(input *MoveAccountInput) MoveAccountR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return MoveAccountRequest{Request: req, Input: input}
+	return MoveAccountRequest{Request: req, Input: input, Copy: c.MoveAccountRequest}
 }
 
 const opRemoveAccountFromOrganization = "RemoveAccountFromOrganization"
@@ -3006,6 +3045,7 @@ const opRemoveAccountFromOrganization = "RemoveAccountFromOrganization"
 type RemoveAccountFromOrganizationRequest struct {
 	*aws.Request
 	Input *RemoveAccountFromOrganizationInput
+	Copy  func(*RemoveAccountFromOrganizationInput) RemoveAccountFromOrganizationRequest
 }
 
 // Send marshals and sends the RemoveAccountFromOrganization API request.
@@ -3077,7 +3117,7 @@ func (c *Organizations) RemoveAccountFromOrganizationRequest(input *RemoveAccoun
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveAccountFromOrganizationRequest{Request: req, Input: input}
+	return RemoveAccountFromOrganizationRequest{Request: req, Input: input, Copy: c.RemoveAccountFromOrganizationRequest}
 }
 
 const opUpdateOrganizationalUnit = "UpdateOrganizationalUnit"
@@ -3086,6 +3126,7 @@ const opUpdateOrganizationalUnit = "UpdateOrganizationalUnit"
 type UpdateOrganizationalUnitRequest struct {
 	*aws.Request
 	Input *UpdateOrganizationalUnitInput
+	Copy  func(*UpdateOrganizationalUnitInput) UpdateOrganizationalUnitRequest
 }
 
 // Send marshals and sends the UpdateOrganizationalUnit API request.
@@ -3130,7 +3171,7 @@ func (c *Organizations) UpdateOrganizationalUnitRequest(input *UpdateOrganizatio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateOrganizationalUnitRequest{Request: req, Input: input}
+	return UpdateOrganizationalUnitRequest{Request: req, Input: input, Copy: c.UpdateOrganizationalUnitRequest}
 }
 
 const opUpdatePolicy = "UpdatePolicy"
@@ -3139,6 +3180,7 @@ const opUpdatePolicy = "UpdatePolicy"
 type UpdatePolicyRequest struct {
 	*aws.Request
 	Input *UpdatePolicyInput
+	Copy  func(*UpdatePolicyInput) UpdatePolicyRequest
 }
 
 // Send marshals and sends the UpdatePolicy API request.
@@ -3183,7 +3225,7 @@ func (c *Organizations) UpdatePolicyRequest(input *UpdatePolicyInput) UpdatePoli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePolicyRequest{Request: req, Input: input}
+	return UpdatePolicyRequest{Request: req, Input: input, Copy: c.UpdatePolicyRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/organizations-2016-11-28/AcceptHandshakeRequest

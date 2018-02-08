@@ -16,6 +16,7 @@ const opDescribeStream = "DescribeStream"
 type DescribeStreamRequest struct {
 	*aws.Request
 	Input *DescribeStreamInput
+	Copy  func(*DescribeStreamInput) DescribeStreamRequest
 }
 
 // Send marshals and sends the DescribeStream API request.
@@ -66,7 +67,7 @@ func (c *DynamoDBStreams) DescribeStreamRequest(input *DescribeStreamInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStreamRequest{Request: req, Input: input}
+	return DescribeStreamRequest{Request: req, Input: input, Copy: c.DescribeStreamRequest}
 }
 
 const opGetRecords = "GetRecords"
@@ -75,6 +76,7 @@ const opGetRecords = "GetRecords"
 type GetRecordsRequest struct {
 	*aws.Request
 	Input *GetRecordsInput
+	Copy  func(*GetRecordsInput) GetRecordsRequest
 }
 
 // Send marshals and sends the GetRecords API request.
@@ -125,7 +127,7 @@ func (c *DynamoDBStreams) GetRecordsRequest(input *GetRecordsInput) GetRecordsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRecordsRequest{Request: req, Input: input}
+	return GetRecordsRequest{Request: req, Input: input, Copy: c.GetRecordsRequest}
 }
 
 const opGetShardIterator = "GetShardIterator"
@@ -134,6 +136,7 @@ const opGetShardIterator = "GetShardIterator"
 type GetShardIteratorRequest struct {
 	*aws.Request
 	Input *GetShardIteratorInput
+	Copy  func(*GetShardIteratorInput) GetShardIteratorRequest
 }
 
 // Send marshals and sends the GetShardIterator API request.
@@ -178,7 +181,7 @@ func (c *DynamoDBStreams) GetShardIteratorRequest(input *GetShardIteratorInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetShardIteratorRequest{Request: req, Input: input}
+	return GetShardIteratorRequest{Request: req, Input: input, Copy: c.GetShardIteratorRequest}
 }
 
 const opListStreams = "ListStreams"
@@ -187,6 +190,7 @@ const opListStreams = "ListStreams"
 type ListStreamsRequest struct {
 	*aws.Request
 	Input *ListStreamsInput
+	Copy  func(*ListStreamsInput) ListStreamsRequest
 }
 
 // Send marshals and sends the ListStreams API request.
@@ -231,7 +235,7 @@ func (c *DynamoDBStreams) ListStreamsRequest(input *ListStreamsInput) ListStream
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStreamsRequest{Request: req, Input: input}
+	return ListStreamsRequest{Request: req, Input: input, Copy: c.ListStreamsRequest}
 }
 
 // Represents the input of a DescribeStream operation.

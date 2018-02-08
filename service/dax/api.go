@@ -15,6 +15,7 @@ const opCreateCluster = "CreateCluster"
 type CreateClusterRequest struct {
 	*aws.Request
 	Input *CreateClusterInput
+	Copy  func(*CreateClusterInput) CreateClusterRequest
 }
 
 // Send marshals and sends the CreateCluster API request.
@@ -56,7 +57,7 @@ func (c *DAX) CreateClusterRequest(input *CreateClusterInput) CreateClusterReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateClusterRequest{Request: req, Input: input}
+	return CreateClusterRequest{Request: req, Input: input, Copy: c.CreateClusterRequest}
 }
 
 const opCreateParameterGroup = "CreateParameterGroup"
@@ -65,6 +66,7 @@ const opCreateParameterGroup = "CreateParameterGroup"
 type CreateParameterGroupRequest struct {
 	*aws.Request
 	Input *CreateParameterGroupInput
+	Copy  func(*CreateParameterGroupInput) CreateParameterGroupRequest
 }
 
 // Send marshals and sends the CreateParameterGroup API request.
@@ -106,7 +108,7 @@ func (c *DAX) CreateParameterGroupRequest(input *CreateParameterGroupInput) Crea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateParameterGroupRequest{Request: req, Input: input}
+	return CreateParameterGroupRequest{Request: req, Input: input, Copy: c.CreateParameterGroupRequest}
 }
 
 const opCreateSubnetGroup = "CreateSubnetGroup"
@@ -115,6 +117,7 @@ const opCreateSubnetGroup = "CreateSubnetGroup"
 type CreateSubnetGroupRequest struct {
 	*aws.Request
 	Input *CreateSubnetGroupInput
+	Copy  func(*CreateSubnetGroupInput) CreateSubnetGroupRequest
 }
 
 // Send marshals and sends the CreateSubnetGroup API request.
@@ -155,7 +158,7 @@ func (c *DAX) CreateSubnetGroupRequest(input *CreateSubnetGroupInput) CreateSubn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSubnetGroupRequest{Request: req, Input: input}
+	return CreateSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateSubnetGroupRequest}
 }
 
 const opDecreaseReplicationFactor = "DecreaseReplicationFactor"
@@ -164,6 +167,7 @@ const opDecreaseReplicationFactor = "DecreaseReplicationFactor"
 type DecreaseReplicationFactorRequest struct {
 	*aws.Request
 	Input *DecreaseReplicationFactorInput
+	Copy  func(*DecreaseReplicationFactorInput) DecreaseReplicationFactorRequest
 }
 
 // Send marshals and sends the DecreaseReplicationFactor API request.
@@ -207,7 +211,7 @@ func (c *DAX) DecreaseReplicationFactorRequest(input *DecreaseReplicationFactorI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DecreaseReplicationFactorRequest{Request: req, Input: input}
+	return DecreaseReplicationFactorRequest{Request: req, Input: input, Copy: c.DecreaseReplicationFactorRequest}
 }
 
 const opDeleteCluster = "DeleteCluster"
@@ -216,6 +220,7 @@ const opDeleteCluster = "DeleteCluster"
 type DeleteClusterRequest struct {
 	*aws.Request
 	Input *DeleteClusterInput
+	Copy  func(*DeleteClusterInput) DeleteClusterRequest
 }
 
 // Send marshals and sends the DeleteCluster API request.
@@ -259,7 +264,7 @@ func (c *DAX) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteClusterRequest{Request: req, Input: input}
+	return DeleteClusterRequest{Request: req, Input: input, Copy: c.DeleteClusterRequest}
 }
 
 const opDeleteParameterGroup = "DeleteParameterGroup"
@@ -268,6 +273,7 @@ const opDeleteParameterGroup = "DeleteParameterGroup"
 type DeleteParameterGroupRequest struct {
 	*aws.Request
 	Input *DeleteParameterGroupInput
+	Copy  func(*DeleteParameterGroupInput) DeleteParameterGroupRequest
 }
 
 // Send marshals and sends the DeleteParameterGroup API request.
@@ -309,7 +315,7 @@ func (c *DAX) DeleteParameterGroupRequest(input *DeleteParameterGroupInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteParameterGroupRequest{Request: req, Input: input}
+	return DeleteParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteParameterGroupRequest}
 }
 
 const opDeleteSubnetGroup = "DeleteSubnetGroup"
@@ -318,6 +324,7 @@ const opDeleteSubnetGroup = "DeleteSubnetGroup"
 type DeleteSubnetGroupRequest struct {
 	*aws.Request
 	Input *DeleteSubnetGroupInput
+	Copy  func(*DeleteSubnetGroupInput) DeleteSubnetGroupRequest
 }
 
 // Send marshals and sends the DeleteSubnetGroup API request.
@@ -360,7 +367,7 @@ func (c *DAX) DeleteSubnetGroupRequest(input *DeleteSubnetGroupInput) DeleteSubn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSubnetGroupRequest{Request: req, Input: input}
+	return DeleteSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteSubnetGroupRequest}
 }
 
 const opDescribeClusters = "DescribeClusters"
@@ -369,6 +376,7 @@ const opDescribeClusters = "DescribeClusters"
 type DescribeClustersRequest struct {
 	*aws.Request
 	Input *DescribeClustersInput
+	Copy  func(*DescribeClustersInput) DescribeClustersRequest
 }
 
 // Send marshals and sends the DescribeClusters API request.
@@ -425,7 +433,7 @@ func (c *DAX) DescribeClustersRequest(input *DescribeClustersInput) DescribeClus
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClustersRequest{Request: req, Input: input}
+	return DescribeClustersRequest{Request: req, Input: input, Copy: c.DescribeClustersRequest}
 }
 
 const opDescribeDefaultParameters = "DescribeDefaultParameters"
@@ -434,6 +442,7 @@ const opDescribeDefaultParameters = "DescribeDefaultParameters"
 type DescribeDefaultParametersRequest struct {
 	*aws.Request
 	Input *DescribeDefaultParametersInput
+	Copy  func(*DescribeDefaultParametersInput) DescribeDefaultParametersRequest
 }
 
 // Send marshals and sends the DescribeDefaultParameters API request.
@@ -474,7 +483,7 @@ func (c *DAX) DescribeDefaultParametersRequest(input *DescribeDefaultParametersI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDefaultParametersRequest{Request: req, Input: input}
+	return DescribeDefaultParametersRequest{Request: req, Input: input, Copy: c.DescribeDefaultParametersRequest}
 }
 
 const opDescribeEvents = "DescribeEvents"
@@ -483,6 +492,7 @@ const opDescribeEvents = "DescribeEvents"
 type DescribeEventsRequest struct {
 	*aws.Request
 	Input *DescribeEventsInput
+	Copy  func(*DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -528,7 +538,7 @@ func (c *DAX) DescribeEventsRequest(input *DescribeEventsInput) DescribeEventsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventsRequest{Request: req, Input: input}
+	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
 const opDescribeParameterGroups = "DescribeParameterGroups"
@@ -537,6 +547,7 @@ const opDescribeParameterGroups = "DescribeParameterGroups"
 type DescribeParameterGroupsRequest struct {
 	*aws.Request
 	Input *DescribeParameterGroupsInput
+	Copy  func(*DescribeParameterGroupsInput) DescribeParameterGroupsRequest
 }
 
 // Send marshals and sends the DescribeParameterGroups API request.
@@ -578,7 +589,7 @@ func (c *DAX) DescribeParameterGroupsRequest(input *DescribeParameterGroupsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeParameterGroupsRequest{Request: req, Input: input}
+	return DescribeParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeParameterGroupsRequest}
 }
 
 const opDescribeParameters = "DescribeParameters"
@@ -587,6 +598,7 @@ const opDescribeParameters = "DescribeParameters"
 type DescribeParametersRequest struct {
 	*aws.Request
 	Input *DescribeParametersInput
+	Copy  func(*DescribeParametersInput) DescribeParametersRequest
 }
 
 // Send marshals and sends the DescribeParameters API request.
@@ -627,7 +639,7 @@ func (c *DAX) DescribeParametersRequest(input *DescribeParametersInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeParametersRequest{Request: req, Input: input}
+	return DescribeParametersRequest{Request: req, Input: input, Copy: c.DescribeParametersRequest}
 }
 
 const opDescribeSubnetGroups = "DescribeSubnetGroups"
@@ -636,6 +648,7 @@ const opDescribeSubnetGroups = "DescribeSubnetGroups"
 type DescribeSubnetGroupsRequest struct {
 	*aws.Request
 	Input *DescribeSubnetGroupsInput
+	Copy  func(*DescribeSubnetGroupsInput) DescribeSubnetGroupsRequest
 }
 
 // Send marshals and sends the DescribeSubnetGroups API request.
@@ -677,7 +690,7 @@ func (c *DAX) DescribeSubnetGroupsRequest(input *DescribeSubnetGroupsInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSubnetGroupsRequest{Request: req, Input: input}
+	return DescribeSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeSubnetGroupsRequest}
 }
 
 const opIncreaseReplicationFactor = "IncreaseReplicationFactor"
@@ -686,6 +699,7 @@ const opIncreaseReplicationFactor = "IncreaseReplicationFactor"
 type IncreaseReplicationFactorRequest struct {
 	*aws.Request
 	Input *IncreaseReplicationFactorInput
+	Copy  func(*IncreaseReplicationFactorInput) IncreaseReplicationFactorRequest
 }
 
 // Send marshals and sends the IncreaseReplicationFactor API request.
@@ -726,7 +740,7 @@ func (c *DAX) IncreaseReplicationFactorRequest(input *IncreaseReplicationFactorI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return IncreaseReplicationFactorRequest{Request: req, Input: input}
+	return IncreaseReplicationFactorRequest{Request: req, Input: input, Copy: c.IncreaseReplicationFactorRequest}
 }
 
 const opListTags = "ListTags"
@@ -735,6 +749,7 @@ const opListTags = "ListTags"
 type ListTagsRequest struct {
 	*aws.Request
 	Input *ListTagsInput
+	Copy  func(*ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -776,7 +791,7 @@ func (c *DAX) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsRequest{Request: req, Input: input}
+	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
 const opRebootNode = "RebootNode"
@@ -785,6 +800,7 @@ const opRebootNode = "RebootNode"
 type RebootNodeRequest struct {
 	*aws.Request
 	Input *RebootNodeInput
+	Copy  func(*RebootNodeInput) RebootNodeRequest
 }
 
 // Send marshals and sends the RebootNode API request.
@@ -826,7 +842,7 @@ func (c *DAX) RebootNodeRequest(input *RebootNodeInput) RebootNodeRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RebootNodeRequest{Request: req, Input: input}
+	return RebootNodeRequest{Request: req, Input: input, Copy: c.RebootNodeRequest}
 }
 
 const opTagResource = "TagResource"
@@ -835,6 +851,7 @@ const opTagResource = "TagResource"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -876,7 +893,7 @@ func (c *DAX) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUntagResource = "UntagResource"
@@ -885,6 +902,7 @@ const opUntagResource = "UntagResource"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -926,7 +944,7 @@ func (c *DAX) UntagResourceRequest(input *UntagResourceInput) UntagResourceReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateCluster = "UpdateCluster"
@@ -935,6 +953,7 @@ const opUpdateCluster = "UpdateCluster"
 type UpdateClusterRequest struct {
 	*aws.Request
 	Input *UpdateClusterInput
+	Copy  func(*UpdateClusterInput) UpdateClusterRequest
 }
 
 // Send marshals and sends the UpdateCluster API request.
@@ -977,7 +996,7 @@ func (c *DAX) UpdateClusterRequest(input *UpdateClusterInput) UpdateClusterReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateClusterRequest{Request: req, Input: input}
+	return UpdateClusterRequest{Request: req, Input: input, Copy: c.UpdateClusterRequest}
 }
 
 const opUpdateParameterGroup = "UpdateParameterGroup"
@@ -986,6 +1005,7 @@ const opUpdateParameterGroup = "UpdateParameterGroup"
 type UpdateParameterGroupRequest struct {
 	*aws.Request
 	Input *UpdateParameterGroupInput
+	Copy  func(*UpdateParameterGroupInput) UpdateParameterGroupRequest
 }
 
 // Send marshals and sends the UpdateParameterGroup API request.
@@ -1027,7 +1047,7 @@ func (c *DAX) UpdateParameterGroupRequest(input *UpdateParameterGroupInput) Upda
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateParameterGroupRequest{Request: req, Input: input}
+	return UpdateParameterGroupRequest{Request: req, Input: input, Copy: c.UpdateParameterGroupRequest}
 }
 
 const opUpdateSubnetGroup = "UpdateSubnetGroup"
@@ -1036,6 +1056,7 @@ const opUpdateSubnetGroup = "UpdateSubnetGroup"
 type UpdateSubnetGroupRequest struct {
 	*aws.Request
 	Input *UpdateSubnetGroupInput
+	Copy  func(*UpdateSubnetGroupInput) UpdateSubnetGroupRequest
 }
 
 // Send marshals and sends the UpdateSubnetGroup API request.
@@ -1076,7 +1097,7 @@ func (c *DAX) UpdateSubnetGroupRequest(input *UpdateSubnetGroupInput) UpdateSubn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSubnetGroupRequest{Request: req, Input: input}
+	return UpdateSubnetGroupRequest{Request: req, Input: input, Copy: c.UpdateSubnetGroupRequest}
 }
 
 // Contains all of the attributes of a specific DAX cluster.

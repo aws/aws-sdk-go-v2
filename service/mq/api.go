@@ -14,6 +14,7 @@ const opCreateBroker = "CreateBroker"
 type CreateBrokerRequest struct {
 	*aws.Request
 	Input *CreateBrokerInput
+	Copy  func(*CreateBrokerInput) CreateBrokerRequest
 }
 
 // Send marshals and sends the CreateBroker API request.
@@ -54,7 +55,7 @@ func (c *MQ) CreateBrokerRequest(input *CreateBrokerInput) CreateBrokerRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBrokerRequest{Request: req, Input: input}
+	return CreateBrokerRequest{Request: req, Input: input, Copy: c.CreateBrokerRequest}
 }
 
 const opCreateConfiguration = "CreateConfiguration"
@@ -63,6 +64,7 @@ const opCreateConfiguration = "CreateConfiguration"
 type CreateConfigurationRequest struct {
 	*aws.Request
 	Input *CreateConfigurationInput
+	Copy  func(*CreateConfigurationInput) CreateConfigurationRequest
 }
 
 // Send marshals and sends the CreateConfiguration API request.
@@ -105,7 +107,7 @@ func (c *MQ) CreateConfigurationRequest(input *CreateConfigurationInput) CreateC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateConfigurationRequest{Request: req, Input: input}
+	return CreateConfigurationRequest{Request: req, Input: input, Copy: c.CreateConfigurationRequest}
 }
 
 const opCreateUser = "CreateUser"
@@ -114,6 +116,7 @@ const opCreateUser = "CreateUser"
 type CreateUserRequest struct {
 	*aws.Request
 	Input *CreateUserInput
+	Copy  func(*CreateUserInput) CreateUserRequest
 }
 
 // Send marshals and sends the CreateUser API request.
@@ -154,7 +157,7 @@ func (c *MQ) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserRequest{Request: req, Input: input}
+	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
 }
 
 const opDeleteBroker = "DeleteBroker"
@@ -163,6 +166,7 @@ const opDeleteBroker = "DeleteBroker"
 type DeleteBrokerRequest struct {
 	*aws.Request
 	Input *DeleteBrokerInput
+	Copy  func(*DeleteBrokerInput) DeleteBrokerRequest
 }
 
 // Send marshals and sends the DeleteBroker API request.
@@ -203,7 +207,7 @@ func (c *MQ) DeleteBrokerRequest(input *DeleteBrokerInput) DeleteBrokerRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBrokerRequest{Request: req, Input: input}
+	return DeleteBrokerRequest{Request: req, Input: input, Copy: c.DeleteBrokerRequest}
 }
 
 const opDeleteUser = "DeleteUser"
@@ -212,6 +216,7 @@ const opDeleteUser = "DeleteUser"
 type DeleteUserRequest struct {
 	*aws.Request
 	Input *DeleteUserInput
+	Copy  func(*DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -252,7 +257,7 @@ func (c *MQ) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserRequest{Request: req, Input: input}
+	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
 const opDescribeBroker = "DescribeBroker"
@@ -261,6 +266,7 @@ const opDescribeBroker = "DescribeBroker"
 type DescribeBrokerRequest struct {
 	*aws.Request
 	Input *DescribeBrokerInput
+	Copy  func(*DescribeBrokerInput) DescribeBrokerRequest
 }
 
 // Send marshals and sends the DescribeBroker API request.
@@ -301,7 +307,7 @@ func (c *MQ) DescribeBrokerRequest(input *DescribeBrokerInput) DescribeBrokerReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBrokerRequest{Request: req, Input: input}
+	return DescribeBrokerRequest{Request: req, Input: input, Copy: c.DescribeBrokerRequest}
 }
 
 const opDescribeConfiguration = "DescribeConfiguration"
@@ -310,6 +316,7 @@ const opDescribeConfiguration = "DescribeConfiguration"
 type DescribeConfigurationRequest struct {
 	*aws.Request
 	Input *DescribeConfigurationInput
+	Copy  func(*DescribeConfigurationInput) DescribeConfigurationRequest
 }
 
 // Send marshals and sends the DescribeConfiguration API request.
@@ -350,7 +357,7 @@ func (c *MQ) DescribeConfigurationRequest(input *DescribeConfigurationInput) Des
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConfigurationRequest{Request: req, Input: input}
+	return DescribeConfigurationRequest{Request: req, Input: input, Copy: c.DescribeConfigurationRequest}
 }
 
 const opDescribeConfigurationRevision = "DescribeConfigurationRevision"
@@ -359,6 +366,7 @@ const opDescribeConfigurationRevision = "DescribeConfigurationRevision"
 type DescribeConfigurationRevisionRequest struct {
 	*aws.Request
 	Input *DescribeConfigurationRevisionInput
+	Copy  func(*DescribeConfigurationRevisionInput) DescribeConfigurationRevisionRequest
 }
 
 // Send marshals and sends the DescribeConfigurationRevision API request.
@@ -399,7 +407,7 @@ func (c *MQ) DescribeConfigurationRevisionRequest(input *DescribeConfigurationRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConfigurationRevisionRequest{Request: req, Input: input}
+	return DescribeConfigurationRevisionRequest{Request: req, Input: input, Copy: c.DescribeConfigurationRevisionRequest}
 }
 
 const opDescribeUser = "DescribeUser"
@@ -408,6 +416,7 @@ const opDescribeUser = "DescribeUser"
 type DescribeUserRequest struct {
 	*aws.Request
 	Input *DescribeUserInput
+	Copy  func(*DescribeUserInput) DescribeUserRequest
 }
 
 // Send marshals and sends the DescribeUser API request.
@@ -448,7 +457,7 @@ func (c *MQ) DescribeUserRequest(input *DescribeUserInput) DescribeUserRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeUserRequest{Request: req, Input: input}
+	return DescribeUserRequest{Request: req, Input: input, Copy: c.DescribeUserRequest}
 }
 
 const opListBrokers = "ListBrokers"
@@ -457,6 +466,7 @@ const opListBrokers = "ListBrokers"
 type ListBrokersRequest struct {
 	*aws.Request
 	Input *ListBrokersInput
+	Copy  func(*ListBrokersInput) ListBrokersRequest
 }
 
 // Send marshals and sends the ListBrokers API request.
@@ -497,7 +507,7 @@ func (c *MQ) ListBrokersRequest(input *ListBrokersInput) ListBrokersRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBrokersRequest{Request: req, Input: input}
+	return ListBrokersRequest{Request: req, Input: input, Copy: c.ListBrokersRequest}
 }
 
 const opListConfigurationRevisions = "ListConfigurationRevisions"
@@ -506,6 +516,7 @@ const opListConfigurationRevisions = "ListConfigurationRevisions"
 type ListConfigurationRevisionsRequest struct {
 	*aws.Request
 	Input *ListConfigurationRevisionsInput
+	Copy  func(*ListConfigurationRevisionsInput) ListConfigurationRevisionsRequest
 }
 
 // Send marshals and sends the ListConfigurationRevisions API request.
@@ -546,7 +557,7 @@ func (c *MQ) ListConfigurationRevisionsRequest(input *ListConfigurationRevisions
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListConfigurationRevisionsRequest{Request: req, Input: input}
+	return ListConfigurationRevisionsRequest{Request: req, Input: input, Copy: c.ListConfigurationRevisionsRequest}
 }
 
 const opListConfigurations = "ListConfigurations"
@@ -555,6 +566,7 @@ const opListConfigurations = "ListConfigurations"
 type ListConfigurationsRequest struct {
 	*aws.Request
 	Input *ListConfigurationsInput
+	Copy  func(*ListConfigurationsInput) ListConfigurationsRequest
 }
 
 // Send marshals and sends the ListConfigurations API request.
@@ -595,7 +607,7 @@ func (c *MQ) ListConfigurationsRequest(input *ListConfigurationsInput) ListConfi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListConfigurationsRequest{Request: req, Input: input}
+	return ListConfigurationsRequest{Request: req, Input: input, Copy: c.ListConfigurationsRequest}
 }
 
 const opListUsers = "ListUsers"
@@ -604,6 +616,7 @@ const opListUsers = "ListUsers"
 type ListUsersRequest struct {
 	*aws.Request
 	Input *ListUsersInput
+	Copy  func(*ListUsersInput) ListUsersRequest
 }
 
 // Send marshals and sends the ListUsers API request.
@@ -644,7 +657,7 @@ func (c *MQ) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUsersRequest{Request: req, Input: input}
+	return ListUsersRequest{Request: req, Input: input, Copy: c.ListUsersRequest}
 }
 
 const opRebootBroker = "RebootBroker"
@@ -653,6 +666,7 @@ const opRebootBroker = "RebootBroker"
 type RebootBrokerRequest struct {
 	*aws.Request
 	Input *RebootBrokerInput
+	Copy  func(*RebootBrokerInput) RebootBrokerRequest
 }
 
 // Send marshals and sends the RebootBroker API request.
@@ -693,7 +707,7 @@ func (c *MQ) RebootBrokerRequest(input *RebootBrokerInput) RebootBrokerRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RebootBrokerRequest{Request: req, Input: input}
+	return RebootBrokerRequest{Request: req, Input: input, Copy: c.RebootBrokerRequest}
 }
 
 const opUpdateBroker = "UpdateBroker"
@@ -702,6 +716,7 @@ const opUpdateBroker = "UpdateBroker"
 type UpdateBrokerRequest struct {
 	*aws.Request
 	Input *UpdateBrokerInput
+	Copy  func(*UpdateBrokerInput) UpdateBrokerRequest
 }
 
 // Send marshals and sends the UpdateBroker API request.
@@ -742,7 +757,7 @@ func (c *MQ) UpdateBrokerRequest(input *UpdateBrokerInput) UpdateBrokerRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateBrokerRequest{Request: req, Input: input}
+	return UpdateBrokerRequest{Request: req, Input: input, Copy: c.UpdateBrokerRequest}
 }
 
 const opUpdateConfiguration = "UpdateConfiguration"
@@ -751,6 +766,7 @@ const opUpdateConfiguration = "UpdateConfiguration"
 type UpdateConfigurationRequest struct {
 	*aws.Request
 	Input *UpdateConfigurationInput
+	Copy  func(*UpdateConfigurationInput) UpdateConfigurationRequest
 }
 
 // Send marshals and sends the UpdateConfiguration API request.
@@ -791,7 +807,7 @@ func (c *MQ) UpdateConfigurationRequest(input *UpdateConfigurationInput) UpdateC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateConfigurationRequest{Request: req, Input: input}
+	return UpdateConfigurationRequest{Request: req, Input: input, Copy: c.UpdateConfigurationRequest}
 }
 
 const opUpdateUser = "UpdateUser"
@@ -800,6 +816,7 @@ const opUpdateUser = "UpdateUser"
 type UpdateUserRequest struct {
 	*aws.Request
 	Input *UpdateUserInput
+	Copy  func(*UpdateUserInput) UpdateUserRequest
 }
 
 // Send marshals and sends the UpdateUser API request.
@@ -840,7 +857,7 @@ func (c *MQ) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateUserRequest{Request: req, Input: input}
+	return UpdateUserRequest{Request: req, Input: input, Copy: c.UpdateUserRequest}
 }
 
 // Returns information about all brokers.

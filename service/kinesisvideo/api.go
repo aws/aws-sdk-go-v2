@@ -16,6 +16,7 @@ const opCreateStream = "CreateStream"
 type CreateStreamRequest struct {
 	*aws.Request
 	Input *CreateStreamInput
+	Copy  func(*CreateStreamInput) CreateStreamRequest
 }
 
 // Send marshals and sends the CreateStream API request.
@@ -66,7 +67,7 @@ func (c *KinesisVideo) CreateStreamRequest(input *CreateStreamInput) CreateStrea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStreamRequest{Request: req, Input: input}
+	return CreateStreamRequest{Request: req, Input: input, Copy: c.CreateStreamRequest}
 }
 
 const opDeleteStream = "DeleteStream"
@@ -75,6 +76,7 @@ const opDeleteStream = "DeleteStream"
 type DeleteStreamRequest struct {
 	*aws.Request
 	Input *DeleteStreamInput
+	Copy  func(*DeleteStreamInput) DeleteStreamRequest
 }
 
 // Send marshals and sends the DeleteStream API request.
@@ -126,7 +128,7 @@ func (c *KinesisVideo) DeleteStreamRequest(input *DeleteStreamInput) DeleteStrea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStreamRequest{Request: req, Input: input}
+	return DeleteStreamRequest{Request: req, Input: input, Copy: c.DeleteStreamRequest}
 }
 
 const opDescribeStream = "DescribeStream"
@@ -135,6 +137,7 @@ const opDescribeStream = "DescribeStream"
 type DescribeStreamRequest struct {
 	*aws.Request
 	Input *DescribeStreamInput
+	Copy  func(*DescribeStreamInput) DescribeStreamRequest
 }
 
 // Send marshals and sends the DescribeStream API request.
@@ -176,7 +179,7 @@ func (c *KinesisVideo) DescribeStreamRequest(input *DescribeStreamInput) Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStreamRequest{Request: req, Input: input}
+	return DescribeStreamRequest{Request: req, Input: input, Copy: c.DescribeStreamRequest}
 }
 
 const opGetDataEndpoint = "GetDataEndpoint"
@@ -185,6 +188,7 @@ const opGetDataEndpoint = "GetDataEndpoint"
 type GetDataEndpointRequest struct {
 	*aws.Request
 	Input *GetDataEndpointInput
+	Copy  func(*GetDataEndpointInput) GetDataEndpointRequest
 }
 
 // Send marshals and sends the GetDataEndpoint API request.
@@ -233,7 +237,7 @@ func (c *KinesisVideo) GetDataEndpointRequest(input *GetDataEndpointInput) GetDa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDataEndpointRequest{Request: req, Input: input}
+	return GetDataEndpointRequest{Request: req, Input: input, Copy: c.GetDataEndpointRequest}
 }
 
 const opListStreams = "ListStreams"
@@ -242,6 +246,7 @@ const opListStreams = "ListStreams"
 type ListStreamsRequest struct {
 	*aws.Request
 	Input *ListStreamsInput
+	Copy  func(*ListStreamsInput) ListStreamsRequest
 }
 
 // Send marshals and sends the ListStreams API request.
@@ -284,7 +289,7 @@ func (c *KinesisVideo) ListStreamsRequest(input *ListStreamsInput) ListStreamsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStreamsRequest{Request: req, Input: input}
+	return ListStreamsRequest{Request: req, Input: input, Copy: c.ListStreamsRequest}
 }
 
 const opListTagsForStream = "ListTagsForStream"
@@ -293,6 +298,7 @@ const opListTagsForStream = "ListTagsForStream"
 type ListTagsForStreamRequest struct {
 	*aws.Request
 	Input *ListTagsForStreamInput
+	Copy  func(*ListTagsForStreamInput) ListTagsForStreamRequest
 }
 
 // Send marshals and sends the ListTagsForStream API request.
@@ -335,7 +341,7 @@ func (c *KinesisVideo) ListTagsForStreamRequest(input *ListTagsForStreamInput) L
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForStreamRequest{Request: req, Input: input}
+	return ListTagsForStreamRequest{Request: req, Input: input, Copy: c.ListTagsForStreamRequest}
 }
 
 const opTagStream = "TagStream"
@@ -344,6 +350,7 @@ const opTagStream = "TagStream"
 type TagStreamRequest struct {
 	*aws.Request
 	Input *TagStreamInput
+	Copy  func(*TagStreamInput) TagStreamRequest
 }
 
 // Send marshals and sends the TagStream API request.
@@ -395,7 +402,7 @@ func (c *KinesisVideo) TagStreamRequest(input *TagStreamInput) TagStreamRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagStreamRequest{Request: req, Input: input}
+	return TagStreamRequest{Request: req, Input: input, Copy: c.TagStreamRequest}
 }
 
 const opUntagStream = "UntagStream"
@@ -404,6 +411,7 @@ const opUntagStream = "UntagStream"
 type UntagStreamRequest struct {
 	*aws.Request
 	Input *UntagStreamInput
+	Copy  func(*UntagStreamInput) UntagStreamRequest
 }
 
 // Send marshals and sends the UntagStream API request.
@@ -448,7 +456,7 @@ func (c *KinesisVideo) UntagStreamRequest(input *UntagStreamInput) UntagStreamRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagStreamRequest{Request: req, Input: input}
+	return UntagStreamRequest{Request: req, Input: input, Copy: c.UntagStreamRequest}
 }
 
 const opUpdateDataRetention = "UpdateDataRetention"
@@ -457,6 +465,7 @@ const opUpdateDataRetention = "UpdateDataRetention"
 type UpdateDataRetentionRequest struct {
 	*aws.Request
 	Input *UpdateDataRetentionInput
+	Copy  func(*UpdateDataRetentionInput) UpdateDataRetentionRequest
 }
 
 // Send marshals and sends the UpdateDataRetention API request.
@@ -517,7 +526,7 @@ func (c *KinesisVideo) UpdateDataRetentionRequest(input *UpdateDataRetentionInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDataRetentionRequest{Request: req, Input: input}
+	return UpdateDataRetentionRequest{Request: req, Input: input, Copy: c.UpdateDataRetentionRequest}
 }
 
 const opUpdateStream = "UpdateStream"
@@ -526,6 +535,7 @@ const opUpdateStream = "UpdateStream"
 type UpdateStreamRequest struct {
 	*aws.Request
 	Input *UpdateStreamInput
+	Copy  func(*UpdateStreamInput) UpdateStreamRequest
 }
 
 // Send marshals and sends the UpdateStream API request.
@@ -577,7 +587,7 @@ func (c *KinesisVideo) UpdateStreamRequest(input *UpdateStreamInput) UpdateStrea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateStreamRequest{Request: req, Input: input}
+	return UpdateStreamRequest{Request: req, Input: input, Copy: c.UpdateStreamRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/CreateStreamInput

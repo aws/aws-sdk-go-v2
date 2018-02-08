@@ -15,6 +15,7 @@ const opBuildSuggesters = "BuildSuggesters"
 type BuildSuggestersRequest struct {
 	*aws.Request
 	Input *BuildSuggestersInput
+	Copy  func(*BuildSuggestersInput) BuildSuggestersRequest
 }
 
 // Send marshals and sends the BuildSuggesters API request.
@@ -55,7 +56,7 @@ func (c *CloudSearch) BuildSuggestersRequest(input *BuildSuggestersInput) BuildS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BuildSuggestersRequest{Request: req, Input: input}
+	return BuildSuggestersRequest{Request: req, Input: input, Copy: c.BuildSuggestersRequest}
 }
 
 const opCreateDomain = "CreateDomain"
@@ -64,6 +65,7 @@ const opCreateDomain = "CreateDomain"
 type CreateDomainRequest struct {
 	*aws.Request
 	Input *CreateDomainInput
+	Copy  func(*CreateDomainInput) CreateDomainRequest
 }
 
 // Send marshals and sends the CreateDomain API request.
@@ -104,7 +106,7 @@ func (c *CloudSearch) CreateDomainRequest(input *CreateDomainInput) CreateDomain
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDomainRequest{Request: req, Input: input}
+	return CreateDomainRequest{Request: req, Input: input, Copy: c.CreateDomainRequest}
 }
 
 const opDefineAnalysisScheme = "DefineAnalysisScheme"
@@ -113,6 +115,7 @@ const opDefineAnalysisScheme = "DefineAnalysisScheme"
 type DefineAnalysisSchemeRequest struct {
 	*aws.Request
 	Input *DefineAnalysisSchemeInput
+	Copy  func(*DefineAnalysisSchemeInput) DefineAnalysisSchemeRequest
 }
 
 // Send marshals and sends the DefineAnalysisScheme API request.
@@ -154,7 +157,7 @@ func (c *CloudSearch) DefineAnalysisSchemeRequest(input *DefineAnalysisSchemeInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DefineAnalysisSchemeRequest{Request: req, Input: input}
+	return DefineAnalysisSchemeRequest{Request: req, Input: input, Copy: c.DefineAnalysisSchemeRequest}
 }
 
 const opDefineExpression = "DefineExpression"
@@ -163,6 +166,7 @@ const opDefineExpression = "DefineExpression"
 type DefineExpressionRequest struct {
 	*aws.Request
 	Input *DefineExpressionInput
+	Copy  func(*DefineExpressionInput) DefineExpressionRequest
 }
 
 // Send marshals and sends the DefineExpression API request.
@@ -204,7 +208,7 @@ func (c *CloudSearch) DefineExpressionRequest(input *DefineExpressionInput) Defi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DefineExpressionRequest{Request: req, Input: input}
+	return DefineExpressionRequest{Request: req, Input: input, Copy: c.DefineExpressionRequest}
 }
 
 const opDefineIndexField = "DefineIndexField"
@@ -213,6 +217,7 @@ const opDefineIndexField = "DefineIndexField"
 type DefineIndexFieldRequest struct {
 	*aws.Request
 	Input *DefineIndexFieldInput
+	Copy  func(*DefineIndexFieldInput) DefineIndexFieldRequest
 }
 
 // Send marshals and sends the DefineIndexField API request.
@@ -258,7 +263,7 @@ func (c *CloudSearch) DefineIndexFieldRequest(input *DefineIndexFieldInput) Defi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DefineIndexFieldRequest{Request: req, Input: input}
+	return DefineIndexFieldRequest{Request: req, Input: input, Copy: c.DefineIndexFieldRequest}
 }
 
 const opDefineSuggester = "DefineSuggester"
@@ -267,6 +272,7 @@ const opDefineSuggester = "DefineSuggester"
 type DefineSuggesterRequest struct {
 	*aws.Request
 	Input *DefineSuggesterInput
+	Copy  func(*DefineSuggesterInput) DefineSuggesterRequest
 }
 
 // Send marshals and sends the DefineSuggester API request.
@@ -310,7 +316,7 @@ func (c *CloudSearch) DefineSuggesterRequest(input *DefineSuggesterInput) Define
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DefineSuggesterRequest{Request: req, Input: input}
+	return DefineSuggesterRequest{Request: req, Input: input, Copy: c.DefineSuggesterRequest}
 }
 
 const opDeleteAnalysisScheme = "DeleteAnalysisScheme"
@@ -319,6 +325,7 @@ const opDeleteAnalysisScheme = "DeleteAnalysisScheme"
 type DeleteAnalysisSchemeRequest struct {
 	*aws.Request
 	Input *DeleteAnalysisSchemeInput
+	Copy  func(*DeleteAnalysisSchemeInput) DeleteAnalysisSchemeRequest
 }
 
 // Send marshals and sends the DeleteAnalysisScheme API request.
@@ -359,7 +366,7 @@ func (c *CloudSearch) DeleteAnalysisSchemeRequest(input *DeleteAnalysisSchemeInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAnalysisSchemeRequest{Request: req, Input: input}
+	return DeleteAnalysisSchemeRequest{Request: req, Input: input, Copy: c.DeleteAnalysisSchemeRequest}
 }
 
 const opDeleteDomain = "DeleteDomain"
@@ -368,6 +375,7 @@ const opDeleteDomain = "DeleteDomain"
 type DeleteDomainRequest struct {
 	*aws.Request
 	Input *DeleteDomainInput
+	Copy  func(*DeleteDomainInput) DeleteDomainRequest
 }
 
 // Send marshals and sends the DeleteDomain API request.
@@ -409,7 +417,7 @@ func (c *CloudSearch) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomain
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDomainRequest{Request: req, Input: input}
+	return DeleteDomainRequest{Request: req, Input: input, Copy: c.DeleteDomainRequest}
 }
 
 const opDeleteExpression = "DeleteExpression"
@@ -418,6 +426,7 @@ const opDeleteExpression = "DeleteExpression"
 type DeleteExpressionRequest struct {
 	*aws.Request
 	Input *DeleteExpressionInput
+	Copy  func(*DeleteExpressionInput) DeleteExpressionRequest
 }
 
 // Send marshals and sends the DeleteExpression API request.
@@ -458,7 +467,7 @@ func (c *CloudSearch) DeleteExpressionRequest(input *DeleteExpressionInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteExpressionRequest{Request: req, Input: input}
+	return DeleteExpressionRequest{Request: req, Input: input, Copy: c.DeleteExpressionRequest}
 }
 
 const opDeleteIndexField = "DeleteIndexField"
@@ -467,6 +476,7 @@ const opDeleteIndexField = "DeleteIndexField"
 type DeleteIndexFieldRequest struct {
 	*aws.Request
 	Input *DeleteIndexFieldInput
+	Copy  func(*DeleteIndexFieldInput) DeleteIndexFieldRequest
 }
 
 // Send marshals and sends the DeleteIndexField API request.
@@ -507,7 +517,7 @@ func (c *CloudSearch) DeleteIndexFieldRequest(input *DeleteIndexFieldInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIndexFieldRequest{Request: req, Input: input}
+	return DeleteIndexFieldRequest{Request: req, Input: input, Copy: c.DeleteIndexFieldRequest}
 }
 
 const opDeleteSuggester = "DeleteSuggester"
@@ -516,6 +526,7 @@ const opDeleteSuggester = "DeleteSuggester"
 type DeleteSuggesterRequest struct {
 	*aws.Request
 	Input *DeleteSuggesterInput
+	Copy  func(*DeleteSuggesterInput) DeleteSuggesterRequest
 }
 
 // Send marshals and sends the DeleteSuggester API request.
@@ -556,7 +567,7 @@ func (c *CloudSearch) DeleteSuggesterRequest(input *DeleteSuggesterInput) Delete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSuggesterRequest{Request: req, Input: input}
+	return DeleteSuggesterRequest{Request: req, Input: input, Copy: c.DeleteSuggesterRequest}
 }
 
 const opDescribeAnalysisSchemes = "DescribeAnalysisSchemes"
@@ -565,6 +576,7 @@ const opDescribeAnalysisSchemes = "DescribeAnalysisSchemes"
 type DescribeAnalysisSchemesRequest struct {
 	*aws.Request
 	Input *DescribeAnalysisSchemesInput
+	Copy  func(*DescribeAnalysisSchemesInput) DescribeAnalysisSchemesRequest
 }
 
 // Send marshals and sends the DescribeAnalysisSchemes API request.
@@ -609,7 +621,7 @@ func (c *CloudSearch) DescribeAnalysisSchemesRequest(input *DescribeAnalysisSche
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAnalysisSchemesRequest{Request: req, Input: input}
+	return DescribeAnalysisSchemesRequest{Request: req, Input: input, Copy: c.DescribeAnalysisSchemesRequest}
 }
 
 const opDescribeAvailabilityOptions = "DescribeAvailabilityOptions"
@@ -618,6 +630,7 @@ const opDescribeAvailabilityOptions = "DescribeAvailabilityOptions"
 type DescribeAvailabilityOptionsRequest struct {
 	*aws.Request
 	Input *DescribeAvailabilityOptionsInput
+	Copy  func(*DescribeAvailabilityOptionsInput) DescribeAvailabilityOptionsRequest
 }
 
 // Send marshals and sends the DescribeAvailabilityOptions API request.
@@ -660,7 +673,7 @@ func (c *CloudSearch) DescribeAvailabilityOptionsRequest(input *DescribeAvailabi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAvailabilityOptionsRequest{Request: req, Input: input}
+	return DescribeAvailabilityOptionsRequest{Request: req, Input: input, Copy: c.DescribeAvailabilityOptionsRequest}
 }
 
 const opDescribeDomains = "DescribeDomains"
@@ -669,6 +682,7 @@ const opDescribeDomains = "DescribeDomains"
 type DescribeDomainsRequest struct {
 	*aws.Request
 	Input *DescribeDomainsInput
+	Copy  func(*DescribeDomainsInput) DescribeDomainsRequest
 }
 
 // Send marshals and sends the DescribeDomains API request.
@@ -712,7 +726,7 @@ func (c *CloudSearch) DescribeDomainsRequest(input *DescribeDomainsInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDomainsRequest{Request: req, Input: input}
+	return DescribeDomainsRequest{Request: req, Input: input, Copy: c.DescribeDomainsRequest}
 }
 
 const opDescribeExpressions = "DescribeExpressions"
@@ -721,6 +735,7 @@ const opDescribeExpressions = "DescribeExpressions"
 type DescribeExpressionsRequest struct {
 	*aws.Request
 	Input *DescribeExpressionsInput
+	Copy  func(*DescribeExpressionsInput) DescribeExpressionsRequest
 }
 
 // Send marshals and sends the DescribeExpressions API request.
@@ -764,7 +779,7 @@ func (c *CloudSearch) DescribeExpressionsRequest(input *DescribeExpressionsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeExpressionsRequest{Request: req, Input: input}
+	return DescribeExpressionsRequest{Request: req, Input: input, Copy: c.DescribeExpressionsRequest}
 }
 
 const opDescribeIndexFields = "DescribeIndexFields"
@@ -773,6 +788,7 @@ const opDescribeIndexFields = "DescribeIndexFields"
 type DescribeIndexFieldsRequest struct {
 	*aws.Request
 	Input *DescribeIndexFieldsInput
+	Copy  func(*DescribeIndexFieldsInput) DescribeIndexFieldsRequest
 }
 
 // Send marshals and sends the DescribeIndexFields API request.
@@ -816,7 +832,7 @@ func (c *CloudSearch) DescribeIndexFieldsRequest(input *DescribeIndexFieldsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeIndexFieldsRequest{Request: req, Input: input}
+	return DescribeIndexFieldsRequest{Request: req, Input: input, Copy: c.DescribeIndexFieldsRequest}
 }
 
 const opDescribeScalingParameters = "DescribeScalingParameters"
@@ -825,6 +841,7 @@ const opDescribeScalingParameters = "DescribeScalingParameters"
 type DescribeScalingParametersRequest struct {
 	*aws.Request
 	Input *DescribeScalingParametersInput
+	Copy  func(*DescribeScalingParametersInput) DescribeScalingParametersRequest
 }
 
 // Send marshals and sends the DescribeScalingParameters API request.
@@ -866,7 +883,7 @@ func (c *CloudSearch) DescribeScalingParametersRequest(input *DescribeScalingPar
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScalingParametersRequest{Request: req, Input: input}
+	return DescribeScalingParametersRequest{Request: req, Input: input, Copy: c.DescribeScalingParametersRequest}
 }
 
 const opDescribeServiceAccessPolicies = "DescribeServiceAccessPolicies"
@@ -875,6 +892,7 @@ const opDescribeServiceAccessPolicies = "DescribeServiceAccessPolicies"
 type DescribeServiceAccessPoliciesRequest struct {
 	*aws.Request
 	Input *DescribeServiceAccessPoliciesInput
+	Copy  func(*DescribeServiceAccessPoliciesInput) DescribeServiceAccessPoliciesRequest
 }
 
 // Send marshals and sends the DescribeServiceAccessPolicies API request.
@@ -918,7 +936,7 @@ func (c *CloudSearch) DescribeServiceAccessPoliciesRequest(input *DescribeServic
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeServiceAccessPoliciesRequest{Request: req, Input: input}
+	return DescribeServiceAccessPoliciesRequest{Request: req, Input: input, Copy: c.DescribeServiceAccessPoliciesRequest}
 }
 
 const opDescribeSuggesters = "DescribeSuggesters"
@@ -927,6 +945,7 @@ const opDescribeSuggesters = "DescribeSuggesters"
 type DescribeSuggestersRequest struct {
 	*aws.Request
 	Input *DescribeSuggestersInput
+	Copy  func(*DescribeSuggestersInput) DescribeSuggestersRequest
 }
 
 // Send marshals and sends the DescribeSuggesters API request.
@@ -971,7 +990,7 @@ func (c *CloudSearch) DescribeSuggestersRequest(input *DescribeSuggestersInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSuggestersRequest{Request: req, Input: input}
+	return DescribeSuggestersRequest{Request: req, Input: input, Copy: c.DescribeSuggestersRequest}
 }
 
 const opIndexDocuments = "IndexDocuments"
@@ -980,6 +999,7 @@ const opIndexDocuments = "IndexDocuments"
 type IndexDocumentsRequest struct {
 	*aws.Request
 	Input *IndexDocumentsInput
+	Copy  func(*IndexDocumentsInput) IndexDocumentsRequest
 }
 
 // Send marshals and sends the IndexDocuments API request.
@@ -1020,7 +1040,7 @@ func (c *CloudSearch) IndexDocumentsRequest(input *IndexDocumentsInput) IndexDoc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return IndexDocumentsRequest{Request: req, Input: input}
+	return IndexDocumentsRequest{Request: req, Input: input, Copy: c.IndexDocumentsRequest}
 }
 
 const opListDomainNames = "ListDomainNames"
@@ -1029,6 +1049,7 @@ const opListDomainNames = "ListDomainNames"
 type ListDomainNamesRequest struct {
 	*aws.Request
 	Input *ListDomainNamesInput
+	Copy  func(*ListDomainNamesInput) ListDomainNamesRequest
 }
 
 // Send marshals and sends the ListDomainNames API request.
@@ -1067,7 +1088,7 @@ func (c *CloudSearch) ListDomainNamesRequest(input *ListDomainNamesInput) ListDo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDomainNamesRequest{Request: req, Input: input}
+	return ListDomainNamesRequest{Request: req, Input: input, Copy: c.ListDomainNamesRequest}
 }
 
 const opUpdateAvailabilityOptions = "UpdateAvailabilityOptions"
@@ -1076,6 +1097,7 @@ const opUpdateAvailabilityOptions = "UpdateAvailabilityOptions"
 type UpdateAvailabilityOptionsRequest struct {
 	*aws.Request
 	Input *UpdateAvailabilityOptionsInput
+	Copy  func(*UpdateAvailabilityOptionsInput) UpdateAvailabilityOptionsRequest
 }
 
 // Send marshals and sends the UpdateAvailabilityOptions API request.
@@ -1119,7 +1141,7 @@ func (c *CloudSearch) UpdateAvailabilityOptionsRequest(input *UpdateAvailability
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAvailabilityOptionsRequest{Request: req, Input: input}
+	return UpdateAvailabilityOptionsRequest{Request: req, Input: input, Copy: c.UpdateAvailabilityOptionsRequest}
 }
 
 const opUpdateScalingParameters = "UpdateScalingParameters"
@@ -1128,6 +1150,7 @@ const opUpdateScalingParameters = "UpdateScalingParameters"
 type UpdateScalingParametersRequest struct {
 	*aws.Request
 	Input *UpdateScalingParametersInput
+	Copy  func(*UpdateScalingParametersInput) UpdateScalingParametersRequest
 }
 
 // Send marshals and sends the UpdateScalingParameters API request.
@@ -1173,7 +1196,7 @@ func (c *CloudSearch) UpdateScalingParametersRequest(input *UpdateScalingParamet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateScalingParametersRequest{Request: req, Input: input}
+	return UpdateScalingParametersRequest{Request: req, Input: input, Copy: c.UpdateScalingParametersRequest}
 }
 
 const opUpdateServiceAccessPolicies = "UpdateServiceAccessPolicies"
@@ -1182,6 +1205,7 @@ const opUpdateServiceAccessPolicies = "UpdateServiceAccessPolicies"
 type UpdateServiceAccessPoliciesRequest struct {
 	*aws.Request
 	Input *UpdateServiceAccessPoliciesInput
+	Copy  func(*UpdateServiceAccessPoliciesInput) UpdateServiceAccessPoliciesRequest
 }
 
 // Send marshals and sends the UpdateServiceAccessPolicies API request.
@@ -1222,7 +1246,7 @@ func (c *CloudSearch) UpdateServiceAccessPoliciesRequest(input *UpdateServiceAcc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateServiceAccessPoliciesRequest{Request: req, Input: input}
+	return UpdateServiceAccessPoliciesRequest{Request: req, Input: input, Copy: c.UpdateServiceAccessPoliciesRequest}
 }
 
 // The configured access rules for the domain's document and search endpoints,

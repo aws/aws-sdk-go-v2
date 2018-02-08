@@ -16,6 +16,7 @@ const opBatchCreatePartition = "BatchCreatePartition"
 type BatchCreatePartitionRequest struct {
 	*aws.Request
 	Input *BatchCreatePartitionInput
+	Copy  func(*BatchCreatePartitionInput) BatchCreatePartitionRequest
 }
 
 // Send marshals and sends the BatchCreatePartition API request.
@@ -56,7 +57,7 @@ func (c *Glue) BatchCreatePartitionRequest(input *BatchCreatePartitionInput) Bat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchCreatePartitionRequest{Request: req, Input: input}
+	return BatchCreatePartitionRequest{Request: req, Input: input, Copy: c.BatchCreatePartitionRequest}
 }
 
 const opBatchDeleteConnection = "BatchDeleteConnection"
@@ -65,6 +66,7 @@ const opBatchDeleteConnection = "BatchDeleteConnection"
 type BatchDeleteConnectionRequest struct {
 	*aws.Request
 	Input *BatchDeleteConnectionInput
+	Copy  func(*BatchDeleteConnectionInput) BatchDeleteConnectionRequest
 }
 
 // Send marshals and sends the BatchDeleteConnection API request.
@@ -105,7 +107,7 @@ func (c *Glue) BatchDeleteConnectionRequest(input *BatchDeleteConnectionInput) B
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchDeleteConnectionRequest{Request: req, Input: input}
+	return BatchDeleteConnectionRequest{Request: req, Input: input, Copy: c.BatchDeleteConnectionRequest}
 }
 
 const opBatchDeletePartition = "BatchDeletePartition"
@@ -114,6 +116,7 @@ const opBatchDeletePartition = "BatchDeletePartition"
 type BatchDeletePartitionRequest struct {
 	*aws.Request
 	Input *BatchDeletePartitionInput
+	Copy  func(*BatchDeletePartitionInput) BatchDeletePartitionRequest
 }
 
 // Send marshals and sends the BatchDeletePartition API request.
@@ -154,7 +157,7 @@ func (c *Glue) BatchDeletePartitionRequest(input *BatchDeletePartitionInput) Bat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchDeletePartitionRequest{Request: req, Input: input}
+	return BatchDeletePartitionRequest{Request: req, Input: input, Copy: c.BatchDeletePartitionRequest}
 }
 
 const opBatchDeleteTable = "BatchDeleteTable"
@@ -163,6 +166,7 @@ const opBatchDeleteTable = "BatchDeleteTable"
 type BatchDeleteTableRequest struct {
 	*aws.Request
 	Input *BatchDeleteTableInput
+	Copy  func(*BatchDeleteTableInput) BatchDeleteTableRequest
 }
 
 // Send marshals and sends the BatchDeleteTable API request.
@@ -203,7 +207,7 @@ func (c *Glue) BatchDeleteTableRequest(input *BatchDeleteTableInput) BatchDelete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchDeleteTableRequest{Request: req, Input: input}
+	return BatchDeleteTableRequest{Request: req, Input: input, Copy: c.BatchDeleteTableRequest}
 }
 
 const opBatchGetPartition = "BatchGetPartition"
@@ -212,6 +216,7 @@ const opBatchGetPartition = "BatchGetPartition"
 type BatchGetPartitionRequest struct {
 	*aws.Request
 	Input *BatchGetPartitionInput
+	Copy  func(*BatchGetPartitionInput) BatchGetPartitionRequest
 }
 
 // Send marshals and sends the BatchGetPartition API request.
@@ -252,7 +257,7 @@ func (c *Glue) BatchGetPartitionRequest(input *BatchGetPartitionInput) BatchGetP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetPartitionRequest{Request: req, Input: input}
+	return BatchGetPartitionRequest{Request: req, Input: input, Copy: c.BatchGetPartitionRequest}
 }
 
 const opBatchStopJobRun = "BatchStopJobRun"
@@ -261,6 +266,7 @@ const opBatchStopJobRun = "BatchStopJobRun"
 type BatchStopJobRunRequest struct {
 	*aws.Request
 	Input *BatchStopJobRunInput
+	Copy  func(*BatchStopJobRunInput) BatchStopJobRunRequest
 }
 
 // Send marshals and sends the BatchStopJobRun API request.
@@ -301,7 +307,7 @@ func (c *Glue) BatchStopJobRunRequest(input *BatchStopJobRunInput) BatchStopJobR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchStopJobRunRequest{Request: req, Input: input}
+	return BatchStopJobRunRequest{Request: req, Input: input, Copy: c.BatchStopJobRunRequest}
 }
 
 const opCreateClassifier = "CreateClassifier"
@@ -310,6 +316,7 @@ const opCreateClassifier = "CreateClassifier"
 type CreateClassifierRequest struct {
 	*aws.Request
 	Input *CreateClassifierInput
+	Copy  func(*CreateClassifierInput) CreateClassifierRequest
 }
 
 // Send marshals and sends the CreateClassifier API request.
@@ -351,7 +358,7 @@ func (c *Glue) CreateClassifierRequest(input *CreateClassifierInput) CreateClass
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateClassifierRequest{Request: req, Input: input}
+	return CreateClassifierRequest{Request: req, Input: input, Copy: c.CreateClassifierRequest}
 }
 
 const opCreateConnection = "CreateConnection"
@@ -360,6 +367,7 @@ const opCreateConnection = "CreateConnection"
 type CreateConnectionRequest struct {
 	*aws.Request
 	Input *CreateConnectionInput
+	Copy  func(*CreateConnectionInput) CreateConnectionRequest
 }
 
 // Send marshals and sends the CreateConnection API request.
@@ -400,7 +408,7 @@ func (c *Glue) CreateConnectionRequest(input *CreateConnectionInput) CreateConne
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateConnectionRequest{Request: req, Input: input}
+	return CreateConnectionRequest{Request: req, Input: input, Copy: c.CreateConnectionRequest}
 }
 
 const opCreateCrawler = "CreateCrawler"
@@ -409,6 +417,7 @@ const opCreateCrawler = "CreateCrawler"
 type CreateCrawlerRequest struct {
 	*aws.Request
 	Input *CreateCrawlerInput
+	Copy  func(*CreateCrawlerInput) CreateCrawlerRequest
 }
 
 // Send marshals and sends the CreateCrawler API request.
@@ -451,7 +460,7 @@ func (c *Glue) CreateCrawlerRequest(input *CreateCrawlerInput) CreateCrawlerRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCrawlerRequest{Request: req, Input: input}
+	return CreateCrawlerRequest{Request: req, Input: input, Copy: c.CreateCrawlerRequest}
 }
 
 const opCreateDatabase = "CreateDatabase"
@@ -460,6 +469,7 @@ const opCreateDatabase = "CreateDatabase"
 type CreateDatabaseRequest struct {
 	*aws.Request
 	Input *CreateDatabaseInput
+	Copy  func(*CreateDatabaseInput) CreateDatabaseRequest
 }
 
 // Send marshals and sends the CreateDatabase API request.
@@ -500,7 +510,7 @@ func (c *Glue) CreateDatabaseRequest(input *CreateDatabaseInput) CreateDatabaseR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDatabaseRequest{Request: req, Input: input}
+	return CreateDatabaseRequest{Request: req, Input: input, Copy: c.CreateDatabaseRequest}
 }
 
 const opCreateDevEndpoint = "CreateDevEndpoint"
@@ -509,6 +519,7 @@ const opCreateDevEndpoint = "CreateDevEndpoint"
 type CreateDevEndpointRequest struct {
 	*aws.Request
 	Input *CreateDevEndpointInput
+	Copy  func(*CreateDevEndpointInput) CreateDevEndpointRequest
 }
 
 // Send marshals and sends the CreateDevEndpoint API request.
@@ -549,7 +560,7 @@ func (c *Glue) CreateDevEndpointRequest(input *CreateDevEndpointInput) CreateDev
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDevEndpointRequest{Request: req, Input: input}
+	return CreateDevEndpointRequest{Request: req, Input: input, Copy: c.CreateDevEndpointRequest}
 }
 
 const opCreateJob = "CreateJob"
@@ -558,6 +569,7 @@ const opCreateJob = "CreateJob"
 type CreateJobRequest struct {
 	*aws.Request
 	Input *CreateJobInput
+	Copy  func(*CreateJobInput) CreateJobRequest
 }
 
 // Send marshals and sends the CreateJob API request.
@@ -598,7 +610,7 @@ func (c *Glue) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateJobRequest{Request: req, Input: input}
+	return CreateJobRequest{Request: req, Input: input, Copy: c.CreateJobRequest}
 }
 
 const opCreatePartition = "CreatePartition"
@@ -607,6 +619,7 @@ const opCreatePartition = "CreatePartition"
 type CreatePartitionRequest struct {
 	*aws.Request
 	Input *CreatePartitionInput
+	Copy  func(*CreatePartitionInput) CreatePartitionRequest
 }
 
 // Send marshals and sends the CreatePartition API request.
@@ -647,7 +660,7 @@ func (c *Glue) CreatePartitionRequest(input *CreatePartitionInput) CreatePartiti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePartitionRequest{Request: req, Input: input}
+	return CreatePartitionRequest{Request: req, Input: input, Copy: c.CreatePartitionRequest}
 }
 
 const opCreateScript = "CreateScript"
@@ -656,6 +669,7 @@ const opCreateScript = "CreateScript"
 type CreateScriptRequest struct {
 	*aws.Request
 	Input *CreateScriptInput
+	Copy  func(*CreateScriptInput) CreateScriptRequest
 }
 
 // Send marshals and sends the CreateScript API request.
@@ -696,7 +710,7 @@ func (c *Glue) CreateScriptRequest(input *CreateScriptInput) CreateScriptRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateScriptRequest{Request: req, Input: input}
+	return CreateScriptRequest{Request: req, Input: input, Copy: c.CreateScriptRequest}
 }
 
 const opCreateTable = "CreateTable"
@@ -705,6 +719,7 @@ const opCreateTable = "CreateTable"
 type CreateTableRequest struct {
 	*aws.Request
 	Input *CreateTableInput
+	Copy  func(*CreateTableInput) CreateTableRequest
 }
 
 // Send marshals and sends the CreateTable API request.
@@ -745,7 +760,7 @@ func (c *Glue) CreateTableRequest(input *CreateTableInput) CreateTableRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTableRequest{Request: req, Input: input}
+	return CreateTableRequest{Request: req, Input: input, Copy: c.CreateTableRequest}
 }
 
 const opCreateTrigger = "CreateTrigger"
@@ -754,6 +769,7 @@ const opCreateTrigger = "CreateTrigger"
 type CreateTriggerRequest struct {
 	*aws.Request
 	Input *CreateTriggerInput
+	Copy  func(*CreateTriggerInput) CreateTriggerRequest
 }
 
 // Send marshals and sends the CreateTrigger API request.
@@ -794,7 +810,7 @@ func (c *Glue) CreateTriggerRequest(input *CreateTriggerInput) CreateTriggerRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTriggerRequest{Request: req, Input: input}
+	return CreateTriggerRequest{Request: req, Input: input, Copy: c.CreateTriggerRequest}
 }
 
 const opCreateUserDefinedFunction = "CreateUserDefinedFunction"
@@ -803,6 +819,7 @@ const opCreateUserDefinedFunction = "CreateUserDefinedFunction"
 type CreateUserDefinedFunctionRequest struct {
 	*aws.Request
 	Input *CreateUserDefinedFunctionInput
+	Copy  func(*CreateUserDefinedFunctionInput) CreateUserDefinedFunctionRequest
 }
 
 // Send marshals and sends the CreateUserDefinedFunction API request.
@@ -843,7 +860,7 @@ func (c *Glue) CreateUserDefinedFunctionRequest(input *CreateUserDefinedFunction
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserDefinedFunctionRequest{Request: req, Input: input}
+	return CreateUserDefinedFunctionRequest{Request: req, Input: input, Copy: c.CreateUserDefinedFunctionRequest}
 }
 
 const opDeleteClassifier = "DeleteClassifier"
@@ -852,6 +869,7 @@ const opDeleteClassifier = "DeleteClassifier"
 type DeleteClassifierRequest struct {
 	*aws.Request
 	Input *DeleteClassifierInput
+	Copy  func(*DeleteClassifierInput) DeleteClassifierRequest
 }
 
 // Send marshals and sends the DeleteClassifier API request.
@@ -892,7 +910,7 @@ func (c *Glue) DeleteClassifierRequest(input *DeleteClassifierInput) DeleteClass
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteClassifierRequest{Request: req, Input: input}
+	return DeleteClassifierRequest{Request: req, Input: input, Copy: c.DeleteClassifierRequest}
 }
 
 const opDeleteConnection = "DeleteConnection"
@@ -901,6 +919,7 @@ const opDeleteConnection = "DeleteConnection"
 type DeleteConnectionRequest struct {
 	*aws.Request
 	Input *DeleteConnectionInput
+	Copy  func(*DeleteConnectionInput) DeleteConnectionRequest
 }
 
 // Send marshals and sends the DeleteConnection API request.
@@ -941,7 +960,7 @@ func (c *Glue) DeleteConnectionRequest(input *DeleteConnectionInput) DeleteConne
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteConnectionRequest{Request: req, Input: input}
+	return DeleteConnectionRequest{Request: req, Input: input, Copy: c.DeleteConnectionRequest}
 }
 
 const opDeleteCrawler = "DeleteCrawler"
@@ -950,6 +969,7 @@ const opDeleteCrawler = "DeleteCrawler"
 type DeleteCrawlerRequest struct {
 	*aws.Request
 	Input *DeleteCrawlerInput
+	Copy  func(*DeleteCrawlerInput) DeleteCrawlerRequest
 }
 
 // Send marshals and sends the DeleteCrawler API request.
@@ -991,7 +1011,7 @@ func (c *Glue) DeleteCrawlerRequest(input *DeleteCrawlerInput) DeleteCrawlerRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCrawlerRequest{Request: req, Input: input}
+	return DeleteCrawlerRequest{Request: req, Input: input, Copy: c.DeleteCrawlerRequest}
 }
 
 const opDeleteDatabase = "DeleteDatabase"
@@ -1000,6 +1020,7 @@ const opDeleteDatabase = "DeleteDatabase"
 type DeleteDatabaseRequest struct {
 	*aws.Request
 	Input *DeleteDatabaseInput
+	Copy  func(*DeleteDatabaseInput) DeleteDatabaseRequest
 }
 
 // Send marshals and sends the DeleteDatabase API request.
@@ -1040,7 +1061,7 @@ func (c *Glue) DeleteDatabaseRequest(input *DeleteDatabaseInput) DeleteDatabaseR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDatabaseRequest{Request: req, Input: input}
+	return DeleteDatabaseRequest{Request: req, Input: input, Copy: c.DeleteDatabaseRequest}
 }
 
 const opDeleteDevEndpoint = "DeleteDevEndpoint"
@@ -1049,6 +1070,7 @@ const opDeleteDevEndpoint = "DeleteDevEndpoint"
 type DeleteDevEndpointRequest struct {
 	*aws.Request
 	Input *DeleteDevEndpointInput
+	Copy  func(*DeleteDevEndpointInput) DeleteDevEndpointRequest
 }
 
 // Send marshals and sends the DeleteDevEndpoint API request.
@@ -1089,7 +1111,7 @@ func (c *Glue) DeleteDevEndpointRequest(input *DeleteDevEndpointInput) DeleteDev
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDevEndpointRequest{Request: req, Input: input}
+	return DeleteDevEndpointRequest{Request: req, Input: input, Copy: c.DeleteDevEndpointRequest}
 }
 
 const opDeleteJob = "DeleteJob"
@@ -1098,6 +1120,7 @@ const opDeleteJob = "DeleteJob"
 type DeleteJobRequest struct {
 	*aws.Request
 	Input *DeleteJobInput
+	Copy  func(*DeleteJobInput) DeleteJobRequest
 }
 
 // Send marshals and sends the DeleteJob API request.
@@ -1138,7 +1161,7 @@ func (c *Glue) DeleteJobRequest(input *DeleteJobInput) DeleteJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteJobRequest{Request: req, Input: input}
+	return DeleteJobRequest{Request: req, Input: input, Copy: c.DeleteJobRequest}
 }
 
 const opDeletePartition = "DeletePartition"
@@ -1147,6 +1170,7 @@ const opDeletePartition = "DeletePartition"
 type DeletePartitionRequest struct {
 	*aws.Request
 	Input *DeletePartitionInput
+	Copy  func(*DeletePartitionInput) DeletePartitionRequest
 }
 
 // Send marshals and sends the DeletePartition API request.
@@ -1187,7 +1211,7 @@ func (c *Glue) DeletePartitionRequest(input *DeletePartitionInput) DeletePartiti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePartitionRequest{Request: req, Input: input}
+	return DeletePartitionRequest{Request: req, Input: input, Copy: c.DeletePartitionRequest}
 }
 
 const opDeleteTable = "DeleteTable"
@@ -1196,6 +1220,7 @@ const opDeleteTable = "DeleteTable"
 type DeleteTableRequest struct {
 	*aws.Request
 	Input *DeleteTableInput
+	Copy  func(*DeleteTableInput) DeleteTableRequest
 }
 
 // Send marshals and sends the DeleteTable API request.
@@ -1236,7 +1261,7 @@ func (c *Glue) DeleteTableRequest(input *DeleteTableInput) DeleteTableRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTableRequest{Request: req, Input: input}
+	return DeleteTableRequest{Request: req, Input: input, Copy: c.DeleteTableRequest}
 }
 
 const opDeleteTrigger = "DeleteTrigger"
@@ -1245,6 +1270,7 @@ const opDeleteTrigger = "DeleteTrigger"
 type DeleteTriggerRequest struct {
 	*aws.Request
 	Input *DeleteTriggerInput
+	Copy  func(*DeleteTriggerInput) DeleteTriggerRequest
 }
 
 // Send marshals and sends the DeleteTrigger API request.
@@ -1286,7 +1312,7 @@ func (c *Glue) DeleteTriggerRequest(input *DeleteTriggerInput) DeleteTriggerRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTriggerRequest{Request: req, Input: input}
+	return DeleteTriggerRequest{Request: req, Input: input, Copy: c.DeleteTriggerRequest}
 }
 
 const opDeleteUserDefinedFunction = "DeleteUserDefinedFunction"
@@ -1295,6 +1321,7 @@ const opDeleteUserDefinedFunction = "DeleteUserDefinedFunction"
 type DeleteUserDefinedFunctionRequest struct {
 	*aws.Request
 	Input *DeleteUserDefinedFunctionInput
+	Copy  func(*DeleteUserDefinedFunctionInput) DeleteUserDefinedFunctionRequest
 }
 
 // Send marshals and sends the DeleteUserDefinedFunction API request.
@@ -1335,7 +1362,7 @@ func (c *Glue) DeleteUserDefinedFunctionRequest(input *DeleteUserDefinedFunction
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserDefinedFunctionRequest{Request: req, Input: input}
+	return DeleteUserDefinedFunctionRequest{Request: req, Input: input, Copy: c.DeleteUserDefinedFunctionRequest}
 }
 
 const opGetCatalogImportStatus = "GetCatalogImportStatus"
@@ -1344,6 +1371,7 @@ const opGetCatalogImportStatus = "GetCatalogImportStatus"
 type GetCatalogImportStatusRequest struct {
 	*aws.Request
 	Input *GetCatalogImportStatusInput
+	Copy  func(*GetCatalogImportStatusInput) GetCatalogImportStatusRequest
 }
 
 // Send marshals and sends the GetCatalogImportStatus API request.
@@ -1384,7 +1412,7 @@ func (c *Glue) GetCatalogImportStatusRequest(input *GetCatalogImportStatusInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCatalogImportStatusRequest{Request: req, Input: input}
+	return GetCatalogImportStatusRequest{Request: req, Input: input, Copy: c.GetCatalogImportStatusRequest}
 }
 
 const opGetClassifier = "GetClassifier"
@@ -1393,6 +1421,7 @@ const opGetClassifier = "GetClassifier"
 type GetClassifierRequest struct {
 	*aws.Request
 	Input *GetClassifierInput
+	Copy  func(*GetClassifierInput) GetClassifierRequest
 }
 
 // Send marshals and sends the GetClassifier API request.
@@ -1433,7 +1462,7 @@ func (c *Glue) GetClassifierRequest(input *GetClassifierInput) GetClassifierRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetClassifierRequest{Request: req, Input: input}
+	return GetClassifierRequest{Request: req, Input: input, Copy: c.GetClassifierRequest}
 }
 
 const opGetClassifiers = "GetClassifiers"
@@ -1442,6 +1471,7 @@ const opGetClassifiers = "GetClassifiers"
 type GetClassifiersRequest struct {
 	*aws.Request
 	Input *GetClassifiersInput
+	Copy  func(*GetClassifiersInput) GetClassifiersRequest
 }
 
 // Send marshals and sends the GetClassifiers API request.
@@ -1488,47 +1518,47 @@ func (c *Glue) GetClassifiersRequest(input *GetClassifiersInput) GetClassifiersR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetClassifiersRequest{Request: req, Input: input}
+	return GetClassifiersRequest{Request: req, Input: input, Copy: c.GetClassifiersRequest}
 }
 
-// GetClassifiersPages iterates over the pages of a GetClassifiers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetClassifiers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetClassifiersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetClassifiers operation.
-//    pageNum := 0
-//    err := client.GetClassifiersPages(params,
-//        func(page *GetClassifiersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetClassifiersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetClassifiersRequest) Paginate(opts ...aws.Option) GetClassifiersPager {
 	return GetClassifiersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetClassifiersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetClassifiersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetClassifiersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetClassifiersPager ...
+// GetClassifiersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetClassifiersPager struct {
 	aws.Pager
 }
@@ -1543,6 +1573,7 @@ const opGetConnection = "GetConnection"
 type GetConnectionRequest struct {
 	*aws.Request
 	Input *GetConnectionInput
+	Copy  func(*GetConnectionInput) GetConnectionRequest
 }
 
 // Send marshals and sends the GetConnection API request.
@@ -1583,7 +1614,7 @@ func (c *Glue) GetConnectionRequest(input *GetConnectionInput) GetConnectionRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetConnectionRequest{Request: req, Input: input}
+	return GetConnectionRequest{Request: req, Input: input, Copy: c.GetConnectionRequest}
 }
 
 const opGetConnections = "GetConnections"
@@ -1592,6 +1623,7 @@ const opGetConnections = "GetConnections"
 type GetConnectionsRequest struct {
 	*aws.Request
 	Input *GetConnectionsInput
+	Copy  func(*GetConnectionsInput) GetConnectionsRequest
 }
 
 // Send marshals and sends the GetConnections API request.
@@ -1638,47 +1670,47 @@ func (c *Glue) GetConnectionsRequest(input *GetConnectionsInput) GetConnectionsR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetConnectionsRequest{Request: req, Input: input}
+	return GetConnectionsRequest{Request: req, Input: input, Copy: c.GetConnectionsRequest}
 }
 
-// GetConnectionsPages iterates over the pages of a GetConnections operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetConnections method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetConnectionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetConnections operation.
-//    pageNum := 0
-//    err := client.GetConnectionsPages(params,
-//        func(page *GetConnectionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetConnectionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetConnectionsRequest) Paginate(opts ...aws.Option) GetConnectionsPager {
 	return GetConnectionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetConnectionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetConnectionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetConnectionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetConnectionsPager ...
+// GetConnectionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetConnectionsPager struct {
 	aws.Pager
 }
@@ -1693,6 +1725,7 @@ const opGetCrawler = "GetCrawler"
 type GetCrawlerRequest struct {
 	*aws.Request
 	Input *GetCrawlerInput
+	Copy  func(*GetCrawlerInput) GetCrawlerRequest
 }
 
 // Send marshals and sends the GetCrawler API request.
@@ -1733,7 +1766,7 @@ func (c *Glue) GetCrawlerRequest(input *GetCrawlerInput) GetCrawlerRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCrawlerRequest{Request: req, Input: input}
+	return GetCrawlerRequest{Request: req, Input: input, Copy: c.GetCrawlerRequest}
 }
 
 const opGetCrawlerMetrics = "GetCrawlerMetrics"
@@ -1742,6 +1775,7 @@ const opGetCrawlerMetrics = "GetCrawlerMetrics"
 type GetCrawlerMetricsRequest struct {
 	*aws.Request
 	Input *GetCrawlerMetricsInput
+	Copy  func(*GetCrawlerMetricsInput) GetCrawlerMetricsRequest
 }
 
 // Send marshals and sends the GetCrawlerMetrics API request.
@@ -1788,47 +1822,47 @@ func (c *Glue) GetCrawlerMetricsRequest(input *GetCrawlerMetricsInput) GetCrawle
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCrawlerMetricsRequest{Request: req, Input: input}
+	return GetCrawlerMetricsRequest{Request: req, Input: input, Copy: c.GetCrawlerMetricsRequest}
 }
 
-// GetCrawlerMetricsPages iterates over the pages of a GetCrawlerMetrics operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetCrawlerMetrics method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetCrawlerMetricsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetCrawlerMetrics operation.
-//    pageNum := 0
-//    err := client.GetCrawlerMetricsPages(params,
-//        func(page *GetCrawlerMetricsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetCrawlerMetricsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetCrawlerMetricsRequest) Paginate(opts ...aws.Option) GetCrawlerMetricsPager {
 	return GetCrawlerMetricsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetCrawlerMetricsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetCrawlerMetricsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetCrawlerMetricsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetCrawlerMetricsPager ...
+// GetCrawlerMetricsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetCrawlerMetricsPager struct {
 	aws.Pager
 }
@@ -1843,6 +1877,7 @@ const opGetCrawlers = "GetCrawlers"
 type GetCrawlersRequest struct {
 	*aws.Request
 	Input *GetCrawlersInput
+	Copy  func(*GetCrawlersInput) GetCrawlersRequest
 }
 
 // Send marshals and sends the GetCrawlers API request.
@@ -1889,47 +1924,47 @@ func (c *Glue) GetCrawlersRequest(input *GetCrawlersInput) GetCrawlersRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCrawlersRequest{Request: req, Input: input}
+	return GetCrawlersRequest{Request: req, Input: input, Copy: c.GetCrawlersRequest}
 }
 
-// GetCrawlersPages iterates over the pages of a GetCrawlers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetCrawlers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetCrawlersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetCrawlers operation.
-//    pageNum := 0
-//    err := client.GetCrawlersPages(params,
-//        func(page *GetCrawlersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetCrawlersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetCrawlersRequest) Paginate(opts ...aws.Option) GetCrawlersPager {
 	return GetCrawlersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetCrawlersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetCrawlersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetCrawlersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetCrawlersPager ...
+// GetCrawlersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetCrawlersPager struct {
 	aws.Pager
 }
@@ -1944,6 +1979,7 @@ const opGetDatabase = "GetDatabase"
 type GetDatabaseRequest struct {
 	*aws.Request
 	Input *GetDatabaseInput
+	Copy  func(*GetDatabaseInput) GetDatabaseRequest
 }
 
 // Send marshals and sends the GetDatabase API request.
@@ -1984,7 +2020,7 @@ func (c *Glue) GetDatabaseRequest(input *GetDatabaseInput) GetDatabaseRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDatabaseRequest{Request: req, Input: input}
+	return GetDatabaseRequest{Request: req, Input: input, Copy: c.GetDatabaseRequest}
 }
 
 const opGetDatabases = "GetDatabases"
@@ -1993,6 +2029,7 @@ const opGetDatabases = "GetDatabases"
 type GetDatabasesRequest struct {
 	*aws.Request
 	Input *GetDatabasesInput
+	Copy  func(*GetDatabasesInput) GetDatabasesRequest
 }
 
 // Send marshals and sends the GetDatabases API request.
@@ -2039,47 +2076,47 @@ func (c *Glue) GetDatabasesRequest(input *GetDatabasesInput) GetDatabasesRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDatabasesRequest{Request: req, Input: input}
+	return GetDatabasesRequest{Request: req, Input: input, Copy: c.GetDatabasesRequest}
 }
 
-// GetDatabasesPages iterates over the pages of a GetDatabases operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetDatabases method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetDatabasesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetDatabases operation.
-//    pageNum := 0
-//    err := client.GetDatabasesPages(params,
-//        func(page *GetDatabasesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetDatabasesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetDatabasesRequest) Paginate(opts ...aws.Option) GetDatabasesPager {
 	return GetDatabasesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetDatabasesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetDatabasesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetDatabasesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetDatabasesPager ...
+// GetDatabasesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetDatabasesPager struct {
 	aws.Pager
 }
@@ -2094,6 +2131,7 @@ const opGetDataflowGraph = "GetDataflowGraph"
 type GetDataflowGraphRequest struct {
 	*aws.Request
 	Input *GetDataflowGraphInput
+	Copy  func(*GetDataflowGraphInput) GetDataflowGraphRequest
 }
 
 // Send marshals and sends the GetDataflowGraph API request.
@@ -2134,7 +2172,7 @@ func (c *Glue) GetDataflowGraphRequest(input *GetDataflowGraphInput) GetDataflow
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDataflowGraphRequest{Request: req, Input: input}
+	return GetDataflowGraphRequest{Request: req, Input: input, Copy: c.GetDataflowGraphRequest}
 }
 
 const opGetDevEndpoint = "GetDevEndpoint"
@@ -2143,6 +2181,7 @@ const opGetDevEndpoint = "GetDevEndpoint"
 type GetDevEndpointRequest struct {
 	*aws.Request
 	Input *GetDevEndpointInput
+	Copy  func(*GetDevEndpointInput) GetDevEndpointRequest
 }
 
 // Send marshals and sends the GetDevEndpoint API request.
@@ -2183,7 +2222,7 @@ func (c *Glue) GetDevEndpointRequest(input *GetDevEndpointInput) GetDevEndpointR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDevEndpointRequest{Request: req, Input: input}
+	return GetDevEndpointRequest{Request: req, Input: input, Copy: c.GetDevEndpointRequest}
 }
 
 const opGetDevEndpoints = "GetDevEndpoints"
@@ -2192,6 +2231,7 @@ const opGetDevEndpoints = "GetDevEndpoints"
 type GetDevEndpointsRequest struct {
 	*aws.Request
 	Input *GetDevEndpointsInput
+	Copy  func(*GetDevEndpointsInput) GetDevEndpointsRequest
 }
 
 // Send marshals and sends the GetDevEndpoints API request.
@@ -2238,47 +2278,47 @@ func (c *Glue) GetDevEndpointsRequest(input *GetDevEndpointsInput) GetDevEndpoin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDevEndpointsRequest{Request: req, Input: input}
+	return GetDevEndpointsRequest{Request: req, Input: input, Copy: c.GetDevEndpointsRequest}
 }
 
-// GetDevEndpointsPages iterates over the pages of a GetDevEndpoints operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetDevEndpoints method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetDevEndpointsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetDevEndpoints operation.
-//    pageNum := 0
-//    err := client.GetDevEndpointsPages(params,
-//        func(page *GetDevEndpointsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetDevEndpointsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetDevEndpointsRequest) Paginate(opts ...aws.Option) GetDevEndpointsPager {
 	return GetDevEndpointsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetDevEndpointsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetDevEndpointsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetDevEndpointsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetDevEndpointsPager ...
+// GetDevEndpointsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetDevEndpointsPager struct {
 	aws.Pager
 }
@@ -2293,6 +2333,7 @@ const opGetJob = "GetJob"
 type GetJobRequest struct {
 	*aws.Request
 	Input *GetJobInput
+	Copy  func(*GetJobInput) GetJobRequest
 }
 
 // Send marshals and sends the GetJob API request.
@@ -2333,7 +2374,7 @@ func (c *Glue) GetJobRequest(input *GetJobInput) GetJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobRequest{Request: req, Input: input}
+	return GetJobRequest{Request: req, Input: input, Copy: c.GetJobRequest}
 }
 
 const opGetJobRun = "GetJobRun"
@@ -2342,6 +2383,7 @@ const opGetJobRun = "GetJobRun"
 type GetJobRunRequest struct {
 	*aws.Request
 	Input *GetJobRunInput
+	Copy  func(*GetJobRunInput) GetJobRunRequest
 }
 
 // Send marshals and sends the GetJobRun API request.
@@ -2382,7 +2424,7 @@ func (c *Glue) GetJobRunRequest(input *GetJobRunInput) GetJobRunRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobRunRequest{Request: req, Input: input}
+	return GetJobRunRequest{Request: req, Input: input, Copy: c.GetJobRunRequest}
 }
 
 const opGetJobRuns = "GetJobRuns"
@@ -2391,6 +2433,7 @@ const opGetJobRuns = "GetJobRuns"
 type GetJobRunsRequest struct {
 	*aws.Request
 	Input *GetJobRunsInput
+	Copy  func(*GetJobRunsInput) GetJobRunsRequest
 }
 
 // Send marshals and sends the GetJobRuns API request.
@@ -2437,47 +2480,47 @@ func (c *Glue) GetJobRunsRequest(input *GetJobRunsInput) GetJobRunsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobRunsRequest{Request: req, Input: input}
+	return GetJobRunsRequest{Request: req, Input: input, Copy: c.GetJobRunsRequest}
 }
 
-// GetJobRunsPages iterates over the pages of a GetJobRuns operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetJobRuns method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetJobRunsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetJobRuns operation.
-//    pageNum := 0
-//    err := client.GetJobRunsPages(params,
-//        func(page *GetJobRunsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetJobRunsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetJobRunsRequest) Paginate(opts ...aws.Option) GetJobRunsPager {
 	return GetJobRunsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetJobRunsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetJobRunsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetJobRunsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetJobRunsPager ...
+// GetJobRunsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetJobRunsPager struct {
 	aws.Pager
 }
@@ -2492,6 +2535,7 @@ const opGetJobs = "GetJobs"
 type GetJobsRequest struct {
 	*aws.Request
 	Input *GetJobsInput
+	Copy  func(*GetJobsInput) GetJobsRequest
 }
 
 // Send marshals and sends the GetJobs API request.
@@ -2538,47 +2582,47 @@ func (c *Glue) GetJobsRequest(input *GetJobsInput) GetJobsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobsRequest{Request: req, Input: input}
+	return GetJobsRequest{Request: req, Input: input, Copy: c.GetJobsRequest}
 }
 
-// GetJobsPages iterates over the pages of a GetJobs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetJobs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetJobs operation.
-//    pageNum := 0
-//    err := client.GetJobsPages(params,
-//        func(page *GetJobsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetJobsRequest) Paginate(opts ...aws.Option) GetJobsPager {
 	return GetJobsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetJobsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetJobsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetJobsPager ...
+// GetJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetJobsPager struct {
 	aws.Pager
 }
@@ -2593,6 +2637,7 @@ const opGetMapping = "GetMapping"
 type GetMappingRequest struct {
 	*aws.Request
 	Input *GetMappingInput
+	Copy  func(*GetMappingInput) GetMappingRequest
 }
 
 // Send marshals and sends the GetMapping API request.
@@ -2633,7 +2678,7 @@ func (c *Glue) GetMappingRequest(input *GetMappingInput) GetMappingRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMappingRequest{Request: req, Input: input}
+	return GetMappingRequest{Request: req, Input: input, Copy: c.GetMappingRequest}
 }
 
 const opGetPartition = "GetPartition"
@@ -2642,6 +2687,7 @@ const opGetPartition = "GetPartition"
 type GetPartitionRequest struct {
 	*aws.Request
 	Input *GetPartitionInput
+	Copy  func(*GetPartitionInput) GetPartitionRequest
 }
 
 // Send marshals and sends the GetPartition API request.
@@ -2682,7 +2728,7 @@ func (c *Glue) GetPartitionRequest(input *GetPartitionInput) GetPartitionRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPartitionRequest{Request: req, Input: input}
+	return GetPartitionRequest{Request: req, Input: input, Copy: c.GetPartitionRequest}
 }
 
 const opGetPartitions = "GetPartitions"
@@ -2691,6 +2737,7 @@ const opGetPartitions = "GetPartitions"
 type GetPartitionsRequest struct {
 	*aws.Request
 	Input *GetPartitionsInput
+	Copy  func(*GetPartitionsInput) GetPartitionsRequest
 }
 
 // Send marshals and sends the GetPartitions API request.
@@ -2737,47 +2784,47 @@ func (c *Glue) GetPartitionsRequest(input *GetPartitionsInput) GetPartitionsRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPartitionsRequest{Request: req, Input: input}
+	return GetPartitionsRequest{Request: req, Input: input, Copy: c.GetPartitionsRequest}
 }
 
-// GetPartitionsPages iterates over the pages of a GetPartitions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetPartitions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetPartitionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetPartitions operation.
-//    pageNum := 0
-//    err := client.GetPartitionsPages(params,
-//        func(page *GetPartitionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetPartitionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetPartitionsRequest) Paginate(opts ...aws.Option) GetPartitionsPager {
 	return GetPartitionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetPartitionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetPartitionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetPartitionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetPartitionsPager ...
+// GetPartitionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetPartitionsPager struct {
 	aws.Pager
 }
@@ -2792,6 +2839,7 @@ const opGetPlan = "GetPlan"
 type GetPlanRequest struct {
 	*aws.Request
 	Input *GetPlanInput
+	Copy  func(*GetPlanInput) GetPlanRequest
 }
 
 // Send marshals and sends the GetPlan API request.
@@ -2832,7 +2880,7 @@ func (c *Glue) GetPlanRequest(input *GetPlanInput) GetPlanRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPlanRequest{Request: req, Input: input}
+	return GetPlanRequest{Request: req, Input: input, Copy: c.GetPlanRequest}
 }
 
 const opGetTable = "GetTable"
@@ -2841,6 +2889,7 @@ const opGetTable = "GetTable"
 type GetTableRequest struct {
 	*aws.Request
 	Input *GetTableInput
+	Copy  func(*GetTableInput) GetTableRequest
 }
 
 // Send marshals and sends the GetTable API request.
@@ -2881,7 +2930,7 @@ func (c *Glue) GetTableRequest(input *GetTableInput) GetTableRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTableRequest{Request: req, Input: input}
+	return GetTableRequest{Request: req, Input: input, Copy: c.GetTableRequest}
 }
 
 const opGetTableVersions = "GetTableVersions"
@@ -2890,6 +2939,7 @@ const opGetTableVersions = "GetTableVersions"
 type GetTableVersionsRequest struct {
 	*aws.Request
 	Input *GetTableVersionsInput
+	Copy  func(*GetTableVersionsInput) GetTableVersionsRequest
 }
 
 // Send marshals and sends the GetTableVersions API request.
@@ -2937,47 +2987,47 @@ func (c *Glue) GetTableVersionsRequest(input *GetTableVersionsInput) GetTableVer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTableVersionsRequest{Request: req, Input: input}
+	return GetTableVersionsRequest{Request: req, Input: input, Copy: c.GetTableVersionsRequest}
 }
 
-// GetTableVersionsPages iterates over the pages of a GetTableVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetTableVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetTableVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetTableVersions operation.
-//    pageNum := 0
-//    err := client.GetTableVersionsPages(params,
-//        func(page *GetTableVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetTableVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetTableVersionsRequest) Paginate(opts ...aws.Option) GetTableVersionsPager {
 	return GetTableVersionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetTableVersionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetTableVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetTableVersionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetTableVersionsPager ...
+// GetTableVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetTableVersionsPager struct {
 	aws.Pager
 }
@@ -2992,6 +3042,7 @@ const opGetTables = "GetTables"
 type GetTablesRequest struct {
 	*aws.Request
 	Input *GetTablesInput
+	Copy  func(*GetTablesInput) GetTablesRequest
 }
 
 // Send marshals and sends the GetTables API request.
@@ -3038,47 +3089,47 @@ func (c *Glue) GetTablesRequest(input *GetTablesInput) GetTablesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTablesRequest{Request: req, Input: input}
+	return GetTablesRequest{Request: req, Input: input, Copy: c.GetTablesRequest}
 }
 
-// GetTablesPages iterates over the pages of a GetTables operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetTables method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetTablesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetTables operation.
-//    pageNum := 0
-//    err := client.GetTablesPages(params,
-//        func(page *GetTablesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetTablesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetTablesRequest) Paginate(opts ...aws.Option) GetTablesPager {
 	return GetTablesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetTablesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetTablesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetTablesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetTablesPager ...
+// GetTablesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetTablesPager struct {
 	aws.Pager
 }
@@ -3093,6 +3144,7 @@ const opGetTrigger = "GetTrigger"
 type GetTriggerRequest struct {
 	*aws.Request
 	Input *GetTriggerInput
+	Copy  func(*GetTriggerInput) GetTriggerRequest
 }
 
 // Send marshals and sends the GetTrigger API request.
@@ -3133,7 +3185,7 @@ func (c *Glue) GetTriggerRequest(input *GetTriggerInput) GetTriggerRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTriggerRequest{Request: req, Input: input}
+	return GetTriggerRequest{Request: req, Input: input, Copy: c.GetTriggerRequest}
 }
 
 const opGetTriggers = "GetTriggers"
@@ -3142,6 +3194,7 @@ const opGetTriggers = "GetTriggers"
 type GetTriggersRequest struct {
 	*aws.Request
 	Input *GetTriggersInput
+	Copy  func(*GetTriggersInput) GetTriggersRequest
 }
 
 // Send marshals and sends the GetTriggers API request.
@@ -3188,47 +3241,47 @@ func (c *Glue) GetTriggersRequest(input *GetTriggersInput) GetTriggersRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTriggersRequest{Request: req, Input: input}
+	return GetTriggersRequest{Request: req, Input: input, Copy: c.GetTriggersRequest}
 }
 
-// GetTriggersPages iterates over the pages of a GetTriggers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetTriggers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetTriggersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetTriggers operation.
-//    pageNum := 0
-//    err := client.GetTriggersPages(params,
-//        func(page *GetTriggersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetTriggersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetTriggersRequest) Paginate(opts ...aws.Option) GetTriggersPager {
 	return GetTriggersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetTriggersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetTriggersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetTriggersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetTriggersPager ...
+// GetTriggersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetTriggersPager struct {
 	aws.Pager
 }
@@ -3243,6 +3296,7 @@ const opGetUserDefinedFunction = "GetUserDefinedFunction"
 type GetUserDefinedFunctionRequest struct {
 	*aws.Request
 	Input *GetUserDefinedFunctionInput
+	Copy  func(*GetUserDefinedFunctionInput) GetUserDefinedFunctionRequest
 }
 
 // Send marshals and sends the GetUserDefinedFunction API request.
@@ -3283,7 +3337,7 @@ func (c *Glue) GetUserDefinedFunctionRequest(input *GetUserDefinedFunctionInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUserDefinedFunctionRequest{Request: req, Input: input}
+	return GetUserDefinedFunctionRequest{Request: req, Input: input, Copy: c.GetUserDefinedFunctionRequest}
 }
 
 const opGetUserDefinedFunctions = "GetUserDefinedFunctions"
@@ -3292,6 +3346,7 @@ const opGetUserDefinedFunctions = "GetUserDefinedFunctions"
 type GetUserDefinedFunctionsRequest struct {
 	*aws.Request
 	Input *GetUserDefinedFunctionsInput
+	Copy  func(*GetUserDefinedFunctionsInput) GetUserDefinedFunctionsRequest
 }
 
 // Send marshals and sends the GetUserDefinedFunctions API request.
@@ -3338,47 +3393,47 @@ func (c *Glue) GetUserDefinedFunctionsRequest(input *GetUserDefinedFunctionsInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUserDefinedFunctionsRequest{Request: req, Input: input}
+	return GetUserDefinedFunctionsRequest{Request: req, Input: input, Copy: c.GetUserDefinedFunctionsRequest}
 }
 
-// GetUserDefinedFunctionsPages iterates over the pages of a GetUserDefinedFunctions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetUserDefinedFunctions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetUserDefinedFunctionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetUserDefinedFunctions operation.
-//    pageNum := 0
-//    err := client.GetUserDefinedFunctionsPages(params,
-//        func(page *GetUserDefinedFunctionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetUserDefinedFunctionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetUserDefinedFunctionsRequest) Paginate(opts ...aws.Option) GetUserDefinedFunctionsPager {
 	return GetUserDefinedFunctionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetUserDefinedFunctionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetUserDefinedFunctionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetUserDefinedFunctionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetUserDefinedFunctionsPager ...
+// GetUserDefinedFunctionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetUserDefinedFunctionsPager struct {
 	aws.Pager
 }
@@ -3393,6 +3448,7 @@ const opImportCatalogToGlue = "ImportCatalogToGlue"
 type ImportCatalogToGlueRequest struct {
 	*aws.Request
 	Input *ImportCatalogToGlueInput
+	Copy  func(*ImportCatalogToGlueInput) ImportCatalogToGlueRequest
 }
 
 // Send marshals and sends the ImportCatalogToGlue API request.
@@ -3433,7 +3489,7 @@ func (c *Glue) ImportCatalogToGlueRequest(input *ImportCatalogToGlueInput) Impor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportCatalogToGlueRequest{Request: req, Input: input}
+	return ImportCatalogToGlueRequest{Request: req, Input: input, Copy: c.ImportCatalogToGlueRequest}
 }
 
 const opResetJobBookmark = "ResetJobBookmark"
@@ -3442,6 +3498,7 @@ const opResetJobBookmark = "ResetJobBookmark"
 type ResetJobBookmarkRequest struct {
 	*aws.Request
 	Input *ResetJobBookmarkInput
+	Copy  func(*ResetJobBookmarkInput) ResetJobBookmarkRequest
 }
 
 // Send marshals and sends the ResetJobBookmark API request.
@@ -3482,7 +3539,7 @@ func (c *Glue) ResetJobBookmarkRequest(input *ResetJobBookmarkInput) ResetJobBoo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetJobBookmarkRequest{Request: req, Input: input}
+	return ResetJobBookmarkRequest{Request: req, Input: input, Copy: c.ResetJobBookmarkRequest}
 }
 
 const opStartCrawler = "StartCrawler"
@@ -3491,6 +3548,7 @@ const opStartCrawler = "StartCrawler"
 type StartCrawlerRequest struct {
 	*aws.Request
 	Input *StartCrawlerInput
+	Copy  func(*StartCrawlerInput) StartCrawlerRequest
 }
 
 // Send marshals and sends the StartCrawler API request.
@@ -3532,7 +3590,7 @@ func (c *Glue) StartCrawlerRequest(input *StartCrawlerInput) StartCrawlerRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartCrawlerRequest{Request: req, Input: input}
+	return StartCrawlerRequest{Request: req, Input: input, Copy: c.StartCrawlerRequest}
 }
 
 const opStartCrawlerSchedule = "StartCrawlerSchedule"
@@ -3541,6 +3599,7 @@ const opStartCrawlerSchedule = "StartCrawlerSchedule"
 type StartCrawlerScheduleRequest struct {
 	*aws.Request
 	Input *StartCrawlerScheduleInput
+	Copy  func(*StartCrawlerScheduleInput) StartCrawlerScheduleRequest
 }
 
 // Send marshals and sends the StartCrawlerSchedule API request.
@@ -3582,7 +3641,7 @@ func (c *Glue) StartCrawlerScheduleRequest(input *StartCrawlerScheduleInput) Sta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartCrawlerScheduleRequest{Request: req, Input: input}
+	return StartCrawlerScheduleRequest{Request: req, Input: input, Copy: c.StartCrawlerScheduleRequest}
 }
 
 const opStartJobRun = "StartJobRun"
@@ -3591,6 +3650,7 @@ const opStartJobRun = "StartJobRun"
 type StartJobRunRequest struct {
 	*aws.Request
 	Input *StartJobRunInput
+	Copy  func(*StartJobRunInput) StartJobRunRequest
 }
 
 // Send marshals and sends the StartJobRun API request.
@@ -3631,7 +3691,7 @@ func (c *Glue) StartJobRunRequest(input *StartJobRunInput) StartJobRunRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartJobRunRequest{Request: req, Input: input}
+	return StartJobRunRequest{Request: req, Input: input, Copy: c.StartJobRunRequest}
 }
 
 const opStartTrigger = "StartTrigger"
@@ -3640,6 +3700,7 @@ const opStartTrigger = "StartTrigger"
 type StartTriggerRequest struct {
 	*aws.Request
 	Input *StartTriggerInput
+	Copy  func(*StartTriggerInput) StartTriggerRequest
 }
 
 // Send marshals and sends the StartTrigger API request.
@@ -3681,7 +3742,7 @@ func (c *Glue) StartTriggerRequest(input *StartTriggerInput) StartTriggerRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartTriggerRequest{Request: req, Input: input}
+	return StartTriggerRequest{Request: req, Input: input, Copy: c.StartTriggerRequest}
 }
 
 const opStopCrawler = "StopCrawler"
@@ -3690,6 +3751,7 @@ const opStopCrawler = "StopCrawler"
 type StopCrawlerRequest struct {
 	*aws.Request
 	Input *StopCrawlerInput
+	Copy  func(*StopCrawlerInput) StopCrawlerRequest
 }
 
 // Send marshals and sends the StopCrawler API request.
@@ -3730,7 +3792,7 @@ func (c *Glue) StopCrawlerRequest(input *StopCrawlerInput) StopCrawlerRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopCrawlerRequest{Request: req, Input: input}
+	return StopCrawlerRequest{Request: req, Input: input, Copy: c.StopCrawlerRequest}
 }
 
 const opStopCrawlerSchedule = "StopCrawlerSchedule"
@@ -3739,6 +3801,7 @@ const opStopCrawlerSchedule = "StopCrawlerSchedule"
 type StopCrawlerScheduleRequest struct {
 	*aws.Request
 	Input *StopCrawlerScheduleInput
+	Copy  func(*StopCrawlerScheduleInput) StopCrawlerScheduleRequest
 }
 
 // Send marshals and sends the StopCrawlerSchedule API request.
@@ -3780,7 +3843,7 @@ func (c *Glue) StopCrawlerScheduleRequest(input *StopCrawlerScheduleInput) StopC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopCrawlerScheduleRequest{Request: req, Input: input}
+	return StopCrawlerScheduleRequest{Request: req, Input: input, Copy: c.StopCrawlerScheduleRequest}
 }
 
 const opStopTrigger = "StopTrigger"
@@ -3789,6 +3852,7 @@ const opStopTrigger = "StopTrigger"
 type StopTriggerRequest struct {
 	*aws.Request
 	Input *StopTriggerInput
+	Copy  func(*StopTriggerInput) StopTriggerRequest
 }
 
 // Send marshals and sends the StopTrigger API request.
@@ -3829,7 +3893,7 @@ func (c *Glue) StopTriggerRequest(input *StopTriggerInput) StopTriggerRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopTriggerRequest{Request: req, Input: input}
+	return StopTriggerRequest{Request: req, Input: input, Copy: c.StopTriggerRequest}
 }
 
 const opUpdateClassifier = "UpdateClassifier"
@@ -3838,6 +3902,7 @@ const opUpdateClassifier = "UpdateClassifier"
 type UpdateClassifierRequest struct {
 	*aws.Request
 	Input *UpdateClassifierInput
+	Copy  func(*UpdateClassifierInput) UpdateClassifierRequest
 }
 
 // Send marshals and sends the UpdateClassifier API request.
@@ -3878,7 +3943,7 @@ func (c *Glue) UpdateClassifierRequest(input *UpdateClassifierInput) UpdateClass
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateClassifierRequest{Request: req, Input: input}
+	return UpdateClassifierRequest{Request: req, Input: input, Copy: c.UpdateClassifierRequest}
 }
 
 const opUpdateConnection = "UpdateConnection"
@@ -3887,6 +3952,7 @@ const opUpdateConnection = "UpdateConnection"
 type UpdateConnectionRequest struct {
 	*aws.Request
 	Input *UpdateConnectionInput
+	Copy  func(*UpdateConnectionInput) UpdateConnectionRequest
 }
 
 // Send marshals and sends the UpdateConnection API request.
@@ -3927,7 +3993,7 @@ func (c *Glue) UpdateConnectionRequest(input *UpdateConnectionInput) UpdateConne
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateConnectionRequest{Request: req, Input: input}
+	return UpdateConnectionRequest{Request: req, Input: input, Copy: c.UpdateConnectionRequest}
 }
 
 const opUpdateCrawler = "UpdateCrawler"
@@ -3936,6 +4002,7 @@ const opUpdateCrawler = "UpdateCrawler"
 type UpdateCrawlerRequest struct {
 	*aws.Request
 	Input *UpdateCrawlerInput
+	Copy  func(*UpdateCrawlerInput) UpdateCrawlerRequest
 }
 
 // Send marshals and sends the UpdateCrawler API request.
@@ -3977,7 +4044,7 @@ func (c *Glue) UpdateCrawlerRequest(input *UpdateCrawlerInput) UpdateCrawlerRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateCrawlerRequest{Request: req, Input: input}
+	return UpdateCrawlerRequest{Request: req, Input: input, Copy: c.UpdateCrawlerRequest}
 }
 
 const opUpdateCrawlerSchedule = "UpdateCrawlerSchedule"
@@ -3986,6 +4053,7 @@ const opUpdateCrawlerSchedule = "UpdateCrawlerSchedule"
 type UpdateCrawlerScheduleRequest struct {
 	*aws.Request
 	Input *UpdateCrawlerScheduleInput
+	Copy  func(*UpdateCrawlerScheduleInput) UpdateCrawlerScheduleRequest
 }
 
 // Send marshals and sends the UpdateCrawlerSchedule API request.
@@ -4026,7 +4094,7 @@ func (c *Glue) UpdateCrawlerScheduleRequest(input *UpdateCrawlerScheduleInput) U
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateCrawlerScheduleRequest{Request: req, Input: input}
+	return UpdateCrawlerScheduleRequest{Request: req, Input: input, Copy: c.UpdateCrawlerScheduleRequest}
 }
 
 const opUpdateDatabase = "UpdateDatabase"
@@ -4035,6 +4103,7 @@ const opUpdateDatabase = "UpdateDatabase"
 type UpdateDatabaseRequest struct {
 	*aws.Request
 	Input *UpdateDatabaseInput
+	Copy  func(*UpdateDatabaseInput) UpdateDatabaseRequest
 }
 
 // Send marshals and sends the UpdateDatabase API request.
@@ -4075,7 +4144,7 @@ func (c *Glue) UpdateDatabaseRequest(input *UpdateDatabaseInput) UpdateDatabaseR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDatabaseRequest{Request: req, Input: input}
+	return UpdateDatabaseRequest{Request: req, Input: input, Copy: c.UpdateDatabaseRequest}
 }
 
 const opUpdateDevEndpoint = "UpdateDevEndpoint"
@@ -4084,6 +4153,7 @@ const opUpdateDevEndpoint = "UpdateDevEndpoint"
 type UpdateDevEndpointRequest struct {
 	*aws.Request
 	Input *UpdateDevEndpointInput
+	Copy  func(*UpdateDevEndpointInput) UpdateDevEndpointRequest
 }
 
 // Send marshals and sends the UpdateDevEndpoint API request.
@@ -4124,7 +4194,7 @@ func (c *Glue) UpdateDevEndpointRequest(input *UpdateDevEndpointInput) UpdateDev
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDevEndpointRequest{Request: req, Input: input}
+	return UpdateDevEndpointRequest{Request: req, Input: input, Copy: c.UpdateDevEndpointRequest}
 }
 
 const opUpdateJob = "UpdateJob"
@@ -4133,6 +4203,7 @@ const opUpdateJob = "UpdateJob"
 type UpdateJobRequest struct {
 	*aws.Request
 	Input *UpdateJobInput
+	Copy  func(*UpdateJobInput) UpdateJobRequest
 }
 
 // Send marshals and sends the UpdateJob API request.
@@ -4173,7 +4244,7 @@ func (c *Glue) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateJobRequest{Request: req, Input: input}
+	return UpdateJobRequest{Request: req, Input: input, Copy: c.UpdateJobRequest}
 }
 
 const opUpdatePartition = "UpdatePartition"
@@ -4182,6 +4253,7 @@ const opUpdatePartition = "UpdatePartition"
 type UpdatePartitionRequest struct {
 	*aws.Request
 	Input *UpdatePartitionInput
+	Copy  func(*UpdatePartitionInput) UpdatePartitionRequest
 }
 
 // Send marshals and sends the UpdatePartition API request.
@@ -4222,7 +4294,7 @@ func (c *Glue) UpdatePartitionRequest(input *UpdatePartitionInput) UpdatePartiti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePartitionRequest{Request: req, Input: input}
+	return UpdatePartitionRequest{Request: req, Input: input, Copy: c.UpdatePartitionRequest}
 }
 
 const opUpdateTable = "UpdateTable"
@@ -4231,6 +4303,7 @@ const opUpdateTable = "UpdateTable"
 type UpdateTableRequest struct {
 	*aws.Request
 	Input *UpdateTableInput
+	Copy  func(*UpdateTableInput) UpdateTableRequest
 }
 
 // Send marshals and sends the UpdateTable API request.
@@ -4271,7 +4344,7 @@ func (c *Glue) UpdateTableRequest(input *UpdateTableInput) UpdateTableRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTableRequest{Request: req, Input: input}
+	return UpdateTableRequest{Request: req, Input: input, Copy: c.UpdateTableRequest}
 }
 
 const opUpdateTrigger = "UpdateTrigger"
@@ -4280,6 +4353,7 @@ const opUpdateTrigger = "UpdateTrigger"
 type UpdateTriggerRequest struct {
 	*aws.Request
 	Input *UpdateTriggerInput
+	Copy  func(*UpdateTriggerInput) UpdateTriggerRequest
 }
 
 // Send marshals and sends the UpdateTrigger API request.
@@ -4320,7 +4394,7 @@ func (c *Glue) UpdateTriggerRequest(input *UpdateTriggerInput) UpdateTriggerRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTriggerRequest{Request: req, Input: input}
+	return UpdateTriggerRequest{Request: req, Input: input, Copy: c.UpdateTriggerRequest}
 }
 
 const opUpdateUserDefinedFunction = "UpdateUserDefinedFunction"
@@ -4329,6 +4403,7 @@ const opUpdateUserDefinedFunction = "UpdateUserDefinedFunction"
 type UpdateUserDefinedFunctionRequest struct {
 	*aws.Request
 	Input *UpdateUserDefinedFunctionInput
+	Copy  func(*UpdateUserDefinedFunctionInput) UpdateUserDefinedFunctionRequest
 }
 
 // Send marshals and sends the UpdateUserDefinedFunction API request.
@@ -4369,7 +4444,7 @@ func (c *Glue) UpdateUserDefinedFunctionRequest(input *UpdateUserDefinedFunction
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateUserDefinedFunctionRequest{Request: req, Input: input}
+	return UpdateUserDefinedFunctionRequest{Request: req, Input: input, Copy: c.UpdateUserDefinedFunctionRequest}
 }
 
 // Defines an action to be initiated by a trigger.

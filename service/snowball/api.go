@@ -16,6 +16,7 @@ const opCancelCluster = "CancelCluster"
 type CancelClusterRequest struct {
 	*aws.Request
 	Input *CancelClusterInput
+	Copy  func(*CancelClusterInput) CancelClusterRequest
 }
 
 // Send marshals and sends the CancelCluster API request.
@@ -58,7 +59,7 @@ func (c *Snowball) CancelClusterRequest(input *CancelClusterInput) CancelCluster
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelClusterRequest{Request: req, Input: input}
+	return CancelClusterRequest{Request: req, Input: input, Copy: c.CancelClusterRequest}
 }
 
 const opCancelJob = "CancelJob"
@@ -67,6 +68,7 @@ const opCancelJob = "CancelJob"
 type CancelJobRequest struct {
 	*aws.Request
 	Input *CancelJobInput
+	Copy  func(*CancelJobInput) CancelJobRequest
 }
 
 // Send marshals and sends the CancelJob API request.
@@ -110,7 +112,7 @@ func (c *Snowball) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelJobRequest{Request: req, Input: input}
+	return CancelJobRequest{Request: req, Input: input, Copy: c.CancelJobRequest}
 }
 
 const opCreateAddress = "CreateAddress"
@@ -119,6 +121,7 @@ const opCreateAddress = "CreateAddress"
 type CreateAddressRequest struct {
 	*aws.Request
 	Input *CreateAddressInput
+	Copy  func(*CreateAddressInput) CreateAddressRequest
 }
 
 // Send marshals and sends the CreateAddress API request.
@@ -162,7 +165,7 @@ func (c *Snowball) CreateAddressRequest(input *CreateAddressInput) CreateAddress
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAddressRequest{Request: req, Input: input}
+	return CreateAddressRequest{Request: req, Input: input, Copy: c.CreateAddressRequest}
 }
 
 const opCreateCluster = "CreateCluster"
@@ -171,6 +174,7 @@ const opCreateCluster = "CreateCluster"
 type CreateClusterRequest struct {
 	*aws.Request
 	Input *CreateClusterInput
+	Copy  func(*CreateClusterInput) CreateClusterRequest
 }
 
 // Send marshals and sends the CreateCluster API request.
@@ -213,7 +217,7 @@ func (c *Snowball) CreateClusterRequest(input *CreateClusterInput) CreateCluster
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateClusterRequest{Request: req, Input: input}
+	return CreateClusterRequest{Request: req, Input: input, Copy: c.CreateClusterRequest}
 }
 
 const opCreateJob = "CreateJob"
@@ -222,6 +226,7 @@ const opCreateJob = "CreateJob"
 type CreateJobRequest struct {
 	*aws.Request
 	Input *CreateJobInput
+	Copy  func(*CreateJobInput) CreateJobRequest
 }
 
 // Send marshals and sends the CreateJob API request.
@@ -266,7 +271,7 @@ func (c *Snowball) CreateJobRequest(input *CreateJobInput) CreateJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateJobRequest{Request: req, Input: input}
+	return CreateJobRequest{Request: req, Input: input, Copy: c.CreateJobRequest}
 }
 
 const opDescribeAddress = "DescribeAddress"
@@ -275,6 +280,7 @@ const opDescribeAddress = "DescribeAddress"
 type DescribeAddressRequest struct {
 	*aws.Request
 	Input *DescribeAddressInput
+	Copy  func(*DescribeAddressInput) DescribeAddressRequest
 }
 
 // Send marshals and sends the DescribeAddress API request.
@@ -316,7 +322,7 @@ func (c *Snowball) DescribeAddressRequest(input *DescribeAddressInput) DescribeA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAddressRequest{Request: req, Input: input}
+	return DescribeAddressRequest{Request: req, Input: input, Copy: c.DescribeAddressRequest}
 }
 
 const opDescribeAddresses = "DescribeAddresses"
@@ -325,6 +331,7 @@ const opDescribeAddresses = "DescribeAddresses"
 type DescribeAddressesRequest struct {
 	*aws.Request
 	Input *DescribeAddressesInput
+	Copy  func(*DescribeAddressesInput) DescribeAddressesRequest
 }
 
 // Send marshals and sends the DescribeAddresses API request.
@@ -373,47 +380,47 @@ func (c *Snowball) DescribeAddressesRequest(input *DescribeAddressesInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAddressesRequest{Request: req, Input: input}
+	return DescribeAddressesRequest{Request: req, Input: input, Copy: c.DescribeAddressesRequest}
 }
 
-// DescribeAddressesPages iterates over the pages of a DescribeAddresses operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeAddresses method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeAddressesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeAddresses operation.
-//    pageNum := 0
-//    err := client.DescribeAddressesPages(params,
-//        func(page *DescribeAddressesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeAddressesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeAddressesRequest) Paginate(opts ...aws.Option) DescribeAddressesPager {
 	return DescribeAddressesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeAddressesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeAddressesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeAddressesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeAddressesPager ...
+// DescribeAddressesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeAddressesPager struct {
 	aws.Pager
 }
@@ -428,6 +435,7 @@ const opDescribeCluster = "DescribeCluster"
 type DescribeClusterRequest struct {
 	*aws.Request
 	Input *DescribeClusterInput
+	Copy  func(*DescribeClusterInput) DescribeClusterRequest
 }
 
 // Send marshals and sends the DescribeCluster API request.
@@ -469,7 +477,7 @@ func (c *Snowball) DescribeClusterRequest(input *DescribeClusterInput) DescribeC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClusterRequest{Request: req, Input: input}
+	return DescribeClusterRequest{Request: req, Input: input, Copy: c.DescribeClusterRequest}
 }
 
 const opDescribeJob = "DescribeJob"
@@ -478,6 +486,7 @@ const opDescribeJob = "DescribeJob"
 type DescribeJobRequest struct {
 	*aws.Request
 	Input *DescribeJobInput
+	Copy  func(*DescribeJobInput) DescribeJobRequest
 }
 
 // Send marshals and sends the DescribeJob API request.
@@ -519,7 +528,7 @@ func (c *Snowball) DescribeJobRequest(input *DescribeJobInput) DescribeJobReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeJobRequest{Request: req, Input: input}
+	return DescribeJobRequest{Request: req, Input: input, Copy: c.DescribeJobRequest}
 }
 
 const opGetJobManifest = "GetJobManifest"
@@ -528,6 +537,7 @@ const opGetJobManifest = "GetJobManifest"
 type GetJobManifestRequest struct {
 	*aws.Request
 	Input *GetJobManifestInput
+	Copy  func(*GetJobManifestInput) GetJobManifestRequest
 }
 
 // Send marshals and sends the GetJobManifest API request.
@@ -585,7 +595,7 @@ func (c *Snowball) GetJobManifestRequest(input *GetJobManifestInput) GetJobManif
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobManifestRequest{Request: req, Input: input}
+	return GetJobManifestRequest{Request: req, Input: input, Copy: c.GetJobManifestRequest}
 }
 
 const opGetJobUnlockCode = "GetJobUnlockCode"
@@ -594,6 +604,7 @@ const opGetJobUnlockCode = "GetJobUnlockCode"
 type GetJobUnlockCodeRequest struct {
 	*aws.Request
 	Input *GetJobUnlockCodeInput
+	Copy  func(*GetJobUnlockCodeInput) GetJobUnlockCodeRequest
 }
 
 // Send marshals and sends the GetJobUnlockCode API request.
@@ -646,7 +657,7 @@ func (c *Snowball) GetJobUnlockCodeRequest(input *GetJobUnlockCodeInput) GetJobU
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobUnlockCodeRequest{Request: req, Input: input}
+	return GetJobUnlockCodeRequest{Request: req, Input: input, Copy: c.GetJobUnlockCodeRequest}
 }
 
 const opGetSnowballUsage = "GetSnowballUsage"
@@ -655,6 +666,7 @@ const opGetSnowballUsage = "GetSnowballUsage"
 type GetSnowballUsageRequest struct {
 	*aws.Request
 	Input *GetSnowballUsageInput
+	Copy  func(*GetSnowballUsageInput) GetSnowballUsageRequest
 }
 
 // Send marshals and sends the GetSnowballUsage API request.
@@ -699,7 +711,7 @@ func (c *Snowball) GetSnowballUsageRequest(input *GetSnowballUsageInput) GetSnow
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSnowballUsageRequest{Request: req, Input: input}
+	return GetSnowballUsageRequest{Request: req, Input: input, Copy: c.GetSnowballUsageRequest}
 }
 
 const opListClusterJobs = "ListClusterJobs"
@@ -708,6 +720,7 @@ const opListClusterJobs = "ListClusterJobs"
 type ListClusterJobsRequest struct {
 	*aws.Request
 	Input *ListClusterJobsInput
+	Copy  func(*ListClusterJobsInput) ListClusterJobsRequest
 }
 
 // Send marshals and sends the ListClusterJobs API request.
@@ -750,7 +763,7 @@ func (c *Snowball) ListClusterJobsRequest(input *ListClusterJobsInput) ListClust
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListClusterJobsRequest{Request: req, Input: input}
+	return ListClusterJobsRequest{Request: req, Input: input, Copy: c.ListClusterJobsRequest}
 }
 
 const opListClusters = "ListClusters"
@@ -759,6 +772,7 @@ const opListClusters = "ListClusters"
 type ListClustersRequest struct {
 	*aws.Request
 	Input *ListClustersInput
+	Copy  func(*ListClustersInput) ListClustersRequest
 }
 
 // Send marshals and sends the ListClusters API request.
@@ -801,7 +815,7 @@ func (c *Snowball) ListClustersRequest(input *ListClustersInput) ListClustersReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListClustersRequest{Request: req, Input: input}
+	return ListClustersRequest{Request: req, Input: input, Copy: c.ListClustersRequest}
 }
 
 const opListJobs = "ListJobs"
@@ -810,6 +824,7 @@ const opListJobs = "ListJobs"
 type ListJobsRequest struct {
 	*aws.Request
 	Input *ListJobsInput
+	Copy  func(*ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -860,47 +875,47 @@ func (c *Snowball) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobsRequest{Request: req, Input: input}
+	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
-// ListJobsPages iterates over the pages of a ListJobs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListJobs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListJobs operation.
-//    pageNum := 0
-//    err := client.ListJobsPages(params,
-//        func(page *ListJobsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 	return ListJobsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListJobsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListJobsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListJobsPager ...
+// ListJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListJobsPager struct {
 	aws.Pager
 }
@@ -915,6 +930,7 @@ const opUpdateCluster = "UpdateCluster"
 type UpdateClusterRequest struct {
 	*aws.Request
 	Input *UpdateClusterInput
+	Copy  func(*UpdateClusterInput) UpdateClusterRequest
 }
 
 // Send marshals and sends the UpdateCluster API request.
@@ -958,7 +974,7 @@ func (c *Snowball) UpdateClusterRequest(input *UpdateClusterInput) UpdateCluster
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateClusterRequest{Request: req, Input: input}
+	return UpdateClusterRequest{Request: req, Input: input, Copy: c.UpdateClusterRequest}
 }
 
 const opUpdateJob = "UpdateJob"
@@ -967,6 +983,7 @@ const opUpdateJob = "UpdateJob"
 type UpdateJobRequest struct {
 	*aws.Request
 	Input *UpdateJobInput
+	Copy  func(*UpdateJobInput) UpdateJobRequest
 }
 
 // Send marshals and sends the UpdateJob API request.
@@ -1009,7 +1026,7 @@ func (c *Snowball) UpdateJobRequest(input *UpdateJobInput) UpdateJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateJobRequest{Request: req, Input: input}
+	return UpdateJobRequest{Request: req, Input: input, Copy: c.UpdateJobRequest}
 }
 
 // The address that you want the Snowball or Snowballs associated with a specific

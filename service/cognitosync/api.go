@@ -18,6 +18,7 @@ const opBulkPublish = "BulkPublish"
 type BulkPublishRequest struct {
 	*aws.Request
 	Input *BulkPublishInput
+	Copy  func(*BulkPublishInput) BulkPublishRequest
 }
 
 // Send marshals and sends the BulkPublish API request.
@@ -64,7 +65,7 @@ func (c *CognitoSync) BulkPublishRequest(input *BulkPublishInput) BulkPublishReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BulkPublishRequest{Request: req, Input: input}
+	return BulkPublishRequest{Request: req, Input: input, Copy: c.BulkPublishRequest}
 }
 
 const opDeleteDataset = "DeleteDataset"
@@ -73,6 +74,7 @@ const opDeleteDataset = "DeleteDataset"
 type DeleteDatasetRequest struct {
 	*aws.Request
 	Input *DeleteDatasetInput
+	Copy  func(*DeleteDatasetInput) DeleteDatasetRequest
 }
 
 // Send marshals and sends the DeleteDataset API request.
@@ -119,7 +121,7 @@ func (c *CognitoSync) DeleteDatasetRequest(input *DeleteDatasetInput) DeleteData
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDatasetRequest{Request: req, Input: input}
+	return DeleteDatasetRequest{Request: req, Input: input, Copy: c.DeleteDatasetRequest}
 }
 
 const opDescribeDataset = "DescribeDataset"
@@ -128,6 +130,7 @@ const opDescribeDataset = "DescribeDataset"
 type DescribeDatasetRequest struct {
 	*aws.Request
 	Input *DescribeDatasetInput
+	Copy  func(*DescribeDatasetInput) DescribeDatasetRequest
 }
 
 // Send marshals and sends the DescribeDataset API request.
@@ -174,7 +177,7 @@ func (c *CognitoSync) DescribeDatasetRequest(input *DescribeDatasetInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDatasetRequest{Request: req, Input: input}
+	return DescribeDatasetRequest{Request: req, Input: input, Copy: c.DescribeDatasetRequest}
 }
 
 const opDescribeIdentityPoolUsage = "DescribeIdentityPoolUsage"
@@ -183,6 +186,7 @@ const opDescribeIdentityPoolUsage = "DescribeIdentityPoolUsage"
 type DescribeIdentityPoolUsageRequest struct {
 	*aws.Request
 	Input *DescribeIdentityPoolUsageInput
+	Copy  func(*DescribeIdentityPoolUsageInput) DescribeIdentityPoolUsageRequest
 }
 
 // Send marshals and sends the DescribeIdentityPoolUsage API request.
@@ -227,7 +231,7 @@ func (c *CognitoSync) DescribeIdentityPoolUsageRequest(input *DescribeIdentityPo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeIdentityPoolUsageRequest{Request: req, Input: input}
+	return DescribeIdentityPoolUsageRequest{Request: req, Input: input, Copy: c.DescribeIdentityPoolUsageRequest}
 }
 
 const opDescribeIdentityUsage = "DescribeIdentityUsage"
@@ -236,6 +240,7 @@ const opDescribeIdentityUsage = "DescribeIdentityUsage"
 type DescribeIdentityUsageRequest struct {
 	*aws.Request
 	Input *DescribeIdentityUsageInput
+	Copy  func(*DescribeIdentityUsageInput) DescribeIdentityUsageRequest
 }
 
 // Send marshals and sends the DescribeIdentityUsage API request.
@@ -280,7 +285,7 @@ func (c *CognitoSync) DescribeIdentityUsageRequest(input *DescribeIdentityUsageI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeIdentityUsageRequest{Request: req, Input: input}
+	return DescribeIdentityUsageRequest{Request: req, Input: input, Copy: c.DescribeIdentityUsageRequest}
 }
 
 const opGetBulkPublishDetails = "GetBulkPublishDetails"
@@ -289,6 +294,7 @@ const opGetBulkPublishDetails = "GetBulkPublishDetails"
 type GetBulkPublishDetailsRequest struct {
 	*aws.Request
 	Input *GetBulkPublishDetailsInput
+	Copy  func(*GetBulkPublishDetailsInput) GetBulkPublishDetailsRequest
 }
 
 // Send marshals and sends the GetBulkPublishDetails API request.
@@ -332,7 +338,7 @@ func (c *CognitoSync) GetBulkPublishDetailsRequest(input *GetBulkPublishDetailsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBulkPublishDetailsRequest{Request: req, Input: input}
+	return GetBulkPublishDetailsRequest{Request: req, Input: input, Copy: c.GetBulkPublishDetailsRequest}
 }
 
 const opGetCognitoEvents = "GetCognitoEvents"
@@ -341,6 +347,7 @@ const opGetCognitoEvents = "GetCognitoEvents"
 type GetCognitoEventsRequest struct {
 	*aws.Request
 	Input *GetCognitoEventsInput
+	Copy  func(*GetCognitoEventsInput) GetCognitoEventsRequest
 }
 
 // Send marshals and sends the GetCognitoEvents API request.
@@ -385,7 +392,7 @@ func (c *CognitoSync) GetCognitoEventsRequest(input *GetCognitoEventsInput) GetC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCognitoEventsRequest{Request: req, Input: input}
+	return GetCognitoEventsRequest{Request: req, Input: input, Copy: c.GetCognitoEventsRequest}
 }
 
 const opGetIdentityPoolConfiguration = "GetIdentityPoolConfiguration"
@@ -394,6 +401,7 @@ const opGetIdentityPoolConfiguration = "GetIdentityPoolConfiguration"
 type GetIdentityPoolConfigurationRequest struct {
 	*aws.Request
 	Input *GetIdentityPoolConfigurationInput
+	Copy  func(*GetIdentityPoolConfigurationInput) GetIdentityPoolConfigurationRequest
 }
 
 // Send marshals and sends the GetIdentityPoolConfiguration API request.
@@ -437,7 +445,7 @@ func (c *CognitoSync) GetIdentityPoolConfigurationRequest(input *GetIdentityPool
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIdentityPoolConfigurationRequest{Request: req, Input: input}
+	return GetIdentityPoolConfigurationRequest{Request: req, Input: input, Copy: c.GetIdentityPoolConfigurationRequest}
 }
 
 const opListDatasets = "ListDatasets"
@@ -446,6 +454,7 @@ const opListDatasets = "ListDatasets"
 type ListDatasetsRequest struct {
 	*aws.Request
 	Input *ListDatasetsInput
+	Copy  func(*ListDatasetsInput) ListDatasetsRequest
 }
 
 // Send marshals and sends the ListDatasets API request.
@@ -492,7 +501,7 @@ func (c *CognitoSync) ListDatasetsRequest(input *ListDatasetsInput) ListDatasets
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDatasetsRequest{Request: req, Input: input}
+	return ListDatasetsRequest{Request: req, Input: input, Copy: c.ListDatasetsRequest}
 }
 
 const opListIdentityPoolUsage = "ListIdentityPoolUsage"
@@ -501,6 +510,7 @@ const opListIdentityPoolUsage = "ListIdentityPoolUsage"
 type ListIdentityPoolUsageRequest struct {
 	*aws.Request
 	Input *ListIdentityPoolUsageInput
+	Copy  func(*ListIdentityPoolUsageInput) ListIdentityPoolUsageRequest
 }
 
 // Send marshals and sends the ListIdentityPoolUsage API request.
@@ -545,7 +555,7 @@ func (c *CognitoSync) ListIdentityPoolUsageRequest(input *ListIdentityPoolUsageI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIdentityPoolUsageRequest{Request: req, Input: input}
+	return ListIdentityPoolUsageRequest{Request: req, Input: input, Copy: c.ListIdentityPoolUsageRequest}
 }
 
 const opListRecords = "ListRecords"
@@ -554,6 +564,7 @@ const opListRecords = "ListRecords"
 type ListRecordsRequest struct {
 	*aws.Request
 	Input *ListRecordsInput
+	Copy  func(*ListRecordsInput) ListRecordsRequest
 }
 
 // Send marshals and sends the ListRecords API request.
@@ -601,7 +612,7 @@ func (c *CognitoSync) ListRecordsRequest(input *ListRecordsInput) ListRecordsReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRecordsRequest{Request: req, Input: input}
+	return ListRecordsRequest{Request: req, Input: input, Copy: c.ListRecordsRequest}
 }
 
 const opRegisterDevice = "RegisterDevice"
@@ -610,6 +621,7 @@ const opRegisterDevice = "RegisterDevice"
 type RegisterDeviceRequest struct {
 	*aws.Request
 	Input *RegisterDeviceInput
+	Copy  func(*RegisterDeviceInput) RegisterDeviceRequest
 }
 
 // Send marshals and sends the RegisterDevice API request.
@@ -653,7 +665,7 @@ func (c *CognitoSync) RegisterDeviceRequest(input *RegisterDeviceInput) Register
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterDeviceRequest{Request: req, Input: input}
+	return RegisterDeviceRequest{Request: req, Input: input, Copy: c.RegisterDeviceRequest}
 }
 
 const opSetCognitoEvents = "SetCognitoEvents"
@@ -662,6 +674,7 @@ const opSetCognitoEvents = "SetCognitoEvents"
 type SetCognitoEventsRequest struct {
 	*aws.Request
 	Input *SetCognitoEventsInput
+	Copy  func(*SetCognitoEventsInput) SetCognitoEventsRequest
 }
 
 // Send marshals and sends the SetCognitoEvents API request.
@@ -710,7 +723,7 @@ func (c *CognitoSync) SetCognitoEventsRequest(input *SetCognitoEventsInput) SetC
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetCognitoEventsRequest{Request: req, Input: input}
+	return SetCognitoEventsRequest{Request: req, Input: input, Copy: c.SetCognitoEventsRequest}
 }
 
 const opSetIdentityPoolConfiguration = "SetIdentityPoolConfiguration"
@@ -719,6 +732,7 @@ const opSetIdentityPoolConfiguration = "SetIdentityPoolConfiguration"
 type SetIdentityPoolConfigurationRequest struct {
 	*aws.Request
 	Input *SetIdentityPoolConfigurationInput
+	Copy  func(*SetIdentityPoolConfigurationInput) SetIdentityPoolConfigurationRequest
 }
 
 // Send marshals and sends the SetIdentityPoolConfiguration API request.
@@ -762,7 +776,7 @@ func (c *CognitoSync) SetIdentityPoolConfigurationRequest(input *SetIdentityPool
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetIdentityPoolConfigurationRequest{Request: req, Input: input}
+	return SetIdentityPoolConfigurationRequest{Request: req, Input: input, Copy: c.SetIdentityPoolConfigurationRequest}
 }
 
 const opSubscribeToDataset = "SubscribeToDataset"
@@ -771,6 +785,7 @@ const opSubscribeToDataset = "SubscribeToDataset"
 type SubscribeToDatasetRequest struct {
 	*aws.Request
 	Input *SubscribeToDatasetInput
+	Copy  func(*SubscribeToDatasetInput) SubscribeToDatasetRequest
 }
 
 // Send marshals and sends the SubscribeToDataset API request.
@@ -815,7 +830,7 @@ func (c *CognitoSync) SubscribeToDatasetRequest(input *SubscribeToDatasetInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SubscribeToDatasetRequest{Request: req, Input: input}
+	return SubscribeToDatasetRequest{Request: req, Input: input, Copy: c.SubscribeToDatasetRequest}
 }
 
 const opUnsubscribeFromDataset = "UnsubscribeFromDataset"
@@ -824,6 +839,7 @@ const opUnsubscribeFromDataset = "UnsubscribeFromDataset"
 type UnsubscribeFromDatasetRequest struct {
 	*aws.Request
 	Input *UnsubscribeFromDatasetInput
+	Copy  func(*UnsubscribeFromDatasetInput) UnsubscribeFromDatasetRequest
 }
 
 // Send marshals and sends the UnsubscribeFromDataset API request.
@@ -868,7 +884,7 @@ func (c *CognitoSync) UnsubscribeFromDatasetRequest(input *UnsubscribeFromDatase
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UnsubscribeFromDatasetRequest{Request: req, Input: input}
+	return UnsubscribeFromDatasetRequest{Request: req, Input: input, Copy: c.UnsubscribeFromDatasetRequest}
 }
 
 const opUpdateRecords = "UpdateRecords"
@@ -877,6 +893,7 @@ const opUpdateRecords = "UpdateRecords"
 type UpdateRecordsRequest struct {
 	*aws.Request
 	Input *UpdateRecordsInput
+	Copy  func(*UpdateRecordsInput) UpdateRecordsRequest
 }
 
 // Send marshals and sends the UpdateRecords API request.
@@ -932,7 +949,7 @@ func (c *CognitoSync) UpdateRecordsRequest(input *UpdateRecordsInput) UpdateReco
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRecordsRequest{Request: req, Input: input}
+	return UpdateRecordsRequest{Request: req, Input: input, Copy: c.UpdateRecordsRequest}
 }
 
 // The input for the BulkPublish operation.

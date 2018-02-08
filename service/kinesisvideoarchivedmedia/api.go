@@ -17,6 +17,7 @@ const opGetMediaForFragmentList = "GetMediaForFragmentList"
 type GetMediaForFragmentListRequest struct {
 	*aws.Request
 	Input *GetMediaForFragmentListInput
+	Copy  func(*GetMediaForFragmentListInput) GetMediaForFragmentListRequest
 }
 
 // Send marshals and sends the GetMediaForFragmentList API request.
@@ -70,7 +71,7 @@ func (c *KinesisVideoArchivedMedia) GetMediaForFragmentListRequest(input *GetMed
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMediaForFragmentListRequest{Request: req, Input: input}
+	return GetMediaForFragmentListRequest{Request: req, Input: input, Copy: c.GetMediaForFragmentListRequest}
 }
 
 const opListFragments = "ListFragments"
@@ -79,6 +80,7 @@ const opListFragments = "ListFragments"
 type ListFragmentsRequest struct {
 	*aws.Request
 	Input *ListFragmentsInput
+	Copy  func(*ListFragmentsInput) ListFragmentsRequest
 }
 
 // Send marshals and sends the ListFragments API request.
@@ -120,7 +122,7 @@ func (c *KinesisVideoArchivedMedia) ListFragmentsRequest(input *ListFragmentsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFragmentsRequest{Request: req, Input: input}
+	return ListFragmentsRequest{Request: req, Input: input, Copy: c.ListFragmentsRequest}
 }
 
 // Represents a segment of video or other time-delimited data.

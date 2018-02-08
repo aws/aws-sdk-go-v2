@@ -18,6 +18,7 @@ const opAbortEnvironmentUpdate = "AbortEnvironmentUpdate"
 type AbortEnvironmentUpdateRequest struct {
 	*aws.Request
 	Input *AbortEnvironmentUpdateInput
+	Copy  func(*AbortEnvironmentUpdateInput) AbortEnvironmentUpdateRequest
 }
 
 // Send marshals and sends the AbortEnvironmentUpdate API request.
@@ -61,7 +62,7 @@ func (c *ElasticBeanstalk) AbortEnvironmentUpdateRequest(input *AbortEnvironment
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AbortEnvironmentUpdateRequest{Request: req, Input: input}
+	return AbortEnvironmentUpdateRequest{Request: req, Input: input, Copy: c.AbortEnvironmentUpdateRequest}
 }
 
 const opApplyEnvironmentManagedAction = "ApplyEnvironmentManagedAction"
@@ -70,6 +71,7 @@ const opApplyEnvironmentManagedAction = "ApplyEnvironmentManagedAction"
 type ApplyEnvironmentManagedActionRequest struct {
 	*aws.Request
 	Input *ApplyEnvironmentManagedActionInput
+	Copy  func(*ApplyEnvironmentManagedActionInput) ApplyEnvironmentManagedActionRequest
 }
 
 // Send marshals and sends the ApplyEnvironmentManagedAction API request.
@@ -112,7 +114,7 @@ func (c *ElasticBeanstalk) ApplyEnvironmentManagedActionRequest(input *ApplyEnvi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ApplyEnvironmentManagedActionRequest{Request: req, Input: input}
+	return ApplyEnvironmentManagedActionRequest{Request: req, Input: input, Copy: c.ApplyEnvironmentManagedActionRequest}
 }
 
 const opCheckDNSAvailability = "CheckDNSAvailability"
@@ -121,6 +123,7 @@ const opCheckDNSAvailability = "CheckDNSAvailability"
 type CheckDNSAvailabilityRequest struct {
 	*aws.Request
 	Input *CheckDNSAvailabilityInput
+	Copy  func(*CheckDNSAvailabilityInput) CheckDNSAvailabilityRequest
 }
 
 // Send marshals and sends the CheckDNSAvailability API request.
@@ -161,7 +164,7 @@ func (c *ElasticBeanstalk) CheckDNSAvailabilityRequest(input *CheckDNSAvailabili
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CheckDNSAvailabilityRequest{Request: req, Input: input}
+	return CheckDNSAvailabilityRequest{Request: req, Input: input, Copy: c.CheckDNSAvailabilityRequest}
 }
 
 const opComposeEnvironments = "ComposeEnvironments"
@@ -170,6 +173,7 @@ const opComposeEnvironments = "ComposeEnvironments"
 type ComposeEnvironmentsRequest struct {
 	*aws.Request
 	Input *ComposeEnvironmentsInput
+	Copy  func(*ComposeEnvironmentsInput) ComposeEnvironmentsRequest
 }
 
 // Send marshals and sends the ComposeEnvironments API request.
@@ -216,7 +220,7 @@ func (c *ElasticBeanstalk) ComposeEnvironmentsRequest(input *ComposeEnvironments
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ComposeEnvironmentsRequest{Request: req, Input: input}
+	return ComposeEnvironmentsRequest{Request: req, Input: input, Copy: c.ComposeEnvironmentsRequest}
 }
 
 const opCreateApplication = "CreateApplication"
@@ -225,6 +229,7 @@ const opCreateApplication = "CreateApplication"
 type CreateApplicationRequest struct {
 	*aws.Request
 	Input *CreateApplicationInput
+	Copy  func(*CreateApplicationInput) CreateApplicationRequest
 }
 
 // Send marshals and sends the CreateApplication API request.
@@ -266,7 +271,7 @@ func (c *ElasticBeanstalk) CreateApplicationRequest(input *CreateApplicationInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateApplicationRequest{Request: req, Input: input}
+	return CreateApplicationRequest{Request: req, Input: input, Copy: c.CreateApplicationRequest}
 }
 
 const opCreateApplicationVersion = "CreateApplicationVersion"
@@ -275,6 +280,7 @@ const opCreateApplicationVersion = "CreateApplicationVersion"
 type CreateApplicationVersionRequest struct {
 	*aws.Request
 	Input *CreateApplicationVersionInput
+	Copy  func(*CreateApplicationVersionInput) CreateApplicationVersionRequest
 }
 
 // Send marshals and sends the CreateApplicationVersion API request.
@@ -331,7 +337,7 @@ func (c *ElasticBeanstalk) CreateApplicationVersionRequest(input *CreateApplicat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateApplicationVersionRequest{Request: req, Input: input}
+	return CreateApplicationVersionRequest{Request: req, Input: input, Copy: c.CreateApplicationVersionRequest}
 }
 
 const opCreateConfigurationTemplate = "CreateConfigurationTemplate"
@@ -340,6 +346,7 @@ const opCreateConfigurationTemplate = "CreateConfigurationTemplate"
 type CreateConfigurationTemplateRequest struct {
 	*aws.Request
 	Input *CreateConfigurationTemplateInput
+	Copy  func(*CreateConfigurationTemplateInput) CreateConfigurationTemplateRequest
 }
 
 // Send marshals and sends the CreateConfigurationTemplate API request.
@@ -390,7 +397,7 @@ func (c *ElasticBeanstalk) CreateConfigurationTemplateRequest(input *CreateConfi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateConfigurationTemplateRequest{Request: req, Input: input}
+	return CreateConfigurationTemplateRequest{Request: req, Input: input, Copy: c.CreateConfigurationTemplateRequest}
 }
 
 const opCreateEnvironment = "CreateEnvironment"
@@ -399,6 +406,7 @@ const opCreateEnvironment = "CreateEnvironment"
 type CreateEnvironmentRequest struct {
 	*aws.Request
 	Input *CreateEnvironmentInput
+	Copy  func(*CreateEnvironmentInput) CreateEnvironmentRequest
 }
 
 // Send marshals and sends the CreateEnvironment API request.
@@ -440,7 +448,7 @@ func (c *ElasticBeanstalk) CreateEnvironmentRequest(input *CreateEnvironmentInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEnvironmentRequest{Request: req, Input: input}
+	return CreateEnvironmentRequest{Request: req, Input: input, Copy: c.CreateEnvironmentRequest}
 }
 
 const opCreatePlatformVersion = "CreatePlatformVersion"
@@ -449,6 +457,7 @@ const opCreatePlatformVersion = "CreatePlatformVersion"
 type CreatePlatformVersionRequest struct {
 	*aws.Request
 	Input *CreatePlatformVersionInput
+	Copy  func(*CreatePlatformVersionInput) CreatePlatformVersionRequest
 }
 
 // Send marshals and sends the CreatePlatformVersion API request.
@@ -489,7 +498,7 @@ func (c *ElasticBeanstalk) CreatePlatformVersionRequest(input *CreatePlatformVer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePlatformVersionRequest{Request: req, Input: input}
+	return CreatePlatformVersionRequest{Request: req, Input: input, Copy: c.CreatePlatformVersionRequest}
 }
 
 const opCreateStorageLocation = "CreateStorageLocation"
@@ -498,6 +507,7 @@ const opCreateStorageLocation = "CreateStorageLocation"
 type CreateStorageLocationRequest struct {
 	*aws.Request
 	Input *CreateStorageLocationInput
+	Copy  func(*CreateStorageLocationInput) CreateStorageLocationRequest
 }
 
 // Send marshals and sends the CreateStorageLocation API request.
@@ -542,7 +552,7 @@ func (c *ElasticBeanstalk) CreateStorageLocationRequest(input *CreateStorageLoca
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStorageLocationRequest{Request: req, Input: input}
+	return CreateStorageLocationRequest{Request: req, Input: input, Copy: c.CreateStorageLocationRequest}
 }
 
 const opDeleteApplication = "DeleteApplication"
@@ -551,6 +561,7 @@ const opDeleteApplication = "DeleteApplication"
 type DeleteApplicationRequest struct {
 	*aws.Request
 	Input *DeleteApplicationInput
+	Copy  func(*DeleteApplicationInput) DeleteApplicationRequest
 }
 
 // Send marshals and sends the DeleteApplication API request.
@@ -597,7 +608,7 @@ func (c *ElasticBeanstalk) DeleteApplicationRequest(input *DeleteApplicationInpu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApplicationRequest{Request: req, Input: input}
+	return DeleteApplicationRequest{Request: req, Input: input, Copy: c.DeleteApplicationRequest}
 }
 
 const opDeleteApplicationVersion = "DeleteApplicationVersion"
@@ -606,6 +617,7 @@ const opDeleteApplicationVersion = "DeleteApplicationVersion"
 type DeleteApplicationVersionRequest struct {
 	*aws.Request
 	Input *DeleteApplicationVersionInput
+	Copy  func(*DeleteApplicationVersionInput) DeleteApplicationVersionRequest
 }
 
 // Send marshals and sends the DeleteApplicationVersion API request.
@@ -651,7 +663,7 @@ func (c *ElasticBeanstalk) DeleteApplicationVersionRequest(input *DeleteApplicat
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApplicationVersionRequest{Request: req, Input: input}
+	return DeleteApplicationVersionRequest{Request: req, Input: input, Copy: c.DeleteApplicationVersionRequest}
 }
 
 const opDeleteConfigurationTemplate = "DeleteConfigurationTemplate"
@@ -660,6 +672,7 @@ const opDeleteConfigurationTemplate = "DeleteConfigurationTemplate"
 type DeleteConfigurationTemplateRequest struct {
 	*aws.Request
 	Input *DeleteConfigurationTemplateInput
+	Copy  func(*DeleteConfigurationTemplateInput) DeleteConfigurationTemplateRequest
 }
 
 // Send marshals and sends the DeleteConfigurationTemplate API request.
@@ -706,7 +719,7 @@ func (c *ElasticBeanstalk) DeleteConfigurationTemplateRequest(input *DeleteConfi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteConfigurationTemplateRequest{Request: req, Input: input}
+	return DeleteConfigurationTemplateRequest{Request: req, Input: input, Copy: c.DeleteConfigurationTemplateRequest}
 }
 
 const opDeleteEnvironmentConfiguration = "DeleteEnvironmentConfiguration"
@@ -715,6 +728,7 @@ const opDeleteEnvironmentConfiguration = "DeleteEnvironmentConfiguration"
 type DeleteEnvironmentConfigurationRequest struct {
 	*aws.Request
 	Input *DeleteEnvironmentConfigurationInput
+	Copy  func(*DeleteEnvironmentConfigurationInput) DeleteEnvironmentConfigurationRequest
 }
 
 // Send marshals and sends the DeleteEnvironmentConfiguration API request.
@@ -764,7 +778,7 @@ func (c *ElasticBeanstalk) DeleteEnvironmentConfigurationRequest(input *DeleteEn
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEnvironmentConfigurationRequest{Request: req, Input: input}
+	return DeleteEnvironmentConfigurationRequest{Request: req, Input: input, Copy: c.DeleteEnvironmentConfigurationRequest}
 }
 
 const opDeletePlatformVersion = "DeletePlatformVersion"
@@ -773,6 +787,7 @@ const opDeletePlatformVersion = "DeletePlatformVersion"
 type DeletePlatformVersionRequest struct {
 	*aws.Request
 	Input *DeletePlatformVersionInput
+	Copy  func(*DeletePlatformVersionInput) DeletePlatformVersionRequest
 }
 
 // Send marshals and sends the DeletePlatformVersion API request.
@@ -813,7 +828,7 @@ func (c *ElasticBeanstalk) DeletePlatformVersionRequest(input *DeletePlatformVer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePlatformVersionRequest{Request: req, Input: input}
+	return DeletePlatformVersionRequest{Request: req, Input: input, Copy: c.DeletePlatformVersionRequest}
 }
 
 const opDescribeApplicationVersions = "DescribeApplicationVersions"
@@ -822,6 +837,7 @@ const opDescribeApplicationVersions = "DescribeApplicationVersions"
 type DescribeApplicationVersionsRequest struct {
 	*aws.Request
 	Input *DescribeApplicationVersionsInput
+	Copy  func(*DescribeApplicationVersionsInput) DescribeApplicationVersionsRequest
 }
 
 // Send marshals and sends the DescribeApplicationVersions API request.
@@ -862,7 +878,7 @@ func (c *ElasticBeanstalk) DescribeApplicationVersionsRequest(input *DescribeApp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeApplicationVersionsRequest{Request: req, Input: input}
+	return DescribeApplicationVersionsRequest{Request: req, Input: input, Copy: c.DescribeApplicationVersionsRequest}
 }
 
 const opDescribeApplications = "DescribeApplications"
@@ -871,6 +887,7 @@ const opDescribeApplications = "DescribeApplications"
 type DescribeApplicationsRequest struct {
 	*aws.Request
 	Input *DescribeApplicationsInput
+	Copy  func(*DescribeApplicationsInput) DescribeApplicationsRequest
 }
 
 // Send marshals and sends the DescribeApplications API request.
@@ -911,7 +928,7 @@ func (c *ElasticBeanstalk) DescribeApplicationsRequest(input *DescribeApplicatio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeApplicationsRequest{Request: req, Input: input}
+	return DescribeApplicationsRequest{Request: req, Input: input, Copy: c.DescribeApplicationsRequest}
 }
 
 const opDescribeConfigurationOptions = "DescribeConfigurationOptions"
@@ -920,6 +937,7 @@ const opDescribeConfigurationOptions = "DescribeConfigurationOptions"
 type DescribeConfigurationOptionsRequest struct {
 	*aws.Request
 	Input *DescribeConfigurationOptionsInput
+	Copy  func(*DescribeConfigurationOptionsInput) DescribeConfigurationOptionsRequest
 }
 
 // Send marshals and sends the DescribeConfigurationOptions API request.
@@ -964,7 +982,7 @@ func (c *ElasticBeanstalk) DescribeConfigurationOptionsRequest(input *DescribeCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConfigurationOptionsRequest{Request: req, Input: input}
+	return DescribeConfigurationOptionsRequest{Request: req, Input: input, Copy: c.DescribeConfigurationOptionsRequest}
 }
 
 const opDescribeConfigurationSettings = "DescribeConfigurationSettings"
@@ -973,6 +991,7 @@ const opDescribeConfigurationSettings = "DescribeConfigurationSettings"
 type DescribeConfigurationSettingsRequest struct {
 	*aws.Request
 	Input *DescribeConfigurationSettingsInput
+	Copy  func(*DescribeConfigurationSettingsInput) DescribeConfigurationSettingsRequest
 }
 
 // Send marshals and sends the DescribeConfigurationSettings API request.
@@ -1025,7 +1044,7 @@ func (c *ElasticBeanstalk) DescribeConfigurationSettingsRequest(input *DescribeC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConfigurationSettingsRequest{Request: req, Input: input}
+	return DescribeConfigurationSettingsRequest{Request: req, Input: input, Copy: c.DescribeConfigurationSettingsRequest}
 }
 
 const opDescribeEnvironmentHealth = "DescribeEnvironmentHealth"
@@ -1034,6 +1053,7 @@ const opDescribeEnvironmentHealth = "DescribeEnvironmentHealth"
 type DescribeEnvironmentHealthRequest struct {
 	*aws.Request
 	Input *DescribeEnvironmentHealthInput
+	Copy  func(*DescribeEnvironmentHealthInput) DescribeEnvironmentHealthRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentHealth API request.
@@ -1076,7 +1096,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentHealthRequest(input *DescribeEnvir
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEnvironmentHealthRequest{Request: req, Input: input}
+	return DescribeEnvironmentHealthRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentHealthRequest}
 }
 
 const opDescribeEnvironmentManagedActionHistory = "DescribeEnvironmentManagedActionHistory"
@@ -1085,6 +1105,7 @@ const opDescribeEnvironmentManagedActionHistory = "DescribeEnvironmentManagedAct
 type DescribeEnvironmentManagedActionHistoryRequest struct {
 	*aws.Request
 	Input *DescribeEnvironmentManagedActionHistoryInput
+	Copy  func(*DescribeEnvironmentManagedActionHistoryInput) DescribeEnvironmentManagedActionHistoryRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentManagedActionHistory API request.
@@ -1125,7 +1146,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionHistoryRequest(input 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEnvironmentManagedActionHistoryRequest{Request: req, Input: input}
+	return DescribeEnvironmentManagedActionHistoryRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentManagedActionHistoryRequest}
 }
 
 const opDescribeEnvironmentManagedActions = "DescribeEnvironmentManagedActions"
@@ -1134,6 +1155,7 @@ const opDescribeEnvironmentManagedActions = "DescribeEnvironmentManagedActions"
 type DescribeEnvironmentManagedActionsRequest struct {
 	*aws.Request
 	Input *DescribeEnvironmentManagedActionsInput
+	Copy  func(*DescribeEnvironmentManagedActionsInput) DescribeEnvironmentManagedActionsRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentManagedActions API request.
@@ -1174,7 +1196,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentManagedActionsRequest(input *Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEnvironmentManagedActionsRequest{Request: req, Input: input}
+	return DescribeEnvironmentManagedActionsRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentManagedActionsRequest}
 }
 
 const opDescribeEnvironmentResources = "DescribeEnvironmentResources"
@@ -1183,6 +1205,7 @@ const opDescribeEnvironmentResources = "DescribeEnvironmentResources"
 type DescribeEnvironmentResourcesRequest struct {
 	*aws.Request
 	Input *DescribeEnvironmentResourcesInput
+	Copy  func(*DescribeEnvironmentResourcesInput) DescribeEnvironmentResourcesRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentResources API request.
@@ -1223,7 +1246,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentResourcesRequest(input *DescribeEn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEnvironmentResourcesRequest{Request: req, Input: input}
+	return DescribeEnvironmentResourcesRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentResourcesRequest}
 }
 
 const opDescribeEnvironments = "DescribeEnvironments"
@@ -1232,6 +1255,7 @@ const opDescribeEnvironments = "DescribeEnvironments"
 type DescribeEnvironmentsRequest struct {
 	*aws.Request
 	Input *DescribeEnvironmentsInput
+	Copy  func(*DescribeEnvironmentsInput) DescribeEnvironmentsRequest
 }
 
 // Send marshals and sends the DescribeEnvironments API request.
@@ -1272,7 +1296,7 @@ func (c *ElasticBeanstalk) DescribeEnvironmentsRequest(input *DescribeEnvironmen
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEnvironmentsRequest{Request: req, Input: input}
+	return DescribeEnvironmentsRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentsRequest}
 }
 
 const opDescribeEvents = "DescribeEvents"
@@ -1281,6 +1305,7 @@ const opDescribeEvents = "DescribeEvents"
 type DescribeEventsRequest struct {
 	*aws.Request
 	Input *DescribeEventsInput
+	Copy  func(*DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -1329,47 +1354,47 @@ func (c *ElasticBeanstalk) DescribeEventsRequest(input *DescribeEventsInput) Des
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventsRequest{Request: req, Input: input}
+	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
-// DescribeEventsPages iterates over the pages of a DescribeEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEvents operation.
-//    pageNum := 0
-//    err := client.DescribeEventsPages(params,
-//        func(page *DescribeEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeEventsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeEventsPager ...
+// DescribeEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeEventsPager struct {
 	aws.Pager
 }
@@ -1384,6 +1409,7 @@ const opDescribeInstancesHealth = "DescribeInstancesHealth"
 type DescribeInstancesHealthRequest struct {
 	*aws.Request
 	Input *DescribeInstancesHealthInput
+	Copy  func(*DescribeInstancesHealthInput) DescribeInstancesHealthRequest
 }
 
 // Send marshals and sends the DescribeInstancesHealth API request.
@@ -1425,7 +1451,7 @@ func (c *ElasticBeanstalk) DescribeInstancesHealthRequest(input *DescribeInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstancesHealthRequest{Request: req, Input: input}
+	return DescribeInstancesHealthRequest{Request: req, Input: input, Copy: c.DescribeInstancesHealthRequest}
 }
 
 const opDescribePlatformVersion = "DescribePlatformVersion"
@@ -1434,6 +1460,7 @@ const opDescribePlatformVersion = "DescribePlatformVersion"
 type DescribePlatformVersionRequest struct {
 	*aws.Request
 	Input *DescribePlatformVersionInput
+	Copy  func(*DescribePlatformVersionInput) DescribePlatformVersionRequest
 }
 
 // Send marshals and sends the DescribePlatformVersion API request.
@@ -1474,7 +1501,7 @@ func (c *ElasticBeanstalk) DescribePlatformVersionRequest(input *DescribePlatfor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePlatformVersionRequest{Request: req, Input: input}
+	return DescribePlatformVersionRequest{Request: req, Input: input, Copy: c.DescribePlatformVersionRequest}
 }
 
 const opListAvailableSolutionStacks = "ListAvailableSolutionStacks"
@@ -1483,6 +1510,7 @@ const opListAvailableSolutionStacks = "ListAvailableSolutionStacks"
 type ListAvailableSolutionStacksRequest struct {
 	*aws.Request
 	Input *ListAvailableSolutionStacksInput
+	Copy  func(*ListAvailableSolutionStacksInput) ListAvailableSolutionStacksRequest
 }
 
 // Send marshals and sends the ListAvailableSolutionStacks API request.
@@ -1524,7 +1552,7 @@ func (c *ElasticBeanstalk) ListAvailableSolutionStacksRequest(input *ListAvailab
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAvailableSolutionStacksRequest{Request: req, Input: input}
+	return ListAvailableSolutionStacksRequest{Request: req, Input: input, Copy: c.ListAvailableSolutionStacksRequest}
 }
 
 const opListPlatformVersions = "ListPlatformVersions"
@@ -1533,6 +1561,7 @@ const opListPlatformVersions = "ListPlatformVersions"
 type ListPlatformVersionsRequest struct {
 	*aws.Request
 	Input *ListPlatformVersionsInput
+	Copy  func(*ListPlatformVersionsInput) ListPlatformVersionsRequest
 }
 
 // Send marshals and sends the ListPlatformVersions API request.
@@ -1573,7 +1602,7 @@ func (c *ElasticBeanstalk) ListPlatformVersionsRequest(input *ListPlatformVersio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPlatformVersionsRequest{Request: req, Input: input}
+	return ListPlatformVersionsRequest{Request: req, Input: input, Copy: c.ListPlatformVersionsRequest}
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -1582,6 +1611,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -1627,7 +1657,7 @@ func (c *ElasticBeanstalk) ListTagsForResourceRequest(input *ListTagsForResource
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opRebuildEnvironment = "RebuildEnvironment"
@@ -1636,6 +1666,7 @@ const opRebuildEnvironment = "RebuildEnvironment"
 type RebuildEnvironmentRequest struct {
 	*aws.Request
 	Input *RebuildEnvironmentInput
+	Copy  func(*RebuildEnvironmentInput) RebuildEnvironmentRequest
 }
 
 // Send marshals and sends the RebuildEnvironment API request.
@@ -1679,7 +1710,7 @@ func (c *ElasticBeanstalk) RebuildEnvironmentRequest(input *RebuildEnvironmentIn
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RebuildEnvironmentRequest{Request: req, Input: input}
+	return RebuildEnvironmentRequest{Request: req, Input: input, Copy: c.RebuildEnvironmentRequest}
 }
 
 const opRequestEnvironmentInfo = "RequestEnvironmentInfo"
@@ -1688,6 +1719,7 @@ const opRequestEnvironmentInfo = "RequestEnvironmentInfo"
 type RequestEnvironmentInfoRequest struct {
 	*aws.Request
 	Input *RequestEnvironmentInfoInput
+	Copy  func(*RequestEnvironmentInfoInput) RequestEnvironmentInfoRequest
 }
 
 // Send marshals and sends the RequestEnvironmentInfo API request.
@@ -1744,7 +1776,7 @@ func (c *ElasticBeanstalk) RequestEnvironmentInfoRequest(input *RequestEnvironme
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RequestEnvironmentInfoRequest{Request: req, Input: input}
+	return RequestEnvironmentInfoRequest{Request: req, Input: input, Copy: c.RequestEnvironmentInfoRequest}
 }
 
 const opRestartAppServer = "RestartAppServer"
@@ -1753,6 +1785,7 @@ const opRestartAppServer = "RestartAppServer"
 type RestartAppServerRequest struct {
 	*aws.Request
 	Input *RestartAppServerInput
+	Copy  func(*RestartAppServerInput) RestartAppServerRequest
 }
 
 // Send marshals and sends the RestartAppServer API request.
@@ -1796,7 +1829,7 @@ func (c *ElasticBeanstalk) RestartAppServerRequest(input *RestartAppServerInput)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestartAppServerRequest{Request: req, Input: input}
+	return RestartAppServerRequest{Request: req, Input: input, Copy: c.RestartAppServerRequest}
 }
 
 const opRetrieveEnvironmentInfo = "RetrieveEnvironmentInfo"
@@ -1805,6 +1838,7 @@ const opRetrieveEnvironmentInfo = "RetrieveEnvironmentInfo"
 type RetrieveEnvironmentInfoRequest struct {
 	*aws.Request
 	Input *RetrieveEnvironmentInfoInput
+	Copy  func(*RetrieveEnvironmentInfoInput) RetrieveEnvironmentInfoRequest
 }
 
 // Send marshals and sends the RetrieveEnvironmentInfo API request.
@@ -1849,7 +1883,7 @@ func (c *ElasticBeanstalk) RetrieveEnvironmentInfoRequest(input *RetrieveEnviron
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RetrieveEnvironmentInfoRequest{Request: req, Input: input}
+	return RetrieveEnvironmentInfoRequest{Request: req, Input: input, Copy: c.RetrieveEnvironmentInfoRequest}
 }
 
 const opSwapEnvironmentCNAMEs = "SwapEnvironmentCNAMEs"
@@ -1858,6 +1892,7 @@ const opSwapEnvironmentCNAMEs = "SwapEnvironmentCNAMEs"
 type SwapEnvironmentCNAMEsRequest struct {
 	*aws.Request
 	Input *SwapEnvironmentCNAMEsInput
+	Copy  func(*SwapEnvironmentCNAMEsInput) SwapEnvironmentCNAMEsRequest
 }
 
 // Send marshals and sends the SwapEnvironmentCNAMEs API request.
@@ -1900,7 +1935,7 @@ func (c *ElasticBeanstalk) SwapEnvironmentCNAMEsRequest(input *SwapEnvironmentCN
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SwapEnvironmentCNAMEsRequest{Request: req, Input: input}
+	return SwapEnvironmentCNAMEsRequest{Request: req, Input: input, Copy: c.SwapEnvironmentCNAMEsRequest}
 }
 
 const opTerminateEnvironment = "TerminateEnvironment"
@@ -1909,6 +1944,7 @@ const opTerminateEnvironment = "TerminateEnvironment"
 type TerminateEnvironmentRequest struct {
 	*aws.Request
 	Input *TerminateEnvironmentInput
+	Copy  func(*TerminateEnvironmentInput) TerminateEnvironmentRequest
 }
 
 // Send marshals and sends the TerminateEnvironment API request.
@@ -1949,7 +1985,7 @@ func (c *ElasticBeanstalk) TerminateEnvironmentRequest(input *TerminateEnvironme
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TerminateEnvironmentRequest{Request: req, Input: input}
+	return TerminateEnvironmentRequest{Request: req, Input: input, Copy: c.TerminateEnvironmentRequest}
 }
 
 const opUpdateApplication = "UpdateApplication"
@@ -1958,6 +1994,7 @@ const opUpdateApplication = "UpdateApplication"
 type UpdateApplicationRequest struct {
 	*aws.Request
 	Input *UpdateApplicationInput
+	Copy  func(*UpdateApplicationInput) UpdateApplicationRequest
 }
 
 // Send marshals and sends the UpdateApplication API request.
@@ -2001,7 +2038,7 @@ func (c *ElasticBeanstalk) UpdateApplicationRequest(input *UpdateApplicationInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApplicationRequest{Request: req, Input: input}
+	return UpdateApplicationRequest{Request: req, Input: input, Copy: c.UpdateApplicationRequest}
 }
 
 const opUpdateApplicationResourceLifecycle = "UpdateApplicationResourceLifecycle"
@@ -2010,6 +2047,7 @@ const opUpdateApplicationResourceLifecycle = "UpdateApplicationResourceLifecycle
 type UpdateApplicationResourceLifecycleRequest struct {
 	*aws.Request
 	Input *UpdateApplicationResourceLifecycleInput
+	Copy  func(*UpdateApplicationResourceLifecycleInput) UpdateApplicationResourceLifecycleRequest
 }
 
 // Send marshals and sends the UpdateApplicationResourceLifecycle API request.
@@ -2050,7 +2088,7 @@ func (c *ElasticBeanstalk) UpdateApplicationResourceLifecycleRequest(input *Upda
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApplicationResourceLifecycleRequest{Request: req, Input: input}
+	return UpdateApplicationResourceLifecycleRequest{Request: req, Input: input, Copy: c.UpdateApplicationResourceLifecycleRequest}
 }
 
 const opUpdateApplicationVersion = "UpdateApplicationVersion"
@@ -2059,6 +2097,7 @@ const opUpdateApplicationVersion = "UpdateApplicationVersion"
 type UpdateApplicationVersionRequest struct {
 	*aws.Request
 	Input *UpdateApplicationVersionInput
+	Copy  func(*UpdateApplicationVersionInput) UpdateApplicationVersionRequest
 }
 
 // Send marshals and sends the UpdateApplicationVersion API request.
@@ -2102,7 +2141,7 @@ func (c *ElasticBeanstalk) UpdateApplicationVersionRequest(input *UpdateApplicat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApplicationVersionRequest{Request: req, Input: input}
+	return UpdateApplicationVersionRequest{Request: req, Input: input, Copy: c.UpdateApplicationVersionRequest}
 }
 
 const opUpdateConfigurationTemplate = "UpdateConfigurationTemplate"
@@ -2111,6 +2150,7 @@ const opUpdateConfigurationTemplate = "UpdateConfigurationTemplate"
 type UpdateConfigurationTemplateRequest struct {
 	*aws.Request
 	Input *UpdateConfigurationTemplateInput
+	Copy  func(*UpdateConfigurationTemplateInput) UpdateConfigurationTemplateRequest
 }
 
 // Send marshals and sends the UpdateConfigurationTemplate API request.
@@ -2159,7 +2199,7 @@ func (c *ElasticBeanstalk) UpdateConfigurationTemplateRequest(input *UpdateConfi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateConfigurationTemplateRequest{Request: req, Input: input}
+	return UpdateConfigurationTemplateRequest{Request: req, Input: input, Copy: c.UpdateConfigurationTemplateRequest}
 }
 
 const opUpdateEnvironment = "UpdateEnvironment"
@@ -2168,6 +2208,7 @@ const opUpdateEnvironment = "UpdateEnvironment"
 type UpdateEnvironmentRequest struct {
 	*aws.Request
 	Input *UpdateEnvironmentInput
+	Copy  func(*UpdateEnvironmentInput) UpdateEnvironmentRequest
 }
 
 // Send marshals and sends the UpdateEnvironment API request.
@@ -2218,7 +2259,7 @@ func (c *ElasticBeanstalk) UpdateEnvironmentRequest(input *UpdateEnvironmentInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEnvironmentRequest{Request: req, Input: input}
+	return UpdateEnvironmentRequest{Request: req, Input: input, Copy: c.UpdateEnvironmentRequest}
 }
 
 const opUpdateTagsForResource = "UpdateTagsForResource"
@@ -2227,6 +2268,7 @@ const opUpdateTagsForResource = "UpdateTagsForResource"
 type UpdateTagsForResourceRequest struct {
 	*aws.Request
 	Input *UpdateTagsForResourceInput
+	Copy  func(*UpdateTagsForResourceInput) UpdateTagsForResourceRequest
 }
 
 // Send marshals and sends the UpdateTagsForResource API request.
@@ -2287,7 +2329,7 @@ func (c *ElasticBeanstalk) UpdateTagsForResourceRequest(input *UpdateTagsForReso
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTagsForResourceRequest{Request: req, Input: input}
+	return UpdateTagsForResourceRequest{Request: req, Input: input, Copy: c.UpdateTagsForResourceRequest}
 }
 
 const opValidateConfigurationSettings = "ValidateConfigurationSettings"
@@ -2296,6 +2338,7 @@ const opValidateConfigurationSettings = "ValidateConfigurationSettings"
 type ValidateConfigurationSettingsRequest struct {
 	*aws.Request
 	Input *ValidateConfigurationSettingsInput
+	Copy  func(*ValidateConfigurationSettingsInput) ValidateConfigurationSettingsRequest
 }
 
 // Send marshals and sends the ValidateConfigurationSettings API request.
@@ -2340,7 +2383,7 @@ func (c *ElasticBeanstalk) ValidateConfigurationSettingsRequest(input *ValidateC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ValidateConfigurationSettingsRequest{Request: req, Input: input}
+	return ValidateConfigurationSettingsRequest{Request: req, Input: input, Copy: c.ValidateConfigurationSettingsRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/AbortEnvironmentUpdateMessage

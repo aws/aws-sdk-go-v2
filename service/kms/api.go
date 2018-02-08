@@ -18,6 +18,7 @@ const opCancelKeyDeletion = "CancelKeyDeletion"
 type CancelKeyDeletionRequest struct {
 	*aws.Request
 	Input *CancelKeyDeletionInput
+	Copy  func(*CancelKeyDeletionInput) CancelKeyDeletionRequest
 }
 
 // Send marshals and sends the CancelKeyDeletion API request.
@@ -65,7 +66,7 @@ func (c *KMS) CancelKeyDeletionRequest(input *CancelKeyDeletionInput) CancelKeyD
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelKeyDeletionRequest{Request: req, Input: input}
+	return CancelKeyDeletionRequest{Request: req, Input: input, Copy: c.CancelKeyDeletionRequest}
 }
 
 const opCreateAlias = "CreateAlias"
@@ -74,6 +75,7 @@ const opCreateAlias = "CreateAlias"
 type CreateAliasRequest struct {
 	*aws.Request
 	Input *CreateAliasInput
+	Copy  func(*CreateAliasInput) CreateAliasRequest
 }
 
 // Send marshals and sends the CreateAlias API request.
@@ -138,7 +140,7 @@ func (c *KMS) CreateAliasRequest(input *CreateAliasInput) CreateAliasRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAliasRequest{Request: req, Input: input}
+	return CreateAliasRequest{Request: req, Input: input, Copy: c.CreateAliasRequest}
 }
 
 const opCreateGrant = "CreateGrant"
@@ -147,6 +149,7 @@ const opCreateGrant = "CreateGrant"
 type CreateGrantRequest struct {
 	*aws.Request
 	Input *CreateGrantInput
+	Copy  func(*CreateGrantInput) CreateGrantRequest
 }
 
 // Send marshals and sends the CreateGrant API request.
@@ -194,7 +197,7 @@ func (c *KMS) CreateGrantRequest(input *CreateGrantInput) CreateGrantRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGrantRequest{Request: req, Input: input}
+	return CreateGrantRequest{Request: req, Input: input, Copy: c.CreateGrantRequest}
 }
 
 const opCreateKey = "CreateKey"
@@ -203,6 +206,7 @@ const opCreateKey = "CreateKey"
 type CreateKeyRequest struct {
 	*aws.Request
 	Input *CreateKeyInput
+	Copy  func(*CreateKeyInput) CreateKeyRequest
 }
 
 // Send marshals and sends the CreateKey API request.
@@ -255,7 +259,7 @@ func (c *KMS) CreateKeyRequest(input *CreateKeyInput) CreateKeyRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateKeyRequest{Request: req, Input: input}
+	return CreateKeyRequest{Request: req, Input: input, Copy: c.CreateKeyRequest}
 }
 
 const opDecrypt = "Decrypt"
@@ -264,6 +268,7 @@ const opDecrypt = "Decrypt"
 type DecryptRequest struct {
 	*aws.Request
 	Input *DecryptInput
+	Copy  func(*DecryptInput) DecryptRequest
 }
 
 // Send marshals and sends the Decrypt API request.
@@ -320,7 +325,7 @@ func (c *KMS) DecryptRequest(input *DecryptInput) DecryptRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DecryptRequest{Request: req, Input: input}
+	return DecryptRequest{Request: req, Input: input, Copy: c.DecryptRequest}
 }
 
 const opDeleteAlias = "DeleteAlias"
@@ -329,6 +334,7 @@ const opDeleteAlias = "DeleteAlias"
 type DeleteAliasRequest struct {
 	*aws.Request
 	Input *DeleteAliasInput
+	Copy  func(*DeleteAliasInput) DeleteAliasRequest
 }
 
 // Send marshals and sends the DeleteAlias API request.
@@ -381,7 +387,7 @@ func (c *KMS) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAliasRequest{Request: req, Input: input}
+	return DeleteAliasRequest{Request: req, Input: input, Copy: c.DeleteAliasRequest}
 }
 
 const opDeleteImportedKeyMaterial = "DeleteImportedKeyMaterial"
@@ -390,6 +396,7 @@ const opDeleteImportedKeyMaterial = "DeleteImportedKeyMaterial"
 type DeleteImportedKeyMaterialRequest struct {
 	*aws.Request
 	Input *DeleteImportedKeyMaterialInput
+	Copy  func(*DeleteImportedKeyMaterialInput) DeleteImportedKeyMaterialRequest
 }
 
 // Send marshals and sends the DeleteImportedKeyMaterial API request.
@@ -442,7 +449,7 @@ func (c *KMS) DeleteImportedKeyMaterialRequest(input *DeleteImportedKeyMaterialI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteImportedKeyMaterialRequest{Request: req, Input: input}
+	return DeleteImportedKeyMaterialRequest{Request: req, Input: input, Copy: c.DeleteImportedKeyMaterialRequest}
 }
 
 const opDescribeKey = "DescribeKey"
@@ -451,6 +458,7 @@ const opDescribeKey = "DescribeKey"
 type DescribeKeyRequest struct {
 	*aws.Request
 	Input *DescribeKeyInput
+	Copy  func(*DescribeKeyInput) DescribeKeyRequest
 }
 
 // Send marshals and sends the DescribeKey API request.
@@ -494,7 +502,7 @@ func (c *KMS) DescribeKeyRequest(input *DescribeKeyInput) DescribeKeyRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeKeyRequest{Request: req, Input: input}
+	return DescribeKeyRequest{Request: req, Input: input, Copy: c.DescribeKeyRequest}
 }
 
 const opDisableKey = "DisableKey"
@@ -503,6 +511,7 @@ const opDisableKey = "DisableKey"
 type DisableKeyRequest struct {
 	*aws.Request
 	Input *DisableKeyInput
+	Copy  func(*DisableKeyInput) DisableKeyRequest
 }
 
 // Send marshals and sends the DisableKey API request.
@@ -551,7 +560,7 @@ func (c *KMS) DisableKeyRequest(input *DisableKeyInput) DisableKeyRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableKeyRequest{Request: req, Input: input}
+	return DisableKeyRequest{Request: req, Input: input, Copy: c.DisableKeyRequest}
 }
 
 const opDisableKeyRotation = "DisableKeyRotation"
@@ -560,6 +569,7 @@ const opDisableKeyRotation = "DisableKeyRotation"
 type DisableKeyRotationRequest struct {
 	*aws.Request
 	Input *DisableKeyRotationInput
+	Copy  func(*DisableKeyRotationInput) DisableKeyRotationRequest
 }
 
 // Send marshals and sends the DisableKeyRotation API request.
@@ -604,7 +614,7 @@ func (c *KMS) DisableKeyRotationRequest(input *DisableKeyRotationInput) DisableK
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableKeyRotationRequest{Request: req, Input: input}
+	return DisableKeyRotationRequest{Request: req, Input: input, Copy: c.DisableKeyRotationRequest}
 }
 
 const opEnableKey = "EnableKey"
@@ -613,6 +623,7 @@ const opEnableKey = "EnableKey"
 type EnableKeyRequest struct {
 	*aws.Request
 	Input *EnableKeyInput
+	Copy  func(*EnableKeyInput) EnableKeyRequest
 }
 
 // Send marshals and sends the EnableKey API request.
@@ -657,7 +668,7 @@ func (c *KMS) EnableKeyRequest(input *EnableKeyInput) EnableKeyRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableKeyRequest{Request: req, Input: input}
+	return EnableKeyRequest{Request: req, Input: input, Copy: c.EnableKeyRequest}
 }
 
 const opEnableKeyRotation = "EnableKeyRotation"
@@ -666,6 +677,7 @@ const opEnableKeyRotation = "EnableKeyRotation"
 type EnableKeyRotationRequest struct {
 	*aws.Request
 	Input *EnableKeyRotationInput
+	Copy  func(*EnableKeyRotationInput) EnableKeyRotationRequest
 }
 
 // Send marshals and sends the EnableKeyRotation API request.
@@ -710,7 +722,7 @@ func (c *KMS) EnableKeyRotationRequest(input *EnableKeyRotationInput) EnableKeyR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableKeyRotationRequest{Request: req, Input: input}
+	return EnableKeyRotationRequest{Request: req, Input: input, Copy: c.EnableKeyRotationRequest}
 }
 
 const opEncrypt = "Encrypt"
@@ -719,6 +731,7 @@ const opEncrypt = "Encrypt"
 type EncryptRequest struct {
 	*aws.Request
 	Input *EncryptInput
+	Copy  func(*EncryptInput) EncryptRequest
 }
 
 // Send marshals and sends the Encrypt API request.
@@ -781,7 +794,7 @@ func (c *KMS) EncryptRequest(input *EncryptInput) EncryptRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EncryptRequest{Request: req, Input: input}
+	return EncryptRequest{Request: req, Input: input, Copy: c.EncryptRequest}
 }
 
 const opGenerateDataKey = "GenerateDataKey"
@@ -790,6 +803,7 @@ const opGenerateDataKey = "GenerateDataKey"
 type GenerateDataKeyRequest struct {
 	*aws.Request
 	Input *GenerateDataKeyInput
+	Copy  func(*GenerateDataKeyInput) GenerateDataKeyRequest
 }
 
 // Send marshals and sends the GenerateDataKey API request.
@@ -875,7 +889,7 @@ func (c *KMS) GenerateDataKeyRequest(input *GenerateDataKeyInput) GenerateDataKe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GenerateDataKeyRequest{Request: req, Input: input}
+	return GenerateDataKeyRequest{Request: req, Input: input, Copy: c.GenerateDataKeyRequest}
 }
 
 const opGenerateDataKeyWithoutPlaintext = "GenerateDataKeyWithoutPlaintext"
@@ -884,6 +898,7 @@ const opGenerateDataKeyWithoutPlaintext = "GenerateDataKeyWithoutPlaintext"
 type GenerateDataKeyWithoutPlaintextRequest struct {
 	*aws.Request
 	Input *GenerateDataKeyWithoutPlaintextInput
+	Copy  func(*GenerateDataKeyWithoutPlaintextInput) GenerateDataKeyWithoutPlaintextRequest
 }
 
 // Send marshals and sends the GenerateDataKeyWithoutPlaintext API request.
@@ -941,7 +956,7 @@ func (c *KMS) GenerateDataKeyWithoutPlaintextRequest(input *GenerateDataKeyWitho
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GenerateDataKeyWithoutPlaintextRequest{Request: req, Input: input}
+	return GenerateDataKeyWithoutPlaintextRequest{Request: req, Input: input, Copy: c.GenerateDataKeyWithoutPlaintextRequest}
 }
 
 const opGenerateRandom = "GenerateRandom"
@@ -950,6 +965,7 @@ const opGenerateRandom = "GenerateRandom"
 type GenerateRandomRequest struct {
 	*aws.Request
 	Input *GenerateRandomInput
+	Copy  func(*GenerateRandomInput) GenerateRandomRequest
 }
 
 // Send marshals and sends the GenerateRandom API request.
@@ -994,7 +1010,7 @@ func (c *KMS) GenerateRandomRequest(input *GenerateRandomInput) GenerateRandomRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GenerateRandomRequest{Request: req, Input: input}
+	return GenerateRandomRequest{Request: req, Input: input, Copy: c.GenerateRandomRequest}
 }
 
 const opGetKeyPolicy = "GetKeyPolicy"
@@ -1003,6 +1019,7 @@ const opGetKeyPolicy = "GetKeyPolicy"
 type GetKeyPolicyRequest struct {
 	*aws.Request
 	Input *GetKeyPolicyInput
+	Copy  func(*GetKeyPolicyInput) GetKeyPolicyRequest
 }
 
 // Send marshals and sends the GetKeyPolicy API request.
@@ -1044,7 +1061,7 @@ func (c *KMS) GetKeyPolicyRequest(input *GetKeyPolicyInput) GetKeyPolicyRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetKeyPolicyRequest{Request: req, Input: input}
+	return GetKeyPolicyRequest{Request: req, Input: input, Copy: c.GetKeyPolicyRequest}
 }
 
 const opGetKeyRotationStatus = "GetKeyRotationStatus"
@@ -1053,6 +1070,7 @@ const opGetKeyRotationStatus = "GetKeyRotationStatus"
 type GetKeyRotationStatusRequest struct {
 	*aws.Request
 	Input *GetKeyRotationStatusInput
+	Copy  func(*GetKeyRotationStatusInput) GetKeyRotationStatusRequest
 }
 
 // Send marshals and sends the GetKeyRotationStatus API request.
@@ -1097,7 +1115,7 @@ func (c *KMS) GetKeyRotationStatusRequest(input *GetKeyRotationStatusInput) GetK
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetKeyRotationStatusRequest{Request: req, Input: input}
+	return GetKeyRotationStatusRequest{Request: req, Input: input, Copy: c.GetKeyRotationStatusRequest}
 }
 
 const opGetParametersForImport = "GetParametersForImport"
@@ -1106,6 +1124,7 @@ const opGetParametersForImport = "GetParametersForImport"
 type GetParametersForImportRequest struct {
 	*aws.Request
 	Input *GetParametersForImportInput
+	Copy  func(*GetParametersForImportInput) GetParametersForImportRequest
 }
 
 // Send marshals and sends the GetParametersForImport API request.
@@ -1162,7 +1181,7 @@ func (c *KMS) GetParametersForImportRequest(input *GetParametersForImportInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetParametersForImportRequest{Request: req, Input: input}
+	return GetParametersForImportRequest{Request: req, Input: input, Copy: c.GetParametersForImportRequest}
 }
 
 const opImportKeyMaterial = "ImportKeyMaterial"
@@ -1171,6 +1190,7 @@ const opImportKeyMaterial = "ImportKeyMaterial"
 type ImportKeyMaterialRequest struct {
 	*aws.Request
 	Input *ImportKeyMaterialInput
+	Copy  func(*ImportKeyMaterialInput) ImportKeyMaterialRequest
 }
 
 // Send marshals and sends the ImportKeyMaterial API request.
@@ -1246,7 +1266,7 @@ func (c *KMS) ImportKeyMaterialRequest(input *ImportKeyMaterialInput) ImportKeyM
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportKeyMaterialRequest{Request: req, Input: input}
+	return ImportKeyMaterialRequest{Request: req, Input: input, Copy: c.ImportKeyMaterialRequest}
 }
 
 const opListAliases = "ListAliases"
@@ -1255,6 +1275,7 @@ const opListAliases = "ListAliases"
 type ListAliasesRequest struct {
 	*aws.Request
 	Input *ListAliasesInput
+	Copy  func(*ListAliasesInput) ListAliasesRequest
 }
 
 // Send marshals and sends the ListAliases API request.
@@ -1308,47 +1329,47 @@ func (c *KMS) ListAliasesRequest(input *ListAliasesInput) ListAliasesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAliasesRequest{Request: req, Input: input}
+	return ListAliasesRequest{Request: req, Input: input, Copy: c.ListAliasesRequest}
 }
 
-// ListAliasesPages iterates over the pages of a ListAliases operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAliases method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAliasesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAliases operation.
-//    pageNum := 0
-//    err := client.ListAliasesPages(params,
-//        func(page *ListAliasesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAliasesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListAliasesRequest) Paginate(opts ...aws.Option) ListAliasesPager {
 	return ListAliasesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAliasesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAliasesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListAliasesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListAliasesPager ...
+// ListAliasesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListAliasesPager struct {
 	aws.Pager
 }
@@ -1363,6 +1384,7 @@ const opListGrants = "ListGrants"
 type ListGrantsRequest struct {
 	*aws.Request
 	Input *ListGrantsInput
+	Copy  func(*ListGrantsInput) ListGrantsRequest
 }
 
 // Send marshals and sends the ListGrants API request.
@@ -1412,47 +1434,47 @@ func (c *KMS) ListGrantsRequest(input *ListGrantsInput) ListGrantsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGrantsRequest{Request: req, Input: input}
+	return ListGrantsRequest{Request: req, Input: input, Copy: c.ListGrantsRequest}
 }
 
-// ListGrantsPages iterates over the pages of a ListGrants operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListGrants method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListGrantsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListGrants operation.
-//    pageNum := 0
-//    err := client.ListGrantsPages(params,
-//        func(page *ListRetirableGrantsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListGrantsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListGrantsRequest) Paginate(opts ...aws.Option) ListGrantsPager {
 	return ListGrantsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListGrantsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListGrantsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListRetirableGrantsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListGrantsPager ...
+// ListGrantsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListGrantsPager struct {
 	aws.Pager
 }
@@ -1467,6 +1489,7 @@ const opListKeyPolicies = "ListKeyPolicies"
 type ListKeyPoliciesRequest struct {
 	*aws.Request
 	Input *ListKeyPoliciesInput
+	Copy  func(*ListKeyPoliciesInput) ListKeyPoliciesRequest
 }
 
 // Send marshals and sends the ListKeyPolicies API request.
@@ -1516,47 +1539,47 @@ func (c *KMS) ListKeyPoliciesRequest(input *ListKeyPoliciesInput) ListKeyPolicie
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListKeyPoliciesRequest{Request: req, Input: input}
+	return ListKeyPoliciesRequest{Request: req, Input: input, Copy: c.ListKeyPoliciesRequest}
 }
 
-// ListKeyPoliciesPages iterates over the pages of a ListKeyPolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListKeyPolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListKeyPoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListKeyPolicies operation.
-//    pageNum := 0
-//    err := client.ListKeyPoliciesPages(params,
-//        func(page *ListKeyPoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListKeyPoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListKeyPoliciesRequest) Paginate(opts ...aws.Option) ListKeyPoliciesPager {
 	return ListKeyPoliciesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListKeyPoliciesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListKeyPoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListKeyPoliciesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListKeyPoliciesPager ...
+// ListKeyPoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListKeyPoliciesPager struct {
 	aws.Pager
 }
@@ -1571,6 +1594,7 @@ const opListKeys = "ListKeys"
 type ListKeysRequest struct {
 	*aws.Request
 	Input *ListKeysInput
+	Copy  func(*ListKeysInput) ListKeysRequest
 }
 
 // Send marshals and sends the ListKeys API request.
@@ -1618,47 +1642,47 @@ func (c *KMS) ListKeysRequest(input *ListKeysInput) ListKeysRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListKeysRequest{Request: req, Input: input}
+	return ListKeysRequest{Request: req, Input: input, Copy: c.ListKeysRequest}
 }
 
-// ListKeysPages iterates over the pages of a ListKeys operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListKeys method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListKeysRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListKeys operation.
-//    pageNum := 0
-//    err := client.ListKeysPages(params,
-//        func(page *ListKeysOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListKeysRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListKeysRequest) Paginate(opts ...aws.Option) ListKeysPager {
 	return ListKeysPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListKeysInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListKeysInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListKeysOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListKeysPager ...
+// ListKeysPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListKeysPager struct {
 	aws.Pager
 }
@@ -1673,6 +1697,7 @@ const opListResourceTags = "ListResourceTags"
 type ListResourceTagsRequest struct {
 	*aws.Request
 	Input *ListResourceTagsInput
+	Copy  func(*ListResourceTagsInput) ListResourceTagsRequest
 }
 
 // Send marshals and sends the ListResourceTags API request.
@@ -1715,7 +1740,7 @@ func (c *KMS) ListResourceTagsRequest(input *ListResourceTagsInput) ListResource
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourceTagsRequest{Request: req, Input: input}
+	return ListResourceTagsRequest{Request: req, Input: input, Copy: c.ListResourceTagsRequest}
 }
 
 const opListRetirableGrants = "ListRetirableGrants"
@@ -1724,6 +1749,7 @@ const opListRetirableGrants = "ListRetirableGrants"
 type ListRetirableGrantsRequest struct {
 	*aws.Request
 	Input *ListRetirableGrantsInput
+	Copy  func(*ListRetirableGrantsInput) ListRetirableGrantsRequest
 }
 
 // Send marshals and sends the ListRetirableGrants API request.
@@ -1768,7 +1794,7 @@ func (c *KMS) ListRetirableGrantsRequest(input *ListRetirableGrantsInput) ListRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRetirableGrantsRequest{Request: req, Input: input}
+	return ListRetirableGrantsRequest{Request: req, Input: input, Copy: c.ListRetirableGrantsRequest}
 }
 
 const opPutKeyPolicy = "PutKeyPolicy"
@@ -1777,6 +1803,7 @@ const opPutKeyPolicy = "PutKeyPolicy"
 type PutKeyPolicyRequest struct {
 	*aws.Request
 	Input *PutKeyPolicyInput
+	Copy  func(*PutKeyPolicyInput) PutKeyPolicyRequest
 }
 
 // Send marshals and sends the PutKeyPolicy API request.
@@ -1823,7 +1850,7 @@ func (c *KMS) PutKeyPolicyRequest(input *PutKeyPolicyInput) PutKeyPolicyRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutKeyPolicyRequest{Request: req, Input: input}
+	return PutKeyPolicyRequest{Request: req, Input: input, Copy: c.PutKeyPolicyRequest}
 }
 
 const opReEncrypt = "ReEncrypt"
@@ -1832,6 +1859,7 @@ const opReEncrypt = "ReEncrypt"
 type ReEncryptRequest struct {
 	*aws.Request
 	Input *ReEncryptInput
+	Copy  func(*ReEncryptInput) ReEncryptRequest
 }
 
 // Send marshals and sends the ReEncrypt API request.
@@ -1885,7 +1913,7 @@ func (c *KMS) ReEncryptRequest(input *ReEncryptInput) ReEncryptRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReEncryptRequest{Request: req, Input: input}
+	return ReEncryptRequest{Request: req, Input: input, Copy: c.ReEncryptRequest}
 }
 
 const opRetireGrant = "RetireGrant"
@@ -1894,6 +1922,7 @@ const opRetireGrant = "RetireGrant"
 type RetireGrantRequest struct {
 	*aws.Request
 	Input *RetireGrantInput
+	Copy  func(*RetireGrantInput) RetireGrantRequest
 }
 
 // Send marshals and sends the RetireGrant API request.
@@ -1951,7 +1980,7 @@ func (c *KMS) RetireGrantRequest(input *RetireGrantInput) RetireGrantRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RetireGrantRequest{Request: req, Input: input}
+	return RetireGrantRequest{Request: req, Input: input, Copy: c.RetireGrantRequest}
 }
 
 const opRevokeGrant = "RevokeGrant"
@@ -1960,6 +1989,7 @@ const opRevokeGrant = "RevokeGrant"
 type RevokeGrantRequest struct {
 	*aws.Request
 	Input *RevokeGrantInput
+	Copy  func(*RevokeGrantInput) RevokeGrantRequest
 }
 
 // Send marshals and sends the RevokeGrant API request.
@@ -2006,7 +2036,7 @@ func (c *KMS) RevokeGrantRequest(input *RevokeGrantInput) RevokeGrantRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RevokeGrantRequest{Request: req, Input: input}
+	return RevokeGrantRequest{Request: req, Input: input, Copy: c.RevokeGrantRequest}
 }
 
 const opScheduleKeyDeletion = "ScheduleKeyDeletion"
@@ -2015,6 +2045,7 @@ const opScheduleKeyDeletion = "ScheduleKeyDeletion"
 type ScheduleKeyDeletionRequest struct {
 	*aws.Request
 	Input *ScheduleKeyDeletionInput
+	Copy  func(*ScheduleKeyDeletionInput) ScheduleKeyDeletionRequest
 }
 
 // Send marshals and sends the ScheduleKeyDeletion API request.
@@ -2072,7 +2103,7 @@ func (c *KMS) ScheduleKeyDeletionRequest(input *ScheduleKeyDeletionInput) Schedu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ScheduleKeyDeletionRequest{Request: req, Input: input}
+	return ScheduleKeyDeletionRequest{Request: req, Input: input, Copy: c.ScheduleKeyDeletionRequest}
 }
 
 const opTagResource = "TagResource"
@@ -2081,6 +2112,7 @@ const opTagResource = "TagResource"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -2137,7 +2169,7 @@ func (c *KMS) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUntagResource = "UntagResource"
@@ -2146,6 +2178,7 @@ const opUntagResource = "UntagResource"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -2193,7 +2226,7 @@ func (c *KMS) UntagResourceRequest(input *UntagResourceInput) UntagResourceReque
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateAlias = "UpdateAlias"
@@ -2202,6 +2235,7 @@ const opUpdateAlias = "UpdateAlias"
 type UpdateAliasRequest struct {
 	*aws.Request
 	Input *UpdateAliasInput
+	Copy  func(*UpdateAliasInput) UpdateAliasRequest
 }
 
 // Send marshals and sends the UpdateAlias API request.
@@ -2263,7 +2297,7 @@ func (c *KMS) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAliasRequest{Request: req, Input: input}
+	return UpdateAliasRequest{Request: req, Input: input, Copy: c.UpdateAliasRequest}
 }
 
 const opUpdateKeyDescription = "UpdateKeyDescription"
@@ -2272,6 +2306,7 @@ const opUpdateKeyDescription = "UpdateKeyDescription"
 type UpdateKeyDescriptionRequest struct {
 	*aws.Request
 	Input *UpdateKeyDescriptionInput
+	Copy  func(*UpdateKeyDescriptionInput) UpdateKeyDescriptionRequest
 }
 
 // Send marshals and sends the UpdateKeyDescription API request.
@@ -2317,7 +2352,7 @@ func (c *KMS) UpdateKeyDescriptionRequest(input *UpdateKeyDescriptionInput) Upda
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateKeyDescriptionRequest{Request: req, Input: input}
+	return UpdateKeyDescriptionRequest{Request: req, Input: input, Copy: c.UpdateKeyDescriptionRequest}
 }
 
 // Contains information about an alias.

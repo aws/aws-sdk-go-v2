@@ -14,6 +14,7 @@ const opCreateChannel = "CreateChannel"
 type CreateChannelRequest struct {
 	*aws.Request
 	Input *CreateChannelInput
+	Copy  func(*CreateChannelInput) CreateChannelRequest
 }
 
 // Send marshals and sends the CreateChannel API request.
@@ -54,7 +55,7 @@ func (c *MediaPackage) CreateChannelRequest(input *CreateChannelInput) CreateCha
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateChannelRequest{Request: req, Input: input}
+	return CreateChannelRequest{Request: req, Input: input, Copy: c.CreateChannelRequest}
 }
 
 const opCreateOriginEndpoint = "CreateOriginEndpoint"
@@ -63,6 +64,7 @@ const opCreateOriginEndpoint = "CreateOriginEndpoint"
 type CreateOriginEndpointRequest struct {
 	*aws.Request
 	Input *CreateOriginEndpointInput
+	Copy  func(*CreateOriginEndpointInput) CreateOriginEndpointRequest
 }
 
 // Send marshals and sends the CreateOriginEndpoint API request.
@@ -103,7 +105,7 @@ func (c *MediaPackage) CreateOriginEndpointRequest(input *CreateOriginEndpointIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateOriginEndpointRequest{Request: req, Input: input}
+	return CreateOriginEndpointRequest{Request: req, Input: input, Copy: c.CreateOriginEndpointRequest}
 }
 
 const opDeleteChannel = "DeleteChannel"
@@ -112,6 +114,7 @@ const opDeleteChannel = "DeleteChannel"
 type DeleteChannelRequest struct {
 	*aws.Request
 	Input *DeleteChannelInput
+	Copy  func(*DeleteChannelInput) DeleteChannelRequest
 }
 
 // Send marshals and sends the DeleteChannel API request.
@@ -152,7 +155,7 @@ func (c *MediaPackage) DeleteChannelRequest(input *DeleteChannelInput) DeleteCha
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteChannelRequest{Request: req, Input: input}
+	return DeleteChannelRequest{Request: req, Input: input, Copy: c.DeleteChannelRequest}
 }
 
 const opDeleteOriginEndpoint = "DeleteOriginEndpoint"
@@ -161,6 +164,7 @@ const opDeleteOriginEndpoint = "DeleteOriginEndpoint"
 type DeleteOriginEndpointRequest struct {
 	*aws.Request
 	Input *DeleteOriginEndpointInput
+	Copy  func(*DeleteOriginEndpointInput) DeleteOriginEndpointRequest
 }
 
 // Send marshals and sends the DeleteOriginEndpoint API request.
@@ -201,7 +205,7 @@ func (c *MediaPackage) DeleteOriginEndpointRequest(input *DeleteOriginEndpointIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteOriginEndpointRequest{Request: req, Input: input}
+	return DeleteOriginEndpointRequest{Request: req, Input: input, Copy: c.DeleteOriginEndpointRequest}
 }
 
 const opDescribeChannel = "DescribeChannel"
@@ -210,6 +214,7 @@ const opDescribeChannel = "DescribeChannel"
 type DescribeChannelRequest struct {
 	*aws.Request
 	Input *DescribeChannelInput
+	Copy  func(*DescribeChannelInput) DescribeChannelRequest
 }
 
 // Send marshals and sends the DescribeChannel API request.
@@ -250,7 +255,7 @@ func (c *MediaPackage) DescribeChannelRequest(input *DescribeChannelInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeChannelRequest{Request: req, Input: input}
+	return DescribeChannelRequest{Request: req, Input: input, Copy: c.DescribeChannelRequest}
 }
 
 const opDescribeOriginEndpoint = "DescribeOriginEndpoint"
@@ -259,6 +264,7 @@ const opDescribeOriginEndpoint = "DescribeOriginEndpoint"
 type DescribeOriginEndpointRequest struct {
 	*aws.Request
 	Input *DescribeOriginEndpointInput
+	Copy  func(*DescribeOriginEndpointInput) DescribeOriginEndpointRequest
 }
 
 // Send marshals and sends the DescribeOriginEndpoint API request.
@@ -299,7 +305,7 @@ func (c *MediaPackage) DescribeOriginEndpointRequest(input *DescribeOriginEndpoi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeOriginEndpointRequest{Request: req, Input: input}
+	return DescribeOriginEndpointRequest{Request: req, Input: input, Copy: c.DescribeOriginEndpointRequest}
 }
 
 const opListChannels = "ListChannels"
@@ -308,6 +314,7 @@ const opListChannels = "ListChannels"
 type ListChannelsRequest struct {
 	*aws.Request
 	Input *ListChannelsInput
+	Copy  func(*ListChannelsInput) ListChannelsRequest
 }
 
 // Send marshals and sends the ListChannels API request.
@@ -354,47 +361,47 @@ func (c *MediaPackage) ListChannelsRequest(input *ListChannelsInput) ListChannel
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListChannelsRequest{Request: req, Input: input}
+	return ListChannelsRequest{Request: req, Input: input, Copy: c.ListChannelsRequest}
 }
 
-// ListChannelsPages iterates over the pages of a ListChannels operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListChannels method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListChannelsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListChannels operation.
-//    pageNum := 0
-//    err := client.ListChannelsPages(params,
-//        func(page *ListChannelsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListChannelsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
 	return ListChannelsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListChannelsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListChannelsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListChannelsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListChannelsPager ...
+// ListChannelsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListChannelsPager struct {
 	aws.Pager
 }
@@ -409,6 +416,7 @@ const opListOriginEndpoints = "ListOriginEndpoints"
 type ListOriginEndpointsRequest struct {
 	*aws.Request
 	Input *ListOriginEndpointsInput
+	Copy  func(*ListOriginEndpointsInput) ListOriginEndpointsRequest
 }
 
 // Send marshals and sends the ListOriginEndpoints API request.
@@ -455,47 +463,47 @@ func (c *MediaPackage) ListOriginEndpointsRequest(input *ListOriginEndpointsInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOriginEndpointsRequest{Request: req, Input: input}
+	return ListOriginEndpointsRequest{Request: req, Input: input, Copy: c.ListOriginEndpointsRequest}
 }
 
-// ListOriginEndpointsPages iterates over the pages of a ListOriginEndpoints operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListOriginEndpoints method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListOriginEndpointsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListOriginEndpoints operation.
-//    pageNum := 0
-//    err := client.ListOriginEndpointsPages(params,
-//        func(page *ListOriginEndpointsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListOriginEndpointsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListOriginEndpointsRequest) Paginate(opts ...aws.Option) ListOriginEndpointsPager {
 	return ListOriginEndpointsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListOriginEndpointsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListOriginEndpointsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListOriginEndpointsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListOriginEndpointsPager ...
+// ListOriginEndpointsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListOriginEndpointsPager struct {
 	aws.Pager
 }
@@ -510,6 +518,7 @@ const opRotateChannelCredentials = "RotateChannelCredentials"
 type RotateChannelCredentialsRequest struct {
 	*aws.Request
 	Input *RotateChannelCredentialsInput
+	Copy  func(*RotateChannelCredentialsInput) RotateChannelCredentialsRequest
 }
 
 // Send marshals and sends the RotateChannelCredentials API request.
@@ -550,7 +559,7 @@ func (c *MediaPackage) RotateChannelCredentialsRequest(input *RotateChannelCrede
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RotateChannelCredentialsRequest{Request: req, Input: input}
+	return RotateChannelCredentialsRequest{Request: req, Input: input, Copy: c.RotateChannelCredentialsRequest}
 }
 
 const opUpdateChannel = "UpdateChannel"
@@ -559,6 +568,7 @@ const opUpdateChannel = "UpdateChannel"
 type UpdateChannelRequest struct {
 	*aws.Request
 	Input *UpdateChannelInput
+	Copy  func(*UpdateChannelInput) UpdateChannelRequest
 }
 
 // Send marshals and sends the UpdateChannel API request.
@@ -599,7 +609,7 @@ func (c *MediaPackage) UpdateChannelRequest(input *UpdateChannelInput) UpdateCha
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateChannelRequest{Request: req, Input: input}
+	return UpdateChannelRequest{Request: req, Input: input, Copy: c.UpdateChannelRequest}
 }
 
 const opUpdateOriginEndpoint = "UpdateOriginEndpoint"
@@ -608,6 +618,7 @@ const opUpdateOriginEndpoint = "UpdateOriginEndpoint"
 type UpdateOriginEndpointRequest struct {
 	*aws.Request
 	Input *UpdateOriginEndpointInput
+	Copy  func(*UpdateOriginEndpointInput) UpdateOriginEndpointRequest
 }
 
 // Send marshals and sends the UpdateOriginEndpoint API request.
@@ -648,7 +659,7 @@ func (c *MediaPackage) UpdateOriginEndpointRequest(input *UpdateOriginEndpointIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateOriginEndpointRequest{Request: req, Input: input}
+	return UpdateOriginEndpointRequest{Request: req, Input: input, Copy: c.UpdateOriginEndpointRequest}
 }
 
 // A Channel resource configuration.

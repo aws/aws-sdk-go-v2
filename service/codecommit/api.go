@@ -18,6 +18,7 @@ const opBatchGetRepositories = "BatchGetRepositories"
 type BatchGetRepositoriesRequest struct {
 	*aws.Request
 	Input *BatchGetRepositoriesInput
+	Copy  func(*BatchGetRepositoriesInput) BatchGetRepositoriesRequest
 }
 
 // Send marshals and sends the BatchGetRepositories API request.
@@ -64,7 +65,7 @@ func (c *CodeCommit) BatchGetRepositoriesRequest(input *BatchGetRepositoriesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetRepositoriesRequest{Request: req, Input: input}
+	return BatchGetRepositoriesRequest{Request: req, Input: input, Copy: c.BatchGetRepositoriesRequest}
 }
 
 const opCreateBranch = "CreateBranch"
@@ -73,6 +74,7 @@ const opCreateBranch = "CreateBranch"
 type CreateBranchRequest struct {
 	*aws.Request
 	Input *CreateBranchInput
+	Copy  func(*CreateBranchInput) CreateBranchRequest
 }
 
 // Send marshals and sends the CreateBranch API request.
@@ -118,7 +120,7 @@ func (c *CodeCommit) CreateBranchRequest(input *CreateBranchInput) CreateBranchR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBranchRequest{Request: req, Input: input}
+	return CreateBranchRequest{Request: req, Input: input, Copy: c.CreateBranchRequest}
 }
 
 const opCreatePullRequest = "CreatePullRequest"
@@ -127,6 +129,7 @@ const opCreatePullRequest = "CreatePullRequest"
 type CreatePullRequestRequest struct {
 	*aws.Request
 	Input *CreatePullRequestInput
+	Copy  func(*CreatePullRequestInput) CreatePullRequestRequest
 }
 
 // Send marshals and sends the CreatePullRequest API request.
@@ -167,7 +170,7 @@ func (c *CodeCommit) CreatePullRequestRequest(input *CreatePullRequestInput) Cre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePullRequestRequest{Request: req, Input: input}
+	return CreatePullRequestRequest{Request: req, Input: input, Copy: c.CreatePullRequestRequest}
 }
 
 const opCreateRepository = "CreateRepository"
@@ -176,6 +179,7 @@ const opCreateRepository = "CreateRepository"
 type CreateRepositoryRequest struct {
 	*aws.Request
 	Input *CreateRepositoryInput
+	Copy  func(*CreateRepositoryInput) CreateRepositoryRequest
 }
 
 // Send marshals and sends the CreateRepository API request.
@@ -216,7 +220,7 @@ func (c *CodeCommit) CreateRepositoryRequest(input *CreateRepositoryInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRepositoryRequest{Request: req, Input: input}
+	return CreateRepositoryRequest{Request: req, Input: input, Copy: c.CreateRepositoryRequest}
 }
 
 const opDeleteBranch = "DeleteBranch"
@@ -225,6 +229,7 @@ const opDeleteBranch = "DeleteBranch"
 type DeleteBranchRequest struct {
 	*aws.Request
 	Input *DeleteBranchInput
+	Copy  func(*DeleteBranchInput) DeleteBranchRequest
 }
 
 // Send marshals and sends the DeleteBranch API request.
@@ -266,7 +271,7 @@ func (c *CodeCommit) DeleteBranchRequest(input *DeleteBranchInput) DeleteBranchR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBranchRequest{Request: req, Input: input}
+	return DeleteBranchRequest{Request: req, Input: input, Copy: c.DeleteBranchRequest}
 }
 
 const opDeleteCommentContent = "DeleteCommentContent"
@@ -275,6 +280,7 @@ const opDeleteCommentContent = "DeleteCommentContent"
 type DeleteCommentContentRequest struct {
 	*aws.Request
 	Input *DeleteCommentContentInput
+	Copy  func(*DeleteCommentContentInput) DeleteCommentContentRequest
 }
 
 // Send marshals and sends the DeleteCommentContent API request.
@@ -315,7 +321,7 @@ func (c *CodeCommit) DeleteCommentContentRequest(input *DeleteCommentContentInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCommentContentRequest{Request: req, Input: input}
+	return DeleteCommentContentRequest{Request: req, Input: input, Copy: c.DeleteCommentContentRequest}
 }
 
 const opDeleteRepository = "DeleteRepository"
@@ -324,6 +330,7 @@ const opDeleteRepository = "DeleteRepository"
 type DeleteRepositoryRequest struct {
 	*aws.Request
 	Input *DeleteRepositoryInput
+	Copy  func(*DeleteRepositoryInput) DeleteRepositoryRequest
 }
 
 // Send marshals and sends the DeleteRepository API request.
@@ -369,7 +376,7 @@ func (c *CodeCommit) DeleteRepositoryRequest(input *DeleteRepositoryInput) Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRepositoryRequest{Request: req, Input: input}
+	return DeleteRepositoryRequest{Request: req, Input: input, Copy: c.DeleteRepositoryRequest}
 }
 
 const opDescribePullRequestEvents = "DescribePullRequestEvents"
@@ -378,6 +385,7 @@ const opDescribePullRequestEvents = "DescribePullRequestEvents"
 type DescribePullRequestEventsRequest struct {
 	*aws.Request
 	Input *DescribePullRequestEventsInput
+	Copy  func(*DescribePullRequestEventsInput) DescribePullRequestEventsRequest
 }
 
 // Send marshals and sends the DescribePullRequestEvents API request.
@@ -424,47 +432,47 @@ func (c *CodeCommit) DescribePullRequestEventsRequest(input *DescribePullRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePullRequestEventsRequest{Request: req, Input: input}
+	return DescribePullRequestEventsRequest{Request: req, Input: input, Copy: c.DescribePullRequestEventsRequest}
 }
 
-// DescribePullRequestEventsPages iterates over the pages of a DescribePullRequestEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribePullRequestEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribePullRequestEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribePullRequestEvents operation.
-//    pageNum := 0
-//    err := client.DescribePullRequestEventsPages(params,
-//        func(page *DescribePullRequestEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribePullRequestEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribePullRequestEventsRequest) Paginate(opts ...aws.Option) DescribePullRequestEventsPager {
 	return DescribePullRequestEventsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribePullRequestEventsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribePullRequestEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribePullRequestEventsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribePullRequestEventsPager ...
+// DescribePullRequestEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribePullRequestEventsPager struct {
 	aws.Pager
 }
@@ -479,6 +487,7 @@ const opGetBlob = "GetBlob"
 type GetBlobRequest struct {
 	*aws.Request
 	Input *GetBlobInput
+	Copy  func(*GetBlobInput) GetBlobRequest
 }
 
 // Send marshals and sends the GetBlob API request.
@@ -519,7 +528,7 @@ func (c *CodeCommit) GetBlobRequest(input *GetBlobInput) GetBlobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBlobRequest{Request: req, Input: input}
+	return GetBlobRequest{Request: req, Input: input, Copy: c.GetBlobRequest}
 }
 
 const opGetBranch = "GetBranch"
@@ -528,6 +537,7 @@ const opGetBranch = "GetBranch"
 type GetBranchRequest struct {
 	*aws.Request
 	Input *GetBranchInput
+	Copy  func(*GetBranchInput) GetBranchRequest
 }
 
 // Send marshals and sends the GetBranch API request.
@@ -569,7 +579,7 @@ func (c *CodeCommit) GetBranchRequest(input *GetBranchInput) GetBranchRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBranchRequest{Request: req, Input: input}
+	return GetBranchRequest{Request: req, Input: input, Copy: c.GetBranchRequest}
 }
 
 const opGetComment = "GetComment"
@@ -578,6 +588,7 @@ const opGetComment = "GetComment"
 type GetCommentRequest struct {
 	*aws.Request
 	Input *GetCommentInput
+	Copy  func(*GetCommentInput) GetCommentRequest
 }
 
 // Send marshals and sends the GetComment API request.
@@ -618,7 +629,7 @@ func (c *CodeCommit) GetCommentRequest(input *GetCommentInput) GetCommentRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCommentRequest{Request: req, Input: input}
+	return GetCommentRequest{Request: req, Input: input, Copy: c.GetCommentRequest}
 }
 
 const opGetCommentsForComparedCommit = "GetCommentsForComparedCommit"
@@ -627,6 +638,7 @@ const opGetCommentsForComparedCommit = "GetCommentsForComparedCommit"
 type GetCommentsForComparedCommitRequest struct {
 	*aws.Request
 	Input *GetCommentsForComparedCommitInput
+	Copy  func(*GetCommentsForComparedCommitInput) GetCommentsForComparedCommitRequest
 }
 
 // Send marshals and sends the GetCommentsForComparedCommit API request.
@@ -673,47 +685,47 @@ func (c *CodeCommit) GetCommentsForComparedCommitRequest(input *GetCommentsForCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCommentsForComparedCommitRequest{Request: req, Input: input}
+	return GetCommentsForComparedCommitRequest{Request: req, Input: input, Copy: c.GetCommentsForComparedCommitRequest}
 }
 
-// GetCommentsForComparedCommitPages iterates over the pages of a GetCommentsForComparedCommit operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetCommentsForComparedCommit method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetCommentsForComparedCommitRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetCommentsForComparedCommit operation.
-//    pageNum := 0
-//    err := client.GetCommentsForComparedCommitPages(params,
-//        func(page *GetCommentsForComparedCommitOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetCommentsForComparedCommitRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetCommentsForComparedCommitRequest) Paginate(opts ...aws.Option) GetCommentsForComparedCommitPager {
 	return GetCommentsForComparedCommitPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetCommentsForComparedCommitInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetCommentsForComparedCommitInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetCommentsForComparedCommitOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetCommentsForComparedCommitPager ...
+// GetCommentsForComparedCommitPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetCommentsForComparedCommitPager struct {
 	aws.Pager
 }
@@ -728,6 +740,7 @@ const opGetCommentsForPullRequest = "GetCommentsForPullRequest"
 type GetCommentsForPullRequestRequest struct {
 	*aws.Request
 	Input *GetCommentsForPullRequestInput
+	Copy  func(*GetCommentsForPullRequestInput) GetCommentsForPullRequestRequest
 }
 
 // Send marshals and sends the GetCommentsForPullRequest API request.
@@ -774,47 +787,47 @@ func (c *CodeCommit) GetCommentsForPullRequestRequest(input *GetCommentsForPullR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCommentsForPullRequestRequest{Request: req, Input: input}
+	return GetCommentsForPullRequestRequest{Request: req, Input: input, Copy: c.GetCommentsForPullRequestRequest}
 }
 
-// GetCommentsForPullRequestPages iterates over the pages of a GetCommentsForPullRequest operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetCommentsForPullRequest method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetCommentsForPullRequestRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetCommentsForPullRequest operation.
-//    pageNum := 0
-//    err := client.GetCommentsForPullRequestPages(params,
-//        func(page *GetCommentsForPullRequestOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetCommentsForPullRequestRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetCommentsForPullRequestRequest) Paginate(opts ...aws.Option) GetCommentsForPullRequestPager {
 	return GetCommentsForPullRequestPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetCommentsForPullRequestInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetCommentsForPullRequestInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetCommentsForPullRequestOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetCommentsForPullRequestPager ...
+// GetCommentsForPullRequestPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetCommentsForPullRequestPager struct {
 	aws.Pager
 }
@@ -829,6 +842,7 @@ const opGetCommit = "GetCommit"
 type GetCommitRequest struct {
 	*aws.Request
 	Input *GetCommitInput
+	Copy  func(*GetCommitInput) GetCommitRequest
 }
 
 // Send marshals and sends the GetCommit API request.
@@ -870,7 +884,7 @@ func (c *CodeCommit) GetCommitRequest(input *GetCommitInput) GetCommitRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCommitRequest{Request: req, Input: input}
+	return GetCommitRequest{Request: req, Input: input, Copy: c.GetCommitRequest}
 }
 
 const opGetDifferences = "GetDifferences"
@@ -879,6 +893,7 @@ const opGetDifferences = "GetDifferences"
 type GetDifferencesRequest struct {
 	*aws.Request
 	Input *GetDifferencesInput
+	Copy  func(*GetDifferencesInput) GetDifferencesRequest
 }
 
 // Send marshals and sends the GetDifferences API request.
@@ -927,47 +942,47 @@ func (c *CodeCommit) GetDifferencesRequest(input *GetDifferencesInput) GetDiffer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDifferencesRequest{Request: req, Input: input}
+	return GetDifferencesRequest{Request: req, Input: input, Copy: c.GetDifferencesRequest}
 }
 
-// GetDifferencesPages iterates over the pages of a GetDifferences operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetDifferences method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetDifferencesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetDifferences operation.
-//    pageNum := 0
-//    err := client.GetDifferencesPages(params,
-//        func(page *GetDifferencesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetDifferencesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetDifferencesRequest) Paginate(opts ...aws.Option) GetDifferencesPager {
 	return GetDifferencesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetDifferencesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetDifferencesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetDifferencesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetDifferencesPager ...
+// GetDifferencesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetDifferencesPager struct {
 	aws.Pager
 }
@@ -982,6 +997,7 @@ const opGetMergeConflicts = "GetMergeConflicts"
 type GetMergeConflictsRequest struct {
 	*aws.Request
 	Input *GetMergeConflictsInput
+	Copy  func(*GetMergeConflictsInput) GetMergeConflictsRequest
 }
 
 // Send marshals and sends the GetMergeConflicts API request.
@@ -1023,7 +1039,7 @@ func (c *CodeCommit) GetMergeConflictsRequest(input *GetMergeConflictsInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMergeConflictsRequest{Request: req, Input: input}
+	return GetMergeConflictsRequest{Request: req, Input: input, Copy: c.GetMergeConflictsRequest}
 }
 
 const opGetPullRequest = "GetPullRequest"
@@ -1032,6 +1048,7 @@ const opGetPullRequest = "GetPullRequest"
 type GetPullRequestRequest struct {
 	*aws.Request
 	Input *GetPullRequestInput
+	Copy  func(*GetPullRequestInput) GetPullRequestRequest
 }
 
 // Send marshals and sends the GetPullRequest API request.
@@ -1072,7 +1089,7 @@ func (c *CodeCommit) GetPullRequestRequest(input *GetPullRequestInput) GetPullRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPullRequestRequest{Request: req, Input: input}
+	return GetPullRequestRequest{Request: req, Input: input, Copy: c.GetPullRequestRequest}
 }
 
 const opGetRepository = "GetRepository"
@@ -1081,6 +1098,7 @@ const opGetRepository = "GetRepository"
 type GetRepositoryRequest struct {
 	*aws.Request
 	Input *GetRepositoryInput
+	Copy  func(*GetRepositoryInput) GetRepositoryRequest
 }
 
 // Send marshals and sends the GetRepository API request.
@@ -1127,7 +1145,7 @@ func (c *CodeCommit) GetRepositoryRequest(input *GetRepositoryInput) GetReposito
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRepositoryRequest{Request: req, Input: input}
+	return GetRepositoryRequest{Request: req, Input: input, Copy: c.GetRepositoryRequest}
 }
 
 const opGetRepositoryTriggers = "GetRepositoryTriggers"
@@ -1136,6 +1154,7 @@ const opGetRepositoryTriggers = "GetRepositoryTriggers"
 type GetRepositoryTriggersRequest struct {
 	*aws.Request
 	Input *GetRepositoryTriggersInput
+	Copy  func(*GetRepositoryTriggersInput) GetRepositoryTriggersRequest
 }
 
 // Send marshals and sends the GetRepositoryTriggers API request.
@@ -1176,7 +1195,7 @@ func (c *CodeCommit) GetRepositoryTriggersRequest(input *GetRepositoryTriggersIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRepositoryTriggersRequest{Request: req, Input: input}
+	return GetRepositoryTriggersRequest{Request: req, Input: input, Copy: c.GetRepositoryTriggersRequest}
 }
 
 const opListBranches = "ListBranches"
@@ -1185,6 +1204,7 @@ const opListBranches = "ListBranches"
 type ListBranchesRequest struct {
 	*aws.Request
 	Input *ListBranchesInput
+	Copy  func(*ListBranchesInput) ListBranchesRequest
 }
 
 // Send marshals and sends the ListBranches API request.
@@ -1231,47 +1251,47 @@ func (c *CodeCommit) ListBranchesRequest(input *ListBranchesInput) ListBranchesR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBranchesRequest{Request: req, Input: input}
+	return ListBranchesRequest{Request: req, Input: input, Copy: c.ListBranchesRequest}
 }
 
-// ListBranchesPages iterates over the pages of a ListBranches operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListBranches method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListBranchesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListBranches operation.
-//    pageNum := 0
-//    err := client.ListBranchesPages(params,
-//        func(page *ListBranchesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListBranchesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListBranchesRequest) Paginate(opts ...aws.Option) ListBranchesPager {
 	return ListBranchesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListBranchesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListBranchesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListBranchesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListBranchesPager ...
+// ListBranchesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListBranchesPager struct {
 	aws.Pager
 }
@@ -1286,6 +1306,7 @@ const opListPullRequests = "ListPullRequests"
 type ListPullRequestsRequest struct {
 	*aws.Request
 	Input *ListPullRequestsInput
+	Copy  func(*ListPullRequestsInput) ListPullRequestsRequest
 }
 
 // Send marshals and sends the ListPullRequests API request.
@@ -1333,47 +1354,47 @@ func (c *CodeCommit) ListPullRequestsRequest(input *ListPullRequestsInput) ListP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPullRequestsRequest{Request: req, Input: input}
+	return ListPullRequestsRequest{Request: req, Input: input, Copy: c.ListPullRequestsRequest}
 }
 
-// ListPullRequestsPages iterates over the pages of a ListPullRequests operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPullRequests method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPullRequestsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPullRequests operation.
-//    pageNum := 0
-//    err := client.ListPullRequestsPages(params,
-//        func(page *ListPullRequestsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPullRequestsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListPullRequestsRequest) Paginate(opts ...aws.Option) ListPullRequestsPager {
 	return ListPullRequestsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPullRequestsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPullRequestsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListPullRequestsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListPullRequestsPager ...
+// ListPullRequestsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListPullRequestsPager struct {
 	aws.Pager
 }
@@ -1388,6 +1409,7 @@ const opListRepositories = "ListRepositories"
 type ListRepositoriesRequest struct {
 	*aws.Request
 	Input *ListRepositoriesInput
+	Copy  func(*ListRepositoriesInput) ListRepositoriesRequest
 }
 
 // Send marshals and sends the ListRepositories API request.
@@ -1434,47 +1456,47 @@ func (c *CodeCommit) ListRepositoriesRequest(input *ListRepositoriesInput) ListR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRepositoriesRequest{Request: req, Input: input}
+	return ListRepositoriesRequest{Request: req, Input: input, Copy: c.ListRepositoriesRequest}
 }
 
-// ListRepositoriesPages iterates over the pages of a ListRepositories operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListRepositories method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListRepositoriesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListRepositories operation.
-//    pageNum := 0
-//    err := client.ListRepositoriesPages(params,
-//        func(page *ListRepositoriesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListRepositoriesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListRepositoriesRequest) Paginate(opts ...aws.Option) ListRepositoriesPager {
 	return ListRepositoriesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListRepositoriesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListRepositoriesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListRepositoriesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListRepositoriesPager ...
+// ListRepositoriesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListRepositoriesPager struct {
 	aws.Pager
 }
@@ -1489,6 +1511,7 @@ const opMergePullRequestByFastForward = "MergePullRequestByFastForward"
 type MergePullRequestByFastForwardRequest struct {
 	*aws.Request
 	Input *MergePullRequestByFastForwardInput
+	Copy  func(*MergePullRequestByFastForwardInput) MergePullRequestByFastForwardRequest
 }
 
 // Send marshals and sends the MergePullRequestByFastForward API request.
@@ -1531,7 +1554,7 @@ func (c *CodeCommit) MergePullRequestByFastForwardRequest(input *MergePullReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return MergePullRequestByFastForwardRequest{Request: req, Input: input}
+	return MergePullRequestByFastForwardRequest{Request: req, Input: input, Copy: c.MergePullRequestByFastForwardRequest}
 }
 
 const opPostCommentForComparedCommit = "PostCommentForComparedCommit"
@@ -1540,6 +1563,7 @@ const opPostCommentForComparedCommit = "PostCommentForComparedCommit"
 type PostCommentForComparedCommitRequest struct {
 	*aws.Request
 	Input *PostCommentForComparedCommitInput
+	Copy  func(*PostCommentForComparedCommitInput) PostCommentForComparedCommitRequest
 }
 
 // Send marshals and sends the PostCommentForComparedCommit API request.
@@ -1580,7 +1604,7 @@ func (c *CodeCommit) PostCommentForComparedCommitRequest(input *PostCommentForCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PostCommentForComparedCommitRequest{Request: req, Input: input}
+	return PostCommentForComparedCommitRequest{Request: req, Input: input, Copy: c.PostCommentForComparedCommitRequest}
 }
 
 const opPostCommentForPullRequest = "PostCommentForPullRequest"
@@ -1589,6 +1613,7 @@ const opPostCommentForPullRequest = "PostCommentForPullRequest"
 type PostCommentForPullRequestRequest struct {
 	*aws.Request
 	Input *PostCommentForPullRequestInput
+	Copy  func(*PostCommentForPullRequestInput) PostCommentForPullRequestRequest
 }
 
 // Send marshals and sends the PostCommentForPullRequest API request.
@@ -1629,7 +1654,7 @@ func (c *CodeCommit) PostCommentForPullRequestRequest(input *PostCommentForPullR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PostCommentForPullRequestRequest{Request: req, Input: input}
+	return PostCommentForPullRequestRequest{Request: req, Input: input, Copy: c.PostCommentForPullRequestRequest}
 }
 
 const opPostCommentReply = "PostCommentReply"
@@ -1638,6 +1663,7 @@ const opPostCommentReply = "PostCommentReply"
 type PostCommentReplyRequest struct {
 	*aws.Request
 	Input *PostCommentReplyInput
+	Copy  func(*PostCommentReplyInput) PostCommentReplyRequest
 }
 
 // Send marshals and sends the PostCommentReply API request.
@@ -1679,7 +1705,7 @@ func (c *CodeCommit) PostCommentReplyRequest(input *PostCommentReplyInput) PostC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PostCommentReplyRequest{Request: req, Input: input}
+	return PostCommentReplyRequest{Request: req, Input: input, Copy: c.PostCommentReplyRequest}
 }
 
 const opPutRepositoryTriggers = "PutRepositoryTriggers"
@@ -1688,6 +1714,7 @@ const opPutRepositoryTriggers = "PutRepositoryTriggers"
 type PutRepositoryTriggersRequest struct {
 	*aws.Request
 	Input *PutRepositoryTriggersInput
+	Copy  func(*PutRepositoryTriggersInput) PutRepositoryTriggersRequest
 }
 
 // Send marshals and sends the PutRepositoryTriggers API request.
@@ -1729,7 +1756,7 @@ func (c *CodeCommit) PutRepositoryTriggersRequest(input *PutRepositoryTriggersIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutRepositoryTriggersRequest{Request: req, Input: input}
+	return PutRepositoryTriggersRequest{Request: req, Input: input, Copy: c.PutRepositoryTriggersRequest}
 }
 
 const opTestRepositoryTriggers = "TestRepositoryTriggers"
@@ -1738,6 +1765,7 @@ const opTestRepositoryTriggers = "TestRepositoryTriggers"
 type TestRepositoryTriggersRequest struct {
 	*aws.Request
 	Input *TestRepositoryTriggersInput
+	Copy  func(*TestRepositoryTriggersInput) TestRepositoryTriggersRequest
 }
 
 // Send marshals and sends the TestRepositoryTriggers API request.
@@ -1781,7 +1809,7 @@ func (c *CodeCommit) TestRepositoryTriggersRequest(input *TestRepositoryTriggers
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestRepositoryTriggersRequest{Request: req, Input: input}
+	return TestRepositoryTriggersRequest{Request: req, Input: input, Copy: c.TestRepositoryTriggersRequest}
 }
 
 const opUpdateComment = "UpdateComment"
@@ -1790,6 +1818,7 @@ const opUpdateComment = "UpdateComment"
 type UpdateCommentRequest struct {
 	*aws.Request
 	Input *UpdateCommentInput
+	Copy  func(*UpdateCommentInput) UpdateCommentRequest
 }
 
 // Send marshals and sends the UpdateComment API request.
@@ -1830,7 +1859,7 @@ func (c *CodeCommit) UpdateCommentRequest(input *UpdateCommentInput) UpdateComme
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateCommentRequest{Request: req, Input: input}
+	return UpdateCommentRequest{Request: req, Input: input, Copy: c.UpdateCommentRequest}
 }
 
 const opUpdateDefaultBranch = "UpdateDefaultBranch"
@@ -1839,6 +1868,7 @@ const opUpdateDefaultBranch = "UpdateDefaultBranch"
 type UpdateDefaultBranchRequest struct {
 	*aws.Request
 	Input *UpdateDefaultBranchInput
+	Copy  func(*UpdateDefaultBranchInput) UpdateDefaultBranchRequest
 }
 
 // Send marshals and sends the UpdateDefaultBranch API request.
@@ -1885,7 +1915,7 @@ func (c *CodeCommit) UpdateDefaultBranchRequest(input *UpdateDefaultBranchInput)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDefaultBranchRequest{Request: req, Input: input}
+	return UpdateDefaultBranchRequest{Request: req, Input: input, Copy: c.UpdateDefaultBranchRequest}
 }
 
 const opUpdatePullRequestDescription = "UpdatePullRequestDescription"
@@ -1894,6 +1924,7 @@ const opUpdatePullRequestDescription = "UpdatePullRequestDescription"
 type UpdatePullRequestDescriptionRequest struct {
 	*aws.Request
 	Input *UpdatePullRequestDescriptionInput
+	Copy  func(*UpdatePullRequestDescriptionInput) UpdatePullRequestDescriptionRequest
 }
 
 // Send marshals and sends the UpdatePullRequestDescription API request.
@@ -1934,7 +1965,7 @@ func (c *CodeCommit) UpdatePullRequestDescriptionRequest(input *UpdatePullReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePullRequestDescriptionRequest{Request: req, Input: input}
+	return UpdatePullRequestDescriptionRequest{Request: req, Input: input, Copy: c.UpdatePullRequestDescriptionRequest}
 }
 
 const opUpdatePullRequestStatus = "UpdatePullRequestStatus"
@@ -1943,6 +1974,7 @@ const opUpdatePullRequestStatus = "UpdatePullRequestStatus"
 type UpdatePullRequestStatusRequest struct {
 	*aws.Request
 	Input *UpdatePullRequestStatusInput
+	Copy  func(*UpdatePullRequestStatusInput) UpdatePullRequestStatusRequest
 }
 
 // Send marshals and sends the UpdatePullRequestStatus API request.
@@ -1983,7 +2015,7 @@ func (c *CodeCommit) UpdatePullRequestStatusRequest(input *UpdatePullRequestStat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePullRequestStatusRequest{Request: req, Input: input}
+	return UpdatePullRequestStatusRequest{Request: req, Input: input, Copy: c.UpdatePullRequestStatusRequest}
 }
 
 const opUpdatePullRequestTitle = "UpdatePullRequestTitle"
@@ -1992,6 +2024,7 @@ const opUpdatePullRequestTitle = "UpdatePullRequestTitle"
 type UpdatePullRequestTitleRequest struct {
 	*aws.Request
 	Input *UpdatePullRequestTitleInput
+	Copy  func(*UpdatePullRequestTitleInput) UpdatePullRequestTitleRequest
 }
 
 // Send marshals and sends the UpdatePullRequestTitle API request.
@@ -2032,7 +2065,7 @@ func (c *CodeCommit) UpdatePullRequestTitleRequest(input *UpdatePullRequestTitle
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePullRequestTitleRequest{Request: req, Input: input}
+	return UpdatePullRequestTitleRequest{Request: req, Input: input, Copy: c.UpdatePullRequestTitleRequest}
 }
 
 const opUpdateRepositoryDescription = "UpdateRepositoryDescription"
@@ -2041,6 +2074,7 @@ const opUpdateRepositoryDescription = "UpdateRepositoryDescription"
 type UpdateRepositoryDescriptionRequest struct {
 	*aws.Request
 	Input *UpdateRepositoryDescriptionInput
+	Copy  func(*UpdateRepositoryDescriptionInput) UpdateRepositoryDescriptionRequest
 }
 
 // Send marshals and sends the UpdateRepositoryDescription API request.
@@ -2089,7 +2123,7 @@ func (c *CodeCommit) UpdateRepositoryDescriptionRequest(input *UpdateRepositoryD
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRepositoryDescriptionRequest{Request: req, Input: input}
+	return UpdateRepositoryDescriptionRequest{Request: req, Input: input, Copy: c.UpdateRepositoryDescriptionRequest}
 }
 
 const opUpdateRepositoryName = "UpdateRepositoryName"
@@ -2098,6 +2132,7 @@ const opUpdateRepositoryName = "UpdateRepositoryName"
 type UpdateRepositoryNameRequest struct {
 	*aws.Request
 	Input *UpdateRepositoryNameInput
+	Copy  func(*UpdateRepositoryNameInput) UpdateRepositoryNameRequest
 }
 
 // Send marshals and sends the UpdateRepositoryName API request.
@@ -2145,7 +2180,7 @@ func (c *CodeCommit) UpdateRepositoryNameRequest(input *UpdateRepositoryNameInpu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRepositoryNameRequest{Request: req, Input: input}
+	return UpdateRepositoryNameRequest{Request: req, Input: input, Copy: c.UpdateRepositoryNameRequest}
 }
 
 // Represents the input of a batch get repositories operation.

@@ -15,6 +15,7 @@ const opCreateReplicationJob = "CreateReplicationJob"
 type CreateReplicationJobRequest struct {
 	*aws.Request
 	Input *CreateReplicationJobInput
+	Copy  func(*CreateReplicationJobInput) CreateReplicationJobRequest
 }
 
 // Send marshals and sends the CreateReplicationJob API request.
@@ -58,7 +59,7 @@ func (c *SMS) CreateReplicationJobRequest(input *CreateReplicationJobInput) Crea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateReplicationJobRequest{Request: req, Input: input}
+	return CreateReplicationJobRequest{Request: req, Input: input, Copy: c.CreateReplicationJobRequest}
 }
 
 const opDeleteReplicationJob = "DeleteReplicationJob"
@@ -67,6 +68,7 @@ const opDeleteReplicationJob = "DeleteReplicationJob"
 type DeleteReplicationJobRequest struct {
 	*aws.Request
 	Input *DeleteReplicationJobInput
+	Copy  func(*DeleteReplicationJobInput) DeleteReplicationJobRequest
 }
 
 // Send marshals and sends the DeleteReplicationJob API request.
@@ -110,7 +112,7 @@ func (c *SMS) DeleteReplicationJobRequest(input *DeleteReplicationJobInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteReplicationJobRequest{Request: req, Input: input}
+	return DeleteReplicationJobRequest{Request: req, Input: input, Copy: c.DeleteReplicationJobRequest}
 }
 
 const opDeleteServerCatalog = "DeleteServerCatalog"
@@ -119,6 +121,7 @@ const opDeleteServerCatalog = "DeleteServerCatalog"
 type DeleteServerCatalogRequest struct {
 	*aws.Request
 	Input *DeleteServerCatalogInput
+	Copy  func(*DeleteServerCatalogInput) DeleteServerCatalogRequest
 }
 
 // Send marshals and sends the DeleteServerCatalog API request.
@@ -161,7 +164,7 @@ func (c *SMS) DeleteServerCatalogRequest(input *DeleteServerCatalogInput) Delete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteServerCatalogRequest{Request: req, Input: input}
+	return DeleteServerCatalogRequest{Request: req, Input: input, Copy: c.DeleteServerCatalogRequest}
 }
 
 const opDisassociateConnector = "DisassociateConnector"
@@ -170,6 +173,7 @@ const opDisassociateConnector = "DisassociateConnector"
 type DisassociateConnectorRequest struct {
 	*aws.Request
 	Input *DisassociateConnectorInput
+	Copy  func(*DisassociateConnectorInput) DisassociateConnectorRequest
 }
 
 // Send marshals and sends the DisassociateConnector API request.
@@ -211,7 +215,7 @@ func (c *SMS) DisassociateConnectorRequest(input *DisassociateConnectorInput) Di
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateConnectorRequest{Request: req, Input: input}
+	return DisassociateConnectorRequest{Request: req, Input: input, Copy: c.DisassociateConnectorRequest}
 }
 
 const opGetConnectors = "GetConnectors"
@@ -220,6 +224,7 @@ const opGetConnectors = "GetConnectors"
 type GetConnectorsRequest struct {
 	*aws.Request
 	Input *GetConnectorsInput
+	Copy  func(*GetConnectorsInput) GetConnectorsRequest
 }
 
 // Send marshals and sends the GetConnectors API request.
@@ -267,47 +272,47 @@ func (c *SMS) GetConnectorsRequest(input *GetConnectorsInput) GetConnectorsReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetConnectorsRequest{Request: req, Input: input}
+	return GetConnectorsRequest{Request: req, Input: input, Copy: c.GetConnectorsRequest}
 }
 
-// GetConnectorsPages iterates over the pages of a GetConnectors operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetConnectors method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetConnectorsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetConnectors operation.
-//    pageNum := 0
-//    err := client.GetConnectorsPages(params,
-//        func(page *GetConnectorsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetConnectorsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetConnectorsRequest) Paginate(opts ...aws.Option) GetConnectorsPager {
 	return GetConnectorsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetConnectorsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetConnectorsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetConnectorsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetConnectorsPager ...
+// GetConnectorsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetConnectorsPager struct {
 	aws.Pager
 }
@@ -322,6 +327,7 @@ const opGetReplicationJobs = "GetReplicationJobs"
 type GetReplicationJobsRequest struct {
 	*aws.Request
 	Input *GetReplicationJobsInput
+	Copy  func(*GetReplicationJobsInput) GetReplicationJobsRequest
 }
 
 // Send marshals and sends the GetReplicationJobs API request.
@@ -370,47 +376,47 @@ func (c *SMS) GetReplicationJobsRequest(input *GetReplicationJobsInput) GetRepli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetReplicationJobsRequest{Request: req, Input: input}
+	return GetReplicationJobsRequest{Request: req, Input: input, Copy: c.GetReplicationJobsRequest}
 }
 
-// GetReplicationJobsPages iterates over the pages of a GetReplicationJobs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetReplicationJobs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetReplicationJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetReplicationJobs operation.
-//    pageNum := 0
-//    err := client.GetReplicationJobsPages(params,
-//        func(page *GetReplicationJobsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetReplicationJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetReplicationJobsRequest) Paginate(opts ...aws.Option) GetReplicationJobsPager {
 	return GetReplicationJobsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetReplicationJobsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetReplicationJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetReplicationJobsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetReplicationJobsPager ...
+// GetReplicationJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetReplicationJobsPager struct {
 	aws.Pager
 }
@@ -425,6 +431,7 @@ const opGetReplicationRuns = "GetReplicationRuns"
 type GetReplicationRunsRequest struct {
 	*aws.Request
 	Input *GetReplicationRunsInput
+	Copy  func(*GetReplicationRunsInput) GetReplicationRunsRequest
 }
 
 // Send marshals and sends the GetReplicationRuns API request.
@@ -473,47 +480,47 @@ func (c *SMS) GetReplicationRunsRequest(input *GetReplicationRunsInput) GetRepli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetReplicationRunsRequest{Request: req, Input: input}
+	return GetReplicationRunsRequest{Request: req, Input: input, Copy: c.GetReplicationRunsRequest}
 }
 
-// GetReplicationRunsPages iterates over the pages of a GetReplicationRuns operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetReplicationRuns method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetReplicationRunsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetReplicationRuns operation.
-//    pageNum := 0
-//    err := client.GetReplicationRunsPages(params,
-//        func(page *GetReplicationRunsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetReplicationRunsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetReplicationRunsRequest) Paginate(opts ...aws.Option) GetReplicationRunsPager {
 	return GetReplicationRunsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetReplicationRunsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetReplicationRunsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetReplicationRunsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetReplicationRunsPager ...
+// GetReplicationRunsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetReplicationRunsPager struct {
 	aws.Pager
 }
@@ -528,6 +535,7 @@ const opGetServers = "GetServers"
 type GetServersRequest struct {
 	*aws.Request
 	Input *GetServersInput
+	Copy  func(*GetServersInput) GetServersRequest
 }
 
 // Send marshals and sends the GetServers API request.
@@ -575,47 +583,47 @@ func (c *SMS) GetServersRequest(input *GetServersInput) GetServersRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetServersRequest{Request: req, Input: input}
+	return GetServersRequest{Request: req, Input: input, Copy: c.GetServersRequest}
 }
 
-// GetServersPages iterates over the pages of a GetServers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetServers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetServersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetServers operation.
-//    pageNum := 0
-//    err := client.GetServersPages(params,
-//        func(page *GetServersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetServersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *GetServersRequest) Paginate(opts ...aws.Option) GetServersPager {
 	return GetServersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetServersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetServersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output GetServersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// GetServersPager ...
+// GetServersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type GetServersPager struct {
 	aws.Pager
 }
@@ -630,6 +638,7 @@ const opImportServerCatalog = "ImportServerCatalog"
 type ImportServerCatalogRequest struct {
 	*aws.Request
 	Input *ImportServerCatalogInput
+	Copy  func(*ImportServerCatalogInput) ImportServerCatalogRequest
 }
 
 // Send marshals and sends the ImportServerCatalog API request.
@@ -673,7 +682,7 @@ func (c *SMS) ImportServerCatalogRequest(input *ImportServerCatalogInput) Import
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportServerCatalogRequest{Request: req, Input: input}
+	return ImportServerCatalogRequest{Request: req, Input: input, Copy: c.ImportServerCatalogRequest}
 }
 
 const opStartOnDemandReplicationRun = "StartOnDemandReplicationRun"
@@ -682,6 +691,7 @@ const opStartOnDemandReplicationRun = "StartOnDemandReplicationRun"
 type StartOnDemandReplicationRunRequest struct {
 	*aws.Request
 	Input *StartOnDemandReplicationRunInput
+	Copy  func(*StartOnDemandReplicationRunInput) StartOnDemandReplicationRunRequest
 }
 
 // Send marshals and sends the StartOnDemandReplicationRun API request.
@@ -726,7 +736,7 @@ func (c *SMS) StartOnDemandReplicationRunRequest(input *StartOnDemandReplication
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartOnDemandReplicationRunRequest{Request: req, Input: input}
+	return StartOnDemandReplicationRunRequest{Request: req, Input: input, Copy: c.StartOnDemandReplicationRunRequest}
 }
 
 const opUpdateReplicationJob = "UpdateReplicationJob"
@@ -735,6 +745,7 @@ const opUpdateReplicationJob = "UpdateReplicationJob"
 type UpdateReplicationJobRequest struct {
 	*aws.Request
 	Input *UpdateReplicationJobInput
+	Copy  func(*UpdateReplicationJobInput) UpdateReplicationJobRequest
 }
 
 // Send marshals and sends the UpdateReplicationJob API request.
@@ -777,7 +788,7 @@ func (c *SMS) UpdateReplicationJobRequest(input *UpdateReplicationJobInput) Upda
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateReplicationJobRequest{Request: req, Input: input}
+	return UpdateReplicationJobRequest{Request: req, Input: input, Copy: c.UpdateReplicationJobRequest}
 }
 
 // Object representing a Connector

@@ -18,6 +18,7 @@ const opDeleteRule = "DeleteRule"
 type DeleteRuleRequest struct {
 	*aws.Request
 	Input *DeleteRuleInput
+	Copy  func(*DeleteRuleInput) DeleteRuleRequest
 }
 
 // Send marshals and sends the DeleteRule API request.
@@ -66,7 +67,7 @@ func (c *CloudWatchEvents) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRuleRequest{Request: req, Input: input}
+	return DeleteRuleRequest{Request: req, Input: input, Copy: c.DeleteRuleRequest}
 }
 
 const opDescribeEventBus = "DescribeEventBus"
@@ -75,6 +76,7 @@ const opDescribeEventBus = "DescribeEventBus"
 type DescribeEventBusRequest struct {
 	*aws.Request
 	Input *DescribeEventBusInput
+	Copy  func(*DescribeEventBusInput) DescribeEventBusRequest
 }
 
 // Send marshals and sends the DescribeEventBus API request.
@@ -117,7 +119,7 @@ func (c *CloudWatchEvents) DescribeEventBusRequest(input *DescribeEventBusInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventBusRequest{Request: req, Input: input}
+	return DescribeEventBusRequest{Request: req, Input: input, Copy: c.DescribeEventBusRequest}
 }
 
 const opDescribeRule = "DescribeRule"
@@ -126,6 +128,7 @@ const opDescribeRule = "DescribeRule"
 type DescribeRuleRequest struct {
 	*aws.Request
 	Input *DescribeRuleInput
+	Copy  func(*DescribeRuleInput) DescribeRuleRequest
 }
 
 // Send marshals and sends the DescribeRule API request.
@@ -166,7 +169,7 @@ func (c *CloudWatchEvents) DescribeRuleRequest(input *DescribeRuleInput) Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRuleRequest{Request: req, Input: input}
+	return DescribeRuleRequest{Request: req, Input: input, Copy: c.DescribeRuleRequest}
 }
 
 const opDisableRule = "DisableRule"
@@ -175,6 +178,7 @@ const opDisableRule = "DisableRule"
 type DisableRuleRequest struct {
 	*aws.Request
 	Input *DisableRuleInput
+	Copy  func(*DisableRuleInput) DisableRuleRequest
 }
 
 // Send marshals and sends the DisableRule API request.
@@ -221,7 +225,7 @@ func (c *CloudWatchEvents) DisableRuleRequest(input *DisableRuleInput) DisableRu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableRuleRequest{Request: req, Input: input}
+	return DisableRuleRequest{Request: req, Input: input, Copy: c.DisableRuleRequest}
 }
 
 const opEnableRule = "EnableRule"
@@ -230,6 +234,7 @@ const opEnableRule = "EnableRule"
 type EnableRuleRequest struct {
 	*aws.Request
 	Input *EnableRuleInput
+	Copy  func(*EnableRuleInput) EnableRuleRequest
 }
 
 // Send marshals and sends the EnableRule API request.
@@ -276,7 +281,7 @@ func (c *CloudWatchEvents) EnableRuleRequest(input *EnableRuleInput) EnableRuleR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableRuleRequest{Request: req, Input: input}
+	return EnableRuleRequest{Request: req, Input: input, Copy: c.EnableRuleRequest}
 }
 
 const opListRuleNamesByTarget = "ListRuleNamesByTarget"
@@ -285,6 +290,7 @@ const opListRuleNamesByTarget = "ListRuleNamesByTarget"
 type ListRuleNamesByTargetRequest struct {
 	*aws.Request
 	Input *ListRuleNamesByTargetInput
+	Copy  func(*ListRuleNamesByTargetInput) ListRuleNamesByTargetRequest
 }
 
 // Send marshals and sends the ListRuleNamesByTarget API request.
@@ -326,7 +332,7 @@ func (c *CloudWatchEvents) ListRuleNamesByTargetRequest(input *ListRuleNamesByTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRuleNamesByTargetRequest{Request: req, Input: input}
+	return ListRuleNamesByTargetRequest{Request: req, Input: input, Copy: c.ListRuleNamesByTargetRequest}
 }
 
 const opListRules = "ListRules"
@@ -335,6 +341,7 @@ const opListRules = "ListRules"
 type ListRulesRequest struct {
 	*aws.Request
 	Input *ListRulesInput
+	Copy  func(*ListRulesInput) ListRulesRequest
 }
 
 // Send marshals and sends the ListRules API request.
@@ -376,7 +383,7 @@ func (c *CloudWatchEvents) ListRulesRequest(input *ListRulesInput) ListRulesRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRulesRequest{Request: req, Input: input}
+	return ListRulesRequest{Request: req, Input: input, Copy: c.ListRulesRequest}
 }
 
 const opListTargetsByRule = "ListTargetsByRule"
@@ -385,6 +392,7 @@ const opListTargetsByRule = "ListTargetsByRule"
 type ListTargetsByRuleRequest struct {
 	*aws.Request
 	Input *ListTargetsByRuleInput
+	Copy  func(*ListTargetsByRuleInput) ListTargetsByRuleRequest
 }
 
 // Send marshals and sends the ListTargetsByRule API request.
@@ -425,7 +433,7 @@ func (c *CloudWatchEvents) ListTargetsByRuleRequest(input *ListTargetsByRuleInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTargetsByRuleRequest{Request: req, Input: input}
+	return ListTargetsByRuleRequest{Request: req, Input: input, Copy: c.ListTargetsByRuleRequest}
 }
 
 const opPutEvents = "PutEvents"
@@ -434,6 +442,7 @@ const opPutEvents = "PutEvents"
 type PutEventsRequest struct {
 	*aws.Request
 	Input *PutEventsInput
+	Copy  func(*PutEventsInput) PutEventsRequest
 }
 
 // Send marshals and sends the PutEvents API request.
@@ -475,7 +484,7 @@ func (c *CloudWatchEvents) PutEventsRequest(input *PutEventsInput) PutEventsRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutEventsRequest{Request: req, Input: input}
+	return PutEventsRequest{Request: req, Input: input, Copy: c.PutEventsRequest}
 }
 
 const opPutPermission = "PutPermission"
@@ -484,6 +493,7 @@ const opPutPermission = "PutPermission"
 type PutPermissionRequest struct {
 	*aws.Request
 	Input *PutPermissionInput
+	Copy  func(*PutPermissionInput) PutPermissionRequest
 }
 
 // Send marshals and sends the PutPermission API request.
@@ -537,7 +547,7 @@ func (c *CloudWatchEvents) PutPermissionRequest(input *PutPermissionInput) PutPe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutPermissionRequest{Request: req, Input: input}
+	return PutPermissionRequest{Request: req, Input: input, Copy: c.PutPermissionRequest}
 }
 
 const opPutRule = "PutRule"
@@ -546,6 +556,7 @@ const opPutRule = "PutRule"
 type PutRuleRequest struct {
 	*aws.Request
 	Input *PutRuleInput
+	Copy  func(*PutRuleInput) PutRuleRequest
 }
 
 // Send marshals and sends the PutRule API request.
@@ -602,7 +613,7 @@ func (c *CloudWatchEvents) PutRuleRequest(input *PutRuleInput) PutRuleRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutRuleRequest{Request: req, Input: input}
+	return PutRuleRequest{Request: req, Input: input, Copy: c.PutRuleRequest}
 }
 
 const opPutTargets = "PutTargets"
@@ -611,6 +622,7 @@ const opPutTargets = "PutTargets"
 type PutTargetsRequest struct {
 	*aws.Request
 	Input *PutTargetsInput
+	Copy  func(*PutTargetsInput) PutTargetsRequest
 }
 
 // Send marshals and sends the PutTargets API request.
@@ -738,7 +750,7 @@ func (c *CloudWatchEvents) PutTargetsRequest(input *PutTargetsInput) PutTargetsR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutTargetsRequest{Request: req, Input: input}
+	return PutTargetsRequest{Request: req, Input: input, Copy: c.PutTargetsRequest}
 }
 
 const opRemovePermission = "RemovePermission"
@@ -747,6 +759,7 @@ const opRemovePermission = "RemovePermission"
 type RemovePermissionRequest struct {
 	*aws.Request
 	Input *RemovePermissionInput
+	Copy  func(*RemovePermissionInput) RemovePermissionRequest
 }
 
 // Send marshals and sends the RemovePermission API request.
@@ -792,7 +805,7 @@ func (c *CloudWatchEvents) RemovePermissionRequest(input *RemovePermissionInput)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemovePermissionRequest{Request: req, Input: input}
+	return RemovePermissionRequest{Request: req, Input: input, Copy: c.RemovePermissionRequest}
 }
 
 const opRemoveTargets = "RemoveTargets"
@@ -801,6 +814,7 @@ const opRemoveTargets = "RemoveTargets"
 type RemoveTargetsRequest struct {
 	*aws.Request
 	Input *RemoveTargetsInput
+	Copy  func(*RemoveTargetsInput) RemoveTargetsRequest
 }
 
 // Send marshals and sends the RemoveTargets API request.
@@ -851,7 +865,7 @@ func (c *CloudWatchEvents) RemoveTargetsRequest(input *RemoveTargetsInput) Remov
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTargetsRequest{Request: req, Input: input}
+	return RemoveTargetsRequest{Request: req, Input: input, Copy: c.RemoveTargetsRequest}
 }
 
 const opTestEventPattern = "TestEventPattern"
@@ -860,6 +874,7 @@ const opTestEventPattern = "TestEventPattern"
 type TestEventPatternRequest struct {
 	*aws.Request
 	Input *TestEventPatternInput
+	Copy  func(*TestEventPatternInput) TestEventPatternRequest
 }
 
 // Send marshals and sends the TestEventPattern API request.
@@ -905,7 +920,7 @@ func (c *CloudWatchEvents) TestEventPatternRequest(input *TestEventPatternInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestEventPatternRequest{Request: req, Input: input}
+	return TestEventPatternRequest{Request: req, Input: input, Copy: c.TestEventPatternRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRuleRequest

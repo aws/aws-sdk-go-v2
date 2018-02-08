@@ -17,6 +17,7 @@ const opAddPermission = "AddPermission"
 type AddPermissionRequest struct {
 	*aws.Request
 	Input *AddPermissionInput
+	Copy  func(*AddPermissionInput) AddPermissionRequest
 }
 
 // Send marshals and sends the AddPermission API request.
@@ -60,7 +61,7 @@ func (c *SNS) AddPermissionRequest(input *AddPermissionInput) AddPermissionReque
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddPermissionRequest{Request: req, Input: input}
+	return AddPermissionRequest{Request: req, Input: input, Copy: c.AddPermissionRequest}
 }
 
 const opCheckIfPhoneNumberIsOptedOut = "CheckIfPhoneNumberIsOptedOut"
@@ -69,6 +70,7 @@ const opCheckIfPhoneNumberIsOptedOut = "CheckIfPhoneNumberIsOptedOut"
 type CheckIfPhoneNumberIsOptedOutRequest struct {
 	*aws.Request
 	Input *CheckIfPhoneNumberIsOptedOutInput
+	Copy  func(*CheckIfPhoneNumberIsOptedOutInput) CheckIfPhoneNumberIsOptedOutRequest
 }
 
 // Send marshals and sends the CheckIfPhoneNumberIsOptedOut API request.
@@ -114,7 +116,7 @@ func (c *SNS) CheckIfPhoneNumberIsOptedOutRequest(input *CheckIfPhoneNumberIsOpt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CheckIfPhoneNumberIsOptedOutRequest{Request: req, Input: input}
+	return CheckIfPhoneNumberIsOptedOutRequest{Request: req, Input: input, Copy: c.CheckIfPhoneNumberIsOptedOutRequest}
 }
 
 const opConfirmSubscription = "ConfirmSubscription"
@@ -123,6 +125,7 @@ const opConfirmSubscription = "ConfirmSubscription"
 type ConfirmSubscriptionRequest struct {
 	*aws.Request
 	Input *ConfirmSubscriptionInput
+	Copy  func(*ConfirmSubscriptionInput) ConfirmSubscriptionRequest
 }
 
 // Send marshals and sends the ConfirmSubscription API request.
@@ -167,7 +170,7 @@ func (c *SNS) ConfirmSubscriptionRequest(input *ConfirmSubscriptionInput) Confir
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ConfirmSubscriptionRequest{Request: req, Input: input}
+	return ConfirmSubscriptionRequest{Request: req, Input: input, Copy: c.ConfirmSubscriptionRequest}
 }
 
 const opCreatePlatformApplication = "CreatePlatformApplication"
@@ -176,6 +179,7 @@ const opCreatePlatformApplication = "CreatePlatformApplication"
 type CreatePlatformApplicationRequest struct {
 	*aws.Request
 	Input *CreatePlatformApplicationInput
+	Copy  func(*CreatePlatformApplicationInput) CreatePlatformApplicationRequest
 }
 
 // Send marshals and sends the CreatePlatformApplication API request.
@@ -241,7 +245,7 @@ func (c *SNS) CreatePlatformApplicationRequest(input *CreatePlatformApplicationI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePlatformApplicationRequest{Request: req, Input: input}
+	return CreatePlatformApplicationRequest{Request: req, Input: input, Copy: c.CreatePlatformApplicationRequest}
 }
 
 const opCreatePlatformEndpoint = "CreatePlatformEndpoint"
@@ -250,6 +254,7 @@ const opCreatePlatformEndpoint = "CreatePlatformEndpoint"
 type CreatePlatformEndpointRequest struct {
 	*aws.Request
 	Input *CreatePlatformEndpointInput
+	Copy  func(*CreatePlatformEndpointInput) CreatePlatformEndpointRequest
 }
 
 // Send marshals and sends the CreatePlatformEndpoint API request.
@@ -303,7 +308,7 @@ func (c *SNS) CreatePlatformEndpointRequest(input *CreatePlatformEndpointInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePlatformEndpointRequest{Request: req, Input: input}
+	return CreatePlatformEndpointRequest{Request: req, Input: input, Copy: c.CreatePlatformEndpointRequest}
 }
 
 const opCreateTopic = "CreateTopic"
@@ -312,6 +317,7 @@ const opCreateTopic = "CreateTopic"
 type CreateTopicRequest struct {
 	*aws.Request
 	Input *CreateTopicInput
+	Copy  func(*CreateTopicInput) CreateTopicRequest
 }
 
 // Send marshals and sends the CreateTopic API request.
@@ -356,7 +362,7 @@ func (c *SNS) CreateTopicRequest(input *CreateTopicInput) CreateTopicRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTopicRequest{Request: req, Input: input}
+	return CreateTopicRequest{Request: req, Input: input, Copy: c.CreateTopicRequest}
 }
 
 const opDeleteEndpoint = "DeleteEndpoint"
@@ -365,6 +371,7 @@ const opDeleteEndpoint = "DeleteEndpoint"
 type DeleteEndpointRequest struct {
 	*aws.Request
 	Input *DeleteEndpointInput
+	Copy  func(*DeleteEndpointInput) DeleteEndpointRequest
 }
 
 // Send marshals and sends the DeleteEndpoint API request.
@@ -412,7 +419,7 @@ func (c *SNS) DeleteEndpointRequest(input *DeleteEndpointInput) DeleteEndpointRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEndpointRequest{Request: req, Input: input}
+	return DeleteEndpointRequest{Request: req, Input: input, Copy: c.DeleteEndpointRequest}
 }
 
 const opDeletePlatformApplication = "DeletePlatformApplication"
@@ -421,6 +428,7 @@ const opDeletePlatformApplication = "DeletePlatformApplication"
 type DeletePlatformApplicationRequest struct {
 	*aws.Request
 	Input *DeletePlatformApplicationInput
+	Copy  func(*DeletePlatformApplicationInput) DeletePlatformApplicationRequest
 }
 
 // Send marshals and sends the DeletePlatformApplication API request.
@@ -465,7 +473,7 @@ func (c *SNS) DeletePlatformApplicationRequest(input *DeletePlatformApplicationI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePlatformApplicationRequest{Request: req, Input: input}
+	return DeletePlatformApplicationRequest{Request: req, Input: input, Copy: c.DeletePlatformApplicationRequest}
 }
 
 const opDeleteTopic = "DeleteTopic"
@@ -474,6 +482,7 @@ const opDeleteTopic = "DeleteTopic"
 type DeleteTopicRequest struct {
 	*aws.Request
 	Input *DeleteTopicInput
+	Copy  func(*DeleteTopicInput) DeleteTopicRequest
 }
 
 // Send marshals and sends the DeleteTopic API request.
@@ -519,7 +528,7 @@ func (c *SNS) DeleteTopicRequest(input *DeleteTopicInput) DeleteTopicRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTopicRequest{Request: req, Input: input}
+	return DeleteTopicRequest{Request: req, Input: input, Copy: c.DeleteTopicRequest}
 }
 
 const opGetEndpointAttributes = "GetEndpointAttributes"
@@ -528,6 +537,7 @@ const opGetEndpointAttributes = "GetEndpointAttributes"
 type GetEndpointAttributesRequest struct {
 	*aws.Request
 	Input *GetEndpointAttributesInput
+	Copy  func(*GetEndpointAttributesInput) GetEndpointAttributesRequest
 }
 
 // Send marshals and sends the GetEndpointAttributes API request.
@@ -570,7 +580,7 @@ func (c *SNS) GetEndpointAttributesRequest(input *GetEndpointAttributesInput) Ge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetEndpointAttributesRequest{Request: req, Input: input}
+	return GetEndpointAttributesRequest{Request: req, Input: input, Copy: c.GetEndpointAttributesRequest}
 }
 
 const opGetPlatformApplicationAttributes = "GetPlatformApplicationAttributes"
@@ -579,6 +589,7 @@ const opGetPlatformApplicationAttributes = "GetPlatformApplicationAttributes"
 type GetPlatformApplicationAttributesRequest struct {
 	*aws.Request
 	Input *GetPlatformApplicationAttributesInput
+	Copy  func(*GetPlatformApplicationAttributesInput) GetPlatformApplicationAttributesRequest
 }
 
 // Send marshals and sends the GetPlatformApplicationAttributes API request.
@@ -621,7 +632,7 @@ func (c *SNS) GetPlatformApplicationAttributesRequest(input *GetPlatformApplicat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPlatformApplicationAttributesRequest{Request: req, Input: input}
+	return GetPlatformApplicationAttributesRequest{Request: req, Input: input, Copy: c.GetPlatformApplicationAttributesRequest}
 }
 
 const opGetSMSAttributes = "GetSMSAttributes"
@@ -630,6 +641,7 @@ const opGetSMSAttributes = "GetSMSAttributes"
 type GetSMSAttributesRequest struct {
 	*aws.Request
 	Input *GetSMSAttributesInput
+	Copy  func(*GetSMSAttributesInput) GetSMSAttributesRequest
 }
 
 // Send marshals and sends the GetSMSAttributes API request.
@@ -672,7 +684,7 @@ func (c *SNS) GetSMSAttributesRequest(input *GetSMSAttributesInput) GetSMSAttrib
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSMSAttributesRequest{Request: req, Input: input}
+	return GetSMSAttributesRequest{Request: req, Input: input, Copy: c.GetSMSAttributesRequest}
 }
 
 const opGetSubscriptionAttributes = "GetSubscriptionAttributes"
@@ -681,6 +693,7 @@ const opGetSubscriptionAttributes = "GetSubscriptionAttributes"
 type GetSubscriptionAttributesRequest struct {
 	*aws.Request
 	Input *GetSubscriptionAttributesInput
+	Copy  func(*GetSubscriptionAttributesInput) GetSubscriptionAttributesRequest
 }
 
 // Send marshals and sends the GetSubscriptionAttributes API request.
@@ -721,7 +734,7 @@ func (c *SNS) GetSubscriptionAttributesRequest(input *GetSubscriptionAttributesI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSubscriptionAttributesRequest{Request: req, Input: input}
+	return GetSubscriptionAttributesRequest{Request: req, Input: input, Copy: c.GetSubscriptionAttributesRequest}
 }
 
 const opGetTopicAttributes = "GetTopicAttributes"
@@ -730,6 +743,7 @@ const opGetTopicAttributes = "GetTopicAttributes"
 type GetTopicAttributesRequest struct {
 	*aws.Request
 	Input *GetTopicAttributesInput
+	Copy  func(*GetTopicAttributesInput) GetTopicAttributesRequest
 }
 
 // Send marshals and sends the GetTopicAttributes API request.
@@ -771,7 +785,7 @@ func (c *SNS) GetTopicAttributesRequest(input *GetTopicAttributesInput) GetTopic
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTopicAttributesRequest{Request: req, Input: input}
+	return GetTopicAttributesRequest{Request: req, Input: input, Copy: c.GetTopicAttributesRequest}
 }
 
 const opListEndpointsByPlatformApplication = "ListEndpointsByPlatformApplication"
@@ -780,6 +794,7 @@ const opListEndpointsByPlatformApplication = "ListEndpointsByPlatformApplication
 type ListEndpointsByPlatformApplicationRequest struct {
 	*aws.Request
 	Input *ListEndpointsByPlatformApplicationInput
+	Copy  func(*ListEndpointsByPlatformApplicationInput) ListEndpointsByPlatformApplicationRequest
 }
 
 // Send marshals and sends the ListEndpointsByPlatformApplication API request.
@@ -833,47 +848,47 @@ func (c *SNS) ListEndpointsByPlatformApplicationRequest(input *ListEndpointsByPl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListEndpointsByPlatformApplicationRequest{Request: req, Input: input}
+	return ListEndpointsByPlatformApplicationRequest{Request: req, Input: input, Copy: c.ListEndpointsByPlatformApplicationRequest}
 }
 
-// ListEndpointsByPlatformApplicationPages iterates over the pages of a ListEndpointsByPlatformApplication operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListEndpointsByPlatformApplication method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListEndpointsByPlatformApplicationRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListEndpointsByPlatformApplication operation.
-//    pageNum := 0
-//    err := client.ListEndpointsByPlatformApplicationPages(params,
-//        func(page *ListEndpointsByPlatformApplicationOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListEndpointsByPlatformApplicationRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListEndpointsByPlatformApplicationRequest) Paginate(opts ...aws.Option) ListEndpointsByPlatformApplicationPager {
 	return ListEndpointsByPlatformApplicationPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListEndpointsByPlatformApplicationInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListEndpointsByPlatformApplicationInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListEndpointsByPlatformApplicationOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListEndpointsByPlatformApplicationPager ...
+// ListEndpointsByPlatformApplicationPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListEndpointsByPlatformApplicationPager struct {
 	aws.Pager
 }
@@ -888,6 +903,7 @@ const opListPhoneNumbersOptedOut = "ListPhoneNumbersOptedOut"
 type ListPhoneNumbersOptedOutRequest struct {
 	*aws.Request
 	Input *ListPhoneNumbersOptedOutInput
+	Copy  func(*ListPhoneNumbersOptedOutInput) ListPhoneNumbersOptedOutRequest
 }
 
 // Send marshals and sends the ListPhoneNumbersOptedOut API request.
@@ -936,7 +952,7 @@ func (c *SNS) ListPhoneNumbersOptedOutRequest(input *ListPhoneNumbersOptedOutInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPhoneNumbersOptedOutRequest{Request: req, Input: input}
+	return ListPhoneNumbersOptedOutRequest{Request: req, Input: input, Copy: c.ListPhoneNumbersOptedOutRequest}
 }
 
 const opListPlatformApplications = "ListPlatformApplications"
@@ -945,6 +961,7 @@ const opListPlatformApplications = "ListPlatformApplications"
 type ListPlatformApplicationsRequest struct {
 	*aws.Request
 	Input *ListPlatformApplicationsInput
+	Copy  func(*ListPlatformApplicationsInput) ListPlatformApplicationsRequest
 }
 
 // Send marshals and sends the ListPlatformApplications API request.
@@ -998,47 +1015,47 @@ func (c *SNS) ListPlatformApplicationsRequest(input *ListPlatformApplicationsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPlatformApplicationsRequest{Request: req, Input: input}
+	return ListPlatformApplicationsRequest{Request: req, Input: input, Copy: c.ListPlatformApplicationsRequest}
 }
 
-// ListPlatformApplicationsPages iterates over the pages of a ListPlatformApplications operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPlatformApplications method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPlatformApplicationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPlatformApplications operation.
-//    pageNum := 0
-//    err := client.ListPlatformApplicationsPages(params,
-//        func(page *ListPlatformApplicationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPlatformApplicationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListPlatformApplicationsRequest) Paginate(opts ...aws.Option) ListPlatformApplicationsPager {
 	return ListPlatformApplicationsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPlatformApplicationsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPlatformApplicationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListPlatformApplicationsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListPlatformApplicationsPager ...
+// ListPlatformApplicationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListPlatformApplicationsPager struct {
 	aws.Pager
 }
@@ -1053,6 +1070,7 @@ const opListSubscriptions = "ListSubscriptions"
 type ListSubscriptionsRequest struct {
 	*aws.Request
 	Input *ListSubscriptionsInput
+	Copy  func(*ListSubscriptionsInput) ListSubscriptionsRequest
 }
 
 // Send marshals and sends the ListSubscriptions API request.
@@ -1102,47 +1120,47 @@ func (c *SNS) ListSubscriptionsRequest(input *ListSubscriptionsInput) ListSubscr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSubscriptionsRequest{Request: req, Input: input}
+	return ListSubscriptionsRequest{Request: req, Input: input, Copy: c.ListSubscriptionsRequest}
 }
 
-// ListSubscriptionsPages iterates over the pages of a ListSubscriptions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListSubscriptions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListSubscriptionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListSubscriptions operation.
-//    pageNum := 0
-//    err := client.ListSubscriptionsPages(params,
-//        func(page *ListSubscriptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListSubscriptionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListSubscriptionsRequest) Paginate(opts ...aws.Option) ListSubscriptionsPager {
 	return ListSubscriptionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListSubscriptionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSubscriptionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListSubscriptionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListSubscriptionsPager ...
+// ListSubscriptionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListSubscriptionsPager struct {
 	aws.Pager
 }
@@ -1157,6 +1175,7 @@ const opListSubscriptionsByTopic = "ListSubscriptionsByTopic"
 type ListSubscriptionsByTopicRequest struct {
 	*aws.Request
 	Input *ListSubscriptionsByTopicInput
+	Copy  func(*ListSubscriptionsByTopicInput) ListSubscriptionsByTopicRequest
 }
 
 // Send marshals and sends the ListSubscriptionsByTopic API request.
@@ -1206,47 +1225,47 @@ func (c *SNS) ListSubscriptionsByTopicRequest(input *ListSubscriptionsByTopicInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSubscriptionsByTopicRequest{Request: req, Input: input}
+	return ListSubscriptionsByTopicRequest{Request: req, Input: input, Copy: c.ListSubscriptionsByTopicRequest}
 }
 
-// ListSubscriptionsByTopicPages iterates over the pages of a ListSubscriptionsByTopic operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListSubscriptionsByTopic method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListSubscriptionsByTopicRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListSubscriptionsByTopic operation.
-//    pageNum := 0
-//    err := client.ListSubscriptionsByTopicPages(params,
-//        func(page *ListSubscriptionsByTopicOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListSubscriptionsByTopicRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListSubscriptionsByTopicRequest) Paginate(opts ...aws.Option) ListSubscriptionsByTopicPager {
 	return ListSubscriptionsByTopicPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListSubscriptionsByTopicInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSubscriptionsByTopicInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListSubscriptionsByTopicOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListSubscriptionsByTopicPager ...
+// ListSubscriptionsByTopicPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListSubscriptionsByTopicPager struct {
 	aws.Pager
 }
@@ -1261,6 +1280,7 @@ const opListTopics = "ListTopics"
 type ListTopicsRequest struct {
 	*aws.Request
 	Input *ListTopicsInput
+	Copy  func(*ListTopicsInput) ListTopicsRequest
 }
 
 // Send marshals and sends the ListTopics API request.
@@ -1309,47 +1329,47 @@ func (c *SNS) ListTopicsRequest(input *ListTopicsInput) ListTopicsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTopicsRequest{Request: req, Input: input}
+	return ListTopicsRequest{Request: req, Input: input, Copy: c.ListTopicsRequest}
 }
 
-// ListTopicsPages iterates over the pages of a ListTopics operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTopics method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTopicsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTopics operation.
-//    pageNum := 0
-//    err := client.ListTopicsPages(params,
-//        func(page *ListTopicsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTopicsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListTopicsRequest) Paginate(opts ...aws.Option) ListTopicsPager {
 	return ListTopicsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTopicsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTopicsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListTopicsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListTopicsPager ...
+// ListTopicsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListTopicsPager struct {
 	aws.Pager
 }
@@ -1364,6 +1384,7 @@ const opOptInPhoneNumber = "OptInPhoneNumber"
 type OptInPhoneNumberRequest struct {
 	*aws.Request
 	Input *OptInPhoneNumberInput
+	Copy  func(*OptInPhoneNumberInput) OptInPhoneNumberRequest
 }
 
 // Send marshals and sends the OptInPhoneNumber API request.
@@ -1407,7 +1428,7 @@ func (c *SNS) OptInPhoneNumberRequest(input *OptInPhoneNumberInput) OptInPhoneNu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return OptInPhoneNumberRequest{Request: req, Input: input}
+	return OptInPhoneNumberRequest{Request: req, Input: input, Copy: c.OptInPhoneNumberRequest}
 }
 
 const opPublish = "Publish"
@@ -1416,6 +1437,7 @@ const opPublish = "Publish"
 type PublishRequest struct {
 	*aws.Request
 	Input *PublishInput
+	Copy  func(*PublishInput) PublishRequest
 }
 
 // Send marshals and sends the Publish API request.
@@ -1467,7 +1489,7 @@ func (c *SNS) PublishRequest(input *PublishInput) PublishRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PublishRequest{Request: req, Input: input}
+	return PublishRequest{Request: req, Input: input, Copy: c.PublishRequest}
 }
 
 const opRemovePermission = "RemovePermission"
@@ -1476,6 +1498,7 @@ const opRemovePermission = "RemovePermission"
 type RemovePermissionRequest struct {
 	*aws.Request
 	Input *RemovePermissionInput
+	Copy  func(*RemovePermissionInput) RemovePermissionRequest
 }
 
 // Send marshals and sends the RemovePermission API request.
@@ -1518,7 +1541,7 @@ func (c *SNS) RemovePermissionRequest(input *RemovePermissionInput) RemovePermis
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemovePermissionRequest{Request: req, Input: input}
+	return RemovePermissionRequest{Request: req, Input: input, Copy: c.RemovePermissionRequest}
 }
 
 const opSetEndpointAttributes = "SetEndpointAttributes"
@@ -1527,6 +1550,7 @@ const opSetEndpointAttributes = "SetEndpointAttributes"
 type SetEndpointAttributesRequest struct {
 	*aws.Request
 	Input *SetEndpointAttributesInput
+	Copy  func(*SetEndpointAttributesInput) SetEndpointAttributesRequest
 }
 
 // Send marshals and sends the SetEndpointAttributes API request.
@@ -1571,7 +1595,7 @@ func (c *SNS) SetEndpointAttributesRequest(input *SetEndpointAttributesInput) Se
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetEndpointAttributesRequest{Request: req, Input: input}
+	return SetEndpointAttributesRequest{Request: req, Input: input, Copy: c.SetEndpointAttributesRequest}
 }
 
 const opSetPlatformApplicationAttributes = "SetPlatformApplicationAttributes"
@@ -1580,6 +1604,7 @@ const opSetPlatformApplicationAttributes = "SetPlatformApplicationAttributes"
 type SetPlatformApplicationAttributesRequest struct {
 	*aws.Request
 	Input *SetPlatformApplicationAttributesInput
+	Copy  func(*SetPlatformApplicationAttributesInput) SetPlatformApplicationAttributesRequest
 }
 
 // Send marshals and sends the SetPlatformApplicationAttributes API request.
@@ -1626,7 +1651,7 @@ func (c *SNS) SetPlatformApplicationAttributesRequest(input *SetPlatformApplicat
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetPlatformApplicationAttributesRequest{Request: req, Input: input}
+	return SetPlatformApplicationAttributesRequest{Request: req, Input: input, Copy: c.SetPlatformApplicationAttributesRequest}
 }
 
 const opSetSMSAttributes = "SetSMSAttributes"
@@ -1635,6 +1660,7 @@ const opSetSMSAttributes = "SetSMSAttributes"
 type SetSMSAttributesRequest struct {
 	*aws.Request
 	Input *SetSMSAttributesInput
+	Copy  func(*SetSMSAttributesInput) SetSMSAttributesRequest
 }
 
 // Send marshals and sends the SetSMSAttributes API request.
@@ -1681,7 +1707,7 @@ func (c *SNS) SetSMSAttributesRequest(input *SetSMSAttributesInput) SetSMSAttrib
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetSMSAttributesRequest{Request: req, Input: input}
+	return SetSMSAttributesRequest{Request: req, Input: input, Copy: c.SetSMSAttributesRequest}
 }
 
 const opSetSubscriptionAttributes = "SetSubscriptionAttributes"
@@ -1690,6 +1716,7 @@ const opSetSubscriptionAttributes = "SetSubscriptionAttributes"
 type SetSubscriptionAttributesRequest struct {
 	*aws.Request
 	Input *SetSubscriptionAttributesInput
+	Copy  func(*SetSubscriptionAttributesInput) SetSubscriptionAttributesRequest
 }
 
 // Send marshals and sends the SetSubscriptionAttributes API request.
@@ -1732,7 +1759,7 @@ func (c *SNS) SetSubscriptionAttributesRequest(input *SetSubscriptionAttributesI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetSubscriptionAttributesRequest{Request: req, Input: input}
+	return SetSubscriptionAttributesRequest{Request: req, Input: input, Copy: c.SetSubscriptionAttributesRequest}
 }
 
 const opSetTopicAttributes = "SetTopicAttributes"
@@ -1741,6 +1768,7 @@ const opSetTopicAttributes = "SetTopicAttributes"
 type SetTopicAttributesRequest struct {
 	*aws.Request
 	Input *SetTopicAttributesInput
+	Copy  func(*SetTopicAttributesInput) SetTopicAttributesRequest
 }
 
 // Send marshals and sends the SetTopicAttributes API request.
@@ -1783,7 +1811,7 @@ func (c *SNS) SetTopicAttributesRequest(input *SetTopicAttributesInput) SetTopic
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetTopicAttributesRequest{Request: req, Input: input}
+	return SetTopicAttributesRequest{Request: req, Input: input, Copy: c.SetTopicAttributesRequest}
 }
 
 const opSubscribe = "Subscribe"
@@ -1792,6 +1820,7 @@ const opSubscribe = "Subscribe"
 type SubscribeRequest struct {
 	*aws.Request
 	Input *SubscribeInput
+	Copy  func(*SubscribeInput) SubscribeRequest
 }
 
 // Send marshals and sends the Subscribe API request.
@@ -1835,7 +1864,7 @@ func (c *SNS) SubscribeRequest(input *SubscribeInput) SubscribeRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SubscribeRequest{Request: req, Input: input}
+	return SubscribeRequest{Request: req, Input: input, Copy: c.SubscribeRequest}
 }
 
 const opUnsubscribe = "Unsubscribe"
@@ -1844,6 +1873,7 @@ const opUnsubscribe = "Unsubscribe"
 type UnsubscribeRequest struct {
 	*aws.Request
 	Input *UnsubscribeInput
+	Copy  func(*UnsubscribeInput) UnsubscribeRequest
 }
 
 // Send marshals and sends the Unsubscribe API request.
@@ -1891,7 +1921,7 @@ func (c *SNS) UnsubscribeRequest(input *UnsubscribeInput) UnsubscribeRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UnsubscribeRequest{Request: req, Input: input}
+	return UnsubscribeRequest{Request: req, Input: input, Copy: c.UnsubscribeRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sns-2010-03-31/AddPermissionInput

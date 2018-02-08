@@ -18,6 +18,7 @@ const opAcceptReservedInstancesExchangeQuote = "AcceptReservedInstancesExchangeQ
 type AcceptReservedInstancesExchangeQuoteRequest struct {
 	*aws.Request
 	Input *AcceptReservedInstancesExchangeQuoteInput
+	Copy  func(*AcceptReservedInstancesExchangeQuoteInput) AcceptReservedInstancesExchangeQuoteRequest
 }
 
 // Send marshals and sends the AcceptReservedInstancesExchangeQuote API request.
@@ -59,7 +60,7 @@ func (c *EC2) AcceptReservedInstancesExchangeQuoteRequest(input *AcceptReservedI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcceptReservedInstancesExchangeQuoteRequest{Request: req, Input: input}
+	return AcceptReservedInstancesExchangeQuoteRequest{Request: req, Input: input, Copy: c.AcceptReservedInstancesExchangeQuoteRequest}
 }
 
 const opAcceptVpcEndpointConnections = "AcceptVpcEndpointConnections"
@@ -68,6 +69,7 @@ const opAcceptVpcEndpointConnections = "AcceptVpcEndpointConnections"
 type AcceptVpcEndpointConnectionsRequest struct {
 	*aws.Request
 	Input *AcceptVpcEndpointConnectionsInput
+	Copy  func(*AcceptVpcEndpointConnectionsInput) AcceptVpcEndpointConnectionsRequest
 }
 
 // Send marshals and sends the AcceptVpcEndpointConnections API request.
@@ -109,7 +111,7 @@ func (c *EC2) AcceptVpcEndpointConnectionsRequest(input *AcceptVpcEndpointConnec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcceptVpcEndpointConnectionsRequest{Request: req, Input: input}
+	return AcceptVpcEndpointConnectionsRequest{Request: req, Input: input, Copy: c.AcceptVpcEndpointConnectionsRequest}
 }
 
 const opAcceptVpcPeeringConnection = "AcceptVpcPeeringConnection"
@@ -118,6 +120,7 @@ const opAcceptVpcPeeringConnection = "AcceptVpcPeeringConnection"
 type AcceptVpcPeeringConnectionRequest struct {
 	*aws.Request
 	Input *AcceptVpcPeeringConnectionInput
+	Copy  func(*AcceptVpcPeeringConnectionInput) AcceptVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the AcceptVpcPeeringConnection API request.
@@ -164,7 +167,7 @@ func (c *EC2) AcceptVpcPeeringConnectionRequest(input *AcceptVpcPeeringConnectio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcceptVpcPeeringConnectionRequest{Request: req, Input: input}
+	return AcceptVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.AcceptVpcPeeringConnectionRequest}
 }
 
 const opAllocateAddress = "AllocateAddress"
@@ -173,6 +176,7 @@ const opAllocateAddress = "AllocateAddress"
 type AllocateAddressRequest struct {
 	*aws.Request
 	Input *AllocateAddressInput
+	Copy  func(*AllocateAddressInput) AllocateAddressRequest
 }
 
 // Send marshals and sends the AllocateAddress API request.
@@ -225,7 +229,7 @@ func (c *EC2) AllocateAddressRequest(input *AllocateAddressInput) AllocateAddres
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AllocateAddressRequest{Request: req, Input: input}
+	return AllocateAddressRequest{Request: req, Input: input, Copy: c.AllocateAddressRequest}
 }
 
 const opAllocateHosts = "AllocateHosts"
@@ -234,6 +238,7 @@ const opAllocateHosts = "AllocateHosts"
 type AllocateHostsRequest struct {
 	*aws.Request
 	Input *AllocateHostsInput
+	Copy  func(*AllocateHostsInput) AllocateHostsRequest
 }
 
 // Send marshals and sends the AllocateHosts API request.
@@ -276,7 +281,7 @@ func (c *EC2) AllocateHostsRequest(input *AllocateHostsInput) AllocateHostsReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AllocateHostsRequest{Request: req, Input: input}
+	return AllocateHostsRequest{Request: req, Input: input, Copy: c.AllocateHostsRequest}
 }
 
 const opAssignIpv6Addresses = "AssignIpv6Addresses"
@@ -285,6 +290,7 @@ const opAssignIpv6Addresses = "AssignIpv6Addresses"
 type AssignIpv6AddressesRequest struct {
 	*aws.Request
 	Input *AssignIpv6AddressesInput
+	Copy  func(*AssignIpv6AddressesInput) AssignIpv6AddressesRequest
 }
 
 // Send marshals and sends the AssignIpv6Addresses API request.
@@ -332,7 +338,7 @@ func (c *EC2) AssignIpv6AddressesRequest(input *AssignIpv6AddressesInput) Assign
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssignIpv6AddressesRequest{Request: req, Input: input}
+	return AssignIpv6AddressesRequest{Request: req, Input: input, Copy: c.AssignIpv6AddressesRequest}
 }
 
 const opAssignPrivateIpAddresses = "AssignPrivateIpAddresses"
@@ -341,6 +347,7 @@ const opAssignPrivateIpAddresses = "AssignPrivateIpAddresses"
 type AssignPrivateIpAddressesRequest struct {
 	*aws.Request
 	Input *AssignPrivateIpAddressesInput
+	Copy  func(*AssignPrivateIpAddressesInput) AssignPrivateIpAddressesRequest
 }
 
 // Send marshals and sends the AssignPrivateIpAddresses API request.
@@ -393,7 +400,7 @@ func (c *EC2) AssignPrivateIpAddressesRequest(input *AssignPrivateIpAddressesInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssignPrivateIpAddressesRequest{Request: req, Input: input}
+	return AssignPrivateIpAddressesRequest{Request: req, Input: input, Copy: c.AssignPrivateIpAddressesRequest}
 }
 
 const opAssociateAddress = "AssociateAddress"
@@ -402,6 +409,7 @@ const opAssociateAddress = "AssociateAddress"
 type AssociateAddressRequest struct {
 	*aws.Request
 	Input *AssociateAddressInput
+	Copy  func(*AssociateAddressInput) AssociateAddressRequest
 }
 
 // Send marshals and sends the AssociateAddress API request.
@@ -465,7 +473,7 @@ func (c *EC2) AssociateAddressRequest(input *AssociateAddressInput) AssociateAdd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateAddressRequest{Request: req, Input: input}
+	return AssociateAddressRequest{Request: req, Input: input, Copy: c.AssociateAddressRequest}
 }
 
 const opAssociateDhcpOptions = "AssociateDhcpOptions"
@@ -474,6 +482,7 @@ const opAssociateDhcpOptions = "AssociateDhcpOptions"
 type AssociateDhcpOptionsRequest struct {
 	*aws.Request
 	Input *AssociateDhcpOptionsInput
+	Copy  func(*AssociateDhcpOptionsInput) AssociateDhcpOptionsRequest
 }
 
 // Send marshals and sends the AssociateDhcpOptions API request.
@@ -527,7 +536,7 @@ func (c *EC2) AssociateDhcpOptionsRequest(input *AssociateDhcpOptionsInput) Asso
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateDhcpOptionsRequest{Request: req, Input: input}
+	return AssociateDhcpOptionsRequest{Request: req, Input: input, Copy: c.AssociateDhcpOptionsRequest}
 }
 
 const opAssociateIamInstanceProfile = "AssociateIamInstanceProfile"
@@ -536,6 +545,7 @@ const opAssociateIamInstanceProfile = "AssociateIamInstanceProfile"
 type AssociateIamInstanceProfileRequest struct {
 	*aws.Request
 	Input *AssociateIamInstanceProfileInput
+	Copy  func(*AssociateIamInstanceProfileInput) AssociateIamInstanceProfileRequest
 }
 
 // Send marshals and sends the AssociateIamInstanceProfile API request.
@@ -577,7 +587,7 @@ func (c *EC2) AssociateIamInstanceProfileRequest(input *AssociateIamInstanceProf
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateIamInstanceProfileRequest{Request: req, Input: input}
+	return AssociateIamInstanceProfileRequest{Request: req, Input: input, Copy: c.AssociateIamInstanceProfileRequest}
 }
 
 const opAssociateRouteTable = "AssociateRouteTable"
@@ -586,6 +596,7 @@ const opAssociateRouteTable = "AssociateRouteTable"
 type AssociateRouteTableRequest struct {
 	*aws.Request
 	Input *AssociateRouteTableInput
+	Copy  func(*AssociateRouteTableInput) AssociateRouteTableRequest
 }
 
 // Send marshals and sends the AssociateRouteTable API request.
@@ -633,7 +644,7 @@ func (c *EC2) AssociateRouteTableRequest(input *AssociateRouteTableInput) Associ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateRouteTableRequest{Request: req, Input: input}
+	return AssociateRouteTableRequest{Request: req, Input: input, Copy: c.AssociateRouteTableRequest}
 }
 
 const opAssociateSubnetCidrBlock = "AssociateSubnetCidrBlock"
@@ -642,6 +653,7 @@ const opAssociateSubnetCidrBlock = "AssociateSubnetCidrBlock"
 type AssociateSubnetCidrBlockRequest struct {
 	*aws.Request
 	Input *AssociateSubnetCidrBlockInput
+	Copy  func(*AssociateSubnetCidrBlockInput) AssociateSubnetCidrBlockRequest
 }
 
 // Send marshals and sends the AssociateSubnetCidrBlock API request.
@@ -684,7 +696,7 @@ func (c *EC2) AssociateSubnetCidrBlockRequest(input *AssociateSubnetCidrBlockInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateSubnetCidrBlockRequest{Request: req, Input: input}
+	return AssociateSubnetCidrBlockRequest{Request: req, Input: input, Copy: c.AssociateSubnetCidrBlockRequest}
 }
 
 const opAssociateVpcCidrBlock = "AssociateVpcCidrBlock"
@@ -693,6 +705,7 @@ const opAssociateVpcCidrBlock = "AssociateVpcCidrBlock"
 type AssociateVpcCidrBlockRequest struct {
 	*aws.Request
 	Input *AssociateVpcCidrBlockInput
+	Copy  func(*AssociateVpcCidrBlockInput) AssociateVpcCidrBlockRequest
 }
 
 // Send marshals and sends the AssociateVpcCidrBlock API request.
@@ -739,7 +752,7 @@ func (c *EC2) AssociateVpcCidrBlockRequest(input *AssociateVpcCidrBlockInput) As
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateVpcCidrBlockRequest{Request: req, Input: input}
+	return AssociateVpcCidrBlockRequest{Request: req, Input: input, Copy: c.AssociateVpcCidrBlockRequest}
 }
 
 const opAttachClassicLinkVpc = "AttachClassicLinkVpc"
@@ -748,6 +761,7 @@ const opAttachClassicLinkVpc = "AttachClassicLinkVpc"
 type AttachClassicLinkVpcRequest struct {
 	*aws.Request
 	Input *AttachClassicLinkVpcInput
+	Copy  func(*AttachClassicLinkVpcInput) AttachClassicLinkVpcRequest
 }
 
 // Send marshals and sends the AttachClassicLinkVpc API request.
@@ -799,7 +813,7 @@ func (c *EC2) AttachClassicLinkVpcRequest(input *AttachClassicLinkVpcInput) Atta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachClassicLinkVpcRequest{Request: req, Input: input}
+	return AttachClassicLinkVpcRequest{Request: req, Input: input, Copy: c.AttachClassicLinkVpcRequest}
 }
 
 const opAttachInternetGateway = "AttachInternetGateway"
@@ -808,6 +822,7 @@ const opAttachInternetGateway = "AttachInternetGateway"
 type AttachInternetGatewayRequest struct {
 	*aws.Request
 	Input *AttachInternetGatewayInput
+	Copy  func(*AttachInternetGatewayInput) AttachInternetGatewayRequest
 }
 
 // Send marshals and sends the AttachInternetGateway API request.
@@ -852,7 +867,7 @@ func (c *EC2) AttachInternetGatewayRequest(input *AttachInternetGatewayInput) At
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachInternetGatewayRequest{Request: req, Input: input}
+	return AttachInternetGatewayRequest{Request: req, Input: input, Copy: c.AttachInternetGatewayRequest}
 }
 
 const opAttachNetworkInterface = "AttachNetworkInterface"
@@ -861,6 +876,7 @@ const opAttachNetworkInterface = "AttachNetworkInterface"
 type AttachNetworkInterfaceRequest struct {
 	*aws.Request
 	Input *AttachNetworkInterfaceInput
+	Copy  func(*AttachNetworkInterfaceInput) AttachNetworkInterfaceRequest
 }
 
 // Send marshals and sends the AttachNetworkInterface API request.
@@ -901,7 +917,7 @@ func (c *EC2) AttachNetworkInterfaceRequest(input *AttachNetworkInterfaceInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachNetworkInterfaceRequest{Request: req, Input: input}
+	return AttachNetworkInterfaceRequest{Request: req, Input: input, Copy: c.AttachNetworkInterfaceRequest}
 }
 
 const opAttachVolume = "AttachVolume"
@@ -910,6 +926,7 @@ const opAttachVolume = "AttachVolume"
 type AttachVolumeRequest struct {
 	*aws.Request
 	Input *AttachVolumeInput
+	Copy  func(*AttachVolumeInput) AttachVolumeRequest
 }
 
 // Send marshals and sends the AttachVolume API request.
@@ -979,7 +996,7 @@ func (c *EC2) AttachVolumeRequest(input *AttachVolumeInput) AttachVolumeRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachVolumeRequest{Request: req, Input: input}
+	return AttachVolumeRequest{Request: req, Input: input, Copy: c.AttachVolumeRequest}
 }
 
 const opAttachVpnGateway = "AttachVpnGateway"
@@ -988,6 +1005,7 @@ const opAttachVpnGateway = "AttachVpnGateway"
 type AttachVpnGatewayRequest struct {
 	*aws.Request
 	Input *AttachVpnGatewayInput
+	Copy  func(*AttachVpnGatewayInput) AttachVpnGatewayRequest
 }
 
 // Send marshals and sends the AttachVpnGateway API request.
@@ -1032,7 +1050,7 @@ func (c *EC2) AttachVpnGatewayRequest(input *AttachVpnGatewayInput) AttachVpnGat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachVpnGatewayRequest{Request: req, Input: input}
+	return AttachVpnGatewayRequest{Request: req, Input: input, Copy: c.AttachVpnGatewayRequest}
 }
 
 const opAuthorizeSecurityGroupEgress = "AuthorizeSecurityGroupEgress"
@@ -1041,6 +1059,7 @@ const opAuthorizeSecurityGroupEgress = "AuthorizeSecurityGroupEgress"
 type AuthorizeSecurityGroupEgressRequest struct {
 	*aws.Request
 	Input *AuthorizeSecurityGroupEgressInput
+	Copy  func(*AuthorizeSecurityGroupEgressInput) AuthorizeSecurityGroupEgressRequest
 }
 
 // Send marshals and sends the AuthorizeSecurityGroupEgress API request.
@@ -1100,7 +1119,7 @@ func (c *EC2) AuthorizeSecurityGroupEgressRequest(input *AuthorizeSecurityGroupE
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AuthorizeSecurityGroupEgressRequest{Request: req, Input: input}
+	return AuthorizeSecurityGroupEgressRequest{Request: req, Input: input, Copy: c.AuthorizeSecurityGroupEgressRequest}
 }
 
 const opAuthorizeSecurityGroupIngress = "AuthorizeSecurityGroupIngress"
@@ -1109,6 +1128,7 @@ const opAuthorizeSecurityGroupIngress = "AuthorizeSecurityGroupIngress"
 type AuthorizeSecurityGroupIngressRequest struct {
 	*aws.Request
 	Input *AuthorizeSecurityGroupIngressInput
+	Copy  func(*AuthorizeSecurityGroupIngressInput) AuthorizeSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the AuthorizeSecurityGroupIngress API request.
@@ -1169,7 +1189,7 @@ func (c *EC2) AuthorizeSecurityGroupIngressRequest(input *AuthorizeSecurityGroup
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AuthorizeSecurityGroupIngressRequest{Request: req, Input: input}
+	return AuthorizeSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeSecurityGroupIngressRequest}
 }
 
 const opBundleInstance = "BundleInstance"
@@ -1178,6 +1198,7 @@ const opBundleInstance = "BundleInstance"
 type BundleInstanceRequest struct {
 	*aws.Request
 	Input *BundleInstanceInput
+	Copy  func(*BundleInstanceInput) BundleInstanceRequest
 }
 
 // Send marshals and sends the BundleInstance API request.
@@ -1226,7 +1247,7 @@ func (c *EC2) BundleInstanceRequest(input *BundleInstanceInput) BundleInstanceRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BundleInstanceRequest{Request: req, Input: input}
+	return BundleInstanceRequest{Request: req, Input: input, Copy: c.BundleInstanceRequest}
 }
 
 const opCancelBundleTask = "CancelBundleTask"
@@ -1235,6 +1256,7 @@ const opCancelBundleTask = "CancelBundleTask"
 type CancelBundleTaskRequest struct {
 	*aws.Request
 	Input *CancelBundleTaskInput
+	Copy  func(*CancelBundleTaskInput) CancelBundleTaskRequest
 }
 
 // Send marshals and sends the CancelBundleTask API request.
@@ -1275,7 +1297,7 @@ func (c *EC2) CancelBundleTaskRequest(input *CancelBundleTaskInput) CancelBundle
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelBundleTaskRequest{Request: req, Input: input}
+	return CancelBundleTaskRequest{Request: req, Input: input, Copy: c.CancelBundleTaskRequest}
 }
 
 const opCancelConversionTask = "CancelConversionTask"
@@ -1284,6 +1306,7 @@ const opCancelConversionTask = "CancelConversionTask"
 type CancelConversionTaskRequest struct {
 	*aws.Request
 	Input *CancelConversionTaskInput
+	Copy  func(*CancelConversionTaskInput) CancelConversionTaskRequest
 }
 
 // Send marshals and sends the CancelConversionTask API request.
@@ -1333,7 +1356,7 @@ func (c *EC2) CancelConversionTaskRequest(input *CancelConversionTaskInput) Canc
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelConversionTaskRequest{Request: req, Input: input}
+	return CancelConversionTaskRequest{Request: req, Input: input, Copy: c.CancelConversionTaskRequest}
 }
 
 const opCancelExportTask = "CancelExportTask"
@@ -1342,6 +1365,7 @@ const opCancelExportTask = "CancelExportTask"
 type CancelExportTaskRequest struct {
 	*aws.Request
 	Input *CancelExportTaskInput
+	Copy  func(*CancelExportTaskInput) CancelExportTaskRequest
 }
 
 // Send marshals and sends the CancelExportTask API request.
@@ -1387,7 +1411,7 @@ func (c *EC2) CancelExportTaskRequest(input *CancelExportTaskInput) CancelExport
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelExportTaskRequest{Request: req, Input: input}
+	return CancelExportTaskRequest{Request: req, Input: input, Copy: c.CancelExportTaskRequest}
 }
 
 const opCancelImportTask = "CancelImportTask"
@@ -1396,6 +1420,7 @@ const opCancelImportTask = "CancelImportTask"
 type CancelImportTaskRequest struct {
 	*aws.Request
 	Input *CancelImportTaskInput
+	Copy  func(*CancelImportTaskInput) CancelImportTaskRequest
 }
 
 // Send marshals and sends the CancelImportTask API request.
@@ -1436,7 +1461,7 @@ func (c *EC2) CancelImportTaskRequest(input *CancelImportTaskInput) CancelImport
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelImportTaskRequest{Request: req, Input: input}
+	return CancelImportTaskRequest{Request: req, Input: input, Copy: c.CancelImportTaskRequest}
 }
 
 const opCancelReservedInstancesListing = "CancelReservedInstancesListing"
@@ -1445,6 +1470,7 @@ const opCancelReservedInstancesListing = "CancelReservedInstancesListing"
 type CancelReservedInstancesListingRequest struct {
 	*aws.Request
 	Input *CancelReservedInstancesListingInput
+	Copy  func(*CancelReservedInstancesListingInput) CancelReservedInstancesListingRequest
 }
 
 // Send marshals and sends the CancelReservedInstancesListing API request.
@@ -1489,7 +1515,7 @@ func (c *EC2) CancelReservedInstancesListingRequest(input *CancelReservedInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelReservedInstancesListingRequest{Request: req, Input: input}
+	return CancelReservedInstancesListingRequest{Request: req, Input: input, Copy: c.CancelReservedInstancesListingRequest}
 }
 
 const opCancelSpotFleetRequests = "CancelSpotFleetRequests"
@@ -1498,6 +1524,7 @@ const opCancelSpotFleetRequests = "CancelSpotFleetRequests"
 type CancelSpotFleetRequestsRequest struct {
 	*aws.Request
 	Input *CancelSpotFleetRequestsInput
+	Copy  func(*CancelSpotFleetRequestsInput) CancelSpotFleetRequestsRequest
 }
 
 // Send marshals and sends the CancelSpotFleetRequests API request.
@@ -1545,7 +1572,7 @@ func (c *EC2) CancelSpotFleetRequestsRequest(input *CancelSpotFleetRequestsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelSpotFleetRequestsRequest{Request: req, Input: input}
+	return CancelSpotFleetRequestsRequest{Request: req, Input: input, Copy: c.CancelSpotFleetRequestsRequest}
 }
 
 const opCancelSpotInstanceRequests = "CancelSpotInstanceRequests"
@@ -1554,6 +1581,7 @@ const opCancelSpotInstanceRequests = "CancelSpotInstanceRequests"
 type CancelSpotInstanceRequestsRequest struct {
 	*aws.Request
 	Input *CancelSpotInstanceRequestsInput
+	Copy  func(*CancelSpotInstanceRequestsInput) CancelSpotInstanceRequestsRequest
 }
 
 // Send marshals and sends the CancelSpotInstanceRequests API request.
@@ -1601,7 +1629,7 @@ func (c *EC2) CancelSpotInstanceRequestsRequest(input *CancelSpotInstanceRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelSpotInstanceRequestsRequest{Request: req, Input: input}
+	return CancelSpotInstanceRequestsRequest{Request: req, Input: input, Copy: c.CancelSpotInstanceRequestsRequest}
 }
 
 const opConfirmProductInstance = "ConfirmProductInstance"
@@ -1610,6 +1638,7 @@ const opConfirmProductInstance = "ConfirmProductInstance"
 type ConfirmProductInstanceRequest struct {
 	*aws.Request
 	Input *ConfirmProductInstanceInput
+	Copy  func(*ConfirmProductInstanceInput) ConfirmProductInstanceRequest
 }
 
 // Send marshals and sends the ConfirmProductInstance API request.
@@ -1652,7 +1681,7 @@ func (c *EC2) ConfirmProductInstanceRequest(input *ConfirmProductInstanceInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ConfirmProductInstanceRequest{Request: req, Input: input}
+	return ConfirmProductInstanceRequest{Request: req, Input: input, Copy: c.ConfirmProductInstanceRequest}
 }
 
 const opCopyFpgaImage = "CopyFpgaImage"
@@ -1661,6 +1690,7 @@ const opCopyFpgaImage = "CopyFpgaImage"
 type CopyFpgaImageRequest struct {
 	*aws.Request
 	Input *CopyFpgaImageInput
+	Copy  func(*CopyFpgaImageInput) CopyFpgaImageRequest
 }
 
 // Send marshals and sends the CopyFpgaImage API request.
@@ -1701,7 +1731,7 @@ func (c *EC2) CopyFpgaImageRequest(input *CopyFpgaImageInput) CopyFpgaImageReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopyFpgaImageRequest{Request: req, Input: input}
+	return CopyFpgaImageRequest{Request: req, Input: input, Copy: c.CopyFpgaImageRequest}
 }
 
 const opCopyImage = "CopyImage"
@@ -1710,6 +1740,7 @@ const opCopyImage = "CopyImage"
 type CopyImageRequest struct {
 	*aws.Request
 	Input *CopyImageInput
+	Copy  func(*CopyImageInput) CopyImageRequest
 }
 
 // Send marshals and sends the CopyImage API request.
@@ -1756,7 +1787,7 @@ func (c *EC2) CopyImageRequest(input *CopyImageInput) CopyImageRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopyImageRequest{Request: req, Input: input}
+	return CopyImageRequest{Request: req, Input: input, Copy: c.CopyImageRequest}
 }
 
 const opCopySnapshot = "CopySnapshot"
@@ -1765,6 +1796,7 @@ const opCopySnapshot = "CopySnapshot"
 type CopySnapshotRequest struct {
 	*aws.Request
 	Input *CopySnapshotInput
+	Copy  func(*CopySnapshotInput) CopySnapshotRequest
 }
 
 // Send marshals and sends the CopySnapshot API request.
@@ -1824,7 +1856,7 @@ func (c *EC2) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshotRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopySnapshotRequest{Request: req, Input: input}
+	return CopySnapshotRequest{Request: req, Input: input, Copy: c.CopySnapshotRequest}
 }
 
 const opCreateCustomerGateway = "CreateCustomerGateway"
@@ -1833,6 +1865,7 @@ const opCreateCustomerGateway = "CreateCustomerGateway"
 type CreateCustomerGatewayRequest struct {
 	*aws.Request
 	Input *CreateCustomerGatewayInput
+	Copy  func(*CreateCustomerGatewayInput) CreateCustomerGatewayRequest
 }
 
 // Send marshals and sends the CreateCustomerGateway API request.
@@ -1897,7 +1930,7 @@ func (c *EC2) CreateCustomerGatewayRequest(input *CreateCustomerGatewayInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCustomerGatewayRequest{Request: req, Input: input}
+	return CreateCustomerGatewayRequest{Request: req, Input: input, Copy: c.CreateCustomerGatewayRequest}
 }
 
 const opCreateDefaultSubnet = "CreateDefaultSubnet"
@@ -1906,6 +1939,7 @@ const opCreateDefaultSubnet = "CreateDefaultSubnet"
 type CreateDefaultSubnetRequest struct {
 	*aws.Request
 	Input *CreateDefaultSubnetInput
+	Copy  func(*CreateDefaultSubnetInput) CreateDefaultSubnetRequest
 }
 
 // Send marshals and sends the CreateDefaultSubnet API request.
@@ -1950,7 +1984,7 @@ func (c *EC2) CreateDefaultSubnetRequest(input *CreateDefaultSubnetInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDefaultSubnetRequest{Request: req, Input: input}
+	return CreateDefaultSubnetRequest{Request: req, Input: input, Copy: c.CreateDefaultSubnetRequest}
 }
 
 const opCreateDefaultVpc = "CreateDefaultVpc"
@@ -1959,6 +1993,7 @@ const opCreateDefaultVpc = "CreateDefaultVpc"
 type CreateDefaultVpcRequest struct {
 	*aws.Request
 	Input *CreateDefaultVpcInput
+	Copy  func(*CreateDefaultVpcInput) CreateDefaultVpcRequest
 }
 
 // Send marshals and sends the CreateDefaultVpc API request.
@@ -2011,7 +2046,7 @@ func (c *EC2) CreateDefaultVpcRequest(input *CreateDefaultVpcInput) CreateDefaul
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDefaultVpcRequest{Request: req, Input: input}
+	return CreateDefaultVpcRequest{Request: req, Input: input, Copy: c.CreateDefaultVpcRequest}
 }
 
 const opCreateDhcpOptions = "CreateDhcpOptions"
@@ -2020,6 +2055,7 @@ const opCreateDhcpOptions = "CreateDhcpOptions"
 type CreateDhcpOptionsRequest struct {
 	*aws.Request
 	Input *CreateDhcpOptionsInput
+	Copy  func(*CreateDhcpOptionsInput) CreateDhcpOptionsRequest
 }
 
 // Send marshals and sends the CreateDhcpOptions API request.
@@ -2099,7 +2135,7 @@ func (c *EC2) CreateDhcpOptionsRequest(input *CreateDhcpOptionsInput) CreateDhcp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDhcpOptionsRequest{Request: req, Input: input}
+	return CreateDhcpOptionsRequest{Request: req, Input: input, Copy: c.CreateDhcpOptionsRequest}
 }
 
 const opCreateEgressOnlyInternetGateway = "CreateEgressOnlyInternetGateway"
@@ -2108,6 +2144,7 @@ const opCreateEgressOnlyInternetGateway = "CreateEgressOnlyInternetGateway"
 type CreateEgressOnlyInternetGatewayRequest struct {
 	*aws.Request
 	Input *CreateEgressOnlyInternetGatewayInput
+	Copy  func(*CreateEgressOnlyInternetGatewayInput) CreateEgressOnlyInternetGatewayRequest
 }
 
 // Send marshals and sends the CreateEgressOnlyInternetGateway API request.
@@ -2151,7 +2188,7 @@ func (c *EC2) CreateEgressOnlyInternetGatewayRequest(input *CreateEgressOnlyInte
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEgressOnlyInternetGatewayRequest{Request: req, Input: input}
+	return CreateEgressOnlyInternetGatewayRequest{Request: req, Input: input, Copy: c.CreateEgressOnlyInternetGatewayRequest}
 }
 
 const opCreateFlowLogs = "CreateFlowLogs"
@@ -2160,6 +2197,7 @@ const opCreateFlowLogs = "CreateFlowLogs"
 type CreateFlowLogsRequest struct {
 	*aws.Request
 	Input *CreateFlowLogsInput
+	Copy  func(*CreateFlowLogsInput) CreateFlowLogsRequest
 }
 
 // Send marshals and sends the CreateFlowLogs API request.
@@ -2209,7 +2247,7 @@ func (c *EC2) CreateFlowLogsRequest(input *CreateFlowLogsInput) CreateFlowLogsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateFlowLogsRequest{Request: req, Input: input}
+	return CreateFlowLogsRequest{Request: req, Input: input, Copy: c.CreateFlowLogsRequest}
 }
 
 const opCreateFpgaImage = "CreateFpgaImage"
@@ -2218,6 +2256,7 @@ const opCreateFpgaImage = "CreateFpgaImage"
 type CreateFpgaImageRequest struct {
 	*aws.Request
 	Input *CreateFpgaImageInput
+	Copy  func(*CreateFpgaImageInput) CreateFpgaImageRequest
 }
 
 // Send marshals and sends the CreateFpgaImage API request.
@@ -2265,7 +2304,7 @@ func (c *EC2) CreateFpgaImageRequest(input *CreateFpgaImageInput) CreateFpgaImag
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateFpgaImageRequest{Request: req, Input: input}
+	return CreateFpgaImageRequest{Request: req, Input: input, Copy: c.CreateFpgaImageRequest}
 }
 
 const opCreateImage = "CreateImage"
@@ -2274,6 +2313,7 @@ const opCreateImage = "CreateImage"
 type CreateImageRequest struct {
 	*aws.Request
 	Input *CreateImageInput
+	Copy  func(*CreateImageInput) CreateImageRequest
 }
 
 // Send marshals and sends the CreateImage API request.
@@ -2323,7 +2363,7 @@ func (c *EC2) CreateImageRequest(input *CreateImageInput) CreateImageRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateImageRequest{Request: req, Input: input}
+	return CreateImageRequest{Request: req, Input: input, Copy: c.CreateImageRequest}
 }
 
 const opCreateInstanceExportTask = "CreateInstanceExportTask"
@@ -2332,6 +2372,7 @@ const opCreateInstanceExportTask = "CreateInstanceExportTask"
 type CreateInstanceExportTaskRequest struct {
 	*aws.Request
 	Input *CreateInstanceExportTaskInput
+	Copy  func(*CreateInstanceExportTaskInput) CreateInstanceExportTaskRequest
 }
 
 // Send marshals and sends the CreateInstanceExportTask API request.
@@ -2377,7 +2418,7 @@ func (c *EC2) CreateInstanceExportTaskRequest(input *CreateInstanceExportTaskInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateInstanceExportTaskRequest{Request: req, Input: input}
+	return CreateInstanceExportTaskRequest{Request: req, Input: input, Copy: c.CreateInstanceExportTaskRequest}
 }
 
 const opCreateInternetGateway = "CreateInternetGateway"
@@ -2386,6 +2427,7 @@ const opCreateInternetGateway = "CreateInternetGateway"
 type CreateInternetGatewayRequest struct {
 	*aws.Request
 	Input *CreateInternetGatewayInput
+	Copy  func(*CreateInternetGatewayInput) CreateInternetGatewayRequest
 }
 
 // Send marshals and sends the CreateInternetGateway API request.
@@ -2430,7 +2472,7 @@ func (c *EC2) CreateInternetGatewayRequest(input *CreateInternetGatewayInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateInternetGatewayRequest{Request: req, Input: input}
+	return CreateInternetGatewayRequest{Request: req, Input: input, Copy: c.CreateInternetGatewayRequest}
 }
 
 const opCreateKeyPair = "CreateKeyPair"
@@ -2439,6 +2481,7 @@ const opCreateKeyPair = "CreateKeyPair"
 type CreateKeyPairRequest struct {
 	*aws.Request
 	Input *CreateKeyPairInput
+	Copy  func(*CreateKeyPairInput) CreateKeyPairRequest
 }
 
 // Send marshals and sends the CreateKeyPair API request.
@@ -2491,7 +2534,7 @@ func (c *EC2) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPairReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateKeyPairRequest{Request: req, Input: input}
+	return CreateKeyPairRequest{Request: req, Input: input, Copy: c.CreateKeyPairRequest}
 }
 
 const opCreateLaunchTemplate = "CreateLaunchTemplate"
@@ -2500,6 +2543,7 @@ const opCreateLaunchTemplate = "CreateLaunchTemplate"
 type CreateLaunchTemplateRequest struct {
 	*aws.Request
 	Input *CreateLaunchTemplateInput
+	Copy  func(*CreateLaunchTemplateInput) CreateLaunchTemplateRequest
 }
 
 // Send marshals and sends the CreateLaunchTemplate API request.
@@ -2542,7 +2586,7 @@ func (c *EC2) CreateLaunchTemplateRequest(input *CreateLaunchTemplateInput) Crea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLaunchTemplateRequest{Request: req, Input: input}
+	return CreateLaunchTemplateRequest{Request: req, Input: input, Copy: c.CreateLaunchTemplateRequest}
 }
 
 const opCreateLaunchTemplateVersion = "CreateLaunchTemplateVersion"
@@ -2551,6 +2595,7 @@ const opCreateLaunchTemplateVersion = "CreateLaunchTemplateVersion"
 type CreateLaunchTemplateVersionRequest struct {
 	*aws.Request
 	Input *CreateLaunchTemplateVersionInput
+	Copy  func(*CreateLaunchTemplateVersionInput) CreateLaunchTemplateVersionRequest
 }
 
 // Send marshals and sends the CreateLaunchTemplateVersion API request.
@@ -2595,7 +2640,7 @@ func (c *EC2) CreateLaunchTemplateVersionRequest(input *CreateLaunchTemplateVers
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLaunchTemplateVersionRequest{Request: req, Input: input}
+	return CreateLaunchTemplateVersionRequest{Request: req, Input: input, Copy: c.CreateLaunchTemplateVersionRequest}
 }
 
 const opCreateNatGateway = "CreateNatGateway"
@@ -2604,6 +2649,7 @@ const opCreateNatGateway = "CreateNatGateway"
 type CreateNatGatewayRequest struct {
 	*aws.Request
 	Input *CreateNatGatewayInput
+	Copy  func(*CreateNatGatewayInput) CreateNatGatewayRequest
 }
 
 // Send marshals and sends the CreateNatGateway API request.
@@ -2649,7 +2695,7 @@ func (c *EC2) CreateNatGatewayRequest(input *CreateNatGatewayInput) CreateNatGat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNatGatewayRequest{Request: req, Input: input}
+	return CreateNatGatewayRequest{Request: req, Input: input, Copy: c.CreateNatGatewayRequest}
 }
 
 const opCreateNetworkAcl = "CreateNetworkAcl"
@@ -2658,6 +2704,7 @@ const opCreateNetworkAcl = "CreateNetworkAcl"
 type CreateNetworkAclRequest struct {
 	*aws.Request
 	Input *CreateNetworkAclInput
+	Copy  func(*CreateNetworkAclInput) CreateNetworkAclRequest
 }
 
 // Send marshals and sends the CreateNetworkAcl API request.
@@ -2702,7 +2749,7 @@ func (c *EC2) CreateNetworkAclRequest(input *CreateNetworkAclInput) CreateNetwor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNetworkAclRequest{Request: req, Input: input}
+	return CreateNetworkAclRequest{Request: req, Input: input, Copy: c.CreateNetworkAclRequest}
 }
 
 const opCreateNetworkAclEntry = "CreateNetworkAclEntry"
@@ -2711,6 +2758,7 @@ const opCreateNetworkAclEntry = "CreateNetworkAclEntry"
 type CreateNetworkAclEntryRequest struct {
 	*aws.Request
 	Input *CreateNetworkAclEntryInput
+	Copy  func(*CreateNetworkAclEntryInput) CreateNetworkAclEntryRequest
 }
 
 // Send marshals and sends the CreateNetworkAclEntry API request.
@@ -2769,7 +2817,7 @@ func (c *EC2) CreateNetworkAclEntryRequest(input *CreateNetworkAclEntryInput) Cr
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNetworkAclEntryRequest{Request: req, Input: input}
+	return CreateNetworkAclEntryRequest{Request: req, Input: input, Copy: c.CreateNetworkAclEntryRequest}
 }
 
 const opCreateNetworkInterface = "CreateNetworkInterface"
@@ -2778,6 +2826,7 @@ const opCreateNetworkInterface = "CreateNetworkInterface"
 type CreateNetworkInterfaceRequest struct {
 	*aws.Request
 	Input *CreateNetworkInterfaceInput
+	Copy  func(*CreateNetworkInterfaceInput) CreateNetworkInterfaceRequest
 }
 
 // Send marshals and sends the CreateNetworkInterface API request.
@@ -2822,7 +2871,7 @@ func (c *EC2) CreateNetworkInterfaceRequest(input *CreateNetworkInterfaceInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNetworkInterfaceRequest{Request: req, Input: input}
+	return CreateNetworkInterfaceRequest{Request: req, Input: input, Copy: c.CreateNetworkInterfaceRequest}
 }
 
 const opCreateNetworkInterfacePermission = "CreateNetworkInterfacePermission"
@@ -2831,6 +2880,7 @@ const opCreateNetworkInterfacePermission = "CreateNetworkInterfacePermission"
 type CreateNetworkInterfacePermissionRequest struct {
 	*aws.Request
 	Input *CreateNetworkInterfacePermissionInput
+	Copy  func(*CreateNetworkInterfacePermissionInput) CreateNetworkInterfacePermissionRequest
 }
 
 // Send marshals and sends the CreateNetworkInterfacePermission API request.
@@ -2875,7 +2925,7 @@ func (c *EC2) CreateNetworkInterfacePermissionRequest(input *CreateNetworkInterf
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNetworkInterfacePermissionRequest{Request: req, Input: input}
+	return CreateNetworkInterfacePermissionRequest{Request: req, Input: input, Copy: c.CreateNetworkInterfacePermissionRequest}
 }
 
 const opCreatePlacementGroup = "CreatePlacementGroup"
@@ -2884,6 +2934,7 @@ const opCreatePlacementGroup = "CreatePlacementGroup"
 type CreatePlacementGroupRequest struct {
 	*aws.Request
 	Input *CreatePlacementGroupInput
+	Copy  func(*CreatePlacementGroupInput) CreatePlacementGroupRequest
 }
 
 // Send marshals and sends the CreatePlacementGroup API request.
@@ -2934,7 +2985,7 @@ func (c *EC2) CreatePlacementGroupRequest(input *CreatePlacementGroupInput) Crea
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePlacementGroupRequest{Request: req, Input: input}
+	return CreatePlacementGroupRequest{Request: req, Input: input, Copy: c.CreatePlacementGroupRequest}
 }
 
 const opCreateReservedInstancesListing = "CreateReservedInstancesListing"
@@ -2943,6 +2994,7 @@ const opCreateReservedInstancesListing = "CreateReservedInstancesListing"
 type CreateReservedInstancesListingRequest struct {
 	*aws.Request
 	Input *CreateReservedInstancesListingInput
+	Copy  func(*CreateReservedInstancesListingInput) CreateReservedInstancesListingRequest
 }
 
 // Send marshals and sends the CreateReservedInstancesListing API request.
@@ -3006,7 +3058,7 @@ func (c *EC2) CreateReservedInstancesListingRequest(input *CreateReservedInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateReservedInstancesListingRequest{Request: req, Input: input}
+	return CreateReservedInstancesListingRequest{Request: req, Input: input, Copy: c.CreateReservedInstancesListingRequest}
 }
 
 const opCreateRoute = "CreateRoute"
@@ -3015,6 +3067,7 @@ const opCreateRoute = "CreateRoute"
 type CreateRouteRequest struct {
 	*aws.Request
 	Input *CreateRouteInput
+	Copy  func(*CreateRouteInput) CreateRouteRequest
 }
 
 // Send marshals and sends the CreateRoute API request.
@@ -3074,7 +3127,7 @@ func (c *EC2) CreateRouteRequest(input *CreateRouteInput) CreateRouteRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRouteRequest{Request: req, Input: input}
+	return CreateRouteRequest{Request: req, Input: input, Copy: c.CreateRouteRequest}
 }
 
 const opCreateRouteTable = "CreateRouteTable"
@@ -3083,6 +3136,7 @@ const opCreateRouteTable = "CreateRouteTable"
 type CreateRouteTableRequest struct {
 	*aws.Request
 	Input *CreateRouteTableInput
+	Copy  func(*CreateRouteTableInput) CreateRouteTableRequest
 }
 
 // Send marshals and sends the CreateRouteTable API request.
@@ -3127,7 +3181,7 @@ func (c *EC2) CreateRouteTableRequest(input *CreateRouteTableInput) CreateRouteT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRouteTableRequest{Request: req, Input: input}
+	return CreateRouteTableRequest{Request: req, Input: input, Copy: c.CreateRouteTableRequest}
 }
 
 const opCreateSecurityGroup = "CreateSecurityGroup"
@@ -3136,6 +3190,7 @@ const opCreateSecurityGroup = "CreateSecurityGroup"
 type CreateSecurityGroupRequest struct {
 	*aws.Request
 	Input *CreateSecurityGroupInput
+	Copy  func(*CreateSecurityGroupInput) CreateSecurityGroupRequest
 }
 
 // Send marshals and sends the CreateSecurityGroup API request.
@@ -3202,7 +3257,7 @@ func (c *EC2) CreateSecurityGroupRequest(input *CreateSecurityGroupInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSecurityGroupRequest{Request: req, Input: input}
+	return CreateSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateSecurityGroupRequest}
 }
 
 const opCreateSnapshot = "CreateSnapshot"
@@ -3211,6 +3266,7 @@ const opCreateSnapshot = "CreateSnapshot"
 type CreateSnapshotRequest struct {
 	*aws.Request
 	Input *CreateSnapshotInput
+	Copy  func(*CreateSnapshotInput) CreateSnapshotRequest
 }
 
 // Send marshals and sends the CreateSnapshot API request.
@@ -3278,7 +3334,7 @@ func (c *EC2) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSnapshotRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSnapshotRequest{Request: req, Input: input}
+	return CreateSnapshotRequest{Request: req, Input: input, Copy: c.CreateSnapshotRequest}
 }
 
 const opCreateSpotDatafeedSubscription = "CreateSpotDatafeedSubscription"
@@ -3287,6 +3343,7 @@ const opCreateSpotDatafeedSubscription = "CreateSpotDatafeedSubscription"
 type CreateSpotDatafeedSubscriptionRequest struct {
 	*aws.Request
 	Input *CreateSpotDatafeedSubscriptionInput
+	Copy  func(*CreateSpotDatafeedSubscriptionInput) CreateSpotDatafeedSubscriptionRequest
 }
 
 // Send marshals and sends the CreateSpotDatafeedSubscription API request.
@@ -3330,7 +3387,7 @@ func (c *EC2) CreateSpotDatafeedSubscriptionRequest(input *CreateSpotDatafeedSub
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSpotDatafeedSubscriptionRequest{Request: req, Input: input}
+	return CreateSpotDatafeedSubscriptionRequest{Request: req, Input: input, Copy: c.CreateSpotDatafeedSubscriptionRequest}
 }
 
 const opCreateSubnet = "CreateSubnet"
@@ -3339,6 +3396,7 @@ const opCreateSubnet = "CreateSubnet"
 type CreateSubnetRequest struct {
 	*aws.Request
 	Input *CreateSubnetInput
+	Copy  func(*CreateSubnetInput) CreateSubnetRequest
 }
 
 // Send marshals and sends the CreateSubnet API request.
@@ -3405,7 +3463,7 @@ func (c *EC2) CreateSubnetRequest(input *CreateSubnetInput) CreateSubnetRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSubnetRequest{Request: req, Input: input}
+	return CreateSubnetRequest{Request: req, Input: input, Copy: c.CreateSubnetRequest}
 }
 
 const opCreateTags = "CreateTags"
@@ -3414,6 +3472,7 @@ const opCreateTags = "CreateTags"
 type CreateTagsRequest struct {
 	*aws.Request
 	Input *CreateTagsInput
+	Copy  func(*CreateTagsInput) CreateTagsRequest
 }
 
 // Send marshals and sends the CreateTags API request.
@@ -3464,7 +3523,7 @@ func (c *EC2) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTagsRequest{Request: req, Input: input}
+	return CreateTagsRequest{Request: req, Input: input, Copy: c.CreateTagsRequest}
 }
 
 const opCreateVolume = "CreateVolume"
@@ -3473,6 +3532,7 @@ const opCreateVolume = "CreateVolume"
 type CreateVolumeRequest struct {
 	*aws.Request
 	Input *CreateVolumeInput
+	Copy  func(*CreateVolumeInput) CreateVolumeRequest
 }
 
 // Send marshals and sends the CreateVolume API request.
@@ -3531,7 +3591,7 @@ func (c *EC2) CreateVolumeRequest(input *CreateVolumeInput) CreateVolumeRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVolumeRequest{Request: req, Input: input}
+	return CreateVolumeRequest{Request: req, Input: input, Copy: c.CreateVolumeRequest}
 }
 
 const opCreateVpc = "CreateVpc"
@@ -3540,6 +3600,7 @@ const opCreateVpc = "CreateVpc"
 type CreateVpcRequest struct {
 	*aws.Request
 	Input *CreateVpcInput
+	Copy  func(*CreateVpcInput) CreateVpcRequest
 }
 
 // Send marshals and sends the CreateVpc API request.
@@ -3598,7 +3659,7 @@ func (c *EC2) CreateVpcRequest(input *CreateVpcInput) CreateVpcRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpcRequest{Request: req, Input: input}
+	return CreateVpcRequest{Request: req, Input: input, Copy: c.CreateVpcRequest}
 }
 
 const opCreateVpcEndpoint = "CreateVpcEndpoint"
@@ -3607,6 +3668,7 @@ const opCreateVpcEndpoint = "CreateVpcEndpoint"
 type CreateVpcEndpointRequest struct {
 	*aws.Request
 	Input *CreateVpcEndpointInput
+	Copy  func(*CreateVpcEndpointInput) CreateVpcEndpointRequest
 }
 
 // Send marshals and sends the CreateVpcEndpoint API request.
@@ -3663,7 +3725,7 @@ func (c *EC2) CreateVpcEndpointRequest(input *CreateVpcEndpointInput) CreateVpcE
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpcEndpointRequest{Request: req, Input: input}
+	return CreateVpcEndpointRequest{Request: req, Input: input, Copy: c.CreateVpcEndpointRequest}
 }
 
 const opCreateVpcEndpointConnectionNotification = "CreateVpcEndpointConnectionNotification"
@@ -3672,6 +3734,7 @@ const opCreateVpcEndpointConnectionNotification = "CreateVpcEndpointConnectionNo
 type CreateVpcEndpointConnectionNotificationRequest struct {
 	*aws.Request
 	Input *CreateVpcEndpointConnectionNotificationInput
+	Copy  func(*CreateVpcEndpointConnectionNotificationInput) CreateVpcEndpointConnectionNotificationRequest
 }
 
 // Send marshals and sends the CreateVpcEndpointConnectionNotification API request.
@@ -3718,7 +3781,7 @@ func (c *EC2) CreateVpcEndpointConnectionNotificationRequest(input *CreateVpcEnd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpcEndpointConnectionNotificationRequest{Request: req, Input: input}
+	return CreateVpcEndpointConnectionNotificationRequest{Request: req, Input: input, Copy: c.CreateVpcEndpointConnectionNotificationRequest}
 }
 
 const opCreateVpcEndpointServiceConfiguration = "CreateVpcEndpointServiceConfiguration"
@@ -3727,6 +3790,7 @@ const opCreateVpcEndpointServiceConfiguration = "CreateVpcEndpointServiceConfigu
 type CreateVpcEndpointServiceConfigurationRequest struct {
 	*aws.Request
 	Input *CreateVpcEndpointServiceConfigurationInput
+	Copy  func(*CreateVpcEndpointServiceConfigurationInput) CreateVpcEndpointServiceConfigurationRequest
 }
 
 // Send marshals and sends the CreateVpcEndpointServiceConfiguration API request.
@@ -3774,7 +3838,7 @@ func (c *EC2) CreateVpcEndpointServiceConfigurationRequest(input *CreateVpcEndpo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpcEndpointServiceConfigurationRequest{Request: req, Input: input}
+	return CreateVpcEndpointServiceConfigurationRequest{Request: req, Input: input, Copy: c.CreateVpcEndpointServiceConfigurationRequest}
 }
 
 const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
@@ -3783,6 +3847,7 @@ const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
 type CreateVpcPeeringConnectionRequest struct {
 	*aws.Request
 	Input *CreateVpcPeeringConnectionInput
+	Copy  func(*CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the CreateVpcPeeringConnection API request.
@@ -3834,7 +3899,7 @@ func (c *EC2) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConnectio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpcPeeringConnectionRequest{Request: req, Input: input}
+	return CreateVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.CreateVpcPeeringConnectionRequest}
 }
 
 const opCreateVpnConnection = "CreateVpnConnection"
@@ -3843,6 +3908,7 @@ const opCreateVpnConnection = "CreateVpnConnection"
 type CreateVpnConnectionRequest struct {
 	*aws.Request
 	Input *CreateVpnConnectionInput
+	Copy  func(*CreateVpnConnectionInput) CreateVpnConnectionRequest
 }
 
 // Send marshals and sends the CreateVpnConnection API request.
@@ -3901,7 +3967,7 @@ func (c *EC2) CreateVpnConnectionRequest(input *CreateVpnConnectionInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpnConnectionRequest{Request: req, Input: input}
+	return CreateVpnConnectionRequest{Request: req, Input: input, Copy: c.CreateVpnConnectionRequest}
 }
 
 const opCreateVpnConnectionRoute = "CreateVpnConnectionRoute"
@@ -3910,6 +3976,7 @@ const opCreateVpnConnectionRoute = "CreateVpnConnectionRoute"
 type CreateVpnConnectionRouteRequest struct {
 	*aws.Request
 	Input *CreateVpnConnectionRouteInput
+	Copy  func(*CreateVpnConnectionRouteInput) CreateVpnConnectionRouteRequest
 }
 
 // Send marshals and sends the CreateVpnConnectionRoute API request.
@@ -3959,7 +4026,7 @@ func (c *EC2) CreateVpnConnectionRouteRequest(input *CreateVpnConnectionRouteInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpnConnectionRouteRequest{Request: req, Input: input}
+	return CreateVpnConnectionRouteRequest{Request: req, Input: input, Copy: c.CreateVpnConnectionRouteRequest}
 }
 
 const opCreateVpnGateway = "CreateVpnGateway"
@@ -3968,6 +4035,7 @@ const opCreateVpnGateway = "CreateVpnGateway"
 type CreateVpnGatewayRequest struct {
 	*aws.Request
 	Input *CreateVpnGatewayInput
+	Copy  func(*CreateVpnGatewayInput) CreateVpnGatewayRequest
 }
 
 // Send marshals and sends the CreateVpnGateway API request.
@@ -4014,7 +4082,7 @@ func (c *EC2) CreateVpnGatewayRequest(input *CreateVpnGatewayInput) CreateVpnGat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpnGatewayRequest{Request: req, Input: input}
+	return CreateVpnGatewayRequest{Request: req, Input: input, Copy: c.CreateVpnGatewayRequest}
 }
 
 const opDeleteCustomerGateway = "DeleteCustomerGateway"
@@ -4023,6 +4091,7 @@ const opDeleteCustomerGateway = "DeleteCustomerGateway"
 type DeleteCustomerGatewayRequest struct {
 	*aws.Request
 	Input *DeleteCustomerGatewayInput
+	Copy  func(*DeleteCustomerGatewayInput) DeleteCustomerGatewayRequest
 }
 
 // Send marshals and sends the DeleteCustomerGateway API request.
@@ -4066,7 +4135,7 @@ func (c *EC2) DeleteCustomerGatewayRequest(input *DeleteCustomerGatewayInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCustomerGatewayRequest{Request: req, Input: input}
+	return DeleteCustomerGatewayRequest{Request: req, Input: input, Copy: c.DeleteCustomerGatewayRequest}
 }
 
 const opDeleteDhcpOptions = "DeleteDhcpOptions"
@@ -4075,6 +4144,7 @@ const opDeleteDhcpOptions = "DeleteDhcpOptions"
 type DeleteDhcpOptionsRequest struct {
 	*aws.Request
 	Input *DeleteDhcpOptionsInput
+	Copy  func(*DeleteDhcpOptionsInput) DeleteDhcpOptionsRequest
 }
 
 // Send marshals and sends the DeleteDhcpOptions API request.
@@ -4120,7 +4190,7 @@ func (c *EC2) DeleteDhcpOptionsRequest(input *DeleteDhcpOptionsInput) DeleteDhcp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDhcpOptionsRequest{Request: req, Input: input}
+	return DeleteDhcpOptionsRequest{Request: req, Input: input, Copy: c.DeleteDhcpOptionsRequest}
 }
 
 const opDeleteEgressOnlyInternetGateway = "DeleteEgressOnlyInternetGateway"
@@ -4129,6 +4199,7 @@ const opDeleteEgressOnlyInternetGateway = "DeleteEgressOnlyInternetGateway"
 type DeleteEgressOnlyInternetGatewayRequest struct {
 	*aws.Request
 	Input *DeleteEgressOnlyInternetGatewayInput
+	Copy  func(*DeleteEgressOnlyInternetGatewayInput) DeleteEgressOnlyInternetGatewayRequest
 }
 
 // Send marshals and sends the DeleteEgressOnlyInternetGateway API request.
@@ -4169,7 +4240,7 @@ func (c *EC2) DeleteEgressOnlyInternetGatewayRequest(input *DeleteEgressOnlyInte
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEgressOnlyInternetGatewayRequest{Request: req, Input: input}
+	return DeleteEgressOnlyInternetGatewayRequest{Request: req, Input: input, Copy: c.DeleteEgressOnlyInternetGatewayRequest}
 }
 
 const opDeleteFlowLogs = "DeleteFlowLogs"
@@ -4178,6 +4249,7 @@ const opDeleteFlowLogs = "DeleteFlowLogs"
 type DeleteFlowLogsRequest struct {
 	*aws.Request
 	Input *DeleteFlowLogsInput
+	Copy  func(*DeleteFlowLogsInput) DeleteFlowLogsRequest
 }
 
 // Send marshals and sends the DeleteFlowLogs API request.
@@ -4218,7 +4290,7 @@ func (c *EC2) DeleteFlowLogsRequest(input *DeleteFlowLogsInput) DeleteFlowLogsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFlowLogsRequest{Request: req, Input: input}
+	return DeleteFlowLogsRequest{Request: req, Input: input, Copy: c.DeleteFlowLogsRequest}
 }
 
 const opDeleteFpgaImage = "DeleteFpgaImage"
@@ -4227,6 +4299,7 @@ const opDeleteFpgaImage = "DeleteFpgaImage"
 type DeleteFpgaImageRequest struct {
 	*aws.Request
 	Input *DeleteFpgaImageInput
+	Copy  func(*DeleteFpgaImageInput) DeleteFpgaImageRequest
 }
 
 // Send marshals and sends the DeleteFpgaImage API request.
@@ -4267,7 +4340,7 @@ func (c *EC2) DeleteFpgaImageRequest(input *DeleteFpgaImageInput) DeleteFpgaImag
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFpgaImageRequest{Request: req, Input: input}
+	return DeleteFpgaImageRequest{Request: req, Input: input, Copy: c.DeleteFpgaImageRequest}
 }
 
 const opDeleteInternetGateway = "DeleteInternetGateway"
@@ -4276,6 +4349,7 @@ const opDeleteInternetGateway = "DeleteInternetGateway"
 type DeleteInternetGatewayRequest struct {
 	*aws.Request
 	Input *DeleteInternetGatewayInput
+	Copy  func(*DeleteInternetGatewayInput) DeleteInternetGatewayRequest
 }
 
 // Send marshals and sends the DeleteInternetGateway API request.
@@ -4319,7 +4393,7 @@ func (c *EC2) DeleteInternetGatewayRequest(input *DeleteInternetGatewayInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteInternetGatewayRequest{Request: req, Input: input}
+	return DeleteInternetGatewayRequest{Request: req, Input: input, Copy: c.DeleteInternetGatewayRequest}
 }
 
 const opDeleteKeyPair = "DeleteKeyPair"
@@ -4328,6 +4402,7 @@ const opDeleteKeyPair = "DeleteKeyPair"
 type DeleteKeyPairRequest struct {
 	*aws.Request
 	Input *DeleteKeyPairInput
+	Copy  func(*DeleteKeyPairInput) DeleteKeyPairRequest
 }
 
 // Send marshals and sends the DeleteKeyPair API request.
@@ -4370,7 +4445,7 @@ func (c *EC2) DeleteKeyPairRequest(input *DeleteKeyPairInput) DeleteKeyPairReque
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteKeyPairRequest{Request: req, Input: input}
+	return DeleteKeyPairRequest{Request: req, Input: input, Copy: c.DeleteKeyPairRequest}
 }
 
 const opDeleteLaunchTemplate = "DeleteLaunchTemplate"
@@ -4379,6 +4454,7 @@ const opDeleteLaunchTemplate = "DeleteLaunchTemplate"
 type DeleteLaunchTemplateRequest struct {
 	*aws.Request
 	Input *DeleteLaunchTemplateInput
+	Copy  func(*DeleteLaunchTemplateInput) DeleteLaunchTemplateRequest
 }
 
 // Send marshals and sends the DeleteLaunchTemplate API request.
@@ -4420,7 +4496,7 @@ func (c *EC2) DeleteLaunchTemplateRequest(input *DeleteLaunchTemplateInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLaunchTemplateRequest{Request: req, Input: input}
+	return DeleteLaunchTemplateRequest{Request: req, Input: input, Copy: c.DeleteLaunchTemplateRequest}
 }
 
 const opDeleteLaunchTemplateVersions = "DeleteLaunchTemplateVersions"
@@ -4429,6 +4505,7 @@ const opDeleteLaunchTemplateVersions = "DeleteLaunchTemplateVersions"
 type DeleteLaunchTemplateVersionsRequest struct {
 	*aws.Request
 	Input *DeleteLaunchTemplateVersionsInput
+	Copy  func(*DeleteLaunchTemplateVersionsInput) DeleteLaunchTemplateVersionsRequest
 }
 
 // Send marshals and sends the DeleteLaunchTemplateVersions API request.
@@ -4472,7 +4549,7 @@ func (c *EC2) DeleteLaunchTemplateVersionsRequest(input *DeleteLaunchTemplateVer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLaunchTemplateVersionsRequest{Request: req, Input: input}
+	return DeleteLaunchTemplateVersionsRequest{Request: req, Input: input, Copy: c.DeleteLaunchTemplateVersionsRequest}
 }
 
 const opDeleteNatGateway = "DeleteNatGateway"
@@ -4481,6 +4558,7 @@ const opDeleteNatGateway = "DeleteNatGateway"
 type DeleteNatGatewayRequest struct {
 	*aws.Request
 	Input *DeleteNatGatewayInput
+	Copy  func(*DeleteNatGatewayInput) DeleteNatGatewayRequest
 }
 
 // Send marshals and sends the DeleteNatGateway API request.
@@ -4523,7 +4601,7 @@ func (c *EC2) DeleteNatGatewayRequest(input *DeleteNatGatewayInput) DeleteNatGat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNatGatewayRequest{Request: req, Input: input}
+	return DeleteNatGatewayRequest{Request: req, Input: input, Copy: c.DeleteNatGatewayRequest}
 }
 
 const opDeleteNetworkAcl = "DeleteNetworkAcl"
@@ -4532,6 +4610,7 @@ const opDeleteNetworkAcl = "DeleteNetworkAcl"
 type DeleteNetworkAclRequest struct {
 	*aws.Request
 	Input *DeleteNetworkAclInput
+	Copy  func(*DeleteNetworkAclInput) DeleteNetworkAclRequest
 }
 
 // Send marshals and sends the DeleteNetworkAcl API request.
@@ -4575,7 +4654,7 @@ func (c *EC2) DeleteNetworkAclRequest(input *DeleteNetworkAclInput) DeleteNetwor
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNetworkAclRequest{Request: req, Input: input}
+	return DeleteNetworkAclRequest{Request: req, Input: input, Copy: c.DeleteNetworkAclRequest}
 }
 
 const opDeleteNetworkAclEntry = "DeleteNetworkAclEntry"
@@ -4584,6 +4663,7 @@ const opDeleteNetworkAclEntry = "DeleteNetworkAclEntry"
 type DeleteNetworkAclEntryRequest struct {
 	*aws.Request
 	Input *DeleteNetworkAclEntryInput
+	Copy  func(*DeleteNetworkAclEntryInput) DeleteNetworkAclEntryRequest
 }
 
 // Send marshals and sends the DeleteNetworkAclEntry API request.
@@ -4627,7 +4707,7 @@ func (c *EC2) DeleteNetworkAclEntryRequest(input *DeleteNetworkAclEntryInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNetworkAclEntryRequest{Request: req, Input: input}
+	return DeleteNetworkAclEntryRequest{Request: req, Input: input, Copy: c.DeleteNetworkAclEntryRequest}
 }
 
 const opDeleteNetworkInterface = "DeleteNetworkInterface"
@@ -4636,6 +4716,7 @@ const opDeleteNetworkInterface = "DeleteNetworkInterface"
 type DeleteNetworkInterfaceRequest struct {
 	*aws.Request
 	Input *DeleteNetworkInterfaceInput
+	Copy  func(*DeleteNetworkInterfaceInput) DeleteNetworkInterfaceRequest
 }
 
 // Send marshals and sends the DeleteNetworkInterface API request.
@@ -4679,7 +4760,7 @@ func (c *EC2) DeleteNetworkInterfaceRequest(input *DeleteNetworkInterfaceInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNetworkInterfaceRequest{Request: req, Input: input}
+	return DeleteNetworkInterfaceRequest{Request: req, Input: input, Copy: c.DeleteNetworkInterfaceRequest}
 }
 
 const opDeleteNetworkInterfacePermission = "DeleteNetworkInterfacePermission"
@@ -4688,6 +4769,7 @@ const opDeleteNetworkInterfacePermission = "DeleteNetworkInterfacePermission"
 type DeleteNetworkInterfacePermissionRequest struct {
 	*aws.Request
 	Input *DeleteNetworkInterfacePermissionInput
+	Copy  func(*DeleteNetworkInterfacePermissionInput) DeleteNetworkInterfacePermissionRequest
 }
 
 // Send marshals and sends the DeleteNetworkInterfacePermission API request.
@@ -4731,7 +4813,7 @@ func (c *EC2) DeleteNetworkInterfacePermissionRequest(input *DeleteNetworkInterf
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNetworkInterfacePermissionRequest{Request: req, Input: input}
+	return DeleteNetworkInterfacePermissionRequest{Request: req, Input: input, Copy: c.DeleteNetworkInterfacePermissionRequest}
 }
 
 const opDeletePlacementGroup = "DeletePlacementGroup"
@@ -4740,6 +4822,7 @@ const opDeletePlacementGroup = "DeletePlacementGroup"
 type DeletePlacementGroupRequest struct {
 	*aws.Request
 	Input *DeletePlacementGroupInput
+	Copy  func(*DeletePlacementGroupInput) DeletePlacementGroupRequest
 }
 
 // Send marshals and sends the DeletePlacementGroup API request.
@@ -4785,7 +4868,7 @@ func (c *EC2) DeletePlacementGroupRequest(input *DeletePlacementGroupInput) Dele
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePlacementGroupRequest{Request: req, Input: input}
+	return DeletePlacementGroupRequest{Request: req, Input: input, Copy: c.DeletePlacementGroupRequest}
 }
 
 const opDeleteRoute = "DeleteRoute"
@@ -4794,6 +4877,7 @@ const opDeleteRoute = "DeleteRoute"
 type DeleteRouteRequest struct {
 	*aws.Request
 	Input *DeleteRouteInput
+	Copy  func(*DeleteRouteInput) DeleteRouteRequest
 }
 
 // Send marshals and sends the DeleteRoute API request.
@@ -4836,7 +4920,7 @@ func (c *EC2) DeleteRouteRequest(input *DeleteRouteInput) DeleteRouteRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRouteRequest{Request: req, Input: input}
+	return DeleteRouteRequest{Request: req, Input: input, Copy: c.DeleteRouteRequest}
 }
 
 const opDeleteRouteTable = "DeleteRouteTable"
@@ -4845,6 +4929,7 @@ const opDeleteRouteTable = "DeleteRouteTable"
 type DeleteRouteTableRequest struct {
 	*aws.Request
 	Input *DeleteRouteTableInput
+	Copy  func(*DeleteRouteTableInput) DeleteRouteTableRequest
 }
 
 // Send marshals and sends the DeleteRouteTable API request.
@@ -4889,7 +4974,7 @@ func (c *EC2) DeleteRouteTableRequest(input *DeleteRouteTableInput) DeleteRouteT
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRouteTableRequest{Request: req, Input: input}
+	return DeleteRouteTableRequest{Request: req, Input: input, Copy: c.DeleteRouteTableRequest}
 }
 
 const opDeleteSecurityGroup = "DeleteSecurityGroup"
@@ -4898,6 +4983,7 @@ const opDeleteSecurityGroup = "DeleteSecurityGroup"
 type DeleteSecurityGroupRequest struct {
 	*aws.Request
 	Input *DeleteSecurityGroupInput
+	Copy  func(*DeleteSecurityGroupInput) DeleteSecurityGroupRequest
 }
 
 // Send marshals and sends the DeleteSecurityGroup API request.
@@ -4944,7 +5030,7 @@ func (c *EC2) DeleteSecurityGroupRequest(input *DeleteSecurityGroupInput) Delete
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSecurityGroupRequest{Request: req, Input: input}
+	return DeleteSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteSecurityGroupRequest}
 }
 
 const opDeleteSnapshot = "DeleteSnapshot"
@@ -4953,6 +5039,7 @@ const opDeleteSnapshot = "DeleteSnapshot"
 type DeleteSnapshotRequest struct {
 	*aws.Request
 	Input *DeleteSnapshotInput
+	Copy  func(*DeleteSnapshotInput) DeleteSnapshotRequest
 }
 
 // Send marshals and sends the DeleteSnapshot API request.
@@ -5009,7 +5096,7 @@ func (c *EC2) DeleteSnapshotRequest(input *DeleteSnapshotInput) DeleteSnapshotRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSnapshotRequest{Request: req, Input: input}
+	return DeleteSnapshotRequest{Request: req, Input: input, Copy: c.DeleteSnapshotRequest}
 }
 
 const opDeleteSpotDatafeedSubscription = "DeleteSpotDatafeedSubscription"
@@ -5018,6 +5105,7 @@ const opDeleteSpotDatafeedSubscription = "DeleteSpotDatafeedSubscription"
 type DeleteSpotDatafeedSubscriptionRequest struct {
 	*aws.Request
 	Input *DeleteSpotDatafeedSubscriptionInput
+	Copy  func(*DeleteSpotDatafeedSubscriptionInput) DeleteSpotDatafeedSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteSpotDatafeedSubscription API request.
@@ -5060,7 +5148,7 @@ func (c *EC2) DeleteSpotDatafeedSubscriptionRequest(input *DeleteSpotDatafeedSub
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSpotDatafeedSubscriptionRequest{Request: req, Input: input}
+	return DeleteSpotDatafeedSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteSpotDatafeedSubscriptionRequest}
 }
 
 const opDeleteSubnet = "DeleteSubnet"
@@ -5069,6 +5157,7 @@ const opDeleteSubnet = "DeleteSubnet"
 type DeleteSubnetRequest struct {
 	*aws.Request
 	Input *DeleteSubnetInput
+	Copy  func(*DeleteSubnetInput) DeleteSubnetRequest
 }
 
 // Send marshals and sends the DeleteSubnet API request.
@@ -5112,7 +5201,7 @@ func (c *EC2) DeleteSubnetRequest(input *DeleteSubnetInput) DeleteSubnetRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSubnetRequest{Request: req, Input: input}
+	return DeleteSubnetRequest{Request: req, Input: input, Copy: c.DeleteSubnetRequest}
 }
 
 const opDeleteTags = "DeleteTags"
@@ -5121,6 +5210,7 @@ const opDeleteTags = "DeleteTags"
 type DeleteTagsRequest struct {
 	*aws.Request
 	Input *DeleteTagsInput
+	Copy  func(*DeleteTagsInput) DeleteTagsRequest
 }
 
 // Send marshals and sends the DeleteTags API request.
@@ -5167,7 +5257,7 @@ func (c *EC2) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTagsRequest{Request: req, Input: input}
+	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
 const opDeleteVolume = "DeleteVolume"
@@ -5176,6 +5266,7 @@ const opDeleteVolume = "DeleteVolume"
 type DeleteVolumeRequest struct {
 	*aws.Request
 	Input *DeleteVolumeInput
+	Copy  func(*DeleteVolumeInput) DeleteVolumeRequest
 }
 
 // Send marshals and sends the DeleteVolume API request.
@@ -5224,7 +5315,7 @@ func (c *EC2) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVolumeRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVolumeRequest{Request: req, Input: input}
+	return DeleteVolumeRequest{Request: req, Input: input, Copy: c.DeleteVolumeRequest}
 }
 
 const opDeleteVpc = "DeleteVpc"
@@ -5233,6 +5324,7 @@ const opDeleteVpc = "DeleteVpc"
 type DeleteVpcRequest struct {
 	*aws.Request
 	Input *DeleteVpcInput
+	Copy  func(*DeleteVpcInput) DeleteVpcRequest
 }
 
 // Send marshals and sends the DeleteVpc API request.
@@ -5279,7 +5371,7 @@ func (c *EC2) DeleteVpcRequest(input *DeleteVpcInput) DeleteVpcRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpcRequest{Request: req, Input: input}
+	return DeleteVpcRequest{Request: req, Input: input, Copy: c.DeleteVpcRequest}
 }
 
 const opDeleteVpcEndpointConnectionNotifications = "DeleteVpcEndpointConnectionNotifications"
@@ -5288,6 +5380,7 @@ const opDeleteVpcEndpointConnectionNotifications = "DeleteVpcEndpointConnectionN
 type DeleteVpcEndpointConnectionNotificationsRequest struct {
 	*aws.Request
 	Input *DeleteVpcEndpointConnectionNotificationsInput
+	Copy  func(*DeleteVpcEndpointConnectionNotificationsInput) DeleteVpcEndpointConnectionNotificationsRequest
 }
 
 // Send marshals and sends the DeleteVpcEndpointConnectionNotifications API request.
@@ -5328,7 +5421,7 @@ func (c *EC2) DeleteVpcEndpointConnectionNotificationsRequest(input *DeleteVpcEn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpcEndpointConnectionNotificationsRequest{Request: req, Input: input}
+	return DeleteVpcEndpointConnectionNotificationsRequest{Request: req, Input: input, Copy: c.DeleteVpcEndpointConnectionNotificationsRequest}
 }
 
 const opDeleteVpcEndpointServiceConfigurations = "DeleteVpcEndpointServiceConfigurations"
@@ -5337,6 +5430,7 @@ const opDeleteVpcEndpointServiceConfigurations = "DeleteVpcEndpointServiceConfig
 type DeleteVpcEndpointServiceConfigurationsRequest struct {
 	*aws.Request
 	Input *DeleteVpcEndpointServiceConfigurationsInput
+	Copy  func(*DeleteVpcEndpointServiceConfigurationsInput) DeleteVpcEndpointServiceConfigurationsRequest
 }
 
 // Send marshals and sends the DeleteVpcEndpointServiceConfigurations API request.
@@ -5380,7 +5474,7 @@ func (c *EC2) DeleteVpcEndpointServiceConfigurationsRequest(input *DeleteVpcEndp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpcEndpointServiceConfigurationsRequest{Request: req, Input: input}
+	return DeleteVpcEndpointServiceConfigurationsRequest{Request: req, Input: input, Copy: c.DeleteVpcEndpointServiceConfigurationsRequest}
 }
 
 const opDeleteVpcEndpoints = "DeleteVpcEndpoints"
@@ -5389,6 +5483,7 @@ const opDeleteVpcEndpoints = "DeleteVpcEndpoints"
 type DeleteVpcEndpointsRequest struct {
 	*aws.Request
 	Input *DeleteVpcEndpointsInput
+	Copy  func(*DeleteVpcEndpointsInput) DeleteVpcEndpointsRequest
 }
 
 // Send marshals and sends the DeleteVpcEndpoints API request.
@@ -5432,7 +5527,7 @@ func (c *EC2) DeleteVpcEndpointsRequest(input *DeleteVpcEndpointsInput) DeleteVp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpcEndpointsRequest{Request: req, Input: input}
+	return DeleteVpcEndpointsRequest{Request: req, Input: input, Copy: c.DeleteVpcEndpointsRequest}
 }
 
 const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
@@ -5441,6 +5536,7 @@ const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
 type DeleteVpcPeeringConnectionRequest struct {
 	*aws.Request
 	Input *DeleteVpcPeeringConnectionInput
+	Copy  func(*DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the DeleteVpcPeeringConnection API request.
@@ -5484,7 +5580,7 @@ func (c *EC2) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConnectio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpcPeeringConnectionRequest{Request: req, Input: input}
+	return DeleteVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.DeleteVpcPeeringConnectionRequest}
 }
 
 const opDeleteVpnConnection = "DeleteVpnConnection"
@@ -5493,6 +5589,7 @@ const opDeleteVpnConnection = "DeleteVpnConnection"
 type DeleteVpnConnectionRequest struct {
 	*aws.Request
 	Input *DeleteVpnConnectionInput
+	Copy  func(*DeleteVpnConnectionInput) DeleteVpnConnectionRequest
 }
 
 // Send marshals and sends the DeleteVpnConnection API request.
@@ -5544,7 +5641,7 @@ func (c *EC2) DeleteVpnConnectionRequest(input *DeleteVpnConnectionInput) Delete
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpnConnectionRequest{Request: req, Input: input}
+	return DeleteVpnConnectionRequest{Request: req, Input: input, Copy: c.DeleteVpnConnectionRequest}
 }
 
 const opDeleteVpnConnectionRoute = "DeleteVpnConnectionRoute"
@@ -5553,6 +5650,7 @@ const opDeleteVpnConnectionRoute = "DeleteVpnConnectionRoute"
 type DeleteVpnConnectionRouteRequest struct {
 	*aws.Request
 	Input *DeleteVpnConnectionRouteInput
+	Copy  func(*DeleteVpnConnectionRouteInput) DeleteVpnConnectionRouteRequest
 }
 
 // Send marshals and sends the DeleteVpnConnectionRoute API request.
@@ -5598,7 +5696,7 @@ func (c *EC2) DeleteVpnConnectionRouteRequest(input *DeleteVpnConnectionRouteInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpnConnectionRouteRequest{Request: req, Input: input}
+	return DeleteVpnConnectionRouteRequest{Request: req, Input: input, Copy: c.DeleteVpnConnectionRouteRequest}
 }
 
 const opDeleteVpnGateway = "DeleteVpnGateway"
@@ -5607,6 +5705,7 @@ const opDeleteVpnGateway = "DeleteVpnGateway"
 type DeleteVpnGatewayRequest struct {
 	*aws.Request
 	Input *DeleteVpnGatewayInput
+	Copy  func(*DeleteVpnGatewayInput) DeleteVpnGatewayRequest
 }
 
 // Send marshals and sends the DeleteVpnGateway API request.
@@ -5653,7 +5752,7 @@ func (c *EC2) DeleteVpnGatewayRequest(input *DeleteVpnGatewayInput) DeleteVpnGat
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpnGatewayRequest{Request: req, Input: input}
+	return DeleteVpnGatewayRequest{Request: req, Input: input, Copy: c.DeleteVpnGatewayRequest}
 }
 
 const opDeregisterImage = "DeregisterImage"
@@ -5662,6 +5761,7 @@ const opDeregisterImage = "DeregisterImage"
 type DeregisterImageRequest struct {
 	*aws.Request
 	Input *DeregisterImageInput
+	Copy  func(*DeregisterImageInput) DeregisterImageRequest
 }
 
 // Send marshals and sends the DeregisterImage API request.
@@ -5712,7 +5812,7 @@ func (c *EC2) DeregisterImageRequest(input *DeregisterImageInput) DeregisterImag
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterImageRequest{Request: req, Input: input}
+	return DeregisterImageRequest{Request: req, Input: input, Copy: c.DeregisterImageRequest}
 }
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
@@ -5721,6 +5821,7 @@ const opDescribeAccountAttributes = "DescribeAccountAttributes"
 type DescribeAccountAttributesRequest struct {
 	*aws.Request
 	Input *DescribeAccountAttributesInput
+	Copy  func(*DescribeAccountAttributesInput) DescribeAccountAttributesRequest
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
@@ -5779,7 +5880,7 @@ func (c *EC2) DescribeAccountAttributesRequest(input *DescribeAccountAttributesI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAccountAttributesRequest{Request: req, Input: input}
+	return DescribeAccountAttributesRequest{Request: req, Input: input, Copy: c.DescribeAccountAttributesRequest}
 }
 
 const opDescribeAddresses = "DescribeAddresses"
@@ -5788,6 +5889,7 @@ const opDescribeAddresses = "DescribeAddresses"
 type DescribeAddressesRequest struct {
 	*aws.Request
 	Input *DescribeAddressesInput
+	Copy  func(*DescribeAddressesInput) DescribeAddressesRequest
 }
 
 // Send marshals and sends the DescribeAddresses API request.
@@ -5832,7 +5934,7 @@ func (c *EC2) DescribeAddressesRequest(input *DescribeAddressesInput) DescribeAd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAddressesRequest{Request: req, Input: input}
+	return DescribeAddressesRequest{Request: req, Input: input, Copy: c.DescribeAddressesRequest}
 }
 
 const opDescribeAvailabilityZones = "DescribeAvailabilityZones"
@@ -5841,6 +5943,7 @@ const opDescribeAvailabilityZones = "DescribeAvailabilityZones"
 type DescribeAvailabilityZonesRequest struct {
 	*aws.Request
 	Input *DescribeAvailabilityZonesInput
+	Copy  func(*DescribeAvailabilityZonesInput) DescribeAvailabilityZonesRequest
 }
 
 // Send marshals and sends the DescribeAvailabilityZones API request.
@@ -5887,7 +5990,7 @@ func (c *EC2) DescribeAvailabilityZonesRequest(input *DescribeAvailabilityZonesI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAvailabilityZonesRequest{Request: req, Input: input}
+	return DescribeAvailabilityZonesRequest{Request: req, Input: input, Copy: c.DescribeAvailabilityZonesRequest}
 }
 
 const opDescribeBundleTasks = "DescribeBundleTasks"
@@ -5896,6 +5999,7 @@ const opDescribeBundleTasks = "DescribeBundleTasks"
 type DescribeBundleTasksRequest struct {
 	*aws.Request
 	Input *DescribeBundleTasksInput
+	Copy  func(*DescribeBundleTasksInput) DescribeBundleTasksRequest
 }
 
 // Send marshals and sends the DescribeBundleTasks API request.
@@ -5941,7 +6045,7 @@ func (c *EC2) DescribeBundleTasksRequest(input *DescribeBundleTasksInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBundleTasksRequest{Request: req, Input: input}
+	return DescribeBundleTasksRequest{Request: req, Input: input, Copy: c.DescribeBundleTasksRequest}
 }
 
 const opDescribeClassicLinkInstances = "DescribeClassicLinkInstances"
@@ -5950,6 +6054,7 @@ const opDescribeClassicLinkInstances = "DescribeClassicLinkInstances"
 type DescribeClassicLinkInstancesRequest struct {
 	*aws.Request
 	Input *DescribeClassicLinkInstancesInput
+	Copy  func(*DescribeClassicLinkInstancesInput) DescribeClassicLinkInstancesRequest
 }
 
 // Send marshals and sends the DescribeClassicLinkInstances API request.
@@ -5993,7 +6098,7 @@ func (c *EC2) DescribeClassicLinkInstancesRequest(input *DescribeClassicLinkInst
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClassicLinkInstancesRequest{Request: req, Input: input}
+	return DescribeClassicLinkInstancesRequest{Request: req, Input: input, Copy: c.DescribeClassicLinkInstancesRequest}
 }
 
 const opDescribeConversionTasks = "DescribeConversionTasks"
@@ -6002,6 +6107,7 @@ const opDescribeConversionTasks = "DescribeConversionTasks"
 type DescribeConversionTasksRequest struct {
 	*aws.Request
 	Input *DescribeConversionTasksInput
+	Copy  func(*DescribeConversionTasksInput) DescribeConversionTasksRequest
 }
 
 // Send marshals and sends the DescribeConversionTasks API request.
@@ -6046,7 +6152,7 @@ func (c *EC2) DescribeConversionTasksRequest(input *DescribeConversionTasksInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConversionTasksRequest{Request: req, Input: input}
+	return DescribeConversionTasksRequest{Request: req, Input: input, Copy: c.DescribeConversionTasksRequest}
 }
 
 const opDescribeCustomerGateways = "DescribeCustomerGateways"
@@ -6055,6 +6161,7 @@ const opDescribeCustomerGateways = "DescribeCustomerGateways"
 type DescribeCustomerGatewaysRequest struct {
 	*aws.Request
 	Input *DescribeCustomerGatewaysInput
+	Copy  func(*DescribeCustomerGatewaysInput) DescribeCustomerGatewaysRequest
 }
 
 // Send marshals and sends the DescribeCustomerGateways API request.
@@ -6099,7 +6206,7 @@ func (c *EC2) DescribeCustomerGatewaysRequest(input *DescribeCustomerGatewaysInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCustomerGatewaysRequest{Request: req, Input: input}
+	return DescribeCustomerGatewaysRequest{Request: req, Input: input, Copy: c.DescribeCustomerGatewaysRequest}
 }
 
 const opDescribeDhcpOptions = "DescribeDhcpOptions"
@@ -6108,6 +6215,7 @@ const opDescribeDhcpOptions = "DescribeDhcpOptions"
 type DescribeDhcpOptionsRequest struct {
 	*aws.Request
 	Input *DescribeDhcpOptionsInput
+	Copy  func(*DescribeDhcpOptionsInput) DescribeDhcpOptionsRequest
 }
 
 // Send marshals and sends the DescribeDhcpOptions API request.
@@ -6151,7 +6259,7 @@ func (c *EC2) DescribeDhcpOptionsRequest(input *DescribeDhcpOptionsInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDhcpOptionsRequest{Request: req, Input: input}
+	return DescribeDhcpOptionsRequest{Request: req, Input: input, Copy: c.DescribeDhcpOptionsRequest}
 }
 
 const opDescribeEgressOnlyInternetGateways = "DescribeEgressOnlyInternetGateways"
@@ -6160,6 +6268,7 @@ const opDescribeEgressOnlyInternetGateways = "DescribeEgressOnlyInternetGateways
 type DescribeEgressOnlyInternetGatewaysRequest struct {
 	*aws.Request
 	Input *DescribeEgressOnlyInternetGatewaysInput
+	Copy  func(*DescribeEgressOnlyInternetGatewaysInput) DescribeEgressOnlyInternetGatewaysRequest
 }
 
 // Send marshals and sends the DescribeEgressOnlyInternetGateways API request.
@@ -6200,7 +6309,7 @@ func (c *EC2) DescribeEgressOnlyInternetGatewaysRequest(input *DescribeEgressOnl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEgressOnlyInternetGatewaysRequest{Request: req, Input: input}
+	return DescribeEgressOnlyInternetGatewaysRequest{Request: req, Input: input, Copy: c.DescribeEgressOnlyInternetGatewaysRequest}
 }
 
 const opDescribeElasticGpus = "DescribeElasticGpus"
@@ -6209,6 +6318,7 @@ const opDescribeElasticGpus = "DescribeElasticGpus"
 type DescribeElasticGpusRequest struct {
 	*aws.Request
 	Input *DescribeElasticGpusInput
+	Copy  func(*DescribeElasticGpusInput) DescribeElasticGpusRequest
 }
 
 // Send marshals and sends the DescribeElasticGpus API request.
@@ -6250,7 +6360,7 @@ func (c *EC2) DescribeElasticGpusRequest(input *DescribeElasticGpusInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeElasticGpusRequest{Request: req, Input: input}
+	return DescribeElasticGpusRequest{Request: req, Input: input, Copy: c.DescribeElasticGpusRequest}
 }
 
 const opDescribeExportTasks = "DescribeExportTasks"
@@ -6259,6 +6369,7 @@ const opDescribeExportTasks = "DescribeExportTasks"
 type DescribeExportTasksRequest struct {
 	*aws.Request
 	Input *DescribeExportTasksInput
+	Copy  func(*DescribeExportTasksInput) DescribeExportTasksRequest
 }
 
 // Send marshals and sends the DescribeExportTasks API request.
@@ -6299,7 +6410,7 @@ func (c *EC2) DescribeExportTasksRequest(input *DescribeExportTasksInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeExportTasksRequest{Request: req, Input: input}
+	return DescribeExportTasksRequest{Request: req, Input: input, Copy: c.DescribeExportTasksRequest}
 }
 
 const opDescribeFlowLogs = "DescribeFlowLogs"
@@ -6308,6 +6419,7 @@ const opDescribeFlowLogs = "DescribeFlowLogs"
 type DescribeFlowLogsRequest struct {
 	*aws.Request
 	Input *DescribeFlowLogsInput
+	Copy  func(*DescribeFlowLogsInput) DescribeFlowLogsRequest
 }
 
 // Send marshals and sends the DescribeFlowLogs API request.
@@ -6350,7 +6462,7 @@ func (c *EC2) DescribeFlowLogsRequest(input *DescribeFlowLogsInput) DescribeFlow
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFlowLogsRequest{Request: req, Input: input}
+	return DescribeFlowLogsRequest{Request: req, Input: input, Copy: c.DescribeFlowLogsRequest}
 }
 
 const opDescribeFpgaImageAttribute = "DescribeFpgaImageAttribute"
@@ -6359,6 +6471,7 @@ const opDescribeFpgaImageAttribute = "DescribeFpgaImageAttribute"
 type DescribeFpgaImageAttributeRequest struct {
 	*aws.Request
 	Input *DescribeFpgaImageAttributeInput
+	Copy  func(*DescribeFpgaImageAttributeInput) DescribeFpgaImageAttributeRequest
 }
 
 // Send marshals and sends the DescribeFpgaImageAttribute API request.
@@ -6399,7 +6512,7 @@ func (c *EC2) DescribeFpgaImageAttributeRequest(input *DescribeFpgaImageAttribut
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFpgaImageAttributeRequest{Request: req, Input: input}
+	return DescribeFpgaImageAttributeRequest{Request: req, Input: input, Copy: c.DescribeFpgaImageAttributeRequest}
 }
 
 const opDescribeFpgaImages = "DescribeFpgaImages"
@@ -6408,6 +6521,7 @@ const opDescribeFpgaImages = "DescribeFpgaImages"
 type DescribeFpgaImagesRequest struct {
 	*aws.Request
 	Input *DescribeFpgaImagesInput
+	Copy  func(*DescribeFpgaImagesInput) DescribeFpgaImagesRequest
 }
 
 // Send marshals and sends the DescribeFpgaImages API request.
@@ -6450,7 +6564,7 @@ func (c *EC2) DescribeFpgaImagesRequest(input *DescribeFpgaImagesInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFpgaImagesRequest{Request: req, Input: input}
+	return DescribeFpgaImagesRequest{Request: req, Input: input, Copy: c.DescribeFpgaImagesRequest}
 }
 
 const opDescribeHostReservationOfferings = "DescribeHostReservationOfferings"
@@ -6459,6 +6573,7 @@ const opDescribeHostReservationOfferings = "DescribeHostReservationOfferings"
 type DescribeHostReservationOfferingsRequest struct {
 	*aws.Request
 	Input *DescribeHostReservationOfferingsInput
+	Copy  func(*DescribeHostReservationOfferingsInput) DescribeHostReservationOfferingsRequest
 }
 
 // Send marshals and sends the DescribeHostReservationOfferings API request.
@@ -6507,7 +6622,7 @@ func (c *EC2) DescribeHostReservationOfferingsRequest(input *DescribeHostReserva
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeHostReservationOfferingsRequest{Request: req, Input: input}
+	return DescribeHostReservationOfferingsRequest{Request: req, Input: input, Copy: c.DescribeHostReservationOfferingsRequest}
 }
 
 const opDescribeHostReservations = "DescribeHostReservations"
@@ -6516,6 +6631,7 @@ const opDescribeHostReservations = "DescribeHostReservations"
 type DescribeHostReservationsRequest struct {
 	*aws.Request
 	Input *DescribeHostReservationsInput
+	Copy  func(*DescribeHostReservationsInput) DescribeHostReservationsRequest
 }
 
 // Send marshals and sends the DescribeHostReservations API request.
@@ -6557,7 +6673,7 @@ func (c *EC2) DescribeHostReservationsRequest(input *DescribeHostReservationsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeHostReservationsRequest{Request: req, Input: input}
+	return DescribeHostReservationsRequest{Request: req, Input: input, Copy: c.DescribeHostReservationsRequest}
 }
 
 const opDescribeHosts = "DescribeHosts"
@@ -6566,6 +6682,7 @@ const opDescribeHosts = "DescribeHosts"
 type DescribeHostsRequest struct {
 	*aws.Request
 	Input *DescribeHostsInput
+	Copy  func(*DescribeHostsInput) DescribeHostsRequest
 }
 
 // Send marshals and sends the DescribeHosts API request.
@@ -6610,7 +6727,7 @@ func (c *EC2) DescribeHostsRequest(input *DescribeHostsInput) DescribeHostsReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeHostsRequest{Request: req, Input: input}
+	return DescribeHostsRequest{Request: req, Input: input, Copy: c.DescribeHostsRequest}
 }
 
 const opDescribeIamInstanceProfileAssociations = "DescribeIamInstanceProfileAssociations"
@@ -6619,6 +6736,7 @@ const opDescribeIamInstanceProfileAssociations = "DescribeIamInstanceProfileAsso
 type DescribeIamInstanceProfileAssociationsRequest struct {
 	*aws.Request
 	Input *DescribeIamInstanceProfileAssociationsInput
+	Copy  func(*DescribeIamInstanceProfileAssociationsInput) DescribeIamInstanceProfileAssociationsRequest
 }
 
 // Send marshals and sends the DescribeIamInstanceProfileAssociations API request.
@@ -6659,7 +6777,7 @@ func (c *EC2) DescribeIamInstanceProfileAssociationsRequest(input *DescribeIamIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeIamInstanceProfileAssociationsRequest{Request: req, Input: input}
+	return DescribeIamInstanceProfileAssociationsRequest{Request: req, Input: input, Copy: c.DescribeIamInstanceProfileAssociationsRequest}
 }
 
 const opDescribeIdFormat = "DescribeIdFormat"
@@ -6668,6 +6786,7 @@ const opDescribeIdFormat = "DescribeIdFormat"
 type DescribeIdFormatRequest struct {
 	*aws.Request
 	Input *DescribeIdFormatInput
+	Copy  func(*DescribeIdFormatInput) DescribeIdFormatRequest
 }
 
 // Send marshals and sends the DescribeIdFormat API request.
@@ -6721,7 +6840,7 @@ func (c *EC2) DescribeIdFormatRequest(input *DescribeIdFormatInput) DescribeIdFo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeIdFormatRequest{Request: req, Input: input}
+	return DescribeIdFormatRequest{Request: req, Input: input, Copy: c.DescribeIdFormatRequest}
 }
 
 const opDescribeIdentityIdFormat = "DescribeIdentityIdFormat"
@@ -6730,6 +6849,7 @@ const opDescribeIdentityIdFormat = "DescribeIdentityIdFormat"
 type DescribeIdentityIdFormatRequest struct {
 	*aws.Request
 	Input *DescribeIdentityIdFormatInput
+	Copy  func(*DescribeIdentityIdFormatInput) DescribeIdentityIdFormatRequest
 }
 
 // Send marshals and sends the DescribeIdentityIdFormat API request.
@@ -6781,7 +6901,7 @@ func (c *EC2) DescribeIdentityIdFormatRequest(input *DescribeIdentityIdFormatInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeIdentityIdFormatRequest{Request: req, Input: input}
+	return DescribeIdentityIdFormatRequest{Request: req, Input: input, Copy: c.DescribeIdentityIdFormatRequest}
 }
 
 const opDescribeImageAttribute = "DescribeImageAttribute"
@@ -6790,6 +6910,7 @@ const opDescribeImageAttribute = "DescribeImageAttribute"
 type DescribeImageAttributeRequest struct {
 	*aws.Request
 	Input *DescribeImageAttributeInput
+	Copy  func(*DescribeImageAttributeInput) DescribeImageAttributeRequest
 }
 
 // Send marshals and sends the DescribeImageAttribute API request.
@@ -6831,7 +6952,7 @@ func (c *EC2) DescribeImageAttributeRequest(input *DescribeImageAttributeInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeImageAttributeRequest{Request: req, Input: input}
+	return DescribeImageAttributeRequest{Request: req, Input: input, Copy: c.DescribeImageAttributeRequest}
 }
 
 const opDescribeImages = "DescribeImages"
@@ -6840,6 +6961,7 @@ const opDescribeImages = "DescribeImages"
 type DescribeImagesRequest struct {
 	*aws.Request
 	Input *DescribeImagesInput
+	Copy  func(*DescribeImagesInput) DescribeImagesRequest
 }
 
 // Send marshals and sends the DescribeImages API request.
@@ -6886,7 +7008,7 @@ func (c *EC2) DescribeImagesRequest(input *DescribeImagesInput) DescribeImagesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeImagesRequest{Request: req, Input: input}
+	return DescribeImagesRequest{Request: req, Input: input, Copy: c.DescribeImagesRequest}
 }
 
 const opDescribeImportImageTasks = "DescribeImportImageTasks"
@@ -6895,6 +7017,7 @@ const opDescribeImportImageTasks = "DescribeImportImageTasks"
 type DescribeImportImageTasksRequest struct {
 	*aws.Request
 	Input *DescribeImportImageTasksInput
+	Copy  func(*DescribeImportImageTasksInput) DescribeImportImageTasksRequest
 }
 
 // Send marshals and sends the DescribeImportImageTasks API request.
@@ -6936,7 +7059,7 @@ func (c *EC2) DescribeImportImageTasksRequest(input *DescribeImportImageTasksInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeImportImageTasksRequest{Request: req, Input: input}
+	return DescribeImportImageTasksRequest{Request: req, Input: input, Copy: c.DescribeImportImageTasksRequest}
 }
 
 const opDescribeImportSnapshotTasks = "DescribeImportSnapshotTasks"
@@ -6945,6 +7068,7 @@ const opDescribeImportSnapshotTasks = "DescribeImportSnapshotTasks"
 type DescribeImportSnapshotTasksRequest struct {
 	*aws.Request
 	Input *DescribeImportSnapshotTasksInput
+	Copy  func(*DescribeImportSnapshotTasksInput) DescribeImportSnapshotTasksRequest
 }
 
 // Send marshals and sends the DescribeImportSnapshotTasks API request.
@@ -6985,7 +7109,7 @@ func (c *EC2) DescribeImportSnapshotTasksRequest(input *DescribeImportSnapshotTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeImportSnapshotTasksRequest{Request: req, Input: input}
+	return DescribeImportSnapshotTasksRequest{Request: req, Input: input, Copy: c.DescribeImportSnapshotTasksRequest}
 }
 
 const opDescribeInstanceAttribute = "DescribeInstanceAttribute"
@@ -6994,6 +7118,7 @@ const opDescribeInstanceAttribute = "DescribeInstanceAttribute"
 type DescribeInstanceAttributeRequest struct {
 	*aws.Request
 	Input *DescribeInstanceAttributeInput
+	Copy  func(*DescribeInstanceAttributeInput) DescribeInstanceAttributeRequest
 }
 
 // Send marshals and sends the DescribeInstanceAttribute API request.
@@ -7038,7 +7163,7 @@ func (c *EC2) DescribeInstanceAttributeRequest(input *DescribeInstanceAttributeI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstanceAttributeRequest{Request: req, Input: input}
+	return DescribeInstanceAttributeRequest{Request: req, Input: input, Copy: c.DescribeInstanceAttributeRequest}
 }
 
 const opDescribeInstanceCreditSpecifications = "DescribeInstanceCreditSpecifications"
@@ -7047,6 +7172,7 @@ const opDescribeInstanceCreditSpecifications = "DescribeInstanceCreditSpecificat
 type DescribeInstanceCreditSpecificationsRequest struct {
 	*aws.Request
 	Input *DescribeInstanceCreditSpecificationsInput
+	Copy  func(*DescribeInstanceCreditSpecificationsInput) DescribeInstanceCreditSpecificationsRequest
 }
 
 // Send marshals and sends the DescribeInstanceCreditSpecifications API request.
@@ -7105,7 +7231,7 @@ func (c *EC2) DescribeInstanceCreditSpecificationsRequest(input *DescribeInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstanceCreditSpecificationsRequest{Request: req, Input: input}
+	return DescribeInstanceCreditSpecificationsRequest{Request: req, Input: input, Copy: c.DescribeInstanceCreditSpecificationsRequest}
 }
 
 const opDescribeInstanceStatus = "DescribeInstanceStatus"
@@ -7114,6 +7240,7 @@ const opDescribeInstanceStatus = "DescribeInstanceStatus"
 type DescribeInstanceStatusRequest struct {
 	*aws.Request
 	Input *DescribeInstanceStatusInput
+	Copy  func(*DescribeInstanceStatusInput) DescribeInstanceStatusRequest
 }
 
 // Send marshals and sends the DescribeInstanceStatus API request.
@@ -7181,47 +7308,47 @@ func (c *EC2) DescribeInstanceStatusRequest(input *DescribeInstanceStatusInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstanceStatusRequest{Request: req, Input: input}
+	return DescribeInstanceStatusRequest{Request: req, Input: input, Copy: c.DescribeInstanceStatusRequest}
 }
 
-// DescribeInstanceStatusPages iterates over the pages of a DescribeInstanceStatus operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeInstanceStatus method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeInstanceStatusRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeInstanceStatus operation.
-//    pageNum := 0
-//    err := client.DescribeInstanceStatusPages(params,
-//        func(page *DescribeInstanceStatusOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeInstanceStatusRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeInstanceStatusRequest) Paginate(opts ...aws.Option) DescribeInstanceStatusPager {
 	return DescribeInstanceStatusPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeInstanceStatusInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeInstanceStatusInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeInstanceStatusOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeInstanceStatusPager ...
+// DescribeInstanceStatusPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeInstanceStatusPager struct {
 	aws.Pager
 }
@@ -7236,6 +7363,7 @@ const opDescribeInstances = "DescribeInstances"
 type DescribeInstancesRequest struct {
 	*aws.Request
 	Input *DescribeInstancesInput
+	Copy  func(*DescribeInstancesInput) DescribeInstancesRequest
 }
 
 // Send marshals and sends the DescribeInstances API request.
@@ -7297,47 +7425,47 @@ func (c *EC2) DescribeInstancesRequest(input *DescribeInstancesInput) DescribeIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstancesRequest{Request: req, Input: input}
+	return DescribeInstancesRequest{Request: req, Input: input, Copy: c.DescribeInstancesRequest}
 }
 
-// DescribeInstancesPages iterates over the pages of a DescribeInstances operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeInstances method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeInstances operation.
-//    pageNum := 0
-//    err := client.DescribeInstancesPages(params,
-//        func(page *DescribeInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeInstancesRequest) Paginate(opts ...aws.Option) DescribeInstancesPager {
 	return DescribeInstancesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeInstancesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeInstancesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeInstancesPager ...
+// DescribeInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeInstancesPager struct {
 	aws.Pager
 }
@@ -7352,6 +7480,7 @@ const opDescribeInternetGateways = "DescribeInternetGateways"
 type DescribeInternetGatewaysRequest struct {
 	*aws.Request
 	Input *DescribeInternetGatewaysInput
+	Copy  func(*DescribeInternetGatewaysInput) DescribeInternetGatewaysRequest
 }
 
 // Send marshals and sends the DescribeInternetGateways API request.
@@ -7392,7 +7521,7 @@ func (c *EC2) DescribeInternetGatewaysRequest(input *DescribeInternetGatewaysInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInternetGatewaysRequest{Request: req, Input: input}
+	return DescribeInternetGatewaysRequest{Request: req, Input: input, Copy: c.DescribeInternetGatewaysRequest}
 }
 
 const opDescribeKeyPairs = "DescribeKeyPairs"
@@ -7401,6 +7530,7 @@ const opDescribeKeyPairs = "DescribeKeyPairs"
 type DescribeKeyPairsRequest struct {
 	*aws.Request
 	Input *DescribeKeyPairsInput
+	Copy  func(*DescribeKeyPairsInput) DescribeKeyPairsRequest
 }
 
 // Send marshals and sends the DescribeKeyPairs API request.
@@ -7444,7 +7574,7 @@ func (c *EC2) DescribeKeyPairsRequest(input *DescribeKeyPairsInput) DescribeKeyP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeKeyPairsRequest{Request: req, Input: input}
+	return DescribeKeyPairsRequest{Request: req, Input: input, Copy: c.DescribeKeyPairsRequest}
 }
 
 const opDescribeLaunchTemplateVersions = "DescribeLaunchTemplateVersions"
@@ -7453,6 +7583,7 @@ const opDescribeLaunchTemplateVersions = "DescribeLaunchTemplateVersions"
 type DescribeLaunchTemplateVersionsRequest struct {
 	*aws.Request
 	Input *DescribeLaunchTemplateVersionsInput
+	Copy  func(*DescribeLaunchTemplateVersionsInput) DescribeLaunchTemplateVersionsRequest
 }
 
 // Send marshals and sends the DescribeLaunchTemplateVersions API request.
@@ -7494,7 +7625,7 @@ func (c *EC2) DescribeLaunchTemplateVersionsRequest(input *DescribeLaunchTemplat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLaunchTemplateVersionsRequest{Request: req, Input: input}
+	return DescribeLaunchTemplateVersionsRequest{Request: req, Input: input, Copy: c.DescribeLaunchTemplateVersionsRequest}
 }
 
 const opDescribeLaunchTemplates = "DescribeLaunchTemplates"
@@ -7503,6 +7634,7 @@ const opDescribeLaunchTemplates = "DescribeLaunchTemplates"
 type DescribeLaunchTemplatesRequest struct {
 	*aws.Request
 	Input *DescribeLaunchTemplatesInput
+	Copy  func(*DescribeLaunchTemplatesInput) DescribeLaunchTemplatesRequest
 }
 
 // Send marshals and sends the DescribeLaunchTemplates API request.
@@ -7543,7 +7675,7 @@ func (c *EC2) DescribeLaunchTemplatesRequest(input *DescribeLaunchTemplatesInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLaunchTemplatesRequest{Request: req, Input: input}
+	return DescribeLaunchTemplatesRequest{Request: req, Input: input, Copy: c.DescribeLaunchTemplatesRequest}
 }
 
 const opDescribeMovingAddresses = "DescribeMovingAddresses"
@@ -7552,6 +7684,7 @@ const opDescribeMovingAddresses = "DescribeMovingAddresses"
 type DescribeMovingAddressesRequest struct {
 	*aws.Request
 	Input *DescribeMovingAddressesInput
+	Copy  func(*DescribeMovingAddressesInput) DescribeMovingAddressesRequest
 }
 
 // Send marshals and sends the DescribeMovingAddresses API request.
@@ -7594,7 +7727,7 @@ func (c *EC2) DescribeMovingAddressesRequest(input *DescribeMovingAddressesInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMovingAddressesRequest{Request: req, Input: input}
+	return DescribeMovingAddressesRequest{Request: req, Input: input, Copy: c.DescribeMovingAddressesRequest}
 }
 
 const opDescribeNatGateways = "DescribeNatGateways"
@@ -7603,6 +7736,7 @@ const opDescribeNatGateways = "DescribeNatGateways"
 type DescribeNatGatewaysRequest struct {
 	*aws.Request
 	Input *DescribeNatGatewaysInput
+	Copy  func(*DescribeNatGatewaysInput) DescribeNatGatewaysRequest
 }
 
 // Send marshals and sends the DescribeNatGateways API request.
@@ -7649,47 +7783,47 @@ func (c *EC2) DescribeNatGatewaysRequest(input *DescribeNatGatewaysInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNatGatewaysRequest{Request: req, Input: input}
+	return DescribeNatGatewaysRequest{Request: req, Input: input, Copy: c.DescribeNatGatewaysRequest}
 }
 
-// DescribeNatGatewaysPages iterates over the pages of a DescribeNatGateways operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeNatGateways method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeNatGatewaysRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeNatGateways operation.
-//    pageNum := 0
-//    err := client.DescribeNatGatewaysPages(params,
-//        func(page *DescribeNatGatewaysOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeNatGatewaysRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeNatGatewaysRequest) Paginate(opts ...aws.Option) DescribeNatGatewaysPager {
 	return DescribeNatGatewaysPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeNatGatewaysInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeNatGatewaysInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeNatGatewaysOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeNatGatewaysPager ...
+// DescribeNatGatewaysPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeNatGatewaysPager struct {
 	aws.Pager
 }
@@ -7704,6 +7838,7 @@ const opDescribeNetworkAcls = "DescribeNetworkAcls"
 type DescribeNetworkAclsRequest struct {
 	*aws.Request
 	Input *DescribeNetworkAclsInput
+	Copy  func(*DescribeNetworkAclsInput) DescribeNetworkAclsRequest
 }
 
 // Send marshals and sends the DescribeNetworkAcls API request.
@@ -7747,7 +7882,7 @@ func (c *EC2) DescribeNetworkAclsRequest(input *DescribeNetworkAclsInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNetworkAclsRequest{Request: req, Input: input}
+	return DescribeNetworkAclsRequest{Request: req, Input: input, Copy: c.DescribeNetworkAclsRequest}
 }
 
 const opDescribeNetworkInterfaceAttribute = "DescribeNetworkInterfaceAttribute"
@@ -7756,6 +7891,7 @@ const opDescribeNetworkInterfaceAttribute = "DescribeNetworkInterfaceAttribute"
 type DescribeNetworkInterfaceAttributeRequest struct {
 	*aws.Request
 	Input *DescribeNetworkInterfaceAttributeInput
+	Copy  func(*DescribeNetworkInterfaceAttributeInput) DescribeNetworkInterfaceAttributeRequest
 }
 
 // Send marshals and sends the DescribeNetworkInterfaceAttribute API request.
@@ -7797,7 +7933,7 @@ func (c *EC2) DescribeNetworkInterfaceAttributeRequest(input *DescribeNetworkInt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNetworkInterfaceAttributeRequest{Request: req, Input: input}
+	return DescribeNetworkInterfaceAttributeRequest{Request: req, Input: input, Copy: c.DescribeNetworkInterfaceAttributeRequest}
 }
 
 const opDescribeNetworkInterfacePermissions = "DescribeNetworkInterfacePermissions"
@@ -7806,6 +7942,7 @@ const opDescribeNetworkInterfacePermissions = "DescribeNetworkInterfacePermissio
 type DescribeNetworkInterfacePermissionsRequest struct {
 	*aws.Request
 	Input *DescribeNetworkInterfacePermissionsInput
+	Copy  func(*DescribeNetworkInterfacePermissionsInput) DescribeNetworkInterfacePermissionsRequest
 }
 
 // Send marshals and sends the DescribeNetworkInterfacePermissions API request.
@@ -7846,7 +7983,7 @@ func (c *EC2) DescribeNetworkInterfacePermissionsRequest(input *DescribeNetworkI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNetworkInterfacePermissionsRequest{Request: req, Input: input}
+	return DescribeNetworkInterfacePermissionsRequest{Request: req, Input: input, Copy: c.DescribeNetworkInterfacePermissionsRequest}
 }
 
 const opDescribeNetworkInterfaces = "DescribeNetworkInterfaces"
@@ -7855,6 +7992,7 @@ const opDescribeNetworkInterfaces = "DescribeNetworkInterfaces"
 type DescribeNetworkInterfacesRequest struct {
 	*aws.Request
 	Input *DescribeNetworkInterfacesInput
+	Copy  func(*DescribeNetworkInterfacesInput) DescribeNetworkInterfacesRequest
 }
 
 // Send marshals and sends the DescribeNetworkInterfaces API request.
@@ -7895,7 +8033,7 @@ func (c *EC2) DescribeNetworkInterfacesRequest(input *DescribeNetworkInterfacesI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNetworkInterfacesRequest{Request: req, Input: input}
+	return DescribeNetworkInterfacesRequest{Request: req, Input: input, Copy: c.DescribeNetworkInterfacesRequest}
 }
 
 const opDescribePlacementGroups = "DescribePlacementGroups"
@@ -7904,6 +8042,7 @@ const opDescribePlacementGroups = "DescribePlacementGroups"
 type DescribePlacementGroupsRequest struct {
 	*aws.Request
 	Input *DescribePlacementGroupsInput
+	Copy  func(*DescribePlacementGroupsInput) DescribePlacementGroupsRequest
 }
 
 // Send marshals and sends the DescribePlacementGroups API request.
@@ -7946,7 +8085,7 @@ func (c *EC2) DescribePlacementGroupsRequest(input *DescribePlacementGroupsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePlacementGroupsRequest{Request: req, Input: input}
+	return DescribePlacementGroupsRequest{Request: req, Input: input, Copy: c.DescribePlacementGroupsRequest}
 }
 
 const opDescribePrefixLists = "DescribePrefixLists"
@@ -7955,6 +8094,7 @@ const opDescribePrefixLists = "DescribePrefixLists"
 type DescribePrefixListsRequest struct {
 	*aws.Request
 	Input *DescribePrefixListsInput
+	Copy  func(*DescribePrefixListsInput) DescribePrefixListsRequest
 }
 
 // Send marshals and sends the DescribePrefixLists API request.
@@ -7999,7 +8139,7 @@ func (c *EC2) DescribePrefixListsRequest(input *DescribePrefixListsInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePrefixListsRequest{Request: req, Input: input}
+	return DescribePrefixListsRequest{Request: req, Input: input, Copy: c.DescribePrefixListsRequest}
 }
 
 const opDescribeRegions = "DescribeRegions"
@@ -8008,6 +8148,7 @@ const opDescribeRegions = "DescribeRegions"
 type DescribeRegionsRequest struct {
 	*aws.Request
 	Input *DescribeRegionsInput
+	Copy  func(*DescribeRegionsInput) DescribeRegionsRequest
 }
 
 // Send marshals and sends the DescribeRegions API request.
@@ -8051,7 +8192,7 @@ func (c *EC2) DescribeRegionsRequest(input *DescribeRegionsInput) DescribeRegion
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRegionsRequest{Request: req, Input: input}
+	return DescribeRegionsRequest{Request: req, Input: input, Copy: c.DescribeRegionsRequest}
 }
 
 const opDescribeReservedInstances = "DescribeReservedInstances"
@@ -8060,6 +8201,7 @@ const opDescribeReservedInstances = "DescribeReservedInstances"
 type DescribeReservedInstancesRequest struct {
 	*aws.Request
 	Input *DescribeReservedInstancesInput
+	Copy  func(*DescribeReservedInstancesInput) DescribeReservedInstancesRequest
 }
 
 // Send marshals and sends the DescribeReservedInstances API request.
@@ -8103,7 +8245,7 @@ func (c *EC2) DescribeReservedInstancesRequest(input *DescribeReservedInstancesI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReservedInstancesRequest{Request: req, Input: input}
+	return DescribeReservedInstancesRequest{Request: req, Input: input, Copy: c.DescribeReservedInstancesRequest}
 }
 
 const opDescribeReservedInstancesListings = "DescribeReservedInstancesListings"
@@ -8112,6 +8254,7 @@ const opDescribeReservedInstancesListings = "DescribeReservedInstancesListings"
 type DescribeReservedInstancesListingsRequest struct {
 	*aws.Request
 	Input *DescribeReservedInstancesListingsInput
+	Copy  func(*DescribeReservedInstancesListingsInput) DescribeReservedInstancesListingsRequest
 }
 
 // Send marshals and sends the DescribeReservedInstancesListings API request.
@@ -8173,7 +8316,7 @@ func (c *EC2) DescribeReservedInstancesListingsRequest(input *DescribeReservedIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReservedInstancesListingsRequest{Request: req, Input: input}
+	return DescribeReservedInstancesListingsRequest{Request: req, Input: input, Copy: c.DescribeReservedInstancesListingsRequest}
 }
 
 const opDescribeReservedInstancesModifications = "DescribeReservedInstancesModifications"
@@ -8182,6 +8325,7 @@ const opDescribeReservedInstancesModifications = "DescribeReservedInstancesModif
 type DescribeReservedInstancesModificationsRequest struct {
 	*aws.Request
 	Input *DescribeReservedInstancesModificationsInput
+	Copy  func(*DescribeReservedInstancesModificationsInput) DescribeReservedInstancesModificationsRequest
 }
 
 // Send marshals and sends the DescribeReservedInstancesModifications API request.
@@ -8234,47 +8378,47 @@ func (c *EC2) DescribeReservedInstancesModificationsRequest(input *DescribeReser
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReservedInstancesModificationsRequest{Request: req, Input: input}
+	return DescribeReservedInstancesModificationsRequest{Request: req, Input: input, Copy: c.DescribeReservedInstancesModificationsRequest}
 }
 
-// DescribeReservedInstancesModificationsPages iterates over the pages of a DescribeReservedInstancesModifications operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReservedInstancesModifications method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReservedInstancesModificationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReservedInstancesModifications operation.
-//    pageNum := 0
-//    err := client.DescribeReservedInstancesModificationsPages(params,
-//        func(page *DescribeReservedInstancesModificationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReservedInstancesModificationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeReservedInstancesModificationsRequest) Paginate(opts ...aws.Option) DescribeReservedInstancesModificationsPager {
 	return DescribeReservedInstancesModificationsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReservedInstancesModificationsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReservedInstancesModificationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeReservedInstancesModificationsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeReservedInstancesModificationsPager ...
+// DescribeReservedInstancesModificationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeReservedInstancesModificationsPager struct {
 	aws.Pager
 }
@@ -8289,6 +8433,7 @@ const opDescribeReservedInstancesOfferings = "DescribeReservedInstancesOfferings
 type DescribeReservedInstancesOfferingsRequest struct {
 	*aws.Request
 	Input *DescribeReservedInstancesOfferingsInput
+	Copy  func(*DescribeReservedInstancesOfferingsInput) DescribeReservedInstancesOfferingsRequest
 }
 
 // Send marshals and sends the DescribeReservedInstancesOfferings API request.
@@ -8346,47 +8491,47 @@ func (c *EC2) DescribeReservedInstancesOfferingsRequest(input *DescribeReservedI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReservedInstancesOfferingsRequest{Request: req, Input: input}
+	return DescribeReservedInstancesOfferingsRequest{Request: req, Input: input, Copy: c.DescribeReservedInstancesOfferingsRequest}
 }
 
-// DescribeReservedInstancesOfferingsPages iterates over the pages of a DescribeReservedInstancesOfferings operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReservedInstancesOfferings method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReservedInstancesOfferingsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReservedInstancesOfferings operation.
-//    pageNum := 0
-//    err := client.DescribeReservedInstancesOfferingsPages(params,
-//        func(page *DescribeReservedInstancesOfferingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReservedInstancesOfferingsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeReservedInstancesOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedInstancesOfferingsPager {
 	return DescribeReservedInstancesOfferingsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReservedInstancesOfferingsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReservedInstancesOfferingsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeReservedInstancesOfferingsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeReservedInstancesOfferingsPager ...
+// DescribeReservedInstancesOfferingsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeReservedInstancesOfferingsPager struct {
 	aws.Pager
 }
@@ -8401,6 +8546,7 @@ const opDescribeRouteTables = "DescribeRouteTables"
 type DescribeRouteTablesRequest struct {
 	*aws.Request
 	Input *DescribeRouteTablesInput
+	Copy  func(*DescribeRouteTablesInput) DescribeRouteTablesRequest
 }
 
 // Send marshals and sends the DescribeRouteTables API request.
@@ -8449,7 +8595,7 @@ func (c *EC2) DescribeRouteTablesRequest(input *DescribeRouteTablesInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRouteTablesRequest{Request: req, Input: input}
+	return DescribeRouteTablesRequest{Request: req, Input: input, Copy: c.DescribeRouteTablesRequest}
 }
 
 const opDescribeScheduledInstanceAvailability = "DescribeScheduledInstanceAvailability"
@@ -8458,6 +8604,7 @@ const opDescribeScheduledInstanceAvailability = "DescribeScheduledInstanceAvaila
 type DescribeScheduledInstanceAvailabilityRequest struct {
 	*aws.Request
 	Input *DescribeScheduledInstanceAvailabilityInput
+	Copy  func(*DescribeScheduledInstanceAvailabilityInput) DescribeScheduledInstanceAvailabilityRequest
 }
 
 // Send marshals and sends the DescribeScheduledInstanceAvailability API request.
@@ -8506,7 +8653,7 @@ func (c *EC2) DescribeScheduledInstanceAvailabilityRequest(input *DescribeSchedu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScheduledInstanceAvailabilityRequest{Request: req, Input: input}
+	return DescribeScheduledInstanceAvailabilityRequest{Request: req, Input: input, Copy: c.DescribeScheduledInstanceAvailabilityRequest}
 }
 
 const opDescribeScheduledInstances = "DescribeScheduledInstances"
@@ -8515,6 +8662,7 @@ const opDescribeScheduledInstances = "DescribeScheduledInstances"
 type DescribeScheduledInstancesRequest struct {
 	*aws.Request
 	Input *DescribeScheduledInstancesInput
+	Copy  func(*DescribeScheduledInstancesInput) DescribeScheduledInstancesRequest
 }
 
 // Send marshals and sends the DescribeScheduledInstances API request.
@@ -8555,7 +8703,7 @@ func (c *EC2) DescribeScheduledInstancesRequest(input *DescribeScheduledInstance
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScheduledInstancesRequest{Request: req, Input: input}
+	return DescribeScheduledInstancesRequest{Request: req, Input: input, Copy: c.DescribeScheduledInstancesRequest}
 }
 
 const opDescribeSecurityGroupReferences = "DescribeSecurityGroupReferences"
@@ -8564,6 +8712,7 @@ const opDescribeSecurityGroupReferences = "DescribeSecurityGroupReferences"
 type DescribeSecurityGroupReferencesRequest struct {
 	*aws.Request
 	Input *DescribeSecurityGroupReferencesInput
+	Copy  func(*DescribeSecurityGroupReferencesInput) DescribeSecurityGroupReferencesRequest
 }
 
 // Send marshals and sends the DescribeSecurityGroupReferences API request.
@@ -8605,7 +8754,7 @@ func (c *EC2) DescribeSecurityGroupReferencesRequest(input *DescribeSecurityGrou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSecurityGroupReferencesRequest{Request: req, Input: input}
+	return DescribeSecurityGroupReferencesRequest{Request: req, Input: input, Copy: c.DescribeSecurityGroupReferencesRequest}
 }
 
 const opDescribeSecurityGroups = "DescribeSecurityGroups"
@@ -8614,6 +8763,7 @@ const opDescribeSecurityGroups = "DescribeSecurityGroups"
 type DescribeSecurityGroupsRequest struct {
 	*aws.Request
 	Input *DescribeSecurityGroupsInput
+	Copy  func(*DescribeSecurityGroupsInput) DescribeSecurityGroupsRequest
 }
 
 // Send marshals and sends the DescribeSecurityGroups API request.
@@ -8661,7 +8811,7 @@ func (c *EC2) DescribeSecurityGroupsRequest(input *DescribeSecurityGroupsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSecurityGroupsRequest{Request: req, Input: input}
+	return DescribeSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeSecurityGroupsRequest}
 }
 
 const opDescribeSnapshotAttribute = "DescribeSnapshotAttribute"
@@ -8670,6 +8820,7 @@ const opDescribeSnapshotAttribute = "DescribeSnapshotAttribute"
 type DescribeSnapshotAttributeRequest struct {
 	*aws.Request
 	Input *DescribeSnapshotAttributeInput
+	Copy  func(*DescribeSnapshotAttributeInput) DescribeSnapshotAttributeRequest
 }
 
 // Send marshals and sends the DescribeSnapshotAttribute API request.
@@ -8714,7 +8865,7 @@ func (c *EC2) DescribeSnapshotAttributeRequest(input *DescribeSnapshotAttributeI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSnapshotAttributeRequest{Request: req, Input: input}
+	return DescribeSnapshotAttributeRequest{Request: req, Input: input, Copy: c.DescribeSnapshotAttributeRequest}
 }
 
 const opDescribeSnapshots = "DescribeSnapshots"
@@ -8723,6 +8874,7 @@ const opDescribeSnapshots = "DescribeSnapshots"
 type DescribeSnapshotsRequest struct {
 	*aws.Request
 	Input *DescribeSnapshotsInput
+	Copy  func(*DescribeSnapshotsInput) DescribeSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeSnapshots API request.
@@ -8814,47 +8966,47 @@ func (c *EC2) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) DescribeSn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSnapshotsRequest{Request: req, Input: input}
+	return DescribeSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeSnapshotsRequest}
 }
 
-// DescribeSnapshotsPages iterates over the pages of a DescribeSnapshots operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeSnapshots method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeSnapshotsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeSnapshots operation.
-//    pageNum := 0
-//    err := client.DescribeSnapshotsPages(params,
-//        func(page *DescribeSnapshotsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeSnapshotsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeSnapshotsRequest) Paginate(opts ...aws.Option) DescribeSnapshotsPager {
 	return DescribeSnapshotsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeSnapshotsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeSnapshotsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeSnapshotsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeSnapshotsPager ...
+// DescribeSnapshotsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeSnapshotsPager struct {
 	aws.Pager
 }
@@ -8869,6 +9021,7 @@ const opDescribeSpotDatafeedSubscription = "DescribeSpotDatafeedSubscription"
 type DescribeSpotDatafeedSubscriptionRequest struct {
 	*aws.Request
 	Input *DescribeSpotDatafeedSubscriptionInput
+	Copy  func(*DescribeSpotDatafeedSubscriptionInput) DescribeSpotDatafeedSubscriptionRequest
 }
 
 // Send marshals and sends the DescribeSpotDatafeedSubscription API request.
@@ -8911,7 +9064,7 @@ func (c *EC2) DescribeSpotDatafeedSubscriptionRequest(input *DescribeSpotDatafee
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSpotDatafeedSubscriptionRequest{Request: req, Input: input}
+	return DescribeSpotDatafeedSubscriptionRequest{Request: req, Input: input, Copy: c.DescribeSpotDatafeedSubscriptionRequest}
 }
 
 const opDescribeSpotFleetInstances = "DescribeSpotFleetInstances"
@@ -8920,6 +9073,7 @@ const opDescribeSpotFleetInstances = "DescribeSpotFleetInstances"
 type DescribeSpotFleetInstancesRequest struct {
 	*aws.Request
 	Input *DescribeSpotFleetInstancesInput
+	Copy  func(*DescribeSpotFleetInstancesInput) DescribeSpotFleetInstancesRequest
 }
 
 // Send marshals and sends the DescribeSpotFleetInstances API request.
@@ -8960,7 +9114,7 @@ func (c *EC2) DescribeSpotFleetInstancesRequest(input *DescribeSpotFleetInstance
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSpotFleetInstancesRequest{Request: req, Input: input}
+	return DescribeSpotFleetInstancesRequest{Request: req, Input: input, Copy: c.DescribeSpotFleetInstancesRequest}
 }
 
 const opDescribeSpotFleetRequestHistory = "DescribeSpotFleetRequestHistory"
@@ -8969,6 +9123,7 @@ const opDescribeSpotFleetRequestHistory = "DescribeSpotFleetRequestHistory"
 type DescribeSpotFleetRequestHistoryRequest struct {
 	*aws.Request
 	Input *DescribeSpotFleetRequestHistoryInput
+	Copy  func(*DescribeSpotFleetRequestHistoryInput) DescribeSpotFleetRequestHistoryRequest
 }
 
 // Send marshals and sends the DescribeSpotFleetRequestHistory API request.
@@ -9014,7 +9169,7 @@ func (c *EC2) DescribeSpotFleetRequestHistoryRequest(input *DescribeSpotFleetReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSpotFleetRequestHistoryRequest{Request: req, Input: input}
+	return DescribeSpotFleetRequestHistoryRequest{Request: req, Input: input, Copy: c.DescribeSpotFleetRequestHistoryRequest}
 }
 
 const opDescribeSpotFleetRequests = "DescribeSpotFleetRequests"
@@ -9023,6 +9178,7 @@ const opDescribeSpotFleetRequests = "DescribeSpotFleetRequests"
 type DescribeSpotFleetRequestsRequest struct {
 	*aws.Request
 	Input *DescribeSpotFleetRequestsInput
+	Copy  func(*DescribeSpotFleetRequestsInput) DescribeSpotFleetRequestsRequest
 }
 
 // Send marshals and sends the DescribeSpotFleetRequests API request.
@@ -9072,47 +9228,47 @@ func (c *EC2) DescribeSpotFleetRequestsRequest(input *DescribeSpotFleetRequestsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSpotFleetRequestsRequest{Request: req, Input: input}
+	return DescribeSpotFleetRequestsRequest{Request: req, Input: input, Copy: c.DescribeSpotFleetRequestsRequest}
 }
 
-// DescribeSpotFleetRequestsPages iterates over the pages of a DescribeSpotFleetRequests operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeSpotFleetRequests method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeSpotFleetRequestsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeSpotFleetRequests operation.
-//    pageNum := 0
-//    err := client.DescribeSpotFleetRequestsPages(params,
-//        func(page *DescribeSpotFleetRequestsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeSpotFleetRequestsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeSpotFleetRequestsRequest) Paginate(opts ...aws.Option) DescribeSpotFleetRequestsPager {
 	return DescribeSpotFleetRequestsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeSpotFleetRequestsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeSpotFleetRequestsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeSpotFleetRequestsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeSpotFleetRequestsPager ...
+// DescribeSpotFleetRequestsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeSpotFleetRequestsPager struct {
 	aws.Pager
 }
@@ -9127,6 +9283,7 @@ const opDescribeSpotInstanceRequests = "DescribeSpotInstanceRequests"
 type DescribeSpotInstanceRequestsRequest struct {
 	*aws.Request
 	Input *DescribeSpotInstanceRequestsInput
+	Copy  func(*DescribeSpotInstanceRequestsInput) DescribeSpotInstanceRequestsRequest
 }
 
 // Send marshals and sends the DescribeSpotInstanceRequests API request.
@@ -9180,7 +9337,7 @@ func (c *EC2) DescribeSpotInstanceRequestsRequest(input *DescribeSpotInstanceReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSpotInstanceRequestsRequest{Request: req, Input: input}
+	return DescribeSpotInstanceRequestsRequest{Request: req, Input: input, Copy: c.DescribeSpotInstanceRequestsRequest}
 }
 
 const opDescribeSpotPriceHistory = "DescribeSpotPriceHistory"
@@ -9189,6 +9346,7 @@ const opDescribeSpotPriceHistory = "DescribeSpotPriceHistory"
 type DescribeSpotPriceHistoryRequest struct {
 	*aws.Request
 	Input *DescribeSpotPriceHistoryInput
+	Copy  func(*DescribeSpotPriceHistoryInput) DescribeSpotPriceHistoryRequest
 }
 
 // Send marshals and sends the DescribeSpotPriceHistory API request.
@@ -9242,47 +9400,47 @@ func (c *EC2) DescribeSpotPriceHistoryRequest(input *DescribeSpotPriceHistoryInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSpotPriceHistoryRequest{Request: req, Input: input}
+	return DescribeSpotPriceHistoryRequest{Request: req, Input: input, Copy: c.DescribeSpotPriceHistoryRequest}
 }
 
-// DescribeSpotPriceHistoryPages iterates over the pages of a DescribeSpotPriceHistory operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeSpotPriceHistory method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeSpotPriceHistoryRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeSpotPriceHistory operation.
-//    pageNum := 0
-//    err := client.DescribeSpotPriceHistoryPages(params,
-//        func(page *DescribeSpotPriceHistoryOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeSpotPriceHistoryRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeSpotPriceHistoryRequest) Paginate(opts ...aws.Option) DescribeSpotPriceHistoryPager {
 	return DescribeSpotPriceHistoryPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeSpotPriceHistoryInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeSpotPriceHistoryInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeSpotPriceHistoryOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeSpotPriceHistoryPager ...
+// DescribeSpotPriceHistoryPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeSpotPriceHistoryPager struct {
 	aws.Pager
 }
@@ -9297,6 +9455,7 @@ const opDescribeStaleSecurityGroups = "DescribeStaleSecurityGroups"
 type DescribeStaleSecurityGroupsRequest struct {
 	*aws.Request
 	Input *DescribeStaleSecurityGroupsInput
+	Copy  func(*DescribeStaleSecurityGroupsInput) DescribeStaleSecurityGroupsRequest
 }
 
 // Send marshals and sends the DescribeStaleSecurityGroups API request.
@@ -9340,7 +9499,7 @@ func (c *EC2) DescribeStaleSecurityGroupsRequest(input *DescribeStaleSecurityGro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStaleSecurityGroupsRequest{Request: req, Input: input}
+	return DescribeStaleSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeStaleSecurityGroupsRequest}
 }
 
 const opDescribeSubnets = "DescribeSubnets"
@@ -9349,6 +9508,7 @@ const opDescribeSubnets = "DescribeSubnets"
 type DescribeSubnetsRequest struct {
 	*aws.Request
 	Input *DescribeSubnetsInput
+	Copy  func(*DescribeSubnetsInput) DescribeSubnetsRequest
 }
 
 // Send marshals and sends the DescribeSubnets API request.
@@ -9392,7 +9552,7 @@ func (c *EC2) DescribeSubnetsRequest(input *DescribeSubnetsInput) DescribeSubnet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSubnetsRequest{Request: req, Input: input}
+	return DescribeSubnetsRequest{Request: req, Input: input, Copy: c.DescribeSubnetsRequest}
 }
 
 const opDescribeTags = "DescribeTags"
@@ -9401,6 +9561,7 @@ const opDescribeTags = "DescribeTags"
 type DescribeTagsRequest struct {
 	*aws.Request
 	Input *DescribeTagsInput
+	Copy  func(*DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -9450,47 +9611,47 @@ func (c *EC2) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagsRequest{Request: req, Input: input}
+	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
-// DescribeTagsPages iterates over the pages of a DescribeTags operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeTags method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeTagsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeTags operation.
-//    pageNum := 0
-//    err := client.DescribeTagsPages(params,
-//        func(page *DescribeTagsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeTagsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeTagsRequest) Paginate(opts ...aws.Option) DescribeTagsPager {
 	return DescribeTagsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeTagsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeTagsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeTagsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeTagsPager ...
+// DescribeTagsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeTagsPager struct {
 	aws.Pager
 }
@@ -9505,6 +9666,7 @@ const opDescribeVolumeAttribute = "DescribeVolumeAttribute"
 type DescribeVolumeAttributeRequest struct {
 	*aws.Request
 	Input *DescribeVolumeAttributeInput
+	Copy  func(*DescribeVolumeAttributeInput) DescribeVolumeAttributeRequest
 }
 
 // Send marshals and sends the DescribeVolumeAttribute API request.
@@ -9549,7 +9711,7 @@ func (c *EC2) DescribeVolumeAttributeRequest(input *DescribeVolumeAttributeInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVolumeAttributeRequest{Request: req, Input: input}
+	return DescribeVolumeAttributeRequest{Request: req, Input: input, Copy: c.DescribeVolumeAttributeRequest}
 }
 
 const opDescribeVolumeStatus = "DescribeVolumeStatus"
@@ -9558,6 +9720,7 @@ const opDescribeVolumeStatus = "DescribeVolumeStatus"
 type DescribeVolumeStatusRequest struct {
 	*aws.Request
 	Input *DescribeVolumeStatusInput
+	Copy  func(*DescribeVolumeStatusInput) DescribeVolumeStatusRequest
 }
 
 // Send marshals and sends the DescribeVolumeStatus API request.
@@ -9638,47 +9801,47 @@ func (c *EC2) DescribeVolumeStatusRequest(input *DescribeVolumeStatusInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVolumeStatusRequest{Request: req, Input: input}
+	return DescribeVolumeStatusRequest{Request: req, Input: input, Copy: c.DescribeVolumeStatusRequest}
 }
 
-// DescribeVolumeStatusPages iterates over the pages of a DescribeVolumeStatus operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeVolumeStatus method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeVolumeStatusRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeVolumeStatus operation.
-//    pageNum := 0
-//    err := client.DescribeVolumeStatusPages(params,
-//        func(page *DescribeVolumeStatusOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeVolumeStatusRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeVolumeStatusRequest) Paginate(opts ...aws.Option) DescribeVolumeStatusPager {
 	return DescribeVolumeStatusPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeVolumeStatusInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeVolumeStatusInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeVolumeStatusOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeVolumeStatusPager ...
+// DescribeVolumeStatusPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeVolumeStatusPager struct {
 	aws.Pager
 }
@@ -9693,6 +9856,7 @@ const opDescribeVolumes = "DescribeVolumes"
 type DescribeVolumesRequest struct {
 	*aws.Request
 	Input *DescribeVolumesInput
+	Copy  func(*DescribeVolumesInput) DescribeVolumesRequest
 }
 
 // Send marshals and sends the DescribeVolumes API request.
@@ -9749,47 +9913,47 @@ func (c *EC2) DescribeVolumesRequest(input *DescribeVolumesInput) DescribeVolume
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVolumesRequest{Request: req, Input: input}
+	return DescribeVolumesRequest{Request: req, Input: input, Copy: c.DescribeVolumesRequest}
 }
 
-// DescribeVolumesPages iterates over the pages of a DescribeVolumes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeVolumes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeVolumesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeVolumes operation.
-//    pageNum := 0
-//    err := client.DescribeVolumesPages(params,
-//        func(page *DescribeVolumesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeVolumesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeVolumesRequest) Paginate(opts ...aws.Option) DescribeVolumesPager {
 	return DescribeVolumesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeVolumesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeVolumesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeVolumesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeVolumesPager ...
+// DescribeVolumesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeVolumesPager struct {
 	aws.Pager
 }
@@ -9804,6 +9968,7 @@ const opDescribeVolumesModifications = "DescribeVolumesModifications"
 type DescribeVolumesModificationsRequest struct {
 	*aws.Request
 	Input *DescribeVolumesModificationsInput
+	Copy  func(*DescribeVolumesModificationsInput) DescribeVolumesModificationsRequest
 }
 
 // Send marshals and sends the DescribeVolumesModifications API request.
@@ -9856,7 +10021,7 @@ func (c *EC2) DescribeVolumesModificationsRequest(input *DescribeVolumesModifica
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVolumesModificationsRequest{Request: req, Input: input}
+	return DescribeVolumesModificationsRequest{Request: req, Input: input, Copy: c.DescribeVolumesModificationsRequest}
 }
 
 const opDescribeVpcAttribute = "DescribeVpcAttribute"
@@ -9865,6 +10030,7 @@ const opDescribeVpcAttribute = "DescribeVpcAttribute"
 type DescribeVpcAttributeRequest struct {
 	*aws.Request
 	Input *DescribeVpcAttributeInput
+	Copy  func(*DescribeVpcAttributeInput) DescribeVpcAttributeRequest
 }
 
 // Send marshals and sends the DescribeVpcAttribute API request.
@@ -9906,7 +10072,7 @@ func (c *EC2) DescribeVpcAttributeRequest(input *DescribeVpcAttributeInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcAttributeRequest{Request: req, Input: input}
+	return DescribeVpcAttributeRequest{Request: req, Input: input, Copy: c.DescribeVpcAttributeRequest}
 }
 
 const opDescribeVpcClassicLink = "DescribeVpcClassicLink"
@@ -9915,6 +10081,7 @@ const opDescribeVpcClassicLink = "DescribeVpcClassicLink"
 type DescribeVpcClassicLinkRequest struct {
 	*aws.Request
 	Input *DescribeVpcClassicLinkInput
+	Copy  func(*DescribeVpcClassicLinkInput) DescribeVpcClassicLinkRequest
 }
 
 // Send marshals and sends the DescribeVpcClassicLink API request.
@@ -9955,7 +10122,7 @@ func (c *EC2) DescribeVpcClassicLinkRequest(input *DescribeVpcClassicLinkInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcClassicLinkRequest{Request: req, Input: input}
+	return DescribeVpcClassicLinkRequest{Request: req, Input: input, Copy: c.DescribeVpcClassicLinkRequest}
 }
 
 const opDescribeVpcClassicLinkDnsSupport = "DescribeVpcClassicLinkDnsSupport"
@@ -9964,6 +10131,7 @@ const opDescribeVpcClassicLinkDnsSupport = "DescribeVpcClassicLinkDnsSupport"
 type DescribeVpcClassicLinkDnsSupportRequest struct {
 	*aws.Request
 	Input *DescribeVpcClassicLinkDnsSupportInput
+	Copy  func(*DescribeVpcClassicLinkDnsSupportInput) DescribeVpcClassicLinkDnsSupportRequest
 }
 
 // Send marshals and sends the DescribeVpcClassicLinkDnsSupport API request.
@@ -10010,7 +10178,7 @@ func (c *EC2) DescribeVpcClassicLinkDnsSupportRequest(input *DescribeVpcClassicL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcClassicLinkDnsSupportRequest{Request: req, Input: input}
+	return DescribeVpcClassicLinkDnsSupportRequest{Request: req, Input: input, Copy: c.DescribeVpcClassicLinkDnsSupportRequest}
 }
 
 const opDescribeVpcEndpointConnectionNotifications = "DescribeVpcEndpointConnectionNotifications"
@@ -10019,6 +10187,7 @@ const opDescribeVpcEndpointConnectionNotifications = "DescribeVpcEndpointConnect
 type DescribeVpcEndpointConnectionNotificationsRequest struct {
 	*aws.Request
 	Input *DescribeVpcEndpointConnectionNotificationsInput
+	Copy  func(*DescribeVpcEndpointConnectionNotificationsInput) DescribeVpcEndpointConnectionNotificationsRequest
 }
 
 // Send marshals and sends the DescribeVpcEndpointConnectionNotifications API request.
@@ -10060,7 +10229,7 @@ func (c *EC2) DescribeVpcEndpointConnectionNotificationsRequest(input *DescribeV
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcEndpointConnectionNotificationsRequest{Request: req, Input: input}
+	return DescribeVpcEndpointConnectionNotificationsRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointConnectionNotificationsRequest}
 }
 
 const opDescribeVpcEndpointConnections = "DescribeVpcEndpointConnections"
@@ -10069,6 +10238,7 @@ const opDescribeVpcEndpointConnections = "DescribeVpcEndpointConnections"
 type DescribeVpcEndpointConnectionsRequest struct {
 	*aws.Request
 	Input *DescribeVpcEndpointConnectionsInput
+	Copy  func(*DescribeVpcEndpointConnectionsInput) DescribeVpcEndpointConnectionsRequest
 }
 
 // Send marshals and sends the DescribeVpcEndpointConnections API request.
@@ -10110,7 +10280,7 @@ func (c *EC2) DescribeVpcEndpointConnectionsRequest(input *DescribeVpcEndpointCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcEndpointConnectionsRequest{Request: req, Input: input}
+	return DescribeVpcEndpointConnectionsRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointConnectionsRequest}
 }
 
 const opDescribeVpcEndpointServiceConfigurations = "DescribeVpcEndpointServiceConfigurations"
@@ -10119,6 +10289,7 @@ const opDescribeVpcEndpointServiceConfigurations = "DescribeVpcEndpointServiceCo
 type DescribeVpcEndpointServiceConfigurationsRequest struct {
 	*aws.Request
 	Input *DescribeVpcEndpointServiceConfigurationsInput
+	Copy  func(*DescribeVpcEndpointServiceConfigurationsInput) DescribeVpcEndpointServiceConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeVpcEndpointServiceConfigurations API request.
@@ -10159,7 +10330,7 @@ func (c *EC2) DescribeVpcEndpointServiceConfigurationsRequest(input *DescribeVpc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcEndpointServiceConfigurationsRequest{Request: req, Input: input}
+	return DescribeVpcEndpointServiceConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointServiceConfigurationsRequest}
 }
 
 const opDescribeVpcEndpointServicePermissions = "DescribeVpcEndpointServicePermissions"
@@ -10168,6 +10339,7 @@ const opDescribeVpcEndpointServicePermissions = "DescribeVpcEndpointServicePermi
 type DescribeVpcEndpointServicePermissionsRequest struct {
 	*aws.Request
 	Input *DescribeVpcEndpointServicePermissionsInput
+	Copy  func(*DescribeVpcEndpointServicePermissionsInput) DescribeVpcEndpointServicePermissionsRequest
 }
 
 // Send marshals and sends the DescribeVpcEndpointServicePermissions API request.
@@ -10209,7 +10381,7 @@ func (c *EC2) DescribeVpcEndpointServicePermissionsRequest(input *DescribeVpcEnd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcEndpointServicePermissionsRequest{Request: req, Input: input}
+	return DescribeVpcEndpointServicePermissionsRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointServicePermissionsRequest}
 }
 
 const opDescribeVpcEndpointServices = "DescribeVpcEndpointServices"
@@ -10218,6 +10390,7 @@ const opDescribeVpcEndpointServices = "DescribeVpcEndpointServices"
 type DescribeVpcEndpointServicesRequest struct {
 	*aws.Request
 	Input *DescribeVpcEndpointServicesInput
+	Copy  func(*DescribeVpcEndpointServicesInput) DescribeVpcEndpointServicesRequest
 }
 
 // Send marshals and sends the DescribeVpcEndpointServices API request.
@@ -10258,7 +10431,7 @@ func (c *EC2) DescribeVpcEndpointServicesRequest(input *DescribeVpcEndpointServi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcEndpointServicesRequest{Request: req, Input: input}
+	return DescribeVpcEndpointServicesRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointServicesRequest}
 }
 
 const opDescribeVpcEndpoints = "DescribeVpcEndpoints"
@@ -10267,6 +10440,7 @@ const opDescribeVpcEndpoints = "DescribeVpcEndpoints"
 type DescribeVpcEndpointsRequest struct {
 	*aws.Request
 	Input *DescribeVpcEndpointsInput
+	Copy  func(*DescribeVpcEndpointsInput) DescribeVpcEndpointsRequest
 }
 
 // Send marshals and sends the DescribeVpcEndpoints API request.
@@ -10307,7 +10481,7 @@ func (c *EC2) DescribeVpcEndpointsRequest(input *DescribeVpcEndpointsInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcEndpointsRequest{Request: req, Input: input}
+	return DescribeVpcEndpointsRequest{Request: req, Input: input, Copy: c.DescribeVpcEndpointsRequest}
 }
 
 const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
@@ -10316,6 +10490,7 @@ const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
 type DescribeVpcPeeringConnectionsRequest struct {
 	*aws.Request
 	Input *DescribeVpcPeeringConnectionsInput
+	Copy  func(*DescribeVpcPeeringConnectionsInput) DescribeVpcPeeringConnectionsRequest
 }
 
 // Send marshals and sends the DescribeVpcPeeringConnections API request.
@@ -10356,7 +10531,7 @@ func (c *EC2) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeeringConn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcPeeringConnectionsRequest{Request: req, Input: input}
+	return DescribeVpcPeeringConnectionsRequest{Request: req, Input: input, Copy: c.DescribeVpcPeeringConnectionsRequest}
 }
 
 const opDescribeVpcs = "DescribeVpcs"
@@ -10365,6 +10540,7 @@ const opDescribeVpcs = "DescribeVpcs"
 type DescribeVpcsRequest struct {
 	*aws.Request
 	Input *DescribeVpcsInput
+	Copy  func(*DescribeVpcsInput) DescribeVpcsRequest
 }
 
 // Send marshals and sends the DescribeVpcs API request.
@@ -10405,7 +10581,7 @@ func (c *EC2) DescribeVpcsRequest(input *DescribeVpcsInput) DescribeVpcsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcsRequest{Request: req, Input: input}
+	return DescribeVpcsRequest{Request: req, Input: input, Copy: c.DescribeVpcsRequest}
 }
 
 const opDescribeVpnConnections = "DescribeVpnConnections"
@@ -10414,6 +10590,7 @@ const opDescribeVpnConnections = "DescribeVpnConnections"
 type DescribeVpnConnectionsRequest struct {
 	*aws.Request
 	Input *DescribeVpnConnectionsInput
+	Copy  func(*DescribeVpnConnectionsInput) DescribeVpnConnectionsRequest
 }
 
 // Send marshals and sends the DescribeVpnConnections API request.
@@ -10458,7 +10635,7 @@ func (c *EC2) DescribeVpnConnectionsRequest(input *DescribeVpnConnectionsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpnConnectionsRequest{Request: req, Input: input}
+	return DescribeVpnConnectionsRequest{Request: req, Input: input, Copy: c.DescribeVpnConnectionsRequest}
 }
 
 const opDescribeVpnGateways = "DescribeVpnGateways"
@@ -10467,6 +10644,7 @@ const opDescribeVpnGateways = "DescribeVpnGateways"
 type DescribeVpnGatewaysRequest struct {
 	*aws.Request
 	Input *DescribeVpnGatewaysInput
+	Copy  func(*DescribeVpnGatewaysInput) DescribeVpnGatewaysRequest
 }
 
 // Send marshals and sends the DescribeVpnGateways API request.
@@ -10511,7 +10689,7 @@ func (c *EC2) DescribeVpnGatewaysRequest(input *DescribeVpnGatewaysInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpnGatewaysRequest{Request: req, Input: input}
+	return DescribeVpnGatewaysRequest{Request: req, Input: input, Copy: c.DescribeVpnGatewaysRequest}
 }
 
 const opDetachClassicLinkVpc = "DetachClassicLinkVpc"
@@ -10520,6 +10698,7 @@ const opDetachClassicLinkVpc = "DetachClassicLinkVpc"
 type DetachClassicLinkVpcRequest struct {
 	*aws.Request
 	Input *DetachClassicLinkVpcInput
+	Copy  func(*DetachClassicLinkVpcInput) DetachClassicLinkVpcRequest
 }
 
 // Send marshals and sends the DetachClassicLinkVpc API request.
@@ -10562,7 +10741,7 @@ func (c *EC2) DetachClassicLinkVpcRequest(input *DetachClassicLinkVpcInput) Deta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachClassicLinkVpcRequest{Request: req, Input: input}
+	return DetachClassicLinkVpcRequest{Request: req, Input: input, Copy: c.DetachClassicLinkVpcRequest}
 }
 
 const opDetachInternetGateway = "DetachInternetGateway"
@@ -10571,6 +10750,7 @@ const opDetachInternetGateway = "DetachInternetGateway"
 type DetachInternetGatewayRequest struct {
 	*aws.Request
 	Input *DetachInternetGatewayInput
+	Copy  func(*DetachInternetGatewayInput) DetachInternetGatewayRequest
 }
 
 // Send marshals and sends the DetachInternetGateway API request.
@@ -10615,7 +10795,7 @@ func (c *EC2) DetachInternetGatewayRequest(input *DetachInternetGatewayInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachInternetGatewayRequest{Request: req, Input: input}
+	return DetachInternetGatewayRequest{Request: req, Input: input, Copy: c.DetachInternetGatewayRequest}
 }
 
 const opDetachNetworkInterface = "DetachNetworkInterface"
@@ -10624,6 +10804,7 @@ const opDetachNetworkInterface = "DetachNetworkInterface"
 type DetachNetworkInterfaceRequest struct {
 	*aws.Request
 	Input *DetachNetworkInterfaceInput
+	Copy  func(*DetachNetworkInterfaceInput) DetachNetworkInterfaceRequest
 }
 
 // Send marshals and sends the DetachNetworkInterface API request.
@@ -10666,7 +10847,7 @@ func (c *EC2) DetachNetworkInterfaceRequest(input *DetachNetworkInterfaceInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachNetworkInterfaceRequest{Request: req, Input: input}
+	return DetachNetworkInterfaceRequest{Request: req, Input: input, Copy: c.DetachNetworkInterfaceRequest}
 }
 
 const opDetachVolume = "DetachVolume"
@@ -10675,6 +10856,7 @@ const opDetachVolume = "DetachVolume"
 type DetachVolumeRequest struct {
 	*aws.Request
 	Input *DetachVolumeInput
+	Copy  func(*DetachVolumeInput) DetachVolumeRequest
 }
 
 // Send marshals and sends the DetachVolume API request.
@@ -10728,7 +10910,7 @@ func (c *EC2) DetachVolumeRequest(input *DetachVolumeInput) DetachVolumeRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachVolumeRequest{Request: req, Input: input}
+	return DetachVolumeRequest{Request: req, Input: input, Copy: c.DetachVolumeRequest}
 }
 
 const opDetachVpnGateway = "DetachVpnGateway"
@@ -10737,6 +10919,7 @@ const opDetachVpnGateway = "DetachVpnGateway"
 type DetachVpnGatewayRequest struct {
 	*aws.Request
 	Input *DetachVpnGatewayInput
+	Copy  func(*DetachVpnGatewayInput) DetachVpnGatewayRequest
 }
 
 // Send marshals and sends the DetachVpnGateway API request.
@@ -10786,7 +10969,7 @@ func (c *EC2) DetachVpnGatewayRequest(input *DetachVpnGatewayInput) DetachVpnGat
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachVpnGatewayRequest{Request: req, Input: input}
+	return DetachVpnGatewayRequest{Request: req, Input: input, Copy: c.DetachVpnGatewayRequest}
 }
 
 const opDisableVgwRoutePropagation = "DisableVgwRoutePropagation"
@@ -10795,6 +10978,7 @@ const opDisableVgwRoutePropagation = "DisableVgwRoutePropagation"
 type DisableVgwRoutePropagationRequest struct {
 	*aws.Request
 	Input *DisableVgwRoutePropagationInput
+	Copy  func(*DisableVgwRoutePropagationInput) DisableVgwRoutePropagationRequest
 }
 
 // Send marshals and sends the DisableVgwRoutePropagation API request.
@@ -10838,7 +11022,7 @@ func (c *EC2) DisableVgwRoutePropagationRequest(input *DisableVgwRoutePropagatio
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableVgwRoutePropagationRequest{Request: req, Input: input}
+	return DisableVgwRoutePropagationRequest{Request: req, Input: input, Copy: c.DisableVgwRoutePropagationRequest}
 }
 
 const opDisableVpcClassicLink = "DisableVpcClassicLink"
@@ -10847,6 +11031,7 @@ const opDisableVpcClassicLink = "DisableVpcClassicLink"
 type DisableVpcClassicLinkRequest struct {
 	*aws.Request
 	Input *DisableVpcClassicLinkInput
+	Copy  func(*DisableVpcClassicLinkInput) DisableVpcClassicLinkRequest
 }
 
 // Send marshals and sends the DisableVpcClassicLink API request.
@@ -10888,7 +11073,7 @@ func (c *EC2) DisableVpcClassicLinkRequest(input *DisableVpcClassicLinkInput) Di
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableVpcClassicLinkRequest{Request: req, Input: input}
+	return DisableVpcClassicLinkRequest{Request: req, Input: input, Copy: c.DisableVpcClassicLinkRequest}
 }
 
 const opDisableVpcClassicLinkDnsSupport = "DisableVpcClassicLinkDnsSupport"
@@ -10897,6 +11082,7 @@ const opDisableVpcClassicLinkDnsSupport = "DisableVpcClassicLinkDnsSupport"
 type DisableVpcClassicLinkDnsSupportRequest struct {
 	*aws.Request
 	Input *DisableVpcClassicLinkDnsSupportInput
+	Copy  func(*DisableVpcClassicLinkDnsSupportInput) DisableVpcClassicLinkDnsSupportRequest
 }
 
 // Send marshals and sends the DisableVpcClassicLinkDnsSupport API request.
@@ -10941,7 +11127,7 @@ func (c *EC2) DisableVpcClassicLinkDnsSupportRequest(input *DisableVpcClassicLin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableVpcClassicLinkDnsSupportRequest{Request: req, Input: input}
+	return DisableVpcClassicLinkDnsSupportRequest{Request: req, Input: input, Copy: c.DisableVpcClassicLinkDnsSupportRequest}
 }
 
 const opDisassociateAddress = "DisassociateAddress"
@@ -10950,6 +11136,7 @@ const opDisassociateAddress = "DisassociateAddress"
 type DisassociateAddressRequest struct {
 	*aws.Request
 	Input *DisassociateAddressInput
+	Copy  func(*DisassociateAddressInput) DisassociateAddressRequest
 }
 
 // Send marshals and sends the DisassociateAddress API request.
@@ -11000,7 +11187,7 @@ func (c *EC2) DisassociateAddressRequest(input *DisassociateAddressInput) Disass
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateAddressRequest{Request: req, Input: input}
+	return DisassociateAddressRequest{Request: req, Input: input, Copy: c.DisassociateAddressRequest}
 }
 
 const opDisassociateIamInstanceProfile = "DisassociateIamInstanceProfile"
@@ -11009,6 +11196,7 @@ const opDisassociateIamInstanceProfile = "DisassociateIamInstanceProfile"
 type DisassociateIamInstanceProfileRequest struct {
 	*aws.Request
 	Input *DisassociateIamInstanceProfileInput
+	Copy  func(*DisassociateIamInstanceProfileInput) DisassociateIamInstanceProfileRequest
 }
 
 // Send marshals and sends the DisassociateIamInstanceProfile API request.
@@ -11051,7 +11239,7 @@ func (c *EC2) DisassociateIamInstanceProfileRequest(input *DisassociateIamInstan
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateIamInstanceProfileRequest{Request: req, Input: input}
+	return DisassociateIamInstanceProfileRequest{Request: req, Input: input, Copy: c.DisassociateIamInstanceProfileRequest}
 }
 
 const opDisassociateRouteTable = "DisassociateRouteTable"
@@ -11060,6 +11248,7 @@ const opDisassociateRouteTable = "DisassociateRouteTable"
 type DisassociateRouteTableRequest struct {
 	*aws.Request
 	Input *DisassociateRouteTableInput
+	Copy  func(*DisassociateRouteTableInput) DisassociateRouteTableRequest
 }
 
 // Send marshals and sends the DisassociateRouteTable API request.
@@ -11107,7 +11296,7 @@ func (c *EC2) DisassociateRouteTableRequest(input *DisassociateRouteTableInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateRouteTableRequest{Request: req, Input: input}
+	return DisassociateRouteTableRequest{Request: req, Input: input, Copy: c.DisassociateRouteTableRequest}
 }
 
 const opDisassociateSubnetCidrBlock = "DisassociateSubnetCidrBlock"
@@ -11116,6 +11305,7 @@ const opDisassociateSubnetCidrBlock = "DisassociateSubnetCidrBlock"
 type DisassociateSubnetCidrBlockRequest struct {
 	*aws.Request
 	Input *DisassociateSubnetCidrBlockInput
+	Copy  func(*DisassociateSubnetCidrBlockInput) DisassociateSubnetCidrBlockRequest
 }
 
 // Send marshals and sends the DisassociateSubnetCidrBlock API request.
@@ -11158,7 +11348,7 @@ func (c *EC2) DisassociateSubnetCidrBlockRequest(input *DisassociateSubnetCidrBl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateSubnetCidrBlockRequest{Request: req, Input: input}
+	return DisassociateSubnetCidrBlockRequest{Request: req, Input: input, Copy: c.DisassociateSubnetCidrBlockRequest}
 }
 
 const opDisassociateVpcCidrBlock = "DisassociateVpcCidrBlock"
@@ -11167,6 +11357,7 @@ const opDisassociateVpcCidrBlock = "DisassociateVpcCidrBlock"
 type DisassociateVpcCidrBlockRequest struct {
 	*aws.Request
 	Input *DisassociateVpcCidrBlockInput
+	Copy  func(*DisassociateVpcCidrBlockInput) DisassociateVpcCidrBlockRequest
 }
 
 // Send marshals and sends the DisassociateVpcCidrBlock API request.
@@ -11213,7 +11404,7 @@ func (c *EC2) DisassociateVpcCidrBlockRequest(input *DisassociateVpcCidrBlockInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateVpcCidrBlockRequest{Request: req, Input: input}
+	return DisassociateVpcCidrBlockRequest{Request: req, Input: input, Copy: c.DisassociateVpcCidrBlockRequest}
 }
 
 const opEnableVgwRoutePropagation = "EnableVgwRoutePropagation"
@@ -11222,6 +11413,7 @@ const opEnableVgwRoutePropagation = "EnableVgwRoutePropagation"
 type EnableVgwRoutePropagationRequest struct {
 	*aws.Request
 	Input *EnableVgwRoutePropagationInput
+	Copy  func(*EnableVgwRoutePropagationInput) EnableVgwRoutePropagationRequest
 }
 
 // Send marshals and sends the EnableVgwRoutePropagation API request.
@@ -11265,7 +11457,7 @@ func (c *EC2) EnableVgwRoutePropagationRequest(input *EnableVgwRoutePropagationI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableVgwRoutePropagationRequest{Request: req, Input: input}
+	return EnableVgwRoutePropagationRequest{Request: req, Input: input, Copy: c.EnableVgwRoutePropagationRequest}
 }
 
 const opEnableVolumeIO = "EnableVolumeIO"
@@ -11274,6 +11466,7 @@ const opEnableVolumeIO = "EnableVolumeIO"
 type EnableVolumeIORequest struct {
 	*aws.Request
 	Input *EnableVolumeIOInput
+	Copy  func(*EnableVolumeIOInput) EnableVolumeIORequest
 }
 
 // Send marshals and sends the EnableVolumeIO API request.
@@ -11317,7 +11510,7 @@ func (c *EC2) EnableVolumeIORequest(input *EnableVolumeIOInput) EnableVolumeIORe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableVolumeIORequest{Request: req, Input: input}
+	return EnableVolumeIORequest{Request: req, Input: input, Copy: c.EnableVolumeIORequest}
 }
 
 const opEnableVpcClassicLink = "EnableVpcClassicLink"
@@ -11326,6 +11519,7 @@ const opEnableVpcClassicLink = "EnableVpcClassicLink"
 type EnableVpcClassicLinkRequest struct {
 	*aws.Request
 	Input *EnableVpcClassicLinkInput
+	Copy  func(*EnableVpcClassicLinkInput) EnableVpcClassicLinkRequest
 }
 
 // Send marshals and sends the EnableVpcClassicLink API request.
@@ -11372,7 +11566,7 @@ func (c *EC2) EnableVpcClassicLinkRequest(input *EnableVpcClassicLinkInput) Enab
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableVpcClassicLinkRequest{Request: req, Input: input}
+	return EnableVpcClassicLinkRequest{Request: req, Input: input, Copy: c.EnableVpcClassicLinkRequest}
 }
 
 const opEnableVpcClassicLinkDnsSupport = "EnableVpcClassicLinkDnsSupport"
@@ -11381,6 +11575,7 @@ const opEnableVpcClassicLinkDnsSupport = "EnableVpcClassicLinkDnsSupport"
 type EnableVpcClassicLinkDnsSupportRequest struct {
 	*aws.Request
 	Input *EnableVpcClassicLinkDnsSupportInput
+	Copy  func(*EnableVpcClassicLinkDnsSupportInput) EnableVpcClassicLinkDnsSupportRequest
 }
 
 // Send marshals and sends the EnableVpcClassicLinkDnsSupport API request.
@@ -11427,7 +11622,7 @@ func (c *EC2) EnableVpcClassicLinkDnsSupportRequest(input *EnableVpcClassicLinkD
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableVpcClassicLinkDnsSupportRequest{Request: req, Input: input}
+	return EnableVpcClassicLinkDnsSupportRequest{Request: req, Input: input, Copy: c.EnableVpcClassicLinkDnsSupportRequest}
 }
 
 const opGetConsoleOutput = "GetConsoleOutput"
@@ -11436,6 +11631,7 @@ const opGetConsoleOutput = "GetConsoleOutput"
 type GetConsoleOutputRequest struct {
 	*aws.Request
 	Input *GetConsoleOutputInput
+	Copy  func(*GetConsoleOutputInput) GetConsoleOutputRequest
 }
 
 // Send marshals and sends the GetConsoleOutput API request.
@@ -11493,7 +11689,7 @@ func (c *EC2) GetConsoleOutputRequest(input *GetConsoleOutputInput) GetConsoleOu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetConsoleOutputRequest{Request: req, Input: input}
+	return GetConsoleOutputRequest{Request: req, Input: input, Copy: c.GetConsoleOutputRequest}
 }
 
 const opGetConsoleScreenshot = "GetConsoleScreenshot"
@@ -11502,6 +11698,7 @@ const opGetConsoleScreenshot = "GetConsoleScreenshot"
 type GetConsoleScreenshotRequest struct {
 	*aws.Request
 	Input *GetConsoleScreenshotInput
+	Copy  func(*GetConsoleScreenshotInput) GetConsoleScreenshotRequest
 }
 
 // Send marshals and sends the GetConsoleScreenshot API request.
@@ -11544,7 +11741,7 @@ func (c *EC2) GetConsoleScreenshotRequest(input *GetConsoleScreenshotInput) GetC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetConsoleScreenshotRequest{Request: req, Input: input}
+	return GetConsoleScreenshotRequest{Request: req, Input: input, Copy: c.GetConsoleScreenshotRequest}
 }
 
 const opGetHostReservationPurchasePreview = "GetHostReservationPurchasePreview"
@@ -11553,6 +11750,7 @@ const opGetHostReservationPurchasePreview = "GetHostReservationPurchasePreview"
 type GetHostReservationPurchasePreviewRequest struct {
 	*aws.Request
 	Input *GetHostReservationPurchasePreviewInput
+	Copy  func(*GetHostReservationPurchasePreviewInput) GetHostReservationPurchasePreviewRequest
 }
 
 // Send marshals and sends the GetHostReservationPurchasePreview API request.
@@ -11598,7 +11796,7 @@ func (c *EC2) GetHostReservationPurchasePreviewRequest(input *GetHostReservation
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetHostReservationPurchasePreviewRequest{Request: req, Input: input}
+	return GetHostReservationPurchasePreviewRequest{Request: req, Input: input, Copy: c.GetHostReservationPurchasePreviewRequest}
 }
 
 const opGetLaunchTemplateData = "GetLaunchTemplateData"
@@ -11607,6 +11805,7 @@ const opGetLaunchTemplateData = "GetLaunchTemplateData"
 type GetLaunchTemplateDataRequest struct {
 	*aws.Request
 	Input *GetLaunchTemplateDataInput
+	Copy  func(*GetLaunchTemplateDataInput) GetLaunchTemplateDataRequest
 }
 
 // Send marshals and sends the GetLaunchTemplateData API request.
@@ -11648,7 +11847,7 @@ func (c *EC2) GetLaunchTemplateDataRequest(input *GetLaunchTemplateDataInput) Ge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLaunchTemplateDataRequest{Request: req, Input: input}
+	return GetLaunchTemplateDataRequest{Request: req, Input: input, Copy: c.GetLaunchTemplateDataRequest}
 }
 
 const opGetPasswordData = "GetPasswordData"
@@ -11657,6 +11856,7 @@ const opGetPasswordData = "GetPasswordData"
 type GetPasswordDataRequest struct {
 	*aws.Request
 	Input *GetPasswordDataInput
+	Copy  func(*GetPasswordDataInput) GetPasswordDataRequest
 }
 
 // Send marshals and sends the GetPasswordData API request.
@@ -11714,7 +11914,7 @@ func (c *EC2) GetPasswordDataRequest(input *GetPasswordDataInput) GetPasswordDat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPasswordDataRequest{Request: req, Input: input}
+	return GetPasswordDataRequest{Request: req, Input: input, Copy: c.GetPasswordDataRequest}
 }
 
 const opGetReservedInstancesExchangeQuote = "GetReservedInstancesExchangeQuote"
@@ -11723,6 +11923,7 @@ const opGetReservedInstancesExchangeQuote = "GetReservedInstancesExchangeQuote"
 type GetReservedInstancesExchangeQuoteRequest struct {
 	*aws.Request
 	Input *GetReservedInstancesExchangeQuoteInput
+	Copy  func(*GetReservedInstancesExchangeQuoteInput) GetReservedInstancesExchangeQuoteRequest
 }
 
 // Send marshals and sends the GetReservedInstancesExchangeQuote API request.
@@ -11766,7 +11967,7 @@ func (c *EC2) GetReservedInstancesExchangeQuoteRequest(input *GetReservedInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetReservedInstancesExchangeQuoteRequest{Request: req, Input: input}
+	return GetReservedInstancesExchangeQuoteRequest{Request: req, Input: input, Copy: c.GetReservedInstancesExchangeQuoteRequest}
 }
 
 const opImportImage = "ImportImage"
@@ -11775,6 +11976,7 @@ const opImportImage = "ImportImage"
 type ImportImageRequest struct {
 	*aws.Request
 	Input *ImportImageInput
+	Copy  func(*ImportImageInput) ImportImageRequest
 }
 
 // Send marshals and sends the ImportImage API request.
@@ -11818,7 +12020,7 @@ func (c *EC2) ImportImageRequest(input *ImportImageInput) ImportImageRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportImageRequest{Request: req, Input: input}
+	return ImportImageRequest{Request: req, Input: input, Copy: c.ImportImageRequest}
 }
 
 const opImportInstance = "ImportInstance"
@@ -11827,6 +12029,7 @@ const opImportInstance = "ImportInstance"
 type ImportInstanceRequest struct {
 	*aws.Request
 	Input *ImportInstanceInput
+	Copy  func(*ImportInstanceInput) ImportInstanceRequest
 }
 
 // Send marshals and sends the ImportInstance API request.
@@ -11873,7 +12076,7 @@ func (c *EC2) ImportInstanceRequest(input *ImportInstanceInput) ImportInstanceRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportInstanceRequest{Request: req, Input: input}
+	return ImportInstanceRequest{Request: req, Input: input, Copy: c.ImportInstanceRequest}
 }
 
 const opImportKeyPair = "ImportKeyPair"
@@ -11882,6 +12085,7 @@ const opImportKeyPair = "ImportKeyPair"
 type ImportKeyPairRequest struct {
 	*aws.Request
 	Input *ImportKeyPairInput
+	Copy  func(*ImportKeyPairInput) ImportKeyPairRequest
 }
 
 // Send marshals and sends the ImportKeyPair API request.
@@ -11929,7 +12133,7 @@ func (c *EC2) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPairReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportKeyPairRequest{Request: req, Input: input}
+	return ImportKeyPairRequest{Request: req, Input: input, Copy: c.ImportKeyPairRequest}
 }
 
 const opImportSnapshot = "ImportSnapshot"
@@ -11938,6 +12142,7 @@ const opImportSnapshot = "ImportSnapshot"
 type ImportSnapshotRequest struct {
 	*aws.Request
 	Input *ImportSnapshotInput
+	Copy  func(*ImportSnapshotInput) ImportSnapshotRequest
 }
 
 // Send marshals and sends the ImportSnapshot API request.
@@ -11978,7 +12183,7 @@ func (c *EC2) ImportSnapshotRequest(input *ImportSnapshotInput) ImportSnapshotRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportSnapshotRequest{Request: req, Input: input}
+	return ImportSnapshotRequest{Request: req, Input: input, Copy: c.ImportSnapshotRequest}
 }
 
 const opImportVolume = "ImportVolume"
@@ -11987,6 +12192,7 @@ const opImportVolume = "ImportVolume"
 type ImportVolumeRequest struct {
 	*aws.Request
 	Input *ImportVolumeInput
+	Copy  func(*ImportVolumeInput) ImportVolumeRequest
 }
 
 // Send marshals and sends the ImportVolume API request.
@@ -12031,7 +12237,7 @@ func (c *EC2) ImportVolumeRequest(input *ImportVolumeInput) ImportVolumeRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportVolumeRequest{Request: req, Input: input}
+	return ImportVolumeRequest{Request: req, Input: input, Copy: c.ImportVolumeRequest}
 }
 
 const opModifyFpgaImageAttribute = "ModifyFpgaImageAttribute"
@@ -12040,6 +12246,7 @@ const opModifyFpgaImageAttribute = "ModifyFpgaImageAttribute"
 type ModifyFpgaImageAttributeRequest struct {
 	*aws.Request
 	Input *ModifyFpgaImageAttributeInput
+	Copy  func(*ModifyFpgaImageAttributeInput) ModifyFpgaImageAttributeRequest
 }
 
 // Send marshals and sends the ModifyFpgaImageAttribute API request.
@@ -12080,7 +12287,7 @@ func (c *EC2) ModifyFpgaImageAttributeRequest(input *ModifyFpgaImageAttributeInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyFpgaImageAttributeRequest{Request: req, Input: input}
+	return ModifyFpgaImageAttributeRequest{Request: req, Input: input, Copy: c.ModifyFpgaImageAttributeRequest}
 }
 
 const opModifyHosts = "ModifyHosts"
@@ -12089,6 +12296,7 @@ const opModifyHosts = "ModifyHosts"
 type ModifyHostsRequest struct {
 	*aws.Request
 	Input *ModifyHostsInput
+	Copy  func(*ModifyHostsInput) ModifyHostsRequest
 }
 
 // Send marshals and sends the ModifyHosts API request.
@@ -12135,7 +12343,7 @@ func (c *EC2) ModifyHostsRequest(input *ModifyHostsInput) ModifyHostsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyHostsRequest{Request: req, Input: input}
+	return ModifyHostsRequest{Request: req, Input: input, Copy: c.ModifyHostsRequest}
 }
 
 const opModifyIdFormat = "ModifyIdFormat"
@@ -12144,6 +12352,7 @@ const opModifyIdFormat = "ModifyIdFormat"
 type ModifyIdFormatRequest struct {
 	*aws.Request
 	Input *ModifyIdFormatInput
+	Copy  func(*ModifyIdFormatInput) ModifyIdFormatRequest
 }
 
 // Send marshals and sends the ModifyIdFormat API request.
@@ -12200,7 +12409,7 @@ func (c *EC2) ModifyIdFormatRequest(input *ModifyIdFormatInput) ModifyIdFormatRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyIdFormatRequest{Request: req, Input: input}
+	return ModifyIdFormatRequest{Request: req, Input: input, Copy: c.ModifyIdFormatRequest}
 }
 
 const opModifyIdentityIdFormat = "ModifyIdentityIdFormat"
@@ -12209,6 +12418,7 @@ const opModifyIdentityIdFormat = "ModifyIdentityIdFormat"
 type ModifyIdentityIdFormatRequest struct {
 	*aws.Request
 	Input *ModifyIdentityIdFormatInput
+	Copy  func(*ModifyIdentityIdFormatInput) ModifyIdentityIdFormatRequest
 }
 
 // Send marshals and sends the ModifyIdentityIdFormat API request.
@@ -12265,7 +12475,7 @@ func (c *EC2) ModifyIdentityIdFormatRequest(input *ModifyIdentityIdFormatInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyIdentityIdFormatRequest{Request: req, Input: input}
+	return ModifyIdentityIdFormatRequest{Request: req, Input: input, Copy: c.ModifyIdentityIdFormatRequest}
 }
 
 const opModifyImageAttribute = "ModifyImageAttribute"
@@ -12274,6 +12484,7 @@ const opModifyImageAttribute = "ModifyImageAttribute"
 type ModifyImageAttributeRequest struct {
 	*aws.Request
 	Input *ModifyImageAttributeInput
+	Copy  func(*ModifyImageAttributeInput) ModifyImageAttributeRequest
 }
 
 // Send marshals and sends the ModifyImageAttribute API request.
@@ -12325,7 +12536,7 @@ func (c *EC2) ModifyImageAttributeRequest(input *ModifyImageAttributeInput) Modi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyImageAttributeRequest{Request: req, Input: input}
+	return ModifyImageAttributeRequest{Request: req, Input: input, Copy: c.ModifyImageAttributeRequest}
 }
 
 const opModifyInstanceAttribute = "ModifyInstanceAttribute"
@@ -12334,6 +12545,7 @@ const opModifyInstanceAttribute = "ModifyInstanceAttribute"
 type ModifyInstanceAttributeRequest struct {
 	*aws.Request
 	Input *ModifyInstanceAttributeInput
+	Copy  func(*ModifyInstanceAttributeInput) ModifyInstanceAttributeRequest
 }
 
 // Send marshals and sends the ModifyInstanceAttribute API request.
@@ -12381,7 +12593,7 @@ func (c *EC2) ModifyInstanceAttributeRequest(input *ModifyInstanceAttributeInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyInstanceAttributeRequest{Request: req, Input: input}
+	return ModifyInstanceAttributeRequest{Request: req, Input: input, Copy: c.ModifyInstanceAttributeRequest}
 }
 
 const opModifyInstanceCreditSpecification = "ModifyInstanceCreditSpecification"
@@ -12390,6 +12602,7 @@ const opModifyInstanceCreditSpecification = "ModifyInstanceCreditSpecification"
 type ModifyInstanceCreditSpecificationRequest struct {
 	*aws.Request
 	Input *ModifyInstanceCreditSpecificationInput
+	Copy  func(*ModifyInstanceCreditSpecificationInput) ModifyInstanceCreditSpecificationRequest
 }
 
 // Send marshals and sends the ModifyInstanceCreditSpecification API request.
@@ -12434,7 +12647,7 @@ func (c *EC2) ModifyInstanceCreditSpecificationRequest(input *ModifyInstanceCred
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyInstanceCreditSpecificationRequest{Request: req, Input: input}
+	return ModifyInstanceCreditSpecificationRequest{Request: req, Input: input, Copy: c.ModifyInstanceCreditSpecificationRequest}
 }
 
 const opModifyInstancePlacement = "ModifyInstancePlacement"
@@ -12443,6 +12656,7 @@ const opModifyInstancePlacement = "ModifyInstancePlacement"
 type ModifyInstancePlacementRequest struct {
 	*aws.Request
 	Input *ModifyInstancePlacementInput
+	Copy  func(*ModifyInstancePlacementInput) ModifyInstancePlacementRequest
 }
 
 // Send marshals and sends the ModifyInstancePlacement API request.
@@ -12501,7 +12715,7 @@ func (c *EC2) ModifyInstancePlacementRequest(input *ModifyInstancePlacementInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyInstancePlacementRequest{Request: req, Input: input}
+	return ModifyInstancePlacementRequest{Request: req, Input: input, Copy: c.ModifyInstancePlacementRequest}
 }
 
 const opModifyLaunchTemplate = "ModifyLaunchTemplate"
@@ -12510,6 +12724,7 @@ const opModifyLaunchTemplate = "ModifyLaunchTemplate"
 type ModifyLaunchTemplateRequest struct {
 	*aws.Request
 	Input *ModifyLaunchTemplateInput
+	Copy  func(*ModifyLaunchTemplateInput) ModifyLaunchTemplateRequest
 }
 
 // Send marshals and sends the ModifyLaunchTemplate API request.
@@ -12552,7 +12767,7 @@ func (c *EC2) ModifyLaunchTemplateRequest(input *ModifyLaunchTemplateInput) Modi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyLaunchTemplateRequest{Request: req, Input: input}
+	return ModifyLaunchTemplateRequest{Request: req, Input: input, Copy: c.ModifyLaunchTemplateRequest}
 }
 
 const opModifyNetworkInterfaceAttribute = "ModifyNetworkInterfaceAttribute"
@@ -12561,6 +12776,7 @@ const opModifyNetworkInterfaceAttribute = "ModifyNetworkInterfaceAttribute"
 type ModifyNetworkInterfaceAttributeRequest struct {
 	*aws.Request
 	Input *ModifyNetworkInterfaceAttributeInput
+	Copy  func(*ModifyNetworkInterfaceAttributeInput) ModifyNetworkInterfaceAttributeRequest
 }
 
 // Send marshals and sends the ModifyNetworkInterfaceAttribute API request.
@@ -12604,7 +12820,7 @@ func (c *EC2) ModifyNetworkInterfaceAttributeRequest(input *ModifyNetworkInterfa
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyNetworkInterfaceAttributeRequest{Request: req, Input: input}
+	return ModifyNetworkInterfaceAttributeRequest{Request: req, Input: input, Copy: c.ModifyNetworkInterfaceAttributeRequest}
 }
 
 const opModifyReservedInstances = "ModifyReservedInstances"
@@ -12613,6 +12829,7 @@ const opModifyReservedInstances = "ModifyReservedInstances"
 type ModifyReservedInstancesRequest struct {
 	*aws.Request
 	Input *ModifyReservedInstancesInput
+	Copy  func(*ModifyReservedInstancesInput) ModifyReservedInstancesRequest
 }
 
 // Send marshals and sends the ModifyReservedInstances API request.
@@ -12659,7 +12876,7 @@ func (c *EC2) ModifyReservedInstancesRequest(input *ModifyReservedInstancesInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyReservedInstancesRequest{Request: req, Input: input}
+	return ModifyReservedInstancesRequest{Request: req, Input: input, Copy: c.ModifyReservedInstancesRequest}
 }
 
 const opModifySnapshotAttribute = "ModifySnapshotAttribute"
@@ -12668,6 +12885,7 @@ const opModifySnapshotAttribute = "ModifySnapshotAttribute"
 type ModifySnapshotAttributeRequest struct {
 	*aws.Request
 	Input *ModifySnapshotAttributeInput
+	Copy  func(*ModifySnapshotAttributeInput) ModifySnapshotAttributeRequest
 }
 
 // Send marshals and sends the ModifySnapshotAttribute API request.
@@ -12722,7 +12940,7 @@ func (c *EC2) ModifySnapshotAttributeRequest(input *ModifySnapshotAttributeInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifySnapshotAttributeRequest{Request: req, Input: input}
+	return ModifySnapshotAttributeRequest{Request: req, Input: input, Copy: c.ModifySnapshotAttributeRequest}
 }
 
 const opModifySpotFleetRequest = "ModifySpotFleetRequest"
@@ -12731,6 +12949,7 @@ const opModifySpotFleetRequest = "ModifySpotFleetRequest"
 type ModifySpotFleetRequestRequest struct {
 	*aws.Request
 	Input *ModifySpotFleetRequestInput
+	Copy  func(*ModifySpotFleetRequestInput) ModifySpotFleetRequestRequest
 }
 
 // Send marshals and sends the ModifySpotFleetRequest API request.
@@ -12793,7 +13012,7 @@ func (c *EC2) ModifySpotFleetRequestRequest(input *ModifySpotFleetRequestInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifySpotFleetRequestRequest{Request: req, Input: input}
+	return ModifySpotFleetRequestRequest{Request: req, Input: input, Copy: c.ModifySpotFleetRequestRequest}
 }
 
 const opModifySubnetAttribute = "ModifySubnetAttribute"
@@ -12802,6 +13021,7 @@ const opModifySubnetAttribute = "ModifySubnetAttribute"
 type ModifySubnetAttributeRequest struct {
 	*aws.Request
 	Input *ModifySubnetAttributeInput
+	Copy  func(*ModifySubnetAttributeInput) ModifySubnetAttributeRequest
 }
 
 // Send marshals and sends the ModifySubnetAttribute API request.
@@ -12844,7 +13064,7 @@ func (c *EC2) ModifySubnetAttributeRequest(input *ModifySubnetAttributeInput) Mo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifySubnetAttributeRequest{Request: req, Input: input}
+	return ModifySubnetAttributeRequest{Request: req, Input: input, Copy: c.ModifySubnetAttributeRequest}
 }
 
 const opModifyVolume = "ModifyVolume"
@@ -12853,6 +13073,7 @@ const opModifyVolume = "ModifyVolume"
 type ModifyVolumeRequest struct {
 	*aws.Request
 	Input *ModifyVolumeInput
+	Copy  func(*ModifyVolumeInput) ModifyVolumeRequest
 }
 
 // Send marshals and sends the ModifyVolume API request.
@@ -12925,7 +13146,7 @@ func (c *EC2) ModifyVolumeRequest(input *ModifyVolumeInput) ModifyVolumeRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyVolumeRequest{Request: req, Input: input}
+	return ModifyVolumeRequest{Request: req, Input: input, Copy: c.ModifyVolumeRequest}
 }
 
 const opModifyVolumeAttribute = "ModifyVolumeAttribute"
@@ -12934,6 +13155,7 @@ const opModifyVolumeAttribute = "ModifyVolumeAttribute"
 type ModifyVolumeAttributeRequest struct {
 	*aws.Request
 	Input *ModifyVolumeAttributeInput
+	Copy  func(*ModifyVolumeAttributeInput) ModifyVolumeAttributeRequest
 }
 
 // Send marshals and sends the ModifyVolumeAttribute API request.
@@ -12985,7 +13207,7 @@ func (c *EC2) ModifyVolumeAttributeRequest(input *ModifyVolumeAttributeInput) Mo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyVolumeAttributeRequest{Request: req, Input: input}
+	return ModifyVolumeAttributeRequest{Request: req, Input: input, Copy: c.ModifyVolumeAttributeRequest}
 }
 
 const opModifyVpcAttribute = "ModifyVpcAttribute"
@@ -12994,6 +13216,7 @@ const opModifyVpcAttribute = "ModifyVpcAttribute"
 type ModifyVpcAttributeRequest struct {
 	*aws.Request
 	Input *ModifyVpcAttributeInput
+	Copy  func(*ModifyVpcAttributeInput) ModifyVpcAttributeRequest
 }
 
 // Send marshals and sends the ModifyVpcAttribute API request.
@@ -13036,7 +13259,7 @@ func (c *EC2) ModifyVpcAttributeRequest(input *ModifyVpcAttributeInput) ModifyVp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyVpcAttributeRequest{Request: req, Input: input}
+	return ModifyVpcAttributeRequest{Request: req, Input: input, Copy: c.ModifyVpcAttributeRequest}
 }
 
 const opModifyVpcEndpoint = "ModifyVpcEndpoint"
@@ -13045,6 +13268,7 @@ const opModifyVpcEndpoint = "ModifyVpcEndpoint"
 type ModifyVpcEndpointRequest struct {
 	*aws.Request
 	Input *ModifyVpcEndpointInput
+	Copy  func(*ModifyVpcEndpointInput) ModifyVpcEndpointRequest
 }
 
 // Send marshals and sends the ModifyVpcEndpoint API request.
@@ -13088,7 +13312,7 @@ func (c *EC2) ModifyVpcEndpointRequest(input *ModifyVpcEndpointInput) ModifyVpcE
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyVpcEndpointRequest{Request: req, Input: input}
+	return ModifyVpcEndpointRequest{Request: req, Input: input, Copy: c.ModifyVpcEndpointRequest}
 }
 
 const opModifyVpcEndpointConnectionNotification = "ModifyVpcEndpointConnectionNotification"
@@ -13097,6 +13321,7 @@ const opModifyVpcEndpointConnectionNotification = "ModifyVpcEndpointConnectionNo
 type ModifyVpcEndpointConnectionNotificationRequest struct {
 	*aws.Request
 	Input *ModifyVpcEndpointConnectionNotificationInput
+	Copy  func(*ModifyVpcEndpointConnectionNotificationInput) ModifyVpcEndpointConnectionNotificationRequest
 }
 
 // Send marshals and sends the ModifyVpcEndpointConnectionNotification API request.
@@ -13139,7 +13364,7 @@ func (c *EC2) ModifyVpcEndpointConnectionNotificationRequest(input *ModifyVpcEnd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyVpcEndpointConnectionNotificationRequest{Request: req, Input: input}
+	return ModifyVpcEndpointConnectionNotificationRequest{Request: req, Input: input, Copy: c.ModifyVpcEndpointConnectionNotificationRequest}
 }
 
 const opModifyVpcEndpointServiceConfiguration = "ModifyVpcEndpointServiceConfiguration"
@@ -13148,6 +13373,7 @@ const opModifyVpcEndpointServiceConfiguration = "ModifyVpcEndpointServiceConfigu
 type ModifyVpcEndpointServiceConfigurationRequest struct {
 	*aws.Request
 	Input *ModifyVpcEndpointServiceConfigurationInput
+	Copy  func(*ModifyVpcEndpointServiceConfigurationInput) ModifyVpcEndpointServiceConfigurationRequest
 }
 
 // Send marshals and sends the ModifyVpcEndpointServiceConfiguration API request.
@@ -13191,7 +13417,7 @@ func (c *EC2) ModifyVpcEndpointServiceConfigurationRequest(input *ModifyVpcEndpo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyVpcEndpointServiceConfigurationRequest{Request: req, Input: input}
+	return ModifyVpcEndpointServiceConfigurationRequest{Request: req, Input: input, Copy: c.ModifyVpcEndpointServiceConfigurationRequest}
 }
 
 const opModifyVpcEndpointServicePermissions = "ModifyVpcEndpointServicePermissions"
@@ -13200,6 +13426,7 @@ const opModifyVpcEndpointServicePermissions = "ModifyVpcEndpointServicePermissio
 type ModifyVpcEndpointServicePermissionsRequest struct {
 	*aws.Request
 	Input *ModifyVpcEndpointServicePermissionsInput
+	Copy  func(*ModifyVpcEndpointServicePermissionsInput) ModifyVpcEndpointServicePermissionsRequest
 }
 
 // Send marshals and sends the ModifyVpcEndpointServicePermissions API request.
@@ -13242,7 +13469,7 @@ func (c *EC2) ModifyVpcEndpointServicePermissionsRequest(input *ModifyVpcEndpoin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyVpcEndpointServicePermissionsRequest{Request: req, Input: input}
+	return ModifyVpcEndpointServicePermissionsRequest{Request: req, Input: input, Copy: c.ModifyVpcEndpointServicePermissionsRequest}
 }
 
 const opModifyVpcPeeringConnectionOptions = "ModifyVpcPeeringConnectionOptions"
@@ -13251,6 +13478,7 @@ const opModifyVpcPeeringConnectionOptions = "ModifyVpcPeeringConnectionOptions"
 type ModifyVpcPeeringConnectionOptionsRequest struct {
 	*aws.Request
 	Input *ModifyVpcPeeringConnectionOptionsInput
+	Copy  func(*ModifyVpcPeeringConnectionOptionsInput) ModifyVpcPeeringConnectionOptionsRequest
 }
 
 // Send marshals and sends the ModifyVpcPeeringConnectionOptions API request.
@@ -13310,7 +13538,7 @@ func (c *EC2) ModifyVpcPeeringConnectionOptionsRequest(input *ModifyVpcPeeringCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyVpcPeeringConnectionOptionsRequest{Request: req, Input: input}
+	return ModifyVpcPeeringConnectionOptionsRequest{Request: req, Input: input, Copy: c.ModifyVpcPeeringConnectionOptionsRequest}
 }
 
 const opModifyVpcTenancy = "ModifyVpcTenancy"
@@ -13319,6 +13547,7 @@ const opModifyVpcTenancy = "ModifyVpcTenancy"
 type ModifyVpcTenancyRequest struct {
 	*aws.Request
 	Input *ModifyVpcTenancyInput
+	Copy  func(*ModifyVpcTenancyInput) ModifyVpcTenancyRequest
 }
 
 // Send marshals and sends the ModifyVpcTenancy API request.
@@ -13368,7 +13597,7 @@ func (c *EC2) ModifyVpcTenancyRequest(input *ModifyVpcTenancyInput) ModifyVpcTen
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyVpcTenancyRequest{Request: req, Input: input}
+	return ModifyVpcTenancyRequest{Request: req, Input: input, Copy: c.ModifyVpcTenancyRequest}
 }
 
 const opMonitorInstances = "MonitorInstances"
@@ -13377,6 +13606,7 @@ const opMonitorInstances = "MonitorInstances"
 type MonitorInstancesRequest struct {
 	*aws.Request
 	Input *MonitorInstancesInput
+	Copy  func(*MonitorInstancesInput) MonitorInstancesRequest
 }
 
 // Send marshals and sends the MonitorInstances API request.
@@ -13422,7 +13652,7 @@ func (c *EC2) MonitorInstancesRequest(input *MonitorInstancesInput) MonitorInsta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return MonitorInstancesRequest{Request: req, Input: input}
+	return MonitorInstancesRequest{Request: req, Input: input, Copy: c.MonitorInstancesRequest}
 }
 
 const opMoveAddressToVpc = "MoveAddressToVpc"
@@ -13431,6 +13661,7 @@ const opMoveAddressToVpc = "MoveAddressToVpc"
 type MoveAddressToVpcRequest struct {
 	*aws.Request
 	Input *MoveAddressToVpcInput
+	Copy  func(*MoveAddressToVpcInput) MoveAddressToVpcRequest
 }
 
 // Send marshals and sends the MoveAddressToVpc API request.
@@ -13477,7 +13708,7 @@ func (c *EC2) MoveAddressToVpcRequest(input *MoveAddressToVpcInput) MoveAddressT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return MoveAddressToVpcRequest{Request: req, Input: input}
+	return MoveAddressToVpcRequest{Request: req, Input: input, Copy: c.MoveAddressToVpcRequest}
 }
 
 const opPurchaseHostReservation = "PurchaseHostReservation"
@@ -13486,6 +13717,7 @@ const opPurchaseHostReservation = "PurchaseHostReservation"
 type PurchaseHostReservationRequest struct {
 	*aws.Request
 	Input *PurchaseHostReservationInput
+	Copy  func(*PurchaseHostReservationInput) PurchaseHostReservationRequest
 }
 
 // Send marshals and sends the PurchaseHostReservation API request.
@@ -13529,7 +13761,7 @@ func (c *EC2) PurchaseHostReservationRequest(input *PurchaseHostReservationInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PurchaseHostReservationRequest{Request: req, Input: input}
+	return PurchaseHostReservationRequest{Request: req, Input: input, Copy: c.PurchaseHostReservationRequest}
 }
 
 const opPurchaseReservedInstancesOffering = "PurchaseReservedInstancesOffering"
@@ -13538,6 +13770,7 @@ const opPurchaseReservedInstancesOffering = "PurchaseReservedInstancesOffering"
 type PurchaseReservedInstancesOfferingRequest struct {
 	*aws.Request
 	Input *PurchaseReservedInstancesOfferingInput
+	Copy  func(*PurchaseReservedInstancesOfferingInput) PurchaseReservedInstancesOfferingRequest
 }
 
 // Send marshals and sends the PurchaseReservedInstancesOffering API request.
@@ -13587,7 +13820,7 @@ func (c *EC2) PurchaseReservedInstancesOfferingRequest(input *PurchaseReservedIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PurchaseReservedInstancesOfferingRequest{Request: req, Input: input}
+	return PurchaseReservedInstancesOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedInstancesOfferingRequest}
 }
 
 const opPurchaseScheduledInstances = "PurchaseScheduledInstances"
@@ -13596,6 +13829,7 @@ const opPurchaseScheduledInstances = "PurchaseScheduledInstances"
 type PurchaseScheduledInstancesRequest struct {
 	*aws.Request
 	Input *PurchaseScheduledInstancesInput
+	Copy  func(*PurchaseScheduledInstancesInput) PurchaseScheduledInstancesRequest
 }
 
 // Send marshals and sends the PurchaseScheduledInstances API request.
@@ -13645,7 +13879,7 @@ func (c *EC2) PurchaseScheduledInstancesRequest(input *PurchaseScheduledInstance
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PurchaseScheduledInstancesRequest{Request: req, Input: input}
+	return PurchaseScheduledInstancesRequest{Request: req, Input: input, Copy: c.PurchaseScheduledInstancesRequest}
 }
 
 const opRebootInstances = "RebootInstances"
@@ -13654,6 +13888,7 @@ const opRebootInstances = "RebootInstances"
 type RebootInstancesRequest struct {
 	*aws.Request
 	Input *RebootInstancesInput
+	Copy  func(*RebootInstancesInput) RebootInstancesRequest
 }
 
 // Send marshals and sends the RebootInstances API request.
@@ -13706,7 +13941,7 @@ func (c *EC2) RebootInstancesRequest(input *RebootInstancesInput) RebootInstance
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RebootInstancesRequest{Request: req, Input: input}
+	return RebootInstancesRequest{Request: req, Input: input, Copy: c.RebootInstancesRequest}
 }
 
 const opRegisterImage = "RegisterImage"
@@ -13715,6 +13950,7 @@ const opRegisterImage = "RegisterImage"
 type RegisterImageRequest struct {
 	*aws.Request
 	Input *RegisterImageInput
+	Copy  func(*RegisterImageInput) RegisterImageRequest
 }
 
 // Send marshals and sends the RegisterImage API request.
@@ -13783,7 +14019,7 @@ func (c *EC2) RegisterImageRequest(input *RegisterImageInput) RegisterImageReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterImageRequest{Request: req, Input: input}
+	return RegisterImageRequest{Request: req, Input: input, Copy: c.RegisterImageRequest}
 }
 
 const opRejectVpcEndpointConnections = "RejectVpcEndpointConnections"
@@ -13792,6 +14028,7 @@ const opRejectVpcEndpointConnections = "RejectVpcEndpointConnections"
 type RejectVpcEndpointConnectionsRequest struct {
 	*aws.Request
 	Input *RejectVpcEndpointConnectionsInput
+	Copy  func(*RejectVpcEndpointConnectionsInput) RejectVpcEndpointConnectionsRequest
 }
 
 // Send marshals and sends the RejectVpcEndpointConnections API request.
@@ -13833,7 +14070,7 @@ func (c *EC2) RejectVpcEndpointConnectionsRequest(input *RejectVpcEndpointConnec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RejectVpcEndpointConnectionsRequest{Request: req, Input: input}
+	return RejectVpcEndpointConnectionsRequest{Request: req, Input: input, Copy: c.RejectVpcEndpointConnectionsRequest}
 }
 
 const opRejectVpcPeeringConnection = "RejectVpcPeeringConnection"
@@ -13842,6 +14079,7 @@ const opRejectVpcPeeringConnection = "RejectVpcPeeringConnection"
 type RejectVpcPeeringConnectionRequest struct {
 	*aws.Request
 	Input *RejectVpcPeeringConnectionInput
+	Copy  func(*RejectVpcPeeringConnectionInput) RejectVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the RejectVpcPeeringConnection API request.
@@ -13886,7 +14124,7 @@ func (c *EC2) RejectVpcPeeringConnectionRequest(input *RejectVpcPeeringConnectio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RejectVpcPeeringConnectionRequest{Request: req, Input: input}
+	return RejectVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.RejectVpcPeeringConnectionRequest}
 }
 
 const opReleaseAddress = "ReleaseAddress"
@@ -13895,6 +14133,7 @@ const opReleaseAddress = "ReleaseAddress"
 type ReleaseAddressRequest struct {
 	*aws.Request
 	Input *ReleaseAddressInput
+	Copy  func(*ReleaseAddressInput) ReleaseAddressRequest
 }
 
 // Send marshals and sends the ReleaseAddress API request.
@@ -13954,7 +14193,7 @@ func (c *EC2) ReleaseAddressRequest(input *ReleaseAddressInput) ReleaseAddressRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReleaseAddressRequest{Request: req, Input: input}
+	return ReleaseAddressRequest{Request: req, Input: input, Copy: c.ReleaseAddressRequest}
 }
 
 const opReleaseHosts = "ReleaseHosts"
@@ -13963,6 +14202,7 @@ const opReleaseHosts = "ReleaseHosts"
 type ReleaseHostsRequest struct {
 	*aws.Request
 	Input *ReleaseHostsInput
+	Copy  func(*ReleaseHostsInput) ReleaseHostsRequest
 }
 
 // Send marshals and sends the ReleaseHosts API request.
@@ -14014,7 +14254,7 @@ func (c *EC2) ReleaseHostsRequest(input *ReleaseHostsInput) ReleaseHostsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReleaseHostsRequest{Request: req, Input: input}
+	return ReleaseHostsRequest{Request: req, Input: input, Copy: c.ReleaseHostsRequest}
 }
 
 const opReplaceIamInstanceProfileAssociation = "ReplaceIamInstanceProfileAssociation"
@@ -14023,6 +14263,7 @@ const opReplaceIamInstanceProfileAssociation = "ReplaceIamInstanceProfileAssocia
 type ReplaceIamInstanceProfileAssociationRequest struct {
 	*aws.Request
 	Input *ReplaceIamInstanceProfileAssociationInput
+	Copy  func(*ReplaceIamInstanceProfileAssociationInput) ReplaceIamInstanceProfileAssociationRequest
 }
 
 // Send marshals and sends the ReplaceIamInstanceProfileAssociation API request.
@@ -14068,7 +14309,7 @@ func (c *EC2) ReplaceIamInstanceProfileAssociationRequest(input *ReplaceIamInsta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReplaceIamInstanceProfileAssociationRequest{Request: req, Input: input}
+	return ReplaceIamInstanceProfileAssociationRequest{Request: req, Input: input, Copy: c.ReplaceIamInstanceProfileAssociationRequest}
 }
 
 const opReplaceNetworkAclAssociation = "ReplaceNetworkAclAssociation"
@@ -14077,6 +14318,7 @@ const opReplaceNetworkAclAssociation = "ReplaceNetworkAclAssociation"
 type ReplaceNetworkAclAssociationRequest struct {
 	*aws.Request
 	Input *ReplaceNetworkAclAssociationInput
+	Copy  func(*ReplaceNetworkAclAssociationInput) ReplaceNetworkAclAssociationRequest
 }
 
 // Send marshals and sends the ReplaceNetworkAclAssociation API request.
@@ -14122,7 +14364,7 @@ func (c *EC2) ReplaceNetworkAclAssociationRequest(input *ReplaceNetworkAclAssoci
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReplaceNetworkAclAssociationRequest{Request: req, Input: input}
+	return ReplaceNetworkAclAssociationRequest{Request: req, Input: input, Copy: c.ReplaceNetworkAclAssociationRequest}
 }
 
 const opReplaceNetworkAclEntry = "ReplaceNetworkAclEntry"
@@ -14131,6 +14373,7 @@ const opReplaceNetworkAclEntry = "ReplaceNetworkAclEntry"
 type ReplaceNetworkAclEntryRequest struct {
 	*aws.Request
 	Input *ReplaceNetworkAclEntryInput
+	Copy  func(*ReplaceNetworkAclEntryInput) ReplaceNetworkAclEntryRequest
 }
 
 // Send marshals and sends the ReplaceNetworkAclEntry API request.
@@ -14175,7 +14418,7 @@ func (c *EC2) ReplaceNetworkAclEntryRequest(input *ReplaceNetworkAclEntryInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReplaceNetworkAclEntryRequest{Request: req, Input: input}
+	return ReplaceNetworkAclEntryRequest{Request: req, Input: input, Copy: c.ReplaceNetworkAclEntryRequest}
 }
 
 const opReplaceRoute = "ReplaceRoute"
@@ -14184,6 +14427,7 @@ const opReplaceRoute = "ReplaceRoute"
 type ReplaceRouteRequest struct {
 	*aws.Request
 	Input *ReplaceRouteInput
+	Copy  func(*ReplaceRouteInput) ReplaceRouteRequest
 }
 
 // Send marshals and sends the ReplaceRoute API request.
@@ -14232,7 +14476,7 @@ func (c *EC2) ReplaceRouteRequest(input *ReplaceRouteInput) ReplaceRouteRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReplaceRouteRequest{Request: req, Input: input}
+	return ReplaceRouteRequest{Request: req, Input: input, Copy: c.ReplaceRouteRequest}
 }
 
 const opReplaceRouteTableAssociation = "ReplaceRouteTableAssociation"
@@ -14241,6 +14485,7 @@ const opReplaceRouteTableAssociation = "ReplaceRouteTableAssociation"
 type ReplaceRouteTableAssociationRequest struct {
 	*aws.Request
 	Input *ReplaceRouteTableAssociationInput
+	Copy  func(*ReplaceRouteTableAssociationInput) ReplaceRouteTableAssociationRequest
 }
 
 // Send marshals and sends the ReplaceRouteTableAssociation API request.
@@ -14289,7 +14534,7 @@ func (c *EC2) ReplaceRouteTableAssociationRequest(input *ReplaceRouteTableAssoci
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReplaceRouteTableAssociationRequest{Request: req, Input: input}
+	return ReplaceRouteTableAssociationRequest{Request: req, Input: input, Copy: c.ReplaceRouteTableAssociationRequest}
 }
 
 const opReportInstanceStatus = "ReportInstanceStatus"
@@ -14298,6 +14543,7 @@ const opReportInstanceStatus = "ReportInstanceStatus"
 type ReportInstanceStatusRequest struct {
 	*aws.Request
 	Input *ReportInstanceStatusInput
+	Copy  func(*ReportInstanceStatusInput) ReportInstanceStatusRequest
 }
 
 // Send marshals and sends the ReportInstanceStatus API request.
@@ -14346,7 +14592,7 @@ func (c *EC2) ReportInstanceStatusRequest(input *ReportInstanceStatusInput) Repo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReportInstanceStatusRequest{Request: req, Input: input}
+	return ReportInstanceStatusRequest{Request: req, Input: input, Copy: c.ReportInstanceStatusRequest}
 }
 
 const opRequestSpotFleet = "RequestSpotFleet"
@@ -14355,6 +14601,7 @@ const opRequestSpotFleet = "RequestSpotFleet"
 type RequestSpotFleetRequest struct {
 	*aws.Request
 	Input *RequestSpotFleetInput
+	Copy  func(*RequestSpotFleetInput) RequestSpotFleetRequest
 }
 
 // Send marshals and sends the RequestSpotFleet API request.
@@ -14414,7 +14661,7 @@ func (c *EC2) RequestSpotFleetRequest(input *RequestSpotFleetInput) RequestSpotF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RequestSpotFleetRequest{Request: req, Input: input}
+	return RequestSpotFleetRequest{Request: req, Input: input, Copy: c.RequestSpotFleetRequest}
 }
 
 const opRequestSpotInstances = "RequestSpotInstances"
@@ -14423,6 +14670,7 @@ const opRequestSpotInstances = "RequestSpotInstances"
 type RequestSpotInstancesRequest struct {
 	*aws.Request
 	Input *RequestSpotInstancesInput
+	Copy  func(*RequestSpotInstancesInput) RequestSpotInstancesRequest
 }
 
 // Send marshals and sends the RequestSpotInstances API request.
@@ -14466,7 +14714,7 @@ func (c *EC2) RequestSpotInstancesRequest(input *RequestSpotInstancesInput) Requ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RequestSpotInstancesRequest{Request: req, Input: input}
+	return RequestSpotInstancesRequest{Request: req, Input: input, Copy: c.RequestSpotInstancesRequest}
 }
 
 const opResetFpgaImageAttribute = "ResetFpgaImageAttribute"
@@ -14475,6 +14723,7 @@ const opResetFpgaImageAttribute = "ResetFpgaImageAttribute"
 type ResetFpgaImageAttributeRequest struct {
 	*aws.Request
 	Input *ResetFpgaImageAttributeInput
+	Copy  func(*ResetFpgaImageAttributeInput) ResetFpgaImageAttributeRequest
 }
 
 // Send marshals and sends the ResetFpgaImageAttribute API request.
@@ -14516,7 +14765,7 @@ func (c *EC2) ResetFpgaImageAttributeRequest(input *ResetFpgaImageAttributeInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetFpgaImageAttributeRequest{Request: req, Input: input}
+	return ResetFpgaImageAttributeRequest{Request: req, Input: input, Copy: c.ResetFpgaImageAttributeRequest}
 }
 
 const opResetImageAttribute = "ResetImageAttribute"
@@ -14525,6 +14774,7 @@ const opResetImageAttribute = "ResetImageAttribute"
 type ResetImageAttributeRequest struct {
 	*aws.Request
 	Input *ResetImageAttributeInput
+	Copy  func(*ResetImageAttributeInput) ResetImageAttributeRequest
 }
 
 // Send marshals and sends the ResetImageAttribute API request.
@@ -14569,7 +14819,7 @@ func (c *EC2) ResetImageAttributeRequest(input *ResetImageAttributeInput) ResetI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetImageAttributeRequest{Request: req, Input: input}
+	return ResetImageAttributeRequest{Request: req, Input: input, Copy: c.ResetImageAttributeRequest}
 }
 
 const opResetInstanceAttribute = "ResetInstanceAttribute"
@@ -14578,6 +14828,7 @@ const opResetInstanceAttribute = "ResetInstanceAttribute"
 type ResetInstanceAttributeRequest struct {
 	*aws.Request
 	Input *ResetInstanceAttributeInput
+	Copy  func(*ResetInstanceAttributeInput) ResetInstanceAttributeRequest
 }
 
 // Send marshals and sends the ResetInstanceAttribute API request.
@@ -14628,7 +14879,7 @@ func (c *EC2) ResetInstanceAttributeRequest(input *ResetInstanceAttributeInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetInstanceAttributeRequest{Request: req, Input: input}
+	return ResetInstanceAttributeRequest{Request: req, Input: input, Copy: c.ResetInstanceAttributeRequest}
 }
 
 const opResetNetworkInterfaceAttribute = "ResetNetworkInterfaceAttribute"
@@ -14637,6 +14888,7 @@ const opResetNetworkInterfaceAttribute = "ResetNetworkInterfaceAttribute"
 type ResetNetworkInterfaceAttributeRequest struct {
 	*aws.Request
 	Input *ResetNetworkInterfaceAttributeInput
+	Copy  func(*ResetNetworkInterfaceAttributeInput) ResetNetworkInterfaceAttributeRequest
 }
 
 // Send marshals and sends the ResetNetworkInterfaceAttribute API request.
@@ -14680,7 +14932,7 @@ func (c *EC2) ResetNetworkInterfaceAttributeRequest(input *ResetNetworkInterface
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetNetworkInterfaceAttributeRequest{Request: req, Input: input}
+	return ResetNetworkInterfaceAttributeRequest{Request: req, Input: input, Copy: c.ResetNetworkInterfaceAttributeRequest}
 }
 
 const opResetSnapshotAttribute = "ResetSnapshotAttribute"
@@ -14689,6 +14941,7 @@ const opResetSnapshotAttribute = "ResetSnapshotAttribute"
 type ResetSnapshotAttributeRequest struct {
 	*aws.Request
 	Input *ResetSnapshotAttributeInput
+	Copy  func(*ResetSnapshotAttributeInput) ResetSnapshotAttributeRequest
 }
 
 // Send marshals and sends the ResetSnapshotAttribute API request.
@@ -14735,7 +14988,7 @@ func (c *EC2) ResetSnapshotAttributeRequest(input *ResetSnapshotAttributeInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetSnapshotAttributeRequest{Request: req, Input: input}
+	return ResetSnapshotAttributeRequest{Request: req, Input: input, Copy: c.ResetSnapshotAttributeRequest}
 }
 
 const opRestoreAddressToClassic = "RestoreAddressToClassic"
@@ -14744,6 +14997,7 @@ const opRestoreAddressToClassic = "RestoreAddressToClassic"
 type RestoreAddressToClassicRequest struct {
 	*aws.Request
 	Input *RestoreAddressToClassicInput
+	Copy  func(*RestoreAddressToClassicInput) RestoreAddressToClassicRequest
 }
 
 // Send marshals and sends the RestoreAddressToClassic API request.
@@ -14787,7 +15041,7 @@ func (c *EC2) RestoreAddressToClassicRequest(input *RestoreAddressToClassicInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreAddressToClassicRequest{Request: req, Input: input}
+	return RestoreAddressToClassicRequest{Request: req, Input: input, Copy: c.RestoreAddressToClassicRequest}
 }
 
 const opRevokeSecurityGroupEgress = "RevokeSecurityGroupEgress"
@@ -14796,6 +15050,7 @@ const opRevokeSecurityGroupEgress = "RevokeSecurityGroupEgress"
 type RevokeSecurityGroupEgressRequest struct {
 	*aws.Request
 	Input *RevokeSecurityGroupEgressInput
+	Copy  func(*RevokeSecurityGroupEgressInput) RevokeSecurityGroupEgressRequest
 }
 
 // Send marshals and sends the RevokeSecurityGroupEgress API request.
@@ -14850,7 +15105,7 @@ func (c *EC2) RevokeSecurityGroupEgressRequest(input *RevokeSecurityGroupEgressI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RevokeSecurityGroupEgressRequest{Request: req, Input: input}
+	return RevokeSecurityGroupEgressRequest{Request: req, Input: input, Copy: c.RevokeSecurityGroupEgressRequest}
 }
 
 const opRevokeSecurityGroupIngress = "RevokeSecurityGroupIngress"
@@ -14859,6 +15114,7 @@ const opRevokeSecurityGroupIngress = "RevokeSecurityGroupIngress"
 type RevokeSecurityGroupIngressRequest struct {
 	*aws.Request
 	Input *RevokeSecurityGroupIngressInput
+	Copy  func(*RevokeSecurityGroupIngressInput) RevokeSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the RevokeSecurityGroupIngress API request.
@@ -14916,7 +15172,7 @@ func (c *EC2) RevokeSecurityGroupIngressRequest(input *RevokeSecurityGroupIngres
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RevokeSecurityGroupIngressRequest{Request: req, Input: input}
+	return RevokeSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.RevokeSecurityGroupIngressRequest}
 }
 
 const opRunInstances = "RunInstances"
@@ -14925,6 +15181,7 @@ const opRunInstances = "RunInstances"
 type RunInstancesRequest struct {
 	*aws.Request
 	Input *RunInstancesInput
+	Copy  func(*RunInstancesInput) RunInstancesRequest
 }
 
 // Send marshals and sends the RunInstances API request.
@@ -15018,7 +15275,7 @@ func (c *EC2) RunInstancesRequest(input *RunInstancesInput) RunInstancesRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RunInstancesRequest{Request: req, Input: input}
+	return RunInstancesRequest{Request: req, Input: input, Copy: c.RunInstancesRequest}
 }
 
 const opRunScheduledInstances = "RunScheduledInstances"
@@ -15027,6 +15284,7 @@ const opRunScheduledInstances = "RunScheduledInstances"
 type RunScheduledInstancesRequest struct {
 	*aws.Request
 	Input *RunScheduledInstancesInput
+	Copy  func(*RunScheduledInstancesInput) RunScheduledInstancesRequest
 }
 
 // Send marshals and sends the RunScheduledInstances API request.
@@ -15077,7 +15335,7 @@ func (c *EC2) RunScheduledInstancesRequest(input *RunScheduledInstancesInput) Ru
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RunScheduledInstancesRequest{Request: req, Input: input}
+	return RunScheduledInstancesRequest{Request: req, Input: input, Copy: c.RunScheduledInstancesRequest}
 }
 
 const opStartInstances = "StartInstances"
@@ -15086,6 +15344,7 @@ const opStartInstances = "StartInstances"
 type StartInstancesRequest struct {
 	*aws.Request
 	Input *StartInstancesInput
+	Copy  func(*StartInstancesInput) StartInstancesRequest
 }
 
 // Send marshals and sends the StartInstances API request.
@@ -15148,7 +15407,7 @@ func (c *EC2) StartInstancesRequest(input *StartInstancesInput) StartInstancesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartInstancesRequest{Request: req, Input: input}
+	return StartInstancesRequest{Request: req, Input: input, Copy: c.StartInstancesRequest}
 }
 
 const opStopInstances = "StopInstances"
@@ -15157,6 +15416,7 @@ const opStopInstances = "StopInstances"
 type StopInstancesRequest struct {
 	*aws.Request
 	Input *StopInstancesInput
+	Copy  func(*StopInstancesInput) StopInstancesRequest
 }
 
 // Send marshals and sends the StopInstances API request.
@@ -15229,7 +15489,7 @@ func (c *EC2) StopInstancesRequest(input *StopInstancesInput) StopInstancesReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopInstancesRequest{Request: req, Input: input}
+	return StopInstancesRequest{Request: req, Input: input, Copy: c.StopInstancesRequest}
 }
 
 const opTerminateInstances = "TerminateInstances"
@@ -15238,6 +15498,7 @@ const opTerminateInstances = "TerminateInstances"
 type TerminateInstancesRequest struct {
 	*aws.Request
 	Input *TerminateInstancesInput
+	Copy  func(*TerminateInstancesInput) TerminateInstancesRequest
 }
 
 // Send marshals and sends the TerminateInstances API request.
@@ -15302,7 +15563,7 @@ func (c *EC2) TerminateInstancesRequest(input *TerminateInstancesInput) Terminat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TerminateInstancesRequest{Request: req, Input: input}
+	return TerminateInstancesRequest{Request: req, Input: input, Copy: c.TerminateInstancesRequest}
 }
 
 const opUnassignIpv6Addresses = "UnassignIpv6Addresses"
@@ -15311,6 +15572,7 @@ const opUnassignIpv6Addresses = "UnassignIpv6Addresses"
 type UnassignIpv6AddressesRequest struct {
 	*aws.Request
 	Input *UnassignIpv6AddressesInput
+	Copy  func(*UnassignIpv6AddressesInput) UnassignIpv6AddressesRequest
 }
 
 // Send marshals and sends the UnassignIpv6Addresses API request.
@@ -15351,7 +15613,7 @@ func (c *EC2) UnassignIpv6AddressesRequest(input *UnassignIpv6AddressesInput) Un
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UnassignIpv6AddressesRequest{Request: req, Input: input}
+	return UnassignIpv6AddressesRequest{Request: req, Input: input, Copy: c.UnassignIpv6AddressesRequest}
 }
 
 const opUnassignPrivateIpAddresses = "UnassignPrivateIpAddresses"
@@ -15360,6 +15622,7 @@ const opUnassignPrivateIpAddresses = "UnassignPrivateIpAddresses"
 type UnassignPrivateIpAddressesRequest struct {
 	*aws.Request
 	Input *UnassignPrivateIpAddressesInput
+	Copy  func(*UnassignPrivateIpAddressesInput) UnassignPrivateIpAddressesRequest
 }
 
 // Send marshals and sends the UnassignPrivateIpAddresses API request.
@@ -15402,7 +15665,7 @@ func (c *EC2) UnassignPrivateIpAddressesRequest(input *UnassignPrivateIpAddresse
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UnassignPrivateIpAddressesRequest{Request: req, Input: input}
+	return UnassignPrivateIpAddressesRequest{Request: req, Input: input, Copy: c.UnassignPrivateIpAddressesRequest}
 }
 
 const opUnmonitorInstances = "UnmonitorInstances"
@@ -15411,6 +15674,7 @@ const opUnmonitorInstances = "UnmonitorInstances"
 type UnmonitorInstancesRequest struct {
 	*aws.Request
 	Input *UnmonitorInstancesInput
+	Copy  func(*UnmonitorInstancesInput) UnmonitorInstancesRequest
 }
 
 // Send marshals and sends the UnmonitorInstances API request.
@@ -15453,7 +15717,7 @@ func (c *EC2) UnmonitorInstancesRequest(input *UnmonitorInstancesInput) Unmonito
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UnmonitorInstancesRequest{Request: req, Input: input}
+	return UnmonitorInstancesRequest{Request: req, Input: input, Copy: c.UnmonitorInstancesRequest}
 }
 
 const opUpdateSecurityGroupRuleDescriptionsEgress = "UpdateSecurityGroupRuleDescriptionsEgress"
@@ -15462,6 +15726,7 @@ const opUpdateSecurityGroupRuleDescriptionsEgress = "UpdateSecurityGroupRuleDesc
 type UpdateSecurityGroupRuleDescriptionsEgressRequest struct {
 	*aws.Request
 	Input *UpdateSecurityGroupRuleDescriptionsEgressInput
+	Copy  func(*UpdateSecurityGroupRuleDescriptionsEgressInput) UpdateSecurityGroupRuleDescriptionsEgressRequest
 }
 
 // Send marshals and sends the UpdateSecurityGroupRuleDescriptionsEgress API request.
@@ -15508,7 +15773,7 @@ func (c *EC2) UpdateSecurityGroupRuleDescriptionsEgressRequest(input *UpdateSecu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSecurityGroupRuleDescriptionsEgressRequest{Request: req, Input: input}
+	return UpdateSecurityGroupRuleDescriptionsEgressRequest{Request: req, Input: input, Copy: c.UpdateSecurityGroupRuleDescriptionsEgressRequest}
 }
 
 const opUpdateSecurityGroupRuleDescriptionsIngress = "UpdateSecurityGroupRuleDescriptionsIngress"
@@ -15517,6 +15782,7 @@ const opUpdateSecurityGroupRuleDescriptionsIngress = "UpdateSecurityGroupRuleDes
 type UpdateSecurityGroupRuleDescriptionsIngressRequest struct {
 	*aws.Request
 	Input *UpdateSecurityGroupRuleDescriptionsIngressInput
+	Copy  func(*UpdateSecurityGroupRuleDescriptionsIngressInput) UpdateSecurityGroupRuleDescriptionsIngressRequest
 }
 
 // Send marshals and sends the UpdateSecurityGroupRuleDescriptionsIngress API request.
@@ -15563,7 +15829,7 @@ func (c *EC2) UpdateSecurityGroupRuleDescriptionsIngressRequest(input *UpdateSec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSecurityGroupRuleDescriptionsIngressRequest{Request: req, Input: input}
+	return UpdateSecurityGroupRuleDescriptionsIngressRequest{Request: req, Input: input, Copy: c.UpdateSecurityGroupRuleDescriptionsIngressRequest}
 }
 
 // Contains the parameters for accepting the quote.

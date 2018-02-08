@@ -16,6 +16,7 @@ const opAssociateFleet = "AssociateFleet"
 type AssociateFleetRequest struct {
 	*aws.Request
 	Input *AssociateFleetInput
+	Copy  func(*AssociateFleetInput) AssociateFleetRequest
 }
 
 // Send marshals and sends the AssociateFleet API request.
@@ -56,7 +57,7 @@ func (c *AppStream) AssociateFleetRequest(input *AssociateFleetInput) AssociateF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateFleetRequest{Request: req, Input: input}
+	return AssociateFleetRequest{Request: req, Input: input, Copy: c.AssociateFleetRequest}
 }
 
 const opCreateDirectoryConfig = "CreateDirectoryConfig"
@@ -65,6 +66,7 @@ const opCreateDirectoryConfig = "CreateDirectoryConfig"
 type CreateDirectoryConfigRequest struct {
 	*aws.Request
 	Input *CreateDirectoryConfigInput
+	Copy  func(*CreateDirectoryConfigInput) CreateDirectoryConfigRequest
 }
 
 // Send marshals and sends the CreateDirectoryConfig API request.
@@ -105,7 +107,7 @@ func (c *AppStream) CreateDirectoryConfigRequest(input *CreateDirectoryConfigInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDirectoryConfigRequest{Request: req, Input: input}
+	return CreateDirectoryConfigRequest{Request: req, Input: input, Copy: c.CreateDirectoryConfigRequest}
 }
 
 const opCreateFleet = "CreateFleet"
@@ -114,6 +116,7 @@ const opCreateFleet = "CreateFleet"
 type CreateFleetRequest struct {
 	*aws.Request
 	Input *CreateFleetInput
+	Copy  func(*CreateFleetInput) CreateFleetRequest
 }
 
 // Send marshals and sends the CreateFleet API request.
@@ -154,7 +157,7 @@ func (c *AppStream) CreateFleetRequest(input *CreateFleetInput) CreateFleetReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateFleetRequest{Request: req, Input: input}
+	return CreateFleetRequest{Request: req, Input: input, Copy: c.CreateFleetRequest}
 }
 
 const opCreateImageBuilder = "CreateImageBuilder"
@@ -163,6 +166,7 @@ const opCreateImageBuilder = "CreateImageBuilder"
 type CreateImageBuilderRequest struct {
 	*aws.Request
 	Input *CreateImageBuilderInput
+	Copy  func(*CreateImageBuilderInput) CreateImageBuilderRequest
 }
 
 // Send marshals and sends the CreateImageBuilder API request.
@@ -206,7 +210,7 @@ func (c *AppStream) CreateImageBuilderRequest(input *CreateImageBuilderInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateImageBuilderRequest{Request: req, Input: input}
+	return CreateImageBuilderRequest{Request: req, Input: input, Copy: c.CreateImageBuilderRequest}
 }
 
 const opCreateImageBuilderStreamingURL = "CreateImageBuilderStreamingURL"
@@ -215,6 +219,7 @@ const opCreateImageBuilderStreamingURL = "CreateImageBuilderStreamingURL"
 type CreateImageBuilderStreamingURLRequest struct {
 	*aws.Request
 	Input *CreateImageBuilderStreamingURLInput
+	Copy  func(*CreateImageBuilderStreamingURLInput) CreateImageBuilderStreamingURLRequest
 }
 
 // Send marshals and sends the CreateImageBuilderStreamingURL API request.
@@ -255,7 +260,7 @@ func (c *AppStream) CreateImageBuilderStreamingURLRequest(input *CreateImageBuil
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateImageBuilderStreamingURLRequest{Request: req, Input: input}
+	return CreateImageBuilderStreamingURLRequest{Request: req, Input: input, Copy: c.CreateImageBuilderStreamingURLRequest}
 }
 
 const opCreateStack = "CreateStack"
@@ -264,6 +269,7 @@ const opCreateStack = "CreateStack"
 type CreateStackRequest struct {
 	*aws.Request
 	Input *CreateStackInput
+	Copy  func(*CreateStackInput) CreateStackRequest
 }
 
 // Send marshals and sends the CreateStack API request.
@@ -304,7 +310,7 @@ func (c *AppStream) CreateStackRequest(input *CreateStackInput) CreateStackReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStackRequest{Request: req, Input: input}
+	return CreateStackRequest{Request: req, Input: input, Copy: c.CreateStackRequest}
 }
 
 const opCreateStreamingURL = "CreateStreamingURL"
@@ -313,6 +319,7 @@ const opCreateStreamingURL = "CreateStreamingURL"
 type CreateStreamingURLRequest struct {
 	*aws.Request
 	Input *CreateStreamingURLInput
+	Copy  func(*CreateStreamingURLInput) CreateStreamingURLRequest
 }
 
 // Send marshals and sends the CreateStreamingURL API request.
@@ -353,7 +360,7 @@ func (c *AppStream) CreateStreamingURLRequest(input *CreateStreamingURLInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStreamingURLRequest{Request: req, Input: input}
+	return CreateStreamingURLRequest{Request: req, Input: input, Copy: c.CreateStreamingURLRequest}
 }
 
 const opDeleteDirectoryConfig = "DeleteDirectoryConfig"
@@ -362,6 +369,7 @@ const opDeleteDirectoryConfig = "DeleteDirectoryConfig"
 type DeleteDirectoryConfigRequest struct {
 	*aws.Request
 	Input *DeleteDirectoryConfigInput
+	Copy  func(*DeleteDirectoryConfigInput) DeleteDirectoryConfigRequest
 }
 
 // Send marshals and sends the DeleteDirectoryConfig API request.
@@ -402,7 +410,7 @@ func (c *AppStream) DeleteDirectoryConfigRequest(input *DeleteDirectoryConfigInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDirectoryConfigRequest{Request: req, Input: input}
+	return DeleteDirectoryConfigRequest{Request: req, Input: input, Copy: c.DeleteDirectoryConfigRequest}
 }
 
 const opDeleteFleet = "DeleteFleet"
@@ -411,6 +419,7 @@ const opDeleteFleet = "DeleteFleet"
 type DeleteFleetRequest struct {
 	*aws.Request
 	Input *DeleteFleetInput
+	Copy  func(*DeleteFleetInput) DeleteFleetRequest
 }
 
 // Send marshals and sends the DeleteFleet API request.
@@ -451,7 +460,7 @@ func (c *AppStream) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFleetRequest{Request: req, Input: input}
+	return DeleteFleetRequest{Request: req, Input: input, Copy: c.DeleteFleetRequest}
 }
 
 const opDeleteImage = "DeleteImage"
@@ -460,6 +469,7 @@ const opDeleteImage = "DeleteImage"
 type DeleteImageRequest struct {
 	*aws.Request
 	Input *DeleteImageInput
+	Copy  func(*DeleteImageInput) DeleteImageRequest
 }
 
 // Send marshals and sends the DeleteImage API request.
@@ -502,7 +512,7 @@ func (c *AppStream) DeleteImageRequest(input *DeleteImageInput) DeleteImageReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteImageRequest{Request: req, Input: input}
+	return DeleteImageRequest{Request: req, Input: input, Copy: c.DeleteImageRequest}
 }
 
 const opDeleteImageBuilder = "DeleteImageBuilder"
@@ -511,6 +521,7 @@ const opDeleteImageBuilder = "DeleteImageBuilder"
 type DeleteImageBuilderRequest struct {
 	*aws.Request
 	Input *DeleteImageBuilderInput
+	Copy  func(*DeleteImageBuilderInput) DeleteImageBuilderRequest
 }
 
 // Send marshals and sends the DeleteImageBuilder API request.
@@ -551,7 +562,7 @@ func (c *AppStream) DeleteImageBuilderRequest(input *DeleteImageBuilderInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteImageBuilderRequest{Request: req, Input: input}
+	return DeleteImageBuilderRequest{Request: req, Input: input, Copy: c.DeleteImageBuilderRequest}
 }
 
 const opDeleteStack = "DeleteStack"
@@ -560,6 +571,7 @@ const opDeleteStack = "DeleteStack"
 type DeleteStackRequest struct {
 	*aws.Request
 	Input *DeleteStackInput
+	Copy  func(*DeleteStackInput) DeleteStackRequest
 }
 
 // Send marshals and sends the DeleteStack API request.
@@ -601,7 +613,7 @@ func (c *AppStream) DeleteStackRequest(input *DeleteStackInput) DeleteStackReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStackRequest{Request: req, Input: input}
+	return DeleteStackRequest{Request: req, Input: input, Copy: c.DeleteStackRequest}
 }
 
 const opDescribeDirectoryConfigs = "DescribeDirectoryConfigs"
@@ -610,6 +622,7 @@ const opDescribeDirectoryConfigs = "DescribeDirectoryConfigs"
 type DescribeDirectoryConfigsRequest struct {
 	*aws.Request
 	Input *DescribeDirectoryConfigsInput
+	Copy  func(*DescribeDirectoryConfigsInput) DescribeDirectoryConfigsRequest
 }
 
 // Send marshals and sends the DescribeDirectoryConfigs API request.
@@ -650,7 +663,7 @@ func (c *AppStream) DescribeDirectoryConfigsRequest(input *DescribeDirectoryConf
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDirectoryConfigsRequest{Request: req, Input: input}
+	return DescribeDirectoryConfigsRequest{Request: req, Input: input, Copy: c.DescribeDirectoryConfigsRequest}
 }
 
 const opDescribeFleets = "DescribeFleets"
@@ -659,6 +672,7 @@ const opDescribeFleets = "DescribeFleets"
 type DescribeFleetsRequest struct {
 	*aws.Request
 	Input *DescribeFleetsInput
+	Copy  func(*DescribeFleetsInput) DescribeFleetsRequest
 }
 
 // Send marshals and sends the DescribeFleets API request.
@@ -699,7 +713,7 @@ func (c *AppStream) DescribeFleetsRequest(input *DescribeFleetsInput) DescribeFl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFleetsRequest{Request: req, Input: input}
+	return DescribeFleetsRequest{Request: req, Input: input, Copy: c.DescribeFleetsRequest}
 }
 
 const opDescribeImageBuilders = "DescribeImageBuilders"
@@ -708,6 +722,7 @@ const opDescribeImageBuilders = "DescribeImageBuilders"
 type DescribeImageBuildersRequest struct {
 	*aws.Request
 	Input *DescribeImageBuildersInput
+	Copy  func(*DescribeImageBuildersInput) DescribeImageBuildersRequest
 }
 
 // Send marshals and sends the DescribeImageBuilders API request.
@@ -748,7 +763,7 @@ func (c *AppStream) DescribeImageBuildersRequest(input *DescribeImageBuildersInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeImageBuildersRequest{Request: req, Input: input}
+	return DescribeImageBuildersRequest{Request: req, Input: input, Copy: c.DescribeImageBuildersRequest}
 }
 
 const opDescribeImages = "DescribeImages"
@@ -757,6 +772,7 @@ const opDescribeImages = "DescribeImages"
 type DescribeImagesRequest struct {
 	*aws.Request
 	Input *DescribeImagesInput
+	Copy  func(*DescribeImagesInput) DescribeImagesRequest
 }
 
 // Send marshals and sends the DescribeImages API request.
@@ -797,7 +813,7 @@ func (c *AppStream) DescribeImagesRequest(input *DescribeImagesInput) DescribeIm
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeImagesRequest{Request: req, Input: input}
+	return DescribeImagesRequest{Request: req, Input: input, Copy: c.DescribeImagesRequest}
 }
 
 const opDescribeSessions = "DescribeSessions"
@@ -806,6 +822,7 @@ const opDescribeSessions = "DescribeSessions"
 type DescribeSessionsRequest struct {
 	*aws.Request
 	Input *DescribeSessionsInput
+	Copy  func(*DescribeSessionsInput) DescribeSessionsRequest
 }
 
 // Send marshals and sends the DescribeSessions API request.
@@ -849,7 +866,7 @@ func (c *AppStream) DescribeSessionsRequest(input *DescribeSessionsInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSessionsRequest{Request: req, Input: input}
+	return DescribeSessionsRequest{Request: req, Input: input, Copy: c.DescribeSessionsRequest}
 }
 
 const opDescribeStacks = "DescribeStacks"
@@ -858,6 +875,7 @@ const opDescribeStacks = "DescribeStacks"
 type DescribeStacksRequest struct {
 	*aws.Request
 	Input *DescribeStacksInput
+	Copy  func(*DescribeStacksInput) DescribeStacksRequest
 }
 
 // Send marshals and sends the DescribeStacks API request.
@@ -898,7 +916,7 @@ func (c *AppStream) DescribeStacksRequest(input *DescribeStacksInput) DescribeSt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStacksRequest{Request: req, Input: input}
+	return DescribeStacksRequest{Request: req, Input: input, Copy: c.DescribeStacksRequest}
 }
 
 const opDisassociateFleet = "DisassociateFleet"
@@ -907,6 +925,7 @@ const opDisassociateFleet = "DisassociateFleet"
 type DisassociateFleetRequest struct {
 	*aws.Request
 	Input *DisassociateFleetInput
+	Copy  func(*DisassociateFleetInput) DisassociateFleetRequest
 }
 
 // Send marshals and sends the DisassociateFleet API request.
@@ -947,7 +966,7 @@ func (c *AppStream) DisassociateFleetRequest(input *DisassociateFleetInput) Disa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateFleetRequest{Request: req, Input: input}
+	return DisassociateFleetRequest{Request: req, Input: input, Copy: c.DisassociateFleetRequest}
 }
 
 const opExpireSession = "ExpireSession"
@@ -956,6 +975,7 @@ const opExpireSession = "ExpireSession"
 type ExpireSessionRequest struct {
 	*aws.Request
 	Input *ExpireSessionInput
+	Copy  func(*ExpireSessionInput) ExpireSessionRequest
 }
 
 // Send marshals and sends the ExpireSession API request.
@@ -996,7 +1016,7 @@ func (c *AppStream) ExpireSessionRequest(input *ExpireSessionInput) ExpireSessio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ExpireSessionRequest{Request: req, Input: input}
+	return ExpireSessionRequest{Request: req, Input: input, Copy: c.ExpireSessionRequest}
 }
 
 const opListAssociatedFleets = "ListAssociatedFleets"
@@ -1005,6 +1025,7 @@ const opListAssociatedFleets = "ListAssociatedFleets"
 type ListAssociatedFleetsRequest struct {
 	*aws.Request
 	Input *ListAssociatedFleetsInput
+	Copy  func(*ListAssociatedFleetsInput) ListAssociatedFleetsRequest
 }
 
 // Send marshals and sends the ListAssociatedFleets API request.
@@ -1045,7 +1066,7 @@ func (c *AppStream) ListAssociatedFleetsRequest(input *ListAssociatedFleetsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAssociatedFleetsRequest{Request: req, Input: input}
+	return ListAssociatedFleetsRequest{Request: req, Input: input, Copy: c.ListAssociatedFleetsRequest}
 }
 
 const opListAssociatedStacks = "ListAssociatedStacks"
@@ -1054,6 +1075,7 @@ const opListAssociatedStacks = "ListAssociatedStacks"
 type ListAssociatedStacksRequest struct {
 	*aws.Request
 	Input *ListAssociatedStacksInput
+	Copy  func(*ListAssociatedStacksInput) ListAssociatedStacksRequest
 }
 
 // Send marshals and sends the ListAssociatedStacks API request.
@@ -1094,7 +1116,7 @@ func (c *AppStream) ListAssociatedStacksRequest(input *ListAssociatedStacksInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAssociatedStacksRequest{Request: req, Input: input}
+	return ListAssociatedStacksRequest{Request: req, Input: input, Copy: c.ListAssociatedStacksRequest}
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -1103,6 +1125,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -1147,7 +1170,7 @@ func (c *AppStream) ListTagsForResourceRequest(input *ListTagsForResourceInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opStartFleet = "StartFleet"
@@ -1156,6 +1179,7 @@ const opStartFleet = "StartFleet"
 type StartFleetRequest struct {
 	*aws.Request
 	Input *StartFleetInput
+	Copy  func(*StartFleetInput) StartFleetRequest
 }
 
 // Send marshals and sends the StartFleet API request.
@@ -1196,7 +1220,7 @@ func (c *AppStream) StartFleetRequest(input *StartFleetInput) StartFleetRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartFleetRequest{Request: req, Input: input}
+	return StartFleetRequest{Request: req, Input: input, Copy: c.StartFleetRequest}
 }
 
 const opStartImageBuilder = "StartImageBuilder"
@@ -1205,6 +1229,7 @@ const opStartImageBuilder = "StartImageBuilder"
 type StartImageBuilderRequest struct {
 	*aws.Request
 	Input *StartImageBuilderInput
+	Copy  func(*StartImageBuilderInput) StartImageBuilderRequest
 }
 
 // Send marshals and sends the StartImageBuilder API request.
@@ -1245,7 +1270,7 @@ func (c *AppStream) StartImageBuilderRequest(input *StartImageBuilderInput) Star
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartImageBuilderRequest{Request: req, Input: input}
+	return StartImageBuilderRequest{Request: req, Input: input, Copy: c.StartImageBuilderRequest}
 }
 
 const opStopFleet = "StopFleet"
@@ -1254,6 +1279,7 @@ const opStopFleet = "StopFleet"
 type StopFleetRequest struct {
 	*aws.Request
 	Input *StopFleetInput
+	Copy  func(*StopFleetInput) StopFleetRequest
 }
 
 // Send marshals and sends the StopFleet API request.
@@ -1294,7 +1320,7 @@ func (c *AppStream) StopFleetRequest(input *StopFleetInput) StopFleetRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopFleetRequest{Request: req, Input: input}
+	return StopFleetRequest{Request: req, Input: input, Copy: c.StopFleetRequest}
 }
 
 const opStopImageBuilder = "StopImageBuilder"
@@ -1303,6 +1329,7 @@ const opStopImageBuilder = "StopImageBuilder"
 type StopImageBuilderRequest struct {
 	*aws.Request
 	Input *StopImageBuilderInput
+	Copy  func(*StopImageBuilderInput) StopImageBuilderRequest
 }
 
 // Send marshals and sends the StopImageBuilder API request.
@@ -1343,7 +1370,7 @@ func (c *AppStream) StopImageBuilderRequest(input *StopImageBuilderInput) StopIm
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopImageBuilderRequest{Request: req, Input: input}
+	return StopImageBuilderRequest{Request: req, Input: input, Copy: c.StopImageBuilderRequest}
 }
 
 const opTagResource = "TagResource"
@@ -1352,6 +1379,7 @@ const opTagResource = "TagResource"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -1402,7 +1430,7 @@ func (c *AppStream) TagResourceRequest(input *TagResourceInput) TagResourceReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUntagResource = "UntagResource"
@@ -1411,6 +1439,7 @@ const opUntagResource = "UntagResource"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -1456,7 +1485,7 @@ func (c *AppStream) UntagResourceRequest(input *UntagResourceInput) UntagResourc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateDirectoryConfig = "UpdateDirectoryConfig"
@@ -1465,6 +1494,7 @@ const opUpdateDirectoryConfig = "UpdateDirectoryConfig"
 type UpdateDirectoryConfigRequest struct {
 	*aws.Request
 	Input *UpdateDirectoryConfigInput
+	Copy  func(*UpdateDirectoryConfigInput) UpdateDirectoryConfigRequest
 }
 
 // Send marshals and sends the UpdateDirectoryConfig API request.
@@ -1505,7 +1535,7 @@ func (c *AppStream) UpdateDirectoryConfigRequest(input *UpdateDirectoryConfigInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDirectoryConfigRequest{Request: req, Input: input}
+	return UpdateDirectoryConfigRequest{Request: req, Input: input, Copy: c.UpdateDirectoryConfigRequest}
 }
 
 const opUpdateFleet = "UpdateFleet"
@@ -1514,6 +1544,7 @@ const opUpdateFleet = "UpdateFleet"
 type UpdateFleetRequest struct {
 	*aws.Request
 	Input *UpdateFleetInput
+	Copy  func(*UpdateFleetInput) UpdateFleetRequest
 }
 
 // Send marshals and sends the UpdateFleet API request.
@@ -1559,7 +1590,7 @@ func (c *AppStream) UpdateFleetRequest(input *UpdateFleetInput) UpdateFleetReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateFleetRequest{Request: req, Input: input}
+	return UpdateFleetRequest{Request: req, Input: input, Copy: c.UpdateFleetRequest}
 }
 
 const opUpdateStack = "UpdateStack"
@@ -1568,6 +1599,7 @@ const opUpdateStack = "UpdateStack"
 type UpdateStackRequest struct {
 	*aws.Request
 	Input *UpdateStackInput
+	Copy  func(*UpdateStackInput) UpdateStackRequest
 }
 
 // Send marshals and sends the UpdateStack API request.
@@ -1608,7 +1640,7 @@ func (c *AppStream) UpdateStackRequest(input *UpdateStackInput) UpdateStackReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateStackRequest{Request: req, Input: input}
+	return UpdateStackRequest{Request: req, Input: input, Copy: c.UpdateStackRequest}
 }
 
 // Describes an application in the application catalog.

@@ -16,6 +16,7 @@ const opSearch = "Search"
 type SearchRequest struct {
 	*aws.Request
 	Input *SearchInput
+	Copy  func(*SearchInput) SearchRequest
 }
 
 // Send marshals and sends the Search API request.
@@ -74,7 +75,7 @@ func (c *CloudSearchDomain) SearchRequest(input *SearchInput) SearchRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchRequest{Request: req, Input: input}
+	return SearchRequest{Request: req, Input: input, Copy: c.SearchRequest}
 }
 
 const opSuggest = "Suggest"
@@ -83,6 +84,7 @@ const opSuggest = "Suggest"
 type SuggestRequest struct {
 	*aws.Request
 	Input *SuggestInput
+	Copy  func(*SuggestInput) SuggestRequest
 }
 
 // Send marshals and sends the Suggest API request.
@@ -137,7 +139,7 @@ func (c *CloudSearchDomain) SuggestRequest(input *SuggestInput) SuggestRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SuggestRequest{Request: req, Input: input}
+	return SuggestRequest{Request: req, Input: input, Copy: c.SuggestRequest}
 }
 
 const opUploadDocuments = "UploadDocuments"
@@ -146,6 +148,7 @@ const opUploadDocuments = "UploadDocuments"
 type UploadDocumentsRequest struct {
 	*aws.Request
 	Input *UploadDocumentsInput
+	Copy  func(*UploadDocumentsInput) UploadDocumentsRequest
 }
 
 // Send marshals and sends the UploadDocuments API request.
@@ -205,7 +208,7 @@ func (c *CloudSearchDomain) UploadDocumentsRequest(input *UploadDocumentsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UploadDocumentsRequest{Request: req, Input: input}
+	return UploadDocumentsRequest{Request: req, Input: input, Copy: c.UploadDocumentsRequest}
 }
 
 // A container for facet information.

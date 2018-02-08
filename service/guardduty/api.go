@@ -14,6 +14,7 @@ const opAcceptInvitation = "AcceptInvitation"
 type AcceptInvitationRequest struct {
 	*aws.Request
 	Input *AcceptInvitationInput
+	Copy  func(*AcceptInvitationInput) AcceptInvitationRequest
 }
 
 // Send marshals and sends the AcceptInvitation API request.
@@ -54,7 +55,7 @@ func (c *GuardDuty) AcceptInvitationRequest(input *AcceptInvitationInput) Accept
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcceptInvitationRequest{Request: req, Input: input}
+	return AcceptInvitationRequest{Request: req, Input: input, Copy: c.AcceptInvitationRequest}
 }
 
 const opArchiveFindings = "ArchiveFindings"
@@ -63,6 +64,7 @@ const opArchiveFindings = "ArchiveFindings"
 type ArchiveFindingsRequest struct {
 	*aws.Request
 	Input *ArchiveFindingsInput
+	Copy  func(*ArchiveFindingsInput) ArchiveFindingsRequest
 }
 
 // Send marshals and sends the ArchiveFindings API request.
@@ -103,7 +105,7 @@ func (c *GuardDuty) ArchiveFindingsRequest(input *ArchiveFindingsInput) ArchiveF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ArchiveFindingsRequest{Request: req, Input: input}
+	return ArchiveFindingsRequest{Request: req, Input: input, Copy: c.ArchiveFindingsRequest}
 }
 
 const opCreateDetector = "CreateDetector"
@@ -112,6 +114,7 @@ const opCreateDetector = "CreateDetector"
 type CreateDetectorRequest struct {
 	*aws.Request
 	Input *CreateDetectorInput
+	Copy  func(*CreateDetectorInput) CreateDetectorRequest
 }
 
 // Send marshals and sends the CreateDetector API request.
@@ -154,7 +157,7 @@ func (c *GuardDuty) CreateDetectorRequest(input *CreateDetectorInput) CreateDete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDetectorRequest{Request: req, Input: input}
+	return CreateDetectorRequest{Request: req, Input: input, Copy: c.CreateDetectorRequest}
 }
 
 const opCreateIPSet = "CreateIPSet"
@@ -163,6 +166,7 @@ const opCreateIPSet = "CreateIPSet"
 type CreateIPSetRequest struct {
 	*aws.Request
 	Input *CreateIPSetInput
+	Copy  func(*CreateIPSetInput) CreateIPSetRequest
 }
 
 // Send marshals and sends the CreateIPSet API request.
@@ -204,7 +208,7 @@ func (c *GuardDuty) CreateIPSetRequest(input *CreateIPSetInput) CreateIPSetReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateIPSetRequest{Request: req, Input: input}
+	return CreateIPSetRequest{Request: req, Input: input, Copy: c.CreateIPSetRequest}
 }
 
 const opCreateMembers = "CreateMembers"
@@ -213,6 +217,7 @@ const opCreateMembers = "CreateMembers"
 type CreateMembersRequest struct {
 	*aws.Request
 	Input *CreateMembersInput
+	Copy  func(*CreateMembersInput) CreateMembersRequest
 }
 
 // Send marshals and sends the CreateMembers API request.
@@ -255,7 +260,7 @@ func (c *GuardDuty) CreateMembersRequest(input *CreateMembersInput) CreateMember
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateMembersRequest{Request: req, Input: input}
+	return CreateMembersRequest{Request: req, Input: input, Copy: c.CreateMembersRequest}
 }
 
 const opCreateSampleFindings = "CreateSampleFindings"
@@ -264,6 +269,7 @@ const opCreateSampleFindings = "CreateSampleFindings"
 type CreateSampleFindingsRequest struct {
 	*aws.Request
 	Input *CreateSampleFindingsInput
+	Copy  func(*CreateSampleFindingsInput) CreateSampleFindingsRequest
 }
 
 // Send marshals and sends the CreateSampleFindings API request.
@@ -306,7 +312,7 @@ func (c *GuardDuty) CreateSampleFindingsRequest(input *CreateSampleFindingsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSampleFindingsRequest{Request: req, Input: input}
+	return CreateSampleFindingsRequest{Request: req, Input: input, Copy: c.CreateSampleFindingsRequest}
 }
 
 const opCreateThreatIntelSet = "CreateThreatIntelSet"
@@ -315,6 +321,7 @@ const opCreateThreatIntelSet = "CreateThreatIntelSet"
 type CreateThreatIntelSetRequest struct {
 	*aws.Request
 	Input *CreateThreatIntelSetInput
+	Copy  func(*CreateThreatIntelSetInput) CreateThreatIntelSetRequest
 }
 
 // Send marshals and sends the CreateThreatIntelSet API request.
@@ -356,7 +363,7 @@ func (c *GuardDuty) CreateThreatIntelSetRequest(input *CreateThreatIntelSetInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateThreatIntelSetRequest{Request: req, Input: input}
+	return CreateThreatIntelSetRequest{Request: req, Input: input, Copy: c.CreateThreatIntelSetRequest}
 }
 
 const opDeclineInvitations = "DeclineInvitations"
@@ -365,6 +372,7 @@ const opDeclineInvitations = "DeclineInvitations"
 type DeclineInvitationsRequest struct {
 	*aws.Request
 	Input *DeclineInvitationsInput
+	Copy  func(*DeclineInvitationsInput) DeclineInvitationsRequest
 }
 
 // Send marshals and sends the DeclineInvitations API request.
@@ -406,7 +414,7 @@ func (c *GuardDuty) DeclineInvitationsRequest(input *DeclineInvitationsInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeclineInvitationsRequest{Request: req, Input: input}
+	return DeclineInvitationsRequest{Request: req, Input: input, Copy: c.DeclineInvitationsRequest}
 }
 
 const opDeleteDetector = "DeleteDetector"
@@ -415,6 +423,7 @@ const opDeleteDetector = "DeleteDetector"
 type DeleteDetectorRequest struct {
 	*aws.Request
 	Input *DeleteDetectorInput
+	Copy  func(*DeleteDetectorInput) DeleteDetectorRequest
 }
 
 // Send marshals and sends the DeleteDetector API request.
@@ -455,7 +464,7 @@ func (c *GuardDuty) DeleteDetectorRequest(input *DeleteDetectorInput) DeleteDete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDetectorRequest{Request: req, Input: input}
+	return DeleteDetectorRequest{Request: req, Input: input, Copy: c.DeleteDetectorRequest}
 }
 
 const opDeleteIPSet = "DeleteIPSet"
@@ -464,6 +473,7 @@ const opDeleteIPSet = "DeleteIPSet"
 type DeleteIPSetRequest struct {
 	*aws.Request
 	Input *DeleteIPSetInput
+	Copy  func(*DeleteIPSetInput) DeleteIPSetRequest
 }
 
 // Send marshals and sends the DeleteIPSet API request.
@@ -504,7 +514,7 @@ func (c *GuardDuty) DeleteIPSetRequest(input *DeleteIPSetInput) DeleteIPSetReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIPSetRequest{Request: req, Input: input}
+	return DeleteIPSetRequest{Request: req, Input: input, Copy: c.DeleteIPSetRequest}
 }
 
 const opDeleteInvitations = "DeleteInvitations"
@@ -513,6 +523,7 @@ const opDeleteInvitations = "DeleteInvitations"
 type DeleteInvitationsRequest struct {
 	*aws.Request
 	Input *DeleteInvitationsInput
+	Copy  func(*DeleteInvitationsInput) DeleteInvitationsRequest
 }
 
 // Send marshals and sends the DeleteInvitations API request.
@@ -554,7 +565,7 @@ func (c *GuardDuty) DeleteInvitationsRequest(input *DeleteInvitationsInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteInvitationsRequest{Request: req, Input: input}
+	return DeleteInvitationsRequest{Request: req, Input: input, Copy: c.DeleteInvitationsRequest}
 }
 
 const opDeleteMembers = "DeleteMembers"
@@ -563,6 +574,7 @@ const opDeleteMembers = "DeleteMembers"
 type DeleteMembersRequest struct {
 	*aws.Request
 	Input *DeleteMembersInput
+	Copy  func(*DeleteMembersInput) DeleteMembersRequest
 }
 
 // Send marshals and sends the DeleteMembers API request.
@@ -604,7 +616,7 @@ func (c *GuardDuty) DeleteMembersRequest(input *DeleteMembersInput) DeleteMember
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteMembersRequest{Request: req, Input: input}
+	return DeleteMembersRequest{Request: req, Input: input, Copy: c.DeleteMembersRequest}
 }
 
 const opDeleteThreatIntelSet = "DeleteThreatIntelSet"
@@ -613,6 +625,7 @@ const opDeleteThreatIntelSet = "DeleteThreatIntelSet"
 type DeleteThreatIntelSetRequest struct {
 	*aws.Request
 	Input *DeleteThreatIntelSetInput
+	Copy  func(*DeleteThreatIntelSetInput) DeleteThreatIntelSetRequest
 }
 
 // Send marshals and sends the DeleteThreatIntelSet API request.
@@ -653,7 +666,7 @@ func (c *GuardDuty) DeleteThreatIntelSetRequest(input *DeleteThreatIntelSetInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteThreatIntelSetRequest{Request: req, Input: input}
+	return DeleteThreatIntelSetRequest{Request: req, Input: input, Copy: c.DeleteThreatIntelSetRequest}
 }
 
 const opDisassociateFromMasterAccount = "DisassociateFromMasterAccount"
@@ -662,6 +675,7 @@ const opDisassociateFromMasterAccount = "DisassociateFromMasterAccount"
 type DisassociateFromMasterAccountRequest struct {
 	*aws.Request
 	Input *DisassociateFromMasterAccountInput
+	Copy  func(*DisassociateFromMasterAccountInput) DisassociateFromMasterAccountRequest
 }
 
 // Send marshals and sends the DisassociateFromMasterAccount API request.
@@ -702,7 +716,7 @@ func (c *GuardDuty) DisassociateFromMasterAccountRequest(input *DisassociateFrom
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateFromMasterAccountRequest{Request: req, Input: input}
+	return DisassociateFromMasterAccountRequest{Request: req, Input: input, Copy: c.DisassociateFromMasterAccountRequest}
 }
 
 const opDisassociateMembers = "DisassociateMembers"
@@ -711,6 +725,7 @@ const opDisassociateMembers = "DisassociateMembers"
 type DisassociateMembersRequest struct {
 	*aws.Request
 	Input *DisassociateMembersInput
+	Copy  func(*DisassociateMembersInput) DisassociateMembersRequest
 }
 
 // Send marshals and sends the DisassociateMembers API request.
@@ -752,7 +767,7 @@ func (c *GuardDuty) DisassociateMembersRequest(input *DisassociateMembersInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateMembersRequest{Request: req, Input: input}
+	return DisassociateMembersRequest{Request: req, Input: input, Copy: c.DisassociateMembersRequest}
 }
 
 const opGetDetector = "GetDetector"
@@ -761,6 +776,7 @@ const opGetDetector = "GetDetector"
 type GetDetectorRequest struct {
 	*aws.Request
 	Input *GetDetectorInput
+	Copy  func(*GetDetectorInput) GetDetectorRequest
 }
 
 // Send marshals and sends the GetDetector API request.
@@ -801,7 +817,7 @@ func (c *GuardDuty) GetDetectorRequest(input *GetDetectorInput) GetDetectorReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDetectorRequest{Request: req, Input: input}
+	return GetDetectorRequest{Request: req, Input: input, Copy: c.GetDetectorRequest}
 }
 
 const opGetFindings = "GetFindings"
@@ -810,6 +826,7 @@ const opGetFindings = "GetFindings"
 type GetFindingsRequest struct {
 	*aws.Request
 	Input *GetFindingsInput
+	Copy  func(*GetFindingsInput) GetFindingsRequest
 }
 
 // Send marshals and sends the GetFindings API request.
@@ -850,7 +867,7 @@ func (c *GuardDuty) GetFindingsRequest(input *GetFindingsInput) GetFindingsReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFindingsRequest{Request: req, Input: input}
+	return GetFindingsRequest{Request: req, Input: input, Copy: c.GetFindingsRequest}
 }
 
 const opGetFindingsStatistics = "GetFindingsStatistics"
@@ -859,6 +876,7 @@ const opGetFindingsStatistics = "GetFindingsStatistics"
 type GetFindingsStatisticsRequest struct {
 	*aws.Request
 	Input *GetFindingsStatisticsInput
+	Copy  func(*GetFindingsStatisticsInput) GetFindingsStatisticsRequest
 }
 
 // Send marshals and sends the GetFindingsStatistics API request.
@@ -899,7 +917,7 @@ func (c *GuardDuty) GetFindingsStatisticsRequest(input *GetFindingsStatisticsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFindingsStatisticsRequest{Request: req, Input: input}
+	return GetFindingsStatisticsRequest{Request: req, Input: input, Copy: c.GetFindingsStatisticsRequest}
 }
 
 const opGetIPSet = "GetIPSet"
@@ -908,6 +926,7 @@ const opGetIPSet = "GetIPSet"
 type GetIPSetRequest struct {
 	*aws.Request
 	Input *GetIPSetInput
+	Copy  func(*GetIPSetInput) GetIPSetRequest
 }
 
 // Send marshals and sends the GetIPSet API request.
@@ -948,7 +967,7 @@ func (c *GuardDuty) GetIPSetRequest(input *GetIPSetInput) GetIPSetRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIPSetRequest{Request: req, Input: input}
+	return GetIPSetRequest{Request: req, Input: input, Copy: c.GetIPSetRequest}
 }
 
 const opGetInvitationsCount = "GetInvitationsCount"
@@ -957,6 +976,7 @@ const opGetInvitationsCount = "GetInvitationsCount"
 type GetInvitationsCountRequest struct {
 	*aws.Request
 	Input *GetInvitationsCountInput
+	Copy  func(*GetInvitationsCountInput) GetInvitationsCountRequest
 }
 
 // Send marshals and sends the GetInvitationsCount API request.
@@ -998,7 +1018,7 @@ func (c *GuardDuty) GetInvitationsCountRequest(input *GetInvitationsCountInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInvitationsCountRequest{Request: req, Input: input}
+	return GetInvitationsCountRequest{Request: req, Input: input, Copy: c.GetInvitationsCountRequest}
 }
 
 const opGetMasterAccount = "GetMasterAccount"
@@ -1007,6 +1027,7 @@ const opGetMasterAccount = "GetMasterAccount"
 type GetMasterAccountRequest struct {
 	*aws.Request
 	Input *GetMasterAccountInput
+	Copy  func(*GetMasterAccountInput) GetMasterAccountRequest
 }
 
 // Send marshals and sends the GetMasterAccount API request.
@@ -1048,7 +1069,7 @@ func (c *GuardDuty) GetMasterAccountRequest(input *GetMasterAccountInput) GetMas
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMasterAccountRequest{Request: req, Input: input}
+	return GetMasterAccountRequest{Request: req, Input: input, Copy: c.GetMasterAccountRequest}
 }
 
 const opGetMembers = "GetMembers"
@@ -1057,6 +1078,7 @@ const opGetMembers = "GetMembers"
 type GetMembersRequest struct {
 	*aws.Request
 	Input *GetMembersInput
+	Copy  func(*GetMembersInput) GetMembersRequest
 }
 
 // Send marshals and sends the GetMembers API request.
@@ -1098,7 +1120,7 @@ func (c *GuardDuty) GetMembersRequest(input *GetMembersInput) GetMembersRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMembersRequest{Request: req, Input: input}
+	return GetMembersRequest{Request: req, Input: input, Copy: c.GetMembersRequest}
 }
 
 const opGetThreatIntelSet = "GetThreatIntelSet"
@@ -1107,6 +1129,7 @@ const opGetThreatIntelSet = "GetThreatIntelSet"
 type GetThreatIntelSetRequest struct {
 	*aws.Request
 	Input *GetThreatIntelSetInput
+	Copy  func(*GetThreatIntelSetInput) GetThreatIntelSetRequest
 }
 
 // Send marshals and sends the GetThreatIntelSet API request.
@@ -1147,7 +1170,7 @@ func (c *GuardDuty) GetThreatIntelSetRequest(input *GetThreatIntelSetInput) GetT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetThreatIntelSetRequest{Request: req, Input: input}
+	return GetThreatIntelSetRequest{Request: req, Input: input, Copy: c.GetThreatIntelSetRequest}
 }
 
 const opInviteMembers = "InviteMembers"
@@ -1156,6 +1179,7 @@ const opInviteMembers = "InviteMembers"
 type InviteMembersRequest struct {
 	*aws.Request
 	Input *InviteMembersInput
+	Copy  func(*InviteMembersInput) InviteMembersRequest
 }
 
 // Send marshals and sends the InviteMembers API request.
@@ -1199,7 +1223,7 @@ func (c *GuardDuty) InviteMembersRequest(input *InviteMembersInput) InviteMember
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InviteMembersRequest{Request: req, Input: input}
+	return InviteMembersRequest{Request: req, Input: input, Copy: c.InviteMembersRequest}
 }
 
 const opListDetectors = "ListDetectors"
@@ -1208,6 +1232,7 @@ const opListDetectors = "ListDetectors"
 type ListDetectorsRequest struct {
 	*aws.Request
 	Input *ListDetectorsInput
+	Copy  func(*ListDetectorsInput) ListDetectorsRequest
 }
 
 // Send marshals and sends the ListDetectors API request.
@@ -1254,47 +1279,47 @@ func (c *GuardDuty) ListDetectorsRequest(input *ListDetectorsInput) ListDetector
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDetectorsRequest{Request: req, Input: input}
+	return ListDetectorsRequest{Request: req, Input: input, Copy: c.ListDetectorsRequest}
 }
 
-// ListDetectorsPages iterates over the pages of a ListDetectors operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDetectors method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDetectorsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDetectors operation.
-//    pageNum := 0
-//    err := client.ListDetectorsPages(params,
-//        func(page *ListDetectorsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDetectorsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDetectorsRequest) Paginate(opts ...aws.Option) ListDetectorsPager {
 	return ListDetectorsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDetectorsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDetectorsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDetectorsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDetectorsPager ...
+// ListDetectorsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDetectorsPager struct {
 	aws.Pager
 }
@@ -1309,6 +1334,7 @@ const opListFindings = "ListFindings"
 type ListFindingsRequest struct {
 	*aws.Request
 	Input *ListFindingsInput
+	Copy  func(*ListFindingsInput) ListFindingsRequest
 }
 
 // Send marshals and sends the ListFindings API request.
@@ -1355,47 +1381,47 @@ func (c *GuardDuty) ListFindingsRequest(input *ListFindingsInput) ListFindingsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFindingsRequest{Request: req, Input: input}
+	return ListFindingsRequest{Request: req, Input: input, Copy: c.ListFindingsRequest}
 }
 
-// ListFindingsPages iterates over the pages of a ListFindings operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListFindings method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListFindingsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListFindings operation.
-//    pageNum := 0
-//    err := client.ListFindingsPages(params,
-//        func(page *ListFindingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListFindingsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListFindingsRequest) Paginate(opts ...aws.Option) ListFindingsPager {
 	return ListFindingsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListFindingsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListFindingsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListFindingsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListFindingsPager ...
+// ListFindingsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListFindingsPager struct {
 	aws.Pager
 }
@@ -1410,6 +1436,7 @@ const opListIPSets = "ListIPSets"
 type ListIPSetsRequest struct {
 	*aws.Request
 	Input *ListIPSetsInput
+	Copy  func(*ListIPSetsInput) ListIPSetsRequest
 }
 
 // Send marshals and sends the ListIPSets API request.
@@ -1456,47 +1483,47 @@ func (c *GuardDuty) ListIPSetsRequest(input *ListIPSetsInput) ListIPSetsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIPSetsRequest{Request: req, Input: input}
+	return ListIPSetsRequest{Request: req, Input: input, Copy: c.ListIPSetsRequest}
 }
 
-// ListIPSetsPages iterates over the pages of a ListIPSets operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListIPSets method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListIPSetsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListIPSets operation.
-//    pageNum := 0
-//    err := client.ListIPSetsPages(params,
-//        func(page *ListIPSetsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListIPSetsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListIPSetsRequest) Paginate(opts ...aws.Option) ListIPSetsPager {
 	return ListIPSetsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListIPSetsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListIPSetsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListIPSetsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListIPSetsPager ...
+// ListIPSetsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListIPSetsPager struct {
 	aws.Pager
 }
@@ -1511,6 +1538,7 @@ const opListInvitations = "ListInvitations"
 type ListInvitationsRequest struct {
 	*aws.Request
 	Input *ListInvitationsInput
+	Copy  func(*ListInvitationsInput) ListInvitationsRequest
 }
 
 // Send marshals and sends the ListInvitations API request.
@@ -1558,47 +1586,47 @@ func (c *GuardDuty) ListInvitationsRequest(input *ListInvitationsInput) ListInvi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListInvitationsRequest{Request: req, Input: input}
+	return ListInvitationsRequest{Request: req, Input: input, Copy: c.ListInvitationsRequest}
 }
 
-// ListInvitationsPages iterates over the pages of a ListInvitations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListInvitations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListInvitationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListInvitations operation.
-//    pageNum := 0
-//    err := client.ListInvitationsPages(params,
-//        func(page *ListInvitationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListInvitationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListInvitationsRequest) Paginate(opts ...aws.Option) ListInvitationsPager {
 	return ListInvitationsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListInvitationsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListInvitationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListInvitationsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListInvitationsPager ...
+// ListInvitationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListInvitationsPager struct {
 	aws.Pager
 }
@@ -1613,6 +1641,7 @@ const opListMembers = "ListMembers"
 type ListMembersRequest struct {
 	*aws.Request
 	Input *ListMembersInput
+	Copy  func(*ListMembersInput) ListMembersRequest
 }
 
 // Send marshals and sends the ListMembers API request.
@@ -1660,47 +1689,47 @@ func (c *GuardDuty) ListMembersRequest(input *ListMembersInput) ListMembersReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListMembersRequest{Request: req, Input: input}
+	return ListMembersRequest{Request: req, Input: input, Copy: c.ListMembersRequest}
 }
 
-// ListMembersPages iterates over the pages of a ListMembers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListMembers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListMembersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListMembers operation.
-//    pageNum := 0
-//    err := client.ListMembersPages(params,
-//        func(page *ListMembersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListMembersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListMembersRequest) Paginate(opts ...aws.Option) ListMembersPager {
 	return ListMembersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListMembersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListMembersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListMembersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListMembersPager ...
+// ListMembersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListMembersPager struct {
 	aws.Pager
 }
@@ -1715,6 +1744,7 @@ const opListThreatIntelSets = "ListThreatIntelSets"
 type ListThreatIntelSetsRequest struct {
 	*aws.Request
 	Input *ListThreatIntelSetsInput
+	Copy  func(*ListThreatIntelSetsInput) ListThreatIntelSetsRequest
 }
 
 // Send marshals and sends the ListThreatIntelSets API request.
@@ -1762,47 +1792,47 @@ func (c *GuardDuty) ListThreatIntelSetsRequest(input *ListThreatIntelSetsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListThreatIntelSetsRequest{Request: req, Input: input}
+	return ListThreatIntelSetsRequest{Request: req, Input: input, Copy: c.ListThreatIntelSetsRequest}
 }
 
-// ListThreatIntelSetsPages iterates over the pages of a ListThreatIntelSets operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListThreatIntelSets method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListThreatIntelSetsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListThreatIntelSets operation.
-//    pageNum := 0
-//    err := client.ListThreatIntelSetsPages(params,
-//        func(page *ListThreatIntelSetsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListThreatIntelSetsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListThreatIntelSetsRequest) Paginate(opts ...aws.Option) ListThreatIntelSetsPager {
 	return ListThreatIntelSetsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListThreatIntelSetsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListThreatIntelSetsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListThreatIntelSetsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListThreatIntelSetsPager ...
+// ListThreatIntelSetsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListThreatIntelSetsPager struct {
 	aws.Pager
 }
@@ -1817,6 +1847,7 @@ const opStartMonitoringMembers = "StartMonitoringMembers"
 type StartMonitoringMembersRequest struct {
 	*aws.Request
 	Input *StartMonitoringMembersInput
+	Copy  func(*StartMonitoringMembersInput) StartMonitoringMembersRequest
 }
 
 // Send marshals and sends the StartMonitoringMembers API request.
@@ -1859,7 +1890,7 @@ func (c *GuardDuty) StartMonitoringMembersRequest(input *StartMonitoringMembersI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartMonitoringMembersRequest{Request: req, Input: input}
+	return StartMonitoringMembersRequest{Request: req, Input: input, Copy: c.StartMonitoringMembersRequest}
 }
 
 const opStopMonitoringMembers = "StopMonitoringMembers"
@@ -1868,6 +1899,7 @@ const opStopMonitoringMembers = "StopMonitoringMembers"
 type StopMonitoringMembersRequest struct {
 	*aws.Request
 	Input *StopMonitoringMembersInput
+	Copy  func(*StopMonitoringMembersInput) StopMonitoringMembersRequest
 }
 
 // Send marshals and sends the StopMonitoringMembers API request.
@@ -1911,7 +1943,7 @@ func (c *GuardDuty) StopMonitoringMembersRequest(input *StopMonitoringMembersInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopMonitoringMembersRequest{Request: req, Input: input}
+	return StopMonitoringMembersRequest{Request: req, Input: input, Copy: c.StopMonitoringMembersRequest}
 }
 
 const opUnarchiveFindings = "UnarchiveFindings"
@@ -1920,6 +1952,7 @@ const opUnarchiveFindings = "UnarchiveFindings"
 type UnarchiveFindingsRequest struct {
 	*aws.Request
 	Input *UnarchiveFindingsInput
+	Copy  func(*UnarchiveFindingsInput) UnarchiveFindingsRequest
 }
 
 // Send marshals and sends the UnarchiveFindings API request.
@@ -1960,7 +1993,7 @@ func (c *GuardDuty) UnarchiveFindingsRequest(input *UnarchiveFindingsInput) Unar
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UnarchiveFindingsRequest{Request: req, Input: input}
+	return UnarchiveFindingsRequest{Request: req, Input: input, Copy: c.UnarchiveFindingsRequest}
 }
 
 const opUpdateDetector = "UpdateDetector"
@@ -1969,6 +2002,7 @@ const opUpdateDetector = "UpdateDetector"
 type UpdateDetectorRequest struct {
 	*aws.Request
 	Input *UpdateDetectorInput
+	Copy  func(*UpdateDetectorInput) UpdateDetectorRequest
 }
 
 // Send marshals and sends the UpdateDetector API request.
@@ -2009,7 +2043,7 @@ func (c *GuardDuty) UpdateDetectorRequest(input *UpdateDetectorInput) UpdateDete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDetectorRequest{Request: req, Input: input}
+	return UpdateDetectorRequest{Request: req, Input: input, Copy: c.UpdateDetectorRequest}
 }
 
 const opUpdateFindingsFeedback = "UpdateFindingsFeedback"
@@ -2018,6 +2052,7 @@ const opUpdateFindingsFeedback = "UpdateFindingsFeedback"
 type UpdateFindingsFeedbackRequest struct {
 	*aws.Request
 	Input *UpdateFindingsFeedbackInput
+	Copy  func(*UpdateFindingsFeedbackInput) UpdateFindingsFeedbackRequest
 }
 
 // Send marshals and sends the UpdateFindingsFeedback API request.
@@ -2058,7 +2093,7 @@ func (c *GuardDuty) UpdateFindingsFeedbackRequest(input *UpdateFindingsFeedbackI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateFindingsFeedbackRequest{Request: req, Input: input}
+	return UpdateFindingsFeedbackRequest{Request: req, Input: input, Copy: c.UpdateFindingsFeedbackRequest}
 }
 
 const opUpdateIPSet = "UpdateIPSet"
@@ -2067,6 +2102,7 @@ const opUpdateIPSet = "UpdateIPSet"
 type UpdateIPSetRequest struct {
 	*aws.Request
 	Input *UpdateIPSetInput
+	Copy  func(*UpdateIPSetInput) UpdateIPSetRequest
 }
 
 // Send marshals and sends the UpdateIPSet API request.
@@ -2107,7 +2143,7 @@ func (c *GuardDuty) UpdateIPSetRequest(input *UpdateIPSetInput) UpdateIPSetReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateIPSetRequest{Request: req, Input: input}
+	return UpdateIPSetRequest{Request: req, Input: input, Copy: c.UpdateIPSetRequest}
 }
 
 const opUpdateThreatIntelSet = "UpdateThreatIntelSet"
@@ -2116,6 +2152,7 @@ const opUpdateThreatIntelSet = "UpdateThreatIntelSet"
 type UpdateThreatIntelSetRequest struct {
 	*aws.Request
 	Input *UpdateThreatIntelSetInput
+	Copy  func(*UpdateThreatIntelSetInput) UpdateThreatIntelSetRequest
 }
 
 // Send marshals and sends the UpdateThreatIntelSet API request.
@@ -2156,7 +2193,7 @@ func (c *GuardDuty) UpdateThreatIntelSetRequest(input *UpdateThreatIntelSetInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateThreatIntelSetRequest{Request: req, Input: input}
+	return UpdateThreatIntelSetRequest{Request: req, Input: input, Copy: c.UpdateThreatIntelSetRequest}
 }
 
 // AcceptInvitation request body.

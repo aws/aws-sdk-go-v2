@@ -13,6 +13,7 @@ const opDeleteReportDefinition = "DeleteReportDefinition"
 type DeleteReportDefinitionRequest struct {
 	*aws.Request
 	Input *DeleteReportDefinitionInput
+	Copy  func(*DeleteReportDefinitionInput) DeleteReportDefinitionRequest
 }
 
 // Send marshals and sends the DeleteReportDefinition API request.
@@ -53,7 +54,7 @@ func (c *CostAndUsageReportService) DeleteReportDefinitionRequest(input *DeleteR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteReportDefinitionRequest{Request: req, Input: input}
+	return DeleteReportDefinitionRequest{Request: req, Input: input, Copy: c.DeleteReportDefinitionRequest}
 }
 
 const opDescribeReportDefinitions = "DescribeReportDefinitions"
@@ -62,6 +63,7 @@ const opDescribeReportDefinitions = "DescribeReportDefinitions"
 type DescribeReportDefinitionsRequest struct {
 	*aws.Request
 	Input *DescribeReportDefinitionsInput
+	Copy  func(*DescribeReportDefinitionsInput) DescribeReportDefinitionsRequest
 }
 
 // Send marshals and sends the DescribeReportDefinitions API request.
@@ -108,47 +110,47 @@ func (c *CostAndUsageReportService) DescribeReportDefinitionsRequest(input *Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReportDefinitionsRequest{Request: req, Input: input}
+	return DescribeReportDefinitionsRequest{Request: req, Input: input, Copy: c.DescribeReportDefinitionsRequest}
 }
 
-// DescribeReportDefinitionsPages iterates over the pages of a DescribeReportDefinitions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReportDefinitions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReportDefinitionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReportDefinitions operation.
-//    pageNum := 0
-//    err := client.DescribeReportDefinitionsPages(params,
-//        func(page *DescribeReportDefinitionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReportDefinitionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeReportDefinitionsRequest) Paginate(opts ...aws.Option) DescribeReportDefinitionsPager {
 	return DescribeReportDefinitionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReportDefinitionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReportDefinitionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeReportDefinitionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeReportDefinitionsPager ...
+// DescribeReportDefinitionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeReportDefinitionsPager struct {
 	aws.Pager
 }
@@ -163,6 +165,7 @@ const opPutReportDefinition = "PutReportDefinition"
 type PutReportDefinitionRequest struct {
 	*aws.Request
 	Input *PutReportDefinitionInput
+	Copy  func(*PutReportDefinitionInput) PutReportDefinitionRequest
 }
 
 // Send marshals and sends the PutReportDefinition API request.
@@ -203,7 +206,7 @@ func (c *CostAndUsageReportService) PutReportDefinitionRequest(input *PutReportD
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutReportDefinitionRequest{Request: req, Input: input}
+	return PutReportDefinitionRequest{Request: req, Input: input, Copy: c.PutReportDefinitionRequest}
 }
 
 // Request of DeleteReportDefinition

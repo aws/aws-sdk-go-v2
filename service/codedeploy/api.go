@@ -17,6 +17,7 @@ const opAddTagsToOnPremisesInstances = "AddTagsToOnPremisesInstances"
 type AddTagsToOnPremisesInstancesRequest struct {
 	*aws.Request
 	Input *AddTagsToOnPremisesInstancesInput
+	Copy  func(*AddTagsToOnPremisesInstancesInput) AddTagsToOnPremisesInstancesRequest
 }
 
 // Send marshals and sends the AddTagsToOnPremisesInstances API request.
@@ -59,7 +60,7 @@ func (c *CodeDeploy) AddTagsToOnPremisesInstancesRequest(input *AddTagsToOnPremi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToOnPremisesInstancesRequest{Request: req, Input: input}
+	return AddTagsToOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.AddTagsToOnPremisesInstancesRequest}
 }
 
 const opBatchGetApplicationRevisions = "BatchGetApplicationRevisions"
@@ -68,6 +69,7 @@ const opBatchGetApplicationRevisions = "BatchGetApplicationRevisions"
 type BatchGetApplicationRevisionsRequest struct {
 	*aws.Request
 	Input *BatchGetApplicationRevisionsInput
+	Copy  func(*BatchGetApplicationRevisionsInput) BatchGetApplicationRevisionsRequest
 }
 
 // Send marshals and sends the BatchGetApplicationRevisions API request.
@@ -108,7 +110,7 @@ func (c *CodeDeploy) BatchGetApplicationRevisionsRequest(input *BatchGetApplicat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetApplicationRevisionsRequest{Request: req, Input: input}
+	return BatchGetApplicationRevisionsRequest{Request: req, Input: input, Copy: c.BatchGetApplicationRevisionsRequest}
 }
 
 const opBatchGetApplications = "BatchGetApplications"
@@ -117,6 +119,7 @@ const opBatchGetApplications = "BatchGetApplications"
 type BatchGetApplicationsRequest struct {
 	*aws.Request
 	Input *BatchGetApplicationsInput
+	Copy  func(*BatchGetApplicationsInput) BatchGetApplicationsRequest
 }
 
 // Send marshals and sends the BatchGetApplications API request.
@@ -157,7 +160,7 @@ func (c *CodeDeploy) BatchGetApplicationsRequest(input *BatchGetApplicationsInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetApplicationsRequest{Request: req, Input: input}
+	return BatchGetApplicationsRequest{Request: req, Input: input, Copy: c.BatchGetApplicationsRequest}
 }
 
 const opBatchGetDeploymentGroups = "BatchGetDeploymentGroups"
@@ -166,6 +169,7 @@ const opBatchGetDeploymentGroups = "BatchGetDeploymentGroups"
 type BatchGetDeploymentGroupsRequest struct {
 	*aws.Request
 	Input *BatchGetDeploymentGroupsInput
+	Copy  func(*BatchGetDeploymentGroupsInput) BatchGetDeploymentGroupsRequest
 }
 
 // Send marshals and sends the BatchGetDeploymentGroups API request.
@@ -206,7 +210,7 @@ func (c *CodeDeploy) BatchGetDeploymentGroupsRequest(input *BatchGetDeploymentGr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetDeploymentGroupsRequest{Request: req, Input: input}
+	return BatchGetDeploymentGroupsRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentGroupsRequest}
 }
 
 const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
@@ -215,6 +219,7 @@ const opBatchGetDeploymentInstances = "BatchGetDeploymentInstances"
 type BatchGetDeploymentInstancesRequest struct {
 	*aws.Request
 	Input *BatchGetDeploymentInstancesInput
+	Copy  func(*BatchGetDeploymentInstancesInput) BatchGetDeploymentInstancesRequest
 }
 
 // Send marshals and sends the BatchGetDeploymentInstances API request.
@@ -256,7 +261,7 @@ func (c *CodeDeploy) BatchGetDeploymentInstancesRequest(input *BatchGetDeploymen
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetDeploymentInstancesRequest{Request: req, Input: input}
+	return BatchGetDeploymentInstancesRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentInstancesRequest}
 }
 
 const opBatchGetDeployments = "BatchGetDeployments"
@@ -265,6 +270,7 @@ const opBatchGetDeployments = "BatchGetDeployments"
 type BatchGetDeploymentsRequest struct {
 	*aws.Request
 	Input *BatchGetDeploymentsInput
+	Copy  func(*BatchGetDeploymentsInput) BatchGetDeploymentsRequest
 }
 
 // Send marshals and sends the BatchGetDeployments API request.
@@ -305,7 +311,7 @@ func (c *CodeDeploy) BatchGetDeploymentsRequest(input *BatchGetDeploymentsInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetDeploymentsRequest{Request: req, Input: input}
+	return BatchGetDeploymentsRequest{Request: req, Input: input, Copy: c.BatchGetDeploymentsRequest}
 }
 
 const opBatchGetOnPremisesInstances = "BatchGetOnPremisesInstances"
@@ -314,6 +320,7 @@ const opBatchGetOnPremisesInstances = "BatchGetOnPremisesInstances"
 type BatchGetOnPremisesInstancesRequest struct {
 	*aws.Request
 	Input *BatchGetOnPremisesInstancesInput
+	Copy  func(*BatchGetOnPremisesInstancesInput) BatchGetOnPremisesInstancesRequest
 }
 
 // Send marshals and sends the BatchGetOnPremisesInstances API request.
@@ -354,7 +361,7 @@ func (c *CodeDeploy) BatchGetOnPremisesInstancesRequest(input *BatchGetOnPremise
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetOnPremisesInstancesRequest{Request: req, Input: input}
+	return BatchGetOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.BatchGetOnPremisesInstancesRequest}
 }
 
 const opContinueDeployment = "ContinueDeployment"
@@ -363,6 +370,7 @@ const opContinueDeployment = "ContinueDeployment"
 type ContinueDeploymentRequest struct {
 	*aws.Request
 	Input *ContinueDeploymentInput
+	Copy  func(*ContinueDeploymentInput) ContinueDeploymentRequest
 }
 
 // Send marshals and sends the ContinueDeployment API request.
@@ -410,7 +418,7 @@ func (c *CodeDeploy) ContinueDeploymentRequest(input *ContinueDeploymentInput) C
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ContinueDeploymentRequest{Request: req, Input: input}
+	return ContinueDeploymentRequest{Request: req, Input: input, Copy: c.ContinueDeploymentRequest}
 }
 
 const opCreateApplication = "CreateApplication"
@@ -419,6 +427,7 @@ const opCreateApplication = "CreateApplication"
 type CreateApplicationRequest struct {
 	*aws.Request
 	Input *CreateApplicationInput
+	Copy  func(*CreateApplicationInput) CreateApplicationRequest
 }
 
 // Send marshals and sends the CreateApplication API request.
@@ -459,7 +468,7 @@ func (c *CodeDeploy) CreateApplicationRequest(input *CreateApplicationInput) Cre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateApplicationRequest{Request: req, Input: input}
+	return CreateApplicationRequest{Request: req, Input: input, Copy: c.CreateApplicationRequest}
 }
 
 const opCreateDeployment = "CreateDeployment"
@@ -468,6 +477,7 @@ const opCreateDeployment = "CreateDeployment"
 type CreateDeploymentRequest struct {
 	*aws.Request
 	Input *CreateDeploymentInput
+	Copy  func(*CreateDeploymentInput) CreateDeploymentRequest
 }
 
 // Send marshals and sends the CreateDeployment API request.
@@ -508,7 +518,7 @@ func (c *CodeDeploy) CreateDeploymentRequest(input *CreateDeploymentInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDeploymentRequest{Request: req, Input: input}
+	return CreateDeploymentRequest{Request: req, Input: input, Copy: c.CreateDeploymentRequest}
 }
 
 const opCreateDeploymentConfig = "CreateDeploymentConfig"
@@ -517,6 +527,7 @@ const opCreateDeploymentConfig = "CreateDeploymentConfig"
 type CreateDeploymentConfigRequest struct {
 	*aws.Request
 	Input *CreateDeploymentConfigInput
+	Copy  func(*CreateDeploymentConfigInput) CreateDeploymentConfigRequest
 }
 
 // Send marshals and sends the CreateDeploymentConfig API request.
@@ -557,7 +568,7 @@ func (c *CodeDeploy) CreateDeploymentConfigRequest(input *CreateDeploymentConfig
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDeploymentConfigRequest{Request: req, Input: input}
+	return CreateDeploymentConfigRequest{Request: req, Input: input, Copy: c.CreateDeploymentConfigRequest}
 }
 
 const opCreateDeploymentGroup = "CreateDeploymentGroup"
@@ -566,6 +577,7 @@ const opCreateDeploymentGroup = "CreateDeploymentGroup"
 type CreateDeploymentGroupRequest struct {
 	*aws.Request
 	Input *CreateDeploymentGroupInput
+	Copy  func(*CreateDeploymentGroupInput) CreateDeploymentGroupRequest
 }
 
 // Send marshals and sends the CreateDeploymentGroup API request.
@@ -606,7 +618,7 @@ func (c *CodeDeploy) CreateDeploymentGroupRequest(input *CreateDeploymentGroupIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDeploymentGroupRequest{Request: req, Input: input}
+	return CreateDeploymentGroupRequest{Request: req, Input: input, Copy: c.CreateDeploymentGroupRequest}
 }
 
 const opDeleteApplication = "DeleteApplication"
@@ -615,6 +627,7 @@ const opDeleteApplication = "DeleteApplication"
 type DeleteApplicationRequest struct {
 	*aws.Request
 	Input *DeleteApplicationInput
+	Copy  func(*DeleteApplicationInput) DeleteApplicationRequest
 }
 
 // Send marshals and sends the DeleteApplication API request.
@@ -657,7 +670,7 @@ func (c *CodeDeploy) DeleteApplicationRequest(input *DeleteApplicationInput) Del
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApplicationRequest{Request: req, Input: input}
+	return DeleteApplicationRequest{Request: req, Input: input, Copy: c.DeleteApplicationRequest}
 }
 
 const opDeleteDeploymentConfig = "DeleteDeploymentConfig"
@@ -666,6 +679,7 @@ const opDeleteDeploymentConfig = "DeleteDeploymentConfig"
 type DeleteDeploymentConfigRequest struct {
 	*aws.Request
 	Input *DeleteDeploymentConfigInput
+	Copy  func(*DeleteDeploymentConfigInput) DeleteDeploymentConfigRequest
 }
 
 // Send marshals and sends the DeleteDeploymentConfig API request.
@@ -711,7 +725,7 @@ func (c *CodeDeploy) DeleteDeploymentConfigRequest(input *DeleteDeploymentConfig
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDeploymentConfigRequest{Request: req, Input: input}
+	return DeleteDeploymentConfigRequest{Request: req, Input: input, Copy: c.DeleteDeploymentConfigRequest}
 }
 
 const opDeleteDeploymentGroup = "DeleteDeploymentGroup"
@@ -720,6 +734,7 @@ const opDeleteDeploymentGroup = "DeleteDeploymentGroup"
 type DeleteDeploymentGroupRequest struct {
 	*aws.Request
 	Input *DeleteDeploymentGroupInput
+	Copy  func(*DeleteDeploymentGroupInput) DeleteDeploymentGroupRequest
 }
 
 // Send marshals and sends the DeleteDeploymentGroup API request.
@@ -760,7 +775,7 @@ func (c *CodeDeploy) DeleteDeploymentGroupRequest(input *DeleteDeploymentGroupIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDeploymentGroupRequest{Request: req, Input: input}
+	return DeleteDeploymentGroupRequest{Request: req, Input: input, Copy: c.DeleteDeploymentGroupRequest}
 }
 
 const opDeleteGitHubAccountToken = "DeleteGitHubAccountToken"
@@ -769,6 +784,7 @@ const opDeleteGitHubAccountToken = "DeleteGitHubAccountToken"
 type DeleteGitHubAccountTokenRequest struct {
 	*aws.Request
 	Input *DeleteGitHubAccountTokenInput
+	Copy  func(*DeleteGitHubAccountTokenInput) DeleteGitHubAccountTokenRequest
 }
 
 // Send marshals and sends the DeleteGitHubAccountToken API request.
@@ -809,7 +825,7 @@ func (c *CodeDeploy) DeleteGitHubAccountTokenRequest(input *DeleteGitHubAccountT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGitHubAccountTokenRequest{Request: req, Input: input}
+	return DeleteGitHubAccountTokenRequest{Request: req, Input: input, Copy: c.DeleteGitHubAccountTokenRequest}
 }
 
 const opDeregisterOnPremisesInstance = "DeregisterOnPremisesInstance"
@@ -818,6 +834,7 @@ const opDeregisterOnPremisesInstance = "DeregisterOnPremisesInstance"
 type DeregisterOnPremisesInstanceRequest struct {
 	*aws.Request
 	Input *DeregisterOnPremisesInstanceInput
+	Copy  func(*DeregisterOnPremisesInstanceInput) DeregisterOnPremisesInstanceRequest
 }
 
 // Send marshals and sends the DeregisterOnPremisesInstance API request.
@@ -860,7 +877,7 @@ func (c *CodeDeploy) DeregisterOnPremisesInstanceRequest(input *DeregisterOnPrem
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterOnPremisesInstanceRequest{Request: req, Input: input}
+	return DeregisterOnPremisesInstanceRequest{Request: req, Input: input, Copy: c.DeregisterOnPremisesInstanceRequest}
 }
 
 const opGetApplication = "GetApplication"
@@ -869,6 +886,7 @@ const opGetApplication = "GetApplication"
 type GetApplicationRequest struct {
 	*aws.Request
 	Input *GetApplicationInput
+	Copy  func(*GetApplicationInput) GetApplicationRequest
 }
 
 // Send marshals and sends the GetApplication API request.
@@ -909,7 +927,7 @@ func (c *CodeDeploy) GetApplicationRequest(input *GetApplicationInput) GetApplic
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApplicationRequest{Request: req, Input: input}
+	return GetApplicationRequest{Request: req, Input: input, Copy: c.GetApplicationRequest}
 }
 
 const opGetApplicationRevision = "GetApplicationRevision"
@@ -918,6 +936,7 @@ const opGetApplicationRevision = "GetApplicationRevision"
 type GetApplicationRevisionRequest struct {
 	*aws.Request
 	Input *GetApplicationRevisionInput
+	Copy  func(*GetApplicationRevisionInput) GetApplicationRevisionRequest
 }
 
 // Send marshals and sends the GetApplicationRevision API request.
@@ -958,7 +977,7 @@ func (c *CodeDeploy) GetApplicationRevisionRequest(input *GetApplicationRevision
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApplicationRevisionRequest{Request: req, Input: input}
+	return GetApplicationRevisionRequest{Request: req, Input: input, Copy: c.GetApplicationRevisionRequest}
 }
 
 const opGetDeployment = "GetDeployment"
@@ -967,6 +986,7 @@ const opGetDeployment = "GetDeployment"
 type GetDeploymentRequest struct {
 	*aws.Request
 	Input *GetDeploymentInput
+	Copy  func(*GetDeploymentInput) GetDeploymentRequest
 }
 
 // Send marshals and sends the GetDeployment API request.
@@ -1007,7 +1027,7 @@ func (c *CodeDeploy) GetDeploymentRequest(input *GetDeploymentInput) GetDeployme
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeploymentRequest{Request: req, Input: input}
+	return GetDeploymentRequest{Request: req, Input: input, Copy: c.GetDeploymentRequest}
 }
 
 const opGetDeploymentConfig = "GetDeploymentConfig"
@@ -1016,6 +1036,7 @@ const opGetDeploymentConfig = "GetDeploymentConfig"
 type GetDeploymentConfigRequest struct {
 	*aws.Request
 	Input *GetDeploymentConfigInput
+	Copy  func(*GetDeploymentConfigInput) GetDeploymentConfigRequest
 }
 
 // Send marshals and sends the GetDeploymentConfig API request.
@@ -1056,7 +1077,7 @@ func (c *CodeDeploy) GetDeploymentConfigRequest(input *GetDeploymentConfigInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeploymentConfigRequest{Request: req, Input: input}
+	return GetDeploymentConfigRequest{Request: req, Input: input, Copy: c.GetDeploymentConfigRequest}
 }
 
 const opGetDeploymentGroup = "GetDeploymentGroup"
@@ -1065,6 +1086,7 @@ const opGetDeploymentGroup = "GetDeploymentGroup"
 type GetDeploymentGroupRequest struct {
 	*aws.Request
 	Input *GetDeploymentGroupInput
+	Copy  func(*GetDeploymentGroupInput) GetDeploymentGroupRequest
 }
 
 // Send marshals and sends the GetDeploymentGroup API request.
@@ -1105,7 +1127,7 @@ func (c *CodeDeploy) GetDeploymentGroupRequest(input *GetDeploymentGroupInput) G
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeploymentGroupRequest{Request: req, Input: input}
+	return GetDeploymentGroupRequest{Request: req, Input: input, Copy: c.GetDeploymentGroupRequest}
 }
 
 const opGetDeploymentInstance = "GetDeploymentInstance"
@@ -1114,6 +1136,7 @@ const opGetDeploymentInstance = "GetDeploymentInstance"
 type GetDeploymentInstanceRequest struct {
 	*aws.Request
 	Input *GetDeploymentInstanceInput
+	Copy  func(*GetDeploymentInstanceInput) GetDeploymentInstanceRequest
 }
 
 // Send marshals and sends the GetDeploymentInstance API request.
@@ -1154,7 +1177,7 @@ func (c *CodeDeploy) GetDeploymentInstanceRequest(input *GetDeploymentInstanceIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeploymentInstanceRequest{Request: req, Input: input}
+	return GetDeploymentInstanceRequest{Request: req, Input: input, Copy: c.GetDeploymentInstanceRequest}
 }
 
 const opGetOnPremisesInstance = "GetOnPremisesInstance"
@@ -1163,6 +1186,7 @@ const opGetOnPremisesInstance = "GetOnPremisesInstance"
 type GetOnPremisesInstanceRequest struct {
 	*aws.Request
 	Input *GetOnPremisesInstanceInput
+	Copy  func(*GetOnPremisesInstanceInput) GetOnPremisesInstanceRequest
 }
 
 // Send marshals and sends the GetOnPremisesInstance API request.
@@ -1203,7 +1227,7 @@ func (c *CodeDeploy) GetOnPremisesInstanceRequest(input *GetOnPremisesInstanceIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOnPremisesInstanceRequest{Request: req, Input: input}
+	return GetOnPremisesInstanceRequest{Request: req, Input: input, Copy: c.GetOnPremisesInstanceRequest}
 }
 
 const opListApplicationRevisions = "ListApplicationRevisions"
@@ -1212,6 +1236,7 @@ const opListApplicationRevisions = "ListApplicationRevisions"
 type ListApplicationRevisionsRequest struct {
 	*aws.Request
 	Input *ListApplicationRevisionsInput
+	Copy  func(*ListApplicationRevisionsInput) ListApplicationRevisionsRequest
 }
 
 // Send marshals and sends the ListApplicationRevisions API request.
@@ -1258,47 +1283,47 @@ func (c *CodeDeploy) ListApplicationRevisionsRequest(input *ListApplicationRevis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListApplicationRevisionsRequest{Request: req, Input: input}
+	return ListApplicationRevisionsRequest{Request: req, Input: input, Copy: c.ListApplicationRevisionsRequest}
 }
 
-// ListApplicationRevisionsPages iterates over the pages of a ListApplicationRevisions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListApplicationRevisions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListApplicationRevisionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListApplicationRevisions operation.
-//    pageNum := 0
-//    err := client.ListApplicationRevisionsPages(params,
-//        func(page *ListApplicationRevisionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListApplicationRevisionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListApplicationRevisionsRequest) Paginate(opts ...aws.Option) ListApplicationRevisionsPager {
 	return ListApplicationRevisionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListApplicationRevisionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListApplicationRevisionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListApplicationRevisionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListApplicationRevisionsPager ...
+// ListApplicationRevisionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListApplicationRevisionsPager struct {
 	aws.Pager
 }
@@ -1313,6 +1338,7 @@ const opListApplications = "ListApplications"
 type ListApplicationsRequest struct {
 	*aws.Request
 	Input *ListApplicationsInput
+	Copy  func(*ListApplicationsInput) ListApplicationsRequest
 }
 
 // Send marshals and sends the ListApplications API request.
@@ -1359,47 +1385,47 @@ func (c *CodeDeploy) ListApplicationsRequest(input *ListApplicationsInput) ListA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListApplicationsRequest{Request: req, Input: input}
+	return ListApplicationsRequest{Request: req, Input: input, Copy: c.ListApplicationsRequest}
 }
 
-// ListApplicationsPages iterates over the pages of a ListApplications operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListApplications method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListApplicationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListApplications operation.
-//    pageNum := 0
-//    err := client.ListApplicationsPages(params,
-//        func(page *ListApplicationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListApplicationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsPager {
 	return ListApplicationsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListApplicationsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListApplicationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListApplicationsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListApplicationsPager ...
+// ListApplicationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListApplicationsPager struct {
 	aws.Pager
 }
@@ -1414,6 +1440,7 @@ const opListDeploymentConfigs = "ListDeploymentConfigs"
 type ListDeploymentConfigsRequest struct {
 	*aws.Request
 	Input *ListDeploymentConfigsInput
+	Copy  func(*ListDeploymentConfigsInput) ListDeploymentConfigsRequest
 }
 
 // Send marshals and sends the ListDeploymentConfigs API request.
@@ -1460,47 +1487,47 @@ func (c *CodeDeploy) ListDeploymentConfigsRequest(input *ListDeploymentConfigsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDeploymentConfigsRequest{Request: req, Input: input}
+	return ListDeploymentConfigsRequest{Request: req, Input: input, Copy: c.ListDeploymentConfigsRequest}
 }
 
-// ListDeploymentConfigsPages iterates over the pages of a ListDeploymentConfigs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDeploymentConfigs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDeploymentConfigsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDeploymentConfigs operation.
-//    pageNum := 0
-//    err := client.ListDeploymentConfigsPages(params,
-//        func(page *ListDeploymentConfigsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDeploymentConfigsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDeploymentConfigsRequest) Paginate(opts ...aws.Option) ListDeploymentConfigsPager {
 	return ListDeploymentConfigsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDeploymentConfigsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDeploymentConfigsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDeploymentConfigsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDeploymentConfigsPager ...
+// ListDeploymentConfigsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDeploymentConfigsPager struct {
 	aws.Pager
 }
@@ -1515,6 +1542,7 @@ const opListDeploymentGroups = "ListDeploymentGroups"
 type ListDeploymentGroupsRequest struct {
 	*aws.Request
 	Input *ListDeploymentGroupsInput
+	Copy  func(*ListDeploymentGroupsInput) ListDeploymentGroupsRequest
 }
 
 // Send marshals and sends the ListDeploymentGroups API request.
@@ -1562,47 +1590,47 @@ func (c *CodeDeploy) ListDeploymentGroupsRequest(input *ListDeploymentGroupsInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDeploymentGroupsRequest{Request: req, Input: input}
+	return ListDeploymentGroupsRequest{Request: req, Input: input, Copy: c.ListDeploymentGroupsRequest}
 }
 
-// ListDeploymentGroupsPages iterates over the pages of a ListDeploymentGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDeploymentGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDeploymentGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDeploymentGroups operation.
-//    pageNum := 0
-//    err := client.ListDeploymentGroupsPages(params,
-//        func(page *ListDeploymentGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDeploymentGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDeploymentGroupsRequest) Paginate(opts ...aws.Option) ListDeploymentGroupsPager {
 	return ListDeploymentGroupsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDeploymentGroupsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDeploymentGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDeploymentGroupsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDeploymentGroupsPager ...
+// ListDeploymentGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDeploymentGroupsPager struct {
 	aws.Pager
 }
@@ -1617,6 +1645,7 @@ const opListDeploymentInstances = "ListDeploymentInstances"
 type ListDeploymentInstancesRequest struct {
 	*aws.Request
 	Input *ListDeploymentInstancesInput
+	Copy  func(*ListDeploymentInstancesInput) ListDeploymentInstancesRequest
 }
 
 // Send marshals and sends the ListDeploymentInstances API request.
@@ -1664,47 +1693,47 @@ func (c *CodeDeploy) ListDeploymentInstancesRequest(input *ListDeploymentInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDeploymentInstancesRequest{Request: req, Input: input}
+	return ListDeploymentInstancesRequest{Request: req, Input: input, Copy: c.ListDeploymentInstancesRequest}
 }
 
-// ListDeploymentInstancesPages iterates over the pages of a ListDeploymentInstances operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDeploymentInstances method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDeploymentInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDeploymentInstances operation.
-//    pageNum := 0
-//    err := client.ListDeploymentInstancesPages(params,
-//        func(page *ListDeploymentInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDeploymentInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDeploymentInstancesRequest) Paginate(opts ...aws.Option) ListDeploymentInstancesPager {
 	return ListDeploymentInstancesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDeploymentInstancesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDeploymentInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDeploymentInstancesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDeploymentInstancesPager ...
+// ListDeploymentInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDeploymentInstancesPager struct {
 	aws.Pager
 }
@@ -1719,6 +1748,7 @@ const opListDeployments = "ListDeployments"
 type ListDeploymentsRequest struct {
 	*aws.Request
 	Input *ListDeploymentsInput
+	Copy  func(*ListDeploymentsInput) ListDeploymentsRequest
 }
 
 // Send marshals and sends the ListDeployments API request.
@@ -1766,47 +1796,47 @@ func (c *CodeDeploy) ListDeploymentsRequest(input *ListDeploymentsInput) ListDep
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDeploymentsRequest{Request: req, Input: input}
+	return ListDeploymentsRequest{Request: req, Input: input, Copy: c.ListDeploymentsRequest}
 }
 
-// ListDeploymentsPages iterates over the pages of a ListDeployments operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDeployments method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDeploymentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDeployments operation.
-//    pageNum := 0
-//    err := client.ListDeploymentsPages(params,
-//        func(page *ListDeploymentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDeploymentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDeploymentsRequest) Paginate(opts ...aws.Option) ListDeploymentsPager {
 	return ListDeploymentsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDeploymentsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDeploymentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDeploymentsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDeploymentsPager ...
+// ListDeploymentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDeploymentsPager struct {
 	aws.Pager
 }
@@ -1821,6 +1851,7 @@ const opListGitHubAccountTokenNames = "ListGitHubAccountTokenNames"
 type ListGitHubAccountTokenNamesRequest struct {
 	*aws.Request
 	Input *ListGitHubAccountTokenNamesInput
+	Copy  func(*ListGitHubAccountTokenNamesInput) ListGitHubAccountTokenNamesRequest
 }
 
 // Send marshals and sends the ListGitHubAccountTokenNames API request.
@@ -1861,7 +1892,7 @@ func (c *CodeDeploy) ListGitHubAccountTokenNamesRequest(input *ListGitHubAccount
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGitHubAccountTokenNamesRequest{Request: req, Input: input}
+	return ListGitHubAccountTokenNamesRequest{Request: req, Input: input, Copy: c.ListGitHubAccountTokenNamesRequest}
 }
 
 const opListOnPremisesInstances = "ListOnPremisesInstances"
@@ -1870,6 +1901,7 @@ const opListOnPremisesInstances = "ListOnPremisesInstances"
 type ListOnPremisesInstancesRequest struct {
 	*aws.Request
 	Input *ListOnPremisesInstancesInput
+	Copy  func(*ListOnPremisesInstancesInput) ListOnPremisesInstancesRequest
 }
 
 // Send marshals and sends the ListOnPremisesInstances API request.
@@ -1914,7 +1946,7 @@ func (c *CodeDeploy) ListOnPremisesInstancesRequest(input *ListOnPremisesInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOnPremisesInstancesRequest{Request: req, Input: input}
+	return ListOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.ListOnPremisesInstancesRequest}
 }
 
 const opPutLifecycleEventHookExecutionStatus = "PutLifecycleEventHookExecutionStatus"
@@ -1923,6 +1955,7 @@ const opPutLifecycleEventHookExecutionStatus = "PutLifecycleEventHookExecutionSt
 type PutLifecycleEventHookExecutionStatusRequest struct {
 	*aws.Request
 	Input *PutLifecycleEventHookExecutionStatusInput
+	Copy  func(*PutLifecycleEventHookExecutionStatusInput) PutLifecycleEventHookExecutionStatusRequest
 }
 
 // Send marshals and sends the PutLifecycleEventHookExecutionStatus API request.
@@ -1965,7 +1998,7 @@ func (c *CodeDeploy) PutLifecycleEventHookExecutionStatusRequest(input *PutLifec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutLifecycleEventHookExecutionStatusRequest{Request: req, Input: input}
+	return PutLifecycleEventHookExecutionStatusRequest{Request: req, Input: input, Copy: c.PutLifecycleEventHookExecutionStatusRequest}
 }
 
 const opRegisterApplicationRevision = "RegisterApplicationRevision"
@@ -1974,6 +2007,7 @@ const opRegisterApplicationRevision = "RegisterApplicationRevision"
 type RegisterApplicationRevisionRequest struct {
 	*aws.Request
 	Input *RegisterApplicationRevisionInput
+	Copy  func(*RegisterApplicationRevisionInput) RegisterApplicationRevisionRequest
 }
 
 // Send marshals and sends the RegisterApplicationRevision API request.
@@ -2016,7 +2050,7 @@ func (c *CodeDeploy) RegisterApplicationRevisionRequest(input *RegisterApplicati
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterApplicationRevisionRequest{Request: req, Input: input}
+	return RegisterApplicationRevisionRequest{Request: req, Input: input, Copy: c.RegisterApplicationRevisionRequest}
 }
 
 const opRegisterOnPremisesInstance = "RegisterOnPremisesInstance"
@@ -2025,6 +2059,7 @@ const opRegisterOnPremisesInstance = "RegisterOnPremisesInstance"
 type RegisterOnPremisesInstanceRequest struct {
 	*aws.Request
 	Input *RegisterOnPremisesInstanceInput
+	Copy  func(*RegisterOnPremisesInstanceInput) RegisterOnPremisesInstanceRequest
 }
 
 // Send marshals and sends the RegisterOnPremisesInstance API request.
@@ -2070,7 +2105,7 @@ func (c *CodeDeploy) RegisterOnPremisesInstanceRequest(input *RegisterOnPremises
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterOnPremisesInstanceRequest{Request: req, Input: input}
+	return RegisterOnPremisesInstanceRequest{Request: req, Input: input, Copy: c.RegisterOnPremisesInstanceRequest}
 }
 
 const opRemoveTagsFromOnPremisesInstances = "RemoveTagsFromOnPremisesInstances"
@@ -2079,6 +2114,7 @@ const opRemoveTagsFromOnPremisesInstances = "RemoveTagsFromOnPremisesInstances"
 type RemoveTagsFromOnPremisesInstancesRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromOnPremisesInstancesInput
+	Copy  func(*RemoveTagsFromOnPremisesInstancesInput) RemoveTagsFromOnPremisesInstancesRequest
 }
 
 // Send marshals and sends the RemoveTagsFromOnPremisesInstances API request.
@@ -2121,7 +2157,7 @@ func (c *CodeDeploy) RemoveTagsFromOnPremisesInstancesRequest(input *RemoveTagsF
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromOnPremisesInstancesRequest{Request: req, Input: input}
+	return RemoveTagsFromOnPremisesInstancesRequest{Request: req, Input: input, Copy: c.RemoveTagsFromOnPremisesInstancesRequest}
 }
 
 const opSkipWaitTimeForInstanceTermination = "SkipWaitTimeForInstanceTermination"
@@ -2130,6 +2166,7 @@ const opSkipWaitTimeForInstanceTermination = "SkipWaitTimeForInstanceTermination
 type SkipWaitTimeForInstanceTerminationRequest struct {
 	*aws.Request
 	Input *SkipWaitTimeForInstanceTerminationInput
+	Copy  func(*SkipWaitTimeForInstanceTerminationInput) SkipWaitTimeForInstanceTerminationRequest
 }
 
 // Send marshals and sends the SkipWaitTimeForInstanceTermination API request.
@@ -2173,7 +2210,7 @@ func (c *CodeDeploy) SkipWaitTimeForInstanceTerminationRequest(input *SkipWaitTi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SkipWaitTimeForInstanceTerminationRequest{Request: req, Input: input}
+	return SkipWaitTimeForInstanceTerminationRequest{Request: req, Input: input, Copy: c.SkipWaitTimeForInstanceTerminationRequest}
 }
 
 const opStopDeployment = "StopDeployment"
@@ -2182,6 +2219,7 @@ const opStopDeployment = "StopDeployment"
 type StopDeploymentRequest struct {
 	*aws.Request
 	Input *StopDeploymentInput
+	Copy  func(*StopDeploymentInput) StopDeploymentRequest
 }
 
 // Send marshals and sends the StopDeployment API request.
@@ -2222,7 +2260,7 @@ func (c *CodeDeploy) StopDeploymentRequest(input *StopDeploymentInput) StopDeplo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopDeploymentRequest{Request: req, Input: input}
+	return StopDeploymentRequest{Request: req, Input: input, Copy: c.StopDeploymentRequest}
 }
 
 const opUpdateApplication = "UpdateApplication"
@@ -2231,6 +2269,7 @@ const opUpdateApplication = "UpdateApplication"
 type UpdateApplicationRequest struct {
 	*aws.Request
 	Input *UpdateApplicationInput
+	Copy  func(*UpdateApplicationInput) UpdateApplicationRequest
 }
 
 // Send marshals and sends the UpdateApplication API request.
@@ -2273,7 +2312,7 @@ func (c *CodeDeploy) UpdateApplicationRequest(input *UpdateApplicationInput) Upd
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApplicationRequest{Request: req, Input: input}
+	return UpdateApplicationRequest{Request: req, Input: input, Copy: c.UpdateApplicationRequest}
 }
 
 const opUpdateDeploymentGroup = "UpdateDeploymentGroup"
@@ -2282,6 +2321,7 @@ const opUpdateDeploymentGroup = "UpdateDeploymentGroup"
 type UpdateDeploymentGroupRequest struct {
 	*aws.Request
 	Input *UpdateDeploymentGroupInput
+	Copy  func(*UpdateDeploymentGroupInput) UpdateDeploymentGroupRequest
 }
 
 // Send marshals and sends the UpdateDeploymentGroup API request.
@@ -2322,7 +2362,7 @@ func (c *CodeDeploy) UpdateDeploymentGroupRequest(input *UpdateDeploymentGroupIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDeploymentGroupRequest{Request: req, Input: input}
+	return UpdateDeploymentGroupRequest{Request: req, Input: input, Copy: c.UpdateDeploymentGroupRequest}
 }
 
 // Represents the input of, and adds tags to, an on-premises instance operation.

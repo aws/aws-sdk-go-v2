@@ -16,6 +16,7 @@ const opCancelJob = "CancelJob"
 type CancelJobRequest struct {
 	*aws.Request
 	Input *CancelJobInput
+	Copy  func(*CancelJobInput) CancelJobRequest
 }
 
 // Send marshals and sends the CancelJob API request.
@@ -58,7 +59,7 @@ func (c *ElasticTranscoder) CancelJobRequest(input *CancelJobInput) CancelJobReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelJobRequest{Request: req, Input: input}
+	return CancelJobRequest{Request: req, Input: input, Copy: c.CancelJobRequest}
 }
 
 const opCreateJob = "CreateJob"
@@ -67,6 +68,7 @@ const opCreateJob = "CreateJob"
 type CreateJobRequest struct {
 	*aws.Request
 	Input *CreateJobInput
+	Copy  func(*CreateJobInput) CreateJobRequest
 }
 
 // Send marshals and sends the CreateJob API request.
@@ -111,7 +113,7 @@ func (c *ElasticTranscoder) CreateJobRequest(input *CreateJobInput) CreateJobReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateJobRequest{Request: req, Input: input}
+	return CreateJobRequest{Request: req, Input: input, Copy: c.CreateJobRequest}
 }
 
 const opCreatePipeline = "CreatePipeline"
@@ -120,6 +122,7 @@ const opCreatePipeline = "CreatePipeline"
 type CreatePipelineRequest struct {
 	*aws.Request
 	Input *CreatePipelineInput
+	Copy  func(*CreatePipelineInput) CreatePipelineRequest
 }
 
 // Send marshals and sends the CreatePipeline API request.
@@ -158,7 +161,7 @@ func (c *ElasticTranscoder) CreatePipelineRequest(input *CreatePipelineInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePipelineRequest{Request: req, Input: input}
+	return CreatePipelineRequest{Request: req, Input: input, Copy: c.CreatePipelineRequest}
 }
 
 const opCreatePreset = "CreatePreset"
@@ -167,6 +170,7 @@ const opCreatePreset = "CreatePreset"
 type CreatePresetRequest struct {
 	*aws.Request
 	Input *CreatePresetInput
+	Copy  func(*CreatePresetInput) CreatePresetRequest
 }
 
 // Send marshals and sends the CreatePreset API request.
@@ -219,7 +223,7 @@ func (c *ElasticTranscoder) CreatePresetRequest(input *CreatePresetInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePresetRequest{Request: req, Input: input}
+	return CreatePresetRequest{Request: req, Input: input, Copy: c.CreatePresetRequest}
 }
 
 const opDeletePipeline = "DeletePipeline"
@@ -228,6 +232,7 @@ const opDeletePipeline = "DeletePipeline"
 type DeletePipelineRequest struct {
 	*aws.Request
 	Input *DeletePipelineInput
+	Copy  func(*DeletePipelineInput) DeletePipelineRequest
 }
 
 // Send marshals and sends the DeletePipeline API request.
@@ -270,7 +275,7 @@ func (c *ElasticTranscoder) DeletePipelineRequest(input *DeletePipelineInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePipelineRequest{Request: req, Input: input}
+	return DeletePipelineRequest{Request: req, Input: input, Copy: c.DeletePipelineRequest}
 }
 
 const opDeletePreset = "DeletePreset"
@@ -279,6 +284,7 @@ const opDeletePreset = "DeletePreset"
 type DeletePresetRequest struct {
 	*aws.Request
 	Input *DeletePresetInput
+	Copy  func(*DeletePresetInput) DeletePresetRequest
 }
 
 // Send marshals and sends the DeletePreset API request.
@@ -319,7 +325,7 @@ func (c *ElasticTranscoder) DeletePresetRequest(input *DeletePresetInput) Delete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePresetRequest{Request: req, Input: input}
+	return DeletePresetRequest{Request: req, Input: input, Copy: c.DeletePresetRequest}
 }
 
 const opListJobsByPipeline = "ListJobsByPipeline"
@@ -328,6 +334,7 @@ const opListJobsByPipeline = "ListJobsByPipeline"
 type ListJobsByPipelineRequest struct {
 	*aws.Request
 	Input *ListJobsByPipelineInput
+	Copy  func(*ListJobsByPipelineInput) ListJobsByPipelineRequest
 }
 
 // Send marshals and sends the ListJobsByPipeline API request.
@@ -376,47 +383,47 @@ func (c *ElasticTranscoder) ListJobsByPipelineRequest(input *ListJobsByPipelineI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobsByPipelineRequest{Request: req, Input: input}
+	return ListJobsByPipelineRequest{Request: req, Input: input, Copy: c.ListJobsByPipelineRequest}
 }
 
-// ListJobsByPipelinePages iterates over the pages of a ListJobsByPipeline operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListJobsByPipeline method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListJobsByPipelineRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListJobsByPipeline operation.
-//    pageNum := 0
-//    err := client.ListJobsByPipelinePages(params,
-//        func(page *ListJobsByPipelineOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListJobsByPipelineRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListJobsByPipelineRequest) Paginate(opts ...aws.Option) ListJobsByPipelinePager {
 	return ListJobsByPipelinePager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListJobsByPipelineInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListJobsByPipelineInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListJobsByPipelineOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListJobsByPipelinePager ...
+// ListJobsByPipelinePager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListJobsByPipelinePager struct {
 	aws.Pager
 }
@@ -431,6 +438,7 @@ const opListJobsByStatus = "ListJobsByStatus"
 type ListJobsByStatusRequest struct {
 	*aws.Request
 	Input *ListJobsByStatusInput
+	Copy  func(*ListJobsByStatusInput) ListJobsByStatusRequest
 }
 
 // Send marshals and sends the ListJobsByStatus API request.
@@ -477,47 +485,47 @@ func (c *ElasticTranscoder) ListJobsByStatusRequest(input *ListJobsByStatusInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobsByStatusRequest{Request: req, Input: input}
+	return ListJobsByStatusRequest{Request: req, Input: input, Copy: c.ListJobsByStatusRequest}
 }
 
-// ListJobsByStatusPages iterates over the pages of a ListJobsByStatus operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListJobsByStatus method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListJobsByStatusRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListJobsByStatus operation.
-//    pageNum := 0
-//    err := client.ListJobsByStatusPages(params,
-//        func(page *ListJobsByStatusOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListJobsByStatusRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListJobsByStatusRequest) Paginate(opts ...aws.Option) ListJobsByStatusPager {
 	return ListJobsByStatusPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListJobsByStatusInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListJobsByStatusInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListJobsByStatusOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListJobsByStatusPager ...
+// ListJobsByStatusPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListJobsByStatusPager struct {
 	aws.Pager
 }
@@ -532,6 +540,7 @@ const opListPipelines = "ListPipelines"
 type ListPipelinesRequest struct {
 	*aws.Request
 	Input *ListPipelinesInput
+	Copy  func(*ListPipelinesInput) ListPipelinesRequest
 }
 
 // Send marshals and sends the ListPipelines API request.
@@ -577,47 +586,47 @@ func (c *ElasticTranscoder) ListPipelinesRequest(input *ListPipelinesInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPipelinesRequest{Request: req, Input: input}
+	return ListPipelinesRequest{Request: req, Input: input, Copy: c.ListPipelinesRequest}
 }
 
-// ListPipelinesPages iterates over the pages of a ListPipelines operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPipelines method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPipelinesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPipelines operation.
-//    pageNum := 0
-//    err := client.ListPipelinesPages(params,
-//        func(page *ListPipelinesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPipelinesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
 	return ListPipelinesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPipelinesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPipelinesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListPipelinesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListPipelinesPager ...
+// ListPipelinesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListPipelinesPager struct {
 	aws.Pager
 }
@@ -632,6 +641,7 @@ const opListPresets = "ListPresets"
 type ListPresetsRequest struct {
 	*aws.Request
 	Input *ListPresetsInput
+	Copy  func(*ListPresetsInput) ListPresetsRequest
 }
 
 // Send marshals and sends the ListPresets API request.
@@ -677,47 +687,47 @@ func (c *ElasticTranscoder) ListPresetsRequest(input *ListPresetsInput) ListPres
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPresetsRequest{Request: req, Input: input}
+	return ListPresetsRequest{Request: req, Input: input, Copy: c.ListPresetsRequest}
 }
 
-// ListPresetsPages iterates over the pages of a ListPresets operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPresets method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPresetsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPresets operation.
-//    pageNum := 0
-//    err := client.ListPresetsPages(params,
-//        func(page *ListPresetsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPresetsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListPresetsRequest) Paginate(opts ...aws.Option) ListPresetsPager {
 	return ListPresetsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPresetsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPresetsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListPresetsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListPresetsPager ...
+// ListPresetsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListPresetsPager struct {
 	aws.Pager
 }
@@ -732,6 +742,7 @@ const opReadJob = "ReadJob"
 type ReadJobRequest struct {
 	*aws.Request
 	Input *ReadJobInput
+	Copy  func(*ReadJobInput) ReadJobRequest
 }
 
 // Send marshals and sends the ReadJob API request.
@@ -770,7 +781,7 @@ func (c *ElasticTranscoder) ReadJobRequest(input *ReadJobInput) ReadJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReadJobRequest{Request: req, Input: input}
+	return ReadJobRequest{Request: req, Input: input, Copy: c.ReadJobRequest}
 }
 
 const opReadPipeline = "ReadPipeline"
@@ -779,6 +790,7 @@ const opReadPipeline = "ReadPipeline"
 type ReadPipelineRequest struct {
 	*aws.Request
 	Input *ReadPipelineInput
+	Copy  func(*ReadPipelineInput) ReadPipelineRequest
 }
 
 // Send marshals and sends the ReadPipeline API request.
@@ -817,7 +829,7 @@ func (c *ElasticTranscoder) ReadPipelineRequest(input *ReadPipelineInput) ReadPi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReadPipelineRequest{Request: req, Input: input}
+	return ReadPipelineRequest{Request: req, Input: input, Copy: c.ReadPipelineRequest}
 }
 
 const opReadPreset = "ReadPreset"
@@ -826,6 +838,7 @@ const opReadPreset = "ReadPreset"
 type ReadPresetRequest struct {
 	*aws.Request
 	Input *ReadPresetInput
+	Copy  func(*ReadPresetInput) ReadPresetRequest
 }
 
 // Send marshals and sends the ReadPreset API request.
@@ -864,7 +877,7 @@ func (c *ElasticTranscoder) ReadPresetRequest(input *ReadPresetInput) ReadPreset
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReadPresetRequest{Request: req, Input: input}
+	return ReadPresetRequest{Request: req, Input: input, Copy: c.ReadPresetRequest}
 }
 
 const opTestRole = "TestRole"
@@ -873,6 +886,7 @@ const opTestRole = "TestRole"
 type TestRoleRequest struct {
 	*aws.Request
 	Input *TestRoleInput
+	Copy  func(*TestRoleInput) TestRoleRequest
 }
 
 // Send marshals and sends the TestRole API request.
@@ -920,7 +934,7 @@ func (c *ElasticTranscoder) TestRoleRequest(input *TestRoleInput) TestRoleReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestRoleRequest{Request: req, Input: input}
+	return TestRoleRequest{Request: req, Input: input, Copy: c.TestRoleRequest}
 }
 
 const opUpdatePipeline = "UpdatePipeline"
@@ -929,6 +943,7 @@ const opUpdatePipeline = "UpdatePipeline"
 type UpdatePipelineRequest struct {
 	*aws.Request
 	Input *UpdatePipelineInput
+	Copy  func(*UpdatePipelineInput) UpdatePipelineRequest
 }
 
 // Send marshals and sends the UpdatePipeline API request.
@@ -972,7 +987,7 @@ func (c *ElasticTranscoder) UpdatePipelineRequest(input *UpdatePipelineInput) Up
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePipelineRequest{Request: req, Input: input}
+	return UpdatePipelineRequest{Request: req, Input: input, Copy: c.UpdatePipelineRequest}
 }
 
 const opUpdatePipelineNotifications = "UpdatePipelineNotifications"
@@ -981,6 +996,7 @@ const opUpdatePipelineNotifications = "UpdatePipelineNotifications"
 type UpdatePipelineNotificationsRequest struct {
 	*aws.Request
 	Input *UpdatePipelineNotificationsInput
+	Copy  func(*UpdatePipelineNotificationsInput) UpdatePipelineNotificationsRequest
 }
 
 // Send marshals and sends the UpdatePipelineNotifications API request.
@@ -1023,7 +1039,7 @@ func (c *ElasticTranscoder) UpdatePipelineNotificationsRequest(input *UpdatePipe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePipelineNotificationsRequest{Request: req, Input: input}
+	return UpdatePipelineNotificationsRequest{Request: req, Input: input, Copy: c.UpdatePipelineNotificationsRequest}
 }
 
 const opUpdatePipelineStatus = "UpdatePipelineStatus"
@@ -1032,6 +1048,7 @@ const opUpdatePipelineStatus = "UpdatePipelineStatus"
 type UpdatePipelineStatusRequest struct {
 	*aws.Request
 	Input *UpdatePipelineStatusInput
+	Copy  func(*UpdatePipelineStatusInput) UpdatePipelineStatusRequest
 }
 
 // Send marshals and sends the UpdatePipelineStatus API request.
@@ -1077,7 +1094,7 @@ func (c *ElasticTranscoder) UpdatePipelineStatusRequest(input *UpdatePipelineSta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePipelineStatusRequest{Request: req, Input: input}
+	return UpdatePipelineStatusRequest{Request: req, Input: input, Copy: c.UpdatePipelineStatusRequest}
 }
 
 // The file to be used as album art. There can be multiple artworks associated

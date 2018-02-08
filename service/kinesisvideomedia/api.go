@@ -17,6 +17,7 @@ const opGetMedia = "GetMedia"
 type GetMediaRequest struct {
 	*aws.Request
 	Input *GetMediaInput
+	Copy  func(*GetMediaInput) GetMediaRequest
 }
 
 // Send marshals and sends the GetMedia API request.
@@ -75,7 +76,7 @@ func (c *KinesisVideoMedia) GetMediaRequest(input *GetMediaInput) GetMediaReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMediaRequest{Request: req, Input: input}
+	return GetMediaRequest{Request: req, Input: input, Copy: c.GetMediaRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesis-video-media-2017-09-30/GetMediaInput

@@ -16,6 +16,7 @@ const opAssociateCreatedArtifact = "AssociateCreatedArtifact"
 type AssociateCreatedArtifactRequest struct {
 	*aws.Request
 	Input *AssociateCreatedArtifactInput
+	Copy  func(*AssociateCreatedArtifactInput) AssociateCreatedArtifactRequest
 }
 
 // Send marshals and sends the AssociateCreatedArtifact API request.
@@ -68,7 +69,7 @@ func (c *MigrationHub) AssociateCreatedArtifactRequest(input *AssociateCreatedAr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateCreatedArtifactRequest{Request: req, Input: input}
+	return AssociateCreatedArtifactRequest{Request: req, Input: input, Copy: c.AssociateCreatedArtifactRequest}
 }
 
 const opAssociateDiscoveredResource = "AssociateDiscoveredResource"
@@ -77,6 +78,7 @@ const opAssociateDiscoveredResource = "AssociateDiscoveredResource"
 type AssociateDiscoveredResourceRequest struct {
 	*aws.Request
 	Input *AssociateDiscoveredResourceInput
+	Copy  func(*AssociateDiscoveredResourceInput) AssociateDiscoveredResourceRequest
 }
 
 // Send marshals and sends the AssociateDiscoveredResource API request.
@@ -118,7 +120,7 @@ func (c *MigrationHub) AssociateDiscoveredResourceRequest(input *AssociateDiscov
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateDiscoveredResourceRequest{Request: req, Input: input}
+	return AssociateDiscoveredResourceRequest{Request: req, Input: input, Copy: c.AssociateDiscoveredResourceRequest}
 }
 
 const opCreateProgressUpdateStream = "CreateProgressUpdateStream"
@@ -127,6 +129,7 @@ const opCreateProgressUpdateStream = "CreateProgressUpdateStream"
 type CreateProgressUpdateStreamRequest struct {
 	*aws.Request
 	Input *CreateProgressUpdateStreamInput
+	Copy  func(*CreateProgressUpdateStreamInput) CreateProgressUpdateStreamRequest
 }
 
 // Send marshals and sends the CreateProgressUpdateStream API request.
@@ -171,7 +174,7 @@ func (c *MigrationHub) CreateProgressUpdateStreamRequest(input *CreateProgressUp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateProgressUpdateStreamRequest{Request: req, Input: input}
+	return CreateProgressUpdateStreamRequest{Request: req, Input: input, Copy: c.CreateProgressUpdateStreamRequest}
 }
 
 const opDeleteProgressUpdateStream = "DeleteProgressUpdateStream"
@@ -180,6 +183,7 @@ const opDeleteProgressUpdateStream = "DeleteProgressUpdateStream"
 type DeleteProgressUpdateStreamRequest struct {
 	*aws.Request
 	Input *DeleteProgressUpdateStreamInput
+	Copy  func(*DeleteProgressUpdateStreamInput) DeleteProgressUpdateStreamRequest
 }
 
 // Send marshals and sends the DeleteProgressUpdateStream API request.
@@ -242,7 +246,7 @@ func (c *MigrationHub) DeleteProgressUpdateStreamRequest(input *DeleteProgressUp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteProgressUpdateStreamRequest{Request: req, Input: input}
+	return DeleteProgressUpdateStreamRequest{Request: req, Input: input, Copy: c.DeleteProgressUpdateStreamRequest}
 }
 
 const opDescribeApplicationState = "DescribeApplicationState"
@@ -251,6 +255,7 @@ const opDescribeApplicationState = "DescribeApplicationState"
 type DescribeApplicationStateRequest struct {
 	*aws.Request
 	Input *DescribeApplicationStateInput
+	Copy  func(*DescribeApplicationStateInput) DescribeApplicationStateRequest
 }
 
 // Send marshals and sends the DescribeApplicationState API request.
@@ -291,7 +296,7 @@ func (c *MigrationHub) DescribeApplicationStateRequest(input *DescribeApplicatio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeApplicationStateRequest{Request: req, Input: input}
+	return DescribeApplicationStateRequest{Request: req, Input: input, Copy: c.DescribeApplicationStateRequest}
 }
 
 const opDescribeMigrationTask = "DescribeMigrationTask"
@@ -300,6 +305,7 @@ const opDescribeMigrationTask = "DescribeMigrationTask"
 type DescribeMigrationTaskRequest struct {
 	*aws.Request
 	Input *DescribeMigrationTaskInput
+	Copy  func(*DescribeMigrationTaskInput) DescribeMigrationTaskRequest
 }
 
 // Send marshals and sends the DescribeMigrationTask API request.
@@ -340,7 +346,7 @@ func (c *MigrationHub) DescribeMigrationTaskRequest(input *DescribeMigrationTask
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMigrationTaskRequest{Request: req, Input: input}
+	return DescribeMigrationTaskRequest{Request: req, Input: input, Copy: c.DescribeMigrationTaskRequest}
 }
 
 const opDisassociateCreatedArtifact = "DisassociateCreatedArtifact"
@@ -349,6 +355,7 @@ const opDisassociateCreatedArtifact = "DisassociateCreatedArtifact"
 type DisassociateCreatedArtifactRequest struct {
 	*aws.Request
 	Input *DisassociateCreatedArtifactInput
+	Copy  func(*DisassociateCreatedArtifactInput) DisassociateCreatedArtifactRequest
 }
 
 // Send marshals and sends the DisassociateCreatedArtifact API request.
@@ -401,7 +408,7 @@ func (c *MigrationHub) DisassociateCreatedArtifactRequest(input *DisassociateCre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateCreatedArtifactRequest{Request: req, Input: input}
+	return DisassociateCreatedArtifactRequest{Request: req, Input: input, Copy: c.DisassociateCreatedArtifactRequest}
 }
 
 const opDisassociateDiscoveredResource = "DisassociateDiscoveredResource"
@@ -410,6 +417,7 @@ const opDisassociateDiscoveredResource = "DisassociateDiscoveredResource"
 type DisassociateDiscoveredResourceRequest struct {
 	*aws.Request
 	Input *DisassociateDiscoveredResourceInput
+	Copy  func(*DisassociateDiscoveredResourceInput) DisassociateDiscoveredResourceRequest
 }
 
 // Send marshals and sends the DisassociateDiscoveredResource API request.
@@ -451,7 +459,7 @@ func (c *MigrationHub) DisassociateDiscoveredResourceRequest(input *Disassociate
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateDiscoveredResourceRequest{Request: req, Input: input}
+	return DisassociateDiscoveredResourceRequest{Request: req, Input: input, Copy: c.DisassociateDiscoveredResourceRequest}
 }
 
 const opImportMigrationTask = "ImportMigrationTask"
@@ -460,6 +468,7 @@ const opImportMigrationTask = "ImportMigrationTask"
 type ImportMigrationTaskRequest struct {
 	*aws.Request
 	Input *ImportMigrationTaskInput
+	Copy  func(*ImportMigrationTaskInput) ImportMigrationTaskRequest
 }
 
 // Send marshals and sends the ImportMigrationTask API request.
@@ -505,7 +514,7 @@ func (c *MigrationHub) ImportMigrationTaskRequest(input *ImportMigrationTaskInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportMigrationTaskRequest{Request: req, Input: input}
+	return ImportMigrationTaskRequest{Request: req, Input: input, Copy: c.ImportMigrationTaskRequest}
 }
 
 const opListCreatedArtifacts = "ListCreatedArtifacts"
@@ -514,6 +523,7 @@ const opListCreatedArtifacts = "ListCreatedArtifacts"
 type ListCreatedArtifactsRequest struct {
 	*aws.Request
 	Input *ListCreatedArtifactsInput
+	Copy  func(*ListCreatedArtifactsInput) ListCreatedArtifactsRequest
 }
 
 // Send marshals and sends the ListCreatedArtifacts API request.
@@ -562,7 +572,7 @@ func (c *MigrationHub) ListCreatedArtifactsRequest(input *ListCreatedArtifactsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCreatedArtifactsRequest{Request: req, Input: input}
+	return ListCreatedArtifactsRequest{Request: req, Input: input, Copy: c.ListCreatedArtifactsRequest}
 }
 
 const opListDiscoveredResources = "ListDiscoveredResources"
@@ -571,6 +581,7 @@ const opListDiscoveredResources = "ListDiscoveredResources"
 type ListDiscoveredResourcesRequest struct {
 	*aws.Request
 	Input *ListDiscoveredResourcesInput
+	Copy  func(*ListDiscoveredResourcesInput) ListDiscoveredResourcesRequest
 }
 
 // Send marshals and sends the ListDiscoveredResources API request.
@@ -611,7 +622,7 @@ func (c *MigrationHub) ListDiscoveredResourcesRequest(input *ListDiscoveredResou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDiscoveredResourcesRequest{Request: req, Input: input}
+	return ListDiscoveredResourcesRequest{Request: req, Input: input, Copy: c.ListDiscoveredResourcesRequest}
 }
 
 const opListMigrationTasks = "ListMigrationTasks"
@@ -620,6 +631,7 @@ const opListMigrationTasks = "ListMigrationTasks"
 type ListMigrationTasksRequest struct {
 	*aws.Request
 	Input *ListMigrationTasksInput
+	Copy  func(*ListMigrationTasksInput) ListMigrationTasksRequest
 }
 
 // Send marshals and sends the ListMigrationTasks API request.
@@ -668,7 +680,7 @@ func (c *MigrationHub) ListMigrationTasksRequest(input *ListMigrationTasksInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListMigrationTasksRequest{Request: req, Input: input}
+	return ListMigrationTasksRequest{Request: req, Input: input, Copy: c.ListMigrationTasksRequest}
 }
 
 const opListProgressUpdateStreams = "ListProgressUpdateStreams"
@@ -677,6 +689,7 @@ const opListProgressUpdateStreams = "ListProgressUpdateStreams"
 type ListProgressUpdateStreamsRequest struct {
 	*aws.Request
 	Input *ListProgressUpdateStreamsInput
+	Copy  func(*ListProgressUpdateStreamsInput) ListProgressUpdateStreamsRequest
 }
 
 // Send marshals and sends the ListProgressUpdateStreams API request.
@@ -718,7 +731,7 @@ func (c *MigrationHub) ListProgressUpdateStreamsRequest(input *ListProgressUpdat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListProgressUpdateStreamsRequest{Request: req, Input: input}
+	return ListProgressUpdateStreamsRequest{Request: req, Input: input, Copy: c.ListProgressUpdateStreamsRequest}
 }
 
 const opNotifyApplicationState = "NotifyApplicationState"
@@ -727,6 +740,7 @@ const opNotifyApplicationState = "NotifyApplicationState"
 type NotifyApplicationStateRequest struct {
 	*aws.Request
 	Input *NotifyApplicationStateInput
+	Copy  func(*NotifyApplicationStateInput) NotifyApplicationStateRequest
 }
 
 // Send marshals and sends the NotifyApplicationState API request.
@@ -769,7 +783,7 @@ func (c *MigrationHub) NotifyApplicationStateRequest(input *NotifyApplicationSta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return NotifyApplicationStateRequest{Request: req, Input: input}
+	return NotifyApplicationStateRequest{Request: req, Input: input, Copy: c.NotifyApplicationStateRequest}
 }
 
 const opNotifyMigrationTaskState = "NotifyMigrationTaskState"
@@ -778,6 +792,7 @@ const opNotifyMigrationTaskState = "NotifyMigrationTaskState"
 type NotifyMigrationTaskStateRequest struct {
 	*aws.Request
 	Input *NotifyMigrationTaskStateInput
+	Copy  func(*NotifyMigrationTaskStateInput) NotifyMigrationTaskStateRequest
 }
 
 // Send marshals and sends the NotifyMigrationTaskState API request.
@@ -827,7 +842,7 @@ func (c *MigrationHub) NotifyMigrationTaskStateRequest(input *NotifyMigrationTas
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return NotifyMigrationTaskStateRequest{Request: req, Input: input}
+	return NotifyMigrationTaskStateRequest{Request: req, Input: input, Copy: c.NotifyMigrationTaskStateRequest}
 }
 
 const opPutResourceAttributes = "PutResourceAttributes"
@@ -836,6 +851,7 @@ const opPutResourceAttributes = "PutResourceAttributes"
 type PutResourceAttributesRequest struct {
 	*aws.Request
 	Input *PutResourceAttributesInput
+	Copy  func(*PutResourceAttributesInput) PutResourceAttributesRequest
 }
 
 // Send marshals and sends the PutResourceAttributes API request.
@@ -888,7 +904,7 @@ func (c *MigrationHub) PutResourceAttributesRequest(input *PutResourceAttributes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutResourceAttributesRequest{Request: req, Input: input}
+	return PutResourceAttributesRequest{Request: req, Input: input, Copy: c.PutResourceAttributesRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/AssociateCreatedArtifactRequest

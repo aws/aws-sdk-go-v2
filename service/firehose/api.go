@@ -16,6 +16,7 @@ const opCreateDeliveryStream = "CreateDeliveryStream"
 type CreateDeliveryStreamRequest struct {
 	*aws.Request
 	Input *CreateDeliveryStreamInput
+	Copy  func(*CreateDeliveryStreamInput) CreateDeliveryStreamRequest
 }
 
 // Send marshals and sends the CreateDeliveryStream API request.
@@ -107,7 +108,7 @@ func (c *Firehose) CreateDeliveryStreamRequest(input *CreateDeliveryStreamInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDeliveryStreamRequest{Request: req, Input: input}
+	return CreateDeliveryStreamRequest{Request: req, Input: input, Copy: c.CreateDeliveryStreamRequest}
 }
 
 const opDeleteDeliveryStream = "DeleteDeliveryStream"
@@ -116,6 +117,7 @@ const opDeleteDeliveryStream = "DeleteDeliveryStream"
 type DeleteDeliveryStreamRequest struct {
 	*aws.Request
 	Input *DeleteDeliveryStreamInput
+	Copy  func(*DeleteDeliveryStreamInput) DeleteDeliveryStreamRequest
 }
 
 // Send marshals and sends the DeleteDeliveryStream API request.
@@ -167,7 +169,7 @@ func (c *Firehose) DeleteDeliveryStreamRequest(input *DeleteDeliveryStreamInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDeliveryStreamRequest{Request: req, Input: input}
+	return DeleteDeliveryStreamRequest{Request: req, Input: input, Copy: c.DeleteDeliveryStreamRequest}
 }
 
 const opDescribeDeliveryStream = "DescribeDeliveryStream"
@@ -176,6 +178,7 @@ const opDescribeDeliveryStream = "DescribeDeliveryStream"
 type DescribeDeliveryStreamRequest struct {
 	*aws.Request
 	Input *DescribeDeliveryStreamInput
+	Copy  func(*DescribeDeliveryStreamInput) DescribeDeliveryStreamRequest
 }
 
 // Send marshals and sends the DescribeDeliveryStream API request.
@@ -219,7 +222,7 @@ func (c *Firehose) DescribeDeliveryStreamRequest(input *DescribeDeliveryStreamIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDeliveryStreamRequest{Request: req, Input: input}
+	return DescribeDeliveryStreamRequest{Request: req, Input: input, Copy: c.DescribeDeliveryStreamRequest}
 }
 
 const opListDeliveryStreams = "ListDeliveryStreams"
@@ -228,6 +231,7 @@ const opListDeliveryStreams = "ListDeliveryStreams"
 type ListDeliveryStreamsRequest struct {
 	*aws.Request
 	Input *ListDeliveryStreamsInput
+	Copy  func(*ListDeliveryStreamsInput) ListDeliveryStreamsRequest
 }
 
 // Send marshals and sends the ListDeliveryStreams API request.
@@ -276,7 +280,7 @@ func (c *Firehose) ListDeliveryStreamsRequest(input *ListDeliveryStreamsInput) L
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDeliveryStreamsRequest{Request: req, Input: input}
+	return ListDeliveryStreamsRequest{Request: req, Input: input, Copy: c.ListDeliveryStreamsRequest}
 }
 
 const opPutRecord = "PutRecord"
@@ -285,6 +289,7 @@ const opPutRecord = "PutRecord"
 type PutRecordRequest struct {
 	*aws.Request
 	Input *PutRecordInput
+	Copy  func(*PutRecordInput) PutRecordRequest
 }
 
 // Send marshals and sends the PutRecord API request.
@@ -357,7 +362,7 @@ func (c *Firehose) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutRecordRequest{Request: req, Input: input}
+	return PutRecordRequest{Request: req, Input: input, Copy: c.PutRecordRequest}
 }
 
 const opPutRecordBatch = "PutRecordBatch"
@@ -366,6 +371,7 @@ const opPutRecordBatch = "PutRecordBatch"
 type PutRecordBatchRequest struct {
 	*aws.Request
 	Input *PutRecordBatchInput
+	Copy  func(*PutRecordBatchInput) PutRecordBatchRequest
 }
 
 // Send marshals and sends the PutRecordBatch API request.
@@ -463,7 +469,7 @@ func (c *Firehose) PutRecordBatchRequest(input *PutRecordBatchInput) PutRecordBa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutRecordBatchRequest{Request: req, Input: input}
+	return PutRecordBatchRequest{Request: req, Input: input, Copy: c.PutRecordBatchRequest}
 }
 
 const opUpdateDestination = "UpdateDestination"
@@ -472,6 +478,7 @@ const opUpdateDestination = "UpdateDestination"
 type UpdateDestinationRequest struct {
 	*aws.Request
 	Input *UpdateDestinationInput
+	Copy  func(*UpdateDestinationInput) UpdateDestinationRequest
 }
 
 // Send marshals and sends the UpdateDestination API request.
@@ -541,7 +548,7 @@ func (c *Firehose) UpdateDestinationRequest(input *UpdateDestinationInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDestinationRequest{Request: req, Input: input}
+	return UpdateDestinationRequest{Request: req, Input: input, Copy: c.UpdateDestinationRequest}
 }
 
 // Describes hints for the buffering to perform before delivering data to the

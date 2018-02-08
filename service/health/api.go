@@ -15,6 +15,7 @@ const opDescribeAffectedEntities = "DescribeAffectedEntities"
 type DescribeAffectedEntitiesRequest struct {
 	*aws.Request
 	Input *DescribeAffectedEntitiesInput
+	Copy  func(*DescribeAffectedEntitiesInput) DescribeAffectedEntitiesRequest
 }
 
 // Send marshals and sends the DescribeAffectedEntities API request.
@@ -69,47 +70,47 @@ func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntities
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAffectedEntitiesRequest{Request: req, Input: input}
+	return DescribeAffectedEntitiesRequest{Request: req, Input: input, Copy: c.DescribeAffectedEntitiesRequest}
 }
 
-// DescribeAffectedEntitiesPages iterates over the pages of a DescribeAffectedEntities operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeAffectedEntities method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeAffectedEntitiesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeAffectedEntities operation.
-//    pageNum := 0
-//    err := client.DescribeAffectedEntitiesPages(params,
-//        func(page *DescribeAffectedEntitiesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeAffectedEntitiesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeAffectedEntitiesRequest) Paginate(opts ...aws.Option) DescribeAffectedEntitiesPager {
 	return DescribeAffectedEntitiesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeAffectedEntitiesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeAffectedEntitiesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeAffectedEntitiesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeAffectedEntitiesPager ...
+// DescribeAffectedEntitiesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeAffectedEntitiesPager struct {
 	aws.Pager
 }
@@ -124,6 +125,7 @@ const opDescribeEntityAggregates = "DescribeEntityAggregates"
 type DescribeEntityAggregatesRequest struct {
 	*aws.Request
 	Input *DescribeEntityAggregatesInput
+	Copy  func(*DescribeEntityAggregatesInput) DescribeEntityAggregatesRequest
 }
 
 // Send marshals and sends the DescribeEntityAggregates API request.
@@ -166,7 +168,7 @@ func (c *Health) DescribeEntityAggregatesRequest(input *DescribeEntityAggregates
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEntityAggregatesRequest{Request: req, Input: input}
+	return DescribeEntityAggregatesRequest{Request: req, Input: input, Copy: c.DescribeEntityAggregatesRequest}
 }
 
 const opDescribeEventAggregates = "DescribeEventAggregates"
@@ -175,6 +177,7 @@ const opDescribeEventAggregates = "DescribeEventAggregates"
 type DescribeEventAggregatesRequest struct {
 	*aws.Request
 	Input *DescribeEventAggregatesInput
+	Copy  func(*DescribeEventAggregatesInput) DescribeEventAggregatesRequest
 }
 
 // Send marshals and sends the DescribeEventAggregates API request.
@@ -223,47 +226,47 @@ func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventAggregatesRequest{Request: req, Input: input}
+	return DescribeEventAggregatesRequest{Request: req, Input: input, Copy: c.DescribeEventAggregatesRequest}
 }
 
-// DescribeEventAggregatesPages iterates over the pages of a DescribeEventAggregates operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEventAggregates method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventAggregatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEventAggregates operation.
-//    pageNum := 0
-//    err := client.DescribeEventAggregatesPages(params,
-//        func(page *DescribeEventAggregatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventAggregatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeEventAggregatesRequest) Paginate(opts ...aws.Option) DescribeEventAggregatesPager {
 	return DescribeEventAggregatesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventAggregatesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventAggregatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeEventAggregatesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeEventAggregatesPager ...
+// DescribeEventAggregatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeEventAggregatesPager struct {
 	aws.Pager
 }
@@ -278,6 +281,7 @@ const opDescribeEventDetails = "DescribeEventDetails"
 type DescribeEventDetailsRequest struct {
 	*aws.Request
 	Input *DescribeEventDetailsInput
+	Copy  func(*DescribeEventDetailsInput) DescribeEventDetailsRequest
 }
 
 // Send marshals and sends the DescribeEventDetails API request.
@@ -325,7 +329,7 @@ func (c *Health) DescribeEventDetailsRequest(input *DescribeEventDetailsInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventDetailsRequest{Request: req, Input: input}
+	return DescribeEventDetailsRequest{Request: req, Input: input, Copy: c.DescribeEventDetailsRequest}
 }
 
 const opDescribeEventTypes = "DescribeEventTypes"
@@ -334,6 +338,7 @@ const opDescribeEventTypes = "DescribeEventTypes"
 type DescribeEventTypesRequest struct {
 	*aws.Request
 	Input *DescribeEventTypesInput
+	Copy  func(*DescribeEventTypesInput) DescribeEventTypesRequest
 }
 
 // Send marshals and sends the DescribeEventTypes API request.
@@ -381,47 +386,47 @@ func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventTypesRequest{Request: req, Input: input}
+	return DescribeEventTypesRequest{Request: req, Input: input, Copy: c.DescribeEventTypesRequest}
 }
 
-// DescribeEventTypesPages iterates over the pages of a DescribeEventTypes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEventTypes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventTypesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEventTypes operation.
-//    pageNum := 0
-//    err := client.DescribeEventTypesPages(params,
-//        func(page *DescribeEventTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventTypesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeEventTypesRequest) Paginate(opts ...aws.Option) DescribeEventTypesPager {
 	return DescribeEventTypesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventTypesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventTypesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeEventTypesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeEventTypesPager ...
+// DescribeEventTypesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeEventTypesPager struct {
 	aws.Pager
 }
@@ -436,6 +441,7 @@ const opDescribeEvents = "DescribeEvents"
 type DescribeEventsRequest struct {
 	*aws.Request
 	Input *DescribeEventsInput
+	Copy  func(*DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -489,47 +495,47 @@ func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventsRequest{Request: req, Input: input}
+	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
-// DescribeEventsPages iterates over the pages of a DescribeEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEvents operation.
-//    pageNum := 0
-//    err := client.DescribeEventsPages(params,
-//        func(page *DescribeEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeEventsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeEventsPager ...
+// DescribeEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeEventsPager struct {
 	aws.Pager
 }

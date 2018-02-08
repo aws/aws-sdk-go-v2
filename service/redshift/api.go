@@ -17,6 +17,7 @@ const opAuthorizeClusterSecurityGroupIngress = "AuthorizeClusterSecurityGroupIng
 type AuthorizeClusterSecurityGroupIngressRequest struct {
 	*aws.Request
 	Input *AuthorizeClusterSecurityGroupIngressInput
+	Copy  func(*AuthorizeClusterSecurityGroupIngressInput) AuthorizeClusterSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the AuthorizeClusterSecurityGroupIngress API request.
@@ -76,7 +77,7 @@ func (c *Redshift) AuthorizeClusterSecurityGroupIngressRequest(input *AuthorizeC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AuthorizeClusterSecurityGroupIngressRequest{Request: req, Input: input}
+	return AuthorizeClusterSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeClusterSecurityGroupIngressRequest}
 }
 
 const opAuthorizeSnapshotAccess = "AuthorizeSnapshotAccess"
@@ -85,6 +86,7 @@ const opAuthorizeSnapshotAccess = "AuthorizeSnapshotAccess"
 type AuthorizeSnapshotAccessRequest struct {
 	*aws.Request
 	Input *AuthorizeSnapshotAccessInput
+	Copy  func(*AuthorizeSnapshotAccessInput) AuthorizeSnapshotAccessRequest
 }
 
 // Send marshals and sends the AuthorizeSnapshotAccess API request.
@@ -129,7 +131,7 @@ func (c *Redshift) AuthorizeSnapshotAccessRequest(input *AuthorizeSnapshotAccess
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AuthorizeSnapshotAccessRequest{Request: req, Input: input}
+	return AuthorizeSnapshotAccessRequest{Request: req, Input: input, Copy: c.AuthorizeSnapshotAccessRequest}
 }
 
 const opCopyClusterSnapshot = "CopyClusterSnapshot"
@@ -138,6 +140,7 @@ const opCopyClusterSnapshot = "CopyClusterSnapshot"
 type CopyClusterSnapshotRequest struct {
 	*aws.Request
 	Input *CopyClusterSnapshotInput
+	Copy  func(*CopyClusterSnapshotInput) CopyClusterSnapshotRequest
 }
 
 // Send marshals and sends the CopyClusterSnapshot API request.
@@ -190,7 +193,7 @@ func (c *Redshift) CopyClusterSnapshotRequest(input *CopyClusterSnapshotInput) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopyClusterSnapshotRequest{Request: req, Input: input}
+	return CopyClusterSnapshotRequest{Request: req, Input: input, Copy: c.CopyClusterSnapshotRequest}
 }
 
 const opCreateCluster = "CreateCluster"
@@ -199,6 +202,7 @@ const opCreateCluster = "CreateCluster"
 type CreateClusterRequest struct {
 	*aws.Request
 	Input *CreateClusterInput
+	Copy  func(*CreateClusterInput) CreateClusterRequest
 }
 
 // Send marshals and sends the CreateCluster API request.
@@ -245,7 +249,7 @@ func (c *Redshift) CreateClusterRequest(input *CreateClusterInput) CreateCluster
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateClusterRequest{Request: req, Input: input}
+	return CreateClusterRequest{Request: req, Input: input, Copy: c.CreateClusterRequest}
 }
 
 const opCreateClusterParameterGroup = "CreateClusterParameterGroup"
@@ -254,6 +258,7 @@ const opCreateClusterParameterGroup = "CreateClusterParameterGroup"
 type CreateClusterParameterGroupRequest struct {
 	*aws.Request
 	Input *CreateClusterParameterGroupInput
+	Copy  func(*CreateClusterParameterGroupInput) CreateClusterParameterGroupRequest
 }
 
 // Send marshals and sends the CreateClusterParameterGroup API request.
@@ -304,7 +309,7 @@ func (c *Redshift) CreateClusterParameterGroupRequest(input *CreateClusterParame
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateClusterParameterGroupRequest{Request: req, Input: input}
+	return CreateClusterParameterGroupRequest{Request: req, Input: input, Copy: c.CreateClusterParameterGroupRequest}
 }
 
 const opCreateClusterSecurityGroup = "CreateClusterSecurityGroup"
@@ -313,6 +318,7 @@ const opCreateClusterSecurityGroup = "CreateClusterSecurityGroup"
 type CreateClusterSecurityGroupRequest struct {
 	*aws.Request
 	Input *CreateClusterSecurityGroupInput
+	Copy  func(*CreateClusterSecurityGroupInput) CreateClusterSecurityGroupRequest
 }
 
 // Send marshals and sends the CreateClusterSecurityGroup API request.
@@ -358,7 +364,7 @@ func (c *Redshift) CreateClusterSecurityGroupRequest(input *CreateClusterSecurit
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateClusterSecurityGroupRequest{Request: req, Input: input}
+	return CreateClusterSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateClusterSecurityGroupRequest}
 }
 
 const opCreateClusterSnapshot = "CreateClusterSnapshot"
@@ -367,6 +373,7 @@ const opCreateClusterSnapshot = "CreateClusterSnapshot"
 type CreateClusterSnapshotRequest struct {
 	*aws.Request
 	Input *CreateClusterSnapshotInput
+	Copy  func(*CreateClusterSnapshotInput) CreateClusterSnapshotRequest
 }
 
 // Send marshals and sends the CreateClusterSnapshot API request.
@@ -412,7 +419,7 @@ func (c *Redshift) CreateClusterSnapshotRequest(input *CreateClusterSnapshotInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateClusterSnapshotRequest{Request: req, Input: input}
+	return CreateClusterSnapshotRequest{Request: req, Input: input, Copy: c.CreateClusterSnapshotRequest}
 }
 
 const opCreateClusterSubnetGroup = "CreateClusterSubnetGroup"
@@ -421,6 +428,7 @@ const opCreateClusterSubnetGroup = "CreateClusterSubnetGroup"
 type CreateClusterSubnetGroupRequest struct {
 	*aws.Request
 	Input *CreateClusterSubnetGroupInput
+	Copy  func(*CreateClusterSubnetGroupInput) CreateClusterSubnetGroupRequest
 }
 
 // Send marshals and sends the CreateClusterSubnetGroup API request.
@@ -467,7 +475,7 @@ func (c *Redshift) CreateClusterSubnetGroupRequest(input *CreateClusterSubnetGro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateClusterSubnetGroupRequest{Request: req, Input: input}
+	return CreateClusterSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateClusterSubnetGroupRequest}
 }
 
 const opCreateEventSubscription = "CreateEventSubscription"
@@ -476,6 +484,7 @@ const opCreateEventSubscription = "CreateEventSubscription"
 type CreateEventSubscriptionRequest struct {
 	*aws.Request
 	Input *CreateEventSubscriptionInput
+	Copy  func(*CreateEventSubscriptionInput) CreateEventSubscriptionRequest
 }
 
 // Send marshals and sends the CreateEventSubscription API request.
@@ -537,7 +546,7 @@ func (c *Redshift) CreateEventSubscriptionRequest(input *CreateEventSubscription
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEventSubscriptionRequest{Request: req, Input: input}
+	return CreateEventSubscriptionRequest{Request: req, Input: input, Copy: c.CreateEventSubscriptionRequest}
 }
 
 const opCreateHsmClientCertificate = "CreateHsmClientCertificate"
@@ -546,6 +555,7 @@ const opCreateHsmClientCertificate = "CreateHsmClientCertificate"
 type CreateHsmClientCertificateRequest struct {
 	*aws.Request
 	Input *CreateHsmClientCertificateInput
+	Copy  func(*CreateHsmClientCertificateInput) CreateHsmClientCertificateRequest
 }
 
 // Send marshals and sends the CreateHsmClientCertificate API request.
@@ -594,7 +604,7 @@ func (c *Redshift) CreateHsmClientCertificateRequest(input *CreateHsmClientCerti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateHsmClientCertificateRequest{Request: req, Input: input}
+	return CreateHsmClientCertificateRequest{Request: req, Input: input, Copy: c.CreateHsmClientCertificateRequest}
 }
 
 const opCreateHsmConfiguration = "CreateHsmConfiguration"
@@ -603,6 +613,7 @@ const opCreateHsmConfiguration = "CreateHsmConfiguration"
 type CreateHsmConfigurationRequest struct {
 	*aws.Request
 	Input *CreateHsmConfigurationInput
+	Copy  func(*CreateHsmConfigurationInput) CreateHsmConfigurationRequest
 }
 
 // Send marshals and sends the CreateHsmConfiguration API request.
@@ -652,7 +663,7 @@ func (c *Redshift) CreateHsmConfigurationRequest(input *CreateHsmConfigurationIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateHsmConfigurationRequest{Request: req, Input: input}
+	return CreateHsmConfigurationRequest{Request: req, Input: input, Copy: c.CreateHsmConfigurationRequest}
 }
 
 const opCreateSnapshotCopyGrant = "CreateSnapshotCopyGrant"
@@ -661,6 +672,7 @@ const opCreateSnapshotCopyGrant = "CreateSnapshotCopyGrant"
 type CreateSnapshotCopyGrantRequest struct {
 	*aws.Request
 	Input *CreateSnapshotCopyGrantInput
+	Copy  func(*CreateSnapshotCopyGrantInput) CreateSnapshotCopyGrantRequest
 }
 
 // Send marshals and sends the CreateSnapshotCopyGrant API request.
@@ -707,7 +719,7 @@ func (c *Redshift) CreateSnapshotCopyGrantRequest(input *CreateSnapshotCopyGrant
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSnapshotCopyGrantRequest{Request: req, Input: input}
+	return CreateSnapshotCopyGrantRequest{Request: req, Input: input, Copy: c.CreateSnapshotCopyGrantRequest}
 }
 
 const opCreateTags = "CreateTags"
@@ -716,6 +728,7 @@ const opCreateTags = "CreateTags"
 type CreateTagsRequest struct {
 	*aws.Request
 	Input *CreateTagsInput
+	Copy  func(*CreateTagsInput) CreateTagsRequest
 }
 
 // Send marshals and sends the CreateTags API request.
@@ -764,7 +777,7 @@ func (c *Redshift) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTagsRequest{Request: req, Input: input}
+	return CreateTagsRequest{Request: req, Input: input, Copy: c.CreateTagsRequest}
 }
 
 const opDeleteCluster = "DeleteCluster"
@@ -773,6 +786,7 @@ const opDeleteCluster = "DeleteCluster"
 type DeleteClusterRequest struct {
 	*aws.Request
 	Input *DeleteClusterInput
+	Copy  func(*DeleteClusterInput) DeleteClusterRequest
 }
 
 // Send marshals and sends the DeleteCluster API request.
@@ -829,7 +843,7 @@ func (c *Redshift) DeleteClusterRequest(input *DeleteClusterInput) DeleteCluster
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteClusterRequest{Request: req, Input: input}
+	return DeleteClusterRequest{Request: req, Input: input, Copy: c.DeleteClusterRequest}
 }
 
 const opDeleteClusterParameterGroup = "DeleteClusterParameterGroup"
@@ -838,6 +852,7 @@ const opDeleteClusterParameterGroup = "DeleteClusterParameterGroup"
 type DeleteClusterParameterGroupRequest struct {
 	*aws.Request
 	Input *DeleteClusterParameterGroupInput
+	Copy  func(*DeleteClusterParameterGroupInput) DeleteClusterParameterGroupRequest
 }
 
 // Send marshals and sends the DeleteClusterParameterGroup API request.
@@ -882,7 +897,7 @@ func (c *Redshift) DeleteClusterParameterGroupRequest(input *DeleteClusterParame
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteClusterParameterGroupRequest{Request: req, Input: input}
+	return DeleteClusterParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteClusterParameterGroupRequest}
 }
 
 const opDeleteClusterSecurityGroup = "DeleteClusterSecurityGroup"
@@ -891,6 +906,7 @@ const opDeleteClusterSecurityGroup = "DeleteClusterSecurityGroup"
 type DeleteClusterSecurityGroupRequest struct {
 	*aws.Request
 	Input *DeleteClusterSecurityGroupInput
+	Copy  func(*DeleteClusterSecurityGroupInput) DeleteClusterSecurityGroupRequest
 }
 
 // Send marshals and sends the DeleteClusterSecurityGroup API request.
@@ -940,7 +956,7 @@ func (c *Redshift) DeleteClusterSecurityGroupRequest(input *DeleteClusterSecurit
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteClusterSecurityGroupRequest{Request: req, Input: input}
+	return DeleteClusterSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteClusterSecurityGroupRequest}
 }
 
 const opDeleteClusterSnapshot = "DeleteClusterSnapshot"
@@ -949,6 +965,7 @@ const opDeleteClusterSnapshot = "DeleteClusterSnapshot"
 type DeleteClusterSnapshotRequest struct {
 	*aws.Request
 	Input *DeleteClusterSnapshotInput
+	Copy  func(*DeleteClusterSnapshotInput) DeleteClusterSnapshotRequest
 }
 
 // Send marshals and sends the DeleteClusterSnapshot API request.
@@ -996,7 +1013,7 @@ func (c *Redshift) DeleteClusterSnapshotRequest(input *DeleteClusterSnapshotInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteClusterSnapshotRequest{Request: req, Input: input}
+	return DeleteClusterSnapshotRequest{Request: req, Input: input, Copy: c.DeleteClusterSnapshotRequest}
 }
 
 const opDeleteClusterSubnetGroup = "DeleteClusterSubnetGroup"
@@ -1005,6 +1022,7 @@ const opDeleteClusterSubnetGroup = "DeleteClusterSubnetGroup"
 type DeleteClusterSubnetGroupRequest struct {
 	*aws.Request
 	Input *DeleteClusterSubnetGroupInput
+	Copy  func(*DeleteClusterSubnetGroupInput) DeleteClusterSubnetGroupRequest
 }
 
 // Send marshals and sends the DeleteClusterSubnetGroup API request.
@@ -1047,7 +1065,7 @@ func (c *Redshift) DeleteClusterSubnetGroupRequest(input *DeleteClusterSubnetGro
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteClusterSubnetGroupRequest{Request: req, Input: input}
+	return DeleteClusterSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteClusterSubnetGroupRequest}
 }
 
 const opDeleteEventSubscription = "DeleteEventSubscription"
@@ -1056,6 +1074,7 @@ const opDeleteEventSubscription = "DeleteEventSubscription"
 type DeleteEventSubscriptionRequest struct {
 	*aws.Request
 	Input *DeleteEventSubscriptionInput
+	Copy  func(*DeleteEventSubscriptionInput) DeleteEventSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteEventSubscription API request.
@@ -1098,7 +1117,7 @@ func (c *Redshift) DeleteEventSubscriptionRequest(input *DeleteEventSubscription
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEventSubscriptionRequest{Request: req, Input: input}
+	return DeleteEventSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteEventSubscriptionRequest}
 }
 
 const opDeleteHsmClientCertificate = "DeleteHsmClientCertificate"
@@ -1107,6 +1126,7 @@ const opDeleteHsmClientCertificate = "DeleteHsmClientCertificate"
 type DeleteHsmClientCertificateRequest struct {
 	*aws.Request
 	Input *DeleteHsmClientCertificateInput
+	Copy  func(*DeleteHsmClientCertificateInput) DeleteHsmClientCertificateRequest
 }
 
 // Send marshals and sends the DeleteHsmClientCertificate API request.
@@ -1149,7 +1169,7 @@ func (c *Redshift) DeleteHsmClientCertificateRequest(input *DeleteHsmClientCerti
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteHsmClientCertificateRequest{Request: req, Input: input}
+	return DeleteHsmClientCertificateRequest{Request: req, Input: input, Copy: c.DeleteHsmClientCertificateRequest}
 }
 
 const opDeleteHsmConfiguration = "DeleteHsmConfiguration"
@@ -1158,6 +1178,7 @@ const opDeleteHsmConfiguration = "DeleteHsmConfiguration"
 type DeleteHsmConfigurationRequest struct {
 	*aws.Request
 	Input *DeleteHsmConfigurationInput
+	Copy  func(*DeleteHsmConfigurationInput) DeleteHsmConfigurationRequest
 }
 
 // Send marshals and sends the DeleteHsmConfiguration API request.
@@ -1200,7 +1221,7 @@ func (c *Redshift) DeleteHsmConfigurationRequest(input *DeleteHsmConfigurationIn
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteHsmConfigurationRequest{Request: req, Input: input}
+	return DeleteHsmConfigurationRequest{Request: req, Input: input, Copy: c.DeleteHsmConfigurationRequest}
 }
 
 const opDeleteSnapshotCopyGrant = "DeleteSnapshotCopyGrant"
@@ -1209,6 +1230,7 @@ const opDeleteSnapshotCopyGrant = "DeleteSnapshotCopyGrant"
 type DeleteSnapshotCopyGrantRequest struct {
 	*aws.Request
 	Input *DeleteSnapshotCopyGrantInput
+	Copy  func(*DeleteSnapshotCopyGrantInput) DeleteSnapshotCopyGrantRequest
 }
 
 // Send marshals and sends the DeleteSnapshotCopyGrant API request.
@@ -1251,7 +1273,7 @@ func (c *Redshift) DeleteSnapshotCopyGrantRequest(input *DeleteSnapshotCopyGrant
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSnapshotCopyGrantRequest{Request: req, Input: input}
+	return DeleteSnapshotCopyGrantRequest{Request: req, Input: input, Copy: c.DeleteSnapshotCopyGrantRequest}
 }
 
 const opDeleteTags = "DeleteTags"
@@ -1260,6 +1282,7 @@ const opDeleteTags = "DeleteTags"
 type DeleteTagsRequest struct {
 	*aws.Request
 	Input *DeleteTagsInput
+	Copy  func(*DeleteTagsInput) DeleteTagsRequest
 }
 
 // Send marshals and sends the DeleteTags API request.
@@ -1303,7 +1326,7 @@ func (c *Redshift) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTagsRequest{Request: req, Input: input}
+	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
 const opDescribeClusterParameterGroups = "DescribeClusterParameterGroups"
@@ -1312,6 +1335,7 @@ const opDescribeClusterParameterGroups = "DescribeClusterParameterGroups"
 type DescribeClusterParameterGroupsRequest struct {
 	*aws.Request
 	Input *DescribeClusterParameterGroupsInput
+	Copy  func(*DescribeClusterParameterGroupsInput) DescribeClusterParameterGroupsRequest
 }
 
 // Send marshals and sends the DescribeClusterParameterGroups API request.
@@ -1376,47 +1400,47 @@ func (c *Redshift) DescribeClusterParameterGroupsRequest(input *DescribeClusterP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClusterParameterGroupsRequest{Request: req, Input: input}
+	return DescribeClusterParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeClusterParameterGroupsRequest}
 }
 
-// DescribeClusterParameterGroupsPages iterates over the pages of a DescribeClusterParameterGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeClusterParameterGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeClusterParameterGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeClusterParameterGroups operation.
-//    pageNum := 0
-//    err := client.DescribeClusterParameterGroupsPages(params,
-//        func(page *DescribeClusterParameterGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeClusterParameterGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeClusterParameterGroupsRequest) Paginate(opts ...aws.Option) DescribeClusterParameterGroupsPager {
 	return DescribeClusterParameterGroupsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeClusterParameterGroupsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeClusterParameterGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeClusterParameterGroupsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeClusterParameterGroupsPager ...
+// DescribeClusterParameterGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeClusterParameterGroupsPager struct {
 	aws.Pager
 }
@@ -1431,6 +1455,7 @@ const opDescribeClusterParameters = "DescribeClusterParameters"
 type DescribeClusterParametersRequest struct {
 	*aws.Request
 	Input *DescribeClusterParametersInput
+	Copy  func(*DescribeClusterParametersInput) DescribeClusterParametersRequest
 }
 
 // Send marshals and sends the DescribeClusterParameters API request.
@@ -1488,47 +1513,47 @@ func (c *Redshift) DescribeClusterParametersRequest(input *DescribeClusterParame
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClusterParametersRequest{Request: req, Input: input}
+	return DescribeClusterParametersRequest{Request: req, Input: input, Copy: c.DescribeClusterParametersRequest}
 }
 
-// DescribeClusterParametersPages iterates over the pages of a DescribeClusterParameters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeClusterParameters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeClusterParametersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeClusterParameters operation.
-//    pageNum := 0
-//    err := client.DescribeClusterParametersPages(params,
-//        func(page *DescribeClusterParametersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeClusterParametersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeClusterParametersRequest) Paginate(opts ...aws.Option) DescribeClusterParametersPager {
 	return DescribeClusterParametersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeClusterParametersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeClusterParametersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeClusterParametersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeClusterParametersPager ...
+// DescribeClusterParametersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeClusterParametersPager struct {
 	aws.Pager
 }
@@ -1543,6 +1568,7 @@ const opDescribeClusterSecurityGroups = "DescribeClusterSecurityGroups"
 type DescribeClusterSecurityGroupsRequest struct {
 	*aws.Request
 	Input *DescribeClusterSecurityGroupsInput
+	Copy  func(*DescribeClusterSecurityGroupsInput) DescribeClusterSecurityGroupsRequest
 }
 
 // Send marshals and sends the DescribeClusterSecurityGroups API request.
@@ -1605,47 +1631,47 @@ func (c *Redshift) DescribeClusterSecurityGroupsRequest(input *DescribeClusterSe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClusterSecurityGroupsRequest{Request: req, Input: input}
+	return DescribeClusterSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeClusterSecurityGroupsRequest}
 }
 
-// DescribeClusterSecurityGroupsPages iterates over the pages of a DescribeClusterSecurityGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeClusterSecurityGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeClusterSecurityGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeClusterSecurityGroups operation.
-//    pageNum := 0
-//    err := client.DescribeClusterSecurityGroupsPages(params,
-//        func(page *DescribeClusterSecurityGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeClusterSecurityGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeClusterSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeClusterSecurityGroupsPager {
 	return DescribeClusterSecurityGroupsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeClusterSecurityGroupsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeClusterSecurityGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeClusterSecurityGroupsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeClusterSecurityGroupsPager ...
+// DescribeClusterSecurityGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeClusterSecurityGroupsPager struct {
 	aws.Pager
 }
@@ -1660,6 +1686,7 @@ const opDescribeClusterSnapshots = "DescribeClusterSnapshots"
 type DescribeClusterSnapshotsRequest struct {
 	*aws.Request
 	Input *DescribeClusterSnapshotsInput
+	Copy  func(*DescribeClusterSnapshotsInput) DescribeClusterSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeClusterSnapshots API request.
@@ -1720,47 +1747,47 @@ func (c *Redshift) DescribeClusterSnapshotsRequest(input *DescribeClusterSnapsho
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClusterSnapshotsRequest{Request: req, Input: input}
+	return DescribeClusterSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeClusterSnapshotsRequest}
 }
 
-// DescribeClusterSnapshotsPages iterates over the pages of a DescribeClusterSnapshots operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeClusterSnapshots method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeClusterSnapshotsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeClusterSnapshots operation.
-//    pageNum := 0
-//    err := client.DescribeClusterSnapshotsPages(params,
-//        func(page *DescribeClusterSnapshotsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeClusterSnapshotsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeClusterSnapshotsRequest) Paginate(opts ...aws.Option) DescribeClusterSnapshotsPager {
 	return DescribeClusterSnapshotsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeClusterSnapshotsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeClusterSnapshotsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeClusterSnapshotsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeClusterSnapshotsPager ...
+// DescribeClusterSnapshotsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeClusterSnapshotsPager struct {
 	aws.Pager
 }
@@ -1775,6 +1802,7 @@ const opDescribeClusterSubnetGroups = "DescribeClusterSubnetGroups"
 type DescribeClusterSubnetGroupsRequest struct {
 	*aws.Request
 	Input *DescribeClusterSubnetGroupsInput
+	Copy  func(*DescribeClusterSubnetGroupsInput) DescribeClusterSubnetGroupsRequest
 }
 
 // Send marshals and sends the DescribeClusterSubnetGroups API request.
@@ -1833,47 +1861,47 @@ func (c *Redshift) DescribeClusterSubnetGroupsRequest(input *DescribeClusterSubn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClusterSubnetGroupsRequest{Request: req, Input: input}
+	return DescribeClusterSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeClusterSubnetGroupsRequest}
 }
 
-// DescribeClusterSubnetGroupsPages iterates over the pages of a DescribeClusterSubnetGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeClusterSubnetGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeClusterSubnetGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeClusterSubnetGroups operation.
-//    pageNum := 0
-//    err := client.DescribeClusterSubnetGroupsPages(params,
-//        func(page *DescribeClusterSubnetGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeClusterSubnetGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeClusterSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeClusterSubnetGroupsPager {
 	return DescribeClusterSubnetGroupsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeClusterSubnetGroupsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeClusterSubnetGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeClusterSubnetGroupsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeClusterSubnetGroupsPager ...
+// DescribeClusterSubnetGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeClusterSubnetGroupsPager struct {
 	aws.Pager
 }
@@ -1888,6 +1916,7 @@ const opDescribeClusterVersions = "DescribeClusterVersions"
 type DescribeClusterVersionsRequest struct {
 	*aws.Request
 	Input *DescribeClusterVersionsInput
+	Copy  func(*DescribeClusterVersionsInput) DescribeClusterVersionsRequest
 }
 
 // Send marshals and sends the DescribeClusterVersions API request.
@@ -1938,47 +1967,47 @@ func (c *Redshift) DescribeClusterVersionsRequest(input *DescribeClusterVersions
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClusterVersionsRequest{Request: req, Input: input}
+	return DescribeClusterVersionsRequest{Request: req, Input: input, Copy: c.DescribeClusterVersionsRequest}
 }
 
-// DescribeClusterVersionsPages iterates over the pages of a DescribeClusterVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeClusterVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeClusterVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeClusterVersions operation.
-//    pageNum := 0
-//    err := client.DescribeClusterVersionsPages(params,
-//        func(page *DescribeClusterVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeClusterVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeClusterVersionsRequest) Paginate(opts ...aws.Option) DescribeClusterVersionsPager {
 	return DescribeClusterVersionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeClusterVersionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeClusterVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeClusterVersionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeClusterVersionsPager ...
+// DescribeClusterVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeClusterVersionsPager struct {
 	aws.Pager
 }
@@ -1993,6 +2022,7 @@ const opDescribeClusters = "DescribeClusters"
 type DescribeClustersRequest struct {
 	*aws.Request
 	Input *DescribeClustersInput
+	Copy  func(*DescribeClustersInput) DescribeClustersRequest
 }
 
 // Send marshals and sends the DescribeClusters API request.
@@ -2052,47 +2082,47 @@ func (c *Redshift) DescribeClustersRequest(input *DescribeClustersInput) Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClustersRequest{Request: req, Input: input}
+	return DescribeClustersRequest{Request: req, Input: input, Copy: c.DescribeClustersRequest}
 }
 
-// DescribeClustersPages iterates over the pages of a DescribeClusters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeClusters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeClustersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeClusters operation.
-//    pageNum := 0
-//    err := client.DescribeClustersPages(params,
-//        func(page *DescribeClustersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeClustersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeClustersRequest) Paginate(opts ...aws.Option) DescribeClustersPager {
 	return DescribeClustersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeClustersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeClustersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeClustersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeClustersPager ...
+// DescribeClustersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeClustersPager struct {
 	aws.Pager
 }
@@ -2107,6 +2137,7 @@ const opDescribeDefaultClusterParameters = "DescribeDefaultClusterParameters"
 type DescribeDefaultClusterParametersRequest struct {
 	*aws.Request
 	Input *DescribeDefaultClusterParametersInput
+	Copy  func(*DescribeDefaultClusterParametersInput) DescribeDefaultClusterParametersRequest
 }
 
 // Send marshals and sends the DescribeDefaultClusterParameters API request.
@@ -2157,47 +2188,47 @@ func (c *Redshift) DescribeDefaultClusterParametersRequest(input *DescribeDefaul
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDefaultClusterParametersRequest{Request: req, Input: input}
+	return DescribeDefaultClusterParametersRequest{Request: req, Input: input, Copy: c.DescribeDefaultClusterParametersRequest}
 }
 
-// DescribeDefaultClusterParametersPages iterates over the pages of a DescribeDefaultClusterParameters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDefaultClusterParameters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDefaultClusterParametersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDefaultClusterParameters operation.
-//    pageNum := 0
-//    err := client.DescribeDefaultClusterParametersPages(params,
-//        func(page *DescribeDefaultClusterParametersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDefaultClusterParametersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeDefaultClusterParametersRequest) Paginate(opts ...aws.Option) DescribeDefaultClusterParametersPager {
 	return DescribeDefaultClusterParametersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDefaultClusterParametersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDefaultClusterParametersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeDefaultClusterParametersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeDefaultClusterParametersPager ...
+// DescribeDefaultClusterParametersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeDefaultClusterParametersPager struct {
 	aws.Pager
 }
@@ -2212,6 +2243,7 @@ const opDescribeEventCategories = "DescribeEventCategories"
 type DescribeEventCategoriesRequest struct {
 	*aws.Request
 	Input *DescribeEventCategoriesInput
+	Copy  func(*DescribeEventCategoriesInput) DescribeEventCategoriesRequest
 }
 
 // Send marshals and sends the DescribeEventCategories API request.
@@ -2254,7 +2286,7 @@ func (c *Redshift) DescribeEventCategoriesRequest(input *DescribeEventCategories
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventCategoriesRequest{Request: req, Input: input}
+	return DescribeEventCategoriesRequest{Request: req, Input: input, Copy: c.DescribeEventCategoriesRequest}
 }
 
 const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
@@ -2263,6 +2295,7 @@ const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 type DescribeEventSubscriptionsRequest struct {
 	*aws.Request
 	Input *DescribeEventSubscriptionsInput
+	Copy  func(*DescribeEventSubscriptionsInput) DescribeEventSubscriptionsRequest
 }
 
 // Send marshals and sends the DescribeEventSubscriptions API request.
@@ -2321,47 +2354,47 @@ func (c *Redshift) DescribeEventSubscriptionsRequest(input *DescribeEventSubscri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventSubscriptionsRequest{Request: req, Input: input}
+	return DescribeEventSubscriptionsRequest{Request: req, Input: input, Copy: c.DescribeEventSubscriptionsRequest}
 }
 
-// DescribeEventSubscriptionsPages iterates over the pages of a DescribeEventSubscriptions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEventSubscriptions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventSubscriptionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEventSubscriptions operation.
-//    pageNum := 0
-//    err := client.DescribeEventSubscriptionsPages(params,
-//        func(page *DescribeEventSubscriptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventSubscriptionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) DescribeEventSubscriptionsPager {
 	return DescribeEventSubscriptionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventSubscriptionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventSubscriptionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeEventSubscriptionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeEventSubscriptionsPager ...
+// DescribeEventSubscriptionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeEventSubscriptionsPager struct {
 	aws.Pager
 }
@@ -2376,6 +2409,7 @@ const opDescribeEvents = "DescribeEvents"
 type DescribeEventsRequest struct {
 	*aws.Request
 	Input *DescribeEventsInput
+	Copy  func(*DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -2425,47 +2459,47 @@ func (c *Redshift) DescribeEventsRequest(input *DescribeEventsInput) DescribeEve
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventsRequest{Request: req, Input: input}
+	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
-// DescribeEventsPages iterates over the pages of a DescribeEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEvents operation.
-//    pageNum := 0
-//    err := client.DescribeEventsPages(params,
-//        func(page *DescribeEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
 	return DescribeEventsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeEventsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeEventsPager ...
+// DescribeEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeEventsPager struct {
 	aws.Pager
 }
@@ -2480,6 +2514,7 @@ const opDescribeHsmClientCertificates = "DescribeHsmClientCertificates"
 type DescribeHsmClientCertificatesRequest struct {
 	*aws.Request
 	Input *DescribeHsmClientCertificatesInput
+	Copy  func(*DescribeHsmClientCertificatesInput) DescribeHsmClientCertificatesRequest
 }
 
 // Send marshals and sends the DescribeHsmClientCertificates API request.
@@ -2538,47 +2573,47 @@ func (c *Redshift) DescribeHsmClientCertificatesRequest(input *DescribeHsmClient
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeHsmClientCertificatesRequest{Request: req, Input: input}
+	return DescribeHsmClientCertificatesRequest{Request: req, Input: input, Copy: c.DescribeHsmClientCertificatesRequest}
 }
 
-// DescribeHsmClientCertificatesPages iterates over the pages of a DescribeHsmClientCertificates operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeHsmClientCertificates method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeHsmClientCertificatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeHsmClientCertificates operation.
-//    pageNum := 0
-//    err := client.DescribeHsmClientCertificatesPages(params,
-//        func(page *DescribeHsmClientCertificatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeHsmClientCertificatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeHsmClientCertificatesRequest) Paginate(opts ...aws.Option) DescribeHsmClientCertificatesPager {
 	return DescribeHsmClientCertificatesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeHsmClientCertificatesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeHsmClientCertificatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeHsmClientCertificatesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeHsmClientCertificatesPager ...
+// DescribeHsmClientCertificatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeHsmClientCertificatesPager struct {
 	aws.Pager
 }
@@ -2593,6 +2628,7 @@ const opDescribeHsmConfigurations = "DescribeHsmConfigurations"
 type DescribeHsmConfigurationsRequest struct {
 	*aws.Request
 	Input *DescribeHsmConfigurationsInput
+	Copy  func(*DescribeHsmConfigurationsInput) DescribeHsmConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeHsmConfigurations API request.
@@ -2651,47 +2687,47 @@ func (c *Redshift) DescribeHsmConfigurationsRequest(input *DescribeHsmConfigurat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeHsmConfigurationsRequest{Request: req, Input: input}
+	return DescribeHsmConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeHsmConfigurationsRequest}
 }
 
-// DescribeHsmConfigurationsPages iterates over the pages of a DescribeHsmConfigurations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeHsmConfigurations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeHsmConfigurationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeHsmConfigurations operation.
-//    pageNum := 0
-//    err := client.DescribeHsmConfigurationsPages(params,
-//        func(page *DescribeHsmConfigurationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeHsmConfigurationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeHsmConfigurationsRequest) Paginate(opts ...aws.Option) DescribeHsmConfigurationsPager {
 	return DescribeHsmConfigurationsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeHsmConfigurationsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeHsmConfigurationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeHsmConfigurationsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeHsmConfigurationsPager ...
+// DescribeHsmConfigurationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeHsmConfigurationsPager struct {
 	aws.Pager
 }
@@ -2706,6 +2742,7 @@ const opDescribeLoggingStatus = "DescribeLoggingStatus"
 type DescribeLoggingStatusRequest struct {
 	*aws.Request
 	Input *DescribeLoggingStatusInput
+	Copy  func(*DescribeLoggingStatusInput) DescribeLoggingStatusRequest
 }
 
 // Send marshals and sends the DescribeLoggingStatus API request.
@@ -2747,7 +2784,7 @@ func (c *Redshift) DescribeLoggingStatusRequest(input *DescribeLoggingStatusInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLoggingStatusRequest{Request: req, Input: input}
+	return DescribeLoggingStatusRequest{Request: req, Input: input, Copy: c.DescribeLoggingStatusRequest}
 }
 
 const opDescribeOrderableClusterOptions = "DescribeOrderableClusterOptions"
@@ -2756,6 +2793,7 @@ const opDescribeOrderableClusterOptions = "DescribeOrderableClusterOptions"
 type DescribeOrderableClusterOptionsRequest struct {
 	*aws.Request
 	Input *DescribeOrderableClusterOptionsInput
+	Copy  func(*DescribeOrderableClusterOptionsInput) DescribeOrderableClusterOptionsRequest
 }
 
 // Send marshals and sends the DescribeOrderableClusterOptions API request.
@@ -2810,47 +2848,47 @@ func (c *Redshift) DescribeOrderableClusterOptionsRequest(input *DescribeOrderab
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeOrderableClusterOptionsRequest{Request: req, Input: input}
+	return DescribeOrderableClusterOptionsRequest{Request: req, Input: input, Copy: c.DescribeOrderableClusterOptionsRequest}
 }
 
-// DescribeOrderableClusterOptionsPages iterates over the pages of a DescribeOrderableClusterOptions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeOrderableClusterOptions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeOrderableClusterOptionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeOrderableClusterOptions operation.
-//    pageNum := 0
-//    err := client.DescribeOrderableClusterOptionsPages(params,
-//        func(page *DescribeOrderableClusterOptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeOrderableClusterOptionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeOrderableClusterOptionsRequest) Paginate(opts ...aws.Option) DescribeOrderableClusterOptionsPager {
 	return DescribeOrderableClusterOptionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeOrderableClusterOptionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeOrderableClusterOptionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeOrderableClusterOptionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeOrderableClusterOptionsPager ...
+// DescribeOrderableClusterOptionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeOrderableClusterOptionsPager struct {
 	aws.Pager
 }
@@ -2865,6 +2903,7 @@ const opDescribeReservedNodeOfferings = "DescribeReservedNodeOfferings"
 type DescribeReservedNodeOfferingsRequest struct {
 	*aws.Request
 	Input *DescribeReservedNodeOfferingsInput
+	Copy  func(*DescribeReservedNodeOfferingsInput) DescribeReservedNodeOfferingsRequest
 }
 
 // Send marshals and sends the DescribeReservedNodeOfferings API request.
@@ -2920,47 +2959,47 @@ func (c *Redshift) DescribeReservedNodeOfferingsRequest(input *DescribeReservedN
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReservedNodeOfferingsRequest{Request: req, Input: input}
+	return DescribeReservedNodeOfferingsRequest{Request: req, Input: input, Copy: c.DescribeReservedNodeOfferingsRequest}
 }
 
-// DescribeReservedNodeOfferingsPages iterates over the pages of a DescribeReservedNodeOfferings operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReservedNodeOfferings method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReservedNodeOfferingsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReservedNodeOfferings operation.
-//    pageNum := 0
-//    err := client.DescribeReservedNodeOfferingsPages(params,
-//        func(page *DescribeReservedNodeOfferingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReservedNodeOfferingsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeReservedNodeOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedNodeOfferingsPager {
 	return DescribeReservedNodeOfferingsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReservedNodeOfferingsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReservedNodeOfferingsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeReservedNodeOfferingsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeReservedNodeOfferingsPager ...
+// DescribeReservedNodeOfferingsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeReservedNodeOfferingsPager struct {
 	aws.Pager
 }
@@ -2975,6 +3014,7 @@ const opDescribeReservedNodes = "DescribeReservedNodes"
 type DescribeReservedNodesRequest struct {
 	*aws.Request
 	Input *DescribeReservedNodesInput
+	Copy  func(*DescribeReservedNodesInput) DescribeReservedNodesRequest
 }
 
 // Send marshals and sends the DescribeReservedNodes API request.
@@ -3021,47 +3061,47 @@ func (c *Redshift) DescribeReservedNodesRequest(input *DescribeReservedNodesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReservedNodesRequest{Request: req, Input: input}
+	return DescribeReservedNodesRequest{Request: req, Input: input, Copy: c.DescribeReservedNodesRequest}
 }
 
-// DescribeReservedNodesPages iterates over the pages of a DescribeReservedNodes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReservedNodes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReservedNodesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReservedNodes operation.
-//    pageNum := 0
-//    err := client.DescribeReservedNodesPages(params,
-//        func(page *DescribeReservedNodesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReservedNodesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeReservedNodesRequest) Paginate(opts ...aws.Option) DescribeReservedNodesPager {
 	return DescribeReservedNodesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReservedNodesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReservedNodesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeReservedNodesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeReservedNodesPager ...
+// DescribeReservedNodesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeReservedNodesPager struct {
 	aws.Pager
 }
@@ -3076,6 +3116,7 @@ const opDescribeResize = "DescribeResize"
 type DescribeResizeRequest struct {
 	*aws.Request
 	Input *DescribeResizeInput
+	Copy  func(*DescribeResizeInput) DescribeResizeRequest
 }
 
 // Send marshals and sends the DescribeResize API request.
@@ -3122,7 +3163,7 @@ func (c *Redshift) DescribeResizeRequest(input *DescribeResizeInput) DescribeRes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeResizeRequest{Request: req, Input: input}
+	return DescribeResizeRequest{Request: req, Input: input, Copy: c.DescribeResizeRequest}
 }
 
 const opDescribeSnapshotCopyGrants = "DescribeSnapshotCopyGrants"
@@ -3131,6 +3172,7 @@ const opDescribeSnapshotCopyGrants = "DescribeSnapshotCopyGrants"
 type DescribeSnapshotCopyGrantsRequest struct {
 	*aws.Request
 	Input *DescribeSnapshotCopyGrantsInput
+	Copy  func(*DescribeSnapshotCopyGrantsInput) DescribeSnapshotCopyGrantsRequest
 }
 
 // Send marshals and sends the DescribeSnapshotCopyGrants API request.
@@ -3176,7 +3218,7 @@ func (c *Redshift) DescribeSnapshotCopyGrantsRequest(input *DescribeSnapshotCopy
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSnapshotCopyGrantsRequest{Request: req, Input: input}
+	return DescribeSnapshotCopyGrantsRequest{Request: req, Input: input, Copy: c.DescribeSnapshotCopyGrantsRequest}
 }
 
 const opDescribeTableRestoreStatus = "DescribeTableRestoreStatus"
@@ -3185,6 +3227,7 @@ const opDescribeTableRestoreStatus = "DescribeTableRestoreStatus"
 type DescribeTableRestoreStatusRequest struct {
 	*aws.Request
 	Input *DescribeTableRestoreStatusInput
+	Copy  func(*DescribeTableRestoreStatusInput) DescribeTableRestoreStatusRequest
 }
 
 // Send marshals and sends the DescribeTableRestoreStatus API request.
@@ -3229,7 +3272,7 @@ func (c *Redshift) DescribeTableRestoreStatusRequest(input *DescribeTableRestore
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTableRestoreStatusRequest{Request: req, Input: input}
+	return DescribeTableRestoreStatusRequest{Request: req, Input: input, Copy: c.DescribeTableRestoreStatusRequest}
 }
 
 const opDescribeTags = "DescribeTags"
@@ -3238,6 +3281,7 @@ const opDescribeTags = "DescribeTags"
 type DescribeTagsRequest struct {
 	*aws.Request
 	Input *DescribeTagsInput
+	Copy  func(*DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -3300,7 +3344,7 @@ func (c *Redshift) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagsRequest{Request: req, Input: input}
+	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
 const opDisableLogging = "DisableLogging"
@@ -3309,6 +3353,7 @@ const opDisableLogging = "DisableLogging"
 type DisableLoggingRequest struct {
 	*aws.Request
 	Input *DisableLoggingInput
+	Copy  func(*DisableLoggingInput) DisableLoggingRequest
 }
 
 // Send marshals and sends the DisableLogging API request.
@@ -3350,7 +3395,7 @@ func (c *Redshift) DisableLoggingRequest(input *DisableLoggingInput) DisableLogg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableLoggingRequest{Request: req, Input: input}
+	return DisableLoggingRequest{Request: req, Input: input, Copy: c.DisableLoggingRequest}
 }
 
 const opDisableSnapshotCopy = "DisableSnapshotCopy"
@@ -3359,6 +3404,7 @@ const opDisableSnapshotCopy = "DisableSnapshotCopy"
 type DisableSnapshotCopyRequest struct {
 	*aws.Request
 	Input *DisableSnapshotCopyInput
+	Copy  func(*DisableSnapshotCopyInput) DisableSnapshotCopyRequest
 }
 
 // Send marshals and sends the DisableSnapshotCopy API request.
@@ -3404,7 +3450,7 @@ func (c *Redshift) DisableSnapshotCopyRequest(input *DisableSnapshotCopyInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableSnapshotCopyRequest{Request: req, Input: input}
+	return DisableSnapshotCopyRequest{Request: req, Input: input, Copy: c.DisableSnapshotCopyRequest}
 }
 
 const opEnableLogging = "EnableLogging"
@@ -3413,6 +3459,7 @@ const opEnableLogging = "EnableLogging"
 type EnableLoggingRequest struct {
 	*aws.Request
 	Input *EnableLoggingInput
+	Copy  func(*EnableLoggingInput) EnableLoggingRequest
 }
 
 // Send marshals and sends the EnableLogging API request.
@@ -3454,7 +3501,7 @@ func (c *Redshift) EnableLoggingRequest(input *EnableLoggingInput) EnableLogging
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableLoggingRequest{Request: req, Input: input}
+	return EnableLoggingRequest{Request: req, Input: input, Copy: c.EnableLoggingRequest}
 }
 
 const opEnableSnapshotCopy = "EnableSnapshotCopy"
@@ -3463,6 +3510,7 @@ const opEnableSnapshotCopy = "EnableSnapshotCopy"
 type EnableSnapshotCopyRequest struct {
 	*aws.Request
 	Input *EnableSnapshotCopyInput
+	Copy  func(*EnableSnapshotCopyInput) EnableSnapshotCopyRequest
 }
 
 // Send marshals and sends the EnableSnapshotCopy API request.
@@ -3504,7 +3552,7 @@ func (c *Redshift) EnableSnapshotCopyRequest(input *EnableSnapshotCopyInput) Ena
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableSnapshotCopyRequest{Request: req, Input: input}
+	return EnableSnapshotCopyRequest{Request: req, Input: input, Copy: c.EnableSnapshotCopyRequest}
 }
 
 const opGetClusterCredentials = "GetClusterCredentials"
@@ -3513,6 +3561,7 @@ const opGetClusterCredentials = "GetClusterCredentials"
 type GetClusterCredentialsRequest struct {
 	*aws.Request
 	Input *GetClusterCredentialsInput
+	Copy  func(*GetClusterCredentialsInput) GetClusterCredentialsRequest
 }
 
 // Send marshals and sends the GetClusterCredentials API request.
@@ -3576,7 +3625,7 @@ func (c *Redshift) GetClusterCredentialsRequest(input *GetClusterCredentialsInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetClusterCredentialsRequest{Request: req, Input: input}
+	return GetClusterCredentialsRequest{Request: req, Input: input, Copy: c.GetClusterCredentialsRequest}
 }
 
 const opModifyCluster = "ModifyCluster"
@@ -3585,6 +3634,7 @@ const opModifyCluster = "ModifyCluster"
 type ModifyClusterRequest struct {
 	*aws.Request
 	Input *ModifyClusterInput
+	Copy  func(*ModifyClusterInput) ModifyClusterRequest
 }
 
 // Send marshals and sends the ModifyCluster API request.
@@ -3635,7 +3685,7 @@ func (c *Redshift) ModifyClusterRequest(input *ModifyClusterInput) ModifyCluster
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyClusterRequest{Request: req, Input: input}
+	return ModifyClusterRequest{Request: req, Input: input, Copy: c.ModifyClusterRequest}
 }
 
 const opModifyClusterIamRoles = "ModifyClusterIamRoles"
@@ -3644,6 +3694,7 @@ const opModifyClusterIamRoles = "ModifyClusterIamRoles"
 type ModifyClusterIamRolesRequest struct {
 	*aws.Request
 	Input *ModifyClusterIamRolesInput
+	Copy  func(*ModifyClusterIamRolesInput) ModifyClusterIamRolesRequest
 }
 
 // Send marshals and sends the ModifyClusterIamRoles API request.
@@ -3687,7 +3738,7 @@ func (c *Redshift) ModifyClusterIamRolesRequest(input *ModifyClusterIamRolesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyClusterIamRolesRequest{Request: req, Input: input}
+	return ModifyClusterIamRolesRequest{Request: req, Input: input, Copy: c.ModifyClusterIamRolesRequest}
 }
 
 const opModifyClusterParameterGroup = "ModifyClusterParameterGroup"
@@ -3696,6 +3747,7 @@ const opModifyClusterParameterGroup = "ModifyClusterParameterGroup"
 type ModifyClusterParameterGroupRequest struct {
 	*aws.Request
 	Input *ModifyClusterParameterGroupInput
+	Copy  func(*ModifyClusterParameterGroupInput) ModifyClusterParameterGroupRequest
 }
 
 // Send marshals and sends the ModifyClusterParameterGroup API request.
@@ -3740,7 +3792,7 @@ func (c *Redshift) ModifyClusterParameterGroupRequest(input *ModifyClusterParame
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyClusterParameterGroupRequest{Request: req, Input: input}
+	return ModifyClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyClusterParameterGroupRequest}
 }
 
 const opModifyClusterSubnetGroup = "ModifyClusterSubnetGroup"
@@ -3749,6 +3801,7 @@ const opModifyClusterSubnetGroup = "ModifyClusterSubnetGroup"
 type ModifyClusterSubnetGroupRequest struct {
 	*aws.Request
 	Input *ModifyClusterSubnetGroupInput
+	Copy  func(*ModifyClusterSubnetGroupInput) ModifyClusterSubnetGroupRequest
 }
 
 // Send marshals and sends the ModifyClusterSubnetGroup API request.
@@ -3791,7 +3844,7 @@ func (c *Redshift) ModifyClusterSubnetGroupRequest(input *ModifyClusterSubnetGro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyClusterSubnetGroupRequest{Request: req, Input: input}
+	return ModifyClusterSubnetGroupRequest{Request: req, Input: input, Copy: c.ModifyClusterSubnetGroupRequest}
 }
 
 const opModifyEventSubscription = "ModifyEventSubscription"
@@ -3800,6 +3853,7 @@ const opModifyEventSubscription = "ModifyEventSubscription"
 type ModifyEventSubscriptionRequest struct {
 	*aws.Request
 	Input *ModifyEventSubscriptionInput
+	Copy  func(*ModifyEventSubscriptionInput) ModifyEventSubscriptionRequest
 }
 
 // Send marshals and sends the ModifyEventSubscription API request.
@@ -3840,7 +3894,7 @@ func (c *Redshift) ModifyEventSubscriptionRequest(input *ModifyEventSubscription
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyEventSubscriptionRequest{Request: req, Input: input}
+	return ModifyEventSubscriptionRequest{Request: req, Input: input, Copy: c.ModifyEventSubscriptionRequest}
 }
 
 const opModifySnapshotCopyRetentionPeriod = "ModifySnapshotCopyRetentionPeriod"
@@ -3849,6 +3903,7 @@ const opModifySnapshotCopyRetentionPeriod = "ModifySnapshotCopyRetentionPeriod"
 type ModifySnapshotCopyRetentionPeriodRequest struct {
 	*aws.Request
 	Input *ModifySnapshotCopyRetentionPeriodInput
+	Copy  func(*ModifySnapshotCopyRetentionPeriodInput) ModifySnapshotCopyRetentionPeriodRequest
 }
 
 // Send marshals and sends the ModifySnapshotCopyRetentionPeriod API request.
@@ -3890,7 +3945,7 @@ func (c *Redshift) ModifySnapshotCopyRetentionPeriodRequest(input *ModifySnapsho
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifySnapshotCopyRetentionPeriodRequest{Request: req, Input: input}
+	return ModifySnapshotCopyRetentionPeriodRequest{Request: req, Input: input, Copy: c.ModifySnapshotCopyRetentionPeriodRequest}
 }
 
 const opPurchaseReservedNodeOffering = "PurchaseReservedNodeOffering"
@@ -3899,6 +3954,7 @@ const opPurchaseReservedNodeOffering = "PurchaseReservedNodeOffering"
 type PurchaseReservedNodeOfferingRequest struct {
 	*aws.Request
 	Input *PurchaseReservedNodeOfferingInput
+	Copy  func(*PurchaseReservedNodeOfferingInput) PurchaseReservedNodeOfferingRequest
 }
 
 // Send marshals and sends the PurchaseReservedNodeOffering API request.
@@ -3947,7 +4003,7 @@ func (c *Redshift) PurchaseReservedNodeOfferingRequest(input *PurchaseReservedNo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PurchaseReservedNodeOfferingRequest{Request: req, Input: input}
+	return PurchaseReservedNodeOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedNodeOfferingRequest}
 }
 
 const opRebootCluster = "RebootCluster"
@@ -3956,6 +4012,7 @@ const opRebootCluster = "RebootCluster"
 type RebootClusterRequest struct {
 	*aws.Request
 	Input *RebootClusterInput
+	Copy  func(*RebootClusterInput) RebootClusterRequest
 }
 
 // Send marshals and sends the RebootCluster API request.
@@ -4002,7 +4059,7 @@ func (c *Redshift) RebootClusterRequest(input *RebootClusterInput) RebootCluster
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RebootClusterRequest{Request: req, Input: input}
+	return RebootClusterRequest{Request: req, Input: input, Copy: c.RebootClusterRequest}
 }
 
 const opResetClusterParameterGroup = "ResetClusterParameterGroup"
@@ -4011,6 +4068,7 @@ const opResetClusterParameterGroup = "ResetClusterParameterGroup"
 type ResetClusterParameterGroupRequest struct {
 	*aws.Request
 	Input *ResetClusterParameterGroupInput
+	Copy  func(*ResetClusterParameterGroupInput) ResetClusterParameterGroupRequest
 }
 
 // Send marshals and sends the ResetClusterParameterGroup API request.
@@ -4054,7 +4112,7 @@ func (c *Redshift) ResetClusterParameterGroupRequest(input *ResetClusterParamete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetClusterParameterGroupRequest{Request: req, Input: input}
+	return ResetClusterParameterGroupRequest{Request: req, Input: input, Copy: c.ResetClusterParameterGroupRequest}
 }
 
 const opRestoreFromClusterSnapshot = "RestoreFromClusterSnapshot"
@@ -4063,6 +4121,7 @@ const opRestoreFromClusterSnapshot = "RestoreFromClusterSnapshot"
 type RestoreFromClusterSnapshotRequest struct {
 	*aws.Request
 	Input *RestoreFromClusterSnapshotInput
+	Copy  func(*RestoreFromClusterSnapshotInput) RestoreFromClusterSnapshotRequest
 }
 
 // Send marshals and sends the RestoreFromClusterSnapshot API request.
@@ -4117,7 +4176,7 @@ func (c *Redshift) RestoreFromClusterSnapshotRequest(input *RestoreFromClusterSn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreFromClusterSnapshotRequest{Request: req, Input: input}
+	return RestoreFromClusterSnapshotRequest{Request: req, Input: input, Copy: c.RestoreFromClusterSnapshotRequest}
 }
 
 const opRestoreTableFromClusterSnapshot = "RestoreTableFromClusterSnapshot"
@@ -4126,6 +4185,7 @@ const opRestoreTableFromClusterSnapshot = "RestoreTableFromClusterSnapshot"
 type RestoreTableFromClusterSnapshotRequest struct {
 	*aws.Request
 	Input *RestoreTableFromClusterSnapshotInput
+	Copy  func(*RestoreTableFromClusterSnapshotInput) RestoreTableFromClusterSnapshotRequest
 }
 
 // Send marshals and sends the RestoreTableFromClusterSnapshot API request.
@@ -4178,7 +4238,7 @@ func (c *Redshift) RestoreTableFromClusterSnapshotRequest(input *RestoreTableFro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreTableFromClusterSnapshotRequest{Request: req, Input: input}
+	return RestoreTableFromClusterSnapshotRequest{Request: req, Input: input, Copy: c.RestoreTableFromClusterSnapshotRequest}
 }
 
 const opRevokeClusterSecurityGroupIngress = "RevokeClusterSecurityGroupIngress"
@@ -4187,6 +4247,7 @@ const opRevokeClusterSecurityGroupIngress = "RevokeClusterSecurityGroupIngress"
 type RevokeClusterSecurityGroupIngressRequest struct {
 	*aws.Request
 	Input *RevokeClusterSecurityGroupIngressInput
+	Copy  func(*RevokeClusterSecurityGroupIngressInput) RevokeClusterSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the RevokeClusterSecurityGroupIngress API request.
@@ -4231,7 +4292,7 @@ func (c *Redshift) RevokeClusterSecurityGroupIngressRequest(input *RevokeCluster
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RevokeClusterSecurityGroupIngressRequest{Request: req, Input: input}
+	return RevokeClusterSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.RevokeClusterSecurityGroupIngressRequest}
 }
 
 const opRevokeSnapshotAccess = "RevokeSnapshotAccess"
@@ -4240,6 +4301,7 @@ const opRevokeSnapshotAccess = "RevokeSnapshotAccess"
 type RevokeSnapshotAccessRequest struct {
 	*aws.Request
 	Input *RevokeSnapshotAccessInput
+	Copy  func(*RevokeSnapshotAccessInput) RevokeSnapshotAccessRequest
 }
 
 // Send marshals and sends the RevokeSnapshotAccess API request.
@@ -4286,7 +4348,7 @@ func (c *Redshift) RevokeSnapshotAccessRequest(input *RevokeSnapshotAccessInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RevokeSnapshotAccessRequest{Request: req, Input: input}
+	return RevokeSnapshotAccessRequest{Request: req, Input: input, Copy: c.RevokeSnapshotAccessRequest}
 }
 
 const opRotateEncryptionKey = "RotateEncryptionKey"
@@ -4295,6 +4357,7 @@ const opRotateEncryptionKey = "RotateEncryptionKey"
 type RotateEncryptionKeyRequest struct {
 	*aws.Request
 	Input *RotateEncryptionKeyInput
+	Copy  func(*RotateEncryptionKeyInput) RotateEncryptionKeyRequest
 }
 
 // Send marshals and sends the RotateEncryptionKey API request.
@@ -4335,7 +4398,7 @@ func (c *Redshift) RotateEncryptionKeyRequest(input *RotateEncryptionKeyInput) R
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RotateEncryptionKeyRequest{Request: req, Input: input}
+	return RotateEncryptionKeyRequest{Request: req, Input: input, Copy: c.RotateEncryptionKeyRequest}
 }
 
 // Describes an AWS customer account authorized to restore a snapshot.

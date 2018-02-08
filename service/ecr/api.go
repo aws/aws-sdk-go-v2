@@ -15,6 +15,7 @@ const opBatchCheckLayerAvailability = "BatchCheckLayerAvailability"
 type BatchCheckLayerAvailabilityRequest struct {
 	*aws.Request
 	Input *BatchCheckLayerAvailabilityInput
+	Copy  func(*BatchCheckLayerAvailabilityInput) BatchCheckLayerAvailabilityRequest
 }
 
 // Send marshals and sends the BatchCheckLayerAvailability API request.
@@ -60,7 +61,7 @@ func (c *ECR) BatchCheckLayerAvailabilityRequest(input *BatchCheckLayerAvailabil
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchCheckLayerAvailabilityRequest{Request: req, Input: input}
+	return BatchCheckLayerAvailabilityRequest{Request: req, Input: input, Copy: c.BatchCheckLayerAvailabilityRequest}
 }
 
 const opBatchDeleteImage = "BatchDeleteImage"
@@ -69,6 +70,7 @@ const opBatchDeleteImage = "BatchDeleteImage"
 type BatchDeleteImageRequest struct {
 	*aws.Request
 	Input *BatchDeleteImageInput
+	Copy  func(*BatchDeleteImageInput) BatchDeleteImageRequest
 }
 
 // Send marshals and sends the BatchDeleteImage API request.
@@ -117,7 +119,7 @@ func (c *ECR) BatchDeleteImageRequest(input *BatchDeleteImageInput) BatchDeleteI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchDeleteImageRequest{Request: req, Input: input}
+	return BatchDeleteImageRequest{Request: req, Input: input, Copy: c.BatchDeleteImageRequest}
 }
 
 const opBatchGetImage = "BatchGetImage"
@@ -126,6 +128,7 @@ const opBatchGetImage = "BatchGetImage"
 type BatchGetImageRequest struct {
 	*aws.Request
 	Input *BatchGetImageInput
+	Copy  func(*BatchGetImageInput) BatchGetImageRequest
 }
 
 // Send marshals and sends the BatchGetImage API request.
@@ -167,7 +170,7 @@ func (c *ECR) BatchGetImageRequest(input *BatchGetImageInput) BatchGetImageReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetImageRequest{Request: req, Input: input}
+	return BatchGetImageRequest{Request: req, Input: input, Copy: c.BatchGetImageRequest}
 }
 
 const opCompleteLayerUpload = "CompleteLayerUpload"
@@ -176,6 +179,7 @@ const opCompleteLayerUpload = "CompleteLayerUpload"
 type CompleteLayerUploadRequest struct {
 	*aws.Request
 	Input *CompleteLayerUploadInput
+	Copy  func(*CompleteLayerUploadInput) CompleteLayerUploadRequest
 }
 
 // Send marshals and sends the CompleteLayerUpload API request.
@@ -222,7 +226,7 @@ func (c *ECR) CompleteLayerUploadRequest(input *CompleteLayerUploadInput) Comple
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CompleteLayerUploadRequest{Request: req, Input: input}
+	return CompleteLayerUploadRequest{Request: req, Input: input, Copy: c.CompleteLayerUploadRequest}
 }
 
 const opCreateRepository = "CreateRepository"
@@ -231,6 +235,7 @@ const opCreateRepository = "CreateRepository"
 type CreateRepositoryRequest struct {
 	*aws.Request
 	Input *CreateRepositoryInput
+	Copy  func(*CreateRepositoryInput) CreateRepositoryRequest
 }
 
 // Send marshals and sends the CreateRepository API request.
@@ -271,7 +276,7 @@ func (c *ECR) CreateRepositoryRequest(input *CreateRepositoryInput) CreateReposi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRepositoryRequest{Request: req, Input: input}
+	return CreateRepositoryRequest{Request: req, Input: input, Copy: c.CreateRepositoryRequest}
 }
 
 const opDeleteLifecyclePolicy = "DeleteLifecyclePolicy"
@@ -280,6 +285,7 @@ const opDeleteLifecyclePolicy = "DeleteLifecyclePolicy"
 type DeleteLifecyclePolicyRequest struct {
 	*aws.Request
 	Input *DeleteLifecyclePolicyInput
+	Copy  func(*DeleteLifecyclePolicyInput) DeleteLifecyclePolicyRequest
 }
 
 // Send marshals and sends the DeleteLifecyclePolicy API request.
@@ -320,7 +326,7 @@ func (c *ECR) DeleteLifecyclePolicyRequest(input *DeleteLifecyclePolicyInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLifecyclePolicyRequest{Request: req, Input: input}
+	return DeleteLifecyclePolicyRequest{Request: req, Input: input, Copy: c.DeleteLifecyclePolicyRequest}
 }
 
 const opDeleteRepository = "DeleteRepository"
@@ -329,6 +335,7 @@ const opDeleteRepository = "DeleteRepository"
 type DeleteRepositoryRequest struct {
 	*aws.Request
 	Input *DeleteRepositoryInput
+	Copy  func(*DeleteRepositoryInput) DeleteRepositoryRequest
 }
 
 // Send marshals and sends the DeleteRepository API request.
@@ -370,7 +377,7 @@ func (c *ECR) DeleteRepositoryRequest(input *DeleteRepositoryInput) DeleteReposi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRepositoryRequest{Request: req, Input: input}
+	return DeleteRepositoryRequest{Request: req, Input: input, Copy: c.DeleteRepositoryRequest}
 }
 
 const opDeleteRepositoryPolicy = "DeleteRepositoryPolicy"
@@ -379,6 +386,7 @@ const opDeleteRepositoryPolicy = "DeleteRepositoryPolicy"
 type DeleteRepositoryPolicyRequest struct {
 	*aws.Request
 	Input *DeleteRepositoryPolicyInput
+	Copy  func(*DeleteRepositoryPolicyInput) DeleteRepositoryPolicyRequest
 }
 
 // Send marshals and sends the DeleteRepositoryPolicy API request.
@@ -419,7 +427,7 @@ func (c *ECR) DeleteRepositoryPolicyRequest(input *DeleteRepositoryPolicyInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRepositoryPolicyRequest{Request: req, Input: input}
+	return DeleteRepositoryPolicyRequest{Request: req, Input: input, Copy: c.DeleteRepositoryPolicyRequest}
 }
 
 const opDescribeImages = "DescribeImages"
@@ -428,6 +436,7 @@ const opDescribeImages = "DescribeImages"
 type DescribeImagesRequest struct {
 	*aws.Request
 	Input *DescribeImagesInput
+	Copy  func(*DescribeImagesInput) DescribeImagesRequest
 }
 
 // Send marshals and sends the DescribeImages API request.
@@ -480,47 +489,47 @@ func (c *ECR) DescribeImagesRequest(input *DescribeImagesInput) DescribeImagesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeImagesRequest{Request: req, Input: input}
+	return DescribeImagesRequest{Request: req, Input: input, Copy: c.DescribeImagesRequest}
 }
 
-// DescribeImagesPages iterates over the pages of a DescribeImages operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeImages method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeImagesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeImages operation.
-//    pageNum := 0
-//    err := client.DescribeImagesPages(params,
-//        func(page *DescribeImagesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeImagesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeImagesRequest) Paginate(opts ...aws.Option) DescribeImagesPager {
 	return DescribeImagesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeImagesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeImagesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeImagesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeImagesPager ...
+// DescribeImagesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeImagesPager struct {
 	aws.Pager
 }
@@ -535,6 +544,7 @@ const opDescribeRepositories = "DescribeRepositories"
 type DescribeRepositoriesRequest struct {
 	*aws.Request
 	Input *DescribeRepositoriesInput
+	Copy  func(*DescribeRepositoriesInput) DescribeRepositoriesRequest
 }
 
 // Send marshals and sends the DescribeRepositories API request.
@@ -581,47 +591,47 @@ func (c *ECR) DescribeRepositoriesRequest(input *DescribeRepositoriesInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRepositoriesRequest{Request: req, Input: input}
+	return DescribeRepositoriesRequest{Request: req, Input: input, Copy: c.DescribeRepositoriesRequest}
 }
 
-// DescribeRepositoriesPages iterates over the pages of a DescribeRepositories operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeRepositories method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeRepositoriesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeRepositories operation.
-//    pageNum := 0
-//    err := client.DescribeRepositoriesPages(params,
-//        func(page *DescribeRepositoriesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeRepositoriesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeRepositoriesRequest) Paginate(opts ...aws.Option) DescribeRepositoriesPager {
 	return DescribeRepositoriesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeRepositoriesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeRepositoriesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeRepositoriesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeRepositoriesPager ...
+// DescribeRepositoriesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeRepositoriesPager struct {
 	aws.Pager
 }
@@ -636,6 +646,7 @@ const opGetAuthorizationToken = "GetAuthorizationToken"
 type GetAuthorizationTokenRequest struct {
 	*aws.Request
 	Input *GetAuthorizationTokenInput
+	Copy  func(*GetAuthorizationTokenInput) GetAuthorizationTokenRequest
 }
 
 // Send marshals and sends the GetAuthorizationToken API request.
@@ -683,7 +694,7 @@ func (c *ECR) GetAuthorizationTokenRequest(input *GetAuthorizationTokenInput) Ge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAuthorizationTokenRequest{Request: req, Input: input}
+	return GetAuthorizationTokenRequest{Request: req, Input: input, Copy: c.GetAuthorizationTokenRequest}
 }
 
 const opGetDownloadUrlForLayer = "GetDownloadUrlForLayer"
@@ -692,6 +703,7 @@ const opGetDownloadUrlForLayer = "GetDownloadUrlForLayer"
 type GetDownloadUrlForLayerRequest struct {
 	*aws.Request
 	Input *GetDownloadUrlForLayerInput
+	Copy  func(*GetDownloadUrlForLayerInput) GetDownloadUrlForLayerRequest
 }
 
 // Send marshals and sends the GetDownloadUrlForLayer API request.
@@ -737,7 +749,7 @@ func (c *ECR) GetDownloadUrlForLayerRequest(input *GetDownloadUrlForLayerInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDownloadUrlForLayerRequest{Request: req, Input: input}
+	return GetDownloadUrlForLayerRequest{Request: req, Input: input, Copy: c.GetDownloadUrlForLayerRequest}
 }
 
 const opGetLifecyclePolicy = "GetLifecyclePolicy"
@@ -746,6 +758,7 @@ const opGetLifecyclePolicy = "GetLifecyclePolicy"
 type GetLifecyclePolicyRequest struct {
 	*aws.Request
 	Input *GetLifecyclePolicyInput
+	Copy  func(*GetLifecyclePolicyInput) GetLifecyclePolicyRequest
 }
 
 // Send marshals and sends the GetLifecyclePolicy API request.
@@ -786,7 +799,7 @@ func (c *ECR) GetLifecyclePolicyRequest(input *GetLifecyclePolicyInput) GetLifec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLifecyclePolicyRequest{Request: req, Input: input}
+	return GetLifecyclePolicyRequest{Request: req, Input: input, Copy: c.GetLifecyclePolicyRequest}
 }
 
 const opGetLifecyclePolicyPreview = "GetLifecyclePolicyPreview"
@@ -795,6 +808,7 @@ const opGetLifecyclePolicyPreview = "GetLifecyclePolicyPreview"
 type GetLifecyclePolicyPreviewRequest struct {
 	*aws.Request
 	Input *GetLifecyclePolicyPreviewInput
+	Copy  func(*GetLifecyclePolicyPreviewInput) GetLifecyclePolicyPreviewRequest
 }
 
 // Send marshals and sends the GetLifecyclePolicyPreview API request.
@@ -835,7 +849,7 @@ func (c *ECR) GetLifecyclePolicyPreviewRequest(input *GetLifecyclePolicyPreviewI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLifecyclePolicyPreviewRequest{Request: req, Input: input}
+	return GetLifecyclePolicyPreviewRequest{Request: req, Input: input, Copy: c.GetLifecyclePolicyPreviewRequest}
 }
 
 const opGetRepositoryPolicy = "GetRepositoryPolicy"
@@ -844,6 +858,7 @@ const opGetRepositoryPolicy = "GetRepositoryPolicy"
 type GetRepositoryPolicyRequest struct {
 	*aws.Request
 	Input *GetRepositoryPolicyInput
+	Copy  func(*GetRepositoryPolicyInput) GetRepositoryPolicyRequest
 }
 
 // Send marshals and sends the GetRepositoryPolicy API request.
@@ -884,7 +899,7 @@ func (c *ECR) GetRepositoryPolicyRequest(input *GetRepositoryPolicyInput) GetRep
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRepositoryPolicyRequest{Request: req, Input: input}
+	return GetRepositoryPolicyRequest{Request: req, Input: input, Copy: c.GetRepositoryPolicyRequest}
 }
 
 const opInitiateLayerUpload = "InitiateLayerUpload"
@@ -893,6 +908,7 @@ const opInitiateLayerUpload = "InitiateLayerUpload"
 type InitiateLayerUploadRequest struct {
 	*aws.Request
 	Input *InitiateLayerUploadInput
+	Copy  func(*InitiateLayerUploadInput) InitiateLayerUploadRequest
 }
 
 // Send marshals and sends the InitiateLayerUpload API request.
@@ -937,7 +953,7 @@ func (c *ECR) InitiateLayerUploadRequest(input *InitiateLayerUploadInput) Initia
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InitiateLayerUploadRequest{Request: req, Input: input}
+	return InitiateLayerUploadRequest{Request: req, Input: input, Copy: c.InitiateLayerUploadRequest}
 }
 
 const opListImages = "ListImages"
@@ -946,6 +962,7 @@ const opListImages = "ListImages"
 type ListImagesRequest struct {
 	*aws.Request
 	Input *ListImagesInput
+	Copy  func(*ListImagesInput) ListImagesRequest
 }
 
 // Send marshals and sends the ListImages API request.
@@ -998,47 +1015,47 @@ func (c *ECR) ListImagesRequest(input *ListImagesInput) ListImagesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListImagesRequest{Request: req, Input: input}
+	return ListImagesRequest{Request: req, Input: input, Copy: c.ListImagesRequest}
 }
 
-// ListImagesPages iterates over the pages of a ListImages operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListImages method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListImagesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListImages operation.
-//    pageNum := 0
-//    err := client.ListImagesPages(params,
-//        func(page *ListImagesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListImagesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListImagesRequest) Paginate(opts ...aws.Option) ListImagesPager {
 	return ListImagesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListImagesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListImagesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListImagesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListImagesPager ...
+// ListImagesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListImagesPager struct {
 	aws.Pager
 }
@@ -1053,6 +1070,7 @@ const opPutImage = "PutImage"
 type PutImageRequest struct {
 	*aws.Request
 	Input *PutImageInput
+	Copy  func(*PutImageInput) PutImageRequest
 }
 
 // Send marshals and sends the PutImage API request.
@@ -1097,7 +1115,7 @@ func (c *ECR) PutImageRequest(input *PutImageInput) PutImageRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutImageRequest{Request: req, Input: input}
+	return PutImageRequest{Request: req, Input: input, Copy: c.PutImageRequest}
 }
 
 const opPutLifecyclePolicy = "PutLifecyclePolicy"
@@ -1106,6 +1124,7 @@ const opPutLifecyclePolicy = "PutLifecyclePolicy"
 type PutLifecyclePolicyRequest struct {
 	*aws.Request
 	Input *PutLifecyclePolicyInput
+	Copy  func(*PutLifecyclePolicyInput) PutLifecyclePolicyRequest
 }
 
 // Send marshals and sends the PutLifecyclePolicy API request.
@@ -1146,7 +1165,7 @@ func (c *ECR) PutLifecyclePolicyRequest(input *PutLifecyclePolicyInput) PutLifec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutLifecyclePolicyRequest{Request: req, Input: input}
+	return PutLifecyclePolicyRequest{Request: req, Input: input, Copy: c.PutLifecyclePolicyRequest}
 }
 
 const opSetRepositoryPolicy = "SetRepositoryPolicy"
@@ -1155,6 +1174,7 @@ const opSetRepositoryPolicy = "SetRepositoryPolicy"
 type SetRepositoryPolicyRequest struct {
 	*aws.Request
 	Input *SetRepositoryPolicyInput
+	Copy  func(*SetRepositoryPolicyInput) SetRepositoryPolicyRequest
 }
 
 // Send marshals and sends the SetRepositoryPolicy API request.
@@ -1195,7 +1215,7 @@ func (c *ECR) SetRepositoryPolicyRequest(input *SetRepositoryPolicyInput) SetRep
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetRepositoryPolicyRequest{Request: req, Input: input}
+	return SetRepositoryPolicyRequest{Request: req, Input: input, Copy: c.SetRepositoryPolicyRequest}
 }
 
 const opStartLifecyclePolicyPreview = "StartLifecyclePolicyPreview"
@@ -1204,6 +1224,7 @@ const opStartLifecyclePolicyPreview = "StartLifecyclePolicyPreview"
 type StartLifecyclePolicyPreviewRequest struct {
 	*aws.Request
 	Input *StartLifecyclePolicyPreviewInput
+	Copy  func(*StartLifecyclePolicyPreviewInput) StartLifecyclePolicyPreviewRequest
 }
 
 // Send marshals and sends the StartLifecyclePolicyPreview API request.
@@ -1245,7 +1266,7 @@ func (c *ECR) StartLifecyclePolicyPreviewRequest(input *StartLifecyclePolicyPrev
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartLifecyclePolicyPreviewRequest{Request: req, Input: input}
+	return StartLifecyclePolicyPreviewRequest{Request: req, Input: input, Copy: c.StartLifecyclePolicyPreviewRequest}
 }
 
 const opUploadLayerPart = "UploadLayerPart"
@@ -1254,6 +1275,7 @@ const opUploadLayerPart = "UploadLayerPart"
 type UploadLayerPartRequest struct {
 	*aws.Request
 	Input *UploadLayerPartInput
+	Copy  func(*UploadLayerPartInput) UploadLayerPartRequest
 }
 
 // Send marshals and sends the UploadLayerPart API request.
@@ -1298,7 +1320,7 @@ func (c *ECR) UploadLayerPartRequest(input *UploadLayerPartInput) UploadLayerPar
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UploadLayerPartRequest{Request: req, Input: input}
+	return UploadLayerPartRequest{Request: req, Input: input, Copy: c.UploadLayerPartRequest}
 }
 
 // An object representing authorization data for an Amazon ECR registry.

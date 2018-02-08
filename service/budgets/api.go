@@ -16,6 +16,7 @@ const opCreateBudget = "CreateBudget"
 type CreateBudgetRequest struct {
 	*aws.Request
 	Input *CreateBudgetInput
+	Copy  func(*CreateBudgetInput) CreateBudgetRequest
 }
 
 // Send marshals and sends the CreateBudget API request.
@@ -54,7 +55,7 @@ func (c *Budgets) CreateBudgetRequest(input *CreateBudgetInput) CreateBudgetRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBudgetRequest{Request: req, Input: input}
+	return CreateBudgetRequest{Request: req, Input: input, Copy: c.CreateBudgetRequest}
 }
 
 const opCreateNotification = "CreateNotification"
@@ -63,6 +64,7 @@ const opCreateNotification = "CreateNotification"
 type CreateNotificationRequest struct {
 	*aws.Request
 	Input *CreateNotificationInput
+	Copy  func(*CreateNotificationInput) CreateNotificationRequest
 }
 
 // Send marshals and sends the CreateNotification API request.
@@ -101,7 +103,7 @@ func (c *Budgets) CreateNotificationRequest(input *CreateNotificationInput) Crea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNotificationRequest{Request: req, Input: input}
+	return CreateNotificationRequest{Request: req, Input: input, Copy: c.CreateNotificationRequest}
 }
 
 const opCreateSubscriber = "CreateSubscriber"
@@ -110,6 +112,7 @@ const opCreateSubscriber = "CreateSubscriber"
 type CreateSubscriberRequest struct {
 	*aws.Request
 	Input *CreateSubscriberInput
+	Copy  func(*CreateSubscriberInput) CreateSubscriberRequest
 }
 
 // Send marshals and sends the CreateSubscriber API request.
@@ -148,7 +151,7 @@ func (c *Budgets) CreateSubscriberRequest(input *CreateSubscriberInput) CreateSu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSubscriberRequest{Request: req, Input: input}
+	return CreateSubscriberRequest{Request: req, Input: input, Copy: c.CreateSubscriberRequest}
 }
 
 const opDeleteBudget = "DeleteBudget"
@@ -157,6 +160,7 @@ const opDeleteBudget = "DeleteBudget"
 type DeleteBudgetRequest struct {
 	*aws.Request
 	Input *DeleteBudgetInput
+	Copy  func(*DeleteBudgetInput) DeleteBudgetRequest
 }
 
 // Send marshals and sends the DeleteBudget API request.
@@ -195,7 +199,7 @@ func (c *Budgets) DeleteBudgetRequest(input *DeleteBudgetInput) DeleteBudgetRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBudgetRequest{Request: req, Input: input}
+	return DeleteBudgetRequest{Request: req, Input: input, Copy: c.DeleteBudgetRequest}
 }
 
 const opDeleteNotification = "DeleteNotification"
@@ -204,6 +208,7 @@ const opDeleteNotification = "DeleteNotification"
 type DeleteNotificationRequest struct {
 	*aws.Request
 	Input *DeleteNotificationInput
+	Copy  func(*DeleteNotificationInput) DeleteNotificationRequest
 }
 
 // Send marshals and sends the DeleteNotification API request.
@@ -242,7 +247,7 @@ func (c *Budgets) DeleteNotificationRequest(input *DeleteNotificationInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNotificationRequest{Request: req, Input: input}
+	return DeleteNotificationRequest{Request: req, Input: input, Copy: c.DeleteNotificationRequest}
 }
 
 const opDeleteSubscriber = "DeleteSubscriber"
@@ -251,6 +256,7 @@ const opDeleteSubscriber = "DeleteSubscriber"
 type DeleteSubscriberRequest struct {
 	*aws.Request
 	Input *DeleteSubscriberInput
+	Copy  func(*DeleteSubscriberInput) DeleteSubscriberRequest
 }
 
 // Send marshals and sends the DeleteSubscriber API request.
@@ -289,7 +295,7 @@ func (c *Budgets) DeleteSubscriberRequest(input *DeleteSubscriberInput) DeleteSu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSubscriberRequest{Request: req, Input: input}
+	return DeleteSubscriberRequest{Request: req, Input: input, Copy: c.DeleteSubscriberRequest}
 }
 
 const opDescribeBudget = "DescribeBudget"
@@ -298,6 +304,7 @@ const opDescribeBudget = "DescribeBudget"
 type DescribeBudgetRequest struct {
 	*aws.Request
 	Input *DescribeBudgetInput
+	Copy  func(*DescribeBudgetInput) DescribeBudgetRequest
 }
 
 // Send marshals and sends the DescribeBudget API request.
@@ -336,7 +343,7 @@ func (c *Budgets) DescribeBudgetRequest(input *DescribeBudgetInput) DescribeBudg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBudgetRequest{Request: req, Input: input}
+	return DescribeBudgetRequest{Request: req, Input: input, Copy: c.DescribeBudgetRequest}
 }
 
 const opDescribeBudgets = "DescribeBudgets"
@@ -345,6 +352,7 @@ const opDescribeBudgets = "DescribeBudgets"
 type DescribeBudgetsRequest struct {
 	*aws.Request
 	Input *DescribeBudgetsInput
+	Copy  func(*DescribeBudgetsInput) DescribeBudgetsRequest
 }
 
 // Send marshals and sends the DescribeBudgets API request.
@@ -383,7 +391,7 @@ func (c *Budgets) DescribeBudgetsRequest(input *DescribeBudgetsInput) DescribeBu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBudgetsRequest{Request: req, Input: input}
+	return DescribeBudgetsRequest{Request: req, Input: input, Copy: c.DescribeBudgetsRequest}
 }
 
 const opDescribeNotificationsForBudget = "DescribeNotificationsForBudget"
@@ -392,6 +400,7 @@ const opDescribeNotificationsForBudget = "DescribeNotificationsForBudget"
 type DescribeNotificationsForBudgetRequest struct {
 	*aws.Request
 	Input *DescribeNotificationsForBudgetInput
+	Copy  func(*DescribeNotificationsForBudgetInput) DescribeNotificationsForBudgetRequest
 }
 
 // Send marshals and sends the DescribeNotificationsForBudget API request.
@@ -430,7 +439,7 @@ func (c *Budgets) DescribeNotificationsForBudgetRequest(input *DescribeNotificat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNotificationsForBudgetRequest{Request: req, Input: input}
+	return DescribeNotificationsForBudgetRequest{Request: req, Input: input, Copy: c.DescribeNotificationsForBudgetRequest}
 }
 
 const opDescribeSubscribersForNotification = "DescribeSubscribersForNotification"
@@ -439,6 +448,7 @@ const opDescribeSubscribersForNotification = "DescribeSubscribersForNotification
 type DescribeSubscribersForNotificationRequest struct {
 	*aws.Request
 	Input *DescribeSubscribersForNotificationInput
+	Copy  func(*DescribeSubscribersForNotificationInput) DescribeSubscribersForNotificationRequest
 }
 
 // Send marshals and sends the DescribeSubscribersForNotification API request.
@@ -477,7 +487,7 @@ func (c *Budgets) DescribeSubscribersForNotificationRequest(input *DescribeSubsc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSubscribersForNotificationRequest{Request: req, Input: input}
+	return DescribeSubscribersForNotificationRequest{Request: req, Input: input, Copy: c.DescribeSubscribersForNotificationRequest}
 }
 
 const opUpdateBudget = "UpdateBudget"
@@ -486,6 +496,7 @@ const opUpdateBudget = "UpdateBudget"
 type UpdateBudgetRequest struct {
 	*aws.Request
 	Input *UpdateBudgetInput
+	Copy  func(*UpdateBudgetInput) UpdateBudgetRequest
 }
 
 // Send marshals and sends the UpdateBudget API request.
@@ -524,7 +535,7 @@ func (c *Budgets) UpdateBudgetRequest(input *UpdateBudgetInput) UpdateBudgetRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateBudgetRequest{Request: req, Input: input}
+	return UpdateBudgetRequest{Request: req, Input: input, Copy: c.UpdateBudgetRequest}
 }
 
 const opUpdateNotification = "UpdateNotification"
@@ -533,6 +544,7 @@ const opUpdateNotification = "UpdateNotification"
 type UpdateNotificationRequest struct {
 	*aws.Request
 	Input *UpdateNotificationInput
+	Copy  func(*UpdateNotificationInput) UpdateNotificationRequest
 }
 
 // Send marshals and sends the UpdateNotification API request.
@@ -571,7 +583,7 @@ func (c *Budgets) UpdateNotificationRequest(input *UpdateNotificationInput) Upda
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateNotificationRequest{Request: req, Input: input}
+	return UpdateNotificationRequest{Request: req, Input: input, Copy: c.UpdateNotificationRequest}
 }
 
 const opUpdateSubscriber = "UpdateSubscriber"
@@ -580,6 +592,7 @@ const opUpdateSubscriber = "UpdateSubscriber"
 type UpdateSubscriberRequest struct {
 	*aws.Request
 	Input *UpdateSubscriberInput
+	Copy  func(*UpdateSubscriberInput) UpdateSubscriberRequest
 }
 
 // Send marshals and sends the UpdateSubscriber API request.
@@ -618,7 +631,7 @@ func (c *Budgets) UpdateSubscriberRequest(input *UpdateSubscriberInput) UpdateSu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSubscriberRequest{Request: req, Input: input}
+	return UpdateSubscriberRequest{Request: req, Input: input, Copy: c.UpdateSubscriberRequest}
 }
 
 // AWS Budget model

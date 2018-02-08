@@ -18,6 +18,7 @@ const opAbortMultipartUpload = "AbortMultipartUpload"
 type AbortMultipartUploadRequest struct {
 	*aws.Request
 	Input *AbortMultipartUploadInput
+	Copy  func(*AbortMultipartUploadInput) AbortMultipartUploadRequest
 }
 
 // Send marshals and sends the AbortMultipartUpload API request.
@@ -77,7 +78,7 @@ func (c *Glacier) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AbortMultipartUploadRequest{Request: req, Input: input}
+	return AbortMultipartUploadRequest{Request: req, Input: input, Copy: c.AbortMultipartUploadRequest}
 }
 
 const opAbortVaultLock = "AbortVaultLock"
@@ -86,6 +87,7 @@ const opAbortVaultLock = "AbortVaultLock"
 type AbortVaultLockRequest struct {
 	*aws.Request
 	Input *AbortVaultLockInput
+	Copy  func(*AbortVaultLockInput) AbortVaultLockRequest
 }
 
 // Send marshals and sends the AbortVaultLock API request.
@@ -141,7 +143,7 @@ func (c *Glacier) AbortVaultLockRequest(input *AbortVaultLockInput) AbortVaultLo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AbortVaultLockRequest{Request: req, Input: input}
+	return AbortVaultLockRequest{Request: req, Input: input, Copy: c.AbortVaultLockRequest}
 }
 
 const opAddTagsToVault = "AddTagsToVault"
@@ -150,6 +152,7 @@ const opAddTagsToVault = "AddTagsToVault"
 type AddTagsToVaultRequest struct {
 	*aws.Request
 	Input *AddTagsToVaultInput
+	Copy  func(*AddTagsToVaultInput) AddTagsToVaultRequest
 }
 
 // Send marshals and sends the AddTagsToVault API request.
@@ -195,7 +198,7 @@ func (c *Glacier) AddTagsToVaultRequest(input *AddTagsToVaultInput) AddTagsToVau
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToVaultRequest{Request: req, Input: input}
+	return AddTagsToVaultRequest{Request: req, Input: input, Copy: c.AddTagsToVaultRequest}
 }
 
 const opCompleteMultipartUpload = "CompleteMultipartUpload"
@@ -204,6 +207,7 @@ const opCompleteMultipartUpload = "CompleteMultipartUpload"
 type CompleteMultipartUploadRequest struct {
 	*aws.Request
 	Input *CompleteMultipartUploadInput
+	Copy  func(*CompleteMultipartUploadInput) CompleteMultipartUploadRequest
 }
 
 // Send marshals and sends the CompleteMultipartUpload API request.
@@ -285,7 +289,7 @@ func (c *Glacier) CompleteMultipartUploadRequest(input *CompleteMultipartUploadI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CompleteMultipartUploadRequest{Request: req, Input: input}
+	return CompleteMultipartUploadRequest{Request: req, Input: input, Copy: c.CompleteMultipartUploadRequest}
 }
 
 const opCompleteVaultLock = "CompleteVaultLock"
@@ -294,6 +298,7 @@ const opCompleteVaultLock = "CompleteVaultLock"
 type CompleteVaultLockRequest struct {
 	*aws.Request
 	Input *CompleteVaultLockInput
+	Copy  func(*CompleteVaultLockInput) CompleteVaultLockRequest
 }
 
 // Send marshals and sends the CompleteVaultLock API request.
@@ -348,7 +353,7 @@ func (c *Glacier) CompleteVaultLockRequest(input *CompleteVaultLockInput) Comple
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CompleteVaultLockRequest{Request: req, Input: input}
+	return CompleteVaultLockRequest{Request: req, Input: input, Copy: c.CompleteVaultLockRequest}
 }
 
 const opCreateVault = "CreateVault"
@@ -357,6 +362,7 @@ const opCreateVault = "CreateVault"
 type CreateVaultRequest struct {
 	*aws.Request
 	Input *CreateVaultInput
+	Copy  func(*CreateVaultInput) CreateVaultRequest
 }
 
 // Send marshals and sends the CreateVault API request.
@@ -418,7 +424,7 @@ func (c *Glacier) CreateVaultRequest(input *CreateVaultInput) CreateVaultRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVaultRequest{Request: req, Input: input}
+	return CreateVaultRequest{Request: req, Input: input, Copy: c.CreateVaultRequest}
 }
 
 const opDeleteArchive = "DeleteArchive"
@@ -427,6 +433,7 @@ const opDeleteArchive = "DeleteArchive"
 type DeleteArchiveRequest struct {
 	*aws.Request
 	Input *DeleteArchiveInput
+	Copy  func(*DeleteArchiveInput) DeleteArchiveRequest
 }
 
 // Send marshals and sends the DeleteArchive API request.
@@ -491,7 +498,7 @@ func (c *Glacier) DeleteArchiveRequest(input *DeleteArchiveInput) DeleteArchiveR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteArchiveRequest{Request: req, Input: input}
+	return DeleteArchiveRequest{Request: req, Input: input, Copy: c.DeleteArchiveRequest}
 }
 
 const opDeleteVault = "DeleteVault"
@@ -500,6 +507,7 @@ const opDeleteVault = "DeleteVault"
 type DeleteVaultRequest struct {
 	*aws.Request
 	Input *DeleteVaultInput
+	Copy  func(*DeleteVaultInput) DeleteVaultRequest
 }
 
 // Send marshals and sends the DeleteVault API request.
@@ -562,7 +570,7 @@ func (c *Glacier) DeleteVaultRequest(input *DeleteVaultInput) DeleteVaultRequest
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVaultRequest{Request: req, Input: input}
+	return DeleteVaultRequest{Request: req, Input: input, Copy: c.DeleteVaultRequest}
 }
 
 const opDeleteVaultAccessPolicy = "DeleteVaultAccessPolicy"
@@ -571,6 +579,7 @@ const opDeleteVaultAccessPolicy = "DeleteVaultAccessPolicy"
 type DeleteVaultAccessPolicyRequest struct {
 	*aws.Request
 	Input *DeleteVaultAccessPolicyInput
+	Copy  func(*DeleteVaultAccessPolicyInput) DeleteVaultAccessPolicyRequest
 }
 
 // Send marshals and sends the DeleteVaultAccessPolicy API request.
@@ -620,7 +629,7 @@ func (c *Glacier) DeleteVaultAccessPolicyRequest(input *DeleteVaultAccessPolicyI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVaultAccessPolicyRequest{Request: req, Input: input}
+	return DeleteVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.DeleteVaultAccessPolicyRequest}
 }
 
 const opDeleteVaultNotifications = "DeleteVaultNotifications"
@@ -629,6 +638,7 @@ const opDeleteVaultNotifications = "DeleteVaultNotifications"
 type DeleteVaultNotificationsRequest struct {
 	*aws.Request
 	Input *DeleteVaultNotificationsInput
+	Copy  func(*DeleteVaultNotificationsInput) DeleteVaultNotificationsRequest
 }
 
 // Send marshals and sends the DeleteVaultNotifications API request.
@@ -683,7 +693,7 @@ func (c *Glacier) DeleteVaultNotificationsRequest(input *DeleteVaultNotification
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVaultNotificationsRequest{Request: req, Input: input}
+	return DeleteVaultNotificationsRequest{Request: req, Input: input, Copy: c.DeleteVaultNotificationsRequest}
 }
 
 const opDescribeJob = "DescribeJob"
@@ -692,6 +702,7 @@ const opDescribeJob = "DescribeJob"
 type DescribeJobRequest struct {
 	*aws.Request
 	Input *DescribeJobInput
+	Copy  func(*DescribeJobInput) DescribeJobRequest
 }
 
 // Send marshals and sends the DescribeJob API request.
@@ -751,7 +762,7 @@ func (c *Glacier) DescribeJobRequest(input *DescribeJobInput) DescribeJobRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeJobRequest{Request: req, Input: input}
+	return DescribeJobRequest{Request: req, Input: input, Copy: c.DescribeJobRequest}
 }
 
 const opDescribeVault = "DescribeVault"
@@ -760,6 +771,7 @@ const opDescribeVault = "DescribeVault"
 type DescribeVaultRequest struct {
 	*aws.Request
 	Input *DescribeVaultInput
+	Copy  func(*DescribeVaultInput) DescribeVaultRequest
 }
 
 // Send marshals and sends the DescribeVault API request.
@@ -817,7 +829,7 @@ func (c *Glacier) DescribeVaultRequest(input *DescribeVaultInput) DescribeVaultR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVaultRequest{Request: req, Input: input}
+	return DescribeVaultRequest{Request: req, Input: input, Copy: c.DescribeVaultRequest}
 }
 
 const opGetDataRetrievalPolicy = "GetDataRetrievalPolicy"
@@ -826,6 +838,7 @@ const opGetDataRetrievalPolicy = "GetDataRetrievalPolicy"
 type GetDataRetrievalPolicyRequest struct {
 	*aws.Request
 	Input *GetDataRetrievalPolicyInput
+	Copy  func(*GetDataRetrievalPolicyInput) GetDataRetrievalPolicyRequest
 }
 
 // Send marshals and sends the GetDataRetrievalPolicy API request.
@@ -866,7 +879,7 @@ func (c *Glacier) GetDataRetrievalPolicyRequest(input *GetDataRetrievalPolicyInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDataRetrievalPolicyRequest{Request: req, Input: input}
+	return GetDataRetrievalPolicyRequest{Request: req, Input: input, Copy: c.GetDataRetrievalPolicyRequest}
 }
 
 const opGetJobOutput = "GetJobOutput"
@@ -875,6 +888,7 @@ const opGetJobOutput = "GetJobOutput"
 type GetJobOutputRequest struct {
 	*aws.Request
 	Input *GetJobOutputInput
+	Copy  func(*GetJobOutputInput) GetJobOutputRequest
 }
 
 // Send marshals and sends the GetJobOutput API request.
@@ -956,7 +970,7 @@ func (c *Glacier) GetJobOutputRequest(input *GetJobOutputInput) GetJobOutputRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobOutputRequest{Request: req, Input: input}
+	return GetJobOutputRequest{Request: req, Input: input, Copy: c.GetJobOutputRequest}
 }
 
 const opGetVaultAccessPolicy = "GetVaultAccessPolicy"
@@ -965,6 +979,7 @@ const opGetVaultAccessPolicy = "GetVaultAccessPolicy"
 type GetVaultAccessPolicyRequest struct {
 	*aws.Request
 	Input *GetVaultAccessPolicyInput
+	Copy  func(*GetVaultAccessPolicyInput) GetVaultAccessPolicyRequest
 }
 
 // Send marshals and sends the GetVaultAccessPolicy API request.
@@ -1008,7 +1023,7 @@ func (c *Glacier) GetVaultAccessPolicyRequest(input *GetVaultAccessPolicyInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetVaultAccessPolicyRequest{Request: req, Input: input}
+	return GetVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.GetVaultAccessPolicyRequest}
 }
 
 const opGetVaultLock = "GetVaultLock"
@@ -1017,6 +1032,7 @@ const opGetVaultLock = "GetVaultLock"
 type GetVaultLockRequest struct {
 	*aws.Request
 	Input *GetVaultLockInput
+	Copy  func(*GetVaultLockInput) GetVaultLockRequest
 }
 
 // Send marshals and sends the GetVaultLock API request.
@@ -1074,7 +1090,7 @@ func (c *Glacier) GetVaultLockRequest(input *GetVaultLockInput) GetVaultLockRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetVaultLockRequest{Request: req, Input: input}
+	return GetVaultLockRequest{Request: req, Input: input, Copy: c.GetVaultLockRequest}
 }
 
 const opGetVaultNotifications = "GetVaultNotifications"
@@ -1083,6 +1099,7 @@ const opGetVaultNotifications = "GetVaultNotifications"
 type GetVaultNotificationsRequest struct {
 	*aws.Request
 	Input *GetVaultNotificationsInput
+	Copy  func(*GetVaultNotificationsInput) GetVaultNotificationsRequest
 }
 
 // Send marshals and sends the GetVaultNotifications API request.
@@ -1139,7 +1156,7 @@ func (c *Glacier) GetVaultNotificationsRequest(input *GetVaultNotificationsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetVaultNotificationsRequest{Request: req, Input: input}
+	return GetVaultNotificationsRequest{Request: req, Input: input, Copy: c.GetVaultNotificationsRequest}
 }
 
 const opInitiateJob = "InitiateJob"
@@ -1148,6 +1165,7 @@ const opInitiateJob = "InitiateJob"
 type InitiateJobRequest struct {
 	*aws.Request
 	Input *InitiateJobInput
+	Copy  func(*InitiateJobInput) InitiateJobRequest
 }
 
 // Send marshals and sends the InitiateJob API request.
@@ -1189,7 +1207,7 @@ func (c *Glacier) InitiateJobRequest(input *InitiateJobInput) InitiateJobRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InitiateJobRequest{Request: req, Input: input}
+	return InitiateJobRequest{Request: req, Input: input, Copy: c.InitiateJobRequest}
 }
 
 const opInitiateMultipartUpload = "InitiateMultipartUpload"
@@ -1198,6 +1216,7 @@ const opInitiateMultipartUpload = "InitiateMultipartUpload"
 type InitiateMultipartUploadRequest struct {
 	*aws.Request
 	Input *InitiateMultipartUploadInput
+	Copy  func(*InitiateMultipartUploadInput) InitiateMultipartUploadRequest
 }
 
 // Send marshals and sends the InitiateMultipartUpload API request.
@@ -1270,7 +1289,7 @@ func (c *Glacier) InitiateMultipartUploadRequest(input *InitiateMultipartUploadI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InitiateMultipartUploadRequest{Request: req, Input: input}
+	return InitiateMultipartUploadRequest{Request: req, Input: input, Copy: c.InitiateMultipartUploadRequest}
 }
 
 const opInitiateVaultLock = "InitiateVaultLock"
@@ -1279,6 +1298,7 @@ const opInitiateVaultLock = "InitiateVaultLock"
 type InitiateVaultLockRequest struct {
 	*aws.Request
 	Input *InitiateVaultLockInput
+	Copy  func(*InitiateVaultLockInput) InitiateVaultLockRequest
 }
 
 // Send marshals and sends the InitiateVaultLock API request.
@@ -1345,7 +1365,7 @@ func (c *Glacier) InitiateVaultLockRequest(input *InitiateVaultLockInput) Initia
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InitiateVaultLockRequest{Request: req, Input: input}
+	return InitiateVaultLockRequest{Request: req, Input: input, Copy: c.InitiateVaultLockRequest}
 }
 
 const opListJobs = "ListJobs"
@@ -1354,6 +1374,7 @@ const opListJobs = "ListJobs"
 type ListJobsRequest struct {
 	*aws.Request
 	Input *ListJobsInput
+	Copy  func(*ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -1433,47 +1454,47 @@ func (c *Glacier) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobsRequest{Request: req, Input: input}
+	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
-// ListJobsPages iterates over the pages of a ListJobs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListJobs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListJobs operation.
-//    pageNum := 0
-//    err := client.ListJobsPages(params,
-//        func(page *ListJobsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListJobsRequest) Paginate(opts ...aws.Option) ListJobsPager {
 	return ListJobsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListJobsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListJobsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListJobsPager ...
+// ListJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListJobsPager struct {
 	aws.Pager
 }
@@ -1488,6 +1509,7 @@ const opListMultipartUploads = "ListMultipartUploads"
 type ListMultipartUploadsRequest struct {
 	*aws.Request
 	Input *ListMultipartUploadsInput
+	Copy  func(*ListMultipartUploadsInput) ListMultipartUploadsRequest
 }
 
 // Send marshals and sends the ListMultipartUploads API request.
@@ -1561,47 +1583,47 @@ func (c *Glacier) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListMultipartUploadsRequest{Request: req, Input: input}
+	return ListMultipartUploadsRequest{Request: req, Input: input, Copy: c.ListMultipartUploadsRequest}
 }
 
-// ListMultipartUploadsPages iterates over the pages of a ListMultipartUploads operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListMultipartUploads method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListMultipartUploadsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListMultipartUploads operation.
-//    pageNum := 0
-//    err := client.ListMultipartUploadsPages(params,
-//        func(page *ListMultipartUploadsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListMultipartUploadsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListMultipartUploadsRequest) Paginate(opts ...aws.Option) ListMultipartUploadsPager {
 	return ListMultipartUploadsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListMultipartUploadsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListMultipartUploadsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListMultipartUploadsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListMultipartUploadsPager ...
+// ListMultipartUploadsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListMultipartUploadsPager struct {
 	aws.Pager
 }
@@ -1616,6 +1638,7 @@ const opListParts = "ListParts"
 type ListPartsRequest struct {
 	*aws.Request
 	Input *ListPartsInput
+	Copy  func(*ListPartsInput) ListPartsRequest
 }
 
 // Send marshals and sends the ListParts API request.
@@ -1683,47 +1706,47 @@ func (c *Glacier) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPartsRequest{Request: req, Input: input}
+	return ListPartsRequest{Request: req, Input: input, Copy: c.ListPartsRequest}
 }
 
-// ListPartsPages iterates over the pages of a ListParts operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListParts method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPartsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListParts operation.
-//    pageNum := 0
-//    err := client.ListPartsPages(params,
-//        func(page *ListPartsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPartsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListPartsRequest) Paginate(opts ...aws.Option) ListPartsPager {
 	return ListPartsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPartsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPartsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListPartsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListPartsPager ...
+// ListPartsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListPartsPager struct {
 	aws.Pager
 }
@@ -1738,6 +1761,7 @@ const opListProvisionedCapacity = "ListProvisionedCapacity"
 type ListProvisionedCapacityRequest struct {
 	*aws.Request
 	Input *ListProvisionedCapacityInput
+	Copy  func(*ListProvisionedCapacityInput) ListProvisionedCapacityRequest
 }
 
 // Send marshals and sends the ListProvisionedCapacity API request.
@@ -1777,7 +1801,7 @@ func (c *Glacier) ListProvisionedCapacityRequest(input *ListProvisionedCapacityI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListProvisionedCapacityRequest{Request: req, Input: input}
+	return ListProvisionedCapacityRequest{Request: req, Input: input, Copy: c.ListProvisionedCapacityRequest}
 }
 
 const opListTagsForVault = "ListTagsForVault"
@@ -1786,6 +1810,7 @@ const opListTagsForVault = "ListTagsForVault"
 type ListTagsForVaultRequest struct {
 	*aws.Request
 	Input *ListTagsForVaultInput
+	Copy  func(*ListTagsForVaultInput) ListTagsForVaultRequest
 }
 
 // Send marshals and sends the ListTagsForVault API request.
@@ -1826,7 +1851,7 @@ func (c *Glacier) ListTagsForVaultRequest(input *ListTagsForVaultInput) ListTags
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForVaultRequest{Request: req, Input: input}
+	return ListTagsForVaultRequest{Request: req, Input: input, Copy: c.ListTagsForVaultRequest}
 }
 
 const opListVaults = "ListVaults"
@@ -1835,6 +1860,7 @@ const opListVaults = "ListVaults"
 type ListVaultsRequest struct {
 	*aws.Request
 	Input *ListVaultsInput
+	Copy  func(*ListVaultsInput) ListVaultsRequest
 }
 
 // Send marshals and sends the ListVaults API request.
@@ -1899,47 +1925,47 @@ func (c *Glacier) ListVaultsRequest(input *ListVaultsInput) ListVaultsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListVaultsRequest{Request: req, Input: input}
+	return ListVaultsRequest{Request: req, Input: input, Copy: c.ListVaultsRequest}
 }
 
-// ListVaultsPages iterates over the pages of a ListVaults operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListVaults method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListVaultsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListVaults operation.
-//    pageNum := 0
-//    err := client.ListVaultsPages(params,
-//        func(page *ListVaultsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListVaultsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListVaultsRequest) Paginate(opts ...aws.Option) ListVaultsPager {
 	return ListVaultsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListVaultsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListVaultsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListVaultsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListVaultsPager ...
+// ListVaultsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListVaultsPager struct {
 	aws.Pager
 }
@@ -1954,6 +1980,7 @@ const opPurchaseProvisionedCapacity = "PurchaseProvisionedCapacity"
 type PurchaseProvisionedCapacityRequest struct {
 	*aws.Request
 	Input *PurchaseProvisionedCapacityInput
+	Copy  func(*PurchaseProvisionedCapacityInput) PurchaseProvisionedCapacityRequest
 }
 
 // Send marshals and sends the PurchaseProvisionedCapacity API request.
@@ -1992,7 +2019,7 @@ func (c *Glacier) PurchaseProvisionedCapacityRequest(input *PurchaseProvisionedC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PurchaseProvisionedCapacityRequest{Request: req, Input: input}
+	return PurchaseProvisionedCapacityRequest{Request: req, Input: input, Copy: c.PurchaseProvisionedCapacityRequest}
 }
 
 const opRemoveTagsFromVault = "RemoveTagsFromVault"
@@ -2001,6 +2028,7 @@ const opRemoveTagsFromVault = "RemoveTagsFromVault"
 type RemoveTagsFromVaultRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromVaultInput
+	Copy  func(*RemoveTagsFromVaultInput) RemoveTagsFromVaultRequest
 }
 
 // Send marshals and sends the RemoveTagsFromVault API request.
@@ -2045,7 +2073,7 @@ func (c *Glacier) RemoveTagsFromVaultRequest(input *RemoveTagsFromVaultInput) Re
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromVaultRequest{Request: req, Input: input}
+	return RemoveTagsFromVaultRequest{Request: req, Input: input, Copy: c.RemoveTagsFromVaultRequest}
 }
 
 const opSetDataRetrievalPolicy = "SetDataRetrievalPolicy"
@@ -2054,6 +2082,7 @@ const opSetDataRetrievalPolicy = "SetDataRetrievalPolicy"
 type SetDataRetrievalPolicyRequest struct {
 	*aws.Request
 	Input *SetDataRetrievalPolicyInput
+	Copy  func(*SetDataRetrievalPolicyInput) SetDataRetrievalPolicyRequest
 }
 
 // Send marshals and sends the SetDataRetrievalPolicy API request.
@@ -2100,7 +2129,7 @@ func (c *Glacier) SetDataRetrievalPolicyRequest(input *SetDataRetrievalPolicyInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetDataRetrievalPolicyRequest{Request: req, Input: input}
+	return SetDataRetrievalPolicyRequest{Request: req, Input: input, Copy: c.SetDataRetrievalPolicyRequest}
 }
 
 const opSetVaultAccessPolicy = "SetVaultAccessPolicy"
@@ -2109,6 +2138,7 @@ const opSetVaultAccessPolicy = "SetVaultAccessPolicy"
 type SetVaultAccessPolicyRequest struct {
 	*aws.Request
 	Input *SetVaultAccessPolicyInput
+	Copy  func(*SetVaultAccessPolicyInput) SetVaultAccessPolicyRequest
 }
 
 // Send marshals and sends the SetVaultAccessPolicy API request.
@@ -2155,7 +2185,7 @@ func (c *Glacier) SetVaultAccessPolicyRequest(input *SetVaultAccessPolicyInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetVaultAccessPolicyRequest{Request: req, Input: input}
+	return SetVaultAccessPolicyRequest{Request: req, Input: input, Copy: c.SetVaultAccessPolicyRequest}
 }
 
 const opSetVaultNotifications = "SetVaultNotifications"
@@ -2164,6 +2194,7 @@ const opSetVaultNotifications = "SetVaultNotifications"
 type SetVaultNotificationsRequest struct {
 	*aws.Request
 	Input *SetVaultNotificationsInput
+	Copy  func(*SetVaultNotificationsInput) SetVaultNotificationsRequest
 }
 
 // Send marshals and sends the SetVaultNotifications API request.
@@ -2235,7 +2266,7 @@ func (c *Glacier) SetVaultNotificationsRequest(input *SetVaultNotificationsInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetVaultNotificationsRequest{Request: req, Input: input}
+	return SetVaultNotificationsRequest{Request: req, Input: input, Copy: c.SetVaultNotificationsRequest}
 }
 
 const opUploadArchive = "UploadArchive"
@@ -2244,6 +2275,7 @@ const opUploadArchive = "UploadArchive"
 type UploadArchiveRequest struct {
 	*aws.Request
 	Input *UploadArchiveInput
+	Copy  func(*UploadArchiveInput) UploadArchiveRequest
 }
 
 // Send marshals and sends the UploadArchive API request.
@@ -2317,7 +2349,7 @@ func (c *Glacier) UploadArchiveRequest(input *UploadArchiveInput) UploadArchiveR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UploadArchiveRequest{Request: req, Input: input}
+	return UploadArchiveRequest{Request: req, Input: input, Copy: c.UploadArchiveRequest}
 }
 
 const opUploadMultipartPart = "UploadMultipartPart"
@@ -2326,6 +2358,7 @@ const opUploadMultipartPart = "UploadMultipartPart"
 type UploadMultipartPartRequest struct {
 	*aws.Request
 	Input *UploadMultipartPartInput
+	Copy  func(*UploadMultipartPartInput) UploadMultipartPartRequest
 }
 
 // Send marshals and sends the UploadMultipartPart API request.
@@ -2409,7 +2442,7 @@ func (c *Glacier) UploadMultipartPartRequest(input *UploadMultipartPartInput) Up
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UploadMultipartPartRequest{Request: req, Input: input}
+	return UploadMultipartPartRequest{Request: req, Input: input, Copy: c.UploadMultipartPartRequest}
 }
 
 // Provides options to abort a multipart upload identified by the upload ID.

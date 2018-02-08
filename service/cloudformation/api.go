@@ -18,6 +18,7 @@ const opCancelUpdateStack = "CancelUpdateStack"
 type CancelUpdateStackRequest struct {
 	*aws.Request
 	Input *CancelUpdateStackInput
+	Copy  func(*CancelUpdateStackInput) CancelUpdateStackRequest
 }
 
 // Send marshals and sends the CancelUpdateStack API request.
@@ -63,7 +64,7 @@ func (c *CloudFormation) CancelUpdateStackRequest(input *CancelUpdateStackInput)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelUpdateStackRequest{Request: req, Input: input}
+	return CancelUpdateStackRequest{Request: req, Input: input, Copy: c.CancelUpdateStackRequest}
 }
 
 const opContinueUpdateRollback = "ContinueUpdateRollback"
@@ -72,6 +73,7 @@ const opContinueUpdateRollback = "ContinueUpdateRollback"
 type ContinueUpdateRollbackRequest struct {
 	*aws.Request
 	Input *ContinueUpdateRollbackInput
+	Copy  func(*ContinueUpdateRollbackInput) ContinueUpdateRollbackRequest
 }
 
 // Send marshals and sends the ContinueUpdateRollback API request.
@@ -124,7 +126,7 @@ func (c *CloudFormation) ContinueUpdateRollbackRequest(input *ContinueUpdateRoll
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ContinueUpdateRollbackRequest{Request: req, Input: input}
+	return ContinueUpdateRollbackRequest{Request: req, Input: input, Copy: c.ContinueUpdateRollbackRequest}
 }
 
 const opCreateChangeSet = "CreateChangeSet"
@@ -133,6 +135,7 @@ const opCreateChangeSet = "CreateChangeSet"
 type CreateChangeSetRequest struct {
 	*aws.Request
 	Input *CreateChangeSetInput
+	Copy  func(*CreateChangeSetInput) CreateChangeSetRequest
 }
 
 // Send marshals and sends the CreateChangeSet API request.
@@ -193,7 +196,7 @@ func (c *CloudFormation) CreateChangeSetRequest(input *CreateChangeSetInput) Cre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateChangeSetRequest{Request: req, Input: input}
+	return CreateChangeSetRequest{Request: req, Input: input, Copy: c.CreateChangeSetRequest}
 }
 
 const opCreateStack = "CreateStack"
@@ -202,6 +205,7 @@ const opCreateStack = "CreateStack"
 type CreateStackRequest struct {
 	*aws.Request
 	Input *CreateStackInput
+	Copy  func(*CreateStackInput) CreateStackRequest
 }
 
 // Send marshals and sends the CreateStack API request.
@@ -244,7 +248,7 @@ func (c *CloudFormation) CreateStackRequest(input *CreateStackInput) CreateStack
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStackRequest{Request: req, Input: input}
+	return CreateStackRequest{Request: req, Input: input, Copy: c.CreateStackRequest}
 }
 
 const opCreateStackInstances = "CreateStackInstances"
@@ -253,6 +257,7 @@ const opCreateStackInstances = "CreateStackInstances"
 type CreateStackInstancesRequest struct {
 	*aws.Request
 	Input *CreateStackInstancesInput
+	Copy  func(*CreateStackInstancesInput) CreateStackInstancesRequest
 }
 
 // Send marshals and sends the CreateStackInstances API request.
@@ -296,7 +301,7 @@ func (c *CloudFormation) CreateStackInstancesRequest(input *CreateStackInstances
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStackInstancesRequest{Request: req, Input: input}
+	return CreateStackInstancesRequest{Request: req, Input: input, Copy: c.CreateStackInstancesRequest}
 }
 
 const opCreateStackSet = "CreateStackSet"
@@ -305,6 +310,7 @@ const opCreateStackSet = "CreateStackSet"
 type CreateStackSetRequest struct {
 	*aws.Request
 	Input *CreateStackSetInput
+	Copy  func(*CreateStackSetInput) CreateStackSetRequest
 }
 
 // Send marshals and sends the CreateStackSet API request.
@@ -345,7 +351,7 @@ func (c *CloudFormation) CreateStackSetRequest(input *CreateStackSetInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStackSetRequest{Request: req, Input: input}
+	return CreateStackSetRequest{Request: req, Input: input, Copy: c.CreateStackSetRequest}
 }
 
 const opDeleteChangeSet = "DeleteChangeSet"
@@ -354,6 +360,7 @@ const opDeleteChangeSet = "DeleteChangeSet"
 type DeleteChangeSetRequest struct {
 	*aws.Request
 	Input *DeleteChangeSetInput
+	Copy  func(*DeleteChangeSetInput) DeleteChangeSetRequest
 }
 
 // Send marshals and sends the DeleteChangeSet API request.
@@ -398,7 +405,7 @@ func (c *CloudFormation) DeleteChangeSetRequest(input *DeleteChangeSetInput) Del
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteChangeSetRequest{Request: req, Input: input}
+	return DeleteChangeSetRequest{Request: req, Input: input, Copy: c.DeleteChangeSetRequest}
 }
 
 const opDeleteStack = "DeleteStack"
@@ -407,6 +414,7 @@ const opDeleteStack = "DeleteStack"
 type DeleteStackRequest struct {
 	*aws.Request
 	Input *DeleteStackInput
+	Copy  func(*DeleteStackInput) DeleteStackRequest
 }
 
 // Send marshals and sends the DeleteStack API request.
@@ -451,7 +459,7 @@ func (c *CloudFormation) DeleteStackRequest(input *DeleteStackInput) DeleteStack
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStackRequest{Request: req, Input: input}
+	return DeleteStackRequest{Request: req, Input: input, Copy: c.DeleteStackRequest}
 }
 
 const opDeleteStackInstances = "DeleteStackInstances"
@@ -460,6 +468,7 @@ const opDeleteStackInstances = "DeleteStackInstances"
 type DeleteStackInstancesRequest struct {
 	*aws.Request
 	Input *DeleteStackInstancesInput
+	Copy  func(*DeleteStackInstancesInput) DeleteStackInstancesRequest
 }
 
 // Send marshals and sends the DeleteStackInstances API request.
@@ -500,7 +509,7 @@ func (c *CloudFormation) DeleteStackInstancesRequest(input *DeleteStackInstances
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStackInstancesRequest{Request: req, Input: input}
+	return DeleteStackInstancesRequest{Request: req, Input: input, Copy: c.DeleteStackInstancesRequest}
 }
 
 const opDeleteStackSet = "DeleteStackSet"
@@ -509,6 +518,7 @@ const opDeleteStackSet = "DeleteStackSet"
 type DeleteStackSetRequest struct {
 	*aws.Request
 	Input *DeleteStackSetInput
+	Copy  func(*DeleteStackSetInput) DeleteStackSetRequest
 }
 
 // Send marshals and sends the DeleteStackSet API request.
@@ -551,7 +561,7 @@ func (c *CloudFormation) DeleteStackSetRequest(input *DeleteStackSetInput) Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStackSetRequest{Request: req, Input: input}
+	return DeleteStackSetRequest{Request: req, Input: input, Copy: c.DeleteStackSetRequest}
 }
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
@@ -560,6 +570,7 @@ const opDescribeAccountLimits = "DescribeAccountLimits"
 type DescribeAccountLimitsRequest struct {
 	*aws.Request
 	Input *DescribeAccountLimitsInput
+	Copy  func(*DescribeAccountLimitsInput) DescribeAccountLimitsRequest
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
@@ -601,7 +612,7 @@ func (c *CloudFormation) DescribeAccountLimitsRequest(input *DescribeAccountLimi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAccountLimitsRequest{Request: req, Input: input}
+	return DescribeAccountLimitsRequest{Request: req, Input: input, Copy: c.DescribeAccountLimitsRequest}
 }
 
 const opDescribeChangeSet = "DescribeChangeSet"
@@ -610,6 +621,7 @@ const opDescribeChangeSet = "DescribeChangeSet"
 type DescribeChangeSetRequest struct {
 	*aws.Request
 	Input *DescribeChangeSetInput
+	Copy  func(*DescribeChangeSetInput) DescribeChangeSetRequest
 }
 
 // Send marshals and sends the DescribeChangeSet API request.
@@ -653,7 +665,7 @@ func (c *CloudFormation) DescribeChangeSetRequest(input *DescribeChangeSetInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeChangeSetRequest{Request: req, Input: input}
+	return DescribeChangeSetRequest{Request: req, Input: input, Copy: c.DescribeChangeSetRequest}
 }
 
 const opDescribeStackEvents = "DescribeStackEvents"
@@ -662,6 +674,7 @@ const opDescribeStackEvents = "DescribeStackEvents"
 type DescribeStackEventsRequest struct {
 	*aws.Request
 	Input *DescribeStackEventsInput
+	Copy  func(*DescribeStackEventsInput) DescribeStackEventsRequest
 }
 
 // Send marshals and sends the DescribeStackEvents API request.
@@ -713,47 +726,47 @@ func (c *CloudFormation) DescribeStackEventsRequest(input *DescribeStackEventsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStackEventsRequest{Request: req, Input: input}
+	return DescribeStackEventsRequest{Request: req, Input: input, Copy: c.DescribeStackEventsRequest}
 }
 
-// DescribeStackEventsPages iterates over the pages of a DescribeStackEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeStackEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeStackEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeStackEvents operation.
-//    pageNum := 0
-//    err := client.DescribeStackEventsPages(params,
-//        func(page *DescribeStackEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeStackEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeStackEventsRequest) Paginate(opts ...aws.Option) DescribeStackEventsPager {
 	return DescribeStackEventsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeStackEventsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeStackEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeStackEventsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeStackEventsPager ...
+// DescribeStackEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeStackEventsPager struct {
 	aws.Pager
 }
@@ -768,6 +781,7 @@ const opDescribeStackInstance = "DescribeStackInstance"
 type DescribeStackInstanceRequest struct {
 	*aws.Request
 	Input *DescribeStackInstanceInput
+	Copy  func(*DescribeStackInstanceInput) DescribeStackInstanceRequest
 }
 
 // Send marshals and sends the DescribeStackInstance API request.
@@ -812,7 +826,7 @@ func (c *CloudFormation) DescribeStackInstanceRequest(input *DescribeStackInstan
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStackInstanceRequest{Request: req, Input: input}
+	return DescribeStackInstanceRequest{Request: req, Input: input, Copy: c.DescribeStackInstanceRequest}
 }
 
 const opDescribeStackResource = "DescribeStackResource"
@@ -821,6 +835,7 @@ const opDescribeStackResource = "DescribeStackResource"
 type DescribeStackResourceRequest struct {
 	*aws.Request
 	Input *DescribeStackResourceInput
+	Copy  func(*DescribeStackResourceInput) DescribeStackResourceRequest
 }
 
 // Send marshals and sends the DescribeStackResource API request.
@@ -864,7 +879,7 @@ func (c *CloudFormation) DescribeStackResourceRequest(input *DescribeStackResour
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStackResourceRequest{Request: req, Input: input}
+	return DescribeStackResourceRequest{Request: req, Input: input, Copy: c.DescribeStackResourceRequest}
 }
 
 const opDescribeStackResources = "DescribeStackResources"
@@ -873,6 +888,7 @@ const opDescribeStackResources = "DescribeStackResources"
 type DescribeStackResourcesRequest struct {
 	*aws.Request
 	Input *DescribeStackResourcesInput
+	Copy  func(*DescribeStackResourcesInput) DescribeStackResourcesRequest
 }
 
 // Send marshals and sends the DescribeStackResources API request.
@@ -930,7 +946,7 @@ func (c *CloudFormation) DescribeStackResourcesRequest(input *DescribeStackResou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStackResourcesRequest{Request: req, Input: input}
+	return DescribeStackResourcesRequest{Request: req, Input: input, Copy: c.DescribeStackResourcesRequest}
 }
 
 const opDescribeStackSet = "DescribeStackSet"
@@ -939,6 +955,7 @@ const opDescribeStackSet = "DescribeStackSet"
 type DescribeStackSetRequest struct {
 	*aws.Request
 	Input *DescribeStackSetInput
+	Copy  func(*DescribeStackSetInput) DescribeStackSetRequest
 }
 
 // Send marshals and sends the DescribeStackSet API request.
@@ -979,7 +996,7 @@ func (c *CloudFormation) DescribeStackSetRequest(input *DescribeStackSetInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStackSetRequest{Request: req, Input: input}
+	return DescribeStackSetRequest{Request: req, Input: input, Copy: c.DescribeStackSetRequest}
 }
 
 const opDescribeStackSetOperation = "DescribeStackSetOperation"
@@ -988,6 +1005,7 @@ const opDescribeStackSetOperation = "DescribeStackSetOperation"
 type DescribeStackSetOperationRequest struct {
 	*aws.Request
 	Input *DescribeStackSetOperationInput
+	Copy  func(*DescribeStackSetOperationInput) DescribeStackSetOperationRequest
 }
 
 // Send marshals and sends the DescribeStackSetOperation API request.
@@ -1028,7 +1046,7 @@ func (c *CloudFormation) DescribeStackSetOperationRequest(input *DescribeStackSe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStackSetOperationRequest{Request: req, Input: input}
+	return DescribeStackSetOperationRequest{Request: req, Input: input, Copy: c.DescribeStackSetOperationRequest}
 }
 
 const opDescribeStacks = "DescribeStacks"
@@ -1037,6 +1055,7 @@ const opDescribeStacks = "DescribeStacks"
 type DescribeStacksRequest struct {
 	*aws.Request
 	Input *DescribeStacksInput
+	Copy  func(*DescribeStacksInput) DescribeStacksRequest
 }
 
 // Send marshals and sends the DescribeStacks API request.
@@ -1086,47 +1105,47 @@ func (c *CloudFormation) DescribeStacksRequest(input *DescribeStacksInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStacksRequest{Request: req, Input: input}
+	return DescribeStacksRequest{Request: req, Input: input, Copy: c.DescribeStacksRequest}
 }
 
-// DescribeStacksPages iterates over the pages of a DescribeStacks operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeStacks method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeStacksRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeStacks operation.
-//    pageNum := 0
-//    err := client.DescribeStacksPages(params,
-//        func(page *DescribeStacksOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeStacksRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *DescribeStacksRequest) Paginate(opts ...aws.Option) DescribeStacksPager {
 	return DescribeStacksPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeStacksInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeStacksInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output DescribeStacksOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// DescribeStacksPager ...
+// DescribeStacksPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type DescribeStacksPager struct {
 	aws.Pager
 }
@@ -1141,6 +1160,7 @@ const opEstimateTemplateCost = "EstimateTemplateCost"
 type EstimateTemplateCostRequest struct {
 	*aws.Request
 	Input *EstimateTemplateCostInput
+	Copy  func(*EstimateTemplateCostInput) EstimateTemplateCostRequest
 }
 
 // Send marshals and sends the EstimateTemplateCost API request.
@@ -1183,7 +1203,7 @@ func (c *CloudFormation) EstimateTemplateCostRequest(input *EstimateTemplateCost
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EstimateTemplateCostRequest{Request: req, Input: input}
+	return EstimateTemplateCostRequest{Request: req, Input: input, Copy: c.EstimateTemplateCostRequest}
 }
 
 const opExecuteChangeSet = "ExecuteChangeSet"
@@ -1192,6 +1212,7 @@ const opExecuteChangeSet = "ExecuteChangeSet"
 type ExecuteChangeSetRequest struct {
 	*aws.Request
 	Input *ExecuteChangeSetInput
+	Copy  func(*ExecuteChangeSetInput) ExecuteChangeSetRequest
 }
 
 // Send marshals and sends the ExecuteChangeSet API request.
@@ -1243,7 +1264,7 @@ func (c *CloudFormation) ExecuteChangeSetRequest(input *ExecuteChangeSetInput) E
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ExecuteChangeSetRequest{Request: req, Input: input}
+	return ExecuteChangeSetRequest{Request: req, Input: input, Copy: c.ExecuteChangeSetRequest}
 }
 
 const opGetStackPolicy = "GetStackPolicy"
@@ -1252,6 +1273,7 @@ const opGetStackPolicy = "GetStackPolicy"
 type GetStackPolicyRequest struct {
 	*aws.Request
 	Input *GetStackPolicyInput
+	Copy  func(*GetStackPolicyInput) GetStackPolicyRequest
 }
 
 // Send marshals and sends the GetStackPolicy API request.
@@ -1293,7 +1315,7 @@ func (c *CloudFormation) GetStackPolicyRequest(input *GetStackPolicyInput) GetSt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetStackPolicyRequest{Request: req, Input: input}
+	return GetStackPolicyRequest{Request: req, Input: input, Copy: c.GetStackPolicyRequest}
 }
 
 const opGetTemplate = "GetTemplate"
@@ -1302,6 +1324,7 @@ const opGetTemplate = "GetTemplate"
 type GetTemplateRequest struct {
 	*aws.Request
 	Input *GetTemplateInput
+	Copy  func(*GetTemplateInput) GetTemplateRequest
 }
 
 // Send marshals and sends the GetTemplate API request.
@@ -1348,7 +1371,7 @@ func (c *CloudFormation) GetTemplateRequest(input *GetTemplateInput) GetTemplate
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTemplateRequest{Request: req, Input: input}
+	return GetTemplateRequest{Request: req, Input: input, Copy: c.GetTemplateRequest}
 }
 
 const opGetTemplateSummary = "GetTemplateSummary"
@@ -1357,6 +1380,7 @@ const opGetTemplateSummary = "GetTemplateSummary"
 type GetTemplateSummaryRequest struct {
 	*aws.Request
 	Input *GetTemplateSummaryInput
+	Copy  func(*GetTemplateSummaryInput) GetTemplateSummaryRequest
 }
 
 // Send marshals and sends the GetTemplateSummary API request.
@@ -1408,7 +1432,7 @@ func (c *CloudFormation) GetTemplateSummaryRequest(input *GetTemplateSummaryInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTemplateSummaryRequest{Request: req, Input: input}
+	return GetTemplateSummaryRequest{Request: req, Input: input, Copy: c.GetTemplateSummaryRequest}
 }
 
 const opListChangeSets = "ListChangeSets"
@@ -1417,6 +1441,7 @@ const opListChangeSets = "ListChangeSets"
 type ListChangeSetsRequest struct {
 	*aws.Request
 	Input *ListChangeSetsInput
+	Copy  func(*ListChangeSetsInput) ListChangeSetsRequest
 }
 
 // Send marshals and sends the ListChangeSets API request.
@@ -1459,7 +1484,7 @@ func (c *CloudFormation) ListChangeSetsRequest(input *ListChangeSetsInput) ListC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListChangeSetsRequest{Request: req, Input: input}
+	return ListChangeSetsRequest{Request: req, Input: input, Copy: c.ListChangeSetsRequest}
 }
 
 const opListExports = "ListExports"
@@ -1468,6 +1493,7 @@ const opListExports = "ListExports"
 type ListExportsRequest struct {
 	*aws.Request
 	Input *ListExportsInput
+	Copy  func(*ListExportsInput) ListExportsRequest
 }
 
 // Send marshals and sends the ListExports API request.
@@ -1520,47 +1546,47 @@ func (c *CloudFormation) ListExportsRequest(input *ListExportsInput) ListExports
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListExportsRequest{Request: req, Input: input}
+	return ListExportsRequest{Request: req, Input: input, Copy: c.ListExportsRequest}
 }
 
-// ListExportsPages iterates over the pages of a ListExports operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListExports method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListExportsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListExports operation.
-//    pageNum := 0
-//    err := client.ListExportsPages(params,
-//        func(page *ListExportsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListExportsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListExportsRequest) Paginate(opts ...aws.Option) ListExportsPager {
 	return ListExportsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListExportsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListExportsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListExportsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListExportsPager ...
+// ListExportsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListExportsPager struct {
 	aws.Pager
 }
@@ -1575,6 +1601,7 @@ const opListImports = "ListImports"
 type ListImportsRequest struct {
 	*aws.Request
 	Input *ListImportsInput
+	Copy  func(*ListImportsInput) ListImportsRequest
 }
 
 // Send marshals and sends the ListImports API request.
@@ -1627,47 +1654,47 @@ func (c *CloudFormation) ListImportsRequest(input *ListImportsInput) ListImports
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListImportsRequest{Request: req, Input: input}
+	return ListImportsRequest{Request: req, Input: input, Copy: c.ListImportsRequest}
 }
 
-// ListImportsPages iterates over the pages of a ListImports operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListImports method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListImportsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListImports operation.
-//    pageNum := 0
-//    err := client.ListImportsPages(params,
-//        func(page *ListImportsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListImportsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListImportsRequest) Paginate(opts ...aws.Option) ListImportsPager {
 	return ListImportsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListImportsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListImportsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListImportsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListImportsPager ...
+// ListImportsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListImportsPager struct {
 	aws.Pager
 }
@@ -1682,6 +1709,7 @@ const opListStackInstances = "ListStackInstances"
 type ListStackInstancesRequest struct {
 	*aws.Request
 	Input *ListStackInstancesInput
+	Copy  func(*ListStackInstancesInput) ListStackInstancesRequest
 }
 
 // Send marshals and sends the ListStackInstances API request.
@@ -1724,7 +1752,7 @@ func (c *CloudFormation) ListStackInstancesRequest(input *ListStackInstancesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStackInstancesRequest{Request: req, Input: input}
+	return ListStackInstancesRequest{Request: req, Input: input, Copy: c.ListStackInstancesRequest}
 }
 
 const opListStackResources = "ListStackResources"
@@ -1733,6 +1761,7 @@ const opListStackResources = "ListStackResources"
 type ListStackResourcesRequest struct {
 	*aws.Request
 	Input *ListStackResourcesInput
+	Copy  func(*ListStackResourcesInput) ListStackResourcesRequest
 }
 
 // Send marshals and sends the ListStackResources API request.
@@ -1782,47 +1811,47 @@ func (c *CloudFormation) ListStackResourcesRequest(input *ListStackResourcesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStackResourcesRequest{Request: req, Input: input}
+	return ListStackResourcesRequest{Request: req, Input: input, Copy: c.ListStackResourcesRequest}
 }
 
-// ListStackResourcesPages iterates over the pages of a ListStackResources operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListStackResources method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListStackResourcesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListStackResources operation.
-//    pageNum := 0
-//    err := client.ListStackResourcesPages(params,
-//        func(page *ListStackResourcesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListStackResourcesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListStackResourcesRequest) Paginate(opts ...aws.Option) ListStackResourcesPager {
 	return ListStackResourcesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListStackResourcesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListStackResourcesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListStackResourcesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListStackResourcesPager ...
+// ListStackResourcesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListStackResourcesPager struct {
 	aws.Pager
 }
@@ -1837,6 +1866,7 @@ const opListStackSetOperationResults = "ListStackSetOperationResults"
 type ListStackSetOperationResultsRequest struct {
 	*aws.Request
 	Input *ListStackSetOperationResultsInput
+	Copy  func(*ListStackSetOperationResultsInput) ListStackSetOperationResultsRequest
 }
 
 // Send marshals and sends the ListStackSetOperationResults API request.
@@ -1877,7 +1907,7 @@ func (c *CloudFormation) ListStackSetOperationResultsRequest(input *ListStackSet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStackSetOperationResultsRequest{Request: req, Input: input}
+	return ListStackSetOperationResultsRequest{Request: req, Input: input, Copy: c.ListStackSetOperationResultsRequest}
 }
 
 const opListStackSetOperations = "ListStackSetOperations"
@@ -1886,6 +1916,7 @@ const opListStackSetOperations = "ListStackSetOperations"
 type ListStackSetOperationsRequest struct {
 	*aws.Request
 	Input *ListStackSetOperationsInput
+	Copy  func(*ListStackSetOperationsInput) ListStackSetOperationsRequest
 }
 
 // Send marshals and sends the ListStackSetOperations API request.
@@ -1926,7 +1957,7 @@ func (c *CloudFormation) ListStackSetOperationsRequest(input *ListStackSetOperat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStackSetOperationsRequest{Request: req, Input: input}
+	return ListStackSetOperationsRequest{Request: req, Input: input, Copy: c.ListStackSetOperationsRequest}
 }
 
 const opListStackSets = "ListStackSets"
@@ -1935,6 +1966,7 @@ const opListStackSets = "ListStackSets"
 type ListStackSetsRequest struct {
 	*aws.Request
 	Input *ListStackSetsInput
+	Copy  func(*ListStackSetsInput) ListStackSetsRequest
 }
 
 // Send marshals and sends the ListStackSets API request.
@@ -1976,7 +2008,7 @@ func (c *CloudFormation) ListStackSetsRequest(input *ListStackSetsInput) ListSta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStackSetsRequest{Request: req, Input: input}
+	return ListStackSetsRequest{Request: req, Input: input, Copy: c.ListStackSetsRequest}
 }
 
 const opListStacks = "ListStacks"
@@ -1985,6 +2017,7 @@ const opListStacks = "ListStacks"
 type ListStacksRequest struct {
 	*aws.Request
 	Input *ListStacksInput
+	Copy  func(*ListStacksInput) ListStacksRequest
 }
 
 // Send marshals and sends the ListStacks API request.
@@ -2035,47 +2068,47 @@ func (c *CloudFormation) ListStacksRequest(input *ListStacksInput) ListStacksReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStacksRequest{Request: req, Input: input}
+	return ListStacksRequest{Request: req, Input: input, Copy: c.ListStacksRequest}
 }
 
-// ListStacksPages iterates over the pages of a ListStacks operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListStacks method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListStacksRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListStacks operation.
-//    pageNum := 0
-//    err := client.ListStacksPages(params,
-//        func(page *ListStacksOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListStacksRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListStacksRequest) Paginate(opts ...aws.Option) ListStacksPager {
 	return ListStacksPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListStacksInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListStacksInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListStacksOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListStacksPager ...
+// ListStacksPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListStacksPager struct {
 	aws.Pager
 }
@@ -2090,6 +2123,7 @@ const opSetStackPolicy = "SetStackPolicy"
 type SetStackPolicyRequest struct {
 	*aws.Request
 	Input *SetStackPolicyInput
+	Copy  func(*SetStackPolicyInput) SetStackPolicyRequest
 }
 
 // Send marshals and sends the SetStackPolicy API request.
@@ -2132,7 +2166,7 @@ func (c *CloudFormation) SetStackPolicyRequest(input *SetStackPolicyInput) SetSt
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetStackPolicyRequest{Request: req, Input: input}
+	return SetStackPolicyRequest{Request: req, Input: input, Copy: c.SetStackPolicyRequest}
 }
 
 const opSignalResource = "SignalResource"
@@ -2141,6 +2175,7 @@ const opSignalResource = "SignalResource"
 type SignalResourceRequest struct {
 	*aws.Request
 	Input *SignalResourceInput
+	Copy  func(*SignalResourceInput) SignalResourceRequest
 }
 
 // Send marshals and sends the SignalResource API request.
@@ -2188,7 +2223,7 @@ func (c *CloudFormation) SignalResourceRequest(input *SignalResourceInput) Signa
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SignalResourceRequest{Request: req, Input: input}
+	return SignalResourceRequest{Request: req, Input: input, Copy: c.SignalResourceRequest}
 }
 
 const opStopStackSetOperation = "StopStackSetOperation"
@@ -2197,6 +2232,7 @@ const opStopStackSetOperation = "StopStackSetOperation"
 type StopStackSetOperationRequest struct {
 	*aws.Request
 	Input *StopStackSetOperationInput
+	Copy  func(*StopStackSetOperationInput) StopStackSetOperationRequest
 }
 
 // Send marshals and sends the StopStackSetOperation API request.
@@ -2237,7 +2273,7 @@ func (c *CloudFormation) StopStackSetOperationRequest(input *StopStackSetOperati
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopStackSetOperationRequest{Request: req, Input: input}
+	return StopStackSetOperationRequest{Request: req, Input: input, Copy: c.StopStackSetOperationRequest}
 }
 
 const opUpdateStack = "UpdateStack"
@@ -2246,6 +2282,7 @@ const opUpdateStack = "UpdateStack"
 type UpdateStackRequest struct {
 	*aws.Request
 	Input *UpdateStackInput
+	Copy  func(*UpdateStackInput) UpdateStackRequest
 }
 
 // Send marshals and sends the UpdateStack API request.
@@ -2294,7 +2331,7 @@ func (c *CloudFormation) UpdateStackRequest(input *UpdateStackInput) UpdateStack
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateStackRequest{Request: req, Input: input}
+	return UpdateStackRequest{Request: req, Input: input, Copy: c.UpdateStackRequest}
 }
 
 const opUpdateStackInstances = "UpdateStackInstances"
@@ -2303,6 +2340,7 @@ const opUpdateStackInstances = "UpdateStackInstances"
 type UpdateStackInstancesRequest struct {
 	*aws.Request
 	Input *UpdateStackInstancesInput
+	Copy  func(*UpdateStackInstancesInput) UpdateStackInstancesRequest
 }
 
 // Send marshals and sends the UpdateStackInstances API request.
@@ -2360,7 +2398,7 @@ func (c *CloudFormation) UpdateStackInstancesRequest(input *UpdateStackInstances
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateStackInstancesRequest{Request: req, Input: input}
+	return UpdateStackInstancesRequest{Request: req, Input: input, Copy: c.UpdateStackInstancesRequest}
 }
 
 const opUpdateStackSet = "UpdateStackSet"
@@ -2369,6 +2407,7 @@ const opUpdateStackSet = "UpdateStackSet"
 type UpdateStackSetRequest struct {
 	*aws.Request
 	Input *UpdateStackSetInput
+	Copy  func(*UpdateStackSetInput) UpdateStackSetRequest
 }
 
 // Send marshals and sends the UpdateStackSet API request.
@@ -2414,7 +2453,7 @@ func (c *CloudFormation) UpdateStackSetRequest(input *UpdateStackSetInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateStackSetRequest{Request: req, Input: input}
+	return UpdateStackSetRequest{Request: req, Input: input, Copy: c.UpdateStackSetRequest}
 }
 
 const opUpdateTerminationProtection = "UpdateTerminationProtection"
@@ -2423,6 +2462,7 @@ const opUpdateTerminationProtection = "UpdateTerminationProtection"
 type UpdateTerminationProtectionRequest struct {
 	*aws.Request
 	Input *UpdateTerminationProtectionInput
+	Copy  func(*UpdateTerminationProtectionInput) UpdateTerminationProtectionRequest
 }
 
 // Send marshals and sends the UpdateTerminationProtection API request.
@@ -2471,7 +2511,7 @@ func (c *CloudFormation) UpdateTerminationProtectionRequest(input *UpdateTermina
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTerminationProtectionRequest{Request: req, Input: input}
+	return UpdateTerminationProtectionRequest{Request: req, Input: input, Copy: c.UpdateTerminationProtectionRequest}
 }
 
 const opValidateTemplate = "ValidateTemplate"
@@ -2480,6 +2520,7 @@ const opValidateTemplate = "ValidateTemplate"
 type ValidateTemplateRequest struct {
 	*aws.Request
 	Input *ValidateTemplateInput
+	Copy  func(*ValidateTemplateInput) ValidateTemplateRequest
 }
 
 // Send marshals and sends the ValidateTemplate API request.
@@ -2523,7 +2564,7 @@ func (c *CloudFormation) ValidateTemplateRequest(input *ValidateTemplateInput) V
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ValidateTemplateRequest{Request: req, Input: input}
+	return ValidateTemplateRequest{Request: req, Input: input, Copy: c.ValidateTemplateRequest}
 }
 
 // Structure that contains the results of the account gate function which AWS

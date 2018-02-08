@@ -17,6 +17,7 @@ const opBatchDeleteAttributes = "BatchDeleteAttributes"
 type BatchDeleteAttributesRequest struct {
 	*aws.Request
 	Input *BatchDeleteAttributesInput
+	Copy  func(*BatchDeleteAttributesInput) BatchDeleteAttributesRequest
 }
 
 // Send marshals and sends the BatchDeleteAttributes API request.
@@ -80,7 +81,7 @@ func (c *SimpleDB) BatchDeleteAttributesRequest(input *BatchDeleteAttributesInpu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchDeleteAttributesRequest{Request: req, Input: input}
+	return BatchDeleteAttributesRequest{Request: req, Input: input, Copy: c.BatchDeleteAttributesRequest}
 }
 
 const opBatchPutAttributes = "BatchPutAttributes"
@@ -89,6 +90,7 @@ const opBatchPutAttributes = "BatchPutAttributes"
 type BatchPutAttributesRequest struct {
 	*aws.Request
 	Input *BatchPutAttributesInput
+	Copy  func(*BatchPutAttributesInput) BatchPutAttributesRequest
 }
 
 // Send marshals and sends the BatchPutAttributes API request.
@@ -171,7 +173,7 @@ func (c *SimpleDB) BatchPutAttributesRequest(input *BatchPutAttributesInput) Bat
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchPutAttributesRequest{Request: req, Input: input}
+	return BatchPutAttributesRequest{Request: req, Input: input, Copy: c.BatchPutAttributesRequest}
 }
 
 const opCreateDomain = "CreateDomain"
@@ -180,6 +182,7 @@ const opCreateDomain = "CreateDomain"
 type CreateDomainRequest struct {
 	*aws.Request
 	Input *CreateDomainInput
+	Copy  func(*CreateDomainInput) CreateDomainRequest
 }
 
 // Send marshals and sends the CreateDomain API request.
@@ -228,7 +231,7 @@ func (c *SimpleDB) CreateDomainRequest(input *CreateDomainInput) CreateDomainReq
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDomainRequest{Request: req, Input: input}
+	return CreateDomainRequest{Request: req, Input: input, Copy: c.CreateDomainRequest}
 }
 
 const opDeleteAttributes = "DeleteAttributes"
@@ -237,6 +240,7 @@ const opDeleteAttributes = "DeleteAttributes"
 type DeleteAttributesRequest struct {
 	*aws.Request
 	Input *DeleteAttributesInput
+	Copy  func(*DeleteAttributesInput) DeleteAttributesRequest
 }
 
 // Send marshals and sends the DeleteAttributes API request.
@@ -287,7 +291,7 @@ func (c *SimpleDB) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteA
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAttributesRequest{Request: req, Input: input}
+	return DeleteAttributesRequest{Request: req, Input: input, Copy: c.DeleteAttributesRequest}
 }
 
 const opDeleteDomain = "DeleteDomain"
@@ -296,6 +300,7 @@ const opDeleteDomain = "DeleteDomain"
 type DeleteDomainRequest struct {
 	*aws.Request
 	Input *DeleteDomainInput
+	Copy  func(*DeleteDomainInput) DeleteDomainRequest
 }
 
 // Send marshals and sends the DeleteDomain API request.
@@ -341,7 +346,7 @@ func (c *SimpleDB) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainReq
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDomainRequest{Request: req, Input: input}
+	return DeleteDomainRequest{Request: req, Input: input, Copy: c.DeleteDomainRequest}
 }
 
 const opDomainMetadata = "DomainMetadata"
@@ -350,6 +355,7 @@ const opDomainMetadata = "DomainMetadata"
 type DomainMetadataRequest struct {
 	*aws.Request
 	Input *DomainMetadataInput
+	Copy  func(*DomainMetadataInput) DomainMetadataRequest
 }
 
 // Send marshals and sends the DomainMetadata API request.
@@ -390,7 +396,7 @@ func (c *SimpleDB) DomainMetadataRequest(input *DomainMetadataInput) DomainMetad
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DomainMetadataRequest{Request: req, Input: input}
+	return DomainMetadataRequest{Request: req, Input: input, Copy: c.DomainMetadataRequest}
 }
 
 const opGetAttributes = "GetAttributes"
@@ -399,6 +405,7 @@ const opGetAttributes = "GetAttributes"
 type GetAttributesRequest struct {
 	*aws.Request
 	Input *GetAttributesInput
+	Copy  func(*GetAttributesInput) GetAttributesRequest
 }
 
 // Send marshals and sends the GetAttributes API request.
@@ -446,7 +453,7 @@ func (c *SimpleDB) GetAttributesRequest(input *GetAttributesInput) GetAttributes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAttributesRequest{Request: req, Input: input}
+	return GetAttributesRequest{Request: req, Input: input, Copy: c.GetAttributesRequest}
 }
 
 const opListDomains = "ListDomains"
@@ -455,6 +462,7 @@ const opListDomains = "ListDomains"
 type ListDomainsRequest struct {
 	*aws.Request
 	Input *ListDomainsInput
+	Copy  func(*ListDomainsInput) ListDomainsRequest
 }
 
 // Send marshals and sends the ListDomains API request.
@@ -504,47 +512,47 @@ func (c *SimpleDB) ListDomainsRequest(input *ListDomainsInput) ListDomainsReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDomainsRequest{Request: req, Input: input}
+	return ListDomainsRequest{Request: req, Input: input, Copy: c.ListDomainsRequest}
 }
 
-// ListDomainsPages iterates over the pages of a ListDomains operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDomains method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDomainsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDomains operation.
-//    pageNum := 0
-//    err := client.ListDomainsPages(params,
-//        func(page *ListDomainsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDomainsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListDomainsRequest) Paginate(opts ...aws.Option) ListDomainsPager {
 	return ListDomainsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDomainsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDomainsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListDomainsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListDomainsPager ...
+// ListDomainsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListDomainsPager struct {
 	aws.Pager
 }
@@ -559,6 +567,7 @@ const opPutAttributes = "PutAttributes"
 type PutAttributesRequest struct {
 	*aws.Request
 	Input *PutAttributesInput
+	Copy  func(*PutAttributesInput) PutAttributesRequest
 }
 
 // Send marshals and sends the PutAttributes API request.
@@ -629,7 +638,7 @@ func (c *SimpleDB) PutAttributesRequest(input *PutAttributesInput) PutAttributes
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutAttributesRequest{Request: req, Input: input}
+	return PutAttributesRequest{Request: req, Input: input, Copy: c.PutAttributesRequest}
 }
 
 const opSelect = "Select"
@@ -638,6 +647,7 @@ const opSelect = "Select"
 type SelectRequest struct {
 	*aws.Request
 	Input *SelectInput
+	Copy  func(*SelectInput) SelectRequest
 }
 
 // Send marshals and sends the Select API request.
@@ -692,47 +702,47 @@ func (c *SimpleDB) SelectRequest(input *SelectInput) SelectRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SelectRequest{Request: req, Input: input}
+	return SelectRequest{Request: req, Input: input, Copy: c.SelectRequest}
 }
 
-// SelectPages iterates over the pages of a Select operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See Select method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SelectRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a Select operation.
-//    pageNum := 0
-//    err := client.SelectPages(params,
-//        func(page *SelectOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SelectRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *SelectRequest) Paginate(opts ...aws.Option) SelectPager {
 	return SelectPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *SelectInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SelectInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output SelectOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// SelectPager ...
+// SelectPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type SelectPager struct {
 	aws.Pager
 }

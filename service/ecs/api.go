@@ -16,6 +16,7 @@ const opCreateCluster = "CreateCluster"
 type CreateClusterRequest struct {
 	*aws.Request
 	Input *CreateClusterInput
+	Copy  func(*CreateClusterInput) CreateClusterRequest
 }
 
 // Send marshals and sends the CreateCluster API request.
@@ -66,7 +67,7 @@ func (c *ECS) CreateClusterRequest(input *CreateClusterInput) CreateClusterReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateClusterRequest{Request: req, Input: input}
+	return CreateClusterRequest{Request: req, Input: input, Copy: c.CreateClusterRequest}
 }
 
 const opCreateService = "CreateService"
@@ -75,6 +76,7 @@ const opCreateService = "CreateService"
 type CreateServiceRequest struct {
 	*aws.Request
 	Input *CreateServiceInput
+	Copy  func(*CreateServiceInput) CreateServiceRequest
 }
 
 // Send marshals and sends the CreateService API request.
@@ -173,7 +175,7 @@ func (c *ECS) CreateServiceRequest(input *CreateServiceInput) CreateServiceReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateServiceRequest{Request: req, Input: input}
+	return CreateServiceRequest{Request: req, Input: input, Copy: c.CreateServiceRequest}
 }
 
 const opDeleteAttributes = "DeleteAttributes"
@@ -182,6 +184,7 @@ const opDeleteAttributes = "DeleteAttributes"
 type DeleteAttributesRequest struct {
 	*aws.Request
 	Input *DeleteAttributesInput
+	Copy  func(*DeleteAttributesInput) DeleteAttributesRequest
 }
 
 // Send marshals and sends the DeleteAttributes API request.
@@ -222,7 +225,7 @@ func (c *ECS) DeleteAttributesRequest(input *DeleteAttributesInput) DeleteAttrib
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAttributesRequest{Request: req, Input: input}
+	return DeleteAttributesRequest{Request: req, Input: input, Copy: c.DeleteAttributesRequest}
 }
 
 const opDeleteCluster = "DeleteCluster"
@@ -231,6 +234,7 @@ const opDeleteCluster = "DeleteCluster"
 type DeleteClusterRequest struct {
 	*aws.Request
 	Input *DeleteClusterInput
+	Copy  func(*DeleteClusterInput) DeleteClusterRequest
 }
 
 // Send marshals and sends the DeleteCluster API request.
@@ -273,7 +277,7 @@ func (c *ECS) DeleteClusterRequest(input *DeleteClusterInput) DeleteClusterReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteClusterRequest{Request: req, Input: input}
+	return DeleteClusterRequest{Request: req, Input: input, Copy: c.DeleteClusterRequest}
 }
 
 const opDeleteService = "DeleteService"
@@ -282,6 +286,7 @@ const opDeleteService = "DeleteService"
 type DeleteServiceRequest struct {
 	*aws.Request
 	Input *DeleteServiceInput
+	Copy  func(*DeleteServiceInput) DeleteServiceRequest
 }
 
 // Send marshals and sends the DeleteService API request.
@@ -335,7 +340,7 @@ func (c *ECS) DeleteServiceRequest(input *DeleteServiceInput) DeleteServiceReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteServiceRequest{Request: req, Input: input}
+	return DeleteServiceRequest{Request: req, Input: input, Copy: c.DeleteServiceRequest}
 }
 
 const opDeregisterContainerInstance = "DeregisterContainerInstance"
@@ -344,6 +349,7 @@ const opDeregisterContainerInstance = "DeregisterContainerInstance"
 type DeregisterContainerInstanceRequest struct {
 	*aws.Request
 	Input *DeregisterContainerInstanceInput
+	Copy  func(*DeregisterContainerInstanceInput) DeregisterContainerInstanceRequest
 }
 
 // Send marshals and sends the DeregisterContainerInstance API request.
@@ -398,7 +404,7 @@ func (c *ECS) DeregisterContainerInstanceRequest(input *DeregisterContainerInsta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterContainerInstanceRequest{Request: req, Input: input}
+	return DeregisterContainerInstanceRequest{Request: req, Input: input, Copy: c.DeregisterContainerInstanceRequest}
 }
 
 const opDeregisterTaskDefinition = "DeregisterTaskDefinition"
@@ -407,6 +413,7 @@ const opDeregisterTaskDefinition = "DeregisterTaskDefinition"
 type DeregisterTaskDefinitionRequest struct {
 	*aws.Request
 	Input *DeregisterTaskDefinitionInput
+	Copy  func(*DeregisterTaskDefinitionInput) DeregisterTaskDefinitionRequest
 }
 
 // Send marshals and sends the DeregisterTaskDefinition API request.
@@ -461,7 +468,7 @@ func (c *ECS) DeregisterTaskDefinitionRequest(input *DeregisterTaskDefinitionInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterTaskDefinitionRequest{Request: req, Input: input}
+	return DeregisterTaskDefinitionRequest{Request: req, Input: input, Copy: c.DeregisterTaskDefinitionRequest}
 }
 
 const opDescribeClusters = "DescribeClusters"
@@ -470,6 +477,7 @@ const opDescribeClusters = "DescribeClusters"
 type DescribeClustersRequest struct {
 	*aws.Request
 	Input *DescribeClustersInput
+	Copy  func(*DescribeClustersInput) DescribeClustersRequest
 }
 
 // Send marshals and sends the DescribeClusters API request.
@@ -510,7 +518,7 @@ func (c *ECS) DescribeClustersRequest(input *DescribeClustersInput) DescribeClus
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClustersRequest{Request: req, Input: input}
+	return DescribeClustersRequest{Request: req, Input: input, Copy: c.DescribeClustersRequest}
 }
 
 const opDescribeContainerInstances = "DescribeContainerInstances"
@@ -519,6 +527,7 @@ const opDescribeContainerInstances = "DescribeContainerInstances"
 type DescribeContainerInstancesRequest struct {
 	*aws.Request
 	Input *DescribeContainerInstancesInput
+	Copy  func(*DescribeContainerInstancesInput) DescribeContainerInstancesRequest
 }
 
 // Send marshals and sends the DescribeContainerInstances API request.
@@ -560,7 +569,7 @@ func (c *ECS) DescribeContainerInstancesRequest(input *DescribeContainerInstance
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeContainerInstancesRequest{Request: req, Input: input}
+	return DescribeContainerInstancesRequest{Request: req, Input: input, Copy: c.DescribeContainerInstancesRequest}
 }
 
 const opDescribeServices = "DescribeServices"
@@ -569,6 +578,7 @@ const opDescribeServices = "DescribeServices"
 type DescribeServicesRequest struct {
 	*aws.Request
 	Input *DescribeServicesInput
+	Copy  func(*DescribeServicesInput) DescribeServicesRequest
 }
 
 // Send marshals and sends the DescribeServices API request.
@@ -609,7 +619,7 @@ func (c *ECS) DescribeServicesRequest(input *DescribeServicesInput) DescribeServ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeServicesRequest{Request: req, Input: input}
+	return DescribeServicesRequest{Request: req, Input: input, Copy: c.DescribeServicesRequest}
 }
 
 const opDescribeTaskDefinition = "DescribeTaskDefinition"
@@ -618,6 +628,7 @@ const opDescribeTaskDefinition = "DescribeTaskDefinition"
 type DescribeTaskDefinitionRequest struct {
 	*aws.Request
 	Input *DescribeTaskDefinitionInput
+	Copy  func(*DescribeTaskDefinitionInput) DescribeTaskDefinitionRequest
 }
 
 // Send marshals and sends the DescribeTaskDefinition API request.
@@ -663,7 +674,7 @@ func (c *ECS) DescribeTaskDefinitionRequest(input *DescribeTaskDefinitionInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTaskDefinitionRequest{Request: req, Input: input}
+	return DescribeTaskDefinitionRequest{Request: req, Input: input, Copy: c.DescribeTaskDefinitionRequest}
 }
 
 const opDescribeTasks = "DescribeTasks"
@@ -672,6 +683,7 @@ const opDescribeTasks = "DescribeTasks"
 type DescribeTasksRequest struct {
 	*aws.Request
 	Input *DescribeTasksInput
+	Copy  func(*DescribeTasksInput) DescribeTasksRequest
 }
 
 // Send marshals and sends the DescribeTasks API request.
@@ -712,7 +724,7 @@ func (c *ECS) DescribeTasksRequest(input *DescribeTasksInput) DescribeTasksReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTasksRequest{Request: req, Input: input}
+	return DescribeTasksRequest{Request: req, Input: input, Copy: c.DescribeTasksRequest}
 }
 
 const opDiscoverPollEndpoint = "DiscoverPollEndpoint"
@@ -721,6 +733,7 @@ const opDiscoverPollEndpoint = "DiscoverPollEndpoint"
 type DiscoverPollEndpointRequest struct {
 	*aws.Request
 	Input *DiscoverPollEndpointInput
+	Copy  func(*DiscoverPollEndpointInput) DiscoverPollEndpointRequest
 }
 
 // Send marshals and sends the DiscoverPollEndpoint API request.
@@ -764,7 +777,7 @@ func (c *ECS) DiscoverPollEndpointRequest(input *DiscoverPollEndpointInput) Disc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DiscoverPollEndpointRequest{Request: req, Input: input}
+	return DiscoverPollEndpointRequest{Request: req, Input: input, Copy: c.DiscoverPollEndpointRequest}
 }
 
 const opListAttributes = "ListAttributes"
@@ -773,6 +786,7 @@ const opListAttributes = "ListAttributes"
 type ListAttributesRequest struct {
 	*aws.Request
 	Input *ListAttributesInput
+	Copy  func(*ListAttributesInput) ListAttributesRequest
 }
 
 // Send marshals and sends the ListAttributes API request.
@@ -819,7 +833,7 @@ func (c *ECS) ListAttributesRequest(input *ListAttributesInput) ListAttributesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAttributesRequest{Request: req, Input: input}
+	return ListAttributesRequest{Request: req, Input: input, Copy: c.ListAttributesRequest}
 }
 
 const opListClusters = "ListClusters"
@@ -828,6 +842,7 @@ const opListClusters = "ListClusters"
 type ListClustersRequest struct {
 	*aws.Request
 	Input *ListClustersInput
+	Copy  func(*ListClustersInput) ListClustersRequest
 }
 
 // Send marshals and sends the ListClusters API request.
@@ -874,47 +889,47 @@ func (c *ECS) ListClustersRequest(input *ListClustersInput) ListClustersRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListClustersRequest{Request: req, Input: input}
+	return ListClustersRequest{Request: req, Input: input, Copy: c.ListClustersRequest}
 }
 
-// ListClustersPages iterates over the pages of a ListClusters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListClusters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListClustersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListClusters operation.
-//    pageNum := 0
-//    err := client.ListClustersPages(params,
-//        func(page *ListClustersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListClustersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListClustersRequest) Paginate(opts ...aws.Option) ListClustersPager {
 	return ListClustersPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListClustersInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListClustersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListClustersOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListClustersPager ...
+// ListClustersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListClustersPager struct {
 	aws.Pager
 }
@@ -929,6 +944,7 @@ const opListContainerInstances = "ListContainerInstances"
 type ListContainerInstancesRequest struct {
 	*aws.Request
 	Input *ListContainerInstancesInput
+	Copy  func(*ListContainerInstancesInput) ListContainerInstancesRequest
 }
 
 // Send marshals and sends the ListContainerInstances API request.
@@ -979,47 +995,47 @@ func (c *ECS) ListContainerInstancesRequest(input *ListContainerInstancesInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListContainerInstancesRequest{Request: req, Input: input}
+	return ListContainerInstancesRequest{Request: req, Input: input, Copy: c.ListContainerInstancesRequest}
 }
 
-// ListContainerInstancesPages iterates over the pages of a ListContainerInstances operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListContainerInstances method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListContainerInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListContainerInstances operation.
-//    pageNum := 0
-//    err := client.ListContainerInstancesPages(params,
-//        func(page *ListContainerInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListContainerInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListContainerInstancesRequest) Paginate(opts ...aws.Option) ListContainerInstancesPager {
 	return ListContainerInstancesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListContainerInstancesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListContainerInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListContainerInstancesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListContainerInstancesPager ...
+// ListContainerInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListContainerInstancesPager struct {
 	aws.Pager
 }
@@ -1034,6 +1050,7 @@ const opListServices = "ListServices"
 type ListServicesRequest struct {
 	*aws.Request
 	Input *ListServicesInput
+	Copy  func(*ListServicesInput) ListServicesRequest
 }
 
 // Send marshals and sends the ListServices API request.
@@ -1080,47 +1097,47 @@ func (c *ECS) ListServicesRequest(input *ListServicesInput) ListServicesRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListServicesRequest{Request: req, Input: input}
+	return ListServicesRequest{Request: req, Input: input, Copy: c.ListServicesRequest}
 }
 
-// ListServicesPages iterates over the pages of a ListServices operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListServices method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListServicesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListServices operation.
-//    pageNum := 0
-//    err := client.ListServicesPages(params,
-//        func(page *ListServicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListServicesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListServicesRequest) Paginate(opts ...aws.Option) ListServicesPager {
 	return ListServicesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListServicesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListServicesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListServicesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListServicesPager ...
+// ListServicesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListServicesPager struct {
 	aws.Pager
 }
@@ -1135,6 +1152,7 @@ const opListTaskDefinitionFamilies = "ListTaskDefinitionFamilies"
 type ListTaskDefinitionFamiliesRequest struct {
 	*aws.Request
 	Input *ListTaskDefinitionFamiliesInput
+	Copy  func(*ListTaskDefinitionFamiliesInput) ListTaskDefinitionFamiliesRequest
 }
 
 // Send marshals and sends the ListTaskDefinitionFamilies API request.
@@ -1187,47 +1205,47 @@ func (c *ECS) ListTaskDefinitionFamiliesRequest(input *ListTaskDefinitionFamilie
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTaskDefinitionFamiliesRequest{Request: req, Input: input}
+	return ListTaskDefinitionFamiliesRequest{Request: req, Input: input, Copy: c.ListTaskDefinitionFamiliesRequest}
 }
 
-// ListTaskDefinitionFamiliesPages iterates over the pages of a ListTaskDefinitionFamilies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTaskDefinitionFamilies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTaskDefinitionFamiliesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTaskDefinitionFamilies operation.
-//    pageNum := 0
-//    err := client.ListTaskDefinitionFamiliesPages(params,
-//        func(page *ListTaskDefinitionFamiliesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTaskDefinitionFamiliesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListTaskDefinitionFamiliesRequest) Paginate(opts ...aws.Option) ListTaskDefinitionFamiliesPager {
 	return ListTaskDefinitionFamiliesPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTaskDefinitionFamiliesInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTaskDefinitionFamiliesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListTaskDefinitionFamiliesOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListTaskDefinitionFamiliesPager ...
+// ListTaskDefinitionFamiliesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListTaskDefinitionFamiliesPager struct {
 	aws.Pager
 }
@@ -1242,6 +1260,7 @@ const opListTaskDefinitions = "ListTaskDefinitions"
 type ListTaskDefinitionsRequest struct {
 	*aws.Request
 	Input *ListTaskDefinitionsInput
+	Copy  func(*ListTaskDefinitionsInput) ListTaskDefinitionsRequest
 }
 
 // Send marshals and sends the ListTaskDefinitions API request.
@@ -1290,47 +1309,47 @@ func (c *ECS) ListTaskDefinitionsRequest(input *ListTaskDefinitionsInput) ListTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTaskDefinitionsRequest{Request: req, Input: input}
+	return ListTaskDefinitionsRequest{Request: req, Input: input, Copy: c.ListTaskDefinitionsRequest}
 }
 
-// ListTaskDefinitionsPages iterates over the pages of a ListTaskDefinitions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTaskDefinitions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTaskDefinitionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTaskDefinitions operation.
-//    pageNum := 0
-//    err := client.ListTaskDefinitionsPages(params,
-//        func(page *ListTaskDefinitionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTaskDefinitionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListTaskDefinitionsRequest) Paginate(opts ...aws.Option) ListTaskDefinitionsPager {
 	return ListTaskDefinitionsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTaskDefinitionsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTaskDefinitionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListTaskDefinitionsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListTaskDefinitionsPager ...
+// ListTaskDefinitionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListTaskDefinitionsPager struct {
 	aws.Pager
 }
@@ -1345,6 +1364,7 @@ const opListTasks = "ListTasks"
 type ListTasksRequest struct {
 	*aws.Request
 	Input *ListTasksInput
+	Copy  func(*ListTasksInput) ListTasksRequest
 }
 
 // Send marshals and sends the ListTasks API request.
@@ -1396,47 +1416,47 @@ func (c *ECS) ListTasksRequest(input *ListTasksInput) ListTasksRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTasksRequest{Request: req, Input: input}
+	return ListTasksRequest{Request: req, Input: input, Copy: c.ListTasksRequest}
 }
 
-// ListTasksPages iterates over the pages of a ListTasks operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTasks method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTasksRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTasks operation.
-//    pageNum := 0
-//    err := client.ListTasksPages(params,
-//        func(page *ListTasksOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTasksRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListTasksRequest) Paginate(opts ...aws.Option) ListTasksPager {
 	return ListTasksPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTasksInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTasksInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListTasksOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListTasksPager ...
+// ListTasksPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListTasksPager struct {
 	aws.Pager
 }
@@ -1451,6 +1471,7 @@ const opPutAttributes = "PutAttributes"
 type PutAttributesRequest struct {
 	*aws.Request
 	Input *PutAttributesInput
+	Copy  func(*PutAttributesInput) PutAttributesRequest
 }
 
 // Send marshals and sends the PutAttributes API request.
@@ -1495,7 +1516,7 @@ func (c *ECS) PutAttributesRequest(input *PutAttributesInput) PutAttributesReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutAttributesRequest{Request: req, Input: input}
+	return PutAttributesRequest{Request: req, Input: input, Copy: c.PutAttributesRequest}
 }
 
 const opRegisterContainerInstance = "RegisterContainerInstance"
@@ -1504,6 +1525,7 @@ const opRegisterContainerInstance = "RegisterContainerInstance"
 type RegisterContainerInstanceRequest struct {
 	*aws.Request
 	Input *RegisterContainerInstanceInput
+	Copy  func(*RegisterContainerInstanceInput) RegisterContainerInstanceRequest
 }
 
 // Send marshals and sends the RegisterContainerInstance API request.
@@ -1548,7 +1570,7 @@ func (c *ECS) RegisterContainerInstanceRequest(input *RegisterContainerInstanceI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterContainerInstanceRequest{Request: req, Input: input}
+	return RegisterContainerInstanceRequest{Request: req, Input: input, Copy: c.RegisterContainerInstanceRequest}
 }
 
 const opRegisterTaskDefinition = "RegisterTaskDefinition"
@@ -1557,6 +1579,7 @@ const opRegisterTaskDefinition = "RegisterTaskDefinition"
 type RegisterTaskDefinitionRequest struct {
 	*aws.Request
 	Input *RegisterTaskDefinitionInput
+	Copy  func(*RegisterTaskDefinitionInput) RegisterTaskDefinitionRequest
 }
 
 // Send marshals and sends the RegisterTaskDefinition API request.
@@ -1617,7 +1640,7 @@ func (c *ECS) RegisterTaskDefinitionRequest(input *RegisterTaskDefinitionInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterTaskDefinitionRequest{Request: req, Input: input}
+	return RegisterTaskDefinitionRequest{Request: req, Input: input, Copy: c.RegisterTaskDefinitionRequest}
 }
 
 const opRunTask = "RunTask"
@@ -1626,6 +1649,7 @@ const opRunTask = "RunTask"
 type RunTaskRequest struct {
 	*aws.Request
 	Input *RunTaskInput
+	Copy  func(*RunTaskInput) RunTaskRequest
 }
 
 // Send marshals and sends the RunTask API request.
@@ -1695,7 +1719,7 @@ func (c *ECS) RunTaskRequest(input *RunTaskInput) RunTaskRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RunTaskRequest{Request: req, Input: input}
+	return RunTaskRequest{Request: req, Input: input, Copy: c.RunTaskRequest}
 }
 
 const opStartTask = "StartTask"
@@ -1704,6 +1728,7 @@ const opStartTask = "StartTask"
 type StartTaskRequest struct {
 	*aws.Request
 	Input *StartTaskInput
+	Copy  func(*StartTaskInput) StartTaskRequest
 }
 
 // Send marshals and sends the StartTask API request.
@@ -1749,7 +1774,7 @@ func (c *ECS) StartTaskRequest(input *StartTaskInput) StartTaskRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartTaskRequest{Request: req, Input: input}
+	return StartTaskRequest{Request: req, Input: input, Copy: c.StartTaskRequest}
 }
 
 const opStopTask = "StopTask"
@@ -1758,6 +1783,7 @@ const opStopTask = "StopTask"
 type StopTaskRequest struct {
 	*aws.Request
 	Input *StopTaskInput
+	Copy  func(*StopTaskInput) StopTaskRequest
 }
 
 // Send marshals and sends the StopTask API request.
@@ -1809,7 +1835,7 @@ func (c *ECS) StopTaskRequest(input *StopTaskInput) StopTaskRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopTaskRequest{Request: req, Input: input}
+	return StopTaskRequest{Request: req, Input: input, Copy: c.StopTaskRequest}
 }
 
 const opSubmitContainerStateChange = "SubmitContainerStateChange"
@@ -1818,6 +1844,7 @@ const opSubmitContainerStateChange = "SubmitContainerStateChange"
 type SubmitContainerStateChangeRequest struct {
 	*aws.Request
 	Input *SubmitContainerStateChangeInput
+	Copy  func(*SubmitContainerStateChangeInput) SubmitContainerStateChangeRequest
 }
 
 // Send marshals and sends the SubmitContainerStateChange API request.
@@ -1861,7 +1888,7 @@ func (c *ECS) SubmitContainerStateChangeRequest(input *SubmitContainerStateChang
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SubmitContainerStateChangeRequest{Request: req, Input: input}
+	return SubmitContainerStateChangeRequest{Request: req, Input: input, Copy: c.SubmitContainerStateChangeRequest}
 }
 
 const opSubmitTaskStateChange = "SubmitTaskStateChange"
@@ -1870,6 +1897,7 @@ const opSubmitTaskStateChange = "SubmitTaskStateChange"
 type SubmitTaskStateChangeRequest struct {
 	*aws.Request
 	Input *SubmitTaskStateChangeInput
+	Copy  func(*SubmitTaskStateChangeInput) SubmitTaskStateChangeRequest
 }
 
 // Send marshals and sends the SubmitTaskStateChange API request.
@@ -1913,7 +1941,7 @@ func (c *ECS) SubmitTaskStateChangeRequest(input *SubmitTaskStateChangeInput) Su
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SubmitTaskStateChangeRequest{Request: req, Input: input}
+	return SubmitTaskStateChangeRequest{Request: req, Input: input, Copy: c.SubmitTaskStateChangeRequest}
 }
 
 const opUpdateContainerAgent = "UpdateContainerAgent"
@@ -1922,6 +1950,7 @@ const opUpdateContainerAgent = "UpdateContainerAgent"
 type UpdateContainerAgentRequest struct {
 	*aws.Request
 	Input *UpdateContainerAgentInput
+	Copy  func(*UpdateContainerAgentInput) UpdateContainerAgentRequest
 }
 
 // Send marshals and sends the UpdateContainerAgent API request.
@@ -1972,7 +2001,7 @@ func (c *ECS) UpdateContainerAgentRequest(input *UpdateContainerAgentInput) Upda
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateContainerAgentRequest{Request: req, Input: input}
+	return UpdateContainerAgentRequest{Request: req, Input: input, Copy: c.UpdateContainerAgentRequest}
 }
 
 const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
@@ -1981,6 +2010,7 @@ const opUpdateContainerInstancesState = "UpdateContainerInstancesState"
 type UpdateContainerInstancesStateRequest struct {
 	*aws.Request
 	Input *UpdateContainerInstancesStateInput
+	Copy  func(*UpdateContainerInstancesStateInput) UpdateContainerInstancesStateRequest
 }
 
 // Send marshals and sends the UpdateContainerInstancesState API request.
@@ -2064,7 +2094,7 @@ func (c *ECS) UpdateContainerInstancesStateRequest(input *UpdateContainerInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateContainerInstancesStateRequest{Request: req, Input: input}
+	return UpdateContainerInstancesStateRequest{Request: req, Input: input, Copy: c.UpdateContainerInstancesStateRequest}
 }
 
 const opUpdateService = "UpdateService"
@@ -2073,6 +2103,7 @@ const opUpdateService = "UpdateService"
 type UpdateServiceRequest struct {
 	*aws.Request
 	Input *UpdateServiceInput
+	Copy  func(*UpdateServiceInput) UpdateServiceRequest
 }
 
 // Send marshals and sends the UpdateService API request.
@@ -2179,7 +2210,7 @@ func (c *ECS) UpdateServiceRequest(input *UpdateServiceInput) UpdateServiceReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateServiceRequest{Request: req, Input: input}
+	return UpdateServiceRequest{Request: req, Input: input, Copy: c.UpdateServiceRequest}
 }
 
 // An object representing a container instance or task attachment.

@@ -15,6 +15,7 @@ const opGenerateDataSet = "GenerateDataSet"
 type GenerateDataSetRequest struct {
 	*aws.Request
 	Input *GenerateDataSetInput
+	Copy  func(*GenerateDataSetInput) GenerateDataSetRequest
 }
 
 // Send marshals and sends the GenerateDataSet API request.
@@ -64,7 +65,7 @@ func (c *MarketplaceCommerceAnalytics) GenerateDataSetRequest(input *GenerateDat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GenerateDataSetRequest{Request: req, Input: input}
+	return GenerateDataSetRequest{Request: req, Input: input, Copy: c.GenerateDataSetRequest}
 }
 
 const opStartSupportDataExport = "StartSupportDataExport"
@@ -73,6 +74,7 @@ const opStartSupportDataExport = "StartSupportDataExport"
 type StartSupportDataExportRequest struct {
 	*aws.Request
 	Input *StartSupportDataExportInput
+	Copy  func(*StartSupportDataExportInput) StartSupportDataExportRequest
 }
 
 // Send marshals and sends the StartSupportDataExport API request.
@@ -123,7 +125,7 @@ func (c *MarketplaceCommerceAnalytics) StartSupportDataExportRequest(input *Star
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartSupportDataExportRequest{Request: req, Input: input}
+	return StartSupportDataExportRequest{Request: req, Input: input, Copy: c.StartSupportDataExportRequest}
 }
 
 // Container for the parameters to the GenerateDataSet operation.

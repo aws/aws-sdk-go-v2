@@ -13,6 +13,7 @@ const opText = "TranslateText"
 type TextRequest struct {
 	*aws.Request
 	Input *TextInput
+	Copy  func(*TextInput) TextRequest
 }
 
 // Send marshals and sends the Text API request.
@@ -67,7 +68,7 @@ func (c *Translate) TextRequest(input *TextInput) TextRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TextRequest{Request: req, Input: input}
+	return TextRequest{Request: req, Input: input, Copy: c.TextRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TextRequest

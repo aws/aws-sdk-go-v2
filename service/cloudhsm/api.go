@@ -15,6 +15,7 @@ const opAddTagsToResource = "AddTagsToResource"
 type AddTagsToResourceRequest struct {
 	*aws.Request
 	Input *AddTagsToResourceInput
+	Copy  func(*AddTagsToResourceInput) AddTagsToResourceRequest
 }
 
 // Send marshals and sends the AddTagsToResource API request.
@@ -66,7 +67,7 @@ func (c *CloudHSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToResourceRequest{Request: req, Input: input}
+	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 
 const opCreateHapg = "CreateHapg"
@@ -75,6 +76,7 @@ const opCreateHapg = "CreateHapg"
 type CreateHapgRequest struct {
 	*aws.Request
 	Input *CreateHapgInput
+	Copy  func(*CreateHapgInput) CreateHapgRequest
 }
 
 // Send marshals and sends the CreateHapg API request.
@@ -125,7 +127,7 @@ func (c *CloudHSM) CreateHapgRequest(input *CreateHapgInput) CreateHapgRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateHapgRequest{Request: req, Input: input}
+	return CreateHapgRequest{Request: req, Input: input, Copy: c.CreateHapgRequest}
 }
 
 const opCreateHsm = "CreateHsm"
@@ -134,6 +136,7 @@ const opCreateHsm = "CreateHsm"
 type CreateHsmRequest struct {
 	*aws.Request
 	Input *CreateHsmInput
+	Copy  func(*CreateHsmInput) CreateHsmRequest
 }
 
 // Send marshals and sends the CreateHsm API request.
@@ -193,7 +196,7 @@ func (c *CloudHSM) CreateHsmRequest(input *CreateHsmInput) CreateHsmRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateHsmRequest{Request: req, Input: input}
+	return CreateHsmRequest{Request: req, Input: input, Copy: c.CreateHsmRequest}
 }
 
 const opCreateLunaClient = "CreateLunaClient"
@@ -202,6 +205,7 @@ const opCreateLunaClient = "CreateLunaClient"
 type CreateLunaClientRequest struct {
 	*aws.Request
 	Input *CreateLunaClientInput
+	Copy  func(*CreateLunaClientInput) CreateLunaClientRequest
 }
 
 // Send marshals and sends the CreateLunaClient API request.
@@ -251,7 +255,7 @@ func (c *CloudHSM) CreateLunaClientRequest(input *CreateLunaClientInput) CreateL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLunaClientRequest{Request: req, Input: input}
+	return CreateLunaClientRequest{Request: req, Input: input, Copy: c.CreateLunaClientRequest}
 }
 
 const opDeleteHapg = "DeleteHapg"
@@ -260,6 +264,7 @@ const opDeleteHapg = "DeleteHapg"
 type DeleteHapgRequest struct {
 	*aws.Request
 	Input *DeleteHapgInput
+	Copy  func(*DeleteHapgInput) DeleteHapgRequest
 }
 
 // Send marshals and sends the DeleteHapg API request.
@@ -309,7 +314,7 @@ func (c *CloudHSM) DeleteHapgRequest(input *DeleteHapgInput) DeleteHapgRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteHapgRequest{Request: req, Input: input}
+	return DeleteHapgRequest{Request: req, Input: input, Copy: c.DeleteHapgRequest}
 }
 
 const opDeleteHsm = "DeleteHsm"
@@ -318,6 +323,7 @@ const opDeleteHsm = "DeleteHsm"
 type DeleteHsmRequest struct {
 	*aws.Request
 	Input *DeleteHsmInput
+	Copy  func(*DeleteHsmInput) DeleteHsmRequest
 }
 
 // Send marshals and sends the DeleteHsm API request.
@@ -368,7 +374,7 @@ func (c *CloudHSM) DeleteHsmRequest(input *DeleteHsmInput) DeleteHsmRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteHsmRequest{Request: req, Input: input}
+	return DeleteHsmRequest{Request: req, Input: input, Copy: c.DeleteHsmRequest}
 }
 
 const opDeleteLunaClient = "DeleteLunaClient"
@@ -377,6 +383,7 @@ const opDeleteLunaClient = "DeleteLunaClient"
 type DeleteLunaClientRequest struct {
 	*aws.Request
 	Input *DeleteLunaClientInput
+	Copy  func(*DeleteLunaClientInput) DeleteLunaClientRequest
 }
 
 // Send marshals and sends the DeleteLunaClient API request.
@@ -426,7 +433,7 @@ func (c *CloudHSM) DeleteLunaClientRequest(input *DeleteLunaClientInput) DeleteL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLunaClientRequest{Request: req, Input: input}
+	return DeleteLunaClientRequest{Request: req, Input: input, Copy: c.DeleteLunaClientRequest}
 }
 
 const opDescribeHapg = "DescribeHapg"
@@ -435,6 +442,7 @@ const opDescribeHapg = "DescribeHapg"
 type DescribeHapgRequest struct {
 	*aws.Request
 	Input *DescribeHapgInput
+	Copy  func(*DescribeHapgInput) DescribeHapgRequest
 }
 
 // Send marshals and sends the DescribeHapg API request.
@@ -484,7 +492,7 @@ func (c *CloudHSM) DescribeHapgRequest(input *DescribeHapgInput) DescribeHapgReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeHapgRequest{Request: req, Input: input}
+	return DescribeHapgRequest{Request: req, Input: input, Copy: c.DescribeHapgRequest}
 }
 
 const opDescribeHsm = "DescribeHsm"
@@ -493,6 +501,7 @@ const opDescribeHsm = "DescribeHsm"
 type DescribeHsmRequest struct {
 	*aws.Request
 	Input *DescribeHsmInput
+	Copy  func(*DescribeHsmInput) DescribeHsmRequest
 }
 
 // Send marshals and sends the DescribeHsm API request.
@@ -543,7 +552,7 @@ func (c *CloudHSM) DescribeHsmRequest(input *DescribeHsmInput) DescribeHsmReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeHsmRequest{Request: req, Input: input}
+	return DescribeHsmRequest{Request: req, Input: input, Copy: c.DescribeHsmRequest}
 }
 
 const opDescribeLunaClient = "DescribeLunaClient"
@@ -552,6 +561,7 @@ const opDescribeLunaClient = "DescribeLunaClient"
 type DescribeLunaClientRequest struct {
 	*aws.Request
 	Input *DescribeLunaClientInput
+	Copy  func(*DescribeLunaClientInput) DescribeLunaClientRequest
 }
 
 // Send marshals and sends the DescribeLunaClient API request.
@@ -601,7 +611,7 @@ func (c *CloudHSM) DescribeLunaClientRequest(input *DescribeLunaClientInput) Des
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLunaClientRequest{Request: req, Input: input}
+	return DescribeLunaClientRequest{Request: req, Input: input, Copy: c.DescribeLunaClientRequest}
 }
 
 const opGetConfig = "GetConfig"
@@ -610,6 +620,7 @@ const opGetConfig = "GetConfig"
 type GetConfigRequest struct {
 	*aws.Request
 	Input *GetConfigInput
+	Copy  func(*GetConfigInput) GetConfigRequest
 }
 
 // Send marshals and sends the GetConfig API request.
@@ -660,7 +671,7 @@ func (c *CloudHSM) GetConfigRequest(input *GetConfigInput) GetConfigRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetConfigRequest{Request: req, Input: input}
+	return GetConfigRequest{Request: req, Input: input, Copy: c.GetConfigRequest}
 }
 
 const opListAvailableZones = "ListAvailableZones"
@@ -669,6 +680,7 @@ const opListAvailableZones = "ListAvailableZones"
 type ListAvailableZonesRequest struct {
 	*aws.Request
 	Input *ListAvailableZonesInput
+	Copy  func(*ListAvailableZonesInput) ListAvailableZonesRequest
 }
 
 // Send marshals and sends the ListAvailableZones API request.
@@ -718,7 +730,7 @@ func (c *CloudHSM) ListAvailableZonesRequest(input *ListAvailableZonesInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAvailableZonesRequest{Request: req, Input: input}
+	return ListAvailableZonesRequest{Request: req, Input: input, Copy: c.ListAvailableZonesRequest}
 }
 
 const opListHapgs = "ListHapgs"
@@ -727,6 +739,7 @@ const opListHapgs = "ListHapgs"
 type ListHapgsRequest struct {
 	*aws.Request
 	Input *ListHapgsInput
+	Copy  func(*ListHapgsInput) ListHapgsRequest
 }
 
 // Send marshals and sends the ListHapgs API request.
@@ -781,7 +794,7 @@ func (c *CloudHSM) ListHapgsRequest(input *ListHapgsInput) ListHapgsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListHapgsRequest{Request: req, Input: input}
+	return ListHapgsRequest{Request: req, Input: input, Copy: c.ListHapgsRequest}
 }
 
 const opListHsms = "ListHsms"
@@ -790,6 +803,7 @@ const opListHsms = "ListHsms"
 type ListHsmsRequest struct {
 	*aws.Request
 	Input *ListHsmsInput
+	Copy  func(*ListHsmsInput) ListHsmsRequest
 }
 
 // Send marshals and sends the ListHsms API request.
@@ -845,7 +859,7 @@ func (c *CloudHSM) ListHsmsRequest(input *ListHsmsInput) ListHsmsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListHsmsRequest{Request: req, Input: input}
+	return ListHsmsRequest{Request: req, Input: input, Copy: c.ListHsmsRequest}
 }
 
 const opListLunaClients = "ListLunaClients"
@@ -854,6 +868,7 @@ const opListLunaClients = "ListLunaClients"
 type ListLunaClientsRequest struct {
 	*aws.Request
 	Input *ListLunaClientsInput
+	Copy  func(*ListLunaClientsInput) ListLunaClientsRequest
 }
 
 // Send marshals and sends the ListLunaClients API request.
@@ -908,7 +923,7 @@ func (c *CloudHSM) ListLunaClientsRequest(input *ListLunaClientsInput) ListLunaC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListLunaClientsRequest{Request: req, Input: input}
+	return ListLunaClientsRequest{Request: req, Input: input, Copy: c.ListLunaClientsRequest}
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -917,6 +932,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -966,7 +982,7 @@ func (c *CloudHSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) L
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opModifyHapg = "ModifyHapg"
@@ -975,6 +991,7 @@ const opModifyHapg = "ModifyHapg"
 type ModifyHapgRequest struct {
 	*aws.Request
 	Input *ModifyHapgInput
+	Copy  func(*ModifyHapgInput) ModifyHapgRequest
 }
 
 // Send marshals and sends the ModifyHapg API request.
@@ -1024,7 +1041,7 @@ func (c *CloudHSM) ModifyHapgRequest(input *ModifyHapgInput) ModifyHapgRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyHapgRequest{Request: req, Input: input}
+	return ModifyHapgRequest{Request: req, Input: input, Copy: c.ModifyHapgRequest}
 }
 
 const opModifyHsm = "ModifyHsm"
@@ -1033,6 +1050,7 @@ const opModifyHsm = "ModifyHsm"
 type ModifyHsmRequest struct {
 	*aws.Request
 	Input *ModifyHsmInput
+	Copy  func(*ModifyHsmInput) ModifyHsmRequest
 }
 
 // Send marshals and sends the ModifyHsm API request.
@@ -1088,7 +1106,7 @@ func (c *CloudHSM) ModifyHsmRequest(input *ModifyHsmInput) ModifyHsmRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyHsmRequest{Request: req, Input: input}
+	return ModifyHsmRequest{Request: req, Input: input, Copy: c.ModifyHsmRequest}
 }
 
 const opModifyLunaClient = "ModifyLunaClient"
@@ -1097,6 +1115,7 @@ const opModifyLunaClient = "ModifyLunaClient"
 type ModifyLunaClientRequest struct {
 	*aws.Request
 	Input *ModifyLunaClientInput
+	Copy  func(*ModifyLunaClientInput) ModifyLunaClientRequest
 }
 
 // Send marshals and sends the ModifyLunaClient API request.
@@ -1149,7 +1168,7 @@ func (c *CloudHSM) ModifyLunaClientRequest(input *ModifyLunaClientInput) ModifyL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyLunaClientRequest{Request: req, Input: input}
+	return ModifyLunaClientRequest{Request: req, Input: input, Copy: c.ModifyLunaClientRequest}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
@@ -1158,6 +1177,7 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 type RemoveTagsFromResourceRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromResourceInput
+	Copy  func(*RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
@@ -1210,7 +1230,7 @@ func (c *CloudHSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromResourceRequest{Request: req, Input: input}
+	return RemoveTagsFromResourceRequest{Request: req, Input: input, Copy: c.RemoveTagsFromResourceRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudhsm-2014-05-30/AddTagsToResourceRequest

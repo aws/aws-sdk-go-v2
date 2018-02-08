@@ -15,6 +15,7 @@ const opBatchDetectDominantLanguage = "BatchDetectDominantLanguage"
 type BatchDetectDominantLanguageRequest struct {
 	*aws.Request
 	Input *BatchDetectDominantLanguageInput
+	Copy  func(*BatchDetectDominantLanguageInput) BatchDetectDominantLanguageRequest
 }
 
 // Send marshals and sends the BatchDetectDominantLanguage API request.
@@ -57,7 +58,7 @@ func (c *Comprehend) BatchDetectDominantLanguageRequest(input *BatchDetectDomina
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchDetectDominantLanguageRequest{Request: req, Input: input}
+	return BatchDetectDominantLanguageRequest{Request: req, Input: input, Copy: c.BatchDetectDominantLanguageRequest}
 }
 
 const opBatchDetectEntities = "BatchDetectEntities"
@@ -66,6 +67,7 @@ const opBatchDetectEntities = "BatchDetectEntities"
 type BatchDetectEntitiesRequest struct {
 	*aws.Request
 	Input *BatchDetectEntitiesInput
+	Copy  func(*BatchDetectEntitiesInput) BatchDetectEntitiesRequest
 }
 
 // Send marshals and sends the BatchDetectEntities API request.
@@ -107,7 +109,7 @@ func (c *Comprehend) BatchDetectEntitiesRequest(input *BatchDetectEntitiesInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchDetectEntitiesRequest{Request: req, Input: input}
+	return BatchDetectEntitiesRequest{Request: req, Input: input, Copy: c.BatchDetectEntitiesRequest}
 }
 
 const opBatchDetectKeyPhrases = "BatchDetectKeyPhrases"
@@ -116,6 +118,7 @@ const opBatchDetectKeyPhrases = "BatchDetectKeyPhrases"
 type BatchDetectKeyPhrasesRequest struct {
 	*aws.Request
 	Input *BatchDetectKeyPhrasesInput
+	Copy  func(*BatchDetectKeyPhrasesInput) BatchDetectKeyPhrasesRequest
 }
 
 // Send marshals and sends the BatchDetectKeyPhrases API request.
@@ -156,7 +159,7 @@ func (c *Comprehend) BatchDetectKeyPhrasesRequest(input *BatchDetectKeyPhrasesIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchDetectKeyPhrasesRequest{Request: req, Input: input}
+	return BatchDetectKeyPhrasesRequest{Request: req, Input: input, Copy: c.BatchDetectKeyPhrasesRequest}
 }
 
 const opBatchDetectSentiment = "BatchDetectSentiment"
@@ -165,6 +168,7 @@ const opBatchDetectSentiment = "BatchDetectSentiment"
 type BatchDetectSentimentRequest struct {
 	*aws.Request
 	Input *BatchDetectSentimentInput
+	Copy  func(*BatchDetectSentimentInput) BatchDetectSentimentRequest
 }
 
 // Send marshals and sends the BatchDetectSentiment API request.
@@ -206,7 +210,7 @@ func (c *Comprehend) BatchDetectSentimentRequest(input *BatchDetectSentimentInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchDetectSentimentRequest{Request: req, Input: input}
+	return BatchDetectSentimentRequest{Request: req, Input: input, Copy: c.BatchDetectSentimentRequest}
 }
 
 const opDescribeTopicsDetectionJob = "DescribeTopicsDetectionJob"
@@ -215,6 +219,7 @@ const opDescribeTopicsDetectionJob = "DescribeTopicsDetectionJob"
 type DescribeTopicsDetectionJobRequest struct {
 	*aws.Request
 	Input *DescribeTopicsDetectionJobInput
+	Copy  func(*DescribeTopicsDetectionJobInput) DescribeTopicsDetectionJobRequest
 }
 
 // Send marshals and sends the DescribeTopicsDetectionJob API request.
@@ -256,7 +261,7 @@ func (c *Comprehend) DescribeTopicsDetectionJobRequest(input *DescribeTopicsDete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTopicsDetectionJobRequest{Request: req, Input: input}
+	return DescribeTopicsDetectionJobRequest{Request: req, Input: input, Copy: c.DescribeTopicsDetectionJobRequest}
 }
 
 const opDetectDominantLanguage = "DetectDominantLanguage"
@@ -265,6 +270,7 @@ const opDetectDominantLanguage = "DetectDominantLanguage"
 type DetectDominantLanguageRequest struct {
 	*aws.Request
 	Input *DetectDominantLanguageInput
+	Copy  func(*DetectDominantLanguageInput) DetectDominantLanguageRequest
 }
 
 // Send marshals and sends the DetectDominantLanguage API request.
@@ -307,7 +313,7 @@ func (c *Comprehend) DetectDominantLanguageRequest(input *DetectDominantLanguage
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetectDominantLanguageRequest{Request: req, Input: input}
+	return DetectDominantLanguageRequest{Request: req, Input: input, Copy: c.DetectDominantLanguageRequest}
 }
 
 const opDetectEntities = "DetectEntities"
@@ -316,6 +322,7 @@ const opDetectEntities = "DetectEntities"
 type DetectEntitiesRequest struct {
 	*aws.Request
 	Input *DetectEntitiesInput
+	Copy  func(*DetectEntitiesInput) DetectEntitiesRequest
 }
 
 // Send marshals and sends the DetectEntities API request.
@@ -357,7 +364,7 @@ func (c *Comprehend) DetectEntitiesRequest(input *DetectEntitiesInput) DetectEnt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetectEntitiesRequest{Request: req, Input: input}
+	return DetectEntitiesRequest{Request: req, Input: input, Copy: c.DetectEntitiesRequest}
 }
 
 const opDetectKeyPhrases = "DetectKeyPhrases"
@@ -366,6 +373,7 @@ const opDetectKeyPhrases = "DetectKeyPhrases"
 type DetectKeyPhrasesRequest struct {
 	*aws.Request
 	Input *DetectKeyPhrasesInput
+	Copy  func(*DetectKeyPhrasesInput) DetectKeyPhrasesRequest
 }
 
 // Send marshals and sends the DetectKeyPhrases API request.
@@ -406,7 +414,7 @@ func (c *Comprehend) DetectKeyPhrasesRequest(input *DetectKeyPhrasesInput) Detec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetectKeyPhrasesRequest{Request: req, Input: input}
+	return DetectKeyPhrasesRequest{Request: req, Input: input, Copy: c.DetectKeyPhrasesRequest}
 }
 
 const opDetectSentiment = "DetectSentiment"
@@ -415,6 +423,7 @@ const opDetectSentiment = "DetectSentiment"
 type DetectSentimentRequest struct {
 	*aws.Request
 	Input *DetectSentimentInput
+	Copy  func(*DetectSentimentInput) DetectSentimentRequest
 }
 
 // Send marshals and sends the DetectSentiment API request.
@@ -456,7 +465,7 @@ func (c *Comprehend) DetectSentimentRequest(input *DetectSentimentInput) DetectS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetectSentimentRequest{Request: req, Input: input}
+	return DetectSentimentRequest{Request: req, Input: input, Copy: c.DetectSentimentRequest}
 }
 
 const opListTopicsDetectionJobs = "ListTopicsDetectionJobs"
@@ -465,6 +474,7 @@ const opListTopicsDetectionJobs = "ListTopicsDetectionJobs"
 type ListTopicsDetectionJobsRequest struct {
 	*aws.Request
 	Input *ListTopicsDetectionJobsInput
+	Copy  func(*ListTopicsDetectionJobsInput) ListTopicsDetectionJobsRequest
 }
 
 // Send marshals and sends the ListTopicsDetectionJobs API request.
@@ -511,47 +521,47 @@ func (c *Comprehend) ListTopicsDetectionJobsRequest(input *ListTopicsDetectionJo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTopicsDetectionJobsRequest{Request: req, Input: input}
+	return ListTopicsDetectionJobsRequest{Request: req, Input: input, Copy: c.ListTopicsDetectionJobsRequest}
 }
 
-// ListTopicsDetectionJobsPages iterates over the pages of a ListTopicsDetectionJobs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTopicsDetectionJobs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTopicsDetectionJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTopicsDetectionJobs operation.
-//    pageNum := 0
-//    err := client.ListTopicsDetectionJobsPages(params,
-//        func(page *ListTopicsDetectionJobsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTopicsDetectionJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *ListTopicsDetectionJobsRequest) Paginate(opts ...aws.Option) ListTopicsDetectionJobsPager {
 	return ListTopicsDetectionJobsPager{
-		aws.Pager{NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTopicsDetectionJobsInput
-			if p.Input != nil {
-				tmp := *p.Input
-				inCpy = &tmp
-			}
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTopicsDetectionJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-			var output ListTopicsDetectionJobsOutput
-			req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-			req.SetContext(p.Request.Context())
-			req.ApplyOptions(opts...)
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
 
-			return req, nil
-		},
+				return req.Request, nil
+			},
 		},
 	}
 }
 
-// ListTopicsDetectionJobsPager ...
+// ListTopicsDetectionJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type ListTopicsDetectionJobsPager struct {
 	aws.Pager
 }
@@ -566,6 +576,7 @@ const opStartTopicsDetectionJob = "StartTopicsDetectionJob"
 type StartTopicsDetectionJobRequest struct {
 	*aws.Request
 	Input *StartTopicsDetectionJobInput
+	Copy  func(*StartTopicsDetectionJobInput) StartTopicsDetectionJobRequest
 }
 
 // Send marshals and sends the StartTopicsDetectionJob API request.
@@ -607,7 +618,7 @@ func (c *Comprehend) StartTopicsDetectionJobRequest(input *StartTopicsDetectionJ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartTopicsDetectionJobRequest{Request: req, Input: input}
+	return StartTopicsDetectionJobRequest{Request: req, Input: input, Copy: c.StartTopicsDetectionJobRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/BatchDetectDominantLanguageRequest
