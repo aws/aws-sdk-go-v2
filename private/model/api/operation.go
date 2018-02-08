@@ -77,6 +77,7 @@ const op{{ .ExportedName }} = "{{ .Name }}"
 type {{ $reqType}} struct {
 	*aws.Request
 	Input {{ .InputRef.GoType }}
+	Copy func({{ .InputRef.GoType }}) {{ $reqType }}
 }
 
 // Send marshals and sends the {{ .ExportedName }} API request. 
@@ -142,48 +143,48 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 
 	{{ if ne .AuthType "" }}{{ .GetSigner }}{{ end -}}
 
-	return {{ $reqType}}{Request: req, Input: input}
+	return {{ $reqType}}{Request: req, Input: input, Copy: c.{{ $reqType }} }
 }
 
 {{ if .Paginator }}
-// {{ .ExportedName }}Pages iterates over the pages of a {{ .ExportedName }} operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See {{ .ExportedName }} method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a {{ $reqType }} operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a {{ .ExportedName }} operation.
-//    pageNum := 0
-//    err := client.{{ .ExportedName }}Pages(params,
-//        func(page {{ .OutputRef.GoType }}, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.{{ $reqType }}(input)		
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//		
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
 func (p *{{ $reqType }}) Paginate(opts ...aws.Option) {{ $pagerType }} {
 	return {{ $pagerType }}{
-			aws.Pager {NewRequest: func() (*aws.Request, error) {
+		Pager: aws.Pager {
+			NewRequest: func() (*aws.Request, error) {
 				var inCpy {{ .InputRef.GoType }}
 				if p.Input != nil  {
 					tmp := *p.Input
 					inCpy = &tmp
 				}
 
-				var output {{ .OutputRef.GoTypeElem }}
-				req := aws.New(p.Request.Config, p.Request.Metadata, p.Request.Handlers.Copy(), p.Request.Retryer, p.Request.Operation, inCpy, &output)
-				req.SetContext(p.Request.Context())
+				req := p.Copy(inCpy)
 				req.ApplyOptions(opts...)
 
-				return req, nil
+				return req.Request, nil
 			},
 		},
 	}
 }
 
-// {{ $pagerType }} ...
+// {{ $pagerType }} is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
 type {{ $pagerType }} struct {
 	aws.Pager
 }
