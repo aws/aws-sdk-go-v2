@@ -65,9 +65,6 @@ import (
 type DynamoDBAPI interface {
 	BatchGetItemRequest(*dynamodb.BatchGetItemInput) dynamodb.BatchGetItemRequest
 
-	BatchGetItemPages(*dynamodb.BatchGetItemInput, func(*dynamodb.BatchGetItemOutput, bool) bool) error
-	BatchGetItemPagesWithContext(aws.Context, *dynamodb.BatchGetItemInput, func(*dynamodb.BatchGetItemOutput, bool) bool, ...aws.Option) error
-
 	BatchWriteItemRequest(*dynamodb.BatchWriteItemInput) dynamodb.BatchWriteItemRequest
 
 	CreateBackupRequest(*dynamodb.CreateBackupInput) dynamodb.CreateBackupRequest
@@ -102,24 +99,15 @@ type DynamoDBAPI interface {
 
 	ListTablesRequest(*dynamodb.ListTablesInput) dynamodb.ListTablesRequest
 
-	ListTablesPages(*dynamodb.ListTablesInput, func(*dynamodb.ListTablesOutput, bool) bool) error
-	ListTablesPagesWithContext(aws.Context, *dynamodb.ListTablesInput, func(*dynamodb.ListTablesOutput, bool) bool, ...aws.Option) error
-
 	ListTagsOfResourceRequest(*dynamodb.ListTagsOfResourceInput) dynamodb.ListTagsOfResourceRequest
 
 	PutItemRequest(*dynamodb.PutItemInput) dynamodb.PutItemRequest
 
 	QueryRequest(*dynamodb.QueryInput) dynamodb.QueryRequest
 
-	QueryPages(*dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool) error
-	QueryPagesWithContext(aws.Context, *dynamodb.QueryInput, func(*dynamodb.QueryOutput, bool) bool, ...aws.Option) error
-
 	RestoreTableFromBackupRequest(*dynamodb.RestoreTableFromBackupInput) dynamodb.RestoreTableFromBackupRequest
 
 	ScanRequest(*dynamodb.ScanInput) dynamodb.ScanRequest
-
-	ScanPages(*dynamodb.ScanInput, func(*dynamodb.ScanOutput, bool) bool) error
-	ScanPagesWithContext(aws.Context, *dynamodb.ScanInput, func(*dynamodb.ScanOutput, bool) bool, ...aws.Option) error
 
 	TagResourceRequest(*dynamodb.TagResourceInput) dynamodb.TagResourceRequest
 

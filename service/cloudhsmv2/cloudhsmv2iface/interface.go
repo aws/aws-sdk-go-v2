@@ -9,7 +9,6 @@
 package cloudhsmv2iface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2"
 )
 
@@ -73,20 +72,11 @@ type CloudHSMV2API interface {
 
 	DescribeBackupsRequest(*cloudhsmv2.DescribeBackupsInput) cloudhsmv2.DescribeBackupsRequest
 
-	DescribeBackupsPages(*cloudhsmv2.DescribeBackupsInput, func(*cloudhsmv2.DescribeBackupsOutput, bool) bool) error
-	DescribeBackupsPagesWithContext(aws.Context, *cloudhsmv2.DescribeBackupsInput, func(*cloudhsmv2.DescribeBackupsOutput, bool) bool, ...aws.Option) error
-
 	DescribeClustersRequest(*cloudhsmv2.DescribeClustersInput) cloudhsmv2.DescribeClustersRequest
-
-	DescribeClustersPages(*cloudhsmv2.DescribeClustersInput, func(*cloudhsmv2.DescribeClustersOutput, bool) bool) error
-	DescribeClustersPagesWithContext(aws.Context, *cloudhsmv2.DescribeClustersInput, func(*cloudhsmv2.DescribeClustersOutput, bool) bool, ...aws.Option) error
 
 	InitializeClusterRequest(*cloudhsmv2.InitializeClusterInput) cloudhsmv2.InitializeClusterRequest
 
 	ListTagsRequest(*cloudhsmv2.ListTagsInput) cloudhsmv2.ListTagsRequest
-
-	ListTagsPages(*cloudhsmv2.ListTagsInput, func(*cloudhsmv2.ListTagsOutput, bool) bool) error
-	ListTagsPagesWithContext(aws.Context, *cloudhsmv2.ListTagsInput, func(*cloudhsmv2.ListTagsOutput, bool) bool, ...aws.Option) error
 
 	TagResourceRequest(*cloudhsmv2.TagResourceInput) cloudhsmv2.TagResourceRequest
 

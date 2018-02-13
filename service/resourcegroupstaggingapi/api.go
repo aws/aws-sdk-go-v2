@@ -15,6 +15,7 @@ const opGetResources = "GetResources"
 type GetResourcesRequest struct {
 	*aws.Request
 	Input *GetResourcesInput
+	Copy  func(*GetResourcesInput) GetResourcesRequest
 }
 
 // Send marshals and sends the GetResources API request.
@@ -66,57 +67,53 @@ func (c *ResourceGroupsTaggingAPI) GetResourcesRequest(input *GetResourcesInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetResourcesRequest{Request: req, Input: input}
+	return GetResourcesRequest{Request: req, Input: input, Copy: c.GetResourcesRequest}
 }
 
-// GetResourcesPages iterates over the pages of a GetResources operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetResources method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetResourcesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetResources operation.
-//    pageNum := 0
-//    err := client.GetResourcesPages(params,
-//        func(page *GetResourcesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetResourcesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ResourceGroupsTaggingAPI) GetResourcesPages(input *GetResourcesInput, fn func(*GetResourcesOutput, bool) bool) error {
-	return c.GetResourcesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetResourcesRequest) Paginate(opts ...aws.Option) GetResourcesPager {
+	return GetResourcesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetResourcesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetResourcesPagesWithContext same as GetResourcesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetResourcesPagesWithContext(ctx aws.Context, input *GetResourcesInput, fn func(*GetResourcesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetResourcesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetResourcesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetResourcesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetResourcesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetResourcesPager struct {
+	aws.Pager
+}
+
+func (p *GetResourcesPager) CurrentPage() *GetResourcesOutput {
+	return p.Pager.CurrentPage().(*GetResourcesOutput)
 }
 
 const opGetTagKeys = "GetTagKeys"
@@ -125,6 +122,7 @@ const opGetTagKeys = "GetTagKeys"
 type GetTagKeysRequest struct {
 	*aws.Request
 	Input *GetTagKeysInput
+	Copy  func(*GetTagKeysInput) GetTagKeysRequest
 }
 
 // Send marshals and sends the GetTagKeys API request.
@@ -171,57 +169,53 @@ func (c *ResourceGroupsTaggingAPI) GetTagKeysRequest(input *GetTagKeysInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTagKeysRequest{Request: req, Input: input}
+	return GetTagKeysRequest{Request: req, Input: input, Copy: c.GetTagKeysRequest}
 }
 
-// GetTagKeysPages iterates over the pages of a GetTagKeys operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetTagKeys method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetTagKeysRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetTagKeys operation.
-//    pageNum := 0
-//    err := client.GetTagKeysPages(params,
-//        func(page *GetTagKeysOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetTagKeysRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ResourceGroupsTaggingAPI) GetTagKeysPages(input *GetTagKeysInput, fn func(*GetTagKeysOutput, bool) bool) error {
-	return c.GetTagKeysPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetTagKeysRequest) Paginate(opts ...aws.Option) GetTagKeysPager {
+	return GetTagKeysPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetTagKeysInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetTagKeysPagesWithContext same as GetTagKeysPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetTagKeysPagesWithContext(ctx aws.Context, input *GetTagKeysInput, fn func(*GetTagKeysOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetTagKeysInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetTagKeysRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTagKeysOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetTagKeysPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetTagKeysPager struct {
+	aws.Pager
+}
+
+func (p *GetTagKeysPager) CurrentPage() *GetTagKeysOutput {
+	return p.Pager.CurrentPage().(*GetTagKeysOutput)
 }
 
 const opGetTagValues = "GetTagValues"
@@ -230,6 +224,7 @@ const opGetTagValues = "GetTagValues"
 type GetTagValuesRequest struct {
 	*aws.Request
 	Input *GetTagValuesInput
+	Copy  func(*GetTagValuesInput) GetTagValuesRequest
 }
 
 // Send marshals and sends the GetTagValues API request.
@@ -277,57 +272,53 @@ func (c *ResourceGroupsTaggingAPI) GetTagValuesRequest(input *GetTagValuesInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTagValuesRequest{Request: req, Input: input}
+	return GetTagValuesRequest{Request: req, Input: input, Copy: c.GetTagValuesRequest}
 }
 
-// GetTagValuesPages iterates over the pages of a GetTagValues operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetTagValues method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetTagValuesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetTagValues operation.
-//    pageNum := 0
-//    err := client.GetTagValuesPages(params,
-//        func(page *GetTagValuesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetTagValuesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ResourceGroupsTaggingAPI) GetTagValuesPages(input *GetTagValuesInput, fn func(*GetTagValuesOutput, bool) bool) error {
-	return c.GetTagValuesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetTagValuesRequest) Paginate(opts ...aws.Option) GetTagValuesPager {
+	return GetTagValuesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetTagValuesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetTagValuesPagesWithContext same as GetTagValuesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroupsTaggingAPI) GetTagValuesPagesWithContext(ctx aws.Context, input *GetTagValuesInput, fn func(*GetTagValuesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetTagValuesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetTagValuesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetTagValuesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetTagValuesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetTagValuesPager struct {
+	aws.Pager
+}
+
+func (p *GetTagValuesPager) CurrentPage() *GetTagValuesOutput {
+	return p.Pager.CurrentPage().(*GetTagValuesOutput)
 }
 
 const opTagResources = "TagResources"
@@ -336,6 +327,7 @@ const opTagResources = "TagResources"
 type TagResourcesRequest struct {
 	*aws.Request
 	Input *TagResourcesInput
+	Copy  func(*TagResourcesInput) TagResourcesRequest
 }
 
 // Send marshals and sends the TagResources API request.
@@ -392,7 +384,7 @@ func (c *ResourceGroupsTaggingAPI) TagResourcesRequest(input *TagResourcesInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourcesRequest{Request: req, Input: input}
+	return TagResourcesRequest{Request: req, Input: input, Copy: c.TagResourcesRequest}
 }
 
 const opUntagResources = "UntagResources"
@@ -401,6 +393,7 @@ const opUntagResources = "UntagResources"
 type UntagResourcesRequest struct {
 	*aws.Request
 	Input *UntagResourcesInput
+	Copy  func(*UntagResourcesInput) UntagResourcesRequest
 }
 
 // Send marshals and sends the UntagResources API request.
@@ -452,7 +445,7 @@ func (c *ResourceGroupsTaggingAPI) UntagResourcesRequest(input *UntagResourcesIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourcesRequest{Request: req, Input: input}
+	return UntagResourcesRequest{Request: req, Input: input, Copy: c.UntagResourcesRequest}
 }
 
 // Details of the common errors that all actions return.

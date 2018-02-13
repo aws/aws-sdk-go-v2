@@ -15,6 +15,7 @@ const opCreateEnvironmentEC2 = "CreateEnvironmentEC2"
 type CreateEnvironmentEC2Request struct {
 	*aws.Request
 	Input *CreateEnvironmentEC2Input
+	Copy  func(*CreateEnvironmentEC2Input) CreateEnvironmentEC2Request
 }
 
 // Send marshals and sends the CreateEnvironmentEC2 API request.
@@ -57,7 +58,7 @@ func (c *Cloud9) CreateEnvironmentEC2Request(input *CreateEnvironmentEC2Input) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEnvironmentEC2Request{Request: req, Input: input}
+	return CreateEnvironmentEC2Request{Request: req, Input: input, Copy: c.CreateEnvironmentEC2Request}
 }
 
 const opCreateEnvironmentMembership = "CreateEnvironmentMembership"
@@ -66,6 +67,7 @@ const opCreateEnvironmentMembership = "CreateEnvironmentMembership"
 type CreateEnvironmentMembershipRequest struct {
 	*aws.Request
 	Input *CreateEnvironmentMembershipInput
+	Copy  func(*CreateEnvironmentMembershipInput) CreateEnvironmentMembershipRequest
 }
 
 // Send marshals and sends the CreateEnvironmentMembership API request.
@@ -106,7 +108,7 @@ func (c *Cloud9) CreateEnvironmentMembershipRequest(input *CreateEnvironmentMemb
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEnvironmentMembershipRequest{Request: req, Input: input}
+	return CreateEnvironmentMembershipRequest{Request: req, Input: input, Copy: c.CreateEnvironmentMembershipRequest}
 }
 
 const opDeleteEnvironment = "DeleteEnvironment"
@@ -115,6 +117,7 @@ const opDeleteEnvironment = "DeleteEnvironment"
 type DeleteEnvironmentRequest struct {
 	*aws.Request
 	Input *DeleteEnvironmentInput
+	Copy  func(*DeleteEnvironmentInput) DeleteEnvironmentRequest
 }
 
 // Send marshals and sends the DeleteEnvironment API request.
@@ -157,7 +160,7 @@ func (c *Cloud9) DeleteEnvironmentRequest(input *DeleteEnvironmentInput) DeleteE
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEnvironmentRequest{Request: req, Input: input}
+	return DeleteEnvironmentRequest{Request: req, Input: input, Copy: c.DeleteEnvironmentRequest}
 }
 
 const opDeleteEnvironmentMembership = "DeleteEnvironmentMembership"
@@ -166,6 +169,7 @@ const opDeleteEnvironmentMembership = "DeleteEnvironmentMembership"
 type DeleteEnvironmentMembershipRequest struct {
 	*aws.Request
 	Input *DeleteEnvironmentMembershipInput
+	Copy  func(*DeleteEnvironmentMembershipInput) DeleteEnvironmentMembershipRequest
 }
 
 // Send marshals and sends the DeleteEnvironmentMembership API request.
@@ -206,7 +210,7 @@ func (c *Cloud9) DeleteEnvironmentMembershipRequest(input *DeleteEnvironmentMemb
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEnvironmentMembershipRequest{Request: req, Input: input}
+	return DeleteEnvironmentMembershipRequest{Request: req, Input: input, Copy: c.DeleteEnvironmentMembershipRequest}
 }
 
 const opDescribeEnvironmentMemberships = "DescribeEnvironmentMemberships"
@@ -215,6 +219,7 @@ const opDescribeEnvironmentMemberships = "DescribeEnvironmentMemberships"
 type DescribeEnvironmentMembershipsRequest struct {
 	*aws.Request
 	Input *DescribeEnvironmentMembershipsInput
+	Copy  func(*DescribeEnvironmentMembershipsInput) DescribeEnvironmentMembershipsRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentMemberships API request.
@@ -262,57 +267,53 @@ func (c *Cloud9) DescribeEnvironmentMembershipsRequest(input *DescribeEnvironmen
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEnvironmentMembershipsRequest{Request: req, Input: input}
+	return DescribeEnvironmentMembershipsRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentMembershipsRequest}
 }
 
-// DescribeEnvironmentMembershipsPages iterates over the pages of a DescribeEnvironmentMemberships operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEnvironmentMemberships method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEnvironmentMembershipsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEnvironmentMemberships operation.
-//    pageNum := 0
-//    err := client.DescribeEnvironmentMembershipsPages(params,
-//        func(page *DescribeEnvironmentMembershipsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEnvironmentMembershipsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Cloud9) DescribeEnvironmentMembershipsPages(input *DescribeEnvironmentMembershipsInput, fn func(*DescribeEnvironmentMembershipsOutput, bool) bool) error {
-	return c.DescribeEnvironmentMembershipsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEnvironmentMembershipsRequest) Paginate(opts ...aws.Option) DescribeEnvironmentMembershipsPager {
+	return DescribeEnvironmentMembershipsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEnvironmentMembershipsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEnvironmentMembershipsPagesWithContext same as DescribeEnvironmentMembershipsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Cloud9) DescribeEnvironmentMembershipsPagesWithContext(ctx aws.Context, input *DescribeEnvironmentMembershipsInput, fn func(*DescribeEnvironmentMembershipsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEnvironmentMembershipsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEnvironmentMembershipsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEnvironmentMembershipsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEnvironmentMembershipsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEnvironmentMembershipsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEnvironmentMembershipsPager) CurrentPage() *DescribeEnvironmentMembershipsOutput {
+	return p.Pager.CurrentPage().(*DescribeEnvironmentMembershipsOutput)
 }
 
 const opDescribeEnvironmentStatus = "DescribeEnvironmentStatus"
@@ -321,6 +322,7 @@ const opDescribeEnvironmentStatus = "DescribeEnvironmentStatus"
 type DescribeEnvironmentStatusRequest struct {
 	*aws.Request
 	Input *DescribeEnvironmentStatusInput
+	Copy  func(*DescribeEnvironmentStatusInput) DescribeEnvironmentStatusRequest
 }
 
 // Send marshals and sends the DescribeEnvironmentStatus API request.
@@ -361,7 +363,7 @@ func (c *Cloud9) DescribeEnvironmentStatusRequest(input *DescribeEnvironmentStat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEnvironmentStatusRequest{Request: req, Input: input}
+	return DescribeEnvironmentStatusRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentStatusRequest}
 }
 
 const opDescribeEnvironments = "DescribeEnvironments"
@@ -370,6 +372,7 @@ const opDescribeEnvironments = "DescribeEnvironments"
 type DescribeEnvironmentsRequest struct {
 	*aws.Request
 	Input *DescribeEnvironmentsInput
+	Copy  func(*DescribeEnvironmentsInput) DescribeEnvironmentsRequest
 }
 
 // Send marshals and sends the DescribeEnvironments API request.
@@ -410,7 +413,7 @@ func (c *Cloud9) DescribeEnvironmentsRequest(input *DescribeEnvironmentsInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEnvironmentsRequest{Request: req, Input: input}
+	return DescribeEnvironmentsRequest{Request: req, Input: input, Copy: c.DescribeEnvironmentsRequest}
 }
 
 const opListEnvironments = "ListEnvironments"
@@ -419,6 +422,7 @@ const opListEnvironments = "ListEnvironments"
 type ListEnvironmentsRequest struct {
 	*aws.Request
 	Input *ListEnvironmentsInput
+	Copy  func(*ListEnvironmentsInput) ListEnvironmentsRequest
 }
 
 // Send marshals and sends the ListEnvironments API request.
@@ -465,57 +469,53 @@ func (c *Cloud9) ListEnvironmentsRequest(input *ListEnvironmentsInput) ListEnvir
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListEnvironmentsRequest{Request: req, Input: input}
+	return ListEnvironmentsRequest{Request: req, Input: input, Copy: c.ListEnvironmentsRequest}
 }
 
-// ListEnvironmentsPages iterates over the pages of a ListEnvironments operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListEnvironments method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListEnvironmentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListEnvironments operation.
-//    pageNum := 0
-//    err := client.ListEnvironmentsPages(params,
-//        func(page *ListEnvironmentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListEnvironmentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Cloud9) ListEnvironmentsPages(input *ListEnvironmentsInput, fn func(*ListEnvironmentsOutput, bool) bool) error {
-	return c.ListEnvironmentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListEnvironmentsRequest) Paginate(opts ...aws.Option) ListEnvironmentsPager {
+	return ListEnvironmentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListEnvironmentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListEnvironmentsPagesWithContext same as ListEnvironmentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Cloud9) ListEnvironmentsPagesWithContext(ctx aws.Context, input *ListEnvironmentsInput, fn func(*ListEnvironmentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListEnvironmentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListEnvironmentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListEnvironmentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListEnvironmentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListEnvironmentsPager struct {
+	aws.Pager
+}
+
+func (p *ListEnvironmentsPager) CurrentPage() *ListEnvironmentsOutput {
+	return p.Pager.CurrentPage().(*ListEnvironmentsOutput)
 }
 
 const opUpdateEnvironment = "UpdateEnvironment"
@@ -524,6 +524,7 @@ const opUpdateEnvironment = "UpdateEnvironment"
 type UpdateEnvironmentRequest struct {
 	*aws.Request
 	Input *UpdateEnvironmentInput
+	Copy  func(*UpdateEnvironmentInput) UpdateEnvironmentRequest
 }
 
 // Send marshals and sends the UpdateEnvironment API request.
@@ -564,7 +565,7 @@ func (c *Cloud9) UpdateEnvironmentRequest(input *UpdateEnvironmentInput) UpdateE
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEnvironmentRequest{Request: req, Input: input}
+	return UpdateEnvironmentRequest{Request: req, Input: input, Copy: c.UpdateEnvironmentRequest}
 }
 
 const opUpdateEnvironmentMembership = "UpdateEnvironmentMembership"
@@ -573,6 +574,7 @@ const opUpdateEnvironmentMembership = "UpdateEnvironmentMembership"
 type UpdateEnvironmentMembershipRequest struct {
 	*aws.Request
 	Input *UpdateEnvironmentMembershipInput
+	Copy  func(*UpdateEnvironmentMembershipInput) UpdateEnvironmentMembershipRequest
 }
 
 // Send marshals and sends the UpdateEnvironmentMembership API request.
@@ -614,7 +616,7 @@ func (c *Cloud9) UpdateEnvironmentMembershipRequest(input *UpdateEnvironmentMemb
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEnvironmentMembershipRequest{Request: req, Input: input}
+	return UpdateEnvironmentMembershipRequest{Request: req, Input: input, Copy: c.UpdateEnvironmentMembershipRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloud9-2017-09-23/CreateEnvironmentEC2Request

@@ -18,6 +18,7 @@ const opAcceptMatch = "AcceptMatch"
 type AcceptMatchRequest struct {
 	*aws.Request
 	Input *AcceptMatchInput
+	Copy  func(*AcceptMatchInput) AcceptMatchRequest
 }
 
 // Send marshals and sends the AcceptMatch API request.
@@ -89,7 +90,7 @@ func (c *GameLift) AcceptMatchRequest(input *AcceptMatchInput) AcceptMatchReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcceptMatchRequest{Request: req, Input: input}
+	return AcceptMatchRequest{Request: req, Input: input, Copy: c.AcceptMatchRequest}
 }
 
 const opCreateAlias = "CreateAlias"
@@ -98,6 +99,7 @@ const opCreateAlias = "CreateAlias"
 type CreateAliasRequest struct {
 	*aws.Request
 	Input *CreateAliasInput
+	Copy  func(*CreateAliasInput) CreateAliasRequest
 }
 
 // Send marshals and sends the CreateAlias API request.
@@ -170,7 +172,7 @@ func (c *GameLift) CreateAliasRequest(input *CreateAliasInput) CreateAliasReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAliasRequest{Request: req, Input: input}
+	return CreateAliasRequest{Request: req, Input: input, Copy: c.CreateAliasRequest}
 }
 
 const opCreateBuild = "CreateBuild"
@@ -179,6 +181,7 @@ const opCreateBuild = "CreateBuild"
 type CreateBuildRequest struct {
 	*aws.Request
 	Input *CreateBuildInput
+	Copy  func(*CreateBuildInput) CreateBuildRequest
 }
 
 // Send marshals and sends the CreateBuild API request.
@@ -248,7 +251,7 @@ func (c *GameLift) CreateBuildRequest(input *CreateBuildInput) CreateBuildReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBuildRequest{Request: req, Input: input}
+	return CreateBuildRequest{Request: req, Input: input, Copy: c.CreateBuildRequest}
 }
 
 const opCreateFleet = "CreateFleet"
@@ -257,6 +260,7 @@ const opCreateFleet = "CreateFleet"
 type CreateFleetRequest struct {
 	*aws.Request
 	Input *CreateFleetInput
+	Copy  func(*CreateFleetInput) CreateFleetRequest
 }
 
 // Send marshals and sends the CreateFleet API request.
@@ -390,7 +394,7 @@ func (c *GameLift) CreateFleetRequest(input *CreateFleetInput) CreateFleetReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateFleetRequest{Request: req, Input: input}
+	return CreateFleetRequest{Request: req, Input: input, Copy: c.CreateFleetRequest}
 }
 
 const opCreateGameSession = "CreateGameSession"
@@ -399,6 +403,7 @@ const opCreateGameSession = "CreateGameSession"
 type CreateGameSessionRequest struct {
 	*aws.Request
 	Input *CreateGameSessionInput
+	Copy  func(*CreateGameSessionInput) CreateGameSessionRequest
 }
 
 // Send marshals and sends the CreateGameSession API request.
@@ -490,7 +495,7 @@ func (c *GameLift) CreateGameSessionRequest(input *CreateGameSessionInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGameSessionRequest{Request: req, Input: input}
+	return CreateGameSessionRequest{Request: req, Input: input, Copy: c.CreateGameSessionRequest}
 }
 
 const opCreateGameSessionQueue = "CreateGameSessionQueue"
@@ -499,6 +504,7 @@ const opCreateGameSessionQueue = "CreateGameSessionQueue"
 type CreateGameSessionQueueRequest struct {
 	*aws.Request
 	Input *CreateGameSessionQueueInput
+	Copy  func(*CreateGameSessionQueueInput) CreateGameSessionQueueRequest
 }
 
 // Send marshals and sends the CreateGameSessionQueue API request.
@@ -578,7 +584,7 @@ func (c *GameLift) CreateGameSessionQueueRequest(input *CreateGameSessionQueueIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGameSessionQueueRequest{Request: req, Input: input}
+	return CreateGameSessionQueueRequest{Request: req, Input: input, Copy: c.CreateGameSessionQueueRequest}
 }
 
 const opCreateMatchmakingConfiguration = "CreateMatchmakingConfiguration"
@@ -587,6 +593,7 @@ const opCreateMatchmakingConfiguration = "CreateMatchmakingConfiguration"
 type CreateMatchmakingConfigurationRequest struct {
 	*aws.Request
 	Input *CreateMatchmakingConfigurationInput
+	Copy  func(*CreateMatchmakingConfigurationInput) CreateMatchmakingConfigurationRequest
 }
 
 // Send marshals and sends the CreateMatchmakingConfiguration API request.
@@ -670,7 +677,7 @@ func (c *GameLift) CreateMatchmakingConfigurationRequest(input *CreateMatchmakin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateMatchmakingConfigurationRequest{Request: req, Input: input}
+	return CreateMatchmakingConfigurationRequest{Request: req, Input: input, Copy: c.CreateMatchmakingConfigurationRequest}
 }
 
 const opCreateMatchmakingRuleSet = "CreateMatchmakingRuleSet"
@@ -679,6 +686,7 @@ const opCreateMatchmakingRuleSet = "CreateMatchmakingRuleSet"
 type CreateMatchmakingRuleSetRequest struct {
 	*aws.Request
 	Input *CreateMatchmakingRuleSetInput
+	Copy  func(*CreateMatchmakingRuleSetInput) CreateMatchmakingRuleSetRequest
 }
 
 // Send marshals and sends the CreateMatchmakingRuleSet API request.
@@ -755,7 +763,7 @@ func (c *GameLift) CreateMatchmakingRuleSetRequest(input *CreateMatchmakingRuleS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateMatchmakingRuleSetRequest{Request: req, Input: input}
+	return CreateMatchmakingRuleSetRequest{Request: req, Input: input, Copy: c.CreateMatchmakingRuleSetRequest}
 }
 
 const opCreatePlayerSession = "CreatePlayerSession"
@@ -764,6 +772,7 @@ const opCreatePlayerSession = "CreatePlayerSession"
 type CreatePlayerSessionRequest struct {
 	*aws.Request
 	Input *CreatePlayerSessionInput
+	Copy  func(*CreatePlayerSessionInput) CreatePlayerSessionRequest
 }
 
 // Send marshals and sends the CreatePlayerSession API request.
@@ -829,7 +838,7 @@ func (c *GameLift) CreatePlayerSessionRequest(input *CreatePlayerSessionInput) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePlayerSessionRequest{Request: req, Input: input}
+	return CreatePlayerSessionRequest{Request: req, Input: input, Copy: c.CreatePlayerSessionRequest}
 }
 
 const opCreatePlayerSessions = "CreatePlayerSessions"
@@ -838,6 +847,7 @@ const opCreatePlayerSessions = "CreatePlayerSessions"
 type CreatePlayerSessionsRequest struct {
 	*aws.Request
 	Input *CreatePlayerSessionsInput
+	Copy  func(*CreatePlayerSessionsInput) CreatePlayerSessionsRequest
 }
 
 // Send marshals and sends the CreatePlayerSessions API request.
@@ -904,7 +914,7 @@ func (c *GameLift) CreatePlayerSessionsRequest(input *CreatePlayerSessionsInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePlayerSessionsRequest{Request: req, Input: input}
+	return CreatePlayerSessionsRequest{Request: req, Input: input, Copy: c.CreatePlayerSessionsRequest}
 }
 
 const opCreateVpcPeeringAuthorization = "CreateVpcPeeringAuthorization"
@@ -913,6 +923,7 @@ const opCreateVpcPeeringAuthorization = "CreateVpcPeeringAuthorization"
 type CreateVpcPeeringAuthorizationRequest struct {
 	*aws.Request
 	Input *CreateVpcPeeringAuthorizationInput
+	Copy  func(*CreateVpcPeeringAuthorizationInput) CreateVpcPeeringAuthorizationRequest
 }
 
 // Send marshals and sends the CreateVpcPeeringAuthorization API request.
@@ -994,7 +1005,7 @@ func (c *GameLift) CreateVpcPeeringAuthorizationRequest(input *CreateVpcPeeringA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpcPeeringAuthorizationRequest{Request: req, Input: input}
+	return CreateVpcPeeringAuthorizationRequest{Request: req, Input: input, Copy: c.CreateVpcPeeringAuthorizationRequest}
 }
 
 const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
@@ -1003,6 +1014,7 @@ const opCreateVpcPeeringConnection = "CreateVpcPeeringConnection"
 type CreateVpcPeeringConnectionRequest struct {
 	*aws.Request
 	Input *CreateVpcPeeringConnectionInput
+	Copy  func(*CreateVpcPeeringConnectionInput) CreateVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the CreateVpcPeeringConnection API request.
@@ -1079,7 +1091,7 @@ func (c *GameLift) CreateVpcPeeringConnectionRequest(input *CreateVpcPeeringConn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpcPeeringConnectionRequest{Request: req, Input: input}
+	return CreateVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.CreateVpcPeeringConnectionRequest}
 }
 
 const opDeleteAlias = "DeleteAlias"
@@ -1088,6 +1100,7 @@ const opDeleteAlias = "DeleteAlias"
 type DeleteAliasRequest struct {
 	*aws.Request
 	Input *DeleteAliasInput
+	Copy  func(*DeleteAliasInput) DeleteAliasRequest
 }
 
 // Send marshals and sends the DeleteAlias API request.
@@ -1146,7 +1159,7 @@ func (c *GameLift) DeleteAliasRequest(input *DeleteAliasInput) DeleteAliasReques
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAliasRequest{Request: req, Input: input}
+	return DeleteAliasRequest{Request: req, Input: input, Copy: c.DeleteAliasRequest}
 }
 
 const opDeleteBuild = "DeleteBuild"
@@ -1155,6 +1168,7 @@ const opDeleteBuild = "DeleteBuild"
 type DeleteBuildRequest struct {
 	*aws.Request
 	Input *DeleteBuildInput
+	Copy  func(*DeleteBuildInput) DeleteBuildRequest
 }
 
 // Send marshals and sends the DeleteBuild API request.
@@ -1214,7 +1228,7 @@ func (c *GameLift) DeleteBuildRequest(input *DeleteBuildInput) DeleteBuildReques
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBuildRequest{Request: req, Input: input}
+	return DeleteBuildRequest{Request: req, Input: input, Copy: c.DeleteBuildRequest}
 }
 
 const opDeleteFleet = "DeleteFleet"
@@ -1223,6 +1237,7 @@ const opDeleteFleet = "DeleteFleet"
 type DeleteFleetRequest struct {
 	*aws.Request
 	Input *DeleteFleetInput
+	Copy  func(*DeleteFleetInput) DeleteFleetRequest
 }
 
 // Send marshals and sends the DeleteFleet API request.
@@ -1313,7 +1328,7 @@ func (c *GameLift) DeleteFleetRequest(input *DeleteFleetInput) DeleteFleetReques
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFleetRequest{Request: req, Input: input}
+	return DeleteFleetRequest{Request: req, Input: input, Copy: c.DeleteFleetRequest}
 }
 
 const opDeleteGameSessionQueue = "DeleteGameSessionQueue"
@@ -1322,6 +1337,7 @@ const opDeleteGameSessionQueue = "DeleteGameSessionQueue"
 type DeleteGameSessionQueueRequest struct {
 	*aws.Request
 	Input *DeleteGameSessionQueueInput
+	Copy  func(*DeleteGameSessionQueueInput) DeleteGameSessionQueueRequest
 }
 
 // Send marshals and sends the DeleteGameSessionQueue API request.
@@ -1374,7 +1390,7 @@ func (c *GameLift) DeleteGameSessionQueueRequest(input *DeleteGameSessionQueueIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGameSessionQueueRequest{Request: req, Input: input}
+	return DeleteGameSessionQueueRequest{Request: req, Input: input, Copy: c.DeleteGameSessionQueueRequest}
 }
 
 const opDeleteMatchmakingConfiguration = "DeleteMatchmakingConfiguration"
@@ -1383,6 +1399,7 @@ const opDeleteMatchmakingConfiguration = "DeleteMatchmakingConfiguration"
 type DeleteMatchmakingConfigurationRequest struct {
 	*aws.Request
 	Input *DeleteMatchmakingConfigurationInput
+	Copy  func(*DeleteMatchmakingConfigurationInput) DeleteMatchmakingConfigurationRequest
 }
 
 // Send marshals and sends the DeleteMatchmakingConfiguration API request.
@@ -1441,7 +1458,7 @@ func (c *GameLift) DeleteMatchmakingConfigurationRequest(input *DeleteMatchmakin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteMatchmakingConfigurationRequest{Request: req, Input: input}
+	return DeleteMatchmakingConfigurationRequest{Request: req, Input: input, Copy: c.DeleteMatchmakingConfigurationRequest}
 }
 
 const opDeleteScalingPolicy = "DeleteScalingPolicy"
@@ -1450,6 +1467,7 @@ const opDeleteScalingPolicy = "DeleteScalingPolicy"
 type DeleteScalingPolicyRequest struct {
 	*aws.Request
 	Input *DeleteScalingPolicyInput
+	Copy  func(*DeleteScalingPolicyInput) DeleteScalingPolicyRequest
 }
 
 // Send marshals and sends the DeleteScalingPolicy API request.
@@ -1538,7 +1556,7 @@ func (c *GameLift) DeleteScalingPolicyRequest(input *DeleteScalingPolicyInput) D
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteScalingPolicyRequest{Request: req, Input: input}
+	return DeleteScalingPolicyRequest{Request: req, Input: input, Copy: c.DeleteScalingPolicyRequest}
 }
 
 const opDeleteVpcPeeringAuthorization = "DeleteVpcPeeringAuthorization"
@@ -1547,6 +1565,7 @@ const opDeleteVpcPeeringAuthorization = "DeleteVpcPeeringAuthorization"
 type DeleteVpcPeeringAuthorizationRequest struct {
 	*aws.Request
 	Input *DeleteVpcPeeringAuthorizationInput
+	Copy  func(*DeleteVpcPeeringAuthorizationInput) DeleteVpcPeeringAuthorizationRequest
 }
 
 // Send marshals and sends the DeleteVpcPeeringAuthorization API request.
@@ -1603,7 +1622,7 @@ func (c *GameLift) DeleteVpcPeeringAuthorizationRequest(input *DeleteVpcPeeringA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpcPeeringAuthorizationRequest{Request: req, Input: input}
+	return DeleteVpcPeeringAuthorizationRequest{Request: req, Input: input, Copy: c.DeleteVpcPeeringAuthorizationRequest}
 }
 
 const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
@@ -1612,6 +1631,7 @@ const opDeleteVpcPeeringConnection = "DeleteVpcPeeringConnection"
 type DeleteVpcPeeringConnectionRequest struct {
 	*aws.Request
 	Input *DeleteVpcPeeringConnectionInput
+	Copy  func(*DeleteVpcPeeringConnectionInput) DeleteVpcPeeringConnectionRequest
 }
 
 // Send marshals and sends the DeleteVpcPeeringConnection API request.
@@ -1674,7 +1694,7 @@ func (c *GameLift) DeleteVpcPeeringConnectionRequest(input *DeleteVpcPeeringConn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpcPeeringConnectionRequest{Request: req, Input: input}
+	return DeleteVpcPeeringConnectionRequest{Request: req, Input: input, Copy: c.DeleteVpcPeeringConnectionRequest}
 }
 
 const opDescribeAlias = "DescribeAlias"
@@ -1683,6 +1703,7 @@ const opDescribeAlias = "DescribeAlias"
 type DescribeAliasRequest struct {
 	*aws.Request
 	Input *DescribeAliasInput
+	Copy  func(*DescribeAliasInput) DescribeAliasRequest
 }
 
 // Send marshals and sends the DescribeAlias API request.
@@ -1741,7 +1762,7 @@ func (c *GameLift) DescribeAliasRequest(input *DescribeAliasInput) DescribeAlias
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAliasRequest{Request: req, Input: input}
+	return DescribeAliasRequest{Request: req, Input: input, Copy: c.DescribeAliasRequest}
 }
 
 const opDescribeBuild = "DescribeBuild"
@@ -1750,6 +1771,7 @@ const opDescribeBuild = "DescribeBuild"
 type DescribeBuildRequest struct {
 	*aws.Request
 	Input *DescribeBuildInput
+	Copy  func(*DescribeBuildInput) DescribeBuildRequest
 }
 
 // Send marshals and sends the DescribeBuild API request.
@@ -1803,7 +1825,7 @@ func (c *GameLift) DescribeBuildRequest(input *DescribeBuildInput) DescribeBuild
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBuildRequest{Request: req, Input: input}
+	return DescribeBuildRequest{Request: req, Input: input, Copy: c.DescribeBuildRequest}
 }
 
 const opDescribeEC2InstanceLimits = "DescribeEC2InstanceLimits"
@@ -1812,6 +1834,7 @@ const opDescribeEC2InstanceLimits = "DescribeEC2InstanceLimits"
 type DescribeEC2InstanceLimitsRequest struct {
 	*aws.Request
 	Input *DescribeEC2InstanceLimitsInput
+	Copy  func(*DescribeEC2InstanceLimitsInput) DescribeEC2InstanceLimitsRequest
 }
 
 // Send marshals and sends the DescribeEC2InstanceLimits API request.
@@ -1904,7 +1927,7 @@ func (c *GameLift) DescribeEC2InstanceLimitsRequest(input *DescribeEC2InstanceLi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEC2InstanceLimitsRequest{Request: req, Input: input}
+	return DescribeEC2InstanceLimitsRequest{Request: req, Input: input, Copy: c.DescribeEC2InstanceLimitsRequest}
 }
 
 const opDescribeFleetAttributes = "DescribeFleetAttributes"
@@ -1913,6 +1936,7 @@ const opDescribeFleetAttributes = "DescribeFleetAttributes"
 type DescribeFleetAttributesRequest struct {
 	*aws.Request
 	Input *DescribeFleetAttributesInput
+	Copy  func(*DescribeFleetAttributesInput) DescribeFleetAttributesRequest
 }
 
 // Send marshals and sends the DescribeFleetAttributes API request.
@@ -2007,7 +2031,7 @@ func (c *GameLift) DescribeFleetAttributesRequest(input *DescribeFleetAttributes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFleetAttributesRequest{Request: req, Input: input}
+	return DescribeFleetAttributesRequest{Request: req, Input: input, Copy: c.DescribeFleetAttributesRequest}
 }
 
 const opDescribeFleetCapacity = "DescribeFleetCapacity"
@@ -2016,6 +2040,7 @@ const opDescribeFleetCapacity = "DescribeFleetCapacity"
 type DescribeFleetCapacityRequest struct {
 	*aws.Request
 	Input *DescribeFleetCapacityInput
+	Copy  func(*DescribeFleetCapacityInput) DescribeFleetCapacityRequest
 }
 
 // Send marshals and sends the DescribeFleetCapacity API request.
@@ -2111,7 +2136,7 @@ func (c *GameLift) DescribeFleetCapacityRequest(input *DescribeFleetCapacityInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFleetCapacityRequest{Request: req, Input: input}
+	return DescribeFleetCapacityRequest{Request: req, Input: input, Copy: c.DescribeFleetCapacityRequest}
 }
 
 const opDescribeFleetEvents = "DescribeFleetEvents"
@@ -2120,6 +2145,7 @@ const opDescribeFleetEvents = "DescribeFleetEvents"
 type DescribeFleetEventsRequest struct {
 	*aws.Request
 	Input *DescribeFleetEventsInput
+	Copy  func(*DescribeFleetEventsInput) DescribeFleetEventsRequest
 }
 
 // Send marshals and sends the DescribeFleetEvents API request.
@@ -2207,7 +2233,7 @@ func (c *GameLift) DescribeFleetEventsRequest(input *DescribeFleetEventsInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFleetEventsRequest{Request: req, Input: input}
+	return DescribeFleetEventsRequest{Request: req, Input: input, Copy: c.DescribeFleetEventsRequest}
 }
 
 const opDescribeFleetPortSettings = "DescribeFleetPortSettings"
@@ -2216,6 +2242,7 @@ const opDescribeFleetPortSettings = "DescribeFleetPortSettings"
 type DescribeFleetPortSettingsRequest struct {
 	*aws.Request
 	Input *DescribeFleetPortSettingsInput
+	Copy  func(*DescribeFleetPortSettingsInput) DescribeFleetPortSettingsRequest
 }
 
 // Send marshals and sends the DescribeFleetPortSettings API request.
@@ -2305,7 +2332,7 @@ func (c *GameLift) DescribeFleetPortSettingsRequest(input *DescribeFleetPortSett
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFleetPortSettingsRequest{Request: req, Input: input}
+	return DescribeFleetPortSettingsRequest{Request: req, Input: input, Copy: c.DescribeFleetPortSettingsRequest}
 }
 
 const opDescribeFleetUtilization = "DescribeFleetUtilization"
@@ -2314,6 +2341,7 @@ const opDescribeFleetUtilization = "DescribeFleetUtilization"
 type DescribeFleetUtilizationRequest struct {
 	*aws.Request
 	Input *DescribeFleetUtilizationInput
+	Copy  func(*DescribeFleetUtilizationInput) DescribeFleetUtilizationRequest
 }
 
 // Send marshals and sends the DescribeFleetUtilization API request.
@@ -2407,7 +2435,7 @@ func (c *GameLift) DescribeFleetUtilizationRequest(input *DescribeFleetUtilizati
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFleetUtilizationRequest{Request: req, Input: input}
+	return DescribeFleetUtilizationRequest{Request: req, Input: input, Copy: c.DescribeFleetUtilizationRequest}
 }
 
 const opDescribeGameSessionDetails = "DescribeGameSessionDetails"
@@ -2416,6 +2444,7 @@ const opDescribeGameSessionDetails = "DescribeGameSessionDetails"
 type DescribeGameSessionDetailsRequest struct {
 	*aws.Request
 	Input *DescribeGameSessionDetailsInput
+	Copy  func(*DescribeGameSessionDetailsInput) DescribeGameSessionDetailsRequest
 }
 
 // Send marshals and sends the DescribeGameSessionDetails API request.
@@ -2488,7 +2517,7 @@ func (c *GameLift) DescribeGameSessionDetailsRequest(input *DescribeGameSessionD
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeGameSessionDetailsRequest{Request: req, Input: input}
+	return DescribeGameSessionDetailsRequest{Request: req, Input: input, Copy: c.DescribeGameSessionDetailsRequest}
 }
 
 const opDescribeGameSessionPlacement = "DescribeGameSessionPlacement"
@@ -2497,6 +2526,7 @@ const opDescribeGameSessionPlacement = "DescribeGameSessionPlacement"
 type DescribeGameSessionPlacementRequest struct {
 	*aws.Request
 	Input *DescribeGameSessionPlacementInput
+	Copy  func(*DescribeGameSessionPlacementInput) DescribeGameSessionPlacementRequest
 }
 
 // Send marshals and sends the DescribeGameSessionPlacement API request.
@@ -2561,7 +2591,7 @@ func (c *GameLift) DescribeGameSessionPlacementRequest(input *DescribeGameSessio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeGameSessionPlacementRequest{Request: req, Input: input}
+	return DescribeGameSessionPlacementRequest{Request: req, Input: input, Copy: c.DescribeGameSessionPlacementRequest}
 }
 
 const opDescribeGameSessionQueues = "DescribeGameSessionQueues"
@@ -2570,6 +2600,7 @@ const opDescribeGameSessionQueues = "DescribeGameSessionQueues"
 type DescribeGameSessionQueuesRequest struct {
 	*aws.Request
 	Input *DescribeGameSessionQueuesInput
+	Copy  func(*DescribeGameSessionQueuesInput) DescribeGameSessionQueuesRequest
 }
 
 // Send marshals and sends the DescribeGameSessionQueues API request.
@@ -2624,7 +2655,7 @@ func (c *GameLift) DescribeGameSessionQueuesRequest(input *DescribeGameSessionQu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeGameSessionQueuesRequest{Request: req, Input: input}
+	return DescribeGameSessionQueuesRequest{Request: req, Input: input, Copy: c.DescribeGameSessionQueuesRequest}
 }
 
 const opDescribeGameSessions = "DescribeGameSessions"
@@ -2633,6 +2664,7 @@ const opDescribeGameSessions = "DescribeGameSessions"
 type DescribeGameSessionsRequest struct {
 	*aws.Request
 	Input *DescribeGameSessionsInput
+	Copy  func(*DescribeGameSessionsInput) DescribeGameSessionsRequest
 }
 
 // Send marshals and sends the DescribeGameSessions API request.
@@ -2706,7 +2738,7 @@ func (c *GameLift) DescribeGameSessionsRequest(input *DescribeGameSessionsInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeGameSessionsRequest{Request: req, Input: input}
+	return DescribeGameSessionsRequest{Request: req, Input: input, Copy: c.DescribeGameSessionsRequest}
 }
 
 const opDescribeInstances = "DescribeInstances"
@@ -2715,6 +2747,7 @@ const opDescribeInstances = "DescribeInstances"
 type DescribeInstancesRequest struct {
 	*aws.Request
 	Input *DescribeInstancesInput
+	Copy  func(*DescribeInstancesInput) DescribeInstancesRequest
 }
 
 // Send marshals and sends the DescribeInstances API request.
@@ -2762,7 +2795,7 @@ func (c *GameLift) DescribeInstancesRequest(input *DescribeInstancesInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstancesRequest{Request: req, Input: input}
+	return DescribeInstancesRequest{Request: req, Input: input, Copy: c.DescribeInstancesRequest}
 }
 
 const opDescribeMatchmaking = "DescribeMatchmaking"
@@ -2771,6 +2804,7 @@ const opDescribeMatchmaking = "DescribeMatchmaking"
 type DescribeMatchmakingRequest struct {
 	*aws.Request
 	Input *DescribeMatchmakingInput
+	Copy  func(*DescribeMatchmakingInput) DescribeMatchmakingRequest
 }
 
 // Send marshals and sends the DescribeMatchmaking API request.
@@ -2833,7 +2867,7 @@ func (c *GameLift) DescribeMatchmakingRequest(input *DescribeMatchmakingInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMatchmakingRequest{Request: req, Input: input}
+	return DescribeMatchmakingRequest{Request: req, Input: input, Copy: c.DescribeMatchmakingRequest}
 }
 
 const opDescribeMatchmakingConfigurations = "DescribeMatchmakingConfigurations"
@@ -2842,6 +2876,7 @@ const opDescribeMatchmakingConfigurations = "DescribeMatchmakingConfigurations"
 type DescribeMatchmakingConfigurationsRequest struct {
 	*aws.Request
 	Input *DescribeMatchmakingConfigurationsInput
+	Copy  func(*DescribeMatchmakingConfigurationsInput) DescribeMatchmakingConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeMatchmakingConfigurations API request.
@@ -2905,7 +2940,7 @@ func (c *GameLift) DescribeMatchmakingConfigurationsRequest(input *DescribeMatch
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMatchmakingConfigurationsRequest{Request: req, Input: input}
+	return DescribeMatchmakingConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeMatchmakingConfigurationsRequest}
 }
 
 const opDescribeMatchmakingRuleSets = "DescribeMatchmakingRuleSets"
@@ -2914,6 +2949,7 @@ const opDescribeMatchmakingRuleSets = "DescribeMatchmakingRuleSets"
 type DescribeMatchmakingRuleSetsRequest struct {
 	*aws.Request
 	Input *DescribeMatchmakingRuleSetsInput
+	Copy  func(*DescribeMatchmakingRuleSetsInput) DescribeMatchmakingRuleSetsRequest
 }
 
 // Send marshals and sends the DescribeMatchmakingRuleSets API request.
@@ -2974,7 +3010,7 @@ func (c *GameLift) DescribeMatchmakingRuleSetsRequest(input *DescribeMatchmaking
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMatchmakingRuleSetsRequest{Request: req, Input: input}
+	return DescribeMatchmakingRuleSetsRequest{Request: req, Input: input, Copy: c.DescribeMatchmakingRuleSetsRequest}
 }
 
 const opDescribePlayerSessions = "DescribePlayerSessions"
@@ -2983,6 +3019,7 @@ const opDescribePlayerSessions = "DescribePlayerSessions"
 type DescribePlayerSessionsRequest struct {
 	*aws.Request
 	Input *DescribePlayerSessionsInput
+	Copy  func(*DescribePlayerSessionsInput) DescribePlayerSessionsRequest
 }
 
 // Send marshals and sends the DescribePlayerSessions API request.
@@ -3051,7 +3088,7 @@ func (c *GameLift) DescribePlayerSessionsRequest(input *DescribePlayerSessionsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePlayerSessionsRequest{Request: req, Input: input}
+	return DescribePlayerSessionsRequest{Request: req, Input: input, Copy: c.DescribePlayerSessionsRequest}
 }
 
 const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
@@ -3060,6 +3097,7 @@ const opDescribeRuntimeConfiguration = "DescribeRuntimeConfiguration"
 type DescribeRuntimeConfigurationRequest struct {
 	*aws.Request
 	Input *DescribeRuntimeConfigurationInput
+	Copy  func(*DescribeRuntimeConfigurationInput) DescribeRuntimeConfigurationRequest
 }
 
 // Send marshals and sends the DescribeRuntimeConfiguration API request.
@@ -3146,7 +3184,7 @@ func (c *GameLift) DescribeRuntimeConfigurationRequest(input *DescribeRuntimeCon
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRuntimeConfigurationRequest{Request: req, Input: input}
+	return DescribeRuntimeConfigurationRequest{Request: req, Input: input, Copy: c.DescribeRuntimeConfigurationRequest}
 }
 
 const opDescribeScalingPolicies = "DescribeScalingPolicies"
@@ -3155,6 +3193,7 @@ const opDescribeScalingPolicies = "DescribeScalingPolicies"
 type DescribeScalingPoliciesRequest struct {
 	*aws.Request
 	Input *DescribeScalingPoliciesInput
+	Copy  func(*DescribeScalingPoliciesInput) DescribeScalingPoliciesRequest
 }
 
 // Send marshals and sends the DescribeScalingPolicies API request.
@@ -3244,7 +3283,7 @@ func (c *GameLift) DescribeScalingPoliciesRequest(input *DescribeScalingPolicies
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScalingPoliciesRequest{Request: req, Input: input}
+	return DescribeScalingPoliciesRequest{Request: req, Input: input, Copy: c.DescribeScalingPoliciesRequest}
 }
 
 const opDescribeVpcPeeringAuthorizations = "DescribeVpcPeeringAuthorizations"
@@ -3253,6 +3292,7 @@ const opDescribeVpcPeeringAuthorizations = "DescribeVpcPeeringAuthorizations"
 type DescribeVpcPeeringAuthorizationsRequest struct {
 	*aws.Request
 	Input *DescribeVpcPeeringAuthorizationsInput
+	Copy  func(*DescribeVpcPeeringAuthorizationsInput) DescribeVpcPeeringAuthorizationsRequest
 }
 
 // Send marshals and sends the DescribeVpcPeeringAuthorizations API request.
@@ -3309,7 +3349,7 @@ func (c *GameLift) DescribeVpcPeeringAuthorizationsRequest(input *DescribeVpcPee
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcPeeringAuthorizationsRequest{Request: req, Input: input}
+	return DescribeVpcPeeringAuthorizationsRequest{Request: req, Input: input, Copy: c.DescribeVpcPeeringAuthorizationsRequest}
 }
 
 const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
@@ -3318,6 +3358,7 @@ const opDescribeVpcPeeringConnections = "DescribeVpcPeeringConnections"
 type DescribeVpcPeeringConnectionsRequest struct {
 	*aws.Request
 	Input *DescribeVpcPeeringConnectionsInput
+	Copy  func(*DescribeVpcPeeringConnectionsInput) DescribeVpcPeeringConnectionsRequest
 }
 
 // Send marshals and sends the DescribeVpcPeeringConnections API request.
@@ -3379,7 +3420,7 @@ func (c *GameLift) DescribeVpcPeeringConnectionsRequest(input *DescribeVpcPeerin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVpcPeeringConnectionsRequest{Request: req, Input: input}
+	return DescribeVpcPeeringConnectionsRequest{Request: req, Input: input, Copy: c.DescribeVpcPeeringConnectionsRequest}
 }
 
 const opGetGameSessionLogUrl = "GetGameSessionLogUrl"
@@ -3388,6 +3429,7 @@ const opGetGameSessionLogUrl = "GetGameSessionLogUrl"
 type GetGameSessionLogUrlRequest struct {
 	*aws.Request
 	Input *GetGameSessionLogUrlInput
+	Copy  func(*GetGameSessionLogUrlInput) GetGameSessionLogUrlRequest
 }
 
 // Send marshals and sends the GetGameSessionLogUrl API request.
@@ -3457,7 +3499,7 @@ func (c *GameLift) GetGameSessionLogUrlRequest(input *GetGameSessionLogUrlInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGameSessionLogUrlRequest{Request: req, Input: input}
+	return GetGameSessionLogUrlRequest{Request: req, Input: input, Copy: c.GetGameSessionLogUrlRequest}
 }
 
 const opGetInstanceAccess = "GetInstanceAccess"
@@ -3466,6 +3508,7 @@ const opGetInstanceAccess = "GetInstanceAccess"
 type GetInstanceAccessRequest struct {
 	*aws.Request
 	Input *GetInstanceAccessInput
+	Copy  func(*GetInstanceAccessInput) GetInstanceAccessRequest
 }
 
 // Send marshals and sends the GetInstanceAccess API request.
@@ -3521,7 +3564,7 @@ func (c *GameLift) GetInstanceAccessRequest(input *GetInstanceAccessInput) GetIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstanceAccessRequest{Request: req, Input: input}
+	return GetInstanceAccessRequest{Request: req, Input: input, Copy: c.GetInstanceAccessRequest}
 }
 
 const opListAliases = "ListAliases"
@@ -3530,6 +3573,7 @@ const opListAliases = "ListAliases"
 type ListAliasesRequest struct {
 	*aws.Request
 	Input *ListAliasesInput
+	Copy  func(*ListAliasesInput) ListAliasesRequest
 }
 
 // Send marshals and sends the ListAliases API request.
@@ -3588,7 +3632,7 @@ func (c *GameLift) ListAliasesRequest(input *ListAliasesInput) ListAliasesReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAliasesRequest{Request: req, Input: input}
+	return ListAliasesRequest{Request: req, Input: input, Copy: c.ListAliasesRequest}
 }
 
 const opListBuilds = "ListBuilds"
@@ -3597,6 +3641,7 @@ const opListBuilds = "ListBuilds"
 type ListBuildsRequest struct {
 	*aws.Request
 	Input *ListBuildsInput
+	Copy  func(*ListBuildsInput) ListBuildsRequest
 }
 
 // Send marshals and sends the ListBuilds API request.
@@ -3654,7 +3699,7 @@ func (c *GameLift) ListBuildsRequest(input *ListBuildsInput) ListBuildsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBuildsRequest{Request: req, Input: input}
+	return ListBuildsRequest{Request: req, Input: input, Copy: c.ListBuildsRequest}
 }
 
 const opListFleets = "ListFleets"
@@ -3663,6 +3708,7 @@ const opListFleets = "ListFleets"
 type ListFleetsRequest struct {
 	*aws.Request
 	Input *ListFleetsInput
+	Copy  func(*ListFleetsInput) ListFleetsRequest
 }
 
 // Send marshals and sends the ListFleets API request.
@@ -3751,7 +3797,7 @@ func (c *GameLift) ListFleetsRequest(input *ListFleetsInput) ListFleetsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFleetsRequest{Request: req, Input: input}
+	return ListFleetsRequest{Request: req, Input: input, Copy: c.ListFleetsRequest}
 }
 
 const opPutScalingPolicy = "PutScalingPolicy"
@@ -3760,6 +3806,7 @@ const opPutScalingPolicy = "PutScalingPolicy"
 type PutScalingPolicyRequest struct {
 	*aws.Request
 	Input *PutScalingPolicyInput
+	Copy  func(*PutScalingPolicyInput) PutScalingPolicyRequest
 }
 
 // Send marshals and sends the PutScalingPolicy API request.
@@ -3865,7 +3912,7 @@ func (c *GameLift) PutScalingPolicyRequest(input *PutScalingPolicyInput) PutScal
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutScalingPolicyRequest{Request: req, Input: input}
+	return PutScalingPolicyRequest{Request: req, Input: input, Copy: c.PutScalingPolicyRequest}
 }
 
 const opRequestUploadCredentials = "RequestUploadCredentials"
@@ -3874,6 +3921,7 @@ const opRequestUploadCredentials = "RequestUploadCredentials"
 type RequestUploadCredentialsRequest struct {
 	*aws.Request
 	Input *RequestUploadCredentialsInput
+	Copy  func(*RequestUploadCredentialsInput) RequestUploadCredentialsRequest
 }
 
 // Send marshals and sends the RequestUploadCredentials API request.
@@ -3916,7 +3964,7 @@ func (c *GameLift) RequestUploadCredentialsRequest(input *RequestUploadCredentia
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RequestUploadCredentialsRequest{Request: req, Input: input}
+	return RequestUploadCredentialsRequest{Request: req, Input: input, Copy: c.RequestUploadCredentialsRequest}
 }
 
 const opResolveAlias = "ResolveAlias"
@@ -3925,6 +3973,7 @@ const opResolveAlias = "ResolveAlias"
 type ResolveAliasRequest struct {
 	*aws.Request
 	Input *ResolveAliasInput
+	Copy  func(*ResolveAliasInput) ResolveAliasRequest
 }
 
 // Send marshals and sends the ResolveAlias API request.
@@ -3979,7 +4028,7 @@ func (c *GameLift) ResolveAliasRequest(input *ResolveAliasInput) ResolveAliasReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResolveAliasRequest{Request: req, Input: input}
+	return ResolveAliasRequest{Request: req, Input: input, Copy: c.ResolveAliasRequest}
 }
 
 const opSearchGameSessions = "SearchGameSessions"
@@ -3988,6 +4037,7 @@ const opSearchGameSessions = "SearchGameSessions"
 type SearchGameSessionsRequest struct {
 	*aws.Request
 	Input *SearchGameSessionsInput
+	Copy  func(*SearchGameSessionsInput) SearchGameSessionsRequest
 }
 
 // Send marshals and sends the SearchGameSessions API request.
@@ -4092,7 +4142,7 @@ func (c *GameLift) SearchGameSessionsRequest(input *SearchGameSessionsInput) Sea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchGameSessionsRequest{Request: req, Input: input}
+	return SearchGameSessionsRequest{Request: req, Input: input, Copy: c.SearchGameSessionsRequest}
 }
 
 const opStartGameSessionPlacement = "StartGameSessionPlacement"
@@ -4101,6 +4151,7 @@ const opStartGameSessionPlacement = "StartGameSessionPlacement"
 type StartGameSessionPlacementRequest struct {
 	*aws.Request
 	Input *StartGameSessionPlacementInput
+	Copy  func(*StartGameSessionPlacementInput) StartGameSessionPlacementRequest
 }
 
 // Send marshals and sends the StartGameSessionPlacement API request.
@@ -4203,7 +4254,7 @@ func (c *GameLift) StartGameSessionPlacementRequest(input *StartGameSessionPlace
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartGameSessionPlacementRequest{Request: req, Input: input}
+	return StartGameSessionPlacementRequest{Request: req, Input: input, Copy: c.StartGameSessionPlacementRequest}
 }
 
 const opStartMatchmaking = "StartMatchmaking"
@@ -4212,6 +4263,7 @@ const opStartMatchmaking = "StartMatchmaking"
 type StartMatchmakingRequest struct {
 	*aws.Request
 	Input *StartMatchmakingInput
+	Copy  func(*StartMatchmakingInput) StartMatchmakingRequest
 }
 
 // Send marshals and sends the StartMatchmaking API request.
@@ -4322,7 +4374,7 @@ func (c *GameLift) StartMatchmakingRequest(input *StartMatchmakingInput) StartMa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartMatchmakingRequest{Request: req, Input: input}
+	return StartMatchmakingRequest{Request: req, Input: input, Copy: c.StartMatchmakingRequest}
 }
 
 const opStopGameSessionPlacement = "StopGameSessionPlacement"
@@ -4331,6 +4383,7 @@ const opStopGameSessionPlacement = "StopGameSessionPlacement"
 type StopGameSessionPlacementRequest struct {
 	*aws.Request
 	Input *StopGameSessionPlacementInput
+	Copy  func(*StopGameSessionPlacementInput) StopGameSessionPlacementRequest
 }
 
 // Send marshals and sends the StopGameSessionPlacement API request.
@@ -4395,7 +4448,7 @@ func (c *GameLift) StopGameSessionPlacementRequest(input *StopGameSessionPlaceme
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopGameSessionPlacementRequest{Request: req, Input: input}
+	return StopGameSessionPlacementRequest{Request: req, Input: input, Copy: c.StopGameSessionPlacementRequest}
 }
 
 const opStopMatchmaking = "StopMatchmaking"
@@ -4404,6 +4457,7 @@ const opStopMatchmaking = "StopMatchmaking"
 type StopMatchmakingRequest struct {
 	*aws.Request
 	Input *StopMatchmakingInput
+	Copy  func(*StopMatchmakingInput) StopMatchmakingRequest
 }
 
 // Send marshals and sends the StopMatchmaking API request.
@@ -4456,7 +4510,7 @@ func (c *GameLift) StopMatchmakingRequest(input *StopMatchmakingInput) StopMatch
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopMatchmakingRequest{Request: req, Input: input}
+	return StopMatchmakingRequest{Request: req, Input: input, Copy: c.StopMatchmakingRequest}
 }
 
 const opUpdateAlias = "UpdateAlias"
@@ -4465,6 +4519,7 @@ const opUpdateAlias = "UpdateAlias"
 type UpdateAliasRequest struct {
 	*aws.Request
 	Input *UpdateAliasInput
+	Copy  func(*UpdateAliasInput) UpdateAliasRequest
 }
 
 // Send marshals and sends the UpdateAlias API request.
@@ -4522,7 +4577,7 @@ func (c *GameLift) UpdateAliasRequest(input *UpdateAliasInput) UpdateAliasReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAliasRequest{Request: req, Input: input}
+	return UpdateAliasRequest{Request: req, Input: input, Copy: c.UpdateAliasRequest}
 }
 
 const opUpdateBuild = "UpdateBuild"
@@ -4531,6 +4586,7 @@ const opUpdateBuild = "UpdateBuild"
 type UpdateBuildRequest struct {
 	*aws.Request
 	Input *UpdateBuildInput
+	Copy  func(*UpdateBuildInput) UpdateBuildRequest
 }
 
 // Send marshals and sends the UpdateBuild API request.
@@ -4586,7 +4642,7 @@ func (c *GameLift) UpdateBuildRequest(input *UpdateBuildInput) UpdateBuildReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateBuildRequest{Request: req, Input: input}
+	return UpdateBuildRequest{Request: req, Input: input, Copy: c.UpdateBuildRequest}
 }
 
 const opUpdateFleetAttributes = "UpdateFleetAttributes"
@@ -4595,6 +4651,7 @@ const opUpdateFleetAttributes = "UpdateFleetAttributes"
 type UpdateFleetAttributesRequest struct {
 	*aws.Request
 	Input *UpdateFleetAttributesInput
+	Copy  func(*UpdateFleetAttributesInput) UpdateFleetAttributesRequest
 }
 
 // Send marshals and sends the UpdateFleetAttributes API request.
@@ -4681,7 +4738,7 @@ func (c *GameLift) UpdateFleetAttributesRequest(input *UpdateFleetAttributesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateFleetAttributesRequest{Request: req, Input: input}
+	return UpdateFleetAttributesRequest{Request: req, Input: input, Copy: c.UpdateFleetAttributesRequest}
 }
 
 const opUpdateFleetCapacity = "UpdateFleetCapacity"
@@ -4690,6 +4747,7 @@ const opUpdateFleetCapacity = "UpdateFleetCapacity"
 type UpdateFleetCapacityRequest struct {
 	*aws.Request
 	Input *UpdateFleetCapacityInput
+	Copy  func(*UpdateFleetCapacityInput) UpdateFleetCapacityRequest
 }
 
 // Send marshals and sends the UpdateFleetCapacity API request.
@@ -4788,7 +4846,7 @@ func (c *GameLift) UpdateFleetCapacityRequest(input *UpdateFleetCapacityInput) U
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateFleetCapacityRequest{Request: req, Input: input}
+	return UpdateFleetCapacityRequest{Request: req, Input: input, Copy: c.UpdateFleetCapacityRequest}
 }
 
 const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
@@ -4797,6 +4855,7 @@ const opUpdateFleetPortSettings = "UpdateFleetPortSettings"
 type UpdateFleetPortSettingsRequest struct {
 	*aws.Request
 	Input *UpdateFleetPortSettingsInput
+	Copy  func(*UpdateFleetPortSettingsInput) UpdateFleetPortSettingsRequest
 }
 
 // Send marshals and sends the UpdateFleetPortSettings API request.
@@ -4886,7 +4945,7 @@ func (c *GameLift) UpdateFleetPortSettingsRequest(input *UpdateFleetPortSettings
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateFleetPortSettingsRequest{Request: req, Input: input}
+	return UpdateFleetPortSettingsRequest{Request: req, Input: input, Copy: c.UpdateFleetPortSettingsRequest}
 }
 
 const opUpdateGameSession = "UpdateGameSession"
@@ -4895,6 +4954,7 @@ const opUpdateGameSession = "UpdateGameSession"
 type UpdateGameSessionRequest struct {
 	*aws.Request
 	Input *UpdateGameSessionInput
+	Copy  func(*UpdateGameSessionInput) UpdateGameSessionRequest
 }
 
 // Send marshals and sends the UpdateGameSession API request.
@@ -4963,7 +5023,7 @@ func (c *GameLift) UpdateGameSessionRequest(input *UpdateGameSessionInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGameSessionRequest{Request: req, Input: input}
+	return UpdateGameSessionRequest{Request: req, Input: input, Copy: c.UpdateGameSessionRequest}
 }
 
 const opUpdateGameSessionQueue = "UpdateGameSessionQueue"
@@ -4972,6 +5032,7 @@ const opUpdateGameSessionQueue = "UpdateGameSessionQueue"
 type UpdateGameSessionQueueRequest struct {
 	*aws.Request
 	Input *UpdateGameSessionQueueInput
+	Copy  func(*UpdateGameSessionQueueInput) UpdateGameSessionQueueRequest
 }
 
 // Send marshals and sends the UpdateGameSessionQueue API request.
@@ -5025,7 +5086,7 @@ func (c *GameLift) UpdateGameSessionQueueRequest(input *UpdateGameSessionQueueIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGameSessionQueueRequest{Request: req, Input: input}
+	return UpdateGameSessionQueueRequest{Request: req, Input: input, Copy: c.UpdateGameSessionQueueRequest}
 }
 
 const opUpdateMatchmakingConfiguration = "UpdateMatchmakingConfiguration"
@@ -5034,6 +5095,7 @@ const opUpdateMatchmakingConfiguration = "UpdateMatchmakingConfiguration"
 type UpdateMatchmakingConfigurationRequest struct {
 	*aws.Request
 	Input *UpdateMatchmakingConfigurationInput
+	Copy  func(*UpdateMatchmakingConfigurationInput) UpdateMatchmakingConfigurationRequest
 }
 
 // Send marshals and sends the UpdateMatchmakingConfiguration API request.
@@ -5091,7 +5153,7 @@ func (c *GameLift) UpdateMatchmakingConfigurationRequest(input *UpdateMatchmakin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateMatchmakingConfigurationRequest{Request: req, Input: input}
+	return UpdateMatchmakingConfigurationRequest{Request: req, Input: input, Copy: c.UpdateMatchmakingConfigurationRequest}
 }
 
 const opUpdateRuntimeConfiguration = "UpdateRuntimeConfiguration"
@@ -5100,6 +5162,7 @@ const opUpdateRuntimeConfiguration = "UpdateRuntimeConfiguration"
 type UpdateRuntimeConfigurationRequest struct {
 	*aws.Request
 	Input *UpdateRuntimeConfigurationInput
+	Copy  func(*UpdateRuntimeConfigurationInput) UpdateRuntimeConfigurationRequest
 }
 
 // Send marshals and sends the UpdateRuntimeConfiguration API request.
@@ -5199,7 +5262,7 @@ func (c *GameLift) UpdateRuntimeConfigurationRequest(input *UpdateRuntimeConfigu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRuntimeConfigurationRequest{Request: req, Input: input}
+	return UpdateRuntimeConfigurationRequest{Request: req, Input: input, Copy: c.UpdateRuntimeConfigurationRequest}
 }
 
 const opValidateMatchmakingRuleSet = "ValidateMatchmakingRuleSet"
@@ -5208,6 +5271,7 @@ const opValidateMatchmakingRuleSet = "ValidateMatchmakingRuleSet"
 type ValidateMatchmakingRuleSetRequest struct {
 	*aws.Request
 	Input *ValidateMatchmakingRuleSetInput
+	Copy  func(*ValidateMatchmakingRuleSetInput) ValidateMatchmakingRuleSetRequest
 }
 
 // Send marshals and sends the ValidateMatchmakingRuleSet API request.
@@ -5266,7 +5330,7 @@ func (c *GameLift) ValidateMatchmakingRuleSetRequest(input *ValidateMatchmakingR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ValidateMatchmakingRuleSetRequest{Request: req, Input: input}
+	return ValidateMatchmakingRuleSetRequest{Request: req, Input: input, Copy: c.ValidateMatchmakingRuleSetRequest}
 }
 
 // Represents the input for a request action.

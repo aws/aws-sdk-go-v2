@@ -17,6 +17,7 @@ const opAddPermission = "AddPermission"
 type AddPermissionRequest struct {
 	*aws.Request
 	Input *AddPermissionInput
+	Copy  func(*AddPermissionInput) AddPermissionRequest
 }
 
 // Send marshals and sends the AddPermission API request.
@@ -78,7 +79,7 @@ func (c *SQS) AddPermissionRequest(input *AddPermissionInput) AddPermissionReque
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddPermissionRequest{Request: req, Input: input}
+	return AddPermissionRequest{Request: req, Input: input, Copy: c.AddPermissionRequest}
 }
 
 const opChangeMessageVisibility = "ChangeMessageVisibility"
@@ -87,6 +88,7 @@ const opChangeMessageVisibility = "ChangeMessageVisibility"
 type ChangeMessageVisibilityRequest struct {
 	*aws.Request
 	Input *ChangeMessageVisibilityInput
+	Copy  func(*ChangeMessageVisibilityInput) ChangeMessageVisibilityRequest
 }
 
 // Send marshals and sends the ChangeMessageVisibility API request.
@@ -164,7 +166,7 @@ func (c *SQS) ChangeMessageVisibilityRequest(input *ChangeMessageVisibilityInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ChangeMessageVisibilityRequest{Request: req, Input: input}
+	return ChangeMessageVisibilityRequest{Request: req, Input: input, Copy: c.ChangeMessageVisibilityRequest}
 }
 
 const opChangeMessageVisibilityBatch = "ChangeMessageVisibilityBatch"
@@ -173,6 +175,7 @@ const opChangeMessageVisibilityBatch = "ChangeMessageVisibilityBatch"
 type ChangeMessageVisibilityBatchRequest struct {
 	*aws.Request
 	Input *ChangeMessageVisibilityBatchInput
+	Copy  func(*ChangeMessageVisibilityBatchInput) ChangeMessageVisibilityBatchRequest
 }
 
 // Send marshals and sends the ChangeMessageVisibilityBatch API request.
@@ -228,7 +231,7 @@ func (c *SQS) ChangeMessageVisibilityBatchRequest(input *ChangeMessageVisibility
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ChangeMessageVisibilityBatchRequest{Request: req, Input: input}
+	return ChangeMessageVisibilityBatchRequest{Request: req, Input: input, Copy: c.ChangeMessageVisibilityBatchRequest}
 }
 
 const opCreateQueue = "CreateQueue"
@@ -237,6 +240,7 @@ const opCreateQueue = "CreateQueue"
 type CreateQueueRequest struct {
 	*aws.Request
 	Input *CreateQueueInput
+	Copy  func(*CreateQueueInput) CreateQueueRequest
 }
 
 // Send marshals and sends the CreateQueue API request.
@@ -316,7 +320,7 @@ func (c *SQS) CreateQueueRequest(input *CreateQueueInput) CreateQueueRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateQueueRequest{Request: req, Input: input}
+	return CreateQueueRequest{Request: req, Input: input, Copy: c.CreateQueueRequest}
 }
 
 const opDeleteMessage = "DeleteMessage"
@@ -325,6 +329,7 @@ const opDeleteMessage = "DeleteMessage"
 type DeleteMessageRequest struct {
 	*aws.Request
 	Input *DeleteMessageInput
+	Copy  func(*DeleteMessageInput) DeleteMessageRequest
 }
 
 // Send marshals and sends the DeleteMessage API request.
@@ -386,7 +391,7 @@ func (c *SQS) DeleteMessageRequest(input *DeleteMessageInput) DeleteMessageReque
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteMessageRequest{Request: req, Input: input}
+	return DeleteMessageRequest{Request: req, Input: input, Copy: c.DeleteMessageRequest}
 }
 
 const opDeleteMessageBatch = "DeleteMessageBatch"
@@ -395,6 +400,7 @@ const opDeleteMessageBatch = "DeleteMessageBatch"
 type DeleteMessageBatchRequest struct {
 	*aws.Request
 	Input *DeleteMessageBatchInput
+	Copy  func(*DeleteMessageBatchInput) DeleteMessageBatchRequest
 }
 
 // Send marshals and sends the DeleteMessageBatch API request.
@@ -449,7 +455,7 @@ func (c *SQS) DeleteMessageBatchRequest(input *DeleteMessageBatchInput) DeleteMe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteMessageBatchRequest{Request: req, Input: input}
+	return DeleteMessageBatchRequest{Request: req, Input: input, Copy: c.DeleteMessageBatchRequest}
 }
 
 const opDeleteQueue = "DeleteQueue"
@@ -458,6 +464,7 @@ const opDeleteQueue = "DeleteQueue"
 type DeleteQueueRequest struct {
 	*aws.Request
 	Input *DeleteQueueInput
+	Copy  func(*DeleteQueueInput) DeleteQueueRequest
 }
 
 // Send marshals and sends the DeleteQueue API request.
@@ -512,7 +519,7 @@ func (c *SQS) DeleteQueueRequest(input *DeleteQueueInput) DeleteQueueRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteQueueRequest{Request: req, Input: input}
+	return DeleteQueueRequest{Request: req, Input: input, Copy: c.DeleteQueueRequest}
 }
 
 const opGetQueueAttributes = "GetQueueAttributes"
@@ -521,6 +528,7 @@ const opGetQueueAttributes = "GetQueueAttributes"
 type GetQueueAttributesRequest struct {
 	*aws.Request
 	Input *GetQueueAttributesInput
+	Copy  func(*GetQueueAttributesInput) GetQueueAttributesRequest
 }
 
 // Send marshals and sends the GetQueueAttributes API request.
@@ -572,7 +580,7 @@ func (c *SQS) GetQueueAttributesRequest(input *GetQueueAttributesInput) GetQueue
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetQueueAttributesRequest{Request: req, Input: input}
+	return GetQueueAttributesRequest{Request: req, Input: input, Copy: c.GetQueueAttributesRequest}
 }
 
 const opGetQueueUrl = "GetQueueUrl"
@@ -581,6 +589,7 @@ const opGetQueueUrl = "GetQueueUrl"
 type GetQueueUrlRequest struct {
 	*aws.Request
 	Input *GetQueueUrlInput
+	Copy  func(*GetQueueUrlInput) GetQueueUrlRequest
 }
 
 // Send marshals and sends the GetQueueUrl API request.
@@ -628,7 +637,7 @@ func (c *SQS) GetQueueUrlRequest(input *GetQueueUrlInput) GetQueueUrlRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetQueueUrlRequest{Request: req, Input: input}
+	return GetQueueUrlRequest{Request: req, Input: input, Copy: c.GetQueueUrlRequest}
 }
 
 const opListDeadLetterSourceQueues = "ListDeadLetterSourceQueues"
@@ -637,6 +646,7 @@ const opListDeadLetterSourceQueues = "ListDeadLetterSourceQueues"
 type ListDeadLetterSourceQueuesRequest struct {
 	*aws.Request
 	Input *ListDeadLetterSourceQueuesInput
+	Copy  func(*ListDeadLetterSourceQueuesInput) ListDeadLetterSourceQueuesRequest
 }
 
 // Send marshals and sends the ListDeadLetterSourceQueues API request.
@@ -682,7 +692,7 @@ func (c *SQS) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQueue
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDeadLetterSourceQueuesRequest{Request: req, Input: input}
+	return ListDeadLetterSourceQueuesRequest{Request: req, Input: input, Copy: c.ListDeadLetterSourceQueuesRequest}
 }
 
 const opListQueueTags = "ListQueueTags"
@@ -691,6 +701,7 @@ const opListQueueTags = "ListQueueTags"
 type ListQueueTagsRequest struct {
 	*aws.Request
 	Input *ListQueueTagsInput
+	Copy  func(*ListQueueTagsInput) ListQueueTagsRequest
 }
 
 // Send marshals and sends the ListQueueTags API request.
@@ -751,7 +762,7 @@ func (c *SQS) ListQueueTagsRequest(input *ListQueueTagsInput) ListQueueTagsReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListQueueTagsRequest{Request: req, Input: input}
+	return ListQueueTagsRequest{Request: req, Input: input, Copy: c.ListQueueTagsRequest}
 }
 
 const opListQueues = "ListQueues"
@@ -760,6 +771,7 @@ const opListQueues = "ListQueues"
 type ListQueuesRequest struct {
 	*aws.Request
 	Input *ListQueuesInput
+	Copy  func(*ListQueuesInput) ListQueuesRequest
 }
 
 // Send marshals and sends the ListQueues API request.
@@ -802,7 +814,7 @@ func (c *SQS) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListQueuesRequest{Request: req, Input: input}
+	return ListQueuesRequest{Request: req, Input: input, Copy: c.ListQueuesRequest}
 }
 
 const opPurgeQueue = "PurgeQueue"
@@ -811,6 +823,7 @@ const opPurgeQueue = "PurgeQueue"
 type PurgeQueueRequest struct {
 	*aws.Request
 	Input *PurgeQueueInput
+	Copy  func(*PurgeQueueInput) PurgeQueueRequest
 }
 
 // Send marshals and sends the PurgeQueue API request.
@@ -862,7 +875,7 @@ func (c *SQS) PurgeQueueRequest(input *PurgeQueueInput) PurgeQueueRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PurgeQueueRequest{Request: req, Input: input}
+	return PurgeQueueRequest{Request: req, Input: input, Copy: c.PurgeQueueRequest}
 }
 
 const opReceiveMessage = "ReceiveMessage"
@@ -871,6 +884,7 @@ const opReceiveMessage = "ReceiveMessage"
 type ReceiveMessageRequest struct {
 	*aws.Request
 	Input *ReceiveMessageInput
+	Copy  func(*ReceiveMessageInput) ReceiveMessageRequest
 }
 
 // Send marshals and sends the ReceiveMessage API request.
@@ -957,7 +971,7 @@ func (c *SQS) ReceiveMessageRequest(input *ReceiveMessageInput) ReceiveMessageRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReceiveMessageRequest{Request: req, Input: input}
+	return ReceiveMessageRequest{Request: req, Input: input, Copy: c.ReceiveMessageRequest}
 }
 
 const opRemovePermission = "RemovePermission"
@@ -966,6 +980,7 @@ const opRemovePermission = "RemovePermission"
 type RemovePermissionRequest struct {
 	*aws.Request
 	Input *RemovePermissionInput
+	Copy  func(*RemovePermissionInput) RemovePermissionRequest
 }
 
 // Send marshals and sends the RemovePermission API request.
@@ -1009,7 +1024,7 @@ func (c *SQS) RemovePermissionRequest(input *RemovePermissionInput) RemovePermis
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemovePermissionRequest{Request: req, Input: input}
+	return RemovePermissionRequest{Request: req, Input: input, Copy: c.RemovePermissionRequest}
 }
 
 const opSendMessage = "SendMessage"
@@ -1018,6 +1033,7 @@ const opSendMessage = "SendMessage"
 type SendMessageRequest struct {
 	*aws.Request
 	Input *SendMessageInput
+	Copy  func(*SendMessageInput) SendMessageRequest
 }
 
 // Send marshals and sends the SendMessage API request.
@@ -1066,7 +1082,7 @@ func (c *SQS) SendMessageRequest(input *SendMessageInput) SendMessageRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendMessageRequest{Request: req, Input: input}
+	return SendMessageRequest{Request: req, Input: input, Copy: c.SendMessageRequest}
 }
 
 const opSendMessageBatch = "SendMessageBatch"
@@ -1075,6 +1091,7 @@ const opSendMessageBatch = "SendMessageBatch"
 type SendMessageBatchRequest struct {
 	*aws.Request
 	Input *SendMessageBatchInput
+	Copy  func(*SendMessageBatchInput) SendMessageBatchRequest
 }
 
 // Send marshals and sends the SendMessageBatch API request.
@@ -1145,7 +1162,7 @@ func (c *SQS) SendMessageBatchRequest(input *SendMessageBatchInput) SendMessageB
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendMessageBatchRequest{Request: req, Input: input}
+	return SendMessageBatchRequest{Request: req, Input: input, Copy: c.SendMessageBatchRequest}
 }
 
 const opSetQueueAttributes = "SetQueueAttributes"
@@ -1154,6 +1171,7 @@ const opSetQueueAttributes = "SetQueueAttributes"
 type SetQueueAttributesRequest struct {
 	*aws.Request
 	Input *SetQueueAttributesInput
+	Copy  func(*SetQueueAttributesInput) SetQueueAttributesRequest
 }
 
 // Send marshals and sends the SetQueueAttributes API request.
@@ -1203,7 +1221,7 @@ func (c *SQS) SetQueueAttributesRequest(input *SetQueueAttributesInput) SetQueue
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetQueueAttributesRequest{Request: req, Input: input}
+	return SetQueueAttributesRequest{Request: req, Input: input, Copy: c.SetQueueAttributesRequest}
 }
 
 const opTagQueue = "TagQueue"
@@ -1212,6 +1230,7 @@ const opTagQueue = "TagQueue"
 type TagQueueRequest struct {
 	*aws.Request
 	Input *TagQueueInput
+	Copy  func(*TagQueueInput) TagQueueRequest
 }
 
 // Send marshals and sends the TagQueue API request.
@@ -1274,7 +1293,7 @@ func (c *SQS) TagQueueRequest(input *TagQueueInput) TagQueueRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagQueueRequest{Request: req, Input: input}
+	return TagQueueRequest{Request: req, Input: input, Copy: c.TagQueueRequest}
 }
 
 const opUntagQueue = "UntagQueue"
@@ -1283,6 +1302,7 @@ const opUntagQueue = "UntagQueue"
 type UntagQueueRequest struct {
 	*aws.Request
 	Input *UntagQueueInput
+	Copy  func(*UntagQueueInput) UntagQueueRequest
 }
 
 // Send marshals and sends the UntagQueue API request.
@@ -1345,7 +1365,7 @@ func (c *SQS) UntagQueueRequest(input *UntagQueueInput) UntagQueueRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagQueueRequest{Request: req, Input: input}
+	return UntagQueueRequest{Request: req, Input: input, Copy: c.UntagQueueRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sqs-2012-11-05/AddPermissionRequest

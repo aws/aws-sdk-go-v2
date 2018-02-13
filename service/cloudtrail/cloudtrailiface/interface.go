@@ -9,7 +9,6 @@
 package cloudtrailiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail"
 )
 
@@ -80,9 +79,6 @@ type CloudTrailAPI interface {
 	ListTagsRequest(*cloudtrail.ListTagsInput) cloudtrail.ListTagsRequest
 
 	LookupEventsRequest(*cloudtrail.LookupEventsInput) cloudtrail.LookupEventsRequest
-
-	LookupEventsPages(*cloudtrail.LookupEventsInput, func(*cloudtrail.LookupEventsOutput, bool) bool) error
-	LookupEventsPagesWithContext(aws.Context, *cloudtrail.LookupEventsInput, func(*cloudtrail.LookupEventsOutput, bool) bool, ...aws.Option) error
 
 	PutEventSelectorsRequest(*cloudtrail.PutEventSelectorsInput) cloudtrail.PutEventSelectorsRequest
 

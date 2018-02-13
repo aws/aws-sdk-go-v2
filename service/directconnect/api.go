@@ -16,6 +16,7 @@ const opAllocateConnectionOnInterconnect = "AllocateConnectionOnInterconnect"
 type AllocateConnectionOnInterconnectRequest struct {
 	*aws.Request
 	Input *AllocateConnectionOnInterconnectInput
+	Copy  func(*AllocateConnectionOnInterconnectInput) AllocateConnectionOnInterconnectRequest
 }
 
 // Send marshals and sends the AllocateConnectionOnInterconnect API request.
@@ -66,7 +67,7 @@ func (c *DirectConnect) AllocateConnectionOnInterconnectRequest(input *AllocateC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AllocateConnectionOnInterconnectRequest{Request: req, Input: input}
+	return AllocateConnectionOnInterconnectRequest{Request: req, Input: input, Copy: c.AllocateConnectionOnInterconnectRequest}
 }
 
 const opAllocateHostedConnection = "AllocateHostedConnection"
@@ -75,6 +76,7 @@ const opAllocateHostedConnection = "AllocateHostedConnection"
 type AllocateHostedConnectionRequest struct {
 	*aws.Request
 	Input *AllocateHostedConnectionInput
+	Copy  func(*AllocateHostedConnectionInput) AllocateHostedConnectionRequest
 }
 
 // Send marshals and sends the AllocateHostedConnection API request.
@@ -121,7 +123,7 @@ func (c *DirectConnect) AllocateHostedConnectionRequest(input *AllocateHostedCon
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AllocateHostedConnectionRequest{Request: req, Input: input}
+	return AllocateHostedConnectionRequest{Request: req, Input: input, Copy: c.AllocateHostedConnectionRequest}
 }
 
 const opAllocatePrivateVirtualInterface = "AllocatePrivateVirtualInterface"
@@ -130,6 +132,7 @@ const opAllocatePrivateVirtualInterface = "AllocatePrivateVirtualInterface"
 type AllocatePrivateVirtualInterfaceRequest struct {
 	*aws.Request
 	Input *AllocatePrivateVirtualInterfaceInput
+	Copy  func(*AllocatePrivateVirtualInterfaceInput) AllocatePrivateVirtualInterfaceRequest
 }
 
 // Send marshals and sends the AllocatePrivateVirtualInterface API request.
@@ -175,7 +178,7 @@ func (c *DirectConnect) AllocatePrivateVirtualInterfaceRequest(input *AllocatePr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AllocatePrivateVirtualInterfaceRequest{Request: req, Input: input}
+	return AllocatePrivateVirtualInterfaceRequest{Request: req, Input: input, Copy: c.AllocatePrivateVirtualInterfaceRequest}
 }
 
 const opAllocatePublicVirtualInterface = "AllocatePublicVirtualInterface"
@@ -184,6 +187,7 @@ const opAllocatePublicVirtualInterface = "AllocatePublicVirtualInterface"
 type AllocatePublicVirtualInterfaceRequest struct {
 	*aws.Request
 	Input *AllocatePublicVirtualInterfaceInput
+	Copy  func(*AllocatePublicVirtualInterfaceInput) AllocatePublicVirtualInterfaceRequest
 }
 
 // Send marshals and sends the AllocatePublicVirtualInterface API request.
@@ -236,7 +240,7 @@ func (c *DirectConnect) AllocatePublicVirtualInterfaceRequest(input *AllocatePub
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AllocatePublicVirtualInterfaceRequest{Request: req, Input: input}
+	return AllocatePublicVirtualInterfaceRequest{Request: req, Input: input, Copy: c.AllocatePublicVirtualInterfaceRequest}
 }
 
 const opAssociateConnectionWithLag = "AssociateConnectionWithLag"
@@ -245,6 +249,7 @@ const opAssociateConnectionWithLag = "AssociateConnectionWithLag"
 type AssociateConnectionWithLagRequest struct {
 	*aws.Request
 	Input *AssociateConnectionWithLagInput
+	Copy  func(*AssociateConnectionWithLagInput) AssociateConnectionWithLagRequest
 }
 
 // Send marshals and sends the AssociateConnectionWithLag API request.
@@ -301,7 +306,7 @@ func (c *DirectConnect) AssociateConnectionWithLagRequest(input *AssociateConnec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateConnectionWithLagRequest{Request: req, Input: input}
+	return AssociateConnectionWithLagRequest{Request: req, Input: input, Copy: c.AssociateConnectionWithLagRequest}
 }
 
 const opAssociateHostedConnection = "AssociateHostedConnection"
@@ -310,6 +315,7 @@ const opAssociateHostedConnection = "AssociateHostedConnection"
 type AssociateHostedConnectionRequest struct {
 	*aws.Request
 	Input *AssociateHostedConnectionInput
+	Copy  func(*AssociateHostedConnectionInput) AssociateHostedConnectionRequest
 }
 
 // Send marshals and sends the AssociateHostedConnection API request.
@@ -356,7 +362,7 @@ func (c *DirectConnect) AssociateHostedConnectionRequest(input *AssociateHostedC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateHostedConnectionRequest{Request: req, Input: input}
+	return AssociateHostedConnectionRequest{Request: req, Input: input, Copy: c.AssociateHostedConnectionRequest}
 }
 
 const opAssociateVirtualInterface = "AssociateVirtualInterface"
@@ -365,6 +371,7 @@ const opAssociateVirtualInterface = "AssociateVirtualInterface"
 type AssociateVirtualInterfaceRequest struct {
 	*aws.Request
 	Input *AssociateVirtualInterfaceInput
+	Copy  func(*AssociateVirtualInterfaceInput) AssociateVirtualInterfaceRequest
 }
 
 // Send marshals and sends the AssociateVirtualInterface API request.
@@ -419,7 +426,7 @@ func (c *DirectConnect) AssociateVirtualInterfaceRequest(input *AssociateVirtual
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateVirtualInterfaceRequest{Request: req, Input: input}
+	return AssociateVirtualInterfaceRequest{Request: req, Input: input, Copy: c.AssociateVirtualInterfaceRequest}
 }
 
 const opConfirmConnection = "ConfirmConnection"
@@ -428,6 +435,7 @@ const opConfirmConnection = "ConfirmConnection"
 type ConfirmConnectionRequest struct {
 	*aws.Request
 	Input *ConfirmConnectionInput
+	Copy  func(*ConfirmConnectionInput) ConfirmConnectionRequest
 }
 
 // Send marshals and sends the ConfirmConnection API request.
@@ -472,7 +480,7 @@ func (c *DirectConnect) ConfirmConnectionRequest(input *ConfirmConnectionInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ConfirmConnectionRequest{Request: req, Input: input}
+	return ConfirmConnectionRequest{Request: req, Input: input, Copy: c.ConfirmConnectionRequest}
 }
 
 const opConfirmPrivateVirtualInterface = "ConfirmPrivateVirtualInterface"
@@ -481,6 +489,7 @@ const opConfirmPrivateVirtualInterface = "ConfirmPrivateVirtualInterface"
 type ConfirmPrivateVirtualInterfaceRequest struct {
 	*aws.Request
 	Input *ConfirmPrivateVirtualInterfaceInput
+	Copy  func(*ConfirmPrivateVirtualInterfaceInput) ConfirmPrivateVirtualInterfaceRequest
 }
 
 // Send marshals and sends the ConfirmPrivateVirtualInterface API request.
@@ -525,7 +534,7 @@ func (c *DirectConnect) ConfirmPrivateVirtualInterfaceRequest(input *ConfirmPriv
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ConfirmPrivateVirtualInterfaceRequest{Request: req, Input: input}
+	return ConfirmPrivateVirtualInterfaceRequest{Request: req, Input: input, Copy: c.ConfirmPrivateVirtualInterfaceRequest}
 }
 
 const opConfirmPublicVirtualInterface = "ConfirmPublicVirtualInterface"
@@ -534,6 +543,7 @@ const opConfirmPublicVirtualInterface = "ConfirmPublicVirtualInterface"
 type ConfirmPublicVirtualInterfaceRequest struct {
 	*aws.Request
 	Input *ConfirmPublicVirtualInterfaceInput
+	Copy  func(*ConfirmPublicVirtualInterfaceInput) ConfirmPublicVirtualInterfaceRequest
 }
 
 // Send marshals and sends the ConfirmPublicVirtualInterface API request.
@@ -577,7 +587,7 @@ func (c *DirectConnect) ConfirmPublicVirtualInterfaceRequest(input *ConfirmPubli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ConfirmPublicVirtualInterfaceRequest{Request: req, Input: input}
+	return ConfirmPublicVirtualInterfaceRequest{Request: req, Input: input, Copy: c.ConfirmPublicVirtualInterfaceRequest}
 }
 
 const opCreateBGPPeer = "CreateBGPPeer"
@@ -586,6 +596,7 @@ const opCreateBGPPeer = "CreateBGPPeer"
 type CreateBGPPeerRequest struct {
 	*aws.Request
 	Input *CreateBGPPeerInput
+	Copy  func(*CreateBGPPeerInput) CreateBGPPeerRequest
 }
 
 // Send marshals and sends the CreateBGPPeer API request.
@@ -638,7 +649,7 @@ func (c *DirectConnect) CreateBGPPeerRequest(input *CreateBGPPeerInput) CreateBG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBGPPeerRequest{Request: req, Input: input}
+	return CreateBGPPeerRequest{Request: req, Input: input, Copy: c.CreateBGPPeerRequest}
 }
 
 const opCreateConnection = "CreateConnection"
@@ -647,6 +658,7 @@ const opCreateConnection = "CreateConnection"
 type CreateConnectionRequest struct {
 	*aws.Request
 	Input *CreateConnectionInput
+	Copy  func(*CreateConnectionInput) CreateConnectionRequest
 }
 
 // Send marshals and sends the CreateConnection API request.
@@ -704,7 +716,7 @@ func (c *DirectConnect) CreateConnectionRequest(input *CreateConnectionInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateConnectionRequest{Request: req, Input: input}
+	return CreateConnectionRequest{Request: req, Input: input, Copy: c.CreateConnectionRequest}
 }
 
 const opCreateDirectConnectGateway = "CreateDirectConnectGateway"
@@ -713,6 +725,7 @@ const opCreateDirectConnectGateway = "CreateDirectConnectGateway"
 type CreateDirectConnectGatewayRequest struct {
 	*aws.Request
 	Input *CreateDirectConnectGatewayInput
+	Copy  func(*CreateDirectConnectGatewayInput) CreateDirectConnectGatewayRequest
 }
 
 // Send marshals and sends the CreateDirectConnectGateway API request.
@@ -760,7 +773,7 @@ func (c *DirectConnect) CreateDirectConnectGatewayRequest(input *CreateDirectCon
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDirectConnectGatewayRequest{Request: req, Input: input}
+	return CreateDirectConnectGatewayRequest{Request: req, Input: input, Copy: c.CreateDirectConnectGatewayRequest}
 }
 
 const opCreateDirectConnectGatewayAssociation = "CreateDirectConnectGatewayAssociation"
@@ -769,6 +782,7 @@ const opCreateDirectConnectGatewayAssociation = "CreateDirectConnectGatewayAssoc
 type CreateDirectConnectGatewayAssociationRequest struct {
 	*aws.Request
 	Input *CreateDirectConnectGatewayAssociationInput
+	Copy  func(*CreateDirectConnectGatewayAssociationInput) CreateDirectConnectGatewayAssociationRequest
 }
 
 // Send marshals and sends the CreateDirectConnectGatewayAssociation API request.
@@ -811,7 +825,7 @@ func (c *DirectConnect) CreateDirectConnectGatewayAssociationRequest(input *Crea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDirectConnectGatewayAssociationRequest{Request: req, Input: input}
+	return CreateDirectConnectGatewayAssociationRequest{Request: req, Input: input, Copy: c.CreateDirectConnectGatewayAssociationRequest}
 }
 
 const opCreateInterconnect = "CreateInterconnect"
@@ -820,6 +834,7 @@ const opCreateInterconnect = "CreateInterconnect"
 type CreateInterconnectRequest struct {
 	*aws.Request
 	Input *CreateInterconnectInput
+	Copy  func(*CreateInterconnectInput) CreateInterconnectRequest
 }
 
 // Send marshals and sends the CreateInterconnect API request.
@@ -883,7 +898,7 @@ func (c *DirectConnect) CreateInterconnectRequest(input *CreateInterconnectInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateInterconnectRequest{Request: req, Input: input}
+	return CreateInterconnectRequest{Request: req, Input: input, Copy: c.CreateInterconnectRequest}
 }
 
 const opCreateLag = "CreateLag"
@@ -892,6 +907,7 @@ const opCreateLag = "CreateLag"
 type CreateLagRequest struct {
 	*aws.Request
 	Input *CreateLagInput
+	Copy  func(*CreateLagInput) CreateLagRequest
 }
 
 // Send marshals and sends the CreateLag API request.
@@ -956,7 +972,7 @@ func (c *DirectConnect) CreateLagRequest(input *CreateLagInput) CreateLagRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLagRequest{Request: req, Input: input}
+	return CreateLagRequest{Request: req, Input: input, Copy: c.CreateLagRequest}
 }
 
 const opCreatePrivateVirtualInterface = "CreatePrivateVirtualInterface"
@@ -965,6 +981,7 @@ const opCreatePrivateVirtualInterface = "CreatePrivateVirtualInterface"
 type CreatePrivateVirtualInterfaceRequest struct {
 	*aws.Request
 	Input *CreatePrivateVirtualInterfaceInput
+	Copy  func(*CreatePrivateVirtualInterfaceInput) CreatePrivateVirtualInterfaceRequest
 }
 
 // Send marshals and sends the CreatePrivateVirtualInterface API request.
@@ -1007,7 +1024,7 @@ func (c *DirectConnect) CreatePrivateVirtualInterfaceRequest(input *CreatePrivat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePrivateVirtualInterfaceRequest{Request: req, Input: input}
+	return CreatePrivateVirtualInterfaceRequest{Request: req, Input: input, Copy: c.CreatePrivateVirtualInterfaceRequest}
 }
 
 const opCreatePublicVirtualInterface = "CreatePublicVirtualInterface"
@@ -1016,6 +1033,7 @@ const opCreatePublicVirtualInterface = "CreatePublicVirtualInterface"
 type CreatePublicVirtualInterfaceRequest struct {
 	*aws.Request
 	Input *CreatePublicVirtualInterfaceInput
+	Copy  func(*CreatePublicVirtualInterfaceInput) CreatePublicVirtualInterfaceRequest
 }
 
 // Send marshals and sends the CreatePublicVirtualInterface API request.
@@ -1063,7 +1081,7 @@ func (c *DirectConnect) CreatePublicVirtualInterfaceRequest(input *CreatePublicV
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePublicVirtualInterfaceRequest{Request: req, Input: input}
+	return CreatePublicVirtualInterfaceRequest{Request: req, Input: input, Copy: c.CreatePublicVirtualInterfaceRequest}
 }
 
 const opDeleteBGPPeer = "DeleteBGPPeer"
@@ -1072,6 +1090,7 @@ const opDeleteBGPPeer = "DeleteBGPPeer"
 type DeleteBGPPeerRequest struct {
 	*aws.Request
 	Input *DeleteBGPPeerInput
+	Copy  func(*DeleteBGPPeerInput) DeleteBGPPeerRequest
 }
 
 // Send marshals and sends the DeleteBGPPeer API request.
@@ -1114,7 +1133,7 @@ func (c *DirectConnect) DeleteBGPPeerRequest(input *DeleteBGPPeerInput) DeleteBG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBGPPeerRequest{Request: req, Input: input}
+	return DeleteBGPPeerRequest{Request: req, Input: input, Copy: c.DeleteBGPPeerRequest}
 }
 
 const opDeleteConnection = "DeleteConnection"
@@ -1123,6 +1142,7 @@ const opDeleteConnection = "DeleteConnection"
 type DeleteConnectionRequest struct {
 	*aws.Request
 	Input *DeleteConnectionInput
+	Copy  func(*DeleteConnectionInput) DeleteConnectionRequest
 }
 
 // Send marshals and sends the DeleteConnection API request.
@@ -1168,7 +1188,7 @@ func (c *DirectConnect) DeleteConnectionRequest(input *DeleteConnectionInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteConnectionRequest{Request: req, Input: input}
+	return DeleteConnectionRequest{Request: req, Input: input, Copy: c.DeleteConnectionRequest}
 }
 
 const opDeleteDirectConnectGateway = "DeleteDirectConnectGateway"
@@ -1177,6 +1197,7 @@ const opDeleteDirectConnectGateway = "DeleteDirectConnectGateway"
 type DeleteDirectConnectGatewayRequest struct {
 	*aws.Request
 	Input *DeleteDirectConnectGatewayInput
+	Copy  func(*DeleteDirectConnectGatewayInput) DeleteDirectConnectGatewayRequest
 }
 
 // Send marshals and sends the DeleteDirectConnectGateway API request.
@@ -1219,7 +1240,7 @@ func (c *DirectConnect) DeleteDirectConnectGatewayRequest(input *DeleteDirectCon
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDirectConnectGatewayRequest{Request: req, Input: input}
+	return DeleteDirectConnectGatewayRequest{Request: req, Input: input, Copy: c.DeleteDirectConnectGatewayRequest}
 }
 
 const opDeleteDirectConnectGatewayAssociation = "DeleteDirectConnectGatewayAssociation"
@@ -1228,6 +1249,7 @@ const opDeleteDirectConnectGatewayAssociation = "DeleteDirectConnectGatewayAssoc
 type DeleteDirectConnectGatewayAssociationRequest struct {
 	*aws.Request
 	Input *DeleteDirectConnectGatewayAssociationInput
+	Copy  func(*DeleteDirectConnectGatewayAssociationInput) DeleteDirectConnectGatewayAssociationRequest
 }
 
 // Send marshals and sends the DeleteDirectConnectGatewayAssociation API request.
@@ -1269,7 +1291,7 @@ func (c *DirectConnect) DeleteDirectConnectGatewayAssociationRequest(input *Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDirectConnectGatewayAssociationRequest{Request: req, Input: input}
+	return DeleteDirectConnectGatewayAssociationRequest{Request: req, Input: input, Copy: c.DeleteDirectConnectGatewayAssociationRequest}
 }
 
 const opDeleteInterconnect = "DeleteInterconnect"
@@ -1278,6 +1300,7 @@ const opDeleteInterconnect = "DeleteInterconnect"
 type DeleteInterconnectRequest struct {
 	*aws.Request
 	Input *DeleteInterconnectInput
+	Copy  func(*DeleteInterconnectInput) DeleteInterconnectRequest
 }
 
 // Send marshals and sends the DeleteInterconnect API request.
@@ -1320,7 +1343,7 @@ func (c *DirectConnect) DeleteInterconnectRequest(input *DeleteInterconnectInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteInterconnectRequest{Request: req, Input: input}
+	return DeleteInterconnectRequest{Request: req, Input: input, Copy: c.DeleteInterconnectRequest}
 }
 
 const opDeleteLag = "DeleteLag"
@@ -1329,6 +1352,7 @@ const opDeleteLag = "DeleteLag"
 type DeleteLagRequest struct {
 	*aws.Request
 	Input *DeleteLagInput
+	Copy  func(*DeleteLagInput) DeleteLagRequest
 }
 
 // Send marshals and sends the DeleteLag API request.
@@ -1370,7 +1394,7 @@ func (c *DirectConnect) DeleteLagRequest(input *DeleteLagInput) DeleteLagRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLagRequest{Request: req, Input: input}
+	return DeleteLagRequest{Request: req, Input: input, Copy: c.DeleteLagRequest}
 }
 
 const opDeleteVirtualInterface = "DeleteVirtualInterface"
@@ -1379,6 +1403,7 @@ const opDeleteVirtualInterface = "DeleteVirtualInterface"
 type DeleteVirtualInterfaceRequest struct {
 	*aws.Request
 	Input *DeleteVirtualInterfaceInput
+	Copy  func(*DeleteVirtualInterfaceInput) DeleteVirtualInterfaceRequest
 }
 
 // Send marshals and sends the DeleteVirtualInterface API request.
@@ -1419,7 +1444,7 @@ func (c *DirectConnect) DeleteVirtualInterfaceRequest(input *DeleteVirtualInterf
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVirtualInterfaceRequest{Request: req, Input: input}
+	return DeleteVirtualInterfaceRequest{Request: req, Input: input, Copy: c.DeleteVirtualInterfaceRequest}
 }
 
 const opDescribeConnectionLoa = "DescribeConnectionLoa"
@@ -1428,6 +1453,7 @@ const opDescribeConnectionLoa = "DescribeConnectionLoa"
 type DescribeConnectionLoaRequest struct {
 	*aws.Request
 	Input *DescribeConnectionLoaInput
+	Copy  func(*DescribeConnectionLoaInput) DescribeConnectionLoaRequest
 }
 
 // Send marshals and sends the DescribeConnectionLoa API request.
@@ -1479,7 +1505,7 @@ func (c *DirectConnect) DescribeConnectionLoaRequest(input *DescribeConnectionLo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConnectionLoaRequest{Request: req, Input: input}
+	return DescribeConnectionLoaRequest{Request: req, Input: input, Copy: c.DescribeConnectionLoaRequest}
 }
 
 const opDescribeConnections = "DescribeConnections"
@@ -1488,6 +1514,7 @@ const opDescribeConnections = "DescribeConnections"
 type DescribeConnectionsRequest struct {
 	*aws.Request
 	Input *DescribeConnectionsInput
+	Copy  func(*DescribeConnectionsInput) DescribeConnectionsRequest
 }
 
 // Send marshals and sends the DescribeConnections API request.
@@ -1530,7 +1557,7 @@ func (c *DirectConnect) DescribeConnectionsRequest(input *DescribeConnectionsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConnectionsRequest{Request: req, Input: input}
+	return DescribeConnectionsRequest{Request: req, Input: input, Copy: c.DescribeConnectionsRequest}
 }
 
 const opDescribeConnectionsOnInterconnect = "DescribeConnectionsOnInterconnect"
@@ -1539,6 +1566,7 @@ const opDescribeConnectionsOnInterconnect = "DescribeConnectionsOnInterconnect"
 type DescribeConnectionsOnInterconnectRequest struct {
 	*aws.Request
 	Input *DescribeConnectionsOnInterconnectInput
+	Copy  func(*DescribeConnectionsOnInterconnectInput) DescribeConnectionsOnInterconnectRequest
 }
 
 // Send marshals and sends the DescribeConnectionsOnInterconnect API request.
@@ -1586,7 +1614,7 @@ func (c *DirectConnect) DescribeConnectionsOnInterconnectRequest(input *Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConnectionsOnInterconnectRequest{Request: req, Input: input}
+	return DescribeConnectionsOnInterconnectRequest{Request: req, Input: input, Copy: c.DescribeConnectionsOnInterconnectRequest}
 }
 
 const opDescribeDirectConnectGatewayAssociations = "DescribeDirectConnectGatewayAssociations"
@@ -1595,6 +1623,7 @@ const opDescribeDirectConnectGatewayAssociations = "DescribeDirectConnectGateway
 type DescribeDirectConnectGatewayAssociationsRequest struct {
 	*aws.Request
 	Input *DescribeDirectConnectGatewayAssociationsInput
+	Copy  func(*DescribeDirectConnectGatewayAssociationsInput) DescribeDirectConnectGatewayAssociationsRequest
 }
 
 // Send marshals and sends the DescribeDirectConnectGatewayAssociations API request.
@@ -1641,7 +1670,7 @@ func (c *DirectConnect) DescribeDirectConnectGatewayAssociationsRequest(input *D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDirectConnectGatewayAssociationsRequest{Request: req, Input: input}
+	return DescribeDirectConnectGatewayAssociationsRequest{Request: req, Input: input, Copy: c.DescribeDirectConnectGatewayAssociationsRequest}
 }
 
 const opDescribeDirectConnectGatewayAttachments = "DescribeDirectConnectGatewayAttachments"
@@ -1650,6 +1679,7 @@ const opDescribeDirectConnectGatewayAttachments = "DescribeDirectConnectGatewayA
 type DescribeDirectConnectGatewayAttachmentsRequest struct {
 	*aws.Request
 	Input *DescribeDirectConnectGatewayAttachmentsInput
+	Copy  func(*DescribeDirectConnectGatewayAttachmentsInput) DescribeDirectConnectGatewayAttachmentsRequest
 }
 
 // Send marshals and sends the DescribeDirectConnectGatewayAttachments API request.
@@ -1696,7 +1726,7 @@ func (c *DirectConnect) DescribeDirectConnectGatewayAttachmentsRequest(input *De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDirectConnectGatewayAttachmentsRequest{Request: req, Input: input}
+	return DescribeDirectConnectGatewayAttachmentsRequest{Request: req, Input: input, Copy: c.DescribeDirectConnectGatewayAttachmentsRequest}
 }
 
 const opDescribeDirectConnectGateways = "DescribeDirectConnectGateways"
@@ -1705,6 +1735,7 @@ const opDescribeDirectConnectGateways = "DescribeDirectConnectGateways"
 type DescribeDirectConnectGatewaysRequest struct {
 	*aws.Request
 	Input *DescribeDirectConnectGatewaysInput
+	Copy  func(*DescribeDirectConnectGatewaysInput) DescribeDirectConnectGatewaysRequest
 }
 
 // Send marshals and sends the DescribeDirectConnectGateways API request.
@@ -1749,7 +1780,7 @@ func (c *DirectConnect) DescribeDirectConnectGatewaysRequest(input *DescribeDire
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDirectConnectGatewaysRequest{Request: req, Input: input}
+	return DescribeDirectConnectGatewaysRequest{Request: req, Input: input, Copy: c.DescribeDirectConnectGatewaysRequest}
 }
 
 const opDescribeHostedConnections = "DescribeHostedConnections"
@@ -1758,6 +1789,7 @@ const opDescribeHostedConnections = "DescribeHostedConnections"
 type DescribeHostedConnectionsRequest struct {
 	*aws.Request
 	Input *DescribeHostedConnectionsInput
+	Copy  func(*DescribeHostedConnectionsInput) DescribeHostedConnectionsRequest
 }
 
 // Send marshals and sends the DescribeHostedConnections API request.
@@ -1801,7 +1833,7 @@ func (c *DirectConnect) DescribeHostedConnectionsRequest(input *DescribeHostedCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeHostedConnectionsRequest{Request: req, Input: input}
+	return DescribeHostedConnectionsRequest{Request: req, Input: input, Copy: c.DescribeHostedConnectionsRequest}
 }
 
 const opDescribeInterconnectLoa = "DescribeInterconnectLoa"
@@ -1810,6 +1842,7 @@ const opDescribeInterconnectLoa = "DescribeInterconnectLoa"
 type DescribeInterconnectLoaRequest struct {
 	*aws.Request
 	Input *DescribeInterconnectLoaInput
+	Copy  func(*DescribeInterconnectLoaInput) DescribeInterconnectLoaRequest
 }
 
 // Send marshals and sends the DescribeInterconnectLoa API request.
@@ -1861,7 +1894,7 @@ func (c *DirectConnect) DescribeInterconnectLoaRequest(input *DescribeInterconne
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInterconnectLoaRequest{Request: req, Input: input}
+	return DescribeInterconnectLoaRequest{Request: req, Input: input, Copy: c.DescribeInterconnectLoaRequest}
 }
 
 const opDescribeInterconnects = "DescribeInterconnects"
@@ -1870,6 +1903,7 @@ const opDescribeInterconnects = "DescribeInterconnects"
 type DescribeInterconnectsRequest struct {
 	*aws.Request
 	Input *DescribeInterconnectsInput
+	Copy  func(*DescribeInterconnectsInput) DescribeInterconnectsRequest
 }
 
 // Send marshals and sends the DescribeInterconnects API request.
@@ -1912,7 +1946,7 @@ func (c *DirectConnect) DescribeInterconnectsRequest(input *DescribeInterconnect
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInterconnectsRequest{Request: req, Input: input}
+	return DescribeInterconnectsRequest{Request: req, Input: input, Copy: c.DescribeInterconnectsRequest}
 }
 
 const opDescribeLags = "DescribeLags"
@@ -1921,6 +1955,7 @@ const opDescribeLags = "DescribeLags"
 type DescribeLagsRequest struct {
 	*aws.Request
 	Input *DescribeLagsInput
+	Copy  func(*DescribeLagsInput) DescribeLagsRequest
 }
 
 // Send marshals and sends the DescribeLags API request.
@@ -1963,7 +1998,7 @@ func (c *DirectConnect) DescribeLagsRequest(input *DescribeLagsInput) DescribeLa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLagsRequest{Request: req, Input: input}
+	return DescribeLagsRequest{Request: req, Input: input, Copy: c.DescribeLagsRequest}
 }
 
 const opDescribeLoa = "DescribeLoa"
@@ -1972,6 +2007,7 @@ const opDescribeLoa = "DescribeLoa"
 type DescribeLoaRequest struct {
 	*aws.Request
 	Input *DescribeLoaInput
+	Copy  func(*DescribeLoaInput) DescribeLoaRequest
 }
 
 // Send marshals and sends the DescribeLoa API request.
@@ -2019,7 +2055,7 @@ func (c *DirectConnect) DescribeLoaRequest(input *DescribeLoaInput) DescribeLoaR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLoaRequest{Request: req, Input: input}
+	return DescribeLoaRequest{Request: req, Input: input, Copy: c.DescribeLoaRequest}
 }
 
 const opDescribeLocations = "DescribeLocations"
@@ -2028,6 +2064,7 @@ const opDescribeLocations = "DescribeLocations"
 type DescribeLocationsRequest struct {
 	*aws.Request
 	Input *DescribeLocationsInput
+	Copy  func(*DescribeLocationsInput) DescribeLocationsRequest
 }
 
 // Send marshals and sends the DescribeLocations API request.
@@ -2070,7 +2107,7 @@ func (c *DirectConnect) DescribeLocationsRequest(input *DescribeLocationsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLocationsRequest{Request: req, Input: input}
+	return DescribeLocationsRequest{Request: req, Input: input, Copy: c.DescribeLocationsRequest}
 }
 
 const opDescribeTags = "DescribeTags"
@@ -2079,6 +2116,7 @@ const opDescribeTags = "DescribeTags"
 type DescribeTagsRequest struct {
 	*aws.Request
 	Input *DescribeTagsInput
+	Copy  func(*DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -2119,7 +2157,7 @@ func (c *DirectConnect) DescribeTagsRequest(input *DescribeTagsInput) DescribeTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagsRequest{Request: req, Input: input}
+	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
 const opDescribeVirtualGateways = "DescribeVirtualGateways"
@@ -2128,6 +2166,7 @@ const opDescribeVirtualGateways = "DescribeVirtualGateways"
 type DescribeVirtualGatewaysRequest struct {
 	*aws.Request
 	Input *DescribeVirtualGatewaysInput
+	Copy  func(*DescribeVirtualGatewaysInput) DescribeVirtualGatewaysRequest
 }
 
 // Send marshals and sends the DescribeVirtualGateways API request.
@@ -2174,7 +2213,7 @@ func (c *DirectConnect) DescribeVirtualGatewaysRequest(input *DescribeVirtualGat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVirtualGatewaysRequest{Request: req, Input: input}
+	return DescribeVirtualGatewaysRequest{Request: req, Input: input, Copy: c.DescribeVirtualGatewaysRequest}
 }
 
 const opDescribeVirtualInterfaces = "DescribeVirtualInterfaces"
@@ -2183,6 +2222,7 @@ const opDescribeVirtualInterfaces = "DescribeVirtualInterfaces"
 type DescribeVirtualInterfacesRequest struct {
 	*aws.Request
 	Input *DescribeVirtualInterfacesInput
+	Copy  func(*DescribeVirtualInterfacesInput) DescribeVirtualInterfacesRequest
 }
 
 // Send marshals and sends the DescribeVirtualInterfaces API request.
@@ -2230,7 +2270,7 @@ func (c *DirectConnect) DescribeVirtualInterfacesRequest(input *DescribeVirtualI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVirtualInterfacesRequest{Request: req, Input: input}
+	return DescribeVirtualInterfacesRequest{Request: req, Input: input, Copy: c.DescribeVirtualInterfacesRequest}
 }
 
 const opDisassociateConnectionFromLag = "DisassociateConnectionFromLag"
@@ -2239,6 +2279,7 @@ const opDisassociateConnectionFromLag = "DisassociateConnectionFromLag"
 type DisassociateConnectionFromLagRequest struct {
 	*aws.Request
 	Input *DisassociateConnectionFromLagInput
+	Copy  func(*DisassociateConnectionFromLagInput) DisassociateConnectionFromLagRequest
 }
 
 // Send marshals and sends the DisassociateConnectionFromLag API request.
@@ -2289,7 +2330,7 @@ func (c *DirectConnect) DisassociateConnectionFromLagRequest(input *Disassociate
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateConnectionFromLagRequest{Request: req, Input: input}
+	return DisassociateConnectionFromLagRequest{Request: req, Input: input, Copy: c.DisassociateConnectionFromLagRequest}
 }
 
 const opTagResource = "TagResource"
@@ -2298,6 +2339,7 @@ const opTagResource = "TagResource"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -2343,7 +2385,7 @@ func (c *DirectConnect) TagResourceRequest(input *TagResourceInput) TagResourceR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUntagResource = "UntagResource"
@@ -2352,6 +2394,7 @@ const opUntagResource = "UntagResource"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -2392,7 +2435,7 @@ func (c *DirectConnect) UntagResourceRequest(input *UntagResourceInput) UntagRes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateLag = "UpdateLag"
@@ -2401,6 +2444,7 @@ const opUpdateLag = "UpdateLag"
 type UpdateLagRequest struct {
 	*aws.Request
 	Input *UpdateLagInput
+	Copy  func(*UpdateLagInput) UpdateLagRequest
 }
 
 // Send marshals and sends the UpdateLag API request.
@@ -2455,7 +2499,7 @@ func (c *DirectConnect) UpdateLagRequest(input *UpdateLagInput) UpdateLagRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateLagRequest{Request: req, Input: input}
+	return UpdateLagRequest{Request: req, Input: input, Copy: c.UpdateLagRequest}
 }
 
 // Container for the parameters to the AllocateConnectionOnInterconnect operation.

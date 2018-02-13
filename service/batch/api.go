@@ -16,6 +16,7 @@ const opCancelJob = "CancelJob"
 type CancelJobRequest struct {
 	*aws.Request
 	Input *CancelJobInput
+	Copy  func(*CancelJobInput) CancelJobRequest
 }
 
 // Send marshals and sends the CancelJob API request.
@@ -60,7 +61,7 @@ func (c *Batch) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelJobRequest{Request: req, Input: input}
+	return CancelJobRequest{Request: req, Input: input, Copy: c.CancelJobRequest}
 }
 
 const opCreateComputeEnvironment = "CreateComputeEnvironment"
@@ -69,6 +70,7 @@ const opCreateComputeEnvironment = "CreateComputeEnvironment"
 type CreateComputeEnvironmentRequest struct {
 	*aws.Request
 	Input *CreateComputeEnvironmentInput
+	Copy  func(*CreateComputeEnvironmentInput) CreateComputeEnvironmentRequest
 }
 
 // Send marshals and sends the CreateComputeEnvironment API request.
@@ -130,7 +132,7 @@ func (c *Batch) CreateComputeEnvironmentRequest(input *CreateComputeEnvironmentI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateComputeEnvironmentRequest{Request: req, Input: input}
+	return CreateComputeEnvironmentRequest{Request: req, Input: input, Copy: c.CreateComputeEnvironmentRequest}
 }
 
 const opCreateJobQueue = "CreateJobQueue"
@@ -139,6 +141,7 @@ const opCreateJobQueue = "CreateJobQueue"
 type CreateJobQueueRequest struct {
 	*aws.Request
 	Input *CreateJobQueueInput
+	Copy  func(*CreateJobQueueInput) CreateJobQueueRequest
 }
 
 // Send marshals and sends the CreateJobQueue API request.
@@ -187,7 +190,7 @@ func (c *Batch) CreateJobQueueRequest(input *CreateJobQueueInput) CreateJobQueue
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateJobQueueRequest{Request: req, Input: input}
+	return CreateJobQueueRequest{Request: req, Input: input, Copy: c.CreateJobQueueRequest}
 }
 
 const opDeleteComputeEnvironment = "DeleteComputeEnvironment"
@@ -196,6 +199,7 @@ const opDeleteComputeEnvironment = "DeleteComputeEnvironment"
 type DeleteComputeEnvironmentRequest struct {
 	*aws.Request
 	Input *DeleteComputeEnvironmentInput
+	Copy  func(*DeleteComputeEnvironmentInput) DeleteComputeEnvironmentRequest
 }
 
 // Send marshals and sends the DeleteComputeEnvironment API request.
@@ -240,7 +244,7 @@ func (c *Batch) DeleteComputeEnvironmentRequest(input *DeleteComputeEnvironmentI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteComputeEnvironmentRequest{Request: req, Input: input}
+	return DeleteComputeEnvironmentRequest{Request: req, Input: input, Copy: c.DeleteComputeEnvironmentRequest}
 }
 
 const opDeleteJobQueue = "DeleteJobQueue"
@@ -249,6 +253,7 @@ const opDeleteJobQueue = "DeleteJobQueue"
 type DeleteJobQueueRequest struct {
 	*aws.Request
 	Input *DeleteJobQueueInput
+	Copy  func(*DeleteJobQueueInput) DeleteJobQueueRequest
 }
 
 // Send marshals and sends the DeleteJobQueue API request.
@@ -294,7 +299,7 @@ func (c *Batch) DeleteJobQueueRequest(input *DeleteJobQueueInput) DeleteJobQueue
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteJobQueueRequest{Request: req, Input: input}
+	return DeleteJobQueueRequest{Request: req, Input: input, Copy: c.DeleteJobQueueRequest}
 }
 
 const opDeregisterJobDefinition = "DeregisterJobDefinition"
@@ -303,6 +308,7 @@ const opDeregisterJobDefinition = "DeregisterJobDefinition"
 type DeregisterJobDefinitionRequest struct {
 	*aws.Request
 	Input *DeregisterJobDefinitionInput
+	Copy  func(*DeregisterJobDefinitionInput) DeregisterJobDefinitionRequest
 }
 
 // Send marshals and sends the DeregisterJobDefinition API request.
@@ -343,7 +349,7 @@ func (c *Batch) DeregisterJobDefinitionRequest(input *DeregisterJobDefinitionInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterJobDefinitionRequest{Request: req, Input: input}
+	return DeregisterJobDefinitionRequest{Request: req, Input: input, Copy: c.DeregisterJobDefinitionRequest}
 }
 
 const opDescribeComputeEnvironments = "DescribeComputeEnvironments"
@@ -352,6 +358,7 @@ const opDescribeComputeEnvironments = "DescribeComputeEnvironments"
 type DescribeComputeEnvironmentsRequest struct {
 	*aws.Request
 	Input *DescribeComputeEnvironmentsInput
+	Copy  func(*DescribeComputeEnvironmentsInput) DescribeComputeEnvironmentsRequest
 }
 
 // Send marshals and sends the DescribeComputeEnvironments API request.
@@ -396,7 +403,7 @@ func (c *Batch) DescribeComputeEnvironmentsRequest(input *DescribeComputeEnviron
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeComputeEnvironmentsRequest{Request: req, Input: input}
+	return DescribeComputeEnvironmentsRequest{Request: req, Input: input, Copy: c.DescribeComputeEnvironmentsRequest}
 }
 
 const opDescribeJobDefinitions = "DescribeJobDefinitions"
@@ -405,6 +412,7 @@ const opDescribeJobDefinitions = "DescribeJobDefinitions"
 type DescribeJobDefinitionsRequest struct {
 	*aws.Request
 	Input *DescribeJobDefinitionsInput
+	Copy  func(*DescribeJobDefinitionsInput) DescribeJobDefinitionsRequest
 }
 
 // Send marshals and sends the DescribeJobDefinitions API request.
@@ -446,7 +454,7 @@ func (c *Batch) DescribeJobDefinitionsRequest(input *DescribeJobDefinitionsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeJobDefinitionsRequest{Request: req, Input: input}
+	return DescribeJobDefinitionsRequest{Request: req, Input: input, Copy: c.DescribeJobDefinitionsRequest}
 }
 
 const opDescribeJobQueues = "DescribeJobQueues"
@@ -455,6 +463,7 @@ const opDescribeJobQueues = "DescribeJobQueues"
 type DescribeJobQueuesRequest struct {
 	*aws.Request
 	Input *DescribeJobQueuesInput
+	Copy  func(*DescribeJobQueuesInput) DescribeJobQueuesRequest
 }
 
 // Send marshals and sends the DescribeJobQueues API request.
@@ -495,7 +504,7 @@ func (c *Batch) DescribeJobQueuesRequest(input *DescribeJobQueuesInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeJobQueuesRequest{Request: req, Input: input}
+	return DescribeJobQueuesRequest{Request: req, Input: input, Copy: c.DescribeJobQueuesRequest}
 }
 
 const opDescribeJobs = "DescribeJobs"
@@ -504,6 +513,7 @@ const opDescribeJobs = "DescribeJobs"
 type DescribeJobsRequest struct {
 	*aws.Request
 	Input *DescribeJobsInput
+	Copy  func(*DescribeJobsInput) DescribeJobsRequest
 }
 
 // Send marshals and sends the DescribeJobs API request.
@@ -544,7 +554,7 @@ func (c *Batch) DescribeJobsRequest(input *DescribeJobsInput) DescribeJobsReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeJobsRequest{Request: req, Input: input}
+	return DescribeJobsRequest{Request: req, Input: input, Copy: c.DescribeJobsRequest}
 }
 
 const opListJobs = "ListJobs"
@@ -553,6 +563,7 @@ const opListJobs = "ListJobs"
 type ListJobsRequest struct {
 	*aws.Request
 	Input *ListJobsInput
+	Copy  func(*ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -595,7 +606,7 @@ func (c *Batch) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobsRequest{Request: req, Input: input}
+	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
 const opRegisterJobDefinition = "RegisterJobDefinition"
@@ -604,6 +615,7 @@ const opRegisterJobDefinition = "RegisterJobDefinition"
 type RegisterJobDefinitionRequest struct {
 	*aws.Request
 	Input *RegisterJobDefinitionInput
+	Copy  func(*RegisterJobDefinitionInput) RegisterJobDefinitionRequest
 }
 
 // Send marshals and sends the RegisterJobDefinition API request.
@@ -644,7 +656,7 @@ func (c *Batch) RegisterJobDefinitionRequest(input *RegisterJobDefinitionInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterJobDefinitionRequest{Request: req, Input: input}
+	return RegisterJobDefinitionRequest{Request: req, Input: input, Copy: c.RegisterJobDefinitionRequest}
 }
 
 const opSubmitJob = "SubmitJob"
@@ -653,6 +665,7 @@ const opSubmitJob = "SubmitJob"
 type SubmitJobRequest struct {
 	*aws.Request
 	Input *SubmitJobInput
+	Copy  func(*SubmitJobInput) SubmitJobRequest
 }
 
 // Send marshals and sends the SubmitJob API request.
@@ -694,7 +707,7 @@ func (c *Batch) SubmitJobRequest(input *SubmitJobInput) SubmitJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SubmitJobRequest{Request: req, Input: input}
+	return SubmitJobRequest{Request: req, Input: input, Copy: c.SubmitJobRequest}
 }
 
 const opTerminateJob = "TerminateJob"
@@ -703,6 +716,7 @@ const opTerminateJob = "TerminateJob"
 type TerminateJobRequest struct {
 	*aws.Request
 	Input *TerminateJobInput
+	Copy  func(*TerminateJobInput) TerminateJobRequest
 }
 
 // Send marshals and sends the TerminateJob API request.
@@ -745,7 +759,7 @@ func (c *Batch) TerminateJobRequest(input *TerminateJobInput) TerminateJobReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TerminateJobRequest{Request: req, Input: input}
+	return TerminateJobRequest{Request: req, Input: input, Copy: c.TerminateJobRequest}
 }
 
 const opUpdateComputeEnvironment = "UpdateComputeEnvironment"
@@ -754,6 +768,7 @@ const opUpdateComputeEnvironment = "UpdateComputeEnvironment"
 type UpdateComputeEnvironmentRequest struct {
 	*aws.Request
 	Input *UpdateComputeEnvironmentInput
+	Copy  func(*UpdateComputeEnvironmentInput) UpdateComputeEnvironmentRequest
 }
 
 // Send marshals and sends the UpdateComputeEnvironment API request.
@@ -794,7 +809,7 @@ func (c *Batch) UpdateComputeEnvironmentRequest(input *UpdateComputeEnvironmentI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateComputeEnvironmentRequest{Request: req, Input: input}
+	return UpdateComputeEnvironmentRequest{Request: req, Input: input, Copy: c.UpdateComputeEnvironmentRequest}
 }
 
 const opUpdateJobQueue = "UpdateJobQueue"
@@ -803,6 +818,7 @@ const opUpdateJobQueue = "UpdateJobQueue"
 type UpdateJobQueueRequest struct {
 	*aws.Request
 	Input *UpdateJobQueueInput
+	Copy  func(*UpdateJobQueueInput) UpdateJobQueueRequest
 }
 
 // Send marshals and sends the UpdateJobQueue API request.
@@ -843,7 +859,7 @@ func (c *Batch) UpdateJobQueueRequest(input *UpdateJobQueueInput) UpdateJobQueue
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateJobQueueRequest{Request: req, Input: input}
+	return UpdateJobQueueRequest{Request: req, Input: input, Copy: c.UpdateJobQueueRequest}
 }
 
 // An object representing an AWS Batch array job.

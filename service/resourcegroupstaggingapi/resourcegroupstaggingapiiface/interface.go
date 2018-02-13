@@ -9,7 +9,6 @@
 package resourcegroupstaggingapiiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi"
 )
 
@@ -65,18 +64,9 @@ import (
 type ResourceGroupsTaggingAPIAPI interface {
 	GetResourcesRequest(*resourcegroupstaggingapi.GetResourcesInput) resourcegroupstaggingapi.GetResourcesRequest
 
-	GetResourcesPages(*resourcegroupstaggingapi.GetResourcesInput, func(*resourcegroupstaggingapi.GetResourcesOutput, bool) bool) error
-	GetResourcesPagesWithContext(aws.Context, *resourcegroupstaggingapi.GetResourcesInput, func(*resourcegroupstaggingapi.GetResourcesOutput, bool) bool, ...aws.Option) error
-
 	GetTagKeysRequest(*resourcegroupstaggingapi.GetTagKeysInput) resourcegroupstaggingapi.GetTagKeysRequest
 
-	GetTagKeysPages(*resourcegroupstaggingapi.GetTagKeysInput, func(*resourcegroupstaggingapi.GetTagKeysOutput, bool) bool) error
-	GetTagKeysPagesWithContext(aws.Context, *resourcegroupstaggingapi.GetTagKeysInput, func(*resourcegroupstaggingapi.GetTagKeysOutput, bool) bool, ...aws.Option) error
-
 	GetTagValuesRequest(*resourcegroupstaggingapi.GetTagValuesInput) resourcegroupstaggingapi.GetTagValuesRequest
-
-	GetTagValuesPages(*resourcegroupstaggingapi.GetTagValuesInput, func(*resourcegroupstaggingapi.GetTagValuesOutput, bool) bool) error
-	GetTagValuesPagesWithContext(aws.Context, *resourcegroupstaggingapi.GetTagValuesInput, func(*resourcegroupstaggingapi.GetTagValuesOutput, bool) bool, ...aws.Option) error
 
 	TagResourcesRequest(*resourcegroupstaggingapi.TagResourcesInput) resourcegroupstaggingapi.TagResourcesRequest
 

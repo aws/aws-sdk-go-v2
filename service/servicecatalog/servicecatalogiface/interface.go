@@ -9,7 +9,6 @@
 package servicecatalogiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
 )
 
@@ -125,35 +124,17 @@ type ServiceCatalogAPI interface {
 
 	ListAcceptedPortfolioSharesRequest(*servicecatalog.ListAcceptedPortfolioSharesInput) servicecatalog.ListAcceptedPortfolioSharesRequest
 
-	ListAcceptedPortfolioSharesPages(*servicecatalog.ListAcceptedPortfolioSharesInput, func(*servicecatalog.ListAcceptedPortfolioSharesOutput, bool) bool) error
-	ListAcceptedPortfolioSharesPagesWithContext(aws.Context, *servicecatalog.ListAcceptedPortfolioSharesInput, func(*servicecatalog.ListAcceptedPortfolioSharesOutput, bool) bool, ...aws.Option) error
-
 	ListConstraintsForPortfolioRequest(*servicecatalog.ListConstraintsForPortfolioInput) servicecatalog.ListConstraintsForPortfolioRequest
 
-	ListConstraintsForPortfolioPages(*servicecatalog.ListConstraintsForPortfolioInput, func(*servicecatalog.ListConstraintsForPortfolioOutput, bool) bool) error
-	ListConstraintsForPortfolioPagesWithContext(aws.Context, *servicecatalog.ListConstraintsForPortfolioInput, func(*servicecatalog.ListConstraintsForPortfolioOutput, bool) bool, ...aws.Option) error
-
 	ListLaunchPathsRequest(*servicecatalog.ListLaunchPathsInput) servicecatalog.ListLaunchPathsRequest
-
-	ListLaunchPathsPages(*servicecatalog.ListLaunchPathsInput, func(*servicecatalog.ListLaunchPathsOutput, bool) bool) error
-	ListLaunchPathsPagesWithContext(aws.Context, *servicecatalog.ListLaunchPathsInput, func(*servicecatalog.ListLaunchPathsOutput, bool) bool, ...aws.Option) error
 
 	ListPortfolioAccessRequest(*servicecatalog.ListPortfolioAccessInput) servicecatalog.ListPortfolioAccessRequest
 
 	ListPortfoliosRequest(*servicecatalog.ListPortfoliosInput) servicecatalog.ListPortfoliosRequest
 
-	ListPortfoliosPages(*servicecatalog.ListPortfoliosInput, func(*servicecatalog.ListPortfoliosOutput, bool) bool) error
-	ListPortfoliosPagesWithContext(aws.Context, *servicecatalog.ListPortfoliosInput, func(*servicecatalog.ListPortfoliosOutput, bool) bool, ...aws.Option) error
-
 	ListPortfoliosForProductRequest(*servicecatalog.ListPortfoliosForProductInput) servicecatalog.ListPortfoliosForProductRequest
 
-	ListPortfoliosForProductPages(*servicecatalog.ListPortfoliosForProductInput, func(*servicecatalog.ListPortfoliosForProductOutput, bool) bool) error
-	ListPortfoliosForProductPagesWithContext(aws.Context, *servicecatalog.ListPortfoliosForProductInput, func(*servicecatalog.ListPortfoliosForProductOutput, bool) bool, ...aws.Option) error
-
 	ListPrincipalsForPortfolioRequest(*servicecatalog.ListPrincipalsForPortfolioInput) servicecatalog.ListPrincipalsForPortfolioRequest
-
-	ListPrincipalsForPortfolioPages(*servicecatalog.ListPrincipalsForPortfolioInput, func(*servicecatalog.ListPrincipalsForPortfolioOutput, bool) bool) error
-	ListPrincipalsForPortfolioPagesWithContext(aws.Context, *servicecatalog.ListPrincipalsForPortfolioInput, func(*servicecatalog.ListPrincipalsForPortfolioOutput, bool) bool, ...aws.Option) error
 
 	ListProvisioningArtifactsRequest(*servicecatalog.ListProvisioningArtifactsInput) servicecatalog.ListProvisioningArtifactsRequest
 
@@ -161,13 +142,7 @@ type ServiceCatalogAPI interface {
 
 	ListResourcesForTagOptionRequest(*servicecatalog.ListResourcesForTagOptionInput) servicecatalog.ListResourcesForTagOptionRequest
 
-	ListResourcesForTagOptionPages(*servicecatalog.ListResourcesForTagOptionInput, func(*servicecatalog.ListResourcesForTagOptionOutput, bool) bool) error
-	ListResourcesForTagOptionPagesWithContext(aws.Context, *servicecatalog.ListResourcesForTagOptionInput, func(*servicecatalog.ListResourcesForTagOptionOutput, bool) bool, ...aws.Option) error
-
 	ListTagOptionsRequest(*servicecatalog.ListTagOptionsInput) servicecatalog.ListTagOptionsRequest
-
-	ListTagOptionsPages(*servicecatalog.ListTagOptionsInput, func(*servicecatalog.ListTagOptionsOutput, bool) bool) error
-	ListTagOptionsPagesWithContext(aws.Context, *servicecatalog.ListTagOptionsInput, func(*servicecatalog.ListTagOptionsOutput, bool) bool, ...aws.Option) error
 
 	ProvisionProductRequest(*servicecatalog.ProvisionProductInput) servicecatalog.ProvisionProductRequest
 
@@ -177,13 +152,7 @@ type ServiceCatalogAPI interface {
 
 	SearchProductsRequest(*servicecatalog.SearchProductsInput) servicecatalog.SearchProductsRequest
 
-	SearchProductsPages(*servicecatalog.SearchProductsInput, func(*servicecatalog.SearchProductsOutput, bool) bool) error
-	SearchProductsPagesWithContext(aws.Context, *servicecatalog.SearchProductsInput, func(*servicecatalog.SearchProductsOutput, bool) bool, ...aws.Option) error
-
 	SearchProductsAsAdminRequest(*servicecatalog.SearchProductsAsAdminInput) servicecatalog.SearchProductsAsAdminRequest
-
-	SearchProductsAsAdminPages(*servicecatalog.SearchProductsAsAdminInput, func(*servicecatalog.SearchProductsAsAdminOutput, bool) bool) error
-	SearchProductsAsAdminPagesWithContext(aws.Context, *servicecatalog.SearchProductsAsAdminInput, func(*servicecatalog.SearchProductsAsAdminOutput, bool) bool, ...aws.Option) error
 
 	TerminateProvisionedProductRequest(*servicecatalog.TerminateProvisionedProductInput) servicecatalog.TerminateProvisionedProductRequest
 

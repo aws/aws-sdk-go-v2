@@ -16,6 +16,7 @@ const opAddApplicationCloudWatchLoggingOption = "AddApplicationCloudWatchLogging
 type AddApplicationCloudWatchLoggingOptionRequest struct {
 	*aws.Request
 	Input *AddApplicationCloudWatchLoggingOptionInput
+	Copy  func(*AddApplicationCloudWatchLoggingOptionInput) AddApplicationCloudWatchLoggingOptionRequest
 }
 
 // Send marshals and sends the AddApplicationCloudWatchLoggingOption API request.
@@ -58,7 +59,7 @@ func (c *KinesisAnalytics) AddApplicationCloudWatchLoggingOptionRequest(input *A
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input}
+	return AddApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input, Copy: c.AddApplicationCloudWatchLoggingOptionRequest}
 }
 
 const opAddApplicationInput = "AddApplicationInput"
@@ -67,6 +68,7 @@ const opAddApplicationInput = "AddApplicationInput"
 type AddApplicationInputRequest struct {
 	*aws.Request
 	Input *AddApplicationInputInput
+	Copy  func(*AddApplicationInputInput) AddApplicationInputRequest
 }
 
 // Send marshals and sends the AddApplicationInput API request.
@@ -119,7 +121,7 @@ func (c *KinesisAnalytics) AddApplicationInputRequest(input *AddApplicationInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddApplicationInputRequest{Request: req, Input: input}
+	return AddApplicationInputRequest{Request: req, Input: input, Copy: c.AddApplicationInputRequest}
 }
 
 const opAddApplicationInputProcessingConfiguration = "AddApplicationInputProcessingConfiguration"
@@ -128,6 +130,7 @@ const opAddApplicationInputProcessingConfiguration = "AddApplicationInputProcess
 type AddApplicationInputProcessingConfigurationRequest struct {
 	*aws.Request
 	Input *AddApplicationInputProcessingConfigurationInput
+	Copy  func(*AddApplicationInputProcessingConfigurationInput) AddApplicationInputProcessingConfigurationRequest
 }
 
 // Send marshals and sends the AddApplicationInputProcessingConfiguration API request.
@@ -170,7 +173,7 @@ func (c *KinesisAnalytics) AddApplicationInputProcessingConfigurationRequest(inp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddApplicationInputProcessingConfigurationRequest{Request: req, Input: input}
+	return AddApplicationInputProcessingConfigurationRequest{Request: req, Input: input, Copy: c.AddApplicationInputProcessingConfigurationRequest}
 }
 
 const opAddApplicationOutput = "AddApplicationOutput"
@@ -179,6 +182,7 @@ const opAddApplicationOutput = "AddApplicationOutput"
 type AddApplicationOutputRequest struct {
 	*aws.Request
 	Input *AddApplicationOutputInput
+	Copy  func(*AddApplicationOutputInput) AddApplicationOutputRequest
 }
 
 // Send marshals and sends the AddApplicationOutput API request.
@@ -241,7 +245,7 @@ func (c *KinesisAnalytics) AddApplicationOutputRequest(input *AddApplicationOutp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddApplicationOutputRequest{Request: req, Input: input}
+	return AddApplicationOutputRequest{Request: req, Input: input, Copy: c.AddApplicationOutputRequest}
 }
 
 const opAddApplicationReferenceDataSource = "AddApplicationReferenceDataSource"
@@ -250,6 +254,7 @@ const opAddApplicationReferenceDataSource = "AddApplicationReferenceDataSource"
 type AddApplicationReferenceDataSourceRequest struct {
 	*aws.Request
 	Input *AddApplicationReferenceDataSourceInput
+	Copy  func(*AddApplicationReferenceDataSourceInput) AddApplicationReferenceDataSourceRequest
 }
 
 // Send marshals and sends the AddApplicationReferenceDataSource API request.
@@ -304,7 +309,7 @@ func (c *KinesisAnalytics) AddApplicationReferenceDataSourceRequest(input *AddAp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddApplicationReferenceDataSourceRequest{Request: req, Input: input}
+	return AddApplicationReferenceDataSourceRequest{Request: req, Input: input, Copy: c.AddApplicationReferenceDataSourceRequest}
 }
 
 const opCreateApplication = "CreateApplication"
@@ -313,6 +318,7 @@ const opCreateApplication = "CreateApplication"
 type CreateApplicationRequest struct {
 	*aws.Request
 	Input *CreateApplicationInput
+	Copy  func(*CreateApplicationInput) CreateApplicationRequest
 }
 
 // Send marshals and sends the CreateApplication API request.
@@ -377,7 +383,7 @@ func (c *KinesisAnalytics) CreateApplicationRequest(input *CreateApplicationInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateApplicationRequest{Request: req, Input: input}
+	return CreateApplicationRequest{Request: req, Input: input, Copy: c.CreateApplicationRequest}
 }
 
 const opDeleteApplication = "DeleteApplication"
@@ -386,6 +392,7 @@ const opDeleteApplication = "DeleteApplication"
 type DeleteApplicationRequest struct {
 	*aws.Request
 	Input *DeleteApplicationInput
+	Copy  func(*DeleteApplicationInput) DeleteApplicationRequest
 }
 
 // Send marshals and sends the DeleteApplication API request.
@@ -431,7 +438,7 @@ func (c *KinesisAnalytics) DeleteApplicationRequest(input *DeleteApplicationInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApplicationRequest{Request: req, Input: input}
+	return DeleteApplicationRequest{Request: req, Input: input, Copy: c.DeleteApplicationRequest}
 }
 
 const opDeleteApplicationCloudWatchLoggingOption = "DeleteApplicationCloudWatchLoggingOption"
@@ -440,6 +447,7 @@ const opDeleteApplicationCloudWatchLoggingOption = "DeleteApplicationCloudWatchL
 type DeleteApplicationCloudWatchLoggingOptionRequest struct {
 	*aws.Request
 	Input *DeleteApplicationCloudWatchLoggingOptionInput
+	Copy  func(*DeleteApplicationCloudWatchLoggingOptionInput) DeleteApplicationCloudWatchLoggingOptionRequest
 }
 
 // Send marshals and sends the DeleteApplicationCloudWatchLoggingOption API request.
@@ -482,7 +490,7 @@ func (c *KinesisAnalytics) DeleteApplicationCloudWatchLoggingOptionRequest(input
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input}
+	return DeleteApplicationCloudWatchLoggingOptionRequest{Request: req, Input: input, Copy: c.DeleteApplicationCloudWatchLoggingOptionRequest}
 }
 
 const opDeleteApplicationInputProcessingConfiguration = "DeleteApplicationInputProcessingConfiguration"
@@ -491,6 +499,7 @@ const opDeleteApplicationInputProcessingConfiguration = "DeleteApplicationInputP
 type DeleteApplicationInputProcessingConfigurationRequest struct {
 	*aws.Request
 	Input *DeleteApplicationInputProcessingConfigurationInput
+	Copy  func(*DeleteApplicationInputProcessingConfigurationInput) DeleteApplicationInputProcessingConfigurationRequest
 }
 
 // Send marshals and sends the DeleteApplicationInputProcessingConfiguration API request.
@@ -531,7 +540,7 @@ func (c *KinesisAnalytics) DeleteApplicationInputProcessingConfigurationRequest(
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApplicationInputProcessingConfigurationRequest{Request: req, Input: input}
+	return DeleteApplicationInputProcessingConfigurationRequest{Request: req, Input: input, Copy: c.DeleteApplicationInputProcessingConfigurationRequest}
 }
 
 const opDeleteApplicationOutput = "DeleteApplicationOutput"
@@ -540,6 +549,7 @@ const opDeleteApplicationOutput = "DeleteApplicationOutput"
 type DeleteApplicationOutputRequest struct {
 	*aws.Request
 	Input *DeleteApplicationOutputInput
+	Copy  func(*DeleteApplicationOutputInput) DeleteApplicationOutputRequest
 }
 
 // Send marshals and sends the DeleteApplicationOutput API request.
@@ -585,7 +595,7 @@ func (c *KinesisAnalytics) DeleteApplicationOutputRequest(input *DeleteApplicati
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApplicationOutputRequest{Request: req, Input: input}
+	return DeleteApplicationOutputRequest{Request: req, Input: input, Copy: c.DeleteApplicationOutputRequest}
 }
 
 const opDeleteApplicationReferenceDataSource = "DeleteApplicationReferenceDataSource"
@@ -594,6 +604,7 @@ const opDeleteApplicationReferenceDataSource = "DeleteApplicationReferenceDataSo
 type DeleteApplicationReferenceDataSourceRequest struct {
 	*aws.Request
 	Input *DeleteApplicationReferenceDataSourceInput
+	Copy  func(*DeleteApplicationReferenceDataSourceInput) DeleteApplicationReferenceDataSourceRequest
 }
 
 // Send marshals and sends the DeleteApplicationReferenceDataSource API request.
@@ -642,7 +653,7 @@ func (c *KinesisAnalytics) DeleteApplicationReferenceDataSourceRequest(input *De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApplicationReferenceDataSourceRequest{Request: req, Input: input}
+	return DeleteApplicationReferenceDataSourceRequest{Request: req, Input: input, Copy: c.DeleteApplicationReferenceDataSourceRequest}
 }
 
 const opDescribeApplication = "DescribeApplication"
@@ -651,6 +662,7 @@ const opDescribeApplication = "DescribeApplication"
 type DescribeApplicationRequest struct {
 	*aws.Request
 	Input *DescribeApplicationInput
+	Copy  func(*DescribeApplicationInput) DescribeApplicationRequest
 }
 
 // Send marshals and sends the DescribeApplication API request.
@@ -698,7 +710,7 @@ func (c *KinesisAnalytics) DescribeApplicationRequest(input *DescribeApplication
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeApplicationRequest{Request: req, Input: input}
+	return DescribeApplicationRequest{Request: req, Input: input, Copy: c.DescribeApplicationRequest}
 }
 
 const opDiscoverInputSchema = "DiscoverInputSchema"
@@ -707,6 +719,7 @@ const opDiscoverInputSchema = "DiscoverInputSchema"
 type DiscoverInputSchemaRequest struct {
 	*aws.Request
 	Input *DiscoverInputSchemaInput
+	Copy  func(*DiscoverInputSchemaInput) DiscoverInputSchemaRequest
 }
 
 // Send marshals and sends the DiscoverInputSchema API request.
@@ -760,7 +773,7 @@ func (c *KinesisAnalytics) DiscoverInputSchemaRequest(input *DiscoverInputSchema
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DiscoverInputSchemaRequest{Request: req, Input: input}
+	return DiscoverInputSchemaRequest{Request: req, Input: input, Copy: c.DiscoverInputSchemaRequest}
 }
 
 const opListApplications = "ListApplications"
@@ -769,6 +782,7 @@ const opListApplications = "ListApplications"
 type ListApplicationsRequest struct {
 	*aws.Request
 	Input *ListApplicationsInput
+	Copy  func(*ListApplicationsInput) ListApplicationsRequest
 }
 
 // Send marshals and sends the ListApplications API request.
@@ -819,7 +833,7 @@ func (c *KinesisAnalytics) ListApplicationsRequest(input *ListApplicationsInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListApplicationsRequest{Request: req, Input: input}
+	return ListApplicationsRequest{Request: req, Input: input, Copy: c.ListApplicationsRequest}
 }
 
 const opStartApplication = "StartApplication"
@@ -828,6 +842,7 @@ const opStartApplication = "StartApplication"
 type StartApplicationRequest struct {
 	*aws.Request
 	Input *StartApplicationInput
+	Copy  func(*StartApplicationInput) StartApplicationRequest
 }
 
 // Send marshals and sends the StartApplication API request.
@@ -882,7 +897,7 @@ func (c *KinesisAnalytics) StartApplicationRequest(input *StartApplicationInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartApplicationRequest{Request: req, Input: input}
+	return StartApplicationRequest{Request: req, Input: input, Copy: c.StartApplicationRequest}
 }
 
 const opStopApplication = "StopApplication"
@@ -891,6 +906,7 @@ const opStopApplication = "StopApplication"
 type StopApplicationRequest struct {
 	*aws.Request
 	Input *StopApplicationInput
+	Copy  func(*StopApplicationInput) StopApplicationRequest
 }
 
 // Send marshals and sends the StopApplication API request.
@@ -938,7 +954,7 @@ func (c *KinesisAnalytics) StopApplicationRequest(input *StopApplicationInput) S
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopApplicationRequest{Request: req, Input: input}
+	return StopApplicationRequest{Request: req, Input: input, Copy: c.StopApplicationRequest}
 }
 
 const opUpdateApplication = "UpdateApplication"
@@ -947,6 +963,7 @@ const opUpdateApplication = "UpdateApplication"
 type UpdateApplicationRequest struct {
 	*aws.Request
 	Input *UpdateApplicationInput
+	Copy  func(*UpdateApplicationInput) UpdateApplicationRequest
 }
 
 // Send marshals and sends the UpdateApplication API request.
@@ -994,7 +1011,7 @@ func (c *KinesisAnalytics) UpdateApplicationRequest(input *UpdateApplicationInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApplicationRequest{Request: req, Input: input}
+	return UpdateApplicationRequest{Request: req, Input: input, Copy: c.UpdateApplicationRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/kinesisanalytics-2015-08-14/AddApplicationCloudWatchLoggingOptionRequest

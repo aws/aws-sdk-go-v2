@@ -16,6 +16,7 @@ const opAddTags = "AddTags"
 type AddTagsRequest struct {
 	*aws.Request
 	Input *AddTagsInput
+	Copy  func(*AddTagsInput) AddTagsRequest
 }
 
 // Send marshals and sends the AddTags API request.
@@ -63,7 +64,7 @@ func (c *ELB) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsRequest{Request: req, Input: input}
+	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
 const opApplySecurityGroupsToLoadBalancer = "ApplySecurityGroupsToLoadBalancer"
@@ -72,6 +73,7 @@ const opApplySecurityGroupsToLoadBalancer = "ApplySecurityGroupsToLoadBalancer"
 type ApplySecurityGroupsToLoadBalancerRequest struct {
 	*aws.Request
 	Input *ApplySecurityGroupsToLoadBalancerInput
+	Copy  func(*ApplySecurityGroupsToLoadBalancerInput) ApplySecurityGroupsToLoadBalancerRequest
 }
 
 // Send marshals and sends the ApplySecurityGroupsToLoadBalancer API request.
@@ -117,7 +119,7 @@ func (c *ELB) ApplySecurityGroupsToLoadBalancerRequest(input *ApplySecurityGroup
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ApplySecurityGroupsToLoadBalancerRequest{Request: req, Input: input}
+	return ApplySecurityGroupsToLoadBalancerRequest{Request: req, Input: input, Copy: c.ApplySecurityGroupsToLoadBalancerRequest}
 }
 
 const opAttachLoadBalancerToSubnets = "AttachLoadBalancerToSubnets"
@@ -126,6 +128,7 @@ const opAttachLoadBalancerToSubnets = "AttachLoadBalancerToSubnets"
 type AttachLoadBalancerToSubnetsRequest struct {
 	*aws.Request
 	Input *AttachLoadBalancerToSubnetsInput
+	Copy  func(*AttachLoadBalancerToSubnetsInput) AttachLoadBalancerToSubnetsRequest
 }
 
 // Send marshals and sends the AttachLoadBalancerToSubnets API request.
@@ -172,7 +175,7 @@ func (c *ELB) AttachLoadBalancerToSubnetsRequest(input *AttachLoadBalancerToSubn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachLoadBalancerToSubnetsRequest{Request: req, Input: input}
+	return AttachLoadBalancerToSubnetsRequest{Request: req, Input: input, Copy: c.AttachLoadBalancerToSubnetsRequest}
 }
 
 const opConfigureHealthCheck = "ConfigureHealthCheck"
@@ -181,6 +184,7 @@ const opConfigureHealthCheck = "ConfigureHealthCheck"
 type ConfigureHealthCheckRequest struct {
 	*aws.Request
 	Input *ConfigureHealthCheckInput
+	Copy  func(*ConfigureHealthCheckInput) ConfigureHealthCheckRequest
 }
 
 // Send marshals and sends the ConfigureHealthCheck API request.
@@ -226,7 +230,7 @@ func (c *ELB) ConfigureHealthCheckRequest(input *ConfigureHealthCheckInput) Conf
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ConfigureHealthCheckRequest{Request: req, Input: input}
+	return ConfigureHealthCheckRequest{Request: req, Input: input, Copy: c.ConfigureHealthCheckRequest}
 }
 
 const opCreateAppCookieStickinessPolicy = "CreateAppCookieStickinessPolicy"
@@ -235,6 +239,7 @@ const opCreateAppCookieStickinessPolicy = "CreateAppCookieStickinessPolicy"
 type CreateAppCookieStickinessPolicyRequest struct {
 	*aws.Request
 	Input *CreateAppCookieStickinessPolicyInput
+	Copy  func(*CreateAppCookieStickinessPolicyInput) CreateAppCookieStickinessPolicyRequest
 }
 
 // Send marshals and sends the CreateAppCookieStickinessPolicy API request.
@@ -289,7 +294,7 @@ func (c *ELB) CreateAppCookieStickinessPolicyRequest(input *CreateAppCookieStick
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAppCookieStickinessPolicyRequest{Request: req, Input: input}
+	return CreateAppCookieStickinessPolicyRequest{Request: req, Input: input, Copy: c.CreateAppCookieStickinessPolicyRequest}
 }
 
 const opCreateLBCookieStickinessPolicy = "CreateLBCookieStickinessPolicy"
@@ -298,6 +303,7 @@ const opCreateLBCookieStickinessPolicy = "CreateLBCookieStickinessPolicy"
 type CreateLBCookieStickinessPolicyRequest struct {
 	*aws.Request
 	Input *CreateLBCookieStickinessPolicyInput
+	Copy  func(*CreateLBCookieStickinessPolicyInput) CreateLBCookieStickinessPolicyRequest
 }
 
 // Send marshals and sends the CreateLBCookieStickinessPolicy API request.
@@ -354,7 +360,7 @@ func (c *ELB) CreateLBCookieStickinessPolicyRequest(input *CreateLBCookieStickin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLBCookieStickinessPolicyRequest{Request: req, Input: input}
+	return CreateLBCookieStickinessPolicyRequest{Request: req, Input: input, Copy: c.CreateLBCookieStickinessPolicyRequest}
 }
 
 const opCreateLoadBalancer = "CreateLoadBalancer"
@@ -363,6 +369,7 @@ const opCreateLoadBalancer = "CreateLoadBalancer"
 type CreateLoadBalancerRequest struct {
 	*aws.Request
 	Input *CreateLoadBalancerInput
+	Copy  func(*CreateLoadBalancerInput) CreateLoadBalancerRequest
 }
 
 // Send marshals and sends the CreateLoadBalancer API request.
@@ -415,7 +422,7 @@ func (c *ELB) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) CreateLo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLoadBalancerRequest{Request: req, Input: input}
+	return CreateLoadBalancerRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerRequest}
 }
 
 const opCreateLoadBalancerListeners = "CreateLoadBalancerListeners"
@@ -424,6 +431,7 @@ const opCreateLoadBalancerListeners = "CreateLoadBalancerListeners"
 type CreateLoadBalancerListenersRequest struct {
 	*aws.Request
 	Input *CreateLoadBalancerListenersInput
+	Copy  func(*CreateLoadBalancerListenersInput) CreateLoadBalancerListenersRequest
 }
 
 // Send marshals and sends the CreateLoadBalancerListeners API request.
@@ -470,7 +478,7 @@ func (c *ELB) CreateLoadBalancerListenersRequest(input *CreateLoadBalancerListen
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLoadBalancerListenersRequest{Request: req, Input: input}
+	return CreateLoadBalancerListenersRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerListenersRequest}
 }
 
 const opCreateLoadBalancerPolicy = "CreateLoadBalancerPolicy"
@@ -479,6 +487,7 @@ const opCreateLoadBalancerPolicy = "CreateLoadBalancerPolicy"
 type CreateLoadBalancerPolicyRequest struct {
 	*aws.Request
 	Input *CreateLoadBalancerPolicyInput
+	Copy  func(*CreateLoadBalancerPolicyInput) CreateLoadBalancerPolicyRequest
 }
 
 // Send marshals and sends the CreateLoadBalancerPolicy API request.
@@ -523,7 +532,7 @@ func (c *ELB) CreateLoadBalancerPolicyRequest(input *CreateLoadBalancerPolicyInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLoadBalancerPolicyRequest{Request: req, Input: input}
+	return CreateLoadBalancerPolicyRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerPolicyRequest}
 }
 
 const opDeleteLoadBalancer = "DeleteLoadBalancer"
@@ -532,6 +541,7 @@ const opDeleteLoadBalancer = "DeleteLoadBalancer"
 type DeleteLoadBalancerRequest struct {
 	*aws.Request
 	Input *DeleteLoadBalancerInput
+	Copy  func(*DeleteLoadBalancerInput) DeleteLoadBalancerRequest
 }
 
 // Send marshals and sends the DeleteLoadBalancer API request.
@@ -581,7 +591,7 @@ func (c *ELB) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) DeleteLo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLoadBalancerRequest{Request: req, Input: input}
+	return DeleteLoadBalancerRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerRequest}
 }
 
 const opDeleteLoadBalancerListeners = "DeleteLoadBalancerListeners"
@@ -590,6 +600,7 @@ const opDeleteLoadBalancerListeners = "DeleteLoadBalancerListeners"
 type DeleteLoadBalancerListenersRequest struct {
 	*aws.Request
 	Input *DeleteLoadBalancerListenersInput
+	Copy  func(*DeleteLoadBalancerListenersInput) DeleteLoadBalancerListenersRequest
 }
 
 // Send marshals and sends the DeleteLoadBalancerListeners API request.
@@ -630,7 +641,7 @@ func (c *ELB) DeleteLoadBalancerListenersRequest(input *DeleteLoadBalancerListen
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLoadBalancerListenersRequest{Request: req, Input: input}
+	return DeleteLoadBalancerListenersRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerListenersRequest}
 }
 
 const opDeleteLoadBalancerPolicy = "DeleteLoadBalancerPolicy"
@@ -639,6 +650,7 @@ const opDeleteLoadBalancerPolicy = "DeleteLoadBalancerPolicy"
 type DeleteLoadBalancerPolicyRequest struct {
 	*aws.Request
 	Input *DeleteLoadBalancerPolicyInput
+	Copy  func(*DeleteLoadBalancerPolicyInput) DeleteLoadBalancerPolicyRequest
 }
 
 // Send marshals and sends the DeleteLoadBalancerPolicy API request.
@@ -680,7 +692,7 @@ func (c *ELB) DeleteLoadBalancerPolicyRequest(input *DeleteLoadBalancerPolicyInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLoadBalancerPolicyRequest{Request: req, Input: input}
+	return DeleteLoadBalancerPolicyRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerPolicyRequest}
 }
 
 const opDeregisterInstancesFromLoadBalancer = "DeregisterInstancesFromLoadBalancer"
@@ -689,6 +701,7 @@ const opDeregisterInstancesFromLoadBalancer = "DeregisterInstancesFromLoadBalanc
 type DeregisterInstancesFromLoadBalancerRequest struct {
 	*aws.Request
 	Input *DeregisterInstancesFromLoadBalancerInput
+	Copy  func(*DeregisterInstancesFromLoadBalancerInput) DeregisterInstancesFromLoadBalancerRequest
 }
 
 // Send marshals and sends the DeregisterInstancesFromLoadBalancer API request.
@@ -737,7 +750,7 @@ func (c *ELB) DeregisterInstancesFromLoadBalancerRequest(input *DeregisterInstan
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterInstancesFromLoadBalancerRequest{Request: req, Input: input}
+	return DeregisterInstancesFromLoadBalancerRequest{Request: req, Input: input, Copy: c.DeregisterInstancesFromLoadBalancerRequest}
 }
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
@@ -746,6 +759,7 @@ const opDescribeAccountLimits = "DescribeAccountLimits"
 type DescribeAccountLimitsRequest struct {
 	*aws.Request
 	Input *DescribeAccountLimitsInput
+	Copy  func(*DescribeAccountLimitsInput) DescribeAccountLimitsRequest
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
@@ -790,7 +804,7 @@ func (c *ELB) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAccountLimitsRequest{Request: req, Input: input}
+	return DescribeAccountLimitsRequest{Request: req, Input: input, Copy: c.DescribeAccountLimitsRequest}
 }
 
 const opDescribeInstanceHealth = "DescribeInstanceHealth"
@@ -799,6 +813,7 @@ const opDescribeInstanceHealth = "DescribeInstanceHealth"
 type DescribeInstanceHealthRequest struct {
 	*aws.Request
 	Input *DescribeInstanceHealthInput
+	Copy  func(*DescribeInstanceHealthInput) DescribeInstanceHealthRequest
 }
 
 // Send marshals and sends the DescribeInstanceHealth API request.
@@ -844,7 +859,7 @@ func (c *ELB) DescribeInstanceHealthRequest(input *DescribeInstanceHealthInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstanceHealthRequest{Request: req, Input: input}
+	return DescribeInstanceHealthRequest{Request: req, Input: input, Copy: c.DescribeInstanceHealthRequest}
 }
 
 const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
@@ -853,6 +868,7 @@ const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
 type DescribeLoadBalancerAttributesRequest struct {
 	*aws.Request
 	Input *DescribeLoadBalancerAttributesInput
+	Copy  func(*DescribeLoadBalancerAttributesInput) DescribeLoadBalancerAttributesRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancerAttributes API request.
@@ -893,7 +909,7 @@ func (c *ELB) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalancerA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLoadBalancerAttributesRequest{Request: req, Input: input}
+	return DescribeLoadBalancerAttributesRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerAttributesRequest}
 }
 
 const opDescribeLoadBalancerPolicies = "DescribeLoadBalancerPolicies"
@@ -902,6 +918,7 @@ const opDescribeLoadBalancerPolicies = "DescribeLoadBalancerPolicies"
 type DescribeLoadBalancerPoliciesRequest struct {
 	*aws.Request
 	Input *DescribeLoadBalancerPoliciesInput
+	Copy  func(*DescribeLoadBalancerPoliciesInput) DescribeLoadBalancerPoliciesRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancerPolicies API request.
@@ -949,7 +966,7 @@ func (c *ELB) DescribeLoadBalancerPoliciesRequest(input *DescribeLoadBalancerPol
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLoadBalancerPoliciesRequest{Request: req, Input: input}
+	return DescribeLoadBalancerPoliciesRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerPoliciesRequest}
 }
 
 const opDescribeLoadBalancerPolicyTypes = "DescribeLoadBalancerPolicyTypes"
@@ -958,6 +975,7 @@ const opDescribeLoadBalancerPolicyTypes = "DescribeLoadBalancerPolicyTypes"
 type DescribeLoadBalancerPolicyTypesRequest struct {
 	*aws.Request
 	Input *DescribeLoadBalancerPolicyTypesInput
+	Copy  func(*DescribeLoadBalancerPolicyTypesInput) DescribeLoadBalancerPolicyTypesRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancerPolicyTypes API request.
@@ -1009,7 +1027,7 @@ func (c *ELB) DescribeLoadBalancerPolicyTypesRequest(input *DescribeLoadBalancer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLoadBalancerPolicyTypesRequest{Request: req, Input: input}
+	return DescribeLoadBalancerPolicyTypesRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerPolicyTypesRequest}
 }
 
 const opDescribeLoadBalancers = "DescribeLoadBalancers"
@@ -1018,6 +1036,7 @@ const opDescribeLoadBalancers = "DescribeLoadBalancers"
 type DescribeLoadBalancersRequest struct {
 	*aws.Request
 	Input *DescribeLoadBalancersInput
+	Copy  func(*DescribeLoadBalancersInput) DescribeLoadBalancersRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancers API request.
@@ -1065,57 +1084,53 @@ func (c *ELB) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLoadBalancersRequest{Request: req, Input: input}
+	return DescribeLoadBalancersRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancersRequest}
 }
 
-// DescribeLoadBalancersPages iterates over the pages of a DescribeLoadBalancers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeLoadBalancers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeLoadBalancersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeLoadBalancers operation.
-//    pageNum := 0
-//    err := client.DescribeLoadBalancersPages(params,
-//        func(page *DescribeLoadBalancersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeLoadBalancersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ELB) DescribeLoadBalancersPages(input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool) error {
-	return c.DescribeLoadBalancersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeLoadBalancersRequest) Paginate(opts ...aws.Option) DescribeLoadBalancersPager {
+	return DescribeLoadBalancersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeLoadBalancersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeLoadBalancersPagesWithContext same as DescribeLoadBalancersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELB) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeLoadBalancersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeLoadBalancersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeLoadBalancersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeLoadBalancersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeLoadBalancersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeLoadBalancersPager) CurrentPage() *DescribeLoadBalancersOutput {
+	return p.Pager.CurrentPage().(*DescribeLoadBalancersOutput)
 }
 
 const opDescribeTags = "DescribeTags"
@@ -1124,6 +1139,7 @@ const opDescribeTags = "DescribeTags"
 type DescribeTagsRequest struct {
 	*aws.Request
 	Input *DescribeTagsInput
+	Copy  func(*DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -1164,7 +1180,7 @@ func (c *ELB) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagsRequest{Request: req, Input: input}
+	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
 const opDetachLoadBalancerFromSubnets = "DetachLoadBalancerFromSubnets"
@@ -1173,6 +1189,7 @@ const opDetachLoadBalancerFromSubnets = "DetachLoadBalancerFromSubnets"
 type DetachLoadBalancerFromSubnetsRequest struct {
 	*aws.Request
 	Input *DetachLoadBalancerFromSubnetsInput
+	Copy  func(*DetachLoadBalancerFromSubnetsInput) DetachLoadBalancerFromSubnetsRequest
 }
 
 // Send marshals and sends the DetachLoadBalancerFromSubnets API request.
@@ -1218,7 +1235,7 @@ func (c *ELB) DetachLoadBalancerFromSubnetsRequest(input *DetachLoadBalancerFrom
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachLoadBalancerFromSubnetsRequest{Request: req, Input: input}
+	return DetachLoadBalancerFromSubnetsRequest{Request: req, Input: input, Copy: c.DetachLoadBalancerFromSubnetsRequest}
 }
 
 const opDisableAvailabilityZonesForLoadBalancer = "DisableAvailabilityZonesForLoadBalancer"
@@ -1227,6 +1244,7 @@ const opDisableAvailabilityZonesForLoadBalancer = "DisableAvailabilityZonesForLo
 type DisableAvailabilityZonesForLoadBalancerRequest struct {
 	*aws.Request
 	Input *DisableAvailabilityZonesForLoadBalancerInput
+	Copy  func(*DisableAvailabilityZonesForLoadBalancerInput) DisableAvailabilityZonesForLoadBalancerRequest
 }
 
 // Send marshals and sends the DisableAvailabilityZonesForLoadBalancer API request.
@@ -1277,7 +1295,7 @@ func (c *ELB) DisableAvailabilityZonesForLoadBalancerRequest(input *DisableAvail
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input}
+	return DisableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input, Copy: c.DisableAvailabilityZonesForLoadBalancerRequest}
 }
 
 const opEnableAvailabilityZonesForLoadBalancer = "EnableAvailabilityZonesForLoadBalancer"
@@ -1286,6 +1304,7 @@ const opEnableAvailabilityZonesForLoadBalancer = "EnableAvailabilityZonesForLoad
 type EnableAvailabilityZonesForLoadBalancerRequest struct {
 	*aws.Request
 	Input *EnableAvailabilityZonesForLoadBalancerInput
+	Copy  func(*EnableAvailabilityZonesForLoadBalancerInput) EnableAvailabilityZonesForLoadBalancerRequest
 }
 
 // Send marshals and sends the EnableAvailabilityZonesForLoadBalancer API request.
@@ -1333,7 +1352,7 @@ func (c *ELB) EnableAvailabilityZonesForLoadBalancerRequest(input *EnableAvailab
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input}
+	return EnableAvailabilityZonesForLoadBalancerRequest{Request: req, Input: input, Copy: c.EnableAvailabilityZonesForLoadBalancerRequest}
 }
 
 const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
@@ -1342,6 +1361,7 @@ const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
 type ModifyLoadBalancerAttributesRequest struct {
 	*aws.Request
 	Input *ModifyLoadBalancerAttributesInput
+	Copy  func(*ModifyLoadBalancerAttributesInput) ModifyLoadBalancerAttributesRequest
 }
 
 // Send marshals and sends the ModifyLoadBalancerAttributes API request.
@@ -1397,7 +1417,7 @@ func (c *ELB) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAttri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyLoadBalancerAttributesRequest{Request: req, Input: input}
+	return ModifyLoadBalancerAttributesRequest{Request: req, Input: input, Copy: c.ModifyLoadBalancerAttributesRequest}
 }
 
 const opRegisterInstancesWithLoadBalancer = "RegisterInstancesWithLoadBalancer"
@@ -1406,6 +1426,7 @@ const opRegisterInstancesWithLoadBalancer = "RegisterInstancesWithLoadBalancer"
 type RegisterInstancesWithLoadBalancerRequest struct {
 	*aws.Request
 	Input *RegisterInstancesWithLoadBalancerInput
+	Copy  func(*RegisterInstancesWithLoadBalancerInput) RegisterInstancesWithLoadBalancerRequest
 }
 
 // Send marshals and sends the RegisterInstancesWithLoadBalancer API request.
@@ -1468,7 +1489,7 @@ func (c *ELB) RegisterInstancesWithLoadBalancerRequest(input *RegisterInstancesW
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterInstancesWithLoadBalancerRequest{Request: req, Input: input}
+	return RegisterInstancesWithLoadBalancerRequest{Request: req, Input: input, Copy: c.RegisterInstancesWithLoadBalancerRequest}
 }
 
 const opRemoveTags = "RemoveTags"
@@ -1477,6 +1498,7 @@ const opRemoveTags = "RemoveTags"
 type RemoveTagsRequest struct {
 	*aws.Request
 	Input *RemoveTagsInput
+	Copy  func(*RemoveTagsInput) RemoveTagsRequest
 }
 
 // Send marshals and sends the RemoveTags API request.
@@ -1517,7 +1539,7 @@ func (c *ELB) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsRequest{Request: req, Input: input}
+	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 
 const opSetLoadBalancerListenerSSLCertificate = "SetLoadBalancerListenerSSLCertificate"
@@ -1526,6 +1548,7 @@ const opSetLoadBalancerListenerSSLCertificate = "SetLoadBalancerListenerSSLCerti
 type SetLoadBalancerListenerSSLCertificateRequest struct {
 	*aws.Request
 	Input *SetLoadBalancerListenerSSLCertificateInput
+	Copy  func(*SetLoadBalancerListenerSSLCertificateInput) SetLoadBalancerListenerSSLCertificateRequest
 }
 
 // Send marshals and sends the SetLoadBalancerListenerSSLCertificate API request.
@@ -1572,7 +1595,7 @@ func (c *ELB) SetLoadBalancerListenerSSLCertificateRequest(input *SetLoadBalance
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetLoadBalancerListenerSSLCertificateRequest{Request: req, Input: input}
+	return SetLoadBalancerListenerSSLCertificateRequest{Request: req, Input: input, Copy: c.SetLoadBalancerListenerSSLCertificateRequest}
 }
 
 const opSetLoadBalancerPoliciesForBackendServer = "SetLoadBalancerPoliciesForBackendServer"
@@ -1581,6 +1604,7 @@ const opSetLoadBalancerPoliciesForBackendServer = "SetLoadBalancerPoliciesForBac
 type SetLoadBalancerPoliciesForBackendServerRequest struct {
 	*aws.Request
 	Input *SetLoadBalancerPoliciesForBackendServerInput
+	Copy  func(*SetLoadBalancerPoliciesForBackendServerInput) SetLoadBalancerPoliciesForBackendServerRequest
 }
 
 // Send marshals and sends the SetLoadBalancerPoliciesForBackendServer API request.
@@ -1636,7 +1660,7 @@ func (c *ELB) SetLoadBalancerPoliciesForBackendServerRequest(input *SetLoadBalan
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetLoadBalancerPoliciesForBackendServerRequest{Request: req, Input: input}
+	return SetLoadBalancerPoliciesForBackendServerRequest{Request: req, Input: input, Copy: c.SetLoadBalancerPoliciesForBackendServerRequest}
 }
 
 const opSetLoadBalancerPoliciesOfListener = "SetLoadBalancerPoliciesOfListener"
@@ -1645,6 +1669,7 @@ const opSetLoadBalancerPoliciesOfListener = "SetLoadBalancerPoliciesOfListener"
 type SetLoadBalancerPoliciesOfListenerRequest struct {
 	*aws.Request
 	Input *SetLoadBalancerPoliciesOfListenerInput
+	Copy  func(*SetLoadBalancerPoliciesOfListenerInput) SetLoadBalancerPoliciesOfListenerRequest
 }
 
 // Send marshals and sends the SetLoadBalancerPoliciesOfListener API request.
@@ -1694,7 +1719,7 @@ func (c *ELB) SetLoadBalancerPoliciesOfListenerRequest(input *SetLoadBalancerPol
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetLoadBalancerPoliciesOfListenerRequest{Request: req, Input: input}
+	return SetLoadBalancerPoliciesOfListenerRequest{Request: req, Input: input, Copy: c.SetLoadBalancerPoliciesOfListenerRequest}
 }
 
 // Information about the AccessLog attribute.

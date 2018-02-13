@@ -18,6 +18,7 @@ const opAddTags = "AddTags"
 type AddTagsRequest struct {
 	*aws.Request
 	Input *AddTagsInput
+	Copy  func(*AddTagsInput) AddTagsRequest
 }
 
 // Send marshals and sends the AddTags API request.
@@ -65,7 +66,7 @@ func (c *SageMaker) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsRequest{Request: req, Input: input}
+	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
 const opCreateEndpoint = "CreateEndpoint"
@@ -74,6 +75,7 @@ const opCreateEndpoint = "CreateEndpoint"
 type CreateEndpointRequest struct {
 	*aws.Request
 	Input *CreateEndpointInput
+	Copy  func(*CreateEndpointInput) CreateEndpointRequest
 }
 
 // Send marshals and sends the CreateEndpoint API request.
@@ -133,7 +135,7 @@ func (c *SageMaker) CreateEndpointRequest(input *CreateEndpointInput) CreateEndp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEndpointRequest{Request: req, Input: input}
+	return CreateEndpointRequest{Request: req, Input: input, Copy: c.CreateEndpointRequest}
 }
 
 const opCreateEndpointConfig = "CreateEndpointConfig"
@@ -142,6 +144,7 @@ const opCreateEndpointConfig = "CreateEndpointConfig"
 type CreateEndpointConfigRequest struct {
 	*aws.Request
 	Input *CreateEndpointConfigInput
+	Copy  func(*CreateEndpointConfigInput) CreateEndpointConfigRequest
 }
 
 // Send marshals and sends the CreateEndpointConfig API request.
@@ -200,7 +203,7 @@ func (c *SageMaker) CreateEndpointConfigRequest(input *CreateEndpointConfigInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEndpointConfigRequest{Request: req, Input: input}
+	return CreateEndpointConfigRequest{Request: req, Input: input, Copy: c.CreateEndpointConfigRequest}
 }
 
 const opCreateModel = "CreateModel"
@@ -209,6 +212,7 @@ const opCreateModel = "CreateModel"
 type CreateModelRequest struct {
 	*aws.Request
 	Input *CreateModelInput
+	Copy  func(*CreateModelInput) CreateModelRequest
 }
 
 // Send marshals and sends the CreateModel API request.
@@ -270,7 +274,7 @@ func (c *SageMaker) CreateModelRequest(input *CreateModelInput) CreateModelReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateModelRequest{Request: req, Input: input}
+	return CreateModelRequest{Request: req, Input: input, Copy: c.CreateModelRequest}
 }
 
 const opCreateNotebookInstance = "CreateNotebookInstance"
@@ -279,6 +283,7 @@ const opCreateNotebookInstance = "CreateNotebookInstance"
 type CreateNotebookInstanceRequest struct {
 	*aws.Request
 	Input *CreateNotebookInstanceInput
+	Copy  func(*CreateNotebookInstanceInput) CreateNotebookInstanceRequest
 }
 
 // Send marshals and sends the CreateNotebookInstance API request.
@@ -355,7 +360,7 @@ func (c *SageMaker) CreateNotebookInstanceRequest(input *CreateNotebookInstanceI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNotebookInstanceRequest{Request: req, Input: input}
+	return CreateNotebookInstanceRequest{Request: req, Input: input, Copy: c.CreateNotebookInstanceRequest}
 }
 
 const opCreatePresignedNotebookInstanceUrl = "CreatePresignedNotebookInstanceUrl"
@@ -364,6 +369,7 @@ const opCreatePresignedNotebookInstanceUrl = "CreatePresignedNotebookInstanceUrl
 type CreatePresignedNotebookInstanceUrlRequest struct {
 	*aws.Request
 	Input *CreatePresignedNotebookInstanceUrlInput
+	Copy  func(*CreatePresignedNotebookInstanceUrlInput) CreatePresignedNotebookInstanceUrlRequest
 }
 
 // Send marshals and sends the CreatePresignedNotebookInstanceUrl API request.
@@ -408,7 +414,7 @@ func (c *SageMaker) CreatePresignedNotebookInstanceUrlRequest(input *CreatePresi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePresignedNotebookInstanceUrlRequest{Request: req, Input: input}
+	return CreatePresignedNotebookInstanceUrlRequest{Request: req, Input: input, Copy: c.CreatePresignedNotebookInstanceUrlRequest}
 }
 
 const opCreateTrainingJob = "CreateTrainingJob"
@@ -417,6 +423,7 @@ const opCreateTrainingJob = "CreateTrainingJob"
 type CreateTrainingJobRequest struct {
 	*aws.Request
 	Input *CreateTrainingJobInput
+	Copy  func(*CreateTrainingJobInput) CreateTrainingJobRequest
 }
 
 // Send marshals and sends the CreateTrainingJob API request.
@@ -492,7 +499,7 @@ func (c *SageMaker) CreateTrainingJobRequest(input *CreateTrainingJobInput) Crea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTrainingJobRequest{Request: req, Input: input}
+	return CreateTrainingJobRequest{Request: req, Input: input, Copy: c.CreateTrainingJobRequest}
 }
 
 const opDeleteEndpoint = "DeleteEndpoint"
@@ -501,6 +508,7 @@ const opDeleteEndpoint = "DeleteEndpoint"
 type DeleteEndpointRequest struct {
 	*aws.Request
 	Input *DeleteEndpointInput
+	Copy  func(*DeleteEndpointInput) DeleteEndpointRequest
 }
 
 // Send marshals and sends the DeleteEndpoint API request.
@@ -544,7 +552,7 @@ func (c *SageMaker) DeleteEndpointRequest(input *DeleteEndpointInput) DeleteEndp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEndpointRequest{Request: req, Input: input}
+	return DeleteEndpointRequest{Request: req, Input: input, Copy: c.DeleteEndpointRequest}
 }
 
 const opDeleteEndpointConfig = "DeleteEndpointConfig"
@@ -553,6 +561,7 @@ const opDeleteEndpointConfig = "DeleteEndpointConfig"
 type DeleteEndpointConfigRequest struct {
 	*aws.Request
 	Input *DeleteEndpointConfigInput
+	Copy  func(*DeleteEndpointConfigInput) DeleteEndpointConfigRequest
 }
 
 // Send marshals and sends the DeleteEndpointConfig API request.
@@ -597,7 +606,7 @@ func (c *SageMaker) DeleteEndpointConfigRequest(input *DeleteEndpointConfigInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEndpointConfigRequest{Request: req, Input: input}
+	return DeleteEndpointConfigRequest{Request: req, Input: input, Copy: c.DeleteEndpointConfigRequest}
 }
 
 const opDeleteModel = "DeleteModel"
@@ -606,6 +615,7 @@ const opDeleteModel = "DeleteModel"
 type DeleteModelRequest struct {
 	*aws.Request
 	Input *DeleteModelInput
+	Copy  func(*DeleteModelInput) DeleteModelRequest
 }
 
 // Send marshals and sends the DeleteModel API request.
@@ -651,7 +661,7 @@ func (c *SageMaker) DeleteModelRequest(input *DeleteModelInput) DeleteModelReque
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteModelRequest{Request: req, Input: input}
+	return DeleteModelRequest{Request: req, Input: input, Copy: c.DeleteModelRequest}
 }
 
 const opDeleteNotebookInstance = "DeleteNotebookInstance"
@@ -660,6 +670,7 @@ const opDeleteNotebookInstance = "DeleteNotebookInstance"
 type DeleteNotebookInstanceRequest struct {
 	*aws.Request
 	Input *DeleteNotebookInstanceInput
+	Copy  func(*DeleteNotebookInstanceInput) DeleteNotebookInstanceRequest
 }
 
 // Send marshals and sends the DeleteNotebookInstance API request.
@@ -707,7 +718,7 @@ func (c *SageMaker) DeleteNotebookInstanceRequest(input *DeleteNotebookInstanceI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNotebookInstanceRequest{Request: req, Input: input}
+	return DeleteNotebookInstanceRequest{Request: req, Input: input, Copy: c.DeleteNotebookInstanceRequest}
 }
 
 const opDeleteTags = "DeleteTags"
@@ -716,6 +727,7 @@ const opDeleteTags = "DeleteTags"
 type DeleteTagsRequest struct {
 	*aws.Request
 	Input *DeleteTagsInput
+	Copy  func(*DeleteTagsInput) DeleteTagsRequest
 }
 
 // Send marshals and sends the DeleteTags API request.
@@ -758,7 +770,7 @@ func (c *SageMaker) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTagsRequest{Request: req, Input: input}
+	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
 const opDescribeEndpoint = "DescribeEndpoint"
@@ -767,6 +779,7 @@ const opDescribeEndpoint = "DescribeEndpoint"
 type DescribeEndpointRequest struct {
 	*aws.Request
 	Input *DescribeEndpointInput
+	Copy  func(*DescribeEndpointInput) DescribeEndpointRequest
 }
 
 // Send marshals and sends the DescribeEndpoint API request.
@@ -807,7 +820,7 @@ func (c *SageMaker) DescribeEndpointRequest(input *DescribeEndpointInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEndpointRequest{Request: req, Input: input}
+	return DescribeEndpointRequest{Request: req, Input: input, Copy: c.DescribeEndpointRequest}
 }
 
 const opDescribeEndpointConfig = "DescribeEndpointConfig"
@@ -816,6 +829,7 @@ const opDescribeEndpointConfig = "DescribeEndpointConfig"
 type DescribeEndpointConfigRequest struct {
 	*aws.Request
 	Input *DescribeEndpointConfigInput
+	Copy  func(*DescribeEndpointConfigInput) DescribeEndpointConfigRequest
 }
 
 // Send marshals and sends the DescribeEndpointConfig API request.
@@ -857,7 +871,7 @@ func (c *SageMaker) DescribeEndpointConfigRequest(input *DescribeEndpointConfigI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEndpointConfigRequest{Request: req, Input: input}
+	return DescribeEndpointConfigRequest{Request: req, Input: input, Copy: c.DescribeEndpointConfigRequest}
 }
 
 const opDescribeModel = "DescribeModel"
@@ -866,6 +880,7 @@ const opDescribeModel = "DescribeModel"
 type DescribeModelRequest struct {
 	*aws.Request
 	Input *DescribeModelInput
+	Copy  func(*DescribeModelInput) DescribeModelRequest
 }
 
 // Send marshals and sends the DescribeModel API request.
@@ -906,7 +921,7 @@ func (c *SageMaker) DescribeModelRequest(input *DescribeModelInput) DescribeMode
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeModelRequest{Request: req, Input: input}
+	return DescribeModelRequest{Request: req, Input: input, Copy: c.DescribeModelRequest}
 }
 
 const opDescribeNotebookInstance = "DescribeNotebookInstance"
@@ -915,6 +930,7 @@ const opDescribeNotebookInstance = "DescribeNotebookInstance"
 type DescribeNotebookInstanceRequest struct {
 	*aws.Request
 	Input *DescribeNotebookInstanceInput
+	Copy  func(*DescribeNotebookInstanceInput) DescribeNotebookInstanceRequest
 }
 
 // Send marshals and sends the DescribeNotebookInstance API request.
@@ -955,7 +971,7 @@ func (c *SageMaker) DescribeNotebookInstanceRequest(input *DescribeNotebookInsta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNotebookInstanceRequest{Request: req, Input: input}
+	return DescribeNotebookInstanceRequest{Request: req, Input: input, Copy: c.DescribeNotebookInstanceRequest}
 }
 
 const opDescribeTrainingJob = "DescribeTrainingJob"
@@ -964,6 +980,7 @@ const opDescribeTrainingJob = "DescribeTrainingJob"
 type DescribeTrainingJobRequest struct {
 	*aws.Request
 	Input *DescribeTrainingJobInput
+	Copy  func(*DescribeTrainingJobInput) DescribeTrainingJobRequest
 }
 
 // Send marshals and sends the DescribeTrainingJob API request.
@@ -1004,7 +1021,7 @@ func (c *SageMaker) DescribeTrainingJobRequest(input *DescribeTrainingJobInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTrainingJobRequest{Request: req, Input: input}
+	return DescribeTrainingJobRequest{Request: req, Input: input, Copy: c.DescribeTrainingJobRequest}
 }
 
 const opListEndpointConfigs = "ListEndpointConfigs"
@@ -1013,6 +1030,7 @@ const opListEndpointConfigs = "ListEndpointConfigs"
 type ListEndpointConfigsRequest struct {
 	*aws.Request
 	Input *ListEndpointConfigsInput
+	Copy  func(*ListEndpointConfigsInput) ListEndpointConfigsRequest
 }
 
 // Send marshals and sends the ListEndpointConfigs API request.
@@ -1059,57 +1077,53 @@ func (c *SageMaker) ListEndpointConfigsRequest(input *ListEndpointConfigsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListEndpointConfigsRequest{Request: req, Input: input}
+	return ListEndpointConfigsRequest{Request: req, Input: input, Copy: c.ListEndpointConfigsRequest}
 }
 
-// ListEndpointConfigsPages iterates over the pages of a ListEndpointConfigs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListEndpointConfigs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListEndpointConfigsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListEndpointConfigs operation.
-//    pageNum := 0
-//    err := client.ListEndpointConfigsPages(params,
-//        func(page *ListEndpointConfigsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListEndpointConfigsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SageMaker) ListEndpointConfigsPages(input *ListEndpointConfigsInput, fn func(*ListEndpointConfigsOutput, bool) bool) error {
-	return c.ListEndpointConfigsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListEndpointConfigsRequest) Paginate(opts ...aws.Option) ListEndpointConfigsPager {
+	return ListEndpointConfigsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListEndpointConfigsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListEndpointConfigsPagesWithContext same as ListEndpointConfigsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SageMaker) ListEndpointConfigsPagesWithContext(ctx aws.Context, input *ListEndpointConfigsInput, fn func(*ListEndpointConfigsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListEndpointConfigsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListEndpointConfigsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListEndpointConfigsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListEndpointConfigsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListEndpointConfigsPager struct {
+	aws.Pager
+}
+
+func (p *ListEndpointConfigsPager) CurrentPage() *ListEndpointConfigsOutput {
+	return p.Pager.CurrentPage().(*ListEndpointConfigsOutput)
 }
 
 const opListEndpoints = "ListEndpoints"
@@ -1118,6 +1132,7 @@ const opListEndpoints = "ListEndpoints"
 type ListEndpointsRequest struct {
 	*aws.Request
 	Input *ListEndpointsInput
+	Copy  func(*ListEndpointsInput) ListEndpointsRequest
 }
 
 // Send marshals and sends the ListEndpoints API request.
@@ -1164,57 +1179,53 @@ func (c *SageMaker) ListEndpointsRequest(input *ListEndpointsInput) ListEndpoint
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListEndpointsRequest{Request: req, Input: input}
+	return ListEndpointsRequest{Request: req, Input: input, Copy: c.ListEndpointsRequest}
 }
 
-// ListEndpointsPages iterates over the pages of a ListEndpoints operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListEndpoints method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListEndpointsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListEndpoints operation.
-//    pageNum := 0
-//    err := client.ListEndpointsPages(params,
-//        func(page *ListEndpointsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListEndpointsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SageMaker) ListEndpointsPages(input *ListEndpointsInput, fn func(*ListEndpointsOutput, bool) bool) error {
-	return c.ListEndpointsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListEndpointsRequest) Paginate(opts ...aws.Option) ListEndpointsPager {
+	return ListEndpointsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListEndpointsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListEndpointsPagesWithContext same as ListEndpointsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SageMaker) ListEndpointsPagesWithContext(ctx aws.Context, input *ListEndpointsInput, fn func(*ListEndpointsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListEndpointsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListEndpointsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListEndpointsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListEndpointsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListEndpointsPager struct {
+	aws.Pager
+}
+
+func (p *ListEndpointsPager) CurrentPage() *ListEndpointsOutput {
+	return p.Pager.CurrentPage().(*ListEndpointsOutput)
 }
 
 const opListModels = "ListModels"
@@ -1223,6 +1234,7 @@ const opListModels = "ListModels"
 type ListModelsRequest struct {
 	*aws.Request
 	Input *ListModelsInput
+	Copy  func(*ListModelsInput) ListModelsRequest
 }
 
 // Send marshals and sends the ListModels API request.
@@ -1270,57 +1282,53 @@ func (c *SageMaker) ListModelsRequest(input *ListModelsInput) ListModelsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListModelsRequest{Request: req, Input: input}
+	return ListModelsRequest{Request: req, Input: input, Copy: c.ListModelsRequest}
 }
 
-// ListModelsPages iterates over the pages of a ListModels operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListModels method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListModelsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListModels operation.
-//    pageNum := 0
-//    err := client.ListModelsPages(params,
-//        func(page *ListModelsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListModelsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SageMaker) ListModelsPages(input *ListModelsInput, fn func(*ListModelsOutput, bool) bool) error {
-	return c.ListModelsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListModelsRequest) Paginate(opts ...aws.Option) ListModelsPager {
+	return ListModelsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListModelsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListModelsPagesWithContext same as ListModelsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SageMaker) ListModelsPagesWithContext(ctx aws.Context, input *ListModelsInput, fn func(*ListModelsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListModelsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListModelsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListModelsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListModelsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListModelsPager struct {
+	aws.Pager
+}
+
+func (p *ListModelsPager) CurrentPage() *ListModelsOutput {
+	return p.Pager.CurrentPage().(*ListModelsOutput)
 }
 
 const opListNotebookInstances = "ListNotebookInstances"
@@ -1329,6 +1337,7 @@ const opListNotebookInstances = "ListNotebookInstances"
 type ListNotebookInstancesRequest struct {
 	*aws.Request
 	Input *ListNotebookInstancesInput
+	Copy  func(*ListNotebookInstancesInput) ListNotebookInstancesRequest
 }
 
 // Send marshals and sends the ListNotebookInstances API request.
@@ -1376,57 +1385,53 @@ func (c *SageMaker) ListNotebookInstancesRequest(input *ListNotebookInstancesInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListNotebookInstancesRequest{Request: req, Input: input}
+	return ListNotebookInstancesRequest{Request: req, Input: input, Copy: c.ListNotebookInstancesRequest}
 }
 
-// ListNotebookInstancesPages iterates over the pages of a ListNotebookInstances operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListNotebookInstances method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListNotebookInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListNotebookInstances operation.
-//    pageNum := 0
-//    err := client.ListNotebookInstancesPages(params,
-//        func(page *ListNotebookInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListNotebookInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SageMaker) ListNotebookInstancesPages(input *ListNotebookInstancesInput, fn func(*ListNotebookInstancesOutput, bool) bool) error {
-	return c.ListNotebookInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListNotebookInstancesRequest) Paginate(opts ...aws.Option) ListNotebookInstancesPager {
+	return ListNotebookInstancesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListNotebookInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListNotebookInstancesPagesWithContext same as ListNotebookInstancesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SageMaker) ListNotebookInstancesPagesWithContext(ctx aws.Context, input *ListNotebookInstancesInput, fn func(*ListNotebookInstancesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListNotebookInstancesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListNotebookInstancesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListNotebookInstancesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListNotebookInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListNotebookInstancesPager struct {
+	aws.Pager
+}
+
+func (p *ListNotebookInstancesPager) CurrentPage() *ListNotebookInstancesOutput {
+	return p.Pager.CurrentPage().(*ListNotebookInstancesOutput)
 }
 
 const opListTags = "ListTags"
@@ -1435,6 +1440,7 @@ const opListTags = "ListTags"
 type ListTagsRequest struct {
 	*aws.Request
 	Input *ListTagsInput
+	Copy  func(*ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -1481,57 +1487,53 @@ func (c *SageMaker) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsRequest{Request: req, Input: input}
+	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
-// ListTagsPages iterates over the pages of a ListTags operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTags method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTagsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTags operation.
-//    pageNum := 0
-//    err := client.ListTagsPages(params,
-//        func(page *ListTagsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTagsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SageMaker) ListTagsPages(input *ListTagsInput, fn func(*ListTagsOutput, bool) bool) error {
-	return c.ListTagsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
+	return ListTagsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTagsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListTagsPagesWithContext same as ListTagsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SageMaker) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsInput, fn func(*ListTagsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTagsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListTagsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTagsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTagsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTagsPager struct {
+	aws.Pager
+}
+
+func (p *ListTagsPager) CurrentPage() *ListTagsOutput {
+	return p.Pager.CurrentPage().(*ListTagsOutput)
 }
 
 const opListTrainingJobs = "ListTrainingJobs"
@@ -1540,6 +1542,7 @@ const opListTrainingJobs = "ListTrainingJobs"
 type ListTrainingJobsRequest struct {
 	*aws.Request
 	Input *ListTrainingJobsInput
+	Copy  func(*ListTrainingJobsInput) ListTrainingJobsRequest
 }
 
 // Send marshals and sends the ListTrainingJobs API request.
@@ -1586,57 +1589,53 @@ func (c *SageMaker) ListTrainingJobsRequest(input *ListTrainingJobsInput) ListTr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTrainingJobsRequest{Request: req, Input: input}
+	return ListTrainingJobsRequest{Request: req, Input: input, Copy: c.ListTrainingJobsRequest}
 }
 
-// ListTrainingJobsPages iterates over the pages of a ListTrainingJobs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTrainingJobs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTrainingJobsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTrainingJobs operation.
-//    pageNum := 0
-//    err := client.ListTrainingJobsPages(params,
-//        func(page *ListTrainingJobsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTrainingJobsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SageMaker) ListTrainingJobsPages(input *ListTrainingJobsInput, fn func(*ListTrainingJobsOutput, bool) bool) error {
-	return c.ListTrainingJobsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListTrainingJobsRequest) Paginate(opts ...aws.Option) ListTrainingJobsPager {
+	return ListTrainingJobsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTrainingJobsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListTrainingJobsPagesWithContext same as ListTrainingJobsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SageMaker) ListTrainingJobsPagesWithContext(ctx aws.Context, input *ListTrainingJobsInput, fn func(*ListTrainingJobsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTrainingJobsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListTrainingJobsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTrainingJobsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTrainingJobsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTrainingJobsPager struct {
+	aws.Pager
+}
+
+func (p *ListTrainingJobsPager) CurrentPage() *ListTrainingJobsOutput {
+	return p.Pager.CurrentPage().(*ListTrainingJobsOutput)
 }
 
 const opStartNotebookInstance = "StartNotebookInstance"
@@ -1645,6 +1644,7 @@ const opStartNotebookInstance = "StartNotebookInstance"
 type StartNotebookInstanceRequest struct {
 	*aws.Request
 	Input *StartNotebookInstanceInput
+	Copy  func(*StartNotebookInstanceInput) StartNotebookInstanceRequest
 }
 
 // Send marshals and sends the StartNotebookInstance API request.
@@ -1691,7 +1691,7 @@ func (c *SageMaker) StartNotebookInstanceRequest(input *StartNotebookInstanceInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartNotebookInstanceRequest{Request: req, Input: input}
+	return StartNotebookInstanceRequest{Request: req, Input: input, Copy: c.StartNotebookInstanceRequest}
 }
 
 const opStopNotebookInstance = "StopNotebookInstance"
@@ -1700,6 +1700,7 @@ const opStopNotebookInstance = "StopNotebookInstance"
 type StopNotebookInstanceRequest struct {
 	*aws.Request
 	Input *StopNotebookInstanceInput
+	Copy  func(*StopNotebookInstanceInput) StopNotebookInstanceRequest
 }
 
 // Send marshals and sends the StopNotebookInstance API request.
@@ -1749,7 +1750,7 @@ func (c *SageMaker) StopNotebookInstanceRequest(input *StopNotebookInstanceInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopNotebookInstanceRequest{Request: req, Input: input}
+	return StopNotebookInstanceRequest{Request: req, Input: input, Copy: c.StopNotebookInstanceRequest}
 }
 
 const opStopTrainingJob = "StopTrainingJob"
@@ -1758,6 +1759,7 @@ const opStopTrainingJob = "StopTrainingJob"
 type StopTrainingJobRequest struct {
 	*aws.Request
 	Input *StopTrainingJobInput
+	Copy  func(*StopTrainingJobInput) StopTrainingJobRequest
 }
 
 // Send marshals and sends the StopTrainingJob API request.
@@ -1812,7 +1814,7 @@ func (c *SageMaker) StopTrainingJobRequest(input *StopTrainingJobInput) StopTrai
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopTrainingJobRequest{Request: req, Input: input}
+	return StopTrainingJobRequest{Request: req, Input: input, Copy: c.StopTrainingJobRequest}
 }
 
 const opUpdateEndpoint = "UpdateEndpoint"
@@ -1821,6 +1823,7 @@ const opUpdateEndpoint = "UpdateEndpoint"
 type UpdateEndpointRequest struct {
 	*aws.Request
 	Input *UpdateEndpointInput
+	Copy  func(*UpdateEndpointInput) UpdateEndpointRequest
 }
 
 // Send marshals and sends the UpdateEndpoint API request.
@@ -1868,7 +1871,7 @@ func (c *SageMaker) UpdateEndpointRequest(input *UpdateEndpointInput) UpdateEndp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEndpointRequest{Request: req, Input: input}
+	return UpdateEndpointRequest{Request: req, Input: input, Copy: c.UpdateEndpointRequest}
 }
 
 const opUpdateEndpointWeightsAndCapacities = "UpdateEndpointWeightsAndCapacities"
@@ -1877,6 +1880,7 @@ const opUpdateEndpointWeightsAndCapacities = "UpdateEndpointWeightsAndCapacities
 type UpdateEndpointWeightsAndCapacitiesRequest struct {
 	*aws.Request
 	Input *UpdateEndpointWeightsAndCapacitiesInput
+	Copy  func(*UpdateEndpointWeightsAndCapacitiesInput) UpdateEndpointWeightsAndCapacitiesRequest
 }
 
 // Send marshals and sends the UpdateEndpointWeightsAndCapacities API request.
@@ -1923,7 +1927,7 @@ func (c *SageMaker) UpdateEndpointWeightsAndCapacitiesRequest(input *UpdateEndpo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEndpointWeightsAndCapacitiesRequest{Request: req, Input: input}
+	return UpdateEndpointWeightsAndCapacitiesRequest{Request: req, Input: input, Copy: c.UpdateEndpointWeightsAndCapacitiesRequest}
 }
 
 const opUpdateNotebookInstance = "UpdateNotebookInstance"
@@ -1932,6 +1936,7 @@ const opUpdateNotebookInstance = "UpdateNotebookInstance"
 type UpdateNotebookInstanceRequest struct {
 	*aws.Request
 	Input *UpdateNotebookInstanceInput
+	Copy  func(*UpdateNotebookInstanceInput) UpdateNotebookInstanceRequest
 }
 
 // Send marshals and sends the UpdateNotebookInstance API request.
@@ -1975,7 +1980,7 @@ func (c *SageMaker) UpdateNotebookInstanceRequest(input *UpdateNotebookInstanceI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateNotebookInstanceRequest{Request: req, Input: input}
+	return UpdateNotebookInstanceRequest{Request: req, Input: input, Copy: c.UpdateNotebookInstanceRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTagsInput

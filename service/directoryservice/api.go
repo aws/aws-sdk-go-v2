@@ -16,6 +16,7 @@ const opAddIpRoutes = "AddIpRoutes"
 type AddIpRoutesRequest struct {
 	*aws.Request
 	Input *AddIpRoutesInput
+	Copy  func(*AddIpRoutesInput) AddIpRoutesRequest
 }
 
 // Send marshals and sends the AddIpRoutes API request.
@@ -65,7 +66,7 @@ func (c *DirectoryService) AddIpRoutesRequest(input *AddIpRoutesInput) AddIpRout
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddIpRoutesRequest{Request: req, Input: input}
+	return AddIpRoutesRequest{Request: req, Input: input, Copy: c.AddIpRoutesRequest}
 }
 
 const opAddTagsToResource = "AddTagsToResource"
@@ -74,6 +75,7 @@ const opAddTagsToResource = "AddTagsToResource"
 type AddTagsToResourceRequest struct {
 	*aws.Request
 	Input *AddTagsToResourceInput
+	Copy  func(*AddTagsToResourceInput) AddTagsToResourceRequest
 }
 
 // Send marshals and sends the AddTagsToResource API request.
@@ -116,7 +118,7 @@ func (c *DirectoryService) AddTagsToResourceRequest(input *AddTagsToResourceInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToResourceRequest{Request: req, Input: input}
+	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 
 const opCancelSchemaExtension = "CancelSchemaExtension"
@@ -125,6 +127,7 @@ const opCancelSchemaExtension = "CancelSchemaExtension"
 type CancelSchemaExtensionRequest struct {
 	*aws.Request
 	Input *CancelSchemaExtensionInput
+	Copy  func(*CancelSchemaExtensionInput) CancelSchemaExtensionRequest
 }
 
 // Send marshals and sends the CancelSchemaExtension API request.
@@ -168,7 +171,7 @@ func (c *DirectoryService) CancelSchemaExtensionRequest(input *CancelSchemaExten
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelSchemaExtensionRequest{Request: req, Input: input}
+	return CancelSchemaExtensionRequest{Request: req, Input: input, Copy: c.CancelSchemaExtensionRequest}
 }
 
 const opConnectDirectory = "ConnectDirectory"
@@ -177,6 +180,7 @@ const opConnectDirectory = "ConnectDirectory"
 type ConnectDirectoryRequest struct {
 	*aws.Request
 	Input *ConnectDirectoryInput
+	Copy  func(*ConnectDirectoryInput) ConnectDirectoryRequest
 }
 
 // Send marshals and sends the ConnectDirectory API request.
@@ -222,7 +226,7 @@ func (c *DirectoryService) ConnectDirectoryRequest(input *ConnectDirectoryInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ConnectDirectoryRequest{Request: req, Input: input}
+	return ConnectDirectoryRequest{Request: req, Input: input, Copy: c.ConnectDirectoryRequest}
 }
 
 const opCreateAlias = "CreateAlias"
@@ -231,6 +235,7 @@ const opCreateAlias = "CreateAlias"
 type CreateAliasRequest struct {
 	*aws.Request
 	Input *CreateAliasInput
+	Copy  func(*CreateAliasInput) CreateAliasRequest
 }
 
 // Send marshals and sends the CreateAlias API request.
@@ -276,7 +281,7 @@ func (c *DirectoryService) CreateAliasRequest(input *CreateAliasInput) CreateAli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAliasRequest{Request: req, Input: input}
+	return CreateAliasRequest{Request: req, Input: input, Copy: c.CreateAliasRequest}
 }
 
 const opCreateComputer = "CreateComputer"
@@ -285,6 +290,7 @@ const opCreateComputer = "CreateComputer"
 type CreateComputerRequest struct {
 	*aws.Request
 	Input *CreateComputerInput
+	Copy  func(*CreateComputerInput) CreateComputerRequest
 }
 
 // Send marshals and sends the CreateComputer API request.
@@ -326,7 +332,7 @@ func (c *DirectoryService) CreateComputerRequest(input *CreateComputerInput) Cre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateComputerRequest{Request: req, Input: input}
+	return CreateComputerRequest{Request: req, Input: input, Copy: c.CreateComputerRequest}
 }
 
 const opCreateConditionalForwarder = "CreateConditionalForwarder"
@@ -335,6 +341,7 @@ const opCreateConditionalForwarder = "CreateConditionalForwarder"
 type CreateConditionalForwarderRequest struct {
 	*aws.Request
 	Input *CreateConditionalForwarderInput
+	Copy  func(*CreateConditionalForwarderInput) CreateConditionalForwarderRequest
 }
 
 // Send marshals and sends the CreateConditionalForwarder API request.
@@ -377,7 +384,7 @@ func (c *DirectoryService) CreateConditionalForwarderRequest(input *CreateCondit
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateConditionalForwarderRequest{Request: req, Input: input}
+	return CreateConditionalForwarderRequest{Request: req, Input: input, Copy: c.CreateConditionalForwarderRequest}
 }
 
 const opCreateDirectory = "CreateDirectory"
@@ -386,6 +393,7 @@ const opCreateDirectory = "CreateDirectory"
 type CreateDirectoryRequest struct {
 	*aws.Request
 	Input *CreateDirectoryInput
+	Copy  func(*CreateDirectoryInput) CreateDirectoryRequest
 }
 
 // Send marshals and sends the CreateDirectory API request.
@@ -431,7 +439,7 @@ func (c *DirectoryService) CreateDirectoryRequest(input *CreateDirectoryInput) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDirectoryRequest{Request: req, Input: input}
+	return CreateDirectoryRequest{Request: req, Input: input, Copy: c.CreateDirectoryRequest}
 }
 
 const opCreateMicrosoftAD = "CreateMicrosoftAD"
@@ -440,6 +448,7 @@ const opCreateMicrosoftAD = "CreateMicrosoftAD"
 type CreateMicrosoftADRequest struct {
 	*aws.Request
 	Input *CreateMicrosoftADInput
+	Copy  func(*CreateMicrosoftADInput) CreateMicrosoftADRequest
 }
 
 // Send marshals and sends the CreateMicrosoftAD API request.
@@ -485,7 +494,7 @@ func (c *DirectoryService) CreateMicrosoftADRequest(input *CreateMicrosoftADInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateMicrosoftADRequest{Request: req, Input: input}
+	return CreateMicrosoftADRequest{Request: req, Input: input, Copy: c.CreateMicrosoftADRequest}
 }
 
 const opCreateSnapshot = "CreateSnapshot"
@@ -494,6 +503,7 @@ const opCreateSnapshot = "CreateSnapshot"
 type CreateSnapshotRequest struct {
 	*aws.Request
 	Input *CreateSnapshotInput
+	Copy  func(*CreateSnapshotInput) CreateSnapshotRequest
 }
 
 // Send marshals and sends the CreateSnapshot API request.
@@ -536,7 +546,7 @@ func (c *DirectoryService) CreateSnapshotRequest(input *CreateSnapshotInput) Cre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSnapshotRequest{Request: req, Input: input}
+	return CreateSnapshotRequest{Request: req, Input: input, Copy: c.CreateSnapshotRequest}
 }
 
 const opCreateTrust = "CreateTrust"
@@ -545,6 +555,7 @@ const opCreateTrust = "CreateTrust"
 type CreateTrustRequest struct {
 	*aws.Request
 	Input *CreateTrustInput
+	Copy  func(*CreateTrustInput) CreateTrustRequest
 }
 
 // Send marshals and sends the CreateTrust API request.
@@ -592,7 +603,7 @@ func (c *DirectoryService) CreateTrustRequest(input *CreateTrustInput) CreateTru
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTrustRequest{Request: req, Input: input}
+	return CreateTrustRequest{Request: req, Input: input, Copy: c.CreateTrustRequest}
 }
 
 const opDeleteConditionalForwarder = "DeleteConditionalForwarder"
@@ -601,6 +612,7 @@ const opDeleteConditionalForwarder = "DeleteConditionalForwarder"
 type DeleteConditionalForwarderRequest struct {
 	*aws.Request
 	Input *DeleteConditionalForwarderInput
+	Copy  func(*DeleteConditionalForwarderInput) DeleteConditionalForwarderRequest
 }
 
 // Send marshals and sends the DeleteConditionalForwarder API request.
@@ -641,7 +653,7 @@ func (c *DirectoryService) DeleteConditionalForwarderRequest(input *DeleteCondit
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteConditionalForwarderRequest{Request: req, Input: input}
+	return DeleteConditionalForwarderRequest{Request: req, Input: input, Copy: c.DeleteConditionalForwarderRequest}
 }
 
 const opDeleteDirectory = "DeleteDirectory"
@@ -650,6 +662,7 @@ const opDeleteDirectory = "DeleteDirectory"
 type DeleteDirectoryRequest struct {
 	*aws.Request
 	Input *DeleteDirectoryInput
+	Copy  func(*DeleteDirectoryInput) DeleteDirectoryRequest
 }
 
 // Send marshals and sends the DeleteDirectory API request.
@@ -695,7 +708,7 @@ func (c *DirectoryService) DeleteDirectoryRequest(input *DeleteDirectoryInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDirectoryRequest{Request: req, Input: input}
+	return DeleteDirectoryRequest{Request: req, Input: input, Copy: c.DeleteDirectoryRequest}
 }
 
 const opDeleteSnapshot = "DeleteSnapshot"
@@ -704,6 +717,7 @@ const opDeleteSnapshot = "DeleteSnapshot"
 type DeleteSnapshotRequest struct {
 	*aws.Request
 	Input *DeleteSnapshotInput
+	Copy  func(*DeleteSnapshotInput) DeleteSnapshotRequest
 }
 
 // Send marshals and sends the DeleteSnapshot API request.
@@ -744,7 +758,7 @@ func (c *DirectoryService) DeleteSnapshotRequest(input *DeleteSnapshotInput) Del
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSnapshotRequest{Request: req, Input: input}
+	return DeleteSnapshotRequest{Request: req, Input: input, Copy: c.DeleteSnapshotRequest}
 }
 
 const opDeleteTrust = "DeleteTrust"
@@ -753,6 +767,7 @@ const opDeleteTrust = "DeleteTrust"
 type DeleteTrustRequest struct {
 	*aws.Request
 	Input *DeleteTrustInput
+	Copy  func(*DeleteTrustInput) DeleteTrustRequest
 }
 
 // Send marshals and sends the DeleteTrust API request.
@@ -794,7 +809,7 @@ func (c *DirectoryService) DeleteTrustRequest(input *DeleteTrustInput) DeleteTru
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTrustRequest{Request: req, Input: input}
+	return DeleteTrustRequest{Request: req, Input: input, Copy: c.DeleteTrustRequest}
 }
 
 const opDeregisterEventTopic = "DeregisterEventTopic"
@@ -803,6 +818,7 @@ const opDeregisterEventTopic = "DeregisterEventTopic"
 type DeregisterEventTopicRequest struct {
 	*aws.Request
 	Input *DeregisterEventTopicInput
+	Copy  func(*DeregisterEventTopicInput) DeregisterEventTopicRequest
 }
 
 // Send marshals and sends the DeregisterEventTopic API request.
@@ -843,7 +859,7 @@ func (c *DirectoryService) DeregisterEventTopicRequest(input *DeregisterEventTop
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterEventTopicRequest{Request: req, Input: input}
+	return DeregisterEventTopicRequest{Request: req, Input: input, Copy: c.DeregisterEventTopicRequest}
 }
 
 const opDescribeConditionalForwarders = "DescribeConditionalForwarders"
@@ -852,6 +868,7 @@ const opDescribeConditionalForwarders = "DescribeConditionalForwarders"
 type DescribeConditionalForwardersRequest struct {
 	*aws.Request
 	Input *DescribeConditionalForwardersInput
+	Copy  func(*DescribeConditionalForwardersInput) DescribeConditionalForwardersRequest
 }
 
 // Send marshals and sends the DescribeConditionalForwarders API request.
@@ -895,7 +912,7 @@ func (c *DirectoryService) DescribeConditionalForwardersRequest(input *DescribeC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConditionalForwardersRequest{Request: req, Input: input}
+	return DescribeConditionalForwardersRequest{Request: req, Input: input, Copy: c.DescribeConditionalForwardersRequest}
 }
 
 const opDescribeDirectories = "DescribeDirectories"
@@ -904,6 +921,7 @@ const opDescribeDirectories = "DescribeDirectories"
 type DescribeDirectoriesRequest struct {
 	*aws.Request
 	Input *DescribeDirectoriesInput
+	Copy  func(*DescribeDirectoriesInput) DescribeDirectoriesRequest
 }
 
 // Send marshals and sends the DescribeDirectories API request.
@@ -955,7 +973,7 @@ func (c *DirectoryService) DescribeDirectoriesRequest(input *DescribeDirectories
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDirectoriesRequest{Request: req, Input: input}
+	return DescribeDirectoriesRequest{Request: req, Input: input, Copy: c.DescribeDirectoriesRequest}
 }
 
 const opDescribeDomainControllers = "DescribeDomainControllers"
@@ -964,6 +982,7 @@ const opDescribeDomainControllers = "DescribeDomainControllers"
 type DescribeDomainControllersRequest struct {
 	*aws.Request
 	Input *DescribeDomainControllersInput
+	Copy  func(*DescribeDomainControllersInput) DescribeDomainControllersRequest
 }
 
 // Send marshals and sends the DescribeDomainControllers API request.
@@ -1010,57 +1029,53 @@ func (c *DirectoryService) DescribeDomainControllersRequest(input *DescribeDomai
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDomainControllersRequest{Request: req, Input: input}
+	return DescribeDomainControllersRequest{Request: req, Input: input, Copy: c.DescribeDomainControllersRequest}
 }
 
-// DescribeDomainControllersPages iterates over the pages of a DescribeDomainControllers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDomainControllers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDomainControllersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDomainControllers operation.
-//    pageNum := 0
-//    err := client.DescribeDomainControllersPages(params,
-//        func(page *DescribeDomainControllersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDomainControllersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DirectoryService) DescribeDomainControllersPages(input *DescribeDomainControllersInput, fn func(*DescribeDomainControllersOutput, bool) bool) error {
-	return c.DescribeDomainControllersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeDomainControllersRequest) Paginate(opts ...aws.Option) DescribeDomainControllersPager {
+	return DescribeDomainControllersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDomainControllersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeDomainControllersPagesWithContext same as DescribeDomainControllersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DirectoryService) DescribeDomainControllersPagesWithContext(ctx aws.Context, input *DescribeDomainControllersInput, fn func(*DescribeDomainControllersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDomainControllersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeDomainControllersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDomainControllersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDomainControllersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeDomainControllersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDomainControllersPager) CurrentPage() *DescribeDomainControllersOutput {
+	return p.Pager.CurrentPage().(*DescribeDomainControllersOutput)
 }
 
 const opDescribeEventTopics = "DescribeEventTopics"
@@ -1069,6 +1084,7 @@ const opDescribeEventTopics = "DescribeEventTopics"
 type DescribeEventTopicsRequest struct {
 	*aws.Request
 	Input *DescribeEventTopicsInput
+	Copy  func(*DescribeEventTopicsInput) DescribeEventTopicsRequest
 }
 
 // Send marshals and sends the DescribeEventTopics API request.
@@ -1113,7 +1129,7 @@ func (c *DirectoryService) DescribeEventTopicsRequest(input *DescribeEventTopics
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventTopicsRequest{Request: req, Input: input}
+	return DescribeEventTopicsRequest{Request: req, Input: input, Copy: c.DescribeEventTopicsRequest}
 }
 
 const opDescribeSnapshots = "DescribeSnapshots"
@@ -1122,6 +1138,7 @@ const opDescribeSnapshots = "DescribeSnapshots"
 type DescribeSnapshotsRequest struct {
 	*aws.Request
 	Input *DescribeSnapshotsInput
+	Copy  func(*DescribeSnapshotsInput) DescribeSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeSnapshots API request.
@@ -1169,7 +1186,7 @@ func (c *DirectoryService) DescribeSnapshotsRequest(input *DescribeSnapshotsInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSnapshotsRequest{Request: req, Input: input}
+	return DescribeSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeSnapshotsRequest}
 }
 
 const opDescribeTrusts = "DescribeTrusts"
@@ -1178,6 +1195,7 @@ const opDescribeTrusts = "DescribeTrusts"
 type DescribeTrustsRequest struct {
 	*aws.Request
 	Input *DescribeTrustsInput
+	Copy  func(*DescribeTrustsInput) DescribeTrustsRequest
 }
 
 // Send marshals and sends the DescribeTrusts API request.
@@ -1221,7 +1239,7 @@ func (c *DirectoryService) DescribeTrustsRequest(input *DescribeTrustsInput) Des
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTrustsRequest{Request: req, Input: input}
+	return DescribeTrustsRequest{Request: req, Input: input, Copy: c.DescribeTrustsRequest}
 }
 
 const opDisableRadius = "DisableRadius"
@@ -1230,6 +1248,7 @@ const opDisableRadius = "DisableRadius"
 type DisableRadiusRequest struct {
 	*aws.Request
 	Input *DisableRadiusInput
+	Copy  func(*DisableRadiusInput) DisableRadiusRequest
 }
 
 // Send marshals and sends the DisableRadius API request.
@@ -1271,7 +1290,7 @@ func (c *DirectoryService) DisableRadiusRequest(input *DisableRadiusInput) Disab
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableRadiusRequest{Request: req, Input: input}
+	return DisableRadiusRequest{Request: req, Input: input, Copy: c.DisableRadiusRequest}
 }
 
 const opDisableSso = "DisableSso"
@@ -1280,6 +1299,7 @@ const opDisableSso = "DisableSso"
 type DisableSsoRequest struct {
 	*aws.Request
 	Input *DisableSsoInput
+	Copy  func(*DisableSsoInput) DisableSsoRequest
 }
 
 // Send marshals and sends the DisableSso API request.
@@ -1320,7 +1340,7 @@ func (c *DirectoryService) DisableSsoRequest(input *DisableSsoInput) DisableSsoR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableSsoRequest{Request: req, Input: input}
+	return DisableSsoRequest{Request: req, Input: input, Copy: c.DisableSsoRequest}
 }
 
 const opEnableRadius = "EnableRadius"
@@ -1329,6 +1349,7 @@ const opEnableRadius = "EnableRadius"
 type EnableRadiusRequest struct {
 	*aws.Request
 	Input *EnableRadiusInput
+	Copy  func(*EnableRadiusInput) EnableRadiusRequest
 }
 
 // Send marshals and sends the EnableRadius API request.
@@ -1370,7 +1391,7 @@ func (c *DirectoryService) EnableRadiusRequest(input *EnableRadiusInput) EnableR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableRadiusRequest{Request: req, Input: input}
+	return EnableRadiusRequest{Request: req, Input: input, Copy: c.EnableRadiusRequest}
 }
 
 const opEnableSso = "EnableSso"
@@ -1379,6 +1400,7 @@ const opEnableSso = "EnableSso"
 type EnableSsoRequest struct {
 	*aws.Request
 	Input *EnableSsoInput
+	Copy  func(*EnableSsoInput) EnableSsoRequest
 }
 
 // Send marshals and sends the EnableSso API request.
@@ -1419,7 +1441,7 @@ func (c *DirectoryService) EnableSsoRequest(input *EnableSsoInput) EnableSsoRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableSsoRequest{Request: req, Input: input}
+	return EnableSsoRequest{Request: req, Input: input, Copy: c.EnableSsoRequest}
 }
 
 const opGetDirectoryLimits = "GetDirectoryLimits"
@@ -1428,6 +1450,7 @@ const opGetDirectoryLimits = "GetDirectoryLimits"
 type GetDirectoryLimitsRequest struct {
 	*aws.Request
 	Input *GetDirectoryLimitsInput
+	Copy  func(*GetDirectoryLimitsInput) GetDirectoryLimitsRequest
 }
 
 // Send marshals and sends the GetDirectoryLimits API request.
@@ -1468,7 +1491,7 @@ func (c *DirectoryService) GetDirectoryLimitsRequest(input *GetDirectoryLimitsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDirectoryLimitsRequest{Request: req, Input: input}
+	return GetDirectoryLimitsRequest{Request: req, Input: input, Copy: c.GetDirectoryLimitsRequest}
 }
 
 const opGetSnapshotLimits = "GetSnapshotLimits"
@@ -1477,6 +1500,7 @@ const opGetSnapshotLimits = "GetSnapshotLimits"
 type GetSnapshotLimitsRequest struct {
 	*aws.Request
 	Input *GetSnapshotLimitsInput
+	Copy  func(*GetSnapshotLimitsInput) GetSnapshotLimitsRequest
 }
 
 // Send marshals and sends the GetSnapshotLimits API request.
@@ -1517,7 +1541,7 @@ func (c *DirectoryService) GetSnapshotLimitsRequest(input *GetSnapshotLimitsInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSnapshotLimitsRequest{Request: req, Input: input}
+	return GetSnapshotLimitsRequest{Request: req, Input: input, Copy: c.GetSnapshotLimitsRequest}
 }
 
 const opListIpRoutes = "ListIpRoutes"
@@ -1526,6 +1550,7 @@ const opListIpRoutes = "ListIpRoutes"
 type ListIpRoutesRequest struct {
 	*aws.Request
 	Input *ListIpRoutesInput
+	Copy  func(*ListIpRoutesInput) ListIpRoutesRequest
 }
 
 // Send marshals and sends the ListIpRoutes API request.
@@ -1566,7 +1591,7 @@ func (c *DirectoryService) ListIpRoutesRequest(input *ListIpRoutesInput) ListIpR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIpRoutesRequest{Request: req, Input: input}
+	return ListIpRoutesRequest{Request: req, Input: input, Copy: c.ListIpRoutesRequest}
 }
 
 const opListSchemaExtensions = "ListSchemaExtensions"
@@ -1575,6 +1600,7 @@ const opListSchemaExtensions = "ListSchemaExtensions"
 type ListSchemaExtensionsRequest struct {
 	*aws.Request
 	Input *ListSchemaExtensionsInput
+	Copy  func(*ListSchemaExtensionsInput) ListSchemaExtensionsRequest
 }
 
 // Send marshals and sends the ListSchemaExtensions API request.
@@ -1615,7 +1641,7 @@ func (c *DirectoryService) ListSchemaExtensionsRequest(input *ListSchemaExtensio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSchemaExtensionsRequest{Request: req, Input: input}
+	return ListSchemaExtensionsRequest{Request: req, Input: input, Copy: c.ListSchemaExtensionsRequest}
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -1624,6 +1650,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -1664,7 +1691,7 @@ func (c *DirectoryService) ListTagsForResourceRequest(input *ListTagsForResource
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opRegisterEventTopic = "RegisterEventTopic"
@@ -1673,6 +1700,7 @@ const opRegisterEventTopic = "RegisterEventTopic"
 type RegisterEventTopicRequest struct {
 	*aws.Request
 	Input *RegisterEventTopicInput
+	Copy  func(*RegisterEventTopicInput) RegisterEventTopicRequest
 }
 
 // Send marshals and sends the RegisterEventTopic API request.
@@ -1718,7 +1746,7 @@ func (c *DirectoryService) RegisterEventTopicRequest(input *RegisterEventTopicIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterEventTopicRequest{Request: req, Input: input}
+	return RegisterEventTopicRequest{Request: req, Input: input, Copy: c.RegisterEventTopicRequest}
 }
 
 const opRemoveIpRoutes = "RemoveIpRoutes"
@@ -1727,6 +1755,7 @@ const opRemoveIpRoutes = "RemoveIpRoutes"
 type RemoveIpRoutesRequest struct {
 	*aws.Request
 	Input *RemoveIpRoutesInput
+	Copy  func(*RemoveIpRoutesInput) RemoveIpRoutesRequest
 }
 
 // Send marshals and sends the RemoveIpRoutes API request.
@@ -1767,7 +1796,7 @@ func (c *DirectoryService) RemoveIpRoutesRequest(input *RemoveIpRoutesInput) Rem
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveIpRoutesRequest{Request: req, Input: input}
+	return RemoveIpRoutesRequest{Request: req, Input: input, Copy: c.RemoveIpRoutesRequest}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
@@ -1776,6 +1805,7 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 type RemoveTagsFromResourceRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromResourceInput
+	Copy  func(*RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
@@ -1816,7 +1846,7 @@ func (c *DirectoryService) RemoveTagsFromResourceRequest(input *RemoveTagsFromRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromResourceRequest{Request: req, Input: input}
+	return RemoveTagsFromResourceRequest{Request: req, Input: input, Copy: c.RemoveTagsFromResourceRequest}
 }
 
 const opRestoreFromSnapshot = "RestoreFromSnapshot"
@@ -1825,6 +1855,7 @@ const opRestoreFromSnapshot = "RestoreFromSnapshot"
 type RestoreFromSnapshotRequest struct {
 	*aws.Request
 	Input *RestoreFromSnapshotInput
+	Copy  func(*RestoreFromSnapshotInput) RestoreFromSnapshotRequest
 }
 
 // Send marshals and sends the RestoreFromSnapshot API request.
@@ -1873,7 +1904,7 @@ func (c *DirectoryService) RestoreFromSnapshotRequest(input *RestoreFromSnapshot
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreFromSnapshotRequest{Request: req, Input: input}
+	return RestoreFromSnapshotRequest{Request: req, Input: input, Copy: c.RestoreFromSnapshotRequest}
 }
 
 const opStartSchemaExtension = "StartSchemaExtension"
@@ -1882,6 +1913,7 @@ const opStartSchemaExtension = "StartSchemaExtension"
 type StartSchemaExtensionRequest struct {
 	*aws.Request
 	Input *StartSchemaExtensionInput
+	Copy  func(*StartSchemaExtensionInput) StartSchemaExtensionRequest
 }
 
 // Send marshals and sends the StartSchemaExtension API request.
@@ -1922,7 +1954,7 @@ func (c *DirectoryService) StartSchemaExtensionRequest(input *StartSchemaExtensi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartSchemaExtensionRequest{Request: req, Input: input}
+	return StartSchemaExtensionRequest{Request: req, Input: input, Copy: c.StartSchemaExtensionRequest}
 }
 
 const opUpdateConditionalForwarder = "UpdateConditionalForwarder"
@@ -1931,6 +1963,7 @@ const opUpdateConditionalForwarder = "UpdateConditionalForwarder"
 type UpdateConditionalForwarderRequest struct {
 	*aws.Request
 	Input *UpdateConditionalForwarderInput
+	Copy  func(*UpdateConditionalForwarderInput) UpdateConditionalForwarderRequest
 }
 
 // Send marshals and sends the UpdateConditionalForwarder API request.
@@ -1971,7 +2004,7 @@ func (c *DirectoryService) UpdateConditionalForwarderRequest(input *UpdateCondit
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateConditionalForwarderRequest{Request: req, Input: input}
+	return UpdateConditionalForwarderRequest{Request: req, Input: input, Copy: c.UpdateConditionalForwarderRequest}
 }
 
 const opUpdateNumberOfDomainControllers = "UpdateNumberOfDomainControllers"
@@ -1980,6 +2013,7 @@ const opUpdateNumberOfDomainControllers = "UpdateNumberOfDomainControllers"
 type UpdateNumberOfDomainControllersRequest struct {
 	*aws.Request
 	Input *UpdateNumberOfDomainControllersInput
+	Copy  func(*UpdateNumberOfDomainControllersInput) UpdateNumberOfDomainControllersRequest
 }
 
 // Send marshals and sends the UpdateNumberOfDomainControllers API request.
@@ -2025,7 +2059,7 @@ func (c *DirectoryService) UpdateNumberOfDomainControllersRequest(input *UpdateN
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateNumberOfDomainControllersRequest{Request: req, Input: input}
+	return UpdateNumberOfDomainControllersRequest{Request: req, Input: input, Copy: c.UpdateNumberOfDomainControllersRequest}
 }
 
 const opUpdateRadius = "UpdateRadius"
@@ -2034,6 +2068,7 @@ const opUpdateRadius = "UpdateRadius"
 type UpdateRadiusRequest struct {
 	*aws.Request
 	Input *UpdateRadiusInput
+	Copy  func(*UpdateRadiusInput) UpdateRadiusRequest
 }
 
 // Send marshals and sends the UpdateRadius API request.
@@ -2075,7 +2110,7 @@ func (c *DirectoryService) UpdateRadiusRequest(input *UpdateRadiusInput) UpdateR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRadiusRequest{Request: req, Input: input}
+	return UpdateRadiusRequest{Request: req, Input: input, Copy: c.UpdateRadiusRequest}
 }
 
 const opVerifyTrust = "VerifyTrust"
@@ -2084,6 +2119,7 @@ const opVerifyTrust = "VerifyTrust"
 type VerifyTrustRequest struct {
 	*aws.Request
 	Input *VerifyTrustInput
+	Copy  func(*VerifyTrustInput) VerifyTrustRequest
 }
 
 // Send marshals and sends the VerifyTrust API request.
@@ -2128,7 +2164,7 @@ func (c *DirectoryService) VerifyTrustRequest(input *VerifyTrustInput) VerifyTru
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return VerifyTrustRequest{Request: req, Input: input}
+	return VerifyTrustRequest{Request: req, Input: input, Copy: c.VerifyTrustRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ds-2015-04-16/AddIpRoutesRequest

@@ -16,6 +16,7 @@ const opActivateGateway = "ActivateGateway"
 type ActivateGatewayRequest struct {
 	*aws.Request
 	Input *ActivateGatewayInput
+	Copy  func(*ActivateGatewayInput) ActivateGatewayRequest
 }
 
 // Send marshals and sends the ActivateGateway API request.
@@ -64,7 +65,7 @@ func (c *StorageGateway) ActivateGatewayRequest(input *ActivateGatewayInput) Act
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ActivateGatewayRequest{Request: req, Input: input}
+	return ActivateGatewayRequest{Request: req, Input: input, Copy: c.ActivateGatewayRequest}
 }
 
 const opAddCache = "AddCache"
@@ -73,6 +74,7 @@ const opAddCache = "AddCache"
 type AddCacheRequest struct {
 	*aws.Request
 	Input *AddCacheInput
+	Copy  func(*AddCacheInput) AddCacheRequest
 }
 
 // Send marshals and sends the AddCache API request.
@@ -119,7 +121,7 @@ func (c *StorageGateway) AddCacheRequest(input *AddCacheInput) AddCacheRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddCacheRequest{Request: req, Input: input}
+	return AddCacheRequest{Request: req, Input: input, Copy: c.AddCacheRequest}
 }
 
 const opAddTagsToResource = "AddTagsToResource"
@@ -128,6 +130,7 @@ const opAddTagsToResource = "AddTagsToResource"
 type AddTagsToResourceRequest struct {
 	*aws.Request
 	Input *AddTagsToResourceInput
+	Copy  func(*AddTagsToResourceInput) AddTagsToResourceRequest
 }
 
 // Send marshals and sends the AddTagsToResource API request.
@@ -181,7 +184,7 @@ func (c *StorageGateway) AddTagsToResourceRequest(input *AddTagsToResourceInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToResourceRequest{Request: req, Input: input}
+	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 
 const opAddUploadBuffer = "AddUploadBuffer"
@@ -190,6 +193,7 @@ const opAddUploadBuffer = "AddUploadBuffer"
 type AddUploadBufferRequest struct {
 	*aws.Request
 	Input *AddUploadBufferInput
+	Copy  func(*AddUploadBufferInput) AddUploadBufferRequest
 }
 
 // Send marshals and sends the AddUploadBuffer API request.
@@ -236,7 +240,7 @@ func (c *StorageGateway) AddUploadBufferRequest(input *AddUploadBufferInput) Add
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddUploadBufferRequest{Request: req, Input: input}
+	return AddUploadBufferRequest{Request: req, Input: input, Copy: c.AddUploadBufferRequest}
 }
 
 const opAddWorkingStorage = "AddWorkingStorage"
@@ -245,6 +249,7 @@ const opAddWorkingStorage = "AddWorkingStorage"
 type AddWorkingStorageRequest struct {
 	*aws.Request
 	Input *AddWorkingStorageInput
+	Copy  func(*AddWorkingStorageInput) AddWorkingStorageRequest
 }
 
 // Send marshals and sends the AddWorkingStorage API request.
@@ -295,7 +300,7 @@ func (c *StorageGateway) AddWorkingStorageRequest(input *AddWorkingStorageInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddWorkingStorageRequest{Request: req, Input: input}
+	return AddWorkingStorageRequest{Request: req, Input: input, Copy: c.AddWorkingStorageRequest}
 }
 
 const opCancelArchival = "CancelArchival"
@@ -304,6 +309,7 @@ const opCancelArchival = "CancelArchival"
 type CancelArchivalRequest struct {
 	*aws.Request
 	Input *CancelArchivalInput
+	Copy  func(*CancelArchivalInput) CancelArchivalRequest
 }
 
 // Send marshals and sends the CancelArchival API request.
@@ -346,7 +352,7 @@ func (c *StorageGateway) CancelArchivalRequest(input *CancelArchivalInput) Cance
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelArchivalRequest{Request: req, Input: input}
+	return CancelArchivalRequest{Request: req, Input: input, Copy: c.CancelArchivalRequest}
 }
 
 const opCancelRetrieval = "CancelRetrieval"
@@ -355,6 +361,7 @@ const opCancelRetrieval = "CancelRetrieval"
 type CancelRetrievalRequest struct {
 	*aws.Request
 	Input *CancelRetrievalInput
+	Copy  func(*CancelRetrievalInput) CancelRetrievalRequest
 }
 
 // Send marshals and sends the CancelRetrieval API request.
@@ -397,7 +404,7 @@ func (c *StorageGateway) CancelRetrievalRequest(input *CancelRetrievalInput) Can
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelRetrievalRequest{Request: req, Input: input}
+	return CancelRetrievalRequest{Request: req, Input: input, Copy: c.CancelRetrievalRequest}
 }
 
 const opCreateCachediSCSIVolume = "CreateCachediSCSIVolume"
@@ -406,6 +413,7 @@ const opCreateCachediSCSIVolume = "CreateCachediSCSIVolume"
 type CreateCachediSCSIVolumeRequest struct {
 	*aws.Request
 	Input *CreateCachediSCSIVolumeInput
+	Copy  func(*CreateCachediSCSIVolumeInput) CreateCachediSCSIVolumeRequest
 }
 
 // Send marshals and sends the CreateCachediSCSIVolume API request.
@@ -462,7 +470,7 @@ func (c *StorageGateway) CreateCachediSCSIVolumeRequest(input *CreateCachediSCSI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCachediSCSIVolumeRequest{Request: req, Input: input}
+	return CreateCachediSCSIVolumeRequest{Request: req, Input: input, Copy: c.CreateCachediSCSIVolumeRequest}
 }
 
 const opCreateNFSFileShare = "CreateNFSFileShare"
@@ -471,6 +479,7 @@ const opCreateNFSFileShare = "CreateNFSFileShare"
 type CreateNFSFileShareRequest struct {
 	*aws.Request
 	Input *CreateNFSFileShareInput
+	Copy  func(*CreateNFSFileShareInput) CreateNFSFileShareRequest
 }
 
 // Send marshals and sends the CreateNFSFileShare API request.
@@ -523,7 +532,7 @@ func (c *StorageGateway) CreateNFSFileShareRequest(input *CreateNFSFileShareInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNFSFileShareRequest{Request: req, Input: input}
+	return CreateNFSFileShareRequest{Request: req, Input: input, Copy: c.CreateNFSFileShareRequest}
 }
 
 const opCreateSnapshot = "CreateSnapshot"
@@ -532,6 +541,7 @@ const opCreateSnapshot = "CreateSnapshot"
 type CreateSnapshotRequest struct {
 	*aws.Request
 	Input *CreateSnapshotInput
+	Copy  func(*CreateSnapshotInput) CreateSnapshotRequest
 }
 
 // Send marshals and sends the CreateSnapshot API request.
@@ -595,7 +605,7 @@ func (c *StorageGateway) CreateSnapshotRequest(input *CreateSnapshotInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSnapshotRequest{Request: req, Input: input}
+	return CreateSnapshotRequest{Request: req, Input: input, Copy: c.CreateSnapshotRequest}
 }
 
 const opCreateSnapshotFromVolumeRecoveryPoint = "CreateSnapshotFromVolumeRecoveryPoint"
@@ -604,6 +614,7 @@ const opCreateSnapshotFromVolumeRecoveryPoint = "CreateSnapshotFromVolumeRecover
 type CreateSnapshotFromVolumeRecoveryPointRequest struct {
 	*aws.Request
 	Input *CreateSnapshotFromVolumeRecoveryPointInput
+	Copy  func(*CreateSnapshotFromVolumeRecoveryPointInput) CreateSnapshotFromVolumeRecoveryPointRequest
 }
 
 // Send marshals and sends the CreateSnapshotFromVolumeRecoveryPoint API request.
@@ -660,7 +671,7 @@ func (c *StorageGateway) CreateSnapshotFromVolumeRecoveryPointRequest(input *Cre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSnapshotFromVolumeRecoveryPointRequest{Request: req, Input: input}
+	return CreateSnapshotFromVolumeRecoveryPointRequest{Request: req, Input: input, Copy: c.CreateSnapshotFromVolumeRecoveryPointRequest}
 }
 
 const opCreateStorediSCSIVolume = "CreateStorediSCSIVolume"
@@ -669,6 +680,7 @@ const opCreateStorediSCSIVolume = "CreateStorediSCSIVolume"
 type CreateStorediSCSIVolumeRequest struct {
 	*aws.Request
 	Input *CreateStorediSCSIVolumeInput
+	Copy  func(*CreateStorediSCSIVolumeInput) CreateStorediSCSIVolumeRequest
 }
 
 // Send marshals and sends the CreateStorediSCSIVolume API request.
@@ -721,7 +733,7 @@ func (c *StorageGateway) CreateStorediSCSIVolumeRequest(input *CreateStorediSCSI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStorediSCSIVolumeRequest{Request: req, Input: input}
+	return CreateStorediSCSIVolumeRequest{Request: req, Input: input, Copy: c.CreateStorediSCSIVolumeRequest}
 }
 
 const opCreateTapeWithBarcode = "CreateTapeWithBarcode"
@@ -730,6 +742,7 @@ const opCreateTapeWithBarcode = "CreateTapeWithBarcode"
 type CreateTapeWithBarcodeRequest struct {
 	*aws.Request
 	Input *CreateTapeWithBarcodeInput
+	Copy  func(*CreateTapeWithBarcodeInput) CreateTapeWithBarcodeRequest
 }
 
 // Send marshals and sends the CreateTapeWithBarcode API request.
@@ -776,7 +789,7 @@ func (c *StorageGateway) CreateTapeWithBarcodeRequest(input *CreateTapeWithBarco
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTapeWithBarcodeRequest{Request: req, Input: input}
+	return CreateTapeWithBarcodeRequest{Request: req, Input: input, Copy: c.CreateTapeWithBarcodeRequest}
 }
 
 const opCreateTapes = "CreateTapes"
@@ -785,6 +798,7 @@ const opCreateTapes = "CreateTapes"
 type CreateTapesRequest struct {
 	*aws.Request
 	Input *CreateTapesInput
+	Copy  func(*CreateTapesInput) CreateTapesRequest
 }
 
 // Send marshals and sends the CreateTapes API request.
@@ -830,7 +844,7 @@ func (c *StorageGateway) CreateTapesRequest(input *CreateTapesInput) CreateTapes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTapesRequest{Request: req, Input: input}
+	return CreateTapesRequest{Request: req, Input: input, Copy: c.CreateTapesRequest}
 }
 
 const opDeleteBandwidthRateLimit = "DeleteBandwidthRateLimit"
@@ -839,6 +853,7 @@ const opDeleteBandwidthRateLimit = "DeleteBandwidthRateLimit"
 type DeleteBandwidthRateLimitRequest struct {
 	*aws.Request
 	Input *DeleteBandwidthRateLimitInput
+	Copy  func(*DeleteBandwidthRateLimitInput) DeleteBandwidthRateLimitRequest
 }
 
 // Send marshals and sends the DeleteBandwidthRateLimit API request.
@@ -883,7 +898,7 @@ func (c *StorageGateway) DeleteBandwidthRateLimitRequest(input *DeleteBandwidthR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBandwidthRateLimitRequest{Request: req, Input: input}
+	return DeleteBandwidthRateLimitRequest{Request: req, Input: input, Copy: c.DeleteBandwidthRateLimitRequest}
 }
 
 const opDeleteChapCredentials = "DeleteChapCredentials"
@@ -892,6 +907,7 @@ const opDeleteChapCredentials = "DeleteChapCredentials"
 type DeleteChapCredentialsRequest struct {
 	*aws.Request
 	Input *DeleteChapCredentialsInput
+	Copy  func(*DeleteChapCredentialsInput) DeleteChapCredentialsRequest
 }
 
 // Send marshals and sends the DeleteChapCredentials API request.
@@ -933,7 +949,7 @@ func (c *StorageGateway) DeleteChapCredentialsRequest(input *DeleteChapCredentia
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteChapCredentialsRequest{Request: req, Input: input}
+	return DeleteChapCredentialsRequest{Request: req, Input: input, Copy: c.DeleteChapCredentialsRequest}
 }
 
 const opDeleteFileShare = "DeleteFileShare"
@@ -942,6 +958,7 @@ const opDeleteFileShare = "DeleteFileShare"
 type DeleteFileShareRequest struct {
 	*aws.Request
 	Input *DeleteFileShareInput
+	Copy  func(*DeleteFileShareInput) DeleteFileShareRequest
 }
 
 // Send marshals and sends the DeleteFileShare API request.
@@ -983,7 +1000,7 @@ func (c *StorageGateway) DeleteFileShareRequest(input *DeleteFileShareInput) Del
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFileShareRequest{Request: req, Input: input}
+	return DeleteFileShareRequest{Request: req, Input: input, Copy: c.DeleteFileShareRequest}
 }
 
 const opDeleteGateway = "DeleteGateway"
@@ -992,6 +1009,7 @@ const opDeleteGateway = "DeleteGateway"
 type DeleteGatewayRequest struct {
 	*aws.Request
 	Input *DeleteGatewayInput
+	Copy  func(*DeleteGatewayInput) DeleteGatewayRequest
 }
 
 // Send marshals and sends the DeleteGateway API request.
@@ -1047,7 +1065,7 @@ func (c *StorageGateway) DeleteGatewayRequest(input *DeleteGatewayInput) DeleteG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGatewayRequest{Request: req, Input: input}
+	return DeleteGatewayRequest{Request: req, Input: input, Copy: c.DeleteGatewayRequest}
 }
 
 const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
@@ -1056,6 +1074,7 @@ const opDeleteSnapshotSchedule = "DeleteSnapshotSchedule"
 type DeleteSnapshotScheduleRequest struct {
 	*aws.Request
 	Input *DeleteSnapshotScheduleInput
+	Copy  func(*DeleteSnapshotScheduleInput) DeleteSnapshotScheduleRequest
 }
 
 // Send marshals and sends the DeleteSnapshotSchedule API request.
@@ -1106,7 +1125,7 @@ func (c *StorageGateway) DeleteSnapshotScheduleRequest(input *DeleteSnapshotSche
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSnapshotScheduleRequest{Request: req, Input: input}
+	return DeleteSnapshotScheduleRequest{Request: req, Input: input, Copy: c.DeleteSnapshotScheduleRequest}
 }
 
 const opDeleteTape = "DeleteTape"
@@ -1115,6 +1134,7 @@ const opDeleteTape = "DeleteTape"
 type DeleteTapeRequest struct {
 	*aws.Request
 	Input *DeleteTapeInput
+	Copy  func(*DeleteTapeInput) DeleteTapeRequest
 }
 
 // Send marshals and sends the DeleteTape API request.
@@ -1156,7 +1176,7 @@ func (c *StorageGateway) DeleteTapeRequest(input *DeleteTapeInput) DeleteTapeReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTapeRequest{Request: req, Input: input}
+	return DeleteTapeRequest{Request: req, Input: input, Copy: c.DeleteTapeRequest}
 }
 
 const opDeleteTapeArchive = "DeleteTapeArchive"
@@ -1165,6 +1185,7 @@ const opDeleteTapeArchive = "DeleteTapeArchive"
 type DeleteTapeArchiveRequest struct {
 	*aws.Request
 	Input *DeleteTapeArchiveInput
+	Copy  func(*DeleteTapeArchiveInput) DeleteTapeArchiveRequest
 }
 
 // Send marshals and sends the DeleteTapeArchive API request.
@@ -1206,7 +1227,7 @@ func (c *StorageGateway) DeleteTapeArchiveRequest(input *DeleteTapeArchiveInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTapeArchiveRequest{Request: req, Input: input}
+	return DeleteTapeArchiveRequest{Request: req, Input: input, Copy: c.DeleteTapeArchiveRequest}
 }
 
 const opDeleteVolume = "DeleteVolume"
@@ -1215,6 +1236,7 @@ const opDeleteVolume = "DeleteVolume"
 type DeleteVolumeRequest struct {
 	*aws.Request
 	Input *DeleteVolumeInput
+	Copy  func(*DeleteVolumeInput) DeleteVolumeRequest
 }
 
 // Send marshals and sends the DeleteVolume API request.
@@ -1269,7 +1291,7 @@ func (c *StorageGateway) DeleteVolumeRequest(input *DeleteVolumeInput) DeleteVol
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVolumeRequest{Request: req, Input: input}
+	return DeleteVolumeRequest{Request: req, Input: input, Copy: c.DeleteVolumeRequest}
 }
 
 const opDescribeBandwidthRateLimit = "DescribeBandwidthRateLimit"
@@ -1278,6 +1300,7 @@ const opDescribeBandwidthRateLimit = "DescribeBandwidthRateLimit"
 type DescribeBandwidthRateLimitRequest struct {
 	*aws.Request
 	Input *DescribeBandwidthRateLimitInput
+	Copy  func(*DescribeBandwidthRateLimitInput) DescribeBandwidthRateLimitRequest
 }
 
 // Send marshals and sends the DescribeBandwidthRateLimit API request.
@@ -1324,7 +1347,7 @@ func (c *StorageGateway) DescribeBandwidthRateLimitRequest(input *DescribeBandwi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBandwidthRateLimitRequest{Request: req, Input: input}
+	return DescribeBandwidthRateLimitRequest{Request: req, Input: input, Copy: c.DescribeBandwidthRateLimitRequest}
 }
 
 const opDescribeCache = "DescribeCache"
@@ -1333,6 +1356,7 @@ const opDescribeCache = "DescribeCache"
 type DescribeCacheRequest struct {
 	*aws.Request
 	Input *DescribeCacheInput
+	Copy  func(*DescribeCacheInput) DescribeCacheRequest
 }
 
 // Send marshals and sends the DescribeCache API request.
@@ -1377,7 +1401,7 @@ func (c *StorageGateway) DescribeCacheRequest(input *DescribeCacheInput) Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCacheRequest{Request: req, Input: input}
+	return DescribeCacheRequest{Request: req, Input: input, Copy: c.DescribeCacheRequest}
 }
 
 const opDescribeCachediSCSIVolumes = "DescribeCachediSCSIVolumes"
@@ -1386,6 +1410,7 @@ const opDescribeCachediSCSIVolumes = "DescribeCachediSCSIVolumes"
 type DescribeCachediSCSIVolumesRequest struct {
 	*aws.Request
 	Input *DescribeCachediSCSIVolumesInput
+	Copy  func(*DescribeCachediSCSIVolumesInput) DescribeCachediSCSIVolumesRequest
 }
 
 // Send marshals and sends the DescribeCachediSCSIVolumes API request.
@@ -1431,7 +1456,7 @@ func (c *StorageGateway) DescribeCachediSCSIVolumesRequest(input *DescribeCached
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCachediSCSIVolumesRequest{Request: req, Input: input}
+	return DescribeCachediSCSIVolumesRequest{Request: req, Input: input, Copy: c.DescribeCachediSCSIVolumesRequest}
 }
 
 const opDescribeChapCredentials = "DescribeChapCredentials"
@@ -1440,6 +1465,7 @@ const opDescribeChapCredentials = "DescribeChapCredentials"
 type DescribeChapCredentialsRequest struct {
 	*aws.Request
 	Input *DescribeChapCredentialsInput
+	Copy  func(*DescribeChapCredentialsInput) DescribeChapCredentialsRequest
 }
 
 // Send marshals and sends the DescribeChapCredentials API request.
@@ -1481,7 +1507,7 @@ func (c *StorageGateway) DescribeChapCredentialsRequest(input *DescribeChapCrede
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeChapCredentialsRequest{Request: req, Input: input}
+	return DescribeChapCredentialsRequest{Request: req, Input: input, Copy: c.DescribeChapCredentialsRequest}
 }
 
 const opDescribeGatewayInformation = "DescribeGatewayInformation"
@@ -1490,6 +1516,7 @@ const opDescribeGatewayInformation = "DescribeGatewayInformation"
 type DescribeGatewayInformationRequest struct {
 	*aws.Request
 	Input *DescribeGatewayInformationInput
+	Copy  func(*DescribeGatewayInformationInput) DescribeGatewayInformationRequest
 }
 
 // Send marshals and sends the DescribeGatewayInformation API request.
@@ -1533,7 +1560,7 @@ func (c *StorageGateway) DescribeGatewayInformationRequest(input *DescribeGatewa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeGatewayInformationRequest{Request: req, Input: input}
+	return DescribeGatewayInformationRequest{Request: req, Input: input, Copy: c.DescribeGatewayInformationRequest}
 }
 
 const opDescribeMaintenanceStartTime = "DescribeMaintenanceStartTime"
@@ -1542,6 +1569,7 @@ const opDescribeMaintenanceStartTime = "DescribeMaintenanceStartTime"
 type DescribeMaintenanceStartTimeRequest struct {
 	*aws.Request
 	Input *DescribeMaintenanceStartTimeInput
+	Copy  func(*DescribeMaintenanceStartTimeInput) DescribeMaintenanceStartTimeRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceStartTime API request.
@@ -1583,7 +1611,7 @@ func (c *StorageGateway) DescribeMaintenanceStartTimeRequest(input *DescribeMain
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMaintenanceStartTimeRequest{Request: req, Input: input}
+	return DescribeMaintenanceStartTimeRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceStartTimeRequest}
 }
 
 const opDescribeNFSFileShares = "DescribeNFSFileShares"
@@ -1592,6 +1620,7 @@ const opDescribeNFSFileShares = "DescribeNFSFileShares"
 type DescribeNFSFileSharesRequest struct {
 	*aws.Request
 	Input *DescribeNFSFileSharesInput
+	Copy  func(*DescribeNFSFileSharesInput) DescribeNFSFileSharesRequest
 }
 
 // Send marshals and sends the DescribeNFSFileShares API request.
@@ -1633,7 +1662,7 @@ func (c *StorageGateway) DescribeNFSFileSharesRequest(input *DescribeNFSFileShar
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNFSFileSharesRequest{Request: req, Input: input}
+	return DescribeNFSFileSharesRequest{Request: req, Input: input, Copy: c.DescribeNFSFileSharesRequest}
 }
 
 const opDescribeSnapshotSchedule = "DescribeSnapshotSchedule"
@@ -1642,6 +1671,7 @@ const opDescribeSnapshotSchedule = "DescribeSnapshotSchedule"
 type DescribeSnapshotScheduleRequest struct {
 	*aws.Request
 	Input *DescribeSnapshotScheduleInput
+	Copy  func(*DescribeSnapshotScheduleInput) DescribeSnapshotScheduleRequest
 }
 
 // Send marshals and sends the DescribeSnapshotSchedule API request.
@@ -1685,7 +1715,7 @@ func (c *StorageGateway) DescribeSnapshotScheduleRequest(input *DescribeSnapshot
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSnapshotScheduleRequest{Request: req, Input: input}
+	return DescribeSnapshotScheduleRequest{Request: req, Input: input, Copy: c.DescribeSnapshotScheduleRequest}
 }
 
 const opDescribeStorediSCSIVolumes = "DescribeStorediSCSIVolumes"
@@ -1694,6 +1724,7 @@ const opDescribeStorediSCSIVolumes = "DescribeStorediSCSIVolumes"
 type DescribeStorediSCSIVolumesRequest struct {
 	*aws.Request
 	Input *DescribeStorediSCSIVolumesInput
+	Copy  func(*DescribeStorediSCSIVolumesInput) DescribeStorediSCSIVolumesRequest
 }
 
 // Send marshals and sends the DescribeStorediSCSIVolumes API request.
@@ -1737,7 +1768,7 @@ func (c *StorageGateway) DescribeStorediSCSIVolumesRequest(input *DescribeStored
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStorediSCSIVolumesRequest{Request: req, Input: input}
+	return DescribeStorediSCSIVolumesRequest{Request: req, Input: input, Copy: c.DescribeStorediSCSIVolumesRequest}
 }
 
 const opDescribeTapeArchives = "DescribeTapeArchives"
@@ -1746,6 +1777,7 @@ const opDescribeTapeArchives = "DescribeTapeArchives"
 type DescribeTapeArchivesRequest struct {
 	*aws.Request
 	Input *DescribeTapeArchivesInput
+	Copy  func(*DescribeTapeArchivesInput) DescribeTapeArchivesRequest
 }
 
 // Send marshals and sends the DescribeTapeArchives API request.
@@ -1796,57 +1828,53 @@ func (c *StorageGateway) DescribeTapeArchivesRequest(input *DescribeTapeArchives
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTapeArchivesRequest{Request: req, Input: input}
+	return DescribeTapeArchivesRequest{Request: req, Input: input, Copy: c.DescribeTapeArchivesRequest}
 }
 
-// DescribeTapeArchivesPages iterates over the pages of a DescribeTapeArchives operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeTapeArchives method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeTapeArchivesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeTapeArchives operation.
-//    pageNum := 0
-//    err := client.DescribeTapeArchivesPages(params,
-//        func(page *DescribeTapeArchivesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeTapeArchivesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *StorageGateway) DescribeTapeArchivesPages(input *DescribeTapeArchivesInput, fn func(*DescribeTapeArchivesOutput, bool) bool) error {
-	return c.DescribeTapeArchivesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeTapeArchivesRequest) Paginate(opts ...aws.Option) DescribeTapeArchivesPager {
+	return DescribeTapeArchivesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeTapeArchivesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeTapeArchivesPagesWithContext same as DescribeTapeArchivesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeTapeArchivesPagesWithContext(ctx aws.Context, input *DescribeTapeArchivesInput, fn func(*DescribeTapeArchivesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeTapeArchivesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeTapeArchivesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeTapeArchivesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeTapeArchivesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeTapeArchivesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeTapeArchivesPager) CurrentPage() *DescribeTapeArchivesOutput {
+	return p.Pager.CurrentPage().(*DescribeTapeArchivesOutput)
 }
 
 const opDescribeTapeRecoveryPoints = "DescribeTapeRecoveryPoints"
@@ -1855,6 +1883,7 @@ const opDescribeTapeRecoveryPoints = "DescribeTapeRecoveryPoints"
 type DescribeTapeRecoveryPointsRequest struct {
 	*aws.Request
 	Input *DescribeTapeRecoveryPointsInput
+	Copy  func(*DescribeTapeRecoveryPointsInput) DescribeTapeRecoveryPointsRequest
 }
 
 // Send marshals and sends the DescribeTapeRecoveryPoints API request.
@@ -1907,57 +1936,53 @@ func (c *StorageGateway) DescribeTapeRecoveryPointsRequest(input *DescribeTapeRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTapeRecoveryPointsRequest{Request: req, Input: input}
+	return DescribeTapeRecoveryPointsRequest{Request: req, Input: input, Copy: c.DescribeTapeRecoveryPointsRequest}
 }
 
-// DescribeTapeRecoveryPointsPages iterates over the pages of a DescribeTapeRecoveryPoints operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeTapeRecoveryPoints method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeTapeRecoveryPointsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeTapeRecoveryPoints operation.
-//    pageNum := 0
-//    err := client.DescribeTapeRecoveryPointsPages(params,
-//        func(page *DescribeTapeRecoveryPointsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeTapeRecoveryPointsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *StorageGateway) DescribeTapeRecoveryPointsPages(input *DescribeTapeRecoveryPointsInput, fn func(*DescribeTapeRecoveryPointsOutput, bool) bool) error {
-	return c.DescribeTapeRecoveryPointsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeTapeRecoveryPointsRequest) Paginate(opts ...aws.Option) DescribeTapeRecoveryPointsPager {
+	return DescribeTapeRecoveryPointsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeTapeRecoveryPointsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeTapeRecoveryPointsPagesWithContext same as DescribeTapeRecoveryPointsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeTapeRecoveryPointsPagesWithContext(ctx aws.Context, input *DescribeTapeRecoveryPointsInput, fn func(*DescribeTapeRecoveryPointsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeTapeRecoveryPointsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeTapeRecoveryPointsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeTapeRecoveryPointsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeTapeRecoveryPointsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeTapeRecoveryPointsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeTapeRecoveryPointsPager) CurrentPage() *DescribeTapeRecoveryPointsOutput {
+	return p.Pager.CurrentPage().(*DescribeTapeRecoveryPointsOutput)
 }
 
 const opDescribeTapes = "DescribeTapes"
@@ -1966,6 +1991,7 @@ const opDescribeTapes = "DescribeTapes"
 type DescribeTapesRequest struct {
 	*aws.Request
 	Input *DescribeTapesInput
+	Copy  func(*DescribeTapesInput) DescribeTapesRequest
 }
 
 // Send marshals and sends the DescribeTapes API request.
@@ -2015,57 +2041,53 @@ func (c *StorageGateway) DescribeTapesRequest(input *DescribeTapesInput) Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTapesRequest{Request: req, Input: input}
+	return DescribeTapesRequest{Request: req, Input: input, Copy: c.DescribeTapesRequest}
 }
 
-// DescribeTapesPages iterates over the pages of a DescribeTapes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeTapes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeTapesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeTapes operation.
-//    pageNum := 0
-//    err := client.DescribeTapesPages(params,
-//        func(page *DescribeTapesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeTapesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *StorageGateway) DescribeTapesPages(input *DescribeTapesInput, fn func(*DescribeTapesOutput, bool) bool) error {
-	return c.DescribeTapesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeTapesRequest) Paginate(opts ...aws.Option) DescribeTapesPager {
+	return DescribeTapesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeTapesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeTapesPagesWithContext same as DescribeTapesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeTapesPagesWithContext(ctx aws.Context, input *DescribeTapesInput, fn func(*DescribeTapesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeTapesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeTapesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeTapesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeTapesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeTapesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeTapesPager) CurrentPage() *DescribeTapesOutput {
+	return p.Pager.CurrentPage().(*DescribeTapesOutput)
 }
 
 const opDescribeUploadBuffer = "DescribeUploadBuffer"
@@ -2074,6 +2096,7 @@ const opDescribeUploadBuffer = "DescribeUploadBuffer"
 type DescribeUploadBufferRequest struct {
 	*aws.Request
 	Input *DescribeUploadBufferInput
+	Copy  func(*DescribeUploadBufferInput) DescribeUploadBufferRequest
 }
 
 // Send marshals and sends the DescribeUploadBuffer API request.
@@ -2118,7 +2141,7 @@ func (c *StorageGateway) DescribeUploadBufferRequest(input *DescribeUploadBuffer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeUploadBufferRequest{Request: req, Input: input}
+	return DescribeUploadBufferRequest{Request: req, Input: input, Copy: c.DescribeUploadBufferRequest}
 }
 
 const opDescribeVTLDevices = "DescribeVTLDevices"
@@ -2127,6 +2150,7 @@ const opDescribeVTLDevices = "DescribeVTLDevices"
 type DescribeVTLDevicesRequest struct {
 	*aws.Request
 	Input *DescribeVTLDevicesInput
+	Copy  func(*DescribeVTLDevicesInput) DescribeVTLDevicesRequest
 }
 
 // Send marshals and sends the DescribeVTLDevices API request.
@@ -2176,57 +2200,53 @@ func (c *StorageGateway) DescribeVTLDevicesRequest(input *DescribeVTLDevicesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVTLDevicesRequest{Request: req, Input: input}
+	return DescribeVTLDevicesRequest{Request: req, Input: input, Copy: c.DescribeVTLDevicesRequest}
 }
 
-// DescribeVTLDevicesPages iterates over the pages of a DescribeVTLDevices operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeVTLDevices method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeVTLDevicesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeVTLDevices operation.
-//    pageNum := 0
-//    err := client.DescribeVTLDevicesPages(params,
-//        func(page *DescribeVTLDevicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeVTLDevicesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *StorageGateway) DescribeVTLDevicesPages(input *DescribeVTLDevicesInput, fn func(*DescribeVTLDevicesOutput, bool) bool) error {
-	return c.DescribeVTLDevicesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeVTLDevicesRequest) Paginate(opts ...aws.Option) DescribeVTLDevicesPager {
+	return DescribeVTLDevicesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeVTLDevicesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeVTLDevicesPagesWithContext same as DescribeVTLDevicesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) DescribeVTLDevicesPagesWithContext(ctx aws.Context, input *DescribeVTLDevicesInput, fn func(*DescribeVTLDevicesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeVTLDevicesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeVTLDevicesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeVTLDevicesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeVTLDevicesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeVTLDevicesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeVTLDevicesPager) CurrentPage() *DescribeVTLDevicesOutput {
+	return p.Pager.CurrentPage().(*DescribeVTLDevicesOutput)
 }
 
 const opDescribeWorkingStorage = "DescribeWorkingStorage"
@@ -2235,6 +2255,7 @@ const opDescribeWorkingStorage = "DescribeWorkingStorage"
 type DescribeWorkingStorageRequest struct {
 	*aws.Request
 	Input *DescribeWorkingStorageInput
+	Copy  func(*DescribeWorkingStorageInput) DescribeWorkingStorageRequest
 }
 
 // Send marshals and sends the DescribeWorkingStorage API request.
@@ -2283,7 +2304,7 @@ func (c *StorageGateway) DescribeWorkingStorageRequest(input *DescribeWorkingSto
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeWorkingStorageRequest{Request: req, Input: input}
+	return DescribeWorkingStorageRequest{Request: req, Input: input, Copy: c.DescribeWorkingStorageRequest}
 }
 
 const opDisableGateway = "DisableGateway"
@@ -2292,6 +2313,7 @@ const opDisableGateway = "DisableGateway"
 type DisableGatewayRequest struct {
 	*aws.Request
 	Input *DisableGatewayInput
+	Copy  func(*DisableGatewayInput) DisableGatewayRequest
 }
 
 // Send marshals and sends the DisableGateway API request.
@@ -2339,7 +2361,7 @@ func (c *StorageGateway) DisableGatewayRequest(input *DisableGatewayInput) Disab
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableGatewayRequest{Request: req, Input: input}
+	return DisableGatewayRequest{Request: req, Input: input, Copy: c.DisableGatewayRequest}
 }
 
 const opListFileShares = "ListFileShares"
@@ -2348,6 +2370,7 @@ const opListFileShares = "ListFileShares"
 type ListFileSharesRequest struct {
 	*aws.Request
 	Input *ListFileSharesInput
+	Copy  func(*ListFileSharesInput) ListFileSharesRequest
 }
 
 // Send marshals and sends the ListFileShares API request.
@@ -2390,7 +2413,7 @@ func (c *StorageGateway) ListFileSharesRequest(input *ListFileSharesInput) ListF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFileSharesRequest{Request: req, Input: input}
+	return ListFileSharesRequest{Request: req, Input: input, Copy: c.ListFileSharesRequest}
 }
 
 const opListGateways = "ListGateways"
@@ -2399,6 +2422,7 @@ const opListGateways = "ListGateways"
 type ListGatewaysRequest struct {
 	*aws.Request
 	Input *ListGatewaysInput
+	Copy  func(*ListGatewaysInput) ListGatewaysRequest
 }
 
 // Send marshals and sends the ListGateways API request.
@@ -2455,57 +2479,53 @@ func (c *StorageGateway) ListGatewaysRequest(input *ListGatewaysInput) ListGatew
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGatewaysRequest{Request: req, Input: input}
+	return ListGatewaysRequest{Request: req, Input: input, Copy: c.ListGatewaysRequest}
 }
 
-// ListGatewaysPages iterates over the pages of a ListGateways operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListGateways method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListGatewaysRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListGateways operation.
-//    pageNum := 0
-//    err := client.ListGatewaysPages(params,
-//        func(page *ListGatewaysOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListGatewaysRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *StorageGateway) ListGatewaysPages(input *ListGatewaysInput, fn func(*ListGatewaysOutput, bool) bool) error {
-	return c.ListGatewaysPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListGatewaysRequest) Paginate(opts ...aws.Option) ListGatewaysPager {
+	return ListGatewaysPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListGatewaysInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListGatewaysPagesWithContext same as ListGatewaysPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ListGatewaysPagesWithContext(ctx aws.Context, input *ListGatewaysInput, fn func(*ListGatewaysOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListGatewaysInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListGatewaysRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGatewaysOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListGatewaysPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListGatewaysPager struct {
+	aws.Pager
+}
+
+func (p *ListGatewaysPager) CurrentPage() *ListGatewaysOutput {
+	return p.Pager.CurrentPage().(*ListGatewaysOutput)
 }
 
 const opListLocalDisks = "ListLocalDisks"
@@ -2514,6 +2534,7 @@ const opListLocalDisks = "ListLocalDisks"
 type ListLocalDisksRequest struct {
 	*aws.Request
 	Input *ListLocalDisksInput
+	Copy  func(*ListLocalDisksInput) ListLocalDisksRequest
 }
 
 // Send marshals and sends the ListLocalDisks API request.
@@ -2563,7 +2584,7 @@ func (c *StorageGateway) ListLocalDisksRequest(input *ListLocalDisksInput) ListL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListLocalDisksRequest{Request: req, Input: input}
+	return ListLocalDisksRequest{Request: req, Input: input, Copy: c.ListLocalDisksRequest}
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -2572,6 +2593,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -2613,7 +2635,7 @@ func (c *StorageGateway) ListTagsForResourceRequest(input *ListTagsForResourceIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opListTapes = "ListTapes"
@@ -2622,6 +2644,7 @@ const opListTapes = "ListTapes"
 type ListTapesRequest struct {
 	*aws.Request
 	Input *ListTapesInput
+	Copy  func(*ListTapesInput) ListTapesRequest
 }
 
 // Send marshals and sends the ListTapes API request.
@@ -2672,7 +2695,7 @@ func (c *StorageGateway) ListTapesRequest(input *ListTapesInput) ListTapesReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTapesRequest{Request: req, Input: input}
+	return ListTapesRequest{Request: req, Input: input, Copy: c.ListTapesRequest}
 }
 
 const opListVolumeInitiators = "ListVolumeInitiators"
@@ -2681,6 +2704,7 @@ const opListVolumeInitiators = "ListVolumeInitiators"
 type ListVolumeInitiatorsRequest struct {
 	*aws.Request
 	Input *ListVolumeInitiatorsInput
+	Copy  func(*ListVolumeInitiatorsInput) ListVolumeInitiatorsRequest
 }
 
 // Send marshals and sends the ListVolumeInitiators API request.
@@ -2723,7 +2747,7 @@ func (c *StorageGateway) ListVolumeInitiatorsRequest(input *ListVolumeInitiators
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListVolumeInitiatorsRequest{Request: req, Input: input}
+	return ListVolumeInitiatorsRequest{Request: req, Input: input, Copy: c.ListVolumeInitiatorsRequest}
 }
 
 const opListVolumeRecoveryPoints = "ListVolumeRecoveryPoints"
@@ -2732,6 +2756,7 @@ const opListVolumeRecoveryPoints = "ListVolumeRecoveryPoints"
 type ListVolumeRecoveryPointsRequest struct {
 	*aws.Request
 	Input *ListVolumeRecoveryPointsInput
+	Copy  func(*ListVolumeRecoveryPointsInput) ListVolumeRecoveryPointsRequest
 }
 
 // Send marshals and sends the ListVolumeRecoveryPoints API request.
@@ -2779,7 +2804,7 @@ func (c *StorageGateway) ListVolumeRecoveryPointsRequest(input *ListVolumeRecove
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListVolumeRecoveryPointsRequest{Request: req, Input: input}
+	return ListVolumeRecoveryPointsRequest{Request: req, Input: input, Copy: c.ListVolumeRecoveryPointsRequest}
 }
 
 const opListVolumes = "ListVolumes"
@@ -2788,6 +2813,7 @@ const opListVolumes = "ListVolumes"
 type ListVolumesRequest struct {
 	*aws.Request
 	Input *ListVolumesInput
+	Copy  func(*ListVolumesInput) ListVolumesRequest
 }
 
 // Send marshals and sends the ListVolumes API request.
@@ -2845,57 +2871,53 @@ func (c *StorageGateway) ListVolumesRequest(input *ListVolumesInput) ListVolumes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListVolumesRequest{Request: req, Input: input}
+	return ListVolumesRequest{Request: req, Input: input, Copy: c.ListVolumesRequest}
 }
 
-// ListVolumesPages iterates over the pages of a ListVolumes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListVolumes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListVolumesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListVolumes operation.
-//    pageNum := 0
-//    err := client.ListVolumesPages(params,
-//        func(page *ListVolumesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListVolumesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *StorageGateway) ListVolumesPages(input *ListVolumesInput, fn func(*ListVolumesOutput, bool) bool) error {
-	return c.ListVolumesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListVolumesRequest) Paginate(opts ...aws.Option) ListVolumesPager {
+	return ListVolumesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListVolumesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListVolumesPagesWithContext same as ListVolumesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *StorageGateway) ListVolumesPagesWithContext(ctx aws.Context, input *ListVolumesInput, fn func(*ListVolumesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListVolumesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListVolumesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListVolumesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListVolumesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListVolumesPager struct {
+	aws.Pager
+}
+
+func (p *ListVolumesPager) CurrentPage() *ListVolumesOutput {
+	return p.Pager.CurrentPage().(*ListVolumesOutput)
 }
 
 const opNotifyWhenUploaded = "NotifyWhenUploaded"
@@ -2904,6 +2926,7 @@ const opNotifyWhenUploaded = "NotifyWhenUploaded"
 type NotifyWhenUploadedRequest struct {
 	*aws.Request
 	Input *NotifyWhenUploadedInput
+	Copy  func(*NotifyWhenUploadedInput) NotifyWhenUploadedRequest
 }
 
 // Send marshals and sends the NotifyWhenUploaded API request.
@@ -2954,7 +2977,7 @@ func (c *StorageGateway) NotifyWhenUploadedRequest(input *NotifyWhenUploadedInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return NotifyWhenUploadedRequest{Request: req, Input: input}
+	return NotifyWhenUploadedRequest{Request: req, Input: input, Copy: c.NotifyWhenUploadedRequest}
 }
 
 const opRefreshCache = "RefreshCache"
@@ -2963,6 +2986,7 @@ const opRefreshCache = "RefreshCache"
 type RefreshCacheRequest struct {
 	*aws.Request
 	Input *RefreshCacheInput
+	Copy  func(*RefreshCacheInput) RefreshCacheRequest
 }
 
 // Send marshals and sends the RefreshCache API request.
@@ -3006,7 +3030,7 @@ func (c *StorageGateway) RefreshCacheRequest(input *RefreshCacheInput) RefreshCa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RefreshCacheRequest{Request: req, Input: input}
+	return RefreshCacheRequest{Request: req, Input: input, Copy: c.RefreshCacheRequest}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
@@ -3015,6 +3039,7 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 type RemoveTagsFromResourceRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromResourceInput
+	Copy  func(*RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
@@ -3056,7 +3081,7 @@ func (c *StorageGateway) RemoveTagsFromResourceRequest(input *RemoveTagsFromReso
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromResourceRequest{Request: req, Input: input}
+	return RemoveTagsFromResourceRequest{Request: req, Input: input, Copy: c.RemoveTagsFromResourceRequest}
 }
 
 const opResetCache = "ResetCache"
@@ -3065,6 +3090,7 @@ const opResetCache = "ResetCache"
 type ResetCacheRequest struct {
 	*aws.Request
 	Input *ResetCacheInput
+	Copy  func(*ResetCacheInput) ResetCacheRequest
 }
 
 // Send marshals and sends the ResetCache API request.
@@ -3117,7 +3143,7 @@ func (c *StorageGateway) ResetCacheRequest(input *ResetCacheInput) ResetCacheReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetCacheRequest{Request: req, Input: input}
+	return ResetCacheRequest{Request: req, Input: input, Copy: c.ResetCacheRequest}
 }
 
 const opRetrieveTapeArchive = "RetrieveTapeArchive"
@@ -3126,6 +3152,7 @@ const opRetrieveTapeArchive = "RetrieveTapeArchive"
 type RetrieveTapeArchiveRequest struct {
 	*aws.Request
 	Input *RetrieveTapeArchiveInput
+	Copy  func(*RetrieveTapeArchiveInput) RetrieveTapeArchiveRequest
 }
 
 // Send marshals and sends the RetrieveTapeArchive API request.
@@ -3175,7 +3202,7 @@ func (c *StorageGateway) RetrieveTapeArchiveRequest(input *RetrieveTapeArchiveIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RetrieveTapeArchiveRequest{Request: req, Input: input}
+	return RetrieveTapeArchiveRequest{Request: req, Input: input, Copy: c.RetrieveTapeArchiveRequest}
 }
 
 const opRetrieveTapeRecoveryPoint = "RetrieveTapeRecoveryPoint"
@@ -3184,6 +3211,7 @@ const opRetrieveTapeRecoveryPoint = "RetrieveTapeRecoveryPoint"
 type RetrieveTapeRecoveryPointRequest struct {
 	*aws.Request
 	Input *RetrieveTapeRecoveryPointInput
+	Copy  func(*RetrieveTapeRecoveryPointInput) RetrieveTapeRecoveryPointRequest
 }
 
 // Send marshals and sends the RetrieveTapeRecoveryPoint API request.
@@ -3233,7 +3261,7 @@ func (c *StorageGateway) RetrieveTapeRecoveryPointRequest(input *RetrieveTapeRec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RetrieveTapeRecoveryPointRequest{Request: req, Input: input}
+	return RetrieveTapeRecoveryPointRequest{Request: req, Input: input, Copy: c.RetrieveTapeRecoveryPointRequest}
 }
 
 const opSetLocalConsolePassword = "SetLocalConsolePassword"
@@ -3242,6 +3270,7 @@ const opSetLocalConsolePassword = "SetLocalConsolePassword"
 type SetLocalConsolePasswordRequest struct {
 	*aws.Request
 	Input *SetLocalConsolePasswordInput
+	Copy  func(*SetLocalConsolePasswordInput) SetLocalConsolePasswordRequest
 }
 
 // Send marshals and sends the SetLocalConsolePassword API request.
@@ -3285,7 +3314,7 @@ func (c *StorageGateway) SetLocalConsolePasswordRequest(input *SetLocalConsolePa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetLocalConsolePasswordRequest{Request: req, Input: input}
+	return SetLocalConsolePasswordRequest{Request: req, Input: input, Copy: c.SetLocalConsolePasswordRequest}
 }
 
 const opShutdownGateway = "ShutdownGateway"
@@ -3294,6 +3323,7 @@ const opShutdownGateway = "ShutdownGateway"
 type ShutdownGatewayRequest struct {
 	*aws.Request
 	Input *ShutdownGatewayInput
+	Copy  func(*ShutdownGatewayInput) ShutdownGatewayRequest
 }
 
 // Send marshals and sends the ShutdownGateway API request.
@@ -3354,7 +3384,7 @@ func (c *StorageGateway) ShutdownGatewayRequest(input *ShutdownGatewayInput) Shu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ShutdownGatewayRequest{Request: req, Input: input}
+	return ShutdownGatewayRequest{Request: req, Input: input, Copy: c.ShutdownGatewayRequest}
 }
 
 const opStartGateway = "StartGateway"
@@ -3363,6 +3393,7 @@ const opStartGateway = "StartGateway"
 type StartGatewayRequest struct {
 	*aws.Request
 	Input *StartGatewayInput
+	Copy  func(*StartGatewayInput) StartGatewayRequest
 }
 
 // Send marshals and sends the StartGateway API request.
@@ -3414,7 +3445,7 @@ func (c *StorageGateway) StartGatewayRequest(input *StartGatewayInput) StartGate
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartGatewayRequest{Request: req, Input: input}
+	return StartGatewayRequest{Request: req, Input: input, Copy: c.StartGatewayRequest}
 }
 
 const opUpdateBandwidthRateLimit = "UpdateBandwidthRateLimit"
@@ -3423,6 +3454,7 @@ const opUpdateBandwidthRateLimit = "UpdateBandwidthRateLimit"
 type UpdateBandwidthRateLimitRequest struct {
 	*aws.Request
 	Input *UpdateBandwidthRateLimitInput
+	Copy  func(*UpdateBandwidthRateLimitInput) UpdateBandwidthRateLimitRequest
 }
 
 // Send marshals and sends the UpdateBandwidthRateLimit API request.
@@ -3472,7 +3504,7 @@ func (c *StorageGateway) UpdateBandwidthRateLimitRequest(input *UpdateBandwidthR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateBandwidthRateLimitRequest{Request: req, Input: input}
+	return UpdateBandwidthRateLimitRequest{Request: req, Input: input, Copy: c.UpdateBandwidthRateLimitRequest}
 }
 
 const opUpdateChapCredentials = "UpdateChapCredentials"
@@ -3481,6 +3513,7 @@ const opUpdateChapCredentials = "UpdateChapCredentials"
 type UpdateChapCredentialsRequest struct {
 	*aws.Request
 	Input *UpdateChapCredentialsInput
+	Copy  func(*UpdateChapCredentialsInput) UpdateChapCredentialsRequest
 }
 
 // Send marshals and sends the UpdateChapCredentials API request.
@@ -3526,7 +3559,7 @@ func (c *StorageGateway) UpdateChapCredentialsRequest(input *UpdateChapCredentia
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateChapCredentialsRequest{Request: req, Input: input}
+	return UpdateChapCredentialsRequest{Request: req, Input: input, Copy: c.UpdateChapCredentialsRequest}
 }
 
 const opUpdateGatewayInformation = "UpdateGatewayInformation"
@@ -3535,6 +3568,7 @@ const opUpdateGatewayInformation = "UpdateGatewayInformation"
 type UpdateGatewayInformationRequest struct {
 	*aws.Request
 	Input *UpdateGatewayInformationInput
+	Copy  func(*UpdateGatewayInformationInput) UpdateGatewayInformationRequest
 }
 
 // Send marshals and sends the UpdateGatewayInformation API request.
@@ -3581,7 +3615,7 @@ func (c *StorageGateway) UpdateGatewayInformationRequest(input *UpdateGatewayInf
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGatewayInformationRequest{Request: req, Input: input}
+	return UpdateGatewayInformationRequest{Request: req, Input: input, Copy: c.UpdateGatewayInformationRequest}
 }
 
 const opUpdateGatewaySoftwareNow = "UpdateGatewaySoftwareNow"
@@ -3590,6 +3624,7 @@ const opUpdateGatewaySoftwareNow = "UpdateGatewaySoftwareNow"
 type UpdateGatewaySoftwareNowRequest struct {
 	*aws.Request
 	Input *UpdateGatewaySoftwareNowInput
+	Copy  func(*UpdateGatewaySoftwareNowInput) UpdateGatewaySoftwareNowRequest
 }
 
 // Send marshals and sends the UpdateGatewaySoftwareNow API request.
@@ -3644,7 +3679,7 @@ func (c *StorageGateway) UpdateGatewaySoftwareNowRequest(input *UpdateGatewaySof
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGatewaySoftwareNowRequest{Request: req, Input: input}
+	return UpdateGatewaySoftwareNowRequest{Request: req, Input: input, Copy: c.UpdateGatewaySoftwareNowRequest}
 }
 
 const opUpdateMaintenanceStartTime = "UpdateMaintenanceStartTime"
@@ -3653,6 +3688,7 @@ const opUpdateMaintenanceStartTime = "UpdateMaintenanceStartTime"
 type UpdateMaintenanceStartTimeRequest struct {
 	*aws.Request
 	Input *UpdateMaintenanceStartTimeInput
+	Copy  func(*UpdateMaintenanceStartTimeInput) UpdateMaintenanceStartTimeRequest
 }
 
 // Send marshals and sends the UpdateMaintenanceStartTime API request.
@@ -3695,7 +3731,7 @@ func (c *StorageGateway) UpdateMaintenanceStartTimeRequest(input *UpdateMaintena
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateMaintenanceStartTimeRequest{Request: req, Input: input}
+	return UpdateMaintenanceStartTimeRequest{Request: req, Input: input, Copy: c.UpdateMaintenanceStartTimeRequest}
 }
 
 const opUpdateNFSFileShare = "UpdateNFSFileShare"
@@ -3704,6 +3740,7 @@ const opUpdateNFSFileShare = "UpdateNFSFileShare"
 type UpdateNFSFileShareRequest struct {
 	*aws.Request
 	Input *UpdateNFSFileShareInput
+	Copy  func(*UpdateNFSFileShareInput) UpdateNFSFileShareRequest
 }
 
 // Send marshals and sends the UpdateNFSFileShare API request.
@@ -3763,7 +3800,7 @@ func (c *StorageGateway) UpdateNFSFileShareRequest(input *UpdateNFSFileShareInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateNFSFileShareRequest{Request: req, Input: input}
+	return UpdateNFSFileShareRequest{Request: req, Input: input, Copy: c.UpdateNFSFileShareRequest}
 }
 
 const opUpdateSnapshotSchedule = "UpdateSnapshotSchedule"
@@ -3772,6 +3809,7 @@ const opUpdateSnapshotSchedule = "UpdateSnapshotSchedule"
 type UpdateSnapshotScheduleRequest struct {
 	*aws.Request
 	Input *UpdateSnapshotScheduleInput
+	Copy  func(*UpdateSnapshotScheduleInput) UpdateSnapshotScheduleRequest
 }
 
 // Send marshals and sends the UpdateSnapshotSchedule API request.
@@ -3821,7 +3859,7 @@ func (c *StorageGateway) UpdateSnapshotScheduleRequest(input *UpdateSnapshotSche
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSnapshotScheduleRequest{Request: req, Input: input}
+	return UpdateSnapshotScheduleRequest{Request: req, Input: input, Copy: c.UpdateSnapshotScheduleRequest}
 }
 
 const opUpdateVTLDeviceType = "UpdateVTLDeviceType"
@@ -3830,6 +3868,7 @@ const opUpdateVTLDeviceType = "UpdateVTLDeviceType"
 type UpdateVTLDeviceTypeRequest struct {
 	*aws.Request
 	Input *UpdateVTLDeviceTypeInput
+	Copy  func(*UpdateVTLDeviceTypeInput) UpdateVTLDeviceTypeRequest
 }
 
 // Send marshals and sends the UpdateVTLDeviceType API request.
@@ -3874,7 +3913,7 @@ func (c *StorageGateway) UpdateVTLDeviceTypeRequest(input *UpdateVTLDeviceTypeIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateVTLDeviceTypeRequest{Request: req, Input: input}
+	return UpdateVTLDeviceTypeRequest{Request: req, Input: input, Copy: c.UpdateVTLDeviceTypeRequest}
 }
 
 // A JSON object containing one or more of the following fields:

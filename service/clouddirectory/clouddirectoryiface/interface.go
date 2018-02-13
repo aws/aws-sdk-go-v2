@@ -9,7 +9,6 @@
 package clouddirectoryiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory"
 )
 
@@ -127,97 +126,43 @@ type CloudDirectoryAPI interface {
 
 	ListAppliedSchemaArnsRequest(*clouddirectory.ListAppliedSchemaArnsInput) clouddirectory.ListAppliedSchemaArnsRequest
 
-	ListAppliedSchemaArnsPages(*clouddirectory.ListAppliedSchemaArnsInput, func(*clouddirectory.ListAppliedSchemaArnsOutput, bool) bool) error
-	ListAppliedSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListAppliedSchemaArnsInput, func(*clouddirectory.ListAppliedSchemaArnsOutput, bool) bool, ...aws.Option) error
-
 	ListAttachedIndicesRequest(*clouddirectory.ListAttachedIndicesInput) clouddirectory.ListAttachedIndicesRequest
-
-	ListAttachedIndicesPages(*clouddirectory.ListAttachedIndicesInput, func(*clouddirectory.ListAttachedIndicesOutput, bool) bool) error
-	ListAttachedIndicesPagesWithContext(aws.Context, *clouddirectory.ListAttachedIndicesInput, func(*clouddirectory.ListAttachedIndicesOutput, bool) bool, ...aws.Option) error
 
 	ListDevelopmentSchemaArnsRequest(*clouddirectory.ListDevelopmentSchemaArnsInput) clouddirectory.ListDevelopmentSchemaArnsRequest
 
-	ListDevelopmentSchemaArnsPages(*clouddirectory.ListDevelopmentSchemaArnsInput, func(*clouddirectory.ListDevelopmentSchemaArnsOutput, bool) bool) error
-	ListDevelopmentSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListDevelopmentSchemaArnsInput, func(*clouddirectory.ListDevelopmentSchemaArnsOutput, bool) bool, ...aws.Option) error
-
 	ListDirectoriesRequest(*clouddirectory.ListDirectoriesInput) clouddirectory.ListDirectoriesRequest
-
-	ListDirectoriesPages(*clouddirectory.ListDirectoriesInput, func(*clouddirectory.ListDirectoriesOutput, bool) bool) error
-	ListDirectoriesPagesWithContext(aws.Context, *clouddirectory.ListDirectoriesInput, func(*clouddirectory.ListDirectoriesOutput, bool) bool, ...aws.Option) error
 
 	ListFacetAttributesRequest(*clouddirectory.ListFacetAttributesInput) clouddirectory.ListFacetAttributesRequest
 
-	ListFacetAttributesPages(*clouddirectory.ListFacetAttributesInput, func(*clouddirectory.ListFacetAttributesOutput, bool) bool) error
-	ListFacetAttributesPagesWithContext(aws.Context, *clouddirectory.ListFacetAttributesInput, func(*clouddirectory.ListFacetAttributesOutput, bool) bool, ...aws.Option) error
-
 	ListFacetNamesRequest(*clouddirectory.ListFacetNamesInput) clouddirectory.ListFacetNamesRequest
-
-	ListFacetNamesPages(*clouddirectory.ListFacetNamesInput, func(*clouddirectory.ListFacetNamesOutput, bool) bool) error
-	ListFacetNamesPagesWithContext(aws.Context, *clouddirectory.ListFacetNamesInput, func(*clouddirectory.ListFacetNamesOutput, bool) bool, ...aws.Option) error
 
 	ListIncomingTypedLinksRequest(*clouddirectory.ListIncomingTypedLinksInput) clouddirectory.ListIncomingTypedLinksRequest
 
 	ListIndexRequest(*clouddirectory.ListIndexInput) clouddirectory.ListIndexRequest
 
-	ListIndexPages(*clouddirectory.ListIndexInput, func(*clouddirectory.ListIndexOutput, bool) bool) error
-	ListIndexPagesWithContext(aws.Context, *clouddirectory.ListIndexInput, func(*clouddirectory.ListIndexOutput, bool) bool, ...aws.Option) error
-
 	ListObjectAttributesRequest(*clouddirectory.ListObjectAttributesInput) clouddirectory.ListObjectAttributesRequest
-
-	ListObjectAttributesPages(*clouddirectory.ListObjectAttributesInput, func(*clouddirectory.ListObjectAttributesOutput, bool) bool) error
-	ListObjectAttributesPagesWithContext(aws.Context, *clouddirectory.ListObjectAttributesInput, func(*clouddirectory.ListObjectAttributesOutput, bool) bool, ...aws.Option) error
 
 	ListObjectChildrenRequest(*clouddirectory.ListObjectChildrenInput) clouddirectory.ListObjectChildrenRequest
 
-	ListObjectChildrenPages(*clouddirectory.ListObjectChildrenInput, func(*clouddirectory.ListObjectChildrenOutput, bool) bool) error
-	ListObjectChildrenPagesWithContext(aws.Context, *clouddirectory.ListObjectChildrenInput, func(*clouddirectory.ListObjectChildrenOutput, bool) bool, ...aws.Option) error
-
 	ListObjectParentPathsRequest(*clouddirectory.ListObjectParentPathsInput) clouddirectory.ListObjectParentPathsRequest
-
-	ListObjectParentPathsPages(*clouddirectory.ListObjectParentPathsInput, func(*clouddirectory.ListObjectParentPathsOutput, bool) bool) error
-	ListObjectParentPathsPagesWithContext(aws.Context, *clouddirectory.ListObjectParentPathsInput, func(*clouddirectory.ListObjectParentPathsOutput, bool) bool, ...aws.Option) error
 
 	ListObjectParentsRequest(*clouddirectory.ListObjectParentsInput) clouddirectory.ListObjectParentsRequest
 
-	ListObjectParentsPages(*clouddirectory.ListObjectParentsInput, func(*clouddirectory.ListObjectParentsOutput, bool) bool) error
-	ListObjectParentsPagesWithContext(aws.Context, *clouddirectory.ListObjectParentsInput, func(*clouddirectory.ListObjectParentsOutput, bool) bool, ...aws.Option) error
-
 	ListObjectPoliciesRequest(*clouddirectory.ListObjectPoliciesInput) clouddirectory.ListObjectPoliciesRequest
-
-	ListObjectPoliciesPages(*clouddirectory.ListObjectPoliciesInput, func(*clouddirectory.ListObjectPoliciesOutput, bool) bool) error
-	ListObjectPoliciesPagesWithContext(aws.Context, *clouddirectory.ListObjectPoliciesInput, func(*clouddirectory.ListObjectPoliciesOutput, bool) bool, ...aws.Option) error
 
 	ListOutgoingTypedLinksRequest(*clouddirectory.ListOutgoingTypedLinksInput) clouddirectory.ListOutgoingTypedLinksRequest
 
 	ListPolicyAttachmentsRequest(*clouddirectory.ListPolicyAttachmentsInput) clouddirectory.ListPolicyAttachmentsRequest
 
-	ListPolicyAttachmentsPages(*clouddirectory.ListPolicyAttachmentsInput, func(*clouddirectory.ListPolicyAttachmentsOutput, bool) bool) error
-	ListPolicyAttachmentsPagesWithContext(aws.Context, *clouddirectory.ListPolicyAttachmentsInput, func(*clouddirectory.ListPolicyAttachmentsOutput, bool) bool, ...aws.Option) error
-
 	ListPublishedSchemaArnsRequest(*clouddirectory.ListPublishedSchemaArnsInput) clouddirectory.ListPublishedSchemaArnsRequest
-
-	ListPublishedSchemaArnsPages(*clouddirectory.ListPublishedSchemaArnsInput, func(*clouddirectory.ListPublishedSchemaArnsOutput, bool) bool) error
-	ListPublishedSchemaArnsPagesWithContext(aws.Context, *clouddirectory.ListPublishedSchemaArnsInput, func(*clouddirectory.ListPublishedSchemaArnsOutput, bool) bool, ...aws.Option) error
 
 	ListTagsForResourceRequest(*clouddirectory.ListTagsForResourceInput) clouddirectory.ListTagsForResourceRequest
 
-	ListTagsForResourcePages(*clouddirectory.ListTagsForResourceInput, func(*clouddirectory.ListTagsForResourceOutput, bool) bool) error
-	ListTagsForResourcePagesWithContext(aws.Context, *clouddirectory.ListTagsForResourceInput, func(*clouddirectory.ListTagsForResourceOutput, bool) bool, ...aws.Option) error
-
 	ListTypedLinkFacetAttributesRequest(*clouddirectory.ListTypedLinkFacetAttributesInput) clouddirectory.ListTypedLinkFacetAttributesRequest
-
-	ListTypedLinkFacetAttributesPages(*clouddirectory.ListTypedLinkFacetAttributesInput, func(*clouddirectory.ListTypedLinkFacetAttributesOutput, bool) bool) error
-	ListTypedLinkFacetAttributesPagesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetAttributesInput, func(*clouddirectory.ListTypedLinkFacetAttributesOutput, bool) bool, ...aws.Option) error
 
 	ListTypedLinkFacetNamesRequest(*clouddirectory.ListTypedLinkFacetNamesInput) clouddirectory.ListTypedLinkFacetNamesRequest
 
-	ListTypedLinkFacetNamesPages(*clouddirectory.ListTypedLinkFacetNamesInput, func(*clouddirectory.ListTypedLinkFacetNamesOutput, bool) bool) error
-	ListTypedLinkFacetNamesPagesWithContext(aws.Context, *clouddirectory.ListTypedLinkFacetNamesInput, func(*clouddirectory.ListTypedLinkFacetNamesOutput, bool) bool, ...aws.Option) error
-
 	LookupPolicyRequest(*clouddirectory.LookupPolicyInput) clouddirectory.LookupPolicyRequest
-
-	LookupPolicyPages(*clouddirectory.LookupPolicyInput, func(*clouddirectory.LookupPolicyOutput, bool) bool) error
-	LookupPolicyPagesWithContext(aws.Context, *clouddirectory.LookupPolicyInput, func(*clouddirectory.LookupPolicyOutput, bool) bool, ...aws.Option) error
 
 	PublishSchemaRequest(*clouddirectory.PublishSchemaInput) clouddirectory.PublishSchemaRequest
 

@@ -13,6 +13,7 @@ const opAddAttachmentsToSet = "AddAttachmentsToSet"
 type AddAttachmentsToSetRequest struct {
 	*aws.Request
 	Input *AddAttachmentsToSetInput
+	Copy  func(*AddAttachmentsToSetInput) AddAttachmentsToSetRequest
 }
 
 // Send marshals and sends the AddAttachmentsToSet API request.
@@ -62,7 +63,7 @@ func (c *Support) AddAttachmentsToSetRequest(input *AddAttachmentsToSetInput) Ad
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddAttachmentsToSetRequest{Request: req, Input: input}
+	return AddAttachmentsToSetRequest{Request: req, Input: input, Copy: c.AddAttachmentsToSetRequest}
 }
 
 const opAddCommunicationToCase = "AddCommunicationToCase"
@@ -71,6 +72,7 @@ const opAddCommunicationToCase = "AddCommunicationToCase"
 type AddCommunicationToCaseRequest struct {
 	*aws.Request
 	Input *AddCommunicationToCaseInput
+	Copy  func(*AddCommunicationToCaseInput) AddCommunicationToCaseRequest
 }
 
 // Send marshals and sends the AddCommunicationToCase API request.
@@ -118,7 +120,7 @@ func (c *Support) AddCommunicationToCaseRequest(input *AddCommunicationToCaseInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddCommunicationToCaseRequest{Request: req, Input: input}
+	return AddCommunicationToCaseRequest{Request: req, Input: input, Copy: c.AddCommunicationToCaseRequest}
 }
 
 const opCreateCase = "CreateCase"
@@ -127,6 +129,7 @@ const opCreateCase = "CreateCase"
 type CreateCaseRequest struct {
 	*aws.Request
 	Input *CreateCaseInput
+	Copy  func(*CreateCaseInput) CreateCaseRequest
 }
 
 // Send marshals and sends the CreateCase API request.
@@ -210,7 +213,7 @@ func (c *Support) CreateCaseRequest(input *CreateCaseInput) CreateCaseRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCaseRequest{Request: req, Input: input}
+	return CreateCaseRequest{Request: req, Input: input, Copy: c.CreateCaseRequest}
 }
 
 const opDescribeAttachment = "DescribeAttachment"
@@ -219,6 +222,7 @@ const opDescribeAttachment = "DescribeAttachment"
 type DescribeAttachmentRequest struct {
 	*aws.Request
 	Input *DescribeAttachmentInput
+	Copy  func(*DescribeAttachmentInput) DescribeAttachmentRequest
 }
 
 // Send marshals and sends the DescribeAttachment API request.
@@ -262,7 +266,7 @@ func (c *Support) DescribeAttachmentRequest(input *DescribeAttachmentInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAttachmentRequest{Request: req, Input: input}
+	return DescribeAttachmentRequest{Request: req, Input: input, Copy: c.DescribeAttachmentRequest}
 }
 
 const opDescribeCases = "DescribeCases"
@@ -271,6 +275,7 @@ const opDescribeCases = "DescribeCases"
 type DescribeCasesRequest struct {
 	*aws.Request
 	Input *DescribeCasesInput
+	Copy  func(*DescribeCasesInput) DescribeCasesRequest
 }
 
 // Send marshals and sends the DescribeCases API request.
@@ -331,57 +336,53 @@ func (c *Support) DescribeCasesRequest(input *DescribeCasesInput) DescribeCasesR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCasesRequest{Request: req, Input: input}
+	return DescribeCasesRequest{Request: req, Input: input, Copy: c.DescribeCasesRequest}
 }
 
-// DescribeCasesPages iterates over the pages of a DescribeCases operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeCases method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeCasesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeCases operation.
-//    pageNum := 0
-//    err := client.DescribeCasesPages(params,
-//        func(page *DescribeCasesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeCasesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Support) DescribeCasesPages(input *DescribeCasesInput, fn func(*DescribeCasesOutput, bool) bool) error {
-	return c.DescribeCasesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeCasesRequest) Paginate(opts ...aws.Option) DescribeCasesPager {
+	return DescribeCasesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeCasesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeCasesPagesWithContext same as DescribeCasesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeCasesPagesWithContext(ctx aws.Context, input *DescribeCasesInput, fn func(*DescribeCasesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeCasesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeCasesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCasesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCasesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeCasesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCasesPager) CurrentPage() *DescribeCasesOutput {
+	return p.Pager.CurrentPage().(*DescribeCasesOutput)
 }
 
 const opDescribeCommunications = "DescribeCommunications"
@@ -390,6 +391,7 @@ const opDescribeCommunications = "DescribeCommunications"
 type DescribeCommunicationsRequest struct {
 	*aws.Request
 	Input *DescribeCommunicationsInput
+	Copy  func(*DescribeCommunicationsInput) DescribeCommunicationsRequest
 }
 
 // Send marshals and sends the DescribeCommunications API request.
@@ -445,57 +447,53 @@ func (c *Support) DescribeCommunicationsRequest(input *DescribeCommunicationsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCommunicationsRequest{Request: req, Input: input}
+	return DescribeCommunicationsRequest{Request: req, Input: input, Copy: c.DescribeCommunicationsRequest}
 }
 
-// DescribeCommunicationsPages iterates over the pages of a DescribeCommunications operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeCommunications method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeCommunicationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeCommunications operation.
-//    pageNum := 0
-//    err := client.DescribeCommunicationsPages(params,
-//        func(page *DescribeCommunicationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeCommunicationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Support) DescribeCommunicationsPages(input *DescribeCommunicationsInput, fn func(*DescribeCommunicationsOutput, bool) bool) error {
-	return c.DescribeCommunicationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeCommunicationsRequest) Paginate(opts ...aws.Option) DescribeCommunicationsPager {
+	return DescribeCommunicationsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeCommunicationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeCommunicationsPagesWithContext same as DescribeCommunicationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Support) DescribeCommunicationsPagesWithContext(ctx aws.Context, input *DescribeCommunicationsInput, fn func(*DescribeCommunicationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeCommunicationsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeCommunicationsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCommunicationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCommunicationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeCommunicationsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCommunicationsPager) CurrentPage() *DescribeCommunicationsOutput {
+	return p.Pager.CurrentPage().(*DescribeCommunicationsOutput)
 }
 
 const opDescribeServices = "DescribeServices"
@@ -504,6 +502,7 @@ const opDescribeServices = "DescribeServices"
 type DescribeServicesRequest struct {
 	*aws.Request
 	Input *DescribeServicesInput
+	Copy  func(*DescribeServicesInput) DescribeServicesRequest
 }
 
 // Send marshals and sends the DescribeServices API request.
@@ -554,7 +553,7 @@ func (c *Support) DescribeServicesRequest(input *DescribeServicesInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeServicesRequest{Request: req, Input: input}
+	return DescribeServicesRequest{Request: req, Input: input, Copy: c.DescribeServicesRequest}
 }
 
 const opDescribeSeverityLevels = "DescribeSeverityLevels"
@@ -563,6 +562,7 @@ const opDescribeSeverityLevels = "DescribeSeverityLevels"
 type DescribeSeverityLevelsRequest struct {
 	*aws.Request
 	Input *DescribeSeverityLevelsInput
+	Copy  func(*DescribeSeverityLevelsInput) DescribeSeverityLevelsRequest
 }
 
 // Send marshals and sends the DescribeSeverityLevels API request.
@@ -605,7 +605,7 @@ func (c *Support) DescribeSeverityLevelsRequest(input *DescribeSeverityLevelsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSeverityLevelsRequest{Request: req, Input: input}
+	return DescribeSeverityLevelsRequest{Request: req, Input: input, Copy: c.DescribeSeverityLevelsRequest}
 }
 
 const opDescribeTrustedAdvisorCheckRefreshStatuses = "DescribeTrustedAdvisorCheckRefreshStatuses"
@@ -614,6 +614,7 @@ const opDescribeTrustedAdvisorCheckRefreshStatuses = "DescribeTrustedAdvisorChec
 type DescribeTrustedAdvisorCheckRefreshStatusesRequest struct {
 	*aws.Request
 	Input *DescribeTrustedAdvisorCheckRefreshStatusesInput
+	Copy  func(*DescribeTrustedAdvisorCheckRefreshStatusesInput) DescribeTrustedAdvisorCheckRefreshStatusesRequest
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckRefreshStatuses API request.
@@ -659,7 +660,7 @@ func (c *Support) DescribeTrustedAdvisorCheckRefreshStatusesRequest(input *Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTrustedAdvisorCheckRefreshStatusesRequest{Request: req, Input: input}
+	return DescribeTrustedAdvisorCheckRefreshStatusesRequest{Request: req, Input: input, Copy: c.DescribeTrustedAdvisorCheckRefreshStatusesRequest}
 }
 
 const opDescribeTrustedAdvisorCheckResult = "DescribeTrustedAdvisorCheckResult"
@@ -668,6 +669,7 @@ const opDescribeTrustedAdvisorCheckResult = "DescribeTrustedAdvisorCheckResult"
 type DescribeTrustedAdvisorCheckResultRequest struct {
 	*aws.Request
 	Input *DescribeTrustedAdvisorCheckResultInput
+	Copy  func(*DescribeTrustedAdvisorCheckResultInput) DescribeTrustedAdvisorCheckResultRequest
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckResult API request.
@@ -727,7 +729,7 @@ func (c *Support) DescribeTrustedAdvisorCheckResultRequest(input *DescribeTruste
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTrustedAdvisorCheckResultRequest{Request: req, Input: input}
+	return DescribeTrustedAdvisorCheckResultRequest{Request: req, Input: input, Copy: c.DescribeTrustedAdvisorCheckResultRequest}
 }
 
 const opDescribeTrustedAdvisorCheckSummaries = "DescribeTrustedAdvisorCheckSummaries"
@@ -736,6 +738,7 @@ const opDescribeTrustedAdvisorCheckSummaries = "DescribeTrustedAdvisorCheckSumma
 type DescribeTrustedAdvisorCheckSummariesRequest struct {
 	*aws.Request
 	Input *DescribeTrustedAdvisorCheckSummariesInput
+	Copy  func(*DescribeTrustedAdvisorCheckSummariesInput) DescribeTrustedAdvisorCheckSummariesRequest
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorCheckSummaries API request.
@@ -779,7 +782,7 @@ func (c *Support) DescribeTrustedAdvisorCheckSummariesRequest(input *DescribeTru
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTrustedAdvisorCheckSummariesRequest{Request: req, Input: input}
+	return DescribeTrustedAdvisorCheckSummariesRequest{Request: req, Input: input, Copy: c.DescribeTrustedAdvisorCheckSummariesRequest}
 }
 
 const opDescribeTrustedAdvisorChecks = "DescribeTrustedAdvisorChecks"
@@ -788,6 +791,7 @@ const opDescribeTrustedAdvisorChecks = "DescribeTrustedAdvisorChecks"
 type DescribeTrustedAdvisorChecksRequest struct {
 	*aws.Request
 	Input *DescribeTrustedAdvisorChecksInput
+	Copy  func(*DescribeTrustedAdvisorChecksInput) DescribeTrustedAdvisorChecksRequest
 }
 
 // Send marshals and sends the DescribeTrustedAdvisorChecks API request.
@@ -831,7 +835,7 @@ func (c *Support) DescribeTrustedAdvisorChecksRequest(input *DescribeTrustedAdvi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTrustedAdvisorChecksRequest{Request: req, Input: input}
+	return DescribeTrustedAdvisorChecksRequest{Request: req, Input: input, Copy: c.DescribeTrustedAdvisorChecksRequest}
 }
 
 const opRefreshTrustedAdvisorCheck = "RefreshTrustedAdvisorCheck"
@@ -840,6 +844,7 @@ const opRefreshTrustedAdvisorCheck = "RefreshTrustedAdvisorCheck"
 type RefreshTrustedAdvisorCheckRequest struct {
 	*aws.Request
 	Input *RefreshTrustedAdvisorCheckInput
+	Copy  func(*RefreshTrustedAdvisorCheckInput) RefreshTrustedAdvisorCheckRequest
 }
 
 // Send marshals and sends the RefreshTrustedAdvisorCheck API request.
@@ -896,7 +901,7 @@ func (c *Support) RefreshTrustedAdvisorCheckRequest(input *RefreshTrustedAdvisor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RefreshTrustedAdvisorCheckRequest{Request: req, Input: input}
+	return RefreshTrustedAdvisorCheckRequest{Request: req, Input: input, Copy: c.RefreshTrustedAdvisorCheckRequest}
 }
 
 const opResolveCase = "ResolveCase"
@@ -905,6 +910,7 @@ const opResolveCase = "ResolveCase"
 type ResolveCaseRequest struct {
 	*aws.Request
 	Input *ResolveCaseInput
+	Copy  func(*ResolveCaseInput) ResolveCaseRequest
 }
 
 // Send marshals and sends the ResolveCase API request.
@@ -946,7 +952,7 @@ func (c *Support) ResolveCaseRequest(input *ResolveCaseInput) ResolveCaseRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResolveCaseRequest{Request: req, Input: input}
+	return ResolveCaseRequest{Request: req, Input: input, Copy: c.ResolveCaseRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/support-2013-04-15/AddAttachmentsToSetRequest

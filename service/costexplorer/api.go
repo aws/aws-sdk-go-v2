@@ -13,6 +13,7 @@ const opGetCostAndUsage = "GetCostAndUsage"
 type GetCostAndUsageRequest struct {
 	*aws.Request
 	Input *GetCostAndUsageInput
+	Copy  func(*GetCostAndUsageInput) GetCostAndUsageRequest
 }
 
 // Send marshals and sends the GetCostAndUsage API request.
@@ -58,7 +59,7 @@ func (c *CostExplorer) GetCostAndUsageRequest(input *GetCostAndUsageInput) GetCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCostAndUsageRequest{Request: req, Input: input}
+	return GetCostAndUsageRequest{Request: req, Input: input, Copy: c.GetCostAndUsageRequest}
 }
 
 const opGetDimensionValues = "GetDimensionValues"
@@ -67,6 +68,7 @@ const opGetDimensionValues = "GetDimensionValues"
 type GetDimensionValuesRequest struct {
 	*aws.Request
 	Input *GetDimensionValuesInput
+	Copy  func(*GetDimensionValuesInput) GetDimensionValuesRequest
 }
 
 // Send marshals and sends the GetDimensionValues API request.
@@ -109,7 +111,7 @@ func (c *CostExplorer) GetDimensionValuesRequest(input *GetDimensionValuesInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDimensionValuesRequest{Request: req, Input: input}
+	return GetDimensionValuesRequest{Request: req, Input: input, Copy: c.GetDimensionValuesRequest}
 }
 
 const opGetReservationUtilization = "GetReservationUtilization"
@@ -118,6 +120,7 @@ const opGetReservationUtilization = "GetReservationUtilization"
 type GetReservationUtilizationRequest struct {
 	*aws.Request
 	Input *GetReservationUtilizationInput
+	Copy  func(*GetReservationUtilizationInput) GetReservationUtilizationRequest
 }
 
 // Send marshals and sends the GetReservationUtilization API request.
@@ -162,7 +165,7 @@ func (c *CostExplorer) GetReservationUtilizationRequest(input *GetReservationUti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetReservationUtilizationRequest{Request: req, Input: input}
+	return GetReservationUtilizationRequest{Request: req, Input: input, Copy: c.GetReservationUtilizationRequest}
 }
 
 const opGetTags = "GetTags"
@@ -171,6 +174,7 @@ const opGetTags = "GetTags"
 type GetTagsRequest struct {
 	*aws.Request
 	Input *GetTagsInput
+	Copy  func(*GetTagsInput) GetTagsRequest
 }
 
 // Send marshals and sends the GetTags API request.
@@ -212,7 +216,7 @@ func (c *CostExplorer) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTagsRequest{Request: req, Input: input}
+	return GetTagsRequest{Request: req, Input: input, Copy: c.GetTagsRequest}
 }
 
 // The time period that you want the usage and costs for.

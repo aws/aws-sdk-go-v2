@@ -18,6 +18,7 @@ const opDeleteConfigRule = "DeleteConfigRule"
 type DeleteConfigRuleRequest struct {
 	*aws.Request
 	Input *DeleteConfigRuleInput
+	Copy  func(*DeleteConfigRuleInput) DeleteConfigRuleRequest
 }
 
 // Send marshals and sends the DeleteConfigRule API request.
@@ -66,7 +67,7 @@ func (c *ConfigService) DeleteConfigRuleRequest(input *DeleteConfigRuleInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteConfigRuleRequest{Request: req, Input: input}
+	return DeleteConfigRuleRequest{Request: req, Input: input, Copy: c.DeleteConfigRuleRequest}
 }
 
 const opDeleteConfigurationRecorder = "DeleteConfigurationRecorder"
@@ -75,6 +76,7 @@ const opDeleteConfigurationRecorder = "DeleteConfigurationRecorder"
 type DeleteConfigurationRecorderRequest struct {
 	*aws.Request
 	Input *DeleteConfigurationRecorderInput
+	Copy  func(*DeleteConfigurationRecorderInput) DeleteConfigurationRecorderRequest
 }
 
 // Send marshals and sends the DeleteConfigurationRecorder API request.
@@ -126,7 +128,7 @@ func (c *ConfigService) DeleteConfigurationRecorderRequest(input *DeleteConfigur
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteConfigurationRecorderRequest{Request: req, Input: input}
+	return DeleteConfigurationRecorderRequest{Request: req, Input: input, Copy: c.DeleteConfigurationRecorderRequest}
 }
 
 const opDeleteDeliveryChannel = "DeleteDeliveryChannel"
@@ -135,6 +137,7 @@ const opDeleteDeliveryChannel = "DeleteDeliveryChannel"
 type DeleteDeliveryChannelRequest struct {
 	*aws.Request
 	Input *DeleteDeliveryChannelInput
+	Copy  func(*DeleteDeliveryChannelInput) DeleteDeliveryChannelRequest
 }
 
 // Send marshals and sends the DeleteDeliveryChannel API request.
@@ -180,7 +183,7 @@ func (c *ConfigService) DeleteDeliveryChannelRequest(input *DeleteDeliveryChanne
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDeliveryChannelRequest{Request: req, Input: input}
+	return DeleteDeliveryChannelRequest{Request: req, Input: input, Copy: c.DeleteDeliveryChannelRequest}
 }
 
 const opDeleteEvaluationResults = "DeleteEvaluationResults"
@@ -189,6 +192,7 @@ const opDeleteEvaluationResults = "DeleteEvaluationResults"
 type DeleteEvaluationResultsRequest struct {
 	*aws.Request
 	Input *DeleteEvaluationResultsInput
+	Copy  func(*DeleteEvaluationResultsInput) DeleteEvaluationResultsRequest
 }
 
 // Send marshals and sends the DeleteEvaluationResults API request.
@@ -232,7 +236,7 @@ func (c *ConfigService) DeleteEvaluationResultsRequest(input *DeleteEvaluationRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEvaluationResultsRequest{Request: req, Input: input}
+	return DeleteEvaluationResultsRequest{Request: req, Input: input, Copy: c.DeleteEvaluationResultsRequest}
 }
 
 const opDeliverConfigSnapshot = "DeliverConfigSnapshot"
@@ -241,6 +245,7 @@ const opDeliverConfigSnapshot = "DeliverConfigSnapshot"
 type DeliverConfigSnapshotRequest struct {
 	*aws.Request
 	Input *DeliverConfigSnapshotInput
+	Copy  func(*DeliverConfigSnapshotInput) DeliverConfigSnapshotRequest
 }
 
 // Send marshals and sends the DeliverConfigSnapshot API request.
@@ -290,7 +295,7 @@ func (c *ConfigService) DeliverConfigSnapshotRequest(input *DeliverConfigSnapsho
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeliverConfigSnapshotRequest{Request: req, Input: input}
+	return DeliverConfigSnapshotRequest{Request: req, Input: input, Copy: c.DeliverConfigSnapshotRequest}
 }
 
 const opDescribeComplianceByConfigRule = "DescribeComplianceByConfigRule"
@@ -299,6 +304,7 @@ const opDescribeComplianceByConfigRule = "DescribeComplianceByConfigRule"
 type DescribeComplianceByConfigRuleRequest struct {
 	*aws.Request
 	Input *DescribeComplianceByConfigRuleInput
+	Copy  func(*DescribeComplianceByConfigRuleInput) DescribeComplianceByConfigRuleRequest
 }
 
 // Send marshals and sends the DescribeComplianceByConfigRule API request.
@@ -361,7 +367,7 @@ func (c *ConfigService) DescribeComplianceByConfigRuleRequest(input *DescribeCom
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeComplianceByConfigRuleRequest{Request: req, Input: input}
+	return DescribeComplianceByConfigRuleRequest{Request: req, Input: input, Copy: c.DescribeComplianceByConfigRuleRequest}
 }
 
 const opDescribeComplianceByResource = "DescribeComplianceByResource"
@@ -370,6 +376,7 @@ const opDescribeComplianceByResource = "DescribeComplianceByResource"
 type DescribeComplianceByResourceRequest struct {
 	*aws.Request
 	Input *DescribeComplianceByResourceInput
+	Copy  func(*DescribeComplianceByResourceInput) DescribeComplianceByResourceRequest
 }
 
 // Send marshals and sends the DescribeComplianceByResource API request.
@@ -434,7 +441,7 @@ func (c *ConfigService) DescribeComplianceByResourceRequest(input *DescribeCompl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeComplianceByResourceRequest{Request: req, Input: input}
+	return DescribeComplianceByResourceRequest{Request: req, Input: input, Copy: c.DescribeComplianceByResourceRequest}
 }
 
 const opDescribeConfigRuleEvaluationStatus = "DescribeConfigRuleEvaluationStatus"
@@ -443,6 +450,7 @@ const opDescribeConfigRuleEvaluationStatus = "DescribeConfigRuleEvaluationStatus
 type DescribeConfigRuleEvaluationStatusRequest struct {
 	*aws.Request
 	Input *DescribeConfigRuleEvaluationStatusInput
+	Copy  func(*DescribeConfigRuleEvaluationStatusInput) DescribeConfigRuleEvaluationStatusRequest
 }
 
 // Send marshals and sends the DescribeConfigRuleEvaluationStatus API request.
@@ -486,7 +494,7 @@ func (c *ConfigService) DescribeConfigRuleEvaluationStatusRequest(input *Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConfigRuleEvaluationStatusRequest{Request: req, Input: input}
+	return DescribeConfigRuleEvaluationStatusRequest{Request: req, Input: input, Copy: c.DescribeConfigRuleEvaluationStatusRequest}
 }
 
 const opDescribeConfigRules = "DescribeConfigRules"
@@ -495,6 +503,7 @@ const opDescribeConfigRules = "DescribeConfigRules"
 type DescribeConfigRulesRequest struct {
 	*aws.Request
 	Input *DescribeConfigRulesInput
+	Copy  func(*DescribeConfigRulesInput) DescribeConfigRulesRequest
 }
 
 // Send marshals and sends the DescribeConfigRules API request.
@@ -535,7 +544,7 @@ func (c *ConfigService) DescribeConfigRulesRequest(input *DescribeConfigRulesInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConfigRulesRequest{Request: req, Input: input}
+	return DescribeConfigRulesRequest{Request: req, Input: input, Copy: c.DescribeConfigRulesRequest}
 }
 
 const opDescribeConfigurationRecorderStatus = "DescribeConfigurationRecorderStatus"
@@ -544,6 +553,7 @@ const opDescribeConfigurationRecorderStatus = "DescribeConfigurationRecorderStat
 type DescribeConfigurationRecorderStatusRequest struct {
 	*aws.Request
 	Input *DescribeConfigurationRecorderStatusInput
+	Copy  func(*DescribeConfigurationRecorderStatusInput) DescribeConfigurationRecorderStatusRequest
 }
 
 // Send marshals and sends the DescribeConfigurationRecorderStatus API request.
@@ -589,7 +599,7 @@ func (c *ConfigService) DescribeConfigurationRecorderStatusRequest(input *Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConfigurationRecorderStatusRequest{Request: req, Input: input}
+	return DescribeConfigurationRecorderStatusRequest{Request: req, Input: input, Copy: c.DescribeConfigurationRecorderStatusRequest}
 }
 
 const opDescribeConfigurationRecorders = "DescribeConfigurationRecorders"
@@ -598,6 +608,7 @@ const opDescribeConfigurationRecorders = "DescribeConfigurationRecorders"
 type DescribeConfigurationRecordersRequest struct {
 	*aws.Request
 	Input *DescribeConfigurationRecordersInput
+	Copy  func(*DescribeConfigurationRecordersInput) DescribeConfigurationRecordersRequest
 }
 
 // Send marshals and sends the DescribeConfigurationRecorders API request.
@@ -643,7 +654,7 @@ func (c *ConfigService) DescribeConfigurationRecordersRequest(input *DescribeCon
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConfigurationRecordersRequest{Request: req, Input: input}
+	return DescribeConfigurationRecordersRequest{Request: req, Input: input, Copy: c.DescribeConfigurationRecordersRequest}
 }
 
 const opDescribeDeliveryChannelStatus = "DescribeDeliveryChannelStatus"
@@ -652,6 +663,7 @@ const opDescribeDeliveryChannelStatus = "DescribeDeliveryChannelStatus"
 type DescribeDeliveryChannelStatusRequest struct {
 	*aws.Request
 	Input *DescribeDeliveryChannelStatusInput
+	Copy  func(*DescribeDeliveryChannelStatusInput) DescribeDeliveryChannelStatusRequest
 }
 
 // Send marshals and sends the DescribeDeliveryChannelStatus API request.
@@ -696,7 +708,7 @@ func (c *ConfigService) DescribeDeliveryChannelStatusRequest(input *DescribeDeli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDeliveryChannelStatusRequest{Request: req, Input: input}
+	return DescribeDeliveryChannelStatusRequest{Request: req, Input: input, Copy: c.DescribeDeliveryChannelStatusRequest}
 }
 
 const opDescribeDeliveryChannels = "DescribeDeliveryChannels"
@@ -705,6 +717,7 @@ const opDescribeDeliveryChannels = "DescribeDeliveryChannels"
 type DescribeDeliveryChannelsRequest struct {
 	*aws.Request
 	Input *DescribeDeliveryChannelsInput
+	Copy  func(*DescribeDeliveryChannelsInput) DescribeDeliveryChannelsRequest
 }
 
 // Send marshals and sends the DescribeDeliveryChannels API request.
@@ -749,7 +762,7 @@ func (c *ConfigService) DescribeDeliveryChannelsRequest(input *DescribeDeliveryC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDeliveryChannelsRequest{Request: req, Input: input}
+	return DescribeDeliveryChannelsRequest{Request: req, Input: input, Copy: c.DescribeDeliveryChannelsRequest}
 }
 
 const opGetComplianceDetailsByConfigRule = "GetComplianceDetailsByConfigRule"
@@ -758,6 +771,7 @@ const opGetComplianceDetailsByConfigRule = "GetComplianceDetailsByConfigRule"
 type GetComplianceDetailsByConfigRuleRequest struct {
 	*aws.Request
 	Input *GetComplianceDetailsByConfigRuleInput
+	Copy  func(*GetComplianceDetailsByConfigRuleInput) GetComplianceDetailsByConfigRuleRequest
 }
 
 // Send marshals and sends the GetComplianceDetailsByConfigRule API request.
@@ -800,7 +814,7 @@ func (c *ConfigService) GetComplianceDetailsByConfigRuleRequest(input *GetCompli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetComplianceDetailsByConfigRuleRequest{Request: req, Input: input}
+	return GetComplianceDetailsByConfigRuleRequest{Request: req, Input: input, Copy: c.GetComplianceDetailsByConfigRuleRequest}
 }
 
 const opGetComplianceDetailsByResource = "GetComplianceDetailsByResource"
@@ -809,6 +823,7 @@ const opGetComplianceDetailsByResource = "GetComplianceDetailsByResource"
 type GetComplianceDetailsByResourceRequest struct {
 	*aws.Request
 	Input *GetComplianceDetailsByResourceInput
+	Copy  func(*GetComplianceDetailsByResourceInput) GetComplianceDetailsByResourceRequest
 }
 
 // Send marshals and sends the GetComplianceDetailsByResource API request.
@@ -851,7 +866,7 @@ func (c *ConfigService) GetComplianceDetailsByResourceRequest(input *GetComplian
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetComplianceDetailsByResourceRequest{Request: req, Input: input}
+	return GetComplianceDetailsByResourceRequest{Request: req, Input: input, Copy: c.GetComplianceDetailsByResourceRequest}
 }
 
 const opGetComplianceSummaryByConfigRule = "GetComplianceSummaryByConfigRule"
@@ -860,6 +875,7 @@ const opGetComplianceSummaryByConfigRule = "GetComplianceSummaryByConfigRule"
 type GetComplianceSummaryByConfigRuleRequest struct {
 	*aws.Request
 	Input *GetComplianceSummaryByConfigRuleInput
+	Copy  func(*GetComplianceSummaryByConfigRuleInput) GetComplianceSummaryByConfigRuleRequest
 }
 
 // Send marshals and sends the GetComplianceSummaryByConfigRule API request.
@@ -901,7 +917,7 @@ func (c *ConfigService) GetComplianceSummaryByConfigRuleRequest(input *GetCompli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetComplianceSummaryByConfigRuleRequest{Request: req, Input: input}
+	return GetComplianceSummaryByConfigRuleRequest{Request: req, Input: input, Copy: c.GetComplianceSummaryByConfigRuleRequest}
 }
 
 const opGetComplianceSummaryByResourceType = "GetComplianceSummaryByResourceType"
@@ -910,6 +926,7 @@ const opGetComplianceSummaryByResourceType = "GetComplianceSummaryByResourceType
 type GetComplianceSummaryByResourceTypeRequest struct {
 	*aws.Request
 	Input *GetComplianceSummaryByResourceTypeInput
+	Copy  func(*GetComplianceSummaryByResourceTypeInput) GetComplianceSummaryByResourceTypeRequest
 }
 
 // Send marshals and sends the GetComplianceSummaryByResourceType API request.
@@ -952,7 +969,7 @@ func (c *ConfigService) GetComplianceSummaryByResourceTypeRequest(input *GetComp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetComplianceSummaryByResourceTypeRequest{Request: req, Input: input}
+	return GetComplianceSummaryByResourceTypeRequest{Request: req, Input: input, Copy: c.GetComplianceSummaryByResourceTypeRequest}
 }
 
 const opGetDiscoveredResourceCounts = "GetDiscoveredResourceCounts"
@@ -961,6 +978,7 @@ const opGetDiscoveredResourceCounts = "GetDiscoveredResourceCounts"
 type GetDiscoveredResourceCountsRequest struct {
 	*aws.Request
 	Input *GetDiscoveredResourceCountsInput
+	Copy  func(*GetDiscoveredResourceCountsInput) GetDiscoveredResourceCountsRequest
 }
 
 // Send marshals and sends the GetDiscoveredResourceCounts API request.
@@ -1034,7 +1052,7 @@ func (c *ConfigService) GetDiscoveredResourceCountsRequest(input *GetDiscoveredR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDiscoveredResourceCountsRequest{Request: req, Input: input}
+	return GetDiscoveredResourceCountsRequest{Request: req, Input: input, Copy: c.GetDiscoveredResourceCountsRequest}
 }
 
 const opGetResourceConfigHistory = "GetResourceConfigHistory"
@@ -1043,6 +1061,7 @@ const opGetResourceConfigHistory = "GetResourceConfigHistory"
 type GetResourceConfigHistoryRequest struct {
 	*aws.Request
 	Input *GetResourceConfigHistoryInput
+	Copy  func(*GetResourceConfigHistoryInput) GetResourceConfigHistoryRequest
 }
 
 // Send marshals and sends the GetResourceConfigHistory API request.
@@ -1100,57 +1119,53 @@ func (c *ConfigService) GetResourceConfigHistoryRequest(input *GetResourceConfig
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetResourceConfigHistoryRequest{Request: req, Input: input}
+	return GetResourceConfigHistoryRequest{Request: req, Input: input, Copy: c.GetResourceConfigHistoryRequest}
 }
 
-// GetResourceConfigHistoryPages iterates over the pages of a GetResourceConfigHistory operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetResourceConfigHistory method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetResourceConfigHistoryRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetResourceConfigHistory operation.
-//    pageNum := 0
-//    err := client.GetResourceConfigHistoryPages(params,
-//        func(page *GetResourceConfigHistoryOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetResourceConfigHistoryRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ConfigService) GetResourceConfigHistoryPages(input *GetResourceConfigHistoryInput, fn func(*GetResourceConfigHistoryOutput, bool) bool) error {
-	return c.GetResourceConfigHistoryPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetResourceConfigHistoryRequest) Paginate(opts ...aws.Option) GetResourceConfigHistoryPager {
+	return GetResourceConfigHistoryPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetResourceConfigHistoryInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetResourceConfigHistoryPagesWithContext same as GetResourceConfigHistoryPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ConfigService) GetResourceConfigHistoryPagesWithContext(ctx aws.Context, input *GetResourceConfigHistoryInput, fn func(*GetResourceConfigHistoryOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetResourceConfigHistoryInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetResourceConfigHistoryRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetResourceConfigHistoryOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetResourceConfigHistoryPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetResourceConfigHistoryPager struct {
+	aws.Pager
+}
+
+func (p *GetResourceConfigHistoryPager) CurrentPage() *GetResourceConfigHistoryOutput {
+	return p.Pager.CurrentPage().(*GetResourceConfigHistoryOutput)
 }
 
 const opListDiscoveredResources = "ListDiscoveredResources"
@@ -1159,6 +1174,7 @@ const opListDiscoveredResources = "ListDiscoveredResources"
 type ListDiscoveredResourcesRequest struct {
 	*aws.Request
 	Input *ListDiscoveredResourcesInput
+	Copy  func(*ListDiscoveredResourcesInput) ListDiscoveredResourcesRequest
 }
 
 // Send marshals and sends the ListDiscoveredResources API request.
@@ -1212,7 +1228,7 @@ func (c *ConfigService) ListDiscoveredResourcesRequest(input *ListDiscoveredReso
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDiscoveredResourcesRequest{Request: req, Input: input}
+	return ListDiscoveredResourcesRequest{Request: req, Input: input, Copy: c.ListDiscoveredResourcesRequest}
 }
 
 const opPutConfigRule = "PutConfigRule"
@@ -1221,6 +1237,7 @@ const opPutConfigRule = "PutConfigRule"
 type PutConfigRuleRequest struct {
 	*aws.Request
 	Input *PutConfigRuleInput
+	Copy  func(*PutConfigRuleInput) PutConfigRuleRequest
 }
 
 // Send marshals and sends the PutConfigRule API request.
@@ -1297,7 +1314,7 @@ func (c *ConfigService) PutConfigRuleRequest(input *PutConfigRuleInput) PutConfi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutConfigRuleRequest{Request: req, Input: input}
+	return PutConfigRuleRequest{Request: req, Input: input, Copy: c.PutConfigRuleRequest}
 }
 
 const opPutConfigurationRecorder = "PutConfigurationRecorder"
@@ -1306,6 +1323,7 @@ const opPutConfigurationRecorder = "PutConfigurationRecorder"
 type PutConfigurationRecorderRequest struct {
 	*aws.Request
 	Input *PutConfigurationRecorderInput
+	Copy  func(*PutConfigurationRecorderInput) PutConfigurationRecorderRequest
 }
 
 // Send marshals and sends the PutConfigurationRecorder API request.
@@ -1358,7 +1376,7 @@ func (c *ConfigService) PutConfigurationRecorderRequest(input *PutConfigurationR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutConfigurationRecorderRequest{Request: req, Input: input}
+	return PutConfigurationRecorderRequest{Request: req, Input: input, Copy: c.PutConfigurationRecorderRequest}
 }
 
 const opPutDeliveryChannel = "PutDeliveryChannel"
@@ -1367,6 +1385,7 @@ const opPutDeliveryChannel = "PutDeliveryChannel"
 type PutDeliveryChannelRequest struct {
 	*aws.Request
 	Input *PutDeliveryChannelInput
+	Copy  func(*PutDeliveryChannelInput) PutDeliveryChannelRequest
 }
 
 // Send marshals and sends the PutDeliveryChannel API request.
@@ -1422,7 +1441,7 @@ func (c *ConfigService) PutDeliveryChannelRequest(input *PutDeliveryChannelInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutDeliveryChannelRequest{Request: req, Input: input}
+	return PutDeliveryChannelRequest{Request: req, Input: input, Copy: c.PutDeliveryChannelRequest}
 }
 
 const opPutEvaluations = "PutEvaluations"
@@ -1431,6 +1450,7 @@ const opPutEvaluations = "PutEvaluations"
 type PutEvaluationsRequest struct {
 	*aws.Request
 	Input *PutEvaluationsInput
+	Copy  func(*PutEvaluationsInput) PutEvaluationsRequest
 }
 
 // Send marshals and sends the PutEvaluations API request.
@@ -1473,7 +1493,7 @@ func (c *ConfigService) PutEvaluationsRequest(input *PutEvaluationsInput) PutEva
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutEvaluationsRequest{Request: req, Input: input}
+	return PutEvaluationsRequest{Request: req, Input: input, Copy: c.PutEvaluationsRequest}
 }
 
 const opStartConfigRulesEvaluation = "StartConfigRulesEvaluation"
@@ -1482,6 +1502,7 @@ const opStartConfigRulesEvaluation = "StartConfigRulesEvaluation"
 type StartConfigRulesEvaluationRequest struct {
 	*aws.Request
 	Input *StartConfigRulesEvaluationInput
+	Copy  func(*StartConfigRulesEvaluationInput) StartConfigRulesEvaluationRequest
 }
 
 // Send marshals and sends the StartConfigRulesEvaluation API request.
@@ -1551,7 +1572,7 @@ func (c *ConfigService) StartConfigRulesEvaluationRequest(input *StartConfigRule
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartConfigRulesEvaluationRequest{Request: req, Input: input}
+	return StartConfigRulesEvaluationRequest{Request: req, Input: input, Copy: c.StartConfigRulesEvaluationRequest}
 }
 
 const opStartConfigurationRecorder = "StartConfigurationRecorder"
@@ -1560,6 +1581,7 @@ const opStartConfigurationRecorder = "StartConfigurationRecorder"
 type StartConfigurationRecorderRequest struct {
 	*aws.Request
 	Input *StartConfigurationRecorderInput
+	Copy  func(*StartConfigurationRecorderInput) StartConfigurationRecorderRequest
 }
 
 // Send marshals and sends the StartConfigurationRecorder API request.
@@ -1606,7 +1628,7 @@ func (c *ConfigService) StartConfigurationRecorderRequest(input *StartConfigurat
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartConfigurationRecorderRequest{Request: req, Input: input}
+	return StartConfigurationRecorderRequest{Request: req, Input: input, Copy: c.StartConfigurationRecorderRequest}
 }
 
 const opStopConfigurationRecorder = "StopConfigurationRecorder"
@@ -1615,6 +1637,7 @@ const opStopConfigurationRecorder = "StopConfigurationRecorder"
 type StopConfigurationRecorderRequest struct {
 	*aws.Request
 	Input *StopConfigurationRecorderInput
+	Copy  func(*StopConfigurationRecorderInput) StopConfigurationRecorderRequest
 }
 
 // Send marshals and sends the StopConfigurationRecorder API request.
@@ -1658,7 +1681,7 @@ func (c *ConfigService) StopConfigurationRecorderRequest(input *StopConfiguratio
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopConfigurationRecorderRequest{Request: req, Input: input}
+	return StopConfigurationRecorderRequest{Request: req, Input: input, Copy: c.StopConfigurationRecorderRequest}
 }
 
 // Indicates whether an AWS resource or AWS Config rule is compliant and provides

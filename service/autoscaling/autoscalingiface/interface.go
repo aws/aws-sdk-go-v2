@@ -97,20 +97,11 @@ type AutoScalingAPI interface {
 
 	DescribeAutoScalingGroupsRequest(*autoscaling.DescribeAutoScalingGroupsInput) autoscaling.DescribeAutoScalingGroupsRequest
 
-	DescribeAutoScalingGroupsPages(*autoscaling.DescribeAutoScalingGroupsInput, func(*autoscaling.DescribeAutoScalingGroupsOutput, bool) bool) error
-	DescribeAutoScalingGroupsPagesWithContext(aws.Context, *autoscaling.DescribeAutoScalingGroupsInput, func(*autoscaling.DescribeAutoScalingGroupsOutput, bool) bool, ...aws.Option) error
-
 	DescribeAutoScalingInstancesRequest(*autoscaling.DescribeAutoScalingInstancesInput) autoscaling.DescribeAutoScalingInstancesRequest
-
-	DescribeAutoScalingInstancesPages(*autoscaling.DescribeAutoScalingInstancesInput, func(*autoscaling.DescribeAutoScalingInstancesOutput, bool) bool) error
-	DescribeAutoScalingInstancesPagesWithContext(aws.Context, *autoscaling.DescribeAutoScalingInstancesInput, func(*autoscaling.DescribeAutoScalingInstancesOutput, bool) bool, ...aws.Option) error
 
 	DescribeAutoScalingNotificationTypesRequest(*autoscaling.DescribeAutoScalingNotificationTypesInput) autoscaling.DescribeAutoScalingNotificationTypesRequest
 
 	DescribeLaunchConfigurationsRequest(*autoscaling.DescribeLaunchConfigurationsInput) autoscaling.DescribeLaunchConfigurationsRequest
-
-	DescribeLaunchConfigurationsPages(*autoscaling.DescribeLaunchConfigurationsInput, func(*autoscaling.DescribeLaunchConfigurationsOutput, bool) bool) error
-	DescribeLaunchConfigurationsPagesWithContext(aws.Context, *autoscaling.DescribeLaunchConfigurationsInput, func(*autoscaling.DescribeLaunchConfigurationsOutput, bool) bool, ...aws.Option) error
 
 	DescribeLifecycleHookTypesRequest(*autoscaling.DescribeLifecycleHookTypesInput) autoscaling.DescribeLifecycleHookTypesRequest
 
@@ -124,30 +115,15 @@ type AutoScalingAPI interface {
 
 	DescribeNotificationConfigurationsRequest(*autoscaling.DescribeNotificationConfigurationsInput) autoscaling.DescribeNotificationConfigurationsRequest
 
-	DescribeNotificationConfigurationsPages(*autoscaling.DescribeNotificationConfigurationsInput, func(*autoscaling.DescribeNotificationConfigurationsOutput, bool) bool) error
-	DescribeNotificationConfigurationsPagesWithContext(aws.Context, *autoscaling.DescribeNotificationConfigurationsInput, func(*autoscaling.DescribeNotificationConfigurationsOutput, bool) bool, ...aws.Option) error
-
 	DescribePoliciesRequest(*autoscaling.DescribePoliciesInput) autoscaling.DescribePoliciesRequest
 
-	DescribePoliciesPages(*autoscaling.DescribePoliciesInput, func(*autoscaling.DescribePoliciesOutput, bool) bool) error
-	DescribePoliciesPagesWithContext(aws.Context, *autoscaling.DescribePoliciesInput, func(*autoscaling.DescribePoliciesOutput, bool) bool, ...aws.Option) error
-
 	DescribeScalingActivitiesRequest(*autoscaling.DescribeScalingActivitiesInput) autoscaling.DescribeScalingActivitiesRequest
-
-	DescribeScalingActivitiesPages(*autoscaling.DescribeScalingActivitiesInput, func(*autoscaling.DescribeScalingActivitiesOutput, bool) bool) error
-	DescribeScalingActivitiesPagesWithContext(aws.Context, *autoscaling.DescribeScalingActivitiesInput, func(*autoscaling.DescribeScalingActivitiesOutput, bool) bool, ...aws.Option) error
 
 	DescribeScalingProcessTypesRequest(*autoscaling.DescribeScalingProcessTypesInput) autoscaling.DescribeScalingProcessTypesRequest
 
 	DescribeScheduledActionsRequest(*autoscaling.DescribeScheduledActionsInput) autoscaling.DescribeScheduledActionsRequest
 
-	DescribeScheduledActionsPages(*autoscaling.DescribeScheduledActionsInput, func(*autoscaling.DescribeScheduledActionsOutput, bool) bool) error
-	DescribeScheduledActionsPagesWithContext(aws.Context, *autoscaling.DescribeScheduledActionsInput, func(*autoscaling.DescribeScheduledActionsOutput, bool) bool, ...aws.Option) error
-
 	DescribeTagsRequest(*autoscaling.DescribeTagsInput) autoscaling.DescribeTagsRequest
-
-	DescribeTagsPages(*autoscaling.DescribeTagsInput, func(*autoscaling.DescribeTagsOutput, bool) bool) error
-	DescribeTagsPagesWithContext(aws.Context, *autoscaling.DescribeTagsInput, func(*autoscaling.DescribeTagsOutput, bool) bool, ...aws.Option) error
 
 	DescribeTerminationPolicyTypesRequest(*autoscaling.DescribeTerminationPolicyTypesInput) autoscaling.DescribeTerminationPolicyTypesRequest
 

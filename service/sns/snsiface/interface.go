@@ -9,7 +9,6 @@
 package snsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sns"
 )
 
@@ -93,30 +92,15 @@ type SNSAPI interface {
 
 	ListEndpointsByPlatformApplicationRequest(*sns.ListEndpointsByPlatformApplicationInput) sns.ListEndpointsByPlatformApplicationRequest
 
-	ListEndpointsByPlatformApplicationPages(*sns.ListEndpointsByPlatformApplicationInput, func(*sns.ListEndpointsByPlatformApplicationOutput, bool) bool) error
-	ListEndpointsByPlatformApplicationPagesWithContext(aws.Context, *sns.ListEndpointsByPlatformApplicationInput, func(*sns.ListEndpointsByPlatformApplicationOutput, bool) bool, ...aws.Option) error
-
 	ListPhoneNumbersOptedOutRequest(*sns.ListPhoneNumbersOptedOutInput) sns.ListPhoneNumbersOptedOutRequest
 
 	ListPlatformApplicationsRequest(*sns.ListPlatformApplicationsInput) sns.ListPlatformApplicationsRequest
 
-	ListPlatformApplicationsPages(*sns.ListPlatformApplicationsInput, func(*sns.ListPlatformApplicationsOutput, bool) bool) error
-	ListPlatformApplicationsPagesWithContext(aws.Context, *sns.ListPlatformApplicationsInput, func(*sns.ListPlatformApplicationsOutput, bool) bool, ...aws.Option) error
-
 	ListSubscriptionsRequest(*sns.ListSubscriptionsInput) sns.ListSubscriptionsRequest
-
-	ListSubscriptionsPages(*sns.ListSubscriptionsInput, func(*sns.ListSubscriptionsOutput, bool) bool) error
-	ListSubscriptionsPagesWithContext(aws.Context, *sns.ListSubscriptionsInput, func(*sns.ListSubscriptionsOutput, bool) bool, ...aws.Option) error
 
 	ListSubscriptionsByTopicRequest(*sns.ListSubscriptionsByTopicInput) sns.ListSubscriptionsByTopicRequest
 
-	ListSubscriptionsByTopicPages(*sns.ListSubscriptionsByTopicInput, func(*sns.ListSubscriptionsByTopicOutput, bool) bool) error
-	ListSubscriptionsByTopicPagesWithContext(aws.Context, *sns.ListSubscriptionsByTopicInput, func(*sns.ListSubscriptionsByTopicOutput, bool) bool, ...aws.Option) error
-
 	ListTopicsRequest(*sns.ListTopicsInput) sns.ListTopicsRequest
-
-	ListTopicsPages(*sns.ListTopicsInput, func(*sns.ListTopicsOutput, bool) bool) error
-	ListTopicsPagesWithContext(aws.Context, *sns.ListTopicsInput, func(*sns.ListTopicsOutput, bool) bool, ...aws.Option) error
 
 	OptInPhoneNumberRequest(*sns.OptInPhoneNumberInput) sns.OptInPhoneNumberRequest
 

@@ -9,7 +9,6 @@
 package datapipelineiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline"
 )
 
@@ -75,9 +74,6 @@ type DataPipelineAPI interface {
 
 	DescribeObjectsRequest(*datapipeline.DescribeObjectsInput) datapipeline.DescribeObjectsRequest
 
-	DescribeObjectsPages(*datapipeline.DescribeObjectsInput, func(*datapipeline.DescribeObjectsOutput, bool) bool) error
-	DescribeObjectsPagesWithContext(aws.Context, *datapipeline.DescribeObjectsInput, func(*datapipeline.DescribeObjectsOutput, bool) bool, ...aws.Option) error
-
 	DescribePipelinesRequest(*datapipeline.DescribePipelinesInput) datapipeline.DescribePipelinesRequest
 
 	EvaluateExpressionRequest(*datapipeline.EvaluateExpressionInput) datapipeline.EvaluateExpressionRequest
@@ -86,17 +82,11 @@ type DataPipelineAPI interface {
 
 	ListPipelinesRequest(*datapipeline.ListPipelinesInput) datapipeline.ListPipelinesRequest
 
-	ListPipelinesPages(*datapipeline.ListPipelinesInput, func(*datapipeline.ListPipelinesOutput, bool) bool) error
-	ListPipelinesPagesWithContext(aws.Context, *datapipeline.ListPipelinesInput, func(*datapipeline.ListPipelinesOutput, bool) bool, ...aws.Option) error
-
 	PollForTaskRequest(*datapipeline.PollForTaskInput) datapipeline.PollForTaskRequest
 
 	PutPipelineDefinitionRequest(*datapipeline.PutPipelineDefinitionInput) datapipeline.PutPipelineDefinitionRequest
 
 	QueryObjectsRequest(*datapipeline.QueryObjectsInput) datapipeline.QueryObjectsRequest
-
-	QueryObjectsPages(*datapipeline.QueryObjectsInput, func(*datapipeline.QueryObjectsOutput, bool) bool) error
-	QueryObjectsPagesWithContext(aws.Context, *datapipeline.QueryObjectsInput, func(*datapipeline.QueryObjectsOutput, bool) bool, ...aws.Option) error
 
 	RemoveTagsRequest(*datapipeline.RemoveTagsInput) datapipeline.RemoveTagsRequest
 

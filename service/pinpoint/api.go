@@ -14,6 +14,7 @@ const opCreateApp = "CreateApp"
 type CreateAppRequest struct {
 	*aws.Request
 	Input *CreateAppInput
+	Copy  func(*CreateAppInput) CreateAppRequest
 }
 
 // Send marshals and sends the CreateApp API request.
@@ -54,7 +55,7 @@ func (c *Pinpoint) CreateAppRequest(input *CreateAppInput) CreateAppRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAppRequest{Request: req, Input: input}
+	return CreateAppRequest{Request: req, Input: input, Copy: c.CreateAppRequest}
 }
 
 const opCreateCampaign = "CreateCampaign"
@@ -63,6 +64,7 @@ const opCreateCampaign = "CreateCampaign"
 type CreateCampaignRequest struct {
 	*aws.Request
 	Input *CreateCampaignInput
+	Copy  func(*CreateCampaignInput) CreateCampaignRequest
 }
 
 // Send marshals and sends the CreateCampaign API request.
@@ -103,7 +105,7 @@ func (c *Pinpoint) CreateCampaignRequest(input *CreateCampaignInput) CreateCampa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCampaignRequest{Request: req, Input: input}
+	return CreateCampaignRequest{Request: req, Input: input, Copy: c.CreateCampaignRequest}
 }
 
 const opCreateImportJob = "CreateImportJob"
@@ -112,6 +114,7 @@ const opCreateImportJob = "CreateImportJob"
 type CreateImportJobRequest struct {
 	*aws.Request
 	Input *CreateImportJobInput
+	Copy  func(*CreateImportJobInput) CreateImportJobRequest
 }
 
 // Send marshals and sends the CreateImportJob API request.
@@ -152,7 +155,7 @@ func (c *Pinpoint) CreateImportJobRequest(input *CreateImportJobInput) CreateImp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateImportJobRequest{Request: req, Input: input}
+	return CreateImportJobRequest{Request: req, Input: input, Copy: c.CreateImportJobRequest}
 }
 
 const opCreateSegment = "CreateSegment"
@@ -161,6 +164,7 @@ const opCreateSegment = "CreateSegment"
 type CreateSegmentRequest struct {
 	*aws.Request
 	Input *CreateSegmentInput
+	Copy  func(*CreateSegmentInput) CreateSegmentRequest
 }
 
 // Send marshals and sends the CreateSegment API request.
@@ -201,7 +205,7 @@ func (c *Pinpoint) CreateSegmentRequest(input *CreateSegmentInput) CreateSegment
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSegmentRequest{Request: req, Input: input}
+	return CreateSegmentRequest{Request: req, Input: input, Copy: c.CreateSegmentRequest}
 }
 
 const opDeleteAdmChannel = "DeleteAdmChannel"
@@ -210,6 +214,7 @@ const opDeleteAdmChannel = "DeleteAdmChannel"
 type DeleteAdmChannelRequest struct {
 	*aws.Request
 	Input *DeleteAdmChannelInput
+	Copy  func(*DeleteAdmChannelInput) DeleteAdmChannelRequest
 }
 
 // Send marshals and sends the DeleteAdmChannel API request.
@@ -250,7 +255,7 @@ func (c *Pinpoint) DeleteAdmChannelRequest(input *DeleteAdmChannelInput) DeleteA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAdmChannelRequest{Request: req, Input: input}
+	return DeleteAdmChannelRequest{Request: req, Input: input, Copy: c.DeleteAdmChannelRequest}
 }
 
 const opDeleteApnsChannel = "DeleteApnsChannel"
@@ -259,6 +264,7 @@ const opDeleteApnsChannel = "DeleteApnsChannel"
 type DeleteApnsChannelRequest struct {
 	*aws.Request
 	Input *DeleteApnsChannelInput
+	Copy  func(*DeleteApnsChannelInput) DeleteApnsChannelRequest
 }
 
 // Send marshals and sends the DeleteApnsChannel API request.
@@ -299,7 +305,7 @@ func (c *Pinpoint) DeleteApnsChannelRequest(input *DeleteApnsChannelInput) Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApnsChannelRequest{Request: req, Input: input}
+	return DeleteApnsChannelRequest{Request: req, Input: input, Copy: c.DeleteApnsChannelRequest}
 }
 
 const opDeleteApnsSandboxChannel = "DeleteApnsSandboxChannel"
@@ -308,6 +314,7 @@ const opDeleteApnsSandboxChannel = "DeleteApnsSandboxChannel"
 type DeleteApnsSandboxChannelRequest struct {
 	*aws.Request
 	Input *DeleteApnsSandboxChannelInput
+	Copy  func(*DeleteApnsSandboxChannelInput) DeleteApnsSandboxChannelRequest
 }
 
 // Send marshals and sends the DeleteApnsSandboxChannel API request.
@@ -348,7 +355,7 @@ func (c *Pinpoint) DeleteApnsSandboxChannelRequest(input *DeleteApnsSandboxChann
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApnsSandboxChannelRequest{Request: req, Input: input}
+	return DeleteApnsSandboxChannelRequest{Request: req, Input: input, Copy: c.DeleteApnsSandboxChannelRequest}
 }
 
 const opDeleteApnsVoipChannel = "DeleteApnsVoipChannel"
@@ -357,6 +364,7 @@ const opDeleteApnsVoipChannel = "DeleteApnsVoipChannel"
 type DeleteApnsVoipChannelRequest struct {
 	*aws.Request
 	Input *DeleteApnsVoipChannelInput
+	Copy  func(*DeleteApnsVoipChannelInput) DeleteApnsVoipChannelRequest
 }
 
 // Send marshals and sends the DeleteApnsVoipChannel API request.
@@ -397,7 +405,7 @@ func (c *Pinpoint) DeleteApnsVoipChannelRequest(input *DeleteApnsVoipChannelInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApnsVoipChannelRequest{Request: req, Input: input}
+	return DeleteApnsVoipChannelRequest{Request: req, Input: input, Copy: c.DeleteApnsVoipChannelRequest}
 }
 
 const opDeleteApnsVoipSandboxChannel = "DeleteApnsVoipSandboxChannel"
@@ -406,6 +414,7 @@ const opDeleteApnsVoipSandboxChannel = "DeleteApnsVoipSandboxChannel"
 type DeleteApnsVoipSandboxChannelRequest struct {
 	*aws.Request
 	Input *DeleteApnsVoipSandboxChannelInput
+	Copy  func(*DeleteApnsVoipSandboxChannelInput) DeleteApnsVoipSandboxChannelRequest
 }
 
 // Send marshals and sends the DeleteApnsVoipSandboxChannel API request.
@@ -446,7 +455,7 @@ func (c *Pinpoint) DeleteApnsVoipSandboxChannelRequest(input *DeleteApnsVoipSand
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApnsVoipSandboxChannelRequest{Request: req, Input: input}
+	return DeleteApnsVoipSandboxChannelRequest{Request: req, Input: input, Copy: c.DeleteApnsVoipSandboxChannelRequest}
 }
 
 const opDeleteApp = "DeleteApp"
@@ -455,6 +464,7 @@ const opDeleteApp = "DeleteApp"
 type DeleteAppRequest struct {
 	*aws.Request
 	Input *DeleteAppInput
+	Copy  func(*DeleteAppInput) DeleteAppRequest
 }
 
 // Send marshals and sends the DeleteApp API request.
@@ -495,7 +505,7 @@ func (c *Pinpoint) DeleteAppRequest(input *DeleteAppInput) DeleteAppRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAppRequest{Request: req, Input: input}
+	return DeleteAppRequest{Request: req, Input: input, Copy: c.DeleteAppRequest}
 }
 
 const opDeleteBaiduChannel = "DeleteBaiduChannel"
@@ -504,6 +514,7 @@ const opDeleteBaiduChannel = "DeleteBaiduChannel"
 type DeleteBaiduChannelRequest struct {
 	*aws.Request
 	Input *DeleteBaiduChannelInput
+	Copy  func(*DeleteBaiduChannelInput) DeleteBaiduChannelRequest
 }
 
 // Send marshals and sends the DeleteBaiduChannel API request.
@@ -544,7 +555,7 @@ func (c *Pinpoint) DeleteBaiduChannelRequest(input *DeleteBaiduChannelInput) Del
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBaiduChannelRequest{Request: req, Input: input}
+	return DeleteBaiduChannelRequest{Request: req, Input: input, Copy: c.DeleteBaiduChannelRequest}
 }
 
 const opDeleteCampaign = "DeleteCampaign"
@@ -553,6 +564,7 @@ const opDeleteCampaign = "DeleteCampaign"
 type DeleteCampaignRequest struct {
 	*aws.Request
 	Input *DeleteCampaignInput
+	Copy  func(*DeleteCampaignInput) DeleteCampaignRequest
 }
 
 // Send marshals and sends the DeleteCampaign API request.
@@ -593,7 +605,7 @@ func (c *Pinpoint) DeleteCampaignRequest(input *DeleteCampaignInput) DeleteCampa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCampaignRequest{Request: req, Input: input}
+	return DeleteCampaignRequest{Request: req, Input: input, Copy: c.DeleteCampaignRequest}
 }
 
 const opDeleteEmailChannel = "DeleteEmailChannel"
@@ -602,6 +614,7 @@ const opDeleteEmailChannel = "DeleteEmailChannel"
 type DeleteEmailChannelRequest struct {
 	*aws.Request
 	Input *DeleteEmailChannelInput
+	Copy  func(*DeleteEmailChannelInput) DeleteEmailChannelRequest
 }
 
 // Send marshals and sends the DeleteEmailChannel API request.
@@ -642,7 +655,7 @@ func (c *Pinpoint) DeleteEmailChannelRequest(input *DeleteEmailChannelInput) Del
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEmailChannelRequest{Request: req, Input: input}
+	return DeleteEmailChannelRequest{Request: req, Input: input, Copy: c.DeleteEmailChannelRequest}
 }
 
 const opDeleteEventStream = "DeleteEventStream"
@@ -651,6 +664,7 @@ const opDeleteEventStream = "DeleteEventStream"
 type DeleteEventStreamRequest struct {
 	*aws.Request
 	Input *DeleteEventStreamInput
+	Copy  func(*DeleteEventStreamInput) DeleteEventStreamRequest
 }
 
 // Send marshals and sends the DeleteEventStream API request.
@@ -691,7 +705,7 @@ func (c *Pinpoint) DeleteEventStreamRequest(input *DeleteEventStreamInput) Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEventStreamRequest{Request: req, Input: input}
+	return DeleteEventStreamRequest{Request: req, Input: input, Copy: c.DeleteEventStreamRequest}
 }
 
 const opDeleteGcmChannel = "DeleteGcmChannel"
@@ -700,6 +714,7 @@ const opDeleteGcmChannel = "DeleteGcmChannel"
 type DeleteGcmChannelRequest struct {
 	*aws.Request
 	Input *DeleteGcmChannelInput
+	Copy  func(*DeleteGcmChannelInput) DeleteGcmChannelRequest
 }
 
 // Send marshals and sends the DeleteGcmChannel API request.
@@ -740,7 +755,7 @@ func (c *Pinpoint) DeleteGcmChannelRequest(input *DeleteGcmChannelInput) DeleteG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGcmChannelRequest{Request: req, Input: input}
+	return DeleteGcmChannelRequest{Request: req, Input: input, Copy: c.DeleteGcmChannelRequest}
 }
 
 const opDeleteSegment = "DeleteSegment"
@@ -749,6 +764,7 @@ const opDeleteSegment = "DeleteSegment"
 type DeleteSegmentRequest struct {
 	*aws.Request
 	Input *DeleteSegmentInput
+	Copy  func(*DeleteSegmentInput) DeleteSegmentRequest
 }
 
 // Send marshals and sends the DeleteSegment API request.
@@ -789,7 +805,7 @@ func (c *Pinpoint) DeleteSegmentRequest(input *DeleteSegmentInput) DeleteSegment
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSegmentRequest{Request: req, Input: input}
+	return DeleteSegmentRequest{Request: req, Input: input, Copy: c.DeleteSegmentRequest}
 }
 
 const opDeleteSmsChannel = "DeleteSmsChannel"
@@ -798,6 +814,7 @@ const opDeleteSmsChannel = "DeleteSmsChannel"
 type DeleteSmsChannelRequest struct {
 	*aws.Request
 	Input *DeleteSmsChannelInput
+	Copy  func(*DeleteSmsChannelInput) DeleteSmsChannelRequest
 }
 
 // Send marshals and sends the DeleteSmsChannel API request.
@@ -838,7 +855,7 @@ func (c *Pinpoint) DeleteSmsChannelRequest(input *DeleteSmsChannelInput) DeleteS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSmsChannelRequest{Request: req, Input: input}
+	return DeleteSmsChannelRequest{Request: req, Input: input, Copy: c.DeleteSmsChannelRequest}
 }
 
 const opGetAdmChannel = "GetAdmChannel"
@@ -847,6 +864,7 @@ const opGetAdmChannel = "GetAdmChannel"
 type GetAdmChannelRequest struct {
 	*aws.Request
 	Input *GetAdmChannelInput
+	Copy  func(*GetAdmChannelInput) GetAdmChannelRequest
 }
 
 // Send marshals and sends the GetAdmChannel API request.
@@ -887,7 +905,7 @@ func (c *Pinpoint) GetAdmChannelRequest(input *GetAdmChannelInput) GetAdmChannel
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAdmChannelRequest{Request: req, Input: input}
+	return GetAdmChannelRequest{Request: req, Input: input, Copy: c.GetAdmChannelRequest}
 }
 
 const opGetApnsChannel = "GetApnsChannel"
@@ -896,6 +914,7 @@ const opGetApnsChannel = "GetApnsChannel"
 type GetApnsChannelRequest struct {
 	*aws.Request
 	Input *GetApnsChannelInput
+	Copy  func(*GetApnsChannelInput) GetApnsChannelRequest
 }
 
 // Send marshals and sends the GetApnsChannel API request.
@@ -936,7 +955,7 @@ func (c *Pinpoint) GetApnsChannelRequest(input *GetApnsChannelInput) GetApnsChan
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApnsChannelRequest{Request: req, Input: input}
+	return GetApnsChannelRequest{Request: req, Input: input, Copy: c.GetApnsChannelRequest}
 }
 
 const opGetApnsSandboxChannel = "GetApnsSandboxChannel"
@@ -945,6 +964,7 @@ const opGetApnsSandboxChannel = "GetApnsSandboxChannel"
 type GetApnsSandboxChannelRequest struct {
 	*aws.Request
 	Input *GetApnsSandboxChannelInput
+	Copy  func(*GetApnsSandboxChannelInput) GetApnsSandboxChannelRequest
 }
 
 // Send marshals and sends the GetApnsSandboxChannel API request.
@@ -985,7 +1005,7 @@ func (c *Pinpoint) GetApnsSandboxChannelRequest(input *GetApnsSandboxChannelInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApnsSandboxChannelRequest{Request: req, Input: input}
+	return GetApnsSandboxChannelRequest{Request: req, Input: input, Copy: c.GetApnsSandboxChannelRequest}
 }
 
 const opGetApnsVoipChannel = "GetApnsVoipChannel"
@@ -994,6 +1014,7 @@ const opGetApnsVoipChannel = "GetApnsVoipChannel"
 type GetApnsVoipChannelRequest struct {
 	*aws.Request
 	Input *GetApnsVoipChannelInput
+	Copy  func(*GetApnsVoipChannelInput) GetApnsVoipChannelRequest
 }
 
 // Send marshals and sends the GetApnsVoipChannel API request.
@@ -1034,7 +1055,7 @@ func (c *Pinpoint) GetApnsVoipChannelRequest(input *GetApnsVoipChannelInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApnsVoipChannelRequest{Request: req, Input: input}
+	return GetApnsVoipChannelRequest{Request: req, Input: input, Copy: c.GetApnsVoipChannelRequest}
 }
 
 const opGetApnsVoipSandboxChannel = "GetApnsVoipSandboxChannel"
@@ -1043,6 +1064,7 @@ const opGetApnsVoipSandboxChannel = "GetApnsVoipSandboxChannel"
 type GetApnsVoipSandboxChannelRequest struct {
 	*aws.Request
 	Input *GetApnsVoipSandboxChannelInput
+	Copy  func(*GetApnsVoipSandboxChannelInput) GetApnsVoipSandboxChannelRequest
 }
 
 // Send marshals and sends the GetApnsVoipSandboxChannel API request.
@@ -1083,7 +1105,7 @@ func (c *Pinpoint) GetApnsVoipSandboxChannelRequest(input *GetApnsVoipSandboxCha
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApnsVoipSandboxChannelRequest{Request: req, Input: input}
+	return GetApnsVoipSandboxChannelRequest{Request: req, Input: input, Copy: c.GetApnsVoipSandboxChannelRequest}
 }
 
 const opGetApp = "GetApp"
@@ -1092,6 +1114,7 @@ const opGetApp = "GetApp"
 type GetAppRequest struct {
 	*aws.Request
 	Input *GetAppInput
+	Copy  func(*GetAppInput) GetAppRequest
 }
 
 // Send marshals and sends the GetApp API request.
@@ -1132,7 +1155,7 @@ func (c *Pinpoint) GetAppRequest(input *GetAppInput) GetAppRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAppRequest{Request: req, Input: input}
+	return GetAppRequest{Request: req, Input: input, Copy: c.GetAppRequest}
 }
 
 const opGetApplicationSettings = "GetApplicationSettings"
@@ -1141,6 +1164,7 @@ const opGetApplicationSettings = "GetApplicationSettings"
 type GetApplicationSettingsRequest struct {
 	*aws.Request
 	Input *GetApplicationSettingsInput
+	Copy  func(*GetApplicationSettingsInput) GetApplicationSettingsRequest
 }
 
 // Send marshals and sends the GetApplicationSettings API request.
@@ -1181,7 +1205,7 @@ func (c *Pinpoint) GetApplicationSettingsRequest(input *GetApplicationSettingsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApplicationSettingsRequest{Request: req, Input: input}
+	return GetApplicationSettingsRequest{Request: req, Input: input, Copy: c.GetApplicationSettingsRequest}
 }
 
 const opGetApps = "GetApps"
@@ -1190,6 +1214,7 @@ const opGetApps = "GetApps"
 type GetAppsRequest struct {
 	*aws.Request
 	Input *GetAppsInput
+	Copy  func(*GetAppsInput) GetAppsRequest
 }
 
 // Send marshals and sends the GetApps API request.
@@ -1230,7 +1255,7 @@ func (c *Pinpoint) GetAppsRequest(input *GetAppsInput) GetAppsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAppsRequest{Request: req, Input: input}
+	return GetAppsRequest{Request: req, Input: input, Copy: c.GetAppsRequest}
 }
 
 const opGetBaiduChannel = "GetBaiduChannel"
@@ -1239,6 +1264,7 @@ const opGetBaiduChannel = "GetBaiduChannel"
 type GetBaiduChannelRequest struct {
 	*aws.Request
 	Input *GetBaiduChannelInput
+	Copy  func(*GetBaiduChannelInput) GetBaiduChannelRequest
 }
 
 // Send marshals and sends the GetBaiduChannel API request.
@@ -1279,7 +1305,7 @@ func (c *Pinpoint) GetBaiduChannelRequest(input *GetBaiduChannelInput) GetBaiduC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBaiduChannelRequest{Request: req, Input: input}
+	return GetBaiduChannelRequest{Request: req, Input: input, Copy: c.GetBaiduChannelRequest}
 }
 
 const opGetCampaign = "GetCampaign"
@@ -1288,6 +1314,7 @@ const opGetCampaign = "GetCampaign"
 type GetCampaignRequest struct {
 	*aws.Request
 	Input *GetCampaignInput
+	Copy  func(*GetCampaignInput) GetCampaignRequest
 }
 
 // Send marshals and sends the GetCampaign API request.
@@ -1328,7 +1355,7 @@ func (c *Pinpoint) GetCampaignRequest(input *GetCampaignInput) GetCampaignReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCampaignRequest{Request: req, Input: input}
+	return GetCampaignRequest{Request: req, Input: input, Copy: c.GetCampaignRequest}
 }
 
 const opGetCampaignActivities = "GetCampaignActivities"
@@ -1337,6 +1364,7 @@ const opGetCampaignActivities = "GetCampaignActivities"
 type GetCampaignActivitiesRequest struct {
 	*aws.Request
 	Input *GetCampaignActivitiesInput
+	Copy  func(*GetCampaignActivitiesInput) GetCampaignActivitiesRequest
 }
 
 // Send marshals and sends the GetCampaignActivities API request.
@@ -1377,7 +1405,7 @@ func (c *Pinpoint) GetCampaignActivitiesRequest(input *GetCampaignActivitiesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCampaignActivitiesRequest{Request: req, Input: input}
+	return GetCampaignActivitiesRequest{Request: req, Input: input, Copy: c.GetCampaignActivitiesRequest}
 }
 
 const opGetCampaignVersion = "GetCampaignVersion"
@@ -1386,6 +1414,7 @@ const opGetCampaignVersion = "GetCampaignVersion"
 type GetCampaignVersionRequest struct {
 	*aws.Request
 	Input *GetCampaignVersionInput
+	Copy  func(*GetCampaignVersionInput) GetCampaignVersionRequest
 }
 
 // Send marshals and sends the GetCampaignVersion API request.
@@ -1426,7 +1455,7 @@ func (c *Pinpoint) GetCampaignVersionRequest(input *GetCampaignVersionInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCampaignVersionRequest{Request: req, Input: input}
+	return GetCampaignVersionRequest{Request: req, Input: input, Copy: c.GetCampaignVersionRequest}
 }
 
 const opGetCampaignVersions = "GetCampaignVersions"
@@ -1435,6 +1464,7 @@ const opGetCampaignVersions = "GetCampaignVersions"
 type GetCampaignVersionsRequest struct {
 	*aws.Request
 	Input *GetCampaignVersionsInput
+	Copy  func(*GetCampaignVersionsInput) GetCampaignVersionsRequest
 }
 
 // Send marshals and sends the GetCampaignVersions API request.
@@ -1475,7 +1505,7 @@ func (c *Pinpoint) GetCampaignVersionsRequest(input *GetCampaignVersionsInput) G
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCampaignVersionsRequest{Request: req, Input: input}
+	return GetCampaignVersionsRequest{Request: req, Input: input, Copy: c.GetCampaignVersionsRequest}
 }
 
 const opGetCampaigns = "GetCampaigns"
@@ -1484,6 +1514,7 @@ const opGetCampaigns = "GetCampaigns"
 type GetCampaignsRequest struct {
 	*aws.Request
 	Input *GetCampaignsInput
+	Copy  func(*GetCampaignsInput) GetCampaignsRequest
 }
 
 // Send marshals and sends the GetCampaigns API request.
@@ -1524,7 +1555,7 @@ func (c *Pinpoint) GetCampaignsRequest(input *GetCampaignsInput) GetCampaignsReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCampaignsRequest{Request: req, Input: input}
+	return GetCampaignsRequest{Request: req, Input: input, Copy: c.GetCampaignsRequest}
 }
 
 const opGetEmailChannel = "GetEmailChannel"
@@ -1533,6 +1564,7 @@ const opGetEmailChannel = "GetEmailChannel"
 type GetEmailChannelRequest struct {
 	*aws.Request
 	Input *GetEmailChannelInput
+	Copy  func(*GetEmailChannelInput) GetEmailChannelRequest
 }
 
 // Send marshals and sends the GetEmailChannel API request.
@@ -1573,7 +1605,7 @@ func (c *Pinpoint) GetEmailChannelRequest(input *GetEmailChannelInput) GetEmailC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetEmailChannelRequest{Request: req, Input: input}
+	return GetEmailChannelRequest{Request: req, Input: input, Copy: c.GetEmailChannelRequest}
 }
 
 const opGetEndpoint = "GetEndpoint"
@@ -1582,6 +1614,7 @@ const opGetEndpoint = "GetEndpoint"
 type GetEndpointRequest struct {
 	*aws.Request
 	Input *GetEndpointInput
+	Copy  func(*GetEndpointInput) GetEndpointRequest
 }
 
 // Send marshals and sends the GetEndpoint API request.
@@ -1622,7 +1655,7 @@ func (c *Pinpoint) GetEndpointRequest(input *GetEndpointInput) GetEndpointReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetEndpointRequest{Request: req, Input: input}
+	return GetEndpointRequest{Request: req, Input: input, Copy: c.GetEndpointRequest}
 }
 
 const opGetEventStream = "GetEventStream"
@@ -1631,6 +1664,7 @@ const opGetEventStream = "GetEventStream"
 type GetEventStreamRequest struct {
 	*aws.Request
 	Input *GetEventStreamInput
+	Copy  func(*GetEventStreamInput) GetEventStreamRequest
 }
 
 // Send marshals and sends the GetEventStream API request.
@@ -1671,7 +1705,7 @@ func (c *Pinpoint) GetEventStreamRequest(input *GetEventStreamInput) GetEventStr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetEventStreamRequest{Request: req, Input: input}
+	return GetEventStreamRequest{Request: req, Input: input, Copy: c.GetEventStreamRequest}
 }
 
 const opGetGcmChannel = "GetGcmChannel"
@@ -1680,6 +1714,7 @@ const opGetGcmChannel = "GetGcmChannel"
 type GetGcmChannelRequest struct {
 	*aws.Request
 	Input *GetGcmChannelInput
+	Copy  func(*GetGcmChannelInput) GetGcmChannelRequest
 }
 
 // Send marshals and sends the GetGcmChannel API request.
@@ -1720,7 +1755,7 @@ func (c *Pinpoint) GetGcmChannelRequest(input *GetGcmChannelInput) GetGcmChannel
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGcmChannelRequest{Request: req, Input: input}
+	return GetGcmChannelRequest{Request: req, Input: input, Copy: c.GetGcmChannelRequest}
 }
 
 const opGetImportJob = "GetImportJob"
@@ -1729,6 +1764,7 @@ const opGetImportJob = "GetImportJob"
 type GetImportJobRequest struct {
 	*aws.Request
 	Input *GetImportJobInput
+	Copy  func(*GetImportJobInput) GetImportJobRequest
 }
 
 // Send marshals and sends the GetImportJob API request.
@@ -1769,7 +1805,7 @@ func (c *Pinpoint) GetImportJobRequest(input *GetImportJobInput) GetImportJobReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetImportJobRequest{Request: req, Input: input}
+	return GetImportJobRequest{Request: req, Input: input, Copy: c.GetImportJobRequest}
 }
 
 const opGetImportJobs = "GetImportJobs"
@@ -1778,6 +1814,7 @@ const opGetImportJobs = "GetImportJobs"
 type GetImportJobsRequest struct {
 	*aws.Request
 	Input *GetImportJobsInput
+	Copy  func(*GetImportJobsInput) GetImportJobsRequest
 }
 
 // Send marshals and sends the GetImportJobs API request.
@@ -1818,7 +1855,7 @@ func (c *Pinpoint) GetImportJobsRequest(input *GetImportJobsInput) GetImportJobs
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetImportJobsRequest{Request: req, Input: input}
+	return GetImportJobsRequest{Request: req, Input: input, Copy: c.GetImportJobsRequest}
 }
 
 const opGetSegment = "GetSegment"
@@ -1827,6 +1864,7 @@ const opGetSegment = "GetSegment"
 type GetSegmentRequest struct {
 	*aws.Request
 	Input *GetSegmentInput
+	Copy  func(*GetSegmentInput) GetSegmentRequest
 }
 
 // Send marshals and sends the GetSegment API request.
@@ -1867,7 +1905,7 @@ func (c *Pinpoint) GetSegmentRequest(input *GetSegmentInput) GetSegmentRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSegmentRequest{Request: req, Input: input}
+	return GetSegmentRequest{Request: req, Input: input, Copy: c.GetSegmentRequest}
 }
 
 const opGetSegmentImportJobs = "GetSegmentImportJobs"
@@ -1876,6 +1914,7 @@ const opGetSegmentImportJobs = "GetSegmentImportJobs"
 type GetSegmentImportJobsRequest struct {
 	*aws.Request
 	Input *GetSegmentImportJobsInput
+	Copy  func(*GetSegmentImportJobsInput) GetSegmentImportJobsRequest
 }
 
 // Send marshals and sends the GetSegmentImportJobs API request.
@@ -1916,7 +1955,7 @@ func (c *Pinpoint) GetSegmentImportJobsRequest(input *GetSegmentImportJobsInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSegmentImportJobsRequest{Request: req, Input: input}
+	return GetSegmentImportJobsRequest{Request: req, Input: input, Copy: c.GetSegmentImportJobsRequest}
 }
 
 const opGetSegmentVersion = "GetSegmentVersion"
@@ -1925,6 +1964,7 @@ const opGetSegmentVersion = "GetSegmentVersion"
 type GetSegmentVersionRequest struct {
 	*aws.Request
 	Input *GetSegmentVersionInput
+	Copy  func(*GetSegmentVersionInput) GetSegmentVersionRequest
 }
 
 // Send marshals and sends the GetSegmentVersion API request.
@@ -1965,7 +2005,7 @@ func (c *Pinpoint) GetSegmentVersionRequest(input *GetSegmentVersionInput) GetSe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSegmentVersionRequest{Request: req, Input: input}
+	return GetSegmentVersionRequest{Request: req, Input: input, Copy: c.GetSegmentVersionRequest}
 }
 
 const opGetSegmentVersions = "GetSegmentVersions"
@@ -1974,6 +2014,7 @@ const opGetSegmentVersions = "GetSegmentVersions"
 type GetSegmentVersionsRequest struct {
 	*aws.Request
 	Input *GetSegmentVersionsInput
+	Copy  func(*GetSegmentVersionsInput) GetSegmentVersionsRequest
 }
 
 // Send marshals and sends the GetSegmentVersions API request.
@@ -2014,7 +2055,7 @@ func (c *Pinpoint) GetSegmentVersionsRequest(input *GetSegmentVersionsInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSegmentVersionsRequest{Request: req, Input: input}
+	return GetSegmentVersionsRequest{Request: req, Input: input, Copy: c.GetSegmentVersionsRequest}
 }
 
 const opGetSegments = "GetSegments"
@@ -2023,6 +2064,7 @@ const opGetSegments = "GetSegments"
 type GetSegmentsRequest struct {
 	*aws.Request
 	Input *GetSegmentsInput
+	Copy  func(*GetSegmentsInput) GetSegmentsRequest
 }
 
 // Send marshals and sends the GetSegments API request.
@@ -2063,7 +2105,7 @@ func (c *Pinpoint) GetSegmentsRequest(input *GetSegmentsInput) GetSegmentsReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSegmentsRequest{Request: req, Input: input}
+	return GetSegmentsRequest{Request: req, Input: input, Copy: c.GetSegmentsRequest}
 }
 
 const opGetSmsChannel = "GetSmsChannel"
@@ -2072,6 +2114,7 @@ const opGetSmsChannel = "GetSmsChannel"
 type GetSmsChannelRequest struct {
 	*aws.Request
 	Input *GetSmsChannelInput
+	Copy  func(*GetSmsChannelInput) GetSmsChannelRequest
 }
 
 // Send marshals and sends the GetSmsChannel API request.
@@ -2112,7 +2155,7 @@ func (c *Pinpoint) GetSmsChannelRequest(input *GetSmsChannelInput) GetSmsChannel
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSmsChannelRequest{Request: req, Input: input}
+	return GetSmsChannelRequest{Request: req, Input: input, Copy: c.GetSmsChannelRequest}
 }
 
 const opPutEventStream = "PutEventStream"
@@ -2121,6 +2164,7 @@ const opPutEventStream = "PutEventStream"
 type PutEventStreamRequest struct {
 	*aws.Request
 	Input *PutEventStreamInput
+	Copy  func(*PutEventStreamInput) PutEventStreamRequest
 }
 
 // Send marshals and sends the PutEventStream API request.
@@ -2161,7 +2205,7 @@ func (c *Pinpoint) PutEventStreamRequest(input *PutEventStreamInput) PutEventStr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutEventStreamRequest{Request: req, Input: input}
+	return PutEventStreamRequest{Request: req, Input: input, Copy: c.PutEventStreamRequest}
 }
 
 const opSendMessages = "SendMessages"
@@ -2170,6 +2214,7 @@ const opSendMessages = "SendMessages"
 type SendMessagesRequest struct {
 	*aws.Request
 	Input *SendMessagesInput
+	Copy  func(*SendMessagesInput) SendMessagesRequest
 }
 
 // Send marshals and sends the SendMessages API request.
@@ -2210,7 +2255,7 @@ func (c *Pinpoint) SendMessagesRequest(input *SendMessagesInput) SendMessagesReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendMessagesRequest{Request: req, Input: input}
+	return SendMessagesRequest{Request: req, Input: input, Copy: c.SendMessagesRequest}
 }
 
 const opSendUsersMessages = "SendUsersMessages"
@@ -2219,6 +2264,7 @@ const opSendUsersMessages = "SendUsersMessages"
 type SendUsersMessagesRequest struct {
 	*aws.Request
 	Input *SendUsersMessagesInput
+	Copy  func(*SendUsersMessagesInput) SendUsersMessagesRequest
 }
 
 // Send marshals and sends the SendUsersMessages API request.
@@ -2259,7 +2305,7 @@ func (c *Pinpoint) SendUsersMessagesRequest(input *SendUsersMessagesInput) SendU
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendUsersMessagesRequest{Request: req, Input: input}
+	return SendUsersMessagesRequest{Request: req, Input: input, Copy: c.SendUsersMessagesRequest}
 }
 
 const opUpdateAdmChannel = "UpdateAdmChannel"
@@ -2268,6 +2314,7 @@ const opUpdateAdmChannel = "UpdateAdmChannel"
 type UpdateAdmChannelRequest struct {
 	*aws.Request
 	Input *UpdateAdmChannelInput
+	Copy  func(*UpdateAdmChannelInput) UpdateAdmChannelRequest
 }
 
 // Send marshals and sends the UpdateAdmChannel API request.
@@ -2308,7 +2355,7 @@ func (c *Pinpoint) UpdateAdmChannelRequest(input *UpdateAdmChannelInput) UpdateA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAdmChannelRequest{Request: req, Input: input}
+	return UpdateAdmChannelRequest{Request: req, Input: input, Copy: c.UpdateAdmChannelRequest}
 }
 
 const opUpdateApnsChannel = "UpdateApnsChannel"
@@ -2317,6 +2364,7 @@ const opUpdateApnsChannel = "UpdateApnsChannel"
 type UpdateApnsChannelRequest struct {
 	*aws.Request
 	Input *UpdateApnsChannelInput
+	Copy  func(*UpdateApnsChannelInput) UpdateApnsChannelRequest
 }
 
 // Send marshals and sends the UpdateApnsChannel API request.
@@ -2357,7 +2405,7 @@ func (c *Pinpoint) UpdateApnsChannelRequest(input *UpdateApnsChannelInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApnsChannelRequest{Request: req, Input: input}
+	return UpdateApnsChannelRequest{Request: req, Input: input, Copy: c.UpdateApnsChannelRequest}
 }
 
 const opUpdateApnsSandboxChannel = "UpdateApnsSandboxChannel"
@@ -2366,6 +2414,7 @@ const opUpdateApnsSandboxChannel = "UpdateApnsSandboxChannel"
 type UpdateApnsSandboxChannelRequest struct {
 	*aws.Request
 	Input *UpdateApnsSandboxChannelInput
+	Copy  func(*UpdateApnsSandboxChannelInput) UpdateApnsSandboxChannelRequest
 }
 
 // Send marshals and sends the UpdateApnsSandboxChannel API request.
@@ -2406,7 +2455,7 @@ func (c *Pinpoint) UpdateApnsSandboxChannelRequest(input *UpdateApnsSandboxChann
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApnsSandboxChannelRequest{Request: req, Input: input}
+	return UpdateApnsSandboxChannelRequest{Request: req, Input: input, Copy: c.UpdateApnsSandboxChannelRequest}
 }
 
 const opUpdateApnsVoipChannel = "UpdateApnsVoipChannel"
@@ -2415,6 +2464,7 @@ const opUpdateApnsVoipChannel = "UpdateApnsVoipChannel"
 type UpdateApnsVoipChannelRequest struct {
 	*aws.Request
 	Input *UpdateApnsVoipChannelInput
+	Copy  func(*UpdateApnsVoipChannelInput) UpdateApnsVoipChannelRequest
 }
 
 // Send marshals and sends the UpdateApnsVoipChannel API request.
@@ -2455,7 +2505,7 @@ func (c *Pinpoint) UpdateApnsVoipChannelRequest(input *UpdateApnsVoipChannelInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApnsVoipChannelRequest{Request: req, Input: input}
+	return UpdateApnsVoipChannelRequest{Request: req, Input: input, Copy: c.UpdateApnsVoipChannelRequest}
 }
 
 const opUpdateApnsVoipSandboxChannel = "UpdateApnsVoipSandboxChannel"
@@ -2464,6 +2514,7 @@ const opUpdateApnsVoipSandboxChannel = "UpdateApnsVoipSandboxChannel"
 type UpdateApnsVoipSandboxChannelRequest struct {
 	*aws.Request
 	Input *UpdateApnsVoipSandboxChannelInput
+	Copy  func(*UpdateApnsVoipSandboxChannelInput) UpdateApnsVoipSandboxChannelRequest
 }
 
 // Send marshals and sends the UpdateApnsVoipSandboxChannel API request.
@@ -2504,7 +2555,7 @@ func (c *Pinpoint) UpdateApnsVoipSandboxChannelRequest(input *UpdateApnsVoipSand
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApnsVoipSandboxChannelRequest{Request: req, Input: input}
+	return UpdateApnsVoipSandboxChannelRequest{Request: req, Input: input, Copy: c.UpdateApnsVoipSandboxChannelRequest}
 }
 
 const opUpdateApplicationSettings = "UpdateApplicationSettings"
@@ -2513,6 +2564,7 @@ const opUpdateApplicationSettings = "UpdateApplicationSettings"
 type UpdateApplicationSettingsRequest struct {
 	*aws.Request
 	Input *UpdateApplicationSettingsInput
+	Copy  func(*UpdateApplicationSettingsInput) UpdateApplicationSettingsRequest
 }
 
 // Send marshals and sends the UpdateApplicationSettings API request.
@@ -2553,7 +2605,7 @@ func (c *Pinpoint) UpdateApplicationSettingsRequest(input *UpdateApplicationSett
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApplicationSettingsRequest{Request: req, Input: input}
+	return UpdateApplicationSettingsRequest{Request: req, Input: input, Copy: c.UpdateApplicationSettingsRequest}
 }
 
 const opUpdateBaiduChannel = "UpdateBaiduChannel"
@@ -2562,6 +2614,7 @@ const opUpdateBaiduChannel = "UpdateBaiduChannel"
 type UpdateBaiduChannelRequest struct {
 	*aws.Request
 	Input *UpdateBaiduChannelInput
+	Copy  func(*UpdateBaiduChannelInput) UpdateBaiduChannelRequest
 }
 
 // Send marshals and sends the UpdateBaiduChannel API request.
@@ -2602,7 +2655,7 @@ func (c *Pinpoint) UpdateBaiduChannelRequest(input *UpdateBaiduChannelInput) Upd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateBaiduChannelRequest{Request: req, Input: input}
+	return UpdateBaiduChannelRequest{Request: req, Input: input, Copy: c.UpdateBaiduChannelRequest}
 }
 
 const opUpdateCampaign = "UpdateCampaign"
@@ -2611,6 +2664,7 @@ const opUpdateCampaign = "UpdateCampaign"
 type UpdateCampaignRequest struct {
 	*aws.Request
 	Input *UpdateCampaignInput
+	Copy  func(*UpdateCampaignInput) UpdateCampaignRequest
 }
 
 // Send marshals and sends the UpdateCampaign API request.
@@ -2651,7 +2705,7 @@ func (c *Pinpoint) UpdateCampaignRequest(input *UpdateCampaignInput) UpdateCampa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateCampaignRequest{Request: req, Input: input}
+	return UpdateCampaignRequest{Request: req, Input: input, Copy: c.UpdateCampaignRequest}
 }
 
 const opUpdateEmailChannel = "UpdateEmailChannel"
@@ -2660,6 +2714,7 @@ const opUpdateEmailChannel = "UpdateEmailChannel"
 type UpdateEmailChannelRequest struct {
 	*aws.Request
 	Input *UpdateEmailChannelInput
+	Copy  func(*UpdateEmailChannelInput) UpdateEmailChannelRequest
 }
 
 // Send marshals and sends the UpdateEmailChannel API request.
@@ -2700,7 +2755,7 @@ func (c *Pinpoint) UpdateEmailChannelRequest(input *UpdateEmailChannelInput) Upd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEmailChannelRequest{Request: req, Input: input}
+	return UpdateEmailChannelRequest{Request: req, Input: input, Copy: c.UpdateEmailChannelRequest}
 }
 
 const opUpdateEndpoint = "UpdateEndpoint"
@@ -2709,6 +2764,7 @@ const opUpdateEndpoint = "UpdateEndpoint"
 type UpdateEndpointRequest struct {
 	*aws.Request
 	Input *UpdateEndpointInput
+	Copy  func(*UpdateEndpointInput) UpdateEndpointRequest
 }
 
 // Send marshals and sends the UpdateEndpoint API request.
@@ -2749,7 +2805,7 @@ func (c *Pinpoint) UpdateEndpointRequest(input *UpdateEndpointInput) UpdateEndpo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEndpointRequest{Request: req, Input: input}
+	return UpdateEndpointRequest{Request: req, Input: input, Copy: c.UpdateEndpointRequest}
 }
 
 const opUpdateEndpointsBatch = "UpdateEndpointsBatch"
@@ -2758,6 +2814,7 @@ const opUpdateEndpointsBatch = "UpdateEndpointsBatch"
 type UpdateEndpointsBatchRequest struct {
 	*aws.Request
 	Input *UpdateEndpointsBatchInput
+	Copy  func(*UpdateEndpointsBatchInput) UpdateEndpointsBatchRequest
 }
 
 // Send marshals and sends the UpdateEndpointsBatch API request.
@@ -2798,7 +2855,7 @@ func (c *Pinpoint) UpdateEndpointsBatchRequest(input *UpdateEndpointsBatchInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEndpointsBatchRequest{Request: req, Input: input}
+	return UpdateEndpointsBatchRequest{Request: req, Input: input, Copy: c.UpdateEndpointsBatchRequest}
 }
 
 const opUpdateGcmChannel = "UpdateGcmChannel"
@@ -2807,6 +2864,7 @@ const opUpdateGcmChannel = "UpdateGcmChannel"
 type UpdateGcmChannelRequest struct {
 	*aws.Request
 	Input *UpdateGcmChannelInput
+	Copy  func(*UpdateGcmChannelInput) UpdateGcmChannelRequest
 }
 
 // Send marshals and sends the UpdateGcmChannel API request.
@@ -2847,7 +2905,7 @@ func (c *Pinpoint) UpdateGcmChannelRequest(input *UpdateGcmChannelInput) UpdateG
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGcmChannelRequest{Request: req, Input: input}
+	return UpdateGcmChannelRequest{Request: req, Input: input, Copy: c.UpdateGcmChannelRequest}
 }
 
 const opUpdateSegment = "UpdateSegment"
@@ -2856,6 +2914,7 @@ const opUpdateSegment = "UpdateSegment"
 type UpdateSegmentRequest struct {
 	*aws.Request
 	Input *UpdateSegmentInput
+	Copy  func(*UpdateSegmentInput) UpdateSegmentRequest
 }
 
 // Send marshals and sends the UpdateSegment API request.
@@ -2896,7 +2955,7 @@ func (c *Pinpoint) UpdateSegmentRequest(input *UpdateSegmentInput) UpdateSegment
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSegmentRequest{Request: req, Input: input}
+	return UpdateSegmentRequest{Request: req, Input: input, Copy: c.UpdateSegmentRequest}
 }
 
 const opUpdateSmsChannel = "UpdateSmsChannel"
@@ -2905,6 +2964,7 @@ const opUpdateSmsChannel = "UpdateSmsChannel"
 type UpdateSmsChannelRequest struct {
 	*aws.Request
 	Input *UpdateSmsChannelInput
+	Copy  func(*UpdateSmsChannelInput) UpdateSmsChannelRequest
 }
 
 // Send marshals and sends the UpdateSmsChannel API request.
@@ -2945,7 +3005,7 @@ func (c *Pinpoint) UpdateSmsChannelRequest(input *UpdateSmsChannelInput) UpdateS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSmsChannelRequest{Request: req, Input: input}
+	return UpdateSmsChannelRequest{Request: req, Input: input, Copy: c.UpdateSmsChannelRequest}
 }
 
 // Amazon Device Messaging channel definition.

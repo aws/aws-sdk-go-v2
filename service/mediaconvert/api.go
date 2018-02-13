@@ -16,6 +16,7 @@ const opCancelJob = "CancelJob"
 type CancelJobRequest struct {
 	*aws.Request
 	Input *CancelJobInput
+	Copy  func(*CancelJobInput) CancelJobRequest
 }
 
 // Send marshals and sends the CancelJob API request.
@@ -57,7 +58,7 @@ func (c *MediaConvert) CancelJobRequest(input *CancelJobInput) CancelJobRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelJobRequest{Request: req, Input: input}
+	return CancelJobRequest{Request: req, Input: input, Copy: c.CancelJobRequest}
 }
 
 const opCreateJob = "CreateJob"
@@ -66,6 +67,7 @@ const opCreateJob = "CreateJob"
 type CreateJobRequest struct {
 	*aws.Request
 	Input *CreateJobInput
+	Copy  func(*CreateJobInput) CreateJobRequest
 }
 
 // Send marshals and sends the CreateJob API request.
@@ -107,7 +109,7 @@ func (c *MediaConvert) CreateJobRequest(input *CreateJobInput) CreateJobRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateJobRequest{Request: req, Input: input}
+	return CreateJobRequest{Request: req, Input: input, Copy: c.CreateJobRequest}
 }
 
 const opCreateJobTemplate = "CreateJobTemplate"
@@ -116,6 +118,7 @@ const opCreateJobTemplate = "CreateJobTemplate"
 type CreateJobTemplateRequest struct {
 	*aws.Request
 	Input *CreateJobTemplateInput
+	Copy  func(*CreateJobTemplateInput) CreateJobTemplateRequest
 }
 
 // Send marshals and sends the CreateJobTemplate API request.
@@ -157,7 +160,7 @@ func (c *MediaConvert) CreateJobTemplateRequest(input *CreateJobTemplateInput) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateJobTemplateRequest{Request: req, Input: input}
+	return CreateJobTemplateRequest{Request: req, Input: input, Copy: c.CreateJobTemplateRequest}
 }
 
 const opCreatePreset = "CreatePreset"
@@ -166,6 +169,7 @@ const opCreatePreset = "CreatePreset"
 type CreatePresetRequest struct {
 	*aws.Request
 	Input *CreatePresetInput
+	Copy  func(*CreatePresetInput) CreatePresetRequest
 }
 
 // Send marshals and sends the CreatePreset API request.
@@ -207,7 +211,7 @@ func (c *MediaConvert) CreatePresetRequest(input *CreatePresetInput) CreatePrese
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePresetRequest{Request: req, Input: input}
+	return CreatePresetRequest{Request: req, Input: input, Copy: c.CreatePresetRequest}
 }
 
 const opCreateQueue = "CreateQueue"
@@ -216,6 +220,7 @@ const opCreateQueue = "CreateQueue"
 type CreateQueueRequest struct {
 	*aws.Request
 	Input *CreateQueueInput
+	Copy  func(*CreateQueueInput) CreateQueueRequest
 }
 
 // Send marshals and sends the CreateQueue API request.
@@ -257,7 +262,7 @@ func (c *MediaConvert) CreateQueueRequest(input *CreateQueueInput) CreateQueueRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateQueueRequest{Request: req, Input: input}
+	return CreateQueueRequest{Request: req, Input: input, Copy: c.CreateQueueRequest}
 }
 
 const opDeleteJobTemplate = "DeleteJobTemplate"
@@ -266,6 +271,7 @@ const opDeleteJobTemplate = "DeleteJobTemplate"
 type DeleteJobTemplateRequest struct {
 	*aws.Request
 	Input *DeleteJobTemplateInput
+	Copy  func(*DeleteJobTemplateInput) DeleteJobTemplateRequest
 }
 
 // Send marshals and sends the DeleteJobTemplate API request.
@@ -306,7 +312,7 @@ func (c *MediaConvert) DeleteJobTemplateRequest(input *DeleteJobTemplateInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteJobTemplateRequest{Request: req, Input: input}
+	return DeleteJobTemplateRequest{Request: req, Input: input, Copy: c.DeleteJobTemplateRequest}
 }
 
 const opDeletePreset = "DeletePreset"
@@ -315,6 +321,7 @@ const opDeletePreset = "DeletePreset"
 type DeletePresetRequest struct {
 	*aws.Request
 	Input *DeletePresetInput
+	Copy  func(*DeletePresetInput) DeletePresetRequest
 }
 
 // Send marshals and sends the DeletePreset API request.
@@ -355,7 +362,7 @@ func (c *MediaConvert) DeletePresetRequest(input *DeletePresetInput) DeletePrese
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePresetRequest{Request: req, Input: input}
+	return DeletePresetRequest{Request: req, Input: input, Copy: c.DeletePresetRequest}
 }
 
 const opDeleteQueue = "DeleteQueue"
@@ -364,6 +371,7 @@ const opDeleteQueue = "DeleteQueue"
 type DeleteQueueRequest struct {
 	*aws.Request
 	Input *DeleteQueueInput
+	Copy  func(*DeleteQueueInput) DeleteQueueRequest
 }
 
 // Send marshals and sends the DeleteQueue API request.
@@ -404,7 +412,7 @@ func (c *MediaConvert) DeleteQueueRequest(input *DeleteQueueInput) DeleteQueueRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteQueueRequest{Request: req, Input: input}
+	return DeleteQueueRequest{Request: req, Input: input, Copy: c.DeleteQueueRequest}
 }
 
 const opDescribeEndpoints = "DescribeEndpoints"
@@ -413,6 +421,7 @@ const opDescribeEndpoints = "DescribeEndpoints"
 type DescribeEndpointsRequest struct {
 	*aws.Request
 	Input *DescribeEndpointsInput
+	Copy  func(*DescribeEndpointsInput) DescribeEndpointsRequest
 }
 
 // Send marshals and sends the DescribeEndpoints API request.
@@ -454,7 +463,7 @@ func (c *MediaConvert) DescribeEndpointsRequest(input *DescribeEndpointsInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEndpointsRequest{Request: req, Input: input}
+	return DescribeEndpointsRequest{Request: req, Input: input, Copy: c.DescribeEndpointsRequest}
 }
 
 const opGetJob = "GetJob"
@@ -463,6 +472,7 @@ const opGetJob = "GetJob"
 type GetJobRequest struct {
 	*aws.Request
 	Input *GetJobInput
+	Copy  func(*GetJobInput) GetJobRequest
 }
 
 // Send marshals and sends the GetJob API request.
@@ -503,7 +513,7 @@ func (c *MediaConvert) GetJobRequest(input *GetJobInput) GetJobRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobRequest{Request: req, Input: input}
+	return GetJobRequest{Request: req, Input: input, Copy: c.GetJobRequest}
 }
 
 const opGetJobTemplate = "GetJobTemplate"
@@ -512,6 +522,7 @@ const opGetJobTemplate = "GetJobTemplate"
 type GetJobTemplateRequest struct {
 	*aws.Request
 	Input *GetJobTemplateInput
+	Copy  func(*GetJobTemplateInput) GetJobTemplateRequest
 }
 
 // Send marshals and sends the GetJobTemplate API request.
@@ -552,7 +563,7 @@ func (c *MediaConvert) GetJobTemplateRequest(input *GetJobTemplateInput) GetJobT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobTemplateRequest{Request: req, Input: input}
+	return GetJobTemplateRequest{Request: req, Input: input, Copy: c.GetJobTemplateRequest}
 }
 
 const opGetPreset = "GetPreset"
@@ -561,6 +572,7 @@ const opGetPreset = "GetPreset"
 type GetPresetRequest struct {
 	*aws.Request
 	Input *GetPresetInput
+	Copy  func(*GetPresetInput) GetPresetRequest
 }
 
 // Send marshals and sends the GetPreset API request.
@@ -601,7 +613,7 @@ func (c *MediaConvert) GetPresetRequest(input *GetPresetInput) GetPresetRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPresetRequest{Request: req, Input: input}
+	return GetPresetRequest{Request: req, Input: input, Copy: c.GetPresetRequest}
 }
 
 const opGetQueue = "GetQueue"
@@ -610,6 +622,7 @@ const opGetQueue = "GetQueue"
 type GetQueueRequest struct {
 	*aws.Request
 	Input *GetQueueInput
+	Copy  func(*GetQueueInput) GetQueueRequest
 }
 
 // Send marshals and sends the GetQueue API request.
@@ -650,7 +663,7 @@ func (c *MediaConvert) GetQueueRequest(input *GetQueueInput) GetQueueRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetQueueRequest{Request: req, Input: input}
+	return GetQueueRequest{Request: req, Input: input, Copy: c.GetQueueRequest}
 }
 
 const opListJobTemplates = "ListJobTemplates"
@@ -659,6 +672,7 @@ const opListJobTemplates = "ListJobTemplates"
 type ListJobTemplatesRequest struct {
 	*aws.Request
 	Input *ListJobTemplatesInput
+	Copy  func(*ListJobTemplatesInput) ListJobTemplatesRequest
 }
 
 // Send marshals and sends the ListJobTemplates API request.
@@ -701,7 +715,7 @@ func (c *MediaConvert) ListJobTemplatesRequest(input *ListJobTemplatesInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobTemplatesRequest{Request: req, Input: input}
+	return ListJobTemplatesRequest{Request: req, Input: input, Copy: c.ListJobTemplatesRequest}
 }
 
 const opListJobs = "ListJobs"
@@ -710,6 +724,7 @@ const opListJobs = "ListJobs"
 type ListJobsRequest struct {
 	*aws.Request
 	Input *ListJobsInput
+	Copy  func(*ListJobsInput) ListJobsRequest
 }
 
 // Send marshals and sends the ListJobs API request.
@@ -753,7 +768,7 @@ func (c *MediaConvert) ListJobsRequest(input *ListJobsInput) ListJobsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListJobsRequest{Request: req, Input: input}
+	return ListJobsRequest{Request: req, Input: input, Copy: c.ListJobsRequest}
 }
 
 const opListPresets = "ListPresets"
@@ -762,6 +777,7 @@ const opListPresets = "ListPresets"
 type ListPresetsRequest struct {
 	*aws.Request
 	Input *ListPresetsInput
+	Copy  func(*ListPresetsInput) ListPresetsRequest
 }
 
 // Send marshals and sends the ListPresets API request.
@@ -804,7 +820,7 @@ func (c *MediaConvert) ListPresetsRequest(input *ListPresetsInput) ListPresetsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPresetsRequest{Request: req, Input: input}
+	return ListPresetsRequest{Request: req, Input: input, Copy: c.ListPresetsRequest}
 }
 
 const opListQueues = "ListQueues"
@@ -813,6 +829,7 @@ const opListQueues = "ListQueues"
 type ListQueuesRequest struct {
 	*aws.Request
 	Input *ListQueuesInput
+	Copy  func(*ListQueuesInput) ListQueuesRequest
 }
 
 // Send marshals and sends the ListQueues API request.
@@ -855,7 +872,7 @@ func (c *MediaConvert) ListQueuesRequest(input *ListQueuesInput) ListQueuesReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListQueuesRequest{Request: req, Input: input}
+	return ListQueuesRequest{Request: req, Input: input, Copy: c.ListQueuesRequest}
 }
 
 const opUpdateJobTemplate = "UpdateJobTemplate"
@@ -864,6 +881,7 @@ const opUpdateJobTemplate = "UpdateJobTemplate"
 type UpdateJobTemplateRequest struct {
 	*aws.Request
 	Input *UpdateJobTemplateInput
+	Copy  func(*UpdateJobTemplateInput) UpdateJobTemplateRequest
 }
 
 // Send marshals and sends the UpdateJobTemplate API request.
@@ -904,7 +922,7 @@ func (c *MediaConvert) UpdateJobTemplateRequest(input *UpdateJobTemplateInput) U
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateJobTemplateRequest{Request: req, Input: input}
+	return UpdateJobTemplateRequest{Request: req, Input: input, Copy: c.UpdateJobTemplateRequest}
 }
 
 const opUpdatePreset = "UpdatePreset"
@@ -913,6 +931,7 @@ const opUpdatePreset = "UpdatePreset"
 type UpdatePresetRequest struct {
 	*aws.Request
 	Input *UpdatePresetInput
+	Copy  func(*UpdatePresetInput) UpdatePresetRequest
 }
 
 // Send marshals and sends the UpdatePreset API request.
@@ -953,7 +972,7 @@ func (c *MediaConvert) UpdatePresetRequest(input *UpdatePresetInput) UpdatePrese
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePresetRequest{Request: req, Input: input}
+	return UpdatePresetRequest{Request: req, Input: input, Copy: c.UpdatePresetRequest}
 }
 
 const opUpdateQueue = "UpdateQueue"
@@ -962,6 +981,7 @@ const opUpdateQueue = "UpdateQueue"
 type UpdateQueueRequest struct {
 	*aws.Request
 	Input *UpdateQueueInput
+	Copy  func(*UpdateQueueInput) UpdateQueueRequest
 }
 
 // Send marshals and sends the UpdateQueue API request.
@@ -1002,7 +1022,7 @@ func (c *MediaConvert) UpdateQueueRequest(input *UpdateQueueInput) UpdateQueueRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateQueueRequest{Request: req, Input: input}
+	return UpdateQueueRequest{Request: req, Input: input, Copy: c.UpdateQueueRequest}
 }
 
 // Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to

@@ -16,6 +16,7 @@ const opAddTagsToResource = "AddTagsToResource"
 type AddTagsToResourceRequest struct {
 	*aws.Request
 	Input *AddTagsToResourceInput
+	Copy  func(*AddTagsToResourceInput) AddTagsToResourceRequest
 }
 
 // Send marshals and sends the AddTagsToResource API request.
@@ -59,7 +60,7 @@ func (c *DatabaseMigrationService) AddTagsToResourceRequest(input *AddTagsToReso
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToResourceRequest{Request: req, Input: input}
+	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 
 const opCreateEndpoint = "CreateEndpoint"
@@ -68,6 +69,7 @@ const opCreateEndpoint = "CreateEndpoint"
 type CreateEndpointRequest struct {
 	*aws.Request
 	Input *CreateEndpointInput
+	Copy  func(*CreateEndpointInput) CreateEndpointRequest
 }
 
 // Send marshals and sends the CreateEndpoint API request.
@@ -108,7 +110,7 @@ func (c *DatabaseMigrationService) CreateEndpointRequest(input *CreateEndpointIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEndpointRequest{Request: req, Input: input}
+	return CreateEndpointRequest{Request: req, Input: input, Copy: c.CreateEndpointRequest}
 }
 
 const opCreateEventSubscription = "CreateEventSubscription"
@@ -117,6 +119,7 @@ const opCreateEventSubscription = "CreateEventSubscription"
 type CreateEventSubscriptionRequest struct {
 	*aws.Request
 	Input *CreateEventSubscriptionInput
+	Copy  func(*CreateEventSubscriptionInput) CreateEventSubscriptionRequest
 }
 
 // Send marshals and sends the CreateEventSubscription API request.
@@ -173,7 +176,7 @@ func (c *DatabaseMigrationService) CreateEventSubscriptionRequest(input *CreateE
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEventSubscriptionRequest{Request: req, Input: input}
+	return CreateEventSubscriptionRequest{Request: req, Input: input, Copy: c.CreateEventSubscriptionRequest}
 }
 
 const opCreateReplicationInstance = "CreateReplicationInstance"
@@ -182,6 +185,7 @@ const opCreateReplicationInstance = "CreateReplicationInstance"
 type CreateReplicationInstanceRequest struct {
 	*aws.Request
 	Input *CreateReplicationInstanceInput
+	Copy  func(*CreateReplicationInstanceInput) CreateReplicationInstanceRequest
 }
 
 // Send marshals and sends the CreateReplicationInstance API request.
@@ -222,7 +226,7 @@ func (c *DatabaseMigrationService) CreateReplicationInstanceRequest(input *Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateReplicationInstanceRequest{Request: req, Input: input}
+	return CreateReplicationInstanceRequest{Request: req, Input: input, Copy: c.CreateReplicationInstanceRequest}
 }
 
 const opCreateReplicationSubnetGroup = "CreateReplicationSubnetGroup"
@@ -231,6 +235,7 @@ const opCreateReplicationSubnetGroup = "CreateReplicationSubnetGroup"
 type CreateReplicationSubnetGroupRequest struct {
 	*aws.Request
 	Input *CreateReplicationSubnetGroupInput
+	Copy  func(*CreateReplicationSubnetGroupInput) CreateReplicationSubnetGroupRequest
 }
 
 // Send marshals and sends the CreateReplicationSubnetGroup API request.
@@ -271,7 +276,7 @@ func (c *DatabaseMigrationService) CreateReplicationSubnetGroupRequest(input *Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateReplicationSubnetGroupRequest{Request: req, Input: input}
+	return CreateReplicationSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateReplicationSubnetGroupRequest}
 }
 
 const opCreateReplicationTask = "CreateReplicationTask"
@@ -280,6 +285,7 @@ const opCreateReplicationTask = "CreateReplicationTask"
 type CreateReplicationTaskRequest struct {
 	*aws.Request
 	Input *CreateReplicationTaskInput
+	Copy  func(*CreateReplicationTaskInput) CreateReplicationTaskRequest
 }
 
 // Send marshals and sends the CreateReplicationTask API request.
@@ -320,7 +326,7 @@ func (c *DatabaseMigrationService) CreateReplicationTaskRequest(input *CreateRep
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateReplicationTaskRequest{Request: req, Input: input}
+	return CreateReplicationTaskRequest{Request: req, Input: input, Copy: c.CreateReplicationTaskRequest}
 }
 
 const opDeleteCertificate = "DeleteCertificate"
@@ -329,6 +335,7 @@ const opDeleteCertificate = "DeleteCertificate"
 type DeleteCertificateRequest struct {
 	*aws.Request
 	Input *DeleteCertificateInput
+	Copy  func(*DeleteCertificateInput) DeleteCertificateRequest
 }
 
 // Send marshals and sends the DeleteCertificate API request.
@@ -369,7 +376,7 @@ func (c *DatabaseMigrationService) DeleteCertificateRequest(input *DeleteCertifi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCertificateRequest{Request: req, Input: input}
+	return DeleteCertificateRequest{Request: req, Input: input, Copy: c.DeleteCertificateRequest}
 }
 
 const opDeleteEndpoint = "DeleteEndpoint"
@@ -378,6 +385,7 @@ const opDeleteEndpoint = "DeleteEndpoint"
 type DeleteEndpointRequest struct {
 	*aws.Request
 	Input *DeleteEndpointInput
+	Copy  func(*DeleteEndpointInput) DeleteEndpointRequest
 }
 
 // Send marshals and sends the DeleteEndpoint API request.
@@ -421,7 +429,7 @@ func (c *DatabaseMigrationService) DeleteEndpointRequest(input *DeleteEndpointIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEndpointRequest{Request: req, Input: input}
+	return DeleteEndpointRequest{Request: req, Input: input, Copy: c.DeleteEndpointRequest}
 }
 
 const opDeleteEventSubscription = "DeleteEventSubscription"
@@ -430,6 +438,7 @@ const opDeleteEventSubscription = "DeleteEventSubscription"
 type DeleteEventSubscriptionRequest struct {
 	*aws.Request
 	Input *DeleteEventSubscriptionInput
+	Copy  func(*DeleteEventSubscriptionInput) DeleteEventSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteEventSubscription API request.
@@ -470,7 +479,7 @@ func (c *DatabaseMigrationService) DeleteEventSubscriptionRequest(input *DeleteE
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEventSubscriptionRequest{Request: req, Input: input}
+	return DeleteEventSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteEventSubscriptionRequest}
 }
 
 const opDeleteReplicationInstance = "DeleteReplicationInstance"
@@ -479,6 +488,7 @@ const opDeleteReplicationInstance = "DeleteReplicationInstance"
 type DeleteReplicationInstanceRequest struct {
 	*aws.Request
 	Input *DeleteReplicationInstanceInput
+	Copy  func(*DeleteReplicationInstanceInput) DeleteReplicationInstanceRequest
 }
 
 // Send marshals and sends the DeleteReplicationInstance API request.
@@ -522,7 +532,7 @@ func (c *DatabaseMigrationService) DeleteReplicationInstanceRequest(input *Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteReplicationInstanceRequest{Request: req, Input: input}
+	return DeleteReplicationInstanceRequest{Request: req, Input: input, Copy: c.DeleteReplicationInstanceRequest}
 }
 
 const opDeleteReplicationSubnetGroup = "DeleteReplicationSubnetGroup"
@@ -531,6 +541,7 @@ const opDeleteReplicationSubnetGroup = "DeleteReplicationSubnetGroup"
 type DeleteReplicationSubnetGroupRequest struct {
 	*aws.Request
 	Input *DeleteReplicationSubnetGroupInput
+	Copy  func(*DeleteReplicationSubnetGroupInput) DeleteReplicationSubnetGroupRequest
 }
 
 // Send marshals and sends the DeleteReplicationSubnetGroup API request.
@@ -571,7 +582,7 @@ func (c *DatabaseMigrationService) DeleteReplicationSubnetGroupRequest(input *De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteReplicationSubnetGroupRequest{Request: req, Input: input}
+	return DeleteReplicationSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteReplicationSubnetGroupRequest}
 }
 
 const opDeleteReplicationTask = "DeleteReplicationTask"
@@ -580,6 +591,7 @@ const opDeleteReplicationTask = "DeleteReplicationTask"
 type DeleteReplicationTaskRequest struct {
 	*aws.Request
 	Input *DeleteReplicationTaskInput
+	Copy  func(*DeleteReplicationTaskInput) DeleteReplicationTaskRequest
 }
 
 // Send marshals and sends the DeleteReplicationTask API request.
@@ -620,7 +632,7 @@ func (c *DatabaseMigrationService) DeleteReplicationTaskRequest(input *DeleteRep
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteReplicationTaskRequest{Request: req, Input: input}
+	return DeleteReplicationTaskRequest{Request: req, Input: input, Copy: c.DeleteReplicationTaskRequest}
 }
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
@@ -629,6 +641,7 @@ const opDescribeAccountAttributes = "DescribeAccountAttributes"
 type DescribeAccountAttributesRequest struct {
 	*aws.Request
 	Input *DescribeAccountAttributesInput
+	Copy  func(*DescribeAccountAttributesInput) DescribeAccountAttributesRequest
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
@@ -674,7 +687,7 @@ func (c *DatabaseMigrationService) DescribeAccountAttributesRequest(input *Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAccountAttributesRequest{Request: req, Input: input}
+	return DescribeAccountAttributesRequest{Request: req, Input: input, Copy: c.DescribeAccountAttributesRequest}
 }
 
 const opDescribeCertificates = "DescribeCertificates"
@@ -683,6 +696,7 @@ const opDescribeCertificates = "DescribeCertificates"
 type DescribeCertificatesRequest struct {
 	*aws.Request
 	Input *DescribeCertificatesInput
+	Copy  func(*DescribeCertificatesInput) DescribeCertificatesRequest
 }
 
 // Send marshals and sends the DescribeCertificates API request.
@@ -729,57 +743,53 @@ func (c *DatabaseMigrationService) DescribeCertificatesRequest(input *DescribeCe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCertificatesRequest{Request: req, Input: input}
+	return DescribeCertificatesRequest{Request: req, Input: input, Copy: c.DescribeCertificatesRequest}
 }
 
-// DescribeCertificatesPages iterates over the pages of a DescribeCertificates operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeCertificates method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeCertificatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeCertificates operation.
-//    pageNum := 0
-//    err := client.DescribeCertificatesPages(params,
-//        func(page *DescribeCertificatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeCertificatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeCertificatesPages(input *DescribeCertificatesInput, fn func(*DescribeCertificatesOutput, bool) bool) error {
-	return c.DescribeCertificatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeCertificatesRequest) Paginate(opts ...aws.Option) DescribeCertificatesPager {
+	return DescribeCertificatesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeCertificatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeCertificatesPagesWithContext same as DescribeCertificatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeCertificatesPagesWithContext(ctx aws.Context, input *DescribeCertificatesInput, fn func(*DescribeCertificatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeCertificatesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeCertificatesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCertificatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCertificatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeCertificatesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCertificatesPager) CurrentPage() *DescribeCertificatesOutput {
+	return p.Pager.CurrentPage().(*DescribeCertificatesOutput)
 }
 
 const opDescribeConnections = "DescribeConnections"
@@ -788,6 +798,7 @@ const opDescribeConnections = "DescribeConnections"
 type DescribeConnectionsRequest struct {
 	*aws.Request
 	Input *DescribeConnectionsInput
+	Copy  func(*DescribeConnectionsInput) DescribeConnectionsRequest
 }
 
 // Send marshals and sends the DescribeConnections API request.
@@ -835,57 +846,53 @@ func (c *DatabaseMigrationService) DescribeConnectionsRequest(input *DescribeCon
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConnectionsRequest{Request: req, Input: input}
+	return DescribeConnectionsRequest{Request: req, Input: input, Copy: c.DescribeConnectionsRequest}
 }
 
-// DescribeConnectionsPages iterates over the pages of a DescribeConnections operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeConnections method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeConnectionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeConnections operation.
-//    pageNum := 0
-//    err := client.DescribeConnectionsPages(params,
-//        func(page *DescribeConnectionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeConnectionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeConnectionsPages(input *DescribeConnectionsInput, fn func(*DescribeConnectionsOutput, bool) bool) error {
-	return c.DescribeConnectionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeConnectionsRequest) Paginate(opts ...aws.Option) DescribeConnectionsPager {
+	return DescribeConnectionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeConnectionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeConnectionsPagesWithContext same as DescribeConnectionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeConnectionsPagesWithContext(ctx aws.Context, input *DescribeConnectionsInput, fn func(*DescribeConnectionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeConnectionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeConnectionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeConnectionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeConnectionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeConnectionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeConnectionsPager) CurrentPage() *DescribeConnectionsOutput {
+	return p.Pager.CurrentPage().(*DescribeConnectionsOutput)
 }
 
 const opDescribeEndpointTypes = "DescribeEndpointTypes"
@@ -894,6 +901,7 @@ const opDescribeEndpointTypes = "DescribeEndpointTypes"
 type DescribeEndpointTypesRequest struct {
 	*aws.Request
 	Input *DescribeEndpointTypesInput
+	Copy  func(*DescribeEndpointTypesInput) DescribeEndpointTypesRequest
 }
 
 // Send marshals and sends the DescribeEndpointTypes API request.
@@ -940,57 +948,53 @@ func (c *DatabaseMigrationService) DescribeEndpointTypesRequest(input *DescribeE
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEndpointTypesRequest{Request: req, Input: input}
+	return DescribeEndpointTypesRequest{Request: req, Input: input, Copy: c.DescribeEndpointTypesRequest}
 }
 
-// DescribeEndpointTypesPages iterates over the pages of a DescribeEndpointTypes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEndpointTypes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEndpointTypesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEndpointTypes operation.
-//    pageNum := 0
-//    err := client.DescribeEndpointTypesPages(params,
-//        func(page *DescribeEndpointTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEndpointTypesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeEndpointTypesPages(input *DescribeEndpointTypesInput, fn func(*DescribeEndpointTypesOutput, bool) bool) error {
-	return c.DescribeEndpointTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEndpointTypesRequest) Paginate(opts ...aws.Option) DescribeEndpointTypesPager {
+	return DescribeEndpointTypesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEndpointTypesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEndpointTypesPagesWithContext same as DescribeEndpointTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEndpointTypesPagesWithContext(ctx aws.Context, input *DescribeEndpointTypesInput, fn func(*DescribeEndpointTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEndpointTypesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEndpointTypesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEndpointTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEndpointTypesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEndpointTypesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEndpointTypesPager) CurrentPage() *DescribeEndpointTypesOutput {
+	return p.Pager.CurrentPage().(*DescribeEndpointTypesOutput)
 }
 
 const opDescribeEndpoints = "DescribeEndpoints"
@@ -999,6 +1003,7 @@ const opDescribeEndpoints = "DescribeEndpoints"
 type DescribeEndpointsRequest struct {
 	*aws.Request
 	Input *DescribeEndpointsInput
+	Copy  func(*DescribeEndpointsInput) DescribeEndpointsRequest
 }
 
 // Send marshals and sends the DescribeEndpoints API request.
@@ -1045,57 +1050,53 @@ func (c *DatabaseMigrationService) DescribeEndpointsRequest(input *DescribeEndpo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEndpointsRequest{Request: req, Input: input}
+	return DescribeEndpointsRequest{Request: req, Input: input, Copy: c.DescribeEndpointsRequest}
 }
 
-// DescribeEndpointsPages iterates over the pages of a DescribeEndpoints operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEndpoints method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEndpointsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEndpoints operation.
-//    pageNum := 0
-//    err := client.DescribeEndpointsPages(params,
-//        func(page *DescribeEndpointsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEndpointsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeEndpointsPages(input *DescribeEndpointsInput, fn func(*DescribeEndpointsOutput, bool) bool) error {
-	return c.DescribeEndpointsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEndpointsRequest) Paginate(opts ...aws.Option) DescribeEndpointsPager {
+	return DescribeEndpointsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEndpointsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEndpointsPagesWithContext same as DescribeEndpointsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEndpointsPagesWithContext(ctx aws.Context, input *DescribeEndpointsInput, fn func(*DescribeEndpointsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEndpointsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEndpointsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEndpointsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEndpointsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEndpointsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEndpointsPager) CurrentPage() *DescribeEndpointsOutput {
+	return p.Pager.CurrentPage().(*DescribeEndpointsOutput)
 }
 
 const opDescribeEventCategories = "DescribeEventCategories"
@@ -1104,6 +1105,7 @@ const opDescribeEventCategories = "DescribeEventCategories"
 type DescribeEventCategoriesRequest struct {
 	*aws.Request
 	Input *DescribeEventCategoriesInput
+	Copy  func(*DescribeEventCategoriesInput) DescribeEventCategoriesRequest
 }
 
 // Send marshals and sends the DescribeEventCategories API request.
@@ -1147,7 +1149,7 @@ func (c *DatabaseMigrationService) DescribeEventCategoriesRequest(input *Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventCategoriesRequest{Request: req, Input: input}
+	return DescribeEventCategoriesRequest{Request: req, Input: input, Copy: c.DescribeEventCategoriesRequest}
 }
 
 const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
@@ -1156,6 +1158,7 @@ const opDescribeEventSubscriptions = "DescribeEventSubscriptions"
 type DescribeEventSubscriptionsRequest struct {
 	*aws.Request
 	Input *DescribeEventSubscriptionsInput
+	Copy  func(*DescribeEventSubscriptionsInput) DescribeEventSubscriptionsRequest
 }
 
 // Send marshals and sends the DescribeEventSubscriptions API request.
@@ -1207,57 +1210,53 @@ func (c *DatabaseMigrationService) DescribeEventSubscriptionsRequest(input *Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventSubscriptionsRequest{Request: req, Input: input}
+	return DescribeEventSubscriptionsRequest{Request: req, Input: input, Copy: c.DescribeEventSubscriptionsRequest}
 }
 
-// DescribeEventSubscriptionsPages iterates over the pages of a DescribeEventSubscriptions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEventSubscriptions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventSubscriptionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEventSubscriptions operation.
-//    pageNum := 0
-//    err := client.DescribeEventSubscriptionsPages(params,
-//        func(page *DescribeEventSubscriptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventSubscriptionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeEventSubscriptionsPages(input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool) error {
-	return c.DescribeEventSubscriptionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEventSubscriptionsRequest) Paginate(opts ...aws.Option) DescribeEventSubscriptionsPager {
+	return DescribeEventSubscriptionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventSubscriptionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEventSubscriptionsPagesWithContext same as DescribeEventSubscriptionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventSubscriptionsPagesWithContext(ctx aws.Context, input *DescribeEventSubscriptionsInput, fn func(*DescribeEventSubscriptionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventSubscriptionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEventSubscriptionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventSubscriptionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventSubscriptionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEventSubscriptionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventSubscriptionsPager) CurrentPage() *DescribeEventSubscriptionsOutput {
+	return p.Pager.CurrentPage().(*DescribeEventSubscriptionsOutput)
 }
 
 const opDescribeEvents = "DescribeEvents"
@@ -1266,6 +1265,7 @@ const opDescribeEvents = "DescribeEvents"
 type DescribeEventsRequest struct {
 	*aws.Request
 	Input *DescribeEventsInput
+	Copy  func(*DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -1314,57 +1314,53 @@ func (c *DatabaseMigrationService) DescribeEventsRequest(input *DescribeEventsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventsRequest{Request: req, Input: input}
+	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
-// DescribeEventsPages iterates over the pages of a DescribeEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEvents operation.
-//    pageNum := 0
-//    err := client.DescribeEventsPages(params,
-//        func(page *DescribeEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeEventsPages(input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool) error {
-	return c.DescribeEventsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
+	return DescribeEventsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEventsPagesWithContext same as DescribeEventsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEventsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEventsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventsPager) CurrentPage() *DescribeEventsOutput {
+	return p.Pager.CurrentPage().(*DescribeEventsOutput)
 }
 
 const opDescribeOrderableReplicationInstances = "DescribeOrderableReplicationInstances"
@@ -1373,6 +1369,7 @@ const opDescribeOrderableReplicationInstances = "DescribeOrderableReplicationIns
 type DescribeOrderableReplicationInstancesRequest struct {
 	*aws.Request
 	Input *DescribeOrderableReplicationInstancesInput
+	Copy  func(*DescribeOrderableReplicationInstancesInput) DescribeOrderableReplicationInstancesRequest
 }
 
 // Send marshals and sends the DescribeOrderableReplicationInstances API request.
@@ -1420,57 +1417,53 @@ func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesRequest(
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeOrderableReplicationInstancesRequest{Request: req, Input: input}
+	return DescribeOrderableReplicationInstancesRequest{Request: req, Input: input, Copy: c.DescribeOrderableReplicationInstancesRequest}
 }
 
-// DescribeOrderableReplicationInstancesPages iterates over the pages of a DescribeOrderableReplicationInstances operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeOrderableReplicationInstances method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeOrderableReplicationInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeOrderableReplicationInstances operation.
-//    pageNum := 0
-//    err := client.DescribeOrderableReplicationInstancesPages(params,
-//        func(page *DescribeOrderableReplicationInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeOrderableReplicationInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesPages(input *DescribeOrderableReplicationInstancesInput, fn func(*DescribeOrderableReplicationInstancesOutput, bool) bool) error {
-	return c.DescribeOrderableReplicationInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeOrderableReplicationInstancesRequest) Paginate(opts ...aws.Option) DescribeOrderableReplicationInstancesPager {
+	return DescribeOrderableReplicationInstancesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeOrderableReplicationInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeOrderableReplicationInstancesPagesWithContext same as DescribeOrderableReplicationInstancesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeOrderableReplicationInstancesPagesWithContext(ctx aws.Context, input *DescribeOrderableReplicationInstancesInput, fn func(*DescribeOrderableReplicationInstancesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeOrderableReplicationInstancesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeOrderableReplicationInstancesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeOrderableReplicationInstancesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeOrderableReplicationInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeOrderableReplicationInstancesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeOrderableReplicationInstancesPager) CurrentPage() *DescribeOrderableReplicationInstancesOutput {
+	return p.Pager.CurrentPage().(*DescribeOrderableReplicationInstancesOutput)
 }
 
 const opDescribeRefreshSchemasStatus = "DescribeRefreshSchemasStatus"
@@ -1479,6 +1472,7 @@ const opDescribeRefreshSchemasStatus = "DescribeRefreshSchemasStatus"
 type DescribeRefreshSchemasStatusRequest struct {
 	*aws.Request
 	Input *DescribeRefreshSchemasStatusInput
+	Copy  func(*DescribeRefreshSchemasStatusInput) DescribeRefreshSchemasStatusRequest
 }
 
 // Send marshals and sends the DescribeRefreshSchemasStatus API request.
@@ -1519,7 +1513,7 @@ func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusRequest(input *De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRefreshSchemasStatusRequest{Request: req, Input: input}
+	return DescribeRefreshSchemasStatusRequest{Request: req, Input: input, Copy: c.DescribeRefreshSchemasStatusRequest}
 }
 
 const opDescribeReplicationInstances = "DescribeReplicationInstances"
@@ -1528,6 +1522,7 @@ const opDescribeReplicationInstances = "DescribeReplicationInstances"
 type DescribeReplicationInstancesRequest struct {
 	*aws.Request
 	Input *DescribeReplicationInstancesInput
+	Copy  func(*DescribeReplicationInstancesInput) DescribeReplicationInstancesRequest
 }
 
 // Send marshals and sends the DescribeReplicationInstances API request.
@@ -1575,57 +1570,53 @@ func (c *DatabaseMigrationService) DescribeReplicationInstancesRequest(input *De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReplicationInstancesRequest{Request: req, Input: input}
+	return DescribeReplicationInstancesRequest{Request: req, Input: input, Copy: c.DescribeReplicationInstancesRequest}
 }
 
-// DescribeReplicationInstancesPages iterates over the pages of a DescribeReplicationInstances operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReplicationInstances method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReplicationInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReplicationInstances operation.
-//    pageNum := 0
-//    err := client.DescribeReplicationInstancesPages(params,
-//        func(page *DescribeReplicationInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReplicationInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeReplicationInstancesPages(input *DescribeReplicationInstancesInput, fn func(*DescribeReplicationInstancesOutput, bool) bool) error {
-	return c.DescribeReplicationInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeReplicationInstancesRequest) Paginate(opts ...aws.Option) DescribeReplicationInstancesPager {
+	return DescribeReplicationInstancesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReplicationInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeReplicationInstancesPagesWithContext same as DescribeReplicationInstancesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationInstancesPagesWithContext(ctx aws.Context, input *DescribeReplicationInstancesInput, fn func(*DescribeReplicationInstancesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReplicationInstancesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeReplicationInstancesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReplicationInstancesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReplicationInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeReplicationInstancesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReplicationInstancesPager) CurrentPage() *DescribeReplicationInstancesOutput {
+	return p.Pager.CurrentPage().(*DescribeReplicationInstancesOutput)
 }
 
 const opDescribeReplicationSubnetGroups = "DescribeReplicationSubnetGroups"
@@ -1634,6 +1625,7 @@ const opDescribeReplicationSubnetGroups = "DescribeReplicationSubnetGroups"
 type DescribeReplicationSubnetGroupsRequest struct {
 	*aws.Request
 	Input *DescribeReplicationSubnetGroupsInput
+	Copy  func(*DescribeReplicationSubnetGroupsInput) DescribeReplicationSubnetGroupsRequest
 }
 
 // Send marshals and sends the DescribeReplicationSubnetGroups API request.
@@ -1680,57 +1672,53 @@ func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsRequest(input 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReplicationSubnetGroupsRequest{Request: req, Input: input}
+	return DescribeReplicationSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeReplicationSubnetGroupsRequest}
 }
 
-// DescribeReplicationSubnetGroupsPages iterates over the pages of a DescribeReplicationSubnetGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReplicationSubnetGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReplicationSubnetGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReplicationSubnetGroups operation.
-//    pageNum := 0
-//    err := client.DescribeReplicationSubnetGroupsPages(params,
-//        func(page *DescribeReplicationSubnetGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReplicationSubnetGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsPages(input *DescribeReplicationSubnetGroupsInput, fn func(*DescribeReplicationSubnetGroupsOutput, bool) bool) error {
-	return c.DescribeReplicationSubnetGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeReplicationSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeReplicationSubnetGroupsPager {
+	return DescribeReplicationSubnetGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReplicationSubnetGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeReplicationSubnetGroupsPagesWithContext same as DescribeReplicationSubnetGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeReplicationSubnetGroupsInput, fn func(*DescribeReplicationSubnetGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReplicationSubnetGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeReplicationSubnetGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReplicationSubnetGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReplicationSubnetGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeReplicationSubnetGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReplicationSubnetGroupsPager) CurrentPage() *DescribeReplicationSubnetGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeReplicationSubnetGroupsOutput)
 }
 
 const opDescribeReplicationTaskAssessmentResults = "DescribeReplicationTaskAssessmentResults"
@@ -1739,6 +1727,7 @@ const opDescribeReplicationTaskAssessmentResults = "DescribeReplicationTaskAsses
 type DescribeReplicationTaskAssessmentResultsRequest struct {
 	*aws.Request
 	Input *DescribeReplicationTaskAssessmentResultsInput
+	Copy  func(*DescribeReplicationTaskAssessmentResultsInput) DescribeReplicationTaskAssessmentResultsRequest
 }
 
 // Send marshals and sends the DescribeReplicationTaskAssessmentResults API request.
@@ -1786,57 +1775,53 @@ func (c *DatabaseMigrationService) DescribeReplicationTaskAssessmentResultsReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReplicationTaskAssessmentResultsRequest{Request: req, Input: input}
+	return DescribeReplicationTaskAssessmentResultsRequest{Request: req, Input: input, Copy: c.DescribeReplicationTaskAssessmentResultsRequest}
 }
 
-// DescribeReplicationTaskAssessmentResultsPages iterates over the pages of a DescribeReplicationTaskAssessmentResults operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReplicationTaskAssessmentResults method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReplicationTaskAssessmentResultsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReplicationTaskAssessmentResults operation.
-//    pageNum := 0
-//    err := client.DescribeReplicationTaskAssessmentResultsPages(params,
-//        func(page *DescribeReplicationTaskAssessmentResultsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReplicationTaskAssessmentResultsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeReplicationTaskAssessmentResultsPages(input *DescribeReplicationTaskAssessmentResultsInput, fn func(*DescribeReplicationTaskAssessmentResultsOutput, bool) bool) error {
-	return c.DescribeReplicationTaskAssessmentResultsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeReplicationTaskAssessmentResultsRequest) Paginate(opts ...aws.Option) DescribeReplicationTaskAssessmentResultsPager {
+	return DescribeReplicationTaskAssessmentResultsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReplicationTaskAssessmentResultsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeReplicationTaskAssessmentResultsPagesWithContext same as DescribeReplicationTaskAssessmentResultsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationTaskAssessmentResultsPagesWithContext(ctx aws.Context, input *DescribeReplicationTaskAssessmentResultsInput, fn func(*DescribeReplicationTaskAssessmentResultsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReplicationTaskAssessmentResultsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeReplicationTaskAssessmentResultsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReplicationTaskAssessmentResultsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReplicationTaskAssessmentResultsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeReplicationTaskAssessmentResultsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReplicationTaskAssessmentResultsPager) CurrentPage() *DescribeReplicationTaskAssessmentResultsOutput {
+	return p.Pager.CurrentPage().(*DescribeReplicationTaskAssessmentResultsOutput)
 }
 
 const opDescribeReplicationTasks = "DescribeReplicationTasks"
@@ -1845,6 +1830,7 @@ const opDescribeReplicationTasks = "DescribeReplicationTasks"
 type DescribeReplicationTasksRequest struct {
 	*aws.Request
 	Input *DescribeReplicationTasksInput
+	Copy  func(*DescribeReplicationTasksInput) DescribeReplicationTasksRequest
 }
 
 // Send marshals and sends the DescribeReplicationTasks API request.
@@ -1892,57 +1878,53 @@ func (c *DatabaseMigrationService) DescribeReplicationTasksRequest(input *Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReplicationTasksRequest{Request: req, Input: input}
+	return DescribeReplicationTasksRequest{Request: req, Input: input, Copy: c.DescribeReplicationTasksRequest}
 }
 
-// DescribeReplicationTasksPages iterates over the pages of a DescribeReplicationTasks operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReplicationTasks method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReplicationTasksRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReplicationTasks operation.
-//    pageNum := 0
-//    err := client.DescribeReplicationTasksPages(params,
-//        func(page *DescribeReplicationTasksOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReplicationTasksRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeReplicationTasksPages(input *DescribeReplicationTasksInput, fn func(*DescribeReplicationTasksOutput, bool) bool) error {
-	return c.DescribeReplicationTasksPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeReplicationTasksRequest) Paginate(opts ...aws.Option) DescribeReplicationTasksPager {
+	return DescribeReplicationTasksPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReplicationTasksInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeReplicationTasksPagesWithContext same as DescribeReplicationTasksPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeReplicationTasksPagesWithContext(ctx aws.Context, input *DescribeReplicationTasksInput, fn func(*DescribeReplicationTasksOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReplicationTasksInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeReplicationTasksRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReplicationTasksOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReplicationTasksPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeReplicationTasksPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReplicationTasksPager) CurrentPage() *DescribeReplicationTasksOutput {
+	return p.Pager.CurrentPage().(*DescribeReplicationTasksOutput)
 }
 
 const opDescribeSchemas = "DescribeSchemas"
@@ -1951,6 +1933,7 @@ const opDescribeSchemas = "DescribeSchemas"
 type DescribeSchemasRequest struct {
 	*aws.Request
 	Input *DescribeSchemasInput
+	Copy  func(*DescribeSchemasInput) DescribeSchemasRequest
 }
 
 // Send marshals and sends the DescribeSchemas API request.
@@ -1997,57 +1980,53 @@ func (c *DatabaseMigrationService) DescribeSchemasRequest(input *DescribeSchemas
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSchemasRequest{Request: req, Input: input}
+	return DescribeSchemasRequest{Request: req, Input: input, Copy: c.DescribeSchemasRequest}
 }
 
-// DescribeSchemasPages iterates over the pages of a DescribeSchemas operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeSchemas method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeSchemasRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeSchemas operation.
-//    pageNum := 0
-//    err := client.DescribeSchemasPages(params,
-//        func(page *DescribeSchemasOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeSchemasRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeSchemasPages(input *DescribeSchemasInput, fn func(*DescribeSchemasOutput, bool) bool) error {
-	return c.DescribeSchemasPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeSchemasRequest) Paginate(opts ...aws.Option) DescribeSchemasPager {
+	return DescribeSchemasPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeSchemasInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeSchemasPagesWithContext same as DescribeSchemasPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeSchemasPagesWithContext(ctx aws.Context, input *DescribeSchemasInput, fn func(*DescribeSchemasOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeSchemasInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeSchemasRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeSchemasOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeSchemasPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeSchemasPager struct {
+	aws.Pager
+}
+
+func (p *DescribeSchemasPager) CurrentPage() *DescribeSchemasOutput {
+	return p.Pager.CurrentPage().(*DescribeSchemasOutput)
 }
 
 const opDescribeTableStatistics = "DescribeTableStatistics"
@@ -2056,6 +2035,7 @@ const opDescribeTableStatistics = "DescribeTableStatistics"
 type DescribeTableStatisticsRequest struct {
 	*aws.Request
 	Input *DescribeTableStatisticsInput
+	Copy  func(*DescribeTableStatisticsInput) DescribeTableStatisticsRequest
 }
 
 // Send marshals and sends the DescribeTableStatistics API request.
@@ -2107,57 +2087,53 @@ func (c *DatabaseMigrationService) DescribeTableStatisticsRequest(input *Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTableStatisticsRequest{Request: req, Input: input}
+	return DescribeTableStatisticsRequest{Request: req, Input: input, Copy: c.DescribeTableStatisticsRequest}
 }
 
-// DescribeTableStatisticsPages iterates over the pages of a DescribeTableStatistics operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeTableStatistics method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeTableStatisticsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeTableStatistics operation.
-//    pageNum := 0
-//    err := client.DescribeTableStatisticsPages(params,
-//        func(page *DescribeTableStatisticsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeTableStatisticsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DatabaseMigrationService) DescribeTableStatisticsPages(input *DescribeTableStatisticsInput, fn func(*DescribeTableStatisticsOutput, bool) bool) error {
-	return c.DescribeTableStatisticsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeTableStatisticsRequest) Paginate(opts ...aws.Option) DescribeTableStatisticsPager {
+	return DescribeTableStatisticsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeTableStatisticsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeTableStatisticsPagesWithContext same as DescribeTableStatisticsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DatabaseMigrationService) DescribeTableStatisticsPagesWithContext(ctx aws.Context, input *DescribeTableStatisticsInput, fn func(*DescribeTableStatisticsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeTableStatisticsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeTableStatisticsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeTableStatisticsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeTableStatisticsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeTableStatisticsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeTableStatisticsPager) CurrentPage() *DescribeTableStatisticsOutput {
+	return p.Pager.CurrentPage().(*DescribeTableStatisticsOutput)
 }
 
 const opImportCertificate = "ImportCertificate"
@@ -2166,6 +2142,7 @@ const opImportCertificate = "ImportCertificate"
 type ImportCertificateRequest struct {
 	*aws.Request
 	Input *ImportCertificateInput
+	Copy  func(*ImportCertificateInput) ImportCertificateRequest
 }
 
 // Send marshals and sends the ImportCertificate API request.
@@ -2206,7 +2183,7 @@ func (c *DatabaseMigrationService) ImportCertificateRequest(input *ImportCertifi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportCertificateRequest{Request: req, Input: input}
+	return ImportCertificateRequest{Request: req, Input: input, Copy: c.ImportCertificateRequest}
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -2215,6 +2192,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -2255,7 +2233,7 @@ func (c *DatabaseMigrationService) ListTagsForResourceRequest(input *ListTagsFor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opModifyEndpoint = "ModifyEndpoint"
@@ -2264,6 +2242,7 @@ const opModifyEndpoint = "ModifyEndpoint"
 type ModifyEndpointRequest struct {
 	*aws.Request
 	Input *ModifyEndpointInput
+	Copy  func(*ModifyEndpointInput) ModifyEndpointRequest
 }
 
 // Send marshals and sends the ModifyEndpoint API request.
@@ -2304,7 +2283,7 @@ func (c *DatabaseMigrationService) ModifyEndpointRequest(input *ModifyEndpointIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyEndpointRequest{Request: req, Input: input}
+	return ModifyEndpointRequest{Request: req, Input: input, Copy: c.ModifyEndpointRequest}
 }
 
 const opModifyEventSubscription = "ModifyEventSubscription"
@@ -2313,6 +2292,7 @@ const opModifyEventSubscription = "ModifyEventSubscription"
 type ModifyEventSubscriptionRequest struct {
 	*aws.Request
 	Input *ModifyEventSubscriptionInput
+	Copy  func(*ModifyEventSubscriptionInput) ModifyEventSubscriptionRequest
 }
 
 // Send marshals and sends the ModifyEventSubscription API request.
@@ -2353,7 +2333,7 @@ func (c *DatabaseMigrationService) ModifyEventSubscriptionRequest(input *ModifyE
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyEventSubscriptionRequest{Request: req, Input: input}
+	return ModifyEventSubscriptionRequest{Request: req, Input: input, Copy: c.ModifyEventSubscriptionRequest}
 }
 
 const opModifyReplicationInstance = "ModifyReplicationInstance"
@@ -2362,6 +2342,7 @@ const opModifyReplicationInstance = "ModifyReplicationInstance"
 type ModifyReplicationInstanceRequest struct {
 	*aws.Request
 	Input *ModifyReplicationInstanceInput
+	Copy  func(*ModifyReplicationInstanceInput) ModifyReplicationInstanceRequest
 }
 
 // Send marshals and sends the ModifyReplicationInstance API request.
@@ -2406,7 +2387,7 @@ func (c *DatabaseMigrationService) ModifyReplicationInstanceRequest(input *Modif
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyReplicationInstanceRequest{Request: req, Input: input}
+	return ModifyReplicationInstanceRequest{Request: req, Input: input, Copy: c.ModifyReplicationInstanceRequest}
 }
 
 const opModifyReplicationSubnetGroup = "ModifyReplicationSubnetGroup"
@@ -2415,6 +2396,7 @@ const opModifyReplicationSubnetGroup = "ModifyReplicationSubnetGroup"
 type ModifyReplicationSubnetGroupRequest struct {
 	*aws.Request
 	Input *ModifyReplicationSubnetGroupInput
+	Copy  func(*ModifyReplicationSubnetGroupInput) ModifyReplicationSubnetGroupRequest
 }
 
 // Send marshals and sends the ModifyReplicationSubnetGroup API request.
@@ -2455,7 +2437,7 @@ func (c *DatabaseMigrationService) ModifyReplicationSubnetGroupRequest(input *Mo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyReplicationSubnetGroupRequest{Request: req, Input: input}
+	return ModifyReplicationSubnetGroupRequest{Request: req, Input: input, Copy: c.ModifyReplicationSubnetGroupRequest}
 }
 
 const opModifyReplicationTask = "ModifyReplicationTask"
@@ -2464,6 +2446,7 @@ const opModifyReplicationTask = "ModifyReplicationTask"
 type ModifyReplicationTaskRequest struct {
 	*aws.Request
 	Input *ModifyReplicationTaskInput
+	Copy  func(*ModifyReplicationTaskInput) ModifyReplicationTaskRequest
 }
 
 // Send marshals and sends the ModifyReplicationTask API request.
@@ -2510,7 +2493,7 @@ func (c *DatabaseMigrationService) ModifyReplicationTaskRequest(input *ModifyRep
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyReplicationTaskRequest{Request: req, Input: input}
+	return ModifyReplicationTaskRequest{Request: req, Input: input, Copy: c.ModifyReplicationTaskRequest}
 }
 
 const opRefreshSchemas = "RefreshSchemas"
@@ -2519,6 +2502,7 @@ const opRefreshSchemas = "RefreshSchemas"
 type RefreshSchemasRequest struct {
 	*aws.Request
 	Input *RefreshSchemasInput
+	Copy  func(*RefreshSchemasInput) RefreshSchemasRequest
 }
 
 // Send marshals and sends the RefreshSchemas API request.
@@ -2561,7 +2545,7 @@ func (c *DatabaseMigrationService) RefreshSchemasRequest(input *RefreshSchemasIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RefreshSchemasRequest{Request: req, Input: input}
+	return RefreshSchemasRequest{Request: req, Input: input, Copy: c.RefreshSchemasRequest}
 }
 
 const opReloadTables = "ReloadTables"
@@ -2570,6 +2554,7 @@ const opReloadTables = "ReloadTables"
 type ReloadTablesRequest struct {
 	*aws.Request
 	Input *ReloadTablesInput
+	Copy  func(*ReloadTablesInput) ReloadTablesRequest
 }
 
 // Send marshals and sends the ReloadTables API request.
@@ -2610,7 +2595,7 @@ func (c *DatabaseMigrationService) ReloadTablesRequest(input *ReloadTablesInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReloadTablesRequest{Request: req, Input: input}
+	return ReloadTablesRequest{Request: req, Input: input, Copy: c.ReloadTablesRequest}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
@@ -2619,6 +2604,7 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 type RemoveTagsFromResourceRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromResourceInput
+	Copy  func(*RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
@@ -2659,7 +2645,7 @@ func (c *DatabaseMigrationService) RemoveTagsFromResourceRequest(input *RemoveTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromResourceRequest{Request: req, Input: input}
+	return RemoveTagsFromResourceRequest{Request: req, Input: input, Copy: c.RemoveTagsFromResourceRequest}
 }
 
 const opStartReplicationTask = "StartReplicationTask"
@@ -2668,6 +2654,7 @@ const opStartReplicationTask = "StartReplicationTask"
 type StartReplicationTaskRequest struct {
 	*aws.Request
 	Input *StartReplicationTaskInput
+	Copy  func(*StartReplicationTaskInput) StartReplicationTaskRequest
 }
 
 // Send marshals and sends the StartReplicationTask API request.
@@ -2711,7 +2698,7 @@ func (c *DatabaseMigrationService) StartReplicationTaskRequest(input *StartRepli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartReplicationTaskRequest{Request: req, Input: input}
+	return StartReplicationTaskRequest{Request: req, Input: input, Copy: c.StartReplicationTaskRequest}
 }
 
 const opStartReplicationTaskAssessment = "StartReplicationTaskAssessment"
@@ -2720,6 +2707,7 @@ const opStartReplicationTaskAssessment = "StartReplicationTaskAssessment"
 type StartReplicationTaskAssessmentRequest struct {
 	*aws.Request
 	Input *StartReplicationTaskAssessmentInput
+	Copy  func(*StartReplicationTaskAssessmentInput) StartReplicationTaskAssessmentRequest
 }
 
 // Send marshals and sends the StartReplicationTaskAssessment API request.
@@ -2761,7 +2749,7 @@ func (c *DatabaseMigrationService) StartReplicationTaskAssessmentRequest(input *
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartReplicationTaskAssessmentRequest{Request: req, Input: input}
+	return StartReplicationTaskAssessmentRequest{Request: req, Input: input, Copy: c.StartReplicationTaskAssessmentRequest}
 }
 
 const opStopReplicationTask = "StopReplicationTask"
@@ -2770,6 +2758,7 @@ const opStopReplicationTask = "StopReplicationTask"
 type StopReplicationTaskRequest struct {
 	*aws.Request
 	Input *StopReplicationTaskInput
+	Copy  func(*StopReplicationTaskInput) StopReplicationTaskRequest
 }
 
 // Send marshals and sends the StopReplicationTask API request.
@@ -2810,7 +2799,7 @@ func (c *DatabaseMigrationService) StopReplicationTaskRequest(input *StopReplica
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopReplicationTaskRequest{Request: req, Input: input}
+	return StopReplicationTaskRequest{Request: req, Input: input, Copy: c.StopReplicationTaskRequest}
 }
 
 const opTestConnection = "TestConnection"
@@ -2819,6 +2808,7 @@ const opTestConnection = "TestConnection"
 type TestConnectionRequest struct {
 	*aws.Request
 	Input *TestConnectionInput
+	Copy  func(*TestConnectionInput) TestConnectionRequest
 }
 
 // Send marshals and sends the TestConnection API request.
@@ -2859,7 +2849,7 @@ func (c *DatabaseMigrationService) TestConnectionRequest(input *TestConnectionIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestConnectionRequest{Request: req, Input: input}
+	return TestConnectionRequest{Request: req, Input: input, Copy: c.TestConnectionRequest}
 }
 
 // Describes a quota for an AWS account, for example, the number of replication

@@ -14,6 +14,7 @@ const opCreateApplication = "CreateApplication"
 type CreateApplicationRequest struct {
 	*aws.Request
 	Input *CreateApplicationInput
+	Copy  func(*CreateApplicationInput) CreateApplicationRequest
 }
 
 // Send marshals and sends the CreateApplication API request.
@@ -55,7 +56,7 @@ func (c *ServerlessApplicationRepository) CreateApplicationRequest(input *Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateApplicationRequest{Request: req, Input: input}
+	return CreateApplicationRequest{Request: req, Input: input, Copy: c.CreateApplicationRequest}
 }
 
 const opCreateApplicationVersion = "CreateApplicationVersion"
@@ -64,6 +65,7 @@ const opCreateApplicationVersion = "CreateApplicationVersion"
 type CreateApplicationVersionRequest struct {
 	*aws.Request
 	Input *CreateApplicationVersionInput
+	Copy  func(*CreateApplicationVersionInput) CreateApplicationVersionRequest
 }
 
 // Send marshals and sends the CreateApplicationVersion API request.
@@ -104,7 +106,7 @@ func (c *ServerlessApplicationRepository) CreateApplicationVersionRequest(input 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateApplicationVersionRequest{Request: req, Input: input}
+	return CreateApplicationVersionRequest{Request: req, Input: input, Copy: c.CreateApplicationVersionRequest}
 }
 
 const opCreateCloudFormationChangeSet = "CreateCloudFormationChangeSet"
@@ -113,6 +115,7 @@ const opCreateCloudFormationChangeSet = "CreateCloudFormationChangeSet"
 type CreateCloudFormationChangeSetRequest struct {
 	*aws.Request
 	Input *CreateCloudFormationChangeSetInput
+	Copy  func(*CreateCloudFormationChangeSetInput) CreateCloudFormationChangeSetRequest
 }
 
 // Send marshals and sends the CreateCloudFormationChangeSet API request.
@@ -153,7 +156,7 @@ func (c *ServerlessApplicationRepository) CreateCloudFormationChangeSetRequest(i
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCloudFormationChangeSetRequest{Request: req, Input: input}
+	return CreateCloudFormationChangeSetRequest{Request: req, Input: input, Copy: c.CreateCloudFormationChangeSetRequest}
 }
 
 const opGetApplication = "GetApplication"
@@ -162,6 +165,7 @@ const opGetApplication = "GetApplication"
 type GetApplicationRequest struct {
 	*aws.Request
 	Input *GetApplicationInput
+	Copy  func(*GetApplicationInput) GetApplicationRequest
 }
 
 // Send marshals and sends the GetApplication API request.
@@ -202,7 +206,7 @@ func (c *ServerlessApplicationRepository) GetApplicationRequest(input *GetApplic
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApplicationRequest{Request: req, Input: input}
+	return GetApplicationRequest{Request: req, Input: input, Copy: c.GetApplicationRequest}
 }
 
 const opGetApplicationPolicy = "GetApplicationPolicy"
@@ -211,6 +215,7 @@ const opGetApplicationPolicy = "GetApplicationPolicy"
 type GetApplicationPolicyRequest struct {
 	*aws.Request
 	Input *GetApplicationPolicyInput
+	Copy  func(*GetApplicationPolicyInput) GetApplicationPolicyRequest
 }
 
 // Send marshals and sends the GetApplicationPolicy API request.
@@ -251,7 +256,7 @@ func (c *ServerlessApplicationRepository) GetApplicationPolicyRequest(input *Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApplicationPolicyRequest{Request: req, Input: input}
+	return GetApplicationPolicyRequest{Request: req, Input: input, Copy: c.GetApplicationPolicyRequest}
 }
 
 const opListApplicationVersions = "ListApplicationVersions"
@@ -260,6 +265,7 @@ const opListApplicationVersions = "ListApplicationVersions"
 type ListApplicationVersionsRequest struct {
 	*aws.Request
 	Input *ListApplicationVersionsInput
+	Copy  func(*ListApplicationVersionsInput) ListApplicationVersionsRequest
 }
 
 // Send marshals and sends the ListApplicationVersions API request.
@@ -300,7 +306,7 @@ func (c *ServerlessApplicationRepository) ListApplicationVersionsRequest(input *
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListApplicationVersionsRequest{Request: req, Input: input}
+	return ListApplicationVersionsRequest{Request: req, Input: input, Copy: c.ListApplicationVersionsRequest}
 }
 
 const opListApplications = "ListApplications"
@@ -309,6 +315,7 @@ const opListApplications = "ListApplications"
 type ListApplicationsRequest struct {
 	*aws.Request
 	Input *ListApplicationsInput
+	Copy  func(*ListApplicationsInput) ListApplicationsRequest
 }
 
 // Send marshals and sends the ListApplications API request.
@@ -349,7 +356,7 @@ func (c *ServerlessApplicationRepository) ListApplicationsRequest(input *ListApp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListApplicationsRequest{Request: req, Input: input}
+	return ListApplicationsRequest{Request: req, Input: input, Copy: c.ListApplicationsRequest}
 }
 
 const opPutApplicationPolicy = "PutApplicationPolicy"
@@ -358,6 +365,7 @@ const opPutApplicationPolicy = "PutApplicationPolicy"
 type PutApplicationPolicyRequest struct {
 	*aws.Request
 	Input *PutApplicationPolicyInput
+	Copy  func(*PutApplicationPolicyInput) PutApplicationPolicyRequest
 }
 
 // Send marshals and sends the PutApplicationPolicy API request.
@@ -398,7 +406,7 @@ func (c *ServerlessApplicationRepository) PutApplicationPolicyRequest(input *Put
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutApplicationPolicyRequest{Request: req, Input: input}
+	return PutApplicationPolicyRequest{Request: req, Input: input, Copy: c.PutApplicationPolicyRequest}
 }
 
 const opUpdateApplication = "UpdateApplication"
@@ -407,6 +415,7 @@ const opUpdateApplication = "UpdateApplication"
 type UpdateApplicationRequest struct {
 	*aws.Request
 	Input *UpdateApplicationInput
+	Copy  func(*UpdateApplicationInput) UpdateApplicationRequest
 }
 
 // Send marshals and sends the UpdateApplication API request.
@@ -447,7 +456,7 @@ func (c *ServerlessApplicationRepository) UpdateApplicationRequest(input *Update
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApplicationRequest{Request: req, Input: input}
+	return UpdateApplicationRequest{Request: req, Input: input, Copy: c.UpdateApplicationRequest}
 }
 
 // Policy statement applied to the application.

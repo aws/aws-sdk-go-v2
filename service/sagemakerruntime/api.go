@@ -14,6 +14,7 @@ const opInvokeEndpoint = "InvokeEndpoint"
 type InvokeEndpointRequest struct {
 	*aws.Request
 	Input *InvokeEndpointInput
+	Copy  func(*InvokeEndpointInput) InvokeEndpointRequest
 }
 
 // Send marshals and sends the InvokeEndpoint API request.
@@ -62,7 +63,7 @@ func (c *SageMakerRuntime) InvokeEndpointRequest(input *InvokeEndpointInput) Inv
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InvokeEndpointRequest{Request: req, Input: input}
+	return InvokeEndpointRequest{Request: req, Input: input, Copy: c.InvokeEndpointRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InvokeEndpointInput

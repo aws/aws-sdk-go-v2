@@ -15,6 +15,7 @@ const opAssociateDeviceWithRoom = "AssociateDeviceWithRoom"
 type AssociateDeviceWithRoomRequest struct {
 	*aws.Request
 	Input *AssociateDeviceWithRoomInput
+	Copy  func(*AssociateDeviceWithRoomInput) AssociateDeviceWithRoomRequest
 }
 
 // Send marshals and sends the AssociateDeviceWithRoom API request.
@@ -58,7 +59,7 @@ func (c *AlexaForBusiness) AssociateDeviceWithRoomRequest(input *AssociateDevice
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateDeviceWithRoomRequest{Request: req, Input: input}
+	return AssociateDeviceWithRoomRequest{Request: req, Input: input, Copy: c.AssociateDeviceWithRoomRequest}
 }
 
 const opAssociateSkillGroupWithRoom = "AssociateSkillGroupWithRoom"
@@ -67,6 +68,7 @@ const opAssociateSkillGroupWithRoom = "AssociateSkillGroupWithRoom"
 type AssociateSkillGroupWithRoomRequest struct {
 	*aws.Request
 	Input *AssociateSkillGroupWithRoomInput
+	Copy  func(*AssociateSkillGroupWithRoomInput) AssociateSkillGroupWithRoomRequest
 }
 
 // Send marshals and sends the AssociateSkillGroupWithRoom API request.
@@ -108,7 +110,7 @@ func (c *AlexaForBusiness) AssociateSkillGroupWithRoomRequest(input *AssociateSk
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateSkillGroupWithRoomRequest{Request: req, Input: input}
+	return AssociateSkillGroupWithRoomRequest{Request: req, Input: input, Copy: c.AssociateSkillGroupWithRoomRequest}
 }
 
 const opCreateProfile = "CreateProfile"
@@ -117,6 +119,7 @@ const opCreateProfile = "CreateProfile"
 type CreateProfileRequest struct {
 	*aws.Request
 	Input *CreateProfileInput
+	Copy  func(*CreateProfileInput) CreateProfileRequest
 }
 
 // Send marshals and sends the CreateProfile API request.
@@ -157,7 +160,7 @@ func (c *AlexaForBusiness) CreateProfileRequest(input *CreateProfileInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateProfileRequest{Request: req, Input: input}
+	return CreateProfileRequest{Request: req, Input: input, Copy: c.CreateProfileRequest}
 }
 
 const opCreateRoom = "CreateRoom"
@@ -166,6 +169,7 @@ const opCreateRoom = "CreateRoom"
 type CreateRoomRequest struct {
 	*aws.Request
 	Input *CreateRoomInput
+	Copy  func(*CreateRoomInput) CreateRoomRequest
 }
 
 // Send marshals and sends the CreateRoom API request.
@@ -206,7 +210,7 @@ func (c *AlexaForBusiness) CreateRoomRequest(input *CreateRoomInput) CreateRoomR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRoomRequest{Request: req, Input: input}
+	return CreateRoomRequest{Request: req, Input: input, Copy: c.CreateRoomRequest}
 }
 
 const opCreateSkillGroup = "CreateSkillGroup"
@@ -215,6 +219,7 @@ const opCreateSkillGroup = "CreateSkillGroup"
 type CreateSkillGroupRequest struct {
 	*aws.Request
 	Input *CreateSkillGroupInput
+	Copy  func(*CreateSkillGroupInput) CreateSkillGroupRequest
 }
 
 // Send marshals and sends the CreateSkillGroup API request.
@@ -255,7 +260,7 @@ func (c *AlexaForBusiness) CreateSkillGroupRequest(input *CreateSkillGroupInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSkillGroupRequest{Request: req, Input: input}
+	return CreateSkillGroupRequest{Request: req, Input: input, Copy: c.CreateSkillGroupRequest}
 }
 
 const opCreateUser = "CreateUser"
@@ -264,6 +269,7 @@ const opCreateUser = "CreateUser"
 type CreateUserRequest struct {
 	*aws.Request
 	Input *CreateUserInput
+	Copy  func(*CreateUserInput) CreateUserRequest
 }
 
 // Send marshals and sends the CreateUser API request.
@@ -304,7 +310,7 @@ func (c *AlexaForBusiness) CreateUserRequest(input *CreateUserInput) CreateUserR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserRequest{Request: req, Input: input}
+	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
 }
 
 const opDeleteProfile = "DeleteProfile"
@@ -313,6 +319,7 @@ const opDeleteProfile = "DeleteProfile"
 type DeleteProfileRequest struct {
 	*aws.Request
 	Input *DeleteProfileInput
+	Copy  func(*DeleteProfileInput) DeleteProfileRequest
 }
 
 // Send marshals and sends the DeleteProfile API request.
@@ -353,7 +360,7 @@ func (c *AlexaForBusiness) DeleteProfileRequest(input *DeleteProfileInput) Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteProfileRequest{Request: req, Input: input}
+	return DeleteProfileRequest{Request: req, Input: input, Copy: c.DeleteProfileRequest}
 }
 
 const opDeleteRoom = "DeleteRoom"
@@ -362,6 +369,7 @@ const opDeleteRoom = "DeleteRoom"
 type DeleteRoomRequest struct {
 	*aws.Request
 	Input *DeleteRoomInput
+	Copy  func(*DeleteRoomInput) DeleteRoomRequest
 }
 
 // Send marshals and sends the DeleteRoom API request.
@@ -402,7 +410,7 @@ func (c *AlexaForBusiness) DeleteRoomRequest(input *DeleteRoomInput) DeleteRoomR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRoomRequest{Request: req, Input: input}
+	return DeleteRoomRequest{Request: req, Input: input, Copy: c.DeleteRoomRequest}
 }
 
 const opDeleteRoomSkillParameter = "DeleteRoomSkillParameter"
@@ -411,6 +419,7 @@ const opDeleteRoomSkillParameter = "DeleteRoomSkillParameter"
 type DeleteRoomSkillParameterRequest struct {
 	*aws.Request
 	Input *DeleteRoomSkillParameterInput
+	Copy  func(*DeleteRoomSkillParameterInput) DeleteRoomSkillParameterRequest
 }
 
 // Send marshals and sends the DeleteRoomSkillParameter API request.
@@ -451,7 +460,7 @@ func (c *AlexaForBusiness) DeleteRoomSkillParameterRequest(input *DeleteRoomSkil
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRoomSkillParameterRequest{Request: req, Input: input}
+	return DeleteRoomSkillParameterRequest{Request: req, Input: input, Copy: c.DeleteRoomSkillParameterRequest}
 }
 
 const opDeleteSkillGroup = "DeleteSkillGroup"
@@ -460,6 +469,7 @@ const opDeleteSkillGroup = "DeleteSkillGroup"
 type DeleteSkillGroupRequest struct {
 	*aws.Request
 	Input *DeleteSkillGroupInput
+	Copy  func(*DeleteSkillGroupInput) DeleteSkillGroupRequest
 }
 
 // Send marshals and sends the DeleteSkillGroup API request.
@@ -500,7 +510,7 @@ func (c *AlexaForBusiness) DeleteSkillGroupRequest(input *DeleteSkillGroupInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSkillGroupRequest{Request: req, Input: input}
+	return DeleteSkillGroupRequest{Request: req, Input: input, Copy: c.DeleteSkillGroupRequest}
 }
 
 const opDeleteUser = "DeleteUser"
@@ -509,6 +519,7 @@ const opDeleteUser = "DeleteUser"
 type DeleteUserRequest struct {
 	*aws.Request
 	Input *DeleteUserInput
+	Copy  func(*DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -549,7 +560,7 @@ func (c *AlexaForBusiness) DeleteUserRequest(input *DeleteUserInput) DeleteUserR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserRequest{Request: req, Input: input}
+	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
 const opDisassociateDeviceFromRoom = "DisassociateDeviceFromRoom"
@@ -558,6 +569,7 @@ const opDisassociateDeviceFromRoom = "DisassociateDeviceFromRoom"
 type DisassociateDeviceFromRoomRequest struct {
 	*aws.Request
 	Input *DisassociateDeviceFromRoomInput
+	Copy  func(*DisassociateDeviceFromRoomInput) DisassociateDeviceFromRoomRequest
 }
 
 // Send marshals and sends the DisassociateDeviceFromRoom API request.
@@ -600,7 +612,7 @@ func (c *AlexaForBusiness) DisassociateDeviceFromRoomRequest(input *Disassociate
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateDeviceFromRoomRequest{Request: req, Input: input}
+	return DisassociateDeviceFromRoomRequest{Request: req, Input: input, Copy: c.DisassociateDeviceFromRoomRequest}
 }
 
 const opDisassociateSkillGroupFromRoom = "DisassociateSkillGroupFromRoom"
@@ -609,6 +621,7 @@ const opDisassociateSkillGroupFromRoom = "DisassociateSkillGroupFromRoom"
 type DisassociateSkillGroupFromRoomRequest struct {
 	*aws.Request
 	Input *DisassociateSkillGroupFromRoomInput
+	Copy  func(*DisassociateSkillGroupFromRoomInput) DisassociateSkillGroupFromRoomRequest
 }
 
 // Send marshals and sends the DisassociateSkillGroupFromRoom API request.
@@ -650,7 +663,7 @@ func (c *AlexaForBusiness) DisassociateSkillGroupFromRoomRequest(input *Disassoc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateSkillGroupFromRoomRequest{Request: req, Input: input}
+	return DisassociateSkillGroupFromRoomRequest{Request: req, Input: input, Copy: c.DisassociateSkillGroupFromRoomRequest}
 }
 
 const opGetDevice = "GetDevice"
@@ -659,6 +672,7 @@ const opGetDevice = "GetDevice"
 type GetDeviceRequest struct {
 	*aws.Request
 	Input *GetDeviceInput
+	Copy  func(*GetDeviceInput) GetDeviceRequest
 }
 
 // Send marshals and sends the GetDevice API request.
@@ -699,7 +713,7 @@ func (c *AlexaForBusiness) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeviceRequest{Request: req, Input: input}
+	return GetDeviceRequest{Request: req, Input: input, Copy: c.GetDeviceRequest}
 }
 
 const opGetProfile = "GetProfile"
@@ -708,6 +722,7 @@ const opGetProfile = "GetProfile"
 type GetProfileRequest struct {
 	*aws.Request
 	Input *GetProfileInput
+	Copy  func(*GetProfileInput) GetProfileRequest
 }
 
 // Send marshals and sends the GetProfile API request.
@@ -748,7 +763,7 @@ func (c *AlexaForBusiness) GetProfileRequest(input *GetProfileInput) GetProfileR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetProfileRequest{Request: req, Input: input}
+	return GetProfileRequest{Request: req, Input: input, Copy: c.GetProfileRequest}
 }
 
 const opGetRoom = "GetRoom"
@@ -757,6 +772,7 @@ const opGetRoom = "GetRoom"
 type GetRoomRequest struct {
 	*aws.Request
 	Input *GetRoomInput
+	Copy  func(*GetRoomInput) GetRoomRequest
 }
 
 // Send marshals and sends the GetRoom API request.
@@ -797,7 +813,7 @@ func (c *AlexaForBusiness) GetRoomRequest(input *GetRoomInput) GetRoomRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRoomRequest{Request: req, Input: input}
+	return GetRoomRequest{Request: req, Input: input, Copy: c.GetRoomRequest}
 }
 
 const opGetRoomSkillParameter = "GetRoomSkillParameter"
@@ -806,6 +822,7 @@ const opGetRoomSkillParameter = "GetRoomSkillParameter"
 type GetRoomSkillParameterRequest struct {
 	*aws.Request
 	Input *GetRoomSkillParameterInput
+	Copy  func(*GetRoomSkillParameterInput) GetRoomSkillParameterRequest
 }
 
 // Send marshals and sends the GetRoomSkillParameter API request.
@@ -846,7 +863,7 @@ func (c *AlexaForBusiness) GetRoomSkillParameterRequest(input *GetRoomSkillParam
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRoomSkillParameterRequest{Request: req, Input: input}
+	return GetRoomSkillParameterRequest{Request: req, Input: input, Copy: c.GetRoomSkillParameterRequest}
 }
 
 const opGetSkillGroup = "GetSkillGroup"
@@ -855,6 +872,7 @@ const opGetSkillGroup = "GetSkillGroup"
 type GetSkillGroupRequest struct {
 	*aws.Request
 	Input *GetSkillGroupInput
+	Copy  func(*GetSkillGroupInput) GetSkillGroupRequest
 }
 
 // Send marshals and sends the GetSkillGroup API request.
@@ -895,7 +913,7 @@ func (c *AlexaForBusiness) GetSkillGroupRequest(input *GetSkillGroupInput) GetSk
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSkillGroupRequest{Request: req, Input: input}
+	return GetSkillGroupRequest{Request: req, Input: input, Copy: c.GetSkillGroupRequest}
 }
 
 const opListSkills = "ListSkills"
@@ -904,6 +922,7 @@ const opListSkills = "ListSkills"
 type ListSkillsRequest struct {
 	*aws.Request
 	Input *ListSkillsInput
+	Copy  func(*ListSkillsInput) ListSkillsRequest
 }
 
 // Send marshals and sends the ListSkills API request.
@@ -950,57 +969,53 @@ func (c *AlexaForBusiness) ListSkillsRequest(input *ListSkillsInput) ListSkillsR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSkillsRequest{Request: req, Input: input}
+	return ListSkillsRequest{Request: req, Input: input, Copy: c.ListSkillsRequest}
 }
 
-// ListSkillsPages iterates over the pages of a ListSkills operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListSkills method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListSkillsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListSkills operation.
-//    pageNum := 0
-//    err := client.ListSkillsPages(params,
-//        func(page *ListSkillsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListSkillsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AlexaForBusiness) ListSkillsPages(input *ListSkillsInput, fn func(*ListSkillsOutput, bool) bool) error {
-	return c.ListSkillsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListSkillsRequest) Paginate(opts ...aws.Option) ListSkillsPager {
+	return ListSkillsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSkillsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListSkillsPagesWithContext same as ListSkillsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) ListSkillsPagesWithContext(ctx aws.Context, input *ListSkillsInput, fn func(*ListSkillsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListSkillsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListSkillsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListSkillsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListSkillsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListSkillsPager struct {
+	aws.Pager
+}
+
+func (p *ListSkillsPager) CurrentPage() *ListSkillsOutput {
+	return p.Pager.CurrentPage().(*ListSkillsOutput)
 }
 
 const opListTags = "ListTags"
@@ -1009,6 +1024,7 @@ const opListTags = "ListTags"
 type ListTagsRequest struct {
 	*aws.Request
 	Input *ListTagsInput
+	Copy  func(*ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -1055,57 +1071,53 @@ func (c *AlexaForBusiness) ListTagsRequest(input *ListTagsInput) ListTagsRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsRequest{Request: req, Input: input}
+	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
-// ListTagsPages iterates over the pages of a ListTags operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTags method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTagsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTags operation.
-//    pageNum := 0
-//    err := client.ListTagsPages(params,
-//        func(page *ListTagsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTagsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AlexaForBusiness) ListTagsPages(input *ListTagsInput, fn func(*ListTagsOutput, bool) bool) error {
-	return c.ListTagsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
+	return ListTagsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTagsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListTagsPagesWithContext same as ListTagsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsInput, fn func(*ListTagsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTagsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListTagsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTagsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTagsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTagsPager struct {
+	aws.Pager
+}
+
+func (p *ListTagsPager) CurrentPage() *ListTagsOutput {
+	return p.Pager.CurrentPage().(*ListTagsOutput)
 }
 
 const opPutRoomSkillParameter = "PutRoomSkillParameter"
@@ -1114,6 +1126,7 @@ const opPutRoomSkillParameter = "PutRoomSkillParameter"
 type PutRoomSkillParameterRequest struct {
 	*aws.Request
 	Input *PutRoomSkillParameterInput
+	Copy  func(*PutRoomSkillParameterInput) PutRoomSkillParameterRequest
 }
 
 // Send marshals and sends the PutRoomSkillParameter API request.
@@ -1155,7 +1168,7 @@ func (c *AlexaForBusiness) PutRoomSkillParameterRequest(input *PutRoomSkillParam
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutRoomSkillParameterRequest{Request: req, Input: input}
+	return PutRoomSkillParameterRequest{Request: req, Input: input, Copy: c.PutRoomSkillParameterRequest}
 }
 
 const opResolveRoom = "ResolveRoom"
@@ -1164,6 +1177,7 @@ const opResolveRoom = "ResolveRoom"
 type ResolveRoomRequest struct {
 	*aws.Request
 	Input *ResolveRoomInput
+	Copy  func(*ResolveRoomInput) ResolveRoomRequest
 }
 
 // Send marshals and sends the ResolveRoom API request.
@@ -1205,7 +1219,7 @@ func (c *AlexaForBusiness) ResolveRoomRequest(input *ResolveRoomInput) ResolveRo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResolveRoomRequest{Request: req, Input: input}
+	return ResolveRoomRequest{Request: req, Input: input, Copy: c.ResolveRoomRequest}
 }
 
 const opRevokeInvitation = "RevokeInvitation"
@@ -1214,6 +1228,7 @@ const opRevokeInvitation = "RevokeInvitation"
 type RevokeInvitationRequest struct {
 	*aws.Request
 	Input *RevokeInvitationInput
+	Copy  func(*RevokeInvitationInput) RevokeInvitationRequest
 }
 
 // Send marshals and sends the RevokeInvitation API request.
@@ -1254,7 +1269,7 @@ func (c *AlexaForBusiness) RevokeInvitationRequest(input *RevokeInvitationInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RevokeInvitationRequest{Request: req, Input: input}
+	return RevokeInvitationRequest{Request: req, Input: input, Copy: c.RevokeInvitationRequest}
 }
 
 const opSearchDevices = "SearchDevices"
@@ -1263,6 +1278,7 @@ const opSearchDevices = "SearchDevices"
 type SearchDevicesRequest struct {
 	*aws.Request
 	Input *SearchDevicesInput
+	Copy  func(*SearchDevicesInput) SearchDevicesRequest
 }
 
 // Send marshals and sends the SearchDevices API request.
@@ -1309,57 +1325,53 @@ func (c *AlexaForBusiness) SearchDevicesRequest(input *SearchDevicesInput) Searc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchDevicesRequest{Request: req, Input: input}
+	return SearchDevicesRequest{Request: req, Input: input, Copy: c.SearchDevicesRequest}
 }
 
-// SearchDevicesPages iterates over the pages of a SearchDevices operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See SearchDevices method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SearchDevicesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a SearchDevices operation.
-//    pageNum := 0
-//    err := client.SearchDevicesPages(params,
-//        func(page *SearchDevicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SearchDevicesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AlexaForBusiness) SearchDevicesPages(input *SearchDevicesInput, fn func(*SearchDevicesOutput, bool) bool) error {
-	return c.SearchDevicesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchDevicesRequest) Paginate(opts ...aws.Option) SearchDevicesPager {
+	return SearchDevicesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchDevicesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// SearchDevicesPagesWithContext same as SearchDevicesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) SearchDevicesPagesWithContext(ctx aws.Context, input *SearchDevicesInput, fn func(*SearchDevicesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *SearchDevicesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.SearchDevicesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchDevicesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchDevicesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchDevicesPager struct {
+	aws.Pager
+}
+
+func (p *SearchDevicesPager) CurrentPage() *SearchDevicesOutput {
+	return p.Pager.CurrentPage().(*SearchDevicesOutput)
 }
 
 const opSearchProfiles = "SearchProfiles"
@@ -1368,6 +1380,7 @@ const opSearchProfiles = "SearchProfiles"
 type SearchProfilesRequest struct {
 	*aws.Request
 	Input *SearchProfilesInput
+	Copy  func(*SearchProfilesInput) SearchProfilesRequest
 }
 
 // Send marshals and sends the SearchProfiles API request.
@@ -1414,57 +1427,53 @@ func (c *AlexaForBusiness) SearchProfilesRequest(input *SearchProfilesInput) Sea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchProfilesRequest{Request: req, Input: input}
+	return SearchProfilesRequest{Request: req, Input: input, Copy: c.SearchProfilesRequest}
 }
 
-// SearchProfilesPages iterates over the pages of a SearchProfiles operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See SearchProfiles method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SearchProfilesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a SearchProfiles operation.
-//    pageNum := 0
-//    err := client.SearchProfilesPages(params,
-//        func(page *SearchProfilesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SearchProfilesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AlexaForBusiness) SearchProfilesPages(input *SearchProfilesInput, fn func(*SearchProfilesOutput, bool) bool) error {
-	return c.SearchProfilesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchProfilesRequest) Paginate(opts ...aws.Option) SearchProfilesPager {
+	return SearchProfilesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchProfilesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// SearchProfilesPagesWithContext same as SearchProfilesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) SearchProfilesPagesWithContext(ctx aws.Context, input *SearchProfilesInput, fn func(*SearchProfilesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *SearchProfilesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.SearchProfilesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchProfilesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchProfilesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchProfilesPager struct {
+	aws.Pager
+}
+
+func (p *SearchProfilesPager) CurrentPage() *SearchProfilesOutput {
+	return p.Pager.CurrentPage().(*SearchProfilesOutput)
 }
 
 const opSearchRooms = "SearchRooms"
@@ -1473,6 +1482,7 @@ const opSearchRooms = "SearchRooms"
 type SearchRoomsRequest struct {
 	*aws.Request
 	Input *SearchRoomsInput
+	Copy  func(*SearchRoomsInput) SearchRoomsRequest
 }
 
 // Send marshals and sends the SearchRooms API request.
@@ -1519,57 +1529,53 @@ func (c *AlexaForBusiness) SearchRoomsRequest(input *SearchRoomsInput) SearchRoo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchRoomsRequest{Request: req, Input: input}
+	return SearchRoomsRequest{Request: req, Input: input, Copy: c.SearchRoomsRequest}
 }
 
-// SearchRoomsPages iterates over the pages of a SearchRooms operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See SearchRooms method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SearchRoomsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a SearchRooms operation.
-//    pageNum := 0
-//    err := client.SearchRoomsPages(params,
-//        func(page *SearchRoomsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SearchRoomsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AlexaForBusiness) SearchRoomsPages(input *SearchRoomsInput, fn func(*SearchRoomsOutput, bool) bool) error {
-	return c.SearchRoomsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchRoomsRequest) Paginate(opts ...aws.Option) SearchRoomsPager {
+	return SearchRoomsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchRoomsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// SearchRoomsPagesWithContext same as SearchRoomsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) SearchRoomsPagesWithContext(ctx aws.Context, input *SearchRoomsInput, fn func(*SearchRoomsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *SearchRoomsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.SearchRoomsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchRoomsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchRoomsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchRoomsPager struct {
+	aws.Pager
+}
+
+func (p *SearchRoomsPager) CurrentPage() *SearchRoomsOutput {
+	return p.Pager.CurrentPage().(*SearchRoomsOutput)
 }
 
 const opSearchSkillGroups = "SearchSkillGroups"
@@ -1578,6 +1584,7 @@ const opSearchSkillGroups = "SearchSkillGroups"
 type SearchSkillGroupsRequest struct {
 	*aws.Request
 	Input *SearchSkillGroupsInput
+	Copy  func(*SearchSkillGroupsInput) SearchSkillGroupsRequest
 }
 
 // Send marshals and sends the SearchSkillGroups API request.
@@ -1625,57 +1632,53 @@ func (c *AlexaForBusiness) SearchSkillGroupsRequest(input *SearchSkillGroupsInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchSkillGroupsRequest{Request: req, Input: input}
+	return SearchSkillGroupsRequest{Request: req, Input: input, Copy: c.SearchSkillGroupsRequest}
 }
 
-// SearchSkillGroupsPages iterates over the pages of a SearchSkillGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See SearchSkillGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SearchSkillGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a SearchSkillGroups operation.
-//    pageNum := 0
-//    err := client.SearchSkillGroupsPages(params,
-//        func(page *SearchSkillGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SearchSkillGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AlexaForBusiness) SearchSkillGroupsPages(input *SearchSkillGroupsInput, fn func(*SearchSkillGroupsOutput, bool) bool) error {
-	return c.SearchSkillGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchSkillGroupsRequest) Paginate(opts ...aws.Option) SearchSkillGroupsPager {
+	return SearchSkillGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchSkillGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// SearchSkillGroupsPagesWithContext same as SearchSkillGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) SearchSkillGroupsPagesWithContext(ctx aws.Context, input *SearchSkillGroupsInput, fn func(*SearchSkillGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *SearchSkillGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.SearchSkillGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchSkillGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchSkillGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchSkillGroupsPager struct {
+	aws.Pager
+}
+
+func (p *SearchSkillGroupsPager) CurrentPage() *SearchSkillGroupsOutput {
+	return p.Pager.CurrentPage().(*SearchSkillGroupsOutput)
 }
 
 const opSearchUsers = "SearchUsers"
@@ -1684,6 +1687,7 @@ const opSearchUsers = "SearchUsers"
 type SearchUsersRequest struct {
 	*aws.Request
 	Input *SearchUsersInput
+	Copy  func(*SearchUsersInput) SearchUsersRequest
 }
 
 // Send marshals and sends the SearchUsers API request.
@@ -1730,57 +1734,53 @@ func (c *AlexaForBusiness) SearchUsersRequest(input *SearchUsersInput) SearchUse
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchUsersRequest{Request: req, Input: input}
+	return SearchUsersRequest{Request: req, Input: input, Copy: c.SearchUsersRequest}
 }
 
-// SearchUsersPages iterates over the pages of a SearchUsers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See SearchUsers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SearchUsersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a SearchUsers operation.
-//    pageNum := 0
-//    err := client.SearchUsersPages(params,
-//        func(page *SearchUsersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SearchUsersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AlexaForBusiness) SearchUsersPages(input *SearchUsersInput, fn func(*SearchUsersOutput, bool) bool) error {
-	return c.SearchUsersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchUsersRequest) Paginate(opts ...aws.Option) SearchUsersPager {
+	return SearchUsersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchUsersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// SearchUsersPagesWithContext same as SearchUsersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AlexaForBusiness) SearchUsersPagesWithContext(ctx aws.Context, input *SearchUsersInput, fn func(*SearchUsersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *SearchUsersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.SearchUsersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchUsersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchUsersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchUsersPager struct {
+	aws.Pager
+}
+
+func (p *SearchUsersPager) CurrentPage() *SearchUsersOutput {
+	return p.Pager.CurrentPage().(*SearchUsersOutput)
 }
 
 const opSendInvitation = "SendInvitation"
@@ -1789,6 +1789,7 @@ const opSendInvitation = "SendInvitation"
 type SendInvitationRequest struct {
 	*aws.Request
 	Input *SendInvitationInput
+	Copy  func(*SendInvitationInput) SendInvitationRequest
 }
 
 // Send marshals and sends the SendInvitation API request.
@@ -1830,7 +1831,7 @@ func (c *AlexaForBusiness) SendInvitationRequest(input *SendInvitationInput) Sen
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendInvitationRequest{Request: req, Input: input}
+	return SendInvitationRequest{Request: req, Input: input, Copy: c.SendInvitationRequest}
 }
 
 const opStartDeviceSync = "StartDeviceSync"
@@ -1839,6 +1840,7 @@ const opStartDeviceSync = "StartDeviceSync"
 type StartDeviceSyncRequest struct {
 	*aws.Request
 	Input *StartDeviceSyncInput
+	Copy  func(*StartDeviceSyncInput) StartDeviceSyncRequest
 }
 
 // Send marshals and sends the StartDeviceSync API request.
@@ -1880,7 +1882,7 @@ func (c *AlexaForBusiness) StartDeviceSyncRequest(input *StartDeviceSyncInput) S
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartDeviceSyncRequest{Request: req, Input: input}
+	return StartDeviceSyncRequest{Request: req, Input: input, Copy: c.StartDeviceSyncRequest}
 }
 
 const opTagResource = "TagResource"
@@ -1889,6 +1891,7 @@ const opTagResource = "TagResource"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -1929,7 +1932,7 @@ func (c *AlexaForBusiness) TagResourceRequest(input *TagResourceInput) TagResour
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUntagResource = "UntagResource"
@@ -1938,6 +1941,7 @@ const opUntagResource = "UntagResource"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -1978,7 +1982,7 @@ func (c *AlexaForBusiness) UntagResourceRequest(input *UntagResourceInput) Untag
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateDevice = "UpdateDevice"
@@ -1987,6 +1991,7 @@ const opUpdateDevice = "UpdateDevice"
 type UpdateDeviceRequest struct {
 	*aws.Request
 	Input *UpdateDeviceInput
+	Copy  func(*UpdateDeviceInput) UpdateDeviceRequest
 }
 
 // Send marshals and sends the UpdateDevice API request.
@@ -2027,7 +2032,7 @@ func (c *AlexaForBusiness) UpdateDeviceRequest(input *UpdateDeviceInput) UpdateD
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDeviceRequest{Request: req, Input: input}
+	return UpdateDeviceRequest{Request: req, Input: input, Copy: c.UpdateDeviceRequest}
 }
 
 const opUpdateProfile = "UpdateProfile"
@@ -2036,6 +2041,7 @@ const opUpdateProfile = "UpdateProfile"
 type UpdateProfileRequest struct {
 	*aws.Request
 	Input *UpdateProfileInput
+	Copy  func(*UpdateProfileInput) UpdateProfileRequest
 }
 
 // Send marshals and sends the UpdateProfile API request.
@@ -2076,7 +2082,7 @@ func (c *AlexaForBusiness) UpdateProfileRequest(input *UpdateProfileInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateProfileRequest{Request: req, Input: input}
+	return UpdateProfileRequest{Request: req, Input: input, Copy: c.UpdateProfileRequest}
 }
 
 const opUpdateRoom = "UpdateRoom"
@@ -2085,6 +2091,7 @@ const opUpdateRoom = "UpdateRoom"
 type UpdateRoomRequest struct {
 	*aws.Request
 	Input *UpdateRoomInput
+	Copy  func(*UpdateRoomInput) UpdateRoomRequest
 }
 
 // Send marshals and sends the UpdateRoom API request.
@@ -2125,7 +2132,7 @@ func (c *AlexaForBusiness) UpdateRoomRequest(input *UpdateRoomInput) UpdateRoomR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRoomRequest{Request: req, Input: input}
+	return UpdateRoomRequest{Request: req, Input: input, Copy: c.UpdateRoomRequest}
 }
 
 const opUpdateSkillGroup = "UpdateSkillGroup"
@@ -2134,6 +2141,7 @@ const opUpdateSkillGroup = "UpdateSkillGroup"
 type UpdateSkillGroupRequest struct {
 	*aws.Request
 	Input *UpdateSkillGroupInput
+	Copy  func(*UpdateSkillGroupInput) UpdateSkillGroupRequest
 }
 
 // Send marshals and sends the UpdateSkillGroup API request.
@@ -2174,7 +2182,7 @@ func (c *AlexaForBusiness) UpdateSkillGroupRequest(input *UpdateSkillGroupInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSkillGroupRequest{Request: req, Input: input}
+	return UpdateSkillGroupRequest{Request: req, Input: input, Copy: c.UpdateSkillGroupRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithRoomRequest

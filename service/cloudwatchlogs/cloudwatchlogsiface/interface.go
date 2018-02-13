@@ -9,7 +9,6 @@
 package cloudwatchlogsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs"
 )
 
@@ -89,44 +88,23 @@ type CloudWatchLogsAPI interface {
 
 	DescribeDestinationsRequest(*cloudwatchlogs.DescribeDestinationsInput) cloudwatchlogs.DescribeDestinationsRequest
 
-	DescribeDestinationsPages(*cloudwatchlogs.DescribeDestinationsInput, func(*cloudwatchlogs.DescribeDestinationsOutput, bool) bool) error
-	DescribeDestinationsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeDestinationsInput, func(*cloudwatchlogs.DescribeDestinationsOutput, bool) bool, ...aws.Option) error
-
 	DescribeExportTasksRequest(*cloudwatchlogs.DescribeExportTasksInput) cloudwatchlogs.DescribeExportTasksRequest
 
 	DescribeLogGroupsRequest(*cloudwatchlogs.DescribeLogGroupsInput) cloudwatchlogs.DescribeLogGroupsRequest
 
-	DescribeLogGroupsPages(*cloudwatchlogs.DescribeLogGroupsInput, func(*cloudwatchlogs.DescribeLogGroupsOutput, bool) bool) error
-	DescribeLogGroupsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeLogGroupsInput, func(*cloudwatchlogs.DescribeLogGroupsOutput, bool) bool, ...aws.Option) error
-
 	DescribeLogStreamsRequest(*cloudwatchlogs.DescribeLogStreamsInput) cloudwatchlogs.DescribeLogStreamsRequest
 
-	DescribeLogStreamsPages(*cloudwatchlogs.DescribeLogStreamsInput, func(*cloudwatchlogs.DescribeLogStreamsOutput, bool) bool) error
-	DescribeLogStreamsPagesWithContext(aws.Context, *cloudwatchlogs.DescribeLogStreamsInput, func(*cloudwatchlogs.DescribeLogStreamsOutput, bool) bool, ...aws.Option) error
-
 	DescribeMetricFiltersRequest(*cloudwatchlogs.DescribeMetricFiltersInput) cloudwatchlogs.DescribeMetricFiltersRequest
-
-	DescribeMetricFiltersPages(*cloudwatchlogs.DescribeMetricFiltersInput, func(*cloudwatchlogs.DescribeMetricFiltersOutput, bool) bool) error
-	DescribeMetricFiltersPagesWithContext(aws.Context, *cloudwatchlogs.DescribeMetricFiltersInput, func(*cloudwatchlogs.DescribeMetricFiltersOutput, bool) bool, ...aws.Option) error
 
 	DescribeResourcePoliciesRequest(*cloudwatchlogs.DescribeResourcePoliciesInput) cloudwatchlogs.DescribeResourcePoliciesRequest
 
 	DescribeSubscriptionFiltersRequest(*cloudwatchlogs.DescribeSubscriptionFiltersInput) cloudwatchlogs.DescribeSubscriptionFiltersRequest
 
-	DescribeSubscriptionFiltersPages(*cloudwatchlogs.DescribeSubscriptionFiltersInput, func(*cloudwatchlogs.DescribeSubscriptionFiltersOutput, bool) bool) error
-	DescribeSubscriptionFiltersPagesWithContext(aws.Context, *cloudwatchlogs.DescribeSubscriptionFiltersInput, func(*cloudwatchlogs.DescribeSubscriptionFiltersOutput, bool) bool, ...aws.Option) error
-
 	DisassociateKmsKeyRequest(*cloudwatchlogs.DisassociateKmsKeyInput) cloudwatchlogs.DisassociateKmsKeyRequest
 
 	FilterLogEventsRequest(*cloudwatchlogs.FilterLogEventsInput) cloudwatchlogs.FilterLogEventsRequest
 
-	FilterLogEventsPages(*cloudwatchlogs.FilterLogEventsInput, func(*cloudwatchlogs.FilterLogEventsOutput, bool) bool) error
-	FilterLogEventsPagesWithContext(aws.Context, *cloudwatchlogs.FilterLogEventsInput, func(*cloudwatchlogs.FilterLogEventsOutput, bool) bool, ...aws.Option) error
-
 	GetLogEventsRequest(*cloudwatchlogs.GetLogEventsInput) cloudwatchlogs.GetLogEventsRequest
-
-	GetLogEventsPages(*cloudwatchlogs.GetLogEventsInput, func(*cloudwatchlogs.GetLogEventsOutput, bool) bool) error
-	GetLogEventsPagesWithContext(aws.Context, *cloudwatchlogs.GetLogEventsInput, func(*cloudwatchlogs.GetLogEventsOutput, bool) bool, ...aws.Option) error
 
 	ListTagsLogGroupRequest(*cloudwatchlogs.ListTagsLogGroupInput) cloudwatchlogs.ListTagsLogGroupRequest
 

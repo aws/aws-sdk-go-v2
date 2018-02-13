@@ -16,6 +16,7 @@ const opBatchMeterUsage = "BatchMeterUsage"
 type BatchMeterUsageRequest struct {
 	*aws.Request
 	Input *BatchMeterUsageInput
+	Copy  func(*BatchMeterUsageInput) BatchMeterUsageRequest
 }
 
 // Send marshals and sends the BatchMeterUsage API request.
@@ -65,7 +66,7 @@ func (c *MarketplaceMetering) BatchMeterUsageRequest(input *BatchMeterUsageInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchMeterUsageRequest{Request: req, Input: input}
+	return BatchMeterUsageRequest{Request: req, Input: input, Copy: c.BatchMeterUsageRequest}
 }
 
 const opMeterUsage = "MeterUsage"
@@ -74,6 +75,7 @@ const opMeterUsage = "MeterUsage"
 type MeterUsageRequest struct {
 	*aws.Request
 	Input *MeterUsageInput
+	Copy  func(*MeterUsageInput) MeterUsageRequest
 }
 
 // Send marshals and sends the MeterUsage API request.
@@ -118,7 +120,7 @@ func (c *MarketplaceMetering) MeterUsageRequest(input *MeterUsageInput) MeterUsa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return MeterUsageRequest{Request: req, Input: input}
+	return MeterUsageRequest{Request: req, Input: input, Copy: c.MeterUsageRequest}
 }
 
 const opResolveCustomer = "ResolveCustomer"
@@ -127,6 +129,7 @@ const opResolveCustomer = "ResolveCustomer"
 type ResolveCustomerRequest struct {
 	*aws.Request
 	Input *ResolveCustomerInput
+	Copy  func(*ResolveCustomerInput) ResolveCustomerRequest
 }
 
 // Send marshals and sends the ResolveCustomer API request.
@@ -170,7 +173,7 @@ func (c *MarketplaceMetering) ResolveCustomerRequest(input *ResolveCustomerInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResolveCustomerRequest{Request: req, Input: input}
+	return ResolveCustomerRequest{Request: req, Input: input, Copy: c.ResolveCustomerRequest}
 }
 
 // A BatchMeterUsageRequest contains UsageRecords, which indicate quantities

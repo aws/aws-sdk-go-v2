@@ -18,6 +18,7 @@ const opActivatePipeline = "ActivatePipeline"
 type ActivatePipelineRequest struct {
 	*aws.Request
 	Input *ActivatePipelineInput
+	Copy  func(*ActivatePipelineInput) ActivatePipelineRequest
 }
 
 // Send marshals and sends the ActivatePipeline API request.
@@ -65,7 +66,7 @@ func (c *DataPipeline) ActivatePipelineRequest(input *ActivatePipelineInput) Act
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ActivatePipelineRequest{Request: req, Input: input}
+	return ActivatePipelineRequest{Request: req, Input: input, Copy: c.ActivatePipelineRequest}
 }
 
 const opAddTags = "AddTags"
@@ -74,6 +75,7 @@ const opAddTags = "AddTags"
 type AddTagsRequest struct {
 	*aws.Request
 	Input *AddTagsInput
+	Copy  func(*AddTagsInput) AddTagsRequest
 }
 
 // Send marshals and sends the AddTags API request.
@@ -114,7 +116,7 @@ func (c *DataPipeline) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsRequest{Request: req, Input: input}
+	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
 const opCreatePipeline = "CreatePipeline"
@@ -123,6 +125,7 @@ const opCreatePipeline = "CreatePipeline"
 type CreatePipelineRequest struct {
 	*aws.Request
 	Input *CreatePipelineInput
+	Copy  func(*CreatePipelineInput) CreatePipelineRequest
 }
 
 // Send marshals and sends the CreatePipeline API request.
@@ -164,7 +167,7 @@ func (c *DataPipeline) CreatePipelineRequest(input *CreatePipelineInput) CreateP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePipelineRequest{Request: req, Input: input}
+	return CreatePipelineRequest{Request: req, Input: input, Copy: c.CreatePipelineRequest}
 }
 
 const opDeactivatePipeline = "DeactivatePipeline"
@@ -173,6 +176,7 @@ const opDeactivatePipeline = "DeactivatePipeline"
 type DeactivatePipelineRequest struct {
 	*aws.Request
 	Input *DeactivatePipelineInput
+	Copy  func(*DeactivatePipelineInput) DeactivatePipelineRequest
 }
 
 // Send marshals and sends the DeactivatePipeline API request.
@@ -218,7 +222,7 @@ func (c *DataPipeline) DeactivatePipelineRequest(input *DeactivatePipelineInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeactivatePipelineRequest{Request: req, Input: input}
+	return DeactivatePipelineRequest{Request: req, Input: input, Copy: c.DeactivatePipelineRequest}
 }
 
 const opDeletePipeline = "DeletePipeline"
@@ -227,6 +231,7 @@ const opDeletePipeline = "DeletePipeline"
 type DeletePipelineRequest struct {
 	*aws.Request
 	Input *DeletePipelineInput
+	Copy  func(*DeletePipelineInput) DeletePipelineRequest
 }
 
 // Send marshals and sends the DeletePipeline API request.
@@ -276,7 +281,7 @@ func (c *DataPipeline) DeletePipelineRequest(input *DeletePipelineInput) DeleteP
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePipelineRequest{Request: req, Input: input}
+	return DeletePipelineRequest{Request: req, Input: input, Copy: c.DeletePipelineRequest}
 }
 
 const opDescribeObjects = "DescribeObjects"
@@ -285,6 +290,7 @@ const opDescribeObjects = "DescribeObjects"
 type DescribeObjectsRequest struct {
 	*aws.Request
 	Input *DescribeObjectsInput
+	Copy  func(*DescribeObjectsInput) DescribeObjectsRequest
 }
 
 // Send marshals and sends the DescribeObjects API request.
@@ -333,57 +339,53 @@ func (c *DataPipeline) DescribeObjectsRequest(input *DescribeObjectsInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeObjectsRequest{Request: req, Input: input}
+	return DescribeObjectsRequest{Request: req, Input: input, Copy: c.DescribeObjectsRequest}
 }
 
-// DescribeObjectsPages iterates over the pages of a DescribeObjects operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeObjects method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeObjectsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeObjects operation.
-//    pageNum := 0
-//    err := client.DescribeObjectsPages(params,
-//        func(page *DescribeObjectsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeObjectsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DataPipeline) DescribeObjectsPages(input *DescribeObjectsInput, fn func(*DescribeObjectsOutput, bool) bool) error {
-	return c.DescribeObjectsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeObjectsRequest) Paginate(opts ...aws.Option) DescribeObjectsPager {
+	return DescribeObjectsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeObjectsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeObjectsPagesWithContext same as DescribeObjectsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) DescribeObjectsPagesWithContext(ctx aws.Context, input *DescribeObjectsInput, fn func(*DescribeObjectsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeObjectsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeObjectsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeObjectsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeObjectsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeObjectsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeObjectsPager) CurrentPage() *DescribeObjectsOutput {
+	return p.Pager.CurrentPage().(*DescribeObjectsOutput)
 }
 
 const opDescribePipelines = "DescribePipelines"
@@ -392,6 +394,7 @@ const opDescribePipelines = "DescribePipelines"
 type DescribePipelinesRequest struct {
 	*aws.Request
 	Input *DescribePipelinesInput
+	Copy  func(*DescribePipelinesInput) DescribePipelinesRequest
 }
 
 // Send marshals and sends the DescribePipelines API request.
@@ -440,7 +443,7 @@ func (c *DataPipeline) DescribePipelinesRequest(input *DescribePipelinesInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePipelinesRequest{Request: req, Input: input}
+	return DescribePipelinesRequest{Request: req, Input: input, Copy: c.DescribePipelinesRequest}
 }
 
 const opEvaluateExpression = "EvaluateExpression"
@@ -449,6 +452,7 @@ const opEvaluateExpression = "EvaluateExpression"
 type EvaluateExpressionRequest struct {
 	*aws.Request
 	Input *EvaluateExpressionInput
+	Copy  func(*EvaluateExpressionInput) EvaluateExpressionRequest
 }
 
 // Send marshals and sends the EvaluateExpression API request.
@@ -491,7 +495,7 @@ func (c *DataPipeline) EvaluateExpressionRequest(input *EvaluateExpressionInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EvaluateExpressionRequest{Request: req, Input: input}
+	return EvaluateExpressionRequest{Request: req, Input: input, Copy: c.EvaluateExpressionRequest}
 }
 
 const opGetPipelineDefinition = "GetPipelineDefinition"
@@ -500,6 +504,7 @@ const opGetPipelineDefinition = "GetPipelineDefinition"
 type GetPipelineDefinitionRequest struct {
 	*aws.Request
 	Input *GetPipelineDefinitionInput
+	Copy  func(*GetPipelineDefinitionInput) GetPipelineDefinitionRequest
 }
 
 // Send marshals and sends the GetPipelineDefinition API request.
@@ -541,7 +546,7 @@ func (c *DataPipeline) GetPipelineDefinitionRequest(input *GetPipelineDefinition
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPipelineDefinitionRequest{Request: req, Input: input}
+	return GetPipelineDefinitionRequest{Request: req, Input: input, Copy: c.GetPipelineDefinitionRequest}
 }
 
 const opListPipelines = "ListPipelines"
@@ -550,6 +555,7 @@ const opListPipelines = "ListPipelines"
 type ListPipelinesRequest struct {
 	*aws.Request
 	Input *ListPipelinesInput
+	Copy  func(*ListPipelinesInput) ListPipelinesRequest
 }
 
 // Send marshals and sends the ListPipelines API request.
@@ -597,57 +603,53 @@ func (c *DataPipeline) ListPipelinesRequest(input *ListPipelinesInput) ListPipel
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPipelinesRequest{Request: req, Input: input}
+	return ListPipelinesRequest{Request: req, Input: input, Copy: c.ListPipelinesRequest}
 }
 
-// ListPipelinesPages iterates over the pages of a ListPipelines operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPipelines method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPipelinesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPipelines operation.
-//    pageNum := 0
-//    err := client.ListPipelinesPages(params,
-//        func(page *ListPipelinesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPipelinesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DataPipeline) ListPipelinesPages(input *ListPipelinesInput, fn func(*ListPipelinesOutput, bool) bool) error {
-	return c.ListPipelinesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPipelinesRequest) Paginate(opts ...aws.Option) ListPipelinesPager {
+	return ListPipelinesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPipelinesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListPipelinesPagesWithContext same as ListPipelinesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) ListPipelinesPagesWithContext(ctx aws.Context, input *ListPipelinesInput, fn func(*ListPipelinesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPipelinesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListPipelinesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPipelinesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPipelinesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPipelinesPager struct {
+	aws.Pager
+}
+
+func (p *ListPipelinesPager) CurrentPage() *ListPipelinesOutput {
+	return p.Pager.CurrentPage().(*ListPipelinesOutput)
 }
 
 const opPollForTask = "PollForTask"
@@ -656,6 +658,7 @@ const opPollForTask = "PollForTask"
 type PollForTaskRequest struct {
 	*aws.Request
 	Input *PollForTaskInput
+	Copy  func(*PollForTaskInput) PollForTaskRequest
 }
 
 // Send marshals and sends the PollForTask API request.
@@ -709,7 +712,7 @@ func (c *DataPipeline) PollForTaskRequest(input *PollForTaskInput) PollForTaskRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PollForTaskRequest{Request: req, Input: input}
+	return PollForTaskRequest{Request: req, Input: input, Copy: c.PollForTaskRequest}
 }
 
 const opPutPipelineDefinition = "PutPipelineDefinition"
@@ -718,6 +721,7 @@ const opPutPipelineDefinition = "PutPipelineDefinition"
 type PutPipelineDefinitionRequest struct {
 	*aws.Request
 	Input *PutPipelineDefinitionInput
+	Copy  func(*PutPipelineDefinitionInput) PutPipelineDefinitionRequest
 }
 
 // Send marshals and sends the PutPipelineDefinition API request.
@@ -771,7 +775,7 @@ func (c *DataPipeline) PutPipelineDefinitionRequest(input *PutPipelineDefinition
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutPipelineDefinitionRequest{Request: req, Input: input}
+	return PutPipelineDefinitionRequest{Request: req, Input: input, Copy: c.PutPipelineDefinitionRequest}
 }
 
 const opQueryObjects = "QueryObjects"
@@ -780,6 +784,7 @@ const opQueryObjects = "QueryObjects"
 type QueryObjectsRequest struct {
 	*aws.Request
 	Input *QueryObjectsInput
+	Copy  func(*QueryObjectsInput) QueryObjectsRequest
 }
 
 // Send marshals and sends the QueryObjects API request.
@@ -827,57 +832,53 @@ func (c *DataPipeline) QueryObjectsRequest(input *QueryObjectsInput) QueryObject
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return QueryObjectsRequest{Request: req, Input: input}
+	return QueryObjectsRequest{Request: req, Input: input, Copy: c.QueryObjectsRequest}
 }
 
-// QueryObjectsPages iterates over the pages of a QueryObjects operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See QueryObjects method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a QueryObjectsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a QueryObjects operation.
-//    pageNum := 0
-//    err := client.QueryObjectsPages(params,
-//        func(page *QueryObjectsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.QueryObjectsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *DataPipeline) QueryObjectsPages(input *QueryObjectsInput, fn func(*QueryObjectsOutput, bool) bool) error {
-	return c.QueryObjectsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *QueryObjectsRequest) Paginate(opts ...aws.Option) QueryObjectsPager {
+	return QueryObjectsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *QueryObjectsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// QueryObjectsPagesWithContext same as QueryObjectsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *DataPipeline) QueryObjectsPagesWithContext(ctx aws.Context, input *QueryObjectsInput, fn func(*QueryObjectsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *QueryObjectsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.QueryObjectsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*QueryObjectsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// QueryObjectsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type QueryObjectsPager struct {
+	aws.Pager
+}
+
+func (p *QueryObjectsPager) CurrentPage() *QueryObjectsOutput {
+	return p.Pager.CurrentPage().(*QueryObjectsOutput)
 }
 
 const opRemoveTags = "RemoveTags"
@@ -886,6 +887,7 @@ const opRemoveTags = "RemoveTags"
 type RemoveTagsRequest struct {
 	*aws.Request
 	Input *RemoveTagsInput
+	Copy  func(*RemoveTagsInput) RemoveTagsRequest
 }
 
 // Send marshals and sends the RemoveTags API request.
@@ -926,7 +928,7 @@ func (c *DataPipeline) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsRequest{Request: req, Input: input}
+	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 
 const opReportTaskProgress = "ReportTaskProgress"
@@ -935,6 +937,7 @@ const opReportTaskProgress = "ReportTaskProgress"
 type ReportTaskProgressRequest struct {
 	*aws.Request
 	Input *ReportTaskProgressInput
+	Copy  func(*ReportTaskProgressInput) ReportTaskProgressRequest
 }
 
 // Send marshals and sends the ReportTaskProgress API request.
@@ -986,7 +989,7 @@ func (c *DataPipeline) ReportTaskProgressRequest(input *ReportTaskProgressInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReportTaskProgressRequest{Request: req, Input: input}
+	return ReportTaskProgressRequest{Request: req, Input: input, Copy: c.ReportTaskProgressRequest}
 }
 
 const opReportTaskRunnerHeartbeat = "ReportTaskRunnerHeartbeat"
@@ -995,6 +998,7 @@ const opReportTaskRunnerHeartbeat = "ReportTaskRunnerHeartbeat"
 type ReportTaskRunnerHeartbeatRequest struct {
 	*aws.Request
 	Input *ReportTaskRunnerHeartbeatInput
+	Copy  func(*ReportTaskRunnerHeartbeatInput) ReportTaskRunnerHeartbeatRequest
 }
 
 // Send marshals and sends the ReportTaskRunnerHeartbeat API request.
@@ -1039,7 +1043,7 @@ func (c *DataPipeline) ReportTaskRunnerHeartbeatRequest(input *ReportTaskRunnerH
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReportTaskRunnerHeartbeatRequest{Request: req, Input: input}
+	return ReportTaskRunnerHeartbeatRequest{Request: req, Input: input, Copy: c.ReportTaskRunnerHeartbeatRequest}
 }
 
 const opSetStatus = "SetStatus"
@@ -1048,6 +1052,7 @@ const opSetStatus = "SetStatus"
 type SetStatusRequest struct {
 	*aws.Request
 	Input *SetStatusInput
+	Copy  func(*SetStatusInput) SetStatusRequest
 }
 
 // Send marshals and sends the SetStatus API request.
@@ -1094,7 +1099,7 @@ func (c *DataPipeline) SetStatusRequest(input *SetStatusInput) SetStatusRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetStatusRequest{Request: req, Input: input}
+	return SetStatusRequest{Request: req, Input: input, Copy: c.SetStatusRequest}
 }
 
 const opSetTaskStatus = "SetTaskStatus"
@@ -1103,6 +1108,7 @@ const opSetTaskStatus = "SetTaskStatus"
 type SetTaskStatusRequest struct {
 	*aws.Request
 	Input *SetTaskStatusInput
+	Copy  func(*SetTaskStatusInput) SetTaskStatusRequest
 }
 
 // Send marshals and sends the SetTaskStatus API request.
@@ -1147,7 +1153,7 @@ func (c *DataPipeline) SetTaskStatusRequest(input *SetTaskStatusInput) SetTaskSt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetTaskStatusRequest{Request: req, Input: input}
+	return SetTaskStatusRequest{Request: req, Input: input, Copy: c.SetTaskStatusRequest}
 }
 
 const opValidatePipelineDefinition = "ValidatePipelineDefinition"
@@ -1156,6 +1162,7 @@ const opValidatePipelineDefinition = "ValidatePipelineDefinition"
 type ValidatePipelineDefinitionRequest struct {
 	*aws.Request
 	Input *ValidatePipelineDefinitionInput
+	Copy  func(*ValidatePipelineDefinitionInput) ValidatePipelineDefinitionRequest
 }
 
 // Send marshals and sends the ValidatePipelineDefinition API request.
@@ -1197,7 +1204,7 @@ func (c *DataPipeline) ValidatePipelineDefinitionRequest(input *ValidatePipeline
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ValidatePipelineDefinitionRequest{Request: req, Input: input}
+	return ValidatePipelineDefinitionRequest{Request: req, Input: input, Copy: c.ValidatePipelineDefinitionRequest}
 }
 
 // Contains the parameters for ActivatePipeline.

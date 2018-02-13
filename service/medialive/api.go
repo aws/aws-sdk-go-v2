@@ -14,6 +14,7 @@ const opCreateChannel = "CreateChannel"
 type CreateChannelRequest struct {
 	*aws.Request
 	Input *CreateChannelInput
+	Copy  func(*CreateChannelInput) CreateChannelRequest
 }
 
 // Send marshals and sends the CreateChannel API request.
@@ -54,7 +55,7 @@ func (c *MediaLive) CreateChannelRequest(input *CreateChannelInput) CreateChanne
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateChannelRequest{Request: req, Input: input}
+	return CreateChannelRequest{Request: req, Input: input, Copy: c.CreateChannelRequest}
 }
 
 const opCreateInput = "CreateInput"
@@ -63,6 +64,7 @@ const opCreateInput = "CreateInput"
 type CreateInputRequest struct {
 	*aws.Request
 	Input *CreateInputInput
+	Copy  func(*CreateInputInput) CreateInputRequest
 }
 
 // Send marshals and sends the CreateInput API request.
@@ -103,7 +105,7 @@ func (c *MediaLive) CreateInputRequest(input *CreateInputInput) CreateInputReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateInputRequest{Request: req, Input: input}
+	return CreateInputRequest{Request: req, Input: input, Copy: c.CreateInputRequest}
 }
 
 const opCreateInputSecurityGroup = "CreateInputSecurityGroup"
@@ -112,6 +114,7 @@ const opCreateInputSecurityGroup = "CreateInputSecurityGroup"
 type CreateInputSecurityGroupRequest struct {
 	*aws.Request
 	Input *CreateInputSecurityGroupInput
+	Copy  func(*CreateInputSecurityGroupInput) CreateInputSecurityGroupRequest
 }
 
 // Send marshals and sends the CreateInputSecurityGroup API request.
@@ -152,7 +155,7 @@ func (c *MediaLive) CreateInputSecurityGroupRequest(input *CreateInputSecurityGr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateInputSecurityGroupRequest{Request: req, Input: input}
+	return CreateInputSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateInputSecurityGroupRequest}
 }
 
 const opDeleteChannel = "DeleteChannel"
@@ -161,6 +164,7 @@ const opDeleteChannel = "DeleteChannel"
 type DeleteChannelRequest struct {
 	*aws.Request
 	Input *DeleteChannelInput
+	Copy  func(*DeleteChannelInput) DeleteChannelRequest
 }
 
 // Send marshals and sends the DeleteChannel API request.
@@ -201,7 +205,7 @@ func (c *MediaLive) DeleteChannelRequest(input *DeleteChannelInput) DeleteChanne
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteChannelRequest{Request: req, Input: input}
+	return DeleteChannelRequest{Request: req, Input: input, Copy: c.DeleteChannelRequest}
 }
 
 const opDeleteInput = "DeleteInput"
@@ -210,6 +214,7 @@ const opDeleteInput = "DeleteInput"
 type DeleteInputRequest struct {
 	*aws.Request
 	Input *DeleteInputInput
+	Copy  func(*DeleteInputInput) DeleteInputRequest
 }
 
 // Send marshals and sends the DeleteInput API request.
@@ -250,7 +255,7 @@ func (c *MediaLive) DeleteInputRequest(input *DeleteInputInput) DeleteInputReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteInputRequest{Request: req, Input: input}
+	return DeleteInputRequest{Request: req, Input: input, Copy: c.DeleteInputRequest}
 }
 
 const opDeleteInputSecurityGroup = "DeleteInputSecurityGroup"
@@ -259,6 +264,7 @@ const opDeleteInputSecurityGroup = "DeleteInputSecurityGroup"
 type DeleteInputSecurityGroupRequest struct {
 	*aws.Request
 	Input *DeleteInputSecurityGroupInput
+	Copy  func(*DeleteInputSecurityGroupInput) DeleteInputSecurityGroupRequest
 }
 
 // Send marshals and sends the DeleteInputSecurityGroup API request.
@@ -299,7 +305,7 @@ func (c *MediaLive) DeleteInputSecurityGroupRequest(input *DeleteInputSecurityGr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteInputSecurityGroupRequest{Request: req, Input: input}
+	return DeleteInputSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteInputSecurityGroupRequest}
 }
 
 const opDescribeChannel = "DescribeChannel"
@@ -308,6 +314,7 @@ const opDescribeChannel = "DescribeChannel"
 type DescribeChannelRequest struct {
 	*aws.Request
 	Input *DescribeChannelInput
+	Copy  func(*DescribeChannelInput) DescribeChannelRequest
 }
 
 // Send marshals and sends the DescribeChannel API request.
@@ -348,7 +355,7 @@ func (c *MediaLive) DescribeChannelRequest(input *DescribeChannelInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeChannelRequest{Request: req, Input: input}
+	return DescribeChannelRequest{Request: req, Input: input, Copy: c.DescribeChannelRequest}
 }
 
 const opDescribeInput = "DescribeInput"
@@ -357,6 +364,7 @@ const opDescribeInput = "DescribeInput"
 type DescribeInputRequest struct {
 	*aws.Request
 	Input *DescribeInputInput
+	Copy  func(*DescribeInputInput) DescribeInputRequest
 }
 
 // Send marshals and sends the DescribeInput API request.
@@ -397,7 +405,7 @@ func (c *MediaLive) DescribeInputRequest(input *DescribeInputInput) DescribeInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInputRequest{Request: req, Input: input}
+	return DescribeInputRequest{Request: req, Input: input, Copy: c.DescribeInputRequest}
 }
 
 const opDescribeInputSecurityGroup = "DescribeInputSecurityGroup"
@@ -406,6 +414,7 @@ const opDescribeInputSecurityGroup = "DescribeInputSecurityGroup"
 type DescribeInputSecurityGroupRequest struct {
 	*aws.Request
 	Input *DescribeInputSecurityGroupInput
+	Copy  func(*DescribeInputSecurityGroupInput) DescribeInputSecurityGroupRequest
 }
 
 // Send marshals and sends the DescribeInputSecurityGroup API request.
@@ -446,7 +455,7 @@ func (c *MediaLive) DescribeInputSecurityGroupRequest(input *DescribeInputSecuri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInputSecurityGroupRequest{Request: req, Input: input}
+	return DescribeInputSecurityGroupRequest{Request: req, Input: input, Copy: c.DescribeInputSecurityGroupRequest}
 }
 
 const opListChannels = "ListChannels"
@@ -455,6 +464,7 @@ const opListChannels = "ListChannels"
 type ListChannelsRequest struct {
 	*aws.Request
 	Input *ListChannelsInput
+	Copy  func(*ListChannelsInput) ListChannelsRequest
 }
 
 // Send marshals and sends the ListChannels API request.
@@ -501,57 +511,53 @@ func (c *MediaLive) ListChannelsRequest(input *ListChannelsInput) ListChannelsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListChannelsRequest{Request: req, Input: input}
+	return ListChannelsRequest{Request: req, Input: input, Copy: c.ListChannelsRequest}
 }
 
-// ListChannelsPages iterates over the pages of a ListChannels operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListChannels method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListChannelsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListChannels operation.
-//    pageNum := 0
-//    err := client.ListChannelsPages(params,
-//        func(page *ListChannelsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListChannelsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MediaLive) ListChannelsPages(input *ListChannelsInput, fn func(*ListChannelsOutput, bool) bool) error {
-	return c.ListChannelsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListChannelsRequest) Paginate(opts ...aws.Option) ListChannelsPager {
+	return ListChannelsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListChannelsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListChannelsPagesWithContext same as ListChannelsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MediaLive) ListChannelsPagesWithContext(ctx aws.Context, input *ListChannelsInput, fn func(*ListChannelsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListChannelsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListChannelsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListChannelsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListChannelsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListChannelsPager struct {
+	aws.Pager
+}
+
+func (p *ListChannelsPager) CurrentPage() *ListChannelsOutput {
+	return p.Pager.CurrentPage().(*ListChannelsOutput)
 }
 
 const opListInputSecurityGroups = "ListInputSecurityGroups"
@@ -560,6 +566,7 @@ const opListInputSecurityGroups = "ListInputSecurityGroups"
 type ListInputSecurityGroupsRequest struct {
 	*aws.Request
 	Input *ListInputSecurityGroupsInput
+	Copy  func(*ListInputSecurityGroupsInput) ListInputSecurityGroupsRequest
 }
 
 // Send marshals and sends the ListInputSecurityGroups API request.
@@ -606,57 +613,53 @@ func (c *MediaLive) ListInputSecurityGroupsRequest(input *ListInputSecurityGroup
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListInputSecurityGroupsRequest{Request: req, Input: input}
+	return ListInputSecurityGroupsRequest{Request: req, Input: input, Copy: c.ListInputSecurityGroupsRequest}
 }
 
-// ListInputSecurityGroupsPages iterates over the pages of a ListInputSecurityGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListInputSecurityGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListInputSecurityGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListInputSecurityGroups operation.
-//    pageNum := 0
-//    err := client.ListInputSecurityGroupsPages(params,
-//        func(page *ListInputSecurityGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListInputSecurityGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MediaLive) ListInputSecurityGroupsPages(input *ListInputSecurityGroupsInput, fn func(*ListInputSecurityGroupsOutput, bool) bool) error {
-	return c.ListInputSecurityGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListInputSecurityGroupsRequest) Paginate(opts ...aws.Option) ListInputSecurityGroupsPager {
+	return ListInputSecurityGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListInputSecurityGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListInputSecurityGroupsPagesWithContext same as ListInputSecurityGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MediaLive) ListInputSecurityGroupsPagesWithContext(ctx aws.Context, input *ListInputSecurityGroupsInput, fn func(*ListInputSecurityGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListInputSecurityGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListInputSecurityGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListInputSecurityGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListInputSecurityGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListInputSecurityGroupsPager struct {
+	aws.Pager
+}
+
+func (p *ListInputSecurityGroupsPager) CurrentPage() *ListInputSecurityGroupsOutput {
+	return p.Pager.CurrentPage().(*ListInputSecurityGroupsOutput)
 }
 
 const opListInputs = "ListInputs"
@@ -665,6 +668,7 @@ const opListInputs = "ListInputs"
 type ListInputsRequest struct {
 	*aws.Request
 	Input *ListInputsInput
+	Copy  func(*ListInputsInput) ListInputsRequest
 }
 
 // Send marshals and sends the ListInputs API request.
@@ -711,57 +715,53 @@ func (c *MediaLive) ListInputsRequest(input *ListInputsInput) ListInputsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListInputsRequest{Request: req, Input: input}
+	return ListInputsRequest{Request: req, Input: input, Copy: c.ListInputsRequest}
 }
 
-// ListInputsPages iterates over the pages of a ListInputs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListInputs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListInputsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListInputs operation.
-//    pageNum := 0
-//    err := client.ListInputsPages(params,
-//        func(page *ListInputsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListInputsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MediaLive) ListInputsPages(input *ListInputsInput, fn func(*ListInputsOutput, bool) bool) error {
-	return c.ListInputsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListInputsRequest) Paginate(opts ...aws.Option) ListInputsPager {
+	return ListInputsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListInputsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListInputsPagesWithContext same as ListInputsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MediaLive) ListInputsPagesWithContext(ctx aws.Context, input *ListInputsInput, fn func(*ListInputsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListInputsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListInputsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListInputsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListInputsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListInputsPager struct {
+	aws.Pager
+}
+
+func (p *ListInputsPager) CurrentPage() *ListInputsOutput {
+	return p.Pager.CurrentPage().(*ListInputsOutput)
 }
 
 const opStartChannel = "StartChannel"
@@ -770,6 +770,7 @@ const opStartChannel = "StartChannel"
 type StartChannelRequest struct {
 	*aws.Request
 	Input *StartChannelInput
+	Copy  func(*StartChannelInput) StartChannelRequest
 }
 
 // Send marshals and sends the StartChannel API request.
@@ -810,7 +811,7 @@ func (c *MediaLive) StartChannelRequest(input *StartChannelInput) StartChannelRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartChannelRequest{Request: req, Input: input}
+	return StartChannelRequest{Request: req, Input: input, Copy: c.StartChannelRequest}
 }
 
 const opStopChannel = "StopChannel"
@@ -819,6 +820,7 @@ const opStopChannel = "StopChannel"
 type StopChannelRequest struct {
 	*aws.Request
 	Input *StopChannelInput
+	Copy  func(*StopChannelInput) StopChannelRequest
 }
 
 // Send marshals and sends the StopChannel API request.
@@ -859,7 +861,7 @@ func (c *MediaLive) StopChannelRequest(input *StopChannelInput) StopChannelReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopChannelRequest{Request: req, Input: input}
+	return StopChannelRequest{Request: req, Input: input, Copy: c.StopChannelRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AacSettings

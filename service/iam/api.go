@@ -18,6 +18,7 @@ const opAddClientIDToOpenIDConnectProvider = "AddClientIDToOpenIDConnectProvider
 type AddClientIDToOpenIDConnectProviderRequest struct {
 	*aws.Request
 	Input *AddClientIDToOpenIDConnectProviderInput
+	Copy  func(*AddClientIDToOpenIDConnectProviderInput) AddClientIDToOpenIDConnectProviderRequest
 }
 
 // Send marshals and sends the AddClientIDToOpenIDConnectProvider API request.
@@ -64,7 +65,7 @@ func (c *IAM) AddClientIDToOpenIDConnectProviderRequest(input *AddClientIDToOpen
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddClientIDToOpenIDConnectProviderRequest{Request: req, Input: input}
+	return AddClientIDToOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.AddClientIDToOpenIDConnectProviderRequest}
 }
 
 const opAddRoleToInstanceProfile = "AddRoleToInstanceProfile"
@@ -73,6 +74,7 @@ const opAddRoleToInstanceProfile = "AddRoleToInstanceProfile"
 type AddRoleToInstanceProfileRequest struct {
 	*aws.Request
 	Input *AddRoleToInstanceProfileInput
+	Copy  func(*AddRoleToInstanceProfileInput) AddRoleToInstanceProfileRequest
 }
 
 // Send marshals and sends the AddRoleToInstanceProfile API request.
@@ -123,7 +125,7 @@ func (c *IAM) AddRoleToInstanceProfileRequest(input *AddRoleToInstanceProfileInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddRoleToInstanceProfileRequest{Request: req, Input: input}
+	return AddRoleToInstanceProfileRequest{Request: req, Input: input, Copy: c.AddRoleToInstanceProfileRequest}
 }
 
 const opAddUserToGroup = "AddUserToGroup"
@@ -132,6 +134,7 @@ const opAddUserToGroup = "AddUserToGroup"
 type AddUserToGroupRequest struct {
 	*aws.Request
 	Input *AddUserToGroupInput
+	Copy  func(*AddUserToGroupInput) AddUserToGroupRequest
 }
 
 // Send marshals and sends the AddUserToGroup API request.
@@ -174,7 +177,7 @@ func (c *IAM) AddUserToGroupRequest(input *AddUserToGroupInput) AddUserToGroupRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddUserToGroupRequest{Request: req, Input: input}
+	return AddUserToGroupRequest{Request: req, Input: input, Copy: c.AddUserToGroupRequest}
 }
 
 const opAttachGroupPolicy = "AttachGroupPolicy"
@@ -183,6 +186,7 @@ const opAttachGroupPolicy = "AttachGroupPolicy"
 type AttachGroupPolicyRequest struct {
 	*aws.Request
 	Input *AttachGroupPolicyInput
+	Copy  func(*AttachGroupPolicyInput) AttachGroupPolicyRequest
 }
 
 // Send marshals and sends the AttachGroupPolicy API request.
@@ -232,7 +236,7 @@ func (c *IAM) AttachGroupPolicyRequest(input *AttachGroupPolicyInput) AttachGrou
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachGroupPolicyRequest{Request: req, Input: input}
+	return AttachGroupPolicyRequest{Request: req, Input: input, Copy: c.AttachGroupPolicyRequest}
 }
 
 const opAttachRolePolicy = "AttachRolePolicy"
@@ -241,6 +245,7 @@ const opAttachRolePolicy = "AttachRolePolicy"
 type AttachRolePolicyRequest struct {
 	*aws.Request
 	Input *AttachRolePolicyInput
+	Copy  func(*AttachRolePolicyInput) AttachRolePolicyRequest
 }
 
 // Send marshals and sends the AttachRolePolicy API request.
@@ -294,7 +299,7 @@ func (c *IAM) AttachRolePolicyRequest(input *AttachRolePolicyInput) AttachRolePo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachRolePolicyRequest{Request: req, Input: input}
+	return AttachRolePolicyRequest{Request: req, Input: input, Copy: c.AttachRolePolicyRequest}
 }
 
 const opAttachUserPolicy = "AttachUserPolicy"
@@ -303,6 +308,7 @@ const opAttachUserPolicy = "AttachUserPolicy"
 type AttachUserPolicyRequest struct {
 	*aws.Request
 	Input *AttachUserPolicyInput
+	Copy  func(*AttachUserPolicyInput) AttachUserPolicyRequest
 }
 
 // Send marshals and sends the AttachUserPolicy API request.
@@ -352,7 +358,7 @@ func (c *IAM) AttachUserPolicyRequest(input *AttachUserPolicyInput) AttachUserPo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachUserPolicyRequest{Request: req, Input: input}
+	return AttachUserPolicyRequest{Request: req, Input: input, Copy: c.AttachUserPolicyRequest}
 }
 
 const opChangePassword = "ChangePassword"
@@ -361,6 +367,7 @@ const opChangePassword = "ChangePassword"
 type ChangePasswordRequest struct {
 	*aws.Request
 	Input *ChangePasswordInput
+	Copy  func(*ChangePasswordInput) ChangePasswordRequest
 }
 
 // Send marshals and sends the ChangePassword API request.
@@ -408,7 +415,7 @@ func (c *IAM) ChangePasswordRequest(input *ChangePasswordInput) ChangePasswordRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ChangePasswordRequest{Request: req, Input: input}
+	return ChangePasswordRequest{Request: req, Input: input, Copy: c.ChangePasswordRequest}
 }
 
 const opCreateAccessKey = "CreateAccessKey"
@@ -417,6 +424,7 @@ const opCreateAccessKey = "CreateAccessKey"
 type CreateAccessKeyRequest struct {
 	*aws.Request
 	Input *CreateAccessKeyInput
+	Copy  func(*CreateAccessKeyInput) CreateAccessKeyRequest
 }
 
 // Send marshals and sends the CreateAccessKey API request.
@@ -473,7 +481,7 @@ func (c *IAM) CreateAccessKeyRequest(input *CreateAccessKeyInput) CreateAccessKe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAccessKeyRequest{Request: req, Input: input}
+	return CreateAccessKeyRequest{Request: req, Input: input, Copy: c.CreateAccessKeyRequest}
 }
 
 const opCreateAccountAlias = "CreateAccountAlias"
@@ -482,6 +490,7 @@ const opCreateAccountAlias = "CreateAccountAlias"
 type CreateAccountAliasRequest struct {
 	*aws.Request
 	Input *CreateAccountAliasInput
+	Copy  func(*CreateAccountAliasInput) CreateAccountAliasRequest
 }
 
 // Send marshals and sends the CreateAccountAlias API request.
@@ -526,7 +535,7 @@ func (c *IAM) CreateAccountAliasRequest(input *CreateAccountAliasInput) CreateAc
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAccountAliasRequest{Request: req, Input: input}
+	return CreateAccountAliasRequest{Request: req, Input: input, Copy: c.CreateAccountAliasRequest}
 }
 
 const opCreateGroup = "CreateGroup"
@@ -535,6 +544,7 @@ const opCreateGroup = "CreateGroup"
 type CreateGroupRequest struct {
 	*aws.Request
 	Input *CreateGroupInput
+	Copy  func(*CreateGroupInput) CreateGroupRequest
 }
 
 // Send marshals and sends the CreateGroup API request.
@@ -579,7 +589,7 @@ func (c *IAM) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGroupRequest{Request: req, Input: input}
+	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
 }
 
 const opCreateInstanceProfile = "CreateInstanceProfile"
@@ -588,6 +598,7 @@ const opCreateInstanceProfile = "CreateInstanceProfile"
 type CreateInstanceProfileRequest struct {
 	*aws.Request
 	Input *CreateInstanceProfileInput
+	Copy  func(*CreateInstanceProfileInput) CreateInstanceProfileRequest
 }
 
 // Send marshals and sends the CreateInstanceProfile API request.
@@ -633,7 +644,7 @@ func (c *IAM) CreateInstanceProfileRequest(input *CreateInstanceProfileInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateInstanceProfileRequest{Request: req, Input: input}
+	return CreateInstanceProfileRequest{Request: req, Input: input, Copy: c.CreateInstanceProfileRequest}
 }
 
 const opCreateLoginProfile = "CreateLoginProfile"
@@ -642,6 +653,7 @@ const opCreateLoginProfile = "CreateLoginProfile"
 type CreateLoginProfileRequest struct {
 	*aws.Request
 	Input *CreateLoginProfileInput
+	Copy  func(*CreateLoginProfileInput) CreateLoginProfileRequest
 }
 
 // Send marshals and sends the CreateLoginProfile API request.
@@ -685,7 +697,7 @@ func (c *IAM) CreateLoginProfileRequest(input *CreateLoginProfileInput) CreateLo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLoginProfileRequest{Request: req, Input: input}
+	return CreateLoginProfileRequest{Request: req, Input: input, Copy: c.CreateLoginProfileRequest}
 }
 
 const opCreateOpenIDConnectProvider = "CreateOpenIDConnectProvider"
@@ -694,6 +706,7 @@ const opCreateOpenIDConnectProvider = "CreateOpenIDConnectProvider"
 type CreateOpenIDConnectProviderRequest struct {
 	*aws.Request
 	Input *CreateOpenIDConnectProviderInput
+	Copy  func(*CreateOpenIDConnectProviderInput) CreateOpenIDConnectProviderRequest
 }
 
 // Send marshals and sends the CreateOpenIDConnectProvider API request.
@@ -750,7 +763,7 @@ func (c *IAM) CreateOpenIDConnectProviderRequest(input *CreateOpenIDConnectProvi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateOpenIDConnectProviderRequest{Request: req, Input: input}
+	return CreateOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.CreateOpenIDConnectProviderRequest}
 }
 
 const opCreatePolicy = "CreatePolicy"
@@ -759,6 +772,7 @@ const opCreatePolicy = "CreatePolicy"
 type CreatePolicyRequest struct {
 	*aws.Request
 	Input *CreatePolicyInput
+	Copy  func(*CreatePolicyInput) CreatePolicyRequest
 }
 
 // Send marshals and sends the CreatePolicy API request.
@@ -808,7 +822,7 @@ func (c *IAM) CreatePolicyRequest(input *CreatePolicyInput) CreatePolicyRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePolicyRequest{Request: req, Input: input}
+	return CreatePolicyRequest{Request: req, Input: input, Copy: c.CreatePolicyRequest}
 }
 
 const opCreatePolicyVersion = "CreatePolicyVersion"
@@ -817,6 +831,7 @@ const opCreatePolicyVersion = "CreatePolicyVersion"
 type CreatePolicyVersionRequest struct {
 	*aws.Request
 	Input *CreatePolicyVersionInput
+	Copy  func(*CreatePolicyVersionInput) CreatePolicyVersionRequest
 }
 
 // Send marshals and sends the CreatePolicyVersion API request.
@@ -868,7 +883,7 @@ func (c *IAM) CreatePolicyVersionRequest(input *CreatePolicyVersionInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePolicyVersionRequest{Request: req, Input: input}
+	return CreatePolicyVersionRequest{Request: req, Input: input, Copy: c.CreatePolicyVersionRequest}
 }
 
 const opCreateRole = "CreateRole"
@@ -877,6 +892,7 @@ const opCreateRole = "CreateRole"
 type CreateRoleRequest struct {
 	*aws.Request
 	Input *CreateRoleInput
+	Copy  func(*CreateRoleInput) CreateRoleRequest
 }
 
 // Send marshals and sends the CreateRole API request.
@@ -921,7 +937,7 @@ func (c *IAM) CreateRoleRequest(input *CreateRoleInput) CreateRoleRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRoleRequest{Request: req, Input: input}
+	return CreateRoleRequest{Request: req, Input: input, Copy: c.CreateRoleRequest}
 }
 
 const opCreateSAMLProvider = "CreateSAMLProvider"
@@ -930,6 +946,7 @@ const opCreateSAMLProvider = "CreateSAMLProvider"
 type CreateSAMLProviderRequest struct {
 	*aws.Request
 	Input *CreateSAMLProviderInput
+	Copy  func(*CreateSAMLProviderInput) CreateSAMLProviderRequest
 }
 
 // Send marshals and sends the CreateSAMLProvider API request.
@@ -991,7 +1008,7 @@ func (c *IAM) CreateSAMLProviderRequest(input *CreateSAMLProviderInput) CreateSA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSAMLProviderRequest{Request: req, Input: input}
+	return CreateSAMLProviderRequest{Request: req, Input: input, Copy: c.CreateSAMLProviderRequest}
 }
 
 const opCreateServiceLinkedRole = "CreateServiceLinkedRole"
@@ -1000,6 +1017,7 @@ const opCreateServiceLinkedRole = "CreateServiceLinkedRole"
 type CreateServiceLinkedRoleRequest struct {
 	*aws.Request
 	Input *CreateServiceLinkedRoleInput
+	Copy  func(*CreateServiceLinkedRoleInput) CreateServiceLinkedRoleRequest
 }
 
 // Send marshals and sends the CreateServiceLinkedRole API request.
@@ -1053,7 +1071,7 @@ func (c *IAM) CreateServiceLinkedRoleRequest(input *CreateServiceLinkedRoleInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateServiceLinkedRoleRequest{Request: req, Input: input}
+	return CreateServiceLinkedRoleRequest{Request: req, Input: input, Copy: c.CreateServiceLinkedRoleRequest}
 }
 
 const opCreateServiceSpecificCredential = "CreateServiceSpecificCredential"
@@ -1062,6 +1080,7 @@ const opCreateServiceSpecificCredential = "CreateServiceSpecificCredential"
 type CreateServiceSpecificCredentialRequest struct {
 	*aws.Request
 	Input *CreateServiceSpecificCredentialInput
+	Copy  func(*CreateServiceSpecificCredentialInput) CreateServiceSpecificCredentialRequest
 }
 
 // Send marshals and sends the CreateServiceSpecificCredential API request.
@@ -1115,7 +1134,7 @@ func (c *IAM) CreateServiceSpecificCredentialRequest(input *CreateServiceSpecifi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateServiceSpecificCredentialRequest{Request: req, Input: input}
+	return CreateServiceSpecificCredentialRequest{Request: req, Input: input, Copy: c.CreateServiceSpecificCredentialRequest}
 }
 
 const opCreateUser = "CreateUser"
@@ -1124,6 +1143,7 @@ const opCreateUser = "CreateUser"
 type CreateUserRequest struct {
 	*aws.Request
 	Input *CreateUserInput
+	Copy  func(*CreateUserInput) CreateUserRequest
 }
 
 // Send marshals and sends the CreateUser API request.
@@ -1168,7 +1188,7 @@ func (c *IAM) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserRequest{Request: req, Input: input}
+	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
 }
 
 const opCreateVirtualMFADevice = "CreateVirtualMFADevice"
@@ -1177,6 +1197,7 @@ const opCreateVirtualMFADevice = "CreateVirtualMFADevice"
 type CreateVirtualMFADeviceRequest struct {
 	*aws.Request
 	Input *CreateVirtualMFADeviceInput
+	Copy  func(*CreateVirtualMFADeviceInput) CreateVirtualMFADeviceRequest
 }
 
 // Send marshals and sends the CreateVirtualMFADevice API request.
@@ -1230,7 +1251,7 @@ func (c *IAM) CreateVirtualMFADeviceRequest(input *CreateVirtualMFADeviceInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVirtualMFADeviceRequest{Request: req, Input: input}
+	return CreateVirtualMFADeviceRequest{Request: req, Input: input, Copy: c.CreateVirtualMFADeviceRequest}
 }
 
 const opDeactivateMFADevice = "DeactivateMFADevice"
@@ -1239,6 +1260,7 @@ const opDeactivateMFADevice = "DeactivateMFADevice"
 type DeactivateMFADeviceRequest struct {
 	*aws.Request
 	Input *DeactivateMFADeviceInput
+	Copy  func(*DeactivateMFADeviceInput) DeactivateMFADeviceRequest
 }
 
 // Send marshals and sends the DeactivateMFADevice API request.
@@ -1286,7 +1308,7 @@ func (c *IAM) DeactivateMFADeviceRequest(input *DeactivateMFADeviceInput) Deacti
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeactivateMFADeviceRequest{Request: req, Input: input}
+	return DeactivateMFADeviceRequest{Request: req, Input: input, Copy: c.DeactivateMFADeviceRequest}
 }
 
 const opDeleteAccessKey = "DeleteAccessKey"
@@ -1295,6 +1317,7 @@ const opDeleteAccessKey = "DeleteAccessKey"
 type DeleteAccessKeyRequest struct {
 	*aws.Request
 	Input *DeleteAccessKeyInput
+	Copy  func(*DeleteAccessKeyInput) DeleteAccessKeyRequest
 }
 
 // Send marshals and sends the DeleteAccessKey API request.
@@ -1342,7 +1365,7 @@ func (c *IAM) DeleteAccessKeyRequest(input *DeleteAccessKeyInput) DeleteAccessKe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAccessKeyRequest{Request: req, Input: input}
+	return DeleteAccessKeyRequest{Request: req, Input: input, Copy: c.DeleteAccessKeyRequest}
 }
 
 const opDeleteAccountAlias = "DeleteAccountAlias"
@@ -1351,6 +1374,7 @@ const opDeleteAccountAlias = "DeleteAccountAlias"
 type DeleteAccountAliasRequest struct {
 	*aws.Request
 	Input *DeleteAccountAliasInput
+	Copy  func(*DeleteAccountAliasInput) DeleteAccountAliasRequest
 }
 
 // Send marshals and sends the DeleteAccountAlias API request.
@@ -1395,7 +1419,7 @@ func (c *IAM) DeleteAccountAliasRequest(input *DeleteAccountAliasInput) DeleteAc
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAccountAliasRequest{Request: req, Input: input}
+	return DeleteAccountAliasRequest{Request: req, Input: input, Copy: c.DeleteAccountAliasRequest}
 }
 
 const opDeleteAccountPasswordPolicy = "DeleteAccountPasswordPolicy"
@@ -1404,6 +1428,7 @@ const opDeleteAccountPasswordPolicy = "DeleteAccountPasswordPolicy"
 type DeleteAccountPasswordPolicyRequest struct {
 	*aws.Request
 	Input *DeleteAccountPasswordPolicyInput
+	Copy  func(*DeleteAccountPasswordPolicyInput) DeleteAccountPasswordPolicyRequest
 }
 
 // Send marshals and sends the DeleteAccountPasswordPolicy API request.
@@ -1446,7 +1471,7 @@ func (c *IAM) DeleteAccountPasswordPolicyRequest(input *DeleteAccountPasswordPol
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAccountPasswordPolicyRequest{Request: req, Input: input}
+	return DeleteAccountPasswordPolicyRequest{Request: req, Input: input, Copy: c.DeleteAccountPasswordPolicyRequest}
 }
 
 const opDeleteGroup = "DeleteGroup"
@@ -1455,6 +1480,7 @@ const opDeleteGroup = "DeleteGroup"
 type DeleteGroupRequest struct {
 	*aws.Request
 	Input *DeleteGroupInput
+	Copy  func(*DeleteGroupInput) DeleteGroupRequest
 }
 
 // Send marshals and sends the DeleteGroup API request.
@@ -1498,7 +1524,7 @@ func (c *IAM) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroupRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGroupRequest{Request: req, Input: input}
+	return DeleteGroupRequest{Request: req, Input: input, Copy: c.DeleteGroupRequest}
 }
 
 const opDeleteGroupPolicy = "DeleteGroupPolicy"
@@ -1507,6 +1533,7 @@ const opDeleteGroupPolicy = "DeleteGroupPolicy"
 type DeleteGroupPolicyRequest struct {
 	*aws.Request
 	Input *DeleteGroupPolicyInput
+	Copy  func(*DeleteGroupPolicyInput) DeleteGroupPolicyRequest
 }
 
 // Send marshals and sends the DeleteGroupPolicy API request.
@@ -1555,7 +1582,7 @@ func (c *IAM) DeleteGroupPolicyRequest(input *DeleteGroupPolicyInput) DeleteGrou
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGroupPolicyRequest{Request: req, Input: input}
+	return DeleteGroupPolicyRequest{Request: req, Input: input, Copy: c.DeleteGroupPolicyRequest}
 }
 
 const opDeleteInstanceProfile = "DeleteInstanceProfile"
@@ -1564,6 +1591,7 @@ const opDeleteInstanceProfile = "DeleteInstanceProfile"
 type DeleteInstanceProfileRequest struct {
 	*aws.Request
 	Input *DeleteInstanceProfileInput
+	Copy  func(*DeleteInstanceProfileInput) DeleteInstanceProfileRequest
 }
 
 // Send marshals and sends the DeleteInstanceProfile API request.
@@ -1615,7 +1643,7 @@ func (c *IAM) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteInstanceProfileRequest{Request: req, Input: input}
+	return DeleteInstanceProfileRequest{Request: req, Input: input, Copy: c.DeleteInstanceProfileRequest}
 }
 
 const opDeleteLoginProfile = "DeleteLoginProfile"
@@ -1624,6 +1652,7 @@ const opDeleteLoginProfile = "DeleteLoginProfile"
 type DeleteLoginProfileRequest struct {
 	*aws.Request
 	Input *DeleteLoginProfileInput
+	Copy  func(*DeleteLoginProfileInput) DeleteLoginProfileRequest
 }
 
 // Send marshals and sends the DeleteLoginProfile API request.
@@ -1672,7 +1701,7 @@ func (c *IAM) DeleteLoginProfileRequest(input *DeleteLoginProfileInput) DeleteLo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLoginProfileRequest{Request: req, Input: input}
+	return DeleteLoginProfileRequest{Request: req, Input: input, Copy: c.DeleteLoginProfileRequest}
 }
 
 const opDeleteOpenIDConnectProvider = "DeleteOpenIDConnectProvider"
@@ -1681,6 +1710,7 @@ const opDeleteOpenIDConnectProvider = "DeleteOpenIDConnectProvider"
 type DeleteOpenIDConnectProviderRequest struct {
 	*aws.Request
 	Input *DeleteOpenIDConnectProviderInput
+	Copy  func(*DeleteOpenIDConnectProviderInput) DeleteOpenIDConnectProviderRequest
 }
 
 // Send marshals and sends the DeleteOpenIDConnectProvider API request.
@@ -1730,7 +1760,7 @@ func (c *IAM) DeleteOpenIDConnectProviderRequest(input *DeleteOpenIDConnectProvi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteOpenIDConnectProviderRequest{Request: req, Input: input}
+	return DeleteOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.DeleteOpenIDConnectProviderRequest}
 }
 
 const opDeletePolicy = "DeletePolicy"
@@ -1739,6 +1769,7 @@ const opDeletePolicy = "DeletePolicy"
 type DeletePolicyRequest struct {
 	*aws.Request
 	Input *DeletePolicyInput
+	Copy  func(*DeletePolicyInput) DeletePolicyRequest
 }
 
 // Send marshals and sends the DeletePolicy API request.
@@ -1803,7 +1834,7 @@ func (c *IAM) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicyRequest 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePolicyRequest{Request: req, Input: input}
+	return DeletePolicyRequest{Request: req, Input: input, Copy: c.DeletePolicyRequest}
 }
 
 const opDeletePolicyVersion = "DeletePolicyVersion"
@@ -1812,6 +1843,7 @@ const opDeletePolicyVersion = "DeletePolicyVersion"
 type DeletePolicyVersionRequest struct {
 	*aws.Request
 	Input *DeletePolicyVersionInput
+	Copy  func(*DeletePolicyVersionInput) DeletePolicyVersionRequest
 }
 
 // Send marshals and sends the DeletePolicyVersion API request.
@@ -1862,7 +1894,7 @@ func (c *IAM) DeletePolicyVersionRequest(input *DeletePolicyVersionInput) Delete
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePolicyVersionRequest{Request: req, Input: input}
+	return DeletePolicyVersionRequest{Request: req, Input: input, Copy: c.DeletePolicyVersionRequest}
 }
 
 const opDeleteRole = "DeleteRole"
@@ -1871,6 +1903,7 @@ const opDeleteRole = "DeleteRole"
 type DeleteRoleRequest struct {
 	*aws.Request
 	Input *DeleteRoleInput
+	Copy  func(*DeleteRoleInput) DeleteRoleRequest
 }
 
 // Send marshals and sends the DeleteRole API request.
@@ -1918,7 +1951,7 @@ func (c *IAM) DeleteRoleRequest(input *DeleteRoleInput) DeleteRoleRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRoleRequest{Request: req, Input: input}
+	return DeleteRoleRequest{Request: req, Input: input, Copy: c.DeleteRoleRequest}
 }
 
 const opDeleteRolePolicy = "DeleteRolePolicy"
@@ -1927,6 +1960,7 @@ const opDeleteRolePolicy = "DeleteRolePolicy"
 type DeleteRolePolicyRequest struct {
 	*aws.Request
 	Input *DeleteRolePolicyInput
+	Copy  func(*DeleteRolePolicyInput) DeleteRolePolicyRequest
 }
 
 // Send marshals and sends the DeleteRolePolicy API request.
@@ -1975,7 +2009,7 @@ func (c *IAM) DeleteRolePolicyRequest(input *DeleteRolePolicyInput) DeleteRolePo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRolePolicyRequest{Request: req, Input: input}
+	return DeleteRolePolicyRequest{Request: req, Input: input, Copy: c.DeleteRolePolicyRequest}
 }
 
 const opDeleteSAMLProvider = "DeleteSAMLProvider"
@@ -1984,6 +2018,7 @@ const opDeleteSAMLProvider = "DeleteSAMLProvider"
 type DeleteSAMLProviderRequest struct {
 	*aws.Request
 	Input *DeleteSAMLProviderInput
+	Copy  func(*DeleteSAMLProviderInput) DeleteSAMLProviderRequest
 }
 
 // Send marshals and sends the DeleteSAMLProvider API request.
@@ -2033,7 +2068,7 @@ func (c *IAM) DeleteSAMLProviderRequest(input *DeleteSAMLProviderInput) DeleteSA
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSAMLProviderRequest{Request: req, Input: input}
+	return DeleteSAMLProviderRequest{Request: req, Input: input, Copy: c.DeleteSAMLProviderRequest}
 }
 
 const opDeleteSSHPublicKey = "DeleteSSHPublicKey"
@@ -2042,6 +2077,7 @@ const opDeleteSSHPublicKey = "DeleteSSHPublicKey"
 type DeleteSSHPublicKeyRequest struct {
 	*aws.Request
 	Input *DeleteSSHPublicKeyInput
+	Copy  func(*DeleteSSHPublicKeyInput) DeleteSSHPublicKeyRequest
 }
 
 // Send marshals and sends the DeleteSSHPublicKey API request.
@@ -2090,7 +2126,7 @@ func (c *IAM) DeleteSSHPublicKeyRequest(input *DeleteSSHPublicKeyInput) DeleteSS
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSSHPublicKeyRequest{Request: req, Input: input}
+	return DeleteSSHPublicKeyRequest{Request: req, Input: input, Copy: c.DeleteSSHPublicKeyRequest}
 }
 
 const opDeleteServerCertificate = "DeleteServerCertificate"
@@ -2099,6 +2135,7 @@ const opDeleteServerCertificate = "DeleteServerCertificate"
 type DeleteServerCertificateRequest struct {
 	*aws.Request
 	Input *DeleteServerCertificateInput
+	Copy  func(*DeleteServerCertificateInput) DeleteServerCertificateRequest
 }
 
 // Send marshals and sends the DeleteServerCertificate API request.
@@ -2156,7 +2193,7 @@ func (c *IAM) DeleteServerCertificateRequest(input *DeleteServerCertificateInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteServerCertificateRequest{Request: req, Input: input}
+	return DeleteServerCertificateRequest{Request: req, Input: input, Copy: c.DeleteServerCertificateRequest}
 }
 
 const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole"
@@ -2165,6 +2202,7 @@ const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole"
 type DeleteServiceLinkedRoleRequest struct {
 	*aws.Request
 	Input *DeleteServiceLinkedRoleInput
+	Copy  func(*DeleteServiceLinkedRoleInput) DeleteServiceLinkedRoleRequest
 }
 
 // Send marshals and sends the DeleteServiceLinkedRole API request.
@@ -2224,7 +2262,7 @@ func (c *IAM) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteServiceLinkedRoleRequest{Request: req, Input: input}
+	return DeleteServiceLinkedRoleRequest{Request: req, Input: input, Copy: c.DeleteServiceLinkedRoleRequest}
 }
 
 const opDeleteServiceSpecificCredential = "DeleteServiceSpecificCredential"
@@ -2233,6 +2271,7 @@ const opDeleteServiceSpecificCredential = "DeleteServiceSpecificCredential"
 type DeleteServiceSpecificCredentialRequest struct {
 	*aws.Request
 	Input *DeleteServiceSpecificCredentialInput
+	Copy  func(*DeleteServiceSpecificCredentialInput) DeleteServiceSpecificCredentialRequest
 }
 
 // Send marshals and sends the DeleteServiceSpecificCredential API request.
@@ -2275,7 +2314,7 @@ func (c *IAM) DeleteServiceSpecificCredentialRequest(input *DeleteServiceSpecifi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteServiceSpecificCredentialRequest{Request: req, Input: input}
+	return DeleteServiceSpecificCredentialRequest{Request: req, Input: input, Copy: c.DeleteServiceSpecificCredentialRequest}
 }
 
 const opDeleteSigningCertificate = "DeleteSigningCertificate"
@@ -2284,6 +2323,7 @@ const opDeleteSigningCertificate = "DeleteSigningCertificate"
 type DeleteSigningCertificateRequest struct {
 	*aws.Request
 	Input *DeleteSigningCertificateInput
+	Copy  func(*DeleteSigningCertificateInput) DeleteSigningCertificateRequest
 }
 
 // Send marshals and sends the DeleteSigningCertificate API request.
@@ -2331,7 +2371,7 @@ func (c *IAM) DeleteSigningCertificateRequest(input *DeleteSigningCertificateInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSigningCertificateRequest{Request: req, Input: input}
+	return DeleteSigningCertificateRequest{Request: req, Input: input, Copy: c.DeleteSigningCertificateRequest}
 }
 
 const opDeleteUser = "DeleteUser"
@@ -2340,6 +2380,7 @@ const opDeleteUser = "DeleteUser"
 type DeleteUserRequest struct {
 	*aws.Request
 	Input *DeleteUserInput
+	Copy  func(*DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -2383,7 +2424,7 @@ func (c *IAM) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserRequest{Request: req, Input: input}
+	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
 const opDeleteUserPolicy = "DeleteUserPolicy"
@@ -2392,6 +2433,7 @@ const opDeleteUserPolicy = "DeleteUserPolicy"
 type DeleteUserPolicyRequest struct {
 	*aws.Request
 	Input *DeleteUserPolicyInput
+	Copy  func(*DeleteUserPolicyInput) DeleteUserPolicyRequest
 }
 
 // Send marshals and sends the DeleteUserPolicy API request.
@@ -2440,7 +2482,7 @@ func (c *IAM) DeleteUserPolicyRequest(input *DeleteUserPolicyInput) DeleteUserPo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserPolicyRequest{Request: req, Input: input}
+	return DeleteUserPolicyRequest{Request: req, Input: input, Copy: c.DeleteUserPolicyRequest}
 }
 
 const opDeleteVirtualMFADevice = "DeleteVirtualMFADevice"
@@ -2449,6 +2491,7 @@ const opDeleteVirtualMFADevice = "DeleteVirtualMFADevice"
 type DeleteVirtualMFADeviceRequest struct {
 	*aws.Request
 	Input *DeleteVirtualMFADeviceInput
+	Copy  func(*DeleteVirtualMFADeviceInput) DeleteVirtualMFADeviceRequest
 }
 
 // Send marshals and sends the DeleteVirtualMFADevice API request.
@@ -2494,7 +2537,7 @@ func (c *IAM) DeleteVirtualMFADeviceRequest(input *DeleteVirtualMFADeviceInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVirtualMFADeviceRequest{Request: req, Input: input}
+	return DeleteVirtualMFADeviceRequest{Request: req, Input: input, Copy: c.DeleteVirtualMFADeviceRequest}
 }
 
 const opDetachGroupPolicy = "DetachGroupPolicy"
@@ -2503,6 +2546,7 @@ const opDetachGroupPolicy = "DetachGroupPolicy"
 type DetachGroupPolicyRequest struct {
 	*aws.Request
 	Input *DetachGroupPolicyInput
+	Copy  func(*DetachGroupPolicyInput) DetachGroupPolicyRequest
 }
 
 // Send marshals and sends the DetachGroupPolicy API request.
@@ -2550,7 +2594,7 @@ func (c *IAM) DetachGroupPolicyRequest(input *DetachGroupPolicyInput) DetachGrou
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachGroupPolicyRequest{Request: req, Input: input}
+	return DetachGroupPolicyRequest{Request: req, Input: input, Copy: c.DetachGroupPolicyRequest}
 }
 
 const opDetachRolePolicy = "DetachRolePolicy"
@@ -2559,6 +2603,7 @@ const opDetachRolePolicy = "DetachRolePolicy"
 type DetachRolePolicyRequest struct {
 	*aws.Request
 	Input *DetachRolePolicyInput
+	Copy  func(*DetachRolePolicyInput) DetachRolePolicyRequest
 }
 
 // Send marshals and sends the DetachRolePolicy API request.
@@ -2606,7 +2651,7 @@ func (c *IAM) DetachRolePolicyRequest(input *DetachRolePolicyInput) DetachRolePo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachRolePolicyRequest{Request: req, Input: input}
+	return DetachRolePolicyRequest{Request: req, Input: input, Copy: c.DetachRolePolicyRequest}
 }
 
 const opDetachUserPolicy = "DetachUserPolicy"
@@ -2615,6 +2660,7 @@ const opDetachUserPolicy = "DetachUserPolicy"
 type DetachUserPolicyRequest struct {
 	*aws.Request
 	Input *DetachUserPolicyInput
+	Copy  func(*DetachUserPolicyInput) DetachUserPolicyRequest
 }
 
 // Send marshals and sends the DetachUserPolicy API request.
@@ -2662,7 +2708,7 @@ func (c *IAM) DetachUserPolicyRequest(input *DetachUserPolicyInput) DetachUserPo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachUserPolicyRequest{Request: req, Input: input}
+	return DetachUserPolicyRequest{Request: req, Input: input, Copy: c.DetachUserPolicyRequest}
 }
 
 const opEnableMFADevice = "EnableMFADevice"
@@ -2671,6 +2717,7 @@ const opEnableMFADevice = "EnableMFADevice"
 type EnableMFADeviceRequest struct {
 	*aws.Request
 	Input *EnableMFADeviceInput
+	Copy  func(*EnableMFADeviceInput) EnableMFADeviceRequest
 }
 
 // Send marshals and sends the EnableMFADevice API request.
@@ -2715,7 +2762,7 @@ func (c *IAM) EnableMFADeviceRequest(input *EnableMFADeviceInput) EnableMFADevic
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableMFADeviceRequest{Request: req, Input: input}
+	return EnableMFADeviceRequest{Request: req, Input: input, Copy: c.EnableMFADeviceRequest}
 }
 
 const opGenerateCredentialReport = "GenerateCredentialReport"
@@ -2724,6 +2771,7 @@ const opGenerateCredentialReport = "GenerateCredentialReport"
 type GenerateCredentialReportRequest struct {
 	*aws.Request
 	Input *GenerateCredentialReportInput
+	Copy  func(*GenerateCredentialReportInput) GenerateCredentialReportRequest
 }
 
 // Send marshals and sends the GenerateCredentialReport API request.
@@ -2766,7 +2814,7 @@ func (c *IAM) GenerateCredentialReportRequest(input *GenerateCredentialReportInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GenerateCredentialReportRequest{Request: req, Input: input}
+	return GenerateCredentialReportRequest{Request: req, Input: input, Copy: c.GenerateCredentialReportRequest}
 }
 
 const opGetAccessKeyLastUsed = "GetAccessKeyLastUsed"
@@ -2775,6 +2823,7 @@ const opGetAccessKeyLastUsed = "GetAccessKeyLastUsed"
 type GetAccessKeyLastUsedRequest struct {
 	*aws.Request
 	Input *GetAccessKeyLastUsedInput
+	Copy  func(*GetAccessKeyLastUsedInput) GetAccessKeyLastUsedRequest
 }
 
 // Send marshals and sends the GetAccessKeyLastUsed API request.
@@ -2818,7 +2867,7 @@ func (c *IAM) GetAccessKeyLastUsedRequest(input *GetAccessKeyLastUsedInput) GetA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAccessKeyLastUsedRequest{Request: req, Input: input}
+	return GetAccessKeyLastUsedRequest{Request: req, Input: input, Copy: c.GetAccessKeyLastUsedRequest}
 }
 
 const opGetAccountAuthorizationDetails = "GetAccountAuthorizationDetails"
@@ -2827,6 +2876,7 @@ const opGetAccountAuthorizationDetails = "GetAccountAuthorizationDetails"
 type GetAccountAuthorizationDetailsRequest struct {
 	*aws.Request
 	Input *GetAccountAuthorizationDetailsInput
+	Copy  func(*GetAccountAuthorizationDetailsInput) GetAccountAuthorizationDetailsRequest
 }
 
 // Send marshals and sends the GetAccountAuthorizationDetails API request.
@@ -2879,57 +2929,53 @@ func (c *IAM) GetAccountAuthorizationDetailsRequest(input *GetAccountAuthorizati
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAccountAuthorizationDetailsRequest{Request: req, Input: input}
+	return GetAccountAuthorizationDetailsRequest{Request: req, Input: input, Copy: c.GetAccountAuthorizationDetailsRequest}
 }
 
-// GetAccountAuthorizationDetailsPages iterates over the pages of a GetAccountAuthorizationDetails operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetAccountAuthorizationDetails method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetAccountAuthorizationDetailsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetAccountAuthorizationDetails operation.
-//    pageNum := 0
-//    err := client.GetAccountAuthorizationDetailsPages(params,
-//        func(page *GetAccountAuthorizationDetailsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetAccountAuthorizationDetailsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) GetAccountAuthorizationDetailsPages(input *GetAccountAuthorizationDetailsInput, fn func(*GetAccountAuthorizationDetailsOutput, bool) bool) error {
-	return c.GetAccountAuthorizationDetailsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetAccountAuthorizationDetailsRequest) Paginate(opts ...aws.Option) GetAccountAuthorizationDetailsPager {
+	return GetAccountAuthorizationDetailsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetAccountAuthorizationDetailsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetAccountAuthorizationDetailsPagesWithContext same as GetAccountAuthorizationDetailsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetAccountAuthorizationDetailsPagesWithContext(ctx aws.Context, input *GetAccountAuthorizationDetailsInput, fn func(*GetAccountAuthorizationDetailsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetAccountAuthorizationDetailsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetAccountAuthorizationDetailsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetAccountAuthorizationDetailsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetAccountAuthorizationDetailsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetAccountAuthorizationDetailsPager struct {
+	aws.Pager
+}
+
+func (p *GetAccountAuthorizationDetailsPager) CurrentPage() *GetAccountAuthorizationDetailsOutput {
+	return p.Pager.CurrentPage().(*GetAccountAuthorizationDetailsOutput)
 }
 
 const opGetAccountPasswordPolicy = "GetAccountPasswordPolicy"
@@ -2938,6 +2984,7 @@ const opGetAccountPasswordPolicy = "GetAccountPasswordPolicy"
 type GetAccountPasswordPolicyRequest struct {
 	*aws.Request
 	Input *GetAccountPasswordPolicyInput
+	Copy  func(*GetAccountPasswordPolicyInput) GetAccountPasswordPolicyRequest
 }
 
 // Send marshals and sends the GetAccountPasswordPolicy API request.
@@ -2979,7 +3026,7 @@ func (c *IAM) GetAccountPasswordPolicyRequest(input *GetAccountPasswordPolicyInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAccountPasswordPolicyRequest{Request: req, Input: input}
+	return GetAccountPasswordPolicyRequest{Request: req, Input: input, Copy: c.GetAccountPasswordPolicyRequest}
 }
 
 const opGetAccountSummary = "GetAccountSummary"
@@ -2988,6 +3035,7 @@ const opGetAccountSummary = "GetAccountSummary"
 type GetAccountSummaryRequest struct {
 	*aws.Request
 	Input *GetAccountSummaryInput
+	Copy  func(*GetAccountSummaryInput) GetAccountSummaryRequest
 }
 
 // Send marshals and sends the GetAccountSummary API request.
@@ -3032,7 +3080,7 @@ func (c *IAM) GetAccountSummaryRequest(input *GetAccountSummaryInput) GetAccount
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAccountSummaryRequest{Request: req, Input: input}
+	return GetAccountSummaryRequest{Request: req, Input: input, Copy: c.GetAccountSummaryRequest}
 }
 
 const opGetContextKeysForCustomPolicy = "GetContextKeysForCustomPolicy"
@@ -3041,6 +3089,7 @@ const opGetContextKeysForCustomPolicy = "GetContextKeysForCustomPolicy"
 type GetContextKeysForCustomPolicyRequest struct {
 	*aws.Request
 	Input *GetContextKeysForCustomPolicyInput
+	Copy  func(*GetContextKeysForCustomPolicyInput) GetContextKeysForCustomPolicyRequest
 }
 
 // Send marshals and sends the GetContextKeysForCustomPolicy API request.
@@ -3090,7 +3139,7 @@ func (c *IAM) GetContextKeysForCustomPolicyRequest(input *GetContextKeysForCusto
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetContextKeysForCustomPolicyRequest{Request: req, Input: input}
+	return GetContextKeysForCustomPolicyRequest{Request: req, Input: input, Copy: c.GetContextKeysForCustomPolicyRequest}
 }
 
 const opGetContextKeysForPrincipalPolicy = "GetContextKeysForPrincipalPolicy"
@@ -3099,6 +3148,7 @@ const opGetContextKeysForPrincipalPolicy = "GetContextKeysForPrincipalPolicy"
 type GetContextKeysForPrincipalPolicyRequest struct {
 	*aws.Request
 	Input *GetContextKeysForPrincipalPolicyInput
+	Copy  func(*GetContextKeysForPrincipalPolicyInput) GetContextKeysForPrincipalPolicyRequest
 }
 
 // Send marshals and sends the GetContextKeysForPrincipalPolicy API request.
@@ -3155,7 +3205,7 @@ func (c *IAM) GetContextKeysForPrincipalPolicyRequest(input *GetContextKeysForPr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetContextKeysForPrincipalPolicyRequest{Request: req, Input: input}
+	return GetContextKeysForPrincipalPolicyRequest{Request: req, Input: input, Copy: c.GetContextKeysForPrincipalPolicyRequest}
 }
 
 const opGetCredentialReport = "GetCredentialReport"
@@ -3164,6 +3214,7 @@ const opGetCredentialReport = "GetCredentialReport"
 type GetCredentialReportRequest struct {
 	*aws.Request
 	Input *GetCredentialReportInput
+	Copy  func(*GetCredentialReportInput) GetCredentialReportRequest
 }
 
 // Send marshals and sends the GetCredentialReport API request.
@@ -3206,7 +3257,7 @@ func (c *IAM) GetCredentialReportRequest(input *GetCredentialReportInput) GetCre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCredentialReportRequest{Request: req, Input: input}
+	return GetCredentialReportRequest{Request: req, Input: input, Copy: c.GetCredentialReportRequest}
 }
 
 const opGetGroup = "GetGroup"
@@ -3215,6 +3266,7 @@ const opGetGroup = "GetGroup"
 type GetGroupRequest struct {
 	*aws.Request
 	Input *GetGroupInput
+	Copy  func(*GetGroupInput) GetGroupRequest
 }
 
 // Send marshals and sends the GetGroup API request.
@@ -3262,57 +3314,53 @@ func (c *IAM) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGroupRequest{Request: req, Input: input}
+	return GetGroupRequest{Request: req, Input: input, Copy: c.GetGroupRequest}
 }
 
-// GetGroupPages iterates over the pages of a GetGroup operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetGroup method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetGroupRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetGroup operation.
-//    pageNum := 0
-//    err := client.GetGroupPages(params,
-//        func(page *GetGroupOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetGroupRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) GetGroupPages(input *GetGroupInput, fn func(*GetGroupOutput, bool) bool) error {
-	return c.GetGroupPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetGroupRequest) Paginate(opts ...aws.Option) GetGroupPager {
+	return GetGroupPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetGroupInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetGroupPagesWithContext same as GetGroupPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) GetGroupPagesWithContext(ctx aws.Context, input *GetGroupInput, fn func(*GetGroupOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetGroupInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetGroupRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetGroupOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetGroupPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetGroupPager struct {
+	aws.Pager
+}
+
+func (p *GetGroupPager) CurrentPage() *GetGroupOutput {
+	return p.Pager.CurrentPage().(*GetGroupOutput)
 }
 
 const opGetGroupPolicy = "GetGroupPolicy"
@@ -3321,6 +3369,7 @@ const opGetGroupPolicy = "GetGroupPolicy"
 type GetGroupPolicyRequest struct {
 	*aws.Request
 	Input *GetGroupPolicyInput
+	Copy  func(*GetGroupPolicyInput) GetGroupPolicyRequest
 }
 
 // Send marshals and sends the GetGroupPolicy API request.
@@ -3377,7 +3426,7 @@ func (c *IAM) GetGroupPolicyRequest(input *GetGroupPolicyInput) GetGroupPolicyRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGroupPolicyRequest{Request: req, Input: input}
+	return GetGroupPolicyRequest{Request: req, Input: input, Copy: c.GetGroupPolicyRequest}
 }
 
 const opGetInstanceProfile = "GetInstanceProfile"
@@ -3386,6 +3435,7 @@ const opGetInstanceProfile = "GetInstanceProfile"
 type GetInstanceProfileRequest struct {
 	*aws.Request
 	Input *GetInstanceProfileInput
+	Copy  func(*GetInstanceProfileInput) GetInstanceProfileRequest
 }
 
 // Send marshals and sends the GetInstanceProfile API request.
@@ -3429,7 +3479,7 @@ func (c *IAM) GetInstanceProfileRequest(input *GetInstanceProfileInput) GetInsta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstanceProfileRequest{Request: req, Input: input}
+	return GetInstanceProfileRequest{Request: req, Input: input, Copy: c.GetInstanceProfileRequest}
 }
 
 const opGetLoginProfile = "GetLoginProfile"
@@ -3438,6 +3488,7 @@ const opGetLoginProfile = "GetLoginProfile"
 type GetLoginProfileRequest struct {
 	*aws.Request
 	Input *GetLoginProfileInput
+	Copy  func(*GetLoginProfileInput) GetLoginProfileRequest
 }
 
 // Send marshals and sends the GetLoginProfile API request.
@@ -3480,7 +3531,7 @@ func (c *IAM) GetLoginProfileRequest(input *GetLoginProfileInput) GetLoginProfil
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLoginProfileRequest{Request: req, Input: input}
+	return GetLoginProfileRequest{Request: req, Input: input, Copy: c.GetLoginProfileRequest}
 }
 
 const opGetOpenIDConnectProvider = "GetOpenIDConnectProvider"
@@ -3489,6 +3540,7 @@ const opGetOpenIDConnectProvider = "GetOpenIDConnectProvider"
 type GetOpenIDConnectProviderRequest struct {
 	*aws.Request
 	Input *GetOpenIDConnectProviderInput
+	Copy  func(*GetOpenIDConnectProviderInput) GetOpenIDConnectProviderRequest
 }
 
 // Send marshals and sends the GetOpenIDConnectProvider API request.
@@ -3530,7 +3582,7 @@ func (c *IAM) GetOpenIDConnectProviderRequest(input *GetOpenIDConnectProviderInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOpenIDConnectProviderRequest{Request: req, Input: input}
+	return GetOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.GetOpenIDConnectProviderRequest}
 }
 
 const opGetPolicy = "GetPolicy"
@@ -3539,6 +3591,7 @@ const opGetPolicy = "GetPolicy"
 type GetPolicyRequest struct {
 	*aws.Request
 	Input *GetPolicyInput
+	Copy  func(*GetPolicyInput) GetPolicyRequest
 }
 
 // Send marshals and sends the GetPolicy API request.
@@ -3592,7 +3645,7 @@ func (c *IAM) GetPolicyRequest(input *GetPolicyInput) GetPolicyRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPolicyRequest{Request: req, Input: input}
+	return GetPolicyRequest{Request: req, Input: input, Copy: c.GetPolicyRequest}
 }
 
 const opGetPolicyVersion = "GetPolicyVersion"
@@ -3601,6 +3654,7 @@ const opGetPolicyVersion = "GetPolicyVersion"
 type GetPolicyVersionRequest struct {
 	*aws.Request
 	Input *GetPolicyVersionInput
+	Copy  func(*GetPolicyVersionInput) GetPolicyVersionRequest
 }
 
 // Send marshals and sends the GetPolicyVersion API request.
@@ -3662,7 +3716,7 @@ func (c *IAM) GetPolicyVersionRequest(input *GetPolicyVersionInput) GetPolicyVer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPolicyVersionRequest{Request: req, Input: input}
+	return GetPolicyVersionRequest{Request: req, Input: input, Copy: c.GetPolicyVersionRequest}
 }
 
 const opGetRole = "GetRole"
@@ -3671,6 +3725,7 @@ const opGetRole = "GetRole"
 type GetRoleRequest struct {
 	*aws.Request
 	Input *GetRoleInput
+	Copy  func(*GetRoleInput) GetRoleRequest
 }
 
 // Send marshals and sends the GetRole API request.
@@ -3719,7 +3774,7 @@ func (c *IAM) GetRoleRequest(input *GetRoleInput) GetRoleRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRoleRequest{Request: req, Input: input}
+	return GetRoleRequest{Request: req, Input: input, Copy: c.GetRoleRequest}
 }
 
 const opGetRolePolicy = "GetRolePolicy"
@@ -3728,6 +3783,7 @@ const opGetRolePolicy = "GetRolePolicy"
 type GetRolePolicyRequest struct {
 	*aws.Request
 	Input *GetRolePolicyInput
+	Copy  func(*GetRolePolicyInput) GetRolePolicyRequest
 }
 
 // Send marshals and sends the GetRolePolicy API request.
@@ -3787,7 +3843,7 @@ func (c *IAM) GetRolePolicyRequest(input *GetRolePolicyInput) GetRolePolicyReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRolePolicyRequest{Request: req, Input: input}
+	return GetRolePolicyRequest{Request: req, Input: input, Copy: c.GetRolePolicyRequest}
 }
 
 const opGetSAMLProvider = "GetSAMLProvider"
@@ -3796,6 +3852,7 @@ const opGetSAMLProvider = "GetSAMLProvider"
 type GetSAMLProviderRequest struct {
 	*aws.Request
 	Input *GetSAMLProviderInput
+	Copy  func(*GetSAMLProviderInput) GetSAMLProviderRequest
 }
 
 // Send marshals and sends the GetSAMLProvider API request.
@@ -3839,7 +3896,7 @@ func (c *IAM) GetSAMLProviderRequest(input *GetSAMLProviderInput) GetSAMLProvide
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSAMLProviderRequest{Request: req, Input: input}
+	return GetSAMLProviderRequest{Request: req, Input: input, Copy: c.GetSAMLProviderRequest}
 }
 
 const opGetSSHPublicKey = "GetSSHPublicKey"
@@ -3848,6 +3905,7 @@ const opGetSSHPublicKey = "GetSSHPublicKey"
 type GetSSHPublicKeyRequest struct {
 	*aws.Request
 	Input *GetSSHPublicKeyInput
+	Copy  func(*GetSSHPublicKeyInput) GetSSHPublicKeyRequest
 }
 
 // Send marshals and sends the GetSSHPublicKey API request.
@@ -3894,7 +3952,7 @@ func (c *IAM) GetSSHPublicKeyRequest(input *GetSSHPublicKeyInput) GetSSHPublicKe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSSHPublicKeyRequest{Request: req, Input: input}
+	return GetSSHPublicKeyRequest{Request: req, Input: input, Copy: c.GetSSHPublicKeyRequest}
 }
 
 const opGetServerCertificate = "GetServerCertificate"
@@ -3903,6 +3961,7 @@ const opGetServerCertificate = "GetServerCertificate"
 type GetServerCertificateRequest struct {
 	*aws.Request
 	Input *GetServerCertificateInput
+	Copy  func(*GetServerCertificateInput) GetServerCertificateRequest
 }
 
 // Send marshals and sends the GetServerCertificate API request.
@@ -3948,7 +4007,7 @@ func (c *IAM) GetServerCertificateRequest(input *GetServerCertificateInput) GetS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetServerCertificateRequest{Request: req, Input: input}
+	return GetServerCertificateRequest{Request: req, Input: input, Copy: c.GetServerCertificateRequest}
 }
 
 const opGetServiceLinkedRoleDeletionStatus = "GetServiceLinkedRoleDeletionStatus"
@@ -3957,6 +4016,7 @@ const opGetServiceLinkedRoleDeletionStatus = "GetServiceLinkedRoleDeletionStatus
 type GetServiceLinkedRoleDeletionStatusRequest struct {
 	*aws.Request
 	Input *GetServiceLinkedRoleDeletionStatusInput
+	Copy  func(*GetServiceLinkedRoleDeletionStatusInput) GetServiceLinkedRoleDeletionStatusRequest
 }
 
 // Send marshals and sends the GetServiceLinkedRoleDeletionStatus API request.
@@ -4001,7 +4061,7 @@ func (c *IAM) GetServiceLinkedRoleDeletionStatusRequest(input *GetServiceLinkedR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetServiceLinkedRoleDeletionStatusRequest{Request: req, Input: input}
+	return GetServiceLinkedRoleDeletionStatusRequest{Request: req, Input: input, Copy: c.GetServiceLinkedRoleDeletionStatusRequest}
 }
 
 const opGetUser = "GetUser"
@@ -4010,6 +4070,7 @@ const opGetUser = "GetUser"
 type GetUserRequest struct {
 	*aws.Request
 	Input *GetUserInput
+	Copy  func(*GetUserInput) GetUserRequest
 }
 
 // Send marshals and sends the GetUser API request.
@@ -4054,7 +4115,7 @@ func (c *IAM) GetUserRequest(input *GetUserInput) GetUserRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUserRequest{Request: req, Input: input}
+	return GetUserRequest{Request: req, Input: input, Copy: c.GetUserRequest}
 }
 
 const opGetUserPolicy = "GetUserPolicy"
@@ -4063,6 +4124,7 @@ const opGetUserPolicy = "GetUserPolicy"
 type GetUserPolicyRequest struct {
 	*aws.Request
 	Input *GetUserPolicyInput
+	Copy  func(*GetUserPolicyInput) GetUserPolicyRequest
 }
 
 // Send marshals and sends the GetUserPolicy API request.
@@ -4119,7 +4181,7 @@ func (c *IAM) GetUserPolicyRequest(input *GetUserPolicyInput) GetUserPolicyReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUserPolicyRequest{Request: req, Input: input}
+	return GetUserPolicyRequest{Request: req, Input: input, Copy: c.GetUserPolicyRequest}
 }
 
 const opListAccessKeys = "ListAccessKeys"
@@ -4128,6 +4190,7 @@ const opListAccessKeys = "ListAccessKeys"
 type ListAccessKeysRequest struct {
 	*aws.Request
 	Input *ListAccessKeysInput
+	Copy  func(*ListAccessKeysInput) ListAccessKeysRequest
 }
 
 // Send marshals and sends the ListAccessKeys API request.
@@ -4186,57 +4249,53 @@ func (c *IAM) ListAccessKeysRequest(input *ListAccessKeysInput) ListAccessKeysRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAccessKeysRequest{Request: req, Input: input}
+	return ListAccessKeysRequest{Request: req, Input: input, Copy: c.ListAccessKeysRequest}
 }
 
-// ListAccessKeysPages iterates over the pages of a ListAccessKeys operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAccessKeys method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAccessKeysRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAccessKeys operation.
-//    pageNum := 0
-//    err := client.ListAccessKeysPages(params,
-//        func(page *ListAccessKeysOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAccessKeysRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListAccessKeysPages(input *ListAccessKeysInput, fn func(*ListAccessKeysOutput, bool) bool) error {
-	return c.ListAccessKeysPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAccessKeysRequest) Paginate(opts ...aws.Option) ListAccessKeysPager {
+	return ListAccessKeysPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAccessKeysInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAccessKeysPagesWithContext same as ListAccessKeysPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListAccessKeysPagesWithContext(ctx aws.Context, input *ListAccessKeysInput, fn func(*ListAccessKeysOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAccessKeysInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAccessKeysRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAccessKeysOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAccessKeysPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAccessKeysPager struct {
+	aws.Pager
+}
+
+func (p *ListAccessKeysPager) CurrentPage() *ListAccessKeysOutput {
+	return p.Pager.CurrentPage().(*ListAccessKeysOutput)
 }
 
 const opListAccountAliases = "ListAccountAliases"
@@ -4245,6 +4304,7 @@ const opListAccountAliases = "ListAccountAliases"
 type ListAccountAliasesRequest struct {
 	*aws.Request
 	Input *ListAccountAliasesInput
+	Copy  func(*ListAccountAliasesInput) ListAccountAliasesRequest
 }
 
 // Send marshals and sends the ListAccountAliases API request.
@@ -4294,57 +4354,53 @@ func (c *IAM) ListAccountAliasesRequest(input *ListAccountAliasesInput) ListAcco
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAccountAliasesRequest{Request: req, Input: input}
+	return ListAccountAliasesRequest{Request: req, Input: input, Copy: c.ListAccountAliasesRequest}
 }
 
-// ListAccountAliasesPages iterates over the pages of a ListAccountAliases operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAccountAliases method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAccountAliasesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAccountAliases operation.
-//    pageNum := 0
-//    err := client.ListAccountAliasesPages(params,
-//        func(page *ListAccountAliasesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAccountAliasesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListAccountAliasesPages(input *ListAccountAliasesInput, fn func(*ListAccountAliasesOutput, bool) bool) error {
-	return c.ListAccountAliasesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAccountAliasesRequest) Paginate(opts ...aws.Option) ListAccountAliasesPager {
+	return ListAccountAliasesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAccountAliasesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAccountAliasesPagesWithContext same as ListAccountAliasesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListAccountAliasesPagesWithContext(ctx aws.Context, input *ListAccountAliasesInput, fn func(*ListAccountAliasesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAccountAliasesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAccountAliasesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAccountAliasesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAccountAliasesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAccountAliasesPager struct {
+	aws.Pager
+}
+
+func (p *ListAccountAliasesPager) CurrentPage() *ListAccountAliasesOutput {
+	return p.Pager.CurrentPage().(*ListAccountAliasesOutput)
 }
 
 const opListAttachedGroupPolicies = "ListAttachedGroupPolicies"
@@ -4353,6 +4409,7 @@ const opListAttachedGroupPolicies = "ListAttachedGroupPolicies"
 type ListAttachedGroupPoliciesRequest struct {
 	*aws.Request
 	Input *ListAttachedGroupPoliciesInput
+	Copy  func(*ListAttachedGroupPoliciesInput) ListAttachedGroupPoliciesRequest
 }
 
 // Send marshals and sends the ListAttachedGroupPolicies API request.
@@ -4410,57 +4467,53 @@ func (c *IAM) ListAttachedGroupPoliciesRequest(input *ListAttachedGroupPoliciesI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAttachedGroupPoliciesRequest{Request: req, Input: input}
+	return ListAttachedGroupPoliciesRequest{Request: req, Input: input, Copy: c.ListAttachedGroupPoliciesRequest}
 }
 
-// ListAttachedGroupPoliciesPages iterates over the pages of a ListAttachedGroupPolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAttachedGroupPolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAttachedGroupPoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAttachedGroupPolicies operation.
-//    pageNum := 0
-//    err := client.ListAttachedGroupPoliciesPages(params,
-//        func(page *ListAttachedGroupPoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAttachedGroupPoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListAttachedGroupPoliciesPages(input *ListAttachedGroupPoliciesInput, fn func(*ListAttachedGroupPoliciesOutput, bool) bool) error {
-	return c.ListAttachedGroupPoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAttachedGroupPoliciesRequest) Paginate(opts ...aws.Option) ListAttachedGroupPoliciesPager {
+	return ListAttachedGroupPoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAttachedGroupPoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAttachedGroupPoliciesPagesWithContext same as ListAttachedGroupPoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListAttachedGroupPoliciesPagesWithContext(ctx aws.Context, input *ListAttachedGroupPoliciesInput, fn func(*ListAttachedGroupPoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAttachedGroupPoliciesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAttachedGroupPoliciesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAttachedGroupPoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAttachedGroupPoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAttachedGroupPoliciesPager struct {
+	aws.Pager
+}
+
+func (p *ListAttachedGroupPoliciesPager) CurrentPage() *ListAttachedGroupPoliciesOutput {
+	return p.Pager.CurrentPage().(*ListAttachedGroupPoliciesOutput)
 }
 
 const opListAttachedRolePolicies = "ListAttachedRolePolicies"
@@ -4469,6 +4522,7 @@ const opListAttachedRolePolicies = "ListAttachedRolePolicies"
 type ListAttachedRolePoliciesRequest struct {
 	*aws.Request
 	Input *ListAttachedRolePoliciesInput
+	Copy  func(*ListAttachedRolePoliciesInput) ListAttachedRolePoliciesRequest
 }
 
 // Send marshals and sends the ListAttachedRolePolicies API request.
@@ -4526,57 +4580,53 @@ func (c *IAM) ListAttachedRolePoliciesRequest(input *ListAttachedRolePoliciesInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAttachedRolePoliciesRequest{Request: req, Input: input}
+	return ListAttachedRolePoliciesRequest{Request: req, Input: input, Copy: c.ListAttachedRolePoliciesRequest}
 }
 
-// ListAttachedRolePoliciesPages iterates over the pages of a ListAttachedRolePolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAttachedRolePolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAttachedRolePoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAttachedRolePolicies operation.
-//    pageNum := 0
-//    err := client.ListAttachedRolePoliciesPages(params,
-//        func(page *ListAttachedRolePoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAttachedRolePoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListAttachedRolePoliciesPages(input *ListAttachedRolePoliciesInput, fn func(*ListAttachedRolePoliciesOutput, bool) bool) error {
-	return c.ListAttachedRolePoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAttachedRolePoliciesRequest) Paginate(opts ...aws.Option) ListAttachedRolePoliciesPager {
+	return ListAttachedRolePoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAttachedRolePoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAttachedRolePoliciesPagesWithContext same as ListAttachedRolePoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListAttachedRolePoliciesPagesWithContext(ctx aws.Context, input *ListAttachedRolePoliciesInput, fn func(*ListAttachedRolePoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAttachedRolePoliciesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAttachedRolePoliciesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAttachedRolePoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAttachedRolePoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAttachedRolePoliciesPager struct {
+	aws.Pager
+}
+
+func (p *ListAttachedRolePoliciesPager) CurrentPage() *ListAttachedRolePoliciesOutput {
+	return p.Pager.CurrentPage().(*ListAttachedRolePoliciesOutput)
 }
 
 const opListAttachedUserPolicies = "ListAttachedUserPolicies"
@@ -4585,6 +4635,7 @@ const opListAttachedUserPolicies = "ListAttachedUserPolicies"
 type ListAttachedUserPoliciesRequest struct {
 	*aws.Request
 	Input *ListAttachedUserPoliciesInput
+	Copy  func(*ListAttachedUserPoliciesInput) ListAttachedUserPoliciesRequest
 }
 
 // Send marshals and sends the ListAttachedUserPolicies API request.
@@ -4642,57 +4693,53 @@ func (c *IAM) ListAttachedUserPoliciesRequest(input *ListAttachedUserPoliciesInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAttachedUserPoliciesRequest{Request: req, Input: input}
+	return ListAttachedUserPoliciesRequest{Request: req, Input: input, Copy: c.ListAttachedUserPoliciesRequest}
 }
 
-// ListAttachedUserPoliciesPages iterates over the pages of a ListAttachedUserPolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAttachedUserPolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAttachedUserPoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAttachedUserPolicies operation.
-//    pageNum := 0
-//    err := client.ListAttachedUserPoliciesPages(params,
-//        func(page *ListAttachedUserPoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAttachedUserPoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListAttachedUserPoliciesPages(input *ListAttachedUserPoliciesInput, fn func(*ListAttachedUserPoliciesOutput, bool) bool) error {
-	return c.ListAttachedUserPoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAttachedUserPoliciesRequest) Paginate(opts ...aws.Option) ListAttachedUserPoliciesPager {
+	return ListAttachedUserPoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAttachedUserPoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAttachedUserPoliciesPagesWithContext same as ListAttachedUserPoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListAttachedUserPoliciesPagesWithContext(ctx aws.Context, input *ListAttachedUserPoliciesInput, fn func(*ListAttachedUserPoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAttachedUserPoliciesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAttachedUserPoliciesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAttachedUserPoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAttachedUserPoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAttachedUserPoliciesPager struct {
+	aws.Pager
+}
+
+func (p *ListAttachedUserPoliciesPager) CurrentPage() *ListAttachedUserPoliciesOutput {
+	return p.Pager.CurrentPage().(*ListAttachedUserPoliciesOutput)
 }
 
 const opListEntitiesForPolicy = "ListEntitiesForPolicy"
@@ -4701,6 +4748,7 @@ const opListEntitiesForPolicy = "ListEntitiesForPolicy"
 type ListEntitiesForPolicyRequest struct {
 	*aws.Request
 	Input *ListEntitiesForPolicyInput
+	Copy  func(*ListEntitiesForPolicyInput) ListEntitiesForPolicyRequest
 }
 
 // Send marshals and sends the ListEntitiesForPolicy API request.
@@ -4755,57 +4803,53 @@ func (c *IAM) ListEntitiesForPolicyRequest(input *ListEntitiesForPolicyInput) Li
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListEntitiesForPolicyRequest{Request: req, Input: input}
+	return ListEntitiesForPolicyRequest{Request: req, Input: input, Copy: c.ListEntitiesForPolicyRequest}
 }
 
-// ListEntitiesForPolicyPages iterates over the pages of a ListEntitiesForPolicy operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListEntitiesForPolicy method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListEntitiesForPolicyRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListEntitiesForPolicy operation.
-//    pageNum := 0
-//    err := client.ListEntitiesForPolicyPages(params,
-//        func(page *ListEntitiesForPolicyOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListEntitiesForPolicyRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListEntitiesForPolicyPages(input *ListEntitiesForPolicyInput, fn func(*ListEntitiesForPolicyOutput, bool) bool) error {
-	return c.ListEntitiesForPolicyPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListEntitiesForPolicyRequest) Paginate(opts ...aws.Option) ListEntitiesForPolicyPager {
+	return ListEntitiesForPolicyPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListEntitiesForPolicyInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListEntitiesForPolicyPagesWithContext same as ListEntitiesForPolicyPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListEntitiesForPolicyPagesWithContext(ctx aws.Context, input *ListEntitiesForPolicyInput, fn func(*ListEntitiesForPolicyOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListEntitiesForPolicyInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListEntitiesForPolicyRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListEntitiesForPolicyOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListEntitiesForPolicyPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListEntitiesForPolicyPager struct {
+	aws.Pager
+}
+
+func (p *ListEntitiesForPolicyPager) CurrentPage() *ListEntitiesForPolicyOutput {
+	return p.Pager.CurrentPage().(*ListEntitiesForPolicyOutput)
 }
 
 const opListGroupPolicies = "ListGroupPolicies"
@@ -4814,6 +4858,7 @@ const opListGroupPolicies = "ListGroupPolicies"
 type ListGroupPoliciesRequest struct {
 	*aws.Request
 	Input *ListGroupPoliciesInput
+	Copy  func(*ListGroupPoliciesInput) ListGroupPoliciesRequest
 }
 
 // Send marshals and sends the ListGroupPolicies API request.
@@ -4871,57 +4916,53 @@ func (c *IAM) ListGroupPoliciesRequest(input *ListGroupPoliciesInput) ListGroupP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupPoliciesRequest{Request: req, Input: input}
+	return ListGroupPoliciesRequest{Request: req, Input: input, Copy: c.ListGroupPoliciesRequest}
 }
 
-// ListGroupPoliciesPages iterates over the pages of a ListGroupPolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListGroupPolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListGroupPoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListGroupPolicies operation.
-//    pageNum := 0
-//    err := client.ListGroupPoliciesPages(params,
-//        func(page *ListGroupPoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListGroupPoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListGroupPoliciesPages(input *ListGroupPoliciesInput, fn func(*ListGroupPoliciesOutput, bool) bool) error {
-	return c.ListGroupPoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListGroupPoliciesRequest) Paginate(opts ...aws.Option) ListGroupPoliciesPager {
+	return ListGroupPoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListGroupPoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListGroupPoliciesPagesWithContext same as ListGroupPoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListGroupPoliciesPagesWithContext(ctx aws.Context, input *ListGroupPoliciesInput, fn func(*ListGroupPoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListGroupPoliciesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListGroupPoliciesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGroupPoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListGroupPoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListGroupPoliciesPager struct {
+	aws.Pager
+}
+
+func (p *ListGroupPoliciesPager) CurrentPage() *ListGroupPoliciesOutput {
+	return p.Pager.CurrentPage().(*ListGroupPoliciesOutput)
 }
 
 const opListGroups = "ListGroups"
@@ -4930,6 +4971,7 @@ const opListGroups = "ListGroups"
 type ListGroupsRequest struct {
 	*aws.Request
 	Input *ListGroupsInput
+	Copy  func(*ListGroupsInput) ListGroupsRequest
 }
 
 // Send marshals and sends the ListGroups API request.
@@ -4978,57 +5020,53 @@ func (c *IAM) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupsRequest{Request: req, Input: input}
+	return ListGroupsRequest{Request: req, Input: input, Copy: c.ListGroupsRequest}
 }
 
-// ListGroupsPages iterates over the pages of a ListGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListGroups operation.
-//    pageNum := 0
-//    err := client.ListGroupsPages(params,
-//        func(page *ListGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListGroupsPages(input *ListGroupsInput, fn func(*ListGroupsOutput, bool) bool) error {
-	return c.ListGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
+	return ListGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListGroupsPagesWithContext same as ListGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListGroupsPagesWithContext(ctx aws.Context, input *ListGroupsInput, fn func(*ListGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListGroupsPager struct {
+	aws.Pager
+}
+
+func (p *ListGroupsPager) CurrentPage() *ListGroupsOutput {
+	return p.Pager.CurrentPage().(*ListGroupsOutput)
 }
 
 const opListGroupsForUser = "ListGroupsForUser"
@@ -5037,6 +5075,7 @@ const opListGroupsForUser = "ListGroupsForUser"
 type ListGroupsForUserRequest struct {
 	*aws.Request
 	Input *ListGroupsForUserInput
+	Copy  func(*ListGroupsForUserInput) ListGroupsForUserRequest
 }
 
 // Send marshals and sends the ListGroupsForUser API request.
@@ -5085,57 +5124,53 @@ func (c *IAM) ListGroupsForUserRequest(input *ListGroupsForUserInput) ListGroups
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupsForUserRequest{Request: req, Input: input}
+	return ListGroupsForUserRequest{Request: req, Input: input, Copy: c.ListGroupsForUserRequest}
 }
 
-// ListGroupsForUserPages iterates over the pages of a ListGroupsForUser operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListGroupsForUser method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListGroupsForUserRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListGroupsForUser operation.
-//    pageNum := 0
-//    err := client.ListGroupsForUserPages(params,
-//        func(page *ListGroupsForUserOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListGroupsForUserRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListGroupsForUserPages(input *ListGroupsForUserInput, fn func(*ListGroupsForUserOutput, bool) bool) error {
-	return c.ListGroupsForUserPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListGroupsForUserRequest) Paginate(opts ...aws.Option) ListGroupsForUserPager {
+	return ListGroupsForUserPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListGroupsForUserInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListGroupsForUserPagesWithContext same as ListGroupsForUserPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListGroupsForUserPagesWithContext(ctx aws.Context, input *ListGroupsForUserInput, fn func(*ListGroupsForUserOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListGroupsForUserInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListGroupsForUserRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGroupsForUserOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListGroupsForUserPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListGroupsForUserPager struct {
+	aws.Pager
+}
+
+func (p *ListGroupsForUserPager) CurrentPage() *ListGroupsForUserOutput {
+	return p.Pager.CurrentPage().(*ListGroupsForUserOutput)
 }
 
 const opListInstanceProfiles = "ListInstanceProfiles"
@@ -5144,6 +5179,7 @@ const opListInstanceProfiles = "ListInstanceProfiles"
 type ListInstanceProfilesRequest struct {
 	*aws.Request
 	Input *ListInstanceProfilesInput
+	Copy  func(*ListInstanceProfilesInput) ListInstanceProfilesRequest
 }
 
 // Send marshals and sends the ListInstanceProfiles API request.
@@ -5194,57 +5230,53 @@ func (c *IAM) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListInstanceProfilesRequest{Request: req, Input: input}
+	return ListInstanceProfilesRequest{Request: req, Input: input, Copy: c.ListInstanceProfilesRequest}
 }
 
-// ListInstanceProfilesPages iterates over the pages of a ListInstanceProfiles operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListInstanceProfiles method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListInstanceProfilesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListInstanceProfiles operation.
-//    pageNum := 0
-//    err := client.ListInstanceProfilesPages(params,
-//        func(page *ListInstanceProfilesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListInstanceProfilesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListInstanceProfilesPages(input *ListInstanceProfilesInput, fn func(*ListInstanceProfilesOutput, bool) bool) error {
-	return c.ListInstanceProfilesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListInstanceProfilesRequest) Paginate(opts ...aws.Option) ListInstanceProfilesPager {
+	return ListInstanceProfilesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListInstanceProfilesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListInstanceProfilesPagesWithContext same as ListInstanceProfilesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListInstanceProfilesPagesWithContext(ctx aws.Context, input *ListInstanceProfilesInput, fn func(*ListInstanceProfilesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListInstanceProfilesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListInstanceProfilesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListInstanceProfilesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListInstanceProfilesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListInstanceProfilesPager struct {
+	aws.Pager
+}
+
+func (p *ListInstanceProfilesPager) CurrentPage() *ListInstanceProfilesOutput {
+	return p.Pager.CurrentPage().(*ListInstanceProfilesOutput)
 }
 
 const opListInstanceProfilesForRole = "ListInstanceProfilesForRole"
@@ -5253,6 +5285,7 @@ const opListInstanceProfilesForRole = "ListInstanceProfilesForRole"
 type ListInstanceProfilesForRoleRequest struct {
 	*aws.Request
 	Input *ListInstanceProfilesForRoleInput
+	Copy  func(*ListInstanceProfilesForRoleInput) ListInstanceProfilesForRoleRequest
 }
 
 // Send marshals and sends the ListInstanceProfilesForRole API request.
@@ -5303,57 +5336,53 @@ func (c *IAM) ListInstanceProfilesForRoleRequest(input *ListInstanceProfilesForR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListInstanceProfilesForRoleRequest{Request: req, Input: input}
+	return ListInstanceProfilesForRoleRequest{Request: req, Input: input, Copy: c.ListInstanceProfilesForRoleRequest}
 }
 
-// ListInstanceProfilesForRolePages iterates over the pages of a ListInstanceProfilesForRole operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListInstanceProfilesForRole method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListInstanceProfilesForRoleRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListInstanceProfilesForRole operation.
-//    pageNum := 0
-//    err := client.ListInstanceProfilesForRolePages(params,
-//        func(page *ListInstanceProfilesForRoleOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListInstanceProfilesForRoleRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListInstanceProfilesForRolePages(input *ListInstanceProfilesForRoleInput, fn func(*ListInstanceProfilesForRoleOutput, bool) bool) error {
-	return c.ListInstanceProfilesForRolePagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListInstanceProfilesForRoleRequest) Paginate(opts ...aws.Option) ListInstanceProfilesForRolePager {
+	return ListInstanceProfilesForRolePager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListInstanceProfilesForRoleInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListInstanceProfilesForRolePagesWithContext same as ListInstanceProfilesForRolePages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListInstanceProfilesForRolePagesWithContext(ctx aws.Context, input *ListInstanceProfilesForRoleInput, fn func(*ListInstanceProfilesForRoleOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListInstanceProfilesForRoleInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListInstanceProfilesForRoleRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListInstanceProfilesForRoleOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListInstanceProfilesForRolePager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListInstanceProfilesForRolePager struct {
+	aws.Pager
+}
+
+func (p *ListInstanceProfilesForRolePager) CurrentPage() *ListInstanceProfilesForRoleOutput {
+	return p.Pager.CurrentPage().(*ListInstanceProfilesForRoleOutput)
 }
 
 const opListMFADevices = "ListMFADevices"
@@ -5362,6 +5391,7 @@ const opListMFADevices = "ListMFADevices"
 type ListMFADevicesRequest struct {
 	*aws.Request
 	Input *ListMFADevicesInput
+	Copy  func(*ListMFADevicesInput) ListMFADevicesRequest
 }
 
 // Send marshals and sends the ListMFADevices API request.
@@ -5413,57 +5443,53 @@ func (c *IAM) ListMFADevicesRequest(input *ListMFADevicesInput) ListMFADevicesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListMFADevicesRequest{Request: req, Input: input}
+	return ListMFADevicesRequest{Request: req, Input: input, Copy: c.ListMFADevicesRequest}
 }
 
-// ListMFADevicesPages iterates over the pages of a ListMFADevices operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListMFADevices method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListMFADevicesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListMFADevices operation.
-//    pageNum := 0
-//    err := client.ListMFADevicesPages(params,
-//        func(page *ListMFADevicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListMFADevicesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListMFADevicesPages(input *ListMFADevicesInput, fn func(*ListMFADevicesOutput, bool) bool) error {
-	return c.ListMFADevicesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListMFADevicesRequest) Paginate(opts ...aws.Option) ListMFADevicesPager {
+	return ListMFADevicesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListMFADevicesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListMFADevicesPagesWithContext same as ListMFADevicesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListMFADevicesPagesWithContext(ctx aws.Context, input *ListMFADevicesInput, fn func(*ListMFADevicesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListMFADevicesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListMFADevicesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListMFADevicesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListMFADevicesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListMFADevicesPager struct {
+	aws.Pager
+}
+
+func (p *ListMFADevicesPager) CurrentPage() *ListMFADevicesOutput {
+	return p.Pager.CurrentPage().(*ListMFADevicesOutput)
 }
 
 const opListOpenIDConnectProviders = "ListOpenIDConnectProviders"
@@ -5472,6 +5498,7 @@ const opListOpenIDConnectProviders = "ListOpenIDConnectProviders"
 type ListOpenIDConnectProvidersRequest struct {
 	*aws.Request
 	Input *ListOpenIDConnectProvidersInput
+	Copy  func(*ListOpenIDConnectProvidersInput) ListOpenIDConnectProvidersRequest
 }
 
 // Send marshals and sends the ListOpenIDConnectProviders API request.
@@ -5513,7 +5540,7 @@ func (c *IAM) ListOpenIDConnectProvidersRequest(input *ListOpenIDConnectProvider
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOpenIDConnectProvidersRequest{Request: req, Input: input}
+	return ListOpenIDConnectProvidersRequest{Request: req, Input: input, Copy: c.ListOpenIDConnectProvidersRequest}
 }
 
 const opListPolicies = "ListPolicies"
@@ -5522,6 +5549,7 @@ const opListPolicies = "ListPolicies"
 type ListPoliciesRequest struct {
 	*aws.Request
 	Input *ListPoliciesInput
+	Copy  func(*ListPoliciesInput) ListPoliciesRequest
 }
 
 // Send marshals and sends the ListPolicies API request.
@@ -5580,57 +5608,53 @@ func (c *IAM) ListPoliciesRequest(input *ListPoliciesInput) ListPoliciesRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPoliciesRequest{Request: req, Input: input}
+	return ListPoliciesRequest{Request: req, Input: input, Copy: c.ListPoliciesRequest}
 }
 
-// ListPoliciesPages iterates over the pages of a ListPolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPolicies operation.
-//    pageNum := 0
-//    err := client.ListPoliciesPages(params,
-//        func(page *ListPoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListPoliciesPages(input *ListPoliciesInput, fn func(*ListPoliciesOutput, bool) bool) error {
-	return c.ListPoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPoliciesRequest) Paginate(opts ...aws.Option) ListPoliciesPager {
+	return ListPoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListPoliciesPagesWithContext same as ListPoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListPoliciesPagesWithContext(ctx aws.Context, input *ListPoliciesInput, fn func(*ListPoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPoliciesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListPoliciesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPoliciesPager struct {
+	aws.Pager
+}
+
+func (p *ListPoliciesPager) CurrentPage() *ListPoliciesOutput {
+	return p.Pager.CurrentPage().(*ListPoliciesOutput)
 }
 
 const opListPolicyVersions = "ListPolicyVersions"
@@ -5639,6 +5663,7 @@ const opListPolicyVersions = "ListPolicyVersions"
 type ListPolicyVersionsRequest struct {
 	*aws.Request
 	Input *ListPolicyVersionsInput
+	Copy  func(*ListPolicyVersionsInput) ListPolicyVersionsRequest
 }
 
 // Send marshals and sends the ListPolicyVersions API request.
@@ -5690,57 +5715,53 @@ func (c *IAM) ListPolicyVersionsRequest(input *ListPolicyVersionsInput) ListPoli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPolicyVersionsRequest{Request: req, Input: input}
+	return ListPolicyVersionsRequest{Request: req, Input: input, Copy: c.ListPolicyVersionsRequest}
 }
 
-// ListPolicyVersionsPages iterates over the pages of a ListPolicyVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPolicyVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPolicyVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPolicyVersions operation.
-//    pageNum := 0
-//    err := client.ListPolicyVersionsPages(params,
-//        func(page *ListPolicyVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPolicyVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListPolicyVersionsPages(input *ListPolicyVersionsInput, fn func(*ListPolicyVersionsOutput, bool) bool) error {
-	return c.ListPolicyVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPolicyVersionsRequest) Paginate(opts ...aws.Option) ListPolicyVersionsPager {
+	return ListPolicyVersionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPolicyVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListPolicyVersionsPagesWithContext same as ListPolicyVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListPolicyVersionsPagesWithContext(ctx aws.Context, input *ListPolicyVersionsInput, fn func(*ListPolicyVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPolicyVersionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListPolicyVersionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPolicyVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPolicyVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPolicyVersionsPager struct {
+	aws.Pager
+}
+
+func (p *ListPolicyVersionsPager) CurrentPage() *ListPolicyVersionsOutput {
+	return p.Pager.CurrentPage().(*ListPolicyVersionsOutput)
 }
 
 const opListRolePolicies = "ListRolePolicies"
@@ -5749,6 +5770,7 @@ const opListRolePolicies = "ListRolePolicies"
 type ListRolePoliciesRequest struct {
 	*aws.Request
 	Input *ListRolePoliciesInput
+	Copy  func(*ListRolePoliciesInput) ListRolePoliciesRequest
 }
 
 // Send marshals and sends the ListRolePolicies API request.
@@ -5805,57 +5827,53 @@ func (c *IAM) ListRolePoliciesRequest(input *ListRolePoliciesInput) ListRolePoli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRolePoliciesRequest{Request: req, Input: input}
+	return ListRolePoliciesRequest{Request: req, Input: input, Copy: c.ListRolePoliciesRequest}
 }
 
-// ListRolePoliciesPages iterates over the pages of a ListRolePolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListRolePolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListRolePoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListRolePolicies operation.
-//    pageNum := 0
-//    err := client.ListRolePoliciesPages(params,
-//        func(page *ListRolePoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListRolePoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListRolePoliciesPages(input *ListRolePoliciesInput, fn func(*ListRolePoliciesOutput, bool) bool) error {
-	return c.ListRolePoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListRolePoliciesRequest) Paginate(opts ...aws.Option) ListRolePoliciesPager {
+	return ListRolePoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListRolePoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListRolePoliciesPagesWithContext same as ListRolePoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListRolePoliciesPagesWithContext(ctx aws.Context, input *ListRolePoliciesInput, fn func(*ListRolePoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListRolePoliciesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListRolePoliciesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListRolePoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListRolePoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListRolePoliciesPager struct {
+	aws.Pager
+}
+
+func (p *ListRolePoliciesPager) CurrentPage() *ListRolePoliciesOutput {
+	return p.Pager.CurrentPage().(*ListRolePoliciesOutput)
 }
 
 const opListRoles = "ListRoles"
@@ -5864,6 +5882,7 @@ const opListRoles = "ListRoles"
 type ListRolesRequest struct {
 	*aws.Request
 	Input *ListRolesInput
+	Copy  func(*ListRolesInput) ListRolesRequest
 }
 
 // Send marshals and sends the ListRoles API request.
@@ -5914,57 +5933,53 @@ func (c *IAM) ListRolesRequest(input *ListRolesInput) ListRolesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRolesRequest{Request: req, Input: input}
+	return ListRolesRequest{Request: req, Input: input, Copy: c.ListRolesRequest}
 }
 
-// ListRolesPages iterates over the pages of a ListRoles operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListRoles method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListRolesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListRoles operation.
-//    pageNum := 0
-//    err := client.ListRolesPages(params,
-//        func(page *ListRolesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListRolesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListRolesPages(input *ListRolesInput, fn func(*ListRolesOutput, bool) bool) error {
-	return c.ListRolesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListRolesRequest) Paginate(opts ...aws.Option) ListRolesPager {
+	return ListRolesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListRolesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListRolesPagesWithContext same as ListRolesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListRolesPagesWithContext(ctx aws.Context, input *ListRolesInput, fn func(*ListRolesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListRolesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListRolesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListRolesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListRolesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListRolesPager struct {
+	aws.Pager
+}
+
+func (p *ListRolesPager) CurrentPage() *ListRolesOutput {
+	return p.Pager.CurrentPage().(*ListRolesOutput)
 }
 
 const opListSAMLProviders = "ListSAMLProviders"
@@ -5973,6 +5988,7 @@ const opListSAMLProviders = "ListSAMLProviders"
 type ListSAMLProvidersRequest struct {
 	*aws.Request
 	Input *ListSAMLProvidersInput
+	Copy  func(*ListSAMLProvidersInput) ListSAMLProvidersRequest
 }
 
 // Send marshals and sends the ListSAMLProviders API request.
@@ -6015,7 +6031,7 @@ func (c *IAM) ListSAMLProvidersRequest(input *ListSAMLProvidersInput) ListSAMLPr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSAMLProvidersRequest{Request: req, Input: input}
+	return ListSAMLProvidersRequest{Request: req, Input: input, Copy: c.ListSAMLProvidersRequest}
 }
 
 const opListSSHPublicKeys = "ListSSHPublicKeys"
@@ -6024,6 +6040,7 @@ const opListSSHPublicKeys = "ListSSHPublicKeys"
 type ListSSHPublicKeysRequest struct {
 	*aws.Request
 	Input *ListSSHPublicKeysInput
+	Copy  func(*ListSSHPublicKeysInput) ListSSHPublicKeysRequest
 }
 
 // Send marshals and sends the ListSSHPublicKeys API request.
@@ -6080,57 +6097,53 @@ func (c *IAM) ListSSHPublicKeysRequest(input *ListSSHPublicKeysInput) ListSSHPub
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSSHPublicKeysRequest{Request: req, Input: input}
+	return ListSSHPublicKeysRequest{Request: req, Input: input, Copy: c.ListSSHPublicKeysRequest}
 }
 
-// ListSSHPublicKeysPages iterates over the pages of a ListSSHPublicKeys operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListSSHPublicKeys method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListSSHPublicKeysRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListSSHPublicKeys operation.
-//    pageNum := 0
-//    err := client.ListSSHPublicKeysPages(params,
-//        func(page *ListSSHPublicKeysOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListSSHPublicKeysRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListSSHPublicKeysPages(input *ListSSHPublicKeysInput, fn func(*ListSSHPublicKeysOutput, bool) bool) error {
-	return c.ListSSHPublicKeysPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListSSHPublicKeysRequest) Paginate(opts ...aws.Option) ListSSHPublicKeysPager {
+	return ListSSHPublicKeysPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSSHPublicKeysInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListSSHPublicKeysPagesWithContext same as ListSSHPublicKeysPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListSSHPublicKeysPagesWithContext(ctx aws.Context, input *ListSSHPublicKeysInput, fn func(*ListSSHPublicKeysOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListSSHPublicKeysInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListSSHPublicKeysRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListSSHPublicKeysOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListSSHPublicKeysPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListSSHPublicKeysPager struct {
+	aws.Pager
+}
+
+func (p *ListSSHPublicKeysPager) CurrentPage() *ListSSHPublicKeysOutput {
+	return p.Pager.CurrentPage().(*ListSSHPublicKeysOutput)
 }
 
 const opListServerCertificates = "ListServerCertificates"
@@ -6139,6 +6152,7 @@ const opListServerCertificates = "ListServerCertificates"
 type ListServerCertificatesRequest struct {
 	*aws.Request
 	Input *ListServerCertificatesInput
+	Copy  func(*ListServerCertificatesInput) ListServerCertificatesRequest
 }
 
 // Send marshals and sends the ListServerCertificates API request.
@@ -6193,57 +6207,53 @@ func (c *IAM) ListServerCertificatesRequest(input *ListServerCertificatesInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListServerCertificatesRequest{Request: req, Input: input}
+	return ListServerCertificatesRequest{Request: req, Input: input, Copy: c.ListServerCertificatesRequest}
 }
 
-// ListServerCertificatesPages iterates over the pages of a ListServerCertificates operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListServerCertificates method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListServerCertificatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListServerCertificates operation.
-//    pageNum := 0
-//    err := client.ListServerCertificatesPages(params,
-//        func(page *ListServerCertificatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListServerCertificatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListServerCertificatesPages(input *ListServerCertificatesInput, fn func(*ListServerCertificatesOutput, bool) bool) error {
-	return c.ListServerCertificatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListServerCertificatesRequest) Paginate(opts ...aws.Option) ListServerCertificatesPager {
+	return ListServerCertificatesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListServerCertificatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListServerCertificatesPagesWithContext same as ListServerCertificatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListServerCertificatesPagesWithContext(ctx aws.Context, input *ListServerCertificatesInput, fn func(*ListServerCertificatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListServerCertificatesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListServerCertificatesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListServerCertificatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListServerCertificatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListServerCertificatesPager struct {
+	aws.Pager
+}
+
+func (p *ListServerCertificatesPager) CurrentPage() *ListServerCertificatesOutput {
+	return p.Pager.CurrentPage().(*ListServerCertificatesOutput)
 }
 
 const opListServiceSpecificCredentials = "ListServiceSpecificCredentials"
@@ -6252,6 +6262,7 @@ const opListServiceSpecificCredentials = "ListServiceSpecificCredentials"
 type ListServiceSpecificCredentialsRequest struct {
 	*aws.Request
 	Input *ListServiceSpecificCredentialsInput
+	Copy  func(*ListServiceSpecificCredentialsInput) ListServiceSpecificCredentialsRequest
 }
 
 // Send marshals and sends the ListServiceSpecificCredentials API request.
@@ -6298,7 +6309,7 @@ func (c *IAM) ListServiceSpecificCredentialsRequest(input *ListServiceSpecificCr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListServiceSpecificCredentialsRequest{Request: req, Input: input}
+	return ListServiceSpecificCredentialsRequest{Request: req, Input: input, Copy: c.ListServiceSpecificCredentialsRequest}
 }
 
 const opListSigningCertificates = "ListSigningCertificates"
@@ -6307,6 +6318,7 @@ const opListSigningCertificates = "ListSigningCertificates"
 type ListSigningCertificatesRequest struct {
 	*aws.Request
 	Input *ListSigningCertificatesInput
+	Copy  func(*ListSigningCertificatesInput) ListSigningCertificatesRequest
 }
 
 // Send marshals and sends the ListSigningCertificates API request.
@@ -6363,57 +6375,53 @@ func (c *IAM) ListSigningCertificatesRequest(input *ListSigningCertificatesInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSigningCertificatesRequest{Request: req, Input: input}
+	return ListSigningCertificatesRequest{Request: req, Input: input, Copy: c.ListSigningCertificatesRequest}
 }
 
-// ListSigningCertificatesPages iterates over the pages of a ListSigningCertificates operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListSigningCertificates method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListSigningCertificatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListSigningCertificates operation.
-//    pageNum := 0
-//    err := client.ListSigningCertificatesPages(params,
-//        func(page *ListSigningCertificatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListSigningCertificatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListSigningCertificatesPages(input *ListSigningCertificatesInput, fn func(*ListSigningCertificatesOutput, bool) bool) error {
-	return c.ListSigningCertificatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListSigningCertificatesRequest) Paginate(opts ...aws.Option) ListSigningCertificatesPager {
+	return ListSigningCertificatesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListSigningCertificatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListSigningCertificatesPagesWithContext same as ListSigningCertificatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListSigningCertificatesPagesWithContext(ctx aws.Context, input *ListSigningCertificatesInput, fn func(*ListSigningCertificatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListSigningCertificatesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListSigningCertificatesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListSigningCertificatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListSigningCertificatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListSigningCertificatesPager struct {
+	aws.Pager
+}
+
+func (p *ListSigningCertificatesPager) CurrentPage() *ListSigningCertificatesOutput {
+	return p.Pager.CurrentPage().(*ListSigningCertificatesOutput)
 }
 
 const opListUserPolicies = "ListUserPolicies"
@@ -6422,6 +6430,7 @@ const opListUserPolicies = "ListUserPolicies"
 type ListUserPoliciesRequest struct {
 	*aws.Request
 	Input *ListUserPoliciesInput
+	Copy  func(*ListUserPoliciesInput) ListUserPoliciesRequest
 }
 
 // Send marshals and sends the ListUserPolicies API request.
@@ -6477,57 +6486,53 @@ func (c *IAM) ListUserPoliciesRequest(input *ListUserPoliciesInput) ListUserPoli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUserPoliciesRequest{Request: req, Input: input}
+	return ListUserPoliciesRequest{Request: req, Input: input, Copy: c.ListUserPoliciesRequest}
 }
 
-// ListUserPoliciesPages iterates over the pages of a ListUserPolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListUserPolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListUserPoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListUserPolicies operation.
-//    pageNum := 0
-//    err := client.ListUserPoliciesPages(params,
-//        func(page *ListUserPoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListUserPoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListUserPoliciesPages(input *ListUserPoliciesInput, fn func(*ListUserPoliciesOutput, bool) bool) error {
-	return c.ListUserPoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListUserPoliciesRequest) Paginate(opts ...aws.Option) ListUserPoliciesPager {
+	return ListUserPoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListUserPoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListUserPoliciesPagesWithContext same as ListUserPoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListUserPoliciesPagesWithContext(ctx aws.Context, input *ListUserPoliciesInput, fn func(*ListUserPoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListUserPoliciesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListUserPoliciesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListUserPoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListUserPoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListUserPoliciesPager struct {
+	aws.Pager
+}
+
+func (p *ListUserPoliciesPager) CurrentPage() *ListUserPoliciesOutput {
+	return p.Pager.CurrentPage().(*ListUserPoliciesOutput)
 }
 
 const opListUsers = "ListUsers"
@@ -6536,6 +6541,7 @@ const opListUsers = "ListUsers"
 type ListUsersRequest struct {
 	*aws.Request
 	Input *ListUsersInput
+	Copy  func(*ListUsersInput) ListUsersRequest
 }
 
 // Send marshals and sends the ListUsers API request.
@@ -6586,57 +6592,53 @@ func (c *IAM) ListUsersRequest(input *ListUsersInput) ListUsersRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUsersRequest{Request: req, Input: input}
+	return ListUsersRequest{Request: req, Input: input, Copy: c.ListUsersRequest}
 }
 
-// ListUsersPages iterates over the pages of a ListUsers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListUsers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListUsersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListUsers operation.
-//    pageNum := 0
-//    err := client.ListUsersPages(params,
-//        func(page *ListUsersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListUsersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListUsersPages(input *ListUsersInput, fn func(*ListUsersOutput, bool) bool) error {
-	return c.ListUsersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListUsersRequest) Paginate(opts ...aws.Option) ListUsersPager {
+	return ListUsersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListUsersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListUsersPagesWithContext same as ListUsersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListUsersPagesWithContext(ctx aws.Context, input *ListUsersInput, fn func(*ListUsersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListUsersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListUsersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListUsersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListUsersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListUsersPager struct {
+	aws.Pager
+}
+
+func (p *ListUsersPager) CurrentPage() *ListUsersOutput {
+	return p.Pager.CurrentPage().(*ListUsersOutput)
 }
 
 const opListVirtualMFADevices = "ListVirtualMFADevices"
@@ -6645,6 +6647,7 @@ const opListVirtualMFADevices = "ListVirtualMFADevices"
 type ListVirtualMFADevicesRequest struct {
 	*aws.Request
 	Input *ListVirtualMFADevicesInput
+	Copy  func(*ListVirtualMFADevicesInput) ListVirtualMFADevicesRequest
 }
 
 // Send marshals and sends the ListVirtualMFADevices API request.
@@ -6696,57 +6699,53 @@ func (c *IAM) ListVirtualMFADevicesRequest(input *ListVirtualMFADevicesInput) Li
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListVirtualMFADevicesRequest{Request: req, Input: input}
+	return ListVirtualMFADevicesRequest{Request: req, Input: input, Copy: c.ListVirtualMFADevicesRequest}
 }
 
-// ListVirtualMFADevicesPages iterates over the pages of a ListVirtualMFADevices operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListVirtualMFADevices method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListVirtualMFADevicesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListVirtualMFADevices operation.
-//    pageNum := 0
-//    err := client.ListVirtualMFADevicesPages(params,
-//        func(page *ListVirtualMFADevicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListVirtualMFADevicesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) ListVirtualMFADevicesPages(input *ListVirtualMFADevicesInput, fn func(*ListVirtualMFADevicesOutput, bool) bool) error {
-	return c.ListVirtualMFADevicesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListVirtualMFADevicesRequest) Paginate(opts ...aws.Option) ListVirtualMFADevicesPager {
+	return ListVirtualMFADevicesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListVirtualMFADevicesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListVirtualMFADevicesPagesWithContext same as ListVirtualMFADevicesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) ListVirtualMFADevicesPagesWithContext(ctx aws.Context, input *ListVirtualMFADevicesInput, fn func(*ListVirtualMFADevicesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListVirtualMFADevicesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListVirtualMFADevicesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListVirtualMFADevicesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListVirtualMFADevicesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListVirtualMFADevicesPager struct {
+	aws.Pager
+}
+
+func (p *ListVirtualMFADevicesPager) CurrentPage() *ListVirtualMFADevicesOutput {
+	return p.Pager.CurrentPage().(*ListVirtualMFADevicesOutput)
 }
 
 const opPutGroupPolicy = "PutGroupPolicy"
@@ -6755,6 +6754,7 @@ const opPutGroupPolicy = "PutGroupPolicy"
 type PutGroupPolicyRequest struct {
 	*aws.Request
 	Input *PutGroupPolicyInput
+	Copy  func(*PutGroupPolicyInput) PutGroupPolicyRequest
 }
 
 // Send marshals and sends the PutGroupPolicy API request.
@@ -6813,7 +6813,7 @@ func (c *IAM) PutGroupPolicyRequest(input *PutGroupPolicyInput) PutGroupPolicyRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutGroupPolicyRequest{Request: req, Input: input}
+	return PutGroupPolicyRequest{Request: req, Input: input, Copy: c.PutGroupPolicyRequest}
 }
 
 const opPutRolePolicy = "PutRolePolicy"
@@ -6822,6 +6822,7 @@ const opPutRolePolicy = "PutRolePolicy"
 type PutRolePolicyRequest struct {
 	*aws.Request
 	Input *PutRolePolicyInput
+	Copy  func(*PutRolePolicyInput) PutRolePolicyRequest
 }
 
 // Send marshals and sends the PutRolePolicy API request.
@@ -6886,7 +6887,7 @@ func (c *IAM) PutRolePolicyRequest(input *PutRolePolicyInput) PutRolePolicyReque
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutRolePolicyRequest{Request: req, Input: input}
+	return PutRolePolicyRequest{Request: req, Input: input, Copy: c.PutRolePolicyRequest}
 }
 
 const opPutUserPolicy = "PutUserPolicy"
@@ -6895,6 +6896,7 @@ const opPutUserPolicy = "PutUserPolicy"
 type PutUserPolicyRequest struct {
 	*aws.Request
 	Input *PutUserPolicyInput
+	Copy  func(*PutUserPolicyInput) PutUserPolicyRequest
 }
 
 // Send marshals and sends the PutUserPolicy API request.
@@ -6953,7 +6955,7 @@ func (c *IAM) PutUserPolicyRequest(input *PutUserPolicyInput) PutUserPolicyReque
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutUserPolicyRequest{Request: req, Input: input}
+	return PutUserPolicyRequest{Request: req, Input: input, Copy: c.PutUserPolicyRequest}
 }
 
 const opRemoveClientIDFromOpenIDConnectProvider = "RemoveClientIDFromOpenIDConnectProvider"
@@ -6962,6 +6964,7 @@ const opRemoveClientIDFromOpenIDConnectProvider = "RemoveClientIDFromOpenIDConne
 type RemoveClientIDFromOpenIDConnectProviderRequest struct {
 	*aws.Request
 	Input *RemoveClientIDFromOpenIDConnectProviderInput
+	Copy  func(*RemoveClientIDFromOpenIDConnectProviderInput) RemoveClientIDFromOpenIDConnectProviderRequest
 }
 
 // Send marshals and sends the RemoveClientIDFromOpenIDConnectProvider API request.
@@ -7009,7 +7012,7 @@ func (c *IAM) RemoveClientIDFromOpenIDConnectProviderRequest(input *RemoveClient
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveClientIDFromOpenIDConnectProviderRequest{Request: req, Input: input}
+	return RemoveClientIDFromOpenIDConnectProviderRequest{Request: req, Input: input, Copy: c.RemoveClientIDFromOpenIDConnectProviderRequest}
 }
 
 const opRemoveRoleFromInstanceProfile = "RemoveRoleFromInstanceProfile"
@@ -7018,6 +7021,7 @@ const opRemoveRoleFromInstanceProfile = "RemoveRoleFromInstanceProfile"
 type RemoveRoleFromInstanceProfileRequest struct {
 	*aws.Request
 	Input *RemoveRoleFromInstanceProfileInput
+	Copy  func(*RemoveRoleFromInstanceProfileInput) RemoveRoleFromInstanceProfileRequest
 }
 
 // Send marshals and sends the RemoveRoleFromInstanceProfile API request.
@@ -7069,7 +7073,7 @@ func (c *IAM) RemoveRoleFromInstanceProfileRequest(input *RemoveRoleFromInstance
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveRoleFromInstanceProfileRequest{Request: req, Input: input}
+	return RemoveRoleFromInstanceProfileRequest{Request: req, Input: input, Copy: c.RemoveRoleFromInstanceProfileRequest}
 }
 
 const opRemoveUserFromGroup = "RemoveUserFromGroup"
@@ -7078,6 +7082,7 @@ const opRemoveUserFromGroup = "RemoveUserFromGroup"
 type RemoveUserFromGroupRequest struct {
 	*aws.Request
 	Input *RemoveUserFromGroupInput
+	Copy  func(*RemoveUserFromGroupInput) RemoveUserFromGroupRequest
 }
 
 // Send marshals and sends the RemoveUserFromGroup API request.
@@ -7120,7 +7125,7 @@ func (c *IAM) RemoveUserFromGroupRequest(input *RemoveUserFromGroupInput) Remove
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveUserFromGroupRequest{Request: req, Input: input}
+	return RemoveUserFromGroupRequest{Request: req, Input: input, Copy: c.RemoveUserFromGroupRequest}
 }
 
 const opResetServiceSpecificCredential = "ResetServiceSpecificCredential"
@@ -7129,6 +7134,7 @@ const opResetServiceSpecificCredential = "ResetServiceSpecificCredential"
 type ResetServiceSpecificCredentialRequest struct {
 	*aws.Request
 	Input *ResetServiceSpecificCredentialInput
+	Copy  func(*ResetServiceSpecificCredentialInput) ResetServiceSpecificCredentialRequest
 }
 
 // Send marshals and sends the ResetServiceSpecificCredential API request.
@@ -7172,7 +7178,7 @@ func (c *IAM) ResetServiceSpecificCredentialRequest(input *ResetServiceSpecificC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetServiceSpecificCredentialRequest{Request: req, Input: input}
+	return ResetServiceSpecificCredentialRequest{Request: req, Input: input, Copy: c.ResetServiceSpecificCredentialRequest}
 }
 
 const opResyncMFADevice = "ResyncMFADevice"
@@ -7181,6 +7187,7 @@ const opResyncMFADevice = "ResyncMFADevice"
 type ResyncMFADeviceRequest struct {
 	*aws.Request
 	Input *ResyncMFADeviceInput
+	Copy  func(*ResyncMFADeviceInput) ResyncMFADeviceRequest
 }
 
 // Send marshals and sends the ResyncMFADevice API request.
@@ -7228,7 +7235,7 @@ func (c *IAM) ResyncMFADeviceRequest(input *ResyncMFADeviceInput) ResyncMFADevic
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResyncMFADeviceRequest{Request: req, Input: input}
+	return ResyncMFADeviceRequest{Request: req, Input: input, Copy: c.ResyncMFADeviceRequest}
 }
 
 const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
@@ -7237,6 +7244,7 @@ const opSetDefaultPolicyVersion = "SetDefaultPolicyVersion"
 type SetDefaultPolicyVersionRequest struct {
 	*aws.Request
 	Input *SetDefaultPolicyVersionInput
+	Copy  func(*SetDefaultPolicyVersionInput) SetDefaultPolicyVersionRequest
 }
 
 // Send marshals and sends the SetDefaultPolicyVersion API request.
@@ -7288,7 +7296,7 @@ func (c *IAM) SetDefaultPolicyVersionRequest(input *SetDefaultPolicyVersionInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetDefaultPolicyVersionRequest{Request: req, Input: input}
+	return SetDefaultPolicyVersionRequest{Request: req, Input: input, Copy: c.SetDefaultPolicyVersionRequest}
 }
 
 const opSimulateCustomPolicy = "SimulateCustomPolicy"
@@ -7297,6 +7305,7 @@ const opSimulateCustomPolicy = "SimulateCustomPolicy"
 type SimulateCustomPolicyRequest struct {
 	*aws.Request
 	Input *SimulateCustomPolicyInput
+	Copy  func(*SimulateCustomPolicyInput) SimulateCustomPolicyRequest
 }
 
 // Send marshals and sends the SimulateCustomPolicy API request.
@@ -7359,57 +7368,53 @@ func (c *IAM) SimulateCustomPolicyRequest(input *SimulateCustomPolicyInput) Simu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SimulateCustomPolicyRequest{Request: req, Input: input}
+	return SimulateCustomPolicyRequest{Request: req, Input: input, Copy: c.SimulateCustomPolicyRequest}
 }
 
-// SimulateCustomPolicyPages iterates over the pages of a SimulateCustomPolicy operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See SimulateCustomPolicy method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SimulateCustomPolicyRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a SimulateCustomPolicy operation.
-//    pageNum := 0
-//    err := client.SimulateCustomPolicyPages(params,
-//        func(page *SimulatePrincipalPolicyOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SimulateCustomPolicyRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) SimulateCustomPolicyPages(input *SimulateCustomPolicyInput, fn func(*SimulatePrincipalPolicyOutput, bool) bool) error {
-	return c.SimulateCustomPolicyPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SimulateCustomPolicyRequest) Paginate(opts ...aws.Option) SimulateCustomPolicyPager {
+	return SimulateCustomPolicyPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SimulateCustomPolicyInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// SimulateCustomPolicyPagesWithContext same as SimulateCustomPolicyPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) SimulateCustomPolicyPagesWithContext(ctx aws.Context, input *SimulateCustomPolicyInput, fn func(*SimulatePrincipalPolicyOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *SimulateCustomPolicyInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.SimulateCustomPolicyRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SimulatePrincipalPolicyOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SimulateCustomPolicyPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SimulateCustomPolicyPager struct {
+	aws.Pager
+}
+
+func (p *SimulateCustomPolicyPager) CurrentPage() *SimulatePrincipalPolicyOutput {
+	return p.Pager.CurrentPage().(*SimulatePrincipalPolicyOutput)
 }
 
 const opSimulatePrincipalPolicy = "SimulatePrincipalPolicy"
@@ -7418,6 +7423,7 @@ const opSimulatePrincipalPolicy = "SimulatePrincipalPolicy"
 type SimulatePrincipalPolicyRequest struct {
 	*aws.Request
 	Input *SimulatePrincipalPolicyInput
+	Copy  func(*SimulatePrincipalPolicyInput) SimulatePrincipalPolicyRequest
 }
 
 // Send marshals and sends the SimulatePrincipalPolicy API request.
@@ -7490,57 +7496,53 @@ func (c *IAM) SimulatePrincipalPolicyRequest(input *SimulatePrincipalPolicyInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SimulatePrincipalPolicyRequest{Request: req, Input: input}
+	return SimulatePrincipalPolicyRequest{Request: req, Input: input, Copy: c.SimulatePrincipalPolicyRequest}
 }
 
-// SimulatePrincipalPolicyPages iterates over the pages of a SimulatePrincipalPolicy operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See SimulatePrincipalPolicy method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SimulatePrincipalPolicyRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a SimulatePrincipalPolicy operation.
-//    pageNum := 0
-//    err := client.SimulatePrincipalPolicyPages(params,
-//        func(page *SimulatePrincipalPolicyOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SimulatePrincipalPolicyRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *IAM) SimulatePrincipalPolicyPages(input *SimulatePrincipalPolicyInput, fn func(*SimulatePrincipalPolicyOutput, bool) bool) error {
-	return c.SimulatePrincipalPolicyPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SimulatePrincipalPolicyRequest) Paginate(opts ...aws.Option) SimulatePrincipalPolicyPager {
+	return SimulatePrincipalPolicyPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SimulatePrincipalPolicyInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// SimulatePrincipalPolicyPagesWithContext same as SimulatePrincipalPolicyPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *IAM) SimulatePrincipalPolicyPagesWithContext(ctx aws.Context, input *SimulatePrincipalPolicyInput, fn func(*SimulatePrincipalPolicyOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *SimulatePrincipalPolicyInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.SimulatePrincipalPolicyRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SimulatePrincipalPolicyOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SimulatePrincipalPolicyPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SimulatePrincipalPolicyPager struct {
+	aws.Pager
+}
+
+func (p *SimulatePrincipalPolicyPager) CurrentPage() *SimulatePrincipalPolicyOutput {
+	return p.Pager.CurrentPage().(*SimulatePrincipalPolicyOutput)
 }
 
 const opUpdateAccessKey = "UpdateAccessKey"
@@ -7549,6 +7551,7 @@ const opUpdateAccessKey = "UpdateAccessKey"
 type UpdateAccessKeyRequest struct {
 	*aws.Request
 	Input *UpdateAccessKeyInput
+	Copy  func(*UpdateAccessKeyInput) UpdateAccessKeyRequest
 }
 
 // Send marshals and sends the UpdateAccessKey API request.
@@ -7601,7 +7604,7 @@ func (c *IAM) UpdateAccessKeyRequest(input *UpdateAccessKeyInput) UpdateAccessKe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAccessKeyRequest{Request: req, Input: input}
+	return UpdateAccessKeyRequest{Request: req, Input: input, Copy: c.UpdateAccessKeyRequest}
 }
 
 const opUpdateAccountPasswordPolicy = "UpdateAccountPasswordPolicy"
@@ -7610,6 +7613,7 @@ const opUpdateAccountPasswordPolicy = "UpdateAccountPasswordPolicy"
 type UpdateAccountPasswordPolicyRequest struct {
 	*aws.Request
 	Input *UpdateAccountPasswordPolicyInput
+	Copy  func(*UpdateAccountPasswordPolicyInput) UpdateAccountPasswordPolicyRequest
 }
 
 // Send marshals and sends the UpdateAccountPasswordPolicy API request.
@@ -7661,7 +7665,7 @@ func (c *IAM) UpdateAccountPasswordPolicyRequest(input *UpdateAccountPasswordPol
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAccountPasswordPolicyRequest{Request: req, Input: input}
+	return UpdateAccountPasswordPolicyRequest{Request: req, Input: input, Copy: c.UpdateAccountPasswordPolicyRequest}
 }
 
 const opUpdateAssumeRolePolicy = "UpdateAssumeRolePolicy"
@@ -7670,6 +7674,7 @@ const opUpdateAssumeRolePolicy = "UpdateAssumeRolePolicy"
 type UpdateAssumeRolePolicyRequest struct {
 	*aws.Request
 	Input *UpdateAssumeRolePolicyInput
+	Copy  func(*UpdateAssumeRolePolicyInput) UpdateAssumeRolePolicyRequest
 }
 
 // Send marshals and sends the UpdateAssumeRolePolicy API request.
@@ -7715,7 +7720,7 @@ func (c *IAM) UpdateAssumeRolePolicyRequest(input *UpdateAssumeRolePolicyInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAssumeRolePolicyRequest{Request: req, Input: input}
+	return UpdateAssumeRolePolicyRequest{Request: req, Input: input, Copy: c.UpdateAssumeRolePolicyRequest}
 }
 
 const opUpdateGroup = "UpdateGroup"
@@ -7724,6 +7729,7 @@ const opUpdateGroup = "UpdateGroup"
 type UpdateGroupRequest struct {
 	*aws.Request
 	Input *UpdateGroupInput
+	Copy  func(*UpdateGroupInput) UpdateGroupRequest
 }
 
 // Send marshals and sends the UpdateGroup API request.
@@ -7776,7 +7782,7 @@ func (c *IAM) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGroupRequest{Request: req, Input: input}
+	return UpdateGroupRequest{Request: req, Input: input, Copy: c.UpdateGroupRequest}
 }
 
 const opUpdateLoginProfile = "UpdateLoginProfile"
@@ -7785,6 +7791,7 @@ const opUpdateLoginProfile = "UpdateLoginProfile"
 type UpdateLoginProfileRequest struct {
 	*aws.Request
 	Input *UpdateLoginProfileInput
+	Copy  func(*UpdateLoginProfileInput) UpdateLoginProfileRequest
 }
 
 // Send marshals and sends the UpdateLoginProfile API request.
@@ -7831,7 +7838,7 @@ func (c *IAM) UpdateLoginProfileRequest(input *UpdateLoginProfileInput) UpdateLo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateLoginProfileRequest{Request: req, Input: input}
+	return UpdateLoginProfileRequest{Request: req, Input: input, Copy: c.UpdateLoginProfileRequest}
 }
 
 const opUpdateOpenIDConnectProviderThumbprint = "UpdateOpenIDConnectProviderThumbprint"
@@ -7840,6 +7847,7 @@ const opUpdateOpenIDConnectProviderThumbprint = "UpdateOpenIDConnectProviderThum
 type UpdateOpenIDConnectProviderThumbprintRequest struct {
 	*aws.Request
 	Input *UpdateOpenIDConnectProviderThumbprintInput
+	Copy  func(*UpdateOpenIDConnectProviderThumbprintInput) UpdateOpenIDConnectProviderThumbprintRequest
 }
 
 // Send marshals and sends the UpdateOpenIDConnectProviderThumbprint API request.
@@ -7896,7 +7904,7 @@ func (c *IAM) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenIDCo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateOpenIDConnectProviderThumbprintRequest{Request: req, Input: input}
+	return UpdateOpenIDConnectProviderThumbprintRequest{Request: req, Input: input, Copy: c.UpdateOpenIDConnectProviderThumbprintRequest}
 }
 
 const opUpdateRoleDescription = "UpdateRoleDescription"
@@ -7905,6 +7913,7 @@ const opUpdateRoleDescription = "UpdateRoleDescription"
 type UpdateRoleDescriptionRequest struct {
 	*aws.Request
 	Input *UpdateRoleDescriptionInput
+	Copy  func(*UpdateRoleDescriptionInput) UpdateRoleDescriptionRequest
 }
 
 // Send marshals and sends the UpdateRoleDescription API request.
@@ -7945,7 +7954,7 @@ func (c *IAM) UpdateRoleDescriptionRequest(input *UpdateRoleDescriptionInput) Up
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRoleDescriptionRequest{Request: req, Input: input}
+	return UpdateRoleDescriptionRequest{Request: req, Input: input, Copy: c.UpdateRoleDescriptionRequest}
 }
 
 const opUpdateSAMLProvider = "UpdateSAMLProvider"
@@ -7954,6 +7963,7 @@ const opUpdateSAMLProvider = "UpdateSAMLProvider"
 type UpdateSAMLProviderRequest struct {
 	*aws.Request
 	Input *UpdateSAMLProviderInput
+	Copy  func(*UpdateSAMLProviderInput) UpdateSAMLProviderRequest
 }
 
 // Send marshals and sends the UpdateSAMLProvider API request.
@@ -7996,7 +8006,7 @@ func (c *IAM) UpdateSAMLProviderRequest(input *UpdateSAMLProviderInput) UpdateSA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSAMLProviderRequest{Request: req, Input: input}
+	return UpdateSAMLProviderRequest{Request: req, Input: input, Copy: c.UpdateSAMLProviderRequest}
 }
 
 const opUpdateSSHPublicKey = "UpdateSSHPublicKey"
@@ -8005,6 +8015,7 @@ const opUpdateSSHPublicKey = "UpdateSSHPublicKey"
 type UpdateSSHPublicKeyRequest struct {
 	*aws.Request
 	Input *UpdateSSHPublicKeyInput
+	Copy  func(*UpdateSSHPublicKeyInput) UpdateSSHPublicKeyRequest
 }
 
 // Send marshals and sends the UpdateSSHPublicKey API request.
@@ -8056,7 +8067,7 @@ func (c *IAM) UpdateSSHPublicKeyRequest(input *UpdateSSHPublicKeyInput) UpdateSS
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSSHPublicKeyRequest{Request: req, Input: input}
+	return UpdateSSHPublicKeyRequest{Request: req, Input: input, Copy: c.UpdateSSHPublicKeyRequest}
 }
 
 const opUpdateServerCertificate = "UpdateServerCertificate"
@@ -8065,6 +8076,7 @@ const opUpdateServerCertificate = "UpdateServerCertificate"
 type UpdateServerCertificateRequest struct {
 	*aws.Request
 	Input *UpdateServerCertificateInput
+	Copy  func(*UpdateServerCertificateInput) UpdateServerCertificateRequest
 }
 
 // Send marshals and sends the UpdateServerCertificate API request.
@@ -8125,7 +8137,7 @@ func (c *IAM) UpdateServerCertificateRequest(input *UpdateServerCertificateInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateServerCertificateRequest{Request: req, Input: input}
+	return UpdateServerCertificateRequest{Request: req, Input: input, Copy: c.UpdateServerCertificateRequest}
 }
 
 const opUpdateServiceSpecificCredential = "UpdateServiceSpecificCredential"
@@ -8134,6 +8146,7 @@ const opUpdateServiceSpecificCredential = "UpdateServiceSpecificCredential"
 type UpdateServiceSpecificCredentialRequest struct {
 	*aws.Request
 	Input *UpdateServiceSpecificCredentialInput
+	Copy  func(*UpdateServiceSpecificCredentialInput) UpdateServiceSpecificCredentialRequest
 }
 
 // Send marshals and sends the UpdateServiceSpecificCredential API request.
@@ -8179,7 +8192,7 @@ func (c *IAM) UpdateServiceSpecificCredentialRequest(input *UpdateServiceSpecifi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateServiceSpecificCredentialRequest{Request: req, Input: input}
+	return UpdateServiceSpecificCredentialRequest{Request: req, Input: input, Copy: c.UpdateServiceSpecificCredentialRequest}
 }
 
 const opUpdateSigningCertificate = "UpdateSigningCertificate"
@@ -8188,6 +8201,7 @@ const opUpdateSigningCertificate = "UpdateSigningCertificate"
 type UpdateSigningCertificateRequest struct {
 	*aws.Request
 	Input *UpdateSigningCertificateInput
+	Copy  func(*UpdateSigningCertificateInput) UpdateSigningCertificateRequest
 }
 
 // Send marshals and sends the UpdateSigningCertificate API request.
@@ -8237,7 +8251,7 @@ func (c *IAM) UpdateSigningCertificateRequest(input *UpdateSigningCertificateInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSigningCertificateRequest{Request: req, Input: input}
+	return UpdateSigningCertificateRequest{Request: req, Input: input, Copy: c.UpdateSigningCertificateRequest}
 }
 
 const opUpdateUser = "UpdateUser"
@@ -8246,6 +8260,7 @@ const opUpdateUser = "UpdateUser"
 type UpdateUserRequest struct {
 	*aws.Request
 	Input *UpdateUserInput
+	Copy  func(*UpdateUserInput) UpdateUserRequest
 }
 
 // Send marshals and sends the UpdateUser API request.
@@ -8299,7 +8314,7 @@ func (c *IAM) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateUserRequest{Request: req, Input: input}
+	return UpdateUserRequest{Request: req, Input: input, Copy: c.UpdateUserRequest}
 }
 
 const opUploadSSHPublicKey = "UploadSSHPublicKey"
@@ -8308,6 +8323,7 @@ const opUploadSSHPublicKey = "UploadSSHPublicKey"
 type UploadSSHPublicKeyRequest struct {
 	*aws.Request
 	Input *UploadSSHPublicKeyInput
+	Copy  func(*UploadSSHPublicKeyInput) UploadSSHPublicKeyRequest
 }
 
 // Send marshals and sends the UploadSSHPublicKey API request.
@@ -8354,7 +8370,7 @@ func (c *IAM) UploadSSHPublicKeyRequest(input *UploadSSHPublicKeyInput) UploadSS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UploadSSHPublicKeyRequest{Request: req, Input: input}
+	return UploadSSHPublicKeyRequest{Request: req, Input: input, Copy: c.UploadSSHPublicKeyRequest}
 }
 
 const opUploadServerCertificate = "UploadServerCertificate"
@@ -8363,6 +8379,7 @@ const opUploadServerCertificate = "UploadServerCertificate"
 type UploadServerCertificateRequest struct {
 	*aws.Request
 	Input *UploadServerCertificateInput
+	Copy  func(*UploadServerCertificateInput) UploadServerCertificateRequest
 }
 
 // Send marshals and sends the UploadServerCertificate API request.
@@ -8428,7 +8445,7 @@ func (c *IAM) UploadServerCertificateRequest(input *UploadServerCertificateInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UploadServerCertificateRequest{Request: req, Input: input}
+	return UploadServerCertificateRequest{Request: req, Input: input, Copy: c.UploadServerCertificateRequest}
 }
 
 const opUploadSigningCertificate = "UploadSigningCertificate"
@@ -8437,6 +8454,7 @@ const opUploadSigningCertificate = "UploadSigningCertificate"
 type UploadSigningCertificateRequest struct {
 	*aws.Request
 	Input *UploadSigningCertificateInput
+	Copy  func(*UploadSigningCertificateInput) UploadSigningCertificateRequest
 }
 
 // Send marshals and sends the UploadSigningCertificate API request.
@@ -8493,7 +8511,7 @@ func (c *IAM) UploadSigningCertificateRequest(input *UploadSigningCertificateInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UploadSigningCertificateRequest{Request: req, Input: input}
+	return UploadSigningCertificateRequest{Request: req, Input: input, Copy: c.UploadSigningCertificateRequest}
 }
 
 // Contains information about an AWS access key.

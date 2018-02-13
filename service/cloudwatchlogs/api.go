@@ -17,6 +17,7 @@ const opAssociateKmsKey = "AssociateKmsKey"
 type AssociateKmsKeyRequest struct {
 	*aws.Request
 	Input *AssociateKmsKeyInput
+	Copy  func(*AssociateKmsKeyInput) AssociateKmsKeyRequest
 }
 
 // Send marshals and sends the AssociateKmsKey API request.
@@ -72,7 +73,7 @@ func (c *CloudWatchLogs) AssociateKmsKeyRequest(input *AssociateKmsKeyInput) Ass
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateKmsKeyRequest{Request: req, Input: input}
+	return AssociateKmsKeyRequest{Request: req, Input: input, Copy: c.AssociateKmsKeyRequest}
 }
 
 const opCancelExportTask = "CancelExportTask"
@@ -81,6 +82,7 @@ const opCancelExportTask = "CancelExportTask"
 type CancelExportTaskRequest struct {
 	*aws.Request
 	Input *CancelExportTaskInput
+	Copy  func(*CancelExportTaskInput) CancelExportTaskRequest
 }
 
 // Send marshals and sends the CancelExportTask API request.
@@ -125,7 +127,7 @@ func (c *CloudWatchLogs) CancelExportTaskRequest(input *CancelExportTaskInput) C
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelExportTaskRequest{Request: req, Input: input}
+	return CancelExportTaskRequest{Request: req, Input: input, Copy: c.CancelExportTaskRequest}
 }
 
 const opCreateExportTask = "CreateExportTask"
@@ -134,6 +136,7 @@ const opCreateExportTask = "CreateExportTask"
 type CreateExportTaskRequest struct {
 	*aws.Request
 	Input *CreateExportTaskInput
+	Copy  func(*CreateExportTaskInput) CreateExportTaskRequest
 }
 
 // Send marshals and sends the CreateExportTask API request.
@@ -185,7 +188,7 @@ func (c *CloudWatchLogs) CreateExportTaskRequest(input *CreateExportTaskInput) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateExportTaskRequest{Request: req, Input: input}
+	return CreateExportTaskRequest{Request: req, Input: input, Copy: c.CreateExportTaskRequest}
 }
 
 const opCreateLogGroup = "CreateLogGroup"
@@ -194,6 +197,7 @@ const opCreateLogGroup = "CreateLogGroup"
 type CreateLogGroupRequest struct {
 	*aws.Request
 	Input *CreateLogGroupInput
+	Copy  func(*CreateLogGroupInput) CreateLogGroupRequest
 }
 
 // Send marshals and sends the CreateLogGroup API request.
@@ -257,7 +261,7 @@ func (c *CloudWatchLogs) CreateLogGroupRequest(input *CreateLogGroupInput) Creat
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLogGroupRequest{Request: req, Input: input}
+	return CreateLogGroupRequest{Request: req, Input: input, Copy: c.CreateLogGroupRequest}
 }
 
 const opCreateLogStream = "CreateLogStream"
@@ -266,6 +270,7 @@ const opCreateLogStream = "CreateLogStream"
 type CreateLogStreamRequest struct {
 	*aws.Request
 	Input *CreateLogStreamInput
+	Copy  func(*CreateLogStreamInput) CreateLogStreamRequest
 }
 
 // Send marshals and sends the CreateLogStream API request.
@@ -319,7 +324,7 @@ func (c *CloudWatchLogs) CreateLogStreamRequest(input *CreateLogStreamInput) Cre
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLogStreamRequest{Request: req, Input: input}
+	return CreateLogStreamRequest{Request: req, Input: input, Copy: c.CreateLogStreamRequest}
 }
 
 const opDeleteDestination = "DeleteDestination"
@@ -328,6 +333,7 @@ const opDeleteDestination = "DeleteDestination"
 type DeleteDestinationRequest struct {
 	*aws.Request
 	Input *DeleteDestinationInput
+	Copy  func(*DeleteDestinationInput) DeleteDestinationRequest
 }
 
 // Send marshals and sends the DeleteDestination API request.
@@ -372,7 +378,7 @@ func (c *CloudWatchLogs) DeleteDestinationRequest(input *DeleteDestinationInput)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDestinationRequest{Request: req, Input: input}
+	return DeleteDestinationRequest{Request: req, Input: input, Copy: c.DeleteDestinationRequest}
 }
 
 const opDeleteLogGroup = "DeleteLogGroup"
@@ -381,6 +387,7 @@ const opDeleteLogGroup = "DeleteLogGroup"
 type DeleteLogGroupRequest struct {
 	*aws.Request
 	Input *DeleteLogGroupInput
+	Copy  func(*DeleteLogGroupInput) DeleteLogGroupRequest
 }
 
 // Send marshals and sends the DeleteLogGroup API request.
@@ -424,7 +431,7 @@ func (c *CloudWatchLogs) DeleteLogGroupRequest(input *DeleteLogGroupInput) Delet
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLogGroupRequest{Request: req, Input: input}
+	return DeleteLogGroupRequest{Request: req, Input: input, Copy: c.DeleteLogGroupRequest}
 }
 
 const opDeleteLogStream = "DeleteLogStream"
@@ -433,6 +440,7 @@ const opDeleteLogStream = "DeleteLogStream"
 type DeleteLogStreamRequest struct {
 	*aws.Request
 	Input *DeleteLogStreamInput
+	Copy  func(*DeleteLogStreamInput) DeleteLogStreamRequest
 }
 
 // Send marshals and sends the DeleteLogStream API request.
@@ -476,7 +484,7 @@ func (c *CloudWatchLogs) DeleteLogStreamRequest(input *DeleteLogStreamInput) Del
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLogStreamRequest{Request: req, Input: input}
+	return DeleteLogStreamRequest{Request: req, Input: input, Copy: c.DeleteLogStreamRequest}
 }
 
 const opDeleteMetricFilter = "DeleteMetricFilter"
@@ -485,6 +493,7 @@ const opDeleteMetricFilter = "DeleteMetricFilter"
 type DeleteMetricFilterRequest struct {
 	*aws.Request
 	Input *DeleteMetricFilterInput
+	Copy  func(*DeleteMetricFilterInput) DeleteMetricFilterRequest
 }
 
 // Send marshals and sends the DeleteMetricFilter API request.
@@ -527,7 +536,7 @@ func (c *CloudWatchLogs) DeleteMetricFilterRequest(input *DeleteMetricFilterInpu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteMetricFilterRequest{Request: req, Input: input}
+	return DeleteMetricFilterRequest{Request: req, Input: input, Copy: c.DeleteMetricFilterRequest}
 }
 
 const opDeleteResourcePolicy = "DeleteResourcePolicy"
@@ -536,6 +545,7 @@ const opDeleteResourcePolicy = "DeleteResourcePolicy"
 type DeleteResourcePolicyRequest struct {
 	*aws.Request
 	Input *DeleteResourcePolicyInput
+	Copy  func(*DeleteResourcePolicyInput) DeleteResourcePolicyRequest
 }
 
 // Send marshals and sends the DeleteResourcePolicy API request.
@@ -579,7 +589,7 @@ func (c *CloudWatchLogs) DeleteResourcePolicyRequest(input *DeleteResourcePolicy
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteResourcePolicyRequest{Request: req, Input: input}
+	return DeleteResourcePolicyRequest{Request: req, Input: input, Copy: c.DeleteResourcePolicyRequest}
 }
 
 const opDeleteRetentionPolicy = "DeleteRetentionPolicy"
@@ -588,6 +598,7 @@ const opDeleteRetentionPolicy = "DeleteRetentionPolicy"
 type DeleteRetentionPolicyRequest struct {
 	*aws.Request
 	Input *DeleteRetentionPolicyInput
+	Copy  func(*DeleteRetentionPolicyInput) DeleteRetentionPolicyRequest
 }
 
 // Send marshals and sends the DeleteRetentionPolicy API request.
@@ -633,7 +644,7 @@ func (c *CloudWatchLogs) DeleteRetentionPolicyRequest(input *DeleteRetentionPoli
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRetentionPolicyRequest{Request: req, Input: input}
+	return DeleteRetentionPolicyRequest{Request: req, Input: input, Copy: c.DeleteRetentionPolicyRequest}
 }
 
 const opDeleteSubscriptionFilter = "DeleteSubscriptionFilter"
@@ -642,6 +653,7 @@ const opDeleteSubscriptionFilter = "DeleteSubscriptionFilter"
 type DeleteSubscriptionFilterRequest struct {
 	*aws.Request
 	Input *DeleteSubscriptionFilterInput
+	Copy  func(*DeleteSubscriptionFilterInput) DeleteSubscriptionFilterRequest
 }
 
 // Send marshals and sends the DeleteSubscriptionFilter API request.
@@ -684,7 +696,7 @@ func (c *CloudWatchLogs) DeleteSubscriptionFilterRequest(input *DeleteSubscripti
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSubscriptionFilterRequest{Request: req, Input: input}
+	return DeleteSubscriptionFilterRequest{Request: req, Input: input, Copy: c.DeleteSubscriptionFilterRequest}
 }
 
 const opDescribeDestinations = "DescribeDestinations"
@@ -693,6 +705,7 @@ const opDescribeDestinations = "DescribeDestinations"
 type DescribeDestinationsRequest struct {
 	*aws.Request
 	Input *DescribeDestinationsInput
+	Copy  func(*DescribeDestinationsInput) DescribeDestinationsRequest
 }
 
 // Send marshals and sends the DescribeDestinations API request.
@@ -740,57 +753,53 @@ func (c *CloudWatchLogs) DescribeDestinationsRequest(input *DescribeDestinations
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDestinationsRequest{Request: req, Input: input}
+	return DescribeDestinationsRequest{Request: req, Input: input, Copy: c.DescribeDestinationsRequest}
 }
 
-// DescribeDestinationsPages iterates over the pages of a DescribeDestinations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDestinations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDestinationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDestinations operation.
-//    pageNum := 0
-//    err := client.DescribeDestinationsPages(params,
-//        func(page *DescribeDestinationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDestinationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudWatchLogs) DescribeDestinationsPages(input *DescribeDestinationsInput, fn func(*DescribeDestinationsOutput, bool) bool) error {
-	return c.DescribeDestinationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeDestinationsRequest) Paginate(opts ...aws.Option) DescribeDestinationsPager {
+	return DescribeDestinationsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDestinationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeDestinationsPagesWithContext same as DescribeDestinationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeDestinationsPagesWithContext(ctx aws.Context, input *DescribeDestinationsInput, fn func(*DescribeDestinationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDestinationsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeDestinationsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDestinationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDestinationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeDestinationsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDestinationsPager) CurrentPage() *DescribeDestinationsOutput {
+	return p.Pager.CurrentPage().(*DescribeDestinationsOutput)
 }
 
 const opDescribeExportTasks = "DescribeExportTasks"
@@ -799,6 +808,7 @@ const opDescribeExportTasks = "DescribeExportTasks"
 type DescribeExportTasksRequest struct {
 	*aws.Request
 	Input *DescribeExportTasksInput
+	Copy  func(*DescribeExportTasksInput) DescribeExportTasksRequest
 }
 
 // Send marshals and sends the DescribeExportTasks API request.
@@ -840,7 +850,7 @@ func (c *CloudWatchLogs) DescribeExportTasksRequest(input *DescribeExportTasksIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeExportTasksRequest{Request: req, Input: input}
+	return DescribeExportTasksRequest{Request: req, Input: input, Copy: c.DescribeExportTasksRequest}
 }
 
 const opDescribeLogGroups = "DescribeLogGroups"
@@ -849,6 +859,7 @@ const opDescribeLogGroups = "DescribeLogGroups"
 type DescribeLogGroupsRequest struct {
 	*aws.Request
 	Input *DescribeLogGroupsInput
+	Copy  func(*DescribeLogGroupsInput) DescribeLogGroupsRequest
 }
 
 // Send marshals and sends the DescribeLogGroups API request.
@@ -896,57 +907,53 @@ func (c *CloudWatchLogs) DescribeLogGroupsRequest(input *DescribeLogGroupsInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLogGroupsRequest{Request: req, Input: input}
+	return DescribeLogGroupsRequest{Request: req, Input: input, Copy: c.DescribeLogGroupsRequest}
 }
 
-// DescribeLogGroupsPages iterates over the pages of a DescribeLogGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeLogGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeLogGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeLogGroups operation.
-//    pageNum := 0
-//    err := client.DescribeLogGroupsPages(params,
-//        func(page *DescribeLogGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeLogGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudWatchLogs) DescribeLogGroupsPages(input *DescribeLogGroupsInput, fn func(*DescribeLogGroupsOutput, bool) bool) error {
-	return c.DescribeLogGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeLogGroupsRequest) Paginate(opts ...aws.Option) DescribeLogGroupsPager {
+	return DescribeLogGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeLogGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeLogGroupsPagesWithContext same as DescribeLogGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeLogGroupsPagesWithContext(ctx aws.Context, input *DescribeLogGroupsInput, fn func(*DescribeLogGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeLogGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeLogGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeLogGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeLogGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeLogGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeLogGroupsPager) CurrentPage() *DescribeLogGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeLogGroupsOutput)
 }
 
 const opDescribeLogStreams = "DescribeLogStreams"
@@ -955,6 +962,7 @@ const opDescribeLogStreams = "DescribeLogStreams"
 type DescribeLogStreamsRequest struct {
 	*aws.Request
 	Input *DescribeLogStreamsInput
+	Copy  func(*DescribeLogStreamsInput) DescribeLogStreamsRequest
 }
 
 // Send marshals and sends the DescribeLogStreams API request.
@@ -1006,57 +1014,53 @@ func (c *CloudWatchLogs) DescribeLogStreamsRequest(input *DescribeLogStreamsInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLogStreamsRequest{Request: req, Input: input}
+	return DescribeLogStreamsRequest{Request: req, Input: input, Copy: c.DescribeLogStreamsRequest}
 }
 
-// DescribeLogStreamsPages iterates over the pages of a DescribeLogStreams operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeLogStreams method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeLogStreamsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeLogStreams operation.
-//    pageNum := 0
-//    err := client.DescribeLogStreamsPages(params,
-//        func(page *DescribeLogStreamsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeLogStreamsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudWatchLogs) DescribeLogStreamsPages(input *DescribeLogStreamsInput, fn func(*DescribeLogStreamsOutput, bool) bool) error {
-	return c.DescribeLogStreamsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeLogStreamsRequest) Paginate(opts ...aws.Option) DescribeLogStreamsPager {
+	return DescribeLogStreamsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeLogStreamsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeLogStreamsPagesWithContext same as DescribeLogStreamsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeLogStreamsPagesWithContext(ctx aws.Context, input *DescribeLogStreamsInput, fn func(*DescribeLogStreamsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeLogStreamsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeLogStreamsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeLogStreamsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeLogStreamsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeLogStreamsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeLogStreamsPager) CurrentPage() *DescribeLogStreamsOutput {
+	return p.Pager.CurrentPage().(*DescribeLogStreamsOutput)
 }
 
 const opDescribeMetricFilters = "DescribeMetricFilters"
@@ -1065,6 +1069,7 @@ const opDescribeMetricFilters = "DescribeMetricFilters"
 type DescribeMetricFiltersRequest struct {
 	*aws.Request
 	Input *DescribeMetricFiltersInput
+	Copy  func(*DescribeMetricFiltersInput) DescribeMetricFiltersRequest
 }
 
 // Send marshals and sends the DescribeMetricFilters API request.
@@ -1113,57 +1118,53 @@ func (c *CloudWatchLogs) DescribeMetricFiltersRequest(input *DescribeMetricFilte
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMetricFiltersRequest{Request: req, Input: input}
+	return DescribeMetricFiltersRequest{Request: req, Input: input, Copy: c.DescribeMetricFiltersRequest}
 }
 
-// DescribeMetricFiltersPages iterates over the pages of a DescribeMetricFilters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeMetricFilters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeMetricFiltersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeMetricFilters operation.
-//    pageNum := 0
-//    err := client.DescribeMetricFiltersPages(params,
-//        func(page *DescribeMetricFiltersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeMetricFiltersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudWatchLogs) DescribeMetricFiltersPages(input *DescribeMetricFiltersInput, fn func(*DescribeMetricFiltersOutput, bool) bool) error {
-	return c.DescribeMetricFiltersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeMetricFiltersRequest) Paginate(opts ...aws.Option) DescribeMetricFiltersPager {
+	return DescribeMetricFiltersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeMetricFiltersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeMetricFiltersPagesWithContext same as DescribeMetricFiltersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeMetricFiltersPagesWithContext(ctx aws.Context, input *DescribeMetricFiltersInput, fn func(*DescribeMetricFiltersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeMetricFiltersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeMetricFiltersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeMetricFiltersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeMetricFiltersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeMetricFiltersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeMetricFiltersPager) CurrentPage() *DescribeMetricFiltersOutput {
+	return p.Pager.CurrentPage().(*DescribeMetricFiltersOutput)
 }
 
 const opDescribeResourcePolicies = "DescribeResourcePolicies"
@@ -1172,6 +1173,7 @@ const opDescribeResourcePolicies = "DescribeResourcePolicies"
 type DescribeResourcePoliciesRequest struct {
 	*aws.Request
 	Input *DescribeResourcePoliciesInput
+	Copy  func(*DescribeResourcePoliciesInput) DescribeResourcePoliciesRequest
 }
 
 // Send marshals and sends the DescribeResourcePolicies API request.
@@ -1212,7 +1214,7 @@ func (c *CloudWatchLogs) DescribeResourcePoliciesRequest(input *DescribeResource
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeResourcePoliciesRequest{Request: req, Input: input}
+	return DescribeResourcePoliciesRequest{Request: req, Input: input, Copy: c.DescribeResourcePoliciesRequest}
 }
 
 const opDescribeSubscriptionFilters = "DescribeSubscriptionFilters"
@@ -1221,6 +1223,7 @@ const opDescribeSubscriptionFilters = "DescribeSubscriptionFilters"
 type DescribeSubscriptionFiltersRequest struct {
 	*aws.Request
 	Input *DescribeSubscriptionFiltersInput
+	Copy  func(*DescribeSubscriptionFiltersInput) DescribeSubscriptionFiltersRequest
 }
 
 // Send marshals and sends the DescribeSubscriptionFilters API request.
@@ -1269,57 +1272,53 @@ func (c *CloudWatchLogs) DescribeSubscriptionFiltersRequest(input *DescribeSubsc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSubscriptionFiltersRequest{Request: req, Input: input}
+	return DescribeSubscriptionFiltersRequest{Request: req, Input: input, Copy: c.DescribeSubscriptionFiltersRequest}
 }
 
-// DescribeSubscriptionFiltersPages iterates over the pages of a DescribeSubscriptionFilters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeSubscriptionFilters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeSubscriptionFiltersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeSubscriptionFilters operation.
-//    pageNum := 0
-//    err := client.DescribeSubscriptionFiltersPages(params,
-//        func(page *DescribeSubscriptionFiltersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeSubscriptionFiltersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudWatchLogs) DescribeSubscriptionFiltersPages(input *DescribeSubscriptionFiltersInput, fn func(*DescribeSubscriptionFiltersOutput, bool) bool) error {
-	return c.DescribeSubscriptionFiltersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeSubscriptionFiltersRequest) Paginate(opts ...aws.Option) DescribeSubscriptionFiltersPager {
+	return DescribeSubscriptionFiltersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeSubscriptionFiltersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeSubscriptionFiltersPagesWithContext same as DescribeSubscriptionFiltersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) DescribeSubscriptionFiltersPagesWithContext(ctx aws.Context, input *DescribeSubscriptionFiltersInput, fn func(*DescribeSubscriptionFiltersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeSubscriptionFiltersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeSubscriptionFiltersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeSubscriptionFiltersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeSubscriptionFiltersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeSubscriptionFiltersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeSubscriptionFiltersPager) CurrentPage() *DescribeSubscriptionFiltersOutput {
+	return p.Pager.CurrentPage().(*DescribeSubscriptionFiltersOutput)
 }
 
 const opDisassociateKmsKey = "DisassociateKmsKey"
@@ -1328,6 +1327,7 @@ const opDisassociateKmsKey = "DisassociateKmsKey"
 type DisassociateKmsKeyRequest struct {
 	*aws.Request
 	Input *DisassociateKmsKeyInput
+	Copy  func(*DisassociateKmsKeyInput) DisassociateKmsKeyRequest
 }
 
 // Send marshals and sends the DisassociateKmsKey API request.
@@ -1378,7 +1378,7 @@ func (c *CloudWatchLogs) DisassociateKmsKeyRequest(input *DisassociateKmsKeyInpu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateKmsKeyRequest{Request: req, Input: input}
+	return DisassociateKmsKeyRequest{Request: req, Input: input, Copy: c.DisassociateKmsKeyRequest}
 }
 
 const opFilterLogEvents = "FilterLogEvents"
@@ -1387,6 +1387,7 @@ const opFilterLogEvents = "FilterLogEvents"
 type FilterLogEventsRequest struct {
 	*aws.Request
 	Input *FilterLogEventsInput
+	Copy  func(*FilterLogEventsInput) FilterLogEventsRequest
 }
 
 // Send marshals and sends the FilterLogEvents API request.
@@ -1441,57 +1442,53 @@ func (c *CloudWatchLogs) FilterLogEventsRequest(input *FilterLogEventsInput) Fil
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return FilterLogEventsRequest{Request: req, Input: input}
+	return FilterLogEventsRequest{Request: req, Input: input, Copy: c.FilterLogEventsRequest}
 }
 
-// FilterLogEventsPages iterates over the pages of a FilterLogEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See FilterLogEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a FilterLogEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a FilterLogEvents operation.
-//    pageNum := 0
-//    err := client.FilterLogEventsPages(params,
-//        func(page *FilterLogEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.FilterLogEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudWatchLogs) FilterLogEventsPages(input *FilterLogEventsInput, fn func(*FilterLogEventsOutput, bool) bool) error {
-	return c.FilterLogEventsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *FilterLogEventsRequest) Paginate(opts ...aws.Option) FilterLogEventsPager {
+	return FilterLogEventsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *FilterLogEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// FilterLogEventsPagesWithContext same as FilterLogEventsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) FilterLogEventsPagesWithContext(ctx aws.Context, input *FilterLogEventsInput, fn func(*FilterLogEventsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *FilterLogEventsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.FilterLogEventsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*FilterLogEventsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// FilterLogEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type FilterLogEventsPager struct {
+	aws.Pager
+}
+
+func (p *FilterLogEventsPager) CurrentPage() *FilterLogEventsOutput {
+	return p.Pager.CurrentPage().(*FilterLogEventsOutput)
 }
 
 const opGetLogEvents = "GetLogEvents"
@@ -1500,6 +1497,7 @@ const opGetLogEvents = "GetLogEvents"
 type GetLogEventsRequest struct {
 	*aws.Request
 	Input *GetLogEventsInput
+	Copy  func(*GetLogEventsInput) GetLogEventsRequest
 }
 
 // Send marshals and sends the GetLogEvents API request.
@@ -1551,57 +1549,53 @@ func (c *CloudWatchLogs) GetLogEventsRequest(input *GetLogEventsInput) GetLogEve
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLogEventsRequest{Request: req, Input: input}
+	return GetLogEventsRequest{Request: req, Input: input, Copy: c.GetLogEventsRequest}
 }
 
-// GetLogEventsPages iterates over the pages of a GetLogEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetLogEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetLogEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetLogEvents operation.
-//    pageNum := 0
-//    err := client.GetLogEventsPages(params,
-//        func(page *GetLogEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetLogEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudWatchLogs) GetLogEventsPages(input *GetLogEventsInput, fn func(*GetLogEventsOutput, bool) bool) error {
-	return c.GetLogEventsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetLogEventsRequest) Paginate(opts ...aws.Option) GetLogEventsPager {
+	return GetLogEventsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetLogEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetLogEventsPagesWithContext same as GetLogEventsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatchLogs) GetLogEventsPagesWithContext(ctx aws.Context, input *GetLogEventsInput, fn func(*GetLogEventsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetLogEventsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetLogEventsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetLogEventsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetLogEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetLogEventsPager struct {
+	aws.Pager
+}
+
+func (p *GetLogEventsPager) CurrentPage() *GetLogEventsOutput {
+	return p.Pager.CurrentPage().(*GetLogEventsOutput)
 }
 
 const opListTagsLogGroup = "ListTagsLogGroup"
@@ -1610,6 +1604,7 @@ const opListTagsLogGroup = "ListTagsLogGroup"
 type ListTagsLogGroupRequest struct {
 	*aws.Request
 	Input *ListTagsLogGroupInput
+	Copy  func(*ListTagsLogGroupInput) ListTagsLogGroupRequest
 }
 
 // Send marshals and sends the ListTagsLogGroup API request.
@@ -1650,7 +1645,7 @@ func (c *CloudWatchLogs) ListTagsLogGroupRequest(input *ListTagsLogGroupInput) L
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsLogGroupRequest{Request: req, Input: input}
+	return ListTagsLogGroupRequest{Request: req, Input: input, Copy: c.ListTagsLogGroupRequest}
 }
 
 const opPutDestination = "PutDestination"
@@ -1659,6 +1654,7 @@ const opPutDestination = "PutDestination"
 type PutDestinationRequest struct {
 	*aws.Request
 	Input *PutDestinationInput
+	Copy  func(*PutDestinationInput) PutDestinationRequest
 }
 
 // Send marshals and sends the PutDestination API request.
@@ -1709,7 +1705,7 @@ func (c *CloudWatchLogs) PutDestinationRequest(input *PutDestinationInput) PutDe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutDestinationRequest{Request: req, Input: input}
+	return PutDestinationRequest{Request: req, Input: input, Copy: c.PutDestinationRequest}
 }
 
 const opPutDestinationPolicy = "PutDestinationPolicy"
@@ -1718,6 +1714,7 @@ const opPutDestinationPolicy = "PutDestinationPolicy"
 type PutDestinationPolicyRequest struct {
 	*aws.Request
 	Input *PutDestinationPolicyInput
+	Copy  func(*PutDestinationPolicyInput) PutDestinationPolicyRequest
 }
 
 // Send marshals and sends the PutDestinationPolicy API request.
@@ -1763,7 +1760,7 @@ func (c *CloudWatchLogs) PutDestinationPolicyRequest(input *PutDestinationPolicy
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutDestinationPolicyRequest{Request: req, Input: input}
+	return PutDestinationPolicyRequest{Request: req, Input: input, Copy: c.PutDestinationPolicyRequest}
 }
 
 const opPutLogEvents = "PutLogEvents"
@@ -1772,6 +1769,7 @@ const opPutLogEvents = "PutLogEvents"
 type PutLogEventsRequest struct {
 	*aws.Request
 	Input *PutLogEventsInput
+	Copy  func(*PutLogEventsInput) PutLogEventsRequest
 }
 
 // Send marshals and sends the PutLogEvents API request.
@@ -1839,7 +1837,7 @@ func (c *CloudWatchLogs) PutLogEventsRequest(input *PutLogEventsInput) PutLogEve
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutLogEventsRequest{Request: req, Input: input}
+	return PutLogEventsRequest{Request: req, Input: input, Copy: c.PutLogEventsRequest}
 }
 
 const opPutMetricFilter = "PutMetricFilter"
@@ -1848,6 +1846,7 @@ const opPutMetricFilter = "PutMetricFilter"
 type PutMetricFilterRequest struct {
 	*aws.Request
 	Input *PutMetricFilterInput
+	Copy  func(*PutMetricFilterInput) PutMetricFilterRequest
 }
 
 // Send marshals and sends the PutMetricFilter API request.
@@ -1895,7 +1894,7 @@ func (c *CloudWatchLogs) PutMetricFilterRequest(input *PutMetricFilterInput) Put
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutMetricFilterRequest{Request: req, Input: input}
+	return PutMetricFilterRequest{Request: req, Input: input, Copy: c.PutMetricFilterRequest}
 }
 
 const opPutResourcePolicy = "PutResourcePolicy"
@@ -1904,6 +1903,7 @@ const opPutResourcePolicy = "PutResourcePolicy"
 type PutResourcePolicyRequest struct {
 	*aws.Request
 	Input *PutResourcePolicyInput
+	Copy  func(*PutResourcePolicyInput) PutResourcePolicyRequest
 }
 
 // Send marshals and sends the PutResourcePolicy API request.
@@ -1946,7 +1946,7 @@ func (c *CloudWatchLogs) PutResourcePolicyRequest(input *PutResourcePolicyInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutResourcePolicyRequest{Request: req, Input: input}
+	return PutResourcePolicyRequest{Request: req, Input: input, Copy: c.PutResourcePolicyRequest}
 }
 
 const opPutRetentionPolicy = "PutRetentionPolicy"
@@ -1955,6 +1955,7 @@ const opPutRetentionPolicy = "PutRetentionPolicy"
 type PutRetentionPolicyRequest struct {
 	*aws.Request
 	Input *PutRetentionPolicyInput
+	Copy  func(*PutRetentionPolicyInput) PutRetentionPolicyRequest
 }
 
 // Send marshals and sends the PutRetentionPolicy API request.
@@ -1999,7 +2000,7 @@ func (c *CloudWatchLogs) PutRetentionPolicyRequest(input *PutRetentionPolicyInpu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutRetentionPolicyRequest{Request: req, Input: input}
+	return PutRetentionPolicyRequest{Request: req, Input: input, Copy: c.PutRetentionPolicyRequest}
 }
 
 const opPutSubscriptionFilter = "PutSubscriptionFilter"
@@ -2008,6 +2009,7 @@ const opPutSubscriptionFilter = "PutSubscriptionFilter"
 type PutSubscriptionFilterRequest struct {
 	*aws.Request
 	Input *PutSubscriptionFilterInput
+	Copy  func(*PutSubscriptionFilterInput) PutSubscriptionFilterRequest
 }
 
 // Send marshals and sends the PutSubscriptionFilter API request.
@@ -2070,7 +2072,7 @@ func (c *CloudWatchLogs) PutSubscriptionFilterRequest(input *PutSubscriptionFilt
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutSubscriptionFilterRequest{Request: req, Input: input}
+	return PutSubscriptionFilterRequest{Request: req, Input: input, Copy: c.PutSubscriptionFilterRequest}
 }
 
 const opTagLogGroup = "TagLogGroup"
@@ -2079,6 +2081,7 @@ const opTagLogGroup = "TagLogGroup"
 type TagLogGroupRequest struct {
 	*aws.Request
 	Input *TagLogGroupInput
+	Copy  func(*TagLogGroupInput) TagLogGroupRequest
 }
 
 // Send marshals and sends the TagLogGroup API request.
@@ -2128,7 +2131,7 @@ func (c *CloudWatchLogs) TagLogGroupRequest(input *TagLogGroupInput) TagLogGroup
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagLogGroupRequest{Request: req, Input: input}
+	return TagLogGroupRequest{Request: req, Input: input, Copy: c.TagLogGroupRequest}
 }
 
 const opTestMetricFilter = "TestMetricFilter"
@@ -2137,6 +2140,7 @@ const opTestMetricFilter = "TestMetricFilter"
 type TestMetricFilterRequest struct {
 	*aws.Request
 	Input *TestMetricFilterInput
+	Copy  func(*TestMetricFilterInput) TestMetricFilterRequest
 }
 
 // Send marshals and sends the TestMetricFilter API request.
@@ -2179,7 +2183,7 @@ func (c *CloudWatchLogs) TestMetricFilterRequest(input *TestMetricFilterInput) T
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestMetricFilterRequest{Request: req, Input: input}
+	return TestMetricFilterRequest{Request: req, Input: input, Copy: c.TestMetricFilterRequest}
 }
 
 const opUntagLogGroup = "UntagLogGroup"
@@ -2188,6 +2192,7 @@ const opUntagLogGroup = "UntagLogGroup"
 type UntagLogGroupRequest struct {
 	*aws.Request
 	Input *UntagLogGroupInput
+	Copy  func(*UntagLogGroupInput) UntagLogGroupRequest
 }
 
 // Send marshals and sends the UntagLogGroup API request.
@@ -2233,7 +2238,7 @@ func (c *CloudWatchLogs) UntagLogGroupRequest(input *UntagLogGroupInput) UntagLo
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagLogGroupRequest{Request: req, Input: input}
+	return UntagLogGroupRequest{Request: req, Input: input, Copy: c.UntagLogGroupRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/AssociateKmsKeyRequest

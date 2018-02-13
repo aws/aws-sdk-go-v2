@@ -18,6 +18,7 @@ const opAddCustomAttributes = "AddCustomAttributes"
 type AddCustomAttributesRequest struct {
 	*aws.Request
 	Input *AddCustomAttributesInput
+	Copy  func(*AddCustomAttributesInput) AddCustomAttributesRequest
 }
 
 // Send marshals and sends the AddCustomAttributes API request.
@@ -58,7 +59,7 @@ func (c *CognitoIdentityProvider) AddCustomAttributesRequest(input *AddCustomAtt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddCustomAttributesRequest{Request: req, Input: input}
+	return AddCustomAttributesRequest{Request: req, Input: input, Copy: c.AddCustomAttributesRequest}
 }
 
 const opAdminAddUserToGroup = "AdminAddUserToGroup"
@@ -67,6 +68,7 @@ const opAdminAddUserToGroup = "AdminAddUserToGroup"
 type AdminAddUserToGroupRequest struct {
 	*aws.Request
 	Input *AdminAddUserToGroupInput
+	Copy  func(*AdminAddUserToGroupInput) AdminAddUserToGroupRequest
 }
 
 // Send marshals and sends the AdminAddUserToGroup API request.
@@ -111,7 +113,7 @@ func (c *CognitoIdentityProvider) AdminAddUserToGroupRequest(input *AdminAddUser
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminAddUserToGroupRequest{Request: req, Input: input}
+	return AdminAddUserToGroupRequest{Request: req, Input: input, Copy: c.AdminAddUserToGroupRequest}
 }
 
 const opAdminConfirmSignUp = "AdminConfirmSignUp"
@@ -120,6 +122,7 @@ const opAdminConfirmSignUp = "AdminConfirmSignUp"
 type AdminConfirmSignUpRequest struct {
 	*aws.Request
 	Input *AdminConfirmSignUpInput
+	Copy  func(*AdminConfirmSignUpInput) AdminConfirmSignUpRequest
 }
 
 // Send marshals and sends the AdminConfirmSignUp API request.
@@ -163,7 +166,7 @@ func (c *CognitoIdentityProvider) AdminConfirmSignUpRequest(input *AdminConfirmS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminConfirmSignUpRequest{Request: req, Input: input}
+	return AdminConfirmSignUpRequest{Request: req, Input: input, Copy: c.AdminConfirmSignUpRequest}
 }
 
 const opAdminCreateUser = "AdminCreateUser"
@@ -172,6 +175,7 @@ const opAdminCreateUser = "AdminCreateUser"
 type AdminCreateUserRequest struct {
 	*aws.Request
 	Input *AdminCreateUserInput
+	Copy  func(*AdminCreateUserInput) AdminCreateUserRequest
 }
 
 // Send marshals and sends the AdminCreateUser API request.
@@ -227,7 +231,7 @@ func (c *CognitoIdentityProvider) AdminCreateUserRequest(input *AdminCreateUserI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminCreateUserRequest{Request: req, Input: input}
+	return AdminCreateUserRequest{Request: req, Input: input, Copy: c.AdminCreateUserRequest}
 }
 
 const opAdminDeleteUser = "AdminDeleteUser"
@@ -236,6 +240,7 @@ const opAdminDeleteUser = "AdminDeleteUser"
 type AdminDeleteUserRequest struct {
 	*aws.Request
 	Input *AdminDeleteUserInput
+	Copy  func(*AdminDeleteUserInput) AdminDeleteUserRequest
 }
 
 // Send marshals and sends the AdminDeleteUser API request.
@@ -280,7 +285,7 @@ func (c *CognitoIdentityProvider) AdminDeleteUserRequest(input *AdminDeleteUserI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminDeleteUserRequest{Request: req, Input: input}
+	return AdminDeleteUserRequest{Request: req, Input: input, Copy: c.AdminDeleteUserRequest}
 }
 
 const opAdminDeleteUserAttributes = "AdminDeleteUserAttributes"
@@ -289,6 +294,7 @@ const opAdminDeleteUserAttributes = "AdminDeleteUserAttributes"
 type AdminDeleteUserAttributesRequest struct {
 	*aws.Request
 	Input *AdminDeleteUserAttributesInput
+	Copy  func(*AdminDeleteUserAttributesInput) AdminDeleteUserAttributesRequest
 }
 
 // Send marshals and sends the AdminDeleteUserAttributes API request.
@@ -332,7 +338,7 @@ func (c *CognitoIdentityProvider) AdminDeleteUserAttributesRequest(input *AdminD
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminDeleteUserAttributesRequest{Request: req, Input: input}
+	return AdminDeleteUserAttributesRequest{Request: req, Input: input, Copy: c.AdminDeleteUserAttributesRequest}
 }
 
 const opAdminDisableProviderForUser = "AdminDisableProviderForUser"
@@ -341,6 +347,7 @@ const opAdminDisableProviderForUser = "AdminDisableProviderForUser"
 type AdminDisableProviderForUserRequest struct {
 	*aws.Request
 	Input *AdminDisableProviderForUserInput
+	Copy  func(*AdminDisableProviderForUserInput) AdminDisableProviderForUserRequest
 }
 
 // Send marshals and sends the AdminDisableProviderForUser API request.
@@ -409,7 +416,7 @@ func (c *CognitoIdentityProvider) AdminDisableProviderForUserRequest(input *Admi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminDisableProviderForUserRequest{Request: req, Input: input}
+	return AdminDisableProviderForUserRequest{Request: req, Input: input, Copy: c.AdminDisableProviderForUserRequest}
 }
 
 const opAdminDisableUser = "AdminDisableUser"
@@ -418,6 +425,7 @@ const opAdminDisableUser = "AdminDisableUser"
 type AdminDisableUserRequest struct {
 	*aws.Request
 	Input *AdminDisableUserInput
+	Copy  func(*AdminDisableUserInput) AdminDisableUserRequest
 }
 
 // Send marshals and sends the AdminDisableUser API request.
@@ -460,7 +468,7 @@ func (c *CognitoIdentityProvider) AdminDisableUserRequest(input *AdminDisableUse
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminDisableUserRequest{Request: req, Input: input}
+	return AdminDisableUserRequest{Request: req, Input: input, Copy: c.AdminDisableUserRequest}
 }
 
 const opAdminEnableUser = "AdminEnableUser"
@@ -469,6 +477,7 @@ const opAdminEnableUser = "AdminEnableUser"
 type AdminEnableUserRequest struct {
 	*aws.Request
 	Input *AdminEnableUserInput
+	Copy  func(*AdminEnableUserInput) AdminEnableUserRequest
 }
 
 // Send marshals and sends the AdminEnableUser API request.
@@ -511,7 +520,7 @@ func (c *CognitoIdentityProvider) AdminEnableUserRequest(input *AdminEnableUserI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminEnableUserRequest{Request: req, Input: input}
+	return AdminEnableUserRequest{Request: req, Input: input, Copy: c.AdminEnableUserRequest}
 }
 
 const opAdminForgetDevice = "AdminForgetDevice"
@@ -520,6 +529,7 @@ const opAdminForgetDevice = "AdminForgetDevice"
 type AdminForgetDeviceRequest struct {
 	*aws.Request
 	Input *AdminForgetDeviceInput
+	Copy  func(*AdminForgetDeviceInput) AdminForgetDeviceRequest
 }
 
 // Send marshals and sends the AdminForgetDevice API request.
@@ -564,7 +574,7 @@ func (c *CognitoIdentityProvider) AdminForgetDeviceRequest(input *AdminForgetDev
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminForgetDeviceRequest{Request: req, Input: input}
+	return AdminForgetDeviceRequest{Request: req, Input: input, Copy: c.AdminForgetDeviceRequest}
 }
 
 const opAdminGetDevice = "AdminGetDevice"
@@ -573,6 +583,7 @@ const opAdminGetDevice = "AdminGetDevice"
 type AdminGetDeviceRequest struct {
 	*aws.Request
 	Input *AdminGetDeviceInput
+	Copy  func(*AdminGetDeviceInput) AdminGetDeviceRequest
 }
 
 // Send marshals and sends the AdminGetDevice API request.
@@ -615,7 +626,7 @@ func (c *CognitoIdentityProvider) AdminGetDeviceRequest(input *AdminGetDeviceInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminGetDeviceRequest{Request: req, Input: input}
+	return AdminGetDeviceRequest{Request: req, Input: input, Copy: c.AdminGetDeviceRequest}
 }
 
 const opAdminGetUser = "AdminGetUser"
@@ -624,6 +635,7 @@ const opAdminGetUser = "AdminGetUser"
 type AdminGetUserRequest struct {
 	*aws.Request
 	Input *AdminGetUserInput
+	Copy  func(*AdminGetUserInput) AdminGetUserRequest
 }
 
 // Send marshals and sends the AdminGetUser API request.
@@ -667,7 +679,7 @@ func (c *CognitoIdentityProvider) AdminGetUserRequest(input *AdminGetUserInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminGetUserRequest{Request: req, Input: input}
+	return AdminGetUserRequest{Request: req, Input: input, Copy: c.AdminGetUserRequest}
 }
 
 const opAdminInitiateAuth = "AdminInitiateAuth"
@@ -676,6 +688,7 @@ const opAdminInitiateAuth = "AdminInitiateAuth"
 type AdminInitiateAuthRequest struct {
 	*aws.Request
 	Input *AdminInitiateAuthInput
+	Copy  func(*AdminInitiateAuthInput) AdminInitiateAuthRequest
 }
 
 // Send marshals and sends the AdminInitiateAuth API request.
@@ -718,7 +731,7 @@ func (c *CognitoIdentityProvider) AdminInitiateAuthRequest(input *AdminInitiateA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminInitiateAuthRequest{Request: req, Input: input}
+	return AdminInitiateAuthRequest{Request: req, Input: input, Copy: c.AdminInitiateAuthRequest}
 }
 
 const opAdminLinkProviderForUser = "AdminLinkProviderForUser"
@@ -727,6 +740,7 @@ const opAdminLinkProviderForUser = "AdminLinkProviderForUser"
 type AdminLinkProviderForUserRequest struct {
 	*aws.Request
 	Input *AdminLinkProviderForUserInput
+	Copy  func(*AdminLinkProviderForUserInput) AdminLinkProviderForUserRequest
 }
 
 // Send marshals and sends the AdminLinkProviderForUser API request.
@@ -785,7 +799,7 @@ func (c *CognitoIdentityProvider) AdminLinkProviderForUserRequest(input *AdminLi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminLinkProviderForUserRequest{Request: req, Input: input}
+	return AdminLinkProviderForUserRequest{Request: req, Input: input, Copy: c.AdminLinkProviderForUserRequest}
 }
 
 const opAdminListDevices = "AdminListDevices"
@@ -794,6 +808,7 @@ const opAdminListDevices = "AdminListDevices"
 type AdminListDevicesRequest struct {
 	*aws.Request
 	Input *AdminListDevicesInput
+	Copy  func(*AdminListDevicesInput) AdminListDevicesRequest
 }
 
 // Send marshals and sends the AdminListDevices API request.
@@ -836,7 +851,7 @@ func (c *CognitoIdentityProvider) AdminListDevicesRequest(input *AdminListDevice
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminListDevicesRequest{Request: req, Input: input}
+	return AdminListDevicesRequest{Request: req, Input: input, Copy: c.AdminListDevicesRequest}
 }
 
 const opAdminListGroupsForUser = "AdminListGroupsForUser"
@@ -845,6 +860,7 @@ const opAdminListGroupsForUser = "AdminListGroupsForUser"
 type AdminListGroupsForUserRequest struct {
 	*aws.Request
 	Input *AdminListGroupsForUserInput
+	Copy  func(*AdminListGroupsForUserInput) AdminListGroupsForUserRequest
 }
 
 // Send marshals and sends the AdminListGroupsForUser API request.
@@ -887,7 +903,7 @@ func (c *CognitoIdentityProvider) AdminListGroupsForUserRequest(input *AdminList
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminListGroupsForUserRequest{Request: req, Input: input}
+	return AdminListGroupsForUserRequest{Request: req, Input: input, Copy: c.AdminListGroupsForUserRequest}
 }
 
 const opAdminListUserAuthEvents = "AdminListUserAuthEvents"
@@ -896,6 +912,7 @@ const opAdminListUserAuthEvents = "AdminListUserAuthEvents"
 type AdminListUserAuthEventsRequest struct {
 	*aws.Request
 	Input *AdminListUserAuthEventsInput
+	Copy  func(*AdminListUserAuthEventsInput) AdminListUserAuthEventsRequest
 }
 
 // Send marshals and sends the AdminListUserAuthEvents API request.
@@ -937,7 +954,7 @@ func (c *CognitoIdentityProvider) AdminListUserAuthEventsRequest(input *AdminLis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminListUserAuthEventsRequest{Request: req, Input: input}
+	return AdminListUserAuthEventsRequest{Request: req, Input: input, Copy: c.AdminListUserAuthEventsRequest}
 }
 
 const opAdminRemoveUserFromGroup = "AdminRemoveUserFromGroup"
@@ -946,6 +963,7 @@ const opAdminRemoveUserFromGroup = "AdminRemoveUserFromGroup"
 type AdminRemoveUserFromGroupRequest struct {
 	*aws.Request
 	Input *AdminRemoveUserFromGroupInput
+	Copy  func(*AdminRemoveUserFromGroupInput) AdminRemoveUserFromGroupRequest
 }
 
 // Send marshals and sends the AdminRemoveUserFromGroup API request.
@@ -990,7 +1008,7 @@ func (c *CognitoIdentityProvider) AdminRemoveUserFromGroupRequest(input *AdminRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminRemoveUserFromGroupRequest{Request: req, Input: input}
+	return AdminRemoveUserFromGroupRequest{Request: req, Input: input, Copy: c.AdminRemoveUserFromGroupRequest}
 }
 
 const opAdminResetUserPassword = "AdminResetUserPassword"
@@ -999,6 +1017,7 @@ const opAdminResetUserPassword = "AdminResetUserPassword"
 type AdminResetUserPasswordRequest struct {
 	*aws.Request
 	Input *AdminResetUserPasswordInput
+	Copy  func(*AdminResetUserPasswordInput) AdminResetUserPasswordRequest
 }
 
 // Send marshals and sends the AdminResetUserPassword API request.
@@ -1052,7 +1071,7 @@ func (c *CognitoIdentityProvider) AdminResetUserPasswordRequest(input *AdminRese
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminResetUserPasswordRequest{Request: req, Input: input}
+	return AdminResetUserPasswordRequest{Request: req, Input: input, Copy: c.AdminResetUserPasswordRequest}
 }
 
 const opAdminRespondToAuthChallenge = "AdminRespondToAuthChallenge"
@@ -1061,6 +1080,7 @@ const opAdminRespondToAuthChallenge = "AdminRespondToAuthChallenge"
 type AdminRespondToAuthChallengeRequest struct {
 	*aws.Request
 	Input *AdminRespondToAuthChallengeInput
+	Copy  func(*AdminRespondToAuthChallengeInput) AdminRespondToAuthChallengeRequest
 }
 
 // Send marshals and sends the AdminRespondToAuthChallenge API request.
@@ -1103,7 +1123,7 @@ func (c *CognitoIdentityProvider) AdminRespondToAuthChallengeRequest(input *Admi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminRespondToAuthChallengeRequest{Request: req, Input: input}
+	return AdminRespondToAuthChallengeRequest{Request: req, Input: input, Copy: c.AdminRespondToAuthChallengeRequest}
 }
 
 const opAdminSetUserMFAPreference = "AdminSetUserMFAPreference"
@@ -1112,6 +1132,7 @@ const opAdminSetUserMFAPreference = "AdminSetUserMFAPreference"
 type AdminSetUserMFAPreferenceRequest struct {
 	*aws.Request
 	Input *AdminSetUserMFAPreferenceInput
+	Copy  func(*AdminSetUserMFAPreferenceInput) AdminSetUserMFAPreferenceRequest
 }
 
 // Send marshals and sends the AdminSetUserMFAPreference API request.
@@ -1152,7 +1173,7 @@ func (c *CognitoIdentityProvider) AdminSetUserMFAPreferenceRequest(input *AdminS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminSetUserMFAPreferenceRequest{Request: req, Input: input}
+	return AdminSetUserMFAPreferenceRequest{Request: req, Input: input, Copy: c.AdminSetUserMFAPreferenceRequest}
 }
 
 const opAdminSetUserSettings = "AdminSetUserSettings"
@@ -1161,6 +1182,7 @@ const opAdminSetUserSettings = "AdminSetUserSettings"
 type AdminSetUserSettingsRequest struct {
 	*aws.Request
 	Input *AdminSetUserSettingsInput
+	Copy  func(*AdminSetUserSettingsInput) AdminSetUserSettingsRequest
 }
 
 // Send marshals and sends the AdminSetUserSettings API request.
@@ -1203,7 +1225,7 @@ func (c *CognitoIdentityProvider) AdminSetUserSettingsRequest(input *AdminSetUse
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminSetUserSettingsRequest{Request: req, Input: input}
+	return AdminSetUserSettingsRequest{Request: req, Input: input, Copy: c.AdminSetUserSettingsRequest}
 }
 
 const opAdminUpdateAuthEventFeedback = "AdminUpdateAuthEventFeedback"
@@ -1212,6 +1234,7 @@ const opAdminUpdateAuthEventFeedback = "AdminUpdateAuthEventFeedback"
 type AdminUpdateAuthEventFeedbackRequest struct {
 	*aws.Request
 	Input *AdminUpdateAuthEventFeedbackInput
+	Copy  func(*AdminUpdateAuthEventFeedbackInput) AdminUpdateAuthEventFeedbackRequest
 }
 
 // Send marshals and sends the AdminUpdateAuthEventFeedback API request.
@@ -1254,7 +1277,7 @@ func (c *CognitoIdentityProvider) AdminUpdateAuthEventFeedbackRequest(input *Adm
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminUpdateAuthEventFeedbackRequest{Request: req, Input: input}
+	return AdminUpdateAuthEventFeedbackRequest{Request: req, Input: input, Copy: c.AdminUpdateAuthEventFeedbackRequest}
 }
 
 const opAdminUpdateDeviceStatus = "AdminUpdateDeviceStatus"
@@ -1263,6 +1286,7 @@ const opAdminUpdateDeviceStatus = "AdminUpdateDeviceStatus"
 type AdminUpdateDeviceStatusRequest struct {
 	*aws.Request
 	Input *AdminUpdateDeviceStatusInput
+	Copy  func(*AdminUpdateDeviceStatusInput) AdminUpdateDeviceStatusRequest
 }
 
 // Send marshals and sends the AdminUpdateDeviceStatus API request.
@@ -1305,7 +1329,7 @@ func (c *CognitoIdentityProvider) AdminUpdateDeviceStatusRequest(input *AdminUpd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminUpdateDeviceStatusRequest{Request: req, Input: input}
+	return AdminUpdateDeviceStatusRequest{Request: req, Input: input, Copy: c.AdminUpdateDeviceStatusRequest}
 }
 
 const opAdminUpdateUserAttributes = "AdminUpdateUserAttributes"
@@ -1314,6 +1338,7 @@ const opAdminUpdateUserAttributes = "AdminUpdateUserAttributes"
 type AdminUpdateUserAttributesRequest struct {
 	*aws.Request
 	Input *AdminUpdateUserAttributesInput
+	Copy  func(*AdminUpdateUserAttributesInput) AdminUpdateUserAttributesRequest
 }
 
 // Send marshals and sends the AdminUpdateUserAttributes API request.
@@ -1363,7 +1388,7 @@ func (c *CognitoIdentityProvider) AdminUpdateUserAttributesRequest(input *AdminU
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminUpdateUserAttributesRequest{Request: req, Input: input}
+	return AdminUpdateUserAttributesRequest{Request: req, Input: input, Copy: c.AdminUpdateUserAttributesRequest}
 }
 
 const opAdminUserGlobalSignOut = "AdminUserGlobalSignOut"
@@ -1372,6 +1397,7 @@ const opAdminUserGlobalSignOut = "AdminUserGlobalSignOut"
 type AdminUserGlobalSignOutRequest struct {
 	*aws.Request
 	Input *AdminUserGlobalSignOutInput
+	Copy  func(*AdminUserGlobalSignOutInput) AdminUserGlobalSignOutRequest
 }
 
 // Send marshals and sends the AdminUserGlobalSignOut API request.
@@ -1414,7 +1440,7 @@ func (c *CognitoIdentityProvider) AdminUserGlobalSignOutRequest(input *AdminUser
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AdminUserGlobalSignOutRequest{Request: req, Input: input}
+	return AdminUserGlobalSignOutRequest{Request: req, Input: input, Copy: c.AdminUserGlobalSignOutRequest}
 }
 
 const opAssociateSoftwareToken = "AssociateSoftwareToken"
@@ -1423,6 +1449,7 @@ const opAssociateSoftwareToken = "AssociateSoftwareToken"
 type AssociateSoftwareTokenRequest struct {
 	*aws.Request
 	Input *AssociateSoftwareTokenInput
+	Copy  func(*AssociateSoftwareTokenInput) AssociateSoftwareTokenRequest
 }
 
 // Send marshals and sends the AssociateSoftwareToken API request.
@@ -1464,7 +1491,7 @@ func (c *CognitoIdentityProvider) AssociateSoftwareTokenRequest(input *Associate
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateSoftwareTokenRequest{Request: req, Input: input}
+	return AssociateSoftwareTokenRequest{Request: req, Input: input, Copy: c.AssociateSoftwareTokenRequest}
 }
 
 const opChangePassword = "ChangePassword"
@@ -1473,6 +1500,7 @@ const opChangePassword = "ChangePassword"
 type ChangePasswordRequest struct {
 	*aws.Request
 	Input *ChangePasswordInput
+	Copy  func(*ChangePasswordInput) ChangePasswordRequest
 }
 
 // Send marshals and sends the ChangePassword API request.
@@ -1514,7 +1542,7 @@ func (c *CognitoIdentityProvider) ChangePasswordRequest(input *ChangePasswordInp
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return ChangePasswordRequest{Request: req, Input: input}
+	return ChangePasswordRequest{Request: req, Input: input, Copy: c.ChangePasswordRequest}
 }
 
 const opConfirmDevice = "ConfirmDevice"
@@ -1523,6 +1551,7 @@ const opConfirmDevice = "ConfirmDevice"
 type ConfirmDeviceRequest struct {
 	*aws.Request
 	Input *ConfirmDeviceInput
+	Copy  func(*ConfirmDeviceInput) ConfirmDeviceRequest
 }
 
 // Send marshals and sends the ConfirmDevice API request.
@@ -1564,7 +1593,7 @@ func (c *CognitoIdentityProvider) ConfirmDeviceRequest(input *ConfirmDeviceInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ConfirmDeviceRequest{Request: req, Input: input}
+	return ConfirmDeviceRequest{Request: req, Input: input, Copy: c.ConfirmDeviceRequest}
 }
 
 const opConfirmForgotPassword = "ConfirmForgotPassword"
@@ -1573,6 +1602,7 @@ const opConfirmForgotPassword = "ConfirmForgotPassword"
 type ConfirmForgotPasswordRequest struct {
 	*aws.Request
 	Input *ConfirmForgotPasswordInput
+	Copy  func(*ConfirmForgotPasswordInput) ConfirmForgotPasswordRequest
 }
 
 // Send marshals and sends the ConfirmForgotPassword API request.
@@ -1614,7 +1644,7 @@ func (c *CognitoIdentityProvider) ConfirmForgotPasswordRequest(input *ConfirmFor
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return ConfirmForgotPasswordRequest{Request: req, Input: input}
+	return ConfirmForgotPasswordRequest{Request: req, Input: input, Copy: c.ConfirmForgotPasswordRequest}
 }
 
 const opConfirmSignUp = "ConfirmSignUp"
@@ -1623,6 +1653,7 @@ const opConfirmSignUp = "ConfirmSignUp"
 type ConfirmSignUpRequest struct {
 	*aws.Request
 	Input *ConfirmSignUpInput
+	Copy  func(*ConfirmSignUpInput) ConfirmSignUpRequest
 }
 
 // Send marshals and sends the ConfirmSignUp API request.
@@ -1665,7 +1696,7 @@ func (c *CognitoIdentityProvider) ConfirmSignUpRequest(input *ConfirmSignUpInput
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return ConfirmSignUpRequest{Request: req, Input: input}
+	return ConfirmSignUpRequest{Request: req, Input: input, Copy: c.ConfirmSignUpRequest}
 }
 
 const opCreateGroup = "CreateGroup"
@@ -1674,6 +1705,7 @@ const opCreateGroup = "CreateGroup"
 type CreateGroupRequest struct {
 	*aws.Request
 	Input *CreateGroupInput
+	Copy  func(*CreateGroupInput) CreateGroupRequest
 }
 
 // Send marshals and sends the CreateGroup API request.
@@ -1716,7 +1748,7 @@ func (c *CognitoIdentityProvider) CreateGroupRequest(input *CreateGroupInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGroupRequest{Request: req, Input: input}
+	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
 }
 
 const opCreateIdentityProvider = "CreateIdentityProvider"
@@ -1725,6 +1757,7 @@ const opCreateIdentityProvider = "CreateIdentityProvider"
 type CreateIdentityProviderRequest struct {
 	*aws.Request
 	Input *CreateIdentityProviderInput
+	Copy  func(*CreateIdentityProviderInput) CreateIdentityProviderRequest
 }
 
 // Send marshals and sends the CreateIdentityProvider API request.
@@ -1765,7 +1798,7 @@ func (c *CognitoIdentityProvider) CreateIdentityProviderRequest(input *CreateIde
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateIdentityProviderRequest{Request: req, Input: input}
+	return CreateIdentityProviderRequest{Request: req, Input: input, Copy: c.CreateIdentityProviderRequest}
 }
 
 const opCreateResourceServer = "CreateResourceServer"
@@ -1774,6 +1807,7 @@ const opCreateResourceServer = "CreateResourceServer"
 type CreateResourceServerRequest struct {
 	*aws.Request
 	Input *CreateResourceServerInput
+	Copy  func(*CreateResourceServerInput) CreateResourceServerRequest
 }
 
 // Send marshals and sends the CreateResourceServer API request.
@@ -1814,7 +1848,7 @@ func (c *CognitoIdentityProvider) CreateResourceServerRequest(input *CreateResou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateResourceServerRequest{Request: req, Input: input}
+	return CreateResourceServerRequest{Request: req, Input: input, Copy: c.CreateResourceServerRequest}
 }
 
 const opCreateUserImportJob = "CreateUserImportJob"
@@ -1823,6 +1857,7 @@ const opCreateUserImportJob = "CreateUserImportJob"
 type CreateUserImportJobRequest struct {
 	*aws.Request
 	Input *CreateUserImportJobInput
+	Copy  func(*CreateUserImportJobInput) CreateUserImportJobRequest
 }
 
 // Send marshals and sends the CreateUserImportJob API request.
@@ -1863,7 +1898,7 @@ func (c *CognitoIdentityProvider) CreateUserImportJobRequest(input *CreateUserIm
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserImportJobRequest{Request: req, Input: input}
+	return CreateUserImportJobRequest{Request: req, Input: input, Copy: c.CreateUserImportJobRequest}
 }
 
 const opCreateUserPool = "CreateUserPool"
@@ -1872,6 +1907,7 @@ const opCreateUserPool = "CreateUserPool"
 type CreateUserPoolRequest struct {
 	*aws.Request
 	Input *CreateUserPoolInput
+	Copy  func(*CreateUserPoolInput) CreateUserPoolRequest
 }
 
 // Send marshals and sends the CreateUserPool API request.
@@ -1913,7 +1949,7 @@ func (c *CognitoIdentityProvider) CreateUserPoolRequest(input *CreateUserPoolInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserPoolRequest{Request: req, Input: input}
+	return CreateUserPoolRequest{Request: req, Input: input, Copy: c.CreateUserPoolRequest}
 }
 
 const opCreateUserPoolClient = "CreateUserPoolClient"
@@ -1922,6 +1958,7 @@ const opCreateUserPoolClient = "CreateUserPoolClient"
 type CreateUserPoolClientRequest struct {
 	*aws.Request
 	Input *CreateUserPoolClientInput
+	Copy  func(*CreateUserPoolClientInput) CreateUserPoolClientRequest
 }
 
 // Send marshals and sends the CreateUserPoolClient API request.
@@ -1962,7 +1999,7 @@ func (c *CognitoIdentityProvider) CreateUserPoolClientRequest(input *CreateUserP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserPoolClientRequest{Request: req, Input: input}
+	return CreateUserPoolClientRequest{Request: req, Input: input, Copy: c.CreateUserPoolClientRequest}
 }
 
 const opCreateUserPoolDomain = "CreateUserPoolDomain"
@@ -1971,6 +2008,7 @@ const opCreateUserPoolDomain = "CreateUserPoolDomain"
 type CreateUserPoolDomainRequest struct {
 	*aws.Request
 	Input *CreateUserPoolDomainInput
+	Copy  func(*CreateUserPoolDomainInput) CreateUserPoolDomainRequest
 }
 
 // Send marshals and sends the CreateUserPoolDomain API request.
@@ -2011,7 +2049,7 @@ func (c *CognitoIdentityProvider) CreateUserPoolDomainRequest(input *CreateUserP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserPoolDomainRequest{Request: req, Input: input}
+	return CreateUserPoolDomainRequest{Request: req, Input: input, Copy: c.CreateUserPoolDomainRequest}
 }
 
 const opDeleteGroup = "DeleteGroup"
@@ -2020,6 +2058,7 @@ const opDeleteGroup = "DeleteGroup"
 type DeleteGroupRequest struct {
 	*aws.Request
 	Input *DeleteGroupInput
+	Copy  func(*DeleteGroupInput) DeleteGroupRequest
 }
 
 // Send marshals and sends the DeleteGroup API request.
@@ -2064,7 +2103,7 @@ func (c *CognitoIdentityProvider) DeleteGroupRequest(input *DeleteGroupInput) De
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGroupRequest{Request: req, Input: input}
+	return DeleteGroupRequest{Request: req, Input: input, Copy: c.DeleteGroupRequest}
 }
 
 const opDeleteIdentityProvider = "DeleteIdentityProvider"
@@ -2073,6 +2112,7 @@ const opDeleteIdentityProvider = "DeleteIdentityProvider"
 type DeleteIdentityProviderRequest struct {
 	*aws.Request
 	Input *DeleteIdentityProviderInput
+	Copy  func(*DeleteIdentityProviderInput) DeleteIdentityProviderRequest
 }
 
 // Send marshals and sends the DeleteIdentityProvider API request.
@@ -2115,7 +2155,7 @@ func (c *CognitoIdentityProvider) DeleteIdentityProviderRequest(input *DeleteIde
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIdentityProviderRequest{Request: req, Input: input}
+	return DeleteIdentityProviderRequest{Request: req, Input: input, Copy: c.DeleteIdentityProviderRequest}
 }
 
 const opDeleteResourceServer = "DeleteResourceServer"
@@ -2124,6 +2164,7 @@ const opDeleteResourceServer = "DeleteResourceServer"
 type DeleteResourceServerRequest struct {
 	*aws.Request
 	Input *DeleteResourceServerInput
+	Copy  func(*DeleteResourceServerInput) DeleteResourceServerRequest
 }
 
 // Send marshals and sends the DeleteResourceServer API request.
@@ -2166,7 +2207,7 @@ func (c *CognitoIdentityProvider) DeleteResourceServerRequest(input *DeleteResou
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteResourceServerRequest{Request: req, Input: input}
+	return DeleteResourceServerRequest{Request: req, Input: input, Copy: c.DeleteResourceServerRequest}
 }
 
 const opDeleteUser = "DeleteUser"
@@ -2175,6 +2216,7 @@ const opDeleteUser = "DeleteUser"
 type DeleteUserRequest struct {
 	*aws.Request
 	Input *DeleteUserInput
+	Copy  func(*DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -2218,7 +2260,7 @@ func (c *CognitoIdentityProvider) DeleteUserRequest(input *DeleteUserInput) Dele
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return DeleteUserRequest{Request: req, Input: input}
+	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
 const opDeleteUserAttributes = "DeleteUserAttributes"
@@ -2227,6 +2269,7 @@ const opDeleteUserAttributes = "DeleteUserAttributes"
 type DeleteUserAttributesRequest struct {
 	*aws.Request
 	Input *DeleteUserAttributesInput
+	Copy  func(*DeleteUserAttributesInput) DeleteUserAttributesRequest
 }
 
 // Send marshals and sends the DeleteUserAttributes API request.
@@ -2268,7 +2311,7 @@ func (c *CognitoIdentityProvider) DeleteUserAttributesRequest(input *DeleteUserA
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return DeleteUserAttributesRequest{Request: req, Input: input}
+	return DeleteUserAttributesRequest{Request: req, Input: input, Copy: c.DeleteUserAttributesRequest}
 }
 
 const opDeleteUserPool = "DeleteUserPool"
@@ -2277,6 +2320,7 @@ const opDeleteUserPool = "DeleteUserPool"
 type DeleteUserPoolRequest struct {
 	*aws.Request
 	Input *DeleteUserPoolInput
+	Copy  func(*DeleteUserPoolInput) DeleteUserPoolRequest
 }
 
 // Send marshals and sends the DeleteUserPool API request.
@@ -2319,7 +2363,7 @@ func (c *CognitoIdentityProvider) DeleteUserPoolRequest(input *DeleteUserPoolInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserPoolRequest{Request: req, Input: input}
+	return DeleteUserPoolRequest{Request: req, Input: input, Copy: c.DeleteUserPoolRequest}
 }
 
 const opDeleteUserPoolClient = "DeleteUserPoolClient"
@@ -2328,6 +2372,7 @@ const opDeleteUserPoolClient = "DeleteUserPoolClient"
 type DeleteUserPoolClientRequest struct {
 	*aws.Request
 	Input *DeleteUserPoolClientInput
+	Copy  func(*DeleteUserPoolClientInput) DeleteUserPoolClientRequest
 }
 
 // Send marshals and sends the DeleteUserPoolClient API request.
@@ -2370,7 +2415,7 @@ func (c *CognitoIdentityProvider) DeleteUserPoolClientRequest(input *DeleteUserP
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserPoolClientRequest{Request: req, Input: input}
+	return DeleteUserPoolClientRequest{Request: req, Input: input, Copy: c.DeleteUserPoolClientRequest}
 }
 
 const opDeleteUserPoolDomain = "DeleteUserPoolDomain"
@@ -2379,6 +2424,7 @@ const opDeleteUserPoolDomain = "DeleteUserPoolDomain"
 type DeleteUserPoolDomainRequest struct {
 	*aws.Request
 	Input *DeleteUserPoolDomainInput
+	Copy  func(*DeleteUserPoolDomainInput) DeleteUserPoolDomainRequest
 }
 
 // Send marshals and sends the DeleteUserPoolDomain API request.
@@ -2419,7 +2465,7 @@ func (c *CognitoIdentityProvider) DeleteUserPoolDomainRequest(input *DeleteUserP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserPoolDomainRequest{Request: req, Input: input}
+	return DeleteUserPoolDomainRequest{Request: req, Input: input, Copy: c.DeleteUserPoolDomainRequest}
 }
 
 const opDescribeIdentityProvider = "DescribeIdentityProvider"
@@ -2428,6 +2474,7 @@ const opDescribeIdentityProvider = "DescribeIdentityProvider"
 type DescribeIdentityProviderRequest struct {
 	*aws.Request
 	Input *DescribeIdentityProviderInput
+	Copy  func(*DescribeIdentityProviderInput) DescribeIdentityProviderRequest
 }
 
 // Send marshals and sends the DescribeIdentityProvider API request.
@@ -2468,7 +2515,7 @@ func (c *CognitoIdentityProvider) DescribeIdentityProviderRequest(input *Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeIdentityProviderRequest{Request: req, Input: input}
+	return DescribeIdentityProviderRequest{Request: req, Input: input, Copy: c.DescribeIdentityProviderRequest}
 }
 
 const opDescribeResourceServer = "DescribeResourceServer"
@@ -2477,6 +2524,7 @@ const opDescribeResourceServer = "DescribeResourceServer"
 type DescribeResourceServerRequest struct {
 	*aws.Request
 	Input *DescribeResourceServerInput
+	Copy  func(*DescribeResourceServerInput) DescribeResourceServerRequest
 }
 
 // Send marshals and sends the DescribeResourceServer API request.
@@ -2517,7 +2565,7 @@ func (c *CognitoIdentityProvider) DescribeResourceServerRequest(input *DescribeR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeResourceServerRequest{Request: req, Input: input}
+	return DescribeResourceServerRequest{Request: req, Input: input, Copy: c.DescribeResourceServerRequest}
 }
 
 const opDescribeRiskConfiguration = "DescribeRiskConfiguration"
@@ -2526,6 +2574,7 @@ const opDescribeRiskConfiguration = "DescribeRiskConfiguration"
 type DescribeRiskConfigurationRequest struct {
 	*aws.Request
 	Input *DescribeRiskConfigurationInput
+	Copy  func(*DescribeRiskConfigurationInput) DescribeRiskConfigurationRequest
 }
 
 // Send marshals and sends the DescribeRiskConfiguration API request.
@@ -2566,7 +2615,7 @@ func (c *CognitoIdentityProvider) DescribeRiskConfigurationRequest(input *Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRiskConfigurationRequest{Request: req, Input: input}
+	return DescribeRiskConfigurationRequest{Request: req, Input: input, Copy: c.DescribeRiskConfigurationRequest}
 }
 
 const opDescribeUserImportJob = "DescribeUserImportJob"
@@ -2575,6 +2624,7 @@ const opDescribeUserImportJob = "DescribeUserImportJob"
 type DescribeUserImportJobRequest struct {
 	*aws.Request
 	Input *DescribeUserImportJobInput
+	Copy  func(*DescribeUserImportJobInput) DescribeUserImportJobRequest
 }
 
 // Send marshals and sends the DescribeUserImportJob API request.
@@ -2615,7 +2665,7 @@ func (c *CognitoIdentityProvider) DescribeUserImportJobRequest(input *DescribeUs
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeUserImportJobRequest{Request: req, Input: input}
+	return DescribeUserImportJobRequest{Request: req, Input: input, Copy: c.DescribeUserImportJobRequest}
 }
 
 const opDescribeUserPool = "DescribeUserPool"
@@ -2624,6 +2674,7 @@ const opDescribeUserPool = "DescribeUserPool"
 type DescribeUserPoolRequest struct {
 	*aws.Request
 	Input *DescribeUserPoolInput
+	Copy  func(*DescribeUserPoolInput) DescribeUserPoolRequest
 }
 
 // Send marshals and sends the DescribeUserPool API request.
@@ -2665,7 +2716,7 @@ func (c *CognitoIdentityProvider) DescribeUserPoolRequest(input *DescribeUserPoo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeUserPoolRequest{Request: req, Input: input}
+	return DescribeUserPoolRequest{Request: req, Input: input, Copy: c.DescribeUserPoolRequest}
 }
 
 const opDescribeUserPoolClient = "DescribeUserPoolClient"
@@ -2674,6 +2725,7 @@ const opDescribeUserPoolClient = "DescribeUserPoolClient"
 type DescribeUserPoolClientRequest struct {
 	*aws.Request
 	Input *DescribeUserPoolClientInput
+	Copy  func(*DescribeUserPoolClientInput) DescribeUserPoolClientRequest
 }
 
 // Send marshals and sends the DescribeUserPoolClient API request.
@@ -2715,7 +2767,7 @@ func (c *CognitoIdentityProvider) DescribeUserPoolClientRequest(input *DescribeU
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeUserPoolClientRequest{Request: req, Input: input}
+	return DescribeUserPoolClientRequest{Request: req, Input: input, Copy: c.DescribeUserPoolClientRequest}
 }
 
 const opDescribeUserPoolDomain = "DescribeUserPoolDomain"
@@ -2724,6 +2776,7 @@ const opDescribeUserPoolDomain = "DescribeUserPoolDomain"
 type DescribeUserPoolDomainRequest struct {
 	*aws.Request
 	Input *DescribeUserPoolDomainInput
+	Copy  func(*DescribeUserPoolDomainInput) DescribeUserPoolDomainRequest
 }
 
 // Send marshals and sends the DescribeUserPoolDomain API request.
@@ -2764,7 +2817,7 @@ func (c *CognitoIdentityProvider) DescribeUserPoolDomainRequest(input *DescribeU
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeUserPoolDomainRequest{Request: req, Input: input}
+	return DescribeUserPoolDomainRequest{Request: req, Input: input, Copy: c.DescribeUserPoolDomainRequest}
 }
 
 const opForgetDevice = "ForgetDevice"
@@ -2773,6 +2826,7 @@ const opForgetDevice = "ForgetDevice"
 type ForgetDeviceRequest struct {
 	*aws.Request
 	Input *ForgetDeviceInput
+	Copy  func(*ForgetDeviceInput) ForgetDeviceRequest
 }
 
 // Send marshals and sends the ForgetDevice API request.
@@ -2815,7 +2869,7 @@ func (c *CognitoIdentityProvider) ForgetDeviceRequest(input *ForgetDeviceInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ForgetDeviceRequest{Request: req, Input: input}
+	return ForgetDeviceRequest{Request: req, Input: input, Copy: c.ForgetDeviceRequest}
 }
 
 const opForgotPassword = "ForgotPassword"
@@ -2824,6 +2878,7 @@ const opForgotPassword = "ForgotPassword"
 type ForgotPasswordRequest struct {
 	*aws.Request
 	Input *ForgotPasswordInput
+	Copy  func(*ForgotPasswordInput) ForgotPasswordRequest
 }
 
 // Send marshals and sends the ForgotPassword API request.
@@ -2872,7 +2927,7 @@ func (c *CognitoIdentityProvider) ForgotPasswordRequest(input *ForgotPasswordInp
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return ForgotPasswordRequest{Request: req, Input: input}
+	return ForgotPasswordRequest{Request: req, Input: input, Copy: c.ForgotPasswordRequest}
 }
 
 const opGetCSVHeader = "GetCSVHeader"
@@ -2881,6 +2936,7 @@ const opGetCSVHeader = "GetCSVHeader"
 type GetCSVHeaderRequest struct {
 	*aws.Request
 	Input *GetCSVHeaderInput
+	Copy  func(*GetCSVHeaderInput) GetCSVHeaderRequest
 }
 
 // Send marshals and sends the GetCSVHeader API request.
@@ -2922,7 +2978,7 @@ func (c *CognitoIdentityProvider) GetCSVHeaderRequest(input *GetCSVHeaderInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCSVHeaderRequest{Request: req, Input: input}
+	return GetCSVHeaderRequest{Request: req, Input: input, Copy: c.GetCSVHeaderRequest}
 }
 
 const opGetDevice = "GetDevice"
@@ -2931,6 +2987,7 @@ const opGetDevice = "GetDevice"
 type GetDeviceRequest struct {
 	*aws.Request
 	Input *GetDeviceInput
+	Copy  func(*GetDeviceInput) GetDeviceRequest
 }
 
 // Send marshals and sends the GetDevice API request.
@@ -2971,7 +3028,7 @@ func (c *CognitoIdentityProvider) GetDeviceRequest(input *GetDeviceInput) GetDev
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeviceRequest{Request: req, Input: input}
+	return GetDeviceRequest{Request: req, Input: input, Copy: c.GetDeviceRequest}
 }
 
 const opGetGroup = "GetGroup"
@@ -2980,6 +3037,7 @@ const opGetGroup = "GetGroup"
 type GetGroupRequest struct {
 	*aws.Request
 	Input *GetGroupInput
+	Copy  func(*GetGroupInput) GetGroupRequest
 }
 
 // Send marshals and sends the GetGroup API request.
@@ -3022,7 +3080,7 @@ func (c *CognitoIdentityProvider) GetGroupRequest(input *GetGroupInput) GetGroup
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGroupRequest{Request: req, Input: input}
+	return GetGroupRequest{Request: req, Input: input, Copy: c.GetGroupRequest}
 }
 
 const opGetIdentityProviderByIdentifier = "GetIdentityProviderByIdentifier"
@@ -3031,6 +3089,7 @@ const opGetIdentityProviderByIdentifier = "GetIdentityProviderByIdentifier"
 type GetIdentityProviderByIdentifierRequest struct {
 	*aws.Request
 	Input *GetIdentityProviderByIdentifierInput
+	Copy  func(*GetIdentityProviderByIdentifierInput) GetIdentityProviderByIdentifierRequest
 }
 
 // Send marshals and sends the GetIdentityProviderByIdentifier API request.
@@ -3071,7 +3130,7 @@ func (c *CognitoIdentityProvider) GetIdentityProviderByIdentifierRequest(input *
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIdentityProviderByIdentifierRequest{Request: req, Input: input}
+	return GetIdentityProviderByIdentifierRequest{Request: req, Input: input, Copy: c.GetIdentityProviderByIdentifierRequest}
 }
 
 const opGetUICustomization = "GetUICustomization"
@@ -3080,6 +3139,7 @@ const opGetUICustomization = "GetUICustomization"
 type GetUICustomizationRequest struct {
 	*aws.Request
 	Input *GetUICustomizationInput
+	Copy  func(*GetUICustomizationInput) GetUICustomizationRequest
 }
 
 // Send marshals and sends the GetUICustomization API request.
@@ -3123,7 +3183,7 @@ func (c *CognitoIdentityProvider) GetUICustomizationRequest(input *GetUICustomiz
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUICustomizationRequest{Request: req, Input: input}
+	return GetUICustomizationRequest{Request: req, Input: input, Copy: c.GetUICustomizationRequest}
 }
 
 const opGetUser = "GetUser"
@@ -3132,6 +3192,7 @@ const opGetUser = "GetUser"
 type GetUserRequest struct {
 	*aws.Request
 	Input *GetUserInput
+	Copy  func(*GetUserInput) GetUserRequest
 }
 
 // Send marshals and sends the GetUser API request.
@@ -3173,7 +3234,7 @@ func (c *CognitoIdentityProvider) GetUserRequest(input *GetUserInput) GetUserReq
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return GetUserRequest{Request: req, Input: input}
+	return GetUserRequest{Request: req, Input: input, Copy: c.GetUserRequest}
 }
 
 const opGetUserAttributeVerificationCode = "GetUserAttributeVerificationCode"
@@ -3182,6 +3243,7 @@ const opGetUserAttributeVerificationCode = "GetUserAttributeVerificationCode"
 type GetUserAttributeVerificationCodeRequest struct {
 	*aws.Request
 	Input *GetUserAttributeVerificationCodeInput
+	Copy  func(*GetUserAttributeVerificationCodeInput) GetUserAttributeVerificationCodeRequest
 }
 
 // Send marshals and sends the GetUserAttributeVerificationCode API request.
@@ -3223,7 +3285,7 @@ func (c *CognitoIdentityProvider) GetUserAttributeVerificationCodeRequest(input 
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return GetUserAttributeVerificationCodeRequest{Request: req, Input: input}
+	return GetUserAttributeVerificationCodeRequest{Request: req, Input: input, Copy: c.GetUserAttributeVerificationCodeRequest}
 }
 
 const opGetUserPoolMfaConfig = "GetUserPoolMfaConfig"
@@ -3232,6 +3294,7 @@ const opGetUserPoolMfaConfig = "GetUserPoolMfaConfig"
 type GetUserPoolMfaConfigRequest struct {
 	*aws.Request
 	Input *GetUserPoolMfaConfigInput
+	Copy  func(*GetUserPoolMfaConfigInput) GetUserPoolMfaConfigRequest
 }
 
 // Send marshals and sends the GetUserPoolMfaConfig API request.
@@ -3272,7 +3335,7 @@ func (c *CognitoIdentityProvider) GetUserPoolMfaConfigRequest(input *GetUserPool
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUserPoolMfaConfigRequest{Request: req, Input: input}
+	return GetUserPoolMfaConfigRequest{Request: req, Input: input, Copy: c.GetUserPoolMfaConfigRequest}
 }
 
 const opGlobalSignOut = "GlobalSignOut"
@@ -3281,6 +3344,7 @@ const opGlobalSignOut = "GlobalSignOut"
 type GlobalSignOutRequest struct {
 	*aws.Request
 	Input *GlobalSignOutInput
+	Copy  func(*GlobalSignOutInput) GlobalSignOutRequest
 }
 
 // Send marshals and sends the GlobalSignOut API request.
@@ -3321,7 +3385,7 @@ func (c *CognitoIdentityProvider) GlobalSignOutRequest(input *GlobalSignOutInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GlobalSignOutRequest{Request: req, Input: input}
+	return GlobalSignOutRequest{Request: req, Input: input, Copy: c.GlobalSignOutRequest}
 }
 
 const opInitiateAuth = "InitiateAuth"
@@ -3330,6 +3394,7 @@ const opInitiateAuth = "InitiateAuth"
 type InitiateAuthRequest struct {
 	*aws.Request
 	Input *InitiateAuthInput
+	Copy  func(*InitiateAuthInput) InitiateAuthRequest
 }
 
 // Send marshals and sends the InitiateAuth API request.
@@ -3370,7 +3435,7 @@ func (c *CognitoIdentityProvider) InitiateAuthRequest(input *InitiateAuthInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InitiateAuthRequest{Request: req, Input: input}
+	return InitiateAuthRequest{Request: req, Input: input, Copy: c.InitiateAuthRequest}
 }
 
 const opListDevices = "ListDevices"
@@ -3379,6 +3444,7 @@ const opListDevices = "ListDevices"
 type ListDevicesRequest struct {
 	*aws.Request
 	Input *ListDevicesInput
+	Copy  func(*ListDevicesInput) ListDevicesRequest
 }
 
 // Send marshals and sends the ListDevices API request.
@@ -3419,7 +3485,7 @@ func (c *CognitoIdentityProvider) ListDevicesRequest(input *ListDevicesInput) Li
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDevicesRequest{Request: req, Input: input}
+	return ListDevicesRequest{Request: req, Input: input, Copy: c.ListDevicesRequest}
 }
 
 const opListGroups = "ListGroups"
@@ -3428,6 +3494,7 @@ const opListGroups = "ListGroups"
 type ListGroupsRequest struct {
 	*aws.Request
 	Input *ListGroupsInput
+	Copy  func(*ListGroupsInput) ListGroupsRequest
 }
 
 // Send marshals and sends the ListGroups API request.
@@ -3470,7 +3537,7 @@ func (c *CognitoIdentityProvider) ListGroupsRequest(input *ListGroupsInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupsRequest{Request: req, Input: input}
+	return ListGroupsRequest{Request: req, Input: input, Copy: c.ListGroupsRequest}
 }
 
 const opListIdentityProviders = "ListIdentityProviders"
@@ -3479,6 +3546,7 @@ const opListIdentityProviders = "ListIdentityProviders"
 type ListIdentityProvidersRequest struct {
 	*aws.Request
 	Input *ListIdentityProvidersInput
+	Copy  func(*ListIdentityProvidersInput) ListIdentityProvidersRequest
 }
 
 // Send marshals and sends the ListIdentityProviders API request.
@@ -3519,7 +3587,7 @@ func (c *CognitoIdentityProvider) ListIdentityProvidersRequest(input *ListIdenti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIdentityProvidersRequest{Request: req, Input: input}
+	return ListIdentityProvidersRequest{Request: req, Input: input, Copy: c.ListIdentityProvidersRequest}
 }
 
 const opListResourceServers = "ListResourceServers"
@@ -3528,6 +3596,7 @@ const opListResourceServers = "ListResourceServers"
 type ListResourceServersRequest struct {
 	*aws.Request
 	Input *ListResourceServersInput
+	Copy  func(*ListResourceServersInput) ListResourceServersRequest
 }
 
 // Send marshals and sends the ListResourceServers API request.
@@ -3568,7 +3637,7 @@ func (c *CognitoIdentityProvider) ListResourceServersRequest(input *ListResource
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourceServersRequest{Request: req, Input: input}
+	return ListResourceServersRequest{Request: req, Input: input, Copy: c.ListResourceServersRequest}
 }
 
 const opListUserImportJobs = "ListUserImportJobs"
@@ -3577,6 +3646,7 @@ const opListUserImportJobs = "ListUserImportJobs"
 type ListUserImportJobsRequest struct {
 	*aws.Request
 	Input *ListUserImportJobsInput
+	Copy  func(*ListUserImportJobsInput) ListUserImportJobsRequest
 }
 
 // Send marshals and sends the ListUserImportJobs API request.
@@ -3617,7 +3687,7 @@ func (c *CognitoIdentityProvider) ListUserImportJobsRequest(input *ListUserImpor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUserImportJobsRequest{Request: req, Input: input}
+	return ListUserImportJobsRequest{Request: req, Input: input, Copy: c.ListUserImportJobsRequest}
 }
 
 const opListUserPoolClients = "ListUserPoolClients"
@@ -3626,6 +3696,7 @@ const opListUserPoolClients = "ListUserPoolClients"
 type ListUserPoolClientsRequest struct {
 	*aws.Request
 	Input *ListUserPoolClientsInput
+	Copy  func(*ListUserPoolClientsInput) ListUserPoolClientsRequest
 }
 
 // Send marshals and sends the ListUserPoolClients API request.
@@ -3666,7 +3737,7 @@ func (c *CognitoIdentityProvider) ListUserPoolClientsRequest(input *ListUserPool
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUserPoolClientsRequest{Request: req, Input: input}
+	return ListUserPoolClientsRequest{Request: req, Input: input, Copy: c.ListUserPoolClientsRequest}
 }
 
 const opListUserPools = "ListUserPools"
@@ -3675,6 +3746,7 @@ const opListUserPools = "ListUserPools"
 type ListUserPoolsRequest struct {
 	*aws.Request
 	Input *ListUserPoolsInput
+	Copy  func(*ListUserPoolsInput) ListUserPoolsRequest
 }
 
 // Send marshals and sends the ListUserPools API request.
@@ -3715,7 +3787,7 @@ func (c *CognitoIdentityProvider) ListUserPoolsRequest(input *ListUserPoolsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUserPoolsRequest{Request: req, Input: input}
+	return ListUserPoolsRequest{Request: req, Input: input, Copy: c.ListUserPoolsRequest}
 }
 
 const opListUsers = "ListUsers"
@@ -3724,6 +3796,7 @@ const opListUsers = "ListUsers"
 type ListUsersRequest struct {
 	*aws.Request
 	Input *ListUsersInput
+	Copy  func(*ListUsersInput) ListUsersRequest
 }
 
 // Send marshals and sends the ListUsers API request.
@@ -3764,7 +3837,7 @@ func (c *CognitoIdentityProvider) ListUsersRequest(input *ListUsersInput) ListUs
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUsersRequest{Request: req, Input: input}
+	return ListUsersRequest{Request: req, Input: input, Copy: c.ListUsersRequest}
 }
 
 const opListUsersInGroup = "ListUsersInGroup"
@@ -3773,6 +3846,7 @@ const opListUsersInGroup = "ListUsersInGroup"
 type ListUsersInGroupRequest struct {
 	*aws.Request
 	Input *ListUsersInGroupInput
+	Copy  func(*ListUsersInGroupInput) ListUsersInGroupRequest
 }
 
 // Send marshals and sends the ListUsersInGroup API request.
@@ -3815,7 +3889,7 @@ func (c *CognitoIdentityProvider) ListUsersInGroupRequest(input *ListUsersInGrou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUsersInGroupRequest{Request: req, Input: input}
+	return ListUsersInGroupRequest{Request: req, Input: input, Copy: c.ListUsersInGroupRequest}
 }
 
 const opResendConfirmationCode = "ResendConfirmationCode"
@@ -3824,6 +3898,7 @@ const opResendConfirmationCode = "ResendConfirmationCode"
 type ResendConfirmationCodeRequest struct {
 	*aws.Request
 	Input *ResendConfirmationCodeInput
+	Copy  func(*ResendConfirmationCodeInput) ResendConfirmationCodeRequest
 }
 
 // Send marshals and sends the ResendConfirmationCode API request.
@@ -3866,7 +3941,7 @@ func (c *CognitoIdentityProvider) ResendConfirmationCodeRequest(input *ResendCon
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return ResendConfirmationCodeRequest{Request: req, Input: input}
+	return ResendConfirmationCodeRequest{Request: req, Input: input, Copy: c.ResendConfirmationCodeRequest}
 }
 
 const opRespondToAuthChallenge = "RespondToAuthChallenge"
@@ -3875,6 +3950,7 @@ const opRespondToAuthChallenge = "RespondToAuthChallenge"
 type RespondToAuthChallengeRequest struct {
 	*aws.Request
 	Input *RespondToAuthChallengeInput
+	Copy  func(*RespondToAuthChallengeInput) RespondToAuthChallengeRequest
 }
 
 // Send marshals and sends the RespondToAuthChallenge API request.
@@ -3915,7 +3991,7 @@ func (c *CognitoIdentityProvider) RespondToAuthChallengeRequest(input *RespondTo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RespondToAuthChallengeRequest{Request: req, Input: input}
+	return RespondToAuthChallengeRequest{Request: req, Input: input, Copy: c.RespondToAuthChallengeRequest}
 }
 
 const opSetRiskConfiguration = "SetRiskConfiguration"
@@ -3924,6 +4000,7 @@ const opSetRiskConfiguration = "SetRiskConfiguration"
 type SetRiskConfigurationRequest struct {
 	*aws.Request
 	Input *SetRiskConfigurationInput
+	Copy  func(*SetRiskConfigurationInput) SetRiskConfigurationRequest
 }
 
 // Send marshals and sends the SetRiskConfiguration API request.
@@ -3970,7 +4047,7 @@ func (c *CognitoIdentityProvider) SetRiskConfigurationRequest(input *SetRiskConf
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetRiskConfigurationRequest{Request: req, Input: input}
+	return SetRiskConfigurationRequest{Request: req, Input: input, Copy: c.SetRiskConfigurationRequest}
 }
 
 const opSetUICustomization = "SetUICustomization"
@@ -3979,6 +4056,7 @@ const opSetUICustomization = "SetUICustomization"
 type SetUICustomizationRequest struct {
 	*aws.Request
 	Input *SetUICustomizationInput
+	Copy  func(*SetUICustomizationInput) SetUICustomizationRequest
 }
 
 // Send marshals and sends the SetUICustomization API request.
@@ -4030,7 +4108,7 @@ func (c *CognitoIdentityProvider) SetUICustomizationRequest(input *SetUICustomiz
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetUICustomizationRequest{Request: req, Input: input}
+	return SetUICustomizationRequest{Request: req, Input: input, Copy: c.SetUICustomizationRequest}
 }
 
 const opSetUserMFAPreference = "SetUserMFAPreference"
@@ -4039,6 +4117,7 @@ const opSetUserMFAPreference = "SetUserMFAPreference"
 type SetUserMFAPreferenceRequest struct {
 	*aws.Request
 	Input *SetUserMFAPreferenceInput
+	Copy  func(*SetUserMFAPreferenceInput) SetUserMFAPreferenceRequest
 }
 
 // Send marshals and sends the SetUserMFAPreference API request.
@@ -4079,7 +4158,7 @@ func (c *CognitoIdentityProvider) SetUserMFAPreferenceRequest(input *SetUserMFAP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetUserMFAPreferenceRequest{Request: req, Input: input}
+	return SetUserMFAPreferenceRequest{Request: req, Input: input, Copy: c.SetUserMFAPreferenceRequest}
 }
 
 const opSetUserPoolMfaConfig = "SetUserPoolMfaConfig"
@@ -4088,6 +4167,7 @@ const opSetUserPoolMfaConfig = "SetUserPoolMfaConfig"
 type SetUserPoolMfaConfigRequest struct {
 	*aws.Request
 	Input *SetUserPoolMfaConfigInput
+	Copy  func(*SetUserPoolMfaConfigInput) SetUserPoolMfaConfigRequest
 }
 
 // Send marshals and sends the SetUserPoolMfaConfig API request.
@@ -4128,7 +4208,7 @@ func (c *CognitoIdentityProvider) SetUserPoolMfaConfigRequest(input *SetUserPool
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetUserPoolMfaConfigRequest{Request: req, Input: input}
+	return SetUserPoolMfaConfigRequest{Request: req, Input: input, Copy: c.SetUserPoolMfaConfigRequest}
 }
 
 const opSetUserSettings = "SetUserSettings"
@@ -4137,6 +4217,7 @@ const opSetUserSettings = "SetUserSettings"
 type SetUserSettingsRequest struct {
 	*aws.Request
 	Input *SetUserSettingsInput
+	Copy  func(*SetUserSettingsInput) SetUserSettingsRequest
 }
 
 // Send marshals and sends the SetUserSettings API request.
@@ -4180,7 +4261,7 @@ func (c *CognitoIdentityProvider) SetUserSettingsRequest(input *SetUserSettingsI
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return SetUserSettingsRequest{Request: req, Input: input}
+	return SetUserSettingsRequest{Request: req, Input: input, Copy: c.SetUserSettingsRequest}
 }
 
 const opSignUp = "SignUp"
@@ -4189,6 +4270,7 @@ const opSignUp = "SignUp"
 type SignUpRequest struct {
 	*aws.Request
 	Input *SignUpInput
+	Copy  func(*SignUpInput) SignUpRequest
 }
 
 // Send marshals and sends the SignUp API request.
@@ -4231,7 +4313,7 @@ func (c *CognitoIdentityProvider) SignUpRequest(input *SignUpInput) SignUpReques
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return SignUpRequest{Request: req, Input: input}
+	return SignUpRequest{Request: req, Input: input, Copy: c.SignUpRequest}
 }
 
 const opStartUserImportJob = "StartUserImportJob"
@@ -4240,6 +4322,7 @@ const opStartUserImportJob = "StartUserImportJob"
 type StartUserImportJobRequest struct {
 	*aws.Request
 	Input *StartUserImportJobInput
+	Copy  func(*StartUserImportJobInput) StartUserImportJobRequest
 }
 
 // Send marshals and sends the StartUserImportJob API request.
@@ -4280,7 +4363,7 @@ func (c *CognitoIdentityProvider) StartUserImportJobRequest(input *StartUserImpo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartUserImportJobRequest{Request: req, Input: input}
+	return StartUserImportJobRequest{Request: req, Input: input, Copy: c.StartUserImportJobRequest}
 }
 
 const opStopUserImportJob = "StopUserImportJob"
@@ -4289,6 +4372,7 @@ const opStopUserImportJob = "StopUserImportJob"
 type StopUserImportJobRequest struct {
 	*aws.Request
 	Input *StopUserImportJobInput
+	Copy  func(*StopUserImportJobInput) StopUserImportJobRequest
 }
 
 // Send marshals and sends the StopUserImportJob API request.
@@ -4329,7 +4413,7 @@ func (c *CognitoIdentityProvider) StopUserImportJobRequest(input *StopUserImport
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopUserImportJobRequest{Request: req, Input: input}
+	return StopUserImportJobRequest{Request: req, Input: input, Copy: c.StopUserImportJobRequest}
 }
 
 const opUpdateAuthEventFeedback = "UpdateAuthEventFeedback"
@@ -4338,6 +4422,7 @@ const opUpdateAuthEventFeedback = "UpdateAuthEventFeedback"
 type UpdateAuthEventFeedbackRequest struct {
 	*aws.Request
 	Input *UpdateAuthEventFeedbackInput
+	Copy  func(*UpdateAuthEventFeedbackInput) UpdateAuthEventFeedbackRequest
 }
 
 // Send marshals and sends the UpdateAuthEventFeedback API request.
@@ -4380,7 +4465,7 @@ func (c *CognitoIdentityProvider) UpdateAuthEventFeedbackRequest(input *UpdateAu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAuthEventFeedbackRequest{Request: req, Input: input}
+	return UpdateAuthEventFeedbackRequest{Request: req, Input: input, Copy: c.UpdateAuthEventFeedbackRequest}
 }
 
 const opUpdateDeviceStatus = "UpdateDeviceStatus"
@@ -4389,6 +4474,7 @@ const opUpdateDeviceStatus = "UpdateDeviceStatus"
 type UpdateDeviceStatusRequest struct {
 	*aws.Request
 	Input *UpdateDeviceStatusInput
+	Copy  func(*UpdateDeviceStatusInput) UpdateDeviceStatusRequest
 }
 
 // Send marshals and sends the UpdateDeviceStatus API request.
@@ -4429,7 +4515,7 @@ func (c *CognitoIdentityProvider) UpdateDeviceStatusRequest(input *UpdateDeviceS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDeviceStatusRequest{Request: req, Input: input}
+	return UpdateDeviceStatusRequest{Request: req, Input: input, Copy: c.UpdateDeviceStatusRequest}
 }
 
 const opUpdateGroup = "UpdateGroup"
@@ -4438,6 +4524,7 @@ const opUpdateGroup = "UpdateGroup"
 type UpdateGroupRequest struct {
 	*aws.Request
 	Input *UpdateGroupInput
+	Copy  func(*UpdateGroupInput) UpdateGroupRequest
 }
 
 // Send marshals and sends the UpdateGroup API request.
@@ -4480,7 +4567,7 @@ func (c *CognitoIdentityProvider) UpdateGroupRequest(input *UpdateGroupInput) Up
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGroupRequest{Request: req, Input: input}
+	return UpdateGroupRequest{Request: req, Input: input, Copy: c.UpdateGroupRequest}
 }
 
 const opUpdateIdentityProvider = "UpdateIdentityProvider"
@@ -4489,6 +4576,7 @@ const opUpdateIdentityProvider = "UpdateIdentityProvider"
 type UpdateIdentityProviderRequest struct {
 	*aws.Request
 	Input *UpdateIdentityProviderInput
+	Copy  func(*UpdateIdentityProviderInput) UpdateIdentityProviderRequest
 }
 
 // Send marshals and sends the UpdateIdentityProvider API request.
@@ -4529,7 +4617,7 @@ func (c *CognitoIdentityProvider) UpdateIdentityProviderRequest(input *UpdateIde
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateIdentityProviderRequest{Request: req, Input: input}
+	return UpdateIdentityProviderRequest{Request: req, Input: input, Copy: c.UpdateIdentityProviderRequest}
 }
 
 const opUpdateResourceServer = "UpdateResourceServer"
@@ -4538,6 +4626,7 @@ const opUpdateResourceServer = "UpdateResourceServer"
 type UpdateResourceServerRequest struct {
 	*aws.Request
 	Input *UpdateResourceServerInput
+	Copy  func(*UpdateResourceServerInput) UpdateResourceServerRequest
 }
 
 // Send marshals and sends the UpdateResourceServer API request.
@@ -4578,7 +4667,7 @@ func (c *CognitoIdentityProvider) UpdateResourceServerRequest(input *UpdateResou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateResourceServerRequest{Request: req, Input: input}
+	return UpdateResourceServerRequest{Request: req, Input: input, Copy: c.UpdateResourceServerRequest}
 }
 
 const opUpdateUserAttributes = "UpdateUserAttributes"
@@ -4587,6 +4676,7 @@ const opUpdateUserAttributes = "UpdateUserAttributes"
 type UpdateUserAttributesRequest struct {
 	*aws.Request
 	Input *UpdateUserAttributesInput
+	Copy  func(*UpdateUserAttributesInput) UpdateUserAttributesRequest
 }
 
 // Send marshals and sends the UpdateUserAttributes API request.
@@ -4628,7 +4718,7 @@ func (c *CognitoIdentityProvider) UpdateUserAttributesRequest(input *UpdateUserA
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return UpdateUserAttributesRequest{Request: req, Input: input}
+	return UpdateUserAttributesRequest{Request: req, Input: input, Copy: c.UpdateUserAttributesRequest}
 }
 
 const opUpdateUserPool = "UpdateUserPool"
@@ -4637,6 +4727,7 @@ const opUpdateUserPool = "UpdateUserPool"
 type UpdateUserPoolRequest struct {
 	*aws.Request
 	Input *UpdateUserPoolInput
+	Copy  func(*UpdateUserPoolInput) UpdateUserPoolRequest
 }
 
 // Send marshals and sends the UpdateUserPool API request.
@@ -4677,7 +4768,7 @@ func (c *CognitoIdentityProvider) UpdateUserPoolRequest(input *UpdateUserPoolInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateUserPoolRequest{Request: req, Input: input}
+	return UpdateUserPoolRequest{Request: req, Input: input, Copy: c.UpdateUserPoolRequest}
 }
 
 const opUpdateUserPoolClient = "UpdateUserPoolClient"
@@ -4686,6 +4777,7 @@ const opUpdateUserPoolClient = "UpdateUserPoolClient"
 type UpdateUserPoolClientRequest struct {
 	*aws.Request
 	Input *UpdateUserPoolClientInput
+	Copy  func(*UpdateUserPoolClientInput) UpdateUserPoolClientRequest
 }
 
 // Send marshals and sends the UpdateUserPoolClient API request.
@@ -4727,7 +4819,7 @@ func (c *CognitoIdentityProvider) UpdateUserPoolClientRequest(input *UpdateUserP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateUserPoolClientRequest{Request: req, Input: input}
+	return UpdateUserPoolClientRequest{Request: req, Input: input, Copy: c.UpdateUserPoolClientRequest}
 }
 
 const opVerifySoftwareToken = "VerifySoftwareToken"
@@ -4736,6 +4828,7 @@ const opVerifySoftwareToken = "VerifySoftwareToken"
 type VerifySoftwareTokenRequest struct {
 	*aws.Request
 	Input *VerifySoftwareTokenInput
+	Copy  func(*VerifySoftwareTokenInput) VerifySoftwareTokenRequest
 }
 
 // Send marshals and sends the VerifySoftwareToken API request.
@@ -4777,7 +4870,7 @@ func (c *CognitoIdentityProvider) VerifySoftwareTokenRequest(input *VerifySoftwa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return VerifySoftwareTokenRequest{Request: req, Input: input}
+	return VerifySoftwareTokenRequest{Request: req, Input: input, Copy: c.VerifySoftwareTokenRequest}
 }
 
 const opVerifyUserAttribute = "VerifyUserAttribute"
@@ -4786,6 +4879,7 @@ const opVerifyUserAttribute = "VerifyUserAttribute"
 type VerifyUserAttributeRequest struct {
 	*aws.Request
 	Input *VerifyUserAttributeInput
+	Copy  func(*VerifyUserAttributeInput) VerifyUserAttributeRequest
 }
 
 // Send marshals and sends the VerifyUserAttribute API request.
@@ -4827,7 +4921,7 @@ func (c *CognitoIdentityProvider) VerifyUserAttributeRequest(input *VerifyUserAt
 	output.responseMetadata = aws.Response{Request: req}
 
 	req.Config.Credentials = aws.AnonymousCredentials
-	return VerifyUserAttributeRequest{Request: req, Input: input}
+	return VerifyUserAttributeRequest{Request: req, Input: input, Copy: c.VerifyUserAttributeRequest}
 }
 
 // Account takeover action type.

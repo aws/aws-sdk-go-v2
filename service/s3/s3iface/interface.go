@@ -161,28 +161,13 @@ type S3API interface {
 
 	ListMultipartUploadsRequest(*s3.ListMultipartUploadsInput) s3.ListMultipartUploadsRequest
 
-	ListMultipartUploadsPages(*s3.ListMultipartUploadsInput, func(*s3.ListMultipartUploadsOutput, bool) bool) error
-	ListMultipartUploadsPagesWithContext(aws.Context, *s3.ListMultipartUploadsInput, func(*s3.ListMultipartUploadsOutput, bool) bool, ...aws.Option) error
-
 	ListObjectVersionsRequest(*s3.ListObjectVersionsInput) s3.ListObjectVersionsRequest
-
-	ListObjectVersionsPages(*s3.ListObjectVersionsInput, func(*s3.ListObjectVersionsOutput, bool) bool) error
-	ListObjectVersionsPagesWithContext(aws.Context, *s3.ListObjectVersionsInput, func(*s3.ListObjectVersionsOutput, bool) bool, ...aws.Option) error
 
 	ListObjectsRequest(*s3.ListObjectsInput) s3.ListObjectsRequest
 
-	ListObjectsPages(*s3.ListObjectsInput, func(*s3.ListObjectsOutput, bool) bool) error
-	ListObjectsPagesWithContext(aws.Context, *s3.ListObjectsInput, func(*s3.ListObjectsOutput, bool) bool, ...aws.Option) error
-
 	ListObjectsV2Request(*s3.ListObjectsV2Input) s3.ListObjectsV2Request
 
-	ListObjectsV2Pages(*s3.ListObjectsV2Input, func(*s3.ListObjectsV2Output, bool) bool) error
-	ListObjectsV2PagesWithContext(aws.Context, *s3.ListObjectsV2Input, func(*s3.ListObjectsV2Output, bool) bool, ...aws.Option) error
-
 	ListPartsRequest(*s3.ListPartsInput) s3.ListPartsRequest
-
-	ListPartsPages(*s3.ListPartsInput, func(*s3.ListPartsOutput, bool) bool) error
-	ListPartsPagesWithContext(aws.Context, *s3.ListPartsInput, func(*s3.ListPartsOutput, bool) bool, ...aws.Option) error
 
 	PutBucketAccelerateConfigurationRequest(*s3.PutBucketAccelerateConfigurationInput) s3.PutBucketAccelerateConfigurationRequest
 

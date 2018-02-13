@@ -18,6 +18,7 @@ const opCreateBotVersion = "CreateBotVersion"
 type CreateBotVersionRequest struct {
 	*aws.Request
 	Input *CreateBotVersionInput
+	Copy  func(*CreateBotVersionInput) CreateBotVersionRequest
 }
 
 // Send marshals and sends the CreateBotVersion API request.
@@ -68,7 +69,7 @@ func (c *LexModelBuildingService) CreateBotVersionRequest(input *CreateBotVersio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBotVersionRequest{Request: req, Input: input}
+	return CreateBotVersionRequest{Request: req, Input: input, Copy: c.CreateBotVersionRequest}
 }
 
 const opCreateIntentVersion = "CreateIntentVersion"
@@ -77,6 +78,7 @@ const opCreateIntentVersion = "CreateIntentVersion"
 type CreateIntentVersionRequest struct {
 	*aws.Request
 	Input *CreateIntentVersionInput
+	Copy  func(*CreateIntentVersionInput) CreateIntentVersionRequest
 }
 
 // Send marshals and sends the CreateIntentVersion API request.
@@ -129,7 +131,7 @@ func (c *LexModelBuildingService) CreateIntentVersionRequest(input *CreateIntent
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateIntentVersionRequest{Request: req, Input: input}
+	return CreateIntentVersionRequest{Request: req, Input: input, Copy: c.CreateIntentVersionRequest}
 }
 
 const opCreateSlotTypeVersion = "CreateSlotTypeVersion"
@@ -138,6 +140,7 @@ const opCreateSlotTypeVersion = "CreateSlotTypeVersion"
 type CreateSlotTypeVersionRequest struct {
 	*aws.Request
 	Input *CreateSlotTypeVersionInput
+	Copy  func(*CreateSlotTypeVersionInput) CreateSlotTypeVersionRequest
 }
 
 // Send marshals and sends the CreateSlotTypeVersion API request.
@@ -189,7 +192,7 @@ func (c *LexModelBuildingService) CreateSlotTypeVersionRequest(input *CreateSlot
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSlotTypeVersionRequest{Request: req, Input: input}
+	return CreateSlotTypeVersionRequest{Request: req, Input: input, Copy: c.CreateSlotTypeVersionRequest}
 }
 
 const opDeleteBot = "DeleteBot"
@@ -198,6 +201,7 @@ const opDeleteBot = "DeleteBot"
 type DeleteBotRequest struct {
 	*aws.Request
 	Input *DeleteBotInput
+	Copy  func(*DeleteBotInput) DeleteBotRequest
 }
 
 // Send marshals and sends the DeleteBot API request.
@@ -249,7 +253,7 @@ func (c *LexModelBuildingService) DeleteBotRequest(input *DeleteBotInput) Delete
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBotRequest{Request: req, Input: input}
+	return DeleteBotRequest{Request: req, Input: input, Copy: c.DeleteBotRequest}
 }
 
 const opDeleteBotAlias = "DeleteBotAlias"
@@ -258,6 +262,7 @@ const opDeleteBotAlias = "DeleteBotAlias"
 type DeleteBotAliasRequest struct {
 	*aws.Request
 	Input *DeleteBotAliasInput
+	Copy  func(*DeleteBotAliasInput) DeleteBotAliasRequest
 }
 
 // Send marshals and sends the DeleteBotAlias API request.
@@ -308,7 +313,7 @@ func (c *LexModelBuildingService) DeleteBotAliasRequest(input *DeleteBotAliasInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBotAliasRequest{Request: req, Input: input}
+	return DeleteBotAliasRequest{Request: req, Input: input, Copy: c.DeleteBotAliasRequest}
 }
 
 const opDeleteBotChannelAssociation = "DeleteBotChannelAssociation"
@@ -317,6 +322,7 @@ const opDeleteBotChannelAssociation = "DeleteBotChannelAssociation"
 type DeleteBotChannelAssociationRequest struct {
 	*aws.Request
 	Input *DeleteBotChannelAssociationInput
+	Copy  func(*DeleteBotChannelAssociationInput) DeleteBotChannelAssociationRequest
 }
 
 // Send marshals and sends the DeleteBotChannelAssociation API request.
@@ -362,7 +368,7 @@ func (c *LexModelBuildingService) DeleteBotChannelAssociationRequest(input *Dele
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBotChannelAssociationRequest{Request: req, Input: input}
+	return DeleteBotChannelAssociationRequest{Request: req, Input: input, Copy: c.DeleteBotChannelAssociationRequest}
 }
 
 const opDeleteBotVersion = "DeleteBotVersion"
@@ -371,6 +377,7 @@ const opDeleteBotVersion = "DeleteBotVersion"
 type DeleteBotVersionRequest struct {
 	*aws.Request
 	Input *DeleteBotVersionInput
+	Copy  func(*DeleteBotVersionInput) DeleteBotVersionRequest
 }
 
 // Send marshals and sends the DeleteBotVersion API request.
@@ -416,7 +423,7 @@ func (c *LexModelBuildingService) DeleteBotVersionRequest(input *DeleteBotVersio
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBotVersionRequest{Request: req, Input: input}
+	return DeleteBotVersionRequest{Request: req, Input: input, Copy: c.DeleteBotVersionRequest}
 }
 
 const opDeleteIntent = "DeleteIntent"
@@ -425,6 +432,7 @@ const opDeleteIntent = "DeleteIntent"
 type DeleteIntentRequest struct {
 	*aws.Request
 	Input *DeleteIntentInput
+	Copy  func(*DeleteIntentInput) DeleteIntentRequest
 }
 
 // Send marshals and sends the DeleteIntent API request.
@@ -480,7 +488,7 @@ func (c *LexModelBuildingService) DeleteIntentRequest(input *DeleteIntentInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIntentRequest{Request: req, Input: input}
+	return DeleteIntentRequest{Request: req, Input: input, Copy: c.DeleteIntentRequest}
 }
 
 const opDeleteIntentVersion = "DeleteIntentVersion"
@@ -489,6 +497,7 @@ const opDeleteIntentVersion = "DeleteIntentVersion"
 type DeleteIntentVersionRequest struct {
 	*aws.Request
 	Input *DeleteIntentVersionInput
+	Copy  func(*DeleteIntentVersionInput) DeleteIntentVersionRequest
 }
 
 // Send marshals and sends the DeleteIntentVersion API request.
@@ -534,7 +543,7 @@ func (c *LexModelBuildingService) DeleteIntentVersionRequest(input *DeleteIntent
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIntentVersionRequest{Request: req, Input: input}
+	return DeleteIntentVersionRequest{Request: req, Input: input, Copy: c.DeleteIntentVersionRequest}
 }
 
 const opDeleteSlotType = "DeleteSlotType"
@@ -543,6 +552,7 @@ const opDeleteSlotType = "DeleteSlotType"
 type DeleteSlotTypeRequest struct {
 	*aws.Request
 	Input *DeleteSlotTypeInput
+	Copy  func(*DeleteSlotTypeInput) DeleteSlotTypeRequest
 }
 
 // Send marshals and sends the DeleteSlotType API request.
@@ -600,7 +610,7 @@ func (c *LexModelBuildingService) DeleteSlotTypeRequest(input *DeleteSlotTypeInp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSlotTypeRequest{Request: req, Input: input}
+	return DeleteSlotTypeRequest{Request: req, Input: input, Copy: c.DeleteSlotTypeRequest}
 }
 
 const opDeleteSlotTypeVersion = "DeleteSlotTypeVersion"
@@ -609,6 +619,7 @@ const opDeleteSlotTypeVersion = "DeleteSlotTypeVersion"
 type DeleteSlotTypeVersionRequest struct {
 	*aws.Request
 	Input *DeleteSlotTypeVersionInput
+	Copy  func(*DeleteSlotTypeVersionInput) DeleteSlotTypeVersionRequest
 }
 
 // Send marshals and sends the DeleteSlotTypeVersion API request.
@@ -654,7 +665,7 @@ func (c *LexModelBuildingService) DeleteSlotTypeVersionRequest(input *DeleteSlot
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSlotTypeVersionRequest{Request: req, Input: input}
+	return DeleteSlotTypeVersionRequest{Request: req, Input: input, Copy: c.DeleteSlotTypeVersionRequest}
 }
 
 const opDeleteUtterances = "DeleteUtterances"
@@ -663,6 +674,7 @@ const opDeleteUtterances = "DeleteUtterances"
 type DeleteUtterancesRequest struct {
 	*aws.Request
 	Input *DeleteUtterancesInput
+	Copy  func(*DeleteUtterancesInput) DeleteUtterancesRequest
 }
 
 // Send marshals and sends the DeleteUtterances API request.
@@ -715,7 +727,7 @@ func (c *LexModelBuildingService) DeleteUtterancesRequest(input *DeleteUtterance
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUtterancesRequest{Request: req, Input: input}
+	return DeleteUtterancesRequest{Request: req, Input: input, Copy: c.DeleteUtterancesRequest}
 }
 
 const opGetBot = "GetBot"
@@ -724,6 +736,7 @@ const opGetBot = "GetBot"
 type GetBotRequest struct {
 	*aws.Request
 	Input *GetBotInput
+	Copy  func(*GetBotInput) GetBotRequest
 }
 
 // Send marshals and sends the GetBot API request.
@@ -767,7 +780,7 @@ func (c *LexModelBuildingService) GetBotRequest(input *GetBotInput) GetBotReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBotRequest{Request: req, Input: input}
+	return GetBotRequest{Request: req, Input: input, Copy: c.GetBotRequest}
 }
 
 const opGetBotAlias = "GetBotAlias"
@@ -776,6 +789,7 @@ const opGetBotAlias = "GetBotAlias"
 type GetBotAliasRequest struct {
 	*aws.Request
 	Input *GetBotAliasInput
+	Copy  func(*GetBotAliasInput) GetBotAliasRequest
 }
 
 // Send marshals and sends the GetBotAlias API request.
@@ -819,7 +833,7 @@ func (c *LexModelBuildingService) GetBotAliasRequest(input *GetBotAliasInput) Ge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBotAliasRequest{Request: req, Input: input}
+	return GetBotAliasRequest{Request: req, Input: input, Copy: c.GetBotAliasRequest}
 }
 
 const opGetBotAliases = "GetBotAliases"
@@ -828,6 +842,7 @@ const opGetBotAliases = "GetBotAliases"
 type GetBotAliasesRequest struct {
 	*aws.Request
 	Input *GetBotAliasesInput
+	Copy  func(*GetBotAliasesInput) GetBotAliasesRequest
 }
 
 // Send marshals and sends the GetBotAliases API request.
@@ -876,57 +891,53 @@ func (c *LexModelBuildingService) GetBotAliasesRequest(input *GetBotAliasesInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBotAliasesRequest{Request: req, Input: input}
+	return GetBotAliasesRequest{Request: req, Input: input, Copy: c.GetBotAliasesRequest}
 }
 
-// GetBotAliasesPages iterates over the pages of a GetBotAliases operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetBotAliases method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetBotAliasesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetBotAliases operation.
-//    pageNum := 0
-//    err := client.GetBotAliasesPages(params,
-//        func(page *GetBotAliasesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetBotAliasesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *LexModelBuildingService) GetBotAliasesPages(input *GetBotAliasesInput, fn func(*GetBotAliasesOutput, bool) bool) error {
-	return c.GetBotAliasesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetBotAliasesRequest) Paginate(opts ...aws.Option) GetBotAliasesPager {
+	return GetBotAliasesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetBotAliasesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetBotAliasesPagesWithContext same as GetBotAliasesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotAliasesPagesWithContext(ctx aws.Context, input *GetBotAliasesInput, fn func(*GetBotAliasesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetBotAliasesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetBotAliasesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBotAliasesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBotAliasesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetBotAliasesPager struct {
+	aws.Pager
+}
+
+func (p *GetBotAliasesPager) CurrentPage() *GetBotAliasesOutput {
+	return p.Pager.CurrentPage().(*GetBotAliasesOutput)
 }
 
 const opGetBotChannelAssociation = "GetBotChannelAssociation"
@@ -935,6 +946,7 @@ const opGetBotChannelAssociation = "GetBotChannelAssociation"
 type GetBotChannelAssociationRequest struct {
 	*aws.Request
 	Input *GetBotChannelAssociationInput
+	Copy  func(*GetBotChannelAssociationInput) GetBotChannelAssociationRequest
 }
 
 // Send marshals and sends the GetBotChannelAssociation API request.
@@ -979,7 +991,7 @@ func (c *LexModelBuildingService) GetBotChannelAssociationRequest(input *GetBotC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBotChannelAssociationRequest{Request: req, Input: input}
+	return GetBotChannelAssociationRequest{Request: req, Input: input, Copy: c.GetBotChannelAssociationRequest}
 }
 
 const opGetBotChannelAssociations = "GetBotChannelAssociations"
@@ -988,6 +1000,7 @@ const opGetBotChannelAssociations = "GetBotChannelAssociations"
 type GetBotChannelAssociationsRequest struct {
 	*aws.Request
 	Input *GetBotChannelAssociationsInput
+	Copy  func(*GetBotChannelAssociationsInput) GetBotChannelAssociationsRequest
 }
 
 // Send marshals and sends the GetBotChannelAssociations API request.
@@ -1037,57 +1050,53 @@ func (c *LexModelBuildingService) GetBotChannelAssociationsRequest(input *GetBot
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBotChannelAssociationsRequest{Request: req, Input: input}
+	return GetBotChannelAssociationsRequest{Request: req, Input: input, Copy: c.GetBotChannelAssociationsRequest}
 }
 
-// GetBotChannelAssociationsPages iterates over the pages of a GetBotChannelAssociations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetBotChannelAssociations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetBotChannelAssociationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetBotChannelAssociations operation.
-//    pageNum := 0
-//    err := client.GetBotChannelAssociationsPages(params,
-//        func(page *GetBotChannelAssociationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetBotChannelAssociationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *LexModelBuildingService) GetBotChannelAssociationsPages(input *GetBotChannelAssociationsInput, fn func(*GetBotChannelAssociationsOutput, bool) bool) error {
-	return c.GetBotChannelAssociationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetBotChannelAssociationsRequest) Paginate(opts ...aws.Option) GetBotChannelAssociationsPager {
+	return GetBotChannelAssociationsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetBotChannelAssociationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetBotChannelAssociationsPagesWithContext same as GetBotChannelAssociationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotChannelAssociationsPagesWithContext(ctx aws.Context, input *GetBotChannelAssociationsInput, fn func(*GetBotChannelAssociationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetBotChannelAssociationsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetBotChannelAssociationsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBotChannelAssociationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBotChannelAssociationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetBotChannelAssociationsPager struct {
+	aws.Pager
+}
+
+func (p *GetBotChannelAssociationsPager) CurrentPage() *GetBotChannelAssociationsOutput {
+	return p.Pager.CurrentPage().(*GetBotChannelAssociationsOutput)
 }
 
 const opGetBotVersions = "GetBotVersions"
@@ -1096,6 +1105,7 @@ const opGetBotVersions = "GetBotVersions"
 type GetBotVersionsRequest struct {
 	*aws.Request
 	Input *GetBotVersionsInput
+	Copy  func(*GetBotVersionsInput) GetBotVersionsRequest
 }
 
 // Send marshals and sends the GetBotVersions API request.
@@ -1152,57 +1162,53 @@ func (c *LexModelBuildingService) GetBotVersionsRequest(input *GetBotVersionsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBotVersionsRequest{Request: req, Input: input}
+	return GetBotVersionsRequest{Request: req, Input: input, Copy: c.GetBotVersionsRequest}
 }
 
-// GetBotVersionsPages iterates over the pages of a GetBotVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetBotVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetBotVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetBotVersions operation.
-//    pageNum := 0
-//    err := client.GetBotVersionsPages(params,
-//        func(page *GetBotVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetBotVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *LexModelBuildingService) GetBotVersionsPages(input *GetBotVersionsInput, fn func(*GetBotVersionsOutput, bool) bool) error {
-	return c.GetBotVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetBotVersionsRequest) Paginate(opts ...aws.Option) GetBotVersionsPager {
+	return GetBotVersionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetBotVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetBotVersionsPagesWithContext same as GetBotVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotVersionsPagesWithContext(ctx aws.Context, input *GetBotVersionsInput, fn func(*GetBotVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetBotVersionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetBotVersionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBotVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBotVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetBotVersionsPager struct {
+	aws.Pager
+}
+
+func (p *GetBotVersionsPager) CurrentPage() *GetBotVersionsOutput {
+	return p.Pager.CurrentPage().(*GetBotVersionsOutput)
 }
 
 const opGetBots = "GetBots"
@@ -1211,6 +1217,7 @@ const opGetBots = "GetBots"
 type GetBotsRequest struct {
 	*aws.Request
 	Input *GetBotsInput
+	Copy  func(*GetBotsInput) GetBotsRequest
 }
 
 // Send marshals and sends the GetBots API request.
@@ -1266,57 +1273,53 @@ func (c *LexModelBuildingService) GetBotsRequest(input *GetBotsInput) GetBotsReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBotsRequest{Request: req, Input: input}
+	return GetBotsRequest{Request: req, Input: input, Copy: c.GetBotsRequest}
 }
 
-// GetBotsPages iterates over the pages of a GetBots operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetBots method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetBotsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetBots operation.
-//    pageNum := 0
-//    err := client.GetBotsPages(params,
-//        func(page *GetBotsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetBotsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *LexModelBuildingService) GetBotsPages(input *GetBotsInput, fn func(*GetBotsOutput, bool) bool) error {
-	return c.GetBotsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetBotsRequest) Paginate(opts ...aws.Option) GetBotsPager {
+	return GetBotsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetBotsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetBotsPagesWithContext same as GetBotsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBotsPagesWithContext(ctx aws.Context, input *GetBotsInput, fn func(*GetBotsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetBotsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetBotsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBotsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBotsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetBotsPager struct {
+	aws.Pager
+}
+
+func (p *GetBotsPager) CurrentPage() *GetBotsOutput {
+	return p.Pager.CurrentPage().(*GetBotsOutput)
 }
 
 const opGetBuiltinIntent = "GetBuiltinIntent"
@@ -1325,6 +1328,7 @@ const opGetBuiltinIntent = "GetBuiltinIntent"
 type GetBuiltinIntentRequest struct {
 	*aws.Request
 	Input *GetBuiltinIntentInput
+	Copy  func(*GetBuiltinIntentInput) GetBuiltinIntentRequest
 }
 
 // Send marshals and sends the GetBuiltinIntent API request.
@@ -1367,7 +1371,7 @@ func (c *LexModelBuildingService) GetBuiltinIntentRequest(input *GetBuiltinInten
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBuiltinIntentRequest{Request: req, Input: input}
+	return GetBuiltinIntentRequest{Request: req, Input: input, Copy: c.GetBuiltinIntentRequest}
 }
 
 const opGetBuiltinIntents = "GetBuiltinIntents"
@@ -1376,6 +1380,7 @@ const opGetBuiltinIntents = "GetBuiltinIntents"
 type GetBuiltinIntentsRequest struct {
 	*aws.Request
 	Input *GetBuiltinIntentsInput
+	Copy  func(*GetBuiltinIntentsInput) GetBuiltinIntentsRequest
 }
 
 // Send marshals and sends the GetBuiltinIntents API request.
@@ -1424,57 +1429,53 @@ func (c *LexModelBuildingService) GetBuiltinIntentsRequest(input *GetBuiltinInte
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBuiltinIntentsRequest{Request: req, Input: input}
+	return GetBuiltinIntentsRequest{Request: req, Input: input, Copy: c.GetBuiltinIntentsRequest}
 }
 
-// GetBuiltinIntentsPages iterates over the pages of a GetBuiltinIntents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetBuiltinIntents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetBuiltinIntentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetBuiltinIntents operation.
-//    pageNum := 0
-//    err := client.GetBuiltinIntentsPages(params,
-//        func(page *GetBuiltinIntentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetBuiltinIntentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *LexModelBuildingService) GetBuiltinIntentsPages(input *GetBuiltinIntentsInput, fn func(*GetBuiltinIntentsOutput, bool) bool) error {
-	return c.GetBuiltinIntentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetBuiltinIntentsRequest) Paginate(opts ...aws.Option) GetBuiltinIntentsPager {
+	return GetBuiltinIntentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetBuiltinIntentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetBuiltinIntentsPagesWithContext same as GetBuiltinIntentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinIntentsPagesWithContext(ctx aws.Context, input *GetBuiltinIntentsInput, fn func(*GetBuiltinIntentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetBuiltinIntentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetBuiltinIntentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBuiltinIntentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBuiltinIntentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetBuiltinIntentsPager struct {
+	aws.Pager
+}
+
+func (p *GetBuiltinIntentsPager) CurrentPage() *GetBuiltinIntentsOutput {
+	return p.Pager.CurrentPage().(*GetBuiltinIntentsOutput)
 }
 
 const opGetBuiltinSlotTypes = "GetBuiltinSlotTypes"
@@ -1483,6 +1484,7 @@ const opGetBuiltinSlotTypes = "GetBuiltinSlotTypes"
 type GetBuiltinSlotTypesRequest struct {
 	*aws.Request
 	Input *GetBuiltinSlotTypesInput
+	Copy  func(*GetBuiltinSlotTypesInput) GetBuiltinSlotTypesRequest
 }
 
 // Send marshals and sends the GetBuiltinSlotTypes API request.
@@ -1534,57 +1536,53 @@ func (c *LexModelBuildingService) GetBuiltinSlotTypesRequest(input *GetBuiltinSl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBuiltinSlotTypesRequest{Request: req, Input: input}
+	return GetBuiltinSlotTypesRequest{Request: req, Input: input, Copy: c.GetBuiltinSlotTypesRequest}
 }
 
-// GetBuiltinSlotTypesPages iterates over the pages of a GetBuiltinSlotTypes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetBuiltinSlotTypes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetBuiltinSlotTypesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetBuiltinSlotTypes operation.
-//    pageNum := 0
-//    err := client.GetBuiltinSlotTypesPages(params,
-//        func(page *GetBuiltinSlotTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetBuiltinSlotTypesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *LexModelBuildingService) GetBuiltinSlotTypesPages(input *GetBuiltinSlotTypesInput, fn func(*GetBuiltinSlotTypesOutput, bool) bool) error {
-	return c.GetBuiltinSlotTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetBuiltinSlotTypesRequest) Paginate(opts ...aws.Option) GetBuiltinSlotTypesPager {
+	return GetBuiltinSlotTypesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetBuiltinSlotTypesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetBuiltinSlotTypesPagesWithContext same as GetBuiltinSlotTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetBuiltinSlotTypesPagesWithContext(ctx aws.Context, input *GetBuiltinSlotTypesInput, fn func(*GetBuiltinSlotTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetBuiltinSlotTypesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetBuiltinSlotTypesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBuiltinSlotTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBuiltinSlotTypesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetBuiltinSlotTypesPager struct {
+	aws.Pager
+}
+
+func (p *GetBuiltinSlotTypesPager) CurrentPage() *GetBuiltinSlotTypesOutput {
+	return p.Pager.CurrentPage().(*GetBuiltinSlotTypesOutput)
 }
 
 const opGetExport = "GetExport"
@@ -1593,6 +1591,7 @@ const opGetExport = "GetExport"
 type GetExportRequest struct {
 	*aws.Request
 	Input *GetExportInput
+	Copy  func(*GetExportInput) GetExportRequest
 }
 
 // Send marshals and sends the GetExport API request.
@@ -1633,7 +1632,7 @@ func (c *LexModelBuildingService) GetExportRequest(input *GetExportInput) GetExp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetExportRequest{Request: req, Input: input}
+	return GetExportRequest{Request: req, Input: input, Copy: c.GetExportRequest}
 }
 
 const opGetIntent = "GetIntent"
@@ -1642,6 +1641,7 @@ const opGetIntent = "GetIntent"
 type GetIntentRequest struct {
 	*aws.Request
 	Input *GetIntentInput
+	Copy  func(*GetIntentInput) GetIntentRequest
 }
 
 // Send marshals and sends the GetIntent API request.
@@ -1685,7 +1685,7 @@ func (c *LexModelBuildingService) GetIntentRequest(input *GetIntentInput) GetInt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIntentRequest{Request: req, Input: input}
+	return GetIntentRequest{Request: req, Input: input, Copy: c.GetIntentRequest}
 }
 
 const opGetIntentVersions = "GetIntentVersions"
@@ -1694,6 +1694,7 @@ const opGetIntentVersions = "GetIntentVersions"
 type GetIntentVersionsRequest struct {
 	*aws.Request
 	Input *GetIntentVersionsInput
+	Copy  func(*GetIntentVersionsInput) GetIntentVersionsRequest
 }
 
 // Send marshals and sends the GetIntentVersions API request.
@@ -1750,57 +1751,53 @@ func (c *LexModelBuildingService) GetIntentVersionsRequest(input *GetIntentVersi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIntentVersionsRequest{Request: req, Input: input}
+	return GetIntentVersionsRequest{Request: req, Input: input, Copy: c.GetIntentVersionsRequest}
 }
 
-// GetIntentVersionsPages iterates over the pages of a GetIntentVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetIntentVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetIntentVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetIntentVersions operation.
-//    pageNum := 0
-//    err := client.GetIntentVersionsPages(params,
-//        func(page *GetIntentVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetIntentVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *LexModelBuildingService) GetIntentVersionsPages(input *GetIntentVersionsInput, fn func(*GetIntentVersionsOutput, bool) bool) error {
-	return c.GetIntentVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetIntentVersionsRequest) Paginate(opts ...aws.Option) GetIntentVersionsPager {
+	return GetIntentVersionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetIntentVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetIntentVersionsPagesWithContext same as GetIntentVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentVersionsPagesWithContext(ctx aws.Context, input *GetIntentVersionsInput, fn func(*GetIntentVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetIntentVersionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetIntentVersionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetIntentVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetIntentVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetIntentVersionsPager struct {
+	aws.Pager
+}
+
+func (p *GetIntentVersionsPager) CurrentPage() *GetIntentVersionsOutput {
+	return p.Pager.CurrentPage().(*GetIntentVersionsOutput)
 }
 
 const opGetIntents = "GetIntents"
@@ -1809,6 +1806,7 @@ const opGetIntents = "GetIntents"
 type GetIntentsRequest struct {
 	*aws.Request
 	Input *GetIntentsInput
+	Copy  func(*GetIntentsInput) GetIntentsRequest
 }
 
 // Send marshals and sends the GetIntents API request.
@@ -1863,57 +1861,53 @@ func (c *LexModelBuildingService) GetIntentsRequest(input *GetIntentsInput) GetI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIntentsRequest{Request: req, Input: input}
+	return GetIntentsRequest{Request: req, Input: input, Copy: c.GetIntentsRequest}
 }
 
-// GetIntentsPages iterates over the pages of a GetIntents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetIntents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetIntentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetIntents operation.
-//    pageNum := 0
-//    err := client.GetIntentsPages(params,
-//        func(page *GetIntentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetIntentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *LexModelBuildingService) GetIntentsPages(input *GetIntentsInput, fn func(*GetIntentsOutput, bool) bool) error {
-	return c.GetIntentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetIntentsRequest) Paginate(opts ...aws.Option) GetIntentsPager {
+	return GetIntentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetIntentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetIntentsPagesWithContext same as GetIntentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetIntentsPagesWithContext(ctx aws.Context, input *GetIntentsInput, fn func(*GetIntentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetIntentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetIntentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetIntentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetIntentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetIntentsPager struct {
+	aws.Pager
+}
+
+func (p *GetIntentsPager) CurrentPage() *GetIntentsOutput {
+	return p.Pager.CurrentPage().(*GetIntentsOutput)
 }
 
 const opGetSlotType = "GetSlotType"
@@ -1922,6 +1916,7 @@ const opGetSlotType = "GetSlotType"
 type GetSlotTypeRequest struct {
 	*aws.Request
 	Input *GetSlotTypeInput
+	Copy  func(*GetSlotTypeInput) GetSlotTypeRequest
 }
 
 // Send marshals and sends the GetSlotType API request.
@@ -1965,7 +1960,7 @@ func (c *LexModelBuildingService) GetSlotTypeRequest(input *GetSlotTypeInput) Ge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSlotTypeRequest{Request: req, Input: input}
+	return GetSlotTypeRequest{Request: req, Input: input, Copy: c.GetSlotTypeRequest}
 }
 
 const opGetSlotTypeVersions = "GetSlotTypeVersions"
@@ -1974,6 +1969,7 @@ const opGetSlotTypeVersions = "GetSlotTypeVersions"
 type GetSlotTypeVersionsRequest struct {
 	*aws.Request
 	Input *GetSlotTypeVersionsInput
+	Copy  func(*GetSlotTypeVersionsInput) GetSlotTypeVersionsRequest
 }
 
 // Send marshals and sends the GetSlotTypeVersions API request.
@@ -2030,57 +2026,53 @@ func (c *LexModelBuildingService) GetSlotTypeVersionsRequest(input *GetSlotTypeV
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSlotTypeVersionsRequest{Request: req, Input: input}
+	return GetSlotTypeVersionsRequest{Request: req, Input: input, Copy: c.GetSlotTypeVersionsRequest}
 }
 
-// GetSlotTypeVersionsPages iterates over the pages of a GetSlotTypeVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetSlotTypeVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetSlotTypeVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetSlotTypeVersions operation.
-//    pageNum := 0
-//    err := client.GetSlotTypeVersionsPages(params,
-//        func(page *GetSlotTypeVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetSlotTypeVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *LexModelBuildingService) GetSlotTypeVersionsPages(input *GetSlotTypeVersionsInput, fn func(*GetSlotTypeVersionsOutput, bool) bool) error {
-	return c.GetSlotTypeVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetSlotTypeVersionsRequest) Paginate(opts ...aws.Option) GetSlotTypeVersionsPager {
+	return GetSlotTypeVersionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetSlotTypeVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetSlotTypeVersionsPagesWithContext same as GetSlotTypeVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypeVersionsPagesWithContext(ctx aws.Context, input *GetSlotTypeVersionsInput, fn func(*GetSlotTypeVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetSlotTypeVersionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetSlotTypeVersionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetSlotTypeVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetSlotTypeVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetSlotTypeVersionsPager struct {
+	aws.Pager
+}
+
+func (p *GetSlotTypeVersionsPager) CurrentPage() *GetSlotTypeVersionsOutput {
+	return p.Pager.CurrentPage().(*GetSlotTypeVersionsOutput)
 }
 
 const opGetSlotTypes = "GetSlotTypes"
@@ -2089,6 +2081,7 @@ const opGetSlotTypes = "GetSlotTypes"
 type GetSlotTypesRequest struct {
 	*aws.Request
 	Input *GetSlotTypesInput
+	Copy  func(*GetSlotTypesInput) GetSlotTypesRequest
 }
 
 // Send marshals and sends the GetSlotTypes API request.
@@ -2143,57 +2136,53 @@ func (c *LexModelBuildingService) GetSlotTypesRequest(input *GetSlotTypesInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSlotTypesRequest{Request: req, Input: input}
+	return GetSlotTypesRequest{Request: req, Input: input, Copy: c.GetSlotTypesRequest}
 }
 
-// GetSlotTypesPages iterates over the pages of a GetSlotTypes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetSlotTypes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetSlotTypesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetSlotTypes operation.
-//    pageNum := 0
-//    err := client.GetSlotTypesPages(params,
-//        func(page *GetSlotTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetSlotTypesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *LexModelBuildingService) GetSlotTypesPages(input *GetSlotTypesInput, fn func(*GetSlotTypesOutput, bool) bool) error {
-	return c.GetSlotTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetSlotTypesRequest) Paginate(opts ...aws.Option) GetSlotTypesPager {
+	return GetSlotTypesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetSlotTypesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetSlotTypesPagesWithContext same as GetSlotTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *LexModelBuildingService) GetSlotTypesPagesWithContext(ctx aws.Context, input *GetSlotTypesInput, fn func(*GetSlotTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetSlotTypesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetSlotTypesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetSlotTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetSlotTypesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetSlotTypesPager struct {
+	aws.Pager
+}
+
+func (p *GetSlotTypesPager) CurrentPage() *GetSlotTypesOutput {
+	return p.Pager.CurrentPage().(*GetSlotTypesOutput)
 }
 
 const opGetUtterancesView = "GetUtterancesView"
@@ -2202,6 +2191,7 @@ const opGetUtterancesView = "GetUtterancesView"
 type GetUtterancesViewRequest struct {
 	*aws.Request
 	Input *GetUtterancesViewInput
+	Copy  func(*GetUtterancesViewInput) GetUtterancesViewRequest
 }
 
 // Send marshals and sends the GetUtterancesView API request.
@@ -2265,7 +2255,7 @@ func (c *LexModelBuildingService) GetUtterancesViewRequest(input *GetUtterancesV
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUtterancesViewRequest{Request: req, Input: input}
+	return GetUtterancesViewRequest{Request: req, Input: input, Copy: c.GetUtterancesViewRequest}
 }
 
 const opPutBot = "PutBot"
@@ -2274,6 +2264,7 @@ const opPutBot = "PutBot"
 type PutBotRequest struct {
 	*aws.Request
 	Input *PutBotInput
+	Copy  func(*PutBotInput) PutBotRequest
 }
 
 // Send marshals and sends the PutBot API request.
@@ -2326,7 +2317,7 @@ func (c *LexModelBuildingService) PutBotRequest(input *PutBotInput) PutBotReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBotRequest{Request: req, Input: input}
+	return PutBotRequest{Request: req, Input: input, Copy: c.PutBotRequest}
 }
 
 const opPutBotAlias = "PutBotAlias"
@@ -2335,6 +2326,7 @@ const opPutBotAlias = "PutBotAlias"
 type PutBotAliasRequest struct {
 	*aws.Request
 	Input *PutBotAliasInput
+	Copy  func(*PutBotAliasInput) PutBotAliasRequest
 }
 
 // Send marshals and sends the PutBotAlias API request.
@@ -2379,7 +2371,7 @@ func (c *LexModelBuildingService) PutBotAliasRequest(input *PutBotAliasInput) Pu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBotAliasRequest{Request: req, Input: input}
+	return PutBotAliasRequest{Request: req, Input: input, Copy: c.PutBotAliasRequest}
 }
 
 const opPutIntent = "PutIntent"
@@ -2388,6 +2380,7 @@ const opPutIntent = "PutIntent"
 type PutIntentRequest struct {
 	*aws.Request
 	Input *PutIntentInput
+	Copy  func(*PutIntentInput) PutIntentRequest
 }
 
 // Send marshals and sends the PutIntent API request.
@@ -2473,7 +2466,7 @@ func (c *LexModelBuildingService) PutIntentRequest(input *PutIntentInput) PutInt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutIntentRequest{Request: req, Input: input}
+	return PutIntentRequest{Request: req, Input: input, Copy: c.PutIntentRequest}
 }
 
 const opPutSlotType = "PutSlotType"
@@ -2482,6 +2475,7 @@ const opPutSlotType = "PutSlotType"
 type PutSlotTypeRequest struct {
 	*aws.Request
 	Input *PutSlotTypeInput
+	Copy  func(*PutSlotTypeInput) PutSlotTypeRequest
 }
 
 // Send marshals and sends the PutSlotType API request.
@@ -2535,7 +2529,7 @@ func (c *LexModelBuildingService) PutSlotTypeRequest(input *PutSlotTypeInput) Pu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutSlotTypeRequest{Request: req, Input: input}
+	return PutSlotTypeRequest{Request: req, Input: input, Copy: c.PutSlotTypeRequest}
 }
 
 // Provides information about a bot alias.

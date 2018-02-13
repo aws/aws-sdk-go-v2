@@ -18,6 +18,7 @@ const opAddTagsToCertificate = "AddTagsToCertificate"
 type AddTagsToCertificateRequest struct {
 	*aws.Request
 	Input *AddTagsToCertificateInput
+	Copy  func(*AddTagsToCertificateInput) AddTagsToCertificateRequest
 }
 
 // Send marshals and sends the AddTagsToCertificate API request.
@@ -76,7 +77,7 @@ func (c *ACM) AddTagsToCertificateRequest(input *AddTagsToCertificateInput) AddT
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToCertificateRequest{Request: req, Input: input}
+	return AddTagsToCertificateRequest{Request: req, Input: input, Copy: c.AddTagsToCertificateRequest}
 }
 
 const opDeleteCertificate = "DeleteCertificate"
@@ -85,6 +86,7 @@ const opDeleteCertificate = "DeleteCertificate"
 type DeleteCertificateRequest struct {
 	*aws.Request
 	Input *DeleteCertificateInput
+	Copy  func(*DeleteCertificateInput) DeleteCertificateRequest
 }
 
 // Send marshals and sends the DeleteCertificate API request.
@@ -135,7 +137,7 @@ func (c *ACM) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteCert
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCertificateRequest{Request: req, Input: input}
+	return DeleteCertificateRequest{Request: req, Input: input, Copy: c.DeleteCertificateRequest}
 }
 
 const opDescribeCertificate = "DescribeCertificate"
@@ -144,6 +146,7 @@ const opDescribeCertificate = "DescribeCertificate"
 type DescribeCertificateRequest struct {
 	*aws.Request
 	Input *DescribeCertificateInput
+	Copy  func(*DescribeCertificateInput) DescribeCertificateRequest
 }
 
 // Send marshals and sends the DescribeCertificate API request.
@@ -184,7 +187,7 @@ func (c *ACM) DescribeCertificateRequest(input *DescribeCertificateInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCertificateRequest{Request: req, Input: input}
+	return DescribeCertificateRequest{Request: req, Input: input, Copy: c.DescribeCertificateRequest}
 }
 
 const opGetCertificate = "GetCertificate"
@@ -193,6 +196,7 @@ const opGetCertificate = "GetCertificate"
 type GetCertificateRequest struct {
 	*aws.Request
 	Input *GetCertificateInput
+	Copy  func(*GetCertificateInput) GetCertificateRequest
 }
 
 // Send marshals and sends the GetCertificate API request.
@@ -238,7 +242,7 @@ func (c *ACM) GetCertificateRequest(input *GetCertificateInput) GetCertificateRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCertificateRequest{Request: req, Input: input}
+	return GetCertificateRequest{Request: req, Input: input, Copy: c.GetCertificateRequest}
 }
 
 const opImportCertificate = "ImportCertificate"
@@ -247,6 +251,7 @@ const opImportCertificate = "ImportCertificate"
 type ImportCertificateRequest struct {
 	*aws.Request
 	Input *ImportCertificateInput
+	Copy  func(*ImportCertificateInput) ImportCertificateRequest
 }
 
 // Send marshals and sends the ImportCertificate API request.
@@ -335,7 +340,7 @@ func (c *ACM) ImportCertificateRequest(input *ImportCertificateInput) ImportCert
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportCertificateRequest{Request: req, Input: input}
+	return ImportCertificateRequest{Request: req, Input: input, Copy: c.ImportCertificateRequest}
 }
 
 const opListCertificates = "ListCertificates"
@@ -344,6 +349,7 @@ const opListCertificates = "ListCertificates"
 type ListCertificatesRequest struct {
 	*aws.Request
 	Input *ListCertificatesInput
+	Copy  func(*ListCertificatesInput) ListCertificatesRequest
 }
 
 // Send marshals and sends the ListCertificates API request.
@@ -392,57 +398,53 @@ func (c *ACM) ListCertificatesRequest(input *ListCertificatesInput) ListCertific
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCertificatesRequest{Request: req, Input: input}
+	return ListCertificatesRequest{Request: req, Input: input, Copy: c.ListCertificatesRequest}
 }
 
-// ListCertificatesPages iterates over the pages of a ListCertificates operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListCertificates method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListCertificatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListCertificates operation.
-//    pageNum := 0
-//    err := client.ListCertificatesPages(params,
-//        func(page *ListCertificatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListCertificatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ACM) ListCertificatesPages(input *ListCertificatesInput, fn func(*ListCertificatesOutput, bool) bool) error {
-	return c.ListCertificatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListCertificatesRequest) Paginate(opts ...aws.Option) ListCertificatesPager {
+	return ListCertificatesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListCertificatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListCertificatesPagesWithContext same as ListCertificatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ACM) ListCertificatesPagesWithContext(ctx aws.Context, input *ListCertificatesInput, fn func(*ListCertificatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListCertificatesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListCertificatesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListCertificatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListCertificatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCertificatesPager struct {
+	aws.Pager
+}
+
+func (p *ListCertificatesPager) CurrentPage() *ListCertificatesOutput {
+	return p.Pager.CurrentPage().(*ListCertificatesOutput)
 }
 
 const opListTagsForCertificate = "ListTagsForCertificate"
@@ -451,6 +453,7 @@ const opListTagsForCertificate = "ListTagsForCertificate"
 type ListTagsForCertificateRequest struct {
 	*aws.Request
 	Input *ListTagsForCertificateInput
+	Copy  func(*ListTagsForCertificateInput) ListTagsForCertificateRequest
 }
 
 // Send marshals and sends the ListTagsForCertificate API request.
@@ -494,7 +497,7 @@ func (c *ACM) ListTagsForCertificateRequest(input *ListTagsForCertificateInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForCertificateRequest{Request: req, Input: input}
+	return ListTagsForCertificateRequest{Request: req, Input: input, Copy: c.ListTagsForCertificateRequest}
 }
 
 const opRemoveTagsFromCertificate = "RemoveTagsFromCertificate"
@@ -503,6 +506,7 @@ const opRemoveTagsFromCertificate = "RemoveTagsFromCertificate"
 type RemoveTagsFromCertificateRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromCertificateInput
+	Copy  func(*RemoveTagsFromCertificateInput) RemoveTagsFromCertificateRequest
 }
 
 // Send marshals and sends the RemoveTagsFromCertificate API request.
@@ -552,7 +556,7 @@ func (c *ACM) RemoveTagsFromCertificateRequest(input *RemoveTagsFromCertificateI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromCertificateRequest{Request: req, Input: input}
+	return RemoveTagsFromCertificateRequest{Request: req, Input: input, Copy: c.RemoveTagsFromCertificateRequest}
 }
 
 const opRequestCertificate = "RequestCertificate"
@@ -561,6 +565,7 @@ const opRequestCertificate = "RequestCertificate"
 type RequestCertificateRequest struct {
 	*aws.Request
 	Input *RequestCertificateInput
+	Copy  func(*RequestCertificateInput) RequestCertificateRequest
 }
 
 // Send marshals and sends the RequestCertificate API request.
@@ -614,7 +619,7 @@ func (c *ACM) RequestCertificateRequest(input *RequestCertificateInput) RequestC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RequestCertificateRequest{Request: req, Input: input}
+	return RequestCertificateRequest{Request: req, Input: input, Copy: c.RequestCertificateRequest}
 }
 
 const opResendValidationEmail = "ResendValidationEmail"
@@ -623,6 +628,7 @@ const opResendValidationEmail = "ResendValidationEmail"
 type ResendValidationEmailRequest struct {
 	*aws.Request
 	Input *ResendValidationEmailInput
+	Copy  func(*ResendValidationEmailInput) ResendValidationEmailRequest
 }
 
 // Send marshals and sends the ResendValidationEmail API request.
@@ -675,7 +681,7 @@ func (c *ACM) ResendValidationEmailRequest(input *ResendValidationEmailInput) Re
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResendValidationEmailRequest{Request: req, Input: input}
+	return ResendValidationEmailRequest{Request: req, Input: input, Copy: c.ResendValidationEmailRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificateRequest

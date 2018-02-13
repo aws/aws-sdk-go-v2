@@ -15,6 +15,7 @@ const opAllocateStaticIp = "AllocateStaticIp"
 type AllocateStaticIpRequest struct {
 	*aws.Request
 	Input *AllocateStaticIpInput
+	Copy  func(*AllocateStaticIpInput) AllocateStaticIpRequest
 }
 
 // Send marshals and sends the AllocateStaticIp API request.
@@ -55,7 +56,7 @@ func (c *Lightsail) AllocateStaticIpRequest(input *AllocateStaticIpInput) Alloca
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AllocateStaticIpRequest{Request: req, Input: input}
+	return AllocateStaticIpRequest{Request: req, Input: input, Copy: c.AllocateStaticIpRequest}
 }
 
 const opAttachDisk = "AttachDisk"
@@ -64,6 +65,7 @@ const opAttachDisk = "AttachDisk"
 type AttachDiskRequest struct {
 	*aws.Request
 	Input *AttachDiskInput
+	Copy  func(*AttachDiskInput) AttachDiskRequest
 }
 
 // Send marshals and sends the AttachDisk API request.
@@ -105,7 +107,7 @@ func (c *Lightsail) AttachDiskRequest(input *AttachDiskInput) AttachDiskRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachDiskRequest{Request: req, Input: input}
+	return AttachDiskRequest{Request: req, Input: input, Copy: c.AttachDiskRequest}
 }
 
 const opAttachInstancesToLoadBalancer = "AttachInstancesToLoadBalancer"
@@ -114,6 +116,7 @@ const opAttachInstancesToLoadBalancer = "AttachInstancesToLoadBalancer"
 type AttachInstancesToLoadBalancerRequest struct {
 	*aws.Request
 	Input *AttachInstancesToLoadBalancerInput
+	Copy  func(*AttachInstancesToLoadBalancerInput) AttachInstancesToLoadBalancerRequest
 }
 
 // Send marshals and sends the AttachInstancesToLoadBalancer API request.
@@ -154,7 +157,7 @@ func (c *Lightsail) AttachInstancesToLoadBalancerRequest(input *AttachInstancesT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachInstancesToLoadBalancerRequest{Request: req, Input: input}
+	return AttachInstancesToLoadBalancerRequest{Request: req, Input: input, Copy: c.AttachInstancesToLoadBalancerRequest}
 }
 
 const opAttachLoadBalancerTlsCertificate = "AttachLoadBalancerTlsCertificate"
@@ -163,6 +166,7 @@ const opAttachLoadBalancerTlsCertificate = "AttachLoadBalancerTlsCertificate"
 type AttachLoadBalancerTlsCertificateRequest struct {
 	*aws.Request
 	Input *AttachLoadBalancerTlsCertificateInput
+	Copy  func(*AttachLoadBalancerTlsCertificateInput) AttachLoadBalancerTlsCertificateRequest
 }
 
 // Send marshals and sends the AttachLoadBalancerTlsCertificate API request.
@@ -205,7 +209,7 @@ func (c *Lightsail) AttachLoadBalancerTlsCertificateRequest(input *AttachLoadBal
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachLoadBalancerTlsCertificateRequest{Request: req, Input: input}
+	return AttachLoadBalancerTlsCertificateRequest{Request: req, Input: input, Copy: c.AttachLoadBalancerTlsCertificateRequest}
 }
 
 const opAttachStaticIp = "AttachStaticIp"
@@ -214,6 +218,7 @@ const opAttachStaticIp = "AttachStaticIp"
 type AttachStaticIpRequest struct {
 	*aws.Request
 	Input *AttachStaticIpInput
+	Copy  func(*AttachStaticIpInput) AttachStaticIpRequest
 }
 
 // Send marshals and sends the AttachStaticIp API request.
@@ -254,7 +259,7 @@ func (c *Lightsail) AttachStaticIpRequest(input *AttachStaticIpInput) AttachStat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachStaticIpRequest{Request: req, Input: input}
+	return AttachStaticIpRequest{Request: req, Input: input, Copy: c.AttachStaticIpRequest}
 }
 
 const opCloseInstancePublicPorts = "CloseInstancePublicPorts"
@@ -263,6 +268,7 @@ const opCloseInstancePublicPorts = "CloseInstancePublicPorts"
 type CloseInstancePublicPortsRequest struct {
 	*aws.Request
 	Input *CloseInstancePublicPortsInput
+	Copy  func(*CloseInstancePublicPortsInput) CloseInstancePublicPortsRequest
 }
 
 // Send marshals and sends the CloseInstancePublicPorts API request.
@@ -303,7 +309,7 @@ func (c *Lightsail) CloseInstancePublicPortsRequest(input *CloseInstancePublicPo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CloseInstancePublicPortsRequest{Request: req, Input: input}
+	return CloseInstancePublicPortsRequest{Request: req, Input: input, Copy: c.CloseInstancePublicPortsRequest}
 }
 
 const opCreateDisk = "CreateDisk"
@@ -312,6 +318,7 @@ const opCreateDisk = "CreateDisk"
 type CreateDiskRequest struct {
 	*aws.Request
 	Input *CreateDiskInput
+	Copy  func(*CreateDiskInput) CreateDiskRequest
 }
 
 // Send marshals and sends the CreateDisk API request.
@@ -355,7 +362,7 @@ func (c *Lightsail) CreateDiskRequest(input *CreateDiskInput) CreateDiskRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDiskRequest{Request: req, Input: input}
+	return CreateDiskRequest{Request: req, Input: input, Copy: c.CreateDiskRequest}
 }
 
 const opCreateDiskFromSnapshot = "CreateDiskFromSnapshot"
@@ -364,6 +371,7 @@ const opCreateDiskFromSnapshot = "CreateDiskFromSnapshot"
 type CreateDiskFromSnapshotRequest struct {
 	*aws.Request
 	Input *CreateDiskFromSnapshotInput
+	Copy  func(*CreateDiskFromSnapshotInput) CreateDiskFromSnapshotRequest
 }
 
 // Send marshals and sends the CreateDiskFromSnapshot API request.
@@ -407,7 +415,7 @@ func (c *Lightsail) CreateDiskFromSnapshotRequest(input *CreateDiskFromSnapshotI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDiskFromSnapshotRequest{Request: req, Input: input}
+	return CreateDiskFromSnapshotRequest{Request: req, Input: input, Copy: c.CreateDiskFromSnapshotRequest}
 }
 
 const opCreateDiskSnapshot = "CreateDiskSnapshot"
@@ -416,6 +424,7 @@ const opCreateDiskSnapshot = "CreateDiskSnapshot"
 type CreateDiskSnapshotRequest struct {
 	*aws.Request
 	Input *CreateDiskSnapshotInput
+	Copy  func(*CreateDiskSnapshotInput) CreateDiskSnapshotRequest
 }
 
 // Send marshals and sends the CreateDiskSnapshot API request.
@@ -469,7 +478,7 @@ func (c *Lightsail) CreateDiskSnapshotRequest(input *CreateDiskSnapshotInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDiskSnapshotRequest{Request: req, Input: input}
+	return CreateDiskSnapshotRequest{Request: req, Input: input, Copy: c.CreateDiskSnapshotRequest}
 }
 
 const opCreateDomain = "CreateDomain"
@@ -478,6 +487,7 @@ const opCreateDomain = "CreateDomain"
 type CreateDomainRequest struct {
 	*aws.Request
 	Input *CreateDomainInput
+	Copy  func(*CreateDomainInput) CreateDomainRequest
 }
 
 // Send marshals and sends the CreateDomain API request.
@@ -518,7 +528,7 @@ func (c *Lightsail) CreateDomainRequest(input *CreateDomainInput) CreateDomainRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDomainRequest{Request: req, Input: input}
+	return CreateDomainRequest{Request: req, Input: input, Copy: c.CreateDomainRequest}
 }
 
 const opCreateDomainEntry = "CreateDomainEntry"
@@ -527,6 +537,7 @@ const opCreateDomainEntry = "CreateDomainEntry"
 type CreateDomainEntryRequest struct {
 	*aws.Request
 	Input *CreateDomainEntryInput
+	Copy  func(*CreateDomainEntryInput) CreateDomainEntryRequest
 }
 
 // Send marshals and sends the CreateDomainEntry API request.
@@ -568,7 +579,7 @@ func (c *Lightsail) CreateDomainEntryRequest(input *CreateDomainEntryInput) Crea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDomainEntryRequest{Request: req, Input: input}
+	return CreateDomainEntryRequest{Request: req, Input: input, Copy: c.CreateDomainEntryRequest}
 }
 
 const opCreateInstanceSnapshot = "CreateInstanceSnapshot"
@@ -577,6 +588,7 @@ const opCreateInstanceSnapshot = "CreateInstanceSnapshot"
 type CreateInstanceSnapshotRequest struct {
 	*aws.Request
 	Input *CreateInstanceSnapshotInput
+	Copy  func(*CreateInstanceSnapshotInput) CreateInstanceSnapshotRequest
 }
 
 // Send marshals and sends the CreateInstanceSnapshot API request.
@@ -618,7 +630,7 @@ func (c *Lightsail) CreateInstanceSnapshotRequest(input *CreateInstanceSnapshotI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateInstanceSnapshotRequest{Request: req, Input: input}
+	return CreateInstanceSnapshotRequest{Request: req, Input: input, Copy: c.CreateInstanceSnapshotRequest}
 }
 
 const opCreateInstances = "CreateInstances"
@@ -627,6 +639,7 @@ const opCreateInstances = "CreateInstances"
 type CreateInstancesRequest struct {
 	*aws.Request
 	Input *CreateInstancesInput
+	Copy  func(*CreateInstancesInput) CreateInstancesRequest
 }
 
 // Send marshals and sends the CreateInstances API request.
@@ -667,7 +680,7 @@ func (c *Lightsail) CreateInstancesRequest(input *CreateInstancesInput) CreateIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateInstancesRequest{Request: req, Input: input}
+	return CreateInstancesRequest{Request: req, Input: input, Copy: c.CreateInstancesRequest}
 }
 
 const opCreateInstancesFromSnapshot = "CreateInstancesFromSnapshot"
@@ -676,6 +689,7 @@ const opCreateInstancesFromSnapshot = "CreateInstancesFromSnapshot"
 type CreateInstancesFromSnapshotRequest struct {
 	*aws.Request
 	Input *CreateInstancesFromSnapshotInput
+	Copy  func(*CreateInstancesFromSnapshotInput) CreateInstancesFromSnapshotRequest
 }
 
 // Send marshals and sends the CreateInstancesFromSnapshot API request.
@@ -717,7 +731,7 @@ func (c *Lightsail) CreateInstancesFromSnapshotRequest(input *CreateInstancesFro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateInstancesFromSnapshotRequest{Request: req, Input: input}
+	return CreateInstancesFromSnapshotRequest{Request: req, Input: input, Copy: c.CreateInstancesFromSnapshotRequest}
 }
 
 const opCreateKeyPair = "CreateKeyPair"
@@ -726,6 +740,7 @@ const opCreateKeyPair = "CreateKeyPair"
 type CreateKeyPairRequest struct {
 	*aws.Request
 	Input *CreateKeyPairInput
+	Copy  func(*CreateKeyPairInput) CreateKeyPairRequest
 }
 
 // Send marshals and sends the CreateKeyPair API request.
@@ -766,7 +781,7 @@ func (c *Lightsail) CreateKeyPairRequest(input *CreateKeyPairInput) CreateKeyPai
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateKeyPairRequest{Request: req, Input: input}
+	return CreateKeyPairRequest{Request: req, Input: input, Copy: c.CreateKeyPairRequest}
 }
 
 const opCreateLoadBalancer = "CreateLoadBalancer"
@@ -775,6 +790,7 @@ const opCreateLoadBalancer = "CreateLoadBalancer"
 type CreateLoadBalancerRequest struct {
 	*aws.Request
 	Input *CreateLoadBalancerInput
+	Copy  func(*CreateLoadBalancerInput) CreateLoadBalancerRequest
 }
 
 // Send marshals and sends the CreateLoadBalancer API request.
@@ -818,7 +834,7 @@ func (c *Lightsail) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLoadBalancerRequest{Request: req, Input: input}
+	return CreateLoadBalancerRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerRequest}
 }
 
 const opCreateLoadBalancerTlsCertificate = "CreateLoadBalancerTlsCertificate"
@@ -827,6 +843,7 @@ const opCreateLoadBalancerTlsCertificate = "CreateLoadBalancerTlsCertificate"
 type CreateLoadBalancerTlsCertificateRequest struct {
 	*aws.Request
 	Input *CreateLoadBalancerTlsCertificateInput
+	Copy  func(*CreateLoadBalancerTlsCertificateInput) CreateLoadBalancerTlsCertificateRequest
 }
 
 // Send marshals and sends the CreateLoadBalancerTlsCertificate API request.
@@ -869,7 +886,7 @@ func (c *Lightsail) CreateLoadBalancerTlsCertificateRequest(input *CreateLoadBal
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLoadBalancerTlsCertificateRequest{Request: req, Input: input}
+	return CreateLoadBalancerTlsCertificateRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerTlsCertificateRequest}
 }
 
 const opDeleteDisk = "DeleteDisk"
@@ -878,6 +895,7 @@ const opDeleteDisk = "DeleteDisk"
 type DeleteDiskRequest struct {
 	*aws.Request
 	Input *DeleteDiskInput
+	Copy  func(*DeleteDiskInput) DeleteDiskRequest
 }
 
 // Send marshals and sends the DeleteDisk API request.
@@ -921,7 +939,7 @@ func (c *Lightsail) DeleteDiskRequest(input *DeleteDiskInput) DeleteDiskRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDiskRequest{Request: req, Input: input}
+	return DeleteDiskRequest{Request: req, Input: input, Copy: c.DeleteDiskRequest}
 }
 
 const opDeleteDiskSnapshot = "DeleteDiskSnapshot"
@@ -930,6 +948,7 @@ const opDeleteDiskSnapshot = "DeleteDiskSnapshot"
 type DeleteDiskSnapshotRequest struct {
 	*aws.Request
 	Input *DeleteDiskSnapshotInput
+	Copy  func(*DeleteDiskSnapshotInput) DeleteDiskSnapshotRequest
 }
 
 // Send marshals and sends the DeleteDiskSnapshot API request.
@@ -977,7 +996,7 @@ func (c *Lightsail) DeleteDiskSnapshotRequest(input *DeleteDiskSnapshotInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDiskSnapshotRequest{Request: req, Input: input}
+	return DeleteDiskSnapshotRequest{Request: req, Input: input, Copy: c.DeleteDiskSnapshotRequest}
 }
 
 const opDeleteDomain = "DeleteDomain"
@@ -986,6 +1005,7 @@ const opDeleteDomain = "DeleteDomain"
 type DeleteDomainRequest struct {
 	*aws.Request
 	Input *DeleteDomainInput
+	Copy  func(*DeleteDomainInput) DeleteDomainRequest
 }
 
 // Send marshals and sends the DeleteDomain API request.
@@ -1026,7 +1046,7 @@ func (c *Lightsail) DeleteDomainRequest(input *DeleteDomainInput) DeleteDomainRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDomainRequest{Request: req, Input: input}
+	return DeleteDomainRequest{Request: req, Input: input, Copy: c.DeleteDomainRequest}
 }
 
 const opDeleteDomainEntry = "DeleteDomainEntry"
@@ -1035,6 +1055,7 @@ const opDeleteDomainEntry = "DeleteDomainEntry"
 type DeleteDomainEntryRequest struct {
 	*aws.Request
 	Input *DeleteDomainEntryInput
+	Copy  func(*DeleteDomainEntryInput) DeleteDomainEntryRequest
 }
 
 // Send marshals and sends the DeleteDomainEntry API request.
@@ -1075,7 +1096,7 @@ func (c *Lightsail) DeleteDomainEntryRequest(input *DeleteDomainEntryInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDomainEntryRequest{Request: req, Input: input}
+	return DeleteDomainEntryRequest{Request: req, Input: input, Copy: c.DeleteDomainEntryRequest}
 }
 
 const opDeleteInstance = "DeleteInstance"
@@ -1084,6 +1105,7 @@ const opDeleteInstance = "DeleteInstance"
 type DeleteInstanceRequest struct {
 	*aws.Request
 	Input *DeleteInstanceInput
+	Copy  func(*DeleteInstanceInput) DeleteInstanceRequest
 }
 
 // Send marshals and sends the DeleteInstance API request.
@@ -1124,7 +1146,7 @@ func (c *Lightsail) DeleteInstanceRequest(input *DeleteInstanceInput) DeleteInst
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteInstanceRequest{Request: req, Input: input}
+	return DeleteInstanceRequest{Request: req, Input: input, Copy: c.DeleteInstanceRequest}
 }
 
 const opDeleteInstanceSnapshot = "DeleteInstanceSnapshot"
@@ -1133,6 +1155,7 @@ const opDeleteInstanceSnapshot = "DeleteInstanceSnapshot"
 type DeleteInstanceSnapshotRequest struct {
 	*aws.Request
 	Input *DeleteInstanceSnapshotInput
+	Copy  func(*DeleteInstanceSnapshotInput) DeleteInstanceSnapshotRequest
 }
 
 // Send marshals and sends the DeleteInstanceSnapshot API request.
@@ -1173,7 +1196,7 @@ func (c *Lightsail) DeleteInstanceSnapshotRequest(input *DeleteInstanceSnapshotI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteInstanceSnapshotRequest{Request: req, Input: input}
+	return DeleteInstanceSnapshotRequest{Request: req, Input: input, Copy: c.DeleteInstanceSnapshotRequest}
 }
 
 const opDeleteKeyPair = "DeleteKeyPair"
@@ -1182,6 +1205,7 @@ const opDeleteKeyPair = "DeleteKeyPair"
 type DeleteKeyPairRequest struct {
 	*aws.Request
 	Input *DeleteKeyPairInput
+	Copy  func(*DeleteKeyPairInput) DeleteKeyPairRequest
 }
 
 // Send marshals and sends the DeleteKeyPair API request.
@@ -1222,7 +1246,7 @@ func (c *Lightsail) DeleteKeyPairRequest(input *DeleteKeyPairInput) DeleteKeyPai
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteKeyPairRequest{Request: req, Input: input}
+	return DeleteKeyPairRequest{Request: req, Input: input, Copy: c.DeleteKeyPairRequest}
 }
 
 const opDeleteLoadBalancer = "DeleteLoadBalancer"
@@ -1231,6 +1255,7 @@ const opDeleteLoadBalancer = "DeleteLoadBalancer"
 type DeleteLoadBalancerRequest struct {
 	*aws.Request
 	Input *DeleteLoadBalancerInput
+	Copy  func(*DeleteLoadBalancerInput) DeleteLoadBalancerRequest
 }
 
 // Send marshals and sends the DeleteLoadBalancer API request.
@@ -1271,7 +1296,7 @@ func (c *Lightsail) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLoadBalancerRequest{Request: req, Input: input}
+	return DeleteLoadBalancerRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerRequest}
 }
 
 const opDeleteLoadBalancerTlsCertificate = "DeleteLoadBalancerTlsCertificate"
@@ -1280,6 +1305,7 @@ const opDeleteLoadBalancerTlsCertificate = "DeleteLoadBalancerTlsCertificate"
 type DeleteLoadBalancerTlsCertificateRequest struct {
 	*aws.Request
 	Input *DeleteLoadBalancerTlsCertificateInput
+	Copy  func(*DeleteLoadBalancerTlsCertificateInput) DeleteLoadBalancerTlsCertificateRequest
 }
 
 // Send marshals and sends the DeleteLoadBalancerTlsCertificate API request.
@@ -1320,7 +1346,7 @@ func (c *Lightsail) DeleteLoadBalancerTlsCertificateRequest(input *DeleteLoadBal
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLoadBalancerTlsCertificateRequest{Request: req, Input: input}
+	return DeleteLoadBalancerTlsCertificateRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerTlsCertificateRequest}
 }
 
 const opDetachDisk = "DetachDisk"
@@ -1329,6 +1355,7 @@ const opDetachDisk = "DetachDisk"
 type DetachDiskRequest struct {
 	*aws.Request
 	Input *DetachDiskInput
+	Copy  func(*DetachDiskInput) DetachDiskRequest
 }
 
 // Send marshals and sends the DetachDisk API request.
@@ -1371,7 +1398,7 @@ func (c *Lightsail) DetachDiskRequest(input *DetachDiskInput) DetachDiskRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachDiskRequest{Request: req, Input: input}
+	return DetachDiskRequest{Request: req, Input: input, Copy: c.DetachDiskRequest}
 }
 
 const opDetachInstancesFromLoadBalancer = "DetachInstancesFromLoadBalancer"
@@ -1380,6 +1407,7 @@ const opDetachInstancesFromLoadBalancer = "DetachInstancesFromLoadBalancer"
 type DetachInstancesFromLoadBalancerRequest struct {
 	*aws.Request
 	Input *DetachInstancesFromLoadBalancerInput
+	Copy  func(*DetachInstancesFromLoadBalancerInput) DetachInstancesFromLoadBalancerRequest
 }
 
 // Send marshals and sends the DetachInstancesFromLoadBalancer API request.
@@ -1420,7 +1448,7 @@ func (c *Lightsail) DetachInstancesFromLoadBalancerRequest(input *DetachInstance
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachInstancesFromLoadBalancerRequest{Request: req, Input: input}
+	return DetachInstancesFromLoadBalancerRequest{Request: req, Input: input, Copy: c.DetachInstancesFromLoadBalancerRequest}
 }
 
 const opDetachStaticIp = "DetachStaticIp"
@@ -1429,6 +1457,7 @@ const opDetachStaticIp = "DetachStaticIp"
 type DetachStaticIpRequest struct {
 	*aws.Request
 	Input *DetachStaticIpInput
+	Copy  func(*DetachStaticIpInput) DetachStaticIpRequest
 }
 
 // Send marshals and sends the DetachStaticIp API request.
@@ -1469,7 +1498,7 @@ func (c *Lightsail) DetachStaticIpRequest(input *DetachStaticIpInput) DetachStat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachStaticIpRequest{Request: req, Input: input}
+	return DetachStaticIpRequest{Request: req, Input: input, Copy: c.DetachStaticIpRequest}
 }
 
 const opDownloadDefaultKeyPair = "DownloadDefaultKeyPair"
@@ -1478,6 +1507,7 @@ const opDownloadDefaultKeyPair = "DownloadDefaultKeyPair"
 type DownloadDefaultKeyPairRequest struct {
 	*aws.Request
 	Input *DownloadDefaultKeyPairInput
+	Copy  func(*DownloadDefaultKeyPairInput) DownloadDefaultKeyPairRequest
 }
 
 // Send marshals and sends the DownloadDefaultKeyPair API request.
@@ -1518,7 +1548,7 @@ func (c *Lightsail) DownloadDefaultKeyPairRequest(input *DownloadDefaultKeyPairI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DownloadDefaultKeyPairRequest{Request: req, Input: input}
+	return DownloadDefaultKeyPairRequest{Request: req, Input: input, Copy: c.DownloadDefaultKeyPairRequest}
 }
 
 const opGetActiveNames = "GetActiveNames"
@@ -1527,6 +1557,7 @@ const opGetActiveNames = "GetActiveNames"
 type GetActiveNamesRequest struct {
 	*aws.Request
 	Input *GetActiveNamesInput
+	Copy  func(*GetActiveNamesInput) GetActiveNamesRequest
 }
 
 // Send marshals and sends the GetActiveNames API request.
@@ -1567,7 +1598,7 @@ func (c *Lightsail) GetActiveNamesRequest(input *GetActiveNamesInput) GetActiveN
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetActiveNamesRequest{Request: req, Input: input}
+	return GetActiveNamesRequest{Request: req, Input: input, Copy: c.GetActiveNamesRequest}
 }
 
 const opGetBlueprints = "GetBlueprints"
@@ -1576,6 +1607,7 @@ const opGetBlueprints = "GetBlueprints"
 type GetBlueprintsRequest struct {
 	*aws.Request
 	Input *GetBlueprintsInput
+	Copy  func(*GetBlueprintsInput) GetBlueprintsRequest
 }
 
 // Send marshals and sends the GetBlueprints API request.
@@ -1619,7 +1651,7 @@ func (c *Lightsail) GetBlueprintsRequest(input *GetBlueprintsInput) GetBlueprint
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBlueprintsRequest{Request: req, Input: input}
+	return GetBlueprintsRequest{Request: req, Input: input, Copy: c.GetBlueprintsRequest}
 }
 
 const opGetBundles = "GetBundles"
@@ -1628,6 +1660,7 @@ const opGetBundles = "GetBundles"
 type GetBundlesRequest struct {
 	*aws.Request
 	Input *GetBundlesInput
+	Copy  func(*GetBundlesInput) GetBundlesRequest
 }
 
 // Send marshals and sends the GetBundles API request.
@@ -1669,7 +1702,7 @@ func (c *Lightsail) GetBundlesRequest(input *GetBundlesInput) GetBundlesRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBundlesRequest{Request: req, Input: input}
+	return GetBundlesRequest{Request: req, Input: input, Copy: c.GetBundlesRequest}
 }
 
 const opGetDisk = "GetDisk"
@@ -1678,6 +1711,7 @@ const opGetDisk = "GetDisk"
 type GetDiskRequest struct {
 	*aws.Request
 	Input *GetDiskInput
+	Copy  func(*GetDiskInput) GetDiskRequest
 }
 
 // Send marshals and sends the GetDisk API request.
@@ -1718,7 +1752,7 @@ func (c *Lightsail) GetDiskRequest(input *GetDiskInput) GetDiskRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDiskRequest{Request: req, Input: input}
+	return GetDiskRequest{Request: req, Input: input, Copy: c.GetDiskRequest}
 }
 
 const opGetDiskSnapshot = "GetDiskSnapshot"
@@ -1727,6 +1761,7 @@ const opGetDiskSnapshot = "GetDiskSnapshot"
 type GetDiskSnapshotRequest struct {
 	*aws.Request
 	Input *GetDiskSnapshotInput
+	Copy  func(*GetDiskSnapshotInput) GetDiskSnapshotRequest
 }
 
 // Send marshals and sends the GetDiskSnapshot API request.
@@ -1767,7 +1802,7 @@ func (c *Lightsail) GetDiskSnapshotRequest(input *GetDiskSnapshotInput) GetDiskS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDiskSnapshotRequest{Request: req, Input: input}
+	return GetDiskSnapshotRequest{Request: req, Input: input, Copy: c.GetDiskSnapshotRequest}
 }
 
 const opGetDiskSnapshots = "GetDiskSnapshots"
@@ -1776,6 +1811,7 @@ const opGetDiskSnapshots = "GetDiskSnapshots"
 type GetDiskSnapshotsRequest struct {
 	*aws.Request
 	Input *GetDiskSnapshotsInput
+	Copy  func(*GetDiskSnapshotsInput) GetDiskSnapshotsRequest
 }
 
 // Send marshals and sends the GetDiskSnapshots API request.
@@ -1821,7 +1857,7 @@ func (c *Lightsail) GetDiskSnapshotsRequest(input *GetDiskSnapshotsInput) GetDis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDiskSnapshotsRequest{Request: req, Input: input}
+	return GetDiskSnapshotsRequest{Request: req, Input: input, Copy: c.GetDiskSnapshotsRequest}
 }
 
 const opGetDisks = "GetDisks"
@@ -1830,6 +1866,7 @@ const opGetDisks = "GetDisks"
 type GetDisksRequest struct {
 	*aws.Request
 	Input *GetDisksInput
+	Copy  func(*GetDisksInput) GetDisksRequest
 }
 
 // Send marshals and sends the GetDisks API request.
@@ -1875,7 +1912,7 @@ func (c *Lightsail) GetDisksRequest(input *GetDisksInput) GetDisksRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDisksRequest{Request: req, Input: input}
+	return GetDisksRequest{Request: req, Input: input, Copy: c.GetDisksRequest}
 }
 
 const opGetDomain = "GetDomain"
@@ -1884,6 +1921,7 @@ const opGetDomain = "GetDomain"
 type GetDomainRequest struct {
 	*aws.Request
 	Input *GetDomainInput
+	Copy  func(*GetDomainInput) GetDomainRequest
 }
 
 // Send marshals and sends the GetDomain API request.
@@ -1924,7 +1962,7 @@ func (c *Lightsail) GetDomainRequest(input *GetDomainInput) GetDomainRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDomainRequest{Request: req, Input: input}
+	return GetDomainRequest{Request: req, Input: input, Copy: c.GetDomainRequest}
 }
 
 const opGetDomains = "GetDomains"
@@ -1933,6 +1971,7 @@ const opGetDomains = "GetDomains"
 type GetDomainsRequest struct {
 	*aws.Request
 	Input *GetDomainsInput
+	Copy  func(*GetDomainsInput) GetDomainsRequest
 }
 
 // Send marshals and sends the GetDomains API request.
@@ -1973,7 +2012,7 @@ func (c *Lightsail) GetDomainsRequest(input *GetDomainsInput) GetDomainsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDomainsRequest{Request: req, Input: input}
+	return GetDomainsRequest{Request: req, Input: input, Copy: c.GetDomainsRequest}
 }
 
 const opGetInstance = "GetInstance"
@@ -1982,6 +2021,7 @@ const opGetInstance = "GetInstance"
 type GetInstanceRequest struct {
 	*aws.Request
 	Input *GetInstanceInput
+	Copy  func(*GetInstanceInput) GetInstanceRequest
 }
 
 // Send marshals and sends the GetInstance API request.
@@ -2023,7 +2063,7 @@ func (c *Lightsail) GetInstanceRequest(input *GetInstanceInput) GetInstanceReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstanceRequest{Request: req, Input: input}
+	return GetInstanceRequest{Request: req, Input: input, Copy: c.GetInstanceRequest}
 }
 
 const opGetInstanceAccessDetails = "GetInstanceAccessDetails"
@@ -2032,6 +2072,7 @@ const opGetInstanceAccessDetails = "GetInstanceAccessDetails"
 type GetInstanceAccessDetailsRequest struct {
 	*aws.Request
 	Input *GetInstanceAccessDetailsInput
+	Copy  func(*GetInstanceAccessDetailsInput) GetInstanceAccessDetailsRequest
 }
 
 // Send marshals and sends the GetInstanceAccessDetails API request.
@@ -2073,7 +2114,7 @@ func (c *Lightsail) GetInstanceAccessDetailsRequest(input *GetInstanceAccessDeta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstanceAccessDetailsRequest{Request: req, Input: input}
+	return GetInstanceAccessDetailsRequest{Request: req, Input: input, Copy: c.GetInstanceAccessDetailsRequest}
 }
 
 const opGetInstanceMetricData = "GetInstanceMetricData"
@@ -2082,6 +2123,7 @@ const opGetInstanceMetricData = "GetInstanceMetricData"
 type GetInstanceMetricDataRequest struct {
 	*aws.Request
 	Input *GetInstanceMetricDataInput
+	Copy  func(*GetInstanceMetricDataInput) GetInstanceMetricDataRequest
 }
 
 // Send marshals and sends the GetInstanceMetricData API request.
@@ -2123,7 +2165,7 @@ func (c *Lightsail) GetInstanceMetricDataRequest(input *GetInstanceMetricDataInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstanceMetricDataRequest{Request: req, Input: input}
+	return GetInstanceMetricDataRequest{Request: req, Input: input, Copy: c.GetInstanceMetricDataRequest}
 }
 
 const opGetInstancePortStates = "GetInstancePortStates"
@@ -2132,6 +2174,7 @@ const opGetInstancePortStates = "GetInstancePortStates"
 type GetInstancePortStatesRequest struct {
 	*aws.Request
 	Input *GetInstancePortStatesInput
+	Copy  func(*GetInstancePortStatesInput) GetInstancePortStatesRequest
 }
 
 // Send marshals and sends the GetInstancePortStates API request.
@@ -2172,7 +2215,7 @@ func (c *Lightsail) GetInstancePortStatesRequest(input *GetInstancePortStatesInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstancePortStatesRequest{Request: req, Input: input}
+	return GetInstancePortStatesRequest{Request: req, Input: input, Copy: c.GetInstancePortStatesRequest}
 }
 
 const opGetInstanceSnapshot = "GetInstanceSnapshot"
@@ -2181,6 +2224,7 @@ const opGetInstanceSnapshot = "GetInstanceSnapshot"
 type GetInstanceSnapshotRequest struct {
 	*aws.Request
 	Input *GetInstanceSnapshotInput
+	Copy  func(*GetInstanceSnapshotInput) GetInstanceSnapshotRequest
 }
 
 // Send marshals and sends the GetInstanceSnapshot API request.
@@ -2221,7 +2265,7 @@ func (c *Lightsail) GetInstanceSnapshotRequest(input *GetInstanceSnapshotInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstanceSnapshotRequest{Request: req, Input: input}
+	return GetInstanceSnapshotRequest{Request: req, Input: input, Copy: c.GetInstanceSnapshotRequest}
 }
 
 const opGetInstanceSnapshots = "GetInstanceSnapshots"
@@ -2230,6 +2274,7 @@ const opGetInstanceSnapshots = "GetInstanceSnapshots"
 type GetInstanceSnapshotsRequest struct {
 	*aws.Request
 	Input *GetInstanceSnapshotsInput
+	Copy  func(*GetInstanceSnapshotsInput) GetInstanceSnapshotsRequest
 }
 
 // Send marshals and sends the GetInstanceSnapshots API request.
@@ -2270,7 +2315,7 @@ func (c *Lightsail) GetInstanceSnapshotsRequest(input *GetInstanceSnapshotsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstanceSnapshotsRequest{Request: req, Input: input}
+	return GetInstanceSnapshotsRequest{Request: req, Input: input, Copy: c.GetInstanceSnapshotsRequest}
 }
 
 const opGetInstanceState = "GetInstanceState"
@@ -2279,6 +2324,7 @@ const opGetInstanceState = "GetInstanceState"
 type GetInstanceStateRequest struct {
 	*aws.Request
 	Input *GetInstanceStateInput
+	Copy  func(*GetInstanceStateInput) GetInstanceStateRequest
 }
 
 // Send marshals and sends the GetInstanceState API request.
@@ -2319,7 +2365,7 @@ func (c *Lightsail) GetInstanceStateRequest(input *GetInstanceStateInput) GetIns
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstanceStateRequest{Request: req, Input: input}
+	return GetInstanceStateRequest{Request: req, Input: input, Copy: c.GetInstanceStateRequest}
 }
 
 const opGetInstances = "GetInstances"
@@ -2328,6 +2374,7 @@ const opGetInstances = "GetInstances"
 type GetInstancesRequest struct {
 	*aws.Request
 	Input *GetInstancesInput
+	Copy  func(*GetInstancesInput) GetInstancesRequest
 }
 
 // Send marshals and sends the GetInstances API request.
@@ -2369,7 +2416,7 @@ func (c *Lightsail) GetInstancesRequest(input *GetInstancesInput) GetInstancesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInstancesRequest{Request: req, Input: input}
+	return GetInstancesRequest{Request: req, Input: input, Copy: c.GetInstancesRequest}
 }
 
 const opGetKeyPair = "GetKeyPair"
@@ -2378,6 +2425,7 @@ const opGetKeyPair = "GetKeyPair"
 type GetKeyPairRequest struct {
 	*aws.Request
 	Input *GetKeyPairInput
+	Copy  func(*GetKeyPairInput) GetKeyPairRequest
 }
 
 // Send marshals and sends the GetKeyPair API request.
@@ -2418,7 +2466,7 @@ func (c *Lightsail) GetKeyPairRequest(input *GetKeyPairInput) GetKeyPairRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetKeyPairRequest{Request: req, Input: input}
+	return GetKeyPairRequest{Request: req, Input: input, Copy: c.GetKeyPairRequest}
 }
 
 const opGetKeyPairs = "GetKeyPairs"
@@ -2427,6 +2475,7 @@ const opGetKeyPairs = "GetKeyPairs"
 type GetKeyPairsRequest struct {
 	*aws.Request
 	Input *GetKeyPairsInput
+	Copy  func(*GetKeyPairsInput) GetKeyPairsRequest
 }
 
 // Send marshals and sends the GetKeyPairs API request.
@@ -2467,7 +2516,7 @@ func (c *Lightsail) GetKeyPairsRequest(input *GetKeyPairsInput) GetKeyPairsReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetKeyPairsRequest{Request: req, Input: input}
+	return GetKeyPairsRequest{Request: req, Input: input, Copy: c.GetKeyPairsRequest}
 }
 
 const opGetLoadBalancer = "GetLoadBalancer"
@@ -2476,6 +2525,7 @@ const opGetLoadBalancer = "GetLoadBalancer"
 type GetLoadBalancerRequest struct {
 	*aws.Request
 	Input *GetLoadBalancerInput
+	Copy  func(*GetLoadBalancerInput) GetLoadBalancerRequest
 }
 
 // Send marshals and sends the GetLoadBalancer API request.
@@ -2516,7 +2566,7 @@ func (c *Lightsail) GetLoadBalancerRequest(input *GetLoadBalancerInput) GetLoadB
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLoadBalancerRequest{Request: req, Input: input}
+	return GetLoadBalancerRequest{Request: req, Input: input, Copy: c.GetLoadBalancerRequest}
 }
 
 const opGetLoadBalancerMetricData = "GetLoadBalancerMetricData"
@@ -2525,6 +2575,7 @@ const opGetLoadBalancerMetricData = "GetLoadBalancerMetricData"
 type GetLoadBalancerMetricDataRequest struct {
 	*aws.Request
 	Input *GetLoadBalancerMetricDataInput
+	Copy  func(*GetLoadBalancerMetricDataInput) GetLoadBalancerMetricDataRequest
 }
 
 // Send marshals and sends the GetLoadBalancerMetricData API request.
@@ -2565,7 +2616,7 @@ func (c *Lightsail) GetLoadBalancerMetricDataRequest(input *GetLoadBalancerMetri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLoadBalancerMetricDataRequest{Request: req, Input: input}
+	return GetLoadBalancerMetricDataRequest{Request: req, Input: input, Copy: c.GetLoadBalancerMetricDataRequest}
 }
 
 const opGetLoadBalancerTlsCertificates = "GetLoadBalancerTlsCertificates"
@@ -2574,6 +2625,7 @@ const opGetLoadBalancerTlsCertificates = "GetLoadBalancerTlsCertificates"
 type GetLoadBalancerTlsCertificatesRequest struct {
 	*aws.Request
 	Input *GetLoadBalancerTlsCertificatesInput
+	Copy  func(*GetLoadBalancerTlsCertificatesInput) GetLoadBalancerTlsCertificatesRequest
 }
 
 // Send marshals and sends the GetLoadBalancerTlsCertificates API request.
@@ -2617,7 +2669,7 @@ func (c *Lightsail) GetLoadBalancerTlsCertificatesRequest(input *GetLoadBalancer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLoadBalancerTlsCertificatesRequest{Request: req, Input: input}
+	return GetLoadBalancerTlsCertificatesRequest{Request: req, Input: input, Copy: c.GetLoadBalancerTlsCertificatesRequest}
 }
 
 const opGetLoadBalancers = "GetLoadBalancers"
@@ -2626,6 +2678,7 @@ const opGetLoadBalancers = "GetLoadBalancers"
 type GetLoadBalancersRequest struct {
 	*aws.Request
 	Input *GetLoadBalancersInput
+	Copy  func(*GetLoadBalancersInput) GetLoadBalancersRequest
 }
 
 // Send marshals and sends the GetLoadBalancers API request.
@@ -2670,7 +2723,7 @@ func (c *Lightsail) GetLoadBalancersRequest(input *GetLoadBalancersInput) GetLoa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLoadBalancersRequest{Request: req, Input: input}
+	return GetLoadBalancersRequest{Request: req, Input: input, Copy: c.GetLoadBalancersRequest}
 }
 
 const opGetOperation = "GetOperation"
@@ -2679,6 +2732,7 @@ const opGetOperation = "GetOperation"
 type GetOperationRequest struct {
 	*aws.Request
 	Input *GetOperationInput
+	Copy  func(*GetOperationInput) GetOperationRequest
 }
 
 // Send marshals and sends the GetOperation API request.
@@ -2721,7 +2775,7 @@ func (c *Lightsail) GetOperationRequest(input *GetOperationInput) GetOperationRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOperationRequest{Request: req, Input: input}
+	return GetOperationRequest{Request: req, Input: input, Copy: c.GetOperationRequest}
 }
 
 const opGetOperations = "GetOperations"
@@ -2730,6 +2784,7 @@ const opGetOperations = "GetOperations"
 type GetOperationsRequest struct {
 	*aws.Request
 	Input *GetOperationsInput
+	Copy  func(*GetOperationsInput) GetOperationsRequest
 }
 
 // Send marshals and sends the GetOperations API request.
@@ -2774,7 +2829,7 @@ func (c *Lightsail) GetOperationsRequest(input *GetOperationsInput) GetOperation
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOperationsRequest{Request: req, Input: input}
+	return GetOperationsRequest{Request: req, Input: input, Copy: c.GetOperationsRequest}
 }
 
 const opGetOperationsForResource = "GetOperationsForResource"
@@ -2783,6 +2838,7 @@ const opGetOperationsForResource = "GetOperationsForResource"
 type GetOperationsForResourceRequest struct {
 	*aws.Request
 	Input *GetOperationsForResourceInput
+	Copy  func(*GetOperationsForResourceInput) GetOperationsForResourceRequest
 }
 
 // Send marshals and sends the GetOperationsForResource API request.
@@ -2823,7 +2879,7 @@ func (c *Lightsail) GetOperationsForResourceRequest(input *GetOperationsForResou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetOperationsForResourceRequest{Request: req, Input: input}
+	return GetOperationsForResourceRequest{Request: req, Input: input, Copy: c.GetOperationsForResourceRequest}
 }
 
 const opGetRegions = "GetRegions"
@@ -2832,6 +2888,7 @@ const opGetRegions = "GetRegions"
 type GetRegionsRequest struct {
 	*aws.Request
 	Input *GetRegionsInput
+	Copy  func(*GetRegionsInput) GetRegionsRequest
 }
 
 // Send marshals and sends the GetRegions API request.
@@ -2873,7 +2930,7 @@ func (c *Lightsail) GetRegionsRequest(input *GetRegionsInput) GetRegionsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRegionsRequest{Request: req, Input: input}
+	return GetRegionsRequest{Request: req, Input: input, Copy: c.GetRegionsRequest}
 }
 
 const opGetStaticIp = "GetStaticIp"
@@ -2882,6 +2939,7 @@ const opGetStaticIp = "GetStaticIp"
 type GetStaticIpRequest struct {
 	*aws.Request
 	Input *GetStaticIpInput
+	Copy  func(*GetStaticIpInput) GetStaticIpRequest
 }
 
 // Send marshals and sends the GetStaticIp API request.
@@ -2922,7 +2980,7 @@ func (c *Lightsail) GetStaticIpRequest(input *GetStaticIpInput) GetStaticIpReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetStaticIpRequest{Request: req, Input: input}
+	return GetStaticIpRequest{Request: req, Input: input, Copy: c.GetStaticIpRequest}
 }
 
 const opGetStaticIps = "GetStaticIps"
@@ -2931,6 +2989,7 @@ const opGetStaticIps = "GetStaticIps"
 type GetStaticIpsRequest struct {
 	*aws.Request
 	Input *GetStaticIpsInput
+	Copy  func(*GetStaticIpsInput) GetStaticIpsRequest
 }
 
 // Send marshals and sends the GetStaticIps API request.
@@ -2971,7 +3030,7 @@ func (c *Lightsail) GetStaticIpsRequest(input *GetStaticIpsInput) GetStaticIpsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetStaticIpsRequest{Request: req, Input: input}
+	return GetStaticIpsRequest{Request: req, Input: input, Copy: c.GetStaticIpsRequest}
 }
 
 const opImportKeyPair = "ImportKeyPair"
@@ -2980,6 +3039,7 @@ const opImportKeyPair = "ImportKeyPair"
 type ImportKeyPairRequest struct {
 	*aws.Request
 	Input *ImportKeyPairInput
+	Copy  func(*ImportKeyPairInput) ImportKeyPairRequest
 }
 
 // Send marshals and sends the ImportKeyPair API request.
@@ -3020,7 +3080,7 @@ func (c *Lightsail) ImportKeyPairRequest(input *ImportKeyPairInput) ImportKeyPai
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportKeyPairRequest{Request: req, Input: input}
+	return ImportKeyPairRequest{Request: req, Input: input, Copy: c.ImportKeyPairRequest}
 }
 
 const opIsVpcPeered = "IsVpcPeered"
@@ -3029,6 +3089,7 @@ const opIsVpcPeered = "IsVpcPeered"
 type IsVpcPeeredRequest struct {
 	*aws.Request
 	Input *IsVpcPeeredInput
+	Copy  func(*IsVpcPeeredInput) IsVpcPeeredRequest
 }
 
 // Send marshals and sends the IsVpcPeered API request.
@@ -3069,7 +3130,7 @@ func (c *Lightsail) IsVpcPeeredRequest(input *IsVpcPeeredInput) IsVpcPeeredReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return IsVpcPeeredRequest{Request: req, Input: input}
+	return IsVpcPeeredRequest{Request: req, Input: input, Copy: c.IsVpcPeeredRequest}
 }
 
 const opOpenInstancePublicPorts = "OpenInstancePublicPorts"
@@ -3078,6 +3139,7 @@ const opOpenInstancePublicPorts = "OpenInstancePublicPorts"
 type OpenInstancePublicPortsRequest struct {
 	*aws.Request
 	Input *OpenInstancePublicPortsInput
+	Copy  func(*OpenInstancePublicPortsInput) OpenInstancePublicPortsRequest
 }
 
 // Send marshals and sends the OpenInstancePublicPorts API request.
@@ -3118,7 +3180,7 @@ func (c *Lightsail) OpenInstancePublicPortsRequest(input *OpenInstancePublicPort
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return OpenInstancePublicPortsRequest{Request: req, Input: input}
+	return OpenInstancePublicPortsRequest{Request: req, Input: input, Copy: c.OpenInstancePublicPortsRequest}
 }
 
 const opPeerVpc = "PeerVpc"
@@ -3127,6 +3189,7 @@ const opPeerVpc = "PeerVpc"
 type PeerVpcRequest struct {
 	*aws.Request
 	Input *PeerVpcInput
+	Copy  func(*PeerVpcInput) PeerVpcRequest
 }
 
 // Send marshals and sends the PeerVpc API request.
@@ -3167,7 +3230,7 @@ func (c *Lightsail) PeerVpcRequest(input *PeerVpcInput) PeerVpcRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PeerVpcRequest{Request: req, Input: input}
+	return PeerVpcRequest{Request: req, Input: input, Copy: c.PeerVpcRequest}
 }
 
 const opPutInstancePublicPorts = "PutInstancePublicPorts"
@@ -3176,6 +3239,7 @@ const opPutInstancePublicPorts = "PutInstancePublicPorts"
 type PutInstancePublicPortsRequest struct {
 	*aws.Request
 	Input *PutInstancePublicPortsInput
+	Copy  func(*PutInstancePublicPortsInput) PutInstancePublicPortsRequest
 }
 
 // Send marshals and sends the PutInstancePublicPorts API request.
@@ -3217,7 +3281,7 @@ func (c *Lightsail) PutInstancePublicPortsRequest(input *PutInstancePublicPortsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutInstancePublicPortsRequest{Request: req, Input: input}
+	return PutInstancePublicPortsRequest{Request: req, Input: input, Copy: c.PutInstancePublicPortsRequest}
 }
 
 const opRebootInstance = "RebootInstance"
@@ -3226,6 +3290,7 @@ const opRebootInstance = "RebootInstance"
 type RebootInstanceRequest struct {
 	*aws.Request
 	Input *RebootInstanceInput
+	Copy  func(*RebootInstanceInput) RebootInstanceRequest
 }
 
 // Send marshals and sends the RebootInstance API request.
@@ -3269,7 +3334,7 @@ func (c *Lightsail) RebootInstanceRequest(input *RebootInstanceInput) RebootInst
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RebootInstanceRequest{Request: req, Input: input}
+	return RebootInstanceRequest{Request: req, Input: input, Copy: c.RebootInstanceRequest}
 }
 
 const opReleaseStaticIp = "ReleaseStaticIp"
@@ -3278,6 +3343,7 @@ const opReleaseStaticIp = "ReleaseStaticIp"
 type ReleaseStaticIpRequest struct {
 	*aws.Request
 	Input *ReleaseStaticIpInput
+	Copy  func(*ReleaseStaticIpInput) ReleaseStaticIpRequest
 }
 
 // Send marshals and sends the ReleaseStaticIp API request.
@@ -3318,7 +3384,7 @@ func (c *Lightsail) ReleaseStaticIpRequest(input *ReleaseStaticIpInput) ReleaseS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReleaseStaticIpRequest{Request: req, Input: input}
+	return ReleaseStaticIpRequest{Request: req, Input: input, Copy: c.ReleaseStaticIpRequest}
 }
 
 const opStartInstance = "StartInstance"
@@ -3327,6 +3393,7 @@ const opStartInstance = "StartInstance"
 type StartInstanceRequest struct {
 	*aws.Request
 	Input *StartInstanceInput
+	Copy  func(*StartInstanceInput) StartInstanceRequest
 }
 
 // Send marshals and sends the StartInstance API request.
@@ -3368,7 +3435,7 @@ func (c *Lightsail) StartInstanceRequest(input *StartInstanceInput) StartInstanc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartInstanceRequest{Request: req, Input: input}
+	return StartInstanceRequest{Request: req, Input: input, Copy: c.StartInstanceRequest}
 }
 
 const opStopInstance = "StopInstance"
@@ -3377,6 +3444,7 @@ const opStopInstance = "StopInstance"
 type StopInstanceRequest struct {
 	*aws.Request
 	Input *StopInstanceInput
+	Copy  func(*StopInstanceInput) StopInstanceRequest
 }
 
 // Send marshals and sends the StopInstance API request.
@@ -3417,7 +3485,7 @@ func (c *Lightsail) StopInstanceRequest(input *StopInstanceInput) StopInstanceRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopInstanceRequest{Request: req, Input: input}
+	return StopInstanceRequest{Request: req, Input: input, Copy: c.StopInstanceRequest}
 }
 
 const opUnpeerVpc = "UnpeerVpc"
@@ -3426,6 +3494,7 @@ const opUnpeerVpc = "UnpeerVpc"
 type UnpeerVpcRequest struct {
 	*aws.Request
 	Input *UnpeerVpcInput
+	Copy  func(*UnpeerVpcInput) UnpeerVpcRequest
 }
 
 // Send marshals and sends the UnpeerVpc API request.
@@ -3466,7 +3535,7 @@ func (c *Lightsail) UnpeerVpcRequest(input *UnpeerVpcInput) UnpeerVpcRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UnpeerVpcRequest{Request: req, Input: input}
+	return UnpeerVpcRequest{Request: req, Input: input, Copy: c.UnpeerVpcRequest}
 }
 
 const opUpdateDomainEntry = "UpdateDomainEntry"
@@ -3475,6 +3544,7 @@ const opUpdateDomainEntry = "UpdateDomainEntry"
 type UpdateDomainEntryRequest struct {
 	*aws.Request
 	Input *UpdateDomainEntryInput
+	Copy  func(*UpdateDomainEntryInput) UpdateDomainEntryRequest
 }
 
 // Send marshals and sends the UpdateDomainEntry API request.
@@ -3515,7 +3585,7 @@ func (c *Lightsail) UpdateDomainEntryRequest(input *UpdateDomainEntryInput) Upda
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDomainEntryRequest{Request: req, Input: input}
+	return UpdateDomainEntryRequest{Request: req, Input: input, Copy: c.UpdateDomainEntryRequest}
 }
 
 const opUpdateLoadBalancerAttribute = "UpdateLoadBalancerAttribute"
@@ -3524,6 +3594,7 @@ const opUpdateLoadBalancerAttribute = "UpdateLoadBalancerAttribute"
 type UpdateLoadBalancerAttributeRequest struct {
 	*aws.Request
 	Input *UpdateLoadBalancerAttributeInput
+	Copy  func(*UpdateLoadBalancerAttributeInput) UpdateLoadBalancerAttributeRequest
 }
 
 // Send marshals and sends the UpdateLoadBalancerAttribute API request.
@@ -3564,7 +3635,7 @@ func (c *Lightsail) UpdateLoadBalancerAttributeRequest(input *UpdateLoadBalancer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateLoadBalancerAttributeRequest{Request: req, Input: input}
+	return UpdateLoadBalancerAttributeRequest{Request: req, Input: input, Copy: c.UpdateLoadBalancerAttributeRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AllocateStaticIpRequest

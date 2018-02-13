@@ -9,7 +9,6 @@
 package smsiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sms"
 )
 
@@ -73,23 +72,11 @@ type SMSAPI interface {
 
 	GetConnectorsRequest(*sms.GetConnectorsInput) sms.GetConnectorsRequest
 
-	GetConnectorsPages(*sms.GetConnectorsInput, func(*sms.GetConnectorsOutput, bool) bool) error
-	GetConnectorsPagesWithContext(aws.Context, *sms.GetConnectorsInput, func(*sms.GetConnectorsOutput, bool) bool, ...aws.Option) error
-
 	GetReplicationJobsRequest(*sms.GetReplicationJobsInput) sms.GetReplicationJobsRequest
-
-	GetReplicationJobsPages(*sms.GetReplicationJobsInput, func(*sms.GetReplicationJobsOutput, bool) bool) error
-	GetReplicationJobsPagesWithContext(aws.Context, *sms.GetReplicationJobsInput, func(*sms.GetReplicationJobsOutput, bool) bool, ...aws.Option) error
 
 	GetReplicationRunsRequest(*sms.GetReplicationRunsInput) sms.GetReplicationRunsRequest
 
-	GetReplicationRunsPages(*sms.GetReplicationRunsInput, func(*sms.GetReplicationRunsOutput, bool) bool) error
-	GetReplicationRunsPagesWithContext(aws.Context, *sms.GetReplicationRunsInput, func(*sms.GetReplicationRunsOutput, bool) bool, ...aws.Option) error
-
 	GetServersRequest(*sms.GetServersInput) sms.GetServersRequest
-
-	GetServersPages(*sms.GetServersInput, func(*sms.GetServersOutput, bool) bool) error
-	GetServersPagesWithContext(aws.Context, *sms.GetServersInput, func(*sms.GetServersOutput, bool) bool, ...aws.Option) error
 
 	ImportServerCatalogRequest(*sms.ImportServerCatalogInput) sms.ImportServerCatalogRequest
 

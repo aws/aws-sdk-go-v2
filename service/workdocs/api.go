@@ -18,6 +18,7 @@ const opAbortDocumentVersionUpload = "AbortDocumentVersionUpload"
 type AbortDocumentVersionUploadRequest struct {
 	*aws.Request
 	Input *AbortDocumentVersionUploadInput
+	Copy  func(*AbortDocumentVersionUploadInput) AbortDocumentVersionUploadRequest
 }
 
 // Send marshals and sends the AbortDocumentVersionUpload API request.
@@ -62,7 +63,7 @@ func (c *WorkDocs) AbortDocumentVersionUploadRequest(input *AbortDocumentVersion
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AbortDocumentVersionUploadRequest{Request: req, Input: input}
+	return AbortDocumentVersionUploadRequest{Request: req, Input: input, Copy: c.AbortDocumentVersionUploadRequest}
 }
 
 const opActivateUser = "ActivateUser"
@@ -71,6 +72,7 @@ const opActivateUser = "ActivateUser"
 type ActivateUserRequest struct {
 	*aws.Request
 	Input *ActivateUserInput
+	Copy  func(*ActivateUserInput) ActivateUserRequest
 }
 
 // Send marshals and sends the ActivateUser API request.
@@ -111,7 +113,7 @@ func (c *WorkDocs) ActivateUserRequest(input *ActivateUserInput) ActivateUserReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ActivateUserRequest{Request: req, Input: input}
+	return ActivateUserRequest{Request: req, Input: input, Copy: c.ActivateUserRequest}
 }
 
 const opAddResourcePermissions = "AddResourcePermissions"
@@ -120,6 +122,7 @@ const opAddResourcePermissions = "AddResourcePermissions"
 type AddResourcePermissionsRequest struct {
 	*aws.Request
 	Input *AddResourcePermissionsInput
+	Copy  func(*AddResourcePermissionsInput) AddResourcePermissionsRequest
 }
 
 // Send marshals and sends the AddResourcePermissions API request.
@@ -161,7 +164,7 @@ func (c *WorkDocs) AddResourcePermissionsRequest(input *AddResourcePermissionsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddResourcePermissionsRequest{Request: req, Input: input}
+	return AddResourcePermissionsRequest{Request: req, Input: input, Copy: c.AddResourcePermissionsRequest}
 }
 
 const opCreateComment = "CreateComment"
@@ -170,6 +173,7 @@ const opCreateComment = "CreateComment"
 type CreateCommentRequest struct {
 	*aws.Request
 	Input *CreateCommentInput
+	Copy  func(*CreateCommentInput) CreateCommentRequest
 }
 
 // Send marshals and sends the CreateComment API request.
@@ -210,7 +214,7 @@ func (c *WorkDocs) CreateCommentRequest(input *CreateCommentInput) CreateComment
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCommentRequest{Request: req, Input: input}
+	return CreateCommentRequest{Request: req, Input: input, Copy: c.CreateCommentRequest}
 }
 
 const opCreateCustomMetadata = "CreateCustomMetadata"
@@ -219,6 +223,7 @@ const opCreateCustomMetadata = "CreateCustomMetadata"
 type CreateCustomMetadataRequest struct {
 	*aws.Request
 	Input *CreateCustomMetadataInput
+	Copy  func(*CreateCustomMetadataInput) CreateCustomMetadataRequest
 }
 
 // Send marshals and sends the CreateCustomMetadata API request.
@@ -260,7 +265,7 @@ func (c *WorkDocs) CreateCustomMetadataRequest(input *CreateCustomMetadataInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCustomMetadataRequest{Request: req, Input: input}
+	return CreateCustomMetadataRequest{Request: req, Input: input, Copy: c.CreateCustomMetadataRequest}
 }
 
 const opCreateFolder = "CreateFolder"
@@ -269,6 +274,7 @@ const opCreateFolder = "CreateFolder"
 type CreateFolderRequest struct {
 	*aws.Request
 	Input *CreateFolderInput
+	Copy  func(*CreateFolderInput) CreateFolderRequest
 }
 
 // Send marshals and sends the CreateFolder API request.
@@ -309,7 +315,7 @@ func (c *WorkDocs) CreateFolderRequest(input *CreateFolderInput) CreateFolderReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateFolderRequest{Request: req, Input: input}
+	return CreateFolderRequest{Request: req, Input: input, Copy: c.CreateFolderRequest}
 }
 
 const opCreateLabels = "CreateLabels"
@@ -318,6 +324,7 @@ const opCreateLabels = "CreateLabels"
 type CreateLabelsRequest struct {
 	*aws.Request
 	Input *CreateLabelsInput
+	Copy  func(*CreateLabelsInput) CreateLabelsRequest
 }
 
 // Send marshals and sends the CreateLabels API request.
@@ -358,7 +365,7 @@ func (c *WorkDocs) CreateLabelsRequest(input *CreateLabelsInput) CreateLabelsReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLabelsRequest{Request: req, Input: input}
+	return CreateLabelsRequest{Request: req, Input: input, Copy: c.CreateLabelsRequest}
 }
 
 const opCreateNotificationSubscription = "CreateNotificationSubscription"
@@ -367,6 +374,7 @@ const opCreateNotificationSubscription = "CreateNotificationSubscription"
 type CreateNotificationSubscriptionRequest struct {
 	*aws.Request
 	Input *CreateNotificationSubscriptionInput
+	Copy  func(*CreateNotificationSubscriptionInput) CreateNotificationSubscriptionRequest
 }
 
 // Send marshals and sends the CreateNotificationSubscription API request.
@@ -411,7 +419,7 @@ func (c *WorkDocs) CreateNotificationSubscriptionRequest(input *CreateNotificati
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNotificationSubscriptionRequest{Request: req, Input: input}
+	return CreateNotificationSubscriptionRequest{Request: req, Input: input, Copy: c.CreateNotificationSubscriptionRequest}
 }
 
 const opCreateUser = "CreateUser"
@@ -420,6 +428,7 @@ const opCreateUser = "CreateUser"
 type CreateUserRequest struct {
 	*aws.Request
 	Input *CreateUserInput
+	Copy  func(*CreateUserInput) CreateUserRequest
 }
 
 // Send marshals and sends the CreateUser API request.
@@ -461,7 +470,7 @@ func (c *WorkDocs) CreateUserRequest(input *CreateUserInput) CreateUserRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserRequest{Request: req, Input: input}
+	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
 }
 
 const opDeactivateUser = "DeactivateUser"
@@ -470,6 +479,7 @@ const opDeactivateUser = "DeactivateUser"
 type DeactivateUserRequest struct {
 	*aws.Request
 	Input *DeactivateUserInput
+	Copy  func(*DeactivateUserInput) DeactivateUserRequest
 }
 
 // Send marshals and sends the DeactivateUser API request.
@@ -513,7 +523,7 @@ func (c *WorkDocs) DeactivateUserRequest(input *DeactivateUserInput) DeactivateU
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeactivateUserRequest{Request: req, Input: input}
+	return DeactivateUserRequest{Request: req, Input: input, Copy: c.DeactivateUserRequest}
 }
 
 const opDeleteComment = "DeleteComment"
@@ -522,6 +532,7 @@ const opDeleteComment = "DeleteComment"
 type DeleteCommentRequest struct {
 	*aws.Request
 	Input *DeleteCommentInput
+	Copy  func(*DeleteCommentInput) DeleteCommentRequest
 }
 
 // Send marshals and sends the DeleteComment API request.
@@ -564,7 +575,7 @@ func (c *WorkDocs) DeleteCommentRequest(input *DeleteCommentInput) DeleteComment
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCommentRequest{Request: req, Input: input}
+	return DeleteCommentRequest{Request: req, Input: input, Copy: c.DeleteCommentRequest}
 }
 
 const opDeleteCustomMetadata = "DeleteCustomMetadata"
@@ -573,6 +584,7 @@ const opDeleteCustomMetadata = "DeleteCustomMetadata"
 type DeleteCustomMetadataRequest struct {
 	*aws.Request
 	Input *DeleteCustomMetadataInput
+	Copy  func(*DeleteCustomMetadataInput) DeleteCustomMetadataRequest
 }
 
 // Send marshals and sends the DeleteCustomMetadata API request.
@@ -613,7 +625,7 @@ func (c *WorkDocs) DeleteCustomMetadataRequest(input *DeleteCustomMetadataInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCustomMetadataRequest{Request: req, Input: input}
+	return DeleteCustomMetadataRequest{Request: req, Input: input, Copy: c.DeleteCustomMetadataRequest}
 }
 
 const opDeleteDocument = "DeleteDocument"
@@ -622,6 +634,7 @@ const opDeleteDocument = "DeleteDocument"
 type DeleteDocumentRequest struct {
 	*aws.Request
 	Input *DeleteDocumentInput
+	Copy  func(*DeleteDocumentInput) DeleteDocumentRequest
 }
 
 // Send marshals and sends the DeleteDocument API request.
@@ -664,7 +677,7 @@ func (c *WorkDocs) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocum
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDocumentRequest{Request: req, Input: input}
+	return DeleteDocumentRequest{Request: req, Input: input, Copy: c.DeleteDocumentRequest}
 }
 
 const opDeleteFolder = "DeleteFolder"
@@ -673,6 +686,7 @@ const opDeleteFolder = "DeleteFolder"
 type DeleteFolderRequest struct {
 	*aws.Request
 	Input *DeleteFolderInput
+	Copy  func(*DeleteFolderInput) DeleteFolderRequest
 }
 
 // Send marshals and sends the DeleteFolder API request.
@@ -715,7 +729,7 @@ func (c *WorkDocs) DeleteFolderRequest(input *DeleteFolderInput) DeleteFolderReq
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFolderRequest{Request: req, Input: input}
+	return DeleteFolderRequest{Request: req, Input: input, Copy: c.DeleteFolderRequest}
 }
 
 const opDeleteFolderContents = "DeleteFolderContents"
@@ -724,6 +738,7 @@ const opDeleteFolderContents = "DeleteFolderContents"
 type DeleteFolderContentsRequest struct {
 	*aws.Request
 	Input *DeleteFolderContentsInput
+	Copy  func(*DeleteFolderContentsInput) DeleteFolderContentsRequest
 }
 
 // Send marshals and sends the DeleteFolderContents API request.
@@ -766,7 +781,7 @@ func (c *WorkDocs) DeleteFolderContentsRequest(input *DeleteFolderContentsInput)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFolderContentsRequest{Request: req, Input: input}
+	return DeleteFolderContentsRequest{Request: req, Input: input, Copy: c.DeleteFolderContentsRequest}
 }
 
 const opDeleteLabels = "DeleteLabels"
@@ -775,6 +790,7 @@ const opDeleteLabels = "DeleteLabels"
 type DeleteLabelsRequest struct {
 	*aws.Request
 	Input *DeleteLabelsInput
+	Copy  func(*DeleteLabelsInput) DeleteLabelsRequest
 }
 
 // Send marshals and sends the DeleteLabels API request.
@@ -815,7 +831,7 @@ func (c *WorkDocs) DeleteLabelsRequest(input *DeleteLabelsInput) DeleteLabelsReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLabelsRequest{Request: req, Input: input}
+	return DeleteLabelsRequest{Request: req, Input: input, Copy: c.DeleteLabelsRequest}
 }
 
 const opDeleteNotificationSubscription = "DeleteNotificationSubscription"
@@ -824,6 +840,7 @@ const opDeleteNotificationSubscription = "DeleteNotificationSubscription"
 type DeleteNotificationSubscriptionRequest struct {
 	*aws.Request
 	Input *DeleteNotificationSubscriptionInput
+	Copy  func(*DeleteNotificationSubscriptionInput) DeleteNotificationSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteNotificationSubscription API request.
@@ -866,7 +883,7 @@ func (c *WorkDocs) DeleteNotificationSubscriptionRequest(input *DeleteNotificati
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNotificationSubscriptionRequest{Request: req, Input: input}
+	return DeleteNotificationSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteNotificationSubscriptionRequest}
 }
 
 const opDeleteUser = "DeleteUser"
@@ -875,6 +892,7 @@ const opDeleteUser = "DeleteUser"
 type DeleteUserRequest struct {
 	*aws.Request
 	Input *DeleteUserInput
+	Copy  func(*DeleteUserInput) DeleteUserRequest
 }
 
 // Send marshals and sends the DeleteUser API request.
@@ -917,7 +935,7 @@ func (c *WorkDocs) DeleteUserRequest(input *DeleteUserInput) DeleteUserRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserRequest{Request: req, Input: input}
+	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
 const opDescribeActivities = "DescribeActivities"
@@ -926,6 +944,7 @@ const opDescribeActivities = "DescribeActivities"
 type DescribeActivitiesRequest struct {
 	*aws.Request
 	Input *DescribeActivitiesInput
+	Copy  func(*DescribeActivitiesInput) DescribeActivitiesRequest
 }
 
 // Send marshals and sends the DescribeActivities API request.
@@ -966,7 +985,7 @@ func (c *WorkDocs) DescribeActivitiesRequest(input *DescribeActivitiesInput) Des
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeActivitiesRequest{Request: req, Input: input}
+	return DescribeActivitiesRequest{Request: req, Input: input, Copy: c.DescribeActivitiesRequest}
 }
 
 const opDescribeComments = "DescribeComments"
@@ -975,6 +994,7 @@ const opDescribeComments = "DescribeComments"
 type DescribeCommentsRequest struct {
 	*aws.Request
 	Input *DescribeCommentsInput
+	Copy  func(*DescribeCommentsInput) DescribeCommentsRequest
 }
 
 // Send marshals and sends the DescribeComments API request.
@@ -1015,7 +1035,7 @@ func (c *WorkDocs) DescribeCommentsRequest(input *DescribeCommentsInput) Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCommentsRequest{Request: req, Input: input}
+	return DescribeCommentsRequest{Request: req, Input: input, Copy: c.DescribeCommentsRequest}
 }
 
 const opDescribeDocumentVersions = "DescribeDocumentVersions"
@@ -1024,6 +1044,7 @@ const opDescribeDocumentVersions = "DescribeDocumentVersions"
 type DescribeDocumentVersionsRequest struct {
 	*aws.Request
 	Input *DescribeDocumentVersionsInput
+	Copy  func(*DescribeDocumentVersionsInput) DescribeDocumentVersionsRequest
 }
 
 // Send marshals and sends the DescribeDocumentVersions API request.
@@ -1072,57 +1093,53 @@ func (c *WorkDocs) DescribeDocumentVersionsRequest(input *DescribeDocumentVersio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDocumentVersionsRequest{Request: req, Input: input}
+	return DescribeDocumentVersionsRequest{Request: req, Input: input, Copy: c.DescribeDocumentVersionsRequest}
 }
 
-// DescribeDocumentVersionsPages iterates over the pages of a DescribeDocumentVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDocumentVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDocumentVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDocumentVersions operation.
-//    pageNum := 0
-//    err := client.DescribeDocumentVersionsPages(params,
-//        func(page *DescribeDocumentVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDocumentVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *WorkDocs) DescribeDocumentVersionsPages(input *DescribeDocumentVersionsInput, fn func(*DescribeDocumentVersionsOutput, bool) bool) error {
-	return c.DescribeDocumentVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeDocumentVersionsRequest) Paginate(opts ...aws.Option) DescribeDocumentVersionsPager {
+	return DescribeDocumentVersionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDocumentVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeDocumentVersionsPagesWithContext same as DescribeDocumentVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkDocs) DescribeDocumentVersionsPagesWithContext(ctx aws.Context, input *DescribeDocumentVersionsInput, fn func(*DescribeDocumentVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDocumentVersionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeDocumentVersionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDocumentVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDocumentVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeDocumentVersionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDocumentVersionsPager) CurrentPage() *DescribeDocumentVersionsOutput {
+	return p.Pager.CurrentPage().(*DescribeDocumentVersionsOutput)
 }
 
 const opDescribeFolderContents = "DescribeFolderContents"
@@ -1131,6 +1148,7 @@ const opDescribeFolderContents = "DescribeFolderContents"
 type DescribeFolderContentsRequest struct {
 	*aws.Request
 	Input *DescribeFolderContentsInput
+	Copy  func(*DescribeFolderContentsInput) DescribeFolderContentsRequest
 }
 
 // Send marshals and sends the DescribeFolderContents API request.
@@ -1183,57 +1201,53 @@ func (c *WorkDocs) DescribeFolderContentsRequest(input *DescribeFolderContentsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFolderContentsRequest{Request: req, Input: input}
+	return DescribeFolderContentsRequest{Request: req, Input: input, Copy: c.DescribeFolderContentsRequest}
 }
 
-// DescribeFolderContentsPages iterates over the pages of a DescribeFolderContents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeFolderContents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeFolderContentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeFolderContents operation.
-//    pageNum := 0
-//    err := client.DescribeFolderContentsPages(params,
-//        func(page *DescribeFolderContentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeFolderContentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *WorkDocs) DescribeFolderContentsPages(input *DescribeFolderContentsInput, fn func(*DescribeFolderContentsOutput, bool) bool) error {
-	return c.DescribeFolderContentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeFolderContentsRequest) Paginate(opts ...aws.Option) DescribeFolderContentsPager {
+	return DescribeFolderContentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeFolderContentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeFolderContentsPagesWithContext same as DescribeFolderContentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkDocs) DescribeFolderContentsPagesWithContext(ctx aws.Context, input *DescribeFolderContentsInput, fn func(*DescribeFolderContentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeFolderContentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeFolderContentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeFolderContentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeFolderContentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeFolderContentsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeFolderContentsPager) CurrentPage() *DescribeFolderContentsOutput {
+	return p.Pager.CurrentPage().(*DescribeFolderContentsOutput)
 }
 
 const opDescribeGroups = "DescribeGroups"
@@ -1242,6 +1256,7 @@ const opDescribeGroups = "DescribeGroups"
 type DescribeGroupsRequest struct {
 	*aws.Request
 	Input *DescribeGroupsInput
+	Copy  func(*DescribeGroupsInput) DescribeGroupsRequest
 }
 
 // Send marshals and sends the DescribeGroups API request.
@@ -1282,7 +1297,7 @@ func (c *WorkDocs) DescribeGroupsRequest(input *DescribeGroupsInput) DescribeGro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeGroupsRequest{Request: req, Input: input}
+	return DescribeGroupsRequest{Request: req, Input: input, Copy: c.DescribeGroupsRequest}
 }
 
 const opDescribeNotificationSubscriptions = "DescribeNotificationSubscriptions"
@@ -1291,6 +1306,7 @@ const opDescribeNotificationSubscriptions = "DescribeNotificationSubscriptions"
 type DescribeNotificationSubscriptionsRequest struct {
 	*aws.Request
 	Input *DescribeNotificationSubscriptionsInput
+	Copy  func(*DescribeNotificationSubscriptionsInput) DescribeNotificationSubscriptionsRequest
 }
 
 // Send marshals and sends the DescribeNotificationSubscriptions API request.
@@ -1331,7 +1347,7 @@ func (c *WorkDocs) DescribeNotificationSubscriptionsRequest(input *DescribeNotif
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNotificationSubscriptionsRequest{Request: req, Input: input}
+	return DescribeNotificationSubscriptionsRequest{Request: req, Input: input, Copy: c.DescribeNotificationSubscriptionsRequest}
 }
 
 const opDescribeResourcePermissions = "DescribeResourcePermissions"
@@ -1340,6 +1356,7 @@ const opDescribeResourcePermissions = "DescribeResourcePermissions"
 type DescribeResourcePermissionsRequest struct {
 	*aws.Request
 	Input *DescribeResourcePermissionsInput
+	Copy  func(*DescribeResourcePermissionsInput) DescribeResourcePermissionsRequest
 }
 
 // Send marshals and sends the DescribeResourcePermissions API request.
@@ -1380,7 +1397,7 @@ func (c *WorkDocs) DescribeResourcePermissionsRequest(input *DescribeResourcePer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeResourcePermissionsRequest{Request: req, Input: input}
+	return DescribeResourcePermissionsRequest{Request: req, Input: input, Copy: c.DescribeResourcePermissionsRequest}
 }
 
 const opDescribeRootFolders = "DescribeRootFolders"
@@ -1389,6 +1406,7 @@ const opDescribeRootFolders = "DescribeRootFolders"
 type DescribeRootFoldersRequest struct {
 	*aws.Request
 	Input *DescribeRootFoldersInput
+	Copy  func(*DescribeRootFoldersInput) DescribeRootFoldersRequest
 }
 
 // Send marshals and sends the DescribeRootFolders API request.
@@ -1432,7 +1450,7 @@ func (c *WorkDocs) DescribeRootFoldersRequest(input *DescribeRootFoldersInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRootFoldersRequest{Request: req, Input: input}
+	return DescribeRootFoldersRequest{Request: req, Input: input, Copy: c.DescribeRootFoldersRequest}
 }
 
 const opDescribeUsers = "DescribeUsers"
@@ -1441,6 +1459,7 @@ const opDescribeUsers = "DescribeUsers"
 type DescribeUsersRequest struct {
 	*aws.Request
 	Input *DescribeUsersInput
+	Copy  func(*DescribeUsersInput) DescribeUsersRequest
 }
 
 // Send marshals and sends the DescribeUsers API request.
@@ -1492,57 +1511,53 @@ func (c *WorkDocs) DescribeUsersRequest(input *DescribeUsersInput) DescribeUsers
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeUsersRequest{Request: req, Input: input}
+	return DescribeUsersRequest{Request: req, Input: input, Copy: c.DescribeUsersRequest}
 }
 
-// DescribeUsersPages iterates over the pages of a DescribeUsers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeUsers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeUsersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeUsers operation.
-//    pageNum := 0
-//    err := client.DescribeUsersPages(params,
-//        func(page *DescribeUsersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeUsersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *WorkDocs) DescribeUsersPages(input *DescribeUsersInput, fn func(*DescribeUsersOutput, bool) bool) error {
-	return c.DescribeUsersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeUsersRequest) Paginate(opts ...aws.Option) DescribeUsersPager {
+	return DescribeUsersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeUsersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeUsersPagesWithContext same as DescribeUsersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkDocs) DescribeUsersPagesWithContext(ctx aws.Context, input *DescribeUsersInput, fn func(*DescribeUsersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeUsersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeUsersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeUsersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeUsersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeUsersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeUsersPager) CurrentPage() *DescribeUsersOutput {
+	return p.Pager.CurrentPage().(*DescribeUsersOutput)
 }
 
 const opGetCurrentUser = "GetCurrentUser"
@@ -1551,6 +1566,7 @@ const opGetCurrentUser = "GetCurrentUser"
 type GetCurrentUserRequest struct {
 	*aws.Request
 	Input *GetCurrentUserInput
+	Copy  func(*GetCurrentUserInput) GetCurrentUserRequest
 }
 
 // Send marshals and sends the GetCurrentUser API request.
@@ -1592,7 +1608,7 @@ func (c *WorkDocs) GetCurrentUserRequest(input *GetCurrentUserInput) GetCurrentU
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCurrentUserRequest{Request: req, Input: input}
+	return GetCurrentUserRequest{Request: req, Input: input, Copy: c.GetCurrentUserRequest}
 }
 
 const opGetDocument = "GetDocument"
@@ -1601,6 +1617,7 @@ const opGetDocument = "GetDocument"
 type GetDocumentRequest struct {
 	*aws.Request
 	Input *GetDocumentInput
+	Copy  func(*GetDocumentInput) GetDocumentRequest
 }
 
 // Send marshals and sends the GetDocument API request.
@@ -1641,7 +1658,7 @@ func (c *WorkDocs) GetDocumentRequest(input *GetDocumentInput) GetDocumentReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDocumentRequest{Request: req, Input: input}
+	return GetDocumentRequest{Request: req, Input: input, Copy: c.GetDocumentRequest}
 }
 
 const opGetDocumentPath = "GetDocumentPath"
@@ -1650,6 +1667,7 @@ const opGetDocumentPath = "GetDocumentPath"
 type GetDocumentPathRequest struct {
 	*aws.Request
 	Input *GetDocumentPathInput
+	Copy  func(*GetDocumentPathInput) GetDocumentPathRequest
 }
 
 // Send marshals and sends the GetDocumentPath API request.
@@ -1696,7 +1714,7 @@ func (c *WorkDocs) GetDocumentPathRequest(input *GetDocumentPathInput) GetDocume
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDocumentPathRequest{Request: req, Input: input}
+	return GetDocumentPathRequest{Request: req, Input: input, Copy: c.GetDocumentPathRequest}
 }
 
 const opGetDocumentVersion = "GetDocumentVersion"
@@ -1705,6 +1723,7 @@ const opGetDocumentVersion = "GetDocumentVersion"
 type GetDocumentVersionRequest struct {
 	*aws.Request
 	Input *GetDocumentVersionInput
+	Copy  func(*GetDocumentVersionInput) GetDocumentVersionRequest
 }
 
 // Send marshals and sends the GetDocumentVersion API request.
@@ -1745,7 +1764,7 @@ func (c *WorkDocs) GetDocumentVersionRequest(input *GetDocumentVersionInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDocumentVersionRequest{Request: req, Input: input}
+	return GetDocumentVersionRequest{Request: req, Input: input, Copy: c.GetDocumentVersionRequest}
 }
 
 const opGetFolder = "GetFolder"
@@ -1754,6 +1773,7 @@ const opGetFolder = "GetFolder"
 type GetFolderRequest struct {
 	*aws.Request
 	Input *GetFolderInput
+	Copy  func(*GetFolderInput) GetFolderRequest
 }
 
 // Send marshals and sends the GetFolder API request.
@@ -1794,7 +1814,7 @@ func (c *WorkDocs) GetFolderRequest(input *GetFolderInput) GetFolderRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFolderRequest{Request: req, Input: input}
+	return GetFolderRequest{Request: req, Input: input, Copy: c.GetFolderRequest}
 }
 
 const opGetFolderPath = "GetFolderPath"
@@ -1803,6 +1823,7 @@ const opGetFolderPath = "GetFolderPath"
 type GetFolderPathRequest struct {
 	*aws.Request
 	Input *GetFolderPathInput
+	Copy  func(*GetFolderPathInput) GetFolderPathRequest
 }
 
 // Send marshals and sends the GetFolderPath API request.
@@ -1849,7 +1870,7 @@ func (c *WorkDocs) GetFolderPathRequest(input *GetFolderPathInput) GetFolderPath
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFolderPathRequest{Request: req, Input: input}
+	return GetFolderPathRequest{Request: req, Input: input, Copy: c.GetFolderPathRequest}
 }
 
 const opInitiateDocumentVersionUpload = "InitiateDocumentVersionUpload"
@@ -1858,6 +1879,7 @@ const opInitiateDocumentVersionUpload = "InitiateDocumentVersionUpload"
 type InitiateDocumentVersionUploadRequest struct {
 	*aws.Request
 	Input *InitiateDocumentVersionUploadInput
+	Copy  func(*InitiateDocumentVersionUploadInput) InitiateDocumentVersionUploadRequest
 }
 
 // Send marshals and sends the InitiateDocumentVersionUpload API request.
@@ -1905,7 +1927,7 @@ func (c *WorkDocs) InitiateDocumentVersionUploadRequest(input *InitiateDocumentV
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InitiateDocumentVersionUploadRequest{Request: req, Input: input}
+	return InitiateDocumentVersionUploadRequest{Request: req, Input: input, Copy: c.InitiateDocumentVersionUploadRequest}
 }
 
 const opRemoveAllResourcePermissions = "RemoveAllResourcePermissions"
@@ -1914,6 +1936,7 @@ const opRemoveAllResourcePermissions = "RemoveAllResourcePermissions"
 type RemoveAllResourcePermissionsRequest struct {
 	*aws.Request
 	Input *RemoveAllResourcePermissionsInput
+	Copy  func(*RemoveAllResourcePermissionsInput) RemoveAllResourcePermissionsRequest
 }
 
 // Send marshals and sends the RemoveAllResourcePermissions API request.
@@ -1956,7 +1979,7 @@ func (c *WorkDocs) RemoveAllResourcePermissionsRequest(input *RemoveAllResourceP
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveAllResourcePermissionsRequest{Request: req, Input: input}
+	return RemoveAllResourcePermissionsRequest{Request: req, Input: input, Copy: c.RemoveAllResourcePermissionsRequest}
 }
 
 const opRemoveResourcePermission = "RemoveResourcePermission"
@@ -1965,6 +1988,7 @@ const opRemoveResourcePermission = "RemoveResourcePermission"
 type RemoveResourcePermissionRequest struct {
 	*aws.Request
 	Input *RemoveResourcePermissionInput
+	Copy  func(*RemoveResourcePermissionInput) RemoveResourcePermissionRequest
 }
 
 // Send marshals and sends the RemoveResourcePermission API request.
@@ -2007,7 +2031,7 @@ func (c *WorkDocs) RemoveResourcePermissionRequest(input *RemoveResourcePermissi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveResourcePermissionRequest{Request: req, Input: input}
+	return RemoveResourcePermissionRequest{Request: req, Input: input, Copy: c.RemoveResourcePermissionRequest}
 }
 
 const opUpdateDocument = "UpdateDocument"
@@ -2016,6 +2040,7 @@ const opUpdateDocument = "UpdateDocument"
 type UpdateDocumentRequest struct {
 	*aws.Request
 	Input *UpdateDocumentInput
+	Copy  func(*UpdateDocumentInput) UpdateDocumentRequest
 }
 
 // Send marshals and sends the UpdateDocument API request.
@@ -2059,7 +2084,7 @@ func (c *WorkDocs) UpdateDocumentRequest(input *UpdateDocumentInput) UpdateDocum
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDocumentRequest{Request: req, Input: input}
+	return UpdateDocumentRequest{Request: req, Input: input, Copy: c.UpdateDocumentRequest}
 }
 
 const opUpdateDocumentVersion = "UpdateDocumentVersion"
@@ -2068,6 +2093,7 @@ const opUpdateDocumentVersion = "UpdateDocumentVersion"
 type UpdateDocumentVersionRequest struct {
 	*aws.Request
 	Input *UpdateDocumentVersionInput
+	Copy  func(*UpdateDocumentVersionInput) UpdateDocumentVersionRequest
 }
 
 // Send marshals and sends the UpdateDocumentVersion API request.
@@ -2114,7 +2140,7 @@ func (c *WorkDocs) UpdateDocumentVersionRequest(input *UpdateDocumentVersionInpu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDocumentVersionRequest{Request: req, Input: input}
+	return UpdateDocumentVersionRequest{Request: req, Input: input, Copy: c.UpdateDocumentVersionRequest}
 }
 
 const opUpdateFolder = "UpdateFolder"
@@ -2123,6 +2149,7 @@ const opUpdateFolder = "UpdateFolder"
 type UpdateFolderRequest struct {
 	*aws.Request
 	Input *UpdateFolderInput
+	Copy  func(*UpdateFolderInput) UpdateFolderRequest
 }
 
 // Send marshals and sends the UpdateFolder API request.
@@ -2166,7 +2193,7 @@ func (c *WorkDocs) UpdateFolderRequest(input *UpdateFolderInput) UpdateFolderReq
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateFolderRequest{Request: req, Input: input}
+	return UpdateFolderRequest{Request: req, Input: input, Copy: c.UpdateFolderRequest}
 }
 
 const opUpdateUser = "UpdateUser"
@@ -2175,6 +2202,7 @@ const opUpdateUser = "UpdateUser"
 type UpdateUserRequest struct {
 	*aws.Request
 	Input *UpdateUserInput
+	Copy  func(*UpdateUserInput) UpdateUserRequest
 }
 
 // Send marshals and sends the UpdateUser API request.
@@ -2216,7 +2244,7 @@ func (c *WorkDocs) UpdateUserRequest(input *UpdateUserInput) UpdateUserRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateUserRequest{Request: req, Input: input}
+	return UpdateUserRequest{Request: req, Input: input, Copy: c.UpdateUserRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workdocs-2016-05-01/AbortDocumentVersionUploadRequest

@@ -17,6 +17,7 @@ const opPutEvents = "PutEvents"
 type PutEventsRequest struct {
 	*aws.Request
 	Input *PutEventsInput
+	Copy  func(*PutEventsInput) PutEventsRequest
 }
 
 // Send marshals and sends the PutEvents API request.
@@ -59,7 +60,7 @@ func (c *MobileAnalytics) PutEventsRequest(input *PutEventsInput) PutEventsReque
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutEventsRequest{Request: req, Input: input}
+	return PutEventsRequest{Request: req, Input: input, Copy: c.PutEventsRequest}
 }
 
 // A JSON object representing a batch of unique event occurrences in your app.

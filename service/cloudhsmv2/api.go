@@ -16,6 +16,7 @@ const opCreateCluster = "CreateCluster"
 type CreateClusterRequest struct {
 	*aws.Request
 	Input *CreateClusterInput
+	Copy  func(*CreateClusterInput) CreateClusterRequest
 }
 
 // Send marshals and sends the CreateCluster API request.
@@ -56,7 +57,7 @@ func (c *CloudHSMV2) CreateClusterRequest(input *CreateClusterInput) CreateClust
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateClusterRequest{Request: req, Input: input}
+	return CreateClusterRequest{Request: req, Input: input, Copy: c.CreateClusterRequest}
 }
 
 const opCreateHsm = "CreateHsm"
@@ -65,6 +66,7 @@ const opCreateHsm = "CreateHsm"
 type CreateHsmRequest struct {
 	*aws.Request
 	Input *CreateHsmInput
+	Copy  func(*CreateHsmInput) CreateHsmRequest
 }
 
 // Send marshals and sends the CreateHsm API request.
@@ -106,7 +108,7 @@ func (c *CloudHSMV2) CreateHsmRequest(input *CreateHsmInput) CreateHsmRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateHsmRequest{Request: req, Input: input}
+	return CreateHsmRequest{Request: req, Input: input, Copy: c.CreateHsmRequest}
 }
 
 const opDeleteCluster = "DeleteCluster"
@@ -115,6 +117,7 @@ const opDeleteCluster = "DeleteCluster"
 type DeleteClusterRequest struct {
 	*aws.Request
 	Input *DeleteClusterInput
+	Copy  func(*DeleteClusterInput) DeleteClusterRequest
 }
 
 // Send marshals and sends the DeleteCluster API request.
@@ -157,7 +160,7 @@ func (c *CloudHSMV2) DeleteClusterRequest(input *DeleteClusterInput) DeleteClust
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteClusterRequest{Request: req, Input: input}
+	return DeleteClusterRequest{Request: req, Input: input, Copy: c.DeleteClusterRequest}
 }
 
 const opDeleteHsm = "DeleteHsm"
@@ -166,6 +169,7 @@ const opDeleteHsm = "DeleteHsm"
 type DeleteHsmRequest struct {
 	*aws.Request
 	Input *DeleteHsmInput
+	Copy  func(*DeleteHsmInput) DeleteHsmRequest
 }
 
 // Send marshals and sends the DeleteHsm API request.
@@ -209,7 +213,7 @@ func (c *CloudHSMV2) DeleteHsmRequest(input *DeleteHsmInput) DeleteHsmRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteHsmRequest{Request: req, Input: input}
+	return DeleteHsmRequest{Request: req, Input: input, Copy: c.DeleteHsmRequest}
 }
 
 const opDescribeBackups = "DescribeBackups"
@@ -218,6 +222,7 @@ const opDescribeBackups = "DescribeBackups"
 type DescribeBackupsRequest struct {
 	*aws.Request
 	Input *DescribeBackupsInput
+	Copy  func(*DescribeBackupsInput) DescribeBackupsRequest
 }
 
 // Send marshals and sends the DescribeBackups API request.
@@ -271,57 +276,53 @@ func (c *CloudHSMV2) DescribeBackupsRequest(input *DescribeBackupsInput) Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBackupsRequest{Request: req, Input: input}
+	return DescribeBackupsRequest{Request: req, Input: input, Copy: c.DescribeBackupsRequest}
 }
 
-// DescribeBackupsPages iterates over the pages of a DescribeBackups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeBackups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeBackupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeBackups operation.
-//    pageNum := 0
-//    err := client.DescribeBackupsPages(params,
-//        func(page *DescribeBackupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeBackupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudHSMV2) DescribeBackupsPages(input *DescribeBackupsInput, fn func(*DescribeBackupsOutput, bool) bool) error {
-	return c.DescribeBackupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeBackupsRequest) Paginate(opts ...aws.Option) DescribeBackupsPager {
+	return DescribeBackupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeBackupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeBackupsPagesWithContext same as DescribeBackupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) DescribeBackupsPagesWithContext(ctx aws.Context, input *DescribeBackupsInput, fn func(*DescribeBackupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeBackupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeBackupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeBackupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeBackupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeBackupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeBackupsPager) CurrentPage() *DescribeBackupsOutput {
+	return p.Pager.CurrentPage().(*DescribeBackupsOutput)
 }
 
 const opDescribeClusters = "DescribeClusters"
@@ -330,6 +331,7 @@ const opDescribeClusters = "DescribeClusters"
 type DescribeClustersRequest struct {
 	*aws.Request
 	Input *DescribeClustersInput
+	Copy  func(*DescribeClustersInput) DescribeClustersRequest
 }
 
 // Send marshals and sends the DescribeClusters API request.
@@ -383,57 +385,53 @@ func (c *CloudHSMV2) DescribeClustersRequest(input *DescribeClustersInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeClustersRequest{Request: req, Input: input}
+	return DescribeClustersRequest{Request: req, Input: input, Copy: c.DescribeClustersRequest}
 }
 
-// DescribeClustersPages iterates over the pages of a DescribeClusters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeClusters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeClustersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeClusters operation.
-//    pageNum := 0
-//    err := client.DescribeClustersPages(params,
-//        func(page *DescribeClustersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeClustersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudHSMV2) DescribeClustersPages(input *DescribeClustersInput, fn func(*DescribeClustersOutput, bool) bool) error {
-	return c.DescribeClustersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeClustersRequest) Paginate(opts ...aws.Option) DescribeClustersPager {
+	return DescribeClustersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeClustersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeClustersPagesWithContext same as DescribeClustersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) DescribeClustersPagesWithContext(ctx aws.Context, input *DescribeClustersInput, fn func(*DescribeClustersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeClustersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeClustersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeClustersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeClustersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeClustersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeClustersPager) CurrentPage() *DescribeClustersOutput {
+	return p.Pager.CurrentPage().(*DescribeClustersOutput)
 }
 
 const opInitializeCluster = "InitializeCluster"
@@ -442,6 +440,7 @@ const opInitializeCluster = "InitializeCluster"
 type InitializeClusterRequest struct {
 	*aws.Request
 	Input *InitializeClusterInput
+	Copy  func(*InitializeClusterInput) InitializeClusterRequest
 }
 
 // Send marshals and sends the InitializeCluster API request.
@@ -485,7 +484,7 @@ func (c *CloudHSMV2) InitializeClusterRequest(input *InitializeClusterInput) Ini
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return InitializeClusterRequest{Request: req, Input: input}
+	return InitializeClusterRequest{Request: req, Input: input, Copy: c.InitializeClusterRequest}
 }
 
 const opListTags = "ListTags"
@@ -494,6 +493,7 @@ const opListTags = "ListTags"
 type ListTagsRequest struct {
 	*aws.Request
 	Input *ListTagsInput
+	Copy  func(*ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -546,57 +546,53 @@ func (c *CloudHSMV2) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsRequest{Request: req, Input: input}
+	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
-// ListTagsPages iterates over the pages of a ListTags operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTags method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTagsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTags operation.
-//    pageNum := 0
-//    err := client.ListTagsPages(params,
-//        func(page *ListTagsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTagsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudHSMV2) ListTagsPages(input *ListTagsInput, fn func(*ListTagsOutput, bool) bool) error {
-	return c.ListTagsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListTagsRequest) Paginate(opts ...aws.Option) ListTagsPager {
+	return ListTagsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTagsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListTagsPagesWithContext same as ListTagsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudHSMV2) ListTagsPagesWithContext(ctx aws.Context, input *ListTagsInput, fn func(*ListTagsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTagsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListTagsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTagsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTagsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTagsPager struct {
+	aws.Pager
+}
+
+func (p *ListTagsPager) CurrentPage() *ListTagsOutput {
+	return p.Pager.CurrentPage().(*ListTagsOutput)
 }
 
 const opTagResource = "TagResource"
@@ -605,6 +601,7 @@ const opTagResource = "TagResource"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -645,7 +642,7 @@ func (c *CloudHSMV2) TagResourceRequest(input *TagResourceInput) TagResourceRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUntagResource = "UntagResource"
@@ -654,6 +651,7 @@ const opUntagResource = "UntagResource"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -694,7 +692,7 @@ func (c *CloudHSMV2) UntagResourceRequest(input *UntagResourceInput) UntagResour
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 // Contains information about a backup of an AWS CloudHSM cluster.

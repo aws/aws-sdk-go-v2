@@ -19,6 +19,7 @@ const opAbortMultipartUpload = "AbortMultipartUpload"
 type AbortMultipartUploadRequest struct {
 	*aws.Request
 	Input *AbortMultipartUploadInput
+	Copy  func(*AbortMultipartUploadInput) AbortMultipartUploadRequest
 }
 
 // Send marshals and sends the AbortMultipartUpload API request.
@@ -63,7 +64,7 @@ func (c *S3) AbortMultipartUploadRequest(input *AbortMultipartUploadInput) Abort
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AbortMultipartUploadRequest{Request: req, Input: input}
+	return AbortMultipartUploadRequest{Request: req, Input: input, Copy: c.AbortMultipartUploadRequest}
 }
 
 const opCompleteMultipartUpload = "CompleteMultipartUpload"
@@ -72,6 +73,7 @@ const opCompleteMultipartUpload = "CompleteMultipartUpload"
 type CompleteMultipartUploadRequest struct {
 	*aws.Request
 	Input *CompleteMultipartUploadInput
+	Copy  func(*CompleteMultipartUploadInput) CompleteMultipartUploadRequest
 }
 
 // Send marshals and sends the CompleteMultipartUpload API request.
@@ -112,7 +114,7 @@ func (c *S3) CompleteMultipartUploadRequest(input *CompleteMultipartUploadInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CompleteMultipartUploadRequest{Request: req, Input: input}
+	return CompleteMultipartUploadRequest{Request: req, Input: input, Copy: c.CompleteMultipartUploadRequest}
 }
 
 const opCopyObject = "CopyObject"
@@ -121,6 +123,7 @@ const opCopyObject = "CopyObject"
 type CopyObjectRequest struct {
 	*aws.Request
 	Input *CopyObjectInput
+	Copy  func(*CopyObjectInput) CopyObjectRequest
 }
 
 // Send marshals and sends the CopyObject API request.
@@ -161,7 +164,7 @@ func (c *S3) CopyObjectRequest(input *CopyObjectInput) CopyObjectRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopyObjectRequest{Request: req, Input: input}
+	return CopyObjectRequest{Request: req, Input: input, Copy: c.CopyObjectRequest}
 }
 
 const opCreateBucket = "CreateBucket"
@@ -170,6 +173,7 @@ const opCreateBucket = "CreateBucket"
 type CreateBucketRequest struct {
 	*aws.Request
 	Input *CreateBucketInput
+	Copy  func(*CreateBucketInput) CreateBucketRequest
 }
 
 // Send marshals and sends the CreateBucket API request.
@@ -210,7 +214,7 @@ func (c *S3) CreateBucketRequest(input *CreateBucketInput) CreateBucketRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBucketRequest{Request: req, Input: input}
+	return CreateBucketRequest{Request: req, Input: input, Copy: c.CreateBucketRequest}
 }
 
 const opCreateMultipartUpload = "CreateMultipartUpload"
@@ -219,6 +223,7 @@ const opCreateMultipartUpload = "CreateMultipartUpload"
 type CreateMultipartUploadRequest struct {
 	*aws.Request
 	Input *CreateMultipartUploadInput
+	Copy  func(*CreateMultipartUploadInput) CreateMultipartUploadRequest
 }
 
 // Send marshals and sends the CreateMultipartUpload API request.
@@ -265,7 +270,7 @@ func (c *S3) CreateMultipartUploadRequest(input *CreateMultipartUploadInput) Cre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateMultipartUploadRequest{Request: req, Input: input}
+	return CreateMultipartUploadRequest{Request: req, Input: input, Copy: c.CreateMultipartUploadRequest}
 }
 
 const opDeleteBucket = "DeleteBucket"
@@ -274,6 +279,7 @@ const opDeleteBucket = "DeleteBucket"
 type DeleteBucketRequest struct {
 	*aws.Request
 	Input *DeleteBucketInput
+	Copy  func(*DeleteBucketInput) DeleteBucketRequest
 }
 
 // Send marshals and sends the DeleteBucket API request.
@@ -317,7 +323,7 @@ func (c *S3) DeleteBucketRequest(input *DeleteBucketInput) DeleteBucketRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketRequest{Request: req, Input: input}
+	return DeleteBucketRequest{Request: req, Input: input, Copy: c.DeleteBucketRequest}
 }
 
 const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration"
@@ -326,6 +332,7 @@ const opDeleteBucketAnalyticsConfiguration = "DeleteBucketAnalyticsConfiguration
 type DeleteBucketAnalyticsConfigurationRequest struct {
 	*aws.Request
 	Input *DeleteBucketAnalyticsConfigurationInput
+	Copy  func(*DeleteBucketAnalyticsConfigurationInput) DeleteBucketAnalyticsConfigurationRequest
 }
 
 // Send marshals and sends the DeleteBucketAnalyticsConfiguration API request.
@@ -369,7 +376,7 @@ func (c *S3) DeleteBucketAnalyticsConfigurationRequest(input *DeleteBucketAnalyt
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketAnalyticsConfigurationRequest{Request: req, Input: input}
+	return DeleteBucketAnalyticsConfigurationRequest{Request: req, Input: input, Copy: c.DeleteBucketAnalyticsConfigurationRequest}
 }
 
 const opDeleteBucketCors = "DeleteBucketCors"
@@ -378,6 +385,7 @@ const opDeleteBucketCors = "DeleteBucketCors"
 type DeleteBucketCorsRequest struct {
 	*aws.Request
 	Input *DeleteBucketCorsInput
+	Copy  func(*DeleteBucketCorsInput) DeleteBucketCorsRequest
 }
 
 // Send marshals and sends the DeleteBucketCors API request.
@@ -420,7 +428,7 @@ func (c *S3) DeleteBucketCorsRequest(input *DeleteBucketCorsInput) DeleteBucketC
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketCorsRequest{Request: req, Input: input}
+	return DeleteBucketCorsRequest{Request: req, Input: input, Copy: c.DeleteBucketCorsRequest}
 }
 
 const opDeleteBucketEncryption = "DeleteBucketEncryption"
@@ -429,6 +437,7 @@ const opDeleteBucketEncryption = "DeleteBucketEncryption"
 type DeleteBucketEncryptionRequest struct {
 	*aws.Request
 	Input *DeleteBucketEncryptionInput
+	Copy  func(*DeleteBucketEncryptionInput) DeleteBucketEncryptionRequest
 }
 
 // Send marshals and sends the DeleteBucketEncryption API request.
@@ -471,7 +480,7 @@ func (c *S3) DeleteBucketEncryptionRequest(input *DeleteBucketEncryptionInput) D
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketEncryptionRequest{Request: req, Input: input}
+	return DeleteBucketEncryptionRequest{Request: req, Input: input, Copy: c.DeleteBucketEncryptionRequest}
 }
 
 const opDeleteBucketInventoryConfiguration = "DeleteBucketInventoryConfiguration"
@@ -480,6 +489,7 @@ const opDeleteBucketInventoryConfiguration = "DeleteBucketInventoryConfiguration
 type DeleteBucketInventoryConfigurationRequest struct {
 	*aws.Request
 	Input *DeleteBucketInventoryConfigurationInput
+	Copy  func(*DeleteBucketInventoryConfigurationInput) DeleteBucketInventoryConfigurationRequest
 }
 
 // Send marshals and sends the DeleteBucketInventoryConfiguration API request.
@@ -523,7 +533,7 @@ func (c *S3) DeleteBucketInventoryConfigurationRequest(input *DeleteBucketInvent
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketInventoryConfigurationRequest{Request: req, Input: input}
+	return DeleteBucketInventoryConfigurationRequest{Request: req, Input: input, Copy: c.DeleteBucketInventoryConfigurationRequest}
 }
 
 const opDeleteBucketLifecycle = "DeleteBucketLifecycle"
@@ -532,6 +542,7 @@ const opDeleteBucketLifecycle = "DeleteBucketLifecycle"
 type DeleteBucketLifecycleRequest struct {
 	*aws.Request
 	Input *DeleteBucketLifecycleInput
+	Copy  func(*DeleteBucketLifecycleInput) DeleteBucketLifecycleRequest
 }
 
 // Send marshals and sends the DeleteBucketLifecycle API request.
@@ -574,7 +585,7 @@ func (c *S3) DeleteBucketLifecycleRequest(input *DeleteBucketLifecycleInput) Del
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketLifecycleRequest{Request: req, Input: input}
+	return DeleteBucketLifecycleRequest{Request: req, Input: input, Copy: c.DeleteBucketLifecycleRequest}
 }
 
 const opDeleteBucketMetricsConfiguration = "DeleteBucketMetricsConfiguration"
@@ -583,6 +594,7 @@ const opDeleteBucketMetricsConfiguration = "DeleteBucketMetricsConfiguration"
 type DeleteBucketMetricsConfigurationRequest struct {
 	*aws.Request
 	Input *DeleteBucketMetricsConfigurationInput
+	Copy  func(*DeleteBucketMetricsConfigurationInput) DeleteBucketMetricsConfigurationRequest
 }
 
 // Send marshals and sends the DeleteBucketMetricsConfiguration API request.
@@ -626,7 +638,7 @@ func (c *S3) DeleteBucketMetricsConfigurationRequest(input *DeleteBucketMetricsC
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketMetricsConfigurationRequest{Request: req, Input: input}
+	return DeleteBucketMetricsConfigurationRequest{Request: req, Input: input, Copy: c.DeleteBucketMetricsConfigurationRequest}
 }
 
 const opDeleteBucketPolicy = "DeleteBucketPolicy"
@@ -635,6 +647,7 @@ const opDeleteBucketPolicy = "DeleteBucketPolicy"
 type DeleteBucketPolicyRequest struct {
 	*aws.Request
 	Input *DeleteBucketPolicyInput
+	Copy  func(*DeleteBucketPolicyInput) DeleteBucketPolicyRequest
 }
 
 // Send marshals and sends the DeleteBucketPolicy API request.
@@ -677,7 +690,7 @@ func (c *S3) DeleteBucketPolicyRequest(input *DeleteBucketPolicyInput) DeleteBuc
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketPolicyRequest{Request: req, Input: input}
+	return DeleteBucketPolicyRequest{Request: req, Input: input, Copy: c.DeleteBucketPolicyRequest}
 }
 
 const opDeleteBucketReplication = "DeleteBucketReplication"
@@ -686,6 +699,7 @@ const opDeleteBucketReplication = "DeleteBucketReplication"
 type DeleteBucketReplicationRequest struct {
 	*aws.Request
 	Input *DeleteBucketReplicationInput
+	Copy  func(*DeleteBucketReplicationInput) DeleteBucketReplicationRequest
 }
 
 // Send marshals and sends the DeleteBucketReplication API request.
@@ -728,7 +742,7 @@ func (c *S3) DeleteBucketReplicationRequest(input *DeleteBucketReplicationInput)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketReplicationRequest{Request: req, Input: input}
+	return DeleteBucketReplicationRequest{Request: req, Input: input, Copy: c.DeleteBucketReplicationRequest}
 }
 
 const opDeleteBucketTagging = "DeleteBucketTagging"
@@ -737,6 +751,7 @@ const opDeleteBucketTagging = "DeleteBucketTagging"
 type DeleteBucketTaggingRequest struct {
 	*aws.Request
 	Input *DeleteBucketTaggingInput
+	Copy  func(*DeleteBucketTaggingInput) DeleteBucketTaggingRequest
 }
 
 // Send marshals and sends the DeleteBucketTagging API request.
@@ -779,7 +794,7 @@ func (c *S3) DeleteBucketTaggingRequest(input *DeleteBucketTaggingInput) DeleteB
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketTaggingRequest{Request: req, Input: input}
+	return DeleteBucketTaggingRequest{Request: req, Input: input, Copy: c.DeleteBucketTaggingRequest}
 }
 
 const opDeleteBucketWebsite = "DeleteBucketWebsite"
@@ -788,6 +803,7 @@ const opDeleteBucketWebsite = "DeleteBucketWebsite"
 type DeleteBucketWebsiteRequest struct {
 	*aws.Request
 	Input *DeleteBucketWebsiteInput
+	Copy  func(*DeleteBucketWebsiteInput) DeleteBucketWebsiteRequest
 }
 
 // Send marshals and sends the DeleteBucketWebsite API request.
@@ -830,7 +846,7 @@ func (c *S3) DeleteBucketWebsiteRequest(input *DeleteBucketWebsiteInput) DeleteB
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBucketWebsiteRequest{Request: req, Input: input}
+	return DeleteBucketWebsiteRequest{Request: req, Input: input, Copy: c.DeleteBucketWebsiteRequest}
 }
 
 const opDeleteObject = "DeleteObject"
@@ -839,6 +855,7 @@ const opDeleteObject = "DeleteObject"
 type DeleteObjectRequest struct {
 	*aws.Request
 	Input *DeleteObjectInput
+	Copy  func(*DeleteObjectInput) DeleteObjectRequest
 }
 
 // Send marshals and sends the DeleteObject API request.
@@ -881,7 +898,7 @@ func (c *S3) DeleteObjectRequest(input *DeleteObjectInput) DeleteObjectRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteObjectRequest{Request: req, Input: input}
+	return DeleteObjectRequest{Request: req, Input: input, Copy: c.DeleteObjectRequest}
 }
 
 const opDeleteObjectTagging = "DeleteObjectTagging"
@@ -890,6 +907,7 @@ const opDeleteObjectTagging = "DeleteObjectTagging"
 type DeleteObjectTaggingRequest struct {
 	*aws.Request
 	Input *DeleteObjectTaggingInput
+	Copy  func(*DeleteObjectTaggingInput) DeleteObjectTaggingRequest
 }
 
 // Send marshals and sends the DeleteObjectTagging API request.
@@ -930,7 +948,7 @@ func (c *S3) DeleteObjectTaggingRequest(input *DeleteObjectTaggingInput) DeleteO
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteObjectTaggingRequest{Request: req, Input: input}
+	return DeleteObjectTaggingRequest{Request: req, Input: input, Copy: c.DeleteObjectTaggingRequest}
 }
 
 const opDeleteObjects = "DeleteObjects"
@@ -939,6 +957,7 @@ const opDeleteObjects = "DeleteObjects"
 type DeleteObjectsRequest struct {
 	*aws.Request
 	Input *DeleteObjectsInput
+	Copy  func(*DeleteObjectsInput) DeleteObjectsRequest
 }
 
 // Send marshals and sends the DeleteObjects API request.
@@ -980,7 +999,7 @@ func (c *S3) DeleteObjectsRequest(input *DeleteObjectsInput) DeleteObjectsReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteObjectsRequest{Request: req, Input: input}
+	return DeleteObjectsRequest{Request: req, Input: input, Copy: c.DeleteObjectsRequest}
 }
 
 const opGetBucketAccelerateConfiguration = "GetBucketAccelerateConfiguration"
@@ -989,6 +1008,7 @@ const opGetBucketAccelerateConfiguration = "GetBucketAccelerateConfiguration"
 type GetBucketAccelerateConfigurationRequest struct {
 	*aws.Request
 	Input *GetBucketAccelerateConfigurationInput
+	Copy  func(*GetBucketAccelerateConfigurationInput) GetBucketAccelerateConfigurationRequest
 }
 
 // Send marshals and sends the GetBucketAccelerateConfiguration API request.
@@ -1029,7 +1049,7 @@ func (c *S3) GetBucketAccelerateConfigurationRequest(input *GetBucketAccelerateC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketAccelerateConfigurationRequest{Request: req, Input: input}
+	return GetBucketAccelerateConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketAccelerateConfigurationRequest}
 }
 
 const opGetBucketAcl = "GetBucketAcl"
@@ -1038,6 +1058,7 @@ const opGetBucketAcl = "GetBucketAcl"
 type GetBucketAclRequest struct {
 	*aws.Request
 	Input *GetBucketAclInput
+	Copy  func(*GetBucketAclInput) GetBucketAclRequest
 }
 
 // Send marshals and sends the GetBucketAcl API request.
@@ -1078,7 +1099,7 @@ func (c *S3) GetBucketAclRequest(input *GetBucketAclInput) GetBucketAclRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketAclRequest{Request: req, Input: input}
+	return GetBucketAclRequest{Request: req, Input: input, Copy: c.GetBucketAclRequest}
 }
 
 const opGetBucketAnalyticsConfiguration = "GetBucketAnalyticsConfiguration"
@@ -1087,6 +1108,7 @@ const opGetBucketAnalyticsConfiguration = "GetBucketAnalyticsConfiguration"
 type GetBucketAnalyticsConfigurationRequest struct {
 	*aws.Request
 	Input *GetBucketAnalyticsConfigurationInput
+	Copy  func(*GetBucketAnalyticsConfigurationInput) GetBucketAnalyticsConfigurationRequest
 }
 
 // Send marshals and sends the GetBucketAnalyticsConfiguration API request.
@@ -1128,7 +1150,7 @@ func (c *S3) GetBucketAnalyticsConfigurationRequest(input *GetBucketAnalyticsCon
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketAnalyticsConfigurationRequest{Request: req, Input: input}
+	return GetBucketAnalyticsConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketAnalyticsConfigurationRequest}
 }
 
 const opGetBucketCors = "GetBucketCors"
@@ -1137,6 +1159,7 @@ const opGetBucketCors = "GetBucketCors"
 type GetBucketCorsRequest struct {
 	*aws.Request
 	Input *GetBucketCorsInput
+	Copy  func(*GetBucketCorsInput) GetBucketCorsRequest
 }
 
 // Send marshals and sends the GetBucketCors API request.
@@ -1177,7 +1200,7 @@ func (c *S3) GetBucketCorsRequest(input *GetBucketCorsInput) GetBucketCorsReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketCorsRequest{Request: req, Input: input}
+	return GetBucketCorsRequest{Request: req, Input: input, Copy: c.GetBucketCorsRequest}
 }
 
 const opGetBucketEncryption = "GetBucketEncryption"
@@ -1186,6 +1209,7 @@ const opGetBucketEncryption = "GetBucketEncryption"
 type GetBucketEncryptionRequest struct {
 	*aws.Request
 	Input *GetBucketEncryptionInput
+	Copy  func(*GetBucketEncryptionInput) GetBucketEncryptionRequest
 }
 
 // Send marshals and sends the GetBucketEncryption API request.
@@ -1226,7 +1250,7 @@ func (c *S3) GetBucketEncryptionRequest(input *GetBucketEncryptionInput) GetBuck
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketEncryptionRequest{Request: req, Input: input}
+	return GetBucketEncryptionRequest{Request: req, Input: input, Copy: c.GetBucketEncryptionRequest}
 }
 
 const opGetBucketInventoryConfiguration = "GetBucketInventoryConfiguration"
@@ -1235,6 +1259,7 @@ const opGetBucketInventoryConfiguration = "GetBucketInventoryConfiguration"
 type GetBucketInventoryConfigurationRequest struct {
 	*aws.Request
 	Input *GetBucketInventoryConfigurationInput
+	Copy  func(*GetBucketInventoryConfigurationInput) GetBucketInventoryConfigurationRequest
 }
 
 // Send marshals and sends the GetBucketInventoryConfiguration API request.
@@ -1276,7 +1301,7 @@ func (c *S3) GetBucketInventoryConfigurationRequest(input *GetBucketInventoryCon
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketInventoryConfigurationRequest{Request: req, Input: input}
+	return GetBucketInventoryConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketInventoryConfigurationRequest}
 }
 
 const opGetBucketLifecycle = "GetBucketLifecycle"
@@ -1285,6 +1310,7 @@ const opGetBucketLifecycle = "GetBucketLifecycle"
 type GetBucketLifecycleRequest struct {
 	*aws.Request
 	Input *GetBucketLifecycleInput
+	Copy  func(*GetBucketLifecycleInput) GetBucketLifecycleRequest
 }
 
 // Send marshals and sends the GetBucketLifecycle API request.
@@ -1328,7 +1354,7 @@ func (c *S3) GetBucketLifecycleRequest(input *GetBucketLifecycleInput) GetBucket
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketLifecycleRequest{Request: req, Input: input}
+	return GetBucketLifecycleRequest{Request: req, Input: input, Copy: c.GetBucketLifecycleRequest}
 }
 
 const opGetBucketLifecycleConfiguration = "GetBucketLifecycleConfiguration"
@@ -1337,6 +1363,7 @@ const opGetBucketLifecycleConfiguration = "GetBucketLifecycleConfiguration"
 type GetBucketLifecycleConfigurationRequest struct {
 	*aws.Request
 	Input *GetBucketLifecycleConfigurationInput
+	Copy  func(*GetBucketLifecycleConfigurationInput) GetBucketLifecycleConfigurationRequest
 }
 
 // Send marshals and sends the GetBucketLifecycleConfiguration API request.
@@ -1377,7 +1404,7 @@ func (c *S3) GetBucketLifecycleConfigurationRequest(input *GetBucketLifecycleCon
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketLifecycleConfigurationRequest{Request: req, Input: input}
+	return GetBucketLifecycleConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketLifecycleConfigurationRequest}
 }
 
 const opGetBucketLocation = "GetBucketLocation"
@@ -1386,6 +1413,7 @@ const opGetBucketLocation = "GetBucketLocation"
 type GetBucketLocationRequest struct {
 	*aws.Request
 	Input *GetBucketLocationInput
+	Copy  func(*GetBucketLocationInput) GetBucketLocationRequest
 }
 
 // Send marshals and sends the GetBucketLocation API request.
@@ -1426,7 +1454,7 @@ func (c *S3) GetBucketLocationRequest(input *GetBucketLocationInput) GetBucketLo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketLocationRequest{Request: req, Input: input}
+	return GetBucketLocationRequest{Request: req, Input: input, Copy: c.GetBucketLocationRequest}
 }
 
 const opGetBucketLogging = "GetBucketLogging"
@@ -1435,6 +1463,7 @@ const opGetBucketLogging = "GetBucketLogging"
 type GetBucketLoggingRequest struct {
 	*aws.Request
 	Input *GetBucketLoggingInput
+	Copy  func(*GetBucketLoggingInput) GetBucketLoggingRequest
 }
 
 // Send marshals and sends the GetBucketLogging API request.
@@ -1476,7 +1505,7 @@ func (c *S3) GetBucketLoggingRequest(input *GetBucketLoggingInput) GetBucketLogg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketLoggingRequest{Request: req, Input: input}
+	return GetBucketLoggingRequest{Request: req, Input: input, Copy: c.GetBucketLoggingRequest}
 }
 
 const opGetBucketMetricsConfiguration = "GetBucketMetricsConfiguration"
@@ -1485,6 +1514,7 @@ const opGetBucketMetricsConfiguration = "GetBucketMetricsConfiguration"
 type GetBucketMetricsConfigurationRequest struct {
 	*aws.Request
 	Input *GetBucketMetricsConfigurationInput
+	Copy  func(*GetBucketMetricsConfigurationInput) GetBucketMetricsConfigurationRequest
 }
 
 // Send marshals and sends the GetBucketMetricsConfiguration API request.
@@ -1526,7 +1556,7 @@ func (c *S3) GetBucketMetricsConfigurationRequest(input *GetBucketMetricsConfigu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketMetricsConfigurationRequest{Request: req, Input: input}
+	return GetBucketMetricsConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketMetricsConfigurationRequest}
 }
 
 const opGetBucketNotification = "GetBucketNotification"
@@ -1535,6 +1565,7 @@ const opGetBucketNotification = "GetBucketNotification"
 type GetBucketNotificationRequest struct {
 	*aws.Request
 	Input *GetBucketNotificationConfigurationInput
+	Copy  func(*GetBucketNotificationConfigurationInput) GetBucketNotificationRequest
 }
 
 // Send marshals and sends the GetBucketNotification API request.
@@ -1578,7 +1609,7 @@ func (c *S3) GetBucketNotificationRequest(input *GetBucketNotificationConfigurat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketNotificationRequest{Request: req, Input: input}
+	return GetBucketNotificationRequest{Request: req, Input: input, Copy: c.GetBucketNotificationRequest}
 }
 
 const opGetBucketNotificationConfiguration = "GetBucketNotificationConfiguration"
@@ -1587,6 +1618,7 @@ const opGetBucketNotificationConfiguration = "GetBucketNotificationConfiguration
 type GetBucketNotificationConfigurationRequest struct {
 	*aws.Request
 	Input *GetBucketNotificationConfigurationInput
+	Copy  func(*GetBucketNotificationConfigurationInput) GetBucketNotificationConfigurationRequest
 }
 
 // Send marshals and sends the GetBucketNotificationConfiguration API request.
@@ -1627,7 +1659,7 @@ func (c *S3) GetBucketNotificationConfigurationRequest(input *GetBucketNotificat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketNotificationConfigurationRequest{Request: req, Input: input}
+	return GetBucketNotificationConfigurationRequest{Request: req, Input: input, Copy: c.GetBucketNotificationConfigurationRequest}
 }
 
 const opGetBucketPolicy = "GetBucketPolicy"
@@ -1636,6 +1668,7 @@ const opGetBucketPolicy = "GetBucketPolicy"
 type GetBucketPolicyRequest struct {
 	*aws.Request
 	Input *GetBucketPolicyInput
+	Copy  func(*GetBucketPolicyInput) GetBucketPolicyRequest
 }
 
 // Send marshals and sends the GetBucketPolicy API request.
@@ -1676,7 +1709,7 @@ func (c *S3) GetBucketPolicyRequest(input *GetBucketPolicyInput) GetBucketPolicy
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketPolicyRequest{Request: req, Input: input}
+	return GetBucketPolicyRequest{Request: req, Input: input, Copy: c.GetBucketPolicyRequest}
 }
 
 const opGetBucketReplication = "GetBucketReplication"
@@ -1685,6 +1718,7 @@ const opGetBucketReplication = "GetBucketReplication"
 type GetBucketReplicationRequest struct {
 	*aws.Request
 	Input *GetBucketReplicationInput
+	Copy  func(*GetBucketReplicationInput) GetBucketReplicationRequest
 }
 
 // Send marshals and sends the GetBucketReplication API request.
@@ -1725,7 +1759,7 @@ func (c *S3) GetBucketReplicationRequest(input *GetBucketReplicationInput) GetBu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketReplicationRequest{Request: req, Input: input}
+	return GetBucketReplicationRequest{Request: req, Input: input, Copy: c.GetBucketReplicationRequest}
 }
 
 const opGetBucketRequestPayment = "GetBucketRequestPayment"
@@ -1734,6 +1768,7 @@ const opGetBucketRequestPayment = "GetBucketRequestPayment"
 type GetBucketRequestPaymentRequest struct {
 	*aws.Request
 	Input *GetBucketRequestPaymentInput
+	Copy  func(*GetBucketRequestPaymentInput) GetBucketRequestPaymentRequest
 }
 
 // Send marshals and sends the GetBucketRequestPayment API request.
@@ -1774,7 +1809,7 @@ func (c *S3) GetBucketRequestPaymentRequest(input *GetBucketRequestPaymentInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketRequestPaymentRequest{Request: req, Input: input}
+	return GetBucketRequestPaymentRequest{Request: req, Input: input, Copy: c.GetBucketRequestPaymentRequest}
 }
 
 const opGetBucketTagging = "GetBucketTagging"
@@ -1783,6 +1818,7 @@ const opGetBucketTagging = "GetBucketTagging"
 type GetBucketTaggingRequest struct {
 	*aws.Request
 	Input *GetBucketTaggingInput
+	Copy  func(*GetBucketTaggingInput) GetBucketTaggingRequest
 }
 
 // Send marshals and sends the GetBucketTagging API request.
@@ -1823,7 +1859,7 @@ func (c *S3) GetBucketTaggingRequest(input *GetBucketTaggingInput) GetBucketTagg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketTaggingRequest{Request: req, Input: input}
+	return GetBucketTaggingRequest{Request: req, Input: input, Copy: c.GetBucketTaggingRequest}
 }
 
 const opGetBucketVersioning = "GetBucketVersioning"
@@ -1832,6 +1868,7 @@ const opGetBucketVersioning = "GetBucketVersioning"
 type GetBucketVersioningRequest struct {
 	*aws.Request
 	Input *GetBucketVersioningInput
+	Copy  func(*GetBucketVersioningInput) GetBucketVersioningRequest
 }
 
 // Send marshals and sends the GetBucketVersioning API request.
@@ -1872,7 +1909,7 @@ func (c *S3) GetBucketVersioningRequest(input *GetBucketVersioningInput) GetBuck
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketVersioningRequest{Request: req, Input: input}
+	return GetBucketVersioningRequest{Request: req, Input: input, Copy: c.GetBucketVersioningRequest}
 }
 
 const opGetBucketWebsite = "GetBucketWebsite"
@@ -1881,6 +1918,7 @@ const opGetBucketWebsite = "GetBucketWebsite"
 type GetBucketWebsiteRequest struct {
 	*aws.Request
 	Input *GetBucketWebsiteInput
+	Copy  func(*GetBucketWebsiteInput) GetBucketWebsiteRequest
 }
 
 // Send marshals and sends the GetBucketWebsite API request.
@@ -1921,7 +1959,7 @@ func (c *S3) GetBucketWebsiteRequest(input *GetBucketWebsiteInput) GetBucketWebs
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBucketWebsiteRequest{Request: req, Input: input}
+	return GetBucketWebsiteRequest{Request: req, Input: input, Copy: c.GetBucketWebsiteRequest}
 }
 
 const opGetObject = "GetObject"
@@ -1930,6 +1968,7 @@ const opGetObject = "GetObject"
 type GetObjectRequest struct {
 	*aws.Request
 	Input *GetObjectInput
+	Copy  func(*GetObjectInput) GetObjectRequest
 }
 
 // Send marshals and sends the GetObject API request.
@@ -1970,7 +2009,7 @@ func (c *S3) GetObjectRequest(input *GetObjectInput) GetObjectRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetObjectRequest{Request: req, Input: input}
+	return GetObjectRequest{Request: req, Input: input, Copy: c.GetObjectRequest}
 }
 
 const opGetObjectAcl = "GetObjectAcl"
@@ -1979,6 +2018,7 @@ const opGetObjectAcl = "GetObjectAcl"
 type GetObjectAclRequest struct {
 	*aws.Request
 	Input *GetObjectAclInput
+	Copy  func(*GetObjectAclInput) GetObjectAclRequest
 }
 
 // Send marshals and sends the GetObjectAcl API request.
@@ -2019,7 +2059,7 @@ func (c *S3) GetObjectAclRequest(input *GetObjectAclInput) GetObjectAclRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetObjectAclRequest{Request: req, Input: input}
+	return GetObjectAclRequest{Request: req, Input: input, Copy: c.GetObjectAclRequest}
 }
 
 const opGetObjectTagging = "GetObjectTagging"
@@ -2028,6 +2068,7 @@ const opGetObjectTagging = "GetObjectTagging"
 type GetObjectTaggingRequest struct {
 	*aws.Request
 	Input *GetObjectTaggingInput
+	Copy  func(*GetObjectTaggingInput) GetObjectTaggingRequest
 }
 
 // Send marshals and sends the GetObjectTagging API request.
@@ -2068,7 +2109,7 @@ func (c *S3) GetObjectTaggingRequest(input *GetObjectTaggingInput) GetObjectTagg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetObjectTaggingRequest{Request: req, Input: input}
+	return GetObjectTaggingRequest{Request: req, Input: input, Copy: c.GetObjectTaggingRequest}
 }
 
 const opGetObjectTorrent = "GetObjectTorrent"
@@ -2077,6 +2118,7 @@ const opGetObjectTorrent = "GetObjectTorrent"
 type GetObjectTorrentRequest struct {
 	*aws.Request
 	Input *GetObjectTorrentInput
+	Copy  func(*GetObjectTorrentInput) GetObjectTorrentRequest
 }
 
 // Send marshals and sends the GetObjectTorrent API request.
@@ -2117,7 +2159,7 @@ func (c *S3) GetObjectTorrentRequest(input *GetObjectTorrentInput) GetObjectTorr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetObjectTorrentRequest{Request: req, Input: input}
+	return GetObjectTorrentRequest{Request: req, Input: input, Copy: c.GetObjectTorrentRequest}
 }
 
 const opHeadBucket = "HeadBucket"
@@ -2126,6 +2168,7 @@ const opHeadBucket = "HeadBucket"
 type HeadBucketRequest struct {
 	*aws.Request
 	Input *HeadBucketInput
+	Copy  func(*HeadBucketInput) HeadBucketRequest
 }
 
 // Send marshals and sends the HeadBucket API request.
@@ -2169,7 +2212,7 @@ func (c *S3) HeadBucketRequest(input *HeadBucketInput) HeadBucketRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return HeadBucketRequest{Request: req, Input: input}
+	return HeadBucketRequest{Request: req, Input: input, Copy: c.HeadBucketRequest}
 }
 
 const opHeadObject = "HeadObject"
@@ -2178,6 +2221,7 @@ const opHeadObject = "HeadObject"
 type HeadObjectRequest struct {
 	*aws.Request
 	Input *HeadObjectInput
+	Copy  func(*HeadObjectInput) HeadObjectRequest
 }
 
 // Send marshals and sends the HeadObject API request.
@@ -2223,7 +2267,7 @@ func (c *S3) HeadObjectRequest(input *HeadObjectInput) HeadObjectRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return HeadObjectRequest{Request: req, Input: input}
+	return HeadObjectRequest{Request: req, Input: input, Copy: c.HeadObjectRequest}
 }
 
 const opListBucketAnalyticsConfigurations = "ListBucketAnalyticsConfigurations"
@@ -2232,6 +2276,7 @@ const opListBucketAnalyticsConfigurations = "ListBucketAnalyticsConfigurations"
 type ListBucketAnalyticsConfigurationsRequest struct {
 	*aws.Request
 	Input *ListBucketAnalyticsConfigurationsInput
+	Copy  func(*ListBucketAnalyticsConfigurationsInput) ListBucketAnalyticsConfigurationsRequest
 }
 
 // Send marshals and sends the ListBucketAnalyticsConfigurations API request.
@@ -2272,7 +2317,7 @@ func (c *S3) ListBucketAnalyticsConfigurationsRequest(input *ListBucketAnalytics
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBucketAnalyticsConfigurationsRequest{Request: req, Input: input}
+	return ListBucketAnalyticsConfigurationsRequest{Request: req, Input: input, Copy: c.ListBucketAnalyticsConfigurationsRequest}
 }
 
 const opListBucketInventoryConfigurations = "ListBucketInventoryConfigurations"
@@ -2281,6 +2326,7 @@ const opListBucketInventoryConfigurations = "ListBucketInventoryConfigurations"
 type ListBucketInventoryConfigurationsRequest struct {
 	*aws.Request
 	Input *ListBucketInventoryConfigurationsInput
+	Copy  func(*ListBucketInventoryConfigurationsInput) ListBucketInventoryConfigurationsRequest
 }
 
 // Send marshals and sends the ListBucketInventoryConfigurations API request.
@@ -2321,7 +2367,7 @@ func (c *S3) ListBucketInventoryConfigurationsRequest(input *ListBucketInventory
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBucketInventoryConfigurationsRequest{Request: req, Input: input}
+	return ListBucketInventoryConfigurationsRequest{Request: req, Input: input, Copy: c.ListBucketInventoryConfigurationsRequest}
 }
 
 const opListBucketMetricsConfigurations = "ListBucketMetricsConfigurations"
@@ -2330,6 +2376,7 @@ const opListBucketMetricsConfigurations = "ListBucketMetricsConfigurations"
 type ListBucketMetricsConfigurationsRequest struct {
 	*aws.Request
 	Input *ListBucketMetricsConfigurationsInput
+	Copy  func(*ListBucketMetricsConfigurationsInput) ListBucketMetricsConfigurationsRequest
 }
 
 // Send marshals and sends the ListBucketMetricsConfigurations API request.
@@ -2370,7 +2417,7 @@ func (c *S3) ListBucketMetricsConfigurationsRequest(input *ListBucketMetricsConf
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBucketMetricsConfigurationsRequest{Request: req, Input: input}
+	return ListBucketMetricsConfigurationsRequest{Request: req, Input: input, Copy: c.ListBucketMetricsConfigurationsRequest}
 }
 
 const opListBuckets = "ListBuckets"
@@ -2379,6 +2426,7 @@ const opListBuckets = "ListBuckets"
 type ListBucketsRequest struct {
 	*aws.Request
 	Input *ListBucketsInput
+	Copy  func(*ListBucketsInput) ListBucketsRequest
 }
 
 // Send marshals and sends the ListBuckets API request.
@@ -2419,7 +2467,7 @@ func (c *S3) ListBucketsRequest(input *ListBucketsInput) ListBucketsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBucketsRequest{Request: req, Input: input}
+	return ListBucketsRequest{Request: req, Input: input, Copy: c.ListBucketsRequest}
 }
 
 const opListMultipartUploads = "ListMultipartUploads"
@@ -2428,6 +2476,7 @@ const opListMultipartUploads = "ListMultipartUploads"
 type ListMultipartUploadsRequest struct {
 	*aws.Request
 	Input *ListMultipartUploadsInput
+	Copy  func(*ListMultipartUploadsInput) ListMultipartUploadsRequest
 }
 
 // Send marshals and sends the ListMultipartUploads API request.
@@ -2474,57 +2523,53 @@ func (c *S3) ListMultipartUploadsRequest(input *ListMultipartUploadsInput) ListM
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListMultipartUploadsRequest{Request: req, Input: input}
+	return ListMultipartUploadsRequest{Request: req, Input: input, Copy: c.ListMultipartUploadsRequest}
 }
 
-// ListMultipartUploadsPages iterates over the pages of a ListMultipartUploads operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListMultipartUploads method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListMultipartUploadsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListMultipartUploads operation.
-//    pageNum := 0
-//    err := client.ListMultipartUploadsPages(params,
-//        func(page *ListMultipartUploadsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListMultipartUploadsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *S3) ListMultipartUploadsPages(input *ListMultipartUploadsInput, fn func(*ListMultipartUploadsOutput, bool) bool) error {
-	return c.ListMultipartUploadsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListMultipartUploadsRequest) Paginate(opts ...aws.Option) ListMultipartUploadsPager {
+	return ListMultipartUploadsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListMultipartUploadsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListMultipartUploadsPagesWithContext same as ListMultipartUploadsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListMultipartUploadsPagesWithContext(ctx aws.Context, input *ListMultipartUploadsInput, fn func(*ListMultipartUploadsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListMultipartUploadsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListMultipartUploadsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListMultipartUploadsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListMultipartUploadsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListMultipartUploadsPager struct {
+	aws.Pager
+}
+
+func (p *ListMultipartUploadsPager) CurrentPage() *ListMultipartUploadsOutput {
+	return p.Pager.CurrentPage().(*ListMultipartUploadsOutput)
 }
 
 const opListObjectVersions = "ListObjectVersions"
@@ -2533,6 +2578,7 @@ const opListObjectVersions = "ListObjectVersions"
 type ListObjectVersionsRequest struct {
 	*aws.Request
 	Input *ListObjectVersionsInput
+	Copy  func(*ListObjectVersionsInput) ListObjectVersionsRequest
 }
 
 // Send marshals and sends the ListObjectVersions API request.
@@ -2579,57 +2625,53 @@ func (c *S3) ListObjectVersionsRequest(input *ListObjectVersionsInput) ListObjec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListObjectVersionsRequest{Request: req, Input: input}
+	return ListObjectVersionsRequest{Request: req, Input: input, Copy: c.ListObjectVersionsRequest}
 }
 
-// ListObjectVersionsPages iterates over the pages of a ListObjectVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListObjectVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListObjectVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListObjectVersions operation.
-//    pageNum := 0
-//    err := client.ListObjectVersionsPages(params,
-//        func(page *ListObjectVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListObjectVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *S3) ListObjectVersionsPages(input *ListObjectVersionsInput, fn func(*ListObjectVersionsOutput, bool) bool) error {
-	return c.ListObjectVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListObjectVersionsRequest) Paginate(opts ...aws.Option) ListObjectVersionsPager {
+	return ListObjectVersionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListObjectVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListObjectVersionsPagesWithContext same as ListObjectVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListObjectVersionsPagesWithContext(ctx aws.Context, input *ListObjectVersionsInput, fn func(*ListObjectVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListObjectVersionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListObjectVersionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListObjectVersionsPager struct {
+	aws.Pager
+}
+
+func (p *ListObjectVersionsPager) CurrentPage() *ListObjectVersionsOutput {
+	return p.Pager.CurrentPage().(*ListObjectVersionsOutput)
 }
 
 const opListObjects = "ListObjects"
@@ -2638,6 +2680,7 @@ const opListObjects = "ListObjects"
 type ListObjectsRequest struct {
 	*aws.Request
 	Input *ListObjectsInput
+	Copy  func(*ListObjectsInput) ListObjectsRequest
 }
 
 // Send marshals and sends the ListObjects API request.
@@ -2686,57 +2729,53 @@ func (c *S3) ListObjectsRequest(input *ListObjectsInput) ListObjectsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListObjectsRequest{Request: req, Input: input}
+	return ListObjectsRequest{Request: req, Input: input, Copy: c.ListObjectsRequest}
 }
 
-// ListObjectsPages iterates over the pages of a ListObjects operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListObjects method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListObjectsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListObjects operation.
-//    pageNum := 0
-//    err := client.ListObjectsPages(params,
-//        func(page *ListObjectsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListObjectsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *S3) ListObjectsPages(input *ListObjectsInput, fn func(*ListObjectsOutput, bool) bool) error {
-	return c.ListObjectsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListObjectsRequest) Paginate(opts ...aws.Option) ListObjectsPager {
+	return ListObjectsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListObjectsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListObjectsPagesWithContext same as ListObjectsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListObjectsPagesWithContext(ctx aws.Context, input *ListObjectsInput, fn func(*ListObjectsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListObjectsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListObjectsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListObjectsPager struct {
+	aws.Pager
+}
+
+func (p *ListObjectsPager) CurrentPage() *ListObjectsOutput {
+	return p.Pager.CurrentPage().(*ListObjectsOutput)
 }
 
 const opListObjectsV2 = "ListObjectsV2"
@@ -2745,6 +2784,7 @@ const opListObjectsV2 = "ListObjectsV2"
 type ListObjectsV2Request struct {
 	*aws.Request
 	Input *ListObjectsV2Input
+	Copy  func(*ListObjectsV2Input) ListObjectsV2Request
 }
 
 // Send marshals and sends the ListObjectsV2 API request.
@@ -2794,57 +2834,53 @@ func (c *S3) ListObjectsV2Request(input *ListObjectsV2Input) ListObjectsV2Reques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListObjectsV2Request{Request: req, Input: input}
+	return ListObjectsV2Request{Request: req, Input: input, Copy: c.ListObjectsV2Request}
 }
 
-// ListObjectsV2Pages iterates over the pages of a ListObjectsV2 operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListObjectsV2 method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListObjectsV2Request operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListObjectsV2 operation.
-//    pageNum := 0
-//    err := client.ListObjectsV2Pages(params,
-//        func(page *ListObjectsV2Output, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListObjectsV2Request(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *S3) ListObjectsV2Pages(input *ListObjectsV2Input, fn func(*ListObjectsV2Output, bool) bool) error {
-	return c.ListObjectsV2PagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListObjectsV2Request) Paginate(opts ...aws.Option) ListObjectsV2Pager {
+	return ListObjectsV2Pager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListObjectsV2Input
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListObjectsV2PagesWithContext same as ListObjectsV2Pages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListObjectsV2PagesWithContext(ctx aws.Context, input *ListObjectsV2Input, fn func(*ListObjectsV2Output, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListObjectsV2Input
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListObjectsV2Request(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectsV2Output), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectsV2Pager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListObjectsV2Pager struct {
+	aws.Pager
+}
+
+func (p *ListObjectsV2Pager) CurrentPage() *ListObjectsV2Output {
+	return p.Pager.CurrentPage().(*ListObjectsV2Output)
 }
 
 const opListParts = "ListParts"
@@ -2853,6 +2889,7 @@ const opListParts = "ListParts"
 type ListPartsRequest struct {
 	*aws.Request
 	Input *ListPartsInput
+	Copy  func(*ListPartsInput) ListPartsRequest
 }
 
 // Send marshals and sends the ListParts API request.
@@ -2899,57 +2936,53 @@ func (c *S3) ListPartsRequest(input *ListPartsInput) ListPartsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPartsRequest{Request: req, Input: input}
+	return ListPartsRequest{Request: req, Input: input, Copy: c.ListPartsRequest}
 }
 
-// ListPartsPages iterates over the pages of a ListParts operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListParts method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPartsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListParts operation.
-//    pageNum := 0
-//    err := client.ListPartsPages(params,
-//        func(page *ListPartsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPartsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *S3) ListPartsPages(input *ListPartsInput, fn func(*ListPartsOutput, bool) bool) error {
-	return c.ListPartsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPartsRequest) Paginate(opts ...aws.Option) ListPartsPager {
+	return ListPartsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPartsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListPartsPagesWithContext same as ListPartsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *S3) ListPartsPagesWithContext(ctx aws.Context, input *ListPartsInput, fn func(*ListPartsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPartsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListPartsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPartsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPartsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPartsPager struct {
+	aws.Pager
+}
+
+func (p *ListPartsPager) CurrentPage() *ListPartsOutput {
+	return p.Pager.CurrentPage().(*ListPartsOutput)
 }
 
 const opPutBucketAccelerateConfiguration = "PutBucketAccelerateConfiguration"
@@ -2958,6 +2991,7 @@ const opPutBucketAccelerateConfiguration = "PutBucketAccelerateConfiguration"
 type PutBucketAccelerateConfigurationRequest struct {
 	*aws.Request
 	Input *PutBucketAccelerateConfigurationInput
+	Copy  func(*PutBucketAccelerateConfigurationInput) PutBucketAccelerateConfigurationRequest
 }
 
 // Send marshals and sends the PutBucketAccelerateConfiguration API request.
@@ -3000,7 +3034,7 @@ func (c *S3) PutBucketAccelerateConfigurationRequest(input *PutBucketAccelerateC
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketAccelerateConfigurationRequest{Request: req, Input: input}
+	return PutBucketAccelerateConfigurationRequest{Request: req, Input: input, Copy: c.PutBucketAccelerateConfigurationRequest}
 }
 
 const opPutBucketAcl = "PutBucketAcl"
@@ -3009,6 +3043,7 @@ const opPutBucketAcl = "PutBucketAcl"
 type PutBucketAclRequest struct {
 	*aws.Request
 	Input *PutBucketAclInput
+	Copy  func(*PutBucketAclInput) PutBucketAclRequest
 }
 
 // Send marshals and sends the PutBucketAcl API request.
@@ -3051,7 +3086,7 @@ func (c *S3) PutBucketAclRequest(input *PutBucketAclInput) PutBucketAclRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketAclRequest{Request: req, Input: input}
+	return PutBucketAclRequest{Request: req, Input: input, Copy: c.PutBucketAclRequest}
 }
 
 const opPutBucketAnalyticsConfiguration = "PutBucketAnalyticsConfiguration"
@@ -3060,6 +3095,7 @@ const opPutBucketAnalyticsConfiguration = "PutBucketAnalyticsConfiguration"
 type PutBucketAnalyticsConfigurationRequest struct {
 	*aws.Request
 	Input *PutBucketAnalyticsConfigurationInput
+	Copy  func(*PutBucketAnalyticsConfigurationInput) PutBucketAnalyticsConfigurationRequest
 }
 
 // Send marshals and sends the PutBucketAnalyticsConfiguration API request.
@@ -3103,7 +3139,7 @@ func (c *S3) PutBucketAnalyticsConfigurationRequest(input *PutBucketAnalyticsCon
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketAnalyticsConfigurationRequest{Request: req, Input: input}
+	return PutBucketAnalyticsConfigurationRequest{Request: req, Input: input, Copy: c.PutBucketAnalyticsConfigurationRequest}
 }
 
 const opPutBucketCors = "PutBucketCors"
@@ -3112,6 +3148,7 @@ const opPutBucketCors = "PutBucketCors"
 type PutBucketCorsRequest struct {
 	*aws.Request
 	Input *PutBucketCorsInput
+	Copy  func(*PutBucketCorsInput) PutBucketCorsRequest
 }
 
 // Send marshals and sends the PutBucketCors API request.
@@ -3154,7 +3191,7 @@ func (c *S3) PutBucketCorsRequest(input *PutBucketCorsInput) PutBucketCorsReques
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketCorsRequest{Request: req, Input: input}
+	return PutBucketCorsRequest{Request: req, Input: input, Copy: c.PutBucketCorsRequest}
 }
 
 const opPutBucketEncryption = "PutBucketEncryption"
@@ -3163,6 +3200,7 @@ const opPutBucketEncryption = "PutBucketEncryption"
 type PutBucketEncryptionRequest struct {
 	*aws.Request
 	Input *PutBucketEncryptionInput
+	Copy  func(*PutBucketEncryptionInput) PutBucketEncryptionRequest
 }
 
 // Send marshals and sends the PutBucketEncryption API request.
@@ -3206,7 +3244,7 @@ func (c *S3) PutBucketEncryptionRequest(input *PutBucketEncryptionInput) PutBuck
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketEncryptionRequest{Request: req, Input: input}
+	return PutBucketEncryptionRequest{Request: req, Input: input, Copy: c.PutBucketEncryptionRequest}
 }
 
 const opPutBucketInventoryConfiguration = "PutBucketInventoryConfiguration"
@@ -3215,6 +3253,7 @@ const opPutBucketInventoryConfiguration = "PutBucketInventoryConfiguration"
 type PutBucketInventoryConfigurationRequest struct {
 	*aws.Request
 	Input *PutBucketInventoryConfigurationInput
+	Copy  func(*PutBucketInventoryConfigurationInput) PutBucketInventoryConfigurationRequest
 }
 
 // Send marshals and sends the PutBucketInventoryConfiguration API request.
@@ -3258,7 +3297,7 @@ func (c *S3) PutBucketInventoryConfigurationRequest(input *PutBucketInventoryCon
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketInventoryConfigurationRequest{Request: req, Input: input}
+	return PutBucketInventoryConfigurationRequest{Request: req, Input: input, Copy: c.PutBucketInventoryConfigurationRequest}
 }
 
 const opPutBucketLifecycle = "PutBucketLifecycle"
@@ -3267,6 +3306,7 @@ const opPutBucketLifecycle = "PutBucketLifecycle"
 type PutBucketLifecycleRequest struct {
 	*aws.Request
 	Input *PutBucketLifecycleInput
+	Copy  func(*PutBucketLifecycleInput) PutBucketLifecycleRequest
 }
 
 // Send marshals and sends the PutBucketLifecycle API request.
@@ -3312,7 +3352,7 @@ func (c *S3) PutBucketLifecycleRequest(input *PutBucketLifecycleInput) PutBucket
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketLifecycleRequest{Request: req, Input: input}
+	return PutBucketLifecycleRequest{Request: req, Input: input, Copy: c.PutBucketLifecycleRequest}
 }
 
 const opPutBucketLifecycleConfiguration = "PutBucketLifecycleConfiguration"
@@ -3321,6 +3361,7 @@ const opPutBucketLifecycleConfiguration = "PutBucketLifecycleConfiguration"
 type PutBucketLifecycleConfigurationRequest struct {
 	*aws.Request
 	Input *PutBucketLifecycleConfigurationInput
+	Copy  func(*PutBucketLifecycleConfigurationInput) PutBucketLifecycleConfigurationRequest
 }
 
 // Send marshals and sends the PutBucketLifecycleConfiguration API request.
@@ -3364,7 +3405,7 @@ func (c *S3) PutBucketLifecycleConfigurationRequest(input *PutBucketLifecycleCon
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketLifecycleConfigurationRequest{Request: req, Input: input}
+	return PutBucketLifecycleConfigurationRequest{Request: req, Input: input, Copy: c.PutBucketLifecycleConfigurationRequest}
 }
 
 const opPutBucketLogging = "PutBucketLogging"
@@ -3373,6 +3414,7 @@ const opPutBucketLogging = "PutBucketLogging"
 type PutBucketLoggingRequest struct {
 	*aws.Request
 	Input *PutBucketLoggingInput
+	Copy  func(*PutBucketLoggingInput) PutBucketLoggingRequest
 }
 
 // Send marshals and sends the PutBucketLogging API request.
@@ -3417,7 +3459,7 @@ func (c *S3) PutBucketLoggingRequest(input *PutBucketLoggingInput) PutBucketLogg
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketLoggingRequest{Request: req, Input: input}
+	return PutBucketLoggingRequest{Request: req, Input: input, Copy: c.PutBucketLoggingRequest}
 }
 
 const opPutBucketMetricsConfiguration = "PutBucketMetricsConfiguration"
@@ -3426,6 +3468,7 @@ const opPutBucketMetricsConfiguration = "PutBucketMetricsConfiguration"
 type PutBucketMetricsConfigurationRequest struct {
 	*aws.Request
 	Input *PutBucketMetricsConfigurationInput
+	Copy  func(*PutBucketMetricsConfigurationInput) PutBucketMetricsConfigurationRequest
 }
 
 // Send marshals and sends the PutBucketMetricsConfiguration API request.
@@ -3469,7 +3512,7 @@ func (c *S3) PutBucketMetricsConfigurationRequest(input *PutBucketMetricsConfigu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketMetricsConfigurationRequest{Request: req, Input: input}
+	return PutBucketMetricsConfigurationRequest{Request: req, Input: input, Copy: c.PutBucketMetricsConfigurationRequest}
 }
 
 const opPutBucketNotification = "PutBucketNotification"
@@ -3478,6 +3521,7 @@ const opPutBucketNotification = "PutBucketNotification"
 type PutBucketNotificationRequest struct {
 	*aws.Request
 	Input *PutBucketNotificationInput
+	Copy  func(*PutBucketNotificationInput) PutBucketNotificationRequest
 }
 
 // Send marshals and sends the PutBucketNotification API request.
@@ -3523,7 +3567,7 @@ func (c *S3) PutBucketNotificationRequest(input *PutBucketNotificationInput) Put
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketNotificationRequest{Request: req, Input: input}
+	return PutBucketNotificationRequest{Request: req, Input: input, Copy: c.PutBucketNotificationRequest}
 }
 
 const opPutBucketNotificationConfiguration = "PutBucketNotificationConfiguration"
@@ -3532,6 +3576,7 @@ const opPutBucketNotificationConfiguration = "PutBucketNotificationConfiguration
 type PutBucketNotificationConfigurationRequest struct {
 	*aws.Request
 	Input *PutBucketNotificationConfigurationInput
+	Copy  func(*PutBucketNotificationConfigurationInput) PutBucketNotificationConfigurationRequest
 }
 
 // Send marshals and sends the PutBucketNotificationConfiguration API request.
@@ -3574,7 +3619,7 @@ func (c *S3) PutBucketNotificationConfigurationRequest(input *PutBucketNotificat
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketNotificationConfigurationRequest{Request: req, Input: input}
+	return PutBucketNotificationConfigurationRequest{Request: req, Input: input, Copy: c.PutBucketNotificationConfigurationRequest}
 }
 
 const opPutBucketPolicy = "PutBucketPolicy"
@@ -3583,6 +3628,7 @@ const opPutBucketPolicy = "PutBucketPolicy"
 type PutBucketPolicyRequest struct {
 	*aws.Request
 	Input *PutBucketPolicyInput
+	Copy  func(*PutBucketPolicyInput) PutBucketPolicyRequest
 }
 
 // Send marshals and sends the PutBucketPolicy API request.
@@ -3626,7 +3672,7 @@ func (c *S3) PutBucketPolicyRequest(input *PutBucketPolicyInput) PutBucketPolicy
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketPolicyRequest{Request: req, Input: input}
+	return PutBucketPolicyRequest{Request: req, Input: input, Copy: c.PutBucketPolicyRequest}
 }
 
 const opPutBucketReplication = "PutBucketReplication"
@@ -3635,6 +3681,7 @@ const opPutBucketReplication = "PutBucketReplication"
 type PutBucketReplicationRequest struct {
 	*aws.Request
 	Input *PutBucketReplicationInput
+	Copy  func(*PutBucketReplicationInput) PutBucketReplicationRequest
 }
 
 // Send marshals and sends the PutBucketReplication API request.
@@ -3678,7 +3725,7 @@ func (c *S3) PutBucketReplicationRequest(input *PutBucketReplicationInput) PutBu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketReplicationRequest{Request: req, Input: input}
+	return PutBucketReplicationRequest{Request: req, Input: input, Copy: c.PutBucketReplicationRequest}
 }
 
 const opPutBucketRequestPayment = "PutBucketRequestPayment"
@@ -3687,6 +3734,7 @@ const opPutBucketRequestPayment = "PutBucketRequestPayment"
 type PutBucketRequestPaymentRequest struct {
 	*aws.Request
 	Input *PutBucketRequestPaymentInput
+	Copy  func(*PutBucketRequestPaymentInput) PutBucketRequestPaymentRequest
 }
 
 // Send marshals and sends the PutBucketRequestPayment API request.
@@ -3733,7 +3781,7 @@ func (c *S3) PutBucketRequestPaymentRequest(input *PutBucketRequestPaymentInput)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketRequestPaymentRequest{Request: req, Input: input}
+	return PutBucketRequestPaymentRequest{Request: req, Input: input, Copy: c.PutBucketRequestPaymentRequest}
 }
 
 const opPutBucketTagging = "PutBucketTagging"
@@ -3742,6 +3790,7 @@ const opPutBucketTagging = "PutBucketTagging"
 type PutBucketTaggingRequest struct {
 	*aws.Request
 	Input *PutBucketTaggingInput
+	Copy  func(*PutBucketTaggingInput) PutBucketTaggingRequest
 }
 
 // Send marshals and sends the PutBucketTagging API request.
@@ -3784,7 +3833,7 @@ func (c *S3) PutBucketTaggingRequest(input *PutBucketTaggingInput) PutBucketTagg
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketTaggingRequest{Request: req, Input: input}
+	return PutBucketTaggingRequest{Request: req, Input: input, Copy: c.PutBucketTaggingRequest}
 }
 
 const opPutBucketVersioning = "PutBucketVersioning"
@@ -3793,6 +3842,7 @@ const opPutBucketVersioning = "PutBucketVersioning"
 type PutBucketVersioningRequest struct {
 	*aws.Request
 	Input *PutBucketVersioningInput
+	Copy  func(*PutBucketVersioningInput) PutBucketVersioningRequest
 }
 
 // Send marshals and sends the PutBucketVersioning API request.
@@ -3836,7 +3886,7 @@ func (c *S3) PutBucketVersioningRequest(input *PutBucketVersioningInput) PutBuck
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketVersioningRequest{Request: req, Input: input}
+	return PutBucketVersioningRequest{Request: req, Input: input, Copy: c.PutBucketVersioningRequest}
 }
 
 const opPutBucketWebsite = "PutBucketWebsite"
@@ -3845,6 +3895,7 @@ const opPutBucketWebsite = "PutBucketWebsite"
 type PutBucketWebsiteRequest struct {
 	*aws.Request
 	Input *PutBucketWebsiteInput
+	Copy  func(*PutBucketWebsiteInput) PutBucketWebsiteRequest
 }
 
 // Send marshals and sends the PutBucketWebsite API request.
@@ -3887,7 +3938,7 @@ func (c *S3) PutBucketWebsiteRequest(input *PutBucketWebsiteInput) PutBucketWebs
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutBucketWebsiteRequest{Request: req, Input: input}
+	return PutBucketWebsiteRequest{Request: req, Input: input, Copy: c.PutBucketWebsiteRequest}
 }
 
 const opPutObject = "PutObject"
@@ -3896,6 +3947,7 @@ const opPutObject = "PutObject"
 type PutObjectRequest struct {
 	*aws.Request
 	Input *PutObjectInput
+	Copy  func(*PutObjectInput) PutObjectRequest
 }
 
 // Send marshals and sends the PutObject API request.
@@ -3936,7 +3988,7 @@ func (c *S3) PutObjectRequest(input *PutObjectInput) PutObjectRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutObjectRequest{Request: req, Input: input}
+	return PutObjectRequest{Request: req, Input: input, Copy: c.PutObjectRequest}
 }
 
 const opPutObjectAcl = "PutObjectAcl"
@@ -3945,6 +3997,7 @@ const opPutObjectAcl = "PutObjectAcl"
 type PutObjectAclRequest struct {
 	*aws.Request
 	Input *PutObjectAclInput
+	Copy  func(*PutObjectAclInput) PutObjectAclRequest
 }
 
 // Send marshals and sends the PutObjectAcl API request.
@@ -3986,7 +4039,7 @@ func (c *S3) PutObjectAclRequest(input *PutObjectAclInput) PutObjectAclRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutObjectAclRequest{Request: req, Input: input}
+	return PutObjectAclRequest{Request: req, Input: input, Copy: c.PutObjectAclRequest}
 }
 
 const opPutObjectTagging = "PutObjectTagging"
@@ -3995,6 +4048,7 @@ const opPutObjectTagging = "PutObjectTagging"
 type PutObjectTaggingRequest struct {
 	*aws.Request
 	Input *PutObjectTaggingInput
+	Copy  func(*PutObjectTaggingInput) PutObjectTaggingRequest
 }
 
 // Send marshals and sends the PutObjectTagging API request.
@@ -4035,7 +4089,7 @@ func (c *S3) PutObjectTaggingRequest(input *PutObjectTaggingInput) PutObjectTagg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutObjectTaggingRequest{Request: req, Input: input}
+	return PutObjectTaggingRequest{Request: req, Input: input, Copy: c.PutObjectTaggingRequest}
 }
 
 const opRestoreObject = "RestoreObject"
@@ -4044,6 +4098,7 @@ const opRestoreObject = "RestoreObject"
 type RestoreObjectRequest struct {
 	*aws.Request
 	Input *RestoreObjectInput
+	Copy  func(*RestoreObjectInput) RestoreObjectRequest
 }
 
 // Send marshals and sends the RestoreObject API request.
@@ -4084,7 +4139,7 @@ func (c *S3) RestoreObjectRequest(input *RestoreObjectInput) RestoreObjectReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreObjectRequest{Request: req, Input: input}
+	return RestoreObjectRequest{Request: req, Input: input, Copy: c.RestoreObjectRequest}
 }
 
 const opUploadPart = "UploadPart"
@@ -4093,6 +4148,7 @@ const opUploadPart = "UploadPart"
 type UploadPartRequest struct {
 	*aws.Request
 	Input *UploadPartInput
+	Copy  func(*UploadPartInput) UploadPartRequest
 }
 
 // Send marshals and sends the UploadPart API request.
@@ -4139,7 +4195,7 @@ func (c *S3) UploadPartRequest(input *UploadPartInput) UploadPartRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UploadPartRequest{Request: req, Input: input}
+	return UploadPartRequest{Request: req, Input: input, Copy: c.UploadPartRequest}
 }
 
 const opUploadPartCopy = "UploadPartCopy"
@@ -4148,6 +4204,7 @@ const opUploadPartCopy = "UploadPartCopy"
 type UploadPartCopyRequest struct {
 	*aws.Request
 	Input *UploadPartCopyInput
+	Copy  func(*UploadPartCopyInput) UploadPartCopyRequest
 }
 
 // Send marshals and sends the UploadPartCopy API request.
@@ -4188,7 +4245,7 @@ func (c *S3) UploadPartCopyRequest(input *UploadPartCopyInput) UploadPartCopyReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UploadPartCopyRequest{Request: req, Input: input}
+	return UploadPartCopyRequest{Request: req, Input: input, Copy: c.UploadPartCopyRequest}
 }
 
 // Specifies the days since the initiation of an Incomplete Multipart Upload

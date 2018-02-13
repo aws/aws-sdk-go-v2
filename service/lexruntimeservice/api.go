@@ -17,6 +17,7 @@ const opPostContent = "PostContent"
 type PostContentRequest struct {
 	*aws.Request
 	Input *PostContentInput
+	Copy  func(*PostContentInput) PostContentRequest
 }
 
 // Send marshals and sends the PostContent API request.
@@ -114,7 +115,7 @@ func (c *LexRuntimeService) PostContentRequest(input *PostContentInput) PostCont
 	req.Handlers.Sign.Remove(v4.SignRequestHandler)
 	handler := v4.BuildNamedHandler("v4.CustomSignerHandler", v4.WithUnsignedPayload)
 	req.Handlers.Sign.PushFrontNamed(handler)
-	return PostContentRequest{Request: req, Input: input}
+	return PostContentRequest{Request: req, Input: input, Copy: c.PostContentRequest}
 }
 
 const opPostText = "PostText"
@@ -123,6 +124,7 @@ const opPostText = "PostText"
 type PostTextRequest struct {
 	*aws.Request
 	Input *PostTextInput
+	Copy  func(*PostTextInput) PostTextRequest
 }
 
 // Send marshals and sends the PostText API request.
@@ -211,7 +213,7 @@ func (c *LexRuntimeService) PostTextRequest(input *PostTextInput) PostTextReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PostTextRequest{Request: req, Input: input}
+	return PostTextRequest{Request: req, Input: input, Copy: c.PostTextRequest}
 }
 
 // Represents an option to be shown on the client platform (Facebook, Slack,

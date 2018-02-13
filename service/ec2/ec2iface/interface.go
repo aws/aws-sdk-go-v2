@@ -317,13 +317,7 @@ type EC2API interface {
 
 	DescribeInstanceStatusRequest(*ec2.DescribeInstanceStatusInput) ec2.DescribeInstanceStatusRequest
 
-	DescribeInstanceStatusPages(*ec2.DescribeInstanceStatusInput, func(*ec2.DescribeInstanceStatusOutput, bool) bool) error
-	DescribeInstanceStatusPagesWithContext(aws.Context, *ec2.DescribeInstanceStatusInput, func(*ec2.DescribeInstanceStatusOutput, bool) bool, ...aws.Option) error
-
 	DescribeInstancesRequest(*ec2.DescribeInstancesInput) ec2.DescribeInstancesRequest
-
-	DescribeInstancesPages(*ec2.DescribeInstancesInput, func(*ec2.DescribeInstancesOutput, bool) bool) error
-	DescribeInstancesPagesWithContext(aws.Context, *ec2.DescribeInstancesInput, func(*ec2.DescribeInstancesOutput, bool) bool, ...aws.Option) error
 
 	DescribeInternetGatewaysRequest(*ec2.DescribeInternetGatewaysInput) ec2.DescribeInternetGatewaysRequest
 
@@ -336,9 +330,6 @@ type EC2API interface {
 	DescribeMovingAddressesRequest(*ec2.DescribeMovingAddressesInput) ec2.DescribeMovingAddressesRequest
 
 	DescribeNatGatewaysRequest(*ec2.DescribeNatGatewaysInput) ec2.DescribeNatGatewaysRequest
-
-	DescribeNatGatewaysPages(*ec2.DescribeNatGatewaysInput, func(*ec2.DescribeNatGatewaysOutput, bool) bool) error
-	DescribeNatGatewaysPagesWithContext(aws.Context, *ec2.DescribeNatGatewaysInput, func(*ec2.DescribeNatGatewaysOutput, bool) bool, ...aws.Option) error
 
 	DescribeNetworkAclsRequest(*ec2.DescribeNetworkAclsInput) ec2.DescribeNetworkAclsRequest
 
@@ -360,13 +351,7 @@ type EC2API interface {
 
 	DescribeReservedInstancesModificationsRequest(*ec2.DescribeReservedInstancesModificationsInput) ec2.DescribeReservedInstancesModificationsRequest
 
-	DescribeReservedInstancesModificationsPages(*ec2.DescribeReservedInstancesModificationsInput, func(*ec2.DescribeReservedInstancesModificationsOutput, bool) bool) error
-	DescribeReservedInstancesModificationsPagesWithContext(aws.Context, *ec2.DescribeReservedInstancesModificationsInput, func(*ec2.DescribeReservedInstancesModificationsOutput, bool) bool, ...aws.Option) error
-
 	DescribeReservedInstancesOfferingsRequest(*ec2.DescribeReservedInstancesOfferingsInput) ec2.DescribeReservedInstancesOfferingsRequest
-
-	DescribeReservedInstancesOfferingsPages(*ec2.DescribeReservedInstancesOfferingsInput, func(*ec2.DescribeReservedInstancesOfferingsOutput, bool) bool) error
-	DescribeReservedInstancesOfferingsPagesWithContext(aws.Context, *ec2.DescribeReservedInstancesOfferingsInput, func(*ec2.DescribeReservedInstancesOfferingsOutput, bool) bool, ...aws.Option) error
 
 	DescribeRouteTablesRequest(*ec2.DescribeRouteTablesInput) ec2.DescribeRouteTablesRequest
 
@@ -382,9 +367,6 @@ type EC2API interface {
 
 	DescribeSnapshotsRequest(*ec2.DescribeSnapshotsInput) ec2.DescribeSnapshotsRequest
 
-	DescribeSnapshotsPages(*ec2.DescribeSnapshotsInput, func(*ec2.DescribeSnapshotsOutput, bool) bool) error
-	DescribeSnapshotsPagesWithContext(aws.Context, *ec2.DescribeSnapshotsInput, func(*ec2.DescribeSnapshotsOutput, bool) bool, ...aws.Option) error
-
 	DescribeSpotDatafeedSubscriptionRequest(*ec2.DescribeSpotDatafeedSubscriptionInput) ec2.DescribeSpotDatafeedSubscriptionRequest
 
 	DescribeSpotFleetInstancesRequest(*ec2.DescribeSpotFleetInstancesInput) ec2.DescribeSpotFleetInstancesRequest
@@ -393,15 +375,9 @@ type EC2API interface {
 
 	DescribeSpotFleetRequestsRequest(*ec2.DescribeSpotFleetRequestsInput) ec2.DescribeSpotFleetRequestsRequest
 
-	DescribeSpotFleetRequestsPages(*ec2.DescribeSpotFleetRequestsInput, func(*ec2.DescribeSpotFleetRequestsOutput, bool) bool) error
-	DescribeSpotFleetRequestsPagesWithContext(aws.Context, *ec2.DescribeSpotFleetRequestsInput, func(*ec2.DescribeSpotFleetRequestsOutput, bool) bool, ...aws.Option) error
-
 	DescribeSpotInstanceRequestsRequest(*ec2.DescribeSpotInstanceRequestsInput) ec2.DescribeSpotInstanceRequestsRequest
 
 	DescribeSpotPriceHistoryRequest(*ec2.DescribeSpotPriceHistoryInput) ec2.DescribeSpotPriceHistoryRequest
-
-	DescribeSpotPriceHistoryPages(*ec2.DescribeSpotPriceHistoryInput, func(*ec2.DescribeSpotPriceHistoryOutput, bool) bool) error
-	DescribeSpotPriceHistoryPagesWithContext(aws.Context, *ec2.DescribeSpotPriceHistoryInput, func(*ec2.DescribeSpotPriceHistoryOutput, bool) bool, ...aws.Option) error
 
 	DescribeStaleSecurityGroupsRequest(*ec2.DescribeStaleSecurityGroupsInput) ec2.DescribeStaleSecurityGroupsRequest
 
@@ -409,20 +385,11 @@ type EC2API interface {
 
 	DescribeTagsRequest(*ec2.DescribeTagsInput) ec2.DescribeTagsRequest
 
-	DescribeTagsPages(*ec2.DescribeTagsInput, func(*ec2.DescribeTagsOutput, bool) bool) error
-	DescribeTagsPagesWithContext(aws.Context, *ec2.DescribeTagsInput, func(*ec2.DescribeTagsOutput, bool) bool, ...aws.Option) error
-
 	DescribeVolumeAttributeRequest(*ec2.DescribeVolumeAttributeInput) ec2.DescribeVolumeAttributeRequest
 
 	DescribeVolumeStatusRequest(*ec2.DescribeVolumeStatusInput) ec2.DescribeVolumeStatusRequest
 
-	DescribeVolumeStatusPages(*ec2.DescribeVolumeStatusInput, func(*ec2.DescribeVolumeStatusOutput, bool) bool) error
-	DescribeVolumeStatusPagesWithContext(aws.Context, *ec2.DescribeVolumeStatusInput, func(*ec2.DescribeVolumeStatusOutput, bool) bool, ...aws.Option) error
-
 	DescribeVolumesRequest(*ec2.DescribeVolumesInput) ec2.DescribeVolumesRequest
-
-	DescribeVolumesPages(*ec2.DescribeVolumesInput, func(*ec2.DescribeVolumesOutput, bool) bool) error
-	DescribeVolumesPagesWithContext(aws.Context, *ec2.DescribeVolumesInput, func(*ec2.DescribeVolumesOutput, bool) bool, ...aws.Option) error
 
 	DescribeVolumesModificationsRequest(*ec2.DescribeVolumesModificationsInput) ec2.DescribeVolumesModificationsRequest
 

@@ -17,6 +17,7 @@ const opCreateApiKey = "CreateApiKey"
 type CreateApiKeyRequest struct {
 	*aws.Request
 	Input *CreateApiKeyInput
+	Copy  func(*CreateApiKeyInput) CreateApiKeyRequest
 }
 
 // Send marshals and sends the CreateApiKey API request.
@@ -57,7 +58,7 @@ func (c *APIGateway) CreateApiKeyRequest(input *CreateApiKeyInput) CreateApiKeyR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateApiKeyRequest{Request: req, Input: input}
+	return CreateApiKeyRequest{Request: req, Input: input, Copy: c.CreateApiKeyRequest}
 }
 
 const opCreateAuthorizer = "CreateAuthorizer"
@@ -66,6 +67,7 @@ const opCreateAuthorizer = "CreateAuthorizer"
 type CreateAuthorizerRequest struct {
 	*aws.Request
 	Input *CreateAuthorizerInput
+	Copy  func(*CreateAuthorizerInput) CreateAuthorizerRequest
 }
 
 // Send marshals and sends the CreateAuthorizer API request.
@@ -106,7 +108,7 @@ func (c *APIGateway) CreateAuthorizerRequest(input *CreateAuthorizerInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAuthorizerRequest{Request: req, Input: input}
+	return CreateAuthorizerRequest{Request: req, Input: input, Copy: c.CreateAuthorizerRequest}
 }
 
 const opCreateBasePathMapping = "CreateBasePathMapping"
@@ -115,6 +117,7 @@ const opCreateBasePathMapping = "CreateBasePathMapping"
 type CreateBasePathMappingRequest struct {
 	*aws.Request
 	Input *CreateBasePathMappingInput
+	Copy  func(*CreateBasePathMappingInput) CreateBasePathMappingRequest
 }
 
 // Send marshals and sends the CreateBasePathMapping API request.
@@ -153,7 +156,7 @@ func (c *APIGateway) CreateBasePathMappingRequest(input *CreateBasePathMappingIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBasePathMappingRequest{Request: req, Input: input}
+	return CreateBasePathMappingRequest{Request: req, Input: input, Copy: c.CreateBasePathMappingRequest}
 }
 
 const opCreateDeployment = "CreateDeployment"
@@ -162,6 +165,7 @@ const opCreateDeployment = "CreateDeployment"
 type CreateDeploymentRequest struct {
 	*aws.Request
 	Input *CreateDeploymentInput
+	Copy  func(*CreateDeploymentInput) CreateDeploymentRequest
 }
 
 // Send marshals and sends the CreateDeployment API request.
@@ -201,7 +205,7 @@ func (c *APIGateway) CreateDeploymentRequest(input *CreateDeploymentInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDeploymentRequest{Request: req, Input: input}
+	return CreateDeploymentRequest{Request: req, Input: input, Copy: c.CreateDeploymentRequest}
 }
 
 const opCreateDocumentationPart = "CreateDocumentationPart"
@@ -210,6 +214,7 @@ const opCreateDocumentationPart = "CreateDocumentationPart"
 type CreateDocumentationPartRequest struct {
 	*aws.Request
 	Input *CreateDocumentationPartInput
+	Copy  func(*CreateDocumentationPartInput) CreateDocumentationPartRequest
 }
 
 // Send marshals and sends the CreateDocumentationPart API request.
@@ -246,7 +251,7 @@ func (c *APIGateway) CreateDocumentationPartRequest(input *CreateDocumentationPa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDocumentationPartRequest{Request: req, Input: input}
+	return CreateDocumentationPartRequest{Request: req, Input: input, Copy: c.CreateDocumentationPartRequest}
 }
 
 const opCreateDocumentationVersion = "CreateDocumentationVersion"
@@ -255,6 +260,7 @@ const opCreateDocumentationVersion = "CreateDocumentationVersion"
 type CreateDocumentationVersionRequest struct {
 	*aws.Request
 	Input *CreateDocumentationVersionInput
+	Copy  func(*CreateDocumentationVersionInput) CreateDocumentationVersionRequest
 }
 
 // Send marshals and sends the CreateDocumentationVersion API request.
@@ -291,7 +297,7 @@ func (c *APIGateway) CreateDocumentationVersionRequest(input *CreateDocumentatio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDocumentationVersionRequest{Request: req, Input: input}
+	return CreateDocumentationVersionRequest{Request: req, Input: input, Copy: c.CreateDocumentationVersionRequest}
 }
 
 const opCreateDomainName = "CreateDomainName"
@@ -300,6 +306,7 @@ const opCreateDomainName = "CreateDomainName"
 type CreateDomainNameRequest struct {
 	*aws.Request
 	Input *CreateDomainNameInput
+	Copy  func(*CreateDomainNameInput) CreateDomainNameRequest
 }
 
 // Send marshals and sends the CreateDomainName API request.
@@ -338,7 +345,7 @@ func (c *APIGateway) CreateDomainNameRequest(input *CreateDomainNameInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDomainNameRequest{Request: req, Input: input}
+	return CreateDomainNameRequest{Request: req, Input: input, Copy: c.CreateDomainNameRequest}
 }
 
 const opCreateModel = "CreateModel"
@@ -347,6 +354,7 @@ const opCreateModel = "CreateModel"
 type CreateModelRequest struct {
 	*aws.Request
 	Input *CreateModelInput
+	Copy  func(*CreateModelInput) CreateModelRequest
 }
 
 // Send marshals and sends the CreateModel API request.
@@ -385,7 +393,7 @@ func (c *APIGateway) CreateModelRequest(input *CreateModelInput) CreateModelRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateModelRequest{Request: req, Input: input}
+	return CreateModelRequest{Request: req, Input: input, Copy: c.CreateModelRequest}
 }
 
 const opCreateRequestValidator = "CreateRequestValidator"
@@ -394,6 +402,7 @@ const opCreateRequestValidator = "CreateRequestValidator"
 type CreateRequestValidatorRequest struct {
 	*aws.Request
 	Input *CreateRequestValidatorInput
+	Copy  func(*CreateRequestValidatorInput) CreateRequestValidatorRequest
 }
 
 // Send marshals and sends the CreateRequestValidator API request.
@@ -432,7 +441,7 @@ func (c *APIGateway) CreateRequestValidatorRequest(input *CreateRequestValidator
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRequestValidatorRequest{Request: req, Input: input}
+	return CreateRequestValidatorRequest{Request: req, Input: input, Copy: c.CreateRequestValidatorRequest}
 }
 
 const opCreateResource = "CreateResource"
@@ -441,6 +450,7 @@ const opCreateResource = "CreateResource"
 type CreateResourceRequest struct {
 	*aws.Request
 	Input *CreateResourceInput
+	Copy  func(*CreateResourceInput) CreateResourceRequest
 }
 
 // Send marshals and sends the CreateResource API request.
@@ -479,7 +489,7 @@ func (c *APIGateway) CreateResourceRequest(input *CreateResourceInput) CreateRes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateResourceRequest{Request: req, Input: input}
+	return CreateResourceRequest{Request: req, Input: input, Copy: c.CreateResourceRequest}
 }
 
 const opCreateRestApi = "CreateRestApi"
@@ -488,6 +498,7 @@ const opCreateRestApi = "CreateRestApi"
 type CreateRestApiRequest struct {
 	*aws.Request
 	Input *CreateRestApiInput
+	Copy  func(*CreateRestApiInput) CreateRestApiRequest
 }
 
 // Send marshals and sends the CreateRestApi API request.
@@ -526,7 +537,7 @@ func (c *APIGateway) CreateRestApiRequest(input *CreateRestApiInput) CreateRestA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRestApiRequest{Request: req, Input: input}
+	return CreateRestApiRequest{Request: req, Input: input, Copy: c.CreateRestApiRequest}
 }
 
 const opCreateStage = "CreateStage"
@@ -535,6 +546,7 @@ const opCreateStage = "CreateStage"
 type CreateStageRequest struct {
 	*aws.Request
 	Input *CreateStageInput
+	Copy  func(*CreateStageInput) CreateStageRequest
 }
 
 // Send marshals and sends the CreateStage API request.
@@ -574,7 +586,7 @@ func (c *APIGateway) CreateStageRequest(input *CreateStageInput) CreateStageRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStageRequest{Request: req, Input: input}
+	return CreateStageRequest{Request: req, Input: input, Copy: c.CreateStageRequest}
 }
 
 const opCreateUsagePlan = "CreateUsagePlan"
@@ -583,6 +595,7 @@ const opCreateUsagePlan = "CreateUsagePlan"
 type CreateUsagePlanRequest struct {
 	*aws.Request
 	Input *CreateUsagePlanInput
+	Copy  func(*CreateUsagePlanInput) CreateUsagePlanRequest
 }
 
 // Send marshals and sends the CreateUsagePlan API request.
@@ -622,7 +635,7 @@ func (c *APIGateway) CreateUsagePlanRequest(input *CreateUsagePlanInput) CreateU
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUsagePlanRequest{Request: req, Input: input}
+	return CreateUsagePlanRequest{Request: req, Input: input, Copy: c.CreateUsagePlanRequest}
 }
 
 const opCreateUsagePlanKey = "CreateUsagePlanKey"
@@ -631,6 +644,7 @@ const opCreateUsagePlanKey = "CreateUsagePlanKey"
 type CreateUsagePlanKeyRequest struct {
 	*aws.Request
 	Input *CreateUsagePlanKeyInput
+	Copy  func(*CreateUsagePlanKeyInput) CreateUsagePlanKeyRequest
 }
 
 // Send marshals and sends the CreateUsagePlanKey API request.
@@ -669,7 +683,7 @@ func (c *APIGateway) CreateUsagePlanKeyRequest(input *CreateUsagePlanKeyInput) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUsagePlanKeyRequest{Request: req, Input: input}
+	return CreateUsagePlanKeyRequest{Request: req, Input: input, Copy: c.CreateUsagePlanKeyRequest}
 }
 
 const opCreateVpcLink = "CreateVpcLink"
@@ -678,6 +692,7 @@ const opCreateVpcLink = "CreateVpcLink"
 type CreateVpcLinkRequest struct {
 	*aws.Request
 	Input *CreateVpcLinkInput
+	Copy  func(*CreateVpcLinkInput) CreateVpcLinkRequest
 }
 
 // Send marshals and sends the CreateVpcLink API request.
@@ -719,7 +734,7 @@ func (c *APIGateway) CreateVpcLinkRequest(input *CreateVpcLinkInput) CreateVpcLi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateVpcLinkRequest{Request: req, Input: input}
+	return CreateVpcLinkRequest{Request: req, Input: input, Copy: c.CreateVpcLinkRequest}
 }
 
 const opDeleteApiKey = "DeleteApiKey"
@@ -728,6 +743,7 @@ const opDeleteApiKey = "DeleteApiKey"
 type DeleteApiKeyRequest struct {
 	*aws.Request
 	Input *DeleteApiKeyInput
+	Copy  func(*DeleteApiKeyInput) DeleteApiKeyRequest
 }
 
 // Send marshals and sends the DeleteApiKey API request.
@@ -768,7 +784,7 @@ func (c *APIGateway) DeleteApiKeyRequest(input *DeleteApiKeyInput) DeleteApiKeyR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApiKeyRequest{Request: req, Input: input}
+	return DeleteApiKeyRequest{Request: req, Input: input, Copy: c.DeleteApiKeyRequest}
 }
 
 const opDeleteAuthorizer = "DeleteAuthorizer"
@@ -777,6 +793,7 @@ const opDeleteAuthorizer = "DeleteAuthorizer"
 type DeleteAuthorizerRequest struct {
 	*aws.Request
 	Input *DeleteAuthorizerInput
+	Copy  func(*DeleteAuthorizerInput) DeleteAuthorizerRequest
 }
 
 // Send marshals and sends the DeleteAuthorizer API request.
@@ -819,7 +836,7 @@ func (c *APIGateway) DeleteAuthorizerRequest(input *DeleteAuthorizerInput) Delet
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAuthorizerRequest{Request: req, Input: input}
+	return DeleteAuthorizerRequest{Request: req, Input: input, Copy: c.DeleteAuthorizerRequest}
 }
 
 const opDeleteBasePathMapping = "DeleteBasePathMapping"
@@ -828,6 +845,7 @@ const opDeleteBasePathMapping = "DeleteBasePathMapping"
 type DeleteBasePathMappingRequest struct {
 	*aws.Request
 	Input *DeleteBasePathMappingInput
+	Copy  func(*DeleteBasePathMappingInput) DeleteBasePathMappingRequest
 }
 
 // Send marshals and sends the DeleteBasePathMapping API request.
@@ -868,7 +886,7 @@ func (c *APIGateway) DeleteBasePathMappingRequest(input *DeleteBasePathMappingIn
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBasePathMappingRequest{Request: req, Input: input}
+	return DeleteBasePathMappingRequest{Request: req, Input: input, Copy: c.DeleteBasePathMappingRequest}
 }
 
 const opDeleteClientCertificate = "DeleteClientCertificate"
@@ -877,6 +895,7 @@ const opDeleteClientCertificate = "DeleteClientCertificate"
 type DeleteClientCertificateRequest struct {
 	*aws.Request
 	Input *DeleteClientCertificateInput
+	Copy  func(*DeleteClientCertificateInput) DeleteClientCertificateRequest
 }
 
 // Send marshals and sends the DeleteClientCertificate API request.
@@ -917,7 +936,7 @@ func (c *APIGateway) DeleteClientCertificateRequest(input *DeleteClientCertifica
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteClientCertificateRequest{Request: req, Input: input}
+	return DeleteClientCertificateRequest{Request: req, Input: input, Copy: c.DeleteClientCertificateRequest}
 }
 
 const opDeleteDeployment = "DeleteDeployment"
@@ -926,6 +945,7 @@ const opDeleteDeployment = "DeleteDeployment"
 type DeleteDeploymentRequest struct {
 	*aws.Request
 	Input *DeleteDeploymentInput
+	Copy  func(*DeleteDeploymentInput) DeleteDeploymentRequest
 }
 
 // Send marshals and sends the DeleteDeployment API request.
@@ -967,7 +987,7 @@ func (c *APIGateway) DeleteDeploymentRequest(input *DeleteDeploymentInput) Delet
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDeploymentRequest{Request: req, Input: input}
+	return DeleteDeploymentRequest{Request: req, Input: input, Copy: c.DeleteDeploymentRequest}
 }
 
 const opDeleteDocumentationPart = "DeleteDocumentationPart"
@@ -976,6 +996,7 @@ const opDeleteDocumentationPart = "DeleteDocumentationPart"
 type DeleteDocumentationPartRequest struct {
 	*aws.Request
 	Input *DeleteDocumentationPartInput
+	Copy  func(*DeleteDocumentationPartInput) DeleteDocumentationPartRequest
 }
 
 // Send marshals and sends the DeleteDocumentationPart API request.
@@ -1014,7 +1035,7 @@ func (c *APIGateway) DeleteDocumentationPartRequest(input *DeleteDocumentationPa
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDocumentationPartRequest{Request: req, Input: input}
+	return DeleteDocumentationPartRequest{Request: req, Input: input, Copy: c.DeleteDocumentationPartRequest}
 }
 
 const opDeleteDocumentationVersion = "DeleteDocumentationVersion"
@@ -1023,6 +1044,7 @@ const opDeleteDocumentationVersion = "DeleteDocumentationVersion"
 type DeleteDocumentationVersionRequest struct {
 	*aws.Request
 	Input *DeleteDocumentationVersionInput
+	Copy  func(*DeleteDocumentationVersionInput) DeleteDocumentationVersionRequest
 }
 
 // Send marshals and sends the DeleteDocumentationVersion API request.
@@ -1061,7 +1083,7 @@ func (c *APIGateway) DeleteDocumentationVersionRequest(input *DeleteDocumentatio
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDocumentationVersionRequest{Request: req, Input: input}
+	return DeleteDocumentationVersionRequest{Request: req, Input: input, Copy: c.DeleteDocumentationVersionRequest}
 }
 
 const opDeleteDomainName = "DeleteDomainName"
@@ -1070,6 +1092,7 @@ const opDeleteDomainName = "DeleteDomainName"
 type DeleteDomainNameRequest struct {
 	*aws.Request
 	Input *DeleteDomainNameInput
+	Copy  func(*DeleteDomainNameInput) DeleteDomainNameRequest
 }
 
 // Send marshals and sends the DeleteDomainName API request.
@@ -1110,7 +1133,7 @@ func (c *APIGateway) DeleteDomainNameRequest(input *DeleteDomainNameInput) Delet
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDomainNameRequest{Request: req, Input: input}
+	return DeleteDomainNameRequest{Request: req, Input: input, Copy: c.DeleteDomainNameRequest}
 }
 
 const opDeleteGatewayResponse = "DeleteGatewayResponse"
@@ -1119,6 +1142,7 @@ const opDeleteGatewayResponse = "DeleteGatewayResponse"
 type DeleteGatewayResponseRequest struct {
 	*aws.Request
 	Input *DeleteGatewayResponseInput
+	Copy  func(*DeleteGatewayResponseInput) DeleteGatewayResponseRequest
 }
 
 // Send marshals and sends the DeleteGatewayResponse API request.
@@ -1160,7 +1184,7 @@ func (c *APIGateway) DeleteGatewayResponseRequest(input *DeleteGatewayResponseIn
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGatewayResponseRequest{Request: req, Input: input}
+	return DeleteGatewayResponseRequest{Request: req, Input: input, Copy: c.DeleteGatewayResponseRequest}
 }
 
 const opDeleteIntegration = "DeleteIntegration"
@@ -1169,6 +1193,7 @@ const opDeleteIntegration = "DeleteIntegration"
 type DeleteIntegrationRequest struct {
 	*aws.Request
 	Input *DeleteIntegrationInput
+	Copy  func(*DeleteIntegrationInput) DeleteIntegrationRequest
 }
 
 // Send marshals and sends the DeleteIntegration API request.
@@ -1209,7 +1234,7 @@ func (c *APIGateway) DeleteIntegrationRequest(input *DeleteIntegrationInput) Del
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIntegrationRequest{Request: req, Input: input}
+	return DeleteIntegrationRequest{Request: req, Input: input, Copy: c.DeleteIntegrationRequest}
 }
 
 const opDeleteIntegrationResponse = "DeleteIntegrationResponse"
@@ -1218,6 +1243,7 @@ const opDeleteIntegrationResponse = "DeleteIntegrationResponse"
 type DeleteIntegrationResponseRequest struct {
 	*aws.Request
 	Input *DeleteIntegrationResponseInput
+	Copy  func(*DeleteIntegrationResponseInput) DeleteIntegrationResponseRequest
 }
 
 // Send marshals and sends the DeleteIntegrationResponse API request.
@@ -1258,7 +1284,7 @@ func (c *APIGateway) DeleteIntegrationResponseRequest(input *DeleteIntegrationRe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIntegrationResponseRequest{Request: req, Input: input}
+	return DeleteIntegrationResponseRequest{Request: req, Input: input, Copy: c.DeleteIntegrationResponseRequest}
 }
 
 const opDeleteMethod = "DeleteMethod"
@@ -1267,6 +1293,7 @@ const opDeleteMethod = "DeleteMethod"
 type DeleteMethodRequest struct {
 	*aws.Request
 	Input *DeleteMethodInput
+	Copy  func(*DeleteMethodInput) DeleteMethodRequest
 }
 
 // Send marshals and sends the DeleteMethod API request.
@@ -1307,7 +1334,7 @@ func (c *APIGateway) DeleteMethodRequest(input *DeleteMethodInput) DeleteMethodR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteMethodRequest{Request: req, Input: input}
+	return DeleteMethodRequest{Request: req, Input: input, Copy: c.DeleteMethodRequest}
 }
 
 const opDeleteMethodResponse = "DeleteMethodResponse"
@@ -1316,6 +1343,7 @@ const opDeleteMethodResponse = "DeleteMethodResponse"
 type DeleteMethodResponseRequest struct {
 	*aws.Request
 	Input *DeleteMethodResponseInput
+	Copy  func(*DeleteMethodResponseInput) DeleteMethodResponseRequest
 }
 
 // Send marshals and sends the DeleteMethodResponse API request.
@@ -1356,7 +1384,7 @@ func (c *APIGateway) DeleteMethodResponseRequest(input *DeleteMethodResponseInpu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteMethodResponseRequest{Request: req, Input: input}
+	return DeleteMethodResponseRequest{Request: req, Input: input, Copy: c.DeleteMethodResponseRequest}
 }
 
 const opDeleteModel = "DeleteModel"
@@ -1365,6 +1393,7 @@ const opDeleteModel = "DeleteModel"
 type DeleteModelRequest struct {
 	*aws.Request
 	Input *DeleteModelInput
+	Copy  func(*DeleteModelInput) DeleteModelRequest
 }
 
 // Send marshals and sends the DeleteModel API request.
@@ -1405,7 +1434,7 @@ func (c *APIGateway) DeleteModelRequest(input *DeleteModelInput) DeleteModelRequ
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteModelRequest{Request: req, Input: input}
+	return DeleteModelRequest{Request: req, Input: input, Copy: c.DeleteModelRequest}
 }
 
 const opDeleteRequestValidator = "DeleteRequestValidator"
@@ -1414,6 +1443,7 @@ const opDeleteRequestValidator = "DeleteRequestValidator"
 type DeleteRequestValidatorRequest struct {
 	*aws.Request
 	Input *DeleteRequestValidatorInput
+	Copy  func(*DeleteRequestValidatorInput) DeleteRequestValidatorRequest
 }
 
 // Send marshals and sends the DeleteRequestValidator API request.
@@ -1454,7 +1484,7 @@ func (c *APIGateway) DeleteRequestValidatorRequest(input *DeleteRequestValidator
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRequestValidatorRequest{Request: req, Input: input}
+	return DeleteRequestValidatorRequest{Request: req, Input: input, Copy: c.DeleteRequestValidatorRequest}
 }
 
 const opDeleteResource = "DeleteResource"
@@ -1463,6 +1493,7 @@ const opDeleteResource = "DeleteResource"
 type DeleteResourceRequest struct {
 	*aws.Request
 	Input *DeleteResourceInput
+	Copy  func(*DeleteResourceInput) DeleteResourceRequest
 }
 
 // Send marshals and sends the DeleteResource API request.
@@ -1503,7 +1534,7 @@ func (c *APIGateway) DeleteResourceRequest(input *DeleteResourceInput) DeleteRes
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteResourceRequest{Request: req, Input: input}
+	return DeleteResourceRequest{Request: req, Input: input, Copy: c.DeleteResourceRequest}
 }
 
 const opDeleteRestApi = "DeleteRestApi"
@@ -1512,6 +1543,7 @@ const opDeleteRestApi = "DeleteRestApi"
 type DeleteRestApiRequest struct {
 	*aws.Request
 	Input *DeleteRestApiInput
+	Copy  func(*DeleteRestApiInput) DeleteRestApiRequest
 }
 
 // Send marshals and sends the DeleteRestApi API request.
@@ -1552,7 +1584,7 @@ func (c *APIGateway) DeleteRestApiRequest(input *DeleteRestApiInput) DeleteRestA
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRestApiRequest{Request: req, Input: input}
+	return DeleteRestApiRequest{Request: req, Input: input, Copy: c.DeleteRestApiRequest}
 }
 
 const opDeleteStage = "DeleteStage"
@@ -1561,6 +1593,7 @@ const opDeleteStage = "DeleteStage"
 type DeleteStageRequest struct {
 	*aws.Request
 	Input *DeleteStageInput
+	Copy  func(*DeleteStageInput) DeleteStageRequest
 }
 
 // Send marshals and sends the DeleteStage API request.
@@ -1601,7 +1634,7 @@ func (c *APIGateway) DeleteStageRequest(input *DeleteStageInput) DeleteStageRequ
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStageRequest{Request: req, Input: input}
+	return DeleteStageRequest{Request: req, Input: input, Copy: c.DeleteStageRequest}
 }
 
 const opDeleteUsagePlan = "DeleteUsagePlan"
@@ -1610,6 +1643,7 @@ const opDeleteUsagePlan = "DeleteUsagePlan"
 type DeleteUsagePlanRequest struct {
 	*aws.Request
 	Input *DeleteUsagePlanInput
+	Copy  func(*DeleteUsagePlanInput) DeleteUsagePlanRequest
 }
 
 // Send marshals and sends the DeleteUsagePlan API request.
@@ -1650,7 +1684,7 @@ func (c *APIGateway) DeleteUsagePlanRequest(input *DeleteUsagePlanInput) DeleteU
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUsagePlanRequest{Request: req, Input: input}
+	return DeleteUsagePlanRequest{Request: req, Input: input, Copy: c.DeleteUsagePlanRequest}
 }
 
 const opDeleteUsagePlanKey = "DeleteUsagePlanKey"
@@ -1659,6 +1693,7 @@ const opDeleteUsagePlanKey = "DeleteUsagePlanKey"
 type DeleteUsagePlanKeyRequest struct {
 	*aws.Request
 	Input *DeleteUsagePlanKeyInput
+	Copy  func(*DeleteUsagePlanKeyInput) DeleteUsagePlanKeyRequest
 }
 
 // Send marshals and sends the DeleteUsagePlanKey API request.
@@ -1700,7 +1735,7 @@ func (c *APIGateway) DeleteUsagePlanKeyRequest(input *DeleteUsagePlanKeyInput) D
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUsagePlanKeyRequest{Request: req, Input: input}
+	return DeleteUsagePlanKeyRequest{Request: req, Input: input, Copy: c.DeleteUsagePlanKeyRequest}
 }
 
 const opDeleteVpcLink = "DeleteVpcLink"
@@ -1709,6 +1744,7 @@ const opDeleteVpcLink = "DeleteVpcLink"
 type DeleteVpcLinkRequest struct {
 	*aws.Request
 	Input *DeleteVpcLinkInput
+	Copy  func(*DeleteVpcLinkInput) DeleteVpcLinkRequest
 }
 
 // Send marshals and sends the DeleteVpcLink API request.
@@ -1749,7 +1785,7 @@ func (c *APIGateway) DeleteVpcLinkRequest(input *DeleteVpcLinkInput) DeleteVpcLi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVpcLinkRequest{Request: req, Input: input}
+	return DeleteVpcLinkRequest{Request: req, Input: input, Copy: c.DeleteVpcLinkRequest}
 }
 
 const opFlushStageAuthorizersCache = "FlushStageAuthorizersCache"
@@ -1758,6 +1794,7 @@ const opFlushStageAuthorizersCache = "FlushStageAuthorizersCache"
 type FlushStageAuthorizersCacheRequest struct {
 	*aws.Request
 	Input *FlushStageAuthorizersCacheInput
+	Copy  func(*FlushStageAuthorizersCacheInput) FlushStageAuthorizersCacheRequest
 }
 
 // Send marshals and sends the FlushStageAuthorizersCache API request.
@@ -1798,7 +1835,7 @@ func (c *APIGateway) FlushStageAuthorizersCacheRequest(input *FlushStageAuthoriz
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return FlushStageAuthorizersCacheRequest{Request: req, Input: input}
+	return FlushStageAuthorizersCacheRequest{Request: req, Input: input, Copy: c.FlushStageAuthorizersCacheRequest}
 }
 
 const opFlushStageCache = "FlushStageCache"
@@ -1807,6 +1844,7 @@ const opFlushStageCache = "FlushStageCache"
 type FlushStageCacheRequest struct {
 	*aws.Request
 	Input *FlushStageCacheInput
+	Copy  func(*FlushStageCacheInput) FlushStageCacheRequest
 }
 
 // Send marshals and sends the FlushStageCache API request.
@@ -1847,7 +1885,7 @@ func (c *APIGateway) FlushStageCacheRequest(input *FlushStageCacheInput) FlushSt
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return FlushStageCacheRequest{Request: req, Input: input}
+	return FlushStageCacheRequest{Request: req, Input: input, Copy: c.FlushStageCacheRequest}
 }
 
 const opGenerateClientCertificate = "GenerateClientCertificate"
@@ -1856,6 +1894,7 @@ const opGenerateClientCertificate = "GenerateClientCertificate"
 type GenerateClientCertificateRequest struct {
 	*aws.Request
 	Input *GenerateClientCertificateInput
+	Copy  func(*GenerateClientCertificateInput) GenerateClientCertificateRequest
 }
 
 // Send marshals and sends the GenerateClientCertificate API request.
@@ -1894,7 +1933,7 @@ func (c *APIGateway) GenerateClientCertificateRequest(input *GenerateClientCerti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GenerateClientCertificateRequest{Request: req, Input: input}
+	return GenerateClientCertificateRequest{Request: req, Input: input, Copy: c.GenerateClientCertificateRequest}
 }
 
 const opGetAccount = "GetAccount"
@@ -1903,6 +1942,7 @@ const opGetAccount = "GetAccount"
 type GetAccountRequest struct {
 	*aws.Request
 	Input *GetAccountInput
+	Copy  func(*GetAccountInput) GetAccountRequest
 }
 
 // Send marshals and sends the GetAccount API request.
@@ -1941,7 +1981,7 @@ func (c *APIGateway) GetAccountRequest(input *GetAccountInput) GetAccountRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAccountRequest{Request: req, Input: input}
+	return GetAccountRequest{Request: req, Input: input, Copy: c.GetAccountRequest}
 }
 
 const opGetApiKey = "GetApiKey"
@@ -1950,6 +1990,7 @@ const opGetApiKey = "GetApiKey"
 type GetApiKeyRequest struct {
 	*aws.Request
 	Input *GetApiKeyInput
+	Copy  func(*GetApiKeyInput) GetApiKeyRequest
 }
 
 // Send marshals and sends the GetApiKey API request.
@@ -1988,7 +2029,7 @@ func (c *APIGateway) GetApiKeyRequest(input *GetApiKeyInput) GetApiKeyRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApiKeyRequest{Request: req, Input: input}
+	return GetApiKeyRequest{Request: req, Input: input, Copy: c.GetApiKeyRequest}
 }
 
 const opGetApiKeys = "GetApiKeys"
@@ -1997,6 +2038,7 @@ const opGetApiKeys = "GetApiKeys"
 type GetApiKeysRequest struct {
 	*aws.Request
 	Input *GetApiKeysInput
+	Copy  func(*GetApiKeysInput) GetApiKeysRequest
 }
 
 // Send marshals and sends the GetApiKeys API request.
@@ -2041,57 +2083,53 @@ func (c *APIGateway) GetApiKeysRequest(input *GetApiKeysInput) GetApiKeysRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetApiKeysRequest{Request: req, Input: input}
+	return GetApiKeysRequest{Request: req, Input: input, Copy: c.GetApiKeysRequest}
 }
 
-// GetApiKeysPages iterates over the pages of a GetApiKeys operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetApiKeys method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetApiKeysRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetApiKeys operation.
-//    pageNum := 0
-//    err := client.GetApiKeysPages(params,
-//        func(page *GetApiKeysOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetApiKeysRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetApiKeysPages(input *GetApiKeysInput, fn func(*GetApiKeysOutput, bool) bool) error {
-	return c.GetApiKeysPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetApiKeysRequest) Paginate(opts ...aws.Option) GetApiKeysPager {
+	return GetApiKeysPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetApiKeysInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetApiKeysPagesWithContext same as GetApiKeysPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetApiKeysPagesWithContext(ctx aws.Context, input *GetApiKeysInput, fn func(*GetApiKeysOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetApiKeysInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetApiKeysRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetApiKeysOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetApiKeysPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetApiKeysPager struct {
+	aws.Pager
+}
+
+func (p *GetApiKeysPager) CurrentPage() *GetApiKeysOutput {
+	return p.Pager.CurrentPage().(*GetApiKeysOutput)
 }
 
 const opGetAuthorizer = "GetAuthorizer"
@@ -2100,6 +2138,7 @@ const opGetAuthorizer = "GetAuthorizer"
 type GetAuthorizerRequest struct {
 	*aws.Request
 	Input *GetAuthorizerInput
+	Copy  func(*GetAuthorizerInput) GetAuthorizerRequest
 }
 
 // Send marshals and sends the GetAuthorizer API request.
@@ -2140,7 +2179,7 @@ func (c *APIGateway) GetAuthorizerRequest(input *GetAuthorizerInput) GetAuthoriz
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAuthorizerRequest{Request: req, Input: input}
+	return GetAuthorizerRequest{Request: req, Input: input, Copy: c.GetAuthorizerRequest}
 }
 
 const opGetAuthorizers = "GetAuthorizers"
@@ -2149,6 +2188,7 @@ const opGetAuthorizers = "GetAuthorizers"
 type GetAuthorizersRequest struct {
 	*aws.Request
 	Input *GetAuthorizersInput
+	Copy  func(*GetAuthorizersInput) GetAuthorizersRequest
 }
 
 // Send marshals and sends the GetAuthorizers API request.
@@ -2189,7 +2229,7 @@ func (c *APIGateway) GetAuthorizersRequest(input *GetAuthorizersInput) GetAuthor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAuthorizersRequest{Request: req, Input: input}
+	return GetAuthorizersRequest{Request: req, Input: input, Copy: c.GetAuthorizersRequest}
 }
 
 const opGetBasePathMapping = "GetBasePathMapping"
@@ -2198,6 +2238,7 @@ const opGetBasePathMapping = "GetBasePathMapping"
 type GetBasePathMappingRequest struct {
 	*aws.Request
 	Input *GetBasePathMappingInput
+	Copy  func(*GetBasePathMappingInput) GetBasePathMappingRequest
 }
 
 // Send marshals and sends the GetBasePathMapping API request.
@@ -2236,7 +2277,7 @@ func (c *APIGateway) GetBasePathMappingRequest(input *GetBasePathMappingInput) G
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBasePathMappingRequest{Request: req, Input: input}
+	return GetBasePathMappingRequest{Request: req, Input: input, Copy: c.GetBasePathMappingRequest}
 }
 
 const opGetBasePathMappings = "GetBasePathMappings"
@@ -2245,6 +2286,7 @@ const opGetBasePathMappings = "GetBasePathMappings"
 type GetBasePathMappingsRequest struct {
 	*aws.Request
 	Input *GetBasePathMappingsInput
+	Copy  func(*GetBasePathMappingsInput) GetBasePathMappingsRequest
 }
 
 // Send marshals and sends the GetBasePathMappings API request.
@@ -2289,57 +2331,53 @@ func (c *APIGateway) GetBasePathMappingsRequest(input *GetBasePathMappingsInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBasePathMappingsRequest{Request: req, Input: input}
+	return GetBasePathMappingsRequest{Request: req, Input: input, Copy: c.GetBasePathMappingsRequest}
 }
 
-// GetBasePathMappingsPages iterates over the pages of a GetBasePathMappings operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetBasePathMappings method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetBasePathMappingsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetBasePathMappings operation.
-//    pageNum := 0
-//    err := client.GetBasePathMappingsPages(params,
-//        func(page *GetBasePathMappingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetBasePathMappingsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetBasePathMappingsPages(input *GetBasePathMappingsInput, fn func(*GetBasePathMappingsOutput, bool) bool) error {
-	return c.GetBasePathMappingsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetBasePathMappingsRequest) Paginate(opts ...aws.Option) GetBasePathMappingsPager {
+	return GetBasePathMappingsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetBasePathMappingsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetBasePathMappingsPagesWithContext same as GetBasePathMappingsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetBasePathMappingsPagesWithContext(ctx aws.Context, input *GetBasePathMappingsInput, fn func(*GetBasePathMappingsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetBasePathMappingsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetBasePathMappingsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetBasePathMappingsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetBasePathMappingsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetBasePathMappingsPager struct {
+	aws.Pager
+}
+
+func (p *GetBasePathMappingsPager) CurrentPage() *GetBasePathMappingsOutput {
+	return p.Pager.CurrentPage().(*GetBasePathMappingsOutput)
 }
 
 const opGetClientCertificate = "GetClientCertificate"
@@ -2348,6 +2386,7 @@ const opGetClientCertificate = "GetClientCertificate"
 type GetClientCertificateRequest struct {
 	*aws.Request
 	Input *GetClientCertificateInput
+	Copy  func(*GetClientCertificateInput) GetClientCertificateRequest
 }
 
 // Send marshals and sends the GetClientCertificate API request.
@@ -2386,7 +2425,7 @@ func (c *APIGateway) GetClientCertificateRequest(input *GetClientCertificateInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetClientCertificateRequest{Request: req, Input: input}
+	return GetClientCertificateRequest{Request: req, Input: input, Copy: c.GetClientCertificateRequest}
 }
 
 const opGetClientCertificates = "GetClientCertificates"
@@ -2395,6 +2434,7 @@ const opGetClientCertificates = "GetClientCertificates"
 type GetClientCertificatesRequest struct {
 	*aws.Request
 	Input *GetClientCertificatesInput
+	Copy  func(*GetClientCertificatesInput) GetClientCertificatesRequest
 }
 
 // Send marshals and sends the GetClientCertificates API request.
@@ -2439,57 +2479,53 @@ func (c *APIGateway) GetClientCertificatesRequest(input *GetClientCertificatesIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetClientCertificatesRequest{Request: req, Input: input}
+	return GetClientCertificatesRequest{Request: req, Input: input, Copy: c.GetClientCertificatesRequest}
 }
 
-// GetClientCertificatesPages iterates over the pages of a GetClientCertificates operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetClientCertificates method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetClientCertificatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetClientCertificates operation.
-//    pageNum := 0
-//    err := client.GetClientCertificatesPages(params,
-//        func(page *GetClientCertificatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetClientCertificatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetClientCertificatesPages(input *GetClientCertificatesInput, fn func(*GetClientCertificatesOutput, bool) bool) error {
-	return c.GetClientCertificatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetClientCertificatesRequest) Paginate(opts ...aws.Option) GetClientCertificatesPager {
+	return GetClientCertificatesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetClientCertificatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetClientCertificatesPagesWithContext same as GetClientCertificatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetClientCertificatesPagesWithContext(ctx aws.Context, input *GetClientCertificatesInput, fn func(*GetClientCertificatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetClientCertificatesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetClientCertificatesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetClientCertificatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetClientCertificatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetClientCertificatesPager struct {
+	aws.Pager
+}
+
+func (p *GetClientCertificatesPager) CurrentPage() *GetClientCertificatesOutput {
+	return p.Pager.CurrentPage().(*GetClientCertificatesOutput)
 }
 
 const opGetDeployment = "GetDeployment"
@@ -2498,6 +2534,7 @@ const opGetDeployment = "GetDeployment"
 type GetDeploymentRequest struct {
 	*aws.Request
 	Input *GetDeploymentInput
+	Copy  func(*GetDeploymentInput) GetDeploymentRequest
 }
 
 // Send marshals and sends the GetDeployment API request.
@@ -2536,7 +2573,7 @@ func (c *APIGateway) GetDeploymentRequest(input *GetDeploymentInput) GetDeployme
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeploymentRequest{Request: req, Input: input}
+	return GetDeploymentRequest{Request: req, Input: input, Copy: c.GetDeploymentRequest}
 }
 
 const opGetDeployments = "GetDeployments"
@@ -2545,6 +2582,7 @@ const opGetDeployments = "GetDeployments"
 type GetDeploymentsRequest struct {
 	*aws.Request
 	Input *GetDeploymentsInput
+	Copy  func(*GetDeploymentsInput) GetDeploymentsRequest
 }
 
 // Send marshals and sends the GetDeployments API request.
@@ -2589,57 +2627,53 @@ func (c *APIGateway) GetDeploymentsRequest(input *GetDeploymentsInput) GetDeploy
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeploymentsRequest{Request: req, Input: input}
+	return GetDeploymentsRequest{Request: req, Input: input, Copy: c.GetDeploymentsRequest}
 }
 
-// GetDeploymentsPages iterates over the pages of a GetDeployments operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetDeployments method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetDeploymentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetDeployments operation.
-//    pageNum := 0
-//    err := client.GetDeploymentsPages(params,
-//        func(page *GetDeploymentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetDeploymentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetDeploymentsPages(input *GetDeploymentsInput, fn func(*GetDeploymentsOutput, bool) bool) error {
-	return c.GetDeploymentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetDeploymentsRequest) Paginate(opts ...aws.Option) GetDeploymentsPager {
+	return GetDeploymentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetDeploymentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetDeploymentsPagesWithContext same as GetDeploymentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetDeploymentsPagesWithContext(ctx aws.Context, input *GetDeploymentsInput, fn func(*GetDeploymentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetDeploymentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetDeploymentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetDeploymentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetDeploymentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetDeploymentsPager struct {
+	aws.Pager
+}
+
+func (p *GetDeploymentsPager) CurrentPage() *GetDeploymentsOutput {
+	return p.Pager.CurrentPage().(*GetDeploymentsOutput)
 }
 
 const opGetDocumentationPart = "GetDocumentationPart"
@@ -2648,6 +2682,7 @@ const opGetDocumentationPart = "GetDocumentationPart"
 type GetDocumentationPartRequest struct {
 	*aws.Request
 	Input *GetDocumentationPartInput
+	Copy  func(*GetDocumentationPartInput) GetDocumentationPartRequest
 }
 
 // Send marshals and sends the GetDocumentationPart API request.
@@ -2684,7 +2719,7 @@ func (c *APIGateway) GetDocumentationPartRequest(input *GetDocumentationPartInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDocumentationPartRequest{Request: req, Input: input}
+	return GetDocumentationPartRequest{Request: req, Input: input, Copy: c.GetDocumentationPartRequest}
 }
 
 const opGetDocumentationParts = "GetDocumentationParts"
@@ -2693,6 +2728,7 @@ const opGetDocumentationParts = "GetDocumentationParts"
 type GetDocumentationPartsRequest struct {
 	*aws.Request
 	Input *GetDocumentationPartsInput
+	Copy  func(*GetDocumentationPartsInput) GetDocumentationPartsRequest
 }
 
 // Send marshals and sends the GetDocumentationParts API request.
@@ -2729,7 +2765,7 @@ func (c *APIGateway) GetDocumentationPartsRequest(input *GetDocumentationPartsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDocumentationPartsRequest{Request: req, Input: input}
+	return GetDocumentationPartsRequest{Request: req, Input: input, Copy: c.GetDocumentationPartsRequest}
 }
 
 const opGetDocumentationVersion = "GetDocumentationVersion"
@@ -2738,6 +2774,7 @@ const opGetDocumentationVersion = "GetDocumentationVersion"
 type GetDocumentationVersionRequest struct {
 	*aws.Request
 	Input *GetDocumentationVersionInput
+	Copy  func(*GetDocumentationVersionInput) GetDocumentationVersionRequest
 }
 
 // Send marshals and sends the GetDocumentationVersion API request.
@@ -2774,7 +2811,7 @@ func (c *APIGateway) GetDocumentationVersionRequest(input *GetDocumentationVersi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDocumentationVersionRequest{Request: req, Input: input}
+	return GetDocumentationVersionRequest{Request: req, Input: input, Copy: c.GetDocumentationVersionRequest}
 }
 
 const opGetDocumentationVersions = "GetDocumentationVersions"
@@ -2783,6 +2820,7 @@ const opGetDocumentationVersions = "GetDocumentationVersions"
 type GetDocumentationVersionsRequest struct {
 	*aws.Request
 	Input *GetDocumentationVersionsInput
+	Copy  func(*GetDocumentationVersionsInput) GetDocumentationVersionsRequest
 }
 
 // Send marshals and sends the GetDocumentationVersions API request.
@@ -2819,7 +2857,7 @@ func (c *APIGateway) GetDocumentationVersionsRequest(input *GetDocumentationVers
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDocumentationVersionsRequest{Request: req, Input: input}
+	return GetDocumentationVersionsRequest{Request: req, Input: input, Copy: c.GetDocumentationVersionsRequest}
 }
 
 const opGetDomainName = "GetDomainName"
@@ -2828,6 +2866,7 @@ const opGetDomainName = "GetDomainName"
 type GetDomainNameRequest struct {
 	*aws.Request
 	Input *GetDomainNameInput
+	Copy  func(*GetDomainNameInput) GetDomainNameRequest
 }
 
 // Send marshals and sends the GetDomainName API request.
@@ -2867,7 +2906,7 @@ func (c *APIGateway) GetDomainNameRequest(input *GetDomainNameInput) GetDomainNa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDomainNameRequest{Request: req, Input: input}
+	return GetDomainNameRequest{Request: req, Input: input, Copy: c.GetDomainNameRequest}
 }
 
 const opGetDomainNames = "GetDomainNames"
@@ -2876,6 +2915,7 @@ const opGetDomainNames = "GetDomainNames"
 type GetDomainNamesRequest struct {
 	*aws.Request
 	Input *GetDomainNamesInput
+	Copy  func(*GetDomainNamesInput) GetDomainNamesRequest
 }
 
 // Send marshals and sends the GetDomainNames API request.
@@ -2920,57 +2960,53 @@ func (c *APIGateway) GetDomainNamesRequest(input *GetDomainNamesInput) GetDomain
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDomainNamesRequest{Request: req, Input: input}
+	return GetDomainNamesRequest{Request: req, Input: input, Copy: c.GetDomainNamesRequest}
 }
 
-// GetDomainNamesPages iterates over the pages of a GetDomainNames operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetDomainNames method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetDomainNamesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetDomainNames operation.
-//    pageNum := 0
-//    err := client.GetDomainNamesPages(params,
-//        func(page *GetDomainNamesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetDomainNamesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetDomainNamesPages(input *GetDomainNamesInput, fn func(*GetDomainNamesOutput, bool) bool) error {
-	return c.GetDomainNamesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetDomainNamesRequest) Paginate(opts ...aws.Option) GetDomainNamesPager {
+	return GetDomainNamesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetDomainNamesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetDomainNamesPagesWithContext same as GetDomainNamesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetDomainNamesPagesWithContext(ctx aws.Context, input *GetDomainNamesInput, fn func(*GetDomainNamesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetDomainNamesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetDomainNamesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetDomainNamesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetDomainNamesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetDomainNamesPager struct {
+	aws.Pager
+}
+
+func (p *GetDomainNamesPager) CurrentPage() *GetDomainNamesOutput {
+	return p.Pager.CurrentPage().(*GetDomainNamesOutput)
 }
 
 const opGetExport = "GetExport"
@@ -2979,6 +3015,7 @@ const opGetExport = "GetExport"
 type GetExportRequest struct {
 	*aws.Request
 	Input *GetExportInput
+	Copy  func(*GetExportInput) GetExportRequest
 }
 
 // Send marshals and sends the GetExport API request.
@@ -3017,7 +3054,7 @@ func (c *APIGateway) GetExportRequest(input *GetExportInput) GetExportRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetExportRequest{Request: req, Input: input}
+	return GetExportRequest{Request: req, Input: input, Copy: c.GetExportRequest}
 }
 
 const opGetGatewayResponse = "GetGatewayResponse"
@@ -3026,6 +3063,7 @@ const opGetGatewayResponse = "GetGatewayResponse"
 type GetGatewayResponseRequest struct {
 	*aws.Request
 	Input *GetGatewayResponseInput
+	Copy  func(*GetGatewayResponseInput) GetGatewayResponseRequest
 }
 
 // Send marshals and sends the GetGatewayResponse API request.
@@ -3064,7 +3102,7 @@ func (c *APIGateway) GetGatewayResponseRequest(input *GetGatewayResponseInput) G
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGatewayResponseRequest{Request: req, Input: input}
+	return GetGatewayResponseRequest{Request: req, Input: input, Copy: c.GetGatewayResponseRequest}
 }
 
 const opGetGatewayResponses = "GetGatewayResponses"
@@ -3073,6 +3111,7 @@ const opGetGatewayResponses = "GetGatewayResponses"
 type GetGatewayResponsesRequest struct {
 	*aws.Request
 	Input *GetGatewayResponsesInput
+	Copy  func(*GetGatewayResponsesInput) GetGatewayResponsesRequest
 }
 
 // Send marshals and sends the GetGatewayResponses API request.
@@ -3114,7 +3153,7 @@ func (c *APIGateway) GetGatewayResponsesRequest(input *GetGatewayResponsesInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGatewayResponsesRequest{Request: req, Input: input}
+	return GetGatewayResponsesRequest{Request: req, Input: input, Copy: c.GetGatewayResponsesRequest}
 }
 
 const opGetIntegration = "GetIntegration"
@@ -3123,6 +3162,7 @@ const opGetIntegration = "GetIntegration"
 type GetIntegrationRequest struct {
 	*aws.Request
 	Input *GetIntegrationInput
+	Copy  func(*GetIntegrationInput) GetIntegrationRequest
 }
 
 // Send marshals and sends the GetIntegration API request.
@@ -3161,7 +3201,7 @@ func (c *APIGateway) GetIntegrationRequest(input *GetIntegrationInput) GetIntegr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIntegrationRequest{Request: req, Input: input}
+	return GetIntegrationRequest{Request: req, Input: input, Copy: c.GetIntegrationRequest}
 }
 
 const opGetIntegrationResponse = "GetIntegrationResponse"
@@ -3170,6 +3210,7 @@ const opGetIntegrationResponse = "GetIntegrationResponse"
 type GetIntegrationResponseRequest struct {
 	*aws.Request
 	Input *GetIntegrationResponseInput
+	Copy  func(*GetIntegrationResponseInput) GetIntegrationResponseRequest
 }
 
 // Send marshals and sends the GetIntegrationResponse API request.
@@ -3208,7 +3249,7 @@ func (c *APIGateway) GetIntegrationResponseRequest(input *GetIntegrationResponse
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIntegrationResponseRequest{Request: req, Input: input}
+	return GetIntegrationResponseRequest{Request: req, Input: input, Copy: c.GetIntegrationResponseRequest}
 }
 
 const opGetMethod = "GetMethod"
@@ -3217,6 +3258,7 @@ const opGetMethod = "GetMethod"
 type GetMethodRequest struct {
 	*aws.Request
 	Input *GetMethodInput
+	Copy  func(*GetMethodInput) GetMethodRequest
 }
 
 // Send marshals and sends the GetMethod API request.
@@ -3255,7 +3297,7 @@ func (c *APIGateway) GetMethodRequest(input *GetMethodInput) GetMethodRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMethodRequest{Request: req, Input: input}
+	return GetMethodRequest{Request: req, Input: input, Copy: c.GetMethodRequest}
 }
 
 const opGetMethodResponse = "GetMethodResponse"
@@ -3264,6 +3306,7 @@ const opGetMethodResponse = "GetMethodResponse"
 type GetMethodResponseRequest struct {
 	*aws.Request
 	Input *GetMethodResponseInput
+	Copy  func(*GetMethodResponseInput) GetMethodResponseRequest
 }
 
 // Send marshals and sends the GetMethodResponse API request.
@@ -3302,7 +3345,7 @@ func (c *APIGateway) GetMethodResponseRequest(input *GetMethodResponseInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMethodResponseRequest{Request: req, Input: input}
+	return GetMethodResponseRequest{Request: req, Input: input, Copy: c.GetMethodResponseRequest}
 }
 
 const opGetModel = "GetModel"
@@ -3311,6 +3354,7 @@ const opGetModel = "GetModel"
 type GetModelRequest struct {
 	*aws.Request
 	Input *GetModelInput
+	Copy  func(*GetModelInput) GetModelRequest
 }
 
 // Send marshals and sends the GetModel API request.
@@ -3349,7 +3393,7 @@ func (c *APIGateway) GetModelRequest(input *GetModelInput) GetModelRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetModelRequest{Request: req, Input: input}
+	return GetModelRequest{Request: req, Input: input, Copy: c.GetModelRequest}
 }
 
 const opGetModelTemplate = "GetModelTemplate"
@@ -3358,6 +3402,7 @@ const opGetModelTemplate = "GetModelTemplate"
 type GetModelTemplateRequest struct {
 	*aws.Request
 	Input *GetModelTemplateInput
+	Copy  func(*GetModelTemplateInput) GetModelTemplateRequest
 }
 
 // Send marshals and sends the GetModelTemplate API request.
@@ -3397,7 +3442,7 @@ func (c *APIGateway) GetModelTemplateRequest(input *GetModelTemplateInput) GetMo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetModelTemplateRequest{Request: req, Input: input}
+	return GetModelTemplateRequest{Request: req, Input: input, Copy: c.GetModelTemplateRequest}
 }
 
 const opGetModels = "GetModels"
@@ -3406,6 +3451,7 @@ const opGetModels = "GetModels"
 type GetModelsRequest struct {
 	*aws.Request
 	Input *GetModelsInput
+	Copy  func(*GetModelsInput) GetModelsRequest
 }
 
 // Send marshals and sends the GetModels API request.
@@ -3450,57 +3496,53 @@ func (c *APIGateway) GetModelsRequest(input *GetModelsInput) GetModelsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetModelsRequest{Request: req, Input: input}
+	return GetModelsRequest{Request: req, Input: input, Copy: c.GetModelsRequest}
 }
 
-// GetModelsPages iterates over the pages of a GetModels operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetModels method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetModelsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetModels operation.
-//    pageNum := 0
-//    err := client.GetModelsPages(params,
-//        func(page *GetModelsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetModelsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetModelsPages(input *GetModelsInput, fn func(*GetModelsOutput, bool) bool) error {
-	return c.GetModelsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetModelsRequest) Paginate(opts ...aws.Option) GetModelsPager {
+	return GetModelsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetModelsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetModelsPagesWithContext same as GetModelsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetModelsPagesWithContext(ctx aws.Context, input *GetModelsInput, fn func(*GetModelsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetModelsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetModelsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetModelsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetModelsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetModelsPager struct {
+	aws.Pager
+}
+
+func (p *GetModelsPager) CurrentPage() *GetModelsOutput {
+	return p.Pager.CurrentPage().(*GetModelsOutput)
 }
 
 const opGetRequestValidator = "GetRequestValidator"
@@ -3509,6 +3551,7 @@ const opGetRequestValidator = "GetRequestValidator"
 type GetRequestValidatorRequest struct {
 	*aws.Request
 	Input *GetRequestValidatorInput
+	Copy  func(*GetRequestValidatorInput) GetRequestValidatorRequest
 }
 
 // Send marshals and sends the GetRequestValidator API request.
@@ -3547,7 +3590,7 @@ func (c *APIGateway) GetRequestValidatorRequest(input *GetRequestValidatorInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRequestValidatorRequest{Request: req, Input: input}
+	return GetRequestValidatorRequest{Request: req, Input: input, Copy: c.GetRequestValidatorRequest}
 }
 
 const opGetRequestValidators = "GetRequestValidators"
@@ -3556,6 +3599,7 @@ const opGetRequestValidators = "GetRequestValidators"
 type GetRequestValidatorsRequest struct {
 	*aws.Request
 	Input *GetRequestValidatorsInput
+	Copy  func(*GetRequestValidatorsInput) GetRequestValidatorsRequest
 }
 
 // Send marshals and sends the GetRequestValidators API request.
@@ -3594,7 +3638,7 @@ func (c *APIGateway) GetRequestValidatorsRequest(input *GetRequestValidatorsInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRequestValidatorsRequest{Request: req, Input: input}
+	return GetRequestValidatorsRequest{Request: req, Input: input, Copy: c.GetRequestValidatorsRequest}
 }
 
 const opGetResource = "GetResource"
@@ -3603,6 +3647,7 @@ const opGetResource = "GetResource"
 type GetResourceRequest struct {
 	*aws.Request
 	Input *GetResourceInput
+	Copy  func(*GetResourceInput) GetResourceRequest
 }
 
 // Send marshals and sends the GetResource API request.
@@ -3641,7 +3686,7 @@ func (c *APIGateway) GetResourceRequest(input *GetResourceInput) GetResourceRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetResourceRequest{Request: req, Input: input}
+	return GetResourceRequest{Request: req, Input: input, Copy: c.GetResourceRequest}
 }
 
 const opGetResources = "GetResources"
@@ -3650,6 +3695,7 @@ const opGetResources = "GetResources"
 type GetResourcesRequest struct {
 	*aws.Request
 	Input *GetResourcesInput
+	Copy  func(*GetResourcesInput) GetResourcesRequest
 }
 
 // Send marshals and sends the GetResources API request.
@@ -3694,57 +3740,53 @@ func (c *APIGateway) GetResourcesRequest(input *GetResourcesInput) GetResourcesR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetResourcesRequest{Request: req, Input: input}
+	return GetResourcesRequest{Request: req, Input: input, Copy: c.GetResourcesRequest}
 }
 
-// GetResourcesPages iterates over the pages of a GetResources operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetResources method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetResourcesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetResources operation.
-//    pageNum := 0
-//    err := client.GetResourcesPages(params,
-//        func(page *GetResourcesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetResourcesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetResourcesPages(input *GetResourcesInput, fn func(*GetResourcesOutput, bool) bool) error {
-	return c.GetResourcesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetResourcesRequest) Paginate(opts ...aws.Option) GetResourcesPager {
+	return GetResourcesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetResourcesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetResourcesPagesWithContext same as GetResourcesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetResourcesPagesWithContext(ctx aws.Context, input *GetResourcesInput, fn func(*GetResourcesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetResourcesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetResourcesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetResourcesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetResourcesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetResourcesPager struct {
+	aws.Pager
+}
+
+func (p *GetResourcesPager) CurrentPage() *GetResourcesOutput {
+	return p.Pager.CurrentPage().(*GetResourcesOutput)
 }
 
 const opGetRestApi = "GetRestApi"
@@ -3753,6 +3795,7 @@ const opGetRestApi = "GetRestApi"
 type GetRestApiRequest struct {
 	*aws.Request
 	Input *GetRestApiInput
+	Copy  func(*GetRestApiInput) GetRestApiRequest
 }
 
 // Send marshals and sends the GetRestApi API request.
@@ -3791,7 +3834,7 @@ func (c *APIGateway) GetRestApiRequest(input *GetRestApiInput) GetRestApiRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRestApiRequest{Request: req, Input: input}
+	return GetRestApiRequest{Request: req, Input: input, Copy: c.GetRestApiRequest}
 }
 
 const opGetRestApis = "GetRestApis"
@@ -3800,6 +3843,7 @@ const opGetRestApis = "GetRestApis"
 type GetRestApisRequest struct {
 	*aws.Request
 	Input *GetRestApisInput
+	Copy  func(*GetRestApisInput) GetRestApisRequest
 }
 
 // Send marshals and sends the GetRestApis API request.
@@ -3844,57 +3888,53 @@ func (c *APIGateway) GetRestApisRequest(input *GetRestApisInput) GetRestApisRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRestApisRequest{Request: req, Input: input}
+	return GetRestApisRequest{Request: req, Input: input, Copy: c.GetRestApisRequest}
 }
 
-// GetRestApisPages iterates over the pages of a GetRestApis operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetRestApis method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetRestApisRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetRestApis operation.
-//    pageNum := 0
-//    err := client.GetRestApisPages(params,
-//        func(page *GetRestApisOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetRestApisRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetRestApisPages(input *GetRestApisInput, fn func(*GetRestApisOutput, bool) bool) error {
-	return c.GetRestApisPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetRestApisRequest) Paginate(opts ...aws.Option) GetRestApisPager {
+	return GetRestApisPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetRestApisInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetRestApisPagesWithContext same as GetRestApisPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetRestApisPagesWithContext(ctx aws.Context, input *GetRestApisInput, fn func(*GetRestApisOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetRestApisInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetRestApisRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetRestApisOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetRestApisPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetRestApisPager struct {
+	aws.Pager
+}
+
+func (p *GetRestApisPager) CurrentPage() *GetRestApisOutput {
+	return p.Pager.CurrentPage().(*GetRestApisOutput)
 }
 
 const opGetSdk = "GetSdk"
@@ -3903,6 +3943,7 @@ const opGetSdk = "GetSdk"
 type GetSdkRequest struct {
 	*aws.Request
 	Input *GetSdkInput
+	Copy  func(*GetSdkInput) GetSdkRequest
 }
 
 // Send marshals and sends the GetSdk API request.
@@ -3941,7 +3982,7 @@ func (c *APIGateway) GetSdkRequest(input *GetSdkInput) GetSdkRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSdkRequest{Request: req, Input: input}
+	return GetSdkRequest{Request: req, Input: input, Copy: c.GetSdkRequest}
 }
 
 const opGetSdkType = "GetSdkType"
@@ -3950,6 +3991,7 @@ const opGetSdkType = "GetSdkType"
 type GetSdkTypeRequest struct {
 	*aws.Request
 	Input *GetSdkTypeInput
+	Copy  func(*GetSdkTypeInput) GetSdkTypeRequest
 }
 
 // Send marshals and sends the GetSdkType API request.
@@ -3986,7 +4028,7 @@ func (c *APIGateway) GetSdkTypeRequest(input *GetSdkTypeInput) GetSdkTypeRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSdkTypeRequest{Request: req, Input: input}
+	return GetSdkTypeRequest{Request: req, Input: input, Copy: c.GetSdkTypeRequest}
 }
 
 const opGetSdkTypes = "GetSdkTypes"
@@ -3995,6 +4037,7 @@ const opGetSdkTypes = "GetSdkTypes"
 type GetSdkTypesRequest struct {
 	*aws.Request
 	Input *GetSdkTypesInput
+	Copy  func(*GetSdkTypesInput) GetSdkTypesRequest
 }
 
 // Send marshals and sends the GetSdkTypes API request.
@@ -4031,7 +4074,7 @@ func (c *APIGateway) GetSdkTypesRequest(input *GetSdkTypesInput) GetSdkTypesRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSdkTypesRequest{Request: req, Input: input}
+	return GetSdkTypesRequest{Request: req, Input: input, Copy: c.GetSdkTypesRequest}
 }
 
 const opGetStage = "GetStage"
@@ -4040,6 +4083,7 @@ const opGetStage = "GetStage"
 type GetStageRequest struct {
 	*aws.Request
 	Input *GetStageInput
+	Copy  func(*GetStageInput) GetStageRequest
 }
 
 // Send marshals and sends the GetStage API request.
@@ -4078,7 +4122,7 @@ func (c *APIGateway) GetStageRequest(input *GetStageInput) GetStageRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetStageRequest{Request: req, Input: input}
+	return GetStageRequest{Request: req, Input: input, Copy: c.GetStageRequest}
 }
 
 const opGetStages = "GetStages"
@@ -4087,6 +4131,7 @@ const opGetStages = "GetStages"
 type GetStagesRequest struct {
 	*aws.Request
 	Input *GetStagesInput
+	Copy  func(*GetStagesInput) GetStagesRequest
 }
 
 // Send marshals and sends the GetStages API request.
@@ -4125,7 +4170,7 @@ func (c *APIGateway) GetStagesRequest(input *GetStagesInput) GetStagesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetStagesRequest{Request: req, Input: input}
+	return GetStagesRequest{Request: req, Input: input, Copy: c.GetStagesRequest}
 }
 
 const opGetTags = "GetTags"
@@ -4134,6 +4179,7 @@ const opGetTags = "GetTags"
 type GetTagsRequest struct {
 	*aws.Request
 	Input *GetTagsInput
+	Copy  func(*GetTagsInput) GetTagsRequest
 }
 
 // Send marshals and sends the GetTags API request.
@@ -4172,7 +4218,7 @@ func (c *APIGateway) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTagsRequest{Request: req, Input: input}
+	return GetTagsRequest{Request: req, Input: input, Copy: c.GetTagsRequest}
 }
 
 const opGetUsage = "GetUsage"
@@ -4181,6 +4227,7 @@ const opGetUsage = "GetUsage"
 type GetUsageRequest struct {
 	*aws.Request
 	Input *GetUsageInput
+	Copy  func(*GetUsageInput) GetUsageRequest
 }
 
 // Send marshals and sends the GetUsage API request.
@@ -4225,57 +4272,53 @@ func (c *APIGateway) GetUsageRequest(input *GetUsageInput) GetUsageRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUsageRequest{Request: req, Input: input}
+	return GetUsageRequest{Request: req, Input: input, Copy: c.GetUsageRequest}
 }
 
-// GetUsagePages iterates over the pages of a GetUsage operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetUsage method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetUsageRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetUsage operation.
-//    pageNum := 0
-//    err := client.GetUsagePages(params,
-//        func(page *UpdateUsageOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetUsageRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetUsagePages(input *GetUsageInput, fn func(*UpdateUsageOutput, bool) bool) error {
-	return c.GetUsagePagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetUsageRequest) Paginate(opts ...aws.Option) GetUsagePager {
+	return GetUsagePager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetUsageInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetUsagePagesWithContext same as GetUsagePages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetUsagePagesWithContext(ctx aws.Context, input *GetUsageInput, fn func(*UpdateUsageOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetUsageInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetUsageRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*UpdateUsageOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetUsagePager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetUsagePager struct {
+	aws.Pager
+}
+
+func (p *GetUsagePager) CurrentPage() *UpdateUsageOutput {
+	return p.Pager.CurrentPage().(*UpdateUsageOutput)
 }
 
 const opGetUsagePlan = "GetUsagePlan"
@@ -4284,6 +4327,7 @@ const opGetUsagePlan = "GetUsagePlan"
 type GetUsagePlanRequest struct {
 	*aws.Request
 	Input *GetUsagePlanInput
+	Copy  func(*GetUsagePlanInput) GetUsagePlanRequest
 }
 
 // Send marshals and sends the GetUsagePlan API request.
@@ -4322,7 +4366,7 @@ func (c *APIGateway) GetUsagePlanRequest(input *GetUsagePlanInput) GetUsagePlanR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUsagePlanRequest{Request: req, Input: input}
+	return GetUsagePlanRequest{Request: req, Input: input, Copy: c.GetUsagePlanRequest}
 }
 
 const opGetUsagePlanKey = "GetUsagePlanKey"
@@ -4331,6 +4375,7 @@ const opGetUsagePlanKey = "GetUsagePlanKey"
 type GetUsagePlanKeyRequest struct {
 	*aws.Request
 	Input *GetUsagePlanKeyInput
+	Copy  func(*GetUsagePlanKeyInput) GetUsagePlanKeyRequest
 }
 
 // Send marshals and sends the GetUsagePlanKey API request.
@@ -4369,7 +4414,7 @@ func (c *APIGateway) GetUsagePlanKeyRequest(input *GetUsagePlanKeyInput) GetUsag
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUsagePlanKeyRequest{Request: req, Input: input}
+	return GetUsagePlanKeyRequest{Request: req, Input: input, Copy: c.GetUsagePlanKeyRequest}
 }
 
 const opGetUsagePlanKeys = "GetUsagePlanKeys"
@@ -4378,6 +4423,7 @@ const opGetUsagePlanKeys = "GetUsagePlanKeys"
 type GetUsagePlanKeysRequest struct {
 	*aws.Request
 	Input *GetUsagePlanKeysInput
+	Copy  func(*GetUsagePlanKeysInput) GetUsagePlanKeysRequest
 }
 
 // Send marshals and sends the GetUsagePlanKeys API request.
@@ -4423,57 +4469,53 @@ func (c *APIGateway) GetUsagePlanKeysRequest(input *GetUsagePlanKeysInput) GetUs
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUsagePlanKeysRequest{Request: req, Input: input}
+	return GetUsagePlanKeysRequest{Request: req, Input: input, Copy: c.GetUsagePlanKeysRequest}
 }
 
-// GetUsagePlanKeysPages iterates over the pages of a GetUsagePlanKeys operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetUsagePlanKeys method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetUsagePlanKeysRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetUsagePlanKeys operation.
-//    pageNum := 0
-//    err := client.GetUsagePlanKeysPages(params,
-//        func(page *GetUsagePlanKeysOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetUsagePlanKeysRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetUsagePlanKeysPages(input *GetUsagePlanKeysInput, fn func(*GetUsagePlanKeysOutput, bool) bool) error {
-	return c.GetUsagePlanKeysPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetUsagePlanKeysRequest) Paginate(opts ...aws.Option) GetUsagePlanKeysPager {
+	return GetUsagePlanKeysPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetUsagePlanKeysInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetUsagePlanKeysPagesWithContext same as GetUsagePlanKeysPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetUsagePlanKeysPagesWithContext(ctx aws.Context, input *GetUsagePlanKeysInput, fn func(*GetUsagePlanKeysOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetUsagePlanKeysInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetUsagePlanKeysRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetUsagePlanKeysOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetUsagePlanKeysPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetUsagePlanKeysPager struct {
+	aws.Pager
+}
+
+func (p *GetUsagePlanKeysPager) CurrentPage() *GetUsagePlanKeysOutput {
+	return p.Pager.CurrentPage().(*GetUsagePlanKeysOutput)
 }
 
 const opGetUsagePlans = "GetUsagePlans"
@@ -4482,6 +4524,7 @@ const opGetUsagePlans = "GetUsagePlans"
 type GetUsagePlansRequest struct {
 	*aws.Request
 	Input *GetUsagePlansInput
+	Copy  func(*GetUsagePlansInput) GetUsagePlansRequest
 }
 
 // Send marshals and sends the GetUsagePlans API request.
@@ -4526,57 +4569,53 @@ func (c *APIGateway) GetUsagePlansRequest(input *GetUsagePlansInput) GetUsagePla
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetUsagePlansRequest{Request: req, Input: input}
+	return GetUsagePlansRequest{Request: req, Input: input, Copy: c.GetUsagePlansRequest}
 }
 
-// GetUsagePlansPages iterates over the pages of a GetUsagePlans operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetUsagePlans method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetUsagePlansRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetUsagePlans operation.
-//    pageNum := 0
-//    err := client.GetUsagePlansPages(params,
-//        func(page *GetUsagePlansOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetUsagePlansRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetUsagePlansPages(input *GetUsagePlansInput, fn func(*GetUsagePlansOutput, bool) bool) error {
-	return c.GetUsagePlansPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetUsagePlansRequest) Paginate(opts ...aws.Option) GetUsagePlansPager {
+	return GetUsagePlansPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetUsagePlansInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetUsagePlansPagesWithContext same as GetUsagePlansPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetUsagePlansPagesWithContext(ctx aws.Context, input *GetUsagePlansInput, fn func(*GetUsagePlansOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetUsagePlansInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetUsagePlansRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetUsagePlansOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetUsagePlansPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetUsagePlansPager struct {
+	aws.Pager
+}
+
+func (p *GetUsagePlansPager) CurrentPage() *GetUsagePlansOutput {
+	return p.Pager.CurrentPage().(*GetUsagePlansOutput)
 }
 
 const opGetVpcLink = "GetVpcLink"
@@ -4585,6 +4624,7 @@ const opGetVpcLink = "GetVpcLink"
 type GetVpcLinkRequest struct {
 	*aws.Request
 	Input *GetVpcLinkInput
+	Copy  func(*GetVpcLinkInput) GetVpcLinkRequest
 }
 
 // Send marshals and sends the GetVpcLink API request.
@@ -4623,7 +4663,7 @@ func (c *APIGateway) GetVpcLinkRequest(input *GetVpcLinkInput) GetVpcLinkRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetVpcLinkRequest{Request: req, Input: input}
+	return GetVpcLinkRequest{Request: req, Input: input, Copy: c.GetVpcLinkRequest}
 }
 
 const opGetVpcLinks = "GetVpcLinks"
@@ -4632,6 +4672,7 @@ const opGetVpcLinks = "GetVpcLinks"
 type GetVpcLinksRequest struct {
 	*aws.Request
 	Input *GetVpcLinksInput
+	Copy  func(*GetVpcLinksInput) GetVpcLinksRequest
 }
 
 // Send marshals and sends the GetVpcLinks API request.
@@ -4676,57 +4717,53 @@ func (c *APIGateway) GetVpcLinksRequest(input *GetVpcLinksInput) GetVpcLinksRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetVpcLinksRequest{Request: req, Input: input}
+	return GetVpcLinksRequest{Request: req, Input: input, Copy: c.GetVpcLinksRequest}
 }
 
-// GetVpcLinksPages iterates over the pages of a GetVpcLinks operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetVpcLinks method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetVpcLinksRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetVpcLinks operation.
-//    pageNum := 0
-//    err := client.GetVpcLinksPages(params,
-//        func(page *GetVpcLinksOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetVpcLinksRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *APIGateway) GetVpcLinksPages(input *GetVpcLinksInput, fn func(*GetVpcLinksOutput, bool) bool) error {
-	return c.GetVpcLinksPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetVpcLinksRequest) Paginate(opts ...aws.Option) GetVpcLinksPager {
+	return GetVpcLinksPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetVpcLinksInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetVpcLinksPagesWithContext same as GetVpcLinksPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *APIGateway) GetVpcLinksPagesWithContext(ctx aws.Context, input *GetVpcLinksInput, fn func(*GetVpcLinksOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetVpcLinksInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetVpcLinksRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetVpcLinksOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetVpcLinksPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetVpcLinksPager struct {
+	aws.Pager
+}
+
+func (p *GetVpcLinksPager) CurrentPage() *GetVpcLinksOutput {
+	return p.Pager.CurrentPage().(*GetVpcLinksOutput)
 }
 
 const opImportApiKeys = "ImportApiKeys"
@@ -4735,6 +4772,7 @@ const opImportApiKeys = "ImportApiKeys"
 type ImportApiKeysRequest struct {
 	*aws.Request
 	Input *ImportApiKeysInput
+	Copy  func(*ImportApiKeysInput) ImportApiKeysRequest
 }
 
 // Send marshals and sends the ImportApiKeys API request.
@@ -4773,7 +4811,7 @@ func (c *APIGateway) ImportApiKeysRequest(input *ImportApiKeysInput) ImportApiKe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportApiKeysRequest{Request: req, Input: input}
+	return ImportApiKeysRequest{Request: req, Input: input, Copy: c.ImportApiKeysRequest}
 }
 
 const opImportDocumentationParts = "ImportDocumentationParts"
@@ -4782,6 +4820,7 @@ const opImportDocumentationParts = "ImportDocumentationParts"
 type ImportDocumentationPartsRequest struct {
 	*aws.Request
 	Input *ImportDocumentationPartsInput
+	Copy  func(*ImportDocumentationPartsInput) ImportDocumentationPartsRequest
 }
 
 // Send marshals and sends the ImportDocumentationParts API request.
@@ -4818,7 +4857,7 @@ func (c *APIGateway) ImportDocumentationPartsRequest(input *ImportDocumentationP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportDocumentationPartsRequest{Request: req, Input: input}
+	return ImportDocumentationPartsRequest{Request: req, Input: input, Copy: c.ImportDocumentationPartsRequest}
 }
 
 const opImportRestApi = "ImportRestApi"
@@ -4827,6 +4866,7 @@ const opImportRestApi = "ImportRestApi"
 type ImportRestApiRequest struct {
 	*aws.Request
 	Input *ImportRestApiInput
+	Copy  func(*ImportRestApiInput) ImportRestApiRequest
 }
 
 // Send marshals and sends the ImportRestApi API request.
@@ -4866,7 +4906,7 @@ func (c *APIGateway) ImportRestApiRequest(input *ImportRestApiInput) ImportRestA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ImportRestApiRequest{Request: req, Input: input}
+	return ImportRestApiRequest{Request: req, Input: input, Copy: c.ImportRestApiRequest}
 }
 
 const opPutGatewayResponse = "PutGatewayResponse"
@@ -4875,6 +4915,7 @@ const opPutGatewayResponse = "PutGatewayResponse"
 type PutGatewayResponseRequest struct {
 	*aws.Request
 	Input *PutGatewayResponseInput
+	Copy  func(*PutGatewayResponseInput) PutGatewayResponseRequest
 }
 
 // Send marshals and sends the PutGatewayResponse API request.
@@ -4914,7 +4955,7 @@ func (c *APIGateway) PutGatewayResponseRequest(input *PutGatewayResponseInput) P
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutGatewayResponseRequest{Request: req, Input: input}
+	return PutGatewayResponseRequest{Request: req, Input: input, Copy: c.PutGatewayResponseRequest}
 }
 
 const opPutIntegration = "PutIntegration"
@@ -4923,6 +4964,7 @@ const opPutIntegration = "PutIntegration"
 type PutIntegrationRequest struct {
 	*aws.Request
 	Input *PutIntegrationInput
+	Copy  func(*PutIntegrationInput) PutIntegrationRequest
 }
 
 // Send marshals and sends the PutIntegration API request.
@@ -4961,7 +5003,7 @@ func (c *APIGateway) PutIntegrationRequest(input *PutIntegrationInput) PutIntegr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutIntegrationRequest{Request: req, Input: input}
+	return PutIntegrationRequest{Request: req, Input: input, Copy: c.PutIntegrationRequest}
 }
 
 const opPutIntegrationResponse = "PutIntegrationResponse"
@@ -4970,6 +5012,7 @@ const opPutIntegrationResponse = "PutIntegrationResponse"
 type PutIntegrationResponseRequest struct {
 	*aws.Request
 	Input *PutIntegrationResponseInput
+	Copy  func(*PutIntegrationResponseInput) PutIntegrationResponseRequest
 }
 
 // Send marshals and sends the PutIntegrationResponse API request.
@@ -5008,7 +5051,7 @@ func (c *APIGateway) PutIntegrationResponseRequest(input *PutIntegrationResponse
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutIntegrationResponseRequest{Request: req, Input: input}
+	return PutIntegrationResponseRequest{Request: req, Input: input, Copy: c.PutIntegrationResponseRequest}
 }
 
 const opPutMethod = "PutMethod"
@@ -5017,6 +5060,7 @@ const opPutMethod = "PutMethod"
 type PutMethodRequest struct {
 	*aws.Request
 	Input *PutMethodInput
+	Copy  func(*PutMethodInput) PutMethodRequest
 }
 
 // Send marshals and sends the PutMethod API request.
@@ -5055,7 +5099,7 @@ func (c *APIGateway) PutMethodRequest(input *PutMethodInput) PutMethodRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutMethodRequest{Request: req, Input: input}
+	return PutMethodRequest{Request: req, Input: input, Copy: c.PutMethodRequest}
 }
 
 const opPutMethodResponse = "PutMethodResponse"
@@ -5064,6 +5108,7 @@ const opPutMethodResponse = "PutMethodResponse"
 type PutMethodResponseRequest struct {
 	*aws.Request
 	Input *PutMethodResponseInput
+	Copy  func(*PutMethodResponseInput) PutMethodResponseRequest
 }
 
 // Send marshals and sends the PutMethodResponse API request.
@@ -5102,7 +5147,7 @@ func (c *APIGateway) PutMethodResponseRequest(input *PutMethodResponseInput) Put
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutMethodResponseRequest{Request: req, Input: input}
+	return PutMethodResponseRequest{Request: req, Input: input, Copy: c.PutMethodResponseRequest}
 }
 
 const opPutRestApi = "PutRestApi"
@@ -5111,6 +5156,7 @@ const opPutRestApi = "PutRestApi"
 type PutRestApiRequest struct {
 	*aws.Request
 	Input *PutRestApiInput
+	Copy  func(*PutRestApiInput) PutRestApiRequest
 }
 
 // Send marshals and sends the PutRestApi API request.
@@ -5152,7 +5198,7 @@ func (c *APIGateway) PutRestApiRequest(input *PutRestApiInput) PutRestApiRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutRestApiRequest{Request: req, Input: input}
+	return PutRestApiRequest{Request: req, Input: input, Copy: c.PutRestApiRequest}
 }
 
 const opTagResource = "TagResource"
@@ -5161,6 +5207,7 @@ const opTagResource = "TagResource"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -5201,7 +5248,7 @@ func (c *APIGateway) TagResourceRequest(input *TagResourceInput) TagResourceRequ
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opTestInvokeAuthorizer = "TestInvokeAuthorizer"
@@ -5210,6 +5257,7 @@ const opTestInvokeAuthorizer = "TestInvokeAuthorizer"
 type TestInvokeAuthorizerRequest struct {
 	*aws.Request
 	Input *TestInvokeAuthorizerInput
+	Copy  func(*TestInvokeAuthorizerInput) TestInvokeAuthorizerRequest
 }
 
 // Send marshals and sends the TestInvokeAuthorizer API request.
@@ -5251,7 +5299,7 @@ func (c *APIGateway) TestInvokeAuthorizerRequest(input *TestInvokeAuthorizerInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestInvokeAuthorizerRequest{Request: req, Input: input}
+	return TestInvokeAuthorizerRequest{Request: req, Input: input, Copy: c.TestInvokeAuthorizerRequest}
 }
 
 const opTestInvokeMethod = "TestInvokeMethod"
@@ -5260,6 +5308,7 @@ const opTestInvokeMethod = "TestInvokeMethod"
 type TestInvokeMethodRequest struct {
 	*aws.Request
 	Input *TestInvokeMethodInput
+	Copy  func(*TestInvokeMethodInput) TestInvokeMethodRequest
 }
 
 // Send marshals and sends the TestInvokeMethod API request.
@@ -5299,7 +5348,7 @@ func (c *APIGateway) TestInvokeMethodRequest(input *TestInvokeMethodInput) TestI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestInvokeMethodRequest{Request: req, Input: input}
+	return TestInvokeMethodRequest{Request: req, Input: input, Copy: c.TestInvokeMethodRequest}
 }
 
 const opUntagResource = "UntagResource"
@@ -5308,6 +5357,7 @@ const opUntagResource = "UntagResource"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -5348,7 +5398,7 @@ func (c *APIGateway) UntagResourceRequest(input *UntagResourceInput) UntagResour
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateAccount = "UpdateAccount"
@@ -5357,6 +5407,7 @@ const opUpdateAccount = "UpdateAccount"
 type UpdateAccountRequest struct {
 	*aws.Request
 	Input *UpdateAccountInput
+	Copy  func(*UpdateAccountInput) UpdateAccountRequest
 }
 
 // Send marshals and sends the UpdateAccount API request.
@@ -5395,7 +5446,7 @@ func (c *APIGateway) UpdateAccountRequest(input *UpdateAccountInput) UpdateAccou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAccountRequest{Request: req, Input: input}
+	return UpdateAccountRequest{Request: req, Input: input, Copy: c.UpdateAccountRequest}
 }
 
 const opUpdateApiKey = "UpdateApiKey"
@@ -5404,6 +5455,7 @@ const opUpdateApiKey = "UpdateApiKey"
 type UpdateApiKeyRequest struct {
 	*aws.Request
 	Input *UpdateApiKeyInput
+	Copy  func(*UpdateApiKeyInput) UpdateApiKeyRequest
 }
 
 // Send marshals and sends the UpdateApiKey API request.
@@ -5442,7 +5494,7 @@ func (c *APIGateway) UpdateApiKeyRequest(input *UpdateApiKeyInput) UpdateApiKeyR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApiKeyRequest{Request: req, Input: input}
+	return UpdateApiKeyRequest{Request: req, Input: input, Copy: c.UpdateApiKeyRequest}
 }
 
 const opUpdateAuthorizer = "UpdateAuthorizer"
@@ -5451,6 +5503,7 @@ const opUpdateAuthorizer = "UpdateAuthorizer"
 type UpdateAuthorizerRequest struct {
 	*aws.Request
 	Input *UpdateAuthorizerInput
+	Copy  func(*UpdateAuthorizerInput) UpdateAuthorizerRequest
 }
 
 // Send marshals and sends the UpdateAuthorizer API request.
@@ -5491,7 +5544,7 @@ func (c *APIGateway) UpdateAuthorizerRequest(input *UpdateAuthorizerInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAuthorizerRequest{Request: req, Input: input}
+	return UpdateAuthorizerRequest{Request: req, Input: input, Copy: c.UpdateAuthorizerRequest}
 }
 
 const opUpdateBasePathMapping = "UpdateBasePathMapping"
@@ -5500,6 +5553,7 @@ const opUpdateBasePathMapping = "UpdateBasePathMapping"
 type UpdateBasePathMappingRequest struct {
 	*aws.Request
 	Input *UpdateBasePathMappingInput
+	Copy  func(*UpdateBasePathMappingInput) UpdateBasePathMappingRequest
 }
 
 // Send marshals and sends the UpdateBasePathMapping API request.
@@ -5538,7 +5592,7 @@ func (c *APIGateway) UpdateBasePathMappingRequest(input *UpdateBasePathMappingIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateBasePathMappingRequest{Request: req, Input: input}
+	return UpdateBasePathMappingRequest{Request: req, Input: input, Copy: c.UpdateBasePathMappingRequest}
 }
 
 const opUpdateClientCertificate = "UpdateClientCertificate"
@@ -5547,6 +5601,7 @@ const opUpdateClientCertificate = "UpdateClientCertificate"
 type UpdateClientCertificateRequest struct {
 	*aws.Request
 	Input *UpdateClientCertificateInput
+	Copy  func(*UpdateClientCertificateInput) UpdateClientCertificateRequest
 }
 
 // Send marshals and sends the UpdateClientCertificate API request.
@@ -5585,7 +5640,7 @@ func (c *APIGateway) UpdateClientCertificateRequest(input *UpdateClientCertifica
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateClientCertificateRequest{Request: req, Input: input}
+	return UpdateClientCertificateRequest{Request: req, Input: input, Copy: c.UpdateClientCertificateRequest}
 }
 
 const opUpdateDeployment = "UpdateDeployment"
@@ -5594,6 +5649,7 @@ const opUpdateDeployment = "UpdateDeployment"
 type UpdateDeploymentRequest struct {
 	*aws.Request
 	Input *UpdateDeploymentInput
+	Copy  func(*UpdateDeploymentInput) UpdateDeploymentRequest
 }
 
 // Send marshals and sends the UpdateDeployment API request.
@@ -5632,7 +5688,7 @@ func (c *APIGateway) UpdateDeploymentRequest(input *UpdateDeploymentInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDeploymentRequest{Request: req, Input: input}
+	return UpdateDeploymentRequest{Request: req, Input: input, Copy: c.UpdateDeploymentRequest}
 }
 
 const opUpdateDocumentationPart = "UpdateDocumentationPart"
@@ -5641,6 +5697,7 @@ const opUpdateDocumentationPart = "UpdateDocumentationPart"
 type UpdateDocumentationPartRequest struct {
 	*aws.Request
 	Input *UpdateDocumentationPartInput
+	Copy  func(*UpdateDocumentationPartInput) UpdateDocumentationPartRequest
 }
 
 // Send marshals and sends the UpdateDocumentationPart API request.
@@ -5677,7 +5734,7 @@ func (c *APIGateway) UpdateDocumentationPartRequest(input *UpdateDocumentationPa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDocumentationPartRequest{Request: req, Input: input}
+	return UpdateDocumentationPartRequest{Request: req, Input: input, Copy: c.UpdateDocumentationPartRequest}
 }
 
 const opUpdateDocumentationVersion = "UpdateDocumentationVersion"
@@ -5686,6 +5743,7 @@ const opUpdateDocumentationVersion = "UpdateDocumentationVersion"
 type UpdateDocumentationVersionRequest struct {
 	*aws.Request
 	Input *UpdateDocumentationVersionInput
+	Copy  func(*UpdateDocumentationVersionInput) UpdateDocumentationVersionRequest
 }
 
 // Send marshals and sends the UpdateDocumentationVersion API request.
@@ -5722,7 +5780,7 @@ func (c *APIGateway) UpdateDocumentationVersionRequest(input *UpdateDocumentatio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDocumentationVersionRequest{Request: req, Input: input}
+	return UpdateDocumentationVersionRequest{Request: req, Input: input, Copy: c.UpdateDocumentationVersionRequest}
 }
 
 const opUpdateDomainName = "UpdateDomainName"
@@ -5731,6 +5789,7 @@ const opUpdateDomainName = "UpdateDomainName"
 type UpdateDomainNameRequest struct {
 	*aws.Request
 	Input *UpdateDomainNameInput
+	Copy  func(*UpdateDomainNameInput) UpdateDomainNameRequest
 }
 
 // Send marshals and sends the UpdateDomainName API request.
@@ -5769,7 +5828,7 @@ func (c *APIGateway) UpdateDomainNameRequest(input *UpdateDomainNameInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDomainNameRequest{Request: req, Input: input}
+	return UpdateDomainNameRequest{Request: req, Input: input, Copy: c.UpdateDomainNameRequest}
 }
 
 const opUpdateGatewayResponse = "UpdateGatewayResponse"
@@ -5778,6 +5837,7 @@ const opUpdateGatewayResponse = "UpdateGatewayResponse"
 type UpdateGatewayResponseRequest struct {
 	*aws.Request
 	Input *UpdateGatewayResponseInput
+	Copy  func(*UpdateGatewayResponseInput) UpdateGatewayResponseRequest
 }
 
 // Send marshals and sends the UpdateGatewayResponse API request.
@@ -5816,7 +5876,7 @@ func (c *APIGateway) UpdateGatewayResponseRequest(input *UpdateGatewayResponseIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGatewayResponseRequest{Request: req, Input: input}
+	return UpdateGatewayResponseRequest{Request: req, Input: input, Copy: c.UpdateGatewayResponseRequest}
 }
 
 const opUpdateIntegration = "UpdateIntegration"
@@ -5825,6 +5885,7 @@ const opUpdateIntegration = "UpdateIntegration"
 type UpdateIntegrationRequest struct {
 	*aws.Request
 	Input *UpdateIntegrationInput
+	Copy  func(*UpdateIntegrationInput) UpdateIntegrationRequest
 }
 
 // Send marshals and sends the UpdateIntegration API request.
@@ -5863,7 +5924,7 @@ func (c *APIGateway) UpdateIntegrationRequest(input *UpdateIntegrationInput) Upd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateIntegrationRequest{Request: req, Input: input}
+	return UpdateIntegrationRequest{Request: req, Input: input, Copy: c.UpdateIntegrationRequest}
 }
 
 const opUpdateIntegrationResponse = "UpdateIntegrationResponse"
@@ -5872,6 +5933,7 @@ const opUpdateIntegrationResponse = "UpdateIntegrationResponse"
 type UpdateIntegrationResponseRequest struct {
 	*aws.Request
 	Input *UpdateIntegrationResponseInput
+	Copy  func(*UpdateIntegrationResponseInput) UpdateIntegrationResponseRequest
 }
 
 // Send marshals and sends the UpdateIntegrationResponse API request.
@@ -5910,7 +5972,7 @@ func (c *APIGateway) UpdateIntegrationResponseRequest(input *UpdateIntegrationRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateIntegrationResponseRequest{Request: req, Input: input}
+	return UpdateIntegrationResponseRequest{Request: req, Input: input, Copy: c.UpdateIntegrationResponseRequest}
 }
 
 const opUpdateMethod = "UpdateMethod"
@@ -5919,6 +5981,7 @@ const opUpdateMethod = "UpdateMethod"
 type UpdateMethodRequest struct {
 	*aws.Request
 	Input *UpdateMethodInput
+	Copy  func(*UpdateMethodInput) UpdateMethodRequest
 }
 
 // Send marshals and sends the UpdateMethod API request.
@@ -5957,7 +6020,7 @@ func (c *APIGateway) UpdateMethodRequest(input *UpdateMethodInput) UpdateMethodR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateMethodRequest{Request: req, Input: input}
+	return UpdateMethodRequest{Request: req, Input: input, Copy: c.UpdateMethodRequest}
 }
 
 const opUpdateMethodResponse = "UpdateMethodResponse"
@@ -5966,6 +6029,7 @@ const opUpdateMethodResponse = "UpdateMethodResponse"
 type UpdateMethodResponseRequest struct {
 	*aws.Request
 	Input *UpdateMethodResponseInput
+	Copy  func(*UpdateMethodResponseInput) UpdateMethodResponseRequest
 }
 
 // Send marshals and sends the UpdateMethodResponse API request.
@@ -6004,7 +6068,7 @@ func (c *APIGateway) UpdateMethodResponseRequest(input *UpdateMethodResponseInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateMethodResponseRequest{Request: req, Input: input}
+	return UpdateMethodResponseRequest{Request: req, Input: input, Copy: c.UpdateMethodResponseRequest}
 }
 
 const opUpdateModel = "UpdateModel"
@@ -6013,6 +6077,7 @@ const opUpdateModel = "UpdateModel"
 type UpdateModelRequest struct {
 	*aws.Request
 	Input *UpdateModelInput
+	Copy  func(*UpdateModelInput) UpdateModelRequest
 }
 
 // Send marshals and sends the UpdateModel API request.
@@ -6051,7 +6116,7 @@ func (c *APIGateway) UpdateModelRequest(input *UpdateModelInput) UpdateModelRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateModelRequest{Request: req, Input: input}
+	return UpdateModelRequest{Request: req, Input: input, Copy: c.UpdateModelRequest}
 }
 
 const opUpdateRequestValidator = "UpdateRequestValidator"
@@ -6060,6 +6125,7 @@ const opUpdateRequestValidator = "UpdateRequestValidator"
 type UpdateRequestValidatorRequest struct {
 	*aws.Request
 	Input *UpdateRequestValidatorInput
+	Copy  func(*UpdateRequestValidatorInput) UpdateRequestValidatorRequest
 }
 
 // Send marshals and sends the UpdateRequestValidator API request.
@@ -6098,7 +6164,7 @@ func (c *APIGateway) UpdateRequestValidatorRequest(input *UpdateRequestValidator
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRequestValidatorRequest{Request: req, Input: input}
+	return UpdateRequestValidatorRequest{Request: req, Input: input, Copy: c.UpdateRequestValidatorRequest}
 }
 
 const opUpdateResource = "UpdateResource"
@@ -6107,6 +6173,7 @@ const opUpdateResource = "UpdateResource"
 type UpdateResourceRequest struct {
 	*aws.Request
 	Input *UpdateResourceInput
+	Copy  func(*UpdateResourceInput) UpdateResourceRequest
 }
 
 // Send marshals and sends the UpdateResource API request.
@@ -6145,7 +6212,7 @@ func (c *APIGateway) UpdateResourceRequest(input *UpdateResourceInput) UpdateRes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateResourceRequest{Request: req, Input: input}
+	return UpdateResourceRequest{Request: req, Input: input, Copy: c.UpdateResourceRequest}
 }
 
 const opUpdateRestApi = "UpdateRestApi"
@@ -6154,6 +6221,7 @@ const opUpdateRestApi = "UpdateRestApi"
 type UpdateRestApiRequest struct {
 	*aws.Request
 	Input *UpdateRestApiInput
+	Copy  func(*UpdateRestApiInput) UpdateRestApiRequest
 }
 
 // Send marshals and sends the UpdateRestApi API request.
@@ -6192,7 +6260,7 @@ func (c *APIGateway) UpdateRestApiRequest(input *UpdateRestApiInput) UpdateRestA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateRestApiRequest{Request: req, Input: input}
+	return UpdateRestApiRequest{Request: req, Input: input, Copy: c.UpdateRestApiRequest}
 }
 
 const opUpdateStage = "UpdateStage"
@@ -6201,6 +6269,7 @@ const opUpdateStage = "UpdateStage"
 type UpdateStageRequest struct {
 	*aws.Request
 	Input *UpdateStageInput
+	Copy  func(*UpdateStageInput) UpdateStageRequest
 }
 
 // Send marshals and sends the UpdateStage API request.
@@ -6239,7 +6308,7 @@ func (c *APIGateway) UpdateStageRequest(input *UpdateStageInput) UpdateStageRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateStageRequest{Request: req, Input: input}
+	return UpdateStageRequest{Request: req, Input: input, Copy: c.UpdateStageRequest}
 }
 
 const opUpdateUsage = "UpdateUsage"
@@ -6248,6 +6317,7 @@ const opUpdateUsage = "UpdateUsage"
 type UpdateUsageRequest struct {
 	*aws.Request
 	Input *UpdateUsageInput
+	Copy  func(*UpdateUsageInput) UpdateUsageRequest
 }
 
 // Send marshals and sends the UpdateUsage API request.
@@ -6287,7 +6357,7 @@ func (c *APIGateway) UpdateUsageRequest(input *UpdateUsageInput) UpdateUsageRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateUsageRequest{Request: req, Input: input}
+	return UpdateUsageRequest{Request: req, Input: input, Copy: c.UpdateUsageRequest}
 }
 
 const opUpdateUsagePlan = "UpdateUsagePlan"
@@ -6296,6 +6366,7 @@ const opUpdateUsagePlan = "UpdateUsagePlan"
 type UpdateUsagePlanRequest struct {
 	*aws.Request
 	Input *UpdateUsagePlanInput
+	Copy  func(*UpdateUsagePlanInput) UpdateUsagePlanRequest
 }
 
 // Send marshals and sends the UpdateUsagePlan API request.
@@ -6334,7 +6405,7 @@ func (c *APIGateway) UpdateUsagePlanRequest(input *UpdateUsagePlanInput) UpdateU
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateUsagePlanRequest{Request: req, Input: input}
+	return UpdateUsagePlanRequest{Request: req, Input: input, Copy: c.UpdateUsagePlanRequest}
 }
 
 const opUpdateVpcLink = "UpdateVpcLink"
@@ -6343,6 +6414,7 @@ const opUpdateVpcLink = "UpdateVpcLink"
 type UpdateVpcLinkRequest struct {
 	*aws.Request
 	Input *UpdateVpcLinkInput
+	Copy  func(*UpdateVpcLinkInput) UpdateVpcLinkRequest
 }
 
 // Send marshals and sends the UpdateVpcLink API request.
@@ -6381,7 +6453,7 @@ func (c *APIGateway) UpdateVpcLinkRequest(input *UpdateVpcLinkInput) UpdateVpcLi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateVpcLinkRequest{Request: req, Input: input}
+	return UpdateVpcLinkRequest{Request: req, Input: input, Copy: c.UpdateVpcLinkRequest}
 }
 
 // Access log settings, including the access log format and access log destination

@@ -18,6 +18,7 @@ const opCreateFileSystem = "CreateFileSystem"
 type CreateFileSystemRequest struct {
 	*aws.Request
 	Input *CreateFileSystemInput
+	Copy  func(*CreateFileSystemInput) CreateFileSystemRequest
 }
 
 // Send marshals and sends the CreateFileSystem API request.
@@ -103,7 +104,7 @@ func (c *EFS) CreateFileSystemRequest(input *CreateFileSystemInput) CreateFileSy
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateFileSystemRequest{Request: req, Input: input}
+	return CreateFileSystemRequest{Request: req, Input: input, Copy: c.CreateFileSystemRequest}
 }
 
 const opCreateMountTarget = "CreateMountTarget"
@@ -112,6 +113,7 @@ const opCreateMountTarget = "CreateMountTarget"
 type CreateMountTargetRequest struct {
 	*aws.Request
 	Input *CreateMountTargetInput
+	Copy  func(*CreateMountTargetInput) CreateMountTargetRequest
 }
 
 // Send marshals and sends the CreateMountTarget API request.
@@ -246,7 +248,7 @@ func (c *EFS) CreateMountTargetRequest(input *CreateMountTargetInput) CreateMoun
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateMountTargetRequest{Request: req, Input: input}
+	return CreateMountTargetRequest{Request: req, Input: input, Copy: c.CreateMountTargetRequest}
 }
 
 const opCreateTags = "CreateTags"
@@ -255,6 +257,7 @@ const opCreateTags = "CreateTags"
 type CreateTagsRequest struct {
 	*aws.Request
 	Input *CreateTagsInput
+	Copy  func(*CreateTagsInput) CreateTagsRequest
 }
 
 // Send marshals and sends the CreateTags API request.
@@ -303,7 +306,7 @@ func (c *EFS) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTagsRequest{Request: req, Input: input}
+	return CreateTagsRequest{Request: req, Input: input, Copy: c.CreateTagsRequest}
 }
 
 const opDeleteFileSystem = "DeleteFileSystem"
@@ -312,6 +315,7 @@ const opDeleteFileSystem = "DeleteFileSystem"
 type DeleteFileSystemRequest struct {
 	*aws.Request
 	Input *DeleteFileSystemInput
+	Copy  func(*DeleteFileSystemInput) DeleteFileSystemRequest
 }
 
 // Send marshals and sends the DeleteFileSystem API request.
@@ -369,7 +373,7 @@ func (c *EFS) DeleteFileSystemRequest(input *DeleteFileSystemInput) DeleteFileSy
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFileSystemRequest{Request: req, Input: input}
+	return DeleteFileSystemRequest{Request: req, Input: input, Copy: c.DeleteFileSystemRequest}
 }
 
 const opDeleteMountTarget = "DeleteMountTarget"
@@ -378,6 +382,7 @@ const opDeleteMountTarget = "DeleteMountTarget"
 type DeleteMountTargetRequest struct {
 	*aws.Request
 	Input *DeleteMountTargetInput
+	Copy  func(*DeleteMountTargetInput) DeleteMountTargetRequest
 }
 
 // Send marshals and sends the DeleteMountTarget API request.
@@ -444,7 +449,7 @@ func (c *EFS) DeleteMountTargetRequest(input *DeleteMountTargetInput) DeleteMoun
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteMountTargetRequest{Request: req, Input: input}
+	return DeleteMountTargetRequest{Request: req, Input: input, Copy: c.DeleteMountTargetRequest}
 }
 
 const opDeleteTags = "DeleteTags"
@@ -453,6 +458,7 @@ const opDeleteTags = "DeleteTags"
 type DeleteTagsRequest struct {
 	*aws.Request
 	Input *DeleteTagsInput
+	Copy  func(*DeleteTagsInput) DeleteTagsRequest
 }
 
 // Send marshals and sends the DeleteTags API request.
@@ -502,7 +508,7 @@ func (c *EFS) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTagsRequest{Request: req, Input: input}
+	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
 const opDescribeFileSystems = "DescribeFileSystems"
@@ -511,6 +517,7 @@ const opDescribeFileSystems = "DescribeFileSystems"
 type DescribeFileSystemsRequest struct {
 	*aws.Request
 	Input *DescribeFileSystemsInput
+	Copy  func(*DescribeFileSystemsInput) DescribeFileSystemsRequest
 }
 
 // Send marshals and sends the DescribeFileSystems API request.
@@ -576,7 +583,7 @@ func (c *EFS) DescribeFileSystemsRequest(input *DescribeFileSystemsInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFileSystemsRequest{Request: req, Input: input}
+	return DescribeFileSystemsRequest{Request: req, Input: input, Copy: c.DescribeFileSystemsRequest}
 }
 
 const opDescribeMountTargetSecurityGroups = "DescribeMountTargetSecurityGroups"
@@ -585,6 +592,7 @@ const opDescribeMountTargetSecurityGroups = "DescribeMountTargetSecurityGroups"
 type DescribeMountTargetSecurityGroupsRequest struct {
 	*aws.Request
 	Input *DescribeMountTargetSecurityGroupsInput
+	Copy  func(*DescribeMountTargetSecurityGroupsInput) DescribeMountTargetSecurityGroupsRequest
 }
 
 // Send marshals and sends the DescribeMountTargetSecurityGroups API request.
@@ -635,7 +643,7 @@ func (c *EFS) DescribeMountTargetSecurityGroupsRequest(input *DescribeMountTarge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMountTargetSecurityGroupsRequest{Request: req, Input: input}
+	return DescribeMountTargetSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeMountTargetSecurityGroupsRequest}
 }
 
 const opDescribeMountTargets = "DescribeMountTargets"
@@ -644,6 +652,7 @@ const opDescribeMountTargets = "DescribeMountTargets"
 type DescribeMountTargetsRequest struct {
 	*aws.Request
 	Input *DescribeMountTargetsInput
+	Copy  func(*DescribeMountTargetsInput) DescribeMountTargetsRequest
 }
 
 // Send marshals and sends the DescribeMountTargets API request.
@@ -690,7 +699,7 @@ func (c *EFS) DescribeMountTargetsRequest(input *DescribeMountTargetsInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMountTargetsRequest{Request: req, Input: input}
+	return DescribeMountTargetsRequest{Request: req, Input: input, Copy: c.DescribeMountTargetsRequest}
 }
 
 const opDescribeTags = "DescribeTags"
@@ -699,6 +708,7 @@ const opDescribeTags = "DescribeTags"
 type DescribeTagsRequest struct {
 	*aws.Request
 	Input *DescribeTagsInput
+	Copy  func(*DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -744,7 +754,7 @@ func (c *EFS) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagsRequest{Request: req, Input: input}
+	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
 const opModifyMountTargetSecurityGroups = "ModifyMountTargetSecurityGroups"
@@ -753,6 +763,7 @@ const opModifyMountTargetSecurityGroups = "ModifyMountTargetSecurityGroups"
 type ModifyMountTargetSecurityGroupsRequest struct {
 	*aws.Request
 	Input *ModifyMountTargetSecurityGroupsInput
+	Copy  func(*ModifyMountTargetSecurityGroupsInput) ModifyMountTargetSecurityGroupsRequest
 }
 
 // Send marshals and sends the ModifyMountTargetSecurityGroups API request.
@@ -810,7 +821,7 @@ func (c *EFS) ModifyMountTargetSecurityGroupsRequest(input *ModifyMountTargetSec
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyMountTargetSecurityGroupsRequest{Request: req, Input: input}
+	return ModifyMountTargetSecurityGroupsRequest{Request: req, Input: input, Copy: c.ModifyMountTargetSecurityGroupsRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateFileSystemRequest

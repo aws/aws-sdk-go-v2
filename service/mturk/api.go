@@ -16,6 +16,7 @@ const opAcceptQualificationRequest = "AcceptQualificationRequest"
 type AcceptQualificationRequestRequest struct {
 	*aws.Request
 	Input *AcceptQualificationRequestInput
+	Copy  func(*AcceptQualificationRequestInput) AcceptQualificationRequestRequest
 }
 
 // Send marshals and sends the AcceptQualificationRequest API request.
@@ -63,7 +64,7 @@ func (c *MTurk) AcceptQualificationRequestRequest(input *AcceptQualificationRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcceptQualificationRequestRequest{Request: req, Input: input}
+	return AcceptQualificationRequestRequest{Request: req, Input: input, Copy: c.AcceptQualificationRequestRequest}
 }
 
 const opApproveAssignment = "ApproveAssignment"
@@ -72,6 +73,7 @@ const opApproveAssignment = "ApproveAssignment"
 type ApproveAssignmentRequest struct {
 	*aws.Request
 	Input *ApproveAssignmentInput
+	Copy  func(*ApproveAssignmentInput) ApproveAssignmentRequest
 }
 
 // Send marshals and sends the ApproveAssignment API request.
@@ -130,7 +132,7 @@ func (c *MTurk) ApproveAssignmentRequest(input *ApproveAssignmentInput) ApproveA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ApproveAssignmentRequest{Request: req, Input: input}
+	return ApproveAssignmentRequest{Request: req, Input: input, Copy: c.ApproveAssignmentRequest}
 }
 
 const opAssociateQualificationWithWorker = "AssociateQualificationWithWorker"
@@ -139,6 +141,7 @@ const opAssociateQualificationWithWorker = "AssociateQualificationWithWorker"
 type AssociateQualificationWithWorkerRequest struct {
 	*aws.Request
 	Input *AssociateQualificationWithWorkerInput
+	Copy  func(*AssociateQualificationWithWorkerInput) AssociateQualificationWithWorkerRequest
 }
 
 // Send marshals and sends the AssociateQualificationWithWorker API request.
@@ -191,7 +194,7 @@ func (c *MTurk) AssociateQualificationWithWorkerRequest(input *AssociateQualific
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateQualificationWithWorkerRequest{Request: req, Input: input}
+	return AssociateQualificationWithWorkerRequest{Request: req, Input: input, Copy: c.AssociateQualificationWithWorkerRequest}
 }
 
 const opCreateAdditionalAssignmentsForHIT = "CreateAdditionalAssignmentsForHIT"
@@ -200,6 +203,7 @@ const opCreateAdditionalAssignmentsForHIT = "CreateAdditionalAssignmentsForHIT"
 type CreateAdditionalAssignmentsForHITRequest struct {
 	*aws.Request
 	Input *CreateAdditionalAssignmentsForHITInput
+	Copy  func(*CreateAdditionalAssignmentsForHITInput) CreateAdditionalAssignmentsForHITRequest
 }
 
 // Send marshals and sends the CreateAdditionalAssignmentsForHIT API request.
@@ -254,7 +258,7 @@ func (c *MTurk) CreateAdditionalAssignmentsForHITRequest(input *CreateAdditional
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAdditionalAssignmentsForHITRequest{Request: req, Input: input}
+	return CreateAdditionalAssignmentsForHITRequest{Request: req, Input: input, Copy: c.CreateAdditionalAssignmentsForHITRequest}
 }
 
 const opCreateHIT = "CreateHIT"
@@ -263,6 +267,7 @@ const opCreateHIT = "CreateHIT"
 type CreateHITRequest struct {
 	*aws.Request
 	Input *CreateHITInput
+	Copy  func(*CreateHITInput) CreateHITRequest
 }
 
 // Send marshals and sends the CreateHIT API request.
@@ -324,7 +329,7 @@ func (c *MTurk) CreateHITRequest(input *CreateHITInput) CreateHITRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateHITRequest{Request: req, Input: input}
+	return CreateHITRequest{Request: req, Input: input, Copy: c.CreateHITRequest}
 }
 
 const opCreateHITType = "CreateHITType"
@@ -333,6 +338,7 @@ const opCreateHITType = "CreateHITType"
 type CreateHITTypeRequest struct {
 	*aws.Request
 	Input *CreateHITTypeInput
+	Copy  func(*CreateHITTypeInput) CreateHITTypeRequest
 }
 
 // Send marshals and sends the CreateHITType API request.
@@ -376,7 +382,7 @@ func (c *MTurk) CreateHITTypeRequest(input *CreateHITTypeInput) CreateHITTypeReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateHITTypeRequest{Request: req, Input: input}
+	return CreateHITTypeRequest{Request: req, Input: input, Copy: c.CreateHITTypeRequest}
 }
 
 const opCreateHITWithHITType = "CreateHITWithHITType"
@@ -385,6 +391,7 @@ const opCreateHITWithHITType = "CreateHITWithHITType"
 type CreateHITWithHITTypeRequest struct {
 	*aws.Request
 	Input *CreateHITWithHITTypeInput
+	Copy  func(*CreateHITWithHITTypeInput) CreateHITWithHITTypeRequest
 }
 
 // Send marshals and sends the CreateHITWithHITType API request.
@@ -437,7 +444,7 @@ func (c *MTurk) CreateHITWithHITTypeRequest(input *CreateHITWithHITTypeInput) Cr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateHITWithHITTypeRequest{Request: req, Input: input}
+	return CreateHITWithHITTypeRequest{Request: req, Input: input, Copy: c.CreateHITWithHITTypeRequest}
 }
 
 const opCreateQualificationType = "CreateQualificationType"
@@ -446,6 +453,7 @@ const opCreateQualificationType = "CreateQualificationType"
 type CreateQualificationTypeRequest struct {
 	*aws.Request
 	Input *CreateQualificationTypeInput
+	Copy  func(*CreateQualificationTypeInput) CreateQualificationTypeRequest
 }
 
 // Send marshals and sends the CreateQualificationType API request.
@@ -487,7 +495,7 @@ func (c *MTurk) CreateQualificationTypeRequest(input *CreateQualificationTypeInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateQualificationTypeRequest{Request: req, Input: input}
+	return CreateQualificationTypeRequest{Request: req, Input: input, Copy: c.CreateQualificationTypeRequest}
 }
 
 const opCreateWorkerBlock = "CreateWorkerBlock"
@@ -496,6 +504,7 @@ const opCreateWorkerBlock = "CreateWorkerBlock"
 type CreateWorkerBlockRequest struct {
 	*aws.Request
 	Input *CreateWorkerBlockInput
+	Copy  func(*CreateWorkerBlockInput) CreateWorkerBlockRequest
 }
 
 // Send marshals and sends the CreateWorkerBlock API request.
@@ -538,7 +547,7 @@ func (c *MTurk) CreateWorkerBlockRequest(input *CreateWorkerBlockInput) CreateWo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateWorkerBlockRequest{Request: req, Input: input}
+	return CreateWorkerBlockRequest{Request: req, Input: input, Copy: c.CreateWorkerBlockRequest}
 }
 
 const opDeleteHIT = "DeleteHIT"
@@ -547,6 +556,7 @@ const opDeleteHIT = "DeleteHIT"
 type DeleteHITRequest struct {
 	*aws.Request
 	Input *DeleteHITInput
+	Copy  func(*DeleteHITInput) DeleteHITRequest
 }
 
 // Send marshals and sends the DeleteHIT API request.
@@ -605,7 +615,7 @@ func (c *MTurk) DeleteHITRequest(input *DeleteHITInput) DeleteHITRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteHITRequest{Request: req, Input: input}
+	return DeleteHITRequest{Request: req, Input: input, Copy: c.DeleteHITRequest}
 }
 
 const opDeleteQualificationType = "DeleteQualificationType"
@@ -614,6 +624,7 @@ const opDeleteQualificationType = "DeleteQualificationType"
 type DeleteQualificationTypeRequest struct {
 	*aws.Request
 	Input *DeleteQualificationTypeInput
+	Copy  func(*DeleteQualificationTypeInput) DeleteQualificationTypeRequest
 }
 
 // Send marshals and sends the DeleteQualificationType API request.
@@ -666,7 +677,7 @@ func (c *MTurk) DeleteQualificationTypeRequest(input *DeleteQualificationTypeInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteQualificationTypeRequest{Request: req, Input: input}
+	return DeleteQualificationTypeRequest{Request: req, Input: input, Copy: c.DeleteQualificationTypeRequest}
 }
 
 const opDeleteWorkerBlock = "DeleteWorkerBlock"
@@ -675,6 +686,7 @@ const opDeleteWorkerBlock = "DeleteWorkerBlock"
 type DeleteWorkerBlockRequest struct {
 	*aws.Request
 	Input *DeleteWorkerBlockInput
+	Copy  func(*DeleteWorkerBlockInput) DeleteWorkerBlockRequest
 }
 
 // Send marshals and sends the DeleteWorkerBlock API request.
@@ -720,7 +732,7 @@ func (c *MTurk) DeleteWorkerBlockRequest(input *DeleteWorkerBlockInput) DeleteWo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteWorkerBlockRequest{Request: req, Input: input}
+	return DeleteWorkerBlockRequest{Request: req, Input: input, Copy: c.DeleteWorkerBlockRequest}
 }
 
 const opDisassociateQualificationFromWorker = "DisassociateQualificationFromWorker"
@@ -729,6 +741,7 @@ const opDisassociateQualificationFromWorker = "DisassociateQualificationFromWork
 type DisassociateQualificationFromWorkerRequest struct {
 	*aws.Request
 	Input *DisassociateQualificationFromWorkerInput
+	Copy  func(*DisassociateQualificationFromWorkerInput) DisassociateQualificationFromWorkerRequest
 }
 
 // Send marshals and sends the DisassociateQualificationFromWorker API request.
@@ -773,7 +786,7 @@ func (c *MTurk) DisassociateQualificationFromWorkerRequest(input *DisassociateQu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateQualificationFromWorkerRequest{Request: req, Input: input}
+	return DisassociateQualificationFromWorkerRequest{Request: req, Input: input, Copy: c.DisassociateQualificationFromWorkerRequest}
 }
 
 const opGetAccountBalance = "GetAccountBalance"
@@ -782,6 +795,7 @@ const opGetAccountBalance = "GetAccountBalance"
 type GetAccountBalanceRequest struct {
 	*aws.Request
 	Input *GetAccountBalanceInput
+	Copy  func(*GetAccountBalanceInput) GetAccountBalanceRequest
 }
 
 // Send marshals and sends the GetAccountBalance API request.
@@ -823,7 +837,7 @@ func (c *MTurk) GetAccountBalanceRequest(input *GetAccountBalanceInput) GetAccou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAccountBalanceRequest{Request: req, Input: input}
+	return GetAccountBalanceRequest{Request: req, Input: input, Copy: c.GetAccountBalanceRequest}
 }
 
 const opGetAssignment = "GetAssignment"
@@ -832,6 +846,7 @@ const opGetAssignment = "GetAssignment"
 type GetAssignmentRequest struct {
 	*aws.Request
 	Input *GetAssignmentInput
+	Copy  func(*GetAssignmentInput) GetAssignmentRequest
 }
 
 // Send marshals and sends the GetAssignment API request.
@@ -872,7 +887,7 @@ func (c *MTurk) GetAssignmentRequest(input *GetAssignmentInput) GetAssignmentReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAssignmentRequest{Request: req, Input: input}
+	return GetAssignmentRequest{Request: req, Input: input, Copy: c.GetAssignmentRequest}
 }
 
 const opGetFileUploadURL = "GetFileUploadURL"
@@ -881,6 +896,7 @@ const opGetFileUploadURL = "GetFileUploadURL"
 type GetFileUploadURLRequest struct {
 	*aws.Request
 	Input *GetFileUploadURLInput
+	Copy  func(*GetFileUploadURLInput) GetFileUploadURLRequest
 }
 
 // Send marshals and sends the GetFileUploadURL API request.
@@ -927,7 +943,7 @@ func (c *MTurk) GetFileUploadURLRequest(input *GetFileUploadURLInput) GetFileUpl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFileUploadURLRequest{Request: req, Input: input}
+	return GetFileUploadURLRequest{Request: req, Input: input, Copy: c.GetFileUploadURLRequest}
 }
 
 const opGetHIT = "GetHIT"
@@ -936,6 +952,7 @@ const opGetHIT = "GetHIT"
 type GetHITRequest struct {
 	*aws.Request
 	Input *GetHITInput
+	Copy  func(*GetHITInput) GetHITRequest
 }
 
 // Send marshals and sends the GetHIT API request.
@@ -976,7 +993,7 @@ func (c *MTurk) GetHITRequest(input *GetHITInput) GetHITRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetHITRequest{Request: req, Input: input}
+	return GetHITRequest{Request: req, Input: input, Copy: c.GetHITRequest}
 }
 
 const opGetQualificationScore = "GetQualificationScore"
@@ -985,6 +1002,7 @@ const opGetQualificationScore = "GetQualificationScore"
 type GetQualificationScoreRequest struct {
 	*aws.Request
 	Input *GetQualificationScoreInput
+	Copy  func(*GetQualificationScoreInput) GetQualificationScoreRequest
 }
 
 // Send marshals and sends the GetQualificationScore API request.
@@ -1033,7 +1051,7 @@ func (c *MTurk) GetQualificationScoreRequest(input *GetQualificationScoreInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetQualificationScoreRequest{Request: req, Input: input}
+	return GetQualificationScoreRequest{Request: req, Input: input, Copy: c.GetQualificationScoreRequest}
 }
 
 const opGetQualificationType = "GetQualificationType"
@@ -1042,6 +1060,7 @@ const opGetQualificationType = "GetQualificationType"
 type GetQualificationTypeRequest struct {
 	*aws.Request
 	Input *GetQualificationTypeInput
+	Copy  func(*GetQualificationTypeInput) GetQualificationTypeRequest
 }
 
 // Send marshals and sends the GetQualificationType API request.
@@ -1083,7 +1102,7 @@ func (c *MTurk) GetQualificationTypeRequest(input *GetQualificationTypeInput) Ge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetQualificationTypeRequest{Request: req, Input: input}
+	return GetQualificationTypeRequest{Request: req, Input: input, Copy: c.GetQualificationTypeRequest}
 }
 
 const opListAssignmentsForHIT = "ListAssignmentsForHIT"
@@ -1092,6 +1111,7 @@ const opListAssignmentsForHIT = "ListAssignmentsForHIT"
 type ListAssignmentsForHITRequest struct {
 	*aws.Request
 	Input *ListAssignmentsForHITInput
+	Copy  func(*ListAssignmentsForHITInput) ListAssignmentsForHITRequest
 }
 
 // Send marshals and sends the ListAssignmentsForHIT API request.
@@ -1158,57 +1178,53 @@ func (c *MTurk) ListAssignmentsForHITRequest(input *ListAssignmentsForHITInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAssignmentsForHITRequest{Request: req, Input: input}
+	return ListAssignmentsForHITRequest{Request: req, Input: input, Copy: c.ListAssignmentsForHITRequest}
 }
 
-// ListAssignmentsForHITPages iterates over the pages of a ListAssignmentsForHIT operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAssignmentsForHIT method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAssignmentsForHITRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAssignmentsForHIT operation.
-//    pageNum := 0
-//    err := client.ListAssignmentsForHITPages(params,
-//        func(page *ListAssignmentsForHITOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAssignmentsForHITRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MTurk) ListAssignmentsForHITPages(input *ListAssignmentsForHITInput, fn func(*ListAssignmentsForHITOutput, bool) bool) error {
-	return c.ListAssignmentsForHITPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAssignmentsForHITRequest) Paginate(opts ...aws.Option) ListAssignmentsForHITPager {
+	return ListAssignmentsForHITPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAssignmentsForHITInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAssignmentsForHITPagesWithContext same as ListAssignmentsForHITPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListAssignmentsForHITPagesWithContext(ctx aws.Context, input *ListAssignmentsForHITInput, fn func(*ListAssignmentsForHITOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAssignmentsForHITInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAssignmentsForHITRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssignmentsForHITOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAssignmentsForHITPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAssignmentsForHITPager struct {
+	aws.Pager
+}
+
+func (p *ListAssignmentsForHITPager) CurrentPage() *ListAssignmentsForHITOutput {
+	return p.Pager.CurrentPage().(*ListAssignmentsForHITOutput)
 }
 
 const opListBonusPayments = "ListBonusPayments"
@@ -1217,6 +1233,7 @@ const opListBonusPayments = "ListBonusPayments"
 type ListBonusPaymentsRequest struct {
 	*aws.Request
 	Input *ListBonusPaymentsInput
+	Copy  func(*ListBonusPaymentsInput) ListBonusPaymentsRequest
 }
 
 // Send marshals and sends the ListBonusPayments API request.
@@ -1264,57 +1281,53 @@ func (c *MTurk) ListBonusPaymentsRequest(input *ListBonusPaymentsInput) ListBonu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListBonusPaymentsRequest{Request: req, Input: input}
+	return ListBonusPaymentsRequest{Request: req, Input: input, Copy: c.ListBonusPaymentsRequest}
 }
 
-// ListBonusPaymentsPages iterates over the pages of a ListBonusPayments operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListBonusPayments method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListBonusPaymentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListBonusPayments operation.
-//    pageNum := 0
-//    err := client.ListBonusPaymentsPages(params,
-//        func(page *ListBonusPaymentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListBonusPaymentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MTurk) ListBonusPaymentsPages(input *ListBonusPaymentsInput, fn func(*ListBonusPaymentsOutput, bool) bool) error {
-	return c.ListBonusPaymentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListBonusPaymentsRequest) Paginate(opts ...aws.Option) ListBonusPaymentsPager {
+	return ListBonusPaymentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListBonusPaymentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListBonusPaymentsPagesWithContext same as ListBonusPaymentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListBonusPaymentsPagesWithContext(ctx aws.Context, input *ListBonusPaymentsInput, fn func(*ListBonusPaymentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListBonusPaymentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListBonusPaymentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListBonusPaymentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListBonusPaymentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListBonusPaymentsPager struct {
+	aws.Pager
+}
+
+func (p *ListBonusPaymentsPager) CurrentPage() *ListBonusPaymentsOutput {
+	return p.Pager.CurrentPage().(*ListBonusPaymentsOutput)
 }
 
 const opListHITs = "ListHITs"
@@ -1323,6 +1336,7 @@ const opListHITs = "ListHITs"
 type ListHITsRequest struct {
 	*aws.Request
 	Input *ListHITsInput
+	Copy  func(*ListHITsInput) ListHITsRequest
 }
 
 // Send marshals and sends the ListHITs API request.
@@ -1371,57 +1385,53 @@ func (c *MTurk) ListHITsRequest(input *ListHITsInput) ListHITsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListHITsRequest{Request: req, Input: input}
+	return ListHITsRequest{Request: req, Input: input, Copy: c.ListHITsRequest}
 }
 
-// ListHITsPages iterates over the pages of a ListHITs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListHITs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListHITsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListHITs operation.
-//    pageNum := 0
-//    err := client.ListHITsPages(params,
-//        func(page *ListHITsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListHITsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MTurk) ListHITsPages(input *ListHITsInput, fn func(*ListHITsOutput, bool) bool) error {
-	return c.ListHITsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListHITsRequest) Paginate(opts ...aws.Option) ListHITsPager {
+	return ListHITsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListHITsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListHITsPagesWithContext same as ListHITsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListHITsPagesWithContext(ctx aws.Context, input *ListHITsInput, fn func(*ListHITsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListHITsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListHITsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListHITsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListHITsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListHITsPager struct {
+	aws.Pager
+}
+
+func (p *ListHITsPager) CurrentPage() *ListHITsOutput {
+	return p.Pager.CurrentPage().(*ListHITsOutput)
 }
 
 const opListHITsForQualificationType = "ListHITsForQualificationType"
@@ -1430,6 +1440,7 @@ const opListHITsForQualificationType = "ListHITsForQualificationType"
 type ListHITsForQualificationTypeRequest struct {
 	*aws.Request
 	Input *ListHITsForQualificationTypeInput
+	Copy  func(*ListHITsForQualificationTypeInput) ListHITsForQualificationTypeRequest
 }
 
 // Send marshals and sends the ListHITsForQualificationType API request.
@@ -1479,57 +1490,53 @@ func (c *MTurk) ListHITsForQualificationTypeRequest(input *ListHITsForQualificat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListHITsForQualificationTypeRequest{Request: req, Input: input}
+	return ListHITsForQualificationTypeRequest{Request: req, Input: input, Copy: c.ListHITsForQualificationTypeRequest}
 }
 
-// ListHITsForQualificationTypePages iterates over the pages of a ListHITsForQualificationType operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListHITsForQualificationType method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListHITsForQualificationTypeRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListHITsForQualificationType operation.
-//    pageNum := 0
-//    err := client.ListHITsForQualificationTypePages(params,
-//        func(page *ListHITsForQualificationTypeOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListHITsForQualificationTypeRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MTurk) ListHITsForQualificationTypePages(input *ListHITsForQualificationTypeInput, fn func(*ListHITsForQualificationTypeOutput, bool) bool) error {
-	return c.ListHITsForQualificationTypePagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListHITsForQualificationTypeRequest) Paginate(opts ...aws.Option) ListHITsForQualificationTypePager {
+	return ListHITsForQualificationTypePager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListHITsForQualificationTypeInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListHITsForQualificationTypePagesWithContext same as ListHITsForQualificationTypePages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListHITsForQualificationTypePagesWithContext(ctx aws.Context, input *ListHITsForQualificationTypeInput, fn func(*ListHITsForQualificationTypeOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListHITsForQualificationTypeInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListHITsForQualificationTypeRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListHITsForQualificationTypeOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListHITsForQualificationTypePager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListHITsForQualificationTypePager struct {
+	aws.Pager
+}
+
+func (p *ListHITsForQualificationTypePager) CurrentPage() *ListHITsForQualificationTypeOutput {
+	return p.Pager.CurrentPage().(*ListHITsForQualificationTypeOutput)
 }
 
 const opListQualificationRequests = "ListQualificationRequests"
@@ -1538,6 +1545,7 @@ const opListQualificationRequests = "ListQualificationRequests"
 type ListQualificationRequestsRequest struct {
 	*aws.Request
 	Input *ListQualificationRequestsInput
+	Copy  func(*ListQualificationRequestsInput) ListQualificationRequestsRequest
 }
 
 // Send marshals and sends the ListQualificationRequests API request.
@@ -1587,57 +1595,53 @@ func (c *MTurk) ListQualificationRequestsRequest(input *ListQualificationRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListQualificationRequestsRequest{Request: req, Input: input}
+	return ListQualificationRequestsRequest{Request: req, Input: input, Copy: c.ListQualificationRequestsRequest}
 }
 
-// ListQualificationRequestsPages iterates over the pages of a ListQualificationRequests operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListQualificationRequests method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListQualificationRequestsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListQualificationRequests operation.
-//    pageNum := 0
-//    err := client.ListQualificationRequestsPages(params,
-//        func(page *ListQualificationRequestsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListQualificationRequestsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MTurk) ListQualificationRequestsPages(input *ListQualificationRequestsInput, fn func(*ListQualificationRequestsOutput, bool) bool) error {
-	return c.ListQualificationRequestsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListQualificationRequestsRequest) Paginate(opts ...aws.Option) ListQualificationRequestsPager {
+	return ListQualificationRequestsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListQualificationRequestsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListQualificationRequestsPagesWithContext same as ListQualificationRequestsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListQualificationRequestsPagesWithContext(ctx aws.Context, input *ListQualificationRequestsInput, fn func(*ListQualificationRequestsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListQualificationRequestsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListQualificationRequestsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListQualificationRequestsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListQualificationRequestsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListQualificationRequestsPager struct {
+	aws.Pager
+}
+
+func (p *ListQualificationRequestsPager) CurrentPage() *ListQualificationRequestsOutput {
+	return p.Pager.CurrentPage().(*ListQualificationRequestsOutput)
 }
 
 const opListQualificationTypes = "ListQualificationTypes"
@@ -1646,6 +1650,7 @@ const opListQualificationTypes = "ListQualificationTypes"
 type ListQualificationTypesRequest struct {
 	*aws.Request
 	Input *ListQualificationTypesInput
+	Copy  func(*ListQualificationTypesInput) ListQualificationTypesRequest
 }
 
 // Send marshals and sends the ListQualificationTypes API request.
@@ -1695,57 +1700,53 @@ func (c *MTurk) ListQualificationTypesRequest(input *ListQualificationTypesInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListQualificationTypesRequest{Request: req, Input: input}
+	return ListQualificationTypesRequest{Request: req, Input: input, Copy: c.ListQualificationTypesRequest}
 }
 
-// ListQualificationTypesPages iterates over the pages of a ListQualificationTypes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListQualificationTypes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListQualificationTypesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListQualificationTypes operation.
-//    pageNum := 0
-//    err := client.ListQualificationTypesPages(params,
-//        func(page *ListQualificationTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListQualificationTypesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MTurk) ListQualificationTypesPages(input *ListQualificationTypesInput, fn func(*ListQualificationTypesOutput, bool) bool) error {
-	return c.ListQualificationTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListQualificationTypesRequest) Paginate(opts ...aws.Option) ListQualificationTypesPager {
+	return ListQualificationTypesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListQualificationTypesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListQualificationTypesPagesWithContext same as ListQualificationTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListQualificationTypesPagesWithContext(ctx aws.Context, input *ListQualificationTypesInput, fn func(*ListQualificationTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListQualificationTypesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListQualificationTypesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListQualificationTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListQualificationTypesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListQualificationTypesPager struct {
+	aws.Pager
+}
+
+func (p *ListQualificationTypesPager) CurrentPage() *ListQualificationTypesOutput {
+	return p.Pager.CurrentPage().(*ListQualificationTypesOutput)
 }
 
 const opListReviewPolicyResultsForHIT = "ListReviewPolicyResultsForHIT"
@@ -1754,6 +1755,7 @@ const opListReviewPolicyResultsForHIT = "ListReviewPolicyResultsForHIT"
 type ListReviewPolicyResultsForHITRequest struct {
 	*aws.Request
 	Input *ListReviewPolicyResultsForHITInput
+	Copy  func(*ListReviewPolicyResultsForHITInput) ListReviewPolicyResultsForHITRequest
 }
 
 // Send marshals and sends the ListReviewPolicyResultsForHIT API request.
@@ -1804,57 +1806,53 @@ func (c *MTurk) ListReviewPolicyResultsForHITRequest(input *ListReviewPolicyResu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListReviewPolicyResultsForHITRequest{Request: req, Input: input}
+	return ListReviewPolicyResultsForHITRequest{Request: req, Input: input, Copy: c.ListReviewPolicyResultsForHITRequest}
 }
 
-// ListReviewPolicyResultsForHITPages iterates over the pages of a ListReviewPolicyResultsForHIT operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListReviewPolicyResultsForHIT method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListReviewPolicyResultsForHITRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListReviewPolicyResultsForHIT operation.
-//    pageNum := 0
-//    err := client.ListReviewPolicyResultsForHITPages(params,
-//        func(page *ListReviewPolicyResultsForHITOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListReviewPolicyResultsForHITRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MTurk) ListReviewPolicyResultsForHITPages(input *ListReviewPolicyResultsForHITInput, fn func(*ListReviewPolicyResultsForHITOutput, bool) bool) error {
-	return c.ListReviewPolicyResultsForHITPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListReviewPolicyResultsForHITRequest) Paginate(opts ...aws.Option) ListReviewPolicyResultsForHITPager {
+	return ListReviewPolicyResultsForHITPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListReviewPolicyResultsForHITInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListReviewPolicyResultsForHITPagesWithContext same as ListReviewPolicyResultsForHITPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListReviewPolicyResultsForHITPagesWithContext(ctx aws.Context, input *ListReviewPolicyResultsForHITInput, fn func(*ListReviewPolicyResultsForHITOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListReviewPolicyResultsForHITInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListReviewPolicyResultsForHITRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListReviewPolicyResultsForHITOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListReviewPolicyResultsForHITPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListReviewPolicyResultsForHITPager struct {
+	aws.Pager
+}
+
+func (p *ListReviewPolicyResultsForHITPager) CurrentPage() *ListReviewPolicyResultsForHITOutput {
+	return p.Pager.CurrentPage().(*ListReviewPolicyResultsForHITOutput)
 }
 
 const opListReviewableHITs = "ListReviewableHITs"
@@ -1863,6 +1861,7 @@ const opListReviewableHITs = "ListReviewableHITs"
 type ListReviewableHITsRequest struct {
 	*aws.Request
 	Input *ListReviewableHITsInput
+	Copy  func(*ListReviewableHITsInput) ListReviewableHITsRequest
 }
 
 // Send marshals and sends the ListReviewableHITs API request.
@@ -1911,57 +1910,53 @@ func (c *MTurk) ListReviewableHITsRequest(input *ListReviewableHITsInput) ListRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListReviewableHITsRequest{Request: req, Input: input}
+	return ListReviewableHITsRequest{Request: req, Input: input, Copy: c.ListReviewableHITsRequest}
 }
 
-// ListReviewableHITsPages iterates over the pages of a ListReviewableHITs operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListReviewableHITs method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListReviewableHITsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListReviewableHITs operation.
-//    pageNum := 0
-//    err := client.ListReviewableHITsPages(params,
-//        func(page *ListReviewableHITsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListReviewableHITsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MTurk) ListReviewableHITsPages(input *ListReviewableHITsInput, fn func(*ListReviewableHITsOutput, bool) bool) error {
-	return c.ListReviewableHITsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListReviewableHITsRequest) Paginate(opts ...aws.Option) ListReviewableHITsPager {
+	return ListReviewableHITsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListReviewableHITsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListReviewableHITsPagesWithContext same as ListReviewableHITsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListReviewableHITsPagesWithContext(ctx aws.Context, input *ListReviewableHITsInput, fn func(*ListReviewableHITsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListReviewableHITsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListReviewableHITsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListReviewableHITsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListReviewableHITsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListReviewableHITsPager struct {
+	aws.Pager
+}
+
+func (p *ListReviewableHITsPager) CurrentPage() *ListReviewableHITsOutput {
+	return p.Pager.CurrentPage().(*ListReviewableHITsOutput)
 }
 
 const opListWorkerBlocks = "ListWorkerBlocks"
@@ -1970,6 +1965,7 @@ const opListWorkerBlocks = "ListWorkerBlocks"
 type ListWorkerBlocksRequest struct {
 	*aws.Request
 	Input *ListWorkerBlocksInput
+	Copy  func(*ListWorkerBlocksInput) ListWorkerBlocksRequest
 }
 
 // Send marshals and sends the ListWorkerBlocks API request.
@@ -2017,57 +2013,53 @@ func (c *MTurk) ListWorkerBlocksRequest(input *ListWorkerBlocksInput) ListWorker
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListWorkerBlocksRequest{Request: req, Input: input}
+	return ListWorkerBlocksRequest{Request: req, Input: input, Copy: c.ListWorkerBlocksRequest}
 }
 
-// ListWorkerBlocksPages iterates over the pages of a ListWorkerBlocks operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListWorkerBlocks method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListWorkerBlocksRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListWorkerBlocks operation.
-//    pageNum := 0
-//    err := client.ListWorkerBlocksPages(params,
-//        func(page *ListWorkerBlocksOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListWorkerBlocksRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MTurk) ListWorkerBlocksPages(input *ListWorkerBlocksInput, fn func(*ListWorkerBlocksOutput, bool) bool) error {
-	return c.ListWorkerBlocksPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListWorkerBlocksRequest) Paginate(opts ...aws.Option) ListWorkerBlocksPager {
+	return ListWorkerBlocksPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListWorkerBlocksInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListWorkerBlocksPagesWithContext same as ListWorkerBlocksPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListWorkerBlocksPagesWithContext(ctx aws.Context, input *ListWorkerBlocksInput, fn func(*ListWorkerBlocksOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListWorkerBlocksInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListWorkerBlocksRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListWorkerBlocksOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListWorkerBlocksPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListWorkerBlocksPager struct {
+	aws.Pager
+}
+
+func (p *ListWorkerBlocksPager) CurrentPage() *ListWorkerBlocksOutput {
+	return p.Pager.CurrentPage().(*ListWorkerBlocksOutput)
 }
 
 const opListWorkersWithQualificationType = "ListWorkersWithQualificationType"
@@ -2076,6 +2068,7 @@ const opListWorkersWithQualificationType = "ListWorkersWithQualificationType"
 type ListWorkersWithQualificationTypeRequest struct {
 	*aws.Request
 	Input *ListWorkersWithQualificationTypeInput
+	Copy  func(*ListWorkersWithQualificationTypeInput) ListWorkersWithQualificationTypeRequest
 }
 
 // Send marshals and sends the ListWorkersWithQualificationType API request.
@@ -2123,57 +2116,53 @@ func (c *MTurk) ListWorkersWithQualificationTypeRequest(input *ListWorkersWithQu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListWorkersWithQualificationTypeRequest{Request: req, Input: input}
+	return ListWorkersWithQualificationTypeRequest{Request: req, Input: input, Copy: c.ListWorkersWithQualificationTypeRequest}
 }
 
-// ListWorkersWithQualificationTypePages iterates over the pages of a ListWorkersWithQualificationType operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListWorkersWithQualificationType method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListWorkersWithQualificationTypeRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListWorkersWithQualificationType operation.
-//    pageNum := 0
-//    err := client.ListWorkersWithQualificationTypePages(params,
-//        func(page *ListWorkersWithQualificationTypeOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListWorkersWithQualificationTypeRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MTurk) ListWorkersWithQualificationTypePages(input *ListWorkersWithQualificationTypeInput, fn func(*ListWorkersWithQualificationTypeOutput, bool) bool) error {
-	return c.ListWorkersWithQualificationTypePagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListWorkersWithQualificationTypeRequest) Paginate(opts ...aws.Option) ListWorkersWithQualificationTypePager {
+	return ListWorkersWithQualificationTypePager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListWorkersWithQualificationTypeInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListWorkersWithQualificationTypePagesWithContext same as ListWorkersWithQualificationTypePages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MTurk) ListWorkersWithQualificationTypePagesWithContext(ctx aws.Context, input *ListWorkersWithQualificationTypeInput, fn func(*ListWorkersWithQualificationTypeOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListWorkersWithQualificationTypeInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListWorkersWithQualificationTypeRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListWorkersWithQualificationTypeOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListWorkersWithQualificationTypePager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListWorkersWithQualificationTypePager struct {
+	aws.Pager
+}
+
+func (p *ListWorkersWithQualificationTypePager) CurrentPage() *ListWorkersWithQualificationTypeOutput {
+	return p.Pager.CurrentPage().(*ListWorkersWithQualificationTypeOutput)
 }
 
 const opNotifyWorkers = "NotifyWorkers"
@@ -2182,6 +2171,7 @@ const opNotifyWorkers = "NotifyWorkers"
 type NotifyWorkersRequest struct {
 	*aws.Request
 	Input *NotifyWorkersInput
+	Copy  func(*NotifyWorkersInput) NotifyWorkersRequest
 }
 
 // Send marshals and sends the NotifyWorkers API request.
@@ -2226,7 +2216,7 @@ func (c *MTurk) NotifyWorkersRequest(input *NotifyWorkersInput) NotifyWorkersReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return NotifyWorkersRequest{Request: req, Input: input}
+	return NotifyWorkersRequest{Request: req, Input: input, Copy: c.NotifyWorkersRequest}
 }
 
 const opRejectAssignment = "RejectAssignment"
@@ -2235,6 +2225,7 @@ const opRejectAssignment = "RejectAssignment"
 type RejectAssignmentRequest struct {
 	*aws.Request
 	Input *RejectAssignmentInput
+	Copy  func(*RejectAssignmentInput) RejectAssignmentRequest
 }
 
 // Send marshals and sends the RejectAssignment API request.
@@ -2283,7 +2274,7 @@ func (c *MTurk) RejectAssignmentRequest(input *RejectAssignmentInput) RejectAssi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RejectAssignmentRequest{Request: req, Input: input}
+	return RejectAssignmentRequest{Request: req, Input: input, Copy: c.RejectAssignmentRequest}
 }
 
 const opRejectQualificationRequest = "RejectQualificationRequest"
@@ -2292,6 +2283,7 @@ const opRejectQualificationRequest = "RejectQualificationRequest"
 type RejectQualificationRequestRequest struct {
 	*aws.Request
 	Input *RejectQualificationRequestInput
+	Copy  func(*RejectQualificationRequestInput) RejectQualificationRequestRequest
 }
 
 // Send marshals and sends the RejectQualificationRequest API request.
@@ -2335,7 +2327,7 @@ func (c *MTurk) RejectQualificationRequestRequest(input *RejectQualificationRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RejectQualificationRequestRequest{Request: req, Input: input}
+	return RejectQualificationRequestRequest{Request: req, Input: input, Copy: c.RejectQualificationRequestRequest}
 }
 
 const opSendBonus = "SendBonus"
@@ -2344,6 +2336,7 @@ const opSendBonus = "SendBonus"
 type SendBonusRequest struct {
 	*aws.Request
 	Input *SendBonusInput
+	Copy  func(*SendBonusInput) SendBonusRequest
 }
 
 // Send marshals and sends the SendBonus API request.
@@ -2392,7 +2385,7 @@ func (c *MTurk) SendBonusRequest(input *SendBonusInput) SendBonusRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendBonusRequest{Request: req, Input: input}
+	return SendBonusRequest{Request: req, Input: input, Copy: c.SendBonusRequest}
 }
 
 const opSendTestEventNotification = "SendTestEventNotification"
@@ -2401,6 +2394,7 @@ const opSendTestEventNotification = "SendTestEventNotification"
 type SendTestEventNotificationRequest struct {
 	*aws.Request
 	Input *SendTestEventNotificationInput
+	Copy  func(*SendTestEventNotificationInput) SendTestEventNotificationRequest
 }
 
 // Send marshals and sends the SendTestEventNotification API request.
@@ -2446,7 +2440,7 @@ func (c *MTurk) SendTestEventNotificationRequest(input *SendTestEventNotificatio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendTestEventNotificationRequest{Request: req, Input: input}
+	return SendTestEventNotificationRequest{Request: req, Input: input, Copy: c.SendTestEventNotificationRequest}
 }
 
 const opUpdateExpirationForHIT = "UpdateExpirationForHIT"
@@ -2455,6 +2449,7 @@ const opUpdateExpirationForHIT = "UpdateExpirationForHIT"
 type UpdateExpirationForHITRequest struct {
 	*aws.Request
 	Input *UpdateExpirationForHITInput
+	Copy  func(*UpdateExpirationForHITInput) UpdateExpirationForHITRequest
 }
 
 // Send marshals and sends the UpdateExpirationForHIT API request.
@@ -2497,7 +2492,7 @@ func (c *MTurk) UpdateExpirationForHITRequest(input *UpdateExpirationForHITInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateExpirationForHITRequest{Request: req, Input: input}
+	return UpdateExpirationForHITRequest{Request: req, Input: input, Copy: c.UpdateExpirationForHITRequest}
 }
 
 const opUpdateHITReviewStatus = "UpdateHITReviewStatus"
@@ -2506,6 +2501,7 @@ const opUpdateHITReviewStatus = "UpdateHITReviewStatus"
 type UpdateHITReviewStatusRequest struct {
 	*aws.Request
 	Input *UpdateHITReviewStatusInput
+	Copy  func(*UpdateHITReviewStatusInput) UpdateHITReviewStatusRequest
 }
 
 // Send marshals and sends the UpdateHITReviewStatus API request.
@@ -2548,7 +2544,7 @@ func (c *MTurk) UpdateHITReviewStatusRequest(input *UpdateHITReviewStatusInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateHITReviewStatusRequest{Request: req, Input: input}
+	return UpdateHITReviewStatusRequest{Request: req, Input: input, Copy: c.UpdateHITReviewStatusRequest}
 }
 
 const opUpdateHITTypeOfHIT = "UpdateHITTypeOfHIT"
@@ -2557,6 +2553,7 @@ const opUpdateHITTypeOfHIT = "UpdateHITTypeOfHIT"
 type UpdateHITTypeOfHITRequest struct {
 	*aws.Request
 	Input *UpdateHITTypeOfHITInput
+	Copy  func(*UpdateHITTypeOfHITInput) UpdateHITTypeOfHITRequest
 }
 
 // Send marshals and sends the UpdateHITTypeOfHIT API request.
@@ -2600,7 +2597,7 @@ func (c *MTurk) UpdateHITTypeOfHITRequest(input *UpdateHITTypeOfHITInput) Update
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateHITTypeOfHITRequest{Request: req, Input: input}
+	return UpdateHITTypeOfHITRequest{Request: req, Input: input, Copy: c.UpdateHITTypeOfHITRequest}
 }
 
 const opUpdateNotificationSettings = "UpdateNotificationSettings"
@@ -2609,6 +2606,7 @@ const opUpdateNotificationSettings = "UpdateNotificationSettings"
 type UpdateNotificationSettingsRequest struct {
 	*aws.Request
 	Input *UpdateNotificationSettingsInput
+	Copy  func(*UpdateNotificationSettingsInput) UpdateNotificationSettingsRequest
 }
 
 // Send marshals and sends the UpdateNotificationSettings API request.
@@ -2658,7 +2656,7 @@ func (c *MTurk) UpdateNotificationSettingsRequest(input *UpdateNotificationSetti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateNotificationSettingsRequest{Request: req, Input: input}
+	return UpdateNotificationSettingsRequest{Request: req, Input: input, Copy: c.UpdateNotificationSettingsRequest}
 }
 
 const opUpdateQualificationType = "UpdateQualificationType"
@@ -2667,6 +2665,7 @@ const opUpdateQualificationType = "UpdateQualificationType"
 type UpdateQualificationTypeRequest struct {
 	*aws.Request
 	Input *UpdateQualificationTypeInput
+	Copy  func(*UpdateQualificationTypeInput) UpdateQualificationTypeRequest
 }
 
 // Send marshals and sends the UpdateQualificationType API request.
@@ -2737,7 +2736,7 @@ func (c *MTurk) UpdateQualificationTypeRequest(input *UpdateQualificationTypeInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateQualificationTypeRequest{Request: req, Input: input}
+	return UpdateQualificationTypeRequest{Request: req, Input: input, Copy: c.UpdateQualificationTypeRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mturk-requester-2017-01-17/AcceptQualificationRequestRequest

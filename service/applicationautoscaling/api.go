@@ -16,6 +16,7 @@ const opDeleteScalingPolicy = "DeleteScalingPolicy"
 type DeleteScalingPolicyRequest struct {
 	*aws.Request
 	Input *DeleteScalingPolicyInput
+	Copy  func(*DeleteScalingPolicyInput) DeleteScalingPolicyRequest
 }
 
 // Send marshals and sends the DeleteScalingPolicy API request.
@@ -62,7 +63,7 @@ func (c *ApplicationAutoScaling) DeleteScalingPolicyRequest(input *DeleteScaling
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteScalingPolicyRequest{Request: req, Input: input}
+	return DeleteScalingPolicyRequest{Request: req, Input: input, Copy: c.DeleteScalingPolicyRequest}
 }
 
 const opDeleteScheduledAction = "DeleteScheduledAction"
@@ -71,6 +72,7 @@ const opDeleteScheduledAction = "DeleteScheduledAction"
 type DeleteScheduledActionRequest struct {
 	*aws.Request
 	Input *DeleteScheduledActionInput
+	Copy  func(*DeleteScheduledActionInput) DeleteScheduledActionRequest
 }
 
 // Send marshals and sends the DeleteScheduledAction API request.
@@ -111,7 +113,7 @@ func (c *ApplicationAutoScaling) DeleteScheduledActionRequest(input *DeleteSched
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteScheduledActionRequest{Request: req, Input: input}
+	return DeleteScheduledActionRequest{Request: req, Input: input, Copy: c.DeleteScheduledActionRequest}
 }
 
 const opDeregisterScalableTarget = "DeregisterScalableTarget"
@@ -120,6 +122,7 @@ const opDeregisterScalableTarget = "DeregisterScalableTarget"
 type DeregisterScalableTargetRequest struct {
 	*aws.Request
 	Input *DeregisterScalableTargetInput
+	Copy  func(*DeregisterScalableTargetInput) DeregisterScalableTargetRequest
 }
 
 // Send marshals and sends the DeregisterScalableTarget API request.
@@ -165,7 +168,7 @@ func (c *ApplicationAutoScaling) DeregisterScalableTargetRequest(input *Deregist
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterScalableTargetRequest{Request: req, Input: input}
+	return DeregisterScalableTargetRequest{Request: req, Input: input, Copy: c.DeregisterScalableTargetRequest}
 }
 
 const opDescribeScalableTargets = "DescribeScalableTargets"
@@ -174,6 +177,7 @@ const opDescribeScalableTargets = "DescribeScalableTargets"
 type DescribeScalableTargetsRequest struct {
 	*aws.Request
 	Input *DescribeScalableTargetsInput
+	Copy  func(*DescribeScalableTargetsInput) DescribeScalableTargetsRequest
 }
 
 // Send marshals and sends the DescribeScalableTargets API request.
@@ -227,57 +231,53 @@ func (c *ApplicationAutoScaling) DescribeScalableTargetsRequest(input *DescribeS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScalableTargetsRequest{Request: req, Input: input}
+	return DescribeScalableTargetsRequest{Request: req, Input: input, Copy: c.DescribeScalableTargetsRequest}
 }
 
-// DescribeScalableTargetsPages iterates over the pages of a DescribeScalableTargets operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeScalableTargets method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeScalableTargetsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeScalableTargets operation.
-//    pageNum := 0
-//    err := client.DescribeScalableTargetsPages(params,
-//        func(page *DescribeScalableTargetsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeScalableTargetsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ApplicationAutoScaling) DescribeScalableTargetsPages(input *DescribeScalableTargetsInput, fn func(*DescribeScalableTargetsOutput, bool) bool) error {
-	return c.DescribeScalableTargetsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeScalableTargetsRequest) Paginate(opts ...aws.Option) DescribeScalableTargetsPager {
+	return DescribeScalableTargetsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeScalableTargetsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeScalableTargetsPagesWithContext same as DescribeScalableTargetsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalableTargetsPagesWithContext(ctx aws.Context, input *DescribeScalableTargetsInput, fn func(*DescribeScalableTargetsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeScalableTargetsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeScalableTargetsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeScalableTargetsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeScalableTargetsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeScalableTargetsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeScalableTargetsPager) CurrentPage() *DescribeScalableTargetsOutput {
+	return p.Pager.CurrentPage().(*DescribeScalableTargetsOutput)
 }
 
 const opDescribeScalingActivities = "DescribeScalingActivities"
@@ -286,6 +286,7 @@ const opDescribeScalingActivities = "DescribeScalingActivities"
 type DescribeScalingActivitiesRequest struct {
 	*aws.Request
 	Input *DescribeScalingActivitiesInput
+	Copy  func(*DescribeScalingActivitiesInput) DescribeScalingActivitiesRequest
 }
 
 // Send marshals and sends the DescribeScalingActivities API request.
@@ -340,57 +341,53 @@ func (c *ApplicationAutoScaling) DescribeScalingActivitiesRequest(input *Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScalingActivitiesRequest{Request: req, Input: input}
+	return DescribeScalingActivitiesRequest{Request: req, Input: input, Copy: c.DescribeScalingActivitiesRequest}
 }
 
-// DescribeScalingActivitiesPages iterates over the pages of a DescribeScalingActivities operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeScalingActivities method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeScalingActivitiesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeScalingActivities operation.
-//    pageNum := 0
-//    err := client.DescribeScalingActivitiesPages(params,
-//        func(page *DescribeScalingActivitiesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeScalingActivitiesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ApplicationAutoScaling) DescribeScalingActivitiesPages(input *DescribeScalingActivitiesInput, fn func(*DescribeScalingActivitiesOutput, bool) bool) error {
-	return c.DescribeScalingActivitiesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) DescribeScalingActivitiesPager {
+	return DescribeScalingActivitiesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeScalingActivitiesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeScalingActivitiesPagesWithContext same as DescribeScalingActivitiesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalingActivitiesPagesWithContext(ctx aws.Context, input *DescribeScalingActivitiesInput, fn func(*DescribeScalingActivitiesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeScalingActivitiesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeScalingActivitiesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeScalingActivitiesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeScalingActivitiesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeScalingActivitiesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeScalingActivitiesPager) CurrentPage() *DescribeScalingActivitiesOutput {
+	return p.Pager.CurrentPage().(*DescribeScalingActivitiesOutput)
 }
 
 const opDescribeScalingPolicies = "DescribeScalingPolicies"
@@ -399,6 +396,7 @@ const opDescribeScalingPolicies = "DescribeScalingPolicies"
 type DescribeScalingPoliciesRequest struct {
 	*aws.Request
 	Input *DescribeScalingPoliciesInput
+	Copy  func(*DescribeScalingPoliciesInput) DescribeScalingPoliciesRequest
 }
 
 // Send marshals and sends the DescribeScalingPolicies API request.
@@ -451,57 +449,53 @@ func (c *ApplicationAutoScaling) DescribeScalingPoliciesRequest(input *DescribeS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScalingPoliciesRequest{Request: req, Input: input}
+	return DescribeScalingPoliciesRequest{Request: req, Input: input, Copy: c.DescribeScalingPoliciesRequest}
 }
 
-// DescribeScalingPoliciesPages iterates over the pages of a DescribeScalingPolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeScalingPolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeScalingPoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeScalingPolicies operation.
-//    pageNum := 0
-//    err := client.DescribeScalingPoliciesPages(params,
-//        func(page *DescribeScalingPoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeScalingPoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ApplicationAutoScaling) DescribeScalingPoliciesPages(input *DescribeScalingPoliciesInput, fn func(*DescribeScalingPoliciesOutput, bool) bool) error {
-	return c.DescribeScalingPoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeScalingPoliciesRequest) Paginate(opts ...aws.Option) DescribeScalingPoliciesPager {
+	return DescribeScalingPoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeScalingPoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeScalingPoliciesPagesWithContext same as DescribeScalingPoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ApplicationAutoScaling) DescribeScalingPoliciesPagesWithContext(ctx aws.Context, input *DescribeScalingPoliciesInput, fn func(*DescribeScalingPoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeScalingPoliciesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeScalingPoliciesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeScalingPoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeScalingPoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeScalingPoliciesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeScalingPoliciesPager) CurrentPage() *DescribeScalingPoliciesOutput {
+	return p.Pager.CurrentPage().(*DescribeScalingPoliciesOutput)
 }
 
 const opDescribeScheduledActions = "DescribeScheduledActions"
@@ -510,6 +504,7 @@ const opDescribeScheduledActions = "DescribeScheduledActions"
 type DescribeScheduledActionsRequest struct {
 	*aws.Request
 	Input *DescribeScheduledActionsInput
+	Copy  func(*DescribeScheduledActionsInput) DescribeScheduledActionsRequest
 }
 
 // Send marshals and sends the DescribeScheduledActions API request.
@@ -556,7 +551,7 @@ func (c *ApplicationAutoScaling) DescribeScheduledActionsRequest(input *Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScheduledActionsRequest{Request: req, Input: input}
+	return DescribeScheduledActionsRequest{Request: req, Input: input, Copy: c.DescribeScheduledActionsRequest}
 }
 
 const opPutScalingPolicy = "PutScalingPolicy"
@@ -565,6 +560,7 @@ const opPutScalingPolicy = "PutScalingPolicy"
 type PutScalingPolicyRequest struct {
 	*aws.Request
 	Input *PutScalingPolicyInput
+	Copy  func(*PutScalingPolicyInput) PutScalingPolicyRequest
 }
 
 // Send marshals and sends the PutScalingPolicy API request.
@@ -617,7 +613,7 @@ func (c *ApplicationAutoScaling) PutScalingPolicyRequest(input *PutScalingPolicy
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutScalingPolicyRequest{Request: req, Input: input}
+	return PutScalingPolicyRequest{Request: req, Input: input, Copy: c.PutScalingPolicyRequest}
 }
 
 const opPutScheduledAction = "PutScheduledAction"
@@ -626,6 +622,7 @@ const opPutScheduledAction = "PutScheduledAction"
 type PutScheduledActionRequest struct {
 	*aws.Request
 	Input *PutScheduledActionInput
+	Copy  func(*PutScheduledActionInput) PutScheduledActionRequest
 }
 
 // Send marshals and sends the PutScheduledAction API request.
@@ -680,7 +677,7 @@ func (c *ApplicationAutoScaling) PutScheduledActionRequest(input *PutScheduledAc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutScheduledActionRequest{Request: req, Input: input}
+	return PutScheduledActionRequest{Request: req, Input: input, Copy: c.PutScheduledActionRequest}
 }
 
 const opRegisterScalableTarget = "RegisterScalableTarget"
@@ -689,6 +686,7 @@ const opRegisterScalableTarget = "RegisterScalableTarget"
 type RegisterScalableTargetRequest struct {
 	*aws.Request
 	Input *RegisterScalableTargetInput
+	Copy  func(*RegisterScalableTargetInput) RegisterScalableTargetRequest
 }
 
 // Send marshals and sends the RegisterScalableTarget API request.
@@ -737,7 +735,7 @@ func (c *ApplicationAutoScaling) RegisterScalableTargetRequest(input *RegisterSc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterScalableTargetRequest{Request: req, Input: input}
+	return RegisterScalableTargetRequest{Request: req, Input: input, Copy: c.RegisterScalableTargetRequest}
 }
 
 // Represents a CloudWatch alarm associated with a scaling policy.

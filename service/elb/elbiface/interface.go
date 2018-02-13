@@ -101,9 +101,6 @@ type ELBAPI interface {
 
 	DescribeLoadBalancersRequest(*elb.DescribeLoadBalancersInput) elb.DescribeLoadBalancersRequest
 
-	DescribeLoadBalancersPages(*elb.DescribeLoadBalancersInput, func(*elb.DescribeLoadBalancersOutput, bool) bool) error
-	DescribeLoadBalancersPagesWithContext(aws.Context, *elb.DescribeLoadBalancersInput, func(*elb.DescribeLoadBalancersOutput, bool) bool, ...aws.Option) error
-
 	DescribeTagsRequest(*elb.DescribeTagsInput) elb.DescribeTagsRequest
 
 	DetachLoadBalancerFromSubnetsRequest(*elb.DetachLoadBalancerFromSubnetsInput) elb.DetachLoadBalancerFromSubnetsRequest

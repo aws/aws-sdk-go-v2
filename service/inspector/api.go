@@ -18,6 +18,7 @@ const opAddAttributesToFindings = "AddAttributesToFindings"
 type AddAttributesToFindingsRequest struct {
 	*aws.Request
 	Input *AddAttributesToFindingsInput
+	Copy  func(*AddAttributesToFindingsInput) AddAttributesToFindingsRequest
 }
 
 // Send marshals and sends the AddAttributesToFindings API request.
@@ -59,7 +60,7 @@ func (c *Inspector) AddAttributesToFindingsRequest(input *AddAttributesToFinding
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddAttributesToFindingsRequest{Request: req, Input: input}
+	return AddAttributesToFindingsRequest{Request: req, Input: input, Copy: c.AddAttributesToFindingsRequest}
 }
 
 const opCreateAssessmentTarget = "CreateAssessmentTarget"
@@ -68,6 +69,7 @@ const opCreateAssessmentTarget = "CreateAssessmentTarget"
 type CreateAssessmentTargetRequest struct {
 	*aws.Request
 	Input *CreateAssessmentTargetInput
+	Copy  func(*CreateAssessmentTargetInput) CreateAssessmentTargetRequest
 }
 
 // Send marshals and sends the CreateAssessmentTarget API request.
@@ -114,7 +116,7 @@ func (c *Inspector) CreateAssessmentTargetRequest(input *CreateAssessmentTargetI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAssessmentTargetRequest{Request: req, Input: input}
+	return CreateAssessmentTargetRequest{Request: req, Input: input, Copy: c.CreateAssessmentTargetRequest}
 }
 
 const opCreateAssessmentTemplate = "CreateAssessmentTemplate"
@@ -123,6 +125,7 @@ const opCreateAssessmentTemplate = "CreateAssessmentTemplate"
 type CreateAssessmentTemplateRequest struct {
 	*aws.Request
 	Input *CreateAssessmentTemplateInput
+	Copy  func(*CreateAssessmentTemplateInput) CreateAssessmentTemplateRequest
 }
 
 // Send marshals and sends the CreateAssessmentTemplate API request.
@@ -167,7 +170,7 @@ func (c *Inspector) CreateAssessmentTemplateRequest(input *CreateAssessmentTempl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAssessmentTemplateRequest{Request: req, Input: input}
+	return CreateAssessmentTemplateRequest{Request: req, Input: input, Copy: c.CreateAssessmentTemplateRequest}
 }
 
 const opCreateResourceGroup = "CreateResourceGroup"
@@ -176,6 +179,7 @@ const opCreateResourceGroup = "CreateResourceGroup"
 type CreateResourceGroupRequest struct {
 	*aws.Request
 	Input *CreateResourceGroupInput
+	Copy  func(*CreateResourceGroupInput) CreateResourceGroupRequest
 }
 
 // Send marshals and sends the CreateResourceGroup API request.
@@ -219,7 +223,7 @@ func (c *Inspector) CreateResourceGroupRequest(input *CreateResourceGroupInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateResourceGroupRequest{Request: req, Input: input}
+	return CreateResourceGroupRequest{Request: req, Input: input, Copy: c.CreateResourceGroupRequest}
 }
 
 const opDeleteAssessmentRun = "DeleteAssessmentRun"
@@ -228,6 +232,7 @@ const opDeleteAssessmentRun = "DeleteAssessmentRun"
 type DeleteAssessmentRunRequest struct {
 	*aws.Request
 	Input *DeleteAssessmentRunInput
+	Copy  func(*DeleteAssessmentRunInput) DeleteAssessmentRunRequest
 }
 
 // Send marshals and sends the DeleteAssessmentRun API request.
@@ -271,7 +276,7 @@ func (c *Inspector) DeleteAssessmentRunRequest(input *DeleteAssessmentRunInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAssessmentRunRequest{Request: req, Input: input}
+	return DeleteAssessmentRunRequest{Request: req, Input: input, Copy: c.DeleteAssessmentRunRequest}
 }
 
 const opDeleteAssessmentTarget = "DeleteAssessmentTarget"
@@ -280,6 +285,7 @@ const opDeleteAssessmentTarget = "DeleteAssessmentTarget"
 type DeleteAssessmentTargetRequest struct {
 	*aws.Request
 	Input *DeleteAssessmentTargetInput
+	Copy  func(*DeleteAssessmentTargetInput) DeleteAssessmentTargetRequest
 }
 
 // Send marshals and sends the DeleteAssessmentTarget API request.
@@ -323,7 +329,7 @@ func (c *Inspector) DeleteAssessmentTargetRequest(input *DeleteAssessmentTargetI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAssessmentTargetRequest{Request: req, Input: input}
+	return DeleteAssessmentTargetRequest{Request: req, Input: input, Copy: c.DeleteAssessmentTargetRequest}
 }
 
 const opDeleteAssessmentTemplate = "DeleteAssessmentTemplate"
@@ -332,6 +338,7 @@ const opDeleteAssessmentTemplate = "DeleteAssessmentTemplate"
 type DeleteAssessmentTemplateRequest struct {
 	*aws.Request
 	Input *DeleteAssessmentTemplateInput
+	Copy  func(*DeleteAssessmentTemplateInput) DeleteAssessmentTemplateRequest
 }
 
 // Send marshals and sends the DeleteAssessmentTemplate API request.
@@ -375,7 +382,7 @@ func (c *Inspector) DeleteAssessmentTemplateRequest(input *DeleteAssessmentTempl
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAssessmentTemplateRequest{Request: req, Input: input}
+	return DeleteAssessmentTemplateRequest{Request: req, Input: input, Copy: c.DeleteAssessmentTemplateRequest}
 }
 
 const opDescribeAssessmentRuns = "DescribeAssessmentRuns"
@@ -384,6 +391,7 @@ const opDescribeAssessmentRuns = "DescribeAssessmentRuns"
 type DescribeAssessmentRunsRequest struct {
 	*aws.Request
 	Input *DescribeAssessmentRunsInput
+	Copy  func(*DescribeAssessmentRunsInput) DescribeAssessmentRunsRequest
 }
 
 // Send marshals and sends the DescribeAssessmentRuns API request.
@@ -425,7 +433,7 @@ func (c *Inspector) DescribeAssessmentRunsRequest(input *DescribeAssessmentRunsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAssessmentRunsRequest{Request: req, Input: input}
+	return DescribeAssessmentRunsRequest{Request: req, Input: input, Copy: c.DescribeAssessmentRunsRequest}
 }
 
 const opDescribeAssessmentTargets = "DescribeAssessmentTargets"
@@ -434,6 +442,7 @@ const opDescribeAssessmentTargets = "DescribeAssessmentTargets"
 type DescribeAssessmentTargetsRequest struct {
 	*aws.Request
 	Input *DescribeAssessmentTargetsInput
+	Copy  func(*DescribeAssessmentTargetsInput) DescribeAssessmentTargetsRequest
 }
 
 // Send marshals and sends the DescribeAssessmentTargets API request.
@@ -475,7 +484,7 @@ func (c *Inspector) DescribeAssessmentTargetsRequest(input *DescribeAssessmentTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAssessmentTargetsRequest{Request: req, Input: input}
+	return DescribeAssessmentTargetsRequest{Request: req, Input: input, Copy: c.DescribeAssessmentTargetsRequest}
 }
 
 const opDescribeAssessmentTemplates = "DescribeAssessmentTemplates"
@@ -484,6 +493,7 @@ const opDescribeAssessmentTemplates = "DescribeAssessmentTemplates"
 type DescribeAssessmentTemplatesRequest struct {
 	*aws.Request
 	Input *DescribeAssessmentTemplatesInput
+	Copy  func(*DescribeAssessmentTemplatesInput) DescribeAssessmentTemplatesRequest
 }
 
 // Send marshals and sends the DescribeAssessmentTemplates API request.
@@ -525,7 +535,7 @@ func (c *Inspector) DescribeAssessmentTemplatesRequest(input *DescribeAssessment
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAssessmentTemplatesRequest{Request: req, Input: input}
+	return DescribeAssessmentTemplatesRequest{Request: req, Input: input, Copy: c.DescribeAssessmentTemplatesRequest}
 }
 
 const opDescribeCrossAccountAccessRole = "DescribeCrossAccountAccessRole"
@@ -534,6 +544,7 @@ const opDescribeCrossAccountAccessRole = "DescribeCrossAccountAccessRole"
 type DescribeCrossAccountAccessRoleRequest struct {
 	*aws.Request
 	Input *DescribeCrossAccountAccessRoleInput
+	Copy  func(*DescribeCrossAccountAccessRoleInput) DescribeCrossAccountAccessRoleRequest
 }
 
 // Send marshals and sends the DescribeCrossAccountAccessRole API request.
@@ -574,7 +585,7 @@ func (c *Inspector) DescribeCrossAccountAccessRoleRequest(input *DescribeCrossAc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCrossAccountAccessRoleRequest{Request: req, Input: input}
+	return DescribeCrossAccountAccessRoleRequest{Request: req, Input: input, Copy: c.DescribeCrossAccountAccessRoleRequest}
 }
 
 const opDescribeFindings = "DescribeFindings"
@@ -583,6 +594,7 @@ const opDescribeFindings = "DescribeFindings"
 type DescribeFindingsRequest struct {
 	*aws.Request
 	Input *DescribeFindingsInput
+	Copy  func(*DescribeFindingsInput) DescribeFindingsRequest
 }
 
 // Send marshals and sends the DescribeFindings API request.
@@ -623,7 +635,7 @@ func (c *Inspector) DescribeFindingsRequest(input *DescribeFindingsInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeFindingsRequest{Request: req, Input: input}
+	return DescribeFindingsRequest{Request: req, Input: input, Copy: c.DescribeFindingsRequest}
 }
 
 const opDescribeResourceGroups = "DescribeResourceGroups"
@@ -632,6 +644,7 @@ const opDescribeResourceGroups = "DescribeResourceGroups"
 type DescribeResourceGroupsRequest struct {
 	*aws.Request
 	Input *DescribeResourceGroupsInput
+	Copy  func(*DescribeResourceGroupsInput) DescribeResourceGroupsRequest
 }
 
 // Send marshals and sends the DescribeResourceGroups API request.
@@ -673,7 +686,7 @@ func (c *Inspector) DescribeResourceGroupsRequest(input *DescribeResourceGroupsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeResourceGroupsRequest{Request: req, Input: input}
+	return DescribeResourceGroupsRequest{Request: req, Input: input, Copy: c.DescribeResourceGroupsRequest}
 }
 
 const opDescribeRulesPackages = "DescribeRulesPackages"
@@ -682,6 +695,7 @@ const opDescribeRulesPackages = "DescribeRulesPackages"
 type DescribeRulesPackagesRequest struct {
 	*aws.Request
 	Input *DescribeRulesPackagesInput
+	Copy  func(*DescribeRulesPackagesInput) DescribeRulesPackagesRequest
 }
 
 // Send marshals and sends the DescribeRulesPackages API request.
@@ -723,7 +737,7 @@ func (c *Inspector) DescribeRulesPackagesRequest(input *DescribeRulesPackagesInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRulesPackagesRequest{Request: req, Input: input}
+	return DescribeRulesPackagesRequest{Request: req, Input: input, Copy: c.DescribeRulesPackagesRequest}
 }
 
 const opGetAssessmentReport = "GetAssessmentReport"
@@ -732,6 +746,7 @@ const opGetAssessmentReport = "GetAssessmentReport"
 type GetAssessmentReportRequest struct {
 	*aws.Request
 	Input *GetAssessmentReportInput
+	Copy  func(*GetAssessmentReportInput) GetAssessmentReportRequest
 }
 
 // Send marshals and sends the GetAssessmentReport API request.
@@ -773,7 +788,7 @@ func (c *Inspector) GetAssessmentReportRequest(input *GetAssessmentReportInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAssessmentReportRequest{Request: req, Input: input}
+	return GetAssessmentReportRequest{Request: req, Input: input, Copy: c.GetAssessmentReportRequest}
 }
 
 const opGetTelemetryMetadata = "GetTelemetryMetadata"
@@ -782,6 +797,7 @@ const opGetTelemetryMetadata = "GetTelemetryMetadata"
 type GetTelemetryMetadataRequest struct {
 	*aws.Request
 	Input *GetTelemetryMetadataInput
+	Copy  func(*GetTelemetryMetadataInput) GetTelemetryMetadataRequest
 }
 
 // Send marshals and sends the GetTelemetryMetadata API request.
@@ -823,7 +839,7 @@ func (c *Inspector) GetTelemetryMetadataRequest(input *GetTelemetryMetadataInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTelemetryMetadataRequest{Request: req, Input: input}
+	return GetTelemetryMetadataRequest{Request: req, Input: input, Copy: c.GetTelemetryMetadataRequest}
 }
 
 const opListAssessmentRunAgents = "ListAssessmentRunAgents"
@@ -832,6 +848,7 @@ const opListAssessmentRunAgents = "ListAssessmentRunAgents"
 type ListAssessmentRunAgentsRequest struct {
 	*aws.Request
 	Input *ListAssessmentRunAgentsInput
+	Copy  func(*ListAssessmentRunAgentsInput) ListAssessmentRunAgentsRequest
 }
 
 // Send marshals and sends the ListAssessmentRunAgents API request.
@@ -879,57 +896,53 @@ func (c *Inspector) ListAssessmentRunAgentsRequest(input *ListAssessmentRunAgent
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAssessmentRunAgentsRequest{Request: req, Input: input}
+	return ListAssessmentRunAgentsRequest{Request: req, Input: input, Copy: c.ListAssessmentRunAgentsRequest}
 }
 
-// ListAssessmentRunAgentsPages iterates over the pages of a ListAssessmentRunAgents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAssessmentRunAgents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAssessmentRunAgentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAssessmentRunAgents operation.
-//    pageNum := 0
-//    err := client.ListAssessmentRunAgentsPages(params,
-//        func(page *ListAssessmentRunAgentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAssessmentRunAgentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Inspector) ListAssessmentRunAgentsPages(input *ListAssessmentRunAgentsInput, fn func(*ListAssessmentRunAgentsOutput, bool) bool) error {
-	return c.ListAssessmentRunAgentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAssessmentRunAgentsRequest) Paginate(opts ...aws.Option) ListAssessmentRunAgentsPager {
+	return ListAssessmentRunAgentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAssessmentRunAgentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAssessmentRunAgentsPagesWithContext same as ListAssessmentRunAgentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Inspector) ListAssessmentRunAgentsPagesWithContext(ctx aws.Context, input *ListAssessmentRunAgentsInput, fn func(*ListAssessmentRunAgentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAssessmentRunAgentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAssessmentRunAgentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssessmentRunAgentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAssessmentRunAgentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAssessmentRunAgentsPager struct {
+	aws.Pager
+}
+
+func (p *ListAssessmentRunAgentsPager) CurrentPage() *ListAssessmentRunAgentsOutput {
+	return p.Pager.CurrentPage().(*ListAssessmentRunAgentsOutput)
 }
 
 const opListAssessmentRuns = "ListAssessmentRuns"
@@ -938,6 +951,7 @@ const opListAssessmentRuns = "ListAssessmentRuns"
 type ListAssessmentRunsRequest struct {
 	*aws.Request
 	Input *ListAssessmentRunsInput
+	Copy  func(*ListAssessmentRunsInput) ListAssessmentRunsRequest
 }
 
 // Send marshals and sends the ListAssessmentRuns API request.
@@ -985,57 +999,53 @@ func (c *Inspector) ListAssessmentRunsRequest(input *ListAssessmentRunsInput) Li
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAssessmentRunsRequest{Request: req, Input: input}
+	return ListAssessmentRunsRequest{Request: req, Input: input, Copy: c.ListAssessmentRunsRequest}
 }
 
-// ListAssessmentRunsPages iterates over the pages of a ListAssessmentRuns operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAssessmentRuns method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAssessmentRunsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAssessmentRuns operation.
-//    pageNum := 0
-//    err := client.ListAssessmentRunsPages(params,
-//        func(page *ListAssessmentRunsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAssessmentRunsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Inspector) ListAssessmentRunsPages(input *ListAssessmentRunsInput, fn func(*ListAssessmentRunsOutput, bool) bool) error {
-	return c.ListAssessmentRunsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAssessmentRunsRequest) Paginate(opts ...aws.Option) ListAssessmentRunsPager {
+	return ListAssessmentRunsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAssessmentRunsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAssessmentRunsPagesWithContext same as ListAssessmentRunsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Inspector) ListAssessmentRunsPagesWithContext(ctx aws.Context, input *ListAssessmentRunsInput, fn func(*ListAssessmentRunsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAssessmentRunsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAssessmentRunsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssessmentRunsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAssessmentRunsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAssessmentRunsPager struct {
+	aws.Pager
+}
+
+func (p *ListAssessmentRunsPager) CurrentPage() *ListAssessmentRunsOutput {
+	return p.Pager.CurrentPage().(*ListAssessmentRunsOutput)
 }
 
 const opListAssessmentTargets = "ListAssessmentTargets"
@@ -1044,6 +1054,7 @@ const opListAssessmentTargets = "ListAssessmentTargets"
 type ListAssessmentTargetsRequest struct {
 	*aws.Request
 	Input *ListAssessmentTargetsInput
+	Copy  func(*ListAssessmentTargetsInput) ListAssessmentTargetsRequest
 }
 
 // Send marshals and sends the ListAssessmentTargets API request.
@@ -1092,57 +1103,53 @@ func (c *Inspector) ListAssessmentTargetsRequest(input *ListAssessmentTargetsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAssessmentTargetsRequest{Request: req, Input: input}
+	return ListAssessmentTargetsRequest{Request: req, Input: input, Copy: c.ListAssessmentTargetsRequest}
 }
 
-// ListAssessmentTargetsPages iterates over the pages of a ListAssessmentTargets operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAssessmentTargets method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAssessmentTargetsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAssessmentTargets operation.
-//    pageNum := 0
-//    err := client.ListAssessmentTargetsPages(params,
-//        func(page *ListAssessmentTargetsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAssessmentTargetsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Inspector) ListAssessmentTargetsPages(input *ListAssessmentTargetsInput, fn func(*ListAssessmentTargetsOutput, bool) bool) error {
-	return c.ListAssessmentTargetsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAssessmentTargetsRequest) Paginate(opts ...aws.Option) ListAssessmentTargetsPager {
+	return ListAssessmentTargetsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAssessmentTargetsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAssessmentTargetsPagesWithContext same as ListAssessmentTargetsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Inspector) ListAssessmentTargetsPagesWithContext(ctx aws.Context, input *ListAssessmentTargetsInput, fn func(*ListAssessmentTargetsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAssessmentTargetsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAssessmentTargetsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssessmentTargetsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAssessmentTargetsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAssessmentTargetsPager struct {
+	aws.Pager
+}
+
+func (p *ListAssessmentTargetsPager) CurrentPage() *ListAssessmentTargetsOutput {
+	return p.Pager.CurrentPage().(*ListAssessmentTargetsOutput)
 }
 
 const opListAssessmentTemplates = "ListAssessmentTemplates"
@@ -1151,6 +1158,7 @@ const opListAssessmentTemplates = "ListAssessmentTemplates"
 type ListAssessmentTemplatesRequest struct {
 	*aws.Request
 	Input *ListAssessmentTemplatesInput
+	Copy  func(*ListAssessmentTemplatesInput) ListAssessmentTemplatesRequest
 }
 
 // Send marshals and sends the ListAssessmentTemplates API request.
@@ -1198,57 +1206,53 @@ func (c *Inspector) ListAssessmentTemplatesRequest(input *ListAssessmentTemplate
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAssessmentTemplatesRequest{Request: req, Input: input}
+	return ListAssessmentTemplatesRequest{Request: req, Input: input, Copy: c.ListAssessmentTemplatesRequest}
 }
 
-// ListAssessmentTemplatesPages iterates over the pages of a ListAssessmentTemplates operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAssessmentTemplates method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAssessmentTemplatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAssessmentTemplates operation.
-//    pageNum := 0
-//    err := client.ListAssessmentTemplatesPages(params,
-//        func(page *ListAssessmentTemplatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAssessmentTemplatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Inspector) ListAssessmentTemplatesPages(input *ListAssessmentTemplatesInput, fn func(*ListAssessmentTemplatesOutput, bool) bool) error {
-	return c.ListAssessmentTemplatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAssessmentTemplatesRequest) Paginate(opts ...aws.Option) ListAssessmentTemplatesPager {
+	return ListAssessmentTemplatesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAssessmentTemplatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAssessmentTemplatesPagesWithContext same as ListAssessmentTemplatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Inspector) ListAssessmentTemplatesPagesWithContext(ctx aws.Context, input *ListAssessmentTemplatesInput, fn func(*ListAssessmentTemplatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAssessmentTemplatesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAssessmentTemplatesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssessmentTemplatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAssessmentTemplatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAssessmentTemplatesPager struct {
+	aws.Pager
+}
+
+func (p *ListAssessmentTemplatesPager) CurrentPage() *ListAssessmentTemplatesOutput {
+	return p.Pager.CurrentPage().(*ListAssessmentTemplatesOutput)
 }
 
 const opListEventSubscriptions = "ListEventSubscriptions"
@@ -1257,6 +1261,7 @@ const opListEventSubscriptions = "ListEventSubscriptions"
 type ListEventSubscriptionsRequest struct {
 	*aws.Request
 	Input *ListEventSubscriptionsInput
+	Copy  func(*ListEventSubscriptionsInput) ListEventSubscriptionsRequest
 }
 
 // Send marshals and sends the ListEventSubscriptions API request.
@@ -1305,57 +1310,53 @@ func (c *Inspector) ListEventSubscriptionsRequest(input *ListEventSubscriptionsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListEventSubscriptionsRequest{Request: req, Input: input}
+	return ListEventSubscriptionsRequest{Request: req, Input: input, Copy: c.ListEventSubscriptionsRequest}
 }
 
-// ListEventSubscriptionsPages iterates over the pages of a ListEventSubscriptions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListEventSubscriptions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListEventSubscriptionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListEventSubscriptions operation.
-//    pageNum := 0
-//    err := client.ListEventSubscriptionsPages(params,
-//        func(page *ListEventSubscriptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListEventSubscriptionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Inspector) ListEventSubscriptionsPages(input *ListEventSubscriptionsInput, fn func(*ListEventSubscriptionsOutput, bool) bool) error {
-	return c.ListEventSubscriptionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListEventSubscriptionsRequest) Paginate(opts ...aws.Option) ListEventSubscriptionsPager {
+	return ListEventSubscriptionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListEventSubscriptionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListEventSubscriptionsPagesWithContext same as ListEventSubscriptionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Inspector) ListEventSubscriptionsPagesWithContext(ctx aws.Context, input *ListEventSubscriptionsInput, fn func(*ListEventSubscriptionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListEventSubscriptionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListEventSubscriptionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListEventSubscriptionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListEventSubscriptionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListEventSubscriptionsPager struct {
+	aws.Pager
+}
+
+func (p *ListEventSubscriptionsPager) CurrentPage() *ListEventSubscriptionsOutput {
+	return p.Pager.CurrentPage().(*ListEventSubscriptionsOutput)
 }
 
 const opListFindings = "ListFindings"
@@ -1364,6 +1365,7 @@ const opListFindings = "ListFindings"
 type ListFindingsRequest struct {
 	*aws.Request
 	Input *ListFindingsInput
+	Copy  func(*ListFindingsInput) ListFindingsRequest
 }
 
 // Send marshals and sends the ListFindings API request.
@@ -1411,57 +1413,53 @@ func (c *Inspector) ListFindingsRequest(input *ListFindingsInput) ListFindingsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFindingsRequest{Request: req, Input: input}
+	return ListFindingsRequest{Request: req, Input: input, Copy: c.ListFindingsRequest}
 }
 
-// ListFindingsPages iterates over the pages of a ListFindings operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListFindings method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListFindingsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListFindings operation.
-//    pageNum := 0
-//    err := client.ListFindingsPages(params,
-//        func(page *ListFindingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListFindingsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Inspector) ListFindingsPages(input *ListFindingsInput, fn func(*ListFindingsOutput, bool) bool) error {
-	return c.ListFindingsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListFindingsRequest) Paginate(opts ...aws.Option) ListFindingsPager {
+	return ListFindingsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListFindingsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListFindingsPagesWithContext same as ListFindingsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Inspector) ListFindingsPagesWithContext(ctx aws.Context, input *ListFindingsInput, fn func(*ListFindingsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListFindingsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListFindingsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFindingsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListFindingsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListFindingsPager struct {
+	aws.Pager
+}
+
+func (p *ListFindingsPager) CurrentPage() *ListFindingsOutput {
+	return p.Pager.CurrentPage().(*ListFindingsOutput)
 }
 
 const opListRulesPackages = "ListRulesPackages"
@@ -1470,6 +1468,7 @@ const opListRulesPackages = "ListRulesPackages"
 type ListRulesPackagesRequest struct {
 	*aws.Request
 	Input *ListRulesPackagesInput
+	Copy  func(*ListRulesPackagesInput) ListRulesPackagesRequest
 }
 
 // Send marshals and sends the ListRulesPackages API request.
@@ -1516,57 +1515,53 @@ func (c *Inspector) ListRulesPackagesRequest(input *ListRulesPackagesInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRulesPackagesRequest{Request: req, Input: input}
+	return ListRulesPackagesRequest{Request: req, Input: input, Copy: c.ListRulesPackagesRequest}
 }
 
-// ListRulesPackagesPages iterates over the pages of a ListRulesPackages operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListRulesPackages method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListRulesPackagesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListRulesPackages operation.
-//    pageNum := 0
-//    err := client.ListRulesPackagesPages(params,
-//        func(page *ListRulesPackagesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListRulesPackagesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Inspector) ListRulesPackagesPages(input *ListRulesPackagesInput, fn func(*ListRulesPackagesOutput, bool) bool) error {
-	return c.ListRulesPackagesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListRulesPackagesRequest) Paginate(opts ...aws.Option) ListRulesPackagesPager {
+	return ListRulesPackagesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListRulesPackagesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListRulesPackagesPagesWithContext same as ListRulesPackagesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Inspector) ListRulesPackagesPagesWithContext(ctx aws.Context, input *ListRulesPackagesInput, fn func(*ListRulesPackagesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListRulesPackagesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListRulesPackagesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListRulesPackagesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListRulesPackagesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListRulesPackagesPager struct {
+	aws.Pager
+}
+
+func (p *ListRulesPackagesPager) CurrentPage() *ListRulesPackagesOutput {
+	return p.Pager.CurrentPage().(*ListRulesPackagesOutput)
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -1575,6 +1570,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -1615,7 +1611,7 @@ func (c *Inspector) ListTagsForResourceRequest(input *ListTagsForResourceInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opPreviewAgents = "PreviewAgents"
@@ -1624,6 +1620,7 @@ const opPreviewAgents = "PreviewAgents"
 type PreviewAgentsRequest struct {
 	*aws.Request
 	Input *PreviewAgentsInput
+	Copy  func(*PreviewAgentsInput) PreviewAgentsRequest
 }
 
 // Send marshals and sends the PreviewAgents API request.
@@ -1671,57 +1668,53 @@ func (c *Inspector) PreviewAgentsRequest(input *PreviewAgentsInput) PreviewAgent
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PreviewAgentsRequest{Request: req, Input: input}
+	return PreviewAgentsRequest{Request: req, Input: input, Copy: c.PreviewAgentsRequest}
 }
 
-// PreviewAgentsPages iterates over the pages of a PreviewAgents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See PreviewAgents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a PreviewAgentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a PreviewAgents operation.
-//    pageNum := 0
-//    err := client.PreviewAgentsPages(params,
-//        func(page *PreviewAgentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.PreviewAgentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Inspector) PreviewAgentsPages(input *PreviewAgentsInput, fn func(*PreviewAgentsOutput, bool) bool) error {
-	return c.PreviewAgentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *PreviewAgentsRequest) Paginate(opts ...aws.Option) PreviewAgentsPager {
+	return PreviewAgentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *PreviewAgentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// PreviewAgentsPagesWithContext same as PreviewAgentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Inspector) PreviewAgentsPagesWithContext(ctx aws.Context, input *PreviewAgentsInput, fn func(*PreviewAgentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *PreviewAgentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.PreviewAgentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*PreviewAgentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// PreviewAgentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type PreviewAgentsPager struct {
+	aws.Pager
+}
+
+func (p *PreviewAgentsPager) CurrentPage() *PreviewAgentsOutput {
+	return p.Pager.CurrentPage().(*PreviewAgentsOutput)
 }
 
 const opRegisterCrossAccountAccessRole = "RegisterCrossAccountAccessRole"
@@ -1730,6 +1723,7 @@ const opRegisterCrossAccountAccessRole = "RegisterCrossAccountAccessRole"
 type RegisterCrossAccountAccessRoleRequest struct {
 	*aws.Request
 	Input *RegisterCrossAccountAccessRoleInput
+	Copy  func(*RegisterCrossAccountAccessRoleInput) RegisterCrossAccountAccessRoleRequest
 }
 
 // Send marshals and sends the RegisterCrossAccountAccessRole API request.
@@ -1773,7 +1767,7 @@ func (c *Inspector) RegisterCrossAccountAccessRoleRequest(input *RegisterCrossAc
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterCrossAccountAccessRoleRequest{Request: req, Input: input}
+	return RegisterCrossAccountAccessRoleRequest{Request: req, Input: input, Copy: c.RegisterCrossAccountAccessRoleRequest}
 }
 
 const opRemoveAttributesFromFindings = "RemoveAttributesFromFindings"
@@ -1782,6 +1776,7 @@ const opRemoveAttributesFromFindings = "RemoveAttributesFromFindings"
 type RemoveAttributesFromFindingsRequest struct {
 	*aws.Request
 	Input *RemoveAttributesFromFindingsInput
+	Copy  func(*RemoveAttributesFromFindingsInput) RemoveAttributesFromFindingsRequest
 }
 
 // Send marshals and sends the RemoveAttributesFromFindings API request.
@@ -1824,7 +1819,7 @@ func (c *Inspector) RemoveAttributesFromFindingsRequest(input *RemoveAttributesF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveAttributesFromFindingsRequest{Request: req, Input: input}
+	return RemoveAttributesFromFindingsRequest{Request: req, Input: input, Copy: c.RemoveAttributesFromFindingsRequest}
 }
 
 const opSetTagsForResource = "SetTagsForResource"
@@ -1833,6 +1828,7 @@ const opSetTagsForResource = "SetTagsForResource"
 type SetTagsForResourceRequest struct {
 	*aws.Request
 	Input *SetTagsForResourceInput
+	Copy  func(*SetTagsForResourceInput) SetTagsForResourceRequest
 }
 
 // Send marshals and sends the SetTagsForResource API request.
@@ -1876,7 +1872,7 @@ func (c *Inspector) SetTagsForResourceRequest(input *SetTagsForResourceInput) Se
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetTagsForResourceRequest{Request: req, Input: input}
+	return SetTagsForResourceRequest{Request: req, Input: input, Copy: c.SetTagsForResourceRequest}
 }
 
 const opStartAssessmentRun = "StartAssessmentRun"
@@ -1885,6 +1881,7 @@ const opStartAssessmentRun = "StartAssessmentRun"
 type StartAssessmentRunRequest struct {
 	*aws.Request
 	Input *StartAssessmentRunInput
+	Copy  func(*StartAssessmentRunInput) StartAssessmentRunRequest
 }
 
 // Send marshals and sends the StartAssessmentRun API request.
@@ -1927,7 +1924,7 @@ func (c *Inspector) StartAssessmentRunRequest(input *StartAssessmentRunInput) St
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartAssessmentRunRequest{Request: req, Input: input}
+	return StartAssessmentRunRequest{Request: req, Input: input, Copy: c.StartAssessmentRunRequest}
 }
 
 const opStopAssessmentRun = "StopAssessmentRun"
@@ -1936,6 +1933,7 @@ const opStopAssessmentRun = "StopAssessmentRun"
 type StopAssessmentRunRequest struct {
 	*aws.Request
 	Input *StopAssessmentRunInput
+	Copy  func(*StopAssessmentRunInput) StopAssessmentRunRequest
 }
 
 // Send marshals and sends the StopAssessmentRun API request.
@@ -1978,7 +1976,7 @@ func (c *Inspector) StopAssessmentRunRequest(input *StopAssessmentRunInput) Stop
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopAssessmentRunRequest{Request: req, Input: input}
+	return StopAssessmentRunRequest{Request: req, Input: input, Copy: c.StopAssessmentRunRequest}
 }
 
 const opSubscribeToEvent = "SubscribeToEvent"
@@ -1987,6 +1985,7 @@ const opSubscribeToEvent = "SubscribeToEvent"
 type SubscribeToEventRequest struct {
 	*aws.Request
 	Input *SubscribeToEventInput
+	Copy  func(*SubscribeToEventInput) SubscribeToEventRequest
 }
 
 // Send marshals and sends the SubscribeToEvent API request.
@@ -2030,7 +2029,7 @@ func (c *Inspector) SubscribeToEventRequest(input *SubscribeToEventInput) Subscr
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SubscribeToEventRequest{Request: req, Input: input}
+	return SubscribeToEventRequest{Request: req, Input: input, Copy: c.SubscribeToEventRequest}
 }
 
 const opUnsubscribeFromEvent = "UnsubscribeFromEvent"
@@ -2039,6 +2038,7 @@ const opUnsubscribeFromEvent = "UnsubscribeFromEvent"
 type UnsubscribeFromEventRequest struct {
 	*aws.Request
 	Input *UnsubscribeFromEventInput
+	Copy  func(*UnsubscribeFromEventInput) UnsubscribeFromEventRequest
 }
 
 // Send marshals and sends the UnsubscribeFromEvent API request.
@@ -2082,7 +2082,7 @@ func (c *Inspector) UnsubscribeFromEventRequest(input *UnsubscribeFromEventInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UnsubscribeFromEventRequest{Request: req, Input: input}
+	return UnsubscribeFromEventRequest{Request: req, Input: input, Copy: c.UnsubscribeFromEventRequest}
 }
 
 const opUpdateAssessmentTarget = "UpdateAssessmentTarget"
@@ -2091,6 +2091,7 @@ const opUpdateAssessmentTarget = "UpdateAssessmentTarget"
 type UpdateAssessmentTargetRequest struct {
 	*aws.Request
 	Input *UpdateAssessmentTargetInput
+	Copy  func(*UpdateAssessmentTargetInput) UpdateAssessmentTargetRequest
 }
 
 // Send marshals and sends the UpdateAssessmentTarget API request.
@@ -2134,7 +2135,7 @@ func (c *Inspector) UpdateAssessmentTargetRequest(input *UpdateAssessmentTargetI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAssessmentTargetRequest{Request: req, Input: input}
+	return UpdateAssessmentTargetRequest{Request: req, Input: input, Copy: c.UpdateAssessmentTargetRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/inspector-2016-02-16/AddAttributesToFindingsRequest

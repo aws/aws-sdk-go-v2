@@ -18,6 +18,7 @@ const opAttachInstances = "AttachInstances"
 type AttachInstancesRequest struct {
 	*aws.Request
 	Input *AttachInstancesInput
+	Copy  func(*AttachInstancesInput) AttachInstancesRequest
 }
 
 // Send marshals and sends the AttachInstances API request.
@@ -74,7 +75,7 @@ func (c *AutoScaling) AttachInstancesRequest(input *AttachInstancesInput) Attach
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachInstancesRequest{Request: req, Input: input}
+	return AttachInstancesRequest{Request: req, Input: input, Copy: c.AttachInstancesRequest}
 }
 
 const opAttachLoadBalancerTargetGroups = "AttachLoadBalancerTargetGroups"
@@ -83,6 +84,7 @@ const opAttachLoadBalancerTargetGroups = "AttachLoadBalancerTargetGroups"
 type AttachLoadBalancerTargetGroupsRequest struct {
 	*aws.Request
 	Input *AttachLoadBalancerTargetGroupsInput
+	Copy  func(*AttachLoadBalancerTargetGroupsInput) AttachLoadBalancerTargetGroupsRequest
 }
 
 // Send marshals and sends the AttachLoadBalancerTargetGroups API request.
@@ -130,7 +132,7 @@ func (c *AutoScaling) AttachLoadBalancerTargetGroupsRequest(input *AttachLoadBal
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachLoadBalancerTargetGroupsRequest{Request: req, Input: input}
+	return AttachLoadBalancerTargetGroupsRequest{Request: req, Input: input, Copy: c.AttachLoadBalancerTargetGroupsRequest}
 }
 
 const opAttachLoadBalancers = "AttachLoadBalancers"
@@ -139,6 +141,7 @@ const opAttachLoadBalancers = "AttachLoadBalancers"
 type AttachLoadBalancersRequest struct {
 	*aws.Request
 	Input *AttachLoadBalancersInput
+	Copy  func(*AttachLoadBalancersInput) AttachLoadBalancersRequest
 }
 
 // Send marshals and sends the AttachLoadBalancers API request.
@@ -189,7 +192,7 @@ func (c *AutoScaling) AttachLoadBalancersRequest(input *AttachLoadBalancersInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachLoadBalancersRequest{Request: req, Input: input}
+	return AttachLoadBalancersRequest{Request: req, Input: input, Copy: c.AttachLoadBalancersRequest}
 }
 
 const opCompleteLifecycleAction = "CompleteLifecycleAction"
@@ -198,6 +201,7 @@ const opCompleteLifecycleAction = "CompleteLifecycleAction"
 type CompleteLifecycleActionRequest struct {
 	*aws.Request
 	Input *CompleteLifecycleActionInput
+	Copy  func(*CompleteLifecycleActionInput) CompleteLifecycleActionRequest
 }
 
 // Send marshals and sends the CompleteLifecycleAction API request.
@@ -260,7 +264,7 @@ func (c *AutoScaling) CompleteLifecycleActionRequest(input *CompleteLifecycleAct
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CompleteLifecycleActionRequest{Request: req, Input: input}
+	return CompleteLifecycleActionRequest{Request: req, Input: input, Copy: c.CompleteLifecycleActionRequest}
 }
 
 const opCreateAutoScalingGroup = "CreateAutoScalingGroup"
@@ -269,6 +273,7 @@ const opCreateAutoScalingGroup = "CreateAutoScalingGroup"
 type CreateAutoScalingGroupRequest struct {
 	*aws.Request
 	Input *CreateAutoScalingGroupInput
+	Copy  func(*CreateAutoScalingGroupInput) CreateAutoScalingGroupRequest
 }
 
 // Send marshals and sends the CreateAutoScalingGroup API request.
@@ -318,7 +323,7 @@ func (c *AutoScaling) CreateAutoScalingGroupRequest(input *CreateAutoScalingGrou
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAutoScalingGroupRequest{Request: req, Input: input}
+	return CreateAutoScalingGroupRequest{Request: req, Input: input, Copy: c.CreateAutoScalingGroupRequest}
 }
 
 const opCreateLaunchConfiguration = "CreateLaunchConfiguration"
@@ -327,6 +332,7 @@ const opCreateLaunchConfiguration = "CreateLaunchConfiguration"
 type CreateLaunchConfigurationRequest struct {
 	*aws.Request
 	Input *CreateLaunchConfigurationInput
+	Copy  func(*CreateLaunchConfigurationInput) CreateLaunchConfigurationRequest
 }
 
 // Send marshals and sends the CreateLaunchConfiguration API request.
@@ -376,7 +382,7 @@ func (c *AutoScaling) CreateLaunchConfigurationRequest(input *CreateLaunchConfig
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLaunchConfigurationRequest{Request: req, Input: input}
+	return CreateLaunchConfigurationRequest{Request: req, Input: input, Copy: c.CreateLaunchConfigurationRequest}
 }
 
 const opCreateOrUpdateTags = "CreateOrUpdateTags"
@@ -385,6 +391,7 @@ const opCreateOrUpdateTags = "CreateOrUpdateTags"
 type CreateOrUpdateTagsRequest struct {
 	*aws.Request
 	Input *CreateOrUpdateTagsInput
+	Copy  func(*CreateOrUpdateTagsInput) CreateOrUpdateTagsRequest
 }
 
 // Send marshals and sends the CreateOrUpdateTags API request.
@@ -433,7 +440,7 @@ func (c *AutoScaling) CreateOrUpdateTagsRequest(input *CreateOrUpdateTagsInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateOrUpdateTagsRequest{Request: req, Input: input}
+	return CreateOrUpdateTagsRequest{Request: req, Input: input, Copy: c.CreateOrUpdateTagsRequest}
 }
 
 const opDeleteAutoScalingGroup = "DeleteAutoScalingGroup"
@@ -442,6 +449,7 @@ const opDeleteAutoScalingGroup = "DeleteAutoScalingGroup"
 type DeleteAutoScalingGroupRequest struct {
 	*aws.Request
 	Input *DeleteAutoScalingGroupInput
+	Copy  func(*DeleteAutoScalingGroupInput) DeleteAutoScalingGroupRequest
 }
 
 // Send marshals and sends the DeleteAutoScalingGroup API request.
@@ -498,7 +506,7 @@ func (c *AutoScaling) DeleteAutoScalingGroupRequest(input *DeleteAutoScalingGrou
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAutoScalingGroupRequest{Request: req, Input: input}
+	return DeleteAutoScalingGroupRequest{Request: req, Input: input, Copy: c.DeleteAutoScalingGroupRequest}
 }
 
 const opDeleteLaunchConfiguration = "DeleteLaunchConfiguration"
@@ -507,6 +515,7 @@ const opDeleteLaunchConfiguration = "DeleteLaunchConfiguration"
 type DeleteLaunchConfigurationRequest struct {
 	*aws.Request
 	Input *DeleteLaunchConfigurationInput
+	Copy  func(*DeleteLaunchConfigurationInput) DeleteLaunchConfigurationRequest
 }
 
 // Send marshals and sends the DeleteLaunchConfiguration API request.
@@ -553,7 +562,7 @@ func (c *AutoScaling) DeleteLaunchConfigurationRequest(input *DeleteLaunchConfig
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLaunchConfigurationRequest{Request: req, Input: input}
+	return DeleteLaunchConfigurationRequest{Request: req, Input: input, Copy: c.DeleteLaunchConfigurationRequest}
 }
 
 const opDeleteLifecycleHook = "DeleteLifecycleHook"
@@ -562,6 +571,7 @@ const opDeleteLifecycleHook = "DeleteLifecycleHook"
 type DeleteLifecycleHookRequest struct {
 	*aws.Request
 	Input *DeleteLifecycleHookInput
+	Copy  func(*DeleteLifecycleHookInput) DeleteLifecycleHookRequest
 }
 
 // Send marshals and sends the DeleteLifecycleHook API request.
@@ -605,7 +615,7 @@ func (c *AutoScaling) DeleteLifecycleHookRequest(input *DeleteLifecycleHookInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLifecycleHookRequest{Request: req, Input: input}
+	return DeleteLifecycleHookRequest{Request: req, Input: input, Copy: c.DeleteLifecycleHookRequest}
 }
 
 const opDeleteNotificationConfiguration = "DeleteNotificationConfiguration"
@@ -614,6 +624,7 @@ const opDeleteNotificationConfiguration = "DeleteNotificationConfiguration"
 type DeleteNotificationConfigurationRequest struct {
 	*aws.Request
 	Input *DeleteNotificationConfigurationInput
+	Copy  func(*DeleteNotificationConfigurationInput) DeleteNotificationConfigurationRequest
 }
 
 // Send marshals and sends the DeleteNotificationConfiguration API request.
@@ -656,7 +667,7 @@ func (c *AutoScaling) DeleteNotificationConfigurationRequest(input *DeleteNotifi
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNotificationConfigurationRequest{Request: req, Input: input}
+	return DeleteNotificationConfigurationRequest{Request: req, Input: input, Copy: c.DeleteNotificationConfigurationRequest}
 }
 
 const opDeletePolicy = "DeletePolicy"
@@ -665,6 +676,7 @@ const opDeletePolicy = "DeletePolicy"
 type DeletePolicyRequest struct {
 	*aws.Request
 	Input *DeletePolicyInput
+	Copy  func(*DeletePolicyInput) DeletePolicyRequest
 }
 
 // Send marshals and sends the DeletePolicy API request.
@@ -710,7 +722,7 @@ func (c *AutoScaling) DeletePolicyRequest(input *DeletePolicyInput) DeletePolicy
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePolicyRequest{Request: req, Input: input}
+	return DeletePolicyRequest{Request: req, Input: input, Copy: c.DeletePolicyRequest}
 }
 
 const opDeleteScheduledAction = "DeleteScheduledAction"
@@ -719,6 +731,7 @@ const opDeleteScheduledAction = "DeleteScheduledAction"
 type DeleteScheduledActionRequest struct {
 	*aws.Request
 	Input *DeleteScheduledActionInput
+	Copy  func(*DeleteScheduledActionInput) DeleteScheduledActionRequest
 }
 
 // Send marshals and sends the DeleteScheduledAction API request.
@@ -761,7 +774,7 @@ func (c *AutoScaling) DeleteScheduledActionRequest(input *DeleteScheduledActionI
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteScheduledActionRequest{Request: req, Input: input}
+	return DeleteScheduledActionRequest{Request: req, Input: input, Copy: c.DeleteScheduledActionRequest}
 }
 
 const opDeleteTags = "DeleteTags"
@@ -770,6 +783,7 @@ const opDeleteTags = "DeleteTags"
 type DeleteTagsRequest struct {
 	*aws.Request
 	Input *DeleteTagsInput
+	Copy  func(*DeleteTagsInput) DeleteTagsRequest
 }
 
 // Send marshals and sends the DeleteTags API request.
@@ -812,7 +826,7 @@ func (c *AutoScaling) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsReques
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTagsRequest{Request: req, Input: input}
+	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
@@ -821,6 +835,7 @@ const opDescribeAccountLimits = "DescribeAccountLimits"
 type DescribeAccountLimitsRequest struct {
 	*aws.Request
 	Input *DescribeAccountLimitsInput
+	Copy  func(*DescribeAccountLimitsInput) DescribeAccountLimitsRequest
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
@@ -865,7 +880,7 @@ func (c *AutoScaling) DescribeAccountLimitsRequest(input *DescribeAccountLimitsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAccountLimitsRequest{Request: req, Input: input}
+	return DescribeAccountLimitsRequest{Request: req, Input: input, Copy: c.DescribeAccountLimitsRequest}
 }
 
 const opDescribeAdjustmentTypes = "DescribeAdjustmentTypes"
@@ -874,6 +889,7 @@ const opDescribeAdjustmentTypes = "DescribeAdjustmentTypes"
 type DescribeAdjustmentTypesRequest struct {
 	*aws.Request
 	Input *DescribeAdjustmentTypesInput
+	Copy  func(*DescribeAdjustmentTypesInput) DescribeAdjustmentTypesRequest
 }
 
 // Send marshals and sends the DescribeAdjustmentTypes API request.
@@ -914,7 +930,7 @@ func (c *AutoScaling) DescribeAdjustmentTypesRequest(input *DescribeAdjustmentTy
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAdjustmentTypesRequest{Request: req, Input: input}
+	return DescribeAdjustmentTypesRequest{Request: req, Input: input, Copy: c.DescribeAdjustmentTypesRequest}
 }
 
 const opDescribeAutoScalingGroups = "DescribeAutoScalingGroups"
@@ -923,6 +939,7 @@ const opDescribeAutoScalingGroups = "DescribeAutoScalingGroups"
 type DescribeAutoScalingGroupsRequest struct {
 	*aws.Request
 	Input *DescribeAutoScalingGroupsInput
+	Copy  func(*DescribeAutoScalingGroupsInput) DescribeAutoScalingGroupsRequest
 }
 
 // Send marshals and sends the DescribeAutoScalingGroups API request.
@@ -969,57 +986,53 @@ func (c *AutoScaling) DescribeAutoScalingGroupsRequest(input *DescribeAutoScalin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAutoScalingGroupsRequest{Request: req, Input: input}
+	return DescribeAutoScalingGroupsRequest{Request: req, Input: input, Copy: c.DescribeAutoScalingGroupsRequest}
 }
 
-// DescribeAutoScalingGroupsPages iterates over the pages of a DescribeAutoScalingGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeAutoScalingGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeAutoScalingGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeAutoScalingGroups operation.
-//    pageNum := 0
-//    err := client.DescribeAutoScalingGroupsPages(params,
-//        func(page *DescribeAutoScalingGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeAutoScalingGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AutoScaling) DescribeAutoScalingGroupsPages(input *DescribeAutoScalingGroupsInput, fn func(*DescribeAutoScalingGroupsOutput, bool) bool) error {
-	return c.DescribeAutoScalingGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeAutoScalingGroupsRequest) Paginate(opts ...aws.Option) DescribeAutoScalingGroupsPager {
+	return DescribeAutoScalingGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeAutoScalingGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeAutoScalingGroupsPagesWithContext same as DescribeAutoScalingGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeAutoScalingGroupsPagesWithContext(ctx aws.Context, input *DescribeAutoScalingGroupsInput, fn func(*DescribeAutoScalingGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeAutoScalingGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeAutoScalingGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeAutoScalingGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeAutoScalingGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeAutoScalingGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeAutoScalingGroupsPager) CurrentPage() *DescribeAutoScalingGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeAutoScalingGroupsOutput)
 }
 
 const opDescribeAutoScalingInstances = "DescribeAutoScalingInstances"
@@ -1028,6 +1041,7 @@ const opDescribeAutoScalingInstances = "DescribeAutoScalingInstances"
 type DescribeAutoScalingInstancesRequest struct {
 	*aws.Request
 	Input *DescribeAutoScalingInstancesInput
+	Copy  func(*DescribeAutoScalingInstancesInput) DescribeAutoScalingInstancesRequest
 }
 
 // Send marshals and sends the DescribeAutoScalingInstances API request.
@@ -1074,57 +1088,53 @@ func (c *AutoScaling) DescribeAutoScalingInstancesRequest(input *DescribeAutoSca
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAutoScalingInstancesRequest{Request: req, Input: input}
+	return DescribeAutoScalingInstancesRequest{Request: req, Input: input, Copy: c.DescribeAutoScalingInstancesRequest}
 }
 
-// DescribeAutoScalingInstancesPages iterates over the pages of a DescribeAutoScalingInstances operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeAutoScalingInstances method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeAutoScalingInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeAutoScalingInstances operation.
-//    pageNum := 0
-//    err := client.DescribeAutoScalingInstancesPages(params,
-//        func(page *DescribeAutoScalingInstancesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeAutoScalingInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AutoScaling) DescribeAutoScalingInstancesPages(input *DescribeAutoScalingInstancesInput, fn func(*DescribeAutoScalingInstancesOutput, bool) bool) error {
-	return c.DescribeAutoScalingInstancesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeAutoScalingInstancesRequest) Paginate(opts ...aws.Option) DescribeAutoScalingInstancesPager {
+	return DescribeAutoScalingInstancesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeAutoScalingInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeAutoScalingInstancesPagesWithContext same as DescribeAutoScalingInstancesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeAutoScalingInstancesPagesWithContext(ctx aws.Context, input *DescribeAutoScalingInstancesInput, fn func(*DescribeAutoScalingInstancesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeAutoScalingInstancesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeAutoScalingInstancesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeAutoScalingInstancesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeAutoScalingInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeAutoScalingInstancesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeAutoScalingInstancesPager) CurrentPage() *DescribeAutoScalingInstancesOutput {
+	return p.Pager.CurrentPage().(*DescribeAutoScalingInstancesOutput)
 }
 
 const opDescribeAutoScalingNotificationTypes = "DescribeAutoScalingNotificationTypes"
@@ -1133,6 +1143,7 @@ const opDescribeAutoScalingNotificationTypes = "DescribeAutoScalingNotificationT
 type DescribeAutoScalingNotificationTypesRequest struct {
 	*aws.Request
 	Input *DescribeAutoScalingNotificationTypesInput
+	Copy  func(*DescribeAutoScalingNotificationTypesInput) DescribeAutoScalingNotificationTypesRequest
 }
 
 // Send marshals and sends the DescribeAutoScalingNotificationTypes API request.
@@ -1173,7 +1184,7 @@ func (c *AutoScaling) DescribeAutoScalingNotificationTypesRequest(input *Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAutoScalingNotificationTypesRequest{Request: req, Input: input}
+	return DescribeAutoScalingNotificationTypesRequest{Request: req, Input: input, Copy: c.DescribeAutoScalingNotificationTypesRequest}
 }
 
 const opDescribeLaunchConfigurations = "DescribeLaunchConfigurations"
@@ -1182,6 +1193,7 @@ const opDescribeLaunchConfigurations = "DescribeLaunchConfigurations"
 type DescribeLaunchConfigurationsRequest struct {
 	*aws.Request
 	Input *DescribeLaunchConfigurationsInput
+	Copy  func(*DescribeLaunchConfigurationsInput) DescribeLaunchConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeLaunchConfigurations API request.
@@ -1228,57 +1240,53 @@ func (c *AutoScaling) DescribeLaunchConfigurationsRequest(input *DescribeLaunchC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLaunchConfigurationsRequest{Request: req, Input: input}
+	return DescribeLaunchConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeLaunchConfigurationsRequest}
 }
 
-// DescribeLaunchConfigurationsPages iterates over the pages of a DescribeLaunchConfigurations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeLaunchConfigurations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeLaunchConfigurationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeLaunchConfigurations operation.
-//    pageNum := 0
-//    err := client.DescribeLaunchConfigurationsPages(params,
-//        func(page *DescribeLaunchConfigurationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeLaunchConfigurationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AutoScaling) DescribeLaunchConfigurationsPages(input *DescribeLaunchConfigurationsInput, fn func(*DescribeLaunchConfigurationsOutput, bool) bool) error {
-	return c.DescribeLaunchConfigurationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeLaunchConfigurationsRequest) Paginate(opts ...aws.Option) DescribeLaunchConfigurationsPager {
+	return DescribeLaunchConfigurationsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeLaunchConfigurationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeLaunchConfigurationsPagesWithContext same as DescribeLaunchConfigurationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeLaunchConfigurationsPagesWithContext(ctx aws.Context, input *DescribeLaunchConfigurationsInput, fn func(*DescribeLaunchConfigurationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeLaunchConfigurationsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeLaunchConfigurationsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeLaunchConfigurationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeLaunchConfigurationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeLaunchConfigurationsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeLaunchConfigurationsPager) CurrentPage() *DescribeLaunchConfigurationsOutput {
+	return p.Pager.CurrentPage().(*DescribeLaunchConfigurationsOutput)
 }
 
 const opDescribeLifecycleHookTypes = "DescribeLifecycleHookTypes"
@@ -1287,6 +1295,7 @@ const opDescribeLifecycleHookTypes = "DescribeLifecycleHookTypes"
 type DescribeLifecycleHookTypesRequest struct {
 	*aws.Request
 	Input *DescribeLifecycleHookTypesInput
+	Copy  func(*DescribeLifecycleHookTypesInput) DescribeLifecycleHookTypesRequest
 }
 
 // Send marshals and sends the DescribeLifecycleHookTypes API request.
@@ -1327,7 +1336,7 @@ func (c *AutoScaling) DescribeLifecycleHookTypesRequest(input *DescribeLifecycle
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLifecycleHookTypesRequest{Request: req, Input: input}
+	return DescribeLifecycleHookTypesRequest{Request: req, Input: input, Copy: c.DescribeLifecycleHookTypesRequest}
 }
 
 const opDescribeLifecycleHooks = "DescribeLifecycleHooks"
@@ -1336,6 +1345,7 @@ const opDescribeLifecycleHooks = "DescribeLifecycleHooks"
 type DescribeLifecycleHooksRequest struct {
 	*aws.Request
 	Input *DescribeLifecycleHooksInput
+	Copy  func(*DescribeLifecycleHooksInput) DescribeLifecycleHooksRequest
 }
 
 // Send marshals and sends the DescribeLifecycleHooks API request.
@@ -1376,7 +1386,7 @@ func (c *AutoScaling) DescribeLifecycleHooksRequest(input *DescribeLifecycleHook
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLifecycleHooksRequest{Request: req, Input: input}
+	return DescribeLifecycleHooksRequest{Request: req, Input: input, Copy: c.DescribeLifecycleHooksRequest}
 }
 
 const opDescribeLoadBalancerTargetGroups = "DescribeLoadBalancerTargetGroups"
@@ -1385,6 +1395,7 @@ const opDescribeLoadBalancerTargetGroups = "DescribeLoadBalancerTargetGroups"
 type DescribeLoadBalancerTargetGroupsRequest struct {
 	*aws.Request
 	Input *DescribeLoadBalancerTargetGroupsInput
+	Copy  func(*DescribeLoadBalancerTargetGroupsInput) DescribeLoadBalancerTargetGroupsRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancerTargetGroups API request.
@@ -1425,7 +1436,7 @@ func (c *AutoScaling) DescribeLoadBalancerTargetGroupsRequest(input *DescribeLoa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLoadBalancerTargetGroupsRequest{Request: req, Input: input}
+	return DescribeLoadBalancerTargetGroupsRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerTargetGroupsRequest}
 }
 
 const opDescribeLoadBalancers = "DescribeLoadBalancers"
@@ -1434,6 +1445,7 @@ const opDescribeLoadBalancers = "DescribeLoadBalancers"
 type DescribeLoadBalancersRequest struct {
 	*aws.Request
 	Input *DescribeLoadBalancersInput
+	Copy  func(*DescribeLoadBalancersInput) DescribeLoadBalancersRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancers API request.
@@ -1477,7 +1489,7 @@ func (c *AutoScaling) DescribeLoadBalancersRequest(input *DescribeLoadBalancersI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLoadBalancersRequest{Request: req, Input: input}
+	return DescribeLoadBalancersRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancersRequest}
 }
 
 const opDescribeMetricCollectionTypes = "DescribeMetricCollectionTypes"
@@ -1486,6 +1498,7 @@ const opDescribeMetricCollectionTypes = "DescribeMetricCollectionTypes"
 type DescribeMetricCollectionTypesRequest struct {
 	*aws.Request
 	Input *DescribeMetricCollectionTypesInput
+	Copy  func(*DescribeMetricCollectionTypesInput) DescribeMetricCollectionTypesRequest
 }
 
 // Send marshals and sends the DescribeMetricCollectionTypes API request.
@@ -1529,7 +1542,7 @@ func (c *AutoScaling) DescribeMetricCollectionTypesRequest(input *DescribeMetric
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMetricCollectionTypesRequest{Request: req, Input: input}
+	return DescribeMetricCollectionTypesRequest{Request: req, Input: input, Copy: c.DescribeMetricCollectionTypesRequest}
 }
 
 const opDescribeNotificationConfigurations = "DescribeNotificationConfigurations"
@@ -1538,6 +1551,7 @@ const opDescribeNotificationConfigurations = "DescribeNotificationConfigurations
 type DescribeNotificationConfigurationsRequest struct {
 	*aws.Request
 	Input *DescribeNotificationConfigurationsInput
+	Copy  func(*DescribeNotificationConfigurationsInput) DescribeNotificationConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeNotificationConfigurations API request.
@@ -1585,57 +1599,53 @@ func (c *AutoScaling) DescribeNotificationConfigurationsRequest(input *DescribeN
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNotificationConfigurationsRequest{Request: req, Input: input}
+	return DescribeNotificationConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeNotificationConfigurationsRequest}
 }
 
-// DescribeNotificationConfigurationsPages iterates over the pages of a DescribeNotificationConfigurations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeNotificationConfigurations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeNotificationConfigurationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeNotificationConfigurations operation.
-//    pageNum := 0
-//    err := client.DescribeNotificationConfigurationsPages(params,
-//        func(page *DescribeNotificationConfigurationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeNotificationConfigurationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AutoScaling) DescribeNotificationConfigurationsPages(input *DescribeNotificationConfigurationsInput, fn func(*DescribeNotificationConfigurationsOutput, bool) bool) error {
-	return c.DescribeNotificationConfigurationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeNotificationConfigurationsRequest) Paginate(opts ...aws.Option) DescribeNotificationConfigurationsPager {
+	return DescribeNotificationConfigurationsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeNotificationConfigurationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeNotificationConfigurationsPagesWithContext same as DescribeNotificationConfigurationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeNotificationConfigurationsPagesWithContext(ctx aws.Context, input *DescribeNotificationConfigurationsInput, fn func(*DescribeNotificationConfigurationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeNotificationConfigurationsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeNotificationConfigurationsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeNotificationConfigurationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeNotificationConfigurationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeNotificationConfigurationsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeNotificationConfigurationsPager) CurrentPage() *DescribeNotificationConfigurationsOutput {
+	return p.Pager.CurrentPage().(*DescribeNotificationConfigurationsOutput)
 }
 
 const opDescribePolicies = "DescribePolicies"
@@ -1644,6 +1654,7 @@ const opDescribePolicies = "DescribePolicies"
 type DescribePoliciesRequest struct {
 	*aws.Request
 	Input *DescribePoliciesInput
+	Copy  func(*DescribePoliciesInput) DescribePoliciesRequest
 }
 
 // Send marshals and sends the DescribePolicies API request.
@@ -1690,57 +1701,53 @@ func (c *AutoScaling) DescribePoliciesRequest(input *DescribePoliciesInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePoliciesRequest{Request: req, Input: input}
+	return DescribePoliciesRequest{Request: req, Input: input, Copy: c.DescribePoliciesRequest}
 }
 
-// DescribePoliciesPages iterates over the pages of a DescribePolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribePolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribePoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribePolicies operation.
-//    pageNum := 0
-//    err := client.DescribePoliciesPages(params,
-//        func(page *DescribePoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribePoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AutoScaling) DescribePoliciesPages(input *DescribePoliciesInput, fn func(*DescribePoliciesOutput, bool) bool) error {
-	return c.DescribePoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribePoliciesRequest) Paginate(opts ...aws.Option) DescribePoliciesPager {
+	return DescribePoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribePoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribePoliciesPagesWithContext same as DescribePoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribePoliciesPagesWithContext(ctx aws.Context, input *DescribePoliciesInput, fn func(*DescribePoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribePoliciesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribePoliciesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribePoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribePoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribePoliciesPager struct {
+	aws.Pager
+}
+
+func (p *DescribePoliciesPager) CurrentPage() *DescribePoliciesOutput {
+	return p.Pager.CurrentPage().(*DescribePoliciesOutput)
 }
 
 const opDescribeScalingActivities = "DescribeScalingActivities"
@@ -1749,6 +1756,7 @@ const opDescribeScalingActivities = "DescribeScalingActivities"
 type DescribeScalingActivitiesRequest struct {
 	*aws.Request
 	Input *DescribeScalingActivitiesInput
+	Copy  func(*DescribeScalingActivitiesInput) DescribeScalingActivitiesRequest
 }
 
 // Send marshals and sends the DescribeScalingActivities API request.
@@ -1795,57 +1803,53 @@ func (c *AutoScaling) DescribeScalingActivitiesRequest(input *DescribeScalingAct
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScalingActivitiesRequest{Request: req, Input: input}
+	return DescribeScalingActivitiesRequest{Request: req, Input: input, Copy: c.DescribeScalingActivitiesRequest}
 }
 
-// DescribeScalingActivitiesPages iterates over the pages of a DescribeScalingActivities operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeScalingActivities method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeScalingActivitiesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeScalingActivities operation.
-//    pageNum := 0
-//    err := client.DescribeScalingActivitiesPages(params,
-//        func(page *DescribeScalingActivitiesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeScalingActivitiesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AutoScaling) DescribeScalingActivitiesPages(input *DescribeScalingActivitiesInput, fn func(*DescribeScalingActivitiesOutput, bool) bool) error {
-	return c.DescribeScalingActivitiesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeScalingActivitiesRequest) Paginate(opts ...aws.Option) DescribeScalingActivitiesPager {
+	return DescribeScalingActivitiesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeScalingActivitiesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeScalingActivitiesPagesWithContext same as DescribeScalingActivitiesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeScalingActivitiesPagesWithContext(ctx aws.Context, input *DescribeScalingActivitiesInput, fn func(*DescribeScalingActivitiesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeScalingActivitiesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeScalingActivitiesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeScalingActivitiesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeScalingActivitiesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeScalingActivitiesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeScalingActivitiesPager) CurrentPage() *DescribeScalingActivitiesOutput {
+	return p.Pager.CurrentPage().(*DescribeScalingActivitiesOutput)
 }
 
 const opDescribeScalingProcessTypes = "DescribeScalingProcessTypes"
@@ -1854,6 +1858,7 @@ const opDescribeScalingProcessTypes = "DescribeScalingProcessTypes"
 type DescribeScalingProcessTypesRequest struct {
 	*aws.Request
 	Input *DescribeScalingProcessTypesInput
+	Copy  func(*DescribeScalingProcessTypesInput) DescribeScalingProcessTypesRequest
 }
 
 // Send marshals and sends the DescribeScalingProcessTypes API request.
@@ -1894,7 +1899,7 @@ func (c *AutoScaling) DescribeScalingProcessTypesRequest(input *DescribeScalingP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScalingProcessTypesRequest{Request: req, Input: input}
+	return DescribeScalingProcessTypesRequest{Request: req, Input: input, Copy: c.DescribeScalingProcessTypesRequest}
 }
 
 const opDescribeScheduledActions = "DescribeScheduledActions"
@@ -1903,6 +1908,7 @@ const opDescribeScheduledActions = "DescribeScheduledActions"
 type DescribeScheduledActionsRequest struct {
 	*aws.Request
 	Input *DescribeScheduledActionsInput
+	Copy  func(*DescribeScheduledActionsInput) DescribeScheduledActionsRequest
 }
 
 // Send marshals and sends the DescribeScheduledActions API request.
@@ -1950,57 +1956,53 @@ func (c *AutoScaling) DescribeScheduledActionsRequest(input *DescribeScheduledAc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeScheduledActionsRequest{Request: req, Input: input}
+	return DescribeScheduledActionsRequest{Request: req, Input: input, Copy: c.DescribeScheduledActionsRequest}
 }
 
-// DescribeScheduledActionsPages iterates over the pages of a DescribeScheduledActions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeScheduledActions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeScheduledActionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeScheduledActions operation.
-//    pageNum := 0
-//    err := client.DescribeScheduledActionsPages(params,
-//        func(page *DescribeScheduledActionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeScheduledActionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AutoScaling) DescribeScheduledActionsPages(input *DescribeScheduledActionsInput, fn func(*DescribeScheduledActionsOutput, bool) bool) error {
-	return c.DescribeScheduledActionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeScheduledActionsRequest) Paginate(opts ...aws.Option) DescribeScheduledActionsPager {
+	return DescribeScheduledActionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeScheduledActionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeScheduledActionsPagesWithContext same as DescribeScheduledActionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeScheduledActionsPagesWithContext(ctx aws.Context, input *DescribeScheduledActionsInput, fn func(*DescribeScheduledActionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeScheduledActionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeScheduledActionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeScheduledActionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeScheduledActionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeScheduledActionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeScheduledActionsPager) CurrentPage() *DescribeScheduledActionsOutput {
+	return p.Pager.CurrentPage().(*DescribeScheduledActionsOutput)
 }
 
 const opDescribeTags = "DescribeTags"
@@ -2009,6 +2011,7 @@ const opDescribeTags = "DescribeTags"
 type DescribeTagsRequest struct {
 	*aws.Request
 	Input *DescribeTagsInput
+	Copy  func(*DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -2064,57 +2067,53 @@ func (c *AutoScaling) DescribeTagsRequest(input *DescribeTagsInput) DescribeTags
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagsRequest{Request: req, Input: input}
+	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
-// DescribeTagsPages iterates over the pages of a DescribeTags operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeTags method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeTagsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeTags operation.
-//    pageNum := 0
-//    err := client.DescribeTagsPages(params,
-//        func(page *DescribeTagsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeTagsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *AutoScaling) DescribeTagsPages(input *DescribeTagsInput, fn func(*DescribeTagsOutput, bool) bool) error {
-	return c.DescribeTagsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeTagsRequest) Paginate(opts ...aws.Option) DescribeTagsPager {
+	return DescribeTagsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeTagsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeTagsPagesWithContext same as DescribeTagsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *AutoScaling) DescribeTagsPagesWithContext(ctx aws.Context, input *DescribeTagsInput, fn func(*DescribeTagsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeTagsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeTagsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeTagsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeTagsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeTagsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeTagsPager) CurrentPage() *DescribeTagsOutput {
+	return p.Pager.CurrentPage().(*DescribeTagsOutput)
 }
 
 const opDescribeTerminationPolicyTypes = "DescribeTerminationPolicyTypes"
@@ -2123,6 +2122,7 @@ const opDescribeTerminationPolicyTypes = "DescribeTerminationPolicyTypes"
 type DescribeTerminationPolicyTypesRequest struct {
 	*aws.Request
 	Input *DescribeTerminationPolicyTypesInput
+	Copy  func(*DescribeTerminationPolicyTypesInput) DescribeTerminationPolicyTypesRequest
 }
 
 // Send marshals and sends the DescribeTerminationPolicyTypes API request.
@@ -2163,7 +2163,7 @@ func (c *AutoScaling) DescribeTerminationPolicyTypesRequest(input *DescribeTermi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTerminationPolicyTypesRequest{Request: req, Input: input}
+	return DescribeTerminationPolicyTypesRequest{Request: req, Input: input, Copy: c.DescribeTerminationPolicyTypesRequest}
 }
 
 const opDetachInstances = "DetachInstances"
@@ -2172,6 +2172,7 @@ const opDetachInstances = "DetachInstances"
 type DetachInstancesRequest struct {
 	*aws.Request
 	Input *DetachInstancesInput
+	Copy  func(*DetachInstancesInput) DetachInstancesRequest
 }
 
 // Send marshals and sends the DetachInstances API request.
@@ -2227,7 +2228,7 @@ func (c *AutoScaling) DetachInstancesRequest(input *DetachInstancesInput) Detach
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachInstancesRequest{Request: req, Input: input}
+	return DetachInstancesRequest{Request: req, Input: input, Copy: c.DetachInstancesRequest}
 }
 
 const opDetachLoadBalancerTargetGroups = "DetachLoadBalancerTargetGroups"
@@ -2236,6 +2237,7 @@ const opDetachLoadBalancerTargetGroups = "DetachLoadBalancerTargetGroups"
 type DetachLoadBalancerTargetGroupsRequest struct {
 	*aws.Request
 	Input *DetachLoadBalancerTargetGroupsInput
+	Copy  func(*DetachLoadBalancerTargetGroupsInput) DetachLoadBalancerTargetGroupsRequest
 }
 
 // Send marshals and sends the DetachLoadBalancerTargetGroups API request.
@@ -2276,7 +2278,7 @@ func (c *AutoScaling) DetachLoadBalancerTargetGroupsRequest(input *DetachLoadBal
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachLoadBalancerTargetGroupsRequest{Request: req, Input: input}
+	return DetachLoadBalancerTargetGroupsRequest{Request: req, Input: input, Copy: c.DetachLoadBalancerTargetGroupsRequest}
 }
 
 const opDetachLoadBalancers = "DetachLoadBalancers"
@@ -2285,6 +2287,7 @@ const opDetachLoadBalancers = "DetachLoadBalancers"
 type DetachLoadBalancersRequest struct {
 	*aws.Request
 	Input *DetachLoadBalancersInput
+	Copy  func(*DetachLoadBalancersInput) DetachLoadBalancersRequest
 }
 
 // Send marshals and sends the DetachLoadBalancers API request.
@@ -2334,7 +2337,7 @@ func (c *AutoScaling) DetachLoadBalancersRequest(input *DetachLoadBalancersInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachLoadBalancersRequest{Request: req, Input: input}
+	return DetachLoadBalancersRequest{Request: req, Input: input, Copy: c.DetachLoadBalancersRequest}
 }
 
 const opDisableMetricsCollection = "DisableMetricsCollection"
@@ -2343,6 +2346,7 @@ const opDisableMetricsCollection = "DisableMetricsCollection"
 type DisableMetricsCollectionRequest struct {
 	*aws.Request
 	Input *DisableMetricsCollectionInput
+	Copy  func(*DisableMetricsCollectionInput) DisableMetricsCollectionRequest
 }
 
 // Send marshals and sends the DisableMetricsCollection API request.
@@ -2385,7 +2389,7 @@ func (c *AutoScaling) DisableMetricsCollectionRequest(input *DisableMetricsColle
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableMetricsCollectionRequest{Request: req, Input: input}
+	return DisableMetricsCollectionRequest{Request: req, Input: input, Copy: c.DisableMetricsCollectionRequest}
 }
 
 const opEnableMetricsCollection = "EnableMetricsCollection"
@@ -2394,6 +2398,7 @@ const opEnableMetricsCollection = "EnableMetricsCollection"
 type EnableMetricsCollectionRequest struct {
 	*aws.Request
 	Input *EnableMetricsCollectionInput
+	Copy  func(*EnableMetricsCollectionInput) EnableMetricsCollectionRequest
 }
 
 // Send marshals and sends the EnableMetricsCollection API request.
@@ -2438,7 +2443,7 @@ func (c *AutoScaling) EnableMetricsCollectionRequest(input *EnableMetricsCollect
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableMetricsCollectionRequest{Request: req, Input: input}
+	return EnableMetricsCollectionRequest{Request: req, Input: input, Copy: c.EnableMetricsCollectionRequest}
 }
 
 const opEnterStandby = "EnterStandby"
@@ -2447,6 +2452,7 @@ const opEnterStandby = "EnterStandby"
 type EnterStandbyRequest struct {
 	*aws.Request
 	Input *EnterStandbyInput
+	Copy  func(*EnterStandbyInput) EnterStandbyRequest
 }
 
 // Send marshals and sends the EnterStandby API request.
@@ -2491,7 +2497,7 @@ func (c *AutoScaling) EnterStandbyRequest(input *EnterStandbyInput) EnterStandby
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnterStandbyRequest{Request: req, Input: input}
+	return EnterStandbyRequest{Request: req, Input: input, Copy: c.EnterStandbyRequest}
 }
 
 const opExecutePolicy = "ExecutePolicy"
@@ -2500,6 +2506,7 @@ const opExecutePolicy = "ExecutePolicy"
 type ExecutePolicyRequest struct {
 	*aws.Request
 	Input *ExecutePolicyInput
+	Copy  func(*ExecutePolicyInput) ExecutePolicyRequest
 }
 
 // Send marshals and sends the ExecutePolicy API request.
@@ -2542,7 +2549,7 @@ func (c *AutoScaling) ExecutePolicyRequest(input *ExecutePolicyInput) ExecutePol
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ExecutePolicyRequest{Request: req, Input: input}
+	return ExecutePolicyRequest{Request: req, Input: input, Copy: c.ExecutePolicyRequest}
 }
 
 const opExitStandby = "ExitStandby"
@@ -2551,6 +2558,7 @@ const opExitStandby = "ExitStandby"
 type ExitStandbyRequest struct {
 	*aws.Request
 	Input *ExitStandbyInput
+	Copy  func(*ExitStandbyInput) ExitStandbyRequest
 }
 
 // Send marshals and sends the ExitStandby API request.
@@ -2595,7 +2603,7 @@ func (c *AutoScaling) ExitStandbyRequest(input *ExitStandbyInput) ExitStandbyReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ExitStandbyRequest{Request: req, Input: input}
+	return ExitStandbyRequest{Request: req, Input: input, Copy: c.ExitStandbyRequest}
 }
 
 const opPutLifecycleHook = "PutLifecycleHook"
@@ -2604,6 +2612,7 @@ const opPutLifecycleHook = "PutLifecycleHook"
 type PutLifecycleHookRequest struct {
 	*aws.Request
 	Input *PutLifecycleHookInput
+	Copy  func(*PutLifecycleHookInput) PutLifecycleHookRequest
 }
 
 // Send marshals and sends the PutLifecycleHook API request.
@@ -2674,7 +2683,7 @@ func (c *AutoScaling) PutLifecycleHookRequest(input *PutLifecycleHookInput) PutL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutLifecycleHookRequest{Request: req, Input: input}
+	return PutLifecycleHookRequest{Request: req, Input: input, Copy: c.PutLifecycleHookRequest}
 }
 
 const opPutNotificationConfiguration = "PutNotificationConfiguration"
@@ -2683,6 +2692,7 @@ const opPutNotificationConfiguration = "PutNotificationConfiguration"
 type PutNotificationConfigurationRequest struct {
 	*aws.Request
 	Input *PutNotificationConfigurationInput
+	Copy  func(*PutNotificationConfigurationInput) PutNotificationConfigurationRequest
 }
 
 // Send marshals and sends the PutNotificationConfiguration API request.
@@ -2733,7 +2743,7 @@ func (c *AutoScaling) PutNotificationConfigurationRequest(input *PutNotification
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutNotificationConfigurationRequest{Request: req, Input: input}
+	return PutNotificationConfigurationRequest{Request: req, Input: input, Copy: c.PutNotificationConfigurationRequest}
 }
 
 const opPutScalingPolicy = "PutScalingPolicy"
@@ -2742,6 +2752,7 @@ const opPutScalingPolicy = "PutScalingPolicy"
 type PutScalingPolicyRequest struct {
 	*aws.Request
 	Input *PutScalingPolicyInput
+	Copy  func(*PutScalingPolicyInput) PutScalingPolicyRequest
 }
 
 // Send marshals and sends the PutScalingPolicy API request.
@@ -2790,7 +2801,7 @@ func (c *AutoScaling) PutScalingPolicyRequest(input *PutScalingPolicyInput) PutS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutScalingPolicyRequest{Request: req, Input: input}
+	return PutScalingPolicyRequest{Request: req, Input: input, Copy: c.PutScalingPolicyRequest}
 }
 
 const opPutScheduledUpdateGroupAction = "PutScheduledUpdateGroupAction"
@@ -2799,6 +2810,7 @@ const opPutScheduledUpdateGroupAction = "PutScheduledUpdateGroupAction"
 type PutScheduledUpdateGroupActionRequest struct {
 	*aws.Request
 	Input *PutScheduledUpdateGroupActionInput
+	Copy  func(*PutScheduledUpdateGroupActionInput) PutScheduledUpdateGroupActionRequest
 }
 
 // Send marshals and sends the PutScheduledUpdateGroupAction API request.
@@ -2846,7 +2858,7 @@ func (c *AutoScaling) PutScheduledUpdateGroupActionRequest(input *PutScheduledUp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutScheduledUpdateGroupActionRequest{Request: req, Input: input}
+	return PutScheduledUpdateGroupActionRequest{Request: req, Input: input, Copy: c.PutScheduledUpdateGroupActionRequest}
 }
 
 const opRecordLifecycleActionHeartbeat = "RecordLifecycleActionHeartbeat"
@@ -2855,6 +2867,7 @@ const opRecordLifecycleActionHeartbeat = "RecordLifecycleActionHeartbeat"
 type RecordLifecycleActionHeartbeatRequest struct {
 	*aws.Request
 	Input *RecordLifecycleActionHeartbeatInput
+	Copy  func(*RecordLifecycleActionHeartbeatInput) RecordLifecycleActionHeartbeatRequest
 }
 
 // Send marshals and sends the RecordLifecycleActionHeartbeat API request.
@@ -2918,7 +2931,7 @@ func (c *AutoScaling) RecordLifecycleActionHeartbeatRequest(input *RecordLifecyc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RecordLifecycleActionHeartbeatRequest{Request: req, Input: input}
+	return RecordLifecycleActionHeartbeatRequest{Request: req, Input: input, Copy: c.RecordLifecycleActionHeartbeatRequest}
 }
 
 const opResumeProcesses = "ResumeProcesses"
@@ -2927,6 +2940,7 @@ const opResumeProcesses = "ResumeProcesses"
 type ResumeProcessesRequest struct {
 	*aws.Request
 	Input *SuspendProcessesInput
+	Copy  func(*SuspendProcessesInput) ResumeProcessesRequest
 }
 
 // Send marshals and sends the ResumeProcesses API request.
@@ -2974,7 +2988,7 @@ func (c *AutoScaling) ResumeProcessesRequest(input *SuspendProcessesInput) Resum
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResumeProcessesRequest{Request: req, Input: input}
+	return ResumeProcessesRequest{Request: req, Input: input, Copy: c.ResumeProcessesRequest}
 }
 
 const opSetDesiredCapacity = "SetDesiredCapacity"
@@ -2983,6 +2997,7 @@ const opSetDesiredCapacity = "SetDesiredCapacity"
 type SetDesiredCapacityRequest struct {
 	*aws.Request
 	Input *SetDesiredCapacityInput
+	Copy  func(*SetDesiredCapacityInput) SetDesiredCapacityRequest
 }
 
 // Send marshals and sends the SetDesiredCapacity API request.
@@ -3028,7 +3043,7 @@ func (c *AutoScaling) SetDesiredCapacityRequest(input *SetDesiredCapacityInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetDesiredCapacityRequest{Request: req, Input: input}
+	return SetDesiredCapacityRequest{Request: req, Input: input, Copy: c.SetDesiredCapacityRequest}
 }
 
 const opSetInstanceHealth = "SetInstanceHealth"
@@ -3037,6 +3052,7 @@ const opSetInstanceHealth = "SetInstanceHealth"
 type SetInstanceHealthRequest struct {
 	*aws.Request
 	Input *SetInstanceHealthInput
+	Copy  func(*SetInstanceHealthInput) SetInstanceHealthRequest
 }
 
 // Send marshals and sends the SetInstanceHealth API request.
@@ -3082,7 +3098,7 @@ func (c *AutoScaling) SetInstanceHealthRequest(input *SetInstanceHealthInput) Se
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetInstanceHealthRequest{Request: req, Input: input}
+	return SetInstanceHealthRequest{Request: req, Input: input, Copy: c.SetInstanceHealthRequest}
 }
 
 const opSetInstanceProtection = "SetInstanceProtection"
@@ -3091,6 +3107,7 @@ const opSetInstanceProtection = "SetInstanceProtection"
 type SetInstanceProtectionRequest struct {
 	*aws.Request
 	Input *SetInstanceProtectionInput
+	Copy  func(*SetInstanceProtectionInput) SetInstanceProtectionRequest
 }
 
 // Send marshals and sends the SetInstanceProtection API request.
@@ -3134,7 +3151,7 @@ func (c *AutoScaling) SetInstanceProtectionRequest(input *SetInstanceProtectionI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetInstanceProtectionRequest{Request: req, Input: input}
+	return SetInstanceProtectionRequest{Request: req, Input: input, Copy: c.SetInstanceProtectionRequest}
 }
 
 const opSuspendProcesses = "SuspendProcesses"
@@ -3143,6 +3160,7 @@ const opSuspendProcesses = "SuspendProcesses"
 type SuspendProcessesRequest struct {
 	*aws.Request
 	Input *SuspendProcessesInput
+	Copy  func(*SuspendProcessesInput) SuspendProcessesRequest
 }
 
 // Send marshals and sends the SuspendProcesses API request.
@@ -3195,7 +3213,7 @@ func (c *AutoScaling) SuspendProcessesRequest(input *SuspendProcessesInput) Susp
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SuspendProcessesRequest{Request: req, Input: input}
+	return SuspendProcessesRequest{Request: req, Input: input, Copy: c.SuspendProcessesRequest}
 }
 
 const opTerminateInstanceInAutoScalingGroup = "TerminateInstanceInAutoScalingGroup"
@@ -3204,6 +3222,7 @@ const opTerminateInstanceInAutoScalingGroup = "TerminateInstanceInAutoScalingGro
 type TerminateInstanceInAutoScalingGroupRequest struct {
 	*aws.Request
 	Input *TerminateInstanceInAutoScalingGroupInput
+	Copy  func(*TerminateInstanceInAutoScalingGroupInput) TerminateInstanceInAutoScalingGroupRequest
 }
 
 // Send marshals and sends the TerminateInstanceInAutoScalingGroup API request.
@@ -3248,7 +3267,7 @@ func (c *AutoScaling) TerminateInstanceInAutoScalingGroupRequest(input *Terminat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TerminateInstanceInAutoScalingGroupRequest{Request: req, Input: input}
+	return TerminateInstanceInAutoScalingGroupRequest{Request: req, Input: input, Copy: c.TerminateInstanceInAutoScalingGroupRequest}
 }
 
 const opUpdateAutoScalingGroup = "UpdateAutoScalingGroup"
@@ -3257,6 +3276,7 @@ const opUpdateAutoScalingGroup = "UpdateAutoScalingGroup"
 type UpdateAutoScalingGroupRequest struct {
 	*aws.Request
 	Input *UpdateAutoScalingGroupInput
+	Copy  func(*UpdateAutoScalingGroupInput) UpdateAutoScalingGroupRequest
 }
 
 // Send marshals and sends the UpdateAutoScalingGroup API request.
@@ -3321,7 +3341,7 @@ func (c *AutoScaling) UpdateAutoScalingGroupRequest(input *UpdateAutoScalingGrou
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAutoScalingGroupRequest{Request: req, Input: input}
+	return UpdateAutoScalingGroupRequest{Request: req, Input: input, Copy: c.UpdateAutoScalingGroupRequest}
 }
 
 // Describes scaling activity, which is a long-running process that represents

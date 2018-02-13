@@ -15,6 +15,7 @@ const opAssociateTeamMember = "AssociateTeamMember"
 type AssociateTeamMemberRequest struct {
 	*aws.Request
 	Input *AssociateTeamMemberInput
+	Copy  func(*AssociateTeamMemberInput) AssociateTeamMemberRequest
 }
 
 // Send marshals and sends the AssociateTeamMember API request.
@@ -55,7 +56,7 @@ func (c *CodeStar) AssociateTeamMemberRequest(input *AssociateTeamMemberInput) A
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateTeamMemberRequest{Request: req, Input: input}
+	return AssociateTeamMemberRequest{Request: req, Input: input, Copy: c.AssociateTeamMemberRequest}
 }
 
 const opCreateProject = "CreateProject"
@@ -64,6 +65,7 @@ const opCreateProject = "CreateProject"
 type CreateProjectRequest struct {
 	*aws.Request
 	Input *CreateProjectInput
+	Copy  func(*CreateProjectInput) CreateProjectRequest
 }
 
 // Send marshals and sends the CreateProject API request.
@@ -104,7 +106,7 @@ func (c *CodeStar) CreateProjectRequest(input *CreateProjectInput) CreateProject
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateProjectRequest{Request: req, Input: input}
+	return CreateProjectRequest{Request: req, Input: input, Copy: c.CreateProjectRequest}
 }
 
 const opCreateUserProfile = "CreateUserProfile"
@@ -113,6 +115,7 @@ const opCreateUserProfile = "CreateUserProfile"
 type CreateUserProfileRequest struct {
 	*aws.Request
 	Input *CreateUserProfileInput
+	Copy  func(*CreateUserProfileInput) CreateUserProfileRequest
 }
 
 // Send marshals and sends the CreateUserProfile API request.
@@ -157,7 +160,7 @@ func (c *CodeStar) CreateUserProfileRequest(input *CreateUserProfileInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateUserProfileRequest{Request: req, Input: input}
+	return CreateUserProfileRequest{Request: req, Input: input, Copy: c.CreateUserProfileRequest}
 }
 
 const opDeleteProject = "DeleteProject"
@@ -166,6 +169,7 @@ const opDeleteProject = "DeleteProject"
 type DeleteProjectRequest struct {
 	*aws.Request
 	Input *DeleteProjectInput
+	Copy  func(*DeleteProjectInput) DeleteProjectRequest
 }
 
 // Send marshals and sends the DeleteProject API request.
@@ -208,7 +212,7 @@ func (c *CodeStar) DeleteProjectRequest(input *DeleteProjectInput) DeleteProject
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteProjectRequest{Request: req, Input: input}
+	return DeleteProjectRequest{Request: req, Input: input, Copy: c.DeleteProjectRequest}
 }
 
 const opDeleteUserProfile = "DeleteUserProfile"
@@ -217,6 +221,7 @@ const opDeleteUserProfile = "DeleteUserProfile"
 type DeleteUserProfileRequest struct {
 	*aws.Request
 	Input *DeleteUserProfileInput
+	Copy  func(*DeleteUserProfileInput) DeleteUserProfileRequest
 }
 
 // Send marshals and sends the DeleteUserProfile API request.
@@ -260,7 +265,7 @@ func (c *CodeStar) DeleteUserProfileRequest(input *DeleteUserProfileInput) Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteUserProfileRequest{Request: req, Input: input}
+	return DeleteUserProfileRequest{Request: req, Input: input, Copy: c.DeleteUserProfileRequest}
 }
 
 const opDescribeProject = "DescribeProject"
@@ -269,6 +274,7 @@ const opDescribeProject = "DescribeProject"
 type DescribeProjectRequest struct {
 	*aws.Request
 	Input *DescribeProjectInput
+	Copy  func(*DescribeProjectInput) DescribeProjectRequest
 }
 
 // Send marshals and sends the DescribeProject API request.
@@ -309,7 +315,7 @@ func (c *CodeStar) DescribeProjectRequest(input *DescribeProjectInput) DescribeP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeProjectRequest{Request: req, Input: input}
+	return DescribeProjectRequest{Request: req, Input: input, Copy: c.DescribeProjectRequest}
 }
 
 const opDescribeUserProfile = "DescribeUserProfile"
@@ -318,6 +324,7 @@ const opDescribeUserProfile = "DescribeUserProfile"
 type DescribeUserProfileRequest struct {
 	*aws.Request
 	Input *DescribeUserProfileInput
+	Copy  func(*DescribeUserProfileInput) DescribeUserProfileRequest
 }
 
 // Send marshals and sends the DescribeUserProfile API request.
@@ -358,7 +365,7 @@ func (c *CodeStar) DescribeUserProfileRequest(input *DescribeUserProfileInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeUserProfileRequest{Request: req, Input: input}
+	return DescribeUserProfileRequest{Request: req, Input: input, Copy: c.DescribeUserProfileRequest}
 }
 
 const opDisassociateTeamMember = "DisassociateTeamMember"
@@ -367,6 +374,7 @@ const opDisassociateTeamMember = "DisassociateTeamMember"
 type DisassociateTeamMemberRequest struct {
 	*aws.Request
 	Input *DisassociateTeamMemberInput
+	Copy  func(*DisassociateTeamMemberInput) DisassociateTeamMemberRequest
 }
 
 // Send marshals and sends the DisassociateTeamMember API request.
@@ -410,7 +418,7 @@ func (c *CodeStar) DisassociateTeamMemberRequest(input *DisassociateTeamMemberIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateTeamMemberRequest{Request: req, Input: input}
+	return DisassociateTeamMemberRequest{Request: req, Input: input, Copy: c.DisassociateTeamMemberRequest}
 }
 
 const opListProjects = "ListProjects"
@@ -419,6 +427,7 @@ const opListProjects = "ListProjects"
 type ListProjectsRequest struct {
 	*aws.Request
 	Input *ListProjectsInput
+	Copy  func(*ListProjectsInput) ListProjectsRequest
 }
 
 // Send marshals and sends the ListProjects API request.
@@ -459,7 +468,7 @@ func (c *CodeStar) ListProjectsRequest(input *ListProjectsInput) ListProjectsReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListProjectsRequest{Request: req, Input: input}
+	return ListProjectsRequest{Request: req, Input: input, Copy: c.ListProjectsRequest}
 }
 
 const opListResources = "ListResources"
@@ -468,6 +477,7 @@ const opListResources = "ListResources"
 type ListResourcesRequest struct {
 	*aws.Request
 	Input *ListResourcesInput
+	Copy  func(*ListResourcesInput) ListResourcesRequest
 }
 
 // Send marshals and sends the ListResources API request.
@@ -508,7 +518,7 @@ func (c *CodeStar) ListResourcesRequest(input *ListResourcesInput) ListResources
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourcesRequest{Request: req, Input: input}
+	return ListResourcesRequest{Request: req, Input: input, Copy: c.ListResourcesRequest}
 }
 
 const opListTagsForProject = "ListTagsForProject"
@@ -517,6 +527,7 @@ const opListTagsForProject = "ListTagsForProject"
 type ListTagsForProjectRequest struct {
 	*aws.Request
 	Input *ListTagsForProjectInput
+	Copy  func(*ListTagsForProjectInput) ListTagsForProjectRequest
 }
 
 // Send marshals and sends the ListTagsForProject API request.
@@ -557,7 +568,7 @@ func (c *CodeStar) ListTagsForProjectRequest(input *ListTagsForProjectInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForProjectRequest{Request: req, Input: input}
+	return ListTagsForProjectRequest{Request: req, Input: input, Copy: c.ListTagsForProjectRequest}
 }
 
 const opListTeamMembers = "ListTeamMembers"
@@ -566,6 +577,7 @@ const opListTeamMembers = "ListTeamMembers"
 type ListTeamMembersRequest struct {
 	*aws.Request
 	Input *ListTeamMembersInput
+	Copy  func(*ListTeamMembersInput) ListTeamMembersRequest
 }
 
 // Send marshals and sends the ListTeamMembers API request.
@@ -606,7 +618,7 @@ func (c *CodeStar) ListTeamMembersRequest(input *ListTeamMembersInput) ListTeamM
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTeamMembersRequest{Request: req, Input: input}
+	return ListTeamMembersRequest{Request: req, Input: input, Copy: c.ListTeamMembersRequest}
 }
 
 const opListUserProfiles = "ListUserProfiles"
@@ -615,6 +627,7 @@ const opListUserProfiles = "ListUserProfiles"
 type ListUserProfilesRequest struct {
 	*aws.Request
 	Input *ListUserProfilesInput
+	Copy  func(*ListUserProfilesInput) ListUserProfilesRequest
 }
 
 // Send marshals and sends the ListUserProfiles API request.
@@ -655,7 +668,7 @@ func (c *CodeStar) ListUserProfilesRequest(input *ListUserProfilesInput) ListUse
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListUserProfilesRequest{Request: req, Input: input}
+	return ListUserProfilesRequest{Request: req, Input: input, Copy: c.ListUserProfilesRequest}
 }
 
 const opTagProject = "TagProject"
@@ -664,6 +677,7 @@ const opTagProject = "TagProject"
 type TagProjectRequest struct {
 	*aws.Request
 	Input *TagProjectInput
+	Copy  func(*TagProjectInput) TagProjectRequest
 }
 
 // Send marshals and sends the TagProject API request.
@@ -704,7 +718,7 @@ func (c *CodeStar) TagProjectRequest(input *TagProjectInput) TagProjectRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagProjectRequest{Request: req, Input: input}
+	return TagProjectRequest{Request: req, Input: input, Copy: c.TagProjectRequest}
 }
 
 const opUntagProject = "UntagProject"
@@ -713,6 +727,7 @@ const opUntagProject = "UntagProject"
 type UntagProjectRequest struct {
 	*aws.Request
 	Input *UntagProjectInput
+	Copy  func(*UntagProjectInput) UntagProjectRequest
 }
 
 // Send marshals and sends the UntagProject API request.
@@ -753,7 +768,7 @@ func (c *CodeStar) UntagProjectRequest(input *UntagProjectInput) UntagProjectReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagProjectRequest{Request: req, Input: input}
+	return UntagProjectRequest{Request: req, Input: input, Copy: c.UntagProjectRequest}
 }
 
 const opUpdateProject = "UpdateProject"
@@ -762,6 +777,7 @@ const opUpdateProject = "UpdateProject"
 type UpdateProjectRequest struct {
 	*aws.Request
 	Input *UpdateProjectInput
+	Copy  func(*UpdateProjectInput) UpdateProjectRequest
 }
 
 // Send marshals and sends the UpdateProject API request.
@@ -802,7 +818,7 @@ func (c *CodeStar) UpdateProjectRequest(input *UpdateProjectInput) UpdateProject
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateProjectRequest{Request: req, Input: input}
+	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 
 const opUpdateTeamMember = "UpdateTeamMember"
@@ -811,6 +827,7 @@ const opUpdateTeamMember = "UpdateTeamMember"
 type UpdateTeamMemberRequest struct {
 	*aws.Request
 	Input *UpdateTeamMemberInput
+	Copy  func(*UpdateTeamMemberInput) UpdateTeamMemberRequest
 }
 
 // Send marshals and sends the UpdateTeamMember API request.
@@ -853,7 +870,7 @@ func (c *CodeStar) UpdateTeamMemberRequest(input *UpdateTeamMemberInput) UpdateT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTeamMemberRequest{Request: req, Input: input}
+	return UpdateTeamMemberRequest{Request: req, Input: input, Copy: c.UpdateTeamMemberRequest}
 }
 
 const opUpdateUserProfile = "UpdateUserProfile"
@@ -862,6 +879,7 @@ const opUpdateUserProfile = "UpdateUserProfile"
 type UpdateUserProfileRequest struct {
 	*aws.Request
 	Input *UpdateUserProfileInput
+	Copy  func(*UpdateUserProfileInput) UpdateUserProfileRequest
 }
 
 // Send marshals and sends the UpdateUserProfile API request.
@@ -904,7 +922,7 @@ func (c *CodeStar) UpdateUserProfileRequest(input *UpdateUserProfileInput) Updat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateUserProfileRequest{Request: req, Input: input}
+	return UpdateUserProfileRequest{Request: req, Input: input, Copy: c.UpdateUserProfileRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codestar-2017-04-19/AssociateTeamMemberRequest

@@ -15,6 +15,7 @@ const opAssociateNode = "AssociateNode"
 type AssociateNodeRequest struct {
 	*aws.Request
 	Input *AssociateNodeInput
+	Copy  func(*AssociateNodeInput) AssociateNodeRequest
 }
 
 // Send marshals and sends the AssociateNode API request.
@@ -75,7 +76,7 @@ func (c *OpsWorksCM) AssociateNodeRequest(input *AssociateNodeInput) AssociateNo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateNodeRequest{Request: req, Input: input}
+	return AssociateNodeRequest{Request: req, Input: input, Copy: c.AssociateNodeRequest}
 }
 
 const opCreateBackup = "CreateBackup"
@@ -84,6 +85,7 @@ const opCreateBackup = "CreateBackup"
 type CreateBackupRequest struct {
 	*aws.Request
 	Input *CreateBackupInput
+	Copy  func(*CreateBackupInput) CreateBackupRequest
 }
 
 // Send marshals and sends the CreateBackup API request.
@@ -137,7 +139,7 @@ func (c *OpsWorksCM) CreateBackupRequest(input *CreateBackupInput) CreateBackupR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBackupRequest{Request: req, Input: input}
+	return CreateBackupRequest{Request: req, Input: input, Copy: c.CreateBackupRequest}
 }
 
 const opCreateServer = "CreateServer"
@@ -146,6 +148,7 @@ const opCreateServer = "CreateServer"
 type CreateServerRequest struct {
 	*aws.Request
 	Input *CreateServerInput
+	Copy  func(*CreateServerInput) CreateServerRequest
 }
 
 // Send marshals and sends the CreateServer API request.
@@ -212,7 +215,7 @@ func (c *OpsWorksCM) CreateServerRequest(input *CreateServerInput) CreateServerR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateServerRequest{Request: req, Input: input}
+	return CreateServerRequest{Request: req, Input: input, Copy: c.CreateServerRequest}
 }
 
 const opDeleteBackup = "DeleteBackup"
@@ -221,6 +224,7 @@ const opDeleteBackup = "DeleteBackup"
 type DeleteBackupRequest struct {
 	*aws.Request
 	Input *DeleteBackupInput
+	Copy  func(*DeleteBackupInput) DeleteBackupRequest
 }
 
 // Send marshals and sends the DeleteBackup API request.
@@ -266,7 +270,7 @@ func (c *OpsWorksCM) DeleteBackupRequest(input *DeleteBackupInput) DeleteBackupR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBackupRequest{Request: req, Input: input}
+	return DeleteBackupRequest{Request: req, Input: input, Copy: c.DeleteBackupRequest}
 }
 
 const opDeleteServer = "DeleteServer"
@@ -275,6 +279,7 @@ const opDeleteServer = "DeleteServer"
 type DeleteServerRequest struct {
 	*aws.Request
 	Input *DeleteServerInput
+	Copy  func(*DeleteServerInput) DeleteServerRequest
 }
 
 // Send marshals and sends the DeleteServer API request.
@@ -325,7 +330,7 @@ func (c *OpsWorksCM) DeleteServerRequest(input *DeleteServerInput) DeleteServerR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteServerRequest{Request: req, Input: input}
+	return DeleteServerRequest{Request: req, Input: input, Copy: c.DeleteServerRequest}
 }
 
 const opDescribeAccountAttributes = "DescribeAccountAttributes"
@@ -334,6 +339,7 @@ const opDescribeAccountAttributes = "DescribeAccountAttributes"
 type DescribeAccountAttributesRequest struct {
 	*aws.Request
 	Input *DescribeAccountAttributesInput
+	Copy  func(*DescribeAccountAttributesInput) DescribeAccountAttributesRequest
 }
 
 // Send marshals and sends the DescribeAccountAttributes API request.
@@ -377,7 +383,7 @@ func (c *OpsWorksCM) DescribeAccountAttributesRequest(input *DescribeAccountAttr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAccountAttributesRequest{Request: req, Input: input}
+	return DescribeAccountAttributesRequest{Request: req, Input: input, Copy: c.DescribeAccountAttributesRequest}
 }
 
 const opDescribeBackups = "DescribeBackups"
@@ -386,6 +392,7 @@ const opDescribeBackups = "DescribeBackups"
 type DescribeBackupsRequest struct {
 	*aws.Request
 	Input *DescribeBackupsInput
+	Copy  func(*DescribeBackupsInput) DescribeBackupsRequest
 }
 
 // Send marshals and sends the DescribeBackups API request.
@@ -432,7 +439,7 @@ func (c *OpsWorksCM) DescribeBackupsRequest(input *DescribeBackupsInput) Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBackupsRequest{Request: req, Input: input}
+	return DescribeBackupsRequest{Request: req, Input: input, Copy: c.DescribeBackupsRequest}
 }
 
 const opDescribeEvents = "DescribeEvents"
@@ -441,6 +448,7 @@ const opDescribeEvents = "DescribeEvents"
 type DescribeEventsRequest struct {
 	*aws.Request
 	Input *DescribeEventsInput
+	Copy  func(*DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -487,7 +495,7 @@ func (c *OpsWorksCM) DescribeEventsRequest(input *DescribeEventsInput) DescribeE
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventsRequest{Request: req, Input: input}
+	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
 const opDescribeNodeAssociationStatus = "DescribeNodeAssociationStatus"
@@ -496,6 +504,7 @@ const opDescribeNodeAssociationStatus = "DescribeNodeAssociationStatus"
 type DescribeNodeAssociationStatusRequest struct {
 	*aws.Request
 	Input *DescribeNodeAssociationStatusInput
+	Copy  func(*DescribeNodeAssociationStatusInput) DescribeNodeAssociationStatusRequest
 }
 
 // Send marshals and sends the DescribeNodeAssociationStatus API request.
@@ -540,7 +549,7 @@ func (c *OpsWorksCM) DescribeNodeAssociationStatusRequest(input *DescribeNodeAss
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeNodeAssociationStatusRequest{Request: req, Input: input}
+	return DescribeNodeAssociationStatusRequest{Request: req, Input: input, Copy: c.DescribeNodeAssociationStatusRequest}
 }
 
 const opDescribeServers = "DescribeServers"
@@ -549,6 +558,7 @@ const opDescribeServers = "DescribeServers"
 type DescribeServersRequest struct {
 	*aws.Request
 	Input *DescribeServersInput
+	Copy  func(*DescribeServersInput) DescribeServersRequest
 }
 
 // Send marshals and sends the DescribeServers API request.
@@ -596,7 +606,7 @@ func (c *OpsWorksCM) DescribeServersRequest(input *DescribeServersInput) Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeServersRequest{Request: req, Input: input}
+	return DescribeServersRequest{Request: req, Input: input, Copy: c.DescribeServersRequest}
 }
 
 const opDisassociateNode = "DisassociateNode"
@@ -605,6 +615,7 @@ const opDisassociateNode = "DisassociateNode"
 type DisassociateNodeRequest struct {
 	*aws.Request
 	Input *DisassociateNodeInput
+	Copy  func(*DisassociateNodeInput) DisassociateNodeRequest
 }
 
 // Send marshals and sends the DisassociateNode API request.
@@ -653,7 +664,7 @@ func (c *OpsWorksCM) DisassociateNodeRequest(input *DisassociateNodeInput) Disas
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateNodeRequest{Request: req, Input: input}
+	return DisassociateNodeRequest{Request: req, Input: input, Copy: c.DisassociateNodeRequest}
 }
 
 const opRestoreServer = "RestoreServer"
@@ -662,6 +673,7 @@ const opRestoreServer = "RestoreServer"
 type RestoreServerRequest struct {
 	*aws.Request
 	Input *RestoreServerInput
+	Copy  func(*RestoreServerInput) RestoreServerRequest
 }
 
 // Send marshals and sends the RestoreServer API request.
@@ -712,7 +724,7 @@ func (c *OpsWorksCM) RestoreServerRequest(input *RestoreServerInput) RestoreServ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RestoreServerRequest{Request: req, Input: input}
+	return RestoreServerRequest{Request: req, Input: input, Copy: c.RestoreServerRequest}
 }
 
 const opStartMaintenance = "StartMaintenance"
@@ -721,6 +733,7 @@ const opStartMaintenance = "StartMaintenance"
 type StartMaintenanceRequest struct {
 	*aws.Request
 	Input *StartMaintenanceInput
+	Copy  func(*StartMaintenanceInput) StartMaintenanceRequest
 }
 
 // Send marshals and sends the StartMaintenance API request.
@@ -769,7 +782,7 @@ func (c *OpsWorksCM) StartMaintenanceRequest(input *StartMaintenanceInput) Start
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartMaintenanceRequest{Request: req, Input: input}
+	return StartMaintenanceRequest{Request: req, Input: input, Copy: c.StartMaintenanceRequest}
 }
 
 const opUpdateServer = "UpdateServer"
@@ -778,6 +791,7 @@ const opUpdateServer = "UpdateServer"
 type UpdateServerRequest struct {
 	*aws.Request
 	Input *UpdateServerInput
+	Copy  func(*UpdateServerInput) UpdateServerRequest
 }
 
 // Send marshals and sends the UpdateServer API request.
@@ -820,7 +834,7 @@ func (c *OpsWorksCM) UpdateServerRequest(input *UpdateServerInput) UpdateServerR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateServerRequest{Request: req, Input: input}
+	return UpdateServerRequest{Request: req, Input: input, Copy: c.UpdateServerRequest}
 }
 
 const opUpdateServerEngineAttributes = "UpdateServerEngineAttributes"
@@ -829,6 +843,7 @@ const opUpdateServerEngineAttributes = "UpdateServerEngineAttributes"
 type UpdateServerEngineAttributesRequest struct {
 	*aws.Request
 	Input *UpdateServerEngineAttributesInput
+	Copy  func(*UpdateServerEngineAttributesInput) UpdateServerEngineAttributesRequest
 }
 
 // Send marshals and sends the UpdateServerEngineAttributes API request.
@@ -880,7 +895,7 @@ func (c *OpsWorksCM) UpdateServerEngineAttributesRequest(input *UpdateServerEngi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateServerEngineAttributesRequest{Request: req, Input: input}
+	return UpdateServerEngineAttributesRequest{Request: req, Input: input, Copy: c.UpdateServerEngineAttributesRequest}
 }
 
 // Stores account attributes.

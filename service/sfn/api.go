@@ -15,6 +15,7 @@ const opCreateActivity = "CreateActivity"
 type CreateActivityRequest struct {
 	*aws.Request
 	Input *CreateActivityInput
+	Copy  func(*CreateActivityInput) CreateActivityRequest
 }
 
 // Send marshals and sends the CreateActivity API request.
@@ -60,7 +61,7 @@ func (c *SFN) CreateActivityRequest(input *CreateActivityInput) CreateActivityRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateActivityRequest{Request: req, Input: input}
+	return CreateActivityRequest{Request: req, Input: input, Copy: c.CreateActivityRequest}
 }
 
 const opCreateStateMachine = "CreateStateMachine"
@@ -69,6 +70,7 @@ const opCreateStateMachine = "CreateStateMachine"
 type CreateStateMachineRequest struct {
 	*aws.Request
 	Input *CreateStateMachineInput
+	Copy  func(*CreateStateMachineInput) CreateStateMachineRequest
 }
 
 // Send marshals and sends the CreateStateMachine API request.
@@ -112,7 +114,7 @@ func (c *SFN) CreateStateMachineRequest(input *CreateStateMachineInput) CreateSt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStateMachineRequest{Request: req, Input: input}
+	return CreateStateMachineRequest{Request: req, Input: input, Copy: c.CreateStateMachineRequest}
 }
 
 const opDeleteActivity = "DeleteActivity"
@@ -121,6 +123,7 @@ const opDeleteActivity = "DeleteActivity"
 type DeleteActivityRequest struct {
 	*aws.Request
 	Input *DeleteActivityInput
+	Copy  func(*DeleteActivityInput) DeleteActivityRequest
 }
 
 // Send marshals and sends the DeleteActivity API request.
@@ -161,7 +164,7 @@ func (c *SFN) DeleteActivityRequest(input *DeleteActivityInput) DeleteActivityRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteActivityRequest{Request: req, Input: input}
+	return DeleteActivityRequest{Request: req, Input: input, Copy: c.DeleteActivityRequest}
 }
 
 const opDeleteStateMachine = "DeleteStateMachine"
@@ -170,6 +173,7 @@ const opDeleteStateMachine = "DeleteStateMachine"
 type DeleteStateMachineRequest struct {
 	*aws.Request
 	Input *DeleteStateMachineInput
+	Copy  func(*DeleteStateMachineInput) DeleteStateMachineRequest
 }
 
 // Send marshals and sends the DeleteStateMachine API request.
@@ -215,7 +219,7 @@ func (c *SFN) DeleteStateMachineRequest(input *DeleteStateMachineInput) DeleteSt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStateMachineRequest{Request: req, Input: input}
+	return DeleteStateMachineRequest{Request: req, Input: input, Copy: c.DeleteStateMachineRequest}
 }
 
 const opDescribeActivity = "DescribeActivity"
@@ -224,6 +228,7 @@ const opDescribeActivity = "DescribeActivity"
 type DescribeActivityRequest struct {
 	*aws.Request
 	Input *DescribeActivityInput
+	Copy  func(*DescribeActivityInput) DescribeActivityRequest
 }
 
 // Send marshals and sends the DescribeActivity API request.
@@ -264,7 +269,7 @@ func (c *SFN) DescribeActivityRequest(input *DescribeActivityInput) DescribeActi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeActivityRequest{Request: req, Input: input}
+	return DescribeActivityRequest{Request: req, Input: input, Copy: c.DescribeActivityRequest}
 }
 
 const opDescribeExecution = "DescribeExecution"
@@ -273,6 +278,7 @@ const opDescribeExecution = "DescribeExecution"
 type DescribeExecutionRequest struct {
 	*aws.Request
 	Input *DescribeExecutionInput
+	Copy  func(*DescribeExecutionInput) DescribeExecutionRequest
 }
 
 // Send marshals and sends the DescribeExecution API request.
@@ -313,7 +319,7 @@ func (c *SFN) DescribeExecutionRequest(input *DescribeExecutionInput) DescribeEx
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeExecutionRequest{Request: req, Input: input}
+	return DescribeExecutionRequest{Request: req, Input: input, Copy: c.DescribeExecutionRequest}
 }
 
 const opDescribeStateMachine = "DescribeStateMachine"
@@ -322,6 +328,7 @@ const opDescribeStateMachine = "DescribeStateMachine"
 type DescribeStateMachineRequest struct {
 	*aws.Request
 	Input *DescribeStateMachineInput
+	Copy  func(*DescribeStateMachineInput) DescribeStateMachineRequest
 }
 
 // Send marshals and sends the DescribeStateMachine API request.
@@ -362,7 +369,7 @@ func (c *SFN) DescribeStateMachineRequest(input *DescribeStateMachineInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStateMachineRequest{Request: req, Input: input}
+	return DescribeStateMachineRequest{Request: req, Input: input, Copy: c.DescribeStateMachineRequest}
 }
 
 const opDescribeStateMachineForExecution = "DescribeStateMachineForExecution"
@@ -371,6 +378,7 @@ const opDescribeStateMachineForExecution = "DescribeStateMachineForExecution"
 type DescribeStateMachineForExecutionRequest struct {
 	*aws.Request
 	Input *DescribeStateMachineForExecutionInput
+	Copy  func(*DescribeStateMachineForExecutionInput) DescribeStateMachineForExecutionRequest
 }
 
 // Send marshals and sends the DescribeStateMachineForExecution API request.
@@ -411,7 +419,7 @@ func (c *SFN) DescribeStateMachineForExecutionRequest(input *DescribeStateMachin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStateMachineForExecutionRequest{Request: req, Input: input}
+	return DescribeStateMachineForExecutionRequest{Request: req, Input: input, Copy: c.DescribeStateMachineForExecutionRequest}
 }
 
 const opGetActivityTask = "GetActivityTask"
@@ -420,6 +428,7 @@ const opGetActivityTask = "GetActivityTask"
 type GetActivityTaskRequest struct {
 	*aws.Request
 	Input *GetActivityTaskInput
+	Copy  func(*GetActivityTaskInput) GetActivityTaskRequest
 }
 
 // Send marshals and sends the GetActivityTask API request.
@@ -469,7 +478,7 @@ func (c *SFN) GetActivityTaskRequest(input *GetActivityTaskInput) GetActivityTas
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetActivityTaskRequest{Request: req, Input: input}
+	return GetActivityTaskRequest{Request: req, Input: input, Copy: c.GetActivityTaskRequest}
 }
 
 const opGetExecutionHistory = "GetExecutionHistory"
@@ -478,6 +487,7 @@ const opGetExecutionHistory = "GetExecutionHistory"
 type GetExecutionHistoryRequest struct {
 	*aws.Request
 	Input *GetExecutionHistoryInput
+	Copy  func(*GetExecutionHistoryInput) GetExecutionHistoryRequest
 }
 
 // Send marshals and sends the GetExecutionHistory API request.
@@ -530,57 +540,53 @@ func (c *SFN) GetExecutionHistoryRequest(input *GetExecutionHistoryInput) GetExe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetExecutionHistoryRequest{Request: req, Input: input}
+	return GetExecutionHistoryRequest{Request: req, Input: input, Copy: c.GetExecutionHistoryRequest}
 }
 
-// GetExecutionHistoryPages iterates over the pages of a GetExecutionHistory operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetExecutionHistory method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetExecutionHistoryRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetExecutionHistory operation.
-//    pageNum := 0
-//    err := client.GetExecutionHistoryPages(params,
-//        func(page *GetExecutionHistoryOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetExecutionHistoryRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SFN) GetExecutionHistoryPages(input *GetExecutionHistoryInput, fn func(*GetExecutionHistoryOutput, bool) bool) error {
-	return c.GetExecutionHistoryPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetExecutionHistoryRequest) Paginate(opts ...aws.Option) GetExecutionHistoryPager {
+	return GetExecutionHistoryPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetExecutionHistoryInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetExecutionHistoryPagesWithContext same as GetExecutionHistoryPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) GetExecutionHistoryPagesWithContext(ctx aws.Context, input *GetExecutionHistoryInput, fn func(*GetExecutionHistoryOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetExecutionHistoryInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetExecutionHistoryRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetExecutionHistoryOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetExecutionHistoryPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetExecutionHistoryPager struct {
+	aws.Pager
+}
+
+func (p *GetExecutionHistoryPager) CurrentPage() *GetExecutionHistoryOutput {
+	return p.Pager.CurrentPage().(*GetExecutionHistoryOutput)
 }
 
 const opListActivities = "ListActivities"
@@ -589,6 +595,7 @@ const opListActivities = "ListActivities"
 type ListActivitiesRequest struct {
 	*aws.Request
 	Input *ListActivitiesInput
+	Copy  func(*ListActivitiesInput) ListActivitiesRequest
 }
 
 // Send marshals and sends the ListActivities API request.
@@ -639,57 +646,53 @@ func (c *SFN) ListActivitiesRequest(input *ListActivitiesInput) ListActivitiesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListActivitiesRequest{Request: req, Input: input}
+	return ListActivitiesRequest{Request: req, Input: input, Copy: c.ListActivitiesRequest}
 }
 
-// ListActivitiesPages iterates over the pages of a ListActivities operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListActivities method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListActivitiesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListActivities operation.
-//    pageNum := 0
-//    err := client.ListActivitiesPages(params,
-//        func(page *ListActivitiesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListActivitiesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SFN) ListActivitiesPages(input *ListActivitiesInput, fn func(*ListActivitiesOutput, bool) bool) error {
-	return c.ListActivitiesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListActivitiesRequest) Paginate(opts ...aws.Option) ListActivitiesPager {
+	return ListActivitiesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListActivitiesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListActivitiesPagesWithContext same as ListActivitiesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) ListActivitiesPagesWithContext(ctx aws.Context, input *ListActivitiesInput, fn func(*ListActivitiesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListActivitiesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListActivitiesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListActivitiesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListActivitiesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListActivitiesPager struct {
+	aws.Pager
+}
+
+func (p *ListActivitiesPager) CurrentPage() *ListActivitiesOutput {
+	return p.Pager.CurrentPage().(*ListActivitiesOutput)
 }
 
 const opListExecutions = "ListExecutions"
@@ -698,6 +701,7 @@ const opListExecutions = "ListExecutions"
 type ListExecutionsRequest struct {
 	*aws.Request
 	Input *ListExecutionsInput
+	Copy  func(*ListExecutionsInput) ListExecutionsRequest
 }
 
 // Send marshals and sends the ListExecutions API request.
@@ -748,57 +752,53 @@ func (c *SFN) ListExecutionsRequest(input *ListExecutionsInput) ListExecutionsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListExecutionsRequest{Request: req, Input: input}
+	return ListExecutionsRequest{Request: req, Input: input, Copy: c.ListExecutionsRequest}
 }
 
-// ListExecutionsPages iterates over the pages of a ListExecutions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListExecutions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListExecutionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListExecutions operation.
-//    pageNum := 0
-//    err := client.ListExecutionsPages(params,
-//        func(page *ListExecutionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListExecutionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SFN) ListExecutionsPages(input *ListExecutionsInput, fn func(*ListExecutionsOutput, bool) bool) error {
-	return c.ListExecutionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListExecutionsRequest) Paginate(opts ...aws.Option) ListExecutionsPager {
+	return ListExecutionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListExecutionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListExecutionsPagesWithContext same as ListExecutionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) ListExecutionsPagesWithContext(ctx aws.Context, input *ListExecutionsInput, fn func(*ListExecutionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListExecutionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListExecutionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListExecutionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListExecutionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListExecutionsPager struct {
+	aws.Pager
+}
+
+func (p *ListExecutionsPager) CurrentPage() *ListExecutionsOutput {
+	return p.Pager.CurrentPage().(*ListExecutionsOutput)
 }
 
 const opListStateMachines = "ListStateMachines"
@@ -807,6 +807,7 @@ const opListStateMachines = "ListStateMachines"
 type ListStateMachinesRequest struct {
 	*aws.Request
 	Input *ListStateMachinesInput
+	Copy  func(*ListStateMachinesInput) ListStateMachinesRequest
 }
 
 // Send marshals and sends the ListStateMachines API request.
@@ -857,57 +858,53 @@ func (c *SFN) ListStateMachinesRequest(input *ListStateMachinesInput) ListStateM
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStateMachinesRequest{Request: req, Input: input}
+	return ListStateMachinesRequest{Request: req, Input: input, Copy: c.ListStateMachinesRequest}
 }
 
-// ListStateMachinesPages iterates over the pages of a ListStateMachines operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListStateMachines method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListStateMachinesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListStateMachines operation.
-//    pageNum := 0
-//    err := client.ListStateMachinesPages(params,
-//        func(page *ListStateMachinesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListStateMachinesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SFN) ListStateMachinesPages(input *ListStateMachinesInput, fn func(*ListStateMachinesOutput, bool) bool) error {
-	return c.ListStateMachinesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListStateMachinesRequest) Paginate(opts ...aws.Option) ListStateMachinesPager {
+	return ListStateMachinesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListStateMachinesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListStateMachinesPagesWithContext same as ListStateMachinesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SFN) ListStateMachinesPagesWithContext(ctx aws.Context, input *ListStateMachinesInput, fn func(*ListStateMachinesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListStateMachinesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListStateMachinesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListStateMachinesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListStateMachinesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListStateMachinesPager struct {
+	aws.Pager
+}
+
+func (p *ListStateMachinesPager) CurrentPage() *ListStateMachinesOutput {
+	return p.Pager.CurrentPage().(*ListStateMachinesOutput)
 }
 
 const opSendTaskFailure = "SendTaskFailure"
@@ -916,6 +913,7 @@ const opSendTaskFailure = "SendTaskFailure"
 type SendTaskFailureRequest struct {
 	*aws.Request
 	Input *SendTaskFailureInput
+	Copy  func(*SendTaskFailureInput) SendTaskFailureRequest
 }
 
 // Send marshals and sends the SendTaskFailure API request.
@@ -956,7 +954,7 @@ func (c *SFN) SendTaskFailureRequest(input *SendTaskFailureInput) SendTaskFailur
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendTaskFailureRequest{Request: req, Input: input}
+	return SendTaskFailureRequest{Request: req, Input: input, Copy: c.SendTaskFailureRequest}
 }
 
 const opSendTaskHeartbeat = "SendTaskHeartbeat"
@@ -965,6 +963,7 @@ const opSendTaskHeartbeat = "SendTaskHeartbeat"
 type SendTaskHeartbeatRequest struct {
 	*aws.Request
 	Input *SendTaskHeartbeatInput
+	Copy  func(*SendTaskHeartbeatInput) SendTaskHeartbeatRequest
 }
 
 // Send marshals and sends the SendTaskHeartbeat API request.
@@ -1017,7 +1016,7 @@ func (c *SFN) SendTaskHeartbeatRequest(input *SendTaskHeartbeatInput) SendTaskHe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendTaskHeartbeatRequest{Request: req, Input: input}
+	return SendTaskHeartbeatRequest{Request: req, Input: input, Copy: c.SendTaskHeartbeatRequest}
 }
 
 const opSendTaskSuccess = "SendTaskSuccess"
@@ -1026,6 +1025,7 @@ const opSendTaskSuccess = "SendTaskSuccess"
 type SendTaskSuccessRequest struct {
 	*aws.Request
 	Input *SendTaskSuccessInput
+	Copy  func(*SendTaskSuccessInput) SendTaskSuccessRequest
 }
 
 // Send marshals and sends the SendTaskSuccess API request.
@@ -1067,7 +1067,7 @@ func (c *SFN) SendTaskSuccessRequest(input *SendTaskSuccessInput) SendTaskSucces
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendTaskSuccessRequest{Request: req, Input: input}
+	return SendTaskSuccessRequest{Request: req, Input: input, Copy: c.SendTaskSuccessRequest}
 }
 
 const opStartExecution = "StartExecution"
@@ -1076,6 +1076,7 @@ const opStartExecution = "StartExecution"
 type StartExecutionRequest struct {
 	*aws.Request
 	Input *StartExecutionInput
+	Copy  func(*StartExecutionInput) StartExecutionRequest
 }
 
 // Send marshals and sends the StartExecution API request.
@@ -1116,7 +1117,7 @@ func (c *SFN) StartExecutionRequest(input *StartExecutionInput) StartExecutionRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartExecutionRequest{Request: req, Input: input}
+	return StartExecutionRequest{Request: req, Input: input, Copy: c.StartExecutionRequest}
 }
 
 const opStopExecution = "StopExecution"
@@ -1125,6 +1126,7 @@ const opStopExecution = "StopExecution"
 type StopExecutionRequest struct {
 	*aws.Request
 	Input *StopExecutionInput
+	Copy  func(*StopExecutionInput) StopExecutionRequest
 }
 
 // Send marshals and sends the StopExecution API request.
@@ -1165,7 +1167,7 @@ func (c *SFN) StopExecutionRequest(input *StopExecutionInput) StopExecutionReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopExecutionRequest{Request: req, Input: input}
+	return StopExecutionRequest{Request: req, Input: input, Copy: c.StopExecutionRequest}
 }
 
 const opUpdateStateMachine = "UpdateStateMachine"
@@ -1174,6 +1176,7 @@ const opUpdateStateMachine = "UpdateStateMachine"
 type UpdateStateMachineRequest struct {
 	*aws.Request
 	Input *UpdateStateMachineInput
+	Copy  func(*UpdateStateMachineInput) UpdateStateMachineRequest
 }
 
 // Send marshals and sends the UpdateStateMachine API request.
@@ -1221,7 +1224,7 @@ func (c *SFN) UpdateStateMachineRequest(input *UpdateStateMachineInput) UpdateSt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateStateMachineRequest{Request: req, Input: input}
+	return UpdateStateMachineRequest{Request: req, Input: input, Copy: c.UpdateStateMachineRequest}
 }
 
 // Contains details about an activity which failed during an execution.

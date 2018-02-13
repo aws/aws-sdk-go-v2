@@ -18,6 +18,7 @@ const opDeleteObject = "DeleteObject"
 type DeleteObjectRequest struct {
 	*aws.Request
 	Input *DeleteObjectInput
+	Copy  func(*DeleteObjectInput) DeleteObjectRequest
 }
 
 // Send marshals and sends the DeleteObject API request.
@@ -58,7 +59,7 @@ func (c *MediaStoreData) DeleteObjectRequest(input *DeleteObjectInput) DeleteObj
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteObjectRequest{Request: req, Input: input}
+	return DeleteObjectRequest{Request: req, Input: input, Copy: c.DeleteObjectRequest}
 }
 
 const opDescribeObject = "DescribeObject"
@@ -67,6 +68,7 @@ const opDescribeObject = "DescribeObject"
 type DescribeObjectRequest struct {
 	*aws.Request
 	Input *DescribeObjectInput
+	Copy  func(*DescribeObjectInput) DescribeObjectRequest
 }
 
 // Send marshals and sends the DescribeObject API request.
@@ -107,7 +109,7 @@ func (c *MediaStoreData) DescribeObjectRequest(input *DescribeObjectInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeObjectRequest{Request: req, Input: input}
+	return DescribeObjectRequest{Request: req, Input: input, Copy: c.DescribeObjectRequest}
 }
 
 const opGetObject = "GetObject"
@@ -116,6 +118,7 @@ const opGetObject = "GetObject"
 type GetObjectRequest struct {
 	*aws.Request
 	Input *GetObjectInput
+	Copy  func(*GetObjectInput) GetObjectRequest
 }
 
 // Send marshals and sends the GetObject API request.
@@ -156,7 +159,7 @@ func (c *MediaStoreData) GetObjectRequest(input *GetObjectInput) GetObjectReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetObjectRequest{Request: req, Input: input}
+	return GetObjectRequest{Request: req, Input: input, Copy: c.GetObjectRequest}
 }
 
 const opListItems = "ListItems"
@@ -165,6 +168,7 @@ const opListItems = "ListItems"
 type ListItemsRequest struct {
 	*aws.Request
 	Input *ListItemsInput
+	Copy  func(*ListItemsInput) ListItemsRequest
 }
 
 // Send marshals and sends the ListItems API request.
@@ -206,7 +210,7 @@ func (c *MediaStoreData) ListItemsRequest(input *ListItemsInput) ListItemsReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListItemsRequest{Request: req, Input: input}
+	return ListItemsRequest{Request: req, Input: input, Copy: c.ListItemsRequest}
 }
 
 const opPutObject = "PutObject"
@@ -215,6 +219,7 @@ const opPutObject = "PutObject"
 type PutObjectRequest struct {
 	*aws.Request
 	Input *PutObjectInput
+	Copy  func(*PutObjectInput) PutObjectRequest
 }
 
 // Send marshals and sends the PutObject API request.
@@ -258,7 +263,7 @@ func (c *MediaStoreData) PutObjectRequest(input *PutObjectInput) PutObjectReques
 	req.Handlers.Sign.Remove(v4.SignRequestHandler)
 	handler := v4.BuildNamedHandler("v4.CustomSignerHandler", v4.WithUnsignedPayload)
 	req.Handlers.Sign.PushFrontNamed(handler)
-	return PutObjectRequest{Request: req, Input: input}
+	return PutObjectRequest{Request: req, Input: input, Copy: c.PutObjectRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-data-2017-09-01/DeleteObjectRequest

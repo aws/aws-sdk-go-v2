@@ -18,6 +18,7 @@ const opAddTagsToStream = "AddTagsToStream"
 type AddTagsToStreamRequest struct {
 	*aws.Request
 	Input *AddTagsToStreamInput
+	Copy  func(*AddTagsToStreamInput) AddTagsToStreamRequest
 }
 
 // Send marshals and sends the AddTagsToStream API request.
@@ -64,7 +65,7 @@ func (c *Kinesis) AddTagsToStreamRequest(input *AddTagsToStreamInput) AddTagsToS
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToStreamRequest{Request: req, Input: input}
+	return AddTagsToStreamRequest{Request: req, Input: input, Copy: c.AddTagsToStreamRequest}
 }
 
 const opCreateStream = "CreateStream"
@@ -73,6 +74,7 @@ const opCreateStream = "CreateStream"
 type CreateStreamRequest struct {
 	*aws.Request
 	Input *CreateStreamInput
+	Copy  func(*CreateStreamInput) CreateStreamRequest
 }
 
 // Send marshals and sends the CreateStream API request.
@@ -152,7 +154,7 @@ func (c *Kinesis) CreateStreamRequest(input *CreateStreamInput) CreateStreamRequ
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStreamRequest{Request: req, Input: input}
+	return CreateStreamRequest{Request: req, Input: input, Copy: c.CreateStreamRequest}
 }
 
 const opDecreaseStreamRetentionPeriod = "DecreaseStreamRetentionPeriod"
@@ -161,6 +163,7 @@ const opDecreaseStreamRetentionPeriod = "DecreaseStreamRetentionPeriod"
 type DecreaseStreamRetentionPeriodRequest struct {
 	*aws.Request
 	Input *DecreaseStreamRetentionPeriodInput
+	Copy  func(*DecreaseStreamRetentionPeriodInput) DecreaseStreamRetentionPeriodRequest
 }
 
 // Send marshals and sends the DecreaseStreamRetentionPeriod API request.
@@ -209,7 +212,7 @@ func (c *Kinesis) DecreaseStreamRetentionPeriodRequest(input *DecreaseStreamRete
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DecreaseStreamRetentionPeriodRequest{Request: req, Input: input}
+	return DecreaseStreamRetentionPeriodRequest{Request: req, Input: input, Copy: c.DecreaseStreamRetentionPeriodRequest}
 }
 
 const opDeleteStream = "DeleteStream"
@@ -218,6 +221,7 @@ const opDeleteStream = "DeleteStream"
 type DeleteStreamRequest struct {
 	*aws.Request
 	Input *DeleteStreamInput
+	Copy  func(*DeleteStreamInput) DeleteStreamRequest
 }
 
 // Send marshals and sends the DeleteStream API request.
@@ -279,7 +283,7 @@ func (c *Kinesis) DeleteStreamRequest(input *DeleteStreamInput) DeleteStreamRequ
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStreamRequest{Request: req, Input: input}
+	return DeleteStreamRequest{Request: req, Input: input, Copy: c.DeleteStreamRequest}
 }
 
 const opDescribeLimits = "DescribeLimits"
@@ -288,6 +292,7 @@ const opDescribeLimits = "DescribeLimits"
 type DescribeLimitsRequest struct {
 	*aws.Request
 	Input *DescribeLimitsInput
+	Copy  func(*DescribeLimitsInput) DescribeLimitsRequest
 }
 
 // Send marshals and sends the DescribeLimits API request.
@@ -333,7 +338,7 @@ func (c *Kinesis) DescribeLimitsRequest(input *DescribeLimitsInput) DescribeLimi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLimitsRequest{Request: req, Input: input}
+	return DescribeLimitsRequest{Request: req, Input: input, Copy: c.DescribeLimitsRequest}
 }
 
 const opDescribeStream = "DescribeStream"
@@ -342,6 +347,7 @@ const opDescribeStream = "DescribeStream"
 type DescribeStreamRequest struct {
 	*aws.Request
 	Input *DescribeStreamInput
+	Copy  func(*DescribeStreamInput) DescribeStreamRequest
 }
 
 // Send marshals and sends the DescribeStream API request.
@@ -406,57 +412,53 @@ func (c *Kinesis) DescribeStreamRequest(input *DescribeStreamInput) DescribeStre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStreamRequest{Request: req, Input: input}
+	return DescribeStreamRequest{Request: req, Input: input, Copy: c.DescribeStreamRequest}
 }
 
-// DescribeStreamPages iterates over the pages of a DescribeStream operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeStream method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeStreamRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeStream operation.
-//    pageNum := 0
-//    err := client.DescribeStreamPages(params,
-//        func(page *DescribeStreamOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeStreamRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Kinesis) DescribeStreamPages(input *DescribeStreamInput, fn func(*DescribeStreamOutput, bool) bool) error {
-	return c.DescribeStreamPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeStreamRequest) Paginate(opts ...aws.Option) DescribeStreamPager {
+	return DescribeStreamPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeStreamInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeStreamPagesWithContext same as DescribeStreamPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) DescribeStreamPagesWithContext(ctx aws.Context, input *DescribeStreamInput, fn func(*DescribeStreamOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeStreamInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeStreamRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeStreamOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeStreamPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeStreamPager struct {
+	aws.Pager
+}
+
+func (p *DescribeStreamPager) CurrentPage() *DescribeStreamOutput {
+	return p.Pager.CurrentPage().(*DescribeStreamOutput)
 }
 
 const opDescribeStreamSummary = "DescribeStreamSummary"
@@ -465,6 +467,7 @@ const opDescribeStreamSummary = "DescribeStreamSummary"
 type DescribeStreamSummaryRequest struct {
 	*aws.Request
 	Input *DescribeStreamSummaryInput
+	Copy  func(*DescribeStreamSummaryInput) DescribeStreamSummaryRequest
 }
 
 // Send marshals and sends the DescribeStreamSummary API request.
@@ -510,7 +513,7 @@ func (c *Kinesis) DescribeStreamSummaryRequest(input *DescribeStreamSummaryInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStreamSummaryRequest{Request: req, Input: input}
+	return DescribeStreamSummaryRequest{Request: req, Input: input, Copy: c.DescribeStreamSummaryRequest}
 }
 
 const opDisableEnhancedMonitoring = "DisableEnhancedMonitoring"
@@ -519,6 +522,7 @@ const opDisableEnhancedMonitoring = "DisableEnhancedMonitoring"
 type DisableEnhancedMonitoringRequest struct {
 	*aws.Request
 	Input *DisableEnhancedMonitoringInput
+	Copy  func(*DisableEnhancedMonitoringInput) DisableEnhancedMonitoringRequest
 }
 
 // Send marshals and sends the DisableEnhancedMonitoring API request.
@@ -559,7 +563,7 @@ func (c *Kinesis) DisableEnhancedMonitoringRequest(input *DisableEnhancedMonitor
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableEnhancedMonitoringRequest{Request: req, Input: input}
+	return DisableEnhancedMonitoringRequest{Request: req, Input: input, Copy: c.DisableEnhancedMonitoringRequest}
 }
 
 const opEnableEnhancedMonitoring = "EnableEnhancedMonitoring"
@@ -568,6 +572,7 @@ const opEnableEnhancedMonitoring = "EnableEnhancedMonitoring"
 type EnableEnhancedMonitoringRequest struct {
 	*aws.Request
 	Input *EnableEnhancedMonitoringInput
+	Copy  func(*EnableEnhancedMonitoringInput) EnableEnhancedMonitoringRequest
 }
 
 // Send marshals and sends the EnableEnhancedMonitoring API request.
@@ -608,7 +613,7 @@ func (c *Kinesis) EnableEnhancedMonitoringRequest(input *EnableEnhancedMonitorin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableEnhancedMonitoringRequest{Request: req, Input: input}
+	return EnableEnhancedMonitoringRequest{Request: req, Input: input, Copy: c.EnableEnhancedMonitoringRequest}
 }
 
 const opGetRecords = "GetRecords"
@@ -617,6 +622,7 @@ const opGetRecords = "GetRecords"
 type GetRecordsRequest struct {
 	*aws.Request
 	Input *GetRecordsInput
+	Copy  func(*GetRecordsInput) GetRecordsRequest
 }
 
 // Send marshals and sends the GetRecords API request.
@@ -708,7 +714,7 @@ func (c *Kinesis) GetRecordsRequest(input *GetRecordsInput) GetRecordsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetRecordsRequest{Request: req, Input: input}
+	return GetRecordsRequest{Request: req, Input: input, Copy: c.GetRecordsRequest}
 }
 
 const opGetShardIterator = "GetShardIterator"
@@ -717,6 +723,7 @@ const opGetShardIterator = "GetShardIterator"
 type GetShardIteratorRequest struct {
 	*aws.Request
 	Input *GetShardIteratorInput
+	Copy  func(*GetShardIteratorInput) GetShardIteratorRequest
 }
 
 // Send marshals and sends the GetShardIterator API request.
@@ -795,7 +802,7 @@ func (c *Kinesis) GetShardIteratorRequest(input *GetShardIteratorInput) GetShard
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetShardIteratorRequest{Request: req, Input: input}
+	return GetShardIteratorRequest{Request: req, Input: input, Copy: c.GetShardIteratorRequest}
 }
 
 const opIncreaseStreamRetentionPeriod = "IncreaseStreamRetentionPeriod"
@@ -804,6 +811,7 @@ const opIncreaseStreamRetentionPeriod = "IncreaseStreamRetentionPeriod"
 type IncreaseStreamRetentionPeriodRequest struct {
 	*aws.Request
 	Input *IncreaseStreamRetentionPeriodInput
+	Copy  func(*IncreaseStreamRetentionPeriodInput) IncreaseStreamRetentionPeriodRequest
 }
 
 // Send marshals and sends the IncreaseStreamRetentionPeriod API request.
@@ -856,7 +864,7 @@ func (c *Kinesis) IncreaseStreamRetentionPeriodRequest(input *IncreaseStreamRete
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return IncreaseStreamRetentionPeriodRequest{Request: req, Input: input}
+	return IncreaseStreamRetentionPeriodRequest{Request: req, Input: input, Copy: c.IncreaseStreamRetentionPeriodRequest}
 }
 
 const opListStreams = "ListStreams"
@@ -865,6 +873,7 @@ const opListStreams = "ListStreams"
 type ListStreamsRequest struct {
 	*aws.Request
 	Input *ListStreamsInput
+	Copy  func(*ListStreamsInput) ListStreamsRequest
 }
 
 // Send marshals and sends the ListStreams API request.
@@ -926,57 +935,53 @@ func (c *Kinesis) ListStreamsRequest(input *ListStreamsInput) ListStreamsRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStreamsRequest{Request: req, Input: input}
+	return ListStreamsRequest{Request: req, Input: input, Copy: c.ListStreamsRequest}
 }
 
-// ListStreamsPages iterates over the pages of a ListStreams operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListStreams method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListStreamsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListStreams operation.
-//    pageNum := 0
-//    err := client.ListStreamsPages(params,
-//        func(page *ListStreamsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListStreamsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Kinesis) ListStreamsPages(input *ListStreamsInput, fn func(*ListStreamsOutput, bool) bool) error {
-	return c.ListStreamsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListStreamsRequest) Paginate(opts ...aws.Option) ListStreamsPager {
+	return ListStreamsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListStreamsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListStreamsPagesWithContext same as ListStreamsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Kinesis) ListStreamsPagesWithContext(ctx aws.Context, input *ListStreamsInput, fn func(*ListStreamsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListStreamsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListStreamsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListStreamsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListStreamsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListStreamsPager struct {
+	aws.Pager
+}
+
+func (p *ListStreamsPager) CurrentPage() *ListStreamsOutput {
+	return p.Pager.CurrentPage().(*ListStreamsOutput)
 }
 
 const opListTagsForStream = "ListTagsForStream"
@@ -985,6 +990,7 @@ const opListTagsForStream = "ListTagsForStream"
 type ListTagsForStreamRequest struct {
 	*aws.Request
 	Input *ListTagsForStreamInput
+	Copy  func(*ListTagsForStreamInput) ListTagsForStreamRequest
 }
 
 // Send marshals and sends the ListTagsForStream API request.
@@ -1025,7 +1031,7 @@ func (c *Kinesis) ListTagsForStreamRequest(input *ListTagsForStreamInput) ListTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForStreamRequest{Request: req, Input: input}
+	return ListTagsForStreamRequest{Request: req, Input: input, Copy: c.ListTagsForStreamRequest}
 }
 
 const opMergeShards = "MergeShards"
@@ -1034,6 +1040,7 @@ const opMergeShards = "MergeShards"
 type MergeShardsRequest struct {
 	*aws.Request
 	Input *MergeShardsInput
+	Copy  func(*MergeShardsInput) MergeShardsRequest
 }
 
 // Send marshals and sends the MergeShards API request.
@@ -1110,7 +1117,7 @@ func (c *Kinesis) MergeShardsRequest(input *MergeShardsInput) MergeShardsRequest
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return MergeShardsRequest{Request: req, Input: input}
+	return MergeShardsRequest{Request: req, Input: input, Copy: c.MergeShardsRequest}
 }
 
 const opPutRecord = "PutRecord"
@@ -1119,6 +1126,7 @@ const opPutRecord = "PutRecord"
 type PutRecordRequest struct {
 	*aws.Request
 	Input *PutRecordInput
+	Copy  func(*PutRecordInput) PutRecordRequest
 }
 
 // Send marshals and sends the PutRecord API request.
@@ -1197,7 +1205,7 @@ func (c *Kinesis) PutRecordRequest(input *PutRecordInput) PutRecordRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutRecordRequest{Request: req, Input: input}
+	return PutRecordRequest{Request: req, Input: input, Copy: c.PutRecordRequest}
 }
 
 const opPutRecords = "PutRecords"
@@ -1206,6 +1214,7 @@ const opPutRecords = "PutRecords"
 type PutRecordsRequest struct {
 	*aws.Request
 	Input *PutRecordsInput
+	Copy  func(*PutRecordsInput) PutRecordsRequest
 }
 
 // Send marshals and sends the PutRecords API request.
@@ -1304,7 +1313,7 @@ func (c *Kinesis) PutRecordsRequest(input *PutRecordsInput) PutRecordsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutRecordsRequest{Request: req, Input: input}
+	return PutRecordsRequest{Request: req, Input: input, Copy: c.PutRecordsRequest}
 }
 
 const opRemoveTagsFromStream = "RemoveTagsFromStream"
@@ -1313,6 +1322,7 @@ const opRemoveTagsFromStream = "RemoveTagsFromStream"
 type RemoveTagsFromStreamRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromStreamInput
+	Copy  func(*RemoveTagsFromStreamInput) RemoveTagsFromStreamRequest
 }
 
 // Send marshals and sends the RemoveTagsFromStream API request.
@@ -1358,7 +1368,7 @@ func (c *Kinesis) RemoveTagsFromStreamRequest(input *RemoveTagsFromStreamInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromStreamRequest{Request: req, Input: input}
+	return RemoveTagsFromStreamRequest{Request: req, Input: input, Copy: c.RemoveTagsFromStreamRequest}
 }
 
 const opSplitShard = "SplitShard"
@@ -1367,6 +1377,7 @@ const opSplitShard = "SplitShard"
 type SplitShardRequest struct {
 	*aws.Request
 	Input *SplitShardInput
+	Copy  func(*SplitShardInput) SplitShardRequest
 }
 
 // Send marshals and sends the SplitShard API request.
@@ -1453,7 +1464,7 @@ func (c *Kinesis) SplitShardRequest(input *SplitShardInput) SplitShardRequest {
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SplitShardRequest{Request: req, Input: input}
+	return SplitShardRequest{Request: req, Input: input, Copy: c.SplitShardRequest}
 }
 
 const opStartStreamEncryption = "StartStreamEncryption"
@@ -1462,6 +1473,7 @@ const opStartStreamEncryption = "StartStreamEncryption"
 type StartStreamEncryptionRequest struct {
 	*aws.Request
 	Input *StartStreamEncryptionInput
+	Copy  func(*StartStreamEncryptionInput) StartStreamEncryptionRequest
 }
 
 // Send marshals and sends the StartStreamEncryption API request.
@@ -1521,7 +1533,7 @@ func (c *Kinesis) StartStreamEncryptionRequest(input *StartStreamEncryptionInput
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartStreamEncryptionRequest{Request: req, Input: input}
+	return StartStreamEncryptionRequest{Request: req, Input: input, Copy: c.StartStreamEncryptionRequest}
 }
 
 const opStopStreamEncryption = "StopStreamEncryption"
@@ -1530,6 +1542,7 @@ const opStopStreamEncryption = "StopStreamEncryption"
 type StopStreamEncryptionRequest struct {
 	*aws.Request
 	Input *StopStreamEncryptionInput
+	Copy  func(*StopStreamEncryptionInput) StopStreamEncryptionRequest
 }
 
 // Send marshals and sends the StopStreamEncryption API request.
@@ -1589,7 +1602,7 @@ func (c *Kinesis) StopStreamEncryptionRequest(input *StopStreamEncryptionInput) 
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopStreamEncryptionRequest{Request: req, Input: input}
+	return StopStreamEncryptionRequest{Request: req, Input: input, Copy: c.StopStreamEncryptionRequest}
 }
 
 const opUpdateShardCount = "UpdateShardCount"
@@ -1598,6 +1611,7 @@ const opUpdateShardCount = "UpdateShardCount"
 type UpdateShardCountRequest struct {
 	*aws.Request
 	Input *UpdateShardCountInput
+	Copy  func(*UpdateShardCountInput) UpdateShardCountRequest
 }
 
 // Send marshals and sends the UpdateShardCount API request.
@@ -1671,7 +1685,7 @@ func (c *Kinesis) UpdateShardCountRequest(input *UpdateShardCountInput) UpdateSh
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateShardCountRequest{Request: req, Input: input}
+	return UpdateShardCountRequest{Request: req, Input: input, Copy: c.UpdateShardCountRequest}
 }
 
 // Represents the input for AddTagsToStream.

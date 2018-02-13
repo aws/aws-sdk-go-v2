@@ -15,6 +15,7 @@ const opCompareFaces = "CompareFaces"
 type CompareFacesRequest struct {
 	*aws.Request
 	Input *CompareFacesInput
+	Copy  func(*CompareFacesInput) CompareFacesRequest
 }
 
 // Send marshals and sends the CompareFaces API request.
@@ -94,7 +95,7 @@ func (c *Rekognition) CompareFacesRequest(input *CompareFacesInput) CompareFaces
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CompareFacesRequest{Request: req, Input: input}
+	return CompareFacesRequest{Request: req, Input: input, Copy: c.CompareFacesRequest}
 }
 
 const opCreateCollection = "CreateCollection"
@@ -103,6 +104,7 @@ const opCreateCollection = "CreateCollection"
 type CreateCollectionRequest struct {
 	*aws.Request
 	Input *CreateCollectionInput
+	Copy  func(*CreateCollectionInput) CreateCollectionRequest
 }
 
 // Send marshals and sends the CreateCollection API request.
@@ -152,7 +154,7 @@ func (c *Rekognition) CreateCollectionRequest(input *CreateCollectionInput) Crea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCollectionRequest{Request: req, Input: input}
+	return CreateCollectionRequest{Request: req, Input: input, Copy: c.CreateCollectionRequest}
 }
 
 const opCreateStreamProcessor = "CreateStreamProcessor"
@@ -161,6 +163,7 @@ const opCreateStreamProcessor = "CreateStreamProcessor"
 type CreateStreamProcessorRequest struct {
 	*aws.Request
 	Input *CreateStreamProcessorInput
+	Copy  func(*CreateStreamProcessorInput) CreateStreamProcessorRequest
 }
 
 // Send marshals and sends the CreateStreamProcessor API request.
@@ -213,7 +216,7 @@ func (c *Rekognition) CreateStreamProcessorRequest(input *CreateStreamProcessorI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateStreamProcessorRequest{Request: req, Input: input}
+	return CreateStreamProcessorRequest{Request: req, Input: input, Copy: c.CreateStreamProcessorRequest}
 }
 
 const opDeleteCollection = "DeleteCollection"
@@ -222,6 +225,7 @@ const opDeleteCollection = "DeleteCollection"
 type DeleteCollectionRequest struct {
 	*aws.Request
 	Input *DeleteCollectionInput
+	Copy  func(*DeleteCollectionInput) DeleteCollectionRequest
 }
 
 // Send marshals and sends the DeleteCollection API request.
@@ -264,7 +268,7 @@ func (c *Rekognition) DeleteCollectionRequest(input *DeleteCollectionInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCollectionRequest{Request: req, Input: input}
+	return DeleteCollectionRequest{Request: req, Input: input, Copy: c.DeleteCollectionRequest}
 }
 
 const opDeleteFaces = "DeleteFaces"
@@ -273,6 +277,7 @@ const opDeleteFaces = "DeleteFaces"
 type DeleteFacesRequest struct {
 	*aws.Request
 	Input *DeleteFacesInput
+	Copy  func(*DeleteFacesInput) DeleteFacesRequest
 }
 
 // Send marshals and sends the DeleteFaces API request.
@@ -315,7 +320,7 @@ func (c *Rekognition) DeleteFacesRequest(input *DeleteFacesInput) DeleteFacesReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFacesRequest{Request: req, Input: input}
+	return DeleteFacesRequest{Request: req, Input: input, Copy: c.DeleteFacesRequest}
 }
 
 const opDeleteStreamProcessor = "DeleteStreamProcessor"
@@ -324,6 +329,7 @@ const opDeleteStreamProcessor = "DeleteStreamProcessor"
 type DeleteStreamProcessorRequest struct {
 	*aws.Request
 	Input *DeleteStreamProcessorInput
+	Copy  func(*DeleteStreamProcessorInput) DeleteStreamProcessorRequest
 }
 
 // Send marshals and sends the DeleteStreamProcessor API request.
@@ -365,7 +371,7 @@ func (c *Rekognition) DeleteStreamProcessorRequest(input *DeleteStreamProcessorI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteStreamProcessorRequest{Request: req, Input: input}
+	return DeleteStreamProcessorRequest{Request: req, Input: input, Copy: c.DeleteStreamProcessorRequest}
 }
 
 const opDescribeStreamProcessor = "DescribeStreamProcessor"
@@ -374,6 +380,7 @@ const opDescribeStreamProcessor = "DescribeStreamProcessor"
 type DescribeStreamProcessorRequest struct {
 	*aws.Request
 	Input *DescribeStreamProcessorInput
+	Copy  func(*DescribeStreamProcessorInput) DescribeStreamProcessorRequest
 }
 
 // Send marshals and sends the DescribeStreamProcessor API request.
@@ -414,7 +421,7 @@ func (c *Rekognition) DescribeStreamProcessorRequest(input *DescribeStreamProces
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeStreamProcessorRequest{Request: req, Input: input}
+	return DescribeStreamProcessorRequest{Request: req, Input: input, Copy: c.DescribeStreamProcessorRequest}
 }
 
 const opDetectFaces = "DetectFaces"
@@ -423,6 +430,7 @@ const opDetectFaces = "DetectFaces"
 type DetectFacesRequest struct {
 	*aws.Request
 	Input *DetectFacesInput
+	Copy  func(*DetectFacesInput) DetectFacesRequest
 }
 
 // Send marshals and sends the DetectFaces API request.
@@ -484,7 +492,7 @@ func (c *Rekognition) DetectFacesRequest(input *DetectFacesInput) DetectFacesReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetectFacesRequest{Request: req, Input: input}
+	return DetectFacesRequest{Request: req, Input: input, Copy: c.DetectFacesRequest}
 }
 
 const opDetectLabels = "DetectLabels"
@@ -493,6 +501,7 @@ const opDetectLabels = "DetectLabels"
 type DetectLabelsRequest struct {
 	*aws.Request
 	Input *DetectLabelsInput
+	Copy  func(*DetectLabelsInput) DetectLabelsRequest
 }
 
 // Send marshals and sends the DetectLabels API request.
@@ -584,7 +593,7 @@ func (c *Rekognition) DetectLabelsRequest(input *DetectLabelsInput) DetectLabels
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetectLabelsRequest{Request: req, Input: input}
+	return DetectLabelsRequest{Request: req, Input: input, Copy: c.DetectLabelsRequest}
 }
 
 const opDetectModerationLabels = "DetectModerationLabels"
@@ -593,6 +602,7 @@ const opDetectModerationLabels = "DetectModerationLabels"
 type DetectModerationLabelsRequest struct {
 	*aws.Request
 	Input *DetectModerationLabelsInput
+	Copy  func(*DetectModerationLabelsInput) DetectModerationLabelsRequest
 }
 
 // Send marshals and sends the DetectModerationLabels API request.
@@ -643,7 +653,7 @@ func (c *Rekognition) DetectModerationLabelsRequest(input *DetectModerationLabel
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetectModerationLabelsRequest{Request: req, Input: input}
+	return DetectModerationLabelsRequest{Request: req, Input: input, Copy: c.DetectModerationLabelsRequest}
 }
 
 const opDetectText = "DetectText"
@@ -652,6 +662,7 @@ const opDetectText = "DetectText"
 type DetectTextRequest struct {
 	*aws.Request
 	Input *DetectTextInput
+	Copy  func(*DetectTextInput) DetectTextRequest
 }
 
 // Send marshals and sends the DetectText API request.
@@ -720,7 +731,7 @@ func (c *Rekognition) DetectTextRequest(input *DetectTextInput) DetectTextReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetectTextRequest{Request: req, Input: input}
+	return DetectTextRequest{Request: req, Input: input, Copy: c.DetectTextRequest}
 }
 
 const opGetCelebrityInfo = "GetCelebrityInfo"
@@ -729,6 +740,7 @@ const opGetCelebrityInfo = "GetCelebrityInfo"
 type GetCelebrityInfoRequest struct {
 	*aws.Request
 	Input *GetCelebrityInfoInput
+	Copy  func(*GetCelebrityInfoInput) GetCelebrityInfoRequest
 }
 
 // Send marshals and sends the GetCelebrityInfo API request.
@@ -773,7 +785,7 @@ func (c *Rekognition) GetCelebrityInfoRequest(input *GetCelebrityInfoInput) GetC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCelebrityInfoRequest{Request: req, Input: input}
+	return GetCelebrityInfoRequest{Request: req, Input: input, Copy: c.GetCelebrityInfoRequest}
 }
 
 const opGetCelebrityRecognition = "GetCelebrityRecognition"
@@ -782,6 +794,7 @@ const opGetCelebrityRecognition = "GetCelebrityRecognition"
 type GetCelebrityRecognitionRequest struct {
 	*aws.Request
 	Input *GetCelebrityRecognitionInput
+	Copy  func(*GetCelebrityRecognitionInput) GetCelebrityRecognitionRequest
 }
 
 // Send marshals and sends the GetCelebrityRecognition API request.
@@ -859,57 +872,53 @@ func (c *Rekognition) GetCelebrityRecognitionRequest(input *GetCelebrityRecognit
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCelebrityRecognitionRequest{Request: req, Input: input}
+	return GetCelebrityRecognitionRequest{Request: req, Input: input, Copy: c.GetCelebrityRecognitionRequest}
 }
 
-// GetCelebrityRecognitionPages iterates over the pages of a GetCelebrityRecognition operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetCelebrityRecognition method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetCelebrityRecognitionRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetCelebrityRecognition operation.
-//    pageNum := 0
-//    err := client.GetCelebrityRecognitionPages(params,
-//        func(page *GetCelebrityRecognitionOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetCelebrityRecognitionRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Rekognition) GetCelebrityRecognitionPages(input *GetCelebrityRecognitionInput, fn func(*GetCelebrityRecognitionOutput, bool) bool) error {
-	return c.GetCelebrityRecognitionPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetCelebrityRecognitionRequest) Paginate(opts ...aws.Option) GetCelebrityRecognitionPager {
+	return GetCelebrityRecognitionPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetCelebrityRecognitionInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetCelebrityRecognitionPagesWithContext same as GetCelebrityRecognitionPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetCelebrityRecognitionPagesWithContext(ctx aws.Context, input *GetCelebrityRecognitionInput, fn func(*GetCelebrityRecognitionOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetCelebrityRecognitionInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetCelebrityRecognitionRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetCelebrityRecognitionOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetCelebrityRecognitionPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetCelebrityRecognitionPager struct {
+	aws.Pager
+}
+
+func (p *GetCelebrityRecognitionPager) CurrentPage() *GetCelebrityRecognitionOutput {
+	return p.Pager.CurrentPage().(*GetCelebrityRecognitionOutput)
 }
 
 const opGetContentModeration = "GetContentModeration"
@@ -918,6 +927,7 @@ const opGetContentModeration = "GetContentModeration"
 type GetContentModerationRequest struct {
 	*aws.Request
 	Input *GetContentModerationInput
+	Copy  func(*GetContentModerationInput) GetContentModerationRequest
 }
 
 // Send marshals and sends the GetContentModeration API request.
@@ -989,57 +999,53 @@ func (c *Rekognition) GetContentModerationRequest(input *GetContentModerationInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetContentModerationRequest{Request: req, Input: input}
+	return GetContentModerationRequest{Request: req, Input: input, Copy: c.GetContentModerationRequest}
 }
 
-// GetContentModerationPages iterates over the pages of a GetContentModeration operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetContentModeration method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetContentModerationRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetContentModeration operation.
-//    pageNum := 0
-//    err := client.GetContentModerationPages(params,
-//        func(page *GetContentModerationOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetContentModerationRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Rekognition) GetContentModerationPages(input *GetContentModerationInput, fn func(*GetContentModerationOutput, bool) bool) error {
-	return c.GetContentModerationPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetContentModerationRequest) Paginate(opts ...aws.Option) GetContentModerationPager {
+	return GetContentModerationPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetContentModerationInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetContentModerationPagesWithContext same as GetContentModerationPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetContentModerationPagesWithContext(ctx aws.Context, input *GetContentModerationInput, fn func(*GetContentModerationOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetContentModerationInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetContentModerationRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetContentModerationOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetContentModerationPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetContentModerationPager struct {
+	aws.Pager
+}
+
+func (p *GetContentModerationPager) CurrentPage() *GetContentModerationOutput {
+	return p.Pager.CurrentPage().(*GetContentModerationOutput)
 }
 
 const opGetFaceDetection = "GetFaceDetection"
@@ -1048,6 +1054,7 @@ const opGetFaceDetection = "GetFaceDetection"
 type GetFaceDetectionRequest struct {
 	*aws.Request
 	Input *GetFaceDetectionInput
+	Copy  func(*GetFaceDetectionInput) GetFaceDetectionRequest
 }
 
 // Send marshals and sends the GetFaceDetection API request.
@@ -1111,57 +1118,53 @@ func (c *Rekognition) GetFaceDetectionRequest(input *GetFaceDetectionInput) GetF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFaceDetectionRequest{Request: req, Input: input}
+	return GetFaceDetectionRequest{Request: req, Input: input, Copy: c.GetFaceDetectionRequest}
 }
 
-// GetFaceDetectionPages iterates over the pages of a GetFaceDetection operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetFaceDetection method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetFaceDetectionRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetFaceDetection operation.
-//    pageNum := 0
-//    err := client.GetFaceDetectionPages(params,
-//        func(page *GetFaceDetectionOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetFaceDetectionRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Rekognition) GetFaceDetectionPages(input *GetFaceDetectionInput, fn func(*GetFaceDetectionOutput, bool) bool) error {
-	return c.GetFaceDetectionPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetFaceDetectionRequest) Paginate(opts ...aws.Option) GetFaceDetectionPager {
+	return GetFaceDetectionPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetFaceDetectionInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetFaceDetectionPagesWithContext same as GetFaceDetectionPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetFaceDetectionPagesWithContext(ctx aws.Context, input *GetFaceDetectionInput, fn func(*GetFaceDetectionOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetFaceDetectionInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetFaceDetectionRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetFaceDetectionOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetFaceDetectionPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetFaceDetectionPager struct {
+	aws.Pager
+}
+
+func (p *GetFaceDetectionPager) CurrentPage() *GetFaceDetectionOutput {
+	return p.Pager.CurrentPage().(*GetFaceDetectionOutput)
 }
 
 const opGetFaceSearch = "GetFaceSearch"
@@ -1170,6 +1173,7 @@ const opGetFaceSearch = "GetFaceSearch"
 type GetFaceSearchRequest struct {
 	*aws.Request
 	Input *GetFaceSearchInput
+	Copy  func(*GetFaceSearchInput) GetFaceSearchRequest
 }
 
 // Send marshals and sends the GetFaceSearch API request.
@@ -1235,57 +1239,53 @@ func (c *Rekognition) GetFaceSearchRequest(input *GetFaceSearchInput) GetFaceSea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFaceSearchRequest{Request: req, Input: input}
+	return GetFaceSearchRequest{Request: req, Input: input, Copy: c.GetFaceSearchRequest}
 }
 
-// GetFaceSearchPages iterates over the pages of a GetFaceSearch operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetFaceSearch method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetFaceSearchRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetFaceSearch operation.
-//    pageNum := 0
-//    err := client.GetFaceSearchPages(params,
-//        func(page *GetFaceSearchOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetFaceSearchRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Rekognition) GetFaceSearchPages(input *GetFaceSearchInput, fn func(*GetFaceSearchOutput, bool) bool) error {
-	return c.GetFaceSearchPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetFaceSearchRequest) Paginate(opts ...aws.Option) GetFaceSearchPager {
+	return GetFaceSearchPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetFaceSearchInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetFaceSearchPagesWithContext same as GetFaceSearchPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetFaceSearchPagesWithContext(ctx aws.Context, input *GetFaceSearchInput, fn func(*GetFaceSearchOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetFaceSearchInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetFaceSearchRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetFaceSearchOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetFaceSearchPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetFaceSearchPager struct {
+	aws.Pager
+}
+
+func (p *GetFaceSearchPager) CurrentPage() *GetFaceSearchOutput {
+	return p.Pager.CurrentPage().(*GetFaceSearchOutput)
 }
 
 const opGetLabelDetection = "GetLabelDetection"
@@ -1294,6 +1294,7 @@ const opGetLabelDetection = "GetLabelDetection"
 type GetLabelDetectionRequest struct {
 	*aws.Request
 	Input *GetLabelDetectionInput
+	Copy  func(*GetLabelDetectionInput) GetLabelDetectionRequest
 }
 
 // Send marshals and sends the GetLabelDetection API request.
@@ -1362,57 +1363,53 @@ func (c *Rekognition) GetLabelDetectionRequest(input *GetLabelDetectionInput) Ge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLabelDetectionRequest{Request: req, Input: input}
+	return GetLabelDetectionRequest{Request: req, Input: input, Copy: c.GetLabelDetectionRequest}
 }
 
-// GetLabelDetectionPages iterates over the pages of a GetLabelDetection operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetLabelDetection method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetLabelDetectionRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetLabelDetection operation.
-//    pageNum := 0
-//    err := client.GetLabelDetectionPages(params,
-//        func(page *GetLabelDetectionOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetLabelDetectionRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Rekognition) GetLabelDetectionPages(input *GetLabelDetectionInput, fn func(*GetLabelDetectionOutput, bool) bool) error {
-	return c.GetLabelDetectionPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetLabelDetectionRequest) Paginate(opts ...aws.Option) GetLabelDetectionPager {
+	return GetLabelDetectionPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetLabelDetectionInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetLabelDetectionPagesWithContext same as GetLabelDetectionPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetLabelDetectionPagesWithContext(ctx aws.Context, input *GetLabelDetectionInput, fn func(*GetLabelDetectionOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetLabelDetectionInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetLabelDetectionRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetLabelDetectionOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetLabelDetectionPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetLabelDetectionPager struct {
+	aws.Pager
+}
+
+func (p *GetLabelDetectionPager) CurrentPage() *GetLabelDetectionOutput {
+	return p.Pager.CurrentPage().(*GetLabelDetectionOutput)
 }
 
 const opGetPersonTracking = "GetPersonTracking"
@@ -1421,6 +1418,7 @@ const opGetPersonTracking = "GetPersonTracking"
 type GetPersonTrackingRequest struct {
 	*aws.Request
 	Input *GetPersonTrackingInput
+	Copy  func(*GetPersonTrackingInput) GetPersonTrackingRequest
 }
 
 // Send marshals and sends the GetPersonTracking API request.
@@ -1489,57 +1487,53 @@ func (c *Rekognition) GetPersonTrackingRequest(input *GetPersonTrackingInput) Ge
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPersonTrackingRequest{Request: req, Input: input}
+	return GetPersonTrackingRequest{Request: req, Input: input, Copy: c.GetPersonTrackingRequest}
 }
 
-// GetPersonTrackingPages iterates over the pages of a GetPersonTracking operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetPersonTracking method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetPersonTrackingRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetPersonTracking operation.
-//    pageNum := 0
-//    err := client.GetPersonTrackingPages(params,
-//        func(page *GetPersonTrackingOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetPersonTrackingRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Rekognition) GetPersonTrackingPages(input *GetPersonTrackingInput, fn func(*GetPersonTrackingOutput, bool) bool) error {
-	return c.GetPersonTrackingPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetPersonTrackingRequest) Paginate(opts ...aws.Option) GetPersonTrackingPager {
+	return GetPersonTrackingPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetPersonTrackingInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetPersonTrackingPagesWithContext same as GetPersonTrackingPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) GetPersonTrackingPagesWithContext(ctx aws.Context, input *GetPersonTrackingInput, fn func(*GetPersonTrackingOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetPersonTrackingInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetPersonTrackingRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetPersonTrackingOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetPersonTrackingPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetPersonTrackingPager struct {
+	aws.Pager
+}
+
+func (p *GetPersonTrackingPager) CurrentPage() *GetPersonTrackingOutput {
+	return p.Pager.CurrentPage().(*GetPersonTrackingOutput)
 }
 
 const opIndexFaces = "IndexFaces"
@@ -1548,6 +1542,7 @@ const opIndexFaces = "IndexFaces"
 type IndexFacesRequest struct {
 	*aws.Request
 	Input *IndexFacesInput
+	Copy  func(*IndexFacesInput) IndexFacesRequest
 }
 
 // Send marshals and sends the IndexFaces API request.
@@ -1623,7 +1618,7 @@ func (c *Rekognition) IndexFacesRequest(input *IndexFacesInput) IndexFacesReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return IndexFacesRequest{Request: req, Input: input}
+	return IndexFacesRequest{Request: req, Input: input, Copy: c.IndexFacesRequest}
 }
 
 const opListCollections = "ListCollections"
@@ -1632,6 +1627,7 @@ const opListCollections = "ListCollections"
 type ListCollectionsRequest struct {
 	*aws.Request
 	Input *ListCollectionsInput
+	Copy  func(*ListCollectionsInput) ListCollectionsRequest
 }
 
 // Send marshals and sends the ListCollections API request.
@@ -1683,57 +1679,53 @@ func (c *Rekognition) ListCollectionsRequest(input *ListCollectionsInput) ListCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCollectionsRequest{Request: req, Input: input}
+	return ListCollectionsRequest{Request: req, Input: input, Copy: c.ListCollectionsRequest}
 }
 
-// ListCollectionsPages iterates over the pages of a ListCollections operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListCollections method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListCollectionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListCollections operation.
-//    pageNum := 0
-//    err := client.ListCollectionsPages(params,
-//        func(page *ListCollectionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListCollectionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Rekognition) ListCollectionsPages(input *ListCollectionsInput, fn func(*ListCollectionsOutput, bool) bool) error {
-	return c.ListCollectionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListCollectionsRequest) Paginate(opts ...aws.Option) ListCollectionsPager {
+	return ListCollectionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListCollectionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListCollectionsPagesWithContext same as ListCollectionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) ListCollectionsPagesWithContext(ctx aws.Context, input *ListCollectionsInput, fn func(*ListCollectionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListCollectionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListCollectionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListCollectionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListCollectionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCollectionsPager struct {
+	aws.Pager
+}
+
+func (p *ListCollectionsPager) CurrentPage() *ListCollectionsOutput {
+	return p.Pager.CurrentPage().(*ListCollectionsOutput)
 }
 
 const opListFaces = "ListFaces"
@@ -1742,6 +1734,7 @@ const opListFaces = "ListFaces"
 type ListFacesRequest struct {
 	*aws.Request
 	Input *ListFacesInput
+	Copy  func(*ListFacesInput) ListFacesRequest
 }
 
 // Send marshals and sends the ListFaces API request.
@@ -1791,57 +1784,53 @@ func (c *Rekognition) ListFacesRequest(input *ListFacesInput) ListFacesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFacesRequest{Request: req, Input: input}
+	return ListFacesRequest{Request: req, Input: input, Copy: c.ListFacesRequest}
 }
 
-// ListFacesPages iterates over the pages of a ListFaces operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListFaces method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListFacesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListFaces operation.
-//    pageNum := 0
-//    err := client.ListFacesPages(params,
-//        func(page *ListFacesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListFacesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Rekognition) ListFacesPages(input *ListFacesInput, fn func(*ListFacesOutput, bool) bool) error {
-	return c.ListFacesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListFacesRequest) Paginate(opts ...aws.Option) ListFacesPager {
+	return ListFacesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListFacesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListFacesPagesWithContext same as ListFacesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) ListFacesPagesWithContext(ctx aws.Context, input *ListFacesInput, fn func(*ListFacesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListFacesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListFacesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFacesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListFacesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListFacesPager struct {
+	aws.Pager
+}
+
+func (p *ListFacesPager) CurrentPage() *ListFacesOutput {
+	return p.Pager.CurrentPage().(*ListFacesOutput)
 }
 
 const opListStreamProcessors = "ListStreamProcessors"
@@ -1850,6 +1839,7 @@ const opListStreamProcessors = "ListStreamProcessors"
 type ListStreamProcessorsRequest struct {
 	*aws.Request
 	Input *ListStreamProcessorsInput
+	Copy  func(*ListStreamProcessorsInput) ListStreamProcessorsRequest
 }
 
 // Send marshals and sends the ListStreamProcessors API request.
@@ -1894,57 +1884,53 @@ func (c *Rekognition) ListStreamProcessorsRequest(input *ListStreamProcessorsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListStreamProcessorsRequest{Request: req, Input: input}
+	return ListStreamProcessorsRequest{Request: req, Input: input, Copy: c.ListStreamProcessorsRequest}
 }
 
-// ListStreamProcessorsPages iterates over the pages of a ListStreamProcessors operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListStreamProcessors method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListStreamProcessorsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListStreamProcessors operation.
-//    pageNum := 0
-//    err := client.ListStreamProcessorsPages(params,
-//        func(page *ListStreamProcessorsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListStreamProcessorsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Rekognition) ListStreamProcessorsPages(input *ListStreamProcessorsInput, fn func(*ListStreamProcessorsOutput, bool) bool) error {
-	return c.ListStreamProcessorsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListStreamProcessorsRequest) Paginate(opts ...aws.Option) ListStreamProcessorsPager {
+	return ListStreamProcessorsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListStreamProcessorsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListStreamProcessorsPagesWithContext same as ListStreamProcessorsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Rekognition) ListStreamProcessorsPagesWithContext(ctx aws.Context, input *ListStreamProcessorsInput, fn func(*ListStreamProcessorsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListStreamProcessorsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListStreamProcessorsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListStreamProcessorsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListStreamProcessorsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListStreamProcessorsPager struct {
+	aws.Pager
+}
+
+func (p *ListStreamProcessorsPager) CurrentPage() *ListStreamProcessorsOutput {
+	return p.Pager.CurrentPage().(*ListStreamProcessorsOutput)
 }
 
 const opRecognizeCelebrities = "RecognizeCelebrities"
@@ -1953,6 +1939,7 @@ const opRecognizeCelebrities = "RecognizeCelebrities"
 type RecognizeCelebritiesRequest struct {
 	*aws.Request
 	Input *RecognizeCelebritiesInput
+	Copy  func(*RecognizeCelebritiesInput) RecognizeCelebritiesRequest
 }
 
 // Send marshals and sends the RecognizeCelebrities API request.
@@ -2019,7 +2006,7 @@ func (c *Rekognition) RecognizeCelebritiesRequest(input *RecognizeCelebritiesInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RecognizeCelebritiesRequest{Request: req, Input: input}
+	return RecognizeCelebritiesRequest{Request: req, Input: input, Copy: c.RecognizeCelebritiesRequest}
 }
 
 const opSearchFaces = "SearchFaces"
@@ -2028,6 +2015,7 @@ const opSearchFaces = "SearchFaces"
 type SearchFacesRequest struct {
 	*aws.Request
 	Input *SearchFacesInput
+	Copy  func(*SearchFacesInput) SearchFacesRequest
 }
 
 // Send marshals and sends the SearchFaces API request.
@@ -2083,7 +2071,7 @@ func (c *Rekognition) SearchFacesRequest(input *SearchFacesInput) SearchFacesReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchFacesRequest{Request: req, Input: input}
+	return SearchFacesRequest{Request: req, Input: input, Copy: c.SearchFacesRequest}
 }
 
 const opSearchFacesByImage = "SearchFacesByImage"
@@ -2092,6 +2080,7 @@ const opSearchFacesByImage = "SearchFacesByImage"
 type SearchFacesByImageRequest struct {
 	*aws.Request
 	Input *SearchFacesByImageInput
+	Copy  func(*SearchFacesByImageInput) SearchFacesByImageRequest
 }
 
 // Send marshals and sends the SearchFacesByImage API request.
@@ -2157,7 +2146,7 @@ func (c *Rekognition) SearchFacesByImageRequest(input *SearchFacesByImageInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchFacesByImageRequest{Request: req, Input: input}
+	return SearchFacesByImageRequest{Request: req, Input: input, Copy: c.SearchFacesByImageRequest}
 }
 
 const opStartCelebrityRecognition = "StartCelebrityRecognition"
@@ -2166,6 +2155,7 @@ const opStartCelebrityRecognition = "StartCelebrityRecognition"
 type StartCelebrityRecognitionRequest struct {
 	*aws.Request
 	Input *StartCelebrityRecognitionInput
+	Copy  func(*StartCelebrityRecognitionInput) StartCelebrityRecognitionRequest
 }
 
 // Send marshals and sends the StartCelebrityRecognition API request.
@@ -2215,7 +2205,7 @@ func (c *Rekognition) StartCelebrityRecognitionRequest(input *StartCelebrityReco
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartCelebrityRecognitionRequest{Request: req, Input: input}
+	return StartCelebrityRecognitionRequest{Request: req, Input: input, Copy: c.StartCelebrityRecognitionRequest}
 }
 
 const opStartContentModeration = "StartContentModeration"
@@ -2224,6 +2214,7 @@ const opStartContentModeration = "StartContentModeration"
 type StartContentModerationRequest struct {
 	*aws.Request
 	Input *StartContentModerationInput
+	Copy  func(*StartContentModerationInput) StartContentModerationRequest
 }
 
 // Send marshals and sends the StartContentModeration API request.
@@ -2275,7 +2266,7 @@ func (c *Rekognition) StartContentModerationRequest(input *StartContentModeratio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartContentModerationRequest{Request: req, Input: input}
+	return StartContentModerationRequest{Request: req, Input: input, Copy: c.StartContentModerationRequest}
 }
 
 const opStartFaceDetection = "StartFaceDetection"
@@ -2284,6 +2275,7 @@ const opStartFaceDetection = "StartFaceDetection"
 type StartFaceDetectionRequest struct {
 	*aws.Request
 	Input *StartFaceDetectionInput
+	Copy  func(*StartFaceDetectionInput) StartFaceDetectionRequest
 }
 
 // Send marshals and sends the StartFaceDetection API request.
@@ -2332,7 +2324,7 @@ func (c *Rekognition) StartFaceDetectionRequest(input *StartFaceDetectionInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartFaceDetectionRequest{Request: req, Input: input}
+	return StartFaceDetectionRequest{Request: req, Input: input, Copy: c.StartFaceDetectionRequest}
 }
 
 const opStartFaceSearch = "StartFaceSearch"
@@ -2341,6 +2333,7 @@ const opStartFaceSearch = "StartFaceSearch"
 type StartFaceSearchRequest struct {
 	*aws.Request
 	Input *StartFaceSearchInput
+	Copy  func(*StartFaceSearchInput) StartFaceSearchRequest
 }
 
 // Send marshals and sends the StartFaceSearch API request.
@@ -2390,7 +2383,7 @@ func (c *Rekognition) StartFaceSearchRequest(input *StartFaceSearchInput) StartF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartFaceSearchRequest{Request: req, Input: input}
+	return StartFaceSearchRequest{Request: req, Input: input, Copy: c.StartFaceSearchRequest}
 }
 
 const opStartLabelDetection = "StartLabelDetection"
@@ -2399,6 +2392,7 @@ const opStartLabelDetection = "StartLabelDetection"
 type StartLabelDetectionRequest struct {
 	*aws.Request
 	Input *StartLabelDetectionInput
+	Copy  func(*StartLabelDetectionInput) StartLabelDetectionRequest
 }
 
 // Send marshals and sends the StartLabelDetection API request.
@@ -2454,7 +2448,7 @@ func (c *Rekognition) StartLabelDetectionRequest(input *StartLabelDetectionInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartLabelDetectionRequest{Request: req, Input: input}
+	return StartLabelDetectionRequest{Request: req, Input: input, Copy: c.StartLabelDetectionRequest}
 }
 
 const opStartPersonTracking = "StartPersonTracking"
@@ -2463,6 +2457,7 @@ const opStartPersonTracking = "StartPersonTracking"
 type StartPersonTrackingRequest struct {
 	*aws.Request
 	Input *StartPersonTrackingInput
+	Copy  func(*StartPersonTrackingInput) StartPersonTrackingRequest
 }
 
 // Send marshals and sends the StartPersonTracking API request.
@@ -2512,7 +2507,7 @@ func (c *Rekognition) StartPersonTrackingRequest(input *StartPersonTrackingInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartPersonTrackingRequest{Request: req, Input: input}
+	return StartPersonTrackingRequest{Request: req, Input: input, Copy: c.StartPersonTrackingRequest}
 }
 
 const opStartStreamProcessor = "StartStreamProcessor"
@@ -2521,6 +2516,7 @@ const opStartStreamProcessor = "StartStreamProcessor"
 type StartStreamProcessorRequest struct {
 	*aws.Request
 	Input *StartStreamProcessorInput
+	Copy  func(*StartStreamProcessorInput) StartStreamProcessorRequest
 }
 
 // Send marshals and sends the StartStreamProcessor API request.
@@ -2561,7 +2557,7 @@ func (c *Rekognition) StartStreamProcessorRequest(input *StartStreamProcessorInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartStreamProcessorRequest{Request: req, Input: input}
+	return StartStreamProcessorRequest{Request: req, Input: input, Copy: c.StartStreamProcessorRequest}
 }
 
 const opStopStreamProcessor = "StopStreamProcessor"
@@ -2570,6 +2566,7 @@ const opStopStreamProcessor = "StopStreamProcessor"
 type StopStreamProcessorRequest struct {
 	*aws.Request
 	Input *StopStreamProcessorInput
+	Copy  func(*StopStreamProcessorInput) StopStreamProcessorRequest
 }
 
 // Send marshals and sends the StopStreamProcessor API request.
@@ -2608,7 +2605,7 @@ func (c *Rekognition) StopStreamProcessorRequest(input *StopStreamProcessorInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopStreamProcessorRequest{Request: req, Input: input}
+	return StopStreamProcessorRequest{Request: req, Input: input, Copy: c.StopStreamProcessorRequest}
 }
 
 // Structure containing the estimated age range, in years, for a face.

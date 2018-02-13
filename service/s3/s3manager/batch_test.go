@@ -10,7 +10,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	request "github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
@@ -315,12 +314,16 @@ type mockS3Client struct {
 }
 
 func (client *mockS3Client) ListObjectsRequest(input *s3.ListObjectsInput) s3.ListObjectsRequest {
-	object := client.objects[client.index]
-	client.index++
 	req := client.S3.ListObjectsRequest(input)
-	req.Handlers.Send.PushBack(func(r *aws.Request) {
-		r.Data = object
-	})
+	req.Copy = func(v *s3.ListObjectsInput) s3.ListObjectsRequest {
+		r := client.S3.ListObjectsRequest(v)
+		r.Handlers.Send.PushBack(func(r *aws.Request) {
+			object := client.objects[client.index]
+			client.index++
+			r.Data = &object
+		})
+		return r
+	}
 
 	return req
 }
@@ -372,20 +375,11 @@ func TestBatchDeleteList(t *testing.T) {
 	input := &s3.ListObjectsInput{
 		Bucket: aws.String("bucket"),
 	}
-	iter := &DeleteListIterator{
-		Bucket: input.Bucket,
-		Paginator: request.Pagination{
-			NewRequest: func() (*request.Request, error) {
-				var inCpy *s3.ListObjectsInput
-				if input != nil {
-					tmp := *input
-					inCpy = &tmp
-				}
 
-				req := svc.ListObjectsRequest(inCpy)
-				return req.Request, nil
-			},
-		},
+	req := svc.ListObjectsRequest(input)
+	iter := &DeleteListIterator{
+		Bucket:    input.Bucket,
+		Paginator: req.Paginate(),
 	}
 
 	if err := batcher.Delete(aws.BackgroundContext(), iter); err != nil {
@@ -431,6 +425,7 @@ func TestBatchDeleteList_EmptyListObjects(t *testing.T) {
 		Bucket: aws.String("bucket"),
 	}
 
+	req := svc.ListObjectsRequest(input)
 	// Test DeleteListIterator in the case when the ListObjectsRequest responds
 	// with an empty listing.
 
@@ -438,13 +433,8 @@ func TestBatchDeleteList_EmptyListObjects(t *testing.T) {
 	// Pagination.HasNextPage() is always true the first time Pagination.Next()
 	// called on it
 	iter := &DeleteListIterator{
-		Bucket: input.Bucket,
-		Paginator: request.Pagination{
-			NewRequest: func() (*request.Request, error) {
-				req := svc.ListObjectsRequest(input)
-				return req.Request, nil
-			},
-		},
+		Bucket:    input.Bucket,
+		Paginator: req.Paginate(),
 	}
 
 	if err := batcher.Delete(aws.BackgroundContext(), iter); err != nil {

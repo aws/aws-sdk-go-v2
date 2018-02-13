@@ -91,15 +91,9 @@ type ELBV2API interface {
 
 	DescribeListenersRequest(*elbv2.DescribeListenersInput) elbv2.DescribeListenersRequest
 
-	DescribeListenersPages(*elbv2.DescribeListenersInput, func(*elbv2.DescribeListenersOutput, bool) bool) error
-	DescribeListenersPagesWithContext(aws.Context, *elbv2.DescribeListenersInput, func(*elbv2.DescribeListenersOutput, bool) bool, ...aws.Option) error
-
 	DescribeLoadBalancerAttributesRequest(*elbv2.DescribeLoadBalancerAttributesInput) elbv2.DescribeLoadBalancerAttributesRequest
 
 	DescribeLoadBalancersRequest(*elbv2.DescribeLoadBalancersInput) elbv2.DescribeLoadBalancersRequest
-
-	DescribeLoadBalancersPages(*elbv2.DescribeLoadBalancersInput, func(*elbv2.DescribeLoadBalancersOutput, bool) bool) error
-	DescribeLoadBalancersPagesWithContext(aws.Context, *elbv2.DescribeLoadBalancersInput, func(*elbv2.DescribeLoadBalancersOutput, bool) bool, ...aws.Option) error
 
 	DescribeRulesRequest(*elbv2.DescribeRulesInput) elbv2.DescribeRulesRequest
 
@@ -110,9 +104,6 @@ type ELBV2API interface {
 	DescribeTargetGroupAttributesRequest(*elbv2.DescribeTargetGroupAttributesInput) elbv2.DescribeTargetGroupAttributesRequest
 
 	DescribeTargetGroupsRequest(*elbv2.DescribeTargetGroupsInput) elbv2.DescribeTargetGroupsRequest
-
-	DescribeTargetGroupsPages(*elbv2.DescribeTargetGroupsInput, func(*elbv2.DescribeTargetGroupsOutput, bool) bool) error
-	DescribeTargetGroupsPagesWithContext(aws.Context, *elbv2.DescribeTargetGroupsInput, func(*elbv2.DescribeTargetGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeTargetHealthRequest(*elbv2.DescribeTargetHealthInput) elbv2.DescribeTargetHealthRequest
 

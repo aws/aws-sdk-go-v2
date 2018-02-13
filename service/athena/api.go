@@ -15,6 +15,7 @@ const opBatchGetNamedQuery = "BatchGetNamedQuery"
 type BatchGetNamedQueryRequest struct {
 	*aws.Request
 	Input *BatchGetNamedQueryInput
+	Copy  func(*BatchGetNamedQueryInput) BatchGetNamedQueryRequest
 }
 
 // Send marshals and sends the BatchGetNamedQuery API request.
@@ -61,7 +62,7 @@ func (c *Athena) BatchGetNamedQueryRequest(input *BatchGetNamedQueryInput) Batch
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetNamedQueryRequest{Request: req, Input: input}
+	return BatchGetNamedQueryRequest{Request: req, Input: input, Copy: c.BatchGetNamedQueryRequest}
 }
 
 const opBatchGetQueryExecution = "BatchGetQueryExecution"
@@ -70,6 +71,7 @@ const opBatchGetQueryExecution = "BatchGetQueryExecution"
 type BatchGetQueryExecutionRequest struct {
 	*aws.Request
 	Input *BatchGetQueryExecutionInput
+	Copy  func(*BatchGetQueryExecutionInput) BatchGetQueryExecutionRequest
 }
 
 // Send marshals and sends the BatchGetQueryExecution API request.
@@ -114,7 +116,7 @@ func (c *Athena) BatchGetQueryExecutionRequest(input *BatchGetQueryExecutionInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchGetQueryExecutionRequest{Request: req, Input: input}
+	return BatchGetQueryExecutionRequest{Request: req, Input: input, Copy: c.BatchGetQueryExecutionRequest}
 }
 
 const opCreateNamedQuery = "CreateNamedQuery"
@@ -123,6 +125,7 @@ const opCreateNamedQuery = "CreateNamedQuery"
 type CreateNamedQueryRequest struct {
 	*aws.Request
 	Input *CreateNamedQueryInput
+	Copy  func(*CreateNamedQueryInput) CreateNamedQueryRequest
 }
 
 // Send marshals and sends the CreateNamedQuery API request.
@@ -167,7 +170,7 @@ func (c *Athena) CreateNamedQueryRequest(input *CreateNamedQueryInput) CreateNam
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateNamedQueryRequest{Request: req, Input: input}
+	return CreateNamedQueryRequest{Request: req, Input: input, Copy: c.CreateNamedQueryRequest}
 }
 
 const opDeleteNamedQuery = "DeleteNamedQuery"
@@ -176,6 +179,7 @@ const opDeleteNamedQuery = "DeleteNamedQuery"
 type DeleteNamedQueryRequest struct {
 	*aws.Request
 	Input *DeleteNamedQueryInput
+	Copy  func(*DeleteNamedQueryInput) DeleteNamedQueryRequest
 }
 
 // Send marshals and sends the DeleteNamedQuery API request.
@@ -220,7 +224,7 @@ func (c *Athena) DeleteNamedQueryRequest(input *DeleteNamedQueryInput) DeleteNam
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteNamedQueryRequest{Request: req, Input: input}
+	return DeleteNamedQueryRequest{Request: req, Input: input, Copy: c.DeleteNamedQueryRequest}
 }
 
 const opGetNamedQuery = "GetNamedQuery"
@@ -229,6 +233,7 @@ const opGetNamedQuery = "GetNamedQuery"
 type GetNamedQueryRequest struct {
 	*aws.Request
 	Input *GetNamedQueryInput
+	Copy  func(*GetNamedQueryInput) GetNamedQueryRequest
 }
 
 // Send marshals and sends the GetNamedQuery API request.
@@ -269,7 +274,7 @@ func (c *Athena) GetNamedQueryRequest(input *GetNamedQueryInput) GetNamedQueryRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetNamedQueryRequest{Request: req, Input: input}
+	return GetNamedQueryRequest{Request: req, Input: input, Copy: c.GetNamedQueryRequest}
 }
 
 const opGetQueryExecution = "GetQueryExecution"
@@ -278,6 +283,7 @@ const opGetQueryExecution = "GetQueryExecution"
 type GetQueryExecutionRequest struct {
 	*aws.Request
 	Input *GetQueryExecutionInput
+	Copy  func(*GetQueryExecutionInput) GetQueryExecutionRequest
 }
 
 // Send marshals and sends the GetQueryExecution API request.
@@ -319,7 +325,7 @@ func (c *Athena) GetQueryExecutionRequest(input *GetQueryExecutionInput) GetQuer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetQueryExecutionRequest{Request: req, Input: input}
+	return GetQueryExecutionRequest{Request: req, Input: input, Copy: c.GetQueryExecutionRequest}
 }
 
 const opGetQueryResults = "GetQueryResults"
@@ -328,6 +334,7 @@ const opGetQueryResults = "GetQueryResults"
 type GetQueryResultsRequest struct {
 	*aws.Request
 	Input *GetQueryResultsInput
+	Copy  func(*GetQueryResultsInput) GetQueryResultsRequest
 }
 
 // Send marshals and sends the GetQueryResults API request.
@@ -376,57 +383,53 @@ func (c *Athena) GetQueryResultsRequest(input *GetQueryResultsInput) GetQueryRes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetQueryResultsRequest{Request: req, Input: input}
+	return GetQueryResultsRequest{Request: req, Input: input, Copy: c.GetQueryResultsRequest}
 }
 
-// GetQueryResultsPages iterates over the pages of a GetQueryResults operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetQueryResults method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetQueryResultsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetQueryResults operation.
-//    pageNum := 0
-//    err := client.GetQueryResultsPages(params,
-//        func(page *GetQueryResultsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetQueryResultsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Athena) GetQueryResultsPages(input *GetQueryResultsInput, fn func(*GetQueryResultsOutput, bool) bool) error {
-	return c.GetQueryResultsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetQueryResultsRequest) Paginate(opts ...aws.Option) GetQueryResultsPager {
+	return GetQueryResultsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetQueryResultsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetQueryResultsPagesWithContext same as GetQueryResultsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) GetQueryResultsPagesWithContext(ctx aws.Context, input *GetQueryResultsInput, fn func(*GetQueryResultsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetQueryResultsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetQueryResultsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetQueryResultsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetQueryResultsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetQueryResultsPager struct {
+	aws.Pager
+}
+
+func (p *GetQueryResultsPager) CurrentPage() *GetQueryResultsOutput {
+	return p.Pager.CurrentPage().(*GetQueryResultsOutput)
 }
 
 const opListNamedQueries = "ListNamedQueries"
@@ -435,6 +438,7 @@ const opListNamedQueries = "ListNamedQueries"
 type ListNamedQueriesRequest struct {
 	*aws.Request
 	Input *ListNamedQueriesInput
+	Copy  func(*ListNamedQueriesInput) ListNamedQueriesRequest
 }
 
 // Send marshals and sends the ListNamedQueries API request.
@@ -485,57 +489,53 @@ func (c *Athena) ListNamedQueriesRequest(input *ListNamedQueriesInput) ListNamed
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListNamedQueriesRequest{Request: req, Input: input}
+	return ListNamedQueriesRequest{Request: req, Input: input, Copy: c.ListNamedQueriesRequest}
 }
 
-// ListNamedQueriesPages iterates over the pages of a ListNamedQueries operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListNamedQueries method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListNamedQueriesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListNamedQueries operation.
-//    pageNum := 0
-//    err := client.ListNamedQueriesPages(params,
-//        func(page *ListNamedQueriesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListNamedQueriesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Athena) ListNamedQueriesPages(input *ListNamedQueriesInput, fn func(*ListNamedQueriesOutput, bool) bool) error {
-	return c.ListNamedQueriesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListNamedQueriesRequest) Paginate(opts ...aws.Option) ListNamedQueriesPager {
+	return ListNamedQueriesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListNamedQueriesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListNamedQueriesPagesWithContext same as ListNamedQueriesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) ListNamedQueriesPagesWithContext(ctx aws.Context, input *ListNamedQueriesInput, fn func(*ListNamedQueriesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListNamedQueriesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListNamedQueriesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListNamedQueriesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListNamedQueriesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListNamedQueriesPager struct {
+	aws.Pager
+}
+
+func (p *ListNamedQueriesPager) CurrentPage() *ListNamedQueriesOutput {
+	return p.Pager.CurrentPage().(*ListNamedQueriesOutput)
 }
 
 const opListQueryExecutions = "ListQueryExecutions"
@@ -544,6 +544,7 @@ const opListQueryExecutions = "ListQueryExecutions"
 type ListQueryExecutionsRequest struct {
 	*aws.Request
 	Input *ListQueryExecutionsInput
+	Copy  func(*ListQueryExecutionsInput) ListQueryExecutionsRequest
 }
 
 // Send marshals and sends the ListQueryExecutions API request.
@@ -594,57 +595,53 @@ func (c *Athena) ListQueryExecutionsRequest(input *ListQueryExecutionsInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListQueryExecutionsRequest{Request: req, Input: input}
+	return ListQueryExecutionsRequest{Request: req, Input: input, Copy: c.ListQueryExecutionsRequest}
 }
 
-// ListQueryExecutionsPages iterates over the pages of a ListQueryExecutions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListQueryExecutions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListQueryExecutionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListQueryExecutions operation.
-//    pageNum := 0
-//    err := client.ListQueryExecutionsPages(params,
-//        func(page *ListQueryExecutionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListQueryExecutionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Athena) ListQueryExecutionsPages(input *ListQueryExecutionsInput, fn func(*ListQueryExecutionsOutput, bool) bool) error {
-	return c.ListQueryExecutionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListQueryExecutionsRequest) Paginate(opts ...aws.Option) ListQueryExecutionsPager {
+	return ListQueryExecutionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListQueryExecutionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListQueryExecutionsPagesWithContext same as ListQueryExecutionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Athena) ListQueryExecutionsPagesWithContext(ctx aws.Context, input *ListQueryExecutionsInput, fn func(*ListQueryExecutionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListQueryExecutionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListQueryExecutionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListQueryExecutionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListQueryExecutionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListQueryExecutionsPager struct {
+	aws.Pager
+}
+
+func (p *ListQueryExecutionsPager) CurrentPage() *ListQueryExecutionsOutput {
+	return p.Pager.CurrentPage().(*ListQueryExecutionsOutput)
 }
 
 const opStartQueryExecution = "StartQueryExecution"
@@ -653,6 +650,7 @@ const opStartQueryExecution = "StartQueryExecution"
 type StartQueryExecutionRequest struct {
 	*aws.Request
 	Input *StartQueryExecutionInput
+	Copy  func(*StartQueryExecutionInput) StartQueryExecutionRequest
 }
 
 // Send marshals and sends the StartQueryExecution API request.
@@ -697,7 +695,7 @@ func (c *Athena) StartQueryExecutionRequest(input *StartQueryExecutionInput) Sta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartQueryExecutionRequest{Request: req, Input: input}
+	return StartQueryExecutionRequest{Request: req, Input: input, Copy: c.StartQueryExecutionRequest}
 }
 
 const opStopQueryExecution = "StopQueryExecution"
@@ -706,6 +704,7 @@ const opStopQueryExecution = "StopQueryExecution"
 type StopQueryExecutionRequest struct {
 	*aws.Request
 	Input *StopQueryExecutionInput
+	Copy  func(*StopQueryExecutionInput) StopQueryExecutionRequest
 }
 
 // Send marshals and sends the StopQueryExecution API request.
@@ -750,7 +749,7 @@ func (c *Athena) StopQueryExecutionRequest(input *StopQueryExecutionInput) StopQ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopQueryExecutionRequest{Request: req, Input: input}
+	return StopQueryExecutionRequest{Request: req, Input: input, Copy: c.StopQueryExecutionRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/BatchGetNamedQueryInput

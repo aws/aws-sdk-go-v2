@@ -70,12 +70,14 @@ var tplOperation = template.Must(template.New("operation").Funcs(template.FuncMa
 	"GetCrosslinkURL": GetCrosslinkURL,
 }).Parse(`
 {{ $reqType := printf "%sRequest" .ExportedName -}}
+{{ $pagerType := printf "%sPager" .ExportedName -}}
 const op{{ .ExportedName }} = "{{ .Name }}"
 
 // {{ $reqType }} is a API request type for the {{ .ExportedName }} API operation.
 type {{ $reqType}} struct {
 	*aws.Request
 	Input {{ .InputRef.GoType }}
+	Copy func({{ .InputRef.GoType }}) {{ $reqType }}
 }
 
 // Send marshals and sends the {{ .ExportedName }} API request. 
@@ -141,64 +143,56 @@ func (c *{{ .API.StructName }}) {{ $reqType }}(input {{ .InputRef.GoType }}) ({{
 
 	{{ if ne .AuthType "" }}{{ .GetSigner }}{{ end -}}
 
-	return {{ $reqType}}{Request: req, Input: input}
+	return {{ $reqType}}{Request: req, Input: input, Copy: c.{{ $reqType }} }
 }
 
 {{ if .Paginator }}
-// {{ .ExportedName }}Pages iterates over the pages of a {{ .ExportedName }} operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See {{ .ExportedName }} method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a {{ $reqType }} operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a {{ .ExportedName }} operation.
-//    pageNum := 0
-//    err := client.{{ .ExportedName }}Pages(params,
-//        func(page {{ .OutputRef.GoType }}, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.{{ $reqType }}(input)		
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//		
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
 //
-func (c *{{ .API.StructName }}) {{ .ExportedName }}Pages(` +
-	`input {{ .InputRef.GoType }}, fn func({{ .OutputRef.GoType }}, bool) bool) error {
-	return c.{{ .ExportedName }}PagesWithContext(aws.BackgroundContext(), input, fn)
-}
+func (p *{{ $reqType }}) Paginate(opts ...aws.Option) {{ $pagerType }} {
+	return {{ $pagerType }}{
+		Pager: aws.Pager {
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy {{ .InputRef.GoType }}
+				if p.Input != nil  {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// {{ .ExportedName }}PagesWithContext same as {{ .ExportedName }}Pages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *{{ .API.StructName }}) {{ .ExportedName }}PagesWithContext(` +
-	`ctx aws.Context, ` +
-	`input {{ .InputRef.GoType }}, ` +
-	`fn func({{ .OutputRef.GoType }}, bool) bool, ` +
-	`opts ...aws.Option) error {
-	p := aws.Pagination {
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy {{ .InputRef.GoType }}
-			if input != nil  {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.{{ .ExportedName }}Request(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
-
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().({{ .OutputRef.GoType }}), !p.HasNextPage())
-	}
-	return p.Err()
 }
+
+// {{ $pagerType }} is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type {{ $pagerType }} struct {
+	aws.Pager
+}
+
+func (p *{{ $pagerType}}) CurrentPage() {{ .OutputRef.GoType }} {
+	return p.Pager.CurrentPage().({{ .OutputRef.GoType }})
+}
+
 {{ end }}
 `))
 
@@ -214,13 +208,7 @@ func (o *Operation) GoCode() string {
 }
 
 // tplInfSig defines the template for rendering an Operation's signature within an Interface definition.
-var tplInfSig = template.Must(template.New("opsig").Parse(`
-{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) {{ .API.PackageName }}.{{ .ExportedName }}Request
-
-{{ if .Paginator -}}
-{{ .ExportedName }}Pages({{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool) error
-{{ .ExportedName }}PagesWithContext(aws.Context, {{ .InputRef.GoTypeWithPkgName }}, func({{ .OutputRef.GoTypeWithPkgName }}, bool) bool, ...aws.Option) error
-{{- end }}
+var tplInfSig = template.Must(template.New("opsig").Parse(`{{ .ExportedName }}Request({{ .InputRef.GoTypeWithPkgName }}) {{ .API.PackageName }}.{{ .ExportedName }}Request
 `))
 
 // InterfaceSignature returns a string representing the Operation's interface{}

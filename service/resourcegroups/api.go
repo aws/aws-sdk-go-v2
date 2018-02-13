@@ -14,6 +14,7 @@ const opCreateGroup = "CreateGroup"
 type CreateGroupRequest struct {
 	*aws.Request
 	Input *CreateGroupInput
+	Copy  func(*CreateGroupInput) CreateGroupRequest
 }
 
 // Send marshals and sends the CreateGroup API request.
@@ -54,7 +55,7 @@ func (c *ResourceGroups) CreateGroupRequest(input *CreateGroupInput) CreateGroup
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGroupRequest{Request: req, Input: input}
+	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
 }
 
 const opDeleteGroup = "DeleteGroup"
@@ -63,6 +64,7 @@ const opDeleteGroup = "DeleteGroup"
 type DeleteGroupRequest struct {
 	*aws.Request
 	Input *DeleteGroupInput
+	Copy  func(*DeleteGroupInput) DeleteGroupRequest
 }
 
 // Send marshals and sends the DeleteGroup API request.
@@ -104,7 +106,7 @@ func (c *ResourceGroups) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroup
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGroupRequest{Request: req, Input: input}
+	return DeleteGroupRequest{Request: req, Input: input, Copy: c.DeleteGroupRequest}
 }
 
 const opGetGroup = "GetGroup"
@@ -113,6 +115,7 @@ const opGetGroup = "GetGroup"
 type GetGroupRequest struct {
 	*aws.Request
 	Input *GetGroupInput
+	Copy  func(*GetGroupInput) GetGroupRequest
 }
 
 // Send marshals and sends the GetGroup API request.
@@ -153,7 +156,7 @@ func (c *ResourceGroups) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGroupRequest{Request: req, Input: input}
+	return GetGroupRequest{Request: req, Input: input, Copy: c.GetGroupRequest}
 }
 
 const opGetGroupQuery = "GetGroupQuery"
@@ -162,6 +165,7 @@ const opGetGroupQuery = "GetGroupQuery"
 type GetGroupQueryRequest struct {
 	*aws.Request
 	Input *GetGroupQueryInput
+	Copy  func(*GetGroupQueryInput) GetGroupQueryRequest
 }
 
 // Send marshals and sends the GetGroupQuery API request.
@@ -202,7 +206,7 @@ func (c *ResourceGroups) GetGroupQueryRequest(input *GetGroupQueryInput) GetGrou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGroupQueryRequest{Request: req, Input: input}
+	return GetGroupQueryRequest{Request: req, Input: input, Copy: c.GetGroupQueryRequest}
 }
 
 const opGetTags = "GetTags"
@@ -211,6 +215,7 @@ const opGetTags = "GetTags"
 type GetTagsRequest struct {
 	*aws.Request
 	Input *GetTagsInput
+	Copy  func(*GetTagsInput) GetTagsRequest
 }
 
 // Send marshals and sends the GetTags API request.
@@ -252,7 +257,7 @@ func (c *ResourceGroups) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTagsRequest{Request: req, Input: input}
+	return GetTagsRequest{Request: req, Input: input, Copy: c.GetTagsRequest}
 }
 
 const opListGroupResources = "ListGroupResources"
@@ -261,6 +266,7 @@ const opListGroupResources = "ListGroupResources"
 type ListGroupResourcesRequest struct {
 	*aws.Request
 	Input *ListGroupResourcesInput
+	Copy  func(*ListGroupResourcesInput) ListGroupResourcesRequest
 }
 
 // Send marshals and sends the ListGroupResources API request.
@@ -308,57 +314,53 @@ func (c *ResourceGroups) ListGroupResourcesRequest(input *ListGroupResourcesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupResourcesRequest{Request: req, Input: input}
+	return ListGroupResourcesRequest{Request: req, Input: input, Copy: c.ListGroupResourcesRequest}
 }
 
-// ListGroupResourcesPages iterates over the pages of a ListGroupResources operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListGroupResources method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListGroupResourcesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListGroupResources operation.
-//    pageNum := 0
-//    err := client.ListGroupResourcesPages(params,
-//        func(page *ListGroupResourcesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListGroupResourcesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ResourceGroups) ListGroupResourcesPages(input *ListGroupResourcesInput, fn func(*ListGroupResourcesOutput, bool) bool) error {
-	return c.ListGroupResourcesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListGroupResourcesRequest) Paginate(opts ...aws.Option) ListGroupResourcesPager {
+	return ListGroupResourcesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListGroupResourcesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListGroupResourcesPagesWithContext same as ListGroupResourcesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroups) ListGroupResourcesPagesWithContext(ctx aws.Context, input *ListGroupResourcesInput, fn func(*ListGroupResourcesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListGroupResourcesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListGroupResourcesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGroupResourcesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListGroupResourcesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListGroupResourcesPager struct {
+	aws.Pager
+}
+
+func (p *ListGroupResourcesPager) CurrentPage() *ListGroupResourcesOutput {
+	return p.Pager.CurrentPage().(*ListGroupResourcesOutput)
 }
 
 const opListGroups = "ListGroups"
@@ -367,6 +369,7 @@ const opListGroups = "ListGroups"
 type ListGroupsRequest struct {
 	*aws.Request
 	Input *ListGroupsInput
+	Copy  func(*ListGroupsInput) ListGroupsRequest
 }
 
 // Send marshals and sends the ListGroups API request.
@@ -413,57 +416,53 @@ func (c *ResourceGroups) ListGroupsRequest(input *ListGroupsInput) ListGroupsReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupsRequest{Request: req, Input: input}
+	return ListGroupsRequest{Request: req, Input: input, Copy: c.ListGroupsRequest}
 }
 
-// ListGroupsPages iterates over the pages of a ListGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListGroups operation.
-//    pageNum := 0
-//    err := client.ListGroupsPages(params,
-//        func(page *ListGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ResourceGroups) ListGroupsPages(input *ListGroupsInput, fn func(*ListGroupsOutput, bool) bool) error {
-	return c.ListGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListGroupsRequest) Paginate(opts ...aws.Option) ListGroupsPager {
+	return ListGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListGroupsPagesWithContext same as ListGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroups) ListGroupsPagesWithContext(ctx aws.Context, input *ListGroupsInput, fn func(*ListGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListGroupsPager struct {
+	aws.Pager
+}
+
+func (p *ListGroupsPager) CurrentPage() *ListGroupsOutput {
+	return p.Pager.CurrentPage().(*ListGroupsOutput)
 }
 
 const opSearchResources = "SearchResources"
@@ -472,6 +471,7 @@ const opSearchResources = "SearchResources"
 type SearchResourcesRequest struct {
 	*aws.Request
 	Input *SearchResourcesInput
+	Copy  func(*SearchResourcesInput) SearchResourcesRequest
 }
 
 // Send marshals and sends the SearchResources API request.
@@ -520,57 +520,53 @@ func (c *ResourceGroups) SearchResourcesRequest(input *SearchResourcesInput) Sea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchResourcesRequest{Request: req, Input: input}
+	return SearchResourcesRequest{Request: req, Input: input, Copy: c.SearchResourcesRequest}
 }
 
-// SearchResourcesPages iterates over the pages of a SearchResources operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See SearchResources method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SearchResourcesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a SearchResources operation.
-//    pageNum := 0
-//    err := client.SearchResourcesPages(params,
-//        func(page *SearchResourcesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SearchResourcesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ResourceGroups) SearchResourcesPages(input *SearchResourcesInput, fn func(*SearchResourcesOutput, bool) bool) error {
-	return c.SearchResourcesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchResourcesRequest) Paginate(opts ...aws.Option) SearchResourcesPager {
+	return SearchResourcesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchResourcesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// SearchResourcesPagesWithContext same as SearchResourcesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ResourceGroups) SearchResourcesPagesWithContext(ctx aws.Context, input *SearchResourcesInput, fn func(*SearchResourcesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *SearchResourcesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.SearchResourcesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchResourcesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchResourcesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchResourcesPager struct {
+	aws.Pager
+}
+
+func (p *SearchResourcesPager) CurrentPage() *SearchResourcesOutput {
+	return p.Pager.CurrentPage().(*SearchResourcesOutput)
 }
 
 const opTag = "Tag"
@@ -579,6 +575,7 @@ const opTag = "Tag"
 type TagRequest struct {
 	*aws.Request
 	Input *TagInput
+	Copy  func(*TagInput) TagRequest
 }
 
 // Send marshals and sends the Tag API request.
@@ -620,7 +617,7 @@ func (c *ResourceGroups) TagRequest(input *TagInput) TagRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagRequest{Request: req, Input: input}
+	return TagRequest{Request: req, Input: input, Copy: c.TagRequest}
 }
 
 const opUntag = "Untag"
@@ -629,6 +626,7 @@ const opUntag = "Untag"
 type UntagRequest struct {
 	*aws.Request
 	Input *UntagInput
+	Copy  func(*UntagInput) UntagRequest
 }
 
 // Send marshals and sends the Untag API request.
@@ -669,7 +667,7 @@ func (c *ResourceGroups) UntagRequest(input *UntagInput) UntagRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagRequest{Request: req, Input: input}
+	return UntagRequest{Request: req, Input: input, Copy: c.UntagRequest}
 }
 
 const opUpdateGroup = "UpdateGroup"
@@ -678,6 +676,7 @@ const opUpdateGroup = "UpdateGroup"
 type UpdateGroupRequest struct {
 	*aws.Request
 	Input *UpdateGroupInput
+	Copy  func(*UpdateGroupInput) UpdateGroupRequest
 }
 
 // Send marshals and sends the UpdateGroup API request.
@@ -719,7 +718,7 @@ func (c *ResourceGroups) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroup
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGroupRequest{Request: req, Input: input}
+	return UpdateGroupRequest{Request: req, Input: input, Copy: c.UpdateGroupRequest}
 }
 
 const opUpdateGroupQuery = "UpdateGroupQuery"
@@ -728,6 +727,7 @@ const opUpdateGroupQuery = "UpdateGroupQuery"
 type UpdateGroupQueryRequest struct {
 	*aws.Request
 	Input *UpdateGroupQueryInput
+	Copy  func(*UpdateGroupQueryInput) UpdateGroupQueryRequest
 }
 
 // Send marshals and sends the UpdateGroupQuery API request.
@@ -768,7 +768,7 @@ func (c *ResourceGroups) UpdateGroupQueryRequest(input *UpdateGroupQueryInput) U
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGroupQueryRequest{Request: req, Input: input}
+	return UpdateGroupQueryRequest{Request: req, Input: input, Copy: c.UpdateGroupQueryRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/resource-groups-2017-11-27/CreateGroupInput

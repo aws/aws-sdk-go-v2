@@ -18,6 +18,7 @@ const opAddTags = "AddTags"
 type AddTagsRequest struct {
 	*aws.Request
 	Input *AddTagsInput
+	Copy  func(*AddTagsInput) AddTagsRequest
 }
 
 // Send marshals and sends the AddTags API request.
@@ -60,7 +61,7 @@ func (c *ElasticsearchService) AddTagsRequest(input *AddTagsInput) AddTagsReques
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsRequest{Request: req, Input: input}
+	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
 const opCreateElasticsearchDomain = "CreateElasticsearchDomain"
@@ -69,6 +70,7 @@ const opCreateElasticsearchDomain = "CreateElasticsearchDomain"
 type CreateElasticsearchDomainRequest struct {
 	*aws.Request
 	Input *CreateElasticsearchDomainInput
+	Copy  func(*CreateElasticsearchDomainInput) CreateElasticsearchDomainRequest
 }
 
 // Send marshals and sends the CreateElasticsearchDomain API request.
@@ -109,7 +111,7 @@ func (c *ElasticsearchService) CreateElasticsearchDomainRequest(input *CreateEla
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateElasticsearchDomainRequest{Request: req, Input: input}
+	return CreateElasticsearchDomainRequest{Request: req, Input: input, Copy: c.CreateElasticsearchDomainRequest}
 }
 
 const opDeleteElasticsearchDomain = "DeleteElasticsearchDomain"
@@ -118,6 +120,7 @@ const opDeleteElasticsearchDomain = "DeleteElasticsearchDomain"
 type DeleteElasticsearchDomainRequest struct {
 	*aws.Request
 	Input *DeleteElasticsearchDomainInput
+	Copy  func(*DeleteElasticsearchDomainInput) DeleteElasticsearchDomainRequest
 }
 
 // Send marshals and sends the DeleteElasticsearchDomain API request.
@@ -157,7 +160,7 @@ func (c *ElasticsearchService) DeleteElasticsearchDomainRequest(input *DeleteEla
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteElasticsearchDomainRequest{Request: req, Input: input}
+	return DeleteElasticsearchDomainRequest{Request: req, Input: input, Copy: c.DeleteElasticsearchDomainRequest}
 }
 
 const opDeleteElasticsearchServiceRole = "DeleteElasticsearchServiceRole"
@@ -166,6 +169,7 @@ const opDeleteElasticsearchServiceRole = "DeleteElasticsearchServiceRole"
 type DeleteElasticsearchServiceRoleRequest struct {
 	*aws.Request
 	Input *DeleteElasticsearchServiceRoleInput
+	Copy  func(*DeleteElasticsearchServiceRoleInput) DeleteElasticsearchServiceRoleRequest
 }
 
 // Send marshals and sends the DeleteElasticsearchServiceRole API request.
@@ -210,7 +214,7 @@ func (c *ElasticsearchService) DeleteElasticsearchServiceRoleRequest(input *Dele
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteElasticsearchServiceRoleRequest{Request: req, Input: input}
+	return DeleteElasticsearchServiceRoleRequest{Request: req, Input: input, Copy: c.DeleteElasticsearchServiceRoleRequest}
 }
 
 const opDescribeElasticsearchDomain = "DescribeElasticsearchDomain"
@@ -219,6 +223,7 @@ const opDescribeElasticsearchDomain = "DescribeElasticsearchDomain"
 type DescribeElasticsearchDomainRequest struct {
 	*aws.Request
 	Input *DescribeElasticsearchDomainInput
+	Copy  func(*DescribeElasticsearchDomainInput) DescribeElasticsearchDomainRequest
 }
 
 // Send marshals and sends the DescribeElasticsearchDomain API request.
@@ -258,7 +263,7 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainRequest(input *Describ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeElasticsearchDomainRequest{Request: req, Input: input}
+	return DescribeElasticsearchDomainRequest{Request: req, Input: input, Copy: c.DescribeElasticsearchDomainRequest}
 }
 
 const opDescribeElasticsearchDomainConfig = "DescribeElasticsearchDomainConfig"
@@ -267,6 +272,7 @@ const opDescribeElasticsearchDomainConfig = "DescribeElasticsearchDomainConfig"
 type DescribeElasticsearchDomainConfigRequest struct {
 	*aws.Request
 	Input *DescribeElasticsearchDomainConfigInput
+	Copy  func(*DescribeElasticsearchDomainConfigInput) DescribeElasticsearchDomainConfigRequest
 }
 
 // Send marshals and sends the DescribeElasticsearchDomainConfig API request.
@@ -307,7 +313,7 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainConfigRequest(input *D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeElasticsearchDomainConfigRequest{Request: req, Input: input}
+	return DescribeElasticsearchDomainConfigRequest{Request: req, Input: input, Copy: c.DescribeElasticsearchDomainConfigRequest}
 }
 
 const opDescribeElasticsearchDomains = "DescribeElasticsearchDomains"
@@ -316,6 +322,7 @@ const opDescribeElasticsearchDomains = "DescribeElasticsearchDomains"
 type DescribeElasticsearchDomainsRequest struct {
 	*aws.Request
 	Input *DescribeElasticsearchDomainsInput
+	Copy  func(*DescribeElasticsearchDomainsInput) DescribeElasticsearchDomainsRequest
 }
 
 // Send marshals and sends the DescribeElasticsearchDomains API request.
@@ -355,7 +362,7 @@ func (c *ElasticsearchService) DescribeElasticsearchDomainsRequest(input *Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeElasticsearchDomainsRequest{Request: req, Input: input}
+	return DescribeElasticsearchDomainsRequest{Request: req, Input: input, Copy: c.DescribeElasticsearchDomainsRequest}
 }
 
 const opDescribeElasticsearchInstanceTypeLimits = "DescribeElasticsearchInstanceTypeLimits"
@@ -364,6 +371,7 @@ const opDescribeElasticsearchInstanceTypeLimits = "DescribeElasticsearchInstance
 type DescribeElasticsearchInstanceTypeLimitsRequest struct {
 	*aws.Request
 	Input *DescribeElasticsearchInstanceTypeLimitsInput
+	Copy  func(*DescribeElasticsearchInstanceTypeLimitsInput) DescribeElasticsearchInstanceTypeLimitsRequest
 }
 
 // Send marshals and sends the DescribeElasticsearchInstanceTypeLimits API request.
@@ -404,7 +412,7 @@ func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsRequest(in
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeElasticsearchInstanceTypeLimitsRequest{Request: req, Input: input}
+	return DescribeElasticsearchInstanceTypeLimitsRequest{Request: req, Input: input, Copy: c.DescribeElasticsearchInstanceTypeLimitsRequest}
 }
 
 const opListDomainNames = "ListDomainNames"
@@ -413,6 +421,7 @@ const opListDomainNames = "ListDomainNames"
 type ListDomainNamesRequest struct {
 	*aws.Request
 	Input *ListDomainNamesInput
+	Copy  func(*ListDomainNamesInput) ListDomainNamesRequest
 }
 
 // Send marshals and sends the ListDomainNames API request.
@@ -452,7 +461,7 @@ func (c *ElasticsearchService) ListDomainNamesRequest(input *ListDomainNamesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDomainNamesRequest{Request: req, Input: input}
+	return ListDomainNamesRequest{Request: req, Input: input, Copy: c.ListDomainNamesRequest}
 }
 
 const opListElasticsearchInstanceTypes = "ListElasticsearchInstanceTypes"
@@ -461,6 +470,7 @@ const opListElasticsearchInstanceTypes = "ListElasticsearchInstanceTypes"
 type ListElasticsearchInstanceTypesRequest struct {
 	*aws.Request
 	Input *ListElasticsearchInstanceTypesInput
+	Copy  func(*ListElasticsearchInstanceTypesInput) ListElasticsearchInstanceTypesRequest
 }
 
 // Send marshals and sends the ListElasticsearchInstanceTypes API request.
@@ -505,57 +515,53 @@ func (c *ElasticsearchService) ListElasticsearchInstanceTypesRequest(input *List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListElasticsearchInstanceTypesRequest{Request: req, Input: input}
+	return ListElasticsearchInstanceTypesRequest{Request: req, Input: input, Copy: c.ListElasticsearchInstanceTypesRequest}
 }
 
-// ListElasticsearchInstanceTypesPages iterates over the pages of a ListElasticsearchInstanceTypes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListElasticsearchInstanceTypes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListElasticsearchInstanceTypesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListElasticsearchInstanceTypes operation.
-//    pageNum := 0
-//    err := client.ListElasticsearchInstanceTypesPages(params,
-//        func(page *ListElasticsearchInstanceTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListElasticsearchInstanceTypesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElasticsearchService) ListElasticsearchInstanceTypesPages(input *ListElasticsearchInstanceTypesInput, fn func(*ListElasticsearchInstanceTypesOutput, bool) bool) error {
-	return c.ListElasticsearchInstanceTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListElasticsearchInstanceTypesRequest) Paginate(opts ...aws.Option) ListElasticsearchInstanceTypesPager {
+	return ListElasticsearchInstanceTypesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListElasticsearchInstanceTypesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListElasticsearchInstanceTypesPagesWithContext same as ListElasticsearchInstanceTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) ListElasticsearchInstanceTypesPagesWithContext(ctx aws.Context, input *ListElasticsearchInstanceTypesInput, fn func(*ListElasticsearchInstanceTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListElasticsearchInstanceTypesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListElasticsearchInstanceTypesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListElasticsearchInstanceTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListElasticsearchInstanceTypesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListElasticsearchInstanceTypesPager struct {
+	aws.Pager
+}
+
+func (p *ListElasticsearchInstanceTypesPager) CurrentPage() *ListElasticsearchInstanceTypesOutput {
+	return p.Pager.CurrentPage().(*ListElasticsearchInstanceTypesOutput)
 }
 
 const opListElasticsearchVersions = "ListElasticsearchVersions"
@@ -564,6 +570,7 @@ const opListElasticsearchVersions = "ListElasticsearchVersions"
 type ListElasticsearchVersionsRequest struct {
 	*aws.Request
 	Input *ListElasticsearchVersionsInput
+	Copy  func(*ListElasticsearchVersionsInput) ListElasticsearchVersionsRequest
 }
 
 // Send marshals and sends the ListElasticsearchVersions API request.
@@ -608,57 +615,53 @@ func (c *ElasticsearchService) ListElasticsearchVersionsRequest(input *ListElast
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListElasticsearchVersionsRequest{Request: req, Input: input}
+	return ListElasticsearchVersionsRequest{Request: req, Input: input, Copy: c.ListElasticsearchVersionsRequest}
 }
 
-// ListElasticsearchVersionsPages iterates over the pages of a ListElasticsearchVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListElasticsearchVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListElasticsearchVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListElasticsearchVersions operation.
-//    pageNum := 0
-//    err := client.ListElasticsearchVersionsPages(params,
-//        func(page *ListElasticsearchVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListElasticsearchVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElasticsearchService) ListElasticsearchVersionsPages(input *ListElasticsearchVersionsInput, fn func(*ListElasticsearchVersionsOutput, bool) bool) error {
-	return c.ListElasticsearchVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListElasticsearchVersionsRequest) Paginate(opts ...aws.Option) ListElasticsearchVersionsPager {
+	return ListElasticsearchVersionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListElasticsearchVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListElasticsearchVersionsPagesWithContext same as ListElasticsearchVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElasticsearchService) ListElasticsearchVersionsPagesWithContext(ctx aws.Context, input *ListElasticsearchVersionsInput, fn func(*ListElasticsearchVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListElasticsearchVersionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListElasticsearchVersionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListElasticsearchVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListElasticsearchVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListElasticsearchVersionsPager struct {
+	aws.Pager
+}
+
+func (p *ListElasticsearchVersionsPager) CurrentPage() *ListElasticsearchVersionsOutput {
+	return p.Pager.CurrentPage().(*ListElasticsearchVersionsOutput)
 }
 
 const opListTags = "ListTags"
@@ -667,6 +670,7 @@ const opListTags = "ListTags"
 type ListTagsRequest struct {
 	*aws.Request
 	Input *ListTagsInput
+	Copy  func(*ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -705,7 +709,7 @@ func (c *ElasticsearchService) ListTagsRequest(input *ListTagsInput) ListTagsReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsRequest{Request: req, Input: input}
+	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
 const opRemoveTags = "RemoveTags"
@@ -714,6 +718,7 @@ const opRemoveTags = "RemoveTags"
 type RemoveTagsRequest struct {
 	*aws.Request
 	Input *RemoveTagsInput
+	Copy  func(*RemoveTagsInput) RemoveTagsRequest
 }
 
 // Send marshals and sends the RemoveTags API request.
@@ -754,7 +759,7 @@ func (c *ElasticsearchService) RemoveTagsRequest(input *RemoveTagsInput) RemoveT
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsRequest{Request: req, Input: input}
+	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 
 const opUpdateElasticsearchDomainConfig = "UpdateElasticsearchDomainConfig"
@@ -763,6 +768,7 @@ const opUpdateElasticsearchDomainConfig = "UpdateElasticsearchDomainConfig"
 type UpdateElasticsearchDomainConfigRequest struct {
 	*aws.Request
 	Input *UpdateElasticsearchDomainConfigInput
+	Copy  func(*UpdateElasticsearchDomainConfigInput) UpdateElasticsearchDomainConfigRequest
 }
 
 // Send marshals and sends the UpdateElasticsearchDomainConfig API request.
@@ -802,7 +808,7 @@ func (c *ElasticsearchService) UpdateElasticsearchDomainConfigRequest(input *Upd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateElasticsearchDomainConfigRequest{Request: req, Input: input}
+	return UpdateElasticsearchDomainConfigRequest{Request: req, Input: input, Copy: c.UpdateElasticsearchDomainConfigRequest}
 }
 
 // The configured access rules for the domain's document and search endpoints,

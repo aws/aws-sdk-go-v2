@@ -16,6 +16,7 @@ const opAssociateConfigurationItemsToApplication = "AssociateConfigurationItemsT
 type AssociateConfigurationItemsToApplicationRequest struct {
 	*aws.Request
 	Input *AssociateConfigurationItemsToApplicationInput
+	Copy  func(*AssociateConfigurationItemsToApplicationInput) AssociateConfigurationItemsToApplicationRequest
 }
 
 // Send marshals and sends the AssociateConfigurationItemsToApplication API request.
@@ -56,7 +57,7 @@ func (c *ApplicationDiscoveryService) AssociateConfigurationItemsToApplicationRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateConfigurationItemsToApplicationRequest{Request: req, Input: input}
+	return AssociateConfigurationItemsToApplicationRequest{Request: req, Input: input, Copy: c.AssociateConfigurationItemsToApplicationRequest}
 }
 
 const opCreateApplication = "CreateApplication"
@@ -65,6 +66,7 @@ const opCreateApplication = "CreateApplication"
 type CreateApplicationRequest struct {
 	*aws.Request
 	Input *CreateApplicationInput
+	Copy  func(*CreateApplicationInput) CreateApplicationRequest
 }
 
 // Send marshals and sends the CreateApplication API request.
@@ -105,7 +107,7 @@ func (c *ApplicationDiscoveryService) CreateApplicationRequest(input *CreateAppl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateApplicationRequest{Request: req, Input: input}
+	return CreateApplicationRequest{Request: req, Input: input, Copy: c.CreateApplicationRequest}
 }
 
 const opCreateTags = "CreateTags"
@@ -114,6 +116,7 @@ const opCreateTags = "CreateTags"
 type CreateTagsRequest struct {
 	*aws.Request
 	Input *CreateTagsInput
+	Copy  func(*CreateTagsInput) CreateTagsRequest
 }
 
 // Send marshals and sends the CreateTags API request.
@@ -156,7 +159,7 @@ func (c *ApplicationDiscoveryService) CreateTagsRequest(input *CreateTagsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTagsRequest{Request: req, Input: input}
+	return CreateTagsRequest{Request: req, Input: input, Copy: c.CreateTagsRequest}
 }
 
 const opDeleteApplications = "DeleteApplications"
@@ -165,6 +168,7 @@ const opDeleteApplications = "DeleteApplications"
 type DeleteApplicationsRequest struct {
 	*aws.Request
 	Input *DeleteApplicationsInput
+	Copy  func(*DeleteApplicationsInput) DeleteApplicationsRequest
 }
 
 // Send marshals and sends the DeleteApplications API request.
@@ -206,7 +210,7 @@ func (c *ApplicationDiscoveryService) DeleteApplicationsRequest(input *DeleteApp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApplicationsRequest{Request: req, Input: input}
+	return DeleteApplicationsRequest{Request: req, Input: input, Copy: c.DeleteApplicationsRequest}
 }
 
 const opDeleteTags = "DeleteTags"
@@ -215,6 +219,7 @@ const opDeleteTags = "DeleteTags"
 type DeleteTagsRequest struct {
 	*aws.Request
 	Input *DeleteTagsInput
+	Copy  func(*DeleteTagsInput) DeleteTagsRequest
 }
 
 // Send marshals and sends the DeleteTags API request.
@@ -256,7 +261,7 @@ func (c *ApplicationDiscoveryService) DeleteTagsRequest(input *DeleteTagsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTagsRequest{Request: req, Input: input}
+	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
 const opDescribeAgents = "DescribeAgents"
@@ -265,6 +270,7 @@ const opDescribeAgents = "DescribeAgents"
 type DescribeAgentsRequest struct {
 	*aws.Request
 	Input *DescribeAgentsInput
+	Copy  func(*DescribeAgentsInput) DescribeAgentsRequest
 }
 
 // Send marshals and sends the DescribeAgents API request.
@@ -306,7 +312,7 @@ func (c *ApplicationDiscoveryService) DescribeAgentsRequest(input *DescribeAgent
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAgentsRequest{Request: req, Input: input}
+	return DescribeAgentsRequest{Request: req, Input: input, Copy: c.DescribeAgentsRequest}
 }
 
 const opDescribeConfigurations = "DescribeConfigurations"
@@ -315,6 +321,7 @@ const opDescribeConfigurations = "DescribeConfigurations"
 type DescribeConfigurationsRequest struct {
 	*aws.Request
 	Input *DescribeConfigurationsInput
+	Copy  func(*DescribeConfigurationsInput) DescribeConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeConfigurations API request.
@@ -362,7 +369,7 @@ func (c *ApplicationDiscoveryService) DescribeConfigurationsRequest(input *Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConfigurationsRequest{Request: req, Input: input}
+	return DescribeConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeConfigurationsRequest}
 }
 
 const opDescribeExportConfigurations = "DescribeExportConfigurations"
@@ -371,6 +378,7 @@ const opDescribeExportConfigurations = "DescribeExportConfigurations"
 type DescribeExportConfigurationsRequest struct {
 	*aws.Request
 	Input *DescribeExportConfigurationsInput
+	Copy  func(*DescribeExportConfigurationsInput) DescribeExportConfigurationsRequest
 }
 
 // Send marshals and sends the DescribeExportConfigurations API request.
@@ -417,7 +425,7 @@ func (c *ApplicationDiscoveryService) DescribeExportConfigurationsRequest(input 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeExportConfigurationsRequest{Request: req, Input: input}
+	return DescribeExportConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeExportConfigurationsRequest}
 }
 
 const opDescribeExportTasks = "DescribeExportTasks"
@@ -426,6 +434,7 @@ const opDescribeExportTasks = "DescribeExportTasks"
 type DescribeExportTasksRequest struct {
 	*aws.Request
 	Input *DescribeExportTasksInput
+	Copy  func(*DescribeExportTasksInput) DescribeExportTasksRequest
 }
 
 // Send marshals and sends the DescribeExportTasks API request.
@@ -467,7 +476,7 @@ func (c *ApplicationDiscoveryService) DescribeExportTasksRequest(input *Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeExportTasksRequest{Request: req, Input: input}
+	return DescribeExportTasksRequest{Request: req, Input: input, Copy: c.DescribeExportTasksRequest}
 }
 
 const opDescribeTags = "DescribeTags"
@@ -476,6 +485,7 @@ const opDescribeTags = "DescribeTags"
 type DescribeTagsRequest struct {
 	*aws.Request
 	Input *DescribeTagsInput
+	Copy  func(*DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -517,7 +527,7 @@ func (c *ApplicationDiscoveryService) DescribeTagsRequest(input *DescribeTagsInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagsRequest{Request: req, Input: input}
+	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
 const opDisassociateConfigurationItemsFromApplication = "DisassociateConfigurationItemsFromApplication"
@@ -526,6 +536,7 @@ const opDisassociateConfigurationItemsFromApplication = "DisassociateConfigurati
 type DisassociateConfigurationItemsFromApplicationRequest struct {
 	*aws.Request
 	Input *DisassociateConfigurationItemsFromApplicationInput
+	Copy  func(*DisassociateConfigurationItemsFromApplicationInput) DisassociateConfigurationItemsFromApplicationRequest
 }
 
 // Send marshals and sends the DisassociateConfigurationItemsFromApplication API request.
@@ -566,7 +577,7 @@ func (c *ApplicationDiscoveryService) DisassociateConfigurationItemsFromApplicat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateConfigurationItemsFromApplicationRequest{Request: req, Input: input}
+	return DisassociateConfigurationItemsFromApplicationRequest{Request: req, Input: input, Copy: c.DisassociateConfigurationItemsFromApplicationRequest}
 }
 
 const opExportConfigurations = "ExportConfigurations"
@@ -575,6 +586,7 @@ const opExportConfigurations = "ExportConfigurations"
 type ExportConfigurationsRequest struct {
 	*aws.Request
 	Input *ExportConfigurationsInput
+	Copy  func(*ExportConfigurationsInput) ExportConfigurationsRequest
 }
 
 // Send marshals and sends the ExportConfigurations API request.
@@ -624,7 +636,7 @@ func (c *ApplicationDiscoveryService) ExportConfigurationsRequest(input *ExportC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ExportConfigurationsRequest{Request: req, Input: input}
+	return ExportConfigurationsRequest{Request: req, Input: input, Copy: c.ExportConfigurationsRequest}
 }
 
 const opGetDiscoverySummary = "GetDiscoverySummary"
@@ -633,6 +645,7 @@ const opGetDiscoverySummary = "GetDiscoverySummary"
 type GetDiscoverySummaryRequest struct {
 	*aws.Request
 	Input *GetDiscoverySummaryInput
+	Copy  func(*GetDiscoverySummaryInput) GetDiscoverySummaryRequest
 }
 
 // Send marshals and sends the GetDiscoverySummary API request.
@@ -673,7 +686,7 @@ func (c *ApplicationDiscoveryService) GetDiscoverySummaryRequest(input *GetDisco
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDiscoverySummaryRequest{Request: req, Input: input}
+	return GetDiscoverySummaryRequest{Request: req, Input: input, Copy: c.GetDiscoverySummaryRequest}
 }
 
 const opListConfigurations = "ListConfigurations"
@@ -682,6 +695,7 @@ const opListConfigurations = "ListConfigurations"
 type ListConfigurationsRequest struct {
 	*aws.Request
 	Input *ListConfigurationsInput
+	Copy  func(*ListConfigurationsInput) ListConfigurationsRequest
 }
 
 // Send marshals and sends the ListConfigurations API request.
@@ -723,7 +737,7 @@ func (c *ApplicationDiscoveryService) ListConfigurationsRequest(input *ListConfi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListConfigurationsRequest{Request: req, Input: input}
+	return ListConfigurationsRequest{Request: req, Input: input, Copy: c.ListConfigurationsRequest}
 }
 
 const opListServerNeighbors = "ListServerNeighbors"
@@ -732,6 +746,7 @@ const opListServerNeighbors = "ListServerNeighbors"
 type ListServerNeighborsRequest struct {
 	*aws.Request
 	Input *ListServerNeighborsInput
+	Copy  func(*ListServerNeighborsInput) ListServerNeighborsRequest
 }
 
 // Send marshals and sends the ListServerNeighbors API request.
@@ -773,7 +788,7 @@ func (c *ApplicationDiscoveryService) ListServerNeighborsRequest(input *ListServ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListServerNeighborsRequest{Request: req, Input: input}
+	return ListServerNeighborsRequest{Request: req, Input: input, Copy: c.ListServerNeighborsRequest}
 }
 
 const opStartDataCollectionByAgentIds = "StartDataCollectionByAgentIds"
@@ -782,6 +797,7 @@ const opStartDataCollectionByAgentIds = "StartDataCollectionByAgentIds"
 type StartDataCollectionByAgentIdsRequest struct {
 	*aws.Request
 	Input *StartDataCollectionByAgentIdsInput
+	Copy  func(*StartDataCollectionByAgentIdsInput) StartDataCollectionByAgentIdsRequest
 }
 
 // Send marshals and sends the StartDataCollectionByAgentIds API request.
@@ -822,7 +838,7 @@ func (c *ApplicationDiscoveryService) StartDataCollectionByAgentIdsRequest(input
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartDataCollectionByAgentIdsRequest{Request: req, Input: input}
+	return StartDataCollectionByAgentIdsRequest{Request: req, Input: input, Copy: c.StartDataCollectionByAgentIdsRequest}
 }
 
 const opStartExportTask = "StartExportTask"
@@ -831,6 +847,7 @@ const opStartExportTask = "StartExportTask"
 type StartExportTaskRequest struct {
 	*aws.Request
 	Input *StartExportTaskInput
+	Copy  func(*StartExportTaskInput) StartExportTaskRequest
 }
 
 // Send marshals and sends the StartExportTask API request.
@@ -881,7 +898,7 @@ func (c *ApplicationDiscoveryService) StartExportTaskRequest(input *StartExportT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartExportTaskRequest{Request: req, Input: input}
+	return StartExportTaskRequest{Request: req, Input: input, Copy: c.StartExportTaskRequest}
 }
 
 const opStopDataCollectionByAgentIds = "StopDataCollectionByAgentIds"
@@ -890,6 +907,7 @@ const opStopDataCollectionByAgentIds = "StopDataCollectionByAgentIds"
 type StopDataCollectionByAgentIdsRequest struct {
 	*aws.Request
 	Input *StopDataCollectionByAgentIdsInput
+	Copy  func(*StopDataCollectionByAgentIdsInput) StopDataCollectionByAgentIdsRequest
 }
 
 // Send marshals and sends the StopDataCollectionByAgentIds API request.
@@ -930,7 +948,7 @@ func (c *ApplicationDiscoveryService) StopDataCollectionByAgentIdsRequest(input 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopDataCollectionByAgentIdsRequest{Request: req, Input: input}
+	return StopDataCollectionByAgentIdsRequest{Request: req, Input: input, Copy: c.StopDataCollectionByAgentIdsRequest}
 }
 
 const opUpdateApplication = "UpdateApplication"
@@ -939,6 +957,7 @@ const opUpdateApplication = "UpdateApplication"
 type UpdateApplicationRequest struct {
 	*aws.Request
 	Input *UpdateApplicationInput
+	Copy  func(*UpdateApplicationInput) UpdateApplicationRequest
 }
 
 // Send marshals and sends the UpdateApplication API request.
@@ -979,7 +998,7 @@ func (c *ApplicationDiscoveryService) UpdateApplicationRequest(input *UpdateAppl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateApplicationRequest{Request: req, Input: input}
+	return UpdateApplicationRequest{Request: req, Input: input, Copy: c.UpdateApplicationRequest}
 }
 
 // Information about agents or connectors that were instructed to start collecting

@@ -14,6 +14,7 @@ const opAssociateRoleToGroup = "AssociateRoleToGroup"
 type AssociateRoleToGroupRequest struct {
 	*aws.Request
 	Input *AssociateRoleToGroupInput
+	Copy  func(*AssociateRoleToGroupInput) AssociateRoleToGroupRequest
 }
 
 // Send marshals and sends the AssociateRoleToGroup API request.
@@ -56,7 +57,7 @@ func (c *Greengrass) AssociateRoleToGroupRequest(input *AssociateRoleToGroupInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateRoleToGroupRequest{Request: req, Input: input}
+	return AssociateRoleToGroupRequest{Request: req, Input: input, Copy: c.AssociateRoleToGroupRequest}
 }
 
 const opAssociateServiceRoleToAccount = "AssociateServiceRoleToAccount"
@@ -65,6 +66,7 @@ const opAssociateServiceRoleToAccount = "AssociateServiceRoleToAccount"
 type AssociateServiceRoleToAccountRequest struct {
 	*aws.Request
 	Input *AssociateServiceRoleToAccountInput
+	Copy  func(*AssociateServiceRoleToAccountInput) AssociateServiceRoleToAccountRequest
 }
 
 // Send marshals and sends the AssociateServiceRoleToAccount API request.
@@ -108,7 +110,7 @@ func (c *Greengrass) AssociateServiceRoleToAccountRequest(input *AssociateServic
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateServiceRoleToAccountRequest{Request: req, Input: input}
+	return AssociateServiceRoleToAccountRequest{Request: req, Input: input, Copy: c.AssociateServiceRoleToAccountRequest}
 }
 
 const opCreateCoreDefinition = "CreateCoreDefinition"
@@ -117,6 +119,7 @@ const opCreateCoreDefinition = "CreateCoreDefinition"
 type CreateCoreDefinitionRequest struct {
 	*aws.Request
 	Input *CreateCoreDefinitionInput
+	Copy  func(*CreateCoreDefinitionInput) CreateCoreDefinitionRequest
 }
 
 // Send marshals and sends the CreateCoreDefinition API request.
@@ -159,7 +162,7 @@ func (c *Greengrass) CreateCoreDefinitionRequest(input *CreateCoreDefinitionInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCoreDefinitionRequest{Request: req, Input: input}
+	return CreateCoreDefinitionRequest{Request: req, Input: input, Copy: c.CreateCoreDefinitionRequest}
 }
 
 const opCreateCoreDefinitionVersion = "CreateCoreDefinitionVersion"
@@ -168,6 +171,7 @@ const opCreateCoreDefinitionVersion = "CreateCoreDefinitionVersion"
 type CreateCoreDefinitionVersionRequest struct {
 	*aws.Request
 	Input *CreateCoreDefinitionVersionInput
+	Copy  func(*CreateCoreDefinitionVersionInput) CreateCoreDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateCoreDefinitionVersion API request.
@@ -209,7 +213,7 @@ func (c *Greengrass) CreateCoreDefinitionVersionRequest(input *CreateCoreDefinit
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCoreDefinitionVersionRequest{Request: req, Input: input}
+	return CreateCoreDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateCoreDefinitionVersionRequest}
 }
 
 const opCreateDeployment = "CreateDeployment"
@@ -218,6 +222,7 @@ const opCreateDeployment = "CreateDeployment"
 type CreateDeploymentRequest struct {
 	*aws.Request
 	Input *CreateDeploymentInput
+	Copy  func(*CreateDeploymentInput) CreateDeploymentRequest
 }
 
 // Send marshals and sends the CreateDeployment API request.
@@ -258,7 +263,7 @@ func (c *Greengrass) CreateDeploymentRequest(input *CreateDeploymentInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDeploymentRequest{Request: req, Input: input}
+	return CreateDeploymentRequest{Request: req, Input: input, Copy: c.CreateDeploymentRequest}
 }
 
 const opCreateDeviceDefinition = "CreateDeviceDefinition"
@@ -267,6 +272,7 @@ const opCreateDeviceDefinition = "CreateDeviceDefinition"
 type CreateDeviceDefinitionRequest struct {
 	*aws.Request
 	Input *CreateDeviceDefinitionInput
+	Copy  func(*CreateDeviceDefinitionInput) CreateDeviceDefinitionRequest
 }
 
 // Send marshals and sends the CreateDeviceDefinition API request.
@@ -309,7 +315,7 @@ func (c *Greengrass) CreateDeviceDefinitionRequest(input *CreateDeviceDefinition
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDeviceDefinitionRequest{Request: req, Input: input}
+	return CreateDeviceDefinitionRequest{Request: req, Input: input, Copy: c.CreateDeviceDefinitionRequest}
 }
 
 const opCreateDeviceDefinitionVersion = "CreateDeviceDefinitionVersion"
@@ -318,6 +324,7 @@ const opCreateDeviceDefinitionVersion = "CreateDeviceDefinitionVersion"
 type CreateDeviceDefinitionVersionRequest struct {
 	*aws.Request
 	Input *CreateDeviceDefinitionVersionInput
+	Copy  func(*CreateDeviceDefinitionVersionInput) CreateDeviceDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateDeviceDefinitionVersion API request.
@@ -358,7 +365,7 @@ func (c *Greengrass) CreateDeviceDefinitionVersionRequest(input *CreateDeviceDef
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDeviceDefinitionVersionRequest{Request: req, Input: input}
+	return CreateDeviceDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateDeviceDefinitionVersionRequest}
 }
 
 const opCreateFunctionDefinition = "CreateFunctionDefinition"
@@ -367,6 +374,7 @@ const opCreateFunctionDefinition = "CreateFunctionDefinition"
 type CreateFunctionDefinitionRequest struct {
 	*aws.Request
 	Input *CreateFunctionDefinitionInput
+	Copy  func(*CreateFunctionDefinitionInput) CreateFunctionDefinitionRequest
 }
 
 // Send marshals and sends the CreateFunctionDefinition API request.
@@ -410,7 +418,7 @@ func (c *Greengrass) CreateFunctionDefinitionRequest(input *CreateFunctionDefini
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateFunctionDefinitionRequest{Request: req, Input: input}
+	return CreateFunctionDefinitionRequest{Request: req, Input: input, Copy: c.CreateFunctionDefinitionRequest}
 }
 
 const opCreateFunctionDefinitionVersion = "CreateFunctionDefinitionVersion"
@@ -419,6 +427,7 @@ const opCreateFunctionDefinitionVersion = "CreateFunctionDefinitionVersion"
 type CreateFunctionDefinitionVersionRequest struct {
 	*aws.Request
 	Input *CreateFunctionDefinitionVersionInput
+	Copy  func(*CreateFunctionDefinitionVersionInput) CreateFunctionDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateFunctionDefinitionVersion API request.
@@ -459,7 +468,7 @@ func (c *Greengrass) CreateFunctionDefinitionVersionRequest(input *CreateFunctio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateFunctionDefinitionVersionRequest{Request: req, Input: input}
+	return CreateFunctionDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateFunctionDefinitionVersionRequest}
 }
 
 const opCreateGroup = "CreateGroup"
@@ -468,6 +477,7 @@ const opCreateGroup = "CreateGroup"
 type CreateGroupRequest struct {
 	*aws.Request
 	Input *CreateGroupInput
+	Copy  func(*CreateGroupInput) CreateGroupRequest
 }
 
 // Send marshals and sends the CreateGroup API request.
@@ -509,7 +519,7 @@ func (c *Greengrass) CreateGroupRequest(input *CreateGroupInput) CreateGroupRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGroupRequest{Request: req, Input: input}
+	return CreateGroupRequest{Request: req, Input: input, Copy: c.CreateGroupRequest}
 }
 
 const opCreateGroupCertificateAuthority = "CreateGroupCertificateAuthority"
@@ -518,6 +528,7 @@ const opCreateGroupCertificateAuthority = "CreateGroupCertificateAuthority"
 type CreateGroupCertificateAuthorityRequest struct {
 	*aws.Request
 	Input *CreateGroupCertificateAuthorityInput
+	Copy  func(*CreateGroupCertificateAuthorityInput) CreateGroupCertificateAuthorityRequest
 }
 
 // Send marshals and sends the CreateGroupCertificateAuthority API request.
@@ -559,7 +570,7 @@ func (c *Greengrass) CreateGroupCertificateAuthorityRequest(input *CreateGroupCe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGroupCertificateAuthorityRequest{Request: req, Input: input}
+	return CreateGroupCertificateAuthorityRequest{Request: req, Input: input, Copy: c.CreateGroupCertificateAuthorityRequest}
 }
 
 const opCreateGroupVersion = "CreateGroupVersion"
@@ -568,6 +579,7 @@ const opCreateGroupVersion = "CreateGroupVersion"
 type CreateGroupVersionRequest struct {
 	*aws.Request
 	Input *CreateGroupVersionInput
+	Copy  func(*CreateGroupVersionInput) CreateGroupVersionRequest
 }
 
 // Send marshals and sends the CreateGroupVersion API request.
@@ -608,7 +620,7 @@ func (c *Greengrass) CreateGroupVersionRequest(input *CreateGroupVersionInput) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGroupVersionRequest{Request: req, Input: input}
+	return CreateGroupVersionRequest{Request: req, Input: input, Copy: c.CreateGroupVersionRequest}
 }
 
 const opCreateLoggerDefinition = "CreateLoggerDefinition"
@@ -617,6 +629,7 @@ const opCreateLoggerDefinition = "CreateLoggerDefinition"
 type CreateLoggerDefinitionRequest struct {
 	*aws.Request
 	Input *CreateLoggerDefinitionInput
+	Copy  func(*CreateLoggerDefinitionInput) CreateLoggerDefinitionRequest
 }
 
 // Send marshals and sends the CreateLoggerDefinition API request.
@@ -659,7 +672,7 @@ func (c *Greengrass) CreateLoggerDefinitionRequest(input *CreateLoggerDefinition
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLoggerDefinitionRequest{Request: req, Input: input}
+	return CreateLoggerDefinitionRequest{Request: req, Input: input, Copy: c.CreateLoggerDefinitionRequest}
 }
 
 const opCreateLoggerDefinitionVersion = "CreateLoggerDefinitionVersion"
@@ -668,6 +681,7 @@ const opCreateLoggerDefinitionVersion = "CreateLoggerDefinitionVersion"
 type CreateLoggerDefinitionVersionRequest struct {
 	*aws.Request
 	Input *CreateLoggerDefinitionVersionInput
+	Copy  func(*CreateLoggerDefinitionVersionInput) CreateLoggerDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateLoggerDefinitionVersion API request.
@@ -708,7 +722,7 @@ func (c *Greengrass) CreateLoggerDefinitionVersionRequest(input *CreateLoggerDef
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLoggerDefinitionVersionRequest{Request: req, Input: input}
+	return CreateLoggerDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateLoggerDefinitionVersionRequest}
 }
 
 const opCreateResourceDefinition = "CreateResourceDefinition"
@@ -717,6 +731,7 @@ const opCreateResourceDefinition = "CreateResourceDefinition"
 type CreateResourceDefinitionRequest struct {
 	*aws.Request
 	Input *CreateResourceDefinitionInput
+	Copy  func(*CreateResourceDefinitionInput) CreateResourceDefinitionRequest
 }
 
 // Send marshals and sends the CreateResourceDefinition API request.
@@ -759,7 +774,7 @@ func (c *Greengrass) CreateResourceDefinitionRequest(input *CreateResourceDefini
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateResourceDefinitionRequest{Request: req, Input: input}
+	return CreateResourceDefinitionRequest{Request: req, Input: input, Copy: c.CreateResourceDefinitionRequest}
 }
 
 const opCreateResourceDefinitionVersion = "CreateResourceDefinitionVersion"
@@ -768,6 +783,7 @@ const opCreateResourceDefinitionVersion = "CreateResourceDefinitionVersion"
 type CreateResourceDefinitionVersionRequest struct {
 	*aws.Request
 	Input *CreateResourceDefinitionVersionInput
+	Copy  func(*CreateResourceDefinitionVersionInput) CreateResourceDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateResourceDefinitionVersion API request.
@@ -808,7 +824,7 @@ func (c *Greengrass) CreateResourceDefinitionVersionRequest(input *CreateResourc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateResourceDefinitionVersionRequest{Request: req, Input: input}
+	return CreateResourceDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateResourceDefinitionVersionRequest}
 }
 
 const opCreateSoftwareUpdateJob = "CreateSoftwareUpdateJob"
@@ -817,6 +833,7 @@ const opCreateSoftwareUpdateJob = "CreateSoftwareUpdateJob"
 type CreateSoftwareUpdateJobRequest struct {
 	*aws.Request
 	Input *CreateSoftwareUpdateJobInput
+	Copy  func(*CreateSoftwareUpdateJobInput) CreateSoftwareUpdateJobRequest
 }
 
 // Send marshals and sends the CreateSoftwareUpdateJob API request.
@@ -858,7 +875,7 @@ func (c *Greengrass) CreateSoftwareUpdateJobRequest(input *CreateSoftwareUpdateJ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSoftwareUpdateJobRequest{Request: req, Input: input}
+	return CreateSoftwareUpdateJobRequest{Request: req, Input: input, Copy: c.CreateSoftwareUpdateJobRequest}
 }
 
 const opCreateSubscriptionDefinition = "CreateSubscriptionDefinition"
@@ -867,6 +884,7 @@ const opCreateSubscriptionDefinition = "CreateSubscriptionDefinition"
 type CreateSubscriptionDefinitionRequest struct {
 	*aws.Request
 	Input *CreateSubscriptionDefinitionInput
+	Copy  func(*CreateSubscriptionDefinitionInput) CreateSubscriptionDefinitionRequest
 }
 
 // Send marshals and sends the CreateSubscriptionDefinition API request.
@@ -909,7 +927,7 @@ func (c *Greengrass) CreateSubscriptionDefinitionRequest(input *CreateSubscripti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSubscriptionDefinitionRequest{Request: req, Input: input}
+	return CreateSubscriptionDefinitionRequest{Request: req, Input: input, Copy: c.CreateSubscriptionDefinitionRequest}
 }
 
 const opCreateSubscriptionDefinitionVersion = "CreateSubscriptionDefinitionVersion"
@@ -918,6 +936,7 @@ const opCreateSubscriptionDefinitionVersion = "CreateSubscriptionDefinitionVersi
 type CreateSubscriptionDefinitionVersionRequest struct {
 	*aws.Request
 	Input *CreateSubscriptionDefinitionVersionInput
+	Copy  func(*CreateSubscriptionDefinitionVersionInput) CreateSubscriptionDefinitionVersionRequest
 }
 
 // Send marshals and sends the CreateSubscriptionDefinitionVersion API request.
@@ -958,7 +977,7 @@ func (c *Greengrass) CreateSubscriptionDefinitionVersionRequest(input *CreateSub
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSubscriptionDefinitionVersionRequest{Request: req, Input: input}
+	return CreateSubscriptionDefinitionVersionRequest{Request: req, Input: input, Copy: c.CreateSubscriptionDefinitionVersionRequest}
 }
 
 const opDeleteCoreDefinition = "DeleteCoreDefinition"
@@ -967,6 +986,7 @@ const opDeleteCoreDefinition = "DeleteCoreDefinition"
 type DeleteCoreDefinitionRequest struct {
 	*aws.Request
 	Input *DeleteCoreDefinitionInput
+	Copy  func(*DeleteCoreDefinitionInput) DeleteCoreDefinitionRequest
 }
 
 // Send marshals and sends the DeleteCoreDefinition API request.
@@ -1008,7 +1028,7 @@ func (c *Greengrass) DeleteCoreDefinitionRequest(input *DeleteCoreDefinitionInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCoreDefinitionRequest{Request: req, Input: input}
+	return DeleteCoreDefinitionRequest{Request: req, Input: input, Copy: c.DeleteCoreDefinitionRequest}
 }
 
 const opDeleteDeviceDefinition = "DeleteDeviceDefinition"
@@ -1017,6 +1037,7 @@ const opDeleteDeviceDefinition = "DeleteDeviceDefinition"
 type DeleteDeviceDefinitionRequest struct {
 	*aws.Request
 	Input *DeleteDeviceDefinitionInput
+	Copy  func(*DeleteDeviceDefinitionInput) DeleteDeviceDefinitionRequest
 }
 
 // Send marshals and sends the DeleteDeviceDefinition API request.
@@ -1058,7 +1079,7 @@ func (c *Greengrass) DeleteDeviceDefinitionRequest(input *DeleteDeviceDefinition
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDeviceDefinitionRequest{Request: req, Input: input}
+	return DeleteDeviceDefinitionRequest{Request: req, Input: input, Copy: c.DeleteDeviceDefinitionRequest}
 }
 
 const opDeleteFunctionDefinition = "DeleteFunctionDefinition"
@@ -1067,6 +1088,7 @@ const opDeleteFunctionDefinition = "DeleteFunctionDefinition"
 type DeleteFunctionDefinitionRequest struct {
 	*aws.Request
 	Input *DeleteFunctionDefinitionInput
+	Copy  func(*DeleteFunctionDefinitionInput) DeleteFunctionDefinitionRequest
 }
 
 // Send marshals and sends the DeleteFunctionDefinition API request.
@@ -1108,7 +1130,7 @@ func (c *Greengrass) DeleteFunctionDefinitionRequest(input *DeleteFunctionDefini
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFunctionDefinitionRequest{Request: req, Input: input}
+	return DeleteFunctionDefinitionRequest{Request: req, Input: input, Copy: c.DeleteFunctionDefinitionRequest}
 }
 
 const opDeleteGroup = "DeleteGroup"
@@ -1117,6 +1139,7 @@ const opDeleteGroup = "DeleteGroup"
 type DeleteGroupRequest struct {
 	*aws.Request
 	Input *DeleteGroupInput
+	Copy  func(*DeleteGroupInput) DeleteGroupRequest
 }
 
 // Send marshals and sends the DeleteGroup API request.
@@ -1157,7 +1180,7 @@ func (c *Greengrass) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroupRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGroupRequest{Request: req, Input: input}
+	return DeleteGroupRequest{Request: req, Input: input, Copy: c.DeleteGroupRequest}
 }
 
 const opDeleteLoggerDefinition = "DeleteLoggerDefinition"
@@ -1166,6 +1189,7 @@ const opDeleteLoggerDefinition = "DeleteLoggerDefinition"
 type DeleteLoggerDefinitionRequest struct {
 	*aws.Request
 	Input *DeleteLoggerDefinitionInput
+	Copy  func(*DeleteLoggerDefinitionInput) DeleteLoggerDefinitionRequest
 }
 
 // Send marshals and sends the DeleteLoggerDefinition API request.
@@ -1207,7 +1231,7 @@ func (c *Greengrass) DeleteLoggerDefinitionRequest(input *DeleteLoggerDefinition
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLoggerDefinitionRequest{Request: req, Input: input}
+	return DeleteLoggerDefinitionRequest{Request: req, Input: input, Copy: c.DeleteLoggerDefinitionRequest}
 }
 
 const opDeleteResourceDefinition = "DeleteResourceDefinition"
@@ -1216,6 +1240,7 @@ const opDeleteResourceDefinition = "DeleteResourceDefinition"
 type DeleteResourceDefinitionRequest struct {
 	*aws.Request
 	Input *DeleteResourceDefinitionInput
+	Copy  func(*DeleteResourceDefinitionInput) DeleteResourceDefinitionRequest
 }
 
 // Send marshals and sends the DeleteResourceDefinition API request.
@@ -1256,7 +1281,7 @@ func (c *Greengrass) DeleteResourceDefinitionRequest(input *DeleteResourceDefini
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteResourceDefinitionRequest{Request: req, Input: input}
+	return DeleteResourceDefinitionRequest{Request: req, Input: input, Copy: c.DeleteResourceDefinitionRequest}
 }
 
 const opDeleteSubscriptionDefinition = "DeleteSubscriptionDefinition"
@@ -1265,6 +1290,7 @@ const opDeleteSubscriptionDefinition = "DeleteSubscriptionDefinition"
 type DeleteSubscriptionDefinitionRequest struct {
 	*aws.Request
 	Input *DeleteSubscriptionDefinitionInput
+	Copy  func(*DeleteSubscriptionDefinitionInput) DeleteSubscriptionDefinitionRequest
 }
 
 // Send marshals and sends the DeleteSubscriptionDefinition API request.
@@ -1306,7 +1332,7 @@ func (c *Greengrass) DeleteSubscriptionDefinitionRequest(input *DeleteSubscripti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSubscriptionDefinitionRequest{Request: req, Input: input}
+	return DeleteSubscriptionDefinitionRequest{Request: req, Input: input, Copy: c.DeleteSubscriptionDefinitionRequest}
 }
 
 const opDisassociateRoleFromGroup = "DisassociateRoleFromGroup"
@@ -1315,6 +1341,7 @@ const opDisassociateRoleFromGroup = "DisassociateRoleFromGroup"
 type DisassociateRoleFromGroupRequest struct {
 	*aws.Request
 	Input *DisassociateRoleFromGroupInput
+	Copy  func(*DisassociateRoleFromGroupInput) DisassociateRoleFromGroupRequest
 }
 
 // Send marshals and sends the DisassociateRoleFromGroup API request.
@@ -1355,7 +1382,7 @@ func (c *Greengrass) DisassociateRoleFromGroupRequest(input *DisassociateRoleFro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateRoleFromGroupRequest{Request: req, Input: input}
+	return DisassociateRoleFromGroupRequest{Request: req, Input: input, Copy: c.DisassociateRoleFromGroupRequest}
 }
 
 const opDisassociateServiceRoleFromAccount = "DisassociateServiceRoleFromAccount"
@@ -1364,6 +1391,7 @@ const opDisassociateServiceRoleFromAccount = "DisassociateServiceRoleFromAccount
 type DisassociateServiceRoleFromAccountRequest struct {
 	*aws.Request
 	Input *DisassociateServiceRoleFromAccountInput
+	Copy  func(*DisassociateServiceRoleFromAccountInput) DisassociateServiceRoleFromAccountRequest
 }
 
 // Send marshals and sends the DisassociateServiceRoleFromAccount API request.
@@ -1405,7 +1433,7 @@ func (c *Greengrass) DisassociateServiceRoleFromAccountRequest(input *Disassocia
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateServiceRoleFromAccountRequest{Request: req, Input: input}
+	return DisassociateServiceRoleFromAccountRequest{Request: req, Input: input, Copy: c.DisassociateServiceRoleFromAccountRequest}
 }
 
 const opGetAssociatedRole = "GetAssociatedRole"
@@ -1414,6 +1442,7 @@ const opGetAssociatedRole = "GetAssociatedRole"
 type GetAssociatedRoleRequest struct {
 	*aws.Request
 	Input *GetAssociatedRoleInput
+	Copy  func(*GetAssociatedRoleInput) GetAssociatedRoleRequest
 }
 
 // Send marshals and sends the GetAssociatedRole API request.
@@ -1454,7 +1483,7 @@ func (c *Greengrass) GetAssociatedRoleRequest(input *GetAssociatedRoleInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAssociatedRoleRequest{Request: req, Input: input}
+	return GetAssociatedRoleRequest{Request: req, Input: input, Copy: c.GetAssociatedRoleRequest}
 }
 
 const opGetConnectivityInfo = "GetConnectivityInfo"
@@ -1463,6 +1492,7 @@ const opGetConnectivityInfo = "GetConnectivityInfo"
 type GetConnectivityInfoRequest struct {
 	*aws.Request
 	Input *GetConnectivityInfoInput
+	Copy  func(*GetConnectivityInfoInput) GetConnectivityInfoRequest
 }
 
 // Send marshals and sends the GetConnectivityInfo API request.
@@ -1503,7 +1533,7 @@ func (c *Greengrass) GetConnectivityInfoRequest(input *GetConnectivityInfoInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetConnectivityInfoRequest{Request: req, Input: input}
+	return GetConnectivityInfoRequest{Request: req, Input: input, Copy: c.GetConnectivityInfoRequest}
 }
 
 const opGetCoreDefinition = "GetCoreDefinition"
@@ -1512,6 +1542,7 @@ const opGetCoreDefinition = "GetCoreDefinition"
 type GetCoreDefinitionRequest struct {
 	*aws.Request
 	Input *GetCoreDefinitionInput
+	Copy  func(*GetCoreDefinitionInput) GetCoreDefinitionRequest
 }
 
 // Send marshals and sends the GetCoreDefinition API request.
@@ -1552,7 +1583,7 @@ func (c *Greengrass) GetCoreDefinitionRequest(input *GetCoreDefinitionInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCoreDefinitionRequest{Request: req, Input: input}
+	return GetCoreDefinitionRequest{Request: req, Input: input, Copy: c.GetCoreDefinitionRequest}
 }
 
 const opGetCoreDefinitionVersion = "GetCoreDefinitionVersion"
@@ -1561,6 +1592,7 @@ const opGetCoreDefinitionVersion = "GetCoreDefinitionVersion"
 type GetCoreDefinitionVersionRequest struct {
 	*aws.Request
 	Input *GetCoreDefinitionVersionInput
+	Copy  func(*GetCoreDefinitionVersionInput) GetCoreDefinitionVersionRequest
 }
 
 // Send marshals and sends the GetCoreDefinitionVersion API request.
@@ -1601,7 +1633,7 @@ func (c *Greengrass) GetCoreDefinitionVersionRequest(input *GetCoreDefinitionVer
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCoreDefinitionVersionRequest{Request: req, Input: input}
+	return GetCoreDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetCoreDefinitionVersionRequest}
 }
 
 const opGetDeploymentStatus = "GetDeploymentStatus"
@@ -1610,6 +1642,7 @@ const opGetDeploymentStatus = "GetDeploymentStatus"
 type GetDeploymentStatusRequest struct {
 	*aws.Request
 	Input *GetDeploymentStatusInput
+	Copy  func(*GetDeploymentStatusInput) GetDeploymentStatusRequest
 }
 
 // Send marshals and sends the GetDeploymentStatus API request.
@@ -1650,7 +1683,7 @@ func (c *Greengrass) GetDeploymentStatusRequest(input *GetDeploymentStatusInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeploymentStatusRequest{Request: req, Input: input}
+	return GetDeploymentStatusRequest{Request: req, Input: input, Copy: c.GetDeploymentStatusRequest}
 }
 
 const opGetDeviceDefinition = "GetDeviceDefinition"
@@ -1659,6 +1692,7 @@ const opGetDeviceDefinition = "GetDeviceDefinition"
 type GetDeviceDefinitionRequest struct {
 	*aws.Request
 	Input *GetDeviceDefinitionInput
+	Copy  func(*GetDeviceDefinitionInput) GetDeviceDefinitionRequest
 }
 
 // Send marshals and sends the GetDeviceDefinition API request.
@@ -1699,7 +1733,7 @@ func (c *Greengrass) GetDeviceDefinitionRequest(input *GetDeviceDefinitionInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeviceDefinitionRequest{Request: req, Input: input}
+	return GetDeviceDefinitionRequest{Request: req, Input: input, Copy: c.GetDeviceDefinitionRequest}
 }
 
 const opGetDeviceDefinitionVersion = "GetDeviceDefinitionVersion"
@@ -1708,6 +1742,7 @@ const opGetDeviceDefinitionVersion = "GetDeviceDefinitionVersion"
 type GetDeviceDefinitionVersionRequest struct {
 	*aws.Request
 	Input *GetDeviceDefinitionVersionInput
+	Copy  func(*GetDeviceDefinitionVersionInput) GetDeviceDefinitionVersionRequest
 }
 
 // Send marshals and sends the GetDeviceDefinitionVersion API request.
@@ -1748,7 +1783,7 @@ func (c *Greengrass) GetDeviceDefinitionVersionRequest(input *GetDeviceDefinitio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeviceDefinitionVersionRequest{Request: req, Input: input}
+	return GetDeviceDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetDeviceDefinitionVersionRequest}
 }
 
 const opGetFunctionDefinition = "GetFunctionDefinition"
@@ -1757,6 +1792,7 @@ const opGetFunctionDefinition = "GetFunctionDefinition"
 type GetFunctionDefinitionRequest struct {
 	*aws.Request
 	Input *GetFunctionDefinitionInput
+	Copy  func(*GetFunctionDefinitionInput) GetFunctionDefinitionRequest
 }
 
 // Send marshals and sends the GetFunctionDefinition API request.
@@ -1798,7 +1834,7 @@ func (c *Greengrass) GetFunctionDefinitionRequest(input *GetFunctionDefinitionIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFunctionDefinitionRequest{Request: req, Input: input}
+	return GetFunctionDefinitionRequest{Request: req, Input: input, Copy: c.GetFunctionDefinitionRequest}
 }
 
 const opGetFunctionDefinitionVersion = "GetFunctionDefinitionVersion"
@@ -1807,6 +1843,7 @@ const opGetFunctionDefinitionVersion = "GetFunctionDefinitionVersion"
 type GetFunctionDefinitionVersionRequest struct {
 	*aws.Request
 	Input *GetFunctionDefinitionVersionInput
+	Copy  func(*GetFunctionDefinitionVersionInput) GetFunctionDefinitionVersionRequest
 }
 
 // Send marshals and sends the GetFunctionDefinitionVersion API request.
@@ -1848,7 +1885,7 @@ func (c *Greengrass) GetFunctionDefinitionVersionRequest(input *GetFunctionDefin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFunctionDefinitionVersionRequest{Request: req, Input: input}
+	return GetFunctionDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetFunctionDefinitionVersionRequest}
 }
 
 const opGetGroup = "GetGroup"
@@ -1857,6 +1894,7 @@ const opGetGroup = "GetGroup"
 type GetGroupRequest struct {
 	*aws.Request
 	Input *GetGroupInput
+	Copy  func(*GetGroupInput) GetGroupRequest
 }
 
 // Send marshals and sends the GetGroup API request.
@@ -1897,7 +1935,7 @@ func (c *Greengrass) GetGroupRequest(input *GetGroupInput) GetGroupRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGroupRequest{Request: req, Input: input}
+	return GetGroupRequest{Request: req, Input: input, Copy: c.GetGroupRequest}
 }
 
 const opGetGroupCertificateAuthority = "GetGroupCertificateAuthority"
@@ -1906,6 +1944,7 @@ const opGetGroupCertificateAuthority = "GetGroupCertificateAuthority"
 type GetGroupCertificateAuthorityRequest struct {
 	*aws.Request
 	Input *GetGroupCertificateAuthorityInput
+	Copy  func(*GetGroupCertificateAuthorityInput) GetGroupCertificateAuthorityRequest
 }
 
 // Send marshals and sends the GetGroupCertificateAuthority API request.
@@ -1946,7 +1985,7 @@ func (c *Greengrass) GetGroupCertificateAuthorityRequest(input *GetGroupCertific
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGroupCertificateAuthorityRequest{Request: req, Input: input}
+	return GetGroupCertificateAuthorityRequest{Request: req, Input: input, Copy: c.GetGroupCertificateAuthorityRequest}
 }
 
 const opGetGroupCertificateConfiguration = "GetGroupCertificateConfiguration"
@@ -1955,6 +1994,7 @@ const opGetGroupCertificateConfiguration = "GetGroupCertificateConfiguration"
 type GetGroupCertificateConfigurationRequest struct {
 	*aws.Request
 	Input *GetGroupCertificateConfigurationInput
+	Copy  func(*GetGroupCertificateConfigurationInput) GetGroupCertificateConfigurationRequest
 }
 
 // Send marshals and sends the GetGroupCertificateConfiguration API request.
@@ -1995,7 +2035,7 @@ func (c *Greengrass) GetGroupCertificateConfigurationRequest(input *GetGroupCert
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGroupCertificateConfigurationRequest{Request: req, Input: input}
+	return GetGroupCertificateConfigurationRequest{Request: req, Input: input, Copy: c.GetGroupCertificateConfigurationRequest}
 }
 
 const opGetGroupVersion = "GetGroupVersion"
@@ -2004,6 +2044,7 @@ const opGetGroupVersion = "GetGroupVersion"
 type GetGroupVersionRequest struct {
 	*aws.Request
 	Input *GetGroupVersionInput
+	Copy  func(*GetGroupVersionInput) GetGroupVersionRequest
 }
 
 // Send marshals and sends the GetGroupVersion API request.
@@ -2044,7 +2085,7 @@ func (c *Greengrass) GetGroupVersionRequest(input *GetGroupVersionInput) GetGrou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGroupVersionRequest{Request: req, Input: input}
+	return GetGroupVersionRequest{Request: req, Input: input, Copy: c.GetGroupVersionRequest}
 }
 
 const opGetLoggerDefinition = "GetLoggerDefinition"
@@ -2053,6 +2094,7 @@ const opGetLoggerDefinition = "GetLoggerDefinition"
 type GetLoggerDefinitionRequest struct {
 	*aws.Request
 	Input *GetLoggerDefinitionInput
+	Copy  func(*GetLoggerDefinitionInput) GetLoggerDefinitionRequest
 }
 
 // Send marshals and sends the GetLoggerDefinition API request.
@@ -2093,7 +2135,7 @@ func (c *Greengrass) GetLoggerDefinitionRequest(input *GetLoggerDefinitionInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLoggerDefinitionRequest{Request: req, Input: input}
+	return GetLoggerDefinitionRequest{Request: req, Input: input, Copy: c.GetLoggerDefinitionRequest}
 }
 
 const opGetLoggerDefinitionVersion = "GetLoggerDefinitionVersion"
@@ -2102,6 +2144,7 @@ const opGetLoggerDefinitionVersion = "GetLoggerDefinitionVersion"
 type GetLoggerDefinitionVersionRequest struct {
 	*aws.Request
 	Input *GetLoggerDefinitionVersionInput
+	Copy  func(*GetLoggerDefinitionVersionInput) GetLoggerDefinitionVersionRequest
 }
 
 // Send marshals and sends the GetLoggerDefinitionVersion API request.
@@ -2142,7 +2185,7 @@ func (c *Greengrass) GetLoggerDefinitionVersionRequest(input *GetLoggerDefinitio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLoggerDefinitionVersionRequest{Request: req, Input: input}
+	return GetLoggerDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetLoggerDefinitionVersionRequest}
 }
 
 const opGetResourceDefinition = "GetResourceDefinition"
@@ -2151,6 +2194,7 @@ const opGetResourceDefinition = "GetResourceDefinition"
 type GetResourceDefinitionRequest struct {
 	*aws.Request
 	Input *GetResourceDefinitionInput
+	Copy  func(*GetResourceDefinitionInput) GetResourceDefinitionRequest
 }
 
 // Send marshals and sends the GetResourceDefinition API request.
@@ -2192,7 +2236,7 @@ func (c *Greengrass) GetResourceDefinitionRequest(input *GetResourceDefinitionIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetResourceDefinitionRequest{Request: req, Input: input}
+	return GetResourceDefinitionRequest{Request: req, Input: input, Copy: c.GetResourceDefinitionRequest}
 }
 
 const opGetResourceDefinitionVersion = "GetResourceDefinitionVersion"
@@ -2201,6 +2245,7 @@ const opGetResourceDefinitionVersion = "GetResourceDefinitionVersion"
 type GetResourceDefinitionVersionRequest struct {
 	*aws.Request
 	Input *GetResourceDefinitionVersionInput
+	Copy  func(*GetResourceDefinitionVersionInput) GetResourceDefinitionVersionRequest
 }
 
 // Send marshals and sends the GetResourceDefinitionVersion API request.
@@ -2242,7 +2287,7 @@ func (c *Greengrass) GetResourceDefinitionVersionRequest(input *GetResourceDefin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetResourceDefinitionVersionRequest{Request: req, Input: input}
+	return GetResourceDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetResourceDefinitionVersionRequest}
 }
 
 const opGetServiceRoleForAccount = "GetServiceRoleForAccount"
@@ -2251,6 +2296,7 @@ const opGetServiceRoleForAccount = "GetServiceRoleForAccount"
 type GetServiceRoleForAccountRequest struct {
 	*aws.Request
 	Input *GetServiceRoleForAccountInput
+	Copy  func(*GetServiceRoleForAccountInput) GetServiceRoleForAccountRequest
 }
 
 // Send marshals and sends the GetServiceRoleForAccount API request.
@@ -2291,7 +2337,7 @@ func (c *Greengrass) GetServiceRoleForAccountRequest(input *GetServiceRoleForAcc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetServiceRoleForAccountRequest{Request: req, Input: input}
+	return GetServiceRoleForAccountRequest{Request: req, Input: input, Copy: c.GetServiceRoleForAccountRequest}
 }
 
 const opGetSubscriptionDefinition = "GetSubscriptionDefinition"
@@ -2300,6 +2346,7 @@ const opGetSubscriptionDefinition = "GetSubscriptionDefinition"
 type GetSubscriptionDefinitionRequest struct {
 	*aws.Request
 	Input *GetSubscriptionDefinitionInput
+	Copy  func(*GetSubscriptionDefinitionInput) GetSubscriptionDefinitionRequest
 }
 
 // Send marshals and sends the GetSubscriptionDefinition API request.
@@ -2340,7 +2387,7 @@ func (c *Greengrass) GetSubscriptionDefinitionRequest(input *GetSubscriptionDefi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSubscriptionDefinitionRequest{Request: req, Input: input}
+	return GetSubscriptionDefinitionRequest{Request: req, Input: input, Copy: c.GetSubscriptionDefinitionRequest}
 }
 
 const opGetSubscriptionDefinitionVersion = "GetSubscriptionDefinitionVersion"
@@ -2349,6 +2396,7 @@ const opGetSubscriptionDefinitionVersion = "GetSubscriptionDefinitionVersion"
 type GetSubscriptionDefinitionVersionRequest struct {
 	*aws.Request
 	Input *GetSubscriptionDefinitionVersionInput
+	Copy  func(*GetSubscriptionDefinitionVersionInput) GetSubscriptionDefinitionVersionRequest
 }
 
 // Send marshals and sends the GetSubscriptionDefinitionVersion API request.
@@ -2389,7 +2437,7 @@ func (c *Greengrass) GetSubscriptionDefinitionVersionRequest(input *GetSubscript
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSubscriptionDefinitionVersionRequest{Request: req, Input: input}
+	return GetSubscriptionDefinitionVersionRequest{Request: req, Input: input, Copy: c.GetSubscriptionDefinitionVersionRequest}
 }
 
 const opListCoreDefinitionVersions = "ListCoreDefinitionVersions"
@@ -2398,6 +2446,7 @@ const opListCoreDefinitionVersions = "ListCoreDefinitionVersions"
 type ListCoreDefinitionVersionsRequest struct {
 	*aws.Request
 	Input *ListCoreDefinitionVersionsInput
+	Copy  func(*ListCoreDefinitionVersionsInput) ListCoreDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListCoreDefinitionVersions API request.
@@ -2438,7 +2487,7 @@ func (c *Greengrass) ListCoreDefinitionVersionsRequest(input *ListCoreDefinition
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCoreDefinitionVersionsRequest{Request: req, Input: input}
+	return ListCoreDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListCoreDefinitionVersionsRequest}
 }
 
 const opListCoreDefinitions = "ListCoreDefinitions"
@@ -2447,6 +2496,7 @@ const opListCoreDefinitions = "ListCoreDefinitions"
 type ListCoreDefinitionsRequest struct {
 	*aws.Request
 	Input *ListCoreDefinitionsInput
+	Copy  func(*ListCoreDefinitionsInput) ListCoreDefinitionsRequest
 }
 
 // Send marshals and sends the ListCoreDefinitions API request.
@@ -2487,7 +2537,7 @@ func (c *Greengrass) ListCoreDefinitionsRequest(input *ListCoreDefinitionsInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCoreDefinitionsRequest{Request: req, Input: input}
+	return ListCoreDefinitionsRequest{Request: req, Input: input, Copy: c.ListCoreDefinitionsRequest}
 }
 
 const opListDeployments = "ListDeployments"
@@ -2496,6 +2546,7 @@ const opListDeployments = "ListDeployments"
 type ListDeploymentsRequest struct {
 	*aws.Request
 	Input *ListDeploymentsInput
+	Copy  func(*ListDeploymentsInput) ListDeploymentsRequest
 }
 
 // Send marshals and sends the ListDeployments API request.
@@ -2536,7 +2587,7 @@ func (c *Greengrass) ListDeploymentsRequest(input *ListDeploymentsInput) ListDep
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDeploymentsRequest{Request: req, Input: input}
+	return ListDeploymentsRequest{Request: req, Input: input, Copy: c.ListDeploymentsRequest}
 }
 
 const opListDeviceDefinitionVersions = "ListDeviceDefinitionVersions"
@@ -2545,6 +2596,7 @@ const opListDeviceDefinitionVersions = "ListDeviceDefinitionVersions"
 type ListDeviceDefinitionVersionsRequest struct {
 	*aws.Request
 	Input *ListDeviceDefinitionVersionsInput
+	Copy  func(*ListDeviceDefinitionVersionsInput) ListDeviceDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListDeviceDefinitionVersions API request.
@@ -2585,7 +2637,7 @@ func (c *Greengrass) ListDeviceDefinitionVersionsRequest(input *ListDeviceDefini
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDeviceDefinitionVersionsRequest{Request: req, Input: input}
+	return ListDeviceDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListDeviceDefinitionVersionsRequest}
 }
 
 const opListDeviceDefinitions = "ListDeviceDefinitions"
@@ -2594,6 +2646,7 @@ const opListDeviceDefinitions = "ListDeviceDefinitions"
 type ListDeviceDefinitionsRequest struct {
 	*aws.Request
 	Input *ListDeviceDefinitionsInput
+	Copy  func(*ListDeviceDefinitionsInput) ListDeviceDefinitionsRequest
 }
 
 // Send marshals and sends the ListDeviceDefinitions API request.
@@ -2634,7 +2687,7 @@ func (c *Greengrass) ListDeviceDefinitionsRequest(input *ListDeviceDefinitionsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDeviceDefinitionsRequest{Request: req, Input: input}
+	return ListDeviceDefinitionsRequest{Request: req, Input: input, Copy: c.ListDeviceDefinitionsRequest}
 }
 
 const opListFunctionDefinitionVersions = "ListFunctionDefinitionVersions"
@@ -2643,6 +2696,7 @@ const opListFunctionDefinitionVersions = "ListFunctionDefinitionVersions"
 type ListFunctionDefinitionVersionsRequest struct {
 	*aws.Request
 	Input *ListFunctionDefinitionVersionsInput
+	Copy  func(*ListFunctionDefinitionVersionsInput) ListFunctionDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListFunctionDefinitionVersions API request.
@@ -2683,7 +2737,7 @@ func (c *Greengrass) ListFunctionDefinitionVersionsRequest(input *ListFunctionDe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFunctionDefinitionVersionsRequest{Request: req, Input: input}
+	return ListFunctionDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListFunctionDefinitionVersionsRequest}
 }
 
 const opListFunctionDefinitions = "ListFunctionDefinitions"
@@ -2692,6 +2746,7 @@ const opListFunctionDefinitions = "ListFunctionDefinitions"
 type ListFunctionDefinitionsRequest struct {
 	*aws.Request
 	Input *ListFunctionDefinitionsInput
+	Copy  func(*ListFunctionDefinitionsInput) ListFunctionDefinitionsRequest
 }
 
 // Send marshals and sends the ListFunctionDefinitions API request.
@@ -2732,7 +2787,7 @@ func (c *Greengrass) ListFunctionDefinitionsRequest(input *ListFunctionDefinitio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFunctionDefinitionsRequest{Request: req, Input: input}
+	return ListFunctionDefinitionsRequest{Request: req, Input: input, Copy: c.ListFunctionDefinitionsRequest}
 }
 
 const opListGroupCertificateAuthorities = "ListGroupCertificateAuthorities"
@@ -2741,6 +2796,7 @@ const opListGroupCertificateAuthorities = "ListGroupCertificateAuthorities"
 type ListGroupCertificateAuthoritiesRequest struct {
 	*aws.Request
 	Input *ListGroupCertificateAuthoritiesInput
+	Copy  func(*ListGroupCertificateAuthoritiesInput) ListGroupCertificateAuthoritiesRequest
 }
 
 // Send marshals and sends the ListGroupCertificateAuthorities API request.
@@ -2781,7 +2837,7 @@ func (c *Greengrass) ListGroupCertificateAuthoritiesRequest(input *ListGroupCert
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupCertificateAuthoritiesRequest{Request: req, Input: input}
+	return ListGroupCertificateAuthoritiesRequest{Request: req, Input: input, Copy: c.ListGroupCertificateAuthoritiesRequest}
 }
 
 const opListGroupVersions = "ListGroupVersions"
@@ -2790,6 +2846,7 @@ const opListGroupVersions = "ListGroupVersions"
 type ListGroupVersionsRequest struct {
 	*aws.Request
 	Input *ListGroupVersionsInput
+	Copy  func(*ListGroupVersionsInput) ListGroupVersionsRequest
 }
 
 // Send marshals and sends the ListGroupVersions API request.
@@ -2830,7 +2887,7 @@ func (c *Greengrass) ListGroupVersionsRequest(input *ListGroupVersionsInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupVersionsRequest{Request: req, Input: input}
+	return ListGroupVersionsRequest{Request: req, Input: input, Copy: c.ListGroupVersionsRequest}
 }
 
 const opListGroups = "ListGroups"
@@ -2839,6 +2896,7 @@ const opListGroups = "ListGroups"
 type ListGroupsRequest struct {
 	*aws.Request
 	Input *ListGroupsInput
+	Copy  func(*ListGroupsInput) ListGroupsRequest
 }
 
 // Send marshals and sends the ListGroups API request.
@@ -2879,7 +2937,7 @@ func (c *Greengrass) ListGroupsRequest(input *ListGroupsInput) ListGroupsRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGroupsRequest{Request: req, Input: input}
+	return ListGroupsRequest{Request: req, Input: input, Copy: c.ListGroupsRequest}
 }
 
 const opListLoggerDefinitionVersions = "ListLoggerDefinitionVersions"
@@ -2888,6 +2946,7 @@ const opListLoggerDefinitionVersions = "ListLoggerDefinitionVersions"
 type ListLoggerDefinitionVersionsRequest struct {
 	*aws.Request
 	Input *ListLoggerDefinitionVersionsInput
+	Copy  func(*ListLoggerDefinitionVersionsInput) ListLoggerDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListLoggerDefinitionVersions API request.
@@ -2928,7 +2987,7 @@ func (c *Greengrass) ListLoggerDefinitionVersionsRequest(input *ListLoggerDefini
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListLoggerDefinitionVersionsRequest{Request: req, Input: input}
+	return ListLoggerDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListLoggerDefinitionVersionsRequest}
 }
 
 const opListLoggerDefinitions = "ListLoggerDefinitions"
@@ -2937,6 +2996,7 @@ const opListLoggerDefinitions = "ListLoggerDefinitions"
 type ListLoggerDefinitionsRequest struct {
 	*aws.Request
 	Input *ListLoggerDefinitionsInput
+	Copy  func(*ListLoggerDefinitionsInput) ListLoggerDefinitionsRequest
 }
 
 // Send marshals and sends the ListLoggerDefinitions API request.
@@ -2977,7 +3037,7 @@ func (c *Greengrass) ListLoggerDefinitionsRequest(input *ListLoggerDefinitionsIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListLoggerDefinitionsRequest{Request: req, Input: input}
+	return ListLoggerDefinitionsRequest{Request: req, Input: input, Copy: c.ListLoggerDefinitionsRequest}
 }
 
 const opListResourceDefinitionVersions = "ListResourceDefinitionVersions"
@@ -2986,6 +3046,7 @@ const opListResourceDefinitionVersions = "ListResourceDefinitionVersions"
 type ListResourceDefinitionVersionsRequest struct {
 	*aws.Request
 	Input *ListResourceDefinitionVersionsInput
+	Copy  func(*ListResourceDefinitionVersionsInput) ListResourceDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListResourceDefinitionVersions API request.
@@ -3026,7 +3087,7 @@ func (c *Greengrass) ListResourceDefinitionVersionsRequest(input *ListResourceDe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourceDefinitionVersionsRequest{Request: req, Input: input}
+	return ListResourceDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListResourceDefinitionVersionsRequest}
 }
 
 const opListResourceDefinitions = "ListResourceDefinitions"
@@ -3035,6 +3096,7 @@ const opListResourceDefinitions = "ListResourceDefinitions"
 type ListResourceDefinitionsRequest struct {
 	*aws.Request
 	Input *ListResourceDefinitionsInput
+	Copy  func(*ListResourceDefinitionsInput) ListResourceDefinitionsRequest
 }
 
 // Send marshals and sends the ListResourceDefinitions API request.
@@ -3075,7 +3137,7 @@ func (c *Greengrass) ListResourceDefinitionsRequest(input *ListResourceDefinitio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourceDefinitionsRequest{Request: req, Input: input}
+	return ListResourceDefinitionsRequest{Request: req, Input: input, Copy: c.ListResourceDefinitionsRequest}
 }
 
 const opListSubscriptionDefinitionVersions = "ListSubscriptionDefinitionVersions"
@@ -3084,6 +3146,7 @@ const opListSubscriptionDefinitionVersions = "ListSubscriptionDefinitionVersions
 type ListSubscriptionDefinitionVersionsRequest struct {
 	*aws.Request
 	Input *ListSubscriptionDefinitionVersionsInput
+	Copy  func(*ListSubscriptionDefinitionVersionsInput) ListSubscriptionDefinitionVersionsRequest
 }
 
 // Send marshals and sends the ListSubscriptionDefinitionVersions API request.
@@ -3124,7 +3187,7 @@ func (c *Greengrass) ListSubscriptionDefinitionVersionsRequest(input *ListSubscr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSubscriptionDefinitionVersionsRequest{Request: req, Input: input}
+	return ListSubscriptionDefinitionVersionsRequest{Request: req, Input: input, Copy: c.ListSubscriptionDefinitionVersionsRequest}
 }
 
 const opListSubscriptionDefinitions = "ListSubscriptionDefinitions"
@@ -3133,6 +3196,7 @@ const opListSubscriptionDefinitions = "ListSubscriptionDefinitions"
 type ListSubscriptionDefinitionsRequest struct {
 	*aws.Request
 	Input *ListSubscriptionDefinitionsInput
+	Copy  func(*ListSubscriptionDefinitionsInput) ListSubscriptionDefinitionsRequest
 }
 
 // Send marshals and sends the ListSubscriptionDefinitions API request.
@@ -3173,7 +3237,7 @@ func (c *Greengrass) ListSubscriptionDefinitionsRequest(input *ListSubscriptionD
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListSubscriptionDefinitionsRequest{Request: req, Input: input}
+	return ListSubscriptionDefinitionsRequest{Request: req, Input: input, Copy: c.ListSubscriptionDefinitionsRequest}
 }
 
 const opResetDeployments = "ResetDeployments"
@@ -3182,6 +3246,7 @@ const opResetDeployments = "ResetDeployments"
 type ResetDeploymentsRequest struct {
 	*aws.Request
 	Input *ResetDeploymentsInput
+	Copy  func(*ResetDeploymentsInput) ResetDeploymentsRequest
 }
 
 // Send marshals and sends the ResetDeployments API request.
@@ -3222,7 +3287,7 @@ func (c *Greengrass) ResetDeploymentsRequest(input *ResetDeploymentsInput) Reset
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetDeploymentsRequest{Request: req, Input: input}
+	return ResetDeploymentsRequest{Request: req, Input: input, Copy: c.ResetDeploymentsRequest}
 }
 
 const opUpdateConnectivityInfo = "UpdateConnectivityInfo"
@@ -3231,6 +3296,7 @@ const opUpdateConnectivityInfo = "UpdateConnectivityInfo"
 type UpdateConnectivityInfoRequest struct {
 	*aws.Request
 	Input *UpdateConnectivityInfoInput
+	Copy  func(*UpdateConnectivityInfoInput) UpdateConnectivityInfoRequest
 }
 
 // Send marshals and sends the UpdateConnectivityInfo API request.
@@ -3273,7 +3339,7 @@ func (c *Greengrass) UpdateConnectivityInfoRequest(input *UpdateConnectivityInfo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateConnectivityInfoRequest{Request: req, Input: input}
+	return UpdateConnectivityInfoRequest{Request: req, Input: input, Copy: c.UpdateConnectivityInfoRequest}
 }
 
 const opUpdateCoreDefinition = "UpdateCoreDefinition"
@@ -3282,6 +3348,7 @@ const opUpdateCoreDefinition = "UpdateCoreDefinition"
 type UpdateCoreDefinitionRequest struct {
 	*aws.Request
 	Input *UpdateCoreDefinitionInput
+	Copy  func(*UpdateCoreDefinitionInput) UpdateCoreDefinitionRequest
 }
 
 // Send marshals and sends the UpdateCoreDefinition API request.
@@ -3322,7 +3389,7 @@ func (c *Greengrass) UpdateCoreDefinitionRequest(input *UpdateCoreDefinitionInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateCoreDefinitionRequest{Request: req, Input: input}
+	return UpdateCoreDefinitionRequest{Request: req, Input: input, Copy: c.UpdateCoreDefinitionRequest}
 }
 
 const opUpdateDeviceDefinition = "UpdateDeviceDefinition"
@@ -3331,6 +3398,7 @@ const opUpdateDeviceDefinition = "UpdateDeviceDefinition"
 type UpdateDeviceDefinitionRequest struct {
 	*aws.Request
 	Input *UpdateDeviceDefinitionInput
+	Copy  func(*UpdateDeviceDefinitionInput) UpdateDeviceDefinitionRequest
 }
 
 // Send marshals and sends the UpdateDeviceDefinition API request.
@@ -3371,7 +3439,7 @@ func (c *Greengrass) UpdateDeviceDefinitionRequest(input *UpdateDeviceDefinition
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDeviceDefinitionRequest{Request: req, Input: input}
+	return UpdateDeviceDefinitionRequest{Request: req, Input: input, Copy: c.UpdateDeviceDefinitionRequest}
 }
 
 const opUpdateFunctionDefinition = "UpdateFunctionDefinition"
@@ -3380,6 +3448,7 @@ const opUpdateFunctionDefinition = "UpdateFunctionDefinition"
 type UpdateFunctionDefinitionRequest struct {
 	*aws.Request
 	Input *UpdateFunctionDefinitionInput
+	Copy  func(*UpdateFunctionDefinitionInput) UpdateFunctionDefinitionRequest
 }
 
 // Send marshals and sends the UpdateFunctionDefinition API request.
@@ -3420,7 +3489,7 @@ func (c *Greengrass) UpdateFunctionDefinitionRequest(input *UpdateFunctionDefini
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateFunctionDefinitionRequest{Request: req, Input: input}
+	return UpdateFunctionDefinitionRequest{Request: req, Input: input, Copy: c.UpdateFunctionDefinitionRequest}
 }
 
 const opUpdateGroup = "UpdateGroup"
@@ -3429,6 +3498,7 @@ const opUpdateGroup = "UpdateGroup"
 type UpdateGroupRequest struct {
 	*aws.Request
 	Input *UpdateGroupInput
+	Copy  func(*UpdateGroupInput) UpdateGroupRequest
 }
 
 // Send marshals and sends the UpdateGroup API request.
@@ -3469,7 +3539,7 @@ func (c *Greengrass) UpdateGroupRequest(input *UpdateGroupInput) UpdateGroupRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGroupRequest{Request: req, Input: input}
+	return UpdateGroupRequest{Request: req, Input: input, Copy: c.UpdateGroupRequest}
 }
 
 const opUpdateGroupCertificateConfiguration = "UpdateGroupCertificateConfiguration"
@@ -3478,6 +3548,7 @@ const opUpdateGroupCertificateConfiguration = "UpdateGroupCertificateConfigurati
 type UpdateGroupCertificateConfigurationRequest struct {
 	*aws.Request
 	Input *UpdateGroupCertificateConfigurationInput
+	Copy  func(*UpdateGroupCertificateConfigurationInput) UpdateGroupCertificateConfigurationRequest
 }
 
 // Send marshals and sends the UpdateGroupCertificateConfiguration API request.
@@ -3518,7 +3589,7 @@ func (c *Greengrass) UpdateGroupCertificateConfigurationRequest(input *UpdateGro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGroupCertificateConfigurationRequest{Request: req, Input: input}
+	return UpdateGroupCertificateConfigurationRequest{Request: req, Input: input, Copy: c.UpdateGroupCertificateConfigurationRequest}
 }
 
 const opUpdateLoggerDefinition = "UpdateLoggerDefinition"
@@ -3527,6 +3598,7 @@ const opUpdateLoggerDefinition = "UpdateLoggerDefinition"
 type UpdateLoggerDefinitionRequest struct {
 	*aws.Request
 	Input *UpdateLoggerDefinitionInput
+	Copy  func(*UpdateLoggerDefinitionInput) UpdateLoggerDefinitionRequest
 }
 
 // Send marshals and sends the UpdateLoggerDefinition API request.
@@ -3567,7 +3639,7 @@ func (c *Greengrass) UpdateLoggerDefinitionRequest(input *UpdateLoggerDefinition
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateLoggerDefinitionRequest{Request: req, Input: input}
+	return UpdateLoggerDefinitionRequest{Request: req, Input: input, Copy: c.UpdateLoggerDefinitionRequest}
 }
 
 const opUpdateResourceDefinition = "UpdateResourceDefinition"
@@ -3576,6 +3648,7 @@ const opUpdateResourceDefinition = "UpdateResourceDefinition"
 type UpdateResourceDefinitionRequest struct {
 	*aws.Request
 	Input *UpdateResourceDefinitionInput
+	Copy  func(*UpdateResourceDefinitionInput) UpdateResourceDefinitionRequest
 }
 
 // Send marshals and sends the UpdateResourceDefinition API request.
@@ -3616,7 +3689,7 @@ func (c *Greengrass) UpdateResourceDefinitionRequest(input *UpdateResourceDefini
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateResourceDefinitionRequest{Request: req, Input: input}
+	return UpdateResourceDefinitionRequest{Request: req, Input: input, Copy: c.UpdateResourceDefinitionRequest}
 }
 
 const opUpdateSubscriptionDefinition = "UpdateSubscriptionDefinition"
@@ -3625,6 +3698,7 @@ const opUpdateSubscriptionDefinition = "UpdateSubscriptionDefinition"
 type UpdateSubscriptionDefinitionRequest struct {
 	*aws.Request
 	Input *UpdateSubscriptionDefinitionInput
+	Copy  func(*UpdateSubscriptionDefinitionInput) UpdateSubscriptionDefinitionRequest
 }
 
 // Send marshals and sends the UpdateSubscriptionDefinition API request.
@@ -3665,7 +3739,7 @@ func (c *Greengrass) UpdateSubscriptionDefinitionRequest(input *UpdateSubscripti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSubscriptionDefinitionRequest{Request: req, Input: input}
+	return UpdateSubscriptionDefinitionRequest{Request: req, Input: input, Copy: c.UpdateSubscriptionDefinitionRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/AssociateRoleToGroupRequest

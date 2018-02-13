@@ -15,6 +15,7 @@ const opAssumeRole = "AssumeRole"
 type AssumeRoleRequest struct {
 	*aws.Request
 	Input *AssumeRoleInput
+	Copy  func(*AssumeRoleInput) AssumeRoleRequest
 }
 
 // Send marshals and sends the AssumeRole API request.
@@ -143,7 +144,7 @@ func (c *STS) AssumeRoleRequest(input *AssumeRoleInput) AssumeRoleRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssumeRoleRequest{Request: req, Input: input}
+	return AssumeRoleRequest{Request: req, Input: input, Copy: c.AssumeRoleRequest}
 }
 
 const opAssumeRoleWithSAML = "AssumeRoleWithSAML"
@@ -152,6 +153,7 @@ const opAssumeRoleWithSAML = "AssumeRoleWithSAML"
 type AssumeRoleWithSAMLRequest struct {
 	*aws.Request
 	Input *AssumeRoleWithSAMLInput
+	Copy  func(*AssumeRoleWithSAMLInput) AssumeRoleWithSAMLRequest
 }
 
 // Send marshals and sends the AssumeRoleWithSAML API request.
@@ -258,7 +260,7 @@ func (c *STS) AssumeRoleWithSAMLRequest(input *AssumeRoleWithSAMLInput) AssumeRo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssumeRoleWithSAMLRequest{Request: req, Input: input}
+	return AssumeRoleWithSAMLRequest{Request: req, Input: input, Copy: c.AssumeRoleWithSAMLRequest}
 }
 
 const opAssumeRoleWithWebIdentity = "AssumeRoleWithWebIdentity"
@@ -267,6 +269,7 @@ const opAssumeRoleWithWebIdentity = "AssumeRoleWithWebIdentity"
 type AssumeRoleWithWebIdentityRequest struct {
 	*aws.Request
 	Input *AssumeRoleWithWebIdentityInput
+	Copy  func(*AssumeRoleWithWebIdentityInput) AssumeRoleWithWebIdentityRequest
 }
 
 // Send marshals and sends the AssumeRoleWithWebIdentity API request.
@@ -395,7 +398,7 @@ func (c *STS) AssumeRoleWithWebIdentityRequest(input *AssumeRoleWithWebIdentityI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssumeRoleWithWebIdentityRequest{Request: req, Input: input}
+	return AssumeRoleWithWebIdentityRequest{Request: req, Input: input, Copy: c.AssumeRoleWithWebIdentityRequest}
 }
 
 const opDecodeAuthorizationMessage = "DecodeAuthorizationMessage"
@@ -404,6 +407,7 @@ const opDecodeAuthorizationMessage = "DecodeAuthorizationMessage"
 type DecodeAuthorizationMessageRequest struct {
 	*aws.Request
 	Input *DecodeAuthorizationMessageInput
+	Copy  func(*DecodeAuthorizationMessageInput) DecodeAuthorizationMessageRequest
 }
 
 // Send marshals and sends the DecodeAuthorizationMessage API request.
@@ -475,7 +479,7 @@ func (c *STS) DecodeAuthorizationMessageRequest(input *DecodeAuthorizationMessag
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DecodeAuthorizationMessageRequest{Request: req, Input: input}
+	return DecodeAuthorizationMessageRequest{Request: req, Input: input, Copy: c.DecodeAuthorizationMessageRequest}
 }
 
 const opGetCallerIdentity = "GetCallerIdentity"
@@ -484,6 +488,7 @@ const opGetCallerIdentity = "GetCallerIdentity"
 type GetCallerIdentityRequest struct {
 	*aws.Request
 	Input *GetCallerIdentityInput
+	Copy  func(*GetCallerIdentityInput) GetCallerIdentityRequest
 }
 
 // Send marshals and sends the GetCallerIdentity API request.
@@ -525,7 +530,7 @@ func (c *STS) GetCallerIdentityRequest(input *GetCallerIdentityInput) GetCallerI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCallerIdentityRequest{Request: req, Input: input}
+	return GetCallerIdentityRequest{Request: req, Input: input, Copy: c.GetCallerIdentityRequest}
 }
 
 const opGetFederationToken = "GetFederationToken"
@@ -534,6 +539,7 @@ const opGetFederationToken = "GetFederationToken"
 type GetFederationTokenRequest struct {
 	*aws.Request
 	Input *GetFederationTokenInput
+	Copy  func(*GetFederationTokenInput) GetFederationTokenRequest
 }
 
 // Send marshals and sends the GetFederationToken API request.
@@ -651,7 +657,7 @@ func (c *STS) GetFederationTokenRequest(input *GetFederationTokenInput) GetFeder
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFederationTokenRequest{Request: req, Input: input}
+	return GetFederationTokenRequest{Request: req, Input: input, Copy: c.GetFederationTokenRequest}
 }
 
 const opGetSessionToken = "GetSessionToken"
@@ -660,6 +666,7 @@ const opGetSessionToken = "GetSessionToken"
 type GetSessionTokenRequest struct {
 	*aws.Request
 	Input *GetSessionTokenInput
+	Copy  func(*GetSessionTokenInput) GetSessionTokenRequest
 }
 
 // Send marshals and sends the GetSessionToken API request.
@@ -745,7 +752,7 @@ func (c *STS) GetSessionTokenRequest(input *GetSessionTokenInput) GetSessionToke
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSessionTokenRequest{Request: req, Input: input}
+	return GetSessionTokenRequest{Request: req, Input: input, Copy: c.GetSessionTokenRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sts-2011-06-15/AssumeRoleRequest

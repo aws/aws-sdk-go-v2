@@ -105,27 +105,15 @@ type GlacierAPI interface {
 
 	ListJobsRequest(*glacier.ListJobsInput) glacier.ListJobsRequest
 
-	ListJobsPages(*glacier.ListJobsInput, func(*glacier.ListJobsOutput, bool) bool) error
-	ListJobsPagesWithContext(aws.Context, *glacier.ListJobsInput, func(*glacier.ListJobsOutput, bool) bool, ...aws.Option) error
-
 	ListMultipartUploadsRequest(*glacier.ListMultipartUploadsInput) glacier.ListMultipartUploadsRequest
 
-	ListMultipartUploadsPages(*glacier.ListMultipartUploadsInput, func(*glacier.ListMultipartUploadsOutput, bool) bool) error
-	ListMultipartUploadsPagesWithContext(aws.Context, *glacier.ListMultipartUploadsInput, func(*glacier.ListMultipartUploadsOutput, bool) bool, ...aws.Option) error
-
 	ListPartsRequest(*glacier.ListPartsInput) glacier.ListPartsRequest
-
-	ListPartsPages(*glacier.ListPartsInput, func(*glacier.ListPartsOutput, bool) bool) error
-	ListPartsPagesWithContext(aws.Context, *glacier.ListPartsInput, func(*glacier.ListPartsOutput, bool) bool, ...aws.Option) error
 
 	ListProvisionedCapacityRequest(*glacier.ListProvisionedCapacityInput) glacier.ListProvisionedCapacityRequest
 
 	ListTagsForVaultRequest(*glacier.ListTagsForVaultInput) glacier.ListTagsForVaultRequest
 
 	ListVaultsRequest(*glacier.ListVaultsInput) glacier.ListVaultsRequest
-
-	ListVaultsPages(*glacier.ListVaultsInput, func(*glacier.ListVaultsOutput, bool) bool) error
-	ListVaultsPagesWithContext(aws.Context, *glacier.ListVaultsInput, func(*glacier.ListVaultsOutput, bool) bool, ...aws.Option) error
 
 	PurchaseProvisionedCapacityRequest(*glacier.PurchaseProvisionedCapacityInput) glacier.PurchaseProvisionedCapacityRequest
 

@@ -18,6 +18,7 @@ const opDeleteAlarms = "DeleteAlarms"
 type DeleteAlarmsRequest struct {
 	*aws.Request
 	Input *DeleteAlarmsInput
+	Copy  func(*DeleteAlarmsInput) DeleteAlarmsRequest
 }
 
 // Send marshals and sends the DeleteAlarms API request.
@@ -60,7 +61,7 @@ func (c *CloudWatch) DeleteAlarmsRequest(input *DeleteAlarmsInput) DeleteAlarmsR
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAlarmsRequest{Request: req, Input: input}
+	return DeleteAlarmsRequest{Request: req, Input: input, Copy: c.DeleteAlarmsRequest}
 }
 
 const opDeleteDashboards = "DeleteDashboards"
@@ -69,6 +70,7 @@ const opDeleteDashboards = "DeleteDashboards"
 type DeleteDashboardsRequest struct {
 	*aws.Request
 	Input *DeleteDashboardsInput
+	Copy  func(*DeleteDashboardsInput) DeleteDashboardsRequest
 }
 
 // Send marshals and sends the DeleteDashboards API request.
@@ -110,7 +112,7 @@ func (c *CloudWatch) DeleteDashboardsRequest(input *DeleteDashboardsInput) Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDashboardsRequest{Request: req, Input: input}
+	return DeleteDashboardsRequest{Request: req, Input: input, Copy: c.DeleteDashboardsRequest}
 }
 
 const opDescribeAlarmHistory = "DescribeAlarmHistory"
@@ -119,6 +121,7 @@ const opDescribeAlarmHistory = "DescribeAlarmHistory"
 type DescribeAlarmHistoryRequest struct {
 	*aws.Request
 	Input *DescribeAlarmHistoryInput
+	Copy  func(*DescribeAlarmHistoryInput) DescribeAlarmHistoryRequest
 }
 
 // Send marshals and sends the DescribeAlarmHistory API request.
@@ -169,57 +172,53 @@ func (c *CloudWatch) DescribeAlarmHistoryRequest(input *DescribeAlarmHistoryInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAlarmHistoryRequest{Request: req, Input: input}
+	return DescribeAlarmHistoryRequest{Request: req, Input: input, Copy: c.DescribeAlarmHistoryRequest}
 }
 
-// DescribeAlarmHistoryPages iterates over the pages of a DescribeAlarmHistory operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeAlarmHistory method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeAlarmHistoryRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeAlarmHistory operation.
-//    pageNum := 0
-//    err := client.DescribeAlarmHistoryPages(params,
-//        func(page *DescribeAlarmHistoryOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeAlarmHistoryRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudWatch) DescribeAlarmHistoryPages(input *DescribeAlarmHistoryInput, fn func(*DescribeAlarmHistoryOutput, bool) bool) error {
-	return c.DescribeAlarmHistoryPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeAlarmHistoryRequest) Paginate(opts ...aws.Option) DescribeAlarmHistoryPager {
+	return DescribeAlarmHistoryPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeAlarmHistoryInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeAlarmHistoryPagesWithContext same as DescribeAlarmHistoryPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmHistoryPagesWithContext(ctx aws.Context, input *DescribeAlarmHistoryInput, fn func(*DescribeAlarmHistoryOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeAlarmHistoryInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeAlarmHistoryRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeAlarmHistoryOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeAlarmHistoryPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeAlarmHistoryPager struct {
+	aws.Pager
+}
+
+func (p *DescribeAlarmHistoryPager) CurrentPage() *DescribeAlarmHistoryOutput {
+	return p.Pager.CurrentPage().(*DescribeAlarmHistoryOutput)
 }
 
 const opDescribeAlarms = "DescribeAlarms"
@@ -228,6 +227,7 @@ const opDescribeAlarms = "DescribeAlarms"
 type DescribeAlarmsRequest struct {
 	*aws.Request
 	Input *DescribeAlarmsInput
+	Copy  func(*DescribeAlarmsInput) DescribeAlarmsRequest
 }
 
 // Send marshals and sends the DescribeAlarms API request.
@@ -276,57 +276,53 @@ func (c *CloudWatch) DescribeAlarmsRequest(input *DescribeAlarmsInput) DescribeA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAlarmsRequest{Request: req, Input: input}
+	return DescribeAlarmsRequest{Request: req, Input: input, Copy: c.DescribeAlarmsRequest}
 }
 
-// DescribeAlarmsPages iterates over the pages of a DescribeAlarms operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeAlarms method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeAlarmsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeAlarms operation.
-//    pageNum := 0
-//    err := client.DescribeAlarmsPages(params,
-//        func(page *DescribeAlarmsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeAlarmsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudWatch) DescribeAlarmsPages(input *DescribeAlarmsInput, fn func(*DescribeAlarmsOutput, bool) bool) error {
-	return c.DescribeAlarmsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeAlarmsRequest) Paginate(opts ...aws.Option) DescribeAlarmsPager {
+	return DescribeAlarmsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeAlarmsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeAlarmsPagesWithContext same as DescribeAlarmsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) DescribeAlarmsPagesWithContext(ctx aws.Context, input *DescribeAlarmsInput, fn func(*DescribeAlarmsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeAlarmsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeAlarmsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeAlarmsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeAlarmsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeAlarmsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeAlarmsPager) CurrentPage() *DescribeAlarmsOutput {
+	return p.Pager.CurrentPage().(*DescribeAlarmsOutput)
 }
 
 const opDescribeAlarmsForMetric = "DescribeAlarmsForMetric"
@@ -335,6 +331,7 @@ const opDescribeAlarmsForMetric = "DescribeAlarmsForMetric"
 type DescribeAlarmsForMetricRequest struct {
 	*aws.Request
 	Input *DescribeAlarmsForMetricInput
+	Copy  func(*DescribeAlarmsForMetricInput) DescribeAlarmsForMetricRequest
 }
 
 // Send marshals and sends the DescribeAlarmsForMetric API request.
@@ -376,7 +373,7 @@ func (c *CloudWatch) DescribeAlarmsForMetricRequest(input *DescribeAlarmsForMetr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAlarmsForMetricRequest{Request: req, Input: input}
+	return DescribeAlarmsForMetricRequest{Request: req, Input: input, Copy: c.DescribeAlarmsForMetricRequest}
 }
 
 const opDisableAlarmActions = "DisableAlarmActions"
@@ -385,6 +382,7 @@ const opDisableAlarmActions = "DisableAlarmActions"
 type DisableAlarmActionsRequest struct {
 	*aws.Request
 	Input *DisableAlarmActionsInput
+	Copy  func(*DisableAlarmActionsInput) DisableAlarmActionsRequest
 }
 
 // Send marshals and sends the DisableAlarmActions API request.
@@ -428,7 +426,7 @@ func (c *CloudWatch) DisableAlarmActionsRequest(input *DisableAlarmActionsInput)
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableAlarmActionsRequest{Request: req, Input: input}
+	return DisableAlarmActionsRequest{Request: req, Input: input, Copy: c.DisableAlarmActionsRequest}
 }
 
 const opEnableAlarmActions = "EnableAlarmActions"
@@ -437,6 +435,7 @@ const opEnableAlarmActions = "EnableAlarmActions"
 type EnableAlarmActionsRequest struct {
 	*aws.Request
 	Input *EnableAlarmActionsInput
+	Copy  func(*EnableAlarmActionsInput) EnableAlarmActionsRequest
 }
 
 // Send marshals and sends the EnableAlarmActions API request.
@@ -479,7 +478,7 @@ func (c *CloudWatch) EnableAlarmActionsRequest(input *EnableAlarmActionsInput) E
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableAlarmActionsRequest{Request: req, Input: input}
+	return EnableAlarmActionsRequest{Request: req, Input: input, Copy: c.EnableAlarmActionsRequest}
 }
 
 const opGetDashboard = "GetDashboard"
@@ -488,6 +487,7 @@ const opGetDashboard = "GetDashboard"
 type GetDashboardRequest struct {
 	*aws.Request
 	Input *GetDashboardInput
+	Copy  func(*GetDashboardInput) GetDashboardRequest
 }
 
 // Send marshals and sends the GetDashboard API request.
@@ -532,7 +532,7 @@ func (c *CloudWatch) GetDashboardRequest(input *GetDashboardInput) GetDashboardR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDashboardRequest{Request: req, Input: input}
+	return GetDashboardRequest{Request: req, Input: input, Copy: c.GetDashboardRequest}
 }
 
 const opGetMetricStatistics = "GetMetricStatistics"
@@ -541,6 +541,7 @@ const opGetMetricStatistics = "GetMetricStatistics"
 type GetMetricStatisticsRequest struct {
 	*aws.Request
 	Input *GetMetricStatisticsInput
+	Copy  func(*GetMetricStatisticsInput) GetMetricStatisticsRequest
 }
 
 // Send marshals and sends the GetMetricStatistics API request.
@@ -631,7 +632,7 @@ func (c *CloudWatch) GetMetricStatisticsRequest(input *GetMetricStatisticsInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMetricStatisticsRequest{Request: req, Input: input}
+	return GetMetricStatisticsRequest{Request: req, Input: input, Copy: c.GetMetricStatisticsRequest}
 }
 
 const opListDashboards = "ListDashboards"
@@ -640,6 +641,7 @@ const opListDashboards = "ListDashboards"
 type ListDashboardsRequest struct {
 	*aws.Request
 	Input *ListDashboardsInput
+	Copy  func(*ListDashboardsInput) ListDashboardsRequest
 }
 
 // Send marshals and sends the ListDashboards API request.
@@ -682,7 +684,7 @@ func (c *CloudWatch) ListDashboardsRequest(input *ListDashboardsInput) ListDashb
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDashboardsRequest{Request: req, Input: input}
+	return ListDashboardsRequest{Request: req, Input: input, Copy: c.ListDashboardsRequest}
 }
 
 const opListMetrics = "ListMetrics"
@@ -691,6 +693,7 @@ const opListMetrics = "ListMetrics"
 type ListMetricsRequest struct {
 	*aws.Request
 	Input *ListMetricsInput
+	Copy  func(*ListMetricsInput) ListMetricsRequest
 }
 
 // Send marshals and sends the ListMetrics API request.
@@ -745,57 +748,53 @@ func (c *CloudWatch) ListMetricsRequest(input *ListMetricsInput) ListMetricsRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListMetricsRequest{Request: req, Input: input}
+	return ListMetricsRequest{Request: req, Input: input, Copy: c.ListMetricsRequest}
 }
 
-// ListMetricsPages iterates over the pages of a ListMetrics operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListMetrics method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListMetricsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListMetrics operation.
-//    pageNum := 0
-//    err := client.ListMetricsPages(params,
-//        func(page *ListMetricsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListMetricsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudWatch) ListMetricsPages(input *ListMetricsInput, fn func(*ListMetricsOutput, bool) bool) error {
-	return c.ListMetricsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListMetricsRequest) Paginate(opts ...aws.Option) ListMetricsPager {
+	return ListMetricsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListMetricsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListMetricsPagesWithContext same as ListMetricsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudWatch) ListMetricsPagesWithContext(ctx aws.Context, input *ListMetricsInput, fn func(*ListMetricsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListMetricsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListMetricsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListMetricsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListMetricsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListMetricsPager struct {
+	aws.Pager
+}
+
+func (p *ListMetricsPager) CurrentPage() *ListMetricsOutput {
+	return p.Pager.CurrentPage().(*ListMetricsOutput)
 }
 
 const opPutDashboard = "PutDashboard"
@@ -804,6 +803,7 @@ const opPutDashboard = "PutDashboard"
 type PutDashboardRequest struct {
 	*aws.Request
 	Input *PutDashboardInput
+	Copy  func(*PutDashboardInput) PutDashboardRequest
 }
 
 // Send marshals and sends the PutDashboard API request.
@@ -862,7 +862,7 @@ func (c *CloudWatch) PutDashboardRequest(input *PutDashboardInput) PutDashboardR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutDashboardRequest{Request: req, Input: input}
+	return PutDashboardRequest{Request: req, Input: input, Copy: c.PutDashboardRequest}
 }
 
 const opPutMetricAlarm = "PutMetricAlarm"
@@ -871,6 +871,7 @@ const opPutMetricAlarm = "PutMetricAlarm"
 type PutMetricAlarmRequest struct {
 	*aws.Request
 	Input *PutMetricAlarmInput
+	Copy  func(*PutMetricAlarmInput) PutMetricAlarmRequest
 }
 
 // Send marshals and sends the PutMetricAlarm API request.
@@ -954,7 +955,7 @@ func (c *CloudWatch) PutMetricAlarmRequest(input *PutMetricAlarmInput) PutMetric
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutMetricAlarmRequest{Request: req, Input: input}
+	return PutMetricAlarmRequest{Request: req, Input: input, Copy: c.PutMetricAlarmRequest}
 }
 
 const opPutMetricData = "PutMetricData"
@@ -963,6 +964,7 @@ const opPutMetricData = "PutMetricData"
 type PutMetricDataRequest struct {
 	*aws.Request
 	Input *PutMetricDataInput
+	Copy  func(*PutMetricDataInput) PutMetricDataRequest
 }
 
 // Send marshals and sends the PutMetricData API request.
@@ -1033,7 +1035,7 @@ func (c *CloudWatch) PutMetricDataRequest(input *PutMetricDataInput) PutMetricDa
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutMetricDataRequest{Request: req, Input: input}
+	return PutMetricDataRequest{Request: req, Input: input, Copy: c.PutMetricDataRequest}
 }
 
 const opSetAlarmState = "SetAlarmState"
@@ -1042,6 +1044,7 @@ const opSetAlarmState = "SetAlarmState"
 type SetAlarmStateRequest struct {
 	*aws.Request
 	Input *SetAlarmStateInput
+	Copy  func(*SetAlarmStateInput) SetAlarmStateRequest
 }
 
 // Send marshals and sends the SetAlarmState API request.
@@ -1091,7 +1094,7 @@ func (c *CloudWatch) SetAlarmStateRequest(input *SetAlarmStateInput) SetAlarmSta
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetAlarmStateRequest{Request: req, Input: input}
+	return SetAlarmStateRequest{Request: req, Input: input, Copy: c.SetAlarmStateRequest}
 }
 
 // Represents the history of a specific alarm.

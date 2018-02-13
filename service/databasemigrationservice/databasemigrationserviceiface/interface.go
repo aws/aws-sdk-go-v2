@@ -9,7 +9,6 @@
 package databasemigrationserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
 )
 
@@ -91,72 +90,33 @@ type DatabaseMigrationServiceAPI interface {
 
 	DescribeCertificatesRequest(*databasemigrationservice.DescribeCertificatesInput) databasemigrationservice.DescribeCertificatesRequest
 
-	DescribeCertificatesPages(*databasemigrationservice.DescribeCertificatesInput, func(*databasemigrationservice.DescribeCertificatesOutput, bool) bool) error
-	DescribeCertificatesPagesWithContext(aws.Context, *databasemigrationservice.DescribeCertificatesInput, func(*databasemigrationservice.DescribeCertificatesOutput, bool) bool, ...aws.Option) error
-
 	DescribeConnectionsRequest(*databasemigrationservice.DescribeConnectionsInput) databasemigrationservice.DescribeConnectionsRequest
-
-	DescribeConnectionsPages(*databasemigrationservice.DescribeConnectionsInput, func(*databasemigrationservice.DescribeConnectionsOutput, bool) bool) error
-	DescribeConnectionsPagesWithContext(aws.Context, *databasemigrationservice.DescribeConnectionsInput, func(*databasemigrationservice.DescribeConnectionsOutput, bool) bool, ...aws.Option) error
 
 	DescribeEndpointTypesRequest(*databasemigrationservice.DescribeEndpointTypesInput) databasemigrationservice.DescribeEndpointTypesRequest
 
-	DescribeEndpointTypesPages(*databasemigrationservice.DescribeEndpointTypesInput, func(*databasemigrationservice.DescribeEndpointTypesOutput, bool) bool) error
-	DescribeEndpointTypesPagesWithContext(aws.Context, *databasemigrationservice.DescribeEndpointTypesInput, func(*databasemigrationservice.DescribeEndpointTypesOutput, bool) bool, ...aws.Option) error
-
 	DescribeEndpointsRequest(*databasemigrationservice.DescribeEndpointsInput) databasemigrationservice.DescribeEndpointsRequest
-
-	DescribeEndpointsPages(*databasemigrationservice.DescribeEndpointsInput, func(*databasemigrationservice.DescribeEndpointsOutput, bool) bool) error
-	DescribeEndpointsPagesWithContext(aws.Context, *databasemigrationservice.DescribeEndpointsInput, func(*databasemigrationservice.DescribeEndpointsOutput, bool) bool, ...aws.Option) error
 
 	DescribeEventCategoriesRequest(*databasemigrationservice.DescribeEventCategoriesInput) databasemigrationservice.DescribeEventCategoriesRequest
 
 	DescribeEventSubscriptionsRequest(*databasemigrationservice.DescribeEventSubscriptionsInput) databasemigrationservice.DescribeEventSubscriptionsRequest
 
-	DescribeEventSubscriptionsPages(*databasemigrationservice.DescribeEventSubscriptionsInput, func(*databasemigrationservice.DescribeEventSubscriptionsOutput, bool) bool) error
-	DescribeEventSubscriptionsPagesWithContext(aws.Context, *databasemigrationservice.DescribeEventSubscriptionsInput, func(*databasemigrationservice.DescribeEventSubscriptionsOutput, bool) bool, ...aws.Option) error
-
 	DescribeEventsRequest(*databasemigrationservice.DescribeEventsInput) databasemigrationservice.DescribeEventsRequest
 
-	DescribeEventsPages(*databasemigrationservice.DescribeEventsInput, func(*databasemigrationservice.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *databasemigrationservice.DescribeEventsInput, func(*databasemigrationservice.DescribeEventsOutput, bool) bool, ...aws.Option) error
-
 	DescribeOrderableReplicationInstancesRequest(*databasemigrationservice.DescribeOrderableReplicationInstancesInput) databasemigrationservice.DescribeOrderableReplicationInstancesRequest
-
-	DescribeOrderableReplicationInstancesPages(*databasemigrationservice.DescribeOrderableReplicationInstancesInput, func(*databasemigrationservice.DescribeOrderableReplicationInstancesOutput, bool) bool) error
-	DescribeOrderableReplicationInstancesPagesWithContext(aws.Context, *databasemigrationservice.DescribeOrderableReplicationInstancesInput, func(*databasemigrationservice.DescribeOrderableReplicationInstancesOutput, bool) bool, ...aws.Option) error
 
 	DescribeRefreshSchemasStatusRequest(*databasemigrationservice.DescribeRefreshSchemasStatusInput) databasemigrationservice.DescribeRefreshSchemasStatusRequest
 
 	DescribeReplicationInstancesRequest(*databasemigrationservice.DescribeReplicationInstancesInput) databasemigrationservice.DescribeReplicationInstancesRequest
 
-	DescribeReplicationInstancesPages(*databasemigrationservice.DescribeReplicationInstancesInput, func(*databasemigrationservice.DescribeReplicationInstancesOutput, bool) bool) error
-	DescribeReplicationInstancesPagesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationInstancesInput, func(*databasemigrationservice.DescribeReplicationInstancesOutput, bool) bool, ...aws.Option) error
-
 	DescribeReplicationSubnetGroupsRequest(*databasemigrationservice.DescribeReplicationSubnetGroupsInput) databasemigrationservice.DescribeReplicationSubnetGroupsRequest
-
-	DescribeReplicationSubnetGroupsPages(*databasemigrationservice.DescribeReplicationSubnetGroupsInput, func(*databasemigrationservice.DescribeReplicationSubnetGroupsOutput, bool) bool) error
-	DescribeReplicationSubnetGroupsPagesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationSubnetGroupsInput, func(*databasemigrationservice.DescribeReplicationSubnetGroupsOutput, bool) bool, ...aws.Option) error
 
 	DescribeReplicationTaskAssessmentResultsRequest(*databasemigrationservice.DescribeReplicationTaskAssessmentResultsInput) databasemigrationservice.DescribeReplicationTaskAssessmentResultsRequest
 
-	DescribeReplicationTaskAssessmentResultsPages(*databasemigrationservice.DescribeReplicationTaskAssessmentResultsInput, func(*databasemigrationservice.DescribeReplicationTaskAssessmentResultsOutput, bool) bool) error
-	DescribeReplicationTaskAssessmentResultsPagesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationTaskAssessmentResultsInput, func(*databasemigrationservice.DescribeReplicationTaskAssessmentResultsOutput, bool) bool, ...aws.Option) error
-
 	DescribeReplicationTasksRequest(*databasemigrationservice.DescribeReplicationTasksInput) databasemigrationservice.DescribeReplicationTasksRequest
-
-	DescribeReplicationTasksPages(*databasemigrationservice.DescribeReplicationTasksInput, func(*databasemigrationservice.DescribeReplicationTasksOutput, bool) bool) error
-	DescribeReplicationTasksPagesWithContext(aws.Context, *databasemigrationservice.DescribeReplicationTasksInput, func(*databasemigrationservice.DescribeReplicationTasksOutput, bool) bool, ...aws.Option) error
 
 	DescribeSchemasRequest(*databasemigrationservice.DescribeSchemasInput) databasemigrationservice.DescribeSchemasRequest
 
-	DescribeSchemasPages(*databasemigrationservice.DescribeSchemasInput, func(*databasemigrationservice.DescribeSchemasOutput, bool) bool) error
-	DescribeSchemasPagesWithContext(aws.Context, *databasemigrationservice.DescribeSchemasInput, func(*databasemigrationservice.DescribeSchemasOutput, bool) bool, ...aws.Option) error
-
 	DescribeTableStatisticsRequest(*databasemigrationservice.DescribeTableStatisticsInput) databasemigrationservice.DescribeTableStatisticsRequest
-
-	DescribeTableStatisticsPages(*databasemigrationservice.DescribeTableStatisticsInput, func(*databasemigrationservice.DescribeTableStatisticsOutput, bool) bool) error
-	DescribeTableStatisticsPagesWithContext(aws.Context, *databasemigrationservice.DescribeTableStatisticsInput, func(*databasemigrationservice.DescribeTableStatisticsOutput, bool) bool, ...aws.Option) error
 
 	ImportCertificateRequest(*databasemigrationservice.ImportCertificateInput) databasemigrationservice.ImportCertificateRequest
 

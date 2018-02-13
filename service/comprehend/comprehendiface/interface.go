@@ -9,7 +9,6 @@
 package comprehendiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend"
 )
 
@@ -82,9 +81,6 @@ type ComprehendAPI interface {
 	DetectSentimentRequest(*comprehend.DetectSentimentInput) comprehend.DetectSentimentRequest
 
 	ListTopicsDetectionJobsRequest(*comprehend.ListTopicsDetectionJobsInput) comprehend.ListTopicsDetectionJobsRequest
-
-	ListTopicsDetectionJobsPages(*comprehend.ListTopicsDetectionJobsInput, func(*comprehend.ListTopicsDetectionJobsOutput, bool) bool) error
-	ListTopicsDetectionJobsPagesWithContext(aws.Context, *comprehend.ListTopicsDetectionJobsInput, func(*comprehend.ListTopicsDetectionJobsOutput, bool) bool, ...aws.Option) error
 
 	StartTopicsDetectionJobRequest(*comprehend.StartTopicsDetectionJobInput) comprehend.StartTopicsDetectionJobRequest
 }

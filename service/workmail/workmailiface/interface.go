@@ -9,7 +9,6 @@
 package workmailiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/workmail"
 )
 
@@ -99,35 +98,17 @@ type WorkMailAPI interface {
 
 	ListAliasesRequest(*workmail.ListAliasesInput) workmail.ListAliasesRequest
 
-	ListAliasesPages(*workmail.ListAliasesInput, func(*workmail.ListAliasesOutput, bool) bool) error
-	ListAliasesPagesWithContext(aws.Context, *workmail.ListAliasesInput, func(*workmail.ListAliasesOutput, bool) bool, ...aws.Option) error
-
 	ListGroupMembersRequest(*workmail.ListGroupMembersInput) workmail.ListGroupMembersRequest
-
-	ListGroupMembersPages(*workmail.ListGroupMembersInput, func(*workmail.ListGroupMembersOutput, bool) bool) error
-	ListGroupMembersPagesWithContext(aws.Context, *workmail.ListGroupMembersInput, func(*workmail.ListGroupMembersOutput, bool) bool, ...aws.Option) error
 
 	ListGroupsRequest(*workmail.ListGroupsInput) workmail.ListGroupsRequest
 
-	ListGroupsPages(*workmail.ListGroupsInput, func(*workmail.ListGroupsOutput, bool) bool) error
-	ListGroupsPagesWithContext(aws.Context, *workmail.ListGroupsInput, func(*workmail.ListGroupsOutput, bool) bool, ...aws.Option) error
-
 	ListOrganizationsRequest(*workmail.ListOrganizationsInput) workmail.ListOrganizationsRequest
-
-	ListOrganizationsPages(*workmail.ListOrganizationsInput, func(*workmail.ListOrganizationsOutput, bool) bool) error
-	ListOrganizationsPagesWithContext(aws.Context, *workmail.ListOrganizationsInput, func(*workmail.ListOrganizationsOutput, bool) bool, ...aws.Option) error
 
 	ListResourceDelegatesRequest(*workmail.ListResourceDelegatesInput) workmail.ListResourceDelegatesRequest
 
 	ListResourcesRequest(*workmail.ListResourcesInput) workmail.ListResourcesRequest
 
-	ListResourcesPages(*workmail.ListResourcesInput, func(*workmail.ListResourcesOutput, bool) bool) error
-	ListResourcesPagesWithContext(aws.Context, *workmail.ListResourcesInput, func(*workmail.ListResourcesOutput, bool) bool, ...aws.Option) error
-
 	ListUsersRequest(*workmail.ListUsersInput) workmail.ListUsersRequest
-
-	ListUsersPages(*workmail.ListUsersInput, func(*workmail.ListUsersOutput, bool) bool) error
-	ListUsersPagesWithContext(aws.Context, *workmail.ListUsersInput, func(*workmail.ListUsersOutput, bool) bool, ...aws.Option) error
 
 	RegisterToWorkMailRequest(*workmail.RegisterToWorkMailInput) workmail.RegisterToWorkMailRequest
 

@@ -163,9 +163,6 @@ type IAMAPI interface {
 
 	GetAccountAuthorizationDetailsRequest(*iam.GetAccountAuthorizationDetailsInput) iam.GetAccountAuthorizationDetailsRequest
 
-	GetAccountAuthorizationDetailsPages(*iam.GetAccountAuthorizationDetailsInput, func(*iam.GetAccountAuthorizationDetailsOutput, bool) bool) error
-	GetAccountAuthorizationDetailsPagesWithContext(aws.Context, *iam.GetAccountAuthorizationDetailsInput, func(*iam.GetAccountAuthorizationDetailsOutput, bool) bool, ...aws.Option) error
-
 	GetAccountPasswordPolicyRequest(*iam.GetAccountPasswordPolicyInput) iam.GetAccountPasswordPolicyRequest
 
 	GetAccountSummaryRequest(*iam.GetAccountSummaryInput) iam.GetAccountSummaryRequest
@@ -177,9 +174,6 @@ type IAMAPI interface {
 	GetCredentialReportRequest(*iam.GetCredentialReportInput) iam.GetCredentialReportRequest
 
 	GetGroupRequest(*iam.GetGroupInput) iam.GetGroupRequest
-
-	GetGroupPages(*iam.GetGroupInput, func(*iam.GetGroupOutput, bool) bool) error
-	GetGroupPagesWithContext(aws.Context, *iam.GetGroupInput, func(*iam.GetGroupOutput, bool) bool, ...aws.Option) error
 
 	GetGroupPolicyRequest(*iam.GetGroupPolicyInput) iam.GetGroupPolicyRequest
 
@@ -211,119 +205,53 @@ type IAMAPI interface {
 
 	ListAccessKeysRequest(*iam.ListAccessKeysInput) iam.ListAccessKeysRequest
 
-	ListAccessKeysPages(*iam.ListAccessKeysInput, func(*iam.ListAccessKeysOutput, bool) bool) error
-	ListAccessKeysPagesWithContext(aws.Context, *iam.ListAccessKeysInput, func(*iam.ListAccessKeysOutput, bool) bool, ...aws.Option) error
-
 	ListAccountAliasesRequest(*iam.ListAccountAliasesInput) iam.ListAccountAliasesRequest
-
-	ListAccountAliasesPages(*iam.ListAccountAliasesInput, func(*iam.ListAccountAliasesOutput, bool) bool) error
-	ListAccountAliasesPagesWithContext(aws.Context, *iam.ListAccountAliasesInput, func(*iam.ListAccountAliasesOutput, bool) bool, ...aws.Option) error
 
 	ListAttachedGroupPoliciesRequest(*iam.ListAttachedGroupPoliciesInput) iam.ListAttachedGroupPoliciesRequest
 
-	ListAttachedGroupPoliciesPages(*iam.ListAttachedGroupPoliciesInput, func(*iam.ListAttachedGroupPoliciesOutput, bool) bool) error
-	ListAttachedGroupPoliciesPagesWithContext(aws.Context, *iam.ListAttachedGroupPoliciesInput, func(*iam.ListAttachedGroupPoliciesOutput, bool) bool, ...aws.Option) error
-
 	ListAttachedRolePoliciesRequest(*iam.ListAttachedRolePoliciesInput) iam.ListAttachedRolePoliciesRequest
-
-	ListAttachedRolePoliciesPages(*iam.ListAttachedRolePoliciesInput, func(*iam.ListAttachedRolePoliciesOutput, bool) bool) error
-	ListAttachedRolePoliciesPagesWithContext(aws.Context, *iam.ListAttachedRolePoliciesInput, func(*iam.ListAttachedRolePoliciesOutput, bool) bool, ...aws.Option) error
 
 	ListAttachedUserPoliciesRequest(*iam.ListAttachedUserPoliciesInput) iam.ListAttachedUserPoliciesRequest
 
-	ListAttachedUserPoliciesPages(*iam.ListAttachedUserPoliciesInput, func(*iam.ListAttachedUserPoliciesOutput, bool) bool) error
-	ListAttachedUserPoliciesPagesWithContext(aws.Context, *iam.ListAttachedUserPoliciesInput, func(*iam.ListAttachedUserPoliciesOutput, bool) bool, ...aws.Option) error
-
 	ListEntitiesForPolicyRequest(*iam.ListEntitiesForPolicyInput) iam.ListEntitiesForPolicyRequest
-
-	ListEntitiesForPolicyPages(*iam.ListEntitiesForPolicyInput, func(*iam.ListEntitiesForPolicyOutput, bool) bool) error
-	ListEntitiesForPolicyPagesWithContext(aws.Context, *iam.ListEntitiesForPolicyInput, func(*iam.ListEntitiesForPolicyOutput, bool) bool, ...aws.Option) error
 
 	ListGroupPoliciesRequest(*iam.ListGroupPoliciesInput) iam.ListGroupPoliciesRequest
 
-	ListGroupPoliciesPages(*iam.ListGroupPoliciesInput, func(*iam.ListGroupPoliciesOutput, bool) bool) error
-	ListGroupPoliciesPagesWithContext(aws.Context, *iam.ListGroupPoliciesInput, func(*iam.ListGroupPoliciesOutput, bool) bool, ...aws.Option) error
-
 	ListGroupsRequest(*iam.ListGroupsInput) iam.ListGroupsRequest
-
-	ListGroupsPages(*iam.ListGroupsInput, func(*iam.ListGroupsOutput, bool) bool) error
-	ListGroupsPagesWithContext(aws.Context, *iam.ListGroupsInput, func(*iam.ListGroupsOutput, bool) bool, ...aws.Option) error
 
 	ListGroupsForUserRequest(*iam.ListGroupsForUserInput) iam.ListGroupsForUserRequest
 
-	ListGroupsForUserPages(*iam.ListGroupsForUserInput, func(*iam.ListGroupsForUserOutput, bool) bool) error
-	ListGroupsForUserPagesWithContext(aws.Context, *iam.ListGroupsForUserInput, func(*iam.ListGroupsForUserOutput, bool) bool, ...aws.Option) error
-
 	ListInstanceProfilesRequest(*iam.ListInstanceProfilesInput) iam.ListInstanceProfilesRequest
-
-	ListInstanceProfilesPages(*iam.ListInstanceProfilesInput, func(*iam.ListInstanceProfilesOutput, bool) bool) error
-	ListInstanceProfilesPagesWithContext(aws.Context, *iam.ListInstanceProfilesInput, func(*iam.ListInstanceProfilesOutput, bool) bool, ...aws.Option) error
 
 	ListInstanceProfilesForRoleRequest(*iam.ListInstanceProfilesForRoleInput) iam.ListInstanceProfilesForRoleRequest
 
-	ListInstanceProfilesForRolePages(*iam.ListInstanceProfilesForRoleInput, func(*iam.ListInstanceProfilesForRoleOutput, bool) bool) error
-	ListInstanceProfilesForRolePagesWithContext(aws.Context, *iam.ListInstanceProfilesForRoleInput, func(*iam.ListInstanceProfilesForRoleOutput, bool) bool, ...aws.Option) error
-
 	ListMFADevicesRequest(*iam.ListMFADevicesInput) iam.ListMFADevicesRequest
-
-	ListMFADevicesPages(*iam.ListMFADevicesInput, func(*iam.ListMFADevicesOutput, bool) bool) error
-	ListMFADevicesPagesWithContext(aws.Context, *iam.ListMFADevicesInput, func(*iam.ListMFADevicesOutput, bool) bool, ...aws.Option) error
 
 	ListOpenIDConnectProvidersRequest(*iam.ListOpenIDConnectProvidersInput) iam.ListOpenIDConnectProvidersRequest
 
 	ListPoliciesRequest(*iam.ListPoliciesInput) iam.ListPoliciesRequest
 
-	ListPoliciesPages(*iam.ListPoliciesInput, func(*iam.ListPoliciesOutput, bool) bool) error
-	ListPoliciesPagesWithContext(aws.Context, *iam.ListPoliciesInput, func(*iam.ListPoliciesOutput, bool) bool, ...aws.Option) error
-
 	ListPolicyVersionsRequest(*iam.ListPolicyVersionsInput) iam.ListPolicyVersionsRequest
-
-	ListPolicyVersionsPages(*iam.ListPolicyVersionsInput, func(*iam.ListPolicyVersionsOutput, bool) bool) error
-	ListPolicyVersionsPagesWithContext(aws.Context, *iam.ListPolicyVersionsInput, func(*iam.ListPolicyVersionsOutput, bool) bool, ...aws.Option) error
 
 	ListRolePoliciesRequest(*iam.ListRolePoliciesInput) iam.ListRolePoliciesRequest
 
-	ListRolePoliciesPages(*iam.ListRolePoliciesInput, func(*iam.ListRolePoliciesOutput, bool) bool) error
-	ListRolePoliciesPagesWithContext(aws.Context, *iam.ListRolePoliciesInput, func(*iam.ListRolePoliciesOutput, bool) bool, ...aws.Option) error
-
 	ListRolesRequest(*iam.ListRolesInput) iam.ListRolesRequest
-
-	ListRolesPages(*iam.ListRolesInput, func(*iam.ListRolesOutput, bool) bool) error
-	ListRolesPagesWithContext(aws.Context, *iam.ListRolesInput, func(*iam.ListRolesOutput, bool) bool, ...aws.Option) error
 
 	ListSAMLProvidersRequest(*iam.ListSAMLProvidersInput) iam.ListSAMLProvidersRequest
 
 	ListSSHPublicKeysRequest(*iam.ListSSHPublicKeysInput) iam.ListSSHPublicKeysRequest
 
-	ListSSHPublicKeysPages(*iam.ListSSHPublicKeysInput, func(*iam.ListSSHPublicKeysOutput, bool) bool) error
-	ListSSHPublicKeysPagesWithContext(aws.Context, *iam.ListSSHPublicKeysInput, func(*iam.ListSSHPublicKeysOutput, bool) bool, ...aws.Option) error
-
 	ListServerCertificatesRequest(*iam.ListServerCertificatesInput) iam.ListServerCertificatesRequest
-
-	ListServerCertificatesPages(*iam.ListServerCertificatesInput, func(*iam.ListServerCertificatesOutput, bool) bool) error
-	ListServerCertificatesPagesWithContext(aws.Context, *iam.ListServerCertificatesInput, func(*iam.ListServerCertificatesOutput, bool) bool, ...aws.Option) error
 
 	ListServiceSpecificCredentialsRequest(*iam.ListServiceSpecificCredentialsInput) iam.ListServiceSpecificCredentialsRequest
 
 	ListSigningCertificatesRequest(*iam.ListSigningCertificatesInput) iam.ListSigningCertificatesRequest
 
-	ListSigningCertificatesPages(*iam.ListSigningCertificatesInput, func(*iam.ListSigningCertificatesOutput, bool) bool) error
-	ListSigningCertificatesPagesWithContext(aws.Context, *iam.ListSigningCertificatesInput, func(*iam.ListSigningCertificatesOutput, bool) bool, ...aws.Option) error
-
 	ListUserPoliciesRequest(*iam.ListUserPoliciesInput) iam.ListUserPoliciesRequest
-
-	ListUserPoliciesPages(*iam.ListUserPoliciesInput, func(*iam.ListUserPoliciesOutput, bool) bool) error
-	ListUserPoliciesPagesWithContext(aws.Context, *iam.ListUserPoliciesInput, func(*iam.ListUserPoliciesOutput, bool) bool, ...aws.Option) error
 
 	ListUsersRequest(*iam.ListUsersInput) iam.ListUsersRequest
 
-	ListUsersPages(*iam.ListUsersInput, func(*iam.ListUsersOutput, bool) bool) error
-	ListUsersPagesWithContext(aws.Context, *iam.ListUsersInput, func(*iam.ListUsersOutput, bool) bool, ...aws.Option) error
-
 	ListVirtualMFADevicesRequest(*iam.ListVirtualMFADevicesInput) iam.ListVirtualMFADevicesRequest
-
-	ListVirtualMFADevicesPages(*iam.ListVirtualMFADevicesInput, func(*iam.ListVirtualMFADevicesOutput, bool) bool) error
-	ListVirtualMFADevicesPagesWithContext(aws.Context, *iam.ListVirtualMFADevicesInput, func(*iam.ListVirtualMFADevicesOutput, bool) bool, ...aws.Option) error
 
 	PutGroupPolicyRequest(*iam.PutGroupPolicyInput) iam.PutGroupPolicyRequest
 
@@ -345,13 +273,7 @@ type IAMAPI interface {
 
 	SimulateCustomPolicyRequest(*iam.SimulateCustomPolicyInput) iam.SimulateCustomPolicyRequest
 
-	SimulateCustomPolicyPages(*iam.SimulateCustomPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool) error
-	SimulateCustomPolicyPagesWithContext(aws.Context, *iam.SimulateCustomPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool, ...aws.Option) error
-
 	SimulatePrincipalPolicyRequest(*iam.SimulatePrincipalPolicyInput) iam.SimulatePrincipalPolicyRequest
-
-	SimulatePrincipalPolicyPages(*iam.SimulatePrincipalPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool) error
-	SimulatePrincipalPolicyPagesWithContext(aws.Context, *iam.SimulatePrincipalPolicyInput, func(*iam.SimulatePrincipalPolicyOutput, bool) bool, ...aws.Option) error
 
 	UpdateAccessKeyRequest(*iam.UpdateAccessKeyInput) iam.UpdateAccessKeyRequest
 

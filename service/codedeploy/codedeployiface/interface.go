@@ -113,33 +113,15 @@ type CodeDeployAPI interface {
 
 	ListApplicationRevisionsRequest(*codedeploy.ListApplicationRevisionsInput) codedeploy.ListApplicationRevisionsRequest
 
-	ListApplicationRevisionsPages(*codedeploy.ListApplicationRevisionsInput, func(*codedeploy.ListApplicationRevisionsOutput, bool) bool) error
-	ListApplicationRevisionsPagesWithContext(aws.Context, *codedeploy.ListApplicationRevisionsInput, func(*codedeploy.ListApplicationRevisionsOutput, bool) bool, ...aws.Option) error
-
 	ListApplicationsRequest(*codedeploy.ListApplicationsInput) codedeploy.ListApplicationsRequest
-
-	ListApplicationsPages(*codedeploy.ListApplicationsInput, func(*codedeploy.ListApplicationsOutput, bool) bool) error
-	ListApplicationsPagesWithContext(aws.Context, *codedeploy.ListApplicationsInput, func(*codedeploy.ListApplicationsOutput, bool) bool, ...aws.Option) error
 
 	ListDeploymentConfigsRequest(*codedeploy.ListDeploymentConfigsInput) codedeploy.ListDeploymentConfigsRequest
 
-	ListDeploymentConfigsPages(*codedeploy.ListDeploymentConfigsInput, func(*codedeploy.ListDeploymentConfigsOutput, bool) bool) error
-	ListDeploymentConfigsPagesWithContext(aws.Context, *codedeploy.ListDeploymentConfigsInput, func(*codedeploy.ListDeploymentConfigsOutput, bool) bool, ...aws.Option) error
-
 	ListDeploymentGroupsRequest(*codedeploy.ListDeploymentGroupsInput) codedeploy.ListDeploymentGroupsRequest
-
-	ListDeploymentGroupsPages(*codedeploy.ListDeploymentGroupsInput, func(*codedeploy.ListDeploymentGroupsOutput, bool) bool) error
-	ListDeploymentGroupsPagesWithContext(aws.Context, *codedeploy.ListDeploymentGroupsInput, func(*codedeploy.ListDeploymentGroupsOutput, bool) bool, ...aws.Option) error
 
 	ListDeploymentInstancesRequest(*codedeploy.ListDeploymentInstancesInput) codedeploy.ListDeploymentInstancesRequest
 
-	ListDeploymentInstancesPages(*codedeploy.ListDeploymentInstancesInput, func(*codedeploy.ListDeploymentInstancesOutput, bool) bool) error
-	ListDeploymentInstancesPagesWithContext(aws.Context, *codedeploy.ListDeploymentInstancesInput, func(*codedeploy.ListDeploymentInstancesOutput, bool) bool, ...aws.Option) error
-
 	ListDeploymentsRequest(*codedeploy.ListDeploymentsInput) codedeploy.ListDeploymentsRequest
-
-	ListDeploymentsPages(*codedeploy.ListDeploymentsInput, func(*codedeploy.ListDeploymentsOutput, bool) bool) error
-	ListDeploymentsPagesWithContext(aws.Context, *codedeploy.ListDeploymentsInput, func(*codedeploy.ListDeploymentsOutput, bool) bool, ...aws.Option) error
 
 	ListGitHubAccountTokenNamesRequest(*codedeploy.ListGitHubAccountTokenNamesInput) codedeploy.ListGitHubAccountTokenNamesRequest
 

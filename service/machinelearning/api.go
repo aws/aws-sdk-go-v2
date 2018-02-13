@@ -16,6 +16,7 @@ const opAddTags = "AddTags"
 type AddTagsRequest struct {
 	*aws.Request
 	Input *AddTagsInput
+	Copy  func(*AddTagsInput) AddTagsRequest
 }
 
 // Send marshals and sends the AddTags API request.
@@ -56,7 +57,7 @@ func (c *MachineLearning) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsRequest{Request: req, Input: input}
+	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
 const opCreateBatchPrediction = "CreateBatchPrediction"
@@ -65,6 +66,7 @@ const opCreateBatchPrediction = "CreateBatchPrediction"
 type CreateBatchPredictionRequest struct {
 	*aws.Request
 	Input *CreateBatchPredictionInput
+	Copy  func(*CreateBatchPredictionInput) CreateBatchPredictionRequest
 }
 
 // Send marshals and sends the CreateBatchPrediction API request.
@@ -116,7 +118,7 @@ func (c *MachineLearning) CreateBatchPredictionRequest(input *CreateBatchPredict
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateBatchPredictionRequest{Request: req, Input: input}
+	return CreateBatchPredictionRequest{Request: req, Input: input, Copy: c.CreateBatchPredictionRequest}
 }
 
 const opCreateDataSourceFromRDS = "CreateDataSourceFromRDS"
@@ -125,6 +127,7 @@ const opCreateDataSourceFromRDS = "CreateDataSourceFromRDS"
 type CreateDataSourceFromRDSRequest struct {
 	*aws.Request
 	Input *CreateDataSourceFromRDSInput
+	Copy  func(*CreateDataSourceFromRDSInput) CreateDataSourceFromRDSRequest
 }
 
 // Send marshals and sends the CreateDataSourceFromRDS API request.
@@ -176,7 +179,7 @@ func (c *MachineLearning) CreateDataSourceFromRDSRequest(input *CreateDataSource
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDataSourceFromRDSRequest{Request: req, Input: input}
+	return CreateDataSourceFromRDSRequest{Request: req, Input: input, Copy: c.CreateDataSourceFromRDSRequest}
 }
 
 const opCreateDataSourceFromRedshift = "CreateDataSourceFromRedshift"
@@ -185,6 +188,7 @@ const opCreateDataSourceFromRedshift = "CreateDataSourceFromRedshift"
 type CreateDataSourceFromRedshiftRequest struct {
 	*aws.Request
 	Input *CreateDataSourceFromRedshiftInput
+	Copy  func(*CreateDataSourceFromRedshiftInput) CreateDataSourceFromRedshiftRequest
 }
 
 // Send marshals and sends the CreateDataSourceFromRedshift API request.
@@ -255,7 +259,7 @@ func (c *MachineLearning) CreateDataSourceFromRedshiftRequest(input *CreateDataS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDataSourceFromRedshiftRequest{Request: req, Input: input}
+	return CreateDataSourceFromRedshiftRequest{Request: req, Input: input, Copy: c.CreateDataSourceFromRedshiftRequest}
 }
 
 const opCreateDataSourceFromS3 = "CreateDataSourceFromS3"
@@ -264,6 +268,7 @@ const opCreateDataSourceFromS3 = "CreateDataSourceFromS3"
 type CreateDataSourceFromS3Request struct {
 	*aws.Request
 	Input *CreateDataSourceFromS3Input
+	Copy  func(*CreateDataSourceFromS3Input) CreateDataSourceFromS3Request
 }
 
 // Send marshals and sends the CreateDataSourceFromS3 API request.
@@ -329,7 +334,7 @@ func (c *MachineLearning) CreateDataSourceFromS3Request(input *CreateDataSourceF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDataSourceFromS3Request{Request: req, Input: input}
+	return CreateDataSourceFromS3Request{Request: req, Input: input, Copy: c.CreateDataSourceFromS3Request}
 }
 
 const opCreateEvaluation = "CreateEvaluation"
@@ -338,6 +343,7 @@ const opCreateEvaluation = "CreateEvaluation"
 type CreateEvaluationRequest struct {
 	*aws.Request
 	Input *CreateEvaluationInput
+	Copy  func(*CreateEvaluationInput) CreateEvaluationRequest
 }
 
 // Send marshals and sends the CreateEvaluation API request.
@@ -391,7 +397,7 @@ func (c *MachineLearning) CreateEvaluationRequest(input *CreateEvaluationInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateEvaluationRequest{Request: req, Input: input}
+	return CreateEvaluationRequest{Request: req, Input: input, Copy: c.CreateEvaluationRequest}
 }
 
 const opCreateMLModel = "CreateMLModel"
@@ -400,6 +406,7 @@ const opCreateMLModel = "CreateMLModel"
 type CreateMLModelRequest struct {
 	*aws.Request
 	Input *CreateMLModelInput
+	Copy  func(*CreateMLModelInput) CreateMLModelRequest
 }
 
 // Send marshals and sends the CreateMLModel API request.
@@ -454,7 +461,7 @@ func (c *MachineLearning) CreateMLModelRequest(input *CreateMLModelInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateMLModelRequest{Request: req, Input: input}
+	return CreateMLModelRequest{Request: req, Input: input, Copy: c.CreateMLModelRequest}
 }
 
 const opCreateRealtimeEndpoint = "CreateRealtimeEndpoint"
@@ -463,6 +470,7 @@ const opCreateRealtimeEndpoint = "CreateRealtimeEndpoint"
 type CreateRealtimeEndpointRequest struct {
 	*aws.Request
 	Input *CreateRealtimeEndpointInput
+	Copy  func(*CreateRealtimeEndpointInput) CreateRealtimeEndpointRequest
 }
 
 // Send marshals and sends the CreateRealtimeEndpoint API request.
@@ -503,7 +511,7 @@ func (c *MachineLearning) CreateRealtimeEndpointRequest(input *CreateRealtimeEnd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRealtimeEndpointRequest{Request: req, Input: input}
+	return CreateRealtimeEndpointRequest{Request: req, Input: input, Copy: c.CreateRealtimeEndpointRequest}
 }
 
 const opDeleteBatchPrediction = "DeleteBatchPrediction"
@@ -512,6 +520,7 @@ const opDeleteBatchPrediction = "DeleteBatchPrediction"
 type DeleteBatchPredictionRequest struct {
 	*aws.Request
 	Input *DeleteBatchPredictionInput
+	Copy  func(*DeleteBatchPredictionInput) DeleteBatchPredictionRequest
 }
 
 // Send marshals and sends the DeleteBatchPrediction API request.
@@ -555,7 +564,7 @@ func (c *MachineLearning) DeleteBatchPredictionRequest(input *DeleteBatchPredict
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteBatchPredictionRequest{Request: req, Input: input}
+	return DeleteBatchPredictionRequest{Request: req, Input: input, Copy: c.DeleteBatchPredictionRequest}
 }
 
 const opDeleteDataSource = "DeleteDataSource"
@@ -564,6 +573,7 @@ const opDeleteDataSource = "DeleteDataSource"
 type DeleteDataSourceRequest struct {
 	*aws.Request
 	Input *DeleteDataSourceInput
+	Copy  func(*DeleteDataSourceInput) DeleteDataSourceRequest
 }
 
 // Send marshals and sends the DeleteDataSource API request.
@@ -607,7 +617,7 @@ func (c *MachineLearning) DeleteDataSourceRequest(input *DeleteDataSourceInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDataSourceRequest{Request: req, Input: input}
+	return DeleteDataSourceRequest{Request: req, Input: input, Copy: c.DeleteDataSourceRequest}
 }
 
 const opDeleteEvaluation = "DeleteEvaluation"
@@ -616,6 +626,7 @@ const opDeleteEvaluation = "DeleteEvaluation"
 type DeleteEvaluationRequest struct {
 	*aws.Request
 	Input *DeleteEvaluationInput
+	Copy  func(*DeleteEvaluationInput) DeleteEvaluationRequest
 }
 
 // Send marshals and sends the DeleteEvaluation API request.
@@ -659,7 +670,7 @@ func (c *MachineLearning) DeleteEvaluationRequest(input *DeleteEvaluationInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteEvaluationRequest{Request: req, Input: input}
+	return DeleteEvaluationRequest{Request: req, Input: input, Copy: c.DeleteEvaluationRequest}
 }
 
 const opDeleteMLModel = "DeleteMLModel"
@@ -668,6 +679,7 @@ const opDeleteMLModel = "DeleteMLModel"
 type DeleteMLModelRequest struct {
 	*aws.Request
 	Input *DeleteMLModelInput
+	Copy  func(*DeleteMLModelInput) DeleteMLModelRequest
 }
 
 // Send marshals and sends the DeleteMLModel API request.
@@ -711,7 +723,7 @@ func (c *MachineLearning) DeleteMLModelRequest(input *DeleteMLModelInput) Delete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteMLModelRequest{Request: req, Input: input}
+	return DeleteMLModelRequest{Request: req, Input: input, Copy: c.DeleteMLModelRequest}
 }
 
 const opDeleteRealtimeEndpoint = "DeleteRealtimeEndpoint"
@@ -720,6 +732,7 @@ const opDeleteRealtimeEndpoint = "DeleteRealtimeEndpoint"
 type DeleteRealtimeEndpointRequest struct {
 	*aws.Request
 	Input *DeleteRealtimeEndpointInput
+	Copy  func(*DeleteRealtimeEndpointInput) DeleteRealtimeEndpointRequest
 }
 
 // Send marshals and sends the DeleteRealtimeEndpoint API request.
@@ -758,7 +771,7 @@ func (c *MachineLearning) DeleteRealtimeEndpointRequest(input *DeleteRealtimeEnd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRealtimeEndpointRequest{Request: req, Input: input}
+	return DeleteRealtimeEndpointRequest{Request: req, Input: input, Copy: c.DeleteRealtimeEndpointRequest}
 }
 
 const opDeleteTags = "DeleteTags"
@@ -767,6 +780,7 @@ const opDeleteTags = "DeleteTags"
 type DeleteTagsRequest struct {
 	*aws.Request
 	Input *DeleteTagsInput
+	Copy  func(*DeleteTagsInput) DeleteTagsRequest
 }
 
 // Send marshals and sends the DeleteTags API request.
@@ -808,7 +822,7 @@ func (c *MachineLearning) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTagsRequest{Request: req, Input: input}
+	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
 const opDescribeBatchPredictions = "DescribeBatchPredictions"
@@ -817,6 +831,7 @@ const opDescribeBatchPredictions = "DescribeBatchPredictions"
 type DescribeBatchPredictionsRequest struct {
 	*aws.Request
 	Input *DescribeBatchPredictionsInput
+	Copy  func(*DescribeBatchPredictionsInput) DescribeBatchPredictionsRequest
 }
 
 // Send marshals and sends the DescribeBatchPredictions API request.
@@ -862,57 +877,53 @@ func (c *MachineLearning) DescribeBatchPredictionsRequest(input *DescribeBatchPr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeBatchPredictionsRequest{Request: req, Input: input}
+	return DescribeBatchPredictionsRequest{Request: req, Input: input, Copy: c.DescribeBatchPredictionsRequest}
 }
 
-// DescribeBatchPredictionsPages iterates over the pages of a DescribeBatchPredictions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeBatchPredictions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeBatchPredictionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeBatchPredictions operation.
-//    pageNum := 0
-//    err := client.DescribeBatchPredictionsPages(params,
-//        func(page *DescribeBatchPredictionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeBatchPredictionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MachineLearning) DescribeBatchPredictionsPages(input *DescribeBatchPredictionsInput, fn func(*DescribeBatchPredictionsOutput, bool) bool) error {
-	return c.DescribeBatchPredictionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeBatchPredictionsRequest) Paginate(opts ...aws.Option) DescribeBatchPredictionsPager {
+	return DescribeBatchPredictionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeBatchPredictionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeBatchPredictionsPagesWithContext same as DescribeBatchPredictionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeBatchPredictionsPagesWithContext(ctx aws.Context, input *DescribeBatchPredictionsInput, fn func(*DescribeBatchPredictionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeBatchPredictionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeBatchPredictionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeBatchPredictionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeBatchPredictionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeBatchPredictionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeBatchPredictionsPager) CurrentPage() *DescribeBatchPredictionsOutput {
+	return p.Pager.CurrentPage().(*DescribeBatchPredictionsOutput)
 }
 
 const opDescribeDataSources = "DescribeDataSources"
@@ -921,6 +932,7 @@ const opDescribeDataSources = "DescribeDataSources"
 type DescribeDataSourcesRequest struct {
 	*aws.Request
 	Input *DescribeDataSourcesInput
+	Copy  func(*DescribeDataSourcesInput) DescribeDataSourcesRequest
 }
 
 // Send marshals and sends the DescribeDataSources API request.
@@ -965,57 +977,53 @@ func (c *MachineLearning) DescribeDataSourcesRequest(input *DescribeDataSourcesI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDataSourcesRequest{Request: req, Input: input}
+	return DescribeDataSourcesRequest{Request: req, Input: input, Copy: c.DescribeDataSourcesRequest}
 }
 
-// DescribeDataSourcesPages iterates over the pages of a DescribeDataSources operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeDataSources method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeDataSourcesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeDataSources operation.
-//    pageNum := 0
-//    err := client.DescribeDataSourcesPages(params,
-//        func(page *DescribeDataSourcesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeDataSourcesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MachineLearning) DescribeDataSourcesPages(input *DescribeDataSourcesInput, fn func(*DescribeDataSourcesOutput, bool) bool) error {
-	return c.DescribeDataSourcesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeDataSourcesRequest) Paginate(opts ...aws.Option) DescribeDataSourcesPager {
+	return DescribeDataSourcesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeDataSourcesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeDataSourcesPagesWithContext same as DescribeDataSourcesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeDataSourcesPagesWithContext(ctx aws.Context, input *DescribeDataSourcesInput, fn func(*DescribeDataSourcesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeDataSourcesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeDataSourcesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeDataSourcesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeDataSourcesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeDataSourcesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeDataSourcesPager) CurrentPage() *DescribeDataSourcesOutput {
+	return p.Pager.CurrentPage().(*DescribeDataSourcesOutput)
 }
 
 const opDescribeEvaluations = "DescribeEvaluations"
@@ -1024,6 +1032,7 @@ const opDescribeEvaluations = "DescribeEvaluations"
 type DescribeEvaluationsRequest struct {
 	*aws.Request
 	Input *DescribeEvaluationsInput
+	Copy  func(*DescribeEvaluationsInput) DescribeEvaluationsRequest
 }
 
 // Send marshals and sends the DescribeEvaluations API request.
@@ -1069,57 +1078,53 @@ func (c *MachineLearning) DescribeEvaluationsRequest(input *DescribeEvaluationsI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEvaluationsRequest{Request: req, Input: input}
+	return DescribeEvaluationsRequest{Request: req, Input: input, Copy: c.DescribeEvaluationsRequest}
 }
 
-// DescribeEvaluationsPages iterates over the pages of a DescribeEvaluations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEvaluations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEvaluationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEvaluations operation.
-//    pageNum := 0
-//    err := client.DescribeEvaluationsPages(params,
-//        func(page *DescribeEvaluationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEvaluationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MachineLearning) DescribeEvaluationsPages(input *DescribeEvaluationsInput, fn func(*DescribeEvaluationsOutput, bool) bool) error {
-	return c.DescribeEvaluationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEvaluationsRequest) Paginate(opts ...aws.Option) DescribeEvaluationsPager {
+	return DescribeEvaluationsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEvaluationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEvaluationsPagesWithContext same as DescribeEvaluationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeEvaluationsPagesWithContext(ctx aws.Context, input *DescribeEvaluationsInput, fn func(*DescribeEvaluationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEvaluationsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEvaluationsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEvaluationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEvaluationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEvaluationsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEvaluationsPager) CurrentPage() *DescribeEvaluationsOutput {
+	return p.Pager.CurrentPage().(*DescribeEvaluationsOutput)
 }
 
 const opDescribeMLModels = "DescribeMLModels"
@@ -1128,6 +1133,7 @@ const opDescribeMLModels = "DescribeMLModels"
 type DescribeMLModelsRequest struct {
 	*aws.Request
 	Input *DescribeMLModelsInput
+	Copy  func(*DescribeMLModelsInput) DescribeMLModelsRequest
 }
 
 // Send marshals and sends the DescribeMLModels API request.
@@ -1172,57 +1178,53 @@ func (c *MachineLearning) DescribeMLModelsRequest(input *DescribeMLModelsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMLModelsRequest{Request: req, Input: input}
+	return DescribeMLModelsRequest{Request: req, Input: input, Copy: c.DescribeMLModelsRequest}
 }
 
-// DescribeMLModelsPages iterates over the pages of a DescribeMLModels operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeMLModels method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeMLModelsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeMLModels operation.
-//    pageNum := 0
-//    err := client.DescribeMLModelsPages(params,
-//        func(page *DescribeMLModelsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeMLModelsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *MachineLearning) DescribeMLModelsPages(input *DescribeMLModelsInput, fn func(*DescribeMLModelsOutput, bool) bool) error {
-	return c.DescribeMLModelsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeMLModelsRequest) Paginate(opts ...aws.Option) DescribeMLModelsPager {
+	return DescribeMLModelsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeMLModelsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeMLModelsPagesWithContext same as DescribeMLModelsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *MachineLearning) DescribeMLModelsPagesWithContext(ctx aws.Context, input *DescribeMLModelsInput, fn func(*DescribeMLModelsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeMLModelsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeMLModelsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeMLModelsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeMLModelsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeMLModelsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeMLModelsPager) CurrentPage() *DescribeMLModelsOutput {
+	return p.Pager.CurrentPage().(*DescribeMLModelsOutput)
 }
 
 const opDescribeTags = "DescribeTags"
@@ -1231,6 +1233,7 @@ const opDescribeTags = "DescribeTags"
 type DescribeTagsRequest struct {
 	*aws.Request
 	Input *DescribeTagsInput
+	Copy  func(*DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -1269,7 +1272,7 @@ func (c *MachineLearning) DescribeTagsRequest(input *DescribeTagsInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagsRequest{Request: req, Input: input}
+	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
 const opGetBatchPrediction = "GetBatchPrediction"
@@ -1278,6 +1281,7 @@ const opGetBatchPrediction = "GetBatchPrediction"
 type GetBatchPredictionRequest struct {
 	*aws.Request
 	Input *GetBatchPredictionInput
+	Copy  func(*GetBatchPredictionInput) GetBatchPredictionRequest
 }
 
 // Send marshals and sends the GetBatchPrediction API request.
@@ -1317,7 +1321,7 @@ func (c *MachineLearning) GetBatchPredictionRequest(input *GetBatchPredictionInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetBatchPredictionRequest{Request: req, Input: input}
+	return GetBatchPredictionRequest{Request: req, Input: input, Copy: c.GetBatchPredictionRequest}
 }
 
 const opGetDataSource = "GetDataSource"
@@ -1326,6 +1330,7 @@ const opGetDataSource = "GetDataSource"
 type GetDataSourceRequest struct {
 	*aws.Request
 	Input *GetDataSourceInput
+	Copy  func(*GetDataSourceInput) GetDataSourceRequest
 }
 
 // Send marshals and sends the GetDataSource API request.
@@ -1369,7 +1374,7 @@ func (c *MachineLearning) GetDataSourceRequest(input *GetDataSourceInput) GetDat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDataSourceRequest{Request: req, Input: input}
+	return GetDataSourceRequest{Request: req, Input: input, Copy: c.GetDataSourceRequest}
 }
 
 const opGetEvaluation = "GetEvaluation"
@@ -1378,6 +1383,7 @@ const opGetEvaluation = "GetEvaluation"
 type GetEvaluationRequest struct {
 	*aws.Request
 	Input *GetEvaluationInput
+	Copy  func(*GetEvaluationInput) GetEvaluationRequest
 }
 
 // Send marshals and sends the GetEvaluation API request.
@@ -1417,7 +1423,7 @@ func (c *MachineLearning) GetEvaluationRequest(input *GetEvaluationInput) GetEva
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetEvaluationRequest{Request: req, Input: input}
+	return GetEvaluationRequest{Request: req, Input: input, Copy: c.GetEvaluationRequest}
 }
 
 const opGetMLModel = "GetMLModel"
@@ -1426,6 +1432,7 @@ const opGetMLModel = "GetMLModel"
 type GetMLModelRequest struct {
 	*aws.Request
 	Input *GetMLModelInput
+	Copy  func(*GetMLModelInput) GetMLModelRequest
 }
 
 // Send marshals and sends the GetMLModel API request.
@@ -1467,7 +1474,7 @@ func (c *MachineLearning) GetMLModelRequest(input *GetMLModelInput) GetMLModelRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMLModelRequest{Request: req, Input: input}
+	return GetMLModelRequest{Request: req, Input: input, Copy: c.GetMLModelRequest}
 }
 
 const opPredict = "Predict"
@@ -1476,6 +1483,7 @@ const opPredict = "Predict"
 type PredictRequest struct {
 	*aws.Request
 	Input *PredictInput
+	Copy  func(*PredictInput) PredictRequest
 }
 
 // Send marshals and sends the Predict API request.
@@ -1517,7 +1525,7 @@ func (c *MachineLearning) PredictRequest(input *PredictInput) PredictRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PredictRequest{Request: req, Input: input}
+	return PredictRequest{Request: req, Input: input, Copy: c.PredictRequest}
 }
 
 const opUpdateBatchPrediction = "UpdateBatchPrediction"
@@ -1526,6 +1534,7 @@ const opUpdateBatchPrediction = "UpdateBatchPrediction"
 type UpdateBatchPredictionRequest struct {
 	*aws.Request
 	Input *UpdateBatchPredictionInput
+	Copy  func(*UpdateBatchPredictionInput) UpdateBatchPredictionRequest
 }
 
 // Send marshals and sends the UpdateBatchPrediction API request.
@@ -1567,7 +1576,7 @@ func (c *MachineLearning) UpdateBatchPredictionRequest(input *UpdateBatchPredict
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateBatchPredictionRequest{Request: req, Input: input}
+	return UpdateBatchPredictionRequest{Request: req, Input: input, Copy: c.UpdateBatchPredictionRequest}
 }
 
 const opUpdateDataSource = "UpdateDataSource"
@@ -1576,6 +1585,7 @@ const opUpdateDataSource = "UpdateDataSource"
 type UpdateDataSourceRequest struct {
 	*aws.Request
 	Input *UpdateDataSourceInput
+	Copy  func(*UpdateDataSourceInput) UpdateDataSourceRequest
 }
 
 // Send marshals and sends the UpdateDataSource API request.
@@ -1617,7 +1627,7 @@ func (c *MachineLearning) UpdateDataSourceRequest(input *UpdateDataSourceInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDataSourceRequest{Request: req, Input: input}
+	return UpdateDataSourceRequest{Request: req, Input: input, Copy: c.UpdateDataSourceRequest}
 }
 
 const opUpdateEvaluation = "UpdateEvaluation"
@@ -1626,6 +1636,7 @@ const opUpdateEvaluation = "UpdateEvaluation"
 type UpdateEvaluationRequest struct {
 	*aws.Request
 	Input *UpdateEvaluationInput
+	Copy  func(*UpdateEvaluationInput) UpdateEvaluationRequest
 }
 
 // Send marshals and sends the UpdateEvaluation API request.
@@ -1667,7 +1678,7 @@ func (c *MachineLearning) UpdateEvaluationRequest(input *UpdateEvaluationInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateEvaluationRequest{Request: req, Input: input}
+	return UpdateEvaluationRequest{Request: req, Input: input, Copy: c.UpdateEvaluationRequest}
 }
 
 const opUpdateMLModel = "UpdateMLModel"
@@ -1676,6 +1687,7 @@ const opUpdateMLModel = "UpdateMLModel"
 type UpdateMLModelRequest struct {
 	*aws.Request
 	Input *UpdateMLModelInput
+	Copy  func(*UpdateMLModelInput) UpdateMLModelRequest
 }
 
 // Send marshals and sends the UpdateMLModel API request.
@@ -1717,7 +1729,7 @@ func (c *MachineLearning) UpdateMLModelRequest(input *UpdateMLModelInput) Update
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateMLModelRequest{Request: req, Input: input}
+	return UpdateMLModelRequest{Request: req, Input: input, Copy: c.UpdateMLModelRequest}
 }
 
 type AddTagsInput struct {

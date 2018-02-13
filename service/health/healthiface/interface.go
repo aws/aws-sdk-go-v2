@@ -9,7 +9,6 @@
 package healthiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/health"
 )
 
@@ -65,27 +64,15 @@ import (
 type HealthAPI interface {
 	DescribeAffectedEntitiesRequest(*health.DescribeAffectedEntitiesInput) health.DescribeAffectedEntitiesRequest
 
-	DescribeAffectedEntitiesPages(*health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool) error
-	DescribeAffectedEntitiesPagesWithContext(aws.Context, *health.DescribeAffectedEntitiesInput, func(*health.DescribeAffectedEntitiesOutput, bool) bool, ...aws.Option) error
-
 	DescribeEntityAggregatesRequest(*health.DescribeEntityAggregatesInput) health.DescribeEntityAggregatesRequest
 
 	DescribeEventAggregatesRequest(*health.DescribeEventAggregatesInput) health.DescribeEventAggregatesRequest
-
-	DescribeEventAggregatesPages(*health.DescribeEventAggregatesInput, func(*health.DescribeEventAggregatesOutput, bool) bool) error
-	DescribeEventAggregatesPagesWithContext(aws.Context, *health.DescribeEventAggregatesInput, func(*health.DescribeEventAggregatesOutput, bool) bool, ...aws.Option) error
 
 	DescribeEventDetailsRequest(*health.DescribeEventDetailsInput) health.DescribeEventDetailsRequest
 
 	DescribeEventTypesRequest(*health.DescribeEventTypesInput) health.DescribeEventTypesRequest
 
-	DescribeEventTypesPages(*health.DescribeEventTypesInput, func(*health.DescribeEventTypesOutput, bool) bool) error
-	DescribeEventTypesPagesWithContext(aws.Context, *health.DescribeEventTypesInput, func(*health.DescribeEventTypesOutput, bool) bool, ...aws.Option) error
-
 	DescribeEventsRequest(*health.DescribeEventsInput) health.DescribeEventsRequest
-
-	DescribeEventsPages(*health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool) error
-	DescribeEventsPagesWithContext(aws.Context, *health.DescribeEventsInput, func(*health.DescribeEventsOutput, bool) bool, ...aws.Option) error
 }
 
 var _ HealthAPI = (*health.Health)(nil)

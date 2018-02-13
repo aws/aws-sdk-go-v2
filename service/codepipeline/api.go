@@ -18,6 +18,7 @@ const opAcknowledgeJob = "AcknowledgeJob"
 type AcknowledgeJobRequest struct {
 	*aws.Request
 	Input *AcknowledgeJobInput
+	Copy  func(*AcknowledgeJobInput) AcknowledgeJobRequest
 }
 
 // Send marshals and sends the AcknowledgeJob API request.
@@ -59,7 +60,7 @@ func (c *CodePipeline) AcknowledgeJobRequest(input *AcknowledgeJobInput) Acknowl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcknowledgeJobRequest{Request: req, Input: input}
+	return AcknowledgeJobRequest{Request: req, Input: input, Copy: c.AcknowledgeJobRequest}
 }
 
 const opAcknowledgeThirdPartyJob = "AcknowledgeThirdPartyJob"
@@ -68,6 +69,7 @@ const opAcknowledgeThirdPartyJob = "AcknowledgeThirdPartyJob"
 type AcknowledgeThirdPartyJobRequest struct {
 	*aws.Request
 	Input *AcknowledgeThirdPartyJobInput
+	Copy  func(*AcknowledgeThirdPartyJobInput) AcknowledgeThirdPartyJobRequest
 }
 
 // Send marshals and sends the AcknowledgeThirdPartyJob API request.
@@ -109,7 +111,7 @@ func (c *CodePipeline) AcknowledgeThirdPartyJobRequest(input *AcknowledgeThirdPa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcknowledgeThirdPartyJobRequest{Request: req, Input: input}
+	return AcknowledgeThirdPartyJobRequest{Request: req, Input: input, Copy: c.AcknowledgeThirdPartyJobRequest}
 }
 
 const opCreateCustomActionType = "CreateCustomActionType"
@@ -118,6 +120,7 @@ const opCreateCustomActionType = "CreateCustomActionType"
 type CreateCustomActionTypeRequest struct {
 	*aws.Request
 	Input *CreateCustomActionTypeInput
+	Copy  func(*CreateCustomActionTypeInput) CreateCustomActionTypeRequest
 }
 
 // Send marshals and sends the CreateCustomActionType API request.
@@ -159,7 +162,7 @@ func (c *CodePipeline) CreateCustomActionTypeRequest(input *CreateCustomActionTy
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCustomActionTypeRequest{Request: req, Input: input}
+	return CreateCustomActionTypeRequest{Request: req, Input: input, Copy: c.CreateCustomActionTypeRequest}
 }
 
 const opCreatePipeline = "CreatePipeline"
@@ -168,6 +171,7 @@ const opCreatePipeline = "CreatePipeline"
 type CreatePipelineRequest struct {
 	*aws.Request
 	Input *CreatePipelineInput
+	Copy  func(*CreatePipelineInput) CreatePipelineRequest
 }
 
 // Send marshals and sends the CreatePipeline API request.
@@ -208,7 +212,7 @@ func (c *CodePipeline) CreatePipelineRequest(input *CreatePipelineInput) CreateP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePipelineRequest{Request: req, Input: input}
+	return CreatePipelineRequest{Request: req, Input: input, Copy: c.CreatePipelineRequest}
 }
 
 const opDeleteCustomActionType = "DeleteCustomActionType"
@@ -217,6 +221,7 @@ const opDeleteCustomActionType = "DeleteCustomActionType"
 type DeleteCustomActionTypeRequest struct {
 	*aws.Request
 	Input *DeleteCustomActionTypeInput
+	Copy  func(*DeleteCustomActionTypeInput) DeleteCustomActionTypeRequest
 }
 
 // Send marshals and sends the DeleteCustomActionType API request.
@@ -263,7 +268,7 @@ func (c *CodePipeline) DeleteCustomActionTypeRequest(input *DeleteCustomActionTy
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCustomActionTypeRequest{Request: req, Input: input}
+	return DeleteCustomActionTypeRequest{Request: req, Input: input, Copy: c.DeleteCustomActionTypeRequest}
 }
 
 const opDeletePipeline = "DeletePipeline"
@@ -272,6 +277,7 @@ const opDeletePipeline = "DeletePipeline"
 type DeletePipelineRequest struct {
 	*aws.Request
 	Input *DeletePipelineInput
+	Copy  func(*DeletePipelineInput) DeletePipelineRequest
 }
 
 // Send marshals and sends the DeletePipeline API request.
@@ -314,7 +320,7 @@ func (c *CodePipeline) DeletePipelineRequest(input *DeletePipelineInput) DeleteP
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePipelineRequest{Request: req, Input: input}
+	return DeletePipelineRequest{Request: req, Input: input, Copy: c.DeletePipelineRequest}
 }
 
 const opDisableStageTransition = "DisableStageTransition"
@@ -323,6 +329,7 @@ const opDisableStageTransition = "DisableStageTransition"
 type DisableStageTransitionRequest struct {
 	*aws.Request
 	Input *DisableStageTransitionInput
+	Copy  func(*DisableStageTransitionInput) DisableStageTransitionRequest
 }
 
 // Send marshals and sends the DisableStageTransition API request.
@@ -366,7 +373,7 @@ func (c *CodePipeline) DisableStageTransitionRequest(input *DisableStageTransiti
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableStageTransitionRequest{Request: req, Input: input}
+	return DisableStageTransitionRequest{Request: req, Input: input, Copy: c.DisableStageTransitionRequest}
 }
 
 const opEnableStageTransition = "EnableStageTransition"
@@ -375,6 +382,7 @@ const opEnableStageTransition = "EnableStageTransition"
 type EnableStageTransitionRequest struct {
 	*aws.Request
 	Input *EnableStageTransitionInput
+	Copy  func(*EnableStageTransitionInput) EnableStageTransitionRequest
 }
 
 // Send marshals and sends the EnableStageTransition API request.
@@ -417,7 +425,7 @@ func (c *CodePipeline) EnableStageTransitionRequest(input *EnableStageTransition
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableStageTransitionRequest{Request: req, Input: input}
+	return EnableStageTransitionRequest{Request: req, Input: input, Copy: c.EnableStageTransitionRequest}
 }
 
 const opGetJobDetails = "GetJobDetails"
@@ -426,6 +434,7 @@ const opGetJobDetails = "GetJobDetails"
 type GetJobDetailsRequest struct {
 	*aws.Request
 	Input *GetJobDetailsInput
+	Copy  func(*GetJobDetailsInput) GetJobDetailsRequest
 }
 
 // Send marshals and sends the GetJobDetails API request.
@@ -471,7 +480,7 @@ func (c *CodePipeline) GetJobDetailsRequest(input *GetJobDetailsInput) GetJobDet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetJobDetailsRequest{Request: req, Input: input}
+	return GetJobDetailsRequest{Request: req, Input: input, Copy: c.GetJobDetailsRequest}
 }
 
 const opGetPipeline = "GetPipeline"
@@ -480,6 +489,7 @@ const opGetPipeline = "GetPipeline"
 type GetPipelineRequest struct {
 	*aws.Request
 	Input *GetPipelineInput
+	Copy  func(*GetPipelineInput) GetPipelineRequest
 }
 
 // Send marshals and sends the GetPipeline API request.
@@ -522,7 +532,7 @@ func (c *CodePipeline) GetPipelineRequest(input *GetPipelineInput) GetPipelineRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPipelineRequest{Request: req, Input: input}
+	return GetPipelineRequest{Request: req, Input: input, Copy: c.GetPipelineRequest}
 }
 
 const opGetPipelineExecution = "GetPipelineExecution"
@@ -531,6 +541,7 @@ const opGetPipelineExecution = "GetPipelineExecution"
 type GetPipelineExecutionRequest struct {
 	*aws.Request
 	Input *GetPipelineExecutionInput
+	Copy  func(*GetPipelineExecutionInput) GetPipelineExecutionRequest
 }
 
 // Send marshals and sends the GetPipelineExecution API request.
@@ -573,7 +584,7 @@ func (c *CodePipeline) GetPipelineExecutionRequest(input *GetPipelineExecutionIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPipelineExecutionRequest{Request: req, Input: input}
+	return GetPipelineExecutionRequest{Request: req, Input: input, Copy: c.GetPipelineExecutionRequest}
 }
 
 const opGetPipelineState = "GetPipelineState"
@@ -582,6 +593,7 @@ const opGetPipelineState = "GetPipelineState"
 type GetPipelineStateRequest struct {
 	*aws.Request
 	Input *GetPipelineStateInput
+	Copy  func(*GetPipelineStateInput) GetPipelineStateRequest
 }
 
 // Send marshals and sends the GetPipelineState API request.
@@ -623,7 +635,7 @@ func (c *CodePipeline) GetPipelineStateRequest(input *GetPipelineStateInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPipelineStateRequest{Request: req, Input: input}
+	return GetPipelineStateRequest{Request: req, Input: input, Copy: c.GetPipelineStateRequest}
 }
 
 const opGetThirdPartyJobDetails = "GetThirdPartyJobDetails"
@@ -632,6 +644,7 @@ const opGetThirdPartyJobDetails = "GetThirdPartyJobDetails"
 type GetThirdPartyJobDetailsRequest struct {
 	*aws.Request
 	Input *GetThirdPartyJobDetailsInput
+	Copy  func(*GetThirdPartyJobDetailsInput) GetThirdPartyJobDetailsRequest
 }
 
 // Send marshals and sends the GetThirdPartyJobDetails API request.
@@ -678,7 +691,7 @@ func (c *CodePipeline) GetThirdPartyJobDetailsRequest(input *GetThirdPartyJobDet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetThirdPartyJobDetailsRequest{Request: req, Input: input}
+	return GetThirdPartyJobDetailsRequest{Request: req, Input: input, Copy: c.GetThirdPartyJobDetailsRequest}
 }
 
 const opListActionTypes = "ListActionTypes"
@@ -687,6 +700,7 @@ const opListActionTypes = "ListActionTypes"
 type ListActionTypesRequest struct {
 	*aws.Request
 	Input *ListActionTypesInput
+	Copy  func(*ListActionTypesInput) ListActionTypesRequest
 }
 
 // Send marshals and sends the ListActionTypes API request.
@@ -728,7 +742,7 @@ func (c *CodePipeline) ListActionTypesRequest(input *ListActionTypesInput) ListA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListActionTypesRequest{Request: req, Input: input}
+	return ListActionTypesRequest{Request: req, Input: input, Copy: c.ListActionTypesRequest}
 }
 
 const opListPipelineExecutions = "ListPipelineExecutions"
@@ -737,6 +751,7 @@ const opListPipelineExecutions = "ListPipelineExecutions"
 type ListPipelineExecutionsRequest struct {
 	*aws.Request
 	Input *ListPipelineExecutionsInput
+	Copy  func(*ListPipelineExecutionsInput) ListPipelineExecutionsRequest
 }
 
 // Send marshals and sends the ListPipelineExecutions API request.
@@ -777,7 +792,7 @@ func (c *CodePipeline) ListPipelineExecutionsRequest(input *ListPipelineExecutio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPipelineExecutionsRequest{Request: req, Input: input}
+	return ListPipelineExecutionsRequest{Request: req, Input: input, Copy: c.ListPipelineExecutionsRequest}
 }
 
 const opListPipelines = "ListPipelines"
@@ -786,6 +801,7 @@ const opListPipelines = "ListPipelines"
 type ListPipelinesRequest struct {
 	*aws.Request
 	Input *ListPipelinesInput
+	Copy  func(*ListPipelinesInput) ListPipelinesRequest
 }
 
 // Send marshals and sends the ListPipelines API request.
@@ -826,7 +842,7 @@ func (c *CodePipeline) ListPipelinesRequest(input *ListPipelinesInput) ListPipel
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPipelinesRequest{Request: req, Input: input}
+	return ListPipelinesRequest{Request: req, Input: input, Copy: c.ListPipelinesRequest}
 }
 
 const opPollForJobs = "PollForJobs"
@@ -835,6 +851,7 @@ const opPollForJobs = "PollForJobs"
 type PollForJobsRequest struct {
 	*aws.Request
 	Input *PollForJobsInput
+	Copy  func(*PollForJobsInput) PollForJobsRequest
 }
 
 // Send marshals and sends the PollForJobs API request.
@@ -880,7 +897,7 @@ func (c *CodePipeline) PollForJobsRequest(input *PollForJobsInput) PollForJobsRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PollForJobsRequest{Request: req, Input: input}
+	return PollForJobsRequest{Request: req, Input: input, Copy: c.PollForJobsRequest}
 }
 
 const opPollForThirdPartyJobs = "PollForThirdPartyJobs"
@@ -889,6 +906,7 @@ const opPollForThirdPartyJobs = "PollForThirdPartyJobs"
 type PollForThirdPartyJobsRequest struct {
 	*aws.Request
 	Input *PollForThirdPartyJobsInput
+	Copy  func(*PollForThirdPartyJobsInput) PollForThirdPartyJobsRequest
 }
 
 // Send marshals and sends the PollForThirdPartyJobs API request.
@@ -934,7 +952,7 @@ func (c *CodePipeline) PollForThirdPartyJobsRequest(input *PollForThirdPartyJobs
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PollForThirdPartyJobsRequest{Request: req, Input: input}
+	return PollForThirdPartyJobsRequest{Request: req, Input: input, Copy: c.PollForThirdPartyJobsRequest}
 }
 
 const opPutActionRevision = "PutActionRevision"
@@ -943,6 +961,7 @@ const opPutActionRevision = "PutActionRevision"
 type PutActionRevisionRequest struct {
 	*aws.Request
 	Input *PutActionRevisionInput
+	Copy  func(*PutActionRevisionInput) PutActionRevisionRequest
 }
 
 // Send marshals and sends the PutActionRevision API request.
@@ -983,7 +1002,7 @@ func (c *CodePipeline) PutActionRevisionRequest(input *PutActionRevisionInput) P
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutActionRevisionRequest{Request: req, Input: input}
+	return PutActionRevisionRequest{Request: req, Input: input, Copy: c.PutActionRevisionRequest}
 }
 
 const opPutApprovalResult = "PutApprovalResult"
@@ -992,6 +1011,7 @@ const opPutApprovalResult = "PutApprovalResult"
 type PutApprovalResultRequest struct {
 	*aws.Request
 	Input *PutApprovalResultInput
+	Copy  func(*PutApprovalResultInput) PutApprovalResultRequest
 }
 
 // Send marshals and sends the PutApprovalResult API request.
@@ -1033,7 +1053,7 @@ func (c *CodePipeline) PutApprovalResultRequest(input *PutApprovalResultInput) P
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutApprovalResultRequest{Request: req, Input: input}
+	return PutApprovalResultRequest{Request: req, Input: input, Copy: c.PutApprovalResultRequest}
 }
 
 const opPutJobFailureResult = "PutJobFailureResult"
@@ -1042,6 +1062,7 @@ const opPutJobFailureResult = "PutJobFailureResult"
 type PutJobFailureResultRequest struct {
 	*aws.Request
 	Input *PutJobFailureResultInput
+	Copy  func(*PutJobFailureResultInput) PutJobFailureResultRequest
 }
 
 // Send marshals and sends the PutJobFailureResult API request.
@@ -1085,7 +1106,7 @@ func (c *CodePipeline) PutJobFailureResultRequest(input *PutJobFailureResultInpu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutJobFailureResultRequest{Request: req, Input: input}
+	return PutJobFailureResultRequest{Request: req, Input: input, Copy: c.PutJobFailureResultRequest}
 }
 
 const opPutJobSuccessResult = "PutJobSuccessResult"
@@ -1094,6 +1115,7 @@ const opPutJobSuccessResult = "PutJobSuccessResult"
 type PutJobSuccessResultRequest struct {
 	*aws.Request
 	Input *PutJobSuccessResultInput
+	Copy  func(*PutJobSuccessResultInput) PutJobSuccessResultRequest
 }
 
 // Send marshals and sends the PutJobSuccessResult API request.
@@ -1137,7 +1159,7 @@ func (c *CodePipeline) PutJobSuccessResultRequest(input *PutJobSuccessResultInpu
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutJobSuccessResultRequest{Request: req, Input: input}
+	return PutJobSuccessResultRequest{Request: req, Input: input, Copy: c.PutJobSuccessResultRequest}
 }
 
 const opPutThirdPartyJobFailureResult = "PutThirdPartyJobFailureResult"
@@ -1146,6 +1168,7 @@ const opPutThirdPartyJobFailureResult = "PutThirdPartyJobFailureResult"
 type PutThirdPartyJobFailureResultRequest struct {
 	*aws.Request
 	Input *PutThirdPartyJobFailureResultInput
+	Copy  func(*PutThirdPartyJobFailureResultInput) PutThirdPartyJobFailureResultRequest
 }
 
 // Send marshals and sends the PutThirdPartyJobFailureResult API request.
@@ -1189,7 +1212,7 @@ func (c *CodePipeline) PutThirdPartyJobFailureResultRequest(input *PutThirdParty
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutThirdPartyJobFailureResultRequest{Request: req, Input: input}
+	return PutThirdPartyJobFailureResultRequest{Request: req, Input: input, Copy: c.PutThirdPartyJobFailureResultRequest}
 }
 
 const opPutThirdPartyJobSuccessResult = "PutThirdPartyJobSuccessResult"
@@ -1198,6 +1221,7 @@ const opPutThirdPartyJobSuccessResult = "PutThirdPartyJobSuccessResult"
 type PutThirdPartyJobSuccessResultRequest struct {
 	*aws.Request
 	Input *PutThirdPartyJobSuccessResultInput
+	Copy  func(*PutThirdPartyJobSuccessResultInput) PutThirdPartyJobSuccessResultRequest
 }
 
 // Send marshals and sends the PutThirdPartyJobSuccessResult API request.
@@ -1241,7 +1265,7 @@ func (c *CodePipeline) PutThirdPartyJobSuccessResultRequest(input *PutThirdParty
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutThirdPartyJobSuccessResultRequest{Request: req, Input: input}
+	return PutThirdPartyJobSuccessResultRequest{Request: req, Input: input, Copy: c.PutThirdPartyJobSuccessResultRequest}
 }
 
 const opRetryStageExecution = "RetryStageExecution"
@@ -1250,6 +1274,7 @@ const opRetryStageExecution = "RetryStageExecution"
 type RetryStageExecutionRequest struct {
 	*aws.Request
 	Input *RetryStageExecutionInput
+	Copy  func(*RetryStageExecutionInput) RetryStageExecutionRequest
 }
 
 // Send marshals and sends the RetryStageExecution API request.
@@ -1290,7 +1315,7 @@ func (c *CodePipeline) RetryStageExecutionRequest(input *RetryStageExecutionInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RetryStageExecutionRequest{Request: req, Input: input}
+	return RetryStageExecutionRequest{Request: req, Input: input, Copy: c.RetryStageExecutionRequest}
 }
 
 const opStartPipelineExecution = "StartPipelineExecution"
@@ -1299,6 +1324,7 @@ const opStartPipelineExecution = "StartPipelineExecution"
 type StartPipelineExecutionRequest struct {
 	*aws.Request
 	Input *StartPipelineExecutionInput
+	Copy  func(*StartPipelineExecutionInput) StartPipelineExecutionRequest
 }
 
 // Send marshals and sends the StartPipelineExecution API request.
@@ -1340,7 +1366,7 @@ func (c *CodePipeline) StartPipelineExecutionRequest(input *StartPipelineExecuti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartPipelineExecutionRequest{Request: req, Input: input}
+	return StartPipelineExecutionRequest{Request: req, Input: input, Copy: c.StartPipelineExecutionRequest}
 }
 
 const opUpdatePipeline = "UpdatePipeline"
@@ -1349,6 +1375,7 @@ const opUpdatePipeline = "UpdatePipeline"
 type UpdatePipelineRequest struct {
 	*aws.Request
 	Input *UpdatePipelineInput
+	Copy  func(*UpdatePipelineInput) UpdatePipelineRequest
 }
 
 // Send marshals and sends the UpdatePipeline API request.
@@ -1392,7 +1419,7 @@ func (c *CodePipeline) UpdatePipelineRequest(input *UpdatePipelineInput) UpdateP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePipelineRequest{Request: req, Input: input}
+	return UpdatePipelineRequest{Request: req, Input: input, Copy: c.UpdatePipelineRequest}
 }
 
 // Represents an AWS session credentials object. These credentials are temporary

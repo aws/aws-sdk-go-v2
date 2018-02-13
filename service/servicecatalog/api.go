@@ -16,6 +16,7 @@ const opAcceptPortfolioShare = "AcceptPortfolioShare"
 type AcceptPortfolioShareRequest struct {
 	*aws.Request
 	Input *AcceptPortfolioShareInput
+	Copy  func(*AcceptPortfolioShareInput) AcceptPortfolioShareRequest
 }
 
 // Send marshals and sends the AcceptPortfolioShare API request.
@@ -56,7 +57,7 @@ func (c *ServiceCatalog) AcceptPortfolioShareRequest(input *AcceptPortfolioShare
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AcceptPortfolioShareRequest{Request: req, Input: input}
+	return AcceptPortfolioShareRequest{Request: req, Input: input, Copy: c.AcceptPortfolioShareRequest}
 }
 
 const opAssociatePrincipalWithPortfolio = "AssociatePrincipalWithPortfolio"
@@ -65,6 +66,7 @@ const opAssociatePrincipalWithPortfolio = "AssociatePrincipalWithPortfolio"
 type AssociatePrincipalWithPortfolioRequest struct {
 	*aws.Request
 	Input *AssociatePrincipalWithPortfolioInput
+	Copy  func(*AssociatePrincipalWithPortfolioInput) AssociatePrincipalWithPortfolioRequest
 }
 
 // Send marshals and sends the AssociatePrincipalWithPortfolio API request.
@@ -105,7 +107,7 @@ func (c *ServiceCatalog) AssociatePrincipalWithPortfolioRequest(input *Associate
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociatePrincipalWithPortfolioRequest{Request: req, Input: input}
+	return AssociatePrincipalWithPortfolioRequest{Request: req, Input: input, Copy: c.AssociatePrincipalWithPortfolioRequest}
 }
 
 const opAssociateProductWithPortfolio = "AssociateProductWithPortfolio"
@@ -114,6 +116,7 @@ const opAssociateProductWithPortfolio = "AssociateProductWithPortfolio"
 type AssociateProductWithPortfolioRequest struct {
 	*aws.Request
 	Input *AssociateProductWithPortfolioInput
+	Copy  func(*AssociateProductWithPortfolioInput) AssociateProductWithPortfolioRequest
 }
 
 // Send marshals and sends the AssociateProductWithPortfolio API request.
@@ -154,7 +157,7 @@ func (c *ServiceCatalog) AssociateProductWithPortfolioRequest(input *AssociatePr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateProductWithPortfolioRequest{Request: req, Input: input}
+	return AssociateProductWithPortfolioRequest{Request: req, Input: input, Copy: c.AssociateProductWithPortfolioRequest}
 }
 
 const opAssociateTagOptionWithResource = "AssociateTagOptionWithResource"
@@ -163,6 +166,7 @@ const opAssociateTagOptionWithResource = "AssociateTagOptionWithResource"
 type AssociateTagOptionWithResourceRequest struct {
 	*aws.Request
 	Input *AssociateTagOptionWithResourceInput
+	Copy  func(*AssociateTagOptionWithResourceInput) AssociateTagOptionWithResourceRequest
 }
 
 // Send marshals and sends the AssociateTagOptionWithResource API request.
@@ -203,7 +207,7 @@ func (c *ServiceCatalog) AssociateTagOptionWithResourceRequest(input *AssociateT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AssociateTagOptionWithResourceRequest{Request: req, Input: input}
+	return AssociateTagOptionWithResourceRequest{Request: req, Input: input, Copy: c.AssociateTagOptionWithResourceRequest}
 }
 
 const opCopyProduct = "CopyProduct"
@@ -212,6 +216,7 @@ const opCopyProduct = "CopyProduct"
 type CopyProductRequest struct {
 	*aws.Request
 	Input *CopyProductInput
+	Copy  func(*CopyProductInput) CopyProductRequest
 }
 
 // Send marshals and sends the CopyProduct API request.
@@ -259,7 +264,7 @@ func (c *ServiceCatalog) CopyProductRequest(input *CopyProductInput) CopyProduct
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopyProductRequest{Request: req, Input: input}
+	return CopyProductRequest{Request: req, Input: input, Copy: c.CopyProductRequest}
 }
 
 const opCreateConstraint = "CreateConstraint"
@@ -268,6 +273,7 @@ const opCreateConstraint = "CreateConstraint"
 type CreateConstraintRequest struct {
 	*aws.Request
 	Input *CreateConstraintInput
+	Copy  func(*CreateConstraintInput) CreateConstraintRequest
 }
 
 // Send marshals and sends the CreateConstraint API request.
@@ -308,7 +314,7 @@ func (c *ServiceCatalog) CreateConstraintRequest(input *CreateConstraintInput) C
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateConstraintRequest{Request: req, Input: input}
+	return CreateConstraintRequest{Request: req, Input: input, Copy: c.CreateConstraintRequest}
 }
 
 const opCreatePortfolio = "CreatePortfolio"
@@ -317,6 +323,7 @@ const opCreatePortfolio = "CreatePortfolio"
 type CreatePortfolioRequest struct {
 	*aws.Request
 	Input *CreatePortfolioInput
+	Copy  func(*CreatePortfolioInput) CreatePortfolioRequest
 }
 
 // Send marshals and sends the CreatePortfolio API request.
@@ -357,7 +364,7 @@ func (c *ServiceCatalog) CreatePortfolioRequest(input *CreatePortfolioInput) Cre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePortfolioRequest{Request: req, Input: input}
+	return CreatePortfolioRequest{Request: req, Input: input, Copy: c.CreatePortfolioRequest}
 }
 
 const opCreatePortfolioShare = "CreatePortfolioShare"
@@ -366,6 +373,7 @@ const opCreatePortfolioShare = "CreatePortfolioShare"
 type CreatePortfolioShareRequest struct {
 	*aws.Request
 	Input *CreatePortfolioShareInput
+	Copy  func(*CreatePortfolioShareInput) CreatePortfolioShareRequest
 }
 
 // Send marshals and sends the CreatePortfolioShare API request.
@@ -406,7 +414,7 @@ func (c *ServiceCatalog) CreatePortfolioShareRequest(input *CreatePortfolioShare
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePortfolioShareRequest{Request: req, Input: input}
+	return CreatePortfolioShareRequest{Request: req, Input: input, Copy: c.CreatePortfolioShareRequest}
 }
 
 const opCreateProduct = "CreateProduct"
@@ -415,6 +423,7 @@ const opCreateProduct = "CreateProduct"
 type CreateProductRequest struct {
 	*aws.Request
 	Input *CreateProductInput
+	Copy  func(*CreateProductInput) CreateProductRequest
 }
 
 // Send marshals and sends the CreateProduct API request.
@@ -455,7 +464,7 @@ func (c *ServiceCatalog) CreateProductRequest(input *CreateProductInput) CreateP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateProductRequest{Request: req, Input: input}
+	return CreateProductRequest{Request: req, Input: input, Copy: c.CreateProductRequest}
 }
 
 const opCreateProvisioningArtifact = "CreateProvisioningArtifact"
@@ -464,6 +473,7 @@ const opCreateProvisioningArtifact = "CreateProvisioningArtifact"
 type CreateProvisioningArtifactRequest struct {
 	*aws.Request
 	Input *CreateProvisioningArtifactInput
+	Copy  func(*CreateProvisioningArtifactInput) CreateProvisioningArtifactRequest
 }
 
 // Send marshals and sends the CreateProvisioningArtifact API request.
@@ -508,7 +518,7 @@ func (c *ServiceCatalog) CreateProvisioningArtifactRequest(input *CreateProvisio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateProvisioningArtifactRequest{Request: req, Input: input}
+	return CreateProvisioningArtifactRequest{Request: req, Input: input, Copy: c.CreateProvisioningArtifactRequest}
 }
 
 const opCreateTagOption = "CreateTagOption"
@@ -517,6 +527,7 @@ const opCreateTagOption = "CreateTagOption"
 type CreateTagOptionRequest struct {
 	*aws.Request
 	Input *CreateTagOptionInput
+	Copy  func(*CreateTagOptionInput) CreateTagOptionRequest
 }
 
 // Send marshals and sends the CreateTagOption API request.
@@ -557,7 +568,7 @@ func (c *ServiceCatalog) CreateTagOptionRequest(input *CreateTagOptionInput) Cre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTagOptionRequest{Request: req, Input: input}
+	return CreateTagOptionRequest{Request: req, Input: input, Copy: c.CreateTagOptionRequest}
 }
 
 const opDeleteConstraint = "DeleteConstraint"
@@ -566,6 +577,7 @@ const opDeleteConstraint = "DeleteConstraint"
 type DeleteConstraintRequest struct {
 	*aws.Request
 	Input *DeleteConstraintInput
+	Copy  func(*DeleteConstraintInput) DeleteConstraintRequest
 }
 
 // Send marshals and sends the DeleteConstraint API request.
@@ -606,7 +618,7 @@ func (c *ServiceCatalog) DeleteConstraintRequest(input *DeleteConstraintInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteConstraintRequest{Request: req, Input: input}
+	return DeleteConstraintRequest{Request: req, Input: input, Copy: c.DeleteConstraintRequest}
 }
 
 const opDeletePortfolio = "DeletePortfolio"
@@ -615,6 +627,7 @@ const opDeletePortfolio = "DeletePortfolio"
 type DeletePortfolioRequest struct {
 	*aws.Request
 	Input *DeletePortfolioInput
+	Copy  func(*DeletePortfolioInput) DeletePortfolioRequest
 }
 
 // Send marshals and sends the DeletePortfolio API request.
@@ -658,7 +671,7 @@ func (c *ServiceCatalog) DeletePortfolioRequest(input *DeletePortfolioInput) Del
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePortfolioRequest{Request: req, Input: input}
+	return DeletePortfolioRequest{Request: req, Input: input, Copy: c.DeletePortfolioRequest}
 }
 
 const opDeletePortfolioShare = "DeletePortfolioShare"
@@ -667,6 +680,7 @@ const opDeletePortfolioShare = "DeletePortfolioShare"
 type DeletePortfolioShareRequest struct {
 	*aws.Request
 	Input *DeletePortfolioShareInput
+	Copy  func(*DeletePortfolioShareInput) DeletePortfolioShareRequest
 }
 
 // Send marshals and sends the DeletePortfolioShare API request.
@@ -707,7 +721,7 @@ func (c *ServiceCatalog) DeletePortfolioShareRequest(input *DeletePortfolioShare
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePortfolioShareRequest{Request: req, Input: input}
+	return DeletePortfolioShareRequest{Request: req, Input: input, Copy: c.DeletePortfolioShareRequest}
 }
 
 const opDeleteProduct = "DeleteProduct"
@@ -716,6 +730,7 @@ const opDeleteProduct = "DeleteProduct"
 type DeleteProductRequest struct {
 	*aws.Request
 	Input *DeleteProductInput
+	Copy  func(*DeleteProductInput) DeleteProductRequest
 }
 
 // Send marshals and sends the DeleteProduct API request.
@@ -759,7 +774,7 @@ func (c *ServiceCatalog) DeleteProductRequest(input *DeleteProductInput) DeleteP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteProductRequest{Request: req, Input: input}
+	return DeleteProductRequest{Request: req, Input: input, Copy: c.DeleteProductRequest}
 }
 
 const opDeleteProvisioningArtifact = "DeleteProvisioningArtifact"
@@ -768,6 +783,7 @@ const opDeleteProvisioningArtifact = "DeleteProvisioningArtifact"
 type DeleteProvisioningArtifactRequest struct {
 	*aws.Request
 	Input *DeleteProvisioningArtifactInput
+	Copy  func(*DeleteProvisioningArtifactInput) DeleteProvisioningArtifactRequest
 }
 
 // Send marshals and sends the DeleteProvisioningArtifact API request.
@@ -813,7 +829,7 @@ func (c *ServiceCatalog) DeleteProvisioningArtifactRequest(input *DeleteProvisio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteProvisioningArtifactRequest{Request: req, Input: input}
+	return DeleteProvisioningArtifactRequest{Request: req, Input: input, Copy: c.DeleteProvisioningArtifactRequest}
 }
 
 const opDescribeConstraint = "DescribeConstraint"
@@ -822,6 +838,7 @@ const opDescribeConstraint = "DescribeConstraint"
 type DescribeConstraintRequest struct {
 	*aws.Request
 	Input *DescribeConstraintInput
+	Copy  func(*DescribeConstraintInput) DescribeConstraintRequest
 }
 
 // Send marshals and sends the DescribeConstraint API request.
@@ -862,7 +879,7 @@ func (c *ServiceCatalog) DescribeConstraintRequest(input *DescribeConstraintInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConstraintRequest{Request: req, Input: input}
+	return DescribeConstraintRequest{Request: req, Input: input, Copy: c.DescribeConstraintRequest}
 }
 
 const opDescribeCopyProductStatus = "DescribeCopyProductStatus"
@@ -871,6 +888,7 @@ const opDescribeCopyProductStatus = "DescribeCopyProductStatus"
 type DescribeCopyProductStatusRequest struct {
 	*aws.Request
 	Input *DescribeCopyProductStatusInput
+	Copy  func(*DescribeCopyProductStatusInput) DescribeCopyProductStatusRequest
 }
 
 // Send marshals and sends the DescribeCopyProductStatus API request.
@@ -911,7 +929,7 @@ func (c *ServiceCatalog) DescribeCopyProductStatusRequest(input *DescribeCopyPro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCopyProductStatusRequest{Request: req, Input: input}
+	return DescribeCopyProductStatusRequest{Request: req, Input: input, Copy: c.DescribeCopyProductStatusRequest}
 }
 
 const opDescribePortfolio = "DescribePortfolio"
@@ -920,6 +938,7 @@ const opDescribePortfolio = "DescribePortfolio"
 type DescribePortfolioRequest struct {
 	*aws.Request
 	Input *DescribePortfolioInput
+	Copy  func(*DescribePortfolioInput) DescribePortfolioRequest
 }
 
 // Send marshals and sends the DescribePortfolio API request.
@@ -960,7 +979,7 @@ func (c *ServiceCatalog) DescribePortfolioRequest(input *DescribePortfolioInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePortfolioRequest{Request: req, Input: input}
+	return DescribePortfolioRequest{Request: req, Input: input, Copy: c.DescribePortfolioRequest}
 }
 
 const opDescribeProduct = "DescribeProduct"
@@ -969,6 +988,7 @@ const opDescribeProduct = "DescribeProduct"
 type DescribeProductRequest struct {
 	*aws.Request
 	Input *DescribeProductInput
+	Copy  func(*DescribeProductInput) DescribeProductRequest
 }
 
 // Send marshals and sends the DescribeProduct API request.
@@ -1009,7 +1029,7 @@ func (c *ServiceCatalog) DescribeProductRequest(input *DescribeProductInput) Des
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeProductRequest{Request: req, Input: input}
+	return DescribeProductRequest{Request: req, Input: input, Copy: c.DescribeProductRequest}
 }
 
 const opDescribeProductAsAdmin = "DescribeProductAsAdmin"
@@ -1018,6 +1038,7 @@ const opDescribeProductAsAdmin = "DescribeProductAsAdmin"
 type DescribeProductAsAdminRequest struct {
 	*aws.Request
 	Input *DescribeProductAsAdminInput
+	Copy  func(*DescribeProductAsAdminInput) DescribeProductAsAdminRequest
 }
 
 // Send marshals and sends the DescribeProductAsAdmin API request.
@@ -1059,7 +1080,7 @@ func (c *ServiceCatalog) DescribeProductAsAdminRequest(input *DescribeProductAsA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeProductAsAdminRequest{Request: req, Input: input}
+	return DescribeProductAsAdminRequest{Request: req, Input: input, Copy: c.DescribeProductAsAdminRequest}
 }
 
 const opDescribeProductView = "DescribeProductView"
@@ -1068,6 +1089,7 @@ const opDescribeProductView = "DescribeProductView"
 type DescribeProductViewRequest struct {
 	*aws.Request
 	Input *DescribeProductViewInput
+	Copy  func(*DescribeProductViewInput) DescribeProductViewRequest
 }
 
 // Send marshals and sends the DescribeProductView API request.
@@ -1108,7 +1130,7 @@ func (c *ServiceCatalog) DescribeProductViewRequest(input *DescribeProductViewIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeProductViewRequest{Request: req, Input: input}
+	return DescribeProductViewRequest{Request: req, Input: input, Copy: c.DescribeProductViewRequest}
 }
 
 const opDescribeProvisionedProduct = "DescribeProvisionedProduct"
@@ -1117,6 +1139,7 @@ const opDescribeProvisionedProduct = "DescribeProvisionedProduct"
 type DescribeProvisionedProductRequest struct {
 	*aws.Request
 	Input *DescribeProvisionedProductInput
+	Copy  func(*DescribeProvisionedProductInput) DescribeProvisionedProductRequest
 }
 
 // Send marshals and sends the DescribeProvisionedProduct API request.
@@ -1157,7 +1180,7 @@ func (c *ServiceCatalog) DescribeProvisionedProductRequest(input *DescribeProvis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeProvisionedProductRequest{Request: req, Input: input}
+	return DescribeProvisionedProductRequest{Request: req, Input: input, Copy: c.DescribeProvisionedProductRequest}
 }
 
 const opDescribeProvisioningArtifact = "DescribeProvisioningArtifact"
@@ -1166,6 +1189,7 @@ const opDescribeProvisioningArtifact = "DescribeProvisioningArtifact"
 type DescribeProvisioningArtifactRequest struct {
 	*aws.Request
 	Input *DescribeProvisioningArtifactInput
+	Copy  func(*DescribeProvisioningArtifactInput) DescribeProvisioningArtifactRequest
 }
 
 // Send marshals and sends the DescribeProvisioningArtifact API request.
@@ -1207,7 +1231,7 @@ func (c *ServiceCatalog) DescribeProvisioningArtifactRequest(input *DescribeProv
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeProvisioningArtifactRequest{Request: req, Input: input}
+	return DescribeProvisioningArtifactRequest{Request: req, Input: input, Copy: c.DescribeProvisioningArtifactRequest}
 }
 
 const opDescribeProvisioningParameters = "DescribeProvisioningParameters"
@@ -1216,6 +1240,7 @@ const opDescribeProvisioningParameters = "DescribeProvisioningParameters"
 type DescribeProvisioningParametersRequest struct {
 	*aws.Request
 	Input *DescribeProvisioningParametersInput
+	Copy  func(*DescribeProvisioningParametersInput) DescribeProvisioningParametersRequest
 }
 
 // Send marshals and sends the DescribeProvisioningParameters API request.
@@ -1264,7 +1289,7 @@ func (c *ServiceCatalog) DescribeProvisioningParametersRequest(input *DescribePr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeProvisioningParametersRequest{Request: req, Input: input}
+	return DescribeProvisioningParametersRequest{Request: req, Input: input, Copy: c.DescribeProvisioningParametersRequest}
 }
 
 const opDescribeRecord = "DescribeRecord"
@@ -1273,6 +1298,7 @@ const opDescribeRecord = "DescribeRecord"
 type DescribeRecordRequest struct {
 	*aws.Request
 	Input *DescribeRecordInput
+	Copy  func(*DescribeRecordInput) DescribeRecordRequest
 }
 
 // Send marshals and sends the DescribeRecord API request.
@@ -1316,7 +1342,7 @@ func (c *ServiceCatalog) DescribeRecordRequest(input *DescribeRecordInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRecordRequest{Request: req, Input: input}
+	return DescribeRecordRequest{Request: req, Input: input, Copy: c.DescribeRecordRequest}
 }
 
 const opDescribeTagOption = "DescribeTagOption"
@@ -1325,6 +1351,7 @@ const opDescribeTagOption = "DescribeTagOption"
 type DescribeTagOptionRequest struct {
 	*aws.Request
 	Input *DescribeTagOptionInput
+	Copy  func(*DescribeTagOptionInput) DescribeTagOptionRequest
 }
 
 // Send marshals and sends the DescribeTagOption API request.
@@ -1365,7 +1392,7 @@ func (c *ServiceCatalog) DescribeTagOptionRequest(input *DescribeTagOptionInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagOptionRequest{Request: req, Input: input}
+	return DescribeTagOptionRequest{Request: req, Input: input, Copy: c.DescribeTagOptionRequest}
 }
 
 const opDisassociatePrincipalFromPortfolio = "DisassociatePrincipalFromPortfolio"
@@ -1374,6 +1401,7 @@ const opDisassociatePrincipalFromPortfolio = "DisassociatePrincipalFromPortfolio
 type DisassociatePrincipalFromPortfolioRequest struct {
 	*aws.Request
 	Input *DisassociatePrincipalFromPortfolioInput
+	Copy  func(*DisassociatePrincipalFromPortfolioInput) DisassociatePrincipalFromPortfolioRequest
 }
 
 // Send marshals and sends the DisassociatePrincipalFromPortfolio API request.
@@ -1414,7 +1442,7 @@ func (c *ServiceCatalog) DisassociatePrincipalFromPortfolioRequest(input *Disass
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociatePrincipalFromPortfolioRequest{Request: req, Input: input}
+	return DisassociatePrincipalFromPortfolioRequest{Request: req, Input: input, Copy: c.DisassociatePrincipalFromPortfolioRequest}
 }
 
 const opDisassociateProductFromPortfolio = "DisassociateProductFromPortfolio"
@@ -1423,6 +1451,7 @@ const opDisassociateProductFromPortfolio = "DisassociateProductFromPortfolio"
 type DisassociateProductFromPortfolioRequest struct {
 	*aws.Request
 	Input *DisassociateProductFromPortfolioInput
+	Copy  func(*DisassociateProductFromPortfolioInput) DisassociateProductFromPortfolioRequest
 }
 
 // Send marshals and sends the DisassociateProductFromPortfolio API request.
@@ -1463,7 +1492,7 @@ func (c *ServiceCatalog) DisassociateProductFromPortfolioRequest(input *Disassoc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateProductFromPortfolioRequest{Request: req, Input: input}
+	return DisassociateProductFromPortfolioRequest{Request: req, Input: input, Copy: c.DisassociateProductFromPortfolioRequest}
 }
 
 const opDisassociateTagOptionFromResource = "DisassociateTagOptionFromResource"
@@ -1472,6 +1501,7 @@ const opDisassociateTagOptionFromResource = "DisassociateTagOptionFromResource"
 type DisassociateTagOptionFromResourceRequest struct {
 	*aws.Request
 	Input *DisassociateTagOptionFromResourceInput
+	Copy  func(*DisassociateTagOptionFromResourceInput) DisassociateTagOptionFromResourceRequest
 }
 
 // Send marshals and sends the DisassociateTagOptionFromResource API request.
@@ -1512,7 +1542,7 @@ func (c *ServiceCatalog) DisassociateTagOptionFromResourceRequest(input *Disasso
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisassociateTagOptionFromResourceRequest{Request: req, Input: input}
+	return DisassociateTagOptionFromResourceRequest{Request: req, Input: input, Copy: c.DisassociateTagOptionFromResourceRequest}
 }
 
 const opListAcceptedPortfolioShares = "ListAcceptedPortfolioShares"
@@ -1521,6 +1551,7 @@ const opListAcceptedPortfolioShares = "ListAcceptedPortfolioShares"
 type ListAcceptedPortfolioSharesRequest struct {
 	*aws.Request
 	Input *ListAcceptedPortfolioSharesInput
+	Copy  func(*ListAcceptedPortfolioSharesInput) ListAcceptedPortfolioSharesRequest
 }
 
 // Send marshals and sends the ListAcceptedPortfolioShares API request.
@@ -1567,57 +1598,53 @@ func (c *ServiceCatalog) ListAcceptedPortfolioSharesRequest(input *ListAcceptedP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAcceptedPortfolioSharesRequest{Request: req, Input: input}
+	return ListAcceptedPortfolioSharesRequest{Request: req, Input: input, Copy: c.ListAcceptedPortfolioSharesRequest}
 }
 
-// ListAcceptedPortfolioSharesPages iterates over the pages of a ListAcceptedPortfolioShares operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAcceptedPortfolioShares method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAcceptedPortfolioSharesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAcceptedPortfolioShares operation.
-//    pageNum := 0
-//    err := client.ListAcceptedPortfolioSharesPages(params,
-//        func(page *ListAcceptedPortfolioSharesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAcceptedPortfolioSharesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ServiceCatalog) ListAcceptedPortfolioSharesPages(input *ListAcceptedPortfolioSharesInput, fn func(*ListAcceptedPortfolioSharesOutput, bool) bool) error {
-	return c.ListAcceptedPortfolioSharesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAcceptedPortfolioSharesRequest) Paginate(opts ...aws.Option) ListAcceptedPortfolioSharesPager {
+	return ListAcceptedPortfolioSharesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAcceptedPortfolioSharesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAcceptedPortfolioSharesPagesWithContext same as ListAcceptedPortfolioSharesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListAcceptedPortfolioSharesPagesWithContext(ctx aws.Context, input *ListAcceptedPortfolioSharesInput, fn func(*ListAcceptedPortfolioSharesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAcceptedPortfolioSharesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAcceptedPortfolioSharesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAcceptedPortfolioSharesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAcceptedPortfolioSharesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAcceptedPortfolioSharesPager struct {
+	aws.Pager
+}
+
+func (p *ListAcceptedPortfolioSharesPager) CurrentPage() *ListAcceptedPortfolioSharesOutput {
+	return p.Pager.CurrentPage().(*ListAcceptedPortfolioSharesOutput)
 }
 
 const opListConstraintsForPortfolio = "ListConstraintsForPortfolio"
@@ -1626,6 +1653,7 @@ const opListConstraintsForPortfolio = "ListConstraintsForPortfolio"
 type ListConstraintsForPortfolioRequest struct {
 	*aws.Request
 	Input *ListConstraintsForPortfolioInput
+	Copy  func(*ListConstraintsForPortfolioInput) ListConstraintsForPortfolioRequest
 }
 
 // Send marshals and sends the ListConstraintsForPortfolio API request.
@@ -1672,57 +1700,53 @@ func (c *ServiceCatalog) ListConstraintsForPortfolioRequest(input *ListConstrain
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListConstraintsForPortfolioRequest{Request: req, Input: input}
+	return ListConstraintsForPortfolioRequest{Request: req, Input: input, Copy: c.ListConstraintsForPortfolioRequest}
 }
 
-// ListConstraintsForPortfolioPages iterates over the pages of a ListConstraintsForPortfolio operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListConstraintsForPortfolio method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListConstraintsForPortfolioRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListConstraintsForPortfolio operation.
-//    pageNum := 0
-//    err := client.ListConstraintsForPortfolioPages(params,
-//        func(page *ListConstraintsForPortfolioOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListConstraintsForPortfolioRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ServiceCatalog) ListConstraintsForPortfolioPages(input *ListConstraintsForPortfolioInput, fn func(*ListConstraintsForPortfolioOutput, bool) bool) error {
-	return c.ListConstraintsForPortfolioPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListConstraintsForPortfolioRequest) Paginate(opts ...aws.Option) ListConstraintsForPortfolioPager {
+	return ListConstraintsForPortfolioPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListConstraintsForPortfolioInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListConstraintsForPortfolioPagesWithContext same as ListConstraintsForPortfolioPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListConstraintsForPortfolioPagesWithContext(ctx aws.Context, input *ListConstraintsForPortfolioInput, fn func(*ListConstraintsForPortfolioOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListConstraintsForPortfolioInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListConstraintsForPortfolioRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListConstraintsForPortfolioOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListConstraintsForPortfolioPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListConstraintsForPortfolioPager struct {
+	aws.Pager
+}
+
+func (p *ListConstraintsForPortfolioPager) CurrentPage() *ListConstraintsForPortfolioOutput {
+	return p.Pager.CurrentPage().(*ListConstraintsForPortfolioOutput)
 }
 
 const opListLaunchPaths = "ListLaunchPaths"
@@ -1731,6 +1755,7 @@ const opListLaunchPaths = "ListLaunchPaths"
 type ListLaunchPathsRequest struct {
 	*aws.Request
 	Input *ListLaunchPathsInput
+	Copy  func(*ListLaunchPathsInput) ListLaunchPathsRequest
 }
 
 // Send marshals and sends the ListLaunchPaths API request.
@@ -1779,57 +1804,53 @@ func (c *ServiceCatalog) ListLaunchPathsRequest(input *ListLaunchPathsInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListLaunchPathsRequest{Request: req, Input: input}
+	return ListLaunchPathsRequest{Request: req, Input: input, Copy: c.ListLaunchPathsRequest}
 }
 
-// ListLaunchPathsPages iterates over the pages of a ListLaunchPaths operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListLaunchPaths method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListLaunchPathsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListLaunchPaths operation.
-//    pageNum := 0
-//    err := client.ListLaunchPathsPages(params,
-//        func(page *ListLaunchPathsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListLaunchPathsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ServiceCatalog) ListLaunchPathsPages(input *ListLaunchPathsInput, fn func(*ListLaunchPathsOutput, bool) bool) error {
-	return c.ListLaunchPathsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListLaunchPathsRequest) Paginate(opts ...aws.Option) ListLaunchPathsPager {
+	return ListLaunchPathsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListLaunchPathsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListLaunchPathsPagesWithContext same as ListLaunchPathsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListLaunchPathsPagesWithContext(ctx aws.Context, input *ListLaunchPathsInput, fn func(*ListLaunchPathsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListLaunchPathsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListLaunchPathsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListLaunchPathsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListLaunchPathsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListLaunchPathsPager struct {
+	aws.Pager
+}
+
+func (p *ListLaunchPathsPager) CurrentPage() *ListLaunchPathsOutput {
+	return p.Pager.CurrentPage().(*ListLaunchPathsOutput)
 }
 
 const opListPortfolioAccess = "ListPortfolioAccess"
@@ -1838,6 +1859,7 @@ const opListPortfolioAccess = "ListPortfolioAccess"
 type ListPortfolioAccessRequest struct {
 	*aws.Request
 	Input *ListPortfolioAccessInput
+	Copy  func(*ListPortfolioAccessInput) ListPortfolioAccessRequest
 }
 
 // Send marshals and sends the ListPortfolioAccess API request.
@@ -1878,7 +1900,7 @@ func (c *ServiceCatalog) ListPortfolioAccessRequest(input *ListPortfolioAccessIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPortfolioAccessRequest{Request: req, Input: input}
+	return ListPortfolioAccessRequest{Request: req, Input: input, Copy: c.ListPortfolioAccessRequest}
 }
 
 const opListPortfolios = "ListPortfolios"
@@ -1887,6 +1909,7 @@ const opListPortfolios = "ListPortfolios"
 type ListPortfoliosRequest struct {
 	*aws.Request
 	Input *ListPortfoliosInput
+	Copy  func(*ListPortfoliosInput) ListPortfoliosRequest
 }
 
 // Send marshals and sends the ListPortfolios API request.
@@ -1933,57 +1956,53 @@ func (c *ServiceCatalog) ListPortfoliosRequest(input *ListPortfoliosInput) ListP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPortfoliosRequest{Request: req, Input: input}
+	return ListPortfoliosRequest{Request: req, Input: input, Copy: c.ListPortfoliosRequest}
 }
 
-// ListPortfoliosPages iterates over the pages of a ListPortfolios operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPortfolios method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPortfoliosRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPortfolios operation.
-//    pageNum := 0
-//    err := client.ListPortfoliosPages(params,
-//        func(page *ListPortfoliosOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPortfoliosRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ServiceCatalog) ListPortfoliosPages(input *ListPortfoliosInput, fn func(*ListPortfoliosOutput, bool) bool) error {
-	return c.ListPortfoliosPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPortfoliosRequest) Paginate(opts ...aws.Option) ListPortfoliosPager {
+	return ListPortfoliosPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPortfoliosInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListPortfoliosPagesWithContext same as ListPortfoliosPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfoliosPagesWithContext(ctx aws.Context, input *ListPortfoliosInput, fn func(*ListPortfoliosOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPortfoliosInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListPortfoliosRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPortfoliosOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPortfoliosPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPortfoliosPager struct {
+	aws.Pager
+}
+
+func (p *ListPortfoliosPager) CurrentPage() *ListPortfoliosOutput {
+	return p.Pager.CurrentPage().(*ListPortfoliosOutput)
 }
 
 const opListPortfoliosForProduct = "ListPortfoliosForProduct"
@@ -1992,6 +2011,7 @@ const opListPortfoliosForProduct = "ListPortfoliosForProduct"
 type ListPortfoliosForProductRequest struct {
 	*aws.Request
 	Input *ListPortfoliosForProductInput
+	Copy  func(*ListPortfoliosForProductInput) ListPortfoliosForProductRequest
 }
 
 // Send marshals and sends the ListPortfoliosForProduct API request.
@@ -2038,57 +2058,53 @@ func (c *ServiceCatalog) ListPortfoliosForProductRequest(input *ListPortfoliosFo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPortfoliosForProductRequest{Request: req, Input: input}
+	return ListPortfoliosForProductRequest{Request: req, Input: input, Copy: c.ListPortfoliosForProductRequest}
 }
 
-// ListPortfoliosForProductPages iterates over the pages of a ListPortfoliosForProduct operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPortfoliosForProduct method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPortfoliosForProductRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPortfoliosForProduct operation.
-//    pageNum := 0
-//    err := client.ListPortfoliosForProductPages(params,
-//        func(page *ListPortfoliosForProductOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPortfoliosForProductRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ServiceCatalog) ListPortfoliosForProductPages(input *ListPortfoliosForProductInput, fn func(*ListPortfoliosForProductOutput, bool) bool) error {
-	return c.ListPortfoliosForProductPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPortfoliosForProductRequest) Paginate(opts ...aws.Option) ListPortfoliosForProductPager {
+	return ListPortfoliosForProductPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPortfoliosForProductInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListPortfoliosForProductPagesWithContext same as ListPortfoliosForProductPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListPortfoliosForProductPagesWithContext(ctx aws.Context, input *ListPortfoliosForProductInput, fn func(*ListPortfoliosForProductOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPortfoliosForProductInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListPortfoliosForProductRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPortfoliosForProductOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPortfoliosForProductPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPortfoliosForProductPager struct {
+	aws.Pager
+}
+
+func (p *ListPortfoliosForProductPager) CurrentPage() *ListPortfoliosForProductOutput {
+	return p.Pager.CurrentPage().(*ListPortfoliosForProductOutput)
 }
 
 const opListPrincipalsForPortfolio = "ListPrincipalsForPortfolio"
@@ -2097,6 +2113,7 @@ const opListPrincipalsForPortfolio = "ListPrincipalsForPortfolio"
 type ListPrincipalsForPortfolioRequest struct {
 	*aws.Request
 	Input *ListPrincipalsForPortfolioInput
+	Copy  func(*ListPrincipalsForPortfolioInput) ListPrincipalsForPortfolioRequest
 }
 
 // Send marshals and sends the ListPrincipalsForPortfolio API request.
@@ -2143,57 +2160,53 @@ func (c *ServiceCatalog) ListPrincipalsForPortfolioRequest(input *ListPrincipals
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPrincipalsForPortfolioRequest{Request: req, Input: input}
+	return ListPrincipalsForPortfolioRequest{Request: req, Input: input, Copy: c.ListPrincipalsForPortfolioRequest}
 }
 
-// ListPrincipalsForPortfolioPages iterates over the pages of a ListPrincipalsForPortfolio operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPrincipalsForPortfolio method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPrincipalsForPortfolioRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPrincipalsForPortfolio operation.
-//    pageNum := 0
-//    err := client.ListPrincipalsForPortfolioPages(params,
-//        func(page *ListPrincipalsForPortfolioOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPrincipalsForPortfolioRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ServiceCatalog) ListPrincipalsForPortfolioPages(input *ListPrincipalsForPortfolioInput, fn func(*ListPrincipalsForPortfolioOutput, bool) bool) error {
-	return c.ListPrincipalsForPortfolioPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPrincipalsForPortfolioRequest) Paginate(opts ...aws.Option) ListPrincipalsForPortfolioPager {
+	return ListPrincipalsForPortfolioPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPrincipalsForPortfolioInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListPrincipalsForPortfolioPagesWithContext same as ListPrincipalsForPortfolioPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListPrincipalsForPortfolioPagesWithContext(ctx aws.Context, input *ListPrincipalsForPortfolioInput, fn func(*ListPrincipalsForPortfolioOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPrincipalsForPortfolioInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListPrincipalsForPortfolioRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPrincipalsForPortfolioOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPrincipalsForPortfolioPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPrincipalsForPortfolioPager struct {
+	aws.Pager
+}
+
+func (p *ListPrincipalsForPortfolioPager) CurrentPage() *ListPrincipalsForPortfolioOutput {
+	return p.Pager.CurrentPage().(*ListPrincipalsForPortfolioOutput)
 }
 
 const opListProvisioningArtifacts = "ListProvisioningArtifacts"
@@ -2202,6 +2215,7 @@ const opListProvisioningArtifacts = "ListProvisioningArtifacts"
 type ListProvisioningArtifactsRequest struct {
 	*aws.Request
 	Input *ListProvisioningArtifactsInput
+	Copy  func(*ListProvisioningArtifactsInput) ListProvisioningArtifactsRequest
 }
 
 // Send marshals and sends the ListProvisioningArtifacts API request.
@@ -2243,7 +2257,7 @@ func (c *ServiceCatalog) ListProvisioningArtifactsRequest(input *ListProvisionin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListProvisioningArtifactsRequest{Request: req, Input: input}
+	return ListProvisioningArtifactsRequest{Request: req, Input: input, Copy: c.ListProvisioningArtifactsRequest}
 }
 
 const opListRecordHistory = "ListRecordHistory"
@@ -2252,6 +2266,7 @@ const opListRecordHistory = "ListRecordHistory"
 type ListRecordHistoryRequest struct {
 	*aws.Request
 	Input *ListRecordHistoryInput
+	Copy  func(*ListRecordHistoryInput) ListRecordHistoryRequest
 }
 
 // Send marshals and sends the ListRecordHistory API request.
@@ -2292,7 +2307,7 @@ func (c *ServiceCatalog) ListRecordHistoryRequest(input *ListRecordHistoryInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListRecordHistoryRequest{Request: req, Input: input}
+	return ListRecordHistoryRequest{Request: req, Input: input, Copy: c.ListRecordHistoryRequest}
 }
 
 const opListResourcesForTagOption = "ListResourcesForTagOption"
@@ -2301,6 +2316,7 @@ const opListResourcesForTagOption = "ListResourcesForTagOption"
 type ListResourcesForTagOptionRequest struct {
 	*aws.Request
 	Input *ListResourcesForTagOptionInput
+	Copy  func(*ListResourcesForTagOptionInput) ListResourcesForTagOptionRequest
 }
 
 // Send marshals and sends the ListResourcesForTagOption API request.
@@ -2347,57 +2363,53 @@ func (c *ServiceCatalog) ListResourcesForTagOptionRequest(input *ListResourcesFo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourcesForTagOptionRequest{Request: req, Input: input}
+	return ListResourcesForTagOptionRequest{Request: req, Input: input, Copy: c.ListResourcesForTagOptionRequest}
 }
 
-// ListResourcesForTagOptionPages iterates over the pages of a ListResourcesForTagOption operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListResourcesForTagOption method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListResourcesForTagOptionRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListResourcesForTagOption operation.
-//    pageNum := 0
-//    err := client.ListResourcesForTagOptionPages(params,
-//        func(page *ListResourcesForTagOptionOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListResourcesForTagOptionRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ServiceCatalog) ListResourcesForTagOptionPages(input *ListResourcesForTagOptionInput, fn func(*ListResourcesForTagOptionOutput, bool) bool) error {
-	return c.ListResourcesForTagOptionPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListResourcesForTagOptionRequest) Paginate(opts ...aws.Option) ListResourcesForTagOptionPager {
+	return ListResourcesForTagOptionPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListResourcesForTagOptionInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListResourcesForTagOptionPagesWithContext same as ListResourcesForTagOptionPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListResourcesForTagOptionPagesWithContext(ctx aws.Context, input *ListResourcesForTagOptionInput, fn func(*ListResourcesForTagOptionOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListResourcesForTagOptionInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListResourcesForTagOptionRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListResourcesForTagOptionOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListResourcesForTagOptionPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListResourcesForTagOptionPager struct {
+	aws.Pager
+}
+
+func (p *ListResourcesForTagOptionPager) CurrentPage() *ListResourcesForTagOptionOutput {
+	return p.Pager.CurrentPage().(*ListResourcesForTagOptionOutput)
 }
 
 const opListTagOptions = "ListTagOptions"
@@ -2406,6 +2418,7 @@ const opListTagOptions = "ListTagOptions"
 type ListTagOptionsRequest struct {
 	*aws.Request
 	Input *ListTagOptionsInput
+	Copy  func(*ListTagOptionsInput) ListTagOptionsRequest
 }
 
 // Send marshals and sends the ListTagOptions API request.
@@ -2452,57 +2465,53 @@ func (c *ServiceCatalog) ListTagOptionsRequest(input *ListTagOptionsInput) ListT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagOptionsRequest{Request: req, Input: input}
+	return ListTagOptionsRequest{Request: req, Input: input, Copy: c.ListTagOptionsRequest}
 }
 
-// ListTagOptionsPages iterates over the pages of a ListTagOptions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTagOptions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTagOptionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTagOptions operation.
-//    pageNum := 0
-//    err := client.ListTagOptionsPages(params,
-//        func(page *ListTagOptionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTagOptionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ServiceCatalog) ListTagOptionsPages(input *ListTagOptionsInput, fn func(*ListTagOptionsOutput, bool) bool) error {
-	return c.ListTagOptionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListTagOptionsRequest) Paginate(opts ...aws.Option) ListTagOptionsPager {
+	return ListTagOptionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTagOptionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListTagOptionsPagesWithContext same as ListTagOptionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) ListTagOptionsPagesWithContext(ctx aws.Context, input *ListTagOptionsInput, fn func(*ListTagOptionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTagOptionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListTagOptionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTagOptionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTagOptionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTagOptionsPager struct {
+	aws.Pager
+}
+
+func (p *ListTagOptionsPager) CurrentPage() *ListTagOptionsOutput {
+	return p.Pager.CurrentPage().(*ListTagOptionsOutput)
 }
 
 const opProvisionProduct = "ProvisionProduct"
@@ -2511,6 +2520,7 @@ const opProvisionProduct = "ProvisionProduct"
 type ProvisionProductRequest struct {
 	*aws.Request
 	Input *ProvisionProductInput
+	Copy  func(*ProvisionProductInput) ProvisionProductRequest
 }
 
 // Send marshals and sends the ProvisionProduct API request.
@@ -2561,7 +2571,7 @@ func (c *ServiceCatalog) ProvisionProductRequest(input *ProvisionProductInput) P
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ProvisionProductRequest{Request: req, Input: input}
+	return ProvisionProductRequest{Request: req, Input: input, Copy: c.ProvisionProductRequest}
 }
 
 const opRejectPortfolioShare = "RejectPortfolioShare"
@@ -2570,6 +2580,7 @@ const opRejectPortfolioShare = "RejectPortfolioShare"
 type RejectPortfolioShareRequest struct {
 	*aws.Request
 	Input *RejectPortfolioShareInput
+	Copy  func(*RejectPortfolioShareInput) RejectPortfolioShareRequest
 }
 
 // Send marshals and sends the RejectPortfolioShare API request.
@@ -2610,7 +2621,7 @@ func (c *ServiceCatalog) RejectPortfolioShareRequest(input *RejectPortfolioShare
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RejectPortfolioShareRequest{Request: req, Input: input}
+	return RejectPortfolioShareRequest{Request: req, Input: input, Copy: c.RejectPortfolioShareRequest}
 }
 
 const opScanProvisionedProducts = "ScanProvisionedProducts"
@@ -2619,6 +2630,7 @@ const opScanProvisionedProducts = "ScanProvisionedProducts"
 type ScanProvisionedProductsRequest struct {
 	*aws.Request
 	Input *ScanProvisionedProductsInput
+	Copy  func(*ScanProvisionedProductsInput) ScanProvisionedProductsRequest
 }
 
 // Send marshals and sends the ScanProvisionedProducts API request.
@@ -2659,7 +2671,7 @@ func (c *ServiceCatalog) ScanProvisionedProductsRequest(input *ScanProvisionedPr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ScanProvisionedProductsRequest{Request: req, Input: input}
+	return ScanProvisionedProductsRequest{Request: req, Input: input, Copy: c.ScanProvisionedProductsRequest}
 }
 
 const opSearchProducts = "SearchProducts"
@@ -2668,6 +2680,7 @@ const opSearchProducts = "SearchProducts"
 type SearchProductsRequest struct {
 	*aws.Request
 	Input *SearchProductsInput
+	Copy  func(*SearchProductsInput) SearchProductsRequest
 }
 
 // Send marshals and sends the SearchProducts API request.
@@ -2714,57 +2727,53 @@ func (c *ServiceCatalog) SearchProductsRequest(input *SearchProductsInput) Searc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchProductsRequest{Request: req, Input: input}
+	return SearchProductsRequest{Request: req, Input: input, Copy: c.SearchProductsRequest}
 }
 
-// SearchProductsPages iterates over the pages of a SearchProducts operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See SearchProducts method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SearchProductsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a SearchProducts operation.
-//    pageNum := 0
-//    err := client.SearchProductsPages(params,
-//        func(page *SearchProductsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SearchProductsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ServiceCatalog) SearchProductsPages(input *SearchProductsInput, fn func(*SearchProductsOutput, bool) bool) error {
-	return c.SearchProductsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchProductsRequest) Paginate(opts ...aws.Option) SearchProductsPager {
+	return SearchProductsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchProductsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// SearchProductsPagesWithContext same as SearchProductsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) SearchProductsPagesWithContext(ctx aws.Context, input *SearchProductsInput, fn func(*SearchProductsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *SearchProductsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.SearchProductsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchProductsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchProductsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchProductsPager struct {
+	aws.Pager
+}
+
+func (p *SearchProductsPager) CurrentPage() *SearchProductsOutput {
+	return p.Pager.CurrentPage().(*SearchProductsOutput)
 }
 
 const opSearchProductsAsAdmin = "SearchProductsAsAdmin"
@@ -2773,6 +2782,7 @@ const opSearchProductsAsAdmin = "SearchProductsAsAdmin"
 type SearchProductsAsAdminRequest struct {
 	*aws.Request
 	Input *SearchProductsAsAdminInput
+	Copy  func(*SearchProductsAsAdminInput) SearchProductsAsAdminRequest
 }
 
 // Send marshals and sends the SearchProductsAsAdmin API request.
@@ -2819,57 +2829,53 @@ func (c *ServiceCatalog) SearchProductsAsAdminRequest(input *SearchProductsAsAdm
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SearchProductsAsAdminRequest{Request: req, Input: input}
+	return SearchProductsAsAdminRequest{Request: req, Input: input, Copy: c.SearchProductsAsAdminRequest}
 }
 
-// SearchProductsAsAdminPages iterates over the pages of a SearchProductsAsAdmin operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See SearchProductsAsAdmin method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a SearchProductsAsAdminRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a SearchProductsAsAdmin operation.
-//    pageNum := 0
-//    err := client.SearchProductsAsAdminPages(params,
-//        func(page *SearchProductsAsAdminOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.SearchProductsAsAdminRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ServiceCatalog) SearchProductsAsAdminPages(input *SearchProductsAsAdminInput, fn func(*SearchProductsAsAdminOutput, bool) bool) error {
-	return c.SearchProductsAsAdminPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchProductsAsAdminRequest) Paginate(opts ...aws.Option) SearchProductsAsAdminPager {
+	return SearchProductsAsAdminPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchProductsAsAdminInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// SearchProductsAsAdminPagesWithContext same as SearchProductsAsAdminPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ServiceCatalog) SearchProductsAsAdminPagesWithContext(ctx aws.Context, input *SearchProductsAsAdminInput, fn func(*SearchProductsAsAdminOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *SearchProductsAsAdminInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.SearchProductsAsAdminRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*SearchProductsAsAdminOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// SearchProductsAsAdminPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchProductsAsAdminPager struct {
+	aws.Pager
+}
+
+func (p *SearchProductsAsAdminPager) CurrentPage() *SearchProductsAsAdminOutput {
+	return p.Pager.CurrentPage().(*SearchProductsAsAdminOutput)
 }
 
 const opTerminateProvisionedProduct = "TerminateProvisionedProduct"
@@ -2878,6 +2884,7 @@ const opTerminateProvisionedProduct = "TerminateProvisionedProduct"
 type TerminateProvisionedProductRequest struct {
 	*aws.Request
 	Input *TerminateProvisionedProductInput
+	Copy  func(*TerminateProvisionedProductInput) TerminateProvisionedProductRequest
 }
 
 // Send marshals and sends the TerminateProvisionedProduct API request.
@@ -2923,7 +2930,7 @@ func (c *ServiceCatalog) TerminateProvisionedProductRequest(input *TerminateProv
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TerminateProvisionedProductRequest{Request: req, Input: input}
+	return TerminateProvisionedProductRequest{Request: req, Input: input, Copy: c.TerminateProvisionedProductRequest}
 }
 
 const opUpdateConstraint = "UpdateConstraint"
@@ -2932,6 +2939,7 @@ const opUpdateConstraint = "UpdateConstraint"
 type UpdateConstraintRequest struct {
 	*aws.Request
 	Input *UpdateConstraintInput
+	Copy  func(*UpdateConstraintInput) UpdateConstraintRequest
 }
 
 // Send marshals and sends the UpdateConstraint API request.
@@ -2972,7 +2980,7 @@ func (c *ServiceCatalog) UpdateConstraintRequest(input *UpdateConstraintInput) U
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateConstraintRequest{Request: req, Input: input}
+	return UpdateConstraintRequest{Request: req, Input: input, Copy: c.UpdateConstraintRequest}
 }
 
 const opUpdatePortfolio = "UpdatePortfolio"
@@ -2981,6 +2989,7 @@ const opUpdatePortfolio = "UpdatePortfolio"
 type UpdatePortfolioRequest struct {
 	*aws.Request
 	Input *UpdatePortfolioInput
+	Copy  func(*UpdatePortfolioInput) UpdatePortfolioRequest
 }
 
 // Send marshals and sends the UpdatePortfolio API request.
@@ -3023,7 +3032,7 @@ func (c *ServiceCatalog) UpdatePortfolioRequest(input *UpdatePortfolioInput) Upd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePortfolioRequest{Request: req, Input: input}
+	return UpdatePortfolioRequest{Request: req, Input: input, Copy: c.UpdatePortfolioRequest}
 }
 
 const opUpdateProduct = "UpdateProduct"
@@ -3032,6 +3041,7 @@ const opUpdateProduct = "UpdateProduct"
 type UpdateProductRequest struct {
 	*aws.Request
 	Input *UpdateProductInput
+	Copy  func(*UpdateProductInput) UpdateProductRequest
 }
 
 // Send marshals and sends the UpdateProduct API request.
@@ -3072,7 +3082,7 @@ func (c *ServiceCatalog) UpdateProductRequest(input *UpdateProductInput) UpdateP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateProductRequest{Request: req, Input: input}
+	return UpdateProductRequest{Request: req, Input: input, Copy: c.UpdateProductRequest}
 }
 
 const opUpdateProvisionedProduct = "UpdateProvisionedProduct"
@@ -3081,6 +3091,7 @@ const opUpdateProvisionedProduct = "UpdateProvisionedProduct"
 type UpdateProvisionedProductRequest struct {
 	*aws.Request
 	Input *UpdateProvisionedProductInput
+	Copy  func(*UpdateProvisionedProductInput) UpdateProvisionedProductRequest
 }
 
 // Send marshals and sends the UpdateProvisionedProduct API request.
@@ -3128,7 +3139,7 @@ func (c *ServiceCatalog) UpdateProvisionedProductRequest(input *UpdateProvisione
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateProvisionedProductRequest{Request: req, Input: input}
+	return UpdateProvisionedProductRequest{Request: req, Input: input, Copy: c.UpdateProvisionedProductRequest}
 }
 
 const opUpdateProvisioningArtifact = "UpdateProvisioningArtifact"
@@ -3137,6 +3148,7 @@ const opUpdateProvisioningArtifact = "UpdateProvisioningArtifact"
 type UpdateProvisioningArtifactRequest struct {
 	*aws.Request
 	Input *UpdateProvisioningArtifactInput
+	Copy  func(*UpdateProvisioningArtifactInput) UpdateProvisioningArtifactRequest
 }
 
 // Send marshals and sends the UpdateProvisioningArtifact API request.
@@ -3181,7 +3193,7 @@ func (c *ServiceCatalog) UpdateProvisioningArtifactRequest(input *UpdateProvisio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateProvisioningArtifactRequest{Request: req, Input: input}
+	return UpdateProvisioningArtifactRequest{Request: req, Input: input, Copy: c.UpdateProvisioningArtifactRequest}
 }
 
 const opUpdateTagOption = "UpdateTagOption"
@@ -3190,6 +3202,7 @@ const opUpdateTagOption = "UpdateTagOption"
 type UpdateTagOptionRequest struct {
 	*aws.Request
 	Input *UpdateTagOptionInput
+	Copy  func(*UpdateTagOptionInput) UpdateTagOptionRequest
 }
 
 // Send marshals and sends the UpdateTagOption API request.
@@ -3230,7 +3243,7 @@ func (c *ServiceCatalog) UpdateTagOptionRequest(input *UpdateTagOptionInput) Upd
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTagOptionRequest{Request: req, Input: input}
+	return UpdateTagOptionRequest{Request: req, Input: input, Copy: c.UpdateTagOptionRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/AcceptPortfolioShareInput

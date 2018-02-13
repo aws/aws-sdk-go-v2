@@ -15,6 +15,7 @@ const opCreateContainer = "CreateContainer"
 type CreateContainerRequest struct {
 	*aws.Request
 	Input *CreateContainerInput
+	Copy  func(*CreateContainerInput) CreateContainerRequest
 }
 
 // Send marshals and sends the CreateContainer API request.
@@ -56,7 +57,7 @@ func (c *MediaStore) CreateContainerRequest(input *CreateContainerInput) CreateC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateContainerRequest{Request: req, Input: input}
+	return CreateContainerRequest{Request: req, Input: input, Copy: c.CreateContainerRequest}
 }
 
 const opDeleteContainer = "DeleteContainer"
@@ -65,6 +66,7 @@ const opDeleteContainer = "DeleteContainer"
 type DeleteContainerRequest struct {
 	*aws.Request
 	Input *DeleteContainerInput
+	Copy  func(*DeleteContainerInput) DeleteContainerRequest
 }
 
 // Send marshals and sends the DeleteContainer API request.
@@ -107,7 +109,7 @@ func (c *MediaStore) DeleteContainerRequest(input *DeleteContainerInput) DeleteC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteContainerRequest{Request: req, Input: input}
+	return DeleteContainerRequest{Request: req, Input: input, Copy: c.DeleteContainerRequest}
 }
 
 const opDeleteContainerPolicy = "DeleteContainerPolicy"
@@ -116,6 +118,7 @@ const opDeleteContainerPolicy = "DeleteContainerPolicy"
 type DeleteContainerPolicyRequest struct {
 	*aws.Request
 	Input *DeleteContainerPolicyInput
+	Copy  func(*DeleteContainerPolicyInput) DeleteContainerPolicyRequest
 }
 
 // Send marshals and sends the DeleteContainerPolicy API request.
@@ -156,7 +159,7 @@ func (c *MediaStore) DeleteContainerPolicyRequest(input *DeleteContainerPolicyIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteContainerPolicyRequest{Request: req, Input: input}
+	return DeleteContainerPolicyRequest{Request: req, Input: input, Copy: c.DeleteContainerPolicyRequest}
 }
 
 const opDescribeContainer = "DescribeContainer"
@@ -165,6 +168,7 @@ const opDescribeContainer = "DescribeContainer"
 type DescribeContainerRequest struct {
 	*aws.Request
 	Input *DescribeContainerInput
+	Copy  func(*DescribeContainerInput) DescribeContainerRequest
 }
 
 // Send marshals and sends the DescribeContainer API request.
@@ -207,7 +211,7 @@ func (c *MediaStore) DescribeContainerRequest(input *DescribeContainerInput) Des
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeContainerRequest{Request: req, Input: input}
+	return DescribeContainerRequest{Request: req, Input: input, Copy: c.DescribeContainerRequest}
 }
 
 const opGetContainerPolicy = "GetContainerPolicy"
@@ -216,6 +220,7 @@ const opGetContainerPolicy = "GetContainerPolicy"
 type GetContainerPolicyRequest struct {
 	*aws.Request
 	Input *GetContainerPolicyInput
+	Copy  func(*GetContainerPolicyInput) GetContainerPolicyRequest
 }
 
 // Send marshals and sends the GetContainerPolicy API request.
@@ -258,7 +263,7 @@ func (c *MediaStore) GetContainerPolicyRequest(input *GetContainerPolicyInput) G
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetContainerPolicyRequest{Request: req, Input: input}
+	return GetContainerPolicyRequest{Request: req, Input: input, Copy: c.GetContainerPolicyRequest}
 }
 
 const opListContainers = "ListContainers"
@@ -267,6 +272,7 @@ const opListContainers = "ListContainers"
 type ListContainersRequest struct {
 	*aws.Request
 	Input *ListContainersInput
+	Copy  func(*ListContainersInput) ListContainersRequest
 }
 
 // Send marshals and sends the ListContainers API request.
@@ -316,7 +322,7 @@ func (c *MediaStore) ListContainersRequest(input *ListContainersInput) ListConta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListContainersRequest{Request: req, Input: input}
+	return ListContainersRequest{Request: req, Input: input, Copy: c.ListContainersRequest}
 }
 
 const opPutContainerPolicy = "PutContainerPolicy"
@@ -325,6 +331,7 @@ const opPutContainerPolicy = "PutContainerPolicy"
 type PutContainerPolicyRequest struct {
 	*aws.Request
 	Input *PutContainerPolicyInput
+	Copy  func(*PutContainerPolicyInput) PutContainerPolicyRequest
 }
 
 // Send marshals and sends the PutContainerPolicy API request.
@@ -372,7 +379,7 @@ func (c *MediaStore) PutContainerPolicyRequest(input *PutContainerPolicyInput) P
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutContainerPolicyRequest{Request: req, Input: input}
+	return PutContainerPolicyRequest{Request: req, Input: input, Copy: c.PutContainerPolicyRequest}
 }
 
 // This section describes operations that you can perform on an AWS Elemental

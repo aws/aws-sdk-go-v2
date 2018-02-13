@@ -9,7 +9,6 @@
 package xrayiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/xray"
 )
 
@@ -65,23 +64,11 @@ import (
 type XRayAPI interface {
 	BatchGetTracesRequest(*xray.BatchGetTracesInput) xray.BatchGetTracesRequest
 
-	BatchGetTracesPages(*xray.BatchGetTracesInput, func(*xray.BatchGetTracesOutput, bool) bool) error
-	BatchGetTracesPagesWithContext(aws.Context, *xray.BatchGetTracesInput, func(*xray.BatchGetTracesOutput, bool) bool, ...aws.Option) error
-
 	GetServiceGraphRequest(*xray.GetServiceGraphInput) xray.GetServiceGraphRequest
-
-	GetServiceGraphPages(*xray.GetServiceGraphInput, func(*xray.GetServiceGraphOutput, bool) bool) error
-	GetServiceGraphPagesWithContext(aws.Context, *xray.GetServiceGraphInput, func(*xray.GetServiceGraphOutput, bool) bool, ...aws.Option) error
 
 	GetTraceGraphRequest(*xray.GetTraceGraphInput) xray.GetTraceGraphRequest
 
-	GetTraceGraphPages(*xray.GetTraceGraphInput, func(*xray.GetTraceGraphOutput, bool) bool) error
-	GetTraceGraphPagesWithContext(aws.Context, *xray.GetTraceGraphInput, func(*xray.GetTraceGraphOutput, bool) bool, ...aws.Option) error
-
 	GetTraceSummariesRequest(*xray.GetTraceSummariesInput) xray.GetTraceSummariesRequest
-
-	GetTraceSummariesPages(*xray.GetTraceSummariesInput, func(*xray.GetTraceSummariesOutput, bool) bool) error
-	GetTraceSummariesPagesWithContext(aws.Context, *xray.GetTraceSummariesInput, func(*xray.GetTraceSummariesOutput, bool) bool, ...aws.Option) error
 
 	PutTelemetryRecordsRequest(*xray.PutTelemetryRecordsInput) xray.PutTelemetryRecordsRequest
 

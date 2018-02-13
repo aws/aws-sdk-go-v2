@@ -679,20 +679,12 @@ var _ {{ .StructName }}API = (*{{ .PackageName }}.{{ .StructName }})(nil)
 // interface{}. Assumes that the interface is being created in a different
 // package than the service API's package.
 func (a *API) InterfaceGoCode() string {
-	var hasPaginator bool
-	for _, op := range a.Operations {
-		if op.Paginator != nil {
-			hasPaginator = true
-			break
-		}
-	}
-
 	a.resetImports()
 	a.imports = map[string]bool{
 		path.Join(a.SvcClientImportPath, a.PackageName()): true,
 	}
 
-	if hasPaginator || len(a.Waiters) > 0 {
+	if len(a.Waiters) > 0 {
 		a.imports["github.com/aws/aws-sdk-go-v2/aws"] = true
 	}
 

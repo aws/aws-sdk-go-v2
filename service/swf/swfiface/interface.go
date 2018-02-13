@@ -9,7 +9,6 @@
 package swfiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/swf"
 )
 
@@ -87,40 +86,19 @@ type SWFAPI interface {
 
 	GetWorkflowExecutionHistoryRequest(*swf.GetWorkflowExecutionHistoryInput) swf.GetWorkflowExecutionHistoryRequest
 
-	GetWorkflowExecutionHistoryPages(*swf.GetWorkflowExecutionHistoryInput, func(*swf.GetWorkflowExecutionHistoryOutput, bool) bool) error
-	GetWorkflowExecutionHistoryPagesWithContext(aws.Context, *swf.GetWorkflowExecutionHistoryInput, func(*swf.GetWorkflowExecutionHistoryOutput, bool) bool, ...aws.Option) error
-
 	ListActivityTypesRequest(*swf.ListActivityTypesInput) swf.ListActivityTypesRequest
-
-	ListActivityTypesPages(*swf.ListActivityTypesInput, func(*swf.ListActivityTypesOutput, bool) bool) error
-	ListActivityTypesPagesWithContext(aws.Context, *swf.ListActivityTypesInput, func(*swf.ListActivityTypesOutput, bool) bool, ...aws.Option) error
 
 	ListClosedWorkflowExecutionsRequest(*swf.ListClosedWorkflowExecutionsInput) swf.ListClosedWorkflowExecutionsRequest
 
-	ListClosedWorkflowExecutionsPages(*swf.ListClosedWorkflowExecutionsInput, func(*swf.ListOpenWorkflowExecutionsOutput, bool) bool) error
-	ListClosedWorkflowExecutionsPagesWithContext(aws.Context, *swf.ListClosedWorkflowExecutionsInput, func(*swf.ListOpenWorkflowExecutionsOutput, bool) bool, ...aws.Option) error
-
 	ListDomainsRequest(*swf.ListDomainsInput) swf.ListDomainsRequest
-
-	ListDomainsPages(*swf.ListDomainsInput, func(*swf.ListDomainsOutput, bool) bool) error
-	ListDomainsPagesWithContext(aws.Context, *swf.ListDomainsInput, func(*swf.ListDomainsOutput, bool) bool, ...aws.Option) error
 
 	ListOpenWorkflowExecutionsRequest(*swf.ListOpenWorkflowExecutionsInput) swf.ListOpenWorkflowExecutionsRequest
 
-	ListOpenWorkflowExecutionsPages(*swf.ListOpenWorkflowExecutionsInput, func(*swf.ListOpenWorkflowExecutionsOutput, bool) bool) error
-	ListOpenWorkflowExecutionsPagesWithContext(aws.Context, *swf.ListOpenWorkflowExecutionsInput, func(*swf.ListOpenWorkflowExecutionsOutput, bool) bool, ...aws.Option) error
-
 	ListWorkflowTypesRequest(*swf.ListWorkflowTypesInput) swf.ListWorkflowTypesRequest
-
-	ListWorkflowTypesPages(*swf.ListWorkflowTypesInput, func(*swf.ListWorkflowTypesOutput, bool) bool) error
-	ListWorkflowTypesPagesWithContext(aws.Context, *swf.ListWorkflowTypesInput, func(*swf.ListWorkflowTypesOutput, bool) bool, ...aws.Option) error
 
 	PollForActivityTaskRequest(*swf.PollForActivityTaskInput) swf.PollForActivityTaskRequest
 
 	PollForDecisionTaskRequest(*swf.PollForDecisionTaskInput) swf.PollForDecisionTaskRequest
-
-	PollForDecisionTaskPages(*swf.PollForDecisionTaskInput, func(*swf.PollForDecisionTaskOutput, bool) bool) error
-	PollForDecisionTaskPagesWithContext(aws.Context, *swf.PollForDecisionTaskInput, func(*swf.PollForDecisionTaskOutput, bool) bool, ...aws.Option) error
 
 	RecordActivityTaskHeartbeatRequest(*swf.RecordActivityTaskHeartbeatInput) swf.RecordActivityTaskHeartbeatRequest
 

@@ -18,6 +18,7 @@ const opCloneReceiptRuleSet = "CloneReceiptRuleSet"
 type CloneReceiptRuleSetRequest struct {
 	*aws.Request
 	Input *CloneReceiptRuleSetInput
+	Copy  func(*CloneReceiptRuleSetInput) CloneReceiptRuleSetRequest
 }
 
 // Send marshals and sends the CloneReceiptRuleSet API request.
@@ -65,7 +66,7 @@ func (c *SES) CloneReceiptRuleSetRequest(input *CloneReceiptRuleSetInput) CloneR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CloneReceiptRuleSetRequest{Request: req, Input: input}
+	return CloneReceiptRuleSetRequest{Request: req, Input: input, Copy: c.CloneReceiptRuleSetRequest}
 }
 
 const opCreateConfigurationSet = "CreateConfigurationSet"
@@ -74,6 +75,7 @@ const opCreateConfigurationSet = "CreateConfigurationSet"
 type CreateConfigurationSetRequest struct {
 	*aws.Request
 	Input *CreateConfigurationSetInput
+	Copy  func(*CreateConfigurationSetInput) CreateConfigurationSetRequest
 }
 
 // Send marshals and sends the CreateConfigurationSet API request.
@@ -119,7 +121,7 @@ func (c *SES) CreateConfigurationSetRequest(input *CreateConfigurationSetInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateConfigurationSetRequest{Request: req, Input: input}
+	return CreateConfigurationSetRequest{Request: req, Input: input, Copy: c.CreateConfigurationSetRequest}
 }
 
 const opCreateConfigurationSetEventDestination = "CreateConfigurationSetEventDestination"
@@ -128,6 +130,7 @@ const opCreateConfigurationSetEventDestination = "CreateConfigurationSetEventDes
 type CreateConfigurationSetEventDestinationRequest struct {
 	*aws.Request
 	Input *CreateConfigurationSetEventDestinationInput
+	Copy  func(*CreateConfigurationSetEventDestinationInput) CreateConfigurationSetEventDestinationRequest
 }
 
 // Send marshals and sends the CreateConfigurationSetEventDestination API request.
@@ -178,7 +181,7 @@ func (c *SES) CreateConfigurationSetEventDestinationRequest(input *CreateConfigu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateConfigurationSetEventDestinationRequest{Request: req, Input: input}
+	return CreateConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.CreateConfigurationSetEventDestinationRequest}
 }
 
 const opCreateConfigurationSetTrackingOptions = "CreateConfigurationSetTrackingOptions"
@@ -187,6 +190,7 @@ const opCreateConfigurationSetTrackingOptions = "CreateConfigurationSetTrackingO
 type CreateConfigurationSetTrackingOptionsRequest struct {
 	*aws.Request
 	Input *CreateConfigurationSetTrackingOptionsInput
+	Copy  func(*CreateConfigurationSetTrackingOptionsInput) CreateConfigurationSetTrackingOptionsRequest
 }
 
 // Send marshals and sends the CreateConfigurationSetTrackingOptions API request.
@@ -234,7 +238,7 @@ func (c *SES) CreateConfigurationSetTrackingOptionsRequest(input *CreateConfigur
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateConfigurationSetTrackingOptionsRequest{Request: req, Input: input}
+	return CreateConfigurationSetTrackingOptionsRequest{Request: req, Input: input, Copy: c.CreateConfigurationSetTrackingOptionsRequest}
 }
 
 const opCreateCustomVerificationEmailTemplate = "CreateCustomVerificationEmailTemplate"
@@ -243,6 +247,7 @@ const opCreateCustomVerificationEmailTemplate = "CreateCustomVerificationEmailTe
 type CreateCustomVerificationEmailTemplateRequest struct {
 	*aws.Request
 	Input *CreateCustomVerificationEmailTemplateInput
+	Copy  func(*CreateCustomVerificationEmailTemplateInput) CreateCustomVerificationEmailTemplateRequest
 }
 
 // Send marshals and sends the CreateCustomVerificationEmailTemplate API request.
@@ -291,7 +296,7 @@ func (c *SES) CreateCustomVerificationEmailTemplateRequest(input *CreateCustomVe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCustomVerificationEmailTemplateRequest{Request: req, Input: input}
+	return CreateCustomVerificationEmailTemplateRequest{Request: req, Input: input, Copy: c.CreateCustomVerificationEmailTemplateRequest}
 }
 
 const opCreateReceiptFilter = "CreateReceiptFilter"
@@ -300,6 +305,7 @@ const opCreateReceiptFilter = "CreateReceiptFilter"
 type CreateReceiptFilterRequest struct {
 	*aws.Request
 	Input *CreateReceiptFilterInput
+	Copy  func(*CreateReceiptFilterInput) CreateReceiptFilterRequest
 }
 
 // Send marshals and sends the CreateReceiptFilter API request.
@@ -345,7 +351,7 @@ func (c *SES) CreateReceiptFilterRequest(input *CreateReceiptFilterInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateReceiptFilterRequest{Request: req, Input: input}
+	return CreateReceiptFilterRequest{Request: req, Input: input, Copy: c.CreateReceiptFilterRequest}
 }
 
 const opCreateReceiptRule = "CreateReceiptRule"
@@ -354,6 +360,7 @@ const opCreateReceiptRule = "CreateReceiptRule"
 type CreateReceiptRuleRequest struct {
 	*aws.Request
 	Input *CreateReceiptRuleInput
+	Copy  func(*CreateReceiptRuleInput) CreateReceiptRuleRequest
 }
 
 // Send marshals and sends the CreateReceiptRule API request.
@@ -399,7 +406,7 @@ func (c *SES) CreateReceiptRuleRequest(input *CreateReceiptRuleInput) CreateRece
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateReceiptRuleRequest{Request: req, Input: input}
+	return CreateReceiptRuleRequest{Request: req, Input: input, Copy: c.CreateReceiptRuleRequest}
 }
 
 const opCreateReceiptRuleSet = "CreateReceiptRuleSet"
@@ -408,6 +415,7 @@ const opCreateReceiptRuleSet = "CreateReceiptRuleSet"
 type CreateReceiptRuleSetRequest struct {
 	*aws.Request
 	Input *CreateReceiptRuleSetInput
+	Copy  func(*CreateReceiptRuleSetInput) CreateReceiptRuleSetRequest
 }
 
 // Send marshals and sends the CreateReceiptRuleSet API request.
@@ -453,7 +461,7 @@ func (c *SES) CreateReceiptRuleSetRequest(input *CreateReceiptRuleSetInput) Crea
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateReceiptRuleSetRequest{Request: req, Input: input}
+	return CreateReceiptRuleSetRequest{Request: req, Input: input, Copy: c.CreateReceiptRuleSetRequest}
 }
 
 const opCreateTemplate = "CreateTemplate"
@@ -462,6 +470,7 @@ const opCreateTemplate = "CreateTemplate"
 type CreateTemplateRequest struct {
 	*aws.Request
 	Input *CreateTemplateInput
+	Copy  func(*CreateTemplateInput) CreateTemplateRequest
 }
 
 // Send marshals and sends the CreateTemplate API request.
@@ -506,7 +515,7 @@ func (c *SES) CreateTemplateRequest(input *CreateTemplateInput) CreateTemplateRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTemplateRequest{Request: req, Input: input}
+	return CreateTemplateRequest{Request: req, Input: input, Copy: c.CreateTemplateRequest}
 }
 
 const opDeleteConfigurationSet = "DeleteConfigurationSet"
@@ -515,6 +524,7 @@ const opDeleteConfigurationSet = "DeleteConfigurationSet"
 type DeleteConfigurationSetRequest struct {
 	*aws.Request
 	Input *DeleteConfigurationSetInput
+	Copy  func(*DeleteConfigurationSetInput) DeleteConfigurationSetRequest
 }
 
 // Send marshals and sends the DeleteConfigurationSet API request.
@@ -559,7 +569,7 @@ func (c *SES) DeleteConfigurationSetRequest(input *DeleteConfigurationSetInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteConfigurationSetRequest{Request: req, Input: input}
+	return DeleteConfigurationSetRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetRequest}
 }
 
 const opDeleteConfigurationSetEventDestination = "DeleteConfigurationSetEventDestination"
@@ -568,6 +578,7 @@ const opDeleteConfigurationSetEventDestination = "DeleteConfigurationSetEventDes
 type DeleteConfigurationSetEventDestinationRequest struct {
 	*aws.Request
 	Input *DeleteConfigurationSetEventDestinationInput
+	Copy  func(*DeleteConfigurationSetEventDestinationInput) DeleteConfigurationSetEventDestinationRequest
 }
 
 // Send marshals and sends the DeleteConfigurationSetEventDestination API request.
@@ -613,7 +624,7 @@ func (c *SES) DeleteConfigurationSetEventDestinationRequest(input *DeleteConfigu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteConfigurationSetEventDestinationRequest{Request: req, Input: input}
+	return DeleteConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetEventDestinationRequest}
 }
 
 const opDeleteConfigurationSetTrackingOptions = "DeleteConfigurationSetTrackingOptions"
@@ -622,6 +633,7 @@ const opDeleteConfigurationSetTrackingOptions = "DeleteConfigurationSetTrackingO
 type DeleteConfigurationSetTrackingOptionsRequest struct {
 	*aws.Request
 	Input *DeleteConfigurationSetTrackingOptionsInput
+	Copy  func(*DeleteConfigurationSetTrackingOptionsInput) DeleteConfigurationSetTrackingOptionsRequest
 }
 
 // Send marshals and sends the DeleteConfigurationSetTrackingOptions API request.
@@ -673,7 +685,7 @@ func (c *SES) DeleteConfigurationSetTrackingOptionsRequest(input *DeleteConfigur
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteConfigurationSetTrackingOptionsRequest{Request: req, Input: input}
+	return DeleteConfigurationSetTrackingOptionsRequest{Request: req, Input: input, Copy: c.DeleteConfigurationSetTrackingOptionsRequest}
 }
 
 const opDeleteCustomVerificationEmailTemplate = "DeleteCustomVerificationEmailTemplate"
@@ -682,6 +694,7 @@ const opDeleteCustomVerificationEmailTemplate = "DeleteCustomVerificationEmailTe
 type DeleteCustomVerificationEmailTemplateRequest struct {
 	*aws.Request
 	Input *DeleteCustomVerificationEmailTemplateInput
+	Copy  func(*DeleteCustomVerificationEmailTemplateInput) DeleteCustomVerificationEmailTemplateRequest
 }
 
 // Send marshals and sends the DeleteCustomVerificationEmailTemplate API request.
@@ -730,7 +743,7 @@ func (c *SES) DeleteCustomVerificationEmailTemplateRequest(input *DeleteCustomVe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCustomVerificationEmailTemplateRequest{Request: req, Input: input}
+	return DeleteCustomVerificationEmailTemplateRequest{Request: req, Input: input, Copy: c.DeleteCustomVerificationEmailTemplateRequest}
 }
 
 const opDeleteIdentity = "DeleteIdentity"
@@ -739,6 +752,7 @@ const opDeleteIdentity = "DeleteIdentity"
 type DeleteIdentityRequest struct {
 	*aws.Request
 	Input *DeleteIdentityInput
+	Copy  func(*DeleteIdentityInput) DeleteIdentityRequest
 }
 
 // Send marshals and sends the DeleteIdentity API request.
@@ -782,7 +796,7 @@ func (c *SES) DeleteIdentityRequest(input *DeleteIdentityInput) DeleteIdentityRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIdentityRequest{Request: req, Input: input}
+	return DeleteIdentityRequest{Request: req, Input: input, Copy: c.DeleteIdentityRequest}
 }
 
 const opDeleteIdentityPolicy = "DeleteIdentityPolicy"
@@ -791,6 +805,7 @@ const opDeleteIdentityPolicy = "DeleteIdentityPolicy"
 type DeleteIdentityPolicyRequest struct {
 	*aws.Request
 	Input *DeleteIdentityPolicyInput
+	Copy  func(*DeleteIdentityPolicyInput) DeleteIdentityPolicyRequest
 }
 
 // Send marshals and sends the DeleteIdentityPolicy API request.
@@ -842,7 +857,7 @@ func (c *SES) DeleteIdentityPolicyRequest(input *DeleteIdentityPolicyInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteIdentityPolicyRequest{Request: req, Input: input}
+	return DeleteIdentityPolicyRequest{Request: req, Input: input, Copy: c.DeleteIdentityPolicyRequest}
 }
 
 const opDeleteReceiptFilter = "DeleteReceiptFilter"
@@ -851,6 +866,7 @@ const opDeleteReceiptFilter = "DeleteReceiptFilter"
 type DeleteReceiptFilterRequest struct {
 	*aws.Request
 	Input *DeleteReceiptFilterInput
+	Copy  func(*DeleteReceiptFilterInput) DeleteReceiptFilterRequest
 }
 
 // Send marshals and sends the DeleteReceiptFilter API request.
@@ -896,7 +912,7 @@ func (c *SES) DeleteReceiptFilterRequest(input *DeleteReceiptFilterInput) Delete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteReceiptFilterRequest{Request: req, Input: input}
+	return DeleteReceiptFilterRequest{Request: req, Input: input, Copy: c.DeleteReceiptFilterRequest}
 }
 
 const opDeleteReceiptRule = "DeleteReceiptRule"
@@ -905,6 +921,7 @@ const opDeleteReceiptRule = "DeleteReceiptRule"
 type DeleteReceiptRuleRequest struct {
 	*aws.Request
 	Input *DeleteReceiptRuleInput
+	Copy  func(*DeleteReceiptRuleInput) DeleteReceiptRuleRequest
 }
 
 // Send marshals and sends the DeleteReceiptRule API request.
@@ -950,7 +967,7 @@ func (c *SES) DeleteReceiptRuleRequest(input *DeleteReceiptRuleInput) DeleteRece
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteReceiptRuleRequest{Request: req, Input: input}
+	return DeleteReceiptRuleRequest{Request: req, Input: input, Copy: c.DeleteReceiptRuleRequest}
 }
 
 const opDeleteReceiptRuleSet = "DeleteReceiptRuleSet"
@@ -959,6 +976,7 @@ const opDeleteReceiptRuleSet = "DeleteReceiptRuleSet"
 type DeleteReceiptRuleSetRequest struct {
 	*aws.Request
 	Input *DeleteReceiptRuleSetInput
+	Copy  func(*DeleteReceiptRuleSetInput) DeleteReceiptRuleSetRequest
 }
 
 // Send marshals and sends the DeleteReceiptRuleSet API request.
@@ -1006,7 +1024,7 @@ func (c *SES) DeleteReceiptRuleSetRequest(input *DeleteReceiptRuleSetInput) Dele
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteReceiptRuleSetRequest{Request: req, Input: input}
+	return DeleteReceiptRuleSetRequest{Request: req, Input: input, Copy: c.DeleteReceiptRuleSetRequest}
 }
 
 const opDeleteTemplate = "DeleteTemplate"
@@ -1015,6 +1033,7 @@ const opDeleteTemplate = "DeleteTemplate"
 type DeleteTemplateRequest struct {
 	*aws.Request
 	Input *DeleteTemplateInput
+	Copy  func(*DeleteTemplateInput) DeleteTemplateRequest
 }
 
 // Send marshals and sends the DeleteTemplate API request.
@@ -1057,7 +1076,7 @@ func (c *SES) DeleteTemplateRequest(input *DeleteTemplateInput) DeleteTemplateRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTemplateRequest{Request: req, Input: input}
+	return DeleteTemplateRequest{Request: req, Input: input, Copy: c.DeleteTemplateRequest}
 }
 
 const opDeleteVerifiedEmailAddress = "DeleteVerifiedEmailAddress"
@@ -1066,6 +1085,7 @@ const opDeleteVerifiedEmailAddress = "DeleteVerifiedEmailAddress"
 type DeleteVerifiedEmailAddressRequest struct {
 	*aws.Request
 	Input *DeleteVerifiedEmailAddressInput
+	Copy  func(*DeleteVerifiedEmailAddressInput) DeleteVerifiedEmailAddressRequest
 }
 
 // Send marshals and sends the DeleteVerifiedEmailAddress API request.
@@ -1109,7 +1129,7 @@ func (c *SES) DeleteVerifiedEmailAddressRequest(input *DeleteVerifiedEmailAddres
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteVerifiedEmailAddressRequest{Request: req, Input: input}
+	return DeleteVerifiedEmailAddressRequest{Request: req, Input: input, Copy: c.DeleteVerifiedEmailAddressRequest}
 }
 
 const opDescribeActiveReceiptRuleSet = "DescribeActiveReceiptRuleSet"
@@ -1118,6 +1138,7 @@ const opDescribeActiveReceiptRuleSet = "DescribeActiveReceiptRuleSet"
 type DescribeActiveReceiptRuleSetRequest struct {
 	*aws.Request
 	Input *DescribeActiveReceiptRuleSetInput
+	Copy  func(*DescribeActiveReceiptRuleSetInput) DescribeActiveReceiptRuleSetRequest
 }
 
 // Send marshals and sends the DescribeActiveReceiptRuleSet API request.
@@ -1164,7 +1185,7 @@ func (c *SES) DescribeActiveReceiptRuleSetRequest(input *DescribeActiveReceiptRu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeActiveReceiptRuleSetRequest{Request: req, Input: input}
+	return DescribeActiveReceiptRuleSetRequest{Request: req, Input: input, Copy: c.DescribeActiveReceiptRuleSetRequest}
 }
 
 const opDescribeConfigurationSet = "DescribeConfigurationSet"
@@ -1173,6 +1194,7 @@ const opDescribeConfigurationSet = "DescribeConfigurationSet"
 type DescribeConfigurationSetRequest struct {
 	*aws.Request
 	Input *DescribeConfigurationSetInput
+	Copy  func(*DescribeConfigurationSetInput) DescribeConfigurationSetRequest
 }
 
 // Send marshals and sends the DescribeConfigurationSet API request.
@@ -1216,7 +1238,7 @@ func (c *SES) DescribeConfigurationSetRequest(input *DescribeConfigurationSetInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeConfigurationSetRequest{Request: req, Input: input}
+	return DescribeConfigurationSetRequest{Request: req, Input: input, Copy: c.DescribeConfigurationSetRequest}
 }
 
 const opDescribeReceiptRule = "DescribeReceiptRule"
@@ -1225,6 +1247,7 @@ const opDescribeReceiptRule = "DescribeReceiptRule"
 type DescribeReceiptRuleRequest struct {
 	*aws.Request
 	Input *DescribeReceiptRuleInput
+	Copy  func(*DescribeReceiptRuleInput) DescribeReceiptRuleRequest
 }
 
 // Send marshals and sends the DescribeReceiptRule API request.
@@ -1270,7 +1293,7 @@ func (c *SES) DescribeReceiptRuleRequest(input *DescribeReceiptRuleInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReceiptRuleRequest{Request: req, Input: input}
+	return DescribeReceiptRuleRequest{Request: req, Input: input, Copy: c.DescribeReceiptRuleRequest}
 }
 
 const opDescribeReceiptRuleSet = "DescribeReceiptRuleSet"
@@ -1279,6 +1302,7 @@ const opDescribeReceiptRuleSet = "DescribeReceiptRuleSet"
 type DescribeReceiptRuleSetRequest struct {
 	*aws.Request
 	Input *DescribeReceiptRuleSetInput
+	Copy  func(*DescribeReceiptRuleSetInput) DescribeReceiptRuleSetRequest
 }
 
 // Send marshals and sends the DescribeReceiptRuleSet API request.
@@ -1324,7 +1348,7 @@ func (c *SES) DescribeReceiptRuleSetRequest(input *DescribeReceiptRuleSetInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReceiptRuleSetRequest{Request: req, Input: input}
+	return DescribeReceiptRuleSetRequest{Request: req, Input: input, Copy: c.DescribeReceiptRuleSetRequest}
 }
 
 const opGetAccountSendingEnabled = "GetAccountSendingEnabled"
@@ -1333,6 +1357,7 @@ const opGetAccountSendingEnabled = "GetAccountSendingEnabled"
 type GetAccountSendingEnabledRequest struct {
 	*aws.Request
 	Input *GetAccountSendingEnabledInput
+	Copy  func(*GetAccountSendingEnabledInput) GetAccountSendingEnabledRequest
 }
 
 // Send marshals and sends the GetAccountSendingEnabled API request.
@@ -1375,7 +1400,7 @@ func (c *SES) GetAccountSendingEnabledRequest(input *GetAccountSendingEnabledInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAccountSendingEnabledRequest{Request: req, Input: input}
+	return GetAccountSendingEnabledRequest{Request: req, Input: input, Copy: c.GetAccountSendingEnabledRequest}
 }
 
 const opGetCustomVerificationEmailTemplate = "GetCustomVerificationEmailTemplate"
@@ -1384,6 +1409,7 @@ const opGetCustomVerificationEmailTemplate = "GetCustomVerificationEmailTemplate
 type GetCustomVerificationEmailTemplateRequest struct {
 	*aws.Request
 	Input *GetCustomVerificationEmailTemplateInput
+	Copy  func(*GetCustomVerificationEmailTemplateInput) GetCustomVerificationEmailTemplateRequest
 }
 
 // Send marshals and sends the GetCustomVerificationEmailTemplate API request.
@@ -1431,7 +1457,7 @@ func (c *SES) GetCustomVerificationEmailTemplateRequest(input *GetCustomVerifica
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCustomVerificationEmailTemplateRequest{Request: req, Input: input}
+	return GetCustomVerificationEmailTemplateRequest{Request: req, Input: input, Copy: c.GetCustomVerificationEmailTemplateRequest}
 }
 
 const opGetIdentityDkimAttributes = "GetIdentityDkimAttributes"
@@ -1440,6 +1466,7 @@ const opGetIdentityDkimAttributes = "GetIdentityDkimAttributes"
 type GetIdentityDkimAttributesRequest struct {
 	*aws.Request
 	Input *GetIdentityDkimAttributesInput
+	Copy  func(*GetIdentityDkimAttributesInput) GetIdentityDkimAttributesRequest
 }
 
 // Send marshals and sends the GetIdentityDkimAttributes API request.
@@ -1501,7 +1528,7 @@ func (c *SES) GetIdentityDkimAttributesRequest(input *GetIdentityDkimAttributesI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIdentityDkimAttributesRequest{Request: req, Input: input}
+	return GetIdentityDkimAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityDkimAttributesRequest}
 }
 
 const opGetIdentityMailFromDomainAttributes = "GetIdentityMailFromDomainAttributes"
@@ -1510,6 +1537,7 @@ const opGetIdentityMailFromDomainAttributes = "GetIdentityMailFromDomainAttribut
 type GetIdentityMailFromDomainAttributesRequest struct {
 	*aws.Request
 	Input *GetIdentityMailFromDomainAttributesInput
+	Copy  func(*GetIdentityMailFromDomainAttributesInput) GetIdentityMailFromDomainAttributesRequest
 }
 
 // Send marshals and sends the GetIdentityMailFromDomainAttributes API request.
@@ -1554,7 +1582,7 @@ func (c *SES) GetIdentityMailFromDomainAttributesRequest(input *GetIdentityMailF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIdentityMailFromDomainAttributesRequest{Request: req, Input: input}
+	return GetIdentityMailFromDomainAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityMailFromDomainAttributesRequest}
 }
 
 const opGetIdentityNotificationAttributes = "GetIdentityNotificationAttributes"
@@ -1563,6 +1591,7 @@ const opGetIdentityNotificationAttributes = "GetIdentityNotificationAttributes"
 type GetIdentityNotificationAttributesRequest struct {
 	*aws.Request
 	Input *GetIdentityNotificationAttributesInput
+	Copy  func(*GetIdentityNotificationAttributesInput) GetIdentityNotificationAttributesRequest
 }
 
 // Send marshals and sends the GetIdentityNotificationAttributes API request.
@@ -1610,7 +1639,7 @@ func (c *SES) GetIdentityNotificationAttributesRequest(input *GetIdentityNotific
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIdentityNotificationAttributesRequest{Request: req, Input: input}
+	return GetIdentityNotificationAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityNotificationAttributesRequest}
 }
 
 const opGetIdentityPolicies = "GetIdentityPolicies"
@@ -1619,6 +1648,7 @@ const opGetIdentityPolicies = "GetIdentityPolicies"
 type GetIdentityPoliciesRequest struct {
 	*aws.Request
 	Input *GetIdentityPoliciesInput
+	Copy  func(*GetIdentityPoliciesInput) GetIdentityPoliciesRequest
 }
 
 // Send marshals and sends the GetIdentityPolicies API request.
@@ -1671,7 +1701,7 @@ func (c *SES) GetIdentityPoliciesRequest(input *GetIdentityPoliciesInput) GetIde
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIdentityPoliciesRequest{Request: req, Input: input}
+	return GetIdentityPoliciesRequest{Request: req, Input: input, Copy: c.GetIdentityPoliciesRequest}
 }
 
 const opGetIdentityVerificationAttributes = "GetIdentityVerificationAttributes"
@@ -1680,6 +1710,7 @@ const opGetIdentityVerificationAttributes = "GetIdentityVerificationAttributes"
 type GetIdentityVerificationAttributesRequest struct {
 	*aws.Request
 	Input *GetIdentityVerificationAttributesInput
+	Copy  func(*GetIdentityVerificationAttributesInput) GetIdentityVerificationAttributesRequest
 }
 
 // Send marshals and sends the GetIdentityVerificationAttributes API request.
@@ -1741,7 +1772,7 @@ func (c *SES) GetIdentityVerificationAttributesRequest(input *GetIdentityVerific
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIdentityVerificationAttributesRequest{Request: req, Input: input}
+	return GetIdentityVerificationAttributesRequest{Request: req, Input: input, Copy: c.GetIdentityVerificationAttributesRequest}
 }
 
 const opGetSendQuota = "GetSendQuota"
@@ -1750,6 +1781,7 @@ const opGetSendQuota = "GetSendQuota"
 type GetSendQuotaRequest struct {
 	*aws.Request
 	Input *GetSendQuotaInput
+	Copy  func(*GetSendQuotaInput) GetSendQuotaRequest
 }
 
 // Send marshals and sends the GetSendQuota API request.
@@ -1792,7 +1824,7 @@ func (c *SES) GetSendQuotaRequest(input *GetSendQuotaInput) GetSendQuotaRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSendQuotaRequest{Request: req, Input: input}
+	return GetSendQuotaRequest{Request: req, Input: input, Copy: c.GetSendQuotaRequest}
 }
 
 const opGetSendStatistics = "GetSendStatistics"
@@ -1801,6 +1833,7 @@ const opGetSendStatistics = "GetSendStatistics"
 type GetSendStatisticsRequest struct {
 	*aws.Request
 	Input *GetSendStatisticsInput
+	Copy  func(*GetSendStatisticsInput) GetSendStatisticsRequest
 }
 
 // Send marshals and sends the GetSendStatistics API request.
@@ -1845,7 +1878,7 @@ func (c *SES) GetSendStatisticsRequest(input *GetSendStatisticsInput) GetSendSta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSendStatisticsRequest{Request: req, Input: input}
+	return GetSendStatisticsRequest{Request: req, Input: input, Copy: c.GetSendStatisticsRequest}
 }
 
 const opGetTemplate = "GetTemplate"
@@ -1854,6 +1887,7 @@ const opGetTemplate = "GetTemplate"
 type GetTemplateRequest struct {
 	*aws.Request
 	Input *GetTemplateInput
+	Copy  func(*GetTemplateInput) GetTemplateRequest
 }
 
 // Send marshals and sends the GetTemplate API request.
@@ -1897,7 +1931,7 @@ func (c *SES) GetTemplateRequest(input *GetTemplateInput) GetTemplateRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTemplateRequest{Request: req, Input: input}
+	return GetTemplateRequest{Request: req, Input: input, Copy: c.GetTemplateRequest}
 }
 
 const opListConfigurationSets = "ListConfigurationSets"
@@ -1906,6 +1940,7 @@ const opListConfigurationSets = "ListConfigurationSets"
 type ListConfigurationSetsRequest struct {
 	*aws.Request
 	Input *ListConfigurationSetsInput
+	Copy  func(*ListConfigurationSetsInput) ListConfigurationSetsRequest
 }
 
 // Send marshals and sends the ListConfigurationSets API request.
@@ -1956,7 +1991,7 @@ func (c *SES) ListConfigurationSetsRequest(input *ListConfigurationSetsInput) Li
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListConfigurationSetsRequest{Request: req, Input: input}
+	return ListConfigurationSetsRequest{Request: req, Input: input, Copy: c.ListConfigurationSetsRequest}
 }
 
 const opListCustomVerificationEmailTemplates = "ListCustomVerificationEmailTemplates"
@@ -1965,6 +2000,7 @@ const opListCustomVerificationEmailTemplates = "ListCustomVerificationEmailTempl
 type ListCustomVerificationEmailTemplatesRequest struct {
 	*aws.Request
 	Input *ListCustomVerificationEmailTemplatesInput
+	Copy  func(*ListCustomVerificationEmailTemplatesInput) ListCustomVerificationEmailTemplatesRequest
 }
 
 // Send marshals and sends the ListCustomVerificationEmailTemplates API request.
@@ -2017,57 +2053,53 @@ func (c *SES) ListCustomVerificationEmailTemplatesRequest(input *ListCustomVerif
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCustomVerificationEmailTemplatesRequest{Request: req, Input: input}
+	return ListCustomVerificationEmailTemplatesRequest{Request: req, Input: input, Copy: c.ListCustomVerificationEmailTemplatesRequest}
 }
 
-// ListCustomVerificationEmailTemplatesPages iterates over the pages of a ListCustomVerificationEmailTemplates operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListCustomVerificationEmailTemplates method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListCustomVerificationEmailTemplatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListCustomVerificationEmailTemplates operation.
-//    pageNum := 0
-//    err := client.ListCustomVerificationEmailTemplatesPages(params,
-//        func(page *ListCustomVerificationEmailTemplatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListCustomVerificationEmailTemplatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SES) ListCustomVerificationEmailTemplatesPages(input *ListCustomVerificationEmailTemplatesInput, fn func(*ListCustomVerificationEmailTemplatesOutput, bool) bool) error {
-	return c.ListCustomVerificationEmailTemplatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListCustomVerificationEmailTemplatesRequest) Paginate(opts ...aws.Option) ListCustomVerificationEmailTemplatesPager {
+	return ListCustomVerificationEmailTemplatesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListCustomVerificationEmailTemplatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListCustomVerificationEmailTemplatesPagesWithContext same as ListCustomVerificationEmailTemplatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SES) ListCustomVerificationEmailTemplatesPagesWithContext(ctx aws.Context, input *ListCustomVerificationEmailTemplatesInput, fn func(*ListCustomVerificationEmailTemplatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListCustomVerificationEmailTemplatesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListCustomVerificationEmailTemplatesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListCustomVerificationEmailTemplatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListCustomVerificationEmailTemplatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCustomVerificationEmailTemplatesPager struct {
+	aws.Pager
+}
+
+func (p *ListCustomVerificationEmailTemplatesPager) CurrentPage() *ListCustomVerificationEmailTemplatesOutput {
+	return p.Pager.CurrentPage().(*ListCustomVerificationEmailTemplatesOutput)
 }
 
 const opListIdentities = "ListIdentities"
@@ -2076,6 +2108,7 @@ const opListIdentities = "ListIdentities"
 type ListIdentitiesRequest struct {
 	*aws.Request
 	Input *ListIdentitiesInput
+	Copy  func(*ListIdentitiesInput) ListIdentitiesRequest
 }
 
 // Send marshals and sends the ListIdentities API request.
@@ -2125,57 +2158,53 @@ func (c *SES) ListIdentitiesRequest(input *ListIdentitiesInput) ListIdentitiesRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIdentitiesRequest{Request: req, Input: input}
+	return ListIdentitiesRequest{Request: req, Input: input, Copy: c.ListIdentitiesRequest}
 }
 
-// ListIdentitiesPages iterates over the pages of a ListIdentities operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListIdentities method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListIdentitiesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListIdentities operation.
-//    pageNum := 0
-//    err := client.ListIdentitiesPages(params,
-//        func(page *ListIdentitiesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListIdentitiesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SES) ListIdentitiesPages(input *ListIdentitiesInput, fn func(*ListIdentitiesOutput, bool) bool) error {
-	return c.ListIdentitiesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListIdentitiesRequest) Paginate(opts ...aws.Option) ListIdentitiesPager {
+	return ListIdentitiesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListIdentitiesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListIdentitiesPagesWithContext same as ListIdentitiesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SES) ListIdentitiesPagesWithContext(ctx aws.Context, input *ListIdentitiesInput, fn func(*ListIdentitiesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListIdentitiesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListIdentitiesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListIdentitiesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListIdentitiesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListIdentitiesPager struct {
+	aws.Pager
+}
+
+func (p *ListIdentitiesPager) CurrentPage() *ListIdentitiesOutput {
+	return p.Pager.CurrentPage().(*ListIdentitiesOutput)
 }
 
 const opListIdentityPolicies = "ListIdentityPolicies"
@@ -2184,6 +2213,7 @@ const opListIdentityPolicies = "ListIdentityPolicies"
 type ListIdentityPoliciesRequest struct {
 	*aws.Request
 	Input *ListIdentityPoliciesInput
+	Copy  func(*ListIdentityPoliciesInput) ListIdentityPoliciesRequest
 }
 
 // Send marshals and sends the ListIdentityPolicies API request.
@@ -2235,7 +2265,7 @@ func (c *SES) ListIdentityPoliciesRequest(input *ListIdentityPoliciesInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIdentityPoliciesRequest{Request: req, Input: input}
+	return ListIdentityPoliciesRequest{Request: req, Input: input, Copy: c.ListIdentityPoliciesRequest}
 }
 
 const opListReceiptFilters = "ListReceiptFilters"
@@ -2244,6 +2274,7 @@ const opListReceiptFilters = "ListReceiptFilters"
 type ListReceiptFiltersRequest struct {
 	*aws.Request
 	Input *ListReceiptFiltersInput
+	Copy  func(*ListReceiptFiltersInput) ListReceiptFiltersRequest
 }
 
 // Send marshals and sends the ListReceiptFilters API request.
@@ -2289,7 +2320,7 @@ func (c *SES) ListReceiptFiltersRequest(input *ListReceiptFiltersInput) ListRece
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListReceiptFiltersRequest{Request: req, Input: input}
+	return ListReceiptFiltersRequest{Request: req, Input: input, Copy: c.ListReceiptFiltersRequest}
 }
 
 const opListReceiptRuleSets = "ListReceiptRuleSets"
@@ -2298,6 +2329,7 @@ const opListReceiptRuleSets = "ListReceiptRuleSets"
 type ListReceiptRuleSetsRequest struct {
 	*aws.Request
 	Input *ListReceiptRuleSetsInput
+	Copy  func(*ListReceiptRuleSetsInput) ListReceiptRuleSetsRequest
 }
 
 // Send marshals and sends the ListReceiptRuleSets API request.
@@ -2346,7 +2378,7 @@ func (c *SES) ListReceiptRuleSetsRequest(input *ListReceiptRuleSetsInput) ListRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListReceiptRuleSetsRequest{Request: req, Input: input}
+	return ListReceiptRuleSetsRequest{Request: req, Input: input, Copy: c.ListReceiptRuleSetsRequest}
 }
 
 const opListTemplates = "ListTemplates"
@@ -2355,6 +2387,7 @@ const opListTemplates = "ListTemplates"
 type ListTemplatesRequest struct {
 	*aws.Request
 	Input *ListTemplatesInput
+	Copy  func(*ListTemplatesInput) ListTemplatesRequest
 }
 
 // Send marshals and sends the ListTemplates API request.
@@ -2397,7 +2430,7 @@ func (c *SES) ListTemplatesRequest(input *ListTemplatesInput) ListTemplatesReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTemplatesRequest{Request: req, Input: input}
+	return ListTemplatesRequest{Request: req, Input: input, Copy: c.ListTemplatesRequest}
 }
 
 const opListVerifiedEmailAddresses = "ListVerifiedEmailAddresses"
@@ -2406,6 +2439,7 @@ const opListVerifiedEmailAddresses = "ListVerifiedEmailAddresses"
 type ListVerifiedEmailAddressesRequest struct {
 	*aws.Request
 	Input *ListVerifiedEmailAddressesInput
+	Copy  func(*ListVerifiedEmailAddressesInput) ListVerifiedEmailAddressesRequest
 }
 
 // Send marshals and sends the ListVerifiedEmailAddresses API request.
@@ -2447,7 +2481,7 @@ func (c *SES) ListVerifiedEmailAddressesRequest(input *ListVerifiedEmailAddresse
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListVerifiedEmailAddressesRequest{Request: req, Input: input}
+	return ListVerifiedEmailAddressesRequest{Request: req, Input: input, Copy: c.ListVerifiedEmailAddressesRequest}
 }
 
 const opPutIdentityPolicy = "PutIdentityPolicy"
@@ -2456,6 +2490,7 @@ const opPutIdentityPolicy = "PutIdentityPolicy"
 type PutIdentityPolicyRequest struct {
 	*aws.Request
 	Input *PutIdentityPolicyInput
+	Copy  func(*PutIdentityPolicyInput) PutIdentityPolicyRequest
 }
 
 // Send marshals and sends the PutIdentityPolicy API request.
@@ -2506,7 +2541,7 @@ func (c *SES) PutIdentityPolicyRequest(input *PutIdentityPolicyInput) PutIdentit
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutIdentityPolicyRequest{Request: req, Input: input}
+	return PutIdentityPolicyRequest{Request: req, Input: input, Copy: c.PutIdentityPolicyRequest}
 }
 
 const opReorderReceiptRuleSet = "ReorderReceiptRuleSet"
@@ -2515,6 +2550,7 @@ const opReorderReceiptRuleSet = "ReorderReceiptRuleSet"
 type ReorderReceiptRuleSetRequest struct {
 	*aws.Request
 	Input *ReorderReceiptRuleSetInput
+	Copy  func(*ReorderReceiptRuleSetInput) ReorderReceiptRuleSetRequest
 }
 
 // Send marshals and sends the ReorderReceiptRuleSet API request.
@@ -2564,7 +2600,7 @@ func (c *SES) ReorderReceiptRuleSetRequest(input *ReorderReceiptRuleSetInput) Re
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ReorderReceiptRuleSetRequest{Request: req, Input: input}
+	return ReorderReceiptRuleSetRequest{Request: req, Input: input, Copy: c.ReorderReceiptRuleSetRequest}
 }
 
 const opSendBounce = "SendBounce"
@@ -2573,6 +2609,7 @@ const opSendBounce = "SendBounce"
 type SendBounceRequest struct {
 	*aws.Request
 	Input *SendBounceInput
+	Copy  func(*SendBounceInput) SendBounceRequest
 }
 
 // Send marshals and sends the SendBounce API request.
@@ -2623,7 +2660,7 @@ func (c *SES) SendBounceRequest(input *SendBounceInput) SendBounceRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendBounceRequest{Request: req, Input: input}
+	return SendBounceRequest{Request: req, Input: input, Copy: c.SendBounceRequest}
 }
 
 const opSendBulkTemplatedEmail = "SendBulkTemplatedEmail"
@@ -2632,6 +2669,7 @@ const opSendBulkTemplatedEmail = "SendBulkTemplatedEmail"
 type SendBulkTemplatedEmailRequest struct {
 	*aws.Request
 	Input *SendBulkTemplatedEmailInput
+	Copy  func(*SendBulkTemplatedEmailInput) SendBulkTemplatedEmailRequest
 }
 
 // Send marshals and sends the SendBulkTemplatedEmail API request.
@@ -2697,7 +2735,7 @@ func (c *SES) SendBulkTemplatedEmailRequest(input *SendBulkTemplatedEmailInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendBulkTemplatedEmailRequest{Request: req, Input: input}
+	return SendBulkTemplatedEmailRequest{Request: req, Input: input, Copy: c.SendBulkTemplatedEmailRequest}
 }
 
 const opSendCustomVerificationEmail = "SendCustomVerificationEmail"
@@ -2706,6 +2744,7 @@ const opSendCustomVerificationEmail = "SendCustomVerificationEmail"
 type SendCustomVerificationEmailRequest struct {
 	*aws.Request
 	Input *SendCustomVerificationEmailInput
+	Copy  func(*SendCustomVerificationEmailInput) SendCustomVerificationEmailRequest
 }
 
 // Send marshals and sends the SendCustomVerificationEmail API request.
@@ -2755,7 +2794,7 @@ func (c *SES) SendCustomVerificationEmailRequest(input *SendCustomVerificationEm
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendCustomVerificationEmailRequest{Request: req, Input: input}
+	return SendCustomVerificationEmailRequest{Request: req, Input: input, Copy: c.SendCustomVerificationEmailRequest}
 }
 
 const opSendEmail = "SendEmail"
@@ -2764,6 +2803,7 @@ const opSendEmail = "SendEmail"
 type SendEmailRequest struct {
 	*aws.Request
 	Input *SendEmailInput
+	Copy  func(*SendEmailInput) SendEmailRequest
 }
 
 // Send marshals and sends the SendEmail API request.
@@ -2838,7 +2878,7 @@ func (c *SES) SendEmailRequest(input *SendEmailInput) SendEmailRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendEmailRequest{Request: req, Input: input}
+	return SendEmailRequest{Request: req, Input: input, Copy: c.SendEmailRequest}
 }
 
 const opSendRawEmail = "SendRawEmail"
@@ -2847,6 +2887,7 @@ const opSendRawEmail = "SendRawEmail"
 type SendRawEmailRequest struct {
 	*aws.Request
 	Input *SendRawEmailInput
+	Copy  func(*SendRawEmailInput) SendRawEmailRequest
 }
 
 // Send marshals and sends the SendRawEmail API request.
@@ -2957,7 +2998,7 @@ func (c *SES) SendRawEmailRequest(input *SendRawEmailInput) SendRawEmailRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendRawEmailRequest{Request: req, Input: input}
+	return SendRawEmailRequest{Request: req, Input: input, Copy: c.SendRawEmailRequest}
 }
 
 const opSendTemplatedEmail = "SendTemplatedEmail"
@@ -2966,6 +3007,7 @@ const opSendTemplatedEmail = "SendTemplatedEmail"
 type SendTemplatedEmailRequest struct {
 	*aws.Request
 	Input *SendTemplatedEmailInput
+	Copy  func(*SendTemplatedEmailInput) SendTemplatedEmailRequest
 }
 
 // Send marshals and sends the SendTemplatedEmail API request.
@@ -3036,7 +3078,7 @@ func (c *SES) SendTemplatedEmailRequest(input *SendTemplatedEmailInput) SendTemp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendTemplatedEmailRequest{Request: req, Input: input}
+	return SendTemplatedEmailRequest{Request: req, Input: input, Copy: c.SendTemplatedEmailRequest}
 }
 
 const opSetActiveReceiptRuleSet = "SetActiveReceiptRuleSet"
@@ -3045,6 +3087,7 @@ const opSetActiveReceiptRuleSet = "SetActiveReceiptRuleSet"
 type SetActiveReceiptRuleSetRequest struct {
 	*aws.Request
 	Input *SetActiveReceiptRuleSetInput
+	Copy  func(*SetActiveReceiptRuleSetInput) SetActiveReceiptRuleSetRequest
 }
 
 // Send marshals and sends the SetActiveReceiptRuleSet API request.
@@ -3093,7 +3136,7 @@ func (c *SES) SetActiveReceiptRuleSetRequest(input *SetActiveReceiptRuleSetInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetActiveReceiptRuleSetRequest{Request: req, Input: input}
+	return SetActiveReceiptRuleSetRequest{Request: req, Input: input, Copy: c.SetActiveReceiptRuleSetRequest}
 }
 
 const opSetIdentityDkimEnabled = "SetIdentityDkimEnabled"
@@ -3102,6 +3145,7 @@ const opSetIdentityDkimEnabled = "SetIdentityDkimEnabled"
 type SetIdentityDkimEnabledRequest struct {
 	*aws.Request
 	Input *SetIdentityDkimEnabledInput
+	Copy  func(*SetIdentityDkimEnabledInput) SetIdentityDkimEnabledRequest
 }
 
 // Send marshals and sends the SetIdentityDkimEnabled API request.
@@ -3159,7 +3203,7 @@ func (c *SES) SetIdentityDkimEnabledRequest(input *SetIdentityDkimEnabledInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetIdentityDkimEnabledRequest{Request: req, Input: input}
+	return SetIdentityDkimEnabledRequest{Request: req, Input: input, Copy: c.SetIdentityDkimEnabledRequest}
 }
 
 const opSetIdentityFeedbackForwardingEnabled = "SetIdentityFeedbackForwardingEnabled"
@@ -3168,6 +3212,7 @@ const opSetIdentityFeedbackForwardingEnabled = "SetIdentityFeedbackForwardingEna
 type SetIdentityFeedbackForwardingEnabledRequest struct {
 	*aws.Request
 	Input *SetIdentityFeedbackForwardingEnabledInput
+	Copy  func(*SetIdentityFeedbackForwardingEnabledInput) SetIdentityFeedbackForwardingEnabledRequest
 }
 
 // Send marshals and sends the SetIdentityFeedbackForwardingEnabled API request.
@@ -3219,7 +3264,7 @@ func (c *SES) SetIdentityFeedbackForwardingEnabledRequest(input *SetIdentityFeed
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetIdentityFeedbackForwardingEnabledRequest{Request: req, Input: input}
+	return SetIdentityFeedbackForwardingEnabledRequest{Request: req, Input: input, Copy: c.SetIdentityFeedbackForwardingEnabledRequest}
 }
 
 const opSetIdentityHeadersInNotificationsEnabled = "SetIdentityHeadersInNotificationsEnabled"
@@ -3228,6 +3273,7 @@ const opSetIdentityHeadersInNotificationsEnabled = "SetIdentityHeadersInNotifica
 type SetIdentityHeadersInNotificationsEnabledRequest struct {
 	*aws.Request
 	Input *SetIdentityHeadersInNotificationsEnabledInput
+	Copy  func(*SetIdentityHeadersInNotificationsEnabledInput) SetIdentityHeadersInNotificationsEnabledRequest
 }
 
 // Send marshals and sends the SetIdentityHeadersInNotificationsEnabled API request.
@@ -3275,7 +3321,7 @@ func (c *SES) SetIdentityHeadersInNotificationsEnabledRequest(input *SetIdentity
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetIdentityHeadersInNotificationsEnabledRequest{Request: req, Input: input}
+	return SetIdentityHeadersInNotificationsEnabledRequest{Request: req, Input: input, Copy: c.SetIdentityHeadersInNotificationsEnabledRequest}
 }
 
 const opSetIdentityMailFromDomain = "SetIdentityMailFromDomain"
@@ -3284,6 +3330,7 @@ const opSetIdentityMailFromDomain = "SetIdentityMailFromDomain"
 type SetIdentityMailFromDomainRequest struct {
 	*aws.Request
 	Input *SetIdentityMailFromDomainInput
+	Copy  func(*SetIdentityMailFromDomainInput) SetIdentityMailFromDomainRequest
 }
 
 // Send marshals and sends the SetIdentityMailFromDomain API request.
@@ -3332,7 +3379,7 @@ func (c *SES) SetIdentityMailFromDomainRequest(input *SetIdentityMailFromDomainI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetIdentityMailFromDomainRequest{Request: req, Input: input}
+	return SetIdentityMailFromDomainRequest{Request: req, Input: input, Copy: c.SetIdentityMailFromDomainRequest}
 }
 
 const opSetIdentityNotificationTopic = "SetIdentityNotificationTopic"
@@ -3341,6 +3388,7 @@ const opSetIdentityNotificationTopic = "SetIdentityNotificationTopic"
 type SetIdentityNotificationTopicRequest struct {
 	*aws.Request
 	Input *SetIdentityNotificationTopicInput
+	Copy  func(*SetIdentityNotificationTopicInput) SetIdentityNotificationTopicRequest
 }
 
 // Send marshals and sends the SetIdentityNotificationTopic API request.
@@ -3392,7 +3440,7 @@ func (c *SES) SetIdentityNotificationTopicRequest(input *SetIdentityNotification
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetIdentityNotificationTopicRequest{Request: req, Input: input}
+	return SetIdentityNotificationTopicRequest{Request: req, Input: input, Copy: c.SetIdentityNotificationTopicRequest}
 }
 
 const opSetReceiptRulePosition = "SetReceiptRulePosition"
@@ -3401,6 +3449,7 @@ const opSetReceiptRulePosition = "SetReceiptRulePosition"
 type SetReceiptRulePositionRequest struct {
 	*aws.Request
 	Input *SetReceiptRulePositionInput
+	Copy  func(*SetReceiptRulePositionInput) SetReceiptRulePositionRequest
 }
 
 // Send marshals and sends the SetReceiptRulePosition API request.
@@ -3446,7 +3495,7 @@ func (c *SES) SetReceiptRulePositionRequest(input *SetReceiptRulePositionInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetReceiptRulePositionRequest{Request: req, Input: input}
+	return SetReceiptRulePositionRequest{Request: req, Input: input, Copy: c.SetReceiptRulePositionRequest}
 }
 
 const opTestRenderTemplate = "TestRenderTemplate"
@@ -3455,6 +3504,7 @@ const opTestRenderTemplate = "TestRenderTemplate"
 type TestRenderTemplateRequest struct {
 	*aws.Request
 	Input *TestRenderTemplateInput
+	Copy  func(*TestRenderTemplateInput) TestRenderTemplateRequest
 }
 
 // Send marshals and sends the TestRenderTemplate API request.
@@ -3498,7 +3548,7 @@ func (c *SES) TestRenderTemplateRequest(input *TestRenderTemplateInput) TestRend
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestRenderTemplateRequest{Request: req, Input: input}
+	return TestRenderTemplateRequest{Request: req, Input: input, Copy: c.TestRenderTemplateRequest}
 }
 
 const opUpdateAccountSendingEnabled = "UpdateAccountSendingEnabled"
@@ -3507,6 +3557,7 @@ const opUpdateAccountSendingEnabled = "UpdateAccountSendingEnabled"
 type UpdateAccountSendingEnabledRequest struct {
 	*aws.Request
 	Input *UpdateAccountSendingEnabledInput
+	Copy  func(*UpdateAccountSendingEnabledInput) UpdateAccountSendingEnabledRequest
 }
 
 // Send marshals and sends the UpdateAccountSendingEnabled API request.
@@ -3554,7 +3605,7 @@ func (c *SES) UpdateAccountSendingEnabledRequest(input *UpdateAccountSendingEnab
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAccountSendingEnabledRequest{Request: req, Input: input}
+	return UpdateAccountSendingEnabledRequest{Request: req, Input: input, Copy: c.UpdateAccountSendingEnabledRequest}
 }
 
 const opUpdateConfigurationSetEventDestination = "UpdateConfigurationSetEventDestination"
@@ -3563,6 +3614,7 @@ const opUpdateConfigurationSetEventDestination = "UpdateConfigurationSetEventDes
 type UpdateConfigurationSetEventDestinationRequest struct {
 	*aws.Request
 	Input *UpdateConfigurationSetEventDestinationInput
+	Copy  func(*UpdateConfigurationSetEventDestinationInput) UpdateConfigurationSetEventDestinationRequest
 }
 
 // Send marshals and sends the UpdateConfigurationSetEventDestination API request.
@@ -3614,7 +3666,7 @@ func (c *SES) UpdateConfigurationSetEventDestinationRequest(input *UpdateConfigu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateConfigurationSetEventDestinationRequest{Request: req, Input: input}
+	return UpdateConfigurationSetEventDestinationRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetEventDestinationRequest}
 }
 
 const opUpdateConfigurationSetReputationMetricsEnabled = "UpdateConfigurationSetReputationMetricsEnabled"
@@ -3623,6 +3675,7 @@ const opUpdateConfigurationSetReputationMetricsEnabled = "UpdateConfigurationSet
 type UpdateConfigurationSetReputationMetricsEnabledRequest struct {
 	*aws.Request
 	Input *UpdateConfigurationSetReputationMetricsEnabledInput
+	Copy  func(*UpdateConfigurationSetReputationMetricsEnabledInput) UpdateConfigurationSetReputationMetricsEnabledRequest
 }
 
 // Send marshals and sends the UpdateConfigurationSetReputationMetricsEnabled API request.
@@ -3671,7 +3724,7 @@ func (c *SES) UpdateConfigurationSetReputationMetricsEnabledRequest(input *Updat
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateConfigurationSetReputationMetricsEnabledRequest{Request: req, Input: input}
+	return UpdateConfigurationSetReputationMetricsEnabledRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetReputationMetricsEnabledRequest}
 }
 
 const opUpdateConfigurationSetSendingEnabled = "UpdateConfigurationSetSendingEnabled"
@@ -3680,6 +3733,7 @@ const opUpdateConfigurationSetSendingEnabled = "UpdateConfigurationSetSendingEna
 type UpdateConfigurationSetSendingEnabledRequest struct {
 	*aws.Request
 	Input *UpdateConfigurationSetSendingEnabledInput
+	Copy  func(*UpdateConfigurationSetSendingEnabledInput) UpdateConfigurationSetSendingEnabledRequest
 }
 
 // Send marshals and sends the UpdateConfigurationSetSendingEnabled API request.
@@ -3728,7 +3782,7 @@ func (c *SES) UpdateConfigurationSetSendingEnabledRequest(input *UpdateConfigura
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateConfigurationSetSendingEnabledRequest{Request: req, Input: input}
+	return UpdateConfigurationSetSendingEnabledRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetSendingEnabledRequest}
 }
 
 const opUpdateConfigurationSetTrackingOptions = "UpdateConfigurationSetTrackingOptions"
@@ -3737,6 +3791,7 @@ const opUpdateConfigurationSetTrackingOptions = "UpdateConfigurationSetTrackingO
 type UpdateConfigurationSetTrackingOptionsRequest struct {
 	*aws.Request
 	Input *UpdateConfigurationSetTrackingOptionsInput
+	Copy  func(*UpdateConfigurationSetTrackingOptionsInput) UpdateConfigurationSetTrackingOptionsRequest
 }
 
 // Send marshals and sends the UpdateConfigurationSetTrackingOptions API request.
@@ -3784,7 +3839,7 @@ func (c *SES) UpdateConfigurationSetTrackingOptionsRequest(input *UpdateConfigur
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateConfigurationSetTrackingOptionsRequest{Request: req, Input: input}
+	return UpdateConfigurationSetTrackingOptionsRequest{Request: req, Input: input, Copy: c.UpdateConfigurationSetTrackingOptionsRequest}
 }
 
 const opUpdateCustomVerificationEmailTemplate = "UpdateCustomVerificationEmailTemplate"
@@ -3793,6 +3848,7 @@ const opUpdateCustomVerificationEmailTemplate = "UpdateCustomVerificationEmailTe
 type UpdateCustomVerificationEmailTemplateRequest struct {
 	*aws.Request
 	Input *UpdateCustomVerificationEmailTemplateInput
+	Copy  func(*UpdateCustomVerificationEmailTemplateInput) UpdateCustomVerificationEmailTemplateRequest
 }
 
 // Send marshals and sends the UpdateCustomVerificationEmailTemplate API request.
@@ -3841,7 +3897,7 @@ func (c *SES) UpdateCustomVerificationEmailTemplateRequest(input *UpdateCustomVe
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateCustomVerificationEmailTemplateRequest{Request: req, Input: input}
+	return UpdateCustomVerificationEmailTemplateRequest{Request: req, Input: input, Copy: c.UpdateCustomVerificationEmailTemplateRequest}
 }
 
 const opUpdateReceiptRule = "UpdateReceiptRule"
@@ -3850,6 +3906,7 @@ const opUpdateReceiptRule = "UpdateReceiptRule"
 type UpdateReceiptRuleRequest struct {
 	*aws.Request
 	Input *UpdateReceiptRuleInput
+	Copy  func(*UpdateReceiptRuleInput) UpdateReceiptRuleRequest
 }
 
 // Send marshals and sends the UpdateReceiptRule API request.
@@ -3895,7 +3952,7 @@ func (c *SES) UpdateReceiptRuleRequest(input *UpdateReceiptRuleInput) UpdateRece
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateReceiptRuleRequest{Request: req, Input: input}
+	return UpdateReceiptRuleRequest{Request: req, Input: input, Copy: c.UpdateReceiptRuleRequest}
 }
 
 const opUpdateTemplate = "UpdateTemplate"
@@ -3904,6 +3961,7 @@ const opUpdateTemplate = "UpdateTemplate"
 type UpdateTemplateRequest struct {
 	*aws.Request
 	Input *UpdateTemplateInput
+	Copy  func(*UpdateTemplateInput) UpdateTemplateRequest
 }
 
 // Send marshals and sends the UpdateTemplate API request.
@@ -3948,7 +4006,7 @@ func (c *SES) UpdateTemplateRequest(input *UpdateTemplateInput) UpdateTemplateRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTemplateRequest{Request: req, Input: input}
+	return UpdateTemplateRequest{Request: req, Input: input, Copy: c.UpdateTemplateRequest}
 }
 
 const opVerifyDomainDkim = "VerifyDomainDkim"
@@ -3957,6 +4015,7 @@ const opVerifyDomainDkim = "VerifyDomainDkim"
 type VerifyDomainDkimRequest struct {
 	*aws.Request
 	Input *VerifyDomainDkimInput
+	Copy  func(*VerifyDomainDkimInput) VerifyDomainDkimRequest
 }
 
 // Send marshals and sends the VerifyDomainDkim API request.
@@ -4011,7 +4070,7 @@ func (c *SES) VerifyDomainDkimRequest(input *VerifyDomainDkimInput) VerifyDomain
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return VerifyDomainDkimRequest{Request: req, Input: input}
+	return VerifyDomainDkimRequest{Request: req, Input: input, Copy: c.VerifyDomainDkimRequest}
 }
 
 const opVerifyDomainIdentity = "VerifyDomainIdentity"
@@ -4020,6 +4079,7 @@ const opVerifyDomainIdentity = "VerifyDomainIdentity"
 type VerifyDomainIdentityRequest struct {
 	*aws.Request
 	Input *VerifyDomainIdentityInput
+	Copy  func(*VerifyDomainIdentityInput) VerifyDomainIdentityRequest
 }
 
 // Send marshals and sends the VerifyDomainIdentity API request.
@@ -4065,7 +4125,7 @@ func (c *SES) VerifyDomainIdentityRequest(input *VerifyDomainIdentityInput) Veri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return VerifyDomainIdentityRequest{Request: req, Input: input}
+	return VerifyDomainIdentityRequest{Request: req, Input: input, Copy: c.VerifyDomainIdentityRequest}
 }
 
 const opVerifyEmailAddress = "VerifyEmailAddress"
@@ -4074,6 +4134,7 @@ const opVerifyEmailAddress = "VerifyEmailAddress"
 type VerifyEmailAddressRequest struct {
 	*aws.Request
 	Input *VerifyEmailAddressInput
+	Copy  func(*VerifyEmailAddressInput) VerifyEmailAddressRequest
 }
 
 // Send marshals and sends the VerifyEmailAddress API request.
@@ -4116,7 +4177,7 @@ func (c *SES) VerifyEmailAddressRequest(input *VerifyEmailAddressInput) VerifyEm
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return VerifyEmailAddressRequest{Request: req, Input: input}
+	return VerifyEmailAddressRequest{Request: req, Input: input, Copy: c.VerifyEmailAddressRequest}
 }
 
 const opVerifyEmailIdentity = "VerifyEmailIdentity"
@@ -4125,6 +4186,7 @@ const opVerifyEmailIdentity = "VerifyEmailIdentity"
 type VerifyEmailIdentityRequest struct {
 	*aws.Request
 	Input *VerifyEmailIdentityInput
+	Copy  func(*VerifyEmailIdentityInput) VerifyEmailIdentityRequest
 }
 
 // Send marshals and sends the VerifyEmailIdentity API request.
@@ -4169,7 +4231,7 @@ func (c *SES) VerifyEmailIdentityRequest(input *VerifyEmailIdentityInput) Verify
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return VerifyEmailIdentityRequest{Request: req, Input: input}
+	return VerifyEmailIdentityRequest{Request: req, Input: input, Copy: c.VerifyEmailIdentityRequest}
 }
 
 // When included in a receipt rule, this action adds a header to the received

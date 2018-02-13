@@ -15,6 +15,7 @@ const opDescribeAffectedEntities = "DescribeAffectedEntities"
 type DescribeAffectedEntitiesRequest struct {
 	*aws.Request
 	Input *DescribeAffectedEntitiesInput
+	Copy  func(*DescribeAffectedEntitiesInput) DescribeAffectedEntitiesRequest
 }
 
 // Send marshals and sends the DescribeAffectedEntities API request.
@@ -69,57 +70,53 @@ func (c *Health) DescribeAffectedEntitiesRequest(input *DescribeAffectedEntities
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAffectedEntitiesRequest{Request: req, Input: input}
+	return DescribeAffectedEntitiesRequest{Request: req, Input: input, Copy: c.DescribeAffectedEntitiesRequest}
 }
 
-// DescribeAffectedEntitiesPages iterates over the pages of a DescribeAffectedEntities operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeAffectedEntities method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeAffectedEntitiesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeAffectedEntities operation.
-//    pageNum := 0
-//    err := client.DescribeAffectedEntitiesPages(params,
-//        func(page *DescribeAffectedEntitiesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeAffectedEntitiesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Health) DescribeAffectedEntitiesPages(input *DescribeAffectedEntitiesInput, fn func(*DescribeAffectedEntitiesOutput, bool) bool) error {
-	return c.DescribeAffectedEntitiesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeAffectedEntitiesRequest) Paginate(opts ...aws.Option) DescribeAffectedEntitiesPager {
+	return DescribeAffectedEntitiesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeAffectedEntitiesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeAffectedEntitiesPagesWithContext same as DescribeAffectedEntitiesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeAffectedEntitiesPagesWithContext(ctx aws.Context, input *DescribeAffectedEntitiesInput, fn func(*DescribeAffectedEntitiesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeAffectedEntitiesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeAffectedEntitiesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeAffectedEntitiesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeAffectedEntitiesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeAffectedEntitiesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeAffectedEntitiesPager) CurrentPage() *DescribeAffectedEntitiesOutput {
+	return p.Pager.CurrentPage().(*DescribeAffectedEntitiesOutput)
 }
 
 const opDescribeEntityAggregates = "DescribeEntityAggregates"
@@ -128,6 +125,7 @@ const opDescribeEntityAggregates = "DescribeEntityAggregates"
 type DescribeEntityAggregatesRequest struct {
 	*aws.Request
 	Input *DescribeEntityAggregatesInput
+	Copy  func(*DescribeEntityAggregatesInput) DescribeEntityAggregatesRequest
 }
 
 // Send marshals and sends the DescribeEntityAggregates API request.
@@ -170,7 +168,7 @@ func (c *Health) DescribeEntityAggregatesRequest(input *DescribeEntityAggregates
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEntityAggregatesRequest{Request: req, Input: input}
+	return DescribeEntityAggregatesRequest{Request: req, Input: input, Copy: c.DescribeEntityAggregatesRequest}
 }
 
 const opDescribeEventAggregates = "DescribeEventAggregates"
@@ -179,6 +177,7 @@ const opDescribeEventAggregates = "DescribeEventAggregates"
 type DescribeEventAggregatesRequest struct {
 	*aws.Request
 	Input *DescribeEventAggregatesInput
+	Copy  func(*DescribeEventAggregatesInput) DescribeEventAggregatesRequest
 }
 
 // Send marshals and sends the DescribeEventAggregates API request.
@@ -227,57 +226,53 @@ func (c *Health) DescribeEventAggregatesRequest(input *DescribeEventAggregatesIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventAggregatesRequest{Request: req, Input: input}
+	return DescribeEventAggregatesRequest{Request: req, Input: input, Copy: c.DescribeEventAggregatesRequest}
 }
 
-// DescribeEventAggregatesPages iterates over the pages of a DescribeEventAggregates operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEventAggregates method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventAggregatesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEventAggregates operation.
-//    pageNum := 0
-//    err := client.DescribeEventAggregatesPages(params,
-//        func(page *DescribeEventAggregatesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventAggregatesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Health) DescribeEventAggregatesPages(input *DescribeEventAggregatesInput, fn func(*DescribeEventAggregatesOutput, bool) bool) error {
-	return c.DescribeEventAggregatesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEventAggregatesRequest) Paginate(opts ...aws.Option) DescribeEventAggregatesPager {
+	return DescribeEventAggregatesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventAggregatesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEventAggregatesPagesWithContext same as DescribeEventAggregatesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEventAggregatesPagesWithContext(ctx aws.Context, input *DescribeEventAggregatesInput, fn func(*DescribeEventAggregatesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventAggregatesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEventAggregatesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventAggregatesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventAggregatesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEventAggregatesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventAggregatesPager) CurrentPage() *DescribeEventAggregatesOutput {
+	return p.Pager.CurrentPage().(*DescribeEventAggregatesOutput)
 }
 
 const opDescribeEventDetails = "DescribeEventDetails"
@@ -286,6 +281,7 @@ const opDescribeEventDetails = "DescribeEventDetails"
 type DescribeEventDetailsRequest struct {
 	*aws.Request
 	Input *DescribeEventDetailsInput
+	Copy  func(*DescribeEventDetailsInput) DescribeEventDetailsRequest
 }
 
 // Send marshals and sends the DescribeEventDetails API request.
@@ -333,7 +329,7 @@ func (c *Health) DescribeEventDetailsRequest(input *DescribeEventDetailsInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventDetailsRequest{Request: req, Input: input}
+	return DescribeEventDetailsRequest{Request: req, Input: input, Copy: c.DescribeEventDetailsRequest}
 }
 
 const opDescribeEventTypes = "DescribeEventTypes"
@@ -342,6 +338,7 @@ const opDescribeEventTypes = "DescribeEventTypes"
 type DescribeEventTypesRequest struct {
 	*aws.Request
 	Input *DescribeEventTypesInput
+	Copy  func(*DescribeEventTypesInput) DescribeEventTypesRequest
 }
 
 // Send marshals and sends the DescribeEventTypes API request.
@@ -389,57 +386,53 @@ func (c *Health) DescribeEventTypesRequest(input *DescribeEventTypesInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventTypesRequest{Request: req, Input: input}
+	return DescribeEventTypesRequest{Request: req, Input: input, Copy: c.DescribeEventTypesRequest}
 }
 
-// DescribeEventTypesPages iterates over the pages of a DescribeEventTypes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEventTypes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventTypesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEventTypes operation.
-//    pageNum := 0
-//    err := client.DescribeEventTypesPages(params,
-//        func(page *DescribeEventTypesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventTypesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Health) DescribeEventTypesPages(input *DescribeEventTypesInput, fn func(*DescribeEventTypesOutput, bool) bool) error {
-	return c.DescribeEventTypesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEventTypesRequest) Paginate(opts ...aws.Option) DescribeEventTypesPager {
+	return DescribeEventTypesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventTypesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEventTypesPagesWithContext same as DescribeEventTypesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEventTypesPagesWithContext(ctx aws.Context, input *DescribeEventTypesInput, fn func(*DescribeEventTypesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventTypesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEventTypesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventTypesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventTypesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEventTypesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventTypesPager) CurrentPage() *DescribeEventTypesOutput {
+	return p.Pager.CurrentPage().(*DescribeEventTypesOutput)
 }
 
 const opDescribeEvents = "DescribeEvents"
@@ -448,6 +441,7 @@ const opDescribeEvents = "DescribeEvents"
 type DescribeEventsRequest struct {
 	*aws.Request
 	Input *DescribeEventsInput
+	Copy  func(*DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -501,57 +495,53 @@ func (c *Health) DescribeEventsRequest(input *DescribeEventsInput) DescribeEvent
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventsRequest{Request: req, Input: input}
+	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
-// DescribeEventsPages iterates over the pages of a DescribeEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEvents operation.
-//    pageNum := 0
-//    err := client.DescribeEventsPages(params,
-//        func(page *DescribeEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *Health) DescribeEventsPages(input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool) error {
-	return c.DescribeEventsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
+	return DescribeEventsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEventsPagesWithContext same as DescribeEventsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *Health) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEventsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEventsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventsPager) CurrentPage() *DescribeEventsOutput {
+	return p.Pager.CurrentPage().(*DescribeEventsOutput)
 }
 
 // Information about an entity that is affected by a Health event.

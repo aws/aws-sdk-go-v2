@@ -16,6 +16,7 @@ const opCreateTags = "CreateTags"
 type CreateTagsRequest struct {
 	*aws.Request
 	Input *CreateTagsInput
+	Copy  func(*CreateTagsInput) CreateTagsRequest
 }
 
 // Send marshals and sends the CreateTags API request.
@@ -56,7 +57,7 @@ func (c *WorkSpaces) CreateTagsRequest(input *CreateTagsInput) CreateTagsRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTagsRequest{Request: req, Input: input}
+	return CreateTagsRequest{Request: req, Input: input, Copy: c.CreateTagsRequest}
 }
 
 const opCreateWorkspaces = "CreateWorkspaces"
@@ -65,6 +66,7 @@ const opCreateWorkspaces = "CreateWorkspaces"
 type CreateWorkspacesRequest struct {
 	*aws.Request
 	Input *CreateWorkspacesInput
+	Copy  func(*CreateWorkspacesInput) CreateWorkspacesRequest
 }
 
 // Send marshals and sends the CreateWorkspaces API request.
@@ -107,7 +109,7 @@ func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateWorkspacesRequest{Request: req, Input: input}
+	return CreateWorkspacesRequest{Request: req, Input: input, Copy: c.CreateWorkspacesRequest}
 }
 
 const opDeleteTags = "DeleteTags"
@@ -116,6 +118,7 @@ const opDeleteTags = "DeleteTags"
 type DeleteTagsRequest struct {
 	*aws.Request
 	Input *DeleteTagsInput
+	Copy  func(*DeleteTagsInput) DeleteTagsRequest
 }
 
 // Send marshals and sends the DeleteTags API request.
@@ -156,7 +159,7 @@ func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTagsRequest{Request: req, Input: input}
+	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
 const opDescribeTags = "DescribeTags"
@@ -165,6 +168,7 @@ const opDescribeTags = "DescribeTags"
 type DescribeTagsRequest struct {
 	*aws.Request
 	Input *DescribeTagsInput
+	Copy  func(*DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -205,7 +209,7 @@ func (c *WorkSpaces) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagsRequest{Request: req, Input: input}
+	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
 const opDescribeWorkspaceBundles = "DescribeWorkspaceBundles"
@@ -214,6 +218,7 @@ const opDescribeWorkspaceBundles = "DescribeWorkspaceBundles"
 type DescribeWorkspaceBundlesRequest struct {
 	*aws.Request
 	Input *DescribeWorkspaceBundlesInput
+	Copy  func(*DescribeWorkspaceBundlesInput) DescribeWorkspaceBundlesRequest
 }
 
 // Send marshals and sends the DescribeWorkspaceBundles API request.
@@ -262,57 +267,53 @@ func (c *WorkSpaces) DescribeWorkspaceBundlesRequest(input *DescribeWorkspaceBun
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeWorkspaceBundlesRequest{Request: req, Input: input}
+	return DescribeWorkspaceBundlesRequest{Request: req, Input: input, Copy: c.DescribeWorkspaceBundlesRequest}
 }
 
-// DescribeWorkspaceBundlesPages iterates over the pages of a DescribeWorkspaceBundles operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeWorkspaceBundles method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeWorkspaceBundlesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeWorkspaceBundles operation.
-//    pageNum := 0
-//    err := client.DescribeWorkspaceBundlesPages(params,
-//        func(page *DescribeWorkspaceBundlesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeWorkspaceBundlesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *WorkSpaces) DescribeWorkspaceBundlesPages(input *DescribeWorkspaceBundlesInput, fn func(*DescribeWorkspaceBundlesOutput, bool) bool) error {
-	return c.DescribeWorkspaceBundlesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeWorkspaceBundlesRequest) Paginate(opts ...aws.Option) DescribeWorkspaceBundlesPager {
+	return DescribeWorkspaceBundlesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeWorkspaceBundlesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeWorkspaceBundlesPagesWithContext same as DescribeWorkspaceBundlesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspaceBundlesPagesWithContext(ctx aws.Context, input *DescribeWorkspaceBundlesInput, fn func(*DescribeWorkspaceBundlesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeWorkspaceBundlesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeWorkspaceBundlesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeWorkspaceBundlesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeWorkspaceBundlesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeWorkspaceBundlesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeWorkspaceBundlesPager) CurrentPage() *DescribeWorkspaceBundlesOutput {
+	return p.Pager.CurrentPage().(*DescribeWorkspaceBundlesOutput)
 }
 
 const opDescribeWorkspaceDirectories = "DescribeWorkspaceDirectories"
@@ -321,6 +322,7 @@ const opDescribeWorkspaceDirectories = "DescribeWorkspaceDirectories"
 type DescribeWorkspaceDirectoriesRequest struct {
 	*aws.Request
 	Input *DescribeWorkspaceDirectoriesInput
+	Copy  func(*DescribeWorkspaceDirectoriesInput) DescribeWorkspaceDirectoriesRequest
 }
 
 // Send marshals and sends the DescribeWorkspaceDirectories API request.
@@ -368,57 +370,53 @@ func (c *WorkSpaces) DescribeWorkspaceDirectoriesRequest(input *DescribeWorkspac
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeWorkspaceDirectoriesRequest{Request: req, Input: input}
+	return DescribeWorkspaceDirectoriesRequest{Request: req, Input: input, Copy: c.DescribeWorkspaceDirectoriesRequest}
 }
 
-// DescribeWorkspaceDirectoriesPages iterates over the pages of a DescribeWorkspaceDirectories operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeWorkspaceDirectories method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeWorkspaceDirectoriesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeWorkspaceDirectories operation.
-//    pageNum := 0
-//    err := client.DescribeWorkspaceDirectoriesPages(params,
-//        func(page *DescribeWorkspaceDirectoriesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeWorkspaceDirectoriesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *WorkSpaces) DescribeWorkspaceDirectoriesPages(input *DescribeWorkspaceDirectoriesInput, fn func(*DescribeWorkspaceDirectoriesOutput, bool) bool) error {
-	return c.DescribeWorkspaceDirectoriesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeWorkspaceDirectoriesRequest) Paginate(opts ...aws.Option) DescribeWorkspaceDirectoriesPager {
+	return DescribeWorkspaceDirectoriesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeWorkspaceDirectoriesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeWorkspaceDirectoriesPagesWithContext same as DescribeWorkspaceDirectoriesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspaceDirectoriesPagesWithContext(ctx aws.Context, input *DescribeWorkspaceDirectoriesInput, fn func(*DescribeWorkspaceDirectoriesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeWorkspaceDirectoriesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeWorkspaceDirectoriesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeWorkspaceDirectoriesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeWorkspaceDirectoriesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeWorkspaceDirectoriesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeWorkspaceDirectoriesPager) CurrentPage() *DescribeWorkspaceDirectoriesOutput {
+	return p.Pager.CurrentPage().(*DescribeWorkspaceDirectoriesOutput)
 }
 
 const opDescribeWorkspaces = "DescribeWorkspaces"
@@ -427,6 +425,7 @@ const opDescribeWorkspaces = "DescribeWorkspaces"
 type DescribeWorkspacesRequest struct {
 	*aws.Request
 	Input *DescribeWorkspacesInput
+	Copy  func(*DescribeWorkspacesInput) DescribeWorkspacesRequest
 }
 
 // Send marshals and sends the DescribeWorkspaces API request.
@@ -476,57 +475,53 @@ func (c *WorkSpaces) DescribeWorkspacesRequest(input *DescribeWorkspacesInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeWorkspacesRequest{Request: req, Input: input}
+	return DescribeWorkspacesRequest{Request: req, Input: input, Copy: c.DescribeWorkspacesRequest}
 }
 
-// DescribeWorkspacesPages iterates over the pages of a DescribeWorkspaces operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeWorkspaces method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeWorkspacesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeWorkspaces operation.
-//    pageNum := 0
-//    err := client.DescribeWorkspacesPages(params,
-//        func(page *DescribeWorkspacesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeWorkspacesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *WorkSpaces) DescribeWorkspacesPages(input *DescribeWorkspacesInput, fn func(*DescribeWorkspacesOutput, bool) bool) error {
-	return c.DescribeWorkspacesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeWorkspacesRequest) Paginate(opts ...aws.Option) DescribeWorkspacesPager {
+	return DescribeWorkspacesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeWorkspacesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeWorkspacesPagesWithContext same as DescribeWorkspacesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *WorkSpaces) DescribeWorkspacesPagesWithContext(ctx aws.Context, input *DescribeWorkspacesInput, fn func(*DescribeWorkspacesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeWorkspacesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeWorkspacesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeWorkspacesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeWorkspacesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeWorkspacesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeWorkspacesPager) CurrentPage() *DescribeWorkspacesOutput {
+	return p.Pager.CurrentPage().(*DescribeWorkspacesOutput)
 }
 
 const opDescribeWorkspacesConnectionStatus = "DescribeWorkspacesConnectionStatus"
@@ -535,6 +530,7 @@ const opDescribeWorkspacesConnectionStatus = "DescribeWorkspacesConnectionStatus
 type DescribeWorkspacesConnectionStatusRequest struct {
 	*aws.Request
 	Input *DescribeWorkspacesConnectionStatusInput
+	Copy  func(*DescribeWorkspacesConnectionStatusInput) DescribeWorkspacesConnectionStatusRequest
 }
 
 // Send marshals and sends the DescribeWorkspacesConnectionStatus API request.
@@ -575,7 +571,7 @@ func (c *WorkSpaces) DescribeWorkspacesConnectionStatusRequest(input *DescribeWo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeWorkspacesConnectionStatusRequest{Request: req, Input: input}
+	return DescribeWorkspacesConnectionStatusRequest{Request: req, Input: input, Copy: c.DescribeWorkspacesConnectionStatusRequest}
 }
 
 const opModifyWorkspaceProperties = "ModifyWorkspaceProperties"
@@ -584,6 +580,7 @@ const opModifyWorkspaceProperties = "ModifyWorkspaceProperties"
 type ModifyWorkspacePropertiesRequest struct {
 	*aws.Request
 	Input *ModifyWorkspacePropertiesInput
+	Copy  func(*ModifyWorkspacePropertiesInput) ModifyWorkspacePropertiesRequest
 }
 
 // Send marshals and sends the ModifyWorkspaceProperties API request.
@@ -624,7 +621,7 @@ func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspaceProp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyWorkspacePropertiesRequest{Request: req, Input: input}
+	return ModifyWorkspacePropertiesRequest{Request: req, Input: input, Copy: c.ModifyWorkspacePropertiesRequest}
 }
 
 const opRebootWorkspaces = "RebootWorkspaces"
@@ -633,6 +630,7 @@ const opRebootWorkspaces = "RebootWorkspaces"
 type RebootWorkspacesRequest struct {
 	*aws.Request
 	Input *RebootWorkspacesInput
+	Copy  func(*RebootWorkspacesInput) RebootWorkspacesRequest
 }
 
 // Send marshals and sends the RebootWorkspaces API request.
@@ -678,7 +676,7 @@ func (c *WorkSpaces) RebootWorkspacesRequest(input *RebootWorkspacesInput) Reboo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RebootWorkspacesRequest{Request: req, Input: input}
+	return RebootWorkspacesRequest{Request: req, Input: input, Copy: c.RebootWorkspacesRequest}
 }
 
 const opRebuildWorkspaces = "RebuildWorkspaces"
@@ -687,6 +685,7 @@ const opRebuildWorkspaces = "RebuildWorkspaces"
 type RebuildWorkspacesRequest struct {
 	*aws.Request
 	Input *RebuildWorkspacesInput
+	Copy  func(*RebuildWorkspacesInput) RebuildWorkspacesRequest
 }
 
 // Send marshals and sends the RebuildWorkspaces API request.
@@ -735,7 +734,7 @@ func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) Reb
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RebuildWorkspacesRequest{Request: req, Input: input}
+	return RebuildWorkspacesRequest{Request: req, Input: input, Copy: c.RebuildWorkspacesRequest}
 }
 
 const opStartWorkspaces = "StartWorkspaces"
@@ -744,6 +743,7 @@ const opStartWorkspaces = "StartWorkspaces"
 type StartWorkspacesRequest struct {
 	*aws.Request
 	Input *StartWorkspacesInput
+	Copy  func(*StartWorkspacesInput) StartWorkspacesRequest
 }
 
 // Send marshals and sends the StartWorkspaces API request.
@@ -787,7 +787,7 @@ func (c *WorkSpaces) StartWorkspacesRequest(input *StartWorkspacesInput) StartWo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartWorkspacesRequest{Request: req, Input: input}
+	return StartWorkspacesRequest{Request: req, Input: input, Copy: c.StartWorkspacesRequest}
 }
 
 const opStopWorkspaces = "StopWorkspaces"
@@ -796,6 +796,7 @@ const opStopWorkspaces = "StopWorkspaces"
 type StopWorkspacesRequest struct {
 	*aws.Request
 	Input *StopWorkspacesInput
+	Copy  func(*StopWorkspacesInput) StopWorkspacesRequest
 }
 
 // Send marshals and sends the StopWorkspaces API request.
@@ -839,7 +840,7 @@ func (c *WorkSpaces) StopWorkspacesRequest(input *StopWorkspacesInput) StopWorks
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopWorkspacesRequest{Request: req, Input: input}
+	return StopWorkspacesRequest{Request: req, Input: input, Copy: c.StopWorkspacesRequest}
 }
 
 const opTerminateWorkspaces = "TerminateWorkspaces"
@@ -848,6 +849,7 @@ const opTerminateWorkspaces = "TerminateWorkspaces"
 type TerminateWorkspacesRequest struct {
 	*aws.Request
 	Input *TerminateWorkspacesInput
+	Copy  func(*TerminateWorkspacesInput) TerminateWorkspacesRequest
 }
 
 // Send marshals and sends the TerminateWorkspaces API request.
@@ -897,7 +899,7 @@ func (c *WorkSpaces) TerminateWorkspacesRequest(input *TerminateWorkspacesInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TerminateWorkspacesRequest{Request: req, Input: input}
+	return TerminateWorkspacesRequest{Request: req, Input: input, Copy: c.TerminateWorkspacesRequest}
 }
 
 // Information about the compute type.

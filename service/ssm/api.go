@@ -16,6 +16,7 @@ const opAddTagsToResource = "AddTagsToResource"
 type AddTagsToResourceRequest struct {
 	*aws.Request
 	Input *AddTagsToResourceInput
+	Copy  func(*AddTagsToResourceInput) AddTagsToResourceRequest
 }
 
 // Send marshals and sends the AddTagsToResource API request.
@@ -75,7 +76,7 @@ func (c *SSM) AddTagsToResourceRequest(input *AddTagsToResourceInput) AddTagsToR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToResourceRequest{Request: req, Input: input}
+	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 
 const opCancelCommand = "CancelCommand"
@@ -84,6 +85,7 @@ const opCancelCommand = "CancelCommand"
 type CancelCommandRequest struct {
 	*aws.Request
 	Input *CancelCommandInput
+	Copy  func(*CancelCommandInput) CancelCommandRequest
 }
 
 // Send marshals and sends the CancelCommand API request.
@@ -125,7 +127,7 @@ func (c *SSM) CancelCommandRequest(input *CancelCommandInput) CancelCommandReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CancelCommandRequest{Request: req, Input: input}
+	return CancelCommandRequest{Request: req, Input: input, Copy: c.CancelCommandRequest}
 }
 
 const opCreateActivation = "CreateActivation"
@@ -134,6 +136,7 @@ const opCreateActivation = "CreateActivation"
 type CreateActivationRequest struct {
 	*aws.Request
 	Input *CreateActivationInput
+	Copy  func(*CreateActivationInput) CreateActivationRequest
 }
 
 // Send marshals and sends the CreateActivation API request.
@@ -178,7 +181,7 @@ func (c *SSM) CreateActivationRequest(input *CreateActivationInput) CreateActiva
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateActivationRequest{Request: req, Input: input}
+	return CreateActivationRequest{Request: req, Input: input, Copy: c.CreateActivationRequest}
 }
 
 const opCreateAssociation = "CreateAssociation"
@@ -187,6 +190,7 @@ const opCreateAssociation = "CreateAssociation"
 type CreateAssociationRequest struct {
 	*aws.Request
 	Input *CreateAssociationInput
+	Copy  func(*CreateAssociationInput) CreateAssociationRequest
 }
 
 // Send marshals and sends the CreateAssociation API request.
@@ -235,7 +239,7 @@ func (c *SSM) CreateAssociationRequest(input *CreateAssociationInput) CreateAsso
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAssociationRequest{Request: req, Input: input}
+	return CreateAssociationRequest{Request: req, Input: input, Copy: c.CreateAssociationRequest}
 }
 
 const opCreateAssociationBatch = "CreateAssociationBatch"
@@ -244,6 +248,7 @@ const opCreateAssociationBatch = "CreateAssociationBatch"
 type CreateAssociationBatchRequest struct {
 	*aws.Request
 	Input *CreateAssociationBatchInput
+	Copy  func(*CreateAssociationBatchInput) CreateAssociationBatchRequest
 }
 
 // Send marshals and sends the CreateAssociationBatch API request.
@@ -292,7 +297,7 @@ func (c *SSM) CreateAssociationBatchRequest(input *CreateAssociationBatchInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateAssociationBatchRequest{Request: req, Input: input}
+	return CreateAssociationBatchRequest{Request: req, Input: input, Copy: c.CreateAssociationBatchRequest}
 }
 
 const opCreateDocument = "CreateDocument"
@@ -301,6 +306,7 @@ const opCreateDocument = "CreateDocument"
 type CreateDocumentRequest struct {
 	*aws.Request
 	Input *CreateDocumentInput
+	Copy  func(*CreateDocumentInput) CreateDocumentRequest
 }
 
 // Send marshals and sends the CreateDocument API request.
@@ -344,7 +350,7 @@ func (c *SSM) CreateDocumentRequest(input *CreateDocumentInput) CreateDocumentRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDocumentRequest{Request: req, Input: input}
+	return CreateDocumentRequest{Request: req, Input: input, Copy: c.CreateDocumentRequest}
 }
 
 const opCreateMaintenanceWindow = "CreateMaintenanceWindow"
@@ -353,6 +359,7 @@ const opCreateMaintenanceWindow = "CreateMaintenanceWindow"
 type CreateMaintenanceWindowRequest struct {
 	*aws.Request
 	Input *CreateMaintenanceWindowInput
+	Copy  func(*CreateMaintenanceWindowInput) CreateMaintenanceWindowRequest
 }
 
 // Send marshals and sends the CreateMaintenanceWindow API request.
@@ -393,7 +400,7 @@ func (c *SSM) CreateMaintenanceWindowRequest(input *CreateMaintenanceWindowInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateMaintenanceWindowRequest{Request: req, Input: input}
+	return CreateMaintenanceWindowRequest{Request: req, Input: input, Copy: c.CreateMaintenanceWindowRequest}
 }
 
 const opCreatePatchBaseline = "CreatePatchBaseline"
@@ -402,6 +409,7 @@ const opCreatePatchBaseline = "CreatePatchBaseline"
 type CreatePatchBaselineRequest struct {
 	*aws.Request
 	Input *CreatePatchBaselineInput
+	Copy  func(*CreatePatchBaselineInput) CreatePatchBaselineRequest
 }
 
 // Send marshals and sends the CreatePatchBaseline API request.
@@ -445,7 +453,7 @@ func (c *SSM) CreatePatchBaselineRequest(input *CreatePatchBaselineInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreatePatchBaselineRequest{Request: req, Input: input}
+	return CreatePatchBaselineRequest{Request: req, Input: input, Copy: c.CreatePatchBaselineRequest}
 }
 
 const opCreateResourceDataSync = "CreateResourceDataSync"
@@ -454,6 +462,7 @@ const opCreateResourceDataSync = "CreateResourceDataSync"
 type CreateResourceDataSyncRequest struct {
 	*aws.Request
 	Input *CreateResourceDataSyncInput
+	Copy  func(*CreateResourceDataSyncInput) CreateResourceDataSyncRequest
 }
 
 // Send marshals and sends the CreateResourceDataSync API request.
@@ -504,7 +513,7 @@ func (c *SSM) CreateResourceDataSyncRequest(input *CreateResourceDataSyncInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateResourceDataSyncRequest{Request: req, Input: input}
+	return CreateResourceDataSyncRequest{Request: req, Input: input, Copy: c.CreateResourceDataSyncRequest}
 }
 
 const opDeleteActivation = "DeleteActivation"
@@ -513,6 +522,7 @@ const opDeleteActivation = "DeleteActivation"
 type DeleteActivationRequest struct {
 	*aws.Request
 	Input *DeleteActivationInput
+	Copy  func(*DeleteActivationInput) DeleteActivationRequest
 }
 
 // Send marshals and sends the DeleteActivation API request.
@@ -556,7 +566,7 @@ func (c *SSM) DeleteActivationRequest(input *DeleteActivationInput) DeleteActiva
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteActivationRequest{Request: req, Input: input}
+	return DeleteActivationRequest{Request: req, Input: input, Copy: c.DeleteActivationRequest}
 }
 
 const opDeleteAssociation = "DeleteAssociation"
@@ -565,6 +575,7 @@ const opDeleteAssociation = "DeleteAssociation"
 type DeleteAssociationRequest struct {
 	*aws.Request
 	Input *DeleteAssociationInput
+	Copy  func(*DeleteAssociationInput) DeleteAssociationRequest
 }
 
 // Send marshals and sends the DeleteAssociation API request.
@@ -610,7 +621,7 @@ func (c *SSM) DeleteAssociationRequest(input *DeleteAssociationInput) DeleteAsso
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteAssociationRequest{Request: req, Input: input}
+	return DeleteAssociationRequest{Request: req, Input: input, Copy: c.DeleteAssociationRequest}
 }
 
 const opDeleteDocument = "DeleteDocument"
@@ -619,6 +630,7 @@ const opDeleteDocument = "DeleteDocument"
 type DeleteDocumentRequest struct {
 	*aws.Request
 	Input *DeleteDocumentInput
+	Copy  func(*DeleteDocumentInput) DeleteDocumentRequest
 }
 
 // Send marshals and sends the DeleteDocument API request.
@@ -663,7 +675,7 @@ func (c *SSM) DeleteDocumentRequest(input *DeleteDocumentInput) DeleteDocumentRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDocumentRequest{Request: req, Input: input}
+	return DeleteDocumentRequest{Request: req, Input: input, Copy: c.DeleteDocumentRequest}
 }
 
 const opDeleteMaintenanceWindow = "DeleteMaintenanceWindow"
@@ -672,6 +684,7 @@ const opDeleteMaintenanceWindow = "DeleteMaintenanceWindow"
 type DeleteMaintenanceWindowRequest struct {
 	*aws.Request
 	Input *DeleteMaintenanceWindowInput
+	Copy  func(*DeleteMaintenanceWindowInput) DeleteMaintenanceWindowRequest
 }
 
 // Send marshals and sends the DeleteMaintenanceWindow API request.
@@ -712,7 +725,7 @@ func (c *SSM) DeleteMaintenanceWindowRequest(input *DeleteMaintenanceWindowInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteMaintenanceWindowRequest{Request: req, Input: input}
+	return DeleteMaintenanceWindowRequest{Request: req, Input: input, Copy: c.DeleteMaintenanceWindowRequest}
 }
 
 const opDeleteParameter = "DeleteParameter"
@@ -721,6 +734,7 @@ const opDeleteParameter = "DeleteParameter"
 type DeleteParameterRequest struct {
 	*aws.Request
 	Input *DeleteParameterInput
+	Copy  func(*DeleteParameterInput) DeleteParameterRequest
 }
 
 // Send marshals and sends the DeleteParameter API request.
@@ -761,7 +775,7 @@ func (c *SSM) DeleteParameterRequest(input *DeleteParameterInput) DeleteParamete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteParameterRequest{Request: req, Input: input}
+	return DeleteParameterRequest{Request: req, Input: input, Copy: c.DeleteParameterRequest}
 }
 
 const opDeleteParameters = "DeleteParameters"
@@ -770,6 +784,7 @@ const opDeleteParameters = "DeleteParameters"
 type DeleteParametersRequest struct {
 	*aws.Request
 	Input *DeleteParametersInput
+	Copy  func(*DeleteParametersInput) DeleteParametersRequest
 }
 
 // Send marshals and sends the DeleteParameters API request.
@@ -811,7 +826,7 @@ func (c *SSM) DeleteParametersRequest(input *DeleteParametersInput) DeleteParame
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteParametersRequest{Request: req, Input: input}
+	return DeleteParametersRequest{Request: req, Input: input, Copy: c.DeleteParametersRequest}
 }
 
 const opDeletePatchBaseline = "DeletePatchBaseline"
@@ -820,6 +835,7 @@ const opDeletePatchBaseline = "DeletePatchBaseline"
 type DeletePatchBaselineRequest struct {
 	*aws.Request
 	Input *DeletePatchBaselineInput
+	Copy  func(*DeletePatchBaselineInput) DeletePatchBaselineRequest
 }
 
 // Send marshals and sends the DeletePatchBaseline API request.
@@ -860,7 +876,7 @@ func (c *SSM) DeletePatchBaselineRequest(input *DeletePatchBaselineInput) Delete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeletePatchBaselineRequest{Request: req, Input: input}
+	return DeletePatchBaselineRequest{Request: req, Input: input, Copy: c.DeletePatchBaselineRequest}
 }
 
 const opDeleteResourceDataSync = "DeleteResourceDataSync"
@@ -869,6 +885,7 @@ const opDeleteResourceDataSync = "DeleteResourceDataSync"
 type DeleteResourceDataSyncRequest struct {
 	*aws.Request
 	Input *DeleteResourceDataSyncInput
+	Copy  func(*DeleteResourceDataSyncInput) DeleteResourceDataSyncRequest
 }
 
 // Send marshals and sends the DeleteResourceDataSync API request.
@@ -912,7 +929,7 @@ func (c *SSM) DeleteResourceDataSyncRequest(input *DeleteResourceDataSyncInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteResourceDataSyncRequest{Request: req, Input: input}
+	return DeleteResourceDataSyncRequest{Request: req, Input: input, Copy: c.DeleteResourceDataSyncRequest}
 }
 
 const opDeregisterManagedInstance = "DeregisterManagedInstance"
@@ -921,6 +938,7 @@ const opDeregisterManagedInstance = "DeregisterManagedInstance"
 type DeregisterManagedInstanceRequest struct {
 	*aws.Request
 	Input *DeregisterManagedInstanceInput
+	Copy  func(*DeregisterManagedInstanceInput) DeregisterManagedInstanceRequest
 }
 
 // Send marshals and sends the DeregisterManagedInstance API request.
@@ -963,7 +981,7 @@ func (c *SSM) DeregisterManagedInstanceRequest(input *DeregisterManagedInstanceI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterManagedInstanceRequest{Request: req, Input: input}
+	return DeregisterManagedInstanceRequest{Request: req, Input: input, Copy: c.DeregisterManagedInstanceRequest}
 }
 
 const opDeregisterPatchBaselineForPatchGroup = "DeregisterPatchBaselineForPatchGroup"
@@ -972,6 +990,7 @@ const opDeregisterPatchBaselineForPatchGroup = "DeregisterPatchBaselineForPatchG
 type DeregisterPatchBaselineForPatchGroupRequest struct {
 	*aws.Request
 	Input *DeregisterPatchBaselineForPatchGroupInput
+	Copy  func(*DeregisterPatchBaselineForPatchGroupInput) DeregisterPatchBaselineForPatchGroupRequest
 }
 
 // Send marshals and sends the DeregisterPatchBaselineForPatchGroup API request.
@@ -1012,7 +1031,7 @@ func (c *SSM) DeregisterPatchBaselineForPatchGroupRequest(input *DeregisterPatch
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterPatchBaselineForPatchGroupRequest{Request: req, Input: input}
+	return DeregisterPatchBaselineForPatchGroupRequest{Request: req, Input: input, Copy: c.DeregisterPatchBaselineForPatchGroupRequest}
 }
 
 const opDeregisterTargetFromMaintenanceWindow = "DeregisterTargetFromMaintenanceWindow"
@@ -1021,6 +1040,7 @@ const opDeregisterTargetFromMaintenanceWindow = "DeregisterTargetFromMaintenance
 type DeregisterTargetFromMaintenanceWindowRequest struct {
 	*aws.Request
 	Input *DeregisterTargetFromMaintenanceWindowInput
+	Copy  func(*DeregisterTargetFromMaintenanceWindowInput) DeregisterTargetFromMaintenanceWindowRequest
 }
 
 // Send marshals and sends the DeregisterTargetFromMaintenanceWindow API request.
@@ -1061,7 +1081,7 @@ func (c *SSM) DeregisterTargetFromMaintenanceWindowRequest(input *DeregisterTarg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterTargetFromMaintenanceWindowRequest{Request: req, Input: input}
+	return DeregisterTargetFromMaintenanceWindowRequest{Request: req, Input: input, Copy: c.DeregisterTargetFromMaintenanceWindowRequest}
 }
 
 const opDeregisterTaskFromMaintenanceWindow = "DeregisterTaskFromMaintenanceWindow"
@@ -1070,6 +1090,7 @@ const opDeregisterTaskFromMaintenanceWindow = "DeregisterTaskFromMaintenanceWind
 type DeregisterTaskFromMaintenanceWindowRequest struct {
 	*aws.Request
 	Input *DeregisterTaskFromMaintenanceWindowInput
+	Copy  func(*DeregisterTaskFromMaintenanceWindowInput) DeregisterTaskFromMaintenanceWindowRequest
 }
 
 // Send marshals and sends the DeregisterTaskFromMaintenanceWindow API request.
@@ -1110,7 +1131,7 @@ func (c *SSM) DeregisterTaskFromMaintenanceWindowRequest(input *DeregisterTaskFr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterTaskFromMaintenanceWindowRequest{Request: req, Input: input}
+	return DeregisterTaskFromMaintenanceWindowRequest{Request: req, Input: input, Copy: c.DeregisterTaskFromMaintenanceWindowRequest}
 }
 
 const opDescribeActivations = "DescribeActivations"
@@ -1119,6 +1140,7 @@ const opDescribeActivations = "DescribeActivations"
 type DescribeActivationsRequest struct {
 	*aws.Request
 	Input *DescribeActivationsInput
+	Copy  func(*DescribeActivationsInput) DescribeActivationsRequest
 }
 
 // Send marshals and sends the DescribeActivations API request.
@@ -1167,57 +1189,53 @@ func (c *SSM) DescribeActivationsRequest(input *DescribeActivationsInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeActivationsRequest{Request: req, Input: input}
+	return DescribeActivationsRequest{Request: req, Input: input, Copy: c.DescribeActivationsRequest}
 }
 
-// DescribeActivationsPages iterates over the pages of a DescribeActivations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeActivations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeActivationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeActivations operation.
-//    pageNum := 0
-//    err := client.DescribeActivationsPages(params,
-//        func(page *DescribeActivationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeActivationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SSM) DescribeActivationsPages(input *DescribeActivationsInput, fn func(*DescribeActivationsOutput, bool) bool) error {
-	return c.DescribeActivationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeActivationsRequest) Paginate(opts ...aws.Option) DescribeActivationsPager {
+	return DescribeActivationsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeActivationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeActivationsPagesWithContext same as DescribeActivationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeActivationsPagesWithContext(ctx aws.Context, input *DescribeActivationsInput, fn func(*DescribeActivationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeActivationsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeActivationsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeActivationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeActivationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeActivationsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeActivationsPager) CurrentPage() *DescribeActivationsOutput {
+	return p.Pager.CurrentPage().(*DescribeActivationsOutput)
 }
 
 const opDescribeAssociation = "DescribeAssociation"
@@ -1226,6 +1244,7 @@ const opDescribeAssociation = "DescribeAssociation"
 type DescribeAssociationRequest struct {
 	*aws.Request
 	Input *DescribeAssociationInput
+	Copy  func(*DescribeAssociationInput) DescribeAssociationRequest
 }
 
 // Send marshals and sends the DescribeAssociation API request.
@@ -1270,7 +1289,7 @@ func (c *SSM) DescribeAssociationRequest(input *DescribeAssociationInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAssociationRequest{Request: req, Input: input}
+	return DescribeAssociationRequest{Request: req, Input: input, Copy: c.DescribeAssociationRequest}
 }
 
 const opDescribeAutomationExecutions = "DescribeAutomationExecutions"
@@ -1279,6 +1298,7 @@ const opDescribeAutomationExecutions = "DescribeAutomationExecutions"
 type DescribeAutomationExecutionsRequest struct {
 	*aws.Request
 	Input *DescribeAutomationExecutionsInput
+	Copy  func(*DescribeAutomationExecutionsInput) DescribeAutomationExecutionsRequest
 }
 
 // Send marshals and sends the DescribeAutomationExecutions API request.
@@ -1319,7 +1339,7 @@ func (c *SSM) DescribeAutomationExecutionsRequest(input *DescribeAutomationExecu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAutomationExecutionsRequest{Request: req, Input: input}
+	return DescribeAutomationExecutionsRequest{Request: req, Input: input, Copy: c.DescribeAutomationExecutionsRequest}
 }
 
 const opDescribeAutomationStepExecutions = "DescribeAutomationStepExecutions"
@@ -1328,6 +1348,7 @@ const opDescribeAutomationStepExecutions = "DescribeAutomationStepExecutions"
 type DescribeAutomationStepExecutionsRequest struct {
 	*aws.Request
 	Input *DescribeAutomationStepExecutionsInput
+	Copy  func(*DescribeAutomationStepExecutionsInput) DescribeAutomationStepExecutionsRequest
 }
 
 // Send marshals and sends the DescribeAutomationStepExecutions API request.
@@ -1369,7 +1390,7 @@ func (c *SSM) DescribeAutomationStepExecutionsRequest(input *DescribeAutomationS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAutomationStepExecutionsRequest{Request: req, Input: input}
+	return DescribeAutomationStepExecutionsRequest{Request: req, Input: input, Copy: c.DescribeAutomationStepExecutionsRequest}
 }
 
 const opDescribeAvailablePatches = "DescribeAvailablePatches"
@@ -1378,6 +1399,7 @@ const opDescribeAvailablePatches = "DescribeAvailablePatches"
 type DescribeAvailablePatchesRequest struct {
 	*aws.Request
 	Input *DescribeAvailablePatchesInput
+	Copy  func(*DescribeAvailablePatchesInput) DescribeAvailablePatchesRequest
 }
 
 // Send marshals and sends the DescribeAvailablePatches API request.
@@ -1418,7 +1440,7 @@ func (c *SSM) DescribeAvailablePatchesRequest(input *DescribeAvailablePatchesInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAvailablePatchesRequest{Request: req, Input: input}
+	return DescribeAvailablePatchesRequest{Request: req, Input: input, Copy: c.DescribeAvailablePatchesRequest}
 }
 
 const opDescribeDocument = "DescribeDocument"
@@ -1427,6 +1449,7 @@ const opDescribeDocument = "DescribeDocument"
 type DescribeDocumentRequest struct {
 	*aws.Request
 	Input *DescribeDocumentInput
+	Copy  func(*DescribeDocumentInput) DescribeDocumentRequest
 }
 
 // Send marshals and sends the DescribeDocument API request.
@@ -1467,7 +1490,7 @@ func (c *SSM) DescribeDocumentRequest(input *DescribeDocumentInput) DescribeDocu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDocumentRequest{Request: req, Input: input}
+	return DescribeDocumentRequest{Request: req, Input: input, Copy: c.DescribeDocumentRequest}
 }
 
 const opDescribeDocumentPermission = "DescribeDocumentPermission"
@@ -1476,6 +1499,7 @@ const opDescribeDocumentPermission = "DescribeDocumentPermission"
 type DescribeDocumentPermissionRequest struct {
 	*aws.Request
 	Input *DescribeDocumentPermissionInput
+	Copy  func(*DescribeDocumentPermissionInput) DescribeDocumentPermissionRequest
 }
 
 // Send marshals and sends the DescribeDocumentPermission API request.
@@ -1518,7 +1542,7 @@ func (c *SSM) DescribeDocumentPermissionRequest(input *DescribeDocumentPermissio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeDocumentPermissionRequest{Request: req, Input: input}
+	return DescribeDocumentPermissionRequest{Request: req, Input: input, Copy: c.DescribeDocumentPermissionRequest}
 }
 
 const opDescribeEffectiveInstanceAssociations = "DescribeEffectiveInstanceAssociations"
@@ -1527,6 +1551,7 @@ const opDescribeEffectiveInstanceAssociations = "DescribeEffectiveInstanceAssoci
 type DescribeEffectiveInstanceAssociationsRequest struct {
 	*aws.Request
 	Input *DescribeEffectiveInstanceAssociationsInput
+	Copy  func(*DescribeEffectiveInstanceAssociationsInput) DescribeEffectiveInstanceAssociationsRequest
 }
 
 // Send marshals and sends the DescribeEffectiveInstanceAssociations API request.
@@ -1567,7 +1592,7 @@ func (c *SSM) DescribeEffectiveInstanceAssociationsRequest(input *DescribeEffect
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEffectiveInstanceAssociationsRequest{Request: req, Input: input}
+	return DescribeEffectiveInstanceAssociationsRequest{Request: req, Input: input, Copy: c.DescribeEffectiveInstanceAssociationsRequest}
 }
 
 const opDescribeEffectivePatchesForPatchBaseline = "DescribeEffectivePatchesForPatchBaseline"
@@ -1576,6 +1601,7 @@ const opDescribeEffectivePatchesForPatchBaseline = "DescribeEffectivePatchesForP
 type DescribeEffectivePatchesForPatchBaselineRequest struct {
 	*aws.Request
 	Input *DescribeEffectivePatchesForPatchBaselineInput
+	Copy  func(*DescribeEffectivePatchesForPatchBaselineInput) DescribeEffectivePatchesForPatchBaselineRequest
 }
 
 // Send marshals and sends the DescribeEffectivePatchesForPatchBaseline API request.
@@ -1618,7 +1644,7 @@ func (c *SSM) DescribeEffectivePatchesForPatchBaselineRequest(input *DescribeEff
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEffectivePatchesForPatchBaselineRequest{Request: req, Input: input}
+	return DescribeEffectivePatchesForPatchBaselineRequest{Request: req, Input: input, Copy: c.DescribeEffectivePatchesForPatchBaselineRequest}
 }
 
 const opDescribeInstanceAssociationsStatus = "DescribeInstanceAssociationsStatus"
@@ -1627,6 +1653,7 @@ const opDescribeInstanceAssociationsStatus = "DescribeInstanceAssociationsStatus
 type DescribeInstanceAssociationsStatusRequest struct {
 	*aws.Request
 	Input *DescribeInstanceAssociationsStatusInput
+	Copy  func(*DescribeInstanceAssociationsStatusInput) DescribeInstanceAssociationsStatusRequest
 }
 
 // Send marshals and sends the DescribeInstanceAssociationsStatus API request.
@@ -1667,7 +1694,7 @@ func (c *SSM) DescribeInstanceAssociationsStatusRequest(input *DescribeInstanceA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstanceAssociationsStatusRequest{Request: req, Input: input}
+	return DescribeInstanceAssociationsStatusRequest{Request: req, Input: input, Copy: c.DescribeInstanceAssociationsStatusRequest}
 }
 
 const opDescribeInstanceInformation = "DescribeInstanceInformation"
@@ -1676,6 +1703,7 @@ const opDescribeInstanceInformation = "DescribeInstanceInformation"
 type DescribeInstanceInformationRequest struct {
 	*aws.Request
 	Input *DescribeInstanceInformationInput
+	Copy  func(*DescribeInstanceInformationInput) DescribeInstanceInformationRequest
 }
 
 // Send marshals and sends the DescribeInstanceInformation API request.
@@ -1727,57 +1755,53 @@ func (c *SSM) DescribeInstanceInformationRequest(input *DescribeInstanceInformat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstanceInformationRequest{Request: req, Input: input}
+	return DescribeInstanceInformationRequest{Request: req, Input: input, Copy: c.DescribeInstanceInformationRequest}
 }
 
-// DescribeInstanceInformationPages iterates over the pages of a DescribeInstanceInformation operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeInstanceInformation method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeInstanceInformationRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeInstanceInformation operation.
-//    pageNum := 0
-//    err := client.DescribeInstanceInformationPages(params,
-//        func(page *DescribeInstanceInformationOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeInstanceInformationRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SSM) DescribeInstanceInformationPages(input *DescribeInstanceInformationInput, fn func(*DescribeInstanceInformationOutput, bool) bool) error {
-	return c.DescribeInstanceInformationPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeInstanceInformationRequest) Paginate(opts ...aws.Option) DescribeInstanceInformationPager {
+	return DescribeInstanceInformationPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeInstanceInformationInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeInstanceInformationPagesWithContext same as DescribeInstanceInformationPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeInstanceInformationPagesWithContext(ctx aws.Context, input *DescribeInstanceInformationInput, fn func(*DescribeInstanceInformationOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeInstanceInformationInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeInstanceInformationRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeInstanceInformationOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeInstanceInformationPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeInstanceInformationPager struct {
+	aws.Pager
+}
+
+func (p *DescribeInstanceInformationPager) CurrentPage() *DescribeInstanceInformationOutput {
+	return p.Pager.CurrentPage().(*DescribeInstanceInformationOutput)
 }
 
 const opDescribeInstancePatchStates = "DescribeInstancePatchStates"
@@ -1786,6 +1810,7 @@ const opDescribeInstancePatchStates = "DescribeInstancePatchStates"
 type DescribeInstancePatchStatesRequest struct {
 	*aws.Request
 	Input *DescribeInstancePatchStatesInput
+	Copy  func(*DescribeInstancePatchStatesInput) DescribeInstancePatchStatesRequest
 }
 
 // Send marshals and sends the DescribeInstancePatchStates API request.
@@ -1826,7 +1851,7 @@ func (c *SSM) DescribeInstancePatchStatesRequest(input *DescribeInstancePatchSta
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstancePatchStatesRequest{Request: req, Input: input}
+	return DescribeInstancePatchStatesRequest{Request: req, Input: input, Copy: c.DescribeInstancePatchStatesRequest}
 }
 
 const opDescribeInstancePatchStatesForPatchGroup = "DescribeInstancePatchStatesForPatchGroup"
@@ -1835,6 +1860,7 @@ const opDescribeInstancePatchStatesForPatchGroup = "DescribeInstancePatchStatesF
 type DescribeInstancePatchStatesForPatchGroupRequest struct {
 	*aws.Request
 	Input *DescribeInstancePatchStatesForPatchGroupInput
+	Copy  func(*DescribeInstancePatchStatesForPatchGroupInput) DescribeInstancePatchStatesForPatchGroupRequest
 }
 
 // Send marshals and sends the DescribeInstancePatchStatesForPatchGroup API request.
@@ -1876,7 +1902,7 @@ func (c *SSM) DescribeInstancePatchStatesForPatchGroupRequest(input *DescribeIns
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstancePatchStatesForPatchGroupRequest{Request: req, Input: input}
+	return DescribeInstancePatchStatesForPatchGroupRequest{Request: req, Input: input, Copy: c.DescribeInstancePatchStatesForPatchGroupRequest}
 }
 
 const opDescribeInstancePatches = "DescribeInstancePatches"
@@ -1885,6 +1911,7 @@ const opDescribeInstancePatches = "DescribeInstancePatches"
 type DescribeInstancePatchesRequest struct {
 	*aws.Request
 	Input *DescribeInstancePatchesInput
+	Copy  func(*DescribeInstancePatchesInput) DescribeInstancePatchesRequest
 }
 
 // Send marshals and sends the DescribeInstancePatches API request.
@@ -1926,7 +1953,7 @@ func (c *SSM) DescribeInstancePatchesRequest(input *DescribeInstancePatchesInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeInstancePatchesRequest{Request: req, Input: input}
+	return DescribeInstancePatchesRequest{Request: req, Input: input, Copy: c.DescribeInstancePatchesRequest}
 }
 
 const opDescribeMaintenanceWindowExecutionTaskInvocations = "DescribeMaintenanceWindowExecutionTaskInvocations"
@@ -1935,6 +1962,7 @@ const opDescribeMaintenanceWindowExecutionTaskInvocations = "DescribeMaintenance
 type DescribeMaintenanceWindowExecutionTaskInvocationsRequest struct {
 	*aws.Request
 	Input *DescribeMaintenanceWindowExecutionTaskInvocationsInput
+	Copy  func(*DescribeMaintenanceWindowExecutionTaskInvocationsInput) DescribeMaintenanceWindowExecutionTaskInvocationsRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutionTaskInvocations API request.
@@ -1976,7 +2004,7 @@ func (c *SSM) DescribeMaintenanceWindowExecutionTaskInvocationsRequest(input *De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMaintenanceWindowExecutionTaskInvocationsRequest{Request: req, Input: input}
+	return DescribeMaintenanceWindowExecutionTaskInvocationsRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowExecutionTaskInvocationsRequest}
 }
 
 const opDescribeMaintenanceWindowExecutionTasks = "DescribeMaintenanceWindowExecutionTasks"
@@ -1985,6 +2013,7 @@ const opDescribeMaintenanceWindowExecutionTasks = "DescribeMaintenanceWindowExec
 type DescribeMaintenanceWindowExecutionTasksRequest struct {
 	*aws.Request
 	Input *DescribeMaintenanceWindowExecutionTasksInput
+	Copy  func(*DescribeMaintenanceWindowExecutionTasksInput) DescribeMaintenanceWindowExecutionTasksRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutionTasks API request.
@@ -2025,7 +2054,7 @@ func (c *SSM) DescribeMaintenanceWindowExecutionTasksRequest(input *DescribeMain
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMaintenanceWindowExecutionTasksRequest{Request: req, Input: input}
+	return DescribeMaintenanceWindowExecutionTasksRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowExecutionTasksRequest}
 }
 
 const opDescribeMaintenanceWindowExecutions = "DescribeMaintenanceWindowExecutions"
@@ -2034,6 +2063,7 @@ const opDescribeMaintenanceWindowExecutions = "DescribeMaintenanceWindowExecutio
 type DescribeMaintenanceWindowExecutionsRequest struct {
 	*aws.Request
 	Input *DescribeMaintenanceWindowExecutionsInput
+	Copy  func(*DescribeMaintenanceWindowExecutionsInput) DescribeMaintenanceWindowExecutionsRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowExecutions API request.
@@ -2076,7 +2106,7 @@ func (c *SSM) DescribeMaintenanceWindowExecutionsRequest(input *DescribeMaintena
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMaintenanceWindowExecutionsRequest{Request: req, Input: input}
+	return DescribeMaintenanceWindowExecutionsRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowExecutionsRequest}
 }
 
 const opDescribeMaintenanceWindowTargets = "DescribeMaintenanceWindowTargets"
@@ -2085,6 +2115,7 @@ const opDescribeMaintenanceWindowTargets = "DescribeMaintenanceWindowTargets"
 type DescribeMaintenanceWindowTargetsRequest struct {
 	*aws.Request
 	Input *DescribeMaintenanceWindowTargetsInput
+	Copy  func(*DescribeMaintenanceWindowTargetsInput) DescribeMaintenanceWindowTargetsRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowTargets API request.
@@ -2125,7 +2156,7 @@ func (c *SSM) DescribeMaintenanceWindowTargetsRequest(input *DescribeMaintenance
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMaintenanceWindowTargetsRequest{Request: req, Input: input}
+	return DescribeMaintenanceWindowTargetsRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowTargetsRequest}
 }
 
 const opDescribeMaintenanceWindowTasks = "DescribeMaintenanceWindowTasks"
@@ -2134,6 +2165,7 @@ const opDescribeMaintenanceWindowTasks = "DescribeMaintenanceWindowTasks"
 type DescribeMaintenanceWindowTasksRequest struct {
 	*aws.Request
 	Input *DescribeMaintenanceWindowTasksInput
+	Copy  func(*DescribeMaintenanceWindowTasksInput) DescribeMaintenanceWindowTasksRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceWindowTasks API request.
@@ -2174,7 +2206,7 @@ func (c *SSM) DescribeMaintenanceWindowTasksRequest(input *DescribeMaintenanceWi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMaintenanceWindowTasksRequest{Request: req, Input: input}
+	return DescribeMaintenanceWindowTasksRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowTasksRequest}
 }
 
 const opDescribeMaintenanceWindows = "DescribeMaintenanceWindows"
@@ -2183,6 +2215,7 @@ const opDescribeMaintenanceWindows = "DescribeMaintenanceWindows"
 type DescribeMaintenanceWindowsRequest struct {
 	*aws.Request
 	Input *DescribeMaintenanceWindowsInput
+	Copy  func(*DescribeMaintenanceWindowsInput) DescribeMaintenanceWindowsRequest
 }
 
 // Send marshals and sends the DescribeMaintenanceWindows API request.
@@ -2223,7 +2256,7 @@ func (c *SSM) DescribeMaintenanceWindowsRequest(input *DescribeMaintenanceWindow
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeMaintenanceWindowsRequest{Request: req, Input: input}
+	return DescribeMaintenanceWindowsRequest{Request: req, Input: input, Copy: c.DescribeMaintenanceWindowsRequest}
 }
 
 const opDescribeParameters = "DescribeParameters"
@@ -2232,6 +2265,7 @@ const opDescribeParameters = "DescribeParameters"
 type DescribeParametersRequest struct {
 	*aws.Request
 	Input *DescribeParametersInput
+	Copy  func(*DescribeParametersInput) DescribeParametersRequest
 }
 
 // Send marshals and sends the DescribeParameters API request.
@@ -2286,57 +2320,53 @@ func (c *SSM) DescribeParametersRequest(input *DescribeParametersInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeParametersRequest{Request: req, Input: input}
+	return DescribeParametersRequest{Request: req, Input: input, Copy: c.DescribeParametersRequest}
 }
 
-// DescribeParametersPages iterates over the pages of a DescribeParameters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeParameters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeParametersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeParameters operation.
-//    pageNum := 0
-//    err := client.DescribeParametersPages(params,
-//        func(page *DescribeParametersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeParametersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SSM) DescribeParametersPages(input *DescribeParametersInput, fn func(*DescribeParametersOutput, bool) bool) error {
-	return c.DescribeParametersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeParametersRequest) Paginate(opts ...aws.Option) DescribeParametersPager {
+	return DescribeParametersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeParametersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeParametersPagesWithContext same as DescribeParametersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) DescribeParametersPagesWithContext(ctx aws.Context, input *DescribeParametersInput, fn func(*DescribeParametersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeParametersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeParametersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeParametersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeParametersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeParametersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeParametersPager) CurrentPage() *DescribeParametersOutput {
+	return p.Pager.CurrentPage().(*DescribeParametersOutput)
 }
 
 const opDescribePatchBaselines = "DescribePatchBaselines"
@@ -2345,6 +2375,7 @@ const opDescribePatchBaselines = "DescribePatchBaselines"
 type DescribePatchBaselinesRequest struct {
 	*aws.Request
 	Input *DescribePatchBaselinesInput
+	Copy  func(*DescribePatchBaselinesInput) DescribePatchBaselinesRequest
 }
 
 // Send marshals and sends the DescribePatchBaselines API request.
@@ -2385,7 +2416,7 @@ func (c *SSM) DescribePatchBaselinesRequest(input *DescribePatchBaselinesInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePatchBaselinesRequest{Request: req, Input: input}
+	return DescribePatchBaselinesRequest{Request: req, Input: input, Copy: c.DescribePatchBaselinesRequest}
 }
 
 const opDescribePatchGroupState = "DescribePatchGroupState"
@@ -2394,6 +2425,7 @@ const opDescribePatchGroupState = "DescribePatchGroupState"
 type DescribePatchGroupStateRequest struct {
 	*aws.Request
 	Input *DescribePatchGroupStateInput
+	Copy  func(*DescribePatchGroupStateInput) DescribePatchGroupStateRequest
 }
 
 // Send marshals and sends the DescribePatchGroupState API request.
@@ -2434,7 +2466,7 @@ func (c *SSM) DescribePatchGroupStateRequest(input *DescribePatchGroupStateInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePatchGroupStateRequest{Request: req, Input: input}
+	return DescribePatchGroupStateRequest{Request: req, Input: input, Copy: c.DescribePatchGroupStateRequest}
 }
 
 const opDescribePatchGroups = "DescribePatchGroups"
@@ -2443,6 +2475,7 @@ const opDescribePatchGroups = "DescribePatchGroups"
 type DescribePatchGroupsRequest struct {
 	*aws.Request
 	Input *DescribePatchGroupsInput
+	Copy  func(*DescribePatchGroupsInput) DescribePatchGroupsRequest
 }
 
 // Send marshals and sends the DescribePatchGroups API request.
@@ -2483,7 +2516,7 @@ func (c *SSM) DescribePatchGroupsRequest(input *DescribePatchGroupsInput) Descri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribePatchGroupsRequest{Request: req, Input: input}
+	return DescribePatchGroupsRequest{Request: req, Input: input, Copy: c.DescribePatchGroupsRequest}
 }
 
 const opGetAutomationExecution = "GetAutomationExecution"
@@ -2492,6 +2525,7 @@ const opGetAutomationExecution = "GetAutomationExecution"
 type GetAutomationExecutionRequest struct {
 	*aws.Request
 	Input *GetAutomationExecutionInput
+	Copy  func(*GetAutomationExecutionInput) GetAutomationExecutionRequest
 }
 
 // Send marshals and sends the GetAutomationExecution API request.
@@ -2532,7 +2566,7 @@ func (c *SSM) GetAutomationExecutionRequest(input *GetAutomationExecutionInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAutomationExecutionRequest{Request: req, Input: input}
+	return GetAutomationExecutionRequest{Request: req, Input: input, Copy: c.GetAutomationExecutionRequest}
 }
 
 const opGetCommandInvocation = "GetCommandInvocation"
@@ -2541,6 +2575,7 @@ const opGetCommandInvocation = "GetCommandInvocation"
 type GetCommandInvocationRequest struct {
 	*aws.Request
 	Input *GetCommandInvocationInput
+	Copy  func(*GetCommandInvocationInput) GetCommandInvocationRequest
 }
 
 // Send marshals and sends the GetCommandInvocation API request.
@@ -2582,7 +2617,7 @@ func (c *SSM) GetCommandInvocationRequest(input *GetCommandInvocationInput) GetC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetCommandInvocationRequest{Request: req, Input: input}
+	return GetCommandInvocationRequest{Request: req, Input: input, Copy: c.GetCommandInvocationRequest}
 }
 
 const opGetDefaultPatchBaseline = "GetDefaultPatchBaseline"
@@ -2591,6 +2626,7 @@ const opGetDefaultPatchBaseline = "GetDefaultPatchBaseline"
 type GetDefaultPatchBaselineRequest struct {
 	*aws.Request
 	Input *GetDefaultPatchBaselineInput
+	Copy  func(*GetDefaultPatchBaselineInput) GetDefaultPatchBaselineRequest
 }
 
 // Send marshals and sends the GetDefaultPatchBaseline API request.
@@ -2633,7 +2669,7 @@ func (c *SSM) GetDefaultPatchBaselineRequest(input *GetDefaultPatchBaselineInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDefaultPatchBaselineRequest{Request: req, Input: input}
+	return GetDefaultPatchBaselineRequest{Request: req, Input: input, Copy: c.GetDefaultPatchBaselineRequest}
 }
 
 const opGetDeployablePatchSnapshotForInstance = "GetDeployablePatchSnapshotForInstance"
@@ -2642,6 +2678,7 @@ const opGetDeployablePatchSnapshotForInstance = "GetDeployablePatchSnapshotForIn
 type GetDeployablePatchSnapshotForInstanceRequest struct {
 	*aws.Request
 	Input *GetDeployablePatchSnapshotForInstanceInput
+	Copy  func(*GetDeployablePatchSnapshotForInstanceInput) GetDeployablePatchSnapshotForInstanceRequest
 }
 
 // Send marshals and sends the GetDeployablePatchSnapshotForInstance API request.
@@ -2683,7 +2720,7 @@ func (c *SSM) GetDeployablePatchSnapshotForInstanceRequest(input *GetDeployableP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDeployablePatchSnapshotForInstanceRequest{Request: req, Input: input}
+	return GetDeployablePatchSnapshotForInstanceRequest{Request: req, Input: input, Copy: c.GetDeployablePatchSnapshotForInstanceRequest}
 }
 
 const opGetDocument = "GetDocument"
@@ -2692,6 +2729,7 @@ const opGetDocument = "GetDocument"
 type GetDocumentRequest struct {
 	*aws.Request
 	Input *GetDocumentInput
+	Copy  func(*GetDocumentInput) GetDocumentRequest
 }
 
 // Send marshals and sends the GetDocument API request.
@@ -2732,7 +2770,7 @@ func (c *SSM) GetDocumentRequest(input *GetDocumentInput) GetDocumentRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDocumentRequest{Request: req, Input: input}
+	return GetDocumentRequest{Request: req, Input: input, Copy: c.GetDocumentRequest}
 }
 
 const opGetInventory = "GetInventory"
@@ -2741,6 +2779,7 @@ const opGetInventory = "GetInventory"
 type GetInventoryRequest struct {
 	*aws.Request
 	Input *GetInventoryInput
+	Copy  func(*GetInventoryInput) GetInventoryRequest
 }
 
 // Send marshals and sends the GetInventory API request.
@@ -2781,7 +2820,7 @@ func (c *SSM) GetInventoryRequest(input *GetInventoryInput) GetInventoryRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInventoryRequest{Request: req, Input: input}
+	return GetInventoryRequest{Request: req, Input: input, Copy: c.GetInventoryRequest}
 }
 
 const opGetInventorySchema = "GetInventorySchema"
@@ -2790,6 +2829,7 @@ const opGetInventorySchema = "GetInventorySchema"
 type GetInventorySchemaRequest struct {
 	*aws.Request
 	Input *GetInventorySchemaInput
+	Copy  func(*GetInventorySchemaInput) GetInventorySchemaRequest
 }
 
 // Send marshals and sends the GetInventorySchema API request.
@@ -2831,7 +2871,7 @@ func (c *SSM) GetInventorySchemaRequest(input *GetInventorySchemaInput) GetInven
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetInventorySchemaRequest{Request: req, Input: input}
+	return GetInventorySchemaRequest{Request: req, Input: input, Copy: c.GetInventorySchemaRequest}
 }
 
 const opGetMaintenanceWindow = "GetMaintenanceWindow"
@@ -2840,6 +2880,7 @@ const opGetMaintenanceWindow = "GetMaintenanceWindow"
 type GetMaintenanceWindowRequest struct {
 	*aws.Request
 	Input *GetMaintenanceWindowInput
+	Copy  func(*GetMaintenanceWindowInput) GetMaintenanceWindowRequest
 }
 
 // Send marshals and sends the GetMaintenanceWindow API request.
@@ -2880,7 +2921,7 @@ func (c *SSM) GetMaintenanceWindowRequest(input *GetMaintenanceWindowInput) GetM
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMaintenanceWindowRequest{Request: req, Input: input}
+	return GetMaintenanceWindowRequest{Request: req, Input: input, Copy: c.GetMaintenanceWindowRequest}
 }
 
 const opGetMaintenanceWindowExecution = "GetMaintenanceWindowExecution"
@@ -2889,6 +2930,7 @@ const opGetMaintenanceWindowExecution = "GetMaintenanceWindowExecution"
 type GetMaintenanceWindowExecutionRequest struct {
 	*aws.Request
 	Input *GetMaintenanceWindowExecutionInput
+	Copy  func(*GetMaintenanceWindowExecutionInput) GetMaintenanceWindowExecutionRequest
 }
 
 // Send marshals and sends the GetMaintenanceWindowExecution API request.
@@ -2930,7 +2972,7 @@ func (c *SSM) GetMaintenanceWindowExecutionRequest(input *GetMaintenanceWindowEx
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMaintenanceWindowExecutionRequest{Request: req, Input: input}
+	return GetMaintenanceWindowExecutionRequest{Request: req, Input: input, Copy: c.GetMaintenanceWindowExecutionRequest}
 }
 
 const opGetMaintenanceWindowExecutionTask = "GetMaintenanceWindowExecutionTask"
@@ -2939,6 +2981,7 @@ const opGetMaintenanceWindowExecutionTask = "GetMaintenanceWindowExecutionTask"
 type GetMaintenanceWindowExecutionTaskRequest struct {
 	*aws.Request
 	Input *GetMaintenanceWindowExecutionTaskInput
+	Copy  func(*GetMaintenanceWindowExecutionTaskInput) GetMaintenanceWindowExecutionTaskRequest
 }
 
 // Send marshals and sends the GetMaintenanceWindowExecutionTask API request.
@@ -2980,7 +3023,7 @@ func (c *SSM) GetMaintenanceWindowExecutionTaskRequest(input *GetMaintenanceWind
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMaintenanceWindowExecutionTaskRequest{Request: req, Input: input}
+	return GetMaintenanceWindowExecutionTaskRequest{Request: req, Input: input, Copy: c.GetMaintenanceWindowExecutionTaskRequest}
 }
 
 const opGetMaintenanceWindowExecutionTaskInvocation = "GetMaintenanceWindowExecutionTaskInvocation"
@@ -2989,6 +3032,7 @@ const opGetMaintenanceWindowExecutionTaskInvocation = "GetMaintenanceWindowExecu
 type GetMaintenanceWindowExecutionTaskInvocationRequest struct {
 	*aws.Request
 	Input *GetMaintenanceWindowExecutionTaskInvocationInput
+	Copy  func(*GetMaintenanceWindowExecutionTaskInvocationInput) GetMaintenanceWindowExecutionTaskInvocationRequest
 }
 
 // Send marshals and sends the GetMaintenanceWindowExecutionTaskInvocation API request.
@@ -3030,7 +3074,7 @@ func (c *SSM) GetMaintenanceWindowExecutionTaskInvocationRequest(input *GetMaint
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMaintenanceWindowExecutionTaskInvocationRequest{Request: req, Input: input}
+	return GetMaintenanceWindowExecutionTaskInvocationRequest{Request: req, Input: input, Copy: c.GetMaintenanceWindowExecutionTaskInvocationRequest}
 }
 
 const opGetMaintenanceWindowTask = "GetMaintenanceWindowTask"
@@ -3039,6 +3083,7 @@ const opGetMaintenanceWindowTask = "GetMaintenanceWindowTask"
 type GetMaintenanceWindowTaskRequest struct {
 	*aws.Request
 	Input *GetMaintenanceWindowTaskInput
+	Copy  func(*GetMaintenanceWindowTaskInput) GetMaintenanceWindowTaskRequest
 }
 
 // Send marshals and sends the GetMaintenanceWindowTask API request.
@@ -3079,7 +3124,7 @@ func (c *SSM) GetMaintenanceWindowTaskRequest(input *GetMaintenanceWindowTaskInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetMaintenanceWindowTaskRequest{Request: req, Input: input}
+	return GetMaintenanceWindowTaskRequest{Request: req, Input: input, Copy: c.GetMaintenanceWindowTaskRequest}
 }
 
 const opGetParameter = "GetParameter"
@@ -3088,6 +3133,7 @@ const opGetParameter = "GetParameter"
 type GetParameterRequest struct {
 	*aws.Request
 	Input *GetParameterInput
+	Copy  func(*GetParameterInput) GetParameterRequest
 }
 
 // Send marshals and sends the GetParameter API request.
@@ -3128,7 +3174,7 @@ func (c *SSM) GetParameterRequest(input *GetParameterInput) GetParameterRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetParameterRequest{Request: req, Input: input}
+	return GetParameterRequest{Request: req, Input: input, Copy: c.GetParameterRequest}
 }
 
 const opGetParameterHistory = "GetParameterHistory"
@@ -3137,6 +3183,7 @@ const opGetParameterHistory = "GetParameterHistory"
 type GetParameterHistoryRequest struct {
 	*aws.Request
 	Input *GetParameterHistoryInput
+	Copy  func(*GetParameterHistoryInput) GetParameterHistoryRequest
 }
 
 // Send marshals and sends the GetParameterHistory API request.
@@ -3183,57 +3230,53 @@ func (c *SSM) GetParameterHistoryRequest(input *GetParameterHistoryInput) GetPar
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetParameterHistoryRequest{Request: req, Input: input}
+	return GetParameterHistoryRequest{Request: req, Input: input, Copy: c.GetParameterHistoryRequest}
 }
 
-// GetParameterHistoryPages iterates over the pages of a GetParameterHistory operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetParameterHistory method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetParameterHistoryRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetParameterHistory operation.
-//    pageNum := 0
-//    err := client.GetParameterHistoryPages(params,
-//        func(page *GetParameterHistoryOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetParameterHistoryRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SSM) GetParameterHistoryPages(input *GetParameterHistoryInput, fn func(*GetParameterHistoryOutput, bool) bool) error {
-	return c.GetParameterHistoryPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetParameterHistoryRequest) Paginate(opts ...aws.Option) GetParameterHistoryPager {
+	return GetParameterHistoryPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetParameterHistoryInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetParameterHistoryPagesWithContext same as GetParameterHistoryPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetParameterHistoryPagesWithContext(ctx aws.Context, input *GetParameterHistoryInput, fn func(*GetParameterHistoryOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetParameterHistoryInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetParameterHistoryRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetParameterHistoryOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetParameterHistoryPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetParameterHistoryPager struct {
+	aws.Pager
+}
+
+func (p *GetParameterHistoryPager) CurrentPage() *GetParameterHistoryOutput {
+	return p.Pager.CurrentPage().(*GetParameterHistoryOutput)
 }
 
 const opGetParameters = "GetParameters"
@@ -3242,6 +3285,7 @@ const opGetParameters = "GetParameters"
 type GetParametersRequest struct {
 	*aws.Request
 	Input *GetParametersInput
+	Copy  func(*GetParametersInput) GetParametersRequest
 }
 
 // Send marshals and sends the GetParameters API request.
@@ -3282,7 +3326,7 @@ func (c *SSM) GetParametersRequest(input *GetParametersInput) GetParametersReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetParametersRequest{Request: req, Input: input}
+	return GetParametersRequest{Request: req, Input: input, Copy: c.GetParametersRequest}
 }
 
 const opGetParametersByPath = "GetParametersByPath"
@@ -3291,6 +3335,7 @@ const opGetParametersByPath = "GetParametersByPath"
 type GetParametersByPathRequest struct {
 	*aws.Request
 	Input *GetParametersByPathInput
+	Copy  func(*GetParametersByPathInput) GetParametersByPathRequest
 }
 
 // Send marshals and sends the GetParametersByPath API request.
@@ -3348,57 +3393,53 @@ func (c *SSM) GetParametersByPathRequest(input *GetParametersByPathInput) GetPar
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetParametersByPathRequest{Request: req, Input: input}
+	return GetParametersByPathRequest{Request: req, Input: input, Copy: c.GetParametersByPathRequest}
 }
 
-// GetParametersByPathPages iterates over the pages of a GetParametersByPath operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See GetParametersByPath method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a GetParametersByPathRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a GetParametersByPath operation.
-//    pageNum := 0
-//    err := client.GetParametersByPathPages(params,
-//        func(page *GetParametersByPathOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.GetParametersByPathRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SSM) GetParametersByPathPages(input *GetParametersByPathInput, fn func(*GetParametersByPathOutput, bool) bool) error {
-	return c.GetParametersByPathPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *GetParametersByPathRequest) Paginate(opts ...aws.Option) GetParametersByPathPager {
+	return GetParametersByPathPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *GetParametersByPathInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// GetParametersByPathPagesWithContext same as GetParametersByPathPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) GetParametersByPathPagesWithContext(ctx aws.Context, input *GetParametersByPathInput, fn func(*GetParametersByPathOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *GetParametersByPathInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.GetParametersByPathRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*GetParametersByPathOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// GetParametersByPathPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetParametersByPathPager struct {
+	aws.Pager
+}
+
+func (p *GetParametersByPathPager) CurrentPage() *GetParametersByPathOutput {
+	return p.Pager.CurrentPage().(*GetParametersByPathOutput)
 }
 
 const opGetPatchBaseline = "GetPatchBaseline"
@@ -3407,6 +3448,7 @@ const opGetPatchBaseline = "GetPatchBaseline"
 type GetPatchBaselineRequest struct {
 	*aws.Request
 	Input *GetPatchBaselineInput
+	Copy  func(*GetPatchBaselineInput) GetPatchBaselineRequest
 }
 
 // Send marshals and sends the GetPatchBaseline API request.
@@ -3447,7 +3489,7 @@ func (c *SSM) GetPatchBaselineRequest(input *GetPatchBaselineInput) GetPatchBase
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPatchBaselineRequest{Request: req, Input: input}
+	return GetPatchBaselineRequest{Request: req, Input: input, Copy: c.GetPatchBaselineRequest}
 }
 
 const opGetPatchBaselineForPatchGroup = "GetPatchBaselineForPatchGroup"
@@ -3456,6 +3498,7 @@ const opGetPatchBaselineForPatchGroup = "GetPatchBaselineForPatchGroup"
 type GetPatchBaselineForPatchGroupRequest struct {
 	*aws.Request
 	Input *GetPatchBaselineForPatchGroupInput
+	Copy  func(*GetPatchBaselineForPatchGroupInput) GetPatchBaselineForPatchGroupRequest
 }
 
 // Send marshals and sends the GetPatchBaselineForPatchGroup API request.
@@ -3497,7 +3540,7 @@ func (c *SSM) GetPatchBaselineForPatchGroupRequest(input *GetPatchBaselineForPat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPatchBaselineForPatchGroupRequest{Request: req, Input: input}
+	return GetPatchBaselineForPatchGroupRequest{Request: req, Input: input, Copy: c.GetPatchBaselineForPatchGroupRequest}
 }
 
 const opListAssociationVersions = "ListAssociationVersions"
@@ -3506,6 +3549,7 @@ const opListAssociationVersions = "ListAssociationVersions"
 type ListAssociationVersionsRequest struct {
 	*aws.Request
 	Input *ListAssociationVersionsInput
+	Copy  func(*ListAssociationVersionsInput) ListAssociationVersionsRequest
 }
 
 // Send marshals and sends the ListAssociationVersions API request.
@@ -3546,7 +3590,7 @@ func (c *SSM) ListAssociationVersionsRequest(input *ListAssociationVersionsInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAssociationVersionsRequest{Request: req, Input: input}
+	return ListAssociationVersionsRequest{Request: req, Input: input, Copy: c.ListAssociationVersionsRequest}
 }
 
 const opListAssociations = "ListAssociations"
@@ -3555,6 +3599,7 @@ const opListAssociations = "ListAssociations"
 type ListAssociationsRequest struct {
 	*aws.Request
 	Input *ListAssociationsInput
+	Copy  func(*ListAssociationsInput) ListAssociationsRequest
 }
 
 // Send marshals and sends the ListAssociations API request.
@@ -3601,57 +3646,53 @@ func (c *SSM) ListAssociationsRequest(input *ListAssociationsInput) ListAssociat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAssociationsRequest{Request: req, Input: input}
+	return ListAssociationsRequest{Request: req, Input: input, Copy: c.ListAssociationsRequest}
 }
 
-// ListAssociationsPages iterates over the pages of a ListAssociations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAssociations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAssociationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAssociations operation.
-//    pageNum := 0
-//    err := client.ListAssociationsPages(params,
-//        func(page *ListAssociationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAssociationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SSM) ListAssociationsPages(input *ListAssociationsInput, fn func(*ListAssociationsOutput, bool) bool) error {
-	return c.ListAssociationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAssociationsRequest) Paginate(opts ...aws.Option) ListAssociationsPager {
+	return ListAssociationsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAssociationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAssociationsPagesWithContext same as ListAssociationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListAssociationsPagesWithContext(ctx aws.Context, input *ListAssociationsInput, fn func(*ListAssociationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAssociationsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAssociationsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAssociationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAssociationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAssociationsPager struct {
+	aws.Pager
+}
+
+func (p *ListAssociationsPager) CurrentPage() *ListAssociationsOutput {
+	return p.Pager.CurrentPage().(*ListAssociationsOutput)
 }
 
 const opListCommandInvocations = "ListCommandInvocations"
@@ -3660,6 +3701,7 @@ const opListCommandInvocations = "ListCommandInvocations"
 type ListCommandInvocationsRequest struct {
 	*aws.Request
 	Input *ListCommandInvocationsInput
+	Copy  func(*ListCommandInvocationsInput) ListCommandInvocationsRequest
 }
 
 // Send marshals and sends the ListCommandInvocations API request.
@@ -3710,57 +3752,53 @@ func (c *SSM) ListCommandInvocationsRequest(input *ListCommandInvocationsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCommandInvocationsRequest{Request: req, Input: input}
+	return ListCommandInvocationsRequest{Request: req, Input: input, Copy: c.ListCommandInvocationsRequest}
 }
 
-// ListCommandInvocationsPages iterates over the pages of a ListCommandInvocations operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListCommandInvocations method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListCommandInvocationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListCommandInvocations operation.
-//    pageNum := 0
-//    err := client.ListCommandInvocationsPages(params,
-//        func(page *ListCommandInvocationsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListCommandInvocationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SSM) ListCommandInvocationsPages(input *ListCommandInvocationsInput, fn func(*ListCommandInvocationsOutput, bool) bool) error {
-	return c.ListCommandInvocationsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListCommandInvocationsRequest) Paginate(opts ...aws.Option) ListCommandInvocationsPager {
+	return ListCommandInvocationsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListCommandInvocationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListCommandInvocationsPagesWithContext same as ListCommandInvocationsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListCommandInvocationsPagesWithContext(ctx aws.Context, input *ListCommandInvocationsInput, fn func(*ListCommandInvocationsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListCommandInvocationsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListCommandInvocationsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListCommandInvocationsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListCommandInvocationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCommandInvocationsPager struct {
+	aws.Pager
+}
+
+func (p *ListCommandInvocationsPager) CurrentPage() *ListCommandInvocationsOutput {
+	return p.Pager.CurrentPage().(*ListCommandInvocationsOutput)
 }
 
 const opListCommands = "ListCommands"
@@ -3769,6 +3807,7 @@ const opListCommands = "ListCommands"
 type ListCommandsRequest struct {
 	*aws.Request
 	Input *ListCommandsInput
+	Copy  func(*ListCommandsInput) ListCommandsRequest
 }
 
 // Send marshals and sends the ListCommands API request.
@@ -3815,57 +3854,53 @@ func (c *SSM) ListCommandsRequest(input *ListCommandsInput) ListCommandsRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListCommandsRequest{Request: req, Input: input}
+	return ListCommandsRequest{Request: req, Input: input, Copy: c.ListCommandsRequest}
 }
 
-// ListCommandsPages iterates over the pages of a ListCommands operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListCommands method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListCommandsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListCommands operation.
-//    pageNum := 0
-//    err := client.ListCommandsPages(params,
-//        func(page *ListCommandsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListCommandsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SSM) ListCommandsPages(input *ListCommandsInput, fn func(*ListCommandsOutput, bool) bool) error {
-	return c.ListCommandsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListCommandsRequest) Paginate(opts ...aws.Option) ListCommandsPager {
+	return ListCommandsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListCommandsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListCommandsPagesWithContext same as ListCommandsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListCommandsPagesWithContext(ctx aws.Context, input *ListCommandsInput, fn func(*ListCommandsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListCommandsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListCommandsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListCommandsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListCommandsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCommandsPager struct {
+	aws.Pager
+}
+
+func (p *ListCommandsPager) CurrentPage() *ListCommandsOutput {
+	return p.Pager.CurrentPage().(*ListCommandsOutput)
 }
 
 const opListComplianceItems = "ListComplianceItems"
@@ -3874,6 +3909,7 @@ const opListComplianceItems = "ListComplianceItems"
 type ListComplianceItemsRequest struct {
 	*aws.Request
 	Input *ListComplianceItemsInput
+	Copy  func(*ListComplianceItemsInput) ListComplianceItemsRequest
 }
 
 // Send marshals and sends the ListComplianceItems API request.
@@ -3917,7 +3953,7 @@ func (c *SSM) ListComplianceItemsRequest(input *ListComplianceItemsInput) ListCo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListComplianceItemsRequest{Request: req, Input: input}
+	return ListComplianceItemsRequest{Request: req, Input: input, Copy: c.ListComplianceItemsRequest}
 }
 
 const opListComplianceSummaries = "ListComplianceSummaries"
@@ -3926,6 +3962,7 @@ const opListComplianceSummaries = "ListComplianceSummaries"
 type ListComplianceSummariesRequest struct {
 	*aws.Request
 	Input *ListComplianceSummariesInput
+	Copy  func(*ListComplianceSummariesInput) ListComplianceSummariesRequest
 }
 
 // Send marshals and sends the ListComplianceSummaries API request.
@@ -3968,7 +4005,7 @@ func (c *SSM) ListComplianceSummariesRequest(input *ListComplianceSummariesInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListComplianceSummariesRequest{Request: req, Input: input}
+	return ListComplianceSummariesRequest{Request: req, Input: input, Copy: c.ListComplianceSummariesRequest}
 }
 
 const opListDocumentVersions = "ListDocumentVersions"
@@ -3977,6 +4014,7 @@ const opListDocumentVersions = "ListDocumentVersions"
 type ListDocumentVersionsRequest struct {
 	*aws.Request
 	Input *ListDocumentVersionsInput
+	Copy  func(*ListDocumentVersionsInput) ListDocumentVersionsRequest
 }
 
 // Send marshals and sends the ListDocumentVersions API request.
@@ -4017,7 +4055,7 @@ func (c *SSM) ListDocumentVersionsRequest(input *ListDocumentVersionsInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDocumentVersionsRequest{Request: req, Input: input}
+	return ListDocumentVersionsRequest{Request: req, Input: input, Copy: c.ListDocumentVersionsRequest}
 }
 
 const opListDocuments = "ListDocuments"
@@ -4026,6 +4064,7 @@ const opListDocuments = "ListDocuments"
 type ListDocumentsRequest struct {
 	*aws.Request
 	Input *ListDocumentsInput
+	Copy  func(*ListDocumentsInput) ListDocumentsRequest
 }
 
 // Send marshals and sends the ListDocuments API request.
@@ -4072,57 +4111,53 @@ func (c *SSM) ListDocumentsRequest(input *ListDocumentsInput) ListDocumentsReque
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDocumentsRequest{Request: req, Input: input}
+	return ListDocumentsRequest{Request: req, Input: input, Copy: c.ListDocumentsRequest}
 }
 
-// ListDocumentsPages iterates over the pages of a ListDocuments operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDocuments method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDocumentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDocuments operation.
-//    pageNum := 0
-//    err := client.ListDocumentsPages(params,
-//        func(page *ListDocumentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDocumentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *SSM) ListDocumentsPages(input *ListDocumentsInput, fn func(*ListDocumentsOutput, bool) bool) error {
-	return c.ListDocumentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListDocumentsRequest) Paginate(opts ...aws.Option) ListDocumentsPager {
+	return ListDocumentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDocumentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListDocumentsPagesWithContext same as ListDocumentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *SSM) ListDocumentsPagesWithContext(ctx aws.Context, input *ListDocumentsInput, fn func(*ListDocumentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDocumentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListDocumentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDocumentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListDocumentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListDocumentsPager struct {
+	aws.Pager
+}
+
+func (p *ListDocumentsPager) CurrentPage() *ListDocumentsOutput {
+	return p.Pager.CurrentPage().(*ListDocumentsOutput)
 }
 
 const opListInventoryEntries = "ListInventoryEntries"
@@ -4131,6 +4166,7 @@ const opListInventoryEntries = "ListInventoryEntries"
 type ListInventoryEntriesRequest struct {
 	*aws.Request
 	Input *ListInventoryEntriesInput
+	Copy  func(*ListInventoryEntriesInput) ListInventoryEntriesRequest
 }
 
 // Send marshals and sends the ListInventoryEntries API request.
@@ -4171,7 +4207,7 @@ func (c *SSM) ListInventoryEntriesRequest(input *ListInventoryEntriesInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListInventoryEntriesRequest{Request: req, Input: input}
+	return ListInventoryEntriesRequest{Request: req, Input: input, Copy: c.ListInventoryEntriesRequest}
 }
 
 const opListResourceComplianceSummaries = "ListResourceComplianceSummaries"
@@ -4180,6 +4216,7 @@ const opListResourceComplianceSummaries = "ListResourceComplianceSummaries"
 type ListResourceComplianceSummariesRequest struct {
 	*aws.Request
 	Input *ListResourceComplianceSummariesInput
+	Copy  func(*ListResourceComplianceSummariesInput) ListResourceComplianceSummariesRequest
 }
 
 // Send marshals and sends the ListResourceComplianceSummaries API request.
@@ -4222,7 +4259,7 @@ func (c *SSM) ListResourceComplianceSummariesRequest(input *ListResourceComplian
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourceComplianceSummariesRequest{Request: req, Input: input}
+	return ListResourceComplianceSummariesRequest{Request: req, Input: input, Copy: c.ListResourceComplianceSummariesRequest}
 }
 
 const opListResourceDataSync = "ListResourceDataSync"
@@ -4231,6 +4268,7 @@ const opListResourceDataSync = "ListResourceDataSync"
 type ListResourceDataSyncRequest struct {
 	*aws.Request
 	Input *ListResourceDataSyncInput
+	Copy  func(*ListResourceDataSyncInput) ListResourceDataSyncRequest
 }
 
 // Send marshals and sends the ListResourceDataSync API request.
@@ -4280,7 +4318,7 @@ func (c *SSM) ListResourceDataSyncRequest(input *ListResourceDataSyncInput) List
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResourceDataSyncRequest{Request: req, Input: input}
+	return ListResourceDataSyncRequest{Request: req, Input: input, Copy: c.ListResourceDataSyncRequest}
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -4289,6 +4327,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -4329,7 +4368,7 @@ func (c *SSM) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opModifyDocumentPermission = "ModifyDocumentPermission"
@@ -4338,6 +4377,7 @@ const opModifyDocumentPermission = "ModifyDocumentPermission"
 type ModifyDocumentPermissionRequest struct {
 	*aws.Request
 	Input *ModifyDocumentPermissionInput
+	Copy  func(*ModifyDocumentPermissionInput) ModifyDocumentPermissionRequest
 }
 
 // Send marshals and sends the ModifyDocumentPermission API request.
@@ -4381,7 +4421,7 @@ func (c *SSM) ModifyDocumentPermissionRequest(input *ModifyDocumentPermissionInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyDocumentPermissionRequest{Request: req, Input: input}
+	return ModifyDocumentPermissionRequest{Request: req, Input: input, Copy: c.ModifyDocumentPermissionRequest}
 }
 
 const opPutComplianceItems = "PutComplianceItems"
@@ -4390,6 +4430,7 @@ const opPutComplianceItems = "PutComplianceItems"
 type PutComplianceItemsRequest struct {
 	*aws.Request
 	Input *PutComplianceItemsInput
+	Copy  func(*PutComplianceItemsInput) PutComplianceItemsRequest
 }
 
 // Send marshals and sends the PutComplianceItems API request.
@@ -4471,7 +4512,7 @@ func (c *SSM) PutComplianceItemsRequest(input *PutComplianceItemsInput) PutCompl
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutComplianceItemsRequest{Request: req, Input: input}
+	return PutComplianceItemsRequest{Request: req, Input: input, Copy: c.PutComplianceItemsRequest}
 }
 
 const opPutInventory = "PutInventory"
@@ -4480,6 +4521,7 @@ const opPutInventory = "PutInventory"
 type PutInventoryRequest struct {
 	*aws.Request
 	Input *PutInventoryInput
+	Copy  func(*PutInventoryInput) PutInventoryRequest
 }
 
 // Send marshals and sends the PutInventory API request.
@@ -4522,7 +4564,7 @@ func (c *SSM) PutInventoryRequest(input *PutInventoryInput) PutInventoryRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutInventoryRequest{Request: req, Input: input}
+	return PutInventoryRequest{Request: req, Input: input, Copy: c.PutInventoryRequest}
 }
 
 const opPutParameter = "PutParameter"
@@ -4531,6 +4573,7 @@ const opPutParameter = "PutParameter"
 type PutParameterRequest struct {
 	*aws.Request
 	Input *PutParameterInput
+	Copy  func(*PutParameterInput) PutParameterRequest
 }
 
 // Send marshals and sends the PutParameter API request.
@@ -4571,7 +4614,7 @@ func (c *SSM) PutParameterRequest(input *PutParameterInput) PutParameterRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutParameterRequest{Request: req, Input: input}
+	return PutParameterRequest{Request: req, Input: input, Copy: c.PutParameterRequest}
 }
 
 const opRegisterDefaultPatchBaseline = "RegisterDefaultPatchBaseline"
@@ -4580,6 +4623,7 @@ const opRegisterDefaultPatchBaseline = "RegisterDefaultPatchBaseline"
 type RegisterDefaultPatchBaselineRequest struct {
 	*aws.Request
 	Input *RegisterDefaultPatchBaselineInput
+	Copy  func(*RegisterDefaultPatchBaselineInput) RegisterDefaultPatchBaselineRequest
 }
 
 // Send marshals and sends the RegisterDefaultPatchBaseline API request.
@@ -4620,7 +4664,7 @@ func (c *SSM) RegisterDefaultPatchBaselineRequest(input *RegisterDefaultPatchBas
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterDefaultPatchBaselineRequest{Request: req, Input: input}
+	return RegisterDefaultPatchBaselineRequest{Request: req, Input: input, Copy: c.RegisterDefaultPatchBaselineRequest}
 }
 
 const opRegisterPatchBaselineForPatchGroup = "RegisterPatchBaselineForPatchGroup"
@@ -4629,6 +4673,7 @@ const opRegisterPatchBaselineForPatchGroup = "RegisterPatchBaselineForPatchGroup
 type RegisterPatchBaselineForPatchGroupRequest struct {
 	*aws.Request
 	Input *RegisterPatchBaselineForPatchGroupInput
+	Copy  func(*RegisterPatchBaselineForPatchGroupInput) RegisterPatchBaselineForPatchGroupRequest
 }
 
 // Send marshals and sends the RegisterPatchBaselineForPatchGroup API request.
@@ -4669,7 +4714,7 @@ func (c *SSM) RegisterPatchBaselineForPatchGroupRequest(input *RegisterPatchBase
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterPatchBaselineForPatchGroupRequest{Request: req, Input: input}
+	return RegisterPatchBaselineForPatchGroupRequest{Request: req, Input: input, Copy: c.RegisterPatchBaselineForPatchGroupRequest}
 }
 
 const opRegisterTargetWithMaintenanceWindow = "RegisterTargetWithMaintenanceWindow"
@@ -4678,6 +4723,7 @@ const opRegisterTargetWithMaintenanceWindow = "RegisterTargetWithMaintenanceWind
 type RegisterTargetWithMaintenanceWindowRequest struct {
 	*aws.Request
 	Input *RegisterTargetWithMaintenanceWindowInput
+	Copy  func(*RegisterTargetWithMaintenanceWindowInput) RegisterTargetWithMaintenanceWindowRequest
 }
 
 // Send marshals and sends the RegisterTargetWithMaintenanceWindow API request.
@@ -4718,7 +4764,7 @@ func (c *SSM) RegisterTargetWithMaintenanceWindowRequest(input *RegisterTargetWi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterTargetWithMaintenanceWindowRequest{Request: req, Input: input}
+	return RegisterTargetWithMaintenanceWindowRequest{Request: req, Input: input, Copy: c.RegisterTargetWithMaintenanceWindowRequest}
 }
 
 const opRegisterTaskWithMaintenanceWindow = "RegisterTaskWithMaintenanceWindow"
@@ -4727,6 +4773,7 @@ const opRegisterTaskWithMaintenanceWindow = "RegisterTaskWithMaintenanceWindow"
 type RegisterTaskWithMaintenanceWindowRequest struct {
 	*aws.Request
 	Input *RegisterTaskWithMaintenanceWindowInput
+	Copy  func(*RegisterTaskWithMaintenanceWindowInput) RegisterTaskWithMaintenanceWindowRequest
 }
 
 // Send marshals and sends the RegisterTaskWithMaintenanceWindow API request.
@@ -4767,7 +4814,7 @@ func (c *SSM) RegisterTaskWithMaintenanceWindowRequest(input *RegisterTaskWithMa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterTaskWithMaintenanceWindowRequest{Request: req, Input: input}
+	return RegisterTaskWithMaintenanceWindowRequest{Request: req, Input: input, Copy: c.RegisterTaskWithMaintenanceWindowRequest}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
@@ -4776,6 +4823,7 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 type RemoveTagsFromResourceRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromResourceInput
+	Copy  func(*RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
@@ -4816,7 +4864,7 @@ func (c *SSM) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourceInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromResourceRequest{Request: req, Input: input}
+	return RemoveTagsFromResourceRequest{Request: req, Input: input, Copy: c.RemoveTagsFromResourceRequest}
 }
 
 const opSendAutomationSignal = "SendAutomationSignal"
@@ -4825,6 +4873,7 @@ const opSendAutomationSignal = "SendAutomationSignal"
 type SendAutomationSignalRequest struct {
 	*aws.Request
 	Input *SendAutomationSignalInput
+	Copy  func(*SendAutomationSignalInput) SendAutomationSignalRequest
 }
 
 // Send marshals and sends the SendAutomationSignal API request.
@@ -4866,7 +4915,7 @@ func (c *SSM) SendAutomationSignalRequest(input *SendAutomationSignalInput) Send
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendAutomationSignalRequest{Request: req, Input: input}
+	return SendAutomationSignalRequest{Request: req, Input: input, Copy: c.SendAutomationSignalRequest}
 }
 
 const opSendCommand = "SendCommand"
@@ -4875,6 +4924,7 @@ const opSendCommand = "SendCommand"
 type SendCommandRequest struct {
 	*aws.Request
 	Input *SendCommandInput
+	Copy  func(*SendCommandInput) SendCommandRequest
 }
 
 // Send marshals and sends the SendCommand API request.
@@ -4915,7 +4965,7 @@ func (c *SSM) SendCommandRequest(input *SendCommandInput) SendCommandRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SendCommandRequest{Request: req, Input: input}
+	return SendCommandRequest{Request: req, Input: input, Copy: c.SendCommandRequest}
 }
 
 const opStartAutomationExecution = "StartAutomationExecution"
@@ -4924,6 +4974,7 @@ const opStartAutomationExecution = "StartAutomationExecution"
 type StartAutomationExecutionRequest struct {
 	*aws.Request
 	Input *StartAutomationExecutionInput
+	Copy  func(*StartAutomationExecutionInput) StartAutomationExecutionRequest
 }
 
 // Send marshals and sends the StartAutomationExecution API request.
@@ -4964,7 +5015,7 @@ func (c *SSM) StartAutomationExecutionRequest(input *StartAutomationExecutionInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartAutomationExecutionRequest{Request: req, Input: input}
+	return StartAutomationExecutionRequest{Request: req, Input: input, Copy: c.StartAutomationExecutionRequest}
 }
 
 const opStopAutomationExecution = "StopAutomationExecution"
@@ -4973,6 +5024,7 @@ const opStopAutomationExecution = "StopAutomationExecution"
 type StopAutomationExecutionRequest struct {
 	*aws.Request
 	Input *StopAutomationExecutionInput
+	Copy  func(*StopAutomationExecutionInput) StopAutomationExecutionRequest
 }
 
 // Send marshals and sends the StopAutomationExecution API request.
@@ -5013,7 +5065,7 @@ func (c *SSM) StopAutomationExecutionRequest(input *StopAutomationExecutionInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopAutomationExecutionRequest{Request: req, Input: input}
+	return StopAutomationExecutionRequest{Request: req, Input: input, Copy: c.StopAutomationExecutionRequest}
 }
 
 const opUpdateAssociation = "UpdateAssociation"
@@ -5022,6 +5074,7 @@ const opUpdateAssociation = "UpdateAssociation"
 type UpdateAssociationRequest struct {
 	*aws.Request
 	Input *UpdateAssociationInput
+	Copy  func(*UpdateAssociationInput) UpdateAssociationRequest
 }
 
 // Send marshals and sends the UpdateAssociation API request.
@@ -5063,7 +5116,7 @@ func (c *SSM) UpdateAssociationRequest(input *UpdateAssociationInput) UpdateAsso
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAssociationRequest{Request: req, Input: input}
+	return UpdateAssociationRequest{Request: req, Input: input, Copy: c.UpdateAssociationRequest}
 }
 
 const opUpdateAssociationStatus = "UpdateAssociationStatus"
@@ -5072,6 +5125,7 @@ const opUpdateAssociationStatus = "UpdateAssociationStatus"
 type UpdateAssociationStatusRequest struct {
 	*aws.Request
 	Input *UpdateAssociationStatusInput
+	Copy  func(*UpdateAssociationStatusInput) UpdateAssociationStatusRequest
 }
 
 // Send marshals and sends the UpdateAssociationStatus API request.
@@ -5113,7 +5167,7 @@ func (c *SSM) UpdateAssociationStatusRequest(input *UpdateAssociationStatusInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateAssociationStatusRequest{Request: req, Input: input}
+	return UpdateAssociationStatusRequest{Request: req, Input: input, Copy: c.UpdateAssociationStatusRequest}
 }
 
 const opUpdateDocument = "UpdateDocument"
@@ -5122,6 +5176,7 @@ const opUpdateDocument = "UpdateDocument"
 type UpdateDocumentRequest struct {
 	*aws.Request
 	Input *UpdateDocumentInput
+	Copy  func(*UpdateDocumentInput) UpdateDocumentRequest
 }
 
 // Send marshals and sends the UpdateDocument API request.
@@ -5162,7 +5217,7 @@ func (c *SSM) UpdateDocumentRequest(input *UpdateDocumentInput) UpdateDocumentRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDocumentRequest{Request: req, Input: input}
+	return UpdateDocumentRequest{Request: req, Input: input, Copy: c.UpdateDocumentRequest}
 }
 
 const opUpdateDocumentDefaultVersion = "UpdateDocumentDefaultVersion"
@@ -5171,6 +5226,7 @@ const opUpdateDocumentDefaultVersion = "UpdateDocumentDefaultVersion"
 type UpdateDocumentDefaultVersionRequest struct {
 	*aws.Request
 	Input *UpdateDocumentDefaultVersionInput
+	Copy  func(*UpdateDocumentDefaultVersionInput) UpdateDocumentDefaultVersionRequest
 }
 
 // Send marshals and sends the UpdateDocumentDefaultVersion API request.
@@ -5211,7 +5267,7 @@ func (c *SSM) UpdateDocumentDefaultVersionRequest(input *UpdateDocumentDefaultVe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDocumentDefaultVersionRequest{Request: req, Input: input}
+	return UpdateDocumentDefaultVersionRequest{Request: req, Input: input, Copy: c.UpdateDocumentDefaultVersionRequest}
 }
 
 const opUpdateMaintenanceWindow = "UpdateMaintenanceWindow"
@@ -5220,6 +5276,7 @@ const opUpdateMaintenanceWindow = "UpdateMaintenanceWindow"
 type UpdateMaintenanceWindowRequest struct {
 	*aws.Request
 	Input *UpdateMaintenanceWindowInput
+	Copy  func(*UpdateMaintenanceWindowInput) UpdateMaintenanceWindowRequest
 }
 
 // Send marshals and sends the UpdateMaintenanceWindow API request.
@@ -5260,7 +5317,7 @@ func (c *SSM) UpdateMaintenanceWindowRequest(input *UpdateMaintenanceWindowInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateMaintenanceWindowRequest{Request: req, Input: input}
+	return UpdateMaintenanceWindowRequest{Request: req, Input: input, Copy: c.UpdateMaintenanceWindowRequest}
 }
 
 const opUpdateMaintenanceWindowTarget = "UpdateMaintenanceWindowTarget"
@@ -5269,6 +5326,7 @@ const opUpdateMaintenanceWindowTarget = "UpdateMaintenanceWindowTarget"
 type UpdateMaintenanceWindowTargetRequest struct {
 	*aws.Request
 	Input *UpdateMaintenanceWindowTargetInput
+	Copy  func(*UpdateMaintenanceWindowTargetInput) UpdateMaintenanceWindowTargetRequest
 }
 
 // Send marshals and sends the UpdateMaintenanceWindowTarget API request.
@@ -5325,7 +5383,7 @@ func (c *SSM) UpdateMaintenanceWindowTargetRequest(input *UpdateMaintenanceWindo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateMaintenanceWindowTargetRequest{Request: req, Input: input}
+	return UpdateMaintenanceWindowTargetRequest{Request: req, Input: input, Copy: c.UpdateMaintenanceWindowTargetRequest}
 }
 
 const opUpdateMaintenanceWindowTask = "UpdateMaintenanceWindowTask"
@@ -5334,6 +5392,7 @@ const opUpdateMaintenanceWindowTask = "UpdateMaintenanceWindowTask"
 type UpdateMaintenanceWindowTaskRequest struct {
 	*aws.Request
 	Input *UpdateMaintenanceWindowTaskInput
+	Copy  func(*UpdateMaintenanceWindowTaskInput) UpdateMaintenanceWindowTaskRequest
 }
 
 // Send marshals and sends the UpdateMaintenanceWindowTask API request.
@@ -5393,7 +5452,7 @@ func (c *SSM) UpdateMaintenanceWindowTaskRequest(input *UpdateMaintenanceWindowT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateMaintenanceWindowTaskRequest{Request: req, Input: input}
+	return UpdateMaintenanceWindowTaskRequest{Request: req, Input: input, Copy: c.UpdateMaintenanceWindowTaskRequest}
 }
 
 const opUpdateManagedInstanceRole = "UpdateManagedInstanceRole"
@@ -5402,6 +5461,7 @@ const opUpdateManagedInstanceRole = "UpdateManagedInstanceRole"
 type UpdateManagedInstanceRoleRequest struct {
 	*aws.Request
 	Input *UpdateManagedInstanceRoleInput
+	Copy  func(*UpdateManagedInstanceRoleInput) UpdateManagedInstanceRoleRequest
 }
 
 // Send marshals and sends the UpdateManagedInstanceRole API request.
@@ -5443,7 +5503,7 @@ func (c *SSM) UpdateManagedInstanceRoleRequest(input *UpdateManagedInstanceRoleI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateManagedInstanceRoleRequest{Request: req, Input: input}
+	return UpdateManagedInstanceRoleRequest{Request: req, Input: input, Copy: c.UpdateManagedInstanceRoleRequest}
 }
 
 const opUpdatePatchBaseline = "UpdatePatchBaseline"
@@ -5452,6 +5512,7 @@ const opUpdatePatchBaseline = "UpdatePatchBaseline"
 type UpdatePatchBaselineRequest struct {
 	*aws.Request
 	Input *UpdatePatchBaselineInput
+	Copy  func(*UpdatePatchBaselineInput) UpdatePatchBaselineRequest
 }
 
 // Send marshals and sends the UpdatePatchBaseline API request.
@@ -5496,7 +5557,7 @@ func (c *SSM) UpdatePatchBaselineRequest(input *UpdatePatchBaselineInput) Update
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdatePatchBaselineRequest{Request: req, Input: input}
+	return UpdatePatchBaselineRequest{Request: req, Input: input, Copy: c.UpdatePatchBaselineRequest}
 }
 
 // An activation registers one or more on-premises servers or virtual machines

@@ -9,7 +9,6 @@
 package configserviceiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/configservice"
 )
 
@@ -100,9 +99,6 @@ type ConfigServiceAPI interface {
 	GetDiscoveredResourceCountsRequest(*configservice.GetDiscoveredResourceCountsInput) configservice.GetDiscoveredResourceCountsRequest
 
 	GetResourceConfigHistoryRequest(*configservice.GetResourceConfigHistoryInput) configservice.GetResourceConfigHistoryRequest
-
-	GetResourceConfigHistoryPages(*configservice.GetResourceConfigHistoryInput, func(*configservice.GetResourceConfigHistoryOutput, bool) bool) error
-	GetResourceConfigHistoryPagesWithContext(aws.Context, *configservice.GetResourceConfigHistoryInput, func(*configservice.GetResourceConfigHistoryOutput, bool) bool, ...aws.Option) error
 
 	ListDiscoveredResourcesRequest(*configservice.ListDiscoveredResourcesInput) configservice.ListDiscoveredResourcesRequest
 

@@ -17,6 +17,7 @@ const opAddTagsToResource = "AddTagsToResource"
 type AddTagsToResourceRequest struct {
 	*aws.Request
 	Input *AddTagsToResourceInput
+	Copy  func(*AddTagsToResourceInput) AddTagsToResourceRequest
 }
 
 // Send marshals and sends the AddTagsToResource API request.
@@ -67,7 +68,7 @@ func (c *ElastiCache) AddTagsToResourceRequest(input *AddTagsToResourceInput) Ad
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsToResourceRequest{Request: req, Input: input}
+	return AddTagsToResourceRequest{Request: req, Input: input, Copy: c.AddTagsToResourceRequest}
 }
 
 const opAuthorizeCacheSecurityGroupIngress = "AuthorizeCacheSecurityGroupIngress"
@@ -76,6 +77,7 @@ const opAuthorizeCacheSecurityGroupIngress = "AuthorizeCacheSecurityGroupIngress
 type AuthorizeCacheSecurityGroupIngressRequest struct {
 	*aws.Request
 	Input *AuthorizeCacheSecurityGroupIngressInput
+	Copy  func(*AuthorizeCacheSecurityGroupIngressInput) AuthorizeCacheSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the AuthorizeCacheSecurityGroupIngress API request.
@@ -121,7 +123,7 @@ func (c *ElastiCache) AuthorizeCacheSecurityGroupIngressRequest(input *Authorize
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AuthorizeCacheSecurityGroupIngressRequest{Request: req, Input: input}
+	return AuthorizeCacheSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeCacheSecurityGroupIngressRequest}
 }
 
 const opCopySnapshot = "CopySnapshot"
@@ -130,6 +132,7 @@ const opCopySnapshot = "CopySnapshot"
 type CopySnapshotRequest struct {
 	*aws.Request
 	Input *CopySnapshotInput
+	Copy  func(*CopySnapshotInput) CopySnapshotRequest
 }
 
 // Send marshals and sends the CopySnapshot API request.
@@ -234,7 +237,7 @@ func (c *ElastiCache) CopySnapshotRequest(input *CopySnapshotInput) CopySnapshot
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CopySnapshotRequest{Request: req, Input: input}
+	return CopySnapshotRequest{Request: req, Input: input, Copy: c.CopySnapshotRequest}
 }
 
 const opCreateCacheCluster = "CreateCacheCluster"
@@ -243,6 +246,7 @@ const opCreateCacheCluster = "CreateCacheCluster"
 type CreateCacheClusterRequest struct {
 	*aws.Request
 	Input *CreateCacheClusterInput
+	Copy  func(*CreateCacheClusterInput) CreateCacheClusterRequest
 }
 
 // Send marshals and sends the CreateCacheCluster API request.
@@ -288,7 +292,7 @@ func (c *ElastiCache) CreateCacheClusterRequest(input *CreateCacheClusterInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCacheClusterRequest{Request: req, Input: input}
+	return CreateCacheClusterRequest{Request: req, Input: input, Copy: c.CreateCacheClusterRequest}
 }
 
 const opCreateCacheParameterGroup = "CreateCacheParameterGroup"
@@ -297,6 +301,7 @@ const opCreateCacheParameterGroup = "CreateCacheParameterGroup"
 type CreateCacheParameterGroupRequest struct {
 	*aws.Request
 	Input *CreateCacheParameterGroupInput
+	Copy  func(*CreateCacheParameterGroupInput) CreateCacheParameterGroupRequest
 }
 
 // Send marshals and sends the CreateCacheParameterGroup API request.
@@ -350,7 +355,7 @@ func (c *ElastiCache) CreateCacheParameterGroupRequest(input *CreateCacheParamet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCacheParameterGroupRequest{Request: req, Input: input}
+	return CreateCacheParameterGroupRequest{Request: req, Input: input, Copy: c.CreateCacheParameterGroupRequest}
 }
 
 const opCreateCacheSecurityGroup = "CreateCacheSecurityGroup"
@@ -359,6 +364,7 @@ const opCreateCacheSecurityGroup = "CreateCacheSecurityGroup"
 type CreateCacheSecurityGroupRequest struct {
 	*aws.Request
 	Input *CreateCacheSecurityGroupInput
+	Copy  func(*CreateCacheSecurityGroupInput) CreateCacheSecurityGroupRequest
 }
 
 // Send marshals and sends the CreateCacheSecurityGroup API request.
@@ -405,7 +411,7 @@ func (c *ElastiCache) CreateCacheSecurityGroupRequest(input *CreateCacheSecurity
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCacheSecurityGroupRequest{Request: req, Input: input}
+	return CreateCacheSecurityGroupRequest{Request: req, Input: input, Copy: c.CreateCacheSecurityGroupRequest}
 }
 
 const opCreateCacheSubnetGroup = "CreateCacheSubnetGroup"
@@ -414,6 +420,7 @@ const opCreateCacheSubnetGroup = "CreateCacheSubnetGroup"
 type CreateCacheSubnetGroupRequest struct {
 	*aws.Request
 	Input *CreateCacheSubnetGroupInput
+	Copy  func(*CreateCacheSubnetGroupInput) CreateCacheSubnetGroupRequest
 }
 
 // Send marshals and sends the CreateCacheSubnetGroup API request.
@@ -457,7 +464,7 @@ func (c *ElastiCache) CreateCacheSubnetGroupRequest(input *CreateCacheSubnetGrou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateCacheSubnetGroupRequest{Request: req, Input: input}
+	return CreateCacheSubnetGroupRequest{Request: req, Input: input, Copy: c.CreateCacheSubnetGroupRequest}
 }
 
 const opCreateReplicationGroup = "CreateReplicationGroup"
@@ -466,6 +473,7 @@ const opCreateReplicationGroup = "CreateReplicationGroup"
 type CreateReplicationGroupRequest struct {
 	*aws.Request
 	Input *CreateReplicationGroupInput
+	Copy  func(*CreateReplicationGroupInput) CreateReplicationGroupRequest
 }
 
 // Send marshals and sends the CreateReplicationGroup API request.
@@ -528,7 +536,7 @@ func (c *ElastiCache) CreateReplicationGroupRequest(input *CreateReplicationGrou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateReplicationGroupRequest{Request: req, Input: input}
+	return CreateReplicationGroupRequest{Request: req, Input: input, Copy: c.CreateReplicationGroupRequest}
 }
 
 const opCreateSnapshot = "CreateSnapshot"
@@ -537,6 +545,7 @@ const opCreateSnapshot = "CreateSnapshot"
 type CreateSnapshotRequest struct {
 	*aws.Request
 	Input *CreateSnapshotInput
+	Copy  func(*CreateSnapshotInput) CreateSnapshotRequest
 }
 
 // Send marshals and sends the CreateSnapshot API request.
@@ -580,7 +589,7 @@ func (c *ElastiCache) CreateSnapshotRequest(input *CreateSnapshotInput) CreateSn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSnapshotRequest{Request: req, Input: input}
+	return CreateSnapshotRequest{Request: req, Input: input, Copy: c.CreateSnapshotRequest}
 }
 
 const opDeleteCacheCluster = "DeleteCacheCluster"
@@ -589,6 +598,7 @@ const opDeleteCacheCluster = "DeleteCacheCluster"
 type DeleteCacheClusterRequest struct {
 	*aws.Request
 	Input *DeleteCacheClusterInput
+	Copy  func(*DeleteCacheClusterInput) DeleteCacheClusterRequest
 }
 
 // Send marshals and sends the DeleteCacheCluster API request.
@@ -640,7 +650,7 @@ func (c *ElastiCache) DeleteCacheClusterRequest(input *DeleteCacheClusterInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCacheClusterRequest{Request: req, Input: input}
+	return DeleteCacheClusterRequest{Request: req, Input: input, Copy: c.DeleteCacheClusterRequest}
 }
 
 const opDeleteCacheParameterGroup = "DeleteCacheParameterGroup"
@@ -649,6 +659,7 @@ const opDeleteCacheParameterGroup = "DeleteCacheParameterGroup"
 type DeleteCacheParameterGroupRequest struct {
 	*aws.Request
 	Input *DeleteCacheParameterGroupInput
+	Copy  func(*DeleteCacheParameterGroupInput) DeleteCacheParameterGroupRequest
 }
 
 // Send marshals and sends the DeleteCacheParameterGroup API request.
@@ -692,7 +703,7 @@ func (c *ElastiCache) DeleteCacheParameterGroupRequest(input *DeleteCacheParamet
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCacheParameterGroupRequest{Request: req, Input: input}
+	return DeleteCacheParameterGroupRequest{Request: req, Input: input, Copy: c.DeleteCacheParameterGroupRequest}
 }
 
 const opDeleteCacheSecurityGroup = "DeleteCacheSecurityGroup"
@@ -701,6 +712,7 @@ const opDeleteCacheSecurityGroup = "DeleteCacheSecurityGroup"
 type DeleteCacheSecurityGroupRequest struct {
 	*aws.Request
 	Input *DeleteCacheSecurityGroupInput
+	Copy  func(*DeleteCacheSecurityGroupInput) DeleteCacheSecurityGroupRequest
 }
 
 // Send marshals and sends the DeleteCacheSecurityGroup API request.
@@ -745,7 +757,7 @@ func (c *ElastiCache) DeleteCacheSecurityGroupRequest(input *DeleteCacheSecurity
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCacheSecurityGroupRequest{Request: req, Input: input}
+	return DeleteCacheSecurityGroupRequest{Request: req, Input: input, Copy: c.DeleteCacheSecurityGroupRequest}
 }
 
 const opDeleteCacheSubnetGroup = "DeleteCacheSubnetGroup"
@@ -754,6 +766,7 @@ const opDeleteCacheSubnetGroup = "DeleteCacheSubnetGroup"
 type DeleteCacheSubnetGroupRequest struct {
 	*aws.Request
 	Input *DeleteCacheSubnetGroupInput
+	Copy  func(*DeleteCacheSubnetGroupInput) DeleteCacheSubnetGroupRequest
 }
 
 // Send marshals and sends the DeleteCacheSubnetGroup API request.
@@ -798,7 +811,7 @@ func (c *ElastiCache) DeleteCacheSubnetGroupRequest(input *DeleteCacheSubnetGrou
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteCacheSubnetGroupRequest{Request: req, Input: input}
+	return DeleteCacheSubnetGroupRequest{Request: req, Input: input, Copy: c.DeleteCacheSubnetGroupRequest}
 }
 
 const opDeleteReplicationGroup = "DeleteReplicationGroup"
@@ -807,6 +820,7 @@ const opDeleteReplicationGroup = "DeleteReplicationGroup"
 type DeleteReplicationGroupRequest struct {
 	*aws.Request
 	Input *DeleteReplicationGroupInput
+	Copy  func(*DeleteReplicationGroupInput) DeleteReplicationGroupRequest
 }
 
 // Send marshals and sends the DeleteReplicationGroup API request.
@@ -857,7 +871,7 @@ func (c *ElastiCache) DeleteReplicationGroupRequest(input *DeleteReplicationGrou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteReplicationGroupRequest{Request: req, Input: input}
+	return DeleteReplicationGroupRequest{Request: req, Input: input, Copy: c.DeleteReplicationGroupRequest}
 }
 
 const opDeleteSnapshot = "DeleteSnapshot"
@@ -866,6 +880,7 @@ const opDeleteSnapshot = "DeleteSnapshot"
 type DeleteSnapshotRequest struct {
 	*aws.Request
 	Input *DeleteSnapshotInput
+	Copy  func(*DeleteSnapshotInput) DeleteSnapshotRequest
 }
 
 // Send marshals and sends the DeleteSnapshot API request.
@@ -910,7 +925,7 @@ func (c *ElastiCache) DeleteSnapshotRequest(input *DeleteSnapshotInput) DeleteSn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSnapshotRequest{Request: req, Input: input}
+	return DeleteSnapshotRequest{Request: req, Input: input, Copy: c.DeleteSnapshotRequest}
 }
 
 const opDescribeCacheClusters = "DescribeCacheClusters"
@@ -919,6 +934,7 @@ const opDescribeCacheClusters = "DescribeCacheClusters"
 type DescribeCacheClustersRequest struct {
 	*aws.Request
 	Input *DescribeCacheClustersInput
+	Copy  func(*DescribeCacheClustersInput) DescribeCacheClustersRequest
 }
 
 // Send marshals and sends the DescribeCacheClusters API request.
@@ -986,57 +1002,53 @@ func (c *ElastiCache) DescribeCacheClustersRequest(input *DescribeCacheClustersI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCacheClustersRequest{Request: req, Input: input}
+	return DescribeCacheClustersRequest{Request: req, Input: input, Copy: c.DescribeCacheClustersRequest}
 }
 
-// DescribeCacheClustersPages iterates over the pages of a DescribeCacheClusters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeCacheClusters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeCacheClustersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeCacheClusters operation.
-//    pageNum := 0
-//    err := client.DescribeCacheClustersPages(params,
-//        func(page *DescribeCacheClustersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeCacheClustersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeCacheClustersPages(input *DescribeCacheClustersInput, fn func(*DescribeCacheClustersOutput, bool) bool) error {
-	return c.DescribeCacheClustersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeCacheClustersRequest) Paginate(opts ...aws.Option) DescribeCacheClustersPager {
+	return DescribeCacheClustersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeCacheClustersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeCacheClustersPagesWithContext same as DescribeCacheClustersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheClustersPagesWithContext(ctx aws.Context, input *DescribeCacheClustersInput, fn func(*DescribeCacheClustersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeCacheClustersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeCacheClustersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCacheClustersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCacheClustersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeCacheClustersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCacheClustersPager) CurrentPage() *DescribeCacheClustersOutput {
+	return p.Pager.CurrentPage().(*DescribeCacheClustersOutput)
 }
 
 const opDescribeCacheEngineVersions = "DescribeCacheEngineVersions"
@@ -1045,6 +1057,7 @@ const opDescribeCacheEngineVersions = "DescribeCacheEngineVersions"
 type DescribeCacheEngineVersionsRequest struct {
 	*aws.Request
 	Input *DescribeCacheEngineVersionsInput
+	Copy  func(*DescribeCacheEngineVersionsInput) DescribeCacheEngineVersionsRequest
 }
 
 // Send marshals and sends the DescribeCacheEngineVersions API request.
@@ -1091,57 +1104,53 @@ func (c *ElastiCache) DescribeCacheEngineVersionsRequest(input *DescribeCacheEng
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCacheEngineVersionsRequest{Request: req, Input: input}
+	return DescribeCacheEngineVersionsRequest{Request: req, Input: input, Copy: c.DescribeCacheEngineVersionsRequest}
 }
 
-// DescribeCacheEngineVersionsPages iterates over the pages of a DescribeCacheEngineVersions operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeCacheEngineVersions method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeCacheEngineVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeCacheEngineVersions operation.
-//    pageNum := 0
-//    err := client.DescribeCacheEngineVersionsPages(params,
-//        func(page *DescribeCacheEngineVersionsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeCacheEngineVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeCacheEngineVersionsPages(input *DescribeCacheEngineVersionsInput, fn func(*DescribeCacheEngineVersionsOutput, bool) bool) error {
-	return c.DescribeCacheEngineVersionsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeCacheEngineVersionsRequest) Paginate(opts ...aws.Option) DescribeCacheEngineVersionsPager {
+	return DescribeCacheEngineVersionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeCacheEngineVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeCacheEngineVersionsPagesWithContext same as DescribeCacheEngineVersionsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheEngineVersionsPagesWithContext(ctx aws.Context, input *DescribeCacheEngineVersionsInput, fn func(*DescribeCacheEngineVersionsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeCacheEngineVersionsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeCacheEngineVersionsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCacheEngineVersionsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCacheEngineVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeCacheEngineVersionsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCacheEngineVersionsPager) CurrentPage() *DescribeCacheEngineVersionsOutput {
+	return p.Pager.CurrentPage().(*DescribeCacheEngineVersionsOutput)
 }
 
 const opDescribeCacheParameterGroups = "DescribeCacheParameterGroups"
@@ -1150,6 +1159,7 @@ const opDescribeCacheParameterGroups = "DescribeCacheParameterGroups"
 type DescribeCacheParameterGroupsRequest struct {
 	*aws.Request
 	Input *DescribeCacheParameterGroupsInput
+	Copy  func(*DescribeCacheParameterGroupsInput) DescribeCacheParameterGroupsRequest
 }
 
 // Send marshals and sends the DescribeCacheParameterGroups API request.
@@ -1198,57 +1208,53 @@ func (c *ElastiCache) DescribeCacheParameterGroupsRequest(input *DescribeCachePa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCacheParameterGroupsRequest{Request: req, Input: input}
+	return DescribeCacheParameterGroupsRequest{Request: req, Input: input, Copy: c.DescribeCacheParameterGroupsRequest}
 }
 
-// DescribeCacheParameterGroupsPages iterates over the pages of a DescribeCacheParameterGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeCacheParameterGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeCacheParameterGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeCacheParameterGroups operation.
-//    pageNum := 0
-//    err := client.DescribeCacheParameterGroupsPages(params,
-//        func(page *DescribeCacheParameterGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeCacheParameterGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeCacheParameterGroupsPages(input *DescribeCacheParameterGroupsInput, fn func(*DescribeCacheParameterGroupsOutput, bool) bool) error {
-	return c.DescribeCacheParameterGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeCacheParameterGroupsRequest) Paginate(opts ...aws.Option) DescribeCacheParameterGroupsPager {
+	return DescribeCacheParameterGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeCacheParameterGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeCacheParameterGroupsPagesWithContext same as DescribeCacheParameterGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheParameterGroupsPagesWithContext(ctx aws.Context, input *DescribeCacheParameterGroupsInput, fn func(*DescribeCacheParameterGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeCacheParameterGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeCacheParameterGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCacheParameterGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCacheParameterGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeCacheParameterGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCacheParameterGroupsPager) CurrentPage() *DescribeCacheParameterGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeCacheParameterGroupsOutput)
 }
 
 const opDescribeCacheParameters = "DescribeCacheParameters"
@@ -1257,6 +1263,7 @@ const opDescribeCacheParameters = "DescribeCacheParameters"
 type DescribeCacheParametersRequest struct {
 	*aws.Request
 	Input *DescribeCacheParametersInput
+	Copy  func(*DescribeCacheParametersInput) DescribeCacheParametersRequest
 }
 
 // Send marshals and sends the DescribeCacheParameters API request.
@@ -1303,57 +1310,53 @@ func (c *ElastiCache) DescribeCacheParametersRequest(input *DescribeCacheParamet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCacheParametersRequest{Request: req, Input: input}
+	return DescribeCacheParametersRequest{Request: req, Input: input, Copy: c.DescribeCacheParametersRequest}
 }
 
-// DescribeCacheParametersPages iterates over the pages of a DescribeCacheParameters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeCacheParameters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeCacheParametersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeCacheParameters operation.
-//    pageNum := 0
-//    err := client.DescribeCacheParametersPages(params,
-//        func(page *DescribeCacheParametersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeCacheParametersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeCacheParametersPages(input *DescribeCacheParametersInput, fn func(*DescribeCacheParametersOutput, bool) bool) error {
-	return c.DescribeCacheParametersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeCacheParametersRequest) Paginate(opts ...aws.Option) DescribeCacheParametersPager {
+	return DescribeCacheParametersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeCacheParametersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeCacheParametersPagesWithContext same as DescribeCacheParametersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheParametersPagesWithContext(ctx aws.Context, input *DescribeCacheParametersInput, fn func(*DescribeCacheParametersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeCacheParametersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeCacheParametersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCacheParametersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCacheParametersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeCacheParametersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCacheParametersPager) CurrentPage() *DescribeCacheParametersOutput {
+	return p.Pager.CurrentPage().(*DescribeCacheParametersOutput)
 }
 
 const opDescribeCacheSecurityGroups = "DescribeCacheSecurityGroups"
@@ -1362,6 +1365,7 @@ const opDescribeCacheSecurityGroups = "DescribeCacheSecurityGroups"
 type DescribeCacheSecurityGroupsRequest struct {
 	*aws.Request
 	Input *DescribeCacheSecurityGroupsInput
+	Copy  func(*DescribeCacheSecurityGroupsInput) DescribeCacheSecurityGroupsRequest
 }
 
 // Send marshals and sends the DescribeCacheSecurityGroups API request.
@@ -1409,57 +1413,53 @@ func (c *ElastiCache) DescribeCacheSecurityGroupsRequest(input *DescribeCacheSec
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCacheSecurityGroupsRequest{Request: req, Input: input}
+	return DescribeCacheSecurityGroupsRequest{Request: req, Input: input, Copy: c.DescribeCacheSecurityGroupsRequest}
 }
 
-// DescribeCacheSecurityGroupsPages iterates over the pages of a DescribeCacheSecurityGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeCacheSecurityGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeCacheSecurityGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeCacheSecurityGroups operation.
-//    pageNum := 0
-//    err := client.DescribeCacheSecurityGroupsPages(params,
-//        func(page *DescribeCacheSecurityGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeCacheSecurityGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeCacheSecurityGroupsPages(input *DescribeCacheSecurityGroupsInput, fn func(*DescribeCacheSecurityGroupsOutput, bool) bool) error {
-	return c.DescribeCacheSecurityGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeCacheSecurityGroupsRequest) Paginate(opts ...aws.Option) DescribeCacheSecurityGroupsPager {
+	return DescribeCacheSecurityGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeCacheSecurityGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeCacheSecurityGroupsPagesWithContext same as DescribeCacheSecurityGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheSecurityGroupsPagesWithContext(ctx aws.Context, input *DescribeCacheSecurityGroupsInput, fn func(*DescribeCacheSecurityGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeCacheSecurityGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeCacheSecurityGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCacheSecurityGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCacheSecurityGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeCacheSecurityGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCacheSecurityGroupsPager) CurrentPage() *DescribeCacheSecurityGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeCacheSecurityGroupsOutput)
 }
 
 const opDescribeCacheSubnetGroups = "DescribeCacheSubnetGroups"
@@ -1468,6 +1468,7 @@ const opDescribeCacheSubnetGroups = "DescribeCacheSubnetGroups"
 type DescribeCacheSubnetGroupsRequest struct {
 	*aws.Request
 	Input *DescribeCacheSubnetGroupsInput
+	Copy  func(*DescribeCacheSubnetGroupsInput) DescribeCacheSubnetGroupsRequest
 }
 
 // Send marshals and sends the DescribeCacheSubnetGroups API request.
@@ -1515,57 +1516,53 @@ func (c *ElastiCache) DescribeCacheSubnetGroupsRequest(input *DescribeCacheSubne
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeCacheSubnetGroupsRequest{Request: req, Input: input}
+	return DescribeCacheSubnetGroupsRequest{Request: req, Input: input, Copy: c.DescribeCacheSubnetGroupsRequest}
 }
 
-// DescribeCacheSubnetGroupsPages iterates over the pages of a DescribeCacheSubnetGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeCacheSubnetGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeCacheSubnetGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeCacheSubnetGroups operation.
-//    pageNum := 0
-//    err := client.DescribeCacheSubnetGroupsPages(params,
-//        func(page *DescribeCacheSubnetGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeCacheSubnetGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeCacheSubnetGroupsPages(input *DescribeCacheSubnetGroupsInput, fn func(*DescribeCacheSubnetGroupsOutput, bool) bool) error {
-	return c.DescribeCacheSubnetGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeCacheSubnetGroupsRequest) Paginate(opts ...aws.Option) DescribeCacheSubnetGroupsPager {
+	return DescribeCacheSubnetGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeCacheSubnetGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeCacheSubnetGroupsPagesWithContext same as DescribeCacheSubnetGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeCacheSubnetGroupsPagesWithContext(ctx aws.Context, input *DescribeCacheSubnetGroupsInput, fn func(*DescribeCacheSubnetGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeCacheSubnetGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeCacheSubnetGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeCacheSubnetGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeCacheSubnetGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeCacheSubnetGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeCacheSubnetGroupsPager) CurrentPage() *DescribeCacheSubnetGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeCacheSubnetGroupsOutput)
 }
 
 const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
@@ -1574,6 +1571,7 @@ const opDescribeEngineDefaultParameters = "DescribeEngineDefaultParameters"
 type DescribeEngineDefaultParametersRequest struct {
 	*aws.Request
 	Input *DescribeEngineDefaultParametersInput
+	Copy  func(*DescribeEngineDefaultParametersInput) DescribeEngineDefaultParametersRequest
 }
 
 // Send marshals and sends the DescribeEngineDefaultParameters API request.
@@ -1621,57 +1619,53 @@ func (c *ElastiCache) DescribeEngineDefaultParametersRequest(input *DescribeEngi
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEngineDefaultParametersRequest{Request: req, Input: input}
+	return DescribeEngineDefaultParametersRequest{Request: req, Input: input, Copy: c.DescribeEngineDefaultParametersRequest}
 }
 
-// DescribeEngineDefaultParametersPages iterates over the pages of a DescribeEngineDefaultParameters operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEngineDefaultParameters method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEngineDefaultParametersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEngineDefaultParameters operation.
-//    pageNum := 0
-//    err := client.DescribeEngineDefaultParametersPages(params,
-//        func(page *DescribeEngineDefaultParametersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEngineDefaultParametersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeEngineDefaultParametersPages(input *DescribeEngineDefaultParametersInput, fn func(*DescribeEngineDefaultParametersOutput, bool) bool) error {
-	return c.DescribeEngineDefaultParametersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEngineDefaultParametersRequest) Paginate(opts ...aws.Option) DescribeEngineDefaultParametersPager {
+	return DescribeEngineDefaultParametersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEngineDefaultParametersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEngineDefaultParametersPagesWithContext same as DescribeEngineDefaultParametersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeEngineDefaultParametersPagesWithContext(ctx aws.Context, input *DescribeEngineDefaultParametersInput, fn func(*DescribeEngineDefaultParametersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEngineDefaultParametersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEngineDefaultParametersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEngineDefaultParametersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEngineDefaultParametersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEngineDefaultParametersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEngineDefaultParametersPager) CurrentPage() *DescribeEngineDefaultParametersOutput {
+	return p.Pager.CurrentPage().(*DescribeEngineDefaultParametersOutput)
 }
 
 const opDescribeEvents = "DescribeEvents"
@@ -1680,6 +1674,7 @@ const opDescribeEvents = "DescribeEvents"
 type DescribeEventsRequest struct {
 	*aws.Request
 	Input *DescribeEventsInput
+	Copy  func(*DescribeEventsInput) DescribeEventsRequest
 }
 
 // Send marshals and sends the DescribeEvents API request.
@@ -1731,57 +1726,53 @@ func (c *ElastiCache) DescribeEventsRequest(input *DescribeEventsInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeEventsRequest{Request: req, Input: input}
+	return DescribeEventsRequest{Request: req, Input: input, Copy: c.DescribeEventsRequest}
 }
 
-// DescribeEventsPages iterates over the pages of a DescribeEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeEvents operation.
-//    pageNum := 0
-//    err := client.DescribeEventsPages(params,
-//        func(page *DescribeEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeEventsPages(input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool) error {
-	return c.DescribeEventsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeEventsRequest) Paginate(opts ...aws.Option) DescribeEventsPager {
+	return DescribeEventsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeEventsPagesWithContext same as DescribeEventsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeEventsPagesWithContext(ctx aws.Context, input *DescribeEventsInput, fn func(*DescribeEventsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeEventsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeEventsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeEventsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeEventsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeEventsPager) CurrentPage() *DescribeEventsOutput {
+	return p.Pager.CurrentPage().(*DescribeEventsOutput)
 }
 
 const opDescribeReplicationGroups = "DescribeReplicationGroups"
@@ -1790,6 +1781,7 @@ const opDescribeReplicationGroups = "DescribeReplicationGroups"
 type DescribeReplicationGroupsRequest struct {
 	*aws.Request
 	Input *DescribeReplicationGroupsInput
+	Copy  func(*DescribeReplicationGroupsInput) DescribeReplicationGroupsRequest
 }
 
 // Send marshals and sends the DescribeReplicationGroups API request.
@@ -1840,57 +1832,53 @@ func (c *ElastiCache) DescribeReplicationGroupsRequest(input *DescribeReplicatio
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReplicationGroupsRequest{Request: req, Input: input}
+	return DescribeReplicationGroupsRequest{Request: req, Input: input, Copy: c.DescribeReplicationGroupsRequest}
 }
 
-// DescribeReplicationGroupsPages iterates over the pages of a DescribeReplicationGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReplicationGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReplicationGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReplicationGroups operation.
-//    pageNum := 0
-//    err := client.DescribeReplicationGroupsPages(params,
-//        func(page *DescribeReplicationGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReplicationGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeReplicationGroupsPages(input *DescribeReplicationGroupsInput, fn func(*DescribeReplicationGroupsOutput, bool) bool) error {
-	return c.DescribeReplicationGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeReplicationGroupsRequest) Paginate(opts ...aws.Option) DescribeReplicationGroupsPager {
+	return DescribeReplicationGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReplicationGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeReplicationGroupsPagesWithContext same as DescribeReplicationGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeReplicationGroupsPagesWithContext(ctx aws.Context, input *DescribeReplicationGroupsInput, fn func(*DescribeReplicationGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReplicationGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeReplicationGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReplicationGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReplicationGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeReplicationGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReplicationGroupsPager) CurrentPage() *DescribeReplicationGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeReplicationGroupsOutput)
 }
 
 const opDescribeReservedCacheNodes = "DescribeReservedCacheNodes"
@@ -1899,6 +1887,7 @@ const opDescribeReservedCacheNodes = "DescribeReservedCacheNodes"
 type DescribeReservedCacheNodesRequest struct {
 	*aws.Request
 	Input *DescribeReservedCacheNodesInput
+	Copy  func(*DescribeReservedCacheNodesInput) DescribeReservedCacheNodesRequest
 }
 
 // Send marshals and sends the DescribeReservedCacheNodes API request.
@@ -1946,57 +1935,53 @@ func (c *ElastiCache) DescribeReservedCacheNodesRequest(input *DescribeReservedC
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReservedCacheNodesRequest{Request: req, Input: input}
+	return DescribeReservedCacheNodesRequest{Request: req, Input: input, Copy: c.DescribeReservedCacheNodesRequest}
 }
 
-// DescribeReservedCacheNodesPages iterates over the pages of a DescribeReservedCacheNodes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReservedCacheNodes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReservedCacheNodesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReservedCacheNodes operation.
-//    pageNum := 0
-//    err := client.DescribeReservedCacheNodesPages(params,
-//        func(page *DescribeReservedCacheNodesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReservedCacheNodesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeReservedCacheNodesPages(input *DescribeReservedCacheNodesInput, fn func(*DescribeReservedCacheNodesOutput, bool) bool) error {
-	return c.DescribeReservedCacheNodesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeReservedCacheNodesRequest) Paginate(opts ...aws.Option) DescribeReservedCacheNodesPager {
+	return DescribeReservedCacheNodesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReservedCacheNodesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeReservedCacheNodesPagesWithContext same as DescribeReservedCacheNodesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeReservedCacheNodesPagesWithContext(ctx aws.Context, input *DescribeReservedCacheNodesInput, fn func(*DescribeReservedCacheNodesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReservedCacheNodesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeReservedCacheNodesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReservedCacheNodesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReservedCacheNodesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeReservedCacheNodesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReservedCacheNodesPager) CurrentPage() *DescribeReservedCacheNodesOutput {
+	return p.Pager.CurrentPage().(*DescribeReservedCacheNodesOutput)
 }
 
 const opDescribeReservedCacheNodesOfferings = "DescribeReservedCacheNodesOfferings"
@@ -2005,6 +1990,7 @@ const opDescribeReservedCacheNodesOfferings = "DescribeReservedCacheNodesOfferin
 type DescribeReservedCacheNodesOfferingsRequest struct {
 	*aws.Request
 	Input *DescribeReservedCacheNodesOfferingsInput
+	Copy  func(*DescribeReservedCacheNodesOfferingsInput) DescribeReservedCacheNodesOfferingsRequest
 }
 
 // Send marshals and sends the DescribeReservedCacheNodesOfferings API request.
@@ -2051,57 +2037,53 @@ func (c *ElastiCache) DescribeReservedCacheNodesOfferingsRequest(input *Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeReservedCacheNodesOfferingsRequest{Request: req, Input: input}
+	return DescribeReservedCacheNodesOfferingsRequest{Request: req, Input: input, Copy: c.DescribeReservedCacheNodesOfferingsRequest}
 }
 
-// DescribeReservedCacheNodesOfferingsPages iterates over the pages of a DescribeReservedCacheNodesOfferings operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeReservedCacheNodesOfferings method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeReservedCacheNodesOfferingsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeReservedCacheNodesOfferings operation.
-//    pageNum := 0
-//    err := client.DescribeReservedCacheNodesOfferingsPages(params,
-//        func(page *DescribeReservedCacheNodesOfferingsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeReservedCacheNodesOfferingsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeReservedCacheNodesOfferingsPages(input *DescribeReservedCacheNodesOfferingsInput, fn func(*DescribeReservedCacheNodesOfferingsOutput, bool) bool) error {
-	return c.DescribeReservedCacheNodesOfferingsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeReservedCacheNodesOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedCacheNodesOfferingsPager {
+	return DescribeReservedCacheNodesOfferingsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReservedCacheNodesOfferingsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeReservedCacheNodesOfferingsPagesWithContext same as DescribeReservedCacheNodesOfferingsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeReservedCacheNodesOfferingsPagesWithContext(ctx aws.Context, input *DescribeReservedCacheNodesOfferingsInput, fn func(*DescribeReservedCacheNodesOfferingsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeReservedCacheNodesOfferingsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeReservedCacheNodesOfferingsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeReservedCacheNodesOfferingsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeReservedCacheNodesOfferingsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeReservedCacheNodesOfferingsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReservedCacheNodesOfferingsPager) CurrentPage() *DescribeReservedCacheNodesOfferingsOutput {
+	return p.Pager.CurrentPage().(*DescribeReservedCacheNodesOfferingsOutput)
 }
 
 const opDescribeSnapshots = "DescribeSnapshots"
@@ -2110,6 +2092,7 @@ const opDescribeSnapshots = "DescribeSnapshots"
 type DescribeSnapshotsRequest struct {
 	*aws.Request
 	Input *DescribeSnapshotsInput
+	Copy  func(*DescribeSnapshotsInput) DescribeSnapshotsRequest
 }
 
 // Send marshals and sends the DescribeSnapshots API request.
@@ -2161,57 +2144,53 @@ func (c *ElastiCache) DescribeSnapshotsRequest(input *DescribeSnapshotsInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSnapshotsRequest{Request: req, Input: input}
+	return DescribeSnapshotsRequest{Request: req, Input: input, Copy: c.DescribeSnapshotsRequest}
 }
 
-// DescribeSnapshotsPages iterates over the pages of a DescribeSnapshots operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeSnapshots method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeSnapshotsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeSnapshots operation.
-//    pageNum := 0
-//    err := client.DescribeSnapshotsPages(params,
-//        func(page *DescribeSnapshotsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeSnapshotsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ElastiCache) DescribeSnapshotsPages(input *DescribeSnapshotsInput, fn func(*DescribeSnapshotsOutput, bool) bool) error {
-	return c.DescribeSnapshotsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeSnapshotsRequest) Paginate(opts ...aws.Option) DescribeSnapshotsPager {
+	return DescribeSnapshotsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeSnapshotsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeSnapshotsPagesWithContext same as DescribeSnapshotsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ElastiCache) DescribeSnapshotsPagesWithContext(ctx aws.Context, input *DescribeSnapshotsInput, fn func(*DescribeSnapshotsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeSnapshotsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeSnapshotsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeSnapshotsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeSnapshotsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeSnapshotsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeSnapshotsPager) CurrentPage() *DescribeSnapshotsOutput {
+	return p.Pager.CurrentPage().(*DescribeSnapshotsOutput)
 }
 
 const opListAllowedNodeTypeModifications = "ListAllowedNodeTypeModifications"
@@ -2220,6 +2199,7 @@ const opListAllowedNodeTypeModifications = "ListAllowedNodeTypeModifications"
 type ListAllowedNodeTypeModificationsRequest struct {
 	*aws.Request
 	Input *ListAllowedNodeTypeModificationsInput
+	Copy  func(*ListAllowedNodeTypeModificationsInput) ListAllowedNodeTypeModificationsRequest
 }
 
 // Send marshals and sends the ListAllowedNodeTypeModifications API request.
@@ -2265,7 +2245,7 @@ func (c *ElastiCache) ListAllowedNodeTypeModificationsRequest(input *ListAllowed
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAllowedNodeTypeModificationsRequest{Request: req, Input: input}
+	return ListAllowedNodeTypeModificationsRequest{Request: req, Input: input, Copy: c.ListAllowedNodeTypeModificationsRequest}
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -2274,6 +2254,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -2321,7 +2302,7 @@ func (c *ElastiCache) ListTagsForResourceRequest(input *ListTagsForResourceInput
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
 const opModifyCacheCluster = "ModifyCacheCluster"
@@ -2330,6 +2311,7 @@ const opModifyCacheCluster = "ModifyCacheCluster"
 type ModifyCacheClusterRequest struct {
 	*aws.Request
 	Input *ModifyCacheClusterInput
+	Copy  func(*ModifyCacheClusterInput) ModifyCacheClusterRequest
 }
 
 // Send marshals and sends the ModifyCacheCluster API request.
@@ -2372,7 +2354,7 @@ func (c *ElastiCache) ModifyCacheClusterRequest(input *ModifyCacheClusterInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyCacheClusterRequest{Request: req, Input: input}
+	return ModifyCacheClusterRequest{Request: req, Input: input, Copy: c.ModifyCacheClusterRequest}
 }
 
 const opModifyCacheParameterGroup = "ModifyCacheParameterGroup"
@@ -2381,6 +2363,7 @@ const opModifyCacheParameterGroup = "ModifyCacheParameterGroup"
 type ModifyCacheParameterGroupRequest struct {
 	*aws.Request
 	Input *ModifyCacheParameterGroupInput
+	Copy  func(*ModifyCacheParameterGroupInput) ModifyCacheParameterGroupRequest
 }
 
 // Send marshals and sends the ModifyCacheParameterGroup API request.
@@ -2423,7 +2406,7 @@ func (c *ElastiCache) ModifyCacheParameterGroupRequest(input *ModifyCacheParamet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyCacheParameterGroupRequest{Request: req, Input: input}
+	return ModifyCacheParameterGroupRequest{Request: req, Input: input, Copy: c.ModifyCacheParameterGroupRequest}
 }
 
 const opModifyCacheSubnetGroup = "ModifyCacheSubnetGroup"
@@ -2432,6 +2415,7 @@ const opModifyCacheSubnetGroup = "ModifyCacheSubnetGroup"
 type ModifyCacheSubnetGroupRequest struct {
 	*aws.Request
 	Input *ModifyCacheSubnetGroupInput
+	Copy  func(*ModifyCacheSubnetGroupInput) ModifyCacheSubnetGroupRequest
 }
 
 // Send marshals and sends the ModifyCacheSubnetGroup API request.
@@ -2472,7 +2456,7 @@ func (c *ElastiCache) ModifyCacheSubnetGroupRequest(input *ModifyCacheSubnetGrou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyCacheSubnetGroupRequest{Request: req, Input: input}
+	return ModifyCacheSubnetGroupRequest{Request: req, Input: input, Copy: c.ModifyCacheSubnetGroupRequest}
 }
 
 const opModifyReplicationGroup = "ModifyReplicationGroup"
@@ -2481,6 +2465,7 @@ const opModifyReplicationGroup = "ModifyReplicationGroup"
 type ModifyReplicationGroupRequest struct {
 	*aws.Request
 	Input *ModifyReplicationGroupInput
+	Copy  func(*ModifyReplicationGroupInput) ModifyReplicationGroupRequest
 }
 
 // Send marshals and sends the ModifyReplicationGroup API request.
@@ -2527,7 +2512,7 @@ func (c *ElastiCache) ModifyReplicationGroupRequest(input *ModifyReplicationGrou
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyReplicationGroupRequest{Request: req, Input: input}
+	return ModifyReplicationGroupRequest{Request: req, Input: input, Copy: c.ModifyReplicationGroupRequest}
 }
 
 const opModifyReplicationGroupShardConfiguration = "ModifyReplicationGroupShardConfiguration"
@@ -2536,6 +2521,7 @@ const opModifyReplicationGroupShardConfiguration = "ModifyReplicationGroupShardC
 type ModifyReplicationGroupShardConfigurationRequest struct {
 	*aws.Request
 	Input *ModifyReplicationGroupShardConfigurationInput
+	Copy  func(*ModifyReplicationGroupShardConfigurationInput) ModifyReplicationGroupShardConfigurationRequest
 }
 
 // Send marshals and sends the ModifyReplicationGroupShardConfiguration API request.
@@ -2583,7 +2569,7 @@ func (c *ElastiCache) ModifyReplicationGroupShardConfigurationRequest(input *Mod
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyReplicationGroupShardConfigurationRequest{Request: req, Input: input}
+	return ModifyReplicationGroupShardConfigurationRequest{Request: req, Input: input, Copy: c.ModifyReplicationGroupShardConfigurationRequest}
 }
 
 const opPurchaseReservedCacheNodesOffering = "PurchaseReservedCacheNodesOffering"
@@ -2592,6 +2578,7 @@ const opPurchaseReservedCacheNodesOffering = "PurchaseReservedCacheNodesOffering
 type PurchaseReservedCacheNodesOfferingRequest struct {
 	*aws.Request
 	Input *PurchaseReservedCacheNodesOfferingInput
+	Copy  func(*PurchaseReservedCacheNodesOfferingInput) PurchaseReservedCacheNodesOfferingRequest
 }
 
 // Send marshals and sends the PurchaseReservedCacheNodesOffering API request.
@@ -2632,7 +2619,7 @@ func (c *ElastiCache) PurchaseReservedCacheNodesOfferingRequest(input *PurchaseR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PurchaseReservedCacheNodesOfferingRequest{Request: req, Input: input}
+	return PurchaseReservedCacheNodesOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedCacheNodesOfferingRequest}
 }
 
 const opRebootCacheCluster = "RebootCacheCluster"
@@ -2641,6 +2628,7 @@ const opRebootCacheCluster = "RebootCacheCluster"
 type RebootCacheClusterRequest struct {
 	*aws.Request
 	Input *RebootCacheClusterInput
+	Copy  func(*RebootCacheClusterInput) RebootCacheClusterRequest
 }
 
 // Send marshals and sends the RebootCacheCluster API request.
@@ -2697,7 +2685,7 @@ func (c *ElastiCache) RebootCacheClusterRequest(input *RebootCacheClusterInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RebootCacheClusterRequest{Request: req, Input: input}
+	return RebootCacheClusterRequest{Request: req, Input: input, Copy: c.RebootCacheClusterRequest}
 }
 
 const opRemoveTagsFromResource = "RemoveTagsFromResource"
@@ -2706,6 +2694,7 @@ const opRemoveTagsFromResource = "RemoveTagsFromResource"
 type RemoveTagsFromResourceRequest struct {
 	*aws.Request
 	Input *RemoveTagsFromResourceInput
+	Copy  func(*RemoveTagsFromResourceInput) RemoveTagsFromResourceRequest
 }
 
 // Send marshals and sends the RemoveTagsFromResource API request.
@@ -2746,7 +2735,7 @@ func (c *ElastiCache) RemoveTagsFromResourceRequest(input *RemoveTagsFromResourc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsFromResourceRequest{Request: req, Input: input}
+	return RemoveTagsFromResourceRequest{Request: req, Input: input, Copy: c.RemoveTagsFromResourceRequest}
 }
 
 const opResetCacheParameterGroup = "ResetCacheParameterGroup"
@@ -2755,6 +2744,7 @@ const opResetCacheParameterGroup = "ResetCacheParameterGroup"
 type ResetCacheParameterGroupRequest struct {
 	*aws.Request
 	Input *ResetCacheParameterGroupInput
+	Copy  func(*ResetCacheParameterGroupInput) ResetCacheParameterGroupRequest
 }
 
 // Send marshals and sends the ResetCacheParameterGroup API request.
@@ -2798,7 +2788,7 @@ func (c *ElastiCache) ResetCacheParameterGroupRequest(input *ResetCacheParameter
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ResetCacheParameterGroupRequest{Request: req, Input: input}
+	return ResetCacheParameterGroupRequest{Request: req, Input: input, Copy: c.ResetCacheParameterGroupRequest}
 }
 
 const opRevokeCacheSecurityGroupIngress = "RevokeCacheSecurityGroupIngress"
@@ -2807,6 +2797,7 @@ const opRevokeCacheSecurityGroupIngress = "RevokeCacheSecurityGroupIngress"
 type RevokeCacheSecurityGroupIngressRequest struct {
 	*aws.Request
 	Input *RevokeCacheSecurityGroupIngressInput
+	Copy  func(*RevokeCacheSecurityGroupIngressInput) RevokeCacheSecurityGroupIngressRequest
 }
 
 // Send marshals and sends the RevokeCacheSecurityGroupIngress API request.
@@ -2848,7 +2839,7 @@ func (c *ElastiCache) RevokeCacheSecurityGroupIngressRequest(input *RevokeCacheS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RevokeCacheSecurityGroupIngressRequest{Request: req, Input: input}
+	return RevokeCacheSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.RevokeCacheSecurityGroupIngressRequest}
 }
 
 const opTestFailover = "TestFailover"
@@ -2857,6 +2848,7 @@ const opTestFailover = "TestFailover"
 type TestFailoverRequest struct {
 	*aws.Request
 	Input *TestFailoverInput
+	Copy  func(*TestFailoverInput) TestFailoverRequest
 }
 
 // Send marshals and sends the TestFailover API request.
@@ -2940,7 +2932,7 @@ func (c *ElastiCache) TestFailoverRequest(input *TestFailoverInput) TestFailover
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TestFailoverRequest{Request: req, Input: input}
+	return TestFailoverRequest{Request: req, Input: input, Copy: c.TestFailoverRequest}
 }
 
 // Represents the input of an AddTagsToResource operation.

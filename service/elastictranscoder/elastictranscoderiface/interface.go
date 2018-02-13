@@ -77,23 +77,11 @@ type ElasticTranscoderAPI interface {
 
 	ListJobsByPipelineRequest(*elastictranscoder.ListJobsByPipelineInput) elastictranscoder.ListJobsByPipelineRequest
 
-	ListJobsByPipelinePages(*elastictranscoder.ListJobsByPipelineInput, func(*elastictranscoder.ListJobsByPipelineOutput, bool) bool) error
-	ListJobsByPipelinePagesWithContext(aws.Context, *elastictranscoder.ListJobsByPipelineInput, func(*elastictranscoder.ListJobsByPipelineOutput, bool) bool, ...aws.Option) error
-
 	ListJobsByStatusRequest(*elastictranscoder.ListJobsByStatusInput) elastictranscoder.ListJobsByStatusRequest
-
-	ListJobsByStatusPages(*elastictranscoder.ListJobsByStatusInput, func(*elastictranscoder.ListJobsByStatusOutput, bool) bool) error
-	ListJobsByStatusPagesWithContext(aws.Context, *elastictranscoder.ListJobsByStatusInput, func(*elastictranscoder.ListJobsByStatusOutput, bool) bool, ...aws.Option) error
 
 	ListPipelinesRequest(*elastictranscoder.ListPipelinesInput) elastictranscoder.ListPipelinesRequest
 
-	ListPipelinesPages(*elastictranscoder.ListPipelinesInput, func(*elastictranscoder.ListPipelinesOutput, bool) bool) error
-	ListPipelinesPagesWithContext(aws.Context, *elastictranscoder.ListPipelinesInput, func(*elastictranscoder.ListPipelinesOutput, bool) bool, ...aws.Option) error
-
 	ListPresetsRequest(*elastictranscoder.ListPresetsInput) elastictranscoder.ListPresetsRequest
-
-	ListPresetsPages(*elastictranscoder.ListPresetsInput, func(*elastictranscoder.ListPresetsOutput, bool) bool) error
-	ListPresetsPagesWithContext(aws.Context, *elastictranscoder.ListPresetsInput, func(*elastictranscoder.ListPresetsOutput, bool) bool, ...aws.Option) error
 
 	ReadJobRequest(*elastictranscoder.ReadJobInput) elastictranscoder.ReadJobRequest
 

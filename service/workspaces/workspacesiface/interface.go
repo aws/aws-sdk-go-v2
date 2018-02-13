@@ -9,7 +9,6 @@
 package workspacesiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces"
 )
 
@@ -73,18 +72,9 @@ type WorkSpacesAPI interface {
 
 	DescribeWorkspaceBundlesRequest(*workspaces.DescribeWorkspaceBundlesInput) workspaces.DescribeWorkspaceBundlesRequest
 
-	DescribeWorkspaceBundlesPages(*workspaces.DescribeWorkspaceBundlesInput, func(*workspaces.DescribeWorkspaceBundlesOutput, bool) bool) error
-	DescribeWorkspaceBundlesPagesWithContext(aws.Context, *workspaces.DescribeWorkspaceBundlesInput, func(*workspaces.DescribeWorkspaceBundlesOutput, bool) bool, ...aws.Option) error
-
 	DescribeWorkspaceDirectoriesRequest(*workspaces.DescribeWorkspaceDirectoriesInput) workspaces.DescribeWorkspaceDirectoriesRequest
 
-	DescribeWorkspaceDirectoriesPages(*workspaces.DescribeWorkspaceDirectoriesInput, func(*workspaces.DescribeWorkspaceDirectoriesOutput, bool) bool) error
-	DescribeWorkspaceDirectoriesPagesWithContext(aws.Context, *workspaces.DescribeWorkspaceDirectoriesInput, func(*workspaces.DescribeWorkspaceDirectoriesOutput, bool) bool, ...aws.Option) error
-
 	DescribeWorkspacesRequest(*workspaces.DescribeWorkspacesInput) workspaces.DescribeWorkspacesRequest
-
-	DescribeWorkspacesPages(*workspaces.DescribeWorkspacesInput, func(*workspaces.DescribeWorkspacesOutput, bool) bool) error
-	DescribeWorkspacesPagesWithContext(aws.Context, *workspaces.DescribeWorkspacesInput, func(*workspaces.DescribeWorkspacesOutput, bool) bool, ...aws.Option) error
 
 	DescribeWorkspacesConnectionStatusRequest(*workspaces.DescribeWorkspacesConnectionStatusInput) workspaces.DescribeWorkspacesConnectionStatusRequest
 

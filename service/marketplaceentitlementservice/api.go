@@ -15,6 +15,7 @@ const opGetEntitlements = "GetEntitlements"
 type GetEntitlementsRequest struct {
 	*aws.Request
 	Input *GetEntitlementsInput
+	Copy  func(*GetEntitlementsInput) GetEntitlementsRequest
 }
 
 // Send marshals and sends the GetEntitlements API request.
@@ -56,7 +57,7 @@ func (c *MarketplaceEntitlementService) GetEntitlementsRequest(input *GetEntitle
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetEntitlementsRequest{Request: req, Input: input}
+	return GetEntitlementsRequest{Request: req, Input: input, Copy: c.GetEntitlementsRequest}
 }
 
 // An entitlement represents capacity in a product owned by the customer. For

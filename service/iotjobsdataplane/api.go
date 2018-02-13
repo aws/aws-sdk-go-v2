@@ -14,6 +14,7 @@ const opDescribeJobExecution = "DescribeJobExecution"
 type DescribeJobExecutionRequest struct {
 	*aws.Request
 	Input *DescribeJobExecutionInput
+	Copy  func(*DescribeJobExecutionInput) DescribeJobExecutionRequest
 }
 
 // Send marshals and sends the DescribeJobExecution API request.
@@ -54,7 +55,7 @@ func (c *IoTJobsDataPlane) DescribeJobExecutionRequest(input *DescribeJobExecuti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeJobExecutionRequest{Request: req, Input: input}
+	return DescribeJobExecutionRequest{Request: req, Input: input, Copy: c.DescribeJobExecutionRequest}
 }
 
 const opGetPendingJobExecutions = "GetPendingJobExecutions"
@@ -63,6 +64,7 @@ const opGetPendingJobExecutions = "GetPendingJobExecutions"
 type GetPendingJobExecutionsRequest struct {
 	*aws.Request
 	Input *GetPendingJobExecutionsInput
+	Copy  func(*GetPendingJobExecutionsInput) GetPendingJobExecutionsRequest
 }
 
 // Send marshals and sends the GetPendingJobExecutions API request.
@@ -103,7 +105,7 @@ func (c *IoTJobsDataPlane) GetPendingJobExecutionsRequest(input *GetPendingJobEx
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetPendingJobExecutionsRequest{Request: req, Input: input}
+	return GetPendingJobExecutionsRequest{Request: req, Input: input, Copy: c.GetPendingJobExecutionsRequest}
 }
 
 const opStartNextPendingJobExecution = "StartNextPendingJobExecution"
@@ -112,6 +114,7 @@ const opStartNextPendingJobExecution = "StartNextPendingJobExecution"
 type StartNextPendingJobExecutionRequest struct {
 	*aws.Request
 	Input *StartNextPendingJobExecutionInput
+	Copy  func(*StartNextPendingJobExecutionInput) StartNextPendingJobExecutionRequest
 }
 
 // Send marshals and sends the StartNextPendingJobExecution API request.
@@ -153,7 +156,7 @@ func (c *IoTJobsDataPlane) StartNextPendingJobExecutionRequest(input *StartNextP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartNextPendingJobExecutionRequest{Request: req, Input: input}
+	return StartNextPendingJobExecutionRequest{Request: req, Input: input, Copy: c.StartNextPendingJobExecutionRequest}
 }
 
 const opUpdateJobExecution = "UpdateJobExecution"
@@ -162,6 +165,7 @@ const opUpdateJobExecution = "UpdateJobExecution"
 type UpdateJobExecutionRequest struct {
 	*aws.Request
 	Input *UpdateJobExecutionInput
+	Copy  func(*UpdateJobExecutionInput) UpdateJobExecutionRequest
 }
 
 // Send marshals and sends the UpdateJobExecution API request.
@@ -202,7 +206,7 @@ func (c *IoTJobsDataPlane) UpdateJobExecutionRequest(input *UpdateJobExecutionIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateJobExecutionRequest{Request: req, Input: input}
+	return UpdateJobExecutionRequest{Request: req, Input: input, Copy: c.UpdateJobExecutionRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iot-jobs-data-2017-09-29/DescribeJobExecutionRequest

@@ -9,7 +9,6 @@
 package applicationautoscalingiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
 )
 
@@ -71,18 +70,9 @@ type ApplicationAutoScalingAPI interface {
 
 	DescribeScalableTargetsRequest(*applicationautoscaling.DescribeScalableTargetsInput) applicationautoscaling.DescribeScalableTargetsRequest
 
-	DescribeScalableTargetsPages(*applicationautoscaling.DescribeScalableTargetsInput, func(*applicationautoscaling.DescribeScalableTargetsOutput, bool) bool) error
-	DescribeScalableTargetsPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalableTargetsInput, func(*applicationautoscaling.DescribeScalableTargetsOutput, bool) bool, ...aws.Option) error
-
 	DescribeScalingActivitiesRequest(*applicationautoscaling.DescribeScalingActivitiesInput) applicationautoscaling.DescribeScalingActivitiesRequest
 
-	DescribeScalingActivitiesPages(*applicationautoscaling.DescribeScalingActivitiesInput, func(*applicationautoscaling.DescribeScalingActivitiesOutput, bool) bool) error
-	DescribeScalingActivitiesPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalingActivitiesInput, func(*applicationautoscaling.DescribeScalingActivitiesOutput, bool) bool, ...aws.Option) error
-
 	DescribeScalingPoliciesRequest(*applicationautoscaling.DescribeScalingPoliciesInput) applicationautoscaling.DescribeScalingPoliciesRequest
-
-	DescribeScalingPoliciesPages(*applicationautoscaling.DescribeScalingPoliciesInput, func(*applicationautoscaling.DescribeScalingPoliciesOutput, bool) bool) error
-	DescribeScalingPoliciesPagesWithContext(aws.Context, *applicationautoscaling.DescribeScalingPoliciesInput, func(*applicationautoscaling.DescribeScalingPoliciesOutput, bool) bool, ...aws.Option) error
 
 	DescribeScheduledActionsRequest(*applicationautoscaling.DescribeScheduledActionsInput) applicationautoscaling.DescribeScheduledActionsRequest
 

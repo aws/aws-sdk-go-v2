@@ -9,7 +9,6 @@
 package supportiface
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/support"
 )
 
@@ -73,13 +72,7 @@ type SupportAPI interface {
 
 	DescribeCasesRequest(*support.DescribeCasesInput) support.DescribeCasesRequest
 
-	DescribeCasesPages(*support.DescribeCasesInput, func(*support.DescribeCasesOutput, bool) bool) error
-	DescribeCasesPagesWithContext(aws.Context, *support.DescribeCasesInput, func(*support.DescribeCasesOutput, bool) bool, ...aws.Option) error
-
 	DescribeCommunicationsRequest(*support.DescribeCommunicationsInput) support.DescribeCommunicationsRequest
-
-	DescribeCommunicationsPages(*support.DescribeCommunicationsInput, func(*support.DescribeCommunicationsOutput, bool) bool) error
-	DescribeCommunicationsPagesWithContext(aws.Context, *support.DescribeCommunicationsInput, func(*support.DescribeCommunicationsOutput, bool) bool, ...aws.Option) error
 
 	DescribeServicesRequest(*support.DescribeServicesInput) support.DescribeServicesRequest
 

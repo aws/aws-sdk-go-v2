@@ -17,6 +17,7 @@ const opDeleteLexicon = "DeleteLexicon"
 type DeleteLexiconRequest struct {
 	*aws.Request
 	Input *DeleteLexiconInput
+	Copy  func(*DeleteLexiconInput) DeleteLexiconRequest
 }
 
 // Send marshals and sends the DeleteLexicon API request.
@@ -61,7 +62,7 @@ func (c *Polly) DeleteLexiconRequest(input *DeleteLexiconInput) DeleteLexiconReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLexiconRequest{Request: req, Input: input}
+	return DeleteLexiconRequest{Request: req, Input: input, Copy: c.DeleteLexiconRequest}
 }
 
 const opDescribeVoices = "DescribeVoices"
@@ -70,6 +71,7 @@ const opDescribeVoices = "DescribeVoices"
 type DescribeVoicesRequest struct {
 	*aws.Request
 	Input *DescribeVoicesInput
+	Copy  func(*DescribeVoicesInput) DescribeVoicesRequest
 }
 
 // Send marshals and sends the DescribeVoices API request.
@@ -126,7 +128,7 @@ func (c *Polly) DescribeVoicesRequest(input *DescribeVoicesInput) DescribeVoices
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeVoicesRequest{Request: req, Input: input}
+	return DescribeVoicesRequest{Request: req, Input: input, Copy: c.DescribeVoicesRequest}
 }
 
 const opGetLexicon = "GetLexicon"
@@ -135,6 +137,7 @@ const opGetLexicon = "GetLexicon"
 type GetLexiconRequest struct {
 	*aws.Request
 	Input *GetLexiconInput
+	Copy  func(*GetLexiconInput) GetLexiconRequest
 }
 
 // Send marshals and sends the GetLexicon API request.
@@ -176,7 +179,7 @@ func (c *Polly) GetLexiconRequest(input *GetLexiconInput) GetLexiconRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetLexiconRequest{Request: req, Input: input}
+	return GetLexiconRequest{Request: req, Input: input, Copy: c.GetLexiconRequest}
 }
 
 const opListLexicons = "ListLexicons"
@@ -185,6 +188,7 @@ const opListLexicons = "ListLexicons"
 type ListLexiconsRequest struct {
 	*aws.Request
 	Input *ListLexiconsInput
+	Copy  func(*ListLexiconsInput) ListLexiconsRequest
 }
 
 // Send marshals and sends the ListLexicons API request.
@@ -226,7 +230,7 @@ func (c *Polly) ListLexiconsRequest(input *ListLexiconsInput) ListLexiconsReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListLexiconsRequest{Request: req, Input: input}
+	return ListLexiconsRequest{Request: req, Input: input, Copy: c.ListLexiconsRequest}
 }
 
 const opPutLexicon = "PutLexicon"
@@ -235,6 +239,7 @@ const opPutLexicon = "PutLexicon"
 type PutLexiconRequest struct {
 	*aws.Request
 	Input *PutLexiconInput
+	Copy  func(*PutLexiconInput) PutLexiconRequest
 }
 
 // Send marshals and sends the PutLexicon API request.
@@ -280,7 +285,7 @@ func (c *Polly) PutLexiconRequest(input *PutLexiconInput) PutLexiconRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutLexiconRequest{Request: req, Input: input}
+	return PutLexiconRequest{Request: req, Input: input, Copy: c.PutLexiconRequest}
 }
 
 const opSynthesizeSpeech = "SynthesizeSpeech"
@@ -289,6 +294,7 @@ const opSynthesizeSpeech = "SynthesizeSpeech"
 type SynthesizeSpeechRequest struct {
 	*aws.Request
 	Input *SynthesizeSpeechInput
+	Copy  func(*SynthesizeSpeechInput) SynthesizeSpeechRequest
 }
 
 // Send marshals and sends the SynthesizeSpeech API request.
@@ -333,7 +339,7 @@ func (c *Polly) SynthesizeSpeechRequest(input *SynthesizeSpeechInput) Synthesize
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SynthesizeSpeechRequest{Request: req, Input: input}
+	return SynthesizeSpeechRequest{Request: req, Input: input, Copy: c.SynthesizeSpeechRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/DeleteLexiconInput

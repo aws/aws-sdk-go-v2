@@ -15,6 +15,7 @@ const opCreateProtection = "CreateProtection"
 type CreateProtectionRequest struct {
 	*aws.Request
 	Input *CreateProtectionInput
+	Copy  func(*CreateProtectionInput) CreateProtectionRequest
 }
 
 // Send marshals and sends the CreateProtection API request.
@@ -57,7 +58,7 @@ func (c *Shield) CreateProtectionRequest(input *CreateProtectionInput) CreatePro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateProtectionRequest{Request: req, Input: input}
+	return CreateProtectionRequest{Request: req, Input: input, Copy: c.CreateProtectionRequest}
 }
 
 const opCreateSubscription = "CreateSubscription"
@@ -66,6 +67,7 @@ const opCreateSubscription = "CreateSubscription"
 type CreateSubscriptionRequest struct {
 	*aws.Request
 	Input *CreateSubscriptionInput
+	Copy  func(*CreateSubscriptionInput) CreateSubscriptionRequest
 }
 
 // Send marshals and sends the CreateSubscription API request.
@@ -106,7 +108,7 @@ func (c *Shield) CreateSubscriptionRequest(input *CreateSubscriptionInput) Creat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSubscriptionRequest{Request: req, Input: input}
+	return CreateSubscriptionRequest{Request: req, Input: input, Copy: c.CreateSubscriptionRequest}
 }
 
 const opDeleteProtection = "DeleteProtection"
@@ -115,6 +117,7 @@ const opDeleteProtection = "DeleteProtection"
 type DeleteProtectionRequest struct {
 	*aws.Request
 	Input *DeleteProtectionInput
+	Copy  func(*DeleteProtectionInput) DeleteProtectionRequest
 }
 
 // Send marshals and sends the DeleteProtection API request.
@@ -155,7 +158,7 @@ func (c *Shield) DeleteProtectionRequest(input *DeleteProtectionInput) DeletePro
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteProtectionRequest{Request: req, Input: input}
+	return DeleteProtectionRequest{Request: req, Input: input, Copy: c.DeleteProtectionRequest}
 }
 
 const opDeleteSubscription = "DeleteSubscription"
@@ -164,6 +167,7 @@ const opDeleteSubscription = "DeleteSubscription"
 type DeleteSubscriptionRequest struct {
 	*aws.Request
 	Input *DeleteSubscriptionInput
+	Copy  func(*DeleteSubscriptionInput) DeleteSubscriptionRequest
 }
 
 // Send marshals and sends the DeleteSubscription API request.
@@ -206,7 +210,7 @@ func (c *Shield) DeleteSubscriptionRequest(input *DeleteSubscriptionInput) Delet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSubscriptionRequest{Request: req, Input: input}
+	return DeleteSubscriptionRequest{Request: req, Input: input, Copy: c.DeleteSubscriptionRequest}
 }
 
 const opDescribeAttack = "DescribeAttack"
@@ -215,6 +219,7 @@ const opDescribeAttack = "DescribeAttack"
 type DescribeAttackRequest struct {
 	*aws.Request
 	Input *DescribeAttackInput
+	Copy  func(*DescribeAttackInput) DescribeAttackRequest
 }
 
 // Send marshals and sends the DescribeAttack API request.
@@ -255,7 +260,7 @@ func (c *Shield) DescribeAttackRequest(input *DescribeAttackInput) DescribeAttac
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAttackRequest{Request: req, Input: input}
+	return DescribeAttackRequest{Request: req, Input: input, Copy: c.DescribeAttackRequest}
 }
 
 const opDescribeProtection = "DescribeProtection"
@@ -264,6 +269,7 @@ const opDescribeProtection = "DescribeProtection"
 type DescribeProtectionRequest struct {
 	*aws.Request
 	Input *DescribeProtectionInput
+	Copy  func(*DescribeProtectionInput) DescribeProtectionRequest
 }
 
 // Send marshals and sends the DescribeProtection API request.
@@ -304,7 +310,7 @@ func (c *Shield) DescribeProtectionRequest(input *DescribeProtectionInput) Descr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeProtectionRequest{Request: req, Input: input}
+	return DescribeProtectionRequest{Request: req, Input: input, Copy: c.DescribeProtectionRequest}
 }
 
 const opDescribeSubscription = "DescribeSubscription"
@@ -313,6 +319,7 @@ const opDescribeSubscription = "DescribeSubscription"
 type DescribeSubscriptionRequest struct {
 	*aws.Request
 	Input *DescribeSubscriptionInput
+	Copy  func(*DescribeSubscriptionInput) DescribeSubscriptionRequest
 }
 
 // Send marshals and sends the DescribeSubscription API request.
@@ -353,7 +360,7 @@ func (c *Shield) DescribeSubscriptionRequest(input *DescribeSubscriptionInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSubscriptionRequest{Request: req, Input: input}
+	return DescribeSubscriptionRequest{Request: req, Input: input, Copy: c.DescribeSubscriptionRequest}
 }
 
 const opGetSubscriptionState = "GetSubscriptionState"
@@ -362,6 +369,7 @@ const opGetSubscriptionState = "GetSubscriptionState"
 type GetSubscriptionStateRequest struct {
 	*aws.Request
 	Input *GetSubscriptionStateInput
+	Copy  func(*GetSubscriptionStateInput) GetSubscriptionStateRequest
 }
 
 // Send marshals and sends the GetSubscriptionState API request.
@@ -402,7 +410,7 @@ func (c *Shield) GetSubscriptionStateRequest(input *GetSubscriptionStateInput) G
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSubscriptionStateRequest{Request: req, Input: input}
+	return GetSubscriptionStateRequest{Request: req, Input: input, Copy: c.GetSubscriptionStateRequest}
 }
 
 const opListAttacks = "ListAttacks"
@@ -411,6 +419,7 @@ const opListAttacks = "ListAttacks"
 type ListAttacksRequest struct {
 	*aws.Request
 	Input *ListAttacksInput
+	Copy  func(*ListAttacksInput) ListAttacksRequest
 }
 
 // Send marshals and sends the ListAttacks API request.
@@ -452,7 +461,7 @@ func (c *Shield) ListAttacksRequest(input *ListAttacksInput) ListAttacksRequest 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAttacksRequest{Request: req, Input: input}
+	return ListAttacksRequest{Request: req, Input: input, Copy: c.ListAttacksRequest}
 }
 
 const opListProtections = "ListProtections"
@@ -461,6 +470,7 @@ const opListProtections = "ListProtections"
 type ListProtectionsRequest struct {
 	*aws.Request
 	Input *ListProtectionsInput
+	Copy  func(*ListProtectionsInput) ListProtectionsRequest
 }
 
 // Send marshals and sends the ListProtections API request.
@@ -501,7 +511,7 @@ func (c *Shield) ListProtectionsRequest(input *ListProtectionsInput) ListProtect
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListProtectionsRequest{Request: req, Input: input}
+	return ListProtectionsRequest{Request: req, Input: input, Copy: c.ListProtectionsRequest}
 }
 
 // The details of a DDoS attack.

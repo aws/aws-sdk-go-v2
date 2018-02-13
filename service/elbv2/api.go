@@ -16,6 +16,7 @@ const opAddListenerCertificates = "AddListenerCertificates"
 type AddListenerCertificatesRequest struct {
 	*aws.Request
 	Input *AddListenerCertificatesInput
+	Copy  func(*AddListenerCertificatesInput) AddListenerCertificatesRequest
 }
 
 // Send marshals and sends the AddListenerCertificates API request.
@@ -62,7 +63,7 @@ func (c *ELBV2) AddListenerCertificatesRequest(input *AddListenerCertificatesInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddListenerCertificatesRequest{Request: req, Input: input}
+	return AddListenerCertificatesRequest{Request: req, Input: input, Copy: c.AddListenerCertificatesRequest}
 }
 
 const opAddTags = "AddTags"
@@ -71,6 +72,7 @@ const opAddTags = "AddTags"
 type AddTagsRequest struct {
 	*aws.Request
 	Input *AddTagsInput
+	Copy  func(*AddTagsInput) AddTagsRequest
 }
 
 // Send marshals and sends the AddTags API request.
@@ -119,7 +121,7 @@ func (c *ELBV2) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsRequest{Request: req, Input: input}
+	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
 const opCreateListener = "CreateListener"
@@ -128,6 +130,7 @@ const opCreateListener = "CreateListener"
 type CreateListenerRequest struct {
 	*aws.Request
 	Input *CreateListenerInput
+	Copy  func(*CreateListenerInput) CreateListenerRequest
 }
 
 // Send marshals and sends the CreateListener API request.
@@ -180,7 +183,7 @@ func (c *ELBV2) CreateListenerRequest(input *CreateListenerInput) CreateListener
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateListenerRequest{Request: req, Input: input}
+	return CreateListenerRequest{Request: req, Input: input, Copy: c.CreateListenerRequest}
 }
 
 const opCreateLoadBalancer = "CreateLoadBalancer"
@@ -189,6 +192,7 @@ const opCreateLoadBalancer = "CreateLoadBalancer"
 type CreateLoadBalancerRequest struct {
 	*aws.Request
 	Input *CreateLoadBalancerInput
+	Copy  func(*CreateLoadBalancerInput) CreateLoadBalancerRequest
 }
 
 // Send marshals and sends the CreateLoadBalancer API request.
@@ -248,7 +252,7 @@ func (c *ELBV2) CreateLoadBalancerRequest(input *CreateLoadBalancerInput) Create
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateLoadBalancerRequest{Request: req, Input: input}
+	return CreateLoadBalancerRequest{Request: req, Input: input, Copy: c.CreateLoadBalancerRequest}
 }
 
 const opCreateRule = "CreateRule"
@@ -257,6 +261,7 @@ const opCreateRule = "CreateRule"
 type CreateRuleRequest struct {
 	*aws.Request
 	Input *CreateRuleInput
+	Copy  func(*CreateRuleInput) CreateRuleRequest
 }
 
 // Send marshals and sends the CreateRule API request.
@@ -308,7 +313,7 @@ func (c *ELBV2) CreateRuleRequest(input *CreateRuleInput) CreateRuleRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateRuleRequest{Request: req, Input: input}
+	return CreateRuleRequest{Request: req, Input: input, Copy: c.CreateRuleRequest}
 }
 
 const opCreateTargetGroup = "CreateTargetGroup"
@@ -317,6 +322,7 @@ const opCreateTargetGroup = "CreateTargetGroup"
 type CreateTargetGroupRequest struct {
 	*aws.Request
 	Input *CreateTargetGroupInput
+	Copy  func(*CreateTargetGroupInput) CreateTargetGroupRequest
 }
 
 // Send marshals and sends the CreateTargetGroup API request.
@@ -372,7 +378,7 @@ func (c *ELBV2) CreateTargetGroupRequest(input *CreateTargetGroupInput) CreateTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTargetGroupRequest{Request: req, Input: input}
+	return CreateTargetGroupRequest{Request: req, Input: input, Copy: c.CreateTargetGroupRequest}
 }
 
 const opDeleteListener = "DeleteListener"
@@ -381,6 +387,7 @@ const opDeleteListener = "DeleteListener"
 type DeleteListenerRequest struct {
 	*aws.Request
 	Input *DeleteListenerInput
+	Copy  func(*DeleteListenerInput) DeleteListenerRequest
 }
 
 // Send marshals and sends the DeleteListener API request.
@@ -424,7 +431,7 @@ func (c *ELBV2) DeleteListenerRequest(input *DeleteListenerInput) DeleteListener
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteListenerRequest{Request: req, Input: input}
+	return DeleteListenerRequest{Request: req, Input: input, Copy: c.DeleteListenerRequest}
 }
 
 const opDeleteLoadBalancer = "DeleteLoadBalancer"
@@ -433,6 +440,7 @@ const opDeleteLoadBalancer = "DeleteLoadBalancer"
 type DeleteLoadBalancerRequest struct {
 	*aws.Request
 	Input *DeleteLoadBalancerInput
+	Copy  func(*DeleteLoadBalancerInput) DeleteLoadBalancerRequest
 }
 
 // Send marshals and sends the DeleteLoadBalancer API request.
@@ -482,7 +490,7 @@ func (c *ELBV2) DeleteLoadBalancerRequest(input *DeleteLoadBalancerInput) Delete
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteLoadBalancerRequest{Request: req, Input: input}
+	return DeleteLoadBalancerRequest{Request: req, Input: input, Copy: c.DeleteLoadBalancerRequest}
 }
 
 const opDeleteRule = "DeleteRule"
@@ -491,6 +499,7 @@ const opDeleteRule = "DeleteRule"
 type DeleteRuleRequest struct {
 	*aws.Request
 	Input *DeleteRuleInput
+	Copy  func(*DeleteRuleInput) DeleteRuleRequest
 }
 
 // Send marshals and sends the DeleteRule API request.
@@ -531,7 +540,7 @@ func (c *ELBV2) DeleteRuleRequest(input *DeleteRuleInput) DeleteRuleRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteRuleRequest{Request: req, Input: input}
+	return DeleteRuleRequest{Request: req, Input: input, Copy: c.DeleteRuleRequest}
 }
 
 const opDeleteTargetGroup = "DeleteTargetGroup"
@@ -540,6 +549,7 @@ const opDeleteTargetGroup = "DeleteTargetGroup"
 type DeleteTargetGroupRequest struct {
 	*aws.Request
 	Input *DeleteTargetGroupInput
+	Copy  func(*DeleteTargetGroupInput) DeleteTargetGroupRequest
 }
 
 // Send marshals and sends the DeleteTargetGroup API request.
@@ -583,7 +593,7 @@ func (c *ELBV2) DeleteTargetGroupRequest(input *DeleteTargetGroupInput) DeleteTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTargetGroupRequest{Request: req, Input: input}
+	return DeleteTargetGroupRequest{Request: req, Input: input, Copy: c.DeleteTargetGroupRequest}
 }
 
 const opDeregisterTargets = "DeregisterTargets"
@@ -592,6 +602,7 @@ const opDeregisterTargets = "DeregisterTargets"
 type DeregisterTargetsRequest struct {
 	*aws.Request
 	Input *DeregisterTargetsInput
+	Copy  func(*DeregisterTargetsInput) DeregisterTargetsRequest
 }
 
 // Send marshals and sends the DeregisterTargets API request.
@@ -634,7 +645,7 @@ func (c *ELBV2) DeregisterTargetsRequest(input *DeregisterTargetsInput) Deregist
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeregisterTargetsRequest{Request: req, Input: input}
+	return DeregisterTargetsRequest{Request: req, Input: input, Copy: c.DeregisterTargetsRequest}
 }
 
 const opDescribeAccountLimits = "DescribeAccountLimits"
@@ -643,6 +654,7 @@ const opDescribeAccountLimits = "DescribeAccountLimits"
 type DescribeAccountLimitsRequest struct {
 	*aws.Request
 	Input *DescribeAccountLimitsInput
+	Copy  func(*DescribeAccountLimitsInput) DescribeAccountLimitsRequest
 }
 
 // Send marshals and sends the DescribeAccountLimits API request.
@@ -689,7 +701,7 @@ func (c *ELBV2) DescribeAccountLimitsRequest(input *DescribeAccountLimitsInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeAccountLimitsRequest{Request: req, Input: input}
+	return DescribeAccountLimitsRequest{Request: req, Input: input, Copy: c.DescribeAccountLimitsRequest}
 }
 
 const opDescribeListenerCertificates = "DescribeListenerCertificates"
@@ -698,6 +710,7 @@ const opDescribeListenerCertificates = "DescribeListenerCertificates"
 type DescribeListenerCertificatesRequest struct {
 	*aws.Request
 	Input *DescribeListenerCertificatesInput
+	Copy  func(*DescribeListenerCertificatesInput) DescribeListenerCertificatesRequest
 }
 
 // Send marshals and sends the DescribeListenerCertificates API request.
@@ -738,7 +751,7 @@ func (c *ELBV2) DescribeListenerCertificatesRequest(input *DescribeListenerCerti
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeListenerCertificatesRequest{Request: req, Input: input}
+	return DescribeListenerCertificatesRequest{Request: req, Input: input, Copy: c.DescribeListenerCertificatesRequest}
 }
 
 const opDescribeListeners = "DescribeListeners"
@@ -747,6 +760,7 @@ const opDescribeListeners = "DescribeListeners"
 type DescribeListenersRequest struct {
 	*aws.Request
 	Input *DescribeListenersInput
+	Copy  func(*DescribeListenersInput) DescribeListenersRequest
 }
 
 // Send marshals and sends the DescribeListeners API request.
@@ -795,57 +809,53 @@ func (c *ELBV2) DescribeListenersRequest(input *DescribeListenersInput) Describe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeListenersRequest{Request: req, Input: input}
+	return DescribeListenersRequest{Request: req, Input: input, Copy: c.DescribeListenersRequest}
 }
 
-// DescribeListenersPages iterates over the pages of a DescribeListeners operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeListeners method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeListenersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeListeners operation.
-//    pageNum := 0
-//    err := client.DescribeListenersPages(params,
-//        func(page *DescribeListenersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeListenersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ELBV2) DescribeListenersPages(input *DescribeListenersInput, fn func(*DescribeListenersOutput, bool) bool) error {
-	return c.DescribeListenersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeListenersRequest) Paginate(opts ...aws.Option) DescribeListenersPager {
+	return DescribeListenersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeListenersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeListenersPagesWithContext same as DescribeListenersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELBV2) DescribeListenersPagesWithContext(ctx aws.Context, input *DescribeListenersInput, fn func(*DescribeListenersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeListenersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeListenersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeListenersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeListenersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeListenersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeListenersPager) CurrentPage() *DescribeListenersOutput {
+	return p.Pager.CurrentPage().(*DescribeListenersOutput)
 }
 
 const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
@@ -854,6 +864,7 @@ const opDescribeLoadBalancerAttributes = "DescribeLoadBalancerAttributes"
 type DescribeLoadBalancerAttributesRequest struct {
 	*aws.Request
 	Input *DescribeLoadBalancerAttributesInput
+	Copy  func(*DescribeLoadBalancerAttributesInput) DescribeLoadBalancerAttributesRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancerAttributes API request.
@@ -895,7 +906,7 @@ func (c *ELBV2) DescribeLoadBalancerAttributesRequest(input *DescribeLoadBalance
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLoadBalancerAttributesRequest{Request: req, Input: input}
+	return DescribeLoadBalancerAttributesRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancerAttributesRequest}
 }
 
 const opDescribeLoadBalancers = "DescribeLoadBalancers"
@@ -904,6 +915,7 @@ const opDescribeLoadBalancers = "DescribeLoadBalancers"
 type DescribeLoadBalancersRequest struct {
 	*aws.Request
 	Input *DescribeLoadBalancersInput
+	Copy  func(*DescribeLoadBalancersInput) DescribeLoadBalancersRequest
 }
 
 // Send marshals and sends the DescribeLoadBalancers API request.
@@ -953,57 +965,53 @@ func (c *ELBV2) DescribeLoadBalancersRequest(input *DescribeLoadBalancersInput) 
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeLoadBalancersRequest{Request: req, Input: input}
+	return DescribeLoadBalancersRequest{Request: req, Input: input, Copy: c.DescribeLoadBalancersRequest}
 }
 
-// DescribeLoadBalancersPages iterates over the pages of a DescribeLoadBalancers operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeLoadBalancers method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeLoadBalancersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeLoadBalancers operation.
-//    pageNum := 0
-//    err := client.DescribeLoadBalancersPages(params,
-//        func(page *DescribeLoadBalancersOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeLoadBalancersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ELBV2) DescribeLoadBalancersPages(input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool) error {
-	return c.DescribeLoadBalancersPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeLoadBalancersRequest) Paginate(opts ...aws.Option) DescribeLoadBalancersPager {
+	return DescribeLoadBalancersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeLoadBalancersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeLoadBalancersPagesWithContext same as DescribeLoadBalancersPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELBV2) DescribeLoadBalancersPagesWithContext(ctx aws.Context, input *DescribeLoadBalancersInput, fn func(*DescribeLoadBalancersOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeLoadBalancersInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeLoadBalancersRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeLoadBalancersOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeLoadBalancersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeLoadBalancersPager struct {
+	aws.Pager
+}
+
+func (p *DescribeLoadBalancersPager) CurrentPage() *DescribeLoadBalancersOutput {
+	return p.Pager.CurrentPage().(*DescribeLoadBalancersOutput)
 }
 
 const opDescribeRules = "DescribeRules"
@@ -1012,6 +1020,7 @@ const opDescribeRules = "DescribeRules"
 type DescribeRulesRequest struct {
 	*aws.Request
 	Input *DescribeRulesInput
+	Copy  func(*DescribeRulesInput) DescribeRulesRequest
 }
 
 // Send marshals and sends the DescribeRules API request.
@@ -1053,7 +1062,7 @@ func (c *ELBV2) DescribeRulesRequest(input *DescribeRulesInput) DescribeRulesReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeRulesRequest{Request: req, Input: input}
+	return DescribeRulesRequest{Request: req, Input: input, Copy: c.DescribeRulesRequest}
 }
 
 const opDescribeSSLPolicies = "DescribeSSLPolicies"
@@ -1062,6 +1071,7 @@ const opDescribeSSLPolicies = "DescribeSSLPolicies"
 type DescribeSSLPoliciesRequest struct {
 	*aws.Request
 	Input *DescribeSSLPoliciesInput
+	Copy  func(*DescribeSSLPoliciesInput) DescribeSSLPoliciesRequest
 }
 
 // Send marshals and sends the DescribeSSLPolicies API request.
@@ -1105,7 +1115,7 @@ func (c *ELBV2) DescribeSSLPoliciesRequest(input *DescribeSSLPoliciesInput) Desc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeSSLPoliciesRequest{Request: req, Input: input}
+	return DescribeSSLPoliciesRequest{Request: req, Input: input, Copy: c.DescribeSSLPoliciesRequest}
 }
 
 const opDescribeTags = "DescribeTags"
@@ -1114,6 +1124,7 @@ const opDescribeTags = "DescribeTags"
 type DescribeTagsRequest struct {
 	*aws.Request
 	Input *DescribeTagsInput
+	Copy  func(*DescribeTagsInput) DescribeTagsRequest
 }
 
 // Send marshals and sends the DescribeTags API request.
@@ -1156,7 +1167,7 @@ func (c *ELBV2) DescribeTagsRequest(input *DescribeTagsInput) DescribeTagsReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTagsRequest{Request: req, Input: input}
+	return DescribeTagsRequest{Request: req, Input: input, Copy: c.DescribeTagsRequest}
 }
 
 const opDescribeTargetGroupAttributes = "DescribeTargetGroupAttributes"
@@ -1165,6 +1176,7 @@ const opDescribeTargetGroupAttributes = "DescribeTargetGroupAttributes"
 type DescribeTargetGroupAttributesRequest struct {
 	*aws.Request
 	Input *DescribeTargetGroupAttributesInput
+	Copy  func(*DescribeTargetGroupAttributesInput) DescribeTargetGroupAttributesRequest
 }
 
 // Send marshals and sends the DescribeTargetGroupAttributes API request.
@@ -1205,7 +1217,7 @@ func (c *ELBV2) DescribeTargetGroupAttributesRequest(input *DescribeTargetGroupA
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTargetGroupAttributesRequest{Request: req, Input: input}
+	return DescribeTargetGroupAttributesRequest{Request: req, Input: input, Copy: c.DescribeTargetGroupAttributesRequest}
 }
 
 const opDescribeTargetGroups = "DescribeTargetGroups"
@@ -1214,6 +1226,7 @@ const opDescribeTargetGroups = "DescribeTargetGroups"
 type DescribeTargetGroupsRequest struct {
 	*aws.Request
 	Input *DescribeTargetGroupsInput
+	Copy  func(*DescribeTargetGroupsInput) DescribeTargetGroupsRequest
 }
 
 // Send marshals and sends the DescribeTargetGroups API request.
@@ -1266,57 +1279,53 @@ func (c *ELBV2) DescribeTargetGroupsRequest(input *DescribeTargetGroupsInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTargetGroupsRequest{Request: req, Input: input}
+	return DescribeTargetGroupsRequest{Request: req, Input: input, Copy: c.DescribeTargetGroupsRequest}
 }
 
-// DescribeTargetGroupsPages iterates over the pages of a DescribeTargetGroups operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See DescribeTargetGroups method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a DescribeTargetGroupsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a DescribeTargetGroups operation.
-//    pageNum := 0
-//    err := client.DescribeTargetGroupsPages(params,
-//        func(page *DescribeTargetGroupsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.DescribeTargetGroupsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *ELBV2) DescribeTargetGroupsPages(input *DescribeTargetGroupsInput, fn func(*DescribeTargetGroupsOutput, bool) bool) error {
-	return c.DescribeTargetGroupsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeTargetGroupsRequest) Paginate(opts ...aws.Option) DescribeTargetGroupsPager {
+	return DescribeTargetGroupsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeTargetGroupsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// DescribeTargetGroupsPagesWithContext same as DescribeTargetGroupsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *ELBV2) DescribeTargetGroupsPagesWithContext(ctx aws.Context, input *DescribeTargetGroupsInput, fn func(*DescribeTargetGroupsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *DescribeTargetGroupsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.DescribeTargetGroupsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*DescribeTargetGroupsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// DescribeTargetGroupsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeTargetGroupsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeTargetGroupsPager) CurrentPage() *DescribeTargetGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeTargetGroupsOutput)
 }
 
 const opDescribeTargetHealth = "DescribeTargetHealth"
@@ -1325,6 +1334,7 @@ const opDescribeTargetHealth = "DescribeTargetHealth"
 type DescribeTargetHealthRequest struct {
 	*aws.Request
 	Input *DescribeTargetHealthInput
+	Copy  func(*DescribeTargetHealthInput) DescribeTargetHealthRequest
 }
 
 // Send marshals and sends the DescribeTargetHealth API request.
@@ -1365,7 +1375,7 @@ func (c *ELBV2) DescribeTargetHealthRequest(input *DescribeTargetHealthInput) De
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTargetHealthRequest{Request: req, Input: input}
+	return DescribeTargetHealthRequest{Request: req, Input: input, Copy: c.DescribeTargetHealthRequest}
 }
 
 const opModifyListener = "ModifyListener"
@@ -1374,6 +1384,7 @@ const opModifyListener = "ModifyListener"
 type ModifyListenerRequest struct {
 	*aws.Request
 	Input *ModifyListenerInput
+	Copy  func(*ModifyListenerInput) ModifyListenerRequest
 }
 
 // Send marshals and sends the ModifyListener API request.
@@ -1419,7 +1430,7 @@ func (c *ELBV2) ModifyListenerRequest(input *ModifyListenerInput) ModifyListener
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyListenerRequest{Request: req, Input: input}
+	return ModifyListenerRequest{Request: req, Input: input, Copy: c.ModifyListenerRequest}
 }
 
 const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
@@ -1428,6 +1439,7 @@ const opModifyLoadBalancerAttributes = "ModifyLoadBalancerAttributes"
 type ModifyLoadBalancerAttributesRequest struct {
 	*aws.Request
 	Input *ModifyLoadBalancerAttributesInput
+	Copy  func(*ModifyLoadBalancerAttributesInput) ModifyLoadBalancerAttributesRequest
 }
 
 // Send marshals and sends the ModifyLoadBalancerAttributes API request.
@@ -1473,7 +1485,7 @@ func (c *ELBV2) ModifyLoadBalancerAttributesRequest(input *ModifyLoadBalancerAtt
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyLoadBalancerAttributesRequest{Request: req, Input: input}
+	return ModifyLoadBalancerAttributesRequest{Request: req, Input: input, Copy: c.ModifyLoadBalancerAttributesRequest}
 }
 
 const opModifyRule = "ModifyRule"
@@ -1482,6 +1494,7 @@ const opModifyRule = "ModifyRule"
 type ModifyRuleRequest struct {
 	*aws.Request
 	Input *ModifyRuleInput
+	Copy  func(*ModifyRuleInput) ModifyRuleRequest
 }
 
 // Send marshals and sends the ModifyRule API request.
@@ -1526,7 +1539,7 @@ func (c *ELBV2) ModifyRuleRequest(input *ModifyRuleInput) ModifyRuleRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyRuleRequest{Request: req, Input: input}
+	return ModifyRuleRequest{Request: req, Input: input, Copy: c.ModifyRuleRequest}
 }
 
 const opModifyTargetGroup = "ModifyTargetGroup"
@@ -1535,6 +1548,7 @@ const opModifyTargetGroup = "ModifyTargetGroup"
 type ModifyTargetGroupRequest struct {
 	*aws.Request
 	Input *ModifyTargetGroupInput
+	Copy  func(*ModifyTargetGroupInput) ModifyTargetGroupRequest
 }
 
 // Send marshals and sends the ModifyTargetGroup API request.
@@ -1578,7 +1592,7 @@ func (c *ELBV2) ModifyTargetGroupRequest(input *ModifyTargetGroupInput) ModifyTa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyTargetGroupRequest{Request: req, Input: input}
+	return ModifyTargetGroupRequest{Request: req, Input: input, Copy: c.ModifyTargetGroupRequest}
 }
 
 const opModifyTargetGroupAttributes = "ModifyTargetGroupAttributes"
@@ -1587,6 +1601,7 @@ const opModifyTargetGroupAttributes = "ModifyTargetGroupAttributes"
 type ModifyTargetGroupAttributesRequest struct {
 	*aws.Request
 	Input *ModifyTargetGroupAttributesInput
+	Copy  func(*ModifyTargetGroupAttributesInput) ModifyTargetGroupAttributesRequest
 }
 
 // Send marshals and sends the ModifyTargetGroupAttributes API request.
@@ -1627,7 +1642,7 @@ func (c *ELBV2) ModifyTargetGroupAttributesRequest(input *ModifyTargetGroupAttri
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ModifyTargetGroupAttributesRequest{Request: req, Input: input}
+	return ModifyTargetGroupAttributesRequest{Request: req, Input: input, Copy: c.ModifyTargetGroupAttributesRequest}
 }
 
 const opRegisterTargets = "RegisterTargets"
@@ -1636,6 +1651,7 @@ const opRegisterTargets = "RegisterTargets"
 type RegisterTargetsRequest struct {
 	*aws.Request
 	Input *RegisterTargetsInput
+	Copy  func(*RegisterTargetsInput) RegisterTargetsRequest
 }
 
 // Send marshals and sends the RegisterTargets API request.
@@ -1691,7 +1707,7 @@ func (c *ELBV2) RegisterTargetsRequest(input *RegisterTargetsInput) RegisterTarg
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RegisterTargetsRequest{Request: req, Input: input}
+	return RegisterTargetsRequest{Request: req, Input: input, Copy: c.RegisterTargetsRequest}
 }
 
 const opRemoveListenerCertificates = "RemoveListenerCertificates"
@@ -1700,6 +1716,7 @@ const opRemoveListenerCertificates = "RemoveListenerCertificates"
 type RemoveListenerCertificatesRequest struct {
 	*aws.Request
 	Input *RemoveListenerCertificatesInput
+	Copy  func(*RemoveListenerCertificatesInput) RemoveListenerCertificatesRequest
 }
 
 // Send marshals and sends the RemoveListenerCertificates API request.
@@ -1745,7 +1762,7 @@ func (c *ELBV2) RemoveListenerCertificatesRequest(input *RemoveListenerCertifica
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveListenerCertificatesRequest{Request: req, Input: input}
+	return RemoveListenerCertificatesRequest{Request: req, Input: input, Copy: c.RemoveListenerCertificatesRequest}
 }
 
 const opRemoveTags = "RemoveTags"
@@ -1754,6 +1771,7 @@ const opRemoveTags = "RemoveTags"
 type RemoveTagsRequest struct {
 	*aws.Request
 	Input *RemoveTagsInput
+	Copy  func(*RemoveTagsInput) RemoveTagsRequest
 }
 
 // Send marshals and sends the RemoveTags API request.
@@ -1796,7 +1814,7 @@ func (c *ELBV2) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsRequest{Request: req, Input: input}
+	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 
 const opSetIpAddressType = "SetIpAddressType"
@@ -1805,6 +1823,7 @@ const opSetIpAddressType = "SetIpAddressType"
 type SetIpAddressTypeRequest struct {
 	*aws.Request
 	Input *SetIpAddressTypeInput
+	Copy  func(*SetIpAddressTypeInput) SetIpAddressTypeRequest
 }
 
 // Send marshals and sends the SetIpAddressType API request.
@@ -1848,7 +1867,7 @@ func (c *ELBV2) SetIpAddressTypeRequest(input *SetIpAddressTypeInput) SetIpAddre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetIpAddressTypeRequest{Request: req, Input: input}
+	return SetIpAddressTypeRequest{Request: req, Input: input, Copy: c.SetIpAddressTypeRequest}
 }
 
 const opSetRulePriorities = "SetRulePriorities"
@@ -1857,6 +1876,7 @@ const opSetRulePriorities = "SetRulePriorities"
 type SetRulePrioritiesRequest struct {
 	*aws.Request
 	Input *SetRulePrioritiesInput
+	Copy  func(*SetRulePrioritiesInput) SetRulePrioritiesRequest
 }
 
 // Send marshals and sends the SetRulePriorities API request.
@@ -1901,7 +1921,7 @@ func (c *ELBV2) SetRulePrioritiesRequest(input *SetRulePrioritiesInput) SetRuleP
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetRulePrioritiesRequest{Request: req, Input: input}
+	return SetRulePrioritiesRequest{Request: req, Input: input, Copy: c.SetRulePrioritiesRequest}
 }
 
 const opSetSecurityGroups = "SetSecurityGroups"
@@ -1910,6 +1930,7 @@ const opSetSecurityGroups = "SetSecurityGroups"
 type SetSecurityGroupsRequest struct {
 	*aws.Request
 	Input *SetSecurityGroupsInput
+	Copy  func(*SetSecurityGroupsInput) SetSecurityGroupsRequest
 }
 
 // Send marshals and sends the SetSecurityGroups API request.
@@ -1954,7 +1975,7 @@ func (c *ELBV2) SetSecurityGroupsRequest(input *SetSecurityGroupsInput) SetSecur
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetSecurityGroupsRequest{Request: req, Input: input}
+	return SetSecurityGroupsRequest{Request: req, Input: input, Copy: c.SetSecurityGroupsRequest}
 }
 
 const opSetSubnets = "SetSubnets"
@@ -1963,6 +1984,7 @@ const opSetSubnets = "SetSubnets"
 type SetSubnetsRequest struct {
 	*aws.Request
 	Input *SetSubnetsInput
+	Copy  func(*SetSubnetsInput) SetSubnetsRequest
 }
 
 // Send marshals and sends the SetSubnets API request.
@@ -2007,7 +2029,7 @@ func (c *ELBV2) SetSubnetsRequest(input *SetSubnetsInput) SetSubnetsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return SetSubnetsRequest{Request: req, Input: input}
+	return SetSubnetsRequest{Request: req, Input: input, Copy: c.SetSubnetsRequest}
 }
 
 // Information about an action.

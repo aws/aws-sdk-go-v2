@@ -18,6 +18,7 @@ const opAddFacetToObject = "AddFacetToObject"
 type AddFacetToObjectRequest struct {
 	*aws.Request
 	Input *AddFacetToObjectInput
+	Copy  func(*AddFacetToObjectInput) AddFacetToObjectRequest
 }
 
 // Send marshals and sends the AddFacetToObject API request.
@@ -58,7 +59,7 @@ func (c *CloudDirectory) AddFacetToObjectRequest(input *AddFacetToObjectInput) A
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddFacetToObjectRequest{Request: req, Input: input}
+	return AddFacetToObjectRequest{Request: req, Input: input, Copy: c.AddFacetToObjectRequest}
 }
 
 const opApplySchema = "ApplySchema"
@@ -67,6 +68,7 @@ const opApplySchema = "ApplySchema"
 type ApplySchemaRequest struct {
 	*aws.Request
 	Input *ApplySchemaInput
+	Copy  func(*ApplySchemaInput) ApplySchemaRequest
 }
 
 // Send marshals and sends the ApplySchema API request.
@@ -108,7 +110,7 @@ func (c *CloudDirectory) ApplySchemaRequest(input *ApplySchemaInput) ApplySchema
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ApplySchemaRequest{Request: req, Input: input}
+	return ApplySchemaRequest{Request: req, Input: input, Copy: c.ApplySchemaRequest}
 }
 
 const opAttachObject = "AttachObject"
@@ -117,6 +119,7 @@ const opAttachObject = "AttachObject"
 type AttachObjectRequest struct {
 	*aws.Request
 	Input *AttachObjectInput
+	Copy  func(*AttachObjectInput) AttachObjectRequest
 }
 
 // Send marshals and sends the AttachObject API request.
@@ -162,7 +165,7 @@ func (c *CloudDirectory) AttachObjectRequest(input *AttachObjectInput) AttachObj
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachObjectRequest{Request: req, Input: input}
+	return AttachObjectRequest{Request: req, Input: input, Copy: c.AttachObjectRequest}
 }
 
 const opAttachPolicy = "AttachPolicy"
@@ -171,6 +174,7 @@ const opAttachPolicy = "AttachPolicy"
 type AttachPolicyRequest struct {
 	*aws.Request
 	Input *AttachPolicyInput
+	Copy  func(*AttachPolicyInput) AttachPolicyRequest
 }
 
 // Send marshals and sends the AttachPolicy API request.
@@ -212,7 +216,7 @@ func (c *CloudDirectory) AttachPolicyRequest(input *AttachPolicyInput) AttachPol
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachPolicyRequest{Request: req, Input: input}
+	return AttachPolicyRequest{Request: req, Input: input, Copy: c.AttachPolicyRequest}
 }
 
 const opAttachToIndex = "AttachToIndex"
@@ -221,6 +225,7 @@ const opAttachToIndex = "AttachToIndex"
 type AttachToIndexRequest struct {
 	*aws.Request
 	Input *AttachToIndexInput
+	Copy  func(*AttachToIndexInput) AttachToIndexRequest
 }
 
 // Send marshals and sends the AttachToIndex API request.
@@ -261,7 +266,7 @@ func (c *CloudDirectory) AttachToIndexRequest(input *AttachToIndexInput) AttachT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachToIndexRequest{Request: req, Input: input}
+	return AttachToIndexRequest{Request: req, Input: input, Copy: c.AttachToIndexRequest}
 }
 
 const opAttachTypedLink = "AttachTypedLink"
@@ -270,6 +275,7 @@ const opAttachTypedLink = "AttachTypedLink"
 type AttachTypedLinkRequest struct {
 	*aws.Request
 	Input *AttachTypedLinkInput
+	Copy  func(*AttachTypedLinkInput) AttachTypedLinkRequest
 }
 
 // Send marshals and sends the AttachTypedLink API request.
@@ -311,7 +317,7 @@ func (c *CloudDirectory) AttachTypedLinkRequest(input *AttachTypedLinkInput) Att
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AttachTypedLinkRequest{Request: req, Input: input}
+	return AttachTypedLinkRequest{Request: req, Input: input, Copy: c.AttachTypedLinkRequest}
 }
 
 const opBatchRead = "BatchRead"
@@ -320,6 +326,7 @@ const opBatchRead = "BatchRead"
 type BatchReadRequest struct {
 	*aws.Request
 	Input *BatchReadInput
+	Copy  func(*BatchReadInput) BatchReadRequest
 }
 
 // Send marshals and sends the BatchRead API request.
@@ -360,7 +367,7 @@ func (c *CloudDirectory) BatchReadRequest(input *BatchReadInput) BatchReadReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchReadRequest{Request: req, Input: input}
+	return BatchReadRequest{Request: req, Input: input, Copy: c.BatchReadRequest}
 }
 
 const opBatchWrite = "BatchWrite"
@@ -369,6 +376,7 @@ const opBatchWrite = "BatchWrite"
 type BatchWriteRequest struct {
 	*aws.Request
 	Input *BatchWriteInput
+	Copy  func(*BatchWriteInput) BatchWriteRequest
 }
 
 // Send marshals and sends the BatchWrite API request.
@@ -410,7 +418,7 @@ func (c *CloudDirectory) BatchWriteRequest(input *BatchWriteInput) BatchWriteReq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return BatchWriteRequest{Request: req, Input: input}
+	return BatchWriteRequest{Request: req, Input: input, Copy: c.BatchWriteRequest}
 }
 
 const opCreateDirectory = "CreateDirectory"
@@ -419,6 +427,7 @@ const opCreateDirectory = "CreateDirectory"
 type CreateDirectoryRequest struct {
 	*aws.Request
 	Input *CreateDirectoryInput
+	Copy  func(*CreateDirectoryInput) CreateDirectoryRequest
 }
 
 // Send marshals and sends the CreateDirectory API request.
@@ -460,7 +469,7 @@ func (c *CloudDirectory) CreateDirectoryRequest(input *CreateDirectoryInput) Cre
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDirectoryRequest{Request: req, Input: input}
+	return CreateDirectoryRequest{Request: req, Input: input, Copy: c.CreateDirectoryRequest}
 }
 
 const opCreateFacet = "CreateFacet"
@@ -469,6 +478,7 @@ const opCreateFacet = "CreateFacet"
 type CreateFacetRequest struct {
 	*aws.Request
 	Input *CreateFacetInput
+	Copy  func(*CreateFacetInput) CreateFacetRequest
 }
 
 // Send marshals and sends the CreateFacet API request.
@@ -510,7 +520,7 @@ func (c *CloudDirectory) CreateFacetRequest(input *CreateFacetInput) CreateFacet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateFacetRequest{Request: req, Input: input}
+	return CreateFacetRequest{Request: req, Input: input, Copy: c.CreateFacetRequest}
 }
 
 const opCreateIndex = "CreateIndex"
@@ -519,6 +529,7 @@ const opCreateIndex = "CreateIndex"
 type CreateIndexRequest struct {
 	*aws.Request
 	Input *CreateIndexInput
+	Copy  func(*CreateIndexInput) CreateIndexRequest
 }
 
 // Send marshals and sends the CreateIndex API request.
@@ -560,7 +571,7 @@ func (c *CloudDirectory) CreateIndexRequest(input *CreateIndexInput) CreateIndex
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateIndexRequest{Request: req, Input: input}
+	return CreateIndexRequest{Request: req, Input: input, Copy: c.CreateIndexRequest}
 }
 
 const opCreateObject = "CreateObject"
@@ -569,6 +580,7 @@ const opCreateObject = "CreateObject"
 type CreateObjectRequest struct {
 	*aws.Request
 	Input *CreateObjectInput
+	Copy  func(*CreateObjectInput) CreateObjectRequest
 }
 
 // Send marshals and sends the CreateObject API request.
@@ -612,7 +624,7 @@ func (c *CloudDirectory) CreateObjectRequest(input *CreateObjectInput) CreateObj
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateObjectRequest{Request: req, Input: input}
+	return CreateObjectRequest{Request: req, Input: input, Copy: c.CreateObjectRequest}
 }
 
 const opCreateSchema = "CreateSchema"
@@ -621,6 +633,7 @@ const opCreateSchema = "CreateSchema"
 type CreateSchemaRequest struct {
 	*aws.Request
 	Input *CreateSchemaInput
+	Copy  func(*CreateSchemaInput) CreateSchemaRequest
 }
 
 // Send marshals and sends the CreateSchema API request.
@@ -673,7 +686,7 @@ func (c *CloudDirectory) CreateSchemaRequest(input *CreateSchemaInput) CreateSch
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateSchemaRequest{Request: req, Input: input}
+	return CreateSchemaRequest{Request: req, Input: input, Copy: c.CreateSchemaRequest}
 }
 
 const opCreateTypedLinkFacet = "CreateTypedLinkFacet"
@@ -682,6 +695,7 @@ const opCreateTypedLinkFacet = "CreateTypedLinkFacet"
 type CreateTypedLinkFacetRequest struct {
 	*aws.Request
 	Input *CreateTypedLinkFacetInput
+	Copy  func(*CreateTypedLinkFacetInput) CreateTypedLinkFacetRequest
 }
 
 // Send marshals and sends the CreateTypedLinkFacet API request.
@@ -722,7 +736,7 @@ func (c *CloudDirectory) CreateTypedLinkFacetRequest(input *CreateTypedLinkFacet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTypedLinkFacetRequest{Request: req, Input: input}
+	return CreateTypedLinkFacetRequest{Request: req, Input: input, Copy: c.CreateTypedLinkFacetRequest}
 }
 
 const opDeleteDirectory = "DeleteDirectory"
@@ -731,6 +745,7 @@ const opDeleteDirectory = "DeleteDirectory"
 type DeleteDirectoryRequest struct {
 	*aws.Request
 	Input *DeleteDirectoryInput
+	Copy  func(*DeleteDirectoryInput) DeleteDirectoryRequest
 }
 
 // Send marshals and sends the DeleteDirectory API request.
@@ -772,7 +787,7 @@ func (c *CloudDirectory) DeleteDirectoryRequest(input *DeleteDirectoryInput) Del
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDirectoryRequest{Request: req, Input: input}
+	return DeleteDirectoryRequest{Request: req, Input: input, Copy: c.DeleteDirectoryRequest}
 }
 
 const opDeleteFacet = "DeleteFacet"
@@ -781,6 +796,7 @@ const opDeleteFacet = "DeleteFacet"
 type DeleteFacetRequest struct {
 	*aws.Request
 	Input *DeleteFacetInput
+	Copy  func(*DeleteFacetInput) DeleteFacetRequest
 }
 
 // Send marshals and sends the DeleteFacet API request.
@@ -822,7 +838,7 @@ func (c *CloudDirectory) DeleteFacetRequest(input *DeleteFacetInput) DeleteFacet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteFacetRequest{Request: req, Input: input}
+	return DeleteFacetRequest{Request: req, Input: input, Copy: c.DeleteFacetRequest}
 }
 
 const opDeleteObject = "DeleteObject"
@@ -831,6 +847,7 @@ const opDeleteObject = "DeleteObject"
 type DeleteObjectRequest struct {
 	*aws.Request
 	Input *DeleteObjectInput
+	Copy  func(*DeleteObjectInput) DeleteObjectRequest
 }
 
 // Send marshals and sends the DeleteObject API request.
@@ -872,7 +889,7 @@ func (c *CloudDirectory) DeleteObjectRequest(input *DeleteObjectInput) DeleteObj
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteObjectRequest{Request: req, Input: input}
+	return DeleteObjectRequest{Request: req, Input: input, Copy: c.DeleteObjectRequest}
 }
 
 const opDeleteSchema = "DeleteSchema"
@@ -881,6 +898,7 @@ const opDeleteSchema = "DeleteSchema"
 type DeleteSchemaRequest struct {
 	*aws.Request
 	Input *DeleteSchemaInput
+	Copy  func(*DeleteSchemaInput) DeleteSchemaRequest
 }
 
 // Send marshals and sends the DeleteSchema API request.
@@ -922,7 +940,7 @@ func (c *CloudDirectory) DeleteSchemaRequest(input *DeleteSchemaInput) DeleteSch
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteSchemaRequest{Request: req, Input: input}
+	return DeleteSchemaRequest{Request: req, Input: input, Copy: c.DeleteSchemaRequest}
 }
 
 const opDeleteTypedLinkFacet = "DeleteTypedLinkFacet"
@@ -931,6 +949,7 @@ const opDeleteTypedLinkFacet = "DeleteTypedLinkFacet"
 type DeleteTypedLinkFacetRequest struct {
 	*aws.Request
 	Input *DeleteTypedLinkFacetInput
+	Copy  func(*DeleteTypedLinkFacetInput) DeleteTypedLinkFacetRequest
 }
 
 // Send marshals and sends the DeleteTypedLinkFacet API request.
@@ -971,7 +990,7 @@ func (c *CloudDirectory) DeleteTypedLinkFacetRequest(input *DeleteTypedLinkFacet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTypedLinkFacetRequest{Request: req, Input: input}
+	return DeleteTypedLinkFacetRequest{Request: req, Input: input, Copy: c.DeleteTypedLinkFacetRequest}
 }
 
 const opDetachFromIndex = "DetachFromIndex"
@@ -980,6 +999,7 @@ const opDetachFromIndex = "DetachFromIndex"
 type DetachFromIndexRequest struct {
 	*aws.Request
 	Input *DetachFromIndexInput
+	Copy  func(*DetachFromIndexInput) DetachFromIndexRequest
 }
 
 // Send marshals and sends the DetachFromIndex API request.
@@ -1020,7 +1040,7 @@ func (c *CloudDirectory) DetachFromIndexRequest(input *DetachFromIndexInput) Det
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachFromIndexRequest{Request: req, Input: input}
+	return DetachFromIndexRequest{Request: req, Input: input, Copy: c.DetachFromIndexRequest}
 }
 
 const opDetachObject = "DetachObject"
@@ -1029,6 +1049,7 @@ const opDetachObject = "DetachObject"
 type DetachObjectRequest struct {
 	*aws.Request
 	Input *DetachObjectInput
+	Copy  func(*DetachObjectInput) DetachObjectRequest
 }
 
 // Send marshals and sends the DetachObject API request.
@@ -1070,7 +1091,7 @@ func (c *CloudDirectory) DetachObjectRequest(input *DetachObjectInput) DetachObj
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachObjectRequest{Request: req, Input: input}
+	return DetachObjectRequest{Request: req, Input: input, Copy: c.DetachObjectRequest}
 }
 
 const opDetachPolicy = "DetachPolicy"
@@ -1079,6 +1100,7 @@ const opDetachPolicy = "DetachPolicy"
 type DetachPolicyRequest struct {
 	*aws.Request
 	Input *DetachPolicyInput
+	Copy  func(*DetachPolicyInput) DetachPolicyRequest
 }
 
 // Send marshals and sends the DetachPolicy API request.
@@ -1119,7 +1141,7 @@ func (c *CloudDirectory) DetachPolicyRequest(input *DetachPolicyInput) DetachPol
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachPolicyRequest{Request: req, Input: input}
+	return DetachPolicyRequest{Request: req, Input: input, Copy: c.DetachPolicyRequest}
 }
 
 const opDetachTypedLink = "DetachTypedLink"
@@ -1128,6 +1150,7 @@ const opDetachTypedLink = "DetachTypedLink"
 type DetachTypedLinkRequest struct {
 	*aws.Request
 	Input *DetachTypedLinkInput
+	Copy  func(*DetachTypedLinkInput) DetachTypedLinkRequest
 }
 
 // Send marshals and sends the DetachTypedLink API request.
@@ -1171,7 +1194,7 @@ func (c *CloudDirectory) DetachTypedLinkRequest(input *DetachTypedLinkInput) Det
 	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DetachTypedLinkRequest{Request: req, Input: input}
+	return DetachTypedLinkRequest{Request: req, Input: input, Copy: c.DetachTypedLinkRequest}
 }
 
 const opDisableDirectory = "DisableDirectory"
@@ -1180,6 +1203,7 @@ const opDisableDirectory = "DisableDirectory"
 type DisableDirectoryRequest struct {
 	*aws.Request
 	Input *DisableDirectoryInput
+	Copy  func(*DisableDirectoryInput) DisableDirectoryRequest
 }
 
 // Send marshals and sends the DisableDirectory API request.
@@ -1222,7 +1246,7 @@ func (c *CloudDirectory) DisableDirectoryRequest(input *DisableDirectoryInput) D
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DisableDirectoryRequest{Request: req, Input: input}
+	return DisableDirectoryRequest{Request: req, Input: input, Copy: c.DisableDirectoryRequest}
 }
 
 const opEnableDirectory = "EnableDirectory"
@@ -1231,6 +1255,7 @@ const opEnableDirectory = "EnableDirectory"
 type EnableDirectoryRequest struct {
 	*aws.Request
 	Input *EnableDirectoryInput
+	Copy  func(*EnableDirectoryInput) EnableDirectoryRequest
 }
 
 // Send marshals and sends the EnableDirectory API request.
@@ -1272,7 +1297,7 @@ func (c *CloudDirectory) EnableDirectoryRequest(input *EnableDirectoryInput) Ena
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return EnableDirectoryRequest{Request: req, Input: input}
+	return EnableDirectoryRequest{Request: req, Input: input, Copy: c.EnableDirectoryRequest}
 }
 
 const opGetAppliedSchemaVersion = "GetAppliedSchemaVersion"
@@ -1281,6 +1306,7 @@ const opGetAppliedSchemaVersion = "GetAppliedSchemaVersion"
 type GetAppliedSchemaVersionRequest struct {
 	*aws.Request
 	Input *GetAppliedSchemaVersionInput
+	Copy  func(*GetAppliedSchemaVersionInput) GetAppliedSchemaVersionRequest
 }
 
 // Send marshals and sends the GetAppliedSchemaVersion API request.
@@ -1322,7 +1348,7 @@ func (c *CloudDirectory) GetAppliedSchemaVersionRequest(input *GetAppliedSchemaV
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetAppliedSchemaVersionRequest{Request: req, Input: input}
+	return GetAppliedSchemaVersionRequest{Request: req, Input: input, Copy: c.GetAppliedSchemaVersionRequest}
 }
 
 const opGetDirectory = "GetDirectory"
@@ -1331,6 +1357,7 @@ const opGetDirectory = "GetDirectory"
 type GetDirectoryRequest struct {
 	*aws.Request
 	Input *GetDirectoryInput
+	Copy  func(*GetDirectoryInput) GetDirectoryRequest
 }
 
 // Send marshals and sends the GetDirectory API request.
@@ -1371,7 +1398,7 @@ func (c *CloudDirectory) GetDirectoryRequest(input *GetDirectoryInput) GetDirect
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDirectoryRequest{Request: req, Input: input}
+	return GetDirectoryRequest{Request: req, Input: input, Copy: c.GetDirectoryRequest}
 }
 
 const opGetFacet = "GetFacet"
@@ -1380,6 +1407,7 @@ const opGetFacet = "GetFacet"
 type GetFacetRequest struct {
 	*aws.Request
 	Input *GetFacetInput
+	Copy  func(*GetFacetInput) GetFacetRequest
 }
 
 // Send marshals and sends the GetFacet API request.
@@ -1422,7 +1450,7 @@ func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) GetFacetRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetFacetRequest{Request: req, Input: input}
+	return GetFacetRequest{Request: req, Input: input, Copy: c.GetFacetRequest}
 }
 
 const opGetObjectInformation = "GetObjectInformation"
@@ -1431,6 +1459,7 @@ const opGetObjectInformation = "GetObjectInformation"
 type GetObjectInformationRequest struct {
 	*aws.Request
 	Input *GetObjectInformationInput
+	Copy  func(*GetObjectInformationInput) GetObjectInformationRequest
 }
 
 // Send marshals and sends the GetObjectInformation API request.
@@ -1471,7 +1500,7 @@ func (c *CloudDirectory) GetObjectInformationRequest(input *GetObjectInformation
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetObjectInformationRequest{Request: req, Input: input}
+	return GetObjectInformationRequest{Request: req, Input: input, Copy: c.GetObjectInformationRequest}
 }
 
 const opGetSchemaAsJson = "GetSchemaAsJson"
@@ -1480,6 +1509,7 @@ const opGetSchemaAsJson = "GetSchemaAsJson"
 type GetSchemaAsJsonRequest struct {
 	*aws.Request
 	Input *GetSchemaAsJsonInput
+	Copy  func(*GetSchemaAsJsonInput) GetSchemaAsJsonRequest
 }
 
 // Send marshals and sends the GetSchemaAsJson API request.
@@ -1521,7 +1551,7 @@ func (c *CloudDirectory) GetSchemaAsJsonRequest(input *GetSchemaAsJsonInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSchemaAsJsonRequest{Request: req, Input: input}
+	return GetSchemaAsJsonRequest{Request: req, Input: input, Copy: c.GetSchemaAsJsonRequest}
 }
 
 const opGetTypedLinkFacetInformation = "GetTypedLinkFacetInformation"
@@ -1530,6 +1560,7 @@ const opGetTypedLinkFacetInformation = "GetTypedLinkFacetInformation"
 type GetTypedLinkFacetInformationRequest struct {
 	*aws.Request
 	Input *GetTypedLinkFacetInformationInput
+	Copy  func(*GetTypedLinkFacetInformationInput) GetTypedLinkFacetInformationRequest
 }
 
 // Send marshals and sends the GetTypedLinkFacetInformation API request.
@@ -1571,7 +1602,7 @@ func (c *CloudDirectory) GetTypedLinkFacetInformationRequest(input *GetTypedLink
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTypedLinkFacetInformationRequest{Request: req, Input: input}
+	return GetTypedLinkFacetInformationRequest{Request: req, Input: input, Copy: c.GetTypedLinkFacetInformationRequest}
 }
 
 const opListAppliedSchemaArns = "ListAppliedSchemaArns"
@@ -1580,6 +1611,7 @@ const opListAppliedSchemaArns = "ListAppliedSchemaArns"
 type ListAppliedSchemaArnsRequest struct {
 	*aws.Request
 	Input *ListAppliedSchemaArnsInput
+	Copy  func(*ListAppliedSchemaArnsInput) ListAppliedSchemaArnsRequest
 }
 
 // Send marshals and sends the ListAppliedSchemaArns API request.
@@ -1627,57 +1659,53 @@ func (c *CloudDirectory) ListAppliedSchemaArnsRequest(input *ListAppliedSchemaAr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAppliedSchemaArnsRequest{Request: req, Input: input}
+	return ListAppliedSchemaArnsRequest{Request: req, Input: input, Copy: c.ListAppliedSchemaArnsRequest}
 }
 
-// ListAppliedSchemaArnsPages iterates over the pages of a ListAppliedSchemaArns operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAppliedSchemaArns method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAppliedSchemaArnsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAppliedSchemaArns operation.
-//    pageNum := 0
-//    err := client.ListAppliedSchemaArnsPages(params,
-//        func(page *ListAppliedSchemaArnsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAppliedSchemaArnsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListAppliedSchemaArnsPages(input *ListAppliedSchemaArnsInput, fn func(*ListAppliedSchemaArnsOutput, bool) bool) error {
-	return c.ListAppliedSchemaArnsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAppliedSchemaArnsRequest) Paginate(opts ...aws.Option) ListAppliedSchemaArnsPager {
+	return ListAppliedSchemaArnsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAppliedSchemaArnsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAppliedSchemaArnsPagesWithContext same as ListAppliedSchemaArnsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListAppliedSchemaArnsPagesWithContext(ctx aws.Context, input *ListAppliedSchemaArnsInput, fn func(*ListAppliedSchemaArnsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAppliedSchemaArnsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAppliedSchemaArnsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAppliedSchemaArnsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAppliedSchemaArnsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAppliedSchemaArnsPager struct {
+	aws.Pager
+}
+
+func (p *ListAppliedSchemaArnsPager) CurrentPage() *ListAppliedSchemaArnsOutput {
+	return p.Pager.CurrentPage().(*ListAppliedSchemaArnsOutput)
 }
 
 const opListAttachedIndices = "ListAttachedIndices"
@@ -1686,6 +1714,7 @@ const opListAttachedIndices = "ListAttachedIndices"
 type ListAttachedIndicesRequest struct {
 	*aws.Request
 	Input *ListAttachedIndicesInput
+	Copy  func(*ListAttachedIndicesInput) ListAttachedIndicesRequest
 }
 
 // Send marshals and sends the ListAttachedIndices API request.
@@ -1732,57 +1761,53 @@ func (c *CloudDirectory) ListAttachedIndicesRequest(input *ListAttachedIndicesIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListAttachedIndicesRequest{Request: req, Input: input}
+	return ListAttachedIndicesRequest{Request: req, Input: input, Copy: c.ListAttachedIndicesRequest}
 }
 
-// ListAttachedIndicesPages iterates over the pages of a ListAttachedIndices operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListAttachedIndices method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListAttachedIndicesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListAttachedIndices operation.
-//    pageNum := 0
-//    err := client.ListAttachedIndicesPages(params,
-//        func(page *ListAttachedIndicesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListAttachedIndicesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListAttachedIndicesPages(input *ListAttachedIndicesInput, fn func(*ListAttachedIndicesOutput, bool) bool) error {
-	return c.ListAttachedIndicesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListAttachedIndicesRequest) Paginate(opts ...aws.Option) ListAttachedIndicesPager {
+	return ListAttachedIndicesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListAttachedIndicesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListAttachedIndicesPagesWithContext same as ListAttachedIndicesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListAttachedIndicesPagesWithContext(ctx aws.Context, input *ListAttachedIndicesInput, fn func(*ListAttachedIndicesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListAttachedIndicesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListAttachedIndicesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListAttachedIndicesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListAttachedIndicesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListAttachedIndicesPager struct {
+	aws.Pager
+}
+
+func (p *ListAttachedIndicesPager) CurrentPage() *ListAttachedIndicesOutput {
+	return p.Pager.CurrentPage().(*ListAttachedIndicesOutput)
 }
 
 const opListDevelopmentSchemaArns = "ListDevelopmentSchemaArns"
@@ -1791,6 +1816,7 @@ const opListDevelopmentSchemaArns = "ListDevelopmentSchemaArns"
 type ListDevelopmentSchemaArnsRequest struct {
 	*aws.Request
 	Input *ListDevelopmentSchemaArnsInput
+	Copy  func(*ListDevelopmentSchemaArnsInput) ListDevelopmentSchemaArnsRequest
 }
 
 // Send marshals and sends the ListDevelopmentSchemaArns API request.
@@ -1837,57 +1863,53 @@ func (c *CloudDirectory) ListDevelopmentSchemaArnsRequest(input *ListDevelopment
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDevelopmentSchemaArnsRequest{Request: req, Input: input}
+	return ListDevelopmentSchemaArnsRequest{Request: req, Input: input, Copy: c.ListDevelopmentSchemaArnsRequest}
 }
 
-// ListDevelopmentSchemaArnsPages iterates over the pages of a ListDevelopmentSchemaArns operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDevelopmentSchemaArns method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDevelopmentSchemaArnsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDevelopmentSchemaArns operation.
-//    pageNum := 0
-//    err := client.ListDevelopmentSchemaArnsPages(params,
-//        func(page *ListDevelopmentSchemaArnsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDevelopmentSchemaArnsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListDevelopmentSchemaArnsPages(input *ListDevelopmentSchemaArnsInput, fn func(*ListDevelopmentSchemaArnsOutput, bool) bool) error {
-	return c.ListDevelopmentSchemaArnsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListDevelopmentSchemaArnsRequest) Paginate(opts ...aws.Option) ListDevelopmentSchemaArnsPager {
+	return ListDevelopmentSchemaArnsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDevelopmentSchemaArnsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListDevelopmentSchemaArnsPagesWithContext same as ListDevelopmentSchemaArnsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListDevelopmentSchemaArnsPagesWithContext(ctx aws.Context, input *ListDevelopmentSchemaArnsInput, fn func(*ListDevelopmentSchemaArnsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDevelopmentSchemaArnsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListDevelopmentSchemaArnsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDevelopmentSchemaArnsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListDevelopmentSchemaArnsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListDevelopmentSchemaArnsPager struct {
+	aws.Pager
+}
+
+func (p *ListDevelopmentSchemaArnsPager) CurrentPage() *ListDevelopmentSchemaArnsOutput {
+	return p.Pager.CurrentPage().(*ListDevelopmentSchemaArnsOutput)
 }
 
 const opListDirectories = "ListDirectories"
@@ -1896,6 +1918,7 @@ const opListDirectories = "ListDirectories"
 type ListDirectoriesRequest struct {
 	*aws.Request
 	Input *ListDirectoriesInput
+	Copy  func(*ListDirectoriesInput) ListDirectoriesRequest
 }
 
 // Send marshals and sends the ListDirectories API request.
@@ -1942,57 +1965,53 @@ func (c *CloudDirectory) ListDirectoriesRequest(input *ListDirectoriesInput) Lis
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDirectoriesRequest{Request: req, Input: input}
+	return ListDirectoriesRequest{Request: req, Input: input, Copy: c.ListDirectoriesRequest}
 }
 
-// ListDirectoriesPages iterates over the pages of a ListDirectories operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListDirectories method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListDirectoriesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListDirectories operation.
-//    pageNum := 0
-//    err := client.ListDirectoriesPages(params,
-//        func(page *ListDirectoriesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListDirectoriesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListDirectoriesPages(input *ListDirectoriesInput, fn func(*ListDirectoriesOutput, bool) bool) error {
-	return c.ListDirectoriesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListDirectoriesRequest) Paginate(opts ...aws.Option) ListDirectoriesPager {
+	return ListDirectoriesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDirectoriesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListDirectoriesPagesWithContext same as ListDirectoriesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListDirectoriesPagesWithContext(ctx aws.Context, input *ListDirectoriesInput, fn func(*ListDirectoriesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListDirectoriesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListDirectoriesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListDirectoriesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListDirectoriesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListDirectoriesPager struct {
+	aws.Pager
+}
+
+func (p *ListDirectoriesPager) CurrentPage() *ListDirectoriesOutput {
+	return p.Pager.CurrentPage().(*ListDirectoriesOutput)
 }
 
 const opListFacetAttributes = "ListFacetAttributes"
@@ -2001,6 +2020,7 @@ const opListFacetAttributes = "ListFacetAttributes"
 type ListFacetAttributesRequest struct {
 	*aws.Request
 	Input *ListFacetAttributesInput
+	Copy  func(*ListFacetAttributesInput) ListFacetAttributesRequest
 }
 
 // Send marshals and sends the ListFacetAttributes API request.
@@ -2047,57 +2067,53 @@ func (c *CloudDirectory) ListFacetAttributesRequest(input *ListFacetAttributesIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFacetAttributesRequest{Request: req, Input: input}
+	return ListFacetAttributesRequest{Request: req, Input: input, Copy: c.ListFacetAttributesRequest}
 }
 
-// ListFacetAttributesPages iterates over the pages of a ListFacetAttributes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListFacetAttributes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListFacetAttributesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListFacetAttributes operation.
-//    pageNum := 0
-//    err := client.ListFacetAttributesPages(params,
-//        func(page *ListFacetAttributesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListFacetAttributesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListFacetAttributesPages(input *ListFacetAttributesInput, fn func(*ListFacetAttributesOutput, bool) bool) error {
-	return c.ListFacetAttributesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListFacetAttributesRequest) Paginate(opts ...aws.Option) ListFacetAttributesPager {
+	return ListFacetAttributesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListFacetAttributesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListFacetAttributesPagesWithContext same as ListFacetAttributesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListFacetAttributesPagesWithContext(ctx aws.Context, input *ListFacetAttributesInput, fn func(*ListFacetAttributesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListFacetAttributesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListFacetAttributesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFacetAttributesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListFacetAttributesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListFacetAttributesPager struct {
+	aws.Pager
+}
+
+func (p *ListFacetAttributesPager) CurrentPage() *ListFacetAttributesOutput {
+	return p.Pager.CurrentPage().(*ListFacetAttributesOutput)
 }
 
 const opListFacetNames = "ListFacetNames"
@@ -2106,6 +2122,7 @@ const opListFacetNames = "ListFacetNames"
 type ListFacetNamesRequest struct {
 	*aws.Request
 	Input *ListFacetNamesInput
+	Copy  func(*ListFacetNamesInput) ListFacetNamesRequest
 }
 
 // Send marshals and sends the ListFacetNames API request.
@@ -2152,57 +2169,53 @@ func (c *CloudDirectory) ListFacetNamesRequest(input *ListFacetNamesInput) ListF
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListFacetNamesRequest{Request: req, Input: input}
+	return ListFacetNamesRequest{Request: req, Input: input, Copy: c.ListFacetNamesRequest}
 }
 
-// ListFacetNamesPages iterates over the pages of a ListFacetNames operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListFacetNames method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListFacetNamesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListFacetNames operation.
-//    pageNum := 0
-//    err := client.ListFacetNamesPages(params,
-//        func(page *ListFacetNamesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListFacetNamesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListFacetNamesPages(input *ListFacetNamesInput, fn func(*ListFacetNamesOutput, bool) bool) error {
-	return c.ListFacetNamesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListFacetNamesRequest) Paginate(opts ...aws.Option) ListFacetNamesPager {
+	return ListFacetNamesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListFacetNamesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListFacetNamesPagesWithContext same as ListFacetNamesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListFacetNamesPagesWithContext(ctx aws.Context, input *ListFacetNamesInput, fn func(*ListFacetNamesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListFacetNamesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListFacetNamesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListFacetNamesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListFacetNamesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListFacetNamesPager struct {
+	aws.Pager
+}
+
+func (p *ListFacetNamesPager) CurrentPage() *ListFacetNamesOutput {
+	return p.Pager.CurrentPage().(*ListFacetNamesOutput)
 }
 
 const opListIncomingTypedLinks = "ListIncomingTypedLinks"
@@ -2211,6 +2224,7 @@ const opListIncomingTypedLinks = "ListIncomingTypedLinks"
 type ListIncomingTypedLinksRequest struct {
 	*aws.Request
 	Input *ListIncomingTypedLinksInput
+	Copy  func(*ListIncomingTypedLinksInput) ListIncomingTypedLinksRequest
 }
 
 // Send marshals and sends the ListIncomingTypedLinks API request.
@@ -2253,7 +2267,7 @@ func (c *CloudDirectory) ListIncomingTypedLinksRequest(input *ListIncomingTypedL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIncomingTypedLinksRequest{Request: req, Input: input}
+	return ListIncomingTypedLinksRequest{Request: req, Input: input, Copy: c.ListIncomingTypedLinksRequest}
 }
 
 const opListIndex = "ListIndex"
@@ -2262,6 +2276,7 @@ const opListIndex = "ListIndex"
 type ListIndexRequest struct {
 	*aws.Request
 	Input *ListIndexInput
+	Copy  func(*ListIndexInput) ListIndexRequest
 }
 
 // Send marshals and sends the ListIndex API request.
@@ -2308,57 +2323,53 @@ func (c *CloudDirectory) ListIndexRequest(input *ListIndexInput) ListIndexReques
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListIndexRequest{Request: req, Input: input}
+	return ListIndexRequest{Request: req, Input: input, Copy: c.ListIndexRequest}
 }
 
-// ListIndexPages iterates over the pages of a ListIndex operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListIndex method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListIndexRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListIndex operation.
-//    pageNum := 0
-//    err := client.ListIndexPages(params,
-//        func(page *ListIndexOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListIndexRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListIndexPages(input *ListIndexInput, fn func(*ListIndexOutput, bool) bool) error {
-	return c.ListIndexPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListIndexRequest) Paginate(opts ...aws.Option) ListIndexPager {
+	return ListIndexPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListIndexInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListIndexPagesWithContext same as ListIndexPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListIndexPagesWithContext(ctx aws.Context, input *ListIndexInput, fn func(*ListIndexOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListIndexInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListIndexRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListIndexOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListIndexPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListIndexPager struct {
+	aws.Pager
+}
+
+func (p *ListIndexPager) CurrentPage() *ListIndexOutput {
+	return p.Pager.CurrentPage().(*ListIndexOutput)
 }
 
 const opListObjectAttributes = "ListObjectAttributes"
@@ -2367,6 +2378,7 @@ const opListObjectAttributes = "ListObjectAttributes"
 type ListObjectAttributesRequest struct {
 	*aws.Request
 	Input *ListObjectAttributesInput
+	Copy  func(*ListObjectAttributesInput) ListObjectAttributesRequest
 }
 
 // Send marshals and sends the ListObjectAttributes API request.
@@ -2413,57 +2425,53 @@ func (c *CloudDirectory) ListObjectAttributesRequest(input *ListObjectAttributes
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListObjectAttributesRequest{Request: req, Input: input}
+	return ListObjectAttributesRequest{Request: req, Input: input, Copy: c.ListObjectAttributesRequest}
 }
 
-// ListObjectAttributesPages iterates over the pages of a ListObjectAttributes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListObjectAttributes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListObjectAttributesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListObjectAttributes operation.
-//    pageNum := 0
-//    err := client.ListObjectAttributesPages(params,
-//        func(page *ListObjectAttributesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListObjectAttributesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListObjectAttributesPages(input *ListObjectAttributesInput, fn func(*ListObjectAttributesOutput, bool) bool) error {
-	return c.ListObjectAttributesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListObjectAttributesRequest) Paginate(opts ...aws.Option) ListObjectAttributesPager {
+	return ListObjectAttributesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListObjectAttributesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListObjectAttributesPagesWithContext same as ListObjectAttributesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListObjectAttributesPagesWithContext(ctx aws.Context, input *ListObjectAttributesInput, fn func(*ListObjectAttributesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListObjectAttributesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListObjectAttributesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectAttributesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectAttributesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListObjectAttributesPager struct {
+	aws.Pager
+}
+
+func (p *ListObjectAttributesPager) CurrentPage() *ListObjectAttributesOutput {
+	return p.Pager.CurrentPage().(*ListObjectAttributesOutput)
 }
 
 const opListObjectChildren = "ListObjectChildren"
@@ -2472,6 +2480,7 @@ const opListObjectChildren = "ListObjectChildren"
 type ListObjectChildrenRequest struct {
 	*aws.Request
 	Input *ListObjectChildrenInput
+	Copy  func(*ListObjectChildrenInput) ListObjectChildrenRequest
 }
 
 // Send marshals and sends the ListObjectChildren API request.
@@ -2519,57 +2528,53 @@ func (c *CloudDirectory) ListObjectChildrenRequest(input *ListObjectChildrenInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListObjectChildrenRequest{Request: req, Input: input}
+	return ListObjectChildrenRequest{Request: req, Input: input, Copy: c.ListObjectChildrenRequest}
 }
 
-// ListObjectChildrenPages iterates over the pages of a ListObjectChildren operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListObjectChildren method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListObjectChildrenRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListObjectChildren operation.
-//    pageNum := 0
-//    err := client.ListObjectChildrenPages(params,
-//        func(page *ListObjectChildrenOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListObjectChildrenRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListObjectChildrenPages(input *ListObjectChildrenInput, fn func(*ListObjectChildrenOutput, bool) bool) error {
-	return c.ListObjectChildrenPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListObjectChildrenRequest) Paginate(opts ...aws.Option) ListObjectChildrenPager {
+	return ListObjectChildrenPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListObjectChildrenInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListObjectChildrenPagesWithContext same as ListObjectChildrenPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListObjectChildrenPagesWithContext(ctx aws.Context, input *ListObjectChildrenInput, fn func(*ListObjectChildrenOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListObjectChildrenInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListObjectChildrenRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectChildrenOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectChildrenPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListObjectChildrenPager struct {
+	aws.Pager
+}
+
+func (p *ListObjectChildrenPager) CurrentPage() *ListObjectChildrenOutput {
+	return p.Pager.CurrentPage().(*ListObjectChildrenOutput)
 }
 
 const opListObjectParentPaths = "ListObjectParentPaths"
@@ -2578,6 +2583,7 @@ const opListObjectParentPaths = "ListObjectParentPaths"
 type ListObjectParentPathsRequest struct {
 	*aws.Request
 	Input *ListObjectParentPathsInput
+	Copy  func(*ListObjectParentPathsInput) ListObjectParentPathsRequest
 }
 
 // Send marshals and sends the ListObjectParentPaths API request.
@@ -2634,57 +2640,53 @@ func (c *CloudDirectory) ListObjectParentPathsRequest(input *ListObjectParentPat
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListObjectParentPathsRequest{Request: req, Input: input}
+	return ListObjectParentPathsRequest{Request: req, Input: input, Copy: c.ListObjectParentPathsRequest}
 }
 
-// ListObjectParentPathsPages iterates over the pages of a ListObjectParentPaths operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListObjectParentPaths method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListObjectParentPathsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListObjectParentPaths operation.
-//    pageNum := 0
-//    err := client.ListObjectParentPathsPages(params,
-//        func(page *ListObjectParentPathsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListObjectParentPathsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListObjectParentPathsPages(input *ListObjectParentPathsInput, fn func(*ListObjectParentPathsOutput, bool) bool) error {
-	return c.ListObjectParentPathsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListObjectParentPathsRequest) Paginate(opts ...aws.Option) ListObjectParentPathsPager {
+	return ListObjectParentPathsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListObjectParentPathsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListObjectParentPathsPagesWithContext same as ListObjectParentPathsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListObjectParentPathsPagesWithContext(ctx aws.Context, input *ListObjectParentPathsInput, fn func(*ListObjectParentPathsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListObjectParentPathsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListObjectParentPathsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectParentPathsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectParentPathsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListObjectParentPathsPager struct {
+	aws.Pager
+}
+
+func (p *ListObjectParentPathsPager) CurrentPage() *ListObjectParentPathsOutput {
+	return p.Pager.CurrentPage().(*ListObjectParentPathsOutput)
 }
 
 const opListObjectParents = "ListObjectParents"
@@ -2693,6 +2695,7 @@ const opListObjectParents = "ListObjectParents"
 type ListObjectParentsRequest struct {
 	*aws.Request
 	Input *ListObjectParentsInput
+	Copy  func(*ListObjectParentsInput) ListObjectParentsRequest
 }
 
 // Send marshals and sends the ListObjectParents API request.
@@ -2740,57 +2743,53 @@ func (c *CloudDirectory) ListObjectParentsRequest(input *ListObjectParentsInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListObjectParentsRequest{Request: req, Input: input}
+	return ListObjectParentsRequest{Request: req, Input: input, Copy: c.ListObjectParentsRequest}
 }
 
-// ListObjectParentsPages iterates over the pages of a ListObjectParents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListObjectParents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListObjectParentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListObjectParents operation.
-//    pageNum := 0
-//    err := client.ListObjectParentsPages(params,
-//        func(page *ListObjectParentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListObjectParentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListObjectParentsPages(input *ListObjectParentsInput, fn func(*ListObjectParentsOutput, bool) bool) error {
-	return c.ListObjectParentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListObjectParentsRequest) Paginate(opts ...aws.Option) ListObjectParentsPager {
+	return ListObjectParentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListObjectParentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListObjectParentsPagesWithContext same as ListObjectParentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListObjectParentsPagesWithContext(ctx aws.Context, input *ListObjectParentsInput, fn func(*ListObjectParentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListObjectParentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListObjectParentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectParentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectParentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListObjectParentsPager struct {
+	aws.Pager
+}
+
+func (p *ListObjectParentsPager) CurrentPage() *ListObjectParentsOutput {
+	return p.Pager.CurrentPage().(*ListObjectParentsOutput)
 }
 
 const opListObjectPolicies = "ListObjectPolicies"
@@ -2799,6 +2798,7 @@ const opListObjectPolicies = "ListObjectPolicies"
 type ListObjectPoliciesRequest struct {
 	*aws.Request
 	Input *ListObjectPoliciesInput
+	Copy  func(*ListObjectPoliciesInput) ListObjectPoliciesRequest
 }
 
 // Send marshals and sends the ListObjectPolicies API request.
@@ -2845,57 +2845,53 @@ func (c *CloudDirectory) ListObjectPoliciesRequest(input *ListObjectPoliciesInpu
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListObjectPoliciesRequest{Request: req, Input: input}
+	return ListObjectPoliciesRequest{Request: req, Input: input, Copy: c.ListObjectPoliciesRequest}
 }
 
-// ListObjectPoliciesPages iterates over the pages of a ListObjectPolicies operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListObjectPolicies method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListObjectPoliciesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListObjectPolicies operation.
-//    pageNum := 0
-//    err := client.ListObjectPoliciesPages(params,
-//        func(page *ListObjectPoliciesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListObjectPoliciesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListObjectPoliciesPages(input *ListObjectPoliciesInput, fn func(*ListObjectPoliciesOutput, bool) bool) error {
-	return c.ListObjectPoliciesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListObjectPoliciesRequest) Paginate(opts ...aws.Option) ListObjectPoliciesPager {
+	return ListObjectPoliciesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListObjectPoliciesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListObjectPoliciesPagesWithContext same as ListObjectPoliciesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListObjectPoliciesPagesWithContext(ctx aws.Context, input *ListObjectPoliciesInput, fn func(*ListObjectPoliciesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListObjectPoliciesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListObjectPoliciesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListObjectPoliciesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListObjectPoliciesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListObjectPoliciesPager struct {
+	aws.Pager
+}
+
+func (p *ListObjectPoliciesPager) CurrentPage() *ListObjectPoliciesOutput {
+	return p.Pager.CurrentPage().(*ListObjectPoliciesOutput)
 }
 
 const opListOutgoingTypedLinks = "ListOutgoingTypedLinks"
@@ -2904,6 +2900,7 @@ const opListOutgoingTypedLinks = "ListOutgoingTypedLinks"
 type ListOutgoingTypedLinksRequest struct {
 	*aws.Request
 	Input *ListOutgoingTypedLinksInput
+	Copy  func(*ListOutgoingTypedLinksInput) ListOutgoingTypedLinksRequest
 }
 
 // Send marshals and sends the ListOutgoingTypedLinks API request.
@@ -2946,7 +2943,7 @@ func (c *CloudDirectory) ListOutgoingTypedLinksRequest(input *ListOutgoingTypedL
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListOutgoingTypedLinksRequest{Request: req, Input: input}
+	return ListOutgoingTypedLinksRequest{Request: req, Input: input, Copy: c.ListOutgoingTypedLinksRequest}
 }
 
 const opListPolicyAttachments = "ListPolicyAttachments"
@@ -2955,6 +2952,7 @@ const opListPolicyAttachments = "ListPolicyAttachments"
 type ListPolicyAttachmentsRequest struct {
 	*aws.Request
 	Input *ListPolicyAttachmentsInput
+	Copy  func(*ListPolicyAttachmentsInput) ListPolicyAttachmentsRequest
 }
 
 // Send marshals and sends the ListPolicyAttachments API request.
@@ -3001,57 +2999,53 @@ func (c *CloudDirectory) ListPolicyAttachmentsRequest(input *ListPolicyAttachmen
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPolicyAttachmentsRequest{Request: req, Input: input}
+	return ListPolicyAttachmentsRequest{Request: req, Input: input, Copy: c.ListPolicyAttachmentsRequest}
 }
 
-// ListPolicyAttachmentsPages iterates over the pages of a ListPolicyAttachments operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPolicyAttachments method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPolicyAttachmentsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPolicyAttachments operation.
-//    pageNum := 0
-//    err := client.ListPolicyAttachmentsPages(params,
-//        func(page *ListPolicyAttachmentsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPolicyAttachmentsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListPolicyAttachmentsPages(input *ListPolicyAttachmentsInput, fn func(*ListPolicyAttachmentsOutput, bool) bool) error {
-	return c.ListPolicyAttachmentsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPolicyAttachmentsRequest) Paginate(opts ...aws.Option) ListPolicyAttachmentsPager {
+	return ListPolicyAttachmentsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPolicyAttachmentsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListPolicyAttachmentsPagesWithContext same as ListPolicyAttachmentsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListPolicyAttachmentsPagesWithContext(ctx aws.Context, input *ListPolicyAttachmentsInput, fn func(*ListPolicyAttachmentsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPolicyAttachmentsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListPolicyAttachmentsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPolicyAttachmentsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPolicyAttachmentsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPolicyAttachmentsPager struct {
+	aws.Pager
+}
+
+func (p *ListPolicyAttachmentsPager) CurrentPage() *ListPolicyAttachmentsOutput {
+	return p.Pager.CurrentPage().(*ListPolicyAttachmentsOutput)
 }
 
 const opListPublishedSchemaArns = "ListPublishedSchemaArns"
@@ -3060,6 +3054,7 @@ const opListPublishedSchemaArns = "ListPublishedSchemaArns"
 type ListPublishedSchemaArnsRequest struct {
 	*aws.Request
 	Input *ListPublishedSchemaArnsInput
+	Copy  func(*ListPublishedSchemaArnsInput) ListPublishedSchemaArnsRequest
 }
 
 // Send marshals and sends the ListPublishedSchemaArns API request.
@@ -3107,57 +3102,53 @@ func (c *CloudDirectory) ListPublishedSchemaArnsRequest(input *ListPublishedSche
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPublishedSchemaArnsRequest{Request: req, Input: input}
+	return ListPublishedSchemaArnsRequest{Request: req, Input: input, Copy: c.ListPublishedSchemaArnsRequest}
 }
 
-// ListPublishedSchemaArnsPages iterates over the pages of a ListPublishedSchemaArns operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListPublishedSchemaArns method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListPublishedSchemaArnsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListPublishedSchemaArns operation.
-//    pageNum := 0
-//    err := client.ListPublishedSchemaArnsPages(params,
-//        func(page *ListPublishedSchemaArnsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListPublishedSchemaArnsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListPublishedSchemaArnsPages(input *ListPublishedSchemaArnsInput, fn func(*ListPublishedSchemaArnsOutput, bool) bool) error {
-	return c.ListPublishedSchemaArnsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListPublishedSchemaArnsRequest) Paginate(opts ...aws.Option) ListPublishedSchemaArnsPager {
+	return ListPublishedSchemaArnsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListPublishedSchemaArnsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListPublishedSchemaArnsPagesWithContext same as ListPublishedSchemaArnsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListPublishedSchemaArnsPagesWithContext(ctx aws.Context, input *ListPublishedSchemaArnsInput, fn func(*ListPublishedSchemaArnsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListPublishedSchemaArnsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListPublishedSchemaArnsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListPublishedSchemaArnsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListPublishedSchemaArnsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPublishedSchemaArnsPager struct {
+	aws.Pager
+}
+
+func (p *ListPublishedSchemaArnsPager) CurrentPage() *ListPublishedSchemaArnsOutput {
+	return p.Pager.CurrentPage().(*ListPublishedSchemaArnsOutput)
 }
 
 const opListTagsForResource = "ListTagsForResource"
@@ -3166,6 +3157,7 @@ const opListTagsForResource = "ListTagsForResource"
 type ListTagsForResourceRequest struct {
 	*aws.Request
 	Input *ListTagsForResourceInput
+	Copy  func(*ListTagsForResourceInput) ListTagsForResourceRequest
 }
 
 // Send marshals and sends the ListTagsForResource API request.
@@ -3214,57 +3206,53 @@ func (c *CloudDirectory) ListTagsForResourceRequest(input *ListTagsForResourceIn
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsForResourceRequest{Request: req, Input: input}
+	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
-// ListTagsForResourcePages iterates over the pages of a ListTagsForResource operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTagsForResource method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTagsForResourceRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTagsForResource operation.
-//    pageNum := 0
-//    err := client.ListTagsForResourcePages(params,
-//        func(page *ListTagsForResourceOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTagsForResourceRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListTagsForResourcePages(input *ListTagsForResourceInput, fn func(*ListTagsForResourceOutput, bool) bool) error {
-	return c.ListTagsForResourcePagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListTagsForResourceRequest) Paginate(opts ...aws.Option) ListTagsForResourcePager {
+	return ListTagsForResourcePager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTagsForResourceInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListTagsForResourcePagesWithContext same as ListTagsForResourcePages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListTagsForResourcePagesWithContext(ctx aws.Context, input *ListTagsForResourceInput, fn func(*ListTagsForResourceOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTagsForResourceInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListTagsForResourceRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTagsForResourceOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTagsForResourcePager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTagsForResourcePager struct {
+	aws.Pager
+}
+
+func (p *ListTagsForResourcePager) CurrentPage() *ListTagsForResourceOutput {
+	return p.Pager.CurrentPage().(*ListTagsForResourceOutput)
 }
 
 const opListTypedLinkFacetAttributes = "ListTypedLinkFacetAttributes"
@@ -3273,6 +3261,7 @@ const opListTypedLinkFacetAttributes = "ListTypedLinkFacetAttributes"
 type ListTypedLinkFacetAttributesRequest struct {
 	*aws.Request
 	Input *ListTypedLinkFacetAttributesInput
+	Copy  func(*ListTypedLinkFacetAttributesInput) ListTypedLinkFacetAttributesRequest
 }
 
 // Send marshals and sends the ListTypedLinkFacetAttributes API request.
@@ -3320,57 +3309,53 @@ func (c *CloudDirectory) ListTypedLinkFacetAttributesRequest(input *ListTypedLin
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTypedLinkFacetAttributesRequest{Request: req, Input: input}
+	return ListTypedLinkFacetAttributesRequest{Request: req, Input: input, Copy: c.ListTypedLinkFacetAttributesRequest}
 }
 
-// ListTypedLinkFacetAttributesPages iterates over the pages of a ListTypedLinkFacetAttributes operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTypedLinkFacetAttributes method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTypedLinkFacetAttributesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTypedLinkFacetAttributes operation.
-//    pageNum := 0
-//    err := client.ListTypedLinkFacetAttributesPages(params,
-//        func(page *ListTypedLinkFacetAttributesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTypedLinkFacetAttributesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListTypedLinkFacetAttributesPages(input *ListTypedLinkFacetAttributesInput, fn func(*ListTypedLinkFacetAttributesOutput, bool) bool) error {
-	return c.ListTypedLinkFacetAttributesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListTypedLinkFacetAttributesRequest) Paginate(opts ...aws.Option) ListTypedLinkFacetAttributesPager {
+	return ListTypedLinkFacetAttributesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTypedLinkFacetAttributesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListTypedLinkFacetAttributesPagesWithContext same as ListTypedLinkFacetAttributesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListTypedLinkFacetAttributesPagesWithContext(ctx aws.Context, input *ListTypedLinkFacetAttributesInput, fn func(*ListTypedLinkFacetAttributesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTypedLinkFacetAttributesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListTypedLinkFacetAttributesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTypedLinkFacetAttributesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTypedLinkFacetAttributesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTypedLinkFacetAttributesPager struct {
+	aws.Pager
+}
+
+func (p *ListTypedLinkFacetAttributesPager) CurrentPage() *ListTypedLinkFacetAttributesOutput {
+	return p.Pager.CurrentPage().(*ListTypedLinkFacetAttributesOutput)
 }
 
 const opListTypedLinkFacetNames = "ListTypedLinkFacetNames"
@@ -3379,6 +3364,7 @@ const opListTypedLinkFacetNames = "ListTypedLinkFacetNames"
 type ListTypedLinkFacetNamesRequest struct {
 	*aws.Request
 	Input *ListTypedLinkFacetNamesInput
+	Copy  func(*ListTypedLinkFacetNamesInput) ListTypedLinkFacetNamesRequest
 }
 
 // Send marshals and sends the ListTypedLinkFacetNames API request.
@@ -3426,57 +3412,53 @@ func (c *CloudDirectory) ListTypedLinkFacetNamesRequest(input *ListTypedLinkFace
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTypedLinkFacetNamesRequest{Request: req, Input: input}
+	return ListTypedLinkFacetNamesRequest{Request: req, Input: input, Copy: c.ListTypedLinkFacetNamesRequest}
 }
 
-// ListTypedLinkFacetNamesPages iterates over the pages of a ListTypedLinkFacetNames operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See ListTypedLinkFacetNames method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a ListTypedLinkFacetNamesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a ListTypedLinkFacetNames operation.
-//    pageNum := 0
-//    err := client.ListTypedLinkFacetNamesPages(params,
-//        func(page *ListTypedLinkFacetNamesOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.ListTypedLinkFacetNamesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) ListTypedLinkFacetNamesPages(input *ListTypedLinkFacetNamesInput, fn func(*ListTypedLinkFacetNamesOutput, bool) bool) error {
-	return c.ListTypedLinkFacetNamesPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListTypedLinkFacetNamesRequest) Paginate(opts ...aws.Option) ListTypedLinkFacetNamesPager {
+	return ListTypedLinkFacetNamesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListTypedLinkFacetNamesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// ListTypedLinkFacetNamesPagesWithContext same as ListTypedLinkFacetNamesPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) ListTypedLinkFacetNamesPagesWithContext(ctx aws.Context, input *ListTypedLinkFacetNamesInput, fn func(*ListTypedLinkFacetNamesOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *ListTypedLinkFacetNamesInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.ListTypedLinkFacetNamesRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*ListTypedLinkFacetNamesOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// ListTypedLinkFacetNamesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListTypedLinkFacetNamesPager struct {
+	aws.Pager
+}
+
+func (p *ListTypedLinkFacetNamesPager) CurrentPage() *ListTypedLinkFacetNamesOutput {
+	return p.Pager.CurrentPage().(*ListTypedLinkFacetNamesOutput)
 }
 
 const opLookupPolicy = "LookupPolicy"
@@ -3485,6 +3467,7 @@ const opLookupPolicy = "LookupPolicy"
 type LookupPolicyRequest struct {
 	*aws.Request
 	Input *LookupPolicyInput
+	Copy  func(*LookupPolicyInput) LookupPolicyRequest
 }
 
 // Send marshals and sends the LookupPolicy API request.
@@ -3537,57 +3520,53 @@ func (c *CloudDirectory) LookupPolicyRequest(input *LookupPolicyInput) LookupPol
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return LookupPolicyRequest{Request: req, Input: input}
+	return LookupPolicyRequest{Request: req, Input: input, Copy: c.LookupPolicyRequest}
 }
 
-// LookupPolicyPages iterates over the pages of a LookupPolicy operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See LookupPolicy method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a LookupPolicyRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a LookupPolicy operation.
-//    pageNum := 0
-//    err := client.LookupPolicyPages(params,
-//        func(page *LookupPolicyOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.LookupPolicyRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudDirectory) LookupPolicyPages(input *LookupPolicyInput, fn func(*LookupPolicyOutput, bool) bool) error {
-	return c.LookupPolicyPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *LookupPolicyRequest) Paginate(opts ...aws.Option) LookupPolicyPager {
+	return LookupPolicyPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *LookupPolicyInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// LookupPolicyPagesWithContext same as LookupPolicyPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudDirectory) LookupPolicyPagesWithContext(ctx aws.Context, input *LookupPolicyInput, fn func(*LookupPolicyOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *LookupPolicyInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.LookupPolicyRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*LookupPolicyOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// LookupPolicyPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type LookupPolicyPager struct {
+	aws.Pager
+}
+
+func (p *LookupPolicyPager) CurrentPage() *LookupPolicyOutput {
+	return p.Pager.CurrentPage().(*LookupPolicyOutput)
 }
 
 const opPublishSchema = "PublishSchema"
@@ -3596,6 +3575,7 @@ const opPublishSchema = "PublishSchema"
 type PublishSchemaRequest struct {
 	*aws.Request
 	Input *PublishSchemaInput
+	Copy  func(*PublishSchemaInput) PublishSchemaRequest
 }
 
 // Send marshals and sends the PublishSchema API request.
@@ -3637,7 +3617,7 @@ func (c *CloudDirectory) PublishSchemaRequest(input *PublishSchemaInput) Publish
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PublishSchemaRequest{Request: req, Input: input}
+	return PublishSchemaRequest{Request: req, Input: input, Copy: c.PublishSchemaRequest}
 }
 
 const opPutSchemaFromJson = "PutSchemaFromJson"
@@ -3646,6 +3626,7 @@ const opPutSchemaFromJson = "PutSchemaFromJson"
 type PutSchemaFromJsonRequest struct {
 	*aws.Request
 	Input *PutSchemaFromJsonInput
+	Copy  func(*PutSchemaFromJsonInput) PutSchemaFromJsonRequest
 }
 
 // Send marshals and sends the PutSchemaFromJson API request.
@@ -3688,7 +3669,7 @@ func (c *CloudDirectory) PutSchemaFromJsonRequest(input *PutSchemaFromJsonInput)
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutSchemaFromJsonRequest{Request: req, Input: input}
+	return PutSchemaFromJsonRequest{Request: req, Input: input, Copy: c.PutSchemaFromJsonRequest}
 }
 
 const opRemoveFacetFromObject = "RemoveFacetFromObject"
@@ -3697,6 +3678,7 @@ const opRemoveFacetFromObject = "RemoveFacetFromObject"
 type RemoveFacetFromObjectRequest struct {
 	*aws.Request
 	Input *RemoveFacetFromObjectInput
+	Copy  func(*RemoveFacetFromObjectInput) RemoveFacetFromObjectRequest
 }
 
 // Send marshals and sends the RemoveFacetFromObject API request.
@@ -3737,7 +3719,7 @@ func (c *CloudDirectory) RemoveFacetFromObjectRequest(input *RemoveFacetFromObje
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveFacetFromObjectRequest{Request: req, Input: input}
+	return RemoveFacetFromObjectRequest{Request: req, Input: input, Copy: c.RemoveFacetFromObjectRequest}
 }
 
 const opTagResource = "TagResource"
@@ -3746,6 +3728,7 @@ const opTagResource = "TagResource"
 type TagResourceRequest struct {
 	*aws.Request
 	Input *TagResourceInput
+	Copy  func(*TagResourceInput) TagResourceRequest
 }
 
 // Send marshals and sends the TagResource API request.
@@ -3786,7 +3769,7 @@ func (c *CloudDirectory) TagResourceRequest(input *TagResourceInput) TagResource
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return TagResourceRequest{Request: req, Input: input}
+	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
 const opUntagResource = "UntagResource"
@@ -3795,6 +3778,7 @@ const opUntagResource = "UntagResource"
 type UntagResourceRequest struct {
 	*aws.Request
 	Input *UntagResourceInput
+	Copy  func(*UntagResourceInput) UntagResourceRequest
 }
 
 // Send marshals and sends the UntagResource API request.
@@ -3835,7 +3819,7 @@ func (c *CloudDirectory) UntagResourceRequest(input *UntagResourceInput) UntagRe
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UntagResourceRequest{Request: req, Input: input}
+	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
 const opUpdateFacet = "UpdateFacet"
@@ -3844,6 +3828,7 @@ const opUpdateFacet = "UpdateFacet"
 type UpdateFacetRequest struct {
 	*aws.Request
 	Input *UpdateFacetInput
+	Copy  func(*UpdateFacetInput) UpdateFacetRequest
 }
 
 // Send marshals and sends the UpdateFacet API request.
@@ -3890,7 +3875,7 @@ func (c *CloudDirectory) UpdateFacetRequest(input *UpdateFacetInput) UpdateFacet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateFacetRequest{Request: req, Input: input}
+	return UpdateFacetRequest{Request: req, Input: input, Copy: c.UpdateFacetRequest}
 }
 
 const opUpdateObjectAttributes = "UpdateObjectAttributes"
@@ -3899,6 +3884,7 @@ const opUpdateObjectAttributes = "UpdateObjectAttributes"
 type UpdateObjectAttributesRequest struct {
 	*aws.Request
 	Input *UpdateObjectAttributesInput
+	Copy  func(*UpdateObjectAttributesInput) UpdateObjectAttributesRequest
 }
 
 // Send marshals and sends the UpdateObjectAttributes API request.
@@ -3939,7 +3925,7 @@ func (c *CloudDirectory) UpdateObjectAttributesRequest(input *UpdateObjectAttrib
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateObjectAttributesRequest{Request: req, Input: input}
+	return UpdateObjectAttributesRequest{Request: req, Input: input, Copy: c.UpdateObjectAttributesRequest}
 }
 
 const opUpdateSchema = "UpdateSchema"
@@ -3948,6 +3934,7 @@ const opUpdateSchema = "UpdateSchema"
 type UpdateSchemaRequest struct {
 	*aws.Request
 	Input *UpdateSchemaInput
+	Copy  func(*UpdateSchemaInput) UpdateSchemaRequest
 }
 
 // Send marshals and sends the UpdateSchema API request.
@@ -3989,7 +3976,7 @@ func (c *CloudDirectory) UpdateSchemaRequest(input *UpdateSchemaInput) UpdateSch
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateSchemaRequest{Request: req, Input: input}
+	return UpdateSchemaRequest{Request: req, Input: input, Copy: c.UpdateSchemaRequest}
 }
 
 const opUpdateTypedLinkFacet = "UpdateTypedLinkFacet"
@@ -3998,6 +3985,7 @@ const opUpdateTypedLinkFacet = "UpdateTypedLinkFacet"
 type UpdateTypedLinkFacetRequest struct {
 	*aws.Request
 	Input *UpdateTypedLinkFacetInput
+	Copy  func(*UpdateTypedLinkFacetInput) UpdateTypedLinkFacetRequest
 }
 
 // Send marshals and sends the UpdateTypedLinkFacet API request.
@@ -4038,7 +4026,7 @@ func (c *CloudDirectory) UpdateTypedLinkFacetRequest(input *UpdateTypedLinkFacet
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTypedLinkFacetRequest{Request: req, Input: input}
+	return UpdateTypedLinkFacetRequest{Request: req, Input: input, Copy: c.UpdateTypedLinkFacetRequest}
 }
 
 const opUpgradeAppliedSchema = "UpgradeAppliedSchema"
@@ -4047,6 +4035,7 @@ const opUpgradeAppliedSchema = "UpgradeAppliedSchema"
 type UpgradeAppliedSchemaRequest struct {
 	*aws.Request
 	Input *UpgradeAppliedSchemaInput
+	Copy  func(*UpgradeAppliedSchemaInput) UpgradeAppliedSchemaRequest
 }
 
 // Send marshals and sends the UpgradeAppliedSchema API request.
@@ -4092,7 +4081,7 @@ func (c *CloudDirectory) UpgradeAppliedSchemaRequest(input *UpgradeAppliedSchema
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpgradeAppliedSchemaRequest{Request: req, Input: input}
+	return UpgradeAppliedSchemaRequest{Request: req, Input: input, Copy: c.UpgradeAppliedSchemaRequest}
 }
 
 const opUpgradePublishedSchema = "UpgradePublishedSchema"
@@ -4101,6 +4090,7 @@ const opUpgradePublishedSchema = "UpgradePublishedSchema"
 type UpgradePublishedSchemaRequest struct {
 	*aws.Request
 	Input *UpgradePublishedSchemaInput
+	Copy  func(*UpgradePublishedSchemaInput) UpgradePublishedSchemaRequest
 }
 
 // Send marshals and sends the UpgradePublishedSchema API request.
@@ -4142,7 +4132,7 @@ func (c *CloudDirectory) UpgradePublishedSchemaRequest(input *UpgradePublishedSc
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpgradePublishedSchemaRequest{Request: req, Input: input}
+	return UpgradePublishedSchemaRequest{Request: req, Input: input, Copy: c.UpgradePublishedSchemaRequest}
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/AddFacetToObjectRequest

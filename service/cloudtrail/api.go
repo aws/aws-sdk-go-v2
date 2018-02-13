@@ -16,6 +16,7 @@ const opAddTags = "AddTags"
 type AddTagsRequest struct {
 	*aws.Request
 	Input *AddTagsInput
+	Copy  func(*AddTagsInput) AddTagsRequest
 }
 
 // Send marshals and sends the AddTags API request.
@@ -61,7 +62,7 @@ func (c *CloudTrail) AddTagsRequest(input *AddTagsInput) AddTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return AddTagsRequest{Request: req, Input: input}
+	return AddTagsRequest{Request: req, Input: input, Copy: c.AddTagsRequest}
 }
 
 const opCreateTrail = "CreateTrail"
@@ -70,6 +71,7 @@ const opCreateTrail = "CreateTrail"
 type CreateTrailRequest struct {
 	*aws.Request
 	Input *CreateTrailInput
+	Copy  func(*CreateTrailInput) CreateTrailRequest
 }
 
 // Send marshals and sends the CreateTrail API request.
@@ -112,7 +114,7 @@ func (c *CloudTrail) CreateTrailRequest(input *CreateTrailInput) CreateTrailRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTrailRequest{Request: req, Input: input}
+	return CreateTrailRequest{Request: req, Input: input, Copy: c.CreateTrailRequest}
 }
 
 const opDeleteTrail = "DeleteTrail"
@@ -121,6 +123,7 @@ const opDeleteTrail = "DeleteTrail"
 type DeleteTrailRequest struct {
 	*aws.Request
 	Input *DeleteTrailInput
+	Copy  func(*DeleteTrailInput) DeleteTrailRequest
 }
 
 // Send marshals and sends the DeleteTrail API request.
@@ -163,7 +166,7 @@ func (c *CloudTrail) DeleteTrailRequest(input *DeleteTrailInput) DeleteTrailRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTrailRequest{Request: req, Input: input}
+	return DeleteTrailRequest{Request: req, Input: input, Copy: c.DeleteTrailRequest}
 }
 
 const opDescribeTrails = "DescribeTrails"
@@ -172,6 +175,7 @@ const opDescribeTrails = "DescribeTrails"
 type DescribeTrailsRequest struct {
 	*aws.Request
 	Input *DescribeTrailsInput
+	Copy  func(*DescribeTrailsInput) DescribeTrailsRequest
 }
 
 // Send marshals and sends the DescribeTrails API request.
@@ -213,7 +217,7 @@ func (c *CloudTrail) DescribeTrailsRequest(input *DescribeTrailsInput) DescribeT
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DescribeTrailsRequest{Request: req, Input: input}
+	return DescribeTrailsRequest{Request: req, Input: input, Copy: c.DescribeTrailsRequest}
 }
 
 const opGetEventSelectors = "GetEventSelectors"
@@ -222,6 +226,7 @@ const opGetEventSelectors = "GetEventSelectors"
 type GetEventSelectorsRequest struct {
 	*aws.Request
 	Input *GetEventSelectorsInput
+	Copy  func(*GetEventSelectorsInput) GetEventSelectorsRequest
 }
 
 // Send marshals and sends the GetEventSelectors API request.
@@ -274,7 +279,7 @@ func (c *CloudTrail) GetEventSelectorsRequest(input *GetEventSelectorsInput) Get
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetEventSelectorsRequest{Request: req, Input: input}
+	return GetEventSelectorsRequest{Request: req, Input: input, Copy: c.GetEventSelectorsRequest}
 }
 
 const opGetTrailStatus = "GetTrailStatus"
@@ -283,6 +288,7 @@ const opGetTrailStatus = "GetTrailStatus"
 type GetTrailStatusRequest struct {
 	*aws.Request
 	Input *GetTrailStatusInput
+	Copy  func(*GetTrailStatusInput) GetTrailStatusRequest
 }
 
 // Send marshals and sends the GetTrailStatus API request.
@@ -327,7 +333,7 @@ func (c *CloudTrail) GetTrailStatusRequest(input *GetTrailStatusInput) GetTrailS
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTrailStatusRequest{Request: req, Input: input}
+	return GetTrailStatusRequest{Request: req, Input: input, Copy: c.GetTrailStatusRequest}
 }
 
 const opListPublicKeys = "ListPublicKeys"
@@ -336,6 +342,7 @@ const opListPublicKeys = "ListPublicKeys"
 type ListPublicKeysRequest struct {
 	*aws.Request
 	Input *ListPublicKeysInput
+	Copy  func(*ListPublicKeysInput) ListPublicKeysRequest
 }
 
 // Send marshals and sends the ListPublicKeys API request.
@@ -383,7 +390,7 @@ func (c *CloudTrail) ListPublicKeysRequest(input *ListPublicKeysInput) ListPubli
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListPublicKeysRequest{Request: req, Input: input}
+	return ListPublicKeysRequest{Request: req, Input: input, Copy: c.ListPublicKeysRequest}
 }
 
 const opListTags = "ListTags"
@@ -392,6 +399,7 @@ const opListTags = "ListTags"
 type ListTagsRequest struct {
 	*aws.Request
 	Input *ListTagsInput
+	Copy  func(*ListTagsInput) ListTagsRequest
 }
 
 // Send marshals and sends the ListTags API request.
@@ -432,7 +440,7 @@ func (c *CloudTrail) ListTagsRequest(input *ListTagsInput) ListTagsRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTagsRequest{Request: req, Input: input}
+	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
 }
 
 const opLookupEvents = "LookupEvents"
@@ -441,6 +449,7 @@ const opLookupEvents = "LookupEvents"
 type LookupEventsRequest struct {
 	*aws.Request
 	Input *LookupEventsInput
+	Copy  func(*LookupEventsInput) LookupEventsRequest
 }
 
 // Send marshals and sends the LookupEvents API request.
@@ -512,57 +521,53 @@ func (c *CloudTrail) LookupEventsRequest(input *LookupEventsInput) LookupEventsR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return LookupEventsRequest{Request: req, Input: input}
+	return LookupEventsRequest{Request: req, Input: input, Copy: c.LookupEventsRequest}
 }
 
-// LookupEventsPages iterates over the pages of a LookupEvents operation,
-// calling the "fn" function with the response data for each page. To stop
-// iterating, return false from the fn function.
-//
-// See LookupEvents method for more information on how to use this operation.
+// Paginate pages iterates over the pages of a LookupEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
 //
 // Note: This operation can generate multiple requests to a service.
 //
 //    // Example iterating over at most 3 pages of a LookupEvents operation.
-//    pageNum := 0
-//    err := client.LookupEventsPages(params,
-//        func(page *LookupEventsOutput, lastPage bool) bool {
-//            pageNum++
-//            fmt.Println(page)
-//            return pageNum <= 3
-//        })
+//		req := client.LookupEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
 //
-func (c *CloudTrail) LookupEventsPages(input *LookupEventsInput, fn func(*LookupEventsOutput, bool) bool) error {
-	return c.LookupEventsPagesWithContext(aws.BackgroundContext(), input, fn)
-}
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *LookupEventsRequest) Paginate(opts ...aws.Option) LookupEventsPager {
+	return LookupEventsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *LookupEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
 
-// LookupEventsPagesWithContext same as LookupEventsPages except
-// it takes a Context and allows setting request options on the pages.
-//
-// The context must be non-nil and will be used for request cancellation. If
-// the context is nil a panic will occur. In the future the SDK may create
-// sub-contexts for http.Requests. See https://golang.org/pkg/context/
-// for more information on using Contexts.
-func (c *CloudTrail) LookupEventsPagesWithContext(ctx aws.Context, input *LookupEventsInput, fn func(*LookupEventsOutput, bool) bool, opts ...aws.Option) error {
-	p := aws.Pagination{
-		NewRequest: func() (*aws.Request, error) {
-			var inCpy *LookupEventsInput
-			if input != nil {
-				tmp := *input
-				inCpy = &tmp
-			}
-			req := c.LookupEventsRequest(inCpy)
-			req.SetContext(ctx)
-			req.ApplyOptions(opts...)
-			return req.Request, nil
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
 		},
 	}
+}
 
-	cont := true
-	for p.Next() && cont {
-		cont = fn(p.Page().(*LookupEventsOutput), !p.HasNextPage())
-	}
-	return p.Err()
+// LookupEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type LookupEventsPager struct {
+	aws.Pager
+}
+
+func (p *LookupEventsPager) CurrentPage() *LookupEventsOutput {
+	return p.Pager.CurrentPage().(*LookupEventsOutput)
 }
 
 const opPutEventSelectors = "PutEventSelectors"
@@ -571,6 +576,7 @@ const opPutEventSelectors = "PutEventSelectors"
 type PutEventSelectorsRequest struct {
 	*aws.Request
 	Input *PutEventSelectorsInput
+	Copy  func(*PutEventSelectorsInput) PutEventSelectorsRequest
 }
 
 // Send marshals and sends the PutEventSelectors API request.
@@ -638,7 +644,7 @@ func (c *CloudTrail) PutEventSelectorsRequest(input *PutEventSelectorsInput) Put
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return PutEventSelectorsRequest{Request: req, Input: input}
+	return PutEventSelectorsRequest{Request: req, Input: input, Copy: c.PutEventSelectorsRequest}
 }
 
 const opRemoveTags = "RemoveTags"
@@ -647,6 +653,7 @@ const opRemoveTags = "RemoveTags"
 type RemoveTagsRequest struct {
 	*aws.Request
 	Input *RemoveTagsInput
+	Copy  func(*RemoveTagsInput) RemoveTagsRequest
 }
 
 // Send marshals and sends the RemoveTags API request.
@@ -687,7 +694,7 @@ func (c *CloudTrail) RemoveTagsRequest(input *RemoveTagsInput) RemoveTagsRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return RemoveTagsRequest{Request: req, Input: input}
+	return RemoveTagsRequest{Request: req, Input: input, Copy: c.RemoveTagsRequest}
 }
 
 const opStartLogging = "StartLogging"
@@ -696,6 +703,7 @@ const opStartLogging = "StartLogging"
 type StartLoggingRequest struct {
 	*aws.Request
 	Input *StartLoggingInput
+	Copy  func(*StartLoggingInput) StartLoggingRequest
 }
 
 // Send marshals and sends the StartLogging API request.
@@ -740,7 +748,7 @@ func (c *CloudTrail) StartLoggingRequest(input *StartLoggingInput) StartLoggingR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartLoggingRequest{Request: req, Input: input}
+	return StartLoggingRequest{Request: req, Input: input, Copy: c.StartLoggingRequest}
 }
 
 const opStopLogging = "StopLogging"
@@ -749,6 +757,7 @@ const opStopLogging = "StopLogging"
 type StopLoggingRequest struct {
 	*aws.Request
 	Input *StopLoggingInput
+	Copy  func(*StopLoggingInput) StopLoggingRequest
 }
 
 // Send marshals and sends the StopLogging API request.
@@ -795,7 +804,7 @@ func (c *CloudTrail) StopLoggingRequest(input *StopLoggingInput) StopLoggingRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StopLoggingRequest{Request: req, Input: input}
+	return StopLoggingRequest{Request: req, Input: input, Copy: c.StopLoggingRequest}
 }
 
 const opUpdateTrail = "UpdateTrail"
@@ -804,6 +813,7 @@ const opUpdateTrail = "UpdateTrail"
 type UpdateTrailRequest struct {
 	*aws.Request
 	Input *UpdateTrailInput
+	Copy  func(*UpdateTrailInput) UpdateTrailRequest
 }
 
 // Send marshals and sends the UpdateTrail API request.
@@ -849,7 +859,7 @@ func (c *CloudTrail) UpdateTrailRequest(input *UpdateTrailInput) UpdateTrailRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTrailRequest{Request: req, Input: input}
+	return UpdateTrailRequest{Request: req, Input: input, Copy: c.UpdateTrailRequest}
 }
 
 // Specifies the tags to add to a trail.

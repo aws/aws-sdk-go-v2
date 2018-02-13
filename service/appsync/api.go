@@ -14,6 +14,7 @@ const opCreateApiKey = "CreateApiKey"
 type CreateApiKeyRequest struct {
 	*aws.Request
 	Input *CreateApiKeyInput
+	Copy  func(*CreateApiKeyInput) CreateApiKeyRequest
 }
 
 // Send marshals and sends the CreateApiKey API request.
@@ -55,7 +56,7 @@ func (c *AppSync) CreateApiKeyRequest(input *CreateApiKeyInput) CreateApiKeyRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateApiKeyRequest{Request: req, Input: input}
+	return CreateApiKeyRequest{Request: req, Input: input, Copy: c.CreateApiKeyRequest}
 }
 
 const opCreateDataSource = "CreateDataSource"
@@ -64,6 +65,7 @@ const opCreateDataSource = "CreateDataSource"
 type CreateDataSourceRequest struct {
 	*aws.Request
 	Input *CreateDataSourceInput
+	Copy  func(*CreateDataSourceInput) CreateDataSourceRequest
 }
 
 // Send marshals and sends the CreateDataSource API request.
@@ -104,7 +106,7 @@ func (c *AppSync) CreateDataSourceRequest(input *CreateDataSourceInput) CreateDa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateDataSourceRequest{Request: req, Input: input}
+	return CreateDataSourceRequest{Request: req, Input: input, Copy: c.CreateDataSourceRequest}
 }
 
 const opCreateGraphqlApi = "CreateGraphqlApi"
@@ -113,6 +115,7 @@ const opCreateGraphqlApi = "CreateGraphqlApi"
 type CreateGraphqlApiRequest struct {
 	*aws.Request
 	Input *CreateGraphqlApiInput
+	Copy  func(*CreateGraphqlApiInput) CreateGraphqlApiRequest
 }
 
 // Send marshals and sends the CreateGraphqlApi API request.
@@ -153,7 +156,7 @@ func (c *AppSync) CreateGraphqlApiRequest(input *CreateGraphqlApiInput) CreateGr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateGraphqlApiRequest{Request: req, Input: input}
+	return CreateGraphqlApiRequest{Request: req, Input: input, Copy: c.CreateGraphqlApiRequest}
 }
 
 const opCreateResolver = "CreateResolver"
@@ -162,6 +165,7 @@ const opCreateResolver = "CreateResolver"
 type CreateResolverRequest struct {
 	*aws.Request
 	Input *CreateResolverInput
+	Copy  func(*CreateResolverInput) CreateResolverRequest
 }
 
 // Send marshals and sends the CreateResolver API request.
@@ -205,7 +209,7 @@ func (c *AppSync) CreateResolverRequest(input *CreateResolverInput) CreateResolv
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateResolverRequest{Request: req, Input: input}
+	return CreateResolverRequest{Request: req, Input: input, Copy: c.CreateResolverRequest}
 }
 
 const opCreateType = "CreateType"
@@ -214,6 +218,7 @@ const opCreateType = "CreateType"
 type CreateTypeRequest struct {
 	*aws.Request
 	Input *CreateTypeInput
+	Copy  func(*CreateTypeInput) CreateTypeRequest
 }
 
 // Send marshals and sends the CreateType API request.
@@ -254,7 +259,7 @@ func (c *AppSync) CreateTypeRequest(input *CreateTypeInput) CreateTypeRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return CreateTypeRequest{Request: req, Input: input}
+	return CreateTypeRequest{Request: req, Input: input, Copy: c.CreateTypeRequest}
 }
 
 const opDeleteApiKey = "DeleteApiKey"
@@ -263,6 +268,7 @@ const opDeleteApiKey = "DeleteApiKey"
 type DeleteApiKeyRequest struct {
 	*aws.Request
 	Input *DeleteApiKeyInput
+	Copy  func(*DeleteApiKeyInput) DeleteApiKeyRequest
 }
 
 // Send marshals and sends the DeleteApiKey API request.
@@ -303,7 +309,7 @@ func (c *AppSync) DeleteApiKeyRequest(input *DeleteApiKeyInput) DeleteApiKeyRequ
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteApiKeyRequest{Request: req, Input: input}
+	return DeleteApiKeyRequest{Request: req, Input: input, Copy: c.DeleteApiKeyRequest}
 }
 
 const opDeleteDataSource = "DeleteDataSource"
@@ -312,6 +318,7 @@ const opDeleteDataSource = "DeleteDataSource"
 type DeleteDataSourceRequest struct {
 	*aws.Request
 	Input *DeleteDataSourceInput
+	Copy  func(*DeleteDataSourceInput) DeleteDataSourceRequest
 }
 
 // Send marshals and sends the DeleteDataSource API request.
@@ -352,7 +359,7 @@ func (c *AppSync) DeleteDataSourceRequest(input *DeleteDataSourceInput) DeleteDa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteDataSourceRequest{Request: req, Input: input}
+	return DeleteDataSourceRequest{Request: req, Input: input, Copy: c.DeleteDataSourceRequest}
 }
 
 const opDeleteGraphqlApi = "DeleteGraphqlApi"
@@ -361,6 +368,7 @@ const opDeleteGraphqlApi = "DeleteGraphqlApi"
 type DeleteGraphqlApiRequest struct {
 	*aws.Request
 	Input *DeleteGraphqlApiInput
+	Copy  func(*DeleteGraphqlApiInput) DeleteGraphqlApiRequest
 }
 
 // Send marshals and sends the DeleteGraphqlApi API request.
@@ -401,7 +409,7 @@ func (c *AppSync) DeleteGraphqlApiRequest(input *DeleteGraphqlApiInput) DeleteGr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteGraphqlApiRequest{Request: req, Input: input}
+	return DeleteGraphqlApiRequest{Request: req, Input: input, Copy: c.DeleteGraphqlApiRequest}
 }
 
 const opDeleteResolver = "DeleteResolver"
@@ -410,6 +418,7 @@ const opDeleteResolver = "DeleteResolver"
 type DeleteResolverRequest struct {
 	*aws.Request
 	Input *DeleteResolverInput
+	Copy  func(*DeleteResolverInput) DeleteResolverRequest
 }
 
 // Send marshals and sends the DeleteResolver API request.
@@ -450,7 +459,7 @@ func (c *AppSync) DeleteResolverRequest(input *DeleteResolverInput) DeleteResolv
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteResolverRequest{Request: req, Input: input}
+	return DeleteResolverRequest{Request: req, Input: input, Copy: c.DeleteResolverRequest}
 }
 
 const opDeleteType = "DeleteType"
@@ -459,6 +468,7 @@ const opDeleteType = "DeleteType"
 type DeleteTypeRequest struct {
 	*aws.Request
 	Input *DeleteTypeInput
+	Copy  func(*DeleteTypeInput) DeleteTypeRequest
 }
 
 // Send marshals and sends the DeleteType API request.
@@ -499,7 +509,7 @@ func (c *AppSync) DeleteTypeRequest(input *DeleteTypeInput) DeleteTypeRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return DeleteTypeRequest{Request: req, Input: input}
+	return DeleteTypeRequest{Request: req, Input: input, Copy: c.DeleteTypeRequest}
 }
 
 const opGetDataSource = "GetDataSource"
@@ -508,6 +518,7 @@ const opGetDataSource = "GetDataSource"
 type GetDataSourceRequest struct {
 	*aws.Request
 	Input *GetDataSourceInput
+	Copy  func(*GetDataSourceInput) GetDataSourceRequest
 }
 
 // Send marshals and sends the GetDataSource API request.
@@ -548,7 +559,7 @@ func (c *AppSync) GetDataSourceRequest(input *GetDataSourceInput) GetDataSourceR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetDataSourceRequest{Request: req, Input: input}
+	return GetDataSourceRequest{Request: req, Input: input, Copy: c.GetDataSourceRequest}
 }
 
 const opGetGraphqlApi = "GetGraphqlApi"
@@ -557,6 +568,7 @@ const opGetGraphqlApi = "GetGraphqlApi"
 type GetGraphqlApiRequest struct {
 	*aws.Request
 	Input *GetGraphqlApiInput
+	Copy  func(*GetGraphqlApiInput) GetGraphqlApiRequest
 }
 
 // Send marshals and sends the GetGraphqlApi API request.
@@ -597,7 +609,7 @@ func (c *AppSync) GetGraphqlApiRequest(input *GetGraphqlApiInput) GetGraphqlApiR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetGraphqlApiRequest{Request: req, Input: input}
+	return GetGraphqlApiRequest{Request: req, Input: input, Copy: c.GetGraphqlApiRequest}
 }
 
 const opGetIntrospectionSchema = "GetIntrospectionSchema"
@@ -606,6 +618,7 @@ const opGetIntrospectionSchema = "GetIntrospectionSchema"
 type GetIntrospectionSchemaRequest struct {
 	*aws.Request
 	Input *GetIntrospectionSchemaInput
+	Copy  func(*GetIntrospectionSchemaInput) GetIntrospectionSchemaRequest
 }
 
 // Send marshals and sends the GetIntrospectionSchema API request.
@@ -646,7 +659,7 @@ func (c *AppSync) GetIntrospectionSchemaRequest(input *GetIntrospectionSchemaInp
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetIntrospectionSchemaRequest{Request: req, Input: input}
+	return GetIntrospectionSchemaRequest{Request: req, Input: input, Copy: c.GetIntrospectionSchemaRequest}
 }
 
 const opGetResolver = "GetResolver"
@@ -655,6 +668,7 @@ const opGetResolver = "GetResolver"
 type GetResolverRequest struct {
 	*aws.Request
 	Input *GetResolverInput
+	Copy  func(*GetResolverInput) GetResolverRequest
 }
 
 // Send marshals and sends the GetResolver API request.
@@ -695,7 +709,7 @@ func (c *AppSync) GetResolverRequest(input *GetResolverInput) GetResolverRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetResolverRequest{Request: req, Input: input}
+	return GetResolverRequest{Request: req, Input: input, Copy: c.GetResolverRequest}
 }
 
 const opGetSchemaCreationStatus = "GetSchemaCreationStatus"
@@ -704,6 +718,7 @@ const opGetSchemaCreationStatus = "GetSchemaCreationStatus"
 type GetSchemaCreationStatusRequest struct {
 	*aws.Request
 	Input *GetSchemaCreationStatusInput
+	Copy  func(*GetSchemaCreationStatusInput) GetSchemaCreationStatusRequest
 }
 
 // Send marshals and sends the GetSchemaCreationStatus API request.
@@ -744,7 +759,7 @@ func (c *AppSync) GetSchemaCreationStatusRequest(input *GetSchemaCreationStatusI
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetSchemaCreationStatusRequest{Request: req, Input: input}
+	return GetSchemaCreationStatusRequest{Request: req, Input: input, Copy: c.GetSchemaCreationStatusRequest}
 }
 
 const opGetType = "GetType"
@@ -753,6 +768,7 @@ const opGetType = "GetType"
 type GetTypeRequest struct {
 	*aws.Request
 	Input *GetTypeInput
+	Copy  func(*GetTypeInput) GetTypeRequest
 }
 
 // Send marshals and sends the GetType API request.
@@ -793,7 +809,7 @@ func (c *AppSync) GetTypeRequest(input *GetTypeInput) GetTypeRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return GetTypeRequest{Request: req, Input: input}
+	return GetTypeRequest{Request: req, Input: input, Copy: c.GetTypeRequest}
 }
 
 const opListApiKeys = "ListApiKeys"
@@ -802,6 +818,7 @@ const opListApiKeys = "ListApiKeys"
 type ListApiKeysRequest struct {
 	*aws.Request
 	Input *ListApiKeysInput
+	Copy  func(*ListApiKeysInput) ListApiKeysRequest
 }
 
 // Send marshals and sends the ListApiKeys API request.
@@ -842,7 +859,7 @@ func (c *AppSync) ListApiKeysRequest(input *ListApiKeysInput) ListApiKeysRequest
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListApiKeysRequest{Request: req, Input: input}
+	return ListApiKeysRequest{Request: req, Input: input, Copy: c.ListApiKeysRequest}
 }
 
 const opListDataSources = "ListDataSources"
@@ -851,6 +868,7 @@ const opListDataSources = "ListDataSources"
 type ListDataSourcesRequest struct {
 	*aws.Request
 	Input *ListDataSourcesInput
+	Copy  func(*ListDataSourcesInput) ListDataSourcesRequest
 }
 
 // Send marshals and sends the ListDataSources API request.
@@ -891,7 +909,7 @@ func (c *AppSync) ListDataSourcesRequest(input *ListDataSourcesInput) ListDataSo
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListDataSourcesRequest{Request: req, Input: input}
+	return ListDataSourcesRequest{Request: req, Input: input, Copy: c.ListDataSourcesRequest}
 }
 
 const opListGraphqlApis = "ListGraphqlApis"
@@ -900,6 +918,7 @@ const opListGraphqlApis = "ListGraphqlApis"
 type ListGraphqlApisRequest struct {
 	*aws.Request
 	Input *ListGraphqlApisInput
+	Copy  func(*ListGraphqlApisInput) ListGraphqlApisRequest
 }
 
 // Send marshals and sends the ListGraphqlApis API request.
@@ -940,7 +959,7 @@ func (c *AppSync) ListGraphqlApisRequest(input *ListGraphqlApisInput) ListGraphq
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListGraphqlApisRequest{Request: req, Input: input}
+	return ListGraphqlApisRequest{Request: req, Input: input, Copy: c.ListGraphqlApisRequest}
 }
 
 const opListResolvers = "ListResolvers"
@@ -949,6 +968,7 @@ const opListResolvers = "ListResolvers"
 type ListResolversRequest struct {
 	*aws.Request
 	Input *ListResolversInput
+	Copy  func(*ListResolversInput) ListResolversRequest
 }
 
 // Send marshals and sends the ListResolvers API request.
@@ -989,7 +1009,7 @@ func (c *AppSync) ListResolversRequest(input *ListResolversInput) ListResolversR
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListResolversRequest{Request: req, Input: input}
+	return ListResolversRequest{Request: req, Input: input, Copy: c.ListResolversRequest}
 }
 
 const opListTypes = "ListTypes"
@@ -998,6 +1018,7 @@ const opListTypes = "ListTypes"
 type ListTypesRequest struct {
 	*aws.Request
 	Input *ListTypesInput
+	Copy  func(*ListTypesInput) ListTypesRequest
 }
 
 // Send marshals and sends the ListTypes API request.
@@ -1038,7 +1059,7 @@ func (c *AppSync) ListTypesRequest(input *ListTypesInput) ListTypesRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return ListTypesRequest{Request: req, Input: input}
+	return ListTypesRequest{Request: req, Input: input, Copy: c.ListTypesRequest}
 }
 
 const opStartSchemaCreation = "StartSchemaCreation"
@@ -1047,6 +1068,7 @@ const opStartSchemaCreation = "StartSchemaCreation"
 type StartSchemaCreationRequest struct {
 	*aws.Request
 	Input *StartSchemaCreationInput
+	Copy  func(*StartSchemaCreationInput) StartSchemaCreationRequest
 }
 
 // Send marshals and sends the StartSchemaCreation API request.
@@ -1089,7 +1111,7 @@ func (c *AppSync) StartSchemaCreationRequest(input *StartSchemaCreationInput) St
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return StartSchemaCreationRequest{Request: req, Input: input}
+	return StartSchemaCreationRequest{Request: req, Input: input, Copy: c.StartSchemaCreationRequest}
 }
 
 const opUpdateDataSource = "UpdateDataSource"
@@ -1098,6 +1120,7 @@ const opUpdateDataSource = "UpdateDataSource"
 type UpdateDataSourceRequest struct {
 	*aws.Request
 	Input *UpdateDataSourceInput
+	Copy  func(*UpdateDataSourceInput) UpdateDataSourceRequest
 }
 
 // Send marshals and sends the UpdateDataSource API request.
@@ -1138,7 +1161,7 @@ func (c *AppSync) UpdateDataSourceRequest(input *UpdateDataSourceInput) UpdateDa
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateDataSourceRequest{Request: req, Input: input}
+	return UpdateDataSourceRequest{Request: req, Input: input, Copy: c.UpdateDataSourceRequest}
 }
 
 const opUpdateGraphqlApi = "UpdateGraphqlApi"
@@ -1147,6 +1170,7 @@ const opUpdateGraphqlApi = "UpdateGraphqlApi"
 type UpdateGraphqlApiRequest struct {
 	*aws.Request
 	Input *UpdateGraphqlApiInput
+	Copy  func(*UpdateGraphqlApiInput) UpdateGraphqlApiRequest
 }
 
 // Send marshals and sends the UpdateGraphqlApi API request.
@@ -1187,7 +1211,7 @@ func (c *AppSync) UpdateGraphqlApiRequest(input *UpdateGraphqlApiInput) UpdateGr
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateGraphqlApiRequest{Request: req, Input: input}
+	return UpdateGraphqlApiRequest{Request: req, Input: input, Copy: c.UpdateGraphqlApiRequest}
 }
 
 const opUpdateResolver = "UpdateResolver"
@@ -1196,6 +1220,7 @@ const opUpdateResolver = "UpdateResolver"
 type UpdateResolverRequest struct {
 	*aws.Request
 	Input *UpdateResolverInput
+	Copy  func(*UpdateResolverInput) UpdateResolverRequest
 }
 
 // Send marshals and sends the UpdateResolver API request.
@@ -1236,7 +1261,7 @@ func (c *AppSync) UpdateResolverRequest(input *UpdateResolverInput) UpdateResolv
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateResolverRequest{Request: req, Input: input}
+	return UpdateResolverRequest{Request: req, Input: input, Copy: c.UpdateResolverRequest}
 }
 
 const opUpdateType = "UpdateType"
@@ -1245,6 +1270,7 @@ const opUpdateType = "UpdateType"
 type UpdateTypeRequest struct {
 	*aws.Request
 	Input *UpdateTypeInput
+	Copy  func(*UpdateTypeInput) UpdateTypeRequest
 }
 
 // Send marshals and sends the UpdateType API request.
@@ -1285,7 +1311,7 @@ func (c *AppSync) UpdateTypeRequest(input *UpdateTypeInput) UpdateTypeRequest {
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
-	return UpdateTypeRequest{Request: req, Input: input}
+	return UpdateTypeRequest{Request: req, Input: input, Copy: c.UpdateTypeRequest}
 }
 
 // Describes an API key.
