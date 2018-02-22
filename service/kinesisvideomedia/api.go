@@ -145,13 +145,13 @@ func (s GetMediaInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -236,7 +236,7 @@ func (s GetMediaOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ContentType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	// Skipping Payload Output type's body not valid.
 	return nil
@@ -331,19 +331,19 @@ func (s StartSelector) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AfterFragmentNumber
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AfterFragmentNumber", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AfterFragmentNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ContinuationToken != nil {
 		v := *s.ContinuationToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContinuationToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ContinuationToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.StartSelectorType) > 0 {
 		v := s.StartSelectorType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartSelectorType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartSelectorType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.StartTimestamp != nil {
 		v := *s.StartTimestamp

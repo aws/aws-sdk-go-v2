@@ -97,7 +97,7 @@ type nestedShape struct {
 
 func (s *nestedShape) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Value != nil {
-		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{protocol.StringValue(*s.Value)}, protocol.Metadata{})
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(*s.Value)}, protocol.Metadata{})
 	}
 	return nil
 }

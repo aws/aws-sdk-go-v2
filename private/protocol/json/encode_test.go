@@ -170,7 +170,7 @@ type payloadShape struct {
 
 func (s *payloadShape) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Value != nil {
-		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{protocol.StringValue(*s.Value)}, protocol.Metadata{})
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(*s.Value)}, protocol.Metadata{})
 	}
 	if s.IntVal != nil {
 		e.SetValue(protocol.BodyTarget, "intval", protocol.Int64Value(*s.IntVal), protocol.Metadata{})
@@ -187,7 +187,7 @@ func (s *payloadShape) MarshalFields(e protocol.FieldEncoder) error {
 		me := e.Map(protocol.BodyTarget, "mapstr", protocol.Metadata{})
 		me.Start()
 		for k, v := range s.MapStr {
-			me.MapSetValue(k, protocol.QuotedValue{protocol.StringValue(*v)})
+			me.MapSetValue(k, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(*v)})
 		}
 		me.End()
 	}
@@ -197,7 +197,7 @@ func (s *payloadShape) MarshalFields(e protocol.FieldEncoder) error {
 		})
 		me.Start()
 		for k, v := range s.MapFlatten {
-			me.MapSetValue(k, protocol.QuotedValue{protocol.StringValue(*v)})
+			me.MapSetValue(k, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(*v)})
 		}
 		me.End()
 	}
@@ -207,7 +207,7 @@ func (s *payloadShape) MarshalFields(e protocol.FieldEncoder) error {
 		})
 		me.Start()
 		for k, v := range s.MapNamed {
-			me.MapSetValue(k, protocol.QuotedValue{protocol.StringValue(*v)})
+			me.MapSetValue(k, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(*v)})
 		}
 		me.End()
 	}
@@ -243,7 +243,7 @@ func (s *payloadShape) MarshalFields(e protocol.FieldEncoder) error {
 		le := e.List(protocol.BodyTarget, "liststr", protocol.Metadata{})
 		le.Start()
 		for _, v := range s.ListStr {
-			le.ListAddValue(protocol.QuotedValue{protocol.StringValue(*v)})
+			le.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(*v)})
 		}
 		le.End()
 	}
@@ -253,7 +253,7 @@ func (s *payloadShape) MarshalFields(e protocol.FieldEncoder) error {
 		})
 		le.Start()
 		for _, v := range s.ListFlatten {
-			le.ListAddValue(protocol.QuotedValue{protocol.StringValue(*v)})
+			le.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(*v)})
 		}
 		le.End()
 	}
@@ -263,7 +263,7 @@ func (s *payloadShape) MarshalFields(e protocol.FieldEncoder) error {
 		})
 		le.Start()
 		for _, v := range s.ListNamed {
-			le.ListAddValue(protocol.QuotedValue{protocol.StringValue(*v)})
+			le.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(*v)})
 		}
 		le.End()
 	}
@@ -306,13 +306,13 @@ type nestedShape struct {
 
 func (s *nestedShape) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Value != nil {
-		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{protocol.StringValue(*s.Value)}, protocol.Metadata{})
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(*s.Value)}, protocol.Metadata{})
 	}
 	if s.IntVal != nil {
 		e.SetValue(protocol.BodyTarget, "intval", protocol.Int64Value(*s.IntVal), protocol.Metadata{})
 	}
 	if s.Prefixed != nil {
-		e.SetValue(protocol.BodyTarget, "prefixed", protocol.QuotedValue{protocol.StringValue(*s.Prefixed)}, protocol.Metadata{})
+		e.SetValue(protocol.BodyTarget, "prefixed", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(*s.Prefixed)}, protocol.Metadata{})
 	}
 	return nil
 }

@@ -169,7 +169,7 @@ func (s Fragment) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.FragmentNumber
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FragmentNumber", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "FragmentNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.FragmentSizeInBytes != nil {
 		v := *s.FragmentSizeInBytes
@@ -246,7 +246,7 @@ func (s FragmentSelector) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.FragmentSelectorType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FragmentSelectorType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "FragmentSelectorType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.TimestampRange != nil {
 		v := s.TimestampRange
@@ -314,7 +314,7 @@ func (s GetMediaForFragmentListInput) MarshalFields(e protocol.FieldEncoder) err
 		ls0 := e.List(protocol.BodyTarget, "Fragments", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -323,7 +323,7 @@ func (s GetMediaForFragmentListInput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -382,7 +382,7 @@ func (s GetMediaForFragmentListOutput) MarshalFields(e protocol.FieldEncoder) er
 		v := *s.ContentType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	// Skipping Payload Output type's body not valid.
 	return nil
@@ -468,13 +468,13 @@ func (s ListFragmentsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -527,7 +527,7 @@ func (s ListFragmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

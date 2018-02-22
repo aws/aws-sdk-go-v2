@@ -125,19 +125,19 @@ func (s InvokeEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Accept
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Accept", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Accept", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ContentType != nil {
 		v := *s.ContentType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.EndpointName != nil {
 		v := *s.EndpointName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "EndpointName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "EndpointName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Body != nil {
 		v := s.Body
@@ -187,13 +187,13 @@ func (s InvokeEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ContentType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.InvokedProductionVariant != nil {
 		v := *s.InvokedProductionVariant
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-Amzn-Invoked-Production-Variant", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-Amzn-Invoked-Production-Variant", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Body != nil {
 		v := s.Body

@@ -232,7 +232,7 @@ var marshalShapeRefTmpl = template.Must(template.New("marshalShapeRefTmpl").Func
 		{{- $helperName := $.EncodeHelperName "map" -}}
 			{{ $helperName }}
 	{{- else if $.Ref.Shape.IsEnum -}}
-	{{ if $.Quoted }}protocol.QuotedValue{ {{ end }}v{{ if $.Quoted }} }  {{ end }}
+	{{ if $.Quoted }}protocol.QuotedValue{ValueMarshaler: {{ end }}v{{ if $.Quoted }} }  {{ end }}
 	{{- else if $.IsShapeType "structure" -}}
 		v
 	{{- else if $.IsShapeType "timestamp" -}}
@@ -248,7 +248,7 @@ var marshalShapeRefTmpl = template.Must(template.New("marshalShapeRefTmpl").Func
 	{{- else if $.IsPayloadStream -}}
 		protocol.{{ $.GoType }}{{ $.MarshalerType }}{V:v}
 	{{- else -}}
-	{{ if $.Quoted }}protocol.QuotedValue{ {{ end }}protocol.{{ $.GoType }}{{ $.MarshalerType }}(v){{ if $.Quoted }} } {{ end }}
+	{{ if $.Quoted }}protocol.QuotedValue{ValueMarshaler: {{ end }}protocol.{{ $.GoType }}{{ $.MarshalerType }}(v){{ if $.Quoted }} } {{ end }}
 	{{- end -}}
 {{- end }}
 
@@ -413,7 +413,7 @@ func Collection(ref marshalShapeRef, level int) string {
 				buf.WriteString(fmt.Sprintf("%s.ListAddValue(protocol.TimeValue{V: v%d})\n", parentVar, level))
 			} else {
 				if ref.Quoted() {
-					buf.WriteString(fmt.Sprintf("%s.ListAddValue(protocol.QuotedValue{protocol.%s%s(v%d)})\n", parentVar, ref.GoType(), ref.MarshalerType(), level))
+					buf.WriteString(fmt.Sprintf("%s.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.%s%s(v%d)})\n", parentVar, ref.GoType(), ref.MarshalerType(), level))
 				} else {
 					buf.WriteString(fmt.Sprintf("%s.ListAddValue(protocol.%s%s(v%d))\n", parentVar, ref.GoType(), ref.MarshalerType(), level))
 				}
@@ -427,7 +427,7 @@ func Collection(ref marshalShapeRef, level int) string {
 				buf.WriteString(fmt.Sprintf("%s.MapSetValue(k%d, protocol.TimeValue{V: v%d})\n", parentVar, level, level))
 			} else {
 				if ref.Quoted() {
-					buf.WriteString(fmt.Sprintf("%s.MapSetValue(k%d, protocol.QuotedValue{protocol.%s%s(v%d)})\n", parentVar, level, ref.GoType(), ref.MarshalerType(), level))
+					buf.WriteString(fmt.Sprintf("%s.MapSetValue(k%d, protocol.QuotedValue{ValueMarshaler: protocol.%s%s(v%d)})\n", parentVar, level, ref.GoType(), ref.MarshalerType(), level))
 				} else {
 					buf.WriteString(fmt.Sprintf("%s.MapSetValue(k%d, protocol.%s%s(v%d))\n", parentVar, level, ref.GoType(), ref.MarshalerType(), level))
 				}

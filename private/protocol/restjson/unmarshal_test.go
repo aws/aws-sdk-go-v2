@@ -226,7 +226,7 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation1Output) MarshalFi
 		v := *s.Str
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Str", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Str", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TrueBool != nil {
 		v := *s.TrueBool
@@ -238,13 +238,13 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation1Output) MarshalFi
 		v := *s.ImaHeader
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ImaHeader", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "ImaHeader", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ImaHeaderLocation != nil {
 		v := *s.ImaHeaderLocation
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Foo", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "X-Foo", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	// ignoring invalid encode state, StatusCode. Status
 	return nil
@@ -363,7 +363,7 @@ func (s OutputService2TestShapeBlobContainer) MarshalFields(e protocol.FieldEnco
 		v := s.Foo
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "foo", protocol.QuotedValue{protocol.BytesValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "foo", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
 	}
 	return nil
 }
@@ -400,7 +400,7 @@ func (s OutputService2TestShapeOutputService2TestCaseOperation1Output) MarshalFi
 		v := s.BlobMember
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BlobMember", protocol.QuotedValue{protocol.BytesValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "BlobMember", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
 	}
 	if s.StructMember != nil {
 		v := s.StructMember
@@ -702,7 +702,7 @@ func (s OutputService4TestShapeOutputService4TestCaseOperation1Output) MarshalFi
 		ls0 := e.List(protocol.BodyTarget, "ListMember", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -862,7 +862,7 @@ func (s OutputService5TestShapeSingleStruct) MarshalFields(e protocol.FieldEncod
 		v := *s.Foo
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Foo", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Foo", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1281,7 +1281,7 @@ func (s OutputService8TestShapeOutputService8TestCaseOperation1Output) MarshalFi
 		v := *s.StrType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StrType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StrType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1420,7 +1420,7 @@ func (s OutputService9TestShapeOutputService9TestCaseOperation1Output) MarshalFi
 		ms0 := e.Map(protocol.HeadersTarget, "AllHeaders", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -1432,7 +1432,7 @@ func (s OutputService9TestShapeOutputService9TestCaseOperation1Output) MarshalFi
 		ms0 := e.Map(protocol.HeadersTarget, "X-", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -1552,7 +1552,7 @@ func (s OutputService10TestShapeBodyStructure) MarshalFields(e protocol.FieldEnc
 		v := *s.Foo
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Foo", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Foo", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1588,7 +1588,7 @@ func (s OutputService10TestShapeOutputService10TestCaseOperation1Output) Marshal
 		v := *s.Header
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "X-Foo", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "X-Foo", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Data != nil {
 		v := s.Data
@@ -2183,7 +2183,7 @@ func (s OutputService13TestShapeOutputService13TestCaseOperation2Input) MarshalF
 		v := s.FooEnum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FooEnum", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "FooEnum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.ListEnums) > 0 {
 		v := s.ListEnums
@@ -2192,7 +2192,7 @@ func (s OutputService13TestShapeOutputService13TestCaseOperation2Input) MarshalF
 		ls0 := e.List(protocol.BodyTarget, "ListEnums", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -2201,7 +2201,7 @@ func (s OutputService13TestShapeOutputService13TestCaseOperation2Input) MarshalF
 		v := s.HeaderEnum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-enum", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-enum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
