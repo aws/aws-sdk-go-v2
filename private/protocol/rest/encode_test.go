@@ -279,7 +279,7 @@ func TestSetQueryMapList(t *testing.T) {
 	if e, a := 2, len(query); e != a {
 		t.Errorf("expect %d query values, got %d", e, a)
 	}
-	for k, vs := range map[string][]string{"a": []string{"a1", "a2"}, "b": []string{"b1", "b2"}} {
+	for k, vs := range map[string][]string{"a": {"a1", "a2"}, "b": {"b1", "b2"}} {
 		as, ok := query[k]
 		if !ok {
 			t.Fatalf("expect %s to exist, was not", k)

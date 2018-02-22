@@ -56,7 +56,7 @@ func TestPagination(t *testing.T) {
 		},
 	}
 
-	retryer := aws.DefaultRetryer{NumMaxRetries:2}
+	retryer := aws.DefaultRetryer{NumMaxRetries: 2}
 	op := aws.Operation{
 		Name: "Operation",
 		Paginator: &aws.Paginator{
@@ -158,7 +158,7 @@ func TestPaginationTruncation(t *testing.T) {
 	}
 
 	reqNum := 0
-	retryer := aws.DefaultRetryer{NumMaxRetries:2}
+	retryer := aws.DefaultRetryer{NumMaxRetries: 2}
 	ops := []aws.Operation{
 		{
 			Name: "Operation",
@@ -269,7 +269,7 @@ func BenchmarkPagination(b *testing.B) {
 		{aws.String("3"), aws.String("")},
 	}
 
-	retryer := aws.DefaultRetryer{NumMaxRetries:2}
+	retryer := aws.DefaultRetryer{NumMaxRetries: 2}
 	op := aws.Operation{
 		Name: "Operation",
 		Paginator: &aws.Paginator{
