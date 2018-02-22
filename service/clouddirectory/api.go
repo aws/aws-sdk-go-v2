@@ -4235,7 +4235,7 @@ func (s AddFacetToObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4319,13 +4319,13 @@ func (s ApplySchemaInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.PublishedSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PublishedSchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "PublishedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4367,13 +4367,13 @@ func (s ApplySchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AppliedSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AppliedSchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AppliedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4456,7 +4456,7 @@ func (s AttachObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LinkName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ParentReference != nil {
 		v := s.ParentReference
@@ -4468,7 +4468,7 @@ func (s AttachObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4504,7 +4504,7 @@ func (s AttachObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AttachedObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AttachedObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AttachedObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4575,7 +4575,7 @@ func (s AttachPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4679,7 +4679,7 @@ func (s AttachToIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4715,7 +4715,7 @@ func (s AttachToIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AttachedObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AttachedObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AttachedObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4840,7 +4840,7 @@ func (s AttachTypedLinkInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4947,19 +4947,19 @@ func (s AttributeKey) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.FacetName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FacetName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "FacetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5083,7 +5083,7 @@ func (s AttributeNameAndValue) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AttributeName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Value != nil {
 		v := s.Value
@@ -5277,7 +5277,7 @@ func (s BatchAttachObject) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LinkName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ParentReference != nil {
 		v := s.ParentReference
@@ -5313,7 +5313,7 @@ func (s BatchAttachObjectResponse) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.AttachedObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "attachedObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "attachedObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5488,7 +5488,7 @@ func (s BatchAttachToIndexResponse) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.AttachedObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AttachedObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AttachedObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5706,7 +5706,7 @@ func (s BatchCreateIndex) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BatchReferenceName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BatchReferenceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "BatchReferenceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.IsUnique != nil {
 		v := *s.IsUnique
@@ -5718,7 +5718,7 @@ func (s BatchCreateIndex) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LinkName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.OrderedIndexedAttributeList) > 0 {
 		v := s.OrderedIndexedAttributeList
@@ -5766,7 +5766,7 @@ func (s BatchCreateIndexResponse) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5868,13 +5868,13 @@ func (s BatchCreateObject) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BatchReferenceName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BatchReferenceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "BatchReferenceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LinkName != nil {
 		v := *s.LinkName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ObjectAttributeList) > 0 {
 		v := s.ObjectAttributeList
@@ -5934,7 +5934,7 @@ func (s BatchCreateObjectResponse) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6093,7 +6093,7 @@ func (s BatchDetachFromIndexResponse) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.DetachedObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DetachedObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DetachedObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6161,13 +6161,13 @@ func (s BatchDetachObject) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BatchReferenceName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BatchReferenceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "BatchReferenceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LinkName != nil {
 		v := *s.LinkName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ParentReference != nil {
 		v := s.ParentReference
@@ -6203,7 +6203,7 @@ func (s BatchDetachObjectResponse) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.DetachedObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "detachedObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "detachedObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6439,7 +6439,7 @@ func (s BatchGetObjectInformationResponse) MarshalFields(e protocol.FieldEncoder
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SchemaFacets) > 0 {
 		v := s.SchemaFacets
@@ -6513,7 +6513,7 @@ func (s BatchListAttachedIndices) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TargetReference != nil {
 		v := s.TargetReference
@@ -6564,7 +6564,7 @@ func (s BatchListAttachedIndicesResponse) MarshalFields(e protocol.FieldEncoder)
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6667,7 +6667,7 @@ func (s BatchListIncomingTypedLinks) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -6718,7 +6718,7 @@ func (s BatchListIncomingTypedLinksResponse) MarshalFields(e protocol.FieldEncod
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6796,7 +6796,7 @@ func (s BatchListIndex) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.RangesOnIndexedValues) > 0 {
 		v := s.RangesOnIndexedValues
@@ -6853,7 +6853,7 @@ func (s BatchListIndexResponse) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6930,7 +6930,7 @@ func (s BatchListObjectAttributes) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -6982,7 +6982,7 @@ func (s BatchListObjectAttributesResponse) MarshalFields(e protocol.FieldEncoder
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7044,7 +7044,7 @@ func (s BatchListObjectChildren) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -7087,7 +7087,7 @@ func (s BatchListObjectChildrenResponse) MarshalFields(e protocol.FieldEncoder) 
 		ms0 := e.Map(protocol.BodyTarget, "Children", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -7096,7 +7096,7 @@ func (s BatchListObjectChildrenResponse) MarshalFields(e protocol.FieldEncoder) 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7159,7 +7159,7 @@ func (s BatchListObjectParentPaths) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -7198,7 +7198,7 @@ func (s BatchListObjectParentPathsResponse) MarshalFields(e protocol.FieldEncode
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.PathToObjectIdentifiersList) > 0 {
 		v := s.PathToObjectIdentifiersList
@@ -7272,7 +7272,7 @@ func (s BatchListObjectPolicies) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -7314,7 +7314,7 @@ func (s BatchListObjectPoliciesResponse) MarshalFields(e protocol.FieldEncoder) 
 		ls0 := e.List(protocol.BodyTarget, "AttachedPolicyIds", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -7323,7 +7323,7 @@ func (s BatchListObjectPoliciesResponse) MarshalFields(e protocol.FieldEncoder) 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7426,7 +7426,7 @@ func (s BatchListOutgoingTypedLinks) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -7465,7 +7465,7 @@ func (s BatchListOutgoingTypedLinksResponse) MarshalFields(e protocol.FieldEncod
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.TypedLinkSpecifiers) > 0 {
 		v := s.TypedLinkSpecifiers
@@ -7540,7 +7540,7 @@ func (s BatchListPolicyAttachments) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PolicyReference != nil {
 		v := s.PolicyReference
@@ -7579,7 +7579,7 @@ func (s BatchListPolicyAttachmentsResponse) MarshalFields(e protocol.FieldEncode
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ObjectIdentifiers) > 0 {
 		v := s.ObjectIdentifiers
@@ -7588,7 +7588,7 @@ func (s BatchListPolicyAttachmentsResponse) MarshalFields(e protocol.FieldEncode
 		ls0 := e.List(protocol.BodyTarget, "ObjectIdentifiers", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -7654,7 +7654,7 @@ func (s BatchLookupPolicy) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -7694,7 +7694,7 @@ func (s BatchLookupPolicyResponse) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.PolicyToPathList) > 0 {
 		v := s.PolicyToPathList
@@ -7740,13 +7740,13 @@ func (s BatchReadException) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Message
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Type) > 0 {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -7825,13 +7825,13 @@ func (s BatchReadInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8434,7 +8434,7 @@ func (s BatchUpdateObjectAttributesResponse) MarshalFields(e protocol.FieldEncod
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8509,7 +8509,7 @@ func (s BatchWriteInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8992,13 +8992,13 @@ func (s CreateDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9054,25 +9054,25 @@ func (s CreateDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AppliedSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AppliedSchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AppliedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectIdentifier != nil {
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9171,19 +9171,19 @@ func (s CreateFacetInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ObjectType) > 0 {
 		v := s.ObjectType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9298,7 +9298,7 @@ func (s CreateIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LinkName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.OrderedIndexedAttributeList) > 0 {
 		v := s.OrderedIndexedAttributeList
@@ -9322,7 +9322,7 @@ func (s CreateIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9358,7 +9358,7 @@ func (s CreateIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9442,7 +9442,7 @@ func (s CreateObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LinkName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ObjectAttributeList) > 0 {
 		v := s.ObjectAttributeList
@@ -9478,7 +9478,7 @@ func (s CreateObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9514,7 +9514,7 @@ func (s CreateObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9564,7 +9564,7 @@ func (s CreateSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9601,7 +9601,7 @@ func (s CreateSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9668,7 +9668,7 @@ func (s CreateTypedLinkFacetInput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9741,7 +9741,7 @@ func (s DeleteDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9779,7 +9779,7 @@ func (s DeleteDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9838,13 +9838,13 @@ func (s DeleteFacetInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9933,7 +9933,7 @@ func (s DeleteObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10007,7 +10007,7 @@ func (s DeleteSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10044,7 +10044,7 @@ func (s DeleteSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10100,13 +10100,13 @@ func (s DeleteTypedLinkFacetInput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10210,7 +10210,7 @@ func (s DetachFromIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10246,7 +10246,7 @@ func (s DetachFromIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DetachedObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DetachedObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DetachedObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10315,7 +10315,7 @@ func (s DetachObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LinkName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ParentReference != nil {
 		v := s.ParentReference
@@ -10327,7 +10327,7 @@ func (s DetachObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10363,7 +10363,7 @@ func (s DetachObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DetachedObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DetachedObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DetachedObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10440,7 +10440,7 @@ func (s DetachPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10534,7 +10534,7 @@ func (s DetachTypedLinkInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10607,19 +10607,19 @@ func (s Directory) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.State) > 0 {
 		v := s.State
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -10665,7 +10665,7 @@ func (s DisableDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10703,7 +10703,7 @@ func (s DisableDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10749,7 +10749,7 @@ func (s EnableDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10787,7 +10787,7 @@ func (s EnableDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10821,13 +10821,13 @@ func (s Facet) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ObjectType) > 0 {
 		v := s.ObjectType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -10911,13 +10911,13 @@ func (s FacetAttribute) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.RequiredBehavior) > 0 {
 		v := s.RequiredBehavior
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RequiredBehavior", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "RequiredBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -10996,7 +10996,7 @@ func (s FacetAttributeDefinition) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -11062,13 +11062,13 @@ func (s FacetAttributeReference) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.TargetAttributeName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TargetAttributeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "TargetAttributeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TargetFacetName != nil {
 		v := *s.TargetFacetName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TargetFacetName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "TargetFacetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11116,7 +11116,7 @@ func (s FacetAttributeUpdate) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Action
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Action", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Attribute != nil {
 		v := s.Attribute
@@ -11168,7 +11168,7 @@ func (s GetAppliedSchemaVersionInput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11205,7 +11205,7 @@ func (s GetAppliedSchemaVersionOutput) MarshalFields(e protocol.FieldEncoder) er
 		v := *s.AppliedSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AppliedSchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AppliedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11251,7 +11251,7 @@ func (s GetDirectoryInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11348,13 +11348,13 @@ func (s GetFacetInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11454,13 +11454,13 @@ func (s GetObjectInformationInput) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11501,7 +11501,7 @@ func (s GetObjectInformationOutput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SchemaFacets) > 0 {
 		v := s.SchemaFacets
@@ -11559,7 +11559,7 @@ func (s GetSchemaAsJsonInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11598,13 +11598,13 @@ func (s GetSchemaAsJsonOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Document
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Document", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Document", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11660,13 +11660,13 @@ func (s GetTypedLinkFacetInformationInput) MarshalFields(e protocol.FieldEncoder
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11712,7 +11712,7 @@ func (s GetTypedLinkFacetInformationOutput) MarshalFields(e protocol.FieldEncode
 		ls0 := e.List(protocol.BodyTarget, "IdentityAttributeOrder", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -11763,7 +11763,7 @@ func (s IndexAttachment) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11822,7 +11822,7 @@ func (s ListAppliedSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -11834,13 +11834,13 @@ func (s ListAppliedSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11879,7 +11879,7 @@ func (s ListAppliedSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SchemaArns) > 0 {
 		v := s.SchemaArns
@@ -11888,7 +11888,7 @@ func (s ListAppliedSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) erro
 		ls0 := e.List(protocol.BodyTarget, "SchemaArns", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -11964,7 +11964,7 @@ func (s ListAttachedIndicesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TargetReference != nil {
 		v := s.TargetReference
@@ -11976,13 +11976,13 @@ func (s ListAttachedIndicesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12033,7 +12033,7 @@ func (s ListAttachedIndicesOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12085,7 +12085,7 @@ func (s ListDevelopmentSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12124,7 +12124,7 @@ func (s ListDevelopmentSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SchemaArns) > 0 {
 		v := s.SchemaArns
@@ -12133,7 +12133,7 @@ func (s ListDevelopmentSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) 
 		ls0 := e.List(protocol.BodyTarget, "SchemaArns", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -12192,13 +12192,13 @@ func (s ListDirectoriesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.State) > 0 {
 		v := s.State
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "state", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -12252,7 +12252,7 @@ func (s ListDirectoriesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12325,19 +12325,19 @@ func (s ListFacetAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12388,7 +12388,7 @@ func (s ListFacetAttributesOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12449,13 +12449,13 @@ func (s ListFacetNamesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12497,7 +12497,7 @@ func (s ListFacetNamesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "FacetNames", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -12506,7 +12506,7 @@ func (s ListFacetNamesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12596,7 +12596,7 @@ func (s ListIncomingTypedLinksInput) MarshalFields(e protocol.FieldEncoder) erro
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ConsistencyLevel", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "ConsistencyLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FilterAttributeRanges) > 0 {
 		v := s.FilterAttributeRanges
@@ -12626,7 +12626,7 @@ func (s ListIncomingTypedLinksInput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -12638,7 +12638,7 @@ func (s ListIncomingTypedLinksInput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12689,7 +12689,7 @@ func (s ListIncomingTypedLinksOutput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12780,7 +12780,7 @@ func (s ListIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.RangesOnIndexedValues) > 0 {
 		v := s.RangesOnIndexedValues
@@ -12798,13 +12798,13 @@ func (s ListIndexInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12855,7 +12855,7 @@ func (s ListIndexOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -12946,7 +12946,7 @@ func (s ListObjectAttributesInput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -12958,13 +12958,13 @@ func (s ListObjectAttributesInput) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13016,7 +13016,7 @@ func (s ListObjectAttributesOutput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13093,7 +13093,7 @@ func (s ListObjectChildrenInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -13105,13 +13105,13 @@ func (s ListObjectChildrenInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13154,7 +13154,7 @@ func (s ListObjectChildrenOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "Children", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -13163,7 +13163,7 @@ func (s ListObjectChildrenOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13234,7 +13234,7 @@ func (s ListObjectParentPathsInput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -13246,7 +13246,7 @@ func (s ListObjectParentPathsInput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13285,7 +13285,7 @@ func (s ListObjectParentPathsOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.PathToObjectIdentifiersList) > 0 {
 		v := s.PathToObjectIdentifiersList
@@ -13374,7 +13374,7 @@ func (s ListObjectParentsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -13386,13 +13386,13 @@ func (s ListObjectParentsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13432,7 +13432,7 @@ func (s ListObjectParentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Parents) > 0 {
 		v := s.Parents
@@ -13441,7 +13441,7 @@ func (s ListObjectParentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "Parents", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -13520,7 +13520,7 @@ func (s ListObjectPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -13532,13 +13532,13 @@ func (s ListObjectPoliciesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13580,7 +13580,7 @@ func (s ListObjectPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "AttachedPolicyIds", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -13589,7 +13589,7 @@ func (s ListObjectPoliciesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13679,7 +13679,7 @@ func (s ListOutgoingTypedLinksInput) MarshalFields(e protocol.FieldEncoder) erro
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ConsistencyLevel", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "ConsistencyLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FilterAttributeRanges) > 0 {
 		v := s.FilterAttributeRanges
@@ -13709,7 +13709,7 @@ func (s ListOutgoingTypedLinksInput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -13721,7 +13721,7 @@ func (s ListOutgoingTypedLinksInput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13760,7 +13760,7 @@ func (s ListOutgoingTypedLinksOutput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.TypedLinkSpecifiers) > 0 {
 		v := s.TypedLinkSpecifiers
@@ -13848,7 +13848,7 @@ func (s ListPolicyAttachmentsInput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PolicyReference != nil {
 		v := s.PolicyReference
@@ -13860,13 +13860,13 @@ func (s ListPolicyAttachmentsInput) MarshalFields(e protocol.FieldEncoder) error
 		v := s.ConsistencyLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DirectoryArn != nil {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -13905,7 +13905,7 @@ func (s ListPolicyAttachmentsOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ObjectIdentifiers) > 0 {
 		v := s.ObjectIdentifiers
@@ -13914,7 +13914,7 @@ func (s ListPolicyAttachmentsOutput) MarshalFields(e protocol.FieldEncoder) erro
 		ls0 := e.List(protocol.BodyTarget, "ObjectIdentifiers", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -13973,13 +13973,13 @@ func (s ListPublishedSchemaArnsInput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -14018,7 +14018,7 @@ func (s ListPublishedSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) er
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SchemaArns) > 0 {
 		v := s.SchemaArns
@@ -14027,7 +14027,7 @@ func (s ListPublishedSchemaArnsOutput) MarshalFields(e protocol.FieldEncoder) er
 		ls0 := e.List(protocol.BodyTarget, "SchemaArns", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -14094,13 +14094,13 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ResourceArn != nil {
 		v := *s.ResourceArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ResourceArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -14140,7 +14140,7 @@ func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Tags) > 0 {
 		v := s.Tags
@@ -14223,19 +14223,19 @@ func (s ListTypedLinkFacetAttributesInput) MarshalFields(e protocol.FieldEncoder
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -14286,7 +14286,7 @@ func (s ListTypedLinkFacetAttributesOutput) MarshalFields(e protocol.FieldEncode
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -14348,13 +14348,13 @@ func (s ListTypedLinkFacetNamesInput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -14396,7 +14396,7 @@ func (s ListTypedLinkFacetNamesOutput) MarshalFields(e protocol.FieldEncoder) er
 		ls0 := e.List(protocol.BodyTarget, "FacetNames", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -14405,7 +14405,7 @@ func (s ListTypedLinkFacetNamesOutput) MarshalFields(e protocol.FieldEncoder) er
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -14477,7 +14477,7 @@ func (s LookupPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ObjectReference != nil {
 		v := s.ObjectReference
@@ -14489,7 +14489,7 @@ func (s LookupPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -14529,7 +14529,7 @@ func (s LookupPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.PolicyToPathList) > 0 {
 		v := s.PolicyToPathList
@@ -14574,7 +14574,7 @@ func (s ObjectAttributeAction) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ObjectAttributeActionType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectAttributeActionType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectAttributeActionType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ObjectAttributeUpdateValue != nil {
 		v := s.ObjectAttributeUpdateValue
@@ -14737,7 +14737,7 @@ func (s ObjectReference) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Selector
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Selector", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Selector", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -14774,7 +14774,7 @@ func (s PathToObjectIdentifiers) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "ObjectIdentifiers", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -14783,7 +14783,7 @@ func (s PathToObjectIdentifiers) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Path
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -14820,19 +14820,19 @@ func (s PolicyAttachment) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PolicyId != nil {
 		v := *s.PolicyId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PolicyId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "PolicyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PolicyType != nil {
 		v := *s.PolicyType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PolicyType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "PolicyType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -14867,7 +14867,7 @@ func (s PolicyToPath) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Path
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Policies) > 0 {
 		v := s.Policies
@@ -14954,25 +14954,25 @@ func (s PublishSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.MinorVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MinorVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "MinorVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DevelopmentSchemaArn != nil {
 		v := *s.DevelopmentSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -15009,7 +15009,7 @@ func (s PublishSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.PublishedSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PublishedSchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "PublishedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -15064,13 +15064,13 @@ func (s PutSchemaFromJsonInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Document
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Document", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Document", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -15106,7 +15106,7 @@ func (s PutSchemaFromJsonOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Arn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -15187,7 +15187,7 @@ func (s RemoveFacetFromObjectInput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -15251,7 +15251,7 @@ func (s Rule) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "Parameters", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -15260,7 +15260,7 @@ func (s Rule) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -15308,13 +15308,13 @@ func (s SchemaFacet) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.FacetName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FacetName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "FacetName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -15347,13 +15347,13 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Key
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Value != nil {
 		v := *s.Value
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -15409,7 +15409,7 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ResourceArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ResourceArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Tags) > 0 {
 		v := s.Tags
@@ -15494,7 +15494,7 @@ func (s TypedAttributeValue) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.BinaryValue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "BinaryValue", protocol.QuotedValue{protocol.BytesValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "BinaryValue", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
 	}
 	if s.BooleanValue != nil {
 		v := *s.BooleanValue
@@ -15512,13 +15512,13 @@ func (s TypedAttributeValue) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NumberValue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NumberValue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NumberValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StringValue != nil {
 		v := *s.StringValue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StringValue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StringValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -15577,7 +15577,7 @@ func (s TypedAttributeValueRange) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.EndMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "EndMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "EndMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.EndValue != nil {
 		v := s.EndValue
@@ -15589,7 +15589,7 @@ func (s TypedAttributeValueRange) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.StartMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StartMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "StartMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.StartValue != nil {
 		v := s.StartValue
@@ -15681,13 +15681,13 @@ func (s TypedLinkAttributeDefinition) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.RequiredBehavior) > 0 {
 		v := s.RequiredBehavior
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "RequiredBehavior", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "RequiredBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Rules) > 0 {
 		v := s.Rules
@@ -15705,7 +15705,7 @@ func (s TypedLinkAttributeDefinition) MarshalFields(e protocol.FieldEncoder) err
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -15762,7 +15762,7 @@ func (s TypedLinkAttributeRange) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AttributeName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AttributeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Range != nil {
 		v := s.Range
@@ -15861,7 +15861,7 @@ func (s TypedLinkFacet) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "IdentityAttributeOrder", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -15870,7 +15870,7 @@ func (s TypedLinkFacet) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -15929,7 +15929,7 @@ func (s TypedLinkFacetAttributeUpdate) MarshalFields(e protocol.FieldEncoder) er
 		v := s.Action
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Action", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Attribute != nil {
 		v := s.Attribute
@@ -15992,13 +15992,13 @@ func (s TypedLinkSchemaAndFacetName) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TypedLinkName != nil {
 		v := *s.TypedLinkName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TypedLinkName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "TypedLinkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16168,7 +16168,7 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ResourceArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ResourceArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ResourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.TagKeys) > 0 {
 		v := s.TagKeys
@@ -16177,7 +16177,7 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "TagKeys", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -16294,19 +16294,19 @@ func (s UpdateFacetInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ObjectType) > 0 {
 		v := s.ObjectType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16423,7 +16423,7 @@ func (s UpdateObjectAttributesInput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16459,7 +16459,7 @@ func (s UpdateObjectAttributesOutput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.ObjectIdentifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ObjectIdentifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16518,13 +16518,13 @@ func (s UpdateSchemaInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16561,7 +16561,7 @@ func (s UpdateSchemaOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "SchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16664,7 +16664,7 @@ func (s UpdateTypedLinkFacetInput) MarshalFields(e protocol.FieldEncoder) error 
 		ls0 := e.List(protocol.BodyTarget, "IdentityAttributeOrder", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -16673,13 +16673,13 @@ func (s UpdateTypedLinkFacetInput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SchemaArn != nil {
 		v := *s.SchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16766,7 +16766,7 @@ func (s UpgradeAppliedSchemaInput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DryRun != nil {
 		v := *s.DryRun
@@ -16778,7 +16778,7 @@ func (s UpgradeAppliedSchemaInput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.PublishedSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PublishedSchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "PublishedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16817,13 +16817,13 @@ func (s UpgradeAppliedSchemaOutput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.DirectoryArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DirectoryArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.UpgradedSchemaArn != nil {
 		v := *s.UpgradedSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpgradedSchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "UpgradedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16897,7 +16897,7 @@ func (s UpgradePublishedSchemaInput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.DevelopmentSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DevelopmentSchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DevelopmentSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DryRun != nil {
 		v := *s.DryRun
@@ -16909,13 +16909,13 @@ func (s UpgradePublishedSchemaInput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.MinorVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MinorVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "MinorVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PublishedSchemaArn != nil {
 		v := *s.PublishedSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "PublishedSchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "PublishedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16951,7 +16951,7 @@ func (s UpgradePublishedSchemaOutput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.UpgradedSchemaArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "UpgradedSchemaArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "UpgradedSchemaArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

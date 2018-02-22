@@ -311,7 +311,7 @@ func (s DeleteObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Path
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -388,7 +388,7 @@ func (s DescribeObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Path
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -440,7 +440,7 @@ func (s DescribeObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CacheControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Cache-Control", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Cache-Control", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ContentLength != nil {
 		v := *s.ContentLength
@@ -452,13 +452,13 @@ func (s DescribeObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ContentType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ETag != nil {
 		v := *s.ETag
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastModified != nil {
 		v := *s.LastModified
@@ -540,13 +540,13 @@ func (s GetObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Range
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Range", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Range", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Path != nil {
 		v := *s.Path
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -611,7 +611,7 @@ func (s GetObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CacheControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Cache-Control", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Cache-Control", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ContentLength != nil {
 		v := *s.ContentLength
@@ -623,19 +623,19 @@ func (s GetObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ContentRange
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Range", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Content-Range", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ContentType != nil {
 		v := *s.ContentType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ETag != nil {
 		v := *s.ETag
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "ETag", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastModified != nil {
 		v := *s.LastModified
@@ -694,13 +694,13 @@ func (s Item) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ContentType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContentType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ContentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ETag != nil {
 		v := *s.ETag
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ETag", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ETag", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastModified != nil {
 		v := *s.LastModified
@@ -712,13 +712,13 @@ func (s Item) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Type) > 0 {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -775,13 +775,13 @@ func (s ListItemsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Path != nil {
 		v := *s.Path
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -832,7 +832,7 @@ func (s ListItemsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -927,25 +927,25 @@ func (s PutObjectInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CacheControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Cache-Control", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Cache-Control", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ContentType != nil {
 		v := *s.ContentType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.StorageClass) > 0 {
 		v := s.StorageClass
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-storage-class", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-storage-class", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Path != nil {
 		v := *s.Path
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "Path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Body != nil {
 		v := s.Body
@@ -993,19 +993,19 @@ func (s PutObjectOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ContentSHA256
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ContentSHA256", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ContentSHA256", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ETag != nil {
 		v := *s.ETag
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ETag", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ETag", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.StorageClass) > 0 {
 		v := s.StorageClass
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StorageClass", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "StorageClass", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }

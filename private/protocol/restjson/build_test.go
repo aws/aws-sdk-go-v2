@@ -284,7 +284,7 @@ func (s InputService2TestShapeInputService2TestCaseOperation1Input) MarshalField
 		v := *s.PipelineId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -420,7 +420,7 @@ func (s InputService3TestShapeInputService3TestCaseOperation1Input) MarshalField
 		v := *s.Foo
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -559,7 +559,7 @@ func (s InputService4TestShapeInputService4TestCaseOperation1Input) MarshalField
 		ls0 := e.List(protocol.QueryTarget, "item", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -700,7 +700,7 @@ func (s InputService5TestShapeInputService5TestCaseOperation1Input) MarshalField
 		v := *s.PipelineId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.QueryDoc) > 0 {
 		v := s.QueryDoc
@@ -709,7 +709,7 @@ func (s InputService5TestShapeInputService5TestCaseOperation1Input) MarshalField
 		ms0 := e.Map(protocol.QueryTarget, "QueryDoc", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -850,7 +850,7 @@ func (s InputService6TestShapeInputService6TestCaseOperation1Input) MarshalField
 		v := *s.PipelineId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.QueryDoc) > 0 {
 		v := s.QueryDoc
@@ -862,7 +862,7 @@ func (s InputService6TestShapeInputService6TestCaseOperation1Input) MarshalField
 			ls1 := ms0.List(k1)
 			ls1.Start()
 			for _, v2 := range v1 {
-				ls1.ListAddValue(protocol.QuotedValue{protocol.StringValue(v2)})
+				ls1.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v2)})
 			}
 			ls1.End()
 		}
@@ -1207,19 +1207,19 @@ func (s InputService8TestShapeInputService8TestCaseOperation1Input) MarshalField
 		v := *s.PipelineId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Ascending != nil {
 		v := *s.Ascending
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PageToken != nil {
 		v := *s.PageToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1367,19 +1367,19 @@ func (s InputService9TestShapeInputService9TestCaseOperation1Input) MarshalField
 		v := *s.PipelineId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Ascending != nil {
 		v := *s.Ascending
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PageToken != nil {
 		v := *s.PageToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1414,13 +1414,13 @@ func (s InputService9TestShapeStructType) MarshalFields(e protocol.FieldEncoder)
 		v := *s.A
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "A", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "A", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.B != nil {
 		v := *s.B
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "B", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "B", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1554,25 +1554,25 @@ func (s InputService10TestShapeInputService10TestCaseOperation1Input) MarshalFie
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PipelineId != nil {
 		v := *s.PipelineId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "PipelineId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Ascending != nil {
 		v := *s.Ascending
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "Ascending", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PageToken != nil {
 		v := *s.PageToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "PageToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1607,13 +1607,13 @@ func (s InputService10TestShapeStructType) MarshalFields(e protocol.FieldEncoder
 		v := *s.A
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "A", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "A", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.B != nil {
 		v := *s.B
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "B", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "B", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1752,13 +1752,13 @@ func (s InputService11TestShapeInputService11TestCaseOperation1Input) MarshalFie
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-sha256-tree-hash", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-sha256-tree-hash", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VaultName != nil {
 		v := *s.VaultName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "vaultName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Body != nil {
 		v := s.Body
@@ -1918,13 +1918,13 @@ func (s InputService12TestShapeInputService12TestCaseOperation1Input) MarshalFie
 		v := s.Bar
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Bar", protocol.QuotedValue{protocol.BytesValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Bar", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
 	}
 	if s.Foo != nil {
 		v := *s.Foo
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "Foo", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "Foo", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2307,7 +2307,7 @@ func (s InputService14TestShapeFooShape) MarshalFields(e protocol.FieldEncoder) 
 		v := *s.Baz
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "baz", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "baz", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2541,7 +2541,7 @@ func (s InputService15TestShapeInputService15TestCaseOperation2Input) MarshalFie
 		v := *s.Foo
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "param-name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "param-name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3036,7 +3036,7 @@ func (s InputService16TestShapeRecursiveStructType) MarshalFields(e protocol.Fie
 		v := *s.NoRecurse
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NoRecurse", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NoRecurse", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.RecursiveList) > 0 {
 		v := s.RecursiveList
@@ -3736,7 +3736,7 @@ func (s InputService20TestShapeInputService20TestCaseOperation2Input) MarshalFie
 		v := Token
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Token", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4255,7 +4255,7 @@ func (s InputService22TestShapeInputService22TestCaseOperation2Input) MarshalFie
 		v := s.FooEnum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "FooEnum", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "FooEnum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.ListEnums) > 0 {
 		v := s.ListEnums
@@ -4264,7 +4264,7 @@ func (s InputService22TestShapeInputService22TestCaseOperation2Input) MarshalFie
 		ls0 := e.List(protocol.BodyTarget, "ListEnums", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -4273,13 +4273,13 @@ func (s InputService22TestShapeInputService22TestCaseOperation2Input) MarshalFie
 		v := s.HeaderEnum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-enum", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-enum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.QueryFooEnum) > 0 {
 		v := s.QueryFooEnum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "Enum", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "Enum", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.QueryListEnums) > 0 {
 		v := s.QueryListEnums
@@ -4288,7 +4288,7 @@ func (s InputService22TestShapeInputService22TestCaseOperation2Input) MarshalFie
 		ls0 := e.List(protocol.QueryTarget, "List", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 

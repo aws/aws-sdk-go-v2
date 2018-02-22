@@ -383,7 +383,7 @@ func (s DeleteLexiconInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LexiconName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "LexiconName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -446,13 +446,13 @@ func (s DescribeVoicesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.LanguageCode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "LanguageCode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -492,7 +492,7 @@ func (s DescribeVoicesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Voices) > 0 {
 		v := s.Voices
@@ -550,7 +550,7 @@ func (s GetLexiconInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LexiconName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "LexiconName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -632,13 +632,13 @@ func (s Lexicon) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Content
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Content", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Content", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -686,13 +686,13 @@ func (s LexiconAttributes) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Alphabet
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Alphabet", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Alphabet", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.LastModified != nil {
 		v := *s.LastModified
@@ -710,7 +710,7 @@ func (s LexiconAttributes) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LexiconArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LexiconArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LexiconArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Size != nil {
 		v := *s.Size
@@ -755,7 +755,7 @@ func (s LexiconDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -786,7 +786,7 @@ func (s ListLexiconsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -838,7 +838,7 @@ func (s ListLexiconsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -895,13 +895,13 @@ func (s PutLexiconInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Content
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Content", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Content", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "LexiconName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "LexiconName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1018,7 +1018,7 @@ func (s SynthesizeSpeechInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "LexiconNames", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -1027,13 +1027,13 @@ func (s SynthesizeSpeechInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.OutputFormat
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "OutputFormat", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "OutputFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SampleRate != nil {
 		v := *s.SampleRate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "SampleRate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "SampleRate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SpeechMarkTypes) > 0 {
 		v := s.SpeechMarkTypes
@@ -1042,7 +1042,7 @@ func (s SynthesizeSpeechInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "SpeechMarkTypes", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -1051,19 +1051,19 @@ func (s SynthesizeSpeechInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Text
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Text", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Text", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.TextType) > 0 {
 		v := s.TextType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "TextType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "TextType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.VoiceId) > 0 {
 		v := s.VoiceId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VoiceId", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "VoiceId", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -1119,7 +1119,7 @@ func (s SynthesizeSpeechOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ContentType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RequestCharacters != nil {
 		v := *s.RequestCharacters
@@ -1170,31 +1170,31 @@ func (s Voice) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Gender
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Gender", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Gender", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Id) > 0 {
 		v := s.Id
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "LanguageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.LanguageName != nil {
 		v := *s.LanguageName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LanguageName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LanguageName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

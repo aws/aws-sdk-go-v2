@@ -685,25 +685,25 @@ func (s CreateStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DeviceName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeviceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DeviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.KmsKeyId != nil {
 		v := *s.KmsKeyId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MediaType != nil {
 		v := *s.MediaType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MediaType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "MediaType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -739,7 +739,7 @@ func (s CreateStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -799,13 +799,13 @@ func (s DeleteStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CurrentVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamARN != nil {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -881,13 +881,13 @@ func (s DescribeStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -982,19 +982,19 @@ func (s GetDataEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.APIName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "APIName", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "APIName", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.StreamARN != nil {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1031,7 +1031,7 @@ func (s GetDataEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DataEndpoint
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DataEndpoint", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DataEndpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1094,7 +1094,7 @@ func (s ListStreamsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamNameCondition != nil {
 		v := s.StreamNameCondition
@@ -1140,7 +1140,7 @@ func (s ListStreamsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.StreamInfoList) > 0 {
 		v := s.StreamInfoList
@@ -1206,19 +1206,19 @@ func (s ListTagsForStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamARN != nil {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1259,7 +1259,7 @@ func (s ListTagsForStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Tags) > 0 {
 		v := s.Tags
@@ -1268,7 +1268,7 @@ func (s ListTagsForStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -1338,43 +1338,43 @@ func (s StreamInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DeviceName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeviceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DeviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.KmsKeyId != nil {
 		v := *s.KmsKeyId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MediaType != nil {
 		v := *s.MediaType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MediaType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "MediaType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.StreamARN != nil {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1424,13 +1424,13 @@ func (s StreamNameCondition) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ComparisonOperator
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ComparisonOperator", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "ComparisonOperator", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ComparisonValue != nil {
 		v := *s.ComparisonValue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ComparisonValue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ComparisonValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1493,13 +1493,13 @@ func (s TagStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Tags) > 0 {
 		v := s.Tags
@@ -1508,7 +1508,7 @@ func (s TagStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -1600,13 +1600,13 @@ func (s UntagStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.TagKeyList) > 0 {
 		v := s.TagKeyList
@@ -1615,7 +1615,7 @@ func (s UntagStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "TagKeyList", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -1729,7 +1729,7 @@ func (s UpdateDataRetentionInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CurrentVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DataRetentionChangeInHours != nil {
 		v := *s.DataRetentionChangeInHours
@@ -1741,19 +1741,19 @@ func (s UpdateDataRetentionInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Operation
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Operation", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "Operation", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.StreamARN != nil {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1864,31 +1864,31 @@ func (s UpdateStreamInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CurrentVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "CurrentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DeviceName != nil {
 		v := *s.DeviceName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DeviceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DeviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MediaType != nil {
 		v := *s.MediaType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "MediaType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "MediaType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamARN != nil {
 		v := *s.StreamARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StreamName != nil {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StreamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

@@ -847,7 +847,7 @@ func (s AccessPoliciesStatus) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Options
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Options", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Options", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Status != nil {
 		v := s.Status
@@ -916,7 +916,7 @@ func (s AddTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.TagList) > 0 {
 		v := s.TagList
@@ -992,7 +992,7 @@ func (s AdditionalLimit) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LimitName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LimitName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LimitName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.LimitValues) > 0 {
 		v := s.LimitValues
@@ -1001,7 +1001,7 @@ func (s AdditionalLimit) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "LimitValues", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -1054,7 +1054,7 @@ func (s AdvancedOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "Options", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -1157,7 +1157,7 @@ func (s CreateElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.AccessPolicies
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AccessPolicies", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AccessPolicies", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.AdvancedOptions) > 0 {
 		v := s.AdvancedOptions
@@ -1166,7 +1166,7 @@ func (s CreateElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder) e
 		ms0 := e.Map(protocol.BodyTarget, "AdvancedOptions", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -1175,7 +1175,7 @@ func (s CreateElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.DomainName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.EBSOptions != nil {
 		v := s.EBSOptions
@@ -1193,7 +1193,7 @@ func (s CreateElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.ElasticsearchVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ElasticsearchVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ElasticsearchVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.EncryptionAtRestOptions != nil {
 		v := s.EncryptionAtRestOptions
@@ -1310,7 +1310,7 @@ func (s DeleteElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.DomainName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1444,7 +1444,7 @@ func (s DescribeElasticsearchDomainConfigInput) MarshalFields(e protocol.FieldEn
 		v := *s.DomainName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1533,7 +1533,7 @@ func (s DescribeElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder)
 		v := *s.DomainName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1622,7 +1622,7 @@ func (s DescribeElasticsearchDomainsInput) MarshalFields(e protocol.FieldEncoder
 		ls0 := e.List(protocol.BodyTarget, "DomainNames", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -1733,19 +1733,19 @@ func (s DescribeElasticsearchInstanceTypeLimitsInput) MarshalFields(e protocol.F
 		v := *s.ElasticsearchVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ElasticsearchVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "ElasticsearchVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.InstanceType) > 0 {
 		v := s.InstanceType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "InstanceType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.PathTarget, "InstanceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DomainName != nil {
 		v := *s.DomainName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "domainName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1819,7 +1819,7 @@ func (s DomainInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DomainName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1876,7 +1876,7 @@ func (s EBSOptions) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.VolumeType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VolumeType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "VolumeType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -1979,7 +1979,7 @@ func (s ElasticsearchClusterConfig) MarshalFields(e protocol.FieldEncoder) error
 		v := s.DedicatedMasterType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DedicatedMasterType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "DedicatedMasterType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.InstanceCount != nil {
 		v := *s.InstanceCount
@@ -1991,7 +1991,7 @@ func (s ElasticsearchClusterConfig) MarshalFields(e protocol.FieldEncoder) error
 		v := s.InstanceType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "InstanceType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "InstanceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ZoneAwarenessEnabled != nil {
 		v := *s.ZoneAwarenessEnabled
@@ -2244,13 +2244,13 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.ARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.AccessPolicies != nil {
 		v := *s.AccessPolicies
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AccessPolicies", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AccessPolicies", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.AdvancedOptions) > 0 {
 		v := s.AdvancedOptions
@@ -2259,7 +2259,7 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		ms0 := e.Map(protocol.BodyTarget, "AdvancedOptions", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -2280,13 +2280,13 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.DomainId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DomainId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DomainName != nil {
 		v := *s.DomainName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.EBSOptions != nil {
 		v := s.EBSOptions
@@ -2304,7 +2304,7 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.ElasticsearchVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ElasticsearchVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ElasticsearchVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.EncryptionAtRestOptions != nil {
 		v := s.EncryptionAtRestOptions
@@ -2316,7 +2316,7 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.Endpoint
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Endpoint", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Endpoint", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Endpoints) > 0 {
 		v := s.Endpoints
@@ -2325,7 +2325,7 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		ms0 := e.Map(protocol.BodyTarget, "Endpoints", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -2396,7 +2396,7 @@ func (s ElasticsearchVersionStatus) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.Options
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Options", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Options", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Status != nil {
 		v := s.Status
@@ -2453,7 +2453,7 @@ func (s EncryptionAtRestOptions) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.KmsKeyId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2756,13 +2756,13 @@ func (s ListElasticsearchInstanceTypesInput) MarshalFields(e protocol.FieldEncod
 		v := *s.ElasticsearchVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "ElasticsearchVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "ElasticsearchVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DomainName != nil {
 		v := *s.DomainName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "domainName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "domainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -2774,7 +2774,7 @@ func (s ListElasticsearchInstanceTypesInput) MarshalFields(e protocol.FieldEncod
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2819,7 +2819,7 @@ func (s ListElasticsearchInstanceTypesOutput) MarshalFields(e protocol.FieldEnco
 		ls0 := e.List(protocol.BodyTarget, "ElasticsearchInstanceTypes", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -2828,7 +2828,7 @@ func (s ListElasticsearchInstanceTypesOutput) MarshalFields(e protocol.FieldEnco
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2875,7 +2875,7 @@ func (s ListElasticsearchVersionsInput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2920,7 +2920,7 @@ func (s ListElasticsearchVersionsOutput) MarshalFields(e protocol.FieldEncoder) 
 		ls0 := e.List(protocol.BodyTarget, "ElasticsearchVersions", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -2929,7 +2929,7 @@ func (s ListElasticsearchVersionsOutput) MarshalFields(e protocol.FieldEncoder) 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2978,7 +2978,7 @@ func (s ListTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3055,7 +3055,7 @@ func (s LogPublishingOption) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CloudWatchLogsLogGroupArn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "CloudWatchLogsLogGroupArn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "CloudWatchLogsLogGroupArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Enabled != nil {
 		v := *s.Enabled
@@ -3165,7 +3165,7 @@ func (s OptionStatus) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.State
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.UpdateDate != nil {
 		v := *s.UpdateDate
@@ -3236,7 +3236,7 @@ func (s RemoveTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ARN
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "ARN", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.TagKeys) > 0 {
 		v := s.TagKeys
@@ -3245,7 +3245,7 @@ func (s RemoveTagsInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "TagKeys", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -3390,7 +3390,7 @@ func (s StorageType) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StorageSubTypeName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StorageSubTypeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StorageSubTypeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.StorageTypeLimits) > 0 {
 		v := s.StorageTypeLimits
@@ -3408,7 +3408,7 @@ func (s StorageType) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StorageTypeName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "StorageTypeName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "StorageTypeName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3449,7 +3449,7 @@ func (s StorageTypeLimit) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.LimitName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "LimitName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "LimitName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.LimitValues) > 0 {
 		v := s.LimitValues
@@ -3458,7 +3458,7 @@ func (s StorageTypeLimit) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "LimitValues", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -3522,13 +3522,13 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Key
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Value != nil {
 		v := *s.Value
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3606,7 +3606,7 @@ func (s UpdateElasticsearchDomainConfigInput) MarshalFields(e protocol.FieldEnco
 		v := *s.AccessPolicies
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "AccessPolicies", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "AccessPolicies", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.AdvancedOptions) > 0 {
 		v := s.AdvancedOptions
@@ -3615,7 +3615,7 @@ func (s UpdateElasticsearchDomainConfigInput) MarshalFields(e protocol.FieldEnco
 		ms0 := e.Map(protocol.BodyTarget, "AdvancedOptions", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -3660,7 +3660,7 @@ func (s UpdateElasticsearchDomainConfigInput) MarshalFields(e protocol.FieldEnco
 		v := *s.DomainName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3744,7 +3744,7 @@ func (s VPCDerivedInfo) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "AvailabilityZones", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -3756,7 +3756,7 @@ func (s VPCDerivedInfo) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "SecurityGroupIds", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -3768,7 +3768,7 @@ func (s VPCDerivedInfo) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "SubnetIds", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -3777,7 +3777,7 @@ func (s VPCDerivedInfo) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.VPCId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "VPCId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "VPCId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3856,7 +3856,7 @@ func (s VPCOptions) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "SecurityGroupIds", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -3868,7 +3868,7 @@ func (s VPCOptions) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "SubnetIds", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 

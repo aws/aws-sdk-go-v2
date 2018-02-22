@@ -146,7 +146,7 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "attributes", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -155,7 +155,7 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EventType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "eventType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "eventType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Metrics) > 0 {
 		v := s.Metrics
@@ -179,13 +179,13 @@ func (s Event) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Timestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "timestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -263,13 +263,13 @@ func (s PutEventsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ClientContext
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ClientContextEncoding != nil {
 		v := *s.ClientContextEncoding
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context-Encoding", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.HeaderTarget, "x-amz-Client-Context-Encoding", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -354,19 +354,19 @@ func (s Session) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Id
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StartTimestamp != nil {
 		v := *s.StartTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "startTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StopTimestamp != nil {
 		v := *s.StopTimestamp
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "stopTimestamp", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "stopTimestamp", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

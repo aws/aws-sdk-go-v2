@@ -1090,7 +1090,7 @@ func (s AacSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.AudioDescriptionBroadcasterMix
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "audioDescriptionBroadcasterMix", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "audioDescriptionBroadcasterMix", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Bitrate != nil {
 		v := *s.Bitrate
@@ -1102,25 +1102,25 @@ func (s AacSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.CodecProfile
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.CodingMode) > 0 {
 		v := s.CodingMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codingMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codingMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.RateControlMode) > 0 {
 		v := s.RateControlMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.RawFormat) > 0 {
 		v := s.RawFormat
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "rawFormat", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "rawFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SampleRate != nil {
 		v := *s.SampleRate
@@ -1132,13 +1132,13 @@ func (s AacSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Specification
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "specification", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "specification", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.VbrQuality) > 0 {
 		v := s.VbrQuality
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "vbrQuality", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "vbrQuality", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -1202,13 +1202,13 @@ func (s Ac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.BitstreamMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "bitstreamMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "bitstreamMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.CodingMode) > 0 {
 		v := s.CodingMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codingMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codingMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Dialnorm != nil {
 		v := *s.Dialnorm
@@ -1220,19 +1220,19 @@ func (s Ac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.DynamicRangeCompressionProfile
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dynamicRangeCompressionProfile", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "dynamicRangeCompressionProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.LfeFilter) > 0 {
 		v := s.LfeFilter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lfeFilter", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "lfeFilter", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.MetadataControl) > 0 {
 		v := s.MetadataControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "metadataControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "metadataControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SampleRate != nil {
 		v := *s.SampleRate
@@ -1398,7 +1398,7 @@ func (s AudioCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Codec
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codec", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codec", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Eac3Settings != nil {
 		v := s.Eac3Settings
@@ -1505,7 +1505,7 @@ func (s AudioDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AudioSourceName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "audioSourceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "audioSourceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.AudioType != nil {
 		v := *s.AudioType
@@ -1517,7 +1517,7 @@ func (s AudioDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.AudioTypeControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "audioTypeControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "audioTypeControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.CodecSettings != nil {
 		v := s.CodecSettings
@@ -1529,13 +1529,13 @@ func (s AudioDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.LanguageCode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.LanguageCodeControl) > 0 {
 		v := s.LanguageCodeControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "languageCodeControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "languageCodeControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.RemixSettings != nil {
 		v := s.RemixSettings
@@ -1547,7 +1547,7 @@ func (s AudioDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StreamName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "streamName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "streamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1600,13 +1600,13 @@ func (s AudioNormalizationSettings) MarshalFields(e protocol.FieldEncoder) error
 		v := s.Algorithm
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "algorithm", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "algorithm", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.AlgorithmControl) > 0 {
 		v := s.AlgorithmControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "algorithmControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "algorithmControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.CorrectionGateLevel != nil {
 		v := *s.CorrectionGateLevel
@@ -1618,13 +1618,13 @@ func (s AudioNormalizationSettings) MarshalFields(e protocol.FieldEncoder) error
 		v := s.LoudnessLogging
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "loudnessLogging", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "loudnessLogging", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.PeakCalculation) > 0 {
 		v := s.PeakCalculation
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "peakCalculation", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "peakCalculation", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.TargetLkfs != nil {
 		v := *s.TargetLkfs
@@ -1697,19 +1697,19 @@ func (s AudioSelector) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.DefaultSelection
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "defaultSelection", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "defaultSelection", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ExternalAudioFileInput != nil {
 		v := *s.ExternalAudioFileInput
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "externalAudioFileInput", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "externalAudioFileInput", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.LanguageCode) > 0 {
 		v := s.LanguageCode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Offset != nil {
 		v := *s.Offset
@@ -1745,7 +1745,7 @@ func (s AudioSelector) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.SelectorType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "selectorType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "selectorType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Tracks) > 0 {
 		v := s.Tracks
@@ -1793,7 +1793,7 @@ func (s AudioSelectorGroup) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "audioSelectorNames", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -1827,7 +1827,7 @@ func (s AvailBlanking) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AvailBlankingImage
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "availBlankingImage", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "availBlankingImage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1946,13 +1946,13 @@ func (s BurninDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.Alignment
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "alignment", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "alignment", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.BackgroundColor) > 0 {
 		v := s.BackgroundColor
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "backgroundColor", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "backgroundColor", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.BackgroundOpacity != nil {
 		v := *s.BackgroundOpacity
@@ -1964,7 +1964,7 @@ func (s BurninDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.FontColor
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "fontColor", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "fontColor", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FontOpacity != nil {
 		v := *s.FontOpacity
@@ -1988,7 +1988,7 @@ func (s BurninDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.OutlineColor
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "outlineColor", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "outlineColor", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.OutlineSize != nil {
 		v := *s.OutlineSize
@@ -2000,7 +2000,7 @@ func (s BurninDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.ShadowColor
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "shadowColor", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "shadowColor", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ShadowOpacity != nil {
 		v := *s.ShadowOpacity
@@ -2024,7 +2024,7 @@ func (s BurninDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.TeletextSpacing
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "teletextSpacing", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "teletextSpacing", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.XPosition != nil {
 		v := *s.XPosition
@@ -2084,7 +2084,7 @@ func (s CancelJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Id
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2157,7 +2157,7 @@ func (s CaptionDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CaptionSelectorName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "captionSelectorName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "captionSelectorName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DestinationSettings != nil {
 		v := s.DestinationSettings
@@ -2169,13 +2169,13 @@ func (s CaptionDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.LanguageCode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.LanguageDescription != nil {
 		v := *s.LanguageDescription
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "languageDescription", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "languageDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2220,13 +2220,13 @@ func (s CaptionDescriptionPreset) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.LanguageCode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.LanguageDescription != nil {
 		v := *s.LanguageDescription
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "languageDescription", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "languageDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2280,7 +2280,7 @@ func (s CaptionDestinationSettings) MarshalFields(e protocol.FieldEncoder) error
 		v := s.DestinationType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "destinationType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "destinationType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DvbSubDestinationSettings != nil {
 		v := s.DvbSubDestinationSettings
@@ -2343,7 +2343,7 @@ func (s CaptionSelector) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.LanguageCode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SourceSettings != nil {
 		v := s.SourceSettings
@@ -2420,7 +2420,7 @@ func (s CaptionSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.SourceType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "sourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.TeletextSourceSettings != nil {
 		v := s.TeletextSourceSettings
@@ -2523,7 +2523,7 @@ func (s ColorCorrector) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ColorSpaceConversion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "colorSpaceConversion", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "colorSpaceConversion", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Contrast != nil {
 		v := *s.Contrast
@@ -2593,7 +2593,7 @@ func (s ContainerSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Container
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "container", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "container", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.F4vSettings != nil {
 		v := s.F4vSettings
@@ -2682,25 +2682,25 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := ClientRequestToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "clientRequestToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.JobTemplate != nil {
 		v := *s.JobTemplate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobTemplate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "jobTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Queue != nil {
 		v := *s.Queue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Role != nil {
 		v := *s.Role
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "role", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "role", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Settings != nil {
 		v := s.Settings
@@ -2715,7 +2715,7 @@ func (s CreateJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "userMetadata", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -2804,25 +2804,25 @@ func (s CreateJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Category
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Queue != nil {
 		v := *s.Queue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Settings != nil {
 		v := s.Settings
@@ -2908,19 +2908,19 @@ func (s CreatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Category
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Settings != nil {
 		v := s.Settings
@@ -2999,13 +2999,13 @@ func (s CreateQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3145,13 +3145,13 @@ func (s DashIsoGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BaseUrl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "baseUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "baseUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Destination != nil {
 		v := *s.Destination
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "destination", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "destination", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Encryption != nil {
 		v := s.Encryption
@@ -3169,7 +3169,7 @@ func (s DashIsoGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.HbbtvCompliance
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "hbbtvCompliance", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "hbbtvCompliance", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MinBufferTime != nil {
 		v := *s.MinBufferTime
@@ -3181,7 +3181,7 @@ func (s DashIsoGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.SegmentControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "segmentControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "segmentControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SegmentLength != nil {
 		v := *s.SegmentLength
@@ -3237,19 +3237,19 @@ func (s Deinterlacer) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Algorithm
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "algorithm", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "algorithm", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Control) > 0 {
 		v := s.Control
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "control", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "control", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Mode) > 0 {
 		v := s.Mode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "mode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "mode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -3297,7 +3297,7 @@ func (s DeleteJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3374,7 +3374,7 @@ func (s DeletePresetInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3451,7 +3451,7 @@ func (s DeleteQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3524,7 +3524,7 @@ func (s DescribeEndpointsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3576,7 +3576,7 @@ func (s DescribeEndpointsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3621,7 +3621,7 @@ func (s DvbNitSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NetworkName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "networkName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "networkName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NitInterval != nil {
 		v := *s.NitInterval
@@ -3675,7 +3675,7 @@ func (s DvbSdtSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.OutputSdt
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "outputSdt", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "outputSdt", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SdtInterval != nil {
 		v := *s.SdtInterval
@@ -3687,13 +3687,13 @@ func (s DvbSdtSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ServiceName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ServiceProviderName != nil {
 		v := *s.ServiceProviderName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "serviceProviderName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "serviceProviderName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3812,13 +3812,13 @@ func (s DvbSubDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.Alignment
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "alignment", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "alignment", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.BackgroundColor) > 0 {
 		v := s.BackgroundColor
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "backgroundColor", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "backgroundColor", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.BackgroundOpacity != nil {
 		v := *s.BackgroundOpacity
@@ -3830,7 +3830,7 @@ func (s DvbSubDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.FontColor
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "fontColor", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "fontColor", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FontOpacity != nil {
 		v := *s.FontOpacity
@@ -3854,7 +3854,7 @@ func (s DvbSubDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.OutlineColor
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "outlineColor", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "outlineColor", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.OutlineSize != nil {
 		v := *s.OutlineSize
@@ -3866,7 +3866,7 @@ func (s DvbSubDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.ShadowColor
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "shadowColor", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "shadowColor", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ShadowOpacity != nil {
 		v := *s.ShadowOpacity
@@ -3890,7 +3890,7 @@ func (s DvbSubDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.TeletextSpacing
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "teletextSpacing", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "teletextSpacing", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.XPosition != nil {
 		v := *s.XPosition
@@ -4074,7 +4074,7 @@ func (s Eac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.AttenuationControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "attenuationControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "attenuationControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Bitrate != nil {
 		v := *s.Bitrate
@@ -4086,19 +4086,19 @@ func (s Eac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.BitstreamMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "bitstreamMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "bitstreamMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.CodingMode) > 0 {
 		v := s.CodingMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codingMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codingMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.DcFilter) > 0 {
 		v := s.DcFilter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dcFilter", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "dcFilter", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Dialnorm != nil {
 		v := *s.Dialnorm
@@ -4110,25 +4110,25 @@ func (s Eac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.DynamicRangeCompressionLine
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dynamicRangeCompressionLine", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "dynamicRangeCompressionLine", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.DynamicRangeCompressionRf) > 0 {
 		v := s.DynamicRangeCompressionRf
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dynamicRangeCompressionRf", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "dynamicRangeCompressionRf", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.LfeControl) > 0 {
 		v := s.LfeControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lfeControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "lfeControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.LfeFilter) > 0 {
 		v := s.LfeFilter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "lfeFilter", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "lfeFilter", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.LoRoCenterMixLevel != nil {
 		v := *s.LoRoCenterMixLevel
@@ -4158,19 +4158,19 @@ func (s Eac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.MetadataControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "metadataControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "metadataControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.PassthroughControl) > 0 {
 		v := s.PassthroughControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "passthroughControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "passthroughControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.PhaseControl) > 0 {
 		v := s.PhaseControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "phaseControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "phaseControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SampleRate != nil {
 		v := *s.SampleRate
@@ -4182,19 +4182,19 @@ func (s Eac3Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.StereoDownmix
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "stereoDownmix", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "stereoDownmix", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SurroundExMode) > 0 {
 		v := s.SurroundExMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "surroundExMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "surroundExMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SurroundMode) > 0 {
 		v := s.SurroundMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "surroundMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "surroundMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -4234,7 +4234,7 @@ func (s EmbeddedSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Convert608To708
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "convert608To708", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "convert608To708", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Source608ChannelNumber != nil {
 		v := *s.Source608ChannelNumber
@@ -4276,7 +4276,7 @@ func (s Endpoint) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Url
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4308,7 +4308,7 @@ func (s F4vSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.MoovPlacement
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "moovPlacement", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "moovPlacement", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -4343,7 +4343,7 @@ func (s FileGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Destination
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "destination", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "destination", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4384,13 +4384,13 @@ func (s FileSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Convert608To708
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "convert608To708", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "convert608To708", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SourceFile != nil {
 		v := *s.SourceFile
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sourceFile", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "sourceFile", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TimeDelta != nil {
 		v := *s.TimeDelta
@@ -4512,7 +4512,7 @@ func (s GetJobInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Id
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4598,7 +4598,7 @@ func (s GetJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4685,7 +4685,7 @@ func (s GetPresetInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4771,7 +4771,7 @@ func (s GetQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5004,7 +5004,7 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.AdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "adaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "adaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Bitrate != nil {
 		v := *s.Bitrate
@@ -5016,43 +5016,43 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.CodecLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codecLevel", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codecLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.CodecProfile) > 0 {
 		v := s.CodecProfile
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.EntropyEncoding) > 0 {
 		v := s.EntropyEncoding
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "entropyEncoding", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "entropyEncoding", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FieldEncoding) > 0 {
 		v := s.FieldEncoding
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "fieldEncoding", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "fieldEncoding", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FlickerAdaptiveQuantization) > 0 {
 		v := s.FlickerAdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "flickerAdaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "flickerAdaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FramerateControl) > 0 {
 		v := s.FramerateControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "framerateControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "framerateControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FramerateConversionAlgorithm) > 0 {
 		v := s.FramerateConversionAlgorithm
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "framerateConversionAlgorithm", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "framerateConversionAlgorithm", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FramerateDenominator != nil {
 		v := *s.FramerateDenominator
@@ -5070,7 +5070,7 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.GopBReference
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "gopBReference", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "gopBReference", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.GopClosedCadence != nil {
 		v := *s.GopClosedCadence
@@ -5088,7 +5088,7 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.GopSizeUnits
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "gopSizeUnits", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "gopSizeUnits", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.HrdBufferInitialFillPercentage != nil {
 		v := *s.HrdBufferInitialFillPercentage
@@ -5106,7 +5106,7 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.InterlaceMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "interlaceMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "interlaceMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MaxBitrate != nil {
 		v := *s.MaxBitrate
@@ -5136,7 +5136,7 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ParControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "parControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ParDenominator != nil {
 		v := *s.ParDenominator
@@ -5154,25 +5154,25 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.QualityTuningLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "qualityTuningLevel", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "qualityTuningLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.RateControlMode) > 0 {
 		v := s.RateControlMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.RepeatPps) > 0 {
 		v := s.RepeatPps
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "repeatPps", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "repeatPps", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SceneChangeDetect) > 0 {
 		v := s.SceneChangeDetect
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sceneChangeDetect", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "sceneChangeDetect", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Slices != nil {
 		v := *s.Slices
@@ -5184,7 +5184,7 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.SlowPal
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "slowPal", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "slowPal", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Softness != nil {
 		v := *s.Softness
@@ -5196,31 +5196,31 @@ func (s H264Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.SpatialAdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "spatialAdaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "spatialAdaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Syntax) > 0 {
 		v := s.Syntax
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "syntax", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "syntax", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Telecine) > 0 {
 		v := s.Telecine
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "telecine", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "telecine", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.TemporalAdaptiveQuantization) > 0 {
 		v := s.TemporalAdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "temporalAdaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "temporalAdaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.UnregisteredSeiTimecode) > 0 {
 		v := s.UnregisteredSeiTimecode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "unregisteredSeiTimecode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "unregisteredSeiTimecode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -5415,13 +5415,13 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.AdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "adaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "adaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.AlternateTransferFunctionSei) > 0 {
 		v := s.AlternateTransferFunctionSei
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "alternateTransferFunctionSei", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "alternateTransferFunctionSei", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Bitrate != nil {
 		v := *s.Bitrate
@@ -5433,31 +5433,31 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.CodecLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codecLevel", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codecLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.CodecProfile) > 0 {
 		v := s.CodecProfile
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FlickerAdaptiveQuantization) > 0 {
 		v := s.FlickerAdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "flickerAdaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "flickerAdaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FramerateControl) > 0 {
 		v := s.FramerateControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "framerateControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "framerateControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FramerateConversionAlgorithm) > 0 {
 		v := s.FramerateConversionAlgorithm
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "framerateConversionAlgorithm", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "framerateConversionAlgorithm", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FramerateDenominator != nil {
 		v := *s.FramerateDenominator
@@ -5475,7 +5475,7 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.GopBReference
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "gopBReference", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "gopBReference", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.GopClosedCadence != nil {
 		v := *s.GopClosedCadence
@@ -5493,7 +5493,7 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.GopSizeUnits
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "gopSizeUnits", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "gopSizeUnits", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.HrdBufferInitialFillPercentage != nil {
 		v := *s.HrdBufferInitialFillPercentage
@@ -5511,7 +5511,7 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.InterlaceMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "interlaceMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "interlaceMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MaxBitrate != nil {
 		v := *s.MaxBitrate
@@ -5541,7 +5541,7 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ParControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "parControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ParDenominator != nil {
 		v := *s.ParDenominator
@@ -5559,25 +5559,25 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.QualityTuningLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "qualityTuningLevel", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "qualityTuningLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.RateControlMode) > 0 {
 		v := s.RateControlMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SampleAdaptiveOffsetFilterMode) > 0 {
 		v := s.SampleAdaptiveOffsetFilterMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sampleAdaptiveOffsetFilterMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "sampleAdaptiveOffsetFilterMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SceneChangeDetect) > 0 {
 		v := s.SceneChangeDetect
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sceneChangeDetect", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "sceneChangeDetect", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Slices != nil {
 		v := *s.Slices
@@ -5589,43 +5589,43 @@ func (s H265Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.SlowPal
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "slowPal", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "slowPal", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SpatialAdaptiveQuantization) > 0 {
 		v := s.SpatialAdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "spatialAdaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "spatialAdaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Telecine) > 0 {
 		v := s.Telecine
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "telecine", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "telecine", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.TemporalAdaptiveQuantization) > 0 {
 		v := s.TemporalAdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "temporalAdaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "temporalAdaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.TemporalIds) > 0 {
 		v := s.TemporalIds
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "temporalIds", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "temporalIds", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Tiles) > 0 {
 		v := s.Tiles
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "tiles", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "tiles", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.UnregisteredSeiTimecode) > 0 {
 		v := s.UnregisteredSeiTimecode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "unregisteredSeiTimecode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "unregisteredSeiTimecode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -5820,13 +5820,13 @@ func (s HlsCaptionLanguageMapping) MarshalFields(e protocol.FieldEncoder) error 
 		v := s.LanguageCode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "languageCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.LanguageDescription != nil {
 		v := *s.LanguageDescription
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "languageDescription", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "languageDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5876,19 +5876,19 @@ func (s HlsEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ConstantInitializationVector
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "constantInitializationVector", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "constantInitializationVector", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.EncryptionMethod) > 0 {
 		v := s.EncryptionMethod
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "encryptionMethod", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "encryptionMethod", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.InitializationVectorInManifest) > 0 {
 		v := s.InitializationVectorInManifest
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "initializationVectorInManifest", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "initializationVectorInManifest", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SpekeKeyProvider != nil {
 		v := s.SpekeKeyProvider
@@ -5906,7 +5906,7 @@ func (s HlsEncryptionSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -6032,7 +6032,7 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "adMarkers", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -6041,7 +6041,7 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BaseUrl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "baseUrl", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "baseUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.CaptionLanguageMappings) > 0 {
 		v := s.CaptionLanguageMappings
@@ -6059,31 +6059,31 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.CaptionLanguageSetting
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "captionLanguageSetting", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "captionLanguageSetting", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.ClientCache) > 0 {
 		v := s.ClientCache
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clientCache", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "clientCache", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.CodecSpecification) > 0 {
 		v := s.CodecSpecification
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codecSpecification", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codecSpecification", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Destination != nil {
 		v := *s.Destination
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "destination", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "destination", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.DirectoryStructure) > 0 {
 		v := s.DirectoryStructure
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "directoryStructure", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "directoryStructure", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Encryption != nil {
 		v := s.Encryption
@@ -6095,13 +6095,13 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ManifestCompression
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "manifestCompression", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "manifestCompression", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.ManifestDurationFormat) > 0 {
 		v := s.ManifestDurationFormat
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "manifestDurationFormat", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "manifestDurationFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MinSegmentLength != nil {
 		v := *s.MinSegmentLength
@@ -6113,13 +6113,13 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.OutputSelection
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "outputSelection", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "outputSelection", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.ProgramDateTime) > 0 {
 		v := s.ProgramDateTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "programDateTime", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "programDateTime", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ProgramDateTimePeriod != nil {
 		v := *s.ProgramDateTimePeriod
@@ -6131,7 +6131,7 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.SegmentControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "segmentControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "segmentControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SegmentLength != nil {
 		v := *s.SegmentLength
@@ -6149,13 +6149,13 @@ func (s HlsGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.StreamInfResolution
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "streamInfResolution", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "streamInfResolution", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.TimedMetadataId3Frame) > 0 {
 		v := s.TimedMetadataId3Frame
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timedMetadataId3Frame", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "timedMetadataId3Frame", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.TimedMetadataId3Period != nil {
 		v := *s.TimedMetadataId3Period
@@ -6221,31 +6221,31 @@ func (s HlsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.AudioGroupId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "audioGroupId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "audioGroupId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.AudioRenditionSets != nil {
 		v := *s.AudioRenditionSets
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "audioRenditionSets", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "audioRenditionSets", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.AudioTrackType) > 0 {
 		v := s.AudioTrackType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "audioTrackType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "audioTrackType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.IFrameOnlyManifest) > 0 {
 		v := s.IFrameOnlyManifest
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "iFrameOnlyManifest", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "iFrameOnlyManifest", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SegmentModifier != nil {
 		v := *s.SegmentModifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "segmentModifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "segmentModifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6281,13 +6281,13 @@ func (s Id3Insertion) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Id3
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id3", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "id3", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Timecode != nil {
 		v := *s.Timecode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timecode", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "timecode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6463,25 +6463,25 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.DeblockFilter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deblockFilter", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "deblockFilter", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.DenoiseFilter) > 0 {
 		v := s.DenoiseFilter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "denoiseFilter", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "denoiseFilter", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FileInput != nil {
 		v := *s.FileInput
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "fileInput", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "fileInput", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.FilterEnable) > 0 {
 		v := s.FilterEnable
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "filterEnable", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "filterEnable", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FilterStrength != nil {
 		v := *s.FilterStrength
@@ -6511,13 +6511,13 @@ func (s Input) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.PsiControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "psiControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "psiControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.TimecodeSource) > 0 {
 		v := s.TimecodeSource
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timecodeSource", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "timecodeSource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.VideoSelector != nil {
 		v := s.VideoSelector
@@ -6567,13 +6567,13 @@ func (s InputClipping) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.EndTimecode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "endTimecode", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "endTimecode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StartTimecode != nil {
 		v := *s.StartTimecode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTimecode", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "startTimecode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6705,19 +6705,19 @@ func (s InputTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.DeblockFilter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "deblockFilter", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "deblockFilter", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.DenoiseFilter) > 0 {
 		v := s.DenoiseFilter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "denoiseFilter", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "denoiseFilter", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FilterEnable) > 0 {
 		v := s.FilterEnable
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "filterEnable", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "filterEnable", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FilterStrength != nil {
 		v := *s.FilterStrength
@@ -6747,13 +6747,13 @@ func (s InputTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.PsiControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "psiControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "psiControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.TimecodeSource) > 0 {
 		v := s.TimecodeSource
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timecodeSource", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "timecodeSource", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.VideoSelector != nil {
 		v := s.VideoSelector
@@ -6861,7 +6861,7 @@ func (s InsertableImage) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ImageInserterInput
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "imageInserterInput", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "imageInserterInput", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ImageX != nil {
 		v := *s.ImageX
@@ -6891,7 +6891,7 @@ func (s InsertableImage) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.StartTime
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "startTime", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "startTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Width != nil {
 		v := *s.Width
@@ -6971,7 +6971,7 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Arn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedAt != nil {
 		v := *s.CreatedAt
@@ -6989,19 +6989,19 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ErrorMessage
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "errorMessage", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "errorMessage", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.JobTemplate != nil {
 		v := *s.JobTemplate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobTemplate", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "jobTemplate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.OutputGroupDetails) > 0 {
 		v := s.OutputGroupDetails
@@ -7019,13 +7019,13 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Queue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Role != nil {
 		v := *s.Role
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "role", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "role", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Settings != nil {
 		v := s.Settings
@@ -7037,7 +7037,7 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Timing != nil {
 		v := s.Timing
@@ -7052,7 +7052,7 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "userMetadata", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -7225,13 +7225,13 @@ func (s JobTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Arn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Category != nil {
 		v := *s.Category
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedAt != nil {
 		v := *s.CreatedAt
@@ -7243,7 +7243,7 @@ func (s JobTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdated != nil {
 		v := *s.LastUpdated
@@ -7255,13 +7255,13 @@ func (s JobTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Queue != nil {
 		v := *s.Queue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Settings != nil {
 		v := s.Settings
@@ -7273,7 +7273,7 @@ func (s JobTemplate) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -7438,13 +7438,13 @@ func (s ListJobTemplatesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Category
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "category", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ListBy) > 0 {
 		v := s.ListBy
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "listBy", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "listBy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -7456,13 +7456,13 @@ func (s ListJobTemplatesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Order) > 0 {
 		v := s.Order
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -7516,7 +7516,7 @@ func (s ListJobTemplatesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7571,25 +7571,25 @@ func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Order) > 0 {
 		v := s.Order
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Queue != nil {
 		v := *s.Queue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "queue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "queue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -7643,7 +7643,7 @@ func (s ListJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7695,13 +7695,13 @@ func (s ListPresetsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Category
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "category", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ListBy) > 0 {
 		v := s.ListBy
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "listBy", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "listBy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -7713,13 +7713,13 @@ func (s ListPresetsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Order) > 0 {
 		v := s.Order
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -7761,7 +7761,7 @@ func (s ListPresetsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Presets) > 0 {
 		v := s.Presets
@@ -7819,7 +7819,7 @@ func (s ListQueuesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ListBy
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "listBy", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "listBy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -7831,13 +7831,13 @@ func (s ListQueuesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Order) > 0 {
 		v := s.Order
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "order", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -7878,7 +7878,7 @@ func (s ListQueuesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Queues) > 0 {
 		v := s.Queues
@@ -8070,7 +8070,7 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.AudioBufferModel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "audioBufferModel", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "audioBufferModel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.AudioFramesPerPes != nil {
 		v := *s.AudioFramesPerPes
@@ -8100,7 +8100,7 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.BufferModel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "bufferModel", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "bufferModel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.DvbNitSettings != nil {
 		v := s.DvbNitSettings
@@ -8142,19 +8142,19 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.EbpAudioInterval
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ebpAudioInterval", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "ebpAudioInterval", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.EbpPlacement) > 0 {
 		v := s.EbpPlacement
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "ebpPlacement", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "ebpPlacement", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.EsRateInPes) > 0 {
 		v := s.EsRateInPes
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "esRateInPes", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "esRateInPes", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FragmentTime != nil {
 		v := *s.FragmentTime
@@ -8190,7 +8190,7 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.PcrControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "pcrControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "pcrControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.PcrPid != nil {
 		v := *s.PcrPid
@@ -8226,7 +8226,7 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.RateMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "rateMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "rateMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Scte35Pid != nil {
 		v := *s.Scte35Pid
@@ -8238,19 +8238,19 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Scte35Source
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "scte35Source", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "scte35Source", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SegmentationMarkers) > 0 {
 		v := s.SegmentationMarkers
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "segmentationMarkers", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "segmentationMarkers", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SegmentationStyle) > 0 {
 		v := s.SegmentationStyle
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "segmentationStyle", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "segmentationStyle", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SegmentationTime != nil {
 		v := *s.SegmentationTime
@@ -8379,7 +8379,7 @@ func (s M3u8Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.PcrControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "pcrControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "pcrControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.PcrPid != nil {
 		v := *s.PcrPid
@@ -8421,13 +8421,13 @@ func (s M3u8Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Scte35Source
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "scte35Source", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "scte35Source", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.TimedMetadata) > 0 {
 		v := s.TimedMetadata
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timedMetadata", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "timedMetadata", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.TimedMetadataPid != nil {
 		v := *s.TimedMetadataPid
@@ -8495,31 +8495,31 @@ func (s MovSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ClapAtom
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "clapAtom", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "clapAtom", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.CslgAtom) > 0 {
 		v := s.CslgAtom
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "cslgAtom", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "cslgAtom", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Mpeg2FourCCControl) > 0 {
 		v := s.Mpeg2FourCCControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "mpeg2FourCCControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "mpeg2FourCCControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.PaddingControl) > 0 {
 		v := s.PaddingControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "paddingControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "paddingControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Reference) > 0 {
 		v := s.Reference
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "reference", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "reference", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -8615,25 +8615,25 @@ func (s Mp4Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.CslgAtom
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "cslgAtom", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "cslgAtom", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FreeSpaceBox) > 0 {
 		v := s.FreeSpaceBox
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "freeSpaceBox", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "freeSpaceBox", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.MoovPlacement) > 0 {
 		v := s.MoovPlacement
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "moovPlacement", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "moovPlacement", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Mp4MajorBrand != nil {
 		v := *s.Mp4MajorBrand
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "mp4MajorBrand", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "mp4MajorBrand", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8795,7 +8795,7 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.AdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "adaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "adaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Bitrate != nil {
 		v := *s.Bitrate
@@ -8807,25 +8807,25 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.CodecLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codecLevel", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codecLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.CodecProfile) > 0 {
 		v := s.CodecProfile
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FramerateControl) > 0 {
 		v := s.FramerateControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "framerateControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "framerateControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FramerateConversionAlgorithm) > 0 {
 		v := s.FramerateConversionAlgorithm
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "framerateConversionAlgorithm", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "framerateConversionAlgorithm", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FramerateDenominator != nil {
 		v := *s.FramerateDenominator
@@ -8855,7 +8855,7 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.GopSizeUnits
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "gopSizeUnits", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "gopSizeUnits", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.HrdBufferInitialFillPercentage != nil {
 		v := *s.HrdBufferInitialFillPercentage
@@ -8873,13 +8873,13 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.InterlaceMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "interlaceMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "interlaceMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.IntraDcPrecision) > 0 {
 		v := s.IntraDcPrecision
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "intraDcPrecision", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "intraDcPrecision", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MaxBitrate != nil {
 		v := *s.MaxBitrate
@@ -8903,7 +8903,7 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ParControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "parControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ParDenominator != nil {
 		v := *s.ParDenominator
@@ -8921,25 +8921,25 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.QualityTuningLevel
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "qualityTuningLevel", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "qualityTuningLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.RateControlMode) > 0 {
 		v := s.RateControlMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "rateControlMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SceneChangeDetect) > 0 {
 		v := s.SceneChangeDetect
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "sceneChangeDetect", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "sceneChangeDetect", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.SlowPal) > 0 {
 		v := s.SlowPal
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "slowPal", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "slowPal", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Softness != nil {
 		v := *s.Softness
@@ -8951,25 +8951,25 @@ func (s Mpeg2Settings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.SpatialAdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "spatialAdaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "spatialAdaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Syntax) > 0 {
 		v := s.Syntax
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "syntax", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "syntax", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Telecine) > 0 {
 		v := s.Telecine
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "telecine", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "telecine", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.TemporalAdaptiveQuantization) > 0 {
 		v := s.TemporalAdaptiveQuantization
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "temporalAdaptiveQuantization", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "temporalAdaptiveQuantization", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -9051,13 +9051,13 @@ func (s MsSmoothGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.AudioDeduplication
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "audioDeduplication", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "audioDeduplication", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Destination != nil {
 		v := *s.Destination
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "destination", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "destination", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Encryption != nil {
 		v := s.Encryption
@@ -9075,7 +9075,7 @@ func (s MsSmoothGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ManifestEncoding
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "manifestEncoding", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "manifestEncoding", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -9116,7 +9116,7 @@ func (s NielsenConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.DistributorId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "distributorId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "distributorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9161,7 +9161,7 @@ func (s NoiseReducer) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Filter
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "filter", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "filter", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FilterSettings != nil {
 		v := s.FilterSettings
@@ -9355,13 +9355,13 @@ func (s Output) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Extension
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "extension", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "extension", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NameModifier != nil {
 		v := *s.NameModifier
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nameModifier", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nameModifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.OutputSettings != nil {
 		v := s.OutputSettings
@@ -9373,7 +9373,7 @@ func (s Output) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Preset
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "preset", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "preset", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VideoDescription != nil {
 		v := s.VideoDescription
@@ -9497,13 +9497,13 @@ func (s OutputGroup) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.CustomName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "customName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "customName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.OutputGroupSettings != nil {
 		v := s.OutputGroupSettings
@@ -9627,7 +9627,7 @@ func (s OutputGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -9710,13 +9710,13 @@ func (s Preset) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Arn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Category != nil {
 		v := *s.Category
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedAt != nil {
 		v := *s.CreatedAt
@@ -9728,7 +9728,7 @@ func (s Preset) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdated != nil {
 		v := *s.LastUpdated
@@ -9740,7 +9740,7 @@ func (s Preset) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Settings != nil {
 		v := s.Settings
@@ -9752,7 +9752,7 @@ func (s Preset) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -9911,19 +9911,19 @@ func (s ProresSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.CodecProfile
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codecProfile", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FramerateControl) > 0 {
 		v := s.FramerateControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "framerateControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "framerateControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.FramerateConversionAlgorithm) > 0 {
 		v := s.FramerateConversionAlgorithm
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "framerateConversionAlgorithm", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "framerateConversionAlgorithm", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FramerateDenominator != nil {
 		v := *s.FramerateDenominator
@@ -9941,13 +9941,13 @@ func (s ProresSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.InterlaceMode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "interlaceMode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "interlaceMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.ParControl) > 0 {
 		v := s.ParControl
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parControl", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "parControl", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ParDenominator != nil {
 		v := *s.ParDenominator
@@ -9965,13 +9965,13 @@ func (s ProresSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.SlowPal
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "slowPal", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "slowPal", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Telecine) > 0 {
 		v := s.Telecine
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "telecine", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "telecine", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -10024,7 +10024,7 @@ func (s Queue) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Arn
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedAt != nil {
 		v := *s.CreatedAt
@@ -10036,7 +10036,7 @@ func (s Queue) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdated != nil {
 		v := *s.LastUpdated
@@ -10048,19 +10048,19 @@ func (s Queue) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Type) > 0 {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -10209,7 +10209,7 @@ func (s SccDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Framerate
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "framerate", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "framerate", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -10247,7 +10247,7 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ResourceId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "resourceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SystemIds) > 0 {
 		v := s.SystemIds
@@ -10256,7 +10256,7 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "systemIds", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -10265,7 +10265,7 @@ func (s SpekeKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Url
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10309,25 +10309,25 @@ func (s StaticKeyProvider) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.KeyFormat
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "keyFormat", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "keyFormat", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.KeyFormatVersions != nil {
 		v := *s.KeyFormatVersions
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "keyFormatVersions", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "keyFormatVersions", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.StaticKeyValue != nil {
 		v := *s.StaticKeyValue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "staticKeyValue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "staticKeyValue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Url != nil {
 		v := *s.Url
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10360,7 +10360,7 @@ func (s TeletextDestinationSettings) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.PageNumber
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "pageNumber", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "pageNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10392,7 +10392,7 @@ func (s TeletextSourceSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.PageNumber
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "pageNumber", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "pageNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10441,13 +10441,13 @@ func (s TimecodeBurnin) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Position
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "position", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Prefix != nil {
 		v := *s.Prefix
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "prefix", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "prefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10514,25 +10514,25 @@ func (s TimecodeConfig) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Anchor
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "anchor", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "anchor", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Source) > 0 {
 		v := s.Source
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "source", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "source", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Start != nil {
 		v := *s.Start
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "start", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "start", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.TimestampOffset != nil {
 		v := *s.TimestampOffset
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timestampOffset", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "timestampOffset", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10651,7 +10651,7 @@ func (s TtmlDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.StylePassthrough
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "stylePassthrough", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "stylePassthrough", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -10714,19 +10714,19 @@ func (s UpdateJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Category
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Queue != nil {
 		v := *s.Queue
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "queue", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Settings != nil {
 		v := s.Settings
@@ -10738,7 +10738,7 @@ func (s UpdateJobTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10836,13 +10836,13 @@ func (s UpdatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Category
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "category", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Settings != nil {
 		v := s.Settings
@@ -10854,7 +10854,7 @@ func (s UpdatePresetInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10950,19 +10950,19 @@ func (s UpdateQueueInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -11056,7 +11056,7 @@ func (s VideoCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Codec
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "codec", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "codec", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FrameCaptureSettings != nil {
 		v := s.FrameCaptureSettings
@@ -11208,13 +11208,13 @@ func (s VideoDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.AfdSignaling
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "afdSignaling", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "afdSignaling", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.AntiAlias) > 0 {
 		v := s.AntiAlias
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "antiAlias", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "antiAlias", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.CodecSettings != nil {
 		v := s.CodecSettings
@@ -11226,7 +11226,7 @@ func (s VideoDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ColorMetadata
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "colorMetadata", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "colorMetadata", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Crop != nil {
 		v := s.Crop
@@ -11238,7 +11238,7 @@ func (s VideoDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.DropFrameTimecode
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "dropFrameTimecode", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "dropFrameTimecode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FixedAfd != nil {
 		v := *s.FixedAfd
@@ -11262,13 +11262,13 @@ func (s VideoDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.RespondToAfd
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "respondToAfd", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "respondToAfd", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.ScalingBehavior) > 0 {
 		v := s.ScalingBehavior
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "scalingBehavior", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "scalingBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Sharpness != nil {
 		v := *s.Sharpness
@@ -11280,7 +11280,7 @@ func (s VideoDescription) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.TimecodeInsertion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "timecodeInsertion", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "timecodeInsertion", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.VideoPreprocessors != nil {
 		v := s.VideoPreprocessors
@@ -11463,13 +11463,13 @@ func (s VideoSelector) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ColorSpace
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "colorSpace", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "colorSpace", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.ColorSpaceUsage) > 0 {
 		v := s.ColorSpaceUsage
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "colorSpaceUsage", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "colorSpaceUsage", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Hdr10Metadata != nil {
 		v := s.Hdr10Metadata

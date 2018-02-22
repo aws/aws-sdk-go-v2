@@ -2576,19 +2576,19 @@ func (s BotAliasMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.BotVersion != nil {
 		v := *s.BotVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Checksum != nil {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -2600,7 +2600,7 @@ func (s BotAliasMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate
@@ -2612,7 +2612,7 @@ func (s BotAliasMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2681,7 +2681,7 @@ func (s BotChannelAssociation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotAlias
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botAlias", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.BotConfiguration) > 0 {
 		v := s.BotConfiguration
@@ -2690,7 +2690,7 @@ func (s BotChannelAssociation) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "botConfiguration", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -2699,7 +2699,7 @@ func (s BotChannelAssociation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -2711,31 +2711,31 @@ func (s BotChannelAssociation) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.FailureReason != nil {
 		v := *s.FailureReason
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Type) > 0 {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -2787,7 +2787,7 @@ func (s BotMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate
@@ -2799,19 +2799,19 @@ func (s BotMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2846,7 +2846,7 @@ func (s BuiltinIntentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Signature
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "signature", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "signature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SupportedLocales) > 0 {
 		v := s.SupportedLocales
@@ -2855,7 +2855,7 @@ func (s BuiltinIntentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "supportedLocales", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -2888,7 +2888,7 @@ func (s BuiltinIntentSlot) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -2923,7 +2923,7 @@ func (s BuiltinSlotTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Signature
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "signature", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "signature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SupportedLocales) > 0 {
 		v := s.SupportedLocales
@@ -2932,7 +2932,7 @@ func (s BuiltinSlotTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "supportedLocales", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -2998,13 +2998,13 @@ func (s CodeHook) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.MessageVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "messageVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "messageVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Uri != nil {
 		v := *s.Uri
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "uri", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "uri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3062,13 +3062,13 @@ func (s CreateBotVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3182,7 +3182,7 @@ func (s CreateBotVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ChildDirected != nil {
 		v := *s.ChildDirected
@@ -3206,13 +3206,13 @@ func (s CreateBotVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.FailureReason != nil {
 		v := *s.FailureReason
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.IdleSessionTTLInSeconds != nil {
 		v := *s.IdleSessionTTLInSeconds
@@ -3242,31 +3242,31 @@ func (s CreateBotVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Locale
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "locale", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "locale", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VoiceId != nil {
 		v := *s.VoiceId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "voiceId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "voiceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3324,13 +3324,13 @@ func (s CreateIntentVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3413,7 +3413,7 @@ func (s CreateIntentVersionOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ConclusionStatement != nil {
 		v := s.ConclusionStatement
@@ -3437,7 +3437,7 @@ func (s CreateIntentVersionOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DialogCodeHook != nil {
 		v := s.DialogCodeHook
@@ -3467,13 +3467,13 @@ func (s CreateIntentVersionOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ParentIntentSignature != nil {
 		v := *s.ParentIntentSignature
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RejectionStatement != nil {
 		v := s.RejectionStatement
@@ -3488,7 +3488,7 @@ func (s CreateIntentVersionOutput) MarshalFields(e protocol.FieldEncoder) error 
 		ls0 := e.List(protocol.BodyTarget, "sampleUtterances", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -3509,7 +3509,7 @@ func (s CreateIntentVersionOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3567,13 +3567,13 @@ func (s CreateSlotTypeVersionInput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3633,7 +3633,7 @@ func (s CreateSlotTypeVersionOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -3645,7 +3645,7 @@ func (s CreateSlotTypeVersionOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.EnumerationValues) > 0 {
 		v := s.EnumerationValues
@@ -3669,19 +3669,19 @@ func (s CreateSlotTypeVersionOutput) MarshalFields(e protocol.FieldEncoder) erro
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ValueSelectionStrategy) > 0 {
 		v := s.ValueSelectionStrategy
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "valueSelectionStrategy", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "valueSelectionStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3743,13 +3743,13 @@ func (s DeleteBotAliasInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3851,19 +3851,19 @@ func (s DeleteBotChannelAssociationInput) MarshalFields(e protocol.FieldEncoder)
 		v := *s.BotAlias
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "aliasName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "aliasName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.BotName != nil {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3940,7 +3940,7 @@ func (s DeleteBotInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4030,13 +4030,13 @@ func (s DeleteBotVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4113,7 +4113,7 @@ func (s DeleteIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4203,13 +4203,13 @@ func (s DeleteIntentVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4286,7 +4286,7 @@ func (s DeleteSlotTypeInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4376,13 +4376,13 @@ func (s DeleteSlotTypeVersionInput) MarshalFields(e protocol.FieldEncoder) error
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4474,13 +4474,13 @@ func (s DeleteUtterancesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.UserId != nil {
 		v := *s.UserId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "userId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4573,7 +4573,7 @@ func (s EnumerationValue) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "synonyms", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -4582,7 +4582,7 @@ func (s EnumerationValue) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Value
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4733,7 +4733,7 @@ func (s FulfillmentActivity) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -4795,13 +4795,13 @@ func (s GetBotAliasInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4856,19 +4856,19 @@ func (s GetBotAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.BotVersion != nil {
 		v := *s.BotVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Checksum != nil {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -4880,7 +4880,7 @@ func (s GetBotAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate
@@ -4892,7 +4892,7 @@ func (s GetBotAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4963,7 +4963,7 @@ func (s GetBotAliasesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -4975,13 +4975,13 @@ func (s GetBotAliasesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NameContains
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5035,7 +5035,7 @@ func (s GetBotAliasesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5111,19 +5111,19 @@ func (s GetBotChannelAssociationInput) MarshalFields(e protocol.FieldEncoder) er
 		v := *s.BotAlias
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "aliasName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "aliasName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.BotName != nil {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5193,7 +5193,7 @@ func (s GetBotChannelAssociationOutput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.BotAlias
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botAlias", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.BotConfiguration) > 0 {
 		v := s.BotConfiguration
@@ -5202,7 +5202,7 @@ func (s GetBotChannelAssociationOutput) MarshalFields(e protocol.FieldEncoder) e
 		ms0 := e.Map(protocol.BodyTarget, "botConfiguration", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -5211,7 +5211,7 @@ func (s GetBotChannelAssociationOutput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -5223,31 +5223,31 @@ func (s GetBotChannelAssociationOutput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.FailureReason != nil {
 		v := *s.FailureReason
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.Type) > 0 {
 		v := s.Type
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -5332,13 +5332,13 @@ func (s GetBotChannelAssociationsInput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.BotAlias
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "aliasName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "aliasName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.BotName != nil {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -5350,13 +5350,13 @@ func (s GetBotChannelAssociationsInput) MarshalFields(e protocol.FieldEncoder) e
 		v := *s.NameContains
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5411,7 +5411,7 @@ func (s GetBotChannelAssociationsOutput) MarshalFields(e protocol.FieldEncoder) 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5470,13 +5470,13 @@ func (s GetBotInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VersionOrAlias != nil {
 		v := *s.VersionOrAlias
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "versionoralias", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "versionoralias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5591,7 +5591,7 @@ func (s GetBotOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ChildDirected != nil {
 		v := *s.ChildDirected
@@ -5615,13 +5615,13 @@ func (s GetBotOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.FailureReason != nil {
 		v := *s.FailureReason
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.IdleSessionTTLInSeconds != nil {
 		v := *s.IdleSessionTTLInSeconds
@@ -5651,31 +5651,31 @@ func (s GetBotOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Locale
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "locale", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "locale", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VoiceId != nil {
 		v := *s.VoiceId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "voiceId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "voiceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5738,7 +5738,7 @@ func (s GetBotVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -5750,7 +5750,7 @@ func (s GetBotVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5805,7 +5805,7 @@ func (s GetBotVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5870,13 +5870,13 @@ func (s GetBotsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NameContains
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5928,7 +5928,7 @@ func (s GetBotsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5977,7 +5977,7 @@ func (s GetBuiltinIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Signature
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "signature", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "signature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6020,7 +6020,7 @@ func (s GetBuiltinIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Signature
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "signature", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "signature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Slots) > 0 {
 		v := s.Slots
@@ -6041,7 +6041,7 @@ func (s GetBuiltinIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "supportedLocales", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -6103,7 +6103,7 @@ func (s GetBuiltinIntentsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Locale
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "locale", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "locale", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -6115,13 +6115,13 @@ func (s GetBuiltinIntentsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SignatureContains != nil {
 		v := *s.SignatureContains
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "signatureContains", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "signatureContains", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6175,7 +6175,7 @@ func (s GetBuiltinIntentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6234,7 +6234,7 @@ func (s GetBuiltinSlotTypesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Locale
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "locale", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "locale", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -6246,13 +6246,13 @@ func (s GetBuiltinSlotTypesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SignatureContains != nil {
 		v := *s.SignatureContains
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "signatureContains", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "signatureContains", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6293,7 +6293,7 @@ func (s GetBuiltinSlotTypesOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SlotTypes) > 0 {
 		v := s.SlotTypes
@@ -6383,25 +6383,25 @@ func (s GetExportInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ExportType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "exportType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "exportType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ResourceType) > 0 {
 		v := s.ResourceType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "resourceType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6465,43 +6465,43 @@ func (s GetExportOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ExportStatus
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "exportStatus", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "exportStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.ExportType) > 0 {
 		v := s.ExportType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "exportType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "exportType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.FailureReason != nil {
 		v := *s.FailureReason
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ResourceType) > 0 {
 		v := s.ResourceType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Url != nil {
 		v := *s.Url
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6563,13 +6563,13 @@ func (s GetIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6653,7 +6653,7 @@ func (s GetIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ConclusionStatement != nil {
 		v := s.ConclusionStatement
@@ -6677,7 +6677,7 @@ func (s GetIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DialogCodeHook != nil {
 		v := s.DialogCodeHook
@@ -6707,13 +6707,13 @@ func (s GetIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ParentIntentSignature != nil {
 		v := *s.ParentIntentSignature
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RejectionStatement != nil {
 		v := s.RejectionStatement
@@ -6728,7 +6728,7 @@ func (s GetIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "sampleUtterances", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -6749,7 +6749,7 @@ func (s GetIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6812,7 +6812,7 @@ func (s GetIntentVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -6824,7 +6824,7 @@ func (s GetIntentVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6879,7 +6879,7 @@ func (s GetIntentVersionsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -6943,13 +6943,13 @@ func (s GetIntentsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NameContains
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7001,7 +7001,7 @@ func (s GetIntentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7063,13 +7063,13 @@ func (s GetSlotTypeInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7129,7 +7129,7 @@ func (s GetSlotTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -7141,7 +7141,7 @@ func (s GetSlotTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.EnumerationValues) > 0 {
 		v := s.EnumerationValues
@@ -7165,19 +7165,19 @@ func (s GetSlotTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ValueSelectionStrategy) > 0 {
 		v := s.ValueSelectionStrategy
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "valueSelectionStrategy", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "valueSelectionStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7240,7 +7240,7 @@ func (s GetSlotTypeVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -7252,7 +7252,7 @@ func (s GetSlotTypeVersionsInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7295,7 +7295,7 @@ func (s GetSlotTypeVersionsOutput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SlotTypes) > 0 {
 		v := s.SlotTypes
@@ -7372,13 +7372,13 @@ func (s GetSlotTypesInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NameContains
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nameContains", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.NextToken != nil {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7419,7 +7419,7 @@ func (s GetSlotTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.NextToken
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SlotTypes) > 0 {
 		v := s.SlotTypes
@@ -7503,7 +7503,7 @@ func (s GetUtterancesViewInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botname", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "botname", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.BotVersions) > 0 {
 		v := s.BotVersions
@@ -7512,7 +7512,7 @@ func (s GetUtterancesViewInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.QueryTarget, "bot_versions", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -7521,7 +7521,7 @@ func (s GetUtterancesViewInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.StatusType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.QueryTarget, "status_type", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.QueryTarget, "status_type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -7562,7 +7562,7 @@ func (s GetUtterancesViewOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Utterances) > 0 {
 		v := s.Utterances
@@ -7635,13 +7635,13 @@ func (s Intent) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.IntentName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "intentName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "intentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.IntentVersion != nil {
 		v := *s.IntentVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "intentVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "intentVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7690,7 +7690,7 @@ func (s IntentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate
@@ -7702,13 +7702,13 @@ func (s IntentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7765,13 +7765,13 @@ func (s Message) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Content
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "content", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "content", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ContentType) > 0 {
 		v := s.ContentType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "contentType", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "contentType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -7870,7 +7870,7 @@ func (s Prompt) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ResponseCard
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "responseCard", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "responseCard", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7958,31 +7958,31 @@ func (s PutBotAliasInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Checksum != nil {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.BotName != nil {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8037,19 +8037,19 @@ func (s PutBotAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.BotVersion != nil {
 		v := *s.BotVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Checksum != nil {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -8061,7 +8061,7 @@ func (s PutBotAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate
@@ -8073,7 +8073,7 @@ func (s PutBotAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8269,7 +8269,7 @@ func (s PutBotInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ChildDirected != nil {
 		v := *s.ChildDirected
@@ -8287,7 +8287,7 @@ func (s PutBotInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.IdleSessionTTLInSeconds != nil {
 		v := *s.IdleSessionTTLInSeconds
@@ -8311,25 +8311,25 @@ func (s PutBotInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Locale
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "locale", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "locale", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.ProcessBehavior) > 0 {
 		v := s.ProcessBehavior
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "processBehavior", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "processBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.VoiceId != nil {
 		v := *s.VoiceId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "voiceId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "voiceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8448,7 +8448,7 @@ func (s PutBotOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ChildDirected != nil {
 		v := *s.ChildDirected
@@ -8472,13 +8472,13 @@ func (s PutBotOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.FailureReason != nil {
 		v := *s.FailureReason
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "failureReason", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.IdleSessionTTLInSeconds != nil {
 		v := *s.IdleSessionTTLInSeconds
@@ -8508,31 +8508,31 @@ func (s PutBotOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Locale
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "locale", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "locale", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Status) > 0 {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VoiceId != nil {
 		v := *s.VoiceId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "voiceId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "voiceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8729,7 +8729,7 @@ func (s PutIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ConclusionStatement != nil {
 		v := s.ConclusionStatement
@@ -8747,7 +8747,7 @@ func (s PutIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DialogCodeHook != nil {
 		v := s.DialogCodeHook
@@ -8771,7 +8771,7 @@ func (s PutIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ParentIntentSignature
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RejectionStatement != nil {
 		v := s.RejectionStatement
@@ -8786,7 +8786,7 @@ func (s PutIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "sampleUtterances", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -8807,7 +8807,7 @@ func (s PutIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -8893,7 +8893,7 @@ func (s PutIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ConclusionStatement != nil {
 		v := s.ConclusionStatement
@@ -8917,7 +8917,7 @@ func (s PutIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.DialogCodeHook != nil {
 		v := s.DialogCodeHook
@@ -8947,13 +8947,13 @@ func (s PutIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ParentIntentSignature != nil {
 		v := *s.ParentIntentSignature
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "parentIntentSignature", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RejectionStatement != nil {
 		v := s.RejectionStatement
@@ -8968,7 +8968,7 @@ func (s PutIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "sampleUtterances", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -8989,7 +8989,7 @@ func (s PutIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9096,13 +9096,13 @@ func (s PutSlotTypeInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.EnumerationValues) > 0 {
 		v := s.EnumerationValues
@@ -9120,13 +9120,13 @@ func (s PutSlotTypeInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.ValueSelectionStrategy
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "valueSelectionStrategy", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "valueSelectionStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9187,7 +9187,7 @@ func (s PutSlotTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Checksum
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -9199,7 +9199,7 @@ func (s PutSlotTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.EnumerationValues) > 0 {
 		v := s.EnumerationValues
@@ -9223,19 +9223,19 @@ func (s PutSlotTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.ValueSelectionStrategy) > 0 {
 		v := s.ValueSelectionStrategy
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "valueSelectionStrategy", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "valueSelectionStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9272,13 +9272,13 @@ func (s ResourceReference) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9381,13 +9381,13 @@ func (s Slot) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Priority != nil {
 		v := *s.Priority
@@ -9399,7 +9399,7 @@ func (s Slot) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ResponseCard
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "responseCard", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "responseCard", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.SampleUtterances) > 0 {
 		v := s.SampleUtterances
@@ -9408,7 +9408,7 @@ func (s Slot) MarshalFields(e protocol.FieldEncoder) error {
 		ls0 := e.List(protocol.BodyTarget, "sampleUtterances", metadata)
 		ls0.Start()
 		for _, v1 := range v {
-			ls0.ListAddValue(protocol.QuotedValue{protocol.StringValue(v1)})
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ls0.End()
 
@@ -9417,19 +9417,19 @@ func (s Slot) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.SlotConstraint
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "slotConstraint", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "slotConstraint", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SlotType != nil {
 		v := *s.SlotType
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "slotType", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "slotType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SlotTypeVersion != nil {
 		v := *s.SlotTypeVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "slotTypeVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "slotTypeVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ValueElicitationPrompt != nil {
 		v := s.ValueElicitationPrompt
@@ -9484,7 +9484,7 @@ func (s SlotTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Description
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate
@@ -9496,13 +9496,13 @@ func (s SlotTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Version != nil {
 		v := *s.Version
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9580,7 +9580,7 @@ func (s Statement) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ResponseCard
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "responseCard", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "responseCard", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9647,7 +9647,7 @@ func (s UtteranceData) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.UtteranceString
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "utteranceString", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "utteranceString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9682,7 +9682,7 @@ func (s UtteranceList) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.BotVersion
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "botVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Utterances) > 0 {
 		v := s.Utterances

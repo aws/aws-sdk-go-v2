@@ -270,13 +270,13 @@ func (s DescribeJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error 
 		v := *s.JobId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ThingName != nil {
 		v := *s.ThingName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ExecutionNumber != nil {
 		v := *s.ExecutionNumber
@@ -373,7 +373,7 @@ func (s GetPendingJobExecutionsInput) MarshalFields(e protocol.FieldEncoder) err
 		v := *s.ThingName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -497,13 +497,13 @@ func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.JobDocument
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobDocument", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "jobDocument", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.JobId != nil {
 		v := *s.JobId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedAt != nil {
 		v := *s.LastUpdatedAt
@@ -527,7 +527,7 @@ func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.StatusDetails) > 0 {
 		v := s.StatusDetails
@@ -536,7 +536,7 @@ func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "statusDetails", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -545,7 +545,7 @@ func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ThingName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VersionNumber != nil {
 		v := *s.VersionNumber
@@ -589,7 +589,7 @@ func (s JobExecutionState) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.StatusDetails) > 0 {
 		v := s.StatusDetails
@@ -598,7 +598,7 @@ func (s JobExecutionState) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "statusDetails", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -660,7 +660,7 @@ func (s JobExecutionSummary) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.JobId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastUpdatedAt != nil {
 		v := *s.LastUpdatedAt
@@ -740,7 +740,7 @@ func (s StartNextPendingJobExecutionInput) MarshalFields(e protocol.FieldEncoder
 		ms0 := e.Map(protocol.BodyTarget, "statusDetails", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -749,7 +749,7 @@ func (s StartNextPendingJobExecutionInput) MarshalFields(e protocol.FieldEncoder
 		v := *s.ThingName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -904,7 +904,7 @@ func (s UpdateJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := s.Status
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{v}, metadata)
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if len(s.StatusDetails) > 0 {
 		v := s.StatusDetails
@@ -913,7 +913,7 @@ func (s UpdateJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0 := e.Map(protocol.BodyTarget, "statusDetails", metadata)
 		ms0.Start()
 		for k1, v1 := range v {
-			ms0.MapSetValue(k1, protocol.QuotedValue{protocol.StringValue(v1)})
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
 		}
 		ms0.End()
 
@@ -922,13 +922,13 @@ func (s UpdateJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.JobId
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ThingName != nil {
 		v := *s.ThingName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -973,7 +973,7 @@ func (s UpdateJobExecutionOutput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.JobDocument
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "jobDocument", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.BodyTarget, "jobDocument", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

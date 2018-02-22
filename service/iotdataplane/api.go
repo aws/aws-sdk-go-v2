@@ -259,7 +259,7 @@ func (s DeleteThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ThingName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -346,7 +346,7 @@ func (s GetThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ThingName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -434,7 +434,7 @@ func (s PublishInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.Topic
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "topic", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "topic", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Payload != nil {
 		v := s.Payload
@@ -530,7 +530,7 @@ func (s UpdateThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
 		v := *s.ThingName
 
 		metadata := protocol.Metadata{}
-		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{protocol.StringValue(v)}, metadata)
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Payload != nil {
 		v := s.Payload

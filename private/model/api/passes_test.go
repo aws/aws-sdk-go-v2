@@ -105,11 +105,11 @@ func TestCollidingFields(t *testing.T) {
 				Shapes: []*Shapes{
 					{
 						MemberRefs: map[string]*ShapeRef{
-							"String":   &ShapeRef{},
-							"GoString": &ShapeRef{},
-							"Validate": &ShapeRef{},
-							"Foo":      &ShapeRef{},
-							"SetFoo":   &ShapeRef{},
+							"String":   {},
+							"GoString": {},
+							"Validate": {},
+							"Foo":      {},
+							"SetFoo":   {},
 						},
 					},
 				},
@@ -117,11 +117,11 @@ func TestCollidingFields(t *testing.T) {
 			[]*Shapes{
 				{
 					MemberRefs: map[string]*ShapeRef{
-						"String_":   &ShapeRef{},
-						"GoString_": &ShapeRef{},
-						"Validate_": &ShapeRef{},
-						"Foo":       &ShapeRef{},
-						"SetFoo_":   &ShapeRef{},
+						"String_":   {},
+						"GoString_": {},
+						"Validate_": {},
+						"Foo":       {},
+						"SetFoo_":   {},
 					},
 				},
 			},
