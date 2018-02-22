@@ -145,7 +145,7 @@ func TestAfterRetryWithContextCanceled(t *testing.T) {
 
 	aerr := req.Error.(awserr.Error)
 
-	if e, a := aws.CanceledErrorCode, aerr.Code(); e != a {
+	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
 		t.Errorf("expect %q, error code got %q", e, a)
 	}
 }
@@ -199,7 +199,7 @@ func TestSendWithContextCanceled(t *testing.T) {
 
 	aerr := req.Error.(awserr.Error)
 
-	if e, a := aws.CanceledErrorCode, aerr.Code(); e != a {
+	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
 		t.Errorf("expect %q, error code got %q", e, a)
 	}
 }

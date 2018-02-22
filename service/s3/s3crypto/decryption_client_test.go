@@ -240,7 +240,7 @@ func TestGetObjectWithContext(t *testing.T) {
 		t.Fatalf("expected error, did not get one")
 	}
 	aerr := err.(awserr.Error)
-	if e, a := aws.CanceledErrorCode, aerr.Code(); e != a {
+	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
 		t.Errorf("expected error code %q, got %q", e, a)
 	}
 	if e, a := "canceled", aerr.Message(); !strings.Contains(a, e) {

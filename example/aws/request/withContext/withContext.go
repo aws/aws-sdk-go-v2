@@ -63,9 +63,9 @@ func main() {
 	req.SetContext(ctx)
 
 	if _, err := req.Send(); err != nil {
-		if aerr, ok := err.(awserr.Error); ok && aerr.Code() == request.CanceledErrorCode {
+		if aerr, ok := err.(awserr.Error); ok && aerr.Code() == request.ErrCodeRequestCanceled {
 			// If the SDK can determine the request or retry delay was canceled
-			// by a context the CanceledErrorCode error code will be returned.
+			// by a context the ErrCodeRequestCanceled error code will be returned.
 			fmt.Fprintf(os.Stderr, "upload canceled due to timeout, %v\n", err)
 		} else {
 			fmt.Fprintf(os.Stderr, "failed to upload object, %v\n", err)
