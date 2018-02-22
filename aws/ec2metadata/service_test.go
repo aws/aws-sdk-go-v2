@@ -5,11 +5,11 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
-	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/awstesting"
 )
 
 func TestClientDisableIMDS(t *testing.T) {
@@ -28,7 +28,7 @@ func TestClientDisableIMDS(t *testing.T) {
 	}
 
 	aerr := err.(awserr.Error)
-	if e, a := request.CanceledErrorCode, aerr.Code(); e != a {
+	if e, a := aws.CanceledErrorCode, aerr.Code(); e != a {
 		t.Errorf("expect %v error code, got %v", e, a)
 	}
 	if e, a := "AWS_EC2_METADATA_DISABLED", aerr.Message(); !strings.Contains(a, e) {
