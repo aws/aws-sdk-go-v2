@@ -28,7 +28,7 @@ func TestClientDisableIMDS(t *testing.T) {
 	}
 
 	aerr := err.(awserr.Error)
-	if e, a := aws.CanceledErrorCode, aerr.Code(); e != a {
+	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
 		t.Errorf("expect %v error code, got %v", e, a)
 	}
 	if e, a := "AWS_EC2_METADATA_DISABLED", aerr.Message(); !strings.Contains(a, e) {

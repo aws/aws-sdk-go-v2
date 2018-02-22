@@ -59,7 +59,7 @@ func New(config aws.Config) *EC2Metadata {
 			Name: defaults.SendHandler.Name,
 			Fn: func(r *aws.Request) {
 				r.Error = awserr.New(
-					aws.CanceledErrorCode,
+					aws.ErrCodeRequestCanceled,
 					"EC2 IMDS access disabled via "+disableServiceEnvVar+" env var",
 					nil)
 			},

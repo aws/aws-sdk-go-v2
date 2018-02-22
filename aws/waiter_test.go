@@ -523,7 +523,7 @@ func TestWaiter_WithContextCanceled(t *testing.T) {
 		t.Fatalf("expect waiter to be canceled.")
 	}
 	aerr := err.(awserr.Error)
-	if e, a := aws.CanceledErrorCode, aerr.Code(); e != a {
+	if e, a := aws.ErrCodeRequestCanceled, aerr.Code(); e != a {
 		t.Errorf("expect %q error code, got %q", e, a)
 	}
 	if e, a := 2, reqCount; e != a {
