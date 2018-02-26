@@ -1,4 +1,4 @@
-![Build Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiNmlHN1RaaXBIc3RmZzFCYjgydENqSENIaTZJazF0QTBWUkxhR2JoWnZLdG9BdU9nblpXbDk5S2xoYUhRcWl5dERFVklaMDRrUy9rY3l4cmJTRzJnNHJZPSIsIml2UGFyYW1ldGVyU3BlYyI6Inc4bW5GZzZNN1MreGl1Y3giLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
+![Build Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiNmlHN1RaaXBIc3RmZzFCYjgydENqSENIaTZJazF0QTBWUkxhR2JoWnZLdG9BdU9nblpXbDk5S2xoYUhRcWl5dERFVklaMDRrUy9rY3l4cmJTRzJnNHJZPSIsIml2UGFyYW1ldGVyU3BlYyI6Inc4bW5GZzZNN1MreGl1Y3giLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master) [![Documentation](https://godoc.org/github.com/aws/aws-sdk-go-v2?status.svg)](https://godoc.org/github.com/aws/aws-sdk-go-v2)
 
 #  AWS SDK for Go v2
 
