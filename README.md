@@ -76,6 +76,9 @@ The v2 SDK will use [GitHub issues] to track feature requests and issues with th
 
 **Contributing**. You can open pull requests for fixes or additions to the AWS SDK for Go 2.0 Developer Preview release. All pull requests must be submitted under the Apache 2.0 license and will be reviewed by an SDK team member before being merged in. Accompanying unit tests, where possible, are appreciated.
 
+## Documentation
+
+Documentation for the SDK is available on [godoc](https://godoc.org/github.com/aws/aws-sdk-go-v2).
 
 ## License
 
