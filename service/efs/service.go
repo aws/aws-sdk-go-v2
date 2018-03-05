@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the EFS client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a EFS client from just a config.
 //     svc := efs.New(myConfig)
-//
-//     // Create a EFS client with additional configuration
-//     svc := efs.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *EFS {
 	var signingName string
 	signingRegion := config.Region

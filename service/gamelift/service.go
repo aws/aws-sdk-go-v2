@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the GameLift client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a GameLift client from just a config.
 //     svc := gamelift.New(myConfig)
-//
-//     // Create a GameLift client with additional configuration
-//     svc := gamelift.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *GameLift {
 	var signingName string
 	signingRegion := config.Region

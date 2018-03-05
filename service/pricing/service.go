@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Pricing client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Pricing client from just a config.
 //     svc := pricing.New(myConfig)
-//
-//     // Create a Pricing client with additional configuration
-//     svc := pricing.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Pricing {
 	var signingName string
 	signingName = "pricing"

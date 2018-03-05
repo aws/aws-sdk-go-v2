@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the DynamoDBStreams client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a DynamoDBStreams client from just a config.
 //     svc := dynamodbstreams.New(myConfig)
-//
-//     // Create a DynamoDBStreams client with additional configuration
-//     svc := dynamodbstreams.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *DynamoDBStreams {
 	var signingName string
 	signingName = "dynamodb"

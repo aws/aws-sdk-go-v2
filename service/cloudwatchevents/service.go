@@ -35,7 +35,6 @@ const (
 // Example:
 //     // Create a CloudWatchEvents client from just a config.
 //     svc := cloudwatchevents.New(myConfig)
-//
 func New(config aws.Config) *CloudWatchEvents {
 	var signingName string
 	signingRegion := config.Region

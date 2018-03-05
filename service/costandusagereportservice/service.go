@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the CostAndUsageReportService client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a CostAndUsageReportService client from just a config.
 //     svc := costandusagereportservice.New(myConfig)
-//
-//     // Create a CostAndUsageReportService client with additional configuration
-//     svc := costandusagereportservice.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *CostAndUsageReportService {
 	var signingName string
 	signingName = "cur"

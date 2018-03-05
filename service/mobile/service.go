@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Mobile client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Mobile client from just a config.
 //     svc := mobile.New(myConfig)
-//
-//     // Create a Mobile client with additional configuration
-//     svc := mobile.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Mobile {
 	var signingName string
 	signingName = "AWSMobileHubService"

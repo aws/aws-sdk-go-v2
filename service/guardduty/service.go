@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the GuardDuty client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a GuardDuty client from just a config.
 //     svc := guardduty.New(myConfig)
-//
-//     // Create a GuardDuty client with additional configuration
-//     svc := guardduty.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *GuardDuty {
 	var signingName string
 	signingName = "guardduty"

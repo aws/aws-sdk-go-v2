@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Rekognition client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Rekognition client from just a config.
 //     svc := rekognition.New(myConfig)
-//
-//     // Create a Rekognition client with additional configuration
-//     svc := rekognition.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Rekognition {
 	var signingName string
 	signingRegion := config.Region

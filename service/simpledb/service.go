@@ -32,15 +32,10 @@ const (
 )
 
 // New creates a new instance of the SimpleDB client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a SimpleDB client from just a config.
 //     svc := simpledb.New(myConfig)
-//
-//     // Create a SimpleDB client with additional configuration
-//     svc := simpledb.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *SimpleDB {
 	var signingName string
 	signingRegion := config.Region

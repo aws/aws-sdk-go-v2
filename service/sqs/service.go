@@ -36,15 +36,10 @@ const (
 )
 
 // New creates a new instance of the SQS client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a SQS client from just a config.
 //     svc := sqs.New(myConfig)
-//
-//     // Create a SQS client with additional configuration
-//     svc := sqs.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *SQS {
 	var signingName string
 	signingRegion := config.Region

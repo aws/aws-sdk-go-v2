@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the RDS client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a RDS client from just a config.
 //     svc := rds.New(myConfig)
-//
-//     // Create a RDS client with additional configuration
-//     svc := rds.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *RDS {
 	var signingName string
 	signingRegion := config.Region

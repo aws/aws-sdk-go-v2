@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the WAFRegional client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a WAFRegional client from just a config.
 //     svc := wafregional.New(myConfig)
-//
-//     // Create a WAFRegional client with additional configuration
-//     svc := wafregional.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *WAFRegional {
 	var signingName string
 	signingRegion := config.Region

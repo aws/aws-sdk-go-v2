@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the EC2 client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a EC2 client from just a config.
 //     svc := ec2.New(myConfig)
-//
-//     // Create a EC2 client with additional configuration
-//     svc := ec2.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *EC2 {
 	var signingName string
 	signingRegion := config.Region

@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the SWF client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a SWF client from just a config.
 //     svc := swf.New(myConfig)
-//
-//     // Create a SWF client with additional configuration
-//     svc := swf.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *SWF {
 	var signingName string
 	signingRegion := config.Region

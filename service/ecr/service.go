@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the ECR client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a ECR client from just a config.
 //     svc := ecr.New(myConfig)
-//
-//     // Create a ECR client with additional configuration
-//     svc := ecr.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *ECR {
 	var signingName string
 	signingRegion := config.Region

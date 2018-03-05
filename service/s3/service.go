@@ -72,15 +72,10 @@ const (
 )
 
 // New creates a new instance of the S3 client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a S3 client from just a config.
 //     svc := s3.New(myConfig)
-//
-//     // Create a S3 client with additional configuration
-//     svc := s3.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *S3 {
 	var signingName string
 	signingRegion := config.Region

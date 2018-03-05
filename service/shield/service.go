@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Shield client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Shield client from just a config.
 //     svc := shield.New(myConfig)
-//
-//     // Create a Shield client with additional configuration
-//     svc := shield.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Shield {
 	var signingName string
 	signingRegion := config.Region

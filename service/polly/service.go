@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Polly client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Polly client from just a config.
 //     svc := polly.New(myConfig)
-//
-//     // Create a Polly client with additional configuration
-//     svc := polly.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Polly {
 	var signingName string
 	signingRegion := config.Region

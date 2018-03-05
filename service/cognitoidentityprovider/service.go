@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the CognitoIdentityProvider client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a CognitoIdentityProvider client from just a config.
 //     svc := cognitoidentityprovider.New(myConfig)
-//
-//     // Create a CognitoIdentityProvider client with additional configuration
-//     svc := cognitoidentityprovider.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *CognitoIdentityProvider {
 	var signingName string
 	signingRegion := config.Region

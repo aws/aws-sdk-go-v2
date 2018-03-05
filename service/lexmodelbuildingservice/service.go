@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the LexModelBuildingService client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a LexModelBuildingService client from just a config.
 //     svc := lexmodelbuildingservice.New(myConfig)
-//
-//     // Create a LexModelBuildingService client with additional configuration
-//     svc := lexmodelbuildingservice.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *LexModelBuildingService {
 	var signingName string
 	signingName = "lex"

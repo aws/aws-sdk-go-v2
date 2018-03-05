@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Pinpoint client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Pinpoint client from just a config.
 //     svc := pinpoint.New(myConfig)
-//
-//     // Create a Pinpoint client with additional configuration
-//     svc := pinpoint.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Pinpoint {
 	var signingName string
 	signingName = "mobiletargeting"

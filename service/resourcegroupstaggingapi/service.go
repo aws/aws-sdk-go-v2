@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the ResourceGroupsTaggingAPI client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a ResourceGroupsTaggingAPI client from just a config.
 //     svc := resourcegroupstaggingapi.New(myConfig)
-//
-//     // Create a ResourceGroupsTaggingAPI client with additional configuration
-//     svc := resourcegroupstaggingapi.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *ResourceGroupsTaggingAPI {
 	var signingName string
 	signingRegion := config.Region

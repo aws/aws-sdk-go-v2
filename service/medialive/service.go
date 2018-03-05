@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the MediaLive client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a MediaLive client from just a config.
 //     svc := medialive.New(myConfig)
-//
-//     // Create a MediaLive client with additional configuration
-//     svc := medialive.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *MediaLive {
 	var signingName string
 	signingName = "medialive"

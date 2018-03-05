@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Glue client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Glue client from just a config.
 //     svc := glue.New(myConfig)
-//
-//     // Create a Glue client with additional configuration
-//     svc := glue.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Glue {
 	var signingName string
 	signingRegion := config.Region

@@ -36,15 +36,10 @@ const (
 )
 
 // New creates a new instance of the DynamoDB client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a DynamoDB client from just a config.
 //     svc := dynamodb.New(myConfig)
-//
-//     // Create a DynamoDB client with additional configuration
-//     svc := dynamodb.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *DynamoDB {
 	var signingName string
 	signingRegion := config.Region

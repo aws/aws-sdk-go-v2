@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the CodeBuild client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a CodeBuild client from just a config.
 //     svc := codebuild.New(myConfig)
-//
-//     // Create a CodeBuild client with additional configuration
-//     svc := codebuild.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *CodeBuild {
 	var signingName string
 	signingRegion := config.Region

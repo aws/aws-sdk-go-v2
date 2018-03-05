@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Glacier client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Glacier client from just a config.
 //     svc := glacier.New(myConfig)
-//
-//     // Create a Glacier client with additional configuration
-//     svc := glacier.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Glacier {
 	var signingName string
 	signingRegion := config.Region

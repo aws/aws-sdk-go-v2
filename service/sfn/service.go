@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the SFN client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a SFN client from just a config.
 //     svc := sfn.New(myConfig)
-//
-//     // Create a SFN client with additional configuration
-//     svc := sfn.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *SFN {
 	var signingName string
 	signingRegion := config.Region

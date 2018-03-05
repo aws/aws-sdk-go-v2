@@ -52,15 +52,10 @@ type InputService1ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService1ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService1ProtocolTest client from just a config.
 //     svc := inputservice1protocoltest.New(myConfig)
-//
-//     // Create a InputService1ProtocolTest client with additional configuration
-//     svc := inputservice1protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService1ProtocolTest(config aws.Config) *InputService1ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -180,15 +175,10 @@ type InputService2ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService2ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService2ProtocolTest client from just a config.
 //     svc := inputservice2protocoltest.New(myConfig)
-//
-//     // Create a InputService2ProtocolTest client with additional configuration
-//     svc := inputservice2protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService2ProtocolTest(config aws.Config) *InputService2ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -316,15 +306,10 @@ type InputService3ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService3ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService3ProtocolTest client from just a config.
 //     svc := inputservice3protocoltest.New(myConfig)
-//
-//     // Create a InputService3ProtocolTest client with additional configuration
-//     svc := inputservice3protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService3ProtocolTest(config aws.Config) *InputService3ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -452,15 +437,10 @@ type InputService4ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService4ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService4ProtocolTest client from just a config.
 //     svc := inputservice4protocoltest.New(myConfig)
-//
-//     // Create a InputService4ProtocolTest client with additional configuration
-//     svc := inputservice4protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService4ProtocolTest(config aws.Config) *InputService4ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -594,15 +574,10 @@ type InputService5ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService5ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService5ProtocolTest client from just a config.
 //     svc := inputservice5protocoltest.New(myConfig)
-//
-//     // Create a InputService5ProtocolTest client with additional configuration
-//     svc := inputservice5protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService5ProtocolTest(config aws.Config) *InputService5ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -744,15 +719,10 @@ type InputService6ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService6ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService6ProtocolTest client from just a config.
 //     svc := inputservice6protocoltest.New(myConfig)
-//
-//     // Create a InputService6ProtocolTest client with additional configuration
-//     svc := inputservice6protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService6ProtocolTest(config aws.Config) *InputService6ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -899,15 +869,10 @@ type InputService7ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService7ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService7ProtocolTest client from just a config.
 //     svc := inputservice7protocoltest.New(myConfig)
-//
-//     // Create a InputService7ProtocolTest client with additional configuration
-//     svc := inputservice7protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService7ProtocolTest(config aws.Config) *InputService7ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1099,15 +1064,10 @@ type InputService8ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService8ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService8ProtocolTest client from just a config.
 //     svc := inputservice8protocoltest.New(myConfig)
-//
-//     // Create a InputService8ProtocolTest client with additional configuration
-//     svc := inputservice8protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService8ProtocolTest(config aws.Config) *InputService8ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1251,15 +1211,10 @@ type InputService9ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService9ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService9ProtocolTest client from just a config.
 //     svc := inputservice9protocoltest.New(myConfig)
-//
-//     // Create a InputService9ProtocolTest client with additional configuration
-//     svc := inputservice9protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService9ProtocolTest(config aws.Config) *InputService9ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1436,15 +1391,10 @@ type InputService10ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService10ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService10ProtocolTest client from just a config.
 //     svc := inputservice10protocoltest.New(myConfig)
-//
-//     // Create a InputService10ProtocolTest client with additional configuration
-//     svc := inputservice10protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService10ProtocolTest(config aws.Config) *InputService10ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1629,15 +1579,10 @@ type InputService11ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService11ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService11ProtocolTest client from just a config.
 //     svc := inputservice11protocoltest.New(myConfig)
-//
-//     // Create a InputService11ProtocolTest client with additional configuration
-//     svc := inputservice11protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService11ProtocolTest(config aws.Config) *InputService11ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1796,15 +1741,10 @@ type InputService12ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService12ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService12ProtocolTest client from just a config.
 //     svc := inputservice12protocoltest.New(myConfig)
-//
-//     // Create a InputService12ProtocolTest client with additional configuration
-//     svc := inputservice12protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService12ProtocolTest(config aws.Config) *InputService12ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1956,15 +1896,10 @@ type InputService13ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService13ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService13ProtocolTest client from just a config.
 //     svc := inputservice13protocoltest.New(myConfig)
-//
-//     // Create a InputService13ProtocolTest client with additional configuration
-//     svc := inputservice13protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService13ProtocolTest(config aws.Config) *InputService13ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -2156,15 +2091,10 @@ type InputService14ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService14ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService14ProtocolTest client from just a config.
 //     svc := inputservice14protocoltest.New(myConfig)
-//
-//     // Create a InputService14ProtocolTest client with additional configuration
-//     svc := inputservice14protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService14ProtocolTest(config aws.Config) *InputService14ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -2373,15 +2303,10 @@ type InputService15ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService15ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService15ProtocolTest client from just a config.
 //     svc := inputservice15protocoltest.New(myConfig)
-//
-//     // Create a InputService15ProtocolTest client with additional configuration
-//     svc := inputservice15protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService15ProtocolTest(config aws.Config) *InputService15ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -2573,15 +2498,10 @@ type InputService16ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService16ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService16ProtocolTest client from just a config.
 //     svc := inputservice16protocoltest.New(myConfig)
-//
-//     // Create a InputService16ProtocolTest client with additional configuration
-//     svc := inputservice16protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService16ProtocolTest(config aws.Config) *InputService16ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -3082,15 +3002,10 @@ type InputService17ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService17ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService17ProtocolTest client from just a config.
 //     svc := inputservice17protocoltest.New(myConfig)
-//
-//     // Create a InputService17ProtocolTest client with additional configuration
-//     svc := inputservice17protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService17ProtocolTest(config aws.Config) *InputService17ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -3290,15 +3205,10 @@ type InputService18ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService18ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService18ProtocolTest client from just a config.
 //     svc := inputservice18protocoltest.New(myConfig)
-//
-//     // Create a InputService18ProtocolTest client with additional configuration
-//     svc := inputservice18protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService18ProtocolTest(config aws.Config) *InputService18ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -3426,15 +3336,10 @@ type InputService19ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService19ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService19ProtocolTest client from just a config.
 //     svc := inputservice19protocoltest.New(myConfig)
-//
-//     // Create a InputService19ProtocolTest client with additional configuration
-//     svc := inputservice19protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService19ProtocolTest(config aws.Config) *InputService19ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -3562,15 +3467,10 @@ type InputService20ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService20ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService20ProtocolTest client from just a config.
 //     svc := inputservice20protocoltest.New(myConfig)
-//
-//     // Create a InputService20ProtocolTest client with additional configuration
-//     svc := inputservice20protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService20ProtocolTest(config aws.Config) *InputService20ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -3768,15 +3668,10 @@ type InputService21ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService21ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService21ProtocolTest client from just a config.
 //     svc := inputservice21protocoltest.New(myConfig)
-//
-//     // Create a InputService21ProtocolTest client with additional configuration
-//     svc := inputservice21protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService21ProtocolTest(config aws.Config) *InputService21ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -4079,15 +3974,10 @@ type InputService22ProtocolTest struct {
 }
 
 // New creates a new instance of the InputService22ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a InputService22ProtocolTest client from just a config.
 //     svc := inputservice22protocoltest.New(myConfig)
-//
-//     // Create a InputService22ProtocolTest client with additional configuration
-//     svc := inputservice22protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewInputService22ProtocolTest(config aws.Config) *InputService22ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
