@@ -480,15 +480,10 @@ const (
 {{- end }}
 
 // New creates a new instance of the {{ .StructName }} client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a {{ .StructName }} client from just a config.
 //     svc := {{ .PackageName }}.New(myConfig)
-//
-//     // Create a {{ .StructName }} client with additional configuration
-//     svc := {{ .PackageName }}.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *{{ .StructName }} {
 	var signingName string
 	{{- if .Metadata.SigningName }}
