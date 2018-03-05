@@ -1,6 +1,6 @@
 ![Build Status](https://codebuild.us-west-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiNmlHN1RaaXBIc3RmZzFCYjgydENqSENIaTZJazF0QTBWUkxhR2JoWnZLdG9BdU9nblpXbDk5S2xoYUhRcWl5dERFVklaMDRrUy9rY3l4cmJTRzJnNHJZPSIsIml2UGFyYW1ldGVyU3BlYyI6Inc4bW5GZzZNN1MreGl1Y3giLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
 
-#  AWS SDK for Go v2
+# AWS SDK for Go v2
 
 aws-sdk-go-v2 is the Developer Preview for the v2 of the AWS SDK for the Go programming language. 
 
@@ -19,7 +19,7 @@ go get github.com/aws/aws-sdk-go-v2
 You could also use [Dep] to add the SDK to your application's dependencies. Using [Dep] will simplify your update story and help your application keep pinned to specific version of the SDK
 
 ```sh
-dep ensure --add github.com/aws/aws-sdk-go-v2
+dep ensure -add github.com/aws/aws-sdk-go-v2
 ```
 
 ### Hello AWS
@@ -76,7 +76,6 @@ The v2 SDK will use [GitHub issues] to track feature requests and issues with th
 
 **Contributing**. You can open pull requests for fixes or additions to the AWS SDK for Go 2.0 Developer Preview release. All pull requests must be submitted under the Apache 2.0 license and will be reviewed by an SDK team member before being merged in. Accompanying unit tests, where possible, are appreciated.
 
-
 ## License
 
 This SDK is distributed under the
@@ -89,5 +88,3 @@ see LICENSE.txt and NOTICE.txt for more information.
 [CHANGE_LOG]: https://github.com/aws/aws-sdk-go-v2/blob/master/CHANGELOG.md
 [Amazon DynamoDB]: https://aws.amazon.com/dynamodb/
 [Gitter channel]: https://gitter.im/aws/aws-sdk-go-v2
-
-
