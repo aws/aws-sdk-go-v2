@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the ResourceGroups client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a ResourceGroups client from just a config.
 //     svc := resourcegroups.New(myConfig)
-//
-//     // Create a ResourceGroups client with additional configuration
-//     svc := resourcegroups.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *ResourceGroups {
 	var signingName string
 	signingName = "resource-groups"

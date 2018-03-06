@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the SSM client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a SSM client from just a config.
 //     svc := ssm.New(myConfig)
-//
-//     // Create a SSM client with additional configuration
-//     svc := ssm.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *SSM {
 	var signingName string
 	signingRegion := config.Region

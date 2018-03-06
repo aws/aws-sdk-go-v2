@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the MigrationHub client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a MigrationHub client from just a config.
 //     svc := migrationhub.New(myConfig)
-//
-//     // Create a MigrationHub client with additional configuration
-//     svc := migrationhub.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *MigrationHub {
 	var signingName string
 	signingRegion := config.Region

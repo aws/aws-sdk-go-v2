@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the IoTJobsDataPlane client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a IoTJobsDataPlane client from just a config.
 //     svc := iotjobsdataplane.New(myConfig)
-//
-//     // Create a IoTJobsDataPlane client with additional configuration
-//     svc := iotjobsdataplane.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *IoTJobsDataPlane {
 	var signingName string
 	signingName = "iot-jobs-data"

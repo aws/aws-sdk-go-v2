@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the DirectoryService client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a DirectoryService client from just a config.
 //     svc := directoryservice.New(myConfig)
-//
-//     // Create a DirectoryService client with additional configuration
-//     svc := directoryservice.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *DirectoryService {
 	var signingName string
 	signingRegion := config.Region

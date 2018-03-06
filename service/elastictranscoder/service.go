@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the ElasticTranscoder client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a ElasticTranscoder client from just a config.
 //     svc := elastictranscoder.New(myConfig)
-//
-//     // Create a ElasticTranscoder client with additional configuration
-//     svc := elastictranscoder.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *ElasticTranscoder {
 	var signingName string
 	signingRegion := config.Region

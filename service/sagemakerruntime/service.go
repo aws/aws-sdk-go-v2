@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the SageMakerRuntime client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a SageMakerRuntime client from just a config.
 //     svc := sagemakerruntime.New(myConfig)
-//
-//     // Create a SageMakerRuntime client with additional configuration
-//     svc := sagemakerruntime.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *SageMakerRuntime {
 	var signingName string
 	signingName = "sagemaker"

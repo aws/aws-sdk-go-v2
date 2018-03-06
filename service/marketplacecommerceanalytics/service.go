@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the MarketplaceCommerceAnalytics client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a MarketplaceCommerceAnalytics client from just a config.
 //     svc := marketplacecommerceanalytics.New(myConfig)
-//
-//     // Create a MarketplaceCommerceAnalytics client with additional configuration
-//     svc := marketplacecommerceanalytics.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *MarketplaceCommerceAnalytics {
 	var signingName string
 	signingName = "marketplacecommerceanalytics"

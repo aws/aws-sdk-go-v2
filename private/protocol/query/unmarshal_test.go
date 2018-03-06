@@ -52,15 +52,10 @@ type OutputService1ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService1ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService1ProtocolTest client from just a config.
 //     svc := outputservice1protocoltest.New(myConfig)
-//
-//     // Create a OutputService1ProtocolTest client with additional configuration
-//     svc := outputservice1protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService1ProtocolTest(config aws.Config) *OutputService1ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -185,15 +180,10 @@ type OutputService2ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService2ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService2ProtocolTest client from just a config.
 //     svc := outputservice2protocoltest.New(myConfig)
-//
-//     // Create a OutputService2ProtocolTest client with additional configuration
-//     svc := outputservice2protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService2ProtocolTest(config aws.Config) *OutputService2ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -304,15 +294,10 @@ type OutputService3ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService3ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService3ProtocolTest client from just a config.
 //     svc := outputservice3protocoltest.New(myConfig)
-//
-//     // Create a OutputService3ProtocolTest client with additional configuration
-//     svc := outputservice3protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService3ProtocolTest(config aws.Config) *OutputService3ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -422,15 +407,10 @@ type OutputService4ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService4ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService4ProtocolTest client from just a config.
 //     svc := outputservice4protocoltest.New(myConfig)
-//
-//     // Create a OutputService4ProtocolTest client with additional configuration
-//     svc := outputservice4protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService4ProtocolTest(config aws.Config) *OutputService4ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -539,15 +519,10 @@ type OutputService5ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService5ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService5ProtocolTest client from just a config.
 //     svc := outputservice5protocoltest.New(myConfig)
-//
-//     // Create a OutputService5ProtocolTest client with additional configuration
-//     svc := outputservice5protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService5ProtocolTest(config aws.Config) *OutputService5ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -656,15 +631,10 @@ type OutputService6ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService6ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService6ProtocolTest client from just a config.
 //     svc := outputservice6protocoltest.New(myConfig)
-//
-//     // Create a OutputService6ProtocolTest client with additional configuration
-//     svc := outputservice6protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService6ProtocolTest(config aws.Config) *OutputService6ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -773,15 +743,10 @@ type OutputService7ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService7ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService7ProtocolTest client from just a config.
 //     svc := outputservice7protocoltest.New(myConfig)
-//
-//     // Create a OutputService7ProtocolTest client with additional configuration
-//     svc := outputservice7protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService7ProtocolTest(config aws.Config) *OutputService7ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -890,15 +855,10 @@ type OutputService8ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService8ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService8ProtocolTest client from just a config.
 //     svc := outputservice8protocoltest.New(myConfig)
-//
-//     // Create a OutputService8ProtocolTest client with additional configuration
-//     svc := outputservice8protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService8ProtocolTest(config aws.Config) *OutputService8ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1017,15 +977,10 @@ type OutputService9ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService9ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService9ProtocolTest client from just a config.
 //     svc := outputservice9protocoltest.New(myConfig)
-//
-//     // Create a OutputService9ProtocolTest client with additional configuration
-//     svc := outputservice9protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService9ProtocolTest(config aws.Config) *OutputService9ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1144,15 +1099,10 @@ type OutputService10ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService10ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService10ProtocolTest client from just a config.
 //     svc := outputservice10protocoltest.New(myConfig)
-//
-//     // Create a OutputService10ProtocolTest client with additional configuration
-//     svc := outputservice10protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService10ProtocolTest(config aws.Config) *OutputService10ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1261,15 +1211,10 @@ type OutputService11ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService11ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService11ProtocolTest client from just a config.
 //     svc := outputservice11protocoltest.New(myConfig)
-//
-//     // Create a OutputService11ProtocolTest client with additional configuration
-//     svc := outputservice11protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService11ProtocolTest(config aws.Config) *OutputService11ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1384,15 +1329,10 @@ type OutputService12ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService12ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService12ProtocolTest client from just a config.
 //     svc := outputservice12protocoltest.New(myConfig)
-//
-//     // Create a OutputService12ProtocolTest client with additional configuration
-//     svc := outputservice12protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService12ProtocolTest(config aws.Config) *OutputService12ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1501,15 +1441,10 @@ type OutputService13ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService13ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService13ProtocolTest client from just a config.
 //     svc := outputservice13protocoltest.New(myConfig)
-//
-//     // Create a OutputService13ProtocolTest client with additional configuration
-//     svc := outputservice13protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService13ProtocolTest(config aws.Config) *OutputService13ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1618,15 +1553,10 @@ type OutputService14ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService14ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService14ProtocolTest client from just a config.
 //     svc := outputservice14protocoltest.New(myConfig)
-//
-//     // Create a OutputService14ProtocolTest client with additional configuration
-//     svc := outputservice14protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService14ProtocolTest(config aws.Config) *OutputService14ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1735,15 +1665,10 @@ type OutputService15ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService15ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService15ProtocolTest client from just a config.
 //     svc := outputservice15protocoltest.New(myConfig)
-//
-//     // Create a OutputService15ProtocolTest client with additional configuration
-//     svc := outputservice15protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService15ProtocolTest(config aws.Config) *OutputService15ProtocolTest {
 	var signingName string
 	signingRegion := config.Region
@@ -1852,15 +1777,10 @@ type OutputService16ProtocolTest struct {
 }
 
 // New creates a new instance of the OutputService16ProtocolTest client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OutputService16ProtocolTest client from just a config.
 //     svc := outputservice16protocoltest.New(myConfig)
-//
-//     // Create a OutputService16ProtocolTest client with additional configuration
-//     svc := outputservice16protocoltest.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func NewOutputService16ProtocolTest(config aws.Config) *OutputService16ProtocolTest {
 	var signingName string
 	signingRegion := config.Region

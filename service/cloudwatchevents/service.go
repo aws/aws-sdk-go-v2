@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the CloudWatchEvents client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a CloudWatchEvents client from just a config.
 //     svc := cloudwatchevents.New(myConfig)
-//
-//     // Create a CloudWatchEvents client with additional configuration
-//     svc := cloudwatchevents.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *CloudWatchEvents {
 	var signingName string
 	signingRegion := config.Region

@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the KMS client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a KMS client from just a config.
 //     svc := kms.New(myConfig)
-//
-//     // Create a KMS client with additional configuration
-//     svc := kms.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *KMS {
 	var signingName string
 	signingRegion := config.Region

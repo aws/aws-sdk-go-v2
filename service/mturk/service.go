@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the MTurk client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a MTurk client from just a config.
 //     svc := mturk.New(myConfig)
-//
-//     // Create a MTurk client with additional configuration
-//     svc := mturk.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *MTurk {
 	var signingName string
 	signingRegion := config.Region

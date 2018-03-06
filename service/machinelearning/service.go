@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the MachineLearning client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a MachineLearning client from just a config.
 //     svc := machinelearning.New(myConfig)
-//
-//     // Create a MachineLearning client with additional configuration
-//     svc := machinelearning.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *MachineLearning {
 	var signingName string
 	signingRegion := config.Region

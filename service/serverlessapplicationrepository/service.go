@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the ServerlessApplicationRepository client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a ServerlessApplicationRepository client from just a config.
 //     svc := serverlessapplicationrepository.New(myConfig)
-//
-//     // Create a ServerlessApplicationRepository client with additional configuration
-//     svc := serverlessapplicationrepository.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *ServerlessApplicationRepository {
 	var signingName string
 	signingName = "serverlessrepo"

@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the IoT client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a IoT client from just a config.
 //     svc := iot.New(myConfig)
-//
-//     // Create a IoT client with additional configuration
-//     svc := iot.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *IoT {
 	var signingName string
 	signingName = "execute-api"

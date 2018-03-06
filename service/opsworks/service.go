@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the OpsWorks client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a OpsWorks client from just a config.
 //     svc := opsworks.New(myConfig)
-//
-//     // Create a OpsWorks client with additional configuration
-//     svc := opsworks.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *OpsWorks {
 	var signingName string
 	signingRegion := config.Region

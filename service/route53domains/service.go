@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Route53Domains client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Route53Domains client from just a config.
 //     svc := route53domains.New(myConfig)
-//
-//     // Create a Route53Domains client with additional configuration
-//     svc := route53domains.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Route53Domains {
 	var signingName string
 	signingRegion := config.Region

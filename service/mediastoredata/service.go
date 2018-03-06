@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the MediaStoreData client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a MediaStoreData client from just a config.
 //     svc := mediastoredata.New(myConfig)
-//
-//     // Create a MediaStoreData client with additional configuration
-//     svc := mediastoredata.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *MediaStoreData {
 	var signingName string
 	signingName = "mediastore"

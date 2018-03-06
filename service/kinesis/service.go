@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Kinesis client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Kinesis client from just a config.
 //     svc := kinesis.New(myConfig)
-//
-//     // Create a Kinesis client with additional configuration
-//     svc := kinesis.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Kinesis {
 	var signingName string
 	signingRegion := config.Region

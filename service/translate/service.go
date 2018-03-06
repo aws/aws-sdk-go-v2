@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Translate client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Translate client from just a config.
 //     svc := translate.New(myConfig)
-//
-//     // Create a Translate client with additional configuration
-//     svc := translate.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Translate {
 	var signingName string
 	signingName = "translate"

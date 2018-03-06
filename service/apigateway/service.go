@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the APIGateway client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a APIGateway client from just a config.
 //     svc := apigateway.New(myConfig)
-//
-//     // Create a APIGateway client with additional configuration
-//     svc := apigateway.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *APIGateway {
 	var signingName string
 	signingRegion := config.Region

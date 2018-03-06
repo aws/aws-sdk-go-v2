@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the MarketplaceMetering client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a MarketplaceMetering client from just a config.
 //     svc := marketplacemetering.New(myConfig)
-//
-//     // Create a MarketplaceMetering client with additional configuration
-//     svc := marketplacemetering.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *MarketplaceMetering {
 	var signingName string
 	signingName = "aws-marketplace"

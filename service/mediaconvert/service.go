@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the MediaConvert client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a MediaConvert client from just a config.
 //     svc := mediaconvert.New(myConfig)
-//
-//     // Create a MediaConvert client with additional configuration
-//     svc := mediaconvert.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *MediaConvert {
 	var signingName string
 	signingName = "mediaconvert"

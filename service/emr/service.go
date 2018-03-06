@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the EMR client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a EMR client from just a config.
 //     svc := emr.New(myConfig)
-//
-//     // Create a EMR client with additional configuration
-//     svc := emr.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *EMR {
 	var signingName string
 	signingRegion := config.Region

@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the ECS client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a ECS client from just a config.
 //     svc := ecs.New(myConfig)
-//
-//     // Create a ECS client with additional configuration
-//     svc := ecs.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *ECS {
 	var signingName string
 	signingRegion := config.Region

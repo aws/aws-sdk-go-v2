@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Comprehend client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Comprehend client from just a config.
 //     svc := comprehend.New(myConfig)
-//
-//     // Create a Comprehend client with additional configuration
-//     svc := comprehend.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Comprehend {
 	var signingName string
 	signingName = "comprehend"

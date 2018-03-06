@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Inspector client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Inspector client from just a config.
 //     svc := inspector.New(myConfig)
-//
-//     // Create a Inspector client with additional configuration
-//     svc := inspector.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Inspector {
 	var signingName string
 	signingRegion := config.Region

@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the CloudSearch client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a CloudSearch client from just a config.
 //     svc := cloudsearch.New(myConfig)
-//
-//     // Create a CloudSearch client with additional configuration
-//     svc := cloudsearch.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *CloudSearch {
 	var signingName string
 	signingRegion := config.Region

@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the AlexaForBusiness client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a AlexaForBusiness client from just a config.
 //     svc := alexaforbusiness.New(myConfig)
-//
-//     // Create a AlexaForBusiness client with additional configuration
-//     svc := alexaforbusiness.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *AlexaForBusiness {
 	var signingName string
 	signingRegion := config.Region

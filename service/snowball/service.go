@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the Snowball client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a Snowball client from just a config.
 //     svc := snowball.New(myConfig)
-//
-//     // Create a Snowball client with additional configuration
-//     svc := snowball.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *Snowball {
 	var signingName string
 	signingRegion := config.Region

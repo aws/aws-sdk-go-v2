@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the ApplicationAutoScaling client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a ApplicationAutoScaling client from just a config.
 //     svc := applicationautoscaling.New(myConfig)
-//
-//     // Create a ApplicationAutoScaling client with additional configuration
-//     svc := applicationautoscaling.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *ApplicationAutoScaling {
 	var signingName string
 	signingName = "application-autoscaling"

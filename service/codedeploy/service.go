@@ -31,15 +31,10 @@ const (
 )
 
 // New creates a new instance of the CodeDeploy client with a config.
-// If additional configuration is needed for the client instance use the
-// optional aws.Config parameter to add your extra config.
 //
 // Example:
 //     // Create a CodeDeploy client from just a config.
 //     svc := codedeploy.New(myConfig)
-//
-//     // Create a CodeDeploy client with additional configuration
-//     svc := codedeploy.New(myConfig, aws.NewConfig().WithRegion("us-west-2"))
 func New(config aws.Config) *CodeDeploy {
 	var signingName string
 	signingRegion := config.Region
