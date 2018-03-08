@@ -4705,10 +4705,11 @@ type ConfigurationItemStatus string
 
 // Enum values for ConfigurationItemStatus
 const (
-	ConfigurationItemStatusOk         ConfigurationItemStatus = "Ok"
-	ConfigurationItemStatusFailed     ConfigurationItemStatus = "Failed"
-	ConfigurationItemStatusDiscovered ConfigurationItemStatus = "Discovered"
-	ConfigurationItemStatusDeleted    ConfigurationItemStatus = "Deleted"
+	ConfigurationItemStatusOk                         ConfigurationItemStatus = "OK"
+	ConfigurationItemStatusResourceDiscovered         ConfigurationItemStatus = "ResourceDiscovered"
+	ConfigurationItemStatusResourceNotRecorded        ConfigurationItemStatus = "ResourceNotRecorded"
+	ConfigurationItemStatusResourceDeleted            ConfigurationItemStatus = "ResourceDeleted"
+	ConfigurationItemStatusResourceDeletedNotRecorded ConfigurationItemStatus = "ResourceDeletedNotRecorded"
 )
 
 func (enum ConfigurationItemStatus) MarshalValue() (string, error) {

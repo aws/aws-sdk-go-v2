@@ -80,6 +80,8 @@ type ServiceCatalogAPI interface {
 
 	CreateProductRequest(*servicecatalog.CreateProductInput) servicecatalog.CreateProductRequest
 
+	CreateProvisionedProductPlanRequest(*servicecatalog.CreateProvisionedProductPlanInput) servicecatalog.CreateProvisionedProductPlanRequest
+
 	CreateProvisioningArtifactRequest(*servicecatalog.CreateProvisioningArtifactInput) servicecatalog.CreateProvisioningArtifactRequest
 
 	CreateTagOptionRequest(*servicecatalog.CreateTagOptionInput) servicecatalog.CreateTagOptionRequest
@@ -92,7 +94,11 @@ type ServiceCatalogAPI interface {
 
 	DeleteProductRequest(*servicecatalog.DeleteProductInput) servicecatalog.DeleteProductRequest
 
+	DeleteProvisionedProductPlanRequest(*servicecatalog.DeleteProvisionedProductPlanInput) servicecatalog.DeleteProvisionedProductPlanRequest
+
 	DeleteProvisioningArtifactRequest(*servicecatalog.DeleteProvisioningArtifactInput) servicecatalog.DeleteProvisioningArtifactRequest
+
+	DeleteTagOptionRequest(*servicecatalog.DeleteTagOptionInput) servicecatalog.DeleteTagOptionRequest
 
 	DescribeConstraintRequest(*servicecatalog.DescribeConstraintInput) servicecatalog.DescribeConstraintRequest
 
@@ -108,6 +114,8 @@ type ServiceCatalogAPI interface {
 
 	DescribeProvisionedProductRequest(*servicecatalog.DescribeProvisionedProductInput) servicecatalog.DescribeProvisionedProductRequest
 
+	DescribeProvisionedProductPlanRequest(*servicecatalog.DescribeProvisionedProductPlanInput) servicecatalog.DescribeProvisionedProductPlanRequest
+
 	DescribeProvisioningArtifactRequest(*servicecatalog.DescribeProvisioningArtifactInput) servicecatalog.DescribeProvisioningArtifactRequest
 
 	DescribeProvisioningParametersRequest(*servicecatalog.DescribeProvisioningParametersInput) servicecatalog.DescribeProvisioningParametersRequest
@@ -122,6 +130,8 @@ type ServiceCatalogAPI interface {
 
 	DisassociateTagOptionFromResourceRequest(*servicecatalog.DisassociateTagOptionFromResourceInput) servicecatalog.DisassociateTagOptionFromResourceRequest
 
+	ExecuteProvisionedProductPlanRequest(*servicecatalog.ExecuteProvisionedProductPlanInput) servicecatalog.ExecuteProvisionedProductPlanRequest
+
 	ListAcceptedPortfolioSharesRequest(*servicecatalog.ListAcceptedPortfolioSharesInput) servicecatalog.ListAcceptedPortfolioSharesRequest
 
 	ListConstraintsForPortfolioRequest(*servicecatalog.ListConstraintsForPortfolioInput) servicecatalog.ListConstraintsForPortfolioRequest
@@ -135,6 +145,8 @@ type ServiceCatalogAPI interface {
 	ListPortfoliosForProductRequest(*servicecatalog.ListPortfoliosForProductInput) servicecatalog.ListPortfoliosForProductRequest
 
 	ListPrincipalsForPortfolioRequest(*servicecatalog.ListPrincipalsForPortfolioInput) servicecatalog.ListPrincipalsForPortfolioRequest
+
+	ListProvisionedProductPlansRequest(*servicecatalog.ListProvisionedProductPlansInput) servicecatalog.ListProvisionedProductPlansRequest
 
 	ListProvisioningArtifactsRequest(*servicecatalog.ListProvisioningArtifactsInput) servicecatalog.ListProvisioningArtifactsRequest
 
@@ -153,6 +165,8 @@ type ServiceCatalogAPI interface {
 	SearchProductsRequest(*servicecatalog.SearchProductsInput) servicecatalog.SearchProductsRequest
 
 	SearchProductsAsAdminRequest(*servicecatalog.SearchProductsAsAdminInput) servicecatalog.SearchProductsAsAdminRequest
+
+	SearchProvisionedProductsRequest(*servicecatalog.SearchProvisionedProductsInput) servicecatalog.SearchProvisionedProductsRequest
 
 	TerminateProvisionedProductRequest(*servicecatalog.TerminateProvisionedProductInput) servicecatalog.TerminateProvisionedProductRequest
 

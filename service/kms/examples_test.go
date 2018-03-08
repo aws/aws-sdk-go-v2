@@ -1341,6 +1341,8 @@ func ExampleKMS_RetireGrantRequest_shared00() {
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok {
 			switch aerr.Code() {
+			case kms.ErrCodeInvalidArnException:
+				fmt.Println(kms.ErrCodeInvalidArnException, aerr.Error())
 			case kms.ErrCodeInvalidGrantTokenException:
 				fmt.Println(kms.ErrCodeInvalidGrantTokenException, aerr.Error())
 			case kms.ErrCodeInvalidGrantIdException:

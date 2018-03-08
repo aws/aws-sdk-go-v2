@@ -14091,6 +14091,7 @@ const (
 	CloudWatchRegionApSoutheast2 CloudWatchRegion = "ap-southeast-2"
 	CloudWatchRegionApNortheast1 CloudWatchRegion = "ap-northeast-1"
 	CloudWatchRegionApNortheast2 CloudWatchRegion = "ap-northeast-2"
+	CloudWatchRegionApNortheast3 CloudWatchRegion = "ap-northeast-3"
 	CloudWatchRegionSaEast1      CloudWatchRegion = "sa-east-1"
 )
 
@@ -14282,6 +14283,7 @@ const (
 	ResourceRecordSetRegionApSoutheast2 ResourceRecordSetRegion = "ap-southeast-2"
 	ResourceRecordSetRegionApNortheast1 ResourceRecordSetRegion = "ap-northeast-1"
 	ResourceRecordSetRegionApNortheast2 ResourceRecordSetRegion = "ap-northeast-2"
+	ResourceRecordSetRegionApNortheast3 ResourceRecordSetRegion = "ap-northeast-3"
 	ResourceRecordSetRegionSaEast1      ResourceRecordSetRegion = "sa-east-1"
 	ResourceRecordSetRegionCnNorth1     ResourceRecordSetRegion = "cn-north-1"
 	ResourceRecordSetRegionCnNorthwest1 ResourceRecordSetRegion = "cn-northwest-1"
@@ -14367,6 +14369,7 @@ const (
 	VPCRegionApSouth1     VPCRegion = "ap-south-1"
 	VPCRegionApNortheast1 VPCRegion = "ap-northeast-1"
 	VPCRegionApNortheast2 VPCRegion = "ap-northeast-2"
+	VPCRegionApNortheast3 VPCRegion = "ap-northeast-3"
 	VPCRegionSaEast1      VPCRegion = "sa-east-1"
 	VPCRegionCaCentral1   VPCRegion = "ca-central-1"
 	VPCRegionCnNorth1     VPCRegion = "cn-north-1"

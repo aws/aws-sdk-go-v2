@@ -106,6 +106,8 @@ type AppSyncAPI interface {
 
 	StartSchemaCreationRequest(*appsync.StartSchemaCreationInput) appsync.StartSchemaCreationRequest
 
+	UpdateApiKeyRequest(*appsync.UpdateApiKeyInput) appsync.UpdateApiKeyRequest
+
 	UpdateDataSourceRequest(*appsync.UpdateDataSourceInput) appsync.UpdateDataSourceRequest
 
 	UpdateGraphqlApiRequest(*appsync.UpdateGraphqlApiInput) appsync.UpdateGraphqlApiRequest

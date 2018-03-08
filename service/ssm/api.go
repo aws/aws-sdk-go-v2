@@ -6309,9 +6309,9 @@ type Command struct {
 
 	// The maximum number of errors allowed before the system stops sending the
 	// command to additional targets. You can specify a number of errors, such as
-	// 10, or a percentage or errors, such as 10%. The default value is 50. For
-	// more information about how to use MaxErrors, see Executing a Command Using
-	// Systems Manager Run Command (http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html).
+	// 10, or a percentage or errors, such as 10%. The default value is 0. For more
+	// information about how to use MaxErrors, see Executing a Command Using Systems
+	// Manager Run Command (http://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html).
 	MaxErrors *string `min:"1" type:"string"`
 
 	// Configurations for sending notifications about command status changes.
@@ -7268,6 +7268,15 @@ type CreateDocumentInput struct {
 
 	// A name for the Systems Manager document.
 	//
+	// Do not use the following to begin the names of documents you create. They
+	// are reserved by AWS for use as document prefixes:
+	//
+	// aws
+	//
+	// amazon
+	//
+	// amzn
+	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
@@ -7477,6 +7486,11 @@ type CreatePatchBaselineInput struct {
 	// HIGH, MEDIUM, LOW, INFORMATIONAL, UNSPECIFIED. The default value is UNSPECIFIED.
 	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
 
+	// Indicates whether the list of approved patches includes non-security updates
+	// that should be applied to the instances. The default value is 'false'. Applies
+	// to Linux instances only.
+	ApprovedPatchesEnableNonSecurity *bool `type:"boolean"`
+
 	// User-provided idempotency token.
 	ClientToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
@@ -7497,6 +7511,10 @@ type CreatePatchBaselineInput struct {
 
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []string `type:"list"`
+
+	// Information about the patches to use to update the instances, including target
+	// operating systems and source repositories. Applies to Linux instances only.
+	Sources []PatchSource `type:"list"`
 }
 
 // String returns the string representation
@@ -7533,6 +7551,13 @@ func (s *CreatePatchBaselineInput) Validate() error {
 	if s.GlobalFilters != nil {
 		if err := s.GlobalFilters.Validate(); err != nil {
 			invalidParams.AddNested("GlobalFilters", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Sources != nil {
+		for i, v := range s.Sources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sources", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 
@@ -12376,6 +12401,11 @@ type GetPatchBaselineOutput struct {
 	// patch baseline.
 	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
 
+	// Indicates whether the list of approved patches includes non-security updates
+	// that should be applied to the instances. The default value is 'false'. Applies
+	// to Linux instances only.
+	ApprovedPatchesEnableNonSecurity *bool `type:"boolean"`
+
 	// The ID of the retrieved patch baseline.
 	BaselineId *string `min:"20" type:"string"`
 
@@ -12402,6 +12432,10 @@ type GetPatchBaselineOutput struct {
 
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []string `type:"list"`
+
+	// Information about the patches to use to update the instances, including target
+	// operating systems and source repositories. Applies to Linux instances only.
+	Sources []PatchSource `type:"list"`
 }
 
 // String returns the string representation
@@ -12606,6 +12640,9 @@ type InstanceInformation struct {
 	InstanceId *string `type:"string"`
 
 	// Indicates whether latest version of the SSM Agent is running on your instance.
+	// Some older versions of Windows Server use the EC2Config service to process
+	// SSM requests. For this reason, this field does not indicate whether or not
+	// the latest version is installed on Windows managed instances.
 	IsLatestVersion *bool `type:"boolean"`
 
 	// The date the association was last executed.
@@ -15507,6 +15544,64 @@ func (s PatchComplianceData) GoString() string {
 //    * Medium
 //
 //    * Low
+//
+// SUSE Linux Enterprise Server (SUSE) Operating Systems
+//
+// The supported keys for SUSE operating systems are PRODUCT, CLASSIFICATION,
+// and SEVERITY. See the following lists for valid values for each of these
+// keys.
+//
+// Supported key:PRODUCT
+//
+// Supported values:
+//
+//    * Suse12.0
+//
+//    * Suse12.1
+//
+//    * Suse12.2
+//
+//    * Suse12.3
+//
+//    * Suse12.4
+//
+//    * Suse12.5
+//
+//    * Suse12.6
+//
+//    * Suse12.7
+//
+//    * Suse12.8
+//
+//    * Suse12.9
+//
+// Supported key:CLASSIFICATION
+//
+// Supported values:
+//
+//    * Security
+//
+//    * Recommended
+//
+//    * Optional
+//
+//    * Feature
+//
+//    * Document
+//
+//    * Yast
+//
+// Supported key:SEVERITY
+//
+// Supported values:
+//
+//    * Critical
+//
+//    * Important
+//
+//    * Moderate
+//
+//    * Low
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchFilter
 type PatchFilter struct {
 	_ struct{} `type:"structure"`
@@ -15673,6 +15768,11 @@ type PatchRule struct {
 	// High, Medium, Low, and Informational.
 	ComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
 
+	// For instances identified by the approval rule filters, enables a patch baseline
+	// to apply non-security updates available in the specified repository. The
+	// default value is 'false'. Applies to Linux instances only.
+	EnableNonSecurity *bool `type:"boolean"`
+
 	// The patch filter group that defines the criteria for the rule.
 	//
 	// PatchFilterGroup is a required field
@@ -15746,6 +15846,76 @@ func (s *PatchRuleGroup) Validate() error {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "PatchRules", i), err.(aws.ErrInvalidParams))
 			}
 		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Information about the patches to use to update the instances, including target
+// operating systems and source repository. Applies to Linux instances only.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/PatchSource
+type PatchSource struct {
+	_ struct{} `type:"structure"`
+
+	// The value of the yum repo configuration. For example:
+	//
+	// cachedir=/var/cache/yum/$basesearch
+	//
+	// $releasever
+	//
+	// keepcache=0
+	//
+	// debualevel=2
+	//
+	// Configuration is a required field
+	Configuration *string `min:"1" type:"string" required:"true"`
+
+	// The name specified to identify the patch source.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The specific operating system versions a patch repository applies to, such
+	// as "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7".
+	// For lists of supported product values, see PatchFilter.
+	//
+	// Products is a required field
+	Products []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s PatchSource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PatchSource) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PatchSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PatchSource"}
+
+	if s.Configuration == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Configuration"))
+	}
+	if s.Configuration != nil && len(*s.Configuration) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Configuration", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.Products == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Products"))
+	}
+	if s.Products != nil && len(s.Products) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Products", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -16000,6 +16170,10 @@ type PutParameterInput struct {
 	// The fully qualified name of the parameter that you want to add to the system.
 	// The fully qualified name includes the complete hierarchy of the parameter
 	// path and name. For example: /Dev/DBServer/MySQL/db-string13
+	//
+	// For information about parameter name requirements and restrictions, see About
+	// Creating Systems Manager Parameters (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html#sysman-paramstore-su-create-about)
+	// in the AWS Systems Manager User Guide.
 	//
 	// The maximum length constraint listed below includes capacity for additional
 	// system attributes that are not part of the name. The maximum length for the
@@ -16668,6 +16842,9 @@ type ResourceDataSyncItem struct {
 	// The last time the sync operations returned a status of SUCCESSFUL (UTC).
 	LastSuccessfulSyncTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// The status message details reported by the last sync.
+	LastSyncStatusMessage *string `type:"string"`
+
 	// The last time the configuration attempted to sync (UTC).
 	LastSyncTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -16981,7 +17158,7 @@ type SendCommandInput struct {
 	// The maximum number of errors allowed without the command failing. When the
 	// command fails one more time beyond the value of MaxErrors, the systems stops
 	// sending the command to additional targets. You can specify a number like
-	// 10 or a percentage like 10%. The default value is 50. For more information
+	// 10 or a percentage like 10%. The default value is 0. For more information
 	// about how to use MaxErrors, see Using Error Controls (http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-maxerrors.html).
 	MaxErrors *string `min:"1" type:"string"`
 
@@ -18388,6 +18565,11 @@ type UpdatePatchBaselineInput struct {
 	// Assigns a new compliance severity level to an existing patch baseline.
 	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
 
+	// Indicates whether the list of approved patches includes non-security updates
+	// that should be applied to the instances. The default value is 'false'. Applies
+	// to Linux instances only.
+	ApprovedPatchesEnableNonSecurity *bool `type:"boolean"`
+
 	// The ID of the patch baseline to update.
 	//
 	// BaselineId is a required field
@@ -18404,6 +18586,15 @@ type UpdatePatchBaselineInput struct {
 
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []string `type:"list"`
+
+	// If True, then all fields that are required by the CreatePatchBaseline action
+	// are also required for this API request. Optional fields that are not specified
+	// are set to null.
+	Replace *bool `type:"boolean"`
+
+	// Information about the patches to use to update the instances, including target
+	// operating systems and source repositories. Applies to Linux instances only.
+	Sources []PatchSource `type:"list"`
 }
 
 // String returns the string representation
@@ -18442,6 +18633,13 @@ func (s *UpdatePatchBaselineInput) Validate() error {
 			invalidParams.AddNested("GlobalFilters", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.Sources != nil {
+		for i, v := range s.Sources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Sources", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -18464,6 +18662,11 @@ type UpdatePatchBaselineOutput struct {
 	// The compliance severity level assigned to the patch baseline after the update
 	// completed.
 	ApprovedPatchesComplianceLevel PatchComplianceLevel `type:"string" enum:"true"`
+
+	// Indicates whether the list of approved patches includes non-security updates
+	// that should be applied to the instances. The default value is 'false'. Applies
+	// to Linux instances only.
+	ApprovedPatchesEnableNonSecurity *bool `type:"boolean"`
 
 	// The ID of the deleted patch baseline.
 	BaselineId *string `min:"20" type:"string"`
@@ -18488,6 +18691,10 @@ type UpdatePatchBaselineOutput struct {
 
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []string `type:"list"`
+
+	// Information about the patches to use to update the instances, including target
+	// operating systems and source repositories. Applies to Linux instances only.
+	Sources []PatchSource `type:"list"`
 }
 
 // String returns the string representation
@@ -19109,6 +19316,7 @@ const (
 	OperatingSystemAmazonLinux           OperatingSystem = "AMAZON_LINUX"
 	OperatingSystemUbuntu                OperatingSystem = "UBUNTU"
 	OperatingSystemRedhatEnterpriseLinux OperatingSystem = "REDHAT_ENTERPRISE_LINUX"
+	OperatingSystemSuse                  OperatingSystem = "SUSE"
 )
 
 func (enum OperatingSystem) MarshalValue() (string, error) {

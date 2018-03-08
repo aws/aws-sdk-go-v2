@@ -630,19 +630,38 @@ type PostContentOutput struct {
 	// Current user intent that Amazon Lex is aware of.
 	IntentName *string `location:"header" locationName:"x-amz-lex-intent-name" type:"string"`
 
-	// Message to convey to the user. It can come from the bot's configuration or
-	// a code hook (Lambda function). If the current intent is not configured with
-	// a code hook or if the code hook returned Delegate as the dialogAction.type
-	// in its response, then Amazon Lex decides the next course of action and selects
-	// an appropriate message from the bot configuration based on the current user
-	// interaction context. For example, if Amazon Lex is not able to understand
-	// the user input, it uses a clarification prompt message (For more information,
-	// see the Error Handling section in the Amazon Lex console). Another example:
-	// if the intent requires confirmation before fulfillment, then Amazon Lex uses
-	// the confirmation prompt message in the intent configuration. If the code
-	// hook returns a message, Amazon Lex passes it as-is in its response to the
-	// client.
+	// The message to convey to the user. The message can come from the bot's configuration
+	// or from a Lambda function.
+	//
+	// If the intent is not configured with a Lambda function, or if the Lambda
+	// function returned Delegate as the dialogAction.type its response, Amazon
+	// Lex decides on the next course of action and selects an appropriate message
+	// from the bot's configuration based on the current interaction context. For
+	// example, if Amazon Lex isn't able to understand user input, it uses a clarification
+	// prompt message.
+	//
+	// When you create an intent you can assign messages to groups. When messages
+	// are assigned to groups Amazon Lex returns one message from each group in
+	// the response. The message field is an escaped JSON string containing the
+	// messages. For more information about the structure of the JSON string returned,
+	// see msg-prompts-formats.
+	//
+	// If the Lambda function returns a message, Amazon Lex passes it to the client
+	// in its response.
 	Message *string `location:"header" locationName:"x-amz-lex-message" min:"1" type:"string"`
+
+	// The format of the response message. One of the following values:
+	//
+	//    * PlainText - The message contains plain UTF-8 text.
+	//
+	//    * CustomPayload - The message is a custom format for the client.
+	//
+	//    * SSML - The message contains text formatted for voice output.
+	//
+	//    * Composite - The message contains an escaped JSON object containing one
+	//    or more messages from the groups that messages were assigned to when the
+	//    intent was created.
+	MessageFormat MessageFormatType `location:"header" locationName:"x-amz-lex-message-format" type:"string" enum:"true"`
 
 	// Map of key/value pairs representing the session-specific context information.
 	SessionAttributes aws.JSONValue `location:"header" locationName:"x-amz-lex-session-attributes" type:"jsonvalue"`
@@ -711,6 +730,12 @@ func (s PostContentOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "x-amz-lex-message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.MessageFormat) > 0 {
+		v := s.MessageFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-lex-message-format", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.SessionAttributes != nil {
 		v := s.SessionAttributes
@@ -944,19 +969,39 @@ type PostTextOutput struct {
 	// The current user intent that Amazon Lex is aware of.
 	IntentName *string `locationName:"intentName" type:"string"`
 
-	// A message to convey to the user. It can come from the bot's configuration
-	// or a code hook (Lambda function). If the current intent is not configured
-	// with a code hook or the code hook returned Delegate as the dialogAction.type
-	// in its response, then Amazon Lex decides the next course of action and selects
-	// an appropriate message from the bot configuration based on the current user
-	// interaction context. For example, if Amazon Lex is not able to understand
-	// the user input, it uses a clarification prompt message (for more information,
-	// see the Error Handling section in the Amazon Lex console). Another example:
-	// if the intent requires confirmation before fulfillment, then Amazon Lex uses
-	// the confirmation prompt message in the intent configuration. If the code
-	// hook returns a message, Amazon Lex passes it as-is in its response to the
-	// client.
+	// The message to convey to the user. The message can come from the bot's configuration
+	// or from a Lambda function.
+	//
+	// If the intent is not configured with a Lambda function, or if the Lambda
+	// function returned Delegate as the dialogAction.type its response, Amazon
+	// Lex decides on the next course of action and selects an appropriate message
+	// from the bot's configuration based on the current interaction context. For
+	// example, if Amazon Lex isn't able to understand user input, it uses a clarification
+	// prompt message.
+	//
+	// When you create an intent you can assign messages to groups. When messages
+	// are assigned to groups Amazon Lex returns one message from each group in
+	// the response. The message field is an escaped JSON string containing the
+	// messages. For more information about the structure of the JSON string returned,
+	// see msg-prompts-formats.
+	//
+	// If the Lambda function returns a message, Amazon Lex passes it to the client
+	// in its response.
 	Message *string `locationName:"message" min:"1" type:"string"`
+
+	// The format of the response message. One of the following values:
+	//
+	//    * PlainText - The message contains plain UTF-8 text.
+	//
+	//    * CustomPayload - The message is a custom format defined by the Lambda
+	//    function.
+	//
+	//    * SSML - The message contains text formatted for voice output.
+	//
+	//    * Composite - The message contains an escaped JSON object containing one
+	//    or more messages from the groups that messages were assigned to when the
+	//    intent was created.
+	MessageFormat MessageFormatType `locationName:"messageFormat" type:"string" enum:"true"`
 
 	// Represents the options that the user has to respond to the current prompt.
 	// Response Card can come from the bot configuration (in the Amazon Lex console,
@@ -1017,6 +1062,12 @@ func (s PostTextOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.MessageFormat) > 0 {
+		v := s.MessageFormat
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "messageFormat", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.ResponseCard != nil {
 		v := s.ResponseCard
@@ -1147,6 +1198,25 @@ func (enum DialogState) MarshalValue() (string, error) {
 }
 
 func (enum DialogState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type MessageFormatType string
+
+// Enum values for MessageFormatType
+const (
+	MessageFormatTypePlainText     MessageFormatType = "PlainText"
+	MessageFormatTypeCustomPayload MessageFormatType = "CustomPayload"
+	MessageFormatTypeSsml          MessageFormatType = "SSML"
+	MessageFormatTypeComposite     MessageFormatType = "Composite"
+)
+
+func (enum MessageFormatType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MessageFormatType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

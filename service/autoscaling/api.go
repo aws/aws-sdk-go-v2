@@ -291,9 +291,10 @@ func (r CreateAutoScalingGroupRequest) Send() (*CreateAutoScalingGroupOutput, er
 //
 // Creates an Auto Scaling group with the specified name and attributes.
 //
-// If you exceed your maximum limit of Auto Scaling groups, which by default
-// is 20 per region, the call fails. For information about viewing and updating
-// this limit, see DescribeAccountLimits.
+// If you exceed your maximum limit of Auto Scaling groups, the call fails.
+// For information about viewing this limit, see DescribeAccountLimits. For
+// information about updating this limit, see Auto Scaling Limits (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-account-limits.html)
+// in the Auto Scaling User Guide.
 //
 // For more information, see Auto Scaling Groups (http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html)
 // in the Auto Scaling User Guide.
@@ -350,9 +351,10 @@ func (r CreateLaunchConfigurationRequest) Send() (*CreateLaunchConfigurationOutp
 //
 // Creates a launch configuration.
 //
-// If you exceed your maximum limit of launch configurations, which by default
-// is 100 per region, the call fails. For information about viewing and updating
-// this limit, see DescribeAccountLimits.
+// If you exceed your maximum limit of launch configurations, the call fails.
+// For information about viewing this limit, see DescribeAccountLimits. For
+// information about updating this limit, see Auto Scaling Limits (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-account-limits.html)
+// in the Auto Scaling User Guide.
 //
 // For more information, see Launch Configurations (http://docs.aws.amazon.com/autoscaling/latest/userguide/LaunchConfiguration.html)
 // in the Auto Scaling User Guide.
@@ -853,9 +855,9 @@ func (r DescribeAccountLimitsRequest) Send() (*DescribeAccountLimitsOutput, erro
 //
 // Describes the current Auto Scaling resource limits for your AWS account.
 //
-// For information about requesting an increase in these limits, see AWS Service
-// Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html)
-// in the Amazon Web Services General Reference.
+// For information about requesting an increase in these limits, see Auto Scaling
+// Limits (http://docs.aws.amazon.com/autoscaling/latest/userguide/as-account-limits.html)
+// in the Auto Scaling User Guide.
 //
 //    // Example sending a request using the DescribeAccountLimitsRequest method.
 //    req := client.DescribeAccountLimitsRequest(params)
@@ -3456,7 +3458,7 @@ type AttachInstancesInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// One or more instance IDs.
+	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []string `type:"list"`
 }
 
@@ -3518,7 +3520,8 @@ type AttachLoadBalancerTargetGroupsInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// The Amazon Resource Names (ARN) of the target groups.
+	// The Amazon Resource Names (ARN) of the target groups. You can specify up
+	// to 10 target groups.
 	//
 	// TargetGroupARNs is a required field
 	TargetGroupARNs []string `type:"list" required:"true"`
@@ -3586,7 +3589,7 @@ type AttachLoadBalancersInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// One or more load balancer names.
+	// The names of the load balancers. You can specify up to 10 load balancers.
 	//
 	// LoadBalancerNames is a required field
 	LoadBalancerNames []string `type:"list" required:"true"`
@@ -3896,6 +3899,12 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	PlacementGroup *string `min:"1" type:"string"`
 
+	// The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling
+	// group uses to call other AWS services on your behalf. By default, Auto Scaling
+	// uses a service-linked role named AWSServiceRoleForAutoScaling, which it creates
+	// if it does not exist.
+	ServiceLinkedRoleARN *string `min:"1" type:"string"`
+
 	// One or more tags.
 	//
 	// For more information, see Tagging Auto Scaling Groups and Instances (http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html)
@@ -3967,6 +3976,9 @@ func (s *CreateAutoScalingGroupInput) Validate() error {
 	if s.PlacementGroup != nil && len(*s.PlacementGroup) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PlacementGroup", 1))
 	}
+	if s.ServiceLinkedRoleARN != nil && len(*s.ServiceLinkedRoleARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServiceLinkedRoleARN", 1))
+	}
 	if s.VPCZoneIdentifier != nil && len(*s.VPCZoneIdentifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("VPCZoneIdentifier", 1))
 	}
@@ -4031,9 +4043,8 @@ type CreateLaunchConfigurationInput struct {
 	// you create your group.
 	//
 	// Default: If the instance is launched into a default subnet, the default is
-	// true. If the instance is launched into a nondefault subnet, the default is
-	// false. For more information, see Supported Platforms (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// to assign a public IP address. If the instance is launched into a nondefault
+	// subnet, the default is not to assign a public IP address.
 	AssociatePublicIpAddress *bool `type:"boolean"`
 
 	// One or more mappings that specify how block devices are exposed to the instance.
@@ -5004,7 +5015,7 @@ type DescribeAutoScalingInstancesInput struct {
 	InstanceIds []string `type:"list"`
 
 	// The maximum number of items to return with this call. The default value is
-	// 50 and the maximum value is 100.
+	// 50 and the maximum value is 50.
 	MaxRecords *int64 `type:"integer"`
 
 	// The token for the next set of items to return. (You received this token from
@@ -5265,7 +5276,7 @@ type DescribeLoadBalancerTargetGroupsInput struct {
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
 	// The maximum number of items to return with this call. The default value is
-	// 50 and the maximum value is 100.
+	// 100 and the maximum value is 100.
 	MaxRecords *int64 `type:"integer"`
 
 	// The token for the next set of items to return. (You received this token from
@@ -5339,7 +5350,7 @@ type DescribeLoadBalancersInput struct {
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
 	// The maximum number of items to return with this call. The default value is
-	// 50 and the maximum value is 100.
+	// 100 and the maximum value is 100.
 	MaxRecords *int64 `type:"integer"`
 
 	// The token for the next set of items to return. (You received this token from
@@ -5595,7 +5606,7 @@ type DescribeScalingActivitiesInput struct {
 	AutoScalingGroupName *string `min:"1" type:"string"`
 
 	// The maximum number of items to return with this call. The default value is
-	// 100.
+	// 100 and the maximum value is 100.
 	MaxRecords *int64 `type:"integer"`
 
 	// The token for the next set of items to return. (You received this token from
@@ -5888,11 +5899,11 @@ type DetachInstancesInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// One or more instance IDs.
+	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []string `type:"list"`
 
-	// If True, the Auto Scaling group decrements the desired capacity value by
-	// the number of instances detached.
+	// Indicates whether the Auto Scaling group decrements the desired capacity
+	// value by the number of instances detached.
 	//
 	// ShouldDecrementDesiredCapacity is a required field
 	ShouldDecrementDesiredCapacity *bool `type:"boolean" required:"true"`
@@ -5963,7 +5974,8 @@ type DetachLoadBalancerTargetGroupsInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// The Amazon Resource Names (ARN) of the target groups.
+	// The Amazon Resource Names (ARN) of the target groups. You can specify up
+	// to 10 target groups.
 	//
 	// TargetGroupARNs is a required field
 	TargetGroupARNs []string `type:"list" required:"true"`
@@ -6031,7 +6043,7 @@ type DetachLoadBalancersInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// One or more load balancer names.
+	// The names of the load balancers. You can specify up to 10 load balancers.
 	//
 	// LoadBalancerNames is a required field
 	LoadBalancerNames []string `type:"list" required:"true"`
@@ -6174,9 +6186,8 @@ func (s DisableMetricsCollectionOutput) SDKResponseMetadata() aws.Response {
 type Ebs struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether the volume is deleted on instance termination.
-	//
-	// Default: true
+	// Indicates whether the volume is deleted on instance termination. The default
+	// is true.
 	DeleteOnTermination *bool `type:"boolean"`
 
 	// Indicates whether the volume should be encrypted. Encrypted EBS volumes must
@@ -6385,14 +6396,11 @@ type EnterStandbyInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// One or more instances to move into Standby mode. You must specify at least
-	// one instance ID.
+	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []string `type:"list"`
 
-	// Specifies whether the instances moved to Standby mode count as part of the
-	// Auto Scaling group's desired capacity. If set, the desired capacity for the
-	// Auto Scaling group decrements by the number of instances moved to Standby
-	// mode.
+	// Indicates whether to decrement the desired capacity of the Auto Scaling group
+	// by the number of instances moved to Standby mode.
 	//
 	// ShouldDecrementDesiredCapacity is a required field
 	ShouldDecrementDesiredCapacity *bool `type:"boolean" required:"true"`
@@ -6467,9 +6475,8 @@ type ExecutePolicyInput struct {
 	// otherwise.
 	BreachThreshold *float64 `type:"double"`
 
-	// If this parameter is true, Auto Scaling waits for the cooldown period to
-	// complete before executing the policy. Otherwise, Auto Scaling executes the
-	// policy without waiting for the cooldown period to complete.
+	// Indicates whether Auto Scaling waits for the cooldown period to complete
+	// before executing the policy.
 	//
 	// This parameter is not supported if the policy type is StepScaling.
 	//
@@ -6557,7 +6564,7 @@ type ExitStandbyInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// One or more instance IDs. You must specify at least one instance ID.
+	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []string `type:"list"`
 }
 
@@ -6712,6 +6719,10 @@ type Group struct {
 	// if any. For more information, see Placement Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	PlacementGroup *string `min:"1" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling
+	// group uses to call other AWS services on your behalf.
+	ServiceLinkedRoleARN *string `min:"1" type:"string"`
 
 	// The current state of the group when DeleteAutoScalingGroup is in progress.
 	Status *string `min:"1" type:"string"`
@@ -6977,8 +6988,10 @@ type LaunchTemplateSpecification struct {
 	// or a template ID.
 	LaunchTemplateName *string `min:"3" type:"string"`
 
-	// The version number. By default, the default version of the launch template
-	// is used.
+	// The version number, $Latest, or $Default. If the value is $Latest, Auto Scaling
+	// selects the latest version of the launch template when launching instances.
+	// If the value is $Default, Auto Scaling selects the default version of the
+	// launch template when launching instances. The default value is $Default.
 	Version *string `min:"1" type:"string"`
 }
 
@@ -8194,10 +8207,10 @@ type SetDesiredCapacityInput struct {
 	// DesiredCapacity is a required field
 	DesiredCapacity *int64 `type:"integer" required:"true"`
 
-	// By default, SetDesiredCapacity overrides any cooldown period associated with
-	// the Auto Scaling group. Specify True to make Auto Scaling to wait for the
-	// cool-down period associated with the Auto Scaling group to complete before
-	// initiating a scaling activity to set your Auto Scaling group to its new capacity.
+	// Indicates whether Auto Scaling waits for the cooldown period to complete
+	// before initiating a scaling activity to set your Auto Scaling group to its
+	// new capacity. By default, Auto Scaling does not honor the cooldown period
+	// during manual scaling activities.
 	HonorCooldown *bool `type:"boolean"`
 }
 
@@ -8689,10 +8702,9 @@ type TargetTrackingConfiguration struct {
 	CustomizedMetricSpecification *CustomizedMetricSpecification `type:"structure"`
 
 	// Indicates whether scale in by the target tracking policy is disabled. If
-	// the value is true, scale in is disabled and the target tracking policy won't
-	// remove instances from the Auto Scaling group. Otherwise, scale in is enabled
-	// and the target tracking policy can remove instances from the Auto Scaling
-	// group. The default value is false.
+	// scale in is disabled, the target tracking policy won't remove instances from
+	// the Auto Scaling group. Otherwise, the target tracking policy can remove
+	// instances from the Auto Scaling group. The default is disabled.
 	DisableScaleIn *bool `type:"boolean"`
 
 	// A predefined metric. You can specify either a predefined metric or a customized
@@ -8748,8 +8760,8 @@ type TerminateInstanceInAutoScalingGroupInput struct {
 	// InstanceId is a required field
 	InstanceId *string `min:"1" type:"string" required:"true"`
 
-	// If true, terminating the instance also decrements the size of the Auto Scaling
-	// group.
+	// Indicates whether terminating the instance also decrements the size of the
+	// Auto Scaling group.
 	//
 	// ShouldDecrementDesiredCapacity is a required field
 	ShouldDecrementDesiredCapacity *bool `type:"boolean" required:"true"`
@@ -8846,12 +8858,12 @@ type UpdateAutoScalingGroupInput struct {
 	// The service to use for the health checks. The valid values are EC2 and ELB.
 	HealthCheckType *string `min:"1" type:"string"`
 
-	// The name of the launch configuration. You must specify either a launch configuration
-	// or a launch template.
+	// The name of the launch configuration. If you specify a launch configuration,
+	// you can't specify a launch template.
 	LaunchConfigurationName *string `min:"1" type:"string"`
 
-	// The launch template to use to specify the updates. You must specify a launch
-	// configuration or a launch template.
+	// The launch template to use to specify the updates. If you specify a launch
+	// template, you can't specify a launch configuration.
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
 
 	// The maximum size of the Auto Scaling group.
@@ -8868,6 +8880,10 @@ type UpdateAutoScalingGroupInput struct {
 	// if any. For more information, see Placement Groups (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	PlacementGroup *string `min:"1" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling
+	// group uses to call other AWS services on your behalf.
+	ServiceLinkedRoleARN *string `min:"1" type:"string"`
 
 	// A standalone termination policy or a list of termination policies used to
 	// select the instance to terminate. The policies are executed in the order
@@ -8920,6 +8936,9 @@ func (s *UpdateAutoScalingGroupInput) Validate() error {
 	}
 	if s.PlacementGroup != nil && len(*s.PlacementGroup) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PlacementGroup", 1))
+	}
+	if s.ServiceLinkedRoleARN != nil && len(*s.ServiceLinkedRoleARN) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServiceLinkedRoleARN", 1))
 	}
 	if s.VPCZoneIdentifier != nil && len(*s.VPCZoneIdentifier) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("VPCZoneIdentifier", 1))

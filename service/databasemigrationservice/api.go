@@ -1516,6 +1516,108 @@ func (c *DatabaseMigrationService) DescribeRefreshSchemasStatusRequest(input *De
 	return DescribeRefreshSchemasStatusRequest{Request: req, Input: input, Copy: c.DescribeRefreshSchemasStatusRequest}
 }
 
+const opDescribeReplicationInstanceTaskLogs = "DescribeReplicationInstanceTaskLogs"
+
+// DescribeReplicationInstanceTaskLogsRequest is a API request type for the DescribeReplicationInstanceTaskLogs API operation.
+type DescribeReplicationInstanceTaskLogsRequest struct {
+	*aws.Request
+	Input *DescribeReplicationInstanceTaskLogsInput
+	Copy  func(*DescribeReplicationInstanceTaskLogsInput) DescribeReplicationInstanceTaskLogsRequest
+}
+
+// Send marshals and sends the DescribeReplicationInstanceTaskLogs API request.
+func (r DescribeReplicationInstanceTaskLogsRequest) Send() (*DescribeReplicationInstanceTaskLogsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReplicationInstanceTaskLogsOutput), nil
+}
+
+// DescribeReplicationInstanceTaskLogsRequest returns a request value for making API operation for
+// AWS Database Migration Service.
+//
+// Returns information about the task logs for the specified task.
+//
+//    // Example sending a request using the DescribeReplicationInstanceTaskLogsRequest method.
+//    req := client.DescribeReplicationInstanceTaskLogsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstanceTaskLogs
+func (c *DatabaseMigrationService) DescribeReplicationInstanceTaskLogsRequest(input *DescribeReplicationInstanceTaskLogsInput) DescribeReplicationInstanceTaskLogsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeReplicationInstanceTaskLogs,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeReplicationInstanceTaskLogsInput{}
+	}
+
+	output := &DescribeReplicationInstanceTaskLogsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeReplicationInstanceTaskLogsRequest{Request: req, Input: input, Copy: c.DescribeReplicationInstanceTaskLogsRequest}
+}
+
+// Paginate pages iterates over the pages of a DescribeReplicationInstanceTaskLogsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a DescribeReplicationInstanceTaskLogs operation.
+//		req := client.DescribeReplicationInstanceTaskLogsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeReplicationInstanceTaskLogsRequest) Paginate(opts ...aws.Option) DescribeReplicationInstanceTaskLogsPager {
+	return DescribeReplicationInstanceTaskLogsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReplicationInstanceTaskLogsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeReplicationInstanceTaskLogsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeReplicationInstanceTaskLogsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReplicationInstanceTaskLogsPager) CurrentPage() *DescribeReplicationInstanceTaskLogsOutput {
+	return p.Pager.CurrentPage().(*DescribeReplicationInstanceTaskLogsOutput)
+}
+
 const opDescribeReplicationInstances = "DescribeReplicationInstances"
 
 // DescribeReplicationInstancesRequest is a API request type for the DescribeReplicationInstances API operation.
@@ -2496,6 +2598,57 @@ func (c *DatabaseMigrationService) ModifyReplicationTaskRequest(input *ModifyRep
 	return ModifyReplicationTaskRequest{Request: req, Input: input, Copy: c.ModifyReplicationTaskRequest}
 }
 
+const opRebootReplicationInstance = "RebootReplicationInstance"
+
+// RebootReplicationInstanceRequest is a API request type for the RebootReplicationInstance API operation.
+type RebootReplicationInstanceRequest struct {
+	*aws.Request
+	Input *RebootReplicationInstanceInput
+	Copy  func(*RebootReplicationInstanceInput) RebootReplicationInstanceRequest
+}
+
+// Send marshals and sends the RebootReplicationInstance API request.
+func (r RebootReplicationInstanceRequest) Send() (*RebootReplicationInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RebootReplicationInstanceOutput), nil
+}
+
+// RebootReplicationInstanceRequest returns a request value for making API operation for
+// AWS Database Migration Service.
+//
+// Reboots a replication instance. Rebooting results in a momentary outage,
+// until the replication instance becomes available again.
+//
+//    // Example sending a request using the RebootReplicationInstanceRequest method.
+//    req := client.RebootReplicationInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstance
+func (c *DatabaseMigrationService) RebootReplicationInstanceRequest(input *RebootReplicationInstanceInput) RebootReplicationInstanceRequest {
+	op := &aws.Operation{
+		Name:       opRebootReplicationInstance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RebootReplicationInstanceInput{}
+	}
+
+	output := &RebootReplicationInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RebootReplicationInstanceRequest{Request: req, Input: input, Copy: c.RebootReplicationInstanceRequest}
+}
+
 const opRefreshSchemas = "RefreshSchemas"
 
 // RefreshSchemasRequest is a API request type for the RefreshSchemas API operation.
@@ -3078,8 +3231,8 @@ type CreateEndpointInput struct {
 	EndpointType ReplicationEndpointTypeValue `type:"string" required:"true" enum:"true"`
 
 	// The type of engine for the endpoint. Valid values, depending on the EndPointType,
-	// include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB,
-	// MONGODB, and SQLSERVER.
+	// include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb,
+	// mongodb, and sqlserver.
 	//
 	// EngineName is a required field
 	EngineName *string `type:"string" required:"true"`
@@ -4720,6 +4873,88 @@ func (s DescribeRefreshSchemasStatusOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstanceTaskLogsMessage
+type DescribeReplicationInstanceTaskLogsInput struct {
+	_ struct{} `type:"structure"`
+
+	// An optional pagination token provided by a previous request. If this parameter
+	// is specified, the response includes only records beyond the marker, up to
+	// the value specified by MaxRecords.
+	Marker *string `type:"string"`
+
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	MaxRecords *int64 `type:"integer"`
+
+	// The Amazon Resource Name (ARN) of the replication instance.
+	//
+	// ReplicationInstanceArn is a required field
+	ReplicationInstanceArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeReplicationInstanceTaskLogsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeReplicationInstanceTaskLogsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeReplicationInstanceTaskLogsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeReplicationInstanceTaskLogsInput"}
+
+	if s.ReplicationInstanceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstanceTaskLogsResponse
+type DescribeReplicationInstanceTaskLogsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An optional pagination token provided by a previous request. If this parameter
+	// is specified, the response includes only records beyond the marker, up to
+	// the value specified by MaxRecords.
+	Marker *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the replication instance.
+	ReplicationInstanceArn *string `type:"string"`
+
+	// An array of replication task log metadata. Each member of the array contains
+	// the replication task name, ARN, and task log size (in bytes).
+	ReplicationInstanceTaskLogs []ReplicationInstanceTaskLog `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeReplicationInstanceTaskLogsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeReplicationInstanceTaskLogsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReplicationInstanceTaskLogsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeReplicationInstancesMessage
 type DescribeReplicationInstancesInput struct {
 	_ struct{} `type:"structure"`
@@ -5264,8 +5499,8 @@ type Endpoint struct {
 	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
 	// The database engine name. Valid values, depending on the EndPointType, include
-	// MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB,
-	// MONGODB, and SQLSERVER.
+	// mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb,
+	// mongodb, and sqlserver.
 	EngineName *string `type:"string"`
 
 	// Value returned by a call to CreateEndpoint that can be used for cross-account
@@ -5639,8 +5874,8 @@ type ModifyEndpointInput struct {
 	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
 	// The type of engine for the endpoint. Valid values, depending on the EndPointType,
-	// include MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, DYNAMODB,
-	// MONGODB, SYBASE, and SQLSERVER.
+	// include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb,
+	// mongodb, and sqlserver.
 	EngineName *string `type:"string"`
 
 	// Additional attributes associated with the connection. To reset this parameter,
@@ -6205,6 +6440,69 @@ func (s OrderableReplicationInstance) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstanceMessage
+type RebootReplicationInstanceInput struct {
+	_ struct{} `type:"structure"`
+
+	// If this parameter is true, the reboot is conducted through a Multi-AZ failover.
+	// (If the instance isn't configured for Multi-AZ, then you can't specify true.)
+	ForceFailover *bool `type:"boolean"`
+
+	// The Amazon Resource Name (ARN) of the replication instance.
+	//
+	// ReplicationInstanceArn is a required field
+	ReplicationInstanceArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s RebootReplicationInstanceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RebootReplicationInstanceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RebootReplicationInstanceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RebootReplicationInstanceInput"}
+
+	if s.ReplicationInstanceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReplicationInstanceArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RebootReplicationInstanceResponse
+type RebootReplicationInstanceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The replication instance that is being rebooted.
+	ReplicationInstance *ReplicationInstance `type:"structure"`
+}
+
+// String returns the string representation
+func (s RebootReplicationInstanceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RebootReplicationInstanceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RebootReplicationInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/RefreshSchemasMessage
 type RefreshSchemasInput struct {
 	_ struct{} `type:"structure"`
@@ -6535,6 +6833,31 @@ func (s ReplicationInstance) String() string {
 
 // GoString returns the string representation
 func (s ReplicationInstance) GoString() string {
+	return s.String()
+}
+
+// Contains metadata for a replication instance task log.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/ReplicationInstanceTaskLog
+type ReplicationInstanceTaskLog struct {
+	_ struct{} `type:"structure"`
+
+	// The size, in bytes, of the replication task log.
+	ReplicationInstanceTaskLogSize *int64 `type:"long"`
+
+	// The Amazon Resource Name (ARN) of the replication task.
+	ReplicationTaskArn *string `type:"string"`
+
+	// The name of the replication task.
+	ReplicationTaskName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ReplicationInstanceTaskLog) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReplicationInstanceTaskLog) GoString() string {
 	return s.String()
 }
 
@@ -6998,8 +7321,8 @@ type SupportedEndpointType struct {
 	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
 	// The database engine name. Valid values, depending on the EndPointType, include
-	// MYSQL, ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, S3, SYBASE, DYNAMODB,
-	// MONGODB, and SQLSERVER.
+	// mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb,
+	// mongodb, and sqlserver.
 	EngineName *string `type:"string"`
 
 	// Indicates if Change Data Capture (CDC) is supported.

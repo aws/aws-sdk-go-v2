@@ -61,6 +61,8 @@ func ExampleLambda_AddPermissionRequest_shared00() {
 				fmt.Println(lambda.ErrCodePolicyLengthExceededException, aerr.Error())
 			case lambda.ErrCodeTooManyRequestsException:
 				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodePreconditionFailedException:
+				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -776,6 +778,8 @@ func ExampleLambda_PublishVersionRequest_shared00() {
 				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
 			case lambda.ErrCodeCodeStorageExceededException:
 				fmt.Println(lambda.ErrCodeCodeStorageExceededException, aerr.Error())
+			case lambda.ErrCodePreconditionFailedException:
+				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -819,6 +823,8 @@ func ExampleLambda_RemovePermissionRequest_shared00() {
 				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
 			case lambda.ErrCodeTooManyRequestsException:
 				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodePreconditionFailedException:
+				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -863,6 +869,8 @@ func ExampleLambda_UpdateAliasRequest_shared00() {
 				fmt.Println(lambda.ErrCodeInvalidParameterValueException, aerr.Error())
 			case lambda.ErrCodeTooManyRequestsException:
 				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
+			case lambda.ErrCodePreconditionFailedException:
+				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -957,6 +965,8 @@ func ExampleLambda_UpdateFunctionCodeRequest_shared00() {
 				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
 			case lambda.ErrCodeCodeStorageExceededException:
 				fmt.Println(lambda.ErrCodeCodeStorageExceededException, aerr.Error())
+			case lambda.ErrCodePreconditionFailedException:
+				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1007,6 +1017,8 @@ func ExampleLambda_UpdateFunctionConfigurationRequest_shared00() {
 				fmt.Println(lambda.ErrCodeTooManyRequestsException, aerr.Error())
 			case lambda.ErrCodeResourceConflictException:
 				fmt.Println(lambda.ErrCodeResourceConflictException, aerr.Error())
+			case lambda.ErrCodePreconditionFailedException:
+				fmt.Println(lambda.ErrCodePreconditionFailedException, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

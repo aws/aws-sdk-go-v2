@@ -1140,7 +1140,8 @@ func (r PutLifecyclePolicyRequest) Send() (*PutLifecyclePolicyOutput, error) {
 // PutLifecyclePolicyRequest returns a request value for making API operation for
 // Amazon EC2 Container Registry.
 //
-// Creates or updates a lifecycle policy.
+// Creates or updates a lifecycle policy. For information about lifecycle policy
+// syntax, see Lifecycle Policy Template (http://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html).
 //
 //    // Example sending a request using the PutLifecyclePolicyRequest method.
 //    req := client.PutLifecyclePolicyRequest(params)
@@ -1779,8 +1780,7 @@ type DeleteLifecyclePolicyInput struct {
 	// If you do not specify a registry, the default registry is assumed.
 	RegistryId *string `locationName:"registryId" type:"string"`
 
-	// The name of the repository that is associated with the repository policy
-	// to  delete.
+	// The name of the repository.
 	//
 	// RepositoryName is a required field
 	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
@@ -1822,7 +1822,7 @@ type DeleteLifecyclePolicyOutput struct {
 	// The time stamp of the last time that the lifecycle policy was run.
 	LastEvaluatedAt *time.Time `locationName:"lastEvaluatedAt" type:"timestamp" timestampFormat:"unix"`
 
-	// The JSON repository policy text.
+	// The JSON lifecycle policy text.
 	LifecyclePolicyText *string `locationName:"lifecyclePolicyText" min:"100" type:"string"`
 
 	// The registry ID associated with the request.
@@ -2026,13 +2026,15 @@ type DescribeImagesInput struct {
 	// results of the initial request can be seen by sending another DescribeImages
 	// request with the returned nextToken value. This value can be between 1 and
 	// 100. If this parameter is not used, then DescribeImages returns up to 100
-	// results and a nextToken value, if applicable.
+	// results and a nextToken value, if applicable. This option cannot be used
+	// when you specify images with imageIds.
 	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
 
 	// The nextToken value returned from a previous paginated DescribeImages request
 	// where maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
 	// nextToken value. This value is null when there are no more results to return.
+	// This option cannot be used when you specify images with imageIds.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The AWS account ID associated with the registry that contains the repository
@@ -2121,14 +2123,16 @@ type DescribeRepositoriesInput struct {
 	// element. The remaining results of the initial request can be seen by sending
 	// another DescribeRepositories request with the returned nextToken value. This
 	// value can be between 1 and 100. If this parameter is not used, then DescribeRepositories
-	// returns up to 100 results and a nextToken value, if applicable.
+	// returns up to 100 results and a nextToken value, if applicable. This option
+	// cannot be used when you specify repositories with repositoryNames.
 	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
 
 	// The nextToken value returned from a previous paginated DescribeRepositories
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value. This value is null when there are no more results
-	// to return.
+	// to return. This option cannot be used when you specify repositories with
+	// repositoryNames.
 	//
 	// This token should be treated as an opaque identifier that is only used to
 	// retrieve the next items in a list and not for other programmatic purposes.
@@ -2346,7 +2350,7 @@ type GetLifecyclePolicyInput struct {
 	// If you do not specify a registry, the default registry is assumed.
 	RegistryId *string `locationName:"registryId" type:"string"`
 
-	// The name of the repository with the policy to retrieve.
+	// The name of the repository.
 	//
 	// RepositoryName is a required field
 	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
@@ -2388,7 +2392,7 @@ type GetLifecyclePolicyOutput struct {
 	// The time stamp of the last time that the lifecycle policy was run.
 	LastEvaluatedAt *time.Time `locationName:"lastEvaluatedAt" type:"timestamp" timestampFormat:"unix"`
 
-	// The JSON repository policy text.
+	// The JSON lifecycle policy text.
 	LifecyclePolicyText *string `locationName:"lifecyclePolicyText" min:"100" type:"string"`
 
 	// The registry ID associated with the request.
@@ -2431,21 +2435,23 @@ type GetLifecyclePolicyPreviewInput struct {
 	// by sending  another GetLifecyclePolicyPreviewRequest request with the returned
 	// nextToken  value. This value can be between 1 and 100. If this  parameter
 	// is not used, then GetLifecyclePolicyPreviewRequest returns up to  100 results
-	// and a nextToken value, if  applicable.
+	// and a nextToken value, if  applicable. This option cannot be used when you
+	// specify images with imageIds.
 	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
 
 	// The nextToken value returned from a previous paginated  GetLifecyclePolicyPreviewRequest
 	// request where maxResults was used and the  results exceeded the value of
 	// that parameter. Pagination continues from the end of the  previous results
 	// that returned the nextToken value. This value is  null when there are no
-	// more results to return.
+	// more results to return. This option cannot be used when you specify images
+	// with imageIds.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
 	// The AWS account ID associated with the registry that contains the repository.
 	// If you do not specify a registry, the default registry is assumed.
 	RegistryId *string `locationName:"registryId" type:"string"`
 
-	// The name of the repository with the policy to retrieve.
+	// The name of the repository.
 	//
 	// RepositoryName is a required field
 	RepositoryName *string `locationName:"repositoryName" min:"2" type:"string" required:"true"`
@@ -2490,7 +2496,7 @@ type GetLifecyclePolicyPreviewOutput struct {
 
 	responseMetadata aws.Response
 
-	// The JSON repository policy text.
+	// The JSON lifecycle policy text.
 	LifecyclePolicyText *string `locationName:"lifecyclePolicyText" min:"100" type:"string"`
 
 	// The nextToken value to include in a future GetLifecyclePolicyPreview request.

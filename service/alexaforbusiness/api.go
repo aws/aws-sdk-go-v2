@@ -2914,8 +2914,12 @@ type Device struct {
 	// The serial number of a device.
 	DeviceSerialNumber *string `type:"string"`
 
-	// The status of a device.
+	// The status of a device. If the status is not READY, check the DeviceStatusInfo
+	// for details.
 	DeviceStatus DeviceStatus `type:"string" enum:"true"`
+
+	// Detailed information about a device's status.
+	DeviceStatusInfo *DeviceStatusInfo `type:"structure"`
 
 	// The type of a device.
 	DeviceType *string `type:"string"`
@@ -2957,6 +2961,9 @@ type DeviceData struct {
 	// The status of a device.
 	DeviceStatus DeviceStatus `type:"string" enum:"true"`
 
+	// Detailed information about a device's status.
+	DeviceStatusInfo *DeviceStatusInfo `type:"structure"`
+
 	// The type of a device.
 	DeviceType *string `type:"string"`
 
@@ -2980,6 +2987,44 @@ func (s DeviceData) String() string {
 
 // GoString returns the string representation
 func (s DeviceData) GoString() string {
+	return s.String()
+}
+
+// Details of a device’s status.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusDetail
+type DeviceStatusDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The device status detail code.
+	Code DeviceStatusDetailCode `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s DeviceStatusDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeviceStatusDetail) GoString() string {
+	return s.String()
+}
+
+// Detailed information about a device's status.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusInfo
+type DeviceStatusInfo struct {
+	_ struct{} `type:"structure"`
+
+	// One or more device status detail descriptions.
+	DeviceStatusDetails []DeviceStatusDetail `type:"list"`
+}
+
+// String returns the string representation
+func (s DeviceStatusInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeviceStatusInfo) GoString() string {
 	return s.String()
 }
 
@@ -3906,8 +3951,8 @@ type SearchDevicesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The filters to use to list a specified set of devices. Supported filter keys
-	// are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and
-	// UnassociatedOnly.
+	// are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType,
+	// DeviceSerialNumber, and UnassociatedOnly.
 	Filters []Filter `type:"list"`
 
 	// The maximum number of results to include in the response. If more results
@@ -5091,6 +5136,23 @@ func (enum DeviceStatus) MarshalValue() (string, error) {
 }
 
 func (enum DeviceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DeviceStatusDetailCode string
+
+// Enum values for DeviceStatusDetailCode
+const (
+	DeviceStatusDetailCodeDeviceSoftwareUpdateNeeded DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"
+	DeviceStatusDetailCodeDeviceWasOffline           DeviceStatusDetailCode = "DEVICE_WAS_OFFLINE"
+)
+
+func (enum DeviceStatusDetailCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceStatusDetailCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

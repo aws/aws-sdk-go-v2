@@ -70,6 +70,8 @@ type GlueAPI interface {
 
 	BatchDeleteTableRequest(*glue.BatchDeleteTableInput) glue.BatchDeleteTableRequest
 
+	BatchDeleteTableVersionRequest(*glue.BatchDeleteTableVersionInput) glue.BatchDeleteTableVersionRequest
+
 	BatchGetPartitionRequest(*glue.BatchGetPartitionInput) glue.BatchGetPartitionRequest
 
 	BatchStopJobRunRequest(*glue.BatchStopJobRunInput) glue.BatchStopJobRunRequest
@@ -111,6 +113,8 @@ type GlueAPI interface {
 	DeletePartitionRequest(*glue.DeletePartitionInput) glue.DeletePartitionRequest
 
 	DeleteTableRequest(*glue.DeleteTableInput) glue.DeleteTableRequest
+
+	DeleteTableVersionRequest(*glue.DeleteTableVersionInput) glue.DeleteTableVersionRequest
 
 	DeleteTriggerRequest(*glue.DeleteTriggerInput) glue.DeleteTriggerRequest
 
@@ -159,6 +163,8 @@ type GlueAPI interface {
 	GetPlanRequest(*glue.GetPlanInput) glue.GetPlanRequest
 
 	GetTableRequest(*glue.GetTableInput) glue.GetTableRequest
+
+	GetTableVersionRequest(*glue.GetTableVersionInput) glue.GetTableVersionRequest
 
 	GetTableVersionsRequest(*glue.GetTableVersionsInput) glue.GetTableVersionsRequest
 

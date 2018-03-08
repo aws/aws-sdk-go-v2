@@ -65,6 +65,8 @@ import (
 type AppStreamAPI interface {
 	AssociateFleetRequest(*appstream.AssociateFleetInput) appstream.AssociateFleetRequest
 
+	CopyImageRequest(*appstream.CopyImageInput) appstream.CopyImageRequest
+
 	CreateDirectoryConfigRequest(*appstream.CreateDirectoryConfigInput) appstream.CreateDirectoryConfigRequest
 
 	CreateFleetRequest(*appstream.CreateFleetInput) appstream.CreateFleetRequest

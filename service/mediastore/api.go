@@ -162,6 +162,61 @@ func (c *MediaStore) DeleteContainerPolicyRequest(input *DeleteContainerPolicyIn
 	return DeleteContainerPolicyRequest{Request: req, Input: input, Copy: c.DeleteContainerPolicyRequest}
 }
 
+const opDeleteCorsPolicy = "DeleteCorsPolicy"
+
+// DeleteCorsPolicyRequest is a API request type for the DeleteCorsPolicy API operation.
+type DeleteCorsPolicyRequest struct {
+	*aws.Request
+	Input *DeleteCorsPolicyInput
+	Copy  func(*DeleteCorsPolicyInput) DeleteCorsPolicyRequest
+}
+
+// Send marshals and sends the DeleteCorsPolicy API request.
+func (r DeleteCorsPolicyRequest) Send() (*DeleteCorsPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteCorsPolicyOutput), nil
+}
+
+// DeleteCorsPolicyRequest returns a request value for making API operation for
+// AWS Elemental MediaStore.
+//
+// Deletes the cross-origin resource sharing (CORS) configuration information
+// that is set for the container.
+//
+// To use this operation, you must have permission to perform the MediaStore:DeleteCorsPolicy
+// action. The container owner has this permission by default and can grant
+// this permission to others.
+//
+//    // Example sending a request using the DeleteCorsPolicyRequest method.
+//    req := client.DeleteCorsPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteCorsPolicy
+func (c *MediaStore) DeleteCorsPolicyRequest(input *DeleteCorsPolicyInput) DeleteCorsPolicyRequest {
+	op := &aws.Operation{
+		Name:       opDeleteCorsPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteCorsPolicyInput{}
+	}
+
+	output := &DeleteCorsPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteCorsPolicyRequest{Request: req, Input: input, Copy: c.DeleteCorsPolicyRequest}
+}
+
 const opDescribeContainer = "DescribeContainer"
 
 // DescribeContainerRequest is a API request type for the DescribeContainer API operation.
@@ -184,9 +239,12 @@ func (r DescribeContainerRequest) Send() (*DescribeContainerOutput, error) {
 // DescribeContainerRequest returns a request value for making API operation for
 // AWS Elemental MediaStore.
 //
-// Retrieves the properties of the requested container. This returns a single
-// Container object based on ContainerName. To return all Container objects
-// that are associated with a specified AWS account, use ListContainers.
+// Retrieves the properties of the requested container. This request is commonly
+// used to retrieve the endpoint of a container. An endpoint is a value assigned
+// by the service when a new container is created. A container's endpoint does
+// not change after it has been assigned. The DescribeContainer request returns
+// a single Container object based on ContainerName. To return all Container
+// objects that are associated with a specified AWS account, use ListContainers.
 //
 //    // Example sending a request using the DescribeContainerRequest method.
 //    req := client.DescribeContainerRequest(params)
@@ -264,6 +322,61 @@ func (c *MediaStore) GetContainerPolicyRequest(input *GetContainerPolicyInput) G
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetContainerPolicyRequest{Request: req, Input: input, Copy: c.GetContainerPolicyRequest}
+}
+
+const opGetCorsPolicy = "GetCorsPolicy"
+
+// GetCorsPolicyRequest is a API request type for the GetCorsPolicy API operation.
+type GetCorsPolicyRequest struct {
+	*aws.Request
+	Input *GetCorsPolicyInput
+	Copy  func(*GetCorsPolicyInput) GetCorsPolicyRequest
+}
+
+// Send marshals and sends the GetCorsPolicy API request.
+func (r GetCorsPolicyRequest) Send() (*GetCorsPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetCorsPolicyOutput), nil
+}
+
+// GetCorsPolicyRequest returns a request value for making API operation for
+// AWS Elemental MediaStore.
+//
+// Returns the cross-origin resource sharing (CORS) configuration information
+// that is set for the container.
+//
+// To use this operation, you must have permission to perform the MediaStore:GetCorsPolicy
+// action. By default, the container owner has this permission and can grant
+// it to others.
+//
+//    // Example sending a request using the GetCorsPolicyRequest method.
+//    req := client.GetCorsPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetCorsPolicy
+func (c *MediaStore) GetCorsPolicyRequest(input *GetCorsPolicyInput) GetCorsPolicyRequest {
+	op := &aws.Operation{
+		Name:       opGetCorsPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetCorsPolicyInput{}
+	}
+
+	output := &GetCorsPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetCorsPolicyRequest{Request: req, Input: input, Copy: c.GetCorsPolicyRequest}
 }
 
 const opListContainers = "ListContainers"
@@ -382,6 +495,66 @@ func (c *MediaStore) PutContainerPolicyRequest(input *PutContainerPolicyInput) P
 	return PutContainerPolicyRequest{Request: req, Input: input, Copy: c.PutContainerPolicyRequest}
 }
 
+const opPutCorsPolicy = "PutCorsPolicy"
+
+// PutCorsPolicyRequest is a API request type for the PutCorsPolicy API operation.
+type PutCorsPolicyRequest struct {
+	*aws.Request
+	Input *PutCorsPolicyInput
+	Copy  func(*PutCorsPolicyInput) PutCorsPolicyRequest
+}
+
+// Send marshals and sends the PutCorsPolicy API request.
+func (r PutCorsPolicyRequest) Send() (*PutCorsPolicyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutCorsPolicyOutput), nil
+}
+
+// PutCorsPolicyRequest returns a request value for making API operation for
+// AWS Elemental MediaStore.
+//
+// Sets the cross-origin resource sharing (CORS) configuration on a container
+// so that the container can service cross-origin requests. For example, you
+// might want to enable a request whose origin is http://www.example.com to
+// access your AWS Elemental MediaStore container at my.example.container.com
+// by using the browser's XMLHttpRequest capability.
+//
+// To enable CORS on a container, you attach a CORS policy to the container.
+// In the CORS policy, you configure rules that identify origins and the HTTP
+// methods that can be executed on your container. The policy can contain up
+// to 398,000 characters. You can add up to 100 rules to a CORS policy. If more
+// than one rule applies, the service uses the first applicable rule listed.
+//
+//    // Example sending a request using the PutCorsPolicyRequest method.
+//    req := client.PutCorsPolicyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutCorsPolicy
+func (c *MediaStore) PutCorsPolicyRequest(input *PutCorsPolicyInput) PutCorsPolicyRequest {
+	op := &aws.Operation{
+		Name:       opPutCorsPolicy,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutCorsPolicyInput{}
+	}
+
+	output := &PutCorsPolicyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutCorsPolicyRequest{Request: req, Input: input, Copy: c.PutCorsPolicyRequest}
+}
+
 // This section describes operations that you can perform on an AWS Elemental
 // MediaStore container.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/Container
@@ -399,8 +572,10 @@ type Container struct {
 	// Unix timestamp.
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// The DNS endpoint of the container. Use from 1 to 255 characters. Use this
-	// endpoint to identify this container when sending requests to the data plane.
+	// The DNS endpoint of the container. Use the endpoint to identify the specific
+	// container when sending requests to the data plane. The service assigns this
+	// value when the container is created. Once the value has been assigned, it
+	// does not change.
 	Endpoint *string `min:"1" type:"string"`
 
 	// The name of the container.
@@ -420,6 +595,59 @@ func (s Container) String() string {
 
 // GoString returns the string representation
 func (s Container) GoString() string {
+	return s.String()
+}
+
+// A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If
+// more than one rule applies, the service uses the first applicable rule listed.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/CorsRule
+type CorsRule struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies which headers are allowed in a preflight OPTIONS request through
+	// the Access-Control-Request-Headers header. Each header name that is specified
+	// in Access-Control-Request-Headers must have a corresponding entry in the
+	// rule. Only the headers that were requested are sent back.
+	//
+	// This element can contain only one wildcard character (*).
+	AllowedHeaders []string `type:"list"`
+
+	// Identifies an HTTP method that the origin that is specified in the rule is
+	// allowed to execute.
+	//
+	// Each CORS rule must contain at least one AllowedMethod and one AllowedOrigin
+	// element.
+	AllowedMethods []MethodName `type:"list"`
+
+	// One or more response headers that you want users to be able to access from
+	// their applications (for example, from a JavaScript XMLHttpRequest object).
+	//
+	// Each CORS rule must have at least one AllowedOrigin element. The string value
+	// can include only one wildcard character (*), for example, http://*.example.com.
+	// Additionally, you can specify only one wildcard character to allow cross-origin
+	// access for all origins.
+	AllowedOrigins []string `type:"list"`
+
+	// One or more headers in the response that you want users to be able to access
+	// from their applications (for example, from a JavaScript XMLHttpRequest object).
+	//
+	// This element is optional for each rule.
+	ExposeHeaders []string `type:"list"`
+
+	// The time in seconds that your browser caches the preflight response for the
+	// specified resource.
+	//
+	// A CORS rule can have only one MaxAgeSeconds element.
+	MaxAgeSeconds *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s CorsRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CorsRule) GoString() string {
 	return s.String()
 }
 
@@ -475,7 +703,7 @@ type CreateContainerOutput struct {
 	//
 	// ContainerName: The container name as specified in the request.
 	//
-	// CreationTime: Unix timestamp.
+	// CreationTime: Unix time stamp.
 	//
 	// Status: The status of container creation or deletion. The status is one of
 	// the following: CREATING, ACTIVE, or DELETING. While the service is creating
@@ -622,6 +850,65 @@ func (s DeleteContainerPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteCorsPolicyInput
+type DeleteCorsPolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the container to remove the policy from.
+	//
+	// ContainerName is a required field
+	ContainerName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteCorsPolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteCorsPolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteCorsPolicyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteCorsPolicyInput"}
+
+	if s.ContainerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
+	}
+	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DeleteCorsPolicyOutput
+type DeleteCorsPolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteCorsPolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteCorsPolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteCorsPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/DescribeContainerInput
 type DescribeContainerInput struct {
 	_ struct{} `type:"structure"`
@@ -739,6 +1026,70 @@ func (s GetContainerPolicyOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetContainerPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetCorsPolicyInput
+type GetCorsPolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the container that the policy is assigned to.
+	//
+	// ContainerName is a required field
+	ContainerName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetCorsPolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCorsPolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetCorsPolicyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetCorsPolicyInput"}
+
+	if s.ContainerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
+	}
+	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/GetCorsPolicyOutput
+type GetCorsPolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The CORS policy of the container.
+	//
+	// CorsPolicy is a required field
+	CorsPolicy []CorsRule `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s GetCorsPolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetCorsPolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetCorsPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -890,6 +1241,77 @@ func (s PutContainerPolicyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutCorsPolicyInput
+type PutCorsPolicyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the container that you want to assign the CORS policy to.
+	//
+	// ContainerName is a required field
+	ContainerName *string `min:"1" type:"string" required:"true"`
+
+	// The CORS policy to apply to the container.
+	//
+	// CorsPolicy is a required field
+	CorsPolicy []CorsRule `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s PutCorsPolicyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutCorsPolicyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutCorsPolicyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutCorsPolicyInput"}
+
+	if s.ContainerName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContainerName"))
+	}
+	if s.ContainerName != nil && len(*s.ContainerName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContainerName", 1))
+	}
+
+	if s.CorsPolicy == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CorsPolicy"))
+	}
+	if s.CorsPolicy != nil && len(s.CorsPolicy) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CorsPolicy", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediastore-2017-09-01/PutCorsPolicyOutput
+type PutCorsPolicyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutCorsPolicyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutCorsPolicyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutCorsPolicyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 type ContainerStatus string
 
 // Enum values for ContainerStatus
@@ -904,6 +1326,25 @@ func (enum ContainerStatus) MarshalValue() (string, error) {
 }
 
 func (enum ContainerStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type MethodName string
+
+// Enum values for MethodName
+const (
+	MethodNamePut    MethodName = "PUT"
+	MethodNameGet    MethodName = "GET"
+	MethodNameDelete MethodName = "DELETE"
+	MethodNameHead   MethodName = "HEAD"
+)
+
+func (enum MethodName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MethodName) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

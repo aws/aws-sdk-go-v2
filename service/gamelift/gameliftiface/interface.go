@@ -164,6 +164,8 @@ type GameLiftAPI interface {
 
 	StartGameSessionPlacementRequest(*gamelift.StartGameSessionPlacementInput) gamelift.StartGameSessionPlacementRequest
 
+	StartMatchBackfillRequest(*gamelift.StartMatchBackfillInput) gamelift.StartMatchBackfillRequest
+
 	StartMatchmakingRequest(*gamelift.StartMatchmakingInput) gamelift.StartMatchmakingRequest
 
 	StopGameSessionPlacementRequest(*gamelift.StopGameSessionPlacementInput) gamelift.StopGameSessionPlacementRequest

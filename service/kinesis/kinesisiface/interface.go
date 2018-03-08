@@ -87,6 +87,8 @@ type KinesisAPI interface {
 
 	IncreaseStreamRetentionPeriodRequest(*kinesis.IncreaseStreamRetentionPeriodInput) kinesis.IncreaseStreamRetentionPeriodRequest
 
+	ListShardsRequest(*kinesis.ListShardsInput) kinesis.ListShardsRequest
+
 	ListStreamsRequest(*kinesis.ListStreamsInput) kinesis.ListStreamsRequest
 
 	ListTagsForStreamRequest(*kinesis.ListTagsForStreamInput) kinesis.ListTagsForStreamRequest

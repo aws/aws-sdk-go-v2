@@ -180,6 +180,8 @@ type CognitoIdentityProviderAPI interface {
 
 	GetIdentityProviderByIdentifierRequest(*cognitoidentityprovider.GetIdentityProviderByIdentifierInput) cognitoidentityprovider.GetIdentityProviderByIdentifierRequest
 
+	GetSigningCertificateRequest(*cognitoidentityprovider.GetSigningCertificateInput) cognitoidentityprovider.GetSigningCertificateRequest
+
 	GetUICustomizationRequest(*cognitoidentityprovider.GetUICustomizationInput) cognitoidentityprovider.GetUICustomizationRequest
 
 	GetUserRequest(*cognitoidentityprovider.GetUserInput) cognitoidentityprovider.GetUserRequest

@@ -692,10 +692,10 @@ func (r DeleteUtterancesRequest) Send() (*DeleteUtterancesOutput, error) {
 //
 // Deletes stored utterances.
 //
-// Amazon Lex stores the utterances that users send to your bot unless the childDirected
-// field in the bot is set to true. Utterances are stored for 15 days for use
-// with the GetUtterancesView operation, and then stored indefinitely for use
-// in improving the ability of your bot to respond to user input.
+// Amazon Lex stores the utterances that users send to your bot. Utterances
+// are stored for 15 days for use with the GetUtterancesView operation, and
+// then stored indefinitely for use in improving the ability of your bot to
+// respond to user input.
 //
 // Use the DeleteStoredUtterances operation to manually delete stored utterances
 // for a specific user.
@@ -1635,6 +1635,56 @@ func (c *LexModelBuildingService) GetExportRequest(input *GetExportInput) GetExp
 	return GetExportRequest{Request: req, Input: input, Copy: c.GetExportRequest}
 }
 
+const opGetImport = "GetImport"
+
+// GetImportRequest is a API request type for the GetImport API operation.
+type GetImportRequest struct {
+	*aws.Request
+	Input *GetImportInput
+	Copy  func(*GetImportInput) GetImportRequest
+}
+
+// Send marshals and sends the GetImport API request.
+func (r GetImportRequest) Send() (*GetImportOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetImportOutput), nil
+}
+
+// GetImportRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
+//
+// Gets information about an import job started with the StartImport operation.
+//
+//    // Example sending a request using the GetImportRequest method.
+//    req := client.GetImportRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetImport
+func (c *LexModelBuildingService) GetImportRequest(input *GetImportInput) GetImportRequest {
+	op := &aws.Operation{
+		Name:       opGetImport,
+		HTTPMethod: "GET",
+		HTTPPath:   "/imports/{importId}",
+	}
+
+	if input == nil {
+		input = &GetImportInput{}
+	}
+
+	output := &GetImportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetImportRequest{Request: req, Input: input, Copy: c.GetImportRequest}
+}
+
 const opGetIntent = "GetIntent"
 
 // GetIntentRequest is a API request type for the GetIntent API operation.
@@ -2222,13 +2272,10 @@ func (r GetUtterancesViewRequest) Send() (*GetUtterancesViewOutput, error) {
 // old version and the new so that you can compare the performance across the
 // two versions.
 //
-// Data is available for the last 15 days. You can request information for up
-// to 5 versions in each request. The response contains information about a
-// maximum of 100 utterances for each version.
-//
-// If the bot's childDirected field is set to true, utterances for the bot are
-// not stored and cannot be retrieved with the GetUtterancesView operation.
-// For more information, see PutBot.
+// Utterance statistics are generated once a day. Data is available for the
+// last 15 days. You can request information for up to 5 versions in each request.
+// The response contains information about a maximum of 100 utterances for each
+// version.
 //
 // This operation requires permissions for the lex:GetUtterancesView action.
 //
@@ -2281,10 +2328,11 @@ func (r PutBotRequest) Send() (*PutBotOutput, error) {
 // Amazon Lex Model Building Service.
 //
 // Creates an Amazon Lex conversational bot or replaces an existing bot. When
-// you create or update a bot you are only required to specify a name. You can
-// use this to add intents later, or to remove intents from an existing bot.
-// When you create a bot with a name only, the bot is created or updated but
-// Amazon Lex returns the response FAILED. You can build the bot after you add one or more intents. For more information
+// you create or update a bot you are only required to specify a name, a locale,
+// and whether the bot is directed toward children under age 13. You can use
+// this to add intents later, or to remove intents from an existing bot. When
+// you create a bot with the minimum information, the bot is created or updated
+// but Amazon Lex returns the response FAILED. You can build the bot after you add one or more intents. For more information
 // about Amazon Lex bots, see how-it-works.
 //
 // If you specify the name of an existing bot, the fields in the request replace
@@ -2530,6 +2578,56 @@ func (c *LexModelBuildingService) PutSlotTypeRequest(input *PutSlotTypeInput) Pu
 	output.responseMetadata = aws.Response{Request: req}
 
 	return PutSlotTypeRequest{Request: req, Input: input, Copy: c.PutSlotTypeRequest}
+}
+
+const opStartImport = "StartImport"
+
+// StartImportRequest is a API request type for the StartImport API operation.
+type StartImportRequest struct {
+	*aws.Request
+	Input *StartImportInput
+	Copy  func(*StartImportInput) StartImportRequest
+}
+
+// Send marshals and sends the StartImport API request.
+func (r StartImportRequest) Send() (*StartImportOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartImportOutput), nil
+}
+
+// StartImportRequest returns a request value for making API operation for
+// Amazon Lex Model Building Service.
+//
+// Starts a job to import a resource to Amazon Lex.
+//
+//    // Example sending a request using the StartImportRequest method.
+//    req := client.StartImportRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImport
+func (c *LexModelBuildingService) StartImportRequest(input *StartImportInput) StartImportRequest {
+	op := &aws.Operation{
+		Name:       opStartImport,
+		HTTPMethod: "POST",
+		HTTPPath:   "/imports/",
+	}
+
+	if input == nil {
+		input = &StartImportInput{}
+	}
+
+	output := &StartImportOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StartImportRequest{Request: req, Input: input, Copy: c.StartImportRequest}
 }
 
 // Provides information about a bot alias.
@@ -6506,6 +6604,151 @@ func (s GetExportOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetImportRequest
+type GetImportInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the import job information to return.
+	//
+	// ImportId is a required field
+	ImportId *string `location:"uri" locationName:"importId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetImportInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetImportInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetImportInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetImportInput"}
+
+	if s.ImportId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ImportId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetImportInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ImportId != nil {
+		v := *s.ImportId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "importId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetImportResponse
+type GetImportOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A timestamp for the date and time that the import job was created.
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+
+	// A string that describes why an import job failed to complete.
+	FailureReason []string `locationName:"failureReason" type:"list"`
+
+	// The identifier for the specific import job.
+	ImportId *string `locationName:"importId" type:"string"`
+
+	// The status of the import job. If the status is FAILED, you can get the reason
+	// for the failure from the failureReason field.
+	ImportStatus ImportStatus `locationName:"importStatus" type:"string" enum:"true"`
+
+	// The action taken when there was a conflict between an existing resource and
+	// a resource in the import file.
+	MergeStrategy MergeStrategy `locationName:"mergeStrategy" type:"string" enum:"true"`
+
+	// The name given to the import job.
+	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// The type of resource imported.
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s GetImportOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetImportOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetImportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetImportOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedDate != nil {
+		v := *s.CreatedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if len(s.FailureReason) > 0 {
+		v := s.FailureReason
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "failureReason", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ImportId != nil {
+		v := *s.ImportId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "importId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ImportStatus) > 0 {
+		v := s.ImportStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "importStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.MergeStrategy) > 0 {
+		v := s.MergeStrategy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mergeStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ResourceType) > 0 {
+		v := s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/GetIntentRequest
 type GetIntentInput struct {
 	_ struct{} `type:"structure"`
@@ -7727,6 +7970,11 @@ type Message struct {
 	//
 	// ContentType is a required field
 	ContentType ContentType `locationName:"contentType" type:"string" required:"true" enum:"true"`
+
+	// Identifies the message group that the message belongs to. When a group is
+	// assigned to a message, Amazon Lex returns one message from each group in
+	// the response.
+	GroupNumber *int64 `locationName:"groupNumber" min:"1" type:"integer"`
 }
 
 // String returns the string representation
@@ -7752,6 +8000,9 @@ func (s *Message) Validate() error {
 	if len(s.ContentType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
 	}
+	if s.GroupNumber != nil && *s.GroupNumber < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("GroupNumber", 1))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7772,6 +8023,12 @@ func (s Message) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "contentType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.GroupNumber != nil {
+		v := *s.GroupNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "groupNumber", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -8147,6 +8404,8 @@ type PutBotInput struct {
 	// can say 'Order a pizza' or 'Order a drink.'"
 	ClarificationPrompt *Prompt `locationName:"clarificationPrompt" type:"structure"`
 
+	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
+
 	// A description of the bot.
 	Description *string `locationName:"description" type:"string"`
 
@@ -8187,11 +8446,11 @@ type PutBotInput struct {
 	// Name is a required field
 	Name *string `location:"uri" locationName:"name" min:"2" type:"string" required:"true"`
 
-	// If you set the processBehavior element to Build, Amazon Lex builds the bot
-	// so that it can be run. If you set the element to SaveAmazon Lex saves the
+	// If you set the processBehavior element to BUILD, Amazon Lex builds the bot
+	// so that it can be run. If you set the element to SAVE Amazon Lex saves the
 	// bot, but doesn't build it.
 	//
-	// If you don't specify this value, the default value is Save.
+	// If you don't specify this value, the default value is BUILD.
 	ProcessBehavior ProcessBehavior `locationName:"processBehavior" type:"string" enum:"true"`
 
 	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions
@@ -8282,6 +8541,12 @@ func (s PutBotInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "clarificationPrompt", v, metadata)
+	}
+	if s.CreateVersion != nil {
+		v := *s.CreateVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createVersion", protocol.BoolValue(v), metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description
@@ -8376,6 +8641,8 @@ type PutBotOutput struct {
 	// For more information, see PutBot.
 	ClarificationPrompt *Prompt `locationName:"clarificationPrompt" type:"structure"`
 
+	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
+
 	// The date that the bot was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
 
@@ -8461,6 +8728,12 @@ func (s PutBotOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "clarificationPrompt", v, metadata)
+	}
+	if s.CreateVersion != nil {
+		v := *s.CreateVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createVersion", protocol.BoolValue(v), metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -8575,6 +8848,8 @@ type PutIntentInput struct {
 	// You you must provide both the rejectionStatement and the confirmationPrompt,
 	// or neither.
 	ConfirmationPrompt *Prompt `locationName:"confirmationPrompt" type:"structure"`
+
+	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
 
 	// A description of the intent.
 	Description *string `locationName:"description" type:"string"`
@@ -8743,6 +9018,12 @@ func (s PutIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "confirmationPrompt", v, metadata)
 	}
+	if s.CreateVersion != nil {
+		v := *s.CreateVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createVersion", protocol.BoolValue(v), metadata)
+	}
 	if s.Description != nil {
 		v := *s.Description
 
@@ -8829,6 +9110,8 @@ type PutIntentOutput struct {
 	// before fulfilling it.
 	ConfirmationPrompt *Prompt `locationName:"confirmationPrompt" type:"structure"`
 
+	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
+
 	// The date that the intent was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
 
@@ -8906,6 +9189,12 @@ func (s PutIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "confirmationPrompt", v, metadata)
+	}
+	if s.CreateVersion != nil {
+		v := *s.CreateVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createVersion", protocol.BoolValue(v), metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -9009,6 +9298,8 @@ type PutSlotTypeInput struct {
 	// you get a PreconditionFailedException exception.
 	Checksum *string `locationName:"checksum" type:"string"`
 
+	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
+
 	// A description of the slot type.
 	Description *string `locationName:"description" type:"string"`
 
@@ -9098,6 +9389,12 @@ func (s PutSlotTypeInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.CreateVersion != nil {
+		v := *s.CreateVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createVersion", protocol.BoolValue(v), metadata)
+	}
 	if s.Description != nil {
 		v := *s.Description
 
@@ -9139,6 +9436,8 @@ type PutSlotTypeOutput struct {
 
 	// Checksum of the $LATEST version of the slot type.
 	Checksum *string `locationName:"checksum" type:"string"`
+
+	CreateVersion *bool `locationName:"createVersion" type:"boolean"`
 
 	// The date that the slot type was created.
 	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
@@ -9188,6 +9487,12 @@ func (s PutSlotTypeOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "checksum", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreateVersion != nil {
+		v := *s.CreateVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createVersion", protocol.BoolValue(v), metadata)
 	}
 	if s.CreatedDate != nil {
 		v := *s.CreatedDate
@@ -9507,6 +9812,182 @@ func (s SlotTypeMetadata) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImportRequest
+type StartImportInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the action that the StartImport operation should take when there
+	// is an existing resource with the same name.
+	//
+	//    * FAIL_ON_CONFLICT - The import operation is stopped on the first conflict
+	//    between a resource in the import file and an existing resource. The name
+	//    of the resource causing the conflict is in the failureReason field of
+	//    the response to the GetImport operation.
+	//
+	// OVERWRITE_LATEST - The import operation proceeds even if there is a conflict
+	//    with an existing resource. The $LASTEST version of the existing resource
+	//    is overwritten with the data from the import file.
+	//
+	// MergeStrategy is a required field
+	MergeStrategy MergeStrategy `locationName:"mergeStrategy" type:"string" required:"true" enum:"true"`
+
+	// A zip archive in binary format. The archive should contain one file, a JSON
+	// file containing the resource to import. The resource should match the type
+	// specified in the resourceType field.
+	//
+	// Payload is automatically base64 encoded/decoded by the SDK.
+	//
+	// Payload is a required field
+	Payload []byte `locationName:"payload" type:"blob" required:"true"`
+
+	// Specifies the type of resource to export. Each resource also exports any
+	// resources that it depends on.
+	//
+	//    * A bot exports dependent intents.
+	//
+	//    * An intent exports dependent slot types.
+	//
+	// ResourceType is a required field
+	ResourceType ResourceType `locationName:"resourceType" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s StartImportInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartImportInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartImportInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartImportInput"}
+	if len(s.MergeStrategy) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("MergeStrategy"))
+	}
+
+	if s.Payload == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Payload"))
+	}
+	if len(s.ResourceType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("ResourceType"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartImportInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.MergeStrategy) > 0 {
+		v := s.MergeStrategy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mergeStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Payload != nil {
+		v := s.Payload
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "payload", protocol.QuotedValue{ValueMarshaler: protocol.BytesValue(v)}, metadata)
+	}
+	if len(s.ResourceType) > 0 {
+		v := s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/StartImportResponse
+type StartImportOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A timestamp for the date and time that the import job was requested.
+	CreatedDate *time.Time `locationName:"createdDate" type:"timestamp" timestampFormat:"unix"`
+
+	// The identifier for the specific import job.
+	ImportId *string `locationName:"importId" type:"string"`
+
+	// The status of the import job. If the status is FAILED, you can get the reason
+	// for the failure using the GetImport operation.
+	ImportStatus ImportStatus `locationName:"importStatus" type:"string" enum:"true"`
+
+	// The action to take when there is a merge conflict.
+	MergeStrategy MergeStrategy `locationName:"mergeStrategy" type:"string" enum:"true"`
+
+	// The name given to the import job.
+	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// The type of resource to import.
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s StartImportOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartImportOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartImportOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s StartImportOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedDate != nil {
+		v := *s.CreatedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.ImportId != nil {
+		v := *s.ImportId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "importId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ImportStatus) > 0 {
+		v := s.ImportStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "importStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.MergeStrategy) > 0 {
+		v := s.MergeStrategy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mergeStrategy", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ResourceType) > 0 {
+		v := s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // A collection of messages that convey information to the user. At runtime,
 // Amazon Lex selects the message to convey.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lex-models-2017-04-19/Statement
@@ -9724,6 +10205,7 @@ const (
 	ChannelTypeFacebook  ChannelType = "Facebook"
 	ChannelTypeSlack     ChannelType = "Slack"
 	ChannelTypeTwilioSms ChannelType = "Twilio-Sms"
+	ChannelTypeKik       ChannelType = "Kik"
 )
 
 func (enum ChannelType) MarshalValue() (string, error) {
@@ -9739,8 +10221,9 @@ type ContentType string
 
 // Enum values for ContentType
 const (
-	ContentTypePlainText ContentType = "PlainText"
-	ContentTypeSsml      ContentType = "SSML"
+	ContentTypePlainText     ContentType = "PlainText"
+	ContentTypeSsml          ContentType = "SSML"
+	ContentTypeCustomPayload ContentType = "CustomPayload"
 )
 
 func (enum ContentType) MarshalValue() (string, error) {
@@ -9775,6 +10258,7 @@ type ExportType string
 // Enum values for ExportType
 const (
 	ExportTypeAlexaSkillsKit ExportType = "ALEXA_SKILLS_KIT"
+	ExportTypeLex            ExportType = "LEX"
 )
 
 func (enum ExportType) MarshalValue() (string, error) {
@@ -9803,11 +10287,31 @@ func (enum FulfillmentActivityType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ImportStatus string
+
+// Enum values for ImportStatus
+const (
+	ImportStatusInProgress ImportStatus = "IN_PROGRESS"
+	ImportStatusComplete   ImportStatus = "COMPLETE"
+	ImportStatusFailed     ImportStatus = "FAILED"
+)
+
+func (enum ImportStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ImportStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Locale string
 
 // Enum values for Locale
 const (
 	LocaleEnUs Locale = "en-US"
+	LocaleEnGb Locale = "en-GB"
+	LocaleDeDe Locale = "de-DE"
 )
 
 func (enum Locale) MarshalValue() (string, error) {
@@ -9815,6 +10319,23 @@ func (enum Locale) MarshalValue() (string, error) {
 }
 
 func (enum Locale) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type MergeStrategy string
+
+// Enum values for MergeStrategy
+const (
+	MergeStrategyOverwriteLatest MergeStrategy = "OVERWRITE_LATEST"
+	MergeStrategyFailOnConflict  MergeStrategy = "FAIL_ON_CONFLICT"
+)
+
+func (enum MergeStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MergeStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -9859,7 +10380,9 @@ type ResourceType string
 
 // Enum values for ResourceType
 const (
-	ResourceTypeBot ResourceType = "BOT"
+	ResourceTypeBot      ResourceType = "BOT"
+	ResourceTypeIntent   ResourceType = "INTENT"
+	ResourceTypeSlotType ResourceType = "SLOT_TYPE"
 )
 
 func (enum ResourceType) MarshalValue() (string, error) {

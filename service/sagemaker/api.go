@@ -1896,12 +1896,11 @@ func (r UpdateEndpointWeightsAndCapacitiesRequest) Send() (*UpdateEndpointWeight
 // UpdateEndpointWeightsAndCapacitiesRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Updates variant weight, capacity, or both of one or more variants associated
-// with an endpoint. This operation updates weight, capacity, or both for the
-// previously provisioned endpoint. When it receives the request, Amazon SageMaker
-// sets the endpoint status to Updating. After updating the endpoint, it sets
-// the status to InService. To check the status of an endpoint, use the DescribeEndpoint
-// (http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html)
+// Updates variant weight of one or more variants associated with an existing
+// endpoint, or capacity of one variant associated with an existing endpoint.
+// When it receives the request, Amazon SageMaker sets the endpoint status to
+// Updating. After updating the endpoint, it sets the status to InService. To
+// check the status of an endpoint, use the DescribeEndpoint (http://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html)
 // API.
 //
 //    // Example sending a request using the UpdateEndpointWeightsAndCapacitiesRequest method.
@@ -2257,6 +2256,11 @@ type CreateEndpointConfigInput struct {
 	//
 	// EndpointConfigName is a required field
 	EndpointConfigName *string `type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
+	// SageMaker uses to encrypt data on the storage volume attached to the ML compute
+	// instance that hosts the endpoint.
+	KmsKeyId *string `type:"string"`
 
 	// An array of ProductionVariant objects, one for each model that you want to
 	// host at this endpoint.
@@ -3301,6 +3305,10 @@ type DescribeEndpointConfigOutput struct {
 	//
 	// EndpointConfigName is a required field
 	EndpointConfigName *string `type:"string" required:"true"`
+
+	// AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the
+	// ML storage volume attached to the instance.
+	KmsKeyId *string `type:"string"`
 
 	// An array of ProductionVariant objects, one for each model that you want to
 	// host at this endpoint.
@@ -4670,6 +4678,11 @@ type ResourceConfig struct {
 	//
 	// InstanceType is a required field
 	InstanceType TrainingInstanceType `type:"string" required:"true" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
+	// SageMaker uses to encrypt data on the storage volume attached to the ML compute
+	// instance(s) that run the training job.
+	VolumeKmsKeyId *string `type:"string"`
 
 	// The size of the ML storage volume that you want to provision.
 	//

@@ -3,9 +3,12 @@
 package serverlessapplicationrepository
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/restjson"
 )
 
 const opCreateApplication = "CreateApplication"
@@ -159,6 +162,58 @@ func (c *ServerlessApplicationRepository) CreateCloudFormationChangeSetRequest(i
 	return CreateCloudFormationChangeSetRequest{Request: req, Input: input, Copy: c.CreateCloudFormationChangeSetRequest}
 }
 
+const opDeleteApplication = "DeleteApplication"
+
+// DeleteApplicationRequest is a API request type for the DeleteApplication API operation.
+type DeleteApplicationRequest struct {
+	*aws.Request
+	Input *DeleteApplicationInput
+	Copy  func(*DeleteApplicationInput) DeleteApplicationRequest
+}
+
+// Send marshals and sends the DeleteApplication API request.
+func (r DeleteApplicationRequest) Send() (*DeleteApplicationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteApplicationOutput), nil
+}
+
+// DeleteApplicationRequest returns a request value for making API operation for
+// AWSServerlessApplicationRepository.
+//
+// Deletes the specified application.
+//
+//    // Example sending a request using the DeleteApplicationRequest method.
+//    req := client.DeleteApplicationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/DeleteApplication
+func (c *ServerlessApplicationRepository) DeleteApplicationRequest(input *DeleteApplicationInput) DeleteApplicationRequest {
+	op := &aws.Operation{
+		Name:       opDeleteApplication,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/applications/{applicationId}",
+	}
+
+	if input == nil {
+		input = &DeleteApplicationInput{}
+	}
+
+	output := &DeleteApplicationOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteApplicationRequest{Request: req, Input: input, Copy: c.DeleteApplicationRequest}
+}
+
 const opGetApplication = "GetApplication"
 
 // GetApplicationRequest is a API request type for the GetApplication API operation.
@@ -296,6 +351,12 @@ func (c *ServerlessApplicationRepository) ListApplicationVersionsRequest(input *
 		Name:       opListApplicationVersions,
 		HTTPMethod: "GET",
 		HTTPPath:   "/applications/{applicationId}/versions",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -307,6 +368,52 @@ func (c *ServerlessApplicationRepository) ListApplicationVersionsRequest(input *
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListApplicationVersionsRequest{Request: req, Input: input, Copy: c.ListApplicationVersionsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListApplicationVersionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListApplicationVersions operation.
+//		req := client.ListApplicationVersionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListApplicationVersionsRequest) Paginate(opts ...aws.Option) ListApplicationVersionsPager {
+	return ListApplicationVersionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListApplicationVersionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListApplicationVersionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListApplicationVersionsPager struct {
+	aws.Pager
+}
+
+func (p *ListApplicationVersionsPager) CurrentPage() *ListApplicationVersionsOutput {
+	return p.Pager.CurrentPage().(*ListApplicationVersionsOutput)
 }
 
 const opListApplications = "ListApplications"
@@ -346,6 +453,12 @@ func (c *ServerlessApplicationRepository) ListApplicationsRequest(input *ListApp
 		Name:       opListApplications,
 		HTTPMethod: "GET",
 		HTTPPath:   "/applications",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxItems",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -357,6 +470,52 @@ func (c *ServerlessApplicationRepository) ListApplicationsRequest(input *ListApp
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListApplicationsRequest{Request: req, Input: input, Copy: c.ListApplicationsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListApplicationsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListApplications operation.
+//		req := client.ListApplicationsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListApplicationsRequest) Paginate(opts ...aws.Option) ListApplicationsPager {
+	return ListApplicationsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListApplicationsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListApplicationsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListApplicationsPager struct {
+	aws.Pager
+}
+
+func (p *ListApplicationsPager) CurrentPage() *ListApplicationsOutput {
+	return p.Pager.CurrentPage().(*ListApplicationsOutput)
 }
 
 const opPutApplicationPolicy = "PutApplicationPolicy"
@@ -464,13 +623,25 @@ func (c *ServerlessApplicationRepository) UpdateApplicationRequest(input *Update
 type ApplicationPolicyStatement struct {
 	_ struct{} `type:"structure"`
 
-	// A list of supported actions:\n\n GetApplication \n \n\n CreateCloudFormationChangeSet
-	// \n \n\n ListApplicationVersions \n \n\n SearchApplications \n \n\n Deploy
-	// (Note: This action enables all other actions above.)
-	Actions []string `locationName:"actions" type:"list"`
+	// A list of supported actions:
+	//
+	// GetApplication
+	//
+	// CreateCloudFormationChangeSet
+	//
+	// ListApplicationVersions
+	//
+	// SearchApplications
+	//
+	// Deploy (Note: This action enables all other actions above.)
+	//
+	// Actions is a required field
+	Actions []string `locationName:"actions" type:"list" required:"true"`
 
 	// An AWS account ID, or * to make the application public.
-	Principals []string `locationName:"principals" type:"list"`
+	//
+	// Principals is a required field
+	Principals []string `locationName:"principals" type:"list" required:"true"`
 
 	// A unique ID for the statement.
 	StatementId *string `locationName:"statementId" type:"string"`
@@ -484,6 +655,24 @@ func (s ApplicationPolicyStatement) String() string {
 // GoString returns the string representation
 func (s ApplicationPolicyStatement) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ApplicationPolicyStatement) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ApplicationPolicyStatement"}
+
+	if s.Actions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Actions"))
+	}
+
+	if s.Principals == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Principals"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -527,26 +716,50 @@ type ApplicationSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The application ARN.
-	ApplicationId *string `locationName:"applicationId" type:"string"`
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `locationName:"applicationId" type:"string" required:"true"`
 
-	// The name of the author publishing the app\nMin Length=1. Max Length=127.\nPattern
-	// "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
-	Author *string `locationName:"author" type:"string"`
+	// The name of the author publishing the app.
+	//
+	// Min Length=1. Max Length=127.
+	//
+	// Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
+	//
+	// Author is a required field
+	Author *string `locationName:"author" type:"string" required:"true"`
 
 	// The date/time this resource was created.
 	CreationTime *string `locationName:"creationTime" type:"string"`
 
-	// The description of the application.\nMin Length=1. Max Length=256
-	Description *string `locationName:"description" type:"string"`
+	// The description of the application.
+	//
+	// Min Length=1. Max Length=256
+	//
+	// Description is a required field
+	Description *string `locationName:"description" type:"string" required:"true"`
 
-	// Labels to improve discovery of apps in search results.\nMin Length=1. Max
-	// Length=127. Maximum number of labels: 10\nPattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
+	// A URL with more information about the application, for example the location
+	// of your GitHub repository for the application.
+	HomePageUrl *string `locationName:"homePageUrl" type:"string"`
+
+	// Labels to improve discovery of apps in search results.
+	//
+	// Min Length=1. Max Length=127. Maximum number of labels: 10
+	//
+	// Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []string `locationName:"labels" type:"list"`
 
-	// The name of the application.\nMin Length=1. Max Length=140\nPattern: "[a-zA-Z0-9\\-]+";
-	Name *string `locationName:"name" type:"string"`
+	// The name of the application.
+	//
+	// Min Length=1. Max Length=140
+	//
+	// Pattern: "[a-zA-Z0-9\\-]+";
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
 
-	// A valid identifier from https://spdx.org/licenses/ .
+	// A valid identifier from https://spdx.org/licenses/.
 	SpdxLicenseId *string `locationName:"spdxLicenseId" type:"string"`
 }
 
@@ -586,6 +799,12 @@ func (s ApplicationSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.HomePageUrl != nil {
+		v := *s.HomePageUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Labels) > 0 {
 		v := s.Labels
 
@@ -620,6 +839,8 @@ type CreateApplicationInput struct {
 	Author *string `locationName:"author" type:"string"`
 
 	Description *string `locationName:"description" type:"string"`
+
+	HomePageUrl *string `locationName:"homePageUrl" type:"string"`
 
 	Labels []string `locationName:"labels" type:"list"`
 
@@ -669,6 +890,12 @@ func (s CreateApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HomePageUrl != nil {
+		v := *s.HomePageUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Labels) > 0 {
 		v := s.Labels
@@ -759,6 +986,8 @@ type CreateApplicationOutput struct {
 
 	Description *string `locationName:"description" type:"string"`
 
+	HomePageUrl *string `locationName:"homePageUrl" type:"string"`
+
 	Labels []string `locationName:"labels" type:"list"`
 
 	LicenseUrl *string `locationName:"licenseUrl" type:"string"`
@@ -813,6 +1042,12 @@ func (s CreateApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HomePageUrl != nil {
+		v := *s.HomePageUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Labels) > 0 {
 		v := s.Labels
@@ -1053,6 +1288,13 @@ func (s *CreateCloudFormationChangeSetInput) Validate() error {
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
 	}
+	if s.ParameterOverrides != nil {
+		for i, v := range s.ParameterOverrides {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ParameterOverrides", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1156,6 +1398,78 @@ func (s CreateCloudFormationChangeSetOutput) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/DeleteApplicationRequest
+type DeleteApplicationInput struct {
+	_ struct{} `type:"structure"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"applicationId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteApplicationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteApplicationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteApplicationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteApplicationInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "applicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/DeleteApplicationOutput
+type DeleteApplicationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteApplicationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteApplicationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteApplicationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/serverlessrepo-2017-09-08/GetApplicationRequest
 type GetApplicationInput struct {
 	_ struct{} `type:"structure"`
@@ -1223,6 +1537,8 @@ type GetApplicationOutput struct {
 
 	Description *string `locationName:"description" type:"string"`
 
+	HomePageUrl *string `locationName:"homePageUrl" type:"string"`
+
 	Labels []string `locationName:"labels" type:"list"`
 
 	LicenseUrl *string `locationName:"licenseUrl" type:"string"`
@@ -1277,6 +1593,12 @@ func (s GetApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HomePageUrl != nil {
+		v := *s.HomePageUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if len(s.Labels) > 0 {
 		v := s.Labels
@@ -1634,17 +1956,22 @@ type ParameterDefinition struct {
 	AllowedValues []string `locationName:"allowedValues" type:"list"`
 
 	// A string that explains a constraint when the constraint is violated. For
-	// example, without a constraint description,\n a parameter that has an allowed
-	// pattern of [A-Za-z0-9]+ displays the following error message when the user\n
-	// specifies an invalid value:\n\n Malformed input-Parameter MyParameter must
-	// match pattern [A-Za-z0-9]+ \n \nBy adding a constraint description, such
-	// as "must contain only uppercase and lowercase letters, and numbers," you
-	// can display\n the following customized error message:\n\n Malformed input-Parameter
-	// MyParameter must contain only uppercase and lowercase letters and numbers.
+	// example, without a constraint description, a parameter that has an allowed
+	// pattern of [A-Za-z0-9]+ displays the following error message when the user
+	// specifies an invalid value:
+	//
+	// Malformed input-Parameter MyParameter must match pattern [A-Za-z0-9]+
+	//
+	// By adding a constraint description, such as "must contain only uppercase
+	// and lowercase letters, and numbers," you can display the following customized
+	// error message:
+	//
+	// Malformed input-Parameter MyParameter must contain only uppercase and lowercase
+	// letters and numbers.
 	ConstraintDescription *string `locationName:"constraintDescription" type:"string"`
 
 	// A value of the appropriate type for the template to use if no value is specified
-	// when a stack is created.\n If you define constraints for the parameter, you
+	// when a stack is created. If you define constraints for the parameter, you
 	// must specify a value that adheres to those constraints.
 	DefaultValue *string `locationName:"defaultValue" type:"string"`
 
@@ -1668,31 +1995,47 @@ type ParameterDefinition struct {
 	MinValue *int64 `locationName:"minValue" type:"integer"`
 
 	// The name of the parameter.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
 
 	// Whether to mask the parameter value whenever anyone makes a call that describes
-	// the stack. If you set the\n value to true, the parameter value is masked
-	// with asterisks (*****).
+	// the stack. If you set the value to true, the parameter value is masked with
+	// asterisks (*****).
 	NoEcho *bool `locationName:"noEcho" type:"boolean"`
 
-	// A list of SAM resources that use this parameter.
-	ReferencedByResources []string `locationName:"referencedByResources" type:"list"`
+	// A list of AWS SAM resources that use this parameter.
+	//
+	// ReferencedByResources is a required field
+	ReferencedByResources []string `locationName:"referencedByResources" type:"list" required:"true"`
 
-	// The type of the parameter.\nValid values: String | Number | List | CommaDelimitedList
-	// \n \n\n String : A literal string.\nFor example, users could specify "MyUserName"
-	// .\n\n Number : An integer or float. AWS CloudFormation validates the parameter
-	// value as a number; however, when you use the\n parameter elsewhere in your
-	// template (for example, by using the Ref intrinsic function), the parameter
-	// value becomes a string.\nFor example, users could specify "8888" .\n\n List
-	// : An array of integers or floats that are separated by commas. AWS CloudFormation
-	// validates the parameter value as numbers; however, when\n you use the parameter
-	// elsewhere in your template (for example, by using the Ref intrinsic function),
-	// the parameter value becomes a list of strings.\nFor example, users could
-	// specify "80,20", and a Ref results in ["80","20"] .\n\n CommaDelimitedList
-	// : An array of literal strings that are separated by commas. The total number
-	// of strings should be one more than the total number of commas.\n Also, each
-	// member string is space-trimmed.\nFor example, users could specify "test,dev,prod",
-	// and a Ref results in ["test","dev","prod"] .
+	// The type of the parameter.
+	//
+	// Valid values: String | Number | List<Number> | CommaDelimitedList
+	//
+	// String: A literal string.
+	//
+	// For example, users could specify "MyUserName".
+	//
+	// Number: An integer or float. AWS CloudFormation validates the parameter value
+	// as a number; however, when you use the parameter elsewhere in your template
+	// (for example, by using the Ref intrinsic function), the parameter value becomes
+	// a string.
+	//
+	// For example, users could specify "8888".
+	//
+	// List<Number>: An array of integers or floats that are separated by commas.
+	// AWS CloudFormation validates the parameter value as numbers; however, when
+	// you use the parameter elsewhere in your template (for example, by using the
+	// Ref intrinsic function), the parameter value becomes a list of strings.
+	//
+	// For example, users could specify "80,20", and a Ref results in ["80","20"].
+	//
+	// CommaDelimitedList: An array of literal strings that are separated by commas.
+	// The total number of strings should be one more than the total number of commas.
+	// Also, each member string is space-trimmed.
+	//
+	// For example, users could specify "test,dev,prod", and a Ref results in ["test","dev","prod"].
 	Type *string `locationName:"type" type:"string"`
 }
 
@@ -1807,12 +2150,16 @@ type ParameterValue struct {
 	_ struct{} `type:"structure"`
 
 	// The key associated with the parameter. If you don't specify a key and value
-	// for a particular parameter, AWS CloudFormation\n uses the default value that
+	// for a particular parameter, AWS CloudFormation uses the default value that
 	// is specified in your template.
-	Name *string `locationName:"name" type:"string"`
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
 
 	// The input value associated with the parameter.
-	Value *string `locationName:"value" type:"string"`
+	//
+	// Value is a required field
+	Value *string `locationName:"value" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1823,6 +2170,24 @@ func (s ParameterValue) String() string {
 // GoString returns the string representation
 func (s ParameterValue) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ParameterValue) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ParameterValue"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -1868,6 +2233,13 @@ func (s *PutApplicationPolicyInput) Validate() error {
 
 	if s.ApplicationId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+	if s.Statements != nil {
+		for i, v := range s.Statements {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Statements", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1953,6 +2325,8 @@ type UpdateApplicationInput struct {
 
 	Description *string `locationName:"description" type:"string"`
 
+	HomePageUrl *string `locationName:"homePageUrl" type:"string"`
+
 	Labels []string `locationName:"labels" type:"list"`
 
 	ReadmeBody *string `locationName:"readmeBody" type:"string"`
@@ -2000,6 +2374,12 @@ func (s UpdateApplicationInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.HomePageUrl != nil {
+		v := *s.HomePageUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Labels) > 0 {
 		v := s.Labels
 
@@ -2046,6 +2426,8 @@ type UpdateApplicationOutput struct {
 	CreationTime *string `locationName:"creationTime" type:"string"`
 
 	Description *string `locationName:"description" type:"string"`
+
+	HomePageUrl *string `locationName:"homePageUrl" type:"string"`
 
 	Labels []string `locationName:"labels" type:"list"`
 
@@ -2102,6 +2484,12 @@ func (s UpdateApplicationOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.HomePageUrl != nil {
+		v := *s.HomePageUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "homePageUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if len(s.Labels) > 0 {
 		v := s.Labels
 
@@ -2153,22 +2541,34 @@ type Version struct {
 	_ struct{} `type:"structure"`
 
 	// The application Amazon Resource Name (ARN).
-	ApplicationId *string `locationName:"applicationId" type:"string"`
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `locationName:"applicationId" type:"string" required:"true"`
 
 	// The date/time this resource was created.
-	CreationTime *string `locationName:"creationTime" type:"string"`
+	//
+	// CreationTime is a required field
+	CreationTime *string `locationName:"creationTime" type:"string" required:"true"`
 
 	// Array of parameter types supported by the application.
-	ParameterDefinitions []ParameterDefinition `locationName:"parameterDefinitions" type:"list"`
+	//
+	// ParameterDefinitions is a required field
+	ParameterDefinitions []ParameterDefinition `locationName:"parameterDefinitions" type:"list" required:"true"`
 
-	// The semantic version of the application:\n\n https://semver.org/
-	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
+	// The semantic version of the application:
+	//
+	// https://semver.org/
+	//
+	// SemanticVersion is a required field
+	SemanticVersion *string `locationName:"semanticVersion" type:"string" required:"true"`
 
 	// A link to a public repository for the source code of your application.
 	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
 
-	// A link to the packaged SAM template of your application.
-	TemplateUrl *string `locationName:"templateUrl" type:"string"`
+	// A link to the packaged AWS SAM template of your application.
+	//
+	// TemplateUrl is a required field
+	TemplateUrl *string `locationName:"templateUrl" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2234,13 +2634,21 @@ type VersionSummary struct {
 	_ struct{} `type:"structure"`
 
 	// The application Amazon Resource Name (ARN).
-	ApplicationId *string `locationName:"applicationId" type:"string"`
+	//
+	// ApplicationId is a required field
+	ApplicationId *string `locationName:"applicationId" type:"string" required:"true"`
 
 	// The date/time this resource was created.
-	CreationTime *string `locationName:"creationTime" type:"string"`
+	//
+	// CreationTime is a required field
+	CreationTime *string `locationName:"creationTime" type:"string" required:"true"`
 
-	// The semantic version of the application:\n\n https://semver.org/
-	SemanticVersion *string `locationName:"semanticVersion" type:"string"`
+	// The semantic version of the application:
+	//
+	// https://semver.org/
+	//
+	// SemanticVersion is a required field
+	SemanticVersion *string `locationName:"semanticVersion" type:"string" required:"true"`
 
 	// A link to a public repository for the source code of your application.
 	SourceCodeUrl *string `locationName:"sourceCodeUrl" type:"string"`
