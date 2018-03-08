@@ -467,6 +467,64 @@ func (c *ServiceCatalog) CreateProductRequest(input *CreateProductInput) CreateP
 	return CreateProductRequest{Request: req, Input: input, Copy: c.CreateProductRequest}
 }
 
+const opCreateProvisionedProductPlan = "CreateProvisionedProductPlan"
+
+// CreateProvisionedProductPlanRequest is a API request type for the CreateProvisionedProductPlan API operation.
+type CreateProvisionedProductPlanRequest struct {
+	*aws.Request
+	Input *CreateProvisionedProductPlanInput
+	Copy  func(*CreateProvisionedProductPlanInput) CreateProvisionedProductPlanRequest
+}
+
+// Send marshals and sends the CreateProvisionedProductPlan API request.
+func (r CreateProvisionedProductPlanRequest) Send() (*CreateProvisionedProductPlanOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateProvisionedProductPlanOutput), nil
+}
+
+// CreateProvisionedProductPlanRequest returns a request value for making API operation for
+// AWS Service Catalog.
+//
+// Creates a plan. A plan includes the list of resources to be created (when
+// provisioning a new product) or modified (when updating a provisioned product)
+// when the plan is executed.
+//
+// You can create one plan per provisioned product. To create a plan for an
+// existing provisioned product, the product status must be AVAILBLE or TAINTED.
+//
+// To view the resource changes in the change set, use DescribeProvisionedProductPlan.
+// To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
+//
+//    // Example sending a request using the CreateProvisionedProductPlanRequest method.
+//    req := client.CreateProvisionedProductPlanRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisionedProductPlan
+func (c *ServiceCatalog) CreateProvisionedProductPlanRequest(input *CreateProvisionedProductPlanInput) CreateProvisionedProductPlanRequest {
+	op := &aws.Operation{
+		Name:       opCreateProvisionedProductPlan,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateProvisionedProductPlanInput{}
+	}
+
+	output := &CreateProvisionedProductPlanOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateProvisionedProductPlanRequest{Request: req, Input: input, Copy: c.CreateProvisionedProductPlanRequest}
+}
+
 const opCreateProvisioningArtifact = "CreateProvisioningArtifact"
 
 // CreateProvisioningArtifactRequest is a API request type for the CreateProvisioningArtifact API operation.
@@ -777,6 +835,56 @@ func (c *ServiceCatalog) DeleteProductRequest(input *DeleteProductInput) DeleteP
 	return DeleteProductRequest{Request: req, Input: input, Copy: c.DeleteProductRequest}
 }
 
+const opDeleteProvisionedProductPlan = "DeleteProvisionedProductPlan"
+
+// DeleteProvisionedProductPlanRequest is a API request type for the DeleteProvisionedProductPlan API operation.
+type DeleteProvisionedProductPlanRequest struct {
+	*aws.Request
+	Input *DeleteProvisionedProductPlanInput
+	Copy  func(*DeleteProvisionedProductPlanInput) DeleteProvisionedProductPlanRequest
+}
+
+// Send marshals and sends the DeleteProvisionedProductPlan API request.
+func (r DeleteProvisionedProductPlanRequest) Send() (*DeleteProvisionedProductPlanOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteProvisionedProductPlanOutput), nil
+}
+
+// DeleteProvisionedProductPlanRequest returns a request value for making API operation for
+// AWS Service Catalog.
+//
+// Deletes the specified plan.
+//
+//    // Example sending a request using the DeleteProvisionedProductPlanRequest method.
+//    req := client.DeleteProvisionedProductPlanRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisionedProductPlan
+func (c *ServiceCatalog) DeleteProvisionedProductPlanRequest(input *DeleteProvisionedProductPlanInput) DeleteProvisionedProductPlanRequest {
+	op := &aws.Operation{
+		Name:       opDeleteProvisionedProductPlan,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteProvisionedProductPlanInput{}
+	}
+
+	output := &DeleteProvisionedProductPlanOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteProvisionedProductPlanRequest{Request: req, Input: input, Copy: c.DeleteProvisionedProductPlanRequest}
+}
+
 const opDeleteProvisioningArtifact = "DeleteProvisioningArtifact"
 
 // DeleteProvisioningArtifactRequest is a API request type for the DeleteProvisioningArtifact API operation.
@@ -830,6 +938,58 @@ func (c *ServiceCatalog) DeleteProvisioningArtifactRequest(input *DeleteProvisio
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteProvisioningArtifactRequest{Request: req, Input: input, Copy: c.DeleteProvisioningArtifactRequest}
+}
+
+const opDeleteTagOption = "DeleteTagOption"
+
+// DeleteTagOptionRequest is a API request type for the DeleteTagOption API operation.
+type DeleteTagOptionRequest struct {
+	*aws.Request
+	Input *DeleteTagOptionInput
+	Copy  func(*DeleteTagOptionInput) DeleteTagOptionRequest
+}
+
+// Send marshals and sends the DeleteTagOption API request.
+func (r DeleteTagOptionRequest) Send() (*DeleteTagOptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteTagOptionOutput), nil
+}
+
+// DeleteTagOptionRequest returns a request value for making API operation for
+// AWS Service Catalog.
+//
+// Deletes the specified TagOption.
+//
+// You cannot delete a TagOption if it is associated with a product or portfolio.
+//
+//    // Example sending a request using the DeleteTagOptionRequest method.
+//    req := client.DeleteTagOptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteTagOption
+func (c *ServiceCatalog) DeleteTagOptionRequest(input *DeleteTagOptionInput) DeleteTagOptionRequest {
+	op := &aws.Operation{
+		Name:       opDeleteTagOption,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteTagOptionInput{}
+	}
+
+	output := &DeleteTagOptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteTagOptionRequest{Request: req, Input: input, Copy: c.DeleteTagOptionRequest}
 }
 
 const opDescribeConstraint = "DescribeConstraint"
@@ -1183,6 +1343,56 @@ func (c *ServiceCatalog) DescribeProvisionedProductRequest(input *DescribeProvis
 	return DescribeProvisionedProductRequest{Request: req, Input: input, Copy: c.DescribeProvisionedProductRequest}
 }
 
+const opDescribeProvisionedProductPlan = "DescribeProvisionedProductPlan"
+
+// DescribeProvisionedProductPlanRequest is a API request type for the DescribeProvisionedProductPlan API operation.
+type DescribeProvisionedProductPlanRequest struct {
+	*aws.Request
+	Input *DescribeProvisionedProductPlanInput
+	Copy  func(*DescribeProvisionedProductPlanInput) DescribeProvisionedProductPlanRequest
+}
+
+// Send marshals and sends the DescribeProvisionedProductPlan API request.
+func (r DescribeProvisionedProductPlanRequest) Send() (*DescribeProvisionedProductPlanOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeProvisionedProductPlanOutput), nil
+}
+
+// DescribeProvisionedProductPlanRequest returns a request value for making API operation for
+// AWS Service Catalog.
+//
+// Gets information about the resource changes for the specified plan.
+//
+//    // Example sending a request using the DescribeProvisionedProductPlanRequest method.
+//    req := client.DescribeProvisionedProductPlanRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductPlan
+func (c *ServiceCatalog) DescribeProvisionedProductPlanRequest(input *DescribeProvisionedProductPlanInput) DescribeProvisionedProductPlanRequest {
+	op := &aws.Operation{
+		Name:       opDescribeProvisionedProductPlan,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeProvisionedProductPlanInput{}
+	}
+
+	output := &DescribeProvisionedProductPlanOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeProvisionedProductPlanRequest{Request: req, Input: input, Copy: c.DescribeProvisionedProductPlanRequest}
+}
+
 const opDescribeProvisioningArtifact = "DescribeProvisioningArtifact"
 
 // DescribeProvisioningArtifactRequest is a API request type for the DescribeProvisioningArtifact API operation.
@@ -1262,9 +1472,9 @@ func (r DescribeProvisioningParametersRequest) Send() (*DescribeProvisioningPara
 // If the output contains a TagOption key with an empty list of values, there
 // is a TagOption conflict for that key. The end user cannot take action to
 // fix the conflict, and launch is not blocked. In subsequent calls to ProvisionProduct,
-// do not include conflicted TagOption keys as tags, or this will cause the
-// error "Parameter validation failed: Missing required parameter in Tags[N]:Value"
-// and tag the provisioned product with the value sc-tagoption-conflict-portfolioId-productId.
+// do not include conflicted TagOption keys as tags, or this causes the error
+// "Parameter validation failed: Missing required parameter in Tags[N]:Value".
+// Tag the provisioned product with the value sc-tagoption-conflict-portfolioId-productId.
 //
 //    // Example sending a request using the DescribeProvisioningParametersRequest method.
 //    req := client.DescribeProvisioningParametersRequest(params)
@@ -1543,6 +1753,57 @@ func (c *ServiceCatalog) DisassociateTagOptionFromResourceRequest(input *Disasso
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DisassociateTagOptionFromResourceRequest{Request: req, Input: input, Copy: c.DisassociateTagOptionFromResourceRequest}
+}
+
+const opExecuteProvisionedProductPlan = "ExecuteProvisionedProductPlan"
+
+// ExecuteProvisionedProductPlanRequest is a API request type for the ExecuteProvisionedProductPlan API operation.
+type ExecuteProvisionedProductPlanRequest struct {
+	*aws.Request
+	Input *ExecuteProvisionedProductPlanInput
+	Copy  func(*ExecuteProvisionedProductPlanInput) ExecuteProvisionedProductPlanRequest
+}
+
+// Send marshals and sends the ExecuteProvisionedProductPlan API request.
+func (r ExecuteProvisionedProductPlanRequest) Send() (*ExecuteProvisionedProductPlanOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExecuteProvisionedProductPlanOutput), nil
+}
+
+// ExecuteProvisionedProductPlanRequest returns a request value for making API operation for
+// AWS Service Catalog.
+//
+// Provisions or modifies a product based on the resource changes for the specified
+// plan.
+//
+//    // Example sending a request using the ExecuteProvisionedProductPlanRequest method.
+//    req := client.ExecuteProvisionedProductPlanRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductPlan
+func (c *ServiceCatalog) ExecuteProvisionedProductPlanRequest(input *ExecuteProvisionedProductPlanInput) ExecuteProvisionedProductPlanRequest {
+	op := &aws.Operation{
+		Name:       opExecuteProvisionedProductPlan,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ExecuteProvisionedProductPlanInput{}
+	}
+
+	output := &ExecuteProvisionedProductPlanOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ExecuteProvisionedProductPlanRequest{Request: req, Input: input, Copy: c.ExecuteProvisionedProductPlanRequest}
 }
 
 const opListAcceptedPortfolioShares = "ListAcceptedPortfolioShares"
@@ -2209,6 +2470,57 @@ func (p *ListPrincipalsForPortfolioPager) CurrentPage() *ListPrincipalsForPortfo
 	return p.Pager.CurrentPage().(*ListPrincipalsForPortfolioOutput)
 }
 
+const opListProvisionedProductPlans = "ListProvisionedProductPlans"
+
+// ListProvisionedProductPlansRequest is a API request type for the ListProvisionedProductPlans API operation.
+type ListProvisionedProductPlansRequest struct {
+	*aws.Request
+	Input *ListProvisionedProductPlansInput
+	Copy  func(*ListProvisionedProductPlansInput) ListProvisionedProductPlansRequest
+}
+
+// Send marshals and sends the ListProvisionedProductPlans API request.
+func (r ListProvisionedProductPlansRequest) Send() (*ListProvisionedProductPlansOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListProvisionedProductPlansOutput), nil
+}
+
+// ListProvisionedProductPlansRequest returns a request value for making API operation for
+// AWS Service Catalog.
+//
+// Lists the plans for the specified provisioned product or all plans to which
+// the user has access.
+//
+//    // Example sending a request using the ListProvisionedProductPlansRequest method.
+//    req := client.ListProvisionedProductPlansRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisionedProductPlans
+func (c *ServiceCatalog) ListProvisionedProductPlansRequest(input *ListProvisionedProductPlansInput) ListProvisionedProductPlansRequest {
+	op := &aws.Operation{
+		Name:       opListProvisionedProductPlans,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListProvisionedProductPlansInput{}
+	}
+
+	output := &ListProvisionedProductPlansOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListProvisionedProductPlansRequest{Request: req, Input: input, Copy: c.ListProvisionedProductPlansRequest}
+}
+
 const opListProvisioningArtifacts = "ListProvisioningArtifacts"
 
 // ListProvisioningArtifactsRequest is a API request type for the ListProvisioningArtifacts API operation.
@@ -2545,7 +2857,7 @@ func (r ProvisionProductRequest) Send() (*ProvisionProductOutput, error) {
 //
 // If the request contains a tag key with an empty list of values, there is
 // a tag conflict for that key. Do not include conflicted keys as tags, or this
-// will cause the error "Parameter validation failed: Missing required parameter
+// causes the error "Parameter validation failed: Missing required parameter
 // in Tags[N]:Value".
 //
 //    // Example sending a request using the ProvisionProductRequest method.
@@ -2647,6 +2959,8 @@ func (r ScanProvisionedProductsRequest) Send() (*ScanProvisionedProductsOutput, 
 // AWS Service Catalog.
 //
 // Lists the provisioned products that are available (not terminated).
+//
+// To use additional filtering, see SearchProvisionedProducts.
 //
 //    // Example sending a request using the ScanProvisionedProductsRequest method.
 //    req := client.ScanProvisionedProductsRequest(params)
@@ -2876,6 +3190,108 @@ type SearchProductsAsAdminPager struct {
 
 func (p *SearchProductsAsAdminPager) CurrentPage() *SearchProductsAsAdminOutput {
 	return p.Pager.CurrentPage().(*SearchProductsAsAdminOutput)
+}
+
+const opSearchProvisionedProducts = "SearchProvisionedProducts"
+
+// SearchProvisionedProductsRequest is a API request type for the SearchProvisionedProducts API operation.
+type SearchProvisionedProductsRequest struct {
+	*aws.Request
+	Input *SearchProvisionedProductsInput
+	Copy  func(*SearchProvisionedProductsInput) SearchProvisionedProductsRequest
+}
+
+// Send marshals and sends the SearchProvisionedProducts API request.
+func (r SearchProvisionedProductsRequest) Send() (*SearchProvisionedProductsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchProvisionedProductsOutput), nil
+}
+
+// SearchProvisionedProductsRequest returns a request value for making API operation for
+// AWS Service Catalog.
+//
+// Gets information about the provisioned products that meet the specified criteria.
+//
+//    // Example sending a request using the SearchProvisionedProductsRequest method.
+//    req := client.SearchProvisionedProductsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProvisionedProducts
+func (c *ServiceCatalog) SearchProvisionedProductsRequest(input *SearchProvisionedProductsInput) SearchProvisionedProductsRequest {
+	op := &aws.Operation{
+		Name:       opSearchProvisionedProducts,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"PageToken"},
+			OutputTokens:    []string{"NextPageToken"},
+			LimitToken:      "PageSize",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &SearchProvisionedProductsInput{}
+	}
+
+	output := &SearchProvisionedProductsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return SearchProvisionedProductsRequest{Request: req, Input: input, Copy: c.SearchProvisionedProductsRequest}
+}
+
+// Paginate pages iterates over the pages of a SearchProvisionedProductsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a SearchProvisionedProducts operation.
+//		req := client.SearchProvisionedProductsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchProvisionedProductsRequest) Paginate(opts ...aws.Option) SearchProvisionedProductsPager {
+	return SearchProvisionedProductsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchProvisionedProductsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// SearchProvisionedProductsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchProvisionedProductsPager struct {
+	aws.Pager
+}
+
+func (p *SearchProvisionedProductsPager) CurrentPage() *SearchProvisionedProductsOutput {
+	return p.Pager.CurrentPage().(*SearchProvisionedProductsOutput)
 }
 
 const opTerminateProvisionedProduct = "TerminateProvisionedProduct"
@@ -3584,6 +4000,25 @@ func (s AssociateTagOptionWithResourceOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
+// Information about a CloudWatch dashboard.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CloudWatchDashboard
+type CloudWatchDashboard struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the CloudWatch dashboard.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CloudWatchDashboard) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CloudWatchDashboard) GoString() string {
+	return s.String()
+}
+
 // Information about a constraint.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ConstraintDetail
 type ConstraintDetail struct {
@@ -3926,7 +4361,7 @@ type CreatePortfolioInput struct {
 	// ProviderName is a required field
 	ProviderName *string `min:"1" type:"string" required:"true"`
 
-	// The tags to associate with the portfolio.
+	// One or more tags.
 	Tags []Tag `type:"list"`
 }
 
@@ -4138,7 +4573,7 @@ type CreateProductInput struct {
 	// The contact URL for product support.
 	SupportUrl *string `type:"string"`
 
-	// The tags to associate with the product.
+	// One or more tags.
 	Tags []Tag `type:"list"`
 }
 
@@ -4224,6 +4659,178 @@ func (s CreateProductOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisionedProductPlanInput
+type CreateProvisionedProductPlanInput struct {
+	_ struct{} `type:"structure"`
+
+	// The language code.
+	//
+	//    * en - English (default)
+	//
+	//    * jp - Japanese
+	//
+	//    * zh - Chinese
+	AcceptLanguage *string `type:"string"`
+
+	// A unique identifier that you provide to ensure idempotency. If multiple requests
+	// differ only by the idempotency token, the same response is returned for each
+	// repeated request.
+	//
+	// IdempotencyToken is a required field
+	IdempotencyToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
+
+	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
+	// events.
+	NotificationArns []string `type:"list"`
+
+	// The path identifier of the product. This value is optional if the product
+	// has a default path, and required if the product has more than one path. To
+	// list the paths for a product, use ListLaunchPaths.
+	PathId *string `min:"1" type:"string"`
+
+	// The name of the plan.
+	//
+	// PlanName is a required field
+	PlanName *string `type:"string" required:"true"`
+
+	// The plan type.
+	//
+	// PlanType is a required field
+	PlanType ProvisionedProductPlanType `type:"string" required:"true" enum:"true"`
+
+	// The product identifier.
+	//
+	// ProductId is a required field
+	ProductId *string `min:"1" type:"string" required:"true"`
+
+	// A user-friendly name for the provisioned product. This value must be unique
+	// for the AWS account and cannot be updated after the product is provisioned.
+	//
+	// ProvisionedProductName is a required field
+	ProvisionedProductName *string `min:"1" type:"string" required:"true"`
+
+	// The identifier of the provisioning artifact.
+	//
+	// ProvisioningArtifactId is a required field
+	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
+
+	// Parameters specified by the administrator that are required for provisioning
+	// the product.
+	ProvisioningParameters []UpdateProvisioningParameter `type:"list"`
+
+	// One or more tags.
+	Tags []Tag `type:"list"`
+}
+
+// String returns the string representation
+func (s CreateProvisionedProductPlanInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateProvisionedProductPlanInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateProvisionedProductPlanInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateProvisionedProductPlanInput"}
+
+	if s.IdempotencyToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
+	}
+	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
+	}
+	if s.PathId != nil && len(*s.PathId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PathId", 1))
+	}
+
+	if s.PlanName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PlanName"))
+	}
+	if len(s.PlanType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("PlanType"))
+	}
+
+	if s.ProductId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
+	}
+	if s.ProductId != nil && len(*s.ProductId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
+	}
+
+	if s.ProvisionedProductName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProvisionedProductName"))
+	}
+	if s.ProvisionedProductName != nil && len(*s.ProvisionedProductName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisionedProductName", 1))
+	}
+
+	if s.ProvisioningArtifactId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
+	}
+	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))
+	}
+	if s.ProvisioningParameters != nil {
+		for i, v := range s.ProvisioningParameters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ProvisioningParameters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/CreateProvisionedProductPlanOutput
+type CreateProvisionedProductPlanOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The plan identifier.
+	PlanId *string `min:"1" type:"string"`
+
+	// The name of the plan.
+	PlanName *string `type:"string"`
+
+	// The product identifier.
+	ProvisionProductId *string `min:"1" type:"string"`
+
+	// The user-friendly name of the provisioned product.
+	ProvisionedProductName *string `min:"1" type:"string"`
+
+	// The identifier of the provisioning artifact.
+	ProvisioningArtifactId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateProvisionedProductPlanOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateProvisionedProductPlanOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateProvisionedProductPlanOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4687,6 +5294,78 @@ func (s DeleteProductOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisionedProductPlanInput
+type DeleteProvisionedProductPlanInput struct {
+	_ struct{} `type:"structure"`
+
+	// The language code.
+	//
+	//    * en - English (default)
+	//
+	//    * jp - Japanese
+	//
+	//    * zh - Chinese
+	AcceptLanguage *string `type:"string"`
+
+	// If set to true, AWS Service Catalog stops managing the specified provisioned
+	// product even if it cannot delete the underlying resources.
+	IgnoreErrors *bool `type:"boolean"`
+
+	// The plan identifier.
+	//
+	// PlanId is a required field
+	PlanId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteProvisionedProductPlanInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteProvisionedProductPlanInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteProvisionedProductPlanInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteProvisionedProductPlanInput"}
+
+	if s.PlanId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PlanId"))
+	}
+	if s.PlanId != nil && len(*s.PlanId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PlanId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisionedProductPlanOutput
+type DeleteProvisionedProductPlanOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteProvisionedProductPlanOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteProvisionedProductPlanOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteProvisionedProductPlanOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteProvisioningArtifactInput
 type DeleteProvisioningArtifactInput struct {
 	_ struct{} `type:"structure"`
@@ -4764,6 +5443,65 @@ func (s DeleteProvisioningArtifactOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteProvisioningArtifactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteTagOptionInput
+type DeleteTagOptionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The TagOption identifier.
+	//
+	// Id is a required field
+	Id *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteTagOptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteTagOptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteTagOptionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteTagOptionInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+	if s.Id != nil && len(*s.Id) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DeleteTagOptionOutput
+type DeleteTagOptionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteTagOptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteTagOptionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteTagOptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5279,6 +6017,9 @@ type DescribeProvisionedProductOutput struct {
 
 	responseMetadata aws.Response
 
+	// Any CloudWatch dashboards that were created when provisioning the product.
+	CloudWatchDashboards []CloudWatchDashboard `type:"list"`
+
 	// Information about the provisioned product.
 	ProvisionedProductDetail *ProvisionedProductDetail `type:"structure"`
 }
@@ -5295,6 +6036,91 @@ func (s DescribeProvisionedProductOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribeProvisionedProductOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductPlanInput
+type DescribeProvisionedProductPlanInput struct {
+	_ struct{} `type:"structure"`
+
+	// The language code.
+	//
+	//    * en - English (default)
+	//
+	//    * jp - Japanese
+	//
+	//    * zh - Chinese
+	AcceptLanguage *string `type:"string"`
+
+	// The maximum number of items to return with this call.
+	PageSize *int64 `type:"integer"`
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string `type:"string"`
+
+	// The plan identifier.
+	//
+	// PlanId is a required field
+	PlanId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeProvisionedProductPlanInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeProvisionedProductPlanInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeProvisionedProductPlanInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisionedProductPlanInput"}
+
+	if s.PlanId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PlanId"))
+	}
+	if s.PlanId != nil && len(*s.PlanId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PlanId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisionedProductPlanOutput
+type DescribeProvisionedProductPlanOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
+	NextPageToken *string `type:"string"`
+
+	// Information about the plan.
+	ProvisionedProductPlanDetails *ProvisionedProductPlanDetails `type:"structure"`
+
+	// Information about the resource changes that will occur when the plan is executed.
+	ResourceChanges []ResourceChange `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeProvisionedProductPlanOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeProvisionedProductPlanOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeProvisionedProductPlanOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5869,6 +6695,91 @@ func (s DisassociateTagOptionFromResourceOutput) SDKResponseMetadata() aws.Respo
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductPlanInput
+type ExecuteProvisionedProductPlanInput struct {
+	_ struct{} `type:"structure"`
+
+	// The language code.
+	//
+	//    * en - English (default)
+	//
+	//    * jp - Japanese
+	//
+	//    * zh - Chinese
+	AcceptLanguage *string `type:"string"`
+
+	// A unique identifier that you provide to ensure idempotency. If multiple requests
+	// differ only by the idempotency token, the same response is returned for each
+	// repeated request.
+	//
+	// IdempotencyToken is a required field
+	IdempotencyToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
+
+	// The plan identifier.
+	//
+	// PlanId is a required field
+	PlanId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ExecuteProvisionedProductPlanInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExecuteProvisionedProductPlanInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExecuteProvisionedProductPlanInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ExecuteProvisionedProductPlanInput"}
+
+	if s.IdempotencyToken == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IdempotencyToken"))
+	}
+	if s.IdempotencyToken != nil && len(*s.IdempotencyToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("IdempotencyToken", 1))
+	}
+
+	if s.PlanId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PlanId"))
+	}
+	if s.PlanId != nil && len(*s.PlanId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PlanId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ExecuteProvisionedProductPlanOutput
+type ExecuteProvisionedProductPlanOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the result of provisioning the product.
+	RecordDetail *RecordDetail `type:"structure"`
+}
+
+// String returns the string representation
+func (s ExecuteProvisionedProductPlanOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExecuteProvisionedProductPlanOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExecuteProvisionedProductPlanOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Summary information about a product path for a user.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/LaunchPathSummary
 type LaunchPathSummary struct {
@@ -6426,6 +7337,85 @@ func (s ListPrincipalsForPortfolioOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisionedProductPlansInput
+type ListProvisionedProductPlansInput struct {
+	_ struct{} `type:"structure"`
+
+	// The language code.
+	//
+	//    * en - English (default)
+	//
+	//    * jp - Japanese
+	//
+	//    * zh - Chinese
+	AcceptLanguage *string `type:"string"`
+
+	// The access level to use to obtain results. The default is User.
+	AccessLevelFilter *AccessLevelFilter `type:"structure"`
+
+	// The maximum number of items to return with this call.
+	PageSize *int64 `type:"integer"`
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string `type:"string"`
+
+	// The product identifier.
+	ProvisionProductId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListProvisionedProductPlansInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListProvisionedProductPlansInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListProvisionedProductPlansInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListProvisionedProductPlansInput"}
+	if s.ProvisionProductId != nil && len(*s.ProvisionProductId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ProvisionProductId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisionedProductPlansOutput
+type ListProvisionedProductPlansOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
+	NextPageToken *string `type:"string"`
+
+	// Information about the plans.
+	ProvisionedProductPlans []ProvisionedProductPlanSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListProvisionedProductPlansOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListProvisionedProductPlansOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListProvisionedProductPlansOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ListProvisioningArtifactsInput
 type ListProvisioningArtifactsInput struct {
 	_ struct{} `type:"structure"`
@@ -6812,7 +7802,7 @@ type PortfolioDetail struct {
 	// The ARN assigned to the portfolio.
 	ARN *string `min:"1" type:"string"`
 
-	// The UTC timestamp of the creation time.
+	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The description of the portfolio.
@@ -6888,7 +7878,7 @@ func (s ProductViewAggregationValue) GoString() string {
 type ProductViewDetail struct {
 	_ struct{} `type:"structure"`
 
-	// The UTC timestamp of the creation time.
+	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The ARN of the product.
@@ -7021,7 +8011,7 @@ type ProvisionProductInput struct {
 	// the product.
 	ProvisioningParameters []ProvisioningParameter `type:"list"`
 
-	// The tags to use as provisioning options.
+	// One or more tags.
 	Tags []Tag `type:"list"`
 }
 
@@ -7096,7 +8086,7 @@ type ProvisionProductOutput struct {
 
 	responseMetadata aws.Response
 
-	// Information about the result of ProvisionProduct.
+	// Information about the result of provisioning the product.
 	RecordDetail *RecordDetail `type:"structure"`
 }
 
@@ -7116,6 +8106,86 @@ func (s ProvisionProductOutput) SDKResponseMetadata() aws.Response {
 }
 
 // Information about a provisioned product.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductAttribute
+type ProvisionedProductAttribute struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the provisioned product.
+	Arn *string `min:"1" type:"string"`
+
+	// The UTC time stamp of the creation time.
+	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The identifier of the provisioned product.
+	Id *string `min:"1" type:"string"`
+
+	// A unique identifier that you provide to ensure idempotency. If multiple requests
+	// differ only by the idempotency token, the same response is returned for each
+	// repeated request.
+	IdempotencyToken *string `min:"1" type:"string"`
+
+	// The record identifier of the last request performed on this provisioned product.
+	LastRecordId *string `min:"1" type:"string"`
+
+	// The user-friendly name of the provisioned product.
+	Name *string `min:"1" type:"string"`
+
+	// The assigned identifier for the resource, such as an EC2 instance ID or an
+	// S3 bucket name.
+	PhysicalId *string `type:"string"`
+
+	// The product identifier.
+	ProductId *string `min:"1" type:"string"`
+
+	// The identifier of the provisioning artifact.
+	ProvisioningArtifactId *string `min:"1" type:"string"`
+
+	// The current status of the provisioned product.
+	//
+	//    * AVAILABLE - Stable state, ready to perform any operation. The most recent
+	//    operation succeeded and completed.
+	//
+	//    * UNDER_CHANGE - Transitive state, operations performed might not have
+	//    valid results. Wait for an AVAILABLE status before performing operations.
+	//
+	//    * TAINTED - Stable state, ready to perform any operation. The stack has
+	//    completed the requested operation but is not exactly what was requested.
+	//    For example, a request to update to a new version failed and the stack
+	//    rolled back to the current version.
+	//
+	//    * ERROR - An unexpected error occurred, the provisioned product exists
+	//    but the stack is not running. For example, CloudFormation received a parameter
+	//    value that was not valid and could not launch the stack.
+	Status ProvisionedProductStatus `type:"string" enum:"true"`
+
+	// The current status message of the provisioned product.
+	StatusMessage *string `type:"string"`
+
+	// One or more tags.
+	Tags []Tag `type:"list"`
+
+	// The type of provisioned product. The supported value is CFN_STACK.
+	Type *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) of the IAM user.
+	UserArn *string `type:"string"`
+
+	// The ARN of the IAM user in the session. This ARN might contain a session
+	// ID.
+	UserArnSession *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ProvisionedProductAttribute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ProvisionedProductAttribute) GoString() string {
+	return s.String()
+}
+
+// Information about a provisioned product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductDetail
 type ProvisionedProductDetail struct {
 	_ struct{} `type:"structure"`
@@ -7123,7 +8193,7 @@ type ProvisionedProductDetail struct {
 	// The ARN of the provisioned product.
 	Arn *string `min:"1" type:"string"`
 
-	// The UTC timestamp of the creation time.
+	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The identifier of the provisioned product.
@@ -7175,13 +8245,112 @@ func (s ProvisionedProductDetail) GoString() string {
 	return s.String()
 }
 
+// Information about a plan.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductPlanDetails
+type ProvisionedProductPlanDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The UTC time stamp of the creation time.
+	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
+	// events.
+	NotificationArns []string `type:"list"`
+
+	// The path identifier of the product. This value is optional if the product
+	// has a default path, and required if the product has more than one path. To
+	// list the paths for a product, use ListLaunchPaths.
+	PathId *string `min:"1" type:"string"`
+
+	// The plan identifier.
+	PlanId *string `min:"1" type:"string"`
+
+	// The name of the plan.
+	PlanName *string `type:"string"`
+
+	// The plan type.
+	PlanType ProvisionedProductPlanType `type:"string" enum:"true"`
+
+	// The product identifier.
+	ProductId *string `min:"1" type:"string"`
+
+	// The product identifier.
+	ProvisionProductId *string `min:"1" type:"string"`
+
+	// The user-friendly name of the provisioned product.
+	ProvisionProductName *string `min:"1" type:"string"`
+
+	// The identifier of the provisioning artifact.
+	ProvisioningArtifactId *string `min:"1" type:"string"`
+
+	// Parameters specified by the administrator that are required for provisioning
+	// the product.
+	ProvisioningParameters []UpdateProvisioningParameter `type:"list"`
+
+	// The status.
+	Status ProvisionedProductPlanStatus `type:"string" enum:"true"`
+
+	// The status message.
+	StatusMessage *string `type:"string"`
+
+	// One or more tags.
+	Tags []Tag `type:"list"`
+
+	// The time when the plan was last updated.
+	UpdatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+}
+
+// String returns the string representation
+func (s ProvisionedProductPlanDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ProvisionedProductPlanDetails) GoString() string {
+	return s.String()
+}
+
+// Summary information about a plan.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisionedProductPlanSummary
+type ProvisionedProductPlanSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The plan identifier.
+	PlanId *string `min:"1" type:"string"`
+
+	// The name of the plan.
+	PlanName *string `type:"string"`
+
+	// The plan type.
+	PlanType ProvisionedProductPlanType `type:"string" enum:"true"`
+
+	// The product identifier.
+	ProvisionProductId *string `min:"1" type:"string"`
+
+	// The user-friendly name of the provisioned product.
+	ProvisionProductName *string `min:"1" type:"string"`
+
+	// The identifier of the provisioning artifact.
+	ProvisioningArtifactId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ProvisionedProductPlanSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ProvisionedProductPlanSummary) GoString() string {
+	return s.String()
+}
+
 // Information about a provisioning artifact. A provisioning artifact is also
 // known as a product version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ProvisioningArtifact
 type ProvisioningArtifact struct {
 	_ struct{} `type:"structure"`
 
-	// The UTC timestamp of the creation time.
+	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The description of the provisioning artifact.
@@ -7213,7 +8382,7 @@ type ProvisioningArtifactDetail struct {
 	// Indicates whether the product version is active.
 	Active *bool `type:"boolean"`
 
-	// The UTC timestamp of the creation time.
+	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The description of the provisioning artifact.
@@ -7346,7 +8515,7 @@ func (s *ProvisioningArtifactProperties) Validate() error {
 type ProvisioningArtifactSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The UTC timestamp of the creation time.
+	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The description of the provisioning artifact.
@@ -7413,7 +8582,7 @@ func (s *ProvisioningParameter) Validate() error {
 type RecordDetail struct {
 	_ struct{} `type:"structure"`
 
-	// The UTC timestamp of the creation time.
+	// The UTC time stamp of the creation time.
 	CreatedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The path identifier.
@@ -7434,16 +8603,16 @@ type RecordDetail struct {
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string `min:"1" type:"string"`
 
-	// The errors that occurred while processing the request.
+	// The errors that occurred.
 	RecordErrors []RecordError `type:"list"`
 
 	// The identifier of the record.
 	RecordId *string `min:"1" type:"string"`
 
-	// The tags associated with this record.
+	// One or more tags.
 	RecordTags []RecordTag `type:"list"`
 
-	// The record type for this record.
+	// The record type.
 	//
 	//    * PROVISION_PRODUCT
 	//
@@ -7531,7 +8700,7 @@ func (s RecordOutput) GoString() string {
 	return s.String()
 }
 
-// A tag associated with the record, stored as a key-value pair.
+// Information about a tag, which is a key-value pair.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/RecordTag
 type RecordTag struct {
 	_ struct{} `type:"structure"`
@@ -7621,6 +8790,71 @@ func (s RejectPortfolioShareOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Information about a resource change that will occur when a plan is executed.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceChange
+type ResourceChange struct {
+	_ struct{} `type:"structure"`
+
+	// The change action.
+	Action ChangeAction `type:"string" enum:"true"`
+
+	// Information about the resource changes.
+	Details []ResourceChangeDetail `type:"list"`
+
+	// The ID of the resource, as defined in the CloudFormation template.
+	LogicalResourceId *string `type:"string"`
+
+	// The ID of the resource, if it was already created.
+	PhysicalResourceId *string `type:"string"`
+
+	// If the change type is Modify, indicates whether the existing resource is
+	// deleted and replaced with a new one.
+	Replacement Replacement `type:"string" enum:"true"`
+
+	// The type of resource.
+	ResourceType *string `min:"1" type:"string"`
+
+	// The change scope.
+	Scope []ResourceAttribute `type:"list"`
+}
+
+// String returns the string representation
+func (s ResourceChange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceChange) GoString() string {
+	return s.String()
+}
+
+// Information about a change to a resource attribute.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceChangeDetail
+type ResourceChangeDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the entity that caused the change.
+	CausingEntity *string `type:"string"`
+
+	// For static evaluations, the value of the resource attribute will change and
+	// the new value is known. For dynamic evaluations, the value might change,
+	// and any new value will be determined when the plan is updated.
+	Evaluation EvaluationType `type:"string" enum:"true"`
+
+	// Information about the resource attribute to be modified.
+	Target *ResourceTargetDefinition `type:"structure"`
+}
+
+// String returns the string representation
+func (s ResourceChangeDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceChangeDetail) GoString() string {
+	return s.String()
+}
+
 // Information about a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceDetail
 type ResourceDetail struct {
@@ -7649,6 +8883,33 @@ func (s ResourceDetail) String() string {
 
 // GoString returns the string representation
 func (s ResourceDetail) GoString() string {
+	return s.String()
+}
+
+// Information about a change to a resource attribute.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/ResourceTargetDefinition
+type ResourceTargetDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// The attribute to be changed.
+	Attribute ResourceAttribute `type:"string" enum:"true"`
+
+	// If the attribute is Properties, the value is the name of the property. Otherwise,
+	// the value is null.
+	Name *string `type:"string"`
+
+	// If the attribute is Properties, indicates whether a change to this property
+	// causes the resource to be re-created.
+	RequiresRecreation RequiresRecreation `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ResourceTargetDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceTargetDefinition) GoString() string {
 	return s.String()
 }
 
@@ -7877,8 +9138,90 @@ func (s SearchProductsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Information about a tag. A tag is a key-value pair. Tags are entirely discretionary
-// and are propagated to the resources created when provisioning a product.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProvisionedProductsInput
+type SearchProvisionedProductsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The language code.
+	//
+	//    * en - English (default)
+	//
+	//    * jp - Japanese
+	//
+	//    * zh - Chinese
+	AcceptLanguage *string `type:"string"`
+
+	// The access level to use to obtain results. The default is User.
+	AccessLevelFilter *AccessLevelFilter `type:"structure"`
+
+	// The search filters.
+	//
+	// When the key is SearchQuery, the searchable fields are arn, createdTime,
+	// id, lastRecordId, idempotencyToken, name, physicalId, productId, provisioningArtifact,
+	// type, status, tags, userArn, and userArnSession.
+	//
+	// Example: "SearchQuery":["status:AVAILABLE"]
+	Filters map[string][]string `type:"map"`
+
+	// The maximum number of items to return with this call.
+	PageSize *int64 `type:"integer"`
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string `type:"string"`
+
+	// The sort field. If no value is specified, the results are not sorted. The
+	// valid values are arn, id, name, and lastRecordId.
+	SortBy *string `type:"string"`
+
+	// The sort order. If no value is specified, the results are not sorted.
+	SortOrder SortOrder `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SearchProvisionedProductsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchProvisionedProductsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/SearchProvisionedProductsOutput
+type SearchProvisionedProductsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
+	NextPageToken *string `type:"string"`
+
+	// Information about the provisioned products.
+	ProvisionedProducts []ProvisionedProductAttribute `type:"list"`
+
+	// The number of provisioned products found.
+	TotalResultsCount *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s SearchProvisionedProductsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchProvisionedProductsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchProvisionedProductsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Information about a tag. A tag is a key-value pair. Tags are propagated to
+// the resources created when provisioning a product.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
@@ -8394,7 +9737,7 @@ type UpdateProvisionedProductInput struct {
 	// The new parameters.
 	ProvisioningParameters []UpdateProvisioningParameter `type:"list"`
 
-	// The idempotency token that uniquely identifies the provisioning update rquest.
+	// The idempotency token that uniquely identifies the provisioning update request.
 	//
 	// UpdateToken is a required field
 	UpdateToken *string `min:"1" type:"string" required:"true" idempotencyToken:"true"`
@@ -8721,6 +10064,24 @@ func (enum AccessLevelFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ChangeAction string
+
+// Enum values for ChangeAction
+const (
+	ChangeActionAdd    ChangeAction = "ADD"
+	ChangeActionModify ChangeAction = "MODIFY"
+	ChangeActionRemove ChangeAction = "REMOVE"
+)
+
+func (enum ChangeAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ChangeAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CopyOption string
 
 // Enum values for CopyOption
@@ -8751,6 +10112,23 @@ func (enum CopyProductStatus) MarshalValue() (string, error) {
 }
 
 func (enum CopyProductStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type EvaluationType string
+
+// Enum values for EvaluationType
+const (
+	EvaluationTypeStatic  EvaluationType = "STATIC"
+	EvaluationTypeDynamic EvaluationType = "DYNAMIC"
+)
+
+func (enum EvaluationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EvaluationType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -8841,14 +10219,52 @@ func (enum ProductViewSortBy) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ProvisionedProductPlanStatus string
+
+// Enum values for ProvisionedProductPlanStatus
+const (
+	ProvisionedProductPlanStatusCreateInProgress  ProvisionedProductPlanStatus = "CREATE_IN_PROGRESS"
+	ProvisionedProductPlanStatusCreateSuccess     ProvisionedProductPlanStatus = "CREATE_SUCCESS"
+	ProvisionedProductPlanStatusCreateFailed      ProvisionedProductPlanStatus = "CREATE_FAILED"
+	ProvisionedProductPlanStatusExecuteInProgress ProvisionedProductPlanStatus = "EXECUTE_IN_PROGRESS"
+	ProvisionedProductPlanStatusExecuteSuccess    ProvisionedProductPlanStatus = "EXECUTE_SUCCESS"
+	ProvisionedProductPlanStatusExecuteFailed     ProvisionedProductPlanStatus = "EXECUTE_FAILED"
+)
+
+func (enum ProvisionedProductPlanStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProvisionedProductPlanStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProvisionedProductPlanType string
+
+// Enum values for ProvisionedProductPlanType
+const (
+	ProvisionedProductPlanTypeCloudformation ProvisionedProductPlanType = "CLOUDFORMATION"
+)
+
+func (enum ProvisionedProductPlanType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProvisionedProductPlanType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ProvisionedProductStatus string
 
 // Enum values for ProvisionedProductStatus
 const (
-	ProvisionedProductStatusAvailable   ProvisionedProductStatus = "AVAILABLE"
-	ProvisionedProductStatusUnderChange ProvisionedProductStatus = "UNDER_CHANGE"
-	ProvisionedProductStatusTainted     ProvisionedProductStatus = "TAINTED"
-	ProvisionedProductStatusError       ProvisionedProductStatus = "ERROR"
+	ProvisionedProductStatusAvailable      ProvisionedProductStatus = "AVAILABLE"
+	ProvisionedProductStatusUnderChange    ProvisionedProductStatus = "UNDER_CHANGE"
+	ProvisionedProductStatusTainted        ProvisionedProductStatus = "TAINTED"
+	ProvisionedProductStatusError          ProvisionedProductStatus = "ERROR"
+	ProvisionedProductStatusPlanInProgress ProvisionedProductStatus = "PLAN_IN_PROGRESS"
 )
 
 func (enum ProvisionedProductStatus) MarshalValue() (string, error) {
@@ -8856,6 +10272,22 @@ func (enum ProvisionedProductStatus) MarshalValue() (string, error) {
 }
 
 func (enum ProvisionedProductStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ProvisionedProductViewFilterBy string
+
+// Enum values for ProvisionedProductViewFilterBy
+const (
+	ProvisionedProductViewFilterBySearchQuery ProvisionedProductViewFilterBy = "SearchQuery"
+)
+
+func (enum ProvisionedProductViewFilterBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProvisionedProductViewFilterBy) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -8910,6 +10342,63 @@ func (enum RecordStatus) MarshalValue() (string, error) {
 }
 
 func (enum RecordStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Replacement string
+
+// Enum values for Replacement
+const (
+	ReplacementTrue        Replacement = "TRUE"
+	ReplacementFalse       Replacement = "FALSE"
+	ReplacementConditional Replacement = "CONDITIONAL"
+)
+
+func (enum Replacement) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Replacement) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RequiresRecreation string
+
+// Enum values for RequiresRecreation
+const (
+	RequiresRecreationNever         RequiresRecreation = "NEVER"
+	RequiresRecreationConditionally RequiresRecreation = "CONDITIONALLY"
+	RequiresRecreationAlways        RequiresRecreation = "ALWAYS"
+)
+
+func (enum RequiresRecreation) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RequiresRecreation) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ResourceAttribute string
+
+// Enum values for ResourceAttribute
+const (
+	ResourceAttributeProperties     ResourceAttribute = "PROPERTIES"
+	ResourceAttributeMetadata       ResourceAttribute = "METADATA"
+	ResourceAttributeCreationpolicy ResourceAttribute = "CREATIONPOLICY"
+	ResourceAttributeUpdatepolicy   ResourceAttribute = "UPDATEPOLICY"
+	ResourceAttributeDeletionpolicy ResourceAttribute = "DELETIONPOLICY"
+	ResourceAttributeTags           ResourceAttribute = "TAGS"
+)
+
+func (enum ResourceAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

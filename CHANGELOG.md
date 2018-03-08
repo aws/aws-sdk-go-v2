@@ -1,3 +1,45 @@
+Release v2.0.0-preview.3 (2018-03-08)
+===
+
+### Services
+* Synced the V2 SDK with latests AWS service API definitions.
+
+### Breaking Changes
+* `private/mode/api`: Refactor service paginator helpers to iterator pattern ([#119](https://github.com/aws/aws-sdk-go-v2/pull/119))
+	* Refactors the generated service client paginators to be an iterator pattern. This pattern improves usability while removing the need for callbacks.
+	* See the linked PR for an example.
+* `private/model/api`: Removes setter helpers from service API types ([#101](https://github.com/aws/aws-sdk-go-v2/pull/101))
+	* Removes the setter helper methods from service API types. Removing clutter and noise from the API type's signature.
+	* Based on feedback [#81][https://github.com/aws/aws-sdk-go-v2/issues/81]
+* `aws`: Rename CanceledErrorCode to ErrCodeRequestCanceled ([#131](https://github.com/aws/aws-sdk-go-v2/pull/131))
+	* Renames CanceledErrorCode to correct naming scheme.
+
+### SDK Bugs
+* `internal/awsutil`: Fix DeepEqual to consider string alias type equal to string ([#102](https://github.com/aws/aws-sdk-go-v2/pull/102))
+	* Fixes SDK waiters not detecting the correct condition is met. [#92](https://github.com/aws/aws-sdk-go-v2/issues/92)
+* `aws/external`: Fix EnvConfig misspelled container endpoint path getter ([#106](https://github.com/aws/aws-sdk-go-v2/pull/106))
+	* This caused the type to not satisfy the ContainerCredentialsEndpointPathProvider interface.
+	* Fixes [#105](https://github.com/aws/aws-sdk-go-v2/issues/105)
+* `service/s3/s3crypto`: Fix S3Crypto's handling of TagLen ([#107](https://github.com/aws/aws-sdk-go-v2/pull/107))
+	* Fixes the S3Crypto's handling of TagLen to only be set if present.
+	* V2 Fix for [aws/aws-sdk-go#1742](https://github.com/aws/aws-sdk-go/issues/1742)
+* `private/model/api`: Update SDK service client initialization documentation ([#141](https://github.com/aws/aws-sdk-go-v2/pull/141))
+	* Updates the SDK's service initialization doc template to reflect the v2 SDK's configuration update change from v1.
+	* Related to [#136](https://github.com/aws/aws-sdk-go-v2/issues/136)
+
+### SDK Enhancements
+* `aws`: Improve pagination unit tests ([#97](https://github.com/aws/aws-sdk-go-v2/pull/97))
+	* V2 port of [aws/aws-sdk-go#1733](https://github.com/aws/aws-sdk-go/pull/1733)
+* `aws/external`: Add example for shared config and static credential helper ([#109](https://github.com/aws/aws-sdk-go-v2/pull/109))
+	* Adds examples for the  config helpers; WithSharedConfigProfile, WithCredentialsValue, WithMFATokenFunc.
+* `private/model/api`: Add validation to prevent collision of api defintions ([#112](https://github.com/aws/aws-sdk-go-v2/pull/112)) 
+	* V2 port of [aws/aws-sdk-go#1758](https://github.com/aws/aws-sdk-go/pull/1758)
+* `aws/ec2metadata`: Add support for AWS_EC2_METADATA_DISABLED env var ([#128](https://github.com/aws/aws-sdk-go-v2/pull/128))
+	* When this environment variable is set. The SDK's EC2 Metadata Client will not attempt to make requests. All requests made with the EC2 Metadata Client will fail.
+	* V2 port of [aws/aws-sdk-go#1799](https://github.com/aws/aws-sdk-go/pull/1799)
+* Add code of conduct ([#138](https://github.com/aws/aws-sdk-go-v2/pull/138))
+* Update SDK README dep usage ([#140](https://github.com/aws/aws-sdk-go-v2/pull/140))
+
 Release v2.0.0-preview.2 (2018-01-15)
 ===
 

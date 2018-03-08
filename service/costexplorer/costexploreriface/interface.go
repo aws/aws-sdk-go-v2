@@ -66,6 +66,8 @@ type CostExplorerAPI interface {
 
 	GetDimensionValuesRequest(*costexplorer.GetDimensionValuesInput) costexplorer.GetDimensionValuesRequest
 
+	GetReservationCoverageRequest(*costexplorer.GetReservationCoverageInput) costexplorer.GetReservationCoverageRequest
+
 	GetReservationUtilizationRequest(*costexplorer.GetReservationUtilizationInput) costexplorer.GetReservationUtilizationRequest
 
 	GetTagsRequest(*costexplorer.GetTagsInput) costexplorer.GetTagsRequest

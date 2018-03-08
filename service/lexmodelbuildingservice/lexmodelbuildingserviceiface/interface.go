@@ -108,6 +108,8 @@ type LexModelBuildingServiceAPI interface {
 
 	GetExportRequest(*lexmodelbuildingservice.GetExportInput) lexmodelbuildingservice.GetExportRequest
 
+	GetImportRequest(*lexmodelbuildingservice.GetImportInput) lexmodelbuildingservice.GetImportRequest
+
 	GetIntentRequest(*lexmodelbuildingservice.GetIntentInput) lexmodelbuildingservice.GetIntentRequest
 
 	GetIntentVersionsRequest(*lexmodelbuildingservice.GetIntentVersionsInput) lexmodelbuildingservice.GetIntentVersionsRequest
@@ -129,6 +131,8 @@ type LexModelBuildingServiceAPI interface {
 	PutIntentRequest(*lexmodelbuildingservice.PutIntentInput) lexmodelbuildingservice.PutIntentRequest
 
 	PutSlotTypeRequest(*lexmodelbuildingservice.PutSlotTypeInput) lexmodelbuildingservice.PutSlotTypeRequest
+
+	StartImportRequest(*lexmodelbuildingservice.StartImportInput) lexmodelbuildingservice.StartImportRequest
 }
 
 var _ LexModelBuildingServiceAPI = (*lexmodelbuildingservice.LexModelBuildingService)(nil)

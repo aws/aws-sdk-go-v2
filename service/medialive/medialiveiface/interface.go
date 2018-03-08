@@ -89,6 +89,8 @@ type MediaLiveAPI interface {
 	StartChannelRequest(*medialive.StartChannelInput) medialive.StartChannelRequest
 
 	StopChannelRequest(*medialive.StopChannelInput) medialive.StopChannelRequest
+
+	UpdateChannelRequest(*medialive.UpdateChannelInput) medialive.UpdateChannelRequest
 }
 
 var _ MediaLiveAPI = (*medialive.MediaLive)(nil)

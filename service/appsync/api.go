@@ -1114,6 +1114,56 @@ func (c *AppSync) StartSchemaCreationRequest(input *StartSchemaCreationInput) St
 	return StartSchemaCreationRequest{Request: req, Input: input, Copy: c.StartSchemaCreationRequest}
 }
 
+const opUpdateApiKey = "UpdateApiKey"
+
+// UpdateApiKeyRequest is a API request type for the UpdateApiKey API operation.
+type UpdateApiKeyRequest struct {
+	*aws.Request
+	Input *UpdateApiKeyInput
+	Copy  func(*UpdateApiKeyInput) UpdateApiKeyRequest
+}
+
+// Send marshals and sends the UpdateApiKey API request.
+func (r UpdateApiKeyRequest) Send() (*UpdateApiKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateApiKeyOutput), nil
+}
+
+// UpdateApiKeyRequest returns a request value for making API operation for
+// AWS AppSync.
+//
+// Updates an API key.
+//
+//    // Example sending a request using the UpdateApiKeyRequest method.
+//    req := client.UpdateApiKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiKey
+func (c *AppSync) UpdateApiKeyRequest(input *UpdateApiKeyInput) UpdateApiKeyRequest {
+	op := &aws.Operation{
+		Name:       opUpdateApiKey,
+		HTTPMethod: "POST",
+		HTTPPath:   "/v1/apis/{apiId}/apikeys/{id}",
+	}
+
+	if input == nil {
+		input = &UpdateApiKeyInput{}
+	}
+
+	output := &UpdateApiKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateApiKeyRequest{Request: req, Input: input, Copy: c.UpdateApiKeyRequest}
+}
+
 const opUpdateDataSource = "UpdateDataSource"
 
 // UpdateDataSourceRequest is a API request type for the UpdateDataSource API operation.
@@ -1322,7 +1372,8 @@ type ApiKey struct {
 	// A description of the purpose of the API key.
 	Description *string `locationName:"description" type:"string"`
 
-	// The time when the API key expires.
+	// The time after which the API key expires. The date is represented as seconds
+	// since the epoch, rounded down to the nearest hour.
 	Expires *int64 `locationName:"expires" type:"long"`
 
 	// The API key ID.
@@ -1373,6 +1424,11 @@ type CreateApiKeyInput struct {
 
 	// A description of the purpose of the API key.
 	Description *string `locationName:"description" type:"string"`
+
+	// The time after which the API key expires. The date is represented as seconds
+	// since the epoch, rounded down to the nearest hour. The default value for
+	// this parameter is 7 days from creation time.
+	Expires *int64 `locationName:"expires" type:"long"`
 }
 
 // String returns the string representation
@@ -1408,6 +1464,12 @@ func (s CreateApiKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Expires != nil {
+		v := *s.Expires
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expires", protocol.Int64Value(v), metadata)
 	}
 	if s.ApiId != nil {
 		v := *s.ApiId
@@ -1759,7 +1821,7 @@ type CreateResolverInput struct {
 
 	// The mapping template to be used for requests.
 	//
-	// A resolver use a request mapping template to convert a GraphQL expression
+	// A resolver uses a request mapping template to convert a GraphQL expression
 	// into a format that a data source can understand. Mapping templates are written
 	// in Apache Velocity Template Language (VTL).
 	//
@@ -2036,6 +2098,16 @@ type DataSource struct {
 	ServiceRoleArn *string `locationName:"serviceRoleArn" type:"string"`
 
 	// The type of the data source.
+	//
+	//    * AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.
+	//
+	//    * AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service
+	//    domain.
+	//
+	//    * AWS_LAMBDA: The data source is an AWS Lambda function.
+	//
+	//    * NONE: There is no data source. This type is used when the required information
+	//    can be computed on the fly without connecting to a back-end data source.
 	Type DataSourceType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -4239,6 +4311,123 @@ func (s Type) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiKeyRequest
+type UpdateApiKeyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID for the GraphQL API
+	//
+	// ApiId is a required field
+	ApiId *string `location:"uri" locationName:"apiId" type:"string" required:"true"`
+
+	// A description of the purpose of the API key.
+	Description *string `locationName:"description" type:"string"`
+
+	// The time after which the API key expires. The date is represented as seconds
+	// since the epoch.
+	Expires *int64 `locationName:"expires" type:"long"`
+
+	// The API key ID.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateApiKeyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateApiKeyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateApiKeyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateApiKeyInput"}
+
+	if s.ApiId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApiId"))
+	}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateApiKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Expires != nil {
+		v := *s.Expires
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expires", protocol.Int64Value(v), metadata)
+	}
+	if s.ApiId != nil {
+		v := *s.ApiId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "apiId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateApiKeyResponse
+type UpdateApiKeyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The API key.
+	ApiKey *ApiKey `locationName:"apiKey" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateApiKeyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateApiKeyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateApiKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateApiKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApiKey != nil {
+		v := s.ApiKey
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "apiKey", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateDataSourceRequest
 type UpdateDataSourceInput struct {
 	_ struct{} `type:"structure"`
@@ -4502,7 +4691,7 @@ type UpdateGraphqlApiOutput struct {
 
 	responseMetadata aws.Response
 
-	// The udpated GraphqlApi object.
+	// The updated GraphqlApi object.
 	GraphqlApi *GraphqlApi `locationName:"graphqlApi" type:"structure"`
 }
 
@@ -4917,6 +5106,7 @@ const (
 	DataSourceTypeAwsLambda           DataSourceType = "AWS_LAMBDA"
 	DataSourceTypeAmazonDynamodb      DataSourceType = "AMAZON_DYNAMODB"
 	DataSourceTypeAmazonElasticsearch DataSourceType = "AMAZON_ELASTICSEARCH"
+	DataSourceTypeNone                DataSourceType = "NONE"
 )
 
 func (enum DataSourceType) MarshalValue() (string, error) {

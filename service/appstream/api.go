@@ -60,6 +60,57 @@ func (c *AppStream) AssociateFleetRequest(input *AssociateFleetInput) AssociateF
 	return AssociateFleetRequest{Request: req, Input: input, Copy: c.AssociateFleetRequest}
 }
 
+const opCopyImage = "CopyImage"
+
+// CopyImageRequest is a API request type for the CopyImage API operation.
+type CopyImageRequest struct {
+	*aws.Request
+	Input *CopyImageInput
+	Copy  func(*CopyImageInput) CopyImageRequest
+}
+
+// Send marshals and sends the CopyImage API request.
+func (r CopyImageRequest) Send() (*CopyImageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CopyImageOutput), nil
+}
+
+// CopyImageRequest returns a request value for making API operation for
+// Amazon AppStream.
+//
+// Copies the image within the same region or to a new region within the same
+// AWS account. Note that any tags you added to the image will not be copied.
+//
+//    // Example sending a request using the CopyImageRequest method.
+//    req := client.CopyImageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CopyImage
+func (c *AppStream) CopyImageRequest(input *CopyImageInput) CopyImageRequest {
+	op := &aws.Operation{
+		Name:       opCopyImage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CopyImageInput{}
+	}
+
+	output := &CopyImageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CopyImageRequest{Request: req, Input: input, Copy: c.CopyImageRequest}
+}
+
 const opCreateDirectoryConfig = "CreateDirectoryConfig"
 
 // CreateDirectoryConfigRequest is a API request type for the CreateDirectoryConfig API operation.
@@ -638,7 +689,9 @@ func (r DescribeDirectoryConfigsRequest) Send() (*DescribeDirectoryConfigsOutput
 // DescribeDirectoryConfigsRequest returns a request value for making API operation for
 // Amazon AppStream.
 //
-// Describes the specified directory configurations.
+// Describes the specified directory configurations. Note that although the
+// response syntax in this topic includes the account password, this password
+// is not returned in the actual response.
 //
 //    // Example sending a request using the DescribeDirectoryConfigsRequest method.
 //    req := client.DescribeDirectoryConfigsRequest(params)
@@ -1144,7 +1197,7 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 // Lists the tags for the specified AppStream 2.0 resource. You can tag AppStream
 // 2.0 image builders, images, fleets, and stacks.
 //
-// For more information about tags, see Tagging Your Resources (http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic)
+// For more information about tags, see Tagging Your Resources (http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 // in the Amazon AppStream 2.0 Developer Guide.
 //
 //    // Example sending a request using the ListTagsForResourceRequest method.
@@ -1404,7 +1457,7 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 // To list the current tags for your resources, use ListTagsForResource. To
 // disassociate tags from your resources, use UntagResource.
 //
-// For more information about tags, see Tagging Your Resources (http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic)
+// For more information about tags, see Tagging Your Resources (http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 // in the Amazon AppStream 2.0 Developer Guide.
 //
 //    // Example sending a request using the TagResourceRequest method.
@@ -1459,7 +1512,7 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //
 // To list the current tags for your resources, use ListTagsForResource.
 //
-// For more information about tags, see Tagging Your Resources (http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic)
+// For more information about tags, see Tagging Your Resources (http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 // in the Amazon AppStream 2.0 Developer Guide.
 //
 //    // Example sending a request using the UntagResourceRequest method.
@@ -1814,6 +1867,90 @@ func (s ComputeCapacityStatus) String() string {
 // GoString returns the string representation
 func (s ComputeCapacityStatus) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CopyImageRequest
+type CopyImageInput struct {
+	_ struct{} `type:"structure"`
+
+	// The description that the image will have when it is copied to the destination.
+	DestinationImageDescription *string `type:"string"`
+
+	// The name that the image will have when it is copied to the destination.
+	//
+	// DestinationImageName is a required field
+	DestinationImageName *string `type:"string" required:"true"`
+
+	// The destination region to which the image will be copied. This parameter
+	// is required, even if you are copying an image within the same region.
+	//
+	// DestinationRegion is a required field
+	DestinationRegion *string `min:"1" type:"string" required:"true"`
+
+	// The name of the image to copy.
+	//
+	// SourceImageName is a required field
+	SourceImageName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CopyImageInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CopyImageInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CopyImageInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CopyImageInput"}
+
+	if s.DestinationImageName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DestinationImageName"))
+	}
+
+	if s.DestinationRegion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DestinationRegion"))
+	}
+	if s.DestinationRegion != nil && len(*s.DestinationRegion) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DestinationRegion", 1))
+	}
+
+	if s.SourceImageName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceImageName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CopyImageResponse
+type CopyImageOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The name of the destination image.
+	DestinationImageName *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CopyImageOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CopyImageOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CopyImageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateDirectoryConfigRequest
@@ -2261,6 +2398,9 @@ type CreateStackInput struct {
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
+
+	// The URL the user is redirected to after the streaming session ends.
+	RedirectURL *string `type:"string"`
 
 	// The storage connectors to enable.
 	StorageConnectors []StorageConnector `type:"list"`
@@ -2768,7 +2908,9 @@ type DescribeDirectoryConfigsOutput struct {
 
 	responseMetadata aws.Response
 
-	// Information about the directory configurations.
+	// Information about the directory configurations. Note that although the response
+	// syntax in this topic includes the account password, this password is not
+	// returned in the actual response.
 	DirectoryConfigs []DirectoryConfig `type:"list"`
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -2974,7 +3116,7 @@ type DescribeSessionsInput struct {
 	// using a streaming URL.
 	AuthenticationType AuthenticationType `type:"string" enum:"true"`
 
-	// The name of the fleet.
+	// The name of the fleet. This value is case-sensitive.
 	//
 	// FleetName is a required field
 	FleetName *string `min:"1" type:"string" required:"true"`
@@ -2987,7 +3129,7 @@ type DescribeSessionsInput struct {
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string `min:"1" type:"string"`
 
-	// The name of the stack.
+	// The name of the stack. This value is case-sensitive.
 	//
 	// StackName is a required field
 	StackName *string `min:"1" type:"string" required:"true"`
@@ -3944,6 +4086,9 @@ type Stack struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
+	// The URL the user is redirected to after the streaming session ends.
+	RedirectURL *string `type:"string"`
+
 	// The errors for the stack.
 	StackErrors []StackError `type:"list"`
 
@@ -4640,8 +4785,11 @@ func (s UpdateFleetOutput) SDKResponseMetadata() aws.Response {
 type UpdateStackInput struct {
 	_ struct{} `type:"structure"`
 
+	// The stack attributes to delete.
+	AttributesToDelete []StackAttribute `type:"list"`
+
 	// Deletes the storage connectors currently enabled for the stack.
-	DeleteStorageConnectors *bool `type:"boolean"`
+	DeleteStorageConnectors *bool `deprecated:"true" type:"boolean"`
 
 	// The description for display.
 	Description *string `type:"string"`
@@ -4653,6 +4801,9 @@ type UpdateStackInput struct {
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
+
+	// The URL the user is redirected to after the streaming session ends.
+	RedirectURL *string `type:"string"`
 
 	// The storage connectors to enable.
 	StorageConnectors []StorageConnector `type:"list"`
@@ -4901,6 +5052,7 @@ const (
 	ImageStatePending   ImageState = "PENDING"
 	ImageStateAvailable ImageState = "AVAILABLE"
 	ImageStateFailed    ImageState = "FAILED"
+	ImageStateCopying   ImageState = "COPYING"
 	ImageStateDeleting  ImageState = "DELETING"
 )
 
@@ -4919,6 +5071,7 @@ type ImageStateChangeReasonCode string
 const (
 	ImageStateChangeReasonCodeInternalError            ImageStateChangeReasonCode = "INTERNAL_ERROR"
 	ImageStateChangeReasonCodeImageBuilderNotAvailable ImageStateChangeReasonCode = "IMAGE_BUILDER_NOT_AVAILABLE"
+	ImageStateChangeReasonCodeImageCopyFailure         ImageStateChangeReasonCode = "IMAGE_COPY_FAILURE"
 )
 
 func (enum ImageStateChangeReasonCode) MarshalValue() (string, error) {
@@ -4961,6 +5114,23 @@ func (enum SessionState) MarshalValue() (string, error) {
 }
 
 func (enum SessionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type StackAttribute string
+
+// Enum values for StackAttribute
+const (
+	StackAttributeStorageConnectors StackAttribute = "STORAGE_CONNECTORS"
+	StackAttributeRedirectUrl       StackAttribute = "REDIRECT_URL"
+)
+
+func (enum StackAttribute) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackAttribute) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

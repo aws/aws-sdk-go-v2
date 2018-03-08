@@ -312,11 +312,6 @@ func (c *OpsWorks) WaitUntilInstanceStoppedWithContext(ctx aws.Context, input *D
 			{
 				State:   aws.FailureWaiterState,
 				Matcher: aws.PathAnyWaiterMatch, Argument: "Instances[].Status",
-				Expected: "online",
-			},
-			{
-				State:   aws.FailureWaiterState,
-				Matcher: aws.PathAnyWaiterMatch, Argument: "Instances[].Status",
 				Expected: "pending",
 			},
 			{

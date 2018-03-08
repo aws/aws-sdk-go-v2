@@ -267,6 +267,8 @@ type EC2API interface {
 
 	DescribeAddressesRequest(*ec2.DescribeAddressesInput) ec2.DescribeAddressesRequest
 
+	DescribeAggregateIdFormatRequest(*ec2.DescribeAggregateIdFormatInput) ec2.DescribeAggregateIdFormatRequest
+
 	DescribeAvailabilityZonesRequest(*ec2.DescribeAvailabilityZonesInput) ec2.DescribeAvailabilityZonesRequest
 
 	DescribeBundleTasksRequest(*ec2.DescribeBundleTasksInput) ec2.DescribeBundleTasksRequest
@@ -342,6 +344,8 @@ type EC2API interface {
 	DescribePlacementGroupsRequest(*ec2.DescribePlacementGroupsInput) ec2.DescribePlacementGroupsRequest
 
 	DescribePrefixListsRequest(*ec2.DescribePrefixListsInput) ec2.DescribePrefixListsRequest
+
+	DescribePrincipalIdFormatRequest(*ec2.DescribePrincipalIdFormatInput) ec2.DescribePrincipalIdFormatRequest
 
 	DescribeRegionsRequest(*ec2.DescribeRegionsInput) ec2.DescribeRegionsRequest
 

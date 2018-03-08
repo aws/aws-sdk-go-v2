@@ -49,6 +49,8 @@ func ExampleAutoScaling_AttachInstancesRequest_shared00() {
 			switch aerr.Code() {
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -87,6 +89,8 @@ func ExampleAutoScaling_AttachLoadBalancerTargetGroupsRequest_shared00() {
 			switch aerr.Code() {
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -125,6 +129,8 @@ func ExampleAutoScaling_AttachLoadBalancersRequest_shared00() {
 			switch aerr.Code() {
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -207,6 +213,8 @@ func ExampleAutoScaling_CreateAutoScalingGroupRequest_shared00() {
 				fmt.Println(autoscaling.ErrCodeLimitExceededFault, aerr.Error())
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -258,6 +266,8 @@ func ExampleAutoScaling_CreateAutoScalingGroupRequest_shared01() {
 				fmt.Println(autoscaling.ErrCodeLimitExceededFault, aerr.Error())
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -306,6 +316,8 @@ func ExampleAutoScaling_CreateAutoScalingGroupRequest_shared02() {
 				fmt.Println(autoscaling.ErrCodeLimitExceededFault, aerr.Error())
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -631,6 +643,8 @@ func ExampleAutoScaling_DeletePolicyRequest_shared00() {
 			switch aerr.Code() {
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1177,6 +1191,8 @@ func ExampleAutoScaling_DescribePoliciesRequest_shared00() {
 				fmt.Println(autoscaling.ErrCodeInvalidNextToken, aerr.Error())
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1752,6 +1768,8 @@ func ExampleAutoScaling_PutNotificationConfigurationRequest_shared00() {
 				fmt.Println(autoscaling.ErrCodeLimitExceededFault, aerr.Error())
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -1792,6 +1810,8 @@ func ExampleAutoScaling_PutScalingPolicyRequest_shared00() {
 				fmt.Println(autoscaling.ErrCodeLimitExceededFault, aerr.Error())
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -2192,6 +2212,8 @@ func ExampleAutoScaling_UpdateAutoScalingGroupRequest_shared00() {
 				fmt.Println(autoscaling.ErrCodeScalingActivityInProgressFault, aerr.Error())
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -2232,6 +2254,8 @@ func ExampleAutoScaling_UpdateAutoScalingGroupRequest_shared01() {
 				fmt.Println(autoscaling.ErrCodeScalingActivityInProgressFault, aerr.Error())
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}
@@ -2270,6 +2294,8 @@ func ExampleAutoScaling_UpdateAutoScalingGroupRequest_shared02() {
 				fmt.Println(autoscaling.ErrCodeScalingActivityInProgressFault, aerr.Error())
 			case autoscaling.ErrCodeResourceContentionFault:
 				fmt.Println(autoscaling.ErrCodeResourceContentionFault, aerr.Error())
+			case autoscaling.ErrCodeServiceLinkedRoleFailure:
+				fmt.Println(autoscaling.ErrCodeServiceLinkedRoleFailure, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

@@ -114,6 +114,8 @@ type CodeCommitAPI interface {
 
 	PostCommentReplyRequest(*codecommit.PostCommentReplyInput) codecommit.PostCommentReplyRequest
 
+	PutFileRequest(*codecommit.PutFileInput) codecommit.PutFileRequest
+
 	PutRepositoryTriggersRequest(*codecommit.PutRepositoryTriggersInput) codecommit.PutRepositoryTriggersRequest
 
 	TestRepositoryTriggersRequest(*codecommit.TestRepositoryTriggersInput) codecommit.TestRepositoryTriggersRequest

@@ -575,6 +575,11 @@ func (r PutRuleRequest) Send() (*PutRuleOutput, error) {
 // Creates or updates the specified rule. Rules are enabled by default, or based
 // on value of the state. You can disable a rule using DisableRule.
 //
+// If you are updating an existing rule, the rule is completely replaced with
+// what you specify in this PutRule command. If you omit arguments in PutRule,
+// the old values for those arguments are not kept. Instead, they are replaced
+// with null values.
+//
 // When you create or update a rule, incoming events might not immediately start
 // matching to new or updated rules. Please allow a short period of time for
 // changes to take effect.
@@ -657,6 +662,8 @@ func (r PutTargetsRequest) Send() (*PutTargetsOutput, error) {
 //
 //    * AWS Step Functions state machines
 //
+//    * AWS Batch jobs
+//
 //    * Pipelines in Amazon Code Pipeline
 //
 //    * Amazon Inspector assessment templates
@@ -715,8 +722,8 @@ func (r PutTargetsRequest) Send() (*PutTargetsOutput, error) {
 //    are extracted from the event and used as values in a template that you
 //    specify as the input to the target.
 //
-// When you specify Input, InputPath, or InputTransformer, you must use JSON
-// dot notation, not bracket notation.
+// When you specify InputPath or InputTransformer, you must use JSON dot notation,
+// not bracket notation.
 //
 // When you add targets to a rule and the associated rule triggers soon after,
 // new or updated targets might not be immediately invoked. Please allow a short
@@ -921,6 +928,109 @@ func (c *CloudWatchEvents) TestEventPatternRequest(input *TestEventPatternInput)
 	output.responseMetadata = aws.Response{Request: req}
 
 	return TestEventPatternRequest{Request: req, Input: input, Copy: c.TestEventPatternRequest}
+}
+
+// The array properties for the submitted job, such as the size of the array.
+// The array size can be between 2 and 10,000. If you specify array properties
+// for a job, it becomes an array job. This parameter is used only if the target
+// is an AWS Batch job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchArrayProperties
+type BatchArrayProperties struct {
+	_ struct{} `type:"structure"`
+
+	// The size of the array, if this is an array batch job. Valid values are integers
+	// between 2 and 10,000.
+	Size *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s BatchArrayProperties) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchArrayProperties) GoString() string {
+	return s.String()
+}
+
+// The custom parameters to be used when the target is an AWS Batch job.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchParameters
+type BatchParameters struct {
+	_ struct{} `type:"structure"`
+
+	// The array properties for the submitted job, such as the size of the array.
+	// The array size can be between 2 and 10,000. If you specify array properties
+	// for a job, it becomes an array job. This parameter is used only if the target
+	// is an AWS Batch job.
+	ArrayProperties *BatchArrayProperties `type:"structure"`
+
+	// The ARN or name of the job definition to use if the event target is an AWS
+	// Batch job. This job definition must already exist.
+	//
+	// JobDefinition is a required field
+	JobDefinition *string `type:"string" required:"true"`
+
+	// The name to use for this execution of the job, if the target is an AWS Batch
+	// job.
+	//
+	// JobName is a required field
+	JobName *string `type:"string" required:"true"`
+
+	// The retry strategy to use for failed jobs, if the target is an AWS Batch
+	// job. The retry strategy is the number of times to retry the failed job execution.
+	// Valid values are 1 to 10. When you specify a retry strategy here, it overrides
+	// the retry strategy defined in the job definition.
+	RetryStrategy *BatchRetryStrategy `type:"structure"`
+}
+
+// String returns the string representation
+func (s BatchParameters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchParameters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchParameters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchParameters"}
+
+	if s.JobDefinition == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JobDefinition"))
+	}
+
+	if s.JobName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JobName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The retry strategy to use for failed jobs, if the target is an AWS Batch
+// job. If you specify a retry strategy here, it overrides the retry strategy
+// defined in the job definition.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/BatchRetryStrategy
+type BatchRetryStrategy struct {
+	_ struct{} `type:"structure"`
+
+	// The number of times to attempt to retry, if the job fails. Valid values are
+	// 1 to 10.
+	Attempts *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s BatchRetryStrategy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchRetryStrategy) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/DeleteRuleRequest
@@ -1661,8 +1771,8 @@ func (s PutEventsOutput) SDKResponseMetadata() aws.Response {
 type PutEventsRequestEntry struct {
 	_ struct{} `type:"structure"`
 
-	// In the JSON sense, an object containing fields, which may also contain nested
-	// subobjects. No constraints are imposed on its contents.
+	// A valid JSON string. There is no other schema imposed. The JSON string may
+	// contain fields and nested subobjects.
 	Detail *string `type:"string"`
 
 	// Free-form string used to decide what fields to expect in the event detail.
@@ -2317,6 +2427,12 @@ type Target struct {
 	// Arn is a required field
 	Arn *string `min:"1" type:"string" required:"true"`
 
+	// Contains the job definition, job name, and other parameters if the event
+	// target is an AWS Batch job. For more information about AWS Batch, see Jobs
+	// (http://docs.aws.amazon.com/batch/latest/userguide/jobs.html) in the AWS
+	// Batch User Guide.
+	BatchParameters *BatchParameters `type:"structure"`
+
 	// Contains the Amazon ECS task definition and task count to be used, if the
 	// event target is an Amazon ECS task. For more information about Amazon ECS
 	// tasks, see Task Definitions  (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
@@ -2329,9 +2445,8 @@ type Target struct {
 	Id *string `min:"1" type:"string" required:"true"`
 
 	// Valid JSON text passed to the target. In this case, nothing from the event
-	// itself is passed to the target. You must use JSON dot notation, not bracket
-	// notation. For more information, see The JavaScript Object Notation (JSON)
-	// Data Interchange Format (http://www.rfc-editor.org/rfc/rfc7159.txt).
+	// itself is passed to the target. For more information, see The JavaScript
+	// Object Notation (JSON) Data Interchange Format (http://www.rfc-editor.org/rfc/rfc7159.txt).
 	Input *string `type:"string"`
 
 	// The value of the JSONPath that is used for extracting part of the matched
@@ -2387,6 +2502,11 @@ func (s *Target) Validate() error {
 	}
 	if s.RoleArn != nil && len(*s.RoleArn) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 1))
+	}
+	if s.BatchParameters != nil {
+		if err := s.BatchParameters.Validate(); err != nil {
+			invalidParams.AddNested("BatchParameters", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.EcsParameters != nil {
 		if err := s.EcsParameters.Validate(); err != nil {

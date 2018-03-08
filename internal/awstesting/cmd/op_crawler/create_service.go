@@ -13,6 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/appsync"
 	"github.com/aws/aws-sdk-go-v2/service/athena"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling"
+	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans"
 	"github.com/aws/aws-sdk-go-v2/service/batch"
 	"github.com/aws/aws-sdk-go-v2/service/budgets"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9"
@@ -126,6 +127,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/aws/aws-sdk-go-v2/service/support"
 	"github.com/aws/aws-sdk-go-v2/service/swf"
+	"github.com/aws/aws-sdk-go-v2/service/transcribeservice"
 	"github.com/aws/aws-sdk-go-v2/service/translate"
 	"github.com/aws/aws-sdk-go-v2/service/waf"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional"
@@ -156,6 +158,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "appsync", value: reflect.ValueOf(appsync.New(cfg))},
 		{name: "athena", value: reflect.ValueOf(athena.New(cfg))},
 		{name: "autoscaling", value: reflect.ValueOf(autoscaling.New(cfg))},
+		{name: "autoscalingplans", value: reflect.ValueOf(autoscalingplans.New(cfg))},
 		{name: "batch", value: reflect.ValueOf(batch.New(cfg))},
 		{name: "budgets", value: reflect.ValueOf(budgets.New(cfg))},
 		{name: "cloud9", value: reflect.ValueOf(cloud9.New(cfg))},
@@ -269,6 +272,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "sts", value: reflect.ValueOf(sts.New(cfg))},
 		{name: "support", value: reflect.ValueOf(support.New(cfg))},
 		{name: "swf", value: reflect.ValueOf(swf.New(cfg))},
+		{name: "transcribeservice", value: reflect.ValueOf(transcribeservice.New(cfg))},
 		{name: "translate", value: reflect.ValueOf(translate.New(cfg))},
 		{name: "waf", value: reflect.ValueOf(waf.New(cfg))},
 		{name: "wafregional", value: reflect.ValueOf(wafregional.New(cfg))},

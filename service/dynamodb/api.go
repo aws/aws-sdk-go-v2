@@ -307,23 +307,21 @@ func (r CreateBackupRequest) Send() (*CreateBackupOutput, error) {
 // Each time you create an On-Demand Backup, the entire table data is backed
 // up. There is no limit to the number of on-demand backups that can be taken.
 //
+// When you create an On-Demand Backup, a time marker of the request is cataloged,
+// and the backup is created asynchronously, by applying all changes until the
+// time of the request to the last full table snapshot. Backup requests are
+// processed instantaneously and become available for restore within minutes.
+//
 // You can call CreateBackup at a maximum rate of 50 times per second.
 //
 // All backups in DynamoDB work without consuming any provisioned throughput
-// on the table. This results in a fast, low-cost, and scalable backup process.
-// In general, the larger the table, the more time it takes to back up. The
-// backup is stored in an S3 data store that is maintained and managed by DynamoDB.
+// on the table.
 //
-// Backups incorporate all writes (delete, put, update) that were completed
-// within the last minute before the backup request was initiated. Backups might
-// include some writes (delete, put, update) that were completed before the
-// backup request was finished.
-//
-// For example, if you submit the backup request on 2018-12-14 at 14:25:00,
-// the backup is guaranteed to contain all data committed to the table up to
-// 14:24:00, and data committed after 14:26:00 will not be. The backup may or
-// may not contain data modifications made between 14:24:00 and 14:26:00. On-Demand
-// Backup does not support causal consistency.
+// If you submit a backup request on 2018-12-14 at 14:25:00, the backup is guaranteed
+// to contain all data committed to the table up to 14:24:00, and data committed
+// after 14:26:00 will not be. The backup may or may not contain data modifications
+// made between 14:24:00 and 14:26:00. On-Demand Backup does not support causal
+// consistency.
 //
 // Along with data, the following are also included on the backups:
 //
@@ -798,7 +796,7 @@ func (r DescribeGlobalTableRequest) Send() (*DescribeGlobalTableOutput, error) {
 // DescribeGlobalTableRequest returns a request value for making API operation for
 // Amazon DynamoDB.
 //
-// Returns information about the global table.
+// Returns information about the specified global table.
 //
 //    // Example sending a request using the DescribeGlobalTableRequest method.
 //    req := client.DescribeGlobalTableRequest(params)
@@ -1177,8 +1175,7 @@ func (r ListGlobalTablesRequest) Send() (*ListGlobalTablesOutput, error) {
 // ListGlobalTablesRequest returns a request value for making API operation for
 // Amazon DynamoDB.
 //
-// Lists all the global tables. Only those global tables that have replicas
-// in the region specified as input are returned.
+// Lists all global tables that have a replica in the specified region.
 //
 //    // Example sending a request using the ListGlobalTablesRequest method.
 //    req := client.ListGlobalTablesRequest(params)
@@ -1643,6 +1640,8 @@ func (r RestoreTableFromBackupRequest) Send() (*RestoreTableFromBackupOutput, er
 //
 //    * Tags
 //
+//    * Stream settings
+//
 //    * Time to Live (TTL) settings
 //
 //    // Example sending a request using the RestoreTableFromBackupRequest method.
@@ -1936,9 +1935,15 @@ func (r UpdateGlobalTableRequest) Send() (*UpdateGlobalTableOutput, error) {
 // UpdateGlobalTableRequest returns a request value for making API operation for
 // Amazon DynamoDB.
 //
-// Adds or removes replicas to the specified global table. The global table
-// should already exist to be able to use this operation. Currently, the replica
-// to be added should be empty.
+// Adds or removes replicas in the specified global table. The global table
+// must already exist to be able to use this operation. Any replica to be added
+// must be empty, must have the same name as the global table, must have the
+// same key schema, must have DynamoDB Streams enabled, and cannot have any
+// local secondary indexes (LSIs).
+//
+// Although you can use UpdateGlobalTable to add replicas and remove replicas
+// in a single request, for simplicity we recommend that you issue separate
+// requests for adding or removing replicas.
 //
 //    // Example sending a request using the UpdateGlobalTableRequest method.
 //    req := client.UpdateGlobalTableRequest(params)
@@ -2385,7 +2390,7 @@ type AttributeValueUpdate struct {
 	// Each attribute value is described as a name-value pair. The name is the data
 	// type, and the value is the data itself.
 	//
-	// For more information, see Data TYpes (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
+	// For more information, see Data Types (http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html#HowItWorks.DataTypes)
 	// in the Amazon DynamoDB Developer Guide.
 	Value *AttributeValue `type:"structure"`
 }
@@ -3434,6 +3439,9 @@ type CreateTableInput struct {
 	// ProvisionedThroughput is a required field
 	ProvisionedThroughput *ProvisionedThroughput `type:"structure" required:"true"`
 
+	// Represents the settings used to enable server-side encryption.
+	SSESpecification *SSESpecification `type:"structure"`
+
 	// The settings for DynamoDB Streams on the table. These settings consist of:
 	//
 	//    * StreamEnabled - Indicates whether Streams is to be enabled (true) or
@@ -3528,6 +3536,11 @@ func (s *CreateTableInput) Validate() error {
 	if s.ProvisionedThroughput != nil {
 		if err := s.ProvisionedThroughput.Validate(); err != nil {
 			invalidParams.AddNested("ProvisionedThroughput", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.SSESpecification != nil {
+		if err := s.SSESpecification.Validate(); err != nil {
+			invalidParams.AddNested("SSESpecification", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -6271,10 +6284,11 @@ type QueryInput struct {
 	// the Query action.
 	//
 	// The condition must perform an equality test on a single partition key value.
-	// The condition can also perform one of several comparison tests on a single
-	// sort key value. Query can use KeyConditionExpression to retrieve one item
-	// with a given partition key value and sort key value, or several items that
-	// have the same partition key value but different sort key values.
+	//
+	// The condition can optionally perform one of several comparison tests on a
+	// single sort key value. This allows Query to retrieve one item with a given
+	// partition key value and sort key value, or several items that have the same
+	// partition key value but different sort key values.
 	//
 	// The partition key equality test is required, and must be specified in the
 	// following format:
@@ -6762,6 +6776,69 @@ func (s RestoreTableFromBackupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// The description of the server-side encryption status on the specified table.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSEDescription
+type SSEDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The current state of server-side encryption:
+	//
+	//    * ENABLING - Server-side encryption is being enabled.
+	//
+	//    * ENABLED - Server-side encryption is enabled.
+	//
+	//    * DISABLING - Server-side encryption is being disabled.
+	//
+	//    * DISABLED - Server-side encryption is disabled.
+	Status SSEStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SSEDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SSEDescription) GoString() string {
+	return s.String()
+}
+
+// Represents the settings used to enable server-side encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/SSESpecification
+type SSESpecification struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether server-side encryption is enabled (true) or disabled (false)
+	// on the table.
+	//
+	// Enabled is a required field
+	Enabled *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s SSESpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SSESpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SSESpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SSESpecification"}
+
+	if s.Enabled == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Enabled"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Represents the input of a Scan operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ScanInput
 type ScanInput struct {
@@ -7186,6 +7263,10 @@ type SourceTableFeatureDetails struct {
 	// at the time of backup.
 	LocalSecondaryIndexes []LocalSecondaryIndexInfo `type:"list"`
 
+	// The description of the server-side encryption status on the table when the
+	// backup was created.
+	SSEDescription *SSEDescription `type:"structure"`
+
 	// Stream settings on the table when the backup was created.
 	StreamDescription *StreamSpecification `type:"structure"`
 
@@ -7415,6 +7496,9 @@ type TableDescription struct {
 
 	// Contains details for the restore.
 	RestoreSummary *RestoreSummary `type:"structure"`
+
+	// The description of the server-side encryption status on the specified table.
+	SSEDescription *SSEDescription `type:"structure"`
 
 	// The current DynamoDB Streams configuration for the table.
 	StreamSpecification *StreamSpecification `type:"structure"`
@@ -8646,6 +8730,25 @@ func (enum ReturnValue) MarshalValue() (string, error) {
 }
 
 func (enum ReturnValue) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SSEStatus string
+
+// Enum values for SSEStatus
+const (
+	SSEStatusEnabling  SSEStatus = "ENABLING"
+	SSEStatusEnabled   SSEStatus = "ENABLED"
+	SSEStatusDisabling SSEStatus = "DISABLING"
+	SSEStatusDisabled  SSEStatus = "DISABLED"
+)
+
+func (enum SSEStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SSEStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

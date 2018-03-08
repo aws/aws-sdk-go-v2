@@ -127,6 +127,8 @@ type OpsWorksAPI interface {
 
 	DescribeMyUserProfileRequest(*opsworks.DescribeMyUserProfileInput) opsworks.DescribeMyUserProfileRequest
 
+	DescribeOperatingSystemsRequest(*opsworks.DescribeOperatingSystemsInput) opsworks.DescribeOperatingSystemsRequest
+
 	DescribePermissionsRequest(*opsworks.DescribePermissionsInput) opsworks.DescribePermissionsRequest
 
 	DescribeRaidArraysRequest(*opsworks.DescribeRaidArraysInput) opsworks.DescribeRaidArraysRequest

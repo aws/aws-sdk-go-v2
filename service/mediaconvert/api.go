@@ -1426,7 +1426,7 @@ func (s AudioCodecSettings) MarshalFields(e protocol.FieldEncoder) error {
 type AudioDescription struct {
 	_ struct{} `type:"structure"`
 
-	// Settings for Audio Normalization
+	// Advanced audio normalization settings.
 	AudioNormalizationSettings *AudioNormalizationSettings `locationName:"audioNormalizationSettings" type:"structure"`
 
 	// Specifies which audio data to use from each input. In the simplest case,
@@ -1646,8 +1646,7 @@ type AudioSelector struct {
 	// as default, silence will be inserted for the duration of the input.
 	DefaultSelection AudioDefaultSelection `locationName:"defaultSelection" type:"string" enum:"true"`
 
-	// Specifies audio data from an external file source. Auto populated when Infer
-	// External Filename is checked
+	// Specifies audio data from an external file source.
 	ExternalAudioFileInput *string `locationName:"externalAudioFileInput" type:"string"`
 
 	// Selects a specific language code from within an audio source.
@@ -4359,8 +4358,7 @@ type FileSourceSettings struct {
 	Convert608To708 FileSourceConvert608To708 `locationName:"convert608To708" type:"string" enum:"true"`
 
 	// External caption file used for loading captions. Accepted file extensions
-	// are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and 'smi'. Auto-populated when Infer
-	// External Filename is checked.
+	// are 'scc', 'ttml', 'dfxp', 'stl', 'srt', and 'smi'.
 	SourceFile *string `locationName:"sourceFile" type:"string"`
 
 	// Specifies a time delta in seconds to offset the captions from the source
@@ -7205,7 +7203,7 @@ type JobTemplate struct {
 	Settings *JobTemplateSettings `locationName:"settings" type:"structure"`
 
 	// A job template can be of two types: system or custom. System or built-in
-	// job templates can’t be modified or deleted by the user.
+	// job templates can't be modified or deleted by the user.
 	Type Type `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -7908,7 +7906,7 @@ type M2tsSettings struct {
 
 	// Packet Identifier (PID) of the elementary audio stream(s) in the transport
 	// stream. Multiple values are accepted, and can be entered in ranges and/or
-	// by comma separation. Can be entered as decimal or hexadecimal values.
+	// by comma separation.
 	AudioPids []int64 `locationName:"audioPids" type:"list"`
 
 	// The output bitrate of the transport stream in bits per second. Setting to
@@ -7931,14 +7929,13 @@ type M2tsSettings struct {
 
 	// Packet Identifier (PID) for input source DVB Subtitle data to this output.
 	// Multiple values are accepted, and can be entered in ranges and/or by comma
-	// separation. Can be entered as decimal or hexadecimal values.
+	// separation.
 	DvbSubPids []int64 `locationName:"dvbSubPids" type:"list"`
 
 	// Inserts DVB Time and Date Table (TDT) at the specified table repetition interval.
 	DvbTdtSettings *DvbTdtSettings `locationName:"dvbTdtSettings" type:"structure"`
 
 	// Packet Identifier (PID) for input source DVB Teletext data to this output.
-	// Can be entered as a decimal or hexadecimal value.
 	DvbTeletextPid *int64 `locationName:"dvbTeletextPid" type:"integer"`
 
 	// When set to VIDEO_AND_FIXED_INTERVALS, audio EBP markers will be added to
@@ -7973,6 +7970,10 @@ type M2tsSettings struct {
 	// elsewhere to create sufficient latency to make the lookahead accurate.
 	MinEbpInterval *int64 `locationName:"minEbpInterval" type:"integer"`
 
+	// If INSERT, Nielsen inaudible tones for media tracking will be detected in
+	// the input audio and an equivalent ID3 tag will be inserted in the output.
+	NielsenId3 M2tsNielsenId3 `locationName:"nielsenId3" type:"string" enum:"true"`
+
 	// Value in bits per second of extra null packets to insert into the transport
 	// stream. This can be used if a downstream encryption system requires periodic
 	// null packets.
@@ -7989,7 +7990,7 @@ type M2tsSettings struct {
 
 	// Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport
 	// stream. When no value is given, the encoder will assign the same value as
-	// the Video PID. Can be entered as a decimal or hexadecimal value.
+	// the Video PID.
 	PcrPid *int64 `locationName:"pcrPid" type:"integer"`
 
 	// The number of milliseconds between instances of this table in the output
@@ -7997,11 +7998,10 @@ type M2tsSettings struct {
 	PmtInterval *int64 `locationName:"pmtInterval" type:"integer"`
 
 	// Packet Identifier (PID) for the Program Map Table (PMT) in the transport
-	// stream. Can be entered as a decimal or hexadecimal value.
+	// stream.
 	PmtPid *int64 `locationName:"pmtPid" type:"integer"`
 
 	// Packet Identifier (PID) of the private metadata stream in the transport stream.
-	// Can be entered as a decimal or hexadecimal value.
 	PrivateMetadataPid *int64 `locationName:"privateMetadataPid" type:"integer"`
 
 	// The value of the program number field in the Program Map Table.
@@ -8012,12 +8012,11 @@ type M2tsSettings struct {
 	// but the output will not be padded up to that bitrate.
 	RateMode M2tsRateMode `locationName:"rateMode" type:"string" enum:"true"`
 
-	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can
-	// be entered as a decimal or hexadecimal value.
+	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
 	Scte35Pid *int64 `locationName:"scte35Pid" type:"integer"`
 
 	// Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from
-	// input to output. This is only available for certain containers.
+	// input to output.
 	Scte35Source M2tsScte35Source `locationName:"scte35Source" type:"string" enum:"true"`
 
 	// Inserts segmentation markers at each segmentation_time period. rai_segstart
@@ -8046,11 +8045,13 @@ type M2tsSettings struct {
 	// _none_.
 	SegmentationTime *float64 `locationName:"segmentationTime" type:"double"`
 
+	// Packet Identifier (PID) of the timed metadata stream in the transport stream.
+	TimedMetadataPid *int64 `locationName:"timedMetadataPid" type:"integer"`
+
 	// The value of the transport stream ID field in the Program Map Table.
 	TransportStreamId *int64 `locationName:"transportStreamId" type:"integer"`
 
 	// Packet Identifier (PID) of the elementary video stream in the transport stream.
-	// Can be entered as a decimal or hexadecimal value.
 	VideoPid *int64 `locationName:"videoPid" type:"integer"`
 }
 
@@ -8174,6 +8175,12 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "minEbpInterval", protocol.Int64Value(v), metadata)
 	}
+	if len(s.NielsenId3) > 0 {
+		v := s.NielsenId3
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nielsenId3", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.NullPacketBitrate != nil {
 		v := *s.NullPacketBitrate
 
@@ -8258,6 +8265,12 @@ func (s M2tsSettings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "segmentationTime", protocol.Float64Value(v), metadata)
 	}
+	if s.TimedMetadataPid != nil {
+		v := *s.TimedMetadataPid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timedMetadataPid", protocol.Int64Value(v), metadata)
+	}
 	if s.TransportStreamId != nil {
 		v := *s.TransportStreamId
 
@@ -8283,8 +8296,12 @@ type M3u8Settings struct {
 
 	// Packet Identifier (PID) of the elementary audio stream(s) in the transport
 	// stream. Multiple values are accepted, and can be entered in ranges and/or
-	// by comma separation. Can be entered as decimal or hexadecimal values.
+	// by comma separation.
 	AudioPids []int64 `locationName:"audioPids" type:"list"`
+
+	// If INSERT, Nielsen inaudible tones for media tracking will be detected in
+	// the input audio and an equivalent ID3 tag will be inserted in the output.
+	NielsenId3 M3u8NielsenId3 `locationName:"nielsenId3" type:"string" enum:"true"`
 
 	// The number of milliseconds between instances of this table in the output
 	// transport stream.
@@ -8297,7 +8314,7 @@ type M3u8Settings struct {
 
 	// Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport
 	// stream. When no value is given, the encoder will assign the same value as
-	// the Video PID. Can be entered as a decimal or hexadecimal value.
+	// the Video PID.
 	PcrPid *int64 `locationName:"pcrPid" type:"integer"`
 
 	// The number of milliseconds between instances of this table in the output
@@ -8305,37 +8322,33 @@ type M3u8Settings struct {
 	PmtInterval *int64 `locationName:"pmtInterval" type:"integer"`
 
 	// Packet Identifier (PID) for the Program Map Table (PMT) in the transport
-	// stream. Can be entered as a decimal or hexadecimal value.
+	// stream.
 	PmtPid *int64 `locationName:"pmtPid" type:"integer"`
 
 	// Packet Identifier (PID) of the private metadata stream in the transport stream.
-	// Can be entered as a decimal or hexadecimal value.
 	PrivateMetadataPid *int64 `locationName:"privateMetadataPid" type:"integer"`
 
 	// The value of the program number field in the Program Map Table.
 	ProgramNumber *int64 `locationName:"programNumber" type:"integer"`
 
-	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can
-	// be entered as a decimal or hexadecimal value.
+	// Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
 	Scte35Pid *int64 `locationName:"scte35Pid" type:"integer"`
 
 	// Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from
-	// input to output. This is only available for certain containers.
+	// input to output.
 	Scte35Source M3u8Scte35Source `locationName:"scte35Source" type:"string" enum:"true"`
 
 	// If PASSTHROUGH, inserts ID3 timed metadata from the timed_metadata REST command
-	// into this output. Only available for certain containers.
+	// into this output.
 	TimedMetadata TimedMetadata `locationName:"timedMetadata" type:"string" enum:"true"`
 
 	// Packet Identifier (PID) of the timed metadata stream in the transport stream.
-	// Can be entered as a decimal or hexadecimal value.
 	TimedMetadataPid *int64 `locationName:"timedMetadataPid" type:"integer"`
 
 	// The value of the transport stream ID field in the Program Map Table.
 	TransportStreamId *int64 `locationName:"transportStreamId" type:"integer"`
 
 	// Packet Identifier (PID) of the elementary video stream in the transport stream.
-	// Can be entered as a decimal or hexadecimal value.
 	VideoPid *int64 `locationName:"videoPid" type:"integer"`
 }
 
@@ -8368,6 +8381,12 @@ func (s M3u8Settings) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if len(s.NielsenId3) > 0 {
+		v := s.NielsenId3
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nielsenId3", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.PatInterval != nil {
 		v := *s.PatInterval
@@ -9289,10 +9308,10 @@ type Output struct {
 	// Use Name modifier (NameModifier) to have the service add a string to the
 	// end of each output filename. You specify the base filename as part of your
 	// destination URI. When you create multiple outputs in the same output group,
-	// Name modifier is required. Name modifier also accepts format identifiers.
-	// For DASH ISO outputs, if you use the format identifiers $Number$ or $Time$
-	// in one output, you must use them in the same way in all outputs of the output
-	// group.
+	// Name modifier (NameModifier) is required. Name modifier also accepts format
+	// identifiers. For DASH ISO outputs, if you use the format identifiers $Number$
+	// or $Time$ in one output, you must use them in the same way in all outputs
+	// of the output group.
 	NameModifier *string `locationName:"nameModifier" type:"string"`
 
 	// Specific settings for this type of output.
@@ -9690,7 +9709,7 @@ type Preset struct {
 	Settings *PresetSettings `locationName:"settings" type:"structure"`
 
 	// A preset can be of two types: system or custom. System or built-in preset
-	// can’t be modified or deleted by the user.
+	// can't be modified or deleted by the user.
 	Type Type `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -10004,7 +10023,7 @@ type Queue struct {
 	Status QueueStatus `locationName:"status" type:"string" enum:"true"`
 
 	// A queue can be of two types: system or custom. System or built-in queues
-	// can’t be modified or deleted by the user.
+	// can't be modified or deleted by the user.
 	Type Type `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -10625,7 +10644,8 @@ func (s Timing) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Settings for TTML caption output
+// Settings specific to TTML caption outputs, including Pass style information
+// (TtmlStylePassthrough).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TtmlDestinationSettings
 type TtmlDestinationSettings struct {
 	_ struct{} `type:"structure"`
@@ -12153,6 +12173,8 @@ func (enum BurninSubtitleTeletextSpacing) MarshalValueBuf(b []byte) ([]byte, err
 	return append(b, enum...), nil
 }
 
+// Type of Caption output, including Burn-In, Embedded, SCC, SRT, TTML, WebVTT,
+// DVB-Sub, Teletext.
 type CaptionDestinationType string
 
 // Enum values for CaptionDestinationType
@@ -14643,6 +14665,25 @@ func (enum M2tsEsRateInPes) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// If INSERT, Nielsen inaudible tones for media tracking will be detected in
+// the input audio and an equivalent ID3 tag will be inserted in the output.
+type M2tsNielsenId3 string
+
+// Enum values for M2tsNielsenId3
+const (
+	M2tsNielsenId3Insert M2tsNielsenId3 = "INSERT"
+	M2tsNielsenId3None   M2tsNielsenId3 = "NONE"
+)
+
+func (enum M2tsNielsenId3) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum M2tsNielsenId3) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // When set to PCR_EVERY_PES_PACKET, a Program Clock Reference value is inserted
 // for every Packetized Elementary Stream (PES) header. This is effective only
 // when the PCR PID is the same as the video or audio elementary stream.
@@ -14684,7 +14725,7 @@ func (enum M2tsRateMode) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from
-// input to output. This is only available for certain containers.
+// input to output.
 type M2tsScte35Source string
 
 // Enum values for M2tsScte35Source
@@ -14758,6 +14799,25 @@ func (enum M2tsSegmentationStyle) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// If INSERT, Nielsen inaudible tones for media tracking will be detected in
+// the input audio and an equivalent ID3 tag will be inserted in the output.
+type M3u8NielsenId3 string
+
+// Enum values for M3u8NielsenId3
+const (
+	M3u8NielsenId3Insert M3u8NielsenId3 = "INSERT"
+	M3u8NielsenId3None   M3u8NielsenId3 = "NONE"
+)
+
+func (enum M3u8NielsenId3) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum M3u8NielsenId3) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // When set to PCR_EVERY_PES_PACKET a Program Clock Reference value is inserted
 // for every Packetized Elementary Stream (PES) header. This parameter is effective
 // only when the PCR PID is the same as the video or audio elementary stream.
@@ -14779,7 +14839,7 @@ func (enum M3u8PcrControl) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from
-// input to output. This is only available for certain containers.
+// input to output.
 type M3u8Scte35Source string
 
 // Enum values for M3u8Scte35Source
@@ -15384,6 +15444,7 @@ func (enum Order) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth Streaming)
 type OutputGroupType string
 
 // Enum values for OutputGroupType
@@ -15769,7 +15830,7 @@ func (enum TimecodeSource) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // If PASSTHROUGH, inserts ID3 timed metadata from the timed_metadata REST command
-// into this output. Only available for certain containers.
+// into this output.
 type TimedMetadata string
 
 // Enum values for TimedMetadata

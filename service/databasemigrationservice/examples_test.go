@@ -1026,6 +1026,8 @@ func ExampleDatabaseMigrationService_ImportCertificateRequest_shared00() {
 				fmt.Println(databasemigrationservice.ErrCodeResourceAlreadyExistsFault, aerr.Error())
 			case databasemigrationservice.ErrCodeInvalidCertificateFault:
 				fmt.Println(databasemigrationservice.ErrCodeInvalidCertificateFault, aerr.Error())
+			case databasemigrationservice.ErrCodeResourceQuotaExceededFault:
+				fmt.Println(databasemigrationservice.ErrCodeResourceQuotaExceededFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

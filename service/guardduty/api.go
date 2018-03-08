@@ -2287,6 +2287,64 @@ func (s AcceptInvitationOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The IAM access key details (IAM user information) of a user that engaged
+// in the activity that prompted GuardDuty to generate a finding.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccessKeyDetails
+type AccessKeyDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Access key ID of the user.
+	AccessKeyId *string `locationName:"accessKeyId" type:"string"`
+
+	// The principal ID of the user.
+	PrincipalId *string `locationName:"principalId" type:"string"`
+
+	// The name of the user.
+	UserName *string `locationName:"userName" type:"string"`
+
+	// The type of the user.
+	UserType *string `locationName:"userType" type:"string"`
+}
+
+// String returns the string representation
+func (s AccessKeyDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AccessKeyDetails) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AccessKeyDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessKeyId != nil {
+		v := *s.AccessKeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "accessKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrincipalId != nil {
+		v := *s.PrincipalId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "principalId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserName != nil {
+		v := *s.UserName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "userName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserType != nil {
+		v := *s.UserType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "userType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object containing the member's accountId and email address.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AccountDetail
 type AccountDetail struct {
@@ -2342,6 +2400,9 @@ type Action struct {
 
 	// Information about the NETWORK_CONNECTION action described in this finding.
 	NetworkConnectionAction *NetworkConnectionAction `locationName:"networkConnectionAction" type:"structure"`
+
+	// Information about the PORT_PROBE action described in this finding.
+	PortProbeAction *PortProbeAction `locationName:"portProbeAction" type:"structure"`
 }
 
 // String returns the string representation
@@ -2379,6 +2440,12 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "networkConnectionAction", v, metadata)
+	}
+	if s.PortProbeAction != nil {
+		v := s.PortProbeAction
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "portProbeAction", v, metadata)
 	}
 	return nil
 }
@@ -6570,6 +6637,90 @@ func (s Organization) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information about the PORT_PROBE action described in this finding.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PortProbeAction
+type PortProbeAction struct {
+	_ struct{} `type:"structure"`
+
+	// Port probe blocked information.
+	Blocked *bool `locationName:"blocked" type:"boolean"`
+
+	// A list of port probe details objects.
+	PortProbeDetails []PortProbeDetail `locationName:"portProbeDetails" type:"list"`
+}
+
+// String returns the string representation
+func (s PortProbeAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PortProbeAction) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PortProbeAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Blocked != nil {
+		v := *s.Blocked
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "blocked", protocol.BoolValue(v), metadata)
+	}
+	if len(s.PortProbeDetails) > 0 {
+		v := s.PortProbeDetails
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "portProbeDetails", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Details about the port probe finding.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PortProbeDetail
+type PortProbeDetail struct {
+	_ struct{} `type:"structure"`
+
+	// Local port information of the connection.
+	LocalPortDetails *LocalPortDetails `locationName:"localPortDetails" type:"structure"`
+
+	// Remote IP information of the connection.
+	RemoteIpDetails *RemoteIpDetails `locationName:"remoteIpDetails" type:"structure"`
+}
+
+// String returns the string representation
+func (s PortProbeDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PortProbeDetail) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PortProbeDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LocalPortDetails != nil {
+		v := s.LocalPortDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "localPortDetails", v, metadata)
+	}
+	if s.RemoteIpDetails != nil {
+		v := s.RemoteIpDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "remoteIpDetails", v, metadata)
+	}
+	return nil
+}
+
 // Other private IP address information of the EC2 instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/PrivateIpAddressDetails
 type PrivateIpAddressDetails struct {
@@ -6759,6 +6910,10 @@ func (s RemotePortDetails) MarshalFields(e protocol.FieldEncoder) error {
 type Resource struct {
 	_ struct{} `type:"structure"`
 
+	// The IAM access key details (IAM user information) of a user that engaged
+	// in the activity that prompted GuardDuty to generate a finding.
+	AccessKeyDetails *AccessKeyDetails `locationName:"accessKeyDetails" type:"structure"`
+
 	// The information about the EC2 instance associated with the activity that
 	// prompted GuardDuty to generate a finding.
 	InstanceDetails *InstanceDetails `locationName:"instanceDetails" type:"structure"`
@@ -6779,6 +6934,12 @@ func (s Resource) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessKeyDetails != nil {
+		v := s.AccessKeyDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "accessKeyDetails", v, metadata)
+	}
 	if s.InstanceDetails != nil {
 		v := s.InstanceDetails
 

@@ -94,6 +94,8 @@ type WAFRegionalAPI interface {
 
 	DeleteIPSetRequest(*wafregional.DeleteIPSetInput) wafregional.DeleteIPSetRequest
 
+	DeletePermissionPolicyRequest(*wafregional.DeletePermissionPolicyInput) wafregional.DeletePermissionPolicyRequest
+
 	DeleteRateBasedRuleRequest(*wafregional.DeleteRateBasedRuleInput) wafregional.DeleteRateBasedRuleRequest
 
 	DeleteRegexMatchSetRequest(*wafregional.DeleteRegexMatchSetInput) wafregional.DeleteRegexMatchSetRequest
@@ -123,6 +125,8 @@ type WAFRegionalAPI interface {
 	GetGeoMatchSetRequest(*wafregional.GetGeoMatchSetInput) wafregional.GetGeoMatchSetRequest
 
 	GetIPSetRequest(*wafregional.GetIPSetInput) wafregional.GetIPSetRequest
+
+	GetPermissionPolicyRequest(*wafregional.GetPermissionPolicyInput) wafregional.GetPermissionPolicyRequest
 
 	GetRateBasedRuleRequest(*wafregional.GetRateBasedRuleInput) wafregional.GetRateBasedRuleRequest
 
@@ -177,6 +181,8 @@ type WAFRegionalAPI interface {
 	ListWebACLsRequest(*wafregional.ListWebACLsInput) wafregional.ListWebACLsRequest
 
 	ListXssMatchSetsRequest(*wafregional.ListXssMatchSetsInput) wafregional.ListXssMatchSetsRequest
+
+	PutPermissionPolicyRequest(*wafregional.PutPermissionPolicyInput) wafregional.PutPermissionPolicyRequest
 
 	UpdateByteMatchSetRequest(*wafregional.UpdateByteMatchSetInput) wafregional.UpdateByteMatchSetRequest
 

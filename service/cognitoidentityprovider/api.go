@@ -3133,6 +3133,56 @@ func (c *CognitoIdentityProvider) GetIdentityProviderByIdentifierRequest(input *
 	return GetIdentityProviderByIdentifierRequest{Request: req, Input: input, Copy: c.GetIdentityProviderByIdentifierRequest}
 }
 
+const opGetSigningCertificate = "GetSigningCertificate"
+
+// GetSigningCertificateRequest is a API request type for the GetSigningCertificate API operation.
+type GetSigningCertificateRequest struct {
+	*aws.Request
+	Input *GetSigningCertificateInput
+	Copy  func(*GetSigningCertificateInput) GetSigningCertificateRequest
+}
+
+// Send marshals and sends the GetSigningCertificate API request.
+func (r GetSigningCertificateRequest) Send() (*GetSigningCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSigningCertificateOutput), nil
+}
+
+// GetSigningCertificateRequest returns a request value for making API operation for
+// Amazon Cognito Identity Provider.
+//
+// This method takes a user pool ID, and returns the signing certificate.
+//
+//    // Example sending a request using the GetSigningCertificateRequest method.
+//    req := client.GetSigningCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetSigningCertificate
+func (c *CognitoIdentityProvider) GetSigningCertificateRequest(input *GetSigningCertificateInput) GetSigningCertificateRequest {
+	op := &aws.Operation{
+		Name:       opGetSigningCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetSigningCertificateInput{}
+	}
+
+	output := &GetSigningCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetSigningCertificateRequest{Request: req, Input: input, Copy: c.GetSigningCertificateRequest}
+}
+
 const opGetUICustomization = "GetUICustomization"
 
 // GetUICustomizationRequest is a API request type for the GetUICustomization API operation.
@@ -6218,6 +6268,9 @@ type AdminInitiateAuthInput struct {
 	//    * USER_SRP_AUTH will take in USERNAME and SRP_A and return the SRP variables
 	//    to be used for next challenge execution.
 	//
+	//    * USER_PASSWORD_AUTH will take in USERNAME and PASSWORD and return the
+	//    next challenge or tokens.
+	//
 	// Valid values include:
 	//
 	//    * USER_SRP_AUTH: Authentication flow for the Secure Remote Password (SRP)
@@ -6232,6 +6285,11 @@ type AdminInitiateAuthInput struct {
 	//    USERNAME and PASSWORD directly if the flow is enabled for calling the
 	//    app client.
 	//
+	//    * USER_PASSWORD_AUTH: Non-SRP authentication flow; USERNAME and PASSWORD
+	//    are passed directly. If a user migration Lambda trigger is set, this flow
+	//    will invoke the user migration Lambda if the USERNAME is not found in
+	//    the user pool.
+	//
 	// AuthFlow is a required field
 	AuthFlow AuthFlowType `type:"string" required:"true" enum:"true"`
 
@@ -6241,9 +6299,8 @@ type AdminInitiateAuthInput struct {
 	//    * For USER_SRP_AUTH: USERNAME (required), SRP_A (required), SECRET_HASH
 	//    (required if the app client is configured with a client secret), DEVICE_KEY
 	//
-	//    * For REFRESH_TOKEN_AUTH/REFRESH_TOKEN: USERNAME (required), SECRET_HASH
-	//    (required if the app client is configured with a client secret), REFRESH_TOKEN
-	//    (required), DEVICE_KEY
+	//    * For REFRESH_TOKEN_AUTH/REFRESH_TOKEN: REFRESH_TOKEN (required), SECRET_HASH
+	//    (required if the app client is configured with a client secret), DEVICE_KEY
 	//
 	//    * For ADMIN_NO_SRP_AUTH: USERNAME (required), SECRET_HASH (if app client
 	//    is configured with client secret), PASSWORD (required), DEVICE_KEY
@@ -6364,7 +6421,7 @@ type AdminInitiateAuthOutput struct {
 	//
 	// All challenges require USERNAME and SECRET_HASH (if applicable).
 	//
-	// The value of the USER_IF_FOR_SRP attribute will be the user's actual username,
+	// The value of the USER_ID_FOR_SRP attribute will be the user's actual username,
 	// not an alias (such as email address or phone number), even if you specified
 	// an alias in your call to AdminInitiateAuth. This is because, in the AdminRespondToAuthChallenge
 	// API ChallengeResponses, the USERNAME attribute cannot be an alias.
@@ -6696,7 +6753,7 @@ type AdminListUserAuthEventsInput struct {
 	// UserPoolId is a required field
 	UserPoolId *string `min:"1" type:"string" required:"true"`
 
-	// The user pool username.
+	// The user pool username or an alias.
 	//
 	// Username is a required field
 	Username *string `min:"1" type:"string" required:"true"`
@@ -7083,7 +7140,7 @@ type AdminSetUserMFAPreferenceInput struct {
 	// UserPoolId is a required field
 	UserPoolId *string `min:"1" type:"string" required:"true"`
 
-	// The user pool username.
+	// The user pool username or alias.
 	//
 	// Username is a required field
 	Username *string `min:"1" type:"string" required:"true"`
@@ -9051,6 +9108,15 @@ type CreateUserPoolInput struct {
 	EmailVerificationSubject *string `min:"1" type:"string"`
 
 	// The Lambda trigger configuration information for the new user pool.
+	//
+	// In a push model, event sources (such as Amazon S3 and custom applications)
+	// need permission to invoke a function. So you will need to make an extra call
+	// to add permission for these event sources to invoke your Lambda function.
+	//
+	// For more information on using the Lambda API to add permission, see  AddPermission
+	//  (https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html).
+	//
+	// For adding permission using the AWS CLI, see  add-permission  (https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html).
 	LambdaConfig *LambdaConfigType `type:"structure"`
 
 	// Specifies MFA configuration details.
@@ -10926,6 +10992,70 @@ func (s GetIdentityProviderByIdentifierOutput) SDKResponseMetadata() aws.Respons
 	return s.responseMetadata
 }
 
+// Request to get a signing certificate from Cognito.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetSigningCertificateRequest
+type GetSigningCertificateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The user pool ID.
+	//
+	// UserPoolId is a required field
+	UserPoolId *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetSigningCertificateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSigningCertificateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetSigningCertificateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetSigningCertificateInput"}
+
+	if s.UserPoolId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolId"))
+	}
+	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Response from Cognito for a signing certificate request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetSigningCertificateResponse
+type GetSigningCertificateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The signing certificate.
+	Certificate *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetSigningCertificateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSigningCertificateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSigningCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/GetUICustomizationRequest
 type GetUICustomizationInput struct {
 	_ struct{} `type:"structure"`
@@ -11412,6 +11542,9 @@ type InitiateAuthInput struct {
 	//    * USER_SRP_AUTH will take in USERNAME and SRP_A and return the SRP variables
 	//    to be used for next challenge execution.
 	//
+	//    * USER_PASSWORD_AUTH will take in USERNAME and PASSWORD and return the
+	//    next challenge or tokens.
+	//
 	// Valid values include:
 	//
 	//    * USER_SRP_AUTH: Authentication flow for the Secure Remote Password (SRP)
@@ -11421,6 +11554,11 @@ type InitiateAuthInput struct {
 	//    the access token and ID token by supplying a valid refresh token.
 	//
 	//    * CUSTOM_AUTH: Custom authentication flow.
+	//
+	//    * USER_PASSWORD_AUTH: Non-SRP authentication flow; USERNAME and PASSWORD
+	//    are passed directly. If a user migration Lambda trigger is set, this flow
+	//    will invoke the user migration Lambda if the USERNAME is not found in
+	//    the user pool.
 	//
 	// ADMIN_NO_SRP_AUTH is not a valid value.
 	//
@@ -11433,9 +11571,8 @@ type InitiateAuthInput struct {
 	//    * For USER_SRP_AUTH: USERNAME (required), SRP_A (required), SECRET_HASH
 	//    (required if the app client is configured with a client secret), DEVICE_KEY
 	//
-	//    * For REFRESH_TOKEN_AUTH/REFRESH_TOKEN: USERNAME (required), SECRET_HASH
-	//    (required if the app client is configured with a client secret), REFRESH_TOKEN
-	//    (required), DEVICE_KEY
+	//    * For REFRESH_TOKEN_AUTH/REFRESH_TOKEN: REFRESH_TOKEN (required), SECRET_HASH
+	//    (required if the app client is configured with a client secret), DEVICE_KEY
 	//
 	//    * For CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is
 	//    configured with client secret), DEVICE_KEY
@@ -11588,6 +11725,9 @@ type LambdaConfigType struct {
 	// A Lambda trigger that is invoked before token generation.
 	PreTokenGeneration *string `min:"20" type:"string"`
 
+	// The user migration Lambda config type.
+	UserMigration *string `min:"20" type:"string"`
+
 	// Verifies the authentication challenge response.
 	VerifyAuthChallengeResponse *string `min:"20" type:"string"`
 }
@@ -11628,6 +11768,9 @@ func (s *LambdaConfigType) Validate() error {
 	}
 	if s.PreTokenGeneration != nil && len(*s.PreTokenGeneration) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("PreTokenGeneration", 20))
+	}
+	if s.UserMigration != nil && len(*s.UserMigration) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserMigration", 20))
 	}
 	if s.VerifyAuthChallengeResponse != nil && len(*s.VerifyAuthChallengeResponse) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("VerifyAuthChallengeResponse", 20))
@@ -15660,6 +15803,7 @@ const (
 	AuthFlowTypeRefreshToken     AuthFlowType = "REFRESH_TOKEN"
 	AuthFlowTypeCustomAuth       AuthFlowType = "CUSTOM_AUTH"
 	AuthFlowTypeAdminNoSrpAuth   AuthFlowType = "ADMIN_NO_SRP_AUTH"
+	AuthFlowTypeUserPasswordAuth AuthFlowType = "USER_PASSWORD_AUTH"
 )
 
 func (enum AuthFlowType) MarshalValue() (string, error) {
@@ -15877,6 +16021,7 @@ type ExplicitAuthFlowsType string
 const (
 	ExplicitAuthFlowsTypeAdminNoSrpAuth     ExplicitAuthFlowsType = "ADMIN_NO_SRP_AUTH"
 	ExplicitAuthFlowsTypeCustomAuthFlowOnly ExplicitAuthFlowsType = "CUSTOM_AUTH_FLOW_ONLY"
+	ExplicitAuthFlowsTypeUserPasswordAuth   ExplicitAuthFlowsType = "USER_PASSWORD_AUTH"
 )
 
 func (enum ExplicitAuthFlowsType) MarshalValue() (string, error) {

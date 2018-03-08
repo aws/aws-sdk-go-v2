@@ -1708,6 +1708,56 @@ func (c *CodeCommit) PostCommentReplyRequest(input *PostCommentReplyInput) PostC
 	return PostCommentReplyRequest{Request: req, Input: input, Copy: c.PostCommentReplyRequest}
 }
 
+const opPutFile = "PutFile"
+
+// PutFileRequest is a API request type for the PutFile API operation.
+type PutFileRequest struct {
+	*aws.Request
+	Input *PutFileInput
+	Copy  func(*PutFileInput) PutFileRequest
+}
+
+// Send marshals and sends the PutFile API request.
+func (r PutFileRequest) Send() (*PutFileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutFileOutput), nil
+}
+
+// PutFileRequest returns a request value for making API operation for
+// AWS CodeCommit.
+//
+// Adds or updates a file in an AWS CodeCommit repository.
+//
+//    // Example sending a request using the PutFileRequest method.
+//    req := client.PutFileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFile
+func (c *CodeCommit) PutFileRequest(input *PutFileInput) PutFileRequest {
+	op := &aws.Operation{
+		Name:       opPutFile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutFileInput{}
+	}
+
+	output := &PutFileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutFileRequest{Request: req, Input: input, Copy: c.PutFileRequest}
+}
+
 const opPutRepositoryTriggers = "PutRepositoryTriggers"
 
 // PutRepositoryTriggersRequest is a API request type for the PutRepositoryTriggers API operation.
@@ -2462,7 +2512,8 @@ type Commit struct {
 	// The commit message associated with the specified commit.
 	Message *string `locationName:"message" type:"string"`
 
-	// The parent list for the specified commit.
+	// A list of parent commits for the specified commit. Each parent commit ID
+	// is the full commit ID.
 	Parents []string `locationName:"parents" type:"list"`
 
 	// Tree information for the specified commit.
@@ -4765,6 +4816,139 @@ func (s PullRequestTarget) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileInput
+type PutFileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the branch where you want to add or update the file.
+	//
+	// BranchName is a required field
+	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
+
+	// A message about why this file was added or updated. While optional, adding
+	// a message is strongly encouraged in order to provide a more useful commit
+	// history for your repository.
+	CommitMessage *string `locationName:"commitMessage" type:"string"`
+
+	// An email address for the person adding or updating the file.
+	Email *string `locationName:"email" type:"string"`
+
+	// The content of the file, in binary object format.
+	//
+	// FileContent is automatically base64 encoded/decoded by the SDK.
+	//
+	// FileContent is a required field
+	FileContent []byte `locationName:"fileContent" type:"blob" required:"true"`
+
+	// The file mode permissions of the blob. Valid file mode permissions are listed
+	// below.
+	FileMode FileModeTypeEnum `locationName:"fileMode" type:"string" enum:"true"`
+
+	// The name of the file you want to add or update, including the relative path
+	// to the file in the repository.
+	//
+	// If the path does not currently exist in the repository, the path will be
+	// created as part of adding the file.
+	//
+	// FilePath is a required field
+	FilePath *string `locationName:"filePath" type:"string" required:"true"`
+
+	// The name of the person adding or updating the file. While optional, adding
+	// a name is strongly encouraged in order to provide a more useful commit history
+	// for your repository.
+	Name *string `locationName:"name" type:"string"`
+
+	// The full commit ID of the head commit in the branch where you want to add
+	// or update the file. If the commit ID does not match the ID of the head commit
+	// at the time of the operation, an error will occur, and the file will not
+	// be added or updated.
+	ParentCommitId *string `locationName:"parentCommitId" type:"string"`
+
+	// The name of the repository where you want to add or update the file.
+	//
+	// RepositoryName is a required field
+	RepositoryName *string `locationName:"repositoryName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PutFileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutFileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutFileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutFileInput"}
+
+	if s.BranchName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BranchName"))
+	}
+	if s.BranchName != nil && len(*s.BranchName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("BranchName", 1))
+	}
+
+	if s.FileContent == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FileContent"))
+	}
+
+	if s.FilePath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilePath"))
+	}
+
+	if s.RepositoryName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RepositoryName"))
+	}
+	if s.RepositoryName != nil && len(*s.RepositoryName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RepositoryName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutFileOutput
+type PutFileOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ID of the blob, which is its SHA-1 pointer.
+	//
+	// BlobId is a required field
+	BlobId *string `locationName:"blobId" type:"string" required:"true"`
+
+	// The full SHA of the commit that contains this file change.
+	//
+	// CommitId is a required field
+	CommitId *string `locationName:"commitId" type:"string" required:"true"`
+
+	// Tree information for the commit that contains this file change.
+	//
+	// TreeId is a required field
+	TreeId *string `locationName:"treeId" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PutFileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutFileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutFileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents the input ofa put repository triggers operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/PutRepositoryTriggersInput
 type PutRepositoryTriggersInput struct {
@@ -5634,7 +5818,8 @@ func (s UpdateRepositoryNameOutput) SDKResponseMetadata() aws.Response {
 type UserInfo struct {
 	_ struct{} `type:"structure"`
 
-	// The date when the specified commit was pushed to the repository.
+	// The date when the specified commit was commited, in timestamp format with
+	// GMT offset.
 	Date *string `locationName:"date" type:"string"`
 
 	// The email address associated with the user who made the commit, if any.
@@ -5668,6 +5853,24 @@ func (enum ChangeTypeEnum) MarshalValue() (string, error) {
 }
 
 func (enum ChangeTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FileModeTypeEnum string
+
+// Enum values for FileModeTypeEnum
+const (
+	FileModeTypeEnumExecutable FileModeTypeEnum = "EXECUTABLE"
+	FileModeTypeEnumNormal     FileModeTypeEnum = "NORMAL"
+	FileModeTypeEnumSymlink    FileModeTypeEnum = "SYMLINK"
+)
+
+func (enum FileModeTypeEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FileModeTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

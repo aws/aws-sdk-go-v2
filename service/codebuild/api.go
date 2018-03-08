@@ -242,7 +242,7 @@ func (r CreateWebhookRequest) Send() (*CreateWebhookOutput, error) {
 // AWS CodePipeline. Because billing is on a per-build basis, you will be billed
 // for both builds. Therefore, if you are using AWS CodePipeline, we recommend
 // that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear
-// the Webhook box. For more information, see step 9 in Change a Build Project’s
+// the Webhook box. For more information, see step 9 in Change a Build Project's
 // Settings (http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console).
 //
 //    // Example sending a request using the CreateWebhookRequest method.
@@ -2363,6 +2363,9 @@ func (s *ProjectCache) Validate() error {
 type ProjectEnvironment struct {
 	_ struct{} `type:"structure"`
 
+	// The certificate to use with this build project.
+	Certificate *string `locationName:"certificate" type:"string"`
+
 	// Information about the compute resources the build project will use. Available
 	// values include:
 	//
@@ -2465,6 +2468,13 @@ type ProjectSource struct {
 	// If this value is not specified, a build spec must be included along with
 	// the source code to be built.
 	Buildspec *string `locationName:"buildspec" type:"string"`
+
+	// Information about the git clone depth for the build project.
+	GitCloneDepth *int64 `locationName:"gitCloneDepth" type:"integer"`
+
+	// Enable this flag to ignore SSL warnings while connecting to the project source
+	// code.
+	InsecureSsl *bool `locationName:"insecureSsl" type:"boolean"`
 
 	// Information about the location of the source code to be built. Valid values
 	// include:
@@ -2612,6 +2622,10 @@ type StartBuildInput struct {
 	// A set of environment variables that overrides, for this build only, the latest
 	// ones already defined in the build project.
 	EnvironmentVariablesOverride []EnvironmentVariable `locationName:"environmentVariablesOverride" type:"list"`
+
+	// The user-defined depth of history, with a minimum value of 0, that overrides,
+	// for this build only, any previous depth of history defined in the build project.
+	GitCloneDepthOverride *int64 `locationName:"gitCloneDepthOverride" type:"integer"`
 
 	// The name of the build project to start running a build.
 	//
@@ -3009,6 +3023,14 @@ func (s *VpcConfig) Validate() error {
 type Webhook struct {
 	_ struct{} `type:"structure"`
 
+	// This is the server endpoint that will receive the webhook payload.
+	PayloadUrl *string `locationName:"payloadUrl" min:"1" type:"string"`
+
+	// Use this secret while creating a webhook in GitHub for Enterprise. The secret
+	// allows webhook requests sent by GitHub for Enterprise to be authenticated
+	// by AWS CodeBuild.
+	Secret *string `locationName:"secret" min:"1" type:"string"`
+
 	// The URL to the webhook.
 	Url *string `locationName:"url" min:"1" type:"string"`
 }
@@ -3265,11 +3287,12 @@ type SourceType string
 
 // Enum values for SourceType
 const (
-	SourceTypeCodecommit   SourceType = "CODECOMMIT"
-	SourceTypeCodepipeline SourceType = "CODEPIPELINE"
-	SourceTypeGithub       SourceType = "GITHUB"
-	SourceTypeS3           SourceType = "S3"
-	SourceTypeBitbucket    SourceType = "BITBUCKET"
+	SourceTypeCodecommit       SourceType = "CODECOMMIT"
+	SourceTypeCodepipeline     SourceType = "CODEPIPELINE"
+	SourceTypeGithub           SourceType = "GITHUB"
+	SourceTypeS3               SourceType = "S3"
+	SourceTypeBitbucket        SourceType = "BITBUCKET"
+	SourceTypeGithubEnterprise SourceType = "GITHUB_ENTERPRISE"
 )
 
 func (enum SourceType) MarshalValue() (string, error) {

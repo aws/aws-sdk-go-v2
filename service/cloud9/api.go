@@ -32,8 +32,8 @@ func (r CreateEnvironmentEC2Request) Send() (*CreateEnvironmentEC2Output, error)
 // AWS Cloud9.
 //
 // Creates an AWS Cloud9 development environment, launches an Amazon Elastic
-// Compute Cloud (Amazon EC2) instance, and then hosts the environment on the
-// instance.
+// Compute Cloud (Amazon EC2) instance, and then connects from the instance
+// to the environment.
 //
 //    // Example sending a request using the CreateEnvironmentEC2Request method.
 //    req := client.CreateEnvironmentEC2Request(params)
@@ -133,9 +133,8 @@ func (r DeleteEnvironmentRequest) Send() (*DeleteEnvironmentOutput, error) {
 // DeleteEnvironmentRequest returns a request value for making API operation for
 // AWS Cloud9.
 //
-// Deletes an AWS Cloud9 development environment. If the environment is hosted
-// on an Amazon Elastic Compute Cloud (Amazon EC2) instance, also terminates
-// the instance.
+// Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance
+// is connected to the environment, also terminates the instance.
 //
 //    // Example sending a request using the DeleteEnvironmentRequest method.
 //    req := client.DeleteEnvironmentRequest(params)
@@ -637,7 +636,7 @@ type CreateEnvironmentEC2Input struct {
 	// The description of the environment to create.
 	Description *string `locationName:"description" type:"string"`
 
-	// The type of instance to host the environment on (for example, t2.micro).
+	// The type of instance to connect to the environment (for example, t2.micro).
 	//
 	// InstanceType is a required field
 	InstanceType *string `locationName:"instanceType" min:"5" type:"string" required:"true"`
@@ -1082,7 +1081,7 @@ func (s DescribeEnvironmentStatusOutput) SDKResponseMetadata() aws.Response {
 type DescribeEnvironmentsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The IDs of invidividual environments to get information about.
+	// The IDs of individual environments to get information about.
 	//
 	// EnvironmentIds is a required field
 	EnvironmentIds []string `locationName:"environmentIds" min:"1" type:"list" required:"true"`
@@ -1162,10 +1161,10 @@ type Environment struct {
 
 	// The type of environment. Valid values include the following:
 	//
-	//    * ec2: An environment hosted on an Amazon Elastic Compute Cloud (Amazon
-	//    EC2) instance.
+	//    * ec2: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects
+	//    to the environment.
 	//
-	//    * ssh: An environment hosted on your own server.
+	//    * ssh: Your own server connects to the environment.
 	Type EnvironmentType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -1288,7 +1287,7 @@ type UpdateEnvironmentInput struct {
 	// EnvironmentId is a required field
 	EnvironmentId *string `locationName:"environmentId" type:"string" required:"true"`
 
-	// Any replacement name for the environment.
+	// A replacement name for the environment.
 	Name *string `locationName:"name" min:"1" type:"string"`
 }
 

@@ -32,9 +32,9 @@ func (r GetCostAndUsageRequest) Send() (*GetCostAndUsageOutput, error) {
 // Retrieve cost and usage metrics for your account. You can specify which cost
 // and usage-related metric, such as BlendedCosts or UsageQuantity, that you
 // want the request to return. You can also filter and group your data by various
-// dimensions, such as AWS Service or AvailabilityZone, in a specific time range.
-// See the GetDimensionValues action for a complete list of the valid dimensions.
-// Master accounts in an organization have access to all member accounts.
+// dimensions, such as SERVICE or AZ, in a specific time range. See the GetDimensionValues
+// action for a complete list of the valid dimensions. Master accounts in an
+// organization have access to all member accounts.
 //
 //    // Example sending a request using the GetCostAndUsageRequest method.
 //    req := client.GetCostAndUsageRequest(params)
@@ -112,6 +112,72 @@ func (c *CostExplorer) GetDimensionValuesRequest(input *GetDimensionValuesInput)
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetDimensionValuesRequest{Request: req, Input: input, Copy: c.GetDimensionValuesRequest}
+}
+
+const opGetReservationCoverage = "GetReservationCoverage"
+
+// GetReservationCoverageRequest is a API request type for the GetReservationCoverage API operation.
+type GetReservationCoverageRequest struct {
+	*aws.Request
+	Input *GetReservationCoverageInput
+	Copy  func(*GetReservationCoverageInput) GetReservationCoverageRequest
+}
+
+// Send marshals and sends the GetReservationCoverage API request.
+func (r GetReservationCoverageRequest) Send() (*GetReservationCoverageOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetReservationCoverageOutput), nil
+}
+
+// GetReservationCoverageRequest returns a request value for making API operation for
+// AWS Cost Explorer Service.
+//
+// Retrieve the reservation coverage for your account. An organization's master
+// account has access to the associated member accounts. For any time period,
+// you can filter data about reservation usage by the following dimensions.
+//
+//    * AZ
+//
+//    * INSTANCE_TYPE
+//
+//    * LINKED_ACCOUNT
+//
+//    * PLATFORM
+//
+//    * REGION
+//
+//    * TENANCY
+//
+// To determine valid values for a dimension, use the GetDimensionValues operation.
+//
+//    // Example sending a request using the GetReservationCoverageRequest method.
+//    req := client.GetReservationCoverageRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationCoverage
+func (c *CostExplorer) GetReservationCoverageRequest(input *GetReservationCoverageInput) GetReservationCoverageRequest {
+	op := &aws.Operation{
+		Name:       opGetReservationCoverage,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetReservationCoverageInput{}
+	}
+
+	output := &GetReservationCoverageOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetReservationCoverageRequest{Request: req, Input: input, Copy: c.GetReservationCoverageRequest}
 }
 
 const opGetReservationUtilization = "GetReservationUtilization"
@@ -219,6 +285,78 @@ func (c *CostExplorer) GetTagsRequest(input *GetTagsInput) GetTagsRequest {
 	return GetTagsRequest{Request: req, Input: input, Copy: c.GetTagsRequest}
 }
 
+// The amount of instance usage that a reservation covered.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Coverage
+type Coverage struct {
+	_ struct{} `type:"structure"`
+
+	// The amount of instance usage that a reservation covered, in hours.
+	CoverageHours *CoverageHours `type:"structure"`
+}
+
+// String returns the string representation
+func (s Coverage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Coverage) GoString() string {
+	return s.String()
+}
+
+// Reservation coverage, in hours.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageByTime
+type CoverageByTime struct {
+	_ struct{} `type:"structure"`
+
+	// The group of instances that a reservation covered.
+	Groups []ReservationCoverageGroup `type:"list"`
+
+	// The period over which this coverage was used.
+	TimePeriod *DateInterval `type:"structure"`
+
+	// The total reservation coverage, in hours.
+	Total *Coverage `type:"structure"`
+}
+
+// String returns the string representation
+func (s CoverageByTime) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CoverageByTime) GoString() string {
+	return s.String()
+}
+
+// How long a running instance either used a reservation or was On-Demand.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CoverageHours
+type CoverageHours struct {
+	_ struct{} `type:"structure"`
+
+	// The percentage of instance hours covered by a reservation.
+	CoverageHoursPercentage *string `type:"string"`
+
+	// The number of instance running hours covered by On-Demand Instances.
+	OnDemandHours *string `type:"string"`
+
+	// The number of instance running hours covered by reservations.
+	ReservedHours *string `type:"string"`
+
+	// The total instance usage, in hours.
+	TotalRunningHours *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CoverageHours) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CoverageHours) GoString() string {
+	return s.String()
+}
+
 // The time period that you want the usage and costs for.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/DateInterval
 type DateInterval struct {
@@ -319,10 +457,10 @@ func (s DimensionValuesWithAttributes) GoString() string {
 //
 //    * Simple dimension values - You can set the dimension name and values
 //    for the filters that you plan to use. For example, you can filter for
-//    InstanceType==m4.xlarge OR InstanceType==c4.large. The Expression for
+//    INSTANCE_TYPE==m4.xlarge OR INSTANCE_TYPE==c4.large. The Expression for
 //    that looks like this.
 //
-// { "Dimensions": { "Key": "InstanceType", "Values": [ "m4.xlarge", “c4.large”
+// { "Dimensions": { "Key": "INSTANCE_TYPE", "Values": [ "m4.xlarge", “c4.large”
 //    ] } }
 //
 // The list of dimension values are OR'd together to retrieve cost or usage
@@ -332,20 +470,20 @@ func (s DimensionValuesWithAttributes) GoString() string {
 //    * Compound dimension values with logical operations - You can use multiple
 //    Expression types and the logical operators AND/OR/NOT to create a list
 //    of one or more Expression objects. This allows you to filter on more advanced
-//    options. For example, you can filter on ((InstanceType == m4.large OR
-//    InstanceType == m3.large) OR (Tag.Type == Type1)) AND (UsageType != DataTransfer).
-//    The Expression for that looks like this.
+//    options. For example, you can filter on ((INSTANCE_TYPE == m4.large OR
+//    INSTANCE_TYPE == m3.large) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
+//    DataTransfer). The Expression for that looks like this.
 //
-// { "And": [ {"Or": [ {"Dimensions": { "Key": "InstanceType", "Values": [ "m4.x.large",
-//    "c4.large" ] }}, {"Tag": { "Key": "TagName", "Values": ["Value1"] } }
-//    ]}, {"Not": {"dimensions": { "Key": "UsageType", "Values": ["DataTransfer"]
+// { "And": [ {"Or": [ {"Dimensions": { "Key": "INSTANCE_TYPE", "Values": [
+//    "m4.x.large", "c4.large" ] }}, {"Tag": { "Key": "TagName", "Values": ["Value1"]
+//    } } ]}, {"Not": {"dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
 //    }}} ] }
 //
 // Because each Expression can have only one operator, the service returns an
 //    error if more than one is specified. The following example shows an Expression
 //    object that will create an error.
 //
-//  { "And": [ ... ], "DimensionValues": { "Dimension": "UsageType", "Values":
+//  { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE", "Values":
 //    [ "DataTransfer" ] } }
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/Expression
 type Expression struct {
@@ -381,14 +519,14 @@ func (s Expression) GoString() string {
 type GetCostAndUsageInput struct {
 	_ struct{} `type:"structure"`
 
-	// Filters AWS costs by different dimensions. For example, you can specify Service
-	// and Linked Account and get the costs associated with that account's usage
+	// Filters AWS costs by different dimensions. For example, you can specify SERVICE
+	// and LINKED_ACCOUNT and get the costs associated with that account's usage
 	// of that service. You can nest Expression objects to define any combination
-	// of dimension filters. For more information, see the Expression object or
-	// More Examples.
+	// of dimension filters. For more information, see Expression (http://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
 	Filter *Expression `type:"structure"`
 
-	// Sets the AWS cost granularity to MONTHLY or DAILY.
+	// Sets the AWS cost granularity to MONTHLY or DAILY. If Granularity isn't set,
+	// the response object doesn't include the Granularity, either MONTHLY or DAILY.
 	Granularity Granularity `type:"string" enum:"true"`
 
 	// You can group AWS costs using up to two different groups, either dimensions,
@@ -396,12 +534,13 @@ type GetCostAndUsageInput struct {
 	//
 	// When you group by tag key, you get all tag values, including empty strings.
 	//
-	// Valid values are: AZ, INSTANCE_TYPE, LINKED_ACCCOUNT, OPERATION, PURCHASE_TYPE,
-	// SERVICE, USAGE_TYPE, TAGS, and PLATFORM.
+	// Valid values are AZ, INSTANCE_TYPE, LINKED_ACCOUNT, OPERATION, PLATFORM,
+	// PURCHASE_TYPE, SERVICE, TAGS, TENANCY, and USAGE_TYPE.
 	GroupBy []GroupDefinition `type:"list"`
 
 	// Which metrics are returned in the query. For more information about blended
-	// and unblended rates, see https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/.
+	// and unblended rates, see Why does the "blended" annotation appear on some
+	// line items in my bill? (https://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/).
 	//
 	// Valid values are BlendedCost, UnblendedCost, and UsageQuantity.
 	//
@@ -487,64 +626,65 @@ func (s GetCostAndUsageOutput) SDKResponseMetadata() aws.Response {
 type GetDimensionValuesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The context for the call to GetDimensionValues. This can be RESERVED_INSTANCE
+	// The context for the call to GetDimensionValues. This can be RESERVATIONS
 	// or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is
-	// set to RESERVED_INSTANCE, the resulting dimension values can be used in the
-	// GetReservationUtilization action. If the context is set to COST_AND_USAGE,
-	// , the resulting dimension values can be used in the GetCostAndUsage operation.
+	// set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization
+	// action. If the context is set to COST_AND_USAGE, the resulting dimension
+	// values can be used in the GetCostAndUsage operation.
 	//
 	// If you set the context to CostAndUsage, you can use the following dimensions
 	// for searching:
 	//
 	//    * AZ - The Availability Zone. An example is us-east-1a.
 	//
-	//    * InstanceType - The type of EC2 instance. An example is m4.xlarge.
+	//    * INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.
 	//
-	//    * LinkedAccount - The description in the attribute map that includes the
-	//    full name of the member account. The value field contains the AWS ID of
-	//    the member account
+	//    * LINKED_ACCOUNT - The description in the attribute map that includes
+	//    the full name of the member account. The value field contains the AWS
+	//    ID of the member account
 	//
-	//    * Operation - The action performed. Examples include RunInstance and CreateBucket.
+	//    * OPERATION - The action performed. Examples include RunInstance and CreateBucket.
 	//
-	//    * PurchaseType - The reservation type of the purchase to which this usage
+	//    * PURCHASE_TYPE - The reservation type of the purchase to which this usage
 	//    is related. Examples include: On Demand Instances and Standard Reserved
 	//    Instances
 	//
-	//    * Service - The AWS service such as DynamoDB.
+	//    * SERVICE - The AWS service such as DynamoDB.
 	//
-	//    * UsageType -The type of usage. An example is DataTransfer-In-Bytes. The
-	//    response for the GetDimensionValues action includes a unit attribute,
+	//    * USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes.
+	//    The response for the GetDimensionValues action includes a unit attribute,
 	//    examples of which include GB and Hrs.
 	//
-	//    * UsageTypeGroup - The grouping of common usage types. An example is EC2:
-	//    CloudWatch – Alarms. The response for this action includes a unit attribute.
+	//    * USAGE_TYPE_GROUP - The grouping of common usage types. An example is
+	//    EC2: CloudWatch – Alarms. The response for this action includes a unit
+	//    attribute.
 	//
-	//    * RecordType - The different types of charges such as RI fees, usage costs,
-	//    tax refunds, and credits
+	//    * RECORD_TYPE - The different types of charges such as RI fees, usage
+	//    costs, tax refunds, and credits.
 	//
-	// If you set the context to ReservedInstance, you can use the following dimensions
+	// If you set the context to RESERVATIONS, you can use the following dimensions
 	// for searching:
 	//
 	//    * AZ - The Availability Zone. An example is us-east-1a.
 	//
-	//    * InstanceType - The type of EC2 instance. An example is m4.xlarge.
+	//    * INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.
 	//
-	//    * LinkedAccount - The description in the attribute map that includes the
-	//    full name of the member account. The value field contains the AWS ID of
-	//    the member account
+	//    * LINKED_ACCOUNT - The description in the attribute map that includes
+	//    the full name of the member account. The value field contains the AWS
+	//    ID of the member account
 	//
-	//    * Platform - The operating system. Examples are Windows or Linux.
+	//    * PLATFORM - The operating system. Examples are Windows or Linux.
 	//
-	//    * Region - The AWS region.
+	//    * REGION - The AWS region.
 	//
-	//    * Scope - The scope of a reserved instance (RI). Values are regional or
+	//    * SCOPE - The scope of a reserved instance (RI). Values are regional or
 	//    a single availability zone.
 	//
-	//    * Tenancy - The tenancy of a resource. Examples are shared or dedicated.
+	//    * TENANCY - The tenancy of a resource. Examples are shared or dedicated.
 	Context Context `type:"string" enum:"true"`
 
-	// The name of the dimension. Different Dimensionsare available for different
-	// Contexts. For more information, see Context.
+	// The name of the dimension. Each Dimensionsis available for different a Context.
+	// For more information, see Context.
 	//
 	// Dimension is a required field
 	Dimension Dimension `type:"string" required:"true" enum:"true"`
@@ -612,49 +752,50 @@ type GetDimensionValuesOutput struct {
 	//
 	//    * AZ - The Availability Zone. An example is us-east-1a.
 	//
-	//    * InstanceType - The type of EC2 instance. An example is m4.xlarge.
+	//    * INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.
 	//
-	//    * LinkedAccount - The description in the attribute map that includes the
-	//    full name of the member account. The value field contains the AWS ID of
-	//    the member account
+	//    * LINKED_ACCOUNT - The description in the attribute map that includes
+	//    the full name of the member account. The value field contains the AWS
+	//    ID of the member account
 	//
-	//    * Operation - The action performed. Examples include RunInstance and CreateBucket.
+	//    * OPERATION - The action performed. Examples include RunInstance and CreateBucket.
 	//
-	//    * PurchaseType - The reservation type of the purchase to which this usage
+	//    * PURCHASE_TYPE - The reservation type of the purchase to which this usage
 	//    is related. Examples include: On Demand Instances and Standard Reserved
 	//    Instances
 	//
-	//    * Service - The AWS service such as DynamoDB.
+	//    * SERVICE - The AWS service such as DynamoDB.
 	//
-	//    * UsageType -The type of usage. An example is DataTransfer-In-Bytes. The
-	//    response for the GetDimensionValues action includes a unit attribute,
+	//    * USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes.
+	//    The response for the GetDimensionValues action includes a unit attribute,
 	//    examples of which include GB and Hrs.
 	//
-	//    * UsageTypeGroup - The grouping of common usage types. An example is EC2:
-	//    CloudWatch – Alarms. The response for this action includes a unit attribute.
+	//    * USAGE_TYPE_GROUP - The grouping of common usage types. An example is
+	//    EC2: CloudWatch – Alarms. The response for this action includes a unit
+	//    attribute.
 	//
-	//    * RecordType - The different types of charges such as RI fees, usage costs,
-	//    tax refunds, and credits
+	//    * RECORD_TYPE - The different types of charges such as RI fees, usage
+	//    costs, tax refunds, and credits.
 	//
-	// If you set the context to ReservedInstance, you can use the following dimensions
+	// If you set the context to RESERVATIONS, you can use the following dimensions
 	// for searching:
 	//
 	//    * AZ - The Availability Zone. An example is us-east-1a.
 	//
-	//    * InstanceType - The type of EC2 instance. An example is m4.xlarge.
+	//    * INSTANCE_TYPE - The type of EC2 instance. An example is m4.xlarge.
 	//
-	//    * LinkedAccount - The description in the attribute map that includes the
-	//    full name of the member account. The value field contains the AWS ID of
-	//    the member account
+	//    * LINKED_ACCOUNT - The description in the attribute map that includes
+	//    the full name of the member account. The value field contains the AWS
+	//    ID of the member account
 	//
-	//    * Platform - The operating system. Examples are Windows or Linux.
+	//    * PLATFORM - The operating system. Examples are Windows or Linux.
 	//
-	//    * Region - The AWS region.
+	//    * REGION - The AWS region.
 	//
-	//    * Scope - The scope of a reserved instance (RI). Values are regional or
+	//    * SCOPE - The scope of a reserved instance (RI). Values are regional or
 	//    a single availability zone.
 	//
-	//    * Tenancy - The tenancy of a resource. Examples are shared or dedicated.
+	//    * TENANCY - The tenancy of a resource. Examples are shared or dedicated.
 	//
 	// DimensionValues is a required field
 	DimensionValues []DimensionValuesWithAttributes `type:"list" required:"true"`
@@ -690,6 +831,132 @@ func (s GetDimensionValuesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// You can query for how much of your instance usage was covered by a reservation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationCoverageRequest
+type GetReservationCoverageInput struct {
+	_ struct{} `type:"structure"`
+
+	// Filters utilization data by dimensions. You can filter by the following dimensions.
+	//
+	//    * AZ
+	//
+	//    * INSTANCE_TYPE
+	//
+	//    * LINKED_ACCOUNT
+	//
+	//    * PLATFORM
+	//
+	//    * REGION
+	//
+	//    * TENANCY
+	//
+	// GetReservationCoverage uses the same Expression object as the other operations,
+	// but only AND is supported among each dimension. You can nest only one level
+	// deep. If there are multiple values for a dimension, they are OR'd together.
+	Filter *Expression `type:"structure"`
+
+	// The granularity of the AWS cost data for the reservation. Valid values are
+	// MONTHLY and DAILY.
+	//
+	// If GroupBy is set, Granularity can't be set. If Granularity isn't set, the
+	// response object doesn't include the Granularity, either MONTHLY or DAILY.
+	Granularity Granularity `type:"string" enum:"true"`
+
+	// You can group the data by the following attributes.
+	//
+	//    * AZ
+	//
+	//    * INSTANCE_TYPE
+	//
+	//    * LINKED_ACCOUNT
+	//
+	//    * PLATFORM
+	//
+	//    * REGION
+	//
+	//    * TENANCY
+	GroupBy []GroupDefinition `type:"list"`
+
+	// The token to retrieve the next set of results. AWS provides the token when
+	// the response from a previous call has more results than the maximum page
+	// size.
+	NextPageToken *string `type:"string"`
+
+	// The start and end dates of the period for which you want to retrieve data
+	// about reservation coverage. You can retrieve data for a maximum of 13 months-the
+	// last 12 months and the current month. The start date is inclusive, but the
+	// end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01,
+	// then the cost and usage data is retrieved from 2017-01-01 up to and including
+	// 2017-04-30 but not including 2017-05-01.
+	//
+	// TimePeriod is a required field
+	TimePeriod *DateInterval `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetReservationCoverageInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetReservationCoverageInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetReservationCoverageInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetReservationCoverageInput"}
+
+	if s.TimePeriod == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TimePeriod"))
+	}
+	if s.TimePeriod != nil {
+		if err := s.TimePeriod.Validate(); err != nil {
+			invalidParams.AddNested("TimePeriod", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationCoverageResponse
+type GetReservationCoverageOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The amount of time that your reservations covered.
+	//
+	// CoveragesByTime is a required field
+	CoveragesByTime []CoverageByTime `type:"list" required:"true"`
+
+	// The token for the next set of retrievable results. AWS provides the token
+	// when the response from a previous call has more results than the maximum
+	// page size.
+	NextPageToken *string `type:"string"`
+
+	// The total amount of instance usage covered by a reservation.
+	Total *Coverage `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetReservationCoverageOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetReservationCoverageOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetReservationCoverageOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/GetReservationUtilizationRequest
 type GetReservationUtilizationInput struct {
 	_ struct{} `type:"structure"`
@@ -700,13 +967,13 @@ type GetReservationUtilizationInput struct {
 	// deep. If there are multiple values for a dimension, they are OR'd together.
 	Filter *Expression `type:"structure"`
 
-	// Sets the AWS cost granularity to MONTHLY or DAILY. If both GroupBy and granularity
-	// are not set, GetReservationUtilization defaults to DAILY. If GroupBy is set,
-	// Granularity can't be set, and the response object doesn't include MONTHLY
-	// or DAILY granularity.
+	// If GroupBy is set, Granularity can't be set. If Granularity isn't set, the
+	// response object doesn't include the Granularity, either MONTHLY or DAILY.
+	// If both GroupBy and Granularity aren't set, GetReservationUtilization defaults
+	// to DAILY.
 	Granularity Granularity `type:"string" enum:"true"`
 
-	// Groups only by SubscriptionId. Metadata is included.
+	// Groups only by SUBSCRIPTION_ID. Metadata is included.
 	GroupBy []GroupDefinition `type:"list"`
 
 	// The token to retrieve the next set of results. AWS provides the token when
@@ -978,6 +1245,28 @@ func (s ReservationAggregates) GoString() string {
 	return s.String()
 }
 
+// A group of reservations that share a set of attributes.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationCoverageGroup
+type ReservationCoverageGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The attributes for this group of reservations.
+	Attributes map[string]string `type:"map"`
+
+	// How much instance usage this group of reservations covered.
+	Coverage *Coverage `type:"structure"`
+}
+
+// String returns the string representation
+func (s ReservationCoverageGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReservationCoverageGroup) GoString() string {
+	return s.String()
+}
+
 // A group of RIs that share a set of attributes.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ReservationUtilizationGroup
 type ReservationUtilizationGroup struct {
@@ -1102,21 +1391,26 @@ type Dimension string
 
 // Enum values for Dimension
 const (
-	DimensionAz              Dimension = "AZ"
-	DimensionInstanceType    Dimension = "INSTANCE_TYPE"
-	DimensionLinkedAccount   Dimension = "LINKED_ACCOUNT"
-	DimensionOperation       Dimension = "OPERATION"
-	DimensionPurchaseType    Dimension = "PURCHASE_TYPE"
-	DimensionRegion          Dimension = "REGION"
-	DimensionService         Dimension = "SERVICE"
-	DimensionUsageType       Dimension = "USAGE_TYPE"
-	DimensionUsageTypeGroup  Dimension = "USAGE_TYPE_GROUP"
-	DimensionRecordType      Dimension = "RECORD_TYPE"
-	DimensionOperatingSystem Dimension = "OPERATING_SYSTEM"
-	DimensionTenancy         Dimension = "TENANCY"
-	DimensionScope           Dimension = "SCOPE"
-	DimensionPlatform        Dimension = "PLATFORM"
-	DimensionSubscriptionId  Dimension = "SUBSCRIPTION_ID"
+	DimensionAz                 Dimension = "AZ"
+	DimensionInstanceType       Dimension = "INSTANCE_TYPE"
+	DimensionLinkedAccount      Dimension = "LINKED_ACCOUNT"
+	DimensionOperation          Dimension = "OPERATION"
+	DimensionPurchaseType       Dimension = "PURCHASE_TYPE"
+	DimensionRegion             Dimension = "REGION"
+	DimensionService            Dimension = "SERVICE"
+	DimensionUsageType          Dimension = "USAGE_TYPE"
+	DimensionUsageTypeGroup     Dimension = "USAGE_TYPE_GROUP"
+	DimensionRecordType         Dimension = "RECORD_TYPE"
+	DimensionOperatingSystem    Dimension = "OPERATING_SYSTEM"
+	DimensionTenancy            Dimension = "TENANCY"
+	DimensionScope              Dimension = "SCOPE"
+	DimensionPlatform           Dimension = "PLATFORM"
+	DimensionSubscriptionId     Dimension = "SUBSCRIPTION_ID"
+	DimensionLegalEntityName    Dimension = "LEGAL_ENTITY_NAME"
+	DimensionDeploymentOption   Dimension = "DEPLOYMENT_OPTION"
+	DimensionDatabaseEngine     Dimension = "DATABASE_ENGINE"
+	DimensionCacheEngine        Dimension = "CACHE_ENGINE"
+	DimensionInstanceTypeFamily Dimension = "INSTANCE_TYPE_FAMILY"
 )
 
 func (enum Dimension) MarshalValue() (string, error) {

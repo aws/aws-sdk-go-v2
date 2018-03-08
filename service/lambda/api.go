@@ -458,7 +458,8 @@ func (r DeleteFunctionConcurrencyRequest) Send() (*DeleteFunctionConcurrencyOutp
 // DeleteFunctionConcurrencyRequest returns a request value for making API operation for
 // AWS Lambda.
 //
-// Removes concurrent execution limits from this function.
+// Removes concurrent execution limits from this function. For more information,
+// see concurrent-executions.
 //
 //    // Example sending a request using the DeleteFunctionConcurrencyRequest method.
 //    req := client.DeleteFunctionConcurrencyRequest(params)
@@ -866,6 +867,13 @@ func (r InvokeRequest) Send() (*InvokeOutput, error) {
 // see AWS Lambda Function Versioning and Aliases (http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
 //
 // This operation requires permission for the lambda:InvokeFunction action.
+//
+// The TooManyRequestsException noted below will return the following: ConcurrentInvocationLimitExceeded
+// will be returned if you have no functions with reserved concurrency and have
+// exceeded your account concurrent limit or if a function without reserved
+// concurrency exceeds the account's unreserved concurrency limit. ReservedFunctionConcurrentInvocationLimitExceeded
+// will be returned when a function with reserved concurrency exceeds its configured
+// concurrency limit.
 //
 //    // Example sending a request using the InvokeRequest method.
 //    req := client.InvokeRequest(params)
@@ -1414,7 +1422,7 @@ func (r PutFunctionConcurrencyRequest) Send() (*PutFunctionConcurrencyOutput, er
 // Note that Lambda automatically reserves a buffer of 100 concurrent executions
 // for functions without any reserved concurrency limit. This means if your
 // account limit is 1000, you have a total of 900 available to allocate to individual
-// functions.
+// functions. For more information, see concurrent-executions.
 //
 //    // Example sending a request using the PutFunctionConcurrencyRequest method.
 //    req := client.PutFunctionConcurrencyRequest(params)
@@ -1877,7 +1885,7 @@ type AccountLimit struct {
 	TotalCodeSize *int64 `type:"long"`
 
 	// The number of concurrent executions available to functions that do not have
-	// concurrency limits set.
+	// concurrency limits set. For more information, see concurrent-executions.
 	UnreservedConcurrentExecutions *int64 `type:"integer"`
 }
 
@@ -2023,6 +2031,13 @@ type AddPermissionInput struct {
 	// arn:aws:lambda:aws-region:acct-id:function:function-name
 	Qualifier *string `location:"querystring" locationName:"Qualifier" min:"1" type:"string"`
 
+	// An optional value you can use to ensure you are updating the latest update
+	// of the function version or alias. If the RevisionID you pass doesn't match
+	// the latest RevisionId of the function or alias, it will fail with an error
+	// message, advising you to retrieve the latest function version or alias RevisionID
+	// using either or .
+	RevisionId *string `type:"string"`
+
 	// This parameter is used for S3 and SES. The AWS account ID (without a hyphen)
 	// of the source owner. For example, if the SourceArn identifies a bucket, then
 	// this is the bucket owner's account ID. You can use this additional condition
@@ -2114,6 +2129,12 @@ func (s AddPermissionInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Principal", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.RevisionId != nil {
+		v := *s.RevisionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.SourceAccount != nil {
 		v := *s.SourceAccount
 
@@ -2191,9 +2212,9 @@ func (s AddPermissionOutput) MarshalFields(e protocol.FieldEncoder) error {
 type AliasRoutingConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Set this property value to dictate what percentage of traffic will invoke
-	// the updated function version. If set to an empty string, 100 percent of traffic
-	// will invoke function-version.
+	// Set this value to dictate what percentage of traffic will invoke the updated
+	// function version. If set to an empty string, 100 percent of traffic will
+	// invoke function-version. For more information, see lambda-traffic-shifting-using-aliases.
 	AdditionalVersionWeights map[string]float64 `type:"map"`
 }
 
@@ -2538,7 +2559,7 @@ type CreateFunctionInput struct {
 	// Node v0.10.42 is currently marked as deprecated. You must migrate existing
 	// functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3
 	// or nodejs6.10) as soon as possible. Failure to do so will result in an invalid
-	// parmaeter error being returned. Note that you will have to follow this procedure
+	// parameter error being returned. Note that you will have to follow this procedure
 	// for each region that contains functions written in the Node v0.10.42 runtime.
 	//
 	// Runtime is a required field
@@ -2897,6 +2918,7 @@ type DeleteFunctionConcurrencyInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the function you are removing concurrent execution limits from.
+	// For more information, see concurrent-executions.
 	//
 	// FunctionName is a required field
 	FunctionName *string `location:"uri" locationName:"FunctionName" min:"1" type:"string" required:"true"`
@@ -3669,7 +3691,8 @@ type GetFunctionOutput struct {
 	// The object for the Lambda function location.
 	Code *FunctionCodeLocation `type:"structure"`
 
-	// The concurrent execution limit set for this function.
+	// The concurrent execution limit set for this function. For more information,
+	// see concurrent-executions.
 	Concurrency *PutFunctionConcurrencyOutput `type:"structure"`
 
 	// A complex type that describes function metadata.
@@ -3812,6 +3835,9 @@ type GetPolicyOutput struct {
 	// returns the same as a string using a backslash ("\") as an escape character
 	// in the JSON.
 	Policy *string `type:"string"`
+
+	// Represents the latest updated revision of the function or alias.
+	RevisionId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -3836,6 +3862,12 @@ func (s GetPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Policy", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RevisionId != nil {
+		v := *s.RevisionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -4072,7 +4104,7 @@ type InvokeOutput struct {
 	responseMetadata aws.Response
 
 	// The function version that has been executed. This value is returned only
-	// if the invocation type is RequestResponse.
+	// if the invocation type is RequestResponse. For more information, see lambda-traffic-shifting-using-aliases.
 	ExecutedVersion *string `location:"header" locationName:"X-Amz-Executed-Version" min:"1" type:"string"`
 
 	// Indicates whether an error occurred while executing the Lambda function.
@@ -4804,6 +4836,13 @@ type PublishVersionInput struct {
 	//
 	// FunctionName is a required field
 	FunctionName *string `location:"uri" locationName:"FunctionName" min:"1" type:"string" required:"true"`
+
+	// An optional value you can use to ensure you are updating the latest update
+	// of the function version or alias. If the RevisionID you pass doesn't match
+	// the latest RevisionId of the function or alias, it will fail with an error
+	// message, advising you to retrieve the latest function version or alias RevisionID
+	// using either or .
+	RevisionId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -4848,6 +4887,12 @@ func (s PublishVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.RevisionId != nil {
+		v := *s.RevisionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.FunctionName != nil {
 		v := *s.FunctionName
 
@@ -4862,11 +4907,13 @@ type PutFunctionConcurrencyInput struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the function you are setting concurrent execution limits on.
+	// For more information, see concurrent-executions.
 	//
 	// FunctionName is a required field
 	FunctionName *string `location:"uri" locationName:"FunctionName" min:"1" type:"string" required:"true"`
 
-	// The concurrent execution limit reserved for this function.
+	// The concurrent execution limit reserved for this function. For more information,
+	// see concurrent-executions.
 	//
 	// ReservedConcurrentExecutions is a required field
 	ReservedConcurrentExecutions *int64 `type:"integer" required:"true"`
@@ -4927,7 +4974,8 @@ type PutFunctionConcurrencyOutput struct {
 
 	responseMetadata aws.Response
 
-	// The number of concurrent executions reserved for this function.
+	// The number of concurrent executions reserved for this function. For more
+	// information, see concurrent-executions.
 	ReservedConcurrentExecutions *int64 `type:"integer"`
 }
 
@@ -4977,6 +5025,13 @@ type RemovePermissionInput struct {
 	// parameter, the API removes permission associated with the unqualified function
 	// ARN.
 	Qualifier *string `location:"querystring" locationName:"Qualifier" min:"1" type:"string"`
+
+	// An optional value you can use to ensure you are updating the latest update
+	// of the function version or alias. If the RevisionID you pass doesn't match
+	// the latest RevisionId of the function or alias, it will fail with an error
+	// message, advising you to retrieve the latest function version or alias RevisionID
+	// using either or .
+	RevisionId *string `location:"querystring" locationName:"RevisionId" type:"string"`
 
 	// Statement ID of the permission to remove.
 	//
@@ -5041,6 +5096,12 @@ func (s RemovePermissionInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.QueryTarget, "Qualifier", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RevisionId != nil {
+		v := *s.RevisionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5347,6 +5408,13 @@ type UpdateAliasInput struct {
 	// Name is a required field
 	Name *string `location:"uri" locationName:"Name" min:"1" type:"string" required:"true"`
 
+	// An optional value you can use to ensure you are updating the latest update
+	// of the function version or alias. If the RevisionID you pass doesn't match
+	// the latest RevisionId of the function or alias, it will fail with an error
+	// message, advising you to retrieve the latest function version or alias RevisionID
+	// using either or .
+	RevisionId *string `type:"string"`
+
 	// Specifies an additional version your alias can point to, allowing you to
 	// dictate what percentage of traffic will invoke each version. For more information,
 	// see lambda-traffic-shifting-using-aliases.
@@ -5405,6 +5473,12 @@ func (s UpdateAliasInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "FunctionVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.RevisionId != nil {
+		v := *s.RevisionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.RoutingConfig != nil {
 		v := s.RoutingConfig
 
@@ -5446,6 +5520,9 @@ type UpdateAliasOutput struct {
 
 	// Alias name.
 	Name *string `min:"1" type:"string"`
+
+	// Represents the latest updated revision of the function or alias.
+	RevisionId *string `type:"string"`
 
 	// Specifies an additional function versions the alias points to, allowing you
 	// to dictate what percentage of traffic will invoke each version. For more
@@ -5493,6 +5570,12 @@ func (s UpdateAliasOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RevisionId != nil {
+		v := *s.RevisionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RoutingConfig != nil {
 		v := s.RoutingConfig
@@ -5730,6 +5813,13 @@ type UpdateFunctionCodeInput struct {
 	// function and publish a version as an atomic operation.
 	Publish *bool `type:"boolean"`
 
+	// An optional value you can use to ensure you are updating the latest update
+	// of the function version or alias. If the RevisionID you pass doesn't match
+	// the latest RevisionId of the function or alias, it will fail with an error
+	// message, advising you to retrieve the latest function version or alias RevisionID
+	// using either or .
+	RevisionId *string `type:"string"`
+
 	// Amazon S3 bucket name where the .zip file containing your deployment package
 	// is stored. This bucket must reside in the same AWS Region where you are creating
 	// the Lambda function.
@@ -5802,6 +5892,12 @@ func (s UpdateFunctionCodeInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Publish", protocol.BoolValue(v), metadata)
+	}
+	if s.RevisionId != nil {
+		v := *s.RevisionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.S3Bucket != nil {
 		v := *s.S3Bucket
@@ -5878,6 +5974,13 @@ type UpdateFunctionConfigurationInput struct {
 	// function. The default value is 128 MB. The value must be a multiple of 64
 	// MB.
 	MemorySize *int64 `min:"128" type:"integer"`
+
+	// An optional value you can use to ensure you are updating the latest update
+	// of the function version or alias. If the RevisionID you pass doesn't match
+	// the latest RevisionId of the function or alias, it will fail with an error
+	// message, advising you to retrieve the latest function version or alias RevisionID
+	// using either or .
+	RevisionId *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that Lambda will assume when
 	// it executes your function.
@@ -5985,6 +6088,12 @@ func (s UpdateFunctionConfigurationInput) MarshalFields(e protocol.FieldEncoder)
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MemorySize", protocol.Int64Value(v), metadata)
 	}
+	if s.RevisionId != nil {
+		v := *s.RevisionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Role != nil {
 		v := *s.Role
 
@@ -6075,6 +6184,9 @@ type UpdateFunctionConfigurationOutput struct {
 	// The memory size, in MB, you configured for the function. Must be a multiple
 	// of 64 MB.
 	MemorySize *int64 `min:"128" type:"integer"`
+
+	// Represents the latest updated revision of the function or alias.
+	RevisionId *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that Lambda assumes when it
 	// executes your function to access any other Amazon Web Services (AWS) resources.
@@ -6186,6 +6298,12 @@ func (s UpdateFunctionConfigurationOutput) MarshalFields(e protocol.FieldEncoder
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MemorySize", protocol.Int64Value(v), metadata)
+	}
+	if s.RevisionId != nil {
+		v := *s.RevisionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RevisionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Role != nil {
 		v := *s.Role
@@ -6420,7 +6538,9 @@ const (
 	RuntimePython27     Runtime = "python2.7"
 	RuntimePython36     Runtime = "python3.6"
 	RuntimeDotnetcore10 Runtime = "dotnetcore1.0"
+	RuntimeDotnetcore20 Runtime = "dotnetcore2.0"
 	RuntimeNodejs43Edge Runtime = "nodejs4.3-edge"
+	RuntimeGo1X         Runtime = "go1.x"
 )
 
 func (enum Runtime) MarshalValue() (string, error) {

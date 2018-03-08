@@ -149,11 +149,13 @@ func (r CreateListenerRequest) Send() (*CreateListenerOutput, error) {
 // Creates a listener for the specified Application Load Balancer or Network
 // Load Balancer.
 //
-// You can create up to 10 listeners per load balancer.
-//
 // To update a listener, use ModifyListener. When you are finished with a listener,
 // you can delete it using DeleteListener. If you are finished with both the
 // listener and the load balancer, you can delete them both using DeleteLoadBalancer.
+//
+// This operation is idempotent, which means that it completes at most one time.
+// If you attempt to create multiple listeners with the same settings, each
+// call succeeds.
 //
 // For more information, see Listeners for Your Application Load Balancers (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html)
 // in the Application Load Balancers Guide and Listeners for Your Network Load
@@ -210,20 +212,22 @@ func (r CreateLoadBalancerRequest) Send() (*CreateLoadBalancerOutput, error) {
 //
 // Creates an Application Load Balancer or a Network Load Balancer.
 //
-// When you create a load balancer, you can specify security groups, subnets,
-// IP address type, and tags. Otherwise, you could do so later using SetSecurityGroups,
-// SetSubnets, SetIpAddressType, and AddTags.
+// When you create a load balancer, you can specify security groups, public
+// subnets, IP address type, and tags. Otherwise, you could do so later using
+// SetSecurityGroups, SetSubnets, SetIpAddressType, and AddTags.
 //
 // To create listeners for your load balancer, use CreateListener. To describe
 // your current load balancers, see DescribeLoadBalancers. When you are finished
 // with a load balancer, you can delete it using DeleteLoadBalancer.
 //
-// You can create up to 20 load balancers per region per account. You can request
-// an increase for the number of load balancers for your account. For more information,
-// see Limits for Your Application Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html)
+// For limit information, see Limits for Your Application Load Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html)
 // in the Application Load Balancers Guide and Limits for Your Network Load
 // Balancer (http://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-limits.html)
 // in the Network Load Balancers Guide.
+//
+// This operation is idempotent, which means that it completes at most one time.
+// If you attempt to create multiple load balancers with the same settings,
+// each call succeeds.
 //
 // For more information, see Application Load Balancers (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html)
 // in the Application Load Balancers Guide and Network Load Balancers (http://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html)
@@ -348,6 +352,10 @@ func (r CreateTargetGroupRequest) Send() (*CreateTargetGroupOutput, error) {
 // in an action using CreateListener or CreateRule.
 //
 // To delete a target group, use DeleteTargetGroup.
+//
+// This operation is idempotent, which means that it completes at most one time.
+// If you attempt to create multiple target groups with the same settings, each
+// call succeeds.
 //
 // For more information, see Target Groups for Your Application Load Balancers
 // (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
@@ -2000,7 +2008,7 @@ func (r SetSubnetsRequest) Send() (*SetSubnetsOutput, error) {
 // SetSubnetsRequest returns a request value for making API operation for
 // Elastic Load Balancing.
 //
-// Enables the Availability Zone for the specified subnets for the specified
+// Enables the Availability Zone for the specified public subnets for the specified
 // Application Load Balancer. The specified subnets replace the previously enabled
 // subnets.
 //
@@ -2426,32 +2434,34 @@ type CreateLoadBalancerInput struct {
 	// The default is an Internet-facing load balancer.
 	Scheme LoadBalancerSchemeEnum `type:"string" enum:"true"`
 
-	// [Application Load Balancers] The IDs of the security groups to assign to
-	// the load balancer.
+	// [Application Load Balancers] The IDs of the security groups for the load
+	// balancer.
 	SecurityGroups []string `type:"list"`
 
-	// The IDs of the subnets to attach to the load balancer. You can specify only
-	// one subnet per Availability Zone. You must specify either subnets or subnet
-	// mappings.
-	//
-	// [Network Load Balancers] You can specify one Elastic IP address per subnet.
-	//
-	// [Application Load Balancers] You cannot specify Elastic IP addresses for
-	// your subnets.
-	SubnetMappings []SubnetMapping `type:"list"`
-
-	// The IDs of the subnets to attach to the load balancer. You can specify only
-	// one subnet per Availability Zone. You must specify either subnets or subnet
-	// mappings.
+	// The IDs of the public subnets. You can specify only one subnet per Availability
+	// Zone. You must specify either subnets or subnet mappings.
 	//
 	// [Application Load Balancers] You must specify subnets from at least two Availability
+	// Zones. You cannot specify Elastic IP addresses for your subnets.
+	//
+	// [Network Load Balancers] You can specify subnets from one or more Availability
+	// Zones. You can specify one Elastic IP address per subnet.
+	SubnetMappings []SubnetMapping `type:"list"`
+
+	// The IDs of the public subnets. You can specify only one subnet per Availability
+	// Zone. You must specify either subnets or subnet mappings.
+	//
+	// [Application Load Balancers] You must specify subnets from at least two Availability
+	// Zones.
+	//
+	// [Network Load Balancers] You can specify subnets from one or more Availability
 	// Zones.
 	Subnets []string `type:"list"`
 
 	// One or more tags to assign to the load balancer.
 	Tags []Tag `min:"1" type:"list"`
 
-	// The type of load balancer to create. The default is application.
+	// The type of load balancer. The default is application.
 	Type LoadBalancerTypeEnum `type:"string" enum:"true"`
 }
 
@@ -3863,6 +3873,10 @@ type Limit struct {
 	//    * target-groups
 	//
 	//    * targets-per-application-load-balancer
+	//
+	//    * targets-per-availability-zone-per-network-load-balancer
+	//
+	//    * targets-per-network-load-balancer
 	Name *string `type:"string"`
 }
 
@@ -4025,6 +4039,13 @@ type LoadBalancerAttribute struct {
 	//    * idle_timeout.timeout_seconds - [Application Load Balancers] The idle
 	//    timeout value, in seconds. The valid range is 1-4000. The default is 60
 	//    seconds.
+	//
+	//    * load_balancing.cross_zone.enabled - [Network Load Balancers] Indicates
+	//    whether cross-zone load balancing is enabled. The value is true or false.
+	//    The default is false.
+	//
+	//    * routing.http2.enabled - [Application Load Balancers] Indicates whether
+	//    HTTP/2 is enabled. The value is true or false. The default is true.
 	Key *string `type:"string"`
 
 	// The value of the attribute.
@@ -5047,17 +5068,16 @@ type SetSubnetsInput struct {
 	// LoadBalancerArn is a required field
 	LoadBalancerArn *string `type:"string" required:"true"`
 
-	// The IDs of the subnets. You must specify subnets from at least two Availability
-	// Zones. You can specify only one subnet per Availability Zone. You must specify
-	// either subnets or subnet mappings.
+	// The IDs of the public subnets. You must specify subnets from at least two
+	// Availability Zones. You can specify only one subnet per Availability Zone.
+	// You must specify either subnets or subnet mappings.
 	//
-	// The load balancer is allocated one static IP address per subnet. You cannot
-	// specify your own Elastic IP addresses.
+	// You cannot specify Elastic IP addresses for your subnets.
 	SubnetMappings []SubnetMapping `type:"list"`
 
-	// The IDs of the subnets. You must specify subnets from at least two Availability
-	// Zones. You can specify only one subnet per Availability Zone. You must specify
-	// either subnets or subnet mappings.
+	// The IDs of the public subnets. You must specify subnets from at least two
+	// Availability Zones. You can specify only one subnet per Availability Zone.
+	// You must specify either subnets or subnet mappings.
 	//
 	// Subnets is a required field
 	Subnets []string `type:"list" required:"true"`
@@ -5360,6 +5380,9 @@ type TargetGroupAttribute struct {
 	//    Balancing to wait before changing the state of a deregistering target
 	//    from draining to unused. The range is 0-3600 seconds. The default value
 	//    is 300 seconds.
+	//
+	//    * proxy_protocol_v2.enabled - [Network Load Balancers] Indicates whether
+	//    Proxy Protocol version 2 is enabled.
 	//
 	//    * stickiness.enabled - [Application Load Balancers] Indicates whether
 	//    sticky sessions are enabled. The value is true or false.
