@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/s3iface"
@@ -671,12 +672,24 @@ type mockClient struct {
 	Put       func() (*s3.PutObjectOutput, error)
 	Get       func() (*s3.GetObjectOutput, error)
 	List      func() (*s3.ListObjectsOutput, error)
+	Deletes   func() (*s3.DeleteObjectsOutput, error)
 	responses []response
 }
 
 type response struct {
 	out interface{}
 	err error
+}
+
+func (client *mockClient) DeleteObjectsRequest(input *s3.DeleteObjectsInput) s3.DeleteObjectsRequest {
+	if client.Deletes == nil {
+		return client.S3API.DeleteObjectsRequest(input)
+	}
+
+	req := client.S3API.DeleteObjectsRequest(input)
+	req.Handlers.Clear()
+	req.Data, req.Error = client.Deletes()
+	return req
 }
 
 func (client *mockClient) PutObjectRequest(input *s3.PutObjectInput) s3.PutObjectRequest {
@@ -961,5 +974,96 @@ func TestAfter(t *testing.T) {
 
 	if !uploadIter.afterUpload {
 		t.Error("Expected 'afterUpload' to be true, but received false")
+	}
+}
+
+func TestBatchDeleteError(t *testing.T) {
+	cases := []struct {
+		objects            []BatchDeleteObject
+		output             s3.DeleteObjectsOutput
+		size               int
+		expectedErrCode    string
+		expectedErrMessage string
+	}{
+		{
+			[]BatchDeleteObject{
+				{
+					Object: &s3.DeleteObjectInput{
+						Key:    aws.String("1"),
+						Bucket: aws.String("bucket1"),
+					},
+				},
+			},
+			s3.DeleteObjectsOutput{
+				Errors: []s3.Error{
+					s3.Error{
+						Code:    aws.String("foo code"),
+						Message: aws.String("foo error"),
+					},
+				},
+			},
+			1,
+			"foo code",
+			"foo error",
+		},
+		{
+			[]BatchDeleteObject{
+				{
+					Object: &s3.DeleteObjectInput{
+						Key:    aws.String("1"),
+						Bucket: aws.String("bucket1"),
+					},
+				},
+			},
+			s3.DeleteObjectsOutput{
+				Errors: []s3.Error{
+					s3.Error{},
+				},
+			},
+			1,
+			ErrDeleteBatchFailCode,
+			errDefaultDeleteBatchMessage,
+		},
+	}
+
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNoContent)
+	}))
+
+	index := 0
+	svc := &mockClient{
+		S3API: buildS3SvcClient(server.URL),
+		Deletes: func() (*s3.DeleteObjectsOutput, error) {
+			resp := cases[index].output
+			index++
+			return &resp, nil
+		},
+	}
+
+	for _, c := range cases {
+		batcher := BatchDelete{
+			Client:    svc,
+			BatchSize: c.size,
+		}
+
+		err := batcher.Delete(aws.BackgroundContext(), &DeleteObjectsIterator{Objects: c.objects})
+		if err == nil {
+			t.Errorf("expected error, but received none")
+		}
+
+		berr := err.(*BatchError)
+
+		if len(berr.Errors) != 1 {
+			t.Errorf("expected 1 error, but received %d", len(berr.Errors))
+		}
+
+		aerr := berr.Errors[0].OrigErr.(awserr.Error)
+		if e, a := c.expectedErrCode, aerr.Code(); e != a {
+			t.Errorf("expected %q, but received %q", e, a)
+		}
+
+		if e, a := c.expectedErrMessage, aerr.Message(); e != a {
+			t.Errorf("expected %q, but received %q", e, a)
+		}
 	}
 }
