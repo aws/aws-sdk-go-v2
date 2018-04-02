@@ -567,7 +567,7 @@ func (r marshalShapeRef) EncodeHelperName(typ string) string {
 	case "integer", "long":
 		return fmt.Sprintf("protocol.%sInt64%s(v)", prefixEncodeName, suffixEncodeName)
 	case "float", "double":
-		return fmt.Sprintf("protocol.%Float64%s(v)", prefixEncodeName, suffixEncodeName)
+		return fmt.Sprintf("protocol.%sFloat64%s(v)", prefixEncodeName, suffixEncodeName)
 	case "string":
 		return fmt.Sprintf("protocol.%sString%s(v)", prefixEncodeName, suffixEncodeName)
 	case "blob":
