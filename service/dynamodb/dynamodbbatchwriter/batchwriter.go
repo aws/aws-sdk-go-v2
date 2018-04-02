@@ -56,8 +56,7 @@ func (b *BatchWriter) addWriteRequest(wr dynamodb.WriteRequest) {
 }
 
 // PutItem adds a PutRequest operation to the requestBuffer.
-func (b *BatchWriter) PutItem(item map[string]dynamodb.AttributeValue) {
-	putRequest := &dynamodb.PutRequest{Item: item}
+func (b *BatchWriter) PutItem(putRequest *dynamodb.PutRequest) {
 	writeRequest := dynamodb.WriteRequest{PutRequest: putRequest}
 	b.addWriteRequest(writeRequest)
 }
@@ -66,8 +65,7 @@ func (b *BatchWriter) PutItem(item map[string]dynamodb.AttributeValue) {
 //
 // The key argument should have the form of the Key argument the normal
 // DeleteItem API call takes.
-func (b *BatchWriter) DeleteItem(key map[string]dynamodb.AttributeValue) {
-	deleteRequest := &dynamodb.DeleteRequest{Key: key}
+func (b *BatchWriter) DeleteItem(deleteRequest *dynamodb.DeleteRequest) {
 	writeRequest := dynamodb.WriteRequest{DeleteRequest: deleteRequest}
 	b.addWriteRequest(writeRequest)
 }

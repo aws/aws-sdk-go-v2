@@ -84,9 +84,13 @@ func TestPutOrDeleteItem(t *testing.T) {
 	for i := 0; i < len(cases); i++ {
 		c := cases[i]
 		if c.put {
-			batchWriter.PutItem(c.item)
+			batchWriter.PutItem(&dynamodb.PutRequest{
+				Item: c.item,
+			})
 		} else {
-			batchWriter.DeleteItem(c.item)
+			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
+				Key: c.item,
+			})
 		}
 		bufferLen := len(batchWriter.requestBuffer)
 		if bufferLen != (i + 1) {
@@ -120,9 +124,13 @@ func TestEmpty(t *testing.T) {
 	batchWriter.SetFlushAmount(len(cases) * 2)
 	for i, c := range(cases) {
 		if c.put {
-			batchWriter.PutItem(c.item)
+			batchWriter.PutItem(&dynamodb.PutRequest{
+				Item: c.item,
+			})
 		} else {
-			batchWriter.DeleteItem(c.item)
+			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
+				Key: c.item,
+			})
 		}
 		if batchWriter.Empty() {
 			t.Errorf("Empty() returned a fase positive in iteration %d", i)
@@ -138,9 +146,13 @@ func TestFlushError(t *testing.T) {
 	cases := sharedCases
 	for i, c := range(cases) {
 		if c.put {
-			batchWriter.PutItem(c.item)
+			batchWriter.PutItem(&dynamodb.PutRequest{
+				Item: c.item,
+			})
 		} else {
-			batchWriter.DeleteItem(c.item)
+			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
+				Key: c.item,
+			})
 		}
 		err := batchWriter.Flush()
 		if err == nil {
@@ -158,12 +170,16 @@ func TestFlushUnprocessed(t *testing.T) {
 	numPutItems := 0
 	for _, c := range(cases) {
 		if c.put {
-			batchWriter.PutItem(c.item)
+			batchWriter.PutItem(&dynamodb.PutRequest{
+				Item: c.item,
+			})
 			// Count PutItems, because all of them will be
 			// unprocessed.
 			numPutItems++
 		} else {
-			batchWriter.DeleteItem(c.item)
+			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
+				Key: c.item,
+			})
 		}
 	}
 	if len(batchWriter.requestBuffer) != len(cases) {
@@ -189,9 +205,13 @@ func TestFlushAutomatically(t *testing.T) {
 	cases := sharedCases[:flushAmount]
 	for i, c := range(cases) {
 		if c.put {
-			batchWriter.PutItem(c.item)
+			batchWriter.PutItem(&dynamodb.PutRequest{
+				Item: c.item,
+			})
 		} else {
-			batchWriter.DeleteItem(c.item)
+			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
+				Key: c.item,
+			})
 		}
 		if i == flushAmount - 1 {
 			if !batchWriter.Empty() {
