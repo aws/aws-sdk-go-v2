@@ -87,7 +87,6 @@ func (b *BatchWriter) Flush() error {
 		requestItems[b.tableName] = itemsToSend
 		output, err := b.sendRequestItems(b.client, requestItems)
 		if err != nil {
-			b.requestBuffer = append(b.requestBuffer, itemsToSend...)
 			return err
 		}
 		unpItems, ok := output.UnprocessedItems[b.tableName]
