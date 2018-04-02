@@ -18,6 +18,9 @@ type BatchWriter struct {
 	client        dynamodbiface.DynamoDBAPI
 	flushAmount   int
 	requestBuffer []dynamodb.WriteRequest
+	sendRequestItems func(
+		dynamodbiface.DynamoDBAPI, map[string][]dynamodb.WriteRequest,
+	) (*dynamodb.BatchWriteItemOutput, error)
 }
 
 // New creates a new BatchWriter that will write to table `tableName`
@@ -31,6 +34,7 @@ func New(tableName string, client dynamodbiface.DynamoDBAPI) *BatchWriter {
 		client:        client,
 		flushAmount:   defaultFlushAmount,
 		requestBuffer: requestBuffer,
+		sendRequestItems: sendRequestItems,
 	}
 }
 
@@ -83,10 +87,9 @@ func (b *BatchWriter) Flush() error {
 		b.requestBuffer = b.requestBuffer[flushBound:]
 		requestItems := make(map[string][]dynamodb.WriteRequest)
 		requestItems[b.tableName] = itemsToSend
-		batchInput := dynamodb.BatchWriteItemInput{RequestItems: requestItems}
-		batchRequest := b.client.BatchWriteItemRequest(&batchInput)
-		output, err := batchRequest.Send()
+		output, err := b.sendRequestItems(b.client, requestItems)
 		if err != nil {
+			b.requestBuffer = append(b.requestBuffer, itemsToSend...)
 			return err
 		}
 		unpItems, ok := output.UnprocessedItems[b.tableName]
@@ -95,6 +98,24 @@ func (b *BatchWriter) Flush() error {
 		}
 	}
 	return nil
+}
+
+// This function is logically a part of BatchWriter.Flush().
+// I am pointing to it through BatchWriter.sendRequestItems so that I can
+// implement tests for Flush() that don't actually make any requests.
+// It is an ugly hack, but I don't see a clear alternative and Flush might be
+// the most important method to test in BatchWriter.
+// TODO: half-decent formatting.
+func sendRequestItems(
+	client dynamodbiface.DynamoDBAPI,
+	requestItems map[string][]dynamodb.WriteRequest,
+) (
+	*dynamodb.BatchWriteItemOutput, error,
+) {
+	batchInput := dynamodb.BatchWriteItemInput{RequestItems: requestItems}
+	batchRequest := client.BatchWriteItemRequest(&batchInput)
+	output, err := batchRequest.Send()
+	return output, err
 }
 
 // Empty returns whether or not the request buffer is empty.
