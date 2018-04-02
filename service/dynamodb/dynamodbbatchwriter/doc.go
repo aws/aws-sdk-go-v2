@@ -26,7 +26,7 @@ flushed periodically, one could use time.NewTicker and the select{} statement
 instead of iterating through the itemChannel to do the flushing safely.
 
 The input to DeleteItem should be the Key of a normal DeleteItem request.
-e.g. {"word": {"S": "potato"}, "position": {"N": 5}}.
+e.g. {"word": "potato", "position": 5} (properly marshalled, of course).
 
 Note: batchWriter is NOT thread safe. Use it only from within a single thread.
 */
