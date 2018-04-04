@@ -14,28 +14,43 @@ const defaultRequestBufferCap = 50
 type BatchWriter struct {
 	_ struct{}
 
-	tableName        string
-	client           dynamodbiface.DynamoDBAPI
-	flushAmount      int
-	requestBuffer    []dynamodb.WriteRequest
-	sendRequestItems func(
-		dynamodbiface.DynamoDBAPI, map[string][]dynamodb.WriteRequest,
-	) (*dynamodb.BatchWriteItemOutput, error)
+	tableName     string
+	client        dynamodbiface.DynamoDBAPI
+	primaryKeys   []string
+	flushAmount   int
+	requestBuffer []dynamodb.WriteRequest
 }
 
 // New creates a new BatchWriter that will write to table `tableName`
 // using `client`.
-func New(tableName string, client dynamodbiface.DynamoDBAPI) *BatchWriter {
+//
+// New will return an error if it fails to access the table information with a
+// DescribeTableRequest.
+func New(tableName string, client dynamodbiface.DynamoDBAPI) (*BatchWriter, error) {
+	describeTableReq := client.DescribeTableRequest(&dynamodb.DescribeTableInput{
+		TableName: &tableName,
+	})
+	describeTableOut, err := describeTableReq.Send()
+	if err != nil {
+		return &BatchWriter{}, err
+	}
+	// List of primary keys of the table. We will get them from a
+	// DescribeTable request to DynamoDB.
+	pKeys := []string{}
+	for _, key := range describeTableOut.Table.KeySchema {
+		pKeys = append(pKeys, *key.AttributeName)
+	}
 	requestBuffer := make(
 		[]dynamodb.WriteRequest, 0, defaultRequestBufferCap,
 	)
-	return &BatchWriter{
-		tableName:        tableName,
-		client:           client,
-		flushAmount:      defaultFlushAmount,
-		requestBuffer:    requestBuffer,
-		sendRequestItems: sendRequestItems,
+	batchWriter := &BatchWriter{
+		tableName:     tableName,
+		client:        client,
+		primaryKeys:   pKeys,
+		flushAmount:   defaultFlushAmount,
+		requestBuffer: requestBuffer,
 	}
+	return batchWriter, nil
 }
 
 // SetFlushAmount changes the size at which the requestBuffer gets `Flush`ed
@@ -85,7 +100,7 @@ func (b *BatchWriter) Flush() error {
 		b.requestBuffer = b.requestBuffer[flushBound:]
 		requestItems := make(map[string][]dynamodb.WriteRequest)
 		requestItems[b.tableName] = itemsToSend
-		output, err := b.sendRequestItems(b.client, requestItems)
+		output, err := b.sendRequestItems(requestItems)
 		if err != nil {
 			return err
 		}
@@ -97,20 +112,13 @@ func (b *BatchWriter) Flush() error {
 	return nil
 }
 
-// This function is logically a part of BatchWriter.Flush().
-// I am pointing to it through BatchWriter.sendRequestItems so that I can
-// implement tests for Flush() that don't actually make any requests.
-// It is an ugly hack, but I don't see a clear alternative and Flush might be
-// the most important method to test in BatchWriter.
-// TODO: half-decent formatting.
-func sendRequestItems(
-	client dynamodbiface.DynamoDBAPI,
+func (b *BatchWriter) sendRequestItems(
 	requestItems map[string][]dynamodb.WriteRequest,
 ) (
 	*dynamodb.BatchWriteItemOutput, error,
 ) {
 	batchInput := dynamodb.BatchWriteItemInput{RequestItems: requestItems}
-	batchRequest := client.BatchWriteItemRequest(&batchInput)
+	batchRequest := b.client.BatchWriteItemRequest(&batchInput)
 	output, err := batchRequest.Send()
 	return output, err
 }

@@ -1,16 +1,21 @@
 package dynamodbbatchwriter
 
 import (
-	"errors"
-	"reflect"
+	"bytes"
+	"encoding/json"
+	"io/ioutil"
+	"net/http"
 	"testing"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbattribute"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbiface"
 )
 
 const testTableName = "testtable"
+const hashKey = "numb"
 
 // Global var holds cases that will be used for many tests.
 var sharedCases = []struct {
@@ -34,37 +39,60 @@ func marshal(in interface{}) map[string]dynamodb.AttributeValue {
 }
 
 // Convenience wrapper.
-func getBatchWriter() *BatchWriter {
-	dynamoClient := &mockDynamoDBClient{}
+func getBatchWriter() (*BatchWriter, *dynamodb.DynamoDB) {
+	config := unit.Config()
+	dynamoClient := dynamodb.New(config)
+	dynamoClient.Handlers.Send.Clear()
+	addResponse(dynamoClient, 200, `{
+		"Table": {
+			"KeySchema": [
+				{
+					"AttributeName": "`+hashKey+`",
+					"KeyType": "HASH"
+				}
+			]
+		}
+	}`)
 	tableName := testTableName
 
-	return New(tableName, dynamoClient)
+	batchWriter, _ := New(tableName, dynamoClient)
+	// Clear the handler before returning the client.
+	dynamoClient.Handlers.Send.Clear()
+	return batchWriter, dynamoClient
 }
 
 // Convenience type alias
 type itemmap map[string]interface{}
 
-// Mock client to avoid running into client-generation errors.
-type mockDynamoDBClient struct {
-	dynamodbiface.DynamoDBAPI
+// Add a dummy response to a client.
+func addResponse(client *dynamodb.DynamoDB, statusCode int, response string) {
+	client.Handlers.Send.PushBack(func(r *aws.Request) {
+		reader := ioutil.NopCloser(bytes.NewReader([]byte(response)))
+		r.HTTPResponse = &http.Response{StatusCode: statusCode, Body: reader}
+	})
 }
 
 func TestNewBatchWriter(t *testing.T) {
-	dynamoClient := &mockDynamoDBClient{}
-	tableName := testTableName
-
-	batchWriter := New(tableName, dynamoClient)
-	if !(reflect.TypeOf(batchWriter.client) == reflect.TypeOf(dynamoClient)) {
-		t.Error("batchWriter.client is set incorrectly.")
+	batchWriter, _ := getBatchWriter()
+	if batchWriter.tableName != testTableName {
+		t.Errorf(`batchWriter.tableName set to "%s" when it should be "%s"`,
+			batchWriter.tableName, testTableName)
 	}
-	if batchWriter.tableName != tableName {
-		t.Errorf(`batchWriter.tableName set to "%v" when it should be "%s"`,
-			batchWriter.tableName, tableName)
+}
+
+func TestNewError(t *testing.T) {
+	config := unit.Config()
+	dynamoClient := dynamodb.New(config)
+	dynamoClient.Handlers.Send.Clear()
+	addResponse(dynamoClient, 404, "ERR")
+	_, err := New(testTableName, dynamoClient)
+	if err == nil {
+		t.Error("Did not propagate BatchWriter creation error correctly.")
 	}
 }
 
 func TestSetFlushAmount(t *testing.T) {
-	batchWriter := getBatchWriter()
+	batchWriter, _ := getBatchWriter()
 
 	testValues := []int{20, 150, 1, 12, 112}
 	for val := range testValues {
@@ -73,11 +101,19 @@ func TestSetFlushAmount(t *testing.T) {
 			t.Errorf("batchWriter.flushAmount is set to %v instead of %d",
 				batchWriter.flushAmount, val)
 		}
+		if len(batchWriter.primaryKeys) != 1 {
+			t.Errorf("Wrong number of primary keys set. Set %d",
+				len(batchWriter.primaryKeys))
+		}
+		if batchWriter.primaryKeys[0] != hashKey {
+			t.Errorf("Wrong primary key set. Should be %s. Is %s.",
+				hashKey, batchWriter.primaryKeys[0])
+		}
 	}
 }
 
 func TestPutOrDeleteItem(t *testing.T) {
-	batchWriter := getBatchWriter()
+	batchWriter, _ := getBatchWriter()
 
 	cases := sharedCases
 	// Make sure the flush amount is larger than the number of items to add.
@@ -115,7 +151,7 @@ func TestPutOrDeleteItem(t *testing.T) {
 }
 
 func TestEmpty(t *testing.T) {
-	batchWriter := getBatchWriter()
+	batchWriter, _ := getBatchWriter()
 	if !batchWriter.Empty() { // BatchWriters should start empty.
 		t.Error("batchWriter was initialized not empty.")
 	}
@@ -140,10 +176,9 @@ func TestEmpty(t *testing.T) {
 }
 
 func TestFlushError(t *testing.T) {
-	batchWriter := getBatchWriter()
-	// Substitute function that requests the API for a dummy function that
-	// returns an error
-	batchWriter.sendRequestItems = errorOnItem
+	batchWriter, dynamoClient := getBatchWriter()
+	// Add a dummy response that should yield an error.
+	addResponse(dynamoClient, 404, "ERR")
 	cases := sharedCases
 	for i, c := range cases {
 		if c.put {
@@ -163,20 +198,37 @@ func TestFlushError(t *testing.T) {
 }
 
 func TestFlushUnprocessed(t *testing.T) {
-	batchWriter := getBatchWriter()
-	batchWriter.sendRequestItems = unprocessPutItems
+	batchWriter, dynamoClient := getBatchWriter()
+	// Number of unprocessed items to return.
+	numUnpItems := 5
+	// Generate a dummy body.
+	body := map[string](map[string][]interface{}){
+		"UnprocessedItems": map[string][]interface{}{
+			testTableName: []interface{}{},
+		},
+	}
+	// Add unprocessed items.
+	for i := 0; i < numUnpItems; i++ {
+		body["UnprocessedItems"][testTableName] = append(
+			body["UnprocessedItems"][testTableName], map[string]interface{}{
+				"PutRequest": map[string]interface{}{
+					"Item": map[string]int{"a": 1, "numb": 89},
+				},
+			},
+		)
+	}
+	bodyBytes, _ := json.Marshal(body)
+	bodyStr := bytes.NewBuffer(bodyBytes).String()
+	addResponse(dynamoClient, 200, bodyStr)
 	cases := sharedCases
 	// Make sure we won't flush while still adding items.
 	batchWriter.SetFlushAmount(len(cases) * 2)
-	numPutItems := 0
+
 	for _, c := range cases {
 		if c.put {
 			batchWriter.PutItem(&dynamodb.PutRequest{
 				Item: c.item,
 			})
-			// Count PutItems, because all of them will be
-			// unprocessed.
-			numPutItems++
 		} else {
 			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
 				Key: c.item,
@@ -189,16 +241,21 @@ func TestFlushUnprocessed(t *testing.T) {
 	batchWriter.Flush()
 	// Note: this works because flushAmount is guaranteed to be higher than
 	// the size of the requestBuffer. So all items will be flushed.
-	expectedLength := numPutItems
+	expectedLength := numUnpItems
 	if len(batchWriter.requestBuffer) != expectedLength {
 		t.Errorf("Wrong number of items after flushing. Should be %d but is"+
-			" %d.", len(cases)-numPutItems, len(batchWriter.requestBuffer))
+			" %d.", expectedLength, len(batchWriter.requestBuffer))
 	}
 }
 
 func TestFlushAutomatically(t *testing.T) {
-	batchWriter := getBatchWriter()
-	batchWriter.sendRequestItems = dummyProcessItems
+	batchWriter, dynamoClient := getBatchWriter()
+	dynamoClient.Handlers.Send.PushBack(func(r *aws.Request) {
+		reader := ioutil.NopCloser(bytes.NewReader([]byte(
+			`{}`,
+		)))
+		r.HTTPResponse = &http.Response{StatusCode: 200, Body: reader}
+	})
 
 	flushAmount := 5
 	batchWriter.SetFlushAmount(flushAmount)
@@ -225,18 +282,6 @@ func TestFlushAutomatically(t *testing.T) {
 	}
 }
 
-// Dummy functions that substitute sendRequestItems.
-
-// Return an error regardless of the input.
-func errorOnItem(
-	client dynamodbiface.DynamoDBAPI,
-	requestItems map[string][]dynamodb.WriteRequest,
-) (
-	*dynamodb.BatchWriteItemOutput, error,
-) {
-	return &dynamodb.BatchWriteItemOutput{}, errors.New("Error")
-}
-
 // Send all PutRequests back as UnprocessedItems.
 func unprocessPutItems(
 	client dynamodbiface.DynamoDBAPI,
@@ -259,14 +304,4 @@ func unprocessPutItems(
 		},
 	}
 	return output, nil
-}
-
-// Return an empty BatchWriteItemOutput and no error.
-func dummyProcessItems(
-	client dynamodbiface.DynamoDBAPI,
-	requestItems map[string][]dynamodb.WriteRequest,
-) (
-	*dynamodb.BatchWriteItemOutput, error,
-) {
-	return &dynamodb.BatchWriteItemOutput{}, nil
 }
