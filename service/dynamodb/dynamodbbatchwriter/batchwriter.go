@@ -117,5 +117,5 @@ func sendRequestItems(
 
 // Empty returns whether or not the request buffer is empty.
 func (b *BatchWriter) Empty() bool {
-	return len(b.requestBuffer) <= 0
+	return len(b.requestBuffer) == 0
 }
