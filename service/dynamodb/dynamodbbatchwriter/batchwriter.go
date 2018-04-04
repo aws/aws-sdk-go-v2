@@ -14,10 +14,10 @@ const defaultRequestBufferCap = 50
 type BatchWriter struct {
 	_ struct{}
 
-	tableName     string
-	client        dynamodbiface.DynamoDBAPI
-	flushAmount   int
-	requestBuffer []dynamodb.WriteRequest
+	tableName        string
+	client           dynamodbiface.DynamoDBAPI
+	flushAmount      int
+	requestBuffer    []dynamodb.WriteRequest
 	sendRequestItems func(
 		dynamodbiface.DynamoDBAPI, map[string][]dynamodb.WriteRequest,
 	) (*dynamodb.BatchWriteItemOutput, error)
@@ -30,10 +30,10 @@ func New(tableName string, client dynamodbiface.DynamoDBAPI) *BatchWriter {
 		[]dynamodb.WriteRequest, 0, defaultRequestBufferCap,
 	)
 	return &BatchWriter{
-		tableName:     tableName,
-		client:        client,
-		flushAmount:   defaultFlushAmount,
-		requestBuffer: requestBuffer,
+		tableName:        tableName,
+		client:           client,
+		flushAmount:      defaultFlushAmount,
+		requestBuffer:    requestBuffer,
 		sendRequestItems: sendRequestItems,
 	}
 }

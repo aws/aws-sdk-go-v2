@@ -15,7 +15,7 @@ goroutine writing to itemChannel):
 			batchWriter.Flush()
 		}
 	}
-	for item := range(itemChannel) {
+	for item := range itemChannel {
 		// Where itemChannel is of type `chan map[string]interface{}`
 		dynamoItem := dynamodbattribute.MarshalMap(item)
 		batchWriter.PutItem(&dynamodb.PutRequest{

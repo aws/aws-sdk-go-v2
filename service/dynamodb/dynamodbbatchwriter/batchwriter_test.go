@@ -4,17 +4,18 @@ import (
 	"errors"
 	"reflect"
 	"testing"
+
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbiface"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbattribute"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbiface"
 )
 
 const testTableName = "testtable"
 
 // Global var holds cases that will be used for many tests.
-var sharedCases = []struct{
+var sharedCases = []struct {
 	put, delete bool
-	item map[string]dynamodb.AttributeValue
+	item        map[string]dynamodb.AttributeValue
 }{
 	{true, false, marshal(itemmap{"itemcount": []int{89, 91, 92}, "key": "stf"})},
 	{true, false, marshal(itemmap{"dance": 1})},
@@ -44,7 +45,7 @@ func getBatchWriter() *BatchWriter {
 type itemmap map[string]interface{}
 
 // Mock client to avoid running into client-generation errors.
-type mockDynamoDBClient struct{
+type mockDynamoDBClient struct {
 	dynamodbiface.DynamoDBAPI
 }
 
@@ -66,7 +67,7 @@ func TestSetFlushAmount(t *testing.T) {
 	batchWriter := getBatchWriter()
 
 	testValues := []int{20, 150, 1, 12, 112}
-	for val := range(testValues) {
+	for val := range testValues {
 		batchWriter.SetFlushAmount(val)
 		if batchWriter.flushAmount != val {
 			t.Errorf("batchWriter.flushAmount is set to %v instead of %d",
@@ -95,7 +96,7 @@ func TestPutOrDeleteItem(t *testing.T) {
 		bufferLen := len(batchWriter.requestBuffer)
 		if bufferLen != (i + 1) {
 			t.Errorf("Length of requestBuffer is %d when it should be %d",
-				len(cases), i + 1)
+				len(cases), i+1)
 		}
 		lastItem := batchWriter.requestBuffer[bufferLen-1]
 		if c.put && lastItem.PutRequest == nil {
@@ -122,7 +123,7 @@ func TestEmpty(t *testing.T) {
 	// flushAmount should be higher than the number of cases, so that we know
 	// Empty() should return false.
 	batchWriter.SetFlushAmount(len(cases) * 2)
-	for i, c := range(cases) {
+	for i, c := range cases {
 		if c.put {
 			batchWriter.PutItem(&dynamodb.PutRequest{
 				Item: c.item,
@@ -144,7 +145,7 @@ func TestFlushError(t *testing.T) {
 	// returns an error
 	batchWriter.sendRequestItems = errorOnItem
 	cases := sharedCases
-	for i, c := range(cases) {
+	for i, c := range cases {
 		if c.put {
 			batchWriter.PutItem(&dynamodb.PutRequest{
 				Item: c.item,
@@ -168,7 +169,7 @@ func TestFlushUnprocessed(t *testing.T) {
 	// Make sure we won't flush while still adding items.
 	batchWriter.SetFlushAmount(len(cases) * 2)
 	numPutItems := 0
-	for _, c := range(cases) {
+	for _, c := range cases {
 		if c.put {
 			batchWriter.PutItem(&dynamodb.PutRequest{
 				Item: c.item,
@@ -190,8 +191,8 @@ func TestFlushUnprocessed(t *testing.T) {
 	// the size of the requestBuffer. So all items will be flushed.
 	expectedLength := numPutItems
 	if len(batchWriter.requestBuffer) != expectedLength {
-		t.Errorf("Wrong number of items after flushing. Should be %d but is" +
-			" %d.", len(cases) - numPutItems, len(batchWriter.requestBuffer))
+		t.Errorf("Wrong number of items after flushing. Should be %d but is"+
+			" %d.", len(cases)-numPutItems, len(batchWriter.requestBuffer))
 	}
 }
 
@@ -203,7 +204,7 @@ func TestFlushAutomatically(t *testing.T) {
 	batchWriter.SetFlushAmount(flushAmount)
 	// We only want enough cases to make the BatchWriter flush automatically.
 	cases := sharedCases[:flushAmount]
-	for i, c := range(cases) {
+	for i, c := range cases {
 		if c.put {
 			batchWriter.PutItem(&dynamodb.PutRequest{
 				Item: c.item,
@@ -213,12 +214,12 @@ func TestFlushAutomatically(t *testing.T) {
 				Key: c.item,
 			})
 		}
-		if i == flushAmount - 1 {
+		if i == flushAmount-1 {
 			if !batchWriter.Empty() {
 				t.Error(
 					"BatchWriter not empty after reaching enough requests.")
 			}
-		} else if len(batchWriter.requestBuffer) != i + 1 {
+		} else if len(batchWriter.requestBuffer) != i+1 {
 			t.Errorf("Wrong size for the requestBuffer on iteration %d", i)
 		}
 	}
@@ -244,7 +245,7 @@ func unprocessPutItems(
 	*dynamodb.BatchWriteItemOutput, error,
 ) {
 	unpItems := make([]dynamodb.WriteRequest, 0, 10)
-	for _, req := range(requestItems[testTableName]) {
+	for _, req := range requestItems[testTableName] {
 		if req.PutRequest != nil {
 			item := req.PutRequest.Item
 			putReq := &dynamodb.PutRequest{Item: item}
