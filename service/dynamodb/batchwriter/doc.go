@@ -1,5 +1,5 @@
 /*
-Package dynamodbbatchwriter exposes a wrapper to a dynamodb client which can
+Package batchwriter exposes a wrapper to a dynamodb client which can
 be used to do automatic batch writes of PutRequests and DeleteRequests.
 
 BatchWriter would normally be used to simplify the task of making
@@ -9,7 +9,7 @@ save on DynamoDB.
 Code using BatchWriter will typically look like this (assuming there is a
 goroutine writing to itemChannel):
 
-	batchWriter := dynamodbbatchwriter.New("table-name", dynamoClient)
+	batchWriter := batchwriter.New("table-name", dynamoClient)
 	defer func() {
 		for !batchwriter.Empty() {
 			batchWriter.Flush()
@@ -29,4 +29,4 @@ instead of iterating through the itemChannel to do the flushing safely.
 
 Note: batchWriter is NOT thread safe. Use it only from within a single thread.
 */
-package dynamodbbatchwriter
+package batchwriter

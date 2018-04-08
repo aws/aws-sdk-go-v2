@@ -1,4 +1,4 @@
-package dynamodbbatchwriter
+package batchwriter
 
 import (
 	"bytes"
