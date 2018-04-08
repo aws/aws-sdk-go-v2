@@ -91,33 +91,12 @@ func TestNewError(t *testing.T) {
 	}
 }
 
-func TestSetFlushAmount(t *testing.T) {
-	batchWriter, _ := getBatchWriter()
-
-	testValues := []int{20, 150, 1, 12, 112}
-	for val := range testValues {
-		batchWriter.SetFlushAmount(val)
-		if batchWriter.flushAmount != val {
-			t.Errorf("batchWriter.flushAmount is set to %v instead of %d",
-				batchWriter.flushAmount, val)
-		}
-		if len(batchWriter.primaryKeys) != 1 {
-			t.Errorf("Wrong number of primary keys set. Set %d",
-				len(batchWriter.primaryKeys))
-		}
-		if batchWriter.primaryKeys[0] != hashKey {
-			t.Errorf("Wrong primary key set. Should be %s. Is %s.",
-				hashKey, batchWriter.primaryKeys[0])
-		}
-	}
-}
-
 func TestPutOrDeleteItem(t *testing.T) {
 	batchWriter, _ := getBatchWriter()
 
 	cases := sharedCases
 	// Make sure the flush amount is larger than the number of items to add.
-	batchWriter.SetFlushAmount(len(cases) * 2)
+	batchWriter.FlushAmount = len(cases) * 2
 	for i := 0; i < len(cases); i++ {
 		c := cases[i]
 		if c.put {
@@ -158,7 +137,7 @@ func TestEmpty(t *testing.T) {
 	cases := sharedCases
 	// flushAmount should be higher than the number of cases, so that we know
 	// Empty() should return false.
-	batchWriter.SetFlushAmount(len(cases) * 2)
+	batchWriter.FlushAmount = len(cases) * 2
 	for i, c := range cases {
 		if c.put {
 			batchWriter.PutItem(&dynamodb.PutRequest{
@@ -222,7 +201,7 @@ func TestFlushUnprocessed(t *testing.T) {
 	addResponse(dynamoClient, 200, bodyStr)
 	cases := sharedCases
 	// Make sure we won't flush while still adding items.
-	batchWriter.SetFlushAmount(len(cases) * 2)
+	batchWriter.FlushAmount = len(cases) * 2
 
 	for _, c := range cases {
 		if c.put {
@@ -258,7 +237,7 @@ func TestFlushAutomatically(t *testing.T) {
 	})
 
 	flushAmount := 5
-	batchWriter.SetFlushAmount(flushAmount)
+	batchWriter.FlushAmount = flushAmount
 	// We only want enough cases to make the BatchWriter flush automatically.
 	cases := sharedCases[:flushAmount]
 	for i, c := range cases {

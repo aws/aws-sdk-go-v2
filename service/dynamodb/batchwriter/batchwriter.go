@@ -12,12 +12,13 @@ const defaultRequestBufferCap = 50
 // API that buffers requests and takes advantage of BatchWriteItem behind
 // the scenes.
 type BatchWriter struct {
-	_ struct{}
-
+	// Size of the buffer in which it will be flushed.
+	// Do not set to a number above 25 as DynamoDB rejects BatchWrites with
+	// more than 25 items.
+	FlushAmount   int
 	tableName     string
 	client        dynamodbiface.DynamoDBAPI
 	primaryKeys   []string
-	flushAmount   int
 	requestBuffer []dynamodb.WriteRequest
 }
 
@@ -44,23 +45,17 @@ func New(tableName string, client dynamodbiface.DynamoDBAPI) (*BatchWriter, erro
 		[]dynamodb.WriteRequest, 0, defaultRequestBufferCap,
 	)
 	batchWriter := &BatchWriter{
+		FlushAmount:   defaultFlushAmount,
 		tableName:     tableName,
 		client:        client,
 		primaryKeys:   pKeys,
-		flushAmount:   defaultFlushAmount,
 		requestBuffer: requestBuffer,
 	}
 	return batchWriter, nil
 }
 
-// SetFlushAmount changes the size at which the requestBuffer gets `Flush`ed
-// automatically.
-func (b *BatchWriter) SetFlushAmount(flushAmount int) {
-	b.flushAmount = flushAmount
-}
-
 func (b *BatchWriter) flushIfNeeded() error {
-	if len(b.requestBuffer) < b.flushAmount {
+	if len(b.requestBuffer) < b.FlushAmount {
 		return nil
 	}
 	err := b.Flush()
@@ -99,7 +94,7 @@ func (b *BatchWriter) Flush() error {
 	if b.Empty() {
 		return nil
 	}
-	flushBound := b.flushAmount
+	flushBound := b.FlushAmount
 	if flushBound > len(b.requestBuffer) {
 		flushBound = len(b.requestBuffer)
 	}
