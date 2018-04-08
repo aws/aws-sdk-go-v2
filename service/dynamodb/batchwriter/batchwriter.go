@@ -59,30 +59,35 @@ func (b *BatchWriter) SetFlushAmount(flushAmount int) {
 	b.flushAmount = flushAmount
 }
 
-func (b *BatchWriter) flushIfNeeded() {
-	if len(b.requestBuffer) >= b.flushAmount {
-		b.Flush()
+func (b *BatchWriter) flushIfNeeded() error {
+	if len(b.requestBuffer) < b.flushAmount {
+		return nil
 	}
+	err := b.Flush()
+	return err
 }
 
-func (b *BatchWriter) addWriteRequest(wr dynamodb.WriteRequest) {
+func (b *BatchWriter) addWriteRequest(wr dynamodb.WriteRequest) error {
 	b.requestBuffer = append(b.requestBuffer, wr)
-	b.flushIfNeeded()
+	err := b.flushIfNeeded()
+	return err
 }
 
 // PutItem adds a PutRequest operation to the requestBuffer.
-func (b *BatchWriter) PutItem(putRequest *dynamodb.PutRequest) {
+func (b *BatchWriter) PutItem(putRequest *dynamodb.PutRequest) error {
 	writeRequest := dynamodb.WriteRequest{PutRequest: putRequest}
-	b.addWriteRequest(writeRequest)
+	err := b.addWriteRequest(writeRequest)
+	return err
 }
 
 // DeleteItem adds a DeleteRequest operation to the requestBuffer.
 //
 // The key argument should have the form of the Key argument the normal
 // DeleteItem API call takes.
-func (b *BatchWriter) DeleteItem(deleteRequest *dynamodb.DeleteRequest) {
+func (b *BatchWriter) DeleteItem(deleteRequest *dynamodb.DeleteRequest) error {
 	writeRequest := dynamodb.WriteRequest{DeleteRequest: deleteRequest}
-	b.addWriteRequest(writeRequest)
+	err := b.addWriteRequest(writeRequest)
+	return err
 }
 
 // Flush makes a BatchWriteItem with some or all requests that have been added
@@ -91,23 +96,24 @@ func (b *BatchWriter) DeleteItem(deleteRequest *dynamodb.DeleteRequest) {
 // Any unprocessed items sent in the response will be added to the end of the
 // buffer, to be sent at a later date.
 func (b *BatchWriter) Flush() error {
-	if len(b.requestBuffer) > 0 {
-		flushBound := b.flushAmount
-		if flushBound > len(b.requestBuffer) {
-			flushBound = len(b.requestBuffer)
-		}
-		itemsToSend := b.requestBuffer[:flushBound]
-		b.requestBuffer = b.requestBuffer[flushBound:]
-		requestItems := make(map[string][]dynamodb.WriteRequest)
-		requestItems[b.tableName] = itemsToSend
-		output, err := b.sendRequestItems(requestItems)
-		if err != nil {
-			return err
-		}
-		unpItems, ok := output.UnprocessedItems[b.tableName]
-		if ok {
-			b.requestBuffer = append(b.requestBuffer, unpItems...)
-		}
+	if b.Empty() {
+		return nil
+	}
+	flushBound := b.flushAmount
+	if flushBound > len(b.requestBuffer) {
+		flushBound = len(b.requestBuffer)
+	}
+	itemsToSend := b.requestBuffer[:flushBound]
+	b.requestBuffer = b.requestBuffer[flushBound:]
+	requestItems := make(map[string][]dynamodb.WriteRequest)
+	requestItems[b.tableName] = itemsToSend
+	output, err := b.sendRequestItems(requestItems)
+	if err != nil {
+		return err
+	}
+	unpItems, ok := output.UnprocessedItems[b.tableName]
+	if ok {
+		b.requestBuffer = append(b.requestBuffer, unpItems...)
 	}
 	return nil
 }
