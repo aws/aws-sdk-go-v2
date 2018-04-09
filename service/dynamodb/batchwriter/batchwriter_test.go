@@ -256,31 +256,7 @@ func TestFlushAutomatically(t *testing.T) {
 					"BatchWriter not empty after reaching enough requests.")
 			}
 		} else if len(batchWriter.requestBuffer) != i+1 {
-			t.Errorf("Wrong size for the requestBuffer on iteration %d", i)
+			t.Errorf("Wrong size for the requestBuffer on iteration %d.", i)
 		}
 	}
-}
-
-// Send all PutRequests back as UnprocessedItems.
-func unprocessPutItems(
-	client dynamodbiface.DynamoDBAPI,
-	requestItems map[string][]dynamodb.WriteRequest,
-) (
-	*dynamodb.BatchWriteItemOutput, error,
-) {
-	unpItems := make([]dynamodb.WriteRequest, 0, 10)
-	for _, req := range requestItems[testTableName] {
-		if req.PutRequest != nil {
-			item := req.PutRequest.Item
-			putReq := &dynamodb.PutRequest{Item: item}
-			writeReq := dynamodb.WriteRequest{PutRequest: putReq}
-			unpItems = append(unpItems, writeReq)
-		}
-	}
-	output := &dynamodb.BatchWriteItemOutput{
-		UnprocessedItems: map[string][]dynamodb.WriteRequest{
-			testTableName: unpItems,
-		},
-	}
-	return output, nil
 }
