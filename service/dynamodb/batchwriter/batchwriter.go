@@ -110,9 +110,7 @@ func (b *BatchWriter) Flush() error {
 	}
 	itemsToSend := b.requestBuffer[:flushBound]
 	b.requestBuffer = b.requestBuffer[flushBound:]
-	requestItems := make(map[string][]dynamodb.WriteRequest)
-	requestItems[b.tableName] = itemsToSend
-	output, err := b.sendRequestItems(requestItems)
+	output, err := b.sendRequestItems(itemsToSend)
 	if err != nil {
 		return err
 	}
@@ -124,11 +122,14 @@ func (b *BatchWriter) Flush() error {
 }
 
 func (b *BatchWriter) sendRequestItems(
-	requestItems map[string][]dynamodb.WriteRequest,
+	requestItems []dynamodb.WriteRequest,
 ) (
 	*dynamodb.BatchWriteItemOutput, error,
 ) {
-	batchInput := dynamodb.BatchWriteItemInput{RequestItems: requestItems}
+	mappedItems := map[string][]dynamodb.WriteRequest{
+		b.tableName: requestItems,
+	}
+	batchInput := dynamodb.BatchWriteItemInput{RequestItems: mappedItems}
 	batchRequest := b.client.BatchWriteItemRequest(&batchInput)
 	output, err := batchRequest.Send()
 	return output, err
