@@ -54,6 +54,25 @@ func New(tableName string, client dynamodbiface.DynamoDBAPI) (*BatchWriter, erro
 	return batchWriter, nil
 }
 
+// NewWithPrimaryKeys creates a new BatchWriter using `primaryKeys` as the
+// specified primary keys instead of getting them from a call to
+// DescribeTable.
+func NewWithPrimaryKeys(tableName string, client dynamodbiface.DynamoDBAPI,
+	primaryKeys []string) *BatchWriter {
+
+	requestBuffer := make(
+		[]dynamodb.WriteRequest, 0, defaultRequestBufferCap,
+	)
+	batchWriter := &BatchWriter{
+		FlushAmount:   defaultFlushAmount,
+		tableName:     tableName,
+		client:        client,
+		primaryKeys:   primaryKeys,
+		requestBuffer: requestBuffer,
+	}
+	return batchWriter
+}
+
 func (b *BatchWriter) flushIfNeeded() error {
 	if len(b.requestBuffer) < b.FlushAmount {
 		return nil

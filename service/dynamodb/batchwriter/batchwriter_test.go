@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbattribute"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbiface"
 )
 
 const testTableName = "testtable"
@@ -75,8 +74,34 @@ func addResponse(client *dynamodb.DynamoDB, statusCode int, response string) {
 func TestNewBatchWriter(t *testing.T) {
 	batchWriter, _ := getBatchWriter()
 	if batchWriter.tableName != testTableName {
-		t.Errorf(`batchWriter.tableName set to "%s" when it should be "%s"`,
+		t.Errorf(`batchWriter.tableName set to "%s" when it should be "%s".`,
 			batchWriter.tableName, testTableName)
+	}
+}
+
+func TestNewWithPrimaryKeys(t *testing.T) {
+	config := unit.Config()
+	dynamoClient := dynamodb.New(config)
+	dynamoClient.Handlers.Send.Clear()
+
+	testPKeys := []string{"transaction", "n_orders"}
+	batchWriter := NewWithPrimaryKeys(testTableName, dynamoClient, testPKeys)
+	if batchWriter.tableName != testTableName {
+		t.Errorf(`batchWriter.tableName set to "%s" when it should be "%s".`,
+			batchWriter.tableName, testTableName)
+	}
+
+	if len(batchWriter.primaryKeys) != len(testPKeys) {
+		t.Errorf(`batchWriter.primaryKeys has length %d, should have %d.`,
+			len(batchWriter.primaryKeys), len(testPKeys))
+	}
+	for i := 0; i < len(batchWriter.primaryKeys); i++ {
+		bwKey := batchWriter.primaryKeys[i]
+		testKey := testPKeys[i]
+		if bwKey != testKey {
+			t.Errorf(`Primary key number %d set to %s. Should be %s.`,
+				i, bwKey, testKey)
+		}
 	}
 }
 
@@ -110,7 +135,7 @@ func TestPutOrDeleteItem(t *testing.T) {
 		}
 		bufferLen := len(batchWriter.requestBuffer)
 		if bufferLen != (i + 1) {
-			t.Errorf("Length of requestBuffer is %d when it should be %d",
+			t.Errorf("Length of requestBuffer is %d when it should be %d.",
 				len(cases), i+1)
 		}
 		lastItem := batchWriter.requestBuffer[bufferLen-1]
@@ -149,7 +174,7 @@ func TestEmpty(t *testing.T) {
 			})
 		}
 		if batchWriter.Empty() {
-			t.Errorf("Empty() returned a fase positive in iteration %d", i)
+			t.Errorf("Empty() returned a fase positive in iteration %d.", i)
 		}
 	}
 }
@@ -171,7 +196,7 @@ func TestFlushError(t *testing.T) {
 		}
 		err := batchWriter.Flush()
 		if err == nil {
-			t.Errorf("Failed to return an error in iteration %d", i)
+			t.Errorf("Failed to return an error in iteration %d.", i)
 		}
 	}
 }
