@@ -41,16 +41,7 @@ func New(tableName string, client dynamodbiface.DynamoDBAPI) (*BatchWriter, erro
 	for _, key := range describeTableOut.Table.KeySchema {
 		pKeys = append(pKeys, *key.AttributeName)
 	}
-	requestBuffer := make(
-		[]dynamodb.WriteRequest, 0, defaultRequestBufferCap,
-	)
-	batchWriter := &BatchWriter{
-		FlushAmount:   defaultFlushAmount,
-		tableName:     tableName,
-		client:        client,
-		primaryKeys:   pKeys,
-		requestBuffer: requestBuffer,
-	}
+	batchWriter := NewWithPrimaryKeys(tableName, client, pKeys)
 	return batchWriter, nil
 }
 

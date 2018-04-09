@@ -154,6 +154,61 @@ func TestPutOrDeleteItem(t *testing.T) {
 	}
 }
 
+func TestBigBuffer(t *testing.T) {
+	batchWriter, dynamoClient := getBatchWriter()
+	cases := sharedCases
+
+	expectedRemainingAfterFlush := len(cases)/2 - 1
+	// Testing the case where the buffer is bigger than the FlushAmount.
+	batchWriter.FlushAmount = len(cases) - expectedRemainingAfterFlush
+	for _, c := range cases {
+		if c.put {
+			batchWriter.requestBuffer = append(
+				batchWriter.requestBuffer, dynamodb.WriteRequest{
+					PutRequest: &dynamodb.PutRequest{
+						Item: c.item,
+					},
+				},
+			)
+		} else {
+			batchWriter.requestBuffer = append(
+				batchWriter.requestBuffer, dynamodb.WriteRequest{
+					DeleteRequest: &dynamodb.DeleteRequest{
+						Key: c.item,
+					},
+				},
+			)
+		}
+	}
+	addResponse(dynamoClient, 200, "{}")
+	err := batchWriter.Flush()
+	if err != nil {
+		t.Error("Flush errored when it should not have.")
+	}
+	if len(batchWriter.requestBuffer) != expectedRemainingAfterFlush {
+		t.Errorf("Flushed the wrong number of items. Have %d items after"+
+			" flushing when there should be %d.",
+			len(batchWriter.requestBuffer), expectedRemainingAfterFlush)
+	}
+	addResponse(dynamoClient, 200, "{}")
+	err = batchWriter.Flush()
+	if err != nil {
+		t.Error("Flush errored on the second call when it should not have.")
+	}
+	if !batchWriter.Empty() {
+		t.Error("requestBuffer should be empty after flushing twice.")
+	}
+}
+
+func TestEmptyFlush(t *testing.T) {
+	batchWriter, dynamoClient := getBatchWriter()
+	addResponse(dynamoClient, 404, "ERR")
+	err := batchWriter.Flush()
+	if err != nil {
+		t.Error("Flush() should not error when the requestBuffer is empty.")
+	}
+}
+
 func TestEmpty(t *testing.T) {
 	batchWriter, _ := getBatchWriter()
 	if !batchWriter.Empty() { // BatchWriters should start empty.
