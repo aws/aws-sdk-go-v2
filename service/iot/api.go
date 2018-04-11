@@ -7361,6 +7361,12 @@ type CACertificateDescription struct {
 	// The date the CA certificate was created.
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
 
+	CustomerVersion *int64 `locationName:"customerVersion" min:"1" type:"integer"`
+
+	GenerationId *string `locationName:"generationId" type:"string"`
+
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
+
 	// The owner of the CA certificate.
 	OwnedBy *string `locationName:"ownedBy" type:"string"`
 
@@ -7409,6 +7415,24 @@ func (s CACertificateDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.CustomerVersion != nil {
+		v := *s.CustomerVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "customerVersion", protocol.Int64Value(v), metadata)
+	}
+	if s.GenerationId != nil {
+		v := *s.GenerationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "generationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if s.OwnedBy != nil {
 		v := *s.OwnedBy
@@ -7687,6 +7711,10 @@ type CertificateDescription struct {
 	// The date and time the certificate was created.
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
 
+	CustomerVersion *int64 `locationName:"customerVersion" min:"1" type:"integer"`
+
+	GenerationId *string `locationName:"generationId" type:"string"`
+
 	// The date and time the certificate was last modified.
 	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
 
@@ -7744,6 +7772,18 @@ func (s CertificateDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.CustomerVersion != nil {
+		v := *s.CustomerVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "customerVersion", protocol.Int64Value(v), metadata)
+	}
+	if s.GenerationId != nil {
+		v := *s.GenerationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "generationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LastModifiedDate != nil {
 		v := *s.LastModifiedDate
@@ -14235,8 +14275,14 @@ type GetPolicyOutput struct {
 
 	responseMetadata aws.Response
 
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+
 	// The default policy version ID.
 	DefaultVersionId *string `locationName:"defaultVersionId" type:"string"`
+
+	GenerationId *string `locationName:"generationId" type:"string"`
+
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The policy ARN.
 	PolicyArn *string `locationName:"policyArn" type:"string"`
@@ -14265,11 +14311,29 @@ func (s GetPolicyOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetPolicyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
 	if s.DefaultVersionId != nil {
 		v := *s.DefaultVersionId
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "defaultVersionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.GenerationId != nil {
+		v := *s.GenerationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "generationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if s.PolicyArn != nil {
 		v := *s.PolicyArn
@@ -14362,8 +14426,14 @@ type GetPolicyVersionOutput struct {
 
 	responseMetadata aws.Response
 
+	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
+
+	GenerationId *string `locationName:"generationId" type:"string"`
+
 	// Specifies whether the policy version is the default.
 	IsDefaultVersion *bool `locationName:"isDefaultVersion" type:"boolean"`
+
+	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The policy ARN.
 	PolicyArn *string `locationName:"policyArn" type:"string"`
@@ -14395,11 +14465,29 @@ func (s GetPolicyVersionOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s GetPolicyVersionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "creationDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.GenerationId != nil {
+		v := *s.GenerationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "generationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.IsDefaultVersion != nil {
 		v := *s.IsDefaultVersion
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "isDefaultVersion", protocol.BoolValue(v), metadata)
+	}
+	if s.LastModifiedDate != nil {
+		v := *s.LastModifiedDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastModifiedDate", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
 	}
 	if s.PolicyArn != nil {
 		v := *s.PolicyArn
@@ -20527,6 +20615,8 @@ type RoleAliasDescription struct {
 	// The role alias.
 	RoleAlias *string `locationName:"roleAlias" min:"1" type:"string"`
 
+	RoleAliasArn *string `locationName:"roleAliasArn" type:"string"`
+
 	// The role ARN.
 	RoleArn *string `locationName:"roleArn" min:"20" type:"string"`
 }
@@ -20572,6 +20662,12 @@ func (s RoleAliasDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "roleAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleAliasArn != nil {
+		v := *s.RoleAliasArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleAliasArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RoleArn != nil {
 		v := *s.RoleArn

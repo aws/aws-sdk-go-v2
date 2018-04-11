@@ -118,6 +118,8 @@ type CloudDirectoryAPI interface {
 
 	GetFacetRequest(*clouddirectory.GetFacetInput) clouddirectory.GetFacetRequest
 
+	GetObjectAttributesRequest(*clouddirectory.GetObjectAttributesInput) clouddirectory.GetObjectAttributesRequest
+
 	GetObjectInformationRequest(*clouddirectory.GetObjectInformationInput) clouddirectory.GetObjectInformationRequest
 
 	GetSchemaAsJsonRequest(*clouddirectory.GetSchemaAsJsonInput) clouddirectory.GetSchemaAsJsonRequest

@@ -41,7 +41,7 @@ func (r AddPermissionRequest) Send() (*AddPermissionOutput, error) {
 // you add to the resource policy allows an event source, permission to invoke
 // the Lambda function.
 //
-// For information about the push model, see AWS Lambda: How it Works (http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html).
+// For information about the push model, see Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html).
 //
 // If you are using versioning, the permissions you add are specific to the
 // Lambda function version or alias you specify in the AddPermission request
@@ -159,16 +159,11 @@ func (r CreateEventSourceMappingRequest) Send() (*UpdateEventSourceMappingOutput
 // This association between a stream source and a Lambda function is called
 // the event source mapping.
 //
-// This event source mapping is relevant only in the AWS Lambda pull model,
-// where AWS Lambda invokes the function. For more information, see AWS Lambda:
-// How it Works (http://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html)
-// in the AWS Lambda Developer Guide.
-//
 // You provide mapping information (for example, which stream to read from and
 // which Lambda function to invoke) in the request body.
 //
 // Each event source, such as an Amazon Kinesis or a DynamoDB stream, can be
-// associated with multiple AWS Lambda function. A given Lambda function can
+// associated with multiple AWS Lambda functions. A given Lambda function can
 // be associated with multiple AWS event sources.
 //
 // If you are using versioning, you can specify a specific function version
@@ -1262,7 +1257,9 @@ func (r ListTagsRequest) Send() (*ListTagsOutput, error) {
 // AWS Lambda.
 //
 // Returns a list of tags assigned to a function when supplied the function
-// ARN (Amazon Resource Name).
+// ARN (Amazon Resource Name). For more information on Tagging, see Tagging
+// Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+// in the AWS Lambda Developer Guide.
 //
 //    // Example sending a request using the ListTagsRequest method.
 //    req := client.ListTagsRequest(params)
@@ -1539,6 +1536,8 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 // Creates a list of tags (key-value pairs) on the Lambda function. Requires
 // the Lambda function ARN (Amazon Resource Name). If a key is specified without
 // a value, Lambda creates a tag with the specified key and a value of null.
+// For more information, see Tagging Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+// in the AWS Lambda Developer Guide.
 //
 //    // Example sending a request using the TagResourceRequest method.
 //    req := client.TagResourceRequest(params)
@@ -1591,7 +1590,8 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 // AWS Lambda.
 //
 // Removes tags from a Lambda function. Requires the function ARN (Amazon Resource
-// Name).
+// Name). For more information, see Tagging Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+// in the AWS Lambda Developer Guide.
 //
 //    // Example sending a request using the UntagResourceRequest method.
 //    req := client.UntagResourceRequest(params)
@@ -2393,9 +2393,11 @@ type CreateEventSourceMappingInput struct {
 	// FunctionName is a required field
 	FunctionName *string `min:"1" type:"string" required:"true"`
 
-	// The position in the stream where AWS Lambda should start reading. Valid only
-	// for Kinesis streams. For more information, see ShardIteratorType (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType)
-	// in the Amazon Kinesis API Reference.
+	// The position in the DynamoDB or Kinesis stream where AWS Lambda should start
+	// reading. For more information, see GetShardIterator (http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType)
+	// in the Amazon Kinesis API Reference Guide or GetShardIterator (http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_streams_GetShardIterator.html)
+	// in the Amazon DynamoDB API Reference Guide. The AT_TIMESTAMP value is supported
+	// only for Kinesis streams (http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html).
 	//
 	// StartingPosition is a required field
 	StartingPosition EventSourcePosition `type:"string" required:"true" enum:"true"`
@@ -2405,7 +2407,7 @@ type CreateEventSourceMappingInput struct {
 	// AT_TIMESTAMP. If a record with this exact timestamp does not exist, the iterator
 	// returned is for the next (later) record. If the timestamp is older than the
 	// current trim horizon, the iterator returned is for the oldest untrimmed data
-	// record (TRIM_HORIZON). Valid only for Kinesis streams.
+	// record (TRIM_HORIZON). Valid only for Kinesis streams (http://docs.aws.amazon.com/streams/latest/dev/amazon-kinesis-streams.html).
 	StartingPositionTimestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
 
@@ -2498,7 +2500,7 @@ type CreateFunctionInput struct {
 	Code *FunctionCode `type:"structure" required:"true"`
 
 	// The parent object that contains the target ARN (Amazon Resource Name) of
-	// an Amazon SQS queue or Amazon SNS topic.
+	// an Amazon SQS queue or Amazon SNS topic. For more information, see dlq.
 	DeadLetterConfig *DeadLetterConfig `type:"structure"`
 
 	// A short, user-defined function description. Lambda does not use this value.
@@ -2554,7 +2556,8 @@ type CreateFunctionInput struct {
 	// To use the Python runtime v3.6, set the value to "python3.6". To use the
 	// Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime
 	// v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set
-	// the value to "nodejs4.3".
+	// the value to "nodejs4.3". To use the .NET Core runtime v1.0, set the value
+	// to "dotnetcore1.0". To use the .NET Core runtime v2.0, set the value to "dotnetcore2.0".
 	//
 	// Node v0.10.42 is currently marked as deprecated. You must migrate existing
 	// functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3
@@ -2565,7 +2568,9 @@ type CreateFunctionInput struct {
 	// Runtime is a required field
 	Runtime Runtime `type:"string" required:"true" enum:"true"`
 
-	// The list of tags (key-value pairs) assigned to the new function.
+	// The list of tags (key-value pairs) assigned to the new function. For more
+	// information, see Tagging Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+	// in the AWS Lambda Developer Guide.
 	Tags map[string]string `type:"map"`
 
 	// The function execution time at which Lambda should terminate the function.
@@ -2738,14 +2743,15 @@ func (s CreateFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The parent object that contains the target ARN (Amazon Resource Name) of
-// an Amazon SQS queue or Amazon SNS topic.
+// The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic
+// you specify as your Dead Letter Queue (DLQ). For more information, see dlq.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeadLetterConfig
 type DeadLetterConfig struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic
-	// you specify as your Dead Letter Queue (DLQ).
+	// you specify as your Dead Letter Queue (DLQ). dlq. For more information, see
+	// dlq.
 	TargetArn *string `type:"string"`
 }
 
@@ -3698,7 +3704,9 @@ type GetFunctionOutput struct {
 	// A complex type that describes function metadata.
 	Configuration *UpdateFunctionConfigurationOutput `type:"structure"`
 
-	// Returns the list of tags associated with the function.
+	// Returns the list of tags associated with the function. For more information,
+	// see Tagging Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+	// in the AWS Lambda Developer Guide.
 	Tags map[string]string `type:"map"`
 }
 
@@ -4600,7 +4608,9 @@ func (s ListFunctionsOutput) MarshalFields(e protocol.FieldEncoder) error {
 type ListTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN (Amazon Resource Name) of the function.
+	// The ARN (Amazon Resource Name) of the function. For more information, see
+	// Tagging Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+	// in the AWS Lambda Developer Guide.
 	//
 	// Resource is a required field
 	Resource *string `location:"uri" locationName:"ARN" type:"string" required:"true"`
@@ -4648,7 +4658,9 @@ type ListTagsOutput struct {
 
 	responseMetadata aws.Response
 
-	// The list of tags assigned to the function.
+	// The list of tags assigned to the function. For more information, see Tagging
+	// Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+	// in the AWS Lambda Developer Guide.
 	Tags map[string]string `type:"map"`
 }
 
@@ -5137,12 +5149,16 @@ func (s RemovePermissionOutput) MarshalFields(e protocol.FieldEncoder) error {
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN (Amazon Resource Name) of the Lambda function.
+	// The ARN (Amazon Resource Name) of the Lambda function. For more information,
+	// see Tagging Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+	// in the AWS Lambda Developer Guide.
 	//
 	// Resource is a required field
 	Resource *string `location:"uri" locationName:"ARN" type:"string" required:"true"`
 
 	// The list of tags (key-value pairs) you are assigning to the Lambda function.
+	// For more information, see Tagging Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+	// in the AWS Lambda Developer Guide.
 	//
 	// Tags is a required field
 	Tags map[string]string `type:"map" required:"true"`
@@ -5295,12 +5311,16 @@ func (s TracingConfigResponse) MarshalFields(e protocol.FieldEncoder) error {
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN (Amazon Resource Name) of the function.
+	// The ARN (Amazon Resource Name) of the function. For more information, see
+	// Tagging Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+	// in the AWS Lambda Developer Guide.
 	//
 	// Resource is a required field
 	Resource *string `location:"uri" locationName:"ARN" type:"string" required:"true"`
 
-	// The list of tag keys to be deleted from the function.
+	// The list of tag keys to be deleted from the function. For more information,
+	// see Tagging Lambda Functions (http://docs.aws.amazon.com/lambda/latest/dg/tagging.html)
+	// in the AWS Lambda Developer Guide.
 	//
 	// TagKeys is a required field
 	TagKeys []string `location:"querystring" locationName:"tagKeys" type:"list" required:"true"`
@@ -5835,8 +5855,7 @@ type UpdateFunctionCodeInput struct {
 	// are using the web API directly, the contents of the zip file must be base64-encoded.
 	// If you are using the AWS SDKs or the AWS CLI, the SDKs or CLI will do the
 	// encoding for you. For more information about creating a .zip file, see Execution
-	// Permissions (http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html)
-	// in the AWS Lambda Developer Guide.
+	// Permissions (http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html).
 	//
 	// ZipFile is automatically base64 encoded/decoded by the SDK.
 	ZipFile []byte `type:"blob"`
@@ -5937,7 +5956,7 @@ type UpdateFunctionConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
 	// The parent object that contains the target ARN (Amazon Resource Name) of
-	// an Amazon SQS queue or Amazon SNS topic.
+	// an Amazon SQS queue or Amazon SNS topic. For more information, see dlq.
 	DeadLetterConfig *DeadLetterConfig `type:"structure"`
 
 	// A short user-defined function description. AWS Lambda does not use this value.
@@ -5991,8 +6010,8 @@ type UpdateFunctionConfigurationInput struct {
 	// To use the Python runtime v3.6, set the value to "python3.6". To use the
 	// Python runtime v2.7, set the value to "python2.7". To use the Node.js runtime
 	// v6.10, set the value to "nodejs6.10". To use the Node.js runtime v4.3, set
-	// the value to "nodejs4.3". To use the Python runtime v3.6, set the value to
-	// "python3.6".
+	// the value to "nodejs4.3". To use the .NET Core runtime v1.0, set the value
+	// to "dotnetcore1.0". To use the .NET Core runtime v2.0, set the value to "dotnetcore2.0".
 	//
 	// Node v0.10.42 is currently marked as deprecated. You must migrate existing
 	// functions to the newer Node.js runtime versions available on AWS Lambda (nodejs4.3
@@ -6147,7 +6166,7 @@ type UpdateFunctionConfigurationOutput struct {
 	CodeSize *int64 `type:"long"`
 
 	// The parent object that contains the target ARN (Amazon Resource Name) of
-	// an Amazon SQS queue or Amazon SNS topic.
+	// an Amazon SQS queue or Amazon SNS topic. For more information, see dlq.
 	DeadLetterConfig *DeadLetterConfig `type:"structure"`
 
 	// The user-provided description.
@@ -6534,6 +6553,7 @@ const (
 	RuntimeNodejs       Runtime = "nodejs"
 	RuntimeNodejs43     Runtime = "nodejs4.3"
 	RuntimeNodejs610    Runtime = "nodejs6.10"
+	RuntimeNodejs810    Runtime = "nodejs8.10"
 	RuntimeJava8        Runtime = "java8"
 	RuntimePython27     Runtime = "python2.7"
 	RuntimePython36     Runtime = "python3.6"

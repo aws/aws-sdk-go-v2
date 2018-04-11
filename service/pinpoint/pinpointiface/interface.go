@@ -66,6 +66,8 @@ type PinpointAPI interface {
 
 	CreateCampaignRequest(*pinpoint.CreateCampaignInput) pinpoint.CreateCampaignRequest
 
+	CreateExportJobRequest(*pinpoint.CreateExportJobInput) pinpoint.CreateExportJobRequest
+
 	CreateImportJobRequest(*pinpoint.CreateImportJobInput) pinpoint.CreateImportJobRequest
 
 	CreateSegmentRequest(*pinpoint.CreateSegmentInput) pinpoint.CreateSegmentRequest
@@ -87,6 +89,8 @@ type PinpointAPI interface {
 	DeleteCampaignRequest(*pinpoint.DeleteCampaignInput) pinpoint.DeleteCampaignRequest
 
 	DeleteEmailChannelRequest(*pinpoint.DeleteEmailChannelInput) pinpoint.DeleteEmailChannelRequest
+
+	DeleteEndpointRequest(*pinpoint.DeleteEndpointInput) pinpoint.DeleteEndpointRequest
 
 	DeleteEventStreamRequest(*pinpoint.DeleteEventStreamInput) pinpoint.DeleteEventStreamRequest
 
@@ -130,6 +134,10 @@ type PinpointAPI interface {
 
 	GetEventStreamRequest(*pinpoint.GetEventStreamInput) pinpoint.GetEventStreamRequest
 
+	GetExportJobRequest(*pinpoint.GetExportJobInput) pinpoint.GetExportJobRequest
+
+	GetExportJobsRequest(*pinpoint.GetExportJobsInput) pinpoint.GetExportJobsRequest
+
 	GetGcmChannelRequest(*pinpoint.GetGcmChannelInput) pinpoint.GetGcmChannelRequest
 
 	GetImportJobRequest(*pinpoint.GetImportJobInput) pinpoint.GetImportJobRequest
@@ -137,6 +145,8 @@ type PinpointAPI interface {
 	GetImportJobsRequest(*pinpoint.GetImportJobsInput) pinpoint.GetImportJobsRequest
 
 	GetSegmentRequest(*pinpoint.GetSegmentInput) pinpoint.GetSegmentRequest
+
+	GetSegmentExportJobsRequest(*pinpoint.GetSegmentExportJobsInput) pinpoint.GetSegmentExportJobsRequest
 
 	GetSegmentImportJobsRequest(*pinpoint.GetSegmentImportJobsInput) pinpoint.GetSegmentImportJobsRequest
 

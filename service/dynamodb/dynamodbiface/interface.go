@@ -107,11 +107,15 @@ type DynamoDBAPI interface {
 
 	RestoreTableFromBackupRequest(*dynamodb.RestoreTableFromBackupInput) dynamodb.RestoreTableFromBackupRequest
 
+	RestoreTableToPointInTimeRequest(*dynamodb.RestoreTableToPointInTimeInput) dynamodb.RestoreTableToPointInTimeRequest
+
 	ScanRequest(*dynamodb.ScanInput) dynamodb.ScanRequest
 
 	TagResourceRequest(*dynamodb.TagResourceInput) dynamodb.TagResourceRequest
 
 	UntagResourceRequest(*dynamodb.UntagResourceInput) dynamodb.UntagResourceRequest
+
+	UpdateContinuousBackupsRequest(*dynamodb.UpdateContinuousBackupsInput) dynamodb.UpdateContinuousBackupsRequest
 
 	UpdateGlobalTableRequest(*dynamodb.UpdateGlobalTableInput) dynamodb.UpdateGlobalTableRequest
 

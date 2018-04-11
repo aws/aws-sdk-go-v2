@@ -670,7 +670,7 @@ func (r PutTargetsRequest) Send() (*PutTargetsOutput, error) {
 //
 //    * Amazon SNS topics
 //
-//    * Amazon SQS queues
+//    * Amazon SQS queues, including FIFO queues
 //
 //    * The default event bus of another AWS account
 //
@@ -2414,6 +2414,26 @@ func (s *RunCommandTarget) Validate() error {
 	return nil
 }
 
+// This structure includes the custom parameter to be used when the target is
+// an SQS FIFO queue.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/events-2015-10-07/SqsParameters
+type SqsParameters struct {
+	_ struct{} `type:"structure"`
+
+	// The FIFO message group ID to use as the target.
+	MessageGroupId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SqsParameters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SqsParameters) GoString() string {
+	return s.String()
+}
+
 // Targets are the resources to be invoked when a rule is triggered. Target
 // types include EC2 instances, AWS Lambda functions, Amazon Kinesis streams,
 // Amazon ECS tasks, AWS Step Functions state machines, Run Command, and built-in
@@ -2471,6 +2491,9 @@ type Target struct {
 
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command.
 	RunCommandParameters *RunCommandParameters `type:"structure"`
+
+	// Contains the message group ID to use when the target is a FIFO queue.
+	SqsParameters *SqsParameters `type:"structure"`
 }
 
 // String returns the string representation

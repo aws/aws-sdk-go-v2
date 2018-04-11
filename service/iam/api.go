@@ -37,8 +37,8 @@ func (r AddClientIDToOpenIDConnectProviderRequest) Send() (*AddClientIDToOpenIDC
 // Adds a new client ID (also known as audience) to the list of client IDs already
 // registered for the specified IAM OpenID Connect (OIDC) provider resource.
 //
-// This action is idempotent; it does not fail or return an error if you add
-// an existing client ID to the provider.
+// This operation is idempotent; it does not fail or return an error if you
+// add an existing client ID to the provider.
 //
 //    // Example sending a request using the AddClientIDToOpenIDConnectProviderRequest method.
 //    req := client.AddClientIDToOpenIDConnectProviderRequest(params)
@@ -91,7 +91,13 @@ func (r AddRoleToInstanceProfileRequest) Send() (*AddRoleToInstanceProfileOutput
 // AWS Identity and Access Management.
 //
 // Adds the specified IAM role to the specified instance profile. An instance
-// profile can contain only one role, and this limit cannot be increased.
+// profile can contain only one role, and this limit cannot be increased. You
+// can remove the existing role and then add a different role to an instance
+// profile. You must then wait for the change to appear across all of AWS because
+// of eventual consistency (https://en.wikipedia.org/wiki/Eventual_consistency).
+// To force the change, you must disassociate the instance profile (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html)
+// and then associate the instance profile (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html),
+// or you can stop your instance and then restart it.
 //
 // The caller of this API must be granted the PassRole permission on the IAM
 // role by a permission policy.
@@ -383,8 +389,8 @@ func (r ChangePasswordRequest) Send() (*ChangePasswordOutput, error) {
 // ChangePasswordRequest returns a request value for making API operation for
 // AWS Identity and Access Management.
 //
-// Changes the password of the IAM user who is calling this action. The root
-// account password is not affected by this action.
+// Changes the password of the IAM user who is calling this operation. The AWS
+// account root user password is not affected by this operation.
 //
 // To change the password for a different user, see UpdateLoginProfile. For
 // more information about modifying passwords, see Managing Passwords (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html)
@@ -444,9 +450,10 @@ func (r CreateAccessKeyRequest) Send() (*CreateAccessKeyOutput, error) {
 // the specified user. The default status for new keys is Active.
 //
 // If you do not specify a user name, IAM determines the user name implicitly
-// based on the AWS access key ID signing the request. Because this action works
-// for access keys under the AWS account, you can use this action to manage
-// root credentials even if the AWS account has no associated users.
+// based on the AWS access key ID signing the request. Because this operation
+// works for access keys under the AWS account, you can use this operation to
+// manage AWS account root user credentials. This is true even if the AWS account
+// has no associated users.
 //
 // For information about limits on the number of keys you can create, see Limitations
 // on IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
@@ -726,19 +733,24 @@ func (r CreateOpenIDConnectProviderRequest) Send() (*CreateOpenIDConnectProvider
 // OpenID Connect (OIDC) (http://openid.net/connect/).
 //
 // The OIDC provider that you create with this operation can be used as a principal
-// in a role's trust policy to establish a trust relationship between AWS and
-// the OIDC provider.
+// in a role's trust policy. Such a policy establishes a trust relationship
+// between AWS and the OIDC provider.
 //
-// When you create the IAM OIDC provider, you specify the URL of the OIDC identity
-// provider (IdP) to trust, a list of client IDs (also known as audiences) that
-// identify the application or applications that are allowed to authenticate
-// using the OIDC provider, and a list of thumbprints of the server certificate(s)
-// that the IdP uses. You get all of this information from the OIDC IdP that
-// you want to use for access to AWS.
+// When you create the IAM OIDC provider, you specify the following:
 //
-// Because trust for the OIDC provider is ultimately derived from the IAM provider
-// that this action creates, it is a best practice to limit access to the CreateOpenIDConnectProvider
-// action to highly-privileged users.
+//    * The URL of the OIDC identity provider (IdP) to trust
+//
+//    * A list of client IDs (also known as audiences) that identify the application
+//    or applications that are allowed to authenticate using the OIDC provider
+//
+//    * A list of thumbprints of the server certificate(s) that the IdP uses.
+//
+// You get all of this information from the OIDC IdP that you want to use to
+// access AWS.
+//
+// Because trust for the OIDC provider is derived from the IAM provider that
+// this operation creates, it is best to limit access to the CreateOpenIDConnectProvider
+// operation to highly privileged users.
 //
 //    // Example sending a request using the CreateOpenIDConnectProviderRequest method.
 //    req := client.CreateOpenIDConnectProviderRequest(params)
@@ -909,7 +921,7 @@ func (r CreateRoleRequest) Send() (*CreateRoleOutput, error) {
 // AWS Identity and Access Management.
 //
 // Creates a new role for your AWS account. For more information about roles,
-// go to Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
+// go to IAM Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
 // For information about limitations on role names and the number of roles you
 // can create, go to Limitations on IAM Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
 // in the IAM User Guide.
@@ -966,14 +978,14 @@ func (r CreateSAMLProviderRequest) Send() (*CreateSAMLProviderOutput, error) {
 // SAML 2.0.
 //
 // The SAML provider resource that you create with this operation can be used
-// as a principal in an IAM role's trust policy to enable federated users who
-// sign-in using the SAML IdP to assume the role. You can create an IAM role
-// that supports Web-based single sign-on (SSO) to the AWS Management Console
-// or one that supports API access to AWS.
+// as a principal in an IAM role's trust policy. Such a policy can enable federated
+// users who sign-in using the SAML IdP to assume the role. You can create an
+// IAM role that supports Web-based single sign-on (SSO) to the AWS Management
+// Console or one that supports API access to AWS.
 //
-// When you create the SAML provider resource, you upload an a SAML metadata
-// document that you get from your IdP and that includes the issuer's name,
-// expiration information, and keys that can be used to validate the SAML authentication
+// When you create the SAML provider resource, you upload a SAML metadata document
+// that you get from your IdP. That document includes the issuer's name, expiration
+// information, and keys that can be used to validate the SAML authentication
 // response (assertions) that the IdP sends. You must generate the metadata
 // document using the identity management software that is used as your organization's
 // IdP.
@@ -1040,7 +1052,7 @@ func (r CreateServiceLinkedRoleRequest) Send() (*CreateServiceLinkedRoleOutput, 
 // the service to control the role helps improve service stability and proper
 // cleanup when a service and its role are no longer needed.
 //
-// The name of the role is autogenerated by combining the string that you specify
+// The name of the role is generated by combining the string that you specify
 // for the AWSServiceName parameter with the string that you specify for the
 // CustomSuffix parameter. The resulting name must be unique in your account
 // or the request fails.
@@ -1336,9 +1348,10 @@ func (r DeleteAccessKeyRequest) Send() (*DeleteAccessKeyOutput, error) {
 // Deletes the access key pair associated with the specified IAM user.
 //
 // If you do not specify a user name, IAM determines the user name implicitly
-// based on the AWS access key ID signing the request. Because this action works
-// for access keys under the AWS account, you can use this action to manage
-// root credentials even if the AWS account has no associated users.
+// based on the AWS access key ID signing the request. Because this operation
+// works for access keys under the AWS account, you can use this operation to
+// manage AWS account root user credentials even if the AWS account has no associated
+// users.
 //
 //    // Example sending a request using the DeleteAccessKeyRequest method.
 //    req := client.DeleteAccessKeyRequest(params)
@@ -1610,9 +1623,9 @@ func (r DeleteInstanceProfileRequest) Send() (*DeleteInstanceProfileOutput, erro
 // Deletes the specified instance profile. The instance profile must not have
 // an associated role.
 //
-// Make sure you do not have any Amazon EC2 instances running with the instance
-// profile you are about to delete. Deleting a role or instance profile that
-// is associated with a running instance will break any applications running
+// Make sure that you do not have any Amazon EC2 instances running with the
+// instance profile you are about to delete. Deleting a role or instance profile
+// that is associated with a running instance will break any applications running
 // on the instance.
 //
 // For more information about instance profiles, go to About Instance Profiles
@@ -1732,8 +1745,8 @@ func (r DeleteOpenIDConnectProviderRequest) Send() (*DeleteOpenIDConnectProvider
 // the provider as a principal in their trust policies. Any attempt to assume
 // a role that references a deleted provider fails.
 //
-// This action is idempotent; it does not fail or return an error if you call
-// the action for a provider that does not exist.
+// This operation is idempotent; it does not fail or return an error if you
+// call the operation for a provider that does not exist.
 //
 //    // Example sending a request using the DeleteOpenIDConnectProviderRequest method.
 //    req := client.DeleteOpenIDConnectProviderRequest(params)
@@ -1788,14 +1801,14 @@ func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
 // Deletes the specified managed policy.
 //
 // Before you can delete a managed policy, you must first detach the policy
-// from all users, groups, and roles that it is attached to, and you must delete
-// all of the policy's versions. The following steps describe the process for
-// deleting a managed policy:
+// from all users, groups, and roles that it is attached to. In addition you
+// must delete all the policy's versions. The following steps describe the process
+// for deleting a managed policy:
 //
 //    * Detach the policy from all users, groups, and roles that the policy
 //    is attached to, using the DetachUserPolicy, DetachGroupPolicy, or DetachRolePolicy
-//    APIs. To list all the users, groups, and roles that a policy is attached
-//    to, use ListEntitiesForPolicy.
+//    API operations. To list all the users, groups, and roles that a policy
+//    is attached to, use ListEntitiesForPolicy.
 //
 //    * Delete all versions of the policy using DeletePolicyVersion. To list
 //    the policy's versions, use ListPolicyVersions. You cannot use DeletePolicyVersion
@@ -1922,9 +1935,10 @@ func (r DeleteRoleRequest) Send() (*DeleteRoleOutput, error) {
 // Deletes the specified role. The role must not have any policies attached.
 // For more information about roles, go to Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
 //
-// Make sure you do not have any Amazon EC2 instances running with the role
-// you are about to delete. Deleting a role or instance profile that is associated
-// with a running instance will break any applications running on the instance.
+// Make sure that you do not have any Amazon EC2 instances running with the
+// role you are about to delete. Deleting a role or instance profile that is
+// associated with a running instance will break any applications running on
+// the instance.
 //
 //    // Example sending a request using the DeleteRoleRequest method.
 //    req := client.DeleteRoleRequest(params)
@@ -2095,7 +2109,7 @@ func (r DeleteSSHPublicKeyRequest) Send() (*DeleteSSHPublicKeyOutput, error) {
 //
 // Deletes the specified SSH public key.
 //
-// The SSH public key deleted by this action is used only for authenticating
+// The SSH public key deleted by this operation is used only for authenticating
 // the associated IAM user to an AWS CodeCommit repository. For more information
 // about using SSH keys to authenticate to an AWS CodeCommit repository, see
 // Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
@@ -2153,10 +2167,10 @@ func (r DeleteServerCertificateRequest) Send() (*DeleteServerCertificateOutput, 
 //
 // Deletes the specified server certificate.
 //
-// For more information about working with server certificates, including a
-// list of AWS services that can use the server certificates that you manage
-// with IAM, go to Working with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
-// in the IAM User Guide.
+// For more information about working with server certificates, see Working
+// with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
+// in the IAM User Guide. This topic also includes a list of AWS services that
+// can use the server certificates that you manage with IAM.
 //
 // If you are using a server certificate with Elastic Load Balancing, deleting
 // the certificate could have implications for your application. If Elastic
@@ -2228,8 +2242,8 @@ func (r DeleteServiceLinkedRoleRequest) Send() (*DeleteServiceLinkedRoleOutput, 
 // If you submit a deletion request for a service-linked role whose linked service
 // is still accessing a resource, then the deletion task fails. If it fails,
 // the GetServiceLinkedRoleDeletionStatus API operation returns the reason for
-// the failure, including the resources that must be deleted. To delete the
-// service-linked role, you must first remove those resources from the linked
+// the failure, usually including the resources that must be deleted. To delete
+// the service-linked role, you must first remove those resources from the linked
 // service and then submit the deletion request again. Resources are specific
 // to the service that is linked to the role. For more information about removing
 // resources from a service, see the AWS documentation (http://docs.aws.amazon.com/)
@@ -2342,9 +2356,10 @@ func (r DeleteSigningCertificateRequest) Send() (*DeleteSigningCertificateOutput
 // Deletes a signing certificate associated with the specified IAM user.
 //
 // If you do not specify a user name, IAM determines the user name implicitly
-// based on the AWS access key ID signing the request. Because this action works
-// for access keys under the AWS account, you can use this action to manage
-// root credentials even if the AWS account has no associated IAM users.
+// based on the AWS access key ID signing the request. Because this operation
+// works for access keys under the AWS account, you can use this operation to
+// manage AWS account root user credentials even if the AWS account has no associated
+// IAM users.
 //
 //    // Example sending a request using the DeleteSigningCertificateRequest method.
 //    req := client.DeleteSigningCertificateRequest(params)
@@ -2897,6 +2912,12 @@ func (r GetAccountAuthorizationDetailsRequest) Send() (*GetAccountAuthorizationD
 // API to obtain a snapshot of the configuration of IAM permissions (users,
 // groups, roles, and policies) in your account.
 //
+// Policies returned by this API are URL-encoded compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986).
+// You can use a URL decoding method to convert the policy back to plain JSON
+// text. For example, if you use Java, you can use the decode method of the
+// java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs
+// provide similar functionality.
+//
 // You can optionally filter the results using the Filter parameter. You can
 // paginate the results using the MaxItems and Marker parameters.
 //
@@ -3110,10 +3131,10 @@ func (r GetContextKeysForCustomPolicyRequest) Send() (*GetContextKeysForPrincipa
 // keys from policies associated with an IAM user, group, or role, use GetContextKeysForPrincipalPolicy.
 //
 // Context keys are variables maintained by AWS and its services that provide
-// details about the context of an API query request, and can be evaluated by
-// testing against a value specified in an IAM policy. Use GetContextKeysForCustomPolicy
+// details about the context of an API query request. Context keys can be evaluated
+// by testing against a value specified in an IAM policy. Use GetContextKeysForCustomPolicy
 // to understand what key names and values you must supply when you call SimulateCustomPolicy.
-// Note that all parameters are shown in unencoded form here for clarity, but
+// Note that all parameters are shown in unencoded form here for clarity but
 // must be URL encoded to be included as a part of a real HTML request.
 //
 //    // Example sending a request using the GetContextKeysForCustomPolicyRequest method.
@@ -3164,10 +3185,10 @@ func (r GetContextKeysForPrincipalPolicyRequest) Send() (*GetContextKeysForPrinc
 // GetContextKeysForPrincipalPolicyRequest returns a request value for making API operation for
 // AWS Identity and Access Management.
 //
-// Gets a list of all of the context keys referenced in all of the IAM policies
-// attached to the specified IAM entity. The entity can be an IAM user, group,
-// or role. If you specify a user, then the request also includes all of the
-// policies attached to groups that the user is a member of.
+// Gets a list of all of the context keys referenced in all the IAM policies
+// that are attached to the specified IAM entity. The entity can be an IAM user,
+// group, or role. If you specify a user, then the request also includes all
+// of the policies attached to groups that the user is a member of.
 //
 // You can optionally include a list of one or more additional policies, specified
 // as strings. If you want to include only a list of policies by string, use
@@ -3178,8 +3199,8 @@ func (r GetContextKeysForPrincipalPolicyRequest) Send() (*GetContextKeysForPrinc
 // allowing them to use GetContextKeysForCustomPolicy instead.
 //
 // Context keys are variables maintained by AWS and its services that provide
-// details about the context of an API query request, and can be evaluated by
-// testing against a value in an IAM policy. Use GetContextKeysForPrincipalPolicy
+// details about the context of an API query request. Context keys can be evaluated
+// by testing against a value in an IAM policy. Use GetContextKeysForPrincipalPolicy
 // to understand what key names and values you must supply when you call SimulatePrincipalPolicy.
 //
 //    // Example sending a request using the GetContextKeysForPrincipalPolicyRequest method.
@@ -3505,8 +3526,8 @@ func (r GetLoginProfileRequest) Send() (*GetLoginProfileOutput, error) {
 // AWS Identity and Access Management.
 //
 // Retrieves the user name and password-creation date for the specified IAM
-// user. If the user has not been assigned a password, the action returns a
-// 404 (NoSuchEntity) error.
+// user. If the user has not been assigned a password, the operation returns
+// a 404 (NoSuchEntity) error.
 //
 //    // Example sending a request using the GetLoginProfileRequest method.
 //    req := client.GetLoginProfileRequest(params)
@@ -3923,7 +3944,7 @@ func (r GetSSHPublicKeyRequest) Send() (*GetSSHPublicKeyOutput, error) {
 //
 // Retrieves the specified SSH public key, including metadata about the key.
 //
-// The SSH public key retrieved by this action is used only for authenticating
+// The SSH public key retrieved by this operation is used only for authenticating
 // the associated IAM user to an AWS CodeCommit repository. For more information
 // about using SSH keys to authenticate to an AWS CodeCommit repository, see
 // Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
@@ -3979,10 +4000,10 @@ func (r GetServerCertificateRequest) Send() (*GetServerCertificateOutput, error)
 //
 // Retrieves information about the specified server certificate stored in IAM.
 //
-// For more information about working with server certificates, including a
-// list of AWS services that can use the server certificates that you manage
-// with IAM, go to Working with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
-// in the IAM User Guide.
+// For more information about working with server certificates, see Working
+// with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
+// in the IAM User Guide. This topic includes a list of AWS services that can
+// use the server certificates that you manage with IAM.
 //
 //    // Example sending a request using the GetServerCertificateRequest method.
 //    req := client.GetServerCertificateRequest(params)
@@ -4036,7 +4057,8 @@ func (r GetServiceLinkedRoleDeletionStatusRequest) Send() (*GetServiceLinkedRole
 // the DeleteServiceLinkedRole API operation to submit a service-linked role
 // for deletion, you can use the DeletionTaskId parameter in GetServiceLinkedRoleDeletionStatus
 // to check the status of the deletion. If the deletion fails, this operation
-// returns the reason that it failed.
+// returns the reason that it failed, if that information is returned by the
+// service.
 //
 //    // Example sending a request using the GetServiceLinkedRoleDeletionStatusRequest method.
 //    req := client.GetServiceLinkedRoleDeletionStatusRequest(params)
@@ -4207,15 +4229,16 @@ func (r ListAccessKeysRequest) Send() (*ListAccessKeysOutput, error) {
 // AWS Identity and Access Management.
 //
 // Returns information about the access key IDs associated with the specified
-// IAM user. If there are none, the action returns an empty list.
+// IAM user. If there are none, the operation returns an empty list.
 //
 // Although each user is limited to a small number of keys, you can still paginate
 // the results using the MaxItems and Marker parameters.
 //
-// If the UserName field is not specified, the UserName is determined implicitly
-// based on the AWS access key ID used to sign the request. Because this action
-// works for access keys under the AWS account, you can use this action to manage
-// root credentials even if the AWS account has no associated users.
+// If the UserName field is not specified, the user name is determined implicitly
+// based on the AWS access key ID used to sign the request. Because this operation
+// works for access keys under the AWS account, you can use this operation to
+// manage AWS account root user credentials even if the AWS account has no associated
+// users.
 //
 // To ensure the security of your AWS account, the secret access key is accessible
 // only during key and user creation.
@@ -4435,7 +4458,7 @@ func (r ListAttachedGroupPoliciesRequest) Send() (*ListAttachedGroupPoliciesOutp
 // You can paginate the results using the MaxItems and Marker parameters. You
 // can use the PathPrefix parameter to limit the list of policies to only those
 // matching the specified path prefix. If there are no policies attached to
-// the specified group (or none that match the specified path prefix), the action
+// the specified group (or none that match the specified path prefix), the operation
 // returns an empty list.
 //
 //    // Example sending a request using the ListAttachedGroupPoliciesRequest method.
@@ -4548,7 +4571,7 @@ func (r ListAttachedRolePoliciesRequest) Send() (*ListAttachedRolePoliciesOutput
 // You can paginate the results using the MaxItems and Marker parameters. You
 // can use the PathPrefix parameter to limit the list of policies to only those
 // matching the specified path prefix. If there are no policies attached to
-// the specified role (or none that match the specified path prefix), the action
+// the specified role (or none that match the specified path prefix), the operation
 // returns an empty list.
 //
 //    // Example sending a request using the ListAttachedRolePoliciesRequest method.
@@ -4661,7 +4684,7 @@ func (r ListAttachedUserPoliciesRequest) Send() (*ListAttachedUserPoliciesOutput
 // You can paginate the results using the MaxItems and Marker parameters. You
 // can use the PathPrefix parameter to limit the list of policies to only those
 // matching the specified path prefix. If there are no policies attached to
-// the specified group (or none that match the specified path prefix), the action
+// the specified group (or none that match the specified path prefix), the operation
 // returns an empty list.
 //
 //    // Example sending a request using the ListAttachedUserPoliciesRequest method.
@@ -4884,7 +4907,7 @@ func (r ListGroupPoliciesRequest) Send() (*ListGroupPoliciesOutput, error) {
 // in the IAM User Guide.
 //
 // You can paginate the results using the MaxItems and Marker parameters. If
-// there are no inline policies embedded with the specified group, the action
+// there are no inline policies embedded with the specified group, the operation
 // returns an empty list.
 //
 //    // Example sending a request using the ListGroupPoliciesRequest method.
@@ -5196,8 +5219,8 @@ func (r ListInstanceProfilesRequest) Send() (*ListInstanceProfilesOutput, error)
 // AWS Identity and Access Management.
 //
 // Lists the instance profiles that have the specified path prefix. If there
-// are none, the action returns an empty list. For more information about instance
-// profiles, go to About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
+// are none, the operation returns an empty list. For more information about
+// instance profiles, go to About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
 //
 // You can paginate the results using the MaxItems and Marker parameters.
 //
@@ -5302,7 +5325,7 @@ func (r ListInstanceProfilesForRoleRequest) Send() (*ListInstanceProfilesForRole
 // AWS Identity and Access Management.
 //
 // Lists the instance profiles that have the specified associated IAM role.
-// If there are none, the action returns an empty list. For more information
+// If there are none, the operation returns an empty list. For more information
 // about instance profiles, go to About Instance Profiles (http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
 //
 // You can paginate the results using the MaxItems and Marker parameters.
@@ -5408,7 +5431,7 @@ func (r ListMFADevicesRequest) Send() (*ListMFADevicesOutput, error) {
 // AWS Identity and Access Management.
 //
 // Lists the MFA devices for an IAM user. If the request includes a IAM user
-// name, then this action lists all the MFA devices associated with the specified
+// name, then this operation lists all the MFA devices associated with the specified
 // user. If you do not specify a user name, IAM determines the user name implicitly
 // based on the AWS access key ID signing the request for this API.
 //
@@ -5795,7 +5818,7 @@ func (r ListRolePoliciesRequest) Send() (*ListRolePoliciesOutput, error) {
 // in the IAM User Guide.
 //
 // You can paginate the results using the MaxItems and Marker parameters. If
-// there are no inline policies embedded with the specified role, the action
+// there are no inline policies embedded with the specified role, the operation
 // returns an empty list.
 //
 //    // Example sending a request using the ListRolePoliciesRequest method.
@@ -5899,8 +5922,8 @@ func (r ListRolesRequest) Send() (*ListRolesOutput, error) {
 // AWS Identity and Access Management.
 //
 // Lists the IAM roles that have the specified path prefix. If there are none,
-// the action returns an empty list. For more information about roles, go to
-// Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
+// the operation returns an empty list. For more information about roles, go
+// to Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
 //
 // You can paginate the results using the MaxItems and Marker parameters.
 //
@@ -6057,9 +6080,9 @@ func (r ListSSHPublicKeysRequest) Send() (*ListSSHPublicKeysOutput, error) {
 // AWS Identity and Access Management.
 //
 // Returns information about the SSH public keys associated with the specified
-// IAM user. If there are none, the action returns an empty list.
+// IAM user. If there are none, the operation returns an empty list.
 //
-// The SSH public keys returned by this action are used only for authenticating
+// The SSH public keys returned by this operation are used only for authenticating
 // the IAM user to an AWS CodeCommit repository. For more information about
 // using SSH keys to authenticate to an AWS CodeCommit repository, see Set up
 // AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
@@ -6169,14 +6192,14 @@ func (r ListServerCertificatesRequest) Send() (*ListServerCertificatesOutput, er
 // AWS Identity and Access Management.
 //
 // Lists the server certificates stored in IAM that have the specified path
-// prefix. If none exist, the action returns an empty list.
+// prefix. If none exist, the operation returns an empty list.
 //
 // You can paginate the results using the MaxItems and Marker parameters.
 //
-// For more information about working with server certificates, including a
-// list of AWS services that can use the server certificates that you manage
-// with IAM, go to Working with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
-// in the IAM User Guide.
+// For more information about working with server certificates, see Working
+// with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
+// in the IAM User Guide. This topic also includes a list of AWS services that
+// can use the server certificates that you manage with IAM.
 //
 //    // Example sending a request using the ListServerCertificatesRequest method.
 //    req := client.ListServerCertificatesRequest(params)
@@ -6279,11 +6302,11 @@ func (r ListServiceSpecificCredentialsRequest) Send() (*ListServiceSpecificCrede
 // AWS Identity and Access Management.
 //
 // Returns information about the service-specific credentials associated with
-// the specified IAM user. If there are none, the action returns an empty list.
-// The service-specific credentials returned by this action are used only for
-// authenticating the IAM user to a specific service. For more information about
-// using service-specific credentials to authenticate to an AWS service, see
-// Set Up service-specific credentials (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html)
+// the specified IAM user. If there are none, the operation returns an empty
+// list. The service-specific credentials returned by this operation are used
+// only for authenticating the IAM user to a specific service. For more information
+// about using service-specific credentials to authenticate to an AWS service,
+// see Set Up service-specific credentials (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html)
 // in the AWS CodeCommit User Guide.
 //
 //    // Example sending a request using the ListServiceSpecificCredentialsRequest method.
@@ -6335,16 +6358,16 @@ func (r ListSigningCertificatesRequest) Send() (*ListSigningCertificatesOutput, 
 // AWS Identity and Access Management.
 //
 // Returns information about the signing certificates associated with the specified
-// IAM user. If there are none, the action returns an empty list.
+// IAM user. If there are none, the operation returns an empty list.
 //
 // Although each user is limited to a small number of signing certificates,
 // you can still paginate the results using the MaxItems and Marker parameters.
 //
 // If the UserName field is not specified, the user name is determined implicitly
 // based on the AWS access key ID used to sign the request for this API. Because
-// this action works for access keys under the AWS account, you can use this
-// action to manage root credentials even if the AWS account has no associated
-// users.
+// this operation works for access keys under the AWS account, you can use this
+// operation to manage AWS account root user credentials even if the AWS account
+// has no associated users.
 //
 //    // Example sending a request using the ListSigningCertificatesRequest method.
 //    req := client.ListSigningCertificatesRequest(params)
@@ -6454,7 +6477,7 @@ func (r ListUserPoliciesRequest) Send() (*ListUserPoliciesOutput, error) {
 // in the IAM User Guide.
 //
 // You can paginate the results using the MaxItems and Marker parameters. If
-// there are no inline policies embedded with the specified user, the action
+// there are no inline policies embedded with the specified user, the operation
 // returns an empty list.
 //
 //    // Example sending a request using the ListUserPoliciesRequest method.
@@ -6558,8 +6581,8 @@ func (r ListUsersRequest) Send() (*ListUsersOutput, error) {
 // AWS Identity and Access Management.
 //
 // Lists the IAM users that have the specified path prefix. If no path prefix
-// is specified, the action returns all users in the AWS account. If there are
-// none, the action returns an empty list.
+// is specified, the operation returns all users in the AWS account. If there
+// are none, the operation returns an empty list.
 //
 // You can paginate the results using the MaxItems and Marker parameters.
 //
@@ -6664,9 +6687,9 @@ func (r ListVirtualMFADevicesRequest) Send() (*ListVirtualMFADevicesOutput, erro
 // AWS Identity and Access Management.
 //
 // Lists the virtual MFA devices defined in the AWS account by assignment status.
-// If you do not specify an assignment status, the action returns a list of
-// all virtual MFA devices. Assignment status can be Assigned, Unassigned, or
-// Any.
+// If you do not specify an assignment status, the operation returns a list
+// of all virtual MFA devices. Assignment status can be Assigned, Unassigned,
+// or Any.
 //
 // You can paginate the results using the MaxItems and Marker parameters.
 //
@@ -6984,8 +7007,8 @@ func (r RemoveClientIDFromOpenIDConnectProviderRequest) Send() (*RemoveClientIDF
 // client IDs registered for the specified IAM OpenID Connect (OIDC) provider
 // resource object.
 //
-// This action is idempotent; it does not fail or return an error if you try
-// to remove a client ID that does not exist.
+// This operation is idempotent; it does not fail or return an error if you
+// try to remove a client ID that does not exist.
 //
 //    // Example sending a request using the RemoveClientIDFromOpenIDConnectProviderRequest method.
 //    req := client.RemoveClientIDFromOpenIDConnectProviderRequest(params)
@@ -7039,10 +7062,10 @@ func (r RemoveRoleFromInstanceProfileRequest) Send() (*RemoveRoleFromInstancePro
 //
 // Removes the specified IAM role from the specified EC2 instance profile.
 //
-// Make sure you do not have any Amazon EC2 instances running with the role
-// you are about to remove from the instance profile. Removing a role from an
-// instance profile that is associated with a running instance might break any
-// applications running on the instance.
+// Make sure that you do not have any Amazon EC2 instances running with the
+// role you are about to remove from the instance profile. Removing a role from
+// an instance profile that is associated with a running instance might break
+// any applications running on the instance.
 //
 // For more information about IAM roles, go to Working with Roles (http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
 // For more information about instance profiles, go to About Instance Profiles
@@ -7263,7 +7286,7 @@ func (r SetDefaultPolicyVersionRequest) Send() (*SetDefaultPolicyVersionOutput, 
 // Sets the specified version of the specified policy as the policy's default
 // (operative) version.
 //
-// This action affects all users, groups, and roles that the policy is attached
+// This operation affects all users, groups, and roles that the policy is attached
 // to. To list the users, groups, and roles that the policy is attached to,
 // use the ListEntitiesForPolicy API.
 //
@@ -7322,11 +7345,11 @@ func (r SimulateCustomPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, err
 // AWS Identity and Access Management.
 //
 // Simulate how a set of IAM policies and optionally a resource-based policy
-// works with a list of API actions and AWS resources to determine the policies'
+// works with a list of API operations and AWS resources to determine the policies'
 // effective permissions. The policies are provided as strings.
 //
-// The simulation does not perform the API actions; it only checks the authorization
-// to determine if the simulated policies allow or deny the actions.
+// The simulation does not perform the API operations; it only checks the authorization
+// to determine if the simulated policies allow or deny the operations.
 //
 // If you want to simulate existing policies attached to an IAM user, group,
 // or role, use SimulatePrincipalPolicy instead.
@@ -7440,10 +7463,10 @@ func (r SimulatePrincipalPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, 
 // AWS Identity and Access Management.
 //
 // Simulate how a set of IAM policies attached to an IAM entity works with a
-// list of API actions and AWS resources to determine the policies' effective
+// list of API operations and AWS resources to determine the policies' effective
 // permissions. The entity can be an IAM user, group, or role. If you specify
 // a user, then the simulation also includes all of the policies that are attached
-// to groups that the user belongs to .
+// to groups that the user belongs to.
 //
 // You can optionally include a list of one or more additional policies specified
 // as strings to include in the simulation. If you want to simulate only policies
@@ -7452,8 +7475,8 @@ func (r SimulatePrincipalPolicyRequest) Send() (*SimulatePrincipalPolicyOutput, 
 // You can also optionally include one resource-based policy to be evaluated
 // with each of the resources included in the simulation.
 //
-// The simulation does not perform the API actions, it only checks the authorization
-// to determine if the simulated policies allow or deny the actions.
+// The simulation does not perform the API operations, it only checks the authorization
+// to determine if the simulated policies allow or deny the operations.
 //
 // Note: This API discloses information about the permissions granted to other
 // users. If you do not want users to see other user's permissions, then consider
@@ -7568,13 +7591,14 @@ func (r UpdateAccessKeyRequest) Send() (*UpdateAccessKeyOutput, error) {
 // AWS Identity and Access Management.
 //
 // Changes the status of the specified access key from Active to Inactive, or
-// vice versa. This action can be used to disable a user's key as part of a
-// key rotation work flow.
+// vice versa. This operation can be used to disable a user's key as part of
+// a key rotation workflow.
 //
-// If the UserName field is not specified, the UserName is determined implicitly
-// based on the AWS access key ID used to sign the request. Because this action
-// works for access keys under the AWS account, you can use this action to manage
-// root credentials even if the AWS account has no associated users.
+// If the UserName field is not specified, the user name is determined implicitly
+// based on the AWS access key ID used to sign the request. Because this operation
+// works for access keys under the AWS account, you can use this operation to
+// manage AWS account root user credentials even if the AWS account has no associated
+// users.
 //
 // For information about rotating keys, see Managing Keys and Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html)
 // in the IAM User Guide.
@@ -7631,10 +7655,12 @@ func (r UpdateAccountPasswordPolicyRequest) Send() (*UpdateAccountPasswordPolicy
 //
 // Updates the password policy settings for the AWS account.
 //
-// This action does not support partial updates. No parameters are required,
+// This operation does not support partial updates. No parameters are required,
 // but if you do not specify a parameter, that parameter's value reverts to
 // its default value. See the Request Parameters section for each parameter's
-// default value.
+// default value. Also note that some parameters do not allow the default parameter
+// to be explicitly set. Instead, to invoke the default value, do not include
+// that parameter when you invoke the operation.
 //
 // For more information about using a password policy, see Managing an IAM Password
 // Policy (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html)
@@ -7751,11 +7777,12 @@ func (r UpdateGroupRequest) Send() (*UpdateGroupOutput, error) {
 // For more information, see Renaming Users and Groups (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html)
 // in the IAM User Guide.
 //
-// To change an IAM group name the requester must have appropriate permissions
-// on both the source object and the target object. For example, to change "Managers"
-// to "MGRs", the entity making the request must have permission on both "Managers"
-// and "MGRs", or must have permission on all (*). For more information about
-// permissions, see Permissions and Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html).
+// The person making the request (the principal), must have permission to change
+// the role group with the old name and the new name. For example, to change
+// the group named Managers to MGRs, the principal must have a policy that allows
+// them to update both groups. If the principal has permission to update the
+// Managers group, but not the MGRs group, then the update fails. For more information
+// about permissions, see Access Management (http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html).
 //
 //    // Example sending a request using the UpdateGroupRequest method.
 //    req := client.UpdateGroupRequest(params)
@@ -7866,7 +7893,7 @@ func (r UpdateOpenIDConnectProviderThumbprintRequest) Send() (*UpdateOpenIDConne
 // Replaces the existing list of server certificate thumbprints associated with
 // an OpenID Connect (OIDC) provider resource object with a new list of thumbprints.
 //
-// The list that you pass with this action completely replaces the existing
+// The list that you pass with this operation completely replaces the existing
 // list of thumbprints. (The lists are not merged.)
 //
 // Typically, you need to update a thumbprint only when the identity provider's
@@ -7874,10 +7901,9 @@ func (r UpdateOpenIDConnectProviderThumbprintRequest) Send() (*UpdateOpenIDConne
 // does change, any attempt to assume an IAM role that specifies the OIDC provider
 // as a principal fails until the certificate thumbprint is updated.
 //
-// Because trust for the OIDC provider is ultimately derived from the provider's
-// certificate and is validated by the thumbprint, it is a best practice to
-// limit access to the UpdateOpenIDConnectProviderThumbprint action to highly-privileged
-// users.
+// Because trust for the OIDC provider is derived from the provider's certificate
+// and is validated by the thumbprint, it is best to limit access to the UpdateOpenIDConnectProviderThumbprint
+// operation to highly privileged users.
 //
 //    // Example sending a request using the UpdateOpenIDConnectProviderThumbprintRequest method.
 //    req := client.UpdateOpenIDConnectProviderThumbprintRequest(params)
@@ -7907,6 +7933,56 @@ func (c *IAM) UpdateOpenIDConnectProviderThumbprintRequest(input *UpdateOpenIDCo
 	return UpdateOpenIDConnectProviderThumbprintRequest{Request: req, Input: input, Copy: c.UpdateOpenIDConnectProviderThumbprintRequest}
 }
 
+const opUpdateRole = "UpdateRole"
+
+// UpdateRoleRequest is a API request type for the UpdateRole API operation.
+type UpdateRoleRequest struct {
+	*aws.Request
+	Input *UpdateRoleInput
+	Copy  func(*UpdateRoleInput) UpdateRoleRequest
+}
+
+// Send marshals and sends the UpdateRole API request.
+func (r UpdateRoleRequest) Send() (*UpdateRoleOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRoleOutput), nil
+}
+
+// UpdateRoleRequest returns a request value for making API operation for
+// AWS Identity and Access Management.
+//
+// Updates the description or maximum session duration setting of a role.
+//
+//    // Example sending a request using the UpdateRoleRequest method.
+//    req := client.UpdateRoleRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRole
+func (c *IAM) UpdateRoleRequest(input *UpdateRoleInput) UpdateRoleRequest {
+	op := &aws.Operation{
+		Name:       opUpdateRole,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateRoleInput{}
+	}
+
+	output := &UpdateRoleOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateRoleRequest{Request: req, Input: input, Copy: c.UpdateRoleRequest}
+}
+
 const opUpdateRoleDescription = "UpdateRoleDescription"
 
 // UpdateRoleDescriptionRequest is a API request type for the UpdateRoleDescription API operation.
@@ -7929,7 +8005,10 @@ func (r UpdateRoleDescriptionRequest) Send() (*UpdateRoleDescriptionOutput, erro
 // UpdateRoleDescriptionRequest returns a request value for making API operation for
 // AWS Identity and Access Management.
 //
-// Modifies the description of a role.
+// Use instead.
+//
+// Modifies only the description of a role. This operation performs the same
+// function as the Description parameter in the UpdateRole operation.
 //
 //    // Example sending a request using the UpdateRoleDescriptionRequest method.
 //    req := client.UpdateRoleDescriptionRequest(params)
@@ -8032,11 +8111,11 @@ func (r UpdateSSHPublicKeyRequest) Send() (*UpdateSSHPublicKeyOutput, error) {
 // AWS Identity and Access Management.
 //
 // Sets the status of an IAM user's SSH public key to active or inactive. SSH
-// public keys that are inactive cannot be used for authentication. This action
+// public keys that are inactive cannot be used for authentication. This operation
 // can be used to disable a user's SSH public key as part of a key rotation
 // work flow.
 //
-// The SSH public key affected by this action is used only for authenticating
+// The SSH public key affected by this operation is used only for authenticating
 // the associated IAM user to an AWS CodeCommit repository. For more information
 // about using SSH keys to authenticate to an AWS CodeCommit repository, see
 // Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
@@ -8095,22 +8174,23 @@ func (r UpdateServerCertificateRequest) Send() (*UpdateServerCertificateOutput, 
 // Updates the name and/or the path of the specified server certificate stored
 // in IAM.
 //
-// For more information about working with server certificates, including a
-// list of AWS services that can use the server certificates that you manage
-// with IAM, go to Working with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
-// in the IAM User Guide.
+// For more information about working with server certificates, see Working
+// with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
+// in the IAM User Guide. This topic also includes a list of AWS services that
+// can use the server certificates that you manage with IAM.
 //
 // You should understand the implications of changing a server certificate's
 // path or name. For more information, see Renaming a Server Certificate (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs_manage.html#RenamingServerCerts)
 // in the IAM User Guide.
 //
-// To change a server certificate name the requester must have appropriate permissions
-// on both the source object and the target object. For example, to change the
-// name from "ProductionCert" to "ProdCert", the entity making the request must
-// have permission on "ProductionCert" and "ProdCert", or must have permission
-// on all (*). For more information about permissions, see Access Management
-// (http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the IAM
-// User Guide.
+// The person making the request (the principal), must have permission to change
+// the server certificate with the old name and the new name. For example, to
+// change the certificate named ProductionCert to ProdCert, the principal must
+// have a policy that allows them to update both certificates. If the principal
+// has permission to update the ProductionCert group, but not the ProdCert certificate,
+// then the update fails. For more information about permissions, see Access
+// Management (http://docs.aws.amazon.com/IAM/latest/UserGuide/access.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using the UpdateServerCertificateRequest method.
 //    req := client.UpdateServerCertificateRequest(params)
@@ -8164,8 +8244,8 @@ func (r UpdateServiceSpecificCredentialRequest) Send() (*UpdateServiceSpecificCr
 //
 // Sets the status of a service-specific credential to Active or Inactive. Service-specific
 // credentials that are inactive cannot be used for authentication to the service.
-// This action can be used to disable a user’s service-specific credential as
-// part of a credential rotation work flow.
+// This operation can be used to disable a user’s service-specific credential
+// as part of a credential rotation work flow.
 //
 //    // Example sending a request using the UpdateServiceSpecificCredentialRequest method.
 //    req := client.UpdateServiceSpecificCredentialRequest(params)
@@ -8218,13 +8298,14 @@ func (r UpdateSigningCertificateRequest) Send() (*UpdateSigningCertificateOutput
 // AWS Identity and Access Management.
 //
 // Changes the status of the specified user signing certificate from active
-// to disabled, or vice versa. This action can be used to disable an IAM user's
-// signing certificate as part of a certificate rotation work flow.
+// to disabled, or vice versa. This operation can be used to disable an IAM
+// user's signing certificate as part of a certificate rotation work flow.
 //
-// If the UserName field is not specified, the UserName is determined implicitly
-// based on the AWS access key ID used to sign the request. Because this action
-// works for access keys under the AWS account, you can use this action to manage
-// root credentials even if the AWS account has no associated users.
+// If the UserName field is not specified, the user name is determined implicitly
+// based on the AWS access key ID used to sign the request. Because this operation
+// works for access keys under the AWS account, you can use this operation to
+// manage AWS account root user credentials even if the AWS account has no associated
+// users.
 //
 //    // Example sending a request using the UpdateSigningCertificateRequest method.
 //    req := client.UpdateSigningCertificateRequest(params)
@@ -8283,7 +8364,7 @@ func (r UpdateUserRequest) Send() (*UpdateUserOutput, error) {
 // and Renaming an IAM Group (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_rename.html)
 // in the IAM User Guide.
 //
-// To change a user name the requester must have appropriate permissions on
+// To change a user name, the requester must have appropriate permissions on
 // both the source object and the target object. For example, to change Bob
 // to Robert, the entity making the request must have permission on Bob and
 // Robert, or must have permission on all (*). For more information about permissions,
@@ -8341,7 +8422,7 @@ func (r UploadSSHPublicKeyRequest) Send() (*UploadSSHPublicKeyOutput, error) {
 //
 // Uploads an SSH public key and associates it with the specified IAM user.
 //
-// The SSH public key uploaded by this action can be used only for authenticating
+// The SSH public key uploaded by this operation can be used only for authenticating
 // the associated IAM user to an AWS CodeCommit repository. For more information
 // about using SSH keys to authenticate to an AWS CodeCommit repository, see
 // Set up AWS CodeCommit for SSH Connections (http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
@@ -8405,10 +8486,10 @@ func (r UploadServerCertificateRequest) Send() (*UploadServerCertificateOutput, 
 // renewals for you. Certificates provided by ACM are free. For more information
 // about using ACM, see the AWS Certificate Manager User Guide (http://docs.aws.amazon.com/acm/latest/userguide/).
 //
-// For more information about working with server certificates, including a
-// list of AWS services that can use the server certificates that you manage
-// with IAM, go to Working with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
-// in the IAM User Guide.
+// For more information about working with server certificates, see Working
+// with Server Certificates (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
+// in the IAM User Guide. This topic includes a list of AWS services that can
+// use the server certificates that you manage with IAM.
 //
 // For information about the number of server certificates you can upload, see
 // Limitations on IAM Entities and Objects (http://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html)
@@ -8476,11 +8557,12 @@ func (r UploadSigningCertificateRequest) Send() (*UploadSigningCertificateOutput
 // its default status is Active.
 //
 // If the UserName field is not specified, the IAM user name is determined implicitly
-// based on the AWS access key ID used to sign the request. Because this action
-// works for access keys under the AWS account, you can use this action to manage
-// root credentials even if the AWS account has no associated users.
+// based on the AWS access key ID used to sign the request. Because this operation
+// works for access keys under the AWS account, you can use this operation to
+// manage AWS account root user credentials even if the AWS account has no associated
+// users.
 //
-// Because the body of a X.509 certificate can be large, you should use POST
+// Because the body of an X.509 certificate can be large, you should use POST
 // rather than GET when calling UploadSigningCertificate. For information about
 // setting up signatures and authorization through the API, go to Signing AWS
 // API Requests (http://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html)
@@ -8517,7 +8599,7 @@ func (c *IAM) UploadSigningCertificateRequest(input *UploadSigningCertificateInp
 // Contains information about an AWS access key.
 //
 // This data type is used as a response element in the CreateAccessKey and ListAccessKeys
-// actions.
+// operations.
 //
 // The SecretAccessKey value is returned only in response to CreateAccessKey.
 // You can get a secret access key only when you first create an access key;
@@ -8540,8 +8622,8 @@ type AccessKey struct {
 	// SecretAccessKey is a required field
 	SecretAccessKey *string `type:"string" required:"true"`
 
-	// The status of the access key. Active means the key is valid for API calls,
-	// while Inactive means it is not.
+	// The status of the access key. Active means that the key is valid for API
+	// calls, while Inactive means it is not.
 	//
 	// Status is a required field
 	Status StatusType `type:"string" required:"true" enum:"true"`
@@ -8565,13 +8647,14 @@ func (s AccessKey) GoString() string {
 // Contains information about the last time an AWS access key was used.
 //
 // This data type is used as a response element in the GetAccessKeyLastUsed
-// action.
+// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessKeyLastUsed
 type AccessKeyLastUsed struct {
 	_ struct{} `type:"structure"`
 
 	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
-	// when the access key was most recently used. This field is null when:
+	// when the access key was most recently used. This field is null in the following
+	// situations:
 	//
 	//    * The user does not have an access key.
 	//
@@ -8584,7 +8667,7 @@ type AccessKeyLastUsed struct {
 	LastUsedDate *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
 
 	// The AWS region where this access key was most recently used. This field is
-	// displays "N/A" when:
+	// displays "N/A" in the following situations:
 	//
 	//    * The user does not have an access key.
 	//
@@ -8600,7 +8683,7 @@ type AccessKeyLastUsed struct {
 	Region *string `type:"string" required:"true"`
 
 	// The name of the AWS service with which this access key was most recently
-	// used. This field displays "N/A" when:
+	// used. This field displays "N/A" in the following situations:
 	//
 	//    * The user does not have an access key.
 	//
@@ -8625,7 +8708,7 @@ func (s AccessKeyLastUsed) GoString() string {
 
 // Contains information about an AWS access key, without its secret key.
 //
-// This data type is used as a response element in the ListAccessKeys action.
+// This data type is used as a response element in the ListAccessKeys operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/AccessKeyMetadata
 type AccessKeyMetadata struct {
 	_ struct{} `type:"structure"`
@@ -8666,7 +8749,7 @@ type AddClientIDToOpenIDConnectProviderInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider
 	// resource to add the client ID to. You can get a list of OIDC provider ARNs
-	// by using the ListOpenIDConnectProviders action.
+	// by using the ListOpenIDConnectProviders operation.
 	//
 	// OpenIDConnectProviderArn is a required field
 	OpenIDConnectProviderArn *string `min:"20" type:"string" required:"true"`
@@ -8736,7 +8819,7 @@ type AddRoleToInstanceProfileInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// InstanceProfileName is a required field
 	InstanceProfileName *string `min:"1" type:"string" required:"true"`
@@ -8815,7 +8898,7 @@ type AddUserToGroupInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -8824,7 +8907,7 @@ type AddUserToGroupInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -8894,7 +8977,7 @@ type AttachGroupPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -9061,7 +9144,7 @@ type AttachUserPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -9128,7 +9211,7 @@ func (s AttachUserPolicyOutput) SDKResponseMetadata() aws.Response {
 // An attached policy is a managed policy that has been attached to a user,
 // group, or role. This data type is used as a response element in the ListAttachedGroupPolicies,
 // ListAttachedRolePolicies, ListAttachedUserPolicies, and GetAccountAuthorizationDetails
-// actions.
+// operations.
 //
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
@@ -9165,14 +9248,14 @@ type ChangePasswordInput struct {
 	// The new password. The new password must conform to the AWS account's password
 	// policy, if one exists.
 	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of almost any printable ASCII
-	// character from the space (\u0020) through the end of the ASCII character
-	// range (\u00FF). You can also include the tab (\u0009), line feed (\u000A),
-	// and carriage return (\u000D) characters. Although any of these characters
-	// are valid in a password, note that many tools, such as the AWS Management
-	// Console, might restrict the ability to enter certain characters because they
-	// have special meaning within that tool.
+	// The regex pattern (http://wikipedia.org/wiki/regex) that is used to validate
+	// this parameter is a string of characters. That string can include almost
+	// any printable ASCII character from the space (\u0020) through the end of
+	// the ASCII character range (\u00FF). You can also include the tab (\u0009),
+	// line feed (\u000A), and carriage return (\u000D) characters. Any of these
+	// characters are valid in a password. However, many tools, such as the AWS
+	// Management Console, might restrict the ability to type certain characters
+	// because they have special meaning within that tool.
 	//
 	// NewPassword is a required field
 	NewPassword *string `min:"1" type:"string" required:"true"`
@@ -9259,8 +9342,8 @@ type ContextEntry struct {
 	ContextKeyType ContextKeyTypeEnum `type:"string" enum:"true"`
 
 	// The value (or values, if the condition context key supports multiple values)
-	// to provide to the simulation for use when the key is referenced by a Condition
-	// element in an input policy.
+	// to provide to the simulation when the key is referenced by a Condition element
+	// in an input policy.
 	ContextKeyValues []string `type:"list"`
 }
 
@@ -9295,7 +9378,7 @@ type CreateAccessKeyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -9422,7 +9505,7 @@ type CreateGroupInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-.
+	// with no spaces. You can also include any of the following characters: _+=,.@-.
 	// The group name must be unique within the account. Group names are not distinguished
 	// by case. For example, you cannot create groups named both "ADMINS" and "admins".
 	//
@@ -9436,11 +9519,12 @@ type CreateGroupInput struct {
 	// This parameter is optional. If it is not included, it defaults to a slash
 	// (/).
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	Path *string `min:"1" type:"string"`
 }
 
@@ -9510,7 +9594,7 @@ type CreateInstanceProfileInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// InstanceProfileName is a required field
 	InstanceProfileName *string `min:"1" type:"string" required:"true"`
@@ -9522,11 +9606,12 @@ type CreateInstanceProfileInput struct {
 	// This parameter is optional. If it is not included, it defaults to a slash
 	// (/).
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	Path *string `min:"1" type:"string"`
 }
 
@@ -9594,14 +9679,14 @@ type CreateLoginProfileInput struct {
 
 	// The new password for the user.
 	//
-	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of almost any printable ASCII
-	// character from the space (\u0020) through the end of the ASCII character
-	// range (\u00FF). You can also include the tab (\u0009), line feed (\u000A),
-	// and carriage return (\u000D) characters. Although any of these characters
-	// are valid in a password, note that many tools, such as the AWS Management
-	// Console, might restrict the ability to enter certain characters because they
-	// have special meaning within that tool.
+	// The regex pattern (http://wikipedia.org/wiki/regex) that is used to validate
+	// this parameter is a string of characters. That string can include almost
+	// any printable ASCII character from the space (\u0020) through the end of
+	// the ASCII character range (\u00FF). You can also include the tab (\u0009),
+	// line feed (\u000A), and carriage return (\u000D) characters. Any of these
+	// characters are valid in a password. However, many tools, such as the AWS
+	// Management Console, might restrict the ability to type certain characters
+	// because they have special meaning within that tool.
 	//
 	// Password is a required field
 	Password *string `min:"1" type:"string" required:"true"`
@@ -9614,7 +9699,7 @@ type CreateLoginProfileInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -9696,11 +9781,11 @@ type CreateOpenIDConnectProviderInput struct {
 	// cannot register more than 100 client IDs with a single IAM OIDC provider.
 	//
 	// There is no defined format for a client ID. The CreateOpenIDConnectProviderRequest
-	// action accepts client IDs up to 255 characters long.
+	// operation accepts client IDs up to 255 characters long.
 	ClientIDList []string `type:"list"`
 
 	// A list of server certificate thumbprints for the OpenID Connect (OIDC) identity
-	// provider's server certificate(s). Typically this list includes only one entry.
+	// provider's server certificates. Typically this list includes only one entry.
 	// However, IAM lets you have up to five thumbprints for an OIDC provider. This
 	// lets you maintain multiple thumbprints if the identity provider is rotating
 	// certificates.
@@ -9710,10 +9795,10 @@ type CreateOpenIDConnectProviderInput struct {
 	// makes its keys available. It is always a 40-character string.
 	//
 	// You must provide at least one thumbprint when creating an IAM OIDC provider.
-	// For example, if the OIDC provider is server.example.com and the provider
-	// stores its keys at "https://keys.server.example.com/openid-connect", the
-	// thumbprint string would be the hex-encoded SHA-1 hash value of the certificate
-	// used by https://keys.server.example.com.
+	// For example, assume that the OIDC provider is server.example.com and the
+	// provider stores its keys at https://keys.server.example.com/openid-connect.
+	// In that case, the thumbprint string would be the hex-encoded SHA-1 hash value
+	// of the certificate used by https://keys.server.example.com.
 	//
 	// For more information about obtaining the OIDC provider's thumbprint, see
 	// Obtaining the Thumbprint for an OpenID Connect Provider (http://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html)
@@ -9722,11 +9807,11 @@ type CreateOpenIDConnectProviderInput struct {
 	// ThumbprintList is a required field
 	ThumbprintList []string `type:"list" required:"true"`
 
-	// The URL of the identity provider. The URL must begin with "https://" and
-	// should correspond to the iss claim in the provider's OpenID Connect ID tokens.
-	// Per the OIDC standard, path components are allowed but query parameters are
-	// not. Typically the URL consists of only a host name, like "https://server.example.org"
-	// or "https://example.com".
+	// The URL of the identity provider. The URL must begin with https:// and should
+	// correspond to the iss claim in the provider's OpenID Connect ID tokens. Per
+	// the OIDC standard, path components are allowed but query parameters are not.
+	// Typically the URL consists of only a hostname, like https://server.example.org
+	// or https://example.com.
 	//
 	// You cannot register the same provider multiple times in a single AWS account.
 	// If you try to submit a URL that has already been used for an OpenID Connect
@@ -9815,22 +9900,28 @@ type CreatePolicyInput struct {
 	// This parameter is optional. If it is not included, it defaults to a slash
 	// (/).
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	Path *string `type:"string"`
 
 	// The JSON policy document that you want to use as the content for the new
 	// policy.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// PolicyDocument is a required field
 	PolicyDocument *string `min:"1" type:"string" required:"true"`
@@ -9839,7 +9930,7 @@ type CreatePolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -9923,11 +10014,16 @@ type CreatePolicyVersionInput struct {
 	// version of the policy.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// PolicyDocument is a required field
 	PolicyDocument *string `min:"1" type:"string" required:"true"`
@@ -9935,8 +10031,8 @@ type CreatePolicyVersionInput struct {
 	// Specifies whether to set this version as the policy's default version.
 	//
 	// When this parameter is true, the new policy version becomes the operative
-	// version; that is, the version that is in effect for the IAM users, groups,
-	// and roles that the policy is attached to.
+	// version. That is, it becomes the version that is in effect for the IAM users,
+	// groups, and roles that the policy is attached to.
 	//
 	// For more information about managed policy versions, see Versioning for Managed
 	// Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
@@ -10012,17 +10108,38 @@ type CreateRoleInput struct {
 	// assume the role.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// AssumeRolePolicyDocument is a required field
 	AssumeRolePolicyDocument *string `min:"1" type:"string" required:"true"`
 
-	// A customer-provided description of the role.
+	// A description of the role.
 	Description *string `type:"string"`
+
+	// The maximum session duration (in seconds) that you want to set for the specified
+	// role. If you do not specify a value for this setting, the default maximum
+	// of one hour is applied. This setting can have a value from 1 hour to 12 hours.
+	//
+	// Anyone who assumes the role from the AWS CLI or API can use the DurationSeconds
+	// API parameter or the duration-seconds CLI parameter to request a longer session.
+	// The MaxSessionDuration setting determines the maximum duration that can be
+	// requested using the DurationSeconds parameter. If users don't specify a value
+	// for the DurationSeconds parameter, their security credentials are valid for
+	// one hour by default. This applies when you use the AssumeRole* API operations
+	// or the assume-role* CLI operations but does not apply when you use those
+	// operations to create a console URL. For more information, see Using IAM Roles
+	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the
+	// IAM User Guide.
+	MaxSessionDuration *int64 `min:"3600" type:"integer"`
 
 	// The path to the role. For more information about paths, see IAM Identifiers
 	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
@@ -10031,11 +10148,12 @@ type CreateRoleInput struct {
 	// This parameter is optional. If it is not included, it defaults to a slash
 	// (/).
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	Path *string `min:"1" type:"string"`
 
 	// The name of the role to create.
@@ -10070,6 +10188,9 @@ func (s *CreateRoleInput) Validate() error {
 	}
 	if s.AssumeRolePolicyDocument != nil && len(*s.AssumeRolePolicyDocument) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("AssumeRolePolicyDocument", 1))
+	}
+	if s.MaxSessionDuration != nil && *s.MaxSessionDuration < 3600 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxSessionDuration", 3600))
 	}
 	if s.Path != nil && len(*s.Path) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
@@ -10124,7 +10245,7 @@ type CreateSAMLProviderInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -10295,7 +10416,7 @@ type CreateServiceSpecificCredentialInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -10373,18 +10494,19 @@ type CreateUserInput struct {
 	// This parameter is optional. If it is not included, it defaults to a slash
 	// (/).
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	Path *string `min:"1" type:"string"`
 
 	// The name of the user to create.
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-.
+	// with no spaces. You can also include any of the following characters: _+=,.@-.
 	// User names are not distinguished by case. For example, you cannot create
 	// users named both "TESTUSER" and "testuser".
 	//
@@ -10459,11 +10581,12 @@ type CreateVirtualMFADeviceInput struct {
 	// This parameter is optional. If it is not included, it defaults to a slash
 	// (/).
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	Path *string `min:"1" type:"string"`
 
 	// The name of the virtual MFA device. Use with path to uniquely identify a
@@ -10471,7 +10594,7 @@ type CreateVirtualMFADeviceInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// VirtualMFADeviceName is a required field
 	VirtualMFADeviceName *string `min:"1" type:"string" required:"true"`
@@ -10553,7 +10676,7 @@ type DeactivateMFADeviceInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -10633,7 +10756,7 @@ type DeleteAccessKeyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -10798,7 +10921,7 @@ type DeleteGroupInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -10862,7 +10985,7 @@ type DeleteGroupPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -10871,7 +10994,7 @@ type DeleteGroupPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -10941,7 +11064,7 @@ type DeleteInstanceProfileInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// InstanceProfileName is a required field
 	InstanceProfileName *string `min:"1" type:"string" required:"true"`
@@ -11004,7 +11127,7 @@ type DeleteLoginProfileInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -11065,7 +11188,7 @@ type DeleteOpenIDConnectProviderInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM OpenID Connect provider resource
 	// object to delete. You can get a list of OpenID Connect provider resource
-	// ARNs by using the ListOpenIDConnectProviders action.
+	// ARNs by using the ListOpenIDConnectProviders operation.
 	//
 	// OpenIDConnectProviderArn is a required field
 	OpenIDConnectProviderArn *string `min:"20" type:"string" required:"true"`
@@ -11336,7 +11459,7 @@ type DeleteRolePolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -11484,7 +11607,7 @@ type DeleteSSHPublicKeyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -11554,7 +11677,7 @@ type DeleteServerCertificateInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// ServerCertificateName is a required field
 	ServerCertificateName *string `min:"1" type:"string" required:"true"`
@@ -11694,7 +11817,7 @@ type DeleteServiceSpecificCredentialInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -11767,7 +11890,7 @@ type DeleteSigningCertificateInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -11831,7 +11954,7 @@ type DeleteUserInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -11894,7 +12017,7 @@ type DeleteUserPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -11904,7 +12027,7 @@ type DeleteUserPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -12042,11 +12165,11 @@ type DeletionTaskFailureReasonType struct {
 	Reason *string `type:"string"`
 
 	// A list of objects that contains details about the service-linked role deletion
-	// failure. If the service-linked role has active sessions or if any resources
-	// that were used by the role have not been deleted from the linked service,
-	// the role can't be deleted. This parameter includes a list of the resources
-	// that are associated with the role and the region in which the resources are
-	// being used.
+	// failure, if that information is returned by the service. If the service-linked
+	// role has active sessions or if any resources that were used by the role have
+	// not been deleted from the linked service, the role can't be deleted. This
+	// parameter includes a list of the resources that are associated with the role
+	// and the region in which the resources are being used.
 	RoleUsageList []RoleUsageType `type:"list"`
 }
 
@@ -12068,7 +12191,7 @@ type DetachGroupPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -12235,7 +12358,7 @@ type DetachUserPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -12303,7 +12426,7 @@ type EnableMFADeviceInput struct {
 
 	// An authentication code emitted by the device.
 	//
-	// The format for this parameter is a string of 6 digits.
+	// The format for this parameter is a string of six digits.
 	//
 	// Submit your request immediately after generating the authentication codes.
 	// If you generate the codes and then wait too long to submit the request, the
@@ -12317,7 +12440,7 @@ type EnableMFADeviceInput struct {
 
 	// A subsequent authentication code emitted by the device.
 	//
-	// The format for this parameter is a string of 6 digits.
+	// The format for this parameter is a string of six digits.
 	//
 	// Submit your request immediately after generating the authentication codes.
 	// If you generate the codes and then wait too long to submit the request, the
@@ -12343,7 +12466,7 @@ type EnableMFADeviceInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -12427,7 +12550,7 @@ func (s EnableMFADeviceOutput) SDKResponseMetadata() aws.Response {
 type EvaluationResult struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the API action tested on the indicated resource.
+	// The name of the API operation tested on the indicated resource.
 	//
 	// EvalActionName is a required field
 	EvalActionName *string `min:"3" type:"string" required:"true"`
@@ -12445,12 +12568,12 @@ type EvaluationResult struct {
 	// Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_compare-resource-policies.html)
 	EvalDecisionDetails map[string]PolicyEvaluationDecisionType `type:"map"`
 
-	// The ARN of the resource that the indicated API action was tested on.
+	// The ARN of the resource that the indicated API operation was tested on.
 	EvalResourceName *string `min:"1" type:"string"`
 
 	// A list of the statements in the input policies that determine the result
-	// for this scenario. Remember that even if multiple statements allow the action
-	// on the resource, if only one statement denies that action, then the explicit
+	// for this scenario. Remember that even if multiple statements allow the operation
+	// on the resource, if only one statement denies that operation, then the explicit
 	// deny overrides any allow, and the deny statement is the only entry included
 	// in the result.
 	MatchedStatements []Statement `type:"list"`
@@ -12469,8 +12592,8 @@ type EvaluationResult struct {
 	// account is part of an organization.
 	OrganizationsDecisionDetail *OrganizationsDecisionDetail `type:"structure"`
 
-	// The individual results of the simulation of the API action specified in EvalActionName
-	// on each resource.
+	// The individual results of the simulation of the API operation specified in
+	// EvalActionName on each resource.
 	ResourceSpecificResults []ResourceSpecificResult `type:"list"`
 }
 
@@ -12798,11 +12921,16 @@ type GetContextKeysForCustomPolicyInput struct {
 	// complete, valid JSON text of an IAM policy.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// PolicyInputList is a required field
 	PolicyInputList []string `type:"list" required:"true"`
@@ -12840,20 +12968,26 @@ type GetContextKeysForPrincipalPolicyInput struct {
 	// keys that are referenced.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	PolicyInputList []string `type:"list"`
 
 	// The ARN of a user, group, or role whose policies contain the context keys
 	// that you want listed. If you specify a user, the list includes context keys
-	// that are found in all policies attached to the user as well as to all groups
-	// that the user is a member of. If you pick a group or a role, then it includes
-	// only those context keys that are found in policies attached to that entity.
-	// Note that all parameters are shown in unencoded form here for clarity, but
-	// must be URL encoded to be included as a part of a real HTML request.
+	// that are found in all policies that are attached to the user. The list also
+	// includes all groups that the user is a member of. If you pick a group or
+	// a role, then it includes only those context keys that are found in policies
+	// attached to that entity. Note that all parameters are shown in unencoded
+	// form here for clarity, but must be URL encoded to be included as a part of
+	// a real HTML request.
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
 	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
@@ -12975,7 +13109,7 @@ type GetGroupInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -13084,7 +13218,7 @@ type GetGroupPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -13093,7 +13227,7 @@ type GetGroupPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -13179,7 +13313,7 @@ type GetInstanceProfileInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// InstanceProfileName is a required field
 	InstanceProfileName *string `min:"1" type:"string" required:"true"`
@@ -13248,7 +13382,7 @@ type GetLoginProfileInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -13315,7 +13449,7 @@ type GetOpenIDConnectProviderInput struct {
 
 	// The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM
 	// to get information for. You can get a list of OIDC provider resource ARNs
-	// by using the ListOpenIDConnectProviders action.
+	// by using the ListOpenIDConnectProviders operation.
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
 	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
@@ -13618,7 +13752,7 @@ type GetRolePolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -13803,7 +13937,7 @@ type GetSSHPublicKeyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -13880,7 +14014,7 @@ type GetServerCertificateInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// ServerCertificateName is a required field
 	ServerCertificateName *string `min:"1" type:"string" required:"true"`
@@ -14018,7 +14152,7 @@ type GetUserInput struct {
 	// This parameter is optional. If it is not included, it defaults to the user
 	// making the request. This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -14081,7 +14215,7 @@ type GetUserPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -14090,7 +14224,7 @@ type GetUserPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -14170,7 +14304,7 @@ func (s GetUserPolicyOutput) SDKResponseMetadata() aws.Response {
 
 // Contains information about an IAM group entity.
 //
-// This data type is used as a response element in the following actions:
+// This data type is used as a response element in the following operations:
 //
 //    * CreateGroup
 //
@@ -14227,7 +14361,7 @@ func (s Group) GoString() string {
 // Contains information about an IAM group, including all of the group's policies.
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
-// action.
+// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/GroupDetail
 type GroupDetail struct {
 	_ struct{} `type:"structure"`
@@ -14275,7 +14409,7 @@ func (s GroupDetail) GoString() string {
 
 // Contains information about an instance profile.
 //
-// This data type is used as a response element in the following actions:
+// This data type is used as a response element in the following operations:
 //
 //    * CreateInstanceProfile
 //
@@ -14361,7 +14495,7 @@ type ListAccessKeysInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -14532,7 +14666,7 @@ type ListAttachedGroupPoliciesInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -14557,11 +14691,12 @@ type ListAttachedGroupPoliciesInput struct {
 	// The path prefix for filtering the results. This parameter is optional. If
 	// it is not included, it defaults to a slash (/), listing all policies.
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	PathPrefix *string `type:"string"`
 }
 
@@ -14660,11 +14795,12 @@ type ListAttachedRolePoliciesInput struct {
 	// The path prefix for filtering the results. This parameter is optional. If
 	// it is not included, it defaults to a slash (/), listing all policies.
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	PathPrefix *string `type:"string"`
 
 	// The name (friendly name, not ARN) of the role to list attached policies for.
@@ -14772,18 +14908,19 @@ type ListAttachedUserPoliciesInput struct {
 	// The path prefix for filtering the results. This parameter is optional. If
 	// it is not included, it defaults to a slash (/), listing all policies.
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	PathPrefix *string `type:"string"`
 
 	// The name (friendly name, not ARN) of the user to list attached policies for.
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -14892,11 +15029,12 @@ type ListEntitiesForPolicyInput struct {
 	// The path prefix for filtering the results. This parameter is optional. If
 	// it is not included, it defaults to a slash (/), listing all entities.
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	PathPrefix *string `min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the IAM policy for which you want the versions.
@@ -14997,7 +15135,7 @@ type ListGroupPoliciesInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -15076,7 +15214,7 @@ type ListGroupPoliciesOutput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyNames is a required field
 	PolicyNames []string `type:"list" required:"true"`
@@ -15122,7 +15260,7 @@ type ListGroupsForUserInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -15226,11 +15364,12 @@ type ListGroupsInput struct {
 	// gets all groups whose path starts with /division_abc/subdivision_xyz/.
 	//
 	// This parameter is optional. If it is not included, it defaults to a slash
-	// (/), listing all groups. This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// (/), listing all groups. This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	PathPrefix *string `min:"1" type:"string"`
 }
 
@@ -15432,12 +15571,12 @@ type ListInstanceProfilesInput struct {
 	// gets all instance profiles whose path starts with /application_abc/component_xyz/.
 	//
 	// This parameter is optional. If it is not included, it defaults to a slash
-	// (/), listing all instance profiles. This paramater allows (per its regex
+	// (/), listing all instance profiles. This parameter allows (per its regex
 	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting
 	// of either a forward slash (/) by itself or a string that must begin and end
-	// with forward slashes, containing any ASCII character from the ! (\u0021)
-	// thru the DEL character (\u007F), including most punctuation characters, digits,
-	// and upper and lowercased letters.
+	// with forward slashes. In addition, it can contain any ASCII character from
+	// the ! (\u0021) through the DEL character (\u007F), including most punctuation
+	// characters, digits, and upper and lowercased letters.
 	PathPrefix *string `min:"1" type:"string"`
 }
 
@@ -15535,7 +15674,7 @@ type ListMFADevicesInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -15679,11 +15818,12 @@ type ListPoliciesInput struct {
 
 	// The path prefix for filtering the results. This parameter is optional. If
 	// it is not included, it defaults to a slash (/), listing all policies. This
-	// paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	PathPrefix *string `type:"string"`
 
 	// The scope to use for filtering the results.
@@ -15995,11 +16135,12 @@ type ListRolesInput struct {
 	// gets all roles whose path starts with /application_abc/component_xyz/.
 	//
 	// This parameter is optional. If it is not included, it defaults to a slash
-	// (/), listing all roles. This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// (/), listing all roles. This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	PathPrefix *string `min:"1" type:"string"`
 }
 
@@ -16140,7 +16281,7 @@ type ListSSHPublicKeysInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -16236,12 +16377,12 @@ type ListServerCertificatesInput struct {
 	// would get all server certificates for which the path starts with /company/servercerts.
 	//
 	// This parameter is optional. If it is not included, it defaults to a slash
-	// (/), listing all server certificates. This paramater allows (per its regex
+	// (/), listing all server certificates. This parameter allows (per its regex
 	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting
 	// of either a forward slash (/) by itself or a string that must begin and end
-	// with forward slashes, containing any ASCII character from the ! (\u0021)
-	// thru the DEL character (\u007F), including most punctuation characters, digits,
-	// and upper and lowercased letters.
+	// with forward slashes. In addition, it can contain any ASCII character from
+	// the ! (\u0021) through the DEL character (\u007F), including most punctuation
+	// characters, digits, and upper and lowercased letters.
 	PathPrefix *string `min:"1" type:"string"`
 }
 
@@ -16323,12 +16464,12 @@ type ListServiceSpecificCredentialsInput struct {
 	ServiceName *string `type:"string"`
 
 	// The name of the user whose service-specific credentials you want information
-	// about. If this value is not specified then the operation assumes the user
+	// about. If this value is not specified, then the operation assumes the user
 	// whose credentials are used to call the operation.
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -16405,7 +16546,7 @@ type ListSigningCertificatesInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -16503,7 +16644,7 @@ type ListUserPoliciesInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -16607,12 +16748,12 @@ type ListUsersInput struct {
 	// which would get all user names whose path starts with /division_abc/subdivision_xyz/.
 	//
 	// This parameter is optional. If it is not included, it defaults to a slash
-	// (/), listing all user names. This paramater allows (per its regex pattern
+	// (/), listing all user names. This parameter allows (per its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of either
 	// a forward slash (/) by itself or a string that must begin and end with forward
-	// slashes, containing any ASCII character from the ! (\u0021) thru the DEL
-	// character (\u007F), including most punctuation characters, digits, and upper
-	// and lowercased letters.
+	// slashes. In addition, it can contain any ASCII character from the ! (\u0021)
+	// through the DEL character (\u007F), including most punctuation characters,
+	// digits, and upper and lowercased letters.
 	PathPrefix *string `min:"1" type:"string"`
 }
 
@@ -16690,7 +16831,7 @@ type ListVirtualMFADevicesInput struct {
 	_ struct{} `type:"structure"`
 
 	// The status (Unassigned or Assigned) of the devices to list. If you do not
-	// specify an AssignmentStatus, the action defaults to Any which lists both
+	// specify an AssignmentStatus, the operation defaults to Any which lists both
 	// assigned and unassigned virtual MFA devices.
 	AssignmentStatus AssignmentStatusType `type:"string" enum:"true"`
 
@@ -16782,7 +16923,7 @@ func (s ListVirtualMFADevicesOutput) SDKResponseMetadata() aws.Response {
 // Contains the user name and password create date for a user.
 //
 // This data type is used as a response element in the CreateLoginProfile and
-// GetLoginProfile actions.
+// GetLoginProfile operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/LoginProfile
 type LoginProfile struct {
 	_ struct{} `type:"structure"`
@@ -16814,7 +16955,7 @@ func (s LoginProfile) GoString() string {
 
 // Contains information about an MFA device.
 //
-// This data type is used as a response element in the ListMFADevices action.
+// This data type is used as a response element in the ListMFADevices operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/MFADevice
 type MFADevice struct {
 	_ struct{} `type:"structure"`
@@ -16851,7 +16992,7 @@ func (s MFADevice) GoString() string {
 // that the policy is attached to.
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
-// action.
+// operation.
 //
 // For more information about managed policies, see Managed Policies and Inline
 // Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
@@ -16950,12 +17091,12 @@ func (s OpenIDConnectProviderListEntry) GoString() string {
 	return s.String()
 }
 
-// Contains information about AWS Organizations's affect on a policy simulation.
+// Contains information about AWS Organizations's effect on a policy simulation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/OrganizationsDecisionDetail
 type OrganizationsDecisionDetail struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies whether the simulated action is allowed by the AWS Organizations
+	// Specifies whether the simulated operation is allowed by the AWS Organizations
 	// service control policies that impact the simulated user's account.
 	AllowedByOrganizations *bool `type:"boolean"`
 }
@@ -16973,7 +17114,7 @@ func (s OrganizationsDecisionDetail) GoString() string {
 // Contains information about the account password policy.
 //
 // This data type is used as a response element in the GetAccountPasswordPolicy
-// action.
+// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PasswordPolicy
 type PasswordPolicy struct {
 	_ struct{} `type:"structure"`
@@ -16982,8 +17123,8 @@ type PasswordPolicy struct {
 	AllowUsersToChangePassword *bool `type:"boolean"`
 
 	// Indicates whether passwords in the account expire. Returns true if MaxPasswordAge
-	// is contains a value greater than 0. Returns false if MaxPasswordAge is 0
-	// or not present.
+	// contains a value greater than 0. Returns false if MaxPasswordAge is 0 or
+	// not present.
 	ExpirePasswords *bool `type:"boolean"`
 
 	// Specifies whether IAM users are prevented from setting a new password after
@@ -17026,7 +17167,7 @@ func (s PasswordPolicy) GoString() string {
 // Contains information about a managed policy.
 //
 // This data type is used as a response element in the CreatePolicy, GetPolicy,
-// and ListPolicies actions.
+// and ListPolicies operations.
 //
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
@@ -17100,7 +17241,7 @@ func (s Policy) GoString() string {
 // Contains information about an IAM policy, including the policy document.
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
-// action.
+// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/PolicyDetail
 type PolicyDetail struct {
 	_ struct{} `type:"structure"`
@@ -17125,7 +17266,7 @@ func (s PolicyDetail) GoString() string {
 // Contains information about a group that a managed policy is attached to.
 //
 // This data type is used as a response element in the ListEntitiesForPolicy
-// action.
+// operation.
 //
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
@@ -17156,7 +17297,7 @@ func (s PolicyGroup) GoString() string {
 // Contains information about a role that a managed policy is attached to.
 //
 // This data type is used as a response element in the ListEntitiesForPolicy
-// action.
+// operation.
 //
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
@@ -17187,7 +17328,7 @@ func (s PolicyRole) GoString() string {
 // Contains information about a user that a managed policy is attached to.
 //
 // This data type is used as a response element in the ListEntitiesForPolicy
-// action.
+// operation.
 //
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
@@ -17219,7 +17360,7 @@ func (s PolicyUser) GoString() string {
 //
 // This data type is used as a response element in the CreatePolicyVersion,
 // GetPolicyVersion, ListPolicyVersions, and GetAccountAuthorizationDetails
-// actions.
+// operations.
 //
 // For more information about managed policies, refer to Managed Policies and
 // Inline Policies (http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
@@ -17237,6 +17378,12 @@ type PolicyVersion struct {
 	// The policy document is returned in the response to the GetPolicyVersion and
 	// GetAccountAuthorizationDetails operations. It is not returned in the response
 	// to the CreatePolicyVersion or ListPolicyVersions operations.
+	//
+	// The policy document returned in this structure is URL-encoded compliant with
+	// RFC 3986 (https://tools.ietf.org/html/rfc3986). You can use a URL decoding
+	// method to convert the policy back to plain JSON text. For example, if you
+	// use Java, you can use the decode method of the java.net.URLDecoder utility
+	// class in the Java SDK. Other languages and SDKs provide similar functionality.
 	Document *string `min:"1" type:"string"`
 
 	// Specifies whether the policy version is set as the policy's default version.
@@ -17292,7 +17439,7 @@ type PutGroupPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -17300,11 +17447,16 @@ type PutGroupPolicyInput struct {
 	// The policy document.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// PolicyDocument is a required field
 	PolicyDocument *string `min:"1" type:"string" required:"true"`
@@ -17313,7 +17465,7 @@ type PutGroupPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -17389,11 +17541,16 @@ type PutRolePolicyInput struct {
 	// The policy document.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// PolicyDocument is a required field
 	PolicyDocument *string `min:"1" type:"string" required:"true"`
@@ -17402,7 +17559,7 @@ type PutRolePolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -17487,11 +17644,16 @@ type PutUserPolicyInput struct {
 	// The policy document.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// PolicyDocument is a required field
 	PolicyDocument *string `min:"1" type:"string" required:"true"`
@@ -17500,7 +17662,7 @@ type PutUserPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-+
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -17509,7 +17671,7 @@ type PutUserPolicyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -17590,7 +17752,7 @@ type RemoveClientIDFromOpenIDConnectProviderInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM OIDC provider resource to remove
 	// the client ID from. You can get a list of OIDC provider ARNs by using the
-	// ListOpenIDConnectProviders action.
+	// ListOpenIDConnectProviders operation.
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
 	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
@@ -17664,7 +17826,7 @@ type RemoveRoleFromInstanceProfileInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// InstanceProfileName is a required field
 	InstanceProfileName *string `min:"1" type:"string" required:"true"`
@@ -17743,7 +17905,7 @@ type RemoveUserFromGroupInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -17752,7 +17914,7 @@ type RemoveUserFromGroupInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -17833,7 +17995,7 @@ type ResetServiceSpecificCredentialInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -17896,8 +18058,8 @@ func (s ResetServiceSpecificCredentialOutput) SDKResponseMetadata() aws.Response
 	return s.responseMetadata
 }
 
-// Contains the result of the simulation of a single API action call on a single
-// resource.
+// Contains the result of the simulation of a single API operation call on a
+// single resource.
 //
 // This data type is used by a member of the EvaluationResult data type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ResourceSpecificResult
@@ -17911,7 +18073,7 @@ type ResourceSpecificResult struct {
 	// caller's IAM policy must grant access.
 	EvalDecisionDetails map[string]PolicyEvaluationDecisionType `type:"map"`
 
-	// The result of the simulation of the simulated API action on the resource
+	// The result of the simulation of the simulated API operation on the resource
 	// specified in EvalResourceName.
 	//
 	// EvalResourceDecision is a required field
@@ -17924,9 +18086,9 @@ type ResourceSpecificResult struct {
 
 	// A list of the statements in the input policies that determine the result
 	// for this part of the simulation. Remember that even if multiple statements
-	// allow the action on the resource, if any statement denies that action, then
-	// the explicit deny overrides any allow, and the deny statement is the only
-	// entry included in the result.
+	// allow the operation on the resource, if any statement denies that operation,
+	// then the explicit deny overrides any allow, and the deny statement is the
+	// only entry included in the result.
 	MatchedStatements []Statement `type:"list"`
 
 	// A list of context keys that are required by the included input policies but
@@ -17972,7 +18134,7 @@ type ResyncMFADeviceInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// SerialNumber is a required field
 	SerialNumber *string `min:"9" type:"string" required:"true"`
@@ -17981,7 +18143,7 @@ type ResyncMFADeviceInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -18058,7 +18220,7 @@ func (s ResyncMFADeviceOutput) SDKResponseMetadata() aws.Response {
 }
 
 // Contains information about an IAM role. This structure is returned as a response
-// element in several APIs that interact with roles.
+// element in several API operations that interact with roles.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/Role
 type Role struct {
 	_ struct{} `type:"structure"`
@@ -18081,6 +18243,11 @@ type Role struct {
 
 	// A description of the role that you provide.
 	Description *string `type:"string"`
+
+	// The maximum session duration (in seconds) for the specified role. Anyone
+	// who uses the AWS CLI or API to assume the role can specify the duration using
+	// the optional DurationSeconds API parameter or duration-seconds CLI parameter.
+	MaxSessionDuration *int64 `min:"3600" type:"integer"`
 
 	// The path to the role. For more information about paths, see IAM Identifiers
 	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
@@ -18115,7 +18282,7 @@ func (s Role) GoString() string {
 // Contains information about an IAM role, including all of the role's policies.
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
-// action.
+// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/RoleDetail
 type RoleDetail struct {
 	_ struct{} `type:"structure"`
@@ -18169,7 +18336,8 @@ func (s RoleDetail) GoString() string {
 	return s.String()
 }
 
-// An object that contains details about how a service-linked role is used.
+// An object that contains details about how a service-linked role is used,
+// if that information is returned by the service.
 //
 // This data type is used as a response element in the GetServiceLinkedRoleDeletionStatus
 // operation.
@@ -18222,7 +18390,7 @@ func (s SAMLProviderListEntry) GoString() string {
 // Contains information about an SSH public key.
 //
 // This data type is used as a response element in the GetSSHPublicKey and UploadSSHPublicKey
-// actions.
+// operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SSHPublicKey
 type SSHPublicKey struct {
 	_ struct{} `type:"structure"`
@@ -18242,8 +18410,9 @@ type SSHPublicKey struct {
 	// SSHPublicKeyId is a required field
 	SSHPublicKeyId *string `min:"20" type:"string" required:"true"`
 
-	// The status of the SSH public key. Active means the key can be used for authentication
-	// with an AWS CodeCommit repository. Inactive means the key cannot be used.
+	// The status of the SSH public key. Active means that the key can be used for
+	// authentication with an AWS CodeCommit repository. Inactive means that the
+	// key cannot be used.
 	//
 	// Status is a required field
 	Status StatusType `type:"string" required:"true" enum:"true"`
@@ -18270,7 +18439,7 @@ func (s SSHPublicKey) GoString() string {
 
 // Contains information about an SSH public key, without the key's body or fingerprint.
 //
-// This data type is used as a response element in the ListSSHPublicKeys action.
+// This data type is used as a response element in the ListSSHPublicKeys operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SSHPublicKeyMetadata
 type SSHPublicKeyMetadata struct {
 	_ struct{} `type:"structure"`
@@ -18280,8 +18449,9 @@ type SSHPublicKeyMetadata struct {
 	// SSHPublicKeyId is a required field
 	SSHPublicKeyId *string `min:"20" type:"string" required:"true"`
 
-	// The status of the SSH public key. Active means the key can be used for authentication
-	// with an AWS CodeCommit repository. Inactive means the key cannot be used.
+	// The status of the SSH public key. Active means that the key can be used for
+	// authentication with an AWS CodeCommit repository. Inactive means that the
+	// key cannot be used.
 	//
 	// Status is a required field
 	Status StatusType `type:"string" required:"true" enum:"true"`
@@ -18311,7 +18481,7 @@ func (s SSHPublicKeyMetadata) GoString() string {
 // Contains information about a server certificate.
 //
 // This data type is used as a response element in the GetServerCertificate
-// action.
+// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServerCertificate
 type ServerCertificate struct {
 	_ struct{} `type:"structure"`
@@ -18345,7 +18515,7 @@ func (s ServerCertificate) GoString() string {
 // certificate chain, and private key.
 //
 // This data type is used as a response element in the UploadServerCertificate
-// and ListServerCertificates actions.
+// and ListServerCertificates operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServerCertificateMetadata
 type ServerCertificateMetadata struct {
 	_ struct{} `type:"structure"`
@@ -18394,7 +18564,7 @@ func (s ServerCertificateMetadata) GoString() string {
 	return s.String()
 }
 
-// Contains the details of a service specific credential.
+// Contains the details of a service-specific credential.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/ServiceSpecificCredential
 type ServiceSpecificCredential struct {
 	_ struct{} `type:"structure"`
@@ -18428,8 +18598,8 @@ type ServiceSpecificCredential struct {
 	// ServiceUserName is a required field
 	ServiceUserName *string `min:"17" type:"string" required:"true"`
 
-	// The status of the service-specific credential. Active means the key is valid
-	// for API calls, while Inactive means it is not.
+	// The status of the service-specific credential. Active means that the key
+	// is valid for API calls, while Inactive means it is not.
 	//
 	// Status is a required field
 	Status StatusType `type:"string" required:"true" enum:"true"`
@@ -18476,8 +18646,8 @@ type ServiceSpecificCredentialMetadata struct {
 	// ServiceUserName is a required field
 	ServiceUserName *string `min:"17" type:"string" required:"true"`
 
-	// The status of the service-specific credential. Active means the key is valid
-	// for API calls, while Inactive means it is not.
+	// The status of the service-specific credential. Active means that the key
+	// is valid for API calls, while Inactive means it is not.
 	//
 	// Status is a required field
 	Status StatusType `type:"string" required:"true" enum:"true"`
@@ -18578,7 +18748,7 @@ func (s SetDefaultPolicyVersionOutput) SDKResponseMetadata() aws.Response {
 // Contains information about an X.509 signing certificate.
 //
 // This data type is used as a response element in the UploadSigningCertificate
-// and ListSigningCertificates actions.
+// and ListSigningCertificates operations.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/SigningCertificate
 type SigningCertificate struct {
 	_ struct{} `type:"structure"`
@@ -18593,8 +18763,8 @@ type SigningCertificate struct {
 	// CertificateId is a required field
 	CertificateId *string `min:"24" type:"string" required:"true"`
 
-	// The status of the signing certificate. Active means the key is valid for
-	// API calls, while Inactive means it is not.
+	// The status of the signing certificate. Active means that the key is valid
+	// for API calls, while Inactive means it is not.
 	//
 	// Status is a required field
 	Status StatusType `type:"string" required:"true" enum:"true"`
@@ -18622,16 +18792,17 @@ func (s SigningCertificate) GoString() string {
 type SimulateCustomPolicyInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of names of API actions to evaluate in the simulation. Each action
-	// is evaluated against each resource. Each action must include the service
+	// A list of names of API operations to evaluate in the simulation. Each operation
+	// is evaluated against each resource. Each operation must include the service
 	// identifier, such as iam:CreateUser.
 	//
 	// ActionNames is a required field
 	ActionNames []string `type:"list" required:"true"`
 
 	// The ARN of the IAM user that you want to use as the simulated caller of the
-	// APIs. CallerArn is required if you include a ResourcePolicy so that the policy's
-	// Principal element has a value to use in evaluating the policy.
+	// API operations. CallerArn is required if you include a ResourcePolicy so
+	// that the policy's Principal element has a value to use in evaluating the
+	// policy.
 	//
 	// You can specify only the ARN of an IAM user. You cannot specify the ARN of
 	// an assumed role, federated user, or a service principal.
@@ -18666,14 +18837,20 @@ type SimulateCustomPolicyInput struct {
 	// The policies cannot be "scope-down" policies, such as you could include in
 	// a call to GetFederationToken (http://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html)
 	// or one of the AssumeRole (http://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html)
-	// APIs to restrict what a user can do while using the temporary credentials.
+	// API operations. In other words, do not use policies designed to restrict
+	// what a user can do while using the temporary credentials.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// PolicyInputList is a required field
 	PolicyInputList []string `type:"list" required:"true"`
@@ -18696,13 +18873,13 @@ type SimulateCustomPolicyInput struct {
 	// in the AWS General Reference.
 	ResourceArns []string `type:"list"`
 
-	// Specifies the type of simulation to run. Different APIs that support resource-based
-	// policies require different combinations of resources. By specifying the type
-	// of simulation to run, you enable the policy simulator to enforce the presence
-	// of the required resources to ensure reliable simulation results. If your
-	// simulation does not match one of the following scenarios, then you can omit
-	// this parameter. The following list shows each of the supported scenario values
-	// and the resources that you must define to run the simulation.
+	// Specifies the type of simulation to run. Different API operations that support
+	// resource-based policies require different combinations of resources. By specifying
+	// the type of simulation to run, you enable the policy simulator to enforce
+	// the presence of the required resources to ensure reliable simulation results.
+	// If your simulation does not match one of the following scenarios, then you
+	// can omit this parameter. The following list shows each of the supported scenario
+	// values and the resources that you must define to run the simulation.
 	//
 	// Each of the EC2 scenarios requires that you specify instance, image, and
 	// security-group resources. If your scenario includes an EBS volume, then you
@@ -18710,7 +18887,7 @@ type SimulateCustomPolicyInput struct {
 	// then you must supply the network-interface resource. If it includes an IP
 	// subnet, then you must specify the subnet resource. For more information on
 	// the EC2 scenario options, see Supported Platforms (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html)
-	// in the AWS EC2 User Guide.
+	// in the Amazon EC2 User Guide.
 	//
 	//    * EC2-Classic-InstanceStore
 	//
@@ -18753,11 +18930,16 @@ type SimulateCustomPolicyInput struct {
 	// You can include only one resource-based policy in a simulation.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	ResourcePolicy *string `min:"1" type:"string"`
 }
 
@@ -18818,19 +19000,20 @@ func (s *SimulateCustomPolicyInput) Validate() error {
 type SimulatePrincipalPolicyInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of names of API actions to evaluate in the simulation. Each action
-	// is evaluated for each resource. Each action must include the service identifier,
+	// A list of names of API operations to evaluate in the simulation. Each operation
+	// is evaluated for each resource. Each operation must include the service identifier,
 	// such as iam:CreateUser.
 	//
 	// ActionNames is a required field
 	ActionNames []string `type:"list" required:"true"`
 
 	// The ARN of the IAM user that you want to specify as the simulated caller
-	// of the APIs. If you do not specify a CallerArn, it defaults to the ARN of
-	// the user that you specify in PolicySourceArn, if you specified a user. If
-	// you include both a PolicySourceArn (for example, arn:aws:iam::123456789012:user/David)
+	// of the API operations. If you do not specify a CallerArn, it defaults to
+	// the ARN of the user that you specify in PolicySourceArn, if you specified
+	// a user. If you include both a PolicySourceArn (for example, arn:aws:iam::123456789012:user/David)
 	// and a CallerArn (for example, arn:aws:iam::123456789012:user/Bob), the result
-	// is that you simulate calling the APIs as Bob, as if Bob had David's policies.
+	// is that you simulate calling the API operations as Bob, as if Bob had David's
+	// policies.
 	//
 	// You can specify only the ARN of an IAM user. You cannot specify the ARN of
 	// an assumed role, federated user, or a service principal.
@@ -18871,11 +19054,16 @@ type SimulatePrincipalPolicyInput struct {
 	// text of an IAM policy.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	PolicyInputList []string `type:"list"`
 
 	// The Amazon Resource Name (ARN) of a user, group, or role whose policies you
@@ -18892,7 +19080,7 @@ type SimulatePrincipalPolicyInput struct {
 	PolicySourceArn *string `min:"20" type:"string" required:"true"`
 
 	// A list of ARNs of AWS resources to include in the simulation. If this parameter
-	// is not provided then the value defaults to * (all resources). Each API in
+	// is not provided, then the value defaults to * (all resources). Each API in
 	// the ActionNames parameter is evaluated for each resource in this list. The
 	// simulation determines the access result (allowed or denied) of each combination
 	// and reports it in the response.
@@ -18906,13 +19094,13 @@ type SimulatePrincipalPolicyInput struct {
 	// in the AWS General Reference.
 	ResourceArns []string `type:"list"`
 
-	// Specifies the type of simulation to run. Different APIs that support resource-based
-	// policies require different combinations of resources. By specifying the type
-	// of simulation to run, you enable the policy simulator to enforce the presence
-	// of the required resources to ensure reliable simulation results. If your
-	// simulation does not match one of the following scenarios, then you can omit
-	// this parameter. The following list shows each of the supported scenario values
-	// and the resources that you must define to run the simulation.
+	// Specifies the type of simulation to run. Different API operations that support
+	// resource-based policies require different combinations of resources. By specifying
+	// the type of simulation to run, you enable the policy simulator to enforce
+	// the presence of the required resources to ensure reliable simulation results.
+	// If your simulation does not match one of the following scenarios, then you
+	// can omit this parameter. The following list shows each of the supported scenario
+	// values and the resources that you must define to run the simulation.
 	//
 	// Each of the EC2 scenarios requires that you specify instance, image, and
 	// security-group resources. If your scenario includes an EBS volume, then you
@@ -18920,7 +19108,7 @@ type SimulatePrincipalPolicyInput struct {
 	// then you must supply the network-interface resource. If it includes an IP
 	// subnet, then you must specify the subnet resource. For more information on
 	// the EC2 scenario options, see Supported Platforms (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html)
-	// in the AWS EC2 User Guide.
+	// in the Amazon EC2 User Guide.
 	//
 	//    * EC2-Classic-InstanceStore
 	//
@@ -18963,11 +19151,16 @@ type SimulatePrincipalPolicyInput struct {
 	// You can include only one resource-based policy in a simulation.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	ResourcePolicy *string `min:"1" type:"string"`
 }
 
@@ -19111,9 +19304,9 @@ type UpdateAccessKeyInput struct {
 	// AccessKeyId is a required field
 	AccessKeyId *string `min:"16" type:"string" required:"true"`
 
-	// The status you want to assign to the secret access key. Active means the
-	// key can be used for API calls to AWS, while Inactive means the key cannot
-	// be used.
+	// The status you want to assign to the secret access key. Active means that
+	// the key can be used for API calls to AWS, while Inactive means that the key
+	// cannot be used.
 	//
 	// Status is a required field
 	Status StatusType `type:"string" required:"true" enum:"true"`
@@ -19122,7 +19315,7 @@ type UpdateAccessKeyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -19190,42 +19383,53 @@ type UpdateAccountPasswordPolicyInput struct {
 	// Their Own Passwords (http://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html)
 	// in the IAM User Guide.
 	//
-	// Default value: false
+	// If you do not specify a value for this parameter, then the operation uses
+	// the default value of false. The result is that IAM users in the account do
+	// not automatically have permissions to change their own password.
 	AllowUsersToChangePassword *bool `type:"boolean"`
 
 	// Prevents IAM users from setting a new password after their password has expired.
+	// The IAM user cannot be accessed until an administrator resets the password.
 	//
-	// Default value: false
+	// If you do not specify a value for this parameter, then the operation uses
+	// the default value of false. The result is that IAM users can change their
+	// passwords after they expire and continue to sign in as the user.
 	HardExpiry *bool `type:"boolean"`
 
-	// The number of days that an IAM user password is valid. The default value
-	// of 0 means IAM user passwords never expire.
+	// The number of days that an IAM user password is valid.
 	//
-	// Default value: 0
+	// If you do not specify a value for this parameter, then the operation uses
+	// the default value of 0. The result is that IAM user passwords never expire.
 	MaxPasswordAge *int64 `min:"1" type:"integer"`
 
 	// The minimum number of characters allowed in an IAM user password.
 	//
-	// Default value: 6
+	// If you do not specify a value for this parameter, then the operation uses
+	// the default value of 6.
 	MinimumPasswordLength *int64 `min:"6" type:"integer"`
 
 	// Specifies the number of previous passwords that IAM users are prevented from
-	// reusing. The default value of 0 means IAM users are not prevented from reusing
-	// previous passwords.
+	// reusing.
 	//
-	// Default value: 0
+	// If you do not specify a value for this parameter, then the operation uses
+	// the default value of 0. The result is that IAM users are not prevented from
+	// reusing previous passwords.
 	PasswordReusePrevention *int64 `min:"1" type:"integer"`
 
 	// Specifies whether IAM user passwords must contain at least one lowercase
 	// character from the ISO basic Latin alphabet (a to z).
 	//
-	// Default value: false
+	// If you do not specify a value for this parameter, then the operation uses
+	// the default value of false. The result is that passwords do not require at
+	// least one lowercase character.
 	RequireLowercaseCharacters *bool `type:"boolean"`
 
 	// Specifies whether IAM user passwords must contain at least one numeric character
 	// (0 to 9).
 	//
-	// Default value: false
+	// If you do not specify a value for this parameter, then the operation uses
+	// the default value of false. The result is that passwords do not require at
+	// least one numeric character.
 	RequireNumbers *bool `type:"boolean"`
 
 	// Specifies whether IAM user passwords must contain at least one of the following
@@ -19233,13 +19437,17 @@ type UpdateAccountPasswordPolicyInput struct {
 	//
 	// ! @ # $ % ^ & * ( ) _ + - = [ ] { } | '
 	//
-	// Default value: false
+	// If you do not specify a value for this parameter, then the operation uses
+	// the default value of false. The result is that passwords do not require at
+	// least one symbol character.
 	RequireSymbols *bool `type:"boolean"`
 
 	// Specifies whether IAM user passwords must contain at least one uppercase
 	// character from the ISO basic Latin alphabet (A to Z).
 	//
-	// Default value: false
+	// If you do not specify a value for this parameter, then the operation uses
+	// the default value of false. The result is that passwords do not require at
+	// least one uppercase character.
 	RequireUppercaseCharacters *bool `type:"boolean"`
 }
 
@@ -19301,11 +19509,16 @@ type UpdateAssumeRolePolicyInput struct {
 	// The policy that grants an entity permission to assume the role.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// PolicyDocument is a required field
 	PolicyDocument *string `min:"1" type:"string" required:"true"`
@@ -19385,7 +19598,7 @@ type UpdateGroupInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// GroupName is a required field
 	GroupName *string `min:"1" type:"string" required:"true"`
@@ -19394,16 +19607,17 @@ type UpdateGroupInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	NewGroupName *string `min:"1" type:"string"`
 
 	// New path for the IAM group. Only include this if changing the group's path.
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	NewPath *string `min:"1" type:"string"`
 }
 
@@ -19469,13 +19683,20 @@ type UpdateLoginProfileInput struct {
 	// The new password for the specified IAM user.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D). However,
-	// the format can be further restricted by the account administrator by setting
-	// a password policy on the AWS account. For more information, see UpdateAccountPasswordPolicy.
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
+	//
+	// However, the format can be further restricted by the account administrator
+	// by setting a password policy on the AWS account. For more information, see
+	// UpdateAccountPasswordPolicy.
 	Password *string `min:"1" type:"string"`
 
 	// Allows this new password to be used only once by requiring the specified
@@ -19486,7 +19707,7 @@ type UpdateLoginProfileInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -19550,7 +19771,7 @@ type UpdateOpenIDConnectProviderThumbprintInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM OIDC provider resource object for
 	// which you want to update the thumbprint. You can get a list of OIDC provider
-	// ARNs by using the ListOpenIDConnectProviders action.
+	// ARNs by using the ListOpenIDConnectProviders operation.
 	//
 	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
 	// Service Namespaces (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
@@ -19690,6 +19911,87 @@ func (s UpdateRoleDescriptionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleRequest
+type UpdateRoleInput struct {
+	_ struct{} `type:"structure"`
+
+	// The new description that you want to apply to the specified role.
+	Description *string `type:"string"`
+
+	// The maximum session duration (in seconds) that you want to set for the specified
+	// role. If you do not specify a value for this setting, the default maximum
+	// of one hour is applied. This setting can have a value from 1 hour to 12 hours.
+	//
+	// Anyone who assumes the role from the AWS CLI or API can use the DurationSeconds
+	// API parameter or the duration-seconds CLI parameter to request a longer session.
+	// The MaxSessionDuration setting determines the maximum duration that can be
+	// requested using the DurationSeconds parameter. If users don't specify a value
+	// for the DurationSeconds parameter, their security credentials are valid for
+	// one hour by default. This applies when you use the AssumeRole* API operations
+	// or the assume-role* CLI operations but does not apply when you use those
+	// operations to create a console URL. For more information, see Using IAM Roles
+	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the
+	// IAM User Guide.
+	MaxSessionDuration *int64 `min:"3600" type:"integer"`
+
+	// The name of the role that you want to modify.
+	//
+	// RoleName is a required field
+	RoleName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateRoleInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRoleInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateRoleInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRoleInput"}
+	if s.MaxSessionDuration != nil && *s.MaxSessionDuration < 3600 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxSessionDuration", 3600))
+	}
+
+	if s.RoleName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RoleName"))
+	}
+	if s.RoleName != nil && len(*s.RoleName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateRoleResponse
+type UpdateRoleOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateRoleOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRoleOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRoleOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UpdateSAMLProviderRequest
 type UpdateSAMLProviderInput struct {
 	_ struct{} `type:"structure"`
@@ -19786,9 +20088,9 @@ type UpdateSSHPublicKeyInput struct {
 	// SSHPublicKeyId is a required field
 	SSHPublicKeyId *string `min:"20" type:"string" required:"true"`
 
-	// The status to assign to the SSH public key. Active means the key can be used
-	// for authentication with an AWS CodeCommit repository. Inactive means the
-	// key cannot be used.
+	// The status to assign to the SSH public key. Active means that the key can
+	// be used for authentication with an AWS CodeCommit repository. Inactive means
+	// that the key cannot be used.
 	//
 	// Status is a required field
 	Status StatusType `type:"string" required:"true" enum:"true"`
@@ -19797,7 +20099,7 @@ type UpdateSSHPublicKeyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -19869,11 +20171,12 @@ type UpdateServerCertificateInput struct {
 	// The new path for the server certificate. Include this only if you are updating
 	// the server certificate's path.
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	NewPath *string `min:"1" type:"string"`
 
 	// The new name for the server certificate. Include this only if you are updating
@@ -19882,14 +20185,14 @@ type UpdateServerCertificateInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	NewServerCertificateName *string `min:"1" type:"string"`
 
 	// The name of the server certificate that you want to update.
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// ServerCertificateName is a required field
 	ServerCertificateName *string `min:"1" type:"string" required:"true"`
@@ -19974,7 +20277,7 @@ type UpdateServiceSpecificCredentialInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -20046,8 +20349,8 @@ type UpdateSigningCertificateInput struct {
 	// CertificateId is a required field
 	CertificateId *string `min:"24" type:"string" required:"true"`
 
-	// The status you want to assign to the certificate. Active means the certificate
-	// can be used for API calls to AWS, while Inactive means the certificate cannot
+	// The status you want to assign to the certificate. Active means that the certificate
+	// can be used for API calls to AWS Inactive means that the certificate cannot
 	// be used.
 	//
 	// Status is a required field
@@ -20057,7 +20360,7 @@ type UpdateSigningCertificateInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -20123,11 +20426,12 @@ type UpdateUserInput struct {
 	// New path for the IAM user. Include this parameter only if you're changing
 	// the user's path.
 	//
-	// This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	NewPath *string `min:"1" type:"string"`
 
 	// New name for the user. Include this parameter only if you're changing the
@@ -20135,7 +20439,7 @@ type UpdateUserInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	NewUserName *string `min:"1" type:"string"`
 
 	// Name of the user to update. If you're changing the name of the user, this
@@ -20143,7 +20447,7 @@ type UpdateUserInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -20212,11 +20516,16 @@ type UploadSSHPublicKeyInput struct {
 	// format.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// SSHPublicKeyBody is a required field
 	SSHPublicKeyBody *string `min:"1" type:"string" required:"true"`
@@ -20225,7 +20534,7 @@ type UploadSSHPublicKeyInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// UserName is a required field
 	UserName *string `min:"1" type:"string" required:"true"`
@@ -20298,11 +20607,16 @@ type UploadServerCertificateInput struct {
 	// The contents of the public key certificate in PEM-encoded format.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// CertificateBody is a required field
 	CertificateBody *string `min:"1" type:"string" required:"true"`
@@ -20311,11 +20625,16 @@ type UploadServerCertificateInput struct {
 	// of the PEM-encoded public key certificates of the chain.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	CertificateChain *string `min:"1" type:"string"`
 
 	// The path for the server certificate. For more information about paths, see
@@ -20323,14 +20642,15 @@ type UploadServerCertificateInput struct {
 	// in the IAM User Guide.
 	//
 	// This parameter is optional. If it is not included, it defaults to a slash
-	// (/). This paramater allows (per its regex pattern (http://wikipedia.org/wiki/regex))
+	// (/). This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of either a forward slash (/) by itself
-	// or a string that must begin and end with forward slashes, containing any
-	// ASCII character from the ! (\u0021) thru the DEL character (\u007F), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// or a string that must begin and end with forward slashes. In addition, it
+	// can contain any ASCII character from the ! (\u0021) through the DEL character
+	// (\u007F), including most punctuation characters, digits, and upper and lowercased
+	// letters.
 	//
 	// If you are uploading a server certificate specifically for use with Amazon
-	// CloudFront distributions, you must specify a path using the --path option.
+	// CloudFront distributions, you must specify a path using the path parameter.
 	// The path must begin with /cloudfront and must include a trailing slash (for
 	// example, /cloudfront/test/).
 	Path *string `min:"1" type:"string"`
@@ -20338,11 +20658,16 @@ type UploadServerCertificateInput struct {
 	// The contents of the private key in PEM-encoded format.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// PrivateKey is a required field
 	PrivateKey *string `min:"1" type:"string" required:"true"`
@@ -20352,7 +20677,7 @@ type UploadServerCertificateInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// ServerCertificateName is a required field
 	ServerCertificateName *string `min:"1" type:"string" required:"true"`
@@ -20439,11 +20764,16 @@ type UploadSigningCertificateInput struct {
 	// The contents of the signing certificate.
 	//
 	// The regex pattern (http://wikipedia.org/wiki/regex) used to validate this
-	// parameter is a string of characters consisting of any printable ASCII character
-	// ranging from the space character (\u0020) through end of the ASCII character
-	// range as well as the printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF). It also includes the special characters
-	// tab (\u0009), line feed (\u000A), and carriage return (\u000D).
+	// parameter is a string of characters consisting of the following:
+	//
+	//    * Any printable ASCII character ranging from the space character (\u0020)
+	//    through the end of the ASCII character range
+	//
+	//    * The printable characters in the Basic Latin and Latin-1 Supplement character
+	//    set (through \u00FF)
+	//
+	//    * The special characters tab (\u0009), line feed (\u000A), and carriage
+	//    return (\u000D)
 	//
 	// CertificateBody is a required field
 	CertificateBody *string `min:"1" type:"string" required:"true"`
@@ -20452,7 +20782,7 @@ type UploadSigningCertificateInput struct {
 	//
 	// This parameter allows (per its regex pattern (http://wikipedia.org/wiki/regex))
 	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: =,.@-
+	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string `min:"1" type:"string"`
 }
 
@@ -20516,7 +20846,7 @@ func (s UploadSigningCertificateOutput) SDKResponseMetadata() aws.Response {
 
 // Contains information about an IAM user entity.
 //
-// This data type is used as a response element in the following actions:
+// This data type is used as a response element in the following operations:
 //
 //    * CreateUser
 //
@@ -20558,7 +20888,7 @@ type User struct {
 	// does not currently have a password, but had one in the past, then this field
 	// contains the date and time the most recent password was used.
 	//
-	// This value is returned only in the GetUser and ListUsers actions.
+	// This value is returned only in the GetUser and ListUsers operations.
 	PasswordLastUsed *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
 	// The path to the user. For more information about paths, see IAM Identifiers
@@ -20595,7 +20925,7 @@ func (s User) GoString() string {
 // and all the IAM groups the user is in.
 //
 // This data type is used as a response element in the GetAccountAuthorizationDetails
-// action.
+// operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/iam-2010-05-08/UserDetail
 type UserDetail struct {
 	_ struct{} `type:"structure"`

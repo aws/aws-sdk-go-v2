@@ -92,6 +92,8 @@ type ElasticBeanstalkAPI interface {
 
 	DeletePlatformVersionRequest(*elasticbeanstalk.DeletePlatformVersionInput) elasticbeanstalk.DeletePlatformVersionRequest
 
+	DescribeAccountAttributesRequest(*elasticbeanstalk.DescribeAccountAttributesInput) elasticbeanstalk.DescribeAccountAttributesRequest
+
 	DescribeApplicationVersionsRequest(*elasticbeanstalk.DescribeApplicationVersionsInput) elasticbeanstalk.DescribeApplicationVersionsRequest
 
 	DescribeApplicationsRequest(*elasticbeanstalk.DescribeApplicationsInput) elasticbeanstalk.DescribeApplicationsRequest

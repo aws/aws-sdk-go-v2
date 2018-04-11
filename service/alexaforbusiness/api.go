@@ -9,6 +9,56 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
+const opAssociateContactWithAddressBook = "AssociateContactWithAddressBook"
+
+// AssociateContactWithAddressBookRequest is a API request type for the AssociateContactWithAddressBook API operation.
+type AssociateContactWithAddressBookRequest struct {
+	*aws.Request
+	Input *AssociateContactWithAddressBookInput
+	Copy  func(*AssociateContactWithAddressBookInput) AssociateContactWithAddressBookRequest
+}
+
+// Send marshals and sends the AssociateContactWithAddressBook API request.
+func (r AssociateContactWithAddressBookRequest) Send() (*AssociateContactWithAddressBookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateContactWithAddressBookOutput), nil
+}
+
+// AssociateContactWithAddressBookRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Associates a contact to a given address book.
+//
+//    // Example sending a request using the AssociateContactWithAddressBookRequest method.
+//    req := client.AssociateContactWithAddressBookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBook
+func (c *AlexaForBusiness) AssociateContactWithAddressBookRequest(input *AssociateContactWithAddressBookInput) AssociateContactWithAddressBookRequest {
+	op := &aws.Operation{
+		Name:       opAssociateContactWithAddressBook,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateContactWithAddressBookInput{}
+	}
+
+	output := &AssociateContactWithAddressBookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AssociateContactWithAddressBookRequest{Request: req, Input: input, Copy: c.AssociateContactWithAddressBookRequest}
+}
+
 const opAssociateDeviceWithRoom = "AssociateDeviceWithRoom"
 
 // AssociateDeviceWithRoomRequest is a API request type for the AssociateDeviceWithRoom API operation.
@@ -111,6 +161,106 @@ func (c *AlexaForBusiness) AssociateSkillGroupWithRoomRequest(input *AssociateSk
 	output.responseMetadata = aws.Response{Request: req}
 
 	return AssociateSkillGroupWithRoomRequest{Request: req, Input: input, Copy: c.AssociateSkillGroupWithRoomRequest}
+}
+
+const opCreateAddressBook = "CreateAddressBook"
+
+// CreateAddressBookRequest is a API request type for the CreateAddressBook API operation.
+type CreateAddressBookRequest struct {
+	*aws.Request
+	Input *CreateAddressBookInput
+	Copy  func(*CreateAddressBookInput) CreateAddressBookRequest
+}
+
+// Send marshals and sends the CreateAddressBook API request.
+func (r CreateAddressBookRequest) Send() (*CreateAddressBookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateAddressBookOutput), nil
+}
+
+// CreateAddressBookRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Creates an address book with the specified details.
+//
+//    // Example sending a request using the CreateAddressBookRequest method.
+//    req := client.CreateAddressBookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateAddressBook
+func (c *AlexaForBusiness) CreateAddressBookRequest(input *CreateAddressBookInput) CreateAddressBookRequest {
+	op := &aws.Operation{
+		Name:       opCreateAddressBook,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateAddressBookInput{}
+	}
+
+	output := &CreateAddressBookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateAddressBookRequest{Request: req, Input: input, Copy: c.CreateAddressBookRequest}
+}
+
+const opCreateContact = "CreateContact"
+
+// CreateContactRequest is a API request type for the CreateContact API operation.
+type CreateContactRequest struct {
+	*aws.Request
+	Input *CreateContactInput
+	Copy  func(*CreateContactInput) CreateContactRequest
+}
+
+// Send marshals and sends the CreateContact API request.
+func (r CreateContactRequest) Send() (*CreateContactOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateContactOutput), nil
+}
+
+// CreateContactRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Creates a contact with the specified details.
+//
+//    // Example sending a request using the CreateContactRequest method.
+//    req := client.CreateContactRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContact
+func (c *AlexaForBusiness) CreateContactRequest(input *CreateContactInput) CreateContactRequest {
+	op := &aws.Operation{
+		Name:       opCreateContact,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateContactInput{}
+	}
+
+	output := &CreateContactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateContactRequest{Request: req, Input: input, Copy: c.CreateContactRequest}
 }
 
 const opCreateProfile = "CreateProfile"
@@ -311,6 +461,106 @@ func (c *AlexaForBusiness) CreateUserRequest(input *CreateUserInput) CreateUserR
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateUserRequest{Request: req, Input: input, Copy: c.CreateUserRequest}
+}
+
+const opDeleteAddressBook = "DeleteAddressBook"
+
+// DeleteAddressBookRequest is a API request type for the DeleteAddressBook API operation.
+type DeleteAddressBookRequest struct {
+	*aws.Request
+	Input *DeleteAddressBookInput
+	Copy  func(*DeleteAddressBookInput) DeleteAddressBookRequest
+}
+
+// Send marshals and sends the DeleteAddressBook API request.
+func (r DeleteAddressBookRequest) Send() (*DeleteAddressBookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteAddressBookOutput), nil
+}
+
+// DeleteAddressBookRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Deletes an address book by the address book ARN.
+//
+//    // Example sending a request using the DeleteAddressBookRequest method.
+//    req := client.DeleteAddressBookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteAddressBook
+func (c *AlexaForBusiness) DeleteAddressBookRequest(input *DeleteAddressBookInput) DeleteAddressBookRequest {
+	op := &aws.Operation{
+		Name:       opDeleteAddressBook,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteAddressBookInput{}
+	}
+
+	output := &DeleteAddressBookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteAddressBookRequest{Request: req, Input: input, Copy: c.DeleteAddressBookRequest}
+}
+
+const opDeleteContact = "DeleteContact"
+
+// DeleteContactRequest is a API request type for the DeleteContact API operation.
+type DeleteContactRequest struct {
+	*aws.Request
+	Input *DeleteContactInput
+	Copy  func(*DeleteContactInput) DeleteContactRequest
+}
+
+// Send marshals and sends the DeleteContact API request.
+func (r DeleteContactRequest) Send() (*DeleteContactOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteContactOutput), nil
+}
+
+// DeleteContactRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Deletes a contact by the contact ARN.
+//
+//    // Example sending a request using the DeleteContactRequest method.
+//    req := client.DeleteContactRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContact
+func (c *AlexaForBusiness) DeleteContactRequest(input *DeleteContactInput) DeleteContactRequest {
+	op := &aws.Operation{
+		Name:       opDeleteContact,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteContactInput{}
+	}
+
+	output := &DeleteContactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteContactRequest{Request: req, Input: input, Copy: c.DeleteContactRequest}
 }
 
 const opDeleteProfile = "DeleteProfile"
@@ -563,6 +813,56 @@ func (c *AlexaForBusiness) DeleteUserRequest(input *DeleteUserInput) DeleteUserR
 	return DeleteUserRequest{Request: req, Input: input, Copy: c.DeleteUserRequest}
 }
 
+const opDisassociateContactFromAddressBook = "DisassociateContactFromAddressBook"
+
+// DisassociateContactFromAddressBookRequest is a API request type for the DisassociateContactFromAddressBook API operation.
+type DisassociateContactFromAddressBookRequest struct {
+	*aws.Request
+	Input *DisassociateContactFromAddressBookInput
+	Copy  func(*DisassociateContactFromAddressBookInput) DisassociateContactFromAddressBookRequest
+}
+
+// Send marshals and sends the DisassociateContactFromAddressBook API request.
+func (r DisassociateContactFromAddressBookRequest) Send() (*DisassociateContactFromAddressBookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateContactFromAddressBookOutput), nil
+}
+
+// DisassociateContactFromAddressBookRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Disassociates a contact from a given address book.
+//
+//    // Example sending a request using the DisassociateContactFromAddressBookRequest method.
+//    req := client.DisassociateContactFromAddressBookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateContactFromAddressBook
+func (c *AlexaForBusiness) DisassociateContactFromAddressBookRequest(input *DisassociateContactFromAddressBookInput) DisassociateContactFromAddressBookRequest {
+	op := &aws.Operation{
+		Name:       opDisassociateContactFromAddressBook,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisassociateContactFromAddressBookInput{}
+	}
+
+	output := &DisassociateContactFromAddressBookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DisassociateContactFromAddressBookRequest{Request: req, Input: input, Copy: c.DisassociateContactFromAddressBookRequest}
+}
+
 const opDisassociateDeviceFromRoom = "DisassociateDeviceFromRoom"
 
 // DisassociateDeviceFromRoomRequest is a API request type for the DisassociateDeviceFromRoom API operation.
@@ -664,6 +964,106 @@ func (c *AlexaForBusiness) DisassociateSkillGroupFromRoomRequest(input *Disassoc
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DisassociateSkillGroupFromRoomRequest{Request: req, Input: input, Copy: c.DisassociateSkillGroupFromRoomRequest}
+}
+
+const opGetAddressBook = "GetAddressBook"
+
+// GetAddressBookRequest is a API request type for the GetAddressBook API operation.
+type GetAddressBookRequest struct {
+	*aws.Request
+	Input *GetAddressBookInput
+	Copy  func(*GetAddressBookInput) GetAddressBookRequest
+}
+
+// Send marshals and sends the GetAddressBook API request.
+func (r GetAddressBookRequest) Send() (*GetAddressBookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetAddressBookOutput), nil
+}
+
+// GetAddressBookRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Gets address the book details by the address book ARN.
+//
+//    // Example sending a request using the GetAddressBookRequest method.
+//    req := client.GetAddressBookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBook
+func (c *AlexaForBusiness) GetAddressBookRequest(input *GetAddressBookInput) GetAddressBookRequest {
+	op := &aws.Operation{
+		Name:       opGetAddressBook,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetAddressBookInput{}
+	}
+
+	output := &GetAddressBookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetAddressBookRequest{Request: req, Input: input, Copy: c.GetAddressBookRequest}
+}
+
+const opGetContact = "GetContact"
+
+// GetContactRequest is a API request type for the GetContact API operation.
+type GetContactRequest struct {
+	*aws.Request
+	Input *GetContactInput
+	Copy  func(*GetContactInput) GetContactRequest
+}
+
+// Send marshals and sends the GetContact API request.
+func (r GetContactRequest) Send() (*GetContactOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetContactOutput), nil
+}
+
+// GetContactRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Gets the contact details by the contact ARN.
+//
+//    // Example sending a request using the GetContactRequest method.
+//    req := client.GetContactRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContact
+func (c *AlexaForBusiness) GetContactRequest(input *GetContactInput) GetContactRequest {
+	op := &aws.Operation{
+		Name:       opGetContact,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetContactInput{}
+	}
+
+	output := &GetContactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetContactRequest{Request: req, Input: input, Copy: c.GetContactRequest}
 }
 
 const opGetDevice = "GetDevice"
@@ -1270,6 +1670,211 @@ func (c *AlexaForBusiness) RevokeInvitationRequest(input *RevokeInvitationInput)
 	output.responseMetadata = aws.Response{Request: req}
 
 	return RevokeInvitationRequest{Request: req, Input: input, Copy: c.RevokeInvitationRequest}
+}
+
+const opSearchAddressBooks = "SearchAddressBooks"
+
+// SearchAddressBooksRequest is a API request type for the SearchAddressBooks API operation.
+type SearchAddressBooksRequest struct {
+	*aws.Request
+	Input *SearchAddressBooksInput
+	Copy  func(*SearchAddressBooksInput) SearchAddressBooksRequest
+}
+
+// Send marshals and sends the SearchAddressBooks API request.
+func (r SearchAddressBooksRequest) Send() (*SearchAddressBooksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchAddressBooksOutput), nil
+}
+
+// SearchAddressBooksRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Searches address books and lists the ones that meet a set of filter and sort
+// criteria.
+//
+//    // Example sending a request using the SearchAddressBooksRequest method.
+//    req := client.SearchAddressBooksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchAddressBooks
+func (c *AlexaForBusiness) SearchAddressBooksRequest(input *SearchAddressBooksInput) SearchAddressBooksRequest {
+	op := &aws.Operation{
+		Name:       opSearchAddressBooks,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &SearchAddressBooksInput{}
+	}
+
+	output := &SearchAddressBooksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return SearchAddressBooksRequest{Request: req, Input: input, Copy: c.SearchAddressBooksRequest}
+}
+
+// Paginate pages iterates over the pages of a SearchAddressBooksRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a SearchAddressBooks operation.
+//		req := client.SearchAddressBooksRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchAddressBooksRequest) Paginate(opts ...aws.Option) SearchAddressBooksPager {
+	return SearchAddressBooksPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchAddressBooksInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// SearchAddressBooksPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchAddressBooksPager struct {
+	aws.Pager
+}
+
+func (p *SearchAddressBooksPager) CurrentPage() *SearchAddressBooksOutput {
+	return p.Pager.CurrentPage().(*SearchAddressBooksOutput)
+}
+
+const opSearchContacts = "SearchContacts"
+
+// SearchContactsRequest is a API request type for the SearchContacts API operation.
+type SearchContactsRequest struct {
+	*aws.Request
+	Input *SearchContactsInput
+	Copy  func(*SearchContactsInput) SearchContactsRequest
+}
+
+// Send marshals and sends the SearchContacts API request.
+func (r SearchContactsRequest) Send() (*SearchContactsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*SearchContactsOutput), nil
+}
+
+// SearchContactsRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Searches contacts and lists the ones that meet a set of filter and sort criteria.
+//
+//    // Example sending a request using the SearchContactsRequest method.
+//    req := client.SearchContactsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchContacts
+func (c *AlexaForBusiness) SearchContactsRequest(input *SearchContactsInput) SearchContactsRequest {
+	op := &aws.Operation{
+		Name:       opSearchContacts,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &SearchContactsInput{}
+	}
+
+	output := &SearchContactsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return SearchContactsRequest{Request: req, Input: input, Copy: c.SearchContactsRequest}
+}
+
+// Paginate pages iterates over the pages of a SearchContactsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a SearchContacts operation.
+//		req := client.SearchContactsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *SearchContactsRequest) Paginate(opts ...aws.Option) SearchContactsPager {
+	return SearchContactsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *SearchContactsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// SearchContactsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type SearchContactsPager struct {
+	aws.Pager
+}
+
+func (p *SearchContactsPager) CurrentPage() *SearchContactsOutput {
+	return p.Pager.CurrentPage().(*SearchContactsOutput)
 }
 
 const opSearchDevices = "SearchDevices"
@@ -1985,6 +2590,106 @@ func (c *AlexaForBusiness) UntagResourceRequest(input *UntagResourceInput) Untag
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
+const opUpdateAddressBook = "UpdateAddressBook"
+
+// UpdateAddressBookRequest is a API request type for the UpdateAddressBook API operation.
+type UpdateAddressBookRequest struct {
+	*aws.Request
+	Input *UpdateAddressBookInput
+	Copy  func(*UpdateAddressBookInput) UpdateAddressBookRequest
+}
+
+// Send marshals and sends the UpdateAddressBook API request.
+func (r UpdateAddressBookRequest) Send() (*UpdateAddressBookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateAddressBookOutput), nil
+}
+
+// UpdateAddressBookRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Updates address book details by the address book ARN.
+//
+//    // Example sending a request using the UpdateAddressBookRequest method.
+//    req := client.UpdateAddressBookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateAddressBook
+func (c *AlexaForBusiness) UpdateAddressBookRequest(input *UpdateAddressBookInput) UpdateAddressBookRequest {
+	op := &aws.Operation{
+		Name:       opUpdateAddressBook,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateAddressBookInput{}
+	}
+
+	output := &UpdateAddressBookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateAddressBookRequest{Request: req, Input: input, Copy: c.UpdateAddressBookRequest}
+}
+
+const opUpdateContact = "UpdateContact"
+
+// UpdateContactRequest is a API request type for the UpdateContact API operation.
+type UpdateContactRequest struct {
+	*aws.Request
+	Input *UpdateContactInput
+	Copy  func(*UpdateContactInput) UpdateContactRequest
+}
+
+// Send marshals and sends the UpdateContact API request.
+func (r UpdateContactRequest) Send() (*UpdateContactOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateContactOutput), nil
+}
+
+// UpdateContactRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Updates the contact details by the contact ARN.
+//
+//    // Example sending a request using the UpdateContactRequest method.
+//    req := client.UpdateContactRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContact
+func (c *AlexaForBusiness) UpdateContactRequest(input *UpdateContactInput) UpdateContactRequest {
+	op := &aws.Operation{
+		Name:       opUpdateContact,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateContactInput{}
+	}
+
+	output := &UpdateContactOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateContactRequest{Request: req, Input: input, Copy: c.UpdateContactRequest}
+}
+
 const opUpdateDevice = "UpdateDevice"
 
 // UpdateDeviceRequest is a API request type for the UpdateDevice API operation.
@@ -2185,6 +2890,121 @@ func (c *AlexaForBusiness) UpdateSkillGroupRequest(input *UpdateSkillGroupInput)
 	return UpdateSkillGroupRequest{Request: req, Input: input, Copy: c.UpdateSkillGroupRequest}
 }
 
+// An address book with attributes.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AddressBook
+type AddressBook struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the address book.
+	AddressBookArn *string `type:"string"`
+
+	// The description of the address book.
+	Description *string `min:"1" type:"string"`
+
+	// The name of the address book.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s AddressBook) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AddressBook) GoString() string {
+	return s.String()
+}
+
+// Information related to an address book.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AddressBookData
+type AddressBookData struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the address book.
+	AddressBookArn *string `type:"string"`
+
+	// The description of the address book.
+	Description *string `min:"1" type:"string"`
+
+	// The name of the address book.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s AddressBookData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AddressBookData) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBookRequest
+type AssociateContactWithAddressBookInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the address book with which to associate the contact.
+	//
+	// AddressBookArn is a required field
+	AddressBookArn *string `type:"string" required:"true"`
+
+	// The ARN of the contact to associate with an address book.
+	//
+	// ContactArn is a required field
+	ContactArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AssociateContactWithAddressBookInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateContactWithAddressBookInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateContactWithAddressBookInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateContactWithAddressBookInput"}
+
+	if s.AddressBookArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AddressBookArn"))
+	}
+
+	if s.ContactArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContactArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateContactWithAddressBookResponse
+type AssociateContactWithAddressBookOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s AssociateContactWithAddressBookOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateContactWithAddressBookOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateContactWithAddressBookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/AssociateDeviceWithRoomRequest
 type AssociateDeviceWithRoomInput struct {
 	_ struct{} `type:"structure"`
@@ -2268,6 +3088,231 @@ func (s AssociateSkillGroupWithRoomOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s AssociateSkillGroupWithRoomOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// A contact with attributes.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/Contact
+type Contact struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the contact.
+	ContactArn *string `type:"string"`
+
+	// The name of the contact to display on the AWS management console.
+	DisplayName *string `min:"1" type:"string"`
+
+	// The first name of the contact that is used to call the contact on the device.
+	FirstName *string `min:"1" type:"string"`
+
+	// The last name of the contact that is used to call the contact on the device.
+	LastName *string `min:"1" type:"string"`
+
+	// The phone number of the contact.
+	PhoneNumber *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Contact) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Contact) GoString() string {
+	return s.String()
+}
+
+// Information related to a contact.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ContactData
+type ContactData struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the contact.
+	ContactArn *string `type:"string"`
+
+	// The name of the contact to display on the AWS management console.
+	DisplayName *string `min:"1" type:"string"`
+
+	// The first name of the contact that is used to call the contact on the device.
+	FirstName *string `min:"1" type:"string"`
+
+	// The last name of the contact that is used to call the contact on the device.
+	LastName *string `min:"1" type:"string"`
+
+	// The phone number of the contact.
+	PhoneNumber *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ContactData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ContactData) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateAddressBookRequest
+type CreateAddressBookInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique, user-specified identifier for the request that ensures idempotency.
+	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
+
+	// The description of the address book.
+	Description *string `min:"1" type:"string"`
+
+	// The name of the address book.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateAddressBookInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateAddressBookInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateAddressBookInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateAddressBookInput"}
+	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
+	}
+	if s.Description != nil && len(*s.Description) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateAddressBookResponse
+type CreateAddressBookOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the newly created address book.
+	AddressBookArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateAddressBookOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateAddressBookOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateAddressBookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContactRequest
+type CreateContactInput struct {
+	_ struct{} `type:"structure"`
+
+	// A unique, user-specified identifier for this request that ensures idempotency.
+	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
+
+	// The name of the contact to display on the AWS management console.
+	DisplayName *string `min:"1" type:"string"`
+
+	// The first name of the contact that is used to call the contact on the device.
+	//
+	// FirstName is a required field
+	FirstName *string `min:"1" type:"string" required:"true"`
+
+	// The last name of the contact that is used to call the contact on the device.
+	LastName *string `min:"1" type:"string"`
+
+	// The phone number of the contact in E164 format.
+	//
+	// PhoneNumber is a required field
+	PhoneNumber *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateContactInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateContactInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateContactInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateContactInput"}
+	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 10 {
+		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 10))
+	}
+	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
+	}
+
+	if s.FirstName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FirstName"))
+	}
+	if s.FirstName != nil && len(*s.FirstName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FirstName", 1))
+	}
+	if s.LastName != nil && len(*s.LastName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LastName", 1))
+	}
+
+	if s.PhoneNumber == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PhoneNumber"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/CreateContactResponse
+type CreateContactOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ARN of the newly created address book.
+	ContactArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateContactOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateContactOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateContactOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -2650,6 +3695,118 @@ func (s CreateUserOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteAddressBookRequest
+type DeleteAddressBookInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the address book to delete.
+	//
+	// AddressBookArn is a required field
+	AddressBookArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteAddressBookInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteAddressBookInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteAddressBookInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteAddressBookInput"}
+
+	if s.AddressBookArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AddressBookArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteAddressBookResponse
+type DeleteAddressBookOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteAddressBookOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteAddressBookOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteAddressBookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContactRequest
+type DeleteContactInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the contact to delete.
+	//
+	// ContactArn is a required field
+	ContactArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteContactInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteContactInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteContactInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteContactInput"}
+
+	if s.ContactArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContactArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteContactResponse
+type DeleteContactOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteContactOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteContactOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteContactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeleteProfileRequest
 type DeleteProfileInput struct {
 	_ struct{} `type:"structure"`
@@ -3028,6 +4185,71 @@ func (s DeviceStatusInfo) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateContactFromAddressBookRequest
+type DisassociateContactFromAddressBookInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the address from which to disassociate the contact.
+	//
+	// AddressBookArn is a required field
+	AddressBookArn *string `type:"string" required:"true"`
+
+	// The ARN of the contact to disassociate from an address book.
+	//
+	// ContactArn is a required field
+	ContactArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DisassociateContactFromAddressBookInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociateContactFromAddressBookInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociateContactFromAddressBookInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateContactFromAddressBookInput"}
+
+	if s.AddressBookArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AddressBookArn"))
+	}
+
+	if s.ContactArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContactArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateContactFromAddressBookResponse
+type DisassociateContactFromAddressBookOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DisassociateContactFromAddressBookOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociateContactFromAddressBookOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateContactFromAddressBookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DisassociateDeviceFromRoomRequest
 type DisassociateDeviceFromRoomInput struct {
 	_ struct{} `type:"structure"`
@@ -3157,6 +4379,124 @@ func (s *Filter) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBookRequest
+type GetAddressBookInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the address book for which to request details.
+	//
+	// AddressBookArn is a required field
+	AddressBookArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetAddressBookInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAddressBookInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetAddressBookInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetAddressBookInput"}
+
+	if s.AddressBookArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AddressBookArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetAddressBookResponse
+type GetAddressBookOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The details of the requested address book.
+	AddressBook *AddressBook `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetAddressBookOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetAddressBookOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetAddressBookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContactRequest
+type GetContactInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the contact for which to request details.
+	//
+	// ContactArn is a required field
+	ContactArn *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetContactInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetContactInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetContactInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetContactInput"}
+
+	if s.ContactArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContactArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetContactResponse
+type GetContactOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The details of the requested contact.
+	Contact *Contact `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetContactOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetContactOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetContactOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/GetDeviceRequest
@@ -3944,6 +5284,195 @@ func (s *RoomSkillParameter) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchAddressBooksRequest
+type SearchAddressBooksInput struct {
+	_ struct{} `type:"structure"`
+
+	// The filters to use to list a specified set of address books. The supported
+	// filter key is AddressBookName.
+	Filters []Filter `type:"list"`
+
+	// The maximum number of results to include in the response. If more results
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// An optional token returned from a prior request. Use this token for pagination
+	// of results from this action. If this parameter is specified, the response
+	// only includes results beyond the token, up to the value specified by MaxResults.
+	NextToken *string `min:"1" type:"string"`
+
+	// The sort order to use in listing the specified set of address books. The
+	// supported sort key is AddressBookName.
+	SortCriteria []Sort `type:"list"`
+}
+
+// String returns the string representation
+func (s SearchAddressBooksInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchAddressBooksInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SearchAddressBooksInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SearchAddressBooksInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SortCriteria != nil {
+		for i, v := range s.SortCriteria {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SortCriteria", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchAddressBooksResponse
+type SearchAddressBooksOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The address books that meet the specified set of filter criteria, in sort
+	// order.
+	AddressBooks []AddressBookData `type:"list"`
+
+	// The token returned to indicate that there is more data available.
+	NextToken *string `min:"1" type:"string"`
+
+	// The total number of address books returned.
+	TotalCount *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s SearchAddressBooksOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchAddressBooksOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchAddressBooksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchContactsRequest
+type SearchContactsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The filters to use to list a specified set of address books. The supported
+	// filter keys are DisplayName, FirstName, LastName, and AddressBookArns.
+	Filters []Filter `type:"list"`
+
+	// The maximum number of results to include in the response. If more results
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// An optional token returned from a prior request. Use this token for pagination
+	// of results from this action. If this parameter is specified, the response
+	// only includes results beyond the token, up to the value specified by MaxResults.
+	NextToken *string `min:"1" type:"string"`
+
+	// The sort order to use in listing the specified set of contacts. The supported
+	// sort keys are DisplayName, FirstName, and LastName.
+	SortCriteria []Sort `type:"list"`
+}
+
+// String returns the string representation
+func (s SearchContactsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchContactsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *SearchContactsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "SearchContactsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.SortCriteria != nil {
+		for i, v := range s.SortCriteria {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "SortCriteria", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchContactsResponse
+type SearchContactsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The contacts that meet the specified set of filter criteria, in sort order.
+	Contacts []ContactData `type:"list"`
+
+	// The token returned to indicate that there is more data available.
+	NextToken *string `min:"1" type:"string"`
+
+	// The total number of contacts returned.
+	TotalCount *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s SearchContactsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SearchContactsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s SearchContactsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/SearchDevicesRequest
@@ -4813,6 +6342,151 @@ func (s UntagResourceOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateAddressBookRequest
+type UpdateAddressBookInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the room to update.
+	//
+	// AddressBookArn is a required field
+	AddressBookArn *string `type:"string" required:"true"`
+
+	// The updated description of the room.
+	Description *string `min:"1" type:"string"`
+
+	// The updated name of the room.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateAddressBookInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateAddressBookInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateAddressBookInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateAddressBookInput"}
+
+	if s.AddressBookArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AddressBookArn"))
+	}
+	if s.Description != nil && len(*s.Description) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateAddressBookResponse
+type UpdateAddressBookOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateAddressBookOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateAddressBookOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateAddressBookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContactRequest
+type UpdateContactInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of the contact to update.
+	//
+	// ContactArn is a required field
+	ContactArn *string `type:"string" required:"true"`
+
+	// The updated display name of the contact.
+	DisplayName *string `min:"1" type:"string"`
+
+	// The updated first name of the contact.
+	FirstName *string `min:"1" type:"string"`
+
+	// The updated last name of the contact.
+	LastName *string `min:"1" type:"string"`
+
+	// The updated phone number of the contact.
+	PhoneNumber *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateContactInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateContactInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateContactInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateContactInput"}
+
+	if s.ContactArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContactArn"))
+	}
+	if s.DisplayName != nil && len(*s.DisplayName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DisplayName", 1))
+	}
+	if s.FirstName != nil && len(*s.FirstName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FirstName", 1))
+	}
+	if s.LastName != nil && len(*s.LastName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("LastName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/UpdateContactResponse
+type UpdateContactOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateContactOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateContactOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateContactOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 

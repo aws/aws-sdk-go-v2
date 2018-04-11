@@ -78,6 +78,8 @@ type WorkMailAPI interface {
 
 	DeleteGroupRequest(*workmail.DeleteGroupInput) workmail.DeleteGroupRequest
 
+	DeleteMailboxPermissionsRequest(*workmail.DeleteMailboxPermissionsInput) workmail.DeleteMailboxPermissionsRequest
+
 	DeleteResourceRequest(*workmail.DeleteResourceInput) workmail.DeleteResourceRequest
 
 	DeleteUserRequest(*workmail.DeleteUserInput) workmail.DeleteUserRequest
@@ -102,6 +104,8 @@ type WorkMailAPI interface {
 
 	ListGroupsRequest(*workmail.ListGroupsInput) workmail.ListGroupsRequest
 
+	ListMailboxPermissionsRequest(*workmail.ListMailboxPermissionsInput) workmail.ListMailboxPermissionsRequest
+
 	ListOrganizationsRequest(*workmail.ListOrganizationsInput) workmail.ListOrganizationsRequest
 
 	ListResourceDelegatesRequest(*workmail.ListResourceDelegatesInput) workmail.ListResourceDelegatesRequest
@@ -109,6 +113,8 @@ type WorkMailAPI interface {
 	ListResourcesRequest(*workmail.ListResourcesInput) workmail.ListResourcesRequest
 
 	ListUsersRequest(*workmail.ListUsersInput) workmail.ListUsersRequest
+
+	PutMailboxPermissionsRequest(*workmail.PutMailboxPermissionsInput) workmail.PutMailboxPermissionsRequest
 
 	RegisterToWorkMailRequest(*workmail.RegisterToWorkMailInput) workmail.RegisterToWorkMailRequest
 

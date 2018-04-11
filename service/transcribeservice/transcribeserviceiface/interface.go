@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Transcribe Service.
 //    func myFunc(svc transcribeserviceiface.TranscribeServiceAPI) bool {
-//        // Make svc.GetTranscriptionJob request
+//        // Make svc.CreateVocabulary request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockTranscribeServiceClient struct {
 //        transcribeserviceiface.TranscribeServiceAPI
 //    }
-//    func (m *mockTranscribeServiceClient) GetTranscriptionJob(input *transcribeservice.GetTranscriptionJobInput) (*transcribeservice.GetTranscriptionJobOutput, error) {
+//    func (m *mockTranscribeServiceClient) CreateVocabulary(input *transcribeservice.CreateVocabularyInput) (*transcribeservice.CreateVocabularyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,11 +62,21 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type TranscribeServiceAPI interface {
+	CreateVocabularyRequest(*transcribeservice.CreateVocabularyInput) transcribeservice.CreateVocabularyRequest
+
+	DeleteVocabularyRequest(*transcribeservice.DeleteVocabularyInput) transcribeservice.DeleteVocabularyRequest
+
 	GetTranscriptionJobRequest(*transcribeservice.GetTranscriptionJobInput) transcribeservice.GetTranscriptionJobRequest
+
+	GetVocabularyRequest(*transcribeservice.GetVocabularyInput) transcribeservice.GetVocabularyRequest
 
 	ListTranscriptionJobsRequest(*transcribeservice.ListTranscriptionJobsInput) transcribeservice.ListTranscriptionJobsRequest
 
+	ListVocabulariesRequest(*transcribeservice.ListVocabulariesInput) transcribeservice.ListVocabulariesRequest
+
 	StartTranscriptionJobRequest(*transcribeservice.StartTranscriptionJobInput) transcribeservice.StartTranscriptionJobRequest
+
+	UpdateVocabularyRequest(*transcribeservice.UpdateVocabularyInput) transcribeservice.UpdateVocabularyRequest
 }
 
 var _ TranscribeServiceAPI = (*transcribeservice.TranscribeService)(nil)

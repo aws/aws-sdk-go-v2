@@ -213,6 +213,8 @@ type S3API interface {
 
 	RestoreObjectRequest(*s3.RestoreObjectInput) s3.RestoreObjectRequest
 
+	SelectObjectContentRequest(*s3.SelectObjectContentInput) s3.SelectObjectContentRequest
+
 	UploadPartRequest(*s3.UploadPartInput) s3.UploadPartRequest
 
 	UploadPartCopyRequest(*s3.UploadPartCopyInput) s3.UploadPartCopyRequest

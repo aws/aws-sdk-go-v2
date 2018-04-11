@@ -73,6 +73,8 @@ type SageMakerAPI interface {
 
 	CreateNotebookInstanceRequest(*sagemaker.CreateNotebookInstanceInput) sagemaker.CreateNotebookInstanceRequest
 
+	CreateNotebookInstanceLifecycleConfigRequest(*sagemaker.CreateNotebookInstanceLifecycleConfigInput) sagemaker.CreateNotebookInstanceLifecycleConfigRequest
+
 	CreatePresignedNotebookInstanceUrlRequest(*sagemaker.CreatePresignedNotebookInstanceUrlInput) sagemaker.CreatePresignedNotebookInstanceUrlRequest
 
 	CreateTrainingJobRequest(*sagemaker.CreateTrainingJobInput) sagemaker.CreateTrainingJobRequest
@@ -85,6 +87,8 @@ type SageMakerAPI interface {
 
 	DeleteNotebookInstanceRequest(*sagemaker.DeleteNotebookInstanceInput) sagemaker.DeleteNotebookInstanceRequest
 
+	DeleteNotebookInstanceLifecycleConfigRequest(*sagemaker.DeleteNotebookInstanceLifecycleConfigInput) sagemaker.DeleteNotebookInstanceLifecycleConfigRequest
+
 	DeleteTagsRequest(*sagemaker.DeleteTagsInput) sagemaker.DeleteTagsRequest
 
 	DescribeEndpointRequest(*sagemaker.DescribeEndpointInput) sagemaker.DescribeEndpointRequest
@@ -95,6 +99,8 @@ type SageMakerAPI interface {
 
 	DescribeNotebookInstanceRequest(*sagemaker.DescribeNotebookInstanceInput) sagemaker.DescribeNotebookInstanceRequest
 
+	DescribeNotebookInstanceLifecycleConfigRequest(*sagemaker.DescribeNotebookInstanceLifecycleConfigInput) sagemaker.DescribeNotebookInstanceLifecycleConfigRequest
+
 	DescribeTrainingJobRequest(*sagemaker.DescribeTrainingJobInput) sagemaker.DescribeTrainingJobRequest
 
 	ListEndpointConfigsRequest(*sagemaker.ListEndpointConfigsInput) sagemaker.ListEndpointConfigsRequest
@@ -102,6 +108,8 @@ type SageMakerAPI interface {
 	ListEndpointsRequest(*sagemaker.ListEndpointsInput) sagemaker.ListEndpointsRequest
 
 	ListModelsRequest(*sagemaker.ListModelsInput) sagemaker.ListModelsRequest
+
+	ListNotebookInstanceLifecycleConfigsRequest(*sagemaker.ListNotebookInstanceLifecycleConfigsInput) sagemaker.ListNotebookInstanceLifecycleConfigsRequest
 
 	ListNotebookInstancesRequest(*sagemaker.ListNotebookInstancesInput) sagemaker.ListNotebookInstancesRequest
 
@@ -120,6 +128,8 @@ type SageMakerAPI interface {
 	UpdateEndpointWeightsAndCapacitiesRequest(*sagemaker.UpdateEndpointWeightsAndCapacitiesInput) sagemaker.UpdateEndpointWeightsAndCapacitiesRequest
 
 	UpdateNotebookInstanceRequest(*sagemaker.UpdateNotebookInstanceInput) sagemaker.UpdateNotebookInstanceRequest
+
+	UpdateNotebookInstanceLifecycleConfigRequest(*sagemaker.UpdateNotebookInstanceLifecycleConfigInput) sagemaker.UpdateNotebookInstanceLifecycleConfigRequest
 
 	WaitUntilEndpointDeleted(*sagemaker.DescribeEndpointInput) error
 	WaitUntilEndpointDeletedWithContext(aws.Context, *sagemaker.DescribeEndpointInput, ...aws.WaiterOption) error

@@ -1337,6 +1337,8 @@ func ExampleDatabaseMigrationService_StartReplicationTaskRequest_shared00() {
 				fmt.Println(databasemigrationservice.ErrCodeResourceNotFoundFault, aerr.Error())
 			case databasemigrationservice.ErrCodeInvalidResourceStateFault:
 				fmt.Println(databasemigrationservice.ErrCodeInvalidResourceStateFault, aerr.Error())
+			case databasemigrationservice.ErrCodeAccessDeniedFault:
+				fmt.Println(databasemigrationservice.ErrCodeAccessDeniedFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

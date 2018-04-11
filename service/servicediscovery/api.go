@@ -8,6 +8,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
 
 const opCreatePrivateDnsNamespace = "CreatePrivateDnsNamespace"
@@ -36,7 +38,9 @@ func (r CreatePrivateDnsNamespaceRequest) Send() (*CreatePrivateDnsNamespaceOutp
 // a specified Amazon VPC. The namespace defines your service naming scheme.
 // For example, if you name your namespace example.com and name your service
 // backend, the resulting DNS name for the service will be backend.example.com.
-// You can associate more than one service with the same namespace.
+// For the current limit on the number of namespaces that you can create using
+// the same AWS account, see Limits on Auto Naming (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming)
+// in the Route 53 Developer Guide.
 //
 //    // Example sending a request using the CreatePrivateDnsNamespaceRequest method.
 //    req := client.CreatePrivateDnsNamespaceRequest(params)
@@ -89,8 +93,10 @@ func (r CreatePublicDnsNamespaceRequest) Send() (*CreatePublicDnsNamespaceOutput
 // Creates a public namespace based on DNS, which will be visible on the internet.
 // The namespace defines your service naming scheme. For example, if you name
 // your namespace example.com and name your service backend, the resulting DNS
-// name for the service will be backend.example.com. You can associate more
-// than one service with the same namespace.
+// name for the service will be backend.example.com. For the current limit on
+// the number of namespaces that you can create using the same AWS account,
+// see Limits on Auto Naming (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming)
+// in the Route 53 Developer Guide.
 //
 //    // Example sending a request using the CreatePublicDnsNamespaceRequest method.
 //    req := client.CreatePublicDnsNamespaceRequest(params)
@@ -149,6 +155,11 @@ func (r CreateServiceRequest) Send() (*CreateServiceOutput, error) {
 // After you create the service, you can submit a RegisterInstance request,
 // and Amazon Route 53 uses the values in the configuration to create the specified
 // entities.
+//
+// For the current limit on the number of instances that you can register using
+// the same namespace and using the same service, see Limits on Auto Naming
+// (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming)
+// in the Route 53 Developer Guide.
 //
 //    // Example sending a request using the CreateServiceRequest method.
 //    req := client.CreateServiceRequest(params)
@@ -1079,8 +1090,8 @@ func (r RegisterInstanceRequest) Send() (*RegisterInstanceOutput, error) {
 //    creates or updates a record in the hosted zone that is associated with
 //    the corresponding namespace
 //
-//    * Creates or updates a health check based on the settings in the health
-//    check configuration, if any, for the service
+//    * If the service includes HealthCheckConfig, creates or updates a health
+//    check based on the settings in the health check configuration
 //
 //    * Associates the health check, if any, with each of the records
 //
@@ -1094,11 +1105,16 @@ func (r RegisterInstanceRequest) Send() (*RegisterInstanceOutput, error) {
 //
 //    * If the health check is healthy: returns all the records
 //
-//    * If the health check is unhealthy: returns the IP address of the last
-//    healthy instance
+//    * If the health check is unhealthy: returns the applicable value for the
+//    last healthy instance
 //
 //    * If you didn't specify a health check configuration: returns all the
 //    records
+//
+// For the current limit on the number of instances that you can register using
+// the same namespace and using the same service, see Limits on Auto Naming
+// (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html#limits-api-entities-autonaming)
+// in the Route 53 Developer Guide.
 //
 //    // Example sending a request using the RegisterInstanceRequest method.
 //    req := client.RegisterInstanceRequest(params)
@@ -1124,6 +1140,56 @@ func (c *ServiceDiscovery) RegisterInstanceRequest(input *RegisterInstanceInput)
 	output.responseMetadata = aws.Response{Request: req}
 
 	return RegisterInstanceRequest{Request: req, Input: input, Copy: c.RegisterInstanceRequest}
+}
+
+const opUpdateInstanceCustomHealthStatus = "UpdateInstanceCustomHealthStatus"
+
+// UpdateInstanceCustomHealthStatusRequest is a API request type for the UpdateInstanceCustomHealthStatus API operation.
+type UpdateInstanceCustomHealthStatusRequest struct {
+	*aws.Request
+	Input *UpdateInstanceCustomHealthStatusInput
+	Copy  func(*UpdateInstanceCustomHealthStatusInput) UpdateInstanceCustomHealthStatusRequest
+}
+
+// Send marshals and sends the UpdateInstanceCustomHealthStatus API request.
+func (r UpdateInstanceCustomHealthStatusRequest) Send() (*UpdateInstanceCustomHealthStatusOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateInstanceCustomHealthStatusOutput), nil
+}
+
+// UpdateInstanceCustomHealthStatusRequest returns a request value for making API operation for
+// Amazon Route 53 Auto Naming.
+//
+//    // Example sending a request using the UpdateInstanceCustomHealthStatusRequest method.
+//    req := client.UpdateInstanceCustomHealthStatusRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateInstanceCustomHealthStatus
+func (c *ServiceDiscovery) UpdateInstanceCustomHealthStatusRequest(input *UpdateInstanceCustomHealthStatusInput) UpdateInstanceCustomHealthStatusRequest {
+	op := &aws.Operation{
+		Name:       opUpdateInstanceCustomHealthStatus,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateInstanceCustomHealthStatusInput{}
+	}
+
+	output := &UpdateInstanceCustomHealthStatusOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateInstanceCustomHealthStatusRequest{Request: req, Input: input, Copy: c.UpdateInstanceCustomHealthStatusRequest}
 }
 
 const opUpdateService = "UpdateService"
@@ -1156,10 +1222,13 @@ func (r UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
 //
 //    * Add, update, or delete HealthCheckConfig for a specified service
 //
-//    *
+// You must specify all DnsRecords configurations (and, optionally, HealthCheckConfig)
+// that you want to appear in the updated service. Any current configurations
+// that don't appear in an UpdateService request are deleted.
 //
-// You must specify all DnsRecordsconfigurations (and, optionally, HealthCheckConfig) that you want to appear in the updated service. Any current configurations
-// that don't appear in an UpdateService
+// When you update the TTL setting for a service, Amazon Route 53 also updates
+// the corresponding settings in all the records and health checks that were
+// created by using the specified service.
 //
 //    // Example sending a request using the UpdateServiceRequest method.
 //    req := client.UpdateServiceRequest(params)
@@ -1360,6 +1429,8 @@ type CreateServiceInput struct {
 	// (http://aws.amazon.com/route53/pricing).
 	HealthCheckConfig *HealthCheckConfig `type:"structure"`
 
+	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
+
 	// The name that you want to assign to the service.
 	//
 	// Name is a required field
@@ -1395,6 +1466,11 @@ func (s *CreateServiceInput) Validate() error {
 	if s.HealthCheckConfig != nil {
 		if err := s.HealthCheckConfig.Validate(); err != nil {
 			invalidParams.AddNested("HealthCheckConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.HealthCheckCustomConfig != nil {
+		if err := s.HealthCheckCustomConfig.Validate(); err != nil {
+			invalidParams.AddNested("HealthCheckCustomConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2332,9 +2408,7 @@ type HealthCheckConfig struct {
 	// For more information, see How Route 53 Determines Whether an Endpoint Is
 	// Healthy (http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
 	// in the Route 53 Developer Guide.
-	//
-	// Type is a required field
-	Type HealthCheckType `type:"string" required:"true" enum:"true"`
+	Type HealthCheckType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -2353,8 +2427,35 @@ func (s *HealthCheckConfig) Validate() error {
 	if s.FailureThreshold != nil && *s.FailureThreshold < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("FailureThreshold", 1))
 	}
-	if len(s.Type) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Type"))
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/HealthCheckCustomConfig
+type HealthCheckCustomConfig struct {
+	_ struct{} `type:"structure"`
+
+	FailureThreshold *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s HealthCheckCustomConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HealthCheckCustomConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HealthCheckCustomConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HealthCheckCustomConfig"}
+	if s.FailureThreshold != nil && *s.FailureThreshold < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("FailureThreshold", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2379,59 +2480,60 @@ type Instance struct {
 	//
 	// Supported attribute keys include the following:
 	//
-	//    * AWS_ALIAS_DNS_NAME: If you want Route 53 to create an alias record that
-	//    routes traffic to an Elastic Load Balancing load balancer, specify the
-	//    DNS name that is associated with the load balancer. For information about
-	//    how to get the DNS name, see "DNSName" in the topic AliasTarget (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html).
+	// AWS_ALIAS_DNS_NAME
+	//
+	// If you want Route 53 to create an alias record that routes traffic to an
+	// Elastic Load Balancing load balancer, specify the DNS name that is associated
+	// with the load balancer. For information about how to get the DNS name, see
+	// "DNSName" in the topic AliasTarget (http://docs.aws.amazon.com/http:/docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html).
 	//
 	// Note the following:
 	//
 	// The configuration for the service that is specified by ServiceId must include
-	//    settings for an A record, an AAAA record, or both.
+	// settings for an A record, an AAAA record, or both.
 	//
-	// In the service that is specified by ServiceId, the value of RoutingPolicy
+	//    * In the service that is specified by ServiceId, the value of RoutingPolicy
 	//    must be WEIGHTED.
 	//
-	// If the service that is specified by ServiceId includes HealthCheckConfig
+	//    * If the service that is specified by ServiceId includes HealthCheckConfig
 	//    settings, Route 53 will create the health check, but it won't associate
 	//    the health check with the alias record.
 	//
-	// Auto naming currently doesn't support creating alias records that route traffic
-	//    to AWS resources other than ELB load balancers.
+	//    * Auto naming currently doesn't support creating alias records that route
+	//    traffic to AWS resources other than ELB load balancers.
 	//
-	// If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values for any
-	//    of the AWS_INSTANCE attributes.
+	//    * If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values
+	//    for any of the AWS_INSTANCE attributes.
 	//
-	//    * AWS_INSTANCE_CNAME: If the service configuration includes a CNAME record,
-	//    the domain name that you want Route 53 to return in response to DNS queries,
-	//    for example, example.com.
+	// AWS_INSTANCE_CNAME
 	//
-	// This value is required if the service specified by ServiceId includes settings
-	//    for an CNAME record.
+	// If the service configuration includes a CNAME record, the domain name that
+	// you want Route 53 to return in response to DNS queries, for example, example.com.
 	//
-	//    * AWS_INSTANCE_IPV4: If the service configuration includes an A record,
-	//    the IPv4 address that you want Route 53 to return in response to DNS queries,
-	//    for example, 192.0.2.44.
+	// This value is required if the service specified by ServiceIdincludes settings for an CNAME record.
 	//
-	// This value is required if the service specified by ServiceId includes settings
-	//    for an A record. Either AWS_INSTANCE_IPV4 or AWS_INSTANCE_IPV6 is required
-	//    if the service includes settings for an SRV record.
+	// AWS_INSTANCE_IPV4
 	//
-	//    * AWS_INSTANCE_IPV6: If the service configuration includes an AAAA record,
-	//    the IPv6 address that you want Route 53 to return in response to DNS queries,
-	//    for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345.
+	// If the service configuration includes an A record, the IPv4 address that
+	// you want Route 53 to return in response to DNS queries, for example, 192.0.2.44.
 	//
-	// This value is required if the service specified by ServiceId includes settings
-	//    for an AAAA record. Either AWS_INSTANCE_IPV4 or AWS_INSTANCE_IPV6 is required
-	//    if the service includes settings for an SRV record.
+	// This value is required if the service specified by ServiceIdincludes settings for an A record. If the service includes settings for an
+	// SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
 	//
-	//    * AWS_INSTANCE_PORT: If the service includes an SRV record, the value
-	//    that you want Route 53 to return for the port. In addition, if the service
-	//    includes HealthCheckConfig, the port on the endpoint that you want Route
-	//    53 to send requests to. For more information, see CreateService.
+	// AWS_INSTANCE_IPV6
 	//
-	// This value is required if you specified settings for an SRV record when you
-	//    created the service.
+	// If the service configuration includes an AAAA record, the IPv6 address that
+	// you want Route 53 to return in response to DNS queries, for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345.
+	//
+	// This value is required if the service specified by ServiceIdincludes settings for an AAAA record. If the service includes settings for
+	// an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
+	//
+	// AWS_INSTANCE_PORT
+	//
+	// If the service includes an SRV record, the value that you want Route 53 to
+	// return for the port.
+	//
+	// If the service includes HealthCheckConfig
 	Attributes map[string]string `type:"map"`
 
 	// A unique string that identifies the request and that allows failed RegisterInstance
@@ -3288,14 +3390,16 @@ type RegisterInstanceInput struct {
 	// If the service configuration includes an A record, the IPv4 address that
 	// you want Route 53 to return in response to DNS queries, for example, 192.0.2.44.
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an A record. Either AWS_INSTANCE_IPV4or AWS_INSTANCE_IPV6is required if the service includes settings for an SRV record.
+	// This value is required if the service specified by ServiceIdincludes settings for an A record. If the service includes settings for an
+	// SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
 	//
 	// AWS_INSTANCE_IPV6
 	//
 	// If the service configuration includes an AAAA record, the IPv6 address that
 	// you want Route 53 to return in response to DNS queries, for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345.
 	//
-	// This value is required if the service specified by ServiceIdincludes settings for an AAAA record. Either AWS_INSTANCE_IPV4or AWS_INSTANCE_IPV6is required if the service includes settings for an SRV record.
+	// This value is required if the service specified by ServiceIdincludes settings for an AAAA record. If the service includes settings for
+	// an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.
 	//
 	// AWS_INSTANCE_PORT
 	//
@@ -3435,6 +3539,8 @@ type Service struct {
 	// For information about the charges for health checks, see Route 53 Pricing
 	// (http://aws.amazon.com/route53/pricing).
 	HealthCheckConfig *HealthCheckConfig `type:"structure"`
+
+	HealthCheckCustomConfig *HealthCheckCustomConfig `type:"structure"`
 
 	// The ID that Route 53 assigned to the service when you created it.
 	Id *string `type:"string"`
@@ -3650,6 +3756,73 @@ func (s ServiceSummary) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateInstanceCustomHealthStatusRequest
+type UpdateInstanceCustomHealthStatusInput struct {
+	_ struct{} `type:"structure"`
+
+	// InstanceId is a required field
+	InstanceId *string `type:"string" required:"true"`
+
+	// ServiceId is a required field
+	ServiceId *string `type:"string" required:"true"`
+
+	// Status is a required field
+	Status CustomHealthStatus `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpdateInstanceCustomHealthStatusInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateInstanceCustomHealthStatusInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateInstanceCustomHealthStatusInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateInstanceCustomHealthStatusInput"}
+
+	if s.InstanceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InstanceId"))
+	}
+
+	if s.ServiceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ServiceId"))
+	}
+	if len(s.Status) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateInstanceCustomHealthStatusOutput
+type UpdateInstanceCustomHealthStatusOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateInstanceCustomHealthStatusOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateInstanceCustomHealthStatusOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateInstanceCustomHealthStatusOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/servicediscovery-2017-03-14/UpdateServiceRequest
 type UpdateServiceInput struct {
 	_ struct{} `type:"structure"`
@@ -3722,6 +3895,23 @@ func (s UpdateServiceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateServiceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+type CustomHealthStatus string
+
+// Enum values for CustomHealthStatus
+const (
+	CustomHealthStatusHealthy   CustomHealthStatus = "HEALTHY"
+	CustomHealthStatusUnhealthy CustomHealthStatus = "UNHEALTHY"
+)
+
+func (enum CustomHealthStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CustomHealthStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 type FilterCondition string

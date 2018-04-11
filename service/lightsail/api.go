@@ -134,6 +134,9 @@ func (r AttachInstancesToLoadBalancerRequest) Send() (*AttachInstancesToLoadBala
 //
 // Attaches one or more Lightsail instances to a load balancer.
 //
+// After some time, the instances are attached to the load balancer and the
+// health check status is available.
+//
 //    // Example sending a request using the AttachInstancesToLoadBalancerRequest method.
 //    req := client.AttachInstancesToLoadBalancerRequest(params)
 //    resp, err := req.Send()
@@ -183,8 +186,13 @@ func (r AttachLoadBalancerTlsCertificateRequest) Send() (*AttachLoadBalancerTlsC
 // Amazon Lightsail.
 //
 // Attaches a Transport Layer Security (TLS) certificate to your load balancer.
-//
 // TLS is just an updated, more secure version of Secure Socket Layer (SSL).
+//
+// Once you create and validate your certificate, you can attach it to your
+// load balancer. You can also use this API to rotate the certificates on your
+// account. Use the AttachLoadBalancerTlsCertificate operation with the non-attached
+// certificate, and it will replace the existing one and become the attached
+// certificate.
 //
 //    // Example sending a request using the AttachLoadBalancerTlsCertificateRequest method.
 //    req := client.AttachLoadBalancerTlsCertificateRequest(params)
@@ -806,10 +814,14 @@ func (r CreateLoadBalancerRequest) Send() (*CreateLoadBalancerOutput, error) {
 // CreateLoadBalancerRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Creates a Lightsail load balancer.
-//
-// When you create a load balancer, you can specify certificates and port settings.
+// Creates a Lightsail load balancer. To learn more about deciding whether to
+// load balance your application, see Configure your Lightsail instances for
+// load balancing (https://lightsail.aws.amazon.com/ls/docs/how-to/article/configure-lightsail-instances-for-load-balancing).
 // You can create up to 5 load balancers per AWS Region in your account.
+//
+// When you create a load balancer, you can specify a unique name and port settings.
+// To change additional load balancer settings, use the UpdateLoadBalancerAttribute
+// operation.
 //
 //    // Example sending a request using the CreateLoadBalancerRequest method.
 //    req := client.CreateLoadBalancerRequest(params)
@@ -1271,7 +1283,9 @@ func (r DeleteLoadBalancerRequest) Send() (*DeleteLoadBalancerOutput, error) {
 // DeleteLoadBalancerRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Deletes a Lightsail load balancer.
+// Deletes a Lightsail load balancer and all its associated SSL/TLS certificates.
+// Once the load balancer is deleted, you will need to create a new load balancer,
+// create a new certificate, and verify domain ownership again.
 //
 //    // Example sending a request using the DeleteLoadBalancerRequest method.
 //    req := client.DeleteLoadBalancerRequest(params)
@@ -1321,7 +1335,7 @@ func (r DeleteLoadBalancerTlsCertificateRequest) Send() (*DeleteLoadBalancerTlsC
 // DeleteLoadBalancerTlsCertificateRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Deletes a TLS/SSL certificate associated with a Lightsail load balancer.
+// Deletes an SSL/TLS certificate associated with a Lightsail load balancer.
 //
 //    // Example sending a request using the DeleteLoadBalancerTlsCertificateRequest method.
 //    req := client.DeleteLoadBalancerTlsCertificateRequest(params)
@@ -1424,6 +1438,9 @@ func (r DetachInstancesFromLoadBalancerRequest) Send() (*DetachInstancesFromLoad
 // Amazon Lightsail.
 //
 // Detaches the specified instances from a Lightsail load balancer.
+//
+// This operation waits until the instances are no longer needed before they
+// are detached from the load balancer.
 //
 //    // Example sending a request using the DetachInstancesFromLoadBalancerRequest method.
 //    req := client.DetachInstancesFromLoadBalancerRequest(params)
@@ -2646,6 +2663,9 @@ func (r GetLoadBalancerTlsCertificatesRequest) Send() (*GetLoadBalancerTlsCertif
 //
 // TLS is just an updated, more secure version of Secure Socket Layer (SSL).
 //
+// You can have a maximum of 2 certificates associated with a Lightsail load
+// balancer. One is active and the other is inactive.
+//
 //    // Example sending a request using the GetLoadBalancerTlsCertificatesRequest method.
 //    req := client.GetLoadBalancerTlsCertificatesRequest(params)
 //    resp, err := req.Send()
@@ -3610,7 +3630,8 @@ func (r UpdateLoadBalancerAttributeRequest) Send() (*UpdateLoadBalancerAttribute
 // UpdateLoadBalancerAttributeRequest returns a request value for making API operation for
 // Amazon Lightsail.
 //
-// Updates the specified attribute for a load balancer.
+// Updates the specified attribute for a load balancer. You can only update
+// one attribute at a time.
 //
 //    // Example sending a request using the UpdateLoadBalancerAttributeRequest method.
 //    req := client.UpdateLoadBalancerAttributeRequest(params)
@@ -3783,6 +3804,12 @@ type AttachInstancesToLoadBalancerInput struct {
 	// An array of strings representing the instance name(s) you want to attach
 	// to your load balancer.
 	//
+	// An instance must be running before you can attach it to your load balancer.
+	//
+	// There are no additional limits on the number of instances you can attach
+	// to your load balancer, aside from the limit of Lightsail instances you can
+	// create in your account (20).
+	//
 	// InstanceNames is a required field
 	InstanceNames []string `locationName:"instanceNames" type:"list" required:"true"`
 
@@ -3849,12 +3876,12 @@ func (s AttachInstancesToLoadBalancerOutput) SDKResponseMetadata() aws.Response 
 type AttachLoadBalancerTlsCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of your TLS/SSL certificate.
+	// The name of your SSL/TLS certificate.
 	//
 	// CertificateName is a required field
 	CertificateName *string `locationName:"certificateName" type:"string" required:"true"`
 
-	// The name of the load balancer to which you want to associate the TLS/SSL
+	// The name of the load balancer to which you want to associate the SSL/TLS
 	// certificate.
 	//
 	// LoadBalancerName is a required field
@@ -3896,6 +3923,9 @@ type AttachLoadBalancerTlsCertificateOutput struct {
 	responseMetadata aws.Response
 
 	// An object representing the API operations.
+	//
+	// These SSL/TLS certificates are only usable by Lightsail load balancers. You
+	// can't get the certificate and use it for another purpose.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
 
@@ -4931,8 +4961,8 @@ func (s CreateKeyPairOutput) SDKResponseMetadata() aws.Response {
 type CreateLoadBalancerInput struct {
 	_ struct{} `type:"structure"`
 
-	// The alternative domain names to use with your TLS/SSL certificate (e.g.,
-	// www.example.com, www.ejemplo.com, ejemplo.com).
+	// The optional alternative domains and subdomains to use with your SSL/TLS
+	// certificate (e.g., www.example.com, example.com, m.example.com, blog.example.com).
 	CertificateAlternativeNames []string `locationName:"certificateAlternativeNames" type:"list"`
 
 	// The domain name with which your certificate is associated (e.g., example.com).
@@ -4941,7 +4971,7 @@ type CreateLoadBalancerInput struct {
 	// vice-versa).
 	CertificateDomainName *string `locationName:"certificateDomainName" type:"string"`
 
-	// The name of the TLS/SSL certificate.
+	// The name of the SSL/TLS certificate.
 	//
 	// If you specify certificateName, then certificateDomainName is required (and
 	// vice-versa).
@@ -4950,6 +4980,10 @@ type CreateLoadBalancerInput struct {
 	// The path you provided to perform the load balancer health check. If you didn't
 	// specify a health check path, Lightsail uses the root path of your website
 	// (e.g., "/").
+	//
+	// You may want to specify a custom health check path other than the root of
+	// your application if your home page loads slowly or has a lot of media or
+	// scripting on it.
 	HealthCheckPath *string `locationName:"healthCheckPath" type:"string"`
 
 	// The instance port where you're creating your load balancer.
@@ -5020,20 +5054,28 @@ func (s CreateLoadBalancerOutput) SDKResponseMetadata() aws.Response {
 type CreateLoadBalancerTlsCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// An array of strings listing alternative domain names for your TLS/SSL certificate.
+	// An array of strings listing alternative domains and subdomains for your SSL/TLS
+	// certificate. Lightsail will de-dupe the names for you. You can have a maximum
+	// of 9 alternative names (in addition to the 1 primary domain). We do not support
+	// wildcards (e.g., *.example.com).
 	CertificateAlternativeNames []string `locationName:"certificateAlternativeNames" type:"list"`
 
-	// The domain name (e.g., example.com) for your TLS/SSL certificate.
+	// The domain name (e.g., example.com) for your SSL/TLS certificate.
 	//
 	// CertificateDomainName is a required field
 	CertificateDomainName *string `locationName:"certificateDomainName" type:"string" required:"true"`
 
-	// The TLS/SSL certificate name.
+	// The SSL/TLS certificate name.
+	//
+	// You can have up to 10 certificates in your account at one time. Each Lightsail
+	// load balancer can have up to 2 certificates associated with it at one time.
+	// There is also an overall limit to the number of certificates that can be
+	// issue in a 365-day period. For more information, see Limits (http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html).
 	//
 	// CertificateName is a required field
 	CertificateName *string `locationName:"certificateName" type:"string" required:"true"`
 
-	// The load balancer name where you want to create the TLS/SSL certificate.
+	// The load balancer name where you want to create the SSL/TLS certificate.
 	//
 	// LoadBalancerName is a required field
 	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
@@ -5586,12 +5628,16 @@ func (s DeleteLoadBalancerOutput) SDKResponseMetadata() aws.Response {
 type DeleteLoadBalancerTlsCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The TLS/SSL certificate name.
+	// The SSL/TLS certificate name.
 	//
 	// CertificateName is a required field
 	CertificateName *string `locationName:"certificateName" type:"string" required:"true"`
 
-	// When true, forces the deletion of a TLS/SSL certificate.
+	// When true, forces the deletion of an SSL/TLS certificate.
+	//
+	// There can be two certificates associated with a Lightsail load balancer:
+	// the primary and the backup. The force parameter is required when the primary
+	// SSL/TLS certificate is in use by an instance attached to the load balancer.
 	Force *bool `locationName:"force" type:"boolean"`
 
 	// The load balancer name.
@@ -6035,7 +6081,9 @@ type DomainEntry struct {
 	Id *string `locationName:"id" type:"string"`
 
 	// When true, specifies whether the domain entry is an alias used by the Lightsail
-	// load balancer.
+	// load balancer. You can include an alias (A type) record in your request,
+	// which points to a load balancer DNS name and routes traffic to your load
+	// balancer
 	IsAlias *bool `locationName:"isAlias" type:"boolean"`
 
 	// The name of the domain.
@@ -6048,6 +6096,10 @@ type DomainEntry struct {
 	Options map[string]string `locationName:"options" deprecated:"true" type:"map"`
 
 	// The target AWS name server (e.g., ns-111.awsdns-22.com.).
+	//
+	// For Lightsail load balancers, the value looks like ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com.
+	// Be sure to also set isAlias to true when setting up an A record for a load
+	// balancer.
 	Target *string `locationName:"target" type:"string"`
 
 	// The type of domain entry (e.g., SOA or NS).
@@ -7350,6 +7402,24 @@ type GetLoadBalancerMetricDataInput struct {
 	// An array of statistics that you want to request metrics for. Valid values
 	// are listed below.
 	//
+	//    * SampleCount - The count (number) of data points used for the statistical
+	//    calculation.
+	//
+	//    * Average - The value of Sum / SampleCount during the specified period.
+	//    By comparing this statistic with the Minimum and Maximum, you can determine
+	//    the full scope of a metric and how close the average use is to the Minimum
+	//    and Maximum. This comparison helps you to know when to increase or decrease
+	//    your resources as needed.
+	//
+	//    * Sum - All values submitted for the matching metric added together. This
+	//    statistic can be useful for determining the total volume of a metric.
+	//
+	//    * Minimum - The lowest value observed during the specified period. You
+	//    can use this value to determine low volumes of activity for your application.
+	//
+	//    * Maximum - The highest value observed during the specified period. You
+	//    can use this value to determine high volumes of activity for your application.
+	//
 	// Statistics is a required field
 	Statistics []MetricStatistic `locationName:"statistics" type:"list" required:"true"`
 
@@ -7418,7 +7488,86 @@ type GetLoadBalancerMetricDataOutput struct {
 	MetricData []MetricDatapoint `locationName:"metricData" type:"list"`
 
 	// The metric about which you are receiving information. Valid values are listed
-	// below.
+	// below, along with the most useful statistics to include in your request.
+	//
+	//    * ClientTLSNegotiationErrorCount - The number of TLS connections initiated
+	//    by the client that did not establish a session with the load balancer.
+	//    Possible causes include a mismatch of ciphers or protocols.
+	//
+	// Statistics: The most useful statistic is Sum.
+	//
+	//    * HealthyHostCount - The number of target instances that are considered
+	//    healthy.
+	//
+	// Statistics: The most useful statistic are Average, Minimum, and Maximum.
+	//
+	//    * UnhealthyHostCount - The number of target instances that are considered
+	//    unhealthy.
+	//
+	// Statistics: The most useful statistic are Average, Minimum, and Maximum.
+	//
+	//    * HTTPCode_LB_4XX_Count - The number of HTTP 4XX client error codes that
+	//    originate from the load balancer. Client errors are generated when requests
+	//    are malformed or incomplete. These requests have not been received by
+	//    the target instance. This count does not include any response codes generated
+	//    by the target instances.
+	//
+	// Statistics: The most useful statistic is Sum. Note that Minimum, Maximum,
+	//    and Average all return 1.
+	//
+	//    * HTTPCode_LB_5XX_Count - The number of HTTP 5XX server error codes that
+	//    originate from the load balancer. This count does not include any response
+	//    codes generated by the target instances.
+	//
+	// Statistics: The most useful statistic is Sum. Note that Minimum, Maximum,
+	//    and Average all return 1. Note that Minimum, Maximum, and Average all
+	//    return 1.
+	//
+	//    * HTTPCode_Instance_2XX_Count - The number of HTTP response codes generated
+	//    by the target instances. This does not include any response codes generated
+	//    by the load balancer.
+	//
+	// Statistics: The most useful statistic is Sum. Note that Minimum, Maximum,
+	//    and Average all return 1.
+	//
+	//    * HTTPCode_Instance_3XX_Count - The number of HTTP response codes generated
+	//    by the target instances. This does not include any response codes generated
+	//    by the load balancer.
+	//
+	// Statistics: The most useful statistic is Sum. Note that Minimum, Maximum,
+	//    and Average all return 1.
+	//
+	//    * HTTPCode_Instance_4XX_Count - The number of HTTP response codes generated
+	//    by the target instances. This does not include any response codes generated
+	//    by the load balancer.
+	//
+	// Statistics: The most useful statistic is Sum. Note that Minimum, Maximum,
+	//    and Average all return 1.
+	//
+	//    * HTTPCode_Instance_5XX_Count - The number of HTTP response codes generated
+	//    by the target instances. This does not include any response codes generated
+	//    by the load balancer.
+	//
+	// Statistics: The most useful statistic is Sum. Note that Minimum, Maximum,
+	//    and Average all return 1.
+	//
+	//    * InstanceResponseTime - The time elapsed, in seconds, after the request
+	//    leaves the load balancer until a response from the target instance is
+	//    received.
+	//
+	// Statistics: The most useful statistic is Average.
+	//
+	//    * RejectedConnectionCount - The number of connections that were rejected
+	//    because the load balancer had reached its maximum number of connections.
+	//
+	// Statistics: The most useful statistic is Sum.
+	//
+	//    * RequestCount - The number of requests processed over IPv4. This count
+	//    includes only the requests with a response generated by a target instance
+	//    of the load balancer.
+	//
+	// Statistics: The most useful statistic is Sum. Note that Minimum, Maximum,
+	//    and Average all return 1.
 	MetricName LoadBalancerMetricName `locationName:"metricName" type:"string" enum:"true"`
 }
 
@@ -7466,7 +7615,7 @@ func (s GetLoadBalancerOutput) SDKResponseMetadata() aws.Response {
 type GetLoadBalancerTlsCertificatesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the load balancer where you stored your TLS/SSL certificate.
+	// The name of the load balancer you associated with your SSL/TLS certificate.
 	//
 	// LoadBalancerName is a required field
 	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
@@ -7502,7 +7651,7 @@ type GetLoadBalancerTlsCertificatesOutput struct {
 
 	responseMetadata aws.Response
 
-	// An array of LoadBalancerTlsCertificate objects describing your TLS/SSL certificates.
+	// An array of LoadBalancerTlsCertificate objects describing your SSL/TLS certificates.
 	TlsCertificates []LoadBalancerTlsCertificate `locationName:"tlsCertificates" type:"list"`
 }
 
@@ -8141,7 +8290,53 @@ type InstanceHealthSummary struct {
 	// Describes the overall instance health. Valid values are below.
 	InstanceHealth InstanceHealthState `locationName:"instanceHealth" type:"string" enum:"true"`
 
-	// More information about the instance health. Valid values are below.
+	// More information about the instance health. If the instanceHealth is healthy,
+	// then an instanceHealthReason value is not provided.
+	//
+	// If instanceHealth is initial, the instanceHealthReason value can be one of
+	// the following:
+	//
+	//    * Lb.RegistrationInProgress - The target instance is in the process of
+	//    being registered with the load balancer.
+	//
+	//    * Lb.InitialHealthChecking - The Lightsail load balancer is still sending
+	//    the target instance the minimum number of health checks required to determine
+	//    its health status.
+	//
+	// If instanceHealth is unhealthy, the instanceHealthReason value can be one
+	// of the following:
+	//
+	//    * Instance.ResponseCodeMismatch - The health checks did not return an
+	//    expected HTTP code.
+	//
+	//    * Instance.Timeout - The health check requests timed out.
+	//
+	//    * Instance.FailedHealthChecks - The health checks failed because the connection
+	//    to the target instance timed out, the target instance response was malformed,
+	//    or the target instance failed the health check for an unknown reason.
+	//
+	//    * Lb.InternalError - The health checks failed due to an internal error.
+	//
+	// If instanceHealth is unused, the instanceHealthReason value can be one of
+	// the following:
+	//
+	//    * Instance.NotRegistered - The target instance is not registered with
+	//    the target group.
+	//
+	//    * Instance.NotInUse - The target group is not used by any load balancer,
+	//    or the target instance is in an Availability Zone that is not enabled
+	//    for its load balancer.
+	//
+	//    * Instance.IpUnusable - The target IP address is reserved for use by a
+	//    Lightsail load balancer.
+	//
+	//    * Instance.InvalidState - The target is in the stopped or terminated state.
+	//
+	// If instanceHealth is draining, the instanceHealthReason value can be one
+	// of the following:
+	//
+	//    * Instance.DeregistrationInProgress - The target instance is in the process
+	//    of being deregistered and the deregistration delay period has not expired.
 	InstanceHealthReason InstanceHealthReason `locationName:"instanceHealthReason" type:"string" enum:"true"`
 
 	// The name of the Lightsail instance for which you are requesting health check
@@ -8471,20 +8666,24 @@ type LoadBalancer struct {
 	// balancer.
 	InstanceHealthSummary []InstanceHealthSummary `locationName:"instanceHealthSummary" type:"list"`
 
-	// The instance port where the load balancer is listening.
+	// The port where the load balancer will direct traffic to your Lightsail instances.
+	// For HTTP traffic, it's port 80. For HTTPS traffic, it's port 443.
 	InstancePort *int64 `locationName:"instancePort" type:"integer"`
 
-	// The AWS Region and Availability Zone where your load balancer was created
-	// (e.g., us-east-2a).
+	// The AWS Region where your load balancer was created (e.g., us-east-2a). Lightsail
+	// automatically creates your load balancer across Availability Zones.
 	Location *ResourceLocation `locationName:"location" type:"structure"`
 
 	// The name of the load balancer (e.g., my-load-balancer).
 	Name *string `locationName:"name" type:"string"`
 
 	// The protocol you have enabled for your load balancer. Valid values are below.
+	//
+	// You can't just have HTTP_HTTPS, but you can have just HTTP.
 	Protocol LoadBalancerProtocol `locationName:"protocol" type:"string" enum:"true"`
 
-	// An array of public port settings for your load balancer.
+	// An array of public port settings for your load balancer. For HTTP, use port
+	// 80. For HTTPS, use port 443.
 	PublicPorts []int64 `locationName:"publicPorts" type:"list"`
 
 	// The resource type (e.g., LoadBalancer.
@@ -8499,7 +8698,8 @@ type LoadBalancer struct {
 	SupportCode *string `locationName:"supportCode" type:"string"`
 
 	// An array of LoadBalancerTlsCertificateSummary objects that provide additional
-	// information about the TLS/SSL certificates.
+	// information about the SSL/TLS certificates. For example, if true, the certificate
+	// is attached to the load balancer.
 	TlsCertificateSummaries []LoadBalancerTlsCertificateSummary `locationName:"tlsCertificateSummaries" type:"list"`
 }
 
@@ -8513,33 +8713,33 @@ func (s LoadBalancer) GoString() string {
 	return s.String()
 }
 
-// Describes a load balancer TLS/SSL certificate.
+// Describes a load balancer SSL/TLS certificate.
 //
 // TLS is just an updated, more secure version of Secure Socket Layer (SSL).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificate
 type LoadBalancerTlsCertificate struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the TLS/SSL certificate.
+	// The Amazon Resource Name (ARN) of the SSL/TLS certificate.
 	Arn *string `locationName:"arn" type:"string"`
 
-	// The time when you created your TLS/SSL certificate.
+	// The time when you created your SSL/TLS certificate.
 	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" timestampFormat:"unix"`
 
-	// The domain name for your TLS/SSL certificate.
+	// The domain name for your SSL/TLS certificate.
 	DomainName *string `locationName:"domainName" type:"string"`
 
 	// An array of LoadBalancerTlsCertificateDomainValidationRecord objects describing
 	// the records.
 	DomainValidationRecords []LoadBalancerTlsCertificateDomainValidationRecord `locationName:"domainValidationRecords" type:"list"`
 
-	// The reason for the TLS/SSL certificate validation failure.
+	// The reason for the SSL/TLS certificate validation failure.
 	FailureReason LoadBalancerTlsCertificateFailureReason `locationName:"failureReason" type:"string" enum:"true"`
 
-	// When true, the TLS/SSL certificate is attached to the Lightsail load balancer.
+	// When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
 	IsAttached *bool `locationName:"isAttached" type:"boolean"`
 
-	// The time when the TLS/SSL certificate was issued.
+	// The time when the SSL/TLS certificate was issued.
 	IssuedAt *time.Time `locationName:"issuedAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The issuer of the certificate.
@@ -8549,32 +8749,53 @@ type LoadBalancerTlsCertificate struct {
 	// key).
 	KeyAlgorithm *string `locationName:"keyAlgorithm" type:"string"`
 
-	// The load balancer name where your TLS/SSL certificate is attached.
+	// The load balancer name where your SSL/TLS certificate is attached.
 	LoadBalancerName *string `locationName:"loadBalancerName" type:"string"`
 
 	// The AWS Region and Availability Zone where you created your certificate.
 	Location *ResourceLocation `locationName:"location" type:"structure"`
 
-	// The name of the TLS/SSL certificate (e.g., my-certificate).
+	// The name of the SSL/TLS certificate (e.g., my-certificate).
 	Name *string `locationName:"name" type:"string"`
 
-	// The timestamp when the TLS/SSL certificate expires.
+	// The timestamp when the SSL/TLS certificate expires.
 	NotAfter *time.Time `locationName:"notAfter" type:"timestamp" timestampFormat:"unix"`
 
-	// The timestamp when the TLS/SSL certificate is first valid.
+	// The timestamp when the SSL/TLS certificate is first valid.
 	NotBefore *time.Time `locationName:"notBefore" type:"timestamp" timestampFormat:"unix"`
 
 	// An object containing information about the status of Lightsail's managed
 	// renewal for the certificate.
 	RenewalSummary *LoadBalancerTlsCertificateRenewalSummary `locationName:"renewalSummary" type:"structure"`
 
-	// The resource type (e.g., LoadBalancerTlsCertificate.
+	// The resource type (e.g., LoadBalancerTlsCertificate).
+	//
+	//    * Instance - A Lightsail instance (a virtual private server)
+	//
+	//    * StaticIp - A static IP address
+	//
+	//    * KeyPair - The key pair used to connect to a Lightsail instance
+	//
+	//    * InstanceSnapshot - A Lightsail instance snapshot
+	//
+	//    * Domain - A DNS zone
+	//
+	//    * PeeredVpc - A peered VPC
+	//
+	//    * LoadBalancer - A Lightsail load balancer
+	//
+	//    * LoadBalancerTlsCertificate - An SSL/TLS certificate associated with
+	//    a Lightsail load balancer
+	//
+	//    * Disk - A Lightsail block storage disk
+	//
+	//    * DiskSnapshot - A block storage disk snapshot
 	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The reason the certificate was revoked. Valid values are below.
 	RevocationReason LoadBalancerTlsCertificateRevocationReason `locationName:"revocationReason" type:"string" enum:"true"`
 
-	// The timestamp when the TLS/SSL certificate was revoked.
+	// The timestamp when the SSL/TLS certificate was revoked.
 	RevokedAt *time.Time `locationName:"revokedAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The serial number of the certificate.
@@ -8583,22 +8804,22 @@ type LoadBalancerTlsCertificate struct {
 	// The algorithm that was used to sign the certificate.
 	SignatureAlgorithm *string `locationName:"signatureAlgorithm" type:"string"`
 
-	// The status of the TLS/SSL certificate. Valid values are below.
+	// The status of the SSL/TLS certificate. Valid values are below.
 	Status LoadBalancerTlsCertificateStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The name of the entity that is associated with the public key contained in
 	// the certificate.
 	Subject *string `locationName:"subject" type:"string"`
 
-	// One or more domain names (subject alternative names) included in the certificate.
-	// This list contains the domain names that are bound to the public key that
-	// is contained in the certificate. The subject alternative names include the
-	// canonical domain name (CN) of the certificate and additional domain names
-	// that can be used to connect to the website.
+	// One or more domains or subdomains included in the certificate. This list
+	// contains the domain names that are bound to the public key that is contained
+	// in the certificate. The subject alternative names include the canonical domain
+	// name (CNAME) of the certificate and additional domain names that can be used
+	// to connect to the website, such as example.com, www.example.com, or m.example.com.
 	SubjectAlternativeNames []string `locationName:"subjectAlternativeNames" type:"list"`
 
 	// The support code. Include this code in your email to support when you have
-	// questions about your Lightsail load balancer or TLS/SSL certificate. This
+	// questions about your Lightsail load balancer or SSL/TLS certificate. This
 	// code enables our support team to look up your Lightsail information more
 	// easily.
 	SupportCode *string `locationName:"supportCode" type:"string"`
@@ -8614,13 +8835,13 @@ func (s LoadBalancerTlsCertificate) GoString() string {
 	return s.String()
 }
 
-// Contains information about the domain names on a TLS/SSL certificate that
+// Contains information about the domain names on an SSL/TLS certificate that
 // you will use to validate domain ownership.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateDomainValidationOption
 type LoadBalancerTlsCertificateDomainValidationOption struct {
 	_ struct{} `type:"structure"`
 
-	// A fully qualified domain name in the certificate request.
+	// The fully qualified domain name in the certificate request.
 	DomainName *string `locationName:"domainName" type:"string"`
 
 	// The status of the domain validation. Valid values are listed below.
@@ -8637,12 +8858,12 @@ func (s LoadBalancerTlsCertificateDomainValidationOption) GoString() string {
 	return s.String()
 }
 
-// Describes the validation record of each domain name in the TLS/SSL certificate.
+// Describes the validation record of each domain name in the SSL/TLS certificate.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateDomainValidationRecord
 type LoadBalancerTlsCertificateDomainValidationRecord struct {
 	_ struct{} `type:"structure"`
 
-	// The domain name against which your TLS/SSL certificate was validated.
+	// The domain name against which your SSL/TLS certificate was validated.
 	DomainName *string `locationName:"domainName" type:"string"`
 
 	// A fully qualified domain name in the certificate. For example, example.com.
@@ -8694,15 +8915,15 @@ func (s LoadBalancerTlsCertificateRenewalSummary) GoString() string {
 	return s.String()
 }
 
-// Provides a summary of TLS/SSL certificate metadata.
+// Provides a summary of SSL/TLS certificate metadata.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsCertificateSummary
 type LoadBalancerTlsCertificateSummary struct {
 	_ struct{} `type:"structure"`
 
-	// When true, the TLS/SSL certificate is attached to the Lightsail load balancer.
+	// When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
 	IsAttached *bool `locationName:"isAttached" type:"boolean"`
 
-	// The name of the TLS/SSL certificate.
+	// The name of the SSL/TLS certificate.
 	Name *string `locationName:"name" type:"string"`
 }
 
@@ -9108,7 +9329,7 @@ type RebootInstanceOutput struct {
 
 	responseMetadata aws.Response
 
-	// An array of key-value pairs containing information about the request operation.
+	// An array of key-value pairs containing information about the request operations.
 	Operations []Operation `locationName:"operations" type:"list"`
 }
 
@@ -9533,7 +9754,7 @@ type UpdateLoadBalancerAttributeInput struct {
 	// AttributeValue is a required field
 	AttributeValue *string `locationName:"attributeValue" min:"1" type:"string" required:"true"`
 
-	// The name of the load balancer that you want to modify.
+	// The name of the load balancer that you want to modify (e.g., my-load-balancer.
 	//
 	// LoadBalancerName is a required field
 	LoadBalancerName *string `locationName:"loadBalancerName" type:"string" required:"true"`
@@ -10066,6 +10287,7 @@ const (
 	OperationStatusStarted    OperationStatus = "Started"
 	OperationStatusFailed     OperationStatus = "Failed"
 	OperationStatusCompleted  OperationStatus = "Completed"
+	OperationStatusSucceeded  OperationStatus = "Succeeded"
 )
 
 func (enum OperationStatus) MarshalValue() (string, error) {
@@ -10168,8 +10390,9 @@ const (
 	RegionNameUsEast2      RegionName = "us-east-2"
 	RegionNameUsWest1      RegionName = "us-west-1"
 	RegionNameUsWest2      RegionName = "us-west-2"
-	RegionNameEuWest1      RegionName = "eu-west-1"
 	RegionNameEuCentral1   RegionName = "eu-central-1"
+	RegionNameEuWest1      RegionName = "eu-west-1"
+	RegionNameEuWest2      RegionName = "eu-west-2"
 	RegionNameApSouth1     RegionName = "ap-south-1"
 	RegionNameApSoutheast1 RegionName = "ap-southeast-1"
 	RegionNameApSoutheast2 RegionName = "ap-southeast-2"

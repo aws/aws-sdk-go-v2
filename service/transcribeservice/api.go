@@ -7,7 +7,112 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/aws/aws-sdk-go-v2/private/protocol"
+	"github.com/aws/aws-sdk-go-v2/private/protocol/jsonrpc"
 )
+
+const opCreateVocabulary = "CreateVocabulary"
+
+// CreateVocabularyRequest is a API request type for the CreateVocabulary API operation.
+type CreateVocabularyRequest struct {
+	*aws.Request
+	Input *CreateVocabularyInput
+	Copy  func(*CreateVocabularyInput) CreateVocabularyRequest
+}
+
+// Send marshals and sends the CreateVocabulary API request.
+func (r CreateVocabularyRequest) Send() (*CreateVocabularyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateVocabularyOutput), nil
+}
+
+// CreateVocabularyRequest returns a request value for making API operation for
+// Amazon Transcribe Service.
+//
+// Creates a new custom vocabulary that you can use to change the way Amazon
+// Transcribe handles transcription of an audio file.
+//
+//    // Example sending a request using the CreateVocabularyRequest method.
+//    req := client.CreateVocabularyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabulary
+func (c *TranscribeService) CreateVocabularyRequest(input *CreateVocabularyInput) CreateVocabularyRequest {
+	op := &aws.Operation{
+		Name:       opCreateVocabulary,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateVocabularyInput{}
+	}
+
+	output := &CreateVocabularyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateVocabularyRequest{Request: req, Input: input, Copy: c.CreateVocabularyRequest}
+}
+
+const opDeleteVocabulary = "DeleteVocabulary"
+
+// DeleteVocabularyRequest is a API request type for the DeleteVocabulary API operation.
+type DeleteVocabularyRequest struct {
+	*aws.Request
+	Input *DeleteVocabularyInput
+	Copy  func(*DeleteVocabularyInput) DeleteVocabularyRequest
+}
+
+// Send marshals and sends the DeleteVocabulary API request.
+func (r DeleteVocabularyRequest) Send() (*DeleteVocabularyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteVocabularyOutput), nil
+}
+
+// DeleteVocabularyRequest returns a request value for making API operation for
+// Amazon Transcribe Service.
+//
+// Deletes a vocabulary from Amazon Transcribe.
+//
+//    // Example sending a request using the DeleteVocabularyRequest method.
+//    req := client.DeleteVocabularyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteVocabulary
+func (c *TranscribeService) DeleteVocabularyRequest(input *DeleteVocabularyInput) DeleteVocabularyRequest {
+	op := &aws.Operation{
+		Name:       opDeleteVocabulary,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteVocabularyInput{}
+	}
+
+	output := &DeleteVocabularyOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteVocabularyRequest{Request: req, Input: input, Copy: c.DeleteVocabularyRequest}
+}
 
 const opGetTranscriptionJob = "GetTranscriptionJob"
 
@@ -32,9 +137,9 @@ func (r GetTranscriptionJobRequest) Send() (*GetTranscriptionJobOutput, error) {
 // Amazon Transcribe Service.
 //
 // Returns information about a transcription job. To see the status of the job,
-// check the Status field. If the status is COMPLETE, the job is finished and
-// you can find the results at the location specified in the TranscriptionFileUri
-// field.
+// check the TranscriptionJobStatus field. If the status is COMPLETED, the job
+// is finished and you can find the results at the location specified in the
+// TranscriptionFileUri field.
 //
 //    // Example sending a request using the GetTranscriptionJobRequest method.
 //    req := client.GetTranscriptionJobRequest(params)
@@ -60,6 +165,56 @@ func (c *TranscribeService) GetTranscriptionJobRequest(input *GetTranscriptionJo
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetTranscriptionJobRequest{Request: req, Input: input, Copy: c.GetTranscriptionJobRequest}
+}
+
+const opGetVocabulary = "GetVocabulary"
+
+// GetVocabularyRequest is a API request type for the GetVocabulary API operation.
+type GetVocabularyRequest struct {
+	*aws.Request
+	Input *GetVocabularyInput
+	Copy  func(*GetVocabularyInput) GetVocabularyRequest
+}
+
+// Send marshals and sends the GetVocabulary API request.
+func (r GetVocabularyRequest) Send() (*GetVocabularyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetVocabularyOutput), nil
+}
+
+// GetVocabularyRequest returns a request value for making API operation for
+// Amazon Transcribe Service.
+//
+// Gets information about a vocabulary.
+//
+//    // Example sending a request using the GetVocabularyRequest method.
+//    req := client.GetVocabularyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabulary
+func (c *TranscribeService) GetVocabularyRequest(input *GetVocabularyInput) GetVocabularyRequest {
+	op := &aws.Operation{
+		Name:       opGetVocabulary,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetVocabularyInput{}
+	}
+
+	output := &GetVocabularyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetVocabularyRequest{Request: req, Input: input, Copy: c.GetVocabularyRequest}
 }
 
 const opListTranscriptionJobs = "ListTranscriptionJobs"
@@ -164,6 +319,109 @@ func (p *ListTranscriptionJobsPager) CurrentPage() *ListTranscriptionJobsOutput 
 	return p.Pager.CurrentPage().(*ListTranscriptionJobsOutput)
 }
 
+const opListVocabularies = "ListVocabularies"
+
+// ListVocabulariesRequest is a API request type for the ListVocabularies API operation.
+type ListVocabulariesRequest struct {
+	*aws.Request
+	Input *ListVocabulariesInput
+	Copy  func(*ListVocabulariesInput) ListVocabulariesRequest
+}
+
+// Send marshals and sends the ListVocabularies API request.
+func (r ListVocabulariesRequest) Send() (*ListVocabulariesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListVocabulariesOutput), nil
+}
+
+// ListVocabulariesRequest returns a request value for making API operation for
+// Amazon Transcribe Service.
+//
+// Returns a list of vocabularies that match the specified criteria. If no criteria
+// are specified, returns the entire list of vocabularies.
+//
+//    // Example sending a request using the ListVocabulariesRequest method.
+//    req := client.ListVocabulariesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabularies
+func (c *TranscribeService) ListVocabulariesRequest(input *ListVocabulariesInput) ListVocabulariesRequest {
+	op := &aws.Operation{
+		Name:       opListVocabularies,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListVocabulariesInput{}
+	}
+
+	output := &ListVocabulariesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListVocabulariesRequest{Request: req, Input: input, Copy: c.ListVocabulariesRequest}
+}
+
+// Paginate pages iterates over the pages of a ListVocabulariesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListVocabularies operation.
+//		req := client.ListVocabulariesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListVocabulariesRequest) Paginate(opts ...aws.Option) ListVocabulariesPager {
+	return ListVocabulariesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListVocabulariesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListVocabulariesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListVocabulariesPager struct {
+	aws.Pager
+}
+
+func (p *ListVocabulariesPager) CurrentPage() *ListVocabulariesOutput {
+	return p.Pager.CurrentPage().(*ListVocabulariesOutput)
+}
+
 const opStartTranscriptionJob = "StartTranscriptionJob"
 
 // StartTranscriptionJobRequest is a API request type for the StartTranscriptionJob API operation.
@@ -212,6 +470,209 @@ func (c *TranscribeService) StartTranscriptionJobRequest(input *StartTranscripti
 	output.responseMetadata = aws.Response{Request: req}
 
 	return StartTranscriptionJobRequest{Request: req, Input: input, Copy: c.StartTranscriptionJobRequest}
+}
+
+const opUpdateVocabulary = "UpdateVocabulary"
+
+// UpdateVocabularyRequest is a API request type for the UpdateVocabulary API operation.
+type UpdateVocabularyRequest struct {
+	*aws.Request
+	Input *UpdateVocabularyInput
+	Copy  func(*UpdateVocabularyInput) UpdateVocabularyRequest
+}
+
+// Send marshals and sends the UpdateVocabulary API request.
+func (r UpdateVocabularyRequest) Send() (*UpdateVocabularyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateVocabularyOutput), nil
+}
+
+// UpdateVocabularyRequest returns a request value for making API operation for
+// Amazon Transcribe Service.
+//
+// Updates an existing vocabulary with new values.
+//
+//    // Example sending a request using the UpdateVocabularyRequest method.
+//    req := client.UpdateVocabularyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabulary
+func (c *TranscribeService) UpdateVocabularyRequest(input *UpdateVocabularyInput) UpdateVocabularyRequest {
+	op := &aws.Operation{
+		Name:       opUpdateVocabulary,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateVocabularyInput{}
+	}
+
+	output := &UpdateVocabularyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateVocabularyRequest{Request: req, Input: input, Copy: c.UpdateVocabularyRequest}
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyRequest
+type CreateVocabularyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The language code of the vocabulary entries.
+	//
+	// LanguageCode is a required field
+	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`
+
+	// An array of strings that contains the vocabulary entries.
+	//
+	// Phrases is a required field
+	Phrases []string `type:"list" required:"true"`
+
+	// The name of the vocabulary. The name must be unique within an AWS account.
+	// The name is case-sensitive.
+	//
+	// VocabularyName is a required field
+	VocabularyName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateVocabularyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVocabularyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateVocabularyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateVocabularyInput"}
+	if len(s.LanguageCode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("LanguageCode"))
+	}
+
+	if s.Phrases == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Phrases"))
+	}
+
+	if s.VocabularyName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VocabularyName"))
+	}
+	if s.VocabularyName != nil && len(*s.VocabularyName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VocabularyName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/CreateVocabularyResponse
+type CreateVocabularyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the VocabularyState field is FAILED, this field contains information about
+	// why the job failed.
+	FailureReason *string `type:"string"`
+
+	// The language code of the vocabulary entries.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
+
+	// The date and time that the vocabulary was created.
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the vocabulary.
+	VocabularyName *string `min:"1" type:"string"`
+
+	// The processing state of the vocabulary. When the VocabularyState field contains
+	// READY the vocabulary is ready to be used in a StartTranscriptionJob request.
+	VocabularyState VocabularyState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CreateVocabularyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateVocabularyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateVocabularyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteVocabularyRequest
+type DeleteVocabularyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the vocabulary to delete.
+	//
+	// VocabularyName is a required field
+	VocabularyName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteVocabularyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVocabularyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteVocabularyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteVocabularyInput"}
+
+	if s.VocabularyName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VocabularyName"))
+	}
+	if s.VocabularyName != nil && len(*s.VocabularyName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VocabularyName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/DeleteVocabularyOutput
+type DeleteVocabularyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteVocabularyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteVocabularyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteVocabularyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetTranscriptionJobRequest
@@ -276,11 +737,95 @@ func (s GetTranscriptionJobOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyRequest
+type GetVocabularyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the vocabulary to return information about. The name is case-sensitive.
+	//
+	// VocabularyName is a required field
+	VocabularyName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetVocabularyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVocabularyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetVocabularyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetVocabularyInput"}
+
+	if s.VocabularyName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VocabularyName"))
+	}
+	if s.VocabularyName != nil && len(*s.VocabularyName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VocabularyName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyResponse
+type GetVocabularyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The S3 location where the vocabulary is stored. Use this URI to get the contents
+	// of the vocabulary. The URI is available for a limited time.
+	DownloadUri *string `min:"1" type:"string"`
+
+	// If the VocabularyState field is FAILED, this field contains information about
+	// why the job failed.
+	FailureReason *string `type:"string"`
+
+	// The language code of the vocabulary entries.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
+
+	// The date and time that the vocabulary was last modified.
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the vocabulary to return.
+	VocabularyName *string `min:"1" type:"string"`
+
+	// The processing state of the vocabulary.
+	VocabularyState VocabularyState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s GetVocabularyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetVocabularyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetVocabularyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListTranscriptionJobsRequest
 type ListTranscriptionJobsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of jobs to return in the response.
+	// When specified, the jobs returned in the list are limited to jobs whose name
+	// contains the specified string.
+	JobNameContains *string `min:"1" type:"string"`
+
+	// The maximum number of jobs to return in the response. If there are fewer
+	// results in the list, this response contains only the actual results.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If the result of the previous request to ListTranscriptionJobs was truncated,
@@ -288,9 +833,7 @@ type ListTranscriptionJobsInput struct {
 	NextToken *string `type:"string"`
 
 	// When specified, returns only transcription jobs with the specified status.
-	//
-	// Status is a required field
-	Status TranscriptionJobStatus `type:"string" required:"true" enum:"true"`
+	Status TranscriptionJobStatus `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -306,11 +849,11 @@ func (s ListTranscriptionJobsInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ListTranscriptionJobsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ListTranscriptionJobsInput"}
+	if s.JobNameContains != nil && len(*s.JobNameContains) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("JobNameContains", 1))
+	}
 	if s.MaxResults != nil && *s.MaxResults < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
-	}
-	if len(s.Status) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Status"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -326,10 +869,10 @@ type ListTranscriptionJobsOutput struct {
 	responseMetadata aws.Response
 
 	// The ListTranscriptionJobs operation returns a page of jobs at a time. The
-	// size of the page is set by the MaxResults parameter. If there are more jobs
-	// in the list than the page size, Amazon Transcribe returns the NextPage token.
-	// Include the token in the next request to the ListTranscriptionJobs operation
-	// to return in the next page of jobs.
+	// maximum size of the page is set by the MaxResults parameter. If there are
+	// more jobs in the list than the page size, Amazon Transcribe returns the NextPage
+	// token. Include the token in the next request to the ListTranscriptionJobs
+	// operation to return in the next page of jobs.
 	NextToken *string `type:"string"`
 
 	// The requested status of the jobs returned.
@@ -354,20 +897,109 @@ func (s ListTranscriptionJobsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabulariesRequest
+type ListVocabulariesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of vocabularies to return in the response. If there are
+	// fewer results in the list, this response contains only the actual results.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// When specified, the vocabularies returned in the list are limited to vocabularies
+	// whose name contains the specified string. The search is case-insensitive,
+	// ListVocabularies will return both "vocabularyname" and "VocabularyName" in
+	// the response list.
+	NameContains *string `min:"1" type:"string"`
+
+	// If the result of the previous request to ListVocabularies was truncated,
+	// include the NextToken to fetch the next set of jobs.
+	NextToken *string `type:"string"`
+
+	// When specified, only returns vocabularies with the VocabularyState field
+	// equal to the specified state.
+	StateEquals VocabularyState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListVocabulariesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListVocabulariesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListVocabulariesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListVocabulariesInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NameContains != nil && len(*s.NameContains) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NameContains", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListVocabulariesResponse
+type ListVocabulariesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ListVocabularies operation returns a page of vocabularies at a time.
+	// The maximum size of the page is set by the MaxResults parameter. If there
+	// are more jobs in the list than the page size, Amazon Transcribe returns the
+	// NextPage token. Include the token in the next request to the ListVocabularies
+	// operation to return in the next page of jobs.
+	NextToken *string `type:"string"`
+
+	// The requested vocabulary state.
+	Status TranscriptionJobStatus `type:"string" enum:"true"`
+
+	// A list of objects that describe the vocabularies that match the search criteria
+	// in the request.
+	Vocabularies []VocabularyInfo `type:"list"`
+}
+
+// String returns the string representation
+func (s ListVocabulariesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListVocabulariesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListVocabulariesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Describes the input media file in a transcription request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Media
 type Media struct {
 	_ struct{} `type:"structure"`
 
-	// The S3 location of the input media file. The general form is:
+	// The S3 location of the input media file. The URI must be in the same region
+	// as the API endpoint that you are calling. The general form is:
 	//
 	// https://<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
 	//
 	// For example:
 	//
-	// https://s3-us-west-2.amazonaws.com/examplebucket/example.mp4
+	// https://s3-us-east-1.amazonaws.com/examplebucket/example.mp4
 	//
-	// https://s3-us-west-2.amazonaws.com/examplebucket/mediadocs/example.mp4
+	// https://s3-us-east-1.amazonaws.com/examplebucket/mediadocs/example.mp4
+	//
+	// For more information about S3 object names, see Object Keys (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
+	// in the Amazon S3 Developer Guide.
 	MediaFileUri *string `min:"1" type:"string"`
 }
 
@@ -386,6 +1018,53 @@ func (s *Media) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Media"}
 	if s.MediaFileUri != nil && len(*s.MediaFileUri) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("MediaFileUri", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Provides optional settings for the StartTranscriptionJob operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Settings
+type Settings struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of speakers to identify in the input audio. If there are
+	// more speakers in the audio than this number, multiple speakers will be identified
+	// as a single speaker. If you specify the MaxSpeakerLabels field, you must
+	// set the ShowSpeakerLabels field to true.
+	MaxSpeakerLabels *int64 `min:"2" type:"integer"`
+
+	// Determines whether the transcription job should use speaker recognition to
+	// identify different speakers in the input audio. If you set the ShowSpeakerLabels
+	// field to true, you must also set the maximum number of speaker labels MaxSpeakerLabels
+	// field.
+	ShowSpeakerLabels *bool `type:"boolean"`
+
+	// The name of a vocabulary to use when processing the transcription job.
+	VocabularyName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s Settings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Settings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Settings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Settings"}
+	if s.MaxSpeakerLabels != nil && *s.MaxSpeakerLabels < 2 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxSpeakerLabels", 2))
+	}
+	if s.VocabularyName != nil && len(*s.VocabularyName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VocabularyName", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -415,6 +1094,9 @@ type StartTranscriptionJobInput struct {
 
 	// The sample rate, in Hertz, of the audio track in the input media file.
 	MediaSampleRateHertz *int64 `min:"8000" type:"integer"`
+
+	// A Settings object that provides optional settings for a transcription job.
+	Settings *Settings `type:"structure"`
 
 	// The name of the job. The name must be unique within an AWS account.
 	//
@@ -460,6 +1142,11 @@ func (s *StartTranscriptionJobInput) Validate() error {
 			invalidParams.AddNested("Media", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.Settings != nil {
+		if err := s.Settings.Validate(); err != nil {
+			invalidParams.AddNested("Settings", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -497,16 +1184,8 @@ func (s StartTranscriptionJobOutput) SDKResponseMetadata() aws.Response {
 type Transcript struct {
 	_ struct{} `type:"structure"`
 
-	// The S3 location where the transcription result is stored. The general form
-	// of this Uri is:
-	//
-	// https://<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
-	//
-	// For example:
-	//
-	// https://s3-us-west-2.amazonaws.com/examplebucket/example.json
-	//
-	// https://s3-us-west-2.amazonaws.com/examplebucket/mediadocs/example.json
+	// The S3 location where the transcription result is stored. Use this URI to
+	// access the results of the transcription job.
 	TranscriptFileUri *string `min:"1" type:"string"`
 }
 
@@ -548,13 +1227,16 @@ type TranscriptionJob struct {
 	// The sample rate, in Hertz, of the audio track in the input media file.
 	MediaSampleRateHertz *int64 `min:"8000" type:"integer"`
 
+	// Optional settings for the transcription job.
+	Settings *Settings `type:"structure"`
+
 	// An object that describes the output of the transcription job.
 	Transcript *Transcript `type:"structure"`
 
 	// A name to identify the transcription job.
 	TranscriptionJobName *string `min:"1" type:"string"`
 
-	// The identifier assigned to the job when it was created.
+	// The status of the transcription job.
 	TranscriptionJobStatus TranscriptionJobStatus `type:"string" enum:"true"`
 }
 
@@ -601,6 +1283,124 @@ func (s TranscriptionJobSummary) String() string {
 
 // GoString returns the string representation
 func (s TranscriptionJobSummary) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyRequest
+type UpdateVocabularyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The language code of the vocabulary entries.
+	//
+	// LanguageCode is a required field
+	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`
+
+	// An array of strings containing the vocabulary entries.
+	//
+	// Phrases is a required field
+	Phrases []string `type:"list" required:"true"`
+
+	// The name of the vocabulary to update. The name is case-sensitive.
+	//
+	// VocabularyName is a required field
+	VocabularyName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateVocabularyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVocabularyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateVocabularyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateVocabularyInput"}
+	if len(s.LanguageCode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("LanguageCode"))
+	}
+
+	if s.Phrases == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Phrases"))
+	}
+
+	if s.VocabularyName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VocabularyName"))
+	}
+	if s.VocabularyName != nil && len(*s.VocabularyName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VocabularyName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyResponse
+type UpdateVocabularyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The language code of the vocabulary entries.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
+
+	// The date and time that the vocabulary was updated.
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the vocabulary that was updated.
+	VocabularyName *string `min:"1" type:"string"`
+
+	// The processing state of the vocabulary. When the VocabularyState field contains
+	// READY the vocabulary is ready to be used in a StartTranscriptionJob request.
+	VocabularyState VocabularyState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s UpdateVocabularyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateVocabularyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateVocabularyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Provides information about a custom vocabulary.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/VocabularyInfo
+type VocabularyInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The language code of the vocabulary entries.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
+
+	// The date and time that the vocabulary was last modified.
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The name of the vocabulary.
+	VocabularyName *string `min:"1" type:"string"`
+
+	// The processing state of the vocabulary. If the state is READY you can use
+	// the vocabulary in a StartTranscriptionJob request.
+	VocabularyState VocabularyState `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s VocabularyInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VocabularyInfo) GoString() string {
 	return s.String()
 }
 
@@ -654,6 +1454,24 @@ func (enum TranscriptionJobStatus) MarshalValue() (string, error) {
 }
 
 func (enum TranscriptionJobStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type VocabularyState string
+
+// Enum values for VocabularyState
+const (
+	VocabularyStatePending VocabularyState = "PENDING"
+	VocabularyStateReady   VocabularyState = "READY"
+	VocabularyStateFailed  VocabularyState = "FAILED"
+)
+
+func (enum VocabularyState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VocabularyState) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

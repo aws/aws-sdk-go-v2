@@ -535,6 +535,67 @@ func (c *CloudWatch) GetDashboardRequest(input *GetDashboardInput) GetDashboardR
 	return GetDashboardRequest{Request: req, Input: input, Copy: c.GetDashboardRequest}
 }
 
+const opGetMetricData = "GetMetricData"
+
+// GetMetricDataRequest is a API request type for the GetMetricData API operation.
+type GetMetricDataRequest struct {
+	*aws.Request
+	Input *GetMetricDataInput
+	Copy  func(*GetMetricDataInput) GetMetricDataRequest
+}
+
+// Send marshals and sends the GetMetricData API request.
+func (r GetMetricDataRequest) Send() (*GetMetricDataOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetMetricDataOutput), nil
+}
+
+// GetMetricDataRequest returns a request value for making API operation for
+// Amazon CloudWatch.
+//
+// You can use the GetMetricData API to retrieve as many as 100 different metrics
+// in a single request, with a total of as many as 100,800 datapoints. You can
+// also optionally perform math expressions on the values of the returned statistics,
+// to create new time series that represent new insights into your data. For
+// example, using Lambda metrics, you could divide the Errors metric by the
+// Invocations metric to get an error rate time series. For more information
+// about metric math expressions, see Metric Math Syntax and Functions (http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
+// in the Amazon CloudWatch User Guide.
+//
+// Calls to the GetMetricData API have a different pricing structure than calls
+// to GetMetricStatistics. For more information about pricing, see Amazon CloudWatch
+// Pricing (https://aws.amazon.com/cloudwatch/pricing/).
+//
+//    // Example sending a request using the GetMetricDataRequest method.
+//    req := client.GetMetricDataRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricData
+func (c *CloudWatch) GetMetricDataRequest(input *GetMetricDataInput) GetMetricDataRequest {
+	op := &aws.Operation{
+		Name:       opGetMetricData,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetMetricDataInput{}
+	}
+
+	output := &GetMetricDataOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetMetricDataRequest{Request: req, Input: input, Copy: c.GetMetricDataRequest}
+}
+
 const opGetMetricStatistics = "GetMetricStatistics"
 
 // GetMetricStatisticsRequest is a API request type for the GetMetricStatistics API operation.
@@ -1868,6 +1929,111 @@ func (s GetDashboardOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataInput
+type GetMetricDataInput struct {
+	_ struct{} `type:"structure"`
+
+	// The time stamp indicating the latest data to be returned.
+	//
+	// EndTime is a required field
+	EndTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+
+	// The maximum number of data points the request should return before paginating.
+	// If you omit this, the default of 100,800 is used.
+	MaxDatapoints *int64 `type:"integer"`
+
+	// The metric queries to be returned. A single GetMetricData call can include
+	// as many as 100 MetricDataQuery structures. Each of these structures can specify
+	// either a metric to retrieve, or a math expression to perform on retrieved
+	// data.
+	//
+	// MetricDataQueries is a required field
+	MetricDataQueries []MetricDataQuery `type:"list" required:"true"`
+
+	// Include this value, if it was returned by the previous call, to get the next
+	// set of data points.
+	NextToken *string `type:"string"`
+
+	// The order in which data points should be returned. TimestampDescending returns
+	// the newest data first and paginates when the MaxDatapoints limit is reached.
+	// TimestampAscending returns the oldest data first and paginates when the MaxDatapoints
+	// limit is reached.
+	ScanBy ScanBy `type:"string" enum:"true"`
+
+	// The time stamp indicating the earliest data to be returned.
+	//
+	// StartTime is a required field
+	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+}
+
+// String returns the string representation
+func (s GetMetricDataInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetMetricDataInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetMetricDataInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetMetricDataInput"}
+
+	if s.EndTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EndTime"))
+	}
+
+	if s.MetricDataQueries == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MetricDataQueries"))
+	}
+
+	if s.StartTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
+	}
+	if s.MetricDataQueries != nil {
+		for i, v := range s.MetricDataQueries {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "MetricDataQueries", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricDataOutput
+type GetMetricDataOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The metrics that are returned, including the metric name, namespace, and
+	// dimensions.
+	MetricDataResults []MetricDataResult `type:"list"`
+
+	// A token that marks the next batch of returned results.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s GetMetricDataOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetMetricDataOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetMetricDataOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStatisticsInput
 type GetMetricStatisticsInput struct {
 	_ struct{} `type:"structure"`
@@ -1963,8 +2129,8 @@ type GetMetricStatisticsInput struct {
 	Statistics []Statistic `min:"1" type:"list"`
 
 	// The unit for a given metric. Metrics may be reported in multiple units. Not
-	// supplying a unit results in all units being returned. If the metric only
-	// ever reports one unit, specifying a unit has no effect.
+	// supplying a unit results in all units being returned. If you specify only
+	// a unit that the metric does not report, the results of the call are null.
 	Unit StandardUnit `type:"string" enum:"true"`
 }
 
@@ -2189,6 +2355,28 @@ func (s ListMetricsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// A message returned by the GetMetricDataAPI, including a code and a description.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MessageData
+type MessageData struct {
+	_ struct{} `type:"structure"`
+
+	// The error code or status code associated with the message.
+	Code *string `type:"string"`
+
+	// The message text.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s MessageData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MessageData) GoString() string {
+	return s.String()
+}
+
 // Represents a specific metric.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/Metric
 type Metric struct {
@@ -2212,6 +2400,29 @@ func (s Metric) String() string {
 // GoString returns the string representation
 func (s Metric) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Metric) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Metric"}
+	if s.MetricName != nil && len(*s.MetricName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MetricName", 1))
+	}
+	if s.Namespace != nil && len(*s.Namespace) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Namespace", 1))
+	}
+	if s.Dimensions != nil {
+		for i, v := range s.Dimensions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Dimensions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Represents an alarm.
@@ -2317,6 +2528,134 @@ func (s MetricAlarm) GoString() string {
 	return s.String()
 }
 
+// This structure indicates the metric data to return, and whether this call
+// is just retrieving a batch set of data for one metric, or is performing a
+// math expression on metric data. A single GetMetricData call can include up
+// to 100 MetricDataQuery structures.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataQuery
+type MetricDataQuery struct {
+	_ struct{} `type:"structure"`
+
+	// The math expression to be performed on the returned data, if this structure
+	// is performing a math expression. For more information about metric math expressions,
+	// see Metric Math Syntax and Functions (http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax)
+	// in the Amazon CloudWatch User Guide.
+	//
+	// Within one MetricDataQuery structure, you must specify either Expression
+	// or MetricStat but not both.
+	Expression *string `min:"1" type:"string"`
+
+	// A short name used to tie this structure to the results in the response. This
+	// name must be unique within a single call to GetMetricData. If you are performing
+	// math expressions on this set of data, this name represents that data and
+	// can serve as a variable in the mathematical expression. The valid characters
+	// are letters, numbers, and underscore. The first character must be a lowercase
+	// letter.
+	//
+	// Id is a required field
+	Id *string `min:"1" type:"string" required:"true"`
+
+	// A human-readable label for this metric or expression. This is especially
+	// useful if this is an expression, so that you know what the value represents.
+	// If the metric or expression is shown in a CloudWatch dashboard widget, the
+	// label is shown. If Label is omitted, CloudWatch generates a default.
+	Label *string `type:"string"`
+
+	// The metric to be returned, along with statistics, period, and units. Use
+	// this parameter only if this structure is performing a data retrieval and
+	// not performing a math expression on the returned data.
+	//
+	// Within one MetricDataQuery structure, you must specify either Expression
+	// or MetricStat but not both.
+	MetricStat *MetricStat `type:"structure"`
+
+	// Indicates whether to return the time stamps and raw data values of this metric.
+	// If you are performing this call just to do math expressions and do not also
+	// need the raw data returned, you can specify False. If you omit this, the
+	// default of True is used.
+	ReturnData *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s MetricDataQuery) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MetricDataQuery) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MetricDataQuery) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MetricDataQuery"}
+	if s.Expression != nil && len(*s.Expression) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Expression", 1))
+	}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+	if s.Id != nil && len(*s.Id) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
+	}
+	if s.MetricStat != nil {
+		if err := s.MetricStat.Validate(); err != nil {
+			invalidParams.AddNested("MetricStat", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// A GetMetricData call returns an array of MetricDataResult structures. Each
+// of these structures includes the data points for that metric, along with
+// the time stamps of those data points and other identifying information.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDataResult
+type MetricDataResult struct {
+	_ struct{} `type:"structure"`
+
+	// The short name you specified to represent this metric.
+	Id *string `min:"1" type:"string"`
+
+	// The human-readable label associated with the data.
+	Label *string `type:"string"`
+
+	// A list of messages with additional information about the data returned.
+	Messages []MessageData `type:"list"`
+
+	// The status of the returned data. Complete indicates that all data points
+	// in the requested time range were returned. PartialData means that an incomplete
+	// set of data points were returned. You can use the NextToken value that was
+	// returned and repeat your request to get more data points. NextToken is not
+	// returned if you are performing a math expression. InternalError indicates
+	// that an error occurred. Retry your request using NextToken, if present.
+	StatusCode StatusCode `type:"string" enum:"true"`
+
+	// The time stamps for the data points, formatted in Unix timestamp format.
+	// The number of time stamps always matches the number of values and the value
+	// for Timestamps[x] is Values[x].
+	Timestamps []time.Time `type:"list"`
+
+	// The data points for the metric corresponding to Timestamps. The number of
+	// values always matches the number of time stamps and the time stamp for Values[x]
+	// is Timestamps[x].
+	Values []float64 `type:"list"`
+}
+
+// String returns the string representation
+func (s MetricDataResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MetricDataResult) GoString() string {
+	return s.String()
+}
+
 // Encapsulates the information sent to either create a metric or add new values
 // to be aggregated into an existing metric.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricDatum
@@ -2395,6 +2734,72 @@ func (s *MetricDatum) Validate() error {
 	if s.StatisticValues != nil {
 		if err := s.StatisticValues.Validate(); err != nil {
 			invalidParams.AddNested("StatisticValues", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// This structure defines the metric to be returned, along with the statistics,
+// period, and units.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricStat
+type MetricStat struct {
+	_ struct{} `type:"structure"`
+
+	// The metric to return, including the metric name, namespace, and dimensions.
+	//
+	// Metric is a required field
+	Metric *Metric `type:"structure" required:"true"`
+
+	// The period to use when retrieving the metric.
+	//
+	// Period is a required field
+	Period *int64 `min:"1" type:"integer" required:"true"`
+
+	// The statistic to return. It can include any CloudWatch statistic or extended
+	// statistic.
+	//
+	// Stat is a required field
+	Stat *string `type:"string" required:"true"`
+
+	// The unit to use for the returned data points.
+	Unit StandardUnit `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s MetricStat) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s MetricStat) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *MetricStat) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "MetricStat"}
+
+	if s.Metric == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Metric"))
+	}
+
+	if s.Period == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Period"))
+	}
+	if s.Period != nil && *s.Period < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Period", 1))
+	}
+
+	if s.Stat == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Stat"))
+	}
+	if s.Metric != nil {
+		if err := s.Metric.Validate(); err != nil {
+			invalidParams.AddNested("Metric", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -2521,7 +2926,10 @@ type PutMetricAlarmInput struct {
 	// ComparisonOperator is a required field
 	ComparisonOperator ComparisonOperator `type:"string" required:"true" enum:"true"`
 
-	// The number of datapoints that must be breaching to trigger the alarm.
+	// The number of datapoints that must be breaching to trigger the alarm. This
+	// is used only if you are setting an "M out of N" alarm. In that case, this
+	// value is the M. For more information, see Evaluating an Alarm (http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarm-evaluation)
+	// in the Amazon CloudWatch User Guide.
 	DatapointsToAlarm *int64 `min:"1" type:"integer"`
 
 	// The dimensions for the metric associated with the alarm.
@@ -2538,6 +2946,10 @@ type PutMetricAlarmInput struct {
 	EvaluateLowSampleCountPercentile *string `min:"1" type:"string"`
 
 	// The number of periods over which data is compared to the specified threshold.
+	// If you are setting an alarm which requires that a number of consecutive data
+	// points be breaching to trigger the alarm, this value specifies that number.
+	// If you are setting an "M out of N" alarm, this value is the N.
+	//
 	// An alarm's total current evaluation period can be no longer than one day,
 	// so this number multiplied by Period cannot be more than 86,400 seconds.
 	//
@@ -2588,7 +3000,7 @@ type PutMetricAlarmInput struct {
 	// values are 10, 30, and any multiple of 60.
 	//
 	// Be sure to specify 10 or 30 only for metrics that are stored by a PutMetricData
-	// call with a StorageResolution of 1. If you specify a Period of 10 or 30 for
+	// call with a StorageResolution of 1. If you specify a period of 10 or 30 for
 	// a metric that does not have sub-minute resolution, the alarm still attempts
 	// to gather data at the period rate that you specify. In this case, it does
 	// not receive data for the attempts that do not correspond to a one-minute
@@ -2989,6 +3401,23 @@ func (enum HistoryItemType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ScanBy string
+
+// Enum values for ScanBy
+const (
+	ScanByTimestampDescending ScanBy = "TimestampDescending"
+	ScanByTimestampAscending  ScanBy = "TimestampAscending"
+)
+
+func (enum ScanBy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ScanBy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StandardUnit string
 
 // Enum values for StandardUnit
@@ -3065,6 +3494,24 @@ func (enum Statistic) MarshalValue() (string, error) {
 }
 
 func (enum Statistic) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type StatusCode string
+
+// Enum values for StatusCode
+const (
+	StatusCodeComplete      StatusCode = "Complete"
+	StatusCodeInternalError StatusCode = "InternalError"
+	StatusCodePartialData   StatusCode = "PartialData"
+)
+
+func (enum StatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

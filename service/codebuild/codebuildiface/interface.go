@@ -91,6 +91,8 @@ type CodeBuildAPI interface {
 	StopBuildRequest(*codebuild.StopBuildInput) codebuild.StopBuildRequest
 
 	UpdateProjectRequest(*codebuild.UpdateProjectInput) codebuild.UpdateProjectRequest
+
+	UpdateWebhookRequest(*codebuild.UpdateWebhookInput) codebuild.UpdateWebhookRequest
 }
 
 var _ CodeBuildAPI = (*codebuild.CodeBuild)(nil)

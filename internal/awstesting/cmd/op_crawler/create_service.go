@@ -5,6 +5,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/acm"
+	"github.com/aws/aws-sdk-go-v2/service/acmpca"
 	"github.com/aws/aws-sdk-go-v2/service/alexaforbusiness"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
@@ -38,6 +39,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend"
 	"github.com/aws/aws-sdk-go-v2/service/configservice"
+	"github.com/aws/aws-sdk-go-v2/service/connect"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice"
@@ -60,6 +62,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elbv2"
 	"github.com/aws/aws-sdk-go-v2/service/emr"
 	"github.com/aws/aws-sdk-go-v2/service/firehose"
+	"github.com/aws/aws-sdk-go-v2/service/fms"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift"
 	"github.com/aws/aws-sdk-go-v2/service/glacier"
 	"github.com/aws/aws-sdk-go-v2/service/glue"
@@ -111,6 +114,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerruntime"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery"
@@ -150,6 +154,7 @@ func createServices(cfg aws.Config) []service {
 
 	return []service{
 		{name: "acm", value: reflect.ValueOf(acm.New(cfg))},
+		{name: "acmpca", value: reflect.ValueOf(acmpca.New(cfg))},
 		{name: "alexaforbusiness", value: reflect.ValueOf(alexaforbusiness.New(cfg))},
 		{name: "apigateway", value: reflect.ValueOf(apigateway.New(cfg))},
 		{name: "applicationautoscaling", value: reflect.ValueOf(applicationautoscaling.New(cfg))},
@@ -183,6 +188,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "cognitosync", value: reflect.ValueOf(cognitosync.New(cfg))},
 		{name: "comprehend", value: reflect.ValueOf(comprehend.New(cfg))},
 		{name: "configservice", value: reflect.ValueOf(configservice.New(cfg))},
+		{name: "connect", value: reflect.ValueOf(connect.New(cfg))},
 		{name: "costandusagereportservice", value: reflect.ValueOf(costandusagereportservice.New(cfg))},
 		{name: "costexplorer", value: reflect.ValueOf(costexplorer.New(cfg))},
 		{name: "databasemigrationservice", value: reflect.ValueOf(databasemigrationservice.New(cfg))},
@@ -205,6 +211,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "elbv2", value: reflect.ValueOf(elbv2.New(cfg))},
 		{name: "emr", value: reflect.ValueOf(emr.New(cfg))},
 		{name: "firehose", value: reflect.ValueOf(firehose.New(cfg))},
+		{name: "fms", value: reflect.ValueOf(fms.New(cfg))},
 		{name: "gamelift", value: reflect.ValueOf(gamelift.New(cfg))},
 		{name: "glacier", value: reflect.ValueOf(glacier.New(cfg))},
 		{name: "glue", value: reflect.ValueOf(glue.New(cfg))},
@@ -256,6 +263,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "s3", value: reflect.ValueOf(s3Client)},
 		{name: "sagemaker", value: reflect.ValueOf(sagemaker.New(cfg))},
 		{name: "sagemakerruntime", value: reflect.ValueOf(sagemakerruntime.New(cfg))},
+		{name: "secretsmanager", value: reflect.ValueOf(secretsmanager.New(cfg))},
 		{name: "serverlessapplicationrepository", value: reflect.ValueOf(serverlessapplicationrepository.New(cfg))},
 		{name: "servicecatalog", value: reflect.ValueOf(servicecatalog.New(cfg))},
 		{name: "servicediscovery", value: reflect.ValueOf(servicediscovery.New(cfg))},

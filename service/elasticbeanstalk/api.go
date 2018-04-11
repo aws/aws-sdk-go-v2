@@ -831,6 +831,59 @@ func (c *ElasticBeanstalk) DeletePlatformVersionRequest(input *DeletePlatformVer
 	return DeletePlatformVersionRequest{Request: req, Input: input, Copy: c.DeletePlatformVersionRequest}
 }
 
+const opDescribeAccountAttributes = "DescribeAccountAttributes"
+
+// DescribeAccountAttributesRequest is a API request type for the DescribeAccountAttributes API operation.
+type DescribeAccountAttributesRequest struct {
+	*aws.Request
+	Input *DescribeAccountAttributesInput
+	Copy  func(*DescribeAccountAttributesInput) DescribeAccountAttributesRequest
+}
+
+// Send marshals and sends the DescribeAccountAttributes API request.
+func (r DescribeAccountAttributesRequest) Send() (*DescribeAccountAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeAccountAttributesOutput), nil
+}
+
+// DescribeAccountAttributesRequest returns a request value for making API operation for
+// AWS Elastic Beanstalk.
+//
+// Returns attributes related to AWS Elastic Beanstalk that are associated with
+// the calling AWS account.
+//
+// The result currently has one set of attributes—resource quotas.
+//
+//    // Example sending a request using the DescribeAccountAttributesRequest method.
+//    req := client.DescribeAccountAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeAccountAttributes
+func (c *ElasticBeanstalk) DescribeAccountAttributesRequest(input *DescribeAccountAttributesInput) DescribeAccountAttributesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeAccountAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeAccountAttributesInput{}
+	}
+
+	output := &DescribeAccountAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeAccountAttributesRequest{Request: req, Input: input, Copy: c.DescribeAccountAttributesRequest}
+}
+
 const opDescribeApplicationVersions = "DescribeApplicationVersions"
 
 // DescribeApplicationVersionsRequest is a API request type for the DescribeApplicationVersions API operation.
@@ -4056,6 +4109,46 @@ func (s Deployment) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeAccountAttributesInput
+type DescribeAccountAttributesInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeAccountAttributesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeAccountAttributesInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeAccountAttributesResult
+type DescribeAccountAttributesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Elastic Beanstalk resource quotas associated with the calling AWS account.
+	ResourceQuotas *ResourceQuotas `type:"structure"`
+}
+
+// String returns the string representation
+func (s DescribeAccountAttributesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeAccountAttributesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeAccountAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Request to describe application versions.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationVersionsMessage
 type DescribeApplicationVersionsInput struct {
@@ -6126,6 +6219,59 @@ func (s RequestEnvironmentInfoOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RequestEnvironmentInfoOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// The AWS Elastic Beanstalk quota information for a single resource type in
+// an AWS account. It reflects the resource's limits for this account.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceQuota
+type ResourceQuota struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of instances of this Elastic Beanstalk resource type that
+	// an AWS account can use.
+	Maximum *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s ResourceQuota) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceQuota) GoString() string {
+	return s.String()
+}
+
+// A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS
+// account. They reflect Elastic Beanstalk resource limits for this account.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceQuotas
+type ResourceQuotas struct {
+	_ struct{} `type:"structure"`
+
+	// The quota for applications in the AWS account.
+	ApplicationQuota *ResourceQuota `type:"structure"`
+
+	// The quota for application versions in the AWS account.
+	ApplicationVersionQuota *ResourceQuota `type:"structure"`
+
+	// The quota for configuration templates in the AWS account.
+	ConfigurationTemplateQuota *ResourceQuota `type:"structure"`
+
+	// The quota for custom platforms in the AWS account.
+	CustomPlatformQuota *ResourceQuota `type:"structure"`
+
+	// The quota for environments in the AWS account.
+	EnvironmentQuota *ResourceQuota `type:"structure"`
+}
+
+// String returns the string representation
+func (s ResourceQuotas) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ResourceQuotas) GoString() string {
+	return s.String()
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/RestartAppServerMessage

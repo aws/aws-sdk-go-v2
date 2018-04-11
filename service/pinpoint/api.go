@@ -108,6 +108,56 @@ func (c *Pinpoint) CreateCampaignRequest(input *CreateCampaignInput) CreateCampa
 	return CreateCampaignRequest{Request: req, Input: input, Copy: c.CreateCampaignRequest}
 }
 
+const opCreateExportJob = "CreateExportJob"
+
+// CreateExportJobRequest is a API request type for the CreateExportJob API operation.
+type CreateExportJobRequest struct {
+	*aws.Request
+	Input *CreateExportJobInput
+	Copy  func(*CreateExportJobInput) CreateExportJobRequest
+}
+
+// Send marshals and sends the CreateExportJob API request.
+func (r CreateExportJobRequest) Send() (*CreateExportJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateExportJobOutput), nil
+}
+
+// CreateExportJobRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Creates an export job.
+//
+//    // Example sending a request using the CreateExportJobRequest method.
+//    req := client.CreateExportJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateExportJob
+func (c *Pinpoint) CreateExportJobRequest(input *CreateExportJobInput) CreateExportJobRequest {
+	op := &aws.Operation{
+		Name:       opCreateExportJob,
+		HTTPMethod: "POST",
+		HTTPPath:   "/v1/apps/{application-id}/jobs/export",
+	}
+
+	if input == nil {
+		input = &CreateExportJobInput{}
+	}
+
+	output := &CreateExportJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateExportJobRequest{Request: req, Input: input, Copy: c.CreateExportJobRequest}
+}
+
 const opCreateImportJob = "CreateImportJob"
 
 // CreateImportJobRequest is a API request type for the CreateImportJob API operation.
@@ -380,7 +430,7 @@ func (r DeleteApnsVoipChannelRequest) Send() (*DeleteApnsVoipChannelOutput, erro
 // DeleteApnsVoipChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Delete an APNS VOIP channel
+// Delete an APNS VoIP channel
 //
 //    // Example sending a request using the DeleteApnsVoipChannelRequest method.
 //    req := client.DeleteApnsVoipChannelRequest(params)
@@ -430,7 +480,7 @@ func (r DeleteApnsVoipSandboxChannelRequest) Send() (*DeleteApnsVoipSandboxChann
 // DeleteApnsVoipSandboxChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Delete an APNS VOIP sandbox channel
+// Delete an APNS VoIP sandbox channel
 //
 //    // Example sending a request using the DeleteApnsVoipSandboxChannelRequest method.
 //    req := client.DeleteApnsVoipSandboxChannelRequest(params)
@@ -656,6 +706,56 @@ func (c *Pinpoint) DeleteEmailChannelRequest(input *DeleteEmailChannelInput) Del
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteEmailChannelRequest{Request: req, Input: input, Copy: c.DeleteEmailChannelRequest}
+}
+
+const opDeleteEndpoint = "DeleteEndpoint"
+
+// DeleteEndpointRequest is a API request type for the DeleteEndpoint API operation.
+type DeleteEndpointRequest struct {
+	*aws.Request
+	Input *DeleteEndpointInput
+	Copy  func(*DeleteEndpointInput) DeleteEndpointRequest
+}
+
+// Send marshals and sends the DeleteEndpoint API request.
+func (r DeleteEndpointRequest) Send() (*DeleteEndpointOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteEndpointOutput), nil
+}
+
+// DeleteEndpointRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Deletes an endpoint.
+//
+//    // Example sending a request using the DeleteEndpointRequest method.
+//    req := client.DeleteEndpointRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEndpoint
+func (c *Pinpoint) DeleteEndpointRequest(input *DeleteEndpointInput) DeleteEndpointRequest {
+	op := &aws.Operation{
+		Name:       opDeleteEndpoint,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/v1/apps/{application-id}/endpoints/{endpoint-id}",
+	}
+
+	if input == nil {
+		input = &DeleteEndpointInput{}
+	}
+
+	output := &DeleteEndpointOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteEndpointRequest{Request: req, Input: input, Copy: c.DeleteEndpointRequest}
 }
 
 const opDeleteEventStream = "DeleteEventStream"
@@ -1030,7 +1130,7 @@ func (r GetApnsVoipChannelRequest) Send() (*GetApnsVoipChannelOutput, error) {
 // GetApnsVoipChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get an APNS Voip channel
+// Get an APNS VoIP channel
 //
 //    // Example sending a request using the GetApnsVoipChannelRequest method.
 //    req := client.GetApnsVoipChannelRequest(params)
@@ -1080,7 +1180,7 @@ func (r GetApnsVoipSandboxChannelRequest) Send() (*GetApnsVoipSandboxChannelOutp
 // GetApnsVoipSandboxChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Get an APNS VoipSandbox channel
+// Get an APNS VoIPSandbox channel
 //
 //    // Example sending a request using the GetApnsVoipSandboxChannelRequest method.
 //    req := client.GetApnsVoipSandboxChannelRequest(params)
@@ -1708,6 +1808,106 @@ func (c *Pinpoint) GetEventStreamRequest(input *GetEventStreamInput) GetEventStr
 	return GetEventStreamRequest{Request: req, Input: input, Copy: c.GetEventStreamRequest}
 }
 
+const opGetExportJob = "GetExportJob"
+
+// GetExportJobRequest is a API request type for the GetExportJob API operation.
+type GetExportJobRequest struct {
+	*aws.Request
+	Input *GetExportJobInput
+	Copy  func(*GetExportJobInput) GetExportJobRequest
+}
+
+// Send marshals and sends the GetExportJob API request.
+func (r GetExportJobRequest) Send() (*GetExportJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetExportJobOutput), nil
+}
+
+// GetExportJobRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Returns information about an export job.
+//
+//    // Example sending a request using the GetExportJobRequest method.
+//    req := client.GetExportJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetExportJob
+func (c *Pinpoint) GetExportJobRequest(input *GetExportJobInput) GetExportJobRequest {
+	op := &aws.Operation{
+		Name:       opGetExportJob,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/apps/{application-id}/jobs/export/{job-id}",
+	}
+
+	if input == nil {
+		input = &GetExportJobInput{}
+	}
+
+	output := &GetExportJobOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetExportJobRequest{Request: req, Input: input, Copy: c.GetExportJobRequest}
+}
+
+const opGetExportJobs = "GetExportJobs"
+
+// GetExportJobsRequest is a API request type for the GetExportJobs API operation.
+type GetExportJobsRequest struct {
+	*aws.Request
+	Input *GetExportJobsInput
+	Copy  func(*GetExportJobsInput) GetExportJobsRequest
+}
+
+// Send marshals and sends the GetExportJobs API request.
+func (r GetExportJobsRequest) Send() (*GetExportJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetExportJobsOutput), nil
+}
+
+// GetExportJobsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Returns information about your export jobs.
+//
+//    // Example sending a request using the GetExportJobsRequest method.
+//    req := client.GetExportJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetExportJobs
+func (c *Pinpoint) GetExportJobsRequest(input *GetExportJobsInput) GetExportJobsRequest {
+	op := &aws.Operation{
+		Name:       opGetExportJobs,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/apps/{application-id}/jobs/export",
+	}
+
+	if input == nil {
+		input = &GetExportJobsInput{}
+	}
+
+	output := &GetExportJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetExportJobsRequest{Request: req, Input: input, Copy: c.GetExportJobsRequest}
+}
+
 const opGetGcmChannel = "GetGcmChannel"
 
 // GetGcmChannelRequest is a API request type for the GetGcmChannel API operation.
@@ -1906,6 +2106,56 @@ func (c *Pinpoint) GetSegmentRequest(input *GetSegmentInput) GetSegmentRequest {
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetSegmentRequest{Request: req, Input: input, Copy: c.GetSegmentRequest}
+}
+
+const opGetSegmentExportJobs = "GetSegmentExportJobs"
+
+// GetSegmentExportJobsRequest is a API request type for the GetSegmentExportJobs API operation.
+type GetSegmentExportJobsRequest struct {
+	*aws.Request
+	Input *GetSegmentExportJobsInput
+	Copy  func(*GetSegmentExportJobsInput) GetSegmentExportJobsRequest
+}
+
+// Send marshals and sends the GetSegmentExportJobs API request.
+func (r GetSegmentExportJobsRequest) Send() (*GetSegmentExportJobsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetSegmentExportJobsOutput), nil
+}
+
+// GetSegmentExportJobsRequest returns a request value for making API operation for
+// Amazon Pinpoint.
+//
+// Returns a list of export jobs for a specific segment.
+//
+//    // Example sending a request using the GetSegmentExportJobsRequest method.
+//    req := client.GetSegmentExportJobsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentExportJobs
+func (c *Pinpoint) GetSegmentExportJobsRequest(input *GetSegmentExportJobsInput) GetSegmentExportJobsRequest {
+	op := &aws.Operation{
+		Name:       opGetSegmentExportJobs,
+		HTTPMethod: "GET",
+		HTTPPath:   "/v1/apps/{application-id}/segments/{segment-id}/jobs/export",
+	}
+
+	if input == nil {
+		input = &GetSegmentExportJobsInput{}
+	}
+
+	output := &GetSegmentExportJobsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetSegmentExportJobsRequest{Request: req, Input: input, Copy: c.GetSegmentExportJobsRequest}
 }
 
 const opGetSegmentImportJobs = "GetSegmentImportJobs"
@@ -2480,7 +2730,7 @@ func (r UpdateApnsVoipChannelRequest) Send() (*UpdateApnsVoipChannelOutput, erro
 // UpdateApnsVoipChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Update an APNS VOIP channel
+// Update an APNS VoIP channel
 //
 //    // Example sending a request using the UpdateApnsVoipChannelRequest method.
 //    req := client.UpdateApnsVoipChannelRequest(params)
@@ -2530,7 +2780,7 @@ func (r UpdateApnsVoipSandboxChannelRequest) Send() (*UpdateApnsVoipSandboxChann
 // UpdateApnsVoipSandboxChannelRequest returns a request value for making API operation for
 // Amazon Pinpoint.
 //
-// Update an APNS VOIP sandbox channel
+// Update an APNS VoIP sandbox channel
 //
 //    // Example sending a request using the UpdateApnsVoipSandboxChannelRequest method.
 //    req := client.UpdateApnsVoipSandboxChannelRequest(params)
@@ -3061,7 +3311,7 @@ func (s ADMChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
 type ADMChannelResponse struct {
 	_ struct{} `type:"structure"`
 
-	// Application id
+	// The ID of the application to which the channel applies.
 	ApplicationId *string `type:"string"`
 
 	// When was this segment created
@@ -3070,7 +3320,9 @@ type ADMChannelResponse struct {
 	// If the channel is enabled for sending messages.
 	Enabled *bool `type:"boolean"`
 
-	// If the channel is registered with a credential for authentication.
+	// Indicates whether the channel is configured with ADM credentials. Amazon
+	// Pinpoint uses your credentials to authenticate push notifications with ADM.
+	// Provide your credentials by setting the ClientId and ClientSecret attributes.
 	HasCredential *bool `type:"boolean"`
 
 	// Channel ID. Not used, only for backwards compatibility.
@@ -3189,6 +3441,8 @@ type ADMMessage struct {
 	// favor of this one.
 	ConsolidationKey *string `type:"string"`
 
+	// The data payload used for a silent push. This payload is added to the notifications'
+	// data.pinpoint.jsonBody' object
 	Data map[string]string `type:"map"`
 
 	// Optional. Number of seconds ADM should retain the message if the device is
@@ -3475,10 +3729,15 @@ type APNSChannelResponse struct {
 	// If the channel is enabled for sending messages.
 	Enabled *bool `type:"boolean"`
 
-	// If the channel is registered with a credential for authentication.
+	// Indicates whether the channel is configured with APNs credentials. Amazon
+	// Pinpoint uses your credentials to authenticate push notifications with APNs.
+	// To use APNs token authentication, set the BundleId, TeamId, TokenKey, and
+	// TokenKeyId attributes. To use certificate authentication, set the Certificate
+	// and PrivateKey attributes.
 	HasCredential *bool `type:"boolean"`
 
-	// If the channel is registered with a token key for authentication.
+	// Indicates whether the channel is configured with a key for APNs token authentication.
+	// Provide a token key by setting the TokenKey attribute.
 	HasTokenKey *bool `type:"boolean"`
 
 	// Channel ID. Not used. Present only for backwards compatibility.
@@ -3614,11 +3873,15 @@ type APNSMessage struct {
 	// your app's registered categories.
 	Category *string `type:"string"`
 
-	// Multiple notifications with the same collapse identifier are displayed to
-	// the user as a single notification. The value of this key must not exceed
-	// 64 bytes.
+	// An ID that, if assigned to multiple messages, causes APNs to coalesce the
+	// messages into a single push notification instead of delivering each message
+	// individually. The value must not exceed 64 bytes. Amazon Pinpoint uses this
+	// value to set the apns-collapse-id request header when it sends the message
+	// to APNs.
 	CollapseId *string `type:"string"`
 
+	// The data payload used for a silent push. This payload is added to the notifications'
+	// data.pinpoint.jsonBody' object
 	Data map[string]string `type:"map"`
 
 	// The URL that points to a video used in the push notification.
@@ -3627,7 +3890,15 @@ type APNSMessage struct {
 	// The preferred authentication method, either "CERTIFICATE" or "TOKEN"
 	PreferredAuthenticationMethod *string `type:"string"`
 
-	// Is this a transaction priority message or lower priority.
+	// The message priority. Amazon Pinpoint uses this value to set the apns-priority
+	// request header when it sends the message to APNs. Accepts the following values:"5"
+	// - Low priority. Messages might be delayed, delivered in groups, and throttled."10"
+	// - High priority. Messages are sent immediately. High priority messages must
+	// cause an alert, sound, or badge on the receiving device.The default value
+	// is "10".The equivalent values for FCM or GCM messages are "normal" and "high".
+	// Amazon Pinpoint accepts these values for APNs messages and converts them.For
+	// more information about the apns-priority parameter, see Communicating with
+	// APNs in the APNs Local and Remote Notification Programming Guide.
 	Priority *string `type:"string"`
 
 	// The Raw JSON formatted string to be used as the payload. This value overrides
@@ -3651,11 +3922,10 @@ type APNSMessage struct {
 	// you can use this value to group your notifications together.
 	ThreadId *string `type:"string"`
 
-	// This parameter specifies how long (in seconds) the message should be kept
-	// if APNS is unable to deliver the notification the first time. If the value
-	// is 0, APNS treats the notification as if it expires immediately and does
-	// not store the notification or attempt to redeliver it. This value is converted
-	// to the expiration field when sent to APNS
+	// The length of time (in seconds) that APNs stores and attempts to deliver
+	// the message. If the value is 0, APNs does not store the message or attempt
+	// to deliver it more than once. Amazon Pinpoint uses this value to set the
+	// apns-expiration request header when it sends the message to APNs.
 	TimeToLive *int64 `type:"integer"`
 
 	// The message title that displays above the message on the user's device.
@@ -3898,7 +4168,7 @@ func (s APNSSandboxChannelRequest) MarshalFields(e protocol.FieldEncoder) error 
 type APNSSandboxChannelResponse struct {
 	_ struct{} `type:"structure"`
 
-	// Application id
+	// The ID of the application to which the channel applies.
 	ApplicationId *string `type:"string"`
 
 	// When was this segment created
@@ -3910,10 +4180,15 @@ type APNSSandboxChannelResponse struct {
 	// If the channel is enabled for sending messages.
 	Enabled *bool `type:"boolean"`
 
-	// If the channel is registered with a credential for authentication.
+	// Indicates whether the channel is configured with APNs credentials. Amazon
+	// Pinpoint uses your credentials to authenticate push notifications with APNs.
+	// To use APNs token authentication, set the BundleId, TeamId, TokenKey, and
+	// TokenKeyId attributes. To use certificate authentication, set the Certificate
+	// and PrivateKey attributes.
 	HasCredential *bool `type:"boolean"`
 
-	// If the channel is registered with a token key for authentication.
+	// Indicates whether the channel is configured with a key for APNs token authentication.
+	// Provide a token key by setting the TokenKey attribute.
 	HasTokenKey *bool `type:"boolean"`
 
 	// Channel ID. Not used, only for backwards compatibility.
@@ -4022,7 +4297,7 @@ func (s APNSSandboxChannelResponse) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Apple VOIP Push Notification Service channel definition.
+// Apple VoIP Push Notification Service channel definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipChannelRequest
 type APNSVoipChannelRequest struct {
 	_ struct{} `type:"structure"`
@@ -4115,7 +4390,7 @@ func (s APNSVoipChannelRequest) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Apple VOIP Push Notification Service channel definition.
+// Apple VoIP Push Notification Service channel definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipChannelResponse
 type APNSVoipChannelResponse struct {
 	_ struct{} `type:"structure"`
@@ -4244,7 +4519,7 @@ func (s APNSVoipChannelResponse) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Apple VOIP Developer Push Notification Service channel definition.
+// Apple VoIP Developer Push Notification Service channel definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipSandboxChannelRequest
 type APNSVoipSandboxChannelRequest struct {
 	_ struct{} `type:"structure"`
@@ -4337,7 +4612,7 @@ func (s APNSVoipSandboxChannelRequest) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Apple VOIP Developer Push Notification Service channel definition.
+// Apple VoIP Developer Push Notification Service channel definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/APNSVoipSandboxChannelResponse
 type APNSVoipSandboxChannelResponse struct {
 	_ struct{} `type:"structure"`
@@ -4651,9 +4926,13 @@ type AddressConfiguration struct {
 	// Body override. If specified will override default body.
 	BodyOverride *string `type:"string"`
 
-	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
+	// The channel type.Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX
+	// | ADM | SMS | EMAIL | BAIDU
 	ChannelType ChannelType `type:"string" enum:"true"`
 
+	// A map of custom attributes to attributes to be attached to the message for
+	// this address. This payload is added to the push notification's 'data.pinpoint'
+	// object or added to the email/sms delivery receipt event attributes.
 	Context map[string]string `type:"map"`
 
 	// The Raw JSON formatted string to be used as the payload. This value overrides
@@ -4781,6 +5060,9 @@ type ApplicationSettingsResource struct {
 	// The unique ID for the application.
 	ApplicationId *string `type:"string"`
 
+	// Default campaign hook.
+	CampaignHook *CampaignHook `type:"structure"`
+
 	// The date that the settings were last updated in ISO 8601 format.
 	LastModifiedDate *string `type:"string"`
 
@@ -4812,6 +5094,12 @@ func (s ApplicationSettingsResource) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CampaignHook != nil {
+		v := s.CampaignHook
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CampaignHook", v, metadata)
 	}
 	if s.LastModifiedDate != nil {
 		v := *s.LastModifiedDate
@@ -4991,7 +5279,10 @@ type BaiduChannelResponse struct {
 	// If the channel is enabled for sending messages.
 	Enabled *bool `type:"boolean"`
 
-	// If the channel is registered with a credential for authentication.
+	// Indicates whether the channel is configured with Baidu Cloud Push credentials.
+	// Amazon Pinpoint uses your credentials to authenticate push notifications
+	// with Baidu Cloud Push. Provide your credentials by setting the ApiKey and
+	// SecretKey attributes.
 	HasCredential *bool `type:"boolean"`
 
 	// Channel ID. Not used, only for backwards compatibility.
@@ -5111,6 +5402,8 @@ type BaiduMessage struct {
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
 
+	// The data payload used for a silent push. This payload is added to the notifications'
+	// data.pinpoint.jsonBody' object
 	Data map[string]string `type:"map"`
 
 	// The icon image name of the asset saved in your application.
@@ -5319,6 +5612,54 @@ func (s CampaignEmailMessage) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignHook
+type CampaignHook struct {
+	_ struct{} `type:"structure"`
+
+	// Lambda function name or arn to be called for delivery
+	LambdaFunctionName *string `type:"string"`
+
+	// What mode Lambda should be invoked in.
+	Mode Mode `type:"string" enum:"true"`
+
+	// Web URL to call for hook. If the URL has authentication specified it will
+	// be added as authentication to the request
+	WebUrl *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CampaignHook) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CampaignHook) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CampaignHook) MarshalFields(e protocol.FieldEncoder) error {
+	if s.LambdaFunctionName != nil {
+		v := *s.LambdaFunctionName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LambdaFunctionName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Mode) > 0 {
+		v := s.Mode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Mode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.WebUrl != nil {
+		v := *s.WebUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "WebUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Campaign Limits are used to limit the number of messages that can be sent
 // to a user.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CampaignLimits
@@ -5328,12 +5669,13 @@ type CampaignLimits struct {
 	// The maximum number of messages that the campaign can send daily.
 	Daily *int64 `type:"integer"`
 
-	// The maximum duration of a campaign from the scheduled start. Must be a minimum
-	// of 60 seconds.
+	// The length of time (in seconds) that the campaign can run before it ends
+	// and message deliveries stop. This duration begins at the scheduled start
+	// time for the campaign. The minimum value is 60.
 	MaximumDuration *int64 `type:"integer"`
 
-	// The maximum number of messages per second that the campaign will send. This
-	// is a best effort maximum cap and can go as high as 20000 and as low as 50
+	// The number of messages that the campaign can send per second. The minimum
+	// value is 50, and the maximum is 20000.
 	MessagesPerSecond *int64 `type:"integer"`
 
 	// The maximum total number of messages that the campaign can send.
@@ -5403,6 +5745,9 @@ type CampaignResponse struct {
 	// The allocated percentage of end users who will not receive messages from
 	// this campaign.
 	HoldoutPercent *int64 `type:"integer"`
+
+	// Campaign hook information.
+	Hook *CampaignHook `type:"structure"`
 
 	// The unique campaign ID.
 	Id *string `type:"string"`
@@ -5499,6 +5844,12 @@ func (s CampaignResponse) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "HoldoutPercent", protocol.Int64Value(v), metadata)
+	}
+	if s.Hook != nil {
+		v := s.Hook
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Hook", v, metadata)
 	}
 	if s.Id != nil {
 		v := *s.Id
@@ -5920,6 +6271,100 @@ func (s CreateCampaignOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateExportJobRequest
+type CreateExportJobInput struct {
+	_ struct{} `type:"structure" payload:"ExportJobRequest"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
+
+	// ExportJobRequest is a required field
+	ExportJobRequest *ExportJobRequest `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateExportJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateExportJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateExportJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateExportJobInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if s.ExportJobRequest == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ExportJobRequest"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateExportJobInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ExportJobRequest != nil {
+		v := s.ExportJobRequest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "ExportJobRequest", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateExportJobResponse
+type CreateExportJobOutput struct {
+	_ struct{} `type:"structure" payload:"ExportJobResponse"`
+
+	responseMetadata aws.Response
+
+	// ExportJobResponse is a required field
+	ExportJobResponse *ExportJobResponse `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s CreateExportJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateExportJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateExportJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateExportJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExportJobResponse != nil {
+		v := s.ExportJobResponse
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "ExportJobResponse", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateImportJobRequest
 type CreateImportJobInput struct {
 	_ struct{} `type:"structure" payload:"ImportJobRequest"`
@@ -6178,6 +6623,8 @@ type DefaultPushNotificationMessage struct {
 	// The message body of the notification, the email body or the text message.
 	Body *string `type:"string"`
 
+	// The data payload used for a silent push. This payload is added to the notifications'
+	// data.pinpoint.jsonBody' object
 	Data map[string]string `type:"map"`
 
 	// Indicates if the message should display on the users device. Silent pushes
@@ -6568,7 +7015,7 @@ type DeleteApnsVoipChannelOutput struct {
 
 	responseMetadata aws.Response
 
-	// Apple VOIP Push Notification Service channel definition.
+	// Apple VoIP Push Notification Service channel definition.
 	//
 	// APNSVoipChannelResponse is a required field
 	APNSVoipChannelResponse *APNSVoipChannelResponse `type:"structure" required:"true"`
@@ -6651,7 +7098,7 @@ type DeleteApnsVoipSandboxChannelOutput struct {
 
 	responseMetadata aws.Response
 
-	// Apple VOIP Developer Push Notification Service channel definition.
+	// Apple VoIP Developer Push Notification Service channel definition.
 	//
 	// APNSVoipSandboxChannelResponse is a required field
 	APNSVoipSandboxChannelResponse *APNSVoipSandboxChannelResponse `type:"structure" required:"true"`
@@ -7024,6 +7471,102 @@ func (s DeleteEmailChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.PayloadTarget, "EmailChannelResponse", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEndpointRequest
+type DeleteEndpointInput struct {
+	_ struct{} `type:"structure"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
+
+	// EndpointId is a required field
+	EndpointId *string `location:"uri" locationName:"endpoint-id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteEndpointInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteEndpointInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteEndpointInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteEndpointInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if s.EndpointId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EndpointId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EndpointId != nil {
+		v := *s.EndpointId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "endpoint-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteEndpointResponse
+type DeleteEndpointOutput struct {
+	_ struct{} `type:"structure" payload:"EndpointResponse"`
+
+	responseMetadata aws.Response
+
+	// Endpoint response
+	//
+	// EndpointResponse is a required field
+	EndpointResponse *EndpointResponse `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteEndpointOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteEndpointOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteEndpointOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteEndpointOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EndpointResponse != nil {
+		v := s.EndpointResponse
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "EndpointResponse", v, metadata)
 	}
 	return nil
 }
@@ -7668,7 +8211,8 @@ type EndpointBatchItem struct {
 
 	Attributes map[string][]string `type:"map"`
 
-	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
+	// The channel type.Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX
+	// | ADM | SMS | EMAIL | BAIDU
 	ChannelType ChannelType `type:"string" enum:"true"`
 
 	// The endpoint demographic attributes.
@@ -7687,6 +8231,7 @@ type EndpointBatchItem struct {
 	// The endpoint location attributes.
 	Location *EndpointLocation `type:"structure"`
 
+	// Custom metrics that your app reports to Amazon Pinpoint.
 	Metrics map[string]float64 `type:"map"`
 
 	// Indicates whether a user has opted out of receiving messages with one of
@@ -8090,7 +8635,8 @@ type EndpointRequest struct {
 
 	Attributes map[string][]string `type:"map"`
 
-	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
+	// The channel type.Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX
+	// | ADM | SMS | EMAIL | BAIDU
 	ChannelType ChannelType `type:"string" enum:"true"`
 
 	// The endpoint demographic attributes.
@@ -8106,6 +8652,7 @@ type EndpointRequest struct {
 	// The endpoint location attributes.
 	Location *EndpointLocation `type:"structure"`
 
+	// Custom metrics that your app reports to Amazon Pinpoint.
 	Metrics map[string]float64 `type:"map"`
 
 	// Indicates whether a user has opted out of receiving messages with one of
@@ -8232,7 +8779,8 @@ type EndpointResponse struct {
 
 	Attributes map[string][]string `type:"map"`
 
-	// The channel type.Valid values: GCM | APNS | SMS | EMAIL
+	// The channel type.Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX
+	// | ADM | SMS | EMAIL | BAIDU
 	ChannelType ChannelType `type:"string" enum:"true"`
 
 	// A number from 0 - 99 that represents the cohort the endpoint is assigned
@@ -8262,6 +8810,7 @@ type EndpointResponse struct {
 	// The endpoint location attributes.
 	Location *EndpointLocation `type:"structure"`
 
+	// Custom metrics that your app reports to Amazon Pinpoint.
 	Metrics map[string]float64 `type:"map"`
 
 	// Indicates whether a user has opted out of receiving messages with one of
@@ -8406,6 +8955,9 @@ type EndpointSendConfiguration struct {
 	// Body override. If specified will override default body.
 	BodyOverride *string `type:"string"`
 
+	// A map of custom attributes to attributes to be attached to the message for
+	// this address. This payload is added to the push notification's 'data.pinpoint'
+	// object or added to the email/sms delivery receipt event attributes.
 	Context map[string]string `type:"map"`
 
 	// The Raw JSON formatted string to be used as the payload. This value overrides
@@ -8542,8 +9094,10 @@ type EventStream struct {
 	// Kinesis ARN: arn:aws:kinesis:REGION:ACCOUNT_ID:stream/STREAM_NAME
 	DestinationStreamArn *string `type:"string"`
 
-	// The external ID assigned the IAM role that authorizes Amazon Pinpoint to
-	// publish to the stream.
+	// DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key
+	// in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This
+	// requirement is removed, and external IDs are not recommended for IAM roles
+	// assumed by Amazon Pinpoint.
 	ExternalId *string `type:"string"`
 
 	// The date the event stream was last updated in ISO 8601 format.
@@ -8608,6 +9162,303 @@ func (s EventStream) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ExportJobRequest
+type ExportJobRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint
+	// access to the Amazon S3 location that endpoints will be exported to.
+	RoleArn *string `type:"string"`
+
+	// A URL that points to the location within an Amazon S3 bucket that will receive
+	// the export. The location is typically a folder with multiple files.The URL
+	// should follow this format: s3://bucket-name/folder-name/Amazon Pinpoint will
+	// export endpoints to this location.
+	S3UrlPrefix *string `type:"string"`
+
+	// The ID of the segment to export endpoints from. If not present, all endpoints
+	// will be exported.
+	SegmentId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ExportJobRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportJobRequest) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportJobRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3UrlPrefix != nil {
+		v := *s.S3UrlPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "S3UrlPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SegmentId != nil {
+		v := *s.SegmentId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SegmentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ExportJobResource
+type ExportJobResource struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of an IAM role that grants Amazon Pinpoint
+	// access to the Amazon S3 location that endpoints will be exported to.
+	RoleArn *string `type:"string"`
+
+	// A URL that points to the location within an Amazon S3 bucket that will receive
+	// the export. The location is typically a folder with multiple files.The URL
+	// should follow this format: s3://bucket-name/folder-name/Amazon Pinpoint will
+	// export endpoints to this location.
+	S3UrlPrefix *string `type:"string"`
+
+	// The ID of the segment to export endpoints from. If not present all endpoints
+	// will be exported.
+	SegmentId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ExportJobResource) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportJobResource) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportJobResource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3UrlPrefix != nil {
+		v := *s.S3UrlPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "S3UrlPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SegmentId != nil {
+		v := *s.SegmentId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SegmentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ExportJobResponse
+type ExportJobResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The unique ID of the application to which the job applies.
+	ApplicationId *string `type:"string"`
+
+	// The number of pieces that have successfully completed as of the time of the
+	// request.
+	CompletedPieces *int64 `type:"integer"`
+
+	// The date the job completed in ISO 8601 format.
+	CompletionDate *string `type:"string"`
+
+	// The date the job was created in ISO 8601 format.
+	CreationDate *string `type:"string"`
+
+	// The export job settings.
+	Definition *ExportJobResource `type:"structure"`
+
+	// The number of pieces that failed to be processed as of the time of the request.
+	FailedPieces *int64 `type:"integer"`
+
+	Failures []string `type:"list"`
+
+	// The unique ID of the job.
+	Id *string `type:"string"`
+
+	// The status of the export job.Valid values: CREATED, INITIALIZING, PROCESSING,
+	// COMPLETING, COMPLETED, FAILING, FAILEDThe job status is FAILED if one or
+	// more pieces failed.
+	JobStatus JobStatus `type:"string" enum:"true"`
+
+	// The number of endpoints that were not processed; for example, because of
+	// syntax errors.
+	TotalFailures *int64 `type:"integer"`
+
+	// The total number of pieces that must be processed to finish the job. Each
+	// piece is an approximately equal portion of the endpoints.
+	TotalPieces *int64 `type:"integer"`
+
+	// The number of endpoints that were processed by the job.
+	TotalProcessed *int64 `type:"integer"`
+
+	// The job type. Will be 'EXPORT'.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ExportJobResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportJobResponse) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportJobResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CompletedPieces != nil {
+		v := *s.CompletedPieces
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CompletedPieces", protocol.Int64Value(v), metadata)
+	}
+	if s.CompletionDate != nil {
+		v := *s.CompletionDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CompletionDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreationDate != nil {
+		v := *s.CreationDate
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreationDate", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Definition != nil {
+		v := s.Definition
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Definition", v, metadata)
+	}
+	if s.FailedPieces != nil {
+		v := *s.FailedPieces
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FailedPieces", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Failures) > 0 {
+		v := s.Failures
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Failures", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.JobStatus) > 0 {
+		v := s.JobStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "JobStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TotalFailures != nil {
+		v := *s.TotalFailures
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TotalFailures", protocol.Int64Value(v), metadata)
+	}
+	if s.TotalPieces != nil {
+		v := *s.TotalPieces
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TotalPieces", protocol.Int64Value(v), metadata)
+	}
+	if s.TotalProcessed != nil {
+		v := *s.TotalProcessed
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TotalProcessed", protocol.Int64Value(v), metadata)
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Export job list.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/ExportJobsResponse
+type ExportJobsResponse struct {
+	_ struct{} `type:"structure"`
+
+	// A list of export jobs for the application.
+	Item []ExportJobResponse `type:"list"`
+
+	// The string that you use in a subsequent request to get the next page of results
+	// in a paginated response.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ExportJobsResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportJobsResponse) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ExportJobsResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Item) > 0 {
+		v := s.Item
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Item", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Google Cloud Messaging credentials
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GCMChannelRequest
 type GCMChannelRequest struct {
@@ -8664,7 +9515,9 @@ type GCMChannelResponse struct {
 	// If the channel is enabled for sending messages.
 	Enabled *bool `type:"boolean"`
 
-	// If the channel is registered with a credential for authentication.
+	// Indicates whether the channel is configured with FCM or GCM credentials.
+	// Amazon Pinpoint uses your credentials to authenticate push notifications
+	// with FCM or GCM. Provide your credentials by setting the ApiKey attribute.
 	HasCredential *bool `type:"boolean"`
 
 	// Channel ID. Not used. Present only for backwards compatibility.
@@ -8790,6 +9643,8 @@ type GCMMessage struct {
 	// of the same messages when the device comes back online or becomes active.
 	CollapseKey *string `type:"string"`
 
+	// The data payload used for a silent push. This payload is added to the notifications'
+	// data.pinpoint.jsonBody' object
 	Data map[string]string `type:"map"`
 
 	// The icon image name of the asset saved in your application.
@@ -8802,7 +9657,14 @@ type GCMMessage struct {
 	// The URL that points to an image used in the push notification.
 	ImageUrl *string `type:"string"`
 
-	// Is this a transaction priority message or lower priority.
+	// The message priority. Amazon Pinpoint uses this value to set the FCM or GCM
+	// priority parameter when it sends the message. Accepts the following values:"Normal"
+	// - Messages might be delayed. Delivery is optimized for battery usage on the
+	// receiving device. Use normal priority unless immediate delivery is required."High"
+	// - Messages are sent immediately and might wake a sleeping device.The equivalent
+	// values for APNs messages are "5" and "10". Amazon Pinpoint accepts these
+	// values here and converts them.For more information, see About FCM Messages
+	// in the Firebase documentation.
 	Priority *string `type:"string"`
 
 	// The Raw JSON formatted string to be used as the payload. This value overrides
@@ -8829,9 +9691,10 @@ type GCMMessage struct {
 
 	Substitutions map[string][]string `type:"map"`
 
-	// This parameter specifies how long (in seconds) the message should be kept
-	// in GCM storage if the device is offline. The maximum time to live supported
-	// is 4 weeks, and the default value is 4 weeks.
+	// The length of time (in seconds) that FCM or GCM stores and attempts to deliver
+	// the message. If unspecified, the value defaults to the maximum, which is
+	// 2,419,200 seconds (28 days). Amazon Pinpoint uses this value to set the FCM
+	// or GCM time_to_live parameter.
 	TimeToLive *int64 `type:"integer"`
 
 	// The message title that displays above the message on the user's device.
@@ -9276,7 +10139,7 @@ type GetApnsVoipChannelOutput struct {
 
 	responseMetadata aws.Response
 
-	// Apple VOIP Push Notification Service channel definition.
+	// Apple VoIP Push Notification Service channel definition.
 	//
 	// APNSVoipChannelResponse is a required field
 	APNSVoipChannelResponse *APNSVoipChannelResponse `type:"structure" required:"true"`
@@ -9359,7 +10222,7 @@ type GetApnsVoipSandboxChannelOutput struct {
 
 	responseMetadata aws.Response
 
-	// Apple VOIP Developer Push Notification Service channel definition.
+	// Apple VoIP Developer Push Notification Service channel definition.
 	//
 	// APNSVoipSandboxChannelResponse is a required field
 	APNSVoipSandboxChannelResponse *APNSVoipSandboxChannelResponse `type:"structure" required:"true"`
@@ -10508,6 +11371,199 @@ func (s GetEventStreamOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetExportJobRequest
+type GetExportJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
+
+	// JobId is a required field
+	JobId *string `location:"uri" locationName:"job-id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetExportJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetExportJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetExportJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetExportJobInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if s.JobId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetExportJobInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "job-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetExportJobResponse
+type GetExportJobOutput struct {
+	_ struct{} `type:"structure" payload:"ExportJobResponse"`
+
+	responseMetadata aws.Response
+
+	// ExportJobResponse is a required field
+	ExportJobResponse *ExportJobResponse `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetExportJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetExportJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetExportJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetExportJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExportJobResponse != nil {
+		v := s.ExportJobResponse
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "ExportJobResponse", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetExportJobsRequest
+type GetExportJobsInput struct {
+	_ struct{} `type:"structure"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
+
+	PageSize *string `location:"querystring" locationName:"page-size" type:"string"`
+
+	Token *string `location:"querystring" locationName:"token" type:"string"`
+}
+
+// String returns the string representation
+func (s GetExportJobsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetExportJobsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetExportJobsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetExportJobsInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetExportJobsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PageSize != nil {
+		v := *s.PageSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "page-size", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Token != nil {
+		v := *s.Token
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetExportJobsResponse
+type GetExportJobsOutput struct {
+	_ struct{} `type:"structure" payload:"ExportJobsResponse"`
+
+	responseMetadata aws.Response
+
+	// Export job list.
+	//
+	// ExportJobsResponse is a required field
+	ExportJobsResponse *ExportJobsResponse `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetExportJobsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetExportJobsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetExportJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetExportJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExportJobsResponse != nil {
+		v := s.ExportJobsResponse
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "ExportJobsResponse", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetGcmChannelRequest
 type GetGcmChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -10780,6 +11836,118 @@ func (s GetImportJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.PayloadTarget, "ImportJobsResponse", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentExportJobsRequest
+type GetSegmentExportJobsInput struct {
+	_ struct{} `type:"structure"`
+
+	// ApplicationId is a required field
+	ApplicationId *string `location:"uri" locationName:"application-id" type:"string" required:"true"`
+
+	PageSize *string `location:"querystring" locationName:"page-size" type:"string"`
+
+	// SegmentId is a required field
+	SegmentId *string `location:"uri" locationName:"segment-id" type:"string" required:"true"`
+
+	Token *string `location:"querystring" locationName:"token" type:"string"`
+}
+
+// String returns the string representation
+func (s GetSegmentExportJobsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSegmentExportJobsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetSegmentExportJobsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetSegmentExportJobsInput"}
+
+	if s.ApplicationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ApplicationId"))
+	}
+
+	if s.SegmentId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SegmentId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSegmentExportJobsInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "application-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SegmentId != nil {
+		v := *s.SegmentId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "segment-id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PageSize != nil {
+		v := *s.PageSize
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "page-size", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Token != nil {
+		v := *s.Token
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "token", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetSegmentExportJobsResponse
+type GetSegmentExportJobsOutput struct {
+	_ struct{} `type:"structure" payload:"ExportJobsResponse"`
+
+	responseMetadata aws.Response
+
+	// Export job list.
+	//
+	// ExportJobsResponse is a required field
+	ExportJobsResponse *ExportJobsResponse `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetSegmentExportJobsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetSegmentExportJobsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetSegmentExportJobsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetSegmentExportJobsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExportJobsResponse != nil {
+		v := s.ExportJobsResponse
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "ExportJobsResponse", v, metadata)
 	}
 	return nil
 }
@@ -11402,8 +12570,10 @@ type ImportJobRequest struct {
 	// Sets whether the endpoints create a segment when they are imported.
 	DefineSegment *bool `type:"boolean"`
 
-	// A unique, custom ID assigned to the IAM role that restricts who can assume
-	// the role.
+	// DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key
+	// in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This
+	// requirement is removed, and external IDs are not recommended for IAM roles
+	// assumed by Amazon Pinpoint.
 	ExternalId *string `type:"string"`
 
 	// The format of the files that contain the endpoint definitions.Valid values:
@@ -11503,8 +12673,10 @@ type ImportJobResource struct {
 	// Sets whether the endpoints create a segment when they are imported.
 	DefineSegment *bool `type:"boolean"`
 
-	// A unique, custom ID assigned to the IAM role that restricts who can assume
-	// the role.
+	// DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key
+	// in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This
+	// requirement is removed, and external IDs are not recommended for IAM roles
+	// assumed by Amazon Pinpoint.
 	ExternalId *string `type:"string"`
 
 	// The format of the files that contain the endpoint definitions.Valid values:
@@ -12055,6 +13227,9 @@ type MessageRequest struct {
 	// phone number or push token) and the Address Configuration as the value.
 	Addresses map[string]AddressConfiguration `type:"map"`
 
+	// A map of custom attributes to attributes to be attached to the message. This
+	// payload is added to the push notification's 'data.pinpoint' object or added
+	// to the email/sms delivery receipt event attributes.
 	Context map[string]string `type:"map"`
 
 	// A map of destination addresses, with the address as the key(Email address,
@@ -12620,7 +13795,14 @@ type SMSMessage struct {
 	// Is this a transaction priority message or lower priority.
 	MessageType MessageType `type:"string" enum:"true"`
 
-	// Sender ID of sent message.
+	// The phone number that the SMS message originates from. Specify one of the
+	// dedicated long codes or short codes that you requested from AWS Support and
+	// that is assigned to your account. If this attribute is not specified, Amazon
+	// Pinpoint randomly assigns a long code.
+	OriginationNumber *string `type:"string"`
+
+	// The sender ID that is shown as the message sender on the recipient's device.
+	// Support for sender IDs varies by country or region.
 	SenderId *string `type:"string"`
 
 	Substitutions map[string][]string `type:"map"`
@@ -12649,6 +13831,12 @@ func (s SMSMessage) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MessageType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.OriginationNumber != nil {
+		v := *s.OriginationNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginationNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.SenderId != nil {
 		v := *s.SenderId
@@ -12942,10 +14130,13 @@ func (s SegmentDimensions) MarshalFields(e protocol.FieldEncoder) error {
 type SegmentImportResource struct {
 	_ struct{} `type:"structure"`
 
+	// Channel type counts
 	ChannelCounts map[string]int64 `type:"map"`
 
-	// A unique, custom ID assigned to the IAM role that restricts who can assume
-	// the role.
+	// DEPRECATED. Your AWS account ID, which you assigned to the ExternalID key
+	// in an IAM trust policy. Used by Amazon Pinpoint to assume an IAM role. This
+	// requirement is removed, and external IDs are not recommended for IAM roles
+	// assumed by Amazon Pinpoint.
 	ExternalId *string `type:"string"`
 
 	// The format of the endpoint files that were imported to create this segment.Valid
@@ -13308,6 +14499,9 @@ func (s SendMessagesOutput) MarshalFields(e protocol.FieldEncoder) error {
 type SendUsersMessageRequest struct {
 	_ struct{} `type:"structure"`
 
+	// A map of custom attributes to attributes to be attached to the message. This
+	// payload is added to the push notification's 'data.pinpoint' object or added
+	// to the email/sms delivery receipt event attributes.
 	Context map[string]string `type:"map"`
 
 	// Message configuration.
@@ -13948,7 +15142,7 @@ func (s UpdateApnsSandboxChannelOutput) MarshalFields(e protocol.FieldEncoder) e
 type UpdateApnsVoipChannelInput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipChannelRequest"`
 
-	// Apple VOIP Push Notification Service channel definition.
+	// Apple VoIP Push Notification Service channel definition.
 	//
 	// APNSVoipChannelRequest is a required field
 	APNSVoipChannelRequest *APNSVoipChannelRequest `type:"structure" required:"true"`
@@ -14010,7 +15204,7 @@ type UpdateApnsVoipChannelOutput struct {
 
 	responseMetadata aws.Response
 
-	// Apple VOIP Push Notification Service channel definition.
+	// Apple VoIP Push Notification Service channel definition.
 	//
 	// APNSVoipChannelResponse is a required field
 	APNSVoipChannelResponse *APNSVoipChannelResponse `type:"structure" required:"true"`
@@ -14046,7 +15240,7 @@ func (s UpdateApnsVoipChannelOutput) MarshalFields(e protocol.FieldEncoder) erro
 type UpdateApnsVoipSandboxChannelInput struct {
 	_ struct{} `type:"structure" payload:"APNSVoipSandboxChannelRequest"`
 
-	// Apple VOIP Developer Push Notification Service channel definition.
+	// Apple VoIP Developer Push Notification Service channel definition.
 	//
 	// APNSVoipSandboxChannelRequest is a required field
 	APNSVoipSandboxChannelRequest *APNSVoipSandboxChannelRequest `type:"structure" required:"true"`
@@ -14108,7 +15302,7 @@ type UpdateApnsVoipSandboxChannelOutput struct {
 
 	responseMetadata aws.Response
 
-	// Apple VOIP Developer Push Notification Service channel definition.
+	// Apple VoIP Developer Push Notification Service channel definition.
 	//
 	// APNSVoipSandboxChannelResponse is a required field
 	APNSVoipSandboxChannelResponse *APNSVoipSandboxChannelResponse `type:"structure" required:"true"`
@@ -15066,6 +16260,9 @@ func (s UpdateSmsChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 type WriteApplicationSettingsRequest struct {
 	_ struct{} `type:"structure"`
 
+	// Default campaign hook information.
+	CampaignHook *CampaignHook `type:"structure"`
+
 	// The default campaign limits for the app. These limits apply to each campaign
 	// for the app, unless the campaign overrides the default with limits of its
 	// own.
@@ -15089,6 +16286,12 @@ func (s WriteApplicationSettingsRequest) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s WriteApplicationSettingsRequest) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CampaignHook != nil {
+		v := s.CampaignHook
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CampaignHook", v, metadata)
+	}
 	if s.Limits != nil {
 		v := s.Limits
 
@@ -15118,6 +16321,9 @@ type WriteCampaignRequest struct {
 	// The allocated percentage of end users who will not receive messages from
 	// this campaign.
 	HoldoutPercent *int64 `type:"integer"`
+
+	// Campaign hook information.
+	Hook *CampaignHook `type:"structure"`
 
 	// Indicates whether the campaign is paused. A paused campaign does not send
 	// messages unless you resume it by setting IsPaused to false.
@@ -15183,6 +16389,12 @@ func (s WriteCampaignRequest) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "HoldoutPercent", protocol.Int64Value(v), metadata)
+	}
+	if s.Hook != nil {
+		v := s.Hook
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Hook", v, metadata)
 	}
 	if s.IsPaused != nil {
 		v := *s.IsPaused
@@ -15456,6 +16668,7 @@ const (
 	ChannelTypeSms             ChannelType = "SMS"
 	ChannelTypeEmail           ChannelType = "EMAIL"
 	ChannelTypeBaidu           ChannelType = "BAIDU"
+	ChannelTypeCustom          ChannelType = "CUSTOM"
 )
 
 func (enum ChannelType) MarshalValue() (string, error) {
@@ -15597,6 +16810,23 @@ func (enum MessageType) MarshalValue() (string, error) {
 }
 
 func (enum MessageType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Mode string
+
+// Enum values for Mode
+const (
+	ModeDelivery Mode = "DELIVERY"
+	ModeFilter   Mode = "FILTER"
+)
+
+func (enum Mode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Mode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

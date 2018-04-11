@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Alexa For Business.
 //    func myFunc(svc alexaforbusinessiface.AlexaForBusinessAPI) bool {
-//        // Make svc.AssociateDeviceWithRoom request
+//        // Make svc.AssociateContactWithAddressBook request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockAlexaForBusinessClient struct {
 //        alexaforbusinessiface.AlexaForBusinessAPI
 //    }
-//    func (m *mockAlexaForBusinessClient) AssociateDeviceWithRoom(input *alexaforbusiness.AssociateDeviceWithRoomInput) (*alexaforbusiness.AssociateDeviceWithRoomOutput, error) {
+//    func (m *mockAlexaForBusinessClient) AssociateContactWithAddressBook(input *alexaforbusiness.AssociateContactWithAddressBookInput) (*alexaforbusiness.AssociateContactWithAddressBookOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,9 +62,15 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type AlexaForBusinessAPI interface {
+	AssociateContactWithAddressBookRequest(*alexaforbusiness.AssociateContactWithAddressBookInput) alexaforbusiness.AssociateContactWithAddressBookRequest
+
 	AssociateDeviceWithRoomRequest(*alexaforbusiness.AssociateDeviceWithRoomInput) alexaforbusiness.AssociateDeviceWithRoomRequest
 
 	AssociateSkillGroupWithRoomRequest(*alexaforbusiness.AssociateSkillGroupWithRoomInput) alexaforbusiness.AssociateSkillGroupWithRoomRequest
+
+	CreateAddressBookRequest(*alexaforbusiness.CreateAddressBookInput) alexaforbusiness.CreateAddressBookRequest
+
+	CreateContactRequest(*alexaforbusiness.CreateContactInput) alexaforbusiness.CreateContactRequest
 
 	CreateProfileRequest(*alexaforbusiness.CreateProfileInput) alexaforbusiness.CreateProfileRequest
 
@@ -73,6 +79,10 @@ type AlexaForBusinessAPI interface {
 	CreateSkillGroupRequest(*alexaforbusiness.CreateSkillGroupInput) alexaforbusiness.CreateSkillGroupRequest
 
 	CreateUserRequest(*alexaforbusiness.CreateUserInput) alexaforbusiness.CreateUserRequest
+
+	DeleteAddressBookRequest(*alexaforbusiness.DeleteAddressBookInput) alexaforbusiness.DeleteAddressBookRequest
+
+	DeleteContactRequest(*alexaforbusiness.DeleteContactInput) alexaforbusiness.DeleteContactRequest
 
 	DeleteProfileRequest(*alexaforbusiness.DeleteProfileInput) alexaforbusiness.DeleteProfileRequest
 
@@ -84,9 +94,15 @@ type AlexaForBusinessAPI interface {
 
 	DeleteUserRequest(*alexaforbusiness.DeleteUserInput) alexaforbusiness.DeleteUserRequest
 
+	DisassociateContactFromAddressBookRequest(*alexaforbusiness.DisassociateContactFromAddressBookInput) alexaforbusiness.DisassociateContactFromAddressBookRequest
+
 	DisassociateDeviceFromRoomRequest(*alexaforbusiness.DisassociateDeviceFromRoomInput) alexaforbusiness.DisassociateDeviceFromRoomRequest
 
 	DisassociateSkillGroupFromRoomRequest(*alexaforbusiness.DisassociateSkillGroupFromRoomInput) alexaforbusiness.DisassociateSkillGroupFromRoomRequest
+
+	GetAddressBookRequest(*alexaforbusiness.GetAddressBookInput) alexaforbusiness.GetAddressBookRequest
+
+	GetContactRequest(*alexaforbusiness.GetContactInput) alexaforbusiness.GetContactRequest
 
 	GetDeviceRequest(*alexaforbusiness.GetDeviceInput) alexaforbusiness.GetDeviceRequest
 
@@ -108,6 +124,10 @@ type AlexaForBusinessAPI interface {
 
 	RevokeInvitationRequest(*alexaforbusiness.RevokeInvitationInput) alexaforbusiness.RevokeInvitationRequest
 
+	SearchAddressBooksRequest(*alexaforbusiness.SearchAddressBooksInput) alexaforbusiness.SearchAddressBooksRequest
+
+	SearchContactsRequest(*alexaforbusiness.SearchContactsInput) alexaforbusiness.SearchContactsRequest
+
 	SearchDevicesRequest(*alexaforbusiness.SearchDevicesInput) alexaforbusiness.SearchDevicesRequest
 
 	SearchProfilesRequest(*alexaforbusiness.SearchProfilesInput) alexaforbusiness.SearchProfilesRequest
@@ -125,6 +145,10 @@ type AlexaForBusinessAPI interface {
 	TagResourceRequest(*alexaforbusiness.TagResourceInput) alexaforbusiness.TagResourceRequest
 
 	UntagResourceRequest(*alexaforbusiness.UntagResourceInput) alexaforbusiness.UntagResourceRequest
+
+	UpdateAddressBookRequest(*alexaforbusiness.UpdateAddressBookInput) alexaforbusiness.UpdateAddressBookRequest
+
+	UpdateContactRequest(*alexaforbusiness.UpdateContactInput) alexaforbusiness.UpdateContactRequest
 
 	UpdateDeviceRequest(*alexaforbusiness.UpdateDeviceInput) alexaforbusiness.UpdateDeviceRequest
 
