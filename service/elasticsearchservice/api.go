@@ -1068,6 +1068,126 @@ func (s AdvancedOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Options to specify the Cognito user and identity pools for Kibana authentication.
+// For more information, see Amazon Cognito Authentication for Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
+type CognitoOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the option to enable Cognito for Kibana authentication.
+	Enabled *bool `type:"boolean"`
+
+	// Specifies the Cognito identity pool ID for Kibana authentication.
+	IdentityPoolId *string `min:"1" type:"string"`
+
+	// Specifies the role ARN that provides Elasticsearch permissions for accessing
+	// Cognito resources.
+	RoleArn *string `min:"20" type:"string"`
+
+	// Specifies the Cognito user pool ID for Kibana authentication.
+	UserPoolId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s CognitoOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CognitoOptions) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CognitoOptions) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CognitoOptions"}
+	if s.IdentityPoolId != nil && len(*s.IdentityPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("IdentityPoolId", 1))
+	}
+	if s.RoleArn != nil && len(*s.RoleArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("RoleArn", 20))
+	}
+	if s.UserPoolId != nil && len(*s.UserPoolId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserPoolId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CognitoOptions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enabled != nil {
+		v := *s.Enabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Enabled", protocol.BoolValue(v), metadata)
+	}
+	if s.IdentityPoolId != nil {
+		v := *s.IdentityPoolId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IdentityPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UserPoolId != nil {
+		v := *s.UserPoolId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UserPoolId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Status of the Cognito options for the specified Elasticsearch domain.
+type CognitoOptionsStatus struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the Cognito options for the specified Elasticsearch domain.
+	//
+	// Options is a required field
+	Options *CognitoOptions `type:"structure" required:"true"`
+
+	// Specifies the status of the Cognito options for the specified Elasticsearch
+	// domain.
+	//
+	// Status is a required field
+	Status *OptionStatus `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s CognitoOptionsStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CognitoOptionsStatus) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CognitoOptionsStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Options != nil {
+		v := s.Options
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Options", v, metadata)
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Status", v, metadata)
+	}
+	return nil
+}
+
 type CreateElasticsearchDomainInput struct {
 	_ struct{} `type:"structure"`
 
@@ -1079,6 +1199,10 @@ type CreateElasticsearchDomainInput struct {
 	// is true. See Configuration Advanced Options (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
 	// for more information.
 	AdvancedOptions map[string]string `type:"map"`
+
+	// Options to specify the Cognito user and identity pools for Kibana authentication.
+	// For more information, see Amazon Cognito Authentication for Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
+	CognitoOptions *CognitoOptions `type:"structure"`
 
 	// The name of the Elasticsearch domain that you are creating. Domain names
 	// are unique across the domains owned by an account within an AWS region. Domain
@@ -1138,6 +1262,11 @@ func (s *CreateElasticsearchDomainInput) Validate() error {
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+	if s.CognitoOptions != nil {
+		if err := s.CognitoOptions.Validate(); err != nil {
+			invalidParams.AddNested("CognitoOptions", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.EncryptionAtRestOptions != nil {
 		if err := s.EncryptionAtRestOptions.Validate(); err != nil {
 			invalidParams.AddNested("EncryptionAtRestOptions", err.(aws.ErrInvalidParams))
@@ -1170,6 +1299,12 @@ func (s CreateElasticsearchDomainInput) MarshalFields(e protocol.FieldEncoder) e
 		}
 		ms0.End()
 
+	}
+	if s.CognitoOptions != nil {
+		v := s.CognitoOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CognitoOptions", v, metadata)
 	}
 	if s.DomainName != nil {
 		v := *s.DomainName
@@ -2057,6 +2192,10 @@ type ElasticsearchDomainConfig struct {
 	// for more information.
 	AdvancedOptions *AdvancedOptionsStatus `type:"structure"`
 
+	// The CognitoOptions for the specified domain. For more information, see Amazon
+	// Cognito Authentication for Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
+	CognitoOptions *CognitoOptionsStatus `type:"structure"`
+
 	// Specifies the EBSOptions for the Elasticsearch domain.
 	EBSOptions *EBSOptionsStatus `type:"structure"`
 
@@ -2103,6 +2242,12 @@ func (s ElasticsearchDomainConfig) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AdvancedOptions", v, metadata)
+	}
+	if s.CognitoOptions != nil {
+		v := s.CognitoOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CognitoOptions", v, metadata)
 	}
 	if s.EBSOptions != nil {
 		v := s.EBSOptions
@@ -2165,6 +2310,10 @@ type ElasticsearchDomainStatus struct {
 
 	// Specifies the status of the AdvancedOptions
 	AdvancedOptions map[string]string `type:"map"`
+
+	// The CognitoOptions for the specified domain. For more information, see Amazon
+	// Cognito Authentication for Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
+	CognitoOptions *CognitoOptions `type:"structure"`
 
 	// The domain creation status. True if the creation of an Elasticsearch domain
 	// is complete. False if domain creation is still in progress.
@@ -2263,6 +2412,12 @@ func (s ElasticsearchDomainStatus) MarshalFields(e protocol.FieldEncoder) error 
 		}
 		ms0.End()
 
+	}
+	if s.CognitoOptions != nil {
+		v := s.CognitoOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CognitoOptions", v, metadata)
 	}
 	if s.Created != nil {
 		v := *s.Created
@@ -3547,6 +3702,10 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// for more information.
 	AdvancedOptions map[string]string `type:"map"`
 
+	// Options to specify the Cognito user and identity pools for Kibana authentication.
+	// For more information, see Amazon Cognito Authentication for Kibana (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
+	CognitoOptions *CognitoOptions `type:"structure"`
+
 	// The name of the Elasticsearch domain that you are updating.
 	//
 	// DomainName is a required field
@@ -3592,6 +3751,11 @@ func (s *UpdateElasticsearchDomainConfigInput) Validate() error {
 	if s.DomainName != nil && len(*s.DomainName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
 	}
+	if s.CognitoOptions != nil {
+		if err := s.CognitoOptions.Validate(); err != nil {
+			invalidParams.AddNested("CognitoOptions", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3619,6 +3783,12 @@ func (s UpdateElasticsearchDomainConfigInput) MarshalFields(e protocol.FieldEnco
 		}
 		ms0.End()
 
+	}
+	if s.CognitoOptions != nil {
+		v := s.CognitoOptions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CognitoOptions", v, metadata)
 	}
 	if s.EBSOptions != nil {
 		v := s.EBSOptions

@@ -34,7 +34,8 @@ func (r AddFacetToObjectRequest) Send() (*AddFacetToObjectOutput, error) {
 // AddFacetToObjectRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Adds a new Facet to an object.
+// Adds a new Facet to an object. An object can have more than one facet applied
+// on it.
 //
 //    // Example sending a request using the AddFacetToObjectRequest method.
 //    req := client.AddFacetToObjectRequest(params)
@@ -1453,6 +1454,56 @@ func (c *CloudDirectory) GetFacetRequest(input *GetFacetInput) GetFacetRequest {
 	return GetFacetRequest{Request: req, Input: input, Copy: c.GetFacetRequest}
 }
 
+const opGetObjectAttributes = "GetObjectAttributes"
+
+// GetObjectAttributesRequest is a API request type for the GetObjectAttributes API operation.
+type GetObjectAttributesRequest struct {
+	*aws.Request
+	Input *GetObjectAttributesInput
+	Copy  func(*GetObjectAttributesInput) GetObjectAttributesRequest
+}
+
+// Send marshals and sends the GetObjectAttributes API request.
+func (r GetObjectAttributesRequest) Send() (*GetObjectAttributesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetObjectAttributesOutput), nil
+}
+
+// GetObjectAttributesRequest returns a request value for making API operation for
+// Amazon CloudDirectory.
+//
+// Retrieves attributes within a facet that are associated with an object.
+//
+//    // Example sending a request using the GetObjectAttributesRequest method.
+//    req := client.GetObjectAttributesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectAttributes
+func (c *CloudDirectory) GetObjectAttributesRequest(input *GetObjectAttributesInput) GetObjectAttributesRequest {
+	op := &aws.Operation{
+		Name:       opGetObjectAttributes,
+		HTTPMethod: "POST",
+		HTTPPath:   "/amazonclouddirectory/2017-01-11/object/attributes/get",
+	}
+
+	if input == nil {
+		input = &GetObjectAttributesInput{}
+	}
+
+	output := &GetObjectAttributesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetObjectAttributesRequest{Request: req, Input: input, Copy: c.GetObjectAttributesRequest}
+}
+
 const opGetObjectInformation = "GetObjectInformation"
 
 // GetObjectInformationRequest is a API request type for the GetObjectInformation API operation.
@@ -2292,7 +2343,7 @@ func (r ListIndexRequest) Send() (*ListIndexOutput, error) {
 // ListIndexRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Lists objects and indexed values attached to the index.
+// Lists objects attached to the specified index.
 //
 //    // Example sending a request using the ListIndexRequest method.
 //    req := client.ListIndexRequest(params)
@@ -3070,8 +3121,9 @@ func (r ListPublishedSchemaArnsRequest) Send() (*ListPublishedSchemaArnsOutput, 
 // ListPublishedSchemaArnsRequest returns a request value for making API operation for
 // Amazon CloudDirectory.
 //
-// Lists schema major versions for a published schema. If SchemaArn is provided,
-// lists the minor version.
+// Lists the major version families of each published schema. If a major version
+// ARN is provided as SchemaArn, the minor version revisions in that family
+// are listed instead.
 //
 //    // Example sending a request using the ListPublishedSchemaArnsRequest method.
 //    req := client.ListPublishedSchemaArnsRequest(params)
@@ -4515,7 +4567,9 @@ type AttachPolicyInput struct {
 
 	// The Amazon Resource Name (ARN) that is associated with the Directory where
 	// both objects reside. For more information, see arns.
-	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string"`
+	//
+	// DirectoryArn is a required field
+	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
 
 	// The reference that identifies the object to which the policy will be attached.
 	//
@@ -4541,6 +4595,10 @@ func (s AttachPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AttachPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AttachPolicyInput"}
+
+	if s.DirectoryArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
+	}
 
 	if s.ObjectReference == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
@@ -5778,14 +5836,10 @@ type BatchCreateObject struct {
 
 	// The batch reference name. See Batches (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches)
 	// for more information.
-	//
-	// BatchReferenceName is a required field
-	BatchReferenceName *string `type:"string" required:"true"`
+	BatchReferenceName *string `type:"string"`
 
 	// The name of the link.
-	//
-	// LinkName is a required field
-	LinkName *string `min:"1" type:"string" required:"true"`
+	LinkName *string `min:"1" type:"string"`
 
 	// An attribute map, which contains an attribute ARN as the key and attribute
 	// value as the map value.
@@ -5794,9 +5848,7 @@ type BatchCreateObject struct {
 	ObjectAttributeList []AttributeKeyAndValue `type:"list" required:"true"`
 
 	// If specified, the parent reference to which this object will be attached.
-	//
-	// ParentReference is a required field
-	ParentReference *ObjectReference `type:"structure" required:"true"`
+	ParentReference *ObjectReference `type:"structure"`
 
 	// A list of FacetArns that will be associated with the object. For more information,
 	// see arns.
@@ -5818,24 +5870,12 @@ func (s BatchCreateObject) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchCreateObject) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchCreateObject"}
-
-	if s.BatchReferenceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BatchReferenceName"))
-	}
-
-	if s.LinkName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
-	}
 	if s.LinkName != nil && len(*s.LinkName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("LinkName", 1))
 	}
 
 	if s.ObjectAttributeList == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ObjectAttributeList"))
-	}
-
-	if s.ParentReference == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ParentReference"))
 	}
 
 	if s.SchemaFacet == nil {
@@ -6105,9 +6145,7 @@ type BatchDetachObject struct {
 
 	// The batch reference name. See Batches (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/cd_advanced.html#batches)
 	// for more information.
-	//
-	// BatchReferenceName is a required field
-	BatchReferenceName *string `type:"string" required:"true"`
+	BatchReferenceName *string `type:"string"`
 
 	// The name of the link.
 	//
@@ -6133,10 +6171,6 @@ func (s BatchDetachObject) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchDetachObject) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchDetachObject"}
-
-	if s.BatchReferenceName == nil {
-		invalidParams.Add(aws.NewErrParamRequired("BatchReferenceName"))
-	}
 
 	if s.LinkName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LinkName"))
@@ -6361,6 +6395,132 @@ func (s BatchDetachTypedLinkResponse) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchDetachTypedLinkResponse) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Retrieves attributes within a facet that are associated with an object inside
+// an BatchRead operation. For more information, see GetObjectAttributes and
+// BatchReadRequest$Operations.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectAttributes
+type BatchGetObjectAttributes struct {
+	_ struct{} `type:"structure"`
+
+	// List of attribute names whose values will be retrieved.
+	//
+	// AttributeNames is a required field
+	AttributeNames []string `type:"list" required:"true"`
+
+	// Reference that identifies the object whose attributes will be retrieved.
+	//
+	// ObjectReference is a required field
+	ObjectReference *ObjectReference `type:"structure" required:"true"`
+
+	// Identifier for the facet whose attributes will be retrieved. See SchemaFacet
+	// for details.
+	//
+	// SchemaFacet is a required field
+	SchemaFacet *SchemaFacet `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s BatchGetObjectAttributes) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetObjectAttributes) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BatchGetObjectAttributes) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BatchGetObjectAttributes"}
+
+	if s.AttributeNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AttributeNames"))
+	}
+
+	if s.ObjectReference == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
+	}
+
+	if s.SchemaFacet == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
+	}
+	if s.SchemaFacet != nil {
+		if err := s.SchemaFacet.Validate(); err != nil {
+			invalidParams.AddNested("SchemaFacet", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchGetObjectAttributes) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AttributeNames) > 0 {
+		v := s.AttributeNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AttributeNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ObjectReference != nil {
+		v := s.ObjectReference
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ObjectReference", v, metadata)
+	}
+	if s.SchemaFacet != nil {
+		v := s.SchemaFacet
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SchemaFacet", v, metadata)
+	}
+	return nil
+}
+
+// Represents the output of a GetObjectAttributes response operation.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/BatchGetObjectAttributesResponse
+type BatchGetObjectAttributesResponse struct {
+	_ struct{} `type:"structure"`
+
+	// The attribute values that are associated with an object.
+	Attributes []AttributeKeyAndValue `type:"list"`
+}
+
+// String returns the string representation
+func (s BatchGetObjectAttributesResponse) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BatchGetObjectAttributesResponse) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BatchGetObjectAttributesResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Attributes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	return nil
 }
 
@@ -7841,6 +8001,9 @@ func (s BatchReadInput) MarshalFields(e protocol.FieldEncoder) error {
 type BatchReadOperation struct {
 	_ struct{} `type:"structure"`
 
+	// Retrieves attributes within a facet that are associated with an object.
+	GetObjectAttributes *BatchGetObjectAttributes `type:"structure"`
+
 	// Retrieves metadata about an object.
 	GetObjectInformation *BatchGetObjectInformation `type:"structure"`
 
@@ -7901,6 +8064,11 @@ func (s BatchReadOperation) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *BatchReadOperation) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "BatchReadOperation"}
+	if s.GetObjectAttributes != nil {
+		if err := s.GetObjectAttributes.Validate(); err != nil {
+			invalidParams.AddNested("GetObjectAttributes", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.GetObjectInformation != nil {
 		if err := s.GetObjectInformation.Validate(); err != nil {
 			invalidParams.AddNested("GetObjectInformation", err.(aws.ErrInvalidParams))
@@ -7965,6 +8133,12 @@ func (s *BatchReadOperation) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchReadOperation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GetObjectAttributes != nil {
+		v := s.GetObjectAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GetObjectAttributes", v, metadata)
+	}
 	if s.GetObjectInformation != nil {
 		v := s.GetObjectInformation
 
@@ -8120,6 +8294,9 @@ func (s BatchReadOutput) MarshalFields(e protocol.FieldEncoder) error {
 type BatchReadSuccessfulResponse struct {
 	_ struct{} `type:"structure"`
 
+	// Retrieves attributes within a facet that are associated with an object.
+	GetObjectAttributes *BatchGetObjectAttributesResponse `type:"structure"`
+
 	// Retrieves metadata about an object.
 	GetObjectInformation *BatchGetObjectInformationResponse `type:"structure"`
 
@@ -8179,6 +8356,12 @@ func (s BatchReadSuccessfulResponse) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BatchReadSuccessfulResponse) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GetObjectAttributes != nil {
+		v := s.GetObjectAttributes
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GetObjectAttributes", v, metadata)
+	}
 	if s.GetObjectInformation != nil {
 		v := s.GetObjectInformation
 
@@ -10793,6 +10976,8 @@ func (s EnableDirectoryOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A structure that contains Name, ARN, Attributes, Rules, and ObjectTypes.
+// See Facets (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html)
+// for more information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/Facet
 type Facet struct {
 	_ struct{} `type:"structure"`
@@ -11391,6 +11576,161 @@ func (s GetFacetOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Facet", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectAttributesRequest
+type GetObjectAttributesInput struct {
+	_ struct{} `type:"structure"`
+
+	// List of attribute names whose values will be retrieved.
+	//
+	// AttributeNames is a required field
+	AttributeNames []string `type:"list" required:"true"`
+
+	// The consistency level at which to retrieve the attributes on an object.
+	ConsistencyLevel ConsistencyLevel `location:"header" locationName:"x-amz-consistency-level" type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) that is associated with the Directory where
+	// the object resides.
+	//
+	// DirectoryArn is a required field
+	DirectoryArn *string `location:"header" locationName:"x-amz-data-partition" type:"string" required:"true"`
+
+	// Reference that identifies the object whose attributes will be retrieved.
+	//
+	// ObjectReference is a required field
+	ObjectReference *ObjectReference `type:"structure" required:"true"`
+
+	// Identifier for the facet whose attributes will be retrieved. See SchemaFacet
+	// for details.
+	//
+	// SchemaFacet is a required field
+	SchemaFacet *SchemaFacet `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GetObjectAttributesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetObjectAttributesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetObjectAttributesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetObjectAttributesInput"}
+
+	if s.AttributeNames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AttributeNames"))
+	}
+
+	if s.DirectoryArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryArn"))
+	}
+
+	if s.ObjectReference == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ObjectReference"))
+	}
+
+	if s.SchemaFacet == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SchemaFacet"))
+	}
+	if s.SchemaFacet != nil {
+		if err := s.SchemaFacet.Validate(); err != nil {
+			invalidParams.AddNested("SchemaFacet", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetObjectAttributesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if len(s.AttributeNames) > 0 {
+		v := s.AttributeNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AttributeNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.ObjectReference != nil {
+		v := s.ObjectReference
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ObjectReference", v, metadata)
+	}
+	if s.SchemaFacet != nil {
+		v := s.SchemaFacet
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SchemaFacet", v, metadata)
+	}
+	if len(s.ConsistencyLevel) > 0 {
+		v := s.ConsistencyLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-consistency-level", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.DirectoryArn != nil {
+		v := *s.DirectoryArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "x-amz-data-partition", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/GetObjectAttributesResponse
+type GetObjectAttributesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The attributes that are associated with the object.
+	Attributes []AttributeKeyAndValue `type:"list"`
+}
+
+// String returns the string representation
+func (s GetObjectAttributesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetObjectAttributesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetObjectAttributesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetObjectAttributesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Attributes) > 0 {
+		v := s.Attributes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Attributes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -15523,7 +15863,7 @@ func (s TypedAttributeValue) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A range of attribute values.
+// A range of attribute values. For more information, see Range Filters (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/clouddirectory-2016-05-10/TypedAttributeValueRange
 type TypedAttributeValueRange struct {
 	_ struct{} `type:"structure"`
@@ -16999,6 +17339,7 @@ const (
 	BatchWriteExceptionTypeAccessDeniedException            BatchWriteExceptionType = "AccessDeniedException"
 	BatchWriteExceptionTypeInvalidAttachmentException       BatchWriteExceptionType = "InvalidAttachmentException"
 	BatchWriteExceptionTypeNotIndexException                BatchWriteExceptionType = "NotIndexException"
+	BatchWriteExceptionTypeNotNodeException                 BatchWriteExceptionType = "NotNodeException"
 	BatchWriteExceptionTypeIndexedAttributeMissingException BatchWriteExceptionType = "IndexedAttributeMissingException"
 	BatchWriteExceptionTypeObjectAlreadyDetachedException   BatchWriteExceptionType = "ObjectAlreadyDetachedException"
 	BatchWriteExceptionTypeNotPolicyException               BatchWriteExceptionType = "NotPolicyException"

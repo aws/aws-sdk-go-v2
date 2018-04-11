@@ -287,6 +287,8 @@ type IAMAPI interface {
 
 	UpdateOpenIDConnectProviderThumbprintRequest(*iam.UpdateOpenIDConnectProviderThumbprintInput) iam.UpdateOpenIDConnectProviderThumbprintRequest
 
+	UpdateRoleRequest(*iam.UpdateRoleInput) iam.UpdateRoleRequest
+
 	UpdateRoleDescriptionRequest(*iam.UpdateRoleDescriptionInput) iam.UpdateRoleDescriptionRequest
 
 	UpdateSAMLProviderRequest(*iam.UpdateSAMLProviderInput) iam.UpdateSAMLProviderRequest

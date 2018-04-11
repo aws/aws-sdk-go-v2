@@ -248,6 +248,9 @@ func (r BatchWriteItemRequest) Send() (*BatchWriteItemOutput, error) {
 //    BatchWriteItem request. For example, you cannot put and delete the same
 //    item in the same BatchWriteItem request.
 //
+//    *  Your request contains at least two items with identical hash and range
+//    keys (which essentially is two put operations).
+//
 //    * There are more than 25 requests in the batch.
 //
 //    * Any individual item in a batch exceeds 400 KB.
@@ -742,8 +745,17 @@ func (r DescribeContinuousBackupsRequest) Send() (*DescribeContinuousBackupsOutp
 // DescribeContinuousBackupsRequest returns a request value for making API operation for
 // Amazon DynamoDB.
 //
-// Checks the status of the backup restore settings on the specified table.
-// If backups are enabled, ContinuousBackupsStatus will bet set to ENABLED.
+// Checks the status of continuous backups and point in time recovery on the
+// specified table. Continuous backups are ENABLED on all tables at table creation.
+// If point in time recovery is enabled, PointInTimeRecoveryStatus will be set
+// to ENABLED.
+//
+// Once continuous backups and point in time recovery are enabled, you can restore
+// to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.
+//
+// LatestRestorableDateTime is typically 5 minutes before the current time.
+// You can restore your table to any point in time during the last 35 days with
+// a 1-minute granularity.
 //
 // You can call DescribeContinuousBackups at a maximum rate of 10 times per
 // second.
@@ -1626,7 +1638,7 @@ func (r RestoreTableFromBackupRequest) Send() (*RestoreTableFromBackupOutput, er
 // Amazon DynamoDB.
 //
 // Creates a new table from an existing backup. Any number of users can execute
-// up to 10 concurrent restores in a given account.
+// up to 4 concurrent restores (any type of restore) in a given account.
 //
 // You can call RestoreTableFromBackup at a maximum rate of 10 times per second.
 //
@@ -1668,6 +1680,76 @@ func (c *DynamoDB) RestoreTableFromBackupRequest(input *RestoreTableFromBackupIn
 	output.responseMetadata = aws.Response{Request: req}
 
 	return RestoreTableFromBackupRequest{Request: req, Input: input, Copy: c.RestoreTableFromBackupRequest}
+}
+
+const opRestoreTableToPointInTime = "RestoreTableToPointInTime"
+
+// RestoreTableToPointInTimeRequest is a API request type for the RestoreTableToPointInTime API operation.
+type RestoreTableToPointInTimeRequest struct {
+	*aws.Request
+	Input *RestoreTableToPointInTimeInput
+	Copy  func(*RestoreTableToPointInTimeInput) RestoreTableToPointInTimeRequest
+}
+
+// Send marshals and sends the RestoreTableToPointInTime API request.
+func (r RestoreTableToPointInTimeRequest) Send() (*RestoreTableToPointInTimeOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RestoreTableToPointInTimeOutput), nil
+}
+
+// RestoreTableToPointInTimeRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// Restores the specified table to the specified point in time within EarliestRestorableDateTime
+// and LatestRestorableDateTime. You can restore your table to any point in
+// time during the last 35 days with a 1-minute granularity. Any number of users
+// can execute up to 4 concurrent restores (any type of restore) in a given
+// account.
+//
+// You must manually set up the following on the restored table:
+//
+//    * Auto scaling policies
+//
+//    * IAM policies
+//
+//    * Cloudwatch metrics and alarms
+//
+//    * Tags
+//
+//    * Stream settings
+//
+//    * Time to Live (TTL) settings
+//
+//    * Point in time recovery settings
+//
+//    // Example sending a request using the RestoreTableToPointInTimeRequest method.
+//    req := client.RestoreTableToPointInTimeRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTime
+func (c *DynamoDB) RestoreTableToPointInTimeRequest(input *RestoreTableToPointInTimeInput) RestoreTableToPointInTimeRequest {
+	op := &aws.Operation{
+		Name:       opRestoreTableToPointInTime,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RestoreTableToPointInTimeInput{}
+	}
+
+	output := &RestoreTableToPointInTimeOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RestoreTableToPointInTimeRequest{Request: req, Input: input, Copy: c.RestoreTableToPointInTimeRequest}
 }
 
 const opScan = "Scan"
@@ -1913,6 +1995,67 @@ func (c *DynamoDB) UntagResourceRequest(input *UntagResourceInput) UntagResource
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
+const opUpdateContinuousBackups = "UpdateContinuousBackups"
+
+// UpdateContinuousBackupsRequest is a API request type for the UpdateContinuousBackups API operation.
+type UpdateContinuousBackupsRequest struct {
+	*aws.Request
+	Input *UpdateContinuousBackupsInput
+	Copy  func(*UpdateContinuousBackupsInput) UpdateContinuousBackupsRequest
+}
+
+// Send marshals and sends the UpdateContinuousBackups API request.
+func (r UpdateContinuousBackupsRequest) Send() (*UpdateContinuousBackupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateContinuousBackupsOutput), nil
+}
+
+// UpdateContinuousBackupsRequest returns a request value for making API operation for
+// Amazon DynamoDB.
+//
+// UpdateContinuousBackups enables or disables point in time recovery for the
+// specified table. A successful UpdateContinuousBackups call returns the current
+// ContinuousBackupsDescription. Continuous backups are ENABLED on all tables
+// at table creation. If point in time recovery is enabled, PointInTimeRecoveryStatus
+// will be set to ENABLED.
+//
+// Once continuous backups and point in time recovery are enabled, you can restore
+// to any point in time within EarliestRestorableDateTime and LatestRestorableDateTime.
+//
+// LatestRestorableDateTime is typically 5 minutes before the current time.
+// You can restore your table to any point in time during the last 35 days with
+// a 1-minute granularity.
+//
+//    // Example sending a request using the UpdateContinuousBackupsRequest method.
+//    req := client.UpdateContinuousBackupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContinuousBackups
+func (c *DynamoDB) UpdateContinuousBackupsRequest(input *UpdateContinuousBackupsInput) UpdateContinuousBackupsRequest {
+	op := &aws.Operation{
+		Name:       opUpdateContinuousBackups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateContinuousBackupsInput{}
+	}
+
+	output := &UpdateContinuousBackupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateContinuousBackupsRequest{Request: req, Input: input, Copy: c.UpdateContinuousBackupsRequest}
+}
+
 const opUpdateGlobalTable = "UpdateGlobalTable"
 
 // UpdateGlobalTableRequest is a API request type for the UpdateGlobalTable API operation.
@@ -1938,8 +2081,7 @@ func (r UpdateGlobalTableRequest) Send() (*UpdateGlobalTableOutput, error) {
 // Adds or removes replicas in the specified global table. The global table
 // must already exist to be able to use this operation. Any replica to be added
 // must be empty, must have the same name as the global table, must have the
-// same key schema, must have DynamoDB Streams enabled, and cannot have any
-// local secondary indexes (LSIs).
+// same key schema, and must have DynamoDB Streams enabled.
 //
 // Although you can use UpdateGlobalTable to add replicas and remove replicas
 // in a single request, for simplicity we recommend that you issue separate
@@ -3022,8 +3164,8 @@ func (s ConsumedCapacity) GoString() string {
 	return s.String()
 }
 
-// Represents the backup and restore settings on the table when the backup was
-// created.
+// Represents the continuous backups and point in time recovery settings on
+// the table.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ContinuousBackupsDescription
 type ContinuousBackupsDescription struct {
 	_ struct{} `type:"structure"`
@@ -3032,6 +3174,9 @@ type ContinuousBackupsDescription struct {
 	//
 	// ContinuousBackupsStatus is a required field
 	ContinuousBackupsStatus ContinuousBackupsStatus `type:"string" required:"true" enum:"true"`
+
+	// The description of the point in time recovery settings applied to the table.
+	PointInTimeRecoveryDescription *PointInTimeRecoveryDescription `type:"structure"`
 }
 
 // String returns the string representation
@@ -4097,8 +4242,8 @@ func (s DescribeBackupOutput) SDKResponseMetadata() aws.Response {
 type DescribeContinuousBackupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the table for which the customer wants to check the backup and restore
-	// settings.
+	// Name of the table for which the customer wants to check the continuous backups
+	// and point in time recovery settings.
 	//
 	// TableName is a required field
 	TableName *string `min:"3" type:"string" required:"true"`
@@ -5752,6 +5897,76 @@ func (s LocalSecondaryIndexInfo) GoString() string {
 	return s.String()
 }
 
+// The description of the point in time settings applied to the table.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PointInTimeRecoveryDescription
+type PointInTimeRecoveryDescription struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the earliest point in time you can restore your table to. It is
+	// equal to the maximum of point in time recovery enabled time and CurrentTime
+	// - PointInTimeRecoveryPeriod.
+	EarliestRestorableDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// LatestRestorableDateTime is 5 minutes from now and there is a +/- 1 minute
+	// fuzziness on the restore times.
+	LatestRestorableDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The current state of point in time recovery:
+	//
+	//    * ENABLING - Point in time recovery is being enabled.
+	//
+	//    * ENABLED - Point in time recovery is enabled.
+	//
+	//    * DISABLED - Point in time recovery is disabled.
+	PointInTimeRecoveryStatus PointInTimeRecoveryStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s PointInTimeRecoveryDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PointInTimeRecoveryDescription) GoString() string {
+	return s.String()
+}
+
+// Represents the settings used to enable point in time recovery.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/PointInTimeRecoverySpecification
+type PointInTimeRecoverySpecification struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates whether point in time recovery is enabled (true) or disabled (false)
+	// on the table.
+	//
+	// PointInTimeRecoveryEnabled is a required field
+	PointInTimeRecoveryEnabled *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s PointInTimeRecoverySpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PointInTimeRecoverySpecification) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PointInTimeRecoverySpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PointInTimeRecoverySpecification"}
+
+	if s.PointInTimeRecoveryEnabled == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PointInTimeRecoveryEnabled"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Represents attributes that are copied (projected) from the table into an
 // index. These are in addition to the primary key attributes and index key
 // attributes, which are automatically projected.
@@ -6406,9 +6621,8 @@ type QueryInput struct {
 	//
 	// Items with the same partition key value are stored in sorted order by sort
 	// key. If the sort key data type is Number, the results are stored in numeric
-	// order. For type String, the results are stored in order of ASCII character
-	// code values. For type Binary, DynamoDB treats each byte of the binary data
-	// as unsigned.
+	// order. For type String, the results are stored in order of UTF-8 bytes. For
+	// type Binary, DynamoDB treats each byte of the binary data as unsigned.
 	//
 	// If ScanIndexForward is true, DynamoDB returns the results in the order in
 	// which they are stored (by sort key value). This is the default behavior.
@@ -6773,6 +6987,87 @@ func (s RestoreTableFromBackupOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RestoreTableFromBackupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTimeInput
+type RestoreTableToPointInTimeInput struct {
+	_ struct{} `type:"structure"`
+
+	// Time in the past to restore the table to.
+	RestoreDateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Name of the source table that is being restored.
+	//
+	// SourceTableName is a required field
+	SourceTableName *string `min:"3" type:"string" required:"true"`
+
+	// The name of the new table to which it must be restored to.
+	//
+	// TargetTableName is a required field
+	TargetTableName *string `min:"3" type:"string" required:"true"`
+
+	// Restore the table to the latest possible time. LatestRestorableDateTime is
+	// typically 5 minutes before the current time.
+	UseLatestRestorableTime *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s RestoreTableToPointInTimeInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestoreTableToPointInTimeInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RestoreTableToPointInTimeInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RestoreTableToPointInTimeInput"}
+
+	if s.SourceTableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SourceTableName"))
+	}
+	if s.SourceTableName != nil && len(*s.SourceTableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("SourceTableName", 3))
+	}
+
+	if s.TargetTableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetTableName"))
+	}
+	if s.TargetTableName != nil && len(*s.TargetTableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetTableName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/RestoreTableToPointInTimeOutput
+type RestoreTableToPointInTimeOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Represents the properties of a table.
+	TableDescription *TableDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s RestoreTableToPointInTimeOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RestoreTableToPointInTimeOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RestoreTableToPointInTimeOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -7815,6 +8110,83 @@ func (s UntagResourceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContinuousBackupsInput
+type UpdateContinuousBackupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Represents the settings used to enable point in time recovery.
+	//
+	// PointInTimeRecoverySpecification is a required field
+	PointInTimeRecoverySpecification *PointInTimeRecoverySpecification `type:"structure" required:"true"`
+
+	// The name of the table.
+	//
+	// TableName is a required field
+	TableName *string `min:"3" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateContinuousBackupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateContinuousBackupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateContinuousBackupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateContinuousBackupsInput"}
+
+	if s.PointInTimeRecoverySpecification == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PointInTimeRecoverySpecification"))
+	}
+
+	if s.TableName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TableName"))
+	}
+	if s.TableName != nil && len(*s.TableName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("TableName", 3))
+	}
+	if s.PointInTimeRecoverySpecification != nil {
+		if err := s.PointInTimeRecoverySpecification.Validate(); err != nil {
+			invalidParams.AddNested("PointInTimeRecoverySpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateContinuousBackupsOutput
+type UpdateContinuousBackupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Represents the continuous backups and point in time recovery settings on
+	// the table.
+	ContinuousBackupsDescription *ContinuousBackupsDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateContinuousBackupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateContinuousBackupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateContinuousBackupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents the new provisioned throughput settings to be applied to a global
 // secondary index.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/UpdateGlobalSecondaryIndexAction
@@ -8642,6 +9014,23 @@ func (enum KeyType) MarshalValue() (string, error) {
 }
 
 func (enum KeyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PointInTimeRecoveryStatus string
+
+// Enum values for PointInTimeRecoveryStatus
+const (
+	PointInTimeRecoveryStatusEnabled  PointInTimeRecoveryStatus = "ENABLED"
+	PointInTimeRecoveryStatusDisabled PointInTimeRecoveryStatus = "DISABLED"
+)
+
+func (enum PointInTimeRecoveryStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PointInTimeRecoveryStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

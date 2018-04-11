@@ -30,9 +30,9 @@ func (r AssociateRoleToGroupRequest) Send() (*AssociateRoleToGroupOutput, error)
 // AssociateRoleToGroupRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Associates a role with a group. The role will be used by the AWS Greengrass
-// core in order to access AWS cloud services. The role's permissions will allow
-// Greengrass core Lambda functions to perform actions against the cloud.
+// Associates a role with a group. Your AWS Greengrass core will use the role
+// to access AWS cloud services. The role's permissions should allow Greengrass
+// core Lambda functions to perform actions against the cloud.
 //
 //    // Example sending a request using the AssociateRoleToGroupRequest method.
 //    req := client.AssociateRoleToGroupRequest(params)
@@ -82,10 +82,10 @@ func (r AssociateServiceRoleToAccountRequest) Send() (*AssociateServiceRoleToAcc
 // AssociateServiceRoleToAccountRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Associates a role which is used by AWS Greengrass. AWS Greengrass uses the
-// role to access your Lambda functions and AWS IoT resources. This is necessary
-// for deployments to succeed. It needs to have minimum permissions in policy
-// ``AWSGreengrassResourceAccessRolePolicy``
+// Associates a role with your account. AWS Greengrass will use the role to
+// access your Lambda functions and AWS IoT resources. This is necessary for
+// deployments to succeed. The role must have at least minimum permissions in
+// the policy ''AWSGreengrassResourceAccessRolePolicy''.
 //
 //    // Example sending a request using the AssociateServiceRoleToAccountRequest method.
 //    req := client.AssociateServiceRoleToAccountRequest(params)
@@ -135,9 +135,9 @@ func (r CreateCoreDefinitionRequest) Send() (*CreateCoreDefinitionOutput, error)
 // CreateCoreDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Creates a core definition. You may optionally provide the initial version
-// of the core definition or use ''CreateCoreDefinitionVersion'' at a later
-// time. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+// Creates a core definition. You may provide the initial version of the core
+// definition now or use ''CreateCoreDefinitionVersion'' at a later time. AWS
+// Greengrass groups must each contain exactly one AWS Greengrass core.
 //
 //    // Example sending a request using the CreateCoreDefinitionRequest method.
 //    req := client.CreateCoreDefinitionRequest(params)
@@ -188,7 +188,7 @@ func (r CreateCoreDefinitionVersionRequest) Send() (*CreateCoreDefinitionVersion
 // AWS Greengrass.
 //
 // Creates a version of a core definition that has already been defined. AWS
-// Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+// Greengrass groups must each contain exactly one AWS Greengrass core.
 //
 //    // Example sending a request using the CreateCoreDefinitionVersionRequest method.
 //    req := client.CreateCoreDefinitionVersionRequest(params)
@@ -288,9 +288,8 @@ func (r CreateDeviceDefinitionRequest) Send() (*CreateDeviceDefinitionOutput, er
 // CreateDeviceDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Creates a device definition. You may optinally provide the initial version
-// of the device definition or use ``CreateDeviceDefinitionVersion`` at a later
-// time.
+// Creates a device definition. You may provide the initial version of the device
+// definition now or use ''CreateDeviceDefinitionVersion'' at a later time.
 //
 //    // Example sending a request using the CreateDeviceDefinitionRequest method.
 //    req := client.CreateDeviceDefinitionRequest(params)
@@ -393,7 +392,7 @@ func (r CreateFunctionDefinitionRequest) Send() (*CreateFunctionDefinitionOutput
 // Creates a Lambda function definition which contains a list of Lambda functions
 // and their configurations to be used in a group. You can create an initial
 // version of the definition by providing a list of Lambda functions and their
-// configurations now, or use ``CreateFunctionDefinitionVersion`` later.
+// configurations now, or use ''CreateFunctionDefinitionVersion'' later.
 //
 //    // Example sending a request using the CreateFunctionDefinitionRequest method.
 //    req := client.CreateFunctionDefinitionRequest(params)
@@ -443,7 +442,7 @@ func (r CreateFunctionDefinitionVersionRequest) Send() (*CreateFunctionDefinitio
 // CreateFunctionDefinitionVersionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Create a version of a Lambda function definition that has already been defined.
+// Creates a version of a Lambda function definition that has already been defined.
 //
 //    // Example sending a request using the CreateFunctionDefinitionVersionRequest method.
 //    req := client.CreateFunctionDefinitionVersionRequest(params)
@@ -493,8 +492,8 @@ func (r CreateGroupRequest) Send() (*CreateGroupOutput, error) {
 // CreateGroupRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Creates a group. You may optionally provide the initial version of the group
-// or use ''CreateGroupVersion'' at a later time.
+// Creates a group. You may provide the initial version of the group or use
+// ''CreateGroupVersion'' at a later time.
 //
 //    // Example sending a request using the CreateGroupRequest method.
 //    req := client.CreateGroupRequest(params)
@@ -645,9 +644,8 @@ func (r CreateLoggerDefinitionRequest) Send() (*CreateLoggerDefinitionOutput, er
 // CreateLoggerDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Creates a logger definition. You may optionally provide the initial version
-// of the logger definition or use ``CreateLoggerDefinitionVersion`` at a later
-// time.
+// Creates a logger definition. You may provide the initial version of the logger
+// definition now or use ''CreateLoggerDefinitionVersion'' at a later time.
 //
 //    // Example sending a request using the CreateLoggerDefinitionRequest method.
 //    req := client.CreateLoggerDefinitionRequest(params)
@@ -749,7 +747,7 @@ func (r CreateResourceDefinitionRequest) Send() (*CreateResourceDefinitionOutput
 //
 // Creates a resource definition which contains a list of resources to be used
 // in a group. You can create an initial version of the definition by providing
-// a list of resources now, or use ``CreateResourceDefinitionVersion`` later.
+// a list of resources now, or use ''CreateResourceDefinitionVersion'' later.
 //
 //    // Example sending a request using the CreateResourceDefinitionRequest method.
 //    req := client.CreateResourceDefinitionRequest(params)
@@ -799,7 +797,7 @@ func (r CreateResourceDefinitionVersionRequest) Send() (*CreateResourceDefinitio
 // CreateResourceDefinitionVersionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Create a version of a resource definition that has already been defined.
+// Creates a version of a resource definition that has already been defined.
 //
 //    // Example sending a request using the CreateResourceDefinitionVersionRequest method.
 //    req := client.CreateResourceDefinitionVersionRequest(params)
@@ -849,8 +847,10 @@ func (r CreateSoftwareUpdateJobRequest) Send() (*CreateSoftwareUpdateJobOutput, 
 // CreateSoftwareUpdateJobRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Creates an Iot Job that will trigger your Greengrass Cores to update the
-// software they are running.
+// Creates a software update for a core or group of cores (specified as an IoT
+// thing group.) Use this to update the OTA Agent as well as the Greengrass
+// core software. It makes use of the IoT Jobs feature which provides additional
+// commands to manage a Greengrass core software update job.
 //
 //    // Example sending a request using the CreateSoftwareUpdateJobRequest method.
 //    req := client.CreateSoftwareUpdateJobRequest(params)
@@ -900,8 +900,8 @@ func (r CreateSubscriptionDefinitionRequest) Send() (*CreateSubscriptionDefiniti
 // CreateSubscriptionDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Creates a subscription definition. You may optionally provide the initial
-// version of the subscription definition or use ``CreateSubscriptionDefinitionVersion``
+// Creates a subscription definition. You may provide the initial version of
+// the subscription definition now or use ''CreateSubscriptionDefinitionVersion''
 // at a later time.
 //
 //    // Example sending a request using the CreateSubscriptionDefinitionRequest method.
@@ -1002,8 +1002,7 @@ func (r DeleteCoreDefinitionRequest) Send() (*DeleteCoreDefinitionOutput, error)
 // DeleteCoreDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Deletes a core definition. The core definition must not have been used in
-// a deployment.
+// Deletes a core definition.
 //
 //    // Example sending a request using the DeleteCoreDefinitionRequest method.
 //    req := client.DeleteCoreDefinitionRequest(params)
@@ -1053,8 +1052,7 @@ func (r DeleteDeviceDefinitionRequest) Send() (*DeleteDeviceDefinitionOutput, er
 // DeleteDeviceDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Deletes a device definition. The device definition must not have been used
-// in a deployment.
+// Deletes a device definition.
 //
 //    // Example sending a request using the DeleteDeviceDefinitionRequest method.
 //    req := client.DeleteDeviceDefinitionRequest(params)
@@ -1104,8 +1102,7 @@ func (r DeleteFunctionDefinitionRequest) Send() (*DeleteFunctionDefinitionOutput
 // DeleteFunctionDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Deletes a Lambda function definition. The Lambda function definition must
-// not have been used in a deployment.
+// Deletes a Lambda function definition.
 //
 //    // Example sending a request using the DeleteFunctionDefinitionRequest method.
 //    req := client.DeleteFunctionDefinitionRequest(params)
@@ -1155,7 +1152,7 @@ func (r DeleteGroupRequest) Send() (*DeleteGroupOutput, error) {
 // DeleteGroupRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Deletes a group. The group must not have been used in deployment.
+// Deletes a group.
 //
 //    // Example sending a request using the DeleteGroupRequest method.
 //    req := client.DeleteGroupRequest(params)
@@ -1205,8 +1202,7 @@ func (r DeleteLoggerDefinitionRequest) Send() (*DeleteLoggerDefinitionOutput, er
 // DeleteLoggerDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Deletes a logger definition. The logger definition must not have been used
-// in a deployment.
+// Deletes a logger definition.
 //
 //    // Example sending a request using the DeleteLoggerDefinitionRequest method.
 //    req := client.DeleteLoggerDefinitionRequest(params)
@@ -1306,8 +1302,7 @@ func (r DeleteSubscriptionDefinitionRequest) Send() (*DeleteSubscriptionDefiniti
 // DeleteSubscriptionDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Deletes a subscription definition. The subscription definition must not have
-// been used in a deployment.
+// Deletes a subscription definition.
 //
 //    // Example sending a request using the DeleteSubscriptionDefinitionRequest method.
 //    req := client.DeleteSubscriptionDefinitionRequest(params)
@@ -1407,7 +1402,7 @@ func (r DisassociateServiceRoleFromAccountRequest) Send() (*DisassociateServiceR
 // DisassociateServiceRoleFromAccountRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Disassociates the service role from the account. Without a service role,
+// Disassociates the service role from your account. Without a service role,
 // deployments will not work.
 //
 //    // Example sending a request using the DisassociateServiceRoleFromAccountRequest method.
@@ -1808,7 +1803,7 @@ func (r GetFunctionDefinitionRequest) Send() (*GetFunctionDefinitionOutput, erro
 // GetFunctionDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Retrieves information about a Lambda function definition, such as its creation
+// Retrieves information about a Lambda function definition, including its creation
 // time and latest version.
 //
 //    // Example sending a request using the GetFunctionDefinitionRequest method.
@@ -1859,7 +1854,7 @@ func (r GetFunctionDefinitionVersionRequest) Send() (*GetFunctionDefinitionVersi
 // GetFunctionDefinitionVersionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Retrieves information about a Lambda function definition version, such as
+// Retrieves information about a Lambda function definition version, including
 // which Lambda functions are included in the version and their configurations.
 //
 //    // Example sending a request using the GetFunctionDefinitionVersionRequest method.
@@ -2210,8 +2205,8 @@ func (r GetResourceDefinitionRequest) Send() (*GetResourceDefinitionOutput, erro
 // GetResourceDefinitionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Retrieves information about a resource definition, such as its creation time
-// and latest version.
+// Retrieves information about a resource definition, including its creation
+// time and latest version.
 //
 //    // Example sending a request using the GetResourceDefinitionRequest method.
 //    req := client.GetResourceDefinitionRequest(params)
@@ -2261,7 +2256,7 @@ func (r GetResourceDefinitionVersionRequest) Send() (*GetResourceDefinitionVersi
 // GetResourceDefinitionVersionRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Retrieves information about a resource definition version, such as which
+// Retrieves information about a resource definition version, including which
 // resources are included in the version.
 //
 //    // Example sending a request using the GetResourceDefinitionVersionRequest method.
@@ -2312,7 +2307,7 @@ func (r GetServiceRoleForAccountRequest) Send() (*GetServiceRoleForAccountOutput
 // GetServiceRoleForAccountRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Retrieves the service role that is attached to the account.
+// Retrieves the service role that is attached to your account.
 //
 //    // Example sending a request using the GetServiceRoleForAccountRequest method.
 //    req := client.GetServiceRoleForAccountRequest(params)
@@ -2462,7 +2457,7 @@ func (r ListCoreDefinitionVersionsRequest) Send() (*ListCoreDefinitionVersionsOu
 // ListCoreDefinitionVersionsRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Lists versions of a core definition.
+// Lists the versions of a core definition.
 //
 //    // Example sending a request using the ListCoreDefinitionVersionsRequest method.
 //    req := client.ListCoreDefinitionVersionsRequest(params)
@@ -2862,7 +2857,7 @@ func (r ListGroupVersionsRequest) Send() (*ListGroupVersionsOutput, error) {
 // ListGroupVersionsRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// List the versions of a group.
+// Lists the versions of a group.
 //
 //    // Example sending a request using the ListGroupVersionsRequest method.
 //    req := client.ListGroupVersionsRequest(params)
@@ -3564,7 +3559,7 @@ func (r UpdateGroupCertificateConfigurationRequest) Send() (*UpdateGroupCertific
 // UpdateGroupCertificateConfigurationRequest returns a request value for making API operation for
 // AWS Greengrass.
 //
-// Updates the Cert expiry time for a group.
+// Updates the Certificate expiry time for a group.
 //
 //    // Example sending a request using the UpdateGroupCertificateConfigurationRequest method.
 //    req := client.UpdateGroupCertificateConfigurationRequest(params)
@@ -3749,7 +3744,7 @@ type AssociateRoleToGroupInput struct {
 	// GroupId is a required field
 	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
 
-	// Role arn you wish to associate with this group.
+	// The ARN of the role you wish to associate with this group.
 	RoleArn *string `type:"string"`
 }
 
@@ -3802,7 +3797,8 @@ type AssociateRoleToGroupOutput struct {
 
 	responseMetadata aws.Response
 
-	// Time the role arn was associated to your group.
+	// The time, in milliseconds since the epoch, when the role ARN was associated
+	// with the group.
 	AssociatedAt *string `type:"string"`
 }
 
@@ -3836,7 +3832,7 @@ func (s AssociateRoleToGroupOutput) MarshalFields(e protocol.FieldEncoder) error
 type AssociateServiceRoleToAccountInput struct {
 	_ struct{} `type:"structure"`
 
-	// Role arn you wish to associate with this account.
+	// The ARN of the service role you wish to associate with your account.
 	RoleArn *string `type:"string"`
 }
 
@@ -3869,7 +3865,7 @@ type AssociateServiceRoleToAccountOutput struct {
 
 	responseMetadata aws.Response
 
-	// Time when the service role was associated to the account.
+	// The time when the service role was associated with the account.
 	AssociatedAt *string `type:"string"`
 }
 
@@ -3899,21 +3895,21 @@ func (s AssociateServiceRoleToAccountOutput) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
-// Connectivity Info
+// Information about a Greengrass core's connectivity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ConnectivityInfo
 type ConnectivityInfo struct {
 	_ struct{} `type:"structure"`
 
-	// Endpoint for the GGC. Can be an IP address or DNS.
+	// The endpoint for the Greengrass core. Can be an IP address or DNS.
 	HostAddress *string `type:"string"`
 
-	// Element Id for this entry in the list.
+	// The ID of the connectivity information.
 	Id *string `type:"string"`
 
 	// Metadata for this endpoint.
 	Metadata *string `type:"string"`
 
-	// Port of the GGC. Usually 8883.
+	// The port of the Greengrass core. Usually 8883.
 	PortNumber *int64 `type:"integer"`
 }
 
@@ -3956,22 +3952,21 @@ func (s ConnectivityInfo) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on the core
+// Information about a core.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Core
 type Core struct {
 	_ struct{} `type:"structure"`
 
-	// Certificate arn of the core.
+	// The ARN of the certificate associated with the core.
 	CertificateArn *string `type:"string"`
 
-	// Element Id for this entry in the list.
+	// The ID of the core.
 	Id *string `type:"string"`
 
-	// If true, the local shadow value automatically syncs with the cloud's shadow
-	// state.
+	// If true, the core's local shadow is automatically synced with the cloud.
 	SyncShadow *bool `type:"boolean"`
 
-	// Thing arn of the core.
+	// The ARN of the thing which is the core.
 	ThingArn *string `type:"string"`
 }
 
@@ -4014,12 +4009,12 @@ func (s Core) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on core definition version
+// Information about a core definition version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CoreDefinitionVersion
 type CoreDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
-	// Cores in the definition version.
+	// A list of cores in the core definition version.
 	Cores []Core `type:"list"`
 }
 
@@ -4056,7 +4051,7 @@ type CreateCoreDefinitionInput struct {
 
 	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
 
-	// Information on core definition version
+	// Information about a core definition version.
 	InitialVersion *CoreDefinitionVersion `type:"structure"`
 
 	Name *string `type:"string"`
@@ -4306,24 +4301,24 @@ func (s CreateCoreDefinitionVersionOutput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Information on Deployment
+// Information about a deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateDeploymentRequest
 type CreateDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
 	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
 
-	// Id of the deployment if you wish to redeploy a previous deployment.
+	// The ID of the deployment if you wish to redeploy a previous deployment.
 	DeploymentId *string `type:"string"`
 
-	// Type of deployment. When used in CreateDeployment, only NewDeployment and
-	// Redeployment are valid.
+	// The type of deployment. When used in ''CreateDeployment'', only ''NewDeployment''
+	// and ''Redeployment'' are valid.
 	DeploymentType DeploymentType `type:"string" enum:"true"`
 
 	// GroupId is a required field
 	GroupId *string `location:"uri" locationName:"GroupId" type:"string" required:"true"`
 
-	// Group Version you wish to deploy.
+	// The ID of the group version to be deployed.
 	GroupVersionId *string `type:"string"`
 }
 
@@ -4394,10 +4389,10 @@ type CreateDeploymentOutput struct {
 
 	responseMetadata aws.Response
 
-	// The arn of the deployment.
+	// The ARN of the deployment.
 	DeploymentArn *string `type:"string"`
 
-	// The id of the deployment.
+	// The ID of the deployment.
 	DeploymentId *string `type:"string"`
 }
 
@@ -4439,7 +4434,7 @@ type CreateDeviceDefinitionInput struct {
 
 	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
 
-	// Information on device definition version
+	// Information about a device definition version.
 	InitialVersion *DeviceDefinitionVersion `type:"structure"`
 
 	Name *string `type:"string"`
@@ -4695,7 +4690,7 @@ type CreateFunctionDefinitionInput struct {
 
 	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
 
-	// Information on the function definition version
+	// Information about a function definition version.
 	InitialVersion *FunctionDefinitionVersion `type:"structure"`
 
 	Name *string `type:"string"`
@@ -5004,7 +4999,7 @@ type CreateGroupCertificateAuthorityOutput struct {
 
 	responseMetadata aws.Response
 
-	// Arn of the group certificate authority.
+	// The ARN of the group certificate authority.
 	GroupCertificateAuthorityArn *string `type:"string"`
 }
 
@@ -5040,7 +5035,7 @@ type CreateGroupInput struct {
 
 	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
 
-	// Information on group version
+	// Information about a group version.
 	InitialVersion *GroupVersion `type:"structure"`
 
 	Name *string `type:"string"`
@@ -5330,7 +5325,7 @@ type CreateLoggerDefinitionInput struct {
 
 	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
 
-	// Information on logger definition version
+	// Information about a logger definition version.
 	InitialVersion *LoggerDefinitionVersion `type:"structure"`
 
 	Name *string `type:"string"`
@@ -5586,7 +5581,7 @@ type CreateResourceDefinitionInput struct {
 
 	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
 
-	// Information on resource definition version
+	// Information about a resource definition version.
 	InitialVersion *ResourceDefinitionVersion `type:"structure"`
 
 	Name *string `type:"string"`
@@ -5836,7 +5831,7 @@ func (s CreateResourceDefinitionVersionOutput) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
-// Request for the CreateSoftwareUpdateJob API
+// Request for the CreateSoftwareUpdateJob API.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/CreateSoftwareUpdateJobRequest
 type CreateSoftwareUpdateJobInput struct {
 	_ struct{} `type:"structure"`
@@ -5847,20 +5842,21 @@ type CreateSoftwareUpdateJobInput struct {
 	// towards the update artifact.
 	S3UrlSignerRole *string `type:"string"`
 
-	// The piece of software on the Greengrass Core that will be updated.
+	// The piece of software on the Greengrass core that will be updated.
 	SoftwareToUpdate SoftwareToUpdate `type:"string" enum:"true"`
 
 	// The minimum level of log statements that should be logged by the OTA Agent
 	// during an update.
 	UpdateAgentLogLevel UpdateAgentLogLevel `type:"string" enum:"true"`
 
-	// The target arns that this update will be applied to.
+	// The ARNs of the targets (IoT things or IoT thing groups) that this update
+	// will be applied to.
 	UpdateTargets []string `type:"list"`
 
-	// The architecture of the Cores in the targets of an update
+	// The architecture of the cores which are the targets of an update.
 	UpdateTargetsArchitecture UpdateTargetsArchitecture `type:"string" enum:"true"`
 
-	// The operating system of the Cores in the targets of an update
+	// The operating system of the cores which are the targets of an update.
 	UpdateTargetsOperatingSystem UpdateTargetsOperatingSystem `type:"string" enum:"true"`
 }
 
@@ -5935,10 +5931,10 @@ type CreateSoftwareUpdateJobOutput struct {
 
 	responseMetadata aws.Response
 
-	// The Iot Job Arn corresponding to this update.
+	// The IoT Job ARN corresponding to this update.
 	IotJobArn *string `type:"string"`
 
-	// The Iot Job Id corresponding to this update.
+	// The IoT Job Id corresponding to this update.
 	IotJobId *string `type:"string"`
 }
 
@@ -5980,7 +5976,7 @@ type CreateSubscriptionDefinitionInput struct {
 
 	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
 
-	// Information on subscription definition version
+	// Information about a subscription definition version.
 	InitialVersion *SubscriptionDefinitionVersion `type:"structure"`
 
 	Name *string `type:"string"`
@@ -6230,30 +6226,30 @@ func (s CreateSubscriptionDefinitionVersionOutput) MarshalFields(e protocol.Fiel
 	return nil
 }
 
-// Information on the Definition
+// Information about a definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DefinitionInformation
 type DefinitionInformation struct {
 	_ struct{} `type:"structure"`
 
-	// Arn of the definition.
+	// The ARN of the definition.
 	Arn *string `type:"string"`
 
-	// Timestamp of when the definition was created.
+	// The time, in milliseconds since the epoch, when the definition was created.
 	CreationTimestamp *string `type:"string"`
 
-	// Id of the definition.
+	// The ID of the definition.
 	Id *string `type:"string"`
 
-	// Last updated timestamp of the definition.
+	// The time, in milliseconds since the epoch, when the definition was last updated.
 	LastUpdatedTimestamp *string `type:"string"`
 
-	// Last version of the definition.
+	// The latest version of the definition.
 	LatestVersion *string `type:"string"`
 
-	// Latest version arn of the definition.
+	// The ARN of the latest version of the definition.
 	LatestVersionArn *string `type:"string"`
 
-	// Name of the definition.
+	// The name of the definition.
 	Name *string `type:"string"`
 }
 
@@ -6818,24 +6814,24 @@ func (s DeleteSubscriptionDefinitionOutput) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
-// Information on the deployment
+// Information about a deployment.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Deployment
 type Deployment struct {
 	_ struct{} `type:"structure"`
 
-	// Timestamp when the deployment was created.
+	// The time, in milliseconds since the epoch, when the deployment was created.
 	CreatedAt *string `type:"string"`
 
-	// Arn of the deployment.
+	// The ARN of the deployment.
 	DeploymentArn *string `type:"string"`
 
-	// Id of the deployment.
+	// The ID of the deployment.
 	DeploymentId *string `type:"string"`
 
-	// The type of deployment.
+	// The type of the deployment.
 	DeploymentType DeploymentType `type:"string" enum:"true"`
 
-	// Arn of the group for this deployment.
+	// The ARN of the group for this deployment.
 	GroupArn *string `type:"string"`
 }
 
@@ -6884,22 +6880,22 @@ func (s Deployment) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on a Device
+// Information about a device.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Device
 type Device struct {
 	_ struct{} `type:"structure"`
 
-	// Certificate arn of the device.
+	// The ARN of the certificate associated with the device.
 	CertificateArn *string `type:"string"`
 
-	// Element Id for this entry in the list.
+	// The ID of the device.
 	Id *string `type:"string"`
 
-	// If true, the local shadow value automatically syncs with the cloud's shadow
-	// state.
+	// If true, the device's local shadow will be automatically synced with the
+	// cloud.
 	SyncShadow *bool `type:"boolean"`
 
-	// Thing arn of the device.
+	// The thing ARN of the device.
 	ThingArn *string `type:"string"`
 }
 
@@ -6942,12 +6938,12 @@ func (s Device) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on device definition version
+// Information about a device definition version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/DeviceDefinitionVersion
 type DeviceDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
-	// Devices in the definition version.
+	// A list of devices in the definition version.
 	Devices []Device `type:"list"`
 }
 
@@ -7029,7 +7025,8 @@ type DisassociateRoleFromGroupOutput struct {
 
 	responseMetadata aws.Response
 
-	// Time when the role was disassociated from the group.
+	// The time, in milliseconds since the epoch, when the role was disassociated
+	// from the group.
 	DisassociatedAt *string `type:"string"`
 }
 
@@ -7087,7 +7084,7 @@ type DisassociateServiceRoleFromAccountOutput struct {
 
 	responseMetadata aws.Response
 
-	// Time when the service role was disassociated from the account.
+	// The time when the service role was disassociated from the account.
 	DisassociatedAt *string `type:"string"`
 }
 
@@ -7117,15 +7114,15 @@ func (s DisassociateServiceRoleFromAccountOutput) MarshalFields(e protocol.Field
 	return nil
 }
 
-// ErrorDetail
+// Details about the error.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ErrorDetail
 type ErrorDetail struct {
 	_ struct{} `type:"structure"`
 
-	// Detailed Error Code
+	// A detailed error code.
 	DetailedErrorCode *string `type:"string"`
 
-	// Detailed Error Message
+	// A detailed error message.
 	DetailedErrorMessage *string `type:"string"`
 }
 
@@ -7156,18 +7153,18 @@ func (s ErrorDetail) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on function
+// Information about a Lambda function.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Function
 type Function struct {
 	_ struct{} `type:"structure"`
 
-	// Arn of the Lambda function.
+	// The ARN of the Lambda function.
 	FunctionArn *string `type:"string"`
 
-	// Configuration of the function
+	// The configuration of the Lambda function.
 	FunctionConfiguration *FunctionConfiguration `type:"structure"`
 
-	// Id of the function in this version.
+	// The ID of the Lambda function.
 	Id *string `type:"string"`
 }
 
@@ -7204,29 +7201,33 @@ func (s Function) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Configuration of the function
+// The configuration of the Lambda function.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionConfiguration
 type FunctionConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Environment of the function configuration
+	// The expected encoding type of the input payload for the function. The default
+	// is ''json''.
+	EncodingType EncodingType `type:"string" enum:"true"`
+
+	// The environment configuration of the function.
 	Environment *FunctionConfigurationEnvironment `type:"structure"`
 
-	// Execution Arguments
+	// The execution arguments.
 	ExecArgs *string `type:"string"`
 
-	// Executable
+	// The name of the function executable.
 	Executable *string `type:"string"`
 
-	// The memory size, in KB, you configured for the function.
+	// The memory size, in KB, which the function requires.
 	MemorySize *int64 `type:"integer"`
 
-	// Whether the function is pinned or not. Pinned means the function is long-lived
-	// and starts when the core starts.
+	// True if the function is pinned. Pinned means the function is long-lived and
+	// starts when the core starts.
 	Pinned *bool `type:"boolean"`
 
-	// The function execution time at which Lambda should terminate the function.
-	// This timeout still applies to pinned lambdas for each request.
+	// The allowed function execution time, after which Lambda should terminate
+	// the function. This timeout still applies to pinned lambdas for each request.
 	Timeout *int64 `type:"integer"`
 }
 
@@ -7242,6 +7243,12 @@ func (s FunctionConfiguration) GoString() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s FunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.EncodingType) > 0 {
+		v := s.EncodingType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EncodingType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Environment != nil {
 		v := s.Environment
 
@@ -7281,17 +7288,20 @@ func (s FunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Environment of the function configuration
+// The environment configuration of the function.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionConfigurationEnvironment
 type FunctionConfigurationEnvironment struct {
 	_ struct{} `type:"structure"`
 
-	// Flag to allow lambda access sys filesystem.
+	// If true, the Lambda function is allowed to access the host's /sys folder.
+	// Use this when the Lambda function needs to read device information from /sys.
 	AccessSysfs *bool `type:"boolean"`
 
-	// Policies for the function to access resources.
+	// A list of the resources, with their permissions, to which the Lambda function
+	// will be granted access. A Lambda function can have at most 10 resources.
 	ResourceAccessPolicies []ResourceAccessPolicy `type:"list"`
 
+	// Environment variables for the Lambda function's configuration.
 	Variables map[string]string `type:"map"`
 }
 
@@ -7340,12 +7350,12 @@ func (s FunctionConfigurationEnvironment) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Information on the function definition version
+// Information about a function definition version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/FunctionDefinitionVersion
 type FunctionDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
-	// Lambda functions in this function definition version.
+	// A list of Lambda functions in this function definition version.
 	Functions []Function `type:"list"`
 }
 
@@ -7427,10 +7437,10 @@ type GetAssociatedRoleOutput struct {
 
 	responseMetadata aws.Response
 
-	// Time when the role was associated for the group.
+	// The time when the role was associated with the group.
 	AssociatedAt *string `type:"string"`
 
-	// Arn of the role that is associated with the group.
+	// The ARN of the role that is associated with the group.
 	RoleArn *string `type:"string"`
 }
 
@@ -7511,17 +7521,17 @@ func (s GetConnectivityInfoInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// connectivity info response
+// Information about a Greengrass core's connectivity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetConnectivityInfoResponse
 type GetConnectivityInfoOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Connectivity info list
+	// Connectivity info list.
 	ConnectivityInfo []ConnectivityInfo `type:"list"`
 
-	// Response Text
+	// A message about the connectivity info request.
 	Message *string `locationName:"message" type:"string"`
 }
 
@@ -7755,19 +7765,20 @@ type GetCoreDefinitionVersionOutput struct {
 
 	responseMetadata aws.Response
 
-	// Arn of the core definition version.
+	// The ARN of the core definition version.
 	Arn *string `type:"string"`
 
-	// Timestamp of when the core definition version was created.
+	// The time, in milliseconds since the epoch, when the core definition version
+	// was created.
 	CreationTimestamp *string `type:"string"`
 
-	// Information on definition
+	// Information about the core definition version.
 	Definition *CoreDefinitionVersion `type:"structure"`
 
-	// Id of the core definition the version belongs to.
+	// The ID of the core definition version.
 	Id *string `type:"string"`
 
-	// Version of the core definition version.
+	// The version of the core definition version.
 	Version *string `type:"string"`
 }
 
@@ -7879,26 +7890,27 @@ func (s GetDeploymentStatusInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The response body contains the status of a deployment for a group.
+// Information about the status of a deployment for a group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetDeploymentStatusResponse
 type GetDeploymentStatusOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Status of the deployment.
+	// The status of the deployment.
 	DeploymentStatus *string `type:"string"`
 
 	// The type of the deployment.
 	DeploymentType DeploymentType `type:"string" enum:"true"`
 
-	// The error Details
+	// Error details
 	ErrorDetails []ErrorDetail `type:"list"`
 
-	// Error Message
+	// Error message
 	ErrorMessage *string `type:"string"`
 
-	// Last time the deployment status was updated.
+	// The time, in milliseconds since the epoch, when the deployment status was
+	// updated.
 	UpdatedAt *string `type:"string"`
 }
 
@@ -8150,19 +8162,20 @@ type GetDeviceDefinitionVersionOutput struct {
 
 	responseMetadata aws.Response
 
-	// Arn of the device definition version.
+	// The ARN of the device definition version.
 	Arn *string `type:"string"`
 
-	// Timestamp of when the device definition version was created.
+	// The time, in milliseconds since the epoch, when the device definition version
+	// was created.
 	CreationTimestamp *string `type:"string"`
 
-	// Device definition version
+	// Information about the device definition version.
 	Definition *DeviceDefinitionVersion `type:"structure"`
 
-	// Id of the device definition the version belongs to.
+	// The ID of the device definition version.
 	Id *string `type:"string"`
 
-	// Version of the device definition version.
+	// The version of the device definition version.
 	Version *string `type:"string"`
 }
 
@@ -8402,26 +8415,27 @@ func (s GetFunctionDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Function definition version
+// Information about a function definition version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetFunctionDefinitionVersionResponse
 type GetFunctionDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Arn of the function definition version.
+	// The ARN of the function definition version.
 	Arn *string `type:"string"`
 
-	// Timestamp when the funtion definition version was created.
+	// The time, in milliseconds since the epoch, when the function definition version
+	// was created.
 	CreationTimestamp *string `type:"string"`
 
 	// Information on the definition.
 	Definition *FunctionDefinitionVersion `type:"structure"`
 
-	// Id of the function definition the version belongs to.
+	// The ID of the function definition version.
 	Id *string `type:"string"`
 
-	// Version of the function definition version.
+	// The version of the function definition version.
 	Version *string `type:"string"`
 }
 
@@ -8533,20 +8547,20 @@ func (s GetGroupCertificateAuthorityInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Certificate authority for the group.
+// Information about a certificate authority for a group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupCertificateAuthorityResponse
 type GetGroupCertificateAuthorityOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Arn of the certificate authority for the group.
+	// The ARN of the certificate authority for the group.
 	GroupCertificateAuthorityArn *string `type:"string"`
 
-	// Id of the certificate authority for the group.
+	// The ID of the certificate authority for the group.
 	GroupCertificateAuthorityId *string `type:"string"`
 
-	// PEM encoded certificate for the group.
+	// The PEM encoded certificate for the group.
 	PemEncodedCertificate *string `type:"string"`
 }
 
@@ -8870,26 +8884,26 @@ func (s GetGroupVersionInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on the group version
+// Information about a group version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetGroupVersionResponse
 type GetGroupVersionOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Arn of the group version.
+	// The ARN of the group version.
 	Arn *string `type:"string"`
 
-	// Timestamp when the group version was created.
+	// The time, in milliseconds since the epoch, when the group version was created.
 	CreationTimestamp *string `type:"string"`
 
-	// Information on the definition
+	// Information about the group version definition.
 	Definition *GroupVersion `type:"structure"`
 
-	// Id of the group version.
+	// The ID of the group version.
 	Id *string `type:"string"`
 
-	// Unique Id for a version of the Group.
+	// The unique ID for the version of the group.
 	Version *string `type:"string"`
 }
 
@@ -9129,26 +9143,27 @@ func (s GetLoggerDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
-// Information on logger definition version response
+// Information about a logger definition version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetLoggerDefinitionVersionResponse
 type GetLoggerDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Arn of the logger definition version.
+	// The ARN of the logger definition version.
 	Arn *string `type:"string"`
 
-	// Timestamp of when the logger definition version was created.
+	// The time, in milliseconds since the epoch, when the logger definition version
+	// was created.
 	CreationTimestamp *string `type:"string"`
 
-	// Information on definition
+	// Information about the logger definition version.
 	Definition *LoggerDefinitionVersion `type:"structure"`
 
-	// Id of the logger definition the version belongs to.
+	// The ID of the logger definition version.
 	Id *string `type:"string"`
 
-	// Version of the logger definition version.
+	// The version of the logger definition version.
 	Version *string `type:"string"`
 }
 
@@ -9388,7 +9403,7 @@ func (s GetResourceDefinitionVersionInput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Information on resource definition version response
+// Information about a resource definition version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetResourceDefinitionVersionResponse
 type GetResourceDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
@@ -9398,16 +9413,17 @@ type GetResourceDefinitionVersionOutput struct {
 	// Arn of the resource definition version.
 	Arn *string `type:"string"`
 
-	// Timestamp of when the resource definition version was created.
+	// The time, in milliseconds since the epoch, when the resource definition version
+	// was created.
 	CreationTimestamp *string `type:"string"`
 
-	// Information on definition.
+	// Information about the definition.
 	Definition *ResourceDefinitionVersion `type:"structure"`
 
-	// Id of the resource definition the version belongs to.
+	// The ID of the resource definition version.
 	Id *string `type:"string"`
 
-	// Version of the resource definition version.
+	// The version of the resource definition version.
 	Version *string `type:"string"`
 }
 
@@ -9489,10 +9505,10 @@ type GetServiceRoleForAccountOutput struct {
 
 	responseMetadata aws.Response
 
-	// Time when the service role was associated to the account.
+	// The time when the service role was associated with the account.
 	AssociatedAt *string `type:"string"`
 
-	// Role arn which is associated to the account.
+	// The ARN of the role which is associated with the account.
 	RoleArn *string `type:"string"`
 }
 
@@ -9714,26 +9730,27 @@ func (s GetSubscriptionDefinitionVersionInput) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
-// Information on the Subscription Definition Version
+// Information about a subscription definition version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GetSubscriptionDefinitionVersionResponse
 type GetSubscriptionDefinitionVersionOutput struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
 
-	// Arn of the subscription definition version.
+	// The ARN of the subscription definition version.
 	Arn *string `type:"string"`
 
-	// Timestamp of when the subscription definition version was created.
+	// The time, in milliseconds since the epoch, when the subscription definition
+	// version was created.
 	CreationTimestamp *string `type:"string"`
 
-	// Information on the definition
+	// Information about the subscription definition version.
 	Definition *SubscriptionDefinitionVersion `type:"structure"`
 
-	// Id of the subscription definition the version belongs to.
+	// The ID of the subscription definition version.
 	Id *string `type:"string"`
 
-	// Version of the subscription definition version.
+	// The version of the subscription definition version.
 	Version *string `type:"string"`
 }
 
@@ -9787,15 +9804,15 @@ func (s GetSubscriptionDefinitionVersionOutput) MarshalFields(e protocol.FieldEn
 	return nil
 }
 
-// Information on group certificate authority properties
+// Information about a certificate authority for a group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupCertificateAuthorityProperties
 type GroupCertificateAuthorityProperties struct {
 	_ struct{} `type:"structure"`
 
-	// Arn of the certificate authority for the group.
+	// The ARN of the certificate authority for the group.
 	GroupCertificateAuthorityArn *string `type:"string"`
 
-	// Id of the certificate authority for the group.
+	// The ID of the certificate authority for the group.
 	GroupCertificateAuthorityId *string `type:"string"`
 }
 
@@ -9826,30 +9843,30 @@ func (s GroupCertificateAuthorityProperties) MarshalFields(e protocol.FieldEncod
 	return nil
 }
 
-// Information on the group
+// Information about a group.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupInformation
 type GroupInformation struct {
 	_ struct{} `type:"structure"`
 
-	// Arn of a group.
+	// The ARN of the group.
 	Arn *string `type:"string"`
 
-	// Timestamp of when the group was created.
+	// The time, in milliseconds since the epoch, when the group was created.
 	CreationTimestamp *string `type:"string"`
 
-	// Id of a group.
+	// The ID of the group.
 	Id *string `type:"string"`
 
-	// Last updated timestamp of the group.
+	// The time, in milliseconds since the epoch, when the group was last updated.
 	LastUpdatedTimestamp *string `type:"string"`
 
-	// Last version of the group.
+	// The latest version of the group.
 	LatestVersion *string `type:"string"`
 
-	// Latest version arn of the group.
+	// The ARN of the latest version of the group.
 	LatestVersionArn *string `type:"string"`
 
-	// Name of a group.
+	// The name of the group.
 	Name *string `type:"string"`
 }
 
@@ -9915,10 +9932,13 @@ func (s GroupInformation) MarshalFields(e protocol.FieldEncoder) error {
 type GroupOwnerSetting struct {
 	_ struct{} `type:"structure"`
 
-	// Eanble the auto added group owner.
+	// If true, GreenGrass automatically adds the specified Linux OS group owner
+	// of the resource to the Lambda process privileges. Thus the Lambda process
+	// will have the file access permissions of the added Linux group.
 	AutoAddGroupOwner *bool `type:"boolean"`
 
-	// Name of the group owner.
+	// The name of the Linux OS group whose privileges will be added to the Lambda
+	// process. This field is optional.
 	GroupOwner *string `type:"string"`
 }
 
@@ -9949,27 +9969,27 @@ func (s GroupOwnerSetting) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on group version
+// Information about a group version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/GroupVersion
 type GroupVersion struct {
 	_ struct{} `type:"structure"`
 
-	// Core definition version arn for this group.
+	// The ARN of the core definition version for this group.
 	CoreDefinitionVersionArn *string `type:"string"`
 
-	// Device definition version arn for this group.
+	// The ARN of the device definition version for this group.
 	DeviceDefinitionVersionArn *string `type:"string"`
 
-	// Function definition version arn for this group.
+	// The ARN of the function definition version for this group.
 	FunctionDefinitionVersionArn *string `type:"string"`
 
-	// Logger definition version arn for this group.
+	// The ARN of the logger definition version for this group.
 	LoggerDefinitionVersionArn *string `type:"string"`
 
-	// Resource definition version arn for this group.
+	// The resource definition version ARN for this group.
 	ResourceDefinitionVersionArn *string `type:"string"`
 
-	// Subscription definition version arn for this group.
+	// The ARN of the subscription definition version for this group.
 	SubscriptionDefinitionVersionArn *string `type:"string"`
 }
 
@@ -10288,7 +10308,7 @@ type ListDeploymentsOutput struct {
 
 	responseMetadata aws.Response
 
-	// List of deployments for the requested groups
+	// A list of deployments for the requested groups.
 	Deployments []Deployment `type:"list"`
 
 	// The token for the next set of results, or ''null'' if there are no additional
@@ -10779,7 +10799,7 @@ type ListGroupCertificateAuthoritiesOutput struct {
 
 	responseMetadata aws.Response
 
-	// List of certificate authorities associated with the group.
+	// A list of certificate authorities associated with the group.
 	GroupCertificateAuthorities []GroupCertificateAuthorityProperties `type:"list"`
 }
 
@@ -10969,7 +10989,7 @@ type ListGroupsOutput struct {
 
 	responseMetadata aws.Response
 
-	// Groups
+	// Information about a group.
 	Groups []GroupInformation `type:"list"`
 
 	// The token for the next set of results, or ''null'' if there are no additional
@@ -11606,15 +11626,16 @@ func (s ListSubscriptionDefinitionsOutput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-// Attributes that define the Local Device Resource.
+// Attributes that define a local device resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalDeviceResourceData
 type LocalDeviceResourceData struct {
 	_ struct{} `type:"structure"`
 
-	// Group owner related settings for local resources.
+	// Group/owner related settings for local resources.
 	GroupOwnerSetting *GroupOwnerSetting `type:"structure"`
 
-	// Local source path of the resource.
+	// The local absolute path of the device resource. The source path for a device
+	// resource can refer only to a character device or block device under ''/dev''.
 	SourcePath *string `type:"string"`
 }
 
@@ -11645,18 +11666,20 @@ func (s LocalDeviceResourceData) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Attributes that define the Local Volume Resource.
+// Attributes that define a local volume resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LocalVolumeResourceData
 type LocalVolumeResourceData struct {
 	_ struct{} `type:"structure"`
 
-	// Local destination path of the resource.
+	// The absolute local path of the resource inside the lambda environment.
 	DestinationPath *string `type:"string"`
 
-	// Group owner related settings for local resources.
+	// Allows you to configure additional group privileges for the Lambda process.
+	// This field is optional.
 	GroupOwnerSetting *GroupOwnerSetting `type:"structure"`
 
-	// Local source path of the resource.
+	// The local absolute path of the volume resource on the host. The source path
+	// for a volume resource type cannot start with ''/proc'' or ''/sys''.
 	SourcePath *string `type:"string"`
 }
 
@@ -11693,25 +11716,25 @@ func (s LocalVolumeResourceData) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on the Logger
+// Information about a logger
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Logger
 type Logger struct {
 	_ struct{} `type:"structure"`
 
-	// The component that will be subject to logs
+	// The component that will be subject to logging.
 	Component LoggerComponent `type:"string" enum:"true"`
 
-	// Element Id for this entry in the list.
+	// The id of the logger.
 	Id *string `type:"string"`
 
-	// The level of the logs
+	// The level of the logs.
 	Level LoggerLevel `type:"string" enum:"true"`
 
-	// Amount of hardware space, in KB, to use if file system is used for logging
-	// purposes.
+	// The amount of file space, in KB, to use if the local file system is used
+	// for logging purposes.
 	Space *int64 `type:"integer"`
 
-	// The type which will be use for log output
+	// The type of log output which will be used.
 	Type LoggerType `type:"string" enum:"true"`
 }
 
@@ -11760,12 +11783,12 @@ func (s Logger) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on logger definition version
+// Information about a logger definition version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/LoggerDefinitionVersion
 type LoggerDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
-	// List of loggers.
+	// A list of loggers.
 	Loggers []Logger `type:"list"`
 }
 
@@ -11796,14 +11819,14 @@ func (s LoggerDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information needed to perform a reset of a group's deployments.
+// Information about a group reset request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResetDeploymentsRequest
 type ResetDeploymentsInput struct {
 	_ struct{} `type:"structure"`
 
 	AmznClientToken *string `location:"header" locationName:"X-Amzn-Client-Token" type:"string"`
 
-	// When set to true, perform a best-effort only core reset.
+	// If true, performs a best-effort only core reset.
 	Force *bool `type:"boolean"`
 
 	// GroupId is a required field
@@ -11865,10 +11888,10 @@ type ResetDeploymentsOutput struct {
 
 	responseMetadata aws.Response
 
-	// The arn of the reset deployment.
+	// The ARN of the deployment.
 	DeploymentArn *string `type:"string"`
 
-	// The id of the reset deployment.
+	// The ID of the deployment.
 	DeploymentId *string `type:"string"`
 }
 
@@ -11904,15 +11927,19 @@ func (s ResetDeploymentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on the resource.
+// Information about a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Resource
 type Resource struct {
 	_ struct{} `type:"structure"`
 
-	// Resource Id.
+	// The resource ID, used to refer to a resource in the Lambda function configuration.
+	// Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must
+	// be unique within a Greengrass group.
 	Id *string `type:"string"`
 
-	// A descriptive resource name.
+	// The descriptive resource name, which is displayed on the Greengrass console.
+	// Max length 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be
+	// unique within a Greengrass group.
 	Name *string `type:"string"`
 
 	// A container of data for all resource types.
@@ -11952,15 +11979,17 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Policy for the function to access a resource.
+// A policy used by the function to access a resource.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceAccessPolicy
 type ResourceAccessPolicy struct {
 	_ struct{} `type:"structure"`
 
-	// The function's access permission to the resource.
+	// The permissions that the Lambda function has to the resource. Can be one
+	// of ''rw'' (read/write) or ''ro'' (read-only).
 	Permission Permission `type:"string" enum:"true"`
 
-	// Id of the resource. A reference to the resource definiton.
+	// The ID of the resource. (This ID is assigned to the resource when you create
+	// the resource definiton.)
 	ResourceId *string `type:"string"`
 }
 
@@ -11991,16 +12020,24 @@ func (s ResourceAccessPolicy) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A container of data for all resource types.
+// A container for resource data. The container takes only one of the following
+// supported resource data types: ''LocalDeviceResourceData'', ''LocalVolumeResourceData'',
+// ''SageMakerMachineLearningModelResourceData'', ''S3MachineLearningModelResourceData''.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDataContainer
 type ResourceDataContainer struct {
 	_ struct{} `type:"structure"`
 
-	// Attributes that define the Local Device Resource.
+	// Attributes that define the local device resource.
 	LocalDeviceResourceData *LocalDeviceResourceData `type:"structure"`
 
-	// Attributes that define the Local Volume Resource.
+	// Attributes that define the local volume resource.
 	LocalVolumeResourceData *LocalVolumeResourceData `type:"structure"`
+
+	// Attributes that define an S3 machine learning resource.
+	S3MachineLearningModelResourceData *S3MachineLearningModelResourceData `type:"structure"`
+
+	// Attributes that define an SageMaker machine learning resource.
+	SageMakerMachineLearningModelResourceData *SageMakerMachineLearningModelResourceData `type:"structure"`
 }
 
 // String returns the string representation
@@ -12027,15 +12064,27 @@ func (s ResourceDataContainer) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "LocalVolumeResourceData", v, metadata)
 	}
+	if s.S3MachineLearningModelResourceData != nil {
+		v := s.S3MachineLearningModelResourceData
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "S3MachineLearningModelResourceData", v, metadata)
+	}
+	if s.SageMakerMachineLearningModelResourceData != nil {
+		v := s.SageMakerMachineLearningModelResourceData
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SageMakerMachineLearningModelResourceData", v, metadata)
+	}
 	return nil
 }
 
-// Information on resource definition version
+// Information about a resource definition version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/ResourceDefinitionVersion
 type ResourceDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
-	// List of resources.
+	// A list of resources.
 	Resources []Resource `type:"list"`
 }
 
@@ -12066,21 +12115,102 @@ func (s ResourceDefinitionVersion) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Information on subscription
+// Attributes that define an S3 machine learning resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/S3MachineLearningModelResourceData
+type S3MachineLearningModelResourceData struct {
+	_ struct{} `type:"structure"`
+
+	// The absolute local path of the resource inside the Lambda environment.
+	DestinationPath *string `type:"string"`
+
+	// The URI of the source model in an S3 bucket. The model package must be in
+	// tar.gz or .zip format.
+	S3Uri *string `type:"string"`
+}
+
+// String returns the string representation
+func (s S3MachineLearningModelResourceData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s S3MachineLearningModelResourceData) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3MachineLearningModelResourceData) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DestinationPath != nil {
+		v := *s.DestinationPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DestinationPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3Uri != nil {
+		v := *s.S3Uri
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "S3Uri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Attributes that define an SageMaker machine learning resource.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/SageMakerMachineLearningModelResourceData
+type SageMakerMachineLearningModelResourceData struct {
+	_ struct{} `type:"structure"`
+
+	// The absolute local path of the resource inside the Lambda environment.
+	DestinationPath *string `type:"string"`
+
+	// The ARN of the SageMaker training job that represents the source model.
+	SageMakerJobArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SageMakerMachineLearningModelResourceData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SageMakerMachineLearningModelResourceData) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SageMakerMachineLearningModelResourceData) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DestinationPath != nil {
+		v := *s.DestinationPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DestinationPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SageMakerJobArn != nil {
+		v := *s.SageMakerJobArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SageMakerJobArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Information about a subscription.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/Subscription
 type Subscription struct {
 	_ struct{} `type:"structure"`
 
-	// Element Id for this entry in the list.
+	// The id of the subscription.
 	Id *string `type:"string"`
 
-	// Source of the subscription. Can be a thing arn, lambda arn or word 'cloud'
+	// The source of the subscription. Can be a thing ARN, a Lambda function ARN,
+	// 'cloud' (which represents the IoT cloud), or 'GGShadowService'.
 	Source *string `type:"string"`
 
-	// Subject of the message.
+	// The subject of the message.
 	Subject *string `type:"string"`
 
-	// Where the message is sent to. Can be a thing arn, lambda arn or word 'cloud'.
+	// Where the message is sent to. Can be a thing ARN, a Lambda function ARN,
+	// 'cloud' (which represents the IoT cloud), or 'GGShadowService'.
 	Target *string `type:"string"`
 }
 
@@ -12123,12 +12253,12 @@ func (s Subscription) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information on subscription definition version
+// Information about a subscription definition version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/SubscriptionDefinitionVersion
 type SubscriptionDefinitionVersion struct {
 	_ struct{} `type:"structure"`
 
-	// Subscriptions in the version.
+	// A list of subscriptions.
 	Subscriptions []Subscription `type:"list"`
 }
 
@@ -12159,12 +12289,12 @@ func (s SubscriptionDefinitionVersion) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Information on connectivity info
+// Information required to update a Greengrass core's connectivity.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/UpdateConnectivityInfoRequest
 type UpdateConnectivityInfoInput struct {
 	_ struct{} `type:"structure"`
 
-	// Connectivity info list
+	// A list of connectivity info.
 	ConnectivityInfo []ConnectivityInfo `type:"list"`
 
 	// ThingName is a required field
@@ -12226,10 +12356,10 @@ type UpdateConnectivityInfoOutput struct {
 
 	responseMetadata aws.Response
 
-	// Response Text
+	// A message about the connectivity info update request.
 	Message *string `locationName:"message" type:"string"`
 
-	// New Version
+	// The new version of the connectivity info.
 	Version *string `type:"string"`
 }
 
@@ -12509,7 +12639,7 @@ func (s UpdateFunctionDefinitionOutput) MarshalFields(e protocol.FieldEncoder) e
 type UpdateGroupCertificateConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Amount of time when the certificate expires in milliseconds.
+	// The amount of time remaining before the certificate expires, in milliseconds.
 	CertificateExpiryInMilliseconds *string `type:"string"`
 
 	// GroupId is a required field
@@ -12930,21 +13060,21 @@ func (s UpdateSubscriptionDefinitionOutput) MarshalFields(e protocol.FieldEncode
 	return nil
 }
 
-// Information on the version
+// Information about a version.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/greengrass-2017-06-07/VersionInformation
 type VersionInformation struct {
 	_ struct{} `type:"structure"`
 
-	// Arn of the version.
+	// The ARN of the version.
 	Arn *string `type:"string"`
 
-	// Timestamp of when the version was created.
+	// The time, in milliseconds since the epoch, when the version was created.
 	CreationTimestamp *string `type:"string"`
 
-	// Id of the resource container.
+	// The ID of the version.
 	Id *string `type:"string"`
 
-	// Unique Id of a version.
+	// The unique ID of the version.
 	Version *string `type:"string"`
 }
 
@@ -13006,6 +13136,23 @@ func (enum DeploymentType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type EncodingType string
+
+// Enum values for EncodingType
+const (
+	EncodingTypeBinary EncodingType = "binary"
+	EncodingTypeJson   EncodingType = "json"
+)
+
+func (enum EncodingType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncodingType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LoggerComponent string
 
 // Enum values for LoggerComponent
@@ -13060,7 +13207,7 @@ func (enum LoggerType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Type of permissions a function could have to access a resource.
+// The type of permission a function has to access a resource.
 type Permission string
 
 // Enum values for Permission
@@ -13078,7 +13225,7 @@ func (enum Permission) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The piece of software on the Greengrass Core that will be updated.
+// The piece of software on the Greengrass core that will be updated.
 type SoftwareToUpdate string
 
 // Enum values for SoftwareToUpdate
@@ -13121,7 +13268,7 @@ func (enum UpdateAgentLogLevel) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The architecture of the Cores in the targets of an update
+// The architecture of the cores which are the targets of an update.
 type UpdateTargetsArchitecture string
 
 // Enum values for UpdateTargetsArchitecture
@@ -13140,7 +13287,7 @@ func (enum UpdateTargetsArchitecture) MarshalValueBuf(b []byte) ([]byte, error) 
 	return append(b, enum...), nil
 }
 
-// The operating system of the Cores in the targets of an update
+// The operating system of the cores which are the targets of an update.
 type UpdateTargetsOperatingSystem string
 
 // Enum values for UpdateTargetsOperatingSystem

@@ -94,6 +94,8 @@ type ServiceDiscoveryAPI interface {
 
 	RegisterInstanceRequest(*servicediscovery.RegisterInstanceInput) servicediscovery.RegisterInstanceRequest
 
+	UpdateInstanceCustomHealthStatusRequest(*servicediscovery.UpdateInstanceCustomHealthStatusInput) servicediscovery.UpdateInstanceCustomHealthStatusRequest
+
 	UpdateServiceRequest(*servicediscovery.UpdateServiceInput) servicediscovery.UpdateServiceRequest
 }
 

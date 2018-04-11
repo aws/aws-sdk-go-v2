@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Config.
 //    func myFunc(svc configserviceiface.ConfigServiceAPI) bool {
-//        // Make svc.DeleteConfigRule request
+//        // Make svc.BatchGetResourceConfig request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockConfigServiceClient struct {
 //        configserviceiface.ConfigServiceAPI
 //    }
-//    func (m *mockConfigServiceClient) DeleteConfigRule(input *configservice.DeleteConfigRuleInput) (*configservice.DeleteConfigRuleOutput, error) {
+//    func (m *mockConfigServiceClient) BatchGetResourceConfig(input *configservice.BatchGetResourceConfigInput) (*configservice.BatchGetResourceConfigOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,7 +62,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ConfigServiceAPI interface {
+	BatchGetResourceConfigRequest(*configservice.BatchGetResourceConfigInput) configservice.BatchGetResourceConfigRequest
+
+	DeleteAggregationAuthorizationRequest(*configservice.DeleteAggregationAuthorizationInput) configservice.DeleteAggregationAuthorizationRequest
+
 	DeleteConfigRuleRequest(*configservice.DeleteConfigRuleInput) configservice.DeleteConfigRuleRequest
+
+	DeleteConfigurationAggregatorRequest(*configservice.DeleteConfigurationAggregatorInput) configservice.DeleteConfigurationAggregatorRequest
 
 	DeleteConfigurationRecorderRequest(*configservice.DeleteConfigurationRecorderInput) configservice.DeleteConfigurationRecorderRequest
 
@@ -70,7 +76,13 @@ type ConfigServiceAPI interface {
 
 	DeleteEvaluationResultsRequest(*configservice.DeleteEvaluationResultsInput) configservice.DeleteEvaluationResultsRequest
 
+	DeletePendingAggregationRequestRequest(*configservice.DeletePendingAggregationRequestInput) configservice.DeletePendingAggregationRequestRequest
+
 	DeliverConfigSnapshotRequest(*configservice.DeliverConfigSnapshotInput) configservice.DeliverConfigSnapshotRequest
+
+	DescribeAggregateComplianceByConfigRulesRequest(*configservice.DescribeAggregateComplianceByConfigRulesInput) configservice.DescribeAggregateComplianceByConfigRulesRequest
+
+	DescribeAggregationAuthorizationsRequest(*configservice.DescribeAggregationAuthorizationsInput) configservice.DescribeAggregationAuthorizationsRequest
 
 	DescribeComplianceByConfigRuleRequest(*configservice.DescribeComplianceByConfigRuleInput) configservice.DescribeComplianceByConfigRuleRequest
 
@@ -80,6 +92,10 @@ type ConfigServiceAPI interface {
 
 	DescribeConfigRulesRequest(*configservice.DescribeConfigRulesInput) configservice.DescribeConfigRulesRequest
 
+	DescribeConfigurationAggregatorSourcesStatusRequest(*configservice.DescribeConfigurationAggregatorSourcesStatusInput) configservice.DescribeConfigurationAggregatorSourcesStatusRequest
+
+	DescribeConfigurationAggregatorsRequest(*configservice.DescribeConfigurationAggregatorsInput) configservice.DescribeConfigurationAggregatorsRequest
+
 	DescribeConfigurationRecorderStatusRequest(*configservice.DescribeConfigurationRecorderStatusInput) configservice.DescribeConfigurationRecorderStatusRequest
 
 	DescribeConfigurationRecordersRequest(*configservice.DescribeConfigurationRecordersInput) configservice.DescribeConfigurationRecordersRequest
@@ -87,6 +103,12 @@ type ConfigServiceAPI interface {
 	DescribeDeliveryChannelStatusRequest(*configservice.DescribeDeliveryChannelStatusInput) configservice.DescribeDeliveryChannelStatusRequest
 
 	DescribeDeliveryChannelsRequest(*configservice.DescribeDeliveryChannelsInput) configservice.DescribeDeliveryChannelsRequest
+
+	DescribePendingAggregationRequestsRequest(*configservice.DescribePendingAggregationRequestsInput) configservice.DescribePendingAggregationRequestsRequest
+
+	GetAggregateComplianceDetailsByConfigRuleRequest(*configservice.GetAggregateComplianceDetailsByConfigRuleInput) configservice.GetAggregateComplianceDetailsByConfigRuleRequest
+
+	GetAggregateConfigRuleComplianceSummaryRequest(*configservice.GetAggregateConfigRuleComplianceSummaryInput) configservice.GetAggregateConfigRuleComplianceSummaryRequest
 
 	GetComplianceDetailsByConfigRuleRequest(*configservice.GetComplianceDetailsByConfigRuleInput) configservice.GetComplianceDetailsByConfigRuleRequest
 
@@ -102,7 +124,11 @@ type ConfigServiceAPI interface {
 
 	ListDiscoveredResourcesRequest(*configservice.ListDiscoveredResourcesInput) configservice.ListDiscoveredResourcesRequest
 
+	PutAggregationAuthorizationRequest(*configservice.PutAggregationAuthorizationInput) configservice.PutAggregationAuthorizationRequest
+
 	PutConfigRuleRequest(*configservice.PutConfigRuleInput) configservice.PutConfigRuleRequest
+
+	PutConfigurationAggregatorRequest(*configservice.PutConfigurationAggregatorInput) configservice.PutConfigurationAggregatorRequest
 
 	PutConfigurationRecorderRequest(*configservice.PutConfigurationRecorderInput) configservice.PutConfigurationRecorderRequest
 

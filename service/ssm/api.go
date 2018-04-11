@@ -19317,6 +19317,7 @@ const (
 	OperatingSystemUbuntu                OperatingSystem = "UBUNTU"
 	OperatingSystemRedhatEnterpriseLinux OperatingSystem = "REDHAT_ENTERPRISE_LINUX"
 	OperatingSystemSuse                  OperatingSystem = "SUSE"
+	OperatingSystemCentos                OperatingSystem = "CENTOS"
 )
 
 func (enum OperatingSystem) MarshalValue() (string, error) {

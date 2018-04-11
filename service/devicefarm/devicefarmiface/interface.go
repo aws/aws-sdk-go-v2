@@ -64,6 +64,8 @@ import (
 type DeviceFarmAPI interface {
 	CreateDevicePoolRequest(*devicefarm.CreateDevicePoolInput) devicefarm.CreateDevicePoolRequest
 
+	CreateInstanceProfileRequest(*devicefarm.CreateInstanceProfileInput) devicefarm.CreateInstanceProfileRequest
+
 	CreateNetworkProfileRequest(*devicefarm.CreateNetworkProfileInput) devicefarm.CreateNetworkProfileRequest
 
 	CreateProjectRequest(*devicefarm.CreateProjectInput) devicefarm.CreateProjectRequest
@@ -73,6 +75,8 @@ type DeviceFarmAPI interface {
 	CreateUploadRequest(*devicefarm.CreateUploadInput) devicefarm.CreateUploadRequest
 
 	DeleteDevicePoolRequest(*devicefarm.DeleteDevicePoolInput) devicefarm.DeleteDevicePoolRequest
+
+	DeleteInstanceProfileRequest(*devicefarm.DeleteInstanceProfileInput) devicefarm.DeleteInstanceProfileRequest
 
 	DeleteNetworkProfileRequest(*devicefarm.DeleteNetworkProfileInput) devicefarm.DeleteNetworkProfileRequest
 
@@ -88,9 +92,13 @@ type DeviceFarmAPI interface {
 
 	GetDeviceRequest(*devicefarm.GetDeviceInput) devicefarm.GetDeviceRequest
 
+	GetDeviceInstanceRequest(*devicefarm.GetDeviceInstanceInput) devicefarm.GetDeviceInstanceRequest
+
 	GetDevicePoolRequest(*devicefarm.GetDevicePoolInput) devicefarm.GetDevicePoolRequest
 
 	GetDevicePoolCompatibilityRequest(*devicefarm.GetDevicePoolCompatibilityInput) devicefarm.GetDevicePoolCompatibilityRequest
+
+	GetInstanceProfileRequest(*devicefarm.GetInstanceProfileInput) devicefarm.GetInstanceProfileRequest
 
 	GetJobRequest(*devicefarm.GetJobInput) devicefarm.GetJobRequest
 
@@ -114,9 +122,13 @@ type DeviceFarmAPI interface {
 
 	ListArtifactsRequest(*devicefarm.ListArtifactsInput) devicefarm.ListArtifactsRequest
 
+	ListDeviceInstancesRequest(*devicefarm.ListDeviceInstancesInput) devicefarm.ListDeviceInstancesRequest
+
 	ListDevicePoolsRequest(*devicefarm.ListDevicePoolsInput) devicefarm.ListDevicePoolsRequest
 
 	ListDevicesRequest(*devicefarm.ListDevicesInput) devicefarm.ListDevicesRequest
+
+	ListInstanceProfilesRequest(*devicefarm.ListInstanceProfilesInput) devicefarm.ListInstanceProfilesRequest
 
 	ListJobsRequest(*devicefarm.ListJobsInput) devicefarm.ListJobsRequest
 
@@ -154,7 +166,11 @@ type DeviceFarmAPI interface {
 
 	StopRunRequest(*devicefarm.StopRunInput) devicefarm.StopRunRequest
 
+	UpdateDeviceInstanceRequest(*devicefarm.UpdateDeviceInstanceInput) devicefarm.UpdateDeviceInstanceRequest
+
 	UpdateDevicePoolRequest(*devicefarm.UpdateDevicePoolInput) devicefarm.UpdateDevicePoolRequest
+
+	UpdateInstanceProfileRequest(*devicefarm.UpdateInstanceProfileInput) devicefarm.UpdateInstanceProfileRequest
 
 	UpdateNetworkProfileRequest(*devicefarm.UpdateNetworkProfileInput) devicefarm.UpdateNetworkProfileRequest
 

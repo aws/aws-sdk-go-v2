@@ -775,6 +775,56 @@ func (c *CodeBuild) UpdateProjectRequest(input *UpdateProjectInput) UpdateProjec
 	return UpdateProjectRequest{Request: req, Input: input, Copy: c.UpdateProjectRequest}
 }
 
+const opUpdateWebhook = "UpdateWebhook"
+
+// UpdateWebhookRequest is a API request type for the UpdateWebhook API operation.
+type UpdateWebhookRequest struct {
+	*aws.Request
+	Input *UpdateWebhookInput
+	Copy  func(*UpdateWebhookInput) UpdateWebhookRequest
+}
+
+// Send marshals and sends the UpdateWebhook API request.
+func (r UpdateWebhookRequest) Send() (*UpdateWebhookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateWebhookOutput), nil
+}
+
+// UpdateWebhookRequest returns a request value for making API operation for
+// AWS CodeBuild.
+//
+// Updates the webhook associated with an AWS CodeBuild build project.
+//
+//    // Example sending a request using the UpdateWebhookRequest method.
+//    req := client.UpdateWebhookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhook
+func (c *CodeBuild) UpdateWebhookRequest(input *UpdateWebhookInput) UpdateWebhookRequest {
+	op := &aws.Operation{
+		Name:       opUpdateWebhook,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateWebhookInput{}
+	}
+
+	output := &UpdateWebhookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateWebhookRequest{Request: req, Input: input, Copy: c.UpdateWebhookRequest}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/BatchDeleteBuildsInput
 type BatchDeleteBuildsInput struct {
 	_ struct{} `type:"structure"`
@@ -1036,7 +1086,7 @@ type Build struct {
 	// about any current build phase that is not yet complete.
 	Phases []BuildPhase `locationName:"phases" type:"list"`
 
-	// The name of the build project.
+	// The name of the AWS CodeBuild project.
 	ProjectName *string `locationName:"projectName" min:"1" type:"string"`
 
 	// Information about the source code to be built.
@@ -1368,7 +1418,13 @@ func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
 type CreateWebhookInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the build project.
+	// A regular expression used to determine which branches in a repository are
+	// built when a webhook is triggered. If the name of a branch matches the regular
+	// expression, then it is built. If it doesn't match, then it is not. If branchFilter
+	// is empty, then all branches are built.
+	BranchFilter *string `locationName:"branchFilter" type:"string"`
+
+	// The name of the AWS CodeBuild project.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"2" type:"string" required:"true"`
@@ -1490,7 +1546,7 @@ func (s DeleteProjectOutput) SDKResponseMetadata() aws.Response {
 type DeleteWebhookInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the build project.
+	// The name of the AWS CodeBuild project.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"2" type:"string" required:"true"`
@@ -1680,7 +1736,8 @@ func (s *EnvironmentVariable) Validate() error {
 type InvalidateProjectCacheInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the build project that the cache will be reset for.
+	// The name of the AWS CodeBuild build project that the cache will be reset
+	// for.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
@@ -1747,7 +1804,7 @@ type ListBuildsForProjectInput struct {
 	// until no more next tokens are returned.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// The name of the build project.
+	// The name of the AWS CodeBuild project.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
@@ -2387,17 +2444,15 @@ type ProjectEnvironment struct {
 	// Image is a required field
 	Image *string `locationName:"image" min:"1" type:"string" required:"true"`
 
-	// If set to true, enables running the Docker daemon inside a Docker container;
-	// otherwise, false or not specified (the default). This value must be set to
-	// true only if this build project will be used to build Docker images, and
-	// the specified build environment image is not one provided by AWS CodeBuild
-	// with Docker support. Otherwise, all associated builds that attempt to interact
-	// with the Docker daemon will fail. Note that you must also start the Docker
-	// daemon so that your builds can interact with it as needed. One way to do
-	// this is to initialize the Docker daemon in the install phase of your build
-	// spec by running the following build commands. (Do not run the following build
-	// commands if the specified build environment image is provided by AWS CodeBuild
-	// with Docker support.)
+	// Enables running the Docker daemon inside a Docker container. Set to true
+	// only if the build project is be used to build Docker images, and the specified
+	// build environment image is not provided by AWS CodeBuild with Docker support.
+	// Otherwise, all associated builds that attempt to interact with the Docker
+	// daemon will fail. Note that you must also start the Docker daemon so that
+	// builds can interact with it. One way to do this is to initialize the Docker
+	// daemon during the install phase of your build spec by running the following
+	// build commands. (Do not run the following build commands if the specified
+	// build environment image is provided by AWS CodeBuild with Docker support.)
 	//
 	// - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375
 	// --storage-driver=overlay& - timeout -t 15 sh -c "until docker info; do echo
@@ -2627,7 +2682,7 @@ type StartBuildInput struct {
 	// for this build only, any previous depth of history defined in the build project.
 	GitCloneDepthOverride *int64 `locationName:"gitCloneDepthOverride" type:"integer"`
 
-	// The name of the build project to start running a build.
+	// The name of the AWS CodeBuild build project to start running a build.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
@@ -2979,6 +3034,79 @@ func (s UpdateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookInput
+type UpdateWebhookInput struct {
+	_ struct{} `type:"structure"`
+
+	// A regular expression used to determine which branches in a repository are
+	// built when a webhook is triggered. If the name of a branch matches the regular
+	// expression, then it is built. If it doesn't match, then it is not. If branchFilter
+	// is empty, then all branches are built.
+	BranchFilter *string `locationName:"branchFilter" type:"string"`
+
+	// The name of the AWS CodeBuild project.
+	//
+	// ProjectName is a required field
+	ProjectName *string `locationName:"projectName" min:"2" type:"string" required:"true"`
+
+	// A boolean value that specifies whether the associated repository's secret
+	// token should be updated.
+	RotateSecret *bool `locationName:"rotateSecret" type:"boolean"`
+}
+
+// String returns the string representation
+func (s UpdateWebhookInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateWebhookInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateWebhookInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateWebhookInput"}
+
+	if s.ProjectName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
+	}
+	if s.ProjectName != nil && len(*s.ProjectName) < 2 {
+		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 2))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/UpdateWebhookOutput
+type UpdateWebhookOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about a repository's webhook that is associated with a project
+	// in AWS CodeBuild.
+	Webhook *Webhook `locationName:"webhook" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateWebhookOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateWebhookOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateWebhookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Information about the VPC configuration that AWS CodeBuild will access.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codebuild-2016-10-06/VpcConfig
 type VpcConfig struct {
@@ -3023,12 +3151,19 @@ func (s *VpcConfig) Validate() error {
 type Webhook struct {
 	_ struct{} `type:"structure"`
 
-	// This is the server endpoint that will receive the webhook payload.
+	// A regular expression used to determine which branches in a repository are
+	// built when a webhook is triggered. If the name of a branch matches the regular
+	// expression, then it is built. If it doesn't match, then it is not. If branchFilter
+	// is empty, then all branches are built.
+	BranchFilter *string `locationName:"branchFilter" type:"string"`
+
+	// A timestamp indicating the last time a repository's secret token was modified.
+	LastModifiedSecret *time.Time `locationName:"lastModifiedSecret" type:"timestamp" timestampFormat:"unix"`
+
+	// The CodeBuild endpoint where webhook events are sent.
 	PayloadUrl *string `locationName:"payloadUrl" min:"1" type:"string"`
 
-	// Use this secret while creating a webhook in GitHub for Enterprise. The secret
-	// allows webhook requests sent by GitHub for Enterprise to be authenticated
-	// by AWS CodeBuild.
+	// The secret token of the associated repository.
 	Secret *string `locationName:"secret" min:"1" type:"string"`
 
 	// The URL to the webhook.

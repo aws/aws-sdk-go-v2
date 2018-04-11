@@ -924,6 +924,10 @@ func (r DescribeOrganizationRequest) Send() (*DescribeOrganizationOutput, error)
 //
 // This operation can be called from any account in the organization.
 //
+// Even if a policy type is shown as available in the organization, it can be
+// disabled separately at the root level with DisablePolicyType. Use ListRoots
+// to see the status of policy types for a specified root.
+//
 //    // Example sending a request using the DescribeOrganizationRequest method.
 //    req := client.DescribeOrganizationRequest(params)
 //    resp, err := req.Send()
@@ -1224,6 +1228,11 @@ func (r DisablePolicyTypeRequest) Send() (*DisablePolicyTypeOutput, error) {
 //
 // This operation can be called only from the organization's master account.
 //
+// If you disable a policy type for a root, it still shows as enabled for the
+// organization if all features are enabled in that organization. Use ListRoots
+// to see the status of policy types for a specified root. Use DescribeOrganization
+// to see the status of policy types in the organization.
+//
 //    // Example sending a request using the DisablePolicyTypeRequest method.
 //    req := client.DisablePolicyTypeRequest(params)
 //    resp, err := req.Send()
@@ -1359,6 +1368,10 @@ func (r EnableAllFeaturesRequest) Send() (*EnableAllFeaturesOutput, error) {
 // only after all administrators in the invited accounts approve the change
 // by accepting the handshake.
 //
+// After you enable all features, you can separately enable or disable individual
+// policy types in a root using EnablePolicyType and DisablePolicyType. To see
+// the status of policy types in a root, use ListRoots.
+//
 // After all invited member accounts accept the handshake, you finalize the
 // feature set change by accepting the handshake that contains "Action": "ENABLE_ALL_FEATURES".
 // This completes the change.
@@ -1424,6 +1437,12 @@ func (r EnablePolicyTypeRequest) Send() (*EnablePolicyTypeOutput, error) {
 // root. You can undo this by using the DisablePolicyType operation.
 //
 // This operation can be called only from the organization's master account.
+//
+// You can enable a policy type in a root only if that policy type is available
+// in the organization. Use DescribeOrganization to view the status of available
+// policy types in the organization.
+//
+// To view the status of policy type in a root, use ListRoots.
 //
 //    // Example sending a request using the EnablePolicyTypeRequest method.
 //    req := client.EnablePolicyTypeRequest(params)
@@ -1732,7 +1751,12 @@ func (r ListAccountsRequest) Send() (*ListAccountsOutput, error) {
 // AWS Organizations.
 //
 // Lists all the accounts in the organization. To request only the accounts
-// in a root or OU, use the ListAccountsForParent operation instead.
+// in a specified root or OU, use the ListAccountsForParent operation instead.
+//
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
 //
 // This operation can be called only from the organization's master account.
 //
@@ -1843,6 +1867,11 @@ func (r ListAccountsForParentRequest) Send() (*ListAccountsForParentOutput, erro
 // OUs. To get a list of all accounts in the organization, use the ListAccounts
 // operation.
 //
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
+//
 // This operation can be called only from the organization's master account.
 //
 //    // Example sending a request using the ListAccountsForParentRequest method.
@@ -1949,6 +1978,11 @@ func (r ListChildrenRequest) Send() (*ListChildrenOutput, error) {
 // OU or root. This operation, along with ListParents enables you to traverse
 // the tree structure that makes up this root.
 //
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
+//
 // This operation can be called only from the organization's master account.
 //
 //    // Example sending a request using the ListChildrenRequest method.
@@ -2053,6 +2087,11 @@ func (r ListCreateAccountStatusRequest) Send() (*ListCreateAccountStatusOutput, 
 //
 // Lists the account creation requests that match the specified status that
 // is currently being tracked for the organization.
+//
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
 //
 // This operation can be called only from the organization's master account.
 //
@@ -2162,6 +2201,11 @@ func (r ListHandshakesForAccountRequest) Send() (*ListHandshakesForAccountOutput
 // Handshakes that are ACCEPTED, DECLINED, or CANCELED appear in the results
 // of this API for only 30 days after changing to that state. After that they
 // are deleted and no longer accessible.
+//
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
 //
 // This operation can be called from any account in the organization.
 //
@@ -2274,6 +2318,11 @@ func (r ListHandshakesForOrganizationRequest) Send() (*ListHandshakesForOrganiza
 // of this API for only 30 days after changing to that state. After that they
 // are deleted and no longer accessible.
 //
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
+//
 // This operation can be called only from the organization's master account.
 //
 //    // Example sending a request using the ListHandshakesForOrganizationRequest method.
@@ -2377,6 +2426,11 @@ func (r ListOrganizationalUnitsForParentRequest) Send() (*ListOrganizationalUnit
 // AWS Organizations.
 //
 // Lists the organizational units (OUs) in a parent organizational unit or root.
+//
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
 //
 // This operation can be called only from the organization's master account.
 //
@@ -2484,6 +2538,11 @@ func (r ListParentsRequest) Send() (*ListParentsOutput, error) {
 // parent of the specified child OU or account. This operation, along with ListChildren
 // enables you to traverse the tree structure that makes up this root.
 //
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
+//
 // This operation can be called only from the organization's master account.
 //
 // In the current release, a child can have only a single parent.
@@ -2589,6 +2648,11 @@ func (r ListPoliciesRequest) Send() (*ListPoliciesOutput, error) {
 // AWS Organizations.
 //
 // Retrieves the list of all policies in an organization of a specified type.
+//
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
 //
 // This operation can be called only from the organization's master account.
 //
@@ -2696,6 +2760,11 @@ func (r ListPoliciesForTargetRequest) Send() (*ListPoliciesForTargetOutput, erro
 // organizational unit (OU), or account. You must specify the policy type that
 // you want included in the returned list.
 //
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
+//
 // This operation can be called only from the organization's master account.
 //
 //    // Example sending a request using the ListPoliciesForTargetRequest method.
@@ -2800,7 +2869,18 @@ func (r ListRootsRequest) Send() (*ListRootsOutput, error) {
 //
 // Lists the roots that are defined in the current organization.
 //
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
+//
 // This operation can be called only from the organization's master account.
+//
+// Policy types can be enabled and disabled in roots. This is distinct from
+// whether they are available in the organization. When you enable all features,
+// you make policy types available for use in that organization. Individual
+// policy types can then be enabled and disabled in a root. To see the availability
+// of a policy type in an organization, use DescribeOrganization.
 //
 //    // Example sending a request using the ListRootsRequest method.
 //    req := client.ListRootsRequest(params)
@@ -2903,6 +2983,11 @@ func (r ListTargetsForPolicyRequest) Send() (*ListTargetsForPolicyOutput, error)
 // AWS Organizations.
 //
 // Lists all the roots, OUs, and accounts to which the specified policy is attached.
+//
+// Always check the NextToken response parameter for a null value when calling
+// a List* operation. These operations can occasionally return an empty set
+// of results even when there are more results available. The NextToken response
+// parameter value is nullonly when there are no more results to display.
 //
 // This operation can be called only from the organization's master account.
 //
@@ -6554,6 +6639,11 @@ type Organization struct {
 	// A list of policy types that are enabled for this organization. For example,
 	// if your organization has all features enabled, then service control policies
 	// (SCPs) are included in the list.
+	//
+	// Even if a policy type is shown as available in the organization, you can
+	// separately enable and disable them at the root level by using EnablePolicyType
+	// and DisablePolicyType. Use ListRoots to see the status of a policy type in
+	// that root.
 	AvailablePolicyTypes []PolicyTypeSummary `type:"list"`
 
 	// Specifies the functionality that currently is available to the organization.
@@ -6911,6 +7001,11 @@ type Root struct {
 
 	// The types of policies that are currently enabled for the root and therefore
 	// can be attached to the root or to its OUs or accounts.
+	//
+	// Even if a policy type is shown as available in the organization, you can
+	// separately enable and disable them at the root level by using EnablePolicyType
+	// and DisablePolicyType. Use DescribeOrganization to see the availability of
+	// the policy types in that organization.
 	PolicyTypes []PolicyTypeSummary `type:"list"`
 }
 
@@ -7365,6 +7460,7 @@ const (
 	InvalidInputExceptionReasonMovingAccountBetweenDifferentRoots InvalidInputExceptionReason = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
 	InvalidInputExceptionReasonInvalidFullNameTarget              InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
 	InvalidInputExceptionReasonUnrecognizedServicePrincipal       InvalidInputExceptionReason = "UNRECOGNIZED_SERVICE_PRINCIPAL"
+	InvalidInputExceptionReasonInvalidRoleName                    InvalidInputExceptionReason = "INVALID_ROLE_NAME"
 )
 
 func (enum InvalidInputExceptionReason) MarshalValue() (string, error) {

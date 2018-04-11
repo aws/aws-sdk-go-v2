@@ -332,7 +332,7 @@ func (r BatchStopJobRunRequest) Send() (*BatchStopJobRunOutput, error) {
 // BatchStopJobRunRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Stops one or more job runs for a specified Job.
+// Stops one or more job runs for a specified job definition.
 //
 //    // Example sending a request using the BatchStopJobRunRequest method.
 //    req := client.BatchStopJobRunRequest(params)
@@ -636,7 +636,7 @@ func (r CreateJobRequest) Send() (*CreateJobOutput, error) {
 // CreateJobRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Creates a new job.
+// Creates a new job definition.
 //
 //    // Example sending a request using the CreateJobRequest method.
 //    req := client.CreateJobRequest(params)
@@ -1187,7 +1187,8 @@ func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
 // DeleteJobRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Deletes a specified job. If the job is not found, no exception is thrown.
+// Deletes a specified job definition. If the job definition is not found, no
+// exception is thrown.
 //
 //    // Example sending a request using the DeleteJobRequest method.
 //    req := client.DeleteJobRequest(params)
@@ -2550,7 +2551,7 @@ func (r GetJobRunsRequest) Send() (*GetJobRunsOutput, error) {
 // GetJobRunsRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Retrieves metadata for all runs of a given job.
+// Retrieves metadata for all runs of a given job definition.
 //
 //    // Example sending a request using the GetJobRunsRequest method.
 //    req := client.GetJobRunsRequest(params)
@@ -2652,7 +2653,7 @@ func (r GetJobsRequest) Send() (*GetJobsOutput, error) {
 // GetJobsRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Retrieves all current jobs.
+// Retrieves all current job definitions.
 //
 //    // Example sending a request using the GetJobsRequest method.
 //    req := client.GetJobsRequest(params)
@@ -3817,7 +3818,7 @@ func (r StartJobRunRequest) Send() (*StartJobRunOutput, error) {
 // StartJobRunRequest returns a request value for making API operation for
 // AWS Glue.
 //
-// Runs a job.
+// Starts a job run using a job definition.
 //
 //    // Example sending a request using the StartJobRunRequest method.
 //    req := client.StartJobRunRequest(params)
@@ -4614,12 +4615,15 @@ type Action struct {
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	Arguments map[string]string `type:"map"`
 
 	// The name of a job to be executed.
 	JobName *string `min:"1" type:"string"`
+
+	// The job run timeout in minutes. It overrides the timeout value of the job.
+	Timeout *int64 `min:"1" type:"integer"`
 }
 
 // String returns the string representation
@@ -4637,6 +4641,9 @@ func (s *Action) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Action"}
 	if s.JobName != nil && len(*s.JobName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobName", 1))
+	}
+	if s.Timeout != nil && *s.Timeout < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Timeout", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5180,7 +5187,7 @@ func (s BatchGetPartitionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Records an error that occurred when attempting to stop a specified JobRun.
+// Records an error that occurred when attempting to stop a specified job run.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchStopJobRunError
 type BatchStopJobRunError struct {
 	_ struct{} `type:"structure"`
@@ -5188,10 +5195,10 @@ type BatchStopJobRunError struct {
 	// Specifies details about the error that was encountered.
 	ErrorDetail *ErrorDetail `type:"structure"`
 
-	// The name of the Job in question.
+	// The name of the job definition used in the job run in question.
 	JobName *string `min:"1" type:"string"`
 
-	// The JobRunId of the JobRun in question.
+	// The JobRunId of the job run in question.
 	JobRunId *string `min:"1" type:"string"`
 }
 
@@ -5209,12 +5216,12 @@ func (s BatchStopJobRunError) GoString() string {
 type BatchStopJobRunInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the Job in question.
+	// The name of the job definition for which to stop job runs.
 	//
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`
 
-	// A list of the JobRunIds that should be stopped for that Job.
+	// A list of the JobRunIds that should be stopped for that job definition.
 	//
 	// JobRunIds is a required field
 	JobRunIds []string `min:"1" type:"list" required:"true"`
@@ -5288,10 +5295,10 @@ func (s BatchStopJobRunOutput) SDKResponseMetadata() aws.Response {
 type BatchStopJobRunSuccessfulSubmission struct {
 	_ struct{} `type:"structure"`
 
-	// The Name of the Job in question.
+	// The name of the job definition used in the job run that was stopped.
 	JobName *string `min:"1" type:"string"`
 
-	// The JobRunId of the JobRun in question.
+	// The JobRunId of the job run that was stopped.
 	JobRunId *string `min:"1" type:"string"`
 }
 
@@ -5634,8 +5641,8 @@ type Condition struct {
 	// A logical operator.
 	LogicalOperator LogicalOperator `type:"string" enum:"true"`
 
-	// The condition state. Currently, the values supported are SUCCEEDED, STOPPED
-	// and FAILED.
+	// The condition state. Currently, the values supported are SUCCEEDED, STOPPED,
+	// TIMEOUT and FAILED.
 	State JobRunState `type:"string" enum:"true"`
 }
 
@@ -6290,9 +6297,7 @@ type CreateDevEndpointInput struct {
 	NumberOfNodes *int64 `type:"integer"`
 
 	// The public key to use for authentication.
-	//
-	// PublicKey is a required field
-	PublicKey *string `type:"string" required:"true"`
+	PublicKey *string `type:"string"`
 
 	// The IAM role for the DevEndpoint.
 	//
@@ -6322,10 +6327,6 @@ func (s *CreateDevEndpointInput) Validate() error {
 
 	if s.EndpointName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EndpointName"))
-	}
-
-	if s.PublicKey == nil {
-		invalidParams.Add(aws.NewErrParamRequired("PublicKey"))
 	}
 
 	if s.RoleArn == nil {
@@ -6496,11 +6497,11 @@ type CreateJobInput struct {
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	DefaultArguments map[string]string `type:"map"`
 
-	// Description of the job.
+	// Description of the job being defined.
 	Description *string `type:"string"`
 
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
@@ -6513,15 +6514,18 @@ type CreateJobInput struct {
 	// The maximum number of times to retry this job if it fails.
 	MaxRetries *int64 `type:"integer"`
 
-	// The name you assign to this job. It must be unique in your account.
+	// The name you assign to this job definition. It must be unique in your account.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The name of the IAM role associated with this job.
+	// The name or ARN of the IAM role associated with this job.
 	//
 	// Role is a required field
 	Role *string `type:"string" required:"true"`
+
+	// The job timeout in minutes. The default is 2880 minutes (48 hours).
+	Timeout *int64 `min:"1" type:"integer"`
 }
 
 // String returns the string representation
@@ -6552,6 +6556,9 @@ func (s *CreateJobInput) Validate() error {
 	if s.Role == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Role"))
 	}
+	if s.Timeout != nil && *s.Timeout < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Timeout", 1))
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6565,7 +6572,7 @@ type CreateJobOutput struct {
 
 	responseMetadata aws.Response
 
-	// The unique name that was provided.
+	// The unique name that was provided for this job definition.
 	Name *string `min:"1" type:"string"`
 }
 
@@ -6911,6 +6918,10 @@ type CreateTriggerInput struct {
 	//
 	// This field is required when the trigger type is SCHEDULED.
 	Schedule *string `type:"string"`
+
+	// Set to true to start SCHEDULED and CONDITIONAL triggers when created. True
+	// not supported for ON_DEMAND triggers.
+	StartOnCreation *bool `type:"boolean"`
 
 	// The type of the new trigger.
 	//
@@ -7520,7 +7531,7 @@ func (s DeleteDevEndpointOutput) SDKResponseMetadata() aws.Response {
 type DeleteJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the job to delete.
+	// The name of the job definition to delete.
 	//
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`
@@ -7559,7 +7570,7 @@ type DeleteJobOutput struct {
 
 	responseMetadata aws.Response
 
-	// The name of the job that was deleted.
+	// The name of the job definition that was deleted.
 	JobName *string `min:"1" type:"string"`
 }
 
@@ -8018,7 +8029,10 @@ type DevEndpoint struct {
 	// The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
 	NumberOfNodes *int64 `type:"integer"`
 
-	// The public address used by this DevEndpoint.
+	// The private address used by this DevEndpoint.
+	PrivateAddress *string `type:"string"`
+
+	// The public VPC address used by this DevEndpoint.
 	PublicAddress *string `type:"string"`
 
 	// The public key to be used by this DevEndpoint for authentication.
@@ -8115,9 +8129,9 @@ func (s ErrorDetail) GoString() string {
 type ExecutionProperty struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum number of concurrent runs allowed for a job. The default is 1.
-	// An error is returned when this threshold is reached. The maximum value you
-	// can specify is controlled by a service limit.
+	// The maximum number of concurrent runs allowed for the job. The default is
+	// 1. An error is returned when this threshold is reached. The maximum value
+	// you can specify is controlled by a service limit.
 	MaxConcurrentRuns *int64 `type:"integer"`
 }
 
@@ -8982,7 +8996,7 @@ func (s GetDevEndpointsOutput) SDKResponseMetadata() aws.Response {
 type GetJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the job to retrieve.
+	// The name of the job definition to retrieve.
 	//
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`
@@ -9044,7 +9058,7 @@ func (s GetJobOutput) SDKResponseMetadata() aws.Response {
 type GetJobRunInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name of the job being run.
+	// Name of the job definition being run.
 	//
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`
@@ -9121,7 +9135,7 @@ func (s GetJobRunOutput) SDKResponseMetadata() aws.Response {
 type GetJobRunsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the job for which to retrieve all job runs.
+	// The name of the job definition for which to retrieve all job runs.
 	//
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`
@@ -9231,10 +9245,10 @@ type GetJobsOutput struct {
 
 	responseMetadata aws.Response
 
-	// A list of jobs.
+	// A list of job definitions.
 	Jobs []Job `type:"list"`
 
-	// A continuation token, if not all jobs have yet been returned.
+	// A continuation token, if not all job definitions have yet been returned.
 	NextToken *string `type:"string"`
 }
 
@@ -10415,16 +10429,16 @@ func (s JdbcTarget) GoString() string {
 	return s.String()
 }
 
-// Specifies a job.
+// Specifies a job definition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job
 type Job struct {
 	_ struct{} `type:"structure"`
 
-	// The number of AWS Glue data processing units (DPUs) allocated to this Job.
-	// From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative
-	// measure of processing power that consists of 4 vCPUs of compute capacity
-	// and 16 GB of memory. For more information, see the AWS Glue pricing page
-	// (https://aws.amazon.com/glue/pricing/).
+	// The number of AWS Glue data processing units (DPUs) allocated to runs of
+	// this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is
+	// a relative measure of processing power that consists of 4 vCPUs of compute
+	// capacity and 16 GB of memory. For more information, see the AWS Glue pricing
+	// page (https://aws.amazon.com/glue/pricing/).
 	AllocatedCapacity *int64 `type:"integer"`
 
 	// The JobCommand that executes this job.
@@ -10433,7 +10447,7 @@ type Job struct {
 	// The connections used for this job.
 	Connections *ConnectionsList `type:"structure"`
 
-	// The time and date that this job specification was created.
+	// The time and date that this job definition was created.
 	CreatedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// The default arguments for this job, specified as name-value pairs.
@@ -10446,31 +10460,34 @@ type Job struct {
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	DefaultArguments map[string]string `type:"map"`
 
-	// Description of this job.
+	// Description of the job being defined.
 	Description *string `type:"string"`
 
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
 	// for this job.
 	ExecutionProperty *ExecutionProperty `type:"structure"`
 
-	// The last point in time when this job specification was modified.
+	// The last point in time when this job definition was modified.
 	LastModifiedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
 
 	// This field is reserved for future use.
 	LogUri *string `type:"string"`
 
-	// The maximum number of times to retry this job if it fails.
+	// The maximum number of times to retry this job after a JobRun fails.
 	MaxRetries *int64 `type:"integer"`
 
-	// The name you assign to this job.
+	// The name you assign to this job definition.
 	Name *string `min:"1" type:"string"`
 
-	// The name of the IAM role associated with this job.
+	// The name or ARN of the IAM role associated with this job.
 	Role *string `type:"string"`
+
+	// The job timeout in minutes.
+	Timeout *int64 `min:"1" type:"integer"`
 }
 
 // String returns the string representation
@@ -10514,7 +10531,7 @@ func (s JobBookmarkEntry) GoString() string {
 	return s.String()
 }
 
-// Specifies code that executes a job.
+// Specifies code executed when a job is run.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobCommand
 type JobCommand struct {
 	_ struct{} `type:"structure"`
@@ -10559,7 +10576,7 @@ type JobRun struct {
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	Arguments map[string]string `type:"map"`
 
@@ -10572,10 +10589,13 @@ type JobRun struct {
 	// An error message associated with this job run.
 	ErrorMessage *string `type:"string"`
 
+	// The amount of time (in seconds) that the job run consumed resources.
+	ExecutionTime *int64 `type:"integer"`
+
 	// The ID of this job run.
 	Id *string `min:"1" type:"string"`
 
-	// The name of the job being run.
+	// The name of the job definition being used in this run.
 	JobName *string `min:"1" type:"string"`
 
 	// The current state of the job run.
@@ -10594,6 +10614,9 @@ type JobRun struct {
 	// The date and time at which this job run was started.
 	StartedOn *time.Time `type:"timestamp" timestampFormat:"unix"`
 
+	// The job run timeout in minutes.
+	Timeout *int64 `min:"1" type:"integer"`
+
 	// The name of the trigger that started this job run.
 	TriggerName *string `min:"1" type:"string"`
 }
@@ -10608,8 +10631,8 @@ func (s JobRun) GoString() string {
 	return s.String()
 }
 
-// Specifies information used to update an existing job. Note that the previous
-// job definition will be completely overwritten by this information.
+// Specifies information used to update an existing job definition. Note that
+// the previous job definition will be completely overwritten by this information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate
 type JobUpdate struct {
 	_ struct{} `type:"structure"`
@@ -10637,11 +10660,11 @@ type JobUpdate struct {
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	DefaultArguments map[string]string `type:"map"`
 
-	// Description of the job.
+	// Description of the job being defined.
 	Description *string `type:"string"`
 
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
@@ -10654,8 +10677,11 @@ type JobUpdate struct {
 	// The maximum number of times to retry this job if it fails.
 	MaxRetries *int64 `type:"integer"`
 
-	// The name of the IAM role associated with this job (required).
+	// The name or ARN of the IAM role associated with this job (required).
 	Role *string `type:"string"`
+
+	// The job timeout in minutes. The default is 2880 minutes (48 hours).
+	Timeout *int64 `min:"1" type:"integer"`
 }
 
 // String returns the string representation
@@ -10666,6 +10692,19 @@ func (s JobUpdate) String() string {
 // GoString returns the string representation
 func (s JobUpdate) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *JobUpdate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "JobUpdate"}
+	if s.Timeout != nil && *s.Timeout < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Timeout", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // A classifier for JSON content.
@@ -11057,7 +11096,7 @@ func (s *PhysicalConnectionRequirements) Validate() error {
 type Predecessor struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the predecessor job.
+	// The name of the job definition used by the predecessor job run.
 	JobName *string `min:"1" type:"string"`
 
 	// The job-run ID of the predecessor job run.
@@ -11082,7 +11121,8 @@ type Predicate struct {
 	// A list of the conditions that determine when the trigger will fire.
 	Conditions []Condition `type:"list"`
 
-	// Currently "OR" is not supported.
+	// Optional field if only one condition is listed. If multiple conditions are
+	// listed, then this field is required.
 	Logical Logical `type:"string" enum:"true"`
 }
 
@@ -11525,7 +11565,7 @@ type StartJobRunInput struct {
 	AllocatedCapacity *int64 `type:"integer"`
 
 	// The job arguments specifically for this run. They override the equivalent
-	// default arguments set for the job itself.
+	// default arguments set for in the job definition itself.
 	//
 	// You can specify arguments here that your own job-execution script consumes,
 	// as well as arguments that AWS Glue itself consumes.
@@ -11535,17 +11575,20 @@ type StartJobRunInput struct {
 	// topic in the developer guide.
 	//
 	// For information about the key-value pairs that AWS Glue consumes to set up
-	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-glue-arguments.html)
+	// your job, see the Special Parameters Used by AWS Glue (http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
 	// topic in the developer guide.
 	Arguments map[string]string `type:"map"`
 
-	// The name of the job to start.
+	// The name of the job definition to use.
 	//
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`
 
 	// The ID of a previous JobRun to retry.
 	JobRunId *string `min:"1" type:"string"`
+
+	// The job run timeout in minutes. It overrides the timeout value of the job.
+	Timeout *int64 `min:"1" type:"integer"`
 }
 
 // String returns the string representation
@@ -11570,6 +11613,9 @@ func (s *StartJobRunInput) Validate() error {
 	}
 	if s.JobRunId != nil && len(*s.JobRunId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("JobRunId", 1))
+	}
+	if s.Timeout != nil && *s.Timeout < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Timeout", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -12788,7 +12834,7 @@ type UpdateJobInput struct {
 	// JobName is a required field
 	JobName *string `min:"1" type:"string" required:"true"`
 
-	// Specifies the values with which to update the job.
+	// Specifies the values with which to update the job definition.
 	//
 	// JobUpdate is a required field
 	JobUpdate *JobUpdate `type:"structure" required:"true"`
@@ -12818,6 +12864,11 @@ func (s *UpdateJobInput) Validate() error {
 	if s.JobUpdate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobUpdate"))
 	}
+	if s.JobUpdate != nil {
+		if err := s.JobUpdate.Validate(); err != nil {
+			invalidParams.AddNested("JobUpdate", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -12831,7 +12882,7 @@ type UpdateJobOutput struct {
 
 	responseMetadata aws.Response
 
-	// Returns the name of the updated job.
+	// Returns the name of the updated job definition.
 	JobName *string `min:"1" type:"string"`
 }
 
@@ -13518,6 +13569,7 @@ const (
 	JobRunStateStopped   JobRunState = "STOPPED"
 	JobRunStateSucceeded JobRunState = "SUCCEEDED"
 	JobRunStateFailed    JobRunState = "FAILED"
+	JobRunStateTimeout   JobRunState = "TIMEOUT"
 )
 
 func (enum JobRunState) MarshalValue() (string, error) {

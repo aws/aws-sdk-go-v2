@@ -3535,6 +3535,16 @@ func (s CreateStackOutput) SDKResponseMetadata() aws.Response {
 type CreateStackSetInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Number (ARN) of the IAM role to use to create this stack
+	// set.
+	//
+	// Specify an IAM role only if you are using customized administrator roles
+	// to control which users or groups can manage specific stack sets within the
+	// same administrator account. For more information, see Define Permissions
+	// for Multiple Administrators (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html)
+	// in the AWS CloudFormation User Guide.
+	AdministrationRoleARN *string `min:"20" type:"string"`
+
 	// A list of values that you must specify before AWS CloudFormation can create
 	// certain stack sets. Some stack set templates might include resources that
 	// can affect permissions in your AWS account—for example, by creating new AWS
@@ -3639,6 +3649,9 @@ func (s CreateStackSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateStackSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateStackSetInput"}
+	if s.AdministrationRoleARN != nil && len(*s.AdministrationRoleARN) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("AdministrationRoleARN", 20))
+	}
 	if s.ClientRequestToken != nil && len(*s.ClientRequestToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientRequestToken", 1))
 	}
@@ -6205,39 +6218,22 @@ func (s ResourceTargetDefinition) GoString() string {
 // Rollback triggers enable you to have AWS CloudFormation monitor the state
 // of your application during stack creation and updating, and to roll back
 // that operation if the application breaches the threshold of any of the alarms
-// you've specified. For each rollback trigger you create, you specify the Cloudwatch
-// alarm that CloudFormation should monitor. CloudFormation monitors the specified
-// alarms during the stack create or update operation, and for the specified
-// amount of time after all resources have been deployed. If any of the alarms
-// goes to ALERT state during the stack operation or the monitoring period,
-// CloudFormation rolls back the entire stack operation. If the monitoring period
-// expires without any alarms going to ALERT state, CloudFormation proceeds
-// to dispose of old resources as usual.
-//
-// By default, CloudFormation only rolls back stack operations if an alarm goes
-// to ALERT state, not INSUFFICIENT_DATA state. To have CloudFormation roll
-// back the stack operation if an alarm goes to INSUFFICIENT_DATA state as well,
-// edit the CloudWatch alarm to treat missing data as breaching. For more information,
-// see Configuring How CloudWatch Alarms Treats Missing Data (http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html).
-//
-// AWS CloudFormation does not monitor rollback triggers when it rolls back
-// a stack during an update operation.
+// you've specified. For more information, see Monitor and Roll Back Stack Operations
+// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-rollback-triggers.html).
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration
 type RollbackConfiguration struct {
 	_ struct{} `type:"structure"`
 
 	// The amount of time, in minutes, during which CloudFormation should monitor
 	// all the rollback triggers after the stack creation or update operation deploys
-	// all necessary resources. If any of the alarms goes to ALERT state during
-	// the stack operation or this monitoring period, CloudFormation rolls back
-	// the entire stack operation. Then, for update operations, if the monitoring
-	// period expires without any alarms going to ALERT state CloudFormation proceeds
-	// to dispose of old resources as usual.
+	// all necessary resources.
+	//
+	// The default is 0 minutes.
 	//
 	// If you specify a monitoring period but do not specify any rollback triggers,
 	// CloudFormation still waits the specified period of time before cleaning up
-	// old resources for update operations. You can use this monitoring period to
-	// perform any manual stack validation desired, and manually cancel the stack
+	// old resources after update operations. You can use this monitoring period
+	// to perform any manual stack validation desired, and manually cancel the stack
 	// creation or update (using CancelUpdateStack (http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CancelUpdateStack.html),
 	// for example) as necessary.
 	//
@@ -6255,20 +6251,20 @@ type RollbackConfiguration struct {
 	// parameter, those triggers replace any list of triggers previously specified
 	// for the stack. This means:
 	//
-	//    * If you don't specify this parameter, AWS CloudFormation uses the rollback
-	//    triggers previously specified for this stack, if any.
+	//    * To use the rollback triggers previously specified for this stack, if
+	//    any, don't specify this parameter.
 	//
-	//    * If you specify any rollback triggers using this parameter, you must
-	//    specify all the triggers that you want used for this stack, even triggers
-	//    you've specifed before (for example, when creating the stack or during
-	//    a previous stack update). Any triggers that you don't include in the updated
-	//    list of triggers are no longer applied to the stack.
+	//    * To specify new or updated rollback triggers, you must specify all the
+	//    triggers that you want used for this stack, even triggers you've specifed
+	//    before (for example, when creating the stack or during a previous stack
+	//    update). Any triggers that you don't include in the updated list of triggers
+	//    are no longer applied to the stack.
 	//
-	//    * If you specify an empty list, AWS CloudFormation removes all currently
-	//    specified triggers.
+	//    * To remove all currently specified triggers, specify an empty list for
+	//    this parameter.
 	//
-	// If a specified Cloudwatch alarm is missing, the entire stack operation fails
-	// and is rolled back.
+	// If a specified trigger is missing, the entire stack operation fails and is
+	// rolled back.
 	RollbackTriggers []RollbackTrigger `type:"list"`
 }
 
@@ -6300,7 +6296,7 @@ func (s *RollbackConfiguration) Validate() error {
 }
 
 // A rollback trigger AWS CloudFormation monitors during creation and updating
-// of stacks. If any of the alarms you specify goes to ALERT state during the
+// of stacks. If any of the alarms you specify goes to ALARM state during the
 // stack operation or within the specified monitoring period afterwards, CloudFormation
 // rolls back the entire stack operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger
@@ -6308,6 +6304,9 @@ type RollbackTrigger struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of the rollback trigger.
+	//
+	// If a specified trigger is missing, the entire stack operation fails and is
+	// rolled back.
 	//
 	// Arn is a required field
 	Arn *string `type:"string" required:"true"`
@@ -6978,6 +6977,15 @@ func (s StackResourceSummary) GoString() string {
 type StackSet struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Number (ARN) of the IAM role used to create or update
+	// the stack set.
+	//
+	// Use customized administrator roles to control which users or groups can manage
+	// specific stack sets within the same administrator account. For more information,
+	// see Define Permissions for Multiple Administrators (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html)
+	// in the AWS CloudFormation User Guide.
+	AdministrationRoleARN *string `min:"20" type:"string"`
+
 	// The capabilities that are allowed in the stack set. Some stack set templates
 	// might include resources that can affect permissions in your AWS account—for
 	// example, by creating new AWS Identity and Access Management (IAM) users.
@@ -6991,6 +6999,9 @@ type StackSet struct {
 
 	// A list of input parameters for a stack set.
 	Parameters []Parameter `type:"list"`
+
+	// The Amazon Resource Number (ARN) of the stack set.
+	StackSetARN *string `type:"string"`
 
 	// The ID of the stack set.
 	StackSetId *string `type:"string"`
@@ -7030,6 +7041,15 @@ type StackSetOperation struct {
 	// with the specified stack set. Update operations affect both the stack set
 	// itself, as well as all associated stack set instances.
 	Action StackSetOperationAction `type:"string" enum:"true"`
+
+	// The Amazon Resource Number (ARN) of the IAM role used to perform this stack
+	// set operation.
+	//
+	// Use customized administrator roles to control which users or groups can manage
+	// specific stack sets within the same administrator account. For more information,
+	// see Define Permissions for Multiple Administrators (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html)
+	// in the AWS CloudFormation User Guide.
+	AdministrationRoleARN *string `min:"20" type:"string"`
 
 	// The time at which the operation was initiated. Note that the creation times
 	// for the stack set operation might differ from the creation time of the individual
@@ -7926,6 +7946,22 @@ func (s UpdateStackOutput) SDKResponseMetadata() aws.Response {
 type UpdateStackSetInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Number (ARN) of the IAM role to use to update this stack
+	// set.
+	//
+	// Specify an IAM role only if you are using customized administrator roles
+	// to control which users or groups can manage specific stack sets within the
+	// same administrator account. For more information, see Define Permissions
+	// for Multiple Administrators (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs.html)
+	// in the AWS CloudFormation User Guide.
+	//
+	// If you specify a customized administrator role, AWS CloudFormation uses that
+	// role to update the stack. If you do not specify a customized administrator
+	// role, AWS CloudFormation performs the update using the role previously associated
+	// with the stack set, so long as you have permissions to perform operations
+	// on the stack set.
+	AdministrationRoleARN *string `min:"20" type:"string"`
+
 	// A list of values that you must specify before AWS CloudFormation can create
 	// certain stack sets. Some stack set templates might include resources that
 	// can affect permissions in your AWS account—for example, by creating new AWS
@@ -8057,6 +8093,9 @@ func (s UpdateStackSetInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *UpdateStackSetInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateStackSetInput"}
+	if s.AdministrationRoleARN != nil && len(*s.AdministrationRoleARN) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("AdministrationRoleARN", 20))
+	}
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
 	}

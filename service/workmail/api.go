@@ -412,6 +412,56 @@ func (c *WorkMail) DeleteGroupRequest(input *DeleteGroupInput) DeleteGroupReques
 	return DeleteGroupRequest{Request: req, Input: input, Copy: c.DeleteGroupRequest}
 }
 
+const opDeleteMailboxPermissions = "DeleteMailboxPermissions"
+
+// DeleteMailboxPermissionsRequest is a API request type for the DeleteMailboxPermissions API operation.
+type DeleteMailboxPermissionsRequest struct {
+	*aws.Request
+	Input *DeleteMailboxPermissionsInput
+	Copy  func(*DeleteMailboxPermissionsInput) DeleteMailboxPermissionsRequest
+}
+
+// Send marshals and sends the DeleteMailboxPermissions API request.
+func (r DeleteMailboxPermissionsRequest) Send() (*DeleteMailboxPermissionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteMailboxPermissionsOutput), nil
+}
+
+// DeleteMailboxPermissionsRequest returns a request value for making API operation for
+// Amazon WorkMail.
+//
+// Deletes permissions granted to a user or group.
+//
+//    // Example sending a request using the DeleteMailboxPermissionsRequest method.
+//    req := client.DeleteMailboxPermissionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissions
+func (c *WorkMail) DeleteMailboxPermissionsRequest(input *DeleteMailboxPermissionsInput) DeleteMailboxPermissionsRequest {
+	op := &aws.Operation{
+		Name:       opDeleteMailboxPermissions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteMailboxPermissionsInput{}
+	}
+
+	output := &DeleteMailboxPermissionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteMailboxPermissionsRequest{Request: req, Input: input, Copy: c.DeleteMailboxPermissionsRequest}
+}
+
 const opDeleteResource = "DeleteResource"
 
 // DeleteResourceRequest is a API request type for the DeleteResource API operation.
@@ -1173,6 +1223,108 @@ func (p *ListGroupsPager) CurrentPage() *ListGroupsOutput {
 	return p.Pager.CurrentPage().(*ListGroupsOutput)
 }
 
+const opListMailboxPermissions = "ListMailboxPermissions"
+
+// ListMailboxPermissionsRequest is a API request type for the ListMailboxPermissions API operation.
+type ListMailboxPermissionsRequest struct {
+	*aws.Request
+	Input *ListMailboxPermissionsInput
+	Copy  func(*ListMailboxPermissionsInput) ListMailboxPermissionsRequest
+}
+
+// Send marshals and sends the ListMailboxPermissions API request.
+func (r ListMailboxPermissionsRequest) Send() (*ListMailboxPermissionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListMailboxPermissionsOutput), nil
+}
+
+// ListMailboxPermissionsRequest returns a request value for making API operation for
+// Amazon WorkMail.
+//
+// Lists the mailbox permissions associated with a mailbox.
+//
+//    // Example sending a request using the ListMailboxPermissionsRequest method.
+//    req := client.ListMailboxPermissionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxPermissions
+func (c *WorkMail) ListMailboxPermissionsRequest(input *ListMailboxPermissionsInput) ListMailboxPermissionsRequest {
+	op := &aws.Operation{
+		Name:       opListMailboxPermissions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListMailboxPermissionsInput{}
+	}
+
+	output := &ListMailboxPermissionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListMailboxPermissionsRequest{Request: req, Input: input, Copy: c.ListMailboxPermissionsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListMailboxPermissionsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListMailboxPermissions operation.
+//		req := client.ListMailboxPermissionsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListMailboxPermissionsRequest) Paginate(opts ...aws.Option) ListMailboxPermissionsPager {
+	return ListMailboxPermissionsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListMailboxPermissionsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListMailboxPermissionsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListMailboxPermissionsPager struct {
+	aws.Pager
+}
+
+func (p *ListMailboxPermissionsPager) CurrentPage() *ListMailboxPermissionsOutput {
+	return p.Pager.CurrentPage().(*ListMailboxPermissionsOutput)
+}
+
 const opListOrganizations = "ListOrganizations"
 
 // ListOrganizationsRequest is a API request type for the ListOrganizations API operation.
@@ -1528,6 +1680,57 @@ type ListUsersPager struct {
 
 func (p *ListUsersPager) CurrentPage() *ListUsersOutput {
 	return p.Pager.CurrentPage().(*ListUsersOutput)
+}
+
+const opPutMailboxPermissions = "PutMailboxPermissions"
+
+// PutMailboxPermissionsRequest is a API request type for the PutMailboxPermissions API operation.
+type PutMailboxPermissionsRequest struct {
+	*aws.Request
+	Input *PutMailboxPermissionsInput
+	Copy  func(*PutMailboxPermissionsInput) PutMailboxPermissionsRequest
+}
+
+// Send marshals and sends the PutMailboxPermissions API request.
+func (r PutMailboxPermissionsRequest) Send() (*PutMailboxPermissionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutMailboxPermissionsOutput), nil
+}
+
+// PutMailboxPermissionsRequest returns a request value for making API operation for
+// Amazon WorkMail.
+//
+// Sets permissions for a user or group. This replaces any pre-existing permissions
+// set for the entity.
+//
+//    // Example sending a request using the PutMailboxPermissionsRequest method.
+//    req := client.PutMailboxPermissionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissions
+func (c *WorkMail) PutMailboxPermissionsRequest(input *PutMailboxPermissionsInput) PutMailboxPermissionsRequest {
+	op := &aws.Operation{
+		Name:       opPutMailboxPermissions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutMailboxPermissionsInput{}
+	}
+
+	output := &PutMailboxPermissionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutMailboxPermissionsRequest{Request: req, Input: input, Copy: c.PutMailboxPermissionsRequest}
 }
 
 const opRegisterToWorkMail = "RegisterToWorkMail"
@@ -2419,6 +2622,89 @@ func (s DeleteGroupOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissionsRequest
+type DeleteMailboxPermissionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the entity (user or group) for which to delete mailbox
+	// permissions.
+	//
+	// EntityId is a required field
+	EntityId *string `min:"12" type:"string" required:"true"`
+
+	// The identifier of the entity (user or group) for which to delete granted
+	// permissions.
+	//
+	// GranteeId is a required field
+	GranteeId *string `min:"12" type:"string" required:"true"`
+
+	// The identifier of the organization under which the entity (user or group)
+	// exists.
+	//
+	// OrganizationId is a required field
+	OrganizationId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteMailboxPermissionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteMailboxPermissionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteMailboxPermissionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteMailboxPermissionsInput"}
+
+	if s.EntityId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
+	}
+	if s.EntityId != nil && len(*s.EntityId) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
+	}
+
+	if s.GranteeId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GranteeId"))
+	}
+	if s.GranteeId != nil && len(*s.GranteeId) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("GranteeId", 12))
+	}
+
+	if s.OrganizationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteMailboxPermissionsResponse
+type DeleteMailboxPermissionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteMailboxPermissionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteMailboxPermissionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteMailboxPermissionsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -3433,6 +3719,95 @@ func (s ListGroupsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxPermissionsRequest
+type ListMailboxPermissionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the entity (user or group) for which to list mailbox permissions.
+	//
+	// EntityId is a required field
+	EntityId *string `min:"12" type:"string" required:"true"`
+
+	// The maximum number of results to return in a single call.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token to use to retrieve the next page of results. The first call does
+	// not contain any tokens.
+	NextToken *string `min:"1" type:"string"`
+
+	// The identifier of the organization under which the entity (user or group)
+	// exists.
+	//
+	// OrganizationId is a required field
+	OrganizationId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListMailboxPermissionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListMailboxPermissionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListMailboxPermissionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListMailboxPermissionsInput"}
+
+	if s.EntityId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
+	}
+	if s.EntityId != nil && len(*s.EntityId) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if s.OrganizationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListMailboxPermissionsResponse
+type ListMailboxPermissionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token to use to retrieve the next page of results. The value is "null"
+	// when there are no more results to return.
+	NextToken *string `min:"1" type:"string"`
+
+	// One page of the entity's mailbox permissions.
+	Permissions []Permission `type:"list"`
+}
+
+// String returns the string representation
+func (s ListMailboxPermissionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListMailboxPermissionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListMailboxPermissionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/ListOrganizationsRequest
 type ListOrganizationsInput struct {
 	_ struct{} `type:"structure"`
@@ -3803,6 +4178,140 @@ func (s OrganizationSummary) String() string {
 // GoString returns the string representation
 func (s OrganizationSummary) GoString() string {
 	return s.String()
+}
+
+// Permission granted to an entity (user, group) to access a certain aspect
+// of another entity's mailbox.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/Permission
+type Permission struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the entity (user or group) to which the permissions are
+	// granted.
+	//
+	// GranteeId is a required field
+	GranteeId *string `min:"12" type:"string" required:"true"`
+
+	// The type of entity (user, group) of the entity referred to in GranteeId.
+	//
+	// GranteeType is a required field
+	GranteeType MemberType `type:"string" required:"true" enum:"true"`
+
+	// The permissions granted to the grantee. SEND_AS allows the grantee to send
+	// email as the owner of the mailbox (the grantee is not mentioned on these
+	// emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the
+	// owner of the mailbox (the grantee is not mentioned as the physical sender
+	// of these emails). FULL_ACCESS allows the grantee full access to the mailbox,
+	// irrespective of other folder-level permissions set on the mailbox.
+	//
+	// PermissionValues is a required field
+	PermissionValues []PermissionType `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s Permission) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Permission) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissionsRequest
+type PutMailboxPermissionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the entity (user or group) for which to update mailbox
+	// permissions.
+	//
+	// EntityId is a required field
+	EntityId *string `min:"12" type:"string" required:"true"`
+
+	// The identifier of the entity (user or group) to which to grant the permissions.
+	//
+	// GranteeId is a required field
+	GranteeId *string `min:"12" type:"string" required:"true"`
+
+	// The identifier of the organization under which the entity (user or group)
+	// exists.
+	//
+	// OrganizationId is a required field
+	OrganizationId *string `type:"string" required:"true"`
+
+	// The permissions granted to the grantee. SEND_AS allows the grantee to send
+	// email as the owner of the mailbox (the grantee is not mentioned on these
+	// emails). SEND_ON_BEHALF allows the grantee to send email on behalf of the
+	// owner of the mailbox (the grantee is not mentioned as the physical sender
+	// of these emails). FULL_ACCESS allows the grantee full access to the mailbox,
+	// irrespective of other folder-level permissions set on the mailbox.
+	//
+	// PermissionValues is a required field
+	PermissionValues []PermissionType `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s PutMailboxPermissionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutMailboxPermissionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutMailboxPermissionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutMailboxPermissionsInput"}
+
+	if s.EntityId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EntityId"))
+	}
+	if s.EntityId != nil && len(*s.EntityId) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("EntityId", 12))
+	}
+
+	if s.GranteeId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GranteeId"))
+	}
+	if s.GranteeId != nil && len(*s.GranteeId) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("GranteeId", 12))
+	}
+
+	if s.OrganizationId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("OrganizationId"))
+	}
+
+	if s.PermissionValues == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PermissionValues"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutMailboxPermissionsResponse
+type PutMailboxPermissionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s PutMailboxPermissionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutMailboxPermissionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutMailboxPermissionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/RegisterToWorkMailRequest
@@ -4227,6 +4736,24 @@ func (enum MemberType) MarshalValue() (string, error) {
 }
 
 func (enum MemberType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PermissionType string
+
+// Enum values for PermissionType
+const (
+	PermissionTypeFullAccess   PermissionType = "FULL_ACCESS"
+	PermissionTypeSendAs       PermissionType = "SEND_AS"
+	PermissionTypeSendOnBehalf PermissionType = "SEND_ON_BEHALF"
+)
+
+func (enum PermissionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PermissionType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

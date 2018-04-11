@@ -2394,12 +2394,16 @@ type CreateStackInput struct {
 	// The stack name for display.
 	DisplayName *string `type:"string"`
 
+	// The URL that users are redirected to after they click the Send Feedback link.
+	// If no URL is specified, no Send Feedback link is displayed.
+	FeedbackURL *string `type:"string"`
+
 	// The name of the stack.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The URL the user is redirected to after the streaming session ends.
+	// The URL that users are redirected to after their streaming session ends.
 	RedirectURL *string `type:"string"`
 
 	// The storage connectors to enable.
@@ -4081,12 +4085,16 @@ type Stack struct {
 	// The stack name for display.
 	DisplayName *string `min:"1" type:"string"`
 
+	// The URL that users are redirected to after they click the Send Feedback link.
+	// If no URL is specified, no Send Feedback link is displayed.
+	FeedbackURL *string `type:"string"`
+
 	// The name of the stack.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The URL the user is redirected to after the streaming session ends.
+	// The URL that users are redirected to after their streaming session ends.
 	RedirectURL *string `type:"string"`
 
 	// The errors for the stack.
@@ -4797,12 +4805,16 @@ type UpdateStackInput struct {
 	// The stack name for display.
 	DisplayName *string `type:"string"`
 
+	// The URL that users are redirected to after they click the Send Feedback link.
+	// If no URL is specified, no Send Feedback link is displayed.
+	FeedbackURL *string `type:"string"`
+
 	// The name of the stack.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The URL the user is redirected to after the streaming session ends.
+	// The URL that users are redirected to after their streaming session ends.
 	RedirectURL *string `type:"string"`
 
 	// The storage connectors to enable.
@@ -5124,6 +5136,8 @@ type StackAttribute string
 const (
 	StackAttributeStorageConnectors StackAttribute = "STORAGE_CONNECTORS"
 	StackAttributeRedirectUrl       StackAttribute = "REDIRECT_URL"
+	StackAttributeFeedbackUrl       StackAttribute = "FEEDBACK_URL"
+	StackAttributeThemeName         StackAttribute = "THEME_NAME"
 )
 
 func (enum StackAttribute) MarshalValue() (string, error) {

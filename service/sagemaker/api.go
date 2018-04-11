@@ -299,27 +299,27 @@ func (r CreateNotebookInstanceRequest) Send() (*CreateNotebookInstanceOutput, er
 // CreateNotebookInstanceRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Creates an Amazon SageMaker notebook instance. A notebook instance is an
-// ML compute instance running on a Jupyter notebook.
+// Creates an Amazon SageMaker notebook instance. A notebook instance is a machine
+// learning (ML) compute instance running on a Jupyter notebook.
 //
-// In a CreateNotebookInstance request, you specify the type of ML compute instance
+// In a CreateNotebookInstance request, specify the type of ML compute instance
 // that you want to run. Amazon SageMaker launches the instance, installs common
 // libraries that you can use to explore datasets for model training, and attaches
 // an ML storage volume to the notebook instance.
 //
 // Amazon SageMaker also provides a set of example notebooks. Each notebook
-// demonstrates how to use Amazon SageMaker with a specific an algorithm or
-// with a machine learning framework.
+// demonstrates how to use Amazon SageMaker with a specific algorithm or with
+// a machine learning framework.
 //
 // After receiving the request, Amazon SageMaker does the following:
 //
 // Creates a network interface in the Amazon SageMaker VPC.
 //
-// (Option) If you specified SubnetId, creates a network interface in your own
-// VPC, which is inferred from the subnet ID that you provide in the input.
-// When creating this network interface, Amazon SageMaker attaches the security
-// group that you specified in the request to the network interface that it
-// creates in your VPC.
+// (Option) If you specified SubnetId, Amazon SageMaker creates a network interface
+// in your own VPC, which is inferred from the subnet ID that you provide in
+// the input. When creating this network interface, Amazon SageMaker attaches
+// the security group that you specified in the request to the network interface
+// that it creates in your VPC.
 //
 // Launches an EC2 instance of the type specified in the request in the Amazon
 // SageMaker VPC. If you specified SubnetId of your VPC, Amazon SageMaker specifies
@@ -361,6 +361,72 @@ func (c *SageMaker) CreateNotebookInstanceRequest(input *CreateNotebookInstanceI
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateNotebookInstanceRequest{Request: req, Input: input, Copy: c.CreateNotebookInstanceRequest}
+}
+
+const opCreateNotebookInstanceLifecycleConfig = "CreateNotebookInstanceLifecycleConfig"
+
+// CreateNotebookInstanceLifecycleConfigRequest is a API request type for the CreateNotebookInstanceLifecycleConfig API operation.
+type CreateNotebookInstanceLifecycleConfigRequest struct {
+	*aws.Request
+	Input *CreateNotebookInstanceLifecycleConfigInput
+	Copy  func(*CreateNotebookInstanceLifecycleConfigInput) CreateNotebookInstanceLifecycleConfigRequest
+}
+
+// Send marshals and sends the CreateNotebookInstanceLifecycleConfig API request.
+func (r CreateNotebookInstanceLifecycleConfigRequest) Send() (*CreateNotebookInstanceLifecycleConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateNotebookInstanceLifecycleConfigOutput), nil
+}
+
+// CreateNotebookInstanceLifecycleConfigRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Creates a lifecycle configuration that you can associate with a notebook
+// instance. A lifecycle configuration is a collection of shell scripts that
+// run when you create or start a notebook instance.
+//
+// Each lifecycle configuration script has a limit of 16384 characters.
+//
+// The value of the $PATH environment variable that is available to both scripts
+// is /sbin:bin:/usr/sbin:/usr/bin.
+//
+// View CloudWatch Logs for notebook instance lifecycle configurations in log
+// group /aws/sagemaker/NotebookInstances in log stream [notebook-instance-name]/[LifecycleConfigHook].
+//
+// Lifecycle configuration scripts cannot run for longer than 5 minutes. If
+// a script runs for longer than 5 minutes, it fails and the notebook instance
+// is not created or started.
+//
+// For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+//
+//    // Example sending a request using the CreateNotebookInstanceLifecycleConfigRequest method.
+//    req := client.CreateNotebookInstanceLifecycleConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceLifecycleConfig
+func (c *SageMaker) CreateNotebookInstanceLifecycleConfigRequest(input *CreateNotebookInstanceLifecycleConfigInput) CreateNotebookInstanceLifecycleConfigRequest {
+	op := &aws.Operation{
+		Name:       opCreateNotebookInstanceLifecycleConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateNotebookInstanceLifecycleConfigInput{}
+	}
+
+	output := &CreateNotebookInstanceLifecycleConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.CreateNotebookInstanceLifecycleConfigRequest}
 }
 
 const opCreatePresignedNotebookInstanceUrl = "CreatePresignedNotebookInstanceUrl"
@@ -721,6 +787,58 @@ func (c *SageMaker) DeleteNotebookInstanceRequest(input *DeleteNotebookInstanceI
 	return DeleteNotebookInstanceRequest{Request: req, Input: input, Copy: c.DeleteNotebookInstanceRequest}
 }
 
+const opDeleteNotebookInstanceLifecycleConfig = "DeleteNotebookInstanceLifecycleConfig"
+
+// DeleteNotebookInstanceLifecycleConfigRequest is a API request type for the DeleteNotebookInstanceLifecycleConfig API operation.
+type DeleteNotebookInstanceLifecycleConfigRequest struct {
+	*aws.Request
+	Input *DeleteNotebookInstanceLifecycleConfigInput
+	Copy  func(*DeleteNotebookInstanceLifecycleConfigInput) DeleteNotebookInstanceLifecycleConfigRequest
+}
+
+// Send marshals and sends the DeleteNotebookInstanceLifecycleConfig API request.
+func (r DeleteNotebookInstanceLifecycleConfigRequest) Send() (*DeleteNotebookInstanceLifecycleConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteNotebookInstanceLifecycleConfigOutput), nil
+}
+
+// DeleteNotebookInstanceLifecycleConfigRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Deletes a notebook instance lifecycle configuration.
+//
+//    // Example sending a request using the DeleteNotebookInstanceLifecycleConfigRequest method.
+//    req := client.DeleteNotebookInstanceLifecycleConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceLifecycleConfig
+func (c *SageMaker) DeleteNotebookInstanceLifecycleConfigRequest(input *DeleteNotebookInstanceLifecycleConfigInput) DeleteNotebookInstanceLifecycleConfigRequest {
+	op := &aws.Operation{
+		Name:       opDeleteNotebookInstanceLifecycleConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteNotebookInstanceLifecycleConfigInput{}
+	}
+
+	output := &DeleteNotebookInstanceLifecycleConfigOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.DeleteNotebookInstanceLifecycleConfigRequest}
+}
+
 const opDeleteTags = "DeleteTags"
 
 // DeleteTagsRequest is a API request type for the DeleteTags API operation.
@@ -972,6 +1090,58 @@ func (c *SageMaker) DescribeNotebookInstanceRequest(input *DescribeNotebookInsta
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeNotebookInstanceRequest{Request: req, Input: input, Copy: c.DescribeNotebookInstanceRequest}
+}
+
+const opDescribeNotebookInstanceLifecycleConfig = "DescribeNotebookInstanceLifecycleConfig"
+
+// DescribeNotebookInstanceLifecycleConfigRequest is a API request type for the DescribeNotebookInstanceLifecycleConfig API operation.
+type DescribeNotebookInstanceLifecycleConfigRequest struct {
+	*aws.Request
+	Input *DescribeNotebookInstanceLifecycleConfigInput
+	Copy  func(*DescribeNotebookInstanceLifecycleConfigInput) DescribeNotebookInstanceLifecycleConfigRequest
+}
+
+// Send marshals and sends the DescribeNotebookInstanceLifecycleConfig API request.
+func (r DescribeNotebookInstanceLifecycleConfigRequest) Send() (*DescribeNotebookInstanceLifecycleConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeNotebookInstanceLifecycleConfigOutput), nil
+}
+
+// DescribeNotebookInstanceLifecycleConfigRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Returns a description of a notebook instance lifecycle configuration.
+//
+// For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+//
+//    // Example sending a request using the DescribeNotebookInstanceLifecycleConfigRequest method.
+//    req := client.DescribeNotebookInstanceLifecycleConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceLifecycleConfig
+func (c *SageMaker) DescribeNotebookInstanceLifecycleConfigRequest(input *DescribeNotebookInstanceLifecycleConfigInput) DescribeNotebookInstanceLifecycleConfigRequest {
+	op := &aws.Operation{
+		Name:       opDescribeNotebookInstanceLifecycleConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeNotebookInstanceLifecycleConfigInput{}
+	}
+
+	output := &DescribeNotebookInstanceLifecycleConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.DescribeNotebookInstanceLifecycleConfigRequest}
 }
 
 const opDescribeTrainingJob = "DescribeTrainingJob"
@@ -1329,6 +1499,108 @@ type ListModelsPager struct {
 
 func (p *ListModelsPager) CurrentPage() *ListModelsOutput {
 	return p.Pager.CurrentPage().(*ListModelsOutput)
+}
+
+const opListNotebookInstanceLifecycleConfigs = "ListNotebookInstanceLifecycleConfigs"
+
+// ListNotebookInstanceLifecycleConfigsRequest is a API request type for the ListNotebookInstanceLifecycleConfigs API operation.
+type ListNotebookInstanceLifecycleConfigsRequest struct {
+	*aws.Request
+	Input *ListNotebookInstanceLifecycleConfigsInput
+	Copy  func(*ListNotebookInstanceLifecycleConfigsInput) ListNotebookInstanceLifecycleConfigsRequest
+}
+
+// Send marshals and sends the ListNotebookInstanceLifecycleConfigs API request.
+func (r ListNotebookInstanceLifecycleConfigsRequest) Send() (*ListNotebookInstanceLifecycleConfigsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListNotebookInstanceLifecycleConfigsOutput), nil
+}
+
+// ListNotebookInstanceLifecycleConfigsRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Lists notebook instance lifestyle configurations created with the API.
+//
+//    // Example sending a request using the ListNotebookInstanceLifecycleConfigsRequest method.
+//    req := client.ListNotebookInstanceLifecycleConfigsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstanceLifecycleConfigs
+func (c *SageMaker) ListNotebookInstanceLifecycleConfigsRequest(input *ListNotebookInstanceLifecycleConfigsInput) ListNotebookInstanceLifecycleConfigsRequest {
+	op := &aws.Operation{
+		Name:       opListNotebookInstanceLifecycleConfigs,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListNotebookInstanceLifecycleConfigsInput{}
+	}
+
+	output := &ListNotebookInstanceLifecycleConfigsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListNotebookInstanceLifecycleConfigsRequest{Request: req, Input: input, Copy: c.ListNotebookInstanceLifecycleConfigsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListNotebookInstanceLifecycleConfigsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListNotebookInstanceLifecycleConfigs operation.
+//		req := client.ListNotebookInstanceLifecycleConfigsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListNotebookInstanceLifecycleConfigsRequest) Paginate(opts ...aws.Option) ListNotebookInstanceLifecycleConfigsPager {
+	return ListNotebookInstanceLifecycleConfigsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListNotebookInstanceLifecycleConfigsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListNotebookInstanceLifecycleConfigsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListNotebookInstanceLifecycleConfigsPager struct {
+	aws.Pager
+}
+
+func (p *ListNotebookInstanceLifecycleConfigsPager) CurrentPage() *ListNotebookInstanceLifecycleConfigsOutput {
+	return p.Pager.CurrentPage().(*ListNotebookInstanceLifecycleConfigsOutput)
 }
 
 const opListNotebookInstances = "ListNotebookInstances"
@@ -1982,6 +2254,56 @@ func (c *SageMaker) UpdateNotebookInstanceRequest(input *UpdateNotebookInstanceI
 	return UpdateNotebookInstanceRequest{Request: req, Input: input, Copy: c.UpdateNotebookInstanceRequest}
 }
 
+const opUpdateNotebookInstanceLifecycleConfig = "UpdateNotebookInstanceLifecycleConfig"
+
+// UpdateNotebookInstanceLifecycleConfigRequest is a API request type for the UpdateNotebookInstanceLifecycleConfig API operation.
+type UpdateNotebookInstanceLifecycleConfigRequest struct {
+	*aws.Request
+	Input *UpdateNotebookInstanceLifecycleConfigInput
+	Copy  func(*UpdateNotebookInstanceLifecycleConfigInput) UpdateNotebookInstanceLifecycleConfigRequest
+}
+
+// Send marshals and sends the UpdateNotebookInstanceLifecycleConfig API request.
+func (r UpdateNotebookInstanceLifecycleConfigRequest) Send() (*UpdateNotebookInstanceLifecycleConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateNotebookInstanceLifecycleConfigOutput), nil
+}
+
+// UpdateNotebookInstanceLifecycleConfigRequest returns a request value for making API operation for
+// Amazon SageMaker Service.
+//
+// Updates a notebook instance lifecycle configuration created with the API.
+//
+//    // Example sending a request using the UpdateNotebookInstanceLifecycleConfigRequest method.
+//    req := client.UpdateNotebookInstanceLifecycleConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceLifecycleConfig
+func (c *SageMaker) UpdateNotebookInstanceLifecycleConfigRequest(input *UpdateNotebookInstanceLifecycleConfigInput) UpdateNotebookInstanceLifecycleConfigRequest {
+	op := &aws.Operation{
+		Name:       opUpdateNotebookInstanceLifecycleConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateNotebookInstanceLifecycleConfigInput{}
+	}
+
+	output := &UpdateNotebookInstanceLifecycleConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateNotebookInstanceLifecycleConfigRequest{Request: req, Input: input, Copy: c.UpdateNotebookInstanceLifecycleConfigRequest}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTagsInput
 type AddTagsInput struct {
 	_ struct{} `type:"structure"`
@@ -2064,14 +2386,14 @@ func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
 //
 // For more information about algorithms provided by Amazon SageMaker, see Algorithms
 // (http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html). For information
-// about using your own algorithms, see Bring Your Own Algorithms  (http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html).
+// about using your own algorithms, see your-algorithms.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmSpecification
 type AlgorithmSpecification struct {
 	_ struct{} `type:"structure"`
 
 	// The registry path of the Docker image that contains the training algorithm.
-	// For information about using your own algorithms, see Docker Registry Paths
-	// for Algorithms Provided by Amazon SageMaker  (http://docs.aws.amazon.com/sagemaker/latest/dg/algos-docker-registry-paths.html).
+	// For information about docker registry paths for built-in algorithms, see
+	// sagemaker-algo-docker-registry-paths.
 	//
 	// TrainingImage is a required field
 	TrainingImage *string `type:"string" required:"true"`
@@ -2085,7 +2407,7 @@ type AlgorithmSpecification struct {
 	// container.
 	//
 	// In File mode, make sure you provision ML storage volume with sufficient capacity
-	// to accomodate the data download from S3. In addition to the training data,
+	// to accommodate the data download from S3. In addition to the training data,
 	// the ML storage volume also stores the output model. The algorithm container
 	// use ML storage volume to also store intermediate information, if any.
 	//
@@ -2538,6 +2860,17 @@ func (s CreateModelOutput) SDKResponseMetadata() aws.Response {
 type CreateNotebookInstanceInput struct {
 	_ struct{} `type:"structure"`
 
+	// Sets whether Amazon SageMaker provides internet access to the notebook instance.
+	// If you set this to Disabled this notebook instance will be able to access
+	// resources only in your VPC, and will not be able to connect to Amazon SageMaker
+	// training and endpoint services unless your configure a NAT Gateway in your
+	// VPC.
+	//
+	// For more information, see appendix-notebook-and-internet-access. You can
+	// set the value of this parameter to Disabled only if you set a value for the
+	// SubnetId parameter.
+	DirectInternetAccess DirectInternetAccess `type:"string" enum:"true"`
+
 	// The type of ML compute instance to launch for the notebook instance.
 	//
 	// InstanceType is a required field
@@ -2546,6 +2879,10 @@ type CreateNotebookInstanceInput struct {
 	// If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt data
 	// at rest on the ML storage volume that is attached to your notebook instance.
 	KmsKeyId *string `type:"string"`
+
+	// The name of a lifecycle configuration to associate with the notebook instance.
+	// For information about lifestyle configurations, see notebook-lifecycle-config.
+	LifecycleConfigName *string `type:"string"`
 
 	// The name of the new notebook instance.
 	//
@@ -2614,6 +2951,86 @@ func (s *CreateNotebookInstanceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceLifecycleConfigInput
+type CreateNotebookInstanceLifecycleConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the lifecycle configuration.
+	//
+	// NotebookInstanceLifecycleConfigName is a required field
+	NotebookInstanceLifecycleConfigName *string `type:"string" required:"true"`
+
+	// A shell script that runs only once, when you create a notebook instance.
+	OnCreate []NotebookInstanceLifecycleHook `type:"list"`
+
+	// A shell script that runs every time you start a notebook instance, including
+	// when you create the notebook instance.
+	OnStart []NotebookInstanceLifecycleHook `type:"list"`
+}
+
+// String returns the string representation
+func (s CreateNotebookInstanceLifecycleConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateNotebookInstanceLifecycleConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateNotebookInstanceLifecycleConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateNotebookInstanceLifecycleConfigInput"}
+
+	if s.NotebookInstanceLifecycleConfigName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
+	}
+	if s.OnCreate != nil {
+		for i, v := range s.OnCreate {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OnCreate", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.OnStart != nil {
+		for i, v := range s.OnStart {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OnStart", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceLifecycleConfigOutput
+type CreateNotebookInstanceLifecycleConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The Amazon Resource Name (ARN) of the lifecycle configuration.
+	NotebookInstanceLifecycleConfigArn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateNotebookInstanceLifecycleConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateNotebookInstanceLifecycleConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateNotebookInstanceLifecycleConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateNotebookInstanceOutput
@@ -2713,8 +3130,7 @@ type CreateTrainingJobInput struct {
 	// The registry path of the Docker image that contains the training algorithm
 	// and algorithm-specific metadata, including the input mode. For more information
 	// about algorithms provided by Amazon SageMaker, see Algorithms (http://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
-	// For information about providing your own algorithms, see Bring Your Own Algorithms
-	//  (http://docs.aws.amazon.com/sagemaker/latest/dg/adv-topics-own-algo.html).
+	// For information about providing your own algorithms, see your-algorithms.
 	//
 	// AlgorithmSpecification is a required field
 	AlgorithmSpecification *AlgorithmSpecification `type:"structure" required:"true"`
@@ -3161,6 +3577,62 @@ func (s *DeleteNotebookInstanceInput) Validate() error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceLifecycleConfigInput
+type DeleteNotebookInstanceLifecycleConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the lifecycle configuration to delete.
+	//
+	// NotebookInstanceLifecycleConfigName is a required field
+	NotebookInstanceLifecycleConfigName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteNotebookInstanceLifecycleConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteNotebookInstanceLifecycleConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteNotebookInstanceLifecycleConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteNotebookInstanceLifecycleConfigInput"}
+
+	if s.NotebookInstanceLifecycleConfigName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceLifecycleConfigOutput
+type DeleteNotebookInstanceLifecycleConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteNotebookInstanceLifecycleConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteNotebookInstanceLifecycleConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteNotebookInstanceLifecycleConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceOutput
 type DeleteNotebookInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3542,6 +4014,81 @@ func (s *DescribeNotebookInstanceInput) Validate() error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceLifecycleConfigInput
+type DescribeNotebookInstanceLifecycleConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the lifecycle configuration to describe.
+	//
+	// NotebookInstanceLifecycleConfigName is a required field
+	NotebookInstanceLifecycleConfigName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeNotebookInstanceLifecycleConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeNotebookInstanceLifecycleConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeNotebookInstanceLifecycleConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeNotebookInstanceLifecycleConfigInput"}
+
+	if s.NotebookInstanceLifecycleConfigName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceLifecycleConfigOutput
+type DescribeNotebookInstanceLifecycleConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A timestamp that tells when the lifecycle configuration was created.
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A timestamp that tells when the lifecycle configuration was last modified.
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Resource Name (ARN) of the lifecycle configuration.
+	NotebookInstanceLifecycleConfigArn *string `type:"string"`
+
+	// The name of the lifecycle configuration.
+	NotebookInstanceLifecycleConfigName *string `type:"string"`
+
+	// The shell script that runs only once, when you create a notebook instance.
+	OnCreate []NotebookInstanceLifecycleHook `type:"list"`
+
+	// The shell script that runs every time you start a notebook instance, including
+	// when you create the notebook instance.
+	OnStart []NotebookInstanceLifecycleHook `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeNotebookInstanceLifecycleConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeNotebookInstanceLifecycleConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeNotebookInstanceLifecycleConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeNotebookInstanceOutput
 type DescribeNotebookInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -3552,7 +4099,15 @@ type DescribeNotebookInstanceOutput struct {
 	// was created
 	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// If staus is failed, the reason it failed.
+	// Describes whether Amazon SageMaker provides internet access to the notebook
+	// instance. If this value is set to Disabled, he notebook instance does not
+	// have internet access, and cannot connect to Amazon SageMaker training and
+	// endpoint services.
+	//
+	// For more information, see appendix-notebook-and-internet-access.
+	DirectInternetAccess DirectInternetAccess `type:"string" enum:"true"`
+
+	// If status is failed, the reason it failed.
 	FailureReason *string `type:"string"`
 
 	// The type of ML compute instance running on the notebook instance.
@@ -3572,6 +4127,11 @@ type DescribeNotebookInstanceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the notebook instance.
 	NotebookInstanceArn *string `type:"string"`
+
+	// Returns the name of a notebook instance lifecycle configuration.
+	//
+	// For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+	NotebookInstanceLifecycleConfigName *string `type:"string"`
 
 	// Name of the Amazon SageMaker notebook instance.
 	NotebookInstanceName *string `type:"string"`
@@ -4140,6 +4700,98 @@ func (s ListModelsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstanceLifecycleConfigsInput
+type ListNotebookInstanceLifecycleConfigsInput struct {
+	_ struct{} `type:"structure"`
+
+	// A filter that returns only lifecycle configurations that were created after
+	// the specified time (timestamp).
+	CreationTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only lifecycle configurations that were created before
+	// the specified time (timestamp).
+	CreationTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only lifecycle configurations that were modified after
+	// the specified time (timestamp).
+	LastModifiedTimeAfter *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A filter that returns only lifecycle configurations that were modified before
+	// the specified time (timestamp).
+	LastModifiedTimeBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The maximum number of lifecycle configurations to return in the response.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// A string in the lifecycle configuration name. This filter returns only lifecycle
+	// configurations whose name contains the specified string.
+	NameContains *string `type:"string"`
+
+	// If the result of a ListNotebookInstanceLifecycleConfigs request was truncated,
+	// the response includes a NextToken. To get the next set of lifecycle configurations,
+	// use the token in the next request.
+	NextToken *string `type:"string"`
+
+	// Sorts the list of results. The default is CreationTime.
+	SortBy NotebookInstanceLifecycleConfigSortKey `type:"string" enum:"true"`
+
+	// The sort order for results.
+	SortOrder NotebookInstanceLifecycleConfigSortOrder `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ListNotebookInstanceLifecycleConfigsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListNotebookInstanceLifecycleConfigsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListNotebookInstanceLifecycleConfigsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListNotebookInstanceLifecycleConfigsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstanceLifecycleConfigsOutput
+type ListNotebookInstanceLifecycleConfigsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the response is truncated, Amazon SageMaker returns this token. To get
+	// the next set of lifecycle configurations, use it in the next request.
+	NextToken *string `type:"string"`
+
+	// An array of NotebookInstanceLifecycleConfiguration objects, each listing
+	// a lifecycle configuration.
+	NotebookInstanceLifecycleConfigs []NotebookInstanceLifecycleConfigSummary `type:"list"`
+}
+
+// String returns the string representation
+func (s ListNotebookInstanceLifecycleConfigsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListNotebookInstanceLifecycleConfigsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListNotebookInstanceLifecycleConfigsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListNotebookInstancesInput
 type ListNotebookInstancesInput struct {
 	_ struct{} `type:"structure"`
@@ -4175,6 +4827,12 @@ type ListNotebookInstancesInput struct {
 	// is truncated, you must use the same values for the filer and sort order in
 	// the next request.
 	NextToken *string `type:"string"`
+
+	// A string in the name of a notebook instances lifecycle configuration associated
+	// with this notebook instance. This filter returns only notebook instances
+	// associated with a lifecycle configuration with a name that contains the specified
+	// string.
+	NotebookInstanceLifecycleConfigNameContains *string `type:"string"`
 
 	// The field to sort results by. The default is Name.
 	SortBy NotebookInstanceSortKey `type:"string" enum:"true"`
@@ -4462,6 +5120,85 @@ func (s ModelSummary) GoString() string {
 	return s.String()
 }
 
+// Provides a summary of a notebook instance lifecycle configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceLifecycleConfigSummary
+type NotebookInstanceLifecycleConfigSummary struct {
+	_ struct{} `type:"structure"`
+
+	// A timestamp that tells when the lifecycle configuration was created.
+	CreationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A timestamp that tells when the lifecycle configuration was last modified.
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The Amazon Resource Name (ARN) of the lifecycle configuration.
+	//
+	// NotebookInstanceLifecycleConfigArn is a required field
+	NotebookInstanceLifecycleConfigArn *string `type:"string" required:"true"`
+
+	// The name of the lifecycle configuration.
+	//
+	// NotebookInstanceLifecycleConfigName is a required field
+	NotebookInstanceLifecycleConfigName *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s NotebookInstanceLifecycleConfigSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NotebookInstanceLifecycleConfigSummary) GoString() string {
+	return s.String()
+}
+
+// Contains the notebook instance lifecycle configuration script.
+//
+// Each lifecycle configuration script has a limit of 16384 characters.
+//
+// The value of the $PATH environment variable that is available to both scripts
+// is /sbin:bin:/usr/sbin:/usr/bin.
+//
+// View CloudWatch Logs for notebook instance lifecycle configurations in log
+// group /aws/sagemaker/NotebookInstances in log stream [notebook-instance-name]/[LifecycleConfigHook].
+//
+// Lifecycle configuration scripts cannot run for longer than 5 minutes. If
+// a script runs for longer than 5 minutes, it fails and the notebook instance
+// is not created or started.
+//
+// For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceLifecycleHook
+type NotebookInstanceLifecycleHook struct {
+	_ struct{} `type:"structure"`
+
+	// A base64-encoded string that contains a shell script for a notebook instance
+	// lifecycle configuration.
+	Content *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s NotebookInstanceLifecycleHook) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s NotebookInstanceLifecycleHook) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *NotebookInstanceLifecycleHook) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "NotebookInstanceLifecycleHook"}
+	if s.Content != nil && len(*s.Content) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Content", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Provides summary information for an Amazon SageMaker notebook instance.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/NotebookInstanceSummary
 type NotebookInstanceSummary struct {
@@ -4480,6 +5217,12 @@ type NotebookInstanceSummary struct {
 	//
 	// NotebookInstanceArn is a required field
 	NotebookInstanceArn *string `type:"string" required:"true"`
+
+	// The name of a notebook instance lifecycle configuration associated with this
+	// notebook instance.
+	//
+	// For information about notebook instance lifestyle configurations, see notebook-lifecycle-config.
+	NotebookInstanceLifecycleConfigName *string `type:"string"`
 
 	// The name of the notebook instance that you want a summary for.
 	//
@@ -4628,8 +5371,9 @@ func (s *ProductionVariant) Validate() error {
 }
 
 // Describes weight and capacities for a production variant associated with
-// an endpoint. If you sent a request to the UpdateWeightAndCapacities API and
-// the endpoint status is Updating, you get different desired and current values.
+// an endpoint. If you sent a request to the UpdateEndpointWeightsAndCapacities
+// API and the endpoint status is Updating, you get different desired and current
+// values.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary
 type ProductionVariantSummary struct {
 	_ struct{} `type:"structure"`
@@ -4640,10 +5384,12 @@ type ProductionVariantSummary struct {
 	// The weight associated with the variant.
 	CurrentWeight *float64 `type:"float"`
 
-	// The number of instances requested in the UpdateWeightAndCapacities request.
+	// The number of instances requested in the UpdateEndpointWeightsAndCapacities
+	// request.
 	DesiredInstanceCount *int64 `min:"1" type:"integer"`
 
-	// The requested weight, as specified in the UpdateWeightAndCapacities request.
+	// The requested weight, as specified in the UpdateEndpointWeightsAndCapacities
+	// request.
 	DesiredWeight *float64 `type:"float"`
 
 	// The name of the variant.
@@ -5341,6 +6087,83 @@ func (s *UpdateNotebookInstanceInput) Validate() error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceLifecycleConfigInput
+type UpdateNotebookInstanceLifecycleConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the lifecycle configuration.
+	//
+	// NotebookInstanceLifecycleConfigName is a required field
+	NotebookInstanceLifecycleConfigName *string `type:"string" required:"true"`
+
+	// The shell script that runs only once, when you create a notebook instance
+	OnCreate []NotebookInstanceLifecycleHook `type:"list"`
+
+	// The shell script that runs every time you start a notebook instance, including
+	// when you create the notebook instance.
+	OnStart []NotebookInstanceLifecycleHook `type:"list"`
+}
+
+// String returns the string representation
+func (s UpdateNotebookInstanceLifecycleConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateNotebookInstanceLifecycleConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateNotebookInstanceLifecycleConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateNotebookInstanceLifecycleConfigInput"}
+
+	if s.NotebookInstanceLifecycleConfigName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NotebookInstanceLifecycleConfigName"))
+	}
+	if s.OnCreate != nil {
+		for i, v := range s.OnCreate {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OnCreate", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.OnStart != nil {
+		for i, v := range s.OnStart {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "OnStart", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceLifecycleConfigOutput
+type UpdateNotebookInstanceLifecycleConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateNotebookInstanceLifecycleConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateNotebookInstanceLifecycleConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateNotebookInstanceLifecycleConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdateNotebookInstanceOutput
 type UpdateNotebookInstanceOutput struct {
 	_ struct{} `type:"structure"`
@@ -5376,6 +6199,23 @@ func (enum CompressionType) MarshalValue() (string, error) {
 }
 
 func (enum CompressionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DirectInternetAccess string
+
+// Enum values for DirectInternetAccess
+const (
+	DirectInternetAccessEnabled  DirectInternetAccess = "Enabled"
+	DirectInternetAccessDisabled DirectInternetAccess = "Disabled"
+)
+
+func (enum DirectInternetAccess) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DirectInternetAccess) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -5441,9 +6281,21 @@ type InstanceType string
 
 // Enum values for InstanceType
 const (
-	InstanceTypeMlT2Medium InstanceType = "ml.t2.medium"
-	InstanceTypeMlM4Xlarge InstanceType = "ml.m4.xlarge"
-	InstanceTypeMlP2Xlarge InstanceType = "ml.p2.xlarge"
+	InstanceTypeMlT2Medium   InstanceType = "ml.t2.medium"
+	InstanceTypeMlT2Large    InstanceType = "ml.t2.large"
+	InstanceTypeMlT2Xlarge   InstanceType = "ml.t2.xlarge"
+	InstanceTypeMlT22xlarge  InstanceType = "ml.t2.2xlarge"
+	InstanceTypeMlM4Xlarge   InstanceType = "ml.m4.xlarge"
+	InstanceTypeMlM42xlarge  InstanceType = "ml.m4.2xlarge"
+	InstanceTypeMlM44xlarge  InstanceType = "ml.m4.4xlarge"
+	InstanceTypeMlM410xlarge InstanceType = "ml.m4.10xlarge"
+	InstanceTypeMlM416xlarge InstanceType = "ml.m4.16xlarge"
+	InstanceTypeMlP2Xlarge   InstanceType = "ml.p2.xlarge"
+	InstanceTypeMlP28xlarge  InstanceType = "ml.p2.8xlarge"
+	InstanceTypeMlP216xlarge InstanceType = "ml.p2.16xlarge"
+	InstanceTypeMlP32xlarge  InstanceType = "ml.p3.2xlarge"
+	InstanceTypeMlP38xlarge  InstanceType = "ml.p3.8xlarge"
+	InstanceTypeMlP316xlarge InstanceType = "ml.p3.16xlarge"
 )
 
 func (enum InstanceType) MarshalValue() (string, error) {
@@ -5468,6 +6320,41 @@ func (enum ModelSortKey) MarshalValue() (string, error) {
 }
 
 func (enum ModelSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type NotebookInstanceLifecycleConfigSortKey string
+
+// Enum values for NotebookInstanceLifecycleConfigSortKey
+const (
+	NotebookInstanceLifecycleConfigSortKeyName             NotebookInstanceLifecycleConfigSortKey = "Name"
+	NotebookInstanceLifecycleConfigSortKeyCreationTime     NotebookInstanceLifecycleConfigSortKey = "CreationTime"
+	NotebookInstanceLifecycleConfigSortKeyLastModifiedTime NotebookInstanceLifecycleConfigSortKey = "LastModifiedTime"
+)
+
+func (enum NotebookInstanceLifecycleConfigSortKey) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotebookInstanceLifecycleConfigSortKey) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type NotebookInstanceLifecycleConfigSortOrder string
+
+// Enum values for NotebookInstanceLifecycleConfigSortOrder
+const (
+	NotebookInstanceLifecycleConfigSortOrderAscending  NotebookInstanceLifecycleConfigSortOrder = "Ascending"
+	NotebookInstanceLifecycleConfigSortOrderDescending NotebookInstanceLifecycleConfigSortOrder = "Descending"
+)
+
+func (enum NotebookInstanceLifecycleConfigSortOrder) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NotebookInstanceLifecycleConfigSortOrder) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -5549,16 +6436,38 @@ type ProductionVariantInstanceType string
 
 // Enum values for ProductionVariantInstanceType
 const (
-	ProductionVariantInstanceTypeMlC42xlarge ProductionVariantInstanceType = "ml.c4.2xlarge"
-	ProductionVariantInstanceTypeMlC48xlarge ProductionVariantInstanceType = "ml.c4.8xlarge"
-	ProductionVariantInstanceTypeMlC4Xlarge  ProductionVariantInstanceType = "ml.c4.xlarge"
-	ProductionVariantInstanceTypeMlC52xlarge ProductionVariantInstanceType = "ml.c5.2xlarge"
-	ProductionVariantInstanceTypeMlC59xlarge ProductionVariantInstanceType = "ml.c5.9xlarge"
-	ProductionVariantInstanceTypeMlC5Xlarge  ProductionVariantInstanceType = "ml.c5.xlarge"
-	ProductionVariantInstanceTypeMlM4Xlarge  ProductionVariantInstanceType = "ml.m4.xlarge"
-	ProductionVariantInstanceTypeMlP2Xlarge  ProductionVariantInstanceType = "ml.p2.xlarge"
-	ProductionVariantInstanceTypeMlP32xlarge ProductionVariantInstanceType = "ml.p3.2xlarge"
-	ProductionVariantInstanceTypeMlT2Medium  ProductionVariantInstanceType = "ml.t2.medium"
+	ProductionVariantInstanceTypeMlT2Medium   ProductionVariantInstanceType = "ml.t2.medium"
+	ProductionVariantInstanceTypeMlT2Large    ProductionVariantInstanceType = "ml.t2.large"
+	ProductionVariantInstanceTypeMlT2Xlarge   ProductionVariantInstanceType = "ml.t2.xlarge"
+	ProductionVariantInstanceTypeMlT22xlarge  ProductionVariantInstanceType = "ml.t2.2xlarge"
+	ProductionVariantInstanceTypeMlM4Xlarge   ProductionVariantInstanceType = "ml.m4.xlarge"
+	ProductionVariantInstanceTypeMlM42xlarge  ProductionVariantInstanceType = "ml.m4.2xlarge"
+	ProductionVariantInstanceTypeMlM44xlarge  ProductionVariantInstanceType = "ml.m4.4xlarge"
+	ProductionVariantInstanceTypeMlM410xlarge ProductionVariantInstanceType = "ml.m4.10xlarge"
+	ProductionVariantInstanceTypeMlM416xlarge ProductionVariantInstanceType = "ml.m4.16xlarge"
+	ProductionVariantInstanceTypeMlM5Large    ProductionVariantInstanceType = "ml.m5.large"
+	ProductionVariantInstanceTypeMlM5Xlarge   ProductionVariantInstanceType = "ml.m5.xlarge"
+	ProductionVariantInstanceTypeMlM52xlarge  ProductionVariantInstanceType = "ml.m5.2xlarge"
+	ProductionVariantInstanceTypeMlM54xlarge  ProductionVariantInstanceType = "ml.m5.4xlarge"
+	ProductionVariantInstanceTypeMlM512xlarge ProductionVariantInstanceType = "ml.m5.12xlarge"
+	ProductionVariantInstanceTypeMlM524xlarge ProductionVariantInstanceType = "ml.m5.24xlarge"
+	ProductionVariantInstanceTypeMlC4Large    ProductionVariantInstanceType = "ml.c4.large"
+	ProductionVariantInstanceTypeMlC4Xlarge   ProductionVariantInstanceType = "ml.c4.xlarge"
+	ProductionVariantInstanceTypeMlC42xlarge  ProductionVariantInstanceType = "ml.c4.2xlarge"
+	ProductionVariantInstanceTypeMlC44xlarge  ProductionVariantInstanceType = "ml.c4.4xlarge"
+	ProductionVariantInstanceTypeMlC48xlarge  ProductionVariantInstanceType = "ml.c4.8xlarge"
+	ProductionVariantInstanceTypeMlP2Xlarge   ProductionVariantInstanceType = "ml.p2.xlarge"
+	ProductionVariantInstanceTypeMlP28xlarge  ProductionVariantInstanceType = "ml.p2.8xlarge"
+	ProductionVariantInstanceTypeMlP216xlarge ProductionVariantInstanceType = "ml.p2.16xlarge"
+	ProductionVariantInstanceTypeMlP32xlarge  ProductionVariantInstanceType = "ml.p3.2xlarge"
+	ProductionVariantInstanceTypeMlP38xlarge  ProductionVariantInstanceType = "ml.p3.8xlarge"
+	ProductionVariantInstanceTypeMlP316xlarge ProductionVariantInstanceType = "ml.p3.16xlarge"
+	ProductionVariantInstanceTypeMlC5Large    ProductionVariantInstanceType = "ml.c5.large"
+	ProductionVariantInstanceTypeMlC5Xlarge   ProductionVariantInstanceType = "ml.c5.xlarge"
+	ProductionVariantInstanceTypeMlC52xlarge  ProductionVariantInstanceType = "ml.c5.2xlarge"
+	ProductionVariantInstanceTypeMlC54xlarge  ProductionVariantInstanceType = "ml.c5.4xlarge"
+	ProductionVariantInstanceTypeMlC59xlarge  ProductionVariantInstanceType = "ml.c5.9xlarge"
+	ProductionVariantInstanceTypeMlC518xlarge ProductionVariantInstanceType = "ml.c5.18xlarge"
 )
 
 func (enum ProductionVariantInstanceType) MarshalValue() (string, error) {
@@ -5702,10 +6611,19 @@ type TrainingInstanceType string
 // Enum values for TrainingInstanceType
 const (
 	TrainingInstanceTypeMlM4Xlarge   TrainingInstanceType = "ml.m4.xlarge"
+	TrainingInstanceTypeMlM42xlarge  TrainingInstanceType = "ml.m4.2xlarge"
 	TrainingInstanceTypeMlM44xlarge  TrainingInstanceType = "ml.m4.4xlarge"
 	TrainingInstanceTypeMlM410xlarge TrainingInstanceType = "ml.m4.10xlarge"
+	TrainingInstanceTypeMlM416xlarge TrainingInstanceType = "ml.m4.16xlarge"
+	TrainingInstanceTypeMlM5Large    TrainingInstanceType = "ml.m5.large"
+	TrainingInstanceTypeMlM5Xlarge   TrainingInstanceType = "ml.m5.xlarge"
+	TrainingInstanceTypeMlM52xlarge  TrainingInstanceType = "ml.m5.2xlarge"
+	TrainingInstanceTypeMlM54xlarge  TrainingInstanceType = "ml.m5.4xlarge"
+	TrainingInstanceTypeMlM512xlarge TrainingInstanceType = "ml.m5.12xlarge"
+	TrainingInstanceTypeMlM524xlarge TrainingInstanceType = "ml.m5.24xlarge"
 	TrainingInstanceTypeMlC4Xlarge   TrainingInstanceType = "ml.c4.xlarge"
 	TrainingInstanceTypeMlC42xlarge  TrainingInstanceType = "ml.c4.2xlarge"
+	TrainingInstanceTypeMlC44xlarge  TrainingInstanceType = "ml.c4.4xlarge"
 	TrainingInstanceTypeMlC48xlarge  TrainingInstanceType = "ml.c4.8xlarge"
 	TrainingInstanceTypeMlP2Xlarge   TrainingInstanceType = "ml.p2.xlarge"
 	TrainingInstanceTypeMlP28xlarge  TrainingInstanceType = "ml.p2.8xlarge"

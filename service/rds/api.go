@@ -527,8 +527,6 @@ func (r CopyDBSnapshotRequest) Send() (*CopyDBSnapshotOutput, error) {
 // AWS Region where you call the CopyDBSnapshot action is the destination AWS
 // Region for the DB snapshot copy.
 //
-// You can't copy an encrypted, shared DB snapshot from one AWS Region to another.
-//
 // For more information about copying snapshots, see Copying a DB Snapshot (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopyDBSnapshot.html)
 // in the Amazon RDS User Guide.
 //
@@ -4988,10 +4986,13 @@ func (r PromoteReadReplicaRequest) Send() (*PromoteReadReplicaOutput, error) {
 //
 // Promotes a Read Replica DB instance to a standalone DB instance.
 //
-// We recommend that you enable automated backups on your Read Replica before
-// promoting the Read Replica. This ensures that no backup is taken during the
-// promotion process. Once the instance is promoted to a primary instance, backups
-// are taken based on your backup settings.
+// Backup duration is a function of the amount of changes to the database since
+// the previous backup. If you plan to promote a Read Replica to a standalone
+// instance, we recommend that you enable backups and complete at least one
+// backup prior to promotion. In addition, a Read Replica cannot be promoted
+// to a standalone instance when it is in the backing-up status. If you have
+// enabled backups on your Read Replica, configure the automated backup window
+// so that daily backups do not interfere with Read Replica promotion.
 //
 // This command doesn't apply to Aurora MySQL and Aurora PostgreSQL.
 //
@@ -7988,15 +7989,21 @@ type CreateDBInstanceInput struct {
 	//
 	// MariaDB
 	//
+	//    * 10.2.12 (supported in all AWS Regions)
+	//
 	//    * 10.2.11 (supported in all AWS Regions)
 	//
-	// 10.1.26 (supported in all AWS Regions)
+	// 10.1.31 (supported in all AWS Regions)
+	//
+	//    * 10.1.26 (supported in all AWS Regions)
 	//
 	//    * 10.1.23 (supported in all AWS Regions)
 	//
 	//    * 10.1.19 (supported in all AWS Regions)
 	//
 	//    * 10.1.14 (supported in all AWS Regions except us-east-2)
+	//
+	//    * 10.0.34 (supported in all AWS Regions)
 	//
 	//    * 10.0.32 (supported in all AWS Regions)
 	//
@@ -8055,11 +8062,15 @@ type CreateDBInstanceInput struct {
 	//
 	// MySQL
 	//
+	//    * 5.7.21 (supported in all AWS regions)
+	//
 	//    * 5.7.19 (supported in all AWS regions)
 	//
 	//    * 5.7.17 (supported in all AWS regions)
 	//
 	//    * 5.7.16 (supported in all AWS regions)
+	//
+	// 5.6.39(supported in all AWS Regions)
 	//
 	// 5.6.37(supported in all AWS Regions)
 	//
@@ -17547,7 +17558,7 @@ type RestoreDBClusterFromSnapshotInput struct {
 	//
 	// Constraints:
 	//
-	//    * Must contain from 1 to 255 letters, numbers, or hyphens
+	//    * Must contain from 1 to 63 letters, numbers, or hyphens
 	//
 	//    * First character must be a letter
 	//

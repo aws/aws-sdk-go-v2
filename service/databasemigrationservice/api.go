@@ -32,10 +32,10 @@ func (r AddTagsToResourceRequest) Send() (*AddTagsToResourceOutput, error) {
 // AddTagsToResourceRequest returns a request value for making API operation for
 // AWS Database Migration Service.
 //
-// Adds metadata tags to a DMS resource, including replication instance, endpoint,
-// security group, and migration task. These tags can also be used with cost
-// allocation reporting to track cost associated with DMS resources, or used
-// in a Condition statement in an IAM policy for DMS.
+// Adds metadata tags to an AWS DMS resource, including replication instance,
+// endpoint, security group, and migration task. These tags can also be used
+// with cost allocation reporting to track cost associated with DMS resources,
+// or used in a Condition statement in an IAM policy for DMS.
 //
 //    // Example sending a request using the AddTagsToResourceRequest method.
 //    req := client.AddTagsToResourceRequest(params)
@@ -3231,11 +3231,14 @@ type CreateEndpointInput struct {
 	EndpointType ReplicationEndpointTypeValue `type:"string" required:"true" enum:"true"`
 
 	// The type of engine for the endpoint. Valid values, depending on the EndPointType,
-	// include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb,
-	// mongodb, and sqlserver.
+	// include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift,
+	// s3, db2, azuredb, sybase, dynamodb, mongodb, and sqlserver.
 	//
 	// EngineName is a required field
 	EngineName *string `type:"string" required:"true"`
+
+	// The external table definition.
+	ExternalTableDefinition *string `type:"string"`
 
 	// Additional attributes associated with the connection.
 	ExtraConnectionAttributes *string `type:"string"`
@@ -3259,13 +3262,17 @@ type CreateEndpointInput struct {
 	// The port used by the endpoint database.
 	Port *int64 `type:"integer"`
 
-	// Settings in JSON format for the target S3 endpoint. For more information
+	// Settings in JSON format for the target Amazon S3 endpoint. For more information
 	// about the available settings, see the Extra Connection Attributes section
 	// at  Using Amazon S3 as a Target for AWS Database Migration Service (http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html).
 	S3Settings *S3Settings `type:"structure"`
 
 	// The name of the server where the endpoint database resides.
 	ServerName *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) for the service access role you want to use
+	// to create the endpoint.
+	ServiceAccessRoleArn *string `type:"string"`
 
 	// The SSL mode to use for the SSL connection.
 	//
@@ -3378,7 +3385,7 @@ type CreateEventSubscriptionInput struct {
 	// Valid values: replication-instance | migration-task
 	SourceType *string `type:"string"`
 
-	// The name of the DMS event notification subscription.
+	// The name of the AWS DMS event notification subscription.
 	//
 	// Constraints: The name must be less than 255 characters.
 	//
@@ -3675,8 +3682,32 @@ func (s CreateReplicationSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 type CreateReplicationTaskInput struct {
 	_ struct{} `type:"structure"`
 
-	// The start time for the Change Data Capture (CDC) operation.
+	// Indicates when you want a change data capture (CDC) operation to start. Use
+	// either CdcStartPosition or CdcStartTime to specify when you want a CDC operation
+	// to start. Specifying both values results in an error.
+	//
+	// The value can be in date, checkpoint, or LSN/SCN format.
+	//
+	// Date Example: --cdc-start-position “2018-03-08T12:12:12”
+	//
+	// Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+	//
+	// LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+	CdcStartPosition *string `type:"string"`
+
+	// Indicates the start time for a change data capture (CDC) operation. Use either
+	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation
+	// to start. Specifying both values results in an error.
 	CdcStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Indicates when you want a change data capture (CDC) operation to stop. The
+	// value can be either server time or commit time.
+	//
+	// Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”
+	//
+	// Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12
+	// “
+	CdcStopPosition *string `type:"string"`
 
 	// The migration type.
 	//
@@ -5498,15 +5529,22 @@ type Endpoint struct {
 	// The type of endpoint.
 	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
+	// The expanded name for the engine name. For example, if the EngineName parameter
+	// is "aurora," this value would be "Amazon Aurora MySQL."
+	EngineDisplayName *string `type:"string"`
+
 	// The database engine name. Valid values, depending on the EndPointType, include
-	// mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb,
-	// mongodb, and sqlserver.
+	// mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3,
+	// db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
 	EngineName *string `type:"string"`
 
 	// Value returned by a call to CreateEndpoint that can be used for cross-account
 	// validation. Use it on a subsequent call to CreateEndpoint to create the endpoint
 	// with a cross-account.
 	ExternalId *string `type:"string"`
+
+	// The external table definition.
+	ExternalTableDefinition *string `type:"string"`
 
 	// Additional connection attributes used to connect to the endpoint.
 	ExtraConnectionAttributes *string `type:"string"`
@@ -5531,6 +5569,9 @@ type Endpoint struct {
 
 	// The name of the server at the endpoint.
 	ServerName *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) used by the service access IAM role.
+	ServiceAccessRoleArn *string `type:"string"`
 
 	// The SSL mode used to connect to the endpoint.
 	//
@@ -5874,9 +5915,12 @@ type ModifyEndpointInput struct {
 	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
 	// The type of engine for the endpoint. Valid values, depending on the EndPointType,
-	// include mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb,
-	// mongodb, and sqlserver.
+	// include mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift,
+	// s3, db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
 	EngineName *string `type:"string"`
+
+	// The external table definition.
+	ExternalTableDefinition *string `type:"string"`
 
 	// Additional attributes associated with the connection. To reset this parameter,
 	// pass the empty string ("") as an argument.
@@ -5901,6 +5945,10 @@ type ModifyEndpointInput struct {
 
 	// The name of the server where the endpoint database resides.
 	ServerName *string `type:"string"`
+
+	// The Amazon Resource Name (ARN) for the service access role you want to use
+	// to modify the endpoint.
+	ServiceAccessRoleArn *string `type:"string"`
 
 	// The SSL mode to be used.
 	//
@@ -6242,8 +6290,32 @@ func (s ModifyReplicationSubnetGroupOutput) SDKResponseMetadata() aws.Response {
 type ModifyReplicationTaskInput struct {
 	_ struct{} `type:"structure"`
 
-	// The start time for the Change Data Capture (CDC) operation.
+	// Indicates when you want a change data capture (CDC) operation to start. Use
+	// either CdcStartPosition or CdcStartTime to specify when you want a CDC operation
+	// to start. Specifying both values results in an error.
+	//
+	// The value can be in date, checkpoint, or LSN/SCN format.
+	//
+	// Date Example: --cdc-start-position “2018-03-08T12:12:12”
+	//
+	// Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+	//
+	// LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+	CdcStartPosition *string `type:"string"`
+
+	// Indicates the start time for a change data capture (CDC) operation. Use either
+	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation
+	// to start. Specifying both values results in an error.
 	CdcStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Indicates when you want a change data capture (CDC) operation to stop. The
+	// value can be either server time or commit time.
+	//
+	// Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”
+	//
+	// Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12
+	// “
+	CdcStopPosition *string `type:"string"`
 
 	// The migration type.
 	//
@@ -6365,6 +6437,13 @@ type MongoDbSettings struct {
 	//
 	// Default value is false.
 	ExtractDocId *string `type:"string"`
+
+	// The KMS key identifier that will be used to encrypt the connection parameters.
+	// If you do not specify a value for the KmsKeyId parameter, then AWS DMS will
+	// use your default encryption key. AWS KMS creates the default encryption key
+	// for your AWS account. Your AWS account has a different default encryption
+	// key for each AWS region.
+	KmsKeyId *string `type:"string"`
 
 	// Specifies either document or table mode.
 	//
@@ -6753,6 +6832,10 @@ type ReplicationInstance struct {
 	// The engine version number of the replication instance.
 	EngineVersion *string `type:"string"`
 
+	// The expiration date of the free replication instance that is part of the
+	// Free DMS program.
+	FreeUntil *time.Time `type:"timestamp" timestampFormat:"unix"`
+
 	// The time the replication instance was created.
 	InstanceCreateTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 
@@ -6927,11 +7010,38 @@ func (s ReplicationSubnetGroup) GoString() string {
 type ReplicationTask struct {
 	_ struct{} `type:"structure"`
 
+	// Indicates when you want a change data capture (CDC) operation to start. Use
+	// either CdcStartPosition or CdcStartTime to specify when you want a CDC operation
+	// to start. Specifying both values results in an error.
+	//
+	// The value can be in date, checkpoint, or LSN/SCN format.
+	//
+	// Date Example: --cdc-start-position “2018-03-08T12:12:12”
+	//
+	// Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+	//
+	// LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+	CdcStartPosition *string `type:"string"`
+
+	// Indicates when you want a change data capture (CDC) operation to stop. The
+	// value can be either server time or commit time.
+	//
+	// Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”
+	//
+	// Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12
+	// “
+	CdcStopPosition *string `type:"string"`
+
 	// The last error (failure) message generated for the replication instance.
 	LastFailureMessage *string `type:"string"`
 
 	// The type of migration.
 	MigrationType MigrationTypeValue `type:"string" enum:"true"`
+
+	// Indicates the last checkpoint that occurred during a change data capture
+	// (CDC) operation. You can provide this value to the CdcStartPosition parameter
+	// to start a CDC operation that begins at that checkpoint.
+	RecoveryCheckpoint *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the replication instance.
 	ReplicationInstanceArn *string `type:"string"`
@@ -7085,6 +7195,7 @@ type S3Settings struct {
 	// carriage return (\n).
 	CsvRowDelimiter *string `type:"string"`
 
+	// The external table definition.
 	ExternalTableDefinition *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) used by the service access IAM role.
@@ -7164,8 +7275,32 @@ func (s StartReplicationTaskAssessmentOutput) SDKResponseMetadata() aws.Response
 type StartReplicationTaskInput struct {
 	_ struct{} `type:"structure"`
 
-	// The start time for the Change Data Capture (CDC) operation.
+	// Indicates when you want a change data capture (CDC) operation to start. Use
+	// either CdcStartPosition or CdcStartTime to specify when you want a CDC operation
+	// to start. Specifying both values results in an error.
+	//
+	// The value can be in date, checkpoint, or LSN/SCN format.
+	//
+	// Date Example: --cdc-start-position “2018-03-08T12:12:12”
+	//
+	// Checkpoint Example: --cdc-start-position "checkpoint:V1#27#mysql-bin-changelog.157832:1975:-1:2002:677883278264080:mysql-bin-changelog.157832:1876#0#0#*#0#93"
+	//
+	// LSN Example: --cdc-start-position “mysql-bin-changelog.000024:373”
+	CdcStartPosition *string `type:"string"`
+
+	// Indicates the start time for a change data capture (CDC) operation. Use either
+	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation
+	// to start. Specifying both values results in an error.
 	CdcStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// Indicates when you want a change data capture (CDC) operation to stop. The
+	// value can be either server time or commit time.
+	//
+	// Server time example: --cdc-stop-position “server_time:3018-02-09T12:12:12”
+	//
+	// Commit time example: --cdc-stop-position “commit_time: 3018-02-09T12:12:12
+	// “
+	CdcStopPosition *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the replication task to be started.
 	//
@@ -7320,9 +7455,13 @@ type SupportedEndpointType struct {
 	// The type of endpoint.
 	EndpointType ReplicationEndpointTypeValue `type:"string" enum:"true"`
 
+	// The expanded name for the engine name. For example, if the EngineName parameter
+	// is "aurora," this value would be "Amazon Aurora MySQL."
+	EngineDisplayName *string `type:"string"`
+
 	// The database engine name. Valid values, depending on the EndPointType, include
-	// mysql, oracle, postgres, mariadb, aurora, redshift, S3, sybase, dynamodb,
-	// mongodb, and sqlserver.
+	// mysql, oracle, postgres, mariadb, aurora, aurora-postgresql, redshift, s3,
+	// db2, azuredb, sybase, sybase, dynamodb, mongodb, and sqlserver.
 	EngineName *string `type:"string"`
 
 	// Indicates if Change Data Capture (CDC) is supported.

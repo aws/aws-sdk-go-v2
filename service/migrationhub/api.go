@@ -206,9 +206,9 @@ func (r DeleteProgressUpdateStreamRequest) Send() (*DeleteProgressUpdateStreamOu
 //    * The only parameter needed for DeleteProgressUpdateStream is the stream
 //    name (same as a CreateProgressUpdateStream call).
 //
-//    * The call will return, and a background process will asynchronously be
-//    doing the actual delete of the stream and all of its resources (tasks,
-//    associated resources, resource attributes, created artifacts).
+//    * The call will return, and a background process will asynchronously delete
+//    the stream and all of its resources (tasks, associated resources, resource
+//    attributes, created artifacts).
 //
 //    * If the stream takes time to be deleted, it might still show up on a
 //    ListProgressUpdateStreams call.
@@ -877,9 +877,12 @@ func (r PutResourceAttributesRequest) Send() (*PutResourceAttributesOutput, erro
 // to call it with both the IP and MAC addresses to prevent overiding the MAC
 // address.
 //
+// Note the instructions regarding the special use case of the ResourceAttributeList
+// parameter when specifying any "VM" related value.
+//
 // Because this is an asynchronous call, it will always return 200, whether
 // an association occurs or not. To confirm if an association was found based
-// on the provided details, call ListAssociatedResource.
+// on the provided details, call ListDiscoveredResources.
 //
 //    // Example sending a request using the PutResourceAttributesRequest method.
 //    req := client.PutResourceAttributesRequest(params)
@@ -1575,7 +1578,7 @@ func (s DisassociateDiscoveredResourceOutput) SDKResponseMetadata() aws.Response
 type DiscoveredResource struct {
 	_ struct{} `type:"structure"`
 
-	// The configurationId in ADS that uniquely identifies the on-premises resource.
+	// The configurationId in ADS that uniquely identifies the on-premise resource.
 	//
 	// ConfigurationId is a required field
 	ConfigurationId *string `min:"1" type:"string" required:"true"`
@@ -2291,6 +2294,18 @@ type PutResourceAttributesInput struct {
 	// used to map the task to a resource in the Application Discovery Service (ADS)'s
 	// repository.
 	//
+	// In the ResourceAttribute object array, the Type field is reserved for the
+	// following values: IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS | FQDN | VM_MANAGER_ID
+	// | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH | BIOS_ID | MOTHERBOARD_SERIAL_NUMBER,
+	// and the identifying value can be a string up to 256 characters.
+	//
+	// If any "VM" related value is used for a ResourceAttribute object, it is required
+	// that VM_MANAGER_ID, as a minimum, is always used. If it is not used, the
+	// server will not be associated in the Application Discovery Service (ADS)'s
+	// repository using any of the other "VM" related values, and you will experience
+	// data loss. See the Example section below for a use case of specifying "VM"
+	// related values.
+	//
 	// ResourceAttributeList is a required field
 	ResourceAttributeList []ResourceAttribute `min:"1" type:"list" required:"true"`
 }
@@ -2366,6 +2381,20 @@ func (s PutResourceAttributesOutput) SDKResponseMetadata() aws.Response {
 }
 
 // Attribute associated with a resource.
+//
+// Note the corresponding format required per type listed below:
+//
+// IPV4x.x.x.x
+//
+// where x is an integer in the range [0,255]
+//
+// IPV6y : y : y : y : y : y : y : y
+//
+// where y is a hexadecimal between 0 and FFFF. [0, FFFF]
+//
+// MAC_ADDRESS^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$
+//
+// FQDN^[^<>{}\\\\/?,=\\p{Cntrl}]{1,256}$
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/AWSMigrationHub-2017-05-31/ResourceAttribute
 type ResourceAttribute struct {
 	_ struct{} `type:"structure"`
@@ -2485,7 +2514,6 @@ const (
 	ResourceAttributeTypeVmPath                   ResourceAttributeType = "VM_PATH"
 	ResourceAttributeTypeBiosId                   ResourceAttributeType = "BIOS_ID"
 	ResourceAttributeTypeMotherboardSerialNumber  ResourceAttributeType = "MOTHERBOARD_SERIAL_NUMBER"
-	ResourceAttributeTypeLabel                    ResourceAttributeType = "LABEL"
 )
 
 func (enum ResourceAttributeType) MarshalValue() (string, error) {

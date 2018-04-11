@@ -68,6 +68,8 @@ type ACMAPI interface {
 
 	DescribeCertificateRequest(*acm.DescribeCertificateInput) acm.DescribeCertificateRequest
 
+	ExportCertificateRequest(*acm.ExportCertificateInput) acm.ExportCertificateRequest
+
 	GetCertificateRequest(*acm.GetCertificateInput) acm.GetCertificateRequest
 
 	ImportCertificateRequest(*acm.ImportCertificateInput) acm.ImportCertificateRequest
@@ -81,6 +83,8 @@ type ACMAPI interface {
 	RequestCertificateRequest(*acm.RequestCertificateInput) acm.RequestCertificateRequest
 
 	ResendValidationEmailRequest(*acm.ResendValidationEmailInput) acm.ResendValidationEmailRequest
+
+	UpdateCertificateOptionsRequest(*acm.UpdateCertificateOptionsInput) acm.UpdateCertificateOptionsRequest
 }
 
 var _ ACMAPI = (*acm.ACM)(nil)

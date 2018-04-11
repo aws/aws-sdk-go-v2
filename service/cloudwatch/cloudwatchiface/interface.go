@@ -79,6 +79,8 @@ type CloudWatchAPI interface {
 
 	GetDashboardRequest(*cloudwatch.GetDashboardInput) cloudwatch.GetDashboardRequest
 
+	GetMetricDataRequest(*cloudwatch.GetMetricDataInput) cloudwatch.GetMetricDataRequest
+
 	GetMetricStatisticsRequest(*cloudwatch.GetMetricStatisticsInput) cloudwatch.GetMetricStatisticsRequest
 
 	ListDashboardsRequest(*cloudwatch.ListDashboardsInput) cloudwatch.ListDashboardsRequest

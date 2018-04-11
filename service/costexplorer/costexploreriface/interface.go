@@ -68,6 +68,8 @@ type CostExplorerAPI interface {
 
 	GetReservationCoverageRequest(*costexplorer.GetReservationCoverageInput) costexplorer.GetReservationCoverageRequest
 
+	GetReservationPurchaseRecommendationRequest(*costexplorer.GetReservationPurchaseRecommendationInput) costexplorer.GetReservationPurchaseRecommendationRequest
+
 	GetReservationUtilizationRequest(*costexplorer.GetReservationUtilizationInput) costexplorer.GetReservationUtilizationRequest
 
 	GetTagsRequest(*costexplorer.GetTagsInput) costexplorer.GetTagsRequest

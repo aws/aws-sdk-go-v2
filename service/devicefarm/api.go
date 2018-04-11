@@ -59,6 +59,57 @@ func (c *DeviceFarm) CreateDevicePoolRequest(input *CreateDevicePoolInput) Creat
 	return CreateDevicePoolRequest{Request: req, Input: input, Copy: c.CreateDevicePoolRequest}
 }
 
+const opCreateInstanceProfile = "CreateInstanceProfile"
+
+// CreateInstanceProfileRequest is a API request type for the CreateInstanceProfile API operation.
+type CreateInstanceProfileRequest struct {
+	*aws.Request
+	Input *CreateInstanceProfileInput
+	Copy  func(*CreateInstanceProfileInput) CreateInstanceProfileRequest
+}
+
+// Send marshals and sends the CreateInstanceProfile API request.
+func (r CreateInstanceProfileRequest) Send() (*CreateInstanceProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateInstanceProfileOutput), nil
+}
+
+// CreateInstanceProfileRequest returns a request value for making API operation for
+// AWS Device Farm.
+//
+// Creates a profile that can be applied to one or more private fleet device
+// instances.
+//
+//    // Example sending a request using the CreateInstanceProfileRequest method.
+//    req := client.CreateInstanceProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateInstanceProfile
+func (c *DeviceFarm) CreateInstanceProfileRequest(input *CreateInstanceProfileInput) CreateInstanceProfileRequest {
+	op := &aws.Operation{
+		Name:       opCreateInstanceProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateInstanceProfileInput{}
+	}
+
+	output := &CreateInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateInstanceProfileRequest{Request: req, Input: input, Copy: c.CreateInstanceProfileRequest}
+}
+
 const opCreateNetworkProfile = "CreateNetworkProfile"
 
 // CreateNetworkProfileRequest is a API request type for the CreateNetworkProfile API operation.
@@ -308,6 +359,56 @@ func (c *DeviceFarm) DeleteDevicePoolRequest(input *DeleteDevicePoolInput) Delet
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteDevicePoolRequest{Request: req, Input: input, Copy: c.DeleteDevicePoolRequest}
+}
+
+const opDeleteInstanceProfile = "DeleteInstanceProfile"
+
+// DeleteInstanceProfileRequest is a API request type for the DeleteInstanceProfile API operation.
+type DeleteInstanceProfileRequest struct {
+	*aws.Request
+	Input *DeleteInstanceProfileInput
+	Copy  func(*DeleteInstanceProfileInput) DeleteInstanceProfileRequest
+}
+
+// Send marshals and sends the DeleteInstanceProfile API request.
+func (r DeleteInstanceProfileRequest) Send() (*DeleteInstanceProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteInstanceProfileOutput), nil
+}
+
+// DeleteInstanceProfileRequest returns a request value for making API operation for
+// AWS Device Farm.
+//
+// Deletes a profile that can be applied to one or more private device instances.
+//
+//    // Example sending a request using the DeleteInstanceProfileRequest method.
+//    req := client.DeleteInstanceProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteInstanceProfile
+func (c *DeviceFarm) DeleteInstanceProfileRequest(input *DeleteInstanceProfileInput) DeleteInstanceProfileRequest {
+	op := &aws.Operation{
+		Name:       opDeleteInstanceProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteInstanceProfileInput{}
+	}
+
+	output := &DeleteInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteInstanceProfileRequest{Request: req, Input: input, Copy: c.DeleteInstanceProfileRequest}
 }
 
 const opDeleteNetworkProfile = "DeleteNetworkProfile"
@@ -665,6 +766,57 @@ func (c *DeviceFarm) GetDeviceRequest(input *GetDeviceInput) GetDeviceRequest {
 	return GetDeviceRequest{Request: req, Input: input, Copy: c.GetDeviceRequest}
 }
 
+const opGetDeviceInstance = "GetDeviceInstance"
+
+// GetDeviceInstanceRequest is a API request type for the GetDeviceInstance API operation.
+type GetDeviceInstanceRequest struct {
+	*aws.Request
+	Input *GetDeviceInstanceInput
+	Copy  func(*GetDeviceInstanceInput) GetDeviceInstanceRequest
+}
+
+// Send marshals and sends the GetDeviceInstance API request.
+func (r GetDeviceInstanceRequest) Send() (*GetDeviceInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetDeviceInstanceOutput), nil
+}
+
+// GetDeviceInstanceRequest returns a request value for making API operation for
+// AWS Device Farm.
+//
+// Returns information about a device instance belonging to a private device
+// fleet.
+//
+//    // Example sending a request using the GetDeviceInstanceRequest method.
+//    req := client.GetDeviceInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceInstance
+func (c *DeviceFarm) GetDeviceInstanceRequest(input *GetDeviceInstanceInput) GetDeviceInstanceRequest {
+	op := &aws.Operation{
+		Name:       opGetDeviceInstance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetDeviceInstanceInput{}
+	}
+
+	output := &GetDeviceInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetDeviceInstanceRequest{Request: req, Input: input, Copy: c.GetDeviceInstanceRequest}
+}
+
 const opGetDevicePool = "GetDevicePool"
 
 // GetDevicePoolRequest is a API request type for the GetDevicePool API operation.
@@ -763,6 +915,56 @@ func (c *DeviceFarm) GetDevicePoolCompatibilityRequest(input *GetDevicePoolCompa
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetDevicePoolCompatibilityRequest{Request: req, Input: input, Copy: c.GetDevicePoolCompatibilityRequest}
+}
+
+const opGetInstanceProfile = "GetInstanceProfile"
+
+// GetInstanceProfileRequest is a API request type for the GetInstanceProfile API operation.
+type GetInstanceProfileRequest struct {
+	*aws.Request
+	Input *GetInstanceProfileInput
+	Copy  func(*GetInstanceProfileInput) GetInstanceProfileRequest
+}
+
+// Send marshals and sends the GetInstanceProfile API request.
+func (r GetInstanceProfileRequest) Send() (*GetInstanceProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetInstanceProfileOutput), nil
+}
+
+// GetInstanceProfileRequest returns a request value for making API operation for
+// AWS Device Farm.
+//
+// Returns information about the specified instance profile.
+//
+//    // Example sending a request using the GetInstanceProfileRequest method.
+//    req := client.GetInstanceProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetInstanceProfile
+func (c *DeviceFarm) GetInstanceProfileRequest(input *GetInstanceProfileInput) GetInstanceProfileRequest {
+	op := &aws.Operation{
+		Name:       opGetInstanceProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &GetInstanceProfileInput{}
+	}
+
+	output := &GetInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetInstanceProfileRequest{Request: req, Input: input, Copy: c.GetInstanceProfileRequest}
 }
 
 const opGetJob = "GetJob"
@@ -1426,6 +1628,57 @@ func (p *ListArtifactsPager) CurrentPage() *ListArtifactsOutput {
 	return p.Pager.CurrentPage().(*ListArtifactsOutput)
 }
 
+const opListDeviceInstances = "ListDeviceInstances"
+
+// ListDeviceInstancesRequest is a API request type for the ListDeviceInstances API operation.
+type ListDeviceInstancesRequest struct {
+	*aws.Request
+	Input *ListDeviceInstancesInput
+	Copy  func(*ListDeviceInstancesInput) ListDeviceInstancesRequest
+}
+
+// Send marshals and sends the ListDeviceInstances API request.
+func (r ListDeviceInstancesRequest) Send() (*ListDeviceInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeviceInstancesOutput), nil
+}
+
+// ListDeviceInstancesRequest returns a request value for making API operation for
+// AWS Device Farm.
+//
+// Returns information about the private device instances associated with one
+// or more AWS accounts.
+//
+//    // Example sending a request using the ListDeviceInstancesRequest method.
+//    req := client.ListDeviceInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDeviceInstances
+func (c *DeviceFarm) ListDeviceInstancesRequest(input *ListDeviceInstancesInput) ListDeviceInstancesRequest {
+	op := &aws.Operation{
+		Name:       opListDeviceInstances,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListDeviceInstancesInput{}
+	}
+
+	output := &ListDeviceInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListDeviceInstancesRequest{Request: req, Input: input, Copy: c.ListDeviceInstancesRequest}
+}
+
 const opListDevicePools = "ListDevicePools"
 
 // ListDevicePoolsRequest is a API request type for the ListDevicePools API operation.
@@ -1628,6 +1881,56 @@ type ListDevicesPager struct {
 
 func (p *ListDevicesPager) CurrentPage() *ListDevicesOutput {
 	return p.Pager.CurrentPage().(*ListDevicesOutput)
+}
+
+const opListInstanceProfiles = "ListInstanceProfiles"
+
+// ListInstanceProfilesRequest is a API request type for the ListInstanceProfiles API operation.
+type ListInstanceProfilesRequest struct {
+	*aws.Request
+	Input *ListInstanceProfilesInput
+	Copy  func(*ListInstanceProfilesInput) ListInstanceProfilesRequest
+}
+
+// Send marshals and sends the ListInstanceProfiles API request.
+func (r ListInstanceProfilesRequest) Send() (*ListInstanceProfilesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListInstanceProfilesOutput), nil
+}
+
+// ListInstanceProfilesRequest returns a request value for making API operation for
+// AWS Device Farm.
+//
+// Returns information about all the instance profiles in an AWS account.
+//
+//    // Example sending a request using the ListInstanceProfilesRequest method.
+//    req := client.ListInstanceProfilesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListInstanceProfiles
+func (c *DeviceFarm) ListInstanceProfilesRequest(input *ListInstanceProfilesInput) ListInstanceProfilesRequest {
+	op := &aws.Operation{
+		Name:       opListInstanceProfiles,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListInstanceProfilesInput{}
+	}
+
+	output := &ListInstanceProfilesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListInstanceProfilesRequest{Request: req, Input: input, Copy: c.ListInstanceProfilesRequest}
 }
 
 const opListJobs = "ListJobs"
@@ -3078,6 +3381,56 @@ func (c *DeviceFarm) StopRunRequest(input *StopRunInput) StopRunRequest {
 	return StopRunRequest{Request: req, Input: input, Copy: c.StopRunRequest}
 }
 
+const opUpdateDeviceInstance = "UpdateDeviceInstance"
+
+// UpdateDeviceInstanceRequest is a API request type for the UpdateDeviceInstance API operation.
+type UpdateDeviceInstanceRequest struct {
+	*aws.Request
+	Input *UpdateDeviceInstanceInput
+	Copy  func(*UpdateDeviceInstanceInput) UpdateDeviceInstanceRequest
+}
+
+// Send marshals and sends the UpdateDeviceInstance API request.
+func (r UpdateDeviceInstanceRequest) Send() (*UpdateDeviceInstanceOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateDeviceInstanceOutput), nil
+}
+
+// UpdateDeviceInstanceRequest returns a request value for making API operation for
+// AWS Device Farm.
+//
+// Updates information about an existing private device instance.
+//
+//    // Example sending a request using the UpdateDeviceInstanceRequest method.
+//    req := client.UpdateDeviceInstanceRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDeviceInstance
+func (c *DeviceFarm) UpdateDeviceInstanceRequest(input *UpdateDeviceInstanceInput) UpdateDeviceInstanceRequest {
+	op := &aws.Operation{
+		Name:       opUpdateDeviceInstance,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateDeviceInstanceInput{}
+	}
+
+	output := &UpdateDeviceInstanceOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateDeviceInstanceRequest{Request: req, Input: input, Copy: c.UpdateDeviceInstanceRequest}
+}
+
 const opUpdateDevicePool = "UpdateDevicePool"
 
 // UpdateDevicePoolRequest is a API request type for the UpdateDevicePool API operation.
@@ -3128,6 +3481,56 @@ func (c *DeviceFarm) UpdateDevicePoolRequest(input *UpdateDevicePoolInput) Updat
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateDevicePoolRequest{Request: req, Input: input, Copy: c.UpdateDevicePoolRequest}
+}
+
+const opUpdateInstanceProfile = "UpdateInstanceProfile"
+
+// UpdateInstanceProfileRequest is a API request type for the UpdateInstanceProfile API operation.
+type UpdateInstanceProfileRequest struct {
+	*aws.Request
+	Input *UpdateInstanceProfileInput
+	Copy  func(*UpdateInstanceProfileInput) UpdateInstanceProfileRequest
+}
+
+// Send marshals and sends the UpdateInstanceProfile API request.
+func (r UpdateInstanceProfileRequest) Send() (*UpdateInstanceProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateInstanceProfileOutput), nil
+}
+
+// UpdateInstanceProfileRequest returns a request value for making API operation for
+// AWS Device Farm.
+//
+// Updates information about an existing private device instance profile.
+//
+//    // Example sending a request using the UpdateInstanceProfileRequest method.
+//    req := client.UpdateInstanceProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateInstanceProfile
+func (c *DeviceFarm) UpdateInstanceProfileRequest(input *UpdateInstanceProfileInput) UpdateInstanceProfileRequest {
+	op := &aws.Operation{
+		Name:       opUpdateInstanceProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateInstanceProfileInput{}
+	}
+
+	output := &UpdateInstanceProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateInstanceProfileRequest{Request: req, Input: input, Copy: c.UpdateInstanceProfileRequest}
 }
 
 const opUpdateNetworkProfile = "UpdateNetworkProfile"
@@ -3249,6 +3652,15 @@ type AccountSettings struct {
 	// maximum is expressed as an offering-id:number pair, where the offering-id
 	// represents one of the IDs returned by the ListOfferings command.
 	MaxSlots map[string]int64 `locationName:"maxSlots" type:"map"`
+
+	// When set to true, for private devices, Device Farm will not sign your app
+	// again. For public devices, Device Farm always signs your apps again and this
+	// parameter has no effect.
+	//
+	// For more information about how Device Farm re-signs your app(s), see Do you
+	// modify my app? (https://aws.amazon.com/device-farm/faq/) in the AWS Device
+	// Farm FAQs.
+	SkipAppResign *bool `locationName:"skipAppResign" type:"boolean"`
 
 	// Information about an AWS account's usage of free trial device minutes.
 	TrialMinutes *TrialMinutes `locationName:"trialMinutes" type:"structure"`
@@ -3502,6 +3914,82 @@ func (s CreateDevicePoolOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateInstanceProfileRequest
+type CreateInstanceProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The description of your instance profile.
+	Description *string `locationName:"description" type:"string"`
+
+	// An array of strings specifying the list of app packages that should not be
+	// cleaned up from the device after a test run is over.
+	//
+	// The list of packages is only considered if you set packageCleanup to true.
+	ExcludeAppPackagesFromCleanup []string `locationName:"excludeAppPackagesFromCleanup" type:"list"`
+
+	// The name of your instance profile.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" type:"string" required:"true"`
+
+	// When set to true, Device Farm will remove app packages after a test run.
+	// The default value is false for private devices.
+	PackageCleanup *bool `locationName:"packageCleanup" type:"boolean"`
+
+	// When set to true, Device Farm will reboot the instance after a test run.
+	// The default value is true.
+	RebootAfterUse *bool `locationName:"rebootAfterUse" type:"boolean"`
+}
+
+// String returns the string representation
+func (s CreateInstanceProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateInstanceProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateInstanceProfileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateInstanceProfileInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateInstanceProfileResult
+type CreateInstanceProfileOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object containing information about your instance profile.
+	InstanceProfile *InstanceProfile `locationName:"instanceProfile" type:"structure"`
+}
+
+// String returns the string representation
+func (s CreateInstanceProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateInstanceProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateInstanceProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateNetworkProfileRequest
 type CreateNetworkProfileInput struct {
 	_ struct{} `type:"structure"`
@@ -3674,13 +4162,12 @@ func (s CreateProjectOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Creates the configuration settings for a remote access session, including
-// the device model and type.
+// Configuration settings for a remote access session, including billing method.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/CreateRemoteAccessSessionConfiguration
 type CreateRemoteAccessSessionConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Returns the billing method for purposes of configuring a remote access session.
+	// The billing method for the remote access session.
 	BillingMethod BillingMethod `locationName:"billingMethod" type:"string" enum:"true"`
 }
 
@@ -3713,6 +4200,10 @@ type CreateRemoteAccessSessionInput struct {
 	//
 	// DeviceArn is a required field
 	DeviceArn *string `locationName:"deviceArn" min:"32" type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the device instance for which you want
+	// to create a remote access session.
+	InstanceArn *string `locationName:"instanceArn" min:"32" type:"string"`
 
 	// The interaction mode of the remote access session. Valid values are:
 	//
@@ -3748,6 +4239,15 @@ type CreateRemoteAccessSessionInput struct {
 	// Set to true to enable remote recording for the remote access session.
 	RemoteRecordEnabled *bool `locationName:"remoteRecordEnabled" type:"boolean"`
 
+	// When set to true, for private devices, Device Farm will not sign your app
+	// again. For public devices, Device Farm always signs your apps again and this
+	// parameter has no effect.
+	//
+	// For more information about how Device Farm re-signs your app(s), see Do you
+	// modify my app? (https://aws.amazon.com/device-farm/faq/) in the AWS Device
+	// Farm FAQs.
+	SkipAppResign *bool `locationName:"skipAppResign" type:"boolean"`
+
 	// The public key of the ssh key pair you want to use for connecting to remote
 	// devices in your remote debugging session. This is only required if remoteDebugEnabled
 	// is set to true.
@@ -3773,6 +4273,9 @@ func (s *CreateRemoteAccessSessionInput) Validate() error {
 	}
 	if s.DeviceArn != nil && len(*s.DeviceArn) < 32 {
 		invalidParams.Add(aws.NewErrParamMinLen("DeviceArn", 32))
+	}
+	if s.InstanceArn != nil && len(*s.InstanceArn) < 32 {
+		invalidParams.Add(aws.NewErrParamMinLen("InstanceArn", 32))
 	}
 
 	if s.ProjectArn == nil {
@@ -4037,6 +4540,66 @@ func (s DeleteDevicePoolOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteDevicePoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteInstanceProfileRequest
+type DeleteInstanceProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the instance profile you are requesting
+	// to delete.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteInstanceProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteInstanceProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteInstanceProfileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteInstanceProfileInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 32 {
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeleteInstanceProfileResult
+type DeleteInstanceProfileOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteInstanceProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteInstanceProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -4383,6 +4946,9 @@ type Device struct {
 	// The device's image name.
 	Image *string `locationName:"image" type:"string"`
 
+	// The instances belonging to this device.
+	Instances []DeviceInstance `locationName:"instances" type:"list"`
+
 	// The device's manufacturer name.
 	Manufacturer *string `locationName:"manufacturer" type:"string"`
 
@@ -4430,6 +4996,40 @@ func (s Device) String() string {
 
 // GoString returns the string representation
 func (s Device) GoString() string {
+	return s.String()
+}
+
+// Represents the device instance.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/DeviceInstance
+type DeviceInstance struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the device instance.
+	Arn *string `locationName:"arn" min:"32" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the device.
+	DeviceArn *string `locationName:"deviceArn" min:"32" type:"string"`
+
+	// A object containing information about the instance profile.
+	InstanceProfile *InstanceProfile `locationName:"instanceProfile" type:"structure"`
+
+	// An array of strings describing the device instance.
+	Labels []string `locationName:"labels" type:"list"`
+
+	// The status of the device instance. Valid values are listed below.
+	Status InstanceStatus `locationName:"status" type:"string" enum:"true"`
+
+	// Unique device identifier for the device instance.
+	Udid *string `locationName:"udid" type:"string"`
+}
+
+// String returns the string representation
+func (s DeviceInstance) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeviceInstance) GoString() string {
 	return s.String()
 }
 
@@ -4541,6 +5141,15 @@ type ExecutionConfiguration struct {
 
 	// The number of minutes a test run will execute before it times out.
 	JobTimeoutMinutes *int64 `locationName:"jobTimeoutMinutes" type:"integer"`
+
+	// When set to true, for private devices, Device Farm will not sign your app
+	// again. For public devices, Device Farm always signs your apps again and this
+	// parameter has no effect.
+	//
+	// For more information about how Device Farm re-signs your app(s), see Do you
+	// modify my app? (https://aws.amazon.com/device-farm/faq/) in the AWS Device
+	// Farm FAQs.
+	SkipAppResign *bool `locationName:"skipAppResign" type:"boolean"`
 }
 
 // String returns the string representation
@@ -4632,6 +5241,69 @@ func (s *GetDeviceInput) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceInstanceRequest
+type GetDeviceInstanceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the instance you're requesting information
+	// about.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetDeviceInstanceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDeviceInstanceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetDeviceInstanceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetDeviceInstanceInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 32 {
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetDeviceInstanceResult
+type GetDeviceInstanceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object containing information about your device instance.
+	DeviceInstance *DeviceInstance `locationName:"deviceInstance" type:"structure"`
+}
+
+// String returns the string representation
+func (s GetDeviceInstanceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetDeviceInstanceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetDeviceInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the result of a get device request.
@@ -4837,6 +5509,68 @@ func (s GetDevicePoolOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetDevicePoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetInstanceProfileRequest
+type GetInstanceProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of your instance profile.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetInstanceProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetInstanceProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetInstanceProfileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetInstanceProfileInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 32 {
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/GetInstanceProfileResult
+type GetInstanceProfileOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object containing information about your instance profile.
+	InstanceProfile *InstanceProfile `locationName:"instanceProfile" type:"structure"`
+}
+
+// String returns the string representation
+func (s GetInstanceProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetInstanceProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5537,6 +6271,45 @@ func (s InstallToRemoteAccessSessionOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Represents the instance profile.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/InstanceProfile
+type InstanceProfile struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the instance profile.
+	Arn *string `locationName:"arn" min:"32" type:"string"`
+
+	// The description of the instance profile.
+	Description *string `locationName:"description" type:"string"`
+
+	// An array of strings specifying the list of app packages that should not be
+	// cleaned up from the device after a test run is over.
+	//
+	// The list of packages is only considered if you set packageCleanup to true.
+	ExcludeAppPackagesFromCleanup []string `locationName:"excludeAppPackagesFromCleanup" type:"list"`
+
+	// The name of the instance profile.
+	Name *string `locationName:"name" type:"string"`
+
+	// When set to true, Device Farm will remove app packages after a test run.
+	// The default value is false for private devices.
+	PackageCleanup *bool `locationName:"packageCleanup" type:"boolean"`
+
+	// When set to true, Device Farm will reboot the instance after a test run.
+	// The default value is true.
+	RebootAfterUse *bool `locationName:"rebootAfterUse" type:"boolean"`
+}
+
+// String returns the string representation
+func (s InstanceProfile) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s InstanceProfile) GoString() string {
+	return s.String()
+}
+
 // Represents a device.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/Job
 type Job struct {
@@ -5556,6 +6329,9 @@ type Job struct {
 
 	// Represents the total (metered or unmetered) minutes used by the job.
 	DeviceMinutes *DeviceMinutes `locationName:"deviceMinutes" type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the instance.
+	InstanceArn *string `locationName:"instanceArn" min:"32" type:"string"`
 
 	// A message about the job's result.
 	Message *string `locationName:"message" type:"string"`
@@ -5749,6 +6525,71 @@ func (s ListArtifactsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDeviceInstancesRequest
+type ListDeviceInstancesInput struct {
+	_ struct{} `type:"structure"`
+
+	// An integer specifying the maximum number of items you want to return in the
+	// API response.
+	MaxResults *int64 `locationName:"maxResults" type:"integer"`
+
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
+	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
+}
+
+// String returns the string representation
+func (s ListDeviceInstancesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDeviceInstancesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListDeviceInstancesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListDeviceInstancesInput"}
+	if s.NextToken != nil && len(*s.NextToken) < 4 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDeviceInstancesResult
+type ListDeviceInstancesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object containing information about your device instances.
+	DeviceInstances []DeviceInstance `locationName:"deviceInstances" type:"list"`
+
+	// An identifier that can be used in the next call to this operation to return
+	// the next set of items in the list.
+	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
+}
+
+// String returns the string representation
+func (s ListDeviceInstancesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDeviceInstancesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeviceInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents the result of a list device pools request.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListDevicePoolsRequest
 type ListDevicePoolsInput struct {
@@ -5902,6 +6743,71 @@ func (s ListDevicesOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s ListDevicesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListInstanceProfilesRequest
+type ListInstanceProfilesInput struct {
+	_ struct{} `type:"structure"`
+
+	// An integer specifying the maximum number of items you want to return in the
+	// API response.
+	MaxResults *int64 `locationName:"maxResults" type:"integer"`
+
+	// An identifier that was returned from the previous call to this operation,
+	// which can be used to return the next set of items in the list.
+	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
+}
+
+// String returns the string representation
+func (s ListInstanceProfilesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListInstanceProfilesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListInstanceProfilesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListInstanceProfilesInput"}
+	if s.NextToken != nil && len(*s.NextToken) < 4 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 4))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/ListInstanceProfilesResult
+type ListInstanceProfilesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object containing information about your instance profiles.
+	InstanceProfiles []InstanceProfile `locationName:"instanceProfiles" type:"list"`
+
+	// An identifier that can be used in the next call to this operation to return
+	// the next set of items in the list.
+	NextToken *string `locationName:"nextToken" min:"4" type:"string"`
+}
+
+// String returns the string representation
+func (s ListInstanceProfilesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListInstanceProfilesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListInstanceProfilesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -7370,6 +8276,9 @@ type RemoteAccessSession struct {
 	// Only returned if remote debugging is enabled for the remote access session.
 	HostAddress *string `locationName:"hostAddress" type:"string"`
 
+	// The Amazon Resource Name (ARN) of the instance.
+	InstanceArn *string `locationName:"instanceArn" min:"32" type:"string"`
+
 	// The interaction mode of the remote access session. Valid values are:
 	//
 	//    * INTERACTIVE: You can interact with the iOS device by viewing, touching,
@@ -7418,6 +8327,15 @@ type RemoteAccessSession struct {
 	//
 	//    * STOPPED: A stopped condition.
 	Result ExecutionResult `locationName:"result" type:"string" enum:"true"`
+
+	// When set to true, for private devices, Device Farm will not sign your app
+	// again. For public devices, Device Farm always signs your apps again and this
+	// parameter has no effect.
+	//
+	// For more information about how Device Farm re-signs your app(s), see Do you
+	// modify my app? (https://aws.amazon.com/device-farm/faq/) in the AWS Device
+	// Farm FAQs.
+	SkipAppResign *bool `locationName:"skipAppResign" type:"boolean"`
 
 	// The date and time the remote access session was started.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
@@ -7561,6 +8479,10 @@ type Rule struct {
 	//    * REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.
 	//
 	//    * APPIUM_VERSION: The Appium version for the test.
+	//
+	//    * INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.
+	//
+	//    * INSTANCE_LABELS: The label of the device instance.
 	Attribute DeviceAttribute `locationName:"attribute" type:"string" enum:"true"`
 
 	// The rule's operator.
@@ -7692,6 +8614,15 @@ type Run struct {
 	// the same seed value between tests ensures identical event sequences.
 	Seed *int64 `locationName:"seed" type:"integer"`
 
+	// When set to true, for private devices, Device Farm will not sign your app
+	// again. For public devices, Device Farm always signs your apps again and this
+	// parameter has no effect.
+	//
+	// For more information about how Device Farm re-signs your app(s), see Do you
+	// modify my app? (https://aws.amazon.com/device-farm/faq/) in the AWS Device
+	// Farm FAQs.
+	SkipAppResign *bool `locationName:"skipAppResign" type:"boolean"`
+
 	// The run's start time.
 	Started *time.Time `locationName:"started" type:"timestamp" timestampFormat:"unix"`
 
@@ -7759,8 +8690,7 @@ type Run struct {
 	//    * XCTEST_UI: The XCode UI test type.
 	Type TestType `locationName:"type" type:"string" enum:"true"`
 
-	// A pre-signed Amazon S3 URL that can be used with a corresponding GET request
-	// to download the symbol file for the run.
+	// The Device Farm console URL for the recording of the run.
 	WebUrl *string `locationName:"webUrl" type:"string"`
 }
 
@@ -8576,6 +9506,78 @@ func (s UniqueProblem) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDeviceInstanceRequest
+type UpdateDeviceInstanceInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the device instance.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
+
+	// An array of strings that you want to associate with the device instance.
+	Labels []string `locationName:"labels" type:"list"`
+
+	// The Amazon Resource Name (ARN) of the profile that you want to associate
+	// with the device instance.
+	ProfileArn *string `locationName:"profileArn" min:"32" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateDeviceInstanceInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateDeviceInstanceInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateDeviceInstanceInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateDeviceInstanceInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 32 {
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
+	}
+	if s.ProfileArn != nil && len(*s.ProfileArn) < 32 {
+		invalidParams.Add(aws.NewErrParamMinLen("ProfileArn", 32))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDeviceInstanceResult
+type UpdateDeviceInstanceOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object containing information about your device instance.
+	DeviceInstance *DeviceInstance `locationName:"deviceInstance" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateDeviceInstanceOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateDeviceInstanceOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateDeviceInstanceOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents a request to the update device pool operation.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateDevicePoolRequest
 type UpdateDevicePoolInput struct {
@@ -8649,6 +9651,88 @@ func (s UpdateDevicePoolOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateDevicePoolOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateInstanceProfileRequest
+type UpdateInstanceProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the instance profile.
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" min:"32" type:"string" required:"true"`
+
+	// The updated description for your instance profile.
+	Description *string `locationName:"description" type:"string"`
+
+	// An array of strings specifying the list of app packages that should not be
+	// cleaned up from the device after a test run is over.
+	//
+	// The list of packages is only considered if you set packageCleanup to true.
+	ExcludeAppPackagesFromCleanup []string `locationName:"excludeAppPackagesFromCleanup" type:"list"`
+
+	// The updated name for your instance profile.
+	Name *string `locationName:"name" type:"string"`
+
+	// The updated choice for whether you want to specify package cleanup. The default
+	// value is false for private devices.
+	PackageCleanup *bool `locationName:"packageCleanup" type:"boolean"`
+
+	// The updated choice for whether you want to reboot the device after use. The
+	// default value is true.
+	RebootAfterUse *bool `locationName:"rebootAfterUse" type:"boolean"`
+}
+
+// String returns the string representation
+func (s UpdateInstanceProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateInstanceProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateInstanceProfileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateInstanceProfileInput"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+	if s.Arn != nil && len(*s.Arn) < 32 {
+		invalidParams.Add(aws.NewErrParamMinLen("Arn", 32))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/devicefarm-2015-06-23/UpdateInstanceProfileResult
+type UpdateInstanceProfileOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// An object containing information about your instance profile.
+	InstanceProfile *InstanceProfile `locationName:"instanceProfile" type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateInstanceProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateInstanceProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateInstanceProfileOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -9021,6 +10105,8 @@ const (
 	DeviceAttributeRemoteAccessEnabled DeviceAttribute = "REMOTE_ACCESS_ENABLED"
 	DeviceAttributeRemoteDebugEnabled  DeviceAttribute = "REMOTE_DEBUG_ENABLED"
 	DeviceAttributeAppiumVersion       DeviceAttribute = "APPIUM_VERSION"
+	DeviceAttributeInstanceArn         DeviceAttribute = "INSTANCE_ARN"
+	DeviceAttributeInstanceLabels      DeviceAttribute = "INSTANCE_LABELS"
 )
 
 func (enum DeviceAttribute) MarshalValue() (string, error) {
@@ -9141,6 +10227,25 @@ func (enum ExecutionStatus) MarshalValue() (string, error) {
 }
 
 func (enum ExecutionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type InstanceStatus string
+
+// Enum values for InstanceStatus
+const (
+	InstanceStatusInUse        InstanceStatus = "IN_USE"
+	InstanceStatusPreparing    InstanceStatus = "PREPARING"
+	InstanceStatusAvailable    InstanceStatus = "AVAILABLE"
+	InstanceStatusNotAvailable InstanceStatus = "NOT_AVAILABLE"
+)
+
+func (enum InstanceStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

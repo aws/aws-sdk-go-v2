@@ -3,6 +3,8 @@
 package mediapackage
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -719,6 +721,237 @@ func (s Channel) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A Common Media Application Format (CMAF) encryption configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafEncryption
+type CmafEncryption struct {
+	_ struct{} `type:"structure"`
+
+	// Time (in seconds) between each encryption key rotation.
+	KeyRotationIntervalSeconds *int64 `locationName:"keyRotationIntervalSeconds" type:"integer"`
+
+	// A configuration for accessing an external Secure Packager and Encoder Key
+	// Exchange (SPEKE) service that will provide encryption keys.
+	//
+	// SpekeKeyProvider is a required field
+	SpekeKeyProvider *SpekeKeyProvider `locationName:"spekeKeyProvider" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s CmafEncryption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CmafEncryption) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CmafEncryption) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CmafEncryption"}
+
+	if s.SpekeKeyProvider == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SpekeKeyProvider"))
+	}
+	if s.SpekeKeyProvider != nil {
+		if err := s.SpekeKeyProvider.Validate(); err != nil {
+			invalidParams.AddNested("SpekeKeyProvider", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CmafEncryption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.KeyRotationIntervalSeconds != nil {
+		v := *s.KeyRotationIntervalSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "keyRotationIntervalSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.SpekeKeyProvider != nil {
+		v := s.SpekeKeyProvider
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spekeKeyProvider", v, metadata)
+	}
+	return nil
+}
+
+// A Common Media Application Format (CMAF) packaging configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafPackage
+type CmafPackage struct {
+	_ struct{} `type:"structure"`
+
+	// A Common Media Application Format (CMAF) encryption configuration.
+	Encryption *CmafEncryption `locationName:"encryption" type:"structure"`
+
+	// A list of HLS manifest configurations
+	HlsManifests []HlsManifest `locationName:"hlsManifests" type:"list"`
+
+	// Duration (in seconds) of each segment. Actual segments will berounded to
+	// the nearest multiple of the source segment duration.
+	SegmentDurationSeconds *int64 `locationName:"segmentDurationSeconds" type:"integer"`
+
+	// An optional custom string that is prepended to the name of each segment.
+	// If not specified, it defaults to the ChannelId.
+	SegmentPrefix *string `locationName:"segmentPrefix" type:"string"`
+
+	// A StreamSelection configuration.
+	StreamSelection *StreamSelection `locationName:"streamSelection" type:"structure"`
+}
+
+// String returns the string representation
+func (s CmafPackage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CmafPackage) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CmafPackage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
+	}
+	if len(s.HlsManifests) > 0 {
+		v := s.HlsManifests
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "hlsManifests", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.SegmentDurationSeconds != nil {
+		v := *s.SegmentDurationSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "segmentDurationSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.SegmentPrefix != nil {
+		v := *s.SegmentPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "segmentPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamSelection != nil {
+		v := s.StreamSelection
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "streamSelection", v, metadata)
+	}
+	return nil
+}
+
+// A Common Media Application Format (CMAF) packaging configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CmafPackageCreateOrUpdateParameters
+type CmafPackageCreateOrUpdateParameters struct {
+	_ struct{} `type:"structure"`
+
+	// A Common Media Application Format (CMAF) encryption configuration.
+	Encryption *CmafEncryption `locationName:"encryption" type:"structure"`
+
+	// A list of HLS manifest configurations
+	HlsManifests []HlsManifestCreateOrUpdateParameters `locationName:"hlsManifests" type:"list"`
+
+	// Duration (in seconds) of each segment. Actual segments will berounded to
+	// the nearest multiple of the source segment duration.
+	SegmentDurationSeconds *int64 `locationName:"segmentDurationSeconds" type:"integer"`
+
+	// An optional custom string that is prepended to the name of each segment.
+	// If not specified, it defaults to the ChannelId.
+	SegmentPrefix *string `locationName:"segmentPrefix" type:"string"`
+
+	// A StreamSelection configuration.
+	StreamSelection *StreamSelection `locationName:"streamSelection" type:"structure"`
+}
+
+// String returns the string representation
+func (s CmafPackageCreateOrUpdateParameters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CmafPackageCreateOrUpdateParameters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CmafPackageCreateOrUpdateParameters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CmafPackageCreateOrUpdateParameters"}
+	if s.Encryption != nil {
+		if err := s.Encryption.Validate(); err != nil {
+			invalidParams.AddNested("Encryption", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.HlsManifests != nil {
+		for i, v := range s.HlsManifests {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "HlsManifests", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CmafPackageCreateOrUpdateParameters) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Encryption != nil {
+		v := s.Encryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "encryption", v, metadata)
+	}
+	if len(s.HlsManifests) > 0 {
+		v := s.HlsManifests
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "hlsManifests", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.SegmentDurationSeconds != nil {
+		v := *s.SegmentDurationSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "segmentDurationSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.SegmentPrefix != nil {
+		v := *s.SegmentPrefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "segmentPrefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamSelection != nil {
+		v := s.StreamSelection
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "streamSelection", v, metadata)
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/CreateChannelRequest
 type CreateChannelInput struct {
 	_ struct{} `type:"structure"`
@@ -839,6 +1072,9 @@ type CreateOriginEndpointInput struct {
 	// ChannelId is a required field
 	ChannelId *string `locationName:"channelId" type:"string" required:"true"`
 
+	// A Common Media Application Format (CMAF) packaging configuration.
+	CmafPackage *CmafPackageCreateOrUpdateParameters `locationName:"cmafPackage" type:"structure"`
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *DashPackage `locationName:"dashPackage" type:"structure"`
 
@@ -883,6 +1119,11 @@ func (s *CreateOriginEndpointInput) Validate() error {
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+	if s.CmafPackage != nil {
+		if err := s.CmafPackage.Validate(); err != nil {
+			invalidParams.AddNested("CmafPackage", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.DashPackage != nil {
 		if err := s.DashPackage.Validate(); err != nil {
 			invalidParams.AddNested("DashPackage", err.(aws.ErrInvalidParams))
@@ -914,6 +1155,12 @@ func (s CreateOriginEndpointInput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CmafPackage != nil {
+		v := s.CmafPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "cmafPackage", v, metadata)
 	}
 	if s.DashPackage != nil {
 		v := s.DashPackage
@@ -988,6 +1235,9 @@ type CreateOriginEndpointOutput struct {
 
 	ChannelId *string `locationName:"channelId" type:"string"`
 
+	// A Common Media Application Format (CMAF) packaging configuration.
+	CmafPackage *CmafPackage `locationName:"cmafPackage" type:"structure"`
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *DashPackage `locationName:"dashPackage" type:"structure"`
 
@@ -1040,6 +1290,12 @@ func (s CreateOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CmafPackage != nil {
+		v := s.CmafPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "cmafPackage", v, metadata)
 	}
 	if s.DashPackage != nil {
 		v := s.DashPackage
@@ -1587,6 +1843,9 @@ type DescribeOriginEndpointOutput struct {
 
 	ChannelId *string `locationName:"channelId" type:"string"`
 
+	// A Common Media Application Format (CMAF) packaging configuration.
+	CmafPackage *CmafPackage `locationName:"cmafPackage" type:"structure"`
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *DashPackage `locationName:"dashPackage" type:"structure"`
 
@@ -1639,6 +1898,12 @@ func (s DescribeOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) err
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CmafPackage != nil {
+		v := s.CmafPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "cmafPackage", v, metadata)
 	}
 	if s.DashPackage != nil {
 		v := s.DashPackage
@@ -1834,6 +2099,231 @@ func (s HlsIngest) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A HTTP Live Streaming (HLS) manifest configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsManifest
+type HlsManifest struct {
+	_ struct{} `type:"structure"`
+
+	// This setting controls how ad markers are included in the packaged OriginEndpoint."NONE"
+	// will omit all SCTE-35 ad markers from the output."PASSTHROUGH" causes the
+	// manifest to contain a copy of the SCTE-35 admarkers (comments) taken directly
+	// from the input HTTP Live Streaming (HLS) manifest."SCTE35_ENHANCED" generates
+	// ad markers and blackout tags based on SCTE-35messages in the input source.
+	AdMarkers AdMarkers `locationName:"adMarkers" type:"string" enum:"true"`
+
+	// The ID of the manifest. The ID must be unique within the OriginEndpoint and
+	// it cannot be changed after it is created.
+	//
+	// Id is a required field
+	Id *string `locationName:"id" type:"string" required:"true"`
+
+	// When enabled, an I-Frame only stream will be included in the output.
+	IncludeIframeOnlyStream *bool `locationName:"includeIframeOnlyStream" type:"boolean"`
+
+	// An optional short string appended to the end of the OriginEndpoint URL. If
+	// not specified, defaults to the manifestName for the OriginEndpoint.
+	ManifestName *string `locationName:"manifestName" type:"string"`
+
+	// The HTTP Live Streaming (HLS) playlist type.When either "EVENT" or "VOD"
+	// is specified, a corresponding EXT-X-PLAYLIST-TYPEentry will be included in
+	// the media playlist.
+	PlaylistType PlaylistType `locationName:"playlistType" type:"string" enum:"true"`
+
+	// Time window (in seconds) contained in each parent manifest.
+	PlaylistWindowSeconds *int64 `locationName:"playlistWindowSeconds" type:"integer"`
+
+	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME taginserted
+	// into manifests. Additionally, when an interval is specifiedID3Timed Metadata
+	// messages will be generated every 5 seconds using theingest time of the content.If
+	// the interval is not specified, or set to 0, thenno EXT-X-PROGRAM-DATE-TIME
+	// tags will be inserted into manifests and noID3Timed Metadata messages will
+	// be generated. Note that irrespectiveof this parameter, if any ID3 Timed Metadata
+	// is found in HTTP Live Streaming (HLS) input,it will be passed through to
+	// HLS output.
+	ProgramDateTimeIntervalSeconds *int64 `locationName:"programDateTimeIntervalSeconds" type:"integer"`
+
+	// The URL of the packaged OriginEndpoint for consumption.
+	Url *string `locationName:"url" type:"string"`
+}
+
+// String returns the string representation
+func (s HlsManifest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HlsManifest) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HlsManifest) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AdMarkers) > 0 {
+		v := s.AdMarkers
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adMarkers", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IncludeIframeOnlyStream != nil {
+		v := *s.IncludeIframeOnlyStream
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "includeIframeOnlyStream", protocol.BoolValue(v), metadata)
+	}
+	if s.ManifestName != nil {
+		v := *s.ManifestName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.PlaylistType) > 0 {
+		v := s.PlaylistType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "playlistType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.PlaylistWindowSeconds != nil {
+		v := *s.PlaylistWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "playlistWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.ProgramDateTimeIntervalSeconds != nil {
+		v := *s.ProgramDateTimeIntervalSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "programDateTimeIntervalSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A HTTP Live Streaming (HLS) manifest configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsManifestCreateOrUpdateParameters
+type HlsManifestCreateOrUpdateParameters struct {
+	_ struct{} `type:"structure"`
+
+	// This setting controls how ad markers are included in the packaged OriginEndpoint."NONE"
+	// will omit all SCTE-35 ad markers from the output."PASSTHROUGH" causes the
+	// manifest to contain a copy of the SCTE-35 admarkers (comments) taken directly
+	// from the input HTTP Live Streaming (HLS) manifest."SCTE35_ENHANCED" generates
+	// ad markers and blackout tags based on SCTE-35messages in the input source.
+	AdMarkers AdMarkers `locationName:"adMarkers" type:"string" enum:"true"`
+
+	// The ID of the manifest. The ID must be unique within the OriginEndpoint and
+	// it cannot be changed after it is created.
+	//
+	// Id is a required field
+	Id *string `locationName:"id" type:"string" required:"true"`
+
+	// When enabled, an I-Frame only stream will be included in the output.
+	IncludeIframeOnlyStream *bool `locationName:"includeIframeOnlyStream" type:"boolean"`
+
+	// An optional short string appended to the end of the OriginEndpoint URL. If
+	// not specified, defaults to the manifestName for the OriginEndpoint.
+	ManifestName *string `locationName:"manifestName" type:"string"`
+
+	// The HTTP Live Streaming (HLS) playlist type.When either "EVENT" or "VOD"
+	// is specified, a corresponding EXT-X-PLAYLIST-TYPEentry will be included in
+	// the media playlist.
+	PlaylistType PlaylistType `locationName:"playlistType" type:"string" enum:"true"`
+
+	// Time window (in seconds) contained in each parent manifest.
+	PlaylistWindowSeconds *int64 `locationName:"playlistWindowSeconds" type:"integer"`
+
+	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME taginserted
+	// into manifests. Additionally, when an interval is specifiedID3Timed Metadata
+	// messages will be generated every 5 seconds using theingest time of the content.If
+	// the interval is not specified, or set to 0, thenno EXT-X-PROGRAM-DATE-TIME
+	// tags will be inserted into manifests and noID3Timed Metadata messages will
+	// be generated. Note that irrespectiveof this parameter, if any ID3 Timed Metadata
+	// is found in HTTP Live Streaming (HLS) input,it will be passed through to
+	// HLS output.
+	ProgramDateTimeIntervalSeconds *int64 `locationName:"programDateTimeIntervalSeconds" type:"integer"`
+}
+
+// String returns the string representation
+func (s HlsManifestCreateOrUpdateParameters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HlsManifestCreateOrUpdateParameters) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HlsManifestCreateOrUpdateParameters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HlsManifestCreateOrUpdateParameters"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HlsManifestCreateOrUpdateParameters) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AdMarkers) > 0 {
+		v := s.AdMarkers
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "adMarkers", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IncludeIframeOnlyStream != nil {
+		v := *s.IncludeIframeOnlyStream
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "includeIframeOnlyStream", protocol.BoolValue(v), metadata)
+	}
+	if s.ManifestName != nil {
+		v := *s.ManifestName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "manifestName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.PlaylistType) > 0 {
+		v := s.PlaylistType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "playlistType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.PlaylistWindowSeconds != nil {
+		v := *s.PlaylistWindowSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "playlistWindowSeconds", protocol.Int64Value(v), metadata)
+	}
+	if s.ProgramDateTimeIntervalSeconds != nil {
+		v := *s.ProgramDateTimeIntervalSeconds
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "programDateTimeIntervalSeconds", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // An HTTP Live Streaming (HLS) packaging configuration.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/HlsPackage
 type HlsPackage struct {
@@ -1862,7 +2352,7 @@ type HlsPackage struct {
 
 	// The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME taginserted
 	// into manifests. Additionally, when an interval is specifiedID3Timed Metadata
-	// messages will be generated every 5 seconds using the ingest time of the content.If
+	// messages will be generated every 5 seconds using theingest time of the content.If
 	// the interval is not specified, or set to 0, thenno EXT-X-PROGRAM-DATE-TIME
 	// tags will be inserted into manifests and noID3Timed Metadata messages will
 	// be generated. Note that irrespectiveof this parameter, if any ID3 Timed Metadata
@@ -2356,6 +2846,9 @@ type OriginEndpoint struct {
 	// The ID of the Channel the OriginEndpoint is associated with.
 	ChannelId *string `locationName:"channelId" type:"string"`
 
+	// A Common Media Application Format (CMAF) packaging configuration.
+	CmafPackage *CmafPackage `locationName:"cmafPackage" type:"structure"`
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *DashPackage `locationName:"dashPackage" type:"structure"`
 
@@ -2412,6 +2905,12 @@ func (s OriginEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CmafPackage != nil {
+		v := s.CmafPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "cmafPackage", v, metadata)
 	}
 	if s.DashPackage != nil {
 		v := s.DashPackage
@@ -2851,6 +3350,9 @@ func (s UpdateChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 type UpdateOriginEndpointInput struct {
 	_ struct{} `type:"structure"`
 
+	// A Common Media Application Format (CMAF) packaging configuration.
+	CmafPackage *CmafPackageCreateOrUpdateParameters `locationName:"cmafPackage" type:"structure"`
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *DashPackage `locationName:"dashPackage" type:"structure"`
 
@@ -2891,6 +3393,11 @@ func (s *UpdateOriginEndpointInput) Validate() error {
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+	if s.CmafPackage != nil {
+		if err := s.CmafPackage.Validate(); err != nil {
+			invalidParams.AddNested("CmafPackage", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.DashPackage != nil {
 		if err := s.DashPackage.Validate(); err != nil {
 			invalidParams.AddNested("DashPackage", err.(aws.ErrInvalidParams))
@@ -2917,6 +3424,12 @@ func (s *UpdateOriginEndpointInput) Validate() error {
 func (s UpdateOriginEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
 
+	if s.CmafPackage != nil {
+		v := s.CmafPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "cmafPackage", v, metadata)
+	}
 	if s.DashPackage != nil {
 		v := s.DashPackage
 
@@ -2990,6 +3503,9 @@ type UpdateOriginEndpointOutput struct {
 
 	ChannelId *string `locationName:"channelId" type:"string"`
 
+	// A Common Media Application Format (CMAF) packaging configuration.
+	CmafPackage *CmafPackage `locationName:"cmafPackage" type:"structure"`
+
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *DashPackage `locationName:"dashPackage" type:"structure"`
 
@@ -3042,6 +3558,12 @@ func (s UpdateOriginEndpointOutput) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CmafPackage != nil {
+		v := s.CmafPackage
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "cmafPackage", v, metadata)
 	}
 	if s.DashPackage != nil {
 		v := s.DashPackage

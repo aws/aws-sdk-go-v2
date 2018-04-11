@@ -34,7 +34,7 @@ func (r AddTagsToCertificateRequest) Send() (*AddTagsToCertificateOutput, error)
 // AddTagsToCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager.
 //
-// Adds one or more tags to an ACM Certificate. Tags are labels that you can
+// Adds one or more tags to an ACM certificate. Tags are labels that you can
 // use to identify and organize your AWS resources. Each tag consists of a key
 // and an optional value. You specify the certificate on input by its Amazon
 // Resource Name (ARN). You specify the tag by using a key-value pair.
@@ -44,9 +44,9 @@ func (r AddTagsToCertificateRequest) Send() (*AddTagsToCertificateOutput, error)
 // certificates if you want to filter for a common relationship among those
 // certificates. Similarly, you can apply the same tag to multiple resources
 // if you want to specify a relationship among those resources. For example,
-// you can add the same tag to an ACM Certificate and an Elastic Load Balancing
+// you can add the same tag to an ACM certificate and an Elastic Load Balancing
 // load balancer to indicate that they are both used by the same website. For
-// more information, see Tagging ACM Certificates (http://docs.aws.amazon.com/acm/latest/userguide/tags.html).
+// more information, see Tagging ACM certificates (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/tags.html).
 //
 // To remove one or more tags, use the RemoveTagsFromCertificate action. To
 // view all of the tags that have been applied to the certificate, use the ListTagsForCertificate
@@ -108,7 +108,7 @@ func (r DeleteCertificateRequest) Send() (*DeleteCertificateOutput, error) {
 // action. The certificate will not be available for use by AWS services integrated
 // with ACM.
 //
-// You cannot delete an ACM Certificate that is being used by another AWS service.
+// You cannot delete an ACM certificate that is being used by another AWS service.
 // To delete a certificate that is in use, the certificate association must
 // first be removed.
 //
@@ -162,7 +162,7 @@ func (r DescribeCertificateRequest) Send() (*DescribeCertificateOutput, error) {
 // DescribeCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager.
 //
-// Returns detailed metadata about the specified ACM Certificate.
+// Returns detailed metadata about the specified ACM certificate.
 //
 //    // Example sending a request using the DescribeCertificateRequest method.
 //    req := client.DescribeCertificateRequest(params)
@@ -188,6 +188,63 @@ func (c *ACM) DescribeCertificateRequest(input *DescribeCertificateInput) Descri
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeCertificateRequest{Request: req, Input: input, Copy: c.DescribeCertificateRequest}
+}
+
+const opExportCertificate = "ExportCertificate"
+
+// ExportCertificateRequest is a API request type for the ExportCertificate API operation.
+type ExportCertificateRequest struct {
+	*aws.Request
+	Input *ExportCertificateInput
+	Copy  func(*ExportCertificateInput) ExportCertificateRequest
+}
+
+// Send marshals and sends the ExportCertificate API request.
+func (r ExportCertificateRequest) Send() (*ExportCertificateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ExportCertificateOutput), nil
+}
+
+// ExportCertificateRequest returns a request value for making API operation for
+// AWS Certificate Manager.
+//
+// Exports a certificate for use anywhere. You can export the certificate, the
+// certificate chain, and the encrypted private key associated with the public
+// key embedded in the certificate. You must store the private key securely.
+// The private key is a 2048 bit RSA key. You must provide a passphrase for
+// the private key when exporting it. You can use the following OpenSSL command
+// to decrypt it later. Provide the passphrase when prompted.
+//
+// openssl rsa -in encrypted_key.pem -out decrypted_key.pem
+//
+//    // Example sending a request using the ExportCertificateRequest method.
+//    req := client.ExportCertificateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificate
+func (c *ACM) ExportCertificateRequest(input *ExportCertificateInput) ExportCertificateRequest {
+	op := &aws.Operation{
+		Name:       opExportCertificate,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ExportCertificateInput{}
+	}
+
+	output := &ExportCertificateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ExportCertificateRequest{Request: req, Input: input, Copy: c.ExportCertificateRequest}
 }
 
 const opGetCertificate = "GetCertificate"
@@ -268,15 +325,15 @@ func (r ImportCertificateRequest) Send() (*ImportCertificateOutput, error) {
 // AWS Certificate Manager.
 //
 // Imports a certificate into AWS Certificate Manager (ACM) to use with services
-// that are integrated with ACM. Note that integrated services (http://docs.aws.amazon.com/acm/latest/userguide/acm-services.html)
+// that are integrated with ACM. Note that integrated services (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-services.html)
 // allow only certificate types and keys they support to be associated with
 // their resources. Further, their support differs depending on whether the
 // certificate is imported into IAM or into ACM. For more information, see the
 // documentation for each service. For more information about importing certificates
-// into ACM, see Importing Certificates (http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
+// into ACM, see Importing Certificates (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/import-certificate.html)
 // in the AWS Certificate Manager User Guide.
 //
-// ACM does not provide managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+// ACM does not provide managed renewal (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html)
 // for certificates that you import.
 //
 // Note the following guidelines when importing third party certificates:
@@ -467,9 +524,9 @@ func (r ListTagsForCertificateRequest) Send() (*ListTagsForCertificateOutput, er
 // ListTagsForCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager.
 //
-// Lists the tags that have been applied to the ACM Certificate. Use the certificate's
+// Lists the tags that have been applied to the ACM certificate. Use the certificate's
 // Amazon Resource Name (ARN) to specify the certificate. To add a tag to an
-// ACM Certificate, use the AddTagsToCertificate action. To delete a tag, use
+// ACM certificate, use the AddTagsToCertificate action. To delete a tag, use
 // the RemoveTagsFromCertificate action.
 //
 //    // Example sending a request using the ListTagsForCertificateRequest method.
@@ -520,13 +577,13 @@ func (r RemoveTagsFromCertificateRequest) Send() (*RemoveTagsFromCertificateOutp
 // RemoveTagsFromCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager.
 //
-// Remove one or more tags from an ACM Certificate. A tag consists of a key-value
+// Remove one or more tags from an ACM certificate. A tag consists of a key-value
 // pair. If you do not specify the value portion of the tag when calling this
 // function, the tag will be removed regardless of value. If you specify a value,
 // the tag is removed only if it is associated with the specified value.
 //
 // To add tags to a certificate, use the AddTagsToCertificate action. To view
-// all of the tags that have been applied to a specific ACM Certificate, use
+// all of the tags that have been applied to a specific ACM certificate, use
 // the ListTagsForCertificate action.
 //
 //    // Example sending a request using the RemoveTagsFromCertificateRequest method.
@@ -579,20 +636,23 @@ func (r RequestCertificateRequest) Send() (*RequestCertificateOutput, error) {
 // RequestCertificateRequest returns a request value for making API operation for
 // AWS Certificate Manager.
 //
-// Requests an ACM Certificate for use with other AWS services. To request an
-// ACM Certificate, you must specify the fully qualified domain name (FQDN)
+// Requests an ACM certificate for use with other AWS services. To request an
+// ACM certificate, you must specify the fully qualified domain name (FQDN)
 // for your site in the DomainName parameter. You can also specify additional
-// FQDNs in the SubjectAlternativeNames parameter if users can reach your site
-// by using other names.
+// FQDNs in the SubjectAlternativeNames parameter.
 //
-// For each domain name you specify, email is sent to the domain owner to request
+// Each domain name that you specify must be validated to verify that you own
+// or control the domain. You can use DNS validation (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html)
+// or email validation (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-email.html).
+// We recommend that you use DNS validation.
+//
+// If you choose email validation, email is sent to the domain owner to request
 // approval to issue the certificate. Email is sent to three registered contact
 // addresses in the WHOIS database and to five common system administration
 // addresses formed from the DomainName you enter or the optional ValidationDomain
-// parameter. For more information, see Validate Domain Ownership (http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate.html).
+// parameter. For more information, see Validate with Email (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-email.html).
 //
-// After receiving approval from the domain owner, the ACM Certificate is issued.
-// For more information, see the AWS Certificate Manager User Guide (http://docs.aws.amazon.com/acm/latest/userguide/).
+// After receiving approval from the domain owner, the ACM certificate is issued.
 //
 //    // Example sending a request using the RequestCertificateRequest method.
 //    req := client.RequestCertificateRequest(params)
@@ -643,16 +703,16 @@ func (r ResendValidationEmailRequest) Send() (*ResendValidationEmailOutput, erro
 // AWS Certificate Manager.
 //
 // Resends the email that requests domain ownership validation. The domain owner
-// or an authorized representative must approve the ACM Certificate before it
+// or an authorized representative must approve the ACM certificate before it
 // can be issued. The certificate can be approved by clicking a link in the
 // mail to navigate to the Amazon certificate approval website and then clicking
 // I Approve. However, the validation email can be blocked by spam filters.
 // Therefore, if you do not receive the original mail, you can request that
-// the mail be resent within 72 hours of requesting the ACM Certificate. If
+// the mail be resent within 72 hours of requesting the ACM certificate. If
 // more than 72 hours have elapsed since your original request or since your
 // last attempt to resend validation mail, you must request a new certificate.
 // For more information about setting up your contact email addresses, see Configure
-// Email for your Domain (http://docs.aws.amazon.com/acm/latest/userguide/setup-email.html).
+// Email for your Domain (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/setup-email.html).
 //
 //    // Example sending a request using the ResendValidationEmailRequest method.
 //    req := client.ResendValidationEmailRequest(params)
@@ -682,11 +742,66 @@ func (c *ACM) ResendValidationEmailRequest(input *ResendValidationEmailInput) Re
 	return ResendValidationEmailRequest{Request: req, Input: input, Copy: c.ResendValidationEmailRequest}
 }
 
+const opUpdateCertificateOptions = "UpdateCertificateOptions"
+
+// UpdateCertificateOptionsRequest is a API request type for the UpdateCertificateOptions API operation.
+type UpdateCertificateOptionsRequest struct {
+	*aws.Request
+	Input *UpdateCertificateOptionsInput
+	Copy  func(*UpdateCertificateOptionsInput) UpdateCertificateOptionsRequest
+}
+
+// Send marshals and sends the UpdateCertificateOptions API request.
+func (r UpdateCertificateOptionsRequest) Send() (*UpdateCertificateOptionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateCertificateOptionsOutput), nil
+}
+
+// UpdateCertificateOptionsRequest returns a request value for making API operation for
+// AWS Certificate Manager.
+//
+// Updates a certificate. Currently, you can use this function to specify whether
+// to opt in to or out of recording your certificate in a certificate transparency
+// log. For more information, see  Opting Out of Certificate Transparency Logging
+// (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
+//
+//    // Example sending a request using the UpdateCertificateOptionsRequest method.
+//    req := client.UpdateCertificateOptionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateCertificateOptions
+func (c *ACM) UpdateCertificateOptionsRequest(input *UpdateCertificateOptionsInput) UpdateCertificateOptionsRequest {
+	op := &aws.Operation{
+		Name:       opUpdateCertificateOptions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateCertificateOptionsInput{}
+	}
+
+	output := &UpdateCertificateOptionsOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateCertificateOptionsRequest{Request: req, Input: input, Copy: c.UpdateCertificateOptionsRequest}
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/AddTagsToCertificateRequest
 type AddTagsToCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// String that contains the ARN of the ACM Certificate to which the tag is to
+	// String that contains the ARN of the ACM certificate to which the tag is to
 	// be applied. This must be of the form:
 	//
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
@@ -777,6 +892,12 @@ type CertificateDetail struct {
 	// in the AWS General Reference.
 	CertificateArn *string `min:"20" type:"string"`
 
+	// The Amazon Resource Name (ARN) of the ACM PCA private certificate authority
+	// (CA) that issued the certificate. This has the following format:
+	//
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	CertificateAuthorityArn *string `min:"20" type:"string"`
+
 	// The time at which the certificate was requested. This value exists only when
 	// the certificate type is AMAZON_ISSUED.
 	CreatedAt *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -797,7 +918,7 @@ type CertificateDetail struct {
 
 	// The reason the certificate request failed. This value exists only when the
 	// certificate status is FAILED. For more information, see Certificate Request
-	// Failed (http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed)
+	// Failed (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/troubleshooting.html#troubleshooting-failed)
 	// in the AWS Certificate Manager User Guide.
 	FailureReason FailureReason `type:"string" enum:"true"`
 
@@ -831,7 +952,17 @@ type CertificateDetail struct {
 	// The time before which the certificate is not valid.
 	NotBefore *time.Time `type:"timestamp" timestampFormat:"unix"`
 
-	// Contains information about the status of ACM's managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+	// Value that specifies whether to add the certificate to a transparency log.
+	// Certificate transparency makes it possible to detect SSL certificates that
+	// have been mistakenly or maliciously issued. A browser might respond to certificate
+	// that has not been logged by showing an error message. The logs are cryptographically
+	// secure.
+	Options *CertificateOptions `type:"structure"`
+
+	// Specifies whether the certificate is eligible for renewal.
+	RenewalEligibility RenewalEligibility `type:"string" enum:"true"`
+
+	// Contains information about the status of ACM's managed renewal (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html)
 	// for the certificate. This field exists only when the certificate type is
 	// AMAZON_ISSUED.
 	RenewalSummary *RenewalSummary `type:"structure"`
@@ -866,10 +997,10 @@ type CertificateDetail struct {
 
 	// The source of the certificate. For certificates provided by ACM, this value
 	// is AMAZON_ISSUED. For certificates that you imported with ImportCertificate,
-	// this value is IMPORTED. ACM does not provide managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+	// this value is IMPORTED. ACM does not provide managed renewal (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html)
 	// for imported certificates. For more information about the differences between
 	// certificates that you import and those that ACM provides, see Importing Certificates
-	// (http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html)
+	// (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/import-certificate.html)
 	// in the AWS Certificate Manager User Guide.
 	Type CertificateType `type:"string" enum:"true"`
 }
@@ -881,6 +1012,32 @@ func (s CertificateDetail) String() string {
 
 // GoString returns the string representation
 func (s CertificateDetail) GoString() string {
+	return s.String()
+}
+
+// Structure that contains options for your certificate. Currently, you can
+// use this only to specify whether to opt in to or out of certificate transparency
+// logging. Some browsers require that public certificates issued for your domain
+// be recorded in a log. Certificates that are not logged typically generate
+// a browser error. Transparency makes it possible for you to detect SSL/TLS
+// certificates that have been mistakenly or maliciously issued for your domain.
+// For general information, see Certificate Transparency Logging (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-concepts.html#concept-transparency).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/CertificateOptions
+type CertificateOptions struct {
+	_ struct{} `type:"structure"`
+
+	// You can opt out of certificate transparency logging by specifying the DISABLED
+	// option. Opt in by specifying ENABLED.
+	CertificateTransparencyLoggingPreference CertificateTransparencyLoggingPreference `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s CertificateOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CertificateOptions) GoString() string {
 	return s.String()
 }
 
@@ -916,7 +1073,7 @@ func (s CertificateSummary) GoString() string {
 type DeleteCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// String that contains the ARN of the ACM Certificate to be deleted. This must
+	// String that contains the ARN of the ACM certificate to be deleted. This must
 	// be of the form:
 	//
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
@@ -981,7 +1138,7 @@ func (s DeleteCertificateOutput) SDKResponseMetadata() aws.Response {
 type DescribeCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the ACM Certificate. The ARN must have
+	// The Amazon Resource Name (ARN) of the ACM certificate. The ARN must have
 	// the following form:
 	//
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
@@ -1057,7 +1214,7 @@ type DomainValidation struct {
 	DomainName *string `min:"1" type:"string" required:"true"`
 
 	// Contains the CNAME record that you add to your DNS database for domain validation.
-	// For more information, see Use DNS to Validate Domain Ownership (http://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-dns.html).
+	// For more information, see Use DNS to Validate Domain Ownership (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html).
 	ResourceRecord *ResourceRecord `type:"structure"`
 
 	// The domain name that ACM used to send domain validation emails.
@@ -1154,6 +1311,96 @@ func (s *DomainValidationOption) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificateRequest
+type ExportCertificateInput struct {
+	_ struct{} `type:"structure"`
+
+	// An Amazon Resource Name (ARN) of the issued certificate. This must be of
+	// the form:
+	//
+	// arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// CertificateArn is a required field
+	CertificateArn *string `min:"20" type:"string" required:"true"`
+
+	// Passphrase to associate with the encrypted exported private key. If you want
+	// to later decrypt the private key, you must have the passphrase. You can use
+	// the following OpenSSL command to decrypt a private key:
+	//
+	// openssl rsa -in encrypted_key.pem -out decrypted_key.pem
+	//
+	// Passphrase is automatically base64 encoded/decoded by the SDK.
+	//
+	// Passphrase is a required field
+	Passphrase []byte `min:"4" type:"blob" required:"true"`
+}
+
+// String returns the string representation
+func (s ExportCertificateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportCertificateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ExportCertificateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ExportCertificateInput"}
+
+	if s.CertificateArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
+	}
+	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
+	}
+
+	if s.Passphrase == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Passphrase"))
+	}
+	if s.Passphrase != nil && len(s.Passphrase) < 4 {
+		invalidParams.Add(aws.NewErrParamMinLen("Passphrase", 4))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/ExportCertificateResponse
+type ExportCertificateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The base64 PEM-encoded certificate.
+	Certificate *string `min:"1" type:"string"`
+
+	// The base64 PEM-encoded certificate chain. This does not include the certificate
+	// that you are exporting.
+	CertificateChain *string `min:"1" type:"string"`
+
+	// The PEM-encoded private key associated with the public key in the certificate.
+	PrivateKey *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ExportCertificateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ExportCertificateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ExportCertificateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // The Extended Key Usage X.509 v3 extension defines one or more purposes for
@@ -1274,7 +1521,7 @@ type GetCertificateOutput struct {
 
 	responseMetadata aws.Response
 
-	// String that contains the ACM Certificate represented by the ARN specified
+	// String that contains the ACM certificate represented by the ARN specified
 	// at input.
 	Certificate *string `min:"1" type:"string"`
 
@@ -1467,7 +1714,7 @@ type ListCertificatesOutput struct {
 
 	responseMetadata aws.Response
 
-	// A list of ACM Certificates.
+	// A list of ACM certificates.
 	CertificateSummaryList []CertificateSummary `type:"list"`
 
 	// When the list is truncated, this value is present and contains the value
@@ -1494,7 +1741,7 @@ func (s ListCertificatesOutput) SDKResponseMetadata() aws.Response {
 type ListTagsForCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// String that contains the ARN of the ACM Certificate for which you want to
+	// String that contains the ARN of the ACM certificate for which you want to
 	// list the tags. This must have the following form:
 	//
 	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
@@ -1642,7 +1889,7 @@ func (s RemoveTagsFromCertificateOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Contains information about the status of ACM's managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+// Contains information about the status of ACM's managed renewal (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html)
 // for the certificate. This structure exists only when the certificate type
 // is AMAZON_ISSUED.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RenewalSummary
@@ -1650,7 +1897,7 @@ type RenewalSummary struct {
 	_ struct{} `type:"structure"`
 
 	// Contains information about the validation of each domain name in the certificate,
-	// as it pertains to ACM's managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html).
+	// as it pertains to ACM's managed renewal (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html).
 	// This is different from the initial validation that occurs as a result of
 	// the RequestCertificate request. This field exists only when the certificate
 	// type is AMAZON_ISSUED.
@@ -1658,7 +1905,7 @@ type RenewalSummary struct {
 	// DomainValidationOptions is a required field
 	DomainValidationOptions []DomainValidation `min:"1" type:"list" required:"true"`
 
-	// The status of ACM's managed renewal (http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html)
+	// The status of ACM's managed renewal (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-renewal.html)
 	// of the certificate.
 	//
 	// RenewalStatus is a required field
@@ -1678,6 +1925,15 @@ func (s RenewalSummary) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/RequestCertificateRequest
 type RequestCertificateInput struct {
 	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the private certificate authority (CA)
+	// that will be used to issue the certificate. For more information about private
+	// CAs, see the AWS Certificate Manager Private Certificate Authority (PCA)
+	// (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm-pca/latest/userguide/PcaWelcome.html)
+	// user guide. The ARN must have the following form:
+	//
+	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	CertificateAuthorityArn *string `min:"20" type:"string"`
 
 	// Fully qualified domain name (FQDN), such as www.example.com, of the site
 	// that you want to secure with an ACM Certificate. Use an asterisk (*) to create
@@ -1703,13 +1959,21 @@ type RequestCertificateInput struct {
 	// requesting multiple certificates.
 	IdempotencyToken *string `min:"1" type:"string"`
 
+	// Currently, you can use this parameter to specify whether to add the certificate
+	// to a certificate transparency log. Certificate transparency makes it possible
+	// to detect SSL/TLS certificates that have been mistakenly or maliciously issued.
+	// Certificates that have not been logged typically produce an error message
+	// in a browser. For more information, see Opting Out of Certificate Transparency
+	// Logging (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
+	Options *CertificateOptions `type:"structure"`
+
 	// Additional FQDNs to be included in the Subject Alternative Name extension
-	// of the ACM Certificate. For example, add the name www.example.net to a certificate
+	// of the ACM certificate. For example, add the name www.example.net to a certificate
 	// for which the DomainName field is www.example.com if users can reach your
 	// site by using either name. The maximum number of domain names that you can
-	// add to an ACM Certificate is 100. However, the initial limit is 10 domain
+	// add to an ACM certificate is 100. However, the initial limit is 10 domain
 	// names. If you need more than 10 names, you must request a limit increase.
-	// For more information, see Limits (http://docs.aws.amazon.com/acm/latest/userguide/acm-limits.html).
+	// For more information, see Limits (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/acm-limits.html).
 	//
 	// The maximum length of a SAN DNS name is 253 octets. The name is made up of
 	// multiple labels separated by periods. No label can be longer than 63 octets.
@@ -1727,7 +1991,10 @@ type RequestCertificateInput struct {
 	//    the total length of the DNS name (63+1+63+1+63+1+62) exceeds 253 octets.
 	SubjectAlternativeNames []string `min:"1" type:"list"`
 
-	// The method you want to use to validate your domain.
+	// The method you want to use to validate that you own or control domain. You
+	// can validate with DNS (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-dns.html)
+	// or validate with email (http://docs.aws.amazon.com/http:/docs.aws.amazon.comacm/latest/userguide/gs-acm-validate-email.html).
+	// We recommend that you use DNS validation.
 	ValidationMethod ValidationMethod `type:"string" enum:"true"`
 }
 
@@ -1744,6 +2011,9 @@ func (s RequestCertificateInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *RequestCertificateInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "RequestCertificateInput"}
+	if s.CertificateAuthorityArn != nil && len(*s.CertificateAuthorityArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArn", 20))
+	}
 
 	if s.DomainName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
@@ -1982,6 +2252,80 @@ func (s *Tag) Validate() error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateCertificateOptionsRequest
+type UpdateCertificateOptionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// ARN of the requested certificate to update. This must be of the form:
+	//
+	// arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// CertificateArn is a required field
+	CertificateArn *string `min:"20" type:"string" required:"true"`
+
+	// Use to update the options for your certificate. Currently, you can specify
+	// whether to add your certificate to a transparency log. Certificate transparency
+	// makes it possible to detect SSL/TLS certificates that have been mistakenly
+	// or maliciously issued. Certificates that have not been logged typically produce
+	// an error message in a browser.
+	//
+	// Options is a required field
+	Options *CertificateOptions `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateCertificateOptionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateCertificateOptionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateCertificateOptionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateCertificateOptionsInput"}
+
+	if s.CertificateArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
+	}
+	if s.CertificateArn != nil && len(*s.CertificateArn) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateArn", 20))
+	}
+
+	if s.Options == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Options"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/acm-2015-12-08/UpdateCertificateOptionsOutput
+type UpdateCertificateOptionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateCertificateOptionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateCertificateOptionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateCertificateOptionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 type CertificateStatus string
 
 // Enum values for CertificateStatus
@@ -2004,12 +2348,30 @@ func (enum CertificateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type CertificateTransparencyLoggingPreference string
+
+// Enum values for CertificateTransparencyLoggingPreference
+const (
+	CertificateTransparencyLoggingPreferenceEnabled  CertificateTransparencyLoggingPreference = "ENABLED"
+	CertificateTransparencyLoggingPreferenceDisabled CertificateTransparencyLoggingPreference = "DISABLED"
+)
+
+func (enum CertificateTransparencyLoggingPreference) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CertificateTransparencyLoggingPreference) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CertificateType string
 
 // Enum values for CertificateType
 const (
 	CertificateTypeImported     CertificateType = "IMPORTED"
 	CertificateTypeAmazonIssued CertificateType = "AMAZON_ISSUED"
+	CertificateTypePrivate      CertificateType = "PRIVATE"
 )
 
 func (enum CertificateType) MarshalValue() (string, error) {
@@ -2075,6 +2437,12 @@ const (
 	FailureReasonDomainNotAllowed               FailureReason = "DOMAIN_NOT_ALLOWED"
 	FailureReasonInvalidPublicDomain            FailureReason = "INVALID_PUBLIC_DOMAIN"
 	FailureReasonCaaError                       FailureReason = "CAA_ERROR"
+	FailureReasonPcaLimitExceeded               FailureReason = "PCA_LIMIT_EXCEEDED"
+	FailureReasonPcaInvalidArn                  FailureReason = "PCA_INVALID_ARN"
+	FailureReasonPcaInvalidState                FailureReason = "PCA_INVALID_STATE"
+	FailureReasonPcaRequestFailed               FailureReason = "PCA_REQUEST_FAILED"
+	FailureReasonPcaResourceNotFound            FailureReason = "PCA_RESOURCE_NOT_FOUND"
+	FailureReasonPcaInvalidArgs                 FailureReason = "PCA_INVALID_ARGS"
 	FailureReasonOther                          FailureReason = "OTHER"
 )
 
@@ -2146,6 +2514,23 @@ func (enum RecordType) MarshalValue() (string, error) {
 }
 
 func (enum RecordType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RenewalEligibility string
+
+// Enum values for RenewalEligibility
+const (
+	RenewalEligibilityEligible   RenewalEligibility = "ELIGIBLE"
+	RenewalEligibilityIneligible RenewalEligibility = "INELIGIBLE"
+)
+
+func (enum RenewalEligibility) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RenewalEligibility) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

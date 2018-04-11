@@ -45,6 +45,10 @@ func (r TextRequest) Send() (*TextOutput, error) {
 //
 //    * Spanish (es)
 //
+// To have Amazon Translate determine the source language of your text, you
+// can specify auto in the SourceLanguageCode field. If you specify auto, Amazon
+// Translate will call Amazon Comprehend to determine the source language.
+//
 //    // Example sending a request using the TextRequest method.
 //    req := client.TextRequest(params)
 //    resp, err := req.Send()
@@ -77,6 +81,10 @@ type TextInput struct {
 
 	// One of the supported language codes for the source text. If the TargetLanguageCode
 	// is not "en", the SourceLanguageCode must be "en".
+	//
+	// To have Amazon Translate determine the source language of your text, you
+	// can specify auto in the SourceLanguageCode field. If you specify auto, Amazon
+	// Translate will call Amazon Comprehend to determine the source language.
 	//
 	// SourceLanguageCode is a required field
 	SourceLanguageCode *string `min:"2" type:"string" required:"true"`

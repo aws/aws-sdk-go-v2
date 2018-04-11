@@ -2126,8 +2126,17 @@ func (r UpdateServiceRequest) Send() (*UpdateServiceOutput, error) {
 // in a service by specifying the cluster that the service is running in and
 // a new desiredCount parameter.
 //
-// You can use UpdateService to modify your task definition and deploy a new
-// version of your service.
+// If you have updated the Docker image of your application, you can create
+// a new task definition with that image and deploy it to your service. The
+// service scheduler uses the minimum healthy percent and maximum percent parameters
+// (in the service's deployment configuration) to determine the deployment strategy.
+//
+// If your updated Docker image uses the same tag as what is in the existing
+// task definition for your service (for example, my_image:latest), you do not
+// need to create a new revision of your task definition. You can update the
+// service using the forceNewDeployment option. The new tasks launched by the
+// deployment pull the current image/tag combination from your repository when
+// they start.
 //
 // You can also update the deployment configuration of a service. When a deployment
 // is triggered by updating the task definition of a service, the service scheduler
@@ -2230,7 +2239,7 @@ type Attachment struct {
 	// ATTACHED, DETACHING, DETACHED, and DELETED.
 	Status *string `locationName:"status" type:"string"`
 
-	// The type of the attachment, such as an ElasticNetworkInterface.
+	// The type of the attachment, such as ElasticNetworkInterface.
 	Type *string `locationName:"type" type:"string"`
 }
 
@@ -2346,15 +2355,16 @@ func (s *Attribute) Validate() error {
 type AwsVpcConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies whether or not the task's elastic network interface receives a
-	// public IP address.
+	// Whether the task's elastic network interface receives a public IP address.
 	AssignPublicIp AssignPublicIp `locationName:"assignPublicIp" type:"string" enum:"true"`
 
 	// The security groups associated with the task or service. If you do not specify
-	// a security group, the default security group for the VPC is used.
+	// a security group, the default security group for the VPC is used. There is
+	// a limit of 5 security groups able to be specified per AwsVpcConfiguration.
 	SecurityGroups []string `locationName:"securityGroups" type:"list"`
 
-	// The subnets associated with the task or service.
+	// The subnets associated with the task or service. There is a limit of 10 subnets
+	// able to be specified per AwsVpcConfiguration.
 	//
 	// Subnets is a required field
 	Subnets []string `locationName:"subnets" type:"list" required:"true"`
@@ -2461,6 +2471,10 @@ type Container struct {
 	// The exit code returned from the container.
 	ExitCode *int64 `locationName:"exitCode" type:"integer"`
 
+	// The health status of the container. If health checks are not configured for
+	// this container in its task definition, then it reports health status as UNKNOWN.
+	HealthStatus HealthStatus `locationName:"healthStatus" type:"string" enum:"true"`
+
 	// The last known status of the container.
 	LastStatus *string `locationName:"lastStatus" type:"string"`
 
@@ -2543,9 +2557,9 @@ type ContainerDefinition struct {
 	// uses the CPU value to calculate the relative CPU share ratios for running
 	// containers. For more information, see CPU share constraint (https://docs.docker.com/engine/reference/run/#cpu-share-constraint)
 	// in the Docker documentation. The minimum valid CPU share value that the Linux
-	// kernel will allow is 2; however, the CPU parameter is not required, and you
-	// can use CPU values below 2 in your container definitions. For CPU values
-	// below 2 (including null), the behavior varies based on your Amazon ECS container
+	// kernel allows is 2; however, the CPU parameter is not required, and you can
+	// use CPU values below 2 in your container definitions. For CPU values below
+	// 2 (including null), the behavior varies based on your Amazon ECS container
 	// agent version:
 	//
 	//    * Agent versions less than or equal to 1.1.0: Null and zero CPU values
@@ -2657,6 +2671,12 @@ type ContainerDefinition struct {
 	// This parameter is not supported for Windows containers.
 	ExtraHosts []HostEntry `locationName:"extraHosts" type:"list"`
 
+	// The health check command and associated configuration parameters for the
+	// container. This parameter maps to HealthCheck in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
+	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
+	// and the HEALTHCHECK parameter of docker run (https://docs.docker.com/engine/reference/run/).
+	HealthCheck *HealthCheck `locationName:"healthCheck" type:"structure"`
+
 	// The hostname to use for your container. This parameter maps to Hostname in
 	// the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
@@ -2672,6 +2692,11 @@ type ContainerDefinition struct {
 	// (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the IMAGE parameter of docker run (https://docs.docker.com/engine/reference/run/).
+	//
+	//    * When a new task starts, the Amazon ECS container agent pulls the latest
+	//    version of the specified image and tag for the container to use. However,
+	//    subsequent updates to a repository image are not propagated to already
+	//    running tasks.
 	//
 	//    * Images in Amazon ECR repositories can be specified by either using the
 	//    full registry/repository:tag or registry/repository@digest. For example,
@@ -2711,8 +2736,7 @@ type ContainerDefinition struct {
 	// Linux-specific modifications that are applied to the container, such as Linux
 	// KernelCapabilities.
 	//
-	// This parameter is not supported for Windows containers or tasks using the
-	// Fargate launch type.
+	// This parameter is not supported for Windows containers.
 	LinuxParameters *LinuxParameters `locationName:"linuxParameters" type:"structure"`
 
 	// The log configuration specification for the container.
@@ -2754,13 +2778,12 @@ type ContainerDefinition struct {
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --memory option to docker run (https://docs.docker.com/engine/reference/run/).
 	//
-	// If your containers will be part of a task using the Fargate launch type,
-	// this field is optional and the only requirement is that the total amount
-	// of memory reserved for all containers within a task be lower than the task
-	// memory value.
+	// If your containers are part of a task using the Fargate launch type, this
+	// field is optional and the only requirement is that the total amount of memory
+	// reserved for all containers within a task be lower than the task memory value.
 	//
-	// For containers that will be part of a task using the EC2 launch type, you
-	// must specify a non-zero integer for one or both of memory or memoryReservation
+	// For containers that are part of a task using the EC2 launch type, you must
+	// specify a non-zero integer for one or both of memory or memoryReservation
 	// in container definitions. If you specify both, memory must be greater than
 	// memoryReservation. If you specify memoryReservation, then that value is subtracted
 	// from the available memory resources for the container instance on which the
@@ -2915,6 +2938,11 @@ func (s *ContainerDefinition) Validate() error {
 			}
 		}
 	}
+	if s.HealthCheck != nil {
+		if err := s.HealthCheck.Validate(); err != nil {
+			invalidParams.AddNested("HealthCheck", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.LinuxParameters != nil {
 		if err := s.LinuxParameters.Validate(); err != nil {
 			invalidParams.AddNested("LinuxParameters", err.(aws.ErrInvalidParams))
@@ -2976,18 +3004,22 @@ type ContainerInstance struct {
 	// The Unix time stamp for when the container instance was registered.
 	RegisteredAt *time.Time `locationName:"registeredAt" type:"timestamp" timestampFormat:"unix"`
 
-	// For most resource types, this parameter describes the registered resources
-	// on the container instance that are in use by current tasks. For port resource
-	// types, this parameter describes the ports that were reserved by the Amazon
-	// ECS container agent when it registered the container instance with Amazon
-	// ECS.
+	// For CPU and memory resource types, this parameter describes the amount of
+	// each resource that was available on the container instance when the container
+	// agent registered it with Amazon ECS; this value represents the total amount
+	// of CPU and memory that can be allocated on this container instance to tasks.
+	// For port resource types, this parameter describes the ports that were reserved
+	// by the Amazon ECS container agent when it registered the container instance
+	// with Amazon ECS.
 	RegisteredResources []Resource `locationName:"registeredResources" type:"list"`
 
-	// For most resource types, this parameter describes the remaining resources
-	// of the container instance that are available for new tasks. For port resource
-	// types, this parameter describes the ports that are reserved by the Amazon
-	// ECS container agent and any containers that have reserved port mappings;
-	// any port that is not specified here is available for new tasks.
+	// For CPU and memory resource types, this parameter describes the remaining
+	// CPU and memory on the that has not already been allocated to tasks (and is
+	// therefore available for new tasks). For port resource types, this parameter
+	// describes the ports that were reserved by the Amazon ECS container agent
+	// (at instance registration time) and any task containers that have reserved
+	// port mappings on the host (with the host or bridge network mode). Any port
+	// that is not specified here is available for new tasks.
 	RemainingResources []Resource `locationName:"remainingResources" type:"list"`
 
 	// The number of tasks on the container instance that are in the RUNNING status.
@@ -3175,11 +3207,11 @@ type CreateServiceInput struct {
 	// ignore unhealthy Elastic Load Balancing target health checks after a task
 	// has first started. This is only valid if your service is configured to use
 	// a load balancer. If your service's tasks take a while to start and respond
-	// to ELB health checks, you can specify a health check grace period of up to
-	// 1,800 seconds during which the ECS service scheduler will ignore ELB health
-	// check status. This grace period can prevent the ECS service scheduler from
-	// marking tasks as unhealthy and stopping them before they have time to come
-	// up.
+	// to Elastic Load Balancing health checks, you can specify a health check grace
+	// period of up to 1,800 seconds during which the ECS service scheduler ignores
+	// health check status. This grace period can prevent the ECS service scheduler
+	// from marking tasks as unhealthy and stopping them before they have time to
+	// come up.
 	HealthCheckGracePeriodSeconds *int64 `locationName:"healthCheckGracePeriodSeconds" type:"integer"`
 
 	// The launch type on which to run your service.
@@ -3253,6 +3285,10 @@ type CreateServiceInput struct {
 	//
 	// ServiceName is a required field
 	ServiceName *string `locationName:"serviceName" type:"string" required:"true"`
+
+	// The details of the service discovery registries you want to assign to this
+	// service. For more information, see Service Discovery (http://docs.aws.amazon.com/AmazonECS/latest/developerguideservice-discovery.html).
+	ServiceRegistries []ServiceRegistry `locationName:"serviceRegistries" type:"list"`
 
 	// The family and revision (family:revision) or full ARN of the task definition
 	// to run in your service. If a revision is not specified, the latest ACTIVE
@@ -4194,6 +4230,77 @@ func (s Failure) GoString() string {
 	return s.String()
 }
 
+// An object representing a container health check. Health check parameters
+// that are specified in a container definition override any Docker health checks
+// that exist in the container image (such as those specified in a parent image
+// or from the image's Dockerfile).
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HealthCheck
+type HealthCheck struct {
+	_ struct{} `type:"structure"`
+
+	// A string array representing the command that the container runs to determine
+	// if it is healthy. The string array must start with CMD to execute the command
+	// arguments directly, or CMD-SHELL to run the command with the container's
+	// default shell. For example:
+	//
+	// [ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]
+	//
+	// An exit code of 0 indicates success, and non-zero exit code indicates failure.
+	// For more information, see HealthCheck in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
+	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/).
+	//
+	// Command is a required field
+	Command []string `locationName:"command" type:"list" required:"true"`
+
+	// The time period in seconds between each health check execution. You may specify
+	// between 5 and 300 seconds. The default value is 30 seconds.
+	Interval *int64 `locationName:"interval" type:"integer"`
+
+	// The number of times to retry a failed health check before the container is
+	// considered unhealthy. You may specify between 1 and 10 retries. The default
+	// value is 3 retries.
+	Retries *int64 `locationName:"retries" type:"integer"`
+
+	// The optional grace period within which to provide containers time to bootstrap
+	// before failed health checks count towards the maximum number of retries.
+	// You may specify between 0 and 300 seconds. The startPeriod is disabled by
+	// default.
+	//
+	// If a health check succeeds within the startPeriod, then the container is
+	// considered healthy and any subsequent failures count toward the maximum number
+	// of retries.
+	StartPeriod *int64 `locationName:"startPeriod" type:"integer"`
+
+	// The time period in seconds to wait for a health check to succeed before it
+	// is considered a failure. You may specify between 2 and 60 seconds. The default
+	// value is 5 seconds.
+	Timeout *int64 `locationName:"timeout" type:"integer"`
+}
+
+// String returns the string representation
+func (s HealthCheck) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HealthCheck) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HealthCheck) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HealthCheck"}
+
+	if s.Command == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Command"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Hostnames and IP address entries that are added to the /etc/hosts file of
 // a container via the extraHosts parameter of its ContainerDefinition.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/HostEntry
@@ -4284,6 +4391,9 @@ type KernelCapabilities struct {
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --cap-add option to docker run (https://docs.docker.com/engine/reference/run/).
 	//
+	// If you are using tasks that use the Fargate launch type, the add parameter
+	// is not supported.
+	//
 	// Valid values: "ALL" | "AUDIT_CONTROL" | "AUDIT_WRITE" | "BLOCK_SUSPEND" |
 	// "CHOWN" | "DAC_OVERRIDE" | "DAC_READ_SEARCH" | "FOWNER" | "FSETID" | "IPC_LOCK"
 	// | "IPC_OWNER" | "KILL" | "LEASE" | "LINUX_IMMUTABLE" | "MAC_ADMIN" | "MAC_OVERRIDE"
@@ -4352,12 +4462,18 @@ type LinuxParameters struct {
 
 	// The Linux capabilities for the container that are added to or dropped from
 	// the default configuration provided by Docker.
+	//
+	// If you are using tasks that use the Fargate launch type, capabilities is
+	// supported but the add parameter is not supported.
 	Capabilities *KernelCapabilities `locationName:"capabilities" type:"structure"`
 
 	// Any host devices to expose to the container. This parameter maps to Devices
 	// in the Create a container (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/#create-a-container)
 	// section of the Docker Remote API (https://docs.docker.com/engine/reference/api/docker_remote_api_v1.27/)
 	// and the --device option to docker run (https://docs.docker.com/engine/reference/run/).
+	//
+	// If you are using tasks that use the Fargate launch type, the devices parameter
+	// is not supported.
 	Devices []Device `locationName:"devices" type:"list"`
 
 	// Run an init process inside the container that forwards signals and reaps
@@ -4367,6 +4483,14 @@ type LinuxParameters struct {
 	// container instance, log in to your container instance and run the following
 	// command: sudo docker version | grep "Server API version"
 	InitProcessEnabled *bool `locationName:"initProcessEnabled" type:"boolean"`
+
+	// The value for the size of the /dev/shm volume. This parameter maps to the
+	// --shm-size option to docker run (https://docs.docker.com/engine/reference/run/).
+	SharedMemorySize *int64 `locationName:"sharedMemorySize" type:"integer"`
+
+	// The container path, mount options, and size of the tmpfs mount. This parameter
+	// maps to the --tmpfs option to docker run (https://docs.docker.com/engine/reference/run/).
+	Tmpfs []Tmpfs `locationName:"tmpfs" type:"list"`
 }
 
 // String returns the string representation
@@ -4386,6 +4510,13 @@ func (s *LinuxParameters) Validate() error {
 		for i, v := range s.Devices {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Devices", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tmpfs != nil {
+		for i, v := range s.Tmpfs {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tmpfs", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -5282,7 +5413,7 @@ type PortMapping struct {
 	// The port number on the container instance to reserve for your container.
 	//
 	// If using containers in a task with the awsvpc or host network mode, the hostPort
-	// can either be left blank or needs to be the same value as the containerPort.
+	// can either be left blank or set to the same value as the containerPort.
 	//
 	// If using containers in a task with the bridge network mode, you can specify
 	// a non-reserved host port for your container port mapping, or you can omit
@@ -5492,28 +5623,35 @@ type RegisterTaskDefinitionInput struct {
 	// ContainerDefinitions is a required field
 	ContainerDefinitions []ContainerDefinition `locationName:"containerDefinitions" type:"list" required:"true"`
 
-	// The number of cpu units used by the task. If using the EC2 launch type, this
-	// field is optional and any value can be used.
+	// The number of CPU units used by the task. It can be expressed as an integer
+	// using CPU units, for example 1024, or as a string using vCPUs, for example
+	// 1 vCPU or 1 vcpu, in a task definition but will be converted to an integer
+	// indicating the CPU units when the task definition is registered.
 	//
 	// Task-level CPU and memory parameters are ignored for Windows containers.
 	// We recommend specifying container-level resources for Windows containers.
 	//
-	// If you are using the Fargate launch type, this field is required and you
-	// must use one of the following values, which determines your range of valid
-	// values for the memory parameter:
+	// If using the EC2 launch type, this field is optional. Supported values are
+	// between 128 CPU units (0.125 vCPUs) and 10240 CPU units (10 vCPUs).
 	//
-	//    * 256 (.25 vCPU) - Available memory values: 0.5GB, 1GB, 2GB
+	// If using the Fargate launch type, this field is required and you must use
+	// one of the following values, which determines your range of supported values
+	// for the memory parameter:
 	//
-	//    * 512 (.5 vCPU) - Available memory values: 1GB, 2GB, 3GB, 4GB
+	//    * 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB),
+	//    2048 (2 GB)
 	//
-	//    * 1024 (1 vCPU) - Available memory values: 2GB, 3GB, 4GB, 5GB, 6GB, 7GB,
-	//    8GB
+	//    * 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072
+	//    (3 GB), 4096 (4 GB)
 	//
-	//    * 2048 (2 vCPU) - Available memory values: Between 4GB and 16GB in 1GB
-	//    increments
+	//    * 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096
+	//    (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
 	//
-	//    * 4096 (4 vCPU) - Available memory values: Between 8GB and 30GB in 1GB
-	//    increments
+	//    * 2048 (2 vCPU) - Available memory values: Between 4096 (4 GB) and 16384
+	//    (16 GB) in increments of 1024 (1 GB)
+	//
+	//    * 4096 (4 vCPU) - Available memory values: Between 8192 (8 GB) and 30720
+	//    (30 GB) in increments of 1024 (1 GB)
 	Cpu *string `locationName:"cpu" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the task execution role that the Amazon
@@ -5528,27 +5666,34 @@ type RegisterTaskDefinitionInput struct {
 	// Family is a required field
 	Family *string `locationName:"family" type:"string" required:"true"`
 
-	// The amount (in MiB) of memory used by the task. If using the EC2 launch type,
-	// this field is optional and any value can be used.
+	// The amount of memory (in MiB) used by the task. It can be expressed as an
+	// integer using MiB, for example 1024, or as a string using GB, for example
+	// 1GB or 1 GB, in a task definition but will be converted to an integer indicating
+	// the MiB when the task definition is registered.
 	//
 	// Task-level CPU and memory parameters are ignored for Windows containers.
 	// We recommend specifying container-level resources for Windows containers.
 	//
-	// If you are using the Fargate launch type, this field is required and you
-	// must use one of the following values, which determines your range of valid
-	// values for the cpu parameter:
+	// If using the EC2 launch type, this field is optional.
 	//
-	//    * 0.5GB, 1GB, 2GB - Available cpu values: 256 (.25 vCPU)
+	// If using the Fargate launch type, this field is required and you must use
+	// one of the following values, which determines your range of supported values
+	// for the cpu parameter:
 	//
-	//    * 1GB, 2GB, 3GB, 4GB - Available cpu values: 512 (.5 vCPU)
+	//    * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256 (.25
+	//    vCPU)
 	//
-	//    * 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available cpu values: 1024 (1 vCPU)
+	//    * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available cpu values:
+	//    512 (.5 vCPU)
 	//
-	//    * Between 4GB and 16GB in 1GB increments - Available cpu values: 2048
-	//    (2 vCPU)
+	//    * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168
+	//    (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)
 	//
-	//    * Between 8GB and 30GB in 1GB increments - Available cpu values: 4096
-	//    (4 vCPU)
+	//    * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) -
+	//    Available cpu values: 2048 (2 vCPU)
+	//
+	//    * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) -
+	//    Available cpu values: 4096 (4 vCPU)
 	Memory *string `locationName:"memory" type:"string"`
 
 	// The Docker networking mode to use for the containers in the task. The valid
@@ -5906,6 +6051,8 @@ type Service struct {
 	// within a region or across multiple regions.
 	ServiceName *string `locationName:"serviceName" type:"string"`
 
+	ServiceRegistries []ServiceRegistry `locationName:"serviceRegistries" type:"list"`
+
 	// The status of the service. The valid values are ACTIVE, DRAINING, or INACTIVE.
 	Status *string `locationName:"status" type:"string"`
 
@@ -5947,6 +6094,30 @@ func (s ServiceEvent) String() string {
 
 // GoString returns the string representation
 func (s ServiceEvent) GoString() string {
+	return s.String()
+}
+
+// Details of the service registry.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ServiceRegistry
+type ServiceRegistry struct {
+	_ struct{} `type:"structure"`
+
+	// The port value used if your Service Discovery service specified an SRV record.
+	Port *int64 `locationName:"port" type:"integer"`
+
+	// The Amazon Resource Name (ARN) of the Service Registry. The currently supported
+	// service registry is Amazon Route 53 Auto Naming Service. For more information,
+	// see Service (https://docs.aws.amazon.com/Route53/latest/APIReference/API_autonaming_Service.html).
+	RegistryArn *string `locationName:"registryArn" type:"string"`
+}
+
+// String returns the string representation
+func (s ServiceRegistry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ServiceRegistry) GoString() string {
 	return s.String()
 }
 
@@ -6212,7 +6383,7 @@ type SubmitTaskStateChangeInput struct {
 	// Any containers associated with the state change request.
 	Containers []ContainerStateChange `locationName:"containers" type:"list"`
 
-	// The Unix timestamp for when the task execution stopped.
+	// The Unix time stamp for when the task execution stopped.
 	ExecutionStoppedAt *time.Time `locationName:"executionStoppedAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The Unix time stamp for when the container image pull began.
@@ -6307,23 +6478,32 @@ type Task struct {
 	// The containers associated with the task.
 	Containers []Container `locationName:"containers" type:"list"`
 
-	// The number of cpu units used by the task. If using the EC2 launch type, this
-	// field is optional and any value can be used. If using the Fargate launch
-	// type, this field is required and you must use one of the following values,
-	// which determines your range of valid values for the memory parameter:
+	// The number of CPU units used by the task. It can be expressed as an integer
+	// using CPU units, for example 1024, or as a string using vCPUs, for example
+	// 1 vCPU or 1 vcpu, in a task definition but is converted to an integer indicating
+	// the CPU units when the task definition is registered.
 	//
-	//    * 256 (.25 vCPU) - Available memory values: 0.5GB, 1GB, 2GB
+	// If using the EC2 launch type, this field is optional. Supported values are
+	// between 128 CPU units (0.125 vCPUs) and 10240 CPU units (10 vCPUs).
 	//
-	//    * 512 (.5 vCPU) - Available memory values: 1GB, 2GB, 3GB, 4GB
+	// If using the Fargate launch type, this field is required and you must use
+	// one of the following values, which determines your range of supported values
+	// for the memory parameter:
 	//
-	//    * 1024 (1 vCPU) - Available memory values: 2GB, 3GB, 4GB, 5GB, 6GB, 7GB,
-	//    8GB
+	//    * 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB),
+	//    2048 (2 GB)
 	//
-	//    * 2048 (2 vCPU) - Available memory values: Between 4GB and 16GB in 1GB
-	//    increments
+	//    * 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072
+	//    (3 GB), 4096 (4 GB)
 	//
-	//    * 4096 (4 vCPU) - Available memory values: Between 8GB and 30GB in 1GB
-	//    increments
+	//    * 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096
+	//    (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
+	//
+	//    * 2048 (2 vCPU) - Available memory values: Between 4096 (4 GB) and 16384
+	//    (16 GB) in increments of 1024 (1 GB)
+	//
+	//    * 4096 (4 vCPU) - Available memory values: Between 8192 (8 GB) and 30720
+	//    (30 GB) in increments of 1024 (1 GB)
 	Cpu *string `locationName:"cpu" type:"string"`
 
 	// The Unix time stamp for when the task was created (the task entered the PENDING
@@ -6333,11 +6513,24 @@ type Task struct {
 	// The desired status of the task.
 	DesiredStatus *string `locationName:"desiredStatus" type:"string"`
 
-	// The Unix timestamp for when the task execution stopped.
+	// The Unix time stamp for when the task execution stopped.
 	ExecutionStoppedAt *time.Time `locationName:"executionStoppedAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The name of the task group associated with the task.
 	Group *string `locationName:"group" type:"string"`
+
+	// The health status for the task, which is determined by the health of the
+	// essential containers in the task. If all essential containers in the task
+	// are reporting as HEALTHY, then the task status also reports as HEALTHY. If
+	// any essential containers in the task are reporting as UNHEALTHY or UNKNOWN,
+	// then the task status also reports as UNHEALTHY or UNKNOWN, accordingly.
+	//
+	// The Amazon ECS container agent does not monitor or report on Docker health
+	// checks that are embedded in a container image (such as those specified in
+	// a parent image or from the image's Dockerfile) and not specified in the container
+	// definition. Health check parameters that are specified in a container definition
+	// override any Docker health checks that exist in the container image.
+	HealthStatus HealthStatus `locationName:"healthStatus" type:"string" enum:"true"`
 
 	// The last known status of the task.
 	LastStatus *string `locationName:"lastStatus" type:"string"`
@@ -6345,22 +6538,31 @@ type Task struct {
 	// The launch type on which your task is running.
 	LaunchType LaunchType `locationName:"launchType" type:"string" enum:"true"`
 
-	// The amount (in MiB) of memory used by the task. If using the EC2 launch type,
-	// this field is optional and any value can be used. If using the Fargate launch
-	// type, this field is required and you must use one of the following values,
-	// which determines your range of valid values for the cpu parameter:
+	// The amount of memory (in MiB) used by the task. It can be expressed as an
+	// integer using MiB, for example 1024, or as a string using GB, for example
+	// 1GB or 1 GB, in a task definition but is converted to an integer indicating
+	// the MiB when the task definition is registered.
 	//
-	//    * 0.5GB, 1GB, 2GB - Available cpu values: 256 (.25 vCPU)
+	// If using the EC2 launch type, this field is optional.
 	//
-	//    * 1GB, 2GB, 3GB, 4GB - Available cpu values: 512 (.5 vCPU)
+	// If using the Fargate launch type, this field is required and you must use
+	// one of the following values, which determines your range of supported values
+	// for the cpu parameter:
 	//
-	//    * 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available cpu values: 1024 (1 vCPU)
+	//    * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256 (.25
+	//    vCPU)
 	//
-	//    * Between 4GB and 16GB in 1GB increments - Available cpu values: 2048
-	//    (2 vCPU)
+	//    * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available cpu values:
+	//    512 (.5 vCPU)
 	//
-	//    * Between 8GB and 30GB in 1GB increments - Available cpu values: 4096
-	//    (4 vCPU)
+	//    * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168
+	//    (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)
+	//
+	//    * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) -
+	//    Available cpu values: 2048 (2 vCPU)
+	//
+	//    * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) -
+	//    Available cpu values: 4096 (4 vCPU)
 	Memory *string `locationName:"memory" type:"string"`
 
 	// One or more container overrides.
@@ -6393,8 +6595,8 @@ type Task struct {
 	// The reason the task was stopped.
 	StoppedReason *string `locationName:"stoppedReason" type:"string"`
 
-	// The Unix time stamp for when the task will stop (the task transitioned from
-	// the RUNNING state to the STOPPED state).
+	// The Unix time stamp for when the task will stop (transitions from the RUNNING
+	// state to STOPPED).
 	StoppingAt *time.Time `locationName:"stoppingAt" type:"timestamp" timestampFormat:"unix"`
 
 	// The Amazon Resource Name (ARN) of the task.
@@ -6443,18 +6645,20 @@ type TaskDefinition struct {
 	// type, this field is required and you must use one of the following values,
 	// which determines your range of valid values for the memory parameter:
 	//
-	//    * 256 (.25 vCPU) - Available memory values: 0.5GB, 1GB, 2GB
+	//    * 256 (.25 vCPU) - Available memory values: 512 (0.5 GB), 1024 (1 GB),
+	//    2048 (2 GB)
 	//
-	//    * 512 (.5 vCPU) - Available memory values: 1GB, 2GB, 3GB, 4GB
+	//    * 512 (.5 vCPU) - Available memory values: 1024 (1 GB), 2048 (2 GB), 3072
+	//    (3 GB), 4096 (4 GB)
 	//
-	//    * 1024 (1 vCPU) - Available memory values: 2GB, 3GB, 4GB, 5GB, 6GB, 7GB,
-	//    8GB
+	//    * 1024 (1 vCPU) - Available memory values: 2048 (2 GB), 3072 (3 GB), 4096
+	//    (4 GB), 5120 (5 GB), 6144 (6 GB), 7168 (7 GB), 8192 (8 GB)
 	//
-	//    * 2048 (2 vCPU) - Available memory values: Between 4GB and 16GB in 1GB
-	//    increments
+	//    * 2048 (2 vCPU) - Available memory values: Between 4096 (4 GB) and 16384
+	//    (16 GB) in increments of 1024 (1 GB)
 	//
-	//    * 4096 (4 vCPU) - Available memory values: Between 8GB and 30GB in 1GB
-	//    increments
+	//    * 4096 (4 vCPU) - Available memory values: Between 8192 (8 GB) and 30720
+	//    (30 GB) in increments of 1024 (1 GB)
 	Cpu *string `locationName:"cpu" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the task execution role that the Amazon
@@ -6469,17 +6673,20 @@ type TaskDefinition struct {
 	// type, this field is required and you must use one of the following values,
 	// which determines your range of valid values for the cpu parameter:
 	//
-	//    * 0.5GB, 1GB, 2GB - Available cpu values: 256 (.25 vCPU)
+	//    * 512 (0.5 GB), 1024 (1 GB), 2048 (2 GB) - Available cpu values: 256 (.25
+	//    vCPU)
 	//
-	//    * 1GB, 2GB, 3GB, 4GB - Available cpu values: 512 (.5 vCPU)
+	//    * 1024 (1 GB), 2048 (2 GB), 3072 (3 GB), 4096 (4 GB) - Available cpu values:
+	//    512 (.5 vCPU)
 	//
-	//    * 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available cpu values: 1024 (1 vCPU)
+	//    * 2048 (2 GB), 3072 (3 GB), 4096 (4 GB), 5120 (5 GB), 6144 (6 GB), 7168
+	//    (7 GB), 8192 (8 GB) - Available cpu values: 1024 (1 vCPU)
 	//
-	//    * Between 4GB and 16GB in 1GB increments - Available cpu values: 2048
-	//    (2 vCPU)
+	//    * Between 4096 (4 GB) and 16384 (16 GB) in increments of 1024 (1 GB) -
+	//    Available cpu values: 2048 (2 vCPU)
 	//
-	//    * Between 8GB and 30GB in 1GB increments - Available cpu values: 4096
-	//    (4 vCPU)
+	//    * Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB) -
+	//    Available cpu values: 4096 (4 vCPU)
 	Memory *string `locationName:"memory" type:"string"`
 
 	// The Docker networking mode to use for the containers in the task. The valid
@@ -6576,8 +6783,8 @@ func (s TaskDefinition) GoString() string {
 
 // An object representing a constraint on task placement in the task definition.
 //
-// If you are using the Fargate launch type, task placement contraints are not
-// supported.
+// If you are using the Fargate launch type, task placement constraints are
+// not supported.
 //
 // For more information, see Task Placement Constraints (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
 // in the Amazon Elastic Container Service Developer Guide.
@@ -6632,6 +6839,59 @@ func (s TaskOverride) String() string {
 // GoString returns the string representation
 func (s TaskOverride) GoString() string {
 	return s.String()
+}
+
+// The container path, mount options, and size of the tmpfs mount.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Tmpfs
+type Tmpfs struct {
+	_ struct{} `type:"structure"`
+
+	// The absolute file path where the tmpfs volume will be mounted.
+	//
+	// ContainerPath is a required field
+	ContainerPath *string `locationName:"containerPath" type:"string" required:"true"`
+
+	// The list of tmpfs volume mount options.
+	//
+	// Valid values: "defaults" | "ro" | "rw" | "suid" | "nosuid" | "dev" | "nodev"
+	// | "exec" | "noexec" | "sync" | "async" | "dirsync" | "remount" | "mand" |
+	// "nomand" | "atime" | "noatime" | "diratime" | "nodiratime" | "bind" | "rbind"
+	// | "unbindable" | "runbindable" | "private" | "rprivate" | "shared" | "rshared"
+	// | "slave" | "rslave" | "relatime" | "norelatime" | "strictatime" | "nostrictatime"
+	MountOptions []string `locationName:"mountOptions" type:"list"`
+
+	// The size of the tmpfs volume.
+	//
+	// Size is a required field
+	Size *int64 `locationName:"size" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s Tmpfs) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s Tmpfs) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tmpfs) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tmpfs"}
+
+	if s.ContainerPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContainerPath"))
+	}
+
+	if s.Size == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Size"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The ulimit settings to pass to the container.
@@ -6843,23 +7103,27 @@ type UpdateServiceInput struct {
 	// service.
 	DesiredCount *int64 `locationName:"desiredCount" type:"integer"`
 
-	// Whether or not to force a new deployment of the service.
+	// Whether to force a new deployment of the service. Deployments are not forced
+	// by default. You can use this option to trigger a new deployment with no service
+	// definition changes. For example, you can update a service's tasks to use
+	// a newer Docker image with the same image/tag combination (my_image:latest)
+	// or to roll Fargate tasks onto a newer platform version.
 	ForceNewDeployment *bool `locationName:"forceNewDeployment" type:"boolean"`
 
 	// The period of time, in seconds, that the Amazon ECS service scheduler should
 	// ignore unhealthy Elastic Load Balancing target health checks after a task
 	// has first started. This is only valid if your service is configured to use
 	// a load balancer. If your service's tasks take a while to start and respond
-	// to ELB health checks, you can specify a health check grace period of up to
-	// 1,800 seconds during which the ECS service scheduler will ignore ELB health
-	// check status. This grace period can prevent the ECS service scheduler from
-	// marking tasks as unhealthy and stopping them before they have time to come
-	// up.
+	// to Elastic Load Balancing health checks, you can specify a health check grace
+	// period of up to 1,800 seconds during which the ECS service scheduler ignores
+	// the Elastic Load Balancing health check status. This grace period can prevent
+	// the ECS service scheduler from marking tasks as unhealthy and stopping them
+	// before they have time to come up.
 	HealthCheckGracePeriodSeconds *int64 `locationName:"healthCheckGracePeriodSeconds" type:"integer"`
 
 	// The network configuration for the service. This parameter is required for
-	// task definitions that use the awsvpc network mode to receive their own Elastic
-	// Network Interface, and it is not supported for other network modes. For more
+	// task definitions that use the awsvpc network mode to receive their own elastic
+	// network interface, and it is not supported for other network modes. For more
 	// information, see Task Networking (http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	//
@@ -7161,6 +7425,24 @@ func (enum DeviceCgroupPermission) MarshalValue() (string, error) {
 }
 
 func (enum DeviceCgroupPermission) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type HealthStatus string
+
+// Enum values for HealthStatus
+const (
+	HealthStatusHealthy   HealthStatus = "HEALTHY"
+	HealthStatusUnhealthy HealthStatus = "UNHEALTHY"
+	HealthStatusUnknown   HealthStatus = "UNKNOWN"
+)
+
+func (enum HealthStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HealthStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
