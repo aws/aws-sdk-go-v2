@@ -54,10 +54,10 @@ type Shape struct {
 	API              *API `json:"-"`
 	ShapeName        string
 	Documentation    string
-	MemberRefs       map[string]*ShapeRef `json:"members"`
-	MemberRef        ShapeRef             `json:"member"`
-	KeyRef           ShapeRef             `json:"key"`
-	ValueRef         ShapeRef             `json:"value"`
+	MemberRefs       map[string]*ShapeRef `json:"members"` // member fields
+	MemberRef        ShapeRef             `json:"member"`  // List type ref
+	KeyRef           ShapeRef             `json:"key"`     // map key type ref
+	ValueRef         ShapeRef             `json:"value"`   // map value type ref
 	Required         []string
 	Payload          string
 	Type             string
@@ -72,6 +72,8 @@ type Shape struct {
 	XMLNamespace     XMLInfo
 	Min              float64 // optional Minimum length (string, list) or value (number)
 	Max              float64 // optional Maximum length (string, list) or value (number)
+
+	IsEventStream bool `json:"eventstream"`
 
 	refs       []*ShapeRef // References to this shape
 	resolvePkg string      // use this package in the goType() if present
