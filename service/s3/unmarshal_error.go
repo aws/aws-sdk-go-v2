@@ -13,9 +13,24 @@ import (
 )
 
 type xmlErrorResponse struct {
-	XMLName xml.Name `xml:"Error"`
-	Code    string   `xml:"Code"`
-	Message string   `xml:"Message"`
+	XMLName xml.Name      `xml:"Error"`
+	Code    string        `xml:"Code"`
+	Message string        `xml:"Message"`
+	Extra   extraElements `xml:",any"`
+}
+
+type extraElements map[string]string
+
+func (e *extraElements) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+	var data string
+	if err := d.DecodeElement(&data, &start); err != nil {
+		return err
+	}
+	if *e == nil {
+		*e = make(extraElements)
+	}
+	(*e)[start.Name.Local] = data
+	return nil
 }
 
 func unmarshalError(r *request.Request) {
@@ -69,6 +84,7 @@ func unmarshalError(r *request.Request) {
 			r.RequestID,
 		),
 		hostID: hostID,
+		extra:  resp.Extra,
 	}
 }
 
@@ -81,12 +97,17 @@ type RequestFailure interface {
 
 	// Host ID is the S3 Host ID needed for debug, and contacting support
 	HostID() string
+
+	// Extra returns a map which represents the S3 error XML elements
+	// other than Code and Message.
+	Extra() map[string]string
 }
 
 type requestFailure struct {
 	awserr.RequestFailure
 
 	hostID string
+	extra  map[string]string
 }
 
 func (r requestFailure) Error() string {
@@ -99,4 +120,10 @@ func (r requestFailure) String() string {
 }
 func (r requestFailure) HostID() string {
 	return r.hostID
+}
+func (r requestFailure) Extra() map[string]string {
+	if r.extra == nil {
+		return map[string]string{}
+	}
+	return r.extra
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"reflect"
 	"strings"
 	"testing"
 
@@ -19,6 +20,7 @@ type testErrorCase struct {
 	RespFn           func() *http.Response
 	ReqID, HostID    string
 	Code, Msg        string
+	Extra            map[string]string
 	WithoutStatusMsg bool
 }
 
@@ -38,6 +40,7 @@ var testUnmarshalCases = []testErrorCase{
 		ReqID:  "abc123",
 		HostID: "321cba",
 		Code:   "BucketRegionError", Msg: "incorrect region, the bucket is not in 'mock-region' region",
+		Extra: map[string]string{},
 	},
 	{
 		RespFn: func() *http.Response {
@@ -54,6 +57,7 @@ var testUnmarshalCases = []testErrorCase{
 		ReqID:  "abc123",
 		HostID: "321cba",
 		Code:   "Forbidden", Msg: "Forbidden",
+		Extra: map[string]string{},
 	},
 	{
 		RespFn: func() *http.Response {
@@ -70,6 +74,7 @@ var testUnmarshalCases = []testErrorCase{
 		ReqID:  "abc123",
 		HostID: "321cba",
 		Code:   "BadRequest", Msg: "Bad Request",
+		Extra: map[string]string{},
 	},
 	{
 		RespFn: func() *http.Response {
@@ -86,6 +91,7 @@ var testUnmarshalCases = []testErrorCase{
 		ReqID:  "abc123",
 		HostID: "321cba",
 		Code:   "NotFound", Msg: "Not Found",
+		Extra: map[string]string{},
 	},
 	{
 		// SDK only reads request ID and host ID from the header. The values
@@ -105,6 +111,10 @@ var testUnmarshalCases = []testErrorCase{
 		ReqID:  "taken-request-id",
 		HostID: "taken-host-id",
 		Code:   "SomeException", Msg: "Exception message",
+		Extra: map[string]string{
+			"RequestId": "ignored-request-id",
+			"HostId":    "ignored-host-id",
+		},
 	},
 	{
 		RespFn: func() *http.Response {
@@ -121,6 +131,7 @@ var testUnmarshalCases = []testErrorCase{
 		ReqID:  "abc123",
 		HostID: "321cba",
 		Code:   "NotFound", Msg: "Not Found", WithoutStatusMsg: true,
+		Extra: map[string]string{},
 	},
 	{
 		RespFn: func() *http.Response {
@@ -137,6 +148,32 @@ var testUnmarshalCases = []testErrorCase{
 		ReqID:  "abc123",
 		HostID: "321cba",
 		Code:   "NotFound", Msg: "Not Found",
+		Extra: map[string]string{},
+	},
+	{
+		// Test for Extra elements.
+		RespFn: func() *http.Response {
+			body := `<Error><Code>SomeException</Code><Message>Exception message</Message><RequestId>xml-request-id</RequestId><HostId>xml-host-id</HostId><Extra1Name>Extra1&#xA;Content</Extra1Name><Extra2Name>Extra2 Content</Extra2Name></Error>`
+			return &http.Response{
+				StatusCode: 500,
+				Header: http.Header{
+					"X-Amz-Request-Id": []string{"taken-request-id"},
+					"X-Amz-Id-2":       []string{"taken-host-id"},
+				},
+				Body:          ioutil.NopCloser(strings.NewReader(body)),
+				ContentLength: int64(len(body)),
+			}
+		},
+		ReqID:  "taken-request-id",
+		HostID: "taken-host-id",
+		Code:   "SomeException",
+		Msg:    "Exception message",
+		Extra: map[string]string{
+			"RequestId":  "xml-request-id",
+			"HostId":     "xml-host-id",
+			"Extra1Name": "Extra1\nContent",
+			"Extra2Name": "Extra2 Content",
+		},
 	},
 }
 
@@ -171,6 +208,9 @@ func TestUnmarshalError(t *testing.T) {
 		}
 		if e, a := c.HostID, err.(s3.RequestFailure).HostID(); e != a {
 			t.Errorf("%d, HostID: expect %s, got %s", i, e, a)
+		}
+		if e, a := c.Extra, err.(s3.RequestFailure).Extra(); !reflect.DeepEqual(e, a) {
+			t.Errorf("%d, Extra: expect %+v, got %+v", i, e, a)
 		}
 	}
 }
