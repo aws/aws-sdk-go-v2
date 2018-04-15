@@ -2182,7 +2182,12 @@ var awsPartition = partition{
 				"aws-global":     endpoint{},
 				"ca-central-1":   endpoint{},
 				"eu-central-1":   endpoint{},
-				"eu-west-1":      endpoint{},
+				"eu-west-1":      endpoint{
+					Hostname: "sts.eu-west-1.amazonaws.com",
+					CredentialScope: credentialScope{
+						Region: "eu-west-1",
+					},
+				},
 				"eu-west-2":      endpoint{},
 				"eu-west-3":      endpoint{},
 				"sa-east-1":      endpoint{},
