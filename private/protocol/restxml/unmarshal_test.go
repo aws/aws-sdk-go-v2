@@ -273,6 +273,8 @@ type OutputService1TestShapeOutputService1TestCaseOperation3Output struct {
 
 	Float *float64 `type:"float"`
 
+	Float64s []float64 `type:"list"`
+
 	ImaHeader *string `location:"header" type:"string"`
 
 	ImaHeaderLocation *string `location:"header" locationName:"X-Foo" type:"string"`
@@ -332,6 +334,18 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation3Output) MarshalFi
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Float", protocol.Float64Value(v), metadata)
+	}
+	if len(s.Float64s) > 0 {
+		v := s.Float64s
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Float64s", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.Float64Value(v1))
+		}
+		ls0.End()
+
 	}
 	if s.Long != nil {
 		v := *s.Long
@@ -2518,7 +2532,7 @@ func TestOutputService1ProtocolTestScalarMembersCase3(t *testing.T) {
 
 	svc := NewOutputService1ProtocolTest(cfg)
 
-	buf := bytes.NewReader([]byte("<OperationNameResponse><Blobs><member>dmFsdWU=</member><member>dmFsdWUy</member></Blobs><Timestamps><member>2015-01-25T08:00:00Z</member><member>2015-01-25T08:00:01Z</member></Timestamps></OperationNameResponse>"))
+	buf := bytes.NewReader([]byte("<OperationNameResponse><Float64s><member>0.1</member><member>0.2</member></Float64s><Blobs><member>dmFsdWU=</member><member>dmFsdWUy</member></Blobs><Timestamps><member>2015-01-25T08:00:00Z</member><member>2015-01-25T08:00:01Z</member></Timestamps></OperationNameResponse>"))
 	req := svc.OutputService1TestCaseOperation3Request(nil)
 	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
 

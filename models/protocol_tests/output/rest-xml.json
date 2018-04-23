@@ -48,6 +48,9 @@
           },
           "Timestamps": {
             "shape": "Timestamps"
+          },
+          "Float64s": {
+            "shape": "Float64s"
           }
         }
       },
@@ -93,6 +96,10 @@
       "Timestamps":{
         "type":"list",
         "member":{"shape":"TimestampType"}
+      },
+      "Float64s": {
+        "type":"list",
+        "member":{"shape":"FloatType"}
       }
     },
     "cases": [
@@ -162,13 +169,14 @@
           "name": "OperationName"
         },
         "result": {
-		  "Blobs": ["value", "value2"],
-		  "Timestamps": [1422172800, 1422172801]
+          "Float64s": [0.1, 0.2],
+          "Blobs": ["value", "value2"],
+          "Timestamps": [1422172800, 1422172801]
         },
         "response": {
           "status_code": 200,
           "headers": {},
-          "body": "<OperationNameResponse><Blobs><member>dmFsdWU=</member><member>dmFsdWUy</member></Blobs><Timestamps><member>2015-01-25T08:00:00Z</member><member>2015-01-25T08:00:01Z</member></Timestamps></OperationNameResponse>"
+          "body": "<OperationNameResponse><Float64s><member>0.1</member><member>0.2</member></Float64s><Blobs><member>dmFsdWU=</member><member>dmFsdWUy</member></Blobs><Timestamps><member>2015-01-25T08:00:00Z</member><member>2015-01-25T08:00:01Z</member></Timestamps></OperationNameResponse>"
         }
       }
     ]
