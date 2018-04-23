@@ -67,8 +67,6 @@ func parse(r reflect.Value, node *XMLNode, tag reflect.StructTag) error {
 		}
 	}
 
-	fmt.Println("parsing", node.Name, tag.Get("type"), t, r.Type())
-
 	switch t {
 	case "structure":
 		if field, ok := rtype.FieldByName("_"); ok {
