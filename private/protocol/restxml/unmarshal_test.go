@@ -100,13 +100,13 @@ type OutputService1TestCaseOperation1Request struct {
 }
 
 // Send marshals and sends the OutputService1TestCaseOperation1 API request.
-func (r OutputService1TestCaseOperation1Request) Send() (*OutputService1TestShapeOutputService1TestCaseOperation2Output, error) {
+func (r OutputService1TestCaseOperation1Request) Send() (*OutputService1TestShapeOutputService1TestCaseOperation3Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*OutputService1TestShapeOutputService1TestCaseOperation2Output), nil
+	return r.Request.Data.(*OutputService1TestShapeOutputService1TestCaseOperation3Output), nil
 }
 
 // OutputService1TestCaseOperation1Request returns a request value for making API operation for
@@ -129,7 +129,7 @@ func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation1Request(inp
 		input = &OutputService1TestShapeOutputService1TestCaseOperation1Input{}
 	}
 
-	output := &OutputService1TestShapeOutputService1TestCaseOperation2Output{}
+	output := &OutputService1TestShapeOutputService1TestCaseOperation3Output{}
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
@@ -146,13 +146,13 @@ type OutputService1TestCaseOperation2Request struct {
 }
 
 // Send marshals and sends the OutputService1TestCaseOperation2 API request.
-func (r OutputService1TestCaseOperation2Request) Send() (*OutputService1TestShapeOutputService1TestCaseOperation2Output, error) {
+func (r OutputService1TestCaseOperation2Request) Send() (*OutputService1TestShapeOutputService1TestCaseOperation3Output, error) {
 	err := r.Request.Send()
 	if err != nil {
 		return nil, err
 	}
 
-	return r.Request.Data.(*OutputService1TestShapeOutputService1TestCaseOperation2Output), nil
+	return r.Request.Data.(*OutputService1TestShapeOutputService1TestCaseOperation3Output), nil
 }
 
 // OutputService1TestCaseOperation2Request returns a request value for making API operation for
@@ -175,11 +175,57 @@ func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation2Request(inp
 		input = &OutputService1TestShapeOutputService1TestCaseOperation2Input{}
 	}
 
-	output := &OutputService1TestShapeOutputService1TestCaseOperation2Output{}
+	output := &OutputService1TestShapeOutputService1TestCaseOperation3Output{}
 	req := c.newRequest(op, input, output)
 	output.responseMetadata = aws.Response{Request: req}
 
 	return OutputService1TestCaseOperation2Request{Request: req, Input: input, Copy: c.OutputService1TestCaseOperation2Request}
+}
+
+const opOutputService1TestCaseOperation3 = "OperationName"
+
+// OutputService1TestCaseOperation3Request is a API request type for the OutputService1TestCaseOperation3 API operation.
+type OutputService1TestCaseOperation3Request struct {
+	*aws.Request
+	Input *OutputService1TestShapeOutputService1TestCaseOperation3Input
+	Copy  func(*OutputService1TestShapeOutputService1TestCaseOperation3Input) OutputService1TestCaseOperation3Request
+}
+
+// Send marshals and sends the OutputService1TestCaseOperation3 API request.
+func (r OutputService1TestCaseOperation3Request) Send() (*OutputService1TestShapeOutputService1TestCaseOperation3Output, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*OutputService1TestShapeOutputService1TestCaseOperation3Output), nil
+}
+
+// OutputService1TestCaseOperation3Request returns a request value for making API operation for
+// .
+//
+//    // Example sending a request using the OutputService1TestCaseOperation3Request method.
+//    req := client.OutputService1TestCaseOperation3Request(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *OutputService1ProtocolTest) OutputService1TestCaseOperation3Request(input *OutputService1TestShapeOutputService1TestCaseOperation3Input) OutputService1TestCaseOperation3Request {
+	op := &aws.Operation{
+		Name: opOutputService1TestCaseOperation3,
+
+		HTTPPath: "/",
+	}
+
+	if input == nil {
+		input = &OutputService1TestShapeOutputService1TestCaseOperation3Input{}
+	}
+
+	output := &OutputService1TestShapeOutputService1TestCaseOperation3Output{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return OutputService1TestCaseOperation3Request{Request: req, Input: input, Copy: c.OutputService1TestCaseOperation3Request}
 }
 
 type OutputService1TestShapeOutputService1TestCaseOperation1Input struct {
@@ -202,10 +248,22 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation2Input) MarshalFie
 	return nil
 }
 
-type OutputService1TestShapeOutputService1TestCaseOperation2Output struct {
+type OutputService1TestShapeOutputService1TestCaseOperation3Input struct {
+	_ struct{} `type:"structure"`
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OutputService1TestShapeOutputService1TestCaseOperation3Input) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
+type OutputService1TestShapeOutputService1TestCaseOperation3Output struct {
 	_ struct{} `type:"structure"`
 
 	responseMetadata aws.Response
+
+	Blobs [][]byte `type:"list"`
 
 	Char *string `type:"character"`
 
@@ -214,6 +272,8 @@ type OutputService1TestShapeOutputService1TestCaseOperation2Output struct {
 	FalseBool *bool `type:"boolean"`
 
 	Float *float64 `type:"float"`
+
+	Float64s []float64 `type:"list"`
 
 	ImaHeader *string `location:"header" type:"string"`
 
@@ -227,16 +287,30 @@ type OutputService1TestShapeOutputService1TestCaseOperation2Output struct {
 
 	Timestamp *time.Time `type:"timestamp" timestampFormat:"iso8601"`
 
+	Timestamps []time.Time `type:"list"`
+
 	TrueBool *bool `type:"boolean"`
 }
 
 // SDKResponseMetdata return sthe response metadata for the API.
-func (s OutputService1TestShapeOutputService1TestCaseOperation2Output) SDKResponseMetadata() aws.Response {
+func (s OutputService1TestShapeOutputService1TestCaseOperation3Output) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
-func (s OutputService1TestShapeOutputService1TestCaseOperation2Output) MarshalFields(e protocol.FieldEncoder) error {
+func (s OutputService1TestShapeOutputService1TestCaseOperation3Output) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Blobs) > 0 {
+		v := s.Blobs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Blobs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.BytesValue(v1))
+		}
+		ls0.End()
+
+	}
 	if s.Char != nil {
 		v := *s.Char
 
@@ -261,6 +335,18 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation2Output) MarshalFi
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Float", protocol.Float64Value(v), metadata)
 	}
+	if len(s.Float64s) > 0 {
+		v := s.Float64s
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Float64s", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.Float64Value(v1))
+		}
+		ls0.End()
+
+	}
 	if s.Long != nil {
 		v := *s.Long
 
@@ -284,6 +370,18 @@ func (s OutputService1TestShapeOutputService1TestCaseOperation2Output) MarshalFi
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Timestamp", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if len(s.Timestamps) > 0 {
+		v := s.Timestamps
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Timestamps", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.TimeValue{V: v1})
+		}
+		ls0.End()
+
 	}
 	if s.TrueBool != nil {
 		v := *s.TrueBool
@@ -2325,7 +2423,7 @@ func TestOutputService1ProtocolTestScalarMembersCase1(t *testing.T) {
 		t.Errorf("expect not error, got %v", req.Error)
 	}
 
-	out := req.Data.(*OutputService1TestShapeOutputService1TestCaseOperation2Output)
+	out := req.Data.(*OutputService1TestShapeOutputService1TestCaseOperation3Output)
 	// assert response
 	if out == nil {
 		t.Errorf("expect not to be nil")
@@ -2387,7 +2485,7 @@ func TestOutputService1ProtocolTestScalarMembersCase2(t *testing.T) {
 		t.Errorf("expect not error, got %v", req.Error)
 	}
 
-	out := req.Data.(*OutputService1TestShapeOutputService1TestCaseOperation2Output)
+	out := req.Data.(*OutputService1TestShapeOutputService1TestCaseOperation3Output)
 	// assert response
 	if out == nil {
 		t.Errorf("expect not to be nil")
@@ -2423,6 +2521,45 @@ func TestOutputService1ProtocolTestScalarMembersCase2(t *testing.T) {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 	if e, a := true, *out.TrueBool; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+
+}
+
+func TestOutputService1ProtocolTestScalarMembersCase3(t *testing.T) {
+	cfg := unit.Config()
+	cfg.EndpointResolver = aws.ResolveWithEndpointURL("https://test")
+
+	svc := NewOutputService1ProtocolTest(cfg)
+
+	buf := bytes.NewReader([]byte("<OperationNameResponse><Float64s><member>0.1</member><member>0.2</member></Float64s><Blobs><member>dmFsdWU=</member><member>dmFsdWUy</member></Blobs><Timestamps><member>2015-01-25T08:00:00Z</member><member>2015-01-25T08:00:01Z</member></Timestamps></OperationNameResponse>"))
+	req := svc.OutputService1TestCaseOperation3Request(nil)
+	req.HTTPResponse = &http.Response{StatusCode: 200, Body: ioutil.NopCloser(buf), Header: http.Header{}}
+
+	// set headers
+
+	// unmarshal response
+	restxml.UnmarshalMeta(req.Request)
+	restxml.Unmarshal(req.Request)
+	if req.Error != nil {
+		t.Errorf("expect not error, got %v", req.Error)
+	}
+
+	out := req.Data.(*OutputService1TestShapeOutputService1TestCaseOperation3Output)
+	// assert response
+	if out == nil {
+		t.Errorf("expect not to be nil")
+	}
+	if e, a := "value", string(out.Blobs[0]); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := "value2", string(out.Blobs[1]); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.4221728e+09, 0).UTC().String(), out.Timestamps[0].String(); e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+	if e, a := time.Unix(1.422172801e+09, 0).UTC().String(), out.Timestamps[1].String(); e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
 
