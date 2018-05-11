@@ -40,7 +40,7 @@ func buildUpdateEndpointForS3Config(c *S3) func(*aws.Request) {
 		if accelerate && accelerateOpBlacklist.Continue(r) {
 			if forceHostStyle {
 				if r.Config.Logger != nil {
-					r.Config.Logger.Log("ERROR: aws.Config.S3UseAccelerate is not compatible with aws.Config.S3ForcePathStyle, ignoring S3ForcePathStyle.")
+					r.Config.Logger.Log("ERROR: s3.S3.UseAccelerate is not compatible with s3.S3.ForcePathStyle, ignoring ForcePathStyle.")
 				}
 			}
 			updateEndpointForAccelerate(r)
@@ -122,7 +122,7 @@ func bucketNameFromReqParams(params interface{}) (string, bool) {
 }
 
 // hostCompatibleBucketName returns true if the request should
-// put the bucket in the host. This is false if S3ForcePathStyle is
+// put the bucket in the host. This is false if ForcePathStyle is
 // explicitly set or if the bucket is not DNS compatible.
 func hostCompatibleBucketName(u *url.URL, bucket string) bool {
 	// Bucket might be DNS compatible but dots in the hostname will fail
