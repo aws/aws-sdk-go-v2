@@ -64,6 +64,18 @@ func NewWithPrimaryKeys(tableName string, client dynamodbiface.DynamoDBAPI,
 	return batchWriter
 }
 
+// WrapPutItem wraps a PutRequest to use with BatchWriter.Add.
+func WrapPutItem(putRequest *dynamodb.PutRequest) dynamodb.WriteRequest {
+	writeRequest := dynamodb.WriteRequest{PutRequest: putRequest}
+	return writeRequest
+}
+
+// WrapDeleteItem wraps a DeleteRequest to use with BatchWriter.Add.
+func WrapDeleteItem(deleteRequest *dynamodb.DeleteRequest) dynamodb.WriteRequest {
+	writeRequest := dynamodb.WriteRequest{DeleteRequest: deleteRequest}
+	return writeRequest
+}
+
 func (b *BatchWriter) flushIfNeeded() error {
 	if len(b.requestBuffer) < b.FlushAmount {
 		return nil
@@ -72,26 +84,13 @@ func (b *BatchWriter) flushIfNeeded() error {
 	return err
 }
 
-func (b *BatchWriter) addWriteRequest(wr dynamodb.WriteRequest) error {
-	b.requestBuffer = append(b.requestBuffer, wr)
-	err := b.flushIfNeeded()
-	return err
-}
-
-// PutItem adds a PutRequest operation to the requestBuffer.
-func (b *BatchWriter) PutItem(putRequest *dynamodb.PutRequest) error {
-	writeRequest := dynamodb.WriteRequest{PutRequest: putRequest}
-	err := b.addWriteRequest(writeRequest)
-	return err
-}
-
-// DeleteItem adds a DeleteRequest operation to the requestBuffer.
+// Add is used to queue a PutItem or DeleteItem operation.
 //
-// The key argument should have the form of the Key argument the normal
-// DeleteItem API call takes.
-func (b *BatchWriter) DeleteItem(deleteRequest *dynamodb.DeleteRequest) error {
-	writeRequest := dynamodb.WriteRequest{DeleteRequest: deleteRequest}
-	err := b.addWriteRequest(writeRequest)
+// Most normally, it will be used in conjunction with WrapPutItem and
+// WrapDeleteItem.
+func (b *BatchWriter) Add(writeRequest dynamodb.WriteRequest) error {
+	b.requestBuffer = append(b.requestBuffer, writeRequest)
+	err := b.flushIfNeeded()
 	return err
 }
 
@@ -114,6 +113,8 @@ func (b *BatchWriter) Flush() error {
 	if err != nil {
 		return err
 	}
+	// Check for unprocessed items and, if there are any, add them to the
+	// back of the buffer.
 	unpItems, ok := output.UnprocessedItems[b.tableName]
 	if ok {
 		b.requestBuffer = append(b.requestBuffer, unpItems...)

@@ -125,13 +125,13 @@ func TestPutOrDeleteItem(t *testing.T) {
 	for i := 0; i < len(cases); i++ {
 		c := cases[i]
 		if c.put {
-			batchWriter.PutItem(&dynamodb.PutRequest{
+			batchWriter.Add(WrapPutItem(&dynamodb.PutRequest{
 				Item: c.item,
-			})
+			}))
 		} else {
-			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
+			batchWriter.Add(WrapDeleteItem(&dynamodb.DeleteRequest{
 				Key: c.item,
-			})
+			}))
 		}
 		bufferLen := len(batchWriter.requestBuffer)
 		if bufferLen != (i + 1) {
@@ -220,13 +220,13 @@ func TestEmpty(t *testing.T) {
 	batchWriter.FlushAmount = len(cases) * 2
 	for i, c := range cases {
 		if c.put {
-			batchWriter.PutItem(&dynamodb.PutRequest{
+			batchWriter.Add(WrapPutItem(&dynamodb.PutRequest{
 				Item: c.item,
-			})
+			}))
 		} else {
-			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
+			batchWriter.Add(WrapDeleteItem(&dynamodb.DeleteRequest{
 				Key: c.item,
-			})
+			}))
 		}
 		if batchWriter.Empty() {
 			t.Errorf("Empty() returned a fase positive in iteration %d.", i)
@@ -241,13 +241,13 @@ func TestFlushError(t *testing.T) {
 	cases := sharedCases
 	for i, c := range cases {
 		if c.put {
-			batchWriter.PutItem(&dynamodb.PutRequest{
+			batchWriter.Add(WrapPutItem(&dynamodb.PutRequest{
 				Item: c.item,
-			})
+			}))
 		} else {
-			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
+			batchWriter.Add(WrapDeleteItem(&dynamodb.DeleteRequest{
 				Key: c.item,
-			})
+			}))
 		}
 		err := batchWriter.Flush()
 		if err == nil {
@@ -285,13 +285,13 @@ func TestFlushUnprocessed(t *testing.T) {
 
 	for _, c := range cases {
 		if c.put {
-			batchWriter.PutItem(&dynamodb.PutRequest{
+			batchWriter.Add(WrapPutItem(&dynamodb.PutRequest{
 				Item: c.item,
-			})
+			}))
 		} else {
-			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
+			batchWriter.Add(WrapDeleteItem(&dynamodb.DeleteRequest{
 				Key: c.item,
-			})
+			}))
 		}
 	}
 	if len(batchWriter.requestBuffer) != len(cases) {
@@ -322,13 +322,13 @@ func TestFlushAutomatically(t *testing.T) {
 	cases := sharedCases[:flushAmount]
 	for i, c := range cases {
 		if c.put {
-			batchWriter.PutItem(&dynamodb.PutRequest{
+			batchWriter.Add(WrapPutItem(&dynamodb.PutRequest{
 				Item: c.item,
-			})
+			}))
 		} else {
-			batchWriter.DeleteItem(&dynamodb.DeleteRequest{
+			batchWriter.Add(WrapDeleteItem(&dynamodb.DeleteRequest{
 				Key: c.item,
-			})
+			}))
 		}
 		if i == flushAmount-1 {
 			if !batchWriter.Empty() {

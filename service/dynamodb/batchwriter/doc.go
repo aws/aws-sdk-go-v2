@@ -9,18 +9,20 @@ save on DynamoDB.
 Code using BatchWriter will typically look like this (assuming there is a
 goroutine writing to itemChannel):
 
-	batchWriter := batchwriter.New("table-name", dynamoClient)
+	batch := batchwriter.New("table-name", dynamoClient)
 	defer func() {
-		for !batchwriter.Empty() {
-			batchWriter.Flush()
+		for !batch.Empty() {
+			// One may want to wait between flushes here, depending on the
+			// write capacity of the table.
+			batch.Flush()
 		}
 	}
 	for item := range itemChannel {
 		// Where itemChannel is of type `chan map[string]interface{}`
 		dynamoItem := dynamodbattribute.MarshalMap(item)
-		batchWriter.PutItem(&dynamodb.PutRequest{
+		batch.Add(batchwriter.WrapPutItem(&dynamodb.PutRequest{
 			Item: dynamoItem,
-		}) // or DeleteItem(&dynamodb.DeleteRequest{Key: dynamoItem})
+		}) // or WrapDeleteItem(&dynamodb.DeleteRequest{Key: dynamoItem})
 	}
 
 Or, in the common case where the pipeline runs forever and it needs to be
