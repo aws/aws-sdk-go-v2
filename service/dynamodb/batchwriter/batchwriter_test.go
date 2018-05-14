@@ -14,20 +14,30 @@ import (
 )
 
 const testTableName = "testtable"
-const hashKey = "numb"
+const (
+	hashKey = "word"
+	sortKey = "number"
+)
 
 // Global var holds cases that will be used for many tests.
 var sharedCases = []struct {
 	put, delete bool
 	item        map[string]dynamodb.AttributeValue
 }{
-	{true, false, marshal(itemmap{"itemcount": []int{89, 91, 92}, "key": "stf"})},
-	{true, false, marshal(itemmap{"dance": 1})},
-	{false, true, marshal(itemmap{"word": "dance"})},
-	{true, false, marshal(itemmap{"func": itemmap{"in": 1, "out": 2}, "id": 142})},
-	{false, true, marshal(itemmap{"tel": 123, "pos": 2})},
-	{false, true, marshal(itemmap{"customer": 7776555})},
 	{true, false, marshal(itemmap{
+		hashKey: "far", sortKey: 0,
+		"itemcount": []int{89, 91, 92}, "key": "stf"},
+	)},
+	{true, false, marshal(itemmap{hashKey: "near", sortKey: 0, "dance": 1})},
+	{false, true, marshal(itemmap{hashKey: "dance", sortKey: 2})},
+	{true, false, marshal(itemmap{
+		hashKey: "far", sortKey: 1,
+		"func": itemmap{"in": 1, "out": 2}, "id": 142},
+	)},
+	{false, true, marshal(itemmap{hashKey: "1", sortKey: 9})},
+	{false, true, marshal(itemmap{hashKey: "9", sortKey: 1})},
+	{true, false, marshal(itemmap{
+		hashKey: "me", sortKey: 55555,
 		"pd": "three", "func": itemmap{"in": 1, "out": 2, "us": 5}})},
 }
 
@@ -48,6 +58,10 @@ func getBatchWriter() (*BatchWriter, *dynamodb.DynamoDB) {
 				{
 					"AttributeName": "`+hashKey+`",
 					"KeyType": "HASH"
+				},
+				{
+					"AttributeName": "`+sortKey+`",
+					"KeyType": "SORT"
 				}
 			]
 		}
@@ -151,6 +165,35 @@ func TestPutOrDeleteItem(t *testing.T) {
 				i,
 			)
 		}
+	}
+	// Repeat an item to check we're overriding by primary keys.
+	// This should work regardless of whether the first case is supposed to be
+	// a DeleteItem or a PutItem.
+	err := batchWriter.Add(WrapPutItem(
+		&dynamodb.PutRequest{Item: cases[0].item},
+	))
+	if err != nil || len(batchWriter.requestBuffer) != len(cases) {
+		t.Error("Failed when removing duplicated items.")
+	}
+	// Only consider the first primary key now.
+	batchWriter.primaryKeys = batchWriter.primaryKeys[:1]
+	err = batchWriter.Add(WrapPutItem(
+		&dynamodb.PutRequest{Item: cases[1].item},
+	))
+	if err != nil || len(batchWriter.requestBuffer) != len(cases) {
+		t.Error("Failed when removing duplicated items with one primary key.")
+	}
+
+}
+
+func TestInvalidRequestError(t *testing.T) {
+	batchWriter, _ := getBatchWriter()
+	err := batchWriter.Add(dynamodb.WriteRequest{})
+	if err == nil {
+		t.Error("Should return error on empty WriteRequest.")
+	}
+	if !batchWriter.Empty() {
+		t.Error("Should not append to the buffer when there is an error.")
 	}
 }
 

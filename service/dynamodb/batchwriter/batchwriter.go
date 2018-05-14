@@ -3,14 +3,20 @@ package batchwriter
 import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/dynamodbiface"
+
+	"errors"
+	"reflect"
 )
 
-const defaultFlushAmount = 25
-const defaultRequestBufferCap = 50
+const (
+	defaultFlushAmount      = 25
+	defaultRequestBufferCap = 50
 
-// BatchWriter wraps a dynamodb client to expose a simple PutItem/DeleteItem
-// API that buffers requests and takes advantage of BatchWriteItem behind
-// the scenes.
+	invalidWriteRequest = "invalid WriteRequest"
+)
+
+// BatchWriter wraps a dynamodb client to expose a simple API that buffers
+// requests and takes advantage of BatchWriteItem behind the scenes.
 type BatchWriter struct {
 	// Size of the buffer in which it will be flushed.
 	// Do not set to a number above 25 as DynamoDB rejects BatchWrites with
@@ -76,6 +82,26 @@ func WrapDeleteItem(deleteRequest *dynamodb.DeleteRequest) dynamodb.WriteRequest
 	return writeRequest
 }
 
+func (b *BatchWriter) getPrimaryKeyValues(
+	wr dynamodb.WriteRequest,
+) ([]dynamodb.AttributeValue, error) {
+	primaryKeyValues := make([]dynamodb.AttributeValue, 0, 2)
+	if wr.PutRequest != nil {
+		for _, key := range b.primaryKeys {
+			value := wr.PutRequest.Item[key]
+			primaryKeyValues = append(primaryKeyValues, value)
+		}
+	} else if wr.DeleteRequest != nil {
+		for _, key := range b.primaryKeys {
+			value := wr.DeleteRequest.Key[key]
+			primaryKeyValues = append(primaryKeyValues, value)
+		}
+	} else {
+		return nil, errors.New(invalidWriteRequest)
+	}
+	return primaryKeyValues, nil
+}
+
 func (b *BatchWriter) flushIfNeeded() error {
 	if len(b.requestBuffer) < b.FlushAmount {
 		return nil
@@ -89,16 +115,31 @@ func (b *BatchWriter) flushIfNeeded() error {
 // Most normally, it will be used in conjunction with WrapPutItem and
 // WrapDeleteItem.
 func (b *BatchWriter) Add(writeRequest dynamodb.WriteRequest) error {
+	pKeyValues, err := b.getPrimaryKeyValues(writeRequest)
+	if err != nil {
+		return err
+	}
+	for i, req := range b.requestBuffer {
+		oldValues, _ := b.getPrimaryKeyValues(req)
+		if reflect.DeepEqual(pKeyValues, oldValues) {
+			// Remove the duplicated element from the buffer by moving the
+			// last element to that position and then slicing the buffer to
+			// remove the now-duplicated last item.
+			lastElem := len(b.requestBuffer) - 1
+			b.requestBuffer[i] = b.requestBuffer[lastElem]
+			b.requestBuffer = b.requestBuffer[:lastElem]
+		}
+	}
 	b.requestBuffer = append(b.requestBuffer, writeRequest)
-	err := b.flushIfNeeded()
+	err = b.flushIfNeeded()
 	return err
 }
 
 // Flush makes a BatchWriteItem with some or all requests that have been added
-// so far to the buffer by means of PutItem and DeleteIem.
+// so far to the buffer by means of Add.
 //
 // Any unprocessed items sent in the response will be added to the end of the
-// buffer, to be sent at a later date.
+// buffer, to be sent later.
 func (b *BatchWriter) Flush() error {
 	if b.Empty() {
 		return nil
