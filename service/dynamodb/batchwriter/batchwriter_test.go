@@ -19,11 +19,13 @@ const (
 	sortKey = "number"
 )
 
-// Global var holds cases that will be used for many tests.
-var sharedCases = []struct {
+type testCases []struct {
 	put, delete bool
 	item        map[string]dynamodb.AttributeValue
-}{
+}
+
+// Global var holds cases that will be used for many tests.
+var sharedCases = testCases{
 	{true, false, marshal(itemmap{
 		hashKey: "far", sortKey: 0,
 		"itemcount": []int{89, 91, 92}, "key": "stf"},
@@ -48,24 +50,38 @@ func marshal(in interface{}) map[string]dynamodb.AttributeValue {
 }
 
 // Convenience wrapper.
-func getBatchWriter() (*BatchWriter, *dynamodb.DynamoDB) {
+func getBatchWriter(addSortKey bool) (*BatchWriter, *dynamodb.DynamoDB) {
 	config := unit.Config()
 	dynamoClient := dynamodb.New(config)
 	dynamoClient.Handlers.Send.Clear()
-	addResponse(dynamoClient, 200, `{
-		"Table": {
-			"KeySchema": [
-				{
-					"AttributeName": "`+hashKey+`",
-					"KeyType": "HASH"
-				},
-				{
-					"AttributeName": "`+sortKey+`",
-					"KeyType": "SORT"
-				}
-			]
-		}
-	}`)
+	if addSortKey {
+		addResponse(dynamoClient, 200, `{
+			"Table": {
+				"KeySchema": [
+					{
+						"AttributeName": "`+hashKey+`",
+						"KeyType": "HASH"
+					},
+					{
+						"AttributeName": "`+sortKey+`",
+						"KeyType": "SORT"
+					}
+				]
+			}
+		}`)
+	} else {
+		addResponse(dynamoClient, 200, `{
+			"Table": {
+				"KeySchema": [
+					{
+						"AttributeName": "`+hashKey+`",
+						"KeyType": "HASH"
+					}
+				]
+			}
+		}`)
+
+	}
 	tableName := testTableName
 
 	batchWriter, _ := New(tableName, dynamoClient)
@@ -86,7 +102,7 @@ func addResponse(client *dynamodb.DynamoDB, statusCode int, response string) {
 }
 
 func TestNewBatchWriter(t *testing.T) {
-	batchWriter, _ := getBatchWriter()
+	batchWriter, _ := getBatchWriter(true)
 	if batchWriter.tableName != testTableName {
 		t.Errorf(`batchWriter.tableName set to "%s" when it should be "%s".`,
 			batchWriter.tableName, testTableName)
@@ -131,63 +147,79 @@ func TestNewError(t *testing.T) {
 }
 
 func TestPutOrDeleteItem(t *testing.T) {
-	batchWriter, _ := getBatchWriter()
+	wrapperTestPutOrDeleteItem := func(batchWriter *BatchWriter, cases testCases) {
+		// Make sure the flush amount is larger than the number of items to add.
+		batchWriter.FlushAmount = len(cases) * 2
+		for i := 0; i < len(cases); i++ {
+			c := cases[i]
+			if c.put {
+				batchWriter.Add(WrapPutItem(&dynamodb.PutRequest{
+					Item: c.item,
+				}))
+			} else {
+				batchWriter.Add(WrapDeleteItem(&dynamodb.DeleteRequest{
+					Key: c.item,
+				}))
+			}
+			bufferLen := len(batchWriter.requestBuffer)
+			if bufferLen != (i + 1) {
+				t.Errorf("Length of requestBuffer is %d when it should be %d.",
+					len(cases), i+1)
+			}
+			lastItem := batchWriter.requestBuffer[bufferLen-1]
+			if c.put && lastItem.PutRequest == nil {
+				t.Errorf(
+					"Case no. %d has PutRequest == nil when it should be set.",
+					i,
+				)
+			}
+			if c.delete && lastItem.DeleteRequest == nil {
+				t.Errorf(
+					"Case no. %d has DeleteRequest == nil when it should be set.",
+					i,
+				)
+			}
+		}
+		// Repeat an item to check we're overriding by primary keys.
+		// This should work regardless of whether the first case is supposed to be
+		// a DeleteItem or a PutItem.
+		err := batchWriter.Add(WrapPutItem(
+			&dynamodb.PutRequest{Item: cases[0].item},
+		))
+		if err != nil || len(batchWriter.requestBuffer) != len(cases) {
+			t.Error("Failed when removing duplicated items.")
+		}
+		// Only consider the first primary key now.
+		batchWriter.primaryKeys = batchWriter.primaryKeys[:1]
+		err = batchWriter.Add(WrapPutItem(
+			&dynamodb.PutRequest{Item: cases[1].item},
+		))
+		if err != nil || len(batchWriter.requestBuffer) != len(cases) {
+			t.Error("Failed when removing duplicated items with one primary key.")
+		}
 
-	cases := sharedCases
-	// Make sure the flush amount is larger than the number of items to add.
-	batchWriter.FlushAmount = len(cases) * 2
-	for i := 0; i < len(cases); i++ {
-		c := cases[i]
-		if c.put {
-			batchWriter.Add(WrapPutItem(&dynamodb.PutRequest{
-				Item: c.item,
-			}))
-		} else {
-			batchWriter.Add(WrapDeleteItem(&dynamodb.DeleteRequest{
-				Key: c.item,
-			}))
-		}
-		bufferLen := len(batchWriter.requestBuffer)
-		if bufferLen != (i + 1) {
-			t.Errorf("Length of requestBuffer is %d when it should be %d.",
-				len(cases), i+1)
-		}
-		lastItem := batchWriter.requestBuffer[bufferLen-1]
-		if c.put && lastItem.PutRequest == nil {
-			t.Errorf(
-				"Case no. %d has PutRequest == nil when it should be set.",
-				i,
-			)
-		}
-		if c.delete && lastItem.DeleteRequest == nil {
-			t.Errorf(
-				"Case no. %d has DeleteRequest == nil when it should be set.",
-				i,
-			)
-		}
 	}
-	// Repeat an item to check we're overriding by primary keys.
-	// This should work regardless of whether the first case is supposed to be
-	// a DeleteItem or a PutItem.
-	err := batchWriter.Add(WrapPutItem(
-		&dynamodb.PutRequest{Item: cases[0].item},
-	))
-	if err != nil || len(batchWriter.requestBuffer) != len(cases) {
-		t.Error("Failed when removing duplicated items.")
-	}
-	// Only consider the first primary key now.
-	batchWriter.primaryKeys = batchWriter.primaryKeys[:1]
-	err = batchWriter.Add(WrapPutItem(
-		&dynamodb.PutRequest{Item: cases[1].item},
-	))
-	if err != nil || len(batchWriter.requestBuffer) != len(cases) {
-		t.Error("Failed when removing duplicated items with one primary key.")
-	}
-
+	batchWriterWithSort, _ := getBatchWriter(true)
+	wrapperTestPutOrDeleteItem(batchWriterWithSort, sharedCases)
+	batchWriterOnlyHash, _ := getBatchWriter(false)
+	wrapperTestPutOrDeleteItem(batchWriterOnlyHash, testCases{
+		{true, false, marshal(itemmap{hashKey: "patented", "id": 218})},
+		{true, false, marshal(itemmap{hashKey: "charger", "favourite": 5})},
+		{true, false, marshal(itemmap{hashKey: "bottle", "favourite": 5})},
+		{true, false, marshal(itemmap{hashKey: "dancing", "name": "internal"})},
+		{true, false, marshal(itemmap{
+			hashKey:     "fortunate",
+			"favourite": 5,
+			"message":   "abcdefghijklmnopqrst1234567890",
+			"url":       "https://golang.org/",
+			"part":      18,
+		})},
+		{true, false, marshal(itemmap{hashKey: "traffic", "favourite": 5})},
+	})
 }
 
 func TestInvalidRequestError(t *testing.T) {
-	batchWriter, _ := getBatchWriter()
+	batchWriter, _ := getBatchWriter(true)
 	err := batchWriter.Add(dynamodb.WriteRequest{})
 	if err == nil {
 		t.Error("Should return error on empty WriteRequest.")
@@ -198,7 +230,7 @@ func TestInvalidRequestError(t *testing.T) {
 }
 
 func TestBigBuffer(t *testing.T) {
-	batchWriter, dynamoClient := getBatchWriter()
+	batchWriter, dynamoClient := getBatchWriter(true)
 	cases := sharedCases
 
 	expectedRemainingAfterFlush := len(cases)/2 - 1
@@ -244,7 +276,7 @@ func TestBigBuffer(t *testing.T) {
 }
 
 func TestEmptyFlush(t *testing.T) {
-	batchWriter, dynamoClient := getBatchWriter()
+	batchWriter, dynamoClient := getBatchWriter(true)
 	addResponse(dynamoClient, 404, "ERR")
 	err := batchWriter.Flush()
 	if err != nil {
@@ -253,7 +285,7 @@ func TestEmptyFlush(t *testing.T) {
 }
 
 func TestEmpty(t *testing.T) {
-	batchWriter, _ := getBatchWriter()
+	batchWriter, _ := getBatchWriter(true)
 	if !batchWriter.Empty() { // BatchWriters should start empty.
 		t.Error("batchWriter was initialized not empty.")
 	}
@@ -278,7 +310,7 @@ func TestEmpty(t *testing.T) {
 }
 
 func TestFlushError(t *testing.T) {
-	batchWriter, dynamoClient := getBatchWriter()
+	batchWriter, dynamoClient := getBatchWriter(true)
 	// Add a dummy response that should yield an error.
 	addResponse(dynamoClient, 404, "ERR")
 	cases := sharedCases
@@ -300,7 +332,7 @@ func TestFlushError(t *testing.T) {
 }
 
 func TestFlushUnprocessed(t *testing.T) {
-	batchWriter, dynamoClient := getBatchWriter()
+	batchWriter, dynamoClient := getBatchWriter(true)
 	// Number of unprocessed items to return.
 	numUnpItems := 5
 	// Generate a dummy body.
@@ -351,7 +383,7 @@ func TestFlushUnprocessed(t *testing.T) {
 }
 
 func TestFlushAutomatically(t *testing.T) {
-	batchWriter, dynamoClient := getBatchWriter()
+	batchWriter, dynamoClient := getBatchWriter(true)
 	dynamoClient.Handlers.Send.PushBack(func(r *aws.Request) {
 		reader := ioutil.NopCloser(bytes.NewReader([]byte(
 			`{}`,
