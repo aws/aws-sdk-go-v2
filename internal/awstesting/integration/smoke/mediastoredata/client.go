@@ -30,7 +30,7 @@ func init() {
 		}
 
 		cfg := integration.Config()
-		cfg.EndpointResolver = aws.ResolveEndpointWithURL(*resp.Container.Endpoint)
+		cfg.EndpointResolver = aws.ResolveWithEndpointURL(*resp.Container.Endpoint)
 		gucumber.World["client"] = mediastoredata.New(cfg)
 	})
 }
