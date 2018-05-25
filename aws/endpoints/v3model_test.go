@@ -278,6 +278,11 @@ var testPartitions = partitions{
 		Services: services{
 			"s3": service{},
 			"service1": service{
+				Defaults: endpoint{
+					CredentialScope: credentialScope{
+						Service: "service1",
+					},
+				},
 				Endpoints: endpoints{
 					"us-east-1": {},
 					"us-west-2": {
@@ -286,7 +291,13 @@ var testPartitions = partitions{
 					},
 				},
 			},
-			"service2": service{},
+			"service2": service{
+				Defaults: endpoint{
+					CredentialScope: credentialScope{
+						Service: "service2",
+					},
+				},
+			},
 			"httpService": service{
 				Defaults: endpoint{
 					Protocols: []string{"http"},
@@ -323,6 +334,9 @@ func TestResolveEndpoint(t *testing.T) {
 	if e, a := "service2", resolved.SigningName; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
+	if resolved.SigningNameDerived {
+		t.Errorf("expect the signing name not to be derived, but was")
+	}
 }
 
 func TestResolveEndpoint_DisableSSL(t *testing.T) {
@@ -339,6 +353,9 @@ func TestResolveEndpoint_DisableSSL(t *testing.T) {
 	}
 	if e, a := "service2", resolved.SigningName; e != a {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+	if resolved.SigningNameDerived {
+		t.Errorf("expect the signing name not to be derived, but was")
 	}
 }
 
@@ -357,6 +374,9 @@ func TestResolveEndpoint_UseDualStack(t *testing.T) {
 	if e, a := "service1", resolved.SigningName; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
+	if resolved.SigningNameDerived {
+		t.Errorf("expect the signing name not to be derived, but was")
+	}
 }
 
 func TestResolveEndpoint_HTTPProtocol(t *testing.T) {
@@ -373,6 +393,9 @@ func TestResolveEndpoint_HTTPProtocol(t *testing.T) {
 	}
 	if e, a := "httpService", resolved.SigningName; e != a {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+	if !resolved.SigningNameDerived {
+		t.Errorf("expect the signing name to be derived")
 	}
 }
 
@@ -391,6 +414,9 @@ func TestResolveEndpoint_UnknownService(t *testing.T) {
 	if e, a := "unknownservice", resolved.SigningName; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
+	if !resolved.SigningNameDerived {
+		t.Errorf("expect the signing name to be derived")
+	}
 }
 
 func TestResolveEndpoint_UnknownMatchedRegion(t *testing.T) {
@@ -408,6 +434,9 @@ func TestResolveEndpoint_UnknownMatchedRegion(t *testing.T) {
 	if e, a := "service2", resolved.SigningName; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
+	if resolved.SigningNameDerived {
+		t.Errorf("expect the signing name not to be derived, but was")
+	}
 }
 
 func TestResolveEndpoint_UnknownRegion(t *testing.T) {
@@ -424,6 +453,9 @@ func TestResolveEndpoint_UnknownRegion(t *testing.T) {
 	}
 	if e, a := "service2", resolved.SigningName; e != a {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+	if resolved.SigningNameDerived {
+		t.Errorf("expect the signing name not to be derived, but was")
 	}
 }
 
@@ -466,6 +498,9 @@ func TestResolveEndpoint_NotRegionalized(t *testing.T) {
 	if e, a := "globalService", resolved.SigningName; e != a {
 		t.Errorf("expect %v, got %v", e, a)
 	}
+	if !resolved.SigningNameDerived {
+		t.Errorf("expect the signing name to be derived")
+	}
 }
 
 func TestResolveEndpoint_AwsGlobal(t *testing.T) {
@@ -482,5 +517,8 @@ func TestResolveEndpoint_AwsGlobal(t *testing.T) {
 	}
 	if e, a := "globalService", resolved.SigningName; e != a {
 		t.Errorf("expect %v, got %v", e, a)
+	}
+	if !resolved.SigningNameDerived {
+		t.Errorf("expect the signing name to be derived")
 	}
 }
