@@ -1,3 +1,30 @@
+Release v2.0.0-preview.4 (2018-05-25)
+===
+
+### Services
+* Synced the V2 SDK with latests AWS service API definitions.
+
+### SDK Bugs
+* `private/protocol/xml/xmlutil`: Fix XML unmarshaler not correctly unmarshaling list of timestamp values ([#166](https://github.com/aws/aws-sdk-go-v2/pull/166))
+	* Fixes a bug in the XML unmarshaler that would incorrectly try to unmarshal "time.Time" parameters that did not have the struct tag type on them.
+	* Related to [aws/aws-sdk-go#1894](https://github.com/aws/aws-sdk-go/pull/1894)
+* `service/s3`: Fix typos for migrated S3 specific config options ([#173](https://github.com/aws/aws-sdk-go-v2/pull/173))
+	* Updates the S3 specific config error messages to the correct fields.
+* `aws/endpoints`: Fix SDK endpoint signing name resolution ([#181](https://github.com/aws/aws-sdk-go-v2/pull/181))
+	* Fixes how the SDK derives service signing names. If the signing name is not modeled in the endpoints package the service will fallback to the signing name modeled in the service model.
+	* Fix [#163](https://github.com/aws/aws-sdk-go-v2/pull/163)
+	* Fix [#153](https://github.com/aws/aws-sdk-go-v2/pull/153)
+	* Related to [aws/aws-sdk-go#1854](https://github.com/aws/aws-sdk-go/pull/1854)
+* `service/s3`: remove SelectContent until EventStream supported ([#175](https://github.com/aws/aws-sdk-go-v2/pull/175])
+	* S3's SelectContent API is not functional in the SDK yet, and was not supposed to be generated until EventStream support is available.
+	* Related to [aws/aws-sdk-go#1941](https://github.com/aws/aws-sdk-go/pull/1941)
+
+### SDK Enhancements
+* `service/s3/s3manager/s3manageriface`: Add WithIterator to mock interface ([#156](https://github.com/aws/aws-sdk-go-v2/pull/156))
+	* Updates the `DownloaderAPI` and `UploaderAPI` mocking interfaces to have parity with the concrete types.
+	* Fixes [#155](https://github.com/aws/aws-sdk-go-v2/issues/155)
+
+
 Release v2.0.0-preview.3 (2018-03-08)
 ===
 
