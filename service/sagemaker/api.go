@@ -2780,6 +2780,11 @@ type CreateModelInput struct {
 	// Tags (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []Tag `type:"list"`
+
+	// A object that specifies the VPC that you want your model to connect to. Control
+	// access to and from your training container by configuring the VPC. For more
+	// information, see host-vpc.
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -2820,6 +2825,11 @@ func (s *CreateModelInput) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+	if s.VpcConfig != nil {
+		if err := s.VpcConfig.Validate(); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3215,6 +3225,11 @@ type CreateTrainingJobInput struct {
 	//
 	// TrainingJobName is a required field
 	TrainingJobName *string `min:"1" type:"string" required:"true"`
+
+	// A object that specifies the VPC that you want your training job to connect
+	// to. Control access to and from your training container by configuring the
+	// VPC. For more information, see train-vpc
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -3299,6 +3314,11 @@ func (s *CreateTrainingJobInput) Validate() error {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+	if s.VpcConfig != nil {
+		if err := s.VpcConfig.Validate(); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3963,6 +3983,10 @@ type DescribeModelOutput struct {
 	//
 	// PrimaryContainer is a required field
 	PrimaryContainer *ContainerDefinition `type:"structure" required:"true"`
+
+	// A object that specifies the VPC that this model has access to. For more information,
+	// see host-vpc
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -4303,6 +4327,10 @@ type DescribeTrainingJobOutput struct {
 
 	// A timestamp that indicates when training started.
 	TrainingStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// A object that specifies the VPC that this training job has access to. For
+	// more information, see train-vpc.
+	VpcConfig *VpcConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -6184,6 +6212,60 @@ func (s UpdateNotebookInstanceOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdateNotebookInstanceOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Specifies a VPC that your training jobs and hosted models have access to.
+// Control access to and from your training and model containers by configuring
+// the VPC. For more information, see host-vpc and train-vpc.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/VpcConfig
+type VpcConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security
+	// groups for the VPC that is specified in the Subnets field.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []string `min:"1" type:"list" required:"true"`
+
+	// The ID of the subnets in the VPC to which you want to connect your training
+	// job or model.
+	//
+	// Subnets is a required field
+	Subnets []string `min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s VpcConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s VpcConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VpcConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VpcConfig"}
+
+	if s.SecurityGroupIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if s.SecurityGroupIds != nil && len(s.SecurityGroupIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecurityGroupIds", 1))
+	}
+
+	if s.Subnets == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
+	}
+	if s.Subnets != nil && len(s.Subnets) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Subnets", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 type CompressionType string

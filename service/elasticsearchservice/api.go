@@ -415,6 +415,206 @@ func (c *ElasticsearchService) DescribeElasticsearchInstanceTypeLimitsRequest(in
 	return DescribeElasticsearchInstanceTypeLimitsRequest{Request: req, Input: input, Copy: c.DescribeElasticsearchInstanceTypeLimitsRequest}
 }
 
+const opDescribeReservedElasticsearchInstanceOfferings = "DescribeReservedElasticsearchInstanceOfferings"
+
+// DescribeReservedElasticsearchInstanceOfferingsRequest is a API request type for the DescribeReservedElasticsearchInstanceOfferings API operation.
+type DescribeReservedElasticsearchInstanceOfferingsRequest struct {
+	*aws.Request
+	Input *DescribeReservedElasticsearchInstanceOfferingsInput
+	Copy  func(*DescribeReservedElasticsearchInstanceOfferingsInput) DescribeReservedElasticsearchInstanceOfferingsRequest
+}
+
+// Send marshals and sends the DescribeReservedElasticsearchInstanceOfferings API request.
+func (r DescribeReservedElasticsearchInstanceOfferingsRequest) Send() (*DescribeReservedElasticsearchInstanceOfferingsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReservedElasticsearchInstanceOfferingsOutput), nil
+}
+
+// DescribeReservedElasticsearchInstanceOfferingsRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Lists available reserved Elasticsearch instance offerings.
+//
+//    // Example sending a request using the DescribeReservedElasticsearchInstanceOfferingsRequest method.
+//    req := client.DescribeReservedElasticsearchInstanceOfferingsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) DescribeReservedElasticsearchInstanceOfferingsRequest(input *DescribeReservedElasticsearchInstanceOfferingsInput) DescribeReservedElasticsearchInstanceOfferingsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeReservedElasticsearchInstanceOfferings,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2015-01-01/es/reservedInstanceOfferings",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeReservedElasticsearchInstanceOfferingsInput{}
+	}
+
+	output := &DescribeReservedElasticsearchInstanceOfferingsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeReservedElasticsearchInstanceOfferingsRequest{Request: req, Input: input, Copy: c.DescribeReservedElasticsearchInstanceOfferingsRequest}
+}
+
+// Paginate pages iterates over the pages of a DescribeReservedElasticsearchInstanceOfferingsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a DescribeReservedElasticsearchInstanceOfferings operation.
+//		req := client.DescribeReservedElasticsearchInstanceOfferingsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeReservedElasticsearchInstanceOfferingsRequest) Paginate(opts ...aws.Option) DescribeReservedElasticsearchInstanceOfferingsPager {
+	return DescribeReservedElasticsearchInstanceOfferingsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReservedElasticsearchInstanceOfferingsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeReservedElasticsearchInstanceOfferingsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeReservedElasticsearchInstanceOfferingsPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReservedElasticsearchInstanceOfferingsPager) CurrentPage() *DescribeReservedElasticsearchInstanceOfferingsOutput {
+	return p.Pager.CurrentPage().(*DescribeReservedElasticsearchInstanceOfferingsOutput)
+}
+
+const opDescribeReservedElasticsearchInstances = "DescribeReservedElasticsearchInstances"
+
+// DescribeReservedElasticsearchInstancesRequest is a API request type for the DescribeReservedElasticsearchInstances API operation.
+type DescribeReservedElasticsearchInstancesRequest struct {
+	*aws.Request
+	Input *DescribeReservedElasticsearchInstancesInput
+	Copy  func(*DescribeReservedElasticsearchInstancesInput) DescribeReservedElasticsearchInstancesRequest
+}
+
+// Send marshals and sends the DescribeReservedElasticsearchInstances API request.
+func (r DescribeReservedElasticsearchInstancesRequest) Send() (*DescribeReservedElasticsearchInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeReservedElasticsearchInstancesOutput), nil
+}
+
+// DescribeReservedElasticsearchInstancesRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Returns information about reserved Elasticsearch instances for this account.
+//
+//    // Example sending a request using the DescribeReservedElasticsearchInstancesRequest method.
+//    req := client.DescribeReservedElasticsearchInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) DescribeReservedElasticsearchInstancesRequest(input *DescribeReservedElasticsearchInstancesInput) DescribeReservedElasticsearchInstancesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeReservedElasticsearchInstances,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2015-01-01/es/reservedInstances",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &DescribeReservedElasticsearchInstancesInput{}
+	}
+
+	output := &DescribeReservedElasticsearchInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeReservedElasticsearchInstancesRequest{Request: req, Input: input, Copy: c.DescribeReservedElasticsearchInstancesRequest}
+}
+
+// Paginate pages iterates over the pages of a DescribeReservedElasticsearchInstancesRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a DescribeReservedElasticsearchInstances operation.
+//		req := client.DescribeReservedElasticsearchInstancesRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *DescribeReservedElasticsearchInstancesRequest) Paginate(opts ...aws.Option) DescribeReservedElasticsearchInstancesPager {
+	return DescribeReservedElasticsearchInstancesPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *DescribeReservedElasticsearchInstancesInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeReservedElasticsearchInstancesPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeReservedElasticsearchInstancesPager struct {
+	aws.Pager
+}
+
+func (p *DescribeReservedElasticsearchInstancesPager) CurrentPage() *DescribeReservedElasticsearchInstancesOutput {
+	return p.Pager.CurrentPage().(*DescribeReservedElasticsearchInstancesOutput)
+}
+
 const opListDomainNames = "ListDomainNames"
 
 // ListDomainNamesRequest is a API request type for the ListDomainNames API operation.
@@ -710,6 +910,54 @@ func (c *ElasticsearchService) ListTagsRequest(input *ListTagsInput) ListTagsReq
 	output.responseMetadata = aws.Response{Request: req}
 
 	return ListTagsRequest{Request: req, Input: input, Copy: c.ListTagsRequest}
+}
+
+const opPurchaseReservedElasticsearchInstanceOffering = "PurchaseReservedElasticsearchInstanceOffering"
+
+// PurchaseReservedElasticsearchInstanceOfferingRequest is a API request type for the PurchaseReservedElasticsearchInstanceOffering API operation.
+type PurchaseReservedElasticsearchInstanceOfferingRequest struct {
+	*aws.Request
+	Input *PurchaseReservedElasticsearchInstanceOfferingInput
+	Copy  func(*PurchaseReservedElasticsearchInstanceOfferingInput) PurchaseReservedElasticsearchInstanceOfferingRequest
+}
+
+// Send marshals and sends the PurchaseReservedElasticsearchInstanceOffering API request.
+func (r PurchaseReservedElasticsearchInstanceOfferingRequest) Send() (*PurchaseReservedElasticsearchInstanceOfferingOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PurchaseReservedElasticsearchInstanceOfferingOutput), nil
+}
+
+// PurchaseReservedElasticsearchInstanceOfferingRequest returns a request value for making API operation for
+// Amazon Elasticsearch Service.
+//
+// Allows you to purchase reserved Elasticsearch instances.
+//
+//    // Example sending a request using the PurchaseReservedElasticsearchInstanceOfferingRequest method.
+//    req := client.PurchaseReservedElasticsearchInstanceOfferingRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *ElasticsearchService) PurchaseReservedElasticsearchInstanceOfferingRequest(input *PurchaseReservedElasticsearchInstanceOfferingInput) PurchaseReservedElasticsearchInstanceOfferingRequest {
+	op := &aws.Operation{
+		Name:       opPurchaseReservedElasticsearchInstanceOffering,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2015-01-01/es/purchaseReservedInstanceOffering",
+	}
+
+	if input == nil {
+		input = &PurchaseReservedElasticsearchInstanceOfferingInput{}
+	}
+
+	output := &PurchaseReservedElasticsearchInstanceOfferingOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PurchaseReservedElasticsearchInstanceOfferingRequest{Request: req, Input: input, Copy: c.PurchaseReservedElasticsearchInstanceOfferingRequest}
 }
 
 const opRemoveTags = "RemoveTags"
@@ -1926,6 +2174,211 @@ func (s DescribeElasticsearchInstanceTypeLimitsOutput) MarshalFields(e protocol.
 			ms0.MapSetFields(k1, v1)
 		}
 		ms0.End()
+
+	}
+	return nil
+}
+
+// Container for parameters to DescribeReservedElasticsearchInstanceOfferings
+type DescribeReservedElasticsearchInstanceOfferingsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Set this value to limit the number of results returned. If not specified,
+	// defaults to 100.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
+
+	// NextToken should be sent in case if earlier API call produced result containing
+	// NextToken. It is used for pagination.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+
+	// The offering identifier filter value. Use this parameter to show only the
+	// available offering that matches the specified reservation identifier.
+	ReservedElasticsearchInstanceOfferingId *string `location:"querystring" locationName:"offeringId" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeReservedElasticsearchInstanceOfferingsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeReservedElasticsearchInstanceOfferingsInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeReservedElasticsearchInstanceOfferingsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReservedElasticsearchInstanceOfferingId != nil {
+		v := *s.ReservedElasticsearchInstanceOfferingId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "offeringId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Container for results from DescribeReservedElasticsearchInstanceOfferings
+type DescribeReservedElasticsearchInstanceOfferingsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Provides an identifier to allow retrieval of paginated results.
+	NextToken *string `type:"string"`
+
+	// List of reserved Elasticsearch instance offerings
+	ReservedElasticsearchInstanceOfferings []ReservedElasticsearchInstanceOffering `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeReservedElasticsearchInstanceOfferingsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeReservedElasticsearchInstanceOfferingsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReservedElasticsearchInstanceOfferingsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeReservedElasticsearchInstanceOfferingsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ReservedElasticsearchInstanceOfferings) > 0 {
+		v := s.ReservedElasticsearchInstanceOfferings
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ReservedElasticsearchInstanceOfferings", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Container for parameters to DescribeReservedElasticsearchInstances
+type DescribeReservedElasticsearchInstancesInput struct {
+	_ struct{} `type:"structure"`
+
+	// Set this value to limit the number of results returned. If not specified,
+	// defaults to 100.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" type:"integer"`
+
+	// NextToken should be sent in case if earlier API call produced result containing
+	// NextToken. It is used for pagination.
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+
+	// The reserved instance identifier filter value. Use this parameter to show
+	// only the reservation that matches the specified reserved Elasticsearch instance
+	// ID.
+	ReservedElasticsearchInstanceId *string `location:"querystring" locationName:"reservationId" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeReservedElasticsearchInstancesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeReservedElasticsearchInstancesInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeReservedElasticsearchInstancesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReservedElasticsearchInstanceId != nil {
+		v := *s.ReservedElasticsearchInstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "reservationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Container for results from DescribeReservedElasticsearchInstances
+type DescribeReservedElasticsearchInstancesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Provides an identifier to allow retrieval of paginated results.
+	NextToken *string `type:"string"`
+
+	// List of reserved Elasticsearch instances.
+	ReservedElasticsearchInstances []ReservedElasticsearchInstance `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeReservedElasticsearchInstancesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeReservedElasticsearchInstancesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeReservedElasticsearchInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DescribeReservedElasticsearchInstancesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ReservedElasticsearchInstances) > 0 {
+		v := s.ReservedElasticsearchInstances
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ReservedElasticsearchInstances", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
 
 	}
 	return nil
@@ -3337,6 +3790,167 @@ func (s OptionStatus) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Container for parameters to PurchaseReservedElasticsearchInstanceOffering
+type PurchaseReservedElasticsearchInstanceOfferingInput struct {
+	_ struct{} `type:"structure"`
+
+	// The number of Elasticsearch instances to reserve.
+	InstanceCount *int64 `min:"1" type:"integer"`
+
+	// A customer-specified identifier to track this reservation.
+	//
+	// ReservationName is a required field
+	ReservationName *string `min:"5" type:"string" required:"true"`
+
+	// The ID of the reserved Elasticsearch instance offering to purchase.
+	//
+	// ReservedElasticsearchInstanceOfferingId is a required field
+	ReservedElasticsearchInstanceOfferingId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PurchaseReservedElasticsearchInstanceOfferingInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PurchaseReservedElasticsearchInstanceOfferingInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PurchaseReservedElasticsearchInstanceOfferingInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PurchaseReservedElasticsearchInstanceOfferingInput"}
+	if s.InstanceCount != nil && *s.InstanceCount < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("InstanceCount", 1))
+	}
+
+	if s.ReservationName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReservationName"))
+	}
+	if s.ReservationName != nil && len(*s.ReservationName) < 5 {
+		invalidParams.Add(aws.NewErrParamMinLen("ReservationName", 5))
+	}
+
+	if s.ReservedElasticsearchInstanceOfferingId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ReservedElasticsearchInstanceOfferingId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PurchaseReservedElasticsearchInstanceOfferingInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.InstanceCount != nil {
+		v := *s.InstanceCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InstanceCount", protocol.Int64Value(v), metadata)
+	}
+	if s.ReservationName != nil {
+		v := *s.ReservationName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReservedElasticsearchInstanceOfferingId != nil {
+		v := *s.ReservedElasticsearchInstanceOfferingId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservedElasticsearchInstanceOfferingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Represents the output of a PurchaseReservedElasticsearchInstanceOffering
+// operation.
+type PurchaseReservedElasticsearchInstanceOfferingOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The customer-specified identifier used to track this reservation.
+	ReservationName *string `min:"5" type:"string"`
+
+	// Details of the reserved Elasticsearch instance which was purchased.
+	ReservedElasticsearchInstanceId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s PurchaseReservedElasticsearchInstanceOfferingOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PurchaseReservedElasticsearchInstanceOfferingOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PurchaseReservedElasticsearchInstanceOfferingOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PurchaseReservedElasticsearchInstanceOfferingOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ReservationName != nil {
+		v := *s.ReservationName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReservedElasticsearchInstanceId != nil {
+		v := *s.ReservedElasticsearchInstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservedElasticsearchInstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains the specific price and frequency of a recurring charges for a reserved
+// Elasticsearch instance, or for a reserved Elasticsearch instance offering.
+type RecurringCharge struct {
+	_ struct{} `type:"structure"`
+
+	// The monetary amount of the recurring charge.
+	RecurringChargeAmount *float64 `type:"double"`
+
+	// The frequency of the recurring charge.
+	RecurringChargeFrequency *string `type:"string"`
+}
+
+// String returns the string representation
+func (s RecurringCharge) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RecurringCharge) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RecurringCharge) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RecurringChargeAmount != nil {
+		v := *s.RecurringChargeAmount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecurringChargeAmount", protocol.Float64Value(v), metadata)
+	}
+	if s.RecurringChargeFrequency != nil {
+		v := *s.RecurringChargeFrequency
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RecurringChargeFrequency", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Container for the parameters to the RemoveTags operation. Specify the ARN
 // for the Elasticsearch domain from which you want to remove the specified
 // TagKey.
@@ -3431,6 +4045,254 @@ func (s RemoveTagsOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s RemoveTagsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Details of a reserved Elasticsearch instance.
+type ReservedElasticsearchInstance struct {
+	_ struct{} `type:"structure"`
+
+	// The currency code for the reserved Elasticsearch instance offering.
+	CurrencyCode *string `type:"string"`
+
+	// The duration, in seconds, for which the Elasticsearch instance is reserved.
+	Duration *int64 `type:"integer"`
+
+	// The number of Elasticsearch instances that have been reserved.
+	ElasticsearchInstanceCount *int64 `type:"integer"`
+
+	// The Elasticsearch instance type offered by the reserved instance offering.
+	ElasticsearchInstanceType ESPartitionInstanceType `type:"string" enum:"true"`
+
+	// The upfront fixed charge you will paid to purchase the specific reserved
+	// Elasticsearch instance offering.
+	FixedPrice *float64 `type:"double"`
+
+	// The payment option as defined in the reserved Elasticsearch instance offering.
+	PaymentOption ReservedElasticsearchInstancePaymentOption `type:"string" enum:"true"`
+
+	// The charge to your account regardless of whether you are creating any domains
+	// using the instance offering.
+	RecurringCharges []RecurringCharge `type:"list"`
+
+	// The customer-specified identifier to track this reservation.
+	ReservationName *string `min:"5" type:"string"`
+
+	// The unique identifier for the reservation.
+	ReservedElasticsearchInstanceId *string `type:"string"`
+
+	// The offering identifier.
+	ReservedElasticsearchInstanceOfferingId *string `type:"string"`
+
+	// The time the reservation started.
+	StartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The state of the reserved Elasticsearch instance.
+	State *string `type:"string"`
+
+	// The rate you are charged for each hour for the domain that is using this
+	// reserved instance.
+	UsagePrice *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s ReservedElasticsearchInstance) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReservedElasticsearchInstance) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReservedElasticsearchInstance) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CurrencyCode != nil {
+		v := *s.CurrencyCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CurrencyCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), metadata)
+	}
+	if s.ElasticsearchInstanceCount != nil {
+		v := *s.ElasticsearchInstanceCount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ElasticsearchInstanceCount", protocol.Int64Value(v), metadata)
+	}
+	if len(s.ElasticsearchInstanceType) > 0 {
+		v := s.ElasticsearchInstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ElasticsearchInstanceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.FixedPrice != nil {
+		v := *s.FixedPrice
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FixedPrice", protocol.Float64Value(v), metadata)
+	}
+	if len(s.PaymentOption) > 0 {
+		v := s.PaymentOption
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PaymentOption", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.RecurringCharges) > 0 {
+		v := s.RecurringCharges
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "RecurringCharges", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ReservationName != nil {
+		v := *s.ReservationName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReservedElasticsearchInstanceId != nil {
+		v := *s.ReservedElasticsearchInstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservedElasticsearchInstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReservedElasticsearchInstanceOfferingId != nil {
+		v := *s.ReservedElasticsearchInstanceOfferingId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservedElasticsearchInstanceOfferingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StartTime != nil {
+		v := *s.StartTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartTime", protocol.TimeValue{V: v, Format: protocol.UnixTimeFormat}, metadata)
+	}
+	if s.State != nil {
+		v := *s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UsagePrice != nil {
+		v := *s.UsagePrice
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UsagePrice", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
+// Details of a reserved Elasticsearch instance offering.
+type ReservedElasticsearchInstanceOffering struct {
+	_ struct{} `type:"structure"`
+
+	// The currency code for the reserved Elasticsearch instance offering.
+	CurrencyCode *string `type:"string"`
+
+	// The duration, in seconds, for which the offering will reserve the Elasticsearch
+	// instance.
+	Duration *int64 `type:"integer"`
+
+	// The Elasticsearch instance type offered by the reserved instance offering.
+	ElasticsearchInstanceType ESPartitionInstanceType `type:"string" enum:"true"`
+
+	// The upfront fixed charge you will pay to purchase the specific reserved Elasticsearch
+	// instance offering.
+	FixedPrice *float64 `type:"double"`
+
+	// Payment option for the reserved Elasticsearch instance offering
+	PaymentOption ReservedElasticsearchInstancePaymentOption `type:"string" enum:"true"`
+
+	// The charge to your account regardless of whether you are creating any domains
+	// using the instance offering.
+	RecurringCharges []RecurringCharge `type:"list"`
+
+	// The Elasticsearch reserved instance offering identifier.
+	ReservedElasticsearchInstanceOfferingId *string `type:"string"`
+
+	// The rate you are charged for each hour the domain that is using the offering
+	// is running.
+	UsagePrice *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s ReservedElasticsearchInstanceOffering) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ReservedElasticsearchInstanceOffering) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ReservedElasticsearchInstanceOffering) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CurrencyCode != nil {
+		v := *s.CurrencyCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CurrencyCode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Duration != nil {
+		v := *s.Duration
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Duration", protocol.Int64Value(v), metadata)
+	}
+	if len(s.ElasticsearchInstanceType) > 0 {
+		v := s.ElasticsearchInstanceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ElasticsearchInstanceType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.FixedPrice != nil {
+		v := *s.FixedPrice
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FixedPrice", protocol.Float64Value(v), metadata)
+	}
+	if len(s.PaymentOption) > 0 {
+		v := s.PaymentOption
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PaymentOption", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.RecurringCharges) > 0 {
+		v := s.RecurringCharges
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "RecurringCharges", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.ReservedElasticsearchInstanceOfferingId != nil {
+		v := *s.ReservedElasticsearchInstanceOfferingId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ReservedElasticsearchInstanceOfferingId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.UsagePrice != nil {
+		v := *s.UsagePrice
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "UsagePrice", protocol.Float64Value(v), metadata)
+	}
 	return nil
 }
 
@@ -4142,6 +5004,24 @@ func (enum OptionState) MarshalValue() (string, error) {
 }
 
 func (enum OptionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ReservedElasticsearchInstancePaymentOption string
+
+// Enum values for ReservedElasticsearchInstancePaymentOption
+const (
+	ReservedElasticsearchInstancePaymentOptionAllUpfront     ReservedElasticsearchInstancePaymentOption = "ALL_UPFRONT"
+	ReservedElasticsearchInstancePaymentOptionPartialUpfront ReservedElasticsearchInstancePaymentOption = "PARTIAL_UPFRONT"
+	ReservedElasticsearchInstancePaymentOptionNoUpfront      ReservedElasticsearchInstancePaymentOption = "NO_UPFRONT"
+)
+
+func (enum ReservedElasticsearchInstancePaymentOption) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ReservedElasticsearchInstancePaymentOption) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

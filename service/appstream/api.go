@@ -2408,6 +2408,10 @@ type CreateStackInput struct {
 
 	// The storage connectors to enable.
 	StorageConnectors []StorageConnector `type:"list"`
+
+	// The actions that are enabled or disabled for users during their streaming
+	// sessions. By default, these actions are enabled.
+	UserSettings []UserSetting `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -2430,10 +2434,20 @@ func (s *CreateStackInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+	if s.UserSettings != nil && len(s.UserSettings) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserSettings", 1))
+	}
 	if s.StorageConnectors != nil {
 		for i, v := range s.StorageConnectors {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StorageConnectors", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.UserSettings != nil {
+		for i, v := range s.UserSettings {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserSettings", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4102,6 +4116,10 @@ type Stack struct {
 
 	// The storage connectors to enable.
 	StorageConnectors []StorageConnector `type:"list"`
+
+	// The actions that are enabled or disabled for users during their streaming
+	// sessions. By default these actions are enabled.
+	UserSettings []UserSetting `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -4819,6 +4837,10 @@ type UpdateStackInput struct {
 
 	// The storage connectors to enable.
 	StorageConnectors []StorageConnector `type:"list"`
+
+	// The actions that are enabled or disabled for users during their streaming
+	// sessions. By default, these actions are enabled.
+	UserSettings []UserSetting `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -4841,10 +4863,20 @@ func (s *UpdateStackInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
+	if s.UserSettings != nil && len(s.UserSettings) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("UserSettings", 1))
+	}
 	if s.StorageConnectors != nil {
 		for i, v := range s.StorageConnectors {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "StorageConnectors", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.UserSettings != nil {
+		for i, v := range s.UserSettings {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "UserSettings", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}
@@ -4880,6 +4912,49 @@ func (s UpdateStackOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Describes an action and whether the action is enabled or disabled for users
+// during their streaming sessions.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UserSetting
+type UserSetting struct {
+	_ struct{} `type:"structure"`
+
+	// The action that is enabled or disabled.
+	//
+	// Action is a required field
+	Action Action `type:"string" required:"true" enum:"true"`
+
+	// Indicates whether the action is enabled or disabled.
+	//
+	// Permission is a required field
+	Permission Permission `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s UserSetting) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UserSetting) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UserSetting) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UserSetting"}
+	if len(s.Action) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+	if len(s.Permission) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Permission"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Describes VPC configuration information.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/VpcConfig
 type VpcConfig struct {
@@ -4900,6 +4975,26 @@ func (s VpcConfig) String() string {
 // GoString returns the string representation
 func (s VpcConfig) GoString() string {
 	return s.String()
+}
+
+type Action string
+
+// Enum values for Action
+const (
+	ActionClipboardCopyFromLocalDevice Action = "CLIPBOARD_COPY_FROM_LOCAL_DEVICE"
+	ActionClipboardCopyToLocalDevice   Action = "CLIPBOARD_COPY_TO_LOCAL_DEVICE"
+	ActionFileUpload                   Action = "FILE_UPLOAD"
+	ActionFileDownload                 Action = "FILE_DOWNLOAD"
+	ActionPrintingToLocalDevice        Action = "PRINTING_TO_LOCAL_DEVICE"
+)
+
+func (enum Action) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Action) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }
 
 type AuthenticationType string
@@ -5095,6 +5190,23 @@ func (enum ImageStateChangeReasonCode) MarshalValueBuf(b []byte) ([]byte, error)
 	return append(b, enum...), nil
 }
 
+type Permission string
+
+// Enum values for Permission
+const (
+	PermissionEnabled  Permission = "ENABLED"
+	PermissionDisabled Permission = "DISABLED"
+)
+
+func (enum Permission) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Permission) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type PlatformType string
 
 // Enum values for PlatformType
@@ -5138,6 +5250,7 @@ const (
 	StackAttributeRedirectUrl       StackAttribute = "REDIRECT_URL"
 	StackAttributeFeedbackUrl       StackAttribute = "FEEDBACK_URL"
 	StackAttributeThemeName         StackAttribute = "THEME_NAME"
+	StackAttributeUserSettings      StackAttribute = "USER_SETTINGS"
 )
 
 func (enum StackAttribute) MarshalValue() (string, error) {

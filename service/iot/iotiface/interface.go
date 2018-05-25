@@ -112,6 +112,10 @@ type IoTAPI interface {
 
 	DeleteCertificateRequest(*iot.DeleteCertificateInput) iot.DeleteCertificateRequest
 
+	DeleteJobRequest(*iot.DeleteJobInput) iot.DeleteJobRequest
+
+	DeleteJobExecutionRequest(*iot.DeleteJobExecutionInput) iot.DeleteJobExecutionRequest
+
 	DeleteOTAUpdateRequest(*iot.DeleteOTAUpdateInput) iot.DeleteOTAUpdateRequest
 
 	DeletePolicyRequest(*iot.DeletePolicyInput) iot.DeletePolicyRequest

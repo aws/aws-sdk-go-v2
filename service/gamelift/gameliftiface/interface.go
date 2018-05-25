@@ -162,11 +162,15 @@ type GameLiftAPI interface {
 
 	SearchGameSessionsRequest(*gamelift.SearchGameSessionsInput) gamelift.SearchGameSessionsRequest
 
+	StartFleetActionsRequest(*gamelift.StartFleetActionsInput) gamelift.StartFleetActionsRequest
+
 	StartGameSessionPlacementRequest(*gamelift.StartGameSessionPlacementInput) gamelift.StartGameSessionPlacementRequest
 
 	StartMatchBackfillRequest(*gamelift.StartMatchBackfillInput) gamelift.StartMatchBackfillRequest
 
 	StartMatchmakingRequest(*gamelift.StartMatchmakingInput) gamelift.StartMatchmakingRequest
+
+	StopFleetActionsRequest(*gamelift.StopFleetActionsInput) gamelift.StopFleetActionsRequest
 
 	StopGameSessionPlacementRequest(*gamelift.StopGameSessionPlacementInput) gamelift.StopGameSessionPlacementRequest
 

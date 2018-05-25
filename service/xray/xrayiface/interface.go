@@ -64,11 +64,15 @@ import (
 type XRayAPI interface {
 	BatchGetTracesRequest(*xray.BatchGetTracesInput) xray.BatchGetTracesRequest
 
+	GetEncryptionConfigRequest(*xray.GetEncryptionConfigInput) xray.GetEncryptionConfigRequest
+
 	GetServiceGraphRequest(*xray.GetServiceGraphInput) xray.GetServiceGraphRequest
 
 	GetTraceGraphRequest(*xray.GetTraceGraphInput) xray.GetTraceGraphRequest
 
 	GetTraceSummariesRequest(*xray.GetTraceSummariesInput) xray.GetTraceSummariesRequest
+
+	PutEncryptionConfigRequest(*xray.PutEncryptionConfigInput) xray.PutEncryptionConfigRequest
 
 	PutTelemetryRecordsRequest(*xray.PutTelemetryRecordsInput) xray.PutTelemetryRecordsRequest
 

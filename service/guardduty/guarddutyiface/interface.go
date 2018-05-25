@@ -68,6 +68,8 @@ type GuardDutyAPI interface {
 
 	CreateDetectorRequest(*guardduty.CreateDetectorInput) guardduty.CreateDetectorRequest
 
+	CreateFilterRequest(*guardduty.CreateFilterInput) guardduty.CreateFilterRequest
+
 	CreateIPSetRequest(*guardduty.CreateIPSetInput) guardduty.CreateIPSetRequest
 
 	CreateMembersRequest(*guardduty.CreateMembersInput) guardduty.CreateMembersRequest
@@ -79,6 +81,8 @@ type GuardDutyAPI interface {
 	DeclineInvitationsRequest(*guardduty.DeclineInvitationsInput) guardduty.DeclineInvitationsRequest
 
 	DeleteDetectorRequest(*guardduty.DeleteDetectorInput) guardduty.DeleteDetectorRequest
+
+	DeleteFilterRequest(*guardduty.DeleteFilterInput) guardduty.DeleteFilterRequest
 
 	DeleteIPSetRequest(*guardduty.DeleteIPSetInput) guardduty.DeleteIPSetRequest
 
@@ -93,6 +97,8 @@ type GuardDutyAPI interface {
 	DisassociateMembersRequest(*guardduty.DisassociateMembersInput) guardduty.DisassociateMembersRequest
 
 	GetDetectorRequest(*guardduty.GetDetectorInput) guardduty.GetDetectorRequest
+
+	GetFilterRequest(*guardduty.GetFilterInput) guardduty.GetFilterRequest
 
 	GetFindingsRequest(*guardduty.GetFindingsInput) guardduty.GetFindingsRequest
 
@@ -112,6 +118,8 @@ type GuardDutyAPI interface {
 
 	ListDetectorsRequest(*guardduty.ListDetectorsInput) guardduty.ListDetectorsRequest
 
+	ListFiltersRequest(*guardduty.ListFiltersInput) guardduty.ListFiltersRequest
+
 	ListFindingsRequest(*guardduty.ListFindingsInput) guardduty.ListFindingsRequest
 
 	ListIPSetsRequest(*guardduty.ListIPSetsInput) guardduty.ListIPSetsRequest
@@ -129,6 +137,8 @@ type GuardDutyAPI interface {
 	UnarchiveFindingsRequest(*guardduty.UnarchiveFindingsInput) guardduty.UnarchiveFindingsRequest
 
 	UpdateDetectorRequest(*guardduty.UpdateDetectorInput) guardduty.UpdateDetectorRequest
+
+	UpdateFilterRequest(*guardduty.UpdateFilterInput) guardduty.UpdateFilterRequest
 
 	UpdateFindingsFeedbackRequest(*guardduty.UpdateFindingsFeedbackInput) guardduty.UpdateFindingsFeedbackRequest
 

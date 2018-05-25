@@ -114,6 +114,8 @@ type AlexaForBusinessAPI interface {
 
 	GetSkillGroupRequest(*alexaforbusiness.GetSkillGroupInput) alexaforbusiness.GetSkillGroupRequest
 
+	ListDeviceEventsRequest(*alexaforbusiness.ListDeviceEventsInput) alexaforbusiness.ListDeviceEventsRequest
+
 	ListSkillsRequest(*alexaforbusiness.ListSkillsInput) alexaforbusiness.ListSkillsRequest
 
 	ListTagsRequest(*alexaforbusiness.ListTagsInput) alexaforbusiness.ListTagsRequest

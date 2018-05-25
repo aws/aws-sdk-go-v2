@@ -6827,6 +6827,13 @@ type ListAcceptedPortfolioSharesInput struct {
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string `type:"string"`
+
+	// The type of shared portfolios to list. The default is to list imported portfolios.
+	//
+	//    * AWS_SERVICECATALOG - List default portfolios
+	//
+	//    * IMPORTED - List imported portfolios
+	PortfolioShareType PortfolioShareType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -10129,6 +10136,23 @@ func (enum EvaluationType) MarshalValue() (string, error) {
 }
 
 func (enum EvaluationType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PortfolioShareType string
+
+// Enum values for PortfolioShareType
+const (
+	PortfolioShareTypeImported          PortfolioShareType = "IMPORTED"
+	PortfolioShareTypeAwsServicecatalog PortfolioShareType = "AWS_SERVICECATALOG"
+)
+
+func (enum PortfolioShareType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PortfolioShareType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

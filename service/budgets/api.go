@@ -2301,6 +2301,7 @@ const (
 	BudgetTypeUsage         BudgetType = "USAGE"
 	BudgetTypeCost          BudgetType = "COST"
 	BudgetTypeRiUtilization BudgetType = "RI_UTILIZATION"
+	BudgetTypeRiCoverage    BudgetType = "RI_COVERAGE"
 )
 
 func (enum BudgetType) MarshalValue() (string, error) {

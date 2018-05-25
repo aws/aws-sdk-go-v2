@@ -86,6 +86,8 @@ type SSMAPI interface {
 
 	DeleteDocumentRequest(*ssm.DeleteDocumentInput) ssm.DeleteDocumentRequest
 
+	DeleteInventoryRequest(*ssm.DeleteInventoryInput) ssm.DeleteInventoryRequest
+
 	DeleteMaintenanceWindowRequest(*ssm.DeleteMaintenanceWindowInput) ssm.DeleteMaintenanceWindowRequest
 
 	DeleteParameterRequest(*ssm.DeleteParameterInput) ssm.DeleteParameterRequest
@@ -131,6 +133,8 @@ type SSMAPI interface {
 	DescribeInstancePatchStatesForPatchGroupRequest(*ssm.DescribeInstancePatchStatesForPatchGroupInput) ssm.DescribeInstancePatchStatesForPatchGroupRequest
 
 	DescribeInstancePatchesRequest(*ssm.DescribeInstancePatchesInput) ssm.DescribeInstancePatchesRequest
+
+	DescribeInventoryDeletionsRequest(*ssm.DescribeInventoryDeletionsInput) ssm.DescribeInventoryDeletionsRequest
 
 	DescribeMaintenanceWindowExecutionTaskInvocationsRequest(*ssm.DescribeMaintenanceWindowExecutionTaskInvocationsInput) ssm.DescribeMaintenanceWindowExecutionTaskInvocationsRequest
 

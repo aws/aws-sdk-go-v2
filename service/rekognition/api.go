@@ -828,6 +828,11 @@ func (r GetCelebrityRecognitionRequest) Send() (*GetCelebrityRecognitionOutput, 
 // contains information about the celebrity in a object and the time, Timestamp,
 // the celebrity was detected.
 //
+// GetCelebrityRecognition only returns the default facial attributes (BoundingBox,
+// Confidence, Landmarks, Pose, and Quality). The other facial attributes listed
+// in the Face object of the following response syntax are not returned. For
+// more information, see .
+//
 // By default, the Celebrities array is sorted by time (milliseconds from the
 // start of the video). You can also sort the array by celebrity by specifying
 // the value ID in the SortBy input parameter.
@@ -1205,8 +1210,13 @@ func (r GetFaceSearchRequest) Send() (*GetFaceSearchOutput, error) {
 //
 // The search results are retured in an array, Persons, of objects. EachPersonMatch
 // element contains details about the matching faces in the input collection,
-// person information for the matched person, and the time the person was matched
-// in the video.
+// person information (facial attributes, bounding boxes, and person identifer)
+// for the matched person, and the time the person was matched in the video.
+//
+// GetFaceSearch only returns the default facial attributes (BoundingBox, Confidence,
+// Landmarks, Pose, and Quality). The other facial attributes listed in the
+// Face object of the following response syntax are not returned. For more information,
+// see .
 //
 // By default, the Persons array is sorted by the time, in milliseconds from
 // the start of the video, persons are matched. You can also sort by persons
@@ -1448,6 +1458,11 @@ func (r GetPersonTrackingRequest) Send() (*GetPersonTrackingOutput, error) {
 //
 // GetPersonTracking returns an array, Persons, of tracked persons and the time(s)
 // they were tracked in the video.
+//
+// GetPersonTracking only returns the default facial attributes (BoundingBox,
+// Confidence, Landmarks, Pose, and Quality). The other facial attributes listed
+// in the Face object of the following response syntax are not returned. For
+// more information, see .
 //
 // By default, the array is sorted by the time(s) a person is tracked in the
 // video. You can sort by tracked persons by specifying INDEX for the SortBy
@@ -3877,6 +3892,26 @@ func (s Face) GoString() string {
 }
 
 // Structure containing attributes of the face that the algorithm detected.
+//
+// A FaceDetail object contains either the default facial attributes or all
+// facial attributes. The default attributes are BoundingBox, Confidence, Landmarks,
+// Pose, and Quality.
+//
+// is the only Rekognition Video stored video operation that can return a FaceDetail
+// object with all attributes. To specify which attributes to return, use the
+// FaceAttributes input parameter for . The following Rekognition Video operations
+// return only the default attributes. The corresponding Start operations don't
+// have a FaceAttributes input parameter.
+//
+//    * GetCelebrityRecognition
+//
+//    * GetPersonTracking
+//
+//    * GetFaceSearch
+//
+// The Rekognition Image and operations can return all facial attributes. To
+// specify which attributes to return, use the Attributes input parameter for
+// DetectFaces. For IndexFaces, use the DetectAttributes input parameter.
 type FaceDetail struct {
 	_ struct{} `type:"structure"`
 
@@ -3888,11 +3923,11 @@ type FaceDetail struct {
 	// the determination.
 	Beard *Beard `type:"structure"`
 
-	// Bounding box of the face.
+	// Bounding box of the face. Default attribute.
 	BoundingBox *BoundingBox `type:"structure"`
 
 	// Confidence level that the bounding box contains a face (and not a different
-	// object such as a tree).
+	// object such as a tree). Default attribute.
 	Confidence *float64 `type:"float"`
 
 	// The emotions detected on the face, and the confidence level in the determination.
@@ -3910,7 +3945,7 @@ type FaceDetail struct {
 	// Gender of the face and the confidence level in the determination.
 	Gender *Gender `type:"structure"`
 
-	// Indicates the location of landmarks on the face.
+	// Indicates the location of landmarks on the face. Default attribute.
 	Landmarks []Landmark `type:"list"`
 
 	// Indicates whether or not the mouth on the face is open, and the confidence
@@ -3922,9 +3957,10 @@ type FaceDetail struct {
 	Mustache *Mustache `type:"structure"`
 
 	// Indicates the pose of the face as determined by its pitch, roll, and yaw.
+	// Default attribute.
 	Pose *Pose `type:"structure"`
 
-	// Identifies image brightness and sharpness.
+	// Identifies image brightness and sharpness. Default attribute.
 	Quality *ImageQuality `type:"structure"`
 
 	// Indicates whether or not the face is smiling, and the confidence level in
@@ -4164,8 +4200,9 @@ type GetCelebrityRecognitionInput struct {
 	// JobId is a required field
 	JobId *string `min:"1" type:"string" required:"true"`
 
-	// Maximum number of celebrities you want Rekognition Video to return in the
-	// response. The default is 1000.
+	// Maximum number of results to return per paginated call. The largest value
+	// you can specify is 1000. If you specify a value greater than 1000, a maximum
+	// of 1000 results is returned. The default value is 1000.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If the previous response was incomplete (because there is more recognized
@@ -4258,7 +4295,9 @@ type GetContentModerationInput struct {
 	// JobId is a required field
 	JobId *string `min:"1" type:"string" required:"true"`
 
-	// Maximum number of content moderation labels to return. The default is 1000.
+	// Maximum number of results to return per paginated call. The largest value
+	// you can specify is 1000. If you specify a value greater than 1000, a maximum
+	// of 1000 results is returned. The default value is 1000.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If the previous response was incomplete (because there is more data to retrieve),
@@ -4351,7 +4390,9 @@ type GetFaceDetectionInput struct {
 	// JobId is a required field
 	JobId *string `min:"1" type:"string" required:"true"`
 
-	// Maximum number of detected faces to return. The default is 1000.
+	// Maximum number of results to return per paginated call. The largest value
+	// you can specify is 1000. If you specify a value greater than 1000, a maximum
+	// of 1000 results is returned. The default value is 1000.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If the previous response was incomplete (because there are more faces to
@@ -4440,8 +4481,9 @@ type GetFaceSearchInput struct {
 	// JobId is a required field
 	JobId *string `min:"1" type:"string" required:"true"`
 
-	// Maximum number of search results you want Rekognition Video to return in
-	// the response. The default is 1000.
+	// Maximum number of results to return per paginated call. The largest value
+	// you can specify is 1000. If you specify a value greater than 1000, a maximum
+	// of 1000 results is returned. The default value is 1000.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If the previous response was incomplete (because there is more search results
@@ -4537,8 +4579,9 @@ type GetLabelDetectionInput struct {
 	// JobId is a required field
 	JobId *string `min:"1" type:"string" required:"true"`
 
-	// Maximum number of labels you want Amazon Rekognition to return in the response.
-	// The default is 1000.
+	// Maximum number of results to return per paginated call. The largest value
+	// you can specify is 1000. If you specify a value greater than 1000, a maximum
+	// of 1000 results is returned. The default value is 1000.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If the previous response was incomplete (because there are more labels to
@@ -4633,7 +4676,9 @@ type GetPersonTrackingInput struct {
 	// JobId is a required field
 	JobId *string `min:"1" type:"string" required:"true"`
 
-	// Maximum number of tracked persons to return. The default is 1000.
+	// Maximum number of results to return per paginated call. The largest value
+	// you can specify is 1000. If you specify a value greater than 1000, a maximum
+	// of 1000 results is returned. The default value is 1000.
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// If the previous response was incomplete (because there are more persons to
@@ -5397,7 +5442,7 @@ func (s PersonDetection) GoString() string {
 
 // Information about a person whose face matches a face(s) in a Amazon Rekognition
 // collection. Includes information about the faces in the Amazon Rekognition
-// collection (,information about the person (PersonDetail) and the timestamp
+// collection (, information about the person (PersonDetail) and the timestamp
 // for when the person was detected in a video. An array of PersonMatch objects
 // is returned by .
 type PersonMatch struct {

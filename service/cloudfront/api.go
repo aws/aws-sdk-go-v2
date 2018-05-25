@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol/restxml"
 )
 
-const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIdentity2017_03_25"
+const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIdentity2017_10_30"
 
 // CreateCloudFrontOriginAccessIdentityRequest is a API request type for the CreateCloudFrontOriginAccessIdentity API operation.
 type CreateCloudFrontOriginAccessIdentityRequest struct {
@@ -48,12 +48,12 @@ func (r CreateCloudFrontOriginAccessIdentityRequest) Send() (*CreateCloudFrontOr
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateCloudFrontOriginAccessIdentity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateCloudFrontOriginAccessIdentity
 func (c *CloudFront) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCloudFrontOriginAccessIdentityInput) CreateCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opCreateCloudFrontOriginAccessIdentity,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront",
+		HTTPPath:   "/2017-10-30/origin-access-identity/cloudfront",
 	}
 
 	if input == nil {
@@ -67,7 +67,7 @@ func (c *CloudFront) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCl
 	return CreateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.CreateCloudFrontOriginAccessIdentityRequest}
 }
 
-const opCreateDistribution = "CreateDistribution2017_03_25"
+const opCreateDistribution = "CreateDistribution2017_10_30"
 
 // CreateDistributionRequest is a API request type for the CreateDistribution API operation.
 type CreateDistributionRequest struct {
@@ -99,12 +99,12 @@ func (r CreateDistributionRequest) Send() (*CreateDistributionOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistribution
 func (c *CloudFront) CreateDistributionRequest(input *CreateDistributionInput) CreateDistributionRequest {
 	op := &aws.Operation{
 		Name:       opCreateDistribution,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2017-03-25/distribution",
+		HTTPPath:   "/2017-10-30/distribution",
 	}
 
 	if input == nil {
@@ -118,7 +118,7 @@ func (c *CloudFront) CreateDistributionRequest(input *CreateDistributionInput) C
 	return CreateDistributionRequest{Request: req, Input: input, Copy: c.CreateDistributionRequest}
 }
 
-const opCreateDistributionWithTags = "CreateDistributionWithTags2017_03_25"
+const opCreateDistributionWithTags = "CreateDistributionWithTags2017_10_30"
 
 // CreateDistributionWithTagsRequest is a API request type for the CreateDistributionWithTags API operation.
 type CreateDistributionWithTagsRequest struct {
@@ -149,12 +149,12 @@ func (r CreateDistributionWithTagsRequest) Send() (*CreateDistributionWithTagsOu
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistributionWithTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionWithTags
 func (c *CloudFront) CreateDistributionWithTagsRequest(input *CreateDistributionWithTagsInput) CreateDistributionWithTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateDistributionWithTags,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2017-03-25/distribution?WithTags",
+		HTTPPath:   "/2017-10-30/distribution?WithTags",
 	}
 
 	if input == nil {
@@ -168,7 +168,107 @@ func (c *CloudFront) CreateDistributionWithTagsRequest(input *CreateDistribution
 	return CreateDistributionWithTagsRequest{Request: req, Input: input, Copy: c.CreateDistributionWithTagsRequest}
 }
 
-const opCreateInvalidation = "CreateInvalidation2017_03_25"
+const opCreateFieldLevelEncryptionConfig = "CreateFieldLevelEncryptionConfig2017_10_30"
+
+// CreateFieldLevelEncryptionConfigRequest is a API request type for the CreateFieldLevelEncryptionConfig API operation.
+type CreateFieldLevelEncryptionConfigRequest struct {
+	*aws.Request
+	Input *CreateFieldLevelEncryptionConfigInput
+	Copy  func(*CreateFieldLevelEncryptionConfigInput) CreateFieldLevelEncryptionConfigRequest
+}
+
+// Send marshals and sends the CreateFieldLevelEncryptionConfig API request.
+func (r CreateFieldLevelEncryptionConfigRequest) Send() (*CreateFieldLevelEncryptionConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFieldLevelEncryptionConfigOutput), nil
+}
+
+// CreateFieldLevelEncryptionConfigRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Create a new field-level encryption configuration.
+//
+//    // Example sending a request using the CreateFieldLevelEncryptionConfigRequest method.
+//    req := client.CreateFieldLevelEncryptionConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionConfig
+func (c *CloudFront) CreateFieldLevelEncryptionConfigRequest(input *CreateFieldLevelEncryptionConfigInput) CreateFieldLevelEncryptionConfigRequest {
+	op := &aws.Operation{
+		Name:       opCreateFieldLevelEncryptionConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2017-10-30/field-level-encryption",
+	}
+
+	if input == nil {
+		input = &CreateFieldLevelEncryptionConfigInput{}
+	}
+
+	output := &CreateFieldLevelEncryptionConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateFieldLevelEncryptionConfigRequest{Request: req, Input: input, Copy: c.CreateFieldLevelEncryptionConfigRequest}
+}
+
+const opCreateFieldLevelEncryptionProfile = "CreateFieldLevelEncryptionProfile2017_10_30"
+
+// CreateFieldLevelEncryptionProfileRequest is a API request type for the CreateFieldLevelEncryptionProfile API operation.
+type CreateFieldLevelEncryptionProfileRequest struct {
+	*aws.Request
+	Input *CreateFieldLevelEncryptionProfileInput
+	Copy  func(*CreateFieldLevelEncryptionProfileInput) CreateFieldLevelEncryptionProfileRequest
+}
+
+// Send marshals and sends the CreateFieldLevelEncryptionProfile API request.
+func (r CreateFieldLevelEncryptionProfileRequest) Send() (*CreateFieldLevelEncryptionProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFieldLevelEncryptionProfileOutput), nil
+}
+
+// CreateFieldLevelEncryptionProfileRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Create a field-level encryption profile.
+//
+//    // Example sending a request using the CreateFieldLevelEncryptionProfileRequest method.
+//    req := client.CreateFieldLevelEncryptionProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionProfile
+func (c *CloudFront) CreateFieldLevelEncryptionProfileRequest(input *CreateFieldLevelEncryptionProfileInput) CreateFieldLevelEncryptionProfileRequest {
+	op := &aws.Operation{
+		Name:       opCreateFieldLevelEncryptionProfile,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2017-10-30/field-level-encryption-profile",
+	}
+
+	if input == nil {
+		input = &CreateFieldLevelEncryptionProfileInput{}
+	}
+
+	output := &CreateFieldLevelEncryptionProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateFieldLevelEncryptionProfileRequest{Request: req, Input: input, Copy: c.CreateFieldLevelEncryptionProfileRequest}
+}
+
+const opCreateInvalidation = "CreateInvalidation2017_10_30"
 
 // CreateInvalidationRequest is a API request type for the CreateInvalidation API operation.
 type CreateInvalidationRequest struct {
@@ -199,12 +299,12 @@ func (r CreateInvalidationRequest) Send() (*CreateInvalidationOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateInvalidation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateInvalidation
 func (c *CloudFront) CreateInvalidationRequest(input *CreateInvalidationInput) CreateInvalidationRequest {
 	op := &aws.Operation{
 		Name:       opCreateInvalidation,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2017-03-25/distribution/{DistributionId}/invalidation",
+		HTTPPath:   "/2017-10-30/distribution/{DistributionId}/invalidation",
 	}
 
 	if input == nil {
@@ -218,7 +318,58 @@ func (c *CloudFront) CreateInvalidationRequest(input *CreateInvalidationInput) C
 	return CreateInvalidationRequest{Request: req, Input: input, Copy: c.CreateInvalidationRequest}
 }
 
-const opCreateStreamingDistribution = "CreateStreamingDistribution2017_03_25"
+const opCreatePublicKey = "CreatePublicKey2017_10_30"
+
+// CreatePublicKeyRequest is a API request type for the CreatePublicKey API operation.
+type CreatePublicKeyRequest struct {
+	*aws.Request
+	Input *CreatePublicKeyInput
+	Copy  func(*CreatePublicKeyInput) CreatePublicKeyRequest
+}
+
+// Send marshals and sends the CreatePublicKey API request.
+func (r CreatePublicKeyRequest) Send() (*CreatePublicKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreatePublicKeyOutput), nil
+}
+
+// CreatePublicKeyRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Add a new public key to CloudFront to use, for example, for field-level encryption.
+// You can add a maximum of 10 public keys with one AWS account.
+//
+//    // Example sending a request using the CreatePublicKeyRequest method.
+//    req := client.CreatePublicKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreatePublicKey
+func (c *CloudFront) CreatePublicKeyRequest(input *CreatePublicKeyInput) CreatePublicKeyRequest {
+	op := &aws.Operation{
+		Name:       opCreatePublicKey,
+		HTTPMethod: "POST",
+		HTTPPath:   "/2017-10-30/public-key",
+	}
+
+	if input == nil {
+		input = &CreatePublicKeyInput{}
+	}
+
+	output := &CreatePublicKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreatePublicKeyRequest{Request: req, Input: input, Copy: c.CreatePublicKeyRequest}
+}
+
+const opCreateStreamingDistribution = "CreateStreamingDistribution2017_10_30"
 
 // CreateStreamingDistributionRequest is a API request type for the CreateStreamingDistribution API operation.
 type CreateStreamingDistributionRequest struct {
@@ -276,12 +427,12 @@ func (r CreateStreamingDistributionRequest) Send() (*CreateStreamingDistribution
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistribution
 func (c *CloudFront) CreateStreamingDistributionRequest(input *CreateStreamingDistributionInput) CreateStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opCreateStreamingDistribution,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2017-03-25/streaming-distribution",
+		HTTPPath:   "/2017-10-30/streaming-distribution",
 	}
 
 	if input == nil {
@@ -295,7 +446,7 @@ func (c *CloudFront) CreateStreamingDistributionRequest(input *CreateStreamingDi
 	return CreateStreamingDistributionRequest{Request: req, Input: input, Copy: c.CreateStreamingDistributionRequest}
 }
 
-const opCreateStreamingDistributionWithTags = "CreateStreamingDistributionWithTags2017_03_25"
+const opCreateStreamingDistributionWithTags = "CreateStreamingDistributionWithTags2017_10_30"
 
 // CreateStreamingDistributionWithTagsRequest is a API request type for the CreateStreamingDistributionWithTags API operation.
 type CreateStreamingDistributionWithTagsRequest struct {
@@ -326,12 +477,12 @@ func (r CreateStreamingDistributionWithTagsRequest) Send() (*CreateStreamingDist
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistributionWithTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionWithTags
 func (c *CloudFront) CreateStreamingDistributionWithTagsRequest(input *CreateStreamingDistributionWithTagsInput) CreateStreamingDistributionWithTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateStreamingDistributionWithTags,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2017-03-25/streaming-distribution?WithTags",
+		HTTPPath:   "/2017-10-30/streaming-distribution?WithTags",
 	}
 
 	if input == nil {
@@ -345,7 +496,7 @@ func (c *CloudFront) CreateStreamingDistributionWithTagsRequest(input *CreateStr
 	return CreateStreamingDistributionWithTagsRequest{Request: req, Input: input, Copy: c.CreateStreamingDistributionWithTagsRequest}
 }
 
-const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIdentity2017_03_25"
+const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIdentity2017_10_30"
 
 // DeleteCloudFrontOriginAccessIdentityRequest is a API request type for the DeleteCloudFrontOriginAccessIdentity API operation.
 type DeleteCloudFrontOriginAccessIdentityRequest struct {
@@ -376,12 +527,12 @@ func (r DeleteCloudFrontOriginAccessIdentityRequest) Send() (*DeleteCloudFrontOr
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteCloudFrontOriginAccessIdentity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteCloudFrontOriginAccessIdentity
 func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCloudFrontOriginAccessIdentityInput) DeleteCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCloudFrontOriginAccessIdentity,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront/{Id}",
+		HTTPPath:   "/2017-10-30/origin-access-identity/cloudfront/{Id}",
 	}
 
 	if input == nil {
@@ -397,7 +548,7 @@ func (c *CloudFront) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCl
 	return DeleteCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.DeleteCloudFrontOriginAccessIdentityRequest}
 }
 
-const opDeleteDistribution = "DeleteDistribution2017_03_25"
+const opDeleteDistribution = "DeleteDistribution2017_10_30"
 
 // DeleteDistributionRequest is a API request type for the DeleteDistribution API operation.
 type DeleteDistributionRequest struct {
@@ -428,12 +579,12 @@ func (r DeleteDistributionRequest) Send() (*DeleteDistributionOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteDistribution
 func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) DeleteDistributionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDistribution,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2017-03-25/distribution/{Id}",
+		HTTPPath:   "/2017-10-30/distribution/{Id}",
 	}
 
 	if input == nil {
@@ -449,7 +600,163 @@ func (c *CloudFront) DeleteDistributionRequest(input *DeleteDistributionInput) D
 	return DeleteDistributionRequest{Request: req, Input: input, Copy: c.DeleteDistributionRequest}
 }
 
-const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole2017_03_25"
+const opDeleteFieldLevelEncryptionConfig = "DeleteFieldLevelEncryptionConfig2017_10_30"
+
+// DeleteFieldLevelEncryptionConfigRequest is a API request type for the DeleteFieldLevelEncryptionConfig API operation.
+type DeleteFieldLevelEncryptionConfigRequest struct {
+	*aws.Request
+	Input *DeleteFieldLevelEncryptionConfigInput
+	Copy  func(*DeleteFieldLevelEncryptionConfigInput) DeleteFieldLevelEncryptionConfigRequest
+}
+
+// Send marshals and sends the DeleteFieldLevelEncryptionConfig API request.
+func (r DeleteFieldLevelEncryptionConfigRequest) Send() (*DeleteFieldLevelEncryptionConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFieldLevelEncryptionConfigOutput), nil
+}
+
+// DeleteFieldLevelEncryptionConfigRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Remove a field-level encryption configuration.
+//
+//    // Example sending a request using the DeleteFieldLevelEncryptionConfigRequest method.
+//    req := client.DeleteFieldLevelEncryptionConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionConfig
+func (c *CloudFront) DeleteFieldLevelEncryptionConfigRequest(input *DeleteFieldLevelEncryptionConfigInput) DeleteFieldLevelEncryptionConfigRequest {
+	op := &aws.Operation{
+		Name:       opDeleteFieldLevelEncryptionConfig,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2017-10-30/field-level-encryption/{Id}",
+	}
+
+	if input == nil {
+		input = &DeleteFieldLevelEncryptionConfigInput{}
+	}
+
+	output := &DeleteFieldLevelEncryptionConfigOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteFieldLevelEncryptionConfigRequest{Request: req, Input: input, Copy: c.DeleteFieldLevelEncryptionConfigRequest}
+}
+
+const opDeleteFieldLevelEncryptionProfile = "DeleteFieldLevelEncryptionProfile2017_10_30"
+
+// DeleteFieldLevelEncryptionProfileRequest is a API request type for the DeleteFieldLevelEncryptionProfile API operation.
+type DeleteFieldLevelEncryptionProfileRequest struct {
+	*aws.Request
+	Input *DeleteFieldLevelEncryptionProfileInput
+	Copy  func(*DeleteFieldLevelEncryptionProfileInput) DeleteFieldLevelEncryptionProfileRequest
+}
+
+// Send marshals and sends the DeleteFieldLevelEncryptionProfile API request.
+func (r DeleteFieldLevelEncryptionProfileRequest) Send() (*DeleteFieldLevelEncryptionProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFieldLevelEncryptionProfileOutput), nil
+}
+
+// DeleteFieldLevelEncryptionProfileRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Remove a field-level encryption profile.
+//
+//    // Example sending a request using the DeleteFieldLevelEncryptionProfileRequest method.
+//    req := client.DeleteFieldLevelEncryptionProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionProfile
+func (c *CloudFront) DeleteFieldLevelEncryptionProfileRequest(input *DeleteFieldLevelEncryptionProfileInput) DeleteFieldLevelEncryptionProfileRequest {
+	op := &aws.Operation{
+		Name:       opDeleteFieldLevelEncryptionProfile,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2017-10-30/field-level-encryption-profile/{Id}",
+	}
+
+	if input == nil {
+		input = &DeleteFieldLevelEncryptionProfileInput{}
+	}
+
+	output := &DeleteFieldLevelEncryptionProfileOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteFieldLevelEncryptionProfileRequest{Request: req, Input: input, Copy: c.DeleteFieldLevelEncryptionProfileRequest}
+}
+
+const opDeletePublicKey = "DeletePublicKey2017_10_30"
+
+// DeletePublicKeyRequest is a API request type for the DeletePublicKey API operation.
+type DeletePublicKeyRequest struct {
+	*aws.Request
+	Input *DeletePublicKeyInput
+	Copy  func(*DeletePublicKeyInput) DeletePublicKeyRequest
+}
+
+// Send marshals and sends the DeletePublicKey API request.
+func (r DeletePublicKeyRequest) Send() (*DeletePublicKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeletePublicKeyOutput), nil
+}
+
+// DeletePublicKeyRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Remove a public key you previously added to CloudFront.
+//
+//    // Example sending a request using the DeletePublicKeyRequest method.
+//    req := client.DeletePublicKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeletePublicKey
+func (c *CloudFront) DeletePublicKeyRequest(input *DeletePublicKeyInput) DeletePublicKeyRequest {
+	op := &aws.Operation{
+		Name:       opDeletePublicKey,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/2017-10-30/public-key/{Id}",
+	}
+
+	if input == nil {
+		input = &DeletePublicKeyInput{}
+	}
+
+	output := &DeletePublicKeyOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restxml.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeletePublicKeyRequest{Request: req, Input: input, Copy: c.DeletePublicKeyRequest}
+}
+
+const opDeleteServiceLinkedRole = "DeleteServiceLinkedRole2017_10_30"
 
 // DeleteServiceLinkedRoleRequest is a API request type for the DeleteServiceLinkedRole API operation.
 type DeleteServiceLinkedRoleRequest struct {
@@ -478,12 +785,12 @@ func (r DeleteServiceLinkedRoleRequest) Send() (*DeleteServiceLinkedRoleOutput, 
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRole
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteServiceLinkedRole
 func (c *CloudFront) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRoleInput) DeleteServiceLinkedRoleRequest {
 	op := &aws.Operation{
 		Name:       opDeleteServiceLinkedRole,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2017-03-25/service-linked-role/{RoleName}",
+		HTTPPath:   "/2017-10-30/service-linked-role/{RoleName}",
 	}
 
 	if input == nil {
@@ -499,7 +806,7 @@ func (c *CloudFront) DeleteServiceLinkedRoleRequest(input *DeleteServiceLinkedRo
 	return DeleteServiceLinkedRoleRequest{Request: req, Input: input, Copy: c.DeleteServiceLinkedRoleRequest}
 }
 
-const opDeleteStreamingDistribution = "DeleteStreamingDistribution2017_03_25"
+const opDeleteStreamingDistribution = "DeleteStreamingDistribution2017_10_30"
 
 // DeleteStreamingDistributionRequest is a API request type for the DeleteStreamingDistribution API operation.
 type DeleteStreamingDistributionRequest struct {
@@ -565,12 +872,12 @@ func (r DeleteStreamingDistributionRequest) Send() (*DeleteStreamingDistribution
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteStreamingDistribution
 func (c *CloudFront) DeleteStreamingDistributionRequest(input *DeleteStreamingDistributionInput) DeleteStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteStreamingDistribution,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2017-03-25/streaming-distribution/{Id}",
+		HTTPPath:   "/2017-10-30/streaming-distribution/{Id}",
 	}
 
 	if input == nil {
@@ -586,7 +893,7 @@ func (c *CloudFront) DeleteStreamingDistributionRequest(input *DeleteStreamingDi
 	return DeleteStreamingDistributionRequest{Request: req, Input: input, Copy: c.DeleteStreamingDistributionRequest}
 }
 
-const opGetCloudFrontOriginAccessIdentity = "GetCloudFrontOriginAccessIdentity2017_03_25"
+const opGetCloudFrontOriginAccessIdentity = "GetCloudFrontOriginAccessIdentity2017_10_30"
 
 // GetCloudFrontOriginAccessIdentityRequest is a API request type for the GetCloudFrontOriginAccessIdentity API operation.
 type GetCloudFrontOriginAccessIdentityRequest struct {
@@ -617,12 +924,12 @@ func (r GetCloudFrontOriginAccessIdentityRequest) Send() (*GetCloudFrontOriginAc
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentity
 func (c *CloudFront) GetCloudFrontOriginAccessIdentityRequest(input *GetCloudFrontOriginAccessIdentityInput) GetCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opGetCloudFrontOriginAccessIdentity,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront/{Id}",
+		HTTPPath:   "/2017-10-30/origin-access-identity/cloudfront/{Id}",
 	}
 
 	if input == nil {
@@ -636,7 +943,7 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityRequest(input *GetCloudFro
 	return GetCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.GetCloudFrontOriginAccessIdentityRequest}
 }
 
-const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIdentityConfig2017_03_25"
+const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIdentityConfig2017_10_30"
 
 // GetCloudFrontOriginAccessIdentityConfigRequest is a API request type for the GetCloudFrontOriginAccessIdentityConfig API operation.
 type GetCloudFrontOriginAccessIdentityConfigRequest struct {
@@ -667,12 +974,12 @@ func (r GetCloudFrontOriginAccessIdentityConfigRequest) Send() (*GetCloudFrontOr
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentityConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityConfig
 func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCloudFrontOriginAccessIdentityConfigInput) GetCloudFrontOriginAccessIdentityConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetCloudFrontOriginAccessIdentityConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront/{Id}/config",
+		HTTPPath:   "/2017-10-30/origin-access-identity/cloudfront/{Id}/config",
 	}
 
 	if input == nil {
@@ -686,7 +993,7 @@ func (c *CloudFront) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCl
 	return GetCloudFrontOriginAccessIdentityConfigRequest{Request: req, Input: input, Copy: c.GetCloudFrontOriginAccessIdentityConfigRequest}
 }
 
-const opGetDistribution = "GetDistribution2017_03_25"
+const opGetDistribution = "GetDistribution2017_10_30"
 
 // GetDistributionRequest is a API request type for the GetDistribution API operation.
 type GetDistributionRequest struct {
@@ -717,12 +1024,12 @@ func (r GetDistributionRequest) Send() (*GetDistributionOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistribution
 func (c *CloudFront) GetDistributionRequest(input *GetDistributionInput) GetDistributionRequest {
 	op := &aws.Operation{
 		Name:       opGetDistribution,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/distribution/{Id}",
+		HTTPPath:   "/2017-10-30/distribution/{Id}",
 	}
 
 	if input == nil {
@@ -736,7 +1043,7 @@ func (c *CloudFront) GetDistributionRequest(input *GetDistributionInput) GetDist
 	return GetDistributionRequest{Request: req, Input: input, Copy: c.GetDistributionRequest}
 }
 
-const opGetDistributionConfig = "GetDistributionConfig2017_03_25"
+const opGetDistributionConfig = "GetDistributionConfig2017_10_30"
 
 // GetDistributionConfigRequest is a API request type for the GetDistributionConfig API operation.
 type GetDistributionConfigRequest struct {
@@ -767,12 +1074,12 @@ func (r GetDistributionConfigRequest) Send() (*GetDistributionConfigOutput, erro
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistributionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionConfig
 func (c *CloudFront) GetDistributionConfigRequest(input *GetDistributionConfigInput) GetDistributionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetDistributionConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/distribution/{Id}/config",
+		HTTPPath:   "/2017-10-30/distribution/{Id}/config",
 	}
 
 	if input == nil {
@@ -786,7 +1093,207 @@ func (c *CloudFront) GetDistributionConfigRequest(input *GetDistributionConfigIn
 	return GetDistributionConfigRequest{Request: req, Input: input, Copy: c.GetDistributionConfigRequest}
 }
 
-const opGetInvalidation = "GetInvalidation2017_03_25"
+const opGetFieldLevelEncryption = "GetFieldLevelEncryption2017_10_30"
+
+// GetFieldLevelEncryptionRequest is a API request type for the GetFieldLevelEncryption API operation.
+type GetFieldLevelEncryptionRequest struct {
+	*aws.Request
+	Input *GetFieldLevelEncryptionInput
+	Copy  func(*GetFieldLevelEncryptionInput) GetFieldLevelEncryptionRequest
+}
+
+// Send marshals and sends the GetFieldLevelEncryption API request.
+func (r GetFieldLevelEncryptionRequest) Send() (*GetFieldLevelEncryptionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFieldLevelEncryptionOutput), nil
+}
+
+// GetFieldLevelEncryptionRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Get the field-level encryption configuration information.
+//
+//    // Example sending a request using the GetFieldLevelEncryptionRequest method.
+//    req := client.GetFieldLevelEncryptionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryption
+func (c *CloudFront) GetFieldLevelEncryptionRequest(input *GetFieldLevelEncryptionInput) GetFieldLevelEncryptionRequest {
+	op := &aws.Operation{
+		Name:       opGetFieldLevelEncryption,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2017-10-30/field-level-encryption/{Id}",
+	}
+
+	if input == nil {
+		input = &GetFieldLevelEncryptionInput{}
+	}
+
+	output := &GetFieldLevelEncryptionOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetFieldLevelEncryptionRequest{Request: req, Input: input, Copy: c.GetFieldLevelEncryptionRequest}
+}
+
+const opGetFieldLevelEncryptionConfig = "GetFieldLevelEncryptionConfig2017_10_30"
+
+// GetFieldLevelEncryptionConfigRequest is a API request type for the GetFieldLevelEncryptionConfig API operation.
+type GetFieldLevelEncryptionConfigRequest struct {
+	*aws.Request
+	Input *GetFieldLevelEncryptionConfigInput
+	Copy  func(*GetFieldLevelEncryptionConfigInput) GetFieldLevelEncryptionConfigRequest
+}
+
+// Send marshals and sends the GetFieldLevelEncryptionConfig API request.
+func (r GetFieldLevelEncryptionConfigRequest) Send() (*GetFieldLevelEncryptionConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFieldLevelEncryptionConfigOutput), nil
+}
+
+// GetFieldLevelEncryptionConfigRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Get the field-level encryption configuration information.
+//
+//    // Example sending a request using the GetFieldLevelEncryptionConfigRequest method.
+//    req := client.GetFieldLevelEncryptionConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionConfig
+func (c *CloudFront) GetFieldLevelEncryptionConfigRequest(input *GetFieldLevelEncryptionConfigInput) GetFieldLevelEncryptionConfigRequest {
+	op := &aws.Operation{
+		Name:       opGetFieldLevelEncryptionConfig,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2017-10-30/field-level-encryption/{Id}/config",
+	}
+
+	if input == nil {
+		input = &GetFieldLevelEncryptionConfigInput{}
+	}
+
+	output := &GetFieldLevelEncryptionConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetFieldLevelEncryptionConfigRequest{Request: req, Input: input, Copy: c.GetFieldLevelEncryptionConfigRequest}
+}
+
+const opGetFieldLevelEncryptionProfile = "GetFieldLevelEncryptionProfile2017_10_30"
+
+// GetFieldLevelEncryptionProfileRequest is a API request type for the GetFieldLevelEncryptionProfile API operation.
+type GetFieldLevelEncryptionProfileRequest struct {
+	*aws.Request
+	Input *GetFieldLevelEncryptionProfileInput
+	Copy  func(*GetFieldLevelEncryptionProfileInput) GetFieldLevelEncryptionProfileRequest
+}
+
+// Send marshals and sends the GetFieldLevelEncryptionProfile API request.
+func (r GetFieldLevelEncryptionProfileRequest) Send() (*GetFieldLevelEncryptionProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFieldLevelEncryptionProfileOutput), nil
+}
+
+// GetFieldLevelEncryptionProfileRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Get the field-level encryption profile information.
+//
+//    // Example sending a request using the GetFieldLevelEncryptionProfileRequest method.
+//    req := client.GetFieldLevelEncryptionProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfile
+func (c *CloudFront) GetFieldLevelEncryptionProfileRequest(input *GetFieldLevelEncryptionProfileInput) GetFieldLevelEncryptionProfileRequest {
+	op := &aws.Operation{
+		Name:       opGetFieldLevelEncryptionProfile,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2017-10-30/field-level-encryption-profile/{Id}",
+	}
+
+	if input == nil {
+		input = &GetFieldLevelEncryptionProfileInput{}
+	}
+
+	output := &GetFieldLevelEncryptionProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetFieldLevelEncryptionProfileRequest{Request: req, Input: input, Copy: c.GetFieldLevelEncryptionProfileRequest}
+}
+
+const opGetFieldLevelEncryptionProfileConfig = "GetFieldLevelEncryptionProfileConfig2017_10_30"
+
+// GetFieldLevelEncryptionProfileConfigRequest is a API request type for the GetFieldLevelEncryptionProfileConfig API operation.
+type GetFieldLevelEncryptionProfileConfigRequest struct {
+	*aws.Request
+	Input *GetFieldLevelEncryptionProfileConfigInput
+	Copy  func(*GetFieldLevelEncryptionProfileConfigInput) GetFieldLevelEncryptionProfileConfigRequest
+}
+
+// Send marshals and sends the GetFieldLevelEncryptionProfileConfig API request.
+func (r GetFieldLevelEncryptionProfileConfigRequest) Send() (*GetFieldLevelEncryptionProfileConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFieldLevelEncryptionProfileConfigOutput), nil
+}
+
+// GetFieldLevelEncryptionProfileConfigRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Get the field-level encryption profile configuration information.
+//
+//    // Example sending a request using the GetFieldLevelEncryptionProfileConfigRequest method.
+//    req := client.GetFieldLevelEncryptionProfileConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileConfig
+func (c *CloudFront) GetFieldLevelEncryptionProfileConfigRequest(input *GetFieldLevelEncryptionProfileConfigInput) GetFieldLevelEncryptionProfileConfigRequest {
+	op := &aws.Operation{
+		Name:       opGetFieldLevelEncryptionProfileConfig,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2017-10-30/field-level-encryption-profile/{Id}/config",
+	}
+
+	if input == nil {
+		input = &GetFieldLevelEncryptionProfileConfigInput{}
+	}
+
+	output := &GetFieldLevelEncryptionProfileConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetFieldLevelEncryptionProfileConfigRequest{Request: req, Input: input, Copy: c.GetFieldLevelEncryptionProfileConfigRequest}
+}
+
+const opGetInvalidation = "GetInvalidation2017_10_30"
 
 // GetInvalidationRequest is a API request type for the GetInvalidation API operation.
 type GetInvalidationRequest struct {
@@ -817,12 +1324,12 @@ func (r GetInvalidationRequest) Send() (*GetInvalidationOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetInvalidation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetInvalidation
 func (c *CloudFront) GetInvalidationRequest(input *GetInvalidationInput) GetInvalidationRequest {
 	op := &aws.Operation{
 		Name:       opGetInvalidation,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/distribution/{DistributionId}/invalidation/{Id}",
+		HTTPPath:   "/2017-10-30/distribution/{DistributionId}/invalidation/{Id}",
 	}
 
 	if input == nil {
@@ -836,7 +1343,107 @@ func (c *CloudFront) GetInvalidationRequest(input *GetInvalidationInput) GetInva
 	return GetInvalidationRequest{Request: req, Input: input, Copy: c.GetInvalidationRequest}
 }
 
-const opGetStreamingDistribution = "GetStreamingDistribution2017_03_25"
+const opGetPublicKey = "GetPublicKey2017_10_30"
+
+// GetPublicKeyRequest is a API request type for the GetPublicKey API operation.
+type GetPublicKeyRequest struct {
+	*aws.Request
+	Input *GetPublicKeyInput
+	Copy  func(*GetPublicKeyInput) GetPublicKeyRequest
+}
+
+// Send marshals and sends the GetPublicKey API request.
+func (r GetPublicKeyRequest) Send() (*GetPublicKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPublicKeyOutput), nil
+}
+
+// GetPublicKeyRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Get the public key information.
+//
+//    // Example sending a request using the GetPublicKeyRequest method.
+//    req := client.GetPublicKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKey
+func (c *CloudFront) GetPublicKeyRequest(input *GetPublicKeyInput) GetPublicKeyRequest {
+	op := &aws.Operation{
+		Name:       opGetPublicKey,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2017-10-30/public-key/{Id}",
+	}
+
+	if input == nil {
+		input = &GetPublicKeyInput{}
+	}
+
+	output := &GetPublicKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetPublicKeyRequest{Request: req, Input: input, Copy: c.GetPublicKeyRequest}
+}
+
+const opGetPublicKeyConfig = "GetPublicKeyConfig2017_10_30"
+
+// GetPublicKeyConfigRequest is a API request type for the GetPublicKeyConfig API operation.
+type GetPublicKeyConfigRequest struct {
+	*aws.Request
+	Input *GetPublicKeyConfigInput
+	Copy  func(*GetPublicKeyConfigInput) GetPublicKeyConfigRequest
+}
+
+// Send marshals and sends the GetPublicKeyConfig API request.
+func (r GetPublicKeyConfigRequest) Send() (*GetPublicKeyConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetPublicKeyConfigOutput), nil
+}
+
+// GetPublicKeyConfigRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Return public key configuration informaation
+//
+//    // Example sending a request using the GetPublicKeyConfigRequest method.
+//    req := client.GetPublicKeyConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyConfig
+func (c *CloudFront) GetPublicKeyConfigRequest(input *GetPublicKeyConfigInput) GetPublicKeyConfigRequest {
+	op := &aws.Operation{
+		Name:       opGetPublicKeyConfig,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2017-10-30/public-key/{Id}/config",
+	}
+
+	if input == nil {
+		input = &GetPublicKeyConfigInput{}
+	}
+
+	output := &GetPublicKeyConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetPublicKeyConfigRequest{Request: req, Input: input, Copy: c.GetPublicKeyConfigRequest}
+}
+
+const opGetStreamingDistribution = "GetStreamingDistribution2017_10_30"
 
 // GetStreamingDistributionRequest is a API request type for the GetStreamingDistribution API operation.
 type GetStreamingDistributionRequest struct {
@@ -868,12 +1475,12 @@ func (r GetStreamingDistributionRequest) Send() (*GetStreamingDistributionOutput
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistribution
 func (c *CloudFront) GetStreamingDistributionRequest(input *GetStreamingDistributionInput) GetStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opGetStreamingDistribution,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/streaming-distribution/{Id}",
+		HTTPPath:   "/2017-10-30/streaming-distribution/{Id}",
 	}
 
 	if input == nil {
@@ -887,7 +1494,7 @@ func (c *CloudFront) GetStreamingDistributionRequest(input *GetStreamingDistribu
 	return GetStreamingDistributionRequest{Request: req, Input: input, Copy: c.GetStreamingDistributionRequest}
 }
 
-const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2017_03_25"
+const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2017_10_30"
 
 // GetStreamingDistributionConfigRequest is a API request type for the GetStreamingDistributionConfig API operation.
 type GetStreamingDistributionConfigRequest struct {
@@ -918,12 +1525,12 @@ func (r GetStreamingDistributionConfigRequest) Send() (*GetStreamingDistribution
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistributionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionConfig
 func (c *CloudFront) GetStreamingDistributionConfigRequest(input *GetStreamingDistributionConfigInput) GetStreamingDistributionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetStreamingDistributionConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/streaming-distribution/{Id}/config",
+		HTTPPath:   "/2017-10-30/streaming-distribution/{Id}/config",
 	}
 
 	if input == nil {
@@ -937,7 +1544,7 @@ func (c *CloudFront) GetStreamingDistributionConfigRequest(input *GetStreamingDi
 	return GetStreamingDistributionConfigRequest{Request: req, Input: input, Copy: c.GetStreamingDistributionConfigRequest}
 }
 
-const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2017_03_25"
+const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2017_10_30"
 
 // ListCloudFrontOriginAccessIdentitiesRequest is a API request type for the ListCloudFrontOriginAccessIdentities API operation.
 type ListCloudFrontOriginAccessIdentitiesRequest struct {
@@ -968,12 +1575,12 @@ func (r ListCloudFrontOriginAccessIdentitiesRequest) Send() (*ListCloudFrontOrig
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListCloudFrontOriginAccessIdentities
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListCloudFrontOriginAccessIdentities
 func (c *CloudFront) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFrontOriginAccessIdentitiesInput) ListCloudFrontOriginAccessIdentitiesRequest {
 	op := &aws.Operation{
 		Name:       opListCloudFrontOriginAccessIdentities,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront",
+		HTTPPath:   "/2017-10-30/origin-access-identity/cloudfront",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"CloudFrontOriginAccessIdentityList.NextMarker"},
@@ -1039,7 +1646,7 @@ func (p *ListCloudFrontOriginAccessIdentitiesPager) CurrentPage() *ListCloudFron
 	return p.Pager.CurrentPage().(*ListCloudFrontOriginAccessIdentitiesOutput)
 }
 
-const opListDistributions = "ListDistributions2017_03_25"
+const opListDistributions = "ListDistributions2017_10_30"
 
 // ListDistributionsRequest is a API request type for the ListDistributions API operation.
 type ListDistributionsRequest struct {
@@ -1070,12 +1677,12 @@ func (r ListDistributionsRequest) Send() (*ListDistributionsOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributions
 func (c *CloudFront) ListDistributionsRequest(input *ListDistributionsInput) ListDistributionsRequest {
 	op := &aws.Operation{
 		Name:       opListDistributions,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/distribution",
+		HTTPPath:   "/2017-10-30/distribution",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"DistributionList.NextMarker"},
@@ -1141,7 +1748,7 @@ func (p *ListDistributionsPager) CurrentPage() *ListDistributionsOutput {
 	return p.Pager.CurrentPage().(*ListDistributionsOutput)
 }
 
-const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2017_03_25"
+const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2017_10_30"
 
 // ListDistributionsByWebACLIdRequest is a API request type for the ListDistributionsByWebACLId API operation.
 type ListDistributionsByWebACLIdRequest struct {
@@ -1172,12 +1779,12 @@ func (r ListDistributionsByWebACLIdRequest) Send() (*ListDistributionsByWebACLId
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributionsByWebACLId
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsByWebACLId
 func (c *CloudFront) ListDistributionsByWebACLIdRequest(input *ListDistributionsByWebACLIdInput) ListDistributionsByWebACLIdRequest {
 	op := &aws.Operation{
 		Name:       opListDistributionsByWebACLId,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/distributionsByWebACLId/{WebACLId}",
+		HTTPPath:   "/2017-10-30/distributionsByWebACLId/{WebACLId}",
 	}
 
 	if input == nil {
@@ -1191,7 +1798,109 @@ func (c *CloudFront) ListDistributionsByWebACLIdRequest(input *ListDistributions
 	return ListDistributionsByWebACLIdRequest{Request: req, Input: input, Copy: c.ListDistributionsByWebACLIdRequest}
 }
 
-const opListInvalidations = "ListInvalidations2017_03_25"
+const opListFieldLevelEncryptionConfigs = "ListFieldLevelEncryptionConfigs2017_10_30"
+
+// ListFieldLevelEncryptionConfigsRequest is a API request type for the ListFieldLevelEncryptionConfigs API operation.
+type ListFieldLevelEncryptionConfigsRequest struct {
+	*aws.Request
+	Input *ListFieldLevelEncryptionConfigsInput
+	Copy  func(*ListFieldLevelEncryptionConfigsInput) ListFieldLevelEncryptionConfigsRequest
+}
+
+// Send marshals and sends the ListFieldLevelEncryptionConfigs API request.
+func (r ListFieldLevelEncryptionConfigsRequest) Send() (*ListFieldLevelEncryptionConfigsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFieldLevelEncryptionConfigsOutput), nil
+}
+
+// ListFieldLevelEncryptionConfigsRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// List all field-level encryption configurations that have been created in
+// CloudFront for this account.
+//
+//    // Example sending a request using the ListFieldLevelEncryptionConfigsRequest method.
+//    req := client.ListFieldLevelEncryptionConfigsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionConfigs
+func (c *CloudFront) ListFieldLevelEncryptionConfigsRequest(input *ListFieldLevelEncryptionConfigsInput) ListFieldLevelEncryptionConfigsRequest {
+	op := &aws.Operation{
+		Name:       opListFieldLevelEncryptionConfigs,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2017-10-30/field-level-encryption",
+	}
+
+	if input == nil {
+		input = &ListFieldLevelEncryptionConfigsInput{}
+	}
+
+	output := &ListFieldLevelEncryptionConfigsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListFieldLevelEncryptionConfigsRequest{Request: req, Input: input, Copy: c.ListFieldLevelEncryptionConfigsRequest}
+}
+
+const opListFieldLevelEncryptionProfiles = "ListFieldLevelEncryptionProfiles2017_10_30"
+
+// ListFieldLevelEncryptionProfilesRequest is a API request type for the ListFieldLevelEncryptionProfiles API operation.
+type ListFieldLevelEncryptionProfilesRequest struct {
+	*aws.Request
+	Input *ListFieldLevelEncryptionProfilesInput
+	Copy  func(*ListFieldLevelEncryptionProfilesInput) ListFieldLevelEncryptionProfilesRequest
+}
+
+// Send marshals and sends the ListFieldLevelEncryptionProfiles API request.
+func (r ListFieldLevelEncryptionProfilesRequest) Send() (*ListFieldLevelEncryptionProfilesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFieldLevelEncryptionProfilesOutput), nil
+}
+
+// ListFieldLevelEncryptionProfilesRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Request a list of field-level encryption profiles that have been created
+// in CloudFront for this account.
+//
+//    // Example sending a request using the ListFieldLevelEncryptionProfilesRequest method.
+//    req := client.ListFieldLevelEncryptionProfilesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionProfiles
+func (c *CloudFront) ListFieldLevelEncryptionProfilesRequest(input *ListFieldLevelEncryptionProfilesInput) ListFieldLevelEncryptionProfilesRequest {
+	op := &aws.Operation{
+		Name:       opListFieldLevelEncryptionProfiles,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2017-10-30/field-level-encryption-profile",
+	}
+
+	if input == nil {
+		input = &ListFieldLevelEncryptionProfilesInput{}
+	}
+
+	output := &ListFieldLevelEncryptionProfilesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListFieldLevelEncryptionProfilesRequest{Request: req, Input: input, Copy: c.ListFieldLevelEncryptionProfilesRequest}
+}
+
+const opListInvalidations = "ListInvalidations2017_10_30"
 
 // ListInvalidationsRequest is a API request type for the ListInvalidations API operation.
 type ListInvalidationsRequest struct {
@@ -1222,12 +1931,12 @@ func (r ListInvalidationsRequest) Send() (*ListInvalidationsOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListInvalidations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListInvalidations
 func (c *CloudFront) ListInvalidationsRequest(input *ListInvalidationsInput) ListInvalidationsRequest {
 	op := &aws.Operation{
 		Name:       opListInvalidations,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/distribution/{DistributionId}/invalidation",
+		HTTPPath:   "/2017-10-30/distribution/{DistributionId}/invalidation",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"InvalidationList.NextMarker"},
@@ -1293,7 +2002,57 @@ func (p *ListInvalidationsPager) CurrentPage() *ListInvalidationsOutput {
 	return p.Pager.CurrentPage().(*ListInvalidationsOutput)
 }
 
-const opListStreamingDistributions = "ListStreamingDistributions2017_03_25"
+const opListPublicKeys = "ListPublicKeys2017_10_30"
+
+// ListPublicKeysRequest is a API request type for the ListPublicKeys API operation.
+type ListPublicKeysRequest struct {
+	*aws.Request
+	Input *ListPublicKeysInput
+	Copy  func(*ListPublicKeysInput) ListPublicKeysRequest
+}
+
+// Send marshals and sends the ListPublicKeys API request.
+func (r ListPublicKeysRequest) Send() (*ListPublicKeysOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListPublicKeysOutput), nil
+}
+
+// ListPublicKeysRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// List all public keys that have been added to CloudFront for this account.
+//
+//    // Example sending a request using the ListPublicKeysRequest method.
+//    req := client.ListPublicKeysRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListPublicKeys
+func (c *CloudFront) ListPublicKeysRequest(input *ListPublicKeysInput) ListPublicKeysRequest {
+	op := &aws.Operation{
+		Name:       opListPublicKeys,
+		HTTPMethod: "GET",
+		HTTPPath:   "/2017-10-30/public-key",
+	}
+
+	if input == nil {
+		input = &ListPublicKeysInput{}
+	}
+
+	output := &ListPublicKeysOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListPublicKeysRequest{Request: req, Input: input, Copy: c.ListPublicKeysRequest}
+}
+
+const opListStreamingDistributions = "ListStreamingDistributions2017_10_30"
 
 // ListStreamingDistributionsRequest is a API request type for the ListStreamingDistributions API operation.
 type ListStreamingDistributionsRequest struct {
@@ -1324,12 +2083,12 @@ func (r ListStreamingDistributionsRequest) Send() (*ListStreamingDistributionsOu
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListStreamingDistributions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListStreamingDistributions
 func (c *CloudFront) ListStreamingDistributionsRequest(input *ListStreamingDistributionsInput) ListStreamingDistributionsRequest {
 	op := &aws.Operation{
 		Name:       opListStreamingDistributions,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/streaming-distribution",
+		HTTPPath:   "/2017-10-30/streaming-distribution",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"StreamingDistributionList.NextMarker"},
@@ -1395,7 +2154,7 @@ func (p *ListStreamingDistributionsPager) CurrentPage() *ListStreamingDistributi
 	return p.Pager.CurrentPage().(*ListStreamingDistributionsOutput)
 }
 
-const opListTagsForResource = "ListTagsForResource2017_03_25"
+const opListTagsForResource = "ListTagsForResource2017_10_30"
 
 // ListTagsForResourceRequest is a API request type for the ListTagsForResource API operation.
 type ListTagsForResourceRequest struct {
@@ -1426,12 +2185,12 @@ func (r ListTagsForResourceRequest) Send() (*ListTagsForResourceOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListTagsForResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListTagsForResource
 func (c *CloudFront) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2017-03-25/tagging",
+		HTTPPath:   "/2017-10-30/tagging",
 	}
 
 	if input == nil {
@@ -1445,7 +2204,7 @@ func (c *CloudFront) ListTagsForResourceRequest(input *ListTagsForResourceInput)
 	return ListTagsForResourceRequest{Request: req, Input: input, Copy: c.ListTagsForResourceRequest}
 }
 
-const opTagResource = "TagResource2017_03_25"
+const opTagResource = "TagResource2017_10_30"
 
 // TagResourceRequest is a API request type for the TagResource API operation.
 type TagResourceRequest struct {
@@ -1476,12 +2235,12 @@ func (r TagResourceRequest) Send() (*TagResourceOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/TagResource
 func (c *CloudFront) TagResourceRequest(input *TagResourceInput) TagResourceRequest {
 	op := &aws.Operation{
 		Name:       opTagResource,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2017-03-25/tagging?Operation=Tag",
+		HTTPPath:   "/2017-10-30/tagging?Operation=Tag",
 	}
 
 	if input == nil {
@@ -1497,7 +2256,7 @@ func (c *CloudFront) TagResourceRequest(input *TagResourceInput) TagResourceRequ
 	return TagResourceRequest{Request: req, Input: input, Copy: c.TagResourceRequest}
 }
 
-const opUntagResource = "UntagResource2017_03_25"
+const opUntagResource = "UntagResource2017_10_30"
 
 // UntagResourceRequest is a API request type for the UntagResource API operation.
 type UntagResourceRequest struct {
@@ -1528,12 +2287,12 @@ func (r UntagResourceRequest) Send() (*UntagResourceOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UntagResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UntagResource
 func (c *CloudFront) UntagResourceRequest(input *UntagResourceInput) UntagResourceRequest {
 	op := &aws.Operation{
 		Name:       opUntagResource,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2017-03-25/tagging?Operation=Untag",
+		HTTPPath:   "/2017-10-30/tagging?Operation=Untag",
 	}
 
 	if input == nil {
@@ -1549,7 +2308,7 @@ func (c *CloudFront) UntagResourceRequest(input *UntagResourceInput) UntagResour
 	return UntagResourceRequest{Request: req, Input: input, Copy: c.UntagResourceRequest}
 }
 
-const opUpdateCloudFrontOriginAccessIdentity = "UpdateCloudFrontOriginAccessIdentity2017_03_25"
+const opUpdateCloudFrontOriginAccessIdentity = "UpdateCloudFrontOriginAccessIdentity2017_10_30"
 
 // UpdateCloudFrontOriginAccessIdentityRequest is a API request type for the UpdateCloudFrontOriginAccessIdentity API operation.
 type UpdateCloudFrontOriginAccessIdentityRequest struct {
@@ -1580,12 +2339,12 @@ func (r UpdateCloudFrontOriginAccessIdentityRequest) Send() (*UpdateCloudFrontOr
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateCloudFrontOriginAccessIdentity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateCloudFrontOriginAccessIdentity
 func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCloudFrontOriginAccessIdentityInput) UpdateCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCloudFrontOriginAccessIdentity,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2017-03-25/origin-access-identity/cloudfront/{Id}/config",
+		HTTPPath:   "/2017-10-30/origin-access-identity/cloudfront/{Id}/config",
 	}
 
 	if input == nil {
@@ -1599,7 +2358,7 @@ func (c *CloudFront) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCl
 	return UpdateCloudFrontOriginAccessIdentityRequest{Request: req, Input: input, Copy: c.UpdateCloudFrontOriginAccessIdentityRequest}
 }
 
-const opUpdateDistribution = "UpdateDistribution2017_03_25"
+const opUpdateDistribution = "UpdateDistribution2017_10_30"
 
 // UpdateDistributionRequest is a API request type for the UpdateDistribution API operation.
 type UpdateDistributionRequest struct {
@@ -1679,12 +2438,12 @@ func (r UpdateDistributionRequest) Send() (*UpdateDistributionOutput, error) {
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateDistribution
 func (c *CloudFront) UpdateDistributionRequest(input *UpdateDistributionInput) UpdateDistributionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDistribution,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2017-03-25/distribution/{Id}/config",
+		HTTPPath:   "/2017-10-30/distribution/{Id}/config",
 	}
 
 	if input == nil {
@@ -1698,7 +2457,158 @@ func (c *CloudFront) UpdateDistributionRequest(input *UpdateDistributionInput) U
 	return UpdateDistributionRequest{Request: req, Input: input, Copy: c.UpdateDistributionRequest}
 }
 
-const opUpdateStreamingDistribution = "UpdateStreamingDistribution2017_03_25"
+const opUpdateFieldLevelEncryptionConfig = "UpdateFieldLevelEncryptionConfig2017_10_30"
+
+// UpdateFieldLevelEncryptionConfigRequest is a API request type for the UpdateFieldLevelEncryptionConfig API operation.
+type UpdateFieldLevelEncryptionConfigRequest struct {
+	*aws.Request
+	Input *UpdateFieldLevelEncryptionConfigInput
+	Copy  func(*UpdateFieldLevelEncryptionConfigInput) UpdateFieldLevelEncryptionConfigRequest
+}
+
+// Send marshals and sends the UpdateFieldLevelEncryptionConfig API request.
+func (r UpdateFieldLevelEncryptionConfigRequest) Send() (*UpdateFieldLevelEncryptionConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFieldLevelEncryptionConfigOutput), nil
+}
+
+// UpdateFieldLevelEncryptionConfigRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Update a field-level encryption configuration.
+//
+//    // Example sending a request using the UpdateFieldLevelEncryptionConfigRequest method.
+//    req := client.UpdateFieldLevelEncryptionConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionConfig
+func (c *CloudFront) UpdateFieldLevelEncryptionConfigRequest(input *UpdateFieldLevelEncryptionConfigInput) UpdateFieldLevelEncryptionConfigRequest {
+	op := &aws.Operation{
+		Name:       opUpdateFieldLevelEncryptionConfig,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2017-10-30/field-level-encryption/{Id}/config",
+	}
+
+	if input == nil {
+		input = &UpdateFieldLevelEncryptionConfigInput{}
+	}
+
+	output := &UpdateFieldLevelEncryptionConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateFieldLevelEncryptionConfigRequest{Request: req, Input: input, Copy: c.UpdateFieldLevelEncryptionConfigRequest}
+}
+
+const opUpdateFieldLevelEncryptionProfile = "UpdateFieldLevelEncryptionProfile2017_10_30"
+
+// UpdateFieldLevelEncryptionProfileRequest is a API request type for the UpdateFieldLevelEncryptionProfile API operation.
+type UpdateFieldLevelEncryptionProfileRequest struct {
+	*aws.Request
+	Input *UpdateFieldLevelEncryptionProfileInput
+	Copy  func(*UpdateFieldLevelEncryptionProfileInput) UpdateFieldLevelEncryptionProfileRequest
+}
+
+// Send marshals and sends the UpdateFieldLevelEncryptionProfile API request.
+func (r UpdateFieldLevelEncryptionProfileRequest) Send() (*UpdateFieldLevelEncryptionProfileOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFieldLevelEncryptionProfileOutput), nil
+}
+
+// UpdateFieldLevelEncryptionProfileRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Update a field-level encryption profile.
+//
+//    // Example sending a request using the UpdateFieldLevelEncryptionProfileRequest method.
+//    req := client.UpdateFieldLevelEncryptionProfileRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionProfile
+func (c *CloudFront) UpdateFieldLevelEncryptionProfileRequest(input *UpdateFieldLevelEncryptionProfileInput) UpdateFieldLevelEncryptionProfileRequest {
+	op := &aws.Operation{
+		Name:       opUpdateFieldLevelEncryptionProfile,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2017-10-30/field-level-encryption-profile/{Id}/config",
+	}
+
+	if input == nil {
+		input = &UpdateFieldLevelEncryptionProfileInput{}
+	}
+
+	output := &UpdateFieldLevelEncryptionProfileOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateFieldLevelEncryptionProfileRequest{Request: req, Input: input, Copy: c.UpdateFieldLevelEncryptionProfileRequest}
+}
+
+const opUpdatePublicKey = "UpdatePublicKey2017_10_30"
+
+// UpdatePublicKeyRequest is a API request type for the UpdatePublicKey API operation.
+type UpdatePublicKeyRequest struct {
+	*aws.Request
+	Input *UpdatePublicKeyInput
+	Copy  func(*UpdatePublicKeyInput) UpdatePublicKeyRequest
+}
+
+// Send marshals and sends the UpdatePublicKey API request.
+func (r UpdatePublicKeyRequest) Send() (*UpdatePublicKeyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdatePublicKeyOutput), nil
+}
+
+// UpdatePublicKeyRequest returns a request value for making API operation for
+// Amazon CloudFront.
+//
+// Update public key information. Note that the only value you can change is
+// the comment.
+//
+//    // Example sending a request using the UpdatePublicKeyRequest method.
+//    req := client.UpdatePublicKeyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdatePublicKey
+func (c *CloudFront) UpdatePublicKeyRequest(input *UpdatePublicKeyInput) UpdatePublicKeyRequest {
+	op := &aws.Operation{
+		Name:       opUpdatePublicKey,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/2017-10-30/public-key/{Id}/config",
+	}
+
+	if input == nil {
+		input = &UpdatePublicKeyInput{}
+	}
+
+	output := &UpdatePublicKeyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdatePublicKeyRequest{Request: req, Input: input, Copy: c.UpdatePublicKeyRequest}
+}
+
+const opUpdateStreamingDistribution = "UpdateStreamingDistribution2017_10_30"
 
 // UpdateStreamingDistributionRequest is a API request type for the UpdateStreamingDistribution API operation.
 type UpdateStreamingDistributionRequest struct {
@@ -1729,12 +2639,12 @@ func (r UpdateStreamingDistributionRequest) Send() (*UpdateStreamingDistribution
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateStreamingDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateStreamingDistribution
 func (c *CloudFront) UpdateStreamingDistributionRequest(input *UpdateStreamingDistributionInput) UpdateStreamingDistributionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateStreamingDistribution,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2017-03-25/streaming-distribution/{Id}/config",
+		HTTPPath:   "/2017-10-30/streaming-distribution/{Id}/config",
 	}
 
 	if input == nil {
@@ -1760,7 +2670,7 @@ func (c *CloudFront) UpdateStreamingDistributionRequest(input *UpdateStreamingDi
 //
 // For more information, see Serving Private Content through CloudFront (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ActiveTrustedSigners
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ActiveTrustedSigners
 type ActiveTrustedSigners struct {
 	_ struct{} `type:"structure"`
 
@@ -1829,7 +2739,7 @@ func (s ActiveTrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about CNAMEs (alternate domain names),
 // if any, for this distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Aliases
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Aliases
 type Aliases struct {
 	_ struct{} `type:"structure"`
 
@@ -1906,7 +2816,7 @@ func (s Aliases) MarshalFields(e protocol.FieldEncoder) error {
 // S3 bucket or to your custom origin so users can't perform operations that
 // you don't want them to. For example, you might not want users to have permissions
 // to delete objects from your origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/AllowedMethods
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/AllowedMethods
 type AllowedMethods struct {
 	_ struct{} `type:"structure"`
 
@@ -2024,7 +2934,7 @@ func (s AllowedMethods) MarshalFields(e protocol.FieldEncoder) error {
 //
 // For more information about cache behaviors, see Cache Behaviors (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CacheBehavior
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CacheBehavior
 type CacheBehavior struct {
 	_ struct{} `type:"structure"`
 
@@ -2059,6 +2969,8 @@ type CacheBehavior struct {
 	// Long Objects and Errors Stay in a CloudFront Edge Cache (Expiration) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	DefaultTTL *int64 `type:"long"`
+
+	FieldLevelEncryptionId *string `type:"string"`
 
 	// A complex type that specifies how CloudFront handles query strings and cookies.
 	//
@@ -2258,6 +3170,12 @@ func (s CacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DefaultTTL", protocol.Int64Value(v), metadata)
 	}
+	if s.FieldLevelEncryptionId != nil {
+		v := *s.FieldLevelEncryptionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FieldLevelEncryptionId", protocol.StringValue(v), metadata)
+	}
 	if s.ForwardedValues != nil {
 		v := s.ForwardedValues
 
@@ -2316,7 +3234,7 @@ func (s CacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains zero or more CacheBehavior elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CacheBehaviors
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CacheBehaviors
 type CacheBehaviors struct {
 	_ struct{} `type:"structure"`
 
@@ -2394,7 +3312,7 @@ func (s CacheBehaviors) MarshalFields(e protocol.FieldEncoder) error {
 // If you pick the second choice for your Amazon S3 Origin, you may need to
 // forward Access-Control-Request-Method, Access-Control-Request-Headers, and
 // Origin headers for the responses to be cached correctly.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CachedMethods
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CachedMethods
 type CachedMethods struct {
 	_ struct{} `type:"structure"`
 
@@ -2463,12 +3381,213 @@ func (s CachedMethods) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A field-level encryption content type profile.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ContentTypeProfile
+type ContentTypeProfile struct {
+	_ struct{} `type:"structure"`
+
+	// The content type for a field-level encryption content type-profile mapping.
+	//
+	// ContentType is a required field
+	ContentType *string `type:"string" required:"true"`
+
+	// The format for a field-level encryption content type-profile mapping.
+	//
+	// Format is a required field
+	Format Format `type:"string" required:"true" enum:"true"`
+
+	// The profile ID for a field-level encryption content type-profile mapping.
+	ProfileId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ContentTypeProfile) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ContentTypeProfile) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ContentTypeProfile) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ContentTypeProfile"}
+
+	if s.ContentType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ContentType"))
+	}
+	if len(s.Format) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Format"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ContentTypeProfile) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ContentType", protocol.StringValue(v), metadata)
+	}
+	if len(s.Format) > 0 {
+		v := s.Format
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Format", v, metadata)
+	}
+	if s.ProfileId != nil {
+		v := *s.ProfileId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProfileId", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// The configuration for a field-level encryption content type-profile mapping.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ContentTypeProfileConfig
+type ContentTypeProfileConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The configuration for a field-level encryption content type-profile.
+	ContentTypeProfiles *ContentTypeProfiles `type:"structure"`
+
+	// The setting in a field-level encryption content type-profile mapping that
+	// specifies what to do when an unknown content type is provided for the profile.
+	// If true, content is forwarded without being encrypted when the content type
+	// is unknown. If false (the default), an error is returned when the content
+	// type is unknown.
+	//
+	// ForwardWhenContentTypeIsUnknown is a required field
+	ForwardWhenContentTypeIsUnknown *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s ContentTypeProfileConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ContentTypeProfileConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ContentTypeProfileConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ContentTypeProfileConfig"}
+
+	if s.ForwardWhenContentTypeIsUnknown == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ForwardWhenContentTypeIsUnknown"))
+	}
+	if s.ContentTypeProfiles != nil {
+		if err := s.ContentTypeProfiles.Validate(); err != nil {
+			invalidParams.AddNested("ContentTypeProfiles", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ContentTypeProfileConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ContentTypeProfiles != nil {
+		v := s.ContentTypeProfiles
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ContentTypeProfiles", v, metadata)
+	}
+	if s.ForwardWhenContentTypeIsUnknown != nil {
+		v := *s.ForwardWhenContentTypeIsUnknown
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ForwardWhenContentTypeIsUnknown", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Field-level encryption content type-profile.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ContentTypeProfiles
+type ContentTypeProfiles struct {
+	_ struct{} `type:"structure"`
+
+	// Items in a field-level encryption content type-profile mapping.
+	Items []ContentTypeProfile `locationNameList:"ContentTypeProfile" type:"list"`
+
+	// The number of field-level encryption content type-profile mappings.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s ContentTypeProfiles) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ContentTypeProfiles) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ContentTypeProfiles) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ContentTypeProfiles"}
+
+	if s.Quantity == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
+	}
+	if s.Items != nil {
+		for i, v := range s.Items {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ContentTypeProfiles) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "ContentTypeProfile"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // A complex type that specifies whether you want CloudFront to forward cookies
 // to the origin and, if so, which ones. For more information about forwarding
 // cookies to the origin, see How CloudFront Forwards, Caches, and Logs Cookies
 // (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CookieNames
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CookieNames
 type CookieNames struct {
 	_ struct{} `type:"structure"`
 
@@ -2535,7 +3654,7 @@ func (s CookieNames) MarshalFields(e protocol.FieldEncoder) error {
 // cookies to the origin, see How CloudFront Forwards, Caches, and Logs Cookies
 // (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CookiePreference
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CookiePreference
 type CookiePreference struct {
 	_ struct{} `type:"structure"`
 
@@ -2611,14 +3730,14 @@ func (s CookiePreference) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The request to create a new origin access identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateCloudFrontOriginAccessIdentityRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateCloudFrontOriginAccessIdentityRequest
 type CreateCloudFrontOriginAccessIdentityInput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityConfig"`
 
 	// The current configuration information for the identity.
 	//
 	// CloudFrontOriginAccessIdentityConfig is a required field
-	CloudFrontOriginAccessIdentityConfig *OriginAccessIdentityConfig `locationName:"CloudFrontOriginAccessIdentityConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	CloudFrontOriginAccessIdentityConfig *OriginAccessIdentityConfig `locationName:"CloudFrontOriginAccessIdentityConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 }
 
 // String returns the string representation
@@ -2656,14 +3775,14 @@ func (s CreateCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.Fiel
 	if s.CloudFrontOriginAccessIdentityConfig != nil {
 		v := s.CloudFrontOriginAccessIdentityConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityConfig", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateCloudFrontOriginAccessIdentityResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateCloudFrontOriginAccessIdentityResult
 type CreateCloudFrontOriginAccessIdentityOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentity"`
 
@@ -2719,14 +3838,14 @@ func (s CreateCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.Fie
 }
 
 // The request to create a new distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionRequest
 type CreateDistributionInput struct {
 	_ struct{} `type:"structure" payload:"DistributionConfig"`
 
 	// The distribution's configuration information.
 	//
 	// DistributionConfig is a required field
-	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 }
 
 // String returns the string representation
@@ -2764,14 +3883,14 @@ func (s CreateDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.DistributionConfig != nil {
 		v := s.DistributionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "DistributionConfig", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionResult
 type CreateDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
@@ -2827,14 +3946,14 @@ func (s CreateDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The request to create a new distribution with tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistributionWithTagsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionWithTagsRequest
 type CreateDistributionWithTagsInput struct {
 	_ struct{} `type:"structure" payload:"DistributionConfigWithTags"`
 
 	// The distribution's configuration information.
 	//
 	// DistributionConfigWithTags is a required field
-	DistributionConfigWithTags *DistributionConfigWithTags `locationName:"DistributionConfigWithTags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	DistributionConfigWithTags *DistributionConfigWithTags `locationName:"DistributionConfigWithTags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 }
 
 // String returns the string representation
@@ -2872,14 +3991,14 @@ func (s CreateDistributionWithTagsInput) MarshalFields(e protocol.FieldEncoder) 
 	if s.DistributionConfigWithTags != nil {
 		v := s.DistributionConfigWithTags
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "DistributionConfigWithTags", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateDistributionWithTagsResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateDistributionWithTagsResult
 type CreateDistributionWithTagsOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
@@ -2934,8 +4053,221 @@ func (s CreateDistributionWithTagsOutput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionConfigRequest
+type CreateFieldLevelEncryptionConfigInput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionConfig"`
+
+	// The request to create a new field-level encryption configuration.
+	//
+	// FieldLevelEncryptionConfig is a required field
+	FieldLevelEncryptionConfig *FieldLevelEncryptionConfig `locationName:"FieldLevelEncryptionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
+}
+
+// String returns the string representation
+func (s CreateFieldLevelEncryptionConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFieldLevelEncryptionConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateFieldLevelEncryptionConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFieldLevelEncryptionConfigInput"}
+
+	if s.FieldLevelEncryptionConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FieldLevelEncryptionConfig"))
+	}
+	if s.FieldLevelEncryptionConfig != nil {
+		if err := s.FieldLevelEncryptionConfig.Validate(); err != nil {
+			invalidParams.AddNested("FieldLevelEncryptionConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FieldLevelEncryptionConfig != nil {
+		v := s.FieldLevelEncryptionConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionConfigResult
+type CreateFieldLevelEncryptionConfigOutput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryption"`
+
+	responseMetadata aws.Response
+
+	// The current version of the field level encryption configuration. For example:
+	// E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Returned when you create a new field-level encryption configuration.
+	FieldLevelEncryption *FieldLevelEncryption `type:"structure"`
+
+	// The fully qualified URI of the new configuration resource just created. For
+	// example: https://cloudfront.amazonaws.com/2010-11-01/field-level-encryption-config/EDFDVBD632BHDS5.
+	Location *string `location:"header" locationName:"Location" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateFieldLevelEncryptionConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFieldLevelEncryptionConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFieldLevelEncryptionConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
+	}
+	if s.FieldLevelEncryption != nil {
+		v := s.FieldLevelEncryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryption", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionProfileRequest
+type CreateFieldLevelEncryptionProfileInput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileConfig"`
+
+	// The request to create a field-level encryption profile.
+	//
+	// FieldLevelEncryptionProfileConfig is a required field
+	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
+}
+
+// String returns the string representation
+func (s CreateFieldLevelEncryptionProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFieldLevelEncryptionProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateFieldLevelEncryptionProfileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFieldLevelEncryptionProfileInput"}
+
+	if s.FieldLevelEncryptionProfileConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FieldLevelEncryptionProfileConfig"))
+	}
+	if s.FieldLevelEncryptionProfileConfig != nil {
+		if err := s.FieldLevelEncryptionProfileConfig.Validate(); err != nil {
+			invalidParams.AddNested("FieldLevelEncryptionProfileConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.FieldLevelEncryptionProfileConfig != nil {
+		v := s.FieldLevelEncryptionProfileConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateFieldLevelEncryptionProfileResult
+type CreateFieldLevelEncryptionProfileOutput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfile"`
+
+	responseMetadata aws.Response
+
+	// The current version of the field level encryption profile. For example: E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Returned when you create a new field-level encryption profile.
+	FieldLevelEncryptionProfile *FieldLevelEncryptionProfile `type:"structure"`
+
+	// The fully qualified URI of the new profile resource just created. For example:
+	// https://cloudfront.amazonaws.com/2010-11-01/field-level-encryption-profile/EDFDVBD632BHDS5.
+	Location *string `location:"header" locationName:"Location" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateFieldLevelEncryptionProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFieldLevelEncryptionProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFieldLevelEncryptionProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
+	}
+	if s.FieldLevelEncryptionProfile != nil {
+		v := s.FieldLevelEncryptionProfile
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfile", v, metadata)
+	}
+	return nil
+}
+
 // The request to create an invalidation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateInvalidationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateInvalidationRequest
 type CreateInvalidationInput struct {
 	_ struct{} `type:"structure" payload:"InvalidationBatch"`
 
@@ -2947,7 +4279,7 @@ type CreateInvalidationInput struct {
 	// The batch information for the invalidation.
 	//
 	// InvalidationBatch is a required field
-	InvalidationBatch *InvalidationBatch `locationName:"InvalidationBatch" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	InvalidationBatch *InvalidationBatch `locationName:"InvalidationBatch" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 }
 
 // String returns the string representation
@@ -2995,14 +4327,14 @@ func (s CreateInvalidationInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.InvalidationBatch != nil {
 		v := s.InvalidationBatch
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "InvalidationBatch", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateInvalidationResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateInvalidationResult
 type CreateInvalidationOutput struct {
 	_ struct{} `type:"structure" payload:"Invalidation"`
 
@@ -3048,15 +4380,121 @@ func (s CreateInvalidationOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreatePublicKeyRequest
+type CreatePublicKeyInput struct {
+	_ struct{} `type:"structure" payload:"PublicKeyConfig"`
+
+	// The request to add a public key to CloudFront.
+	//
+	// PublicKeyConfig is a required field
+	PublicKeyConfig *PublicKeyConfig `locationName:"PublicKeyConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
+}
+
+// String returns the string representation
+func (s CreatePublicKeyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreatePublicKeyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreatePublicKeyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreatePublicKeyInput"}
+
+	if s.PublicKeyConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PublicKeyConfig"))
+	}
+	if s.PublicKeyConfig != nil {
+		if err := s.PublicKeyConfig.Validate(); err != nil {
+			invalidParams.AddNested("PublicKeyConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.PublicKeyConfig != nil {
+		v := s.PublicKeyConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
+		e.SetFields(protocol.PayloadTarget, "PublicKeyConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreatePublicKeyResult
+type CreatePublicKeyOutput struct {
+	_ struct{} `type:"structure" payload:"PublicKey"`
+
+	responseMetadata aws.Response
+
+	// The current version of the public key. For example: E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// The fully qualified URI of the new public key resource just created. For
+	// example: https://cloudfront.amazonaws.com/2010-11-01/cloudfront-public-key/EDFDVBD632BHDS5.
+	Location *string `location:"header" locationName:"Location" type:"string"`
+
+	// Returned when you add a public key.
+	PublicKey *PublicKey `type:"structure"`
+}
+
+// String returns the string representation
+func (s CreatePublicKeyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreatePublicKeyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreatePublicKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreatePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.Location != nil {
+		v := *s.Location
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "Location", protocol.StringValue(v), metadata)
+	}
+	if s.PublicKey != nil {
+		v := s.PublicKey
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "PublicKey", v, metadata)
+	}
+	return nil
+}
+
 // The request to create a new streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionRequest
 type CreateStreamingDistributionInput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionConfig"`
 
 	// The streaming distribution's configuration information.
 	//
 	// StreamingDistributionConfig is a required field
-	StreamingDistributionConfig *StreamingDistributionConfig `locationName:"StreamingDistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	StreamingDistributionConfig *StreamingDistributionConfig `locationName:"StreamingDistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 }
 
 // String returns the string representation
@@ -3094,14 +4532,14 @@ func (s CreateStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder)
 	if s.StreamingDistributionConfig != nil {
 		v := s.StreamingDistributionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfig", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionResult
 type CreateStreamingDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
@@ -3157,14 +4595,14 @@ func (s CreateStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder
 }
 
 // The request to create a new streaming distribution with tags.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistributionWithTagsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionWithTagsRequest
 type CreateStreamingDistributionWithTagsInput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionConfigWithTags"`
 
 	// The streaming distribution's configuration information.
 	//
 	// StreamingDistributionConfigWithTags is a required field
-	StreamingDistributionConfigWithTags *StreamingDistributionConfigWithTags `locationName:"StreamingDistributionConfigWithTags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	StreamingDistributionConfigWithTags *StreamingDistributionConfigWithTags `locationName:"StreamingDistributionConfigWithTags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 }
 
 // String returns the string representation
@@ -3202,14 +4640,14 @@ func (s CreateStreamingDistributionWithTagsInput) MarshalFields(e protocol.Field
 	if s.StreamingDistributionConfigWithTags != nil {
 		v := s.StreamingDistributionConfigWithTags
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfigWithTags", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CreateStreamingDistributionWithTagsResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CreateStreamingDistributionWithTagsResult
 type CreateStreamingDistributionWithTagsOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
@@ -3274,7 +4712,7 @@ func (s CreateStreamingDistributionWithTagsOutput) MarshalFields(e protocol.Fiel
 // For more information about custom error pages, see Customizing Error Responses
 // (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CustomErrorResponse
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CustomErrorResponse
 type CustomErrorResponse struct {
 	_ struct{} `type:"structure"`
 
@@ -3408,7 +4846,7 @@ func (s CustomErrorResponse) MarshalFields(e protocol.FieldEncoder) error {
 // For more information about custom error pages, see Customizing Error Responses
 // (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CustomErrorResponses
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CustomErrorResponses
 type CustomErrorResponses struct {
 	_ struct{} `type:"structure"`
 
@@ -3479,7 +4917,7 @@ func (s CustomErrorResponses) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains the list of Custom Headers for each origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CustomHeaders
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CustomHeaders
 type CustomHeaders struct {
 	_ struct{} `type:"structure"`
 
@@ -3549,7 +4987,7 @@ func (s CustomHeaders) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A customer origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CustomOriginConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CustomOriginConfig
 type CustomOriginConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -3671,7 +5109,7 @@ func (s CustomOriginConfig) MarshalFields(e protocol.FieldEncoder) error {
 // A complex type that describes the default cache behavior if you don't specify
 // a CacheBehavior element or if files don't match any of the values of PathPattern
 // in CacheBehavior elements. You must create exactly one default cache behavior.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DefaultCacheBehavior
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DefaultCacheBehavior
 type DefaultCacheBehavior struct {
 	_ struct{} `type:"structure"`
 
@@ -3706,6 +5144,8 @@ type DefaultCacheBehavior struct {
 	// Long Objects and Errors Stay in a CloudFront Edge Cache (Expiration) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	DefaultTTL *int64 `type:"long"`
+
+	FieldLevelEncryptionId *string `type:"string"`
 
 	// A complex type that specifies how CloudFront handles query strings and cookies.
 	//
@@ -3874,6 +5314,12 @@ func (s DefaultCacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "DefaultTTL", protocol.Int64Value(v), metadata)
 	}
+	if s.FieldLevelEncryptionId != nil {
+		v := *s.FieldLevelEncryptionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FieldLevelEncryptionId", protocol.StringValue(v), metadata)
+	}
 	if s.ForwardedValues != nil {
 		v := s.ForwardedValues
 
@@ -3926,7 +5372,7 @@ func (s DefaultCacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Deletes a origin access identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteCloudFrontOriginAccessIdentityRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteCloudFrontOriginAccessIdentityRequest
 type DeleteCloudFrontOriginAccessIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -3982,7 +5428,7 @@ func (s DeleteCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.Fiel
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteCloudFrontOriginAccessIdentityOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteCloudFrontOriginAccessIdentityOutput
 type DeleteCloudFrontOriginAccessIdentityOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4044,7 +5490,7 @@ func (s DeleteCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.Fie
 // For information about deleting a distribution using the CloudFront console,
 // see Deleting a Distribution (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteDistributionRequest
 type DeleteDistributionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4100,7 +5546,7 @@ func (s DeleteDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteDistributionOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteDistributionOutput
 type DeleteDistributionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4127,7 +5573,256 @@ func (s DeleteDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRoleRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionConfigRequest
+type DeleteFieldLevelEncryptionConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the configuration you want to delete from CloudFront.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+
+	// The value of the ETag header that you received when retrieving the configuration
+	// identity to delete. For example: E2QWRUHAPOMQZL.
+	IfMatch *string `location:"header" locationName:"If-Match" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteFieldLevelEncryptionConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFieldLevelEncryptionConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteFieldLevelEncryptionConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFieldLevelEncryptionConfigInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IfMatch != nil {
+		v := *s.IfMatch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionConfigOutput
+type DeleteFieldLevelEncryptionConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteFieldLevelEncryptionConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFieldLevelEncryptionConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFieldLevelEncryptionConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionProfileRequest
+type DeleteFieldLevelEncryptionProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// Request the ID of the profile you want to delete from CloudFront.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+
+	// The value of the ETag header that you received when retrieving the profile
+	// to delete. For example: E2QWRUHAPOMQZL.
+	IfMatch *string `location:"header" locationName:"If-Match" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteFieldLevelEncryptionProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFieldLevelEncryptionProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteFieldLevelEncryptionProfileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFieldLevelEncryptionProfileInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IfMatch != nil {
+		v := *s.IfMatch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteFieldLevelEncryptionProfileOutput
+type DeleteFieldLevelEncryptionProfileOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteFieldLevelEncryptionProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFieldLevelEncryptionProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFieldLevelEncryptionProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeletePublicKeyRequest
+type DeletePublicKeyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the public key you want to remove from CloudFront.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+
+	// The value of the ETag header that you received when retrieving the public
+	// key identity to delete. For example: E2QWRUHAPOMQZL.
+	IfMatch *string `location:"header" locationName:"If-Match" type:"string"`
+}
+
+// String returns the string representation
+func (s DeletePublicKeyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeletePublicKeyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeletePublicKeyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeletePublicKeyInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IfMatch != nil {
+		v := *s.IfMatch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeletePublicKeyOutput
+type DeletePublicKeyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeletePublicKeyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeletePublicKeyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeletePublicKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeletePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteServiceLinkedRoleRequest
 type DeleteServiceLinkedRoleInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4171,7 +5866,7 @@ func (s DeleteServiceLinkedRoleInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteServiceLinkedRoleOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteServiceLinkedRoleOutput
 type DeleteServiceLinkedRoleOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4199,7 +5894,7 @@ func (s DeleteServiceLinkedRoleOutput) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // The request to delete a streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteStreamingDistributionRequest
 type DeleteStreamingDistributionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -4255,7 +5950,7 @@ func (s DeleteStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DeleteStreamingDistributionOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DeleteStreamingDistributionOutput
 type DeleteStreamingDistributionOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -4283,7 +5978,7 @@ func (s DeleteStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder
 }
 
 // The distribution's information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Distribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Distribution
 type Distribution struct {
 	_ struct{} `type:"structure"`
 
@@ -4403,7 +6098,7 @@ func (s Distribution) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A distribution configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DistributionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DistributionConfig
 type DistributionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -4853,7 +6548,7 @@ func (s DistributionConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A distribution Configuration and a list of tags to be associated with the
 // distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DistributionConfigWithTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DistributionConfigWithTags
 type DistributionConfigWithTags struct {
 	_ struct{} `type:"structure"`
 
@@ -4924,7 +6619,7 @@ func (s DistributionConfigWithTags) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // A distribution list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DistributionList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DistributionList
 type DistributionList struct {
 	_ struct{} `type:"structure"`
 
@@ -5019,7 +6714,7 @@ func (s DistributionList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of the information about a CloudFront distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/DistributionSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/DistributionSummary
 type DistributionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -5329,8 +7024,809 @@ func (s DistributionSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Complex data type for field-level encryption profiles that includes all of
+// the encryption entities.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/EncryptionEntities
+type EncryptionEntities struct {
+	_ struct{} `type:"structure"`
+
+	// An array of field patterns in a field-level encryption content type-profile
+	// mapping.
+	Items []EncryptionEntity `locationNameList:"EncryptionEntity" type:"list"`
+
+	// Number of field pattern items in a field-level encryption content type-profile
+	// mapping.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s EncryptionEntities) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EncryptionEntities) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EncryptionEntities) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EncryptionEntities"}
+
+	if s.Quantity == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
+	}
+	if s.Items != nil {
+		for i, v := range s.Items {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EncryptionEntities) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "EncryptionEntity"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Complex data type for field-level encryption profiles that includes the encryption
+// key and field pattern specifications.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/EncryptionEntity
+type EncryptionEntity struct {
+	_ struct{} `type:"structure"`
+
+	// Field patterns in a field-level encryption content type profile specify the
+	// fields that you want to be encrypted. You can provide the full field name,
+	// or any beginning characters followed by a wildcard (*). You can't overlap
+	// field patterns. For example, you can't have both ABC* and AB*. Note that
+	// field patterns are case-sensitive.
+	//
+	// FieldPatterns is a required field
+	FieldPatterns *FieldPatterns `type:"structure" required:"true"`
+
+	// The provider associated with the public key being used for encryption. This
+	// value must also be provided with the private key for applications to be able
+	// to decrypt data.
+	//
+	// ProviderId is a required field
+	ProviderId *string `type:"string" required:"true"`
+
+	// The public key associated with a set of field-level encryption patterns,
+	// to be used when encrypting the fields that match the patterns.
+	//
+	// PublicKeyId is a required field
+	PublicKeyId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s EncryptionEntity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EncryptionEntity) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EncryptionEntity) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EncryptionEntity"}
+
+	if s.FieldPatterns == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FieldPatterns"))
+	}
+
+	if s.ProviderId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProviderId"))
+	}
+
+	if s.PublicKeyId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PublicKeyId"))
+	}
+	if s.FieldPatterns != nil {
+		if err := s.FieldPatterns.Validate(); err != nil {
+			invalidParams.AddNested("FieldPatterns", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EncryptionEntity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FieldPatterns != nil {
+		v := s.FieldPatterns
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "FieldPatterns", v, metadata)
+	}
+	if s.ProviderId != nil {
+		v := *s.ProviderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProviderId", protocol.StringValue(v), metadata)
+	}
+	if s.PublicKeyId != nil {
+		v := *s.PublicKeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PublicKeyId", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// A complex data type that includes the profile configurations and other options
+// specified for field-level encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryption
+type FieldLevelEncryption struct {
+	_ struct{} `type:"structure"`
+
+	// A complex data type that includes the profile configurations specified for
+	// field-level encryption.
+	//
+	// FieldLevelEncryptionConfig is a required field
+	FieldLevelEncryptionConfig *FieldLevelEncryptionConfig `type:"structure" required:"true"`
+
+	// The configuration ID for a field-level encryption configuration which includes
+	// a set of profiles that specify certain selected data fields to be encrypted
+	// by specific public keys.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// The last time the field-level encryption configuration was changed.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+}
+
+// String returns the string representation
+func (s FieldLevelEncryption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FieldLevelEncryption) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FieldLevelEncryption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FieldLevelEncryptionConfig != nil {
+		v := s.FieldLevelEncryptionConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "FieldLevelEncryptionConfig", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.LastModifiedTime != nil {
+		v := *s.LastModifiedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	return nil
+}
+
+// A complex data type that includes the profile configurations specified for
+// field-level encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionConfig
+type FieldLevelEncryptionConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A unique number that ensures the request can't be replayed.
+	//
+	// CallerReference is a required field
+	CallerReference *string `type:"string" required:"true"`
+
+	// An optional comment about the configuration.
+	Comment *string `type:"string"`
+
+	// A complex data type that specifies when to forward content if a content type
+	// isn't recognized and profiles to use as by default in a request if a query
+	// argument doesn't specify a profile to use.
+	ContentTypeProfileConfig *ContentTypeProfileConfig `type:"structure"`
+
+	// A complex data type that specifies when to forward content if a profile isn't
+	// found and the profile that can be provided as a query argument in a request.
+	QueryArgProfileConfig *QueryArgProfileConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s FieldLevelEncryptionConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FieldLevelEncryptionConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FieldLevelEncryptionConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FieldLevelEncryptionConfig"}
+
+	if s.CallerReference == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
+	}
+	if s.ContentTypeProfileConfig != nil {
+		if err := s.ContentTypeProfileConfig.Validate(); err != nil {
+			invalidParams.AddNested("ContentTypeProfileConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.QueryArgProfileConfig != nil {
+		if err := s.QueryArgProfileConfig.Validate(); err != nil {
+			invalidParams.AddNested("QueryArgProfileConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FieldLevelEncryptionConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CallerReference != nil {
+		v := *s.CallerReference
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallerReference", protocol.StringValue(v), metadata)
+	}
+	if s.Comment != nil {
+		v := *s.Comment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.ContentTypeProfileConfig != nil {
+		v := s.ContentTypeProfileConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ContentTypeProfileConfig", v, metadata)
+	}
+	if s.QueryArgProfileConfig != nil {
+		v := s.QueryArgProfileConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "QueryArgProfileConfig", v, metadata)
+	}
+	return nil
+}
+
+// List of field-level encrpytion configurations.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionList
+type FieldLevelEncryptionList struct {
+	_ struct{} `type:"structure"`
+
+	// An array of field-level encryption items.
+	Items []FieldLevelEncryptionSummary `locationNameList:"FieldLevelEncryptionSummary" type:"list"`
+
+	// The maximum number of elements you want in the response body.
+	//
+	// MaxItems is a required field
+	MaxItems *int64 `type:"integer" required:"true"`
+
+	// If there are more elements to be listed, this element is present and contains
+	// the value that you can use for the Marker request parameter to continue listing
+	// your configurations where you left off.
+	NextMarker *string `type:"string"`
+
+	// The number of field-level encryption items.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s FieldLevelEncryptionList) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FieldLevelEncryptionList) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FieldLevelEncryptionList) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "FieldLevelEncryptionSummary"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// A complex data type for field-level encryption profiles.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionProfile
+type FieldLevelEncryptionProfile struct {
+	_ struct{} `type:"structure"`
+
+	// A complex data type that includes the profile name and the encryption entities
+	// for the field-level encryption profile.
+	//
+	// FieldLevelEncryptionProfileConfig is a required field
+	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `type:"structure" required:"true"`
+
+	// The ID for a field-level encryption profile configuration which includes
+	// a set of profiles that specify certain selected data fields to be encrypted
+	// by specific public keys.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// The last time the field-level encryption profile was updated.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+}
+
+// String returns the string representation
+func (s FieldLevelEncryptionProfile) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FieldLevelEncryptionProfile) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FieldLevelEncryptionProfile) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FieldLevelEncryptionProfileConfig != nil {
+		v := s.FieldLevelEncryptionProfileConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "FieldLevelEncryptionProfileConfig", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.LastModifiedTime != nil {
+		v := *s.LastModifiedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	return nil
+}
+
+// A complex data type of profiles for the field-level encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionProfileConfig
+type FieldLevelEncryptionProfileConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A unique number that ensures the request can't be replayed.
+	//
+	// CallerReference is a required field
+	CallerReference *string `type:"string" required:"true"`
+
+	// An optional comment for the field-level encryption profile.
+	Comment *string `type:"string"`
+
+	// A complex data type of encryption entities for the field-level encryption
+	// profile that include the public key ID, provider, and field patterns for
+	// specifying which fields to encrypt with this key.
+	//
+	// EncryptionEntities is a required field
+	EncryptionEntities *EncryptionEntities `type:"structure" required:"true"`
+
+	// Profile name for the field-level encryption profile.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s FieldLevelEncryptionProfileConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FieldLevelEncryptionProfileConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FieldLevelEncryptionProfileConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FieldLevelEncryptionProfileConfig"}
+
+	if s.CallerReference == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
+	}
+
+	if s.EncryptionEntities == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EncryptionEntities"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.EncryptionEntities != nil {
+		if err := s.EncryptionEntities.Validate(); err != nil {
+			invalidParams.AddNested("EncryptionEntities", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FieldLevelEncryptionProfileConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CallerReference != nil {
+		v := *s.CallerReference
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallerReference", protocol.StringValue(v), metadata)
+	}
+	if s.Comment != nil {
+		v := *s.Comment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.EncryptionEntities != nil {
+		v := s.EncryptionEntities
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EncryptionEntities", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// List of field-level encryption profiles.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionProfileList
+type FieldLevelEncryptionProfileList struct {
+	_ struct{} `type:"structure"`
+
+	// The field-level encryption profile items.
+	Items []FieldLevelEncryptionProfileSummary `locationNameList:"FieldLevelEncryptionProfileSummary" type:"list"`
+
+	// The maximum number of field-level encryption profiles you want in the response
+	// body.
+	//
+	// MaxItems is a required field
+	MaxItems *int64 `type:"integer" required:"true"`
+
+	// If there are more elements to be listed, this element is present and contains
+	// the value that you can use for the Marker request parameter to continue listing
+	// your profiles where you left off.
+	NextMarker *string `type:"string"`
+
+	// The number of field-level encryption profiles.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s FieldLevelEncryptionProfileList) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FieldLevelEncryptionProfileList) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FieldLevelEncryptionProfileList) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "FieldLevelEncryptionProfileSummary"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// The field-level encryption profile summary.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionProfileSummary
+type FieldLevelEncryptionProfileSummary struct {
+	_ struct{} `type:"structure"`
+
+	// An optional comment for the field-level encryption profile summary.
+	Comment *string `type:"string"`
+
+	// A complex data type of encryption entities for the field-level encryption
+	// profile that include the public key ID, provider, and field patterns for
+	// specifying which fields to encrypt with this key.
+	//
+	// EncryptionEntities is a required field
+	EncryptionEntities *EncryptionEntities `type:"structure" required:"true"`
+
+	// ID for the field-level encryption profile summary.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// The time when the the field-level encryption profile summary was last updated.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+
+	// Name for the field-level encryption profile summary.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s FieldLevelEncryptionProfileSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FieldLevelEncryptionProfileSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FieldLevelEncryptionProfileSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Comment != nil {
+		v := *s.Comment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.EncryptionEntities != nil {
+		v := s.EncryptionEntities
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EncryptionEntities", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.LastModifiedTime != nil {
+		v := *s.LastModifiedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// A summary of a field-level encryption item.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldLevelEncryptionSummary
+type FieldLevelEncryptionSummary struct {
+	_ struct{} `type:"structure"`
+
+	// An optional comment about the field-level encryption item.
+	Comment *string `type:"string"`
+
+	// A summary of a content type-profile mapping.
+	ContentTypeProfileConfig *ContentTypeProfileConfig `type:"structure"`
+
+	// The unique ID of a field-level encryption item.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// The last time that the summary of field-level encryption items was modified.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+
+	// A summary of a query argument-profile mapping.
+	QueryArgProfileConfig *QueryArgProfileConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s FieldLevelEncryptionSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FieldLevelEncryptionSummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FieldLevelEncryptionSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Comment != nil {
+		v := *s.Comment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.ContentTypeProfileConfig != nil {
+		v := s.ContentTypeProfileConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ContentTypeProfileConfig", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.LastModifiedTime != nil {
+		v := *s.LastModifiedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if s.QueryArgProfileConfig != nil {
+		v := s.QueryArgProfileConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "QueryArgProfileConfig", v, metadata)
+	}
+	return nil
+}
+
+// A complex data type that includes the field patterns to match for field-level
+// encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/FieldPatterns
+type FieldPatterns struct {
+	_ struct{} `type:"structure"`
+
+	// An array of the field-level encryption field patterns.
+	Items []string `locationNameList:"FieldPattern" type:"list"`
+
+	// The number of field-level encryption field patterns.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s FieldPatterns) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FieldPatterns) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FieldPatterns) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FieldPatterns"}
+
+	if s.Quantity == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FieldPatterns) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "FieldPattern"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // A complex type that specifies how CloudFront handles query strings and cookies.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ForwardedValues
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ForwardedValues
 type ForwardedValues struct {
 	_ struct{} `type:"structure"`
 
@@ -5453,7 +7949,7 @@ func (s ForwardedValues) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that controls the countries in which your content is distributed.
 // CloudFront determines the location of your users using MaxMind GeoIP databases.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GeoRestriction
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GeoRestriction
 type GeoRestriction struct {
 	_ struct{} `type:"structure"`
 
@@ -5553,7 +8049,7 @@ func (s GeoRestriction) MarshalFields(e protocol.FieldEncoder) error {
 
 // The origin access identity's configuration information. For more information,
 // see CloudFrontOriginAccessIdentityConfigComplexType.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentityConfigRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityConfigRequest
 type GetCloudFrontOriginAccessIdentityConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5600,7 +8096,7 @@ func (s GetCloudFrontOriginAccessIdentityConfigInput) MarshalFields(e protocol.F
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentityConfigResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityConfigResult
 type GetCloudFrontOriginAccessIdentityConfigOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityConfig"`
 
@@ -5646,7 +8142,7 @@ func (s GetCloudFrontOriginAccessIdentityConfigOutput) MarshalFields(e protocol.
 }
 
 // The request to get an origin access identity's information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentityRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityRequest
 type GetCloudFrontOriginAccessIdentityInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5693,7 +8189,7 @@ func (s GetCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.FieldEn
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetCloudFrontOriginAccessIdentityResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetCloudFrontOriginAccessIdentityResult
 type GetCloudFrontOriginAccessIdentityOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentity"`
 
@@ -5740,7 +8236,7 @@ func (s GetCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.FieldE
 }
 
 // The request to get a distribution configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistributionConfigRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionConfigRequest
 type GetDistributionConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5787,7 +8283,7 @@ func (s GetDistributionConfigInput) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistributionConfigResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionConfigResult
 type GetDistributionConfigOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionConfig"`
 
@@ -5833,7 +8329,7 @@ func (s GetDistributionConfigOutput) MarshalFields(e protocol.FieldEncoder) erro
 }
 
 // The request to get a distribution's information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionRequest
 type GetDistributionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5880,7 +8376,7 @@ func (s GetDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetDistributionResult
 type GetDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
@@ -5925,8 +8421,375 @@ func (s GetDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionConfigRequest
+type GetFieldLevelEncryptionConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// Request the ID for the field-level encryption configuration information.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetFieldLevelEncryptionConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFieldLevelEncryptionConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetFieldLevelEncryptionConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetFieldLevelEncryptionConfigInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionConfigResult
+type GetFieldLevelEncryptionConfigOutput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionConfig"`
+
+	responseMetadata aws.Response
+
+	// The current version of the field level encryption configuration. For example:
+	// E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Return the field-level encryption configuration information.
+	FieldLevelEncryptionConfig *FieldLevelEncryptionConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetFieldLevelEncryptionConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFieldLevelEncryptionConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFieldLevelEncryptionConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.FieldLevelEncryptionConfig != nil {
+		v := s.FieldLevelEncryptionConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionRequest
+type GetFieldLevelEncryptionInput struct {
+	_ struct{} `type:"structure"`
+
+	// Request the ID for the field-level encryption configuration information.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetFieldLevelEncryptionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFieldLevelEncryptionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetFieldLevelEncryptionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetFieldLevelEncryptionInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFieldLevelEncryptionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionResult
+type GetFieldLevelEncryptionOutput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryption"`
+
+	responseMetadata aws.Response
+
+	// The current version of the field level encryption configuration. For example:
+	// E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Return the field-level encryption configuration information.
+	FieldLevelEncryption *FieldLevelEncryption `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetFieldLevelEncryptionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFieldLevelEncryptionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFieldLevelEncryptionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFieldLevelEncryptionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.FieldLevelEncryption != nil {
+		v := s.FieldLevelEncryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryption", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileConfigRequest
+type GetFieldLevelEncryptionProfileConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// Get the ID for the field-level encryption profile configuration information.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetFieldLevelEncryptionProfileConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFieldLevelEncryptionProfileConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetFieldLevelEncryptionProfileConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetFieldLevelEncryptionProfileConfigInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFieldLevelEncryptionProfileConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileConfigResult
+type GetFieldLevelEncryptionProfileConfigOutput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileConfig"`
+
+	responseMetadata aws.Response
+
+	// The current version of the field-level encryption profile configuration result.
+	// For example: E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Return the field-level encryption profile configuration information.
+	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetFieldLevelEncryptionProfileConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFieldLevelEncryptionProfileConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFieldLevelEncryptionProfileConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFieldLevelEncryptionProfileConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.FieldLevelEncryptionProfileConfig != nil {
+		v := s.FieldLevelEncryptionProfileConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileRequest
+type GetFieldLevelEncryptionProfileInput struct {
+	_ struct{} `type:"structure"`
+
+	// Get the ID for the field-level encryption profile information.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetFieldLevelEncryptionProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFieldLevelEncryptionProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetFieldLevelEncryptionProfileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetFieldLevelEncryptionProfileInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetFieldLevelEncryptionProfileResult
+type GetFieldLevelEncryptionProfileOutput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfile"`
+
+	responseMetadata aws.Response
+
+	// The current version of the field level encryption profile. For example: E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Return the field-level encryption profile information.
+	FieldLevelEncryptionProfile *FieldLevelEncryptionProfile `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetFieldLevelEncryptionProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFieldLevelEncryptionProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFieldLevelEncryptionProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.FieldLevelEncryptionProfile != nil {
+		v := s.FieldLevelEncryptionProfile
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfile", v, metadata)
+	}
+	return nil
+}
+
 // The request to get an invalidation's information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetInvalidationRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetInvalidationRequest
 type GetInvalidationInput struct {
 	_ struct{} `type:"structure"`
 
@@ -5988,7 +8851,7 @@ func (s GetInvalidationInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetInvalidationResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetInvalidationResult
 type GetInvalidationOutput struct {
 	_ struct{} `type:"structure" payload:"Invalidation"`
 
@@ -6025,8 +8888,190 @@ func (s GetInvalidationOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyConfigRequest
+type GetPublicKeyConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// Request the ID for the public key configuration.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetPublicKeyConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetPublicKeyConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetPublicKeyConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetPublicKeyConfigInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetPublicKeyConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyConfigResult
+type GetPublicKeyConfigOutput struct {
+	_ struct{} `type:"structure" payload:"PublicKeyConfig"`
+
+	responseMetadata aws.Response
+
+	// The current version of the public key configuration. For example: E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Return the result for the public key configuration.
+	PublicKeyConfig *PublicKeyConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetPublicKeyConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetPublicKeyConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPublicKeyConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetPublicKeyConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.PublicKeyConfig != nil {
+		v := s.PublicKeyConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "PublicKeyConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyRequest
+type GetPublicKeyInput struct {
+	_ struct{} `type:"structure"`
+
+	// Request the ID for the public key.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetPublicKeyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetPublicKeyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetPublicKeyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetPublicKeyInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetPublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetPublicKeyResult
+type GetPublicKeyOutput struct {
+	_ struct{} `type:"structure" payload:"PublicKey"`
+
+	responseMetadata aws.Response
+
+	// The current version of the public key. For example: E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Return the public key.
+	PublicKey *PublicKey `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetPublicKeyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetPublicKeyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetPublicKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetPublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.PublicKey != nil {
+		v := s.PublicKey
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "PublicKey", v, metadata)
+	}
+	return nil
+}
+
 // To request to get a streaming distribution configuration.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistributionConfigRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionConfigRequest
 type GetStreamingDistributionConfigInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6073,7 +9118,7 @@ func (s GetStreamingDistributionConfigInput) MarshalFields(e protocol.FieldEncod
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistributionConfigResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionConfigResult
 type GetStreamingDistributionConfigOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionConfig"`
 
@@ -6119,7 +9164,7 @@ func (s GetStreamingDistributionConfigOutput) MarshalFields(e protocol.FieldEnco
 }
 
 // The request to get a streaming distribution's information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionRequest
 type GetStreamingDistributionInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6166,7 +9211,7 @@ func (s GetStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder) er
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/GetStreamingDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/GetStreamingDistributionResult
 type GetStreamingDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
@@ -6224,7 +9269,7 @@ func (s GetStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder) e
 // for each header value. For more information about caching based on header
 // values, see How CloudFront Forwards and Caches Headers (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Headers
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Headers
 type Headers struct {
 	_ struct{} `type:"structure"`
 
@@ -6312,7 +9357,7 @@ func (s Headers) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An invalidation.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Invalidation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Invalidation
 type Invalidation struct {
 	_ struct{} `type:"structure"`
 
@@ -6378,7 +9423,7 @@ func (s Invalidation) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // An invalidation batch.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/InvalidationBatch
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/InvalidationBatch
 type InvalidationBatch struct {
 	_ struct{} `type:"structure"`
 
@@ -6464,7 +9509,7 @@ func (s InvalidationBatch) MarshalFields(e protocol.FieldEncoder) error {
 // For more information about invalidation, see Invalidating Objects (Web Distributions
 // Only) (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/InvalidationList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/InvalidationList
 type InvalidationList struct {
 	_ struct{} `type:"structure"`
 
@@ -6559,7 +9604,7 @@ func (s InvalidationList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A summary of an invalidation request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/InvalidationSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/InvalidationSummary
 type InvalidationSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -6614,7 +9659,7 @@ func (s InvalidationSummary) MarshalFields(e protocol.FieldEncoder) error {
 // associated with AwsAccountNumber.
 //
 // For more information, see ActiveTrustedSigners.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/KeyPairIds
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/KeyPairIds
 type KeyPairIds struct {
 	_ struct{} `type:"structure"`
 
@@ -6666,7 +9711,7 @@ func (s KeyPairIds) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains a Lambda function association.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/LambdaFunctionAssociation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/LambdaFunctionAssociation
 type LambdaFunctionAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -6694,11 +9739,15 @@ type LambdaFunctionAssociation struct {
 	//
 	// If the origin returns an HTTP status code other than HTTP 200 (OK), the function
 	//    doesn't execute.
-	EventType EventType `type:"string" enum:"true"`
+	//
+	// EventType is a required field
+	EventType EventType `type:"string" required:"true" enum:"true"`
 
 	// The ARN of the Lambda function. You must specify the ARN of a function version;
 	// you can't specify a Lambda alias or $LATEST.
-	LambdaFunctionARN *string `type:"string"`
+	//
+	// LambdaFunctionARN is a required field
+	LambdaFunctionARN *string `type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6709,6 +9758,23 @@ func (s LambdaFunctionAssociation) String() string {
 // GoString returns the string representation
 func (s LambdaFunctionAssociation) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LambdaFunctionAssociation) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LambdaFunctionAssociation"}
+	if len(s.EventType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("EventType"))
+	}
+
+	if s.LambdaFunctionARN == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LambdaFunctionARN"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -6739,7 +9805,7 @@ func (s LambdaFunctionAssociation) MarshalFields(e protocol.FieldEncoder) error 
 //
 // If you don't want to invoke any Lambda functions for the requests that match
 // PathPattern, specify 0 for Quantity and omit Items.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/LambdaFunctionAssociations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/LambdaFunctionAssociations
 type LambdaFunctionAssociations struct {
 	_ struct{} `type:"structure"`
 
@@ -6769,6 +9835,13 @@ func (s *LambdaFunctionAssociations) Validate() error {
 
 	if s.Quantity == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
+	}
+	if s.Items != nil {
+		for i, v := range s.Items {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -6801,7 +9874,7 @@ func (s LambdaFunctionAssociations) MarshalFields(e protocol.FieldEncoder) error
 }
 
 // The request to list origin access identities.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListCloudFrontOriginAccessIdentitiesRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListCloudFrontOriginAccessIdentitiesRequest
 type ListCloudFrontOriginAccessIdentitiesInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6845,7 +9918,7 @@ func (s ListCloudFrontOriginAccessIdentitiesInput) MarshalFields(e protocol.Fiel
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListCloudFrontOriginAccessIdentitiesResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListCloudFrontOriginAccessIdentitiesResult
 type ListCloudFrontOriginAccessIdentitiesOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityList"`
 
@@ -6883,7 +9956,7 @@ func (s ListCloudFrontOriginAccessIdentitiesOutput) MarshalFields(e protocol.Fie
 
 // The request to list distributions that are associated with a specified AWS
 // WAF web ACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributionsByWebACLIdRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsByWebACLIdRequest
 type ListDistributionsByWebACLIdInput struct {
 	_ struct{} `type:"structure"`
 
@@ -6956,7 +10029,7 @@ func (s ListDistributionsByWebACLIdInput) MarshalFields(e protocol.FieldEncoder)
 
 // The response to a request to list the distributions that are associated with
 // a specified AWS WAF web ACL.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributionsByWebACLIdResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsByWebACLIdResult
 type ListDistributionsByWebACLIdOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionList"`
 
@@ -6993,7 +10066,7 @@ func (s ListDistributionsByWebACLIdOutput) MarshalFields(e protocol.FieldEncoder
 }
 
 // The request to list your distributions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributionsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsRequest
 type ListDistributionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7037,7 +10110,7 @@ func (s ListDistributionsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListDistributionsResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListDistributionsResult
 type ListDistributionsOutput struct {
 	_ struct{} `type:"structure" payload:"DistributionList"`
 
@@ -7073,8 +10146,170 @@ func (s ListDistributionsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionConfigsRequest
+type ListFieldLevelEncryptionConfigsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Use this when paginating results to indicate where to begin in your list
+	// of configurations. The results include configurations in the list that occur
+	// after the marker. To get the next page of results, set the Marker to the
+	// value of the NextMarker from the current page's response (which is also the
+	// ID of the last configuration on that page).
+	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
+
+	// The maximum number of field-level encryption configurations you want in the
+	// response body.
+	MaxItems *int64 `location:"querystring" locationName:"MaxItems" type:"integer"`
+}
+
+// String returns the string representation
+func (s ListFieldLevelEncryptionConfigsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListFieldLevelEncryptionConfigsInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFieldLevelEncryptionConfigsInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionConfigsResult
+type ListFieldLevelEncryptionConfigsOutput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionList"`
+
+	responseMetadata aws.Response
+
+	// Returns a list of all field-level encryption configurations that have been
+	// created in CloudFront for this account.
+	FieldLevelEncryptionList *FieldLevelEncryptionList `type:"structure"`
+}
+
+// String returns the string representation
+func (s ListFieldLevelEncryptionConfigsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListFieldLevelEncryptionConfigsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFieldLevelEncryptionConfigsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFieldLevelEncryptionConfigsOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FieldLevelEncryptionList != nil {
+		v := s.FieldLevelEncryptionList
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionList", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionProfilesRequest
+type ListFieldLevelEncryptionProfilesInput struct {
+	_ struct{} `type:"structure"`
+
+	// Use this when paginating results to indicate where to begin in your list
+	// of profiles. The results include profiles in the list that occur after the
+	// marker. To get the next page of results, set the Marker to the value of the
+	// NextMarker from the current page's response (which is also the ID of the
+	// last profile on that page).
+	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
+
+	// The maximum number of field-level encryption profiles you want in the response
+	// body.
+	MaxItems *int64 `location:"querystring" locationName:"MaxItems" type:"integer"`
+}
+
+// String returns the string representation
+func (s ListFieldLevelEncryptionProfilesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListFieldLevelEncryptionProfilesInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFieldLevelEncryptionProfilesInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListFieldLevelEncryptionProfilesResult
+type ListFieldLevelEncryptionProfilesOutput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileList"`
+
+	responseMetadata aws.Response
+
+	// Returns a list of the field-level encryption profiles that have been created
+	// in CloudFront for this account.
+	FieldLevelEncryptionProfileList *FieldLevelEncryptionProfileList `type:"structure"`
+}
+
+// String returns the string representation
+func (s ListFieldLevelEncryptionProfilesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListFieldLevelEncryptionProfilesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFieldLevelEncryptionProfilesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFieldLevelEncryptionProfilesOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.FieldLevelEncryptionProfileList != nil {
+		v := s.FieldLevelEncryptionProfileList
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileList", v, metadata)
+	}
+	return nil
+}
+
 // The request to list invalidations.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListInvalidationsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListInvalidationsRequest
 type ListInvalidationsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7146,7 +10381,7 @@ func (s ListInvalidationsInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListInvalidationsResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListInvalidationsResult
 type ListInvalidationsOutput struct {
 	_ struct{} `type:"structure" payload:"InvalidationList"`
 
@@ -7182,8 +10417,88 @@ func (s ListInvalidationsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListPublicKeysRequest
+type ListPublicKeysInput struct {
+	_ struct{} `type:"structure"`
+
+	// Use this when paginating results to indicate where to begin in your list
+	// of public keys. The results include public keys in the list that occur after
+	// the marker. To get the next page of results, set the Marker to the value
+	// of the NextMarker from the current page's response (which is also the ID
+	// of the last public key on that page).
+	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
+
+	// The maximum number of public keys you want in the response body.
+	MaxItems *int64 `location:"querystring" locationName:"MaxItems" type:"integer"`
+}
+
+// String returns the string representation
+func (s ListPublicKeysInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListPublicKeysInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPublicKeysInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListPublicKeysResult
+type ListPublicKeysOutput struct {
+	_ struct{} `type:"structure" payload:"PublicKeyList"`
+
+	responseMetadata aws.Response
+
+	// Returns a list of all public keys that have been added to CloudFront for
+	// this account.
+	PublicKeyList *PublicKeyList `type:"structure"`
+}
+
+// String returns the string representation
+func (s ListPublicKeysOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListPublicKeysOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListPublicKeysOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListPublicKeysOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.PublicKeyList != nil {
+		v := s.PublicKeyList
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "PublicKeyList", v, metadata)
+	}
+	return nil
+}
+
 // The request to list your streaming distributions.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListStreamingDistributionsRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListStreamingDistributionsRequest
 type ListStreamingDistributionsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7223,7 +10538,7 @@ func (s ListStreamingDistributionsInput) MarshalFields(e protocol.FieldEncoder) 
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListStreamingDistributionsResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListStreamingDistributionsResult
 type ListStreamingDistributionsOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionList"`
 
@@ -7260,7 +10575,7 @@ func (s ListStreamingDistributionsOutput) MarshalFields(e protocol.FieldEncoder)
 }
 
 // The request to list tags for a CloudFront resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListTagsForResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
@@ -7307,7 +10622,7 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ListTagsForResourceResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ListTagsForResourceResult
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure" payload:"Tags"`
 
@@ -7346,7 +10661,7 @@ func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // A complex type that controls whether access logs are written for the distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/LoggingConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/LoggingConfig
 type LoggingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -7456,7 +10771,7 @@ func (s LoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 // For the current limit on the number of origins that you can create for a
 // distribution, see Amazon CloudFront Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront)
 // in the AWS General Reference.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Origin
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Origin
 type Origin struct {
 	_ struct{} `type:"structure"`
 
@@ -7621,7 +10936,7 @@ func (s Origin) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // CloudFront origin access identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CloudFrontOriginAccessIdentity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CloudFrontOriginAccessIdentity
 type OriginAccessIdentity struct {
 	_ struct{} `type:"structure"`
 
@@ -7676,7 +10991,7 @@ func (s OriginAccessIdentity) MarshalFields(e protocol.FieldEncoder) error {
 
 // Origin access identity configuration. Send a GET request to the /CloudFront
 // API version/CloudFront/identity ID/config resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CloudFrontOriginAccessIdentityConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CloudFrontOriginAccessIdentityConfig
 type OriginAccessIdentityConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -7755,7 +11070,7 @@ func (s OriginAccessIdentityConfig) MarshalFields(e protocol.FieldEncoder) error
 // child elements. By default, your entire list of origin access identities
 // is returned in one single page. If the list is long, you can paginate it
 // using the MaxItems and Marker parameters.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CloudFrontOriginAccessIdentityList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CloudFrontOriginAccessIdentityList
 type OriginAccessIdentityList struct {
 	_ struct{} `type:"structure"`
 
@@ -7855,7 +11170,7 @@ func (s OriginAccessIdentityList) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Summary of the information about a CloudFront origin access identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/CloudFrontOriginAccessIdentitySummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/CloudFrontOriginAccessIdentitySummary
 type OriginAccessIdentitySummary struct {
 	_ struct{} `type:"structure"`
 
@@ -7913,7 +11228,7 @@ func (s OriginAccessIdentitySummary) MarshalFields(e protocol.FieldEncoder) erro
 
 // A complex type that contains HeaderName and HeaderValue elements, if any,
 // for this distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/OriginCustomHeader
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/OriginCustomHeader
 type OriginCustomHeader struct {
 	_ struct{} `type:"structure"`
 
@@ -7978,7 +11293,7 @@ func (s OriginCustomHeader) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the SSL/TLS protocols that
 // CloudFront can use when establishing an HTTPS connection with your origin.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/OriginSslProtocols
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/OriginSslProtocols
 type OriginSslProtocols struct {
 	_ struct{} `type:"structure"`
 
@@ -8046,7 +11361,7 @@ func (s OriginSslProtocols) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains information about origins for this distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Origins
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Origins
 type Origins struct {
 	_ struct{} `type:"structure"`
 
@@ -8120,7 +11435,7 @@ func (s Origins) MarshalFields(e protocol.FieldEncoder) error {
 // to invalidate. For more information, see Specifying the Objects to Invalidate
 // (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Paths
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Paths
 type Paths struct {
 	_ struct{} `type:"structure"`
 
@@ -8180,7 +11495,488 @@ func (s Paths) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/QueryStringCacheKeys
+// A complex data type of public keys you add to CloudFront to use with features
+// like field-level encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/PublicKey
+type PublicKey struct {
+	_ struct{} `type:"structure"`
+
+	// A time you added a public key to CloudFront.
+	//
+	// CreatedTime is a required field
+	CreatedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+
+	// A unique ID assigned to a public key you've added to CloudFront.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// A complex data type for a public key you add to CloudFront to use with features
+	// like field-level encryption.
+	//
+	// PublicKeyConfig is a required field
+	PublicKeyConfig *PublicKeyConfig `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s PublicKey) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PublicKey) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PublicKey) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.PublicKeyConfig != nil {
+		v := s.PublicKeyConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PublicKeyConfig", v, metadata)
+	}
+	return nil
+}
+
+// Information about a public key you add to CloudFront to use with features
+// like field-level encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/PublicKeyConfig
+type PublicKeyConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A unique number that ensures the request can't be replayed.
+	//
+	// CallerReference is a required field
+	CallerReference *string `type:"string" required:"true"`
+
+	// An optional comment about a public key.
+	Comment *string `type:"string"`
+
+	// The encoded public key that you want to add to CloudFront to use with features
+	// like field-level encryption.
+	//
+	// EncodedKey is a required field
+	EncodedKey *string `type:"string" required:"true"`
+
+	// The name for a public key you add to CloudFront to use with features like
+	// field-level encryption.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PublicKeyConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PublicKeyConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PublicKeyConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PublicKeyConfig"}
+
+	if s.CallerReference == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CallerReference"))
+	}
+
+	if s.EncodedKey == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EncodedKey"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PublicKeyConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CallerReference != nil {
+		v := *s.CallerReference
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallerReference", protocol.StringValue(v), metadata)
+	}
+	if s.Comment != nil {
+		v := *s.Comment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.EncodedKey != nil {
+		v := *s.EncodedKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EncodedKey", protocol.StringValue(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// A list of public keys you've added to CloudFront to use with features like
+// field-level encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/PublicKeyList
+type PublicKeyList struct {
+	_ struct{} `type:"structure"`
+
+	// An array of information about a public key you add to CloudFront to use with
+	// features like field-level encryption.
+	Items []PublicKeySummary `locationNameList:"PublicKeySummary" type:"list"`
+
+	// The maximum number of public keys you want in the response body.
+	//
+	// MaxItems is a required field
+	MaxItems *int64 `type:"integer" required:"true"`
+
+	// If there are more elements to be listed, this element is present and contains
+	// the value that you can use for the Marker request parameter to continue listing
+	// your public keys where you left off.
+	NextMarker *string `type:"string"`
+
+	// The number of public keys you added to CloudFront to use with features like
+	// field-level encryption.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s PublicKeyList) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PublicKeyList) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PublicKeyList) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "PublicKeySummary"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Public key information summary.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/PublicKeySummary
+type PublicKeySummary struct {
+	_ struct{} `type:"structure"`
+
+	// Comment for public key information summary.
+	Comment *string `type:"string"`
+
+	// Creation time for public key information summary.
+	//
+	// CreatedTime is a required field
+	CreatedTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+
+	// Encoded key for public key information summary.
+	//
+	// EncodedKey is a required field
+	EncodedKey *string `type:"string" required:"true"`
+
+	// ID for public key information summary.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// Name for public key information summary.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s PublicKeySummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PublicKeySummary) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PublicKeySummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Comment != nil {
+		v := *s.Comment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormat}, metadata)
+	}
+	if s.EncodedKey != nil {
+		v := *s.EncodedKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EncodedKey", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Query argument-profile mapping for field-level encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/QueryArgProfile
+type QueryArgProfile struct {
+	_ struct{} `type:"structure"`
+
+	// ID of profile to use for field-level encryption query argument-profile mapping
+	//
+	// ProfileId is a required field
+	ProfileId *string `type:"string" required:"true"`
+
+	// Query argument for field-level encryption query argument-profile mapping.
+	//
+	// QueryArg is a required field
+	QueryArg *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s QueryArgProfile) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s QueryArgProfile) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *QueryArgProfile) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "QueryArgProfile"}
+
+	if s.ProfileId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProfileId"))
+	}
+
+	if s.QueryArg == nil {
+		invalidParams.Add(aws.NewErrParamRequired("QueryArg"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s QueryArgProfile) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ProfileId != nil {
+		v := *s.ProfileId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ProfileId", protocol.StringValue(v), metadata)
+	}
+	if s.QueryArg != nil {
+		v := *s.QueryArg
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "QueryArg", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// Configuration for query argument-profile mapping for field-level encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/QueryArgProfileConfig
+type QueryArgProfileConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Flag to set if you want a request to be forwarded to the origin even if the
+	// profile specified by the field-level encryption query argument, fle-profile,
+	// is unknown.
+	//
+	// ForwardWhenQueryArgProfileIsUnknown is a required field
+	ForwardWhenQueryArgProfileIsUnknown *bool `type:"boolean" required:"true"`
+
+	// Profiles specified for query argument-profile mapping for field-level encryption.
+	QueryArgProfiles *QueryArgProfiles `type:"structure"`
+}
+
+// String returns the string representation
+func (s QueryArgProfileConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s QueryArgProfileConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *QueryArgProfileConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "QueryArgProfileConfig"}
+
+	if s.ForwardWhenQueryArgProfileIsUnknown == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ForwardWhenQueryArgProfileIsUnknown"))
+	}
+	if s.QueryArgProfiles != nil {
+		if err := s.QueryArgProfiles.Validate(); err != nil {
+			invalidParams.AddNested("QueryArgProfiles", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s QueryArgProfileConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ForwardWhenQueryArgProfileIsUnknown != nil {
+		v := *s.ForwardWhenQueryArgProfileIsUnknown
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ForwardWhenQueryArgProfileIsUnknown", protocol.BoolValue(v), metadata)
+	}
+	if s.QueryArgProfiles != nil {
+		v := s.QueryArgProfiles
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "QueryArgProfiles", v, metadata)
+	}
+	return nil
+}
+
+// Query argument-profile mapping for field-level encryption.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/QueryArgProfiles
+type QueryArgProfiles struct {
+	_ struct{} `type:"structure"`
+
+	// Number of items for query argument-profile mapping for field-level encryption.
+	Items []QueryArgProfile `locationNameList:"QueryArgProfile" type:"list"`
+
+	// Number of profiles for query argument-profile mapping for field-level encryption.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s QueryArgProfiles) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s QueryArgProfiles) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *QueryArgProfiles) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "QueryArgProfiles"}
+
+	if s.Quantity == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
+	}
+	if s.Items != nil {
+		for i, v := range s.Items {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Items", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s QueryArgProfiles) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Items) > 0 {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "QueryArgProfile"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/QueryStringCacheKeys
 type QueryStringCacheKeys struct {
 	_ struct{} `type:"structure"`
 
@@ -8244,7 +12040,7 @@ func (s QueryStringCacheKeys) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that identifies ways in which you want to restrict distribution
 // of your content.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Restrictions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Restrictions
 type Restrictions struct {
 	_ struct{} `type:"structure"`
 
@@ -8297,7 +12093,7 @@ func (s Restrictions) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the Amazon S3 bucket from
 // which you want CloudFront to get your media files for distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/S3Origin
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/S3Origin
 type S3Origin struct {
 	_ struct{} `type:"structure"`
 
@@ -8375,7 +12171,7 @@ func (s S3Origin) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that contains information about the Amazon S3 origin. If the
 // origin is a custom origin, use the CustomOriginConfig element instead.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/S3OriginConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/S3OriginConfig
 type S3OriginConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -8444,7 +12240,7 @@ func (s S3OriginConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 // A complex type that lists the AWS accounts that were included in the TrustedSigners
 // complex type, as well as their active CloudFront key pair IDs, if any.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Signer
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Signer
 type Signer struct {
 	_ struct{} `type:"structure"`
 
@@ -8489,7 +12285,7 @@ func (s Signer) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/StreamingDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingDistribution
 type StreamingDistribution struct {
 	_ struct{} `type:"structure"`
 
@@ -8596,7 +12392,7 @@ func (s StreamingDistribution) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The RTMP distribution's configuration information.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/StreamingDistributionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingDistributionConfig
 type StreamingDistributionConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -8769,7 +12565,7 @@ func (s StreamingDistributionConfig) MarshalFields(e protocol.FieldEncoder) erro
 
 // A streaming distribution Configuration and a list of tags to be associated
 // with the streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/StreamingDistributionConfigWithTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingDistributionConfigWithTags
 type StreamingDistributionConfigWithTags struct {
 	_ struct{} `type:"structure"`
 
@@ -8840,7 +12636,7 @@ func (s StreamingDistributionConfigWithTags) MarshalFields(e protocol.FieldEncod
 }
 
 // A streaming distribution list.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/StreamingDistributionList
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingDistributionList
 type StreamingDistributionList struct {
 	_ struct{} `type:"structure"`
 
@@ -8936,7 +12732,7 @@ func (s StreamingDistributionList) MarshalFields(e protocol.FieldEncoder) error 
 }
 
 // A summary of the information for an Amazon CloudFront streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/StreamingDistributionSummary
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingDistributionSummary
 type StreamingDistributionSummary struct {
 	_ struct{} `type:"structure"`
 
@@ -9092,7 +12888,7 @@ func (s StreamingDistributionSummary) MarshalFields(e protocol.FieldEncoder) err
 
 // A complex type that controls whether access logs are written for this streaming
 // distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/StreamingLoggingConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/StreamingLoggingConfig
 type StreamingLoggingConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -9176,7 +12972,7 @@ func (s StreamingLoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains Tag key and Tag value.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Tag
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Tag
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -9240,7 +13036,7 @@ func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains zero or more Tag elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagKeys
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/TagKeys
 type TagKeys struct {
 	_ struct{} `type:"structure"`
 
@@ -9276,7 +13072,7 @@ func (s TagKeys) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The request to add tags to a CloudFront resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/TagResourceRequest
 type TagResourceInput struct {
 	_ struct{} `type:"structure" payload:"Tags"`
 
@@ -9288,7 +13084,7 @@ type TagResourceInput struct {
 	// A complex type that contains zero or more Tag elements.
 	//
 	// Tags is a required field
-	Tags *Tags `locationName:"Tags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	Tags *Tags `locationName:"Tags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 }
 
 // String returns the string representation
@@ -9330,7 +13126,7 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Tags != nil {
 		v := s.Tags
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "Tags", v, metadata)
 	}
 	if s.Resource != nil {
@@ -9342,7 +13138,7 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TagResourceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/TagResourceOutput
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9370,7 +13166,7 @@ func (s TagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains zero or more Tag elements.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/Tags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/Tags
 type Tags struct {
 	_ struct{} `type:"structure"`
 
@@ -9440,7 +13236,7 @@ func (s Tags) MarshalFields(e protocol.FieldEncoder) error {
 //
 // For more information about updating the distribution configuration, see DistributionConfig
 // .
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/TrustedSigners
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/TrustedSigners
 type TrustedSigners struct {
 	_ struct{} `type:"structure"`
 
@@ -9518,7 +13314,7 @@ func (s TrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The request to remove tags from a CloudFront resource.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UntagResourceRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UntagResourceRequest
 type UntagResourceInput struct {
 	_ struct{} `type:"structure" payload:"TagKeys"`
 
@@ -9530,7 +13326,7 @@ type UntagResourceInput struct {
 	// A complex type that contains zero or more Tag key elements.
 	//
 	// TagKeys is a required field
-	TagKeys *TagKeys `locationName:"TagKeys" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	TagKeys *TagKeys `locationName:"TagKeys" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 }
 
 // String returns the string representation
@@ -9567,7 +13363,7 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.TagKeys != nil {
 		v := s.TagKeys
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "TagKeys", v, metadata)
 	}
 	if s.Resource != nil {
@@ -9579,7 +13375,7 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UntagResourceOutput
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UntagResourceOutput
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -9607,14 +13403,14 @@ func (s UntagResourceOutput) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The request to update an origin access identity.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateCloudFrontOriginAccessIdentityRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateCloudFrontOriginAccessIdentityRequest
 type UpdateCloudFrontOriginAccessIdentityInput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentityConfig"`
 
 	// The identity's configuration information.
 	//
 	// CloudFrontOriginAccessIdentityConfig is a required field
-	CloudFrontOriginAccessIdentityConfig *OriginAccessIdentityConfig `locationName:"CloudFrontOriginAccessIdentityConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	CloudFrontOriginAccessIdentityConfig *OriginAccessIdentityConfig `locationName:"CloudFrontOriginAccessIdentityConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 
 	// The identity's id.
 	//
@@ -9677,14 +13473,14 @@ func (s UpdateCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.Fiel
 	if s.CloudFrontOriginAccessIdentityConfig != nil {
 		v := s.CloudFrontOriginAccessIdentityConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityConfig", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateCloudFrontOriginAccessIdentityResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateCloudFrontOriginAccessIdentityResult
 type UpdateCloudFrontOriginAccessIdentityOutput struct {
 	_ struct{} `type:"structure" payload:"CloudFrontOriginAccessIdentity"`
 
@@ -9730,14 +13526,14 @@ func (s UpdateCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.Fie
 }
 
 // The request to update a distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateDistributionRequest
 type UpdateDistributionInput struct {
 	_ struct{} `type:"structure" payload:"DistributionConfig"`
 
 	// The distribution's configuration information.
 	//
 	// DistributionConfig is a required field
-	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 
 	// The distribution's id.
 	//
@@ -9800,14 +13596,14 @@ func (s UpdateDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.DistributionConfig != nil {
 		v := s.DistributionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "DistributionConfig", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateDistributionResult
 type UpdateDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"Distribution"`
 
@@ -9852,8 +13648,372 @@ func (s UpdateDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionConfigRequest
+type UpdateFieldLevelEncryptionConfigInput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionConfig"`
+
+	// Request to update a field-level encryption configuration.
+	//
+	// FieldLevelEncryptionConfig is a required field
+	FieldLevelEncryptionConfig *FieldLevelEncryptionConfig `locationName:"FieldLevelEncryptionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
+
+	// The ID of the configuration you want to update.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+
+	// The value of the ETag header that you received when retrieving the configuration
+	// identity to update. For example: E2QWRUHAPOMQZL.
+	IfMatch *string `location:"header" locationName:"If-Match" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateFieldLevelEncryptionConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFieldLevelEncryptionConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateFieldLevelEncryptionConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFieldLevelEncryptionConfigInput"}
+
+	if s.FieldLevelEncryptionConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FieldLevelEncryptionConfig"))
+	}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+	if s.FieldLevelEncryptionConfig != nil {
+		if err := s.FieldLevelEncryptionConfig.Validate(); err != nil {
+			invalidParams.AddNested("FieldLevelEncryptionConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IfMatch != nil {
+		v := *s.IfMatch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.FieldLevelEncryptionConfig != nil {
+		v := s.FieldLevelEncryptionConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionConfigResult
+type UpdateFieldLevelEncryptionConfigOutput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryption"`
+
+	responseMetadata aws.Response
+
+	// The value of the ETag header that you received when updating the configuration.
+	// For example: E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Return the results of updating the configuration.
+	FieldLevelEncryption *FieldLevelEncryption `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateFieldLevelEncryptionConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFieldLevelEncryptionConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFieldLevelEncryptionConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.FieldLevelEncryption != nil {
+		v := s.FieldLevelEncryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryption", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionProfileRequest
+type UpdateFieldLevelEncryptionProfileInput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfileConfig"`
+
+	// Request to update a field-level encryption profile.
+	//
+	// FieldLevelEncryptionProfileConfig is a required field
+	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
+
+	// The ID of the field-level encryption profile request.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+
+	// The value of the ETag header that you received when retrieving the profile
+	// identity to update. For example: E2QWRUHAPOMQZL.
+	IfMatch *string `location:"header" locationName:"If-Match" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateFieldLevelEncryptionProfileInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFieldLevelEncryptionProfileInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateFieldLevelEncryptionProfileInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFieldLevelEncryptionProfileInput"}
+
+	if s.FieldLevelEncryptionProfileConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FieldLevelEncryptionProfileConfig"))
+	}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+	if s.FieldLevelEncryptionProfileConfig != nil {
+		if err := s.FieldLevelEncryptionProfileConfig.Validate(); err != nil {
+			invalidParams.AddNested("FieldLevelEncryptionProfileConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IfMatch != nil {
+		v := *s.IfMatch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.FieldLevelEncryptionProfileConfig != nil {
+		v := s.FieldLevelEncryptionProfileConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateFieldLevelEncryptionProfileResult
+type UpdateFieldLevelEncryptionProfileOutput struct {
+	_ struct{} `type:"structure" payload:"FieldLevelEncryptionProfile"`
+
+	responseMetadata aws.Response
+
+	// The result of the field-level encryption profile request.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Return the results of updating the profile.
+	FieldLevelEncryptionProfile *FieldLevelEncryptionProfile `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdateFieldLevelEncryptionProfileOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFieldLevelEncryptionProfileOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFieldLevelEncryptionProfileOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.FieldLevelEncryptionProfile != nil {
+		v := s.FieldLevelEncryptionProfile
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfile", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdatePublicKeyRequest
+type UpdatePublicKeyInput struct {
+	_ struct{} `type:"structure" payload:"PublicKeyConfig"`
+
+	// ID of the public key to be updated.
+	//
+	// Id is a required field
+	Id *string `location:"uri" locationName:"Id" type:"string" required:"true"`
+
+	// The value of the ETag header that you received when retrieving the public
+	// key to update. For example: E2QWRUHAPOMQZL.
+	IfMatch *string `location:"header" locationName:"If-Match" type:"string"`
+
+	// Request to update public key information.
+	//
+	// PublicKeyConfig is a required field
+	PublicKeyConfig *PublicKeyConfig `locationName:"PublicKeyConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
+}
+
+// String returns the string representation
+func (s UpdatePublicKeyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdatePublicKeyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdatePublicKeyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdatePublicKeyInput"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+
+	if s.PublicKeyConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PublicKeyConfig"))
+	}
+	if s.PublicKeyConfig != nil {
+		if err := s.PublicKeyConfig.Validate(); err != nil {
+			invalidParams.AddNested("PublicKeyConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.IfMatch != nil {
+		v := *s.IfMatch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "If-Match", protocol.StringValue(v), metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.PublicKeyConfig != nil {
+		v := s.PublicKeyConfig
+
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
+		e.SetFields(protocol.PayloadTarget, "PublicKeyConfig", v, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdatePublicKeyResult
+type UpdatePublicKeyOutput struct {
+	_ struct{} `type:"structure" payload:"PublicKey"`
+
+	responseMetadata aws.Response
+
+	// The current version of the update public key result. For example: E2QWRUHAPOMQZL.
+	ETag *string `location:"header" locationName:"ETag" type:"string"`
+
+	// Return the results of updating the public key.
+	PublicKey *PublicKey `type:"structure"`
+}
+
+// String returns the string representation
+func (s UpdatePublicKeyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdatePublicKeyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdatePublicKeyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdatePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ETag != nil {
+		v := *s.ETag
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "ETag", protocol.StringValue(v), metadata)
+	}
+	if s.PublicKey != nil {
+		v := s.PublicKey
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.PayloadTarget, "PublicKey", v, metadata)
+	}
+	return nil
+}
+
 // The request to update a streaming distribution.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateStreamingDistributionRequest
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateStreamingDistributionRequest
 type UpdateStreamingDistributionInput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistributionConfig"`
 
@@ -9869,7 +14029,7 @@ type UpdateStreamingDistributionInput struct {
 	// The streaming distribution's configuration information.
 	//
 	// StreamingDistributionConfig is a required field
-	StreamingDistributionConfig *StreamingDistributionConfig `locationName:"StreamingDistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-03-25/"`
+	StreamingDistributionConfig *StreamingDistributionConfig `locationName:"StreamingDistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2017-10-30/"`
 }
 
 // String returns the string representation
@@ -9923,14 +14083,14 @@ func (s UpdateStreamingDistributionInput) MarshalFields(e protocol.FieldEncoder)
 	if s.StreamingDistributionConfig != nil {
 		v := s.StreamingDistributionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-03-25/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2017-10-30/"}
 		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfig", v, metadata)
 	}
 	return nil
 }
 
 // The returned result of the corresponding request.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/UpdateStreamingDistributionResult
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/UpdateStreamingDistributionResult
 type UpdateStreamingDistributionOutput struct {
 	_ struct{} `type:"structure" payload:"StreamingDistribution"`
 
@@ -10061,7 +14221,7 @@ func (s UpdateStreamingDistributionOutput) MarshalFields(e protocol.FieldEncoder
 //
 // For more information, see Using Alternate Domain Names and HTTPS (http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS)
 // in the Amazon CloudFront Developer Guide.
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-03-25/ViewerCertificate
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2017-10-30/ViewerCertificate
 type ViewerCertificate struct {
 	_ struct{} `type:"structure"`
 
@@ -10247,6 +14407,22 @@ func (enum EventType) MarshalValue() (string, error) {
 }
 
 func (enum EventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Format string
+
+// Enum values for Format
+const (
+	FormatUrlencoded Format = "URLEncoded"
+)
+
+func (enum Format) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Format) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

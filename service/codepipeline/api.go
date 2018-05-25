@@ -240,8 +240,11 @@ func (r DeleteCustomActionTypeRequest) Send() (*DeleteCustomActionTypeOutput, er
 // Marks a custom action as deleted. PollForJobs for the custom action will
 // fail after the action is marked for deletion. Only used for custom actions.
 //
-// You cannot recreate a custom action after it has been deleted unless you
-// increase the version number of the action.
+// To re-create a custom action after it has been deleted you must use a string
+// in the version field that has never been used before. This string can be
+// an incremented version number, for example. To restore a deleted custom action,
+// use a JSON file that is identical to the deleted action, including the original
+// string in the version field.
 //
 //    // Example sending a request using the DeleteCustomActionTypeRequest method.
 //    req := client.DeleteCustomActionTypeRequest(params)
@@ -321,6 +324,112 @@ func (c *CodePipeline) DeletePipelineRequest(input *DeletePipelineInput) DeleteP
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeletePipelineRequest{Request: req, Input: input, Copy: c.DeletePipelineRequest}
+}
+
+const opDeleteWebhook = "DeleteWebhook"
+
+// DeleteWebhookRequest is a API request type for the DeleteWebhook API operation.
+type DeleteWebhookRequest struct {
+	*aws.Request
+	Input *DeleteWebhookInput
+	Copy  func(*DeleteWebhookInput) DeleteWebhookRequest
+}
+
+// Send marshals and sends the DeleteWebhook API request.
+func (r DeleteWebhookRequest) Send() (*DeleteWebhookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteWebhookOutput), nil
+}
+
+// DeleteWebhookRequest returns a request value for making API operation for
+// AWS CodePipeline.
+//
+// Deletes a previously created webhook by name. Deleting the webhook stops
+// AWS CodePipeline from starting a pipeline every time an external event occurs.
+// The API will return successfully when trying to delete a webhook that is
+// already deleted. If a deleted webhook is re-created by calling PutWebhook
+// with the same name, it will have a different URL.
+//
+//    // Example sending a request using the DeleteWebhookRequest method.
+//    req := client.DeleteWebhookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteWebhook
+func (c *CodePipeline) DeleteWebhookRequest(input *DeleteWebhookInput) DeleteWebhookRequest {
+	op := &aws.Operation{
+		Name:       opDeleteWebhook,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteWebhookInput{}
+	}
+
+	output := &DeleteWebhookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteWebhookRequest{Request: req, Input: input, Copy: c.DeleteWebhookRequest}
+}
+
+const opDeregisterWebhookWithThirdParty = "DeregisterWebhookWithThirdParty"
+
+// DeregisterWebhookWithThirdPartyRequest is a API request type for the DeregisterWebhookWithThirdParty API operation.
+type DeregisterWebhookWithThirdPartyRequest struct {
+	*aws.Request
+	Input *DeregisterWebhookWithThirdPartyInput
+	Copy  func(*DeregisterWebhookWithThirdPartyInput) DeregisterWebhookWithThirdPartyRequest
+}
+
+// Send marshals and sends the DeregisterWebhookWithThirdParty API request.
+func (r DeregisterWebhookWithThirdPartyRequest) Send() (*DeregisterWebhookWithThirdPartyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeregisterWebhookWithThirdPartyOutput), nil
+}
+
+// DeregisterWebhookWithThirdPartyRequest returns a request value for making API operation for
+// AWS CodePipeline.
+//
+// Removes the connection between the webhook that was created by CodePipeline
+// and the external tool with events to be detected. Currently only supported
+// for webhooks that target an action type of GitHub.
+//
+//    // Example sending a request using the DeregisterWebhookWithThirdPartyRequest method.
+//    req := client.DeregisterWebhookWithThirdPartyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeregisterWebhookWithThirdParty
+func (c *CodePipeline) DeregisterWebhookWithThirdPartyRequest(input *DeregisterWebhookWithThirdPartyInput) DeregisterWebhookWithThirdPartyRequest {
+	op := &aws.Operation{
+		Name:       opDeregisterWebhookWithThirdParty,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeregisterWebhookWithThirdPartyInput{}
+	}
+
+	output := &DeregisterWebhookWithThirdPartyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeregisterWebhookWithThirdPartyRequest{Request: req, Input: input, Copy: c.DeregisterWebhookWithThirdPartyRequest}
 }
 
 const opDisableStageTransition = "DisableStageTransition"
@@ -845,6 +954,58 @@ func (c *CodePipeline) ListPipelinesRequest(input *ListPipelinesInput) ListPipel
 	return ListPipelinesRequest{Request: req, Input: input, Copy: c.ListPipelinesRequest}
 }
 
+const opListWebhooks = "ListWebhooks"
+
+// ListWebhooksRequest is a API request type for the ListWebhooks API operation.
+type ListWebhooksRequest struct {
+	*aws.Request
+	Input *ListWebhooksInput
+	Copy  func(*ListWebhooksInput) ListWebhooksRequest
+}
+
+// Send marshals and sends the ListWebhooks API request.
+func (r ListWebhooksRequest) Send() (*ListWebhooksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListWebhooksOutput), nil
+}
+
+// ListWebhooksRequest returns a request value for making API operation for
+// AWS CodePipeline.
+//
+// Gets a listing of all the webhooks in this region for this account. The output
+// lists all webhooks and includes the webhook URL and ARN, as well the configuration
+// for each webhook.
+//
+//    // Example sending a request using the ListWebhooksRequest method.
+//    req := client.ListWebhooksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhooks
+func (c *CodePipeline) ListWebhooksRequest(input *ListWebhooksInput) ListWebhooksRequest {
+	op := &aws.Operation{
+		Name:       opListWebhooks,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ListWebhooksInput{}
+	}
+
+	output := &ListWebhooksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListWebhooksRequest{Request: req, Input: input, Copy: c.ListWebhooksRequest}
+}
+
 const opPollForJobs = "PollForJobs"
 
 // PollForJobsRequest is a API request type for the PollForJobs API operation.
@@ -867,7 +1028,10 @@ func (r PollForJobsRequest) Send() (*PollForJobsOutput, error) {
 // PollForJobsRequest returns a request value for making API operation for
 // AWS CodePipeline.
 //
-// Returns information about any jobs for AWS CodePipeline to act upon.
+// Returns information about any jobs for AWS CodePipeline to act upon. PollForJobs
+// is only valid for action types with "Custom" in the owner field. If the action
+// type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action
+// returns an error.
 //
 // When this API is called, AWS CodePipeline returns temporary credentials for
 // the Amazon S3 bucket used to store artifacts for the pipeline, if the action
@@ -1268,6 +1432,114 @@ func (c *CodePipeline) PutThirdPartyJobSuccessResultRequest(input *PutThirdParty
 	return PutThirdPartyJobSuccessResultRequest{Request: req, Input: input, Copy: c.PutThirdPartyJobSuccessResultRequest}
 }
 
+const opPutWebhook = "PutWebhook"
+
+// PutWebhookRequest is a API request type for the PutWebhook API operation.
+type PutWebhookRequest struct {
+	*aws.Request
+	Input *PutWebhookInput
+	Copy  func(*PutWebhookInput) PutWebhookRequest
+}
+
+// Send marshals and sends the PutWebhook API request.
+func (r PutWebhookRequest) Send() (*PutWebhookOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutWebhookOutput), nil
+}
+
+// PutWebhookRequest returns a request value for making API operation for
+// AWS CodePipeline.
+//
+// Defines a webhook and returns a unique webhook URL generated by CodePipeline.
+// This URL can be supplied to third party source hosting providers to call
+// every time there's a code change. When CodePipeline receives a POST request
+// on this URL, the pipeline defined in the webhook is started as long as the
+// POST request satisfied the authentication and filtering requirements supplied
+// when defining the webhook. RegisterWebhookWithThirdParty and DeregisterWebhookWithThirdParty
+// APIs can be used to automatically configure supported third parties to call
+// the generated webhook URL.
+//
+//    // Example sending a request using the PutWebhookRequest method.
+//    req := client.PutWebhookRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhook
+func (c *CodePipeline) PutWebhookRequest(input *PutWebhookInput) PutWebhookRequest {
+	op := &aws.Operation{
+		Name:       opPutWebhook,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutWebhookInput{}
+	}
+
+	output := &PutWebhookOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutWebhookRequest{Request: req, Input: input, Copy: c.PutWebhookRequest}
+}
+
+const opRegisterWebhookWithThirdParty = "RegisterWebhookWithThirdParty"
+
+// RegisterWebhookWithThirdPartyRequest is a API request type for the RegisterWebhookWithThirdParty API operation.
+type RegisterWebhookWithThirdPartyRequest struct {
+	*aws.Request
+	Input *RegisterWebhookWithThirdPartyInput
+	Copy  func(*RegisterWebhookWithThirdPartyInput) RegisterWebhookWithThirdPartyRequest
+}
+
+// Send marshals and sends the RegisterWebhookWithThirdParty API request.
+func (r RegisterWebhookWithThirdPartyRequest) Send() (*RegisterWebhookWithThirdPartyOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RegisterWebhookWithThirdPartyOutput), nil
+}
+
+// RegisterWebhookWithThirdPartyRequest returns a request value for making API operation for
+// AWS CodePipeline.
+//
+// Configures a connection between the webhook that was created and the external
+// tool with events to be detected.
+//
+//    // Example sending a request using the RegisterWebhookWithThirdPartyRequest method.
+//    req := client.RegisterWebhookWithThirdPartyRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RegisterWebhookWithThirdParty
+func (c *CodePipeline) RegisterWebhookWithThirdPartyRequest(input *RegisterWebhookWithThirdPartyInput) RegisterWebhookWithThirdPartyRequest {
+	op := &aws.Operation{
+		Name:       opRegisterWebhookWithThirdParty,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RegisterWebhookWithThirdPartyInput{}
+	}
+
+	output := &RegisterWebhookWithThirdPartyOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RegisterWebhookWithThirdPartyRequest{Request: req, Input: input, Copy: c.RegisterWebhookWithThirdPartyRequest}
+}
+
 const opRetryStageExecution = "RetryStageExecution"
 
 // RetryStageExecutionRequest is a API request type for the RetryStageExecution API operation.
@@ -1471,7 +1743,7 @@ type AcknowledgeJobInput struct {
 	// response of the PollForJobs request that returned this job.
 	//
 	// Nonce is a required field
-	Nonce *string `locationName:"nonce" type:"string" required:"true"`
+	Nonce *string `locationName:"nonce" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1494,6 +1766,9 @@ func (s *AcknowledgeJobInput) Validate() error {
 
 	if s.Nonce == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Nonce"))
+	}
+	if s.Nonce != nil && len(*s.Nonce) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Nonce", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1549,7 +1824,7 @@ type AcknowledgeThirdPartyJobInput struct {
 	// response to a GetThirdPartyJobDetails request.
 	//
 	// Nonce is a required field
-	Nonce *string `locationName:"nonce" type:"string" required:"true"`
+	Nonce *string `locationName:"nonce" min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -1582,6 +1857,9 @@ func (s *AcknowledgeThirdPartyJobInput) Validate() error {
 
 	if s.Nonce == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Nonce"))
+	}
+	if s.Nonce != nil && len(*s.Nonce) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Nonce", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1862,7 +2140,7 @@ type ActionExecution struct {
 	Status ActionExecutionStatus `locationName:"status" type:"string" enum:"true"`
 
 	// A summary of the run of the action.
-	Summary *string `locationName:"summary" type:"string"`
+	Summary *string `locationName:"summary" min:"1" type:"string"`
 
 	// The system-generated token used to identify a unique approval request. The
 	// token for each open approval request can be obtained using the GetPipelineState
@@ -2038,7 +2316,7 @@ type ActionTypeId struct {
 	// Provider is a required field
 	Provider *string `locationName:"provider" min:"1" type:"string" required:"true"`
 
-	// A string that identifies the action type.
+	// A string that describes the action version.
 	//
 	// Version is a required field
 	Version *string `locationName:"version" min:"1" type:"string" required:"true"`
@@ -2836,6 +3114,118 @@ func (s DeletePipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteWebhookInput
+type DeleteWebhookInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the webhook you want to delete.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteWebhookInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteWebhookInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteWebhookInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteWebhookInput"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeleteWebhookOutput
+type DeleteWebhookOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteWebhookOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteWebhookOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteWebhookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeregisterWebhookWithThirdPartyInput
+type DeregisterWebhookWithThirdPartyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the webhook you want to deregister.
+	WebhookName *string `locationName:"webhookName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DeregisterWebhookWithThirdPartyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeregisterWebhookWithThirdPartyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeregisterWebhookWithThirdPartyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeregisterWebhookWithThirdPartyInput"}
+	if s.WebhookName != nil && len(*s.WebhookName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WebhookName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DeregisterWebhookWithThirdPartyOutput
+type DeregisterWebhookWithThirdPartyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeregisterWebhookWithThirdPartyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeregisterWebhookWithThirdPartyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeregisterWebhookWithThirdPartyOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents the input of a DisableStageTransition action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/DisableStageTransitionInput
 type DisableStageTransitionInput struct {
@@ -3077,7 +3467,7 @@ type ErrorDetails struct {
 	Code *string `locationName:"code" type:"string"`
 
 	// The text of the error message.
-	Message *string `locationName:"message" type:"string"`
+	Message *string `locationName:"message" min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -3105,7 +3495,7 @@ type ExecutionDetails struct {
 	PercentComplete *int64 `locationName:"percentComplete" type:"integer"`
 
 	// The summary of the current status of the actions.
-	Summary *string `locationName:"summary" type:"string"`
+	Summary *string `locationName:"summary" min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -3123,6 +3513,9 @@ func (s *ExecutionDetails) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ExecutionDetails"}
 	if s.ExternalExecutionId != nil && len(*s.ExternalExecutionId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ExternalExecutionId", 1))
+	}
+	if s.Summary != nil && len(*s.Summary) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Summary", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3142,7 +3535,7 @@ type FailureDetails struct {
 	// The message about the failure.
 	//
 	// Message is a required field
-	Message *string `locationName:"message" type:"string" required:"true"`
+	Message *string `locationName:"message" min:"1" type:"string" required:"true"`
 
 	// The type of the failure.
 	//
@@ -3169,6 +3562,9 @@ func (s *FailureDetails) Validate() error {
 
 	if s.Message == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Message"))
+	}
+	if s.Message != nil && len(*s.Message) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Message", 1))
 	}
 	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
@@ -3611,7 +4007,7 @@ type Job struct {
 	// A system-generated random number that AWS CodePipeline uses to ensure that
 	// the job is being worked on by only one job worker. Use this number in an
 	// AcknowledgeJob request.
-	Nonce *string `locationName:"nonce" type:"string"`
+	Nonce *string `locationName:"nonce" min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -3644,7 +4040,7 @@ type JobData struct {
 
 	// A system-generated token, such as a AWS CodeDeploy deployment ID, that a
 	// job requires in order to continue the job asynchronously.
-	ContinuationToken *string `locationName:"continuationToken" type:"string"`
+	ContinuationToken *string `locationName:"continuationToken" min:"1" type:"string"`
 
 	// Represents information about the key used to encrypt data in the artifact
 	// store, such as an AWS Key Management Service (AWS KMS) key.
@@ -3914,6 +4310,120 @@ func (s ListPipelinesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// The detail returned for each webhook after listing webhooks, such as the
+// webhook URL, the webhook name, and the webhook ARN.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhookItem
+type ListWebhookItem struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the webhook.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The detail returned for each webhook, such as the webhook authentication
+	// type and filter rules.
+	//
+	// Definition is a required field
+	Definition *WebhookDefinition `locationName:"definition" type:"structure" required:"true"`
+
+	// The number code of the error.
+	ErrorCode *string `locationName:"errorCode" type:"string"`
+
+	// The text of the error message about the webhook.
+	ErrorMessage *string `locationName:"errorMessage" type:"string"`
+
+	// The date and time a webhook was last successfully triggered, in timestamp
+	// format.
+	LastTriggered *time.Time `locationName:"lastTriggered" type:"timestamp" timestampFormat:"unix"`
+
+	// A unique URL generated by CodePipeline. When a POST request is made to this
+	// URL, the defined pipeline is started as long as the body of the post request
+	// satisfies the defined authentication and filtering conditions. Deleting and
+	// re-creating a webhook will make the old URL invalid and generate a new URL.
+	//
+	// Url is a required field
+	Url *string `locationName:"url" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ListWebhookItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListWebhookItem) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhooksInput
+type ListWebhooksInput struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token that was returned from the previous ListWebhooks call, which can
+	// be used to return the next set of webhooks in the list.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListWebhooksInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListWebhooksInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListWebhooksInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListWebhooksInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/ListWebhooksOutput
+type ListWebhooksOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// If the amount of returned information is significantly large, an identifier
+	// is also returned and can be used in a subsequent ListWebhooks call to return
+	// the next set of webhooks in the list.
+	NextToken *string `min:"1" type:"string"`
+
+	// The JSON detail returned for each webhook in the list output for the ListWebhooks
+	// call.
+	Webhooks []ListWebhookItem `locationName:"webhooks" type:"list"`
+}
+
+// String returns the string representation
+func (s ListWebhooksOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListWebhooksOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListWebhooksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents information about the output of an action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/OutputArtifact
 type OutputArtifact struct {
@@ -4125,6 +4635,8 @@ type PipelineExecutionSummary struct {
 
 	// The ID of the pipeline execution.
 	PipelineExecutionId *string `locationName:"pipelineExecutionId" type:"string"`
+
+	SourceRevisions []SourceRevision `locationName:"sourceRevisions" type:"list"`
 
 	// The date and time when the pipeline execution began, in timestamp format.
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"unix"`
@@ -4659,7 +5171,7 @@ type PutJobSuccessResultInput struct {
 	// action. It can be reused to return additional information about the progress
 	// of the custom action. When the action is complete, no continuation token
 	// should be supplied.
-	ContinuationToken *string `locationName:"continuationToken" type:"string"`
+	ContinuationToken *string `locationName:"continuationToken" min:"1" type:"string"`
 
 	// The ID of the current revision of the artifact successfully worked upon by
 	// the job.
@@ -4689,6 +5201,9 @@ func (s PutJobSuccessResultInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutJobSuccessResultInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutJobSuccessResultInput"}
+	if s.ContinuationToken != nil && len(*s.ContinuationToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContinuationToken", 1))
+	}
 
 	if s.JobId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("JobId"))
@@ -4836,7 +5351,7 @@ type PutThirdPartyJobSuccessResultInput struct {
 	// of the action. It can be reused to return additional information about the
 	// progress of the partner action. When the action is complete, no continuation
 	// token should be supplied.
-	ContinuationToken *string `locationName:"continuationToken" type:"string"`
+	ContinuationToken *string `locationName:"continuationToken" min:"1" type:"string"`
 
 	// Represents information about a current revision.
 	CurrentRevision *CurrentRevision `locationName:"currentRevision" type:"structure"`
@@ -4871,6 +5386,9 @@ func (s *PutThirdPartyJobSuccessResultInput) Validate() error {
 	}
 	if s.ClientToken != nil && len(*s.ClientToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ClientToken", 1))
+	}
+	if s.ContinuationToken != nil && len(*s.ContinuationToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContinuationToken", 1))
 	}
 
 	if s.JobId == nil {
@@ -4915,6 +5433,129 @@ func (s PutThirdPartyJobSuccessResultOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s PutThirdPartyJobSuccessResultOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhookInput
+type PutWebhookInput struct {
+	_ struct{} `type:"structure"`
+
+	// The detail provided in an input file to create the webhook, such as the webhook
+	// name, the pipeline name, and the action name. Give the webhook a unique name
+	// which identifies the webhook being defined. You may choose to name the webhook
+	// after the pipeline and action it targets so that you can easily recognize
+	// what it's used for later.
+	//
+	// Webhook is a required field
+	Webhook *WebhookDefinition `locationName:"webhook" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s PutWebhookInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutWebhookInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutWebhookInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutWebhookInput"}
+
+	if s.Webhook == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Webhook"))
+	}
+	if s.Webhook != nil {
+		if err := s.Webhook.Validate(); err != nil {
+			invalidParams.AddNested("Webhook", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/PutWebhookOutput
+type PutWebhookOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The detail returned from creating the webhook, such as the webhook name,
+	// webhook URL, and webhook ARN.
+	Webhook *ListWebhookItem `locationName:"webhook" type:"structure"`
+}
+
+// String returns the string representation
+func (s PutWebhookOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutWebhookOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutWebhookOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RegisterWebhookWithThirdPartyInput
+type RegisterWebhookWithThirdPartyInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an existing webhook created with PutWebhook to register with
+	// a supported third party.
+	WebhookName *string `locationName:"webhookName" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s RegisterWebhookWithThirdPartyInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegisterWebhookWithThirdPartyInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RegisterWebhookWithThirdPartyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RegisterWebhookWithThirdPartyInput"}
+	if s.WebhookName != nil && len(*s.WebhookName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WebhookName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/RegisterWebhookWithThirdPartyOutput
+type RegisterWebhookWithThirdPartyOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s RegisterWebhookWithThirdPartyOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RegisterWebhookWithThirdPartyOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RegisterWebhookWithThirdPartyOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5037,6 +5678,30 @@ func (s S3ArtifactLocation) String() string {
 
 // GoString returns the string representation
 func (s S3ArtifactLocation) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/SourceRevision
+type SourceRevision struct {
+	_ struct{} `type:"structure"`
+
+	// ActionName is a required field
+	ActionName *string `locationName:"actionName" min:"1" type:"string" required:"true"`
+
+	RevisionId *string `locationName:"revisionId" min:"1" type:"string"`
+
+	RevisionSummary *string `locationName:"revisionSummary" min:"1" type:"string"`
+
+	RevisionUrl *string `locationName:"revisionUrl" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s SourceRevision) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SourceRevision) GoString() string {
 	return s.String()
 }
 
@@ -5286,7 +5951,7 @@ type ThirdPartyJobData struct {
 
 	// A system-generated token, such as a AWS CodeDeploy deployment ID, that a
 	// job requires in order to continue the job asynchronously.
-	ContinuationToken *string `locationName:"continuationToken" type:"string"`
+	ContinuationToken *string `locationName:"continuationToken" min:"1" type:"string"`
 
 	// The encryption key used to encrypt and decrypt data in the artifact store
 	// for the pipeline, such as an AWS Key Management Service (AWS KMS) key. This
@@ -5333,7 +5998,7 @@ type ThirdPartyJobDetails struct {
 	// A system-generated random number that AWS CodePipeline uses to ensure that
 	// the job is being worked on by only one job worker. Use this number in an
 	// AcknowledgeThirdPartyJob request.
-	Nonce *string `locationName:"nonce" type:"string"`
+	Nonce *string `locationName:"nonce" min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -5440,6 +6105,212 @@ func (s UpdatePipelineOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s UpdatePipelineOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookAuthConfiguration
+type WebhookAuthConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	AllowedIPRange *string `min:"1" type:"string"`
+
+	SecretToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s WebhookAuthConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s WebhookAuthConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *WebhookAuthConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "WebhookAuthConfiguration"}
+	if s.AllowedIPRange != nil && len(*s.AllowedIPRange) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AllowedIPRange", 1))
+	}
+	if s.SecretToken != nil && len(*s.SecretToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecretToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Represents information about a webhook and its definition.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookDefinition
+type WebhookDefinition struct {
+	_ struct{} `type:"structure"`
+
+	// Supported options are GITHUB_HMAC, IP and UNAUTHENTICATED.
+	//
+	//    *  GITHUB_HMAC implements the authentication scheme described here: https://developer.github.com/webhooks/securing/
+	//
+	//    *  IP will reject webhooks trigger requests unless they originate from
+	//    an IP within the IP range whitelisted in the authentication configuration.
+	//
+	//    *  UNAUTHENTICATED will accept all webhook trigger requests regardless
+	//    of origin.
+	//
+	// Authentication is a required field
+	Authentication WebhookAuthenticationType `locationName:"authentication" type:"string" required:"true" enum:"true"`
+
+	// Properties that configure the authentication applied to incoming webhook
+	// trigger requests. The required properties depend on the authentication type.
+	// For GITHUB_HMAC, only the SecretToken property must be set. For IP, only
+	// the AllowedIPRange property must be set to a valid CIDR range. For UNAUTHENTICATED,
+	// no properties can be set.
+	//
+	// AuthenticationConfiguration is a required field
+	AuthenticationConfiguration *WebhookAuthConfiguration `locationName:"authenticationConfiguration" type:"structure" required:"true"`
+
+	// A list of rules applied to the body/payload sent in the POST request to a
+	// webhook URL. All defined rules must pass for the request to be accepted and
+	// the pipeline started.
+	//
+	// Filters is a required field
+	Filters []WebhookFilterRule `locationName:"filters" type:"list" required:"true"`
+
+	// The name of the webhook.
+	//
+	// Name is a required field
+	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
+
+	// The name of the action in a pipeline you want to connect to the webhook.
+	// The action must be from the source (first) stage of the pipeline.
+	//
+	// TargetAction is a required field
+	TargetAction *string `locationName:"targetAction" min:"1" type:"string" required:"true"`
+
+	// The name of the pipeline you want to connect to the webhook.
+	//
+	// TargetPipeline is a required field
+	TargetPipeline *string `locationName:"targetPipeline" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s WebhookDefinition) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s WebhookDefinition) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *WebhookDefinition) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "WebhookDefinition"}
+	if len(s.Authentication) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Authentication"))
+	}
+
+	if s.AuthenticationConfiguration == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AuthenticationConfiguration"))
+	}
+
+	if s.Filters == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Filters"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if s.TargetAction == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetAction"))
+	}
+	if s.TargetAction != nil && len(*s.TargetAction) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetAction", 1))
+	}
+
+	if s.TargetPipeline == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetPipeline"))
+	}
+	if s.TargetPipeline != nil && len(*s.TargetPipeline) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TargetPipeline", 1))
+	}
+	if s.AuthenticationConfiguration != nil {
+		if err := s.AuthenticationConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("AuthenticationConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The event criteria that specify when a webhook notification is sent to your
+// URL.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/codepipeline-2015-07-09/WebhookFilterRule
+type WebhookFilterRule struct {
+	_ struct{} `type:"structure"`
+
+	// A JsonPath expression that will be applied to the body/payload of the webhook.
+	// The value selected by JsonPath expression must match the value specified
+	// in the matchEquals field, otherwise the request will be ignored. More information
+	// on JsonPath expressions can be found here: https://github.com/json-path/JsonPath.
+	//
+	// JsonPath is a required field
+	JsonPath *string `locationName:"jsonPath" min:"1" type:"string" required:"true"`
+
+	// The value selected by the JsonPath expression must match what is supplied
+	// in the MatchEquals field, otherwise the request will be ignored. Properties
+	// from the target action configuration can be included as placeholders in this
+	// value by surrounding the action configuration key with curly braces. For
+	// example, if the value supplied here is "refs/heads/{Branch}" and the target
+	// action has an action configuration property called "Branch" with a value
+	// of "master", the MatchEquals value will be evaluated as "refs/heads/master".
+	// A list of action configuration properties for built-in action types can be
+	// found here: Pipeline Structure Reference Action Requirements (http://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
+	MatchEquals *string `locationName:"matchEquals" min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s WebhookFilterRule) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s WebhookFilterRule) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *WebhookFilterRule) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "WebhookFilterRule"}
+
+	if s.JsonPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JsonPath"))
+	}
+	if s.JsonPath != nil && len(*s.JsonPath) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("JsonPath", 1))
+	}
+	if s.MatchEquals != nil && len(*s.MatchEquals) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("MatchEquals", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 type ActionCategory string
@@ -5707,6 +6578,24 @@ func (enum StageTransitionType) MarshalValue() (string, error) {
 }
 
 func (enum StageTransitionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type WebhookAuthenticationType string
+
+// Enum values for WebhookAuthenticationType
+const (
+	WebhookAuthenticationTypeGithubHmac      WebhookAuthenticationType = "GITHUB_HMAC"
+	WebhookAuthenticationTypeIp              WebhookAuthenticationType = "IP"
+	WebhookAuthenticationTypeUnauthenticated WebhookAuthenticationType = "UNAUTHENTICATED"
+)
+
+func (enum WebhookAuthenticationType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WebhookAuthenticationType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
