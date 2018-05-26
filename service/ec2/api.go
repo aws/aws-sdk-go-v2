@@ -1597,11 +1597,7 @@ func (r CancelSpotInstanceRequestsRequest) Send() (*CancelSpotInstanceRequestsOu
 // CancelSpotInstanceRequestsRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Cancels one or more Spot Instance requests. Spot Instances are instances
-// that Amazon EC2 starts on your behalf when the maximum price that you specify
-// exceeds the current Spot price. For more information, see Spot Instance Requests
-// (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// Cancels one or more Spot Instance requests.
 //
 // Canceling a Spot Instance request does not terminate running Spot Instances
 // associated with the request.
@@ -2191,6 +2187,62 @@ func (c *EC2) CreateEgressOnlyInternetGatewayRequest(input *CreateEgressOnlyInte
 	return CreateEgressOnlyInternetGatewayRequest{Request: req, Input: input, Copy: c.CreateEgressOnlyInternetGatewayRequest}
 }
 
+const opCreateFleet = "CreateFleet"
+
+// CreateFleetRequest is a API request type for the CreateFleet API operation.
+type CreateFleetRequest struct {
+	*aws.Request
+	Input *CreateFleetInput
+	Copy  func(*CreateFleetInput) CreateFleetRequest
+}
+
+// Send marshals and sends the CreateFleet API request.
+func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFleetOutput), nil
+}
+
+// CreateFleetRequest returns a request value for making API operation for
+// Amazon Elastic Compute Cloud.
+//
+// Launches an EC2 Fleet.
+//
+// You can create a single EC2 Fleet that includes multiple launch specifications
+// that vary by instance type, AMI, Availability Zone, or subnet.
+//
+// For more information, see Launching an EC2 Fleet (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html)
+// in the Amazon Elastic Compute Cloud User Guide.
+//
+//    // Example sending a request using the CreateFleetRequest method.
+//    req := client.CreateFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleet
+func (c *EC2) CreateFleetRequest(input *CreateFleetInput) CreateFleetRequest {
+	op := &aws.Operation{
+		Name:       opCreateFleet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateFleetInput{}
+	}
+
+	output := &CreateFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateFleetRequest{Request: req, Input: input, Copy: c.CreateFleetRequest}
+}
+
 const opCreateFlowLogs = "CreateFlowLogs"
 
 // CreateFlowLogsRequest is a API request type for the CreateFlowLogs API operation.
@@ -2668,11 +2720,12 @@ func (r CreateNatGatewayRequest) Send() (*CreateNatGatewayOutput, error) {
 // CreateNatGatewayRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Creates a NAT gateway in the specified subnet. A NAT gateway can be used
-// to enable instances in a private subnet to connect to the Internet. This
-// action creates a network interface in the specified subnet with a private
-// IP address from the IP address range of the subnet. For more information,
-// see NAT Gateways (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html)
+// Creates a NAT gateway in the specified public subnet. This action creates
+// a network interface in the specified subnet with a private IP address from
+// the IP address range of the subnet. Internet-bound traffic from a private
+// subnet can be routed to the NAT gateway, therefore enabling instances in
+// the private subnet to connect to the internet. For more information, see
+// NAT Gateways (http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html)
 // in the Amazon Virtual Private Cloud User Guide.
 //
 //    // Example sending a request using the CreateNatGatewayRequest method.
@@ -2899,8 +2952,8 @@ func (r CreateNetworkInterfacePermissionRequest) Send() (*CreateNetworkInterface
 // CreateNetworkInterfacePermissionRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Grants an AWS authorized partner account permission to attach the specified
-// network interface to an instance in their account.
+// Grants an AWS-authorized account permission to attach the specified network
+// interface to an instance in their account.
 //
 // You can grant permission to a single AWS account only, and only one account
 // at a time.
@@ -3368,7 +3421,7 @@ func (r CreateSpotDatafeedSubscriptionRequest) Send() (*CreateSpotDatafeedSubscr
 // Creates a data feed for Spot Instances, enabling you to view Spot Instance
 // usage logs. You can create one data feed per AWS account. For more information,
 // see Spot Instance Data Feed (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide for Linux Instances.
 //
 //    // Example sending a request using the CreateSpotDatafeedSubscriptionRequest method.
 //    req := client.CreateSpotDatafeedSubscriptionRequest(params)
@@ -4251,6 +4304,63 @@ func (c *EC2) DeleteEgressOnlyInternetGatewayRequest(input *DeleteEgressOnlyInte
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteEgressOnlyInternetGatewayRequest{Request: req, Input: input, Copy: c.DeleteEgressOnlyInternetGatewayRequest}
+}
+
+const opDeleteFleets = "DeleteFleets"
+
+// DeleteFleetsRequest is a API request type for the DeleteFleets API operation.
+type DeleteFleetsRequest struct {
+	*aws.Request
+	Input *DeleteFleetsInput
+	Copy  func(*DeleteFleetsInput) DeleteFleetsRequest
+}
+
+// Send marshals and sends the DeleteFleets API request.
+func (r DeleteFleetsRequest) Send() (*DeleteFleetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFleetsOutput), nil
+}
+
+// DeleteFleetsRequest returns a request value for making API operation for
+// Amazon Elastic Compute Cloud.
+//
+// Deletes the specified EC2 Fleet.
+//
+// After you delete an EC2 Fleet, the EC2 Fleet launches no new instances. You
+// must specify whether the EC2 Fleet should also terminate its instances. If
+// you terminate the instances, the EC2 Fleet enters the deleted_terminating
+// state. Otherwise, the EC2 Fleet enters the deleted_running state, and the
+// instances continue to run until they are interrupted or you terminate them
+// manually.
+//
+//    // Example sending a request using the DeleteFleetsRequest method.
+//    req := client.DeleteFleetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleets
+func (c *EC2) DeleteFleetsRequest(input *DeleteFleetsInput) DeleteFleetsRequest {
+	op := &aws.Operation{
+		Name:       opDeleteFleets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteFleetsInput{}
+	}
+
+	output := &DeleteFleetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteFleetsRequest{Request: req, Input: input, Copy: c.DeleteFleetsRequest}
 }
 
 const opDeleteFlowLogs = "DeleteFlowLogs"
@@ -6486,6 +6596,156 @@ func (c *EC2) DescribeExportTasksRequest(input *DescribeExportTasksInput) Descri
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeExportTasksRequest{Request: req, Input: input, Copy: c.DescribeExportTasksRequest}
+}
+
+const opDescribeFleetHistory = "DescribeFleetHistory"
+
+// DescribeFleetHistoryRequest is a API request type for the DescribeFleetHistory API operation.
+type DescribeFleetHistoryRequest struct {
+	*aws.Request
+	Input *DescribeFleetHistoryInput
+	Copy  func(*DescribeFleetHistoryInput) DescribeFleetHistoryRequest
+}
+
+// Send marshals and sends the DescribeFleetHistory API request.
+func (r DescribeFleetHistoryRequest) Send() (*DescribeFleetHistoryOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeFleetHistoryOutput), nil
+}
+
+// DescribeFleetHistoryRequest returns a request value for making API operation for
+// Amazon Elastic Compute Cloud.
+//
+// Describes the events for the specified EC2 Fleet during the specified time.
+//
+//    // Example sending a request using the DescribeFleetHistoryRequest method.
+//    req := client.DescribeFleetHistoryRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetHistory
+func (c *EC2) DescribeFleetHistoryRequest(input *DescribeFleetHistoryInput) DescribeFleetHistoryRequest {
+	op := &aws.Operation{
+		Name:       opDescribeFleetHistory,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeFleetHistoryInput{}
+	}
+
+	output := &DescribeFleetHistoryOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeFleetHistoryRequest{Request: req, Input: input, Copy: c.DescribeFleetHistoryRequest}
+}
+
+const opDescribeFleetInstances = "DescribeFleetInstances"
+
+// DescribeFleetInstancesRequest is a API request type for the DescribeFleetInstances API operation.
+type DescribeFleetInstancesRequest struct {
+	*aws.Request
+	Input *DescribeFleetInstancesInput
+	Copy  func(*DescribeFleetInstancesInput) DescribeFleetInstancesRequest
+}
+
+// Send marshals and sends the DescribeFleetInstances API request.
+func (r DescribeFleetInstancesRequest) Send() (*DescribeFleetInstancesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeFleetInstancesOutput), nil
+}
+
+// DescribeFleetInstancesRequest returns a request value for making API operation for
+// Amazon Elastic Compute Cloud.
+//
+// Describes the running instances for the specified EC2 Fleet.
+//
+//    // Example sending a request using the DescribeFleetInstancesRequest method.
+//    req := client.DescribeFleetInstancesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetInstances
+func (c *EC2) DescribeFleetInstancesRequest(input *DescribeFleetInstancesInput) DescribeFleetInstancesRequest {
+	op := &aws.Operation{
+		Name:       opDescribeFleetInstances,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeFleetInstancesInput{}
+	}
+
+	output := &DescribeFleetInstancesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeFleetInstancesRequest{Request: req, Input: input, Copy: c.DescribeFleetInstancesRequest}
+}
+
+const opDescribeFleets = "DescribeFleets"
+
+// DescribeFleetsRequest is a API request type for the DescribeFleets API operation.
+type DescribeFleetsRequest struct {
+	*aws.Request
+	Input *DescribeFleetsInput
+	Copy  func(*DescribeFleetsInput) DescribeFleetsRequest
+}
+
+// Send marshals and sends the DescribeFleets API request.
+func (r DescribeFleetsRequest) Send() (*DescribeFleetsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeFleetsOutput), nil
+}
+
+// DescribeFleetsRequest returns a request value for making API operation for
+// Amazon Elastic Compute Cloud.
+//
+// Describes the specified EC2 Fleet.
+//
+//    // Example sending a request using the DescribeFleetsRequest method.
+//    req := client.DescribeFleetsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleets
+func (c *EC2) DescribeFleetsRequest(input *DescribeFleetsInput) DescribeFleetsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeFleets,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeFleetsInput{}
+	}
+
+	output := &DescribeFleetsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeFleetsRequest{Request: req, Input: input, Copy: c.DescribeFleetsRequest}
 }
 
 const opDescribeFlowLogs = "DescribeFlowLogs"
@@ -9188,7 +9448,7 @@ func (r DescribeSpotDatafeedSubscriptionRequest) Send() (*DescribeSpotDatafeedSu
 //
 // Describes the data feed for Spot Instances. For more information, see Spot
 // Instance Data Feed (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide for Linux Instances.
 //
 //    // Example sending a request using the DescribeSpotDatafeedSubscriptionRequest method.
 //    req := client.DescribeSpotDatafeedSubscriptionRequest(params)
@@ -9448,11 +9708,7 @@ func (r DescribeSpotInstanceRequestsRequest) Send() (*DescribeSpotInstanceReques
 // DescribeSpotInstanceRequestsRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Describes the Spot Instance requests that belong to your account. Spot Instances
-// are instances that Amazon EC2 launches when the Spot price that you specify
-// exceeds the current Spot price. For more information, see Spot Instance Requests
-// (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// Describes the specified Spot Instance requests.
 //
 // You can use DescribeSpotInstanceRequests to find a running Spot Instance
 // by examining the response. If the status of the Spot Instance is fulfilled,
@@ -9460,8 +9716,8 @@ func (r DescribeSpotInstanceRequestsRequest) Send() (*DescribeSpotInstanceReques
 // instance. Alternatively, you can use DescribeInstances with a filter to look
 // for instances where the instance lifecycle is spot.
 //
-// Spot Instance requests are deleted 4 hours after they are canceled and their
-// instances are terminated.
+// Spot Instance requests are deleted four hours after they are canceled and
+// their instances are terminated.
 //
 //    // Example sending a request using the DescribeSpotInstanceRequestsRequest method.
 //    req := client.DescribeSpotInstanceRequestsRequest(params)
@@ -9513,7 +9769,7 @@ func (r DescribeSpotPriceHistoryRequest) Send() (*DescribeSpotPriceHistoryOutput
 //
 // Describes the Spot price history. For more information, see Spot Instance
 // Pricing History (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide for Linux Instances.
 //
 // When you specify a start and end time, this operation returns the prices
 // of the instance types within the time range that you specified and the time
@@ -11796,24 +12052,23 @@ func (r GetConsoleOutputRequest) Send() (*GetConsoleOutputOutput, error) {
 // GetConsoleOutputRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Gets the console output for the specified instance.
+// Gets the console output for the specified instance. For Linux instances,
+// the instance console output displays the exact console output that would
+// normally be displayed on a physical monitor attached to a computer. For Windows
+// instances, the instance console output includes output from the EC2Config
+// service.
 //
-// Instances do not have a physical monitor through which you can view their
-// console output. They also lack physical controls that allow you to power
-// up, reboot, or shut them down. To allow these actions, we provide them through
-// the Amazon EC2 API and command line interface.
+// GetConsoleOutput returns up to 64 KB of console output shortly after it's
+// generated by the instance.
 //
-// Instance console output is buffered and posted shortly after instance boot,
-// reboot, and termination. Amazon EC2 preserves the most recent 64 KB output,
-// which is available for at least one hour after the most recent post.
+// By default, the console output returns buffered information that was posted
+// shortly after an instance transition state (start, stop, reboot, or terminate).
+// This information is available for at least one hour after the most recent
+// post.
 //
-// For Linux instances, the instance console output displays the exact console
-// output that would normally be displayed on a physical monitor attached to
-// a computer. This output is buffered because the instance produces it and
-// then posts it to a store where the instance's owner can retrieve it.
-//
-// For Windows instances, the instance console output includes output from the
-// EC2Config service.
+// You can optionally retrieve the latest serial console output at any time
+// during the instance lifecycle. This option is only supported on C5, M5, and
+// i3.metal instances.
 //
 //    // Example sending a request using the GetConsoleOutputRequest method.
 //    req := client.GetConsoleOutputRequest(params)
@@ -12389,6 +12644,58 @@ func (c *EC2) ImportVolumeRequest(input *ImportVolumeInput) ImportVolumeRequest 
 	return ImportVolumeRequest{Request: req, Input: input, Copy: c.ImportVolumeRequest}
 }
 
+const opModifyFleet = "ModifyFleet"
+
+// ModifyFleetRequest is a API request type for the ModifyFleet API operation.
+type ModifyFleetRequest struct {
+	*aws.Request
+	Input *ModifyFleetInput
+	Copy  func(*ModifyFleetInput) ModifyFleetRequest
+}
+
+// Send marshals and sends the ModifyFleet API request.
+func (r ModifyFleetRequest) Send() (*ModifyFleetOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyFleetOutput), nil
+}
+
+// ModifyFleetRequest returns a request value for making API operation for
+// Amazon Elastic Compute Cloud.
+//
+// Modifies the specified EC2 Fleet.
+//
+// While the EC2 Fleet is being modified, it is in the modifying state.
+//
+//    // Example sending a request using the ModifyFleetRequest method.
+//    req := client.ModifyFleetRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleet
+func (c *EC2) ModifyFleetRequest(input *ModifyFleetInput) ModifyFleetRequest {
+	op := &aws.Operation{
+		Name:       opModifyFleet,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyFleetInput{}
+	}
+
+	output := &ModifyFleetOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ModifyFleetRequest{Request: req, Input: input, Copy: c.ModifyFleetRequest}
+}
+
 const opModifyFpgaImageAttribute = "ModifyFpgaImageAttribute"
 
 // ModifyFpgaImageAttributeRequest is a API request type for the ModifyFpgaImageAttribute API operation.
@@ -12728,6 +13035,12 @@ func (r ModifyInstanceAttributeRequest) Send() (*ModifyInstanceAttributeOutput, 
 //
 // Modifies the specified attribute of the specified instance. You can specify
 // only one attribute at a time.
+//
+// Note: Using this action to change the security groups associated with an
+// elastic network interface (ENI) attached to an instance in a VPC can result
+// in an error if the instance has more than one ENI. To change the security
+// groups associated with an ENI attached to an instance that has multiple ENIs,
+// we recommend that you use the ModifyNetworkInterfaceAttribute action.
 //
 // To modify some attributes, the instance must be stopped. For more information,
 // see Modifying Attributes of a Stopped Instance (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_ChangingAttributesWhileInstanceStopped.html)
@@ -14787,6 +15100,10 @@ func (r RequestSpotFleetRequest) Send() (*RequestSpotFleetOutput, error) {
 //
 // Creates a Spot Fleet request.
 //
+// The Spot Fleet request specifies the total target capacity and the On-Demand
+// target capacity. Amazon EC2 calculates the difference between the total capacity
+// and On-Demand capacity, and launches the difference as Spot capacity.
+//
 // You can submit a single request that includes multiple launch specifications
 // that vary by instance type, AMI, Availability Zone, or subnet.
 //
@@ -14801,10 +15118,11 @@ func (r RequestSpotFleetRequest) Send() (*RequestSpotFleetOutput, error) {
 // pools, you can improve the availability of your fleet.
 //
 // You can specify tags for the Spot Instances. You cannot tag other resource
-// types in a Spot Fleet request; only the instance resource type is supported.
+// types in a Spot Fleet request because only the instance resource type is
+// supported.
 //
 // For more information, see Spot Fleet Requests (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide for Linux Instances.
 //
 //    // Example sending a request using the RequestSpotFleetRequest method.
 //    req := client.RequestSpotFleetRequest(params)
@@ -14854,10 +15172,10 @@ func (r RequestSpotInstancesRequest) Send() (*RequestSpotInstancesOutput, error)
 // RequestSpotInstancesRequest returns a request value for making API operation for
 // Amazon Elastic Compute Cloud.
 //
-// Creates a Spot Instance request. Spot Instances are instances that Amazon
-// EC2 launches when the maximum price that you specify exceeds the current
-// Spot price. For more information, see Spot Instance Requests (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// Creates a Spot Instance request.
+//
+// For more information, see Spot Instance Requests (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html)
+// in the Amazon EC2 User Guide for Linux Instances.
 //
 //    // Example sending a request using the RequestSpotInstancesRequest method.
 //    req := client.RequestSpotInstancesRequest(params)
@@ -18824,9 +19142,7 @@ type ConversionTask struct {
 	_ struct{} `type:"structure"`
 
 	// The ID of the conversion task.
-	//
-	// ConversionTaskId is a required field
-	ConversionTaskId *string `locationName:"conversionTaskId" type:"string" required:"true"`
+	ConversionTaskId *string `locationName:"conversionTaskId" type:"string"`
 
 	// The time when the task expires. If the upload isn't complete before the expiration
 	// time, we automatically cancel the task.
@@ -18841,9 +19157,7 @@ type ConversionTask struct {
 	ImportVolume *ImportVolumeTaskDetails `locationName:"importVolume" type:"structure"`
 
 	// The state of the conversion task.
-	//
-	// State is a required field
-	State ConversionTaskState `locationName:"state" type:"string" required:"true" enum:"true"`
+	State ConversionTaskState `locationName:"state" type:"string" enum:"true"`
 
 	// The status message related to the conversion task.
 	StatusMessage *string `locationName:"statusMessage" type:"string"`
@@ -19136,9 +19450,9 @@ type CopySnapshotInput struct {
 	// will eventually fail.
 	KmsKeyId *string `locationName:"kmsKeyId" type:"string"`
 
-	// The pre-signed URL parameter is required when copying an encrypted snapshot
-	// with the Amazon EC2 Query API; it is available as an optional parameter in
-	// all other cases. For more information, see Query Requests (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html).
+	// When you copy an encrypted source snapshot using the Amazon EC2 Query API,
+	// you must supply a pre-signed URL. This parameter is optional for unencrypted
+	// snapshots. For more information, see Query Requests (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html).
 	//
 	// The PresignedUrl should use the snapshot source endpoint, the CopySnapshot
 	// action, and include the SourceRegion, SourceSnapshotId, and DestinationRegion
@@ -19214,6 +19528,53 @@ func (s CopySnapshotOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CopySnapshotOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// The CPU options for the instance.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptions
+type CpuOptions struct {
+	_ struct{} `type:"structure"`
+
+	// The number of CPU cores for the instance.
+	CoreCount *int64 `locationName:"coreCount" type:"integer"`
+
+	// The number of threads per CPU core.
+	ThreadsPerCore *int64 `locationName:"threadsPerCore" type:"integer"`
+}
+
+// String returns the string representation
+func (s CpuOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CpuOptions) GoString() string {
+	return s.String()
+}
+
+// The CPU options for the instance. Both the core count and threads per core
+// must be specified in the request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CpuOptionsRequest
+type CpuOptionsRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The number of CPU cores for the instance.
+	CoreCount *int64 `type:"integer"`
+
+	// The number of threads per CPU core. To disable Intel Hyper-Threading Technology
+	// for the instance, specify a value of 1. Otherwise, specify the default value
+	// of 2.
+	ThreadsPerCore *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s CpuOptionsRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CpuOptionsRequest) GoString() string {
+	return s.String()
 }
 
 // Contains the parameters for CreateCustomerGateway.
@@ -19553,6 +19914,135 @@ func (s CreateEgressOnlyInternetGatewayOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s CreateEgressOnlyInternetGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetRequest
+type CreateFleetInput struct {
+	_ struct{} `type:"structure"`
+
+	// Unique, case-sensitive identifier you provide to ensure the idempotency of
+	// the request. For more information, see Ensuring Idempotency (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	ClientToken *string `type:"string"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// Indicates whether running instances should be terminated if the total target
+	// capacity of the EC2 Fleet is decreased below the current size of the EC2
+	// Fleet.
+	ExcessCapacityTerminationPolicy FleetExcessCapacityTerminationPolicy `type:"string" enum:"true"`
+
+	// The configuration for the EC2 Fleet.
+	//
+	// LaunchTemplateConfigs is a required field
+	LaunchTemplateConfigs []FleetLaunchTemplateConfigRequest `locationNameList:"item" type:"list" required:"true"`
+
+	// Indicates whether EC2 Fleet should replace unhealthy instances.
+	ReplaceUnhealthyInstances *bool `type:"boolean"`
+
+	// Includes SpotAllocationStrategy and SpotInstanceInterruptionBehavior inside
+	// this structure.
+	SpotOptions *SpotOptionsRequest `type:"structure"`
+
+	// The tags for an EC2 Fleet resource.
+	TagSpecifications []TagSpecification `locationName:"TagSpecification" locationNameList:"item" type:"list"`
+
+	// The TotalTargetCapacity, OnDemandTargetCapacity, SpotTargetCapacity, and
+	// DefaultCapacityType structure.
+	//
+	// TargetCapacitySpecification is a required field
+	TargetCapacitySpecification *TargetCapacitySpecificationRequest `type:"structure" required:"true"`
+
+	// Indicates whether running instances should be terminated when the EC2 Fleet
+	// expires.
+	TerminateInstancesWithExpiration *bool `type:"boolean"`
+
+	// The type of request. Indicates whether the EC2 Fleet only requests the target
+	// capacity, or also attempts to maintain it. If you request a certain target
+	// capacity, EC2 Fleet only places the required requests. It does not attempt
+	// to replenish instances if capacity is diminished, and does not submit requests
+	// in alternative capacity pools if capacity is unavailable. To maintain a certain
+	// target capacity, EC2 Fleet places the required requests to meet this target
+	// capacity. It also automatically replenishes any interrupted Spot Instances.
+	// Default: maintain.
+	Type FleetType `type:"string" enum:"true"`
+
+	// The start date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+	// The default is to start fulfilling the request immediately.
+	ValidFrom *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+	// At this point, no new EC2 Fleet requests are placed or able to fulfill the
+	// request. The default end date is 7 days from the current date.
+	ValidUntil *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+}
+
+// String returns the string representation
+func (s CreateFleetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFleetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateFleetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFleetInput"}
+
+	if s.LaunchTemplateConfigs == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LaunchTemplateConfigs"))
+	}
+
+	if s.TargetCapacitySpecification == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetCapacitySpecification"))
+	}
+	if s.LaunchTemplateConfigs != nil {
+		for i, v := range s.LaunchTemplateConfigs {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "LaunchTemplateConfigs", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.TargetCapacitySpecification != nil {
+		if err := s.TargetCapacitySpecification.Validate(); err != nil {
+			invalidParams.AddNested("TargetCapacitySpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateFleetResult
+type CreateFleetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ID of the EC2 Fleet.
+	FleetId *string `locationName:"fleetId" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateFleetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFleetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFleetOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -20333,12 +20823,12 @@ type CreateNetworkAclEntryInput struct {
 	PortRange *PortRange `locationName:"portRange" type:"structure"`
 
 	// The protocol. A value of -1 or all means all protocols. If you specify all,
-	// -1, or a protocol number other than tcp, udp, or icmp, traffic on all ports
-	// is allowed, regardless of any ports or ICMP types or codes you specify. If
-	// you specify protocol 58 (ICMPv6) and specify an IPv4 CIDR block, traffic
-	// for all ICMP types and codes allowed, regardless of any that you specify.
-	// If you specify protocol 58 (ICMPv6) and specify an IPv6 CIDR block, you must
-	// specify an ICMP type and code.
+	// -1, or a protocol number other than 6 (tcp), 17 (udp), or 1 (icmp), traffic
+	// on all ports is allowed, regardless of any ports or ICMP types or codes you
+	// specify. If you specify protocol 58 (ICMPv6) and specify an IPv4 CIDR block,
+	// traffic for all ICMP types and codes allowed, regardless of any that you
+	// specify. If you specify protocol 58 (ICMPv6) and specify an IPv6 CIDR block,
+	// you must specify an ICMP type and code.
 	//
 	// Protocol is a required field
 	Protocol *string `locationName:"protocol" type:"string" required:"true"`
@@ -21484,11 +21974,11 @@ type CreateVolumeInput struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	Encrypted *bool `locationName:"encrypted" type:"boolean"`
 
-	// Only valid for Provisioned IOPS SSD volumes. The number of I/O operations
-	// per second (IOPS) to provision for the volume, with a maximum ratio of 50
-	// IOPS/GiB.
+	// The number of I/O operations per second (IOPS) to provision for the volume,
+	// with a maximum ratio of 50 IOPS/GiB. Range is 100 to 32000 IOPS for volumes
+	// in most regions. For exceptions, see Amazon EBS Volume Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html).
 	//
-	// Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
+	// This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
 	Iops *int64 `type:"integer"`
 
 	// An identifier for the AWS Key Management Service (AWS KMS) customer master
@@ -21538,7 +22028,10 @@ type CreateVolumeInput struct {
 	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard
 	// for Magnetic volumes.
 	//
-	// Default: standard
+	// Defaults: If no volume type is specified, the default is standard in us-east-1,
+	// eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1, ap-northeast-1,
+	// ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-south-1, us-gov-west-1,
+	// and cn-north-1. In all other regions, EBS defaults to gp2.
 	VolumeType VolumeType `type:"string" enum:"true"`
 }
 
@@ -21593,7 +22086,7 @@ type CreateVolumeOutput struct {
 	// performance, I/O credits, and bursting, see Amazon EBS Volume Types (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	//
-	// Constraint: Range is 100-20000 IOPS for io1 volumes and 100-10000 IOPS for
+	// Constraint: Range is 100-32000 IOPS for io1 volumes and 100-10000 IOPS for
 	// gp2 volumes.
 	//
 	// Condition: This parameter is required for requests to create io1 volumes;
@@ -22637,6 +23130,153 @@ func (s DeleteEgressOnlyInternetGatewayOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DeleteEgressOnlyInternetGatewayOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Describes an EC2 Fleet error.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetError
+type DeleteFleetError struct {
+	_ struct{} `type:"structure"`
+
+	// The error code.
+	Code DeleteFleetErrorCode `locationName:"code" type:"string" enum:"true"`
+
+	// The description for the error code.
+	Message *string `locationName:"message" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteFleetError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFleetError) GoString() string {
+	return s.String()
+}
+
+// Describes an EC2 Fleet that was not successfully deleted.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetErrorItem
+type DeleteFleetErrorItem struct {
+	_ struct{} `type:"structure"`
+
+	// The error.
+	Error *DeleteFleetError `locationName:"error" type:"structure"`
+
+	// The ID of the EC2 Fleet.
+	FleetId *string `locationName:"fleetId" type:"string"`
+}
+
+// String returns the string representation
+func (s DeleteFleetErrorItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFleetErrorItem) GoString() string {
+	return s.String()
+}
+
+// Describes an EC2 Fleet that was successfully deleted.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetSuccessItem
+type DeleteFleetSuccessItem struct {
+	_ struct{} `type:"structure"`
+
+	// The current state of the EC2 Fleet.
+	CurrentFleetState FleetStateCode `locationName:"currentFleetState" type:"string" enum:"true"`
+
+	// The ID of the EC2 Fleet.
+	FleetId *string `locationName:"fleetId" type:"string"`
+
+	// The previous state of the EC2 Fleet.
+	PreviousFleetState FleetStateCode `locationName:"previousFleetState" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s DeleteFleetSuccessItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFleetSuccessItem) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetsRequest
+type DeleteFleetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// The IDs of the EC2 Fleets.
+	//
+	// FleetIds is a required field
+	FleetIds []string `locationName:"FleetId" type:"list" required:"true"`
+
+	// Indicates whether to terminate instances for an EC2 Fleet if it is deleted
+	// successfully.
+	//
+	// TerminateInstances is a required field
+	TerminateInstances *bool `type:"boolean" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteFleetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFleetsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteFleetsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFleetsInput"}
+
+	if s.FleetIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FleetIds"))
+	}
+
+	if s.TerminateInstances == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TerminateInstances"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteFleetsResult
+type DeleteFleetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Information about the EC2 Fleets that are successfully deleted.
+	SuccessfulFleetDeletions []DeleteFleetSuccessItem `locationName:"successfulFleetDeletionSet" locationNameList:"item" type:"list"`
+
+	// Information about the EC2 Fleets that are not successfully deleted.
+	UnsuccessfulFleetDeletions []DeleteFleetErrorItem `locationName:"unsuccessfulFleetDeletionSet" locationNameList:"item" type:"list"`
+}
+
+// String returns the string representation
+func (s DeleteFleetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFleetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFleetsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -25394,6 +26034,252 @@ func (s DescribeExportTasksOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetHistoryRequest
+type DescribeFleetHistoryInput struct {
+	_ struct{} `type:"structure"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// The type of events to describe. By default, all events are described.
+	EventType FleetEventType `type:"string" enum:"true"`
+
+	// The ID of the EC2 Fleet.
+	//
+	// FleetId is a required field
+	FleetId *string `type:"string" required:"true"`
+
+	// The maximum number of results to return in a single call. Specify a value
+	// between 1 and 1000. The default value is 1000. To retrieve the remaining
+	// results, make another call with the returned NextToken value.
+	MaxResults *int64 `type:"integer"`
+
+	// The token for the next set of results.
+	NextToken *string `type:"string"`
+
+	// The start date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+	//
+	// StartTime is a required field
+	StartTime *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+}
+
+// String returns the string representation
+func (s DescribeFleetHistoryInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeFleetHistoryInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeFleetHistoryInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetHistoryInput"}
+
+	if s.FleetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
+	}
+
+	if s.StartTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StartTime"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetHistoryResult
+type DescribeFleetHistoryOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ID of the EC Fleet.
+	FleetId *string `locationName:"fleetId" type:"string"`
+
+	// Information about the events in the history of the EC2 Fleet.
+	HistoryRecords []HistoryRecordEntry `locationName:"historyRecordSet" locationNameList:"item" type:"list"`
+
+	// The last date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+	// All records up to this time were retrieved.
+	//
+	// If nextToken indicates that there are more results, this value is not present.
+	LastEvaluatedTime *time.Time `locationName:"lastEvaluatedTime" type:"timestamp" timestampFormat:"iso8601"`
+
+	// The token for the next set of results.
+	NextToken *string `locationName:"nextToken" type:"string"`
+
+	// The start date and time for the events, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+	StartTime *time.Time `locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
+}
+
+// String returns the string representation
+func (s DescribeFleetHistoryOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeFleetHistoryOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFleetHistoryOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetInstancesRequest
+type DescribeFleetInstancesInput struct {
+	_ struct{} `type:"structure"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// One or more filters.
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+
+	// The ID of the EC2 Fleet.
+	//
+	// FleetId is a required field
+	FleetId *string `type:"string" required:"true"`
+
+	// The maximum number of results to return in a single call. Specify a value
+	// between 1 and 1000. The default value is 1000. To retrieve the remaining
+	// results, make another call with the returned NextToken value.
+	MaxResults *int64 `type:"integer"`
+
+	// The token for the next set of results.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeFleetInstancesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeFleetInstancesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeFleetInstancesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeFleetInstancesInput"}
+
+	if s.FleetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetInstancesResult
+type DescribeFleetInstancesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The running instances. This list is refreshed periodically and might be out
+	// of date.
+	ActiveInstances []ActiveInstance `locationName:"activeInstanceSet" locationNameList:"item" type:"list"`
+
+	// The ID of the EC2 Fleet.
+	FleetId *string `locationName:"fleetId" type:"string"`
+
+	// The token for the next set of results.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeFleetInstancesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeFleetInstancesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFleetInstancesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsRequest
+type DescribeFleetsInput struct {
+	_ struct{} `type:"structure"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// One or more filters.
+	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
+
+	// The ID of the EC2 Fleets.
+	FleetIds []string `locationName:"FleetId" type:"list"`
+
+	// The maximum number of results to return in a single call. Specify a value
+	// between 1 and 1000. The default value is 1000. To retrieve the remaining
+	// results, make another call with the returned NextToken value.
+	MaxResults *int64 `type:"integer"`
+
+	// The token for the next set of results.
+	NextToken *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeFleetsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeFleetsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetsResult
+type DescribeFleetsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The EC2 Fleets.
+	Fleets []FleetData `locationName:"fleetSet" locationNameList:"item" type:"list"`
+
+	// The token for the next set of results.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeFleetsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeFleetsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeFleetsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Contains the parameters for DescribeFlowLogs.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFlowLogsRequest
 type DescribeFlowLogsInput struct {
@@ -25806,21 +26692,21 @@ type DescribeHostsInput struct {
 
 	// One or more filters.
 	//
-	//    * instance-type - The instance type size that the Dedicated Host is configured
-	//    to support.
-	//
 	//    * auto-placement - Whether auto-placement is enabled or disabled (on |
 	//    off).
 	//
+	//    * availability-zone - The Availability Zone of the host.
+	//
+	//    * client-token - The idempotency token you provided when you allocated
+	//    the host.
+	//
 	//    * host-reservation-id - The ID of the reservation assigned to this host.
 	//
-	//    * client-token - The idempotency token you provided when you launched
-	//    the instance
+	//    * instance-type - The instance type size that the Dedicated Host is configured
+	//    to support.
 	//
-	//    * state- The allocation state of the Dedicated Host (available | under-assessment
+	//    * state - The allocation state of the Dedicated Host (available | under-assessment
 	//    | permanent-failure | released | released-permanent-failure).
-	//
-	//    * availability-zone - The Availability Zone of the host.
 	Filter []Filter `locationName:"filter" locationNameList:"Filter" type:"list"`
 
 	// The IDs of the Dedicated Hosts. The IDs are used for targeted instance launches.
@@ -29501,8 +30387,8 @@ type DescribeSpotFleetInstancesOutput struct {
 
 	responseMetadata aws.Response
 
-	// The running instances. Note that this list is refreshed periodically and
-	// might be out of date.
+	// The running instances. This list is refreshed periodically and might be out
+	// of date.
 	//
 	// ActiveInstances is a required field
 	ActiveInstances []ActiveInstance `locationName:"activeInstanceSet" locationNameList:"item" type:"list" required:"true"`
@@ -29749,7 +30635,9 @@ type DescribeSpotInstanceRequestsInput struct {
 	//    for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput
 	//    Optimized HDD, sc1for Cold HDD, or standard for Magnetic.
 	//
-	//    * launch.group-id - The security group for the instance.
+	//    * launch.group-id - The ID of the security group for the instance.
+	//
+	//    * launch.group-name - The name of the security group for the instance.
 	//
 	//    * launch.image-id - The ID of the AMI.
 	//
@@ -29800,7 +30688,7 @@ type DescribeSpotInstanceRequestsInput struct {
 	//    | cancelled | failed). Spot request status information can help you track
 	//    your Amazon EC2 Spot Instance requests. For more information, see Spot
 	//    Request Status (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html)
-	//    in the Amazon Elastic Compute Cloud User Guide.
+	//    in the Amazon EC2 User Guide for Linux Instances.
 	//
 	//    * status-code - The short code describing the most recent evaluation of
 	//    your Spot Instance request.
@@ -29903,9 +30791,9 @@ type DescribeSpotPriceHistoryInput struct {
 	//    * spot-price - The Spot price. The value must match exactly (or use wildcards;
 	//    greater than or less than comparison is not supported).
 	//
-	//    * timestamp - The timestamp of the Spot price history, in UTC format (for
-	//    example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?). Greater
-	//    than or less than comparison is not supported.
+	//    * timestamp - The time stamp of the Spot price history, in UTC format
+	//    (for example, YYYY-MM-DDTHH:MM:SSZ). You can use wildcards (* and ?).
+	//    Greater than or less than comparison is not supported.
 	Filters []Filter `locationName:"Filter" locationNameList:"Filter" type:"list"`
 
 	// Filters the results by the specified instance types.
@@ -30432,8 +31320,7 @@ type DescribeVolumesInput struct {
 	//    * attachment.instance-id - The ID of the instance the volume is attached
 	//    to.
 	//
-	//    * attachment.status - The attachment state (attaching | attached | detaching
-	//    | detached).
+	//    * attachment.status - The attachment state (attaching | attached | detaching).
 	//
 	//    * availability-zone - The Availability Zone in which the volume was created.
 	//
@@ -32641,9 +33528,7 @@ type DiskImageDescription struct {
 	Checksum *string `locationName:"checksum" type:"string"`
 
 	// The disk image format.
-	//
-	// Format is a required field
-	Format DiskImageFormat `locationName:"format" type:"string" required:"true" enum:"true"`
+	Format DiskImageFormat `locationName:"format" type:"string" enum:"true"`
 
 	// A presigned URL for the import manifest stored in Amazon S3. For information
 	// about creating a presigned URL for an Amazon S3 object, read the "Query String
@@ -32653,14 +33538,10 @@ type DiskImageDescription struct {
 	//
 	// For information about the import manifest referenced by this API action,
 	// see VM Import Manifest (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html).
-	//
-	// ImportManifestUrl is a required field
-	ImportManifestUrl *string `locationName:"importManifestUrl" type:"string" required:"true"`
+	ImportManifestUrl *string `locationName:"importManifestUrl" type:"string"`
 
 	// The size of the disk image, in GiB.
-	//
-	// Size is a required field
-	Size *int64 `locationName:"size" type:"long" required:"true"`
+	Size *int64 `locationName:"size" type:"long"`
 }
 
 // String returns the string representation
@@ -32738,9 +33619,7 @@ type DiskImageVolumeDescription struct {
 	_ struct{} `type:"structure"`
 
 	// The volume identifier.
-	//
-	// Id is a required field
-	Id *string `locationName:"id" type:"string" required:"true"`
+	Id *string `locationName:"id" type:"string"`
 
 	// The size of the volume, in GiB.
 	Size *int64 `locationName:"size" type:"long"`
@@ -33329,9 +34208,9 @@ type EventInformation struct {
 	//    * cancelled - The Spot Fleet is canceled and has no running Spot Instances.
 	//    The Spot Fleet will be deleted two days after its instances were terminated.
 	//
-	//    * cancelled_running - The Spot Fleet is canceled and will not launch additional
-	//    Spot Instances, but its existing Spot Instances continue to run until
-	//    they are interrupted or terminated.
+	//    * cancelled_running - The Spot Fleet is canceled and does not launch additional
+	//    Spot Instances. Existing Spot Instances continue to run until they are
+	//    interrupted or terminated.
 	//
 	//    * cancelled_terminating - The Spot Fleet is canceled and its Spot Instances
 	//    are terminating.
@@ -33478,8 +34357,30 @@ func (s ExportToS3TaskSpecification) GoString() string {
 }
 
 // A filter name and value pair that is used to return a more specific list
-// of results. Filters can be used to match a set of resources by various criteria,
-// such as tags, attributes, or IDs.
+// of results from a describe operation. Filters can be used to match a set
+// of resources by specific criteria, such as tags, attributes, or IDs. The
+// filters supported by a describe operation are documented with the describe
+// operation. For example:
+//
+//    * DescribeAvailabilityZones
+//
+//    * DescribeImages
+//
+//    * DescribeInstances
+//
+//    * DescribeKeyPairs
+//
+//    * DescribeSecurityGroups
+//
+//    * DescribeSnapshots
+//
+//    * DescribeSubnets
+//
+//    * DescribeTags
+//
+//    * DescribeVolumes
+//
+//    * DescribeVpcs
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
@@ -33498,6 +34399,222 @@ func (s Filter) String() string {
 
 // GoString returns the string representation
 func (s Filter) GoString() string {
+	return s.String()
+}
+
+// Describes an EC2 Fleet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetData
+type FleetData struct {
+	_ struct{} `type:"structure"`
+
+	// The progress of the EC2 Fleet. If there is an error, the status is error.
+	// After all requests are placed, the status is pending_fulfillment. If the
+	// size of the EC2 Fleet is equal to or greater than its target capacity, the
+	// status is fulfilled. If the size of the EC2 Fleet is decreased, the status
+	// is pending_termination while instances are terminating.
+	ActivityStatus FleetActivityStatus `locationName:"activityStatus" type:"string" enum:"true"`
+
+	// Unique, case-sensitive identifier you provide to ensure the idempotency of
+	// the request. For more information, see Ensuring Idempotency (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	//
+	// Constraints: Maximum 64 ASCII characters
+	ClientToken *string `locationName:"clientToken" type:"string"`
+
+	// The creation date and time of the EC2 Fleet.
+	CreateTime *time.Time `locationName:"createTime" type:"timestamp" timestampFormat:"iso8601"`
+
+	// Indicates whether running instances should be terminated if the target capacity
+	// of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+	ExcessCapacityTerminationPolicy FleetExcessCapacityTerminationPolicy `locationName:"excessCapacityTerminationPolicy" type:"string" enum:"true"`
+
+	// The ID of the EC2 Fleet.
+	FleetId *string `locationName:"fleetId" type:"string"`
+
+	// The state of the EC2 Fleet.
+	FleetState FleetStateCode `locationName:"fleetState" type:"string" enum:"true"`
+
+	// The number of units fulfilled by this request compared to the set target
+	// capacity.
+	FulfilledCapacity *float64 `locationName:"fulfilledCapacity" type:"double"`
+
+	// The number of units fulfilled by this request compared to the set target
+	// On-Demand capacity.
+	FulfilledOnDemandCapacity *float64 `locationName:"fulfilledOnDemandCapacity" type:"double"`
+
+	// The launch template and overrides.
+	LaunchTemplateConfigs []FleetLaunchTemplateConfig `locationName:"launchTemplateConfigs" locationNameList:"item" type:"list"`
+
+	// Indicates whether EC2 Fleet should replace unhealthy instances.
+	ReplaceUnhealthyInstances *bool `locationName:"replaceUnhealthyInstances" type:"boolean"`
+
+	// The configuration of Spot Instances in an EC2 Fleet.
+	SpotOptions *SpotOptions `locationName:"spotOptions" type:"structure"`
+
+	// The tags for an EC2 Fleet resource.
+	Tags []Tag `locationName:"tagSet" locationNameList:"item" type:"list"`
+
+	// The number of units to request. You can choose to set the target capacity
+	// in terms of instances or a performance characteristic that is important to
+	// your application workload, such as vCPUs, memory, or I/O. If the request
+	// type is maintain, you can specify a target capacity of 0 and add capacity
+	// later.
+	TargetCapacitySpecification *TargetCapacitySpecification `locationName:"targetCapacitySpecification" type:"structure"`
+
+	// Indicates whether running instances should be terminated when the EC2 Fleet
+	// expires.
+	TerminateInstancesWithExpiration *bool `locationName:"terminateInstancesWithExpiration" type:"boolean"`
+
+	// The type of request. Indicates whether the EC2 Fleet only requests the target
+	// capacity, or also attempts to maintain it. If you request a certain target
+	// capacity, EC2 Fleet only places the required requests; it does not attempt
+	// to replenish instances if capacity is diminished, and does not submit requests
+	// in alternative capacity pools if capacity is unavailable. To maintain a certain
+	// target capacity, EC2 Fleet places the required requests to meet this target
+	// capacity. It also automatically replenishes any interrupted Spot Instances.
+	// Default: maintain.
+	Type FleetType `locationName:"type" type:"string" enum:"true"`
+
+	// The start date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+	// The default is to start fulfilling the request immediately.
+	ValidFrom *time.Time `locationName:"validFrom" type:"timestamp" timestampFormat:"iso8601"`
+
+	// The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+	// At this point, no new instance requests are placed or able to fulfill the
+	// request. The default end date is 7 days from the current date.
+	ValidUntil *time.Time `locationName:"validUntil" type:"timestamp" timestampFormat:"iso8601"`
+}
+
+// String returns the string representation
+func (s FleetData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FleetData) GoString() string {
+	return s.String()
+}
+
+// Describes a launch template and overrides.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateConfig
+type FleetLaunchTemplateConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The launch template.
+	LaunchTemplateSpecification *FleetLaunchTemplateSpecification `locationName:"launchTemplateSpecification" type:"structure"`
+
+	// Any parameters that you specify override the same parameters in the launch
+	// template.
+	Overrides []FleetLaunchTemplateOverrides `locationName:"overrides" locationNameList:"item" type:"list"`
+}
+
+// String returns the string representation
+func (s FleetLaunchTemplateConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FleetLaunchTemplateConfig) GoString() string {
+	return s.String()
+}
+
+// Describes a launch template and overrides.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateConfigRequest
+type FleetLaunchTemplateConfigRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The launch template to use. You must specify either the launch template ID
+	// or launch template name in the request.
+	LaunchTemplateSpecification *FleetLaunchTemplateSpecificationRequest `type:"structure"`
+
+	// Any parameters that you specify override the same parameters in the launch
+	// template.
+	Overrides []FleetLaunchTemplateOverridesRequest `locationNameList:"item" type:"list"`
+}
+
+// String returns the string representation
+func (s FleetLaunchTemplateConfigRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FleetLaunchTemplateConfigRequest) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FleetLaunchTemplateConfigRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FleetLaunchTemplateConfigRequest"}
+	if s.LaunchTemplateSpecification != nil {
+		if err := s.LaunchTemplateSpecification.Validate(); err != nil {
+			invalidParams.AddNested("LaunchTemplateSpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Describes overrides for a launch template.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverrides
+type FleetLaunchTemplateOverrides struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zone in which to launch the instances.
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
+
+	// The instance type.
+	InstanceType InstanceType `locationName:"instanceType" type:"string" enum:"true"`
+
+	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
+	MaxPrice *string `locationName:"maxPrice" type:"string"`
+
+	// The ID of the subnet in which to launch the instances.
+	SubnetId *string `locationName:"subnetId" type:"string"`
+
+	// The number of units provided by the specified instance type.
+	WeightedCapacity *float64 `locationName:"weightedCapacity" type:"double"`
+}
+
+// String returns the string representation
+func (s FleetLaunchTemplateOverrides) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FleetLaunchTemplateOverrides) GoString() string {
+	return s.String()
+}
+
+// Describes overrides for a launch template.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateOverridesRequest
+type FleetLaunchTemplateOverridesRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The Availability Zone in which to launch the instances.
+	AvailabilityZone *string `type:"string"`
+
+	// The instance type.
+	InstanceType InstanceType `type:"string" enum:"true"`
+
+	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
+	MaxPrice *string `type:"string"`
+
+	// The ID of the subnet in which to launch the instances.
+	SubnetId *string `type:"string"`
+
+	// The number of units provided by the specified instance type.
+	WeightedCapacity *float64 `type:"double"`
+}
+
+// String returns the string representation
+func (s FleetLaunchTemplateOverridesRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FleetLaunchTemplateOverridesRequest) GoString() string {
 	return s.String()
 }
 
@@ -33532,6 +34649,45 @@ func (s FleetLaunchTemplateSpecification) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *FleetLaunchTemplateSpecification) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "FleetLaunchTemplateSpecification"}
+	if s.LaunchTemplateName != nil && len(*s.LaunchTemplateName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("LaunchTemplateName", 3))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The launch template to use. You must specify either the launch template ID
+// or launch template name in the request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FleetLaunchTemplateSpecificationRequest
+type FleetLaunchTemplateSpecificationRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the launch template.
+	LaunchTemplateId *string `type:"string"`
+
+	// The name of the launch template.
+	LaunchTemplateName *string `min:"3" type:"string"`
+
+	// The version number of the launch template.
+	Version *string `type:"string"`
+}
+
+// String returns the string representation
+func (s FleetLaunchTemplateSpecificationRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s FleetLaunchTemplateSpecificationRequest) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FleetLaunchTemplateSpecificationRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FleetLaunchTemplateSpecificationRequest"}
 	if s.LaunchTemplateName != nil && len(*s.LaunchTemplateName) < 3 {
 		invalidParams.Add(aws.NewErrParamMinLen("LaunchTemplateName", 3))
 	}
@@ -33725,6 +34881,11 @@ type GetConsoleOutputInput struct {
 	//
 	// InstanceId is a required field
 	InstanceId *string `type:"string" required:"true"`
+
+	// When enabled, retrieves the latest console output for the instance.
+	//
+	// Default: disabled (false)
+	Latest *bool `type:"boolean"`
 }
 
 // String returns the string representation
@@ -33761,11 +34922,11 @@ type GetConsoleOutputOutput struct {
 	// The ID of the instance.
 	InstanceId *string `locationName:"instanceId" type:"string"`
 
-	// The console output, Base64-encoded. If using a command line tool, the tool
-	// decodes the output for you.
+	// The console output, base64-encoded. If you are using a command line tool,
+	// the tool decodes the output for you.
 	Output *string `locationName:"output" type:"string"`
 
-	// The time the output was last updated.
+	// The time at which the output was last updated.
 	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"iso8601"`
 }
 
@@ -34241,10 +35402,38 @@ func (s HistoryRecord) GoString() string {
 	return s.String()
 }
 
+// Describes an event in the history of the EC2 Fleet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/HistoryRecordEntry
+type HistoryRecordEntry struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the event.
+	EventInformation *EventInformation `locationName:"eventInformation" type:"structure"`
+
+	// The event type.
+	EventType FleetEventType `locationName:"eventType" type:"string" enum:"true"`
+
+	// The date and time of the event, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+	Timestamp *time.Time `locationName:"timestamp" type:"timestamp" timestampFormat:"iso8601"`
+}
+
+// String returns the string representation
+func (s HistoryRecordEntry) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s HistoryRecordEntry) GoString() string {
+	return s.String()
+}
+
 // Describes the properties of the Dedicated Host.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host
 type Host struct {
 	_ struct{} `type:"structure"`
+
+	// The time that the Dedicated Host was allocated.
+	AllocationTime *time.Time `locationName:"allocationTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// Whether auto-placement is on or off.
 	AutoPlacement AutoPlacement `locationName:"autoPlacement" type:"string" enum:"true"`
@@ -34272,6 +35461,9 @@ type Host struct {
 
 	// The IDs and instance type that are currently running on the Dedicated Host.
 	Instances []HostInstance `locationName:"instances" locationNameList:"item" type:"list"`
+
+	// The time that the Dedicated Host was released.
+	ReleaseTime *time.Time `locationName:"releaseTime" type:"timestamp" timestampFormat:"iso8601"`
 
 	// The Dedicated Host's state.
 	State AllocationState `locationName:"state" type:"string" enum:"true"`
@@ -35011,9 +36203,7 @@ type ImportInstanceTaskDetails struct {
 	Platform PlatformValues `locationName:"platform" type:"string" enum:"true"`
 
 	// One or more volumes.
-	//
-	// Volumes is a required field
-	Volumes []ImportInstanceVolumeDetailItem `locationName:"volumes" locationNameList:"item" type:"list" required:"true"`
+	Volumes []ImportInstanceVolumeDetailItem `locationName:"volumes" locationNameList:"item" type:"list"`
 }
 
 // String returns the string representation
@@ -35353,27 +36543,19 @@ type ImportVolumeTaskDetails struct {
 	_ struct{} `type:"structure"`
 
 	// The Availability Zone where the resulting volume will reside.
-	//
-	// AvailabilityZone is a required field
-	AvailabilityZone *string `locationName:"availabilityZone" type:"string" required:"true"`
+	AvailabilityZone *string `locationName:"availabilityZone" type:"string"`
 
 	// The number of bytes converted so far.
-	//
-	// BytesConverted is a required field
-	BytesConverted *int64 `locationName:"bytesConverted" type:"long" required:"true"`
+	BytesConverted *int64 `locationName:"bytesConverted" type:"long"`
 
 	// The description you provided when starting the import volume task.
 	Description *string `locationName:"description" type:"string"`
 
 	// The image.
-	//
-	// Image is a required field
-	Image *DiskImageDescription `locationName:"image" type:"structure" required:"true"`
+	Image *DiskImageDescription `locationName:"image" type:"structure"`
 
 	// The volume.
-	//
-	// Volume is a required field
-	Volume *DiskImageVolumeDescription `locationName:"volume" type:"structure" required:"true"`
+	Volume *DiskImageVolumeDescription `locationName:"volume" type:"structure"`
 }
 
 // String returns the string representation
@@ -35403,6 +36585,9 @@ type Instance struct {
 
 	// The idempotency token you provided when you launched the instance, if applicable.
 	ClientToken *string `locationName:"clientToken" type:"string"`
+
+	// The CPU options for the instance.
+	CpuOptions *CpuOptions `locationName:"cpuOptions" type:"structure"`
 
 	// Indicates whether the instance is optimized for Amazon EBS I/O. This optimization
 	// provides dedicated throughput to Amazon EBS and an optimized configuration
@@ -37065,7 +38250,7 @@ func (s LaunchTemplatePlacementRequest) GoString() string {
 }
 
 // The launch template to use. You must specify either the launch template ID
-// or launch template name in the request.
+// or launch template name in the request, but not both.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateSpecification
 type LaunchTemplateSpecification struct {
 	_ struct{} `type:"structure"`
@@ -37397,6 +38582,90 @@ func (s LoadPermissionRequest) String() string {
 // GoString returns the string representation
 func (s LoadPermissionRequest) GoString() string {
 	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleetRequest
+type ModifyFleetInput struct {
+	_ struct{} `type:"structure"`
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have
+	// the required permissions, the error response is DryRunOperation. Otherwise,
+	// it is UnauthorizedOperation.
+	DryRun *bool `type:"boolean"`
+
+	// Indicates whether running instances should be terminated if the total target
+	// capacity of the EC2 Fleet is decreased below the current size of the EC2
+	// Fleet.
+	ExcessCapacityTerminationPolicy FleetExcessCapacityTerminationPolicy `type:"string" enum:"true"`
+
+	// The ID of the EC2 Fleet.
+	//
+	// FleetId is a required field
+	FleetId *string `type:"string" required:"true"`
+
+	// The size of the EC2 Fleet.
+	//
+	// TargetCapacitySpecification is a required field
+	TargetCapacitySpecification *TargetCapacitySpecificationRequest `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ModifyFleetInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyFleetInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyFleetInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyFleetInput"}
+
+	if s.FleetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
+	}
+
+	if s.TargetCapacitySpecification == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetCapacitySpecification"))
+	}
+	if s.TargetCapacitySpecification != nil {
+		if err := s.TargetCapacitySpecification.Validate(); err != nil {
+			invalidParams.AddNested("TargetCapacitySpecification", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleetResult
+type ModifyFleetOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Is true if the request succeeds, and an error otherwise.
+	Return *bool `locationName:"return" type:"boolean"`
+}
+
+// String returns the string representation
+func (s ModifyFleetOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyFleetOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyFleetOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFpgaImageAttributeRequest
@@ -42038,13 +43307,13 @@ type RequestSpotInstancesInput struct {
 	// for termination and provides a Spot Instance termination notice, which gives
 	// the instance a two-minute warning before it terminates.
 	//
-	// Note that you can't specify an Availability Zone group or a launch group
-	// if you specify a duration.
+	// You can't specify an Availability Zone group or a launch group if you specify
+	// a duration.
 	BlockDurationMinutes *int64 `locationName:"blockDurationMinutes" type:"integer"`
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. For more information, see How to Ensure Idempotency (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// in the Amazon EC2 User Guide for Linux Instances.
 	ClientToken *string `locationName:"clientToken" type:"string"`
 
 	// Checks whether you have the required permissions for the action, without
@@ -43469,6 +44738,11 @@ type RunInstancesInput struct {
 	// Constraints: Maximum 64 ASCII characters
 	ClientToken *string `locationName:"clientToken" type:"string"`
 
+	// The CPU options for the instance. For more information, see Optimizing CPU
+	// Options (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	CpuOptions *CpuOptionsRequest `type:"structure"`
+
 	// The credit option for CPU usage of the instance. Valid values are standard
 	// and unlimited. To change this attribute after launch, use ModifyInstanceCreditSpecification.
 	// For more information, see T2 Instances (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html)
@@ -43557,6 +44831,7 @@ type RunInstancesInput struct {
 
 	// The launch template to use to launch the instances. Any parameters that you
 	// specify in RunInstances override the same parameters in the launch template.
+	// You can specify either the name or ID of a launch template, but not both.
 	LaunchTemplate *LaunchTemplateSpecification `type:"structure"`
 
 	// The maximum number of instances to launch. If you specify more instances
@@ -45018,8 +46293,8 @@ type SpotFleetRequestConfigData struct {
 	// by the Spot Fleet request. The default is lowestPrice.
 	AllocationStrategy AllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
 
-	// A unique, case-sensitive identifier you provide to ensure idempotency of
-	// your listings. This helps avoid duplicate listings. For more information,
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of your listings. This helps to avoid duplicate listings. For more information,
 	// see Ensuring Idempotency (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string `locationName:"clientToken" type:"string"`
 
@@ -45057,6 +46332,17 @@ type SpotFleetRequestConfigData struct {
 	// HS1, M1, M2, M3, and T1.
 	LoadBalancersConfig *LoadBalancersConfig `locationName:"loadBalancersConfig" type:"structure"`
 
+	// The number of On-Demand units fulfilled by this request compared to the set
+	// target On-Demand capacity.
+	OnDemandFulfilledCapacity *float64 `locationName:"onDemandFulfilledCapacity" type:"double"`
+
+	// The number of On-Demand units to request. You can choose to set the target
+	// capacity in terms of instances or a performance characteristic that is important
+	// to your application workload, such as vCPUs, memory, or I/O. If the request
+	// type is maintain, you can specify a target capacity of 0 and add capacity
+	// later.
+	OnDemandTargetCapacity *int64 `locationName:"onDemandTargetCapacity" type:"integer"`
+
 	// Indicates whether Spot Fleet should replace unhealthy instances.
 	ReplaceUnhealthyInstances *bool `locationName:"replaceUnhealthyInstances" type:"boolean"`
 
@@ -45077,14 +46363,13 @@ type SpotFleetRequestConfigData struct {
 	// Fleet request expires.
 	TerminateInstancesWithExpiration *bool `locationName:"terminateInstancesWithExpiration" type:"boolean"`
 
-	// The type of request. Indicates whether the fleet will only request the target
-	// capacity or also attempt to maintain it. When you request a certain target
-	// capacity, the fleet will only place the required requests. It will not attempt
-	// to replenish Spot Instances if capacity is diminished, nor will it submit
-	// requests in alternative Spot pools if capacity is not available. When you
-	// want to maintain a certain target capacity, fleet will place the required
-	// requests to meet this target capacity. It will also automatically replenish
-	// any interrupted instances. Default: maintain.
+	// The type of request. Indicates whether the Spot Fleet only requests the target
+	// capacity or also attempts to maintain it. When this value is request, the
+	// Spot Fleet only places the required requests. It does not attempt to replenish
+	// Spot Instances if capacity is diminished, nor does it submit requests in
+	// alternative Spot pools if capacity is not available. To maintain a certain
+	// target capacity, the Spot Fleet places the required requests to meet capacity
+	// and automatically replenishes any interrupted instances. Default: maintain.
 	Type FleetType `locationName:"type" type:"string" enum:"true"`
 
 	// The start date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
@@ -45217,10 +46502,9 @@ type SpotInstanceRequest struct {
 	// The maximum price per hour that you are willing to pay for a Spot Instance.
 	SpotPrice *string `locationName:"spotPrice" type:"string"`
 
-	// The state of the Spot Instance request. Spot status information can help
-	// you track your Spot Instance requests. For more information, see Spot Status
-	// (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// The state of the Spot Instance request. Spot status information helps track
+	// your Spot Instance requests. For more information, see Spot Status (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html)
+	// in the Amazon EC2 User Guide for Linux Instances.
 	State SpotInstanceState `locationName:"state" type:"string" enum:"true"`
 
 	// The status code and status message describing the Spot Instance request.
@@ -45282,7 +46566,7 @@ type SpotInstanceStatus struct {
 	_ struct{} `type:"structure"`
 
 	// The status code. For a list of status codes, see Spot Status Codes (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html#spot-instance-bid-status-understand)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// in the Amazon EC2 User Guide for Linux Instances.
 	Code *string `locationName:"code" type:"string"`
 
 	// The description for the status code.
@@ -45338,6 +46622,52 @@ func (s SpotMarketOptions) String() string {
 
 // GoString returns the string representation
 func (s SpotMarketOptions) GoString() string {
+	return s.String()
+}
+
+// Describes the configuration of Spot Instances in an EC2 Fleet.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptions
+type SpotOptions struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates how to allocate the target capacity across the Spot pools specified
+	// by the Spot Fleet request. The default is lowestPrice.
+	AllocationStrategy SpotAllocationStrategy `locationName:"allocationStrategy" type:"string" enum:"true"`
+
+	// The behavior when a Spot Instance is interrupted. The default is terminate.
+	InstanceInterruptionBehavior SpotInstanceInterruptionBehavior `locationName:"instanceInterruptionBehavior" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SpotOptions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SpotOptions) GoString() string {
+	return s.String()
+}
+
+// Describes the configuration of Spot Instances in an EC2 Fleet request.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SpotOptionsRequest
+type SpotOptionsRequest struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates how to allocate the target capacity across the Spot pools specified
+	// by the Spot Fleet request. The default is lowestPrice.
+	AllocationStrategy SpotAllocationStrategy `type:"string" enum:"true"`
+
+	// The behavior when a Spot Instance is interrupted. The default is terminate.
+	InstanceInterruptionBehavior SpotInstanceInterruptionBehavior `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SpotOptionsRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s SpotOptionsRequest) GoString() string {
 	return s.String()
 }
 
@@ -45896,7 +47226,7 @@ type TagSpecification struct {
 	_ struct{} `type:"structure"`
 
 	// The type of resource to tag. Currently, the resource types that support tagging
-	// on creation are instance and volume.
+	// on creation are instance, snapshot, and volume.
 	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
 
 	// The tags to apply to the resource.
@@ -45911,6 +47241,86 @@ func (s TagSpecification) String() string {
 // GoString returns the string representation
 func (s TagSpecification) GoString() string {
 	return s.String()
+}
+
+// The number of units to request. You can choose to set the target capacity
+// in terms of instances or a performance characteristic that is important to
+// your application workload, such as vCPUs, memory, or I/O. If the request
+// type is maintain, you can specify a target capacity of 0 and add capacity
+// later.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecification
+type TargetCapacitySpecification struct {
+	_ struct{} `type:"structure"`
+
+	// The default TotalTargetCapacity, which is either Spot or On-Demand.
+	DefaultTargetCapacityType DefaultTargetCapacityType `locationName:"defaultTargetCapacityType" type:"string" enum:"true"`
+
+	// The number of On-Demand units to request.
+	OnDemandTargetCapacity *int64 `locationName:"onDemandTargetCapacity" type:"integer"`
+
+	// The maximum number of Spot units to launch.
+	SpotTargetCapacity *int64 `locationName:"spotTargetCapacity" type:"integer"`
+
+	// The number of units to request, filled using DefaultTargetCapacityType.
+	TotalTargetCapacity *int64 `locationName:"totalTargetCapacity" type:"integer"`
+}
+
+// String returns the string representation
+func (s TargetCapacitySpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TargetCapacitySpecification) GoString() string {
+	return s.String()
+}
+
+// The number of units to request. You can choose to set the target capacity
+// in terms of instances or a performance characteristic that is important to
+// your application workload, such as vCPUs, memory, or I/O. If the request
+// type is maintain, you can specify a target capacity of 0 and add capacity
+// later.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TargetCapacitySpecificationRequest
+type TargetCapacitySpecificationRequest struct {
+	_ struct{} `type:"structure"`
+
+	// The default TotalTargetCapacity, which is either Spot or On-Demand.
+	DefaultTargetCapacityType DefaultTargetCapacityType `type:"string" enum:"true"`
+
+	// The number of On-Demand units to request.
+	OnDemandTargetCapacity *int64 `type:"integer"`
+
+	// The number of Spot units to request.
+	SpotTargetCapacity *int64 `type:"integer"`
+
+	// The number of units to request, filled using DefaultTargetCapacityType.
+	//
+	// TotalTargetCapacity is a required field
+	TotalTargetCapacity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s TargetCapacitySpecificationRequest) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TargetCapacitySpecificationRequest) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TargetCapacitySpecificationRequest) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TargetCapacitySpecificationRequest"}
+
+	if s.TotalTargetCapacity == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TotalTargetCapacity"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Information about the Convertible Reserved Instance offering.
@@ -47909,6 +49319,42 @@ func (enum DatafeedSubscriptionState) MarshalValueBuf(b []byte) ([]byte, error) 
 	return append(b, enum...), nil
 }
 
+type DefaultTargetCapacityType string
+
+// Enum values for DefaultTargetCapacityType
+const (
+	DefaultTargetCapacityTypeSpot     DefaultTargetCapacityType = "spot"
+	DefaultTargetCapacityTypeOnDemand DefaultTargetCapacityType = "on-demand"
+)
+
+func (enum DefaultTargetCapacityType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DefaultTargetCapacityType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DeleteFleetErrorCode string
+
+// Enum values for DeleteFleetErrorCode
+const (
+	DeleteFleetErrorCodeFleetIdDoesNotExist      DeleteFleetErrorCode = "fleetIdDoesNotExist"
+	DeleteFleetErrorCodeFleetIdMalformed         DeleteFleetErrorCode = "fleetIdMalformed"
+	DeleteFleetErrorCodeFleetNotInDeletableState DeleteFleetErrorCode = "fleetNotInDeletableState"
+	DeleteFleetErrorCodeUnexpectedError          DeleteFleetErrorCode = "unexpectedError"
+)
+
+func (enum DeleteFleetErrorCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeleteFleetErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeviceType string
 
 // Enum values for DeviceType
@@ -48082,6 +49528,82 @@ func (enum ExportTaskState) MarshalValue() (string, error) {
 }
 
 func (enum ExportTaskState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FleetActivityStatus string
+
+// Enum values for FleetActivityStatus
+const (
+	FleetActivityStatusError              FleetActivityStatus = "error"
+	FleetActivityStatusPendingFulfillment FleetActivityStatus = "pending-fulfillment"
+	FleetActivityStatusPendingTermination FleetActivityStatus = "pending-termination"
+	FleetActivityStatusFulfilled          FleetActivityStatus = "fulfilled"
+)
+
+func (enum FleetActivityStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetActivityStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FleetEventType string
+
+// Enum values for FleetEventType
+const (
+	FleetEventTypeInstanceChange FleetEventType = "instance-change"
+	FleetEventTypeFleetChange    FleetEventType = "fleet-change"
+	FleetEventTypeServiceError   FleetEventType = "service-error"
+)
+
+func (enum FleetEventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetEventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FleetExcessCapacityTerminationPolicy string
+
+// Enum values for FleetExcessCapacityTerminationPolicy
+const (
+	FleetExcessCapacityTerminationPolicyNoTermination FleetExcessCapacityTerminationPolicy = "no-termination"
+	FleetExcessCapacityTerminationPolicyTermination   FleetExcessCapacityTerminationPolicy = "termination"
+)
+
+func (enum FleetExcessCapacityTerminationPolicy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetExcessCapacityTerminationPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FleetStateCode string
+
+// Enum values for FleetStateCode
+const (
+	FleetStateCodeSubmitted          FleetStateCode = "submitted"
+	FleetStateCodeActive             FleetStateCode = "active"
+	FleetStateCodeDeleted            FleetStateCode = "deleted"
+	FleetStateCodeFailed             FleetStateCode = "failed"
+	FleetStateCodeDeletedRunning     FleetStateCode = "deleted-running"
+	FleetStateCodeDeletedTerminating FleetStateCode = "deleted-terminating"
+	FleetStateCodeModifying          FleetStateCode = "modifying"
+)
+
+func (enum FleetStateCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetStateCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -48451,6 +49973,7 @@ const (
 	InstanceTypeI34xlarge   InstanceType = "i3.4xlarge"
 	InstanceTypeI38xlarge   InstanceType = "i3.8xlarge"
 	InstanceTypeI316xlarge  InstanceType = "i3.16xlarge"
+	InstanceTypeI3Metal     InstanceType = "i3.metal"
 	InstanceTypeHi14xlarge  InstanceType = "hi1.4xlarge"
 	InstanceTypeHs18xlarge  InstanceType = "hs1.8xlarge"
 	InstanceTypeC1Medium    InstanceType = "c1.medium"
@@ -48471,6 +49994,12 @@ const (
 	InstanceTypeC54xlarge   InstanceType = "c5.4xlarge"
 	InstanceTypeC59xlarge   InstanceType = "c5.9xlarge"
 	InstanceTypeC518xlarge  InstanceType = "c5.18xlarge"
+	InstanceTypeC5dLarge    InstanceType = "c5d.large"
+	InstanceTypeC5dXlarge   InstanceType = "c5d.xlarge"
+	InstanceTypeC5d2xlarge  InstanceType = "c5d.2xlarge"
+	InstanceTypeC5d4xlarge  InstanceType = "c5d.4xlarge"
+	InstanceTypeC5d9xlarge  InstanceType = "c5d.9xlarge"
+	InstanceTypeC5d18xlarge InstanceType = "c5d.18xlarge"
 	InstanceTypeCc14xlarge  InstanceType = "cc1.4xlarge"
 	InstanceTypeCc28xlarge  InstanceType = "cc2.8xlarge"
 	InstanceTypeG22xlarge   InstanceType = "g2.2xlarge"
@@ -49229,6 +50758,41 @@ func (enum SnapshotState) MarshalValue() (string, error) {
 }
 
 func (enum SnapshotState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SpotAllocationStrategy string
+
+// Enum values for SpotAllocationStrategy
+const (
+	SpotAllocationStrategyLowestPrice SpotAllocationStrategy = "lowest-price"
+	SpotAllocationStrategyDiversified SpotAllocationStrategy = "diversified"
+)
+
+func (enum SpotAllocationStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SpotAllocationStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SpotInstanceInterruptionBehavior string
+
+// Enum values for SpotInstanceInterruptionBehavior
+const (
+	SpotInstanceInterruptionBehaviorHibernate SpotInstanceInterruptionBehavior = "hibernate"
+	SpotInstanceInterruptionBehaviorStop      SpotInstanceInterruptionBehavior = "stop"
+	SpotInstanceInterruptionBehaviorTerminate SpotInstanceInterruptionBehavior = "terminate"
+)
+
+func (enum SpotInstanceInterruptionBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SpotInstanceInterruptionBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

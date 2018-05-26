@@ -286,6 +286,60 @@ func (c *RDS) AuthorizeDBSecurityGroupIngressRequest(input *AuthorizeDBSecurityG
 	return AuthorizeDBSecurityGroupIngressRequest{Request: req, Input: input, Copy: c.AuthorizeDBSecurityGroupIngressRequest}
 }
 
+const opBacktrackDBCluster = "BacktrackDBCluster"
+
+// BacktrackDBClusterRequest is a API request type for the BacktrackDBCluster API operation.
+type BacktrackDBClusterRequest struct {
+	*aws.Request
+	Input *BacktrackDBClusterInput
+	Copy  func(*BacktrackDBClusterInput) BacktrackDBClusterRequest
+}
+
+// Send marshals and sends the BacktrackDBCluster API request.
+func (r BacktrackDBClusterRequest) Send() (*BacktrackDBClusterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*BacktrackDBClusterOutput), nil
+}
+
+// BacktrackDBClusterRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
+//
+// Backtracks a DB cluster to a specific time, without creating a new DB cluster.
+//
+// For more information on backtracking, see  Backtracking an Aurora DB Cluster
+// (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AuroraMySQL.Managing.Backtrack.html)
+// in the Amazon RDS User Guide.
+//
+//    // Example sending a request using the BacktrackDBClusterRequest method.
+//    req := client.BacktrackDBClusterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BacktrackDBCluster
+func (c *RDS) BacktrackDBClusterRequest(input *BacktrackDBClusterInput) BacktrackDBClusterRequest {
+	op := &aws.Operation{
+		Name:       opBacktrackDBCluster,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &BacktrackDBClusterInput{}
+	}
+
+	output := &BacktrackDBClusterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return BacktrackDBClusterRequest{Request: req, Input: input, Copy: c.BacktrackDBClusterRequest}
+}
+
 const opCopyDBClusterParameterGroup = "CopyDBClusterParameterGroup"
 
 // CopyDBClusterParameterGroupRequest is a API request type for the CopyDBClusterParameterGroup API operation.
@@ -999,6 +1053,9 @@ func (r CreateDBSecurityGroupRequest) Send() (*CreateDBSecurityGroupOutput, erro
 //
 // Creates a new DB security group. DB security groups control access to a DB
 // instance.
+//
+// A DB security group controls access to EC2-Classic DB instances that are
+// not in a VPC.
 //
 //    // Example sending a request using the CreateDBSecurityGroupRequest method.
 //    req := client.CreateDBSecurityGroupRequest(params)
@@ -1904,6 +1961,59 @@ func (c *RDS) DescribeCertificatesRequest(input *DescribeCertificatesInput) Desc
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DescribeCertificatesRequest{Request: req, Input: input, Copy: c.DescribeCertificatesRequest}
+}
+
+const opDescribeDBClusterBacktracks = "DescribeDBClusterBacktracks"
+
+// DescribeDBClusterBacktracksRequest is a API request type for the DescribeDBClusterBacktracks API operation.
+type DescribeDBClusterBacktracksRequest struct {
+	*aws.Request
+	Input *DescribeDBClusterBacktracksInput
+	Copy  func(*DescribeDBClusterBacktracksInput) DescribeDBClusterBacktracksRequest
+}
+
+// Send marshals and sends the DescribeDBClusterBacktracks API request.
+func (r DescribeDBClusterBacktracksRequest) Send() (*DescribeDBClusterBacktracksOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeDBClusterBacktracksOutput), nil
+}
+
+// DescribeDBClusterBacktracksRequest returns a request value for making API operation for
+// Amazon Relational Database Service.
+//
+// Returns information about backtracks for a DB cluster.
+//
+// For more information on Amazon Aurora, see Aurora on Amazon RDS (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html)
+// in the Amazon RDS User Guide.
+//
+//    // Example sending a request using the DescribeDBClusterBacktracksRequest method.
+//    req := client.DescribeDBClusterBacktracksRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterBacktracks
+func (c *RDS) DescribeDBClusterBacktracksRequest(input *DescribeDBClusterBacktracksInput) DescribeDBClusterBacktracksRequest {
+	op := &aws.Operation{
+		Name:       opDescribeDBClusterBacktracks,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeDBClusterBacktracksInput{}
+	}
+
+	output := &DescribeDBClusterBacktracksOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeDBClusterBacktracksRequest{Request: req, Input: input, Copy: c.DescribeDBClusterBacktracksRequest}
 }
 
 const opDescribeDBClusterParameterGroups = "DescribeDBClusterParameterGroups"
@@ -6428,6 +6538,137 @@ func (s AvailabilityZone) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/BacktrackDBClusterMessage
+type BacktrackDBClusterInput struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp of the time to backtrack the DB cluster to, specified in ISO
+	// 8601 format. For more information about ISO 8601, see the ISO8601 Wikipedia
+	// page. (http://en.wikipedia.org/wiki/ISO_8601)
+	//
+	// If the specified time is not a consistent time for the DB cluster, Aurora
+	// automatically chooses the nearest possible consistent time for the DB cluster.
+	//
+	// Constraints:
+	//
+	//    * Must contain a valid ISO 8601 timestamp.
+	//
+	//    * Cannot contain a timestamp set in the future.
+	//
+	// Example: 2017-07-08T18:00Z
+	//
+	// BacktrackTo is a required field
+	BacktrackTo *time.Time `type:"timestamp" timestampFormat:"iso8601" required:"true"`
+
+	// The DB cluster identifier of the DB cluster to be backtracked. This parameter
+	// is stored as a lowercase string.
+	//
+	// Constraints:
+	//
+	//    * Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//
+	//    * First character must be a letter.
+	//
+	//    * Cannot end with a hyphen or contain two consecutive hyphens.
+	//
+	// Example: my-cluster1
+	//
+	// DBClusterIdentifier is a required field
+	DBClusterIdentifier *string `type:"string" required:"true"`
+
+	// A value that, if specified, forces the DB cluster to backtrack when binary
+	// logging is enabled. Otherwise, an error occurs when binary logging is enabled.
+	Force *bool `type:"boolean"`
+
+	// If BacktrackTo is set to a timestamp earlier than the earliest backtrack
+	// time, this value backtracks the DB cluster to the earliest possible backtrack
+	// time. Otherwise, an error occurs.
+	UseEarliestTimeOnPointInTimeUnavailable *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s BacktrackDBClusterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BacktrackDBClusterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BacktrackDBClusterInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BacktrackDBClusterInput"}
+
+	if s.BacktrackTo == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BacktrackTo"))
+	}
+
+	if s.DBClusterIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// This data type is used as a response element in the DescribeDBClusterBacktracks
+// action.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterBacktrack
+type BacktrackDBClusterOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Contains the backtrack identifier.
+	BacktrackIdentifier *string `type:"string"`
+
+	// The timestamp of the time at which the backtrack was requested.
+	BacktrackRequestCreationTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The timestamp of the time to which the DB cluster was backtracked.
+	BacktrackTo *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The timestamp of the time from which the DB cluster was backtracked.
+	BacktrackedFrom *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// Contains a user-supplied DB cluster identifier. This identifier is the unique
+	// key that identifies a DB cluster.
+	DBClusterIdentifier *string `type:"string"`
+
+	// The status of the backtrack. This property returns one of the following values:
+	//
+	//    * applying - The backtrack is currently being applied to or rolled back
+	//    from the DB cluster.
+	//
+	//    * completed - The backtrack has successfully been applied to or rolled
+	//    back from the DB cluster.
+	//
+	//    * failed - An error occurred while the backtrack was applied to or rolled
+	//    back from the DB cluster.
+	//
+	//    * pending - The backtrack is currently pending application to or rollback
+	//    from the DB cluster.
+	Status *string `type:"string"`
+}
+
+// String returns the string representation
+func (s BacktrackDBClusterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s BacktrackDBClusterOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s BacktrackDBClusterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // A CA certificate for an AWS account.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Certificate
 type Certificate struct {
@@ -6630,10 +6871,6 @@ type CopyDBClusterSnapshotInput struct {
 	// ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key
 	// alias for the KMS encryption key.
 	//
-	// If you copy an unencrypted DB cluster snapshot and specify a value for the
-	// KmsKeyId parameter, Amazon RDS encrypts the target DB cluster snapshot using
-	// the specified KMS encryption key.
-	//
 	// If you copy an encrypted DB cluster snapshot from your AWS account, you can
 	// specify a value for KmsKeyId to encrypt the copy with a new KMS encryption
 	// key. If you don't specify a value for KmsKeyId, then the copy of the DB cluster
@@ -6647,6 +6884,9 @@ type CopyDBClusterSnapshotInput struct {
 	// DB cluster snapshot in the destination AWS Region. KMS encryption keys are
 	// specific to the AWS Region that they are created in, and you can't use encryption
 	// keys from one AWS Region in another AWS Region.
+	//
+	// If you copy an unencrypted DB cluster snapshot and specify a value for the
+	// KmsKeyId parameter, an error is returned.
 	KmsKeyId *string `type:"string"`
 
 	// The URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot
@@ -7190,6 +7430,17 @@ type CreateDBClusterInput struct {
 	// and Availability Zones (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html).
 	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
+	// The target backtrack window, in seconds. To disable backtracking, set this
+	// value to 0.
+	//
+	// Default: 0
+	//
+	// Constraints:
+	//
+	//    * If specified, this value must be set to a number from 0 to 259,200 (72
+	//    hours).
+	BacktrackWindow *int64 `type:"long"`
+
 	// The number of days for which automated backups are retained. You must specify
 	// a minimum value of 1.
 	//
@@ -7242,6 +7493,10 @@ type CreateDBClusterInput struct {
 
 	// DestinationRegion is used for presigning the request to a given region.
 	DestinationRegion *string `type:"string"`
+
+	// The list of log types that need to be enabled for exporting to CloudWatch
+	// Logs.
+	EnableCloudwatchLogsExports []string `type:"list"`
 
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
 	// to database accounts, and otherwise false.
@@ -7937,6 +8192,9 @@ type CreateDBInstanceInput struct {
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
 	// True to enable Performance Insights for the DB instance, and otherwise false.
+	//
+	// For more information, see Using Amazon Performance Insights (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
+	// in the Amazon Relational Database Service User Guide.
 	EnablePerformanceInsights *bool `type:"boolean"`
 
 	// The name of the database engine to be used for this instance.
@@ -8549,6 +8807,9 @@ type CreateDBInstanceReadReplicaInput struct {
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
 	// True to enable Performance Insights for the read replica, and otherwise false.
+	//
+	// For more information, see Using Amazon Performance Insights (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
+	// in the Amazon Relational Database Service User Guide.
 	EnablePerformanceInsights *bool `type:"boolean"`
 
 	// The amount of Provisioned IOPS (input/output operations per second) to be
@@ -9376,6 +9637,13 @@ type DBCluster struct {
 	// can be created in.
 	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
+	// The number of change records stored for Backtrack.
+	BacktrackConsumedChangeRecords *int64 `type:"long"`
+
+	// The target backtrack window, in seconds. If this value is set to 0, backtracking
+	// is disabled for the DB cluster. Otherwise, backtracking is enabled.
+	BacktrackWindow *int64 `type:"long"`
+
 	// Specifies the number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod *int64 `type:"integer"`
 
@@ -9420,9 +9688,16 @@ type DBCluster struct {
 	// cluster is accessed.
 	DbClusterResourceId *string `type:"string"`
 
-	// Specifies the earliest time to which a database can be restored with point-in-time
+	// The earliest time to which a DB cluster can be backtracked.
+	EarliestBacktrackTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// The earliest time to which a database can be restored with point-in-time
 	// restore.
 	EarliestRestorableTime *time.Time `type:"timestamp" timestampFormat:"iso8601"`
+
+	// A list of log types that this DB cluster is configured to export to CloudWatch
+	// Logs.
+	EnabledCloudwatchLogsExports []string `type:"list"`
 
 	// Specifies the connection endpoint for the primary instance of the DB cluster.
 	Endpoint *string `type:"string"`
@@ -11290,6 +11565,138 @@ func (s DescribeCertificatesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterBacktracksMessage
+type DescribeDBClusterBacktracksInput struct {
+	_ struct{} `type:"structure"`
+
+	// If specified, this value is the backtrack identifier of the backtrack to
+	// be described.
+	//
+	// Constraints:
+	//
+	//    * Must contain a valid universally unique identifier (UUID). For more
+	//    information about UUIDs, see A Universally Unique Identifier (UUID) URN
+	//    Namespace (http://www.ietf.org/rfc/rfc4122.txt).
+	//
+	// Example: 123e4567-e89b-12d3-a456-426655440000
+	BacktrackIdentifier *string `type:"string"`
+
+	// The DB cluster identifier of the DB cluster to be described. This parameter
+	// is stored as a lowercase string.
+	//
+	// Constraints:
+	//
+	//    * Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//
+	//    * First character must be a letter.
+	//
+	//    * Cannot end with a hyphen or contain two consecutive hyphens.
+	//
+	// Example: my-cluster1
+	//
+	// DBClusterIdentifier is a required field
+	DBClusterIdentifier *string `type:"string" required:"true"`
+
+	// A filter that specifies one or more DB clusters to describe. Supported filters
+	// include the following:
+	//
+	//    * db-cluster-backtrack-id - Accepts backtrack identifiers. The results
+	//    list includes information about only the backtracks identified by these
+	//    identifiers.
+	//
+	//    * db-cluster-backtrack-status - Accepts any of the following backtrack
+	//    status values:
+	//
+	// applying
+	//
+	// completed
+	//
+	// failed
+	//
+	// pending
+	//
+	// The results list includes information about only the backtracks identified
+	//    by these values. For more information about backtrack status values, see
+	//    DBClusterBacktrack.
+	Filters []Filter `locationNameList:"Filter" type:"list"`
+
+	// An optional pagination token provided by a previous DescribeDBClusterBacktracks
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by MaxRecords.
+	Marker *string `type:"string"`
+
+	// The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
+	MaxRecords *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s DescribeDBClusterBacktracksInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeDBClusterBacktracksInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeDBClusterBacktracksInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeDBClusterBacktracksInput"}
+
+	if s.DBClusterIdentifier == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DBClusterIdentifier"))
+	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Contains the result of a successful invocation of the DescribeDBClusterBacktracks
+// action.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBClusterBacktrackMessage
+type DescribeDBClusterBacktracksOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Contains a list of backtracks for the user.
+	DBClusterBacktracks []BacktrackDBClusterOutput `locationNameList:"DBClusterBacktrack" type:"list"`
+
+	// A pagination token that can be used in a subsequent DescribeDBClusterBacktracks
+	// request.
+	Marker *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeDBClusterBacktracksOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeDBClusterBacktracksOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeDBClusterBacktracksOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBClusterParameterGroupsMessage
 type DescribeDBClusterParameterGroupsInput struct {
 	_ struct{} `type:"structure"`
@@ -11800,7 +12207,7 @@ type DescribeDBEngineVersionsInput struct {
 	// Example: 5.1.49
 	EngineVersion *string `type:"string"`
 
-	// Not currently supported.
+	// This parameter is not currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// If this parameter is specified and the requested engine supports the CharacterSetName
@@ -12768,7 +13175,7 @@ type DescribeEngineDefaultParametersInput struct {
 	// DBParameterGroupFamily is a required field
 	DBParameterGroupFamily *string `type:"string" required:"true"`
 
-	// Not currently supported.
+	// This parameter is not currently supported.
 	Filters []Filter `locationNameList:"Filter" type:"list"`
 
 	// An optional pagination token provided by a previous DescribeEngineDefaultParameters
@@ -14307,17 +14714,32 @@ func (s FailoverDBClusterOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// This type is not currently supported.
+// A filter name and value pair that is used to return a more specific list
+// of results from a describe operation. Filters can be used to match a set
+// of resources by specific criteria, such as IDs. The filters supported by
+// a describe operation are documented with the describe operation.
+//
+// Currently, wildcards are not supported in filters.
+//
+// The following actions can be filtered:
+//
+//    * DescribeDBClusterBacktracks
+//
+//    * DescribeDBClusters
+//
+//    * DescribeDBInstances
+//
+//    * DescribePendingMaintenanceActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/Filter
 type Filter struct {
 	_ struct{} `type:"structure"`
 
-	// This parameter is not currently supported.
+	// The name of the filter. Filter names are case-sensitive.
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// This parameter is not currently supported.
+	// One or more filter values. Filter values are case-sensitive.
 	//
 	// Values is a required field
 	Values []string `locationNameList:"Value" type:"list" required:"true"`
@@ -14466,6 +14888,17 @@ type ModifyDBClusterInput struct {
 	// Default: false
 	ApplyImmediately *bool `type:"boolean"`
 
+	// The target backtrack window, in seconds. To disable backtracking, set this
+	// value to 0.
+	//
+	// Default: 0
+	//
+	// Constraints:
+	//
+	//    * If specified, this value must be set to a number from 0 to 259,200 (72
+	//    hours).
+	BacktrackWindow *int64 `type:"long"`
+
 	// The number of days for which automated backups are retained. You must specify
 	// a minimum value of 1.
 	//
@@ -14475,6 +14908,10 @@ type ModifyDBClusterInput struct {
 	//
 	//    * Must be a value from 1 to 35
 	BackupRetentionPeriod *int64 `type:"integer"`
+
+	// The configuration setting for the log types to be enabled for export to CloudWatch
+	// Logs for a specific DB cluster.
+	CloudwatchLogsExportConfiguration *CloudwatchLogsExportConfiguration `type:"structure"`
 
 	// The DB cluster identifier for the cluster being modified. This parameter
 	// is not case-sensitive.
@@ -14494,6 +14931,13 @@ type ModifyDBClusterInput struct {
 	//
 	// Default: false
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
+
+	// The version number of the database engine to which you want to upgrade. Changing
+	// this parameter results in an outage. The change is applied during the next
+	// maintenance window unless the ApplyImmediately parameter is set to true.
+	//
+	// For a list of valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions.
+	EngineVersion *string `type:"string"`
 
 	// The new password for the master database user. This password can contain
 	// any printable ASCII character except "/", """, or "@".
@@ -14845,7 +15289,7 @@ type ModifyDBInstanceInput struct {
 	CACertificateIdentifier *string `type:"string"`
 
 	// The configuration setting for the log types to be enabled for export to CloudWatch
-	// Logs for a specific DB instance or DB cluster.
+	// Logs for a specific DB instance.
 	CloudwatchLogsExportConfiguration *CloudwatchLogsExportConfiguration `type:"structure"`
 
 	// True to copy all tags from the DB instance to snapshots of the DB instance,
@@ -14987,6 +15431,9 @@ type ModifyDBInstanceInput struct {
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
 	// True to enable Performance Insights for the DB instance, and otherwise false.
+	//
+	// For more information, see Using Amazon Performance Insights (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
+	// in the Amazon Relational Database Service User Guide.
 	EnablePerformanceInsights *bool `type:"boolean"`
 
 	// The version number of the database engine to upgrade to. Changing this parameter
@@ -17266,6 +17713,17 @@ type RestoreDBClusterFromS3Input struct {
 	// can be created in.
 	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
+	// The target backtrack window, in seconds. To disable backtracking, set this
+	// value to 0.
+	//
+	// Default: 0
+	//
+	// Constraints:
+	//
+	//    * If specified, this value must be set to a number from 0 to 259,200 (72
+	//    hours).
+	BacktrackWindow *int64 `type:"long"`
+
 	// The number of days for which automated backups of the restored DB cluster
 	// are retained. You must specify a minimum value of 1.
 	//
@@ -17313,6 +17771,10 @@ type RestoreDBClusterFromS3Input struct {
 
 	// The database name for the restored DB cluster.
 	DatabaseName *string `type:"string"`
+
+	// The list of logs that the restored DB cluster is to export to CloudWatch
+	// Logs.
+	EnableCloudwatchLogsExports []string `type:"list"`
 
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
 	// to database accounts, and otherwise false.
@@ -17553,6 +18015,17 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// DB cluster can be created in.
 	AvailabilityZones []string `locationNameList:"AvailabilityZone" type:"list"`
 
+	// The target backtrack window, in seconds. To disable backtracking, set this
+	// value to 0.
+	//
+	// Default: 0
+	//
+	// Constraints:
+	//
+	//    * If specified, this value must be set to a number from 0 to 259,200 (72
+	//    hours).
+	BacktrackWindow *int64 `type:"long"`
+
 	// The name of the DB cluster to create from the DB snapshot or DB cluster snapshot.
 	// This parameter isn't case-sensitive.
 	//
@@ -17578,6 +18051,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// The database name for the restored DB cluster.
 	DatabaseName *string `type:"string"`
+
+	// The list of logs that the restored DB cluster is to export to CloudWatch
+	// Logs.
+	EnableCloudwatchLogsExports []string `type:"list"`
 
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
 	// to database accounts, and otherwise false.
@@ -17709,6 +18186,17 @@ func (s RestoreDBClusterFromSnapshotOutput) SDKResponseMetadata() aws.Response {
 type RestoreDBClusterToPointInTimeInput struct {
 	_ struct{} `type:"structure"`
 
+	// The target backtrack window, in seconds. To disable backtracking, set this
+	// value to 0.
+	//
+	// Default: 0
+	//
+	// Constraints:
+	//
+	//    * If specified, this value must be set to a number from 0 to 259,200 (72
+	//    hours).
+	BacktrackWindow *int64 `type:"long"`
+
 	// The name of the new DB cluster to be created.
 	//
 	// Constraints:
@@ -17728,6 +18216,10 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//
 	// Example: mySubnetgroup
 	DBSubnetGroupName *string `type:"string"`
+
+	// The list of logs that the restored DB cluster is to export to CloudWatch
+	// Logs.
+	EnableCloudwatchLogsExports []string `type:"list"`
 
 	// True to enable mapping of AWS Identity and Access Management (IAM) accounts
 	// to database accounts, and otherwise false.
@@ -18241,6 +18733,9 @@ type RestoreDBInstanceFromS3Input struct {
 	EnableIAMDatabaseAuthentication *bool `type:"boolean"`
 
 	// True to enable Performance Insights for the DB instance, and otherwise false.
+	//
+	// For more information, see Using Amazon Performance Insights (http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html)
+	// in the Amazon Relational Database Service User Guide.
 	EnablePerformanceInsights *bool `type:"boolean"`
 
 	// The name of the database engine to be used for this instance.

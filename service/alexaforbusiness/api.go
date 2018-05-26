@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -31,7 +32,7 @@ func (r AssociateContactWithAddressBookRequest) Send() (*AssociateContactWithAdd
 // AssociateContactWithAddressBookRequest returns a request value for making API operation for
 // Alexa For Business.
 //
-// Associates a contact to a given address book.
+// Associates a contact with a given address book.
 //
 //    // Example sending a request using the AssociateContactWithAddressBookRequest method.
 //    req := client.AssociateContactWithAddressBookRequest(params)
@@ -81,10 +82,10 @@ func (r AssociateDeviceWithRoomRequest) Send() (*AssociateDeviceWithRoomOutput, 
 // AssociateDeviceWithRoomRequest returns a request value for making API operation for
 // Alexa For Business.
 //
-// Associates a device to a given room. This applies all the settings from the
-// room profile to the device, and all the skills in any skill groups added
-// to that room. This operation requires the device to be online, or a manual
-// sync is required.
+// Associates a device with a given room. This applies all the settings from
+// the room profile to the device, and all the skills in any skill groups added
+// to that room. This operation requires the device to be online, or else a
+// manual sync is required.
 //
 //    // Example sending a request using the AssociateDeviceWithRoomRequest method.
 //    req := client.AssociateDeviceWithRoomRequest(params)
@@ -134,7 +135,7 @@ func (r AssociateSkillGroupWithRoomRequest) Send() (*AssociateSkillGroupWithRoom
 // AssociateSkillGroupWithRoomRequest returns a request value for making API operation for
 // Alexa For Business.
 //
-// Associates a skill group to a given room. This enables all skills in the
+// Associates a skill group with a given room. This enables all skills in the
 // associated skill group on all devices in the room.
 //
 //    // Example sending a request using the AssociateSkillGroupWithRoomRequest method.
@@ -1316,6 +1317,111 @@ func (c *AlexaForBusiness) GetSkillGroupRequest(input *GetSkillGroupInput) GetSk
 	return GetSkillGroupRequest{Request: req, Input: input, Copy: c.GetSkillGroupRequest}
 }
 
+const opListDeviceEvents = "ListDeviceEvents"
+
+// ListDeviceEventsRequest is a API request type for the ListDeviceEvents API operation.
+type ListDeviceEventsRequest struct {
+	*aws.Request
+	Input *ListDeviceEventsInput
+	Copy  func(*ListDeviceEventsInput) ListDeviceEventsRequest
+}
+
+// Send marshals and sends the ListDeviceEvents API request.
+func (r ListDeviceEventsRequest) Send() (*ListDeviceEventsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListDeviceEventsOutput), nil
+}
+
+// ListDeviceEventsRequest returns a request value for making API operation for
+// Alexa For Business.
+//
+// Lists the Device Event history for up to 30 days. If EventType isn't specified
+// in the request, this returns a list of all device events in reverse chronological
+// order. If EventType is specified, this returns a list of device events for
+// that EventType in reverse chronological order.
+//
+//    // Example sending a request using the ListDeviceEventsRequest method.
+//    req := client.ListDeviceEventsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEvents
+func (c *AlexaForBusiness) ListDeviceEventsRequest(input *ListDeviceEventsInput) ListDeviceEventsRequest {
+	op := &aws.Operation{
+		Name:       opListDeviceEvents,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListDeviceEventsInput{}
+	}
+
+	output := &ListDeviceEventsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListDeviceEventsRequest{Request: req, Input: input, Copy: c.ListDeviceEventsRequest}
+}
+
+// Paginate pages iterates over the pages of a ListDeviceEventsRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListDeviceEvents operation.
+//		req := client.ListDeviceEventsRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListDeviceEventsRequest) Paginate(opts ...aws.Option) ListDeviceEventsPager {
+	return ListDeviceEventsPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListDeviceEventsInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListDeviceEventsPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListDeviceEventsPager struct {
+	aws.Pager
+}
+
+func (p *ListDeviceEventsPager) CurrentPage() *ListDeviceEventsOutput {
+	return p.Pager.CurrentPage().(*ListDeviceEventsOutput)
+}
+
 const opListSkills = "ListSkills"
 
 // ListSkillsRequest is a API request type for the ListSkills API operation.
@@ -2461,7 +2567,7 @@ func (r StartDeviceSyncRequest) Send() (*StartDeviceSyncOutput, error) {
 // StartDeviceSyncRequest returns a request value for making API operation for
 // Alexa For Business.
 //
-// Resets a device and its account to the known default settings by clearing
+// Resets a device and its account to the known default settings, by clearing
 // all information and settings set by previous users.
 //
 //    // Example sending a request using the StartDeviceSyncRequest method.
@@ -3099,13 +3205,13 @@ type Contact struct {
 	// The ARN of the contact.
 	ContactArn *string `type:"string"`
 
-	// The name of the contact to display on the AWS management console.
+	// The name of the contact to display on the console.
 	DisplayName *string `min:"1" type:"string"`
 
-	// The first name of the contact that is used to call the contact on the device.
+	// The first name of the contact, used to call the contact on the device.
 	FirstName *string `min:"1" type:"string"`
 
-	// The last name of the contact that is used to call the contact on the device.
+	// The last name of the contact, used to call the contact on the device.
 	LastName *string `min:"1" type:"string"`
 
 	// The phone number of the contact.
@@ -3130,13 +3236,13 @@ type ContactData struct {
 	// The ARN of the contact.
 	ContactArn *string `type:"string"`
 
-	// The name of the contact to display on the AWS management console.
+	// The name of the contact to display on the console.
 	DisplayName *string `min:"1" type:"string"`
 
-	// The first name of the contact that is used to call the contact on the device.
+	// The first name of the contact, used to call the contact on the device.
 	FirstName *string `min:"1" type:"string"`
 
-	// The last name of the contact that is used to call the contact on the device.
+	// The last name of the contact, used to call the contact on the device.
 	LastName *string `min:"1" type:"string"`
 
 	// The phone number of the contact.
@@ -3234,7 +3340,7 @@ type CreateContactInput struct {
 	// A unique, user-specified identifier for this request that ensures idempotency.
 	ClientRequestToken *string `min:"10" type:"string" idempotencyToken:"true"`
 
-	// The name of the contact to display on the AWS management console.
+	// The name of the contact to display on the console.
 	DisplayName *string `min:"1" type:"string"`
 
 	// The first name of the contact that is used to call the contact on the device.
@@ -3245,7 +3351,7 @@ type CreateContactInput struct {
 	// The last name of the contact that is used to call the contact on the device.
 	LastName *string `min:"1" type:"string"`
 
-	// The phone number of the contact in E164 format.
+	// The phone number of the contact in E.164 format.
 	//
 	// PhoneNumber is a required field
 	PhoneNumber *string `type:"string" required:"true"`
@@ -4072,7 +4178,7 @@ type Device struct {
 	DeviceSerialNumber *string `type:"string"`
 
 	// The status of a device. If the status is not READY, check the DeviceStatusInfo
-	// for details.
+	// value for details.
 	DeviceStatus DeviceStatus `type:"string" enum:"true"`
 
 	// Detailed information about a device's status.
@@ -4147,6 +4253,31 @@ func (s DeviceData) GoString() string {
 	return s.String()
 }
 
+// The list of device events.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceEvent
+type DeviceEvent struct {
+	_ struct{} `type:"structure"`
+
+	// The time (in epoch) when the event occurred.
+	Timestamp *time.Time `type:"timestamp" timestampFormat:"unix"`
+
+	// The type of device event.
+	Type DeviceEventType `type:"string" enum:"true"`
+
+	// The value of the event.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DeviceEvent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeviceEvent) GoString() string {
+	return s.String()
+}
+
 // Details of a device’s status.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusDetail
 type DeviceStatusDetail struct {
@@ -4170,6 +4301,9 @@ func (s DeviceStatusDetail) GoString() string {
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/DeviceStatusInfo
 type DeviceStatusInfo struct {
 	_ struct{} `type:"structure"`
+
+	// The latest available information about the connection status of a device.
+	ConnectionStatus ConnectionStatus `type:"string" enum:"true"`
 
 	// One or more device status detail descriptions.
 	DeviceStatusDetails []DeviceStatusDetail `type:"list"`
@@ -4743,6 +4877,85 @@ func (s GetSkillGroupOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s GetSkillGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEventsRequest
+type ListDeviceEventsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ARN of a device.
+	//
+	// DeviceArn is a required field
+	DeviceArn *string `type:"string" required:"true"`
+
+	// The event type to filter device events.
+	EventType DeviceEventType `type:"string" enum:"true"`
+
+	// The maximum number of results to include in the response. If more results
+	// exist than the specified MaxResults value, a token is included in the response
+	// so that the remaining results can be retrieved. Required.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// An optional token returned from a prior request. Use this token for pagination
+	// of results from this action. If this parameter is specified, the response
+	// only includes results beyond the token, up to the value specified by MaxResults.
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListDeviceEventsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDeviceEventsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListDeviceEventsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListDeviceEventsInput"}
+
+	if s.DeviceArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DeviceArn"))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/alexaforbusiness-2017-11-09/ListDeviceEventsResponse
+type ListDeviceEventsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	DeviceEvents []DeviceEvent `type:"list"`
+
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ListDeviceEventsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListDeviceEventsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListDeviceEventsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5481,7 +5694,7 @@ type SearchDevicesInput struct {
 
 	// The filters to use to list a specified set of devices. Supported filter keys
 	// are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType,
-	// DeviceSerialNumber, and UnassociatedOnly.
+	// DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).
 	Filters []Filter `type:"list"`
 
 	// The maximum number of results to include in the response. If more results
@@ -5495,7 +5708,8 @@ type SearchDevicesInput struct {
 	NextToken *string `min:"1" type:"string"`
 
 	// The sort order to use in listing the specified set of devices. Supported
-	// sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, and DeviceSerialNumber.
+	// sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber,
+	// and ConnectionStatus.
 	SortCriteria []Sort `type:"list"`
 }
 
@@ -6796,13 +7010,48 @@ func (s UserData) GoString() string {
 	return s.String()
 }
 
+type ConnectionStatus string
+
+// Enum values for ConnectionStatus
+const (
+	ConnectionStatusOnline  ConnectionStatus = "ONLINE"
+	ConnectionStatusOffline ConnectionStatus = "OFFLINE"
+)
+
+func (enum ConnectionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ConnectionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type DeviceEventType string
+
+// Enum values for DeviceEventType
+const (
+	DeviceEventTypeConnectionStatus DeviceEventType = "CONNECTION_STATUS"
+	DeviceEventTypeDeviceStatus     DeviceEventType = "DEVICE_STATUS"
+)
+
+func (enum DeviceEventType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DeviceEventType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeviceStatus string
 
 // Enum values for DeviceStatus
 const (
-	DeviceStatusReady      DeviceStatus = "READY"
-	DeviceStatusPending    DeviceStatus = "PENDING"
-	DeviceStatusWasOffline DeviceStatus = "WAS_OFFLINE"
+	DeviceStatusReady        DeviceStatus = "READY"
+	DeviceStatusPending      DeviceStatus = "PENDING"
+	DeviceStatusWasOffline   DeviceStatus = "WAS_OFFLINE"
+	DeviceStatusDeregistered DeviceStatus = "DEREGISTERED"
 )
 
 func (enum DeviceStatus) MarshalValue() (string, error) {
@@ -6852,10 +7101,11 @@ type EnrollmentStatus string
 
 // Enum values for EnrollmentStatus
 const (
-	EnrollmentStatusInitialized   EnrollmentStatus = "INITIALIZED"
-	EnrollmentStatusPending       EnrollmentStatus = "PENDING"
-	EnrollmentStatusRegistered    EnrollmentStatus = "REGISTERED"
-	EnrollmentStatusDeregistering EnrollmentStatus = "DEREGISTERING"
+	EnrollmentStatusInitialized    EnrollmentStatus = "INITIALIZED"
+	EnrollmentStatusPending        EnrollmentStatus = "PENDING"
+	EnrollmentStatusRegistered     EnrollmentStatus = "REGISTERED"
+	EnrollmentStatusDisassociating EnrollmentStatus = "DISASSOCIATING"
+	EnrollmentStatusDeregistering  EnrollmentStatus = "DEREGISTERING"
 )
 
 func (enum EnrollmentStatus) MarshalValue() (string, error) {

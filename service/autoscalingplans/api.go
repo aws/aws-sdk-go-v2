@@ -215,6 +215,59 @@ func (c *AutoScalingPlans) DescribeScalingPlansRequest(input *DescribeScalingPla
 	return DescribeScalingPlansRequest{Request: req, Input: input, Copy: c.DescribeScalingPlansRequest}
 }
 
+const opUpdateScalingPlan = "UpdateScalingPlan"
+
+// UpdateScalingPlanRequest is a API request type for the UpdateScalingPlan API operation.
+type UpdateScalingPlanRequest struct {
+	*aws.Request
+	Input *UpdateScalingPlanInput
+	Copy  func(*UpdateScalingPlanInput) UpdateScalingPlanRequest
+}
+
+// Send marshals and sends the UpdateScalingPlan API request.
+func (r UpdateScalingPlanRequest) Send() (*UpdateScalingPlanOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateScalingPlanOutput), nil
+}
+
+// UpdateScalingPlanRequest returns a request value for making API operation for
+// AWS Auto Scaling Plans.
+//
+// Updates the scaling plan for the specified scaling plan.
+//
+// You cannot update a scaling plan if it is in the process of being created,
+// updated, or deleted.
+//
+//    // Example sending a request using the UpdateScalingPlanRequest method.
+//    req := client.UpdateScalingPlanRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlan
+func (c *AutoScalingPlans) UpdateScalingPlanRequest(input *UpdateScalingPlanInput) UpdateScalingPlanRequest {
+	op := &aws.Operation{
+		Name:       opUpdateScalingPlan,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateScalingPlanInput{}
+	}
+
+	output := &UpdateScalingPlanOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateScalingPlanRequest{Request: req, Input: input, Copy: c.UpdateScalingPlanRequest}
+}
+
 // Represents an application source.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/ApplicationSource
 type ApplicationSource struct {
@@ -222,6 +275,9 @@ type ApplicationSource struct {
 
 	// The Amazon Resource Name (ARN) of a CloudFormation stack.
 	CloudFormationStackARN *string `type:"string"`
+
+	// A set of tags (up to 50).
+	TagFilters []TagFilter `type:"list"`
 }
 
 // String returns the string representation
@@ -234,11 +290,29 @@ func (s ApplicationSource) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ApplicationSource) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ApplicationSource"}
+	if s.TagFilters != nil {
+		for i, v := range s.TagFilters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "TagFilters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/CreateScalingPlanRequest
 type CreateScalingPlanInput struct {
 	_ struct{} `type:"structure"`
 
-	// The source for the application.
+	// A CloudFormation stack or set of tags. You can create one scaling plan per
+	// application source.
 	//
 	// ApplicationSource is a required field
 	ApplicationSource *ApplicationSource `type:"structure" required:"true"`
@@ -248,7 +322,8 @@ type CreateScalingPlanInput struct {
 	// ScalingInstructions is a required field
 	ScalingInstructions []ScalingInstruction `type:"list" required:"true"`
 
-	// The name of the scaling plan.
+	// The name of the scaling plan. Names cannot contain vertical bars, colons,
+	// or forward slashes.
 	//
 	// ScalingPlanName is a required field
 	ScalingPlanName *string `min:"1" type:"string" required:"true"`
@@ -281,6 +356,11 @@ func (s *CreateScalingPlanInput) Validate() error {
 	}
 	if s.ScalingPlanName != nil && len(*s.ScalingPlanName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ScalingPlanName", 1))
+	}
+	if s.ApplicationSource != nil {
+		if err := s.ApplicationSource.Validate(); err != nil {
+			invalidParams.AddNested("ApplicationSource", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.ScalingInstructions != nil {
 		for i, v := range s.ScalingInstructions {
@@ -572,6 +652,23 @@ func (s DescribeScalingPlansInput) GoString() string {
 	return s.String()
 }
 
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeScalingPlansInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeScalingPlansInput"}
+	if s.ApplicationSources != nil {
+		for i, v := range s.ApplicationSources {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ApplicationSources", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/DescribeScalingPlansResponse
 type DescribeScalingPlansOutput struct {
 	_ struct{} `type:"structure"`
@@ -658,8 +755,8 @@ type PredefinedScalingMetricSpecification struct {
 
 	// Identifies the resource associated with the metric type. You can't specify
 	// a resource label unless the metric type is ALBRequestCountPerTarget and there
-	// is a target group attached to the Auto Scaling group, Spot Fleet request,
-	// or ECS service.
+	// is a target group for an Application Load Balancer attached to the Auto Scaling
+	// group, Spot Fleet request, or ECS service.
 	//
 	// The format is app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,
 	// where:
@@ -876,6 +973,9 @@ type ScalingPlan struct {
 
 	// A simple message about the current status of the scaling plan.
 	StatusMessage *string `type:"string"`
+
+	// The Unix timestamp when the scaling plan entered the current status.
+	StatusStartTime *time.Time `type:"timestamp" timestampFormat:"unix"`
 }
 
 // String returns the string representation
@@ -1021,6 +1121,41 @@ func (s ScalingPolicy) GoString() string {
 	return s.String()
 }
 
+// Represents a tag.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/TagFilter
+type TagFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The tag key.
+	Key *string `min:"1" type:"string"`
+
+	// The tag values (0 to 20).
+	Values []string `type:"list"`
+}
+
+// String returns the string representation
+func (s TagFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TagFilter) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TagFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TagFilter"}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Represents a target tracking scaling policy.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/TargetTrackingConfiguration
 type TargetTrackingConfiguration struct {
@@ -1104,6 +1239,92 @@ func (s *TargetTrackingConfiguration) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlanRequest
+type UpdateScalingPlanInput struct {
+	_ struct{} `type:"structure"`
+
+	// A CloudFormation stack or set of tags.
+	ApplicationSource *ApplicationSource `type:"structure"`
+
+	// The scaling instructions.
+	ScalingInstructions []ScalingInstruction `type:"list"`
+
+	// The name of the scaling plan.
+	//
+	// ScalingPlanName is a required field
+	ScalingPlanName *string `min:"1" type:"string" required:"true"`
+
+	// The version number.
+	//
+	// ScalingPlanVersion is a required field
+	ScalingPlanVersion *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateScalingPlanInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateScalingPlanInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateScalingPlanInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateScalingPlanInput"}
+
+	if s.ScalingPlanName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ScalingPlanName"))
+	}
+	if s.ScalingPlanName != nil && len(*s.ScalingPlanName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ScalingPlanName", 1))
+	}
+
+	if s.ScalingPlanVersion == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ScalingPlanVersion"))
+	}
+	if s.ApplicationSource != nil {
+		if err := s.ApplicationSource.Validate(); err != nil {
+			invalidParams.AddNested("ApplicationSource", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ScalingInstructions != nil {
+		for i, v := range s.ScalingInstructions {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "ScalingInstructions", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/autoscaling-plans-2018-01-06/UpdateScalingPlanResponse
+type UpdateScalingPlanOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateScalingPlanOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateScalingPlanOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateScalingPlanOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 type MetricStatistic string
@@ -1203,6 +1424,8 @@ const (
 	ScalingPlanStatusCodeCreationFailed     ScalingPlanStatusCode = "CreationFailed"
 	ScalingPlanStatusCodeDeletionInProgress ScalingPlanStatusCode = "DeletionInProgress"
 	ScalingPlanStatusCodeDeletionFailed     ScalingPlanStatusCode = "DeletionFailed"
+	ScalingPlanStatusCodeUpdateInProgress   ScalingPlanStatusCode = "UpdateInProgress"
+	ScalingPlanStatusCodeUpdateFailed       ScalingPlanStatusCode = "UpdateFailed"
 )
 
 func (enum ScalingPlanStatusCode) MarshalValue() (string, error) {

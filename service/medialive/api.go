@@ -2703,6 +2703,8 @@ type CaptionDestinationSettings struct {
 
 	EmbeddedPlusScte20DestinationSettings *EmbeddedPlusScte20DestinationSettings `locationName:"embeddedPlusScte20DestinationSettings" type:"structure"`
 
+	RtmpCaptionInfoDestinationSettings *RtmpCaptionInfoDestinationSettings `locationName:"rtmpCaptionInfoDestinationSettings" type:"structure"`
+
 	Scte20PlusEmbeddedDestinationSettings *Scte20PlusEmbeddedDestinationSettings `locationName:"scte20PlusEmbeddedDestinationSettings" type:"structure"`
 
 	Scte27DestinationSettings *Scte27DestinationSettings `locationName:"scte27DestinationSettings" type:"structure"`
@@ -2777,6 +2779,12 @@ func (s CaptionDestinationSettings) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "embeddedPlusScte20DestinationSettings", v, metadata)
+	}
+	if s.RtmpCaptionInfoDestinationSettings != nil {
+		v := s.RtmpCaptionInfoDestinationSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rtmpCaptionInfoDestinationSettings", v, metadata)
 	}
 	if s.Scte20PlusEmbeddedDestinationSettings != nil {
 		v := s.Scte20PlusEmbeddedDestinationSettings
@@ -7419,7 +7427,7 @@ type InputLocation struct {
 
 	// Uniform Resource Identifier - This should be a path to a file accessible
 	// to the Live system (eg. a http:// URI) depending on the output type. For
-	// example, a rtmpEndpoint should have a uri simliar to: "rtmp://fmsserver/live".
+	// example, a RTMP destination should have a uri simliar to: "rtmp://fmsserver/live".
 	//
 	// Uri is a required field
 	Uri *string `locationName:"uri" type:"string" required:"true"`
@@ -8937,6 +8945,11 @@ type M3u8Settings struct {
 	// When set to passthrough, timed metadata is passed through from input to output.
 	TimedMetadataBehavior M3u8TimedMetadataBehavior `locationName:"timedMetadataBehavior" type:"string" enum:"true"`
 
+	// Packet Identifier (PID) of the timed metadata stream in the transport stream.
+	// Can be entered as a decimal or hexadecimal value. Valid values are 32 (or
+	// 0x20)..8182 (or 0x1ff6).
+	TimedMetadataPid *string `locationName:"timedMetadataPid" type:"string"`
+
 	// The value of the transport stream ID field in the Program Map Table.
 	TransportStreamId *int64 `locationName:"transportStreamId" type:"integer"`
 
@@ -9035,6 +9048,12 @@ func (s M3u8Settings) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "timedMetadataBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.TimedMetadataPid != nil {
+		v := *s.TimedMetadataPid
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timedMetadataPid", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.TransportStreamId != nil {
 		v := *s.TransportStreamId
 
@@ -9113,8 +9132,7 @@ type MsSmoothGroupSettings struct {
 
 	// If set to verifyAuthenticity, verify the https certificate chain to a trusted
 	// Certificate Authority (CA). This will cause https outputs to self-signed
-	// certificates to fail unless those certificates are manually added to the
-	// OS trusted keystore.
+	// certificates to fail.
 	CertificateMode SmoothGroupCertificateMode `locationName:"certificateMode" type:"string" enum:"true"`
 
 	// Number of seconds to wait before retrying connection to the IIS server if
@@ -9567,6 +9585,9 @@ type OutputDestinationSettings struct {
 	// key used to extract the password from EC2 Parameter store
 	PasswordParam *string `locationName:"passwordParam" type:"string"`
 
+	// Stream name for RTMP destinations (URLs of type rtmp://)
+	StreamName *string `locationName:"streamName" type:"string"`
+
 	// A URL specifying a destination
 	Url *string `locationName:"url" type:"string"`
 
@@ -9591,6 +9612,12 @@ func (s OutputDestinationSettings) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "passwordParam", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StreamName != nil {
+		v := *s.StreamName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "streamName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.Url != nil {
 		v := *s.Url
@@ -9705,6 +9732,8 @@ type OutputGroupSettings struct {
 
 	MsSmoothGroupSettings *MsSmoothGroupSettings `locationName:"msSmoothGroupSettings" type:"structure"`
 
+	RtmpGroupSettings *RtmpGroupSettings `locationName:"rtmpGroupSettings" type:"structure"`
+
 	UdpGroupSettings *UdpGroupSettings `locationName:"udpGroupSettings" type:"structure"`
 }
 
@@ -9736,6 +9765,11 @@ func (s *OutputGroupSettings) Validate() error {
 			invalidParams.AddNested("MsSmoothGroupSettings", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.RtmpGroupSettings != nil {
+		if err := s.RtmpGroupSettings.Validate(); err != nil {
+			invalidParams.AddNested("RtmpGroupSettings", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9762,6 +9796,12 @@ func (s OutputGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "msSmoothGroupSettings", v, metadata)
+	}
+	if s.RtmpGroupSettings != nil {
+		v := s.RtmpGroupSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rtmpGroupSettings", v, metadata)
 	}
 	if s.UdpGroupSettings != nil {
 		v := s.UdpGroupSettings
@@ -9811,6 +9851,8 @@ type OutputSettings struct {
 
 	MsSmoothOutputSettings *MsSmoothOutputSettings `locationName:"msSmoothOutputSettings" type:"structure"`
 
+	RtmpOutputSettings *RtmpOutputSettings `locationName:"rtmpOutputSettings" type:"structure"`
+
 	UdpOutputSettings *UdpOutputSettings `locationName:"udpOutputSettings" type:"structure"`
 }
 
@@ -9835,6 +9877,11 @@ func (s *OutputSettings) Validate() error {
 	if s.HlsOutputSettings != nil {
 		if err := s.HlsOutputSettings.Validate(); err != nil {
 			invalidParams.AddNested("HlsOutputSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.RtmpOutputSettings != nil {
+		if err := s.RtmpOutputSettings.Validate(); err != nil {
+			invalidParams.AddNested("RtmpOutputSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.UdpOutputSettings != nil {
@@ -9868,6 +9915,12 @@ func (s OutputSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "msSmoothOutputSettings", v, metadata)
+	}
+	if s.RtmpOutputSettings != nil {
+		v := s.RtmpOutputSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rtmpOutputSettings", v, metadata)
 	}
 	if s.UdpOutputSettings != nil {
 		v := s.UdpOutputSettings
@@ -9976,6 +10029,195 @@ func (s RemixSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "channelsOut", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpCaptionInfoDestinationSettings
+type RtmpCaptionInfoDestinationSettings struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s RtmpCaptionInfoDestinationSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RtmpCaptionInfoDestinationSettings) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RtmpCaptionInfoDestinationSettings) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpGroupSettings
+type RtmpGroupSettings struct {
+	_ struct{} `type:"structure"`
+
+	// Authentication scheme to use when connecting with CDN
+	AuthenticationScheme AuthenticationScheme `locationName:"authenticationScheme" type:"string" enum:"true"`
+
+	// Controls behavior when content cache fills up. If remote origin server stalls
+	// the RTMP connection and does not accept content fast enough the 'Media Cache'
+	// will fill up. When the cache reaches the duration specified by cacheLength
+	// the cache will stop accepting new content. If set to disconnectImmediately,
+	// the RTMP output will force a disconnect. Clear the media cache, and reconnect
+	// after restartDelay seconds. If set to waitForServer, the RTMP output will
+	// wait up to 5 minutes to allow the origin server to begin accepting data again.
+	CacheFullBehavior RtmpCacheFullBehavior `locationName:"cacheFullBehavior" type:"string" enum:"true"`
+
+	// Cache length, in seconds, is used to calculate buffer size.
+	CacheLength *int64 `locationName:"cacheLength" min:"30" type:"integer"`
+
+	// Controls the types of data that passes to onCaptionInfo outputs. If set to
+	// 'all' then 608 and 708 carried DTVCC data will be passed. If set to 'field1AndField2608'
+	// then DTVCC data will be stripped out, but 608 data from both fields will
+	// be passed. If set to 'field1608' then only the data carried in 608 from field
+	// 1 video will be passed.
+	CaptionData RtmpCaptionData `locationName:"captionData" type:"string" enum:"true"`
+
+	// If a streaming output fails, number of seconds to wait until a restart is
+	// initiated. A value of 0 means never restart.
+	RestartDelay *int64 `locationName:"restartDelay" type:"integer"`
+}
+
+// String returns the string representation
+func (s RtmpGroupSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RtmpGroupSettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RtmpGroupSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RtmpGroupSettings"}
+	if s.CacheLength != nil && *s.CacheLength < 30 {
+		invalidParams.Add(aws.NewErrParamMinValue("CacheLength", 30))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RtmpGroupSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.AuthenticationScheme) > 0 {
+		v := s.AuthenticationScheme
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "authenticationScheme", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.CacheFullBehavior) > 0 {
+		v := s.CacheFullBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "cacheFullBehavior", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.CacheLength != nil {
+		v := *s.CacheLength
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "cacheLength", protocol.Int64Value(v), metadata)
+	}
+	if len(s.CaptionData) > 0 {
+		v := s.CaptionData
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "captionData", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.RestartDelay != nil {
+		v := *s.RestartDelay
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "restartDelay", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/RtmpOutputSettings
+type RtmpOutputSettings struct {
+	_ struct{} `type:"structure"`
+
+	// If set to verifyAuthenticity, verify the tls certificate chain to a trusted
+	// Certificate Authority (CA). This will cause rtmps outputs with self-signed
+	// certificates to fail.
+	CertificateMode RtmpOutputCertificateMode `locationName:"certificateMode" type:"string" enum:"true"`
+
+	// Number of seconds to wait before retrying a connection to the Flash Media
+	// server if the connection is lost.
+	ConnectionRetryInterval *int64 `locationName:"connectionRetryInterval" min:"1" type:"integer"`
+
+	// The RTMP endpoint excluding the stream name (eg. rtmp://host/appname). For
+	// connection to Akamai, a username and password must be supplied. URI fields
+	// accept format identifiers.
+	//
+	// Destination is a required field
+	Destination *OutputLocationRef `locationName:"destination" type:"structure" required:"true"`
+
+	// Number of retry attempts.
+	NumRetries *int64 `locationName:"numRetries" type:"integer"`
+}
+
+// String returns the string representation
+func (s RtmpOutputSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RtmpOutputSettings) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RtmpOutputSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RtmpOutputSettings"}
+	if s.ConnectionRetryInterval != nil && *s.ConnectionRetryInterval < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ConnectionRetryInterval", 1))
+	}
+
+	if s.Destination == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Destination"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s RtmpOutputSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CertificateMode) > 0 {
+		v := s.CertificateMode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateMode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.ConnectionRetryInterval != nil {
+		v := *s.ConnectionRetryInterval
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "connectionRetryInterval", protocol.Int64Value(v), metadata)
+	}
+	if s.Destination != nil {
+		v := s.Destination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "destination", v, metadata)
+	}
+	if s.NumRetries != nil {
+		v := *s.NumRetries
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "numRetries", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -12178,6 +12420,23 @@ func (enum AudioType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AuthenticationScheme string
+
+// Enum values for AuthenticationScheme
+const (
+	AuthenticationSchemeAkamai AuthenticationScheme = "AKAMAI"
+	AuthenticationSchemeCommon AuthenticationScheme = "COMMON"
+)
+
+func (enum AuthenticationScheme) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthenticationScheme) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AvailBlankingState string
 
 // Enum values for AvailBlankingState
@@ -14199,6 +14458,58 @@ func (enum NetworkInputServerValidation) MarshalValue() (string, error) {
 }
 
 func (enum NetworkInputServerValidation) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RtmpCacheFullBehavior string
+
+// Enum values for RtmpCacheFullBehavior
+const (
+	RtmpCacheFullBehaviorDisconnectImmediately RtmpCacheFullBehavior = "DISCONNECT_IMMEDIATELY"
+	RtmpCacheFullBehaviorWaitForServer         RtmpCacheFullBehavior = "WAIT_FOR_SERVER"
+)
+
+func (enum RtmpCacheFullBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RtmpCacheFullBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RtmpCaptionData string
+
+// Enum values for RtmpCaptionData
+const (
+	RtmpCaptionDataAll                RtmpCaptionData = "ALL"
+	RtmpCaptionDataField1608          RtmpCaptionData = "FIELD1_608"
+	RtmpCaptionDataField1AndField2608 RtmpCaptionData = "FIELD1_AND_FIELD2_608"
+)
+
+func (enum RtmpCaptionData) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RtmpCaptionData) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RtmpOutputCertificateMode string
+
+// Enum values for RtmpOutputCertificateMode
+const (
+	RtmpOutputCertificateModeSelfSigned         RtmpOutputCertificateMode = "SELF_SIGNED"
+	RtmpOutputCertificateModeVerifyAuthenticity RtmpOutputCertificateMode = "VERIFY_AUTHENTICITY"
+)
+
+func (enum RtmpOutputCertificateMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RtmpOutputCertificateMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

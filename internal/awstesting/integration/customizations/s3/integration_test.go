@@ -33,7 +33,7 @@ func TestMain(m *testing.M) {
 func setup() {
 	svc = s3.New(integration.Config())
 	bucketName = aws.String(
-		fmt.Sprintf("aws-sdk-go-integration-%d-%s", time.Now().Unix(), integration.UniqueID()))
+		fmt.Sprintf("aws-sdk-go-integration-%s", integration.UniqueID()))
 
 	for i := 0; i < 10; i++ {
 		_, err := svc.CreateBucketRequest(&s3.CreateBucketInput{Bucket: bucketName}).Send()

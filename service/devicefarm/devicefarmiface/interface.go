@@ -74,6 +74,8 @@ type DeviceFarmAPI interface {
 
 	CreateUploadRequest(*devicefarm.CreateUploadInput) devicefarm.CreateUploadRequest
 
+	CreateVPCEConfigurationRequest(*devicefarm.CreateVPCEConfigurationInput) devicefarm.CreateVPCEConfigurationRequest
+
 	DeleteDevicePoolRequest(*devicefarm.DeleteDevicePoolInput) devicefarm.DeleteDevicePoolRequest
 
 	DeleteInstanceProfileRequest(*devicefarm.DeleteInstanceProfileInput) devicefarm.DeleteInstanceProfileRequest
@@ -87,6 +89,8 @@ type DeviceFarmAPI interface {
 	DeleteRunRequest(*devicefarm.DeleteRunInput) devicefarm.DeleteRunRequest
 
 	DeleteUploadRequest(*devicefarm.DeleteUploadInput) devicefarm.DeleteUploadRequest
+
+	DeleteVPCEConfigurationRequest(*devicefarm.DeleteVPCEConfigurationInput) devicefarm.DeleteVPCEConfigurationRequest
 
 	GetAccountSettingsRequest(*devicefarm.GetAccountSettingsInput) devicefarm.GetAccountSettingsRequest
 
@@ -117,6 +121,8 @@ type DeviceFarmAPI interface {
 	GetTestRequest(*devicefarm.GetTestInput) devicefarm.GetTestRequest
 
 	GetUploadRequest(*devicefarm.GetUploadInput) devicefarm.GetUploadRequest
+
+	GetVPCEConfigurationRequest(*devicefarm.GetVPCEConfigurationInput) devicefarm.GetVPCEConfigurationRequest
 
 	InstallToRemoteAccessSessionRequest(*devicefarm.InstallToRemoteAccessSessionInput) devicefarm.InstallToRemoteAccessSessionRequest
 
@@ -156,6 +162,8 @@ type DeviceFarmAPI interface {
 
 	ListUploadsRequest(*devicefarm.ListUploadsInput) devicefarm.ListUploadsRequest
 
+	ListVPCEConfigurationsRequest(*devicefarm.ListVPCEConfigurationsInput) devicefarm.ListVPCEConfigurationsRequest
+
 	PurchaseOfferingRequest(*devicefarm.PurchaseOfferingInput) devicefarm.PurchaseOfferingRequest
 
 	RenewOfferingRequest(*devicefarm.RenewOfferingInput) devicefarm.RenewOfferingRequest
@@ -175,6 +183,8 @@ type DeviceFarmAPI interface {
 	UpdateNetworkProfileRequest(*devicefarm.UpdateNetworkProfileInput) devicefarm.UpdateNetworkProfileRequest
 
 	UpdateProjectRequest(*devicefarm.UpdateProjectInput) devicefarm.UpdateProjectRequest
+
+	UpdateVPCEConfigurationRequest(*devicefarm.UpdateVPCEConfigurationInput) devicefarm.UpdateVPCEConfigurationRequest
 }
 
 var _ DeviceFarmAPI = (*devicefarm.DeviceFarm)(nil)

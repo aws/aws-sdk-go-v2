@@ -137,6 +137,8 @@ type EC2API interface {
 
 	CreateEgressOnlyInternetGatewayRequest(*ec2.CreateEgressOnlyInternetGatewayInput) ec2.CreateEgressOnlyInternetGatewayRequest
 
+	CreateFleetRequest(*ec2.CreateFleetInput) ec2.CreateFleetRequest
+
 	CreateFlowLogsRequest(*ec2.CreateFlowLogsInput) ec2.CreateFlowLogsRequest
 
 	CreateFpgaImageRequest(*ec2.CreateFpgaImageInput) ec2.CreateFpgaImageRequest
@@ -204,6 +206,8 @@ type EC2API interface {
 	DeleteDhcpOptionsRequest(*ec2.DeleteDhcpOptionsInput) ec2.DeleteDhcpOptionsRequest
 
 	DeleteEgressOnlyInternetGatewayRequest(*ec2.DeleteEgressOnlyInternetGatewayInput) ec2.DeleteEgressOnlyInternetGatewayRequest
+
+	DeleteFleetsRequest(*ec2.DeleteFleetsInput) ec2.DeleteFleetsRequest
 
 	DeleteFlowLogsRequest(*ec2.DeleteFlowLogsInput) ec2.DeleteFlowLogsRequest
 
@@ -286,6 +290,12 @@ type EC2API interface {
 	DescribeElasticGpusRequest(*ec2.DescribeElasticGpusInput) ec2.DescribeElasticGpusRequest
 
 	DescribeExportTasksRequest(*ec2.DescribeExportTasksInput) ec2.DescribeExportTasksRequest
+
+	DescribeFleetHistoryRequest(*ec2.DescribeFleetHistoryInput) ec2.DescribeFleetHistoryRequest
+
+	DescribeFleetInstancesRequest(*ec2.DescribeFleetInstancesInput) ec2.DescribeFleetInstancesRequest
+
+	DescribeFleetsRequest(*ec2.DescribeFleetsInput) ec2.DescribeFleetsRequest
 
 	DescribeFlowLogsRequest(*ec2.DescribeFlowLogsInput) ec2.DescribeFlowLogsRequest
 
@@ -478,6 +488,8 @@ type EC2API interface {
 	ImportSnapshotRequest(*ec2.ImportSnapshotInput) ec2.ImportSnapshotRequest
 
 	ImportVolumeRequest(*ec2.ImportVolumeInput) ec2.ImportVolumeRequest
+
+	ModifyFleetRequest(*ec2.ModifyFleetInput) ec2.ModifyFleetRequest
 
 	ModifyFpgaImageAttributeRequest(*ec2.ModifyFpgaImageAttributeInput) ec2.ModifyFpgaImageAttributeRequest
 

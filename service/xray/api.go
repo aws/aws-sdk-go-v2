@@ -115,6 +115,56 @@ func (p *BatchGetTracesPager) CurrentPage() *BatchGetTracesOutput {
 	return p.Pager.CurrentPage().(*BatchGetTracesOutput)
 }
 
+const opGetEncryptionConfig = "GetEncryptionConfig"
+
+// GetEncryptionConfigRequest is a API request type for the GetEncryptionConfig API operation.
+type GetEncryptionConfigRequest struct {
+	*aws.Request
+	Input *GetEncryptionConfigInput
+	Copy  func(*GetEncryptionConfigInput) GetEncryptionConfigRequest
+}
+
+// Send marshals and sends the GetEncryptionConfig API request.
+func (r GetEncryptionConfigRequest) Send() (*GetEncryptionConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetEncryptionConfigOutput), nil
+}
+
+// GetEncryptionConfigRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Retrieves the current encryption configuration for X-Ray data.
+//
+//    // Example sending a request using the GetEncryptionConfigRequest method.
+//    req := client.GetEncryptionConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfig
+func (c *XRay) GetEncryptionConfigRequest(input *GetEncryptionConfigInput) GetEncryptionConfigRequest {
+	op := &aws.Operation{
+		Name:       opGetEncryptionConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/EncryptionConfig",
+	}
+
+	if input == nil {
+		input = &GetEncryptionConfigInput{}
+	}
+
+	output := &GetEncryptionConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetEncryptionConfigRequest{Request: req, Input: input, Copy: c.GetEncryptionConfigRequest}
+}
+
 const opGetServiceGraph = "GetServiceGraph"
 
 // GetServiceGraphRequest is a API request type for the GetServiceGraph API operation.
@@ -441,6 +491,56 @@ func (p *GetTraceSummariesPager) CurrentPage() *GetTraceSummariesOutput {
 	return p.Pager.CurrentPage().(*GetTraceSummariesOutput)
 }
 
+const opPutEncryptionConfig = "PutEncryptionConfig"
+
+// PutEncryptionConfigRequest is a API request type for the PutEncryptionConfig API operation.
+type PutEncryptionConfigRequest struct {
+	*aws.Request
+	Input *PutEncryptionConfigInput
+	Copy  func(*PutEncryptionConfigInput) PutEncryptionConfigRequest
+}
+
+// Send marshals and sends the PutEncryptionConfig API request.
+func (r PutEncryptionConfigRequest) Send() (*PutEncryptionConfigOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutEncryptionConfigOutput), nil
+}
+
+// PutEncryptionConfigRequest returns a request value for making API operation for
+// AWS X-Ray.
+//
+// Updates the encryption configuration for X-Ray data.
+//
+//    // Example sending a request using the PutEncryptionConfigRequest method.
+//    req := client.PutEncryptionConfigRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutEncryptionConfig
+func (c *XRay) PutEncryptionConfigRequest(input *PutEncryptionConfigInput) PutEncryptionConfigRequest {
+	op := &aws.Operation{
+		Name:       opPutEncryptionConfig,
+		HTTPMethod: "POST",
+		HTTPPath:   "/PutEncryptionConfig",
+	}
+
+	if input == nil {
+		input = &PutEncryptionConfigInput{}
+	}
+
+	output := &PutEncryptionConfigOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutEncryptionConfigRequest{Request: req, Input: input, Copy: c.PutEncryptionConfigRequest}
+}
+
 const opPutTelemetryRecords = "PutTelemetryRecords"
 
 // PutTelemetryRecordsRequest is a API request type for the PutTelemetryRecords API operation.
@@ -519,7 +619,7 @@ func (r PutTraceSegmentsRequest) Send() (*PutTraceSegmentsOutput, error) {
 // of subsegments.
 //
 // Segments must include the following fields. For the full segment document
-// schema, see AWS X-Ray Segment Documents (http://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
+// schema, see AWS X-Ray Segment Documents (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
 // in the AWS X-Ray Developer Guide.
 //
 // Required Segment Document Fields
@@ -1037,6 +1137,57 @@ func (s EdgeStatistics) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A configuration document that specifies encryption configuration settings.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/EncryptionConfig
+type EncryptionConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the customer master key (CMK) used for encryption, if applicable.
+	KeyId *string `type:"string"`
+
+	// The encryption status. After modifying encryption configuration with PutEncryptionConfig,
+	// the status can be UPDATING for up to one hour before X-Ray starts encrypting
+	// data with the new key.
+	Status EncryptionStatus `type:"string" enum:"true"`
+
+	// The type of encryption. Set to KMS for encryption with CMKs. Set to NONE
+	// for default encryption.
+	Type EncryptionType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s EncryptionConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s EncryptionConfig) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EncryptionConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.KeyId != nil {
+		v := *s.KeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Information about requests that failed with a 4xx Client Error status code.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/ErrorStatistics
 type ErrorStatistics struct {
@@ -1122,6 +1273,63 @@ func (s FaultStatistics) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "TotalCount", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfigRequest
+type GetEncryptionConfigInput struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetEncryptionConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetEncryptionConfigInput) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/GetEncryptionConfigResult
+type GetEncryptionConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The encryption configuration document.
+	EncryptionConfig *EncryptionConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s GetEncryptionConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetEncryptionConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetEncryptionConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EncryptionConfig != nil {
+		v := s.EncryptionConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EncryptionConfig", v, metadata)
 	}
 	return nil
 }
@@ -1488,7 +1696,8 @@ type GetTraceSummariesOutput struct {
 	// Trace IDs and metadata for traces that were found in the specified time frame.
 	TraceSummaries []TraceSummary `type:"list"`
 
-	// The number of traces that were processed to get this set of summaries.
+	// The total number of traces processed, including traces that did not match
+	// the specified filter expression.
 	TracesProcessedCount *int64 `type:"long"`
 }
 
@@ -1644,6 +1853,110 @@ func (s Http) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UserAgent", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutEncryptionConfigRequest
+type PutEncryptionConfigInput struct {
+	_ struct{} `type:"structure"`
+
+	// An AWS KMS customer master key (CMK) in one of the following formats:
+	//
+	//    * Alias - The name of the key. For example, alias/MyKey.
+	//
+	//    * Key ID - The KMS key ID of the key. For example, ae4aa6d49-a4d8-9df9-a475-4ff6d7898456.
+	//
+	//    * ARN - The full Amazon Resource Name of the key ID or alias. For example,
+	//    arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456.
+	//    Use this format to specify a key in a different account.
+	//
+	// Omit this key if you set Type to NONE.
+	KeyId *string `min:"1" type:"string"`
+
+	// The type of encryption. Set to KMS to use your own key for encryption. Set
+	// to NONE for default encryption.
+	//
+	// Type is a required field
+	Type EncryptionType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s PutEncryptionConfigInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutEncryptionConfigInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutEncryptionConfigInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutEncryptionConfigInput"}
+	if s.KeyId != nil && len(*s.KeyId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("KeyId", 1))
+	}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutEncryptionConfigInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.KeyId != nil {
+		v := *s.KeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/PutEncryptionConfigResult
+type PutEncryptionConfigOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The new encryption configuration.
+	EncryptionConfig *EncryptionConfig `type:"structure"`
+}
+
+// String returns the string representation
+func (s PutEncryptionConfigOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutEncryptionConfigOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutEncryptionConfigOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PutEncryptionConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EncryptionConfig != nil {
+		v := s.EncryptionConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "EncryptionConfig", v, metadata)
 	}
 	return nil
 }
@@ -1854,11 +2167,14 @@ func (s PutTraceSegmentsOutput) MarshalFields(e protocol.FieldEncoder) error {
 // can be compiled from documents uploaded with PutTraceSegments, or an inferred
 // segment for a downstream service, generated from a subsegment sent by the
 // service that called it.
+//
+// For the full segment document schema, see AWS X-Ray Segment Documents (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
+// in the AWS X-Ray Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/Segment
 type Segment struct {
 	_ struct{} `type:"structure"`
 
-	// The segment document
+	// The segment document.
 	Document *string `min:"1" type:"string"`
 
 	// The segment's ID.
@@ -2615,4 +2931,38 @@ func (s ValueWithServiceIds) MarshalFields(e protocol.FieldEncoder) error {
 
 	}
 	return nil
+}
+
+type EncryptionStatus string
+
+// Enum values for EncryptionStatus
+const (
+	EncryptionStatusUpdating EncryptionStatus = "UPDATING"
+	EncryptionStatusActive   EncryptionStatus = "ACTIVE"
+)
+
+func (enum EncryptionStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncryptionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type EncryptionType string
+
+// Enum values for EncryptionType
+const (
+	EncryptionTypeNone EncryptionType = "NONE"
+	EncryptionTypeKms  EncryptionType = "KMS"
+)
+
+func (enum EncryptionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EncryptionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
 }

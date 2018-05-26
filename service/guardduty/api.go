@@ -3,6 +3,8 @@
 package guardduty
 
 import (
+	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -158,6 +160,56 @@ func (c *GuardDuty) CreateDetectorRequest(input *CreateDetectorInput) CreateDete
 	output.responseMetadata = aws.Response{Request: req}
 
 	return CreateDetectorRequest{Request: req, Input: input, Copy: c.CreateDetectorRequest}
+}
+
+const opCreateFilter = "CreateFilter"
+
+// CreateFilterRequest is a API request type for the CreateFilter API operation.
+type CreateFilterRequest struct {
+	*aws.Request
+	Input *CreateFilterInput
+	Copy  func(*CreateFilterInput) CreateFilterRequest
+}
+
+// Send marshals and sends the CreateFilter API request.
+func (r CreateFilterRequest) Send() (*CreateFilterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateFilterOutput), nil
+}
+
+// CreateFilterRequest returns a request value for making API operation for
+// Amazon GuardDuty.
+//
+// Creates a filter using the specified finding criteria.
+//
+//    // Example sending a request using the CreateFilterRequest method.
+//    req := client.CreateFilterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilter
+func (c *GuardDuty) CreateFilterRequest(input *CreateFilterInput) CreateFilterRequest {
+	op := &aws.Operation{
+		Name:       opCreateFilter,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/filter",
+	}
+
+	if input == nil {
+		input = &CreateFilterInput{}
+	}
+
+	output := &CreateFilterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateFilterRequest{Request: req, Input: input, Copy: c.CreateFilterRequest}
 }
 
 const opCreateIPSet = "CreateIPSet"
@@ -465,6 +517,56 @@ func (c *GuardDuty) DeleteDetectorRequest(input *DeleteDetectorInput) DeleteDete
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteDetectorRequest{Request: req, Input: input, Copy: c.DeleteDetectorRequest}
+}
+
+const opDeleteFilter = "DeleteFilter"
+
+// DeleteFilterRequest is a API request type for the DeleteFilter API operation.
+type DeleteFilterRequest struct {
+	*aws.Request
+	Input *DeleteFilterInput
+	Copy  func(*DeleteFilterInput) DeleteFilterRequest
+}
+
+// Send marshals and sends the DeleteFilter API request.
+func (r DeleteFilterRequest) Send() (*DeleteFilterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteFilterOutput), nil
+}
+
+// DeleteFilterRequest returns a request value for making API operation for
+// Amazon GuardDuty.
+//
+// Deletes the filter specified by the filter name.
+//
+//    // Example sending a request using the DeleteFilterRequest method.
+//    req := client.DeleteFilterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilter
+func (c *GuardDuty) DeleteFilterRequest(input *DeleteFilterInput) DeleteFilterRequest {
+	op := &aws.Operation{
+		Name:       opDeleteFilter,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/detector/{detectorId}/filter/{filterName}",
+	}
+
+	if input == nil {
+		input = &DeleteFilterInput{}
+	}
+
+	output := &DeleteFilterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteFilterRequest{Request: req, Input: input, Copy: c.DeleteFilterRequest}
 }
 
 const opDeleteIPSet = "DeleteIPSet"
@@ -818,6 +920,56 @@ func (c *GuardDuty) GetDetectorRequest(input *GetDetectorInput) GetDetectorReque
 	output.responseMetadata = aws.Response{Request: req}
 
 	return GetDetectorRequest{Request: req, Input: input, Copy: c.GetDetectorRequest}
+}
+
+const opGetFilter = "GetFilter"
+
+// GetFilterRequest is a API request type for the GetFilter API operation.
+type GetFilterRequest struct {
+	*aws.Request
+	Input *GetFilterInput
+	Copy  func(*GetFilterInput) GetFilterRequest
+}
+
+// Send marshals and sends the GetFilter API request.
+func (r GetFilterRequest) Send() (*GetFilterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*GetFilterOutput), nil
+}
+
+// GetFilterRequest returns a request value for making API operation for
+// Amazon GuardDuty.
+//
+// Returns the details of the filter specified by the filter name.
+//
+//    // Example sending a request using the GetFilterRequest method.
+//    req := client.GetFilterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilter
+func (c *GuardDuty) GetFilterRequest(input *GetFilterInput) GetFilterRequest {
+	op := &aws.Operation{
+		Name:       opGetFilter,
+		HTTPMethod: "GET",
+		HTTPPath:   "/detector/{detectorId}/filter/{filterName}",
+	}
+
+	if input == nil {
+		input = &GetFilterInput{}
+	}
+
+	output := &GetFilterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return GetFilterRequest{Request: req, Input: input, Copy: c.GetFilterRequest}
 }
 
 const opGetFindings = "GetFindings"
@@ -1326,6 +1478,108 @@ type ListDetectorsPager struct {
 
 func (p *ListDetectorsPager) CurrentPage() *ListDetectorsOutput {
 	return p.Pager.CurrentPage().(*ListDetectorsOutput)
+}
+
+const opListFilters = "ListFilters"
+
+// ListFiltersRequest is a API request type for the ListFilters API operation.
+type ListFiltersRequest struct {
+	*aws.Request
+	Input *ListFiltersInput
+	Copy  func(*ListFiltersInput) ListFiltersRequest
+}
+
+// Send marshals and sends the ListFilters API request.
+func (r ListFiltersRequest) Send() (*ListFiltersOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ListFiltersOutput), nil
+}
+
+// ListFiltersRequest returns a request value for making API operation for
+// Amazon GuardDuty.
+//
+// Returns a paginated list of the current filters.
+//
+//    // Example sending a request using the ListFiltersRequest method.
+//    req := client.ListFiltersRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFilters
+func (c *GuardDuty) ListFiltersRequest(input *ListFiltersInput) ListFiltersRequest {
+	op := &aws.Operation{
+		Name:       opListFilters,
+		HTTPMethod: "GET",
+		HTTPPath:   "/detector/{detectorId}/filter",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
+	}
+
+	if input == nil {
+		input = &ListFiltersInput{}
+	}
+
+	output := &ListFiltersOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ListFiltersRequest{Request: req, Input: input, Copy: c.ListFiltersRequest}
+}
+
+// Paginate pages iterates over the pages of a ListFiltersRequest operation,
+// calling the Next method for each page. Using the paginators Next
+// method will depict whether or not there are more pages.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//    // Example iterating over at most 3 pages of a ListFilters operation.
+//		req := client.ListFiltersRequest(input)
+//		p := req.Paginate()
+//		for p.Next() {
+//			page := p.CurrentPage()
+//		}
+//
+//		if err := p.Err(); err != nil {
+//			return err
+//		}
+//
+func (p *ListFiltersRequest) Paginate(opts ...aws.Option) ListFiltersPager {
+	return ListFiltersPager{
+		Pager: aws.Pager{
+			NewRequest: func() (*aws.Request, error) {
+				var inCpy *ListFiltersInput
+				if p.Input != nil {
+					tmp := *p.Input
+					inCpy = &tmp
+				}
+
+				req := p.Copy(inCpy)
+				req.ApplyOptions(opts...)
+
+				return req.Request, nil
+			},
+		},
+	}
+}
+
+// ListFiltersPager is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListFiltersPager struct {
+	aws.Pager
+}
+
+func (p *ListFiltersPager) CurrentPage() *ListFiltersOutput {
+	return p.Pager.CurrentPage().(*ListFiltersOutput)
 }
 
 const opListFindings = "ListFindings"
@@ -1917,7 +2171,7 @@ func (r StopMonitoringMembersRequest) Send() (*StopMonitoringMembersOutput, erro
 //
 // Disables GuardDuty from monitoring findings of the member accounts specified
 // by the account IDs. After running this command, a master GuardDuty account
-// can run StartMonitoringMembers to re-enable GuardDuty to monitor these members'
+// can run StartMonitoringMembers to re-enable GuardDuty to monitor these members’
 // findings.
 //
 //    // Example sending a request using the StopMonitoringMembersRequest method.
@@ -2044,6 +2298,56 @@ func (c *GuardDuty) UpdateDetectorRequest(input *UpdateDetectorInput) UpdateDete
 	output.responseMetadata = aws.Response{Request: req}
 
 	return UpdateDetectorRequest{Request: req, Input: input, Copy: c.UpdateDetectorRequest}
+}
+
+const opUpdateFilter = "UpdateFilter"
+
+// UpdateFilterRequest is a API request type for the UpdateFilter API operation.
+type UpdateFilterRequest struct {
+	*aws.Request
+	Input *UpdateFilterInput
+	Copy  func(*UpdateFilterInput) UpdateFilterRequest
+}
+
+// Send marshals and sends the UpdateFilter API request.
+func (r UpdateFilterRequest) Send() (*UpdateFilterOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateFilterOutput), nil
+}
+
+// UpdateFilterRequest returns a request value for making API operation for
+// Amazon GuardDuty.
+//
+// Updates the filter specified by the filter name.
+//
+//    // Example sending a request using the UpdateFilterRequest method.
+//    req := client.UpdateFilterRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilter
+func (c *GuardDuty) UpdateFilterRequest(input *UpdateFilterInput) UpdateFilterRequest {
+	op := &aws.Operation{
+		Name:       opUpdateFilter,
+		HTTPMethod: "POST",
+		HTTPPath:   "/detector/{detectorId}/filter/{filterName}",
+	}
+
+	if input == nil {
+		input = &UpdateFilterInput{}
+	}
+
+	output := &UpdateFilterOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateFilterRequest{Request: req, Input: input, Copy: c.UpdateFilterRequest}
 }
 
 const opUpdateFindingsFeedback = "UpdateFindingsFeedback"
@@ -2351,10 +2655,14 @@ type AccountDetail struct {
 	_ struct{} `type:"structure"`
 
 	// Member account ID.
-	AccountId *string `locationName:"accountId" type:"string"`
+	//
+	// AccountId is a required field
+	AccountId *string `locationName:"accountId" type:"string" required:"true"`
 
 	// Member account's email address.
-	Email *string `locationName:"email" type:"string"`
+	//
+	// Email is a required field
+	Email *string `locationName:"email" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -2365,6 +2673,24 @@ func (s AccountDetail) String() string {
 // GoString returns the string representation
 func (s AccountDetail) GoString() string {
 	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AccountDetail) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AccountDetail"}
+
+	if s.AccountId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AccountId"))
+	}
+
+	if s.Email == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Email"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
@@ -2836,6 +3162,151 @@ func (s CreateDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// CreateFilter request object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilterRequest
+type CreateFilterInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the action that is to be applied to the findings that match the
+	// filter.
+	Action FilterAction `locationName:"action" type:"string" enum:"true"`
+
+	// The idempotency token for the create request.
+	ClientToken *string `locationName:"clientToken" type:"string" idempotencyToken:"true"`
+
+	// The description of the filter.
+	Description *string `locationName:"description" type:"string"`
+
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+
+	// Represents the criteria to be used in the filter for querying findings.
+	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
+
+	// The name of the filter.
+	Name *string `locationName:"name" type:"string"`
+
+	// Specifies the position of the filter in the list of current filters. Also
+	// specifies the order in which this filter is applied to the findings.
+	Rank *int64 `locationName:"rank" type:"integer"`
+}
+
+// String returns the string representation
+func (s CreateFilterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFilterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateFilterInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateFilterInput"}
+
+	if s.DetectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFilterInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	var ClientToken string
+	if s.ClientToken != nil {
+		ClientToken = *s.ClientToken
+	} else {
+		ClientToken = protocol.GetIdempotencyToken()
+	}
+	{
+		v := ClientToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FindingCriteria != nil {
+		v := s.FindingCriteria
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "findingCriteria", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Rank != nil {
+		v := *s.Rank
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rank", protocol.Int64Value(v), metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// CreateFilter response object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateFilterResponse
+type CreateFilterOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The name of the successfully created filter.
+	Name *string `locationName:"name" type:"string"`
+}
+
+// String returns the string representation
+func (s CreateFilterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateFilterOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CreateFilterOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Create IP Set Request
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateIPSetRequest
 type CreateIPSetInput struct {
@@ -2987,6 +3458,13 @@ func (s *CreateMembersInput) Validate() error {
 
 	if s.DetectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.AccountDetails != nil {
+		for i, v := range s.AccountDetails {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AccountDetails", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -3425,6 +3903,91 @@ func (s DeleteDetectorOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeleteDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilterRequest
+type DeleteFilterInput struct {
+	_ struct{} `type:"structure"`
+
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+
+	// FilterName is a required field
+	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteFilterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFilterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteFilterInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteFilterInput"}
+
+	if s.DetectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+
+	if s.FilterName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteFilterInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FilterName != nil {
+		v := *s.FilterName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "filterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteFilterResponse
+type DeleteFilterOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteFilterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteFilterOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteFilterOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -4022,51 +4585,71 @@ type Finding struct {
 
 	// AWS account ID where the activity occurred that prompted GuardDuty to generate
 	// a finding.
-	AccountId *string `locationName:"accountId" type:"string"`
+	//
+	// AccountId is a required field
+	AccountId *string `locationName:"accountId" type:"string" required:"true"`
 
 	// The ARN of a finding described by the action.
-	Arn *string `locationName:"arn" type:"string"`
+	//
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
 
 	// The confidence level of a finding.
 	Confidence *float64 `locationName:"confidence" type:"double"`
 
 	// The time stamp at which a finding was generated.
-	CreatedAt *string `locationName:"createdAt" type:"string"`
+	//
+	// CreatedAt is a required field
+	CreatedAt *string `locationName:"createdAt" type:"string" required:"true"`
 
 	// The description of a finding.
 	Description *string `locationName:"description" type:"string"`
 
 	// The identifier that corresponds to a finding described by the action.
-	Id *string `locationName:"id" type:"string"`
+	//
+	// Id is a required field
+	Id *string `locationName:"id" type:"string" required:"true"`
 
 	// The AWS resource partition.
 	Partition *string `locationName:"partition" type:"string"`
 
 	// The AWS region where the activity occurred that prompted GuardDuty to generate
 	// a finding.
-	Region *string `locationName:"region" type:"string"`
+	//
+	// Region is a required field
+	Region *string `locationName:"region" type:"string" required:"true"`
 
 	// The AWS resource associated with the activity that prompted GuardDuty to
 	// generate a finding.
-	Resource *Resource `locationName:"resource" type:"structure"`
+	//
+	// Resource is a required field
+	Resource *Resource `locationName:"resource" type:"structure" required:"true"`
 
 	// Findings' schema version.
-	SchemaVersion *string `locationName:"schemaVersion" type:"string"`
+	//
+	// SchemaVersion is a required field
+	SchemaVersion *string `locationName:"schemaVersion" type:"string" required:"true"`
 
 	// Additional information assigned to the generated finding by GuardDuty.
 	Service *Service `locationName:"service" type:"structure"`
 
 	// The severity of a finding.
-	Severity *float64 `locationName:"severity" type:"double"`
+	//
+	// Severity is a required field
+	Severity *float64 `locationName:"severity" type:"double" required:"true"`
 
 	// The title of a finding.
 	Title *string `locationName:"title" type:"string"`
 
 	// The type of a finding described by the action.
-	Type *string `locationName:"type" type:"string"`
+	//
+	// Type is a required field
+	Type *string `locationName:"type" type:"string" required:"true"`
 
 	// The time stamp at which a finding was last updated.
-	UpdatedAt *string `locationName:"updatedAt" type:"string"`
+	//
+	// UpdatedAt is a required field
+	UpdatedAt *string `locationName:"updatedAt" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -4391,6 +4974,139 @@ func (s GetDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "updatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilterRequest
+type GetFilterInput struct {
+	_ struct{} `type:"structure"`
+
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+
+	// FilterName is a required field
+	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GetFilterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFilterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetFilterInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetFilterInput"}
+
+	if s.DetectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+
+	if s.FilterName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFilterInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FilterName != nil {
+		v := *s.FilterName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "filterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// GetFilter response object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetFilterResponse
+type GetFilterOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Specifies the action that is to be applied to the findings that match the
+	// filter.
+	Action FilterAction `locationName:"action" type:"string" enum:"true"`
+
+	// The description of the filter.
+	Description *string `locationName:"description" type:"string"`
+
+	// Represents the criteria to be used in the filter for querying findings.
+	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
+
+	// The name of the filter.
+	Name *string `locationName:"name" type:"string"`
+
+	// Specifies the position of the filter in the list of current filters. Also
+	// specifies the order in which this filter is applied to the findings.
+	Rank *int64 `locationName:"rank" type:"integer"`
+}
+
+// String returns the string representation
+func (s GetFilterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s GetFilterOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s GetFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GetFilterOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FindingCriteria != nil {
+		v := s.FindingCriteria
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "findingCriteria", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Rank != nil {
+		v := *s.Rank
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rank", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -5174,6 +5890,9 @@ type InstanceDetails struct {
 	// The profile information of the EC2 instance.
 	IamInstanceProfile *IamInstanceProfile `locationName:"iamInstanceProfile" type:"structure"`
 
+	// The image description of the EC2 instance.
+	ImageDescription *string `locationName:"imageDescription" type:"string"`
+
 	// The image ID of the EC2 instance.
 	ImageId *string `locationName:"imageId" type:"string"`
 
@@ -5225,6 +5944,12 @@ func (s InstanceDetails) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "iamInstanceProfile", v, metadata)
+	}
+	if s.ImageDescription != nil {
+		v := *s.ImageDescription
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "imageDescription", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ImageId != nil {
 		v := *s.ImageId
@@ -5370,7 +6095,11 @@ type InviteMembersInput struct {
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
 
-	// The invitation message that you want to send to the accounts that you're
+	// A boolean value that specifies whether you want to disable email notification
+	// to the accounts that you’re inviting to GuardDuty as members.
+	DisableEmailNotification *bool `locationName:"disableEmailNotification" type:"boolean"`
+
+	// The invitation message that you want to send to the accounts that you’re
 	// inviting to GuardDuty as members.
 	Message *string `locationName:"message" type:"string"`
 }
@@ -5414,6 +6143,12 @@ func (s InviteMembersInput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.DisableEmailNotification != nil {
+		v := *s.DisableEmailNotification
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "disableEmailNotification", protocol.BoolValue(v), metadata)
 	}
 	if s.Message != nil {
 		v := *s.Message
@@ -5566,6 +6301,127 @@ func (s ListDetectorsOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		ls0 := e.List(protocol.BodyTarget, "detectorIds", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFiltersRequest
+type ListFiltersInput struct {
+	_ struct{} `type:"structure"`
+
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+
+	// You can use this parameter to indicate the maximum number of items that you
+	// want in the response.
+	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
+
+	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListFiltersInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListFiltersInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ListFiltersInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ListFiltersInput"}
+
+	if s.DetectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFiltersInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MaxResults != nil {
+		v := *s.MaxResults
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "maxResults", protocol.Int64Value(v), metadata)
+	}
+	if s.NextToken != nil {
+		v := *s.NextToken
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "nextToken", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// ListFilters response object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListFiltersResponse
+type ListFiltersOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// A list of filter names
+	FilterNames []string `locationName:"filterNames" type:"list"`
+
+	// You can use this parameter when paginating results. Set the value of this
+	// parameter to null on your first call to the list action. For subsequent calls
+	// to the action fill nextToken in the request with the value of NextToken from
+	// the previous response to continue listing data.
+	NextToken *string `locationName:"nextToken" type:"string"`
+}
+
+// String returns the string representation
+func (s ListFiltersOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ListFiltersOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ListFiltersOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListFiltersOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.FilterNames) > 0 {
+		v := s.FilterNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "filterNames", metadata)
 		ls0.Start()
 		for _, v1 := range v {
 			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
@@ -6307,25 +7163,35 @@ type Member struct {
 	_ struct{} `type:"structure"`
 
 	// AWS account ID.
-	AccountId *string `locationName:"accountId" type:"string"`
+	//
+	// AccountId is a required field
+	AccountId *string `locationName:"accountId" type:"string" required:"true"`
 
 	// The unique identifier for a detector.
 	DetectorId *string `locationName:"detectorId" type:"string"`
 
 	// Member account's email address.
-	Email *string `locationName:"email" type:"string"`
+	//
+	// Email is a required field
+	Email *string `locationName:"email" type:"string" required:"true"`
 
 	// Timestamp at which the invitation was sent
 	InvitedAt *string `locationName:"invitedAt" type:"string"`
 
 	// The master account ID.
-	MasterId *string `locationName:"masterId" type:"string"`
+	//
+	// MasterId is a required field
+	MasterId *string `locationName:"masterId" type:"string" required:"true"`
 
 	// The status of the relationship between the member and the master.
-	RelationshipStatus *string `locationName:"relationshipStatus" type:"string"`
+	//
+	// RelationshipStatus is a required field
+	RelationshipStatus *string `locationName:"relationshipStatus" type:"string" required:"true"`
 
 	// The first time a resource was created. The format will be ISO-8601.
-	UpdatedAt *string `locationName:"updatedAt" type:"string"`
+	//
+	// UpdatedAt is a required field
+	UpdatedAt *string `locationName:"updatedAt" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -6468,6 +7334,9 @@ type NetworkInterface struct {
 	// A list of EC2 instance IPv6 address information.
 	Ipv6Addresses []string `locationName:"ipv6Addresses" type:"list"`
 
+	// The ID of the network interface
+	NetworkInterfaceId *string `locationName:"networkInterfaceId" type:"string"`
+
 	// Private DNS name of the EC2 instance.
 	PrivateDnsName *string `locationName:"privateDnsName" type:"string"`
 
@@ -6516,6 +7385,12 @@ func (s NetworkInterface) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	if s.NetworkInterfaceId != nil {
+		v := *s.NetworkInterfaceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "networkInterfaceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.PrivateDnsName != nil {
 		v := *s.PrivateDnsName
@@ -7484,10 +8359,14 @@ type UnprocessedAccount struct {
 	_ struct{} `type:"structure"`
 
 	// AWS Account ID.
-	AccountId *string `locationName:"accountId" type:"string"`
+	//
+	// AccountId is a required field
+	AccountId *string `locationName:"accountId" type:"string" required:"true"`
 
 	// A reason why the account hasn't been processed.
-	Result *string `locationName:"result" type:"string"`
+	//
+	// Result is a required field
+	Result *string `locationName:"result" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -7597,6 +8476,140 @@ func (s UpdateDetectorOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s UpdateDetectorOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+// UpdateFilter request object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilterRequest
+type UpdateFilterInput struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the action that is to be applied to the findings that match the
+	// filter.
+	Action FilterAction `locationName:"action" type:"string" enum:"true"`
+
+	// The description of the filter.
+	Description *string `locationName:"description" type:"string"`
+
+	// DetectorId is a required field
+	DetectorId *string `location:"uri" locationName:"detectorId" type:"string" required:"true"`
+
+	// FilterName is a required field
+	FilterName *string `location:"uri" locationName:"filterName" type:"string" required:"true"`
+
+	// Represents the criteria to be used in the filter for querying findings.
+	FindingCriteria *FindingCriteria `locationName:"findingCriteria" type:"structure"`
+
+	// Specifies the position of the filter in the list of current filters. Also
+	// specifies the order in which this filter is applied to the findings.
+	Rank *int64 `locationName:"rank" type:"integer"`
+}
+
+// String returns the string representation
+func (s UpdateFilterInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFilterInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateFilterInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateFilterInput"}
+
+	if s.DetectorId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DetectorId"))
+	}
+
+	if s.FilterName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FilterName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFilterInput) MarshalFields(e protocol.FieldEncoder) error {
+	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/x-amz-json-1.1"), protocol.Metadata{})
+
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FindingCriteria != nil {
+		v := s.FindingCriteria
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "findingCriteria", v, metadata)
+	}
+	if s.Rank != nil {
+		v := *s.Rank
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "rank", protocol.Int64Value(v), metadata)
+	}
+	if s.DetectorId != nil {
+		v := *s.DetectorId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "detectorId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.FilterName != nil {
+		v := *s.FilterName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "filterName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// UpdateFilter response object.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateFilterResponse
+type UpdateFilterOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The name of the filter.
+	Name *string `locationName:"name" type:"string"`
+}
+
+// String returns the string representation
+func (s UpdateFilterOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateFilterOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateFilterOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UpdateFilterOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	return nil
 }
 
@@ -7966,6 +8979,24 @@ func (enum Feedback) MarshalValue() (string, error) {
 }
 
 func (enum Feedback) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// The action associated with a filter.
+type FilterAction string
+
+// Enum values for FilterAction
+const (
+	FilterActionNoop    FilterAction = "NOOP"
+	FilterActionArchive FilterAction = "ARCHIVE"
+)
+
+func (enum FilterAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FilterAction) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

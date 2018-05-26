@@ -149,7 +149,7 @@ func (r CreateConfigurationSetEventDestinationRequest) Send() (*CreateConfigurat
 // Creates a configuration set event destination.
 //
 // When you create or update an event destination, you must provide one, and
-// only one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis
+// only one, destination. The destination can be CloudWatch, Amazon Kinesis
 // Firehose, or Amazon Simple Notification Service (Amazon SNS).
 //
 // An event destination is the AWS service to which Amazon SES publishes the
@@ -211,9 +211,8 @@ func (r CreateConfigurationSetTrackingOptionsRequest) Send() (*CreateConfigurati
 //
 // By default, images and links used for tracking open and click events are
 // hosted on domains operated by Amazon SES. You can configure a subdomain of
-// your own to handle these events. For information about using configuration
-// sets, see Configuring Custom Domains to Handle Open and Click Tracking (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
-// in the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html).
+// your own to handle these events. For information about using custom domains,
+// see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html).
 //
 //    // Example sending a request using the CreateConfigurationSetTrackingOptionsRequest method.
 //    req := client.CreateConfigurationSetTrackingOptionsRequest(params)
@@ -266,7 +265,7 @@ func (r CreateCustomVerificationEmailTemplateRequest) Send() (*CreateCustomVerif
 // Creates a new custom verification email template.
 //
 // For more information about custom verification email templates, see Using
-// Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// Custom Verification Email Templates (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second.
@@ -654,9 +653,8 @@ func (r DeleteConfigurationSetTrackingOptionsRequest) Send() (*DeleteConfigurati
 //
 // By default, images and links used for tracking open and click events are
 // hosted on domains operated by Amazon SES. You can configure a subdomain of
-// your own to handle these events. For information about using configuration
-// sets, see Configuring Custom Domains to Handle Open and Click Tracking (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
-// in the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html).
+// your own to handle these events. For information about using custom domains,
+// see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html).
 //
 // Deleting this kind of association will result in emails sent using the specified
 // configuration set to capture open and click events using the standard, Amazon
@@ -713,7 +711,7 @@ func (r DeleteCustomVerificationEmailTemplateRequest) Send() (*DeleteCustomVerif
 // Deletes an existing custom verification email template.
 //
 // For more information about custom verification email templates, see Using
-// Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// Custom Verification Email Templates (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second.
@@ -1373,7 +1371,8 @@ func (r GetAccountSendingEnabledRequest) Send() (*GetAccountSendingEnabledOutput
 // GetAccountSendingEnabledRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Returns the email sending status of the Amazon SES account.
+// Returns the email sending status of the Amazon SES account for the current
+// region.
 //
 // You can execute this operation no more than once per second.
 //
@@ -1429,7 +1428,7 @@ func (r GetCustomVerificationEmailTemplateRequest) Send() (*GetCustomVerificatio
 // specify.
 //
 // For more information about custom verification email templates, see Using
-// Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// Custom Verification Email Templates (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second.
@@ -1849,7 +1848,7 @@ func (r GetSendStatisticsRequest) Send() (*GetSendStatisticsOutput, error) {
 // GetSendStatisticsRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Provides sending statistics for the Amazon SES account. The result is a list
+// Provides sending statistics for the current AWS Region. The result is a list
 // of data points, representing the last two weeks of sending activity. Each
 // data point in the list contains statistics for a 15-minute period of time.
 //
@@ -1957,8 +1956,8 @@ func (r ListConfigurationSetsRequest) Send() (*ListConfigurationSetsOutput, erro
 // Amazon Simple Email Service.
 //
 // Provides a list of the configuration sets associated with your Amazon SES
-// account. For information about using configuration sets, see Monitoring Your
-// Amazon SES Sending Activity (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
+// account in the current AWS Region. For information about using configuration
+// sets, see Monitoring Your Amazon SES Sending Activity (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second. This operation
@@ -2016,10 +2015,11 @@ func (r ListCustomVerificationEmailTemplatesRequest) Send() (*ListCustomVerifica
 // ListCustomVerificationEmailTemplatesRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Lists the existing custom verification email templates for your account.
+// Lists the existing custom verification email templates for your account in
+// the current AWS Region.
 //
 // For more information about custom verification email templates, see Using
-// Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// Custom Verification Email Templates (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second.
@@ -2125,7 +2125,8 @@ func (r ListIdentitiesRequest) Send() (*ListIdentitiesOutput, error) {
 // Amazon Simple Email Service.
 //
 // Returns a list containing all of the identities (email addresses and domains)
-// for your AWS account, regardless of verification status.
+// for your AWS account in the current AWS Region, regardless of verification
+// status.
 //
 // You can execute this operation no more than once per second.
 //
@@ -2290,7 +2291,8 @@ func (r ListReceiptFiltersRequest) Send() (*ListReceiptFiltersOutput, error) {
 // ListReceiptFiltersRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Lists the IP address filters associated with your AWS account.
+// Lists the IP address filters associated with your AWS account in the current
+// AWS Region.
 //
 // For information about managing IP address filters, see the Amazon SES Developer
 // Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-ip-filters.html).
@@ -2345,10 +2347,10 @@ func (r ListReceiptRuleSetsRequest) Send() (*ListReceiptRuleSetsOutput, error) {
 // ListReceiptRuleSetsRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Lists the receipt rule sets that exist under your AWS account. If there are
-// additional receipt rule sets to be retrieved, you will receive a NextToken
-// that you can provide to the next call to ListReceiptRuleSets to retrieve
-// the additional entries.
+// Lists the receipt rule sets that exist under your AWS account in the current
+// AWS Region. If there are additional receipt rule sets to be retrieved, you
+// will receive a NextToken that you can provide to the next call to ListReceiptRuleSets
+// to retrieve the additional entries.
 //
 // For information about managing receipt rule sets, see the Amazon SES Developer
 // Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-managing-receipt-rule-sets.html).
@@ -2403,7 +2405,8 @@ func (r ListTemplatesRequest) Send() (*ListTemplatesOutput, error) {
 // ListTemplatesRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Lists the email templates present in your Amazon SES account.
+// Lists the email templates present in your Amazon SES account in the current
+// AWS Region.
 //
 // You can execute this operation no more than once per second.
 //
@@ -2761,12 +2764,13 @@ func (r SendCustomVerificationEmailRequest) Send() (*SendCustomVerificationEmail
 // Amazon Simple Email Service.
 //
 // Adds an email address to the list of identities for your Amazon SES account
-// and attempts to verify it. As a result of executing this operation, a customized
-// verification email is sent to the specified address.
+// in the current AWS Region and attempts to verify it. As a result of executing
+// this operation, a customized verification email is sent to the specified
+// address.
 //
 // To use this operation, you must first create a custom verification email
 // template. For more information about creating and using custom verification
-// email templates, see Using Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// email templates, see Using Custom Verification Email Templates (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second.
@@ -3054,6 +3058,17 @@ func (r SendTemplatedEmailRequest) Send() (*SendTemplatedEmailOutput, error) {
 //    not in the format UserName@[SubDomain.]Domain.TopLevelDomain), the entire
 //    message will be rejected, even if the message contains other recipients
 //    that are valid.
+//
+// If your call to the SendTemplatedEmail operation includes all of the required
+// parameters, Amazon SES accepts it and returns a Message ID. However, if Amazon
+// SES can't render the email because the template contains errors, it doesn't
+// send the email. Additionally, because it already accepted the message, Amazon
+// SES doesn't return a message stating that it was unable to send the email.
+//
+// For these reasons, we highly recommend that you set up Amazon SES to send
+// you notifications when Rendering Failure events occur. For more information,
+// see Sending Personalized Email Using the Amazon SES API (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html)
+// in the Amazon Simple Email Service Developer Guide.
 //
 //    // Example sending a request using the SendTemplatedEmailRequest method.
 //    req := client.SendTemplatedEmailRequest(params)
@@ -3573,10 +3588,11 @@ func (r UpdateAccountSendingEnabledRequest) Send() (*UpdateAccountSendingEnabled
 // UpdateAccountSendingEnabledRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Enables or disables email sending across your entire Amazon SES account.
-// You can use this operation in conjunction with Amazon CloudWatch alarms to
-// temporarily pause email sending across your Amazon SES account when reputation
-// metrics (such as your bounce on complaint rate) reach certain thresholds.
+// Enables or disables email sending across your entire Amazon SES account in
+// the current AWS Region. You can use this operation in conjunction with Amazon
+// CloudWatch alarms to temporarily pause email sending across your Amazon SES
+// account in a given AWS Region when reputation metrics (such as your bounce
+// or complaint rates) reach certain thresholds.
 //
 // You can execute this operation no more than once per second.
 //
@@ -3692,10 +3708,10 @@ func (r UpdateConfigurationSetReputationMetricsEnabledRequest) Send() (*UpdateCo
 // Amazon Simple Email Service.
 //
 // Enables or disables the publishing of reputation metrics for emails sent
-// using a specific configuration set. Reputation metrics include bounce and
-// complaint rates. These metrics are published to Amazon CloudWatch. By using
-// Amazon CloudWatch, you can create alarms when bounce or complaint rates exceed
-// a certain threshold.
+// using a specific configuration set in a given AWS Region. Reputation metrics
+// include bounce and complaint rates. These metrics are published to Amazon
+// CloudWatch. By using CloudWatch, you can create alarms when bounce or complaint
+// rates exceed certain thresholds.
 //
 // You can execute this operation no more than once per second.
 //
@@ -3750,10 +3766,10 @@ func (r UpdateConfigurationSetSendingEnabledRequest) Send() (*UpdateConfiguratio
 // Amazon Simple Email Service.
 //
 // Enables or disables email sending for messages sent using a specific configuration
-// set. You can use this operation in conjunction with Amazon CloudWatch alarms
-// to temporarily pause email sending for a configuration set when the reputation
-// metrics for that configuration set (such as your bounce on complaint rate)
-// reach certain thresholds.
+// set in a given AWS Region. You can use this operation in conjunction with
+// Amazon CloudWatch alarms to temporarily pause email sending for a configuration
+// set when the reputation metrics for that configuration set (such as your
+// bounce on complaint rate) exceed certain thresholds.
 //
 // You can execute this operation no more than once per second.
 //
@@ -3812,9 +3828,8 @@ func (r UpdateConfigurationSetTrackingOptionsRequest) Send() (*UpdateConfigurati
 //
 // By default, images and links used for tracking open and click events are
 // hosted on domains operated by Amazon SES. You can configure a subdomain of
-// your own to handle these events. For information about using configuration
-// sets, see Configuring Custom Domains to Handle Open and Click Tracking (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
-// in the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html).
+// your own to handle these events. For information about using custom domains,
+// see the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html).
 //
 //    // Example sending a request using the UpdateConfigurationSetTrackingOptionsRequest method.
 //    req := client.UpdateConfigurationSetTrackingOptionsRequest(params)
@@ -3867,7 +3882,7 @@ func (r UpdateCustomVerificationEmailTemplateRequest) Send() (*UpdateCustomVerif
 // Updates an existing custom verification email template.
 //
 // For more information about custom verification email templates, see Using
-// Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// Custom Verification Email Templates (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second.
@@ -4095,9 +4110,9 @@ func (r VerifyDomainIdentityRequest) Send() (*VerifyDomainIdentityOutput, error)
 // VerifyDomainIdentityRequest returns a request value for making API operation for
 // Amazon Simple Email Service.
 //
-// Adds a domain to the list of identities for your Amazon SES account and attempts
-// to verify it. For more information about verifying domains, see Verifying
-// Email Addresses and Domains (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
+// Adds a domain to the list of identities for your Amazon SES account in the
+// current AWS Region and attempts to verify it. For more information about
+// verifying domains, see Verifying Email Addresses and Domains (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-addresses-and-domains.html)
 // in the Amazon SES Developer Guide.
 //
 // You can execute this operation no more than once per second.
@@ -4203,8 +4218,8 @@ func (r VerifyEmailIdentityRequest) Send() (*VerifyEmailIdentityOutput, error) {
 // Amazon Simple Email Service.
 //
 // Adds an email address to the list of identities for your Amazon SES account
-// and attempts to verify it. As a result of executing this operation, a verification
-// email is sent to the specified address.
+// in the current AWS region and attempts to verify it. As a result of executing
+// this operation, a verification email is sent to the specified address.
 //
 // You can execute this operation no more than once per second.
 //
@@ -5032,8 +5047,8 @@ type CreateConfigurationSetTrackingOptionsInput struct {
 	// emails.
 	//
 	// For more information, see Configuring Custom Domains to Handle Open and Click
-	// Tracking (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
-	// in the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html).
+	// Tracking (ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
+	// in the Amazon SES Developer Guide.
 	//
 	// TrackingOptions is a required field
 	TrackingOptions *TrackingOptions `type:"structure" required:"true"`
@@ -6658,7 +6673,7 @@ func (s GetAccountSendingEnabledInput) GoString() string {
 }
 
 // Represents a request to return the email sending status for your Amazon SES
-// account.
+// account in the current AWS Region.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/GetAccountSendingEnabledResponse
 type GetAccountSendingEnabledOutput struct {
 	_ struct{} `type:"structure"`
@@ -6666,7 +6681,7 @@ type GetAccountSendingEnabledOutput struct {
 	responseMetadata aws.Response
 
 	// Describes whether email sending is enabled or disabled for your Amazon SES
-	// account.
+	// account in the current AWS Region.
 	Enabled *bool `type:"boolean"`
 }
 
@@ -7622,7 +7637,7 @@ func (s ListConfigurationSetsOutput) SDKResponseMetadata() aws.Response {
 // for your account.
 //
 // For more information about custom verification email templates, see Using
-// Custom Verification Email Templates (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/custom-verification-emails.html)
+// Custom Verification Email Templates (ses/latest/DeveloperGuide/custom-verification-emails.html)
 // in the Amazon SES Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/ListCustomVerificationEmailTemplatesRequest
 type ListCustomVerificationEmailTemplatesInput struct {
@@ -8371,7 +8386,7 @@ type ReceiptAction struct {
 	StopAction *StopAction `type:"structure"`
 
 	// Calls Amazon WorkMail and, optionally, publishes a notification to Amazon
-	// SNS.
+	// Amazon SNS.
 	WorkmailAction *WorkmailAction `type:"structure"`
 }
 
@@ -8901,10 +8916,10 @@ type S3Action struct {
 	// using Amazon S3 server-side encryption. This means that you must use the
 	// Amazon S3 encryption client to decrypt the email after retrieving it from
 	// Amazon S3, as the service has no access to use your AWS KMS keys for decryption.
-	// This encryption client is currently available with the AWS Java SDK (http://aws.amazon.com/sdk-for-java/)
-	// and AWS Ruby SDK (http://aws.amazon.com/sdk-for-ruby/) only. For more information
-	// about client-side encryption using AWS KMS master keys, see the Amazon S3
-	// Developer Guide (AmazonS3/latest/dev/UsingClientSideEncryption.html).
+	// This encryption client is currently available with the AWS SDK for Java (http://aws.amazon.com/sdk-for-java/)
+	// and AWS SDK for Ruby (http://aws.amazon.com/sdk-for-ruby/) only. For more
+	// information about client-side encryption using AWS KMS master keys, see the
+	// Amazon S3 Developer Guide (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html).
 	KmsKeyArn *string `type:"string"`
 
 	// The key prefix of the Amazon S3 bucket. The key prefix is similar to a directory
@@ -10631,8 +10646,8 @@ func (s TestRenderTemplateOutput) SDKResponseMetadata() aws.Response {
 // emails.
 //
 // For more information, see Configuring Custom Domains to Handle Open and Click
-// Tracking (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
-// in the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html).
+// Tracking (ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
+// in the Amazon SES Developer Guide.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/email-2010-12-01/TrackingOptions
 type TrackingOptions struct {
 	_ struct{} `type:"structure"`
@@ -10659,7 +10674,7 @@ type UpdateAccountSendingEnabledInput struct {
 	_ struct{} `type:"structure"`
 
 	// Describes whether email sending is enabled or disabled for your Amazon SES
-	// account.
+	// account in the current AWS Region.
 	Enabled *bool `type:"boolean"`
 }
 
@@ -10923,8 +10938,8 @@ type UpdateConfigurationSetTrackingOptionsInput struct {
 	// emails.
 	//
 	// For more information, see Configuring Custom Domains to Handle Open and Click
-	// Tracking (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
-	// in the Amazon SES Developer Guide (http://docs.aws.amazon.com/ses/latest/DeveloperGuide/Welcome.html).
+	// Tracking (ses/latest/DeveloperGuide/configure-custom-open-click-domains.html)
+	// in the Amazon SES Developer Guide.
 	//
 	// TrackingOptions is a required field
 	TrackingOptions *TrackingOptions `type:"structure" required:"true"`

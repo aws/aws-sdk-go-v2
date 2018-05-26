@@ -354,15 +354,21 @@ func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -376,21 +382,11 @@ func (r CreateFleetRequest) Send() (*CreateFleetOutput, error) {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the CreateFleetRequest method.
 //    req := client.CreateFleetRequest(params)
@@ -1286,15 +1282,21 @@ func (r DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -1308,21 +1310,11 @@ func (r DeleteFleetRequest) Send() (*DeleteFleetOutput, error) {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the DeleteFleetRequest method.
 //    req := client.DeleteFleetRequest(params)
@@ -1508,49 +1500,30 @@ func (r DeleteScalingPolicyRequest) Send() (*DeleteScalingPolicyOutput, error) {
 // in force and removes all record of it. To delete a scaling policy, specify
 // both the scaling policy name and the fleet ID it is associated with.
 //
-// Fleet-related operations include:
+// To temporarily suspend scaling policies, call StopFleetActions. This operation
+// suspends all policies for the fleet.
 //
-//    * CreateFleet
+// Operations related to fleet capacity scaling include:
 //
-//    * ListFleets
+//    * DescribeFleetCapacity
 //
-//    * Describe fleets:
+//    * UpdateFleetCapacity
 //
-// DescribeFleetAttributes
+//    * DescribeEC2InstanceLimits
 //
-// DescribeFleetPortSettings
+//    * Manage scaling policies:
 //
-// DescribeFleetUtilization
+// PutScalingPolicy (auto-scaling)
 //
-// DescribeRuntimeConfiguration
+// DescribeScalingPolicies (auto-scaling)
 //
-// DescribeFleetEvents
+// DeleteScalingPolicy (auto-scaling)
 //
-//    * Update fleets:
+//    * Manage fleet actions:
 //
-// UpdateFleetAttributes
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet capacity:
-//
-// DescribeFleetCapacity
-//
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the DeleteScalingPolicyRequest method.
 //    req := client.DeleteScalingPolicyRequest(params)
@@ -1887,15 +1860,21 @@ func (r DescribeEC2InstanceLimitsRequest) Send() (*DescribeEC2InstanceLimitsOutp
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -1909,21 +1888,11 @@ func (r DescribeEC2InstanceLimitsRequest) Send() (*DescribeEC2InstanceLimitsOutp
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the DescribeEC2InstanceLimitsRequest method.
 //    req := client.DescribeEC2InstanceLimitsRequest(params)
@@ -1991,15 +1960,21 @@ func (r DescribeFleetAttributesRequest) Send() (*DescribeFleetAttributesOutput, 
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -2013,21 +1988,11 @@ func (r DescribeFleetAttributesRequest) Send() (*DescribeFleetAttributesOutput, 
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the DescribeFleetAttributesRequest method.
 //    req := client.DescribeFleetAttributesRequest(params)
@@ -2096,15 +2061,21 @@ func (r DescribeFleetCapacityRequest) Send() (*DescribeFleetCapacityOutput, erro
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -2118,21 +2089,11 @@ func (r DescribeFleetCapacityRequest) Send() (*DescribeFleetCapacityOutput, erro
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the DescribeFleetCapacityRequest method.
 //    req := client.DescribeFleetCapacityRequest(params)
@@ -2193,15 +2154,21 @@ func (r DescribeFleetEventsRequest) Send() (*DescribeFleetEventsOutput, error) {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -2215,21 +2182,11 @@ func (r DescribeFleetEventsRequest) Send() (*DescribeFleetEventsOutput, error) {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the DescribeFleetEventsRequest method.
 //    req := client.DescribeFleetEventsRequest(params)
@@ -2292,15 +2249,21 @@ func (r DescribeFleetPortSettingsRequest) Send() (*DescribeFleetPortSettingsOutp
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -2314,21 +2277,11 @@ func (r DescribeFleetPortSettingsRequest) Send() (*DescribeFleetPortSettingsOutp
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the DescribeFleetPortSettingsRequest method.
 //    req := client.DescribeFleetPortSettingsRequest(params)
@@ -2395,15 +2348,21 @@ func (r DescribeFleetUtilizationRequest) Send() (*DescribeFleetUtilizationOutput
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -2417,21 +2376,11 @@ func (r DescribeFleetUtilizationRequest) Send() (*DescribeFleetUtilizationOutput
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the DescribeFleetUtilizationRequest method.
 //    req := client.DescribeFleetUtilizationRequest(params)
@@ -3145,15 +3094,21 @@ func (r DescribeRuntimeConfigurationRequest) Send() (*DescribeRuntimeConfigurati
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -3167,21 +3122,11 @@ func (r DescribeRuntimeConfigurationRequest) Send() (*DescribeRuntimeConfigurati
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the DescribeRuntimeConfigurationRequest method.
 //    req := client.DescribeRuntimeConfigurationRequest(params)
@@ -3238,49 +3183,32 @@ func (r DescribeScalingPoliciesRequest) Send() (*DescribeScalingPoliciesOutput, 
 // Use the pagination parameters to retrieve results as a set of sequential
 // pages. If successful, set of ScalingPolicy objects is returned for the fleet.
 //
-// Fleet-related operations include:
+// A fleet may have all of its scaling policies suspended (StopFleetActions).
+// This action does not affect the status of the scaling policies, which remains
+// ACTIVE. To see whether a fleet's scaling policies are in force or suspended,
+// call DescribeFleetAttributes and check the stopped actions.
 //
-//    * CreateFleet
+// Operations related to fleet capacity scaling include:
 //
-//    * ListFleets
+//    * DescribeFleetCapacity
 //
-//    * Describe fleets:
+//    * UpdateFleetCapacity
 //
-// DescribeFleetAttributes
+//    * DescribeEC2InstanceLimits
 //
-// DescribeFleetPortSettings
+//    * Manage scaling policies:
 //
-// DescribeFleetUtilization
+// PutScalingPolicy (auto-scaling)
 //
-// DescribeRuntimeConfiguration
+// DescribeScalingPolicies (auto-scaling)
 //
-// DescribeFleetEvents
+// DeleteScalingPolicy (auto-scaling)
 //
-//    * Update fleets:
+//    * Manage fleet actions:
 //
-// UpdateFleetAttributes
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet capacity:
-//
-// DescribeFleetCapacity
-//
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the DescribeScalingPoliciesRequest method.
 //    req := client.DescribeScalingPoliciesRequest(params)
@@ -3758,15 +3686,21 @@ func (r ListFleetsRequest) Send() (*ListFleetsOutput, error) {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -3780,21 +3714,11 @@ func (r ListFleetsRequest) Send() (*ListFleetsOutput, error) {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the ListFleetsRequest method.
 //    req := client.ListFleetsRequest(params)
@@ -3844,72 +3768,102 @@ func (r PutScalingPolicyRequest) Send() (*PutScalingPolicyOutput, error) {
 // PutScalingPolicyRequest returns a request value for making API operation for
 // Amazon GameLift.
 //
-// Creates or updates a scaling policy for a fleet. An active scaling policy
-// prompts Amazon GameLift to track a certain metric for a fleet and automatically
-// change the fleet's capacity in specific circumstances. Each scaling policy
-// contains one rule statement. Fleets can have multiple scaling policies in
-// force simultaneously.
+// Creates or updates a scaling policy for a fleet. Scaling policies are used
+// to automatically scale a fleet's hosting capacity to meet player demand.
+// An active scaling policy instructs Amazon GameLift to track a fleet metric
+// and automatically change the fleet's capacity when a certain threshold is
+// reached. There are two types of scaling policies: target-based and rule-based.
+// Use a target-based policy to quickly and efficiently manage fleet scaling;
+// this option is the most commonly used. Use rule-based policies when you need
+// to exert fine-grained control over auto-scaling.
 //
-// A scaling policy rule statement has the following structure:
+// Fleets can have multiple scaling policies of each type in force at the same
+// time; you can have one target-based policy, one or multiple rule-based scaling
+// policies, or both. We recommend caution, however, because multiple auto-scaling
+// policies can have unintended consequences.
+//
+// You can temporarily suspend all scaling policies for a fleet by calling StopFleetActions
+// with the fleet action AUTO_SCALING. To resume scaling policies, call StartFleetActions
+// with the same fleet action. To stop just one scaling policy--or to permanently
+// remove it, you must delete the policy with DeleteScalingPolicy.
+//
+// Learn more about how to work with auto-scaling in Set Up Fleet Automatic
+// Scaling (http://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-autoscaling.html).
+//
+// Target-based policy
+//
+// A target-based policy tracks a single metric: PercentAvailableGameSessions.
+// This metric tells us how much of a fleet's hosting capacity is ready to host
+// game sessions but is not currently in use. This is the fleet's buffer; it
+// measures the additional player demand that the fleet could handle at current
+// capacity. With a target-based policy, you set your ideal buffer size and
+// leave it to Amazon GameLift to take whatever action is needed to maintain
+// that target.
+//
+// For example, you might choose to maintain a 10% buffer for a fleet that has
+// the capacity to host 100 simultaneous game sessions. This policy tells Amazon
+// GameLift to take action whenever the fleet's available capacity falls below
+// or rises above 10 game sessions. Amazon GameLift will start new instances
+// or stop unused instances in order to return to the 10% buffer.
+//
+// To create or update a target-based policy, specify a fleet ID and name, and
+// set the policy type to "TargetBased". Specify the metric to track (PercentAvailableGameSessions)
+// and reference a TargetConfiguration object with your desired buffer value.
+// Exclude all other parameters. On a successful request, the policy name is
+// returned. The scaling policy is automatically in force as soon as it's successfully
+// created. If the fleet's auto-scaling actions are temporarily suspended, the
+// new policy will be in force once the fleet actions are restarted.
+//
+// Rule-based policy
+//
+// A rule-based policy tracks specified fleet metric, sets a threshold value,
+// and specifies the type of action to initiate when triggered. With a rule-based
+// policy, you can select from several available fleet metrics. Each policy
+// specifies whether to scale up or scale down (and by how much), so you need
+// one policy for each type of action.
+//
+// For example, a policy may make the following statement: "If the percentage
+// of idle instances is greater than 20% for more than 15 minutes, then reduce
+// the fleet capacity by 10%."
+//
+// A policy's rule statement has the following structure:
 //
 // If [MetricName] is [ComparisonOperator][Threshold] for [EvaluationPeriods]
 // minutes, then [ScalingAdjustmentType] to/by [ScalingAdjustment].
 //
-// For example, this policy: "If the number of idle instances exceeds 20 for
-// more than 15 minutes, then reduce the fleet capacity by 10 instances" could
-// be implemented as the following rule statement:
+// To implement the example, the rule statement would look like this:
 //
-// If [IdleInstances] is [GreaterThanOrEqualToThreshold] [20] for [15] minutes,
-// then [ChangeInCapacity] by [-10].
+// If [PercentIdleInstances] is [GreaterThanThreshold][20] for [15] minutes,
+// then [PercentChangeInCapacity] to/by [10].
 //
 // To create or update a scaling policy, specify a unique combination of name
-// and fleet ID, and set the rule values. All parameters for this action are
-// required. If successful, the policy name is returned. Scaling policies cannot
-// be suspended or made inactive. To stop enforcing a scaling policy, call DeleteScalingPolicy.
+// and fleet ID, and set the policy type to "RuleBased". Specify the parameter
+// values for a policy rule statement. On a successful request, the policy name
+// is returned. Scaling policies are automatically in force as soon as they're
+// successfully created. If the fleet's auto-scaling actions are temporarily
+// suspended, the new policy will be in force once the fleet actions are restarted.
 //
-// Fleet-related operations include:
+// Operations related to fleet capacity scaling include:
 //
-//    * CreateFleet
+//    * DescribeFleetCapacity
 //
-//    * ListFleets
+//    * UpdateFleetCapacity
 //
-//    * Describe fleets:
+//    * DescribeEC2InstanceLimits
 //
-// DescribeFleetAttributes
+//    * Manage scaling policies:
 //
-// DescribeFleetPortSettings
+// PutScalingPolicy (auto-scaling)
 //
-// DescribeFleetUtilization
+// DescribeScalingPolicies (auto-scaling)
 //
-// DescribeRuntimeConfiguration
+// DeleteScalingPolicy (auto-scaling)
 //
-// DescribeFleetEvents
+//    * Manage fleet actions:
 //
-//    * Update fleets:
+// StartFleetActions
 //
-// UpdateFleetAttributes
-//
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet capacity:
-//
-// DescribeFleetCapacity
-//
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the PutScalingPolicyRequest method.
 //    req := client.PutScalingPolicyRequest(params)
@@ -4175,6 +4129,85 @@ func (c *GameLift) SearchGameSessionsRequest(input *SearchGameSessionsInput) Sea
 	output.responseMetadata = aws.Response{Request: req}
 
 	return SearchGameSessionsRequest{Request: req, Input: input, Copy: c.SearchGameSessionsRequest}
+}
+
+const opStartFleetActions = "StartFleetActions"
+
+// StartFleetActionsRequest is a API request type for the StartFleetActions API operation.
+type StartFleetActionsRequest struct {
+	*aws.Request
+	Input *StartFleetActionsInput
+	Copy  func(*StartFleetActionsInput) StartFleetActionsRequest
+}
+
+// Send marshals and sends the StartFleetActions API request.
+func (r StartFleetActionsRequest) Send() (*StartFleetActionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StartFleetActionsOutput), nil
+}
+
+// StartFleetActionsRequest returns a request value for making API operation for
+// Amazon GameLift.
+//
+// Resumes activity on a fleet that was suspended with StopFleetActions. Currently,
+// this operation is used to restart a fleet's auto-scaling activity.
+//
+// To start fleet actions, specify the fleet ID and the type of actions to restart.
+// When auto-scaling fleet actions are restarted, Amazon GameLift once again
+// initiates scaling events as triggered by the fleet's scaling policies. If
+// actions on the fleet were never stopped, this operation will have no effect.
+// You can view a fleet's stopped actions using DescribeFleetAttributes.
+//
+// Operations related to fleet capacity scaling include:
+//
+//    * DescribeFleetCapacity
+//
+//    * UpdateFleetCapacity
+//
+//    * DescribeEC2InstanceLimits
+//
+//    * Manage scaling policies:
+//
+// PutScalingPolicy (auto-scaling)
+//
+// DescribeScalingPolicies (auto-scaling)
+//
+// DeleteScalingPolicy (auto-scaling)
+//
+//    * Manage fleet actions:
+//
+// StartFleetActions
+//
+// StopFleetActions
+//
+//    // Example sending a request using the StartFleetActionsRequest method.
+//    req := client.StartFleetActionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartFleetActions
+func (c *GameLift) StartFleetActionsRequest(input *StartFleetActionsInput) StartFleetActionsRequest {
+	op := &aws.Operation{
+		Name:       opStartFleetActions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StartFleetActionsInput{}
+	}
+
+	output := &StartFleetActionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StartFleetActionsRequest{Request: req, Input: input, Copy: c.StartFleetActionsRequest}
 }
 
 const opStartGameSessionPlacement = "StartGameSessionPlacement"
@@ -4497,6 +4530,65 @@ func (c *GameLift) StartMatchmakingRequest(input *StartMatchmakingInput) StartMa
 	return StartMatchmakingRequest{Request: req, Input: input, Copy: c.StartMatchmakingRequest}
 }
 
+const opStopFleetActions = "StopFleetActions"
+
+// StopFleetActionsRequest is a API request type for the StopFleetActions API operation.
+type StopFleetActionsRequest struct {
+	*aws.Request
+	Input *StopFleetActionsInput
+	Copy  func(*StopFleetActionsInput) StopFleetActionsRequest
+}
+
+// Send marshals and sends the StopFleetActions API request.
+func (r StopFleetActionsRequest) Send() (*StopFleetActionsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*StopFleetActionsOutput), nil
+}
+
+// StopFleetActionsRequest returns a request value for making API operation for
+// Amazon GameLift.
+//
+// Suspends activity on a fleet. Currently, this operation is used to stop a
+// fleet's auto-scaling activity. It is used to temporarily stop scaling events
+// triggered by the fleet's scaling policies. The policies can be retained and
+// auto-scaling activity can be restarted using StartFleetActions. You can view
+// a fleet's stopped actions using DescribeFleetAttributes.
+//
+// To stop fleet actions, specify the fleet ID and the type of actions to suspend.
+// When auto-scaling fleet actions are stopped, Amazon GameLift no longer initiates
+// scaling events except to maintain the fleet's desired instances setting (FleetCapacity.
+// Changes to the fleet's capacity must be done manually using UpdateFleetCapacity.
+//
+//    // Example sending a request using the StopFleetActionsRequest method.
+//    req := client.StopFleetActionsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopFleetActions
+func (c *GameLift) StopFleetActionsRequest(input *StopFleetActionsInput) StopFleetActionsRequest {
+	op := &aws.Operation{
+		Name:       opStopFleetActions,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &StopFleetActionsInput{}
+	}
+
+	output := &StopFleetActionsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return StopFleetActionsRequest{Request: req, Input: input, Copy: c.StopFleetActionsRequest}
+}
+
 const opStopGameSessionPlacement = "StopGameSessionPlacement"
 
 // StopGameSessionPlacementRequest is a API request type for the StopGameSessionPlacement API operation.
@@ -4799,15 +4891,21 @@ func (r UpdateFleetAttributesRequest) Send() (*UpdateFleetAttributesOutput, erro
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -4821,21 +4919,11 @@ func (r UpdateFleetAttributesRequest) Send() (*UpdateFleetAttributesOutput, erro
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the UpdateFleetAttributesRequest method.
 //    req := client.UpdateFleetAttributesRequest(params)
@@ -4890,9 +4978,10 @@ func (r UpdateFleetCapacityRequest) Send() (*UpdateFleetCapacityOutput, error) {
 // this action, you may want to call DescribeEC2InstanceLimits to get the maximum
 // capacity based on the fleet's EC2 instance type.
 //
-// If you're using autoscaling (see PutScalingPolicy), you may want to specify
-// a minimum and/or maximum capacity. If you don't provide these, autoscaling
-// can set capacity anywhere between zero and the service limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift).
+// Specify minimum and maximum number of instances. Amazon GameLift will not
+// change fleet capacity to values fall outside of this range. This is particularly
+// important when using auto-scaling (see PutScalingPolicy) to allow capacity
+// to adjust based on player demand while imposing limits on automatic adjustments.
 //
 // To update fleet capacity, specify the fleet ID and the number of instances
 // you want the fleet to host. If successful, Amazon GameLift starts or terminates
@@ -4907,15 +4996,21 @@ func (r UpdateFleetCapacityRequest) Send() (*UpdateFleetCapacityOutput, error) {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -4929,21 +5024,11 @@ func (r UpdateFleetCapacityRequest) Send() (*UpdateFleetCapacityOutput, error) {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the UpdateFleetCapacityRequest method.
 //    req := client.UpdateFleetCapacityRequest(params)
@@ -5006,15 +5091,21 @@ func (r UpdateFleetPortSettingsRequest) Send() (*UpdateFleetPortSettingsOutput, 
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -5028,21 +5119,11 @@ func (r UpdateFleetPortSettingsRequest) Send() (*UpdateFleetPortSettingsOutput, 
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the UpdateFleetPortSettingsRequest method.
 //    req := client.UpdateFleetPortSettingsRequest(params)
@@ -5323,15 +5404,21 @@ func (r UpdateRuntimeConfigurationRequest) Send() (*UpdateRuntimeConfigurationOu
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -5345,21 +5432,11 @@ func (r UpdateRuntimeConfigurationRequest) Send() (*UpdateRuntimeConfigurationOu
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 //
 //    // Example sending a request using the UpdateRuntimeConfigurationRequest method.
 //    req := client.UpdateRuntimeConfigurationRequest(params)
@@ -9039,15 +9116,21 @@ func (s *DesiredPlayerSession) Validate() error {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -9061,21 +9144,11 @@ func (s *DesiredPlayerSession) Validate() error {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/EC2InstanceCounts
 type EC2InstanceCounts struct {
 	_ struct{} `type:"structure"`
@@ -9286,15 +9359,21 @@ func (s Event) GoString() string {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -9308,21 +9387,11 @@ func (s Event) GoString() string {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetAttributes
 type FleetAttributes struct {
 	_ struct{} `type:"structure"`
@@ -9423,6 +9492,10 @@ type FleetAttributes struct {
 	//    * TERMINATED -- The fleet no longer exists.
 	Status FleetStatus `type:"string" enum:"true"`
 
+	// List of fleet actions that have been suspended using StopFleetActions. This
+	// includes auto-scaling.
+	StoppedActions []FleetAction `min:"1" type:"list"`
+
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	TerminationTime *time.Time `type:"timestamp" timestampFormat:"unix"`
@@ -9449,15 +9522,21 @@ func (s FleetAttributes) GoString() string {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -9471,21 +9550,11 @@ func (s FleetAttributes) GoString() string {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetCapacity
 type FleetCapacity struct {
 	_ struct{} `type:"structure"`
@@ -9523,15 +9592,21 @@ func (s FleetCapacity) GoString() string {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -9545,21 +9620,11 @@ func (s FleetCapacity) GoString() string {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/FleetUtilization
 type FleetUtilization struct {
 	_ struct{} `type:"structure"`
@@ -9714,7 +9779,7 @@ type GameSession struct {
 	IpAddress *string `type:"string"`
 
 	// Information about the matchmaking process that was used to create the game
-	// session. It is in JSON syntax, formated as a string. In addition the matchmaking
+	// session. It is in JSON syntax, formatted as a string. In addition the matchmaking
 	// configuration used, it contains data on all players assigned to the match,
 	// including player attributes and team assignments. For more details on matchmaker
 	// data, see Match Data (http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
@@ -9884,7 +9949,7 @@ type GameSessionPlacement struct {
 	IpAddress *string `type:"string"`
 
 	// Information on the matchmaking process for this game. Data is in JSON syntax,
-	// formated as a string. It identifies the matchmaking configuration used to
+	// formatted as a string. It identifies the matchmaking configuration used to
 	// create the match, and contains data on all players assigned to the match,
 	// including player attributes and team assignments. For more details on matchmaker
 	// data, see Match Data (http://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
@@ -11192,41 +11257,54 @@ type PutScalingPolicyInput struct {
 
 	// Comparison operator to use when measuring the metric against the threshold
 	// value.
-	//
-	// ComparisonOperator is a required field
-	ComparisonOperator ComparisonOperatorType `type:"string" required:"true" enum:"true"`
+	ComparisonOperator ComparisonOperatorType `type:"string" enum:"true"`
 
 	// Length of time (in minutes) the metric must be at or beyond the threshold
 	// before a scaling event is triggered.
-	//
-	// EvaluationPeriods is a required field
-	EvaluationPeriods *int64 `min:"1" type:"integer" required:"true"`
+	EvaluationPeriods *int64 `min:"1" type:"integer"`
 
-	// Unique identifier for a fleet to apply this policy to.
+	// Unique identifier for a fleet to apply this policy to. The fleet cannot be
+	// in any of the following statuses: ERROR or DELETING.
 	//
 	// FleetId is a required field
 	FleetId *string `type:"string" required:"true"`
 
-	// Name of the Amazon GameLift-defined metric that is used to trigger an adjustment.
+	// Name of the Amazon GameLift-defined metric that is used to trigger a scaling
+	// adjustment. For detailed descriptions of fleet metrics, see Monitor Amazon
+	// GameLift with Amazon CloudWatch (http://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html).
 	//
-	//    * ActivatingGameSessions -- number of game sessions in the process of
-	//    being created (game session status = ACTIVATING).
+	//    * ActivatingGameSessions -- Game sessions in the process of being created.
 	//
-	//    * ActiveGameSessions -- number of game sessions currently running (game
-	//    session status = ACTIVE).
+	//    * ActiveGameSessions -- Game sessions that are currently running.
 	//
-	//    * CurrentPlayerSessions -- number of active or reserved player sessions
-	//    (player session status = ACTIVE or RESERVED).
+	//    * ActiveInstances -- Fleet instances that are currently running at least
+	//    one game session.
 	//
-	//    * AvailablePlayerSessions -- number of player session slots currently
-	//    available in active game sessions across the fleet, calculated by subtracting
-	//    a game session's current player session count from its maximum player
-	//    session count. This number includes game sessions that are not currently
-	//    accepting players (game session PlayerSessionCreationPolicy = DENY_ALL).
+	//    * AvailableGameSessions -- Additional game sessions that fleet could host
+	//    simultaneously, given current capacity.
 	//
-	//    * ActiveInstances -- number of instances currently running a game session.
+	//    * AvailablePlayerSessions -- Empty player slots in currently active game
+	//    sessions. This includes game sessions that are not currently accepting
+	//    players. Reserved player slots are not included.
 	//
-	//    * IdleInstances -- number of instances not currently running a game session.
+	//    * CurrentPlayerSessions -- Player slots in active game sessions that are
+	//    being used by a player or are reserved for a player.
+	//
+	//    * IdleInstances -- Active instances that are currently hosting zero game
+	//    sessions.
+	//
+	//    * PercentAvailableGameSessions -- Unused percentage of the total number
+	//    of game sessions that a fleet could host simultaneously, given current
+	//    capacity. Use this metric for a target-based scaling policy.
+	//
+	//    * PercentIdleInstances -- Percentage of the total number of active instances
+	//    that are hosting zero game sessions.
+	//
+	//    * QueueDepth -- Pending game session placement requests, in any queue,
+	//    where the current fleet is the top-priority destination.
+	//
+	//    * WaitTime -- Current wait time for pending game session placement requests,
+	//    in any queue, where the current fleet is the top-priority destination.
 	//
 	// MetricName is a required field
 	MetricName MetricName `type:"string" required:"true" enum:"true"`
@@ -11238,10 +11316,14 @@ type PutScalingPolicyInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
+	// Type of scaling policy to create. For a target-based policy, set the parameter
+	// MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration.
+	// For a rule-based policy set the following parameters: MetricName, ComparisonOperator,
+	// Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.
+	PolicyType PolicyType `type:"string" enum:"true"`
+
 	// Amount of adjustment to make, based on the scaling adjustment type.
-	//
-	// ScalingAdjustment is a required field
-	ScalingAdjustment *int64 `type:"integer" required:"true"`
+	ScalingAdjustment *int64 `type:"integer"`
 
 	// Type of adjustment to make to a fleet's instance count (see FleetCapacity):
 	//
@@ -11255,14 +11337,13 @@ type PutScalingPolicyInput struct {
 	//    by the scaling adjustment, read as a percentage. Positive values scale
 	//    up while negative values scale down; for example, a value of "-10" scales
 	//    the fleet down by 10%.
-	//
-	// ScalingAdjustmentType is a required field
-	ScalingAdjustmentType ScalingAdjustmentType `type:"string" required:"true" enum:"true"`
+	ScalingAdjustmentType ScalingAdjustmentType `type:"string" enum:"true"`
+
+	// Object that contains settings for a target-based scaling policy.
+	TargetConfiguration *TargetConfiguration `type:"structure"`
 
 	// Metric value used to trigger a scaling event.
-	//
-	// Threshold is a required field
-	Threshold *float64 `type:"double" required:"true"`
+	Threshold *float64 `type:"double"`
 }
 
 // String returns the string representation
@@ -11278,13 +11359,6 @@ func (s PutScalingPolicyInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutScalingPolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutScalingPolicyInput"}
-	if len(s.ComparisonOperator) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ComparisonOperator"))
-	}
-
-	if s.EvaluationPeriods == nil {
-		invalidParams.Add(aws.NewErrParamRequired("EvaluationPeriods"))
-	}
 	if s.EvaluationPeriods != nil && *s.EvaluationPeriods < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("EvaluationPeriods", 1))
 	}
@@ -11302,16 +11376,10 @@ func (s *PutScalingPolicyInput) Validate() error {
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
-
-	if s.ScalingAdjustment == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustment"))
-	}
-	if len(s.ScalingAdjustmentType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ScalingAdjustmentType"))
-	}
-
-	if s.Threshold == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Threshold"))
+	if s.TargetConfiguration != nil {
+		if err := s.TargetConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("TargetConfiguration", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -11515,15 +11583,21 @@ func (s ResourceCreationLimitPolicy) GoString() string {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -11537,21 +11611,11 @@ func (s ResourceCreationLimitPolicy) GoString() string {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RoutingStrategy
 type RoutingStrategy struct {
 	_ struct{} `type:"structure"`
@@ -11613,15 +11677,21 @@ func (s RoutingStrategy) GoString() string {
 //
 //    * ListFleets
 //
+//    * DeleteFleet
+//
 //    * Describe fleets:
 //
 // DescribeFleetAttributes
+//
+// DescribeFleetCapacity
 //
 // DescribeFleetPortSettings
 //
 // DescribeFleetUtilization
 //
 // DescribeRuntimeConfiguration
+//
+// DescribeEC2InstanceLimits
 //
 // DescribeFleetEvents
 //
@@ -11635,21 +11705,11 @@ func (s RoutingStrategy) GoString() string {
 //
 // UpdateRuntimeConfiguration
 //
-//    * Manage fleet capacity:
+//    * Manage fleet actions:
 //
-// DescribeFleetCapacity
+// StartFleetActions
 //
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/RuntimeConfiguration
 type RuntimeConfiguration struct {
 	_ struct{} `type:"structure"`
@@ -11756,49 +11816,27 @@ func (s *S3Location) Validate() error {
 // Rule that controls how a fleet is scaled. Scaling policies are uniquely identified
 // by the combination of name and fleet ID.
 //
-// Fleet-related operations include:
+// Operations related to fleet capacity scaling include:
 //
-//    * CreateFleet
+//    * DescribeFleetCapacity
 //
-//    * ListFleets
+//    * UpdateFleetCapacity
 //
-//    * Describe fleets:
+//    * DescribeEC2InstanceLimits
 //
-// DescribeFleetAttributes
+//    * Manage scaling policies:
 //
-// DescribeFleetPortSettings
+// PutScalingPolicy (auto-scaling)
 //
-// DescribeFleetUtilization
+// DescribeScalingPolicies (auto-scaling)
 //
-// DescribeRuntimeConfiguration
+// DeleteScalingPolicy (auto-scaling)
 //
-// DescribeFleetEvents
+//    * Manage fleet actions:
 //
-//    * Update fleets:
+// StartFleetActions
 //
-// UpdateFleetAttributes
-//
-// UpdateFleetCapacity
-//
-// UpdateFleetPortSettings
-//
-// UpdateRuntimeConfiguration
-//
-//    * Manage fleet capacity:
-//
-// DescribeFleetCapacity
-//
-// UpdateFleetCapacity
-//
-// PutScalingPolicy (automatic scaling)
-//
-// DescribeScalingPolicies (automatic scaling)
-//
-// DeleteScalingPolicy (automatic scaling)
-//
-// DescribeEC2InstanceLimits
-//
-//    * DeleteFleet
+// StopFleetActions
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/ScalingPolicy
 type ScalingPolicy struct {
 	_ struct{} `type:"structure"`
@@ -11814,31 +11852,53 @@ type ScalingPolicy struct {
 	// Unique identifier for a fleet that is associated with this scaling policy.
 	FleetId *string `type:"string"`
 
-	// Name of the Amazon GameLift-defined metric that is used to trigger an adjustment.
+	// Name of the Amazon GameLift-defined metric that is used to trigger a scaling
+	// adjustment. For detailed descriptions of fleet metrics, see Monitor Amazon
+	// GameLift with Amazon CloudWatch (http://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html).
 	//
-	//    * ActivatingGameSessions -- number of game sessions in the process of
-	//    being created (game session status = ACTIVATING).
+	//    * ActivatingGameSessions -- Game sessions in the process of being created.
 	//
-	//    * ActiveGameSessions -- number of game sessions currently running (game
-	//    session status = ACTIVE).
+	//    * ActiveGameSessions -- Game sessions that are currently running.
 	//
-	//    * CurrentPlayerSessions -- number of active or reserved player sessions
-	//    (player session status = ACTIVE or RESERVED).
+	//    * ActiveInstances -- Fleet instances that are currently running at least
+	//    one game session.
 	//
-	//    * AvailablePlayerSessions -- number of player session slots currently
-	//    available in active game sessions across the fleet, calculated by subtracting
-	//    a game session's current player session count from its maximum player
-	//    session count. This number does include game sessions that are not currently
-	//    accepting players (game session PlayerSessionCreationPolicy = DENY_ALL).
+	//    * AvailableGameSessions -- Additional game sessions that fleet could host
+	//    simultaneously, given current capacity.
 	//
-	//    * ActiveInstances -- number of instances currently running a game session.
+	//    * AvailablePlayerSessions -- Empty player slots in currently active game
+	//    sessions. This includes game sessions that are not currently accepting
+	//    players. Reserved player slots are not included.
 	//
-	//    * IdleInstances -- number of instances not currently running a game session.
+	//    * CurrentPlayerSessions -- Player slots in active game sessions that are
+	//    being used by a player or are reserved for a player.
+	//
+	//    * IdleInstances -- Active instances that are currently hosting zero game
+	//    sessions.
+	//
+	//    * PercentAvailableGameSessions -- Unused percentage of the total number
+	//    of game sessions that a fleet could host simultaneously, given current
+	//    capacity. Use this metric for a target-based scaling policy.
+	//
+	//    * PercentIdleInstances -- Percentage of the total number of active instances
+	//    that are hosting zero game sessions.
+	//
+	//    * QueueDepth -- Pending game session placement requests, in any queue,
+	//    where the current fleet is the top-priority destination.
+	//
+	//    * WaitTime -- Current wait time for pending game session placement requests,
+	//    in any queue, where the current fleet is the top-priority destination.
 	MetricName MetricName `type:"string" enum:"true"`
 
 	// Descriptive label that is associated with a scaling policy. Policy names
 	// do not need to be unique.
 	Name *string `min:"1" type:"string"`
+
+	// Type of scaling policy to create. For a target-based policy, set the parameter
+	// MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration.
+	// For a rule-based policy set the following parameters: MetricName, ComparisonOperator,
+	// Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.
+	PolicyType PolicyType `type:"string" enum:"true"`
 
 	// Amount of adjustment to make, based on the scaling adjustment type.
 	ScalingAdjustment *int64 `type:"integer"`
@@ -11856,10 +11916,12 @@ type ScalingPolicy struct {
 	//    up while negative values scale down.
 	ScalingAdjustmentType ScalingAdjustmentType `type:"string" enum:"true"`
 
-	// Current status of the scaling policy. The scaling policy is only in force
-	// when in an ACTIVE status.
+	// Current status of the scaling policy. The scaling policy can be in force
+	// only when in an ACTIVE status. Scaling policies can be suspended for individual
+	// fleets (see StopFleetActions; if suspended for a fleet, the policy status
+	// does not change. View a fleet's stopped actions by calling DescribeFleetCapacity.
 	//
-	//    * ACTIVE -- The scaling policy is currently in force.
+	//    * ACTIVE -- The scaling policy can be used for auto-scaling a fleet.
 	//
 	//    * UPDATE_REQUESTED -- A request to update the scaling policy has been
 	//    received.
@@ -11876,6 +11938,9 @@ type ScalingPolicy struct {
 	//    * ERROR -- An error occurred in creating the policy. It should be removed
 	//    and recreated.
 	Status ScalingStatusType `type:"string" enum:"true"`
+
+	// Object that contains settings for a target-based scaling policy.
+	TargetConfiguration *TargetConfiguration `type:"structure"`
 
 	// Metric value used to trigger a scaling event.
 	Threshold *float64 `type:"double"`
@@ -12100,6 +12165,74 @@ func (s *ServerProcess) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartFleetActionsInput
+type StartFleetActionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// List of actions to restart on the fleet.
+	//
+	// Actions is a required field
+	Actions []FleetAction `min:"1" type:"list" required:"true"`
+
+	// Unique identifier for a fleet
+	//
+	// FleetId is a required field
+	FleetId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StartFleetActionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartFleetActionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartFleetActionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartFleetActionsInput"}
+
+	if s.Actions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Actions"))
+	}
+	if s.Actions != nil && len(s.Actions) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Actions", 1))
+	}
+
+	if s.FleetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StartFleetActionsOutput
+type StartFleetActionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StartFleetActionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StartFleetActionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StartFleetActionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
 }
 
 // Represents the input for a request action.
@@ -12457,6 +12590,74 @@ func (s StartMatchmakingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopFleetActionsInput
+type StopFleetActionsInput struct {
+	_ struct{} `type:"structure"`
+
+	// List of actions to suspend on the fleet.
+	//
+	// Actions is a required field
+	Actions []FleetAction `min:"1" type:"list" required:"true"`
+
+	// Unique identifier for a fleet
+	//
+	// FleetId is a required field
+	FleetId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s StopFleetActionsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopFleetActionsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StopFleetActionsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StopFleetActionsInput"}
+
+	if s.Actions == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Actions"))
+	}
+	if s.Actions != nil && len(s.Actions) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Actions", 1))
+	}
+
+	if s.FleetId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("FleetId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopFleetActionsOutput
+type StopFleetActionsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s StopFleetActionsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s StopFleetActionsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s StopFleetActionsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Represents the input for a request action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/StopGameSessionPlacementInput
 type StopGameSessionPlacementInput struct {
@@ -12580,6 +12781,72 @@ func (s StopMatchmakingOutput) GoString() string {
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s StopMatchmakingOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
+}
+
+// Settings for a target-based scaling policy (see ScalingPolicy. A target-based
+// policy tracks a particular fleet metric specifies a target value for the
+// metric. As player usage changes, the policy triggers Amazon GameLift to adjust
+// capacity so that the metric returns to the target value. The target configuration
+// specifies settings as needed for the target based policy, including the target
+// value.
+//
+// Operations related to fleet capacity scaling include:
+//
+//    * DescribeFleetCapacity
+//
+//    * UpdateFleetCapacity
+//
+//    * DescribeEC2InstanceLimits
+//
+//    * Manage scaling policies:
+//
+// PutScalingPolicy (auto-scaling)
+//
+// DescribeScalingPolicies (auto-scaling)
+//
+// DeleteScalingPolicy (auto-scaling)
+//
+//    * Manage fleet actions:
+//
+// StartFleetActions
+//
+// StopFleetActions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/gamelift-2015-10-01/TargetConfiguration
+type TargetConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Desired value to use with a target-based scaling policy. The value must be
+	// relevant for whatever metric the scaling policy is using. For example, in
+	// a policy using the metric PercentAvailableGameSessions, the target value
+	// should be the preferred size of the fleet's buffer (the percent of capacity
+	// that should be idle and ready for new game sessions).
+	//
+	// TargetValue is a required field
+	TargetValue *float64 `type:"double" required:"true"`
+}
+
+// String returns the string representation
+func (s TargetConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s TargetConfiguration) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TargetConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TargetConfiguration"}
+
+	if s.TargetValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TargetValue"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Represents the input for a request action.
@@ -13742,6 +14009,22 @@ func (enum EventCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type FleetAction string
+
+// Enum values for FleetAction
+const (
+	FleetActionAutoScaling FleetAction = "AUTO_SCALING"
+)
+
+func (enum FleetAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FleetAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type FleetStatus string
 
 // Enum values for FleetStatus
@@ -13971,6 +14254,23 @@ func (enum PlayerSessionStatus) MarshalValue() (string, error) {
 }
 
 func (enum PlayerSessionStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type PolicyType string
+
+// Enum values for PolicyType
+const (
+	PolicyTypeRuleBased   PolicyType = "RuleBased"
+	PolicyTypeTargetBased PolicyType = "TargetBased"
+)
+
+func (enum PolicyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum PolicyType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

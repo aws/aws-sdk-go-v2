@@ -10,6 +10,171 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
+const opAssociateIpGroups = "AssociateIpGroups"
+
+// AssociateIpGroupsRequest is a API request type for the AssociateIpGroups API operation.
+type AssociateIpGroupsRequest struct {
+	*aws.Request
+	Input *AssociateIpGroupsInput
+	Copy  func(*AssociateIpGroupsInput) AssociateIpGroupsRequest
+}
+
+// Send marshals and sends the AssociateIpGroups API request.
+func (r AssociateIpGroupsRequest) Send() (*AssociateIpGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AssociateIpGroupsOutput), nil
+}
+
+// AssociateIpGroupsRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
+//
+// Associates the specified IP access control group with the specified directory.
+//
+//    // Example sending a request using the AssociateIpGroupsRequest method.
+//    req := client.AssociateIpGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateIpGroups
+func (c *WorkSpaces) AssociateIpGroupsRequest(input *AssociateIpGroupsInput) AssociateIpGroupsRequest {
+	op := &aws.Operation{
+		Name:       opAssociateIpGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AssociateIpGroupsInput{}
+	}
+
+	output := &AssociateIpGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AssociateIpGroupsRequest{Request: req, Input: input, Copy: c.AssociateIpGroupsRequest}
+}
+
+const opAuthorizeIpRules = "AuthorizeIpRules"
+
+// AuthorizeIpRulesRequest is a API request type for the AuthorizeIpRules API operation.
+type AuthorizeIpRulesRequest struct {
+	*aws.Request
+	Input *AuthorizeIpRulesInput
+	Copy  func(*AuthorizeIpRulesInput) AuthorizeIpRulesRequest
+}
+
+// Send marshals and sends the AuthorizeIpRules API request.
+func (r AuthorizeIpRulesRequest) Send() (*AuthorizeIpRulesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*AuthorizeIpRulesOutput), nil
+}
+
+// AuthorizeIpRulesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
+//
+// Adds one or more rules to the specified IP access control group.
+//
+// This action gives users permission to access their WorkSpaces from the CIDR
+// address ranges specified in the rules.
+//
+//    // Example sending a request using the AuthorizeIpRulesRequest method.
+//    req := client.AuthorizeIpRulesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AuthorizeIpRules
+func (c *WorkSpaces) AuthorizeIpRulesRequest(input *AuthorizeIpRulesInput) AuthorizeIpRulesRequest {
+	op := &aws.Operation{
+		Name:       opAuthorizeIpRules,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &AuthorizeIpRulesInput{}
+	}
+
+	output := &AuthorizeIpRulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return AuthorizeIpRulesRequest{Request: req, Input: input, Copy: c.AuthorizeIpRulesRequest}
+}
+
+const opCreateIpGroup = "CreateIpGroup"
+
+// CreateIpGroupRequest is a API request type for the CreateIpGroup API operation.
+type CreateIpGroupRequest struct {
+	*aws.Request
+	Input *CreateIpGroupInput
+	Copy  func(*CreateIpGroupInput) CreateIpGroupRequest
+}
+
+// Send marshals and sends the CreateIpGroup API request.
+func (r CreateIpGroupRequest) Send() (*CreateIpGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CreateIpGroupOutput), nil
+}
+
+// CreateIpGroupRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
+//
+// Creates an IP access control group.
+//
+// An IP access control group provides you with the ability to control the IP
+// addresses from which users are allowed to access their WorkSpaces. To specify
+// the CIDR address ranges, add rules to your IP access control group and then
+// associate the group with your directory. You can add rules when you create
+// the group or at any time using AuthorizeIpRules.
+//
+// There is a default IP access control group associated with your directory.
+// If you don't associate an IP access control group with your directory, the
+// default group is used. The default group includes a default rule that allows
+// users to access their WorkSpaces from anywhere. You cannot modify the default
+// IP access control group for your directory.
+//
+//    // Example sending a request using the CreateIpGroupRequest method.
+//    req := client.CreateIpGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroup
+func (c *WorkSpaces) CreateIpGroupRequest(input *CreateIpGroupInput) CreateIpGroupRequest {
+	op := &aws.Operation{
+		Name:       opCreateIpGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &CreateIpGroupInput{}
+	}
+
+	output := &CreateIpGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CreateIpGroupRequest{Request: req, Input: input, Copy: c.CreateIpGroupRequest}
+}
+
 const opCreateTags = "CreateTags"
 
 // CreateTagsRequest is a API request type for the CreateTags API operation.
@@ -32,7 +197,7 @@ func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
 // CreateTagsRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Creates tags for the specified WorkSpace.
+// Creates the specified tags for the specified WorkSpace.
 //
 //    // Example sending a request using the CreateTagsRequest method.
 //    req := client.CreateTagsRequest(params)
@@ -112,6 +277,58 @@ func (c *WorkSpaces) CreateWorkspacesRequest(input *CreateWorkspacesInput) Creat
 	return CreateWorkspacesRequest{Request: req, Input: input, Copy: c.CreateWorkspacesRequest}
 }
 
+const opDeleteIpGroup = "DeleteIpGroup"
+
+// DeleteIpGroupRequest is a API request type for the DeleteIpGroup API operation.
+type DeleteIpGroupRequest struct {
+	*aws.Request
+	Input *DeleteIpGroupInput
+	Copy  func(*DeleteIpGroupInput) DeleteIpGroupRequest
+}
+
+// Send marshals and sends the DeleteIpGroup API request.
+func (r DeleteIpGroupRequest) Send() (*DeleteIpGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteIpGroupOutput), nil
+}
+
+// DeleteIpGroupRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
+//
+// Deletes the specified IP access control group.
+//
+// You cannot delete an IP access control group that is associated with a directory.
+//
+//    // Example sending a request using the DeleteIpGroupRequest method.
+//    req := client.DeleteIpGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteIpGroup
+func (c *WorkSpaces) DeleteIpGroupRequest(input *DeleteIpGroupInput) DeleteIpGroupRequest {
+	op := &aws.Operation{
+		Name:       opDeleteIpGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteIpGroupInput{}
+	}
+
+	output := &DeleteIpGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteIpGroupRequest{Request: req, Input: input, Copy: c.DeleteIpGroupRequest}
+}
+
 const opDeleteTags = "DeleteTags"
 
 // DeleteTagsRequest is a API request type for the DeleteTags API operation.
@@ -134,7 +351,7 @@ func (r DeleteTagsRequest) Send() (*DeleteTagsOutput, error) {
 // DeleteTagsRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Deletes the specified tags from a WorkSpace.
+// Deletes the specified tags from the specified WorkSpace.
 //
 //    // Example sending a request using the DeleteTagsRequest method.
 //    req := client.DeleteTagsRequest(params)
@@ -162,6 +379,56 @@ func (c *WorkSpaces) DeleteTagsRequest(input *DeleteTagsInput) DeleteTagsRequest
 	return DeleteTagsRequest{Request: req, Input: input, Copy: c.DeleteTagsRequest}
 }
 
+const opDescribeIpGroups = "DescribeIpGroups"
+
+// DescribeIpGroupsRequest is a API request type for the DescribeIpGroups API operation.
+type DescribeIpGroupsRequest struct {
+	*aws.Request
+	Input *DescribeIpGroupsInput
+	Copy  func(*DescribeIpGroupsInput) DescribeIpGroupsRequest
+}
+
+// Send marshals and sends the DescribeIpGroups API request.
+func (r DescribeIpGroupsRequest) Send() (*DescribeIpGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeIpGroupsOutput), nil
+}
+
+// DescribeIpGroupsRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
+//
+// Describes one or more of your IP access control groups.
+//
+//    // Example sending a request using the DescribeIpGroupsRequest method.
+//    req := client.DescribeIpGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroups
+func (c *WorkSpaces) DescribeIpGroupsRequest(input *DescribeIpGroupsInput) DescribeIpGroupsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeIpGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeIpGroupsInput{}
+	}
+
+	output := &DescribeIpGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeIpGroupsRequest{Request: req, Input: input, Copy: c.DescribeIpGroupsRequest}
+}
+
 const opDescribeTags = "DescribeTags"
 
 // DescribeTagsRequest is a API request type for the DescribeTags API operation.
@@ -184,7 +451,7 @@ func (r DescribeTagsRequest) Send() (*DescribeTagsOutput, error) {
 // DescribeTagsRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Describes the tags for the specified WorkSpace.
+// Describes the specified tags for the specified WorkSpace.
 //
 //    // Example sending a request using the DescribeTagsRequest method.
 //    req := client.DescribeTagsRequest(params)
@@ -574,6 +841,56 @@ func (c *WorkSpaces) DescribeWorkspacesConnectionStatusRequest(input *DescribeWo
 	return DescribeWorkspacesConnectionStatusRequest{Request: req, Input: input, Copy: c.DescribeWorkspacesConnectionStatusRequest}
 }
 
+const opDisassociateIpGroups = "DisassociateIpGroups"
+
+// DisassociateIpGroupsRequest is a API request type for the DisassociateIpGroups API operation.
+type DisassociateIpGroupsRequest struct {
+	*aws.Request
+	Input *DisassociateIpGroupsInput
+	Copy  func(*DisassociateIpGroupsInput) DisassociateIpGroupsRequest
+}
+
+// Send marshals and sends the DisassociateIpGroups API request.
+func (r DisassociateIpGroupsRequest) Send() (*DisassociateIpGroupsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DisassociateIpGroupsOutput), nil
+}
+
+// DisassociateIpGroupsRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
+//
+// Disassociates the specified IP access control group from the specified directory.
+//
+//    // Example sending a request using the DisassociateIpGroupsRequest method.
+//    req := client.DisassociateIpGroupsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateIpGroups
+func (c *WorkSpaces) DisassociateIpGroupsRequest(input *DisassociateIpGroupsInput) DisassociateIpGroupsRequest {
+	op := &aws.Operation{
+		Name:       opDisassociateIpGroups,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DisassociateIpGroupsInput{}
+	}
+
+	output := &DisassociateIpGroupsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DisassociateIpGroupsRequest{Request: req, Input: input, Copy: c.DisassociateIpGroupsRequest}
+}
+
 const opModifyWorkspaceProperties = "ModifyWorkspaceProperties"
 
 // ModifyWorkspacePropertiesRequest is a API request type for the ModifyWorkspaceProperties API operation.
@@ -624,6 +941,61 @@ func (c *WorkSpaces) ModifyWorkspacePropertiesRequest(input *ModifyWorkspaceProp
 	return ModifyWorkspacePropertiesRequest{Request: req, Input: input, Copy: c.ModifyWorkspacePropertiesRequest}
 }
 
+const opModifyWorkspaceState = "ModifyWorkspaceState"
+
+// ModifyWorkspaceStateRequest is a API request type for the ModifyWorkspaceState API operation.
+type ModifyWorkspaceStateRequest struct {
+	*aws.Request
+	Input *ModifyWorkspaceStateInput
+	Copy  func(*ModifyWorkspaceStateInput) ModifyWorkspaceStateRequest
+}
+
+// Send marshals and sends the ModifyWorkspaceState API request.
+func (r ModifyWorkspaceStateRequest) Send() (*ModifyWorkspaceStateOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*ModifyWorkspaceStateOutput), nil
+}
+
+// ModifyWorkspaceStateRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
+//
+// Sets the state of the specified WorkSpace.
+//
+// To maintain a WorkSpace without being interrupted, set the WorkSpace state
+// to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests
+// to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is
+// not stopped. Users can log into a WorkSpace in the ADMIN_MAINTENANCE state.
+//
+//    // Example sending a request using the ModifyWorkspaceStateRequest method.
+//    req := client.ModifyWorkspaceStateRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceState
+func (c *WorkSpaces) ModifyWorkspaceStateRequest(input *ModifyWorkspaceStateInput) ModifyWorkspaceStateRequest {
+	op := &aws.Operation{
+		Name:       opModifyWorkspaceState,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &ModifyWorkspaceStateInput{}
+	}
+
+	output := &ModifyWorkspaceStateOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return ModifyWorkspaceStateRequest{Request: req, Input: input, Copy: c.ModifyWorkspaceStateRequest}
+}
+
 const opRebootWorkspaces = "RebootWorkspaces"
 
 // RebootWorkspacesRequest is a API request type for the RebootWorkspaces API operation.
@@ -648,8 +1020,7 @@ func (r RebootWorkspacesRequest) Send() (*RebootWorkspacesOutput, error) {
 //
 // Reboots the specified WorkSpaces.
 //
-// You cannot reboot a WorkSpace unless its state is AVAILABLE, IMPAIRED, or
-// INOPERABLE.
+// You cannot reboot a WorkSpace unless its state is AVAILABLE or UNHEALTHY.
 //
 // This operation is asynchronous and returns before the WorkSpaces have rebooted.
 //
@@ -701,9 +1072,9 @@ func (r RebuildWorkspacesRequest) Send() (*RebuildWorkspacesOutput, error) {
 // RebuildWorkspacesRequest returns a request value for making API operation for
 // Amazon WorkSpaces.
 //
-// Rebuilds the specified WorkSpaces.
+// Rebuilds the specified WorkSpace.
 //
-// You cannot rebuild a WorkSpace unless its state is AVAILABLE or ERROR.
+// You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, or UNHEALTHY.
 //
 // Rebuilding a WorkSpace is a potentially destructive action that can result
 // in the loss of data. For more information, see Rebuild a WorkSpace (http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html).
@@ -735,6 +1106,56 @@ func (c *WorkSpaces) RebuildWorkspacesRequest(input *RebuildWorkspacesInput) Reb
 	output.responseMetadata = aws.Response{Request: req}
 
 	return RebuildWorkspacesRequest{Request: req, Input: input, Copy: c.RebuildWorkspacesRequest}
+}
+
+const opRevokeIpRules = "RevokeIpRules"
+
+// RevokeIpRulesRequest is a API request type for the RevokeIpRules API operation.
+type RevokeIpRulesRequest struct {
+	*aws.Request
+	Input *RevokeIpRulesInput
+	Copy  func(*RevokeIpRulesInput) RevokeIpRulesRequest
+}
+
+// Send marshals and sends the RevokeIpRules API request.
+func (r RevokeIpRulesRequest) Send() (*RevokeIpRulesOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*RevokeIpRulesOutput), nil
+}
+
+// RevokeIpRulesRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
+//
+// Removes one or more rules from the specified IP access control group.
+//
+//    // Example sending a request using the RevokeIpRulesRequest method.
+//    req := client.RevokeIpRulesRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RevokeIpRules
+func (c *WorkSpaces) RevokeIpRulesRequest(input *RevokeIpRulesInput) RevokeIpRulesRequest {
+	op := &aws.Operation{
+		Name:       opRevokeIpRules,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &RevokeIpRulesInput{}
+	}
+
+	output := &RevokeIpRulesOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return RevokeIpRulesRequest{Request: req, Input: input, Copy: c.RevokeIpRulesRequest}
 }
 
 const opStartWorkspaces = "StartWorkspaces"
@@ -902,6 +1323,187 @@ func (c *WorkSpaces) TerminateWorkspacesRequest(input *TerminateWorkspacesInput)
 	return TerminateWorkspacesRequest{Request: req, Input: input, Copy: c.TerminateWorkspacesRequest}
 }
 
+const opUpdateRulesOfIpGroup = "UpdateRulesOfIpGroup"
+
+// UpdateRulesOfIpGroupRequest is a API request type for the UpdateRulesOfIpGroup API operation.
+type UpdateRulesOfIpGroupRequest struct {
+	*aws.Request
+	Input *UpdateRulesOfIpGroupInput
+	Copy  func(*UpdateRulesOfIpGroupInput) UpdateRulesOfIpGroupRequest
+}
+
+// Send marshals and sends the UpdateRulesOfIpGroup API request.
+func (r UpdateRulesOfIpGroupRequest) Send() (*UpdateRulesOfIpGroupOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*UpdateRulesOfIpGroupOutput), nil
+}
+
+// UpdateRulesOfIpGroupRequest returns a request value for making API operation for
+// Amazon WorkSpaces.
+//
+// Replaces the current rules of the specified IP access control group with
+// the specified rules.
+//
+//    // Example sending a request using the UpdateRulesOfIpGroupRequest method.
+//    req := client.UpdateRulesOfIpGroupRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateRulesOfIpGroup
+func (c *WorkSpaces) UpdateRulesOfIpGroupRequest(input *UpdateRulesOfIpGroupInput) UpdateRulesOfIpGroupRequest {
+	op := &aws.Operation{
+		Name:       opUpdateRulesOfIpGroup,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &UpdateRulesOfIpGroupInput{}
+	}
+
+	output := &UpdateRulesOfIpGroupOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return UpdateRulesOfIpGroupRequest{Request: req, Input: input, Copy: c.UpdateRulesOfIpGroupRequest}
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateIpGroupsRequest
+type AssociateIpGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The IDs of one or more IP access control groups.
+	//
+	// GroupIds is a required field
+	GroupIds []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s AssociateIpGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateIpGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AssociateIpGroupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AssociateIpGroupsInput"}
+
+	if s.DirectoryId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
+	}
+
+	if s.GroupIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GroupIds"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AssociateIpGroupsResult
+type AssociateIpGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s AssociateIpGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AssociateIpGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AssociateIpGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AuthorizeIpRulesRequest
+type AuthorizeIpRulesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the group.
+	//
+	// GroupId is a required field
+	GroupId *string `type:"string" required:"true"`
+
+	// The rules to add to the group.
+	//
+	// UserRules is a required field
+	UserRules []IpRuleItem `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s AuthorizeIpRulesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AuthorizeIpRulesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AuthorizeIpRulesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AuthorizeIpRulesInput"}
+
+	if s.GroupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
+	}
+
+	if s.UserRules == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserRules"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/AuthorizeIpRulesResult
+type AuthorizeIpRulesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s AuthorizeIpRulesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AuthorizeIpRulesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s AuthorizeIpRulesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Information about the compute type.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ComputeType
 type ComputeType struct {
@@ -921,16 +1523,81 @@ func (s ComputeType) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroupRequest
+type CreateIpGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the group.
+	GroupDesc *string `type:"string"`
+
+	// The name of the group.
+	//
+	// GroupName is a required field
+	GroupName *string `type:"string" required:"true"`
+
+	// The rules to add to the group.
+	UserRules []IpRuleItem `type:"list"`
+}
+
+// String returns the string representation
+func (s CreateIpGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateIpGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CreateIpGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CreateIpGroupInput"}
+
+	if s.GroupName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GroupName"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateIpGroupResult
+type CreateIpGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The ID of the group.
+	GroupId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CreateIpGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CreateIpGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CreateIpGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateTagsRequest
 type CreateTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the resource.
+	// The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
 
-	// The tags. Each resource can have a maximum of 50 tags.
+	// The tags. Each WorkSpace can have a maximum of 50 tags.
 	//
 	// Tags is a required field
 	Tags []Tag `type:"list" required:"true"`
@@ -1000,7 +1667,7 @@ func (s CreateTagsOutput) SDKResponseMetadata() aws.Response {
 type CreateWorkspacesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Information about the WorkSpaces to create.
+	// The WorkSpaces to create. You can specify up to 25 WorkSpaces.
 	//
 	// Workspaces is a required field
 	Workspaces []WorkspaceRequest `min:"1" type:"list" required:"true"`
@@ -1104,11 +1771,67 @@ func (s DefaultWorkspaceCreationProperties) GoString() string {
 	return s.String()
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteIpGroupRequest
+type DeleteIpGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the IP access control group.
+	//
+	// GroupId is a required field
+	GroupId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteIpGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteIpGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteIpGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteIpGroupInput"}
+
+	if s.GroupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteIpGroupResult
+type DeleteIpGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteIpGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteIpGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteIpGroupOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteTagsRequest
 type DeleteTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the resource.
+	// The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
@@ -1172,11 +1895,82 @@ func (s DeleteTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroupsRequest
+type DescribeIpGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The IDs of one or more IP access control groups.
+	GroupIds []string `type:"list"`
+
+	// The maximum number of items to return.
+	MaxResults *int64 `min:"1" type:"integer"`
+
+	// The token for the next set of results. (You received this token from a previous
+	// call.)
+	NextToken *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DescribeIpGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeIpGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DescribeIpGroupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DescribeIpGroupsInput"}
+	if s.MaxResults != nil && *s.MaxResults < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MaxResults", 1))
+	}
+	if s.NextToken != nil && len(*s.NextToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeIpGroupsResult
+type DescribeIpGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The token to use to retrieve the next set of results, or null if there are
+	// no more results available. This token is valid for one day and must be used
+	// within that time frame.
+	NextToken *string `min:"1" type:"string"`
+
+	// Information about the IP access control groups.
+	Result []IpGroup `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeIpGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeIpGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeIpGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeTagsRequest
 type DescribeTagsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the resource.
+	// The ID of the WorkSpace. To find this ID, use DescribeWorkspaces.
 	//
 	// ResourceId is a required field
 	ResourceId *string `min:"1" type:"string" required:"true"`
@@ -1387,7 +2181,7 @@ type DescribeWorkspacesConnectionStatusInput struct {
 	// call.)
 	NextToken *string `min:"1" type:"string"`
 
-	// The identifiers of the WorkSpaces.
+	// The identifiers of the WorkSpaces. You can specify up to 25 WorkSpaces.
 	WorkspaceIds []string `min:"1" type:"list"`
 }
 
@@ -1543,6 +2337,71 @@ func (s DescribeWorkspacesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateIpGroupsRequest
+type DisassociateIpGroupsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the directory.
+	//
+	// DirectoryId is a required field
+	DirectoryId *string `type:"string" required:"true"`
+
+	// The IDs of one or more IP access control groups.
+	//
+	// GroupIds is a required field
+	GroupIds []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s DisassociateIpGroupsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociateIpGroupsInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DisassociateIpGroupsInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DisassociateIpGroupsInput"}
+
+	if s.DirectoryId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DirectoryId"))
+	}
+
+	if s.GroupIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GroupIds"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DisassociateIpGroupsResult
+type DisassociateIpGroupsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DisassociateIpGroupsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DisassociateIpGroupsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DisassociateIpGroupsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Information about a WorkSpace that could not be created.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/FailedCreateWorkspaceRequest
 type FailedCreateWorkspaceRequest struct {
@@ -1592,6 +2451,56 @@ func (s FailedWorkspaceChangeRequest) String() string {
 
 // GoString returns the string representation
 func (s FailedWorkspaceChangeRequest) GoString() string {
+	return s.String()
+}
+
+// Information about an IP access control group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspacesIpGroup
+type IpGroup struct {
+	_ struct{} `type:"structure"`
+
+	// The description of the group.
+	GroupDesc *string `locationName:"groupDesc" type:"string"`
+
+	// The ID of the group.
+	GroupId *string `locationName:"groupId" type:"string"`
+
+	// The name of the group.
+	GroupName *string `locationName:"groupName" type:"string"`
+
+	// The rules.
+	UserRules []IpRuleItem `locationName:"userRules" type:"list"`
+}
+
+// String returns the string representation
+func (s IpGroup) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IpGroup) GoString() string {
+	return s.String()
+}
+
+// Information about a rule for an IP access control group.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/IpRuleItem
+type IpRuleItem struct {
+	_ struct{} `type:"structure"`
+
+	// The IP address range, in CIDR notation.
+	IpRule *string `locationName:"ipRule" type:"string"`
+
+	// The description.
+	RuleDesc *string `locationName:"ruleDesc" type:"string"`
+}
+
+// String returns the string representation
+func (s IpRuleItem) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IpRuleItem) GoString() string {
 	return s.String()
 }
 
@@ -1682,12 +2591,76 @@ func (s ModifyWorkspacePropertiesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceStateRequest
+type ModifyWorkspaceStateInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the WorkSpace.
+	//
+	// WorkspaceId is a required field
+	WorkspaceId *string `type:"string" required:"true"`
+
+	// The WorkSpace state.
+	//
+	// WorkspaceState is a required field
+	WorkspaceState TargetWorkspaceState `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ModifyWorkspaceStateInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyWorkspaceStateInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModifyWorkspaceStateInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModifyWorkspaceStateInput"}
+
+	if s.WorkspaceId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("WorkspaceId"))
+	}
+	if len(s.WorkspaceState) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("WorkspaceState"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ModifyWorkspaceStateResult
+type ModifyWorkspaceStateOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s ModifyWorkspaceStateOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s ModifyWorkspaceStateOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s ModifyWorkspaceStateOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Information used to reboot a WorkSpace.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RebootRequest
 type RebootRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the WorkSpace.
+	// The ID of the WorkSpace.
 	//
 	// WorkspaceId is a required field
 	WorkspaceId *string `type:"string" required:"true"`
@@ -1721,7 +2694,7 @@ func (s *RebootRequest) Validate() error {
 type RebootWorkspacesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The WorkSpaces to reboot.
+	// The WorkSpaces to reboot. You can specify up to 25 WorkSpaces.
 	//
 	// RebootWorkspaceRequests is a required field
 	RebootWorkspaceRequests []RebootRequest `min:"1" type:"list" required:"true"`
@@ -1791,7 +2764,7 @@ func (s RebootWorkspacesOutput) SDKResponseMetadata() aws.Response {
 type RebuildRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the WorkSpace.
+	// The ID of the WorkSpace.
 	//
 	// WorkspaceId is a required field
 	WorkspaceId *string `type:"string" required:"true"`
@@ -1825,7 +2798,7 @@ func (s *RebuildRequest) Validate() error {
 type RebuildWorkspacesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The WorkSpaces to rebuild.
+	// The WorkSpace to rebuild. You can specify a single WorkSpace.
 	//
 	// RebuildWorkspaceRequests is a required field
 	RebuildWorkspaceRequests []RebuildRequest `min:"1" type:"list" required:"true"`
@@ -1871,7 +2844,7 @@ type RebuildWorkspacesOutput struct {
 
 	responseMetadata aws.Response
 
-	// Information about the WorkSpaces that could not be rebuilt.
+	// Information about the WorkSpace if it could not be rebuilt.
 	FailedRequests []FailedWorkspaceChangeRequest `type:"list"`
 }
 
@@ -1887,6 +2860,71 @@ func (s RebuildWorkspacesOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s RebuildWorkspacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RevokeIpRulesRequest
+type RevokeIpRulesInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the group.
+	//
+	// GroupId is a required field
+	GroupId *string `type:"string" required:"true"`
+
+	// The rules to remove from the group.
+	//
+	// UserRules is a required field
+	UserRules []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s RevokeIpRulesInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RevokeIpRulesInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *RevokeIpRulesInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "RevokeIpRulesInput"}
+
+	if s.GroupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
+	}
+
+	if s.UserRules == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserRules"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/RevokeIpRulesResult
+type RevokeIpRulesOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s RevokeIpRulesOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RevokeIpRulesOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s RevokeIpRulesOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -1932,7 +2970,7 @@ func (s StartRequest) GoString() string {
 type StartWorkspacesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The WorkSpaces to start.
+	// The WorkSpaces to start. You can specify up to 25 WorkSpaces.
 	//
 	// StartWorkspaceRequests is a required field
 	StartWorkspaceRequests []StartRequest `min:"1" type:"list" required:"true"`
@@ -2013,7 +3051,7 @@ func (s StopRequest) GoString() string {
 type StopWorkspacesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The WorkSpaces to stop.
+	// The WorkSpaces to stop. You can specify up to 25 WorkSpaces.
 	//
 	// StopWorkspaceRequests is a required field
 	StopWorkspaceRequests []StopRequest `min:"1" type:"list" required:"true"`
@@ -2117,7 +3155,7 @@ func (s *Tag) Validate() error {
 type TerminateRequest struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the WorkSpace.
+	// The ID of the WorkSpace.
 	//
 	// WorkspaceId is a required field
 	WorkspaceId *string `type:"string" required:"true"`
@@ -2151,7 +3189,7 @@ func (s *TerminateRequest) Validate() error {
 type TerminateWorkspacesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The WorkSpaces to terminate.
+	// The WorkSpaces to terminate. You can specify up to 25 WorkSpaces.
 	//
 	// TerminateWorkspaceRequests is a required field
 	TerminateWorkspaceRequests []TerminateRequest `min:"1" type:"list" required:"true"`
@@ -2213,6 +3251,71 @@ func (s TerminateWorkspacesOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s TerminateWorkspacesOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateRulesOfIpGroupRequest
+type UpdateRulesOfIpGroupInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the group.
+	//
+	// GroupId is a required field
+	GroupId *string `type:"string" required:"true"`
+
+	// One or more rules.
+	//
+	// UserRules is a required field
+	UserRules []IpRuleItem `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s UpdateRulesOfIpGroupInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRulesOfIpGroupInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *UpdateRulesOfIpGroupInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "UpdateRulesOfIpGroupInput"}
+
+	if s.GroupId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("GroupId"))
+	}
+
+	if s.UserRules == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserRules"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateRulesOfIpGroupResult
+type UpdateRulesOfIpGroupOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s UpdateRulesOfIpGroupOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s UpdateRulesOfIpGroupOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s UpdateRulesOfIpGroupOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -2364,8 +3467,8 @@ func (s WorkspaceConnectionStatus) GoString() string {
 	return s.String()
 }
 
-// Contains information about an AWS Directory Service directory for use with
-// Amazon WorkSpaces.
+// Information about an AWS Directory Service directory for use with Amazon
+// WorkSpaces.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/WorkspaceDirectory
 type WorkspaceDirectory struct {
 	_ struct{} `type:"structure"`
@@ -2391,6 +3494,9 @@ type WorkspaceDirectory struct {
 	// The identifier of the IAM role. This is the role that allows Amazon WorkSpaces
 	// to make calls to other services, such as Amazon EC2, on your behalf.
 	IamRoleId *string `type:"string"`
+
+	// The identifiers of the IP access control groups associated with the directory.
+	IpGroupIds []string `locationName:"ipGroupIds" type:"list"`
 
 	// The registration code for the directory. This is the code that users enter
 	// in their Amazon WorkSpaces client application to connect to the directory.
@@ -2623,6 +3729,23 @@ func (enum RunningMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type TargetWorkspaceState string
+
+// Enum values for TargetWorkspaceState
+const (
+	TargetWorkspaceStateAvailable        TargetWorkspaceState = "AVAILABLE"
+	TargetWorkspaceStateAdminMaintenance TargetWorkspaceState = "ADMIN_MAINTENANCE"
+)
+
+func (enum TargetWorkspaceState) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TargetWorkspaceState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type WorkspaceDirectoryState string
 
 // Enum values for WorkspaceDirectoryState
@@ -2664,21 +3787,22 @@ type WorkspaceState string
 
 // Enum values for WorkspaceState
 const (
-	WorkspaceStatePending     WorkspaceState = "PENDING"
-	WorkspaceStateAvailable   WorkspaceState = "AVAILABLE"
-	WorkspaceStateImpaired    WorkspaceState = "IMPAIRED"
-	WorkspaceStateUnhealthy   WorkspaceState = "UNHEALTHY"
-	WorkspaceStateRebooting   WorkspaceState = "REBOOTING"
-	WorkspaceStateStarting    WorkspaceState = "STARTING"
-	WorkspaceStateRebuilding  WorkspaceState = "REBUILDING"
-	WorkspaceStateMaintenance WorkspaceState = "MAINTENANCE"
-	WorkspaceStateTerminating WorkspaceState = "TERMINATING"
-	WorkspaceStateTerminated  WorkspaceState = "TERMINATED"
-	WorkspaceStateSuspended   WorkspaceState = "SUSPENDED"
-	WorkspaceStateUpdating    WorkspaceState = "UPDATING"
-	WorkspaceStateStopping    WorkspaceState = "STOPPING"
-	WorkspaceStateStopped     WorkspaceState = "STOPPED"
-	WorkspaceStateError       WorkspaceState = "ERROR"
+	WorkspaceStatePending          WorkspaceState = "PENDING"
+	WorkspaceStateAvailable        WorkspaceState = "AVAILABLE"
+	WorkspaceStateImpaired         WorkspaceState = "IMPAIRED"
+	WorkspaceStateUnhealthy        WorkspaceState = "UNHEALTHY"
+	WorkspaceStateRebooting        WorkspaceState = "REBOOTING"
+	WorkspaceStateStarting         WorkspaceState = "STARTING"
+	WorkspaceStateRebuilding       WorkspaceState = "REBUILDING"
+	WorkspaceStateMaintenance      WorkspaceState = "MAINTENANCE"
+	WorkspaceStateAdminMaintenance WorkspaceState = "ADMIN_MAINTENANCE"
+	WorkspaceStateTerminating      WorkspaceState = "TERMINATING"
+	WorkspaceStateTerminated       WorkspaceState = "TERMINATED"
+	WorkspaceStateSuspended        WorkspaceState = "SUSPENDED"
+	WorkspaceStateUpdating         WorkspaceState = "UPDATING"
+	WorkspaceStateStopping         WorkspaceState = "STOPPING"
+	WorkspaceStateStopped          WorkspaceState = "STOPPED"
+	WorkspaceStateError            WorkspaceState = "ERROR"
 )
 
 func (enum WorkspaceState) MarshalValue() (string, error) {

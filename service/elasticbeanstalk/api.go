@@ -2502,6 +2502,9 @@ func (s AbortEnvironmentUpdateOutput) SDKResponseMetadata() aws.Response {
 type ApplicationDescription struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the application.
+	ApplicationArn *string `type:"string"`
+
 	// The name of the application.
 	ApplicationName *string `min:"1" type:"string"`
 
@@ -2615,6 +2618,9 @@ type ApplicationVersionDescription struct {
 
 	// The name of the application to which the application version belongs.
 	ApplicationName *string `min:"1" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the application version.
+	ApplicationVersionArn *string `type:"string"`
 
 	// Reference to the artifact from the AWS CodeBuild build.
 	BuildArn *string `type:"string"`
@@ -7416,7 +7422,7 @@ type UpdateEnvironmentOutput struct {
 	EndpointURL *string `type:"string"`
 
 	// The environment's Amazon Resource Name (ARN), which can be used in other
-	// API reuqests that require an ARN.
+	// API requests that require an ARN.
 	EnvironmentArn *string `type:"string"`
 
 	// The ID of this environment.

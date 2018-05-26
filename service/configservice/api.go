@@ -456,6 +456,58 @@ func (c *ConfigService) DeletePendingAggregationRequestRequest(input *DeletePend
 	return DeletePendingAggregationRequestRequest{Request: req, Input: input, Copy: c.DeletePendingAggregationRequestRequest}
 }
 
+const opDeleteRetentionConfiguration = "DeleteRetentionConfiguration"
+
+// DeleteRetentionConfigurationRequest is a API request type for the DeleteRetentionConfiguration API operation.
+type DeleteRetentionConfigurationRequest struct {
+	*aws.Request
+	Input *DeleteRetentionConfigurationInput
+	Copy  func(*DeleteRetentionConfigurationInput) DeleteRetentionConfigurationRequest
+}
+
+// Send marshals and sends the DeleteRetentionConfiguration API request.
+func (r DeleteRetentionConfigurationRequest) Send() (*DeleteRetentionConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteRetentionConfigurationOutput), nil
+}
+
+// DeleteRetentionConfigurationRequest returns a request value for making API operation for
+// AWS Config.
+//
+// Deletes the retention configuration.
+//
+//    // Example sending a request using the DeleteRetentionConfigurationRequest method.
+//    req := client.DeleteRetentionConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRetentionConfiguration
+func (c *ConfigService) DeleteRetentionConfigurationRequest(input *DeleteRetentionConfigurationInput) DeleteRetentionConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opDeleteRetentionConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DeleteRetentionConfigurationInput{}
+	}
+
+	output := &DeleteRetentionConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(jsonrpc.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteRetentionConfigurationRequest{Request: req, Input: input, Copy: c.DeleteRetentionConfigurationRequest}
+}
+
 const opDeliverConfigSnapshot = "DeliverConfigSnapshot"
 
 // DeliverConfigSnapshotRequest is a API request type for the DeliverConfigSnapshot API operation.
@@ -1243,6 +1295,61 @@ func (c *ConfigService) DescribePendingAggregationRequestsRequest(input *Describ
 	return DescribePendingAggregationRequestsRequest{Request: req, Input: input, Copy: c.DescribePendingAggregationRequestsRequest}
 }
 
+const opDescribeRetentionConfigurations = "DescribeRetentionConfigurations"
+
+// DescribeRetentionConfigurationsRequest is a API request type for the DescribeRetentionConfigurations API operation.
+type DescribeRetentionConfigurationsRequest struct {
+	*aws.Request
+	Input *DescribeRetentionConfigurationsInput
+	Copy  func(*DescribeRetentionConfigurationsInput) DescribeRetentionConfigurationsRequest
+}
+
+// Send marshals and sends the DescribeRetentionConfigurations API request.
+func (r DescribeRetentionConfigurationsRequest) Send() (*DescribeRetentionConfigurationsOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DescribeRetentionConfigurationsOutput), nil
+}
+
+// DescribeRetentionConfigurationsRequest returns a request value for making API operation for
+// AWS Config.
+//
+// Returns the details of one or more retention configurations. If the retention
+// configuration name is not specified, this action returns the details for
+// all the retention configurations for that account.
+//
+// Currently, AWS Config supports only one retention configuration per region
+// in your account.
+//
+//    // Example sending a request using the DescribeRetentionConfigurationsRequest method.
+//    req := client.DescribeRetentionConfigurationsRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRetentionConfigurations
+func (c *ConfigService) DescribeRetentionConfigurationsRequest(input *DescribeRetentionConfigurationsInput) DescribeRetentionConfigurationsRequest {
+	op := &aws.Operation{
+		Name:       opDescribeRetentionConfigurations,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &DescribeRetentionConfigurationsInput{}
+	}
+
+	output := &DescribeRetentionConfigurationsOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DescribeRetentionConfigurationsRequest{Request: req, Input: input, Copy: c.DescribeRetentionConfigurationsRequest}
+}
+
 const opGetAggregateComplianceDetailsByConfigRule = "GetAggregateComplianceDetailsByConfigRule"
 
 // GetAggregateComplianceDetailsByConfigRuleRequest is a API request type for the GetAggregateComplianceDetailsByConfigRule API operation.
@@ -1667,7 +1774,9 @@ func (r GetResourceConfigHistoryRequest) Send() (*GetResourceConfigHistoryOutput
 //
 // Returns a list of configuration items for the specified resource. The list
 // contains details about each state of the resource during the specified time
-// interval.
+// interval. If you specified a retention period to retain your ConfigurationItems
+// between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config
+// returns the ConfigurationItems for the specified retention period.
 //
 // The response is paginated. By default, AWS Config returns a limit of 10 configuration
 // items per page. You can customize this number with the limit parameter. The
@@ -1980,9 +2089,15 @@ func (r PutConfigurationAggregatorRequest) Send() (*PutConfigurationAggregatorOu
 // AWS Config.
 //
 // Creates and updates the configuration aggregator with the selected source
-// accounts and regions.
+// accounts and regions. The source account can be individual account(s) or
+// an organization.
 //
-// AWS Config should be enabled in accounts and regions you want to aggreagate.
+// AWS Config should be enabled in source accounts and regions you want to aggregate.
+//
+// If your source type is an organization, you must be signed in to the master
+// account and all features must be enabled in your organization. AWS Config
+// calls EnableAwsServiceAccess API to enable integration between AWS Config
+// and AWS Organizations.
 //
 //    // Example sending a request using the PutConfigurationAggregatorRequest method.
 //    req := client.PutConfigurationAggregatorRequest(params)
@@ -2189,6 +2304,63 @@ func (c *ConfigService) PutEvaluationsRequest(input *PutEvaluationsInput) PutEva
 	return PutEvaluationsRequest{Request: req, Input: input, Copy: c.PutEvaluationsRequest}
 }
 
+const opPutRetentionConfiguration = "PutRetentionConfiguration"
+
+// PutRetentionConfigurationRequest is a API request type for the PutRetentionConfiguration API operation.
+type PutRetentionConfigurationRequest struct {
+	*aws.Request
+	Input *PutRetentionConfigurationInput
+	Copy  func(*PutRetentionConfigurationInput) PutRetentionConfigurationRequest
+}
+
+// Send marshals and sends the PutRetentionConfiguration API request.
+func (r PutRetentionConfigurationRequest) Send() (*PutRetentionConfigurationOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*PutRetentionConfigurationOutput), nil
+}
+
+// PutRetentionConfigurationRequest returns a request value for making API operation for
+// AWS Config.
+//
+// Creates and updates the retention configuration with details about retention
+// period (number of days) that AWS Config stores your historical information.
+// The API creates the RetentionConfiguration object and names the object as
+// default. When you have a RetentionConfiguration object named default, calling
+// the API modifies the default object.
+//
+// Currently, AWS Config supports only one retention configuration per region
+// in your account.
+//
+//    // Example sending a request using the PutRetentionConfigurationRequest method.
+//    req := client.PutRetentionConfigurationRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+//
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRetentionConfiguration
+func (c *ConfigService) PutRetentionConfigurationRequest(input *PutRetentionConfigurationInput) PutRetentionConfigurationRequest {
+	op := &aws.Operation{
+		Name:       opPutRetentionConfiguration,
+		HTTPMethod: "POST",
+		HTTPPath:   "/",
+	}
+
+	if input == nil {
+		input = &PutRetentionConfigurationInput{}
+	}
+
+	output := &PutRetentionConfigurationOutput{}
+	req := c.newRequest(op, input, output)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return PutRetentionConfigurationRequest{Request: req, Input: input, Copy: c.PutRetentionConfigurationRequest}
+}
+
 const opStartConfigRulesEvaluation = "StartConfigRulesEvaluation"
 
 // StartConfigRulesEvaluationRequest is a API request type for the StartConfigRulesEvaluation API operation.
@@ -2387,7 +2559,7 @@ type AccountAggregationSource struct {
 	// AccountIds is a required field
 	AccountIds []string `min:"1" type:"list" required:"true"`
 
-	// If true, aggreagate existing AWS Config regions and future regions.
+	// If true, aggregate existing AWS Config regions and future regions.
 	AllAwsRegions *bool `type:"boolean"`
 
 	// The source regions being aggregated.
@@ -3934,6 +4106,65 @@ func (s DeletePendingAggregationRequestOutput) SDKResponseMetadata() aws.Respons
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRetentionConfigurationRequest
+type DeleteRetentionConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the retention configuration to delete.
+	//
+	// RetentionConfigurationName is a required field
+	RetentionConfigurationName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteRetentionConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRetentionConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteRetentionConfigurationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteRetentionConfigurationInput"}
+
+	if s.RetentionConfigurationName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RetentionConfigurationName"))
+	}
+	if s.RetentionConfigurationName != nil && len(*s.RetentionConfigurationName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RetentionConfigurationName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeleteRetentionConfigurationOutput
+type DeleteRetentionConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteRetentionConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteRetentionConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteRetentionConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // The input for the DeliverConfigSnapshot action.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DeliverConfigSnapshotRequest
 type DeliverConfigSnapshotInput struct {
@@ -4547,7 +4778,7 @@ type DescribeConfigurationAggregatorSourcesStatusOutput struct {
 
 	responseMetadata aws.Response
 
-	// Retuns an AggregatedSourceStatus object.
+	// Returns an AggregatedSourceStatus object.
 	AggregatedSourceStatusList []AggregatedSourceStatus `type:"list"`
 
 	// The nextToken string returned on a previous page that you use to get the
@@ -4856,6 +5087,62 @@ func (s DescribePendingAggregationRequestsOutput) GoString() string {
 
 // SDKResponseMetdata return sthe response metadata for the API.
 func (s DescribePendingAggregationRequestsOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRetentionConfigurationsRequest
+type DescribeRetentionConfigurationsInput struct {
+	_ struct{} `type:"structure"`
+
+	// The nextToken string returned on a previous page that you use to get the
+	// next page of results in a paginated response.
+	NextToken *string `type:"string"`
+
+	// A list of names of retention configurations for which you want details. If
+	// you do not specify a name, AWS Config returns details for all the retention
+	// configurations for that account.
+	//
+	// Currently, AWS Config supports only one retention configuration per region
+	// in your account.
+	RetentionConfigurationNames []string `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeRetentionConfigurationsInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeRetentionConfigurationsInput) GoString() string {
+	return s.String()
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/DescribeRetentionConfigurationsResponse
+type DescribeRetentionConfigurationsOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// The nextToken string returned on a previous page that you use to get the
+	// next page of results in a paginated response.
+	NextToken *string `type:"string"`
+
+	// Returns a retention configuration object.
+	RetentionConfigurations []RetentionConfiguration `type:"list"`
+}
+
+// String returns the string representation
+func (s DescribeRetentionConfigurationsOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DescribeRetentionConfigurationsOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DescribeRetentionConfigurationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
@@ -5773,7 +6060,7 @@ func (s ListDiscoveredResourcesOutput) SDKResponseMetadata() aws.Response {
 type OrganizationAggregationSource struct {
 	_ struct{} `type:"structure"`
 
-	// If true, aggreagate existing AWS Config regions and future regions.
+	// If true, aggregate existing AWS Config regions and future regions.
 	AllAwsRegions *bool `type:"boolean"`
 
 	// The source regions being aggregated.
@@ -6255,6 +6542,70 @@ func (s PutEvaluationsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRetentionConfigurationRequest
+type PutRetentionConfigurationInput struct {
+	_ struct{} `type:"structure"`
+
+	// Number of days AWS Config stores your historical information.
+	//
+	// Currently, only applicable to the configuration item history.
+	//
+	// RetentionPeriodInDays is a required field
+	RetentionPeriodInDays *int64 `min:"30" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s PutRetentionConfigurationInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutRetentionConfigurationInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *PutRetentionConfigurationInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "PutRetentionConfigurationInput"}
+
+	if s.RetentionPeriodInDays == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RetentionPeriodInDays"))
+	}
+	if s.RetentionPeriodInDays != nil && *s.RetentionPeriodInDays < 30 {
+		invalidParams.Add(aws.NewErrParamMinValue("RetentionPeriodInDays", 30))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/PutRetentionConfigurationResponse
+type PutRetentionConfigurationOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+
+	// Returns a retention configuration object.
+	RetentionConfiguration *RetentionConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s PutRetentionConfigurationOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s PutRetentionConfigurationOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s PutRetentionConfigurationOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
 // Specifies the types of AWS resource for which AWS Config records configuration
 // changes.
 //
@@ -6461,6 +6812,36 @@ func (s *ResourceKey) Validate() error {
 	return nil
 }
 
+// An object with the name of the retention configuration and the retention
+// period in days. The object stores the configuration for data retention in
+// AWS Config.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/config-2014-11-12/RetentionConfiguration
+type RetentionConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the retention configuration object.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// Number of days AWS Config stores your historical information.
+	//
+	// Currently, only applicable to the configuration item history.
+	//
+	// RetentionPeriodInDays is a required field
+	RetentionPeriodInDays *int64 `min:"30" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s RetentionConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s RetentionConfiguration) GoString() string {
+	return s.String()
+}
+
 // Defines which resources trigger an evaluation for an AWS Config rule. The
 // scope can include one or more resource types, a combination of a tag key
 // and value, or a combination of one resource type and one resource ID. Specify
@@ -6621,7 +7002,8 @@ type SourceDetail struct {
 	//    when AWS Config delivers a configuration snapshot.
 	//
 	// If you want your custom rule to be triggered by configuration changes, specify
-	// both ConfigurationItemChangeNotification and OversizedConfigurationItemChangeNotification.
+	// two SourceDetail objects, one for ConfigurationItemChangeNotification and
+	// one for OversizedConfigurationItemChangeNotification.
 	MessageType MessageType `type:"string" enum:"true"`
 }
 
@@ -7100,6 +7482,14 @@ const (
 	ResourceTypeAwsWafregionalWebAcl                  ResourceType = "AWS::WAFRegional::WebACL"
 	ResourceTypeAwsCloudFrontDistribution             ResourceType = "AWS::CloudFront::Distribution"
 	ResourceTypeAwsCloudFrontStreamingDistribution    ResourceType = "AWS::CloudFront::StreamingDistribution"
+	ResourceTypeAwsWafRuleGroup                       ResourceType = "AWS::WAF::RuleGroup"
+	ResourceTypeAwsWafregionalRuleGroup               ResourceType = "AWS::WAFRegional::RuleGroup"
+	ResourceTypeAwsLambdaFunction                     ResourceType = "AWS::Lambda::Function"
+	ResourceTypeAwsElasticBeanstalkApplication        ResourceType = "AWS::ElasticBeanstalk::Application"
+	ResourceTypeAwsElasticBeanstalkApplicationVersion ResourceType = "AWS::ElasticBeanstalk::ApplicationVersion"
+	ResourceTypeAwsElasticBeanstalkEnvironment        ResourceType = "AWS::ElasticBeanstalk::Environment"
+	ResourceTypeAwsElasticLoadBalancingLoadBalancer   ResourceType = "AWS::ElasticLoadBalancing::LoadBalancer"
+	ResourceTypeAwsXrayEncryptionConfig               ResourceType = "AWS::XRay::EncryptionConfig"
 )
 
 func (enum ResourceType) MarshalValue() (string, error) {

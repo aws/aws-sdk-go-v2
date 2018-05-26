@@ -72,6 +72,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iam"
 	"github.com/aws/aws-sdk-go-v2/service/inspector"
 	"github.com/aws/aws-sdk-go-v2/service/iot"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice"
+	"github.com/aws/aws-sdk-go-v2/service/iot1clickprojects"
+	"github.com/aws/aws-sdk-go-v2/service/iotanalytics"
 	"github.com/aws/aws-sdk-go-v2/service/iotdataplane"
 	"github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis"
@@ -221,6 +224,9 @@ func createServices(cfg aws.Config) []service {
 		{name: "iam", value: reflect.ValueOf(iam.New(cfg))},
 		{name: "inspector", value: reflect.ValueOf(inspector.New(cfg))},
 		{name: "iot", value: reflect.ValueOf(iot.New(cfg))},
+		{name: "iot1clickdevicesservice", value: reflect.ValueOf(iot1clickdevicesservice.New(cfg))},
+		{name: "iot1clickprojects", value: reflect.ValueOf(iot1clickprojects.New(cfg))},
+		{name: "iotanalytics", value: reflect.ValueOf(iotanalytics.New(cfg))},
 		{name: "iotdataplane", value: reflect.ValueOf(iotdataplane.New(cfg))},
 		{name: "iotjobsdataplane", value: reflect.ValueOf(iotjobsdataplane.New(cfg))},
 		{name: "kinesis", value: reflect.ValueOf(kinesis.New(cfg))},

@@ -995,7 +995,7 @@ func (r CreateThingRequest) Send() (*CreateThingOutput, error) {
 // CreateThingRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Creates a thing record in the thing registry.
+// Creates a thing record in the registry.
 //
 //    // Example sending a request using the CreateThingRequest method.
 //    req := client.CreateThingRequest(params)
@@ -1318,6 +1318,115 @@ func (c *IoT) DeleteCertificateRequest(input *DeleteCertificateInput) DeleteCert
 	output.responseMetadata = aws.Response{Request: req}
 
 	return DeleteCertificateRequest{Request: req, Input: input, Copy: c.DeleteCertificateRequest}
+}
+
+const opDeleteJob = "DeleteJob"
+
+// DeleteJobRequest is a API request type for the DeleteJob API operation.
+type DeleteJobRequest struct {
+	*aws.Request
+	Input *DeleteJobInput
+	Copy  func(*DeleteJobInput) DeleteJobRequest
+}
+
+// Send marshals and sends the DeleteJob API request.
+func (r DeleteJobRequest) Send() (*DeleteJobOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteJobOutput), nil
+}
+
+// DeleteJobRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Deletes a job and its related job executions.
+//
+// Deleting a job may take time, depending on the number of job executions created
+// for the job and various other factors. While the job is being deleted, the
+// status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to
+// delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will
+// result in an error.
+//
+// Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or
+// a LimitExceededException will occur.
+//
+//    // Example sending a request using the DeleteJobRequest method.
+//    req := client.DeleteJobRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) DeleteJobRequest(input *DeleteJobInput) DeleteJobRequest {
+	op := &aws.Operation{
+		Name:       opDeleteJob,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/jobs/{jobId}",
+	}
+
+	if input == nil {
+		input = &DeleteJobInput{}
+	}
+
+	output := &DeleteJobOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteJobRequest{Request: req, Input: input, Copy: c.DeleteJobRequest}
+}
+
+const opDeleteJobExecution = "DeleteJobExecution"
+
+// DeleteJobExecutionRequest is a API request type for the DeleteJobExecution API operation.
+type DeleteJobExecutionRequest struct {
+	*aws.Request
+	Input *DeleteJobExecutionInput
+	Copy  func(*DeleteJobExecutionInput) DeleteJobExecutionRequest
+}
+
+// Send marshals and sends the DeleteJobExecution API request.
+func (r DeleteJobExecutionRequest) Send() (*DeleteJobExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*DeleteJobExecutionOutput), nil
+}
+
+// DeleteJobExecutionRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Deletes a job execution.
+//
+//    // Example sending a request using the DeleteJobExecutionRequest method.
+//    req := client.DeleteJobExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) DeleteJobExecutionRequest(input *DeleteJobExecutionInput) DeleteJobExecutionRequest {
+	op := &aws.Operation{
+		Name:       opDeleteJobExecution,
+		HTTPMethod: "DELETE",
+		HTTPPath:   "/things/{thingName}/jobs/{jobId}/executionNumber/{executionNumber}",
+	}
+
+	if input == nil {
+		input = &DeleteJobExecutionInput{}
+	}
+
+	output := &DeleteJobExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return DeleteJobExecutionRequest{Request: req, Input: input, Copy: c.DeleteJobExecutionRequest}
 }
 
 const opDeleteOTAUpdate = "DeleteOTAUpdate"
@@ -6143,7 +6252,8 @@ func (c *IoT) UpdateThingGroupsForThingRequest(input *UpdateThingGroupsForThingI
 type AcceptCertificateTransferInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the certificate.
+	// The ID of the certificate. (The last part of the certificate ARN contains
+	// the certificate ID.)
 	//
 	// CertificateId is a required field
 	CertificateId *string `location:"uri" locationName:"certificateId" min:"64" type:"string" required:"true"`
@@ -6246,6 +6356,9 @@ type Action struct {
 
 	// Write to an Amazon Kinesis Firehose stream.
 	Firehose *FirehoseAction `locationName:"firehose" type:"structure"`
+
+	// Sends message data to an AWS IoT Analytics channel.
+	IotAnalytics *IotAnalyticsAction `locationName:"iotAnalytics" type:"structure"`
 
 	// Write data to an Amazon Kinesis stream.
 	Kinesis *KinesisAction `locationName:"kinesis" type:"structure"`
@@ -6391,6 +6504,12 @@ func (s Action) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "firehose", v, metadata)
+	}
+	if s.IotAnalytics != nil {
+		v := s.IotAnalytics
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "iotAnalytics", v, metadata)
 	}
 	if s.Kinesis != nil {
 		v := s.Kinesis
@@ -7361,10 +7480,13 @@ type CACertificateDescription struct {
 	// The date the CA certificate was created.
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
 
+	// The customer version of the CA certificate.
 	CustomerVersion *int64 `locationName:"customerVersion" min:"1" type:"integer"`
 
+	// The generation ID of the CA certificate.
 	GenerationId *string `locationName:"generationId" type:"string"`
 
+	// The date the CA certificate was last modified.
 	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The owner of the CA certificate.
@@ -7453,7 +7575,8 @@ func (s CACertificateDescription) MarshalFields(e protocol.FieldEncoder) error {
 type CancelCertificateTransferInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the certificate.
+	// The ID of the certificate. (The last part of the certificate ARN contains
+	// the certificate ID.)
 	//
 	// CertificateId is a required field
 	CertificateId *string `location:"uri" locationName:"certificateId" min:"64" type:"string" required:"true"`
@@ -7641,7 +7764,8 @@ type Certificate struct {
 	// The ARN of the certificate.
 	CertificateArn *string `locationName:"certificateArn" type:"string"`
 
-	// The ID of the certificate.
+	// The ID of the certificate. (The last part of the certificate ARN contains
+	// the certificate ID.)
 	CertificateId *string `locationName:"certificateId" min:"64" type:"string"`
 
 	// The date and time the certificate was created.
@@ -7711,8 +7835,10 @@ type CertificateDescription struct {
 	// The date and time the certificate was created.
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
 
+	// The customer version of the certificate.
 	CustomerVersion *int64 `locationName:"customerVersion" min:"1" type:"integer"`
 
+	// The generation ID of the certificate.
 	GenerationId *string `locationName:"generationId" type:"string"`
 
 	// The date and time the certificate was last modified.
@@ -10246,7 +10372,8 @@ func (s DeleteAuthorizerOutput) MarshalFields(e protocol.FieldEncoder) error {
 type DeleteCACertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the certificate to delete.
+	// The ID of the certificate to delete. (The last part of the certificate ARN
+	// contains the certificate ID.)
 	//
 	// CertificateId is a required field
 	CertificateId *string `location:"uri" locationName:"caCertificateId" min:"64" type:"string" required:"true"`
@@ -10322,7 +10449,8 @@ func (s DeleteCACertificateOutput) MarshalFields(e protocol.FieldEncoder) error 
 type DeleteCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the certificate.
+	// The ID of the certificate. (The last part of the certificate ARN contains
+	// the certificate ID.)
 	//
 	// CertificateId is a required field
 	CertificateId *string `location:"uri" locationName:"certificateId" min:"64" type:"string" required:"true"`
@@ -10399,6 +10527,227 @@ func (s DeleteCertificateOutput) SDKResponseMetadata() aws.Response {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DeleteCertificateOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+type DeleteJobExecutionInput struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the job execution to be deleted. The executionNumber refers to
+	// the execution of a particular job on a particular device.
+	//
+	// Note that once a job execution is deleted, the executionNumber may be reused
+	// by IoT, so be sure you get and use the correct value here.
+	//
+	// ExecutionNumber is a required field
+	ExecutionNumber *int64 `location:"uri" locationName:"executionNumber" type:"long" required:"true"`
+
+	// (Optional) When true, you can delete a job execution which is "IN_PROGRESS".
+	// Otherwise, you can only delete a job execution which is in a terminal state
+	// ("SUCCEEDED", "FAILED", "REJECTED", "REMOVED" or "CANCELED") or an exception
+	// will occur. The default is false.
+	//
+	// Deleting a job execution which is "IN_PROGRESS", will cause the device to
+	// be unable to access job information or update the job execution status. Use
+	// caution and ensure that the device is able to recover to a valid state.
+	Force *bool `location:"querystring" locationName:"force" type:"boolean"`
+
+	// The ID of the job whose execution on a particular device will be deleted.
+	//
+	// JobId is a required field
+	JobId *string `location:"uri" locationName:"jobId" min:"1" type:"string" required:"true"`
+
+	// The name of the thing whose job execution will be deleted.
+	//
+	// ThingName is a required field
+	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteJobExecutionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteJobExecutionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteJobExecutionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteJobExecutionInput"}
+
+	if s.ExecutionNumber == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ExecutionNumber"))
+	}
+
+	if s.JobId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
+	}
+	if s.JobId != nil && len(*s.JobId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
+	}
+
+	if s.ThingName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
+	}
+	if s.ThingName != nil && len(*s.ThingName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ExecutionNumber != nil {
+		v := *s.ExecutionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "executionNumber", protocol.Int64Value(v), metadata)
+	}
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Force != nil {
+		v := *s.Force
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "force", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+type DeleteJobExecutionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteJobExecutionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteJobExecutionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteJobExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteJobExecutionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
+type DeleteJobInput struct {
+	_ struct{} `type:"structure"`
+
+	// (Optional) When true, you can delete a job which is "IN_PROGRESS". Otherwise,
+	// you can only delete a job which is in a terminal state ("COMPLETED" or "CANCELED")
+	// or an exception will occur. The default is false.
+	//
+	// Deleting a job which is "IN_PROGRESS", will cause a device which is executing
+	// the job to be unable to access job information or update the job execution
+	// status. Use caution and ensure that each device executing a job which is
+	// deleted is able to recover to a valid state.
+	Force *bool `location:"querystring" locationName:"force" type:"boolean"`
+
+	// The ID of the job to be deleted.
+	//
+	// After a job deletion is completed, you may reuse this jobId when you create
+	// a new job. However, this is not recommended, and you must ensure that your
+	// devices are not using the jobId to refer to the deleted job.
+	//
+	// JobId is a required field
+	JobId *string `location:"uri" locationName:"jobId" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s DeleteJobInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteJobInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DeleteJobInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DeleteJobInput"}
+
+	if s.JobId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
+	}
+	if s.JobId != nil && len(*s.JobId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteJobInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Force != nil {
+		v := *s.Force
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "force", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+type DeleteJobOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s DeleteJobOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s DeleteJobOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s DeleteJobOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DeleteJobOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
@@ -11550,7 +11899,8 @@ func (s DescribeCACertificateOutput) MarshalFields(e protocol.FieldEncoder) erro
 type DescribeCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the certificate.
+	// The ID of the certificate. (The last part of the certificate ARN contains
+	// the certificate ID.)
 	//
 	// CertificateId is a required field
 	CertificateId *string `location:"uri" locationName:"certificateId" min:"64" type:"string" required:"true"`
@@ -14275,13 +14625,16 @@ type GetPolicyOutput struct {
 
 	responseMetadata aws.Response
 
+	// The date the policy was created.
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The default policy version ID.
 	DefaultVersionId *string `locationName:"defaultVersionId" type:"string"`
 
+	// The generation ID of the policy.
 	GenerationId *string `locationName:"generationId" type:"string"`
 
+	// The date the policy was last modified.
 	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The policy ARN.
@@ -14426,13 +14779,16 @@ type GetPolicyVersionOutput struct {
 
 	responseMetadata aws.Response
 
+	// The date the policy version was created.
 	CreationDate *time.Time `locationName:"creationDate" type:"timestamp" timestampFormat:"unix"`
 
+	// The generation ID of the policy version.
 	GenerationId *string `locationName:"generationId" type:"string"`
 
 	// Specifies whether the policy version is the default.
 	IsDefaultVersion *bool `locationName:"isDefaultVersion" type:"boolean"`
 
+	// The date the policy version was last modified.
 	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp" timestampFormat:"unix"`
 
 	// The policy ARN.
@@ -14811,6 +15167,55 @@ func (s ImplicitDeny) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// Sends messge data to an AWS IoT Analytics channel.
+type IotAnalyticsAction struct {
+	_ struct{} `type:"structure"`
+
+	// (deprecated) The ARN of the IoT Analytics channel to which message data will
+	// be sent.
+	ChannelArn *string `locationName:"channelArn" type:"string"`
+
+	// The name of the IoT Analytics channel to which message data will be sent.
+	ChannelName *string `locationName:"channelName" type:"string"`
+
+	// The ARN of the role which has a policy that grants IoT Analytics permission
+	// to send message data via IoT Analytics (iotanalytics:BatchPutMessage).
+	RoleArn *string `locationName:"roleArn" type:"string"`
+}
+
+// String returns the string representation
+func (s IotAnalyticsAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s IotAnalyticsAction) GoString() string {
+	return s.String()
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s IotAnalyticsAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ChannelArn != nil {
+		v := *s.ChannelArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channelArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ChannelName != nil {
+		v := *s.ChannelName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "channelName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.RoleArn != nil {
+		v := *s.RoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "roleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -16768,7 +17173,7 @@ type ListOTAUpdatesInput struct {
 	// The maximum number of results to return at one time.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// A token used to retreive the next set of results.
+	// A token used to retrieve the next set of results.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
 	// The OTA update job status.
@@ -20101,10 +20506,12 @@ func (s RegisterCertificateOutput) MarshalFields(e protocol.FieldEncoder) error 
 type RegisterThingInput struct {
 	_ struct{} `type:"structure"`
 
-	// The parameters for provisioning a thing.
+	// The parameters for provisioning a thing. See Programmatic Provisioning (http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html)
+	// for more information.
 	Parameters map[string]string `locationName:"parameters" type:"map"`
 
-	// The provisioning template.
+	// The provisioning template. See Programmatic Provisioning (http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html)
+	// for more information.
 	//
 	// TemplateBody is a required field
 	TemplateBody *string `locationName:"templateBody" type:"string" required:"true"`
@@ -20263,7 +20670,8 @@ func (s RegistrationConfig) MarshalFields(e protocol.FieldEncoder) error {
 type RejectCertificateTransferInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the certificate.
+	// The ID of the certificate. (The last part of the certificate ARN contains
+	// the certificate ID.)
 	//
 	// CertificateId is a required field
 	CertificateId *string `location:"uri" locationName:"certificateId" min:"64" type:"string" required:"true"`
@@ -20615,6 +21023,7 @@ type RoleAliasDescription struct {
 	// The role alias.
 	RoleAlias *string `locationName:"roleAlias" min:"1" type:"string"`
 
+	// The ARN of the role alias.
 	RoleAliasArn *string `locationName:"roleAliasArn" type:"string"`
 
 	// The role ARN.
@@ -22472,7 +22881,7 @@ type ThingDocument struct {
 	// The attributes.
 	Attributes map[string]string `locationName:"attributes" type:"map"`
 
-	// The thing shadow.
+	// The shadow.
 	Shadow *string `locationName:"shadow" type:"string"`
 
 	// Thing group names.
@@ -23115,7 +23524,8 @@ func (s TopicRulePayload) MarshalFields(e protocol.FieldEncoder) error {
 type TransferCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the certificate.
+	// The ID of the certificate. (The last part of the certificate ARN contains
+	// the certificate ID.)
 	//
 	// CertificateId is a required field
 	CertificateId *string `location:"uri" locationName:"certificateId" min:"64" type:"string" required:"true"`
@@ -23546,7 +23956,8 @@ func (s UpdateCACertificateOutput) MarshalFields(e protocol.FieldEncoder) error 
 type UpdateCertificateInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ID of the certificate.
+	// The ID of the certificate. (The last part of the certificate ARN contains
+	// the certificate ID.)
 	//
 	// CertificateId is a required field
 	CertificateId *string `location:"uri" locationName:"certificateId" min:"64" type:"string" required:"true"`
@@ -24571,9 +24982,10 @@ type JobStatus string
 
 // Enum values for JobStatus
 const (
-	JobStatusInProgress JobStatus = "IN_PROGRESS"
-	JobStatusCanceled   JobStatus = "CANCELED"
-	JobStatusCompleted  JobStatus = "COMPLETED"
+	JobStatusInProgress         JobStatus = "IN_PROGRESS"
+	JobStatusCanceled           JobStatus = "CANCELED"
+	JobStatusCompleted          JobStatus = "COMPLETED"
+	JobStatusDeletionInProgress JobStatus = "DELETION_IN_PROGRESS"
 )
 
 func (enum JobStatus) MarshalValue() (string, error) {

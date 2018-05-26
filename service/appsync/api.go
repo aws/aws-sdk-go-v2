@@ -836,6 +836,11 @@ func (r ListApiKeysRequest) Send() (*ListApiKeysOutput, error) {
 //
 // Lists the API keys for a given API.
 //
+// API keys are deleted automatically sometime after they expire. However, they
+// may still be included in the response until they have actually been deleted.
+// You can safely call DeleteApiKey to manually delete a key before it's automatically
+// deleted.
+//
 //    // Example sending a request using the ListApiKeysRequest method.
 //    req := client.ListApiKeysRequest(params)
 //    resp, err := req.Send()
@@ -1365,6 +1370,43 @@ func (c *AppSync) UpdateTypeRequest(input *UpdateTypeInput) UpdateTypeRequest {
 }
 
 // Describes an API key.
+//
+// Customers invoke AWS AppSync GraphQL APIs with API keys as an identity mechanism.
+// There are two key versions:
+//
+// da1: This version was introduced at launch in November 2017. These keys always
+// expire after 7 days. Key expiration is managed by DynamoDB TTL. The keys
+// will cease to be valid after Feb 21, 2018 and should not be used after that
+// date.
+//
+//    * ListApiKeys returns the expiration time in milliseconds.
+//
+//    * CreateApiKey returns the expiration time in milliseconds.
+//
+//    * UpdateApiKey is not available for this key version.
+//
+//    * DeleteApiKey deletes the item from the table.
+//
+//    * Expiration is stored in DynamoDB as milliseconds. This results in a
+//    bug where keys are not automatically deleted because DynamoDB expects
+//    the TTL to be stored in seconds. As a one-time action, we will delete
+//    these keys from the table after Feb 21, 2018.
+//
+// da2: This version was introduced in February 2018 when AppSync added support
+// to extend key expiration.
+//
+//    * ListApiKeys returns the expiration time in seconds.
+//
+//    * CreateApiKey returns the expiration time in seconds and accepts a user-provided
+//    expiration time in seconds.
+//
+//    * UpdateApiKey returns the expiration time in seconds and accepts a user-provided
+//    expiration time in seconds. Key expiration can only be updated while the
+//    key has not expired.
+//
+//    * DeleteApiKey deletes the item from the table.
+//
+//    * Expiration is stored in DynamoDB as seconds.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ApiKey
 type ApiKey struct {
 	_ struct{} `type:"structure"`
@@ -1425,9 +1467,10 @@ type CreateApiKeyInput struct {
 	// A description of the purpose of the API key.
 	Description *string `locationName:"description" type:"string"`
 
-	// The time after which the API key expires. The date is represented as seconds
-	// since the epoch, rounded down to the nearest hour. The default value for
-	// this parameter is 7 days from creation time.
+	// The time from creation time after which the API key expires. The date is
+	// represented as seconds since the epoch, rounded down to the nearest hour.
+	// The default value for this parameter is 7 days from creation time. For more
+	// information, see .
 	Expires *int64 `locationName:"expires" type:"long"`
 }
 
@@ -1698,10 +1741,16 @@ type CreateGraphqlApiInput struct {
 	// AuthenticationType is a required field
 	AuthenticationType AuthenticationType `locationName:"authenticationType" type:"string" required:"true" enum:"true"`
 
+	// The Amazon CloudWatch logs configuration.
+	LogConfig *LogConfig `locationName:"logConfig" type:"structure"`
+
 	// A user-supplied name for the GraphqlApi.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
+
+	// The Open Id Connect configuration configuration.
+	OpenIDConnectConfig *OpenIDConnectConfig `locationName:"openIDConnectConfig" type:"structure"`
 
 	// The Amazon Cognito User Pool configuration.
 	UserPoolConfig *UserPoolConfig `locationName:"userPoolConfig" type:"structure"`
@@ -1727,6 +1776,16 @@ func (s *CreateGraphqlApiInput) Validate() error {
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+	if s.LogConfig != nil {
+		if err := s.LogConfig.Validate(); err != nil {
+			invalidParams.AddNested("LogConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.OpenIDConnectConfig != nil {
+		if err := s.OpenIDConnectConfig.Validate(); err != nil {
+			invalidParams.AddNested("OpenIDConnectConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.UserPoolConfig != nil {
 		if err := s.UserPoolConfig.Validate(); err != nil {
 			invalidParams.AddNested("UserPoolConfig", err.(aws.ErrInvalidParams))
@@ -1749,11 +1808,23 @@ func (s CreateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "authenticationType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.LogConfig != nil {
+		v := s.LogConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logConfig", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OpenIDConnectConfig != nil {
+		v := s.OpenIDConnectConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "openIDConnectConfig", v, metadata)
 	}
 	if s.UserPoolConfig != nil {
 		v := s.UserPoolConfig
@@ -1826,10 +1897,10 @@ type CreateResolverInput struct {
 	// in Apache Velocity Template Language (VTL).
 	//
 	// RequestMappingTemplate is a required field
-	RequestMappingTemplate *string `locationName:"requestMappingTemplate" type:"string" required:"true"`
+	RequestMappingTemplate *string `locationName:"requestMappingTemplate" min:"1" type:"string" required:"true"`
 
 	// The mapping template to be used for responses from the data source.
-	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" type:"string"`
+	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" min:"1" type:"string"`
 
 	// The name of the Type.
 	//
@@ -1865,6 +1936,12 @@ func (s *CreateResolverInput) Validate() error {
 
 	if s.RequestMappingTemplate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequestMappingTemplate"))
+	}
+	if s.RequestMappingTemplate != nil && len(*s.RequestMappingTemplate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RequestMappingTemplate", 1))
+	}
+	if s.ResponseMappingTemplate != nil && len(*s.ResponseMappingTemplate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResponseMappingTemplate", 1))
 	}
 
 	if s.TypeName == nil {
@@ -2106,8 +2183,10 @@ type DataSource struct {
 	//
 	//    * AWS_LAMBDA: The data source is an AWS Lambda function.
 	//
-	//    * NONE: There is no data source. This type is used when the required information
-	//    can be computed on the fly without connecting to a back-end data source.
+	//    * NONE: There is no data source. This type is used when when you wish
+	//    to invoke a GraphQL operation without connecting to a data source, such
+	//    as performing data transformation with resolvers or triggering a subscription
+	//    to be invoked from a mutation.
 	Type DataSourceType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -3362,8 +3441,14 @@ type GraphqlApi struct {
 	// The authentication type.
 	AuthenticationType AuthenticationType `locationName:"authenticationType" type:"string" enum:"true"`
 
+	// The Amazon CloudWatch Logs configuration.
+	LogConfig *LogConfig `locationName:"logConfig" type:"structure"`
+
 	// The API name.
 	Name *string `locationName:"name" type:"string"`
+
+	// The Open Id Connect configuration.
+	OpenIDConnectConfig *OpenIDConnectConfig `locationName:"openIDConnectConfig" type:"structure"`
 
 	// The URIs.
 	Uris map[string]string `locationName:"uris" type:"map"`
@@ -3402,11 +3487,23 @@ func (s GraphqlApi) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "authenticationType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.LogConfig != nil {
+		v := s.LogConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logConfig", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OpenIDConnectConfig != nil {
+		v := s.OpenIDConnectConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "openIDConnectConfig", v, metadata)
 	}
 	if len(s.Uris) > 0 {
 		v := s.Uris
@@ -4069,6 +4166,161 @@ func (s ListTypesOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The CloudWatch Logs configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/LogConfig
+type LogConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The service role that AWS AppSync will assume to publish to Amazon CloudWatch
+	// logs in your account.
+	//
+	// CloudWatchLogsRoleArn is a required field
+	CloudWatchLogsRoleArn *string `locationName:"cloudWatchLogsRoleArn" type:"string" required:"true"`
+
+	// The field logging level. Values can be NONE, ERROR, ALL.
+	//
+	//    * NONE: No field-level logs are captured.
+	//
+	//    * ERROR: Logs the following information only for the fields that are in
+	//    error:
+	//
+	// The error section in the server response.
+	//
+	// Field-level errors.
+	//
+	// The generated request/response functions that got resolved for error fields.
+	//
+	//    * ALL: The following information is logged for all fields in the query:
+	//
+	// Field-level tracing information.
+	//
+	// The generated request/response functions that got resolved for each field.
+	//
+	// FieldLogLevel is a required field
+	FieldLogLevel FieldLogLevel `locationName:"fieldLogLevel" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s LogConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s LogConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LogConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LogConfig"}
+
+	if s.CloudWatchLogsRoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CloudWatchLogsRoleArn"))
+	}
+	if len(s.FieldLogLevel) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FieldLogLevel"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s LogConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CloudWatchLogsRoleArn != nil {
+		v := *s.CloudWatchLogsRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "cloudWatchLogsRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.FieldLogLevel) > 0 {
+		v := s.FieldLogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "fieldLogLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// Describes an Open Id Connect configuration.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/OpenIDConnectConfig
+type OpenIDConnectConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The number of milliseconds a token is valid after being authenticated.
+	AuthTTL *int64 `locationName:"authTTL" type:"long"`
+
+	// The client identifier of the Relying party at the OpenID Provider. This identifier
+	// is typically obtained when the Relying party is registered with the OpenID
+	// Provider. You can specify a regular expression so the AWS AppSync can validate
+	// against multiple client identifiers at a time
+	ClientId *string `locationName:"clientId" type:"string"`
+
+	// The number of milliseconds a token is valid after being issued to a user.
+	IatTTL *int64 `locationName:"iatTTL" type:"long"`
+
+	// The issuer for the open id connect configuration. The issuer returned by
+	// discovery MUST exactly match the value of iss in the ID Token.
+	//
+	// Issuer is a required field
+	Issuer *string `locationName:"issuer" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s OpenIDConnectConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s OpenIDConnectConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OpenIDConnectConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OpenIDConnectConfig"}
+
+	if s.Issuer == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Issuer"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OpenIDConnectConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AuthTTL != nil {
+		v := *s.AuthTTL
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "authTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.ClientId != nil {
+		v := *s.ClientId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "clientId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.IatTTL != nil {
+		v := *s.IatTTL
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "iatTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.Issuer != nil {
+		v := *s.Issuer
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "issuer", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Describes a resolver.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Resolver
 type Resolver struct {
@@ -4081,13 +4333,13 @@ type Resolver struct {
 	FieldName *string `locationName:"fieldName" type:"string"`
 
 	// The request mapping template.
-	RequestMappingTemplate *string `locationName:"requestMappingTemplate" type:"string"`
+	RequestMappingTemplate *string `locationName:"requestMappingTemplate" min:"1" type:"string"`
 
 	// The resolver ARN.
 	ResolverArn *string `locationName:"resolverArn" type:"string"`
 
 	// The response mapping template.
-	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" type:"string"`
+	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" min:"1" type:"string"`
 
 	// The resolver type name.
 	TypeName *string `locationName:"typeName" type:"string"`
@@ -4323,8 +4575,8 @@ type UpdateApiKeyInput struct {
 	// A description of the purpose of the API key.
 	Description *string `locationName:"description" type:"string"`
 
-	// The time after which the API key expires. The date is represented as seconds
-	// since the epoch.
+	// The time from update time after which the API key expires. The date is represented
+	// as seconds since the epoch. For more information, see .
 	Expires *int64 `locationName:"expires" type:"long"`
 
 	// The API key ID.
@@ -4612,10 +4864,16 @@ type UpdateGraphqlApiInput struct {
 	// The new authentication type for the GraphqlApi object.
 	AuthenticationType AuthenticationType `locationName:"authenticationType" type:"string" enum:"true"`
 
+	// The Amazon CloudWatch logs configuration for the GraphqlApi object.
+	LogConfig *LogConfig `locationName:"logConfig" type:"structure"`
+
 	// The new name for the GraphqlApi object.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" type:"string" required:"true"`
+
+	// The Open Id Connect configuration configuration for the GraphqlApi object.
+	OpenIDConnectConfig *OpenIDConnectConfig `locationName:"openIDConnectConfig" type:"structure"`
 
 	// The new Amazon Cognito User Pool configuration for the GraphqlApi object.
 	UserPoolConfig *UserPoolConfig `locationName:"userPoolConfig" type:"structure"`
@@ -4642,6 +4900,16 @@ func (s *UpdateGraphqlApiInput) Validate() error {
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
+	if s.LogConfig != nil {
+		if err := s.LogConfig.Validate(); err != nil {
+			invalidParams.AddNested("LogConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.OpenIDConnectConfig != nil {
+		if err := s.OpenIDConnectConfig.Validate(); err != nil {
+			invalidParams.AddNested("OpenIDConnectConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.UserPoolConfig != nil {
 		if err := s.UserPoolConfig.Validate(); err != nil {
 			invalidParams.AddNested("UserPoolConfig", err.(aws.ErrInvalidParams))
@@ -4664,11 +4932,23 @@ func (s UpdateGraphqlApiInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "authenticationType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.LogConfig != nil {
+		v := s.LogConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logConfig", v, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OpenIDConnectConfig != nil {
+		v := s.OpenIDConnectConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "openIDConnectConfig", v, metadata)
 	}
 	if s.UserPoolConfig != nil {
 		v := s.UserPoolConfig
@@ -4743,10 +5023,10 @@ type UpdateResolverInput struct {
 	// The new request mapping template.
 	//
 	// RequestMappingTemplate is a required field
-	RequestMappingTemplate *string `locationName:"requestMappingTemplate" type:"string" required:"true"`
+	RequestMappingTemplate *string `locationName:"requestMappingTemplate" min:"1" type:"string" required:"true"`
 
 	// The new response mapping template.
-	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" type:"string"`
+	ResponseMappingTemplate *string `locationName:"responseMappingTemplate" min:"1" type:"string"`
 
 	// The new type name.
 	//
@@ -4782,6 +5062,12 @@ func (s *UpdateResolverInput) Validate() error {
 
 	if s.RequestMappingTemplate == nil {
 		invalidParams.Add(aws.NewErrParamRequired("RequestMappingTemplate"))
+	}
+	if s.RequestMappingTemplate != nil && len(*s.RequestMappingTemplate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("RequestMappingTemplate", 1))
+	}
+	if s.ResponseMappingTemplate != nil && len(*s.ResponseMappingTemplate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResponseMappingTemplate", 1))
 	}
 
 	if s.TypeName == nil {
@@ -5088,6 +5374,7 @@ const (
 	AuthenticationTypeApiKey                 AuthenticationType = "API_KEY"
 	AuthenticationTypeAwsIam                 AuthenticationType = "AWS_IAM"
 	AuthenticationTypeAmazonCognitoUserPools AuthenticationType = "AMAZON_COGNITO_USER_POOLS"
+	AuthenticationTypeOpenidConnect          AuthenticationType = "OPENID_CONNECT"
 )
 
 func (enum AuthenticationType) MarshalValue() (string, error) {
@@ -5131,6 +5418,24 @@ func (enum DefaultAction) MarshalValue() (string, error) {
 }
 
 func (enum DefaultAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FieldLogLevel string
+
+// Enum values for FieldLogLevel
+const (
+	FieldLogLevelNone  FieldLogLevel = "NONE"
+	FieldLogLevelError FieldLogLevel = "ERROR"
+	FieldLogLevelAll   FieldLogLevel = "ALL"
+)
+
+func (enum FieldLogLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FieldLogLevel) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

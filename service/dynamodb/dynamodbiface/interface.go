@@ -85,6 +85,8 @@ type DynamoDBAPI interface {
 
 	DescribeGlobalTableRequest(*dynamodb.DescribeGlobalTableInput) dynamodb.DescribeGlobalTableRequest
 
+	DescribeGlobalTableSettingsRequest(*dynamodb.DescribeGlobalTableSettingsInput) dynamodb.DescribeGlobalTableSettingsRequest
+
 	DescribeLimitsRequest(*dynamodb.DescribeLimitsInput) dynamodb.DescribeLimitsRequest
 
 	DescribeTableRequest(*dynamodb.DescribeTableInput) dynamodb.DescribeTableRequest
@@ -118,6 +120,8 @@ type DynamoDBAPI interface {
 	UpdateContinuousBackupsRequest(*dynamodb.UpdateContinuousBackupsInput) dynamodb.UpdateContinuousBackupsRequest
 
 	UpdateGlobalTableRequest(*dynamodb.UpdateGlobalTableInput) dynamodb.UpdateGlobalTableRequest
+
+	UpdateGlobalTableSettingsRequest(*dynamodb.UpdateGlobalTableSettingsInput) dynamodb.UpdateGlobalTableSettingsRequest
 
 	UpdateItemRequest(*dynamodb.UpdateItemInput) dynamodb.UpdateItemRequest
 

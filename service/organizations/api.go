@@ -110,8 +110,8 @@ func (r AttachPolicyRequest) Send() (*AttachPolicyOutput, error) {
 // AttachPolicyRequest returns a request value for making API operation for
 // AWS Organizations.
 //
-// Attaches a policy to a root, an organizational unit, or an individual account.
-// How the policy affects accounts depends on the type of policy:
+// Attaches a policy to a root, an organizational unit (OU), or an individual
+// account. How the policy affects accounts depends on the type of policy:
 //
 //    * Service control policy (SCP) - An SCP specifies what permissions can
 //    be delegated to users in affected member accounts. The scope of influence
@@ -294,6 +294,16 @@ func (r CreateAccountRequest) Send() (*CreateAccountOutput, error) {
 // when all required account information has not yet been provided (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //
+// If you get an exception that indicates that you exceeded your account limits
+// for the organization or that the operation failed because your organization
+// is still initializing, wait one hour and then try again. If the error persists
+// after an hour, then contact AWS Customer Support (https://console.aws.amazon.com/support/home#/).
+//
+// Because CreateAccount operates asynchronously, it can return a successful
+// completion message even though account initialization might still be in progress.
+// You might need to wait a few minutes before you can successfully access the
+// account.
+//
 // When you create a member account with this operation, you can choose whether
 // to create the account with the IAM User and Role Access to Billing Information
 // switch enabled. If you enable it, IAM users and roles that have appropriate
@@ -301,12 +311,6 @@ func (r CreateAccountRequest) Send() (*CreateAccountOutput, error) {
 // this, then only the account root user can access billing information. For
 // information about how to disable this for an account, see Granting Access
 // to Your Billing Information and Tools (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html).
-//
-// This operation can be called only from the organization's master account.
-//
-// If you get an exception that indicates that you exceeded your account limits
-// for the organization or that you can"t add an account because your organization
-// is still initializing, please contact  AWS Customer Support (https://console.aws.amazon.com/support/home#/).
 //
 //    // Example sending a request using the CreateAccountRequest method.
 //    req := client.CreateAccountRequest(params)
@@ -595,7 +599,7 @@ func (r DeleteOrganizationRequest) Send() (*DeleteOrganizationOutput, error) {
 //
 // Deletes the organization. You can delete an organization only by using credentials
 // from the master account. The organization must be empty of member accounts,
-// OUs, and policies.
+// organizational units (OUs), and policies.
 //
 //    // Example sending a request using the DeleteOrganizationRequest method.
 //    req := client.DeleteOrganizationRequest(params)
@@ -647,7 +651,7 @@ func (r DeleteOrganizationalUnitRequest) Send() (*DeleteOrganizationalUnitOutput
 // DeleteOrganizationalUnitRequest returns a request value for making API operation for
 // AWS Organizations.
 //
-// Deletes an organizational unit from a root or another OU. You must first
+// Deletes an organizational unit (OU) from a root or another OU. You must first
 // remove all accounts and child OUs from the OU that you want to delete.
 //
 // This operation can be called only from the organization's master account.
@@ -703,7 +707,8 @@ func (r DeletePolicyRequest) Send() (*DeletePolicyOutput, error) {
 // AWS Organizations.
 //
 // Deletes the specified policy from your organization. Before you perform this
-// operation, you must first detach the policy from all OUs, roots, and accounts.
+// operation, you must first detach the policy from all organizational units
+// (OUs), roots, and accounts.
 //
 // This operation can be called only from the organization's master account.
 //
@@ -1080,8 +1085,8 @@ func (r DetachPolicyRequest) Send() (*DetachPolicyOutput, error) {
 // DetachPolicyRequest returns a request value for making API operation for
 // AWS Organizations.
 //
-// Detaches a policy from a target root, organizational unit, or account. If
-// the policy being detached is a service control policy (SCP), the changes
+// Detaches a policy from a target root, organizational unit (OU), or account.
+// If the policy being detached is a service control policy (SCP), the changes
 // to permissions for IAM users and roles in affected accounts are immediate.
 //
 // Note: Every root, OU, and account must have at least one SCP attached. If
@@ -1223,8 +1228,8 @@ func (r DisablePolicyTypeRequest) Send() (*DisablePolicyTypeOutput, error) {
 // Disables an organizational control policy type in a root. A policy of a certain
 // type can be attached to entities in a root only if that type is enabled in
 // the root. After you perform this operation, you no longer can attach policies
-// of the specified type to that root or to any OU or account in that root.
-// You can undo this by using the EnablePolicyType operation.
+// of the specified type to that root or to any organizational unit (OU) or
+// account in that root. You can undo this by using the EnablePolicyType operation.
 //
 // This operation can be called only from the organization's master account.
 //
@@ -1361,12 +1366,11 @@ func (r EnableAllFeaturesRequest) Send() (*EnableAllFeaturesOutput, error) {
 // in the AWS Organizations User Guide.
 //
 // This operation is required only for organizations that were created explicitly
-// with only the consolidated billing features enabled, or that were migrated
-// from a Consolidated Billing account family to Organizations. Calling this
-// operation sends a handshake to every invited account in the organization.
-// The feature set change can be finalized and the additional features enabled
-// only after all administrators in the invited accounts approve the change
-// by accepting the handshake.
+// with only the consolidated billing features enabled. Calling this operation
+// sends a handshake to every invited account in the organization. The feature
+// set change can be finalized and the additional features enabled only after
+// all administrators in the invited accounts approve the change by accepting
+// the handshake.
 //
 // After you enable all features, you can separately enable or disable individual
 // policy types in a root using EnablePolicyType and DisablePolicyType. To see
@@ -1433,8 +1437,9 @@ func (r EnablePolicyTypeRequest) Send() (*EnablePolicyTypeOutput, error) {
 // AWS Organizations.
 //
 // Enables a policy type in a root. After you enable a policy type in a root,
-// you can attach policies of that type to the root, any OU, or account in that
-// root. You can undo this by using the DisablePolicyType operation.
+// you can attach policies of that type to the root, any organizational unit
+// (OU), or account in that root. You can undo this by using the DisablePolicyType
+// operation.
 //
 // This operation can be called only from the organization's master account.
 //
@@ -1504,11 +1509,12 @@ func (r InviteAccountToOrganizationRequest) Send() (*InviteAccountToOrganization
 // accounts from AISPL and AWS, or any other AWS seller. For more information,
 // see Consolidated Billing in India (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/useconsolidatedbilliing-India.html).
 //
-// This operation can be called only from the organization's master account.
+// If you receive an exception that indicates that you exceeded your account
+// limits for the organization or that the operation failed because your organization
+// is still initializing, wait one hour and then try again. If the error persists
+// after an hour, then contact AWS Customer Support (https://console.aws.amazon.com/support/home#/).
 //
-// If you get an exception that indicates that you exceeded your account limits
-// for the organization or that you can"t add an account because your organization
-// is still initializing, please contact  AWS Customer Support (https://console.aws.amazon.com/support/home#/).
+// This operation can be called only from the organization's master account.
 //
 //    // Example sending a request using the InviteAccountToOrganizationRequest method.
 //    req := client.InviteAccountToOrganizationRequest(params)
@@ -1751,7 +1757,8 @@ func (r ListAccountsRequest) Send() (*ListAccountsOutput, error) {
 // AWS Organizations.
 //
 // Lists all the accounts in the organization. To request only the accounts
-// in a specified root or OU, use the ListAccountsForParent operation instead.
+// in a specified root or organizational unit (OU), use the ListAccountsForParent
+// operation instead.
 //
 // Always check the NextToken response parameter for a null value when calling
 // a List* operation. These operations can occasionally return an empty set
@@ -1974,9 +1981,9 @@ func (r ListChildrenRequest) Send() (*ListChildrenOutput, error) {
 // ListChildrenRequest returns a request value for making API operation for
 // AWS Organizations.
 //
-// Lists all of the OUs or accounts that are contained in the specified parent
-// OU or root. This operation, along with ListParents enables you to traverse
-// the tree structure that makes up this root.
+// Lists all of the organizational units (OUs) or accounts that are contained
+// in the specified parent OU or root. This operation, along with ListParents
+// enables you to traverse the tree structure that makes up this root.
 //
 // Always check the NextToken response parameter for a null value when calling
 // a List* operation. These operations can occasionally return an empty set
@@ -2982,7 +2989,8 @@ func (r ListTargetsForPolicyRequest) Send() (*ListTargetsForPolicyOutput, error)
 // ListTargetsForPolicyRequest returns a request value for making API operation for
 // AWS Organizations.
 //
-// Lists all the roots, OUs, and accounts to which the specified policy is attached.
+// Lists all the roots, organizaitonal units (OUs), and accounts to which the
+// specified policy is attached.
 //
 // Always check the NextToken response parameter for a null value when calling
 // a List* operation. These operations can occasionally return an empty set
@@ -3091,8 +3099,8 @@ func (r MoveAccountRequest) Send() (*MoveAccountOutput, error) {
 // MoveAccountRequest returns a request value for making API operation for
 // AWS Organizations.
 //
-// Moves an account from its current source parent root or OU to the specified
-// destination parent root or OU.
+// Moves an account from its current source parent root or organizational unit
+// (OU) to the specified destination parent root or OU.
 //
 // This operation can be called only from the organization's master account.
 //
@@ -3171,11 +3179,6 @@ func (r RemoveAccountFromOrganizationRequest) Send() (*RemoveAccountFromOrganiza
 // an organization when all required account information has not yet been provided
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
-//
-// You can remove a member account only after you enable IAM user access to
-// billing in the member account. For more information, see Activating Access
-// to the Billing and Cost Management Console (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
-// in the AWS Billing and Cost Management User Guide.
 //
 //    // Example sending a request using the RemoveAccountFromOrganizationRequest method.
 //    req := client.RemoveAccountFromOrganizationRequest(params)

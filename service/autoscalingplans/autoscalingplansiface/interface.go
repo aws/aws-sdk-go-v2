@@ -69,6 +69,8 @@ type AutoScalingPlansAPI interface {
 	DescribeScalingPlanResourcesRequest(*autoscalingplans.DescribeScalingPlanResourcesInput) autoscalingplans.DescribeScalingPlanResourcesRequest
 
 	DescribeScalingPlansRequest(*autoscalingplans.DescribeScalingPlansInput) autoscalingplans.DescribeScalingPlansRequest
+
+	UpdateScalingPlanRequest(*autoscalingplans.UpdateScalingPlanInput) autoscalingplans.UpdateScalingPlanRequest
 }
 
 var _ AutoScalingPlansAPI = (*autoscalingplans.AutoScalingPlans)(nil)

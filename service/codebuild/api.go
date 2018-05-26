@@ -242,7 +242,7 @@ func (r CreateWebhookRequest) Send() (*CreateWebhookOutput, error) {
 // AWS CodePipeline. Because billing is on a per-build basis, you will be billed
 // for both builds. Therefore, if you are using AWS CodePipeline, we recommend
 // that you disable webhooks in CodeBuild. In the AWS CodeBuild console, clear
-// the Webhook box. For more information, see step 9 in Change a Build Project's
+// the Webhook box. For more information, see step 5 in Change a Build Project's
 // Settings (http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console).
 //
 //    // Example sending a request using the CreateWebhookRequest method.
@@ -1088,6 +1088,9 @@ type Build struct {
 
 	// The name of the AWS CodeBuild project.
 	ProjectName *string `locationName:"projectName" min:"1" type:"string"`
+
+	// The name of a service role used for this build.
+	ServiceRole *string `locationName:"serviceRole" min:"1" type:"string"`
 
 	// Information about the source code to be built.
 	Source *ProjectSource `locationName:"source" type:"structure"`
@@ -2245,10 +2248,21 @@ type ProjectArtifacts struct {
 	//    because no build output will be produced.
 	//
 	//    * If type is set to S3, this is the name of the output artifact object.
+	//    If you set the name to be a forward slash ("/"), then the artifact is
+	//    stored in the root of the output bucket.
 	//
-	// For example, if path is set to MyArtifacts, namespaceType is set to BUILD_ID,
-	// and name is set to MyArtifact.zip, then the output artifact would be stored
-	// in MyArtifacts/build-ID/MyArtifact.zip.
+	// For example:
+	//
+	//    *  If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and
+	//    name is set to MyArtifact.zip, then the output artifact would be stored
+	//    in MyArtifacts/build-ID/MyArtifact.zip.
+	//
+	//    *  If path is empty, namespaceType is set to NONE, and name is set to
+	//    "/", then the output artifact would be stored in the root of the output
+	//    bucket.
+	//
+	//    *  If path is set to MyArtifacts, namespaceType is set to BUILD_ID, and
+	//    name is set to "/", then the output artifact would be stored in MyArtifacts/build-ID.
 	Name *string `locationName:"name" type:"string"`
 
 	// Along with path and name, the pattern that AWS CodeBuild will use to determine
@@ -2674,6 +2688,22 @@ type StartBuildInput struct {
 	// one already defined in the build project.
 	BuildspecOverride *string `locationName:"buildspecOverride" type:"string"`
 
+	// A ProjectCache object specified for this build that overrides the one defined
+	// in the build project.
+	CacheOverride *ProjectCache `locationName:"cacheOverride" type:"structure"`
+
+	// The name of a certificate for this build that overrides the one specified
+	// in the build project.
+	CertificateOverride *string `locationName:"certificateOverride" type:"string"`
+
+	// The name of a compute type for this build that overrides the one specified
+	// in the build project.
+	ComputeTypeOverride ComputeType `locationName:"computeTypeOverride" type:"string" enum:"true"`
+
+	// A container type for this build that overrides the one specified in the build
+	// project.
+	EnvironmentTypeOverride EnvironmentType `locationName:"environmentTypeOverride" type:"string" enum:"true"`
+
 	// A set of environment variables that overrides, for this build only, the latest
 	// ones already defined in the build project.
 	EnvironmentVariablesOverride []EnvironmentVariable `locationName:"environmentVariablesOverride" type:"list"`
@@ -2682,10 +2712,47 @@ type StartBuildInput struct {
 	// for this build only, any previous depth of history defined in the build project.
 	GitCloneDepthOverride *int64 `locationName:"gitCloneDepthOverride" type:"integer"`
 
+	// A unique, case sensitive identifier you provide to ensure the idempotency
+	// of the StartBuild request. The token is included in the StartBuild request
+	// and is valid for 12 hours. If you repeat the StartBuild request with the
+	// same token, but change a parameter, AWS CodeBuild returns a parameter mismatch
+	// error.
+	IdempotencyToken *string `locationName:"idempotencyToken" type:"string"`
+
+	// The name of an image for this build that overrides the one specified in the
+	// build project.
+	ImageOverride *string `locationName:"imageOverride" min:"1" type:"string"`
+
+	// Enable this flag to override the insecure SSL setting that is specified in
+	// the build project. The insecure SSL setting determines whether to ignore
+	// SSL warnings while connecting to the project source code. This override applies
+	// only if the build's source is GitHub Enterprise.
+	InsecureSslOverride *bool `locationName:"insecureSslOverride" type:"boolean"`
+
+	// Enable this flag to override privileged mode in the build project.
+	PrivilegedModeOverride *bool `locationName:"privilegedModeOverride" type:"boolean"`
+
 	// The name of the AWS CodeBuild build project to start running a build.
 	//
 	// ProjectName is a required field
 	ProjectName *string `locationName:"projectName" min:"1" type:"string" required:"true"`
+
+	// The name of a service role for this build that overrides the one specified
+	// in the build project.
+	ServiceRoleOverride *string `locationName:"serviceRoleOverride" min:"1" type:"string"`
+
+	// An authorization type for this build that overrides the one defined in the
+	// build project. This override applies only if the build project's source is
+	// BitBucket or GitHub.
+	SourceAuthOverride *SourceAuth `locationName:"sourceAuthOverride" type:"structure"`
+
+	// A location that overrides for this build the source location for the one
+	// defined in the build project.
+	SourceLocationOverride *string `locationName:"sourceLocationOverride" type:"string"`
+
+	// A source input type for this build that overrides the source input defined
+	// in the build project
+	SourceTypeOverride SourceType `locationName:"sourceTypeOverride" type:"string" enum:"true"`
 
 	// A version of the build input to be built, for this build only. If not specified,
 	// the latest version will be used. If specified, must be one of:
@@ -2726,12 +2793,18 @@ func (s StartBuildInput) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StartBuildInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StartBuildInput"}
+	if s.ImageOverride != nil && len(*s.ImageOverride) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ImageOverride", 1))
+	}
 
 	if s.ProjectName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ProjectName"))
 	}
 	if s.ProjectName != nil && len(*s.ProjectName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProjectName", 1))
+	}
+	if s.ServiceRoleOverride != nil && len(*s.ServiceRoleOverride) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ServiceRoleOverride", 1))
 	}
 	if s.TimeoutInMinutesOverride != nil && *s.TimeoutInMinutesOverride < 5 {
 		invalidParams.Add(aws.NewErrParamMinValue("TimeoutInMinutesOverride", 5))
@@ -2741,11 +2814,21 @@ func (s *StartBuildInput) Validate() error {
 			invalidParams.AddNested("ArtifactsOverride", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.CacheOverride != nil {
+		if err := s.CacheOverride.Validate(); err != nil {
+			invalidParams.AddNested("CacheOverride", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.EnvironmentVariablesOverride != nil {
 		for i, v := range s.EnvironmentVariablesOverride {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "EnvironmentVariablesOverride", i), err.(aws.ErrInvalidParams))
 			}
+		}
+	}
+	if s.SourceAuthOverride != nil {
+		if err := s.SourceAuthOverride.Validate(); err != nil {
+			invalidParams.AddNested("SourceAuthOverride", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -3296,7 +3379,8 @@ type EnvironmentType string
 
 // Enum values for EnvironmentType
 const (
-	EnvironmentTypeLinuxContainer EnvironmentType = "LINUX_CONTAINER"
+	EnvironmentTypeWindowsContainer EnvironmentType = "WINDOWS_CONTAINER"
+	EnvironmentTypeLinuxContainer   EnvironmentType = "LINUX_CONTAINER"
 )
 
 func (enum EnvironmentType) MarshalValue() (string, error) {
@@ -3353,9 +3437,10 @@ type PlatformType string
 
 // Enum values for PlatformType
 const (
-	PlatformTypeDebian      PlatformType = "DEBIAN"
-	PlatformTypeAmazonLinux PlatformType = "AMAZON_LINUX"
-	PlatformTypeUbuntu      PlatformType = "UBUNTU"
+	PlatformTypeDebian        PlatformType = "DEBIAN"
+	PlatformTypeAmazonLinux   PlatformType = "AMAZON_LINUX"
+	PlatformTypeUbuntu        PlatformType = "UBUNTU"
+	PlatformTypeWindowsServer PlatformType = "WINDOWS_SERVER"
 )
 
 func (enum PlatformType) MarshalValue() (string, error) {

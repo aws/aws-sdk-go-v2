@@ -74,6 +74,10 @@ type CodePipelineAPI interface {
 
 	DeletePipelineRequest(*codepipeline.DeletePipelineInput) codepipeline.DeletePipelineRequest
 
+	DeleteWebhookRequest(*codepipeline.DeleteWebhookInput) codepipeline.DeleteWebhookRequest
+
+	DeregisterWebhookWithThirdPartyRequest(*codepipeline.DeregisterWebhookWithThirdPartyInput) codepipeline.DeregisterWebhookWithThirdPartyRequest
+
 	DisableStageTransitionRequest(*codepipeline.DisableStageTransitionInput) codepipeline.DisableStageTransitionRequest
 
 	EnableStageTransitionRequest(*codepipeline.EnableStageTransitionInput) codepipeline.EnableStageTransitionRequest
@@ -94,6 +98,8 @@ type CodePipelineAPI interface {
 
 	ListPipelinesRequest(*codepipeline.ListPipelinesInput) codepipeline.ListPipelinesRequest
 
+	ListWebhooksRequest(*codepipeline.ListWebhooksInput) codepipeline.ListWebhooksRequest
+
 	PollForJobsRequest(*codepipeline.PollForJobsInput) codepipeline.PollForJobsRequest
 
 	PollForThirdPartyJobsRequest(*codepipeline.PollForThirdPartyJobsInput) codepipeline.PollForThirdPartyJobsRequest
@@ -109,6 +115,10 @@ type CodePipelineAPI interface {
 	PutThirdPartyJobFailureResultRequest(*codepipeline.PutThirdPartyJobFailureResultInput) codepipeline.PutThirdPartyJobFailureResultRequest
 
 	PutThirdPartyJobSuccessResultRequest(*codepipeline.PutThirdPartyJobSuccessResultInput) codepipeline.PutThirdPartyJobSuccessResultRequest
+
+	PutWebhookRequest(*codepipeline.PutWebhookInput) codepipeline.PutWebhookRequest
+
+	RegisterWebhookWithThirdPartyRequest(*codepipeline.RegisterWebhookWithThirdPartyInput) codepipeline.RegisterWebhookWithThirdPartyRequest
 
 	RetryStageExecutionRequest(*codepipeline.RetryStageExecutionInput) codepipeline.RetryStageExecutionRequest
 
