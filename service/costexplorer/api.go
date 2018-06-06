@@ -617,9 +617,9 @@ func (s EC2Specification) GoString() string {
 //    DataTransfer). The Expression for that looks like this:
 //
 // { "And": [ {"Or": [ {"Dimensions": { "Key": "INSTANCE_TYPE", "Values": [
-//    "m4.x.large", "c4.large" ] }}, {"Tag": { "Key": "TagName", "Values": ["Value1"]
-//    } } ]}, {"Not": {"dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"]
-//    }}} ] }
+//    "m4.x.large", "c4.large" ] }}, {"Tags": { "Key": "TagName", "Values":
+//    ["Value1"] } } ]}, {"Not": {"Dimensions": { "Key": "USAGE_TYPE", "Values":
+//    ["DataTransfer"] }}} ] }
 //
 // Because each Expression can have only one operator, the service returns an
 //    error if more than one is specified. The following example shows an Expression
@@ -1614,11 +1614,30 @@ func (s RDSInstanceDetails) GoString() string {
 type ReservationAggregates struct {
 	_ struct{} `type:"structure"`
 
+	// The monthly cost of your RI, amortized over the RI period.
+	AmortizedRecurringFee *string `type:"string"`
+
+	// The upfront cost of your RI, amortized over the RI period.
+	AmortizedUpfrontFee *string `type:"string"`
+
+	// How much you saved due to purchasing and utilizing RIs. This is calculated
+	// by subtracting the TotalAmortizedFee from the OnDemandCostOfRIHoursUsed.
+	NetRISavings *string `type:"string"`
+
+	// How much your RIs would cost if charged On-Demand rates.
+	OnDemandCostOfRIHoursUsed *string `type:"string"`
+
 	// How many RI hours that you purchased.
 	PurchasedHours *string `type:"string"`
 
 	// The total number of RI hours that you used.
 	TotalActualHours *string `type:"string"`
+
+	// The total cost of your RI, amortized over the RI period.
+	TotalAmortizedFee *string `type:"string"`
+
+	// How much you could save if you use your entire reservation.
+	TotalPotentialRISavings *string `type:"string"`
 
 	// The number of RI hours that you didn't use.
 	UnusedHours *string `type:"string"`

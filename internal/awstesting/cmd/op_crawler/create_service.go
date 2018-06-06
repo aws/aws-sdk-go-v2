@@ -54,6 +54,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ecr"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
 	"github.com/aws/aws-sdk-go-v2/service/efs"
+	"github.com/aws/aws-sdk-go-v2/service/eks"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice"
@@ -96,14 +97,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore"
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub"
 	"github.com/aws/aws-sdk-go-v2/service/mobile"
 	"github.com/aws/aws-sdk-go-v2/service/mobileanalytics"
 	"github.com/aws/aws-sdk-go-v2/service/mq"
 	"github.com/aws/aws-sdk-go-v2/service/mturk"
+	"github.com/aws/aws-sdk-go-v2/service/neptune"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm"
 	"github.com/aws/aws-sdk-go-v2/service/organizations"
+	"github.com/aws/aws-sdk-go-v2/service/pi"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint"
 	"github.com/aws/aws-sdk-go-v2/service/polly"
 	"github.com/aws/aws-sdk-go-v2/service/pricing"
@@ -206,6 +210,7 @@ func createServices(cfg aws.Config) []service {
 		{name: "ecr", value: reflect.ValueOf(ecr.New(cfg))},
 		{name: "ecs", value: reflect.ValueOf(ecs.New(cfg))},
 		{name: "efs", value: reflect.ValueOf(efs.New(cfg))},
+		{name: "eks", value: reflect.ValueOf(eks.New(cfg))},
 		{name: "elasticache", value: reflect.ValueOf(elasticache.New(cfg))},
 		{name: "elasticbeanstalk", value: reflect.ValueOf(elasticbeanstalk.New(cfg))},
 		{name: "elasticsearchservice", value: reflect.ValueOf(elasticsearchservice.New(cfg))},
@@ -248,14 +253,17 @@ func createServices(cfg aws.Config) []service {
 		{name: "mediapackage", value: reflect.ValueOf(mediapackage.New(cfg))},
 		{name: "mediastore", value: reflect.ValueOf(mediastore.New(cfg))},
 		{name: "mediastoredata", value: reflect.ValueOf(mediastoredata.New(cfg))},
+		{name: "mediatailor", value: reflect.ValueOf(mediatailor.New(cfg))},
 		{name: "migrationhub", value: reflect.ValueOf(migrationhub.New(cfg))},
 		{name: "mobile", value: reflect.ValueOf(mobile.New(cfg))},
 		{name: "mobileanalytics", value: reflect.ValueOf(mobileanalytics.New(cfg))},
 		{name: "mq", value: reflect.ValueOf(mq.New(cfg))},
 		{name: "mturk", value: reflect.ValueOf(mturk.New(cfg))},
+		{name: "neptune", value: reflect.ValueOf(neptune.New(cfg))},
 		{name: "opsworks", value: reflect.ValueOf(opsworks.New(cfg))},
 		{name: "opsworkscm", value: reflect.ValueOf(opsworkscm.New(cfg))},
 		{name: "organizations", value: reflect.ValueOf(organizations.New(cfg))},
+		{name: "pi", value: reflect.ValueOf(pi.New(cfg))},
 		{name: "pinpoint", value: reflect.ValueOf(pinpoint.New(cfg))},
 		{name: "polly", value: reflect.ValueOf(polly.New(cfg))},
 		{name: "pricing", value: reflect.ValueOf(pricing.New(cfg))},

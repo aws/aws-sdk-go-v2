@@ -24,7 +24,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Shield.
 //    func myFunc(svc shieldiface.ShieldAPI) bool {
-//        // Make svc.CreateProtection request
+//        // Make svc.AssociateDRTLogBucket request
 //    }
 //
 //    func main() {
@@ -44,7 +44,7 @@ import (
 //    type mockShieldClient struct {
 //        shieldiface.ShieldAPI
 //    }
-//    func (m *mockShieldClient) CreateProtection(input *shield.CreateProtectionInput) (*shield.CreateProtectionOutput, error) {
+//    func (m *mockShieldClient) AssociateDRTLogBucket(input *shield.AssociateDRTLogBucketInput) (*shield.AssociateDRTLogBucketOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -62,6 +62,10 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ShieldAPI interface {
+	AssociateDRTLogBucketRequest(*shield.AssociateDRTLogBucketInput) shield.AssociateDRTLogBucketRequest
+
+	AssociateDRTRoleRequest(*shield.AssociateDRTRoleInput) shield.AssociateDRTRoleRequest
+
 	CreateProtectionRequest(*shield.CreateProtectionInput) shield.CreateProtectionRequest
 
 	CreateSubscriptionRequest(*shield.CreateSubscriptionInput) shield.CreateSubscriptionRequest
@@ -72,15 +76,27 @@ type ShieldAPI interface {
 
 	DescribeAttackRequest(*shield.DescribeAttackInput) shield.DescribeAttackRequest
 
+	DescribeDRTAccessRequest(*shield.DescribeDRTAccessInput) shield.DescribeDRTAccessRequest
+
+	DescribeEmergencyContactSettingsRequest(*shield.DescribeEmergencyContactSettingsInput) shield.DescribeEmergencyContactSettingsRequest
+
 	DescribeProtectionRequest(*shield.DescribeProtectionInput) shield.DescribeProtectionRequest
 
 	DescribeSubscriptionRequest(*shield.DescribeSubscriptionInput) shield.DescribeSubscriptionRequest
+
+	DisassociateDRTLogBucketRequest(*shield.DisassociateDRTLogBucketInput) shield.DisassociateDRTLogBucketRequest
+
+	DisassociateDRTRoleRequest(*shield.DisassociateDRTRoleInput) shield.DisassociateDRTRoleRequest
 
 	GetSubscriptionStateRequest(*shield.GetSubscriptionStateInput) shield.GetSubscriptionStateRequest
 
 	ListAttacksRequest(*shield.ListAttacksInput) shield.ListAttacksRequest
 
 	ListProtectionsRequest(*shield.ListProtectionsInput) shield.ListProtectionsRequest
+
+	UpdateEmergencyContactSettingsRequest(*shield.UpdateEmergencyContactSettingsInput) shield.UpdateEmergencyContactSettingsRequest
+
+	UpdateSubscriptionRequest(*shield.UpdateSubscriptionInput) shield.UpdateSubscriptionRequest
 }
 
 var _ ShieldAPI = (*shield.Shield)(nil)

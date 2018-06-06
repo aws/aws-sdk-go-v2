@@ -746,7 +746,7 @@ func (r CreateTagsRequest) Send() (*CreateTagsOutput, error) {
 //
 // Adds one or more tags to a specified resource.
 //
-// A resource can have up to 10 tags. If you try to create more than 10 tags
+// A resource can have up to 50 tags. If you try to create more than 50 tags
 // for a resource, you will receive an error and the attempt will fail.
 //
 // If you specify a key that already exists for the resource, the value for
@@ -9839,7 +9839,7 @@ type ModifyClusterInput struct {
 	PubliclyAccessible *bool `type:"boolean"`
 
 	// A list of virtual private cloud (VPC) security groups to be associated with
-	// the cluster.
+	// the cluster. This change is asynchronously applied as soon as possible.
 	VpcSecurityGroupIds []string `locationNameList:"VpcSecurityGroupId" type:"list"`
 }
 

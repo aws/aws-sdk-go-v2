@@ -4403,7 +4403,7 @@ func (s StopImageBuilderOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
-// Describes a storage connector.
+// Describes a connector to enable persistent storage for users.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/StorageConnector
 type StorageConnector struct {
 	_ struct{} `type:"structure"`
@@ -4412,6 +4412,9 @@ type StorageConnector struct {
 	//
 	// ConnectorType is a required field
 	ConnectorType StorageConnectorType `type:"string" required:"true" enum:"true"`
+
+	// The names of the domains for the G Suite account.
+	Domains []string `type:"list"`
 
 	// The ARN of the storage connector.
 	ResourceIdentifier *string `min:"1" type:"string"`
@@ -5246,11 +5249,13 @@ type StackAttribute string
 
 // Enum values for StackAttribute
 const (
-	StackAttributeStorageConnectors StackAttribute = "STORAGE_CONNECTORS"
-	StackAttributeRedirectUrl       StackAttribute = "REDIRECT_URL"
-	StackAttributeFeedbackUrl       StackAttribute = "FEEDBACK_URL"
-	StackAttributeThemeName         StackAttribute = "THEME_NAME"
-	StackAttributeUserSettings      StackAttribute = "USER_SETTINGS"
+	StackAttributeStorageConnectors           StackAttribute = "STORAGE_CONNECTORS"
+	StackAttributeStorageConnectorHomefolders StackAttribute = "STORAGE_CONNECTOR_HOMEFOLDERS"
+	StackAttributeStorageConnectorGoogleDrive StackAttribute = "STORAGE_CONNECTOR_GOOGLE_DRIVE"
+	StackAttributeRedirectUrl                 StackAttribute = "REDIRECT_URL"
+	StackAttributeFeedbackUrl                 StackAttribute = "FEEDBACK_URL"
+	StackAttributeThemeName                   StackAttribute = "THEME_NAME"
+	StackAttributeUserSettings                StackAttribute = "USER_SETTINGS"
 )
 
 func (enum StackAttribute) MarshalValue() (string, error) {
@@ -5285,6 +5290,7 @@ type StorageConnectorType string
 // Enum values for StorageConnectorType
 const (
 	StorageConnectorTypeHomefolders StorageConnectorType = "HOMEFOLDERS"
+	StorageConnectorTypeGoogleDrive StorageConnectorType = "GOOGLE_DRIVE"
 )
 
 func (enum StorageConnectorType) MarshalValue() (string, error) {
