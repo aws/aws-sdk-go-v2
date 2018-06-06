@@ -78,6 +78,8 @@ type IoTAPI interface {
 
 	CancelJobRequest(*iot.CancelJobInput) iot.CancelJobRequest
 
+	CancelJobExecutionRequest(*iot.CancelJobExecutionInput) iot.CancelJobExecutionRequest
+
 	ClearDefaultAuthorizerRequest(*iot.ClearDefaultAuthorizerInput) iot.ClearDefaultAuthorizerRequest
 
 	CreateAuthorizerRequest(*iot.CreateAuthorizerInput) iot.CreateAuthorizerRequest

@@ -285,9 +285,9 @@ func (r CreateRuleRequest) Send() (*CreateRuleOutput, error) {
 // with an Application Load Balancer.
 //
 // Rules are evaluated in priority order, from the lowest value to the highest
-// value. When the condition for a rule is met, the specified action is taken.
-// If no conditions are met, the action for the default rule is taken. For more
-// information, see Listener Rules (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules)
+// value. When the conditions for a rule are met, its actions are performed.
+// If the conditions for no rules are met, the actions for the default rule
+// are performed. For more information, see Listener Rules (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules)
 // in the Application Load Balancers Guide.
 //
 // To view your current rules, use DescribeRules. To update a rule, use ModifyRule.
@@ -1530,7 +1530,7 @@ func (r ModifyRuleRequest) Send() (*ModifyRuleOutput, error) {
 //
 // Any existing properties that you do not modify retain their current values.
 //
-// To modify the default action, use ModifyListener.
+// To modify the actions for the default rule, use ModifyListener.
 //
 //    // Example sending a request using the ModifyRuleRequest method.
 //    req := client.ModifyRuleRequest(params)
@@ -2053,12 +2053,27 @@ func (c *ELBV2) SetSubnetsRequest(input *SetSubnetsInput) SetSubnetsRequest {
 type Action struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the target group.
-	//
-	// TargetGroupArn is a required field
-	TargetGroupArn *string `type:"string" required:"true"`
+	// [HTTPS listener] Information for using Amazon Cognito to authenticate users.
+	// Specify only when Type is authenticate-cognito.
+	AuthenticateCognitoConfig *AuthenticateCognitoActionConfig `type:"structure"`
 
-	// The type of action.
+	// [HTTPS listener] Information about an identity provider that is compliant
+	// with OpenID Connect (OIDC). Specify only when Type is authenticate-oidc.
+	AuthenticateOidcConfig *AuthenticateOidcActionConfig `type:"structure"`
+
+	// The order for the action. This value is required for rules with multiple
+	// actions. The action with the lowest value for order is performed first. The
+	// forward action must be performed last.
+	Order *int64 `min:"1" type:"integer"`
+
+	// The Amazon Resource Name (ARN) of the target group. Specify only when Type
+	// is forward.
+	//
+	// For a default rule, the protocol of the target group must be HTTP or HTTPS
+	// for an Application Load Balancer or TCP for a Network Load Balancer.
+	TargetGroupArn *string `type:"string"`
+
+	// The type of action. Each rule must include one forward action.
 	//
 	// Type is a required field
 	Type ActionTypeEnum `type:"string" required:"true" enum:"true"`
@@ -2077,12 +2092,21 @@ func (s Action) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Action) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Action"}
-
-	if s.TargetGroupArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("TargetGroupArn"))
+	if s.Order != nil && *s.Order < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Order", 1))
 	}
 	if len(s.Type) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+	if s.AuthenticateCognitoConfig != nil {
+		if err := s.AuthenticateCognitoConfig.Validate(); err != nil {
+			invalidParams.AddNested("AuthenticateCognitoConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.AuthenticateOidcConfig != nil {
+		if err := s.AuthenticateOidcConfig.Validate(); err != nil {
+			invalidParams.AddNested("AuthenticateOidcConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -2234,6 +2258,202 @@ func (s AddTagsOutput) SDKResponseMetadata() aws.Response {
 	return s.responseMetadata
 }
 
+// Request parameters to use when integrating with Amazon Cognito to authenticate
+// users.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AuthenticateCognitoActionConfig
+type AuthenticateCognitoActionConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The query parameters (up to 10) to include in the redirect request to the
+	// authorization endpoint.
+	AuthenticationRequestExtraParams map[string]string `type:"map"`
+
+	// The behavior if the user is not authenticated. The following are possible
+	// values:
+	//
+	//    * deny - Return an HTTP 401 Unauthorized error.
+	//
+	//    * allow - Allow the request to be forwarded to the target.
+	//
+	// authenticate
+	OnUnauthenticatedRequest AuthenticateCognitoActionConditionalBehaviorEnum `type:"string" enum:"true"`
+
+	// The set of user claims to be requested from the IdP. The default is openid.
+	//
+	// To verify which scope values your IdP supports and how to separate multiple
+	// values, see the documentation for your IdP.
+	Scope *string `type:"string"`
+
+	// The name of the cookie used to maintain session information. The default
+	// is AWSELBAuthSessionCookie.
+	SessionCookieName *string `type:"string"`
+
+	// The maximum duration of the authentication session, in seconds. The default
+	// is 604800 seconds (7 days).
+	SessionTimeout *int64 `type:"long"`
+
+	// The Amazon Resource Name (ARN) of the Amazon Cognito user pool.
+	//
+	// UserPoolArn is a required field
+	UserPoolArn *string `type:"string" required:"true"`
+
+	// The ID of the Amazon Cognito user pool client.
+	//
+	// UserPoolClientId is a required field
+	UserPoolClientId *string `type:"string" required:"true"`
+
+	// The domain prefix or fully-qualified domain name of the Amazon Cognito user
+	// pool.
+	//
+	// UserPoolDomain is a required field
+	UserPoolDomain *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AuthenticateCognitoActionConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AuthenticateCognitoActionConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AuthenticateCognitoActionConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AuthenticateCognitoActionConfig"}
+
+	if s.UserPoolArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolArn"))
+	}
+
+	if s.UserPoolClientId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolClientId"))
+	}
+
+	if s.UserPoolDomain == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserPoolDomain"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Request parameters when using an identity provider (IdP) that is compliant
+// with OpenID Connect (OIDC) to authenticate users.
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AuthenticateOidcActionConfig
+type AuthenticateOidcActionConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The query parameters (up to 10) to include in the redirect request to the
+	// authorization endpoint.
+	AuthenticationRequestExtraParams map[string]string `type:"map"`
+
+	// The authorization endpoint of the IdP. This must be a full URL, including
+	// the HTTPS protocol, the domain, and the path.
+	//
+	// AuthorizationEndpoint is a required field
+	AuthorizationEndpoint *string `type:"string" required:"true"`
+
+	// The OAuth 2.0 client identifier.
+	//
+	// ClientId is a required field
+	ClientId *string `type:"string" required:"true"`
+
+	// The OAuth 2.0 client secret.
+	//
+	// ClientSecret is a required field
+	ClientSecret *string `type:"string" required:"true"`
+
+	// The OIDC issuer identifier of the IdP. This must be a full URL, including
+	// the HTTPS protocol, the domain, and the path.
+	//
+	// Issuer is a required field
+	Issuer *string `type:"string" required:"true"`
+
+	// The behavior if the user is not authenticated. The following are possible
+	// values:
+	//
+	//    * deny - Return an HTTP 401 Unauthorized error.
+	//
+	//    * allow - Allow the request to be forwarded to the target.
+	//
+	// authenticate
+	OnUnauthenticatedRequest AuthenticateOidcActionConditionalBehaviorEnum `type:"string" enum:"true"`
+
+	// The set of user claims to be requested from the IdP. The default is openid.
+	//
+	// To verify which scope values your IdP supports and how to separate multiple
+	// values, see the documentation for your IdP.
+	Scope *string `type:"string"`
+
+	// The name of the cookie used to maintain session information. The default
+	// is AWSELBAuthSessionCookie.
+	SessionCookieName *string `type:"string"`
+
+	// The maximum duration of the authentication session, in seconds. The default
+	// is 604800 seconds (7 days).
+	SessionTimeout *int64 `type:"long"`
+
+	// The token endpoint of the IdP. This must be a full URL, including the HTTPS
+	// protocol, the domain, and the path.
+	//
+	// TokenEndpoint is a required field
+	TokenEndpoint *string `type:"string" required:"true"`
+
+	// The user info endpoint of the IdP. This must be a full URL, including the
+	// HTTPS protocol, the domain, and the path.
+	//
+	// UserInfoEndpoint is a required field
+	UserInfoEndpoint *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s AuthenticateOidcActionConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s AuthenticateOidcActionConfig) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AuthenticateOidcActionConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AuthenticateOidcActionConfig"}
+
+	if s.AuthorizationEndpoint == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AuthorizationEndpoint"))
+	}
+
+	if s.ClientId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClientId"))
+	}
+
+	if s.ClientSecret == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ClientSecret"))
+	}
+
+	if s.Issuer == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Issuer"))
+	}
+
+	if s.TokenEndpoint == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TokenEndpoint"))
+	}
+
+	if s.UserInfoEndpoint == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UserInfoEndpoint"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Information about an Availability Zone.
 // Please also see https://docs.aws.amazon.com/goto/WebAPI/elasticloadbalancingv2-2015-12-01/AvailabilityZone
 type AvailabilityZone struct {
@@ -2307,13 +2527,22 @@ func (s Cipher) GoString() string {
 type CreateListenerInput struct {
 	_ struct{} `type:"structure"`
 
-	// [HTTPS listeners] The SSL server certificate. You must provide exactly one
-	// certificate.
+	// [HTTPS listeners] The default SSL server certificate. You must provide exactly
+	// one certificate. To create a certificate list, use AddListenerCertificates.
 	Certificates []Certificate `type:"list"`
 
-	// The default action for the listener. For Application Load Balancers, the
-	// protocol of the specified target group must be HTTP or HTTPS. For Network
-	// Load Balancers, the protocol of the specified target group must be TCP.
+	// The actions for the default rule. The rule must include one forward action.
+	//
+	// If the action type is forward, you can specify a single target group. The
+	// protocol of the target group must be HTTP or HTTPS for an Application Load
+	// Balancer or TCP for a Network Load Balancer.
+	//
+	// If the action type is authenticate-oidc, you can use an identity provider
+	// that is OpenID Connect (OIDC) compliant to authenticate users as they access
+	// your application.
+	//
+	// If the action type is authenticate-cognito, you can use Amazon Cognito to
+	// authenticate users as they access your application.
 	//
 	// DefaultActions is a required field
 	DefaultActions []Action `type:"list" required:"true"`
@@ -2536,7 +2765,16 @@ func (s CreateLoadBalancerOutput) SDKResponseMetadata() aws.Response {
 type CreateRuleInput struct {
 	_ struct{} `type:"structure"`
 
-	// An action. Each action has the type forward and specifies a target group.
+	// The actions. Each rule must include one forward action.
+	//
+	// If the action type is forward, you can specify a single target group.
+	//
+	// If the action type is authenticate-oidc, you can use an identity provider
+	// that is OpenID Connect (OIDC) compliant to authenticate users as they access
+	// your application.
+	//
+	// If the action type is authenticate-cognito, you can use Amazon Cognito to
+	// authenticate users as they access your application.
 	//
 	// Actions is a required field
 	Actions []Action `type:"list" required:"true"`
@@ -2579,8 +2817,7 @@ type CreateRuleInput struct {
 	// ListenerArn is a required field
 	ListenerArn *string `type:"string" required:"true"`
 
-	// The priority for the rule. A listener can't have multiple rules with the
-	// same priority.
+	// The rule priority. A listener can't have multiple rules with the same priority.
 	//
 	// Priority is a required field
 	Priority *int64 `min:"1" type:"integer" required:"true"`
@@ -4142,12 +4379,22 @@ func (s *Matcher) Validate() error {
 type ModifyListenerInput struct {
 	_ struct{} `type:"structure"`
 
-	// The default SSL server certificate.
+	// [HTTPS listeners] The default SSL server certificate. You must provide exactly
+	// one certificate. To create a certificate list, use AddListenerCertificates.
 	Certificates []Certificate `type:"list"`
 
-	// The default action. For Application Load Balancers, the protocol of the specified
-	// target group must be HTTP or HTTPS. For Network Load Balancers, the protocol
-	// of the specified target group must be TCP.
+	// The actions for the default rule. The rule must include one forward action.
+	//
+	// If the action type is forward, you can specify a single target group. The
+	// protocol of the target group must be HTTP or HTTPS for an Application Load
+	// Balancer or TCP for a Network Load Balancer.
+	//
+	// If the action type is authenticate-oidc, you can use an identity provider
+	// that is OpenID Connect (OIDC) compliant to authenticate users as they access
+	// your application.
+	//
+	// If the action type is authenticate-cognito, you can use Amazon Cognito to
+	// authenticate users as they access your application.
 	DefaultActions []Action `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the listener.
@@ -4163,8 +4410,8 @@ type ModifyListenerInput struct {
 	// TCP.
 	Protocol ProtocolEnum `type:"string" enum:"true"`
 
-	// The security policy that defines which protocols and ciphers are supported.
-	// For more information, see Security Policies (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
+	// [HTTPS listeners] The security policy that defines which protocols and ciphers
+	// are supported. For more information, see Security Policies (http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
 	// in the Application Load Balancers Guide.
 	SslPolicy *string `type:"string"`
 }
@@ -4209,7 +4456,7 @@ type ModifyListenerOutput struct {
 
 	responseMetadata aws.Response
 
-	// Information about the modified listeners.
+	// Information about the modified listener.
 	Listeners []Listener `type:"list"`
 }
 
@@ -4300,10 +4547,47 @@ func (s ModifyLoadBalancerAttributesOutput) SDKResponseMetadata() aws.Response {
 type ModifyRuleInput struct {
 	_ struct{} `type:"structure"`
 
-	// The actions. The target group must use the HTTP or HTTPS protocol.
+	// The actions.
+	//
+	// If the action type is forward, you can specify a single target group.
+	//
+	// If the action type is authenticate-oidc, you can use an identity provider
+	// that is OpenID Connect (OIDC) compliant to authenticate users as they access
+	// your application.
+	//
+	// If the action type is authenticate-cognito, you can use Amazon Cognito to
+	// authenticate users as they access your application.
 	Actions []Action `type:"list"`
 
-	// The conditions.
+	// The conditions. Each condition specifies a field name and a single value.
+	//
+	// If the field name is host-header, you can specify a single host name (for
+	// example, my.example.com). A host name is case insensitive, can be up to 128
+	// characters in length, and can contain any of the following characters. Note
+	// that you can include up to three wildcard characters.
+	//
+	//    * A-Z, a-z, 0-9
+	//
+	//    * - .
+	//
+	//    * * (matches 0 or more characters)
+	//
+	//    * ? (matches exactly 1 character)
+	//
+	// If the field name is path-pattern, you can specify a single path pattern.
+	// A path pattern is case sensitive, can be up to 128 characters in length,
+	// and can contain any of the following characters. Note that you can include
+	// up to three wildcard characters.
+	//
+	//    * A-Z, a-z, 0-9
+	//
+	//    * _ - . $ / ~ " ' @ : +
+	//
+	//    * & (using &)
+	//
+	//    * * (matches 0 or more characters)
+	//
+	//    * ? (matches exactly 1 character)
 	Conditions []RuleCondition `type:"list"`
 
 	// The Amazon Resource Name (ARN) of the rule.
@@ -4349,7 +4633,7 @@ type ModifyRuleOutput struct {
 
 	responseMetadata aws.Response
 
-	// Information about the rule.
+	// Information about the modified rule.
 	Rules []Rule `type:"list"`
 }
 
@@ -4530,7 +4814,7 @@ type ModifyTargetGroupOutput struct {
 
 	responseMetadata aws.Response
 
-	// Information about the target group.
+	// Information about the modified target group.
 	TargetGroups []TargetGroup `type:"list"`
 }
 
@@ -5089,9 +5373,7 @@ type SetSubnetsInput struct {
 	// The IDs of the public subnets. You must specify subnets from at least two
 	// Availability Zones. You can specify only one subnet per Availability Zone.
 	// You must specify either subnets or subnet mappings.
-	//
-	// Subnets is a required field
-	Subnets []string `type:"list" required:"true"`
+	Subnets []string `type:"list"`
 }
 
 // String returns the string representation
@@ -5110,10 +5392,6 @@ func (s *SetSubnetsInput) Validate() error {
 
 	if s.LoadBalancerArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("LoadBalancerArn"))
-	}
-
-	if s.Subnets == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Subnets"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -5533,7 +5811,9 @@ type ActionTypeEnum string
 
 // Enum values for ActionTypeEnum
 const (
-	ActionTypeEnumForward ActionTypeEnum = "forward"
+	ActionTypeEnumForward             ActionTypeEnum = "forward"
+	ActionTypeEnumAuthenticateOidc    ActionTypeEnum = "authenticate-oidc"
+	ActionTypeEnumAuthenticateCognito ActionTypeEnum = "authenticate-cognito"
 )
 
 func (enum ActionTypeEnum) MarshalValue() (string, error) {
@@ -5541,6 +5821,42 @@ func (enum ActionTypeEnum) MarshalValue() (string, error) {
 }
 
 func (enum ActionTypeEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AuthenticateCognitoActionConditionalBehaviorEnum string
+
+// Enum values for AuthenticateCognitoActionConditionalBehaviorEnum
+const (
+	AuthenticateCognitoActionConditionalBehaviorEnumDeny         AuthenticateCognitoActionConditionalBehaviorEnum = "deny"
+	AuthenticateCognitoActionConditionalBehaviorEnumAllow        AuthenticateCognitoActionConditionalBehaviorEnum = "allow"
+	AuthenticateCognitoActionConditionalBehaviorEnumAuthenticate AuthenticateCognitoActionConditionalBehaviorEnum = "authenticate"
+)
+
+func (enum AuthenticateCognitoActionConditionalBehaviorEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthenticateCognitoActionConditionalBehaviorEnum) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AuthenticateOidcActionConditionalBehaviorEnum string
+
+// Enum values for AuthenticateOidcActionConditionalBehaviorEnum
+const (
+	AuthenticateOidcActionConditionalBehaviorEnumDeny         AuthenticateOidcActionConditionalBehaviorEnum = "deny"
+	AuthenticateOidcActionConditionalBehaviorEnumAllow        AuthenticateOidcActionConditionalBehaviorEnum = "allow"
+	AuthenticateOidcActionConditionalBehaviorEnumAuthenticate AuthenticateOidcActionConditionalBehaviorEnum = "authenticate"
+)
+
+func (enum AuthenticateOidcActionConditionalBehaviorEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AuthenticateOidcActionConditionalBehaviorEnum) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

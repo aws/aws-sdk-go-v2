@@ -1341,6 +1341,7 @@ const (
 	VoiceIdPenelope  VoiceId = "Penelope"
 	VoiceIdChantal   VoiceId = "Chantal"
 	VoiceIdCeline    VoiceId = "Celine"
+	VoiceIdLea       VoiceId = "Lea"
 	VoiceIdMathieu   VoiceId = "Mathieu"
 	VoiceIdDora      VoiceId = "Dora"
 	VoiceIdKarl      VoiceId = "Karl"

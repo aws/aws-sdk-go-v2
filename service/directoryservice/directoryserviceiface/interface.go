@@ -130,6 +130,8 @@ type DirectoryServiceAPI interface {
 
 	RemoveTagsFromResourceRequest(*directoryservice.RemoveTagsFromResourceInput) directoryservice.RemoveTagsFromResourceRequest
 
+	ResetUserPasswordRequest(*directoryservice.ResetUserPasswordInput) directoryservice.ResetUserPasswordRequest
+
 	RestoreFromSnapshotRequest(*directoryservice.RestoreFromSnapshotInput) directoryservice.RestoreFromSnapshotRequest
 
 	StartSchemaExtensionRequest(*directoryservice.StartSchemaExtensionInput) directoryservice.StartSchemaExtensionRequest

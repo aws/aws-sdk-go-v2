@@ -431,6 +431,56 @@ func (c *IoT) CancelJobRequest(input *CancelJobInput) CancelJobRequest {
 	return CancelJobRequest{Request: req, Input: input, Copy: c.CancelJobRequest}
 }
 
+const opCancelJobExecution = "CancelJobExecution"
+
+// CancelJobExecutionRequest is a API request type for the CancelJobExecution API operation.
+type CancelJobExecutionRequest struct {
+	*aws.Request
+	Input *CancelJobExecutionInput
+	Copy  func(*CancelJobExecutionInput) CancelJobExecutionRequest
+}
+
+// Send marshals and sends the CancelJobExecution API request.
+func (r CancelJobExecutionRequest) Send() (*CancelJobExecutionOutput, error) {
+	err := r.Request.Send()
+	if err != nil {
+		return nil, err
+	}
+
+	return r.Request.Data.(*CancelJobExecutionOutput), nil
+}
+
+// CancelJobExecutionRequest returns a request value for making API operation for
+// AWS IoT.
+//
+// Cancels the execution of a job for a given thing.
+//
+//    // Example sending a request using the CancelJobExecutionRequest method.
+//    req := client.CancelJobExecutionRequest(params)
+//    resp, err := req.Send()
+//    if err == nil {
+//        fmt.Println(resp)
+//    }
+func (c *IoT) CancelJobExecutionRequest(input *CancelJobExecutionInput) CancelJobExecutionRequest {
+	op := &aws.Operation{
+		Name:       opCancelJobExecution,
+		HTTPMethod: "PUT",
+		HTTPPath:   "/things/{thingName}/jobs/{jobId}/cancel",
+	}
+
+	if input == nil {
+		input = &CancelJobExecutionInput{}
+	}
+
+	output := &CancelJobExecutionOutput{}
+	req := c.newRequest(op, input, output)
+	req.Handlers.Unmarshal.Remove(restjson.UnmarshalHandler)
+	req.Handlers.Unmarshal.PushBackNamed(protocol.UnmarshalDiscardBodyHandler)
+	output.responseMetadata = aws.Response{Request: req}
+
+	return CancelJobExecutionRequest{Request: req, Input: input, Copy: c.CancelJobExecutionRequest}
+}
+
 const opClearDefaultAuthorizer = "ClearDefaultAuthorizer"
 
 // ClearDefaultAuthorizerRequest is a API request type for the ClearDefaultAuthorizer API operation.
@@ -3026,7 +3076,8 @@ func (r GetEffectivePoliciesRequest) Send() (*GetEffectivePoliciesOutput, error)
 // GetEffectivePoliciesRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Gets effective policies.
+// Gets a list of the policies that have an effect on the authorization behavior
+// of the specified device when it connects to the AWS IoT device gateway.
 //
 //    // Example sending a request using the GetEffectivePoliciesRequest method.
 //    req := client.GetEffectivePoliciesRequest(params)
@@ -5625,7 +5676,9 @@ func (r TestAuthorizationRequest) Send() (*TestAuthorizationOutput, error) {
 // TestAuthorizationRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Test custom authorization.
+// Tests if a specified principal is authorized to perform an AWS IoT action
+// on a specified resource. Use this to test and debug the authorization behavior
+// of devices that connect to the AWS IoT device gateway.
 //
 //    // Example sending a request using the TestAuthorizationRequest method.
 //    req := client.TestAuthorizationRequest(params)
@@ -5673,7 +5726,9 @@ func (r TestInvokeAuthorizerRequest) Send() (*TestInvokeAuthorizerOutput, error)
 // TestInvokeAuthorizerRequest returns a request value for making API operation for
 // AWS IoT.
 //
-// Invoke the specified custom authorizer for testing purposes.
+// Tests a custom authorization behavior by invoking a specified custom authorizer.
+// Use this to test and debug the custom authorization behavior of devices that
+// connect to the AWS IoT device gateway.
 //
 //    // Example sending a request using the TestInvokeAuthorizerRequest method.
 //    req := client.TestInvokeAuthorizerRequest(params)
@@ -7647,11 +7702,162 @@ func (s CancelCertificateTransferOutput) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
+type CancelJobExecutionInput struct {
+	_ struct{} `type:"structure"`
+
+	// (Optional) The expected current version of the job execution. Each time you
+	// update the job execution, its version is incremented. If the version of the
+	// job execution stored in Jobs does not match, the update is rejected with
+	// a VersionMismatch error, and an ErrorResponse that contains the current job
+	// execution status data is returned. (This makes it unnecessary to perform
+	// a separate DescribeJobExecution request in order to obtain the job execution
+	// status data.)
+	ExpectedVersion *int64 `locationName:"expectedVersion" type:"long"`
+
+	// (Optional) If true the job execution will be canceled if it has status IN_PROGRESS
+	// or QUEUED, otherwise the job execution will be canceled only if it has status
+	// QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS, and
+	// you do not set force to true, then an InvalidStateTransitionException will
+	// be thrown. The default is false.
+	//
+	// Canceling a job execution which is "IN_PROGRESS", will cause the device to
+	// be unable to update the job execution status. Use caution and ensure that
+	// the device is able to recover to a valid state.
+	Force *bool `location:"querystring" locationName:"force" type:"boolean"`
+
+	// The ID of the job to be canceled.
+	//
+	// JobId is a required field
+	JobId *string `location:"uri" locationName:"jobId" min:"1" type:"string" required:"true"`
+
+	// A collection of name/value pairs that describe the status of the job execution.
+	// If not specified, the statusDetails are unchanged. You can specify at most
+	// 10 name/value pairs.
+	StatusDetails map[string]string `locationName:"statusDetails" type:"map"`
+
+	// The name of the thing whose execution of the job will be canceled.
+	//
+	// ThingName is a required field
+	ThingName *string `location:"uri" locationName:"thingName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s CancelJobExecutionInput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CancelJobExecutionInput) GoString() string {
+	return s.String()
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CancelJobExecutionInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CancelJobExecutionInput"}
+
+	if s.JobId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("JobId"))
+	}
+	if s.JobId != nil && len(*s.JobId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("JobId", 1))
+	}
+
+	if s.ThingName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
+	}
+	if s.ThingName != nil && len(*s.ThingName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ThingName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelJobExecutionInput) MarshalFields(e protocol.FieldEncoder) error {
+
+	if s.ExpectedVersion != nil {
+		v := *s.ExpectedVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "expectedVersion", protocol.Int64Value(v), metadata)
+	}
+	if len(s.StatusDetails) > 0 {
+		v := s.StatusDetails
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "statusDetails", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
+	if s.JobId != nil {
+		v := *s.JobId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThingName != nil {
+		v := *s.ThingName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Force != nil {
+		v := *s.Force
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "force", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+type CancelJobExecutionOutput struct {
+	_ struct{} `type:"structure"`
+
+	responseMetadata aws.Response
+}
+
+// String returns the string representation
+func (s CancelJobExecutionOutput) String() string {
+	return awsutil.Prettify(s)
+}
+
+// GoString returns the string representation
+func (s CancelJobExecutionOutput) GoString() string {
+	return s.String()
+}
+
+// SDKResponseMetdata return sthe response metadata for the API.
+func (s CancelJobExecutionOutput) SDKResponseMetadata() aws.Response {
+	return s.responseMetadata
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CancelJobExecutionOutput) MarshalFields(e protocol.FieldEncoder) error {
+	return nil
+}
+
 type CancelJobInput struct {
 	_ struct{} `type:"structure"`
 
 	// An optional comment string describing why the job was canceled.
 	Comment *string `locationName:"comment" type:"string"`
+
+	// (Optional) If true job executions with status "IN_PROGRESS" and "QUEUED"
+	// are canceled, otherwise only job executions with status "QUEUED" are canceled.
+	// The default is false.
+	//
+	// Canceling a job which is "IN_PROGRESS", will cause a device which is executing
+	// the job to be unable to update the job execution status. Use caution and
+	// ensure that each device executing a job which is canceled is able to recover
+	// to a valid state.
+	Force *bool `location:"querystring" locationName:"force" type:"boolean"`
 
 	// The unique identifier you assigned to this job when it was created.
 	//
@@ -7700,6 +7906,12 @@ func (s CancelJobInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "jobId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Force != nil {
+		v := *s.Force
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "force", protocol.BoolValue(v), metadata)
 	}
 	return nil
 }
@@ -15239,6 +15451,10 @@ type Job struct {
 	// The parameters specified for the job document.
 	DocumentParameters map[string]string `locationName:"documentParameters" type:"map"`
 
+	// Will be true if the job was canceled with the optional force parameter set
+	// to true.
+	ForceCanceled *bool `locationName:"forceCanceled" type:"boolean"`
+
 	// An ARN identifying the job with format "arn:aws:iot:region:account:job/jobId".
 	JobArn *string `locationName:"jobArn" type:"string"`
 
@@ -15320,6 +15536,12 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
+	if s.ForceCanceled != nil {
+		v := *s.ForceCanceled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "forceCanceled", protocol.BoolValue(v), metadata)
+	}
 	if s.JobArn != nil {
 		v := *s.JobArn
 
@@ -15393,6 +15615,10 @@ type JobExecution struct {
 	// which return or update job execution information.
 	ExecutionNumber *int64 `locationName:"executionNumber" type:"long"`
 
+	// Will be true if the job execution was canceled with the optional force parameter
+	// set to true.
+	ForceCanceled *bool `locationName:"forceCanceled" type:"boolean"`
+
 	// The unique identifier you assigned to the job when it was created.
 	JobId *string `locationName:"jobId" min:"1" type:"string"`
 
@@ -15415,6 +15641,10 @@ type JobExecution struct {
 
 	// The ARN of the thing on which the job execution is running.
 	ThingArn *string `locationName:"thingArn" type:"string"`
+
+	// The version of the job execution. Job execution versions are incremented
+	// each time they are updated by a device.
+	VersionNumber *int64 `locationName:"versionNumber" type:"long"`
 }
 
 // String returns the string representation
@@ -15434,6 +15664,12 @@ func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "executionNumber", protocol.Int64Value(v), metadata)
+	}
+	if s.ForceCanceled != nil {
+		v := *s.ForceCanceled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "forceCanceled", protocol.BoolValue(v), metadata)
 	}
 	if s.JobId != nil {
 		v := *s.JobId
@@ -15476,6 +15712,12 @@ func (s JobExecution) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "thingArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VersionNumber != nil {
+		v := *s.VersionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "versionNumber", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -15729,7 +15971,9 @@ type JobProcessDetails struct {
 	// The number of things which successfully completed the job.
 	NumberOfSucceededThings *int64 `locationName:"numberOfSucceededThings" type:"integer"`
 
-	// The devices on which the job is executing.
+	// The target devices to which the job execution is being rolled out. This value
+	// will be null after the job execution has finished rolling out to all the
+	// target devices.
 	ProcessingTargets []string `locationName:"processingTargets" type:"list"`
 }
 
@@ -21881,9 +22125,9 @@ func (s SetV2LoggingOptionsOutput) MarshalFields(e protocol.FieldEncoder) error 
 type SnsAction struct {
 	_ struct{} `type:"structure"`
 
-	// The message format of the message to publish. Optional. Accepted values are
-	// "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this
-	// setting to determine if the payload should be parsed and relevant platform-specific
+	// (Optional) The message format of the message to publish. Accepted values
+	// are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses
+	// this setting to determine if the payload should be parsed and relevant platform-specific
 	// bits of the payload should be extracted. To read more about SNS message formats,
 	// see http://docs.aws.amazon.com/sns/latest/dg/json-formats.html (http://docs.aws.amazon.com/sns/latest/dg/json-formats.html)
 	// refer to their official documentation.
