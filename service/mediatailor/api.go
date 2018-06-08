@@ -45,7 +45,7 @@ func (c *MediaTailor) DeletePlaybackConfigurationRequest(input *DeletePlaybackCo
 	op := &aws.Operation{
 		Name:       opDeletePlaybackConfiguration,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/prod/playbackConfiguration/{Name}",
+		HTTPPath:   "/playbackConfiguration/{Name}",
 	}
 
 	if input == nil {
@@ -97,7 +97,7 @@ func (c *MediaTailor) GetPlaybackConfigurationRequest(input *GetPlaybackConfigur
 	op := &aws.Operation{
 		Name:       opGetPlaybackConfiguration,
 		HTTPMethod: "GET",
-		HTTPPath:   "/prod/playbackConfiguration/{Name}",
+		HTTPPath:   "/playbackConfiguration/{Name}",
 	}
 
 	if input == nil {
@@ -151,7 +151,7 @@ func (c *MediaTailor) ListPlaybackConfigurationsRequest(input *ListPlaybackConfi
 	op := &aws.Operation{
 		Name:       opListPlaybackConfigurations,
 		HTTPMethod: "GET",
-		HTTPPath:   "/prod/playbackConfigurations",
+		HTTPPath:   "/playbackConfigurations",
 	}
 
 	if input == nil {
@@ -201,7 +201,7 @@ func (c *MediaTailor) PutPlaybackConfigurationRequest(input *PutPlaybackConfigur
 	op := &aws.Operation{
 		Name:       opPutPlaybackConfiguration,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/prod/playbackConfiguration",
+		HTTPPath:   "/playbackConfiguration",
 	}
 
 	if input == nil {

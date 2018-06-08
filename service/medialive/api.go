@@ -3108,6 +3108,9 @@ type Channel struct {
 
 	InputSpecification *InputSpecification `locationName:"inputSpecification" type:"structure"`
 
+	// The log level being written to CloudWatch Logs.
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
+
 	// The name of the channel. (user-mutable)
 	Name *string `locationName:"name" type:"string"`
 
@@ -3192,6 +3195,12 @@ func (s Channel) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "inputSpecification", v, metadata)
 	}
+	if len(s.LogLevel) > 0 {
+		v := s.LogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
@@ -3271,6 +3280,9 @@ type ChannelSummary struct {
 
 	InputSpecification *InputSpecification `locationName:"inputSpecification" type:"structure"`
 
+	// The log level being written to CloudWatch Logs.
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
+
 	// The name of the channel. (user-mutable)
 	Name *string `locationName:"name" type:"string"`
 
@@ -3349,6 +3361,12 @@ func (s ChannelSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "inputSpecification", v, metadata)
 	}
+	if len(s.LogLevel) > 0 {
+		v := s.LogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
@@ -3387,6 +3405,8 @@ type CreateChannelInput struct {
 	InputAttachments []InputAttachment `locationName:"inputAttachments" type:"list"`
 
 	InputSpecification *InputSpecification `locationName:"inputSpecification" type:"structure"`
+
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
 
 	Name *string `locationName:"name" type:"string"`
 
@@ -3468,6 +3488,12 @@ func (s CreateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "inputSpecification", v, metadata)
+	}
+	if len(s.LogLevel) > 0 {
+		v := s.LogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -3803,6 +3829,8 @@ type DeleteChannelOutput struct {
 
 	InputSpecification *InputSpecification `locationName:"inputSpecification" type:"structure"`
 
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
+
 	Name *string `locationName:"name" type:"string"`
 
 	PipelinesRunningCount *int64 `locationName:"pipelinesRunningCount" type:"integer"`
@@ -3888,6 +3916,12 @@ func (s DeleteChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "inputSpecification", v, metadata)
+	}
+	if len(s.LogLevel) > 0 {
+		v := s.LogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -4125,6 +4159,8 @@ type DescribeChannelOutput struct {
 
 	InputSpecification *InputSpecification `locationName:"inputSpecification" type:"structure"`
 
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
+
 	Name *string `locationName:"name" type:"string"`
 
 	PipelinesRunningCount *int64 `locationName:"pipelinesRunningCount" type:"integer"`
@@ -4210,6 +4246,12 @@ func (s DescribeChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "inputSpecification", v, metadata)
+	}
+	if len(s.LogLevel) > 0 {
+		v := s.LogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -10632,6 +10674,8 @@ type StartChannelOutput struct {
 
 	InputSpecification *InputSpecification `locationName:"inputSpecification" type:"structure"`
 
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
+
 	Name *string `locationName:"name" type:"string"`
 
 	PipelinesRunningCount *int64 `locationName:"pipelinesRunningCount" type:"integer"`
@@ -10718,6 +10762,12 @@ func (s StartChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "inputSpecification", v, metadata)
 	}
+	if len(s.LogLevel) > 0 {
+		v := s.LogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Name != nil {
 		v := *s.Name
 
@@ -10750,7 +10800,9 @@ type StaticKeySettings struct {
 	_ struct{} `type:"structure"`
 
 	// The URL of the license server used for protecting content.
-	KeyProviderServer *InputLocation `locationName:"keyProviderServer" type:"structure"`
+	//
+	// KeyProviderServer is a required field
+	KeyProviderServer *InputLocation `locationName:"keyProviderServer" type:"structure" required:"true"`
 
 	// Static key value as a 32 character hexadecimal string.
 	//
@@ -10771,6 +10823,10 @@ func (s StaticKeySettings) GoString() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *StaticKeySettings) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "StaticKeySettings"}
+
+	if s.KeyProviderServer == nil {
+		invalidParams.Add(aws.NewErrParamRequired("KeyProviderServer"))
+	}
 
 	if s.StaticKeyValue == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StaticKeyValue"))
@@ -10872,6 +10928,8 @@ type StopChannelOutput struct {
 
 	InputSpecification *InputSpecification `locationName:"inputSpecification" type:"structure"`
 
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
+
 	Name *string `locationName:"name" type:"string"`
 
 	PipelinesRunningCount *int64 `locationName:"pipelinesRunningCount" type:"integer"`
@@ -10957,6 +11015,12 @@ func (s StopChannelOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "inputSpecification", v, metadata)
+	}
+	if len(s.LogLevel) > 0 {
+		v := s.LogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -11332,6 +11396,8 @@ type UpdateChannelInput struct {
 
 	InputSpecification *InputSpecification `locationName:"inputSpecification" type:"structure"`
 
+	LogLevel LogLevel `locationName:"logLevel" type:"string" enum:"true"`
+
 	Name *string `locationName:"name" type:"string"`
 
 	RoleArn *string `locationName:"roleArn" type:"string"`
@@ -11412,6 +11478,12 @@ func (s UpdateChannelInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "inputSpecification", v, metadata)
+	}
+	if len(s.LogLevel) > 0 {
+		v := s.LogLevel
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "logLevel", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -14063,6 +14135,26 @@ func (enum InputType) MarshalValue() (string, error) {
 }
 
 func (enum InputType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type LogLevel string
+
+// Enum values for LogLevel
+const (
+	LogLevelError    LogLevel = "ERROR"
+	LogLevelWarning  LogLevel = "WARNING"
+	LogLevelInfo     LogLevel = "INFO"
+	LogLevelDebug    LogLevel = "DEBUG"
+	LogLevelDisabled LogLevel = "DISABLED"
+)
+
+func (enum LogLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum LogLevel) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
