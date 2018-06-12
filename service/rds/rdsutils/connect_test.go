@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"testing"
 
-	credentials "github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/rds/rdsutils"
 )
 
@@ -30,7 +30,7 @@ func TestBuildAuthToken(t *testing.T) {
 	}
 
 	for _, c := range cases {
-		provider := credentials.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
+		provider := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 		url, err := rdsutils.BuildAuthToken(c.endpoint, c.region, c.user, provider)
 		if err != nil {
 			t.Errorf("expect no error, got %v", err)
