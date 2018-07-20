@@ -189,6 +189,10 @@ type MarshalOptions struct {
 	//
 	// Enabled by default.
 	SupportJSONTags bool
+
+	// Similarly supported for the YAML struct tag.
+	// Enabled by default.
+	SupportYAMLTags bool
 }
 
 // An Encoder provides marshaling Go value types to AttributeValues.
@@ -210,6 +214,7 @@ func NewEncoder(opts ...func(*Encoder)) *Encoder {
 	e := &Encoder{
 		MarshalOptions: MarshalOptions{
 			SupportJSONTags: true,
+			SupportYAMLTags: true,
 		},
 		NullEmptyString: true,
 	}
