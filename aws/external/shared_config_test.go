@@ -9,7 +9,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/go-ini/ini"
+	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/internal/ini"
 )
 
 var _ RegionProvider = (*SharedConfig)(nil)
@@ -96,12 +97,12 @@ func TestNewSharedConfig(t *testing.T) {
 					SharedConfigProfileNotExistError{
 						Profile:  "profile_not_exists",
 						Filename: testConfigOtherFilename,
-						Err:      fmt.Errorf("section 'profile profile_not_exists' does not exist"),
+						Err:      nil,
 					},
 					SharedConfigProfileNotExistError{
 						Profile:  "profile_not_exists",
 						Filename: testConfigFilename,
-						Err:      fmt.Errorf("section 'profile profile_not_exists' does not exist"),
+						Err:      nil,
 					},
 				},
 			},
@@ -153,7 +154,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:   "profile_name",
 			Err: SharedConfigLoadError{
 				Filename: filepath.Join("testdata", "shared_config_invalid_ini"),
-				Err:      fmt.Errorf("unclosed section: [profile_nam"),
+				Err:      awserr.New("INIParseError", "", nil),
 			},
 		},
 	}
@@ -180,11 +181,11 @@ func TestNewSharedConfig(t *testing.T) {
 
 func TestLoadSharedConfigFromFile(t *testing.T) {
 	filename := testConfigFilename
-	f, err := ini.Load(filename)
+	sections, err := ini.OpenFile(filename)
 	if err != nil {
 		t.Fatalf("failed to load test config file, %s, %v", filename, err)
 	}
-	iniFile := sharedConfigFile{IniData: f, Filename: filename}
+	iniFile := sharedConfigFile{IniData: sections, Filename: filename}
 
 	cases := []struct {
 		Profile  string
@@ -267,7 +268,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 			Err: SharedConfigProfileNotExistError{
 				Filename: "testdata/shared_config",
 				Profile:  "does_not_exist",
-				Err:      fmt.Errorf("section 'profile does_not_exist' does not exist"),
+				Err:      nil,
 			},
 		},
 	}
@@ -419,7 +420,7 @@ func TestLoadSharedConfig(t *testing.T) {
 				testConfigOtherFilename, testConfigFilename,
 			},
 			LoadFn: LoadSharedConfig,
-			Err:    "section 'profile profile_not_exists' does not exist",
+			Err:    "failed to get shared config profile",
 		},
 		{
 			Configs: Configs{
@@ -429,7 +430,7 @@ func TestLoadSharedConfig(t *testing.T) {
 				testConfigOtherFilename, testConfigFilename,
 			},
 			LoadFn: LoadSharedConfigIgnoreNotExist,
-			Err:    "section 'profile profile_not_exists' does not exist",
+			Err:    "failed to get shared config profile",
 		},
 	}
 
