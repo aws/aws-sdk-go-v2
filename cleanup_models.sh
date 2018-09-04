@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 
 # Deletes all but the most current model version.
 for v in $(ls ./models/apis | grep -v '.go' ); do
