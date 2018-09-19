@@ -6,6 +6,7 @@
     "jsonVersion":"1.1",
     "protocol":"json",
     "serviceFullName":"AWS CodeBuild",
+    "serviceId":"CodeBuild",
     "signatureVersion":"v4",
     "targetPrefix":"CodeBuild_20161006",
     "uid":"codebuild-2016-10-06"
@@ -301,7 +302,10 @@
         "projectName":{"shape":"NonEmptyString"},
         "phases":{"shape":"BuildPhases"},
         "source":{"shape":"ProjectSource"},
+        "secondarySources":{"shape":"ProjectSources"},
+        "secondarySourceVersions":{"shape":"ProjectSecondarySourceVersions"},
         "artifacts":{"shape":"BuildArtifacts"},
+        "secondaryArtifacts":{"shape":"BuildArtifactsList"},
         "cache":{"shape":"ProjectCache"},
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
@@ -310,7 +314,8 @@
         "buildComplete":{"shape":"Boolean"},
         "initiator":{"shape":"String"},
         "vpcConfig":{"shape":"VpcConfig"},
-        "networkInterface":{"shape":"NetworkInterface"}
+        "networkInterface":{"shape":"NetworkInterface"},
+        "encryptionKey":{"shape":"NonEmptyString"}
       }
     },
     "BuildArtifacts":{
@@ -318,8 +323,17 @@
       "members":{
         "location":{"shape":"String"},
         "sha256sum":{"shape":"String"},
-        "md5sum":{"shape":"String"}
+        "md5sum":{"shape":"String"},
+        "overrideArtifactName":{"shape":"WrapperBoolean"},
+        "encryptionDisabled":{"shape":"WrapperBoolean"},
+        "artifactIdentifier":{"shape":"String"}
       }
+    },
+    "BuildArtifactsList":{
+      "type":"list",
+      "member":{"shape":"BuildArtifacts"},
+      "max":12,
+      "min":0
     },
     "BuildIds":{
       "type":"list",
@@ -379,6 +393,15 @@
         "S3"
       ]
     },
+    "CloudWatchLogsConfig":{
+      "type":"structure",
+      "required":["status"],
+      "members":{
+        "status":{"shape":"LogsConfigStatusType"},
+        "groupName":{"shape":"String"},
+        "streamName":{"shape":"String"}
+      }
+    },
     "ComputeType":{
       "type":"string",
       "enum":[
@@ -393,13 +416,16 @@
         "name",
         "source",
         "artifacts",
-        "environment"
+        "environment",
+        "serviceRole"
       ],
       "members":{
         "name":{"shape":"ProjectName"},
         "description":{"shape":"ProjectDescription"},
         "source":{"shape":"ProjectSource"},
+        "secondarySources":{"shape":"ProjectSources"},
         "artifacts":{"shape":"ProjectArtifacts"},
+        "secondaryArtifacts":{"shape":"ProjectArtifactsList"},
         "cache":{"shape":"ProjectCache"},
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
@@ -407,7 +433,8 @@
         "encryptionKey":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"},
         "vpcConfig":{"shape":"VpcConfig"},
-        "badgeEnabled":{"shape":"WrapperBoolean"}
+        "badgeEnabled":{"shape":"WrapperBoolean"},
+        "logsConfig":{"shape":"LogsConfig"}
       }
     },
     "CreateProjectOutput":{
@@ -620,12 +647,29 @@
         "projects":{"shape":"ProjectNames"}
       }
     },
+    "LogsConfig":{
+      "type":"structure",
+      "members":{
+        "cloudWatchLogs":{"shape":"CloudWatchLogsConfig"},
+        "s3Logs":{"shape":"S3LogsConfig"}
+      }
+    },
+    "LogsConfigStatusType":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "LogsLocation":{
       "type":"structure",
       "members":{
         "groupName":{"shape":"String"},
         "streamName":{"shape":"String"},
-        "deepLink":{"shape":"String"}
+        "deepLink":{"shape":"String"},
+        "s3DeepLink":{"shape":"String"},
+        "cloudWatchLogs":{"shape":"CloudWatchLogsConfig"},
+        "s3Logs":{"shape":"S3LogsConfig"}
       }
     },
     "NetworkInterface":{
@@ -672,7 +716,9 @@
         "arn":{"shape":"String"},
         "description":{"shape":"ProjectDescription"},
         "source":{"shape":"ProjectSource"},
+        "secondarySources":{"shape":"ProjectSources"},
         "artifacts":{"shape":"ProjectArtifacts"},
+        "secondaryArtifacts":{"shape":"ProjectArtifactsList"},
         "cache":{"shape":"ProjectCache"},
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
@@ -683,7 +729,8 @@
         "lastModified":{"shape":"Timestamp"},
         "webhook":{"shape":"Webhook"},
         "vpcConfig":{"shape":"VpcConfig"},
-        "badge":{"shape":"ProjectBadge"}
+        "badge":{"shape":"ProjectBadge"},
+        "logsConfig":{"shape":"LogsConfig"}
       }
     },
     "ProjectArtifacts":{
@@ -695,8 +742,17 @@
         "path":{"shape":"String"},
         "namespaceType":{"shape":"ArtifactNamespace"},
         "name":{"shape":"String"},
-        "packaging":{"shape":"ArtifactPackaging"}
+        "packaging":{"shape":"ArtifactPackaging"},
+        "overrideArtifactName":{"shape":"WrapperBoolean"},
+        "encryptionDisabled":{"shape":"WrapperBoolean"},
+        "artifactIdentifier":{"shape":"String"}
       }
+    },
+    "ProjectArtifactsList":{
+      "type":"list",
+      "member":{"shape":"ProjectArtifacts"},
+      "max":12,
+      "min":0
     },
     "ProjectBadge":{
       "type":"structure",
@@ -746,6 +802,12 @@
       "max":100,
       "min":1
     },
+    "ProjectSecondarySourceVersions":{
+      "type":"list",
+      "member":{"shape":"ProjectSourceVersion"},
+      "max":12,
+      "min":0
+    },
     "ProjectSortByType":{
       "type":"string",
       "enum":[
@@ -763,8 +825,27 @@
         "gitCloneDepth":{"shape":"GitCloneDepth"},
         "buildspec":{"shape":"String"},
         "auth":{"shape":"SourceAuth"},
-        "insecureSsl":{"shape":"WrapperBoolean"}
+        "reportBuildStatus":{"shape":"WrapperBoolean"},
+        "insecureSsl":{"shape":"WrapperBoolean"},
+        "sourceIdentifier":{"shape":"String"}
       }
+    },
+    "ProjectSourceVersion":{
+      "type":"structure",
+      "required":[
+        "sourceIdentifier",
+        "sourceVersion"
+      ],
+      "members":{
+        "sourceIdentifier":{"shape":"String"},
+        "sourceVersion":{"shape":"String"}
+      }
+    },
+    "ProjectSources":{
+      "type":"list",
+      "member":{"shape":"ProjectSource"},
+      "max":12,
+      "min":0
     },
     "Projects":{
       "type":"list",
@@ -781,6 +862,14 @@
       "members":{
       },
       "exception":true
+    },
+    "S3LogsConfig":{
+      "type":"structure",
+      "required":["status"],
+      "members":{
+        "status":{"shape":"LogsConfigStatusType"},
+        "location":{"shape":"String"}
+      }
     },
     "SecurityGroupIds":{
       "type":"list",
@@ -814,7 +903,8 @@
         "GITHUB",
         "S3",
         "BITBUCKET",
-        "GITHUB_ENTERPRISE"
+        "GITHUB_ENTERPRISE",
+        "NO_SOURCE"
       ]
     },
     "StartBuildInput":{
@@ -822,8 +912,11 @@
       "required":["projectName"],
       "members":{
         "projectName":{"shape":"NonEmptyString"},
+        "secondarySourcesOverride":{"shape":"ProjectSources"},
+        "secondarySourcesVersionOverride":{"shape":"ProjectSecondarySourceVersions"},
         "sourceVersion":{"shape":"String"},
         "artifactsOverride":{"shape":"ProjectArtifacts"},
+        "secondaryArtifactsOverride":{"shape":"ProjectArtifactsList"},
         "environmentVariablesOverride":{"shape":"EnvironmentVariables"},
         "sourceTypeOverride":{"shape":"SourceType"},
         "sourceLocationOverride":{"shape":"String"},
@@ -831,6 +924,7 @@
         "gitCloneDepthOverride":{"shape":"GitCloneDepth"},
         "buildspecOverride":{"shape":"String"},
         "insecureSslOverride":{"shape":"WrapperBoolean"},
+        "reportBuildStatusOverride":{"shape":"WrapperBoolean"},
         "environmentTypeOverride":{"shape":"EnvironmentType"},
         "imageOverride":{"shape":"NonEmptyString"},
         "computeTypeOverride":{"shape":"ComputeType"},
@@ -839,7 +933,8 @@
         "serviceRoleOverride":{"shape":"NonEmptyString"},
         "privilegedModeOverride":{"shape":"WrapperBoolean"},
         "timeoutInMinutesOverride":{"shape":"TimeOut"},
-        "idempotencyToken":{"shape":"String"}
+        "idempotencyToken":{"shape":"String"},
+        "logsConfigOverride":{"shape":"LogsConfig"}
       }
     },
     "StartBuildOutput":{
@@ -904,7 +999,9 @@
         "name":{"shape":"NonEmptyString"},
         "description":{"shape":"ProjectDescription"},
         "source":{"shape":"ProjectSource"},
+        "secondarySources":{"shape":"ProjectSources"},
         "artifacts":{"shape":"ProjectArtifacts"},
+        "secondaryArtifacts":{"shape":"ProjectArtifactsList"},
         "cache":{"shape":"ProjectCache"},
         "environment":{"shape":"ProjectEnvironment"},
         "serviceRole":{"shape":"NonEmptyString"},
@@ -912,7 +1009,8 @@
         "encryptionKey":{"shape":"NonEmptyString"},
         "tags":{"shape":"TagList"},
         "vpcConfig":{"shape":"VpcConfig"},
-        "badgeEnabled":{"shape":"WrapperBoolean"}
+        "badgeEnabled":{"shape":"WrapperBoolean"},
+        "logsConfig":{"shape":"LogsConfig"}
       }
     },
     "UpdateProjectOutput":{

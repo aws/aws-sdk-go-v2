@@ -839,7 +839,8 @@
         "Idle":{"shape":"NullableDouble"},
         "IOWait":{"shape":"NullableDouble"},
         "IRQ":{"shape":"NullableDouble"},
-        "SoftIRQ":{"shape":"NullableDouble"}
+        "SoftIRQ":{"shape":"NullableDouble"},
+        "Privileged":{"shape":"NullableDouble"}
       }
     },
     "Cause":{
@@ -1419,7 +1420,8 @@
         "Info",
         "Warning",
         "Degraded",
-        "Severe"
+        "Severe",
+        "Suspended"
       ]
     },
     "EnvironmentId":{"type":"string"},
